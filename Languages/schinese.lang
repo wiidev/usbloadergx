@@ -5,16 +5,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-21 19:48+0100\n"
+"POT-Creation-Date: 2011-01-23 21:03+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid " "
-msgstr ""
 
 msgid " Wad Saved as:"
 msgstr "WAD 保存为:"
@@ -346,6 +343,9 @@ msgstr "创建"
 msgid "Credits"
 msgstr "作者信息"
 
+msgid "Custom Disc Images"
+msgstr ""
+
 msgid "Custom Paths"
 msgstr "自定义路径"
 
@@ -402,9 +402,6 @@ msgstr "光盘图片路径"
 
 msgid "Disc Default"
 msgstr "游戏默认"
-
-msgid "Disc Images"
-msgstr "光盘图片"
 
 msgid "DiskFlip"
 msgstr "光盘滑动"
@@ -466,8 +463,11 @@ msgstr "现在下载"
 msgid "Download finished"
 msgstr "下载完成"
 
-msgid "Downloading covers"
-msgstr "正在下载封面"
+msgid "Downloading 3D Covers"
+msgstr ""
+
+msgid "Downloading Flat Covers"
+msgstr ""
 
 msgid "Downloading custom Discarts"
 msgstr "正在下载自制光盘封面"
@@ -609,6 +609,9 @@ msgstr "剩余空间"
 
 msgid "French"
 msgstr "法文"
+
+msgid "Full Menu"
+msgstr ""
 
 msgid "Full shutdown"
 msgstr "完全关机"
@@ -976,17 +979,14 @@ msgstr "官方网址:"
 msgid "Offset"
 msgstr "偏移位"
 
-msgid "Only Customs"
-msgstr "仅自制"
-
 msgid "Only Game Partition"
 msgstr "仅游戏分区"
 
-msgid "Only Original"
-msgstr "仅官方"
-
 msgid "Only for Install"
 msgstr "仅安装"
+
+msgid "Original Disc Images"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "官方/自制"
@@ -1074,6 +1074,9 @@ msgstr "删除更新"
 
 msgid "Rename Game on WBFS"
 msgstr "改变 WBFS (硬盘)上的游戏名称"
+
+msgid "Reset"
+msgstr ""
 
 msgid "Reset BG Music"
 msgstr "重置背景音乐"
@@ -1280,12 +1283,6 @@ msgstr "提示信息"
 msgid "Transfer failed"
 msgstr "传输失败"
 
-msgid "Trying custom Discarts"
-msgstr "尝试下载自制光盘封面"
-
-msgid "Trying original Discarts"
-msgstr "尝试下载官方光盘封面"
-
 msgid "USB Device not found"
 msgstr "找不到 USB 设备"
 
@@ -1475,6 +1472,24 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "Disc Images"
+#~ msgstr "光盘图片"
+
+#~ msgid "Downloading covers"
+#~ msgstr "正在下载封面"
+
+#~ msgid "Only Customs"
+#~ msgstr "仅自制"
+
+#~ msgid "Only Original"
+#~ msgstr "仅官方"
+
+#~ msgid "Trying custom Discarts"
+#~ msgstr "尝试下载自制光盘封面"
+
+#~ msgid "Trying original Discarts"
+#~ msgstr "尝试下载官方光盘封面"
 
 #~ msgid "Do you really want to delete:"
 #~ msgstr "确定删除:"

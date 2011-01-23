@@ -11,7 +11,8 @@
 #include <string.h>
 #include <time.h>
 
-#include "menu.h"
+#include "menu/menus.h"
+#include "sys.h"
 #include "language/gettext.h"
 #include "libwiigui/gui.h"
 #include "prompts/ProgressWindow.h"
@@ -236,18 +237,18 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
         progressbarOutlineImg.SetWidescreen(Settings.widescreen);
     }
     progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-    progressbarOutlineImg.SetPosition(25, 40);
+    progressbarOutlineImg.SetPosition(35, 40);
 
     GuiImageData progressbarEmpty(Resources::GetFile("progressbar_empty.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImage progressbarEmptyImg(&progressbarEmpty);
     progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-    progressbarEmptyImg.SetPosition(25, 40);
+    progressbarEmptyImg.SetPosition(35, 40);
     progressbarEmptyImg.SetTile(100);
 
     GuiImageData progressbar(Resources::GetFile("progressbar.png"), Resources::GetFileSize("progressbar.png"));
     GuiImage progressbarImg(&progressbar);
     progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-    progressbarImg.SetPosition(25, 40);
+    progressbarImg.SetPosition(35, 40);
 
     GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -268,7 +269,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
     GuiText prsTxt("%", 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     prsTxt.SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
-    prsTxt.SetPosition(-188, 40);
+    prsTxt.SetPosition(-178, 40);
 
     GuiText timeTxt((char*) NULL, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     timeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
@@ -284,7 +285,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
     GuiText prTxt((char*) NULL, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     prTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-    prTxt.SetPosition(200, 40);
+    prTxt.SetPosition(210, 40);
 
     if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust for widescreen
     {
@@ -347,7 +348,12 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
     while (showProgress)
     {
-        usleep(100000);
+        usleep(30000);
+
+        if (shutdown)
+            Sys_Shutdown();
+        if (reset)
+            Sys_Reboot();
 
         if (changed)
         {
@@ -396,7 +402,7 @@ static void * ProgressThread(void *arg)
 void InitProgressThread()
 {
     LWP_MutexInit(&ProgressMutex, true);
-    LWP_CreateThread(&progressthread, ProgressThread, NULL, NULL, 16384, 80);
+    LWP_CreateThread(&progressthread, ProgressThread, NULL, NULL, 16384, 70);
 }
 
 /****************************************************************************

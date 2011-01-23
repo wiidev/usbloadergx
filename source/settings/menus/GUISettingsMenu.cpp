@@ -77,10 +77,8 @@ static const char * KeyboardText[KEYBOARD_MAX] =
     "QWERTY 2"
 };
 
-static const char * DiscArtDownloadText[4] =
+static const char * DiscArtDownloadText[DISCARTS_MAX_CHOICE] =
 {
-    trNOOP( "Only Original" ),
-    trNOOP( "Only Customs" ),
     trNOOP( "Original/Customs" ),
     trNOOP( "Customs/Original" )
 };
@@ -96,7 +94,7 @@ static const char *ScreensaverText[SCREENSAVER_MAX] =
     trNOOP( "1 hour" )
 };
 
-static const char * HomeMenuText[3] =
+static const char * HomeMenuText[HOME_MENU_MAX_CHOICE] =
 {
     trNOOP( "System Default" ),
     trNOOP( "Full Menu" ),
@@ -288,7 +286,7 @@ int GuiSettingsMenu::GetMenuInternal()
     //! Settings: Disc Artwork Download
     else if (ret == ++Idx)
     {
-        if (++Settings.discart >= 4) Settings.discart = 0;
+        if (++Settings.discart >= DISCARTS_MAX_CHOICE) Settings.discart = 0;
     }
 
     //! Settings: Wiilight
@@ -338,7 +336,7 @@ int GuiSettingsMenu::GetMenuInternal()
     //! Settings: Home Menu Style
     else if (ret == ++Idx)
     {
-        if (++Settings.HomeMenu >= 3) Settings.HomeMenu = 0;
+        if (++Settings.HomeMenu >= HOME_MENU_MAX_CHOICE) Settings.HomeMenu = 0;
     }
 
     SetOptionValues();

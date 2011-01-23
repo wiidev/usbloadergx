@@ -21,43 +21,22 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  ***************************************************************************/
-#include "ThreadedTask.hpp"
+#include "gui_box.hpp"
 
-ThreadedTask * ThreadedTask::instance = NULL;
-
-ThreadedTask::ThreadedTask()
-    : ExitRequested(false)
+void GuiBox::Draw()
 {
-	LWP_CreateThread (&Thread, ThreadCallback, this, NULL, 16384, 80);
-}
+    u32 n = filled ? 4 : 5;
+    f32 x = GetLeft();
+    f32 y = GetTop();
+    f32 x2 = x + width;
+    f32 y2 = y + height;
+    guVector v[] = { { x, y, 0.0f }, { x2, y, 0.0f }, { x2, y2, 0.0f }, { x, y2, 0.0f }, { x, y, 0.0f } };
 
-ThreadedTask::~ThreadedTask()
-{
-    ExitRequested = true;
-    Execute();
-    LWP_JoinThread(Thread, NULL);
-}
-
-void * ThreadedTask::ThreadCallback(void *arg)
-{
-    ThreadedTask * myInstance = (ThreadedTask *) arg;
-
-    while(!myInstance->ExitRequested)
+    GX_Begin(filled ? GX_TRIANGLEFAN : GX_LINESTRIP, GX_VTXFMT0, n);
+    for (u32 i = 0; i < n; i++)
     {
-        LWP_SuspendThread(myInstance->Thread);
-
-        while(!myInstance->CallbackList.empty())
-        {
-            if(myInstance->CallbackList[0].first)
-                myInstance->CallbackList[0].first->Execute(myInstance->ArgList[0]);
-
-            else if(myInstance->CallbackList[0].second)
-                myInstance->CallbackList[0].second(myInstance->ArgList[0]);
-
-            myInstance->CallbackList.erase(myInstance->CallbackList.begin());
-            myInstance->ArgList.erase(myInstance->ArgList.begin());
-        }
+        GX_Position3f32(v[i].x, v[i].y, v[i].z);
+        GX_Color4u8(color[i].r, color[i].g, color[i].b, color[i].a);
     }
-
-    return NULL;
+    GX_End();
 }

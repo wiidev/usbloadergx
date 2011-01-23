@@ -737,12 +737,8 @@ void GameBrowseMenu::ReloadBrowser()
 
 int GameBrowseMenu::MainLoop()
 {
-    time_t rawtime = time(0);
-    if(rawtime != lastrawtime) //! Only update every 1 second
-    {
-        UpdateClock(rawtime);
-        CheckDiscSlotUpdate();
-    }
+    UpdateClock();
+    CheckDiscSlotUpdate();
 
     if (updateavailable == true)
     {
@@ -1105,12 +1101,16 @@ void GameBrowseMenu::CheckDiscSlotUpdate()
     }
 }
 
-void GameBrowseMenu::UpdateClock(time_t &rawtime)
+void GameBrowseMenu::UpdateClock()
 {
-    lastrawtime = rawtime;
-
     if(Settings.hddinfo != CLOCK_HR12 && Settings.hddinfo != CLOCK_HR24)
         return;
+
+    time_t rawtime = time(0);
+    if(rawtime == lastrawtime) //! Only update every 1 second
+        return;
+
+    lastrawtime = rawtime;
 
     char theTime[50];
     theTime[0] = 0;

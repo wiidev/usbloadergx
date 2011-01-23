@@ -94,7 +94,7 @@ void CSettings::SetDefault()
     gridRows = 3;
     error002 = 2;
     partition = -1;
-    discart = DISCARTS_ORIGINALS;
+    discart = DISCARTS_ORIGINALS_CUSTOMS;
     xflip = XFLIP_NO;
     quickboot = OFF;
     wiilight = WIILIGHT_ON;

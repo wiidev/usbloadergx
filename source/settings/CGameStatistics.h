@@ -11,7 +11,7 @@ typedef struct _Stats
 {
     char id[7];
     u8 FavoriteRank;
-    u8 PlayCount;
+    int PlayCount;
 } GameStatus;
 
 class CGameStatistics

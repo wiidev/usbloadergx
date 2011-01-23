@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 16:54+0100\n"
+"POT-Creation-Date: 2011-01-23 21:03+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -343,6 +343,9 @@ msgstr "Létrehozás"
 msgid "Credits"
 msgstr "Készítõk"
 
+msgid "Custom Disc Images"
+msgstr ""
+
 msgid "Custom Paths"
 msgstr "Egyéni útvonalak"
 
@@ -399,9 +402,6 @@ msgstr "Lemezképek Útvonala"
 
 msgid "Disc Default"
 msgstr "Lemez Alapértelmezettje"
-
-msgid "Disc Images"
-msgstr "Lemezfotók"
 
 msgid "DiskFlip"
 msgstr "Lemezforgatás"
@@ -463,7 +463,10 @@ msgstr "Letöltés most"
 msgid "Download finished"
 msgstr "Letöltés kész"
 
-msgid "Downloading covers"
+msgid "Downloading 3D Covers"
+msgstr ""
+
+msgid "Downloading Flat Covers"
 msgstr ""
 
 msgid "Downloading custom Discarts"
@@ -976,17 +979,14 @@ msgstr "Hivatalos oldal:"
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr "Csak egyéni"
-
 msgid "Only Game Partition"
 msgstr ""
 
-msgid "Only Original"
-msgstr "Csak eredeti"
-
 msgid "Only for Install"
 msgstr "Csak telepítéshez"
+
+msgid "Original Disc Images"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Eredeti/Egyéni"
@@ -1283,12 +1283,6 @@ msgstr "Súgók"
 msgid "Transfer failed"
 msgstr ""
 
-msgid "Trying custom Discarts"
-msgstr ""
-
-msgid "Trying original Discarts"
-msgstr ""
-
 msgid "USB Device not found"
 msgstr "USB Meghajtó nem található"
 
@@ -1478,6 +1472,15 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
+
+#~ msgid "Disc Images"
+#~ msgstr "Lemezfotók"
+
+#~ msgid "Only Customs"
+#~ msgstr "Csak egyéni"
+
+#~ msgid "Only Original"
+#~ msgstr "Csak eredeti"
 
 #~ msgid "Do you really want to delete:"
 #~ msgstr "Biztosan törlöd?"

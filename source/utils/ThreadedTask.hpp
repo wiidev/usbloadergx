@@ -33,7 +33,21 @@ class ThreadedTask
     public:
 		static ThreadedTask * Instance() { if(!instance) instance = new ThreadedTask(); return instance; };
 		static void DestroyInstance() { delete instance; instance = NULL; };
-		void AddCallback(cCallback * c, void * arg = 0) { CallbackList.push_back(c); ArgList.push_back(arg); };
+
+        //! This callback is used for C-Like callbacks
+		typedef void (*Callback)(void * arg);
+		void AddCallback(ThreadedTask::Callback C_Standard, void * arg = 0)
+		{
+		    CallbackList.push_back(std::pair<cCallback *, Callback>(0, C_Standard));
+		    ArgList.push_back(arg);
+        }
+        //! This callback is used for C++-Like class callbacks
+		void AddCallback(cCallback * classCallback, void * arg = 0)
+		{
+		    CallbackList.push_back(std::pair<cCallback *, Callback>(classCallback, 0));
+		    ArgList.push_back(arg);
+        }
+        //! Start the threaded task thread and execute one callback after another - FIFO style
 		void Execute() { LWP_ResumeThread(Thread); };
     private:
         ThreadedTask();
@@ -44,7 +58,7 @@ class ThreadedTask
 		static ThreadedTask *instance;
 		lwp_t Thread;
 		bool ExitRequested;
-        std::vector<cCallback *> CallbackList;
+        std::vector<std::pair<cCallback *, Callback> > CallbackList;
         std::vector<void *> ArgList;
 };
 

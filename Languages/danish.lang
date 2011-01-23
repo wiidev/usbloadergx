@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 16:54+0100\n"
+"POT-Creation-Date: 2011-01-23 21:03+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -343,6 +343,9 @@ msgstr "Opret"
 msgid "Credits"
 msgstr "Lavet af:"
 
+msgid "Custom Disc Images"
+msgstr ""
+
 msgid "Custom Paths"
 msgstr "Sti-indstillinger"
 
@@ -399,9 +402,6 @@ msgstr "Sti til DVD-billeder"
 
 msgid "Disc Default"
 msgstr "Spillets standard"
-
-msgid "Disc Images"
-msgstr "DVD-billeder"
 
 msgid "DiskFlip"
 msgstr ""
@@ -463,8 +463,11 @@ msgstr "Download nu"
 msgid "Download finished"
 msgstr "Download færdig"
 
-msgid "Downloading covers"
-msgstr "Downloader covers"
+msgid "Downloading 3D Covers"
+msgstr ""
+
+msgid "Downloading Flat Covers"
+msgstr ""
 
 msgid "Downloading custom Discarts"
 msgstr "Downloader custom DVD billeder"
@@ -976,17 +979,14 @@ msgstr "Officiel side:"
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr "Kun tilpassede"
-
 msgid "Only Game Partition"
 msgstr "Kun spil Partition"
 
-msgid "Only Original"
-msgstr "Kun originale"
-
 msgid "Only for Install"
 msgstr "Kun til installering"
+
+msgid "Original Disc Images"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Originale/Tilpassede"
@@ -1283,12 +1283,6 @@ msgstr "Værktøjstips"
 msgid "Transfer failed"
 msgstr "Overførelse fejlede"
 
-msgid "Trying custom Discarts"
-msgstr "Prøver custom DVD billeder"
-
-msgid "Trying original Discarts"
-msgstr "Prøver orginale DVD billeder"
-
 msgid "USB Device not found"
 msgstr "USB-enhed ikke fundet"
 
@@ -1478,6 +1472,24 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "Disc Images"
+#~ msgstr "DVD-billeder"
+
+#~ msgid "Downloading covers"
+#~ msgstr "Downloader covers"
+
+#~ msgid "Only Customs"
+#~ msgstr "Kun tilpassede"
+
+#~ msgid "Only Original"
+#~ msgstr "Kun originale"
+
+#~ msgid "Trying custom Discarts"
+#~ msgstr "Prøver custom DVD billeder"
+
+#~ msgid "Trying original Discarts"
+#~ msgstr "Prøver orginale DVD billeder"
 
 #~ msgid "Do you really want to delete:"
 #~ msgstr "Vil du slette:"

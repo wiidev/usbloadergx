@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 16:56+0100\n"
+"POT-Creation-Date: 2011-01-23 21:03+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -343,6 +343,9 @@ msgstr "產生"
 msgid "Credits"
 msgstr "作者信息"
 
+msgid "Custom Disc Images"
+msgstr ""
+
 msgid "Custom Paths"
 msgstr "自訂路徑"
 
@@ -399,9 +402,6 @@ msgstr "光碟圖片路徑"
 
 msgid "Disc Default"
 msgstr "光碟預設"
-
-msgid "Disc Images"
-msgstr "光碟圖片"
 
 msgid "DiskFlip"
 msgstr "光碟滑動"
@@ -463,8 +463,11 @@ msgstr "現在下載"
 msgid "Download finished"
 msgstr "下載完成"
 
-msgid "Downloading covers"
-msgstr "下載封面"
+msgid "Downloading 3D Covers"
+msgstr ""
+
+msgid "Downloading Flat Covers"
+msgstr ""
 
 msgid "Downloading custom Discarts"
 msgstr "下載自製光碟圖片"
@@ -976,17 +979,14 @@ msgstr "官方網址："
 msgid "Offset"
 msgstr "偏移"
 
-msgid "Only Customs"
-msgstr "只顯示自製"
-
 msgid "Only Game Partition"
 msgstr "僅遊戲磁區"
 
-msgid "Only Original"
-msgstr "只顯示原始"
-
 msgid "Only for Install"
 msgstr "安裝遊戲時"
+
+msgid "Original Disc Images"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "原始/自製"
@@ -1283,12 +1283,6 @@ msgstr "提示信息"
 msgid "Transfer failed"
 msgstr "傳輸失敗"
 
-msgid "Trying custom Discarts"
-msgstr "嘗試自製光碟圖片"
-
-msgid "Trying original Discarts"
-msgstr "嘗試原始光碟圖片"
-
 msgid "USB Device not found"
 msgstr "找不到 USB 設備"
 
@@ -1478,6 +1472,24 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "Disc Images"
+#~ msgstr "光碟圖片"
+
+#~ msgid "Downloading covers"
+#~ msgstr "下載封面"
+
+#~ msgid "Only Customs"
+#~ msgstr "只顯示自製"
+
+#~ msgid "Only Original"
+#~ msgstr "只顯示原始"
+
+#~ msgid "Trying custom Discarts"
+#~ msgstr "嘗試自製光碟圖片"
+
+#~ msgid "Trying original Discarts"
+#~ msgstr "嘗試原始光碟圖片"
 
 #~ msgid "Do you really want to delete:"
 #~ msgstr "確定刪除："

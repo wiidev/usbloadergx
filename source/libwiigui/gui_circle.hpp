@@ -21,43 +21,26 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  ***************************************************************************/
-#include "ThreadedTask.hpp"
+#ifndef GUICIRCLE_HPP_
+#define GUICIRCLE_HPP_
 
-ThreadedTask * ThreadedTask::instance = NULL;
+#include "libwiigui/gui.h"
 
-ThreadedTask::ThreadedTask()
-    : ExitRequested(false)
+class GuiCircle : public GuiElement
 {
-	LWP_CreateThread (&Thread, ThreadCallback, this, NULL, 16384, 80);
-}
+    public:
+        GuiCircle();
+        GuiCircle(float radius);
+        void SetRadius(float r) { LOCK(this); radius = r; }
+        void SetColor(const GXColor c) { LOCK(this); color = c; }
+        void SetAccuracy(int a) { LOCK(this); accuracy = a; }
+        void SetFilled(bool f) { LOCK(this); filled = f; }
+        void Draw();
+    protected:
+        GXColor color;
+        float radius;
+        bool filled;
+        int accuracy;
+};
 
-ThreadedTask::~ThreadedTask()
-{
-    ExitRequested = true;
-    Execute();
-    LWP_JoinThread(Thread, NULL);
-}
-
-void * ThreadedTask::ThreadCallback(void *arg)
-{
-    ThreadedTask * myInstance = (ThreadedTask *) arg;
-
-    while(!myInstance->ExitRequested)
-    {
-        LWP_SuspendThread(myInstance->Thread);
-
-        while(!myInstance->CallbackList.empty())
-        {
-            if(myInstance->CallbackList[0].first)
-                myInstance->CallbackList[0].first->Execute(myInstance->ArgList[0]);
-
-            else if(myInstance->CallbackList[0].second)
-                myInstance->CallbackList[0].second(myInstance->ArgList[0]);
-
-            myInstance->CallbackList.erase(myInstance->CallbackList.begin());
-            myInstance->ArgList.erase(myInstance->ArgList.begin());
-        }
-    }
-
-    return NULL;
-}
+#endif

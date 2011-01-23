@@ -4,6 +4,7 @@
 #include "network/http.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/ProgressWindow.h"
+#include "prompts/CheckboxPrompt.hpp"
 #include "FileOperations/fileops.h"
 #include "settings/CSettings.h"
 #include "language/gettext.h"
@@ -162,68 +163,86 @@ static int CoverDownloadWithProgress(const char * url, const char * progressTitl
     return FilesSkipped;
 }
 
-void CoverDownload()
+static int CoverDownloader(const char * downloadURL, const char *writepath, const char * progressTitle, const char * PromptText, bool skipPrompt)
 {
-    int choice = WindowPrompt(tr( "Cover Download" ), 0, tr( "3D Covers" ), tr( "Flat Covers" ), tr( "Disc Images" ), tr( "Back" )); // ask for download choice
-    if (choice == 0)
-        return;
-
-    const char * writepath = choice == 1 ? Settings.covers_path : choice == 2 ? Settings.covers2d_path : Settings.disc_path;
-    const char * downloadURL = choice == 1 ? serverURL3D : choice == 2 ? serverURL2D : NULL;
-    const char * progressTitle = choice != 3 ? tr("Downloading covers") : NULL;
-    if(choice == 3)
-    {
-        downloadURL = (Settings.discart == 0 || Settings.discart == 2) ? serverURLOrigDiscs : serverURLCustomDiscs;
-        progressTitle = (Settings.discart == 0 || Settings.discart == 2) ? tr("Downloading original Discarts") : tr("Downloading custom Discarts");
-    }
-
     std::vector<std::string> MissingFilesList;
     GetMissingGameFiles(writepath, ".png", MissingFilesList);
 
     if(MissingFilesList.size() == 0)
     {
         WindowPrompt(tr( "No file missing!" ), 0, tr("OK"));
-        return;
+        return -1;
     }
 
     if (!IsNetworkInit() && !NetworkInitPrompt())
-        return;
+        return -1;
 
-    const char * PromptText = choice == 3 ? tr("Download Discart image?") : tr("Download Boxart image?");
+    if(!skipPrompt)
+    {
+        char tempCnt[80];
+        snprintf(tempCnt, sizeof(tempCnt), "%i %s", MissingFilesList.size(), tr( "Missing files" ));
 
-    char tempCnt[80];
-    snprintf(tempCnt, sizeof(tempCnt), "%i %s", MissingFilesList.size(), tr( "Missing files" ));
-
-    if (WindowPrompt(PromptText, tempCnt, tr( "Yes" ), tr( "No" )) == 0)
-        return;
+        if (WindowPrompt(PromptText, tempCnt, tr( "Yes" ), tr( "No" )) == 0)
+            return -1;
+    }
 
     AbortRequested = false;
 
-    int FileSkipped = CoverDownloadWithProgress(downloadURL, progressTitle, writepath, MissingFilesList);
+    return CoverDownloadWithProgress(downloadURL, progressTitle, writepath, MissingFilesList);
+}
 
-    if(choice == 3 && FileSkipped > 0 && Settings.discart > 1)
+void CoverDownload()
+{
+    int choice = CheckboxWindow(tr( "Cover Download" ), 0, tr( "3D Covers" ), tr( "Flat Covers" ), tr( "Original Disc Images" ), tr( "Custom Disc Images" )); // ask for download choice
+    if (choice == 0)
+        return;
+
+    bool skipPrompt = false;
+    int FileSkipped = 0;
+    int SkippedDiscArts = 0;
+
+    if(choice & CheckedBox1)
     {
-        if(downloadURL == serverURLOrigDiscs)
-        {
-            progressTitle = tr("Trying custom Discarts");
-            downloadURL = serverURLCustomDiscs;
-        }
-        else
-        {
-            progressTitle = tr("Trying original Discarts");
-            downloadURL = serverURLOrigDiscs;
-        }
-
-        GetMissingGameFiles(writepath, ".png", MissingFilesList);
-        FileSkipped = CoverDownloadWithProgress(downloadURL, progressTitle, writepath, MissingFilesList);
+        int ret = CoverDownloader(serverURL3D, Settings.covers_path, tr("Downloading 3D Covers"), tr("Download Boxart image?"), skipPrompt);
+		if(ret > 0)
+			FileSkipped += ret;
+        skipPrompt = true;
     }
+    if(choice & CheckedBox2)
+    {
+        int ret = CoverDownloader(serverURL2D, Settings.covers2d_path, tr("Downloading Flat Covers"), tr("Download Boxart image?"), skipPrompt);
+		if(ret > 0)
+			FileSkipped += ret;
+        skipPrompt = true;
+    }
+    if(choice & CheckedBox3)
+    {
+        skipPrompt = true;
+        const char * downloadURL = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS) ? serverURLOrigDiscs : serverURLCustomDiscs;
+        const char * progressTitle = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS) ? tr("Downloading original Discarts") : tr("Downloading custom Discarts");
+        int ret = CoverDownloader(downloadURL, Settings.disc_path, progressTitle, tr("Download Discart image?"), skipPrompt);
+		if(ret > 0)
+			SkippedDiscArts = ret;
+	}
+    if(choice & CheckedBox4)
+    {
+        skipPrompt = true;
+        const char * downloadURL = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS) ? serverURLCustomDiscs : serverURLOrigDiscs;
+        const char * progressTitle = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS) ? tr("Downloading custom Discarts") : tr("Downloading original Discarts");
+        int ret = CoverDownloader(downloadURL, Settings.disc_path, progressTitle, tr("Download Discart image?"), skipPrompt);
+		if(ret > 0)
+			SkippedDiscArts = ret;
+    }
+
+    FileSkipped += SkippedDiscArts;
 
     if (FileSkipped == 0)
     {
         WindowPrompt(tr("Download finished"), tr("All images downloaded successfully."), tr( "OK" ));
     }
-    else
+    else if(FileSkipped > 0)
     {
+        char tempCnt[80];
         sprintf(tempCnt, "%i %s", FileSkipped, tr( "files not found on the server!" ));
         WindowPrompt(tr( "Download finished" ), tempCnt, tr( "OK" ));
     }

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 16:56+0100\n"
+"POT-Creation-Date: 2011-01-23 21:03+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nikolai_ca\n"
 "Language-Team: Kir, alendit, nikolai_ca\n"
@@ -343,6 +343,9 @@ msgstr "Создать"
 msgid "Credits"
 msgstr "Об авторах"
 
+msgid "Custom Disc Images"
+msgstr ""
+
 msgid "Custom Paths"
 msgstr "Изменение путей"
 
@@ -399,9 +402,6 @@ msgstr "Путь к изображениям дисков"
 
 msgid "Disc Default"
 msgstr "По умолчанию (диск)"
-
-msgid "Disc Images"
-msgstr "Изображения дисков"
 
 msgid "DiskFlip"
 msgstr "ДискФлип"
@@ -463,7 +463,10 @@ msgstr "Скачать сейчас"
 msgid "Download finished"
 msgstr "Скачивание завершено"
 
-msgid "Downloading covers"
+msgid "Downloading 3D Covers"
+msgstr ""
+
+msgid "Downloading Flat Covers"
 msgstr ""
 
 msgid "Downloading custom Discarts"
@@ -976,17 +979,14 @@ msgstr "Оф. сайт:"
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr "Только измененные"
-
 msgid "Only Game Partition"
 msgstr ""
 
-msgid "Only Original"
-msgstr "Только оригинальные"
-
 msgid "Only for Install"
 msgstr "Только при установке"
+
+msgid "Original Disc Images"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Измененные/Модифицированные"
@@ -1283,12 +1283,6 @@ msgstr "Подсказки"
 msgid "Transfer failed"
 msgstr ""
 
-msgid "Trying custom Discarts"
-msgstr ""
-
-msgid "Trying original Discarts"
-msgstr ""
-
 msgid "USB Device not found"
 msgstr "USB устройство не найдено"
 
@@ -1478,6 +1472,15 @@ msgstr "из"
 
 msgid "seconds left"
 msgstr "секунд осталось"
+
+#~ msgid "Disc Images"
+#~ msgstr "Изображения дисков"
+
+#~ msgid "Only Customs"
+#~ msgstr "Только измененные"
+
+#~ msgid "Only Original"
+#~ msgstr "Только оригинальные"
 
 #~ msgid "Do you really want to delete:"
 #~ msgstr "Вы хотите удалить:"

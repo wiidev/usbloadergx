@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 16:56+0100\n"
+"POT-Creation-Date: 2011-01-23 21:03+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -343,6 +343,9 @@ msgstr "Utworz"
 msgid "Credits"
 msgstr ""
 
+msgid "Custom Disc Images"
+msgstr ""
+
 msgid "Custom Paths"
 msgstr "Sciezki"
 
@@ -399,9 +402,6 @@ msgstr "Sciezka do obrazkow plyt"
 
 msgid "Disc Default"
 msgstr "Domyslny dysk"
-
-msgid "Disc Images"
-msgstr "Obrazki plyt"
 
 msgid "DiskFlip"
 msgstr "Obrot plytami"
@@ -463,7 +463,10 @@ msgstr "Pobierz teraz"
 msgid "Download finished"
 msgstr "Zakonczono pobieranie"
 
-msgid "Downloading covers"
+msgid "Downloading 3D Covers"
+msgstr ""
+
+msgid "Downloading Flat Covers"
 msgstr ""
 
 msgid "Downloading custom Discarts"
@@ -976,17 +979,14 @@ msgstr "Strona oficjalna:"
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr "Tylko nieoryginalne"
-
 msgid "Only Game Partition"
 msgstr ""
 
-msgid "Only Original"
-msgstr "Tylko oryginalne"
-
 msgid "Only for Install"
 msgstr "Tylko dla instalacji"
+
+msgid "Original Disc Images"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Mieszane"
@@ -1283,12 +1283,6 @@ msgstr "Chmurki z podpowiedziami"
 msgid "Transfer failed"
 msgstr ""
 
-msgid "Trying custom Discarts"
-msgstr ""
-
-msgid "Trying original Discarts"
-msgstr ""
-
 msgid "USB Device not found"
 msgstr "Nie znaleziono urzadzenia USB"
 
@@ -1478,6 +1472,15 @@ msgstr "z"
 
 msgid "seconds left"
 msgstr "sekund pozostalo"
+
+#~ msgid "Disc Images"
+#~ msgstr "Obrazki plyt"
+
+#~ msgid "Only Customs"
+#~ msgstr "Tylko nieoryginalne"
+
+#~ msgid "Only Original"
+#~ msgstr "Tylko oryginalne"
 
 #~ msgid "Do you really want to delete:"
 #~ msgstr "Na pewno usunac: "

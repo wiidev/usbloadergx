@@ -21,43 +21,34 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  ***************************************************************************/
-#include "ThreadedTask.hpp"
+#include "gui_cross.hpp"
 
-ThreadedTask * ThreadedTask::instance = NULL;
-
-ThreadedTask::ThreadedTask()
-    : ExitRequested(false)
+void GuiCross::Draw()
 {
-	LWP_CreateThread (&Thread, ThreadCallback, this, NULL, 16384, 80);
-}
+    f32 x1 = GetLeft();
+    f32 x2 = x1 + width;
+    f32 y1 = GetTop();
+    f32 y2 = y1 + height;
 
-ThreadedTask::~ThreadedTask()
-{
-    ExitRequested = true;
-    Execute();
-    LWP_JoinThread(Thread, NULL);
-}
+    GX_Begin(GX_TRIANGLEFAN, GX_VTXFMT0, 4);
+    GX_Position3f32(x1, y1, 0.0f);
+    GX_Color4u8(color.r, color.g, color.b, color.a);
+    GX_Position3f32(x1-Linewidth, y1+Linewidth, 0.0f);
+    GX_Color4u8(color.r, color.g, color.b, color.a);
+    GX_Position3f32(x2-Linewidth, y2+Linewidth, 0.0f);
+    GX_Color4u8(color.r, color.g, color.b, color.a);
+    GX_Position3f32(x2, y2, 0.0f);
+    GX_Color4u8(color.r, color.g, color.b, color.a);
+    GX_End();
 
-void * ThreadedTask::ThreadCallback(void *arg)
-{
-    ThreadedTask * myInstance = (ThreadedTask *) arg;
-
-    while(!myInstance->ExitRequested)
-    {
-        LWP_SuspendThread(myInstance->Thread);
-
-        while(!myInstance->CallbackList.empty())
-        {
-            if(myInstance->CallbackList[0].first)
-                myInstance->CallbackList[0].first->Execute(myInstance->ArgList[0]);
-
-            else if(myInstance->CallbackList[0].second)
-                myInstance->CallbackList[0].second(myInstance->ArgList[0]);
-
-            myInstance->CallbackList.erase(myInstance->CallbackList.begin());
-            myInstance->ArgList.erase(myInstance->ArgList.begin());
-        }
-    }
-
-    return NULL;
+    GX_Begin(GX_TRIANGLEFAN, GX_VTXFMT0, 4);
+    GX_Position3f32(x2, y1, 0.0f);
+    GX_Color4u8(color.r, color.g, color.b, color.a);
+    GX_Position3f32(x2+Linewidth, y1+Linewidth, 0.0f);
+    GX_Color4u8(color.r, color.g, color.b, color.a);
+    GX_Position3f32(x1+Linewidth, y2+Linewidth, 0.0f);
+    GX_Color4u8(color.r, color.g, color.b, color.a);
+    GX_Position3f32(x1, y2, 0.0f);
+    GX_Color4u8(color.r, color.g, color.b, color.a);
+    GX_End();
 }

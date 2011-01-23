@@ -21,43 +21,34 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  ***************************************************************************/
-#include "ThreadedTask.hpp"
+#include "gui_circle.hpp"
 
-ThreadedTask * ThreadedTask::instance = NULL;
-
-ThreadedTask::ThreadedTask()
-    : ExitRequested(false)
+GuiCircle::GuiCircle()
+    : radius(100.0f), filled(true), accuracy(36)
 {
-	LWP_CreateThread (&Thread, ThreadCallback, this, NULL, 16384, 80);
+
+    color = (GXColor) {0, 0, 0, 255};
 }
 
-ThreadedTask::~ThreadedTask()
+GuiCircle::GuiCircle(float r)
+    : radius(r), filled(true), accuracy(36)
 {
-    ExitRequested = true;
-    Execute();
-    LWP_JoinThread(Thread, NULL);
+    color = (GXColor) {0, 0, 0, 255};
 }
 
-void * ThreadedTask::ThreadCallback(void *arg)
+void GuiCircle::Draw()
 {
-    ThreadedTask * myInstance = (ThreadedTask *) arg;
+    int loopAmount = filled ? accuracy : accuracy+1;
 
-    while(!myInstance->ExitRequested)
+    GX_Begin(filled ? GX_TRIANGLEFAN : GX_LINESTRIP, GX_VTXFMT0, loopAmount);
+    for(int i = 0; i < loopAmount; ++i)
     {
-        LWP_SuspendThread(myInstance->Thread);
+        f32 rad = (f32) i / (f32) accuracy * 360.0f;
+        f32 x = cos(DegToRad(rad)) * radius + GetLeft();
+        f32 y = sin(DegToRad(rad)) * radius + GetTop();
 
-        while(!myInstance->CallbackList.empty())
-        {
-            if(myInstance->CallbackList[0].first)
-                myInstance->CallbackList[0].first->Execute(myInstance->ArgList[0]);
-
-            else if(myInstance->CallbackList[0].second)
-                myInstance->CallbackList[0].second(myInstance->ArgList[0]);
-
-            myInstance->CallbackList.erase(myInstance->CallbackList.begin());
-            myInstance->ArgList.erase(myInstance->ArgList.begin());
-        }
+        GX_Position3f32(x, y, 0.0f);
+        GX_Color4u8(color.r, color.g, color.b, color.a);
     }
-
-    return NULL;
+    GX_End();
 }

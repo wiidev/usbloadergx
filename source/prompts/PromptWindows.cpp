@@ -23,6 +23,7 @@
 #include "network/update.h"
 #include "network/http.h"
 #include "prompts/PromptWindows.h"
+#include "prompts/PromptWindow.hpp"
 #include "prompts/gameinfo.h"
 #include "themes/CTheme.h"
 #include "utils/StringTools.h"
@@ -525,258 +526,45 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
 {
     int choice = -1;
     int count = wait;
-    gprintf("WindowPrompt( %s, %s, %s, %s, %s, %s, %i ): ", title, msg, btn1Label, btn2Label, btn3Label, btn4Label,
-            wait);
+    gprintf("WindowPrompt( %s, %s, %s, %s, %s, %s, %i ): ", title, msg, btn1Label, btn2Label, btn3Label, btn4Label, wait);
 
-    GuiWindow promptWindow(472, 320);
-    promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-    promptWindow.SetPosition(0, -10);
+    PromptWindow *Window = new PromptWindow;
+    Window->SetTitle(title);
+    Window->SetMessageText(msg);
+    if(btn1Label)
+        Window->AddButton(btn1Label);
+    if(btn2Label)
+        Window->AddButton(btn2Label);
+    if(btn3Label)
+        Window->AddButton(btn3Label);
+    if(btn4Label)
+        Window->AddButton(btn4Label);
 
-    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
-    GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
-
-    GuiTrigger trigA;
-    trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-    GuiTrigger trigB;
-    trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
-
-    GuiImage dialogBoxImg(&dialogBox);
-    if (Settings.wsprompt)
-    {
-        dialogBoxImg.SetWidescreen(Settings.widescreen);
-    }
-
-    GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-    titleTxt.SetPosition(0, 55);
-    titleTxt.SetMaxWidth(430, DOTTED);
-    GuiText msgTxt(msg, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-    msgTxt.SetPosition(0, -40);
-    msgTxt.SetMaxWidth(430);
-
-    GuiText btn1Txt(btn1Label, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    GuiImage btn1Img(&btnOutline);
-    if (Settings.wsprompt)
-    {
-        btn1Txt.SetWidescreen(Settings.widescreen);
-        btn1Img.SetWidescreen(Settings.widescreen);
-    }
-
-    GuiButton btn1(&btn1Img, &btn1Img, 0, 3, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
-    btn1.SetLabel(&btn1Txt);
-    btn1.SetState(STATE_SELECTED);
-
-    GuiText btn2Txt(btn2Label, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    GuiImage btn2Img(&btnOutline);
-    if (Settings.wsprompt)
-    {
-        btn2Txt.SetWidescreen(Settings.widescreen);
-        btn2Img.SetWidescreen(Settings.widescreen);
-    }
-    GuiButton btn2(&btn2Img, &btn2Img, 0, 3, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
-    btn2.SetLabel(&btn2Txt);
-    if (!btn3Label && !btn4Label) btn2.SetTrigger(&trigB);
-
-    GuiText btn3Txt(btn3Label, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    GuiImage btn3Img(&btnOutline);
-    if (Settings.wsprompt)
-    {
-        btn3Txt.SetWidescreen(Settings.widescreen);
-        btn3Img.SetWidescreen(Settings.widescreen);
-    }
-    GuiButton btn3(&btn3Img, &btn3Img, 0, 3, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
-    btn3.SetLabel(&btn3Txt);
-    if (!btn4Label) btn3.SetTrigger(&trigB);
-
-    GuiText btn4Txt(btn4Label, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    GuiImage btn4Img(&btnOutline);
-    if (Settings.wsprompt)
-    {
-        btn4Txt.SetWidescreen(Settings.widescreen);
-        btn4Img.SetWidescreen(Settings.widescreen);
-    }
-    GuiButton btn4(&btn4Img, &btn4Img, 0, 3, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
-    btn4.SetLabel(&btn4Txt);
-    if (btn4Label) btn4.SetTrigger(&trigB);
-
-    if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust buttons for widescreen
-    {
-        msgTxt.SetMaxWidth(330);
-
-        if (btn2Label && !btn3Label && !btn4Label)
-        {
-            btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            btn1.SetPosition(70, -80);
-            btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            btn2.SetPosition(-70, -80);
-            btn3.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            btn3.SetPosition(-70, -55);
-            btn4.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            btn4.SetPosition(70, -55);
-        }
-        else if (btn2Label && btn3Label && !btn4Label)
-        {
-            btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            btn1.SetPosition(70, -120);
-            btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            btn2.SetPosition(-70, -120);
-            btn3.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-            btn3.SetPosition(0, -55);
-            btn4.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            btn4.SetPosition(70, -55);
-        }
-        else if (btn2Label && btn3Label && btn4Label)
-        {
-            btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            btn1.SetPosition(70, -120);
-            btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            btn2.SetPosition(-70, -120);
-            btn3.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            btn3.SetPosition(70, -55);
-            btn4.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            btn4.SetPosition(-70, -55);
-        }
-        else if (!btn2Label && btn3Label && btn4Label)
-        {
-            btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-            btn1.SetPosition(0, -120);
-            btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            btn2.SetPosition(-70, -120);
-            btn3.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            btn3.SetPosition(70, -55);
-            btn4.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            btn4.SetPosition(-70, -55);
-        }
-        else
-        {
-            btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-            btn1.SetPosition(0, -80);
-            btn2.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            btn2.SetPosition(70, -120);
-            btn3.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            btn3.SetPosition(-70, -55);
-            btn4.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            btn4.SetPosition(70, -55);
-        }
-    }
-    else
-    {
-
-        if (btn2Label && !btn3Label && !btn4Label)
-        {
-            btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            btn1.SetPosition(40, -45);
-            btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            btn2.SetPosition(-40, -45);
-            btn3.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            btn3.SetPosition(50, -65);
-            btn4.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            btn4.SetPosition(-50, -65);
-        }
-        else if (btn2Label && btn3Label && !btn4Label)
-        {
-            btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            btn1.SetPosition(50, -120);
-            btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            btn2.SetPosition(-50, -120);
-            btn3.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-            btn3.SetPosition(0, -65);
-            btn4.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            btn4.SetPosition(-50, -65);
-        }
-        else if (btn2Label && btn3Label && btn4Label)
-        {
-            btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            btn1.SetPosition(50, -120);
-            btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            btn2.SetPosition(-50, -120);
-            btn3.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            btn3.SetPosition(50, -65);
-            btn4.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            btn4.SetPosition(-50, -65);
-        }
-        else if (!btn2Label && btn3Label && btn4Label)
-        {
-            btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-            btn1.SetPosition(0, -120);
-            btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            btn2.SetPosition(-50, -120);
-            btn3.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            btn3.SetPosition(50, -65);
-            btn4.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            btn4.SetPosition(-50, -65);
-        }
-        else
-        {
-            btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-            btn1.SetPosition(0, -45);
-            btn2.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            btn2.SetPosition(50, -120);
-            btn3.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            btn3.SetPosition(50, -65);
-            btn4.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            btn4.SetPosition(-50, -65);
-        }
-
-    }
-
-    promptWindow.Append(&dialogBoxImg);
-    promptWindow.Append(&titleTxt);
-    promptWindow.Append(&msgTxt);
-
-    if (btn1Label) promptWindow.Append(&btn1);
-    if (btn2Label) promptWindow.Append(&btn2);
-    if (btn3Label) promptWindow.Append(&btn3);
-    if (btn4Label) promptWindow.Append(&btn4);
-
-    promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
-    HaltGui();
     mainWindow->SetState(STATE_DISABLED);
-    mainWindow->Append(&promptWindow);
-    mainWindow->ChangeFocus(&promptWindow);
-    ResumeGui();
+    mainWindow->Append(Window);
+    mainWindow->ChangeFocus(Window);
 
     while (choice == -1)
     {
         VIDEO_WaitVSync();
-        if (shutdown == 1)
+
+        if (shutdown)
         {
             wiilight(0);
             Sys_Shutdown();
         }
-        if (reset == 1) Sys_Reboot();
-        if (btn1.GetState() == STATE_CLICKED)
-        {
-            choice = 1;
-        }
-        else if (btn2.GetState() == STATE_CLICKED)
-        {
-            if (!btn3Label)
-                choice = 0;
-            else choice = 2;
-        }
-        else if (btn3.GetState() == STATE_CLICKED)
-        {
-            if (!btn4Label)
-                choice = 0;
-            else choice = 3;
-        }
-        else if (btn4.GetState() == STATE_CLICKED)
-        {
-            choice = 0;
-        }
+        if (reset)
+            Sys_Reboot();
+
+        choice = Window->GetChoice();
+
         if (count > 0) count--;
         if (count == 0) choice = 1;
     }
 
-    promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-    while (promptWindow.GetEffect() > 0)
-        usleep(100);
-    HaltGui();
-    mainWindow->Remove(&promptWindow);
+    delete Window;
+
     mainWindow->SetState(STATE_DEFAULT);
-    ResumeGui();
     gprintf(" %i\n", choice);
 
     return choice;

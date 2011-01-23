@@ -221,10 +221,10 @@ void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, u8 data[]
     GX_SetVtxDesc(GX_VA_TEX0, GX_DIRECT);
 
     Mtx m, m1, m2, mv;
-    width *= .5;
-    height *= .5;
+    width *= 0.5f;
+    height *= 0.5f;
     guMtxIdentity(m1);
-    guMtxScaleApply(m1, m1, scaleX, scaleY, 1.0);
+    guMtxScaleApply(m1, m1, scaleX, scaleY, 1.0f);
     guVector axis = ( guVector )
     {
         0 , 0, 1
@@ -233,7 +233,7 @@ void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, u8 data[]
     //  guMtxConcat(m2,m1,m);
     guMtxConcat(m1, m2, m);
 
-    guMtxTransApply(m, m, xpos + width + 0.5, ypos + height + 0.5, zpos);
+    guMtxTransApply(m, m, xpos + width + 0.5f, ypos + height + 0.5f, zpos);
     guMtxConcat(GXmodelView2D, m, mv);
     GX_LoadPosMtxImm(mv, GX_PNMTX0);
     //

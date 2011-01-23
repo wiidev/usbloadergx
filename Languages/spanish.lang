@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 16:56+0100\n"
+"POT-Creation-Date: 2011-01-23 21:03+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: SirPalax\n"
 "Language-Team: Penn, SirPalax\n"
@@ -343,6 +343,9 @@ msgstr "Crear"
 msgid "Credits"
 msgstr "Créditos"
 
+msgid "Custom Disc Images"
+msgstr ""
+
 msgid "Custom Paths"
 msgstr "Personalizar Rutas"
 
@@ -399,9 +402,6 @@ msgstr "Ruta Imagen Discos"
 
 msgid "Disc Default"
 msgstr "Pred. Disco"
-
-msgid "Disc Images"
-msgstr "Imagen Discos"
 
 msgid "DiskFlip"
 msgstr "GiraDiscos"
@@ -463,7 +463,10 @@ msgstr "Descargar ahora"
 msgid "Download finished"
 msgstr "Descarga completada"
 
-msgid "Downloading covers"
+msgid "Downloading 3D Covers"
+msgstr ""
+
+msgid "Downloading Flat Covers"
 msgstr ""
 
 msgid "Downloading custom Discarts"
@@ -976,17 +979,14 @@ msgstr "Página Oficial:"
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr "Sólo Artísticas"
-
 msgid "Only Game Partition"
 msgstr ""
 
-msgid "Only Original"
-msgstr "Sólo Originales"
-
 msgid "Only for Install"
 msgstr "Sólo al instalar"
+
+msgid "Original Disc Images"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Originales/Artísticas"
@@ -1283,12 +1283,6 @@ msgstr "InfoBurbujas"
 msgid "Transfer failed"
 msgstr ""
 
-msgid "Trying custom Discarts"
-msgstr ""
-
-msgid "Trying original Discarts"
-msgstr ""
-
 msgid "USB Device not found"
 msgstr "USB no encontrado"
 
@@ -1478,6 +1472,15 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Disc Images"
+#~ msgstr "Imagen Discos"
+
+#~ msgid "Only Customs"
+#~ msgstr "Sólo Artísticas"
+
+#~ msgid "Only Original"
+#~ msgstr "Sólo Originales"
 
 #~ msgid "Do you really want to delete:"
 #~ msgstr "¿Realmente quieres borrar?:"

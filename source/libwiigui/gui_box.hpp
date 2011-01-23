@@ -21,43 +21,27 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  ***************************************************************************/
-#include "ThreadedTask.hpp"
+#ifndef GUIBOX_HPP_
+#define GUIBOX_HPP_
 
-ThreadedTask * ThreadedTask::instance = NULL;
+#include "libwiigui/gui.h"
 
-ThreadedTask::ThreadedTask()
-    : ExitRequested(false)
+class GuiBox : public GuiElement
 {
-	LWP_CreateThread (&Thread, ThreadCallback, this, NULL, 16384, 80);
-}
+    public:
+        GuiBox() : filled(true) { SetColor((GXColor) {255, 255, 255, 255}); }
+        GuiBox(int w, int h) : filled(true) { width = w; height = h; SetColor((GXColor) {255, 255, 255, 255}); }
+        //! Set one color for the whole square
+        void SetColor(const GXColor c) { LOCK(this); for(int i = 0; i < 4; ++i) color[i] = c; }
+        //! Set Color for each corner having a nice fluent flow into the color of the other corners
+        //! 0 = up/left, 1 = up/right, 2 = buttom/left, 3 = buttom/right
+        void SetColor(int i, const GXColor c) { LOCK(this); if(i < 4) color[i] = c; }
+        void SetSize(int w, int h) { LOCK(this); width = w; height = h; }
+        void SetFilled(bool f) { LOCK(this); filled = f; }
+        void Draw();
+    protected:
+        GXColor color[4];
+        bool filled;
+};
 
-ThreadedTask::~ThreadedTask()
-{
-    ExitRequested = true;
-    Execute();
-    LWP_JoinThread(Thread, NULL);
-}
-
-void * ThreadedTask::ThreadCallback(void *arg)
-{
-    ThreadedTask * myInstance = (ThreadedTask *) arg;
-
-    while(!myInstance->ExitRequested)
-    {
-        LWP_SuspendThread(myInstance->Thread);
-
-        while(!myInstance->CallbackList.empty())
-        {
-            if(myInstance->CallbackList[0].first)
-                myInstance->CallbackList[0].first->Execute(myInstance->ArgList[0]);
-
-            else if(myInstance->CallbackList[0].second)
-                myInstance->CallbackList[0].second(myInstance->ArgList[0]);
-
-            myInstance->CallbackList.erase(myInstance->CallbackList.begin());
-            myInstance->ArgList.erase(myInstance->ArgList.begin());
-        }
-    }
-
-    return NULL;
-}
+#endif

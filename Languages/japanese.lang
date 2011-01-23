@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 16:56+0100\n"
+"POT-Creation-Date: 2011-01-23 21:03+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi, papa\n"
@@ -343,6 +343,9 @@ msgstr "作成"
 msgid "Credits"
 msgstr "提供･協力"
 
+msgid "Custom Disc Images"
+msgstr ""
+
 msgid "Custom Paths"
 msgstr "パスを変更"
 
@@ -399,9 +402,6 @@ msgstr "ディスク画像"
 
 msgid "Disc Default"
 msgstr "ディスクの初期値"
-
-msgid "Disc Images"
-msgstr "ディスク画像"
 
 msgid "DiskFlip"
 msgstr "ディスクの回転風"
@@ -463,8 +463,11 @@ msgstr "ダウンロード"
 msgid "Download finished"
 msgstr "ダウンロードが終了しました"
 
-msgid "Downloading covers"
-msgstr "カバーをダウンロード中"
+msgid "Downloading 3D Covers"
+msgstr ""
+
+msgid "Downloading Flat Covers"
+msgstr ""
 
 msgid "Downloading custom Discarts"
 msgstr "カスタムカバーをダウンロード中"
@@ -976,17 +979,14 @@ msgstr "公式サイト:"
 msgid "Offset"
 msgstr "代替"
 
-msgid "Only Customs"
-msgstr "カスタムのみ"
-
 msgid "Only Game Partition"
 msgstr "ゲーム領域のみ"
 
-msgid "Only Original"
-msgstr "公式のみ"
-
 msgid "Only for Install"
 msgstr "インストール中のみ"
+
+msgid "Original Disc Images"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "公式を優先"
@@ -1283,12 +1283,6 @@ msgstr "ヒントバルーン"
 msgid "Transfer failed"
 msgstr "転送に失敗しました"
 
-msgid "Trying custom Discarts"
-msgstr "カスタムを試行中"
-
-msgid "Trying original Discarts"
-msgstr "公式を試行中"
-
 msgid "USB Device not found"
 msgstr "USB機器が見つかりません"
 
@@ -1478,6 +1472,24 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "Disc Images"
+#~ msgstr "ディスク画像"
+
+#~ msgid "Downloading covers"
+#~ msgstr "カバーをダウンロード中"
+
+#~ msgid "Only Customs"
+#~ msgstr "カスタムのみ"
+
+#~ msgid "Only Original"
+#~ msgstr "公式のみ"
+
+#~ msgid "Trying custom Discarts"
+#~ msgstr "カスタムを試行中"
+
+#~ msgid "Trying original Discarts"
+#~ msgstr "公式を試行中"
 
 #~ msgid "Do you really want to delete:"
 #~ msgstr "本当に削除しますか?"

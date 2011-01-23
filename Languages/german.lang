@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 16:54+0100\n"
+"POT-Creation-Date: 2011-01-23 21:03+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -343,6 +343,9 @@ msgstr "Erstelle GCT"
 msgid "Credits"
 msgstr "Danksagungen"
 
+msgid "Custom Disc Images"
+msgstr ""
+
 msgid "Custom Paths"
 msgstr "Pfade anpassen"
 
@@ -399,9 +402,6 @@ msgstr "Disk Cover"
 
 msgid "Disc Default"
 msgstr "Diskstandard"
-
-msgid "Disc Images"
-msgstr "Disk Cover"
 
 msgid "DiskFlip"
 msgstr "DiskFlip"
@@ -463,8 +463,11 @@ msgstr "Herunterladen"
 msgid "Download finished"
 msgstr "Download abgeschlossen"
 
-msgid "Downloading covers"
-msgstr "Lade Cover herunter"
+msgid "Downloading 3D Covers"
+msgstr ""
+
+msgid "Downloading Flat Covers"
+msgstr ""
 
 msgid "Downloading custom Discarts"
 msgstr "Lade Community Diskcovers herunter"
@@ -976,17 +979,14 @@ msgstr "Offizielle Seite:"
 msgid "Offset"
 msgstr "Offset"
 
-msgid "Only Customs"
-msgstr "Nur Community"
-
 msgid "Only Game Partition"
 msgstr "Nur Spiele Partition"
 
-msgid "Only Original"
-msgstr "Nur Originale"
-
 msgid "Only for Install"
 msgstr "Nur beim Installieren"
+
+msgid "Original Disc Images"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Original/Community"
@@ -1283,12 +1283,6 @@ msgstr "Quickinfo"
 msgid "Transfer failed"
 msgstr "Transfer fehlgeschlagen"
 
-msgid "Trying custom Discarts"
-msgstr "Probiere community Diskcover"
-
-msgid "Trying original Discarts"
-msgstr "Probiere original Diskcover"
-
 msgid "USB Device not found"
 msgstr "USB Gerät nicht gefunden."
 
@@ -1478,6 +1472,24 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "Disc Images"
+#~ msgstr "Disk Cover"
+
+#~ msgid "Downloading covers"
+#~ msgstr "Lade Cover herunter"
+
+#~ msgid "Only Customs"
+#~ msgstr "Nur Community"
+
+#~ msgid "Only Original"
+#~ msgstr "Nur Originale"
+
+#~ msgid "Trying custom Discarts"
+#~ msgstr "Probiere community Diskcover"
+
+#~ msgid "Trying original Discarts"
+#~ msgstr "Probiere original Diskcover"
 
 #~ msgid "Do you really want to delete:"
 #~ msgstr "Löschvorgang bestätigen:"

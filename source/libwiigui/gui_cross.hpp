@@ -21,43 +21,22 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  ***************************************************************************/
-#include "ThreadedTask.hpp"
+#ifndef GUICROSS_HPP_
+#define GUICROSS_HPP_
 
-ThreadedTask * ThreadedTask::instance = NULL;
+#include "libwiigui/gui.h"
 
-ThreadedTask::ThreadedTask()
-    : ExitRequested(false)
+class GuiCross : public GuiElement
 {
-	LWP_CreateThread (&Thread, ThreadCallback, this, NULL, 16384, 80);
-}
+    public:
+        GuiCross() : Linewidth(1.5f) { color = (GXColor) {0, 0, 0, 255}; }
+        void SetLinewidth(float w) { LOCK(this); Linewidth = w; }
+        void SetColor(const GXColor c) { LOCK(this); color = c; }
+        void SetSize(int w, int h) { LOCK(this); width = w; height = h; }
+        void Draw();
+    protected:
+        GXColor color;
+        float Linewidth;
+};
 
-ThreadedTask::~ThreadedTask()
-{
-    ExitRequested = true;
-    Execute();
-    LWP_JoinThread(Thread, NULL);
-}
-
-void * ThreadedTask::ThreadCallback(void *arg)
-{
-    ThreadedTask * myInstance = (ThreadedTask *) arg;
-
-    while(!myInstance->ExitRequested)
-    {
-        LWP_SuspendThread(myInstance->Thread);
-
-        while(!myInstance->CallbackList.empty())
-        {
-            if(myInstance->CallbackList[0].first)
-                myInstance->CallbackList[0].first->Execute(myInstance->ArgList[0]);
-
-            else if(myInstance->CallbackList[0].second)
-                myInstance->CallbackList[0].second(myInstance->ArgList[0]);
-
-            myInstance->CallbackList.erase(myInstance->CallbackList.begin());
-            myInstance->ArgList.erase(myInstance->ArgList.begin());
-        }
-    }
-
-    return NULL;
-}
+#endif

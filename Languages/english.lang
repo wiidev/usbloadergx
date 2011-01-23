@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 15:31+0100\n"
+"POT-Creation-Date: 2011-01-23 21:03+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -343,6 +343,9 @@ msgstr ""
 msgid "Credits"
 msgstr ""
 
+msgid "Custom Disc Images"
+msgstr ""
+
 msgid "Custom Paths"
 msgstr ""
 
@@ -398,9 +401,6 @@ msgid "Disc Artwork Path"
 msgstr ""
 
 msgid "Disc Default"
-msgstr ""
-
-msgid "Disc Images"
 msgstr ""
 
 msgid "DiskFlip"
@@ -463,7 +463,10 @@ msgstr ""
 msgid "Download finished"
 msgstr ""
 
-msgid "Downloading covers"
+msgid "Downloading 3D Covers"
+msgstr ""
+
+msgid "Downloading Flat Covers"
 msgstr ""
 
 msgid "Downloading custom Discarts"
@@ -976,16 +979,13 @@ msgstr ""
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr ""
-
 msgid "Only Game Partition"
 msgstr ""
 
-msgid "Only Original"
+msgid "Only for Install"
 msgstr ""
 
-msgid "Only for Install"
+msgid "Original Disc Images"
 msgstr ""
 
 msgid "Original/Customs"
@@ -1281,12 +1281,6 @@ msgid "Tooltips"
 msgstr ""
 
 msgid "Transfer failed"
-msgstr ""
-
-msgid "Trying custom Discarts"
-msgstr ""
-
-msgid "Trying original Discarts"
 msgstr ""
 
 msgid "USB Device not found"

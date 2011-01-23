@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 15:31+0100\n"
+"POT-Creation-Date: 2011-01-23 21:03+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
@@ -343,6 +343,9 @@ msgstr "Créer"
 msgid "Credits"
 msgstr "Crédits"
 
+msgid "Custom Disc Images"
+msgstr ""
+
 msgid "Custom Paths"
 msgstr "Personnalisation des dossiers"
 
@@ -399,9 +402,6 @@ msgstr "Dossier labels DVD"
 
 msgid "Disc Default"
 msgstr "Disque par défaut"
-
-msgid "Disc Images"
-msgstr "Labels DVD"
 
 msgid "DiskFlip"
 msgstr "Inversion disque"
@@ -463,8 +463,11 @@ msgstr "Télécharger"
 msgid "Download finished"
 msgstr "Téléchargement terminé"
 
-msgid "Downloading covers"
-msgstr "Téléchargement des jaquettes"
+msgid "Downloading 3D Covers"
+msgstr ""
+
+msgid "Downloading Flat Covers"
+msgstr ""
 
 msgid "Downloading custom Discarts"
 msgstr "Téléch. des labels DVD persos"
@@ -976,17 +979,14 @@ msgstr "Site officiel:"
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr "Personnalisés"
-
 msgid "Only Game Partition"
 msgstr "Uniquement la partition de jeu"
 
-msgid "Only Original"
-msgstr "Originaux"
-
 msgid "Only for Install"
 msgstr "Uniquement à l'installation"
+
+msgid "Original Disc Images"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Originaux/Persos"
@@ -1283,12 +1283,6 @@ msgstr "Info-bulles"
 msgid "Transfer failed"
 msgstr "Échec du transfert"
 
-msgid "Trying custom Discarts"
-msgstr "Essai labels DVD persos"
-
-msgid "Trying original Discarts"
-msgstr "Essai labels DVD originaux"
-
 msgid "USB Device not found"
 msgstr "Périphérique USB introuvable"
 
@@ -1478,6 +1472,24 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "Disc Images"
+#~ msgstr "Labels DVD"
+
+#~ msgid "Downloading covers"
+#~ msgstr "Téléchargement des jaquettes"
+
+#~ msgid "Only Customs"
+#~ msgstr "Personnalisés"
+
+#~ msgid "Only Original"
+#~ msgstr "Originaux"
+
+#~ msgid "Trying custom Discarts"
+#~ msgstr "Essai labels DVD persos"
+
+#~ msgid "Trying original Discarts"
+#~ msgstr "Essai labels DVD originaux"
 
 #~ msgid "Do you really want to delete:"
 #~ msgstr "Voulez-vous vraiment supprimer:"

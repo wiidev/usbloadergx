@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 16:56+0100\n"
+"POT-Creation-Date: 2011-01-23 21:03+0100\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -343,6 +343,9 @@ msgstr "Skapa"
 msgid "Credits"
 msgstr "Medverkande"
 
+msgid "Custom Disc Images"
+msgstr ""
+
 msgid "Custom Paths"
 msgstr "Anpassade sökvägar"
 
@@ -399,9 +402,6 @@ msgstr "Skivbildsmapp"
 
 msgid "Disc Default"
 msgstr "Skivans standard"
-
-msgid "Disc Images"
-msgstr "Skivbilder"
 
 msgid "DiskFlip"
 msgstr "Vänd Skiva"
@@ -463,7 +463,10 @@ msgstr "Ladda ner nu"
 msgid "Download finished"
 msgstr "Nedladdning klar"
 
-msgid "Downloading covers"
+msgid "Downloading 3D Covers"
+msgstr ""
+
+msgid "Downloading Flat Covers"
 msgstr ""
 
 msgid "Downloading custom Discarts"
@@ -976,17 +979,14 @@ msgstr "Officiell sida:"
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr "Endast anpassade"
-
 msgid "Only Game Partition"
 msgstr ""
 
-msgid "Only Original"
-msgstr "Endast original"
-
 msgid "Only for Install"
 msgstr "Endast för installering"
+
+msgid "Original Disc Images"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Original/Anpassade"
@@ -1283,12 +1283,6 @@ msgstr "Verktygstips"
 msgid "Transfer failed"
 msgstr ""
 
-msgid "Trying custom Discarts"
-msgstr ""
-
-msgid "Trying original Discarts"
-msgstr ""
-
 msgid "USB Device not found"
 msgstr "USB-enhet ej hittad"
 
@@ -1478,6 +1472,15 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "Disc Images"
+#~ msgstr "Skivbilder"
+
+#~ msgid "Only Customs"
+#~ msgstr "Endast anpassade"
+
+#~ msgid "Only Original"
+#~ msgstr "Endast original"
 
 #~ msgid "Do you really want to delete:"
 #~ msgstr "Vill du verkligen radera:"

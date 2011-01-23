@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 16:56+0100\n"
+"POT-Creation-Date: 2011-01-23 21:03+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -343,6 +343,9 @@ msgstr "Opprett"
 msgid "Credits"
 msgstr "Medvirkende"
 
+msgid "Custom Disc Images"
+msgstr ""
+
 msgid "Custom Paths"
 msgstr "Endre stier"
 
@@ -399,9 +402,6 @@ msgstr "Platebilde sti"
 
 msgid "Disc Default"
 msgstr "Spill Standard"
-
-msgid "Disc Images"
-msgstr "Plate bilder"
 
 msgid "DiskFlip"
 msgstr "Snu plate"
@@ -463,7 +463,10 @@ msgstr "Last ned nå"
 msgid "Download finished"
 msgstr "Nedlasting ferdig"
 
-msgid "Downloading covers"
+msgid "Downloading 3D Covers"
+msgstr ""
+
+msgid "Downloading Flat Covers"
 msgstr ""
 
 msgid "Downloading custom Discarts"
@@ -976,17 +979,14 @@ msgstr "Offisiell nettside:"
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr "Kun custom"
-
 msgid "Only Game Partition"
 msgstr ""
 
-msgid "Only Original"
-msgstr "Kun original"
-
 msgid "Only for Install"
 msgstr "Kun for installering"
+
+msgid "Original Disc Images"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Original/Custom"
@@ -1283,12 +1283,6 @@ msgstr "Verktøystips"
 msgid "Transfer failed"
 msgstr ""
 
-msgid "Trying custom Discarts"
-msgstr ""
-
-msgid "Trying original Discarts"
-msgstr ""
-
 msgid "USB Device not found"
 msgstr "USB enhet ikke funnet"
 
@@ -1478,6 +1472,15 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
+
+#~ msgid "Disc Images"
+#~ msgstr "Plate bilder"
+
+#~ msgid "Only Customs"
+#~ msgstr "Kun custom"
+
+#~ msgid "Only Original"
+#~ msgstr "Kun original"
 
 #~ msgid "Do you really want to delete:"
 #~ msgstr "Er du sikker på at du vil slette:"

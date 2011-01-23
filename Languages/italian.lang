@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 16:54+0100\n"
+"POT-Creation-Date: 2011-01-23 21:03+0100\n"
 "PO-Revision-Date: 2011-01-16 16:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: Cambo\n"
@@ -343,6 +343,9 @@ msgstr "Crea"
 msgid "Credits"
 msgstr "Ringraziamenti"
 
+msgid "Custom Disc Images"
+msgstr ""
+
 msgid "Custom Paths"
 msgstr "Impostazioni Cartelle"
 
@@ -399,9 +402,6 @@ msgstr "Cart. Imm. Disco"
 
 msgid "Disc Default"
 msgstr "Predefinita Disco"
-
-msgid "Disc Images"
-msgstr "Immagini Disco"
 
 msgid "DiskFlip"
 msgstr "Gira i dischi"
@@ -463,8 +463,11 @@ msgstr "Scarica Adesso"
 msgid "Download finished"
 msgstr "Ho finito di scaricare"
 
-msgid "Downloading covers"
-msgstr "Sto scaricando le copertine"
+msgid "Downloading 3D Covers"
+msgstr ""
+
+msgid "Downloading Flat Covers"
+msgstr ""
 
 msgid "Downloading custom Discarts"
 msgstr "Sto scaricando le imm. disco personalizzate"
@@ -976,17 +979,14 @@ msgstr "Sito Ufficiale:"
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr "Modificate"
-
 msgid "Only Game Partition"
 msgstr "Solo Giochi"
 
-msgid "Only Original"
-msgstr "Originali"
-
 msgid "Only for Install"
 msgstr "Installa Solamente"
+
+msgid "Original Disc Images"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Origin./Modific."
@@ -1283,12 +1283,6 @@ msgstr "Suggerimenti"
 msgid "Transfer failed"
 msgstr "Trasferimento fallito"
 
-msgid "Trying custom Discarts"
-msgstr "Provo con le Imm. Disco personalizzate"
-
-msgid "Trying original Discarts"
-msgstr "Provo con le Imm. Disco originali"
-
 msgid "USB Device not found"
 msgstr "Dispositivo USB non Trovato"
 
@@ -1478,6 +1472,24 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "Disc Images"
+#~ msgstr "Immagini Disco"
+
+#~ msgid "Downloading covers"
+#~ msgstr "Sto scaricando le copertine"
+
+#~ msgid "Only Customs"
+#~ msgstr "Modificate"
+
+#~ msgid "Only Original"
+#~ msgstr "Originali"
+
+#~ msgid "Trying custom Discarts"
+#~ msgstr "Provo con le Imm. Disco personalizzate"
+
+#~ msgid "Trying original Discarts"
+#~ msgstr "Provo con le Imm. Disco originali"
 
 #~ msgid "Do you really want to delete:"
 #~ msgstr "Vuoi veramente eliminare:"

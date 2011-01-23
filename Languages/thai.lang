@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 16:56+0100\n"
+"POT-Creation-Date: 2011-01-23 21:03+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -343,6 +343,9 @@ msgstr "สร้าง"
 msgid "Credits"
 msgstr "เครดิต"
 
+msgid "Custom Disc Images"
+msgstr ""
+
 msgid "Custom Paths"
 msgstr "กำหนด ที่เก็บ"
 
@@ -399,9 +402,6 @@ msgstr "ที่เก็บ ภาพแผ่น"
 
 msgid "Disc Default"
 msgstr "ค่าตั้งต้นแผ่น"
-
-msgid "Disc Images"
-msgstr "ภาพแผ่น"
 
 msgid "DiskFlip"
 msgstr "สลับด้านแผ่น"
@@ -463,7 +463,10 @@ msgstr "เริ่มการดาวน์โหลด"
 msgid "Download finished"
 msgstr "ดาวน์โหลดเสร็จแล้ว"
 
-msgid "Downloading covers"
+msgid "Downloading 3D Covers"
+msgstr ""
+
+msgid "Downloading Flat Covers"
 msgstr ""
 
 msgid "Downloading custom Discarts"
@@ -976,17 +979,14 @@ msgstr "เวบไซต์อย่างเป็นทางการ:"
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr "เฉพาะที่ดัดแปลง"
-
 msgid "Only Game Partition"
 msgstr ""
 
-msgid "Only Original"
-msgstr "เฉพาะของแท้"
-
 msgid "Only for Install"
 msgstr "เฉพาะติดตั้งเท่านั้น"
+
+msgid "Original Disc Images"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "ของแท้/ดัดแปลง"
@@ -1283,12 +1283,6 @@ msgstr "คำแนะนำ"
 msgid "Transfer failed"
 msgstr ""
 
-msgid "Trying custom Discarts"
-msgstr ""
-
-msgid "Trying original Discarts"
-msgstr ""
-
 msgid "USB Device not found"
 msgstr "ไม่พบอุปกรณ์ USB"
 
@@ -1478,6 +1472,15 @@ msgstr "จาก"
 
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
+
+#~ msgid "Disc Images"
+#~ msgstr "ภาพแผ่น"
+
+#~ msgid "Only Customs"
+#~ msgstr "เฉพาะที่ดัดแปลง"
+
+#~ msgid "Only Original"
+#~ msgstr "เฉพาะของแท้"
 
 #~ msgid "Do you really want to delete:"
 #~ msgstr "ต้องการที่จะลบใช่ไหม:"

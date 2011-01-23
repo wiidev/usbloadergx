@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 16:54+0100\n"
+"POT-Creation-Date: 2011-01-23 21:03+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1043 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -343,6 +343,9 @@ msgstr "Vytvorit"
 msgid "Credits"
 msgstr "Zásluhy"
 
+msgid "Custom Disc Images"
+msgstr ""
+
 msgid "Custom Paths"
 msgstr "Vlastní cesty"
 
@@ -399,9 +402,6 @@ msgstr "Cesta k potiskum DVD"
 
 msgid "Disc Default"
 msgstr "Puvodní nastavení disku"
-
-msgid "Disc Images"
-msgstr "Potisky DVD"
 
 msgid "DiskFlip"
 msgstr ""
@@ -463,8 +463,11 @@ msgstr "Stáhnout nyní"
 msgid "Download finished"
 msgstr "Stažení dokonceno"
 
-msgid "Downloading covers"
-msgstr "Stáhování obalu"
+msgid "Downloading 3D Covers"
+msgstr ""
+
+msgid "Downloading Flat Covers"
+msgstr ""
 
 msgid "Downloading custom Discarts"
 msgstr "Stahuji upravené potisky"
@@ -976,17 +979,14 @@ msgstr "Oficiální místo:"
 msgid "Offset"
 msgstr "Ofset"
 
-msgid "Only Customs"
-msgstr "Pouze Upravené"
-
 msgid "Only Game Partition"
 msgstr "Pouze oddíl s hrami"
 
-msgid "Only Original"
-msgstr "Pouze originál"
-
 msgid "Only for Install"
 msgstr "Pouze pro instalaci"
+
+msgid "Original Disc Images"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Originál/Upravené"
@@ -1283,12 +1283,6 @@ msgstr "Popisky"
 msgid "Transfer failed"
 msgstr "Prenos selhal"
 
-msgid "Trying custom Discarts"
-msgstr "Zkousím upravené potisky"
-
-msgid "Trying original Discarts"
-msgstr "Zkousím puvodní potisky"
-
 msgid "USB Device not found"
 msgstr "USB zarízení nenalezeno"
 
@@ -1478,6 +1472,24 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid "Disc Images"
+#~ msgstr "Potisky DVD"
+
+#~ msgid "Downloading covers"
+#~ msgstr "Stáhování obalu"
+
+#~ msgid "Only Customs"
+#~ msgstr "Pouze Upravené"
+
+#~ msgid "Only Original"
+#~ msgstr "Pouze originál"
+
+#~ msgid "Trying custom Discarts"
+#~ msgstr "Zkousím upravené potisky"
+
+#~ msgid "Trying original Discarts"
+#~ msgstr "Zkousím puvodní potisky"
 
 #~ msgid "Do you really want to delete:"
 #~ msgstr "Opravdu smazat:"

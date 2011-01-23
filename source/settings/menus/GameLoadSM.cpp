@@ -311,7 +311,7 @@ int GameLoadSM::GetMenuInternal()
     //! Settings: Alternate DOL
     else if (ret == ++Idx)
     {
-        if (++GameConfig.loadalternatedol > 4)
+        if (++GameConfig.loadalternatedol >= ALT_DOL_MAX_CHOICE)
             GameConfig.loadalternatedol = 0;
     }
 

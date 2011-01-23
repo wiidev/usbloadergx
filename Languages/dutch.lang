@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-22 16:54+0100\n"
+"POT-Creation-Date: 2011-01-23 21:03+0100\n"
 "PO-Revision-Date: 2011-01-21 13:52+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -343,6 +343,9 @@ msgstr "Maak"
 msgid "Credits"
 msgstr ""
 
+msgid "Custom Disc Images"
+msgstr ""
+
 msgid "Custom Paths"
 msgstr "Bestandslocaties"
 
@@ -399,9 +402,6 @@ msgstr "Locatie disk labels"
 
 msgid "Disc Default"
 msgstr "Disk standaard"
-
-msgid "Disc Images"
-msgstr "Disk labels"
 
 msgid "DiskFlip"
 msgstr ""
@@ -463,8 +463,11 @@ msgstr "Download nu"
 msgid "Download finished"
 msgstr "Download voltooid"
 
-msgid "Downloading covers"
-msgstr "Covers downloaden"
+msgid "Downloading 3D Covers"
+msgstr ""
+
+msgid "Downloading Flat Covers"
+msgstr ""
 
 msgid "Downloading custom Discarts"
 msgstr "Aangepaste disc afbeeldingen downloaden"
@@ -976,17 +979,14 @@ msgstr "Officiële site:"
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr "Enkel aangepast"
-
 msgid "Only Game Partition"
 msgstr "Alleen Spel Partitie"
 
-msgid "Only Original"
-msgstr "Enkel origineel"
-
 msgid "Only for Install"
 msgstr "Alleen bij installeren"
+
+msgid "Original Disc Images"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Origineel/Aangepast"
@@ -1283,12 +1283,6 @@ msgstr "Knopinfo"
 msgid "Transfer failed"
 msgstr "Overdracht mislukt."
 
-msgid "Trying custom Discarts"
-msgstr "Aangepaste disc afbeeldingen proberen"
-
-msgid "Trying original Discarts"
-msgstr "Origninele disc afbeeldingen proberen"
-
 msgid "USB Device not found"
 msgstr "USB Apparaat niet gevonden"
 
@@ -1478,6 +1472,24 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "Disc Images"
+#~ msgstr "Disk labels"
+
+#~ msgid "Downloading covers"
+#~ msgstr "Covers downloaden"
+
+#~ msgid "Only Customs"
+#~ msgstr "Enkel aangepast"
+
+#~ msgid "Only Original"
+#~ msgstr "Enkel origineel"
+
+#~ msgid "Trying custom Discarts"
+#~ msgstr "Aangepaste disc afbeeldingen proberen"
+
+#~ msgid "Trying original Discarts"
+#~ msgstr "Origninele disc afbeeldingen proberen"
 
 #~ msgid "Do you really want to delete:"
 #~ msgstr "Wil je echt verwijderen:"

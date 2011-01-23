@@ -21,43 +21,30 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  ***************************************************************************/
-#include "ThreadedTask.hpp"
+#ifndef GUICHECKBOX_HPP_
+#define GUICHECKBOX_HPP_
 
-ThreadedTask * ThreadedTask::instance = NULL;
+#include "libwiigui/gui.h"
+#include "libwiigui/gui_box.hpp"
+#include "libwiigui/gui_cross.hpp"
 
-ThreadedTask::ThreadedTask()
-    : ExitRequested(false)
+class GuiCheckbox : public GuiButton
 {
-	LWP_CreateThread (&Thread, ThreadCallback, this, NULL, 16384, 80);
-}
+    public:
+        GuiCheckbox();
+        GuiCheckbox(int w, int h);
+        void SetTransparent(bool b);
+        void SetSize(int w, int h);
+        void SetChecked(bool c) { LOCK(this); Checked = c; }
+        bool IsChecked() const { return Checked; }
+        virtual void SetState(int s, int c = -1);
+        virtual void Draw();
+    protected:
+        GuiCross Cross;
+        GuiBox Blackbox;
+        GuiBox Whitebox;
+        bool Checked;
 
-ThreadedTask::~ThreadedTask()
-{
-    ExitRequested = true;
-    Execute();
-    LWP_JoinThread(Thread, NULL);
-}
+};
 
-void * ThreadedTask::ThreadCallback(void *arg)
-{
-    ThreadedTask * myInstance = (ThreadedTask *) arg;
-
-    while(!myInstance->ExitRequested)
-    {
-        LWP_SuspendThread(myInstance->Thread);
-
-        while(!myInstance->CallbackList.empty())
-        {
-            if(myInstance->CallbackList[0].first)
-                myInstance->CallbackList[0].first->Execute(myInstance->ArgList[0]);
-
-            else if(myInstance->CallbackList[0].second)
-                myInstance->CallbackList[0].second(myInstance->ArgList[0]);
-
-            myInstance->CallbackList.erase(myInstance->CallbackList.begin());
-            myInstance->ArgList.erase(myInstance->ArgList.begin());
-        }
-    }
-
-    return NULL;
-}
+#endif

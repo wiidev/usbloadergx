@@ -21,43 +21,38 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  ***************************************************************************/
-#include "ThreadedTask.hpp"
+#ifndef _CHECKBOXPROMPT_HPP_
+#define _CHECKBOXPROMPT_HPP_
 
-ThreadedTask * ThreadedTask::instance = NULL;
+#include "libwiigui/gui_checkbox.hpp"
+#include "PromptWindow.hpp"
 
-ThreadedTask::ThreadedTask()
-    : ExitRequested(false)
+enum
 {
-	LWP_CreateThread (&Thread, ThreadCallback, this, NULL, 16384, 80);
-}
+    CheckedBox1 = 0x01,
+    CheckedBox2 = 0x02,
+    CheckedBox3 = 0x04,
+    CheckedBox4 = 0x08,
+};
 
-ThreadedTask::~ThreadedTask()
+class CheckboxPrompt : private PromptWindow
 {
-    ExitRequested = true;
-    Execute();
-    LWP_JoinThread(Thread, NULL);
-}
+    public:
+        //! Constructor
+        CheckboxPrompt(const char * title = 0, const char *msg = 0);
+        //! Destructor
+        ~CheckboxPrompt();
+        //! Add new checkbox
+        void AddCheckBox(const char *text);
+        //! Default function to get the button pressed
+        int GetChoice();
+        //! Show window and wait for the user to press OK/Cancel
+        static int Show(const char *title = 0, const char *msg = 0, const char *chbx1 = 0, const char *chbx2 = 0, const char *chbx3 = 0, const char *chbx4 = 0);
+    protected:
+        std::vector<GuiText *> CheckboxTxt;
+        std::vector<GuiCheckbox *> Checkbox;
+};
 
-void * ThreadedTask::ThreadCallback(void *arg)
-{
-    ThreadedTask * myInstance = (ThreadedTask *) arg;
+#define CheckboxWindow CheckboxPrompt::Show
 
-    while(!myInstance->ExitRequested)
-    {
-        LWP_SuspendThread(myInstance->Thread);
-
-        while(!myInstance->CallbackList.empty())
-        {
-            if(myInstance->CallbackList[0].first)
-                myInstance->CallbackList[0].first->Execute(myInstance->ArgList[0]);
-
-            else if(myInstance->CallbackList[0].second)
-                myInstance->CallbackList[0].second(myInstance->ArgList[0]);
-
-            myInstance->CallbackList.erase(myInstance->CallbackList.begin());
-            myInstance->ArgList.erase(myInstance->ArgList.begin());
-        }
-    }
-
-    return NULL;
-}
+#endif
