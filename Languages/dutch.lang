@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-01-23 21:03+0100\n"
-"PO-Revision-Date: 2011-01-21 13:52+0100\n"
+"PO-Revision-Date: 2011-01-24 07:20+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
 "MIME-Version: 1.0\n"
@@ -203,7 +203,7 @@ msgid "Block Loader Settings"
 msgstr "Blokkeer Loader Instellingen"
 
 msgid "Block Parental Settings"
-msgstr "Blokkeer Ouderlijk toezicht instellingen"
+msgstr "Blokkeer Ouderlijk toezicht"
 
 msgid "Block Reset Settings"
 msgstr "Blokkeer Reset Instellingen"
@@ -344,7 +344,7 @@ msgid "Credits"
 msgstr ""
 
 msgid "Custom Disc Images"
-msgstr ""
+msgstr "Aangepaste Disk Labels"
 
 msgid "Custom Paths"
 msgstr "Bestandslocaties"
@@ -464,10 +464,10 @@ msgid "Download finished"
 msgstr "Download voltooid"
 
 msgid "Downloading 3D Covers"
-msgstr ""
+msgstr "3D hoesjes aan het downloaden"
 
 msgid "Downloading Flat Covers"
-msgstr ""
+msgstr "Platte hoesjes aan het downloaden"
 
 msgid "Downloading custom Discarts"
 msgstr "Aangepaste disc afbeeldingen downloaden"
@@ -611,7 +611,7 @@ msgid "French"
 msgstr "Frans"
 
 msgid "Full Menu"
-msgstr ""
+msgstr "Volledig Menu"
 
 msgid "Full shutdown"
 msgstr "Volledig uitzetten"
@@ -644,7 +644,7 @@ msgid "Game Lock"
 msgstr "Spel vergrendelen"
 
 msgid "Game Only"
-msgstr ""
+msgstr "Alleen Spel"
 
 msgid "Game Region"
 msgstr "Spel Regio"
@@ -986,7 +986,7 @@ msgid "Only for Install"
 msgstr "Alleen bij installeren"
 
 msgid "Original Disc Images"
-msgstr ""
+msgstr "Originele Disk Labels"
 
 msgid "Original/Customs"
 msgstr "Origineel/Aangepast"
@@ -1299,7 +1299,7 @@ msgid "Uninstall Menu"
 msgstr "Verwijderen"
 
 msgid "Uninstall all"
-msgstr ""
+msgstr "Verwijder alle"
 
 msgid "Uninstalling wad"
 msgstr "Wad verwijderen"
@@ -1375,7 +1375,7 @@ msgid "What do you want to update?"
 msgstr "Wat wil je updaten?"
 
 msgid "What should be deleted for this game title:"
-msgstr ""
+msgstr "Wat er verwijderd moet worden voor deze spel titel:"
 
 msgid "WiFi Features"
 msgstr "WiFi functies"

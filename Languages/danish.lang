@@ -292,7 +292,7 @@ msgid "Console Locked"
 msgstr "Konsollen er låst"
 
 msgid "Console must be unlocked for this option."
-msgstr "Konsollen skal være oplåst for denne mulighed."
+msgstr "Konsollen skal være låst op for denne mulighed."
 
 msgid "Console should be unlocked to modify it."
 msgstr "Konsollen skal være låst op for ændre dette."
@@ -344,7 +344,7 @@ msgid "Credits"
 msgstr "Lavet af:"
 
 msgid "Custom Disc Images"
-msgstr ""
+msgstr "Tilpasset DVD billede"
 
 msgid "Custom Paths"
 msgstr "Sti-indstillinger"
@@ -464,13 +464,13 @@ msgid "Download finished"
 msgstr "Download færdig"
 
 msgid "Downloading 3D Covers"
-msgstr ""
+msgstr "Downloader 3D Covers"
 
 msgid "Downloading Flat Covers"
-msgstr ""
+msgstr "Downloader Flade Covers"
 
 msgid "Downloading custom Discarts"
-msgstr "Downloader custom DVD billeder"
+msgstr "Downloader tilpasset DVD billeder"
 
 msgid "Downloading file"
 msgstr "Downloader fil"
@@ -611,7 +611,7 @@ msgid "French"
 msgstr "Fransk"
 
 msgid "Full Menu"
-msgstr ""
+msgstr "Fuld Menu"
 
 msgid "Full shutdown"
 msgstr "Luk helt ned"
@@ -644,7 +644,7 @@ msgid "Game Lock"
 msgstr "Spil låst"
 
 msgid "Game Only"
-msgstr ""
+msgstr "Kun Spil"
 
 msgid "Game Region"
 msgstr "Region"
@@ -986,7 +986,7 @@ msgid "Only for Install"
 msgstr "Kun til installering"
 
 msgid "Original Disc Images"
-msgstr ""
+msgstr "Originale DVD billeder"
 
 msgid "Original/Customs"
 msgstr "Originale/Tilpassede"
@@ -1076,7 +1076,7 @@ msgid "Rename Game on WBFS"
 msgstr "Omdøb spil på WBFS"
 
 msgid "Reset"
-msgstr ""
+msgstr "Nulstil"
 
 msgid "Reset BG Music"
 msgstr "Nulstil BG-musik"
@@ -1299,7 +1299,7 @@ msgid "Uninstall Menu"
 msgstr "Afinstallationsmenu"
 
 msgid "Uninstall all"
-msgstr ""
+msgstr "Afinstaller alle"
 
 msgid "Uninstalling wad"
 msgstr "Afinstallerer WAD"
@@ -1375,7 +1375,7 @@ msgid "What do you want to update?"
 msgstr "Hvad skal opdateres?"
 
 msgid "What should be deleted for this game title:"
-msgstr ""
+msgstr "Hvad skal der slettes for dette spil:"
 
 msgid "WiFi Features"
 msgstr "WiFi-indstillinger"
@@ -1486,7 +1486,7 @@ msgstr "sekunder tilbage"
 #~ msgstr "Kun originale"
 
 #~ msgid "Trying custom Discarts"
-#~ msgstr "Prøver custom DVD billeder"
+#~ msgstr "Prøver tilpassede DVD billeder"
 
 #~ msgid "Trying original Discarts"
 #~ msgstr "Prøver orginale DVD billeder"

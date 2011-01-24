@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# French.lang for r1053
+# French.lang for r1055
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -335,7 +335,7 @@ msgid "Could not save."
 msgstr "Sauvegarde impossible."
 
 msgid "Cover Download"
-msgstr "Téléchargement jaquettes"
+msgstr "Téléchargement des jaquettes"
 
 msgid "Create"
 msgstr "Créer"
@@ -344,7 +344,7 @@ msgid "Credits"
 msgstr "Crédits"
 
 msgid "Custom Disc Images"
-msgstr ""
+msgstr "Labels DVD persos"
 
 msgid "Custom Paths"
 msgstr "Personnalisation des dossiers"
@@ -464,10 +464,10 @@ msgid "Download finished"
 msgstr "Téléchargement terminé"
 
 msgid "Downloading 3D Covers"
-msgstr ""
+msgstr "Téléchargement des jaquettes 3D"
 
 msgid "Downloading Flat Covers"
-msgstr ""
+msgstr "Téléchargement des jaquettes 2D"
 
 msgid "Downloading custom Discarts"
 msgstr "Téléch. des labels DVD persos"
@@ -863,7 +863,7 @@ msgid "Motion+ Video"
 msgstr "Vidéo Motion+"
 
 msgid "Mount DVD drive"
-msgstr "Lancer DVD"
+msgstr "Charger le DVD"
 
 msgid "Music Loop Mode"
 msgstr "Type de boucle"
@@ -986,7 +986,7 @@ msgid "Only for Install"
 msgstr "Uniquement à l'installation"
 
 msgid "Original Disc Images"
-msgstr ""
+msgstr "Labels DVD originaux"
 
 msgid "Original/Customs"
 msgstr "Originaux/Persos"

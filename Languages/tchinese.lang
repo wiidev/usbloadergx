@@ -344,7 +344,7 @@ msgid "Credits"
 msgstr "作者信息"
 
 msgid "Custom Disc Images"
-msgstr ""
+msgstr "自製光碟圖片"
 
 msgid "Custom Paths"
 msgstr "自訂路徑"
@@ -464,10 +464,10 @@ msgid "Download finished"
 msgstr "下載完成"
 
 msgid "Downloading 3D Covers"
-msgstr ""
+msgstr "下載 3D封面"
 
 msgid "Downloading Flat Covers"
-msgstr ""
+msgstr "下載一般封面"
 
 msgid "Downloading custom Discarts"
 msgstr "下載自製光碟圖片"
@@ -611,7 +611,7 @@ msgid "French"
 msgstr "法文"
 
 msgid "Full Menu"
-msgstr ""
+msgstr "完整選單"
 
 msgid "Full shutdown"
 msgstr "關機"
@@ -644,7 +644,7 @@ msgid "Game Lock"
 msgstr "遊戲上鎖"
 
 msgid "Game Only"
-msgstr ""
+msgstr "僅遊戲"
 
 msgid "Game Region"
 msgstr "遊戲區碼"
@@ -860,7 +860,7 @@ msgid "Missing files"
 msgstr "缺少的檔案"
 
 msgid "Motion+ Video"
-msgstr ""
+msgstr "移動+視訊"
 
 msgid "Mount DVD drive"
 msgstr "掛載DVD光碟"
@@ -986,7 +986,7 @@ msgid "Only for Install"
 msgstr "安裝遊戲時"
 
 msgid "Original Disc Images"
-msgstr ""
+msgstr "原始光碟圖片"
 
 msgid "Original/Customs"
 msgstr "原始/自製"
@@ -1076,7 +1076,7 @@ msgid "Rename Game on WBFS"
 msgstr "變更WBFS上的遊戲名稱"
 
 msgid "Reset"
-msgstr ""
+msgstr "重新啟動"
 
 msgid "Reset BG Music"
 msgstr "重設 BG 音樂"
@@ -1293,13 +1293,13 @@ msgid "Uninstall"
 msgstr "移除"
 
 msgid "Uninstall Game"
-msgstr "刪除遊戲"
+msgstr "移除遊戲"
 
 msgid "Uninstall Menu"
-msgstr "刪除選單"
+msgstr "移除選單"
 
 msgid "Uninstall all"
-msgstr ""
+msgstr "移除全部"
 
 msgid "Uninstalling wad"
 msgstr "移除 WAD"
@@ -1375,7 +1375,7 @@ msgid "What do you want to update?"
 msgstr "更新何者？"
 
 msgid "What should be deleted for this game title:"
-msgstr ""
+msgstr "這遊戲title應刪除什麼："
 
 msgid "WiFi Features"
 msgstr "WiFi功能設定"

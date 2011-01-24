@@ -1,5 +1,5 @@
 # USB Loader GX
-# german language source file - r1052
+# german language source file - r1054
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -173,31 +173,31 @@ msgid "Big thanks to:"
 msgstr "Großen Dank an:"
 
 msgid "Block Cover Downloads"
-msgstr "Blocke Cover Downloads"
+msgstr "Blocke Cover-Downloads"
 
 msgid "Block Custom Paths"
 msgstr "Blocke eigene Pfade"
 
 msgid "Block Game Install"
-msgstr "Blocke Spiele Installation"
+msgstr "Blocke Spieleinstallation"
 
 msgid "Block Game Settings"
-msgstr "Blocke Spiele Optionen"
+msgstr "Blocke Spieleoptionen"
 
 msgid "Block GameID Change"
-msgstr "Blocke SpieleID Änderung"
+msgstr "Blocke SpieleID-Änderung"
 
 msgid "Block Global Settings"
 msgstr "Blocke globale Optionen"
 
 msgid "Block Gui Settings"
-msgstr "Blocke GUI Optionen"
+msgstr "Blocke GUI-Optionen"
 
 msgid "Block HBC Menu"
 msgstr "Blocke HBC Menü"
 
 msgid "Block IOS Reload"
-msgstr "Blocke IOS Neuladen"
+msgstr "Blocke IOS-Neuladen"
 
 msgid "Block Loader Settings"
 msgstr "Blocke Loaderoptionen"
@@ -344,7 +344,7 @@ msgid "Credits"
 msgstr "Danksagungen"
 
 msgid "Custom Disc Images"
-msgstr ""
+msgstr "Eigene DVD Bilder"
 
 msgid "Custom Paths"
 msgstr "Pfade anpassen"
@@ -464,10 +464,10 @@ msgid "Download finished"
 msgstr "Download abgeschlossen"
 
 msgid "Downloading 3D Covers"
-msgstr ""
+msgstr "Lade 3D Cover herunter"
 
 msgid "Downloading Flat Covers"
-msgstr ""
+msgstr "Lade 2D Cover herunter"
 
 msgid "Downloading custom Discarts"
 msgstr "Lade Community Diskcovers herunter"
@@ -611,10 +611,10 @@ msgid "French"
 msgstr "Französisch"
 
 msgid "Full Menu"
-msgstr ""
+msgstr "Ganzes Menü"
 
 msgid "Full shutdown"
-msgstr "Komplett ausschalten"
+msgstr "Ausschalten"
 
 msgid "GAMEID_Gamename"
 msgstr "SPIELID_Spielname"
@@ -986,7 +986,7 @@ msgid "Only for Install"
 msgstr "Nur beim Installieren"
 
 msgid "Original Disc Images"
-msgstr ""
+msgstr "Original DVD Bilder"
 
 msgid "Original/Customs"
 msgstr "Original/Community"
@@ -1076,7 +1076,7 @@ msgid "Rename Game on WBFS"
 msgstr "Spiel umbenennen"
 
 msgid "Reset"
-msgstr ""
+msgstr "Zurücksetzen"
 
 msgid "Reset BG Music"
 msgstr "Musik zurücksetzen"

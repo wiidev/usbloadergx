@@ -115,12 +115,13 @@ void PromptWindow::PositionButtons()
                 break;
             case 1:
                 Button[0]->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-                Button[0]->SetPosition(0, -80);
+                Button[0]->SetPosition(0, -55);
+                break;
             case 2:
                 Button[0]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-                Button[0]->SetPosition(70, -80);
+                Button[0]->SetPosition(70, -55);
                 Button[1]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-                Button[1]->SetPosition(-70, -80);
+                Button[1]->SetPosition(-70, -55);
                 break;
             case 3:
                 Button[0]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
@@ -150,13 +151,13 @@ void PromptWindow::PositionButtons()
                 break;
             case 1:
                 Button[0]->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-                Button[0]->SetPosition(0, -45);
+                Button[0]->SetPosition(0, -55);
                 break;
             case 2:
                 Button[0]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-                Button[0]->SetPosition(50, -45);
+                Button[0]->SetPosition(50, -55);
                 Button[1]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-                Button[1]->SetPosition(-50, -45);
+                Button[1]->SetPosition(-50, -55);
                 break;
             case 3:
                 Button[0]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
@@ -164,7 +165,7 @@ void PromptWindow::PositionButtons()
                 Button[1]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
                 Button[1]->SetPosition(-50, -120);
                 Button[2]->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-                Button[2]->SetPosition(0, -65);
+                Button[2]->SetPosition(0, -55);
                 break;
             case 4:
                 Button[0]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
@@ -172,9 +173,9 @@ void PromptWindow::PositionButtons()
                 Button[1]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
                 Button[1]->SetPosition(-50, -120);
                 Button[2]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-                Button[2]->SetPosition(50, -65);
+                Button[2]->SetPosition(50, -55);
                 Button[3]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-                Button[3]->SetPosition(-50, -65);
+                Button[3]->SetPosition(-50, -55);
                 break;
         }
     }

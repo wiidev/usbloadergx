@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# italian.lang - v68 - r1045
+# italian.lang - v69 - r1053
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-23 21:03+0100\n"
-"PO-Revision-Date: 2011-01-16 16:00+0200\n"
+"POT-Creation-Date: 2011-01-24 21:19+0100\n"
+"PO-Revision-Date: 2011-01-22 20:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: Cambo\n"
 "MIME-Version: 1.0\n"
@@ -173,55 +173,55 @@ msgid "Big thanks to:"
 msgstr "Grazie mille a:"
 
 msgid "Block Cover Downloads"
-msgstr ""
+msgstr "Blocca Scaricam. Copertine"
 
 msgid "Block Custom Paths"
-msgstr ""
+msgstr "Blocca Modifica Cartelle"
 
 msgid "Block Game Install"
-msgstr ""
+msgstr "Blocca Install. Giochi"
 
 msgid "Block Game Settings"
-msgstr ""
+msgstr "Blocca Impost. Gioco"
 
 msgid "Block GameID Change"
-msgstr ""
+msgstr "Blocca Modif. ID Gioco"
 
 msgid "Block Global Settings"
-msgstr ""
+msgstr "Blocca Impost. Globali"
 
 msgid "Block Gui Settings"
-msgstr ""
+msgstr "Blocca Interf. Grafica"
 
 msgid "Block HBC Menu"
-msgstr ""
+msgstr "Blocca Menu HBC"
 
 msgid "Block IOS Reload"
 msgstr "Blocca Ricarica cIOS"
 
 msgid "Block Loader Settings"
-msgstr ""
+msgstr "Blocca Impost. Loader"
 
 msgid "Block Parental Settings"
-msgstr ""
+msgstr "Blocca Contr. Genitori"
 
 msgid "Block Reset Settings"
-msgstr ""
+msgstr "Blocca Impost. Predef."
 
 msgid "Block Sound Settings"
-msgstr ""
+msgstr "Blocca Impost. Audio"
 
 msgid "Block Theme Downloader"
-msgstr ""
+msgstr "Blocca Scaricam. Temi"
 
 msgid "Block Theme Menu"
-msgstr ""
+msgstr "Blocca Menu Temi"
 
 msgid "Block Title Launcher"
-msgstr ""
+msgstr "Blocca Avvio Gioco"
 
 msgid "Block Updates"
-msgstr ""
+msgstr "Blocca Aggiornamenti"
 
 msgid "Boot/Standard"
 msgstr "cIOS Predefinito"
@@ -292,7 +292,7 @@ msgid "Console Locked"
 msgstr "Console Bloccata"
 
 msgid "Console must be unlocked for this option."
-msgstr ""
+msgstr "La Wii deve essere sbloccata per questa opzione."
 
 msgid "Console should be unlocked to modify it."
 msgstr "Sbloccare la Console per Modificarla."
@@ -611,7 +611,7 @@ msgid "French"
 msgstr "Francese"
 
 msgid "Full Menu"
-msgstr ""
+msgstr "Menu Completo"
 
 msgid "Full shutdown"
 msgstr "Completo"
@@ -644,7 +644,7 @@ msgid "Game Lock"
 msgstr "Bloccaggio Gioco"
 
 msgid "Game Only"
-msgstr ""
+msgstr "Solo Gioco"
 
 msgid "Game Region"
 msgstr "Regione Gioco"
@@ -860,7 +860,7 @@ msgid "Missing files"
 msgstr "File Mancante/i"
 
 msgid "Motion+ Video"
-msgstr ""
+msgstr "Video Motion+"
 
 msgid "Mount DVD drive"
 msgstr "Avvia DVD"
@@ -1013,7 +1013,7 @@ msgid "Path Changed"
 msgstr "Cartella Modificata"
 
 msgid "Permission denied."
-msgstr ""
+msgstr "Permesso vietato."
 
 msgid "Pick from a list"
 msgstr "Seleziona da un elenco"
@@ -1076,7 +1076,7 @@ msgid "Rename Game on WBFS"
 msgstr "Rinomina Gioco su WBFS"
 
 msgid "Reset"
-msgstr ""
+msgstr "Resetta"
 
 msgid "Reset BG Music"
 msgstr "Resetta Musica Sottof."
@@ -1238,7 +1238,7 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "La cartella indicata non esiste. Vuoi crearla?"
 
 msgid "The game installation is disabled under this IOS because of instability in usb write."
-msgstr ""
+msgstr "L'installazione dei giochi è disabilitata poiché la scrittura sul disco USB è instabile usando questo IOS"
 
 msgid "The wad file was installed"
 msgstr "File wad installato"
@@ -1299,7 +1299,7 @@ msgid "Uninstall Menu"
 msgstr "Menu Disinstallazioni"
 
 msgid "Uninstall all"
-msgstr ""
+msgstr "Disinstalla tutto"
 
 msgid "Uninstalling wad"
 msgstr "Disinstalla WAD"
@@ -1375,7 +1375,7 @@ msgid "What do you want to update?"
 msgstr "Che cosa vuoi aggiornare?"
 
 msgid "What should be deleted for this game title:"
-msgstr ""
+msgstr "Cosa vuoi eliminare per questo gioco?"
 
 msgid "WiFi Features"
 msgstr "Caratteristiche WiFi"
@@ -1408,7 +1408,7 @@ msgid "Yes"
 msgstr "Sì"
 
 msgid "You are currently using IOS"
-msgstr ""
+msgstr "Al momento stai utilizzando l'IOS"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Stai cercando di accedere ad una partizione FAT32/NTFS/EXT con un cIOS 249 di versione inferiore alla rev18. Ciò è non supportato. Continua a tuo rischio."

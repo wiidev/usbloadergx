@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-23 21:03+0100\n"
+"POT-Creation-Date: 2011-01-24 21:19+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -344,7 +344,7 @@ msgid "Credits"
 msgstr "作者信息"
 
 msgid "Custom Disc Images"
-msgstr ""
+msgstr "自定义光盘图片"
 
 msgid "Custom Paths"
 msgstr "自定义路径"
@@ -464,10 +464,10 @@ msgid "Download finished"
 msgstr "下载完成"
 
 msgid "Downloading 3D Covers"
-msgstr ""
+msgstr "正在下载3D封面"
 
 msgid "Downloading Flat Covers"
-msgstr ""
+msgstr "正在下载2D封面"
 
 msgid "Downloading custom Discarts"
 msgstr "正在下载自制光盘封面"
@@ -611,7 +611,7 @@ msgid "French"
 msgstr "法文"
 
 msgid "Full Menu"
-msgstr ""
+msgstr "完整菜单"
 
 msgid "Full shutdown"
 msgstr "完全关机"
@@ -986,7 +986,7 @@ msgid "Only for Install"
 msgstr "仅安装"
 
 msgid "Original Disc Images"
-msgstr ""
+msgstr "官方光盘图片"
 
 msgid "Original/Customs"
 msgstr "官方/自制"
@@ -1076,7 +1076,7 @@ msgid "Rename Game on WBFS"
 msgstr "改变 WBFS (硬盘)上的游戏名称"
 
 msgid "Reset"
-msgstr ""
+msgstr "重启"
 
 msgid "Reset BG Music"
 msgstr "重置背景音乐"

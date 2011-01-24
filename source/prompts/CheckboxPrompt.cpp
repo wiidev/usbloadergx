@@ -76,25 +76,51 @@ void CheckboxPrompt::AddCheckBox(const char *text)
     Checkbox[size]->SetTrigger(trigA);
     Append(Checkbox[size]);
 
-    if(size == 0)
+    if (Settings.wsprompt && Settings.widescreen)
     {
-        Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-        Checkbox[size]->SetPosition(60, -170);
+        if(size == 0)
+        {
+            Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            Checkbox[size]->SetPosition(80, -170);
+        }
+        else if(size == 1)
+        {
+            Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            Checkbox[size]->SetPosition(80, -115);
+        }
+        else if(size == 2)
+        {
+            Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            Checkbox[size]->SetPosition(-210, -170);
+        }
+        else if(size == 3)
+        {
+            Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            Checkbox[size]->SetPosition(-210, -115);
+        }
     }
-    else if(size == 1)
+    else
     {
-        Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-        Checkbox[size]->SetPosition(60, -115);
-    }
-    else if(size == 2)
-    {
-        Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-        Checkbox[size]->SetPosition(-170, -170);
-    }
-    else if(size == 3)
-    {
-        Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-        Checkbox[size]->SetPosition(-170, -115);
+        if(size == 0)
+        {
+            Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            Checkbox[size]->SetPosition(40, -170);
+        }
+        else if(size == 1)
+        {
+            Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            Checkbox[size]->SetPosition(40, -115);
+        }
+        else if(size == 2)
+        {
+            Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            Checkbox[size]->SetPosition(-210, -170);
+        }
+        else if(size == 3)
+        {
+            Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            Checkbox[size]->SetPosition(-210, -115);
+        }
     }
 }
 
