@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-23 21:03+0100\n"
+"POT-Creation-Date: 2011-01-25 21:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -281,6 +281,9 @@ msgstr "%s tarafından kodlandı"
 
 msgid "Coding:"
 msgstr "Kodlama:"
+
+msgid "Connection to server timed out."
+msgstr ""
 
 msgid "Console"
 msgstr "Konsol"

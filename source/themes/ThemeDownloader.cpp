@@ -222,12 +222,19 @@ void ThemeDownloader::SetupMainButtons()
 
     ShowProgress(tr("Downloading pagelist:"), "www.spiffy360.com", tr("Please wait..."), 0, 1);
 
+    if(!CheckConnection(ThemeListURL.c_str()))
+    {
+        ShowError(tr("Connection to server timed out."));
+        return;
+    }
+
     ThemeList = new Theme_List(ThemeListURL.c_str());
 
     if (ThemeList->GetThemeCount() == 0)
     {
         WindowPrompt(tr( "No themes found on the site." ), 0, "OK");
         returnMenu = MENU_SETTINGS;
+        ProgressStop();
     }
 
     for(int i = 0; i < ThemeList->GetThemeCount(); ++i)
@@ -369,7 +376,10 @@ void ThemeDownloader::MainButtonClicked(int button)
             {
                 result = DownloadTheme(downloadlink, title);
                 if (result == 2)
+                {
                     returnMenu = MENU_THEMEDOWNLOADER;
+                    leave = true;
+                }
             }
             mainWindow->SetState(STATE_DISABLED);
             promptWindow.SetState(STATE_DEFAULT);
@@ -475,6 +485,7 @@ int ThemeDownloader::DownloadTheme(const char *url, const char *title)
     if (Theme::Load(real_themepath))
     {
         snprintf(Settings.theme, sizeof(Settings.theme), real_themepath);
+        Theme::Reload();
         result = 2;
     }
 

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-23 21:03+0100\n"
+"POT-Creation-Date: 2011-01-25 20:46+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -281,6 +281,9 @@ msgstr "Koodaus: %s"
 
 msgid "Coding:"
 msgstr "Koodaus"
+
+msgid "Connection to server timed out."
+msgstr ""
 
 msgid "Console"
 msgstr "Konsoli"

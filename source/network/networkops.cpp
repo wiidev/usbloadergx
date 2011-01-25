@@ -10,10 +10,12 @@
 #include <string.h>
 #include <ogcsys.h>
 #include <ogc/machine/processor.h>
+#include <fcntl.h>
 
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
 #include "settings/CSettings.h"
+#include "utils/timer.h"
 #include "networkops.h"
 #include "main.h"
 #include "http.h"
@@ -292,6 +294,62 @@ void CloseConnection()
         net_close(socket);
         waitforanswer = false;
     }
+}
+
+/****************************************************************************
+ * Test if connection to the address is available (PING)
+ ***************************************************************************/
+bool CheckConnection(const char *url, float timeout)
+{
+    //Check if the url starts with "http://", if not it is not considered a valid url
+    if (strncmp(url, "http://", strlen("http://")) != 0)
+        return false;
+
+    //Locate the path part of the url by searching for '/' past "http://"
+    char *path = strchr(url + strlen("http://"), '/');
+
+    //At the very least the url has to end with '/', ending with just a domain is invalid
+    if (path == NULL)
+        return false;
+
+    //Extract the domain part out of the url
+    int domainlength = path - url - strlen("http://");
+    if (domainlength == 0)
+        return false;
+
+    char domain[domainlength + 1];
+    strlcpy(domain, url + strlen("http://"), domainlength + 1);
+
+    //Parsing of the URL is done, start making an actual connection
+    u32 ipaddress = getipbynamecached(domain);
+    if (ipaddress == 0)
+        return false;
+
+    //Initialize socket
+    s32 connection = net_socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
+    if (connection < 0) return connection;
+
+    s32 flags = net_fcntl(connection, F_GETFL, 0);
+    if (flags >= 0) flags = net_fcntl(connection, F_SETFL, flags | 4);
+
+    struct sockaddr_in connect_addr;
+    memset(&connect_addr, 0, sizeof(connect_addr));
+    connect_addr.sin_family = AF_INET;
+    connect_addr.sin_port = 80;
+    connect_addr.sin_addr.s_addr = getipbynamecached(domain);
+
+    Timer netTime;
+
+    int res = -1;
+    while(res < 0 && res != -127 && netTime.elapsed() < timeout)
+    {
+        res = net_connect(connection, (struct sockaddr*) &connect_addr, sizeof(connect_addr));
+        usleep(1000);
+    }
+
+    net_close(connection);
+
+    return !(res < 0 && res != -127);
 }
 
 /****************************************************************************

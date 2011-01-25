@@ -34,6 +34,7 @@ class GameBrowseMenu : public GuiWindow
         int returnMenu;
         int gameSelectedOld;
         int gameClicked;
+        int GridRowsPreSearch;
         time_t lastrawtime;
         bool show_searchwindow;
         wchar_t searchChar;

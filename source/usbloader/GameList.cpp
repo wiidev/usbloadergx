@@ -23,6 +23,7 @@
  ***************************************************************************/
 #include <algorithm>
 #include <string>
+#include <wctype.h>
 #include <malloc.h>
 #include "usbloader/wbfs.h"
 #include "settings/newtitles.h"
@@ -172,8 +173,12 @@ int GameList::FilterList(const wchar_t * gameFilter)
 
         if (gameName)
         {
-            if (wcslen(gameName) > GameFilter.size() && AvailableSearchChars.find(gameName[GameFilter.size()]) == std::string::npos)
+            if (wcslen(gameName) > GameFilter.size() &&
+                AvailableSearchChars.find(towupper(gameName[GameFilter.size()])) == std::string::npos &&
+                AvailableSearchChars.find(towlower(gameName[GameFilter.size()])) == std::string::npos)
+            {
                 AvailableSearchChars.push_back(gameName[GameFilter.size()]);
+            }
 
             delete [] gameName;
         }
@@ -211,9 +216,14 @@ int GameList::LoadUnfiltered()
         wchar_t *gameName = charToWideChar(GameTitles.GetTitle(header));
         if (gameName)
         {
-            if (wcslen(gameName) > GameFilter.size() && AvailableSearchChars.find(gameName[GameFilter.size()]) == std::string::npos)
+            if (wcslen(gameName) > GameFilter.size() &&
+                AvailableSearchChars.find(towupper(gameName[GameFilter.size()])) == std::string::npos &&
+                AvailableSearchChars.find(towlower(gameName[GameFilter.size()])) == std::string::npos)
+            {
                 AvailableSearchChars.push_back(gameName[GameFilter.size()]);
-            delete[] gameName;
+            }
+
+            delete [] gameName;
         }
 
         FilteredList.push_back(header);

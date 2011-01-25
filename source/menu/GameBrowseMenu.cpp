@@ -861,11 +861,13 @@ int GameBrowseMenu::MainLoop()
         gameList.FilterList(oldFilter.c_str());
         ReloadBrowser();
         searchBtn->ResetState();
+        if(show_searchwindow && wcslen(gameList.GetCurrentFilter()) == 0)
+            GridRowsPreSearch = Settings.gridRows; //! store old rows amount
     }
 
     else if (searchBar && (searchChar = searchBar->GetClicked()))
     {
-        if (searchChar > 27)
+        if (searchChar > 27) //! Character clicked
         {
             int len = gameList.GetCurrentFilter() ? wcslen(gameList.GetCurrentFilter()) : 0;
             wchar_t newFilter[len + 2];
@@ -875,18 +877,20 @@ int GameBrowseMenu::MainLoop()
 
             gameList.FilterList(newFilter);
         }
-        else if (searchChar == 7) // Close
+        else if (searchChar == 7) //! Close
         {
             show_searchwindow = false;
             searchBtn->StopEffect();
         }
-        else if (searchChar == 8) // Backspace
+        else if (searchChar == 8) //! Backspace
         {
             int len = wcslen(gameList.GetCurrentFilter());
             wchar_t newFilter[len + 1];
             if (gameList.GetCurrentFilter()) wcscpy(newFilter, gameList.GetCurrentFilter());
             newFilter[len > 0 ? len - 1 : 0] = 0;
             gameList.FilterList(newFilter);
+            if(len == 1)
+                Settings.gridRows = GridRowsPreSearch; //! restore old rows amount so we don't stay on one row
         }
         ReloadBrowser();
         return MENU_NONE;

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-23 21:03+0100\n"
+"POT-Creation-Date: 2011-01-25 20:46+0100\n"
 "PO-Revision-Date: 2010-03-22 10:55-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
@@ -281,6 +281,9 @@ msgstr "Programado por: %s"
 
 msgid "Coding:"
 msgstr "Desenvolvimento:"
+
+msgid "Connection to server timed out."
+msgstr ""
 
 msgid "Console"
 msgstr "Configuração"
