@@ -91,7 +91,7 @@ void ntfsCloseFile (ntfs_file_state *file)
 
 int ntfs_open_r (struct _reent *r, void *fileStruct, const char *path, int flags, int mode)
 {
-    ntfs_log_trace("fileStruct %p, path %s, flags %i, mode %i\n", fileStruct, path, flags, mode);
+    ntfs_log_trace("fileStruct %p, path %s, flags %i, mode %i\n", (void *) fileStruct, path, flags, mode);
 
     ntfs_file_state* file = STATE(fileStruct);
 
@@ -198,7 +198,7 @@ int ntfs_open_r (struct _reent *r, void *fileStruct, const char *path, int flags
     file->pos = 0;
     file->len = file->data_na->data_size;
 
-    ntfs_log_trace("file->len %d\n", file->len);
+    ntfs_log_trace("file->len %llu\n", file->len);
 
     // Update file times
     ntfsUpdateTimes(file->vd, file->ni, NTFS_UPDATE_ATIME);
@@ -222,7 +222,7 @@ int ntfs_open_r (struct _reent *r, void *fileStruct, const char *path, int flags
 
 int ntfs_close_r (struct _reent *r, int fd)
 {
-    ntfs_log_trace("fd %p\n", fd);
+    ntfs_log_trace("fd %p\n", (void *) fd);
 
     ntfs_file_state* file = STATE(fd);
 
@@ -255,7 +255,7 @@ int ntfs_close_r (struct _reent *r, int fd)
 
 ssize_t ntfs_write_r (struct _reent *r, int fd, const char *ptr, size_t len)
 {
-    ntfs_log_trace("fd %p, ptr %p, len %Li\n", fd, ptr, len);
+    ntfs_log_trace("fd %p, ptr %p, len %u\n", (void *) fd, ptr, len);
 
     ntfs_file_state* file = STATE(fd);
     ssize_t written = 0;
@@ -321,7 +321,7 @@ ssize_t ntfs_write_r (struct _reent *r, int fd, const char *ptr, size_t len)
 
 ssize_t ntfs_read_r (struct _reent *r, int fd, char *ptr, size_t len)
 {
-    ntfs_log_trace("fd %p, ptr %p, len %Li\n", fd, ptr, len);
+    ntfs_log_trace("fd %p, ptr %p, len %u\n", (void *) fd, ptr, len);
 
     ntfs_file_state* file = STATE(fd);
     ssize_t read = 0;
@@ -380,7 +380,7 @@ ssize_t ntfs_read_r (struct _reent *r, int fd, char *ptr, size_t len)
 
 off_t ntfs_seek_r (struct _reent *r, int fd, off_t pos, int dir)
 {
-    ntfs_log_trace("fd %p, pos %Li, dir %i\n", fd, pos, dir);
+    ntfs_log_trace("fd %p, pos %llu, dir %i\n", (void *) fd, pos, dir);
 
     ntfs_file_state* file = STATE(fd);
     off_t position = 0;
@@ -408,7 +408,7 @@ off_t ntfs_seek_r (struct _reent *r, int fd, off_t pos, int dir)
 }
 int ntfs_fstat_r (struct _reent *r, int fd, struct stat *st)
 {
-    ntfs_log_trace("fd %p\n", fd);
+    ntfs_log_trace("fd %p\n", (void *) fd);
 
     ntfs_file_state* file = STATE(fd);
     int ret = 0;
@@ -433,7 +433,7 @@ int ntfs_fstat_r (struct _reent *r, int fd, struct stat *st)
 
 int ntfs_ftruncate_r (struct _reent *r, int fd, off_t len)
 {
-    ntfs_log_trace("fd %p, len %Li\n", fd, len);
+    ntfs_log_trace("fd %p, len %llu\n", (void *) fd, (u64) len);
 
     ntfs_file_state* file = STATE(fd);
 
@@ -500,7 +500,7 @@ int ntfs_ftruncate_r (struct _reent *r, int fd, off_t len)
 
 int ntfs_fsync_r (struct _reent *r, int fd)
 {
-    ntfs_log_trace("fd %p\n", fd);
+    ntfs_log_trace("fd %p\n", (void *) fd);
 
     ntfs_file_state* file = STATE(fd);
     int ret = 0;

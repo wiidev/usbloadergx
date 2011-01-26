@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 Richard Russon
  * Copyright (c) 2002-2008 Szabolcs Szakacsits
  * Copyright (c) 2004 Yura Pakhuchiy
- * Copyright (c) 2007-2009 Jean-Pierre Andre
+ * Copyright (c) 2007-2010 Jean-Pierre Andre
  *
  * This program/include file is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as published
@@ -101,15 +101,14 @@ static void ntfs_rl_mc(runlist_element *dstbase, int dst,
  * On success, return a pointer to the newly allocated, or recycled, memory.
  * On error, return NULL with errno set to the error code.
  */
- #include "mem2.h"
-static runlist_element *ntfs_rl_realloc(runlist_element *rl, int old_size,
+static runlist_element *ntfs_rl_realloc(runlist_element *rl, int old_size, 
 					int new_size)
 {
 	old_size = (old_size * sizeof(runlist_element) + 0xfff) & ~0xfff;
 	new_size = (new_size * sizeof(runlist_element) + 0xfff) & ~0xfff;
 	if (old_size == new_size)
 		return rl;
-	return MEM2_realloc(rl, new_size);
+	return realloc(rl, new_size);
 }
 
 /*
@@ -382,7 +381,7 @@ static runlist_element *ntfs_rl_insert(runlist_element *dst, int dsize,
  * left unmodified.
  */
 static runlist_element *ntfs_rl_replace(runlist_element *dst, int dsize,
-					runlist_element *src, int ssize,
+					runlist_element *src, int ssize, 
 					int loc)
 {
 	signed delta;
@@ -503,7 +502,7 @@ static runlist_element *ntfs_rl_split(runlist_element *dst, int dsize,
 /**
  * ntfs_runlists_merge_i - see ntfs_runlists_merge
  */
-static runlist_element *ntfs_runlists_merge_i(runlist_element *drl,
+static runlist_element *ntfs_runlists_merge_i(runlist_element *drl, 
 					      runlist_element *srl)
 {
 	int di, si;		/* Current index into @[ds]rl. */
@@ -745,8 +744,8 @@ critical_error:
 runlist_element *ntfs_runlists_merge(runlist_element *drl,
 		runlist_element *srl)
 {
-	runlist_element *rl;
-
+	runlist_element *rl; 
+	
 	ntfs_log_enter("Entering\n");
 	rl = ntfs_runlists_merge_i(drl, srl);
 	ntfs_log_leave("\n");
@@ -836,7 +835,7 @@ static runlist_element *ntfs_mapping_pairs_decompress_i(const ntfs_volume *vol,
 			runlist_element *rl2;
 
 			rlsize += 0x1000;
-			rl2 = MEM2_realloc(rl, rlsize);
+			rl2 = realloc(rl, rlsize);
 			if (!rl2) {
 				int eo = errno;
 				free(rl);
@@ -1007,8 +1006,8 @@ err_out:
 runlist_element *ntfs_mapping_pairs_decompress(const ntfs_volume *vol,
 		const ATTR_RECORD *attr, runlist_element *old_rl)
 {
-	runlist_element *rle;
-
+	runlist_element *rle; 
+	
 	ntfs_log_enter("Entering\n");
 	rle = ntfs_mapping_pairs_decompress_i(vol, attr, old_rl);
 	ntfs_log_leave("\n");
@@ -1212,10 +1211,10 @@ s64 ntfs_rl_pwrite(const ntfs_volume *vol, const runlist_element *rl,
 
 			if (rl->lcn != (LCN)LCN_HOLE)
 				goto rl_err_out;
-
+			
 			to_write = min(count, (rl->length <<
 					       vol->cluster_size_bits) - ofs);
-
+			
 			total += to_write;
 			count -= to_write;
 			b = (u8*)b + to_write;
@@ -1385,14 +1384,14 @@ int ntfs_get_size_for_mapping_pairs(const ntfs_volume *vol,
 			prev_lcn = rl->lcn;
 		}
 	}
-out:
+out:	
 	return rls;
 err_out:
 	if (rl->lcn == LCN_RL_NOT_MAPPED)
 		errno = EINVAL;
 	else
 		errno = EIO;
-errno_set:
+errno_set:	
 	rls = -1;
 	goto out;
 }
@@ -1419,28 +1418,18 @@ int ntfs_write_significant_bytes(u8 *dst, const u8 *dst_max, const s64 n)
 {
 	s64 l = n;
 	int i;
-	s8 j;
 
 	i = 0;
-	do {
+	if (dst > dst_max)
+		goto err_out;
+	*dst++ = l;
+	i++;
+	while ((l > 0x7f) || (l < -0x80)) {
 		if (dst > dst_max)
 			goto err_out;
-		*dst++ = l & 0xffLL;
 		l >>= 8;
+		*dst++ = l;
 		i++;
-	} while (l != 0LL && l != -1LL);
-	j = (n >> 8 * (i - 1)) & 0xff;
-	/* If the sign bit is wrong, we need an extra byte. */
-	if (n < 0LL && j >= 0) {
-		if (dst > dst_max)
-			goto err_out;
-		i++;
-		*dst = (u8)-1;
-	} else if (n > 0LL && j < 0) {
-		if (dst > dst_max)
-			goto err_out;
-		i++;
-		*dst = 0;
 	}
 	return i;
 err_out:
@@ -1591,7 +1580,7 @@ int ntfs_mapping_pairs_build(const ntfs_volume *vol, u8 *dst,
 	/* Set stop vcn. */
 	if (stop_rl)
 		*stop_rl = rl;
-ok:
+ok:	
 	/* Add terminator byte. */
 	*dst = 0;
 out:
@@ -1645,31 +1634,31 @@ int ntfs_rl_truncate(runlist **arl, const VCN start_vcn)
 				" arl: %p *arl: %p", arl, *arl);
 		return -1;
 	}
-
+	
 	rl = *arl;
-
+	
 	if (start_vcn < rl->vcn) {
 		errno = EINVAL;
 		ntfs_log_perror("Start_vcn lies outside front of runlist");
 		return -1;
 	}
-
+	
 	/* Find the starting vcn in the run list. */
 	while (rl->length) {
 		if (start_vcn < rl[1].vcn)
 			break;
 		rl++;
 	}
-
+	
 	if (!rl->length) {
 		errno = EIO;
 		ntfs_log_trace("Truncating already truncated runlist?\n");
 		return -1;
 	}
-
+	
 	/* Truncate the run. */
 	rl->length = start_vcn - rl->vcn;
-
+	
 	/*
 	 * If a run was partially truncated, make the following runlist
 	 * element a terminator instead of the truncated runlist
@@ -1685,10 +1674,10 @@ int ntfs_rl_truncate(runlist **arl, const VCN start_vcn)
 	rl->lcn = (LCN)LCN_ENOENT;
 	/**
 	 * Reallocate memory if necessary.
-	 * FIXME: Below code is broken, because runlist allocations must be
+	 * FIXME: Below code is broken, because runlist allocations must be 
 	 * a multiply of 4096. The code caused crashes and corruptions.
 	 */
-/*
+/*	
 	 if (!is_end) {
 		size_t new_size = (rl - *arl + 1) * sizeof(runlist_element);
 		rl = realloc(*arl, new_size);
@@ -1901,7 +1890,7 @@ static runlist_element * test_rl_pure_src(BOOL contig, BOOL multi, int vcn, int 
 	result = ntfs_malloc(4096);
 	if (!result)
 		return NULL;
-
+	
 	if (multi) {
 		MKRL(result+0, vcn + (0*len/4), fudge + vcn + 1000 + (0*len/4), len / 4)
 		MKRL(result+1, vcn + (1*len/4), fudge + vcn + 1000 + (1*len/4), len / 4)

@@ -1,7 +1,7 @@
 /*
  * param.h - Parameter values for ntfs-3g
  *
- * Copyright (c) 2009      Jean-Pierre Andre
+ * Copyright (c) 2009-2010 Jean-Pierre Andre
  *
  * This program/include file is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as published
@@ -51,6 +51,20 @@ enum {
 #define MAX_COMPRESSION_CLUSTER_SIZE 4096
 
 /*
+ *		Parameters for runlists
+ */
+
+	/* only update the final extent of a runlist when appending data */
+#define PARTIAL_RUNLIST_UPDATING 1
+
+/*
+ *		Parameters for user and xattr mappings
+ */
+
+#define XATTRMAPPINGFILE ".NTFS-3G/XattrMapping" /* default mapping file */
+
+
+/*
  *		Permission checking modes for high level and low level
  *
  *	The choices for high and low lowel are independent, they have
@@ -58,7 +72,8 @@ enum {
  *
  *	Stick to the recommended values unless you understand the consequences
  *	on protection and performances. Use of cacheing is good for
- *	performances, but bad on security.
+ *	performances, but bad on security with internal fuse or external
+ *	fuse older than 2.8
  *
  *	Possible values for high level :
  *		1 : no cache, kernel control (recommended)
@@ -67,7 +82,7 @@ enum {
  *
  *	Possible values for low level :
  *		2 : no cache, kernel control
- *		3 : use kernel/fuse cache, kernel control
+ *		3 : use kernel/fuse cache, kernel control (external fuse >= 2.8)
  *		5 : no cache, file system control (recommended)
  *		8 : no cache, kernel control for ACLs
  *
@@ -77,6 +92,10 @@ enum {
  */
 
 #define HPERMSCONFIG 1
+#if defined(FUSE_INTERNAL) || !defined(FUSE_VERSION) || (FUSE_VERSION < 28)
 #define LPERMSCONFIG 5
+#else
+#define LPERMSCONFIG 3
+#endif
 
 #endif /* defined _NTFS_PARAM_H */

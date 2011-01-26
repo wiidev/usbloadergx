@@ -186,7 +186,7 @@ int ntfsFindPartitions (const DISC_INTERFACE *interface, sec_t **partitions)
                         // Read and validate the extended boot record
                         if (interface->readSectors(ebr_lba + next_erb_lba, 1, &sector)) {
                             if (sector.ebr.signature == EBR_SIGNATURE) {
-                                ntfs_log_debug("Logical Partition @ %d: type 0x%x\n", ebr_lba + next_erb_lba,
+                                ntfs_log_debug("Logical Partition @ %d: %s type 0x%x\n", ebr_lba + next_erb_lba,
                                                sector.ebr.partition.status == PARTITION_STATUS_BOOTABLE ? "bootable (active)" : "non-bootable",
                                                sector.ebr.partition.type);
 
@@ -264,9 +264,6 @@ int ntfsFindPartitions (const DISC_INTERFACE *interface, sec_t **partitions)
         }
 
     }
-
-    // Shutdown the device
-    /*interface->shutdown();*/
 
     // Return the found partitions (if any)
     if (partition_count > 0) {
@@ -560,9 +557,6 @@ void ntfsUnmount (const char *name, bool force)
 const char *ntfsGetVolumeName (const char *name)
 {
     ntfs_vd *vd = NULL;
-    //ntfs_attr *na = NULL;
-    //ntfschar *ulabel = NULL;
-    //char *volumeName = NULL;
 
     // Sanity check
     if (!name) {
@@ -577,64 +571,6 @@ const char *ntfsGetVolumeName (const char *name)
         return NULL;
     }
     return vd->vol->vol_name;
-/*
-
-    // If the volume name has already been cached then just use that
-    if (vd->name[0])
-        return vd->name;
-
-    // Lock
-    ntfsLock(vd);
-
-    // Check if the volume name attribute exists
-    na = ntfs_attr_open(vd->vol->vol_ni, AT_VOLUME_NAME, NULL, 0);
-    if (!na) {
-        ntfsUnlock(vd);
-        errno = ENOENT;
-        return false;
-    }
-
-    // Allocate a buffer to store the raw volume name
-    ulabel = ntfs_alloc(na->data_size * sizeof(ntfschar));
-    if (!ulabel) {
-        ntfsUnlock(vd);
-        errno = ENOMEM;
-        return false;
-    }
-
-    // Read the volume name
-    if (ntfs_attr_pread(na, 0, na->data_size, ulabel) != na->data_size) {
-        ntfs_free(ulabel);
-        ntfsUnlock(vd);
-        errno = EIO;
-        return false;
-    }
-
-    // Convert the volume name to the current local
-    if (ntfsUnicodeToLocal(ulabel, na->data_size, &volumeName, 0) < 0) {
-        errno = EINVAL;
-        ntfs_free(ulabel);
-        ntfsUnlock(vd);
-        return false;
-    }
-
-    // If the volume name was read then cache it (for future fetches)
-    if (volumeName)
-        strcpy(vd->name, volumeName);
-
-    // Close the volume name attribute
-    if (na)
-        ntfs_attr_close(na);
-
-    // Clean up
-    ntfs_free(volumeName);
-    ntfs_free(ulabel);
-
-    // Unlock
-    ntfsUnlock(vd);
-
-    return vd->name;
-*/
 }
 
 bool ntfsSetVolumeName (const char *name, const char *volumeName)

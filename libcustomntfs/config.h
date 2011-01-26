@@ -298,13 +298,13 @@
 #define PACKAGE_NAME "ntfs-3g"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "ntfs-3g 2010.8.8"
+#define PACKAGE_STRING "ntfs-3g 2011.1.15"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "ntfs-3g"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "2010.8.8"
+#define PACKAGE_VERSION "2011.1.15"
 
 /* POSIX ACL support */
 #undef POSIXACLS
@@ -346,6 +346,9 @@
 /* Define to 1 if your processor stores words with the least significant byte
    first (like Intel and VAX, unlike Motorola and SPARC). */
 #undef WORDS_LITTLEENDIAN
+
+/* system extended attributes mappings */
+#undef XATTR_MAPPINGS
 
 /* Number of bits in a file offset, on hosts where this is settable. */
 #define _FILE_OFFSET_BITS 64
