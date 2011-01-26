@@ -1,11 +1,11 @@
 # USB Loader GX
-# german language source file - r1054
+# german language source file - r1056
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-25 20:46+0100\n"
+"POT-Creation-Date: 2011-01-25 21:40+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -206,10 +206,10 @@ msgid "Block Parental Settings"
 msgstr "Blocke Altersoptionen"
 
 msgid "Block Reset Settings"
-msgstr "Blocke Reset Optionen"
+msgstr "Blocke Resetoptionen"
 
 msgid "Block Sound Settings"
-msgstr "Blocke Sound Optionen"
+msgstr "Blocke Soundoptionen"
 
 msgid "Block Theme Downloader"
 msgstr "Blocke Theme Downloader"
@@ -283,7 +283,7 @@ msgid "Coding:"
 msgstr "Programmierung:"
 
 msgid "Connection to server timed out."
-msgstr ""
+msgstr "Zeitüberschreitung bei Serververbindung."
 
 msgid "Console"
 msgstr "Konsolenstatus"

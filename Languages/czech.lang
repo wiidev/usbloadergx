@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# czech.lang - r1043
+# czech.lang - r1056
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -8,7 +8,7 @@ msgstr ""
 "POT-Creation-Date: 2011-01-25 20:46+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
-"Language-Team: r1043 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
+"Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -173,55 +173,55 @@ msgid "Big thanks to:"
 msgstr "Velké díky pro:"
 
 msgid "Block Cover Downloads"
-msgstr ""
+msgstr "Zablokovat stažení obalů"
 
 msgid "Block Custom Paths"
-msgstr ""
+msgstr "Zablokovat vlastní cesty"
 
 msgid "Block Game Install"
-msgstr ""
+msgstr "Zablokovat instalaci her"
 
 msgid "Block Game Settings"
-msgstr ""
+msgstr "Zablokovat nastavení her"
 
 msgid "Block GameID Change"
-msgstr ""
+msgstr "Zablokovat zmenu ID hry"
 
 msgid "Block Global Settings"
-msgstr ""
+msgstr "Zablokovat hlavní nastavení"
 
 msgid "Block Gui Settings"
-msgstr ""
+msgstr "Zablokovat GUI nastavení"
 
 msgid "Block HBC Menu"
-msgstr ""
+msgstr "Zablokovat HBC nabídku"
 
 msgid "Block IOS Reload"
-msgstr "Blokovat opetovné zavedení IOS"
+msgstr "Zablokovat opetovné zavedení IOS"
 
 msgid "Block Loader Settings"
-msgstr ""
+msgstr "Zablokovat nastavení spouštění"
 
 msgid "Block Parental Settings"
-msgstr ""
+msgstr "Zablokovat rodičovskou kontrolu"
 
 msgid "Block Reset Settings"
-msgstr ""
+msgstr "Zablokovat původní nastavení"
 
 msgid "Block Sound Settings"
-msgstr ""
+msgstr "Zablokovat nastavení zvuku"
 
 msgid "Block Theme Downloader"
-msgstr ""
+msgstr "Zablokovat stahování témat "
 
 msgid "Block Theme Menu"
-msgstr ""
+msgstr "Zablokovat nabídku témat"
 
 msgid "Block Title Launcher"
-msgstr ""
+msgstr "Zablokovat spouštění titulu"
 
 msgid "Block Updates"
-msgstr ""
+msgstr "Zablokovat aktualizace"
 
 msgid "Boot/Standard"
 msgstr ""
@@ -283,7 +283,7 @@ msgid "Coding:"
 msgstr "Programování:"
 
 msgid "Connection to server timed out."
-msgstr ""
+msgstr "Spojení se serverem vypršelo"
 
 msgid "Console"
 msgstr "Konzole"
@@ -295,7 +295,7 @@ msgid "Console Locked"
 msgstr "Konzole uzamcena"
 
 msgid "Console must be unlocked for this option."
-msgstr ""
+msgstr "Konzole musí být pro tuto možnost odemčena "
 
 msgid "Console should be unlocked to modify it."
 msgstr "Konzole musí být odemcena pro tuto zmenu"
@@ -347,7 +347,7 @@ msgid "Credits"
 msgstr "Zásluhy"
 
 msgid "Custom Disc Images"
-msgstr ""
+msgstr "Vlastní potisky DVD"
 
 msgid "Custom Paths"
 msgstr "Vlastní cesty"
@@ -443,7 +443,7 @@ msgid "Do you want to load this theme?"
 msgstr "Prejete si nahrát toto téma?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
-msgstr ""
+msgstr "Prejete si synchronizovat informace o volných sektorech na vsech FAT 32 oddílech?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Prejete si zaktualizovat vsechny jazykové soubory?"
@@ -467,10 +467,10 @@ msgid "Download finished"
 msgstr "Stažení dokonceno"
 
 msgid "Downloading 3D Covers"
-msgstr ""
+msgstr "Stahování 3D obalu"
 
 msgid "Downloading Flat Covers"
-msgstr ""
+msgstr "Stahování plochých obalu"
 
 msgid "Downloading custom Discarts"
 msgstr "Stahuji upravené potisky"
@@ -614,7 +614,7 @@ msgid "French"
 msgstr "Francouzky"
 
 msgid "Full Menu"
-msgstr ""
+msgstr "Plná nabídka"
 
 msgid "Full shutdown"
 msgstr "Uplné ukoncení"
@@ -647,7 +647,7 @@ msgid "Game Lock"
 msgstr "Zámek hry"
 
 msgid "Game Only"
-msgstr ""
+msgstr "Pouze hry"
 
 msgid "Game Region"
 msgstr "Region hry"
@@ -799,7 +799,7 @@ msgid "Like SysMenu"
 msgstr "Jako hlavní menu"
 
 msgid "List on Gamelaunch"
-msgstr ""
+msgstr "Seznam pri spustení hry"
 
 msgid "Load"
 msgstr "Spustit"
@@ -863,7 +863,7 @@ msgid "Missing files"
 msgstr "Chybející soubory"
 
 msgid "Motion+ Video"
-msgstr ""
+msgstr "WiiMotion+ Video"
 
 msgid "Mount DVD drive"
 msgstr "Spustit z DVD"
@@ -989,7 +989,7 @@ msgid "Only for Install"
 msgstr "Pouze pro instalaci"
 
 msgid "Original Disc Images"
-msgstr ""
+msgstr "Originální potisky DVD"
 
 msgid "Original/Customs"
 msgstr "Originál/Upravené"
@@ -1016,7 +1016,7 @@ msgid "Path Changed"
 msgstr "Cesta zmenena"
 
 msgid "Permission denied."
-msgstr ""
+msgstr "Prístup odmítnut"
 
 msgid "Pick from a list"
 msgstr "Vyberte ze seznamu"
@@ -1220,10 +1220,10 @@ msgid "Successfully installed:"
 msgstr "Úspešne nainstalováno"
 
 msgid "Sync FAT32 FS Info"
-msgstr ""
+msgstr "FAT32 volné místo"
 
 msgid "Synchronizing..."
-msgstr ""
+msgstr "Synchronizuji ..."
 
 msgid "System Default"
 msgstr "Puvodní nastavení systému"
@@ -1241,7 +1241,7 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Zadaný adresár neexistuje. Chcete ho vytvorit?"
 
 msgid "The game installation is disabled under this IOS because of instability in usb write."
-msgstr ""
+msgstr "Instalace her je zakázána s tímto IOS kvuli nestabilite v USB zápisu."
 
 msgid "The wad file was installed"
 msgstr "Soubor WAD byl nainstalován"
@@ -1302,7 +1302,7 @@ msgid "Uninstall Menu"
 msgstr "Menu odinstalací"
 
 msgid "Uninstall all"
-msgstr ""
+msgstr "Odinstalovat vse"
 
 msgid "Uninstalling wad"
 msgstr "Odinstalace WAD"
@@ -1350,7 +1350,7 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Odeslaný ZIP soubor nainstalován do adresáre homebrew"
 
 msgid "Use IOS58"
-msgstr ""
+msgstr "Použít IOS58"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV korekce"
@@ -1363,7 +1363,7 @@ msgid "Video Mode"
 msgstr "Video mód"
 
 msgid "WDM Files Path"
-msgstr ""
+msgstr "Cesta k WDM soborum"
 
 msgid "WIP Patches Path"
 msgstr "Cesta k WIP patchum"
@@ -1378,7 +1378,7 @@ msgid "What do you want to update?"
 msgstr "Co si prejete zaktualizovat?"
 
 msgid "What should be deleted for this game title:"
-msgstr ""
+msgstr "Co si prejete smazat pro tento titul:"
 
 msgid "WiFi Features"
 msgstr "WiFi možnosti"
@@ -1411,7 +1411,7 @@ msgid "Yes"
 msgstr "Ano"
 
 msgid "You are currently using IOS"
-msgstr ""
+msgstr "Nyní pouzíváte IOS:"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Pokousíte se vybrat oddíl FAT32/NTFS/EXT s cIOS 249 Rev < 18. To není podporováno. Pokracujte na vasi odpovednost."
@@ -1475,45 +1475,3 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
-
-#~ msgid "Disc Images"
-#~ msgstr "Potisky DVD"
-
-#~ msgid "Downloading covers"
-#~ msgstr "Stáhování obalu"
-
-#~ msgid "Only Customs"
-#~ msgstr "Pouze Upravené"
-
-#~ msgid "Only Original"
-#~ msgstr "Pouze originál"
-
-#~ msgid "Trying custom Discarts"
-#~ msgstr "Zkousím upravené potisky"
-
-#~ msgid "Trying original Discarts"
-#~ msgstr "Zkousím puvodní potisky"
-
-#~ msgid "Do you really want to delete:"
-#~ msgstr "Opravdu smazat:"
-
-#~ msgid "Do you want to use the alternate DOL that is known to be correct?"
-#~ msgstr "Prejete si použít jiný DOL, který je správný?"
-
-#~ msgid "0 (Locked and Unlocked Games)"
-#~ msgstr "0 (Zamcené a odemcené hry)"
-
-#~ msgid "1 (Unlocked Games Only)"
-#~ msgstr "1 (Pouze odemcené hry)"
-
-#~ msgid "BETA revisions"
-#~ msgstr "BETA revize"
-
-#~ msgid "Enabling this option on a FAT partition might slow the startup of the loader."
-#~ msgstr "Povolení této moznosti na FAT oddílu muze zpusobit pomalejsi start."
-
-#~ msgid "GamesLevel"
-#~ msgstr "Uroven hry"
-
-#~ msgid "Unlock console to use this option."
-#~ msgstr "Odemknete konzoli pro tuto akci."

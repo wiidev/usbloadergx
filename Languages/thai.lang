@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-25 21:17+0100\n"
+"POT-Creation-Date: 2011-01-25 21:30+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -683,51 +683,51 @@ msgid "Global Settings"
 msgstr ""
 
 msgid "HOME Menu"
-msgstr ""
+msgstr "เมนู HOME"
 
 msgid "Homebrew Apps Path"
-msgstr ""
+msgstr "ที่เก็บโปรแกรม Homebrew"
 
 msgid "Homebrew Channel"
 msgstr ""
 
 msgid "Homebrew Launcher"
-msgstr ""
+msgstr "Homebrew Launcher"
 
 msgid "Hour"
-msgstr ""
+msgstr "ชั่วโมง"
 
 msgid "How do you want to update?"
-msgstr ""
+msgstr "ต้องการอัพเดทแบบไหน ?"
 
 msgid "How to Shutdown?"
-msgstr ""
+msgstr "ต้องการปิดแบบไหน ?"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
-msgstr ""
+msgstr "ดาวน์โหลดไฟล์ %0.2fKB"
 
 #, c-format
 msgid "Incoming file %0.2fMB"
-msgstr ""
+msgstr "ดาวน์โหลดไฟล์ %0.2fMB"
 
 msgid "Initializing Network"
-msgstr ""
+msgstr "เชื่อมต่อเครือข่าย"
 
 msgid "Insert Disk"
-msgstr ""
+msgstr "ใส่แผ่น"
 
 msgid "Insert a Wii Disc!"
-msgstr ""
+msgstr "ใส่แผ่น Wii !"
 
 msgid "Install"
-msgstr ""
+msgstr "ติดตั้ง"
 
 msgid "Install Error!"
-msgstr ""
+msgstr "ผิดพลาดขณะติดตั้ง!"
 
 msgid "Install a game"
-msgstr ""
+msgstr "ติดตั้งเกมส์"
 
 msgid "Install directories"
 msgstr ""
@@ -736,83 +736,83 @@ msgid "Install partitions"
 msgstr ""
 
 msgid "Installing content... Ok!"
-msgstr ""
+msgstr "ติดตั้งเนื้อหา... สำเร็จ!"
 
 msgid "Installing game:"
-msgstr ""
+msgstr "กำลังติดตั้งเกมส์:"
 
 msgid "Installing ticket... Ok!"
-msgstr ""
+msgstr "ติดตั้ง ticket... สำเร็จ!"
 
 msgid "Installing title... Ok!"
-msgstr ""
+msgstr "ติดตั้ง Title... สำเร็จ!"
 
 msgid "Installing wad"
-msgstr ""
+msgstr "ติดตั้ง WAD"
 
 msgid "Issue manager /"
 msgstr ""
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
-msgstr ""
+msgstr "ดูเหมือนว่าคุณมีข้อมูลที่จำเป็นต่อการพัฒนาโปรแกรม กรุณาส่งข้อมูลนั้นให้ทีมพัฒนาด้วย."
 
 msgid "Italian"
-msgstr ""
+msgstr "อิตาลี"
 
 msgid "Jan"
-msgstr ""
+msgstr "มค."
 
 msgid "Japanese"
-msgstr ""
+msgstr "ญี่ปุ่น"
 
 msgid "July"
-msgstr ""
+msgstr "กค."
 
 msgid "June"
-msgstr ""
+msgstr "มิย."
 
 msgid "Keep"
-msgstr ""
+msgstr "เก็บ"
 
 msgid "Keyboard"
-msgstr ""
+msgstr "แป้นพิมพ์"
 
 msgid "Korean"
-msgstr ""
+msgstr "เกาหลี"
 
 msgid "Language File"
-msgstr ""
+msgstr "ไฟล์ภาษา"
 
 msgid "Language change:"
-msgstr ""
+msgstr "เปลี่ยนภาษา:"
 
 msgid "Languagefiles Path"
 msgstr ""
 
 msgid "Languagepath changed."
-msgstr ""
+msgstr "ที่เก็บไฟล์ภาษาถูกเปลี่ยนแปลง"
 
 msgid "Left"
-msgstr ""
+msgstr "ซ้าย"
 
 msgid "Like SysMenu"
-msgstr ""
+msgstr "คล้าย SysMenu"
 
 msgid "List on Gamelaunch"
 msgstr ""
 
 msgid "Load"
-msgstr ""
+msgstr "โหลด"
 
 msgid "Load From SD/USB"
-msgstr ""
+msgstr "โหลดจาก SD/USB"
 
 #, c-format
 msgid "Load file from: %s ?"
-msgstr ""
+msgstr "โหลดไฟล์จาก: %s ?"
 
 msgid "Load this DOL as alternate DOL?"
-msgstr ""
+msgstr "โหลด DOL นี้เป็น alternate DOL?"
 
 msgid "Loader Settings"
 msgstr ""
@@ -821,19 +821,19 @@ msgid "Loading default theme."
 msgstr ""
 
 msgid "Loading standard language."
-msgstr ""
+msgstr "โหลดภาษามาตราฐาน."
 
 msgid "Loading standard music."
-msgstr ""
+msgstr "โหลดเพลงมาตราฐาน"
 
 msgid "Lock Console"
-msgstr ""
+msgstr "ล๊อค Console"
 
 msgid "Lock USB Loader GX"
 msgstr ""
 
 msgid "Locked"
-msgstr ""
+msgstr "ล๊อค"
 
 msgid "Loop Directory"
 msgstr ""
@@ -842,58 +842,58 @@ msgid "Loop Music"
 msgstr ""
 
 msgid "Loop Sound"
-msgstr ""
+msgstr "เล่นเสียงซ้ำ"
 
 msgid "Main tester:"
 msgstr ""
 
 msgid "Mar"
-msgstr ""
+msgstr "มีค."
 
 msgid "Mark new games"
 msgstr ""
 
 msgid "May"
-msgstr ""
+msgstr "พค."
 
 msgid "Messageboard Update"
 msgstr ""
 
 msgid "Missing files"
-msgstr ""
+msgstr "ไฟล์ที่หาไม่พบ"
 
 msgid "Motion+ Video"
 msgstr ""
 
 msgid "Mount DVD drive"
-msgstr ""
+msgstr "เชื่อม DVD ไดร์ฟ"
 
 msgid "Music Loop Mode"
 msgstr ""
 
 msgid "Music Volume"
-msgstr ""
+msgstr "ความดังเสียงเพลง"
 
 msgid "Neither"
-msgstr ""
+msgstr "ไม่ทั้งสอง"
 
 msgid "Network is not initiated."
 msgstr ""
 
 msgid "New Disc Detected"
-msgstr ""
+msgstr "พบแผ่นเกมส์ใหม่"
 
 msgid "Next"
-msgstr ""
+msgstr "ต่อไป"
 
 msgid "No"
-msgstr ""
+msgstr "ไม่"
 
 msgid "No Cheatfile found"
-msgstr ""
+msgstr "ไม่พบไฟล์โกงเกมส์"
 
 msgid "No DOL file found on disc."
-msgstr ""
+msgstr "ไม่มีไฟล์ DOL ในแผ่น"
 
 msgid "No Splitting"
 msgstr ""
@@ -905,34 +905,34 @@ msgid "No WBFS or FAT/NTFS/EXT partition found"
 msgstr ""
 
 msgid "No cheats were selected"
-msgstr ""
+msgstr "ไม่ได้เลือกการโกงเกมส์ไว้"
 
 msgid "No data could be read."
-msgstr ""
+msgstr "ไม่มีข้อมูลที่อ่านไม่ได้"
 
 msgid "No favorites selected."
 msgstr ""
 
 msgid "No file missing!"
-msgstr ""
+msgstr "ไม่มีไฟล์ที่หายไป"
 
 msgid "No new updates."
-msgstr ""
+msgstr "ไม่มีไฟล์ Update ตัวใหม่"
 
 msgid "No themes found on the site."
-msgstr ""
+msgstr "ไม่พบธีมบนเวบไซต์"
 
 msgid "None"
 msgstr ""
 
 msgid "Normal"
-msgstr ""
+msgstr "ปกติ"
 
 msgid "Not a WAD file."
 msgstr ""
 
 msgid "Not a Wii Disc"
-msgstr ""
+msgstr "ไม่ใช่แผ่นเกมส์ Wii"
 
 msgid "Not a valid URL"
 msgstr ""
@@ -944,10 +944,10 @@ msgid "Not a valid domain"
 msgstr ""
 
 msgid "Not enough free memory."
-msgstr ""
+msgstr "มีหน่วยความจำเหลือไม่พอ"
 
 msgid "Not enough free space!"
-msgstr ""
+msgstr "มีที่ว่างเหลือไม่พอ !"
 
 msgid "Not enough memory."
 msgstr ""
@@ -956,28 +956,28 @@ msgid "Not required"
 msgstr ""
 
 msgid "Not supported format!"
-msgstr ""
+msgstr "ไม่รองรับรูปแบบไฟล์นี้"
 
 msgid "Nov"
-msgstr ""
+msgstr "พย."
 
 msgid "OFF"
-msgstr ""
+msgstr "ปิด"
 
 msgid "OK"
-msgstr ""
+msgstr "ตกลง"
 
 msgid "ON"
-msgstr ""
+msgstr "เปิด"
 
 msgid "Ocarina"
 msgstr ""
 
 msgid "Oct"
-msgstr ""
+msgstr "ตค."
 
 msgid "Official Site:"
-msgstr ""
+msgstr "เวบไซต์อย่างเป็นทางการ:"
 
 msgid "Offset"
 msgstr ""
@@ -986,31 +986,31 @@ msgid "Only Game Partition"
 msgstr ""
 
 msgid "Only for Install"
-msgstr ""
+msgstr "เฉพาะติดตั้งเท่านั้น"
 
 msgid "Original Disc Images"
 msgstr ""
 
 msgid "Original/Customs"
-msgstr ""
+msgstr "ของแท้/ดัดแปลง"
 
 msgid "Parental Control"
-msgstr ""
+msgstr "กำหนดอายุ"
 
 msgid "Partition"
-msgstr ""
+msgstr "พาร์ติชั่น"
 
 msgid "Password"
-msgstr ""
+msgstr "รหัสผ่าน"
 
 msgid "Password Changed"
-msgstr ""
+msgstr "รหัสผ่านถูกเปลี่ยนแปลง"
 
 msgid "Password has been changed"
-msgstr ""
+msgstr "รหัสผ่านถูกเปลี่ยนแปลง"
 
 msgid "Patch Country Strings"
-msgstr ""
+msgstr "แก้อักขระประเทศ"
 
 msgid "Path Changed"
 msgstr ""
@@ -1019,10 +1019,10 @@ msgid "Permission denied."
 msgstr ""
 
 msgid "Pick from a list"
-msgstr ""
+msgstr "เลือกจากรายการ"
 
 msgid "Play Count"
-msgstr ""
+msgstr "จำนวนที่เล่น"
 
 msgid "Play Next"
 msgstr ""
@@ -1037,46 +1037,46 @@ msgid "Playing Music:"
 msgstr ""
 
 msgid "Please wait..."
-msgstr ""
+msgstr "รอสักครู่"
 
 msgid "Power off the Wii"
-msgstr ""
+msgstr "ปิดเครื่อง Wii"
 
 msgid "Prev"
-msgstr ""
+msgstr "ที่ผ่านมา"
 
 msgid "Prompts Buttons"
-msgstr ""
+msgstr "ปุ่มเตรียมตัว"
 
 msgid "Published by"
-msgstr ""
+msgstr "เผยแพร่โดย"
 
 msgid "Quick Boot"
-msgstr ""
+msgstr "บูตแบบเร็ว"
 
 msgid "Random Directory Music"
 msgstr ""
 
 msgid "Reading WAD data... Ok!"
-msgstr ""
+msgstr "อ่านข้อมูล WAD... สำเร็จ!"
 
 msgid "Receiving file from:"
-msgstr ""
+msgstr "ได้รับไฟล์จาก:"
 
 msgid "Region Patch"
 msgstr ""
 
 msgid "Released"
-msgstr ""
+msgstr "ปล่อย"
 
 msgid "Reload SD"
-msgstr ""
+msgstr "โหลด SD ใหม่"
 
 msgid "Remove update"
 msgstr ""
 
 msgid "Rename Game on WBFS"
-msgstr ""
+msgstr "เปลี่ยนชื่อเกมส์บน WBFS"
 
 msgid "Reset"
 msgstr ""
@@ -1085,49 +1085,49 @@ msgid "Reset BG Music"
 msgstr ""
 
 msgid "Reset Playcounter"
-msgstr ""
+msgstr "เคลียร์การนับจำนวนที่เล่น"
 
 msgid "Reset to default BGM?"
 msgstr ""
 
 msgid "Restarting..."
-msgstr ""
+msgstr "รีสตารท์..."
 
 msgid "Return"
-msgstr ""
+msgstr "กลับ"
 
 msgid "Return To"
 msgstr ""
 
 msgid "Return to Wii Menu"
-msgstr ""
+msgstr "กลับไปที่เมนู Wii"
 
 msgid "Right"
-msgstr ""
+msgstr "ขวา"
 
 msgid "Rumble"
-msgstr ""
+msgstr "สั่น"
 
 msgid "SChinese"
-msgstr ""
+msgstr "จีน"
 
 msgid "SFX Volume"
-msgstr ""
+msgstr "ความดังของ SFX"
 
 msgid "Save"
-msgstr ""
+msgstr "บันทึก"
 
 msgid "Save Failed. No device inserted?"
 msgstr ""
 
 msgid "Save Game List to"
-msgstr ""
+msgstr "บันทึกรายชื่อเกมส์ไปที่"
 
 msgid "Saved"
-msgstr ""
+msgstr "บันทึกแล้ว"
 
 msgid "Screensaver"
-msgstr ""
+msgstr "รักษาหน้าจอ"
 
 msgid "Select"
 msgstr ""
@@ -1136,55 +1136,55 @@ msgid "Select DOL Offset"
 msgstr ""
 
 msgid "Select a DOL"
-msgstr ""
+msgstr "เลือก DOL"
 
 msgid "Select a DOL from Game"
 msgstr ""
 
 msgid "Sept"
-msgstr ""
+msgstr "กย."
 
 msgid "Set Search-Filter"
-msgstr ""
+msgstr "กำหนดเงื่อนไขการค้นหา"
 
 msgid "Settings"
-msgstr ""
+msgstr "กำหนดค่า"
 
 msgid "Show Free Space"
 msgstr ""
 
 msgid "Shutdown System"
-msgstr ""
+msgstr "ปิดระบบ"
 
 msgid "Shutdown Wii"
 msgstr ""
 
 msgid "Sort alphabetically"
-msgstr ""
+msgstr "เรียงตามตัวอักษร"
 
 msgid "Sort by rank"
-msgstr ""
+msgstr "เรียงตามอันดับ"
 
 msgid "Sort order by most played"
-msgstr ""
+msgstr "เรียงตามความถี่ในการเล่น"
 
 msgid "Sound"
-msgstr ""
+msgstr "เสียง"
 
 msgid "Sound Settings"
 msgstr ""
 
 msgid "Sound+BGM"
-msgstr ""
+msgstr "เสียง+BGM"
 
 msgid "Sound+Quiet"
-msgstr ""
+msgstr "เสียง+เงียบ"
 
 msgid "Spanish"
-msgstr ""
+msgstr "สเปน"
 
 msgid "Special thanks to:"
-msgstr ""
+msgstr "ขอขอบคุณอย่างสูง:"
 
 msgid "Split each 2GB"
 msgstr ""
@@ -1196,28 +1196,28 @@ msgid "Standby"
 msgstr ""
 
 msgid "Success"
-msgstr ""
+msgstr "สำเร็จ"
 
 msgid "Success:"
-msgstr ""
+msgstr "สำเร็จ:"
 
 msgid "Successfully Saved"
-msgstr ""
+msgstr "บันทึกสำเร็จ"
 
 msgid "Successfully Updated"
-msgstr ""
+msgstr "อัพเดทสำเร็จ"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
 msgstr ""
 
 msgid "Successfully deleted:"
-msgstr ""
+msgstr "ลบสำเร็จ:"
 
 msgid "Successfully extracted theme."
-msgstr ""
+msgstr "ขยายไฟล์ธีมสำเร็จ."
 
 msgid "Successfully installed:"
-msgstr ""
+msgstr "ติดตั้งสำเร็จ:"
 
 msgid "Sync FAT32 FS Info"
 msgstr ""
@@ -1226,19 +1226,19 @@ msgid "Synchronizing..."
 msgstr ""
 
 msgid "System Default"
-msgstr ""
+msgstr "ค่าเริ่มต้นของระบบ"
 
 msgid "TChinese"
-msgstr ""
+msgstr "จีนโบราณ"
 
 msgid "TXT Cheatcodes Path"
-msgstr ""
+msgstr "ที่เก็บ TXTCheatcodes"
 
 msgid "The .them file was not found in the zip."
 msgstr ""
 
 msgid "The entered directory does not exist. Would you like to create it?"
-msgstr ""
+msgstr "ไม่พบไดเรคทอรี่นี้ ต้องการสร้างใหม่รึไม่ ?"
 
 msgid "The game installation is disabled under this IOS because of instability in usb write."
 msgstr ""
@@ -1251,13 +1251,13 @@ msgid "The wad installation failed with error %i"
 msgstr ""
 
 msgid "Theme Downloader"
-msgstr ""
+msgstr "ตัวช่วยดาวน์โหลดธีม"
 
 msgid "Theme Path"
-msgstr ""
+msgstr "ที่อยู่ Theme"
 
 msgid "Theme Title:"
-msgstr ""
+msgstr "ชื่อธีม:"
 
 msgid "Theme path is changed."
 msgstr ""
@@ -1272,40 +1272,40 @@ msgid "This IOS was not found on the titles list. If you are sure you have it in
 msgstr ""
 
 msgid "Time left:"
-msgstr ""
+msgstr "เหลือเวลาอีก:"
 
 msgid "Title Launcher"
-msgstr ""
+msgstr "Title Launcher"
 
 msgid "Titles from WiiTDB"
-msgstr ""
+msgstr "Title จาก WiiTDB"
 
 msgid "Tooltips"
-msgstr ""
+msgstr "คำแนะนำ"
 
 msgid "Transfer failed"
 msgstr ""
 
 msgid "USB Device not found"
-msgstr ""
+msgstr "ไม่พบอุปกรณ์ USB"
 
 msgid "USB Loader GX is protected"
-msgstr ""
+msgstr "USB Loader GX 5 ถูกป้องกัน"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "ถอนการติดตั้ง"
 
 msgid "Uninstall Game"
-msgstr ""
+msgstr "ถอนการติดตั้ง"
 
 msgid "Uninstall Menu"
-msgstr ""
+msgstr "ถอนการติดตั้ง"
 
 msgid "Uninstall all"
 msgstr ""
 
 msgid "Uninstalling wad"
-msgstr ""
+msgstr "ถอนการติดตั้ง wad"
 
 msgid "Unknown"
 msgstr ""
@@ -1314,53 +1314,53 @@ msgid "Unlock USB Loader GX"
 msgstr ""
 
 msgid "Unlocked"
-msgstr ""
+msgstr "ปลดล๊อค"
 
 msgid "Unsupported format, try to extract manually TempTheme.zip."
 msgstr ""
 
 msgid "Update"
-msgstr ""
+msgstr "อัพเดท"
 
 msgid "Update All"
-msgstr ""
+msgstr "อัทเดททั้งหมด"
 
 msgid "Update DOL"
-msgstr ""
+msgstr "อัพเดท DOL"
 
 msgid "Update Files"
-msgstr ""
+msgstr "อัพเดทไฟล์"
 
 msgid "Update Path"
-msgstr ""
+msgstr "ที่อยู่ Update"
 
 msgid "Update all Language Files"
-msgstr ""
+msgstr "อัพเดทภาษาทั้งหมด"
 
 msgid "Update failed"
-msgstr ""
+msgstr "อัพเดทล้มเหลว"
 
 msgid "Update successfull"
 msgstr ""
 
 msgid "Updating Language Files:"
-msgstr ""
+msgstr "กำลังอัพเดทไฟล์ภาษา:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr ""
+msgstr "อัพโหลดไฟล์ zip ไปที่ไดเรคทอรี่ homebrew"
 
 msgid "Use IOS58"
 msgstr ""
 
 msgid "VIDTV Patch"
-msgstr ""
+msgstr "ปรับแก้ VIDTV"
 
 #, c-format
 msgid "Version: %s"
-msgstr ""
+msgstr "เวอร์ชั่น: %s"
 
 msgid "Video Mode"
-msgstr ""
+msgstr "โหมดการแสดงผลภาพ"
 
 msgid "WDM Files Path"
 msgstr ""
@@ -1369,46 +1369,46 @@ msgid "WIP Patches Path"
 msgstr ""
 
 msgid "Waiting..."
-msgstr ""
+msgstr "กำลังรอ..."
 
 msgid "Warning:"
 msgstr ""
 
 msgid "What do you want to update?"
-msgstr ""
+msgstr "คุณต้องการอัพเดทอะไร ?"
 
 msgid "What should be deleted for this game title:"
 msgstr ""
 
 msgid "WiFi Features"
-msgstr ""
+msgstr "ความสามารถของ Wi Fi"
 
 msgid "Widescreen Fix"
-msgstr ""
+msgstr "จอกว้าง"
 
 msgid "Wii Menu"
-msgstr ""
+msgstr "เมนู Wii"
 
 msgid "Wii Settings"
-msgstr ""
+msgstr "การปรับแต่ง Wii"
 
 msgid "WiiTDB Files"
-msgstr ""
+msgstr "ไฟล์ WiiTDB"
 
 msgid "WiiTDB Path"
-msgstr ""
+msgstr "ที่อยู่ WiiTDB"
 
 msgid "WiiTDB is up to date."
 msgstr ""
 
 msgid "Wiilight"
-msgstr ""
+msgstr "ความสว่างของ Wii"
 
 msgid "Wrong Password"
-msgstr ""
+msgstr "รหัสผ่านผิดพลาด"
 
 msgid "Yes"
-msgstr ""
+msgstr "ใช่"
 
 msgid "You are currently using IOS"
 msgstr ""
@@ -1423,55 +1423,280 @@ msgid "and translators for language files updates"
 msgstr ""
 
 msgid "available"
-msgstr ""
+msgstr "ว่างอยู่"
 
 msgid "does not exist!"
-msgstr ""
+msgstr "ไม่มี!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr ""
+msgstr "ไม่มี! โหลดเกมส์โดยไม่ใช้การโกงเกมส์."
 
 msgid "files left"
-msgstr ""
+msgstr "ไฟล์ที่ยังเหลือ"
 
 msgid "files not found on the server!"
-msgstr ""
+msgstr "ไม่พบไฟล์/i บนเซิฟเวอร์!"
 
 msgid "for FAT/NTFS support"
 msgstr ""
 
 msgid "for Ocarina"
-msgstr ""
+msgstr "สำหรับ Ocarina"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr ""
+msgstr "สำหรับ WiiTDB และ ปก/รูปแผ่นดิสก์"
 
 msgid "for diverse patches"
-msgstr ""
+msgstr "แก้ diverse"
 
 msgid "for his awesome tool LibWiiGui"
-msgstr ""
+msgstr "สำหรับสุดยอด tool ของเค้า LibWiiGui"
 
 msgid "for hosting the themes"
-msgstr ""
+msgstr "สำหรับให้ฝากธีม"
 
 msgid "for hosting the update files"
-msgstr ""
+msgstr "สำหรับที่เก็บไฟล์อัพเดท"
 
 msgid "for the USB Loader source"
-msgstr ""
+msgstr "สำหรับรหัสโปรแกรม USB Loader"
 
 msgid "formatted!"
-msgstr ""
+msgstr "ฟอร์แมต!"
 
 msgid "free"
-msgstr ""
+msgstr "ว่างอยู่"
 
 msgid "not set"
-msgstr ""
+msgstr "ไม่ได้กำหนด"
 
 msgid "of"
-msgstr ""
+msgstr "จาก"
 
 msgid "seconds left"
-msgstr ""
+msgstr "วินาทีที่เหลือ"
+
+#~ msgid "Disc Images"
+#~ msgstr "ภาพแผ่น"
+
+#~ msgid "Only Customs"
+#~ msgstr "เฉพาะที่ดัดแปลง"
+
+#~ msgid "Only Original"
+#~ msgstr "เฉพาะของแท้"
+
+#~ msgid "Do you really want to delete:"
+#~ msgstr "ต้องการที่จะลบใช่ไหม:"
+
+#~ msgid "Do you want to use the alternate DOL that is known to be correct?"
+#~ msgstr "ต้องการจะใช้ alt DOL เฉพาะที่รู้ว่าถูกต้อง?"
+
+#~ msgid "Unlock console to use this option."
+#~ msgstr "ปลดล๊อค Console ก่อน เพื่อใช้ตัวเลือกนี้"
+
+#~ msgid "Full Shutdown"
+#~ msgstr "ปิดอย่างสมบรูณ์"
+
+#~ msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
+#~ msgstr "ถ้าไม่มี Wifi กด 1 เพื่อแสดง URL สำหรับดาวน์โหลด WiiTDB.zip"
+
+#~ msgid "Paste it into your browser to get your WiiTDB.zip."
+#~ msgstr "วางในเวบบราวเซอร์เพื่อดึงข้อมูล WiiTDB.zip"
+
+#~ msgid "Shutdown to Idle"
+#~ msgstr "เข้าโหมด Idle"
+
+#~ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
+#~ msgstr "URL ของคุณถูกบันทึกใน %sWiiTDB_URL.txt."
+
+#~ msgid "Can't create file"
+#~ msgstr "สร้างไฟล์ไม่ได้"
+
+#~ msgid "Download failed."
+#~ msgstr "ดาวน์โหลดไม่ได้"
+
+#~ msgid "Download request failed."
+#~ msgstr "ดาวน์โหลดไม่ได้"
+
+#~ msgid "Downloading Page List:"
+#~ msgstr "รายการที่กำลังดาวน์โหลด:"
+
+#~ msgid "Theme Download Path"
+#~ msgstr "ตำแหน่งที่ดาวน์โหลดธีม"
+
+#~ msgid "Transfer failed."
+#~ msgstr "ถ่ายโอนไม่ได้"
+
+#~ msgid "Unsupported format, try to extract manually."
+#~ msgstr "ไม่สนับสนุนไฟล์นี้ ลองขยายไฟล์เอง"
+
+#~ msgid "and translaters for language files updates"
+#~ msgstr "และผู้แปลภาษาสำหรับการอัพเดท"
+
+#~ msgid "Insert an SD-Card to save."
+#~ msgstr "ใส่ SD card เพื่อบันทึก"
+
+#~ msgid "Insert an SD-Card to use this option."
+#~ msgstr "ใส่ SD card เพื่อใช้ตัวเลือกนี้ "
+
+#~ msgid "No SD-Card inserted!"
+#~ msgstr "ไม่ได้เสียบ SD card!"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "กำลังรออุปกรณ์ USB"
+
+#~ msgid "Back to Loader"
+#~ msgstr "กลับไปที่ Loader"
+
+#~ msgid "An Error occured"
+#~ msgstr "พบความผิดพลาด"
+
+#~ msgid "AutoPatch"
+#~ msgstr "แก้ไขอัตโนมัติ"
+
+#~ msgid "Checking for Updates"
+#~ msgstr "ตรวจสอบหาอัพเดท"
+
+#~ msgid "Downloading"
+#~ msgstr "กำลังดาวน์โหลด"
+
+#~ msgid "The wad file was installed.  But It could not be deleted from the SD card."
+#~ msgstr "ไฟล์ Wad ถูกติดตั้งแล้ว แต่ไม่สามารถลบจาก SD card ได้"
+
+#~ msgid "The wad installation failed with error %ld"
+#~ msgstr "การติดตั้งไฟล์ Wad ล้มเหลวด้วยข้อผิดพลาด %ld"
+
+#~ msgid "Unable to open the wad that was just downloaded (%s)."
+#~ msgstr "ไม่สามารถเปิดไฟล์ Wad ที่เพิ่งดาวน์โหลดมาได้ (%s)."
+
+#~ msgid "Update to"
+#~ msgstr "อัพเดทเป็น"
+
+#~ msgid "Updating"
+#~ msgstr "กำลังอัพเดท"
+
+#~ msgid "Updating Language Files..."
+#~ msgstr "กำลังอัพเดทไฟล์ภาษา..."
+
+#~ msgid "Updating WiiTDB.zip"
+#~ msgstr "กำลังอัพเดทไฟล์ WiiTDB.zip"
+
+#~ msgid "%s : %s May not boot correctly if your System Menu is not up to date."
+#~ msgstr "%s : %s อาจทำงานผิดปกติ ถ้าระบบของคุณไม่ทันสมัย"
+
+#~ msgid "Back to Wii Menu"
+#~ msgstr "กลับไป เมนู Wii"
+
+#~ msgid "Channels"
+#~ msgstr "แชนแนล"
+
+#~ msgid "Checking existing artwork"
+#~ msgstr "ตรวจหาอาร์ตเวิรค์"
+
+#~ msgid "Confirm"
+#~ msgstr "ยืนยัน"
+
+#~ msgid "Could not find a WBFS partition."
+#~ msgstr "ไม่พบ WBFS พาร์ติชั่น"
+
+#~ msgid "Could not open WBFS partition"
+#~ msgstr "ไม่สามารถเปิด WBFS พาร์ติชั่นได้"
+
+#~ msgid "Could not read the disc."
+#~ msgstr "อ่านแผ่นไม่ได้ !"
+
+#~ msgid "Could not set USB."
+#~ msgstr "ไม่สามารถตั้งค่า USB ได้"
+
+#~ msgid "Cover Path Changed"
+#~ msgstr "ที่เก็บ ปก ถูกเปลี่ยนแปลง"
+
+#~ msgid "DOL path changed"
+#~ msgstr "ที่เก็บ DOL ถูกเปลี่ยนแปลง"
+
+#~ msgid "Disc Path Changed"
+#~ msgstr "ที่เก็บ ภาพแผ่น ถูกเปลี่ยนแปลง"
+
+#~ msgid "Display favorites"
+#~ msgstr "แสดง แบบเกมส์ที่ชอบ"
+
+#~ msgid "Do you want to retry for 30 secs?"
+#~ msgstr "ต้องการลองใหม่ทุก 30 วินาที?"
+
+#~ msgid "Force"
+#~ msgstr "บังคับ"
+
+#~ msgid "GCT Cheatcodes Path changed"
+#~ msgstr "ที่เก็บ สูตรโกง ถูกเปลี่ยนแปลง"
+
+#~ msgid "Homebrew Appspath changed"
+#~ msgstr "ที่เก็บโปรแกรม Homebrew ถูกเปลี่ยนแปลง"
+
+#~ msgid "Insert an SD-Card to download images."
+#~ msgstr "ใส่ SD card เพื่อดาวน์โหลดภาพ"
+
+#~ msgid "Most likely it has dimensions that are not evenly divisible by 4."
+#~ msgstr "ดูเหมือนว่าขนาดจะหารด้วย 4 ไม่ลงตัว"
+
+#~ msgid "Network init error"
+#~ msgstr "การเชื่อมต่อเครือข่ายผิดพลาด"
+
+#~ msgid "No .dol or .elf files found."
+#~ msgstr "ไม่พบไฟล์ .dol หรือ .elf"
+
+#~ msgid "No Favorites"
+#~ msgstr "ไม่พบเกมส์ที่ชื่นชอบ"
+
+#~ msgid "No USB Device"
+#~ msgstr "ไม่ได้เสียบอุปกรณ์ USB"
+
+#~ msgid "No USB Device found."
+#~ msgstr "ไม่พบอุปกรณ์ USB"
+
+#~ msgid "Normal Covers"
+#~ msgstr "หน้าปกแบบปกติ"
+
+#~ msgid "Not Found"
+#~ msgstr "ไม่พบ"
+
+#~ msgid "Not a DOL/ELF file."
+#~ msgstr "ไม่ใช่ไฟล์ DOL หรือ ELF"
+
+#~ msgid "Save Failed"
+#~ msgstr "การบันทึกไม่สำเร็จ"
+
+#~ msgid "Selected DOL"
+#~ msgstr "DOL ที่เลือก"
+
+#~ msgid "Standard"
+#~ msgstr "มาตราฐาน"
+
+#~ msgid "TXT Cheatcodes Path changed"
+#~ msgstr "ที่เก็บ TXTCheatcodes ถูกเปลี่ยนแปลง"
+
+#~ msgid "Theme Download Path changed"
+#~ msgstr "ตำแหน่งที่ดาวน์โหลดธีมเปลี่ยนแปลง"
+
+#~ msgid "Theme Path Changed"
+#~ msgstr "ที่อยู่ Theme ถูกเปลี่ยนแปลง"
+
+#~ msgid "Update Path changed."
+#~ msgstr "ที่อยู่ Update ถูกเปลี่ยน"
+
+#~ msgid "WiiTDB Path changed."
+#~ msgstr "ที่อยู่ WiiTDB ถูกเปลี่ยนแปลง"
+
+#~ msgid "You are about to delete "
+#~ msgstr "คุณกำลังจะลบ "
+
+#~ msgid "You are choosing to display favorites and you do not have any selected."
+#~ msgstr "คุณเลือกจะแสดงเกมส์ที่ชอบ แต่คุณไม่ได้กำหนดเกมส์ที่ชื่นชอบไว้"
+
+#~ msgid "You have attempted to load a bad image"
+#~ msgstr "คุณพยายามที่จะโหลดรูปภาพที่เสียหาย"
+
+#~ msgid "does not exist!  You Messed something up, Idiot."
+#~ msgstr "ไม่มี! คุณทำให้มันเละไปแล้ว ไอ้โง่ อิอิ."
+
+#~ msgid "file left"
+#~ msgstr "ไฟล์ที่ยังเหลือ"
