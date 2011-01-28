@@ -65,7 +65,7 @@ static char fs3[] ATTRIBUTE_ALIGN(32) = "/dev/usb/ehc";
 
 static u8 * mem2_ptr = NULL;
 static s32 hid = -1, fd = -1;
-static u32 sector_size = 0;
+u32 hdd_sector_size = 512;
 
 s32 USBStorage2_Init(void)
 {
@@ -93,7 +93,7 @@ s32 USBStorage2_Init(void)
     if (ret < 0) goto err;
 
     /* Get device capacity */
-    if (USBStorage2_GetCapacity(&sector_size) == 0)
+    if (USBStorage2_GetCapacity(&hdd_sector_size) == 0)
     {
         ret = IPC_ENOENT;
         goto err;
@@ -120,6 +120,8 @@ void USBStorage2_Deinit(void)
         IOS_Close(fd);
         fd = -1;
     }
+
+    hdd_sector_size = 512;
 }
 
 
@@ -143,9 +145,9 @@ s32 USBStorage2_GetCapacity(u32 *_sector_size)
     {
         s32 ret;
 
-        ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_UMS_GET_CAPACITY, ":i", &sector_size);
+        ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_UMS_GET_CAPACITY, ":i", &hdd_sector_size);
 
-        if (ret && _sector_size) *_sector_size = sector_size;
+        if (ret && _sector_size) *_sector_size = hdd_sector_size;
 
         return ret;
     }
@@ -162,14 +164,14 @@ s32 USBStorage2_ReadSectors(u32 sector, u32 numSectors, void *buffer)
     if (fd < 0) return fd;
 
     if (!mem2_ptr)
-        mem2_ptr = (u8 *) MEM2_alloc(sector_size * MAX_BUFFER_SECTORS);
+        mem2_ptr = (u8 *) MEM2_alloc(hdd_sector_size * MAX_BUFFER_SECTORS);
 
     s32 read_secs, read_size;
 
     while(numSectors > 0)
     {
         read_secs = numSectors > MAX_BUFFER_SECTORS ? MAX_BUFFER_SECTORS : numSectors;
-        read_size = read_secs*sector_size;
+        read_size = read_secs*hdd_sector_size;
 
         // Do not read more than MAX_BUFFER_SECTORS sectors at once and create a mem overflow!
         if (!isMEM2Buffer(buffer))
@@ -206,14 +208,14 @@ s32 USBStorage2_WriteSectors(u32 sector, u32 numSectors, const void *buffer)
 
     /* Device not opened */
     if (!mem2_ptr)
-        mem2_ptr = (u8 *) MEM2_alloc(sector_size * MAX_BUFFER_SECTORS);
+        mem2_ptr = (u8 *) MEM2_alloc(hdd_sector_size * MAX_BUFFER_SECTORS);
 
     s32 write_size, write_secs;
 
     while(numSectors > 0)
     {
         write_secs = numSectors > MAX_BUFFER_SECTORS ? MAX_BUFFER_SECTORS : numSectors;
-        write_size = write_secs*sector_size;
+        write_size = write_secs*hdd_sector_size;
 
         /* MEM1 buffer */
         if (!isMEM2Buffer(buffer))

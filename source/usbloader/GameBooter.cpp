@@ -32,6 +32,7 @@ u32 AppEntrypoint = 0;
 
 struct discHdr *dvdheader = NULL;
 extern int wbfs_part_fs;
+extern u32 hdd_sector_size;
 extern int mountMethod;
 
 int GameBooter::BootGCMode()
@@ -134,7 +135,8 @@ int GameBooter::SetupDisc(u8 * gameID)
 
     int ret = -1;
 
-    if(IosLoader::IsWaninkokoIOS() && IOS_GetRevision() < 18)
+    if(((IosLoader::IsWaninkokoIOS() && IOS_GetRevision() < 18) ||
+        hdd_sector_size != 512) && wbfs_part_fs == PART_FS_WBFS)
     {
         gprintf("Disc_SetUSB...");
         ret = Disc_SetUSB(gameID);

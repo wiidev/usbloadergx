@@ -46,7 +46,8 @@
 #define GUID_HIDDEN_PARTITION       0x2000000000000000LL    /* Hidden partition */
 #define GUID_NO_AUTOMOUNT_PARTITION 0x4000000000000000LL    /* Do not automount (e.g., do not assign drive letter) */
 
-#define BYTES_PER_SECTOR        512 /* Default in libogc */
+#define BYTES_PER_SECTOR        512  /* Default in libogc */
+#define MAX_BYTES_PER_SECTOR    4096 /* Max bytes per sector */
 
 typedef struct _PARTITION_RECORD {
     u8 status;                              /* Partition status; see above */

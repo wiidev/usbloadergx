@@ -6,7 +6,16 @@ extern "C"
 {
 #endif
 
+#include <gccore.h>
 #include "libs/libwbfs/libwbfs.h"
+
+    typedef struct _WBFS_PartInfo
+    {
+        u32 wbfs_sector_size;
+        u32 hdd_sector_size;
+        u32 partition_lba;
+        u32 partition_num_sec;
+    } WBFS_PartInfo;
 
     extern rw_sector_callback_t readCallback;
     extern rw_sector_callback_t writeCallback;

@@ -31,7 +31,7 @@ int mload_init()
 {
     int n;
 
-	if(hid<0) hid = iosCreateHeap(0x8000);
+	if(hid<0) hid = iosCreateHeap(0x10000);
 
 	if(hid<0)
 		{

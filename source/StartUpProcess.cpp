@@ -103,6 +103,14 @@ bool StartUpProcess::USBSpinUp()
             messageTxt->SetTextf("Waiting for HDD: %i sec left\n", retries/20);
             Draw();
         }
+
+        if(retries/20 == 18 && IOS_GetVersion() < 200)
+        {
+            DeviceHandler::DestroyInstance();
+            IosLoader::LoadAppCios();
+            DeviceHandler::Instance()->MountSD();
+            handle = DeviceHandler::GetUSBInterface();
+        }
     }
     while(!started && --retries > 0);
 

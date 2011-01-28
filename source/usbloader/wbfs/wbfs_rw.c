@@ -14,8 +14,6 @@ rw_sector_callback_t readCallback = NULL;
 rw_sector_callback_t writeCallback = NULL;
 const DISC_INTERFACE * currentHandle = NULL;
 
-static const u32 sector_size = 512;
-
 s32 __ReadDVD(void *fp, u32 lba, u32 len, void *iobuf)
 {
     void *buffer = NULL;
@@ -66,20 +64,23 @@ s32 __ReadDVD(void *fp, u32 lba, u32 len, void *iobuf)
 
 s32 __ReadUSB(void *fp, u32 lba, u32 count, void *iobuf)
 {
+    WBFS_PartInfo * info = (WBFS_PartInfo *) fp;
     u32 cnt = 0;
     s32 ret;
+    u32 partition_offset = info->partition_lba + (lba-info->partition_lba)*(info->wbfs_sector_size/info->hdd_sector_size);
+    count *= info->wbfs_sector_size/info->hdd_sector_size;
 
     /* Do reads */
     while (cnt < count)
     {
-        void *ptr = ((u8 *) iobuf) + (cnt * sector_size);
+        u8 *ptr = ((u8 *) iobuf) + (cnt * info->wbfs_sector_size);
         u32 sectors = (count - cnt);
 
         /* Read sectors is too big */
         if (sectors > MAX_NB_SECTORS) sectors = MAX_NB_SECTORS;
 
         /* USB read */
-        ret = currentHandle->readSectors(lba + cnt, sectors, ptr);
+        ret = currentHandle->readSectors(partition_offset + cnt, sectors, ptr);
         if (!ret) return -1;
 
         /* Increment counter */
@@ -91,20 +92,23 @@ s32 __ReadUSB(void *fp, u32 lba, u32 count, void *iobuf)
 
 s32 __WriteUSB(void *fp, u32 lba, u32 count, void *iobuf)
 {
+    WBFS_PartInfo * info = (WBFS_PartInfo *) fp;
     u32 cnt = 0;
     s32 ret;
+    u32 partition_offset = info->partition_lba + (lba-info->partition_lba)*(info->wbfs_sector_size/info->hdd_sector_size);
+    count *= info->wbfs_sector_size/info->hdd_sector_size;
 
     /* Do writes */
     while (cnt < count)
     {
-        void *ptr = ((u8 *) iobuf) + (cnt * sector_size);
+        u8 *ptr = ((u8 *) iobuf) + (cnt * info->wbfs_sector_size);
         u32 sectors = (count - cnt);
 
         /* Write sectors is too big */
         if (sectors > MAX_NB_SECTORS) sectors = MAX_NB_SECTORS;
 
         /* USB write */
-        ret = currentHandle->writeSectors(lba + cnt, sectors, ptr);
+        ret = currentHandle->writeSectors(partition_offset + cnt, sectors, ptr);
         if (!ret) return -1;
 
         /* Increment counter */
@@ -116,20 +120,23 @@ s32 __WriteUSB(void *fp, u32 lba, u32 count, void *iobuf)
 
 s32 __ReadSDHC(void *fp, u32 lba, u32 count, void *iobuf)
 {
+    WBFS_PartInfo * info = (WBFS_PartInfo *) fp;
     u32 cnt = 0;
     s32 ret;
+    u32 partition_offset = info->partition_lba + (lba-info->partition_lba)*(info->wbfs_sector_size/info->hdd_sector_size);
+    count *= info->wbfs_sector_size/info->hdd_sector_size;
 
     /* Do reads */
     while (cnt < count)
     {
-        void *ptr = ((u8 *) iobuf) + (cnt * sector_size);
+        void *ptr = ((u8 *) iobuf) + (cnt * info->wbfs_sector_size);
         u32 sectors = (count - cnt);
 
         /* Read sectors is too big */
         if (sectors > MAX_NB_SECTORS) sectors = MAX_NB_SECTORS;
 
         /* SDHC read */
-        ret = SDHC_ReadSectors(lba + cnt, sectors, ptr);
+        ret = SDHC_ReadSectors(partition_offset + cnt, sectors, ptr);
         if (!ret) return -1;
 
         /* Increment counter */
@@ -141,20 +148,23 @@ s32 __ReadSDHC(void *fp, u32 lba, u32 count, void *iobuf)
 
 s32 __WriteSDHC(void *fp, u32 lba, u32 count, void *iobuf)
 {
+    WBFS_PartInfo * info = (WBFS_PartInfo *) fp;
     u32 cnt = 0;
     s32 ret;
+    u32 partition_offset = info->partition_lba + (lba-info->partition_lba)*(info->wbfs_sector_size/info->hdd_sector_size);
+    count *= info->wbfs_sector_size/info->hdd_sector_size;
 
     /* Do writes */
     while (cnt < count)
     {
-        void *ptr = ((u8 *) iobuf) + (cnt * sector_size);
+        void *ptr = ((u8 *) iobuf) + (cnt * info->wbfs_sector_size);
         u32 sectors = (count - cnt);
 
         /* Write sectors is too big */
         if (sectors > MAX_NB_SECTORS) sectors = MAX_NB_SECTORS;
 
         /* SDHC write */
-        ret = SDHC_WriteSectors(lba + cnt, sectors, ptr);
+        ret = SDHC_WriteSectors(partition_offset + cnt, sectors, ptr);
         if (!ret) return -1;
 
         /* Increment counter */

@@ -5,24 +5,37 @@
 #include "wbfs_rw.h"
 
 extern int wbfs_part_fs;
+extern u32 hdd_sector_size;
 
 s32 Wbfs_Wbfs::Open()
 {
     wbfs_t *part = NULL;
 
-    u8 buffer[512];
-    memset(buffer, 0, sizeof(buffer));
+    PartInfo.wbfs_sector_size = hdd_sector_size;
+    PartInfo.hdd_sector_size = hdd_sector_size;
+    PartInfo.partition_lba = lba;
+    PartInfo.partition_num_sec = size;
 
-    wbfs_head_t *head = (wbfs_head_t *) buffer;
+    u8 * buffer = (u8 *) malloc(hdd_sector_size);
+    memset(buffer, 0, hdd_sector_size);
 
-    if(readCallback(NULL, lba, 1, buffer) < 0)
+    if(readCallback(&PartInfo, lba, 1, buffer) < 0)
+    {
+        free(buffer);
+        return -1;
+    }
+
+    wbfs_head_t head;
+    memcpy(&head, buffer, sizeof(wbfs_head_t));
+    free(buffer);
+
+    if (head.magic != wbfs_htonl(WBFS_MAGIC))
         return -1;
 
-    if (head->magic != wbfs_htonl(WBFS_MAGIC))
-        return -1;
+    PartInfo.wbfs_sector_size = 1 << head.hd_sec_sz_s;
 
     /* Open partition */
-    part = wbfs_open_partition(readCallback, writeCallback, NULL, 512, head->n_hd_sec, lba, 0);
+    part = wbfs_open_partition(readCallback, writeCallback, &PartInfo, 1 << head.hd_sec_sz_s, head.n_hd_sec, lba, 0);
     if (!part) return -1;
 
     /* Close current hard disk */
@@ -65,10 +78,16 @@ void Wbfs_Wbfs::CloseDisc(wbfs_disc_t *disc)
 
 s32 Wbfs_Wbfs::Format()
 {
+    WBFS_PartInfo HDD_Inf;
+    HDD_Inf.wbfs_sector_size = hdd_sector_size;
+    HDD_Inf.hdd_sector_size = hdd_sector_size;
+    HDD_Inf.partition_lba = lba;
+    HDD_Inf.partition_num_sec = size;
+
     wbfs_t *partition = NULL;
 
     /* Reset partition */
-    partition = wbfs_open_partition(readCallback, writeCallback, NULL, 512, size, lba, 1);
+    partition = wbfs_open_partition(readCallback, writeCallback, &PartInfo, hdd_sector_size, size, lba, 1);
     if (!partition) return -1;
 
     /* Free memory */

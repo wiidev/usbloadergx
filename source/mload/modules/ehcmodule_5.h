@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-extern unsigned char ehcmodule_5[3352];
+extern unsigned char ehcmodule_5[25883];
 
 #define ehcmodule_5_size sizeof(ehcmodule_5)
 
