@@ -23,6 +23,7 @@
 #include "gecko.h"
 #include "xml/WiiTDB.hpp"
 #include "utils/ShowError.h"
+#include "BoxCover/BoxCover.hpp"
 
 /****************************************************************************
  * gameinfo
@@ -71,6 +72,7 @@ int showGameInfo(char *ID)
     int newline = 1;
     u8 page = 1;
 
+    BoxCover * boxCov = NULL;
     GuiImageData * playersImgData = NULL;
     GuiImage * playersImg = NULL;
 
@@ -101,7 +103,6 @@ int showGameInfo(char *ID)
     GuiImage * dialogBoxImg33 = NULL;
     GuiImage * dialogBoxImg44 = NULL;
     GuiImage * coverImg = NULL;
-    GuiImage * coverImg2 = NULL;
 
     GuiImageData * classiccontrollerImgData = NULL;
     GuiImageData * nunchukImgData = NULL;
@@ -168,9 +169,17 @@ int showGameInfo(char *ID)
     backBtn.SetTrigger(&trigB);
     gameinfoWindow.Append(&backBtn);
 
-    GuiButton nextBtn(0, 0);
-    nextBtn.SetPosition(20, 20);
-    nextBtn.SetTrigger(&trigA);
+    GuiTrigger trigA_Simple;
+    trigA_Simple.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+
+    GuiButton coverBtn(180, 250);
+    coverBtn.SetPosition(20, 20);
+    coverBtn.SetTrigger(&trigA_Simple);
+    gameinfoWindow.Append(&coverBtn);
+
+    GuiButton nextBtn(400, 300);
+    nextBtn.SetPosition(200, 20);
+    nextBtn.SetTrigger(&trigA_Simple);
     gameinfoWindow.Append(&nextBtn);
 
     //buttons for scrolling the synopsis
@@ -185,6 +194,7 @@ int showGameInfo(char *ID)
     GuiButton homeBtn(0, 0);
     homeBtn.SetPosition(0, 0);
     homeBtn.SetTrigger(&trigH);
+    gameinfoWindow.Append(&homeBtn);
 
     char linebuf2[100] = "";
 
@@ -308,21 +318,52 @@ int showGameInfo(char *ID)
     gameinfoWindow.Append(dialogBoxImg3);
     gameinfoWindow.Append(dialogBoxImg4);
 
+    bool loadFlatCover = false;
+    bool load3DCover = false;
     char imgPath[150];
-    snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, ID);
+    snprintf(imgPath, sizeof(imgPath), "%s/%s.png", Settings.coversFull_path, ID);
+    if(!CheckFile(imgPath))
+    {
+        loadFlatCover = true;
+        snprintf(imgPath, sizeof(imgPath), "%s/%s.png", Settings.covers2d_path, ID);
+    }
+    if(!CheckFile(imgPath))
+    {
+        loadFlatCover = false;
+        load3DCover = true;
+        snprintf(imgPath, sizeof(imgPath), "%s/%s.png", Settings.covers_path, ID);
+    }
     cover = new GuiImageData(imgPath); //load full id image
     if (!cover->GetImage())
     {
         delete cover;
-        cover = Resources::GetImageData("nocover.png");
+        cover = NULL;
     }
-    delete coverImg;
-    coverImg = NULL;
 
-    coverImg = new GuiImage(cover);
-    coverImg->SetWidescreen(Settings.widescreen);
-    coverImg->SetPosition(15, 30);
-    gameinfoWindow.Append(coverImg);
+    if(load3DCover && cover) //! No cover is always 3D box
+    {
+        coverImg = new GuiImage(cover);
+        coverImg->SetWidescreen(Settings.widescreen);
+        coverImg->SetPosition(15, 30);
+    }
+    else
+    {
+        boxCov = new BoxCover(cover, loadFlatCover);
+        boxCov->SetPosition(-1.75f, 0.4f, -5.0f);
+        boxCov->SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 40);
+
+        if(GameInfo.CaseColor == 0xFF0000)
+        {
+            boxCov->SetBoxColor((GXColor) { 198, 34, 4, 255 });
+        }
+        else if(GameInfo.CaseColor >= 0)
+        {
+            u8 * Color = (u8 *) &GameInfo.CaseColor;
+            boxCov->SetBoxColor((GXColor) { Color[1], Color[2], Color[3], 255 });
+        }
+
+        gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 100);
+    }
 
     // # of players
     if (GameInfo.Players > 0)
@@ -370,8 +411,7 @@ int showGameInfo(char *ID)
         classiccontrollerImg->SetPosition(intputX, inputY);
         classiccontrollerImg->SetAlignment(0, 4);
         gameinfoWindow.Append(classiccontrollerImg);
-        intputX += (Settings.widescreen ? classiccontrollerImg->GetWidth() * .8 : classiccontrollerImg->GetWidth())
-                + 5;
+        intputX += (Settings.widescreen ? classiccontrollerImg->GetWidth() * .8 : classiccontrollerImg->GetWidth()) + 5;
     }
     if (gamecube == 1)
     {
@@ -760,10 +800,6 @@ int showGameInfo(char *ID)
         txtWindow.Append(synopsisTxt);
         txtWindow.Append(&upBtn);
         txtWindow.Append(&dnBtn);
-        coverImg2 = new GuiImage(cover);
-        coverImg2->SetWidescreen(Settings.widescreen);
-        coverImg2->SetPosition(15, 30);
-        gameinfoWindow2.Append(coverImg2);
         gameinfoWindow2.Append(&txtWindow);
     }
 
@@ -771,12 +807,12 @@ int showGameInfo(char *ID)
     wiitdb1Txt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
     wiitdb1Txt->SetPosition(40, -15);
     gameinfoWindow.Append(wiitdb1Txt);
-
-    gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 100);
+    if(coverImg) gameinfoWindow.Append(coverImg);
 
     HaltGui();
     //mainWindow->SetState(STATE_DISABLED);
     mainWindow->Append(&gameinfoWindow);
+    if(boxCov) mainWindow->Append(boxCov);
     mainWindow->ChangeFocus(&gameinfoWindow);
     ResumeGui();
 
@@ -808,15 +844,54 @@ int showGameInfo(char *ID)
                 gameinfoWindow2.Remove(&nextBtn);
                 gameinfoWindow2.Remove(&backBtn);
                 gameinfoWindow2.Remove(&homeBtn);
+                gameinfoWindow2.Remove(&coverBtn);
+                gameinfoWindow2.Remove(coverImg);
                 gameinfoWindow2.SetVisible(false);
                 gameinfoWindow.SetVisible(true);
                 gameinfoWindow.Append(&backBtn);
                 gameinfoWindow.Append(&nextBtn);
                 gameinfoWindow.Append(&homeBtn);
+                gameinfoWindow.Append(&coverBtn);
+                gameinfoWindow.Append(coverImg);
                 mainWindow->Remove(&gameinfoWindow2);
                 ResumeGui();
                 page = 1;
             }
+        }
+        else if(coverBtn.GetState() == STATE_CLICKED && boxCov)
+        {
+            coverBtn.ResetState();
+            boxCov->SetEffect(EFFECT_BOX_FLY_CENTRE, 100);
+            gameinfoWindow2.Remove(&nextBtn);
+            gameinfoWindow2.Remove(&homeBtn);
+            gameinfoWindow.Remove(&nextBtn);
+            gameinfoWindow.Remove(&homeBtn);
+            boxCov->SetZoomable(true);
+
+            while(backBtn.GetState() != STATE_CLICKED && homeBtn.GetState() != STATE_CLICKED)
+            {
+                usleep(100);
+                if (shutdown)
+                    Sys_Shutdown();
+                else if (reset)
+                    Sys_Reboot();
+            }
+
+            if (page == 1)
+            {
+                gameinfoWindow.Append(&nextBtn);
+                gameinfoWindow.Append(&homeBtn);
+            }
+            else
+            {
+                gameinfoWindow2.Append(&nextBtn);
+                gameinfoWindow2.Append(&homeBtn);
+            }
+
+            boxCov->SetZoomable(false);
+            backBtn.ResetState();
+            boxCov->SetEffect(EFFECT_BOX_FLY_BACK, 100);
+
         }
         else if (((nextBtn.GetState() == STATE_CLICKED) || (nextBtn.GetState() == STATE_HELD)) && GameInfo.Synopsis.size() > 0)
         {
@@ -828,12 +903,17 @@ int showGameInfo(char *ID)
                 gameinfoWindow.Remove(&nextBtn);
                 gameinfoWindow.Remove(&backBtn);
                 gameinfoWindow.Remove(&homeBtn);
+                gameinfoWindow.Remove(&coverBtn);
+                gameinfoWindow.Remove(wiitdb1Txt);
+                gameinfoWindow.Remove(coverImg);
                 gameinfoWindow.SetVisible(false);
                 gameinfoWindow2.SetVisible(true);
-                coverImg->SetPosition(15, 30);
                 gameinfoWindow2.Append(&nextBtn);
                 gameinfoWindow2.Append(&backBtn);
                 gameinfoWindow2.Append(&homeBtn);
+                gameinfoWindow2.Append(&coverBtn);
+                gameinfoWindow2.Append(wiitdb1Txt);
+                gameinfoWindow2.Append(coverImg);
                 mainWindow->Append(&gameinfoWindow2);
                 ResumeGui();
                 page = 2;
@@ -844,11 +924,17 @@ int showGameInfo(char *ID)
                 gameinfoWindow2.Remove(&nextBtn);
                 gameinfoWindow2.Remove(&backBtn);
                 gameinfoWindow2.Remove(&homeBtn);
+                gameinfoWindow2.Remove(&coverBtn);
+                gameinfoWindow2.Remove(wiitdb1Txt);
+                gameinfoWindow2.Remove(coverImg);
                 gameinfoWindow2.SetVisible(false);
                 gameinfoWindow.SetVisible(true);
                 gameinfoWindow.Append(&backBtn);
                 gameinfoWindow.Append(&nextBtn);
                 gameinfoWindow.Append(&homeBtn);
+                gameinfoWindow.Append(&coverBtn);
+                gameinfoWindow.Append(wiitdb1Txt);
+                gameinfoWindow.Append(coverImg);
                 mainWindow->Remove(&gameinfoWindow2);
                 ResumeGui();
                 page = 1;
@@ -891,13 +977,18 @@ int showGameInfo(char *ID)
         }
     }
 
+    HaltGui();
     gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 100);
-    while (gameinfoWindow.GetEffect() > 0)
-        usleep(100);
+    if(boxCov) boxCov->SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 60);
+    ResumeGui();
+
+    while (gameinfoWindow.GetEffect() > 0) usleep(100);
     HaltGui();
     mainWindow->Remove(&gameinfoWindow);
+    if(boxCov) mainWindow->Remove(boxCov);
     mainWindow->SetState(STATE_DEFAULT);
 
+    delete boxCov;
     delete playersImgData;
     delete playersImg;
 
@@ -927,7 +1018,6 @@ int showGameInfo(char *ID)
     delete dialogBoxImg33;
     delete dialogBoxImg44;
     delete coverImg;
-    delete coverImg2;
     delete classiccontrollerImgData;
     delete nunchukImgData;
     delete guitarImgData;

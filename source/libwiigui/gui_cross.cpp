@@ -30,23 +30,12 @@ void GuiCross::Draw()
     f32 y1 = GetTop();
     f32 y2 = y1 + height;
 
-    GX_Begin(GX_TRIANGLEFAN, GX_VTXFMT0, 4);
+    GX_Begin(GX_LINES, GX_VTXFMT0, 4);
     GX_Position3f32(x1, y1, 0.0f);
-    GX_Color4u8(color.r, color.g, color.b, color.a);
-    GX_Position3f32(x1-Linewidth, y1+Linewidth, 0.0f);
-    GX_Color4u8(color.r, color.g, color.b, color.a);
-    GX_Position3f32(x2-Linewidth, y2+Linewidth, 0.0f);
     GX_Color4u8(color.r, color.g, color.b, color.a);
     GX_Position3f32(x2, y2, 0.0f);
     GX_Color4u8(color.r, color.g, color.b, color.a);
-    GX_End();
-
-    GX_Begin(GX_TRIANGLEFAN, GX_VTXFMT0, 4);
     GX_Position3f32(x2, y1, 0.0f);
-    GX_Color4u8(color.r, color.g, color.b, color.a);
-    GX_Position3f32(x2+Linewidth, y1+Linewidth, 0.0f);
-    GX_Color4u8(color.r, color.g, color.b, color.a);
-    GX_Position3f32(x1+Linewidth, y2+Linewidth, 0.0f);
     GX_Color4u8(color.r, color.g, color.b, color.a);
     GX_Position3f32(x1, y2, 0.0f);
     GX_Color4u8(color.r, color.g, color.b, color.a);

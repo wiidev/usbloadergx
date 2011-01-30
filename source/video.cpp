@@ -25,6 +25,7 @@ static int whichfb = 0; // Switch
 static GXRModeObj *vmode; // Menu video mode
 static unsigned char gp_fifo[DEFAULT_FIFO_SIZE] ATTRIBUTE_ALIGN ( 32 );
 static Mtx GXmodelView2D;
+static Mtx44 projection;
 int screenheight;
 int screenwidth;
 u32 frameCount = 0;
@@ -39,7 +40,6 @@ u8 * gameScreenTex2 = NULL; // a GX texture screen capture of the game (copy)
  ****************************************************************************/
 void ResetVideo_Menu()
 {
-    Mtx44 p;
     f32 yscale;
     u32 xfbHeight;
 
@@ -65,7 +65,8 @@ void ResetVideo_Menu()
 
     if (vmode->aa)
         GX_SetPixelFmt(GX_PF_RGB565_Z16, GX_ZC_LINEAR);
-    else GX_SetPixelFmt(GX_PF_RGB8_Z24, GX_ZC_LINEAR);
+    else
+        GX_SetPixelFmt(GX_PF_RGB8_Z24, GX_ZC_LINEAR);
 
     // setup the vertex descriptor
     // tells the flipper to expect direct data
@@ -92,10 +93,10 @@ void ResetVideo_Menu()
     guMtxTransApply(GXmodelView2D, GXmodelView2D, 0.0F, 0.0F, -200.0F);
     GX_LoadPosMtxImm(GXmodelView2D, GX_PNMTX0);
 
-    guOrtho(p, 0, 479, 0, 639, 0, 300);
-    GX_LoadProjectionMtx(p, GX_ORTHOGRAPHIC);
+    guOrtho(projection, 0, 479, 0, 639, 0, 300);
+    GX_LoadProjectionMtx(projection, GX_ORTHOGRAPHIC);
 
-    GX_SetViewport(0, 0, vmode->fbWidth, vmode->efbHeight, 0, 1);
+    GX_SetViewport(0.0f, 0.0f, vmode->fbWidth, vmode->efbHeight, 0.0f, 1.0f);
     GX_SetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_CLEAR);
     GX_SetAlphaUpdate(GX_TRUE);
 }
@@ -211,6 +212,8 @@ void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, u8 data[]
 {
     if (data == NULL) return;
 
+	GX_LoadProjectionMtx(projection, GX_ORTHOGRAPHIC);
+
     GXTexObj texObj;
 
     GX_InitTexObj(&texObj, data, width, height, GX_TF_RGBA8, GX_CLAMP, GX_CLAMP, GX_FALSE);
@@ -271,6 +274,8 @@ void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, u8 data[]
  ***************************************************************************/
 void Menu_DrawRectangle(f32 x, f32 y, f32 width, f32 height, GXColor color, u8 filled)
 {
+	GX_LoadProjectionMtx(projection, GX_ORTHOGRAPHIC);
+
     u8 fmt;
     long n;
     int i;
@@ -302,6 +307,8 @@ void Menu_DrawDiskCover(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16
         f32 deg_beta, f32 scaleX, f32 scaleY, u8 alpha, bool shadow)
 {
     if (data == NULL) return;
+
+	GX_LoadProjectionMtx(projection, GX_ORTHOGRAPHIC);
 
     GXTexObj texObj;
 
@@ -397,6 +404,8 @@ void Menu_DrawDiskCover(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16
 void Menu_DrawTPLImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, GXTexObj *texObj, f32 degrees, f32 scaleX,
         f32 scaleY, u8 alpha, int XX1, int YY1, int XX2, int YY2, int XX3, int YY3, int XX4, int YY4)
 {
+	GX_LoadProjectionMtx(projection, GX_ORTHOGRAPHIC);
+
     GX_LoadTexObj(texObj, GX_TEXMAP0);
     GX_InvalidateTexAll();
 

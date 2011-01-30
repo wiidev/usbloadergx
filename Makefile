@@ -36,6 +36,7 @@ SOURCES		:=	source \
 				source/prompts \
 				source/wad \
 				source/banner \
+				source/BoxCover \
 				source/cheats \
 				source/homebrewboot \
 				source/themes \

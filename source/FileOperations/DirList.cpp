@@ -29,7 +29,8 @@
 #include <string.h>
 #include <string>
 #include <algorithm>
-#include <sys/dir.h>
+#include <sys/stat.h>
+#include <sys/dirent.h>
 
 #include "utils/StringTools.h"
 #include "DirList.h"
@@ -51,7 +52,8 @@ bool DirList::LoadPath(const char * folder, const char *filter, u32 flags)
         return false;
 
     struct stat st;
-    DIR_ITER *dir = NULL;
+    struct dirent *dirent = NULL;
+    DIR *dir = NULL;
 	std::string folderpath = folder;
 
 	if(folderpath[folderpath.size()-1] == '/')
@@ -61,19 +63,26 @@ bool DirList::LoadPath(const char * folder, const char *filter, u32 flags)
 	if(!notRoot)
 	    folderpath += '/';
 
-    dir = diropen(folderpath.c_str());
+    dir = opendir(folderpath.c_str());
     if (dir == NULL)
         return false;
 
     char * filename = new (std::nothrow) char[1024];
     if(!filename)
     {
-        dirclose(dir);
+        closedir(dir);
         return false;
     }
 
-    while (dirnext(dir,filename,&st) == 0)
+    while ((dirent = readdir(dir)) != 0)
     {
+        snprintf(filename, 1024, "%s/%s", folderpath.c_str(), dirent->d_name);
+
+        if(stat(filename, &st) != 0)
+            continue;
+
+        snprintf(filename, 1024, dirent->d_name);
+
         if(st.st_mode & S_IFDIR)
         {
             if(!(flags & Dirs))
@@ -110,7 +119,7 @@ bool DirList::LoadPath(const char * folder, const char *filter, u32 flags)
             AddEntrie(folderpath.c_str(), filename, st.st_size, (st.st_mode & S_IFDIR) ? true : false);
         }
     }
-    dirclose(dir);
+    closedir(dir);
     delete [] filename;
 
     return true;

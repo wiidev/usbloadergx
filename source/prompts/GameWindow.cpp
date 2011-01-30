@@ -580,7 +580,7 @@ int GameWindow::MainLoop()
     {
         if(FavoriteBtn[i]->GetState() == STATE_CLICKED)
         {
-		struct discHdr * header = (mountMethod ? dvdheader : gameList[gameSelected]);
+            struct discHdr * header = (mountMethod ? dvdheader : gameList[gameSelected]);
             int FavoriteRank = (i+1 == GameStatistics.GetFavoriteRank(header->id)) ? 0 : i+1; // Press the current rank to reset the rank
 
             GameStatistics.SetFavoriteRank(header->id, FavoriteRank);

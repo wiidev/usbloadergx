@@ -28,12 +28,21 @@ GuiCircle::GuiCircle()
 {
 
     color = (GXColor) {0, 0, 0, 255};
+    SetLinewidth(1.0f);
 }
 
 GuiCircle::GuiCircle(float r)
     : radius(r), filled(true), accuracy(36)
 {
     color = (GXColor) {0, 0, 0, 255};
+    SetLinewidth(1.0f);
+}
+
+void GuiCircle::SetLinewidth(float s)
+{
+    LOCK(this);
+    Linewidth = s;
+    GX_SetLineWidth((u8) (s*6.0f), 0);
 }
 
 void GuiCircle::Draw()

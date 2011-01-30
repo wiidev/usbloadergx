@@ -318,16 +318,22 @@ int GameLoadSM::GetMenuInternal()
     //! Settings: Select DOL Offset from Game
     else if (ret == ++Idx && GameConfig.loadalternatedol == 1)
     {
+        GuiWindow * parentWindow = (GuiWindow *) parentElement;
+        if(parentWindow) parentWindow->SetState(STATE_DISABLED);
         //alt dol menu for games that require more than a single alt dol
         int autodol = autoSelectDolPrompt((char *) GameConfig.id);
         if(autodol == 0)
+        {
+            if(parentWindow) parentWindow->SetState(STATE_DEFAULT);
             return MENU_NONE; //Cancel Button pressed
+        }
 
         if (autodol > 0)
         {
             GameConfig.alternatedolstart = autodol;
             snprintf(GameConfig.alternatedolname, sizeof(GameConfig.alternatedolname), "%s <%i>", tr( "AUTO" ), autodol);
             SetOptionValues();
+            if(parentWindow) parentWindow->SetState(STATE_DEFAULT);
             return MENU_NONE;
         }
 
@@ -342,6 +348,7 @@ int GameLoadSM::GetMenuInternal()
 
         if(GameConfig.alternatedolstart == 0)
             GameConfig.loadalternatedol = 0;
+        if(parentWindow) parentWindow->SetState(STATE_DEFAULT);
     }
 
     //! Settings: Block IOS Reload

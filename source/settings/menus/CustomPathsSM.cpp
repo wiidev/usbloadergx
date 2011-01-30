@@ -36,6 +36,7 @@ CustomPathsSM::CustomPathsSM()
     int Idx = 0;
     Options->SetName(Idx++, tr("3D Cover Path"));
     Options->SetName(Idx++, tr("2D Cover Path"));
+    Options->SetName(Idx++, tr("Full Cover Path"));
     Options->SetName(Idx++, tr("Disc Artwork Path"));
     Options->SetName(Idx++, tr("Theme Path"));
     Options->SetName(Idx++, tr("WiiTDB Path"));
@@ -61,6 +62,9 @@ void CustomPathsSM::SetOptionValues()
 
     //! Settings: 2D Cover Path
     Options->SetValue(Idx++, Settings.covers2d_path);
+
+    //! Settings: Full Cover Path
+    Options->SetValue(Idx++, Settings.coversFull_path);
 
     //! Settings: Disc Artwork Path
     Options->SetValue(Idx++, Settings.disc_path);
@@ -120,6 +124,13 @@ int CustomPathsSM::GetMenuInternal()
     {
         titleTxt->SetText(tr( "2D Cover Path" ));
         ChangePath(Settings.covers2d_path, sizeof(Settings.covers2d_path));
+    }
+
+    //! Settings: Full Cover Path
+    else if (ret == ++Idx)
+    {
+        titleTxt->SetText(tr( "Full Cover Path" ));
+        ChangePath(Settings.coversFull_path, sizeof(Settings.coversFull_path));
     }
 
     //! Settings: Disc Artwork Path

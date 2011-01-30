@@ -10,9 +10,12 @@
 #include "language/gettext.h"
 #include "usbloader/GetMissingGameFiles.hpp"
 #include "utils/StringTools.h"
+#include "gecko.h"
 
 #define VALID_IMAGE(x) (!(x.size == 36864 || x.size <= 1024 || x.size == 7386 || x.size <= 1174 || x.size == 4446 || x.data == NULL))
 
+const char * serverURLFull = "http://wiitdb.com/wiitdb/artwork/coverfull/";
+const char * serverURLFullHQ = "http://wiitdb.com/wiitdb/artwork/coverfullHQ/";
 const char * serverURL3D = "http://wiitdb.com/wiitdb/artwork/cover3D/";
 const char * serverURL2D = "http://wiitdb.com/wiitdb/artwork/cover/";
 const char * serverURLOrigDiscs = "http://wiitdb.com/wiitdb/artwork/disc/";
@@ -175,7 +178,10 @@ static int CoverDownloader(const char * downloadURL, const char *writepath, cons
     }
 
     if (!IsNetworkInit() && !NetworkInitPrompt())
+    {
+        gprintf("No network\n");
         return -1;
+    }
 
     if(!skipPrompt)
     {
@@ -188,18 +194,23 @@ static int CoverDownloader(const char * downloadURL, const char *writepath, cons
 
     AbortRequested = false;
 
+    gprintf("CoverDownloadWithProgress - downloadURL: %s progressTitle: %s writepath: %s MissingFiles: %i\n", downloadURL, progressTitle, writepath, MissingFilesList.size());
+
     return CoverDownloadWithProgress(downloadURL, progressTitle, writepath, MissingFilesList);
 }
 
 void CoverDownload()
 {
-    int choice = CheckboxWindow(tr( "Cover Download" ), 0, tr( "3D Covers" ), tr( "Flat Covers" ), tr( "Original Disc Images" ), tr( "Custom Disc Images" )); // ask for download choice
+    int choice = CheckboxWindow(tr( "Cover Download" ), 0, tr( "3D Covers" ), tr( "Flat Covers" ), tr("Full HQ Covers"), tr("Full LQ Covers"), tr( "Original Discarts" ), tr( "Custom Discarts" )); // ask for download choice
     if (choice == 0)
         return;
 
     bool skipPrompt = false;
     int FileSkipped = 0;
+    int SkippedFull = 0;
     int SkippedDiscArts = 0;
+
+    gprintf("CoverDownload start - choices: %04X\n", choice);
 
     if(choice & CheckedBox1)
     {
@@ -217,6 +228,20 @@ void CoverDownload()
     }
     if(choice & CheckedBox3)
     {
+        int ret = CoverDownloader(serverURLFullHQ, Settings.coversFull_path, tr("Downloading Full HQ Covers"), tr("Download Boxart image?"), skipPrompt);
+		if(ret > 0)
+			SkippedFull = ret;
+        skipPrompt = true;
+    }
+    if(choice & CheckedBox4)
+    {
+        int ret = CoverDownloader(serverURLFull, Settings.coversFull_path, tr("Downloading Full LQ Covers"), tr("Download Boxart image?"), skipPrompt);
+		if(ret > 0)
+			SkippedFull = ret;
+        skipPrompt = true;
+    }
+    if(choice & CheckedBox5)
+    {
         skipPrompt = true;
         const char * downloadURL = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS) ? serverURLOrigDiscs : serverURLCustomDiscs;
         const char * progressTitle = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS) ? tr("Downloading original Discarts") : tr("Downloading custom Discarts");
@@ -224,7 +249,7 @@ void CoverDownload()
 		if(ret > 0)
 			SkippedDiscArts = ret;
 	}
-    if(choice & CheckedBox4)
+    if(choice & CheckedBox6)
     {
         skipPrompt = true;
         const char * downloadURL = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS) ? serverURLCustomDiscs : serverURLOrigDiscs;
@@ -234,7 +259,7 @@ void CoverDownload()
 			SkippedDiscArts = ret;
     }
 
-    FileSkipped += SkippedDiscArts;
+    FileSkipped += SkippedDiscArts+SkippedFull;
 
     if (FileSkipped == 0)
     {

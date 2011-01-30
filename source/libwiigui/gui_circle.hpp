@@ -32,13 +32,16 @@ class GuiCircle : public GuiElement
         GuiCircle();
         GuiCircle(float radius);
         void SetRadius(float r) { LOCK(this); radius = r; }
+        void SetInnerRadius(float r) { SetLinewidth((radius-r)*2.0f); }
         void SetColor(const GXColor c) { LOCK(this); color = c; }
         void SetAccuracy(int a) { LOCK(this); accuracy = a; }
         void SetFilled(bool f) { LOCK(this); filled = f; }
+        void SetLinewidth(float s);
         void Draw();
     protected:
         GXColor color;
         float radius;
+        float Linewidth;
         bool filled;
         int accuracy;
 };

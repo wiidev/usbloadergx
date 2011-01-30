@@ -688,7 +688,7 @@ int WindowExitPrompt()
     GuiButton btn1(&btn1Img, &btn1OverImg, 0, 3, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 0);
     btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 
-    GuiText btn2Txt(tr( "Homebrew Channel" ), 28, ( GXColor ) {0, 0, 0, 255});
+    GuiText btn2Txt(tr( "Homebrew Channel" ), 26, ( GXColor ) {0, 0, 0, 255});
     if (Settings.HomeMenu == HOME_MENU_SYSTEM)
     {
         btn2Txt.SetText(tr( "Wii Menu" ));
@@ -709,7 +709,7 @@ int WindowExitPrompt()
     btn2.SetRumble(false);
     btn2.SetPosition(-150, 0);
 
-    GuiText btn3Txt(tr( "Wii Menu" ), 28, ( GXColor ) {0, 0, 0, 255});
+    GuiText btn3Txt(tr( "Wii Menu" ), 26, ( GXColor ) {0, 0, 0, 255});
     if (Settings.HomeMenu == HOME_MENU_SYSTEM)
     {
        btn3Txt.SetText(tr( "Reset" ));

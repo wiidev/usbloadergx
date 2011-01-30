@@ -56,6 +56,7 @@ void CSettings::SetDefault()
 {
     snprintf(covers_path, sizeof(covers_path), "%simages/", ConfigPath);
     snprintf(covers2d_path, sizeof(covers2d_path), "%simages/2D/", ConfigPath);
+    snprintf(coversFull_path, sizeof(coversFull_path), "%simages/full/", ConfigPath);
     snprintf(disc_path, sizeof(disc_path), "%simages/disc/", ConfigPath);
     snprintf(titlestxt_path, sizeof(titlestxt_path), "%s", ConfigPath);
     snprintf(languagefiles_path, sizeof(languagefiles_path), "%slanguage/", ConfigPath);
@@ -217,6 +218,7 @@ bool CSettings::Save()
     fprintf(file, "parentalcontrol = %d\n ", parentalcontrol);
     fprintf(file, "covers_path = %s\n ", covers_path);
     fprintf(file, "covers2d_path = %s\n ", covers2d_path);
+    fprintf(file, "coversFull_path = %s\n ", coversFull_path);
     fprintf(file, "theme_path = %s\n ", theme_path);
     fprintf(file, "theme = %s\n ", theme);
     fprintf(file, "disc_path = %s\n ", disc_path);
@@ -513,6 +515,11 @@ bool CSettings::SetSetting(char *name, char *value)
     else if (strcmp(name, "covers2d_path") == 0)
     {
         strcpy(covers2d_path, value);
+        return true;
+    }
+    else if (strcmp(name, "coversFull_path") == 0)
+    {
+        strcpy(coversFull_path, value);
         return true;
     }
     else if (strcmp(name, "theme_path") == 0)

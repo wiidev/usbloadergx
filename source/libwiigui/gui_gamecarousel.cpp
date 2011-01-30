@@ -265,7 +265,7 @@ void GuiGameCarousel::Draw()
 void GuiGameCarousel::Update(GuiTrigger * t)
 {
     LOCK( this );
-    if (state == STATE_DISABLED || !t || !gameList.size()) return;
+    if (state == STATE_DISABLED || !t || !gameList.size() || !pagesize) return;
 
     btnRight->Update(t);
     btnLeft->Update(t);

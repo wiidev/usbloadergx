@@ -59,7 +59,7 @@ CheckboxPrompt::~CheckboxPrompt()
 void CheckboxPrompt::AddCheckBox(const char *text)
 {
     int size = Checkbox.size();
-    if(size > 3)
+    if(size > 5)
         return;
 
     CheckboxTxt.resize(size+1);
@@ -67,7 +67,7 @@ void CheckboxPrompt::AddCheckBox(const char *text)
 
     CheckboxTxt[size] = new GuiText(text, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     CheckboxTxt[size]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-    CheckboxTxt[size]->SetPosition(40, 0);
+    CheckboxTxt[size]->SetPosition(30, 0);
 
     Checkbox[size] = new GuiCheckbox(24, 24);
     Checkbox[size]->SetLabel(CheckboxTxt[size]);
@@ -81,22 +81,32 @@ void CheckboxPrompt::AddCheckBox(const char *text)
         if(size == 0)
         {
             Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(80, -170);
+            Checkbox[size]->SetPosition(80, -190);
         }
         else if(size == 1)
         {
             Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(80, -115);
+            Checkbox[size]->SetPosition(80, -150);
         }
         else if(size == 2)
         {
-            Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(-210, -170);
+            Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            Checkbox[size]->SetPosition(80, -110);
         }
         else if(size == 3)
         {
             Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(-210, -115);
+            Checkbox[size]->SetPosition(-210, -190);
+        }
+        else if(size == 4)
+        {
+            Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            Checkbox[size]->SetPosition(-210, -150);
+        }
+        else if(size == 5)
+        {
+            Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            Checkbox[size]->SetPosition(-210, -110);
         }
     }
     else
@@ -104,22 +114,32 @@ void CheckboxPrompt::AddCheckBox(const char *text)
         if(size == 0)
         {
             Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(40, -170);
+            Checkbox[size]->SetPosition(40, -190);
         }
         else if(size == 1)
         {
             Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(40, -115);
+            Checkbox[size]->SetPosition(40, -150);
         }
         else if(size == 2)
         {
-            Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(-210, -170);
+            Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            Checkbox[size]->SetPosition(40, -110);
         }
         else if(size == 3)
         {
             Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(-210, -115);
+            Checkbox[size]->SetPosition(-210, -190);
+        }
+        else if(size == 4)
+        {
+            Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            Checkbox[size]->SetPosition(-210, -150);
+        }
+        else if(size == 5)
+        {
+            Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            Checkbox[size]->SetPosition(-210, -110);
         }
     }
 }
@@ -149,7 +169,10 @@ int CheckboxPrompt::GetChoice()
 }
 
 
-int CheckboxPrompt::Show(const char *title, const char *msg, const char *chbx1, const char *chbx2, const char *chbx3, const char *chbx4)
+int CheckboxPrompt::Show(const char *title, const char *msg,
+                         const char *chbx1, const char *chbx2,
+                         const char *chbx3, const char *chbx4,
+                         const char *chbx5, const char *chbx6)
 {
     CheckboxPrompt * Window = new CheckboxPrompt(title, msg);
     if(chbx1)
@@ -160,6 +183,10 @@ int CheckboxPrompt::Show(const char *title, const char *msg, const char *chbx1, 
         Window->AddCheckBox(chbx3);
     if(chbx4)
         Window->AddCheckBox(chbx4);
+    if(chbx5)
+        Window->AddCheckBox(chbx5);
+    if(chbx6)
+        Window->AddCheckBox(chbx6);
 
     mainWindow->SetState(STATE_DISABLED);
     mainWindow->Append(Window);

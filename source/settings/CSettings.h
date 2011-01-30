@@ -55,6 +55,7 @@ class CSettings
         char returnTo[20];
         char ConfigPath[80];
         char covers_path[100];
+        char coversFull_path[100];
         char covers2d_path[100];
         char theme_path[100];
         char theme[100];

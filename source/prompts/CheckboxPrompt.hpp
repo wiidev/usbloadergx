@@ -33,6 +33,8 @@ enum
     CheckedBox2 = 0x02,
     CheckedBox3 = 0x04,
     CheckedBox4 = 0x08,
+    CheckedBox5 = 0x10,
+    CheckedBox6 = 0x20,
 };
 
 class CheckboxPrompt : private PromptWindow
@@ -47,7 +49,10 @@ class CheckboxPrompt : private PromptWindow
         //! Default function to get the button pressed
         int GetChoice();
         //! Show window and wait for the user to press OK/Cancel
-        static int Show(const char *title = 0, const char *msg = 0, const char *chbx1 = 0, const char *chbx2 = 0, const char *chbx3 = 0, const char *chbx4 = 0);
+        static int Show(const char *title = 0, const char *msg = 0,
+                        const char *chbx1 = 0, const char *chbx2 = 0,
+                        const char *chbx3 = 0, const char *chbx4 = 0,
+                        const char *chbx5 = 0, const char *chbx6 = 0);
     protected:
         std::vector<GuiText *> CheckboxTxt;
         std::vector<GuiCheckbox *> Checkbox;
