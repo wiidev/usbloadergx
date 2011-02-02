@@ -10,10 +10,7 @@ class Wbfs_Ntfs: public Wbfs_Fat
             Wbfs_Fat(device, lba, size)
         {
         }
-
-        virtual s32 Open();
-
-        bool ShowFreeSpace(void) { return true; };
+        virtual const u8 GetFSType(void) const { return PART_FS_NTFS; }
 };
 
 #endif //_WBFS_NTFS_H

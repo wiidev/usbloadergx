@@ -47,7 +47,7 @@ static int FindGamePartition()
 
         u32 count;
         // Get the game count...
-        WBFS_GetCount(&count);
+        WBFS_GetCount(i, &count);
 
         if (count > 0)
         {
@@ -55,7 +55,7 @@ static int FindGamePartition()
             return 0;
         }
 
-        WBFS_Close();
+        WBFS_Close(i);
     }
 
     return -1;
@@ -119,7 +119,12 @@ int MountGamePartition(bool ShowGUI)
         Sys_LoadMenu();
     }
 
-    s32 ret = WBFS_OpenPart(Settings.partition);
+    s32 ret = -1;
+
+    if(Settings.MultiplePartitions)
+        ret = WBFS_OpenAll();
+    else
+        WBFS_OpenPart(Settings.partition);
     if(ret < 0)
         ret = FindGamePartition();
 
@@ -138,7 +143,7 @@ int MountGamePartition(bool ShowGUI)
         Sys_LoadMenu();
     }
 
-    gprintf("\tOpenXMLDatabase\n");
+    gprintf("LoadTitlesFromWiiTDB\n");
 
     GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
 

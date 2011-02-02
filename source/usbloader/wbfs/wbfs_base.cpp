@@ -7,26 +7,14 @@
 #include "Controls/DeviceHandler.hpp"
 #include "usbloader/sdhc.h"
 #include "usbloader/usbstorage2.h"
+#include "usbloader/wbfs.h"
 #include "wbfs_rw.h"
 
 #include "wbfs_base.h"
 
-s32 Wbfs::done = -1;
-s32 Wbfs::total = -1;
-u32 Wbfs::nb_sectors;
-
-Wbfs::Wbfs(u32 device, u32 lba, u32 size) :
-    hdd(NULL)
+Wbfs::Wbfs(u32 dev, u32 l, u32 s)
+    : hdd(NULL), device(dev), lba(l), size(s)
 {
-    this->device = device;
-    this->lba = lba;
-    this->size = size;
-}
-
-void Wbfs::GetProgressValue(s32 * d, s32 * m)
-{
-    *d = done;
-    *m = total;
 }
 
 s32 Wbfs::Init(u32 device)
@@ -58,9 +46,6 @@ s32 Wbfs::Init(u32 device)
                 /* Setup callbacks */
                 readCallback = __ReadSDHC;
                 writeCallback = __WriteSDHC;
-
-                /* Device info */
-                nb_sectors = 0;
             }
             else return -1;
             break;
@@ -112,11 +97,6 @@ s32 Wbfs::GameSize(u8 *discid, f32 *size)
     CloseDisc(disc);
 
     return 0;
-}
-
-wbfs_t *Wbfs::GetHddInfo()
-{
-    return hdd;
 }
 
 bool Wbfs::ShowFreeSpace(void)

@@ -4,7 +4,7 @@
  *
  * Backgroundmusic
  ***************************************************************************/
-#include <sys/dir.h>
+#include <sys/dirent.h>
 #include "themes/CTheme.h"
 #include "gui_bgm.h"
 #include "menu.h"
@@ -87,9 +87,9 @@ bool GuiBGM::ParsePath(const char * folderpath)
     char * LoadedFilename = strrchr(folderpath, '/') + 1;
 
     char filename[1024];
-    struct stat st;
+	struct dirent * dirent = NULL;
 
-    DIR_ITER * dir = diropen(currentPath);
+    DIR * dir = opendir(currentPath);
     if (dir == NULL)
     {
         LoadStandard();
@@ -97,24 +97,27 @@ bool GuiBGM::ParsePath(const char * folderpath)
     }
     u32 counter = 0;
 
-    while (dirnext(dir, filename, &st) == 0)
+    while ((dirent = readdir(dir)) != 0)
     {
+        snprintf(filename, sizeof(filename), dirent->d_name);
+
         char * fileext = strrchr(filename, '.');
-        if (fileext)
+        if (!fileext)
+            continue;
+
+        if (strcasecmp(fileext, ".mp3") == 0 || strcasecmp(fileext, ".ogg") == 0 ||
+            strcasecmp(fileext, ".wav") == 0 || strcasecmp(fileext, ".aif") == 0)
         {
-            if (strcasecmp(fileext, ".mp3") == 0 || strcasecmp(fileext, ".ogg") == 0 || strcasecmp(fileext, ".wav")
-                    == 0)
-            {
-                AddEntrie(filename);
+            AddEntrie(filename);
 
-                if (strcmp(LoadedFilename, filename) == 0) currentPlaying = counter;
+            if (strcmp(LoadedFilename, filename) == 0) currentPlaying = counter;
 
-                counter++;
-            }
+            counter++;
         }
+
     }
 
-    dirclose(dir);
+    closedir(dir);
 
     snprintf(Settings.ogg_path, sizeof(Settings.ogg_path), "%s", folderpath);
 

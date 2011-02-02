@@ -31,19 +31,16 @@ class Wbfs_Fat: public Wbfs
 
         u64 EstimateGameSize();
 
-        int GetFragList(u8 *);
+        virtual int GetFragList(u8 *);
         virtual bool ShowFreeSpace(void);
+        virtual const u8 GetFSType(void) const { return PART_FS_FAT; }
 
     protected:
-        static char wbfs_fs_drive[16];
-    private:
         split_info_t split;
 
-        static u32 fat_sector_size;
-        static char wbfs_fat_dir[16];
-        static char invalid_path[];
-        static struct discHdr *fat_hdr_list;
-        static u32 fat_hdr_count;
+        struct discHdr *fat_hdr_list;
+        u32 fat_hdr_count;
+        char wbfs_fs_drive[16];
 
         wbfs_t* OpenPart(char *fname);
         void ClosePart(wbfs_t* part);

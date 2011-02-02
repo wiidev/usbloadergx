@@ -31,7 +31,6 @@
 u32 AppEntrypoint = 0;
 
 struct discHdr *dvdheader = NULL;
-extern int wbfs_part_fs;
 extern u32 hdd_sector_size;
 extern int mountMethod;
 
@@ -103,8 +102,6 @@ int GameBooter::FindDiscHeader(const char * gameID, struct discHdr &gameHeader)
     delete dvdheader;
     dvdheader = NULL;
 
-    gameList.clear();
-
     return 0;
 }
 
@@ -136,7 +133,7 @@ int GameBooter::SetupDisc(u8 * gameID)
     int ret = -1;
 
     if(((IosLoader::IsWaninkokoIOS() && IOS_GetRevision() < 18) ||
-        hdd_sector_size != 512) && wbfs_part_fs == PART_FS_WBFS)
+        hdd_sector_size != 512) && gameList.GetGameFS(gameID) == PART_FS_WBFS)
     {
         gprintf("Disc_SetUSB...");
         ret = Disc_SetUSB(gameID);
@@ -243,9 +240,12 @@ int GameBooter::BootGame(const char * gameID)
     if (reloadblock == ON && IosLoader::IsHermesIOS())
     {
         enable_ES_ioctlv_vector();
-        if (wbfs_part_fs == PART_FS_WBFS)
+        if (gameList.GetGameFS(gameHeader.id) == PART_FS_WBFS)
             mload_close();
     }
+	
+	//! Now we can free up the memory used by the game list
+    gameList.clear();
 
     //! Load main.dol or alternative dol into memory, start the game apploader and get game entrypoint
     gprintf("\tDisc_wiiBoot\n");
@@ -268,7 +268,7 @@ int GameBooter::BootGame(const char * gameID)
     shadow_mload();
 
     //! Flush all caches and close up all devices
-    WBFS_Close();
+    WBFS_CloseAll();
     DeviceHandler::DestroyInstance();
     USB_Deinitialize();
 

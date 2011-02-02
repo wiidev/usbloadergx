@@ -96,6 +96,7 @@ RecourceFile Resources::RecourceFiles[] =
     {"abcIcon.png", abcIcon_png, abcIcon_png_size, NULL, 0},
     {"rankIcon.png", rankIcon_png, rankIcon_png_size, NULL, 0},
     {"playCountIcon.png", playCountIcon_png, playCountIcon_png_size, NULL, 0},
+    {"playersSort.png", playersSort_png, playersSort_png_size, NULL, 0},
     {"arrangeList.png", arrangeList_png, arrangeList_png_size, NULL, 0},
     {"arrangeList_gray.png", arrangeList_gray_png, arrangeList_gray_png_size, NULL, 0},
     {"arrangeGrid.png", arrangeGrid_png, arrangeGrid_png_size, NULL, 0},

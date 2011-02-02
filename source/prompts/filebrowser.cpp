@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <wiiuse/wpad.h>
-#include <sys/dir.h>
+#include <sys/dirent.h>
 #include <sys/iosupport.h>
 #include <malloc.h>
 #include <algorithm>
@@ -80,9 +80,9 @@ int InitBrowsers()
         if (strcmp(devoptab_list[i]->name, "stdnull") && devoptab_list[i]->write_r != NULL)
         {
             snprintf(rootdir, sizeof(rootdir), "%s:/", devoptab_list[i]->name);
-            if ( DIR_ITER *dir = diropen( rootdir ) )
+            if ( DIR *dir = opendir( rootdir ) )
             {
-                dirclose(dir);
+                closedir(dir);
                 BROWSERINFO browser;
                 browser.dir[0] = '\0';
                 strcpy(browser.rootdir, rootdir);
@@ -171,7 +171,7 @@ int ParseFilter(FILTERCASCADE *Filter, BROWSERENTRY* Entry)
  **************************************************************************/
 int ParseDirectory(const char* Path, int Flags, FILTERCASCADE *Filter)
 {
-    DIR_ITER *dir = NULL;
+    DIR *dir = NULL;
     char fulldir[MAXPATHLEN];
     char filename[MAXPATHLEN];
     struct stat filestat;
@@ -233,18 +233,27 @@ int ParseDirectory(const char* Path, int Flags, FILTERCASCADE *Filter)
     ResetBrowser(browser);
 
     // open the directory
-    if ((dir = diropen(fulldir)) == NULL)
+    if ((dir = opendir(fulldir)) == NULL)
     {
         if (Flags & FB_TRYROOTDIR)
         {
+			snprintf(fulldir, sizeof(fulldir), browser->rootdir);
             browser->dir[0] = 0;
-            if ((dir = diropen(browser->rootdir)) == NULL) return -1;
+            if ((dir = opendir(browser->rootdir)) == NULL) return -1;
         }
         else return -1;
     }
+	
+	struct dirent *dirent = NULL;
 
-    while (dirnext(dir, filename, &filestat) == 0)
+    while ((dirent = readdir(dir)) != 0)
     {
+		snprintf(filename, sizeof(filename), "%s/%s", fulldir, dirent->d_name);
+        if(stat(filename, &filestat) != 0)
+			continue;
+			
+		snprintf(filename, sizeof(filename), dirent->d_name);
+		
         if (strcmp(filename, ".") != 0)
         {
             BROWSERENTRY newEntry;
@@ -258,7 +267,7 @@ int ParseDirectory(const char* Path, int Flags, FILTERCASCADE *Filter)
     }
 
     // close directory
-    dirclose(dir);
+    closedir(dir);
 
     // Sort the file list
     std::sort(browser->browserList.begin(), browser->browserList.end());

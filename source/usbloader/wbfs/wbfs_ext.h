@@ -1,7 +1,6 @@
 #ifndef _WBFS_EXT_H
 #define _WBFS_EXT_H
 
-#include <ext2.h>
 #include "wbfs_fat.h"
 
 class Wbfs_Ext: public Wbfs_Fat
@@ -11,9 +10,7 @@ class Wbfs_Ext: public Wbfs_Fat
             Wbfs_Fat(device, lba, size)
         {
         }
-
-        virtual s32 Open();
-        bool ShowFreeSpace(void) { return true; };
+        virtual const u8 GetFSType(void) const { return PART_FS_EXT; }
 };
 
 #endif //_WBFS_NTFS_H

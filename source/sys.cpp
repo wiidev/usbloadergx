@@ -112,7 +112,7 @@ void AppCleanUp(void)
 void ExitApp(void)
 {
     AppCleanUp();
-    WBFS_Close();
+    WBFS_CloseAll();
     DeviceHandler::DestroyInstance();
     USB_Deinitialize();
     if(Settings.PlaylogUpdate)

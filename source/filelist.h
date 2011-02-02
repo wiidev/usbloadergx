@@ -529,6 +529,9 @@ extern const u32 boxBorder_png_size;
 extern const u8 nocoverFull_png[];
 extern const u32 nocoverFull_png_size;
 
+extern const u8 playersSort_png[];
+extern const u32 playersSort_png_size;
+
 extern const u8 stub_bin[];
 extern const u32 stub_bin_size;
 

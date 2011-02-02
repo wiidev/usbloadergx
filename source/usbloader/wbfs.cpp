@@ -1,3 +1,4 @@
+#include <vector>
 #include <ogcsys.h>
 #include <unistd.h>
 #include <time.h>
@@ -15,28 +16,51 @@
 #include "menu/menus.h"
 #include "gecko.h"
 
-static Wbfs *current = NULL;
-/* WBFS device */
-s32 wbfsDev = WBFS_MIN_DEVICE;
+#define VALID(x) (x >= 0 && x < (int) WbfsList.size() && WbfsList[x] != NULL)
+
+static std::vector<Wbfs *> WbfsList;
 
 wbfs_disc_t* WBFS_OpenDisc(u8 *discid)
 {
-    return current->OpenDisc(discid);
+    int part = gameList.GetPartitionNumber(discid);
+    if(VALID(part))
+        return WbfsList[part]->OpenDisc(discid);
+
+    return NULL;
 }
 
 void WBFS_CloseDisc(wbfs_disc_t *disc)
 {
-    current->CloseDisc(disc);
-}
+    if(!disc) return;
 
-wbfs_t *GetHddInfo(void)
-{
-    return current->GetHddInfo();
+    for(u32 i = 0; i < WbfsList.size(); ++i)
+    {
+        if(WbfsList[i]->GetHDDHandle() == disc->p)
+        {
+            WbfsList[i]->CloseDisc(disc);
+            break;
+        }
+    }
 }
 
 s32 WBFS_Init(u32 device)
 {
     return Wbfs::Init(device);
+}
+
+s32 WBFS_OpenAll()
+{
+    int ret = -1;
+
+    PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
+
+    for(int i = 0; i < usbHandle->GetPartitionCount(); ++i)
+    {
+        if(WBFS_OpenPart(i) == 0)
+            ret = 0;
+    }
+
+    return ret;
 }
 
 s32 WBFS_OpenPart(int part_num)
@@ -46,137 +70,163 @@ s32 WBFS_OpenPart(int part_num)
         return -1;
 
     // close
-    WBFS_Close();
+    WBFS_Close(part_num);
+
+    if(part_num <= (int) WbfsList.size())
+        WbfsList.resize(part_num+1);
 
     gprintf("\tWBFS_OpenPart: start sector %u, sector count: %u\n", usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
 
     if (strncmp(usbHandle->GetFSName(part_num), "FAT", 3) == 0)
     {
-        current = new Wbfs_Fat(wbfsDev, usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
+        WbfsList[part_num] = new Wbfs_Fat(WBFS_MIN_DEVICE, usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
     }
     else if (strncmp(usbHandle->GetFSName(part_num), "NTFS", 4) == 0)
     {
-        current = new Wbfs_Ntfs(wbfsDev, usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
+        WbfsList[part_num] = new Wbfs_Ntfs(WBFS_MIN_DEVICE, usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
     }
     else if (strncmp(usbHandle->GetFSName(part_num), "LINUX", 5) == 0)
     {
-        current = new Wbfs_Ext(wbfsDev, usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
+        WbfsList[part_num] = new Wbfs_Ext(WBFS_MIN_DEVICE, usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
     }
     else if (strncmp(usbHandle->GetFSName(part_num), "WBFS", 4) == 0)
     {
-        current = new Wbfs_Wbfs(wbfsDev, usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
+        WbfsList[part_num] = new Wbfs_Wbfs(WBFS_MIN_DEVICE, usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
     }
     else
     {
         return -1;
     }
 
-    if (current->Open())
+    if (WbfsList[part_num]->Open() != 0)
     {
-        delete current;
-        current = NULL;
+        delete WbfsList[part_num];
+        WbfsList[part_num] = NULL;
         return -1;
     }
 
     return 0;
 }
 
-bool WBFS_Close(void)
+bool WBFS_Close(int part_num)
 {
-    if (current != NULL)
-    {
-        current->Close();
-        delete current;
-        current = NULL;
-    }
+    if(!VALID(part_num))
+        return false;
 
-    gameList.clear();
+    WbfsList[part_num]->Close();
+    delete WbfsList[part_num];
+    WbfsList[part_num] = NULL;
 
-    return 0;
+    gameList.RemovePartition(part_num);
+
+    return true;
 }
 
-bool WBFS_Mounted()
+void WBFS_CloseAll()
 {
-    return (current != NULL && current->IsMounted());
+    for(u32 i = 0; i < WbfsList.size(); ++i)
+        WBFS_Close(i);
 }
 
 s32 WBFS_Format(u32 lba, u32 size)
 {
-    Wbfs_Wbfs Part(wbfsDev, lba, size);
+    Wbfs_Wbfs Part(WBFS_MIN_DEVICE, lba, size);
 
     return Part.Format();
 }
 
-s32 WBFS_GetCount(u32 *count)
+s32 WBFS_GetCount(int part_num, u32 *count)
 {
-    return current->GetCount(count);
+    if(!VALID(part_num))
+        return -1;
+
+    return WbfsList[part_num]->GetCount(count);
 }
 
-s32 WBFS_GetHeaders(struct discHdr *outbuf, u32 cnt, u32 len)
+s32 WBFS_GetHeaders(int part_num, struct discHdr *outbuf, u32 cnt, u32 len)
 {
-    return current->GetHeaders(outbuf, cnt, len);
+    if(!VALID(part_num))
+        return -1;
+
+    return WbfsList[part_num]->GetHeaders(outbuf, cnt, len);
 }
 
 s32 WBFS_CheckGame(u8 *discid)
 {
-    return current->CheckGame(discid);
+    int part_num = gameList.GetPartitionNumber(discid);
+    if(!VALID(part_num))
+        return -1;
+
+    return WbfsList[part_num]->CheckGame(discid);
 }
 
 s32 WBFS_AddGame(void)
 {
-    s32 retval = current->AddGame();
-    if (retval == 0) gameList.clear();
+    if(!VALID(Settings.partition))
+        return -1;
 
-    return retval;
+    return WbfsList[Settings.partition]->AddGame();
 }
 
 s32 WBFS_RemoveGame(u8 *discid)
 {
-    s32 retval = current->RemoveGame(discid);
-    if (retval == 0) gameList.clear();
+    int part_num = gameList.GetPartitionNumber(discid);
+    if(!VALID(part_num))
+        return -1;
 
-    return retval;
+    return WbfsList[part_num]->RemoveGame(discid);
 }
 
 s32 WBFS_GameSize(u8 *discid, f32 *size)
 {
-    return current->GameSize(discid, size);
+    int part_num = gameList.GetPartitionNumber(discid);
+    if(!VALID(part_num))
+        return -1;
+
+    return WbfsList[part_num]->GameSize(discid, size);
 }
 
 s32 WBFS_DiskSpace(f32 *used, f32 *free)
 {
-    return current->DiskSpace(used, free);
+    if(!VALID(Settings.partition))
+        return -1;
+
+    return WbfsList[Settings.partition]->DiskSpace(used, free);
 }
 
 s32 WBFS_RenameGame(u8 *discid, const void *newname)
 {
-    s32 retval = current->RenameGame(discid, newname);
-    if (retval == 0) gameList.clear();
+    int part_num = gameList.GetPartitionNumber(discid);
+    if(!VALID(part_num))
+        return -1;
 
-    return retval;
+    return WbfsList[part_num]->RenameGame(discid, newname);
 }
 
 s32 WBFS_ReIDGame(u8 *discid, const void *newID)
 {
-    s32 retval = current->ReIDGame(discid, newID);
-    if (retval == 0) gameList.clear();
+    int part_num = gameList.GetPartitionNumber(discid);
+    if(!VALID(part_num))
+        return -1;
 
-    return retval;
+    return WbfsList[part_num]->ReIDGame(discid, newID);
 }
 
 u64 WBFS_EstimeGameSize(void)
 {
-    return current->EstimateGameSize();
+    if(!VALID(Settings.partition))
+        return 0;
+
+    return WbfsList[Settings.partition]->EstimateGameSize();
 }
 
 int WBFS_GetFragList(u8 *id)
 {
-    return current->GetFragList(id);
-}
+    int part_num = gameList.GetPartitionNumber(id);
+    if(!VALID(part_num))
+        return -1;
 
-bool WBFS_ShowFreeSpace(void)
-{
-    return current->ShowFreeSpace();
+    return WbfsList[part_num]->GetFragList(id);
 }
 
 int MountWBFS(bool ShowGUI)

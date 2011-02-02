@@ -37,6 +37,7 @@ class LoaderSettings : public SettingsMenu
         int GetMenuInternal();
 
         int OldSettingsPartition;
+        int OldSettingsMultiplePartitions;
 
         OptionList GuiOptions;
 };

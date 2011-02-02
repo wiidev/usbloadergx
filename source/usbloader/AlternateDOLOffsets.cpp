@@ -45,8 +45,6 @@ int defaultAltDol(const char *gameid)
     if(defaultDolSelected)
         return defaultDolSelected;
 
-    gprintf("\nautoSelectDol() started");
-
     char id[7];
     snprintf(id, sizeof(id), gameid);
 

@@ -35,20 +35,14 @@ extern "C" {
 #endif
 
 bool CreateSubfolder(const char * fullpath);
-bool FindFile(const char * filename, const char * path);
-bool SearchFile(const char * searchpath, const char * searched_filename, char * outfilepath);
 bool CheckFile(const char * filepath);
 u64 FileSize(const char * filepath);
 int LoadFileToMem(const char * filepath, u8 **buffer, u64 *size);
 int LoadFileToMemWithProgress(const char *progressText, const char *filePath, u8 **buffer, u64 *size);
 int CopyFile(const char * src, const char * dest);
-int CopyDirectory(const char * src, const char * dest);
-int MoveDirectory(char * src, const char * dest);
 int MoveFile(const char *srcpath, char *destdir);
-int RemoveDirectory(char * dirpath);
 bool RenameFile(const char * srcpath, const char * destpath);
 bool RemoveFile(const char * filepath);
-void GetFolderSize(const char * folderpath, u64 * foldersize, u32 * filenumber);
 
 #ifdef __cplusplus
 }

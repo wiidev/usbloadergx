@@ -169,8 +169,8 @@ void BoxCover::Draw()
 
 	GX_LoadPosMtxImm(modelView,	GX_PNMTX0);
 
-    GX_InvalidateTexAll();
 	GX_LoadTexObj(&boxBorderTex, GX_TEXMAP0);
+    GX_InvalidateTexAll();
 
 	//! Border quads
 	GX_SetArray(GX_VA_POS, (void *) &g_boxMeshQ[0].pos, sizeof(g_boxMeshQ[0]));
@@ -199,6 +199,7 @@ void BoxCover::Draw()
 	GX_End();
 
 	GX_LoadTexObj(flatCover ? &defaultBoxTex : &coverTex, GX_TEXMAP0);
+    GX_InvalidateTexAll();
 
 	//! Back Cover
 	GX_SetArray(GX_VA_POS, (void *) &g_boxBackCoverMesh[0].pos, sizeof(g_boxBackCoverMesh[0]));
@@ -220,6 +221,7 @@ void BoxCover::Draw()
 	{
         //! Front Flat Cover
         GX_LoadTexObj(&coverTex, GX_TEXMAP0);
+        GX_InvalidateTexAll();
 
         GX_SetArray(GX_VA_POS, (void *) &g_flatCoverMesh[0].pos, sizeof(g_flatCoverMesh[0]));
         GX_SetArray(GX_VA_TEX0, (void *) &g_flatCoverMesh[0].texCoord, sizeof(g_flatCoverMesh[0]));

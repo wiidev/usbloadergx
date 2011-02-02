@@ -115,7 +115,8 @@ LoaderSettings::LoaderSettings()
     Options->SetName(Idx++, "%s", tr( "Ocarina" ));
     Options->SetName(Idx++, "%s", tr( "Use IOS58" ));
     Options->SetName(Idx++, "%s", tr( "Boot/Standard" ));
-    Options->SetName(Idx++, "%s", tr( "Partition" ));
+    Options->SetName(Idx++, "%s", tr( "Game/Install Partition" ));
+    Options->SetName(Idx++, "%s", tr( "Multiple Partitions" ));
     Options->SetName(Idx++, "%s", tr( "Install directories" ));
     Options->SetName(Idx++, "%s", tr( "Game Split Size" ));
     Options->SetName(Idx++, "%s", tr( "Quick Boot" ));
@@ -128,14 +129,20 @@ LoaderSettings::LoaderSettings()
     SetOptionValues();
 
     OldSettingsPartition = Settings.partition;
+    OldSettingsMultiplePartitions = Settings.MultiplePartitions;
 }
 
 LoaderSettings::~LoaderSettings()
 {
     //! if partition has changed, Reinitialize it
-    if (Settings.partition != OldSettingsPartition)
+    if (Settings.partition != OldSettingsPartition ||
+        Settings.MultiplePartitions != OldSettingsMultiplePartitions)
     {
-        WBFS_OpenPart(Settings.partition);
+        WBFS_CloseAll();
+        if(Settings.MultiplePartitions)
+            WBFS_OpenAll();
+        else
+            WBFS_OpenPart(Settings.partition);
 
         //! Reload the new game titles
         gameList.ReadGameList();
@@ -174,10 +181,13 @@ void LoaderSettings::SetOptionValues()
     else
         Options->SetValue(Idx++, "********");
 
-    //! Settings: Partition
+    //! Settings: Game/Install Partition
     PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
     // Get the partition name and it's size in GB's
     Options->SetValue(Idx++, "%s (%.2fGB)", usbHandle->GetFSName(Settings.partition), usbHandle->GetSize(Settings.partition)/GB_SIZE);
+
+    //! Settings: Multiple Partitions
+    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.MultiplePartitions] ));
 
     //! Settings: Install directories
     Options->SetValue(Idx++, "%s", tr( InstallToText[Settings.InstallToDir] ));
@@ -287,7 +297,7 @@ int LoaderSettings::GetMenuInternal()
         }
     }
 
-    //! Settings: Partition
+    //! Settings: Game/Install Partition
     else if (ret == ++Idx)
     {
         if(DeviceHandler::Instance()->GetUSBHandle()->GetPartitionCount() < 2)
@@ -306,6 +316,12 @@ int LoaderSettings::GetMenuInternal()
 
         if(fs_type == PART_FS_FAT && Settings.GameSplit == GAMESPLIT_NONE)
             Settings.GameSplit = GAMESPLIT_4GB;
+    }
+
+    //! Settings: Multiple Partitions
+    else if (ret == ++Idx)
+    {
+        if (++Settings.MultiplePartitions >= MAX_ON_OFF) Settings.MultiplePartitions = 0;
     }
 
     //! Settings: Install directories

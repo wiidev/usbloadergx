@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/dir.h>
+#include <sys/dirent.h>
 
 #include "HomebrewFiles.h"
 
@@ -37,17 +37,25 @@ HomebrewFiles::~HomebrewFiles()
 bool HomebrewFiles::LoadPath(const char * folderpath)
 {
     struct stat st;
-    DIR_ITER *dir = NULL;
+    DIR *dir = NULL;
+	struct dirent *dirent = NULL;
     char filename[1024];
 
-    dir = diropen(folderpath);
+    dir = opendir(folderpath);
     if (dir == NULL)
     {
         return false;
     }
 
-    while (dirnext(dir, filename, &st) == 0)
+    while ((dirent = readdir(dir)) != 0)
     {
+        snprintf(filename, 1024, "%s/%s", folderpath, dirent->d_name);
+
+        if(stat(filename, &st) != 0)
+            continue;
+
+        snprintf(filename, 1024, dirent->d_name);
+		
         if ((st.st_mode & S_IFDIR) != 0)
         {
             if (strcmp(filename, ".") != 0 && strcmp(filename, "..") != 0)
@@ -76,7 +84,7 @@ bool HomebrewFiles::LoadPath(const char * folderpath)
                     free(FileInfo);
                     FileInfo = NULL;
                     filecount = 0;
-                    dirclose(dir);
+                    closedir(dir);
                     return false;
                 }
 
@@ -89,7 +97,7 @@ bool HomebrewFiles::LoadPath(const char * folderpath)
             }
         }
     }
-    dirclose(dir);
+    closedir(dir);
 
     return true;
 }

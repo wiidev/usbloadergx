@@ -11,6 +11,7 @@ typedef struct _GameTitle
     char GameID[7];
     std::string Title;
     int ParentalRating;
+    int PlayersCount;
 
 } GameTitle;
 
@@ -31,7 +32,8 @@ class CGameTitles
 
         //! Get game parental rating
         int GetParentalRating(const char * id) const;
-
+        //! Get possible number of players for this game
+        int GetPlayersCount(const char * id) const;
         //! Load Game Titles from WiiTDB
         void LoadTitlesFromWiiTDB(const char * path);
         //! Set default game titles

@@ -91,6 +91,7 @@ enum
     SORT_PLAYCOUNT  = 0x02,
     SORT_RANKING    = 0x04,
     SORT_FAVORITE   = 0x08,
+    SORT_PLAYERS    = 0x10,
 };
 enum
 {

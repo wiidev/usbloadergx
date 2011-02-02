@@ -82,6 +82,7 @@ GameBrowseMenu::GameBrowseMenu()
     imgabcIcon = Resources::GetImageData("abcIcon.png");
     imgrankIcon = Resources::GetImageData("rankIcon.png");
     imgplayCountIcon = Resources::GetImageData("playCountIcon.png");
+    imgplayersSortIcon = Resources::GetImageData("playersSort.png");
     imgarrangeGrid = Resources::GetImageData("arrangeGrid.png");
     imgarrangeGrid_gray = Resources::GetImageData("arrangeGrid_gray.png");
     imgarrangeList = Resources::GetImageData("arrangeList.png");
@@ -352,6 +353,7 @@ GameBrowseMenu::~GameBrowseMenu()
     delete imgabcIcon;
     delete imgrankIcon;
     delete imgplayCountIcon;
+    delete imgplayersSortIcon;
     delete imgarrangeGrid;
     delete imgarrangeGrid_gray;
     delete imgarrangeCarousel;
@@ -513,6 +515,11 @@ void GameBrowseMenu::ReloadBrowser()
     {
         sortTTText = tr( "Sort order by most played");
         sortImgData = imgplayCountIcon;
+    }
+    else if(Settings.GameSort & SORT_PLAYERS)
+    {
+        sortTTText = tr( "Sort by number of players");
+        sortImgData = imgplayersSortIcon;
     }
     else
     {
@@ -913,6 +920,11 @@ int GameBrowseMenu::MainLoop()
         else if(Settings.GameSort & SORT_PLAYCOUNT)
         {
             Settings.GameSort &= ~SORT_PLAYCOUNT;
+            Settings.GameSort |= SORT_PLAYERS;
+        }
+        else if(Settings.GameSort & SORT_PLAYERS)
+        {
+            Settings.GameSort &= ~SORT_PLAYERS;
             Settings.GameSort |= SORT_ABC;
         }
 

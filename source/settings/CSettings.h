@@ -111,6 +111,7 @@ class CSettings
         short ShowFreeSpace;
         short UseIOS58;
         short HomeMenu;
+        short MultiplePartitions;
         u32 InstallPartitions;
         u32 ParentalBlocks;
     protected:

@@ -4,7 +4,6 @@
 #include "usbloader/wbfs.h"
 #include "wbfs_rw.h"
 
-extern int wbfs_part_fs;
 extern u32 hdd_sector_size;
 
 s32 Wbfs_Wbfs::Open()
@@ -42,8 +41,6 @@ s32 Wbfs_Wbfs::Open()
     Close();
     hdd = part;
 
-    wbfs_part_fs = PART_FS_WBFS;
-
     return 0;
 }
 
@@ -54,8 +51,6 @@ void Wbfs_Wbfs::Close()
         wbfs_close(hdd);
         hdd = NULL;
     }
-
-    wbfs_part_fs = -1;
 }
 
 wbfs_disc_t* Wbfs_Wbfs::OpenDisc(u8 *discid)
@@ -212,5 +207,5 @@ s32 Wbfs_Wbfs::GetFragList(u8 *id)
 {
     //! Doesn't have to be called ".iso" just something different than .wbfs but with a dot.
     //! So that the code doesn't fail.
-    return get_frag_list_for_file((char *) ".iso", id);
+    return get_frag_list_for_file((char *) ".iso", id, GetFSType(), lba);
 }

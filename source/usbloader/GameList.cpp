@@ -43,6 +43,7 @@ void GameList::clear()
     GameFilter.clear();
     AvailableSearchChars.clear();
     FullGameList.clear();
+    GamePartitionList.clear();
     FilteredList.clear();
     //! Clear memory of the vector completely
     std::vector<struct discHdr *>().swap(FilteredList);
@@ -60,15 +61,41 @@ struct discHdr * GameList::GetDiscHeader(const char * gameID) const
     return NULL;
 }
 
-int GameList::ReadGameList()
+int GameList::GetPartitionNumber(const u8 *gameID) const
 {
-    // Clear list
-    clear();
+    for (u32 i = 0; i < FullGameList.size(); ++i)
+    {
+        if(strncasecmp((const char *) gameID, (const char *) FullGameList[i].id, 6) == 0)
+            return GamePartitionList[i];
+    }
 
+    return -1;
+}
+
+void GameList::RemovePartition(int part)
+{
+    wString filter(GameFilter);
+
+    for(u32 i = 0; i < GamePartitionList.size(); ++i)
+    {
+        if(GamePartitionList[i] == part)
+        {
+            FullGameList.erase(FullGameList.begin()+i);
+            GamePartitionList.erase(GamePartitionList.begin()+i);
+            --i;
+        }
+    }
+
+    if(FullGameList.size() > 0)
+        FilterList(filter.c_str());
+}
+
+int GameList::InternalReadList(int part)
+{
     // Retrieve all stuff from WBFS
-    u32 cnt;
+    u32 cnt = 0;
 
-    int ret = WBFS_GetCount(&cnt);
+    int ret = WBFS_GetCount(part, &cnt);
     if (ret < 0) return -1;
 
     // We are done here if no games are there
@@ -86,17 +113,51 @@ int GameList::ReadGameList()
     memset(buffer, 0, len);
 
     /* Get header list */
-    ret = WBFS_GetHeaders(buffer, cnt, sizeof(struct discHdr));
+    ret = WBFS_GetHeaders(part, buffer, cnt, sizeof(struct discHdr));
     if (ret < 0)
     {
-        if (buffer) free(buffer);
+        free(buffer);
         return -1;
     }
 
-    FullGameList.resize(cnt);
-    memcpy(&FullGameList[0], buffer, len);
+    u32 oldSize = FullGameList.size();
+
+    FullGameList.resize(oldSize+cnt);
+    memcpy(&FullGameList[oldSize], buffer, len);
 
     free(buffer);
+
+    GamePartitionList.resize(oldSize+cnt);
+
+    for(u32 i = oldSize; i < GamePartitionList.size(); ++i)
+        GamePartitionList[i] = part;
+
+    return cnt;
+}
+
+int GameList::ReadGameList()
+{
+    // Clear list
+    clear();
+
+    if(!Settings.MultiplePartitions)
+    {
+        int ret = InternalReadList(Settings.partition);
+        if(ret <= 0) return ret;
+    }
+    else
+    {
+        PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
+        int cnt = 0;
+
+        for(int part = 0; part < usbHandle->GetPartitionCount(); ++part)
+        {
+            int ret = InternalReadList(part);
+            if(ret > 0) cnt += ret;
+        }
+
+        if(!cnt) return cnt;
+    }
 
     return LoadUnfiltered();
 }
@@ -253,6 +314,10 @@ void GameList::SortList()
     {
         std::sort(FilteredList.begin(), FilteredList.end(), RankingSortCallback);
     }
+    else if(Settings.GameSort & SORT_PLAYERS)
+    {
+        std::sort(FilteredList.begin(), FilteredList.end(), PlayersSortCallback);
+    }
     else
     {
         std::sort(FilteredList.begin(), FilteredList.end(), NameSortCallback);
@@ -286,4 +351,14 @@ bool GameList::RankingSortCallback(const struct discHdr *a, const struct discHdr
     if (fav1 == fav2) return NameSortCallback(a, b);
 
     return (fav1 > fav2);
+}
+
+bool GameList::PlayersSortCallback(const struct discHdr *a, const struct discHdr *b)
+{
+    int count1 = GameTitles.GetPlayersCount((const char *) a->id);
+	int count2 = GameTitles.GetPlayersCount((const char *) b->id);
+
+    if (count1 == count2) return NameSortCallback(a, b);
+
+    return (count1 > count2);
 }

@@ -89,7 +89,7 @@ s32 IosLoader::LoadGameCios(s32 ios)
     s32 ret = -1;
 
     // Unmount fat before reloading IOS.
-    WBFS_Close();
+    WBFS_CloseAll();
     WDVD_Close();
     DeviceHandler::DestroyInstance();
 

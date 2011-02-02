@@ -76,6 +76,21 @@ int CGameTitles::GetParentalRating(const char * id) const
     return -1;
 }
 
+
+int CGameTitles::GetPlayersCount(const char * id) const
+{
+    if(!id)
+        return 1;
+
+    for(u32 i = 0; i < TitleList.size(); ++i)
+    {
+        if(strncasecmp(id, TitleList[i].GameID, 6) == 0)
+            return TitleList[i].PlayersCount;
+    }
+
+    return 1;
+}
+
 void CGameTitles::SetDefault()
 {
     TitleList.clear();
@@ -111,6 +126,7 @@ void CGameTitles::LoadTitlesFromWiiTDB(const char * path)
         this->SetGameTitle(gameList[i]->id, Title.c_str());
 
         TitleList[TitleList.size()-1].ParentalRating = -1;
+        TitleList[TitleList.size()-1].PlayersCount = 1;
 
         Rating = XML_DB.GetRating((const char *) gameList[i]->id);
         if(Rating < 0)
@@ -120,5 +136,8 @@ void CGameTitles::LoadTitlesFromWiiTDB(const char * path)
             continue;
 
         TitleList[TitleList.size()-1].ParentalRating = ConvertRating(RatValTxt.c_str(), WiiTDB::RatingToString(Rating), "PEGI");
+        int ret = XML_DB.GetPlayers((const char *) gameList[i]->id);
+        if(ret > 0)
+            TitleList[TitleList.size()-1].PlayersCount = ret;
     }
 }

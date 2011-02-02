@@ -34,18 +34,14 @@
 
 using namespace std;
 
-int wbfs_part_fs = -1;
-
-char Wbfs_Fat::wbfs_fs_drive[16];
-char Wbfs_Fat::wbfs_fat_dir[16] = "/wbfs";
-char Wbfs_Fat::invalid_path[] = "/\\:|<>?*\"'";
-struct discHdr *Wbfs_Fat::fat_hdr_list = NULL;
-u32 Wbfs_Fat::fat_hdr_count = 0;
-u32 Wbfs_Fat::fat_sector_size = 512;
+static const char wbfs_fat_dir[] = "/wbfs";
+static const char invalid_path[] = "/\\:|<>?*\"'";
+static const u32 fat_sector_size = 512;
 
 Wbfs_Fat::Wbfs_Fat(u32 device, u32 lba, u32 size) :
-    Wbfs(device, lba, size)
+    Wbfs(device, lba, size), fat_hdr_list(NULL), fat_hdr_count(0)
 {
+    memset(wbfs_fs_drive, 0, sizeof(wbfs_fs_drive));
 }
 
 s32 Wbfs_Fat::Open()
@@ -59,7 +55,6 @@ s32 Wbfs_Fat::Open()
         if (device == WBFS_DEVICE_USB && lba == usbHandle->GetLBAStart(i))
         {
             sprintf(wbfs_fs_drive, "%s:", usbHandle->MountName(i));
-            wbfs_part_fs = PART_FS_FAT;
             return 0;
         }
     }
@@ -75,7 +70,6 @@ void Wbfs_Fat::Close()
         hdd = NULL;
     }
 
-    wbfs_part_fs = -1;
     memset(wbfs_fs_drive, 0, sizeof(wbfs_fs_drive));
 }
 
@@ -102,9 +96,17 @@ wbfs_disc_t* Wbfs_Fat::OpenDisc(u8 *discid)
         return iso_file;
     }
 
-    wbfs_t *part = OpenPart(fname);
-    if (!part) return NULL;
-    return wbfs_open_disc(part, discid);
+    hdd = OpenPart(fname);
+    if (!hdd) return NULL;
+
+    wbfs_disc_t *disc = wbfs_open_disc(hdd, discid);
+    if(!disc)
+    {
+        ClosePart(hdd);
+        return NULL;
+    }
+
+    return disc;
 }
 
 void Wbfs_Fat::CloseDisc(wbfs_disc_t* disc)
@@ -152,18 +154,14 @@ s32 Wbfs_Fat::GetHeaders(struct discHdr *outbuf, u32 cnt, u32 len)
     {
         len = sizeof(struct discHdr);
     }
-#ifdef DEBUG_WBFS
-    gprintf( "\n\tGetHeaders" );
-#endif
+
     for (i = 0; i < cnt && i < fat_hdr_count; i++)
     {
         memcpy(&outbuf[i], &fat_hdr_list[i], len);
     }
     SAFE_FREE( fat_hdr_list );
     fat_hdr_count = 0;
-#ifdef DEBUG_WBFS
-    gprintf( "...ok" );
-#endif
+
     return 0;
 }
 
@@ -184,10 +182,7 @@ s32 Wbfs_Fat::AddGame(void)
     /* Add game to device */
     partition_selector_t part_sel = (partition_selector_t) Settings.InstallPartitions;
 
-    wbfs_t *old_hdd = hdd;
-    hdd = part; // used by spinner
-    ret = wbfs_add_disc(hdd, __ReadDVD, NULL, ShowProgress, part_sel, 0);
-    hdd = old_hdd;
+    ret = wbfs_add_disc(part, __ReadDVD, NULL, ShowProgress, part_sel, 0);
     wbfs_trim(part);
     ClosePart(part);
 
@@ -210,17 +205,18 @@ s32 Wbfs_Fat::RemoveGame(u8 *discid)
 
     // game is in subdir
     // remove optional .txt file
-    DIR_ITER *dir_iter;
-    struct stat st;
+    DIR *dir = NULL;
+    struct dirent *dirent = NULL;
     char path[MAX_FAT_PATH];
     char name[MAX_FAT_PATH];
     strncpy(path, fname, sizeof(path));
     char *p = strrchr(path, '/');
     if (p) *p = 0;
-    dir_iter = diropen(path);
-    if (!dir_iter) return 0;
-    while (dirnext(dir_iter, name, &st) == 0)
+    dir = opendir(path);
+    if (!dir) return 0;
+    while ((dirent = readdir(dir)) != 0)
     {
+		snprintf(name, sizeof(name), dirent->d_name);
         if (name[0] == '.') continue;
         if (name[6] != '_') continue;
         if (strncmp(name, (char*) discid, 6) != 0) continue;
@@ -231,7 +227,7 @@ s32 Wbfs_Fat::RemoveGame(u8 *discid)
         remove(fname);
         break;
     }
-    dirclose(dir_iter);
+    closedir(dir);
     // remove game subdir
     unlink(path);
 
@@ -382,8 +378,8 @@ s32 Wbfs_Fat::GetHeadersCount()
     char dir_title[65];
     char fname_title[TITLE_LEN];
     const char *title;
-    DIR_ITER *dir_iter;
-
+    DIR *dir_iter;
+	struct dirent *dirent;
     //dbg_time1();
 
     SAFE_FREE( fat_hdr_list );
@@ -392,14 +388,18 @@ s32 Wbfs_Fat::GetHeadersCount()
     strcpy(path, wbfs_fs_drive);
     strcat(path, wbfs_fat_dir);
 
-    dir_iter = diropen(path);
+    dir_iter = opendir(path);
     if (!dir_iter) return 0;
 
-    dir_iter = diropen(path);
-    if (!dir_iter) return 0;
-
-    while (dirnext(dir_iter, fname, &st) == 0)
+    while ((dirent = readdir(dir_iter)) != 0)
     {
+        snprintf(fname, sizeof(fname), "%s/%s", path, dirent->d_name);
+
+        if(stat(fname, &st) != 0)
+            continue;
+
+        snprintf(fname, sizeof(fname), dirent->d_name);
+
         //printf("found: %s\n", fname); Wpad_WaitButtonsCommon();
         if ((char) fname[0] == '.') continue;
         len = strlen(fname);
@@ -584,7 +584,7 @@ s32 Wbfs_Fat::GetHeadersCount()
         fat_hdr_list = (struct discHdr *) realloc(fat_hdr_list, fat_hdr_count * sizeof(struct discHdr));
         memcpy(&fat_hdr_list[fat_hdr_count - 1], &tmpHdr, sizeof(struct discHdr));
     }
-    dirclose(dir_iter);
+    closedir(dir_iter);
     //dbg_time2("\nFAT_GetCount"); Wpad_WaitButtonsCommon();
 
     return 0;
@@ -604,19 +604,26 @@ int Wbfs_Fat::FindFilename(u8 *id, char *fname, int len)
     if (stat(fname, &st) == 0) return 1;
     // direct file not found, check subdirs
     *fname = 0;
-    DIR_ITER *dir_iter;
+    DIR *dir_iter;
+	struct dirent *dirent;
     char path[MAX_FAT_PATH];
     char name[MAX_FAT_PATH];
     strcpy(path, wbfs_fs_drive);
     strcat(path, wbfs_fat_dir);
-    dir_iter = diropen(path);
+    dir_iter = opendir(path);
     //printf("dir: %s %p\n", path, dir); Wpad_WaitButtons();
     if (!dir_iter)
     {
         return 0;
     }
-    while (dirnext(dir_iter, name, &st) == 0)
+    while ((dirent = readdir(dir_iter)) != 0)
     {
+        snprintf(name, sizeof(name), "%s/%s", path, dirent->d_name);
+
+        if(stat(name, &st) != 0)
+            continue;
+
+        snprintf(name, sizeof(name), dirent->d_name);
         //dbg_printf("name:%s\n", name);
         if (name[0] == '.') continue;
         int n = strlen(name);
@@ -660,7 +667,7 @@ int Wbfs_Fat::FindFilename(u8 *id, char *fname, int len)
         if (stat(fname, &st) == 0) break;
         *fname = 0;
     }
-    dirclose(dir_iter);
+    closedir(dir_iter);
     if (*fname)
     {
         // found
@@ -739,7 +746,7 @@ wbfs_t* Wbfs_Fat::CreatePart(u8 *id, char *path)
     // 1 cluster less than 4gb
     u64 OPT_split_size = 4LL * 1024 * 1024 * 1024 - 32 * 1024;
 
-    if(Settings.GameSplit == GAMESPLIT_NONE && wbfs_part_fs != PART_FS_FAT)
+    if(Settings.GameSplit == GAMESPLIT_NONE && gameList.GetGameFS(id) != PART_FS_FAT)
         OPT_split_size = (u64) 100LL * 1024 * 1024 * 1024 - 32 * 1024;
 
     else if(Settings.GameSplit == GAMESPLIT_2GB)
@@ -860,7 +867,7 @@ int Wbfs_Fat::GetFragList(u8 *id)
     int ret = FindFilename(id, fname, sizeof(fname));
     if (!ret) return -1;
 
-    return get_frag_list_for_file(fname, id);
+    return get_frag_list_for_file(fname, id, GetFSType(), lba);
 }
 
 bool Wbfs_Fat::ShowFreeSpace(void)

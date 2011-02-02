@@ -258,6 +258,7 @@ int DeviceHandler::GetUSBFilesystemType(int partition)
     PartitionHandle * usbHandle = instance->GetUSBHandle();
 
     const char * FSName = usbHandle->GetFSName(partition);
+    if(!FSName) return -1;
 
     if(strncmp(FSName, "WBFS", 4) == 0)
         return PART_FS_WBFS;

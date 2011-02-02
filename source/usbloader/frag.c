@@ -18,9 +18,6 @@
 
 #define SAFE_FREE(x) if(x) { free(x); x = NULL; }
 
-extern sec_t ntfs_wbfs_sec;
-extern sec_t ext_wbfs_sec;
-
 static FragList *frag_list = NULL;
 
 void frag_init(FragList *ff, int maxnum)
@@ -167,7 +164,7 @@ int frag_remap(FragList *ff, FragList *log, FragList *phy)
 	return 0;
 }
 
-int get_frag_list_for_file(char *fname, u8 *id)
+int get_frag_list_for_file(char *fname, u8 *id, u8 wbfs_part_fs, u32 lba_offset)
 {
 	char fname1[1024];
 	struct stat st;
@@ -212,7 +209,7 @@ int get_frag_list_for_file(char *fname, u8 *id)
 			}
 			// offset to start of partition
 			for (j=0; j<fs->num; j++) {
-				fs->frag[j].sector += ntfs_wbfs_sec;
+				fs->frag[j].sector += lba_offset;
 			}
 		} else if (wbfs_part_fs == PART_FS_EXT) {
 			ret = _EXT2_get_fragments(fname, &_frag_append, fs);
@@ -222,7 +219,7 @@ int get_frag_list_for_file(char *fname, u8 *id)
 			}
 			// offset to start of partition
 			for (j=0; j<fs->num; j++) {
-				fs->frag[j].sector += ext_wbfs_sec;
+				fs->frag[j].sector += lba_offset;
 			}
 		} else if (wbfs_part_fs == PART_FS_WBFS) {
             // if wbfs file format, remap.
@@ -288,7 +285,7 @@ int set_frag_list(u8 *id)
 	frag_list = NULL;
 
 	gprintf("Calling WDVD_SetFragList, frag list size %d\n", size);
-	int ret = WDVD_SetFragList(wbfsDev, FragListAligned, size);
+	int ret = WDVD_SetFragList(WBFS_MIN_DEVICE, FragListAligned, size);
 	free(FragListAligned);
 
 	if (ret)

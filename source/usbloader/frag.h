@@ -40,7 +40,7 @@ int frag_get(FragList *ff, u32 offset, u32 count, u32 *poffset, u32 *psector, u3
 
 int frag_remap(FragList *ff, FragList *log, FragList *phy);
 
-int get_frag_list_for_file(char *fname, u8 *id);
+int get_frag_list_for_file(char *fname, u8 *id, u8 fstype, u32 sec_offset);
 int get_frag_list(u8 *id);
 int set_frag_list(u8 *id);
 

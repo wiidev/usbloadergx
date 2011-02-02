@@ -62,6 +62,7 @@ class GameBrowseMenu : public GuiWindow
         GuiImageData * imgabcIcon;
         GuiImageData * imgrankIcon;
         GuiImageData * imgplayCountIcon;
+        GuiImageData * imgplayersSortIcon;
         GuiImageData * imgarrangeGrid;
         GuiImageData * imgarrangeGrid_gray;
         GuiImageData * imgarrangeCarousel;

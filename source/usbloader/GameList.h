@@ -2,6 +2,7 @@
 #define GAME_LIST_H_
 
 #include <vector>
+#include "Controls/DeviceHandler.hpp"
 #include "wstring.hpp"
 #include "usbloader/disc.h"
 
@@ -30,17 +31,22 @@ class GameList
         int operator++(int i) { return operator++(); }
         int operator--(int i) { return operator--(); }
         struct discHdr * GetCurrentSelected() const { return operator[](selectedGame); }
-
+        int GetPartitionNumber(const u8 *gameid) const;
+        int GetGameFS(const u8 *gameID) const { return DeviceHandler::Instance()->GetUSBFilesystemType(GetPartitionNumber(gameID)); }
+        void RemovePartition(int part_num);
     protected:
+        int InternalReadList(int part);
         static bool NameSortCallback(const struct discHdr *a, const struct discHdr *b);
         static bool PlaycountSortCallback(const struct discHdr *a, const struct discHdr *b);
         static bool RankingSortCallback(const struct discHdr *a, const struct discHdr *b);
+        static bool PlayersSortCallback(const struct discHdr *a, const struct discHdr *b);
 
         wString AvailableSearchChars;
         wString GameFilter;
         int selectedGame;
         std::vector<struct discHdr *> FilteredList;
         std::vector<struct discHdr> FullGameList;
+        std::vector<int> GamePartitionList;
 };
 
 extern GameList gameList;

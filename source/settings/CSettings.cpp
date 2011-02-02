@@ -114,6 +114,7 @@ void CSettings::SetDefault()
     InstallPartitions = ONLY_GAME_PARTITION;
     widescreen = (CONF_GetAspectRatio() == CONF_ASPECT_16_9);
     HomeMenu = HOME_MENU_DEFAULT;
+    MultiplePartitions = OFF;
 }
 
 bool CSettings::Load()
@@ -255,6 +256,7 @@ bool CSettings::Save()
     fprintf(file, "ParentalBlocks = %08X\n ", ParentalBlocks);
     fprintf(file, "returnTo = %s\n ", returnTo);
     fprintf(file, "HomeMenu = %d\n ", HomeMenu);
+    fprintf(file, "MultiplePartitions = %d\n ", MultiplePartitions);
     fclose(file);
 
     return true;
@@ -455,6 +457,11 @@ bool CSettings::SetSetting(char *name, char *value)
     else if (strcmp(name, "HomeMenu") == 0)
     {
         if (sscanf(value, "%d", &i) == 1) HomeMenu = i;
+        return true;
+    }
+    else if (strcmp(name, "MultiplePartitions") == 0)
+    {
+        if (sscanf(value, "%d", &i) == 1) MultiplePartitions = i;
         return true;
     }
     else if (strcmp(name, "patchcountrystrings") == 0)

@@ -3,6 +3,7 @@
 
 #include "wbfs_base.h"
 #include "libs/libwbfs/libwbfs.h"
+#include "usbloader/wbfs.h"
 #include "wbfs_rw.h"
 
 class Wbfs_Wbfs: public Wbfs
@@ -32,8 +33,9 @@ class Wbfs_Wbfs: public Wbfs
 
         u64 EstimateGameSize();
         int GetFragList(u8 *id);
+        virtual const u8 GetFSType(void) const { return PART_FS_WBFS; }
     private:
-        _WBFS_PartInfo PartInfo;
+        WBFS_PartInfo PartInfo;
 };
 
 #endif //_WBFS_WBFS_H
