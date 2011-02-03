@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-25 20:46+0100\n"
+"POT-Creation-Date: 2011-02-03 22:46+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -24,6 +24,14 @@ msgstr " er blevet gemt. Koderne er ikke blevet kontrolleret. Nogle af koderne v
 
 msgid " is not on the server."
 msgstr " er ikke på serveren."
+
+#, c-format
+msgid "%i files not found on the server!"
+msgstr ""
+
+#, c-format
+msgid "%i missing files"
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (Alle)"
@@ -346,8 +354,8 @@ msgstr "Opret"
 msgid "Credits"
 msgstr "Lavet af:"
 
-msgid "Custom Disc Images"
-msgstr "Tilpasset DVD billede"
+msgid "Custom Discarts"
+msgstr ""
 
 msgid "Custom Paths"
 msgstr "Sti-indstillinger"
@@ -454,12 +462,6 @@ msgstr "Færdig!"
 msgid "Download"
 msgstr ""
 
-msgid "Download Boxart image?"
-msgstr "Download boxart-billede?"
-
-msgid "Download Discart image?"
-msgstr "Download DVD-billede?"
-
 msgid "Download Now"
 msgstr "Download nu"
 
@@ -472,11 +474,14 @@ msgstr "Downloader 3D Covers"
 msgid "Downloading Flat Covers"
 msgstr "Downloader Flade Covers"
 
+msgid "Downloading Full HQ Covers"
+msgstr ""
+
+msgid "Downloading Full LQ Covers"
+msgstr ""
+
 msgid "Downloading custom Discarts"
 msgstr "Downloader tilpasset DVD billeder"
-
-msgid "Downloading file"
-msgstr "Downloader fil"
 
 msgid "Downloading file..."
 msgstr "Downloader fil..."
@@ -607,11 +612,23 @@ msgstr "Formater"
 msgid "Formatting, please wait..."
 msgstr "Formatere, vent venligst..."
 
+msgid "Found missing images."
+msgstr ""
+
 msgid "Free Space"
 msgstr "Ledig plads"
 
 msgid "French"
 msgstr "Fransk"
+
+msgid "Full Cover Path"
+msgstr ""
+
+msgid "Full HQ Covers"
+msgstr ""
+
+msgid "Full LQ Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr "Fuld Menu"
@@ -666,6 +683,9 @@ msgstr "Spil Split størrelse"
 
 msgid "Game is already installed:"
 msgstr "Dette spil er allerede installeret:"
+
+msgid "Game/Install Partition"
+msgstr ""
 
 msgid "Gamename [GAMEID]"
 msgstr ""
@@ -859,14 +879,14 @@ msgstr "Maj"
 msgid "Messageboard Update"
 msgstr "Messageboard opdatering"
 
-msgid "Missing files"
-msgstr "Manglende filer"
-
 msgid "Motion+ Video"
 msgstr ""
 
 msgid "Mount DVD drive"
 msgstr "Mount DVD-drev"
+
+msgid "Multiple Partitions"
+msgstr ""
 
 msgid "Music Loop Mode"
 msgstr "Musik i løkke"
@@ -988,8 +1008,8 @@ msgstr "Kun spil Partition"
 msgid "Only for Install"
 msgstr "Kun til installering"
 
-msgid "Original Disc Images"
-msgstr "Originale DVD billeder"
+msgid "Original Discarts"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Originale/Tilpassede"
@@ -1123,6 +1143,9 @@ msgstr "Gem fejlede. Ingen enheder indsat?"
 msgid "Save Game List to"
 msgstr "Gem spilliste på"
 
+msgid "Save List"
+msgstr ""
+
 msgid "Saved"
 msgstr "Gemt"
 
@@ -1161,6 +1184,9 @@ msgstr "Sluk Wii"
 
 msgid "Sort alphabetically"
 msgstr "Sortér alfabetisk"
+
+msgid "Sort by number of players"
+msgstr ""
 
 msgid "Sort by rank"
 msgstr "Sortér efter favoritstatus"
@@ -1434,9 +1460,6 @@ msgstr "eksisterer ikke! Indlæser spillet uden cheats."
 msgid "files left"
 msgstr "filer tilbage"
 
-msgid "files not found on the server!"
-msgstr "filer blev ikke fundet på serveren!"
-
 msgid "for FAT/NTFS support"
 msgstr "for FAT/NTFS understøttelse"
 
@@ -1475,6 +1498,27 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "Custom Disc Images"
+#~ msgstr "Tilpasset DVD billede"
+
+#~ msgid "Download Boxart image?"
+#~ msgstr "Download boxart-billede?"
+
+#~ msgid "Download Discart image?"
+#~ msgstr "Download DVD-billede?"
+
+#~ msgid "Downloading file"
+#~ msgstr "Downloader fil"
+
+#~ msgid "Missing files"
+#~ msgstr "Manglende filer"
+
+#~ msgid "Original Disc Images"
+#~ msgstr "Originale DVD billeder"
+
+#~ msgid "files not found on the server!"
+#~ msgstr "filer blev ikke fundet på serveren!"
 
 #~ msgid "Disc Images"
 #~ msgstr "DVD-billeder"

@@ -22,6 +22,8 @@ static std::vector<Wbfs *> WbfsList;
 
 wbfs_disc_t* WBFS_OpenDisc(u8 *discid)
 {
+    if(!discid) return NULL;
+
     int part = gameList.GetPartitionNumber(discid);
     if(VALID(part))
         return WbfsList[part]->OpenDisc(discid);
@@ -35,6 +37,8 @@ void WBFS_CloseDisc(wbfs_disc_t *disc)
 
     for(u32 i = 0; i < WbfsList.size(); ++i)
     {
+        if(!WbfsList[i]) continue;
+
         if(WbfsList[i]->GetHDDHandle() == disc->p)
         {
             WbfsList[i]->CloseDisc(disc);
@@ -72,7 +76,7 @@ s32 WBFS_OpenPart(int part_num)
     // close
     WBFS_Close(part_num);
 
-    if(part_num <= (int) WbfsList.size())
+    if(part_num >= (int) WbfsList.size())
         WbfsList.resize(part_num+1);
 
     gprintf("\tWBFS_OpenPart: start sector %u, sector count: %u\n", usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));

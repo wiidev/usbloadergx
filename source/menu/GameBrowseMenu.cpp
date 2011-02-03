@@ -15,7 +15,7 @@
 #include "usbloader/GameBooter.hpp"
 #include "network/networkops.h"
 #include "network/update.h"
-#include "network/CoverDownload.h"
+#include "network/ImageDownloader.h"
 #include "FileOperations/fileops.h"
 #include "settings/Settings.h"
 #include "settings/CSettings.h"
@@ -820,7 +820,7 @@ int GameBrowseMenu::MainLoop()
     else if (DownloadBtn->GetState() == STATE_CLICKED)
     {
         gprintf("\tDownloadBtn Clicked\n");
-        CoverDownload();
+        ImageDownloader::DownloadImages();
         ReloadBrowser();
         DownloadBtn->ResetState();
     }

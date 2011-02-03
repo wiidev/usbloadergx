@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-25 20:46+0100\n"
+"POT-Creation-Date: 2011-02-03 22:46+0100\n"
 "PO-Revision-Date: 2011-01-24 07:20+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -24,6 +24,14 @@ msgstr " is opgeslagen. De tekst is niet gecontroleerd. Delen van de code kunnen
 
 msgid " is not on the server."
 msgstr " staat niet op de server."
+
+#, c-format
+msgid "%i files not found on the server!"
+msgstr ""
+
+#, c-format
+msgid "%i missing files"
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (Iedereen 3+)"
@@ -346,8 +354,8 @@ msgstr "Maak"
 msgid "Credits"
 msgstr ""
 
-msgid "Custom Disc Images"
-msgstr "Aangepaste Disk Labels"
+msgid "Custom Discarts"
+msgstr ""
 
 msgid "Custom Paths"
 msgstr "Bestandslocaties"
@@ -454,12 +462,6 @@ msgstr "Klaar!"
 msgid "Download"
 msgstr ""
 
-msgid "Download Boxart image?"
-msgstr "Hoesjes downloaden?"
-
-msgid "Download Discart image?"
-msgstr "Disk label downloaden?"
-
 msgid "Download Now"
 msgstr "Download nu"
 
@@ -472,11 +474,14 @@ msgstr "3D hoesjes aan het downloaden"
 msgid "Downloading Flat Covers"
 msgstr "Platte hoesjes aan het downloaden"
 
+msgid "Downloading Full HQ Covers"
+msgstr ""
+
+msgid "Downloading Full LQ Covers"
+msgstr ""
+
 msgid "Downloading custom Discarts"
 msgstr "Aangepaste disc afbeeldingen downloaden"
-
-msgid "Downloading file"
-msgstr "Bestand downloaden"
 
 msgid "Downloading file..."
 msgstr "Bestand downloaden..."
@@ -607,11 +612,23 @@ msgstr "Formatteer"
 msgid "Formatting, please wait..."
 msgstr "Bezig met formatteren..."
 
+msgid "Found missing images."
+msgstr ""
+
 msgid "Free Space"
 msgstr "Vrije ruimte"
 
 msgid "French"
 msgstr "Frans"
+
+msgid "Full Cover Path"
+msgstr ""
+
+msgid "Full HQ Covers"
+msgstr ""
+
+msgid "Full LQ Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr "Volledig Menu"
@@ -666,6 +683,9 @@ msgstr "Spel splits grootte"
 
 msgid "Game is already installed:"
 msgstr "Spel is al geïnstalleerd:"
+
+msgid "Game/Install Partition"
+msgstr ""
 
 msgid "Gamename [GAMEID]"
 msgstr "Spelnaam [SPELID]"
@@ -859,14 +879,14 @@ msgstr "Mei"
 msgid "Messageboard Update"
 msgstr ""
 
-msgid "Missing files"
-msgstr "Missende bestanden"
-
 msgid "Motion+ Video"
 msgstr ""
 
 msgid "Mount DVD drive"
 msgstr "DVD Laden"
+
+msgid "Multiple Partitions"
+msgstr ""
 
 msgid "Music Loop Mode"
 msgstr "Muziek Herhaal Mode"
@@ -988,8 +1008,8 @@ msgstr "Alleen Spel Partitie"
 msgid "Only for Install"
 msgstr "Alleen bij installeren"
 
-msgid "Original Disc Images"
-msgstr "Originele Disk Labels"
+msgid "Original Discarts"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Origineel/Aangepast"
@@ -1123,6 +1143,9 @@ msgstr "Opslaan Mislukt. Geen media aanwezig?"
 msgid "Save Game List to"
 msgstr "Spellenlijst opslaan in"
 
+msgid "Save List"
+msgstr ""
+
 msgid "Saved"
 msgstr "Opgeslagen"
 
@@ -1161,6 +1184,9 @@ msgstr "Wii uitzetten"
 
 msgid "Sort alphabetically"
 msgstr "Alfabetisch sorteren"
+
+msgid "Sort by number of players"
+msgstr ""
 
 msgid "Sort by rank"
 msgstr "Sorteren op rang"
@@ -1434,9 +1460,6 @@ msgstr "bestaat niet! Spel laden zonder cheats."
 msgid "files left"
 msgstr "Bestanden resterend"
 
-msgid "files not found on the server!"
-msgstr "Bestanden niet gevonden op server!"
-
 msgid "for FAT/NTFS support"
 msgstr "voor FAT/NTFS ondersteuning"
 
@@ -1475,6 +1498,27 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "Custom Disc Images"
+#~ msgstr "Aangepaste Disk Labels"
+
+#~ msgid "Download Boxart image?"
+#~ msgstr "Hoesjes downloaden?"
+
+#~ msgid "Download Discart image?"
+#~ msgstr "Disk label downloaden?"
+
+#~ msgid "Downloading file"
+#~ msgstr "Bestand downloaden"
+
+#~ msgid "Missing files"
+#~ msgstr "Missende bestanden"
+
+#~ msgid "Original Disc Images"
+#~ msgstr "Originele Disk Labels"
+
+#~ msgid "files not found on the server!"
+#~ msgstr "Bestanden niet gevonden op server!"
 
 #~ msgid "Disc Images"
 #~ msgstr "Disk labels"

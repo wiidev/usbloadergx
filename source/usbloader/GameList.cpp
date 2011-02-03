@@ -52,6 +52,8 @@ void GameList::clear()
 
 struct discHdr * GameList::GetDiscHeader(const char * gameID) const
 {
+    if(!gameID) return NULL;
+
     for (u32 i = 0; i < FilteredList.size(); ++i)
     {
         if(strncasecmp(gameID, (const char *) FilteredList[i]->id, 6) == 0)
@@ -63,6 +65,8 @@ struct discHdr * GameList::GetDiscHeader(const char * gameID) const
 
 int GameList::GetPartitionNumber(const u8 *gameID) const
 {
+    if(!gameID) return -1;
+
     for (u32 i = 0; i < FullGameList.size(); ++i)
     {
         if(strncasecmp((const char *) gameID, (const char *) FullGameList[i].id, 6) == 0)

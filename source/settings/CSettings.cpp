@@ -77,7 +77,7 @@ void CSettings::SetDefault()
     strcpy(returnTo, "");
 
     godmode = 1;
-    videomode = VIDEO_MODE_SYSDEFAULT;
+    videomode = VIDEO_MODE_DISCDEFAULT;
     videopatch = OFF;
     language = CONSOLE_DEFAULT;
     ocarina = OFF;

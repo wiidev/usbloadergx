@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-25 20:46+0100\n"
+"POT-Creation-Date: 2011-02-03 22:46+0100\n"
 "PO-Revision-Date: 2010-03-22 10:55-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
@@ -24,6 +24,14 @@ msgstr " foi guardado. O texto não foi verificado. Parte do código pode não f
 
 msgid " is not on the server."
 msgstr " não está no servidor."
+
+#, c-format
+msgid "%i files not found on the server!"
+msgstr ""
+
+#, c-format
+msgid "%i missing files"
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (Todos)"
@@ -346,7 +354,7 @@ msgstr "Criar"
 msgid "Credits"
 msgstr "Créditos"
 
-msgid "Custom Disc Images"
+msgid "Custom Discarts"
 msgstr ""
 
 msgid "Custom Paths"
@@ -454,12 +462,6 @@ msgstr "Concluído!"
 msgid "Download"
 msgstr "Descarregar"
 
-msgid "Download Boxart image?"
-msgstr "Descarregar imagem da Caixa?"
-
-msgid "Download Discart image?"
-msgstr "Descarregar imagem do Disco?"
-
 msgid "Download Now"
 msgstr "Descarregar Agora"
 
@@ -472,11 +474,14 @@ msgstr ""
 msgid "Downloading Flat Covers"
 msgstr ""
 
-msgid "Downloading custom Discarts"
+msgid "Downloading Full HQ Covers"
 msgstr ""
 
-msgid "Downloading file"
-msgstr "Descarregando ficheiro:"
+msgid "Downloading Full LQ Covers"
+msgstr ""
+
+msgid "Downloading custom Discarts"
+msgstr ""
 
 msgid "Downloading file..."
 msgstr ""
@@ -607,11 +612,23 @@ msgstr "Formatar"
 msgid "Formatting, please wait..."
 msgstr "Formatando, por favor aguarde..."
 
+msgid "Found missing images."
+msgstr ""
+
 msgid "Free Space"
 msgstr "Espaço Livre"
 
 msgid "French"
 msgstr "Francês"
+
+msgid "Full Cover Path"
+msgstr ""
+
+msgid "Full HQ Covers"
+msgstr ""
+
+msgid "Full LQ Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr ""
@@ -666,6 +683,9 @@ msgstr ""
 
 msgid "Game is already installed:"
 msgstr "O jogo já está instalado:"
+
+msgid "Game/Install Partition"
+msgstr ""
 
 msgid "Gamename [GAMEID]"
 msgstr "NomeJogo [IDJOGO]"
@@ -859,14 +879,14 @@ msgstr "Mai"
 msgid "Messageboard Update"
 msgstr ""
 
-msgid "Missing files"
-msgstr "Ficheiros em falta"
-
 msgid "Motion+ Video"
 msgstr ""
 
 msgid "Mount DVD drive"
 msgstr "Montar Unidade de DVD"
+
+msgid "Multiple Partitions"
+msgstr ""
 
 msgid "Music Loop Mode"
 msgstr "Modo de Repetição"
@@ -988,7 +1008,7 @@ msgstr ""
 msgid "Only for Install"
 msgstr "Apenas na instalação"
 
-msgid "Original Disc Images"
+msgid "Original Discarts"
 msgstr ""
 
 msgid "Original/Customs"
@@ -1123,6 +1143,9 @@ msgstr ""
 msgid "Save Game List to"
 msgstr "Gravar lista de Jogos para"
 
+msgid "Save List"
+msgstr ""
+
 msgid "Saved"
 msgstr "Gravado"
 
@@ -1161,6 +1184,9 @@ msgstr ""
 
 msgid "Sort alphabetically"
 msgstr "Ordenar por ordem alfabética"
+
+msgid "Sort by number of players"
+msgstr ""
 
 msgid "Sort by rank"
 msgstr "Ordenar por classificação"
@@ -1434,9 +1460,6 @@ msgstr "não existe!  Carregando jogo sem truques."
 msgid "files left"
 msgstr "ficheiros restantes"
 
-msgid "files not found on the server!"
-msgstr "ficheiros não encontrados no servidor!"
-
 msgid "for FAT/NTFS support"
 msgstr "pelo suporte FAT/NTFS"
 
@@ -1475,6 +1498,21 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Download Boxart image?"
+#~ msgstr "Descarregar imagem da Caixa?"
+
+#~ msgid "Download Discart image?"
+#~ msgstr "Descarregar imagem do Disco?"
+
+#~ msgid "Downloading file"
+#~ msgstr "Descarregando ficheiro:"
+
+#~ msgid "Missing files"
+#~ msgstr "Ficheiros em falta"
+
+#~ msgid "files not found on the server!"
+#~ msgstr "ficheiros não encontrados no servidor!"
 
 #~ msgid "Disc Images"
 #~ msgstr "Imagens de Disco"

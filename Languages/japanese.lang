@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-25 20:46+0100\n"
+"POT-Creation-Date: 2011-02-03 22:46+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ichiroling\n"
 "Language-Team: hosigumayuugi, papa\n"
@@ -24,6 +24,14 @@ msgstr "に保存されました。使用は 自己責任でお願いします�
 
 msgid " is not on the server."
 msgstr "はｻｰﾊﾞｰにありません"
+
+#, c-format
+msgid "%i files not found on the server!"
+msgstr ""
+
+#, c-format
+msgid "%i missing files"
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "セットしない"
@@ -346,8 +354,8 @@ msgstr "作成"
 msgid "Credits"
 msgstr "提供･協力"
 
-msgid "Custom Disc Images"
-msgstr "カスタムレーベル"
+msgid "Custom Discarts"
+msgstr ""
 
 msgid "Custom Paths"
 msgstr "パスを変更"
@@ -454,12 +462,6 @@ msgstr "完了！"
 msgid "Download"
 msgstr "ダウンロード"
 
-msgid "Download Boxart image?"
-msgstr "画像をﾀﾞｳﾝﾛｰﾄﾞしますか？"
-
-msgid "Download Discart image?"
-msgstr "画像をﾀﾞｳﾝﾛｰﾄﾞしますか？"
-
 msgid "Download Now"
 msgstr "ダウンロード"
 
@@ -472,11 +474,14 @@ msgstr "両面ｶﾊﾞｰをﾀﾞｳﾝﾛｰﾄﾞ中"
 msgid "Downloading Flat Covers"
 msgstr "片面ｶﾊﾞｰをﾀﾞｳﾝﾛｰﾄﾞ中"
 
+msgid "Downloading Full HQ Covers"
+msgstr ""
+
+msgid "Downloading Full LQ Covers"
+msgstr ""
+
 msgid "Downloading custom Discarts"
 msgstr "カスタムカバーをダウンロード中"
-
-msgid "Downloading file"
-msgstr "ファイルをダウンロード中"
 
 msgid "Downloading file..."
 msgstr "ダウンロード中です..."
@@ -607,11 +612,23 @@ msgstr "初期化"
 msgid "Formatting, please wait..."
 msgstr "初期化中です、暫くお待ち下さい..."
 
+msgid "Found missing images."
+msgstr ""
+
 msgid "Free Space"
 msgstr "空き"
 
 msgid "French"
 msgstr "フランス語"
+
+msgid "Full Cover Path"
+msgstr ""
+
+msgid "Full HQ Covers"
+msgstr ""
+
+msgid "Full LQ Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr "フルメニュー"
@@ -666,6 +683,9 @@ msgstr "ゲームの分割サイズ"
 
 msgid "Game is already installed:"
 msgstr "このｹﾞｰﾑは既にｲﾝｽﾄｰﾙされています:"
+
+msgid "Game/Install Partition"
+msgstr ""
 
 msgid "Gamename [GAMEID]"
 msgstr "ゲーム名 [ゲームID]"
@@ -859,14 +879,14 @@ msgstr "5月"
 msgid "Messageboard Update"
 msgstr "Wii伝言板の更新"
 
-msgid "Missing files"
-msgstr "個の画像"
-
 msgid "Motion+ Video"
 msgstr "モーション＋の映像"
 
 msgid "Mount DVD drive"
 msgstr "DVDを起動"
+
+msgid "Multiple Partitions"
+msgstr ""
 
 msgid "Music Loop Mode"
 msgstr "ループ機能"
@@ -988,8 +1008,8 @@ msgstr "ゲーム領域のみ"
 msgid "Only for Install"
 msgstr "インストール中のみ"
 
-msgid "Original Disc Images"
-msgstr "純正レーベル"
+msgid "Original Discarts"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "公式を優先"
@@ -1123,6 +1143,9 @@ msgstr "保存に失敗しました"
 msgid "Save Game List to"
 msgstr "リストを保存しますか"
 
+msgid "Save List"
+msgstr ""
+
 msgid "Saved"
 msgstr "保存しました"
 
@@ -1161,6 +1184,9 @@ msgstr "シャットダウン"
 
 msgid "Sort alphabetically"
 msgstr "名前順に並び替え"
+
+msgid "Sort by number of players"
+msgstr ""
 
 msgid "Sort by rank"
 msgstr "ランク順に並び替え"
@@ -1434,9 +1460,6 @@ msgstr "存在しないので チートなしで起動します"
 msgid "files left"
 msgstr "個未完了"
 
-msgid "files not found on the server!"
-msgstr "個ｻｰﾊﾞｰにありませんでした…"
-
 msgid "for FAT/NTFS support"
 msgstr "…FATとNTFSへの対応"
 
@@ -1475,6 +1498,27 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "Custom Disc Images"
+#~ msgstr "カスタムレーベル"
+
+#~ msgid "Download Boxart image?"
+#~ msgstr "画像をﾀﾞｳﾝﾛｰﾄﾞしますか？"
+
+#~ msgid "Download Discart image?"
+#~ msgstr "画像をﾀﾞｳﾝﾛｰﾄﾞしますか？"
+
+#~ msgid "Downloading file"
+#~ msgstr "ファイルをダウンロード中"
+
+#~ msgid "Missing files"
+#~ msgstr "個の画像"
+
+#~ msgid "Original Disc Images"
+#~ msgstr "純正レーベル"
+
+#~ msgid "files not found on the server!"
+#~ msgstr "個ｻｰﾊﾞｰにありませんでした…"
 
 #~ msgid "Disc Images"
 #~ msgstr "ディスク画像"

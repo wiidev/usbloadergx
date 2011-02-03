@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-25 21:30+0100\n"
+"POT-Creation-Date: 2011-02-03 22:46+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -24,6 +24,14 @@ msgstr " ถูกบันทึกแล้ว ข้อความยัง�
 
 msgid " is not on the server."
 msgstr " ไม่อยู่บนแม่ข่าย"
+
+#, c-format
+msgid "%i files not found on the server!"
+msgstr ""
+
+#, c-format
+msgid "%i missing files"
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (ทุกคน)"
@@ -346,7 +354,7 @@ msgstr "สร้าง"
 msgid "Credits"
 msgstr "เครดิต"
 
-msgid "Custom Disc Images"
+msgid "Custom Discarts"
 msgstr ""
 
 msgid "Custom Paths"
@@ -454,12 +462,6 @@ msgstr "เสร็จ!"
 msgid "Download"
 msgstr "ดาวน์โหลด"
 
-msgid "Download Boxart image?"
-msgstr "ดาวน์โหลดภาพกล่อง ?"
-
-msgid "Download Discart image?"
-msgstr "ดาวน์โหลดภาพแผ่น ?"
-
 msgid "Download Now"
 msgstr "เริ่มการดาวน์โหลด"
 
@@ -472,11 +474,14 @@ msgstr ""
 msgid "Downloading Flat Covers"
 msgstr ""
 
-msgid "Downloading custom Discarts"
+msgid "Downloading Full HQ Covers"
 msgstr ""
 
-msgid "Downloading file"
-msgstr "กำลังดาวน์โหลดไฟล์:"
+msgid "Downloading Full LQ Covers"
+msgstr ""
+
+msgid "Downloading custom Discarts"
+msgstr ""
 
 msgid "Downloading file..."
 msgstr ""
@@ -607,11 +612,23 @@ msgstr "ฟอร์แมต"
 msgid "Formatting, please wait..."
 msgstr "กำลังฟอร์แมต,รอสักครู่..."
 
+msgid "Found missing images."
+msgstr ""
+
 msgid "Free Space"
 msgstr "พื้นที่ว่าง"
 
 msgid "French"
 msgstr "ฝรั่งเศส"
+
+msgid "Full Cover Path"
+msgstr ""
+
+msgid "Full HQ Covers"
+msgstr ""
+
+msgid "Full LQ Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr ""
@@ -666,6 +683,9 @@ msgstr ""
 
 msgid "Game is already installed:"
 msgstr "เกมส์นี้ถูกติดตั้งอยู่แล้ว:"
+
+msgid "Game/Install Partition"
+msgstr ""
 
 msgid "Gamename [GAMEID]"
 msgstr ""
@@ -859,14 +879,14 @@ msgstr "พค."
 msgid "Messageboard Update"
 msgstr ""
 
-msgid "Missing files"
-msgstr "ไฟล์ที่หาไม่พบ"
-
 msgid "Motion+ Video"
 msgstr ""
 
 msgid "Mount DVD drive"
 msgstr "เชื่อม DVD ไดร์ฟ"
+
+msgid "Multiple Partitions"
+msgstr ""
 
 msgid "Music Loop Mode"
 msgstr ""
@@ -988,7 +1008,7 @@ msgstr ""
 msgid "Only for Install"
 msgstr "เฉพาะติดตั้งเท่านั้น"
 
-msgid "Original Disc Images"
+msgid "Original Discarts"
 msgstr ""
 
 msgid "Original/Customs"
@@ -1123,6 +1143,9 @@ msgstr ""
 msgid "Save Game List to"
 msgstr "บันทึกรายชื่อเกมส์ไปที่"
 
+msgid "Save List"
+msgstr ""
+
 msgid "Saved"
 msgstr "บันทึกแล้ว"
 
@@ -1161,6 +1184,9 @@ msgstr ""
 
 msgid "Sort alphabetically"
 msgstr "เรียงตามตัวอักษร"
+
+msgid "Sort by number of players"
+msgstr ""
 
 msgid "Sort by rank"
 msgstr "เรียงตามอันดับ"
@@ -1434,9 +1460,6 @@ msgstr "ไม่มี! โหลดเกมส์โดยไม่ใช้�
 msgid "files left"
 msgstr "ไฟล์ที่ยังเหลือ"
 
-msgid "files not found on the server!"
-msgstr "ไม่พบไฟล์/i บนเซิฟเวอร์!"
-
 msgid "for FAT/NTFS support"
 msgstr ""
 
@@ -1475,6 +1498,21 @@ msgstr "จาก"
 
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
+
+#~ msgid "Download Boxart image?"
+#~ msgstr "ดาวน์โหลดภาพกล่อง ?"
+
+#~ msgid "Download Discart image?"
+#~ msgstr "ดาวน์โหลดภาพแผ่น ?"
+
+#~ msgid "Downloading file"
+#~ msgstr "กำลังดาวน์โหลดไฟล์:"
+
+#~ msgid "Missing files"
+#~ msgstr "ไฟล์ที่หาไม่พบ"
+
+#~ msgid "files not found on the server!"
+#~ msgstr "ไม่พบไฟล์/i บนเซิฟเวอร์!"
 
 #~ msgid "Disc Images"
 #~ msgstr "ภาพแผ่น"

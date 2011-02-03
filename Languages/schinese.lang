@@ -5,16 +5,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-24 21:19+0100\n"
+"POT-Creation-Date: 2011-02-03 22:46+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid " "
-msgstr ""
 
 msgid " Wad Saved as:"
 msgstr "WAD 保存为:"
@@ -27,6 +24,14 @@ msgstr "已经被保存.内容尚未验证.部分代码可能无法作用.如果
 
 msgid " is not on the server."
 msgstr "不在服务器上"
+
+#, c-format
+msgid "%i files not found on the server!"
+msgstr ""
+
+#, c-format
+msgid "%i missing files"
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (全年龄)"
@@ -349,8 +354,8 @@ msgstr "创建"
 msgid "Credits"
 msgstr "作者信息"
 
-msgid "Custom Disc Images"
-msgstr "自定义光盘图片"
+msgid "Custom Discarts"
+msgstr ""
 
 msgid "Custom Paths"
 msgstr "自定义路径"
@@ -457,12 +462,6 @@ msgstr "完成"
 msgid "Download"
 msgstr "下载"
 
-msgid "Download Boxart image?"
-msgstr "下载封面图片?"
-
-msgid "Download Discart image?"
-msgstr "下载光盘图片?"
-
 msgid "Download Now"
 msgstr "现在下载"
 
@@ -475,11 +474,14 @@ msgstr "正在下载3D封面"
 msgid "Downloading Flat Covers"
 msgstr "正在下载2D封面"
 
+msgid "Downloading Full HQ Covers"
+msgstr ""
+
+msgid "Downloading Full LQ Covers"
+msgstr ""
+
 msgid "Downloading custom Discarts"
 msgstr "正在下载自制光盘封面"
-
-msgid "Downloading file"
-msgstr "下载文件:"
 
 msgid "Downloading file..."
 msgstr "正在下载文件..."
@@ -610,11 +612,23 @@ msgstr "格式化"
 msgid "Formatting, please wait..."
 msgstr "格式化中, 请稍候..."
 
+msgid "Found missing images."
+msgstr ""
+
 msgid "Free Space"
 msgstr "剩余空间"
 
 msgid "French"
 msgstr "法文"
+
+msgid "Full Cover Path"
+msgstr ""
+
+msgid "Full HQ Covers"
+msgstr ""
+
+msgid "Full LQ Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr "完整菜单"
@@ -669,6 +683,9 @@ msgstr "游戏分割大小"
 
 msgid "Game is already installed:"
 msgstr "已安装的游戏:"
+
+msgid "Game/Install Partition"
+msgstr ""
 
 msgid "Gamename [GAMEID]"
 msgstr "游戏名[游戏ID]"
@@ -862,14 +879,14 @@ msgstr "五月"
 msgid "Messageboard Update"
 msgstr "留言板更新"
 
-msgid "Missing files"
-msgstr "缺少的文件"
-
 msgid "Motion+ Video"
 msgstr "移动+视频"
 
 msgid "Mount DVD drive"
 msgstr "挂载DVD光驱"
+
+msgid "Multiple Partitions"
+msgstr ""
 
 msgid "Music Loop Mode"
 msgstr "音乐循环模式"
@@ -991,8 +1008,8 @@ msgstr "仅游戏分区"
 msgid "Only for Install"
 msgstr "仅安装"
 
-msgid "Original Disc Images"
-msgstr "官方光盘图片"
+msgid "Original Discarts"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "官方/自制"
@@ -1126,6 +1143,9 @@ msgstr "保存失败. 可能是没有设备插入?"
 msgid "Save Game List to"
 msgstr "保存游戏列表到"
 
+msgid "Save List"
+msgstr ""
+
 msgid "Saved"
 msgstr "已保存"
 
@@ -1164,6 +1184,9 @@ msgstr "关闭 Wii"
 
 msgid "Sort alphabetically"
 msgstr "按字母排序"
+
+msgid "Sort by number of players"
+msgstr ""
 
 msgid "Sort by rank"
 msgstr "以排名排序"
@@ -1437,9 +1460,6 @@ msgstr "不存在!游戏以无作弊码方式载入."
 msgid "files left"
 msgstr "剩余文件"
 
-msgid "files not found on the server!"
-msgstr "服务器中无此文件!"
-
 msgid "for FAT/NTFS support"
 msgstr "的 FAT/NTFS 支持"
 
@@ -1478,6 +1498,27 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "Custom Disc Images"
+#~ msgstr "自定义光盘图片"
+
+#~ msgid "Download Boxart image?"
+#~ msgstr "下载封面图片?"
+
+#~ msgid "Download Discart image?"
+#~ msgstr "下载光盘图片?"
+
+#~ msgid "Downloading file"
+#~ msgstr "下载文件:"
+
+#~ msgid "Missing files"
+#~ msgstr "缺少的文件"
+
+#~ msgid "Original Disc Images"
+#~ msgstr "官方光盘图片"
+
+#~ msgid "files not found on the server!"
+#~ msgstr "服务器中无此文件!"
 
 #~ msgid "Disc Images"
 #~ msgstr "光盘图片"

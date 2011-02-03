@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-25 20:46+0100\n"
+"POT-Creation-Date: 2011-02-03 22:46+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nikolai_ca\n"
 "Language-Team: Kir, alendit, nikolai_ca\n"
@@ -24,6 +24,14 @@ msgstr " был сохранен. Текст не был проверен. Не�
 
 msgid " is not on the server."
 msgstr " не найден на сервере"
+
+#, c-format
+msgid "%i files not found on the server!"
+msgstr ""
+
+#, c-format
+msgid "%i missing files"
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (Для всех)"
@@ -346,7 +354,7 @@ msgstr "Создать"
 msgid "Credits"
 msgstr "Об авторах"
 
-msgid "Custom Disc Images"
+msgid "Custom Discarts"
 msgstr ""
 
 msgid "Custom Paths"
@@ -454,12 +462,6 @@ msgstr "Готово!"
 msgid "Download"
 msgstr "Загрузка"
 
-msgid "Download Boxart image?"
-msgstr "Скачать обложку диска?"
-
-msgid "Download Discart image?"
-msgstr "Скачать изображение диска ?"
-
 msgid "Download Now"
 msgstr "Скачать сейчас"
 
@@ -472,11 +474,14 @@ msgstr ""
 msgid "Downloading Flat Covers"
 msgstr ""
 
-msgid "Downloading custom Discarts"
+msgid "Downloading Full HQ Covers"
 msgstr ""
 
-msgid "Downloading file"
-msgstr "Скачиваю файл:"
+msgid "Downloading Full LQ Covers"
+msgstr ""
+
+msgid "Downloading custom Discarts"
+msgstr ""
 
 msgid "Downloading file..."
 msgstr ""
@@ -607,11 +612,23 @@ msgstr "Форматировать"
 msgid "Formatting, please wait..."
 msgstr "Форматирую, пожалуйста подождите..."
 
+msgid "Found missing images."
+msgstr ""
+
 msgid "Free Space"
 msgstr "Свободное пространство"
 
 msgid "French"
 msgstr "Французский"
+
+msgid "Full Cover Path"
+msgstr ""
+
+msgid "Full HQ Covers"
+msgstr ""
+
+msgid "Full LQ Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr ""
@@ -666,6 +683,9 @@ msgstr ""
 
 msgid "Game is already installed:"
 msgstr "Игра уже установлена:"
+
+msgid "Game/Install Partition"
+msgstr ""
 
 msgid "Gamename [GAMEID]"
 msgstr ""
@@ -859,14 +879,14 @@ msgstr "Май"
 msgid "Messageboard Update"
 msgstr ""
 
-msgid "Missing files"
-msgstr "Отсутствующие файлы"
-
 msgid "Motion+ Video"
 msgstr ""
 
 msgid "Mount DVD drive"
 msgstr "Монтировать DVD"
+
+msgid "Multiple Partitions"
+msgstr ""
 
 msgid "Music Loop Mode"
 msgstr ""
@@ -988,7 +1008,7 @@ msgstr ""
 msgid "Only for Install"
 msgstr "Только при установке"
 
-msgid "Original Disc Images"
+msgid "Original Discarts"
 msgstr ""
 
 msgid "Original/Customs"
@@ -1123,6 +1143,9 @@ msgstr ""
 msgid "Save Game List to"
 msgstr "Сохранить список игр в"
 
+msgid "Save List"
+msgstr ""
+
 msgid "Saved"
 msgstr "Сохранено"
 
@@ -1161,6 +1184,9 @@ msgstr ""
 
 msgid "Sort alphabetically"
 msgstr "Сортировать по алфавиту"
+
+msgid "Sort by number of players"
+msgstr ""
 
 msgid "Sort by rank"
 msgstr "Сортировать по популярности"
@@ -1434,9 +1460,6 @@ msgstr "не существует! Загружаю игру без читов"
 msgid "files left"
 msgstr "файлов осталось"
 
-msgid "files not found on the server!"
-msgstr "файлы не найдены на сервере!"
-
 msgid "for FAT/NTFS support"
 msgstr "для поддержки FAT/NTFS"
 
@@ -1475,6 +1498,21 @@ msgstr "из"
 
 msgid "seconds left"
 msgstr "секунд осталось"
+
+#~ msgid "Download Boxart image?"
+#~ msgstr "Скачать обложку диска?"
+
+#~ msgid "Download Discart image?"
+#~ msgstr "Скачать изображение диска ?"
+
+#~ msgid "Downloading file"
+#~ msgstr "Скачиваю файл:"
+
+#~ msgid "Missing files"
+#~ msgstr "Отсутствующие файлы"
+
+#~ msgid "files not found on the server!"
+#~ msgstr "файлы не найдены на сервере!"
 
 #~ msgid "Disc Images"
 #~ msgstr "Изображения дисков"

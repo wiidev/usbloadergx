@@ -860,7 +860,6 @@ int showGameInfo(char *ID)
         }
         else if(coverBtn.GetState() == STATE_CLICKED && boxCov)
         {
-            coverBtn.ResetState();
             boxCov->SetEffect(EFFECT_BOX_FLY_CENTRE, 100);
             gameinfoWindow2.Remove(&nextBtn);
             gameinfoWindow2.Remove(&homeBtn);
@@ -889,8 +888,9 @@ int showGameInfo(char *ID)
             }
 
             boxCov->SetZoomable(false);
-            backBtn.ResetState();
             boxCov->SetEffect(EFFECT_BOX_FLY_BACK, 100);
+            backBtn.ResetState();
+            coverBtn.ResetState();
 
         }
         else if (((nextBtn.GetState() == STATE_CLICKED) || (nextBtn.GetState() == STATE_HELD)) && GameInfo.Synopsis.size() > 0)

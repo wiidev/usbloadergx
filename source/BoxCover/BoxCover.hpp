@@ -46,6 +46,8 @@ class BoxCover : public GuiImage
         void Update(GuiTrigger * t);
         void UpdateEffects();
     private:
+        void WiiPADControl(GuiTrigger *t);
+
         f32 RotX;
         f32 RotY;
         f32 RotZ;
@@ -60,6 +62,11 @@ class BoxCover : public GuiImage
         f32 Animation;
         f32 Animation2;
         u32 last_manual_move_frame;
+        int moveStartPosX;
+        int moveStartPosY;
+        f32 movePosX;
+        f32 movePosY;
+        int moveChan;
         bool flatCover;
         bool Zoomable;
         guVector camera, up, look;

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-25 20:46+0100\n"
+"POT-Creation-Date: 2011-02-03 22:46+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -24,6 +24,14 @@ msgstr ""
 
 msgid " is not on the server."
 msgstr "Tiedostoa ei löydy serveriltä"
+
+#, c-format
+msgid "%i files not found on the server!"
+msgstr ""
+
+#, c-format
+msgid "%i missing files"
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (Kaikille)"
@@ -346,7 +354,7 @@ msgstr "Luo"
 msgid "Credits"
 msgstr "Tekijät"
 
-msgid "Custom Disc Images"
+msgid "Custom Discarts"
 msgstr ""
 
 msgid "Custom Paths"
@@ -454,12 +462,6 @@ msgstr "Valmis!"
 msgid "Download"
 msgstr ""
 
-msgid "Download Boxart image?"
-msgstr "Lataa kansikuva?"
-
-msgid "Download Discart image?"
-msgstr "Lataa levykuva?"
-
 msgid "Download Now"
 msgstr "Lataa nyt"
 
@@ -472,11 +474,14 @@ msgstr ""
 msgid "Downloading Flat Covers"
 msgstr ""
 
-msgid "Downloading custom Discarts"
+msgid "Downloading Full HQ Covers"
 msgstr ""
 
-msgid "Downloading file"
-msgstr "Lataa tiedostoa:"
+msgid "Downloading Full LQ Covers"
+msgstr ""
+
+msgid "Downloading custom Discarts"
+msgstr ""
 
 msgid "Downloading file..."
 msgstr ""
@@ -607,11 +612,23 @@ msgstr "Formatoi"
 msgid "Formatting, please wait..."
 msgstr "Formatoi, odota..."
 
+msgid "Found missing images."
+msgstr ""
+
 msgid "Free Space"
 msgstr "Vapaata tilaa"
 
 msgid "French"
 msgstr "Ranska"
+
+msgid "Full Cover Path"
+msgstr ""
+
+msgid "Full HQ Covers"
+msgstr ""
+
+msgid "Full LQ Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr ""
@@ -666,6 +683,9 @@ msgstr ""
 
 msgid "Game is already installed:"
 msgstr "Peli on jo asennettu:"
+
+msgid "Game/Install Partition"
+msgstr ""
 
 msgid "Gamename [GAMEID]"
 msgstr ""
@@ -859,13 +879,13 @@ msgstr "touko"
 msgid "Messageboard Update"
 msgstr ""
 
-msgid "Missing files"
-msgstr "tiedostoja puuttuu"
-
 msgid "Motion+ Video"
 msgstr ""
 
 msgid "Mount DVD drive"
+msgstr ""
+
+msgid "Multiple Partitions"
 msgstr ""
 
 msgid "Music Loop Mode"
@@ -988,7 +1008,7 @@ msgstr ""
 msgid "Only for Install"
 msgstr "Ainoastaan asennusta varten"
 
-msgid "Original Disc Images"
+msgid "Original Discarts"
 msgstr ""
 
 msgid "Original/Customs"
@@ -1123,6 +1143,9 @@ msgstr ""
 msgid "Save Game List to"
 msgstr ""
 
+msgid "Save List"
+msgstr ""
+
 msgid "Saved"
 msgstr ""
 
@@ -1161,6 +1184,9 @@ msgstr ""
 
 msgid "Sort alphabetically"
 msgstr "Järjestä aakkosittain"
+
+msgid "Sort by number of players"
+msgstr ""
 
 msgid "Sort by rank"
 msgstr ""
@@ -1434,9 +1460,6 @@ msgstr "Ei löydy! Ladataan peli ilman koodeja."
 msgid "files left"
 msgstr "Tiedostoja jäljellä"
 
-msgid "files not found on the server!"
-msgstr "tiedostoja ei löytynyt serveriltä!"
-
 msgid "for FAT/NTFS support"
 msgstr ""
 
@@ -1475,6 +1498,21 @@ msgstr "josta"
 
 msgid "seconds left"
 msgstr "sekuntia jäljellä"
+
+#~ msgid "Download Boxart image?"
+#~ msgstr "Lataa kansikuva?"
+
+#~ msgid "Download Discart image?"
+#~ msgstr "Lataa levykuva?"
+
+#~ msgid "Downloading file"
+#~ msgstr "Lataa tiedostoa:"
+
+#~ msgid "Missing files"
+#~ msgstr "tiedostoja puuttuu"
+
+#~ msgid "files not found on the server!"
+#~ msgstr "tiedostoja ei löytynyt serveriltä!"
 
 #~ msgid "Disc Images"
 #~ msgstr "Levykuvat"

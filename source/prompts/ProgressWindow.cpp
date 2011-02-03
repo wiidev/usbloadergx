@@ -35,6 +35,7 @@ static s64 progressTotal = -1;
 static bool showTime = false;
 static bool showSize = false;
 static bool changed = true;
+static bool changedMessages = true;
 
 /****************************************************************************
  * StartProgress
@@ -100,6 +101,7 @@ void ShowProgress(const char *title, const char *msg1, const char *msg2, s64 don
         showProgress = 1;
     }
 
+    changedMessages = true;
     changed = true;
 
     LWP_MutexUnlock(ProgressMutex);
@@ -146,6 +148,7 @@ static void UpdateProgressValues(GuiImage *progressbarImg, GuiText *prTxt, GuiTe
 
     LWP_MutexLock(ProgressMutex);
     changed = false;
+    changedMessages = false;
     s64 done = progressDone;
     s64 total = progressTotal;
     u32 speed = 0;
@@ -357,8 +360,9 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
         if (changed)
         {
-            if (progressMsg1) msg1Txt.SetText(progressMsg1);
-            if (progressMsg2) msg2Txt.SetText(progressMsg2);
+            if (changedMessages && progressTitle) titleTxt.SetText(progressTitle);
+            if (changedMessages && progressMsg1) msg1Txt.SetText(progressMsg1);
+            if (changedMessages && progressMsg2) msg2Txt.SetText(progressMsg2);
 
             UpdateProgressValues(&progressbarImg, &prTxt, &timeTxt, &speedTxt, &sizeTxt);
         }

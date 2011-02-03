@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-25 20:46+0100\n"
+"POT-Creation-Date: 2011-02-03 22:46+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -24,6 +24,14 @@ msgstr " byl uložen. Soubor nebyl zkontrolován. Nekteré cásti kódu nemusí 
 
 msgid " is not on the server."
 msgstr " není na serveru"
+
+#, c-format
+msgid "%i files not found on the server!"
+msgstr ""
+
+#, c-format
+msgid "%i missing files"
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (Každý)"
@@ -346,8 +354,8 @@ msgstr "Vytvorit"
 msgid "Credits"
 msgstr "Zásluhy"
 
-msgid "Custom Disc Images"
-msgstr "Vlastní potisky DVD"
+msgid "Custom Discarts"
+msgstr ""
 
 msgid "Custom Paths"
 msgstr "Vlastní cesty"
@@ -454,12 +462,6 @@ msgstr "Hotovo!"
 msgid "Download"
 msgstr "Stažení"
 
-msgid "Download Boxart image?"
-msgstr "Stáhnout obal krabicky?"
-
-msgid "Download Discart image?"
-msgstr "Stáhnout potisk DVD?"
-
 msgid "Download Now"
 msgstr "Stáhnout nyní"
 
@@ -472,11 +474,14 @@ msgstr "Stahování 3D obalu"
 msgid "Downloading Flat Covers"
 msgstr "Stahování plochých obalu"
 
+msgid "Downloading Full HQ Covers"
+msgstr ""
+
+msgid "Downloading Full LQ Covers"
+msgstr ""
+
 msgid "Downloading custom Discarts"
 msgstr "Stahuji upravené potisky"
-
-msgid "Downloading file"
-msgstr "Stahuji soubor"
 
 msgid "Downloading file..."
 msgstr "Stahuji soubor ..."
@@ -607,11 +612,23 @@ msgstr "Formát"
 msgid "Formatting, please wait..."
 msgstr "Formátuji, cekejte prosím ..."
 
+msgid "Found missing images."
+msgstr ""
+
 msgid "Free Space"
 msgstr "Volné místo"
 
 msgid "French"
 msgstr "Francouzky"
+
+msgid "Full Cover Path"
+msgstr ""
+
+msgid "Full HQ Covers"
+msgstr ""
+
+msgid "Full LQ Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr "Plná nabídka"
@@ -666,6 +683,9 @@ msgstr "Velikost rozdelení hry"
 
 msgid "Game is already installed:"
 msgstr "Hra je již nainstalována:"
+
+msgid "Game/Install Partition"
+msgstr ""
 
 msgid "Gamename [GAMEID]"
 msgstr "Název hry [IdHry]"
@@ -859,14 +879,14 @@ msgstr "Kvet"
 msgid "Messageboard Update"
 msgstr "Aktualizace nástenky"
 
-msgid "Missing files"
-msgstr "Chybející soubory"
-
 msgid "Motion+ Video"
 msgstr "WiiMotion+ Video"
 
 msgid "Mount DVD drive"
 msgstr "Spustit z DVD"
+
+msgid "Multiple Partitions"
+msgstr ""
 
 msgid "Music Loop Mode"
 msgstr "Mód hudební smycky"
@@ -988,8 +1008,8 @@ msgstr "Pouze oddíl s hrami"
 msgid "Only for Install"
 msgstr "Pouze pro instalaci"
 
-msgid "Original Disc Images"
-msgstr "Originální potisky DVD"
+msgid "Original Discarts"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Originál/Upravené"
@@ -1123,6 +1143,9 @@ msgstr "Ulození selhalo. Je pripojeno zarízení?"
 msgid "Save Game List to"
 msgstr "Uložit seznam her do"
 
+msgid "Save List"
+msgstr ""
+
 msgid "Saved"
 msgstr "Uloženo"
 
@@ -1161,6 +1184,9 @@ msgstr "Vypnout Wii"
 
 msgid "Sort alphabetically"
 msgstr "Trídení dle abecedy"
+
+msgid "Sort by number of players"
+msgstr ""
 
 msgid "Sort by rank"
 msgstr "Trídit podle hodnocení"
@@ -1434,9 +1460,6 @@ msgstr "neexistuje. Nahrávání hry bez cheatu."
 msgid "files left"
 msgstr "souboru zbývá"
 
-msgid "files not found on the server!"
-msgstr "souboru nenalezeno na serveru"
-
 msgid "for FAT/NTFS support"
 msgstr "pro FAT/NTFS podporu"
 
@@ -1475,3 +1498,24 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid "Custom Disc Images"
+#~ msgstr "Vlastní potisky DVD"
+
+#~ msgid "Download Boxart image?"
+#~ msgstr "Stáhnout obal krabicky?"
+
+#~ msgid "Download Discart image?"
+#~ msgstr "Stáhnout potisk DVD?"
+
+#~ msgid "Downloading file"
+#~ msgstr "Stahuji soubor"
+
+#~ msgid "Missing files"
+#~ msgstr "Chybející soubory"
+
+#~ msgid "Original Disc Images"
+#~ msgstr "Originální potisky DVD"
+
+#~ msgid "files not found on the server!"
+#~ msgstr "souboru nenalezeno na serveru"

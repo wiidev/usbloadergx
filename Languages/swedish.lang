@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-25 20:46+0100\n"
+"POT-Creation-Date: 2011-02-03 22:46+0100\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -24,6 +24,14 @@ msgstr "har sparats. Texten har inte blivit varifierad. Några av koderna kanske
 
 msgid " is not on the server."
 msgstr "finns inte på servern."
+
+#, c-format
+msgid "%i files not found on the server!"
+msgstr ""
+
+#, c-format
+msgid "%i missing files"
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (Alla)"
@@ -346,7 +354,7 @@ msgstr "Skapa"
 msgid "Credits"
 msgstr "Medverkande"
 
-msgid "Custom Disc Images"
+msgid "Custom Discarts"
 msgstr ""
 
 msgid "Custom Paths"
@@ -454,12 +462,6 @@ msgstr "Klar!"
 msgid "Download"
 msgstr "Ladda ner"
 
-msgid "Download Boxart image?"
-msgstr "Ladda ner omslagsbild?"
-
-msgid "Download Discart image?"
-msgstr "Ladda ner skivbild?"
-
 msgid "Download Now"
 msgstr "Ladda ner nu"
 
@@ -472,11 +474,14 @@ msgstr ""
 msgid "Downloading Flat Covers"
 msgstr ""
 
-msgid "Downloading custom Discarts"
+msgid "Downloading Full HQ Covers"
 msgstr ""
 
-msgid "Downloading file"
-msgstr "Laddar ner fil:"
+msgid "Downloading Full LQ Covers"
+msgstr ""
+
+msgid "Downloading custom Discarts"
+msgstr ""
 
 msgid "Downloading file..."
 msgstr ""
@@ -607,11 +612,23 @@ msgstr "Formatera"
 msgid "Formatting, please wait..."
 msgstr "Formaterar, Vänta..."
 
+msgid "Found missing images."
+msgstr ""
+
 msgid "Free Space"
 msgstr "Ledigt utrymme"
 
 msgid "French"
 msgstr "Franska"
+
+msgid "Full Cover Path"
+msgstr ""
+
+msgid "Full HQ Covers"
+msgstr ""
+
+msgid "Full LQ Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr ""
@@ -666,6 +683,9 @@ msgstr ""
 
 msgid "Game is already installed:"
 msgstr "Spelet är redan installerat:"
+
+msgid "Game/Install Partition"
+msgstr ""
 
 msgid "Gamename [GAMEID]"
 msgstr ""
@@ -859,14 +879,14 @@ msgstr "Maj"
 msgid "Messageboard Update"
 msgstr ""
 
-msgid "Missing files"
-msgstr "Filer som saknas"
-
 msgid "Motion+ Video"
 msgstr ""
 
 msgid "Mount DVD drive"
 msgstr "Montera DVD läsare"
+
+msgid "Multiple Partitions"
+msgstr ""
 
 msgid "Music Loop Mode"
 msgstr "Musik Återuppspelningsläge"
@@ -988,7 +1008,7 @@ msgstr ""
 msgid "Only for Install"
 msgstr "Endast för installering"
 
-msgid "Original Disc Images"
+msgid "Original Discarts"
 msgstr ""
 
 msgid "Original/Customs"
@@ -1123,6 +1143,9 @@ msgstr ""
 msgid "Save Game List to"
 msgstr "Spara spel lista till"
 
+msgid "Save List"
+msgstr ""
+
 msgid "Saved"
 msgstr "Sparat"
 
@@ -1161,6 +1184,9 @@ msgstr ""
 
 msgid "Sort alphabetically"
 msgstr "Sortera alfabetiskt"
+
+msgid "Sort by number of players"
+msgstr ""
 
 msgid "Sort by rank"
 msgstr "Sortera efter rank"
@@ -1434,9 +1460,6 @@ msgstr "existerar inte! Laddar spel utan fusk."
 msgid "files left"
 msgstr "filer kvar"
 
-msgid "files not found on the server!"
-msgstr "filerna hittades inte på servern!"
-
 msgid "for FAT/NTFS support"
 msgstr "för FAT/NTFS stöd"
 
@@ -1475,6 +1498,21 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "Download Boxart image?"
+#~ msgstr "Ladda ner omslagsbild?"
+
+#~ msgid "Download Discart image?"
+#~ msgstr "Ladda ner skivbild?"
+
+#~ msgid "Downloading file"
+#~ msgstr "Laddar ner fil:"
+
+#~ msgid "Missing files"
+#~ msgstr "Filer som saknas"
+
+#~ msgid "files not found on the server!"
+#~ msgstr "filerna hittades inte på servern!"
 
 #~ msgid "Disc Images"
 #~ msgstr "Skivbilder"

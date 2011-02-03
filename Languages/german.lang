@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-25 21:40+0100\n"
+"POT-Creation-Date: 2011-02-03 22:46+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -24,6 +24,14 @@ msgstr " wurde gespeichert.  Möglicherweise funktionieren einige der Codes nich
 
 msgid " is not on the server."
 msgstr " ist nicht auf dem Server."
+
+#, c-format
+msgid "%i files not found on the server!"
+msgstr ""
+
+#, c-format
+msgid "%i missing files"
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (Jeder)"
@@ -346,8 +354,8 @@ msgstr "Erstelle GCT"
 msgid "Credits"
 msgstr "Danksagungen"
 
-msgid "Custom Disc Images"
-msgstr "Eigene DVD Bilder"
+msgid "Custom Discarts"
+msgstr ""
 
 msgid "Custom Paths"
 msgstr "Pfade anpassen"
@@ -454,12 +462,6 @@ msgstr "Fertig!"
 msgid "Download"
 msgstr "Herunterladen"
 
-msgid "Download Boxart image?"
-msgstr "Cover herunterladen?"
-
-msgid "Download Discart image?"
-msgstr "Disc Cover herunterladen?"
-
 msgid "Download Now"
 msgstr "Herunterladen"
 
@@ -472,11 +474,14 @@ msgstr "Lade 3D Cover herunter"
 msgid "Downloading Flat Covers"
 msgstr "Lade 2D Cover herunter"
 
+msgid "Downloading Full HQ Covers"
+msgstr ""
+
+msgid "Downloading Full LQ Covers"
+msgstr ""
+
 msgid "Downloading custom Discarts"
 msgstr "Lade Community Diskcovers herunter"
-
-msgid "Downloading file"
-msgstr "Theme wird heruntergeladen"
 
 msgid "Downloading file..."
 msgstr "Lade Datei herunter..."
@@ -607,11 +612,23 @@ msgstr "Formatieren"
 msgid "Formatting, please wait..."
 msgstr "Formatiere, bitte warten..."
 
+msgid "Found missing images."
+msgstr ""
+
 msgid "Free Space"
 msgstr "Freier Speicher"
 
 msgid "French"
 msgstr "Französisch"
+
+msgid "Full Cover Path"
+msgstr ""
+
+msgid "Full HQ Covers"
+msgstr ""
+
+msgid "Full LQ Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr "Ganzes Menü"
@@ -666,6 +683,9 @@ msgstr "Spiel Split Größe"
 
 msgid "Game is already installed:"
 msgstr "Spiel ist bereits installiert:"
+
+msgid "Game/Install Partition"
+msgstr ""
 
 msgid "Gamename [GAMEID]"
 msgstr "Spielname [SPIELID]"
@@ -859,14 +879,14 @@ msgstr "Mai"
 msgid "Messageboard Update"
 msgstr "Forum Update"
 
-msgid "Missing files"
-msgstr "Fehlende Dateien"
-
 msgid "Motion+ Video"
 msgstr "Motion+ Video"
 
 msgid "Mount DVD drive"
 msgstr "Spiel starten"
+
+msgid "Multiple Partitions"
+msgstr ""
 
 msgid "Music Loop Mode"
 msgstr "HGM Wiederholung"
@@ -988,8 +1008,8 @@ msgstr "Nur Spiele Partition"
 msgid "Only for Install"
 msgstr "Nur beim Installieren"
 
-msgid "Original Disc Images"
-msgstr "Original DVD Bilder"
+msgid "Original Discarts"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Original/Community"
@@ -1123,6 +1143,9 @@ msgstr "Speichern fehlgeschlagen. Kein Gerät eingefügt?"
 msgid "Save Game List to"
 msgstr "Liste speicheren unter"
 
+msgid "Save List"
+msgstr ""
+
 msgid "Saved"
 msgstr "Gespeichert"
 
@@ -1161,6 +1184,9 @@ msgstr "Wii ausschalten"
 
 msgid "Sort alphabetically"
 msgstr "Alphabetisch ordnen"
+
+msgid "Sort by number of players"
+msgstr ""
 
 msgid "Sort by rank"
 msgstr "Nach Bewertungen ordnen"
@@ -1434,9 +1460,6 @@ msgstr "existiert nicht!  Spiel wird ohne Cheats gestartet."
 msgid "files left"
 msgstr "Dateien fehlen"
 
-msgid "files not found on the server!"
-msgstr "Dateien auf dem Server nicht gefunden!"
-
 msgid "for FAT/NTFS support"
 msgstr "für den FAT/NTFS Support"
 
@@ -1475,6 +1498,27 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "Custom Disc Images"
+#~ msgstr "Eigene DVD Bilder"
+
+#~ msgid "Download Boxart image?"
+#~ msgstr "Cover herunterladen?"
+
+#~ msgid "Download Discart image?"
+#~ msgstr "Disc Cover herunterladen?"
+
+#~ msgid "Downloading file"
+#~ msgstr "Theme wird heruntergeladen"
+
+#~ msgid "Missing files"
+#~ msgstr "Fehlende Dateien"
+
+#~ msgid "Original Disc Images"
+#~ msgstr "Original DVD Bilder"
+
+#~ msgid "files not found on the server!"
+#~ msgstr "Dateien auf dem Server nicht gefunden!"
 
 #~ msgid "Disc Images"
 #~ msgstr "Disk Cover"
