@@ -12,7 +12,7 @@ class Wbfs
 {
     public:
         Wbfs(u32, u32, u32);
-
+        ~Wbfs() { Close(); };
         static s32 Init(u32);
         s32 CheckGame(u8 *);
         s32 GameSize(u8 *, f32 *);
@@ -21,7 +21,7 @@ class Wbfs
         virtual bool ShowFreeSpace(void);
 
         virtual s32 Open() = 0;
-        virtual void Close() = 0;
+        virtual void Close() {};
         virtual wbfs_disc_t* OpenDisc(u8 *discid) = 0;
         virtual void CloseDisc(wbfs_disc_t *disc) = 0;
         virtual s32 Format();

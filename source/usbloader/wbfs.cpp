@@ -35,16 +35,12 @@ void WBFS_CloseDisc(wbfs_disc_t *disc)
 {
     if(!disc) return;
 
-    for(u32 i = 0; i < WbfsList.size(); ++i)
-    {
-        if(!WbfsList[i]) continue;
+    struct discHdr * header = (struct discHdr *) disc->header;
+    int part_num = gameList.GetPartitionNumber(header->id);
+    if(!VALID(part_num))
+        return;
 
-        if(WbfsList[i]->GetHDDHandle() == disc->p)
-        {
-            WbfsList[i]->CloseDisc(disc);
-            break;
-        }
-    }
+    WbfsList[part_num]->CloseDisc(disc);
 }
 
 s32 WBFS_Init(u32 device)
@@ -117,7 +113,6 @@ bool WBFS_Close(int part_num)
     if(!VALID(part_num))
         return false;
 
-    WbfsList[part_num]->Close();
     delete WbfsList[part_num];
     WbfsList[part_num] = NULL;
 
@@ -128,6 +123,8 @@ bool WBFS_Close(int part_num)
 
 void WBFS_CloseAll()
 {
+    gameList.clear();
+
     for(u32 i = 0; i < WbfsList.size(); ++i)
         WBFS_Close(i);
 }
@@ -159,7 +156,7 @@ s32 WBFS_CheckGame(u8 *discid)
 {
     int part_num = gameList.GetPartitionNumber(discid);
     if(!VALID(part_num))
-        return -1;
+        return 0;
 
     return WbfsList[part_num]->CheckGame(discid);
 }

@@ -48,6 +48,7 @@ void GameList::clear()
     //! Clear memory of the vector completely
     std::vector<struct discHdr *>().swap(FilteredList);
     std::vector<struct discHdr>().swap(FullGameList);
+    std::vector<int>().swap(GamePartitionList);
 }
 
 struct discHdr * GameList::GetDiscHeader(const char * gameID) const
@@ -78,8 +79,6 @@ int GameList::GetPartitionNumber(const u8 *gameID) const
 
 void GameList::RemovePartition(int part)
 {
-    wString filter(GameFilter);
-
     for(u32 i = 0; i < GamePartitionList.size(); ++i)
     {
         if(GamePartitionList[i] == part)
@@ -91,7 +90,10 @@ void GameList::RemovePartition(int part)
     }
 
     if(FullGameList.size() > 0)
+    {
+        wString filter(GameFilter);
         FilterList(filter.c_str());
+    }
 }
 
 int GameList::InternalReadList(int part)

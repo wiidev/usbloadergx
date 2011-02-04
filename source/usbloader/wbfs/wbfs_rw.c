@@ -68,12 +68,12 @@ s32 __ReadUSB(void *fp, u32 lba, u32 count, void *iobuf)
     u32 cnt = 0;
     s32 ret;
     u32 partition_offset = info->partition_lba + (lba-info->partition_lba)*(info->wbfs_sector_size/info->hdd_sector_size);
-    count *= info->wbfs_sector_size/info->hdd_sector_size;
+    count *= (info->wbfs_sector_size/info->hdd_sector_size);
 
     /* Do reads */
     while (cnt < count)
     {
-        u8 *ptr = ((u8 *) iobuf) + (cnt * info->wbfs_sector_size);
+        u8 *ptr = ((u8 *) iobuf) + (cnt * info->hdd_sector_size);
         u32 sectors = (count - cnt);
 
         /* Read sectors is too big */
@@ -96,12 +96,12 @@ s32 __WriteUSB(void *fp, u32 lba, u32 count, void *iobuf)
     u32 cnt = 0;
     s32 ret;
     u32 partition_offset = info->partition_lba + (lba-info->partition_lba)*(info->wbfs_sector_size/info->hdd_sector_size);
-    count *= info->wbfs_sector_size/info->hdd_sector_size;
+    count *= (info->wbfs_sector_size/info->hdd_sector_size);
 
     /* Do writes */
     while (cnt < count)
     {
-        u8 *ptr = ((u8 *) iobuf) + (cnt * info->wbfs_sector_size);
+        u8 *ptr = ((u8 *) iobuf) + (cnt * info->hdd_sector_size);
         u32 sectors = (count - cnt);
 
         /* Write sectors is too big */

@@ -300,9 +300,6 @@ int LoaderSettings::GetMenuInternal()
     //! Settings: Game/Install Partition
     else if (ret == ++Idx)
     {
-        if(DeviceHandler::Instance()->GetUSBHandle()->GetPartitionCount() < 2)
-            return MENU_NONE;
-
         // Select the next valid partition, even if that's the same one
         int fs_type = 0;
         int ios = IOS_GetVersion();

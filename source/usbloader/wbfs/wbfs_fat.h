@@ -11,7 +11,6 @@ class Wbfs_Fat: public Wbfs
 {
     public:
         Wbfs_Fat(u32 device, u32 lba, u32 size);
-        ~Wbfs_Fat();
 
         virtual s32 Open();
         virtual void Close();

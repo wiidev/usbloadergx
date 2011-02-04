@@ -351,7 +351,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
     while (showProgress)
     {
-        usleep(30000);
+        usleep(50000);
 
         if (shutdown)
             Sys_Shutdown();

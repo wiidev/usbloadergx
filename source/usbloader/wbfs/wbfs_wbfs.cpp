@@ -4,19 +4,21 @@
 #include "usbloader/wbfs.h"
 #include "wbfs_rw.h"
 
+#define MAX_WBFS_SECTORSIZE     4096
+
 extern u32 hdd_sector_size;
 
 s32 Wbfs_Wbfs::Open()
 {
     wbfs_t *part = NULL;
 
-    PartInfo.wbfs_sector_size = hdd_sector_size;
+    PartInfo.wbfs_sector_size = MAX_WBFS_SECTORSIZE;
     PartInfo.hdd_sector_size = hdd_sector_size;
     PartInfo.partition_lba = lba;
     PartInfo.partition_num_sec = size;
 
-    u8 * buffer = (u8 *) malloc(hdd_sector_size);
-    memset(buffer, 0, hdd_sector_size);
+    u8 * buffer = (u8 *) malloc(MAX_WBFS_SECTORSIZE);
+    memset(buffer, 0, MAX_WBFS_SECTORSIZE);
 
     if(readCallback(&PartInfo, lba, 1, buffer) < 0)
     {
@@ -31,10 +33,14 @@ s32 Wbfs_Wbfs::Open()
     if (head.magic != wbfs_htonl(WBFS_MAGIC))
         return -1;
 
+    /* Set correct sector values for wbfs read/write */
     PartInfo.wbfs_sector_size = 1 << head.hd_sec_sz_s;
+    PartInfo.partition_num_sec = head.n_hd_sec;
 
     /* Open partition */
-    part = wbfs_open_partition(readCallback, writeCallback, &PartInfo, 1 << head.hd_sec_sz_s, head.n_hd_sec, lba, 0);
+    part = wbfs_open_partition(readCallback, writeCallback, &PartInfo,
+                               PartInfo.wbfs_sector_size, PartInfo.partition_num_sec,
+                               lba, 0);
     if (!part) return -1;
 
     /* Close current hard disk */
@@ -79,10 +85,18 @@ s32 Wbfs_Wbfs::Format()
     HDD_Inf.partition_lba = lba;
     HDD_Inf.partition_num_sec = size;
 
+    //! If size is over 500GB in sectors and sector size is 512
+    //! set 2048 as hdd sector size
+    if(size > 1048576000 && hdd_sector_size == 512)
+    {
+        HDD_Inf.wbfs_sector_size = 2048;
+        HDD_Inf.partition_num_sec = size/(2048/hdd_sector_size);
+    }
+
     wbfs_t *partition = NULL;
 
     /* Reset partition */
-    partition = wbfs_open_partition(readCallback, writeCallback, &PartInfo, hdd_sector_size, size, lba, 1);
+    partition = wbfs_open_partition(readCallback, writeCallback, &HDD_Inf, HDD_Inf.wbfs_sector_size, HDD_Inf.partition_num_sec, lba, 1);
     if (!partition) return -1;
 
     /* Free memory */

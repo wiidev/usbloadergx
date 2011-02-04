@@ -36,7 +36,7 @@ using namespace std;
 
 static const char wbfs_fat_dir[] = "/wbfs";
 static const char invalid_path[] = "/\\:|<>?*\"'";
-static const u32 fat_sector_size = 512;
+extern u32 hdd_sector_size;
 
 Wbfs_Fat::Wbfs_Fat(u32 device, u32 lba, u32 size) :
     Wbfs(device, lba, size), fat_hdr_list(NULL), fat_hdr_count(0)
@@ -96,13 +96,13 @@ wbfs_disc_t* Wbfs_Fat::OpenDisc(u8 *discid)
         return iso_file;
     }
 
-    hdd = OpenPart(fname);
-    if (!hdd) return NULL;
+    wbfs_t *part = OpenPart(fname);
+    if (!part) return NULL;
 
-    wbfs_disc_t *disc = wbfs_open_disc(hdd, discid);
+    wbfs_disc_t *disc = wbfs_open_disc(part, discid);
     if(!disc)
     {
-        ClosePart(hdd);
+        ClosePart(part);
         return NULL;
     }
 
@@ -318,12 +318,12 @@ u64 Wbfs_Fat::EstimateGameSize()
 {
     wbfs_t *part = NULL;
     u64 size = (u64) 143432 * 2 * 0x8000ULL;
-    u32 n_sector = size / fat_sector_size;
+    u32 n_sector = size / hdd_sector_size;
     u32 wii_sec_sz;
 
     // init a temporary dummy part
     // as a placeholder for wbfs_size_disc
-    part = wbfs_open_partition(nop_rw_sector, nop_rw_sector, NULL, fat_sector_size, n_sector, 0, 1);
+    part = wbfs_open_partition(nop_rw_sector, nop_rw_sector, NULL, hdd_sector_size, n_sector, 0, 1);
     if (!part) return -1;
     wii_sec_sz = part->wii_sec_sz;
 
@@ -687,7 +687,7 @@ wbfs_t* Wbfs_Fat::OpenPart(char *fname)
     ret = split_open(&split, fname);
     if (ret) return NULL;
     part = wbfs_open_partition(split_read_sector, nop_rw_sector, //readonly //split_write_sector,
-            &split, fat_sector_size, split.total_sec, 0, 0);
+            &split, hdd_sector_size, split.total_sec, 0, 0);
     if (!part)
     {
         split_close(&split);
@@ -769,7 +769,7 @@ wbfs_t* Wbfs_Fat::CreatePart(u8 *id, char *path)
         return NULL;
     }
 
-    part = wbfs_open_partition(split_read_sector, split_write_sector, &split, fat_sector_size, n_sector, 0, 1);
+    part = wbfs_open_partition(split_read_sector, split_write_sector, &split, hdd_sector_size, n_sector, 0, 1);
     if (!part)
     {
         split_close(&split);
