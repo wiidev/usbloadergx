@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# danish.lang - r1048
+# danish.lang - r1056
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-03 22:46+0100\n"
+"POT-Creation-Date: 2011-02-05 11:34+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -241,7 +241,7 @@ msgid "Both"
 msgstr "Begge"
 
 msgid "Can't be formatted"
-msgstr "Kan ikke formatteres"
+msgstr "Kan ikke formateres"
 
 msgid "Can't create directory"
 msgstr "Kan ikke lave ny mappe"
@@ -291,7 +291,7 @@ msgid "Coding:"
 msgstr "Programmering:"
 
 msgid "Connection to server timed out."
-msgstr ""
+msgstr "Forbindelse til server timed out."
 
 msgid "Console"
 msgstr "Konsol"
@@ -1237,7 +1237,7 @@ msgid "Successfully Updated thanks to www.techjawa.com"
 msgstr "Opdateringen lykkedes takket været www.techjawa.com"
 
 msgid "Successfully deleted:"
-msgstr "Sletningen lykkedes:"
+msgstr "Det lykkedes at slette:"
 
 msgid "Successfully extracted theme."
 msgstr "Udpakning af tema lykkedes."
@@ -1375,9 +1375,6 @@ msgstr "Opdaterer sprogfiler:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Den uploadede ZIP-fil er installeret i homebrew-mappen."
 
-msgid "Use IOS58"
-msgstr "Brug IOS58"
-
 msgid "VIDTV Patch"
 msgstr "VIDTV-patch"
 
@@ -1500,7 +1497,7 @@ msgid "seconds left"
 msgstr "sekunder tilbage"
 
 #~ msgid "Custom Disc Images"
-#~ msgstr "Tilpasset DVD billede"
+#~ msgstr "Tilpasset DVD billeder"
 
 #~ msgid "Download Boxart image?"
 #~ msgstr "Download boxart-billede?"
@@ -1516,6 +1513,9 @@ msgstr "sekunder tilbage"
 
 #~ msgid "Original Disc Images"
 #~ msgstr "Originale DVD billeder"
+
+#~ msgid "Use IOS58"
+#~ msgstr "Brug IOS58"
 
 #~ msgid "files not found on the server!"
 #~ msgstr "filer blev ikke fundet på serveren!"

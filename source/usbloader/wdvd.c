@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <di/di.h>
 #include <malloc.h>
 #include <ogcsys.h>
 #include "gecko.h"
@@ -37,15 +36,9 @@ static u32 outbuf[8] ATTRIBUTE_ALIGN(32);
 static const char di_fs[] ATTRIBUTE_ALIGN(32) = "/dev/di";
 static s32 _di_fd = -1;
 
-static s32 currentIOS = -1;
-
 
 s32 WDVD_Init(void)
 {
-	currentIOS = IOS_GetVersion();
-	if(currentIOS < 200)
-        return DI_Init();
-
 	/* Open "/dev/di" */
 	if (_di_fd < 0) {
 		_di_fd = IOS_Open(di_fs, 0);
@@ -58,12 +51,6 @@ s32 WDVD_Init(void)
 
 s32 WDVD_Close(void)
 {
-	if(currentIOS < 200)
-	{
-	    DI_Close();
-	    return 0;
-	}
-
 	/* Close "/dev/di" */
 	if (_di_fd >= 0) {
 		IOS_Close(_di_fd);
@@ -75,18 +62,12 @@ s32 WDVD_Close(void)
 
 s32 WDVD_GetHandle(void)
 {
-	if(currentIOS < 200)
-        return -1;
-
 	/* Return di handle */
 	return _di_fd;
 }
 
 s32 WDVD_Reset(void)
 {
-	if(currentIOS < 200)
-        return DI_Reset();
-
     if (_di_fd < 0)
         return _di_fd;
 
@@ -108,9 +89,6 @@ s32 WDVD_Reset(void)
 
 s32 WDVD_ReadDiskId(void *id)
 {
-	if(currentIOS < 200)
-        return DI_ReadDiscID((u64 *) id);
-
     if (_di_fd < 0)
         return _di_fd;
 
@@ -135,9 +113,6 @@ s32 WDVD_ReadDiskId(void *id)
 
 s32 WDVD_Seek(u64 offset)
 {
-	if(currentIOS < 200)
-        return -1;
-
     if (_di_fd < 0)
         return _di_fd;
 
@@ -159,9 +134,6 @@ s32 WDVD_Seek(u64 offset)
 
 s32 WDVD_Offset(u64 offset)
 {
-	if(currentIOS < 200)
-        return -1;
-
     if (_di_fd < 0)
         return _di_fd;
 
@@ -185,9 +157,6 @@ s32 WDVD_Offset(u64 offset)
 
 s32 WDVD_StopLaser(void)
 {
-	if(currentIOS < 200)
-        return -1;
-
     if (_di_fd < 0)
         return _di_fd;
 
@@ -207,9 +176,6 @@ s32 WDVD_StopLaser(void)
 
 s32 WDVD_StopMotor(void)
 {
-	if(currentIOS < 200)
-        return -1;
-
     if (_di_fd < 0)
         return _di_fd;
 
@@ -229,9 +195,6 @@ s32 WDVD_StopMotor(void)
 
 s32 WDVD_OpenPartition(u64 offset)
 {
-	if(currentIOS < 200)
-        return DI_OpenPartition(offset >> 2);
-
     if (_di_fd < 0)
         return _di_fd;
 
@@ -266,9 +229,6 @@ s32 WDVD_OpenPartition(u64 offset)
 
 s32 WDVD_ClosePartition(void)
 {
-	if(currentIOS < 200)
-        return DI_ClosePartition();
-
     if (_di_fd < 0)
         return _di_fd;
 
@@ -288,9 +248,6 @@ s32 WDVD_ClosePartition(void)
 
 s32 WDVD_UnencryptedRead(void *buf, u32 len, u64 offset)
 {
-	if(currentIOS < 200)
-        return DI_UnencryptedRead(buf, len, offset >> 2);
-
     if (_di_fd < 0)
         return _di_fd;
 
@@ -312,9 +269,6 @@ s32 WDVD_UnencryptedRead(void *buf, u32 len, u64 offset)
 
 s32 WDVD_Read(void *buf, u32 len, u64 offset)
 {
-	if(currentIOS < 200)
-        return DI_Read(buf, len, offset >> 2);
-
     if (_di_fd < 0)
         return _di_fd;
 
@@ -336,9 +290,6 @@ s32 WDVD_Read(void *buf, u32 len, u64 offset)
 
 s32 WDVD_WaitForDisc(void)
 {
-	if(currentIOS < 200)
-        return -1;
-
     if (_di_fd < 0)
         return _di_fd;
 
@@ -358,9 +309,6 @@ s32 WDVD_WaitForDisc(void)
 
 s32 WDVD_GetCoverStatus(u32 *status)
 {
-	if(currentIOS < 200)
-        return DI_GetCoverRegister(status);
-
     if (_di_fd < 0)
         return _di_fd;
 
@@ -387,9 +335,6 @@ s32 WDVD_GetCoverStatus(u32 *status)
 
 s32 WDVD_SetUSBMode(const u8 *id, s32 partition)
 {
-	if(currentIOS < 200)
-        return 0;
-
     if (_di_fd < 0)
         return _di_fd;
 
@@ -425,9 +370,6 @@ s32 WDVD_SetUSBMode(const u8 *id, s32 partition)
 
 s32 WDVD_Read_Disc_BCA(void *buf)
 {
-	if(currentIOS < 200)
-        return DI_Read_BCA(buf);
-
     if (_di_fd < 0)
         return _di_fd;
 
@@ -450,9 +392,6 @@ s32 WDVD_Read_Disc_BCA(void *buf)
 
 s32 WDVD_SetFragList(int device, void *fraglist, int size)
 {
-	if(currentIOS < 200)
-        return 0;
-
     if (_di_fd < 0)
         return _di_fd;
 
@@ -478,9 +417,6 @@ s32 WDVD_SetFragList(int device, void *fraglist, int size)
 
 s32 WDVD_Eject(void)
 {
-	if(currentIOS < 200)
-        return DI_Eject();
-
     if (_di_fd < 0)
         return _di_fd;
 

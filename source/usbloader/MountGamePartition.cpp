@@ -124,7 +124,8 @@ int MountGamePartition(bool ShowGUI)
     if(Settings.MultiplePartitions)
         ret = WBFS_OpenAll();
     else
-        WBFS_OpenPart(Settings.partition);
+        ret = WBFS_OpenPart(Settings.partition);
+
     if(ret < 0)
         ret = FindGamePartition();
 

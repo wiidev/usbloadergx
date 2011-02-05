@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-03 22:46+0100\n"
+"POT-Creation-Date: 2011-02-05 11:34+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ichiroling\n"
 "Language-Team: hosigumayuugi, papa\n"
@@ -1375,9 +1375,6 @@ msgstr "言語ファイルを更新中:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "ｲﾝｽﾄｰﾙ済みﾃﾞｨﾚｸﾄﾘにZIPを送信しました"
 
-msgid "Use IOS58"
-msgstr "IOS58を使う"
-
 msgid "VIDTV Patch"
 msgstr "映像パッチ"
 
@@ -1498,6 +1495,9 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "Use IOS58"
+#~ msgstr "IOS58を使う"
 
 #~ msgid "Custom Disc Images"
 #~ msgstr "カスタムレーベル"

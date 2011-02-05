@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-03 22:46+0100\n"
+"POT-Creation-Date: 2011-02-05 11:34+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -1374,9 +1374,6 @@ msgstr "Nyelvi fájlok frissítése:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Feltöltött ZIP fájl telepítve a Homebrew mappába."
-
-msgid "Use IOS58"
-msgstr ""
 
 msgid "VIDTV Patch"
 msgstr ""

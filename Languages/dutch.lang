@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# dutch.lang - r1046
+# dutch.lang - r1061
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-03 22:46+0100\n"
-"PO-Revision-Date: 2011-01-24 07:20+0100\n"
+"POT-Creation-Date: 2011-02-05 11:34+0100\n"
+"PO-Revision-Date: 2011-02-04 13:06+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
 "MIME-Version: 1.0\n"
@@ -27,11 +27,11 @@ msgstr " staat niet op de server."
 
 #, c-format
 msgid "%i files not found on the server!"
-msgstr ""
+msgstr "%i bestanden niet gevonden op de server!"
 
 #, c-format
 msgid "%i missing files"
-msgstr ""
+msgstr "%i missende bestanden"
 
 msgid "0 (Everyone)"
 msgstr "0 (Iedereen 3+)"
@@ -291,7 +291,7 @@ msgid "Coding:"
 msgstr "Codering:"
 
 msgid "Connection to server timed out."
-msgstr ""
+msgstr "Connectie naar de server verlopen"
 
 msgid "Console"
 msgstr ""
@@ -355,7 +355,7 @@ msgid "Credits"
 msgstr ""
 
 msgid "Custom Discarts"
-msgstr ""
+msgstr "Aangepaste Disk Labels"
 
 msgid "Custom Paths"
 msgstr "Bestandslocaties"
@@ -475,10 +475,10 @@ msgid "Downloading Flat Covers"
 msgstr "Platte hoesjes aan het downloaden"
 
 msgid "Downloading Full HQ Covers"
-msgstr ""
+msgstr "HQ volledige hoesjes downloaden"
 
 msgid "Downloading Full LQ Covers"
-msgstr ""
+msgstr "LQ volledige hoesjes downloaden "
 
 msgid "Downloading custom Discarts"
 msgstr "Aangepaste disc afbeeldingen downloaden"
@@ -613,7 +613,7 @@ msgid "Formatting, please wait..."
 msgstr "Bezig met formatteren..."
 
 msgid "Found missing images."
-msgstr ""
+msgstr "Missende plaatje gevonden."
 
 msgid "Free Space"
 msgstr "Vrije ruimte"
@@ -622,13 +622,13 @@ msgid "French"
 msgstr "Frans"
 
 msgid "Full Cover Path"
-msgstr ""
+msgstr "Volledige hoesjes pad"
 
 msgid "Full HQ Covers"
-msgstr ""
+msgstr "HQ volledige hoesjes"
 
 msgid "Full LQ Covers"
-msgstr ""
+msgstr "LQ volledige hoesjes"
 
 msgid "Full Menu"
 msgstr "Volledig Menu"
@@ -685,7 +685,7 @@ msgid "Game is already installed:"
 msgstr "Spel is al geïnstalleerd:"
 
 msgid "Game/Install Partition"
-msgstr ""
+msgstr "Spel/Installatie partitie"
 
 msgid "Gamename [GAMEID]"
 msgstr "Spelnaam [SPELID]"
@@ -886,7 +886,7 @@ msgid "Mount DVD drive"
 msgstr "DVD Laden"
 
 msgid "Multiple Partitions"
-msgstr ""
+msgstr "Meerdere partities"
 
 msgid "Music Loop Mode"
 msgstr "Muziek Herhaal Mode"
@@ -1009,7 +1009,7 @@ msgid "Only for Install"
 msgstr "Alleen bij installeren"
 
 msgid "Original Discarts"
-msgstr ""
+msgstr "Originele Disk Labels"
 
 msgid "Original/Customs"
 msgstr "Origineel/Aangepast"
@@ -1144,7 +1144,7 @@ msgid "Save Game List to"
 msgstr "Spellenlijst opslaan in"
 
 msgid "Save List"
-msgstr ""
+msgstr "Save lijst"
 
 msgid "Saved"
 msgstr "Opgeslagen"
@@ -1186,7 +1186,7 @@ msgid "Sort alphabetically"
 msgstr "Alfabetisch sorteren"
 
 msgid "Sort by number of players"
-msgstr ""
+msgstr "Sorteer op aantal spelers"
 
 msgid "Sort by rank"
 msgstr "Sorteren op rang"
@@ -1375,9 +1375,6 @@ msgstr "Taalbestanden updaten:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Geuploade ZIP is geïnstalleerd in je homebrew locatie."
 
-msgid "Use IOS58"
-msgstr "Gebruik IOS58"
-
 msgid "VIDTV Patch"
 msgstr "VIDTV patchen"
 
@@ -1498,6 +1495,9 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "Use IOS58"
+#~ msgstr "Gebruik IOS58"
 
 #~ msgid "Custom Disc Images"
 #~ msgstr "Aangepaste Disk Labels"

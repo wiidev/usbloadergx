@@ -109,7 +109,6 @@ class CSettings
         short GameSplit;
         short PlaylogUpdate;
         short ShowFreeSpace;
-        short UseIOS58;
         short HomeMenu;
         short MultiplePartitions;
         u32 InstallPartitions;

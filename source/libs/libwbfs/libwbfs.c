@@ -756,9 +756,9 @@ int wbfs_get_fragments(wbfs_disc_t *d, _frag_append_t append_fragment, void *cal
     if (!d) return -1;
 
     //! Use here real physical HDD sector size
-    u32 phys_hdd_sec_sz = *(((u32 *) d->p->callback_data)+1);
+    extern u32 hdd_sector_size;
     wbfs_t *p = d->p;
-    int src_wbs_nlb = p->wbfs_sec_sz / phys_hdd_sec_sz;
+    int src_wbs_nlb = p->wbfs_sec_sz / hdd_sector_size;
     int i, ret, last = 0;
     for (i = 0; i < p->n_wbfs_sec_per_disc; i++)
     {

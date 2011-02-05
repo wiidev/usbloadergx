@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-03 22:46+0100\n"
+"POT-Creation-Date: 2011-02-05 11:34+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -291,7 +291,7 @@ msgid "Coding:"
 msgstr "編譯:"
 
 msgid "Connection to server timed out."
-msgstr ""
+msgstr "連接伺服器超時。"
 
 msgid "Console"
 msgstr "控制台"
@@ -1375,9 +1375,6 @@ msgstr "正在更新語言檔案："
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "已更新安裝在Homebrew目錄的ZIP檔案"
 
-msgid "Use IOS58"
-msgstr "使用 IOS58"
-
 msgid "VIDTV Patch"
 msgstr "VIDTV 修改"
 
@@ -1516,6 +1513,9 @@ msgstr "剩餘秒數"
 
 #~ msgid "Original Disc Images"
 #~ msgstr "原始光碟圖片"
+
+#~ msgid "Use IOS58"
+#~ msgstr "使用 IOS58"
 
 #~ msgid "files not found on the server!"
 #~ msgstr "伺服器中無此檔案！"

@@ -42,8 +42,9 @@ void frag_dump(FragList *ff)
 	}
 }
 
-int frag_append(FragList *ff, u32 offset, u32 sector, u32 count)
+int frag_append(void *f, u32 offset, u32 sector, u32 count)
 {
+    FragList *ff = (FragList *) f;
 	int n;
 	if (count) {
 		n = ff->num - 1;
@@ -70,11 +71,6 @@ int frag_append(FragList *ff, u32 offset, u32 sector, u32 count)
 	}
 	ff->size = offset + count;
 	return 0;
-}
-
-int _frag_append(void *ff, u32 offset, u32 sector, u32 count)
-{
-	return frag_append(ff, offset, sector, count);
 }
 
 int frag_concat(FragList *ff, FragList *src)
@@ -164,9 +160,8 @@ int frag_remap(FragList *ff, FragList *log, FragList *phy)
 	return 0;
 }
 
-int get_frag_list_for_file(char *fname, u8 *id, u8 wbfs_part_fs, u32 lba_offset)
+int get_frag_list_for_file(char *fname, u8 *id, const u8 wbfs_part_fs, const u32 lba_offset)
 {
-	char fname1[1024];
 	struct stat st;
 	FragList *fs = NULL;
 	FragList *fa = NULL;
@@ -192,9 +187,8 @@ int get_frag_list_for_file(char *fname, u8 *id, u8 wbfs_part_fs, u32 lba_offset)
 			fname[strlen(fname)-1] = '0' + i;
 			if (stat(fname, &st) == -1) break;
 		}
-		strcpy(fname1, fname);
 		if (wbfs_part_fs == PART_FS_FAT) {
-			ret = _FAT_get_fragments(fname, &_frag_append, fs);
+			ret = _FAT_get_fragments(fname, &frag_append, fs);
 			if (ret) {
 				// don't return failure, let it fallback to old method
 				//ret_val = ret;
@@ -202,7 +196,7 @@ int get_frag_list_for_file(char *fname, u8 *id, u8 wbfs_part_fs, u32 lba_offset)
 				goto out;
 			}
 		} else if (wbfs_part_fs == PART_FS_NTFS) {
-			ret = _NTFS_get_fragments(fname, &_frag_append, fs);
+			ret = _NTFS_get_fragments(fname, &frag_append, fs);
 			if (ret) {
 				ret_val = ret;
 				goto out;
@@ -212,7 +206,7 @@ int get_frag_list_for_file(char *fname, u8 *id, u8 wbfs_part_fs, u32 lba_offset)
 				fs->frag[j].sector += lba_offset;
 			}
 		} else if (wbfs_part_fs == PART_FS_EXT) {
-			ret = _EXT2_get_fragments(fname, &_frag_append, fs);
+			ret = _EXT2_get_fragments(fname, &frag_append, fs);
 			if (ret) {
 				ret_val = ret;
 				goto out;
@@ -225,21 +219,21 @@ int get_frag_list_for_file(char *fname, u8 *id, u8 wbfs_part_fs, u32 lba_offset)
             // if wbfs file format, remap.
             wbfs_disc_t *d = WBFS_OpenDisc(id);
             if (!d) { ret_val = -4; WBFS_CloseDisc(d); goto out; }
-            ret = wbfs_get_fragments(d, &_frag_append, fs);
+            ret = wbfs_get_fragments(d, &frag_append, fs);
             WBFS_CloseDisc(d);
             if (ret) { ret_val = -5; goto out; }
 		}
 		frag_concat(fa, fs);
 	}
 
-	frag_list = malloc(sizeof(FragList));
+	frag_list = memalign(32, (sizeof(FragList)+31)&(~31));
 	frag_init(frag_list, MAX_FRAG);
 	if (is_wbfs) {
 		// if wbfs file format, remap.
 		wbfs_disc_t *d = WBFS_OpenDisc(id);
 		if (!d) { ret_val = -4; goto out; }
 		frag_init(fw, MAX_FRAG);
-		ret = wbfs_get_fragments(d, &_frag_append, fw);
+		ret = wbfs_get_fragments(d, &frag_append, fw);
 		if (ret) { ret_val = -5; goto out; }
 		WBFS_CloseDisc(d);
 		// DEBUG: frag_list->num = MAX_FRAG-10; // stress test
@@ -278,15 +272,11 @@ int set_frag_list(u8 *id)
 	// (+1 for header which is same size as fragment)
 	int size = sizeof(Fragment) * (frag_list->num + 1);
 
-	u8 * FragListAligned = (u8 *) memalign(32, (size+31)&(~31));
-	memcpy(FragListAligned, frag_list, size);
+	gprintf("Calling WDVD_SetFragList, frag list size %d\n", size);
+	int ret = WDVD_SetFragList(WBFS_MIN_DEVICE, frag_list, size);
 
 	free(frag_list);
 	frag_list = NULL;
-
-	gprintf("Calling WDVD_SetFragList, frag list size %d\n", size);
-	int ret = WDVD_SetFragList(WBFS_MIN_DEVICE, FragListAligned, size);
-	free(FragListAligned);
 
 	if (ret)
 		return ret;

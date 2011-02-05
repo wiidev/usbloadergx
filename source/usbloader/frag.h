@@ -29,8 +29,7 @@ typedef struct
 
 void frag_init(FragList *ff, int maxnum);
 void frag_dump(FragList *ff);
-int  frag_append(FragList *ff, u32 offset, u32 sector, u32 count);
-int  _frag_append(void *ff, u32 offset, u32 sector, u32 count);
+int  frag_append(void *ff, u32 offset, u32 sector, u32 count);
 int  frag_concat(FragList *ff, FragList *src);
 
 // in case a sparse block is requested,
@@ -40,7 +39,7 @@ int frag_get(FragList *ff, u32 offset, u32 count, u32 *poffset, u32 *psector, u3
 
 int frag_remap(FragList *ff, FragList *log, FragList *phy);
 
-int get_frag_list_for_file(char *fname, u8 *id, u8 fstype, u32 sec_offset);
+int get_frag_list_for_file(char *fname, u8 *id, const u8 wbfs_part_fs, const u32 lba_offset);
 int get_frag_list(u8 *id);
 int set_frag_list(u8 *id);
 

@@ -75,7 +75,7 @@ s32 WBFS_OpenPart(int part_num)
     if(part_num >= (int) WbfsList.size())
         WbfsList.resize(part_num+1);
 
-    gprintf("\tWBFS_OpenPart: start sector %u, sector count: %u\n", usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
+    gprintf("\tWBFS_OpenPart: filesystem: %s, start sector %u, sector count: %u\n", usbHandle->GetFSName(part_num), usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
 
     if (strncmp(usbHandle->GetFSName(part_num), "FAT", 3) == 0)
     {

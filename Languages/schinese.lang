@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-03 22:46+0100\n"
+"POT-Creation-Date: 2011-02-05 11:34+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -27,11 +27,11 @@ msgstr "不在服务器上"
 
 #, c-format
 msgid "%i files not found on the server!"
-msgstr ""
+msgstr "服务器上未找到%i个文件!"
 
 #, c-format
 msgid "%i missing files"
-msgstr ""
+msgstr "缺少%i个文件"
 
 msgid "0 (Everyone)"
 msgstr "0 (全年龄)"
@@ -355,7 +355,7 @@ msgid "Credits"
 msgstr "作者信息"
 
 msgid "Custom Discarts"
-msgstr ""
+msgstr "自定义光盘图片"
 
 msgid "Custom Paths"
 msgstr "自定义路径"
@@ -475,10 +475,10 @@ msgid "Downloading Flat Covers"
 msgstr "正在下载2D封面"
 
 msgid "Downloading Full HQ Covers"
-msgstr ""
+msgstr "正在下载高清晰完整封面"
 
 msgid "Downloading Full LQ Covers"
-msgstr ""
+msgstr "正在下载低清晰完整封面"
 
 msgid "Downloading custom Discarts"
 msgstr "正在下载自制光盘封面"
@@ -613,7 +613,7 @@ msgid "Formatting, please wait..."
 msgstr "格式化中, 请稍候..."
 
 msgid "Found missing images."
-msgstr ""
+msgstr "找到缺少的图片."
 
 msgid "Free Space"
 msgstr "剩余空间"
@@ -622,13 +622,13 @@ msgid "French"
 msgstr "法文"
 
 msgid "Full Cover Path"
-msgstr ""
+msgstr "完整封面路径"
 
 msgid "Full HQ Covers"
-msgstr ""
+msgstr "完整高清晰封面路径"
 
 msgid "Full LQ Covers"
-msgstr ""
+msgstr "完整低清晰封面路径"
 
 msgid "Full Menu"
 msgstr "完整菜单"
@@ -685,7 +685,7 @@ msgid "Game is already installed:"
 msgstr "已安装的游戏:"
 
 msgid "Game/Install Partition"
-msgstr ""
+msgstr "游戏/安装分区"
 
 msgid "Gamename [GAMEID]"
 msgstr "游戏名[游戏ID]"
@@ -886,7 +886,7 @@ msgid "Mount DVD drive"
 msgstr "挂载DVD光驱"
 
 msgid "Multiple Partitions"
-msgstr ""
+msgstr "多分区"
 
 msgid "Music Loop Mode"
 msgstr "音乐循环模式"
@@ -1009,7 +1009,7 @@ msgid "Only for Install"
 msgstr "仅安装"
 
 msgid "Original Discarts"
-msgstr ""
+msgstr "官方光盘图片"
 
 msgid "Original/Customs"
 msgstr "官方/自制"
@@ -1144,7 +1144,7 @@ msgid "Save Game List to"
 msgstr "保存游戏列表到"
 
 msgid "Save List"
-msgstr ""
+msgstr "保存列表"
 
 msgid "Saved"
 msgstr "已保存"
@@ -1186,7 +1186,7 @@ msgid "Sort alphabetically"
 msgstr "按字母排序"
 
 msgid "Sort by number of players"
-msgstr ""
+msgstr "以玩家数量排序"
 
 msgid "Sort by rank"
 msgstr "以排名排序"
@@ -1246,7 +1246,7 @@ msgid "Successfully installed:"
 msgstr "成功安装:"
 
 msgid "Sync FAT32 FS Info"
-msgstr "同步FAT32文件系统信息"
+msgstr "同步FAT32信息"
 
 msgid "Synchronizing..."
 msgstr "正在同步..."
@@ -1375,9 +1375,6 @@ msgstr "正在升级语言文件:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "上传已安装Zip文件到自制程序目录"
 
-msgid "Use IOS58"
-msgstr "使用IOS58"
-
 msgid "VIDTV Patch"
 msgstr "VIDTV修改"
 
@@ -1498,6 +1495,9 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "Use IOS58"
+#~ msgstr "使用IOS58"
 
 #~ msgid "Custom Disc Images"
 #~ msgstr "自定义光盘图片"

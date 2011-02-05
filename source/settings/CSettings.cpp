@@ -107,7 +107,6 @@ void CSettings::SetDefault()
     marknewtitles = ON;
     ShowFreeSpace = ON;
     PlaylogUpdate = ON;
-    UseIOS58 = OFF;
     ParentalBlocks = BLOCK_ALL;
     InstallToDir = INSTALL_TO_NAME_GAMEID;
     GameSplit = GAMESPLIT_4GB;
@@ -252,7 +251,6 @@ bool CSettings::Save()
     fprintf(file, "GameSplit = %d\n ", GameSplit);
     fprintf(file, "InstallPartitions = %08X\n ", InstallPartitions);
     fprintf(file, "PlaylogUpdate = %d\n ", PlaylogUpdate);
-    fprintf(file, "UseIOS58 = %d\n ", UseIOS58);
     fprintf(file, "ParentalBlocks = %08X\n ", ParentalBlocks);
     fprintf(file, "returnTo = %s\n ", returnTo);
     fprintf(file, "HomeMenu = %d\n ", HomeMenu);
@@ -497,11 +495,6 @@ bool CSettings::SetSetting(char *name, char *value)
     else if (strcmp(name, "PlaylogUpdate") == 0)
     {
         if (sscanf(value, "%d", &i) == 1) PlaylogUpdate = i;
-        return true;
-    }
-    else if (strcmp(name, "UseIOS58") == 0)
-    {
-        if (sscanf(value, "%d", &i) == 1) UseIOS58 = i;
         return true;
     }
     else if (strcmp(name, "InstallPartitions") == 0)

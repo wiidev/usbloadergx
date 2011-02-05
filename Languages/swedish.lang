@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-03 22:46+0100\n"
+"POT-Creation-Date: 2011-02-05 11:34+0100\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -1374,9 +1374,6 @@ msgstr "Uppdatera språk-filer:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Uppladdad ZIP fil installerad till homebrew-mappen"
-
-msgid "Use IOS58"
-msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "VIDTV-Patch"

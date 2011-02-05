@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-03 22:46+0100\n"
+"POT-Creation-Date: 2011-02-05 11:34+0100\n"
 "PO-Revision-Date: 2011-01-22 20:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: Cambo\n"
@@ -1375,9 +1375,6 @@ msgstr "Aggiornamento file delle lingue:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "File ZIP installato nella cartella Homebrew"
 
-msgid "Use IOS58"
-msgstr "Usa IOS58"
-
 msgid "VIDTV Patch"
 msgstr "Video Forzato"
 
@@ -1498,6 +1495,9 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "Use IOS58"
+#~ msgstr "Usa IOS58"
 
 #~ msgid "Download Boxart image?"
 #~ msgstr "Scarico la copertina?"

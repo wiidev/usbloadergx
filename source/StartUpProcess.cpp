@@ -92,6 +92,7 @@ bool StartUpProcess::USBSpinUp()
     bool started = false;
     int retries = 400;
     const DISC_INTERFACE * handle = DeviceHandler::GetUSBInterface();
+
     // wait 10 sec for the USB to spin up...stupid slow ass HDD
     do
     {
@@ -102,14 +103,6 @@ bool StartUpProcess::USBSpinUp()
         {
             messageTxt->SetTextf("Waiting for HDD: %i sec left\n", retries/20);
             Draw();
-        }
-
-        if(retries/20 == 18 && IOS_GetVersion() < 200)
-        {
-            DeviceHandler::DestroyInstance();
-            IosLoader::LoadAppCios();
-            DeviceHandler::Instance()->MountSD();
-            handle = DeviceHandler::GetUSBInterface();
         }
     }
     while(!started && --retries > 0);
@@ -126,6 +119,15 @@ bool StartUpProcess::Run()
 
 bool StartUpProcess::Execute()
 {
+    SetTextf("Start up\n");
+
+    if(IosLoader::LoadAppCios() < 0)
+    {
+        SetTextf("Failed loading any cIOS. USB Loader GX requires at least cIOS 222, 249 or 250. Exiting...\n");
+        sleep(5);
+        Sys_BackToLoader();
+    }
+
     SetTextf("Initialize sd card\n");
     DeviceHandler::Instance()->MountSD();
 
@@ -139,7 +141,7 @@ bool StartUpProcess::Execute()
     gprintf("\tLoading game settings...%s\n", GameSettings.Load(Settings.ConfigPath) ? "done" : "failed");
     gprintf("\tLoading game statistics...%s\n", GameStatistics.Load(Settings.ConfigPath) ? "done" : "failed");
 
-    if(!Settings.UseIOS58 && Settings.cios != IOS_GetVersion())
+    if(Settings.cios != IOS_GetVersion())
     {
         SetTextf("Loading cIOS %i\n", Settings.cios);
 

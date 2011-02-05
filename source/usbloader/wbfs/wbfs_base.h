@@ -11,7 +11,7 @@
 class Wbfs
 {
     public:
-        Wbfs(u32, u32, u32);
+        Wbfs(u32 dev, u32 lba, u32 size);
         ~Wbfs() { Close(); };
         static s32 Init(u32);
         s32 CheckGame(u8 *);
@@ -37,8 +37,9 @@ class Wbfs
         const wbfs_t *GetHDDHandle(void) const { return hdd; }
     protected:
         wbfs_t *hdd;
-        u32 device, lba, size;
-        u8 wbfs_part_fs;
+        const u32 device;
+        const u32 lba;
+        const u32 size;
 };
 
 #endif //_H

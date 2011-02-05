@@ -49,9 +49,6 @@ static int QuickGameBoot(const char * gameID)
 
 int main(int argc, char *argv[])
 {
-    if(IOS_GetVersion() != 58)
-        IOS_ReloadIOS(58);
-
     MEM2_init(48);
     __exception_setreload(20);
     MagicPatches(1);

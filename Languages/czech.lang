@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-03 22:46+0100\n"
+"POT-Creation-Date: 2011-02-05 11:34+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -1375,9 +1375,6 @@ msgstr "Aktualizuji jazykové soubory:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Odeslaný ZIP soubor nainstalován do adresáre homebrew"
 
-msgid "Use IOS58"
-msgstr "Použít IOS58"
-
 msgid "VIDTV Patch"
 msgstr "VIDTV korekce"
 
@@ -1498,6 +1495,9 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid "Use IOS58"
+#~ msgstr "Použít IOS58"
 
 #~ msgid "Custom Disc Images"
 #~ msgstr "Vlastní potisky DVD"

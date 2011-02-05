@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-03 22:46+0100\n"
+"POT-Creation-Date: 2011-02-05 11:34+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
@@ -1375,9 +1375,6 @@ msgstr "Mise à jour du fichier de langue:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Fichier ZIP envoyé et installé dans le répertoire homebrew."
 
-msgid "Use IOS58"
-msgstr "Utiliser IOS58"
-
 msgid "VIDTV Patch"
 msgstr "Patch VIDTV"
 
@@ -1498,6 +1495,9 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "Use IOS58"
+#~ msgstr "Utiliser IOS58"
 
 #~ msgid "Custom Disc Images"
 #~ msgstr "Labels DVD persos"
