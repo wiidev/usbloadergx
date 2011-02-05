@@ -29,6 +29,7 @@
 #define _ZIPFILE_H_
 
 #include <zip/unzip.h>
+#include <string>
 
 typedef struct
 {
@@ -48,6 +49,10 @@ class ZipFile
         //!Extract all files from a zip file to a directory
         //!\param dest Destination path to where to extract
         bool ExtractAll(const char *dest);
+        //!Find a file inside the zip and return if it is existent or not
+        bool FindFile(const char *filename);
+        //!Only needed a part of a filename to find the real one
+        bool FindFilePart(const char *partfilename, std::string &realname);
     protected:
         bool LoadList();
         unzFile File;

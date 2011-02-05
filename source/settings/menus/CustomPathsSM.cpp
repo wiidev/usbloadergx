@@ -144,17 +144,7 @@ int CustomPathsSM::GetMenuInternal()
     else if (ret == ++Idx)
     {
         titleTxt->SetText(tr( "Theme Path" ));
-        HaltGui();
-        GuiWindow * parent = (GuiWindow *) parentElement;
-        if(parent) parent->SetState(STATE_DISABLED);
-        this->SetState(STATE_DEFAULT);
-        this->Remove(optionBrowser);
-        ResumeGui();
-        int res = MenuThemeSelect();
-        if(parent) parent->SetState(STATE_DEFAULT);
-        this->Append(optionBrowser);
-        if (res == 1)
-            return MENU_SETTINGS;
+        ChangePath(Settings.theme_path, sizeof(Settings.theme_path));
     }
 
     //! Settings: WiiTDB Path

@@ -56,10 +56,11 @@ void GlobalSettings::SetupMainButtons()
     SetMainButton(pos++, tr( "Parental Control" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Sound" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Custom Paths" ), MainButtonImgData, MainButtonImgOverData);
+    SetMainButton(pos++, tr( "Theme Menu" ), MainButtonImgData, MainButtonImgOverData);
+    SetMainButton(pos++, tr( "Theme Downloader" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Update" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Default Settings" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Credits" ), creditsImgData, creditsImgOverData);
-    SetMainButton(pos++, tr( "Theme Downloader" ), MainButtonImgData, MainButtonImgOverData);
 }
 
 void GlobalSettings::CreateSettingsMenu(int menuNr)
@@ -139,6 +140,28 @@ void GlobalSettings::CreateSettingsMenu(int menuNr)
         CurrentMenu = new CustomPathsSM();
         Append(CurrentMenu);
     }
+    //! Theme Menu
+    else if(menuNr == Idx++)
+    {
+        if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_THEME_MENU))
+        {
+            WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+            return;
+        }
+
+        returnMenu = MENU_THEMEMENU;
+    }
+    //! Theme Downloader
+    else if(menuNr == Idx++)
+    {
+        if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_THEME_DOWNLOADER))
+        {
+            WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+            return;
+        }
+
+        returnMenu = MENU_THEMEDOWNLOADER;
+    }
     //! Update
     else if(menuNr == Idx++)
     {
@@ -185,17 +208,6 @@ void GlobalSettings::CreateSettingsMenu(int menuNr)
         WindowCredits();
         Append(backBtn);
         ShowMenu();
-    }
-    //! Theme Downloader
-    else if(menuNr == Idx++)
-    {
-        if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_THEME_DOWNLOADER))
-        {
-            WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
-            return;
-        }
-
-        returnMenu = MENU_THEMEDOWNLOADER;
     }
 }
 

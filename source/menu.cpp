@@ -22,6 +22,7 @@
 #include "settings/Settings.h"
 #include "settings/CGameSettings.h"
 #include "themes/CTheme.h"
+#include "themes/ThemeMenu.h"
 #include "themes/ThemeDownloader.h"
 #include "usbloader/disc.h"
 #include "usbloader/GameList.h"
@@ -216,6 +217,9 @@ int MainMenu(int menu)
                 break;
             case MENU_SETTINGS:
                 currentMenu = MenuSettings();
+                break;
+            case MENU_THEMEMENU:
+                currentMenu = ThemeMenu::Run();
                 break;
             case MENU_THEMEDOWNLOADER:
                 currentMenu = ThemeDownloader::Run();

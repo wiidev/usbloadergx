@@ -10,6 +10,5 @@
 
 bool MenuBackgroundMusic();
 int MenuLanguageSelect();
-int MenuThemeSelect();
 
 #endif

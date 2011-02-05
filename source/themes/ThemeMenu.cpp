@@ -24,7 +24,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "ThemeDownloader.h"
+#include "ThemeMenu.h"
 #include "language/gettext.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/ProgressWindow.h"
@@ -33,41 +33,25 @@
 #include "themes/CTheme.h"
 #include "FileOperations/fileops.h"
 #include "sys.h"
-#include "network/FileDownloader.h"
-#include "network/http.h"
 #include "menu/menus.h"
-#include "ZipFile.h"
 #include "utils/ShowError.h"
 #include "utils/tools.h"
 #include "gecko.h"
 
 
-ThemeDownloader::ThemeDownloader()
-    : FlyingButtonsMenu(tr("Theme Downloader"))
+ThemeMenu::ThemeMenu()
+    : FlyingButtonsMenu(tr("Theme Menu"))
 {
-    ThemeList = NULL;
     delete MainButtonImgData;
     delete MainButtonImgOverData;
-
-    ParentMenu = MENU_SETTINGS;
-
-    ThemeListURL = "http://wii.spiffy360.com/themes.php?xml=1&category=1&adult=";
-    if(Settings.godmode)
-        ThemeListURL += "1";
-    else
-        ThemeListURL += "0";
 
     MainButtonImgData = Resources::GetImageData("theme_box.png");
     MainButtonImgOverData = NULL;
 
-    urlTxt = new GuiText(tr( "Themes by www.spiffy360.com" ), 22, (GXColor) {255, 255, 255, 255});
-    urlTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    urlTxt->SetPosition(350, 12);
-    Append(urlTxt);
+    ParentMenu = MENU_SETTINGS;
 
     for(int i = 0; i < 4; ++i)
         ThemePreviews[i] = NULL;
-
 
     defaultBtnTxt = new GuiText(tr( "Default" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     defaultBtnTxt->SetMaxWidth(btnOutline->GetWidth() - 30);
@@ -91,26 +75,23 @@ ThemeDownloader::ThemeDownloader()
     backBtn->SetPosition(-205, 400);
 }
 
-ThemeDownloader::~ThemeDownloader()
+ThemeMenu::~ThemeMenu()
 {
     HaltGui();
     for(u32 i = 0; i < MainButton.size(); ++i)
         Remove(MainButton[i]);
-    Remove(urlTxt);
     Remove(defaultBtn);
 
-    delete urlTxt;
     delete defaultBtn;
     delete defaultBtnTxt;
     delete defaultBtnImg;
-    delete ThemeList;
     for(int i = 0; i < 4; ++i)
         delete ThemePreviews[i];
 }
 
-int ThemeDownloader::Run()
+int ThemeMenu::Run()
 {
-    ThemeDownloader * Menu = new ThemeDownloader();
+    ThemeMenu * Menu = new ThemeMenu();
     mainWindow->Append(Menu);
 
     Menu->ShowMenu();
@@ -124,7 +105,7 @@ int ThemeDownloader::Run()
     return returnMenu;
 }
 
-int ThemeDownloader::MainLoop()
+int ThemeMenu::MainLoop()
 {
     if(defaultBtn->GetState() == STATE_CLICKED)
     {
@@ -135,7 +116,7 @@ int ThemeDownloader::MainLoop()
             Theme::SetDefault();
             Theme::Reload();
             ResumeGui();
-            return MENU_THEMEDOWNLOADER;
+            return MENU_THEMEMENU;
         }
 
         defaultBtn->ResetState();
@@ -144,7 +125,7 @@ int ThemeDownloader::MainLoop()
     return FlyingButtonsMenu::MainLoop();
 }
 
-void ThemeDownloader::SetMainButton(int position, const char * ButtonText, GuiImageData * imageData, GuiImageData * themeImg)
+void ThemeMenu::SetMainButton(int position, const char * ButtonText, GuiImageData * imageData, GuiImageData * themeImg)
 {
     if(position >= (int) MainButton.size())
     {
@@ -194,76 +175,99 @@ void ThemeDownloader::SetMainButton(int position, const char * ButtonText, GuiIm
     }
 }
 
-GuiImageData * ThemeDownloader::GetImageData(int theme)
+GuiImageData * ThemeMenu::GetImageData(int theme)
 {
-    GuiImageData * ImageData = NULL;
     char filepath[300];
-    snprintf(filepath, sizeof(filepath), "%s/tmp/%s.jpg", Settings.theme_path, ThemeList->GetThemeTitle(theme));
+    snprintf(filepath, sizeof(filepath), "%stheme_preview.png", ThemeList[theme].ImageFolder.c_str());
 
-    if (!CheckFile(filepath))
-    {
-        struct block file = downloadfile(ThemeList->GetImageLink(theme));
-        char storepath[300];
-        snprintf(storepath, sizeof(storepath), "%s/tmp/", Settings.theme_path);
-        CreateSubfolder(storepath);
-        if (file.data)
-        {
-            ImageData = new GuiImageData(file.data, file.size, false);
-
-            FILE *storefile = fopen(filepath, "wb");
-            if(storefile)
-            {
-                fwrite(file.data, 1, file.size, storefile);
-                fclose(storefile);
-            }
-            free(file.data);
-        }
-    }
-    else
-        ImageData = new GuiImageData(filepath);
-
-    return ImageData;
+    return (new GuiImageData(filepath));
 }
 
-void ThemeDownloader::SetupMainButtons()
+void ThemeMenu::SetupMainButtons()
 {
-    ResumeGui();
+    ThemeList.clear();
 
-    if (!IsNetworkInit() && !NetworkInitPrompt())
+    DirList ThemeDir(Settings.theme_path, ".them", DirList::Files);
+    if (ThemeDir.GetFilecount() == 0)
     {
-        ShowError("Could not initialize network!");
-        return;
-    }
-
-    ShowProgress(tr("Downloading pagelist:"), "www.spiffy360.com", tr("Please wait..."), 0, 1);
-
-    if(!CheckConnection(ThemeListURL.c_str()))
-    {
-        ShowError(tr("Connection to server timed out."));
-        return;
-    }
-
-    ThemeList = new Theme_List(ThemeListURL.c_str());
-
-    if (ThemeList->GetThemeCount() == 0)
-    {
-        WindowPrompt(tr( "No themes found on the site." ), 0, "OK");
+        WindowPrompt(tr( "No themes found." ), 0, "OK");
         returnMenu = MENU_SETTINGS;
-        ProgressStop();
     }
 
-    for(int i = 0; i < ThemeList->GetThemeCount(); ++i)
+    for(int i = 0; i < ThemeDir.GetFilecount(); ++i)
     {
-        SetMainButton(i, ThemeList->GetThemeTitle(i), MainButtonImgData, NULL);
+        u8 *buffer = NULL;
+        u64 filesize;
+        gprintf("%i %s\n", i, ThemeDir.GetFilepath(i));
+        LoadFileToMem(ThemeDir.GetFilepath(i), &buffer, &filesize);
+
+        if(!buffer) continue;
+
+        buffer[filesize-1] = '\0';
+
+        int size = ThemeList.size();
+        ThemeList.resize(size+1);
+
+        ThemeList[size].Filepath = ThemeDir.GetFilepath(i);
+        GetNodeText(buffer, "Theme-Title:", ThemeList[size].Title);
+        GetNodeText(buffer, "Theme-Team:", ThemeList[size].Team);
+        GetNodeText(buffer, "Theme-Version:", ThemeList[size].Version);
+        GetNodeText(buffer, "Image-Folder:", ThemeList[size].ImageFolder);
+
+        if(ThemeList[size].Title.size() == 0 && ThemeDir.GetFilename(i))
+        {
+            ThemeList[size].Title = ThemeDir.GetFilename(i);
+            size_t pos = ThemeList[size].Title.rfind('.');
+            if(pos != std::string::npos)
+                ThemeList[size].Title.erase(pos);
+        }
+
+        if(ThemeList[size].ImageFolder.size() == 0)
+        {
+            ThemeList[size].ImageFolder = ThemeDir.GetFilepath(i);
+            size_t pos = ThemeList[size].ImageFolder.rfind('.');
+            if(pos != std::string::npos)
+                ThemeList[size].ImageFolder.erase(pos);
+            ThemeList[size].ImageFolder += '/';
+        }
+        else
+        {
+            std::string tempString = ThemeList[size].ImageFolder;
+            ThemeList[size].ImageFolder = Settings.theme_path;
+            ThemeList[size].ImageFolder += tempString;
+            ThemeList[size].ImageFolder += '/';
+        }
+
+        SetMainButton(size, ThemeList[size].Title.c_str(), MainButtonImgData, NULL);
+
+        free(buffer);
     }
 }
 
-void ThemeDownloader::AddMainButtons()
+bool ThemeMenu::GetNodeText(const u8 *buffer, const char *node, std::string &outtext)
+{
+    const char * nodeText = strcasestr((const char *) buffer, node);
+    if(!nodeText)
+        return false;
+
+    nodeText += strlen(node);
+
+    while(*nodeText == ' ') nodeText++;
+
+    while(*nodeText != '\0' && *nodeText != '\\' && *nodeText != '\n' && *nodeText != '"')
+    {
+        outtext.push_back(*nodeText);
+        nodeText++;
+    }
+
+    return true;
+}
+
+void ThemeMenu::AddMainButtons()
 {
     HaltGui();
     for(u32 i = 0; i < MainButton.size(); ++i)
         Remove(MainButton[i]);
-    ResumeGui();
 
     int FirstItem = currentPage*4;
     int n = 0;
@@ -271,28 +275,24 @@ void ThemeDownloader::AddMainButtons()
     for(int i = FirstItem; i < (int) MainButton.size() && i < FirstItem+4; ++i)
     {
         delete ThemePreviews[n];
-        ShowProgress(tr("Downloading image:"), 0, ThemeList->GetThemeTitle(i), n, 4);
         ThemePreviews[n] = GetImageData(i);
         MainButtonImgOver[i]->SetImage(ThemePreviews[n]);
         n++;
     }
-    ProgressStop();
-    HaltGui();
 
     FlyingButtonsMenu::AddMainButtons();
 }
 
-void ThemeDownloader::MainButtonClicked(int button)
+void ThemeMenu::MainButtonClicked(int button)
 {
     //! TODO: Clean me
-    const char * title = ThemeList->GetThemeTitle(button);
-    const char * author = ThemeList->GetThemeAuthor(button);
+    const char * title = ThemeList[button].Title.c_str();
+    const char * author = ThemeList[button].Team.c_str();
+    const char * version = ThemeList[button].Version.c_str();
     GuiImageData *thumbimageData = ThemePreviews[button % 4];
-    const char *downloadlink = ThemeList->GetDownloadLink(button);
 
-    gprintf("\nTheme_Prompt(%s ,%s, %s)", title, author, downloadlink);
+    gprintf("\nTheme_Prompt(%s ,%s)", title, author);
     bool leave = false;
-    int result = 0;
 
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImageData dialogBox(Resources::GetFile("theme_dialogue_box.png"), Resources::GetFileSize("theme_dialogue_box.png"));
@@ -308,35 +308,58 @@ void ThemeDownloader::MainButtonClicked(int button)
     GuiTrigger trigB;
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
+    int PositionY = 30;
+
     GuiText titleTxt(tr( "Theme Title:" ), 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     titleTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    titleTxt.SetPosition(230, 30);
+    titleTxt.SetPosition(230, PositionY);
+    PositionY += 20;
 
     GuiText titleTxt2(title, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     titleTxt2.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    titleTxt2.SetPosition(230, 50);
+    titleTxt2.SetPosition(230, PositionY);
     titleTxt2.SetMaxWidth(dialogBox.GetWidth() - 220, WRAP);
+
+    if(titleTxt2.GetTextWidth() >= dialogBox.GetWidth() - 220)
+        PositionY += 50;
+    else
+        PositionY += 30;
 
     GuiText authorTxt(tr( "Author(s):" ), 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     authorTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    authorTxt.SetPosition(230, 100);
+    authorTxt.SetPosition(230, PositionY);
+    PositionY += 20;
 
     GuiText authorTxt2(author, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     authorTxt2.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    authorTxt2.SetPosition(230, 120);
+    authorTxt2.SetPosition(230, PositionY);
     authorTxt2.SetMaxWidth(dialogBox.GetWidth() - 220, DOTTED);
 
-    GuiText downloadBtnTxt(tr( "Download" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    downloadBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
-    GuiImage downloadBtnImg(&btnOutline);
+    if(authorTxt2.GetTextWidth() >= dialogBox.GetWidth() - 220)
+        PositionY += 50;
+    else
+        PositionY += 30;
+
+    GuiText versionTxt(tr( "Version:" ), 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    versionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    versionTxt.SetPosition(230, PositionY);
+
+    GuiText versionTxt2(version, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    versionTxt2.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    versionTxt2.SetPosition(235+versionTxt.GetTextWidth(), PositionY);
+    versionTxt2.SetMaxWidth(dialogBox.GetWidth() - 220, DOTTED);
+
+    GuiText applyBtnTxt(tr( "Apply" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    applyBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
+    GuiImage applyBtnImg(&btnOutline);
     if (Settings.wsprompt)
     {
-        downloadBtnTxt.SetWidescreen(Settings.widescreen);
-        downloadBtnImg.SetWidescreen(Settings.widescreen);
+        applyBtnTxt.SetWidescreen(Settings.widescreen);
+        applyBtnImg.SetWidescreen(Settings.widescreen);
     }
-    GuiButton downloadBtn(&downloadBtnImg, &downloadBtnImg, ALIGN_RIGHT, ALIGN_TOP, -5, 170, &trigA, btnSoundOver, btnSoundClick2, 1);
-    downloadBtn.SetLabel(&downloadBtnTxt);
-    downloadBtn.SetScale(0.9);
+    GuiButton applyBtn(&applyBtnImg, &applyBtnImg, ALIGN_RIGHT, ALIGN_TOP, -5, 170, &trigA, btnSoundOver, btnSoundClick2, 1);
+    applyBtn.SetLabel(&applyBtnTxt);
+    applyBtn.SetScale(0.9);
 
     GuiText backBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
@@ -362,7 +385,9 @@ void ThemeDownloader::MainButtonClicked(int button)
     promptWindow.Append(&titleTxt2);
     promptWindow.Append(&authorTxt);
     promptWindow.Append(&authorTxt2);
-    promptWindow.Append(&downloadBtn);
+    promptWindow.Append(&versionTxt);
+    promptWindow.Append(&versionTxt2);
+    promptWindow.Append(&applyBtn);
     promptWindow.Append(&backBtn);
 
     HaltGui();
@@ -374,29 +399,30 @@ void ThemeDownloader::MainButtonClicked(int button)
 
     while (!leave)
     {
-        VIDEO_WaitVSync();
+        usleep(100);
 
         if (shutdown)
             Sys_Shutdown();
         else if (reset)
             Sys_Reboot();
 
-        if (downloadBtn.GetState() == STATE_CLICKED)
+        if (applyBtn.GetState() == STATE_CLICKED)
         {
-            int choice = WindowPrompt(tr( "Do you want to download this theme?" ), title, tr( "Yes" ), tr( "Cancel" ));
+            int choice = WindowPrompt(tr( "Do you want to apply this theme?" ), title, tr( "Yes" ), tr( "Cancel" ));
             if (choice)
             {
-                result = DownloadTheme(downloadlink, title);
-                if (result == 2)
+                if (Theme::Load(ThemeList[button].Filepath.c_str()))
                 {
-                    returnMenu = MENU_THEMEDOWNLOADER;
+                    snprintf(Settings.theme, sizeof(Settings.theme), ThemeList[button].Filepath.c_str());
+                    Theme::Reload();
+                    returnMenu = MENU_THEMEMENU;
                     leave = true;
                 }
             }
             mainWindow->SetState(STATE_DISABLED);
             promptWindow.SetState(STATE_DEFAULT);
             mainWindow->ChangeFocus(&promptWindow);
-            downloadBtn.ResetState();
+            applyBtn.ResetState();
         }
 
         else if (backBtn.GetState() == STATE_CLICKED)
@@ -412,81 +438,4 @@ void ThemeDownloader::MainButtonClicked(int button)
     mainWindow->Remove(&promptWindow);
     mainWindow->SetState(STATE_DEFAULT);
     ResumeGui();
-}
-
-int ThemeDownloader::DownloadTheme(const char *url, const char *title)
-{
-    if (!url) return -1;
-
-    if(!CreateSubfolder(Settings.theme_path))
-    {
-        ShowError(tr("Can't create path: %s"), Settings.theme_path);
-        return -1;
-    }
-
-    DirList oldDir(Settings.theme_path);
-
-    char filepath[300];
-    snprintf(filepath, sizeof(filepath), "%s/TempTheme.zip", Settings.theme_path);
-
-    int ret = DownloadFileToPath(url, filepath, false);
-    if(ret < 1024)
-    {
-        ShowError(tr("Error when downloading file: %i"), ret);
-        return -2;
-    }
-
-    ZipFile *zipfile = new ZipFile(filepath);
-
-    int result = zipfile->ExtractAll(Settings.theme_path);
-    if(result < 0)
-    {
-        WindowPrompt(tr( "Failed to extract." ), tr( "Unsupported format, try to extract manually TempTheme.zip." ), tr( "OK" ));
-        return -3;
-    }
-
-    std::string themeDir;
-    std::string Filename;
-    zipfile->FindFilePart(".them", Filename);
-    zipfile->FindFilePart("/", themeDir);
-
-    if(!zipfile->FindFile("theme_preview.png") && themeDir.size() != 0)
-    {
-        size_t pos = themeDir.find("/");
-        if(pos != std::string::npos)
-        {
-            themeDir.erase(pos);
-            char filepath[255];
-            char newfilepath[255];
-            snprintf(filepath, sizeof(filepath), "%s/tmp/%s.jpg", Settings.theme_path, title);
-            snprintf(newfilepath, sizeof(newfilepath), "%s/%s/theme_preview.png", Settings.theme_path, themeDir.c_str());
-            CopyFile(filepath, newfilepath);
-        }
-
-    }
-
-    delete zipfile;
-    remove(filepath);
-
-    int choice = WindowPrompt(tr( "Successfully extracted theme." ), tr( "Do you want to apply it now?" ), tr( "Yes" ), tr( "No" ));
-    if (choice == 0)
-        return -1;
-
-    if(Filename.size() == 0)
-    {
-        WindowPrompt(tr( "ERROR: Can't set up theme." ), tr( "The .them file was not found in the zip." ), tr( "OK" ));
-        return -1;
-    }
-
-    char real_themepath[1024];
-    snprintf(real_themepath, sizeof(real_themepath), "%s/%s", Settings.theme_path, Filename.c_str());
-
-    if (Theme::Load(real_themepath))
-    {
-        snprintf(Settings.theme, sizeof(Settings.theme), real_themepath);
-        Theme::Reload();
-        result = 2;
-    }
-
-    return result;
 }

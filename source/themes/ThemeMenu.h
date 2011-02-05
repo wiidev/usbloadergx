@@ -21,17 +21,20 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  ***************************************************************************/
-#ifndef _THEME_DOWNLOADER_H_
-#define _THEME_DOWNLOADER_H_
+#ifndef _THEME_MENU_H_
+#define _THEME_MENU_H_
 
+#include <vector>
+#include <string>
 #include "settings/menus/FlyingButtonsMenu.hpp"
+#include "FileOperations/DirList.h"
 #include "themes/Theme_List.h"
 
-class ThemeDownloader : public FlyingButtonsMenu
+class ThemeMenu : public FlyingButtonsMenu
 {
     public:
-        ThemeDownloader();
-        ~ThemeDownloader();
+        ThemeMenu();
+        ~ThemeMenu();
         static int Run();
         int MainLoop();
     protected:
@@ -41,15 +44,21 @@ class ThemeDownloader : public FlyingButtonsMenu
         void SetupMainButtons();
         void SetMainButton(int position, const char * ButtonText, GuiImageData * imageData, GuiImageData * imageOver);
         GuiImageData * GetImageData(int theme);
-        int DownloadTheme(const char *url, const char *title);
+        bool GetNodeText(const u8 *buffer, const char *node, std::string &outtext);
 
-        Theme_List * ThemeList;
-        GuiText * urlTxt;
+        struct ThemeInfoStruct
+        {
+            std::string Filepath;
+            std::string Title;
+            std::string Team;
+            std::string Version;
+            std::string ImageFolder;
+        };
+        std::vector<ThemeInfoStruct> ThemeList;
         GuiText * defaultBtnTxt;
         GuiImage * defaultBtnImg;
         GuiButton * defaultBtn;
         GuiImageData * ThemePreviews[4];
-        std::string ThemeListURL;
 };
 
 #endif

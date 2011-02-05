@@ -55,6 +55,57 @@ bool ZipFile::LoadList()
     return true;
 }
 
+bool ZipFile::FindFile(const char *file)
+{
+    if (!File) return false;
+
+    char filename[MAXPATHLEN];
+
+    int ret = unzGoToFirstFile(File);
+    if (ret != UNZ_OK) return false;
+
+    do
+    {
+        if(unzGetCurrentFileInfo(File, &cur_file_info, filename, sizeof(filename), NULL, 0, NULL, 0) != UNZ_OK)
+            continue;
+
+        const char *realfilename = strrchr(filename, '/');
+        if(!realfilename || strlen(realfilename) == 0)
+            realfilename = filename;
+
+        if(strcasecmp(realfilename, file) == 0)
+            return true;
+    }
+    while(unzGoToNextFile(File) == UNZ_OK);
+
+    return false;
+}
+
+bool ZipFile::FindFilePart(const char *partfilename, std::string &realname)
+{
+    if (!File) return false;
+
+    char filename[MAXPATHLEN];
+
+    int ret = unzGoToFirstFile(File);
+    if (ret != UNZ_OK) return false;
+
+    do
+    {
+        if(unzGetCurrentFileInfo(File, &cur_file_info, filename, sizeof(filename), NULL, 0, NULL, 0) != UNZ_OK)
+            continue;
+
+        if(strcasestr(filename, partfilename) != 0)
+        {
+            realname = filename;
+            return true;
+        }
+    }
+    while(unzGoToNextFile(File) == UNZ_OK);
+
+    return false;
+}
+
 bool ZipFile::ExtractAll(const char *dest)
 {
     if (!File) return false;
