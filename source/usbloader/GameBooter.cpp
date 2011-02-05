@@ -6,6 +6,7 @@
 #include "Controls/DeviceHandler.hpp"
 #include "usbloader/disc.h"
 #include "usbloader/apploader.h"
+#include "usbloader/usbstorage2.h"
 #include "usbloader/wdvd.h"
 #include "usbloader/GameList.h"
 #include "settings/Settings.h"
@@ -243,7 +244,7 @@ int GameBooter::BootGame(const char * gameID)
         if (gameList.GetGameFS(gameHeader.id) == PART_FS_WBFS)
             mload_close();
     }
-	
+
 	//! Now we can free up the memory used by the game list
     gameList.clear();
 
@@ -267,10 +268,21 @@ int GameBooter::BootGame(const char * gameID)
     //! Shadow mload - Only needed on some games with Hermes v5.1 (Check is inside the function)
     shadow_mload();
 
+    //! Remember game's USB port
+    int usbport = USBStorage2_GetPort();
+
     //! Flush all caches and close up all devices
     WBFS_CloseAll();
     DeviceHandler::DestroyInstance();
     USB_Deinitialize();
+
+    if(Settings.USBPort == 2)
+    {
+        //! Reset USB port because device handler changes it for cache flushing
+        USBStorage2_Init();
+        USBStorage2_SetPort(usbport);
+        USBStorage2_Deinit();
+    }
 
     //! Modify Wii Message Board to display the game starting here
     if(Settings.PlaylogUpdate)

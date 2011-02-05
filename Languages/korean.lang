@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-05 17:39+0100\n"
+"POT-Creation-Date: 2011-02-05 22:06+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -242,6 +242,9 @@ msgstr "부팅?"
 
 msgid "Both"
 msgstr "둘다"
+
+msgid "Both Ports"
+msgstr ""
 
 msgid "Can't be formatted"
 msgstr "포맷할 수 없습니다."
@@ -1320,6 +1323,12 @@ msgstr "USB 장치가 없습니다."
 
 msgid "USB Loader GX is protected"
 msgstr "USB 로더 GX 잠김 상태"
+
+msgid "USB Port"
+msgstr ""
+
+msgid "USB Port changing is only supported on Hermes cIOS."
+msgstr ""
 
 msgid "Uninstall"
 msgstr "제거"

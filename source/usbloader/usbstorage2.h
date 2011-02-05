@@ -19,9 +19,8 @@ extern "C"
 
     s32 USBStorage2_Watchdog(u32 on_off);
 
-    s32 USBStorage_WBFS_Read(u32 woffset, u32 len, void *buffer);
-    s32 USBStorage_WBFS_SetDevice(int dev);
-    s32 USBStorage_WBFS_SetFragList(void *p, int size);
+    s32 USBStorage2_SetPort(u32 port);
+    s32 USBStorage2_GetPort();
 
 #define DEVICE_TYPE_WII_UMS (('W'<<24)|('U'<<16)|('M'<<8)|'S')
 

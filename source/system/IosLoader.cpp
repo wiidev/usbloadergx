@@ -147,19 +147,18 @@ void IosLoader::LoadIOSModules(s32 ios, s32 ios_rev)
         int dip_plugin_size = 0;
 
         ech_module = ehcmodule_5;
-        ehc_module_size = ehcmodule_5_size;
+        ehc_module_size = size_ehcmodule_5;
         dip_plugin = odip_frag;
         dip_plugin_size = odip_frag_size;
         gprintf("Loading ehc v5 and opendip module\n");
 
-        u8 *ehc_cfg = search_for_ehcmodule_cfg((u8 *) ech_module, ehc_module_size);
-        if (ehc_cfg)
-        {
-            ehc_cfg += 12;
-            ehc_cfg[0] = 0; // USB Port 0
-            gprintf("Patched ehc module to use usb port 0.\n");
-        }
-
+  //      u8 *ehc_cfg = search_for_ehcmodule_cfg((u8 *) ech_module, ehc_module_size);
+  //      if (ehc_cfg)
+  //      {
+  //          ehc_cfg += 12;
+  //          ehc_cfg[0] = 0; // USB Port 0
+  //          gprintf("Patched ehc module to use usb port 0.\n");
+  //      }
         load_modules(ech_module, ehc_module_size, dip_plugin, dip_plugin_size);
     }
     //! Waninkoko IOS

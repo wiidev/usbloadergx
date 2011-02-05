@@ -114,6 +114,7 @@ void CSettings::SetDefault()
     widescreen = (CONF_GetAspectRatio() == CONF_ASPECT_16_9);
     HomeMenu = HOME_MENU_DEFAULT;
     MultiplePartitions = OFF;
+    USBPort = 0;
 }
 
 bool CSettings::Load()
@@ -255,6 +256,7 @@ bool CSettings::Save()
     fprintf(file, "returnTo = %s\n ", returnTo);
     fprintf(file, "HomeMenu = %d\n ", HomeMenu);
     fprintf(file, "MultiplePartitions = %d\n ", MultiplePartitions);
+    fprintf(file, "USBPort = %d\n ", USBPort);
     fclose(file);
 
     return true;
@@ -460,6 +462,11 @@ bool CSettings::SetSetting(char *name, char *value)
     else if (strcmp(name, "MultiplePartitions") == 0)
     {
         if (sscanf(value, "%d", &i) == 1) MultiplePartitions = i;
+        return true;
+    }
+    else if (strcmp(name, "USBPort") == 0)
+    {
+        if (sscanf(value, "%d", &i) == 1) USBPort = i;
         return true;
     }
     else if (strcmp(name, "patchcountrystrings") == 0)

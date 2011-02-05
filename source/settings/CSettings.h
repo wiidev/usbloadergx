@@ -111,6 +111,7 @@ class CSettings
         short ShowFreeSpace;
         short HomeMenu;
         short MultiplePartitions;
+        short USBPort;
         u32 InstallPartitions;
         u32 ParentalBlocks;
     protected:

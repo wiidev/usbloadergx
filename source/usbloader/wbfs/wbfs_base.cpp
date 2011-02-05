@@ -12,8 +12,8 @@
 
 #include "wbfs_base.h"
 
-Wbfs::Wbfs(u32 dev, u32 l, u32 s)
-    : hdd(NULL), device(dev), lba(l), size(s)
+Wbfs::Wbfs(u32 l, u32 s, u32 part)
+    : hdd(NULL), lba(l), size(s), partition(part)
 {
 }
 
@@ -22,7 +22,7 @@ s32 Wbfs::Init(u32 device)
     s32 ret;
 	const DISC_INTERFACE * handle = DeviceHandler::GetUSBInterface();
 
-    switch (device)
+    switch (WBFS_DEVICE_USB)
     {
         case WBFS_DEVICE_USB:
             /* Initialize USB storage */

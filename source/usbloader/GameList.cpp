@@ -169,7 +169,7 @@ int GameList::ReadGameList()
         PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
         int cnt = 0;
 
-        for(int part = 0; part < usbHandle->GetPartitionCount(); ++part)
+        for(int part = 0; part < usbHandle->GetPartitionTotalCount(); ++part)
         {
             int ret = InternalReadList(part);
             if(ret > 0) cnt += ret;

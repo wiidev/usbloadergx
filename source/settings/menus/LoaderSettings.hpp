@@ -38,6 +38,7 @@ class LoaderSettings : public SettingsMenu
 
         int OldSettingsPartition;
         int OldSettingsMultiplePartitions;
+        int OldSettingsUSBPort;
 
         OptionList GuiOptions;
 };

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-05 17:39+0100\n"
+"POT-Creation-Date: 2011-02-05 22:06+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -242,6 +242,9 @@ msgstr "啟動？"
 
 msgid "Both"
 msgstr "全部"
+
+msgid "Both Ports"
+msgstr ""
 
 msgid "Can't be formatted"
 msgstr "無法格式化"
@@ -1320,6 +1323,12 @@ msgstr "找不到 USB 設備"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX 被上鎖保護"
+
+msgid "USB Port"
+msgstr ""
+
+msgid "USB Port changing is only supported on Hermes cIOS."
+msgstr ""
 
 msgid "Uninstall"
 msgstr "移除"

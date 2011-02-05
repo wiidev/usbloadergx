@@ -68,6 +68,7 @@ static inline const char * PartFromType(int type)
 
 PartitionHandle::PartitionHandle(const DISC_INTERFACE *discio)
 {
+    Port0Size = 0;
     interface = discio;
 
     // Sanity check
@@ -92,6 +93,23 @@ PartitionHandle::~PartitionHandle()
     interface->shutdown();
 }
 
+void PartitionHandle::GetPort1Partitions()
+{
+    if(Port0Size != 0)
+        return;
+
+    Port0Size = PartitionList.size();
+
+    // Start the device and check that it is inserted
+    if (!interface->startup())
+        return;
+
+    if (!interface->isInserted())
+        return;
+
+    FindPartitions();
+}
+
 bool PartitionHandle::IsMounted(int pos)
 {
     if(pos < 0 || pos >= (int) MountNameList.size())
@@ -114,7 +132,7 @@ bool PartitionHandle::Mount(int pos, const char * name, bool forceFAT)
     UnMount(pos);
 
     if(pos >= (int) MountNameList.size())
-        MountNameList.resize(GetPartitionCount());
+        MountNameList.resize(pos+1);
 
     MountNameList[pos] = name;
 
@@ -236,7 +254,7 @@ int PartitionHandle::FindPartitions()
 			continue;
         }
 
-        if(le32(partition->block_count) > 0 && !IsExisting(le32(partition->lba_start)))
+        if(le32(partition->block_count) > 0 && (!IsExisting(le32(partition->lba_start)) || Port0Size))
         {
             AddPartition(PartFromType(partition->type), le32(partition->lba_start),
                                       le32(partition->block_count), (partition->status == PARTITION_BOOTABLE),

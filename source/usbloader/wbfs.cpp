@@ -25,10 +25,12 @@ wbfs_disc_t* WBFS_OpenDisc(u8 *discid)
     if(!discid) return NULL;
 
     int part = gameList.GetPartitionNumber(discid);
-    if(VALID(part))
-        return WbfsList[part]->OpenDisc(discid);
+    if(!VALID(part))
+        return NULL;
 
-    return NULL;
+    DeviceHandler::SetUSBPortFromPartition(part);
+
+    return WbfsList[part]->OpenDisc(discid);
 }
 
 void WBFS_CloseDisc(wbfs_disc_t *disc)
@@ -39,6 +41,8 @@ void WBFS_CloseDisc(wbfs_disc_t *disc)
     int part_num = gameList.GetPartitionNumber(header->id);
     if(!VALID(part_num))
         return;
+
+    DeviceHandler::SetUSBPortFromPartition(part_num);
 
     WbfsList[part_num]->CloseDisc(disc);
 }
@@ -54,7 +58,7 @@ s32 WBFS_OpenAll()
 
     PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
 
-    for(int i = 0; i < usbHandle->GetPartitionCount(); ++i)
+    for(int i = 0; i < usbHandle->GetPartitionTotalCount(); ++i)
     {
         if(WBFS_OpenPart(i) == 0)
             ret = 0;
@@ -66,8 +70,10 @@ s32 WBFS_OpenAll()
 s32 WBFS_OpenPart(int part_num)
 {
     PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
-    if(part_num < 0 || part_num >= usbHandle->GetPartitionCount())
+    if(part_num < 0 || part_num >= usbHandle->GetPartitionTotalCount())
         return -1;
+
+    DeviceHandler::SetUSBPortFromPartition(part_num);
 
     // close
     WBFS_Close(part_num);
@@ -79,19 +85,19 @@ s32 WBFS_OpenPart(int part_num)
 
     if (strncmp(usbHandle->GetFSName(part_num), "FAT", 3) == 0)
     {
-        WbfsList[part_num] = new Wbfs_Fat(WBFS_MIN_DEVICE, usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
+        WbfsList[part_num] = new Wbfs_Fat(usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num), part_num);
     }
     else if (strncmp(usbHandle->GetFSName(part_num), "NTFS", 4) == 0)
     {
-        WbfsList[part_num] = new Wbfs_Ntfs(WBFS_MIN_DEVICE, usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
+        WbfsList[part_num] = new Wbfs_Ntfs(usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num), part_num);
     }
     else if (strncmp(usbHandle->GetFSName(part_num), "LINUX", 5) == 0)
     {
-        WbfsList[part_num] = new Wbfs_Ext(WBFS_MIN_DEVICE, usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
+        WbfsList[part_num] = new Wbfs_Ext(usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num), part_num);
     }
     else if (strncmp(usbHandle->GetFSName(part_num), "WBFS", 4) == 0)
     {
-        WbfsList[part_num] = new Wbfs_Wbfs(WBFS_MIN_DEVICE, usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
+        WbfsList[part_num] = new Wbfs_Wbfs(usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num), part_num);
     }
     else
     {
@@ -112,6 +118,8 @@ bool WBFS_Close(int part_num)
 {
     if(!VALID(part_num))
         return false;
+
+    DeviceHandler::SetUSBPortFromPartition(part_num);
 
     delete WbfsList[part_num];
     WbfsList[part_num] = NULL;
@@ -141,13 +149,18 @@ s32 WBFS_GetCount(int part_num, u32 *count)
     if(!VALID(part_num))
         return -1;
 
-    return WbfsList[part_num]->GetCount(count);
+    DeviceHandler::SetUSBPortFromPartition(part_num);
+    int ret = WbfsList[part_num]->GetCount(count);
+
+    return ret;
 }
 
 s32 WBFS_GetHeaders(int part_num, struct discHdr *outbuf, u32 cnt, u32 len)
 {
     if(!VALID(part_num))
         return -1;
+
+    DeviceHandler::SetUSBPortFromPartition(part_num);
 
     return WbfsList[part_num]->GetHeaders(outbuf, cnt, len);
 }
@@ -158,6 +171,8 @@ s32 WBFS_CheckGame(u8 *discid)
     if(!VALID(part_num))
         return 0;
 
+    DeviceHandler::SetUSBPortFromPartition(part_num);
+
     return WbfsList[part_num]->CheckGame(discid);
 }
 
@@ -165,6 +180,8 @@ s32 WBFS_AddGame(void)
 {
     if(!VALID(Settings.partition))
         return -1;
+
+    DeviceHandler::SetUSBPortFromPartition(Settings.partition);
 
     return WbfsList[Settings.partition]->AddGame();
 }
@@ -175,6 +192,8 @@ s32 WBFS_RemoveGame(u8 *discid)
     if(!VALID(part_num))
         return -1;
 
+    DeviceHandler::SetUSBPortFromPartition(part_num);
+
     return WbfsList[part_num]->RemoveGame(discid);
 }
 
@@ -184,6 +203,8 @@ s32 WBFS_GameSize(u8 *discid, f32 *size)
     if(!VALID(part_num))
         return -1;
 
+    DeviceHandler::SetUSBPortFromPartition(part_num);
+
     return WbfsList[part_num]->GameSize(discid, size);
 }
 
@@ -191,6 +212,8 @@ s32 WBFS_DiskSpace(f32 *used, f32 *free)
 {
     if(!VALID(Settings.partition))
         return -1;
+
+    DeviceHandler::SetUSBPortFromPartition(Settings.partition);
 
     return WbfsList[Settings.partition]->DiskSpace(used, free);
 }
@@ -201,6 +224,8 @@ s32 WBFS_RenameGame(u8 *discid, const void *newname)
     if(!VALID(part_num))
         return -1;
 
+    DeviceHandler::SetUSBPortFromPartition(part_num);
+
     return WbfsList[part_num]->RenameGame(discid, newname);
 }
 
@@ -210,6 +235,8 @@ s32 WBFS_ReIDGame(u8 *discid, const void *newID)
     if(!VALID(part_num))
         return -1;
 
+    DeviceHandler::SetUSBPortFromPartition(part_num);
+
     return WbfsList[part_num]->ReIDGame(discid, newID);
 }
 
@@ -217,6 +244,8 @@ u64 WBFS_EstimeGameSize(void)
 {
     if(!VALID(Settings.partition))
         return 0;
+
+    DeviceHandler::SetUSBPortFromPartition(Settings.partition);
 
     return WbfsList[Settings.partition]->EstimateGameSize();
 }
@@ -226,6 +255,8 @@ int WBFS_GetFragList(u8 *id)
     int part_num = gameList.GetPartitionNumber(id);
     if(!VALID(part_num))
         return -1;
+
+    DeviceHandler::SetUSBPortFromPartition(part_num);
 
     return WbfsList[part_num]->GetFragList(id);
 }

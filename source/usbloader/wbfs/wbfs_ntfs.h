@@ -6,8 +6,8 @@
 class Wbfs_Ntfs: public Wbfs_Fat
 {
     public:
-        Wbfs_Ntfs(u32 device, u32 lba, u32 size) :
-            Wbfs_Fat(device, lba, size)
+        Wbfs_Ntfs(u32 lba, u32 size, u32 part) :
+            Wbfs_Fat(lba, size, part)
         {
         }
         virtual const u8 GetFSType(void) const { return PART_FS_NTFS; }

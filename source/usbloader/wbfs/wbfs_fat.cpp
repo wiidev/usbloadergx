@@ -38,8 +38,8 @@ static const char wbfs_fat_dir[] = "/wbfs";
 static const char invalid_path[] = "/\\:|<>?*\"'";
 extern u32 hdd_sector_size;
 
-Wbfs_Fat::Wbfs_Fat(u32 device, u32 lba, u32 size) :
-    Wbfs(device, lba, size), fat_hdr_list(NULL), fat_hdr_count(0)
+Wbfs_Fat::Wbfs_Fat(u32 lba, u32 size, u32 part) :
+    Wbfs(lba, size, part), fat_hdr_list(NULL), fat_hdr_count(0)
 {
     memset(wbfs_fs_drive, 0, sizeof(wbfs_fs_drive));
 }
@@ -50,11 +50,11 @@ s32 Wbfs_Fat::Open()
 
     PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
 
-    for(int i = 0; i < usbHandle->GetPartitionCount(); ++i)
+    if(partition >= 0 && partition < usbHandle->GetPartitionTotalCount())
     {
-        if (device == WBFS_DEVICE_USB && lba == usbHandle->GetLBAStart(i))
+        if (lba == usbHandle->GetLBAStart(partition))
         {
-            sprintf(wbfs_fs_drive, "%s:", usbHandle->MountName(i));
+            sprintf(wbfs_fs_drive, "%s:", usbHandle->MountName(partition));
             return 0;
         }
     }

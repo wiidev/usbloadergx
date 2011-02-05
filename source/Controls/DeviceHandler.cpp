@@ -30,9 +30,11 @@
 #include <ogc/system.h>
 #include <sdcard/wiisd_io.h>
 #include <sdcard/gcsd.h>
+#include "settings/CSettings.h"
 #include "usbloader/usbstorage2.h"
 #include "DeviceHandler.hpp"
 #include "usbloader/wbfs.h"
+#include "system/IosLoader.h"
 
 DeviceHandler * DeviceHandler::instance = NULL;
 
@@ -159,23 +161,63 @@ static inline bool USBSpinUp()
     return started;
 }
 
+bool DeviceHandler::SetUSBPort(int port)
+{
+    if(Settings.USBPort != 2)
+        DeviceHandler::Instance()->UnMountAllUSB();
+
+    int ret = USBStorage2_SetPort(port);
+
+    USBSpinUp();
+
+    if(Settings.USBPort != 2)
+        DeviceHandler::Instance()->MountAllUSB();
+
+    return ret >= 0;
+}
+
+void DeviceHandler::SetUSBPortFromPartition(int part)
+{
+    if(Settings.USBPort != 2)
+        return;
+
+    PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
+    if(!usbHandle)
+        return;
+
+    if(part < usbHandle->GetPartitionCount())
+        SetUSBPort(0);
+    else
+        SetUSBPort(1);
+}
+
 bool DeviceHandler::MountUSB(int pos, bool spinup)
 {
     if(spinup && !USBSpinUp())
         return false;
 
     if(!usb)
+    {
+        if(Settings.USBPort == 2) SetUSBPort(0);
         usb = new PartitionHandle(GetUSBInterface());
+        if(Settings.USBPort == 2 && IosLoader::IsHermesIOS())
+        {
+            SetUSBPort(1);
+            usb->GetPort1Partitions();
+        }
+    }
 
-    if(usb->GetPartitionCount() < 1)
+    if(usb->GetPartitionTotalCount() < 1)
     {
         delete usb;
         usb = NULL;
         return false;
     }
 
-    if(pos >= usb->GetPartitionCount())
+    if(pos >= usb->GetPartitionTotalCount())
         return false;
+
+    SetUSBPortFromPartition(pos);
 
     return usb->Mount(pos, DeviceName[USB1+pos]);
 }
@@ -186,15 +228,26 @@ bool DeviceHandler::MountAllUSB(bool spinup)
         return false;
 
     if(!usb)
+    {
+        if(Settings.USBPort == 2) SetUSBPort(0);
         usb = new PartitionHandle(GetUSBInterface());
+        if(Settings.USBPort == 2 && IosLoader::IsHermesIOS())
+        {
+            SetUSBPort(1);
+            usb->GetPort1Partitions();
+        }
+    }
 
     bool result = false;
 
-    for(int i = 0; i < usb->GetPartitionCount(); i++)
+    for(int i = 0; i < usb->GetPartitionTotalCount(); i++)
     {
         if(MountUSB(i, false))
             result = true;
     }
+
+    if(Settings.USBPort == 2)
+        SetUSBPort(0);
 
     return result;
 }
@@ -204,8 +257,10 @@ void DeviceHandler::UnMountUSB(int pos)
     if(!usb)
         return;
 
-    if(pos >= usb->GetPartitionCount())
+    if(pos >= usb->GetPartitionTotalCount())
         return;
+
+    SetUSBPortFromPartition(pos);
 
     usb->UnMount(pos);
 }
@@ -215,8 +270,8 @@ void DeviceHandler::UnMountAllUSB()
     if(!usb)
         return;
 
-    for(int i = 0; i < usb->GetPartitionCount(); i++)
-        usb->UnMount(i);
+    for(int i = 0; i < usb->GetPartitionTotalCount(); i++)
+        UnMountUSB(i);
 
     delete usb;
     usb = NULL;

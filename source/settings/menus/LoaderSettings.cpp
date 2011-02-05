@@ -25,6 +25,7 @@
 #include <sys/statvfs.h>
 #include "LoaderSettings.hpp"
 #include "Controls/DeviceHandler.hpp"
+#include "usbloader/usbstorage2.h"
 #include "settings/CSettings.h"
 #include "prompts/ProgressWindow.h"
 #include "prompts/PromptWindows.h"
@@ -116,6 +117,7 @@ LoaderSettings::LoaderSettings()
     Options->SetName(Idx++, "%s", tr( "Boot/Standard" ));
     Options->SetName(Idx++, "%s", tr( "Game/Install Partition" ));
     Options->SetName(Idx++, "%s", tr( "Multiple Partitions" ));
+    Options->SetName(Idx++, "%s", tr( "USB Port" ));
     Options->SetName(Idx++, "%s", tr( "Install directories" ));
     Options->SetName(Idx++, "%s", tr( "Game Split Size" ));
     Options->SetName(Idx++, "%s", tr( "Quick Boot" ));
@@ -129,15 +131,24 @@ LoaderSettings::LoaderSettings()
 
     OldSettingsPartition = Settings.partition;
     OldSettingsMultiplePartitions = Settings.MultiplePartitions;
+    OldSettingsUSBPort = Settings.USBPort;
 }
 
 LoaderSettings::~LoaderSettings()
 {
     //! if partition has changed, Reinitialize it
     if (Settings.partition != OldSettingsPartition ||
-        Settings.MultiplePartitions != OldSettingsMultiplePartitions)
+        Settings.MultiplePartitions != OldSettingsMultiplePartitions ||
+        Settings.USBPort != OldSettingsUSBPort)
     {
+        int tempPort = Settings.USBPort;
+        Settings.USBPort = OldSettingsUSBPort;
         WBFS_CloseAll();
+        DeviceHandler::Instance()->UnMountAllUSB();
+        Settings.USBPort = tempPort;
+        DeviceHandler::SetUSBPort(Settings.USBPort);
+        if(Settings.USBPort == 2) DeviceHandler::Instance()->MountAllUSB();
+
         if(Settings.MultiplePartitions)
             WBFS_OpenAll();
         else
@@ -181,6 +192,12 @@ void LoaderSettings::SetOptionValues()
 
     //! Settings: Multiple Partitions
     Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.MultiplePartitions] ));
+
+    //! Settings: USB Port
+    if(Settings.USBPort == 2)
+        Options->SetValue(Idx++, tr("Both Ports"));
+    else
+        Options->SetValue(Idx++, "%i", Settings.USBPort);
 
     //! Settings: Install directories
     Options->SetValue(Idx++, "%s", tr( InstallToText[Settings.InstallToDir] ));
@@ -290,7 +307,7 @@ int LoaderSettings::GetMenuInternal()
         int retries = 20;
         do
         {
-            Settings.partition = (Settings.partition + 1) % DeviceHandler::Instance()->GetUSBHandle()->GetPartitionCount();
+            Settings.partition = (Settings.partition + 1) % DeviceHandler::Instance()->GetUSBHandle()->GetPartitionTotalCount();
 			fs_type = DeviceHandler::GetUSBFilesystemType(Settings.partition);
         }
         while (!IsValidPartition(fs_type, ios) && --retries > 0);
@@ -303,6 +320,19 @@ int LoaderSettings::GetMenuInternal()
     else if (ret == ++Idx)
     {
         if (++Settings.MultiplePartitions >= MAX_ON_OFF) Settings.MultiplePartitions = 0;
+    }
+
+    //! Settings: USB Port
+    else if (ret == ++Idx)
+    {
+        if(!IosLoader::IsHermesIOS())
+        {
+            WindowPrompt(tr("ERROR:"), tr("USB Port changing is only supported on Hermes cIOS."), tr("OK"));
+            Settings.USBPort = 0;
+        }
+
+        else if (++Settings.USBPort >= 3) // 2 = both ports
+            Settings.USBPort = 0;
     }
 
     //! Settings: Install directories

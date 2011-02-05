@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-05 17:39+0100\n"
+"POT-Creation-Date: 2011-02-05 22:06+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -242,6 +242,9 @@ msgstr ""
 
 msgid "Both"
 msgstr "Mindkettõ"
+
+msgid "Both Ports"
+msgstr ""
 
 msgid "Can't be formatted"
 msgstr "Nem Formázható"
@@ -1320,6 +1323,12 @@ msgstr "USB Meghajtó nem található"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX levédve"
+
+msgid "USB Port"
+msgstr ""
+
+msgid "USB Port changing is only supported on Hermes cIOS."
+msgstr ""
 
 msgid "Uninstall"
 msgstr "Törlés"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-05 17:39+0100\n"
+"POT-Creation-Date: 2011-02-05 22:06+0100\n"
 "PO-Revision-Date: 2010-03-22 10:55-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
@@ -242,6 +242,9 @@ msgstr "Carregar?"
 
 msgid "Both"
 msgstr "Ambos"
+
+msgid "Both Ports"
+msgstr ""
 
 msgid "Can't be formatted"
 msgstr "Não pode ser formatado"
@@ -1320,6 +1323,12 @@ msgstr "Dispositivo USB não encontrado"
 
 msgid "USB Loader GX is protected"
 msgstr "O USB Loader GX está bloqueado"
+
+msgid "USB Port"
+msgstr ""
+
+msgid "USB Port changing is only supported on Hermes cIOS."
+msgstr ""
 
 msgid "Uninstall"
 msgstr "Desinstalar"

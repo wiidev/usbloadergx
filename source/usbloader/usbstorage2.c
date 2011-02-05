@@ -1,6 +1,8 @@
 /*-------------------------------------------------------------
 
  usbstorage_starlet.c -- USB mass storage support, inside starlet
+ Copyright (C) 2011 Dimok
+ Copyright (C) 2011 Rodries
  Copyright (C) 2009 Kwiirk
 
  If this driver is linked before libogc, this will replace the original
@@ -32,6 +34,7 @@
 #include <string.h>
 #include "usbstorage2.h"
 #include "memory/mem2.h"
+#include "gecko.h"
 
 
 /* IOCTL commands */
@@ -46,6 +49,7 @@
 #define USB_IOCTL_UMS_WATCHDOG          (UMS_BASE+0x80)
 
 #define USB_IOCTL_UMS_TESTMODE          (UMS_BASE+0x81)
+#define USB_IOCTL_SET_PORT				(UMS_BASE+0x83)
 
 #define WBFS_BASE (('W'<<24)|('F'<<16)|('S'<<8))
 #define USB_IOCTL_WBFS_OPEN_DISC            (WBFS_BASE+0x1)
@@ -65,6 +69,7 @@ static char fs3[] ATTRIBUTE_ALIGN(32) = "/dev/usb/ehc";
 
 static u8 * mem2_ptr = NULL;
 static s32 hid = -1, fd = -1;
+static u32 usb2_port = 0;  //autodetect mode (works only with hermes ios & rodries ehcmodule)
 u32 hdd_sector_size = 512;
 
 s32 USBStorage2_Init(void)
@@ -85,8 +90,9 @@ s32 USBStorage2_Init(void)
     fd = IOS_Open(fs, 0);
     if (fd < 0) fd = IOS_Open(fs2, 0);
     if (fd < 0) fd = IOS_Open(fs3, 0);
-
     if (fd < 0) return fd;
+
+    IOS_IoctlvFormat(hid, fd, USB_IOCTL_SET_PORT, "i:", usb2_port);
 
     /* Initialize USB storage */
     ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_UMS_INIT, ":");
@@ -124,6 +130,29 @@ void USBStorage2_Deinit(void)
     hdd_sector_size = 512;
 }
 
+s32 USBStorage2_SetPort(u32 port)
+{
+    if(port < 0 || port > 1)
+        return -1;
+
+    if(port == usb2_port)
+        return 0;
+
+    s32 ret = -1;
+	usb2_port = port;
+
+    gprintf("Changing USB port to port %i....\n", port);
+    //must be called before USBStorage2_Init (default port 0)
+	if (fd >= 0)
+	    ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_SET_PORT, "i:", usb2_port);
+
+    return ret;
+}
+
+s32 USBStorage2_GetPort()
+{
+    return usb2_port;
+}
 
 s32 USBStorage2_Watchdog(u32 on_off)
 {
@@ -245,7 +274,7 @@ s32 USBStorage2_WriteSectors(u32 sector, u32 numSectors, const void *buffer)
 
 static bool __usbstorage_Startup(void)
 {
-    return USBStorage2_Init() == 0;
+    return USBStorage2_Init() >= 0;
 }
 
 static bool __usbstorage_IsInserted(void)
@@ -283,64 +312,3 @@ const DISC_INTERFACE __io_usbstorage2 = {
     (FN_MEDIUM_CLEARSTATUS) &__usbstorage_ClearStatus,
     (FN_MEDIUM_SHUTDOWN) &__usbstorage_Shutdown
 };
-
-// woffset is in 32bit words, len is in bytes
-s32 USBStorage_WBFS_Read(u32 woffset, u32 len, void *buffer)
-{
-    s32 ret;
-
-    USBStorage2_Init();
-    /* Device not opened */
-    if (fd < 0) return fd;
-
-    /* Read data */
-    ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_WBFS_READ_DISC, "ii:d", woffset, len, buffer, len);
-
-    return ret;
-}
-
-s32 USBStorage_WBFS_SetFragList(void *p, int size)
-{
-    s32 ret;
-    USBStorage2_Init();
-    // Device not opened
-    if (fd < 0) return fd;
-    // ioctl
-    ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_WBFS_SET_FRAGLIST, "d:", p, size);
-    return ret;
-}
-
-// Not used currently
-#if 0
-
-s32 USBStorage_WBFS_Open(char *buffer)
-{
-    u32 len = 8;
-
-    s32 ret;
-
-    /* Device not opened */
-    if (fd < 0) return fd;
-
-    extern u32 wbfs_part_lba;
-    u32 part = wbfs_part_lba;
-
-    /* Read data */
-    ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_WBFS_OPEN_DISC, "dd:", buffer, len, &part, 4);
-
-    return ret;
-}
-
-s32 USBStorage_WBFS_SetDevice(int dev)
-{
-    s32 ret, retval = 0;
-    USBStorage2_Init();
-    // Device not opened
-    if (fd < 0) return fd;
-    // ioctl
-    ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_WBFS_SET_DEVICE, "i:i", dev, &retval);
-    if (retval) return retval;
-    return ret;
-}
-
-#endif

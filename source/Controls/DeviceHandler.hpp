@@ -83,6 +83,8 @@ class DeviceHandler
         static const char * GetFSName(int dev);
         static const char * PathToFSName(const char * path) { return GetFSName(PathToDriveType(path)); };
         static const DISC_INTERFACE * GetUSBInterface();
+        static bool SetUSBPort(int port);
+        static void SetUSBPortFromPartition(int part);
     private:
         DeviceHandler() : sd(0), usb(0) { };
         ~DeviceHandler();

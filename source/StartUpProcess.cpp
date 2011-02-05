@@ -157,6 +157,14 @@ bool StartUpProcess::Execute()
         DeviceHandler::Instance()->MountAllUSB(false);
     }
 
+    if(!IosLoader::IsHermesIOS())
+        Settings.USBPort = 0;
+    else if(Settings.USBPort == 1)
+    {
+        SetTextf("Changing USB Port to %i\n", Settings.USBPort);
+        DeviceHandler::SetUSBPort(Settings.USBPort);
+    }
+
     gprintf("\tLoading font...%s\n", Theme::LoadFont(Settings.theme_path) ? "done" : "failed (using default)");
     gprintf("\tLoading theme...%s\n", Theme::Load(Settings.theme) ? "done" : "failed (using default)");
 

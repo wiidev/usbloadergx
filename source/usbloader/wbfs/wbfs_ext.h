@@ -6,8 +6,8 @@
 class Wbfs_Ext: public Wbfs_Fat
 {
     public:
-        Wbfs_Ext(u32 device, u32 lba, u32 size) :
-            Wbfs_Fat(device, lba, size)
+        Wbfs_Ext(u32 lba, u32 size, u32 part) :
+            Wbfs_Fat(lba, size, part)
         {
         }
         virtual const u8 GetFSType(void) const { return PART_FS_EXT; }
