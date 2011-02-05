@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-05 11:34+0100\n"
+"POT-Creation-Date: 2011-02-05 17:39+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: SirPalax\n"
 "Language-Team: Penn, SirPalax\n"
@@ -144,6 +144,9 @@ msgstr ""
 msgid "App Language"
 msgstr "Idioma Aplicación"
 
+msgid "Apply"
+msgstr ""
+
 msgid "Apr"
 msgstr "Abr"
 
@@ -159,8 +162,8 @@ msgstr "¿Estás seguro?"
 msgid "Aug"
 msgstr "Ago"
 
-msgid "Author:"
-msgstr "Autor:"
+msgid "Author(s):"
+msgstr ""
 
 msgid "AutoInit Network"
 msgstr "AutoIniciar la Red"
@@ -435,6 +438,9 @@ msgstr ""
 msgid "Do you want to apply it now?"
 msgstr "¿Quieres aplicarlo ahora?"
 
+msgid "Do you want to apply this theme?"
+msgstr ""
+
 msgid "Do you want to change language?"
 msgstr "¿Quieres cambiar el idioma?"
 
@@ -445,9 +451,6 @@ msgid "Do you want to format:"
 msgstr "Quieres formatear:"
 
 msgid "Do you want to load the default theme?"
-msgstr ""
-
-msgid "Do you want to load this theme?"
 msgstr ""
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
@@ -837,9 +840,6 @@ msgstr "¿Cargar este DOL como DOL Alternativo?"
 msgid "Loader Settings"
 msgstr ""
 
-msgid "Loading default theme."
-msgstr ""
-
 msgid "Loading standard language."
 msgstr "Cargando idioma estándar."
 
@@ -941,6 +941,9 @@ msgstr "No hay nuevas actualizaciones."
 
 msgid "No themes found on the site."
 msgstr "No hay Temas en este sitio."
+
+msgid "No themes found."
+msgstr ""
 
 msgid "None"
 msgstr "Ninguno"
@@ -1279,14 +1282,14 @@ msgstr ""
 msgid "Theme Downloader"
 msgstr "Descarga de Temas"
 
+msgid "Theme Menu"
+msgstr ""
+
 msgid "Theme Path"
 msgstr "Ruta del Tema"
 
 msgid "Theme Title:"
 msgstr "Título del Tema:"
-
-msgid "Theme path is changed."
-msgstr ""
 
 msgid "Themes by www.spiffy360.com"
 msgstr ""
@@ -1377,6 +1380,9 @@ msgstr "Enviado archivo ZIP instalado en la carpeta homebrew."
 
 msgid "VIDTV Patch"
 msgstr "Parche VIDTV"
+
+msgid "Version:"
+msgstr ""
 
 #, c-format
 msgid "Version: %s"
@@ -1495,6 +1501,9 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Author:"
+#~ msgstr "Autor:"
 
 #~ msgid "Download Boxart image?"
 #~ msgstr "¿Descargar Imágenes?"

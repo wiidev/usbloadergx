@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-05 11:34+0100\n"
+"POT-Creation-Date: 2011-02-05 17:39+0100\n"
 "PO-Revision-Date: 2011-01-22 20:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: Cambo\n"
@@ -144,6 +144,9 @@ msgstr ""
 msgid "App Language"
 msgstr "Lingua Utilizzata"
 
+msgid "Apply"
+msgstr ""
+
 msgid "Apr"
 msgstr "aprile"
 
@@ -159,8 +162,8 @@ msgstr "Sei sicuro?"
 msgid "Aug"
 msgstr "agosto"
 
-msgid "Author:"
-msgstr "Autore:"
+msgid "Author(s):"
+msgstr ""
 
 msgid "AutoInit Network"
 msgstr "Inizializz. Rete Automatica"
@@ -435,6 +438,9 @@ msgstr "Mostra solo i preferiti"
 msgid "Do you want to apply it now?"
 msgstr "Applicare immediatamente?"
 
+msgid "Do you want to apply this theme?"
+msgstr ""
+
 msgid "Do you want to change language?"
 msgstr "Vuoi cambiare lingua?"
 
@@ -446,9 +452,6 @@ msgstr "Vuoi formattare:"
 
 msgid "Do you want to load the default theme?"
 msgstr "Vuoi caricare il tema predefinito?"
-
-msgid "Do you want to load this theme?"
-msgstr "Vuoi caricare questo tema?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Vuoi sincronizzare le informazioni sullo spazio libero in tutte le partizioni FAT32?"
@@ -837,9 +840,6 @@ msgstr "Vuoi caricare questo DOL come DOL alternativo?"
 msgid "Loader Settings"
 msgstr "Impostazioni Loader"
 
-msgid "Loading default theme."
-msgstr "Sto caricando il tema predefinito."
-
 msgid "Loading standard language."
 msgstr "Caricamento Lingua Standard."
 
@@ -941,6 +941,9 @@ msgstr "Nessun Aggiornamento."
 
 msgid "No themes found on the site."
 msgstr "Nessun tema trovato sul sito."
+
+msgid "No themes found."
+msgstr ""
 
 msgid "None"
 msgstr "Nessuno"
@@ -1279,14 +1282,14 @@ msgstr "Installazione wad fallita con errore %i"
 msgid "Theme Downloader"
 msgstr "Scaricamento Temi"
 
+msgid "Theme Menu"
+msgstr ""
+
 msgid "Theme Path"
 msgstr "Cart. Temi"
 
 msgid "Theme Title:"
 msgstr "Titolo del tema:"
-
-msgid "Theme path is changed."
-msgstr "Cartella Temi Modificata."
 
 msgid "Themes by www.spiffy360.com"
 msgstr "Temi da www.spiffy360.com"
@@ -1377,6 +1380,9 @@ msgstr "File ZIP installato nella cartella Homebrew"
 
 msgid "VIDTV Patch"
 msgstr "Video Forzato"
+
+msgid "Version:"
+msgstr ""
 
 #, c-format
 msgid "Version: %s"
@@ -1495,6 +1501,18 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "Author:"
+#~ msgstr "Autore:"
+
+#~ msgid "Do you want to load this theme?"
+#~ msgstr "Vuoi caricare questo tema?"
+
+#~ msgid "Loading default theme."
+#~ msgstr "Sto caricando il tema predefinito."
+
+#~ msgid "Theme path is changed."
+#~ msgstr "Cartella Temi Modificata."
 
 #~ msgid "Use IOS58"
 #~ msgstr "Usa IOS58"

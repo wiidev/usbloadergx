@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-05 11:34+0100\n"
+"POT-Creation-Date: 2011-02-05 17:39+0100\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -144,6 +144,9 @@ msgstr ""
 msgid "App Language"
 msgstr "Programspråk"
 
+msgid "Apply"
+msgstr ""
+
 msgid "Apr"
 msgstr "Apr"
 
@@ -159,8 +162,8 @@ msgstr "Är du säker?"
 msgid "Aug"
 msgstr ""
 
-msgid "Author:"
-msgstr "Utgivare:"
+msgid "Author(s):"
+msgstr ""
 
 msgid "AutoInit Network"
 msgstr "Autoinitiera Nätverk"
@@ -435,6 +438,9 @@ msgstr ""
 msgid "Do you want to apply it now?"
 msgstr "Vill du tillämpa det nu?"
 
+msgid "Do you want to apply this theme?"
+msgstr ""
+
 msgid "Do you want to change language?"
 msgstr "Vill du byta språk?"
 
@@ -445,9 +451,6 @@ msgid "Do you want to format:"
 msgstr "Vill du formatera:"
 
 msgid "Do you want to load the default theme?"
-msgstr ""
-
-msgid "Do you want to load this theme?"
 msgstr ""
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
@@ -837,9 +840,6 @@ msgstr "Ladda denna DOL som alternativ DOL?"
 msgid "Loader Settings"
 msgstr ""
 
-msgid "Loading default theme."
-msgstr ""
-
 msgid "Loading standard language."
 msgstr "Laddar standard språk."
 
@@ -941,6 +941,9 @@ msgstr "Inga nya uppdateringar"
 
 msgid "No themes found on the site."
 msgstr "Inga teman hittades på sidan."
+
+msgid "No themes found."
+msgstr ""
 
 msgid "None"
 msgstr ""
@@ -1279,14 +1282,14 @@ msgstr ""
 msgid "Theme Downloader"
 msgstr "Tema Nedladdare"
 
+msgid "Theme Menu"
+msgstr ""
+
 msgid "Theme Path"
 msgstr "Tema-mapp"
 
 msgid "Theme Title:"
 msgstr "Tema titel:"
-
-msgid "Theme path is changed."
-msgstr ""
 
 msgid "Themes by www.spiffy360.com"
 msgstr ""
@@ -1377,6 +1380,9 @@ msgstr "Uppladdad ZIP fil installerad till homebrew-mappen"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV-Patch"
+
+msgid "Version:"
+msgstr ""
 
 #, c-format
 msgid "Version: %s"
@@ -1495,6 +1501,9 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "Author:"
+#~ msgstr "Utgivare:"
 
 #~ msgid "Download Boxart image?"
 #~ msgstr "Ladda ner omslagsbild?"

@@ -127,18 +127,31 @@ int GameList::InternalReadList(int part)
     }
 
     u32 oldSize = FullGameList.size();
-
-    FullGameList.resize(oldSize+cnt);
-    memcpy(&FullGameList[oldSize], buffer, len);
+    std::vector<struct discHdr> PartGameList(cnt);
+    memcpy(&PartGameList[0], buffer, len);
+    for (u32 i = 0; i < PartGameList.size(); i++)
+    {
+        for(u32 j = 0; j < FullGameList.size(); j++)
+        {
+            if(strncasecmp((const char *) PartGameList[i].id, (const char *) FullGameList[j].id, 6) == 0)
+            {
+                PartGameList.erase(PartGameList.begin()+i);
+                --i;
+                break;
+            }
+        }
+    }
+    FullGameList.resize(oldSize+PartGameList.size());
+    memcpy(&FullGameList[oldSize], &PartGameList[0], PartGameList.size()*sizeof(struct discHdr));
 
     free(buffer);
 
-    GamePartitionList.resize(oldSize+cnt);
+    GamePartitionList.resize(oldSize+PartGameList.size());
 
     for(u32 i = oldSize; i < GamePartitionList.size(); ++i)
         GamePartitionList[i] = part;
 
-    return cnt;
+    return PartGameList.size();
 }
 
 int GameList::ReadGameList()

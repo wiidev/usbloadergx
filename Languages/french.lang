@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang for r1055
+# French.lang for r1065
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-05 11:34+0100\n"
+"POT-Creation-Date: 2011-02-05 17:39+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
@@ -27,11 +27,11 @@ msgstr " indisponible sur le serveur."
 
 #, c-format
 msgid "%i files not found on the server!"
-msgstr ""
+msgstr "%i fichier(s) introuvable(s) sur le serveur !"
 
 #, c-format
 msgid "%i missing files"
-msgstr ""
+msgstr "%i fichier(s) manquant(s)"
 
 msgid "0 (Everyone)"
 msgstr "0 (Tous 3+)"
@@ -144,6 +144,9 @@ msgstr ""
 msgid "App Language"
 msgstr "Langue d'interface"
 
+msgid "Apply"
+msgstr "Appliquer"
+
 msgid "Apr"
 msgstr "Avr"
 
@@ -159,8 +162,8 @@ msgstr "Êtes-vous sûr ?"
 msgid "Aug"
 msgstr "Août"
 
-msgid "Author:"
-msgstr "Auteur:"
+msgid "Author(s):"
+msgstr "Auteur(s):"
 
 msgid "AutoInit Network"
 msgstr "AutoInit réseau"
@@ -232,7 +235,7 @@ msgid "Block Updates"
 msgstr "Bloquer Mise à jour"
 
 msgid "Boot/Standard"
-msgstr ""
+msgstr "IOS par défaut"
 
 msgid "Boot?"
 msgstr "Lancer ?"
@@ -291,7 +294,7 @@ msgid "Coding:"
 msgstr "Développement:"
 
 msgid "Connection to server timed out."
-msgstr ""
+msgstr "Temps limite de connexion au serveur dépassé."
 
 msgid "Console"
 msgstr ""
@@ -355,7 +358,7 @@ msgid "Credits"
 msgstr "Crédits"
 
 msgid "Custom Discarts"
-msgstr ""
+msgstr "Labels DVD persos"
 
 msgid "Custom Paths"
 msgstr "Personnalisation des dossiers"
@@ -435,6 +438,9 @@ msgstr "Seulement les favoris"
 msgid "Do you want to apply it now?"
 msgstr "L'appliquer maintenant ?"
 
+msgid "Do you want to apply this theme?"
+msgstr "Voulez-vous appliquer ce thème ?"
+
 msgid "Do you want to change language?"
 msgstr "Changer de langue ?"
 
@@ -446,9 +452,6 @@ msgstr "Voulez-vous formater:"
 
 msgid "Do you want to load the default theme?"
 msgstr "Voulez-vous charger le thème par défaut ?"
-
-msgid "Do you want to load this theme?"
-msgstr "Voulez-vous charger ce thème ?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Voulez-vous synchroniser l'information d'espace libre disponible sur toutes les partitions FAT32 ?"
@@ -475,10 +478,10 @@ msgid "Downloading Flat Covers"
 msgstr "Téléchargement des jaquettes 2D"
 
 msgid "Downloading Full HQ Covers"
-msgstr ""
+msgstr "Téléch. des jaquettes complètes HD"
 
 msgid "Downloading Full LQ Covers"
-msgstr ""
+msgstr "Téléch. des jaquettes complètes SD"
 
 msgid "Downloading custom Discarts"
 msgstr "Téléch. des labels DVD persos"
@@ -613,7 +616,7 @@ msgid "Formatting, please wait..."
 msgstr "Formatage en cours, veuillez patienter..."
 
 msgid "Found missing images."
-msgstr ""
+msgstr "Images manquantes trouvées."
 
 msgid "Free Space"
 msgstr "Espace libre"
@@ -622,13 +625,13 @@ msgid "French"
 msgstr "Français"
 
 msgid "Full Cover Path"
-msgstr ""
+msgstr "Dossier jaqu. complètes"
 
 msgid "Full HQ Covers"
-msgstr ""
+msgstr "Jaqu. complètes HD"
 
 msgid "Full LQ Covers"
-msgstr ""
+msgstr "Jaqu. complètes SD"
 
 msgid "Full Menu"
 msgstr "Menu complet"
@@ -685,7 +688,7 @@ msgid "Game is already installed:"
 msgstr "Le jeu est déjà installé:"
 
 msgid "Game/Install Partition"
-msgstr ""
+msgstr "Partition jeu/install."
 
 msgid "Gamename [GAMEID]"
 msgstr "NomJeu [IDJEU]"
@@ -837,9 +840,6 @@ msgstr "Charger comme DOL alternatif ?"
 msgid "Loader Settings"
 msgstr "Paramètres du Loader"
 
-msgid "Loading default theme."
-msgstr "Chargement thème par défaut."
-
 msgid "Loading standard language."
 msgstr "Chargement langue par défaut."
 
@@ -886,7 +886,7 @@ msgid "Mount DVD drive"
 msgstr "Charger le DVD"
 
 msgid "Multiple Partitions"
-msgstr ""
+msgstr "Partitions multiples"
 
 msgid "Music Loop Mode"
 msgstr "Type de boucle"
@@ -941,6 +941,9 @@ msgstr "Pas de nouvelle mise à jour."
 
 msgid "No themes found on the site."
 msgstr "Aucun thème trouvé sur le site."
+
+msgid "No themes found."
+msgstr "Aucun thème trouvé."
 
 msgid "None"
 msgstr "Aucun"
@@ -1009,7 +1012,7 @@ msgid "Only for Install"
 msgstr "Uniquement à l'installation"
 
 msgid "Original Discarts"
-msgstr ""
+msgstr "Labels DVD originaux"
 
 msgid "Original/Customs"
 msgstr "Originaux/Persos"
@@ -1144,7 +1147,7 @@ msgid "Save Game List to"
 msgstr "Sauvegarder la liste des jeux sous"
 
 msgid "Save List"
-msgstr ""
+msgstr "Sauvegarder la liste"
 
 msgid "Saved"
 msgstr "Sauvegardé"
@@ -1186,7 +1189,7 @@ msgid "Sort alphabetically"
 msgstr "Ordre alphabétique"
 
 msgid "Sort by number of players"
-msgstr ""
+msgstr "Nombre de joueurs"
 
 msgid "Sort by rank"
 msgstr "Classement favoris"
@@ -1279,14 +1282,14 @@ msgstr "L'installation du wad a échoué avec l'erreur %i"
 msgid "Theme Downloader"
 msgstr "Téléchargement des thèmes"
 
+msgid "Theme Menu"
+msgstr "Thèmes"
+
 msgid "Theme Path"
 msgstr "Dossier thème"
 
 msgid "Theme Title:"
 msgstr "Titre du thème:"
-
-msgid "Theme path is changed."
-msgstr "Dossier thème changé"
 
 msgid "Themes by www.spiffy360.com"
 msgstr "Thèmes par www.spiffy360.com"
@@ -1377,6 +1380,9 @@ msgstr "Fichier ZIP envoyé et installé dans le répertoire homebrew."
 
 msgid "VIDTV Patch"
 msgstr "Patch VIDTV"
+
+msgid "Version:"
+msgstr ""
 
 #, c-format
 msgid "Version: %s"
@@ -1495,6 +1501,18 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "Author:"
+#~ msgstr "Auteur:"
+
+#~ msgid "Do you want to load this theme?"
+#~ msgstr "Voulez-vous charger ce thème ?"
+
+#~ msgid "Loading default theme."
+#~ msgstr "Chargement thème par défaut."
+
+#~ msgid "Theme path is changed."
+#~ msgstr "Dossier thème changé"
 
 #~ msgid "Use IOS58"
 #~ msgstr "Utiliser IOS58"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-05 11:34+0100\n"
+"POT-Creation-Date: 2011-02-05 17:39+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -144,6 +144,9 @@ msgstr ""
 msgid "App Language"
 msgstr "Jazyk aplikace"
 
+msgid "Apply"
+msgstr ""
+
 msgid "Apr"
 msgstr "Dub"
 
@@ -159,8 +162,8 @@ msgstr "Jste si jisti?"
 msgid "Aug"
 msgstr "Srp"
 
-msgid "Author:"
-msgstr "Autor:"
+msgid "Author(s):"
+msgstr ""
 
 msgid "AutoInit Network"
 msgstr "Automatický start síte"
@@ -435,6 +438,9 @@ msgstr "Zobrazit pouze oblíbené"
 msgid "Do you want to apply it now?"
 msgstr "Prejete si aplikovat zmeny hned?"
 
+msgid "Do you want to apply this theme?"
+msgstr ""
+
 msgid "Do you want to change language?"
 msgstr "Prejete si zmenit jazyk?"
 
@@ -446,9 +452,6 @@ msgstr "Prejete si formátovat"
 
 msgid "Do you want to load the default theme?"
 msgstr "Prejete si nahrát výchozí téma?"
-
-msgid "Do you want to load this theme?"
-msgstr "Prejete si nahrát toto téma?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Prejete si synchronizovat informace o volných sektorech na vsech FAT 32 oddílech?"
@@ -837,9 +840,6 @@ msgstr "Spustit tento DOL jako náhradní DOL?"
 msgid "Loader Settings"
 msgstr "Nstavení spoustení"
 
-msgid "Loading default theme."
-msgstr "Nahrávám původní téma."
-
 msgid "Loading standard language."
 msgstr "Nahrávám puvodní jazyk"
 
@@ -941,6 +941,9 @@ msgstr "Není dostupná žádná aktualizace."
 
 msgid "No themes found on the site."
 msgstr "Žádné téma nebylo nalezeno na serveru."
+
+msgid "No themes found."
+msgstr ""
 
 msgid "None"
 msgstr "Žádný"
@@ -1279,14 +1282,14 @@ msgstr "Instalace souboru WAD selhala s chybou %i"
 msgid "Theme Downloader"
 msgstr "Stahování témat"
 
+msgid "Theme Menu"
+msgstr ""
+
 msgid "Theme Path"
 msgstr "Cesta k tématum"
 
 msgid "Theme Title:"
 msgstr "Název tématu"
-
-msgid "Theme path is changed."
-msgstr "Cesta k tématum zmenena"
 
 msgid "Themes by www.spiffy360.com"
 msgstr "Téma od www.spiffy360.com"
@@ -1377,6 +1380,9 @@ msgstr "Odeslaný ZIP soubor nainstalován do adresáre homebrew"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV korekce"
+
+msgid "Version:"
+msgstr ""
 
 #, c-format
 msgid "Version: %s"
@@ -1495,6 +1501,18 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid "Author:"
+#~ msgstr "Autor:"
+
+#~ msgid "Do you want to load this theme?"
+#~ msgstr "Prejete si nahrát toto téma?"
+
+#~ msgid "Loading default theme."
+#~ msgstr "Nahrávám původní téma."
+
+#~ msgid "Theme path is changed."
+#~ msgstr "Cesta k tématum zmenena"
 
 #~ msgid "Use IOS58"
 #~ msgstr "Použít IOS58"

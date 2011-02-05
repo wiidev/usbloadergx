@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-05 11:34+0100\n"
+"POT-Creation-Date: 2011-02-05 17:39+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -144,6 +144,9 @@ msgstr ""
 msgid "App Language"
 msgstr "USB 로더 언어"
 
+msgid "Apply"
+msgstr ""
+
 msgid "Apr"
 msgstr "4월"
 
@@ -159,7 +162,7 @@ msgstr "확실합니까?"
 msgid "Aug"
 msgstr "8월"
 
-msgid "Author:"
+msgid "Author(s):"
 msgstr ""
 
 msgid "AutoInit Network"
@@ -435,6 +438,9 @@ msgstr ""
 msgid "Do you want to apply it now?"
 msgstr ""
 
+msgid "Do you want to apply this theme?"
+msgstr ""
+
 msgid "Do you want to change language?"
 msgstr "정말로 언어를 변경할까요?"
 
@@ -445,9 +451,6 @@ msgid "Do you want to format:"
 msgstr "포맷하겠습니까:"
 
 msgid "Do you want to load the default theme?"
-msgstr ""
-
-msgid "Do you want to load this theme?"
 msgstr ""
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
@@ -837,9 +840,6 @@ msgstr "이 DOL화일을 alternate DOL로 로딩할까요?"
 msgid "Loader Settings"
 msgstr ""
 
-msgid "Loading default theme."
-msgstr ""
-
 msgid "Loading standard language."
 msgstr "표준 언어로 로딩."
 
@@ -940,6 +940,9 @@ msgid "No new updates."
 msgstr "새로운 업데이트 없음."
 
 msgid "No themes found on the site."
+msgstr ""
+
+msgid "No themes found."
 msgstr ""
 
 msgid "None"
@@ -1279,13 +1282,13 @@ msgstr ""
 msgid "Theme Downloader"
 msgstr ""
 
+msgid "Theme Menu"
+msgstr ""
+
 msgid "Theme Path"
 msgstr "테마 경로"
 
 msgid "Theme Title:"
-msgstr ""
-
-msgid "Theme path is changed."
 msgstr ""
 
 msgid "Themes by www.spiffy360.com"
@@ -1377,6 +1380,9 @@ msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "VIDTV 패치"
+
+msgid "Version:"
+msgstr ""
 
 #, c-format
 msgid "Version: %s"

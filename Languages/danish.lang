@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# danish.lang - r1056
+# danish.lang - r1063
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-05 11:34+0100\n"
+"POT-Creation-Date: 2011-02-05 17:39+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -27,11 +27,11 @@ msgstr " er ikke på serveren."
 
 #, c-format
 msgid "%i files not found on the server!"
-msgstr ""
+msgstr "%i filer ikke fundet på server!"
 
 #, c-format
 msgid "%i missing files"
-msgstr ""
+msgstr "%i filer mangler"
 
 msgid "0 (Everyone)"
 msgstr "0 (Alle)"
@@ -46,7 +46,7 @@ msgid "10 min"
 msgstr "10 min."
 
 msgid "2 (Teen 12+)"
-msgstr "2 (Unge teenagere 12+)"
+msgstr "2 (teenagere 12+)"
 
 msgid "20 min"
 msgstr "20 min."
@@ -55,7 +55,7 @@ msgid "2D Cover Path"
 msgstr "Sti til 2-d covers"
 
 msgid "3 (Mature 16+)"
-msgstr "3 (Modne teenagere 16+)"
+msgstr "3 (teenagere 16+)"
 
 msgid "3 min"
 msgstr "3 min."
@@ -144,6 +144,9 @@ msgstr ""
 msgid "App Language"
 msgstr "Programsprog"
 
+msgid "Apply"
+msgstr ""
+
 msgid "Apr"
 msgstr ""
 
@@ -159,11 +162,11 @@ msgstr "Er du sikker?"
 msgid "Aug"
 msgstr ""
 
-msgid "Author:"
-msgstr "Forfatter:"
+msgid "Author(s):"
+msgstr ""
 
 msgid "AutoInit Network"
-msgstr "AutoInit net"
+msgstr "AutoInit netværk"
 
 msgid "BCA Codes Path"
 msgstr "Sti til BCA koder"
@@ -355,7 +358,7 @@ msgid "Credits"
 msgstr "Lavet af:"
 
 msgid "Custom Discarts"
-msgstr ""
+msgstr "Tilpasset DVD billeder"
 
 msgid "Custom Paths"
 msgstr "Sti-indstillinger"
@@ -435,6 +438,9 @@ msgstr "Vis kun favoritter"
 msgid "Do you want to apply it now?"
 msgstr "Skal det aktiveres nu?"
 
+msgid "Do you want to apply this theme?"
+msgstr ""
+
 msgid "Do you want to change language?"
 msgstr "Skal sproget ændres?"
 
@@ -446,9 +452,6 @@ msgstr "Vil du formatere:"
 
 msgid "Do you want to load the default theme?"
 msgstr "Vil du indlæse standard tema?"
-
-msgid "Do you want to load this theme?"
-msgstr "Vil du indlæse dette tema?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Vil du synkronisere fri plads info sector på alle FAT32 Partitioner?"
@@ -475,10 +478,10 @@ msgid "Downloading Flat Covers"
 msgstr "Downloader Flade Covers"
 
 msgid "Downloading Full HQ Covers"
-msgstr ""
+msgstr "Downloader Fuld HQ Covers"
 
 msgid "Downloading Full LQ Covers"
-msgstr ""
+msgstr "Downloader Fuld LQ Covers"
 
 msgid "Downloading custom Discarts"
 msgstr "Downloader tilpasset DVD billeder"
@@ -613,7 +616,7 @@ msgid "Formatting, please wait..."
 msgstr "Formatere, vent venligst..."
 
 msgid "Found missing images."
-msgstr ""
+msgstr "Fundet manglende billeder"
 
 msgid "Free Space"
 msgstr "Ledig plads"
@@ -622,13 +625,13 @@ msgid "French"
 msgstr "Fransk"
 
 msgid "Full Cover Path"
-msgstr ""
+msgstr "Sti til Fuld Cover"
 
 msgid "Full HQ Covers"
-msgstr ""
+msgstr "Fuld HQ Covers"
 
 msgid "Full LQ Covers"
-msgstr ""
+msgstr "Fuld LQ Covers"
 
 msgid "Full Menu"
 msgstr "Fuld Menu"
@@ -685,7 +688,7 @@ msgid "Game is already installed:"
 msgstr "Dette spil er allerede installeret:"
 
 msgid "Game/Install Partition"
-msgstr ""
+msgstr "Spil/Installation partition"
 
 msgid "Gamename [GAMEID]"
 msgstr ""
@@ -837,9 +840,6 @@ msgstr "Indlæs denne DOL som alternativ DOL?"
 msgid "Loader Settings"
 msgstr "Loader Indstillinger"
 
-msgid "Loading default theme."
-msgstr "Indlæser standard tema."
-
 msgid "Loading standard language."
 msgstr "Indlæser standardsprog."
 
@@ -886,7 +886,7 @@ msgid "Mount DVD drive"
 msgstr "Mount DVD-drev"
 
 msgid "Multiple Partitions"
-msgstr ""
+msgstr "Multiple Partitioner"
 
 msgid "Music Loop Mode"
 msgstr "Musik i løkke"
@@ -941,6 +941,9 @@ msgstr "Ingen nye opdateringer."
 
 msgid "No themes found on the site."
 msgstr "Der blev ikke fundet nogle temaer på denne side."
+
+msgid "No themes found."
+msgstr ""
 
 msgid "None"
 msgstr "Ingen"
@@ -1009,7 +1012,7 @@ msgid "Only for Install"
 msgstr "Kun til installering"
 
 msgid "Original Discarts"
-msgstr ""
+msgstr "Originale DVD Billeder"
 
 msgid "Original/Customs"
 msgstr "Originale/Tilpassede"
@@ -1144,7 +1147,7 @@ msgid "Save Game List to"
 msgstr "Gem spilliste på"
 
 msgid "Save List"
-msgstr ""
+msgstr "Gem list"
 
 msgid "Saved"
 msgstr "Gemt"
@@ -1186,7 +1189,7 @@ msgid "Sort alphabetically"
 msgstr "Sortér alfabetisk"
 
 msgid "Sort by number of players"
-msgstr ""
+msgstr "Sorter efter antal af spillere"
 
 msgid "Sort by rank"
 msgstr "Sortér efter favoritstatus"
@@ -1279,14 +1282,14 @@ msgstr "Installering af wad fil fejlede med fejl %i"
 msgid "Theme Downloader"
 msgstr "Tema-downloader"
 
+msgid "Theme Menu"
+msgstr ""
+
 msgid "Theme Path"
 msgstr "Sti til temaer"
 
 msgid "Theme Title:"
 msgstr "Tematitel:"
-
-msgid "Theme path is changed."
-msgstr "Sti til temaer er ændret."
 
 msgid "Themes by www.spiffy360.com"
 msgstr "Temaer af www.spiffy360.com"
@@ -1377,6 +1380,9 @@ msgstr "Den uploadede ZIP-fil er installeret i homebrew-mappen."
 
 msgid "VIDTV Patch"
 msgstr "VIDTV-patch"
+
+msgid "Version:"
+msgstr ""
 
 #, c-format
 msgid "Version: %s"
@@ -1495,6 +1501,18 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "Author:"
+#~ msgstr "Forfatter:"
+
+#~ msgid "Do you want to load this theme?"
+#~ msgstr "Vil du indlæse dette tema?"
+
+#~ msgid "Loading default theme."
+#~ msgstr "Indlæser standard tema."
+
+#~ msgid "Theme path is changed."
+#~ msgstr "Sti til temaer er ændret."
 
 #~ msgid "Custom Disc Images"
 #~ msgstr "Tilpasset DVD billeder"
