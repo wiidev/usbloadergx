@@ -50,7 +50,7 @@ s32 Wbfs_Fat::Open()
 
     PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
 
-    if(partition >= 0 && partition < usbHandle->GetPartitionTotalCount())
+    if(partition >= 0 && (int) partition < usbHandle->GetPartitionTotalCount())
     {
         if (lba == usbHandle->GetLBAStart(partition))
         {

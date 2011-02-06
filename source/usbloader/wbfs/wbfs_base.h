@@ -4,6 +4,7 @@
 #include "libs/libwbfs/libwbfs.h"
 #include "usbloader/utils.h"
 #include "usbloader/frag.h"
+#include "usbloader/wbfs.h"
 
 #define CACHE_SIZE      32
 #define CACHED_SECTORS  64
@@ -33,7 +34,7 @@ class Wbfs
         virtual s32 RenameGame(u8 *, const void *) = 0;
         virtual s32 ReIDGame(u8 *discid, const void *newID) = 0;
         virtual u64 EstimateGameSize(void) = 0;
-        virtual const u8 GetFSType(void) const = 0;
+        virtual const u8 GetFSType(void) const { return PART_FS_WBFS; }
         const wbfs_t *GetHDDHandle(void) const { return hdd; }
     protected:
         wbfs_t *hdd;

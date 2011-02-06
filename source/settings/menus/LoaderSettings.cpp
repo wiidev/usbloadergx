@@ -127,11 +127,11 @@ LoaderSettings::LoaderSettings()
     Options->SetName(Idx++, "%s", tr( "Messageboard Update" ));
     Options->SetName(Idx++, "%s", tr( "Sync FAT32 FS Info" ));
 
-    SetOptionValues();
-
     OldSettingsPartition = Settings.partition;
     OldSettingsMultiplePartitions = Settings.MultiplePartitions;
-    OldSettingsUSBPort = Settings.USBPort;
+    NewSettingsUSBPort = Settings.USBPort;
+
+    SetOptionValues();
 }
 
 LoaderSettings::~LoaderSettings()
@@ -139,15 +139,17 @@ LoaderSettings::~LoaderSettings()
     //! if partition has changed, Reinitialize it
     if (Settings.partition != OldSettingsPartition ||
         Settings.MultiplePartitions != OldSettingsMultiplePartitions ||
-        Settings.USBPort != OldSettingsUSBPort)
+        Settings.USBPort != NewSettingsUSBPort)
     {
-        int tempPort = Settings.USBPort;
-        Settings.USBPort = OldSettingsUSBPort;
         WBFS_CloseAll();
-        DeviceHandler::Instance()->UnMountAllUSB();
-        Settings.USBPort = tempPort;
-        DeviceHandler::SetUSBPort(Settings.USBPort);
-        if(Settings.USBPort == 2) DeviceHandler::Instance()->MountAllUSB();
+
+        if(Settings.USBPort != NewSettingsUSBPort)
+        {
+            DeviceHandler::Instance()->UnMountAllUSB();
+            Settings.USBPort = NewSettingsUSBPort;
+            DeviceHandler::SetUSBPort(Settings.USBPort);
+            if(Settings.USBPort == 2) DeviceHandler::Instance()->MountAllUSB();
+        }
 
         if(Settings.MultiplePartitions)
             WBFS_OpenAll();
@@ -194,10 +196,10 @@ void LoaderSettings::SetOptionValues()
     Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.MultiplePartitions] ));
 
     //! Settings: USB Port
-    if(Settings.USBPort == 2)
+    if(NewSettingsUSBPort == 2)
         Options->SetValue(Idx++, tr("Both Ports"));
     else
-        Options->SetValue(Idx++, "%i", Settings.USBPort);
+        Options->SetValue(Idx++, "%i", NewSettingsUSBPort);
 
     //! Settings: Install directories
     Options->SetValue(Idx++, "%s", tr( InstallToText[Settings.InstallToDir] ));
@@ -328,11 +330,51 @@ int LoaderSettings::GetMenuInternal()
         if(!IosLoader::IsHermesIOS())
         {
             WindowPrompt(tr("ERROR:"), tr("USB Port changing is only supported on Hermes cIOS."), tr("OK"));
+            NewSettingsUSBPort = 0;
             Settings.USBPort = 0;
         }
 
-        else if (++Settings.USBPort >= 3) // 2 = both ports
-            Settings.USBPort = 0;
+        else if (++NewSettingsUSBPort >= 3) // 2 = both ports
+            NewSettingsUSBPort = 0;
+
+        if(NewSettingsUSBPort == 2)
+        {
+            bool allSDPaths = true;
+            if(strncmp(Settings.covers_path, "usb", 3) == 0)
+                allSDPaths = false;
+            else if(strncmp(Settings.coversFull_path, "usb", 3) == 0)
+                allSDPaths = false;
+            else if(strncmp(Settings.disc_path, "usb", 3) == 0)
+                allSDPaths = false;
+            else if(strncmp(Settings.theme_path, "usb", 3) == 0)
+                allSDPaths = false;
+            else if(strncmp(Settings.titlestxt_path, "usb", 3) == 0)
+                allSDPaths = false;
+            else if(strncmp(Settings.update_path, "usb", 3) == 0)
+                allSDPaths = false;
+            else if(strncmp(Settings.Cheatcodespath, "usb", 3) == 0)
+                allSDPaths = false;
+            else if(strncmp(Settings.TxtCheatcodespath, "usb", 3) == 0)
+                allSDPaths = false;
+            else if(strncmp(Settings.dolpath, "usb", 3) == 0)
+                allSDPaths = false;
+            else if(strncmp(Settings.homebrewapps_path, "usb", 3) == 0)
+                allSDPaths = false;
+            else if(strncmp(Settings.BcaCodepath, "usb", 3) == 0)
+                allSDPaths = false;
+            else if(strncmp(Settings.WipCodepath, "usb", 3) == 0)
+                allSDPaths = false;
+            else if(strncmp(Settings.languagefiles_path, "usb", 3) == 0)
+                allSDPaths = false;
+            else if(strncmp(Settings.WDMpath, "usb", 3) == 0)
+                allSDPaths = false;
+
+            if(!allSDPaths)
+            {
+                WindowPrompt(tr("ERROR:"), tr("Automatic port switching is done on the fly. You should change all custom paths to sd:/ for this option or else it could damage a filesystem."), tr("OK"));
+                NewSettingsUSBPort = 0;
+            }
+        }
     }
 
     //! Settings: Install directories

@@ -79,6 +79,9 @@ int InitBrowsers()
     {
         if (strcmp(devoptab_list[i]->name, "stdnull") && devoptab_list[i]->write_r != NULL)
         {
+            if(Settings.USBPort == 2 && strcmp(devoptab_list[i]->name, "sd") != 0)
+                continue;
+
             snprintf(rootdir, sizeof(rootdir), "%s:/", devoptab_list[i]->name);
             if ( DIR *dir = opendir( rootdir ) )
             {
@@ -243,7 +246,7 @@ int ParseDirectory(const char* Path, int Flags, FILTERCASCADE *Filter)
         }
         else return -1;
     }
-	
+
 	struct dirent *dirent = NULL;
 
     while ((dirent = readdir(dir)) != 0)
@@ -251,9 +254,9 @@ int ParseDirectory(const char* Path, int Flags, FILTERCASCADE *Filter)
 		snprintf(filename, sizeof(filename), "%s/%s", fulldir, dirent->d_name);
         if(stat(filename, &filestat) != 0)
 			continue;
-			
+
 		snprintf(filename, sizeof(filename), dirent->d_name);
-		
+
         if (strcmp(filename, ".") != 0)
         {
             BROWSERENTRY newEntry;

@@ -73,7 +73,10 @@ s32 WBFS_OpenPart(int part_num)
     if(part_num < 0 || part_num >= usbHandle->GetPartitionTotalCount())
         return -1;
 
-    DeviceHandler::SetUSBPortFromPartition(part_num);
+    //! No need to switch ports on other partitions than WBFS
+    //! the open() function does not actually read from drive there.
+    if(strncmp(usbHandle->GetFSName(part_num), "WBFS", 4) == 0)
+        DeviceHandler::SetUSBPortFromPartition(part_num);
 
     // close
     WBFS_Close(part_num);
@@ -119,7 +122,10 @@ bool WBFS_Close(int part_num)
     if(!VALID(part_num))
         return false;
 
-    DeviceHandler::SetUSBPortFromPartition(part_num);
+    //! No need to switch ports on other partitions than WBFS
+    //! the close() function does not actually write to drive there.
+    if(WbfsList[part_num]->GetFSType() == PART_FS_WBFS)
+        DeviceHandler::SetUSBPortFromPartition(part_num);
 
     delete WbfsList[part_num];
     WbfsList[part_num] = NULL;
