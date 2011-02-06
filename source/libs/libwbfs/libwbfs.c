@@ -99,7 +99,7 @@ wbfs_t*wbfs_open_partition(rw_sector_callback_t read_hdsector, rw_sector_callbac
     ERROR( "bad magic" );
     if (!force_mode && hd_sector_size && head->hd_sec_sz_s != size_to_shift(hd_sector_size))
     ERROR( "hd sector size doesn't match" );
-    if (!force_mode && num_hd_sector && head->n_hd_sec != wbfs_htonl( num_hd_sector ))
+    if (!force_mode && num_hd_sector && head->n_hd_sec != (u32) wbfs_htonl( num_hd_sector ))
     ERROR( "hd num sector doesn't match" );
     p->hd_sec_sz = 1 << head->hd_sec_sz_s;
     p->hd_sec_sz_s = head->hd_sec_sz_s;
@@ -797,7 +797,7 @@ int wbfs_iso_file_read(wbfs_disc_t*d, u32 offset, u8 *data, u32 len)
     ret_off = lseek(fd, off, SEEK_SET);
     if (ret_off != off) return -1;
     ret = read(fd, data, len);
-    if (ret != len) return -2;
+    if (ret != (int) len) return -2;
     return 0;
 }
 

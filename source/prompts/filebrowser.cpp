@@ -197,10 +197,13 @@ int ParseDirectory(const char* Path, int Flags, FILTERCASCADE *Filter)
                 strlcpy(fulldir, filename, sizeof(fulldir)); //  we use the current working dir
             else
             { // path is not empty
-                if (chdir(fulldir)) ; // sets the path to concatenate and validate
+                if (chdir(fulldir)) // sets the path to concatenate and validate
                 {
-                    if (Flags & (FB_TRYROOTDIR | FB_TRYSTDDEV)) if (chdir("/") && !(Flags & FB_TRYSTDDEV)) // try to set root if is needed
-                    return -1;
+                    if (Flags & (FB_TRYROOTDIR | FB_TRYSTDDEV))
+					{
+						if (chdir("/") && !(Flags & FB_TRYSTDDEV)) // try to set root if is needed
+							return -1;
+					}
                 }
                 if (getcwd(fulldir, sizeof(fulldir))) return -1; // gets the concatenated current working dir
                 chdir(filename); // restore the saved cwd

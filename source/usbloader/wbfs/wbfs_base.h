@@ -19,7 +19,6 @@ class Wbfs
         s32 GameSize(u8 *, f32 *);
         bool IsMounted() { return hdd == 0; };
         virtual int GetFragList(u8 *id) { return 0; };
-        virtual bool ShowFreeSpace(void);
 
         virtual s32 Open() = 0;
         virtual void Close() {};
@@ -34,8 +33,8 @@ class Wbfs
         virtual s32 RenameGame(u8 *, const void *) = 0;
         virtual s32 ReIDGame(u8 *discid, const void *newID) = 0;
         virtual u64 EstimateGameSize(void) = 0;
-        virtual const u8 GetFSType(void) const { return PART_FS_WBFS; }
-        const wbfs_t *GetHDDHandle(void) const { return hdd; }
+        virtual u8 GetFSType(void) const { return PART_FS_WBFS; }
+        const wbfs_t *GetHDDHandle(void) { return hdd; }
     protected:
         wbfs_t *hdd;
         const u32 lba;

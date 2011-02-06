@@ -102,7 +102,12 @@ static const devoptab_t gecko_out = {
 	NULL,		// device dirreset_r
 	NULL,		// device dirnext_r
 	NULL,		// device dirclose_r
-	NULL		// device statvfs_r
+	NULL,		// device statvfs_r
+	NULL,		// device ftruncate_r
+	NULL,		// device fsync_r
+	NULL,		// device deviceData
+	NULL,		// device chmod_r
+	NULL,		// device fchmod_r
 };
 
 void USBGeckoOutput()

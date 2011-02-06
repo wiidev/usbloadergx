@@ -33,7 +33,6 @@ class Wbfs_Wbfs: public Wbfs
 
         u64 EstimateGameSize();
         int GetFragList(u8 *id);
-        virtual const u8 GetFSType(void) const { return PART_FS_WBFS; }
     private:
         WBFS_PartInfo PartInfo;
 };

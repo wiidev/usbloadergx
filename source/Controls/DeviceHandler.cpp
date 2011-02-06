@@ -163,15 +163,9 @@ static inline bool USBSpinUp()
 
 bool DeviceHandler::SetUSBPort(int port)
 {
-    if(Settings.USBPort != 2)
-        DeviceHandler::Instance()->UnMountAllUSB();
-
     int ret = USBStorage2_SetPort(port);
 
     USBSpinUp();
-
-    if(Settings.USBPort != 2)
-        DeviceHandler::Instance()->MountAllUSB();
 
     return ret >= 0;
 }

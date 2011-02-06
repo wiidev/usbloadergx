@@ -275,9 +275,8 @@ int GameLoadSM::GetMenuInternal()
         snprintf(entered, sizeof(entered), "%i", GameConfig.ios);
         if(OnScreenKeyboard(entered, sizeof(entered), 0))
         {
-            GameConfig.ios = atoi(entered);
+            GameConfig.ios = atoi(entered) & 0xFF;
             if(GameConfig.ios < 200) GameConfig.ios = 200;
-            else if(GameConfig.ios > 255) GameConfig.ios = 255;
 
             if(NandTitles.IndexOf(TITLE_ID(1, GameConfig.ios)) < 0)
             {

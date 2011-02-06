@@ -133,7 +133,7 @@ void USBStorage2_Deinit(void)
 s32 USBStorage2_SetPort(u32 port)
 {
     //! Port = 2 is handle in the loader, no need to handle it in cIOS
-    if(port < 0 || port > 1)
+    if(port > 1)
         return -1;
 
     if(port == usb2_port)

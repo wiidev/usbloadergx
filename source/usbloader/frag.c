@@ -28,7 +28,7 @@ void frag_init(FragList *ff, int maxnum)
 
 void frag_dump(FragList *ff)
 {
-	int i;
+	u32 i;
 	gprintf("frag list: %d %d 0x%x\n", ff->num, ff->size, ff->size);
 	for (i=0; i<ff->num; i++) {
 		if (i>10) {
@@ -75,7 +75,8 @@ int frag_append(void *f, u32 offset, u32 sector, u32 count)
 
 int frag_concat(FragList *ff, FragList *src)
 {
-	int i, ret;
+	u32 i;
+	int ret;
 	u32 size = ff->size;
 	//printf("concat: %d %d <- %d %d\n", ff->num, ff->size, src->num, src->size);
 	for (i=0; i<src->num; i++) {
@@ -94,7 +95,7 @@ int frag_concat(FragList *ff, FragList *src)
 int frag_get(FragList *ff, u32 offset, u32 count,
 		u32 *poffset, u32 *psector, u32 *pcount)
 {
-	int i;
+	u32 i;
 	u32 delta;
 	//printf("frag_get(%u %u)\n", offset, count);
 	for (i=0; i<ff->num; i++) {
@@ -137,7 +138,7 @@ int frag_get(FragList *ff, u32 offset, u32 count,
 
 int frag_remap(FragList *ff, FragList *log, FragList *phy)
 {
-	int i;
+	u32 i;
 	int ret;
 	u32 offset;
 	u32 sector;
@@ -167,7 +168,7 @@ int get_frag_list_for_file(char *fname, u8 *id, const u8 wbfs_part_fs, const u32
 	FragList *fa = NULL;
 	FragList *fw = NULL;
 	int ret;
-	int i, j;
+	u32 i, j;
 	int is_wbfs = 0;
 	int ret_val = -1;
 

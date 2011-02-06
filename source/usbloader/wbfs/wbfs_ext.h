@@ -10,7 +10,7 @@ class Wbfs_Ext: public Wbfs_Fat
             Wbfs_Fat(lba, size, part)
         {
         }
-        virtual const u8 GetFSType(void) const { return PART_FS_EXT; }
+        virtual u8 GetFSType(void) { return PART_FS_EXT; }
 };
 
 #endif //_WBFS_NTFS_H

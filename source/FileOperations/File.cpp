@@ -92,9 +92,6 @@ int CFile::read(u8 * ptr, size_t size)
 
 int CFile::write(const u8 * ptr, size_t size)
 {
-    if(size < 0)
-        return size;
-
     if(file_fd)
     {
         int ret = fwrite(ptr, 1, size, file_fd);

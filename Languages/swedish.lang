@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-05 22:06+0100\n"
+"POT-Creation-Date: 2011-02-06 19:36+0100\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -167,6 +167,9 @@ msgstr ""
 
 msgid "AutoInit Network"
 msgstr "Autoinitiera Nätverk"
+
+msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
+msgstr ""
 
 msgid "BCA Codes Path"
 msgstr "BCA kodssökväg"

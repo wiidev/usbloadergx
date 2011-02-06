@@ -52,10 +52,10 @@ s32 IosLoader::LoadAppCios()
     if((int) activeCios == Settings.cios)
         return 0;
 
-    u32 ciosLoadPriority[] = { 250, 249, 222, Settings.cios }; // Descending.
+    u32 ciosLoadPriority[] = { Settings.cios, 222, 249, 250 }; // Ascending.
 
 
-    for (u8 i = (sizeof(ciosLoadPriority)/sizeof(ciosLoadPriority[0]))-1; i >= 0; i--)
+    for (u32 i = 0; i < (sizeof(ciosLoadPriority)/sizeof(ciosLoadPriority[0])); ++i)
     {
         u32 cios = ciosLoadPriority[i];
 

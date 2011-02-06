@@ -31,8 +31,7 @@ class Wbfs_Fat: public Wbfs
         u64 EstimateGameSize();
 
         virtual int GetFragList(u8 *);
-        virtual bool ShowFreeSpace(void);
-        virtual const u8 GetFSType(void) const { return PART_FS_FAT; }
+        virtual u8 GetFSType(void) { return PART_FS_FAT; }
 
     protected:
         split_info_t split;

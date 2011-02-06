@@ -149,7 +149,7 @@ bool WiiTDB::LoadGameOffsets(const char * path)
 
     OffsetMap.resize(NodeCount);
 
-    if(fread(&OffsetMap[0], 1, NodeCount*sizeof(GameOffsets), fp) != NodeCount*sizeof(GameOffsets))
+    if((int) fread(&OffsetMap[0], 1, NodeCount*sizeof(GameOffsets), fp) < 0)
     {
         fclose(fp);
         bool result = ParseFile();
@@ -176,19 +176,19 @@ bool WiiTDB::SaveGameOffsets(const char * path)
     unsigned long long ExistingVersion = GetWiiTDBVersion();
     unsigned int NodeCount = OffsetMap.size();
 
-    if(fwrite(&ExistingVersion, 1, sizeof(ExistingVersion), fp) < 0)
+    if(fwrite(&ExistingVersion, 1, sizeof(ExistingVersion), fp) != sizeof(ExistingVersion))
     {
         fclose(fp);
         return false;
     }
 
-    if(fwrite(&NodeCount, 1, sizeof(NodeCount), fp) < 0)
+    if(fwrite(&NodeCount, 1, sizeof(NodeCount), fp) != sizeof(NodeCount))
     {
         fclose(fp);
         return false;
     }
 
-    if(fwrite(&OffsetMap[0], 1, NodeCount*sizeof(GameOffsets), fp) < 0)
+    if(fwrite(&OffsetMap[0], 1, NodeCount*sizeof(GameOffsets), fp) != NodeCount*sizeof(GameOffsets))
     {
         fclose(fp);
         return false;
@@ -216,7 +216,7 @@ unsigned long long WiiTDB::GetWiiTDBVersion()
     return strtoull(VersionText, NULL, 10);
 }
 
-size_t WiiTDB::GetData(char * data, int offset, int size)
+int WiiTDB::GetData(char * data, int offset, int size)
 {
     if(!file || !data)
         return -1;

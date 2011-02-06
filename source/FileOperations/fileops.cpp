@@ -274,8 +274,8 @@ static bool CompareDevices(const char *src, const char *dest)
  ***************************************************************************/
 extern "C" int CopyFile(const char * src, const char * dest)
 {
-	u32 read = 1;
-	u32 wrote = 1;
+	int read = 1;
+	int wrote = 1;
 
 	char * filename = strrchr(src, '/');
 	if(filename)

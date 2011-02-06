@@ -241,7 +241,7 @@ const u8 * Resources::GetFile(const char * filename)
     return NULL;
 }
 
-const u32 Resources::GetFileSize(const char * filename)
+u32 Resources::GetFileSize(const char * filename)
 {
     for(int i = 0; RecourceFiles[i].filename != NULL; ++i)
     {

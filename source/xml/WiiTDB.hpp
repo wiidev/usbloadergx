@@ -133,7 +133,7 @@ class WiiTDB
         bool ParseFile();
         bool LoadGameOffsets(const char * path);
         bool SaveGameOffsets(const char * path);
-        inline size_t GetData(char * data, int offset, int size);
+        inline int GetData(char * data, int offset, int size);
         inline char * LoadGameNode(const char * id);
         inline char * GetGameNode(const char * id);
         inline GameOffsets * GetGameOffset(const char * id);

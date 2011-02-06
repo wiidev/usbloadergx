@@ -210,7 +210,7 @@ struct block downloadfile(const char *url)
     //Search for the 4-character sequence \r\n\r\n in the response which signals the start of the http payload (file)
     unsigned char *filestart = NULL;
     u32 filesize = 0;
-    int i;
+    u32 i;
     for (i = 3; i < response.size; i++)
     {
         if (response.data[i] == '\n' && response.data[i - 1] == '\r' && response.data[i - 2] == '\n' && response.data[i

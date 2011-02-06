@@ -69,7 +69,7 @@ int write_zero(int fd, off_t size)
     while (size)
     {
         chunk = size;
-        if (chunk > sizeof(buf)) chunk = sizeof(buf);
+        if (chunk > (int) sizeof(buf)) chunk = sizeof(buf);
         ret = write(fd, buf, chunk);
         //printf("WZ %d %d / %lld \n", ret, chunk, size);
         size -= chunk;
@@ -82,7 +82,7 @@ int split_fill(split_info_t *s, int idx, u64 size)
 {
     int fd = split_open_file(s, idx);
     off64_t fsize = lseek(fd, 0, SEEK_END);
-    if (fsize < size)
+    if (fsize < (s64) size)
     {
         //printf("TRUNC %d "FMT_lld"\n", idx, size); Wpad_WaitButtons();
         //ftruncate(fd, size);

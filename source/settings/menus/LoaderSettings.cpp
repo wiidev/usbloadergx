@@ -148,7 +148,10 @@ LoaderSettings::~LoaderSettings()
             DeviceHandler::Instance()->UnMountAllUSB();
             Settings.USBPort = NewSettingsUSBPort;
             DeviceHandler::SetUSBPort(Settings.USBPort);
-            if(Settings.USBPort == 2) DeviceHandler::Instance()->MountAllUSB();
+            DeviceHandler::Instance()->MountAllUSB();
+
+            if(Settings.partition >= DeviceHandler::Instance()->GetUSBHandle()->GetPartitionTotalCount())
+                Settings.partition = 0;
         }
 
         if(Settings.MultiplePartitions)
@@ -371,7 +374,7 @@ int LoaderSettings::GetMenuInternal()
 
             if(!allSDPaths)
             {
-                WindowPrompt(tr("ERROR:"), tr("Automatic port switching is done on the fly. You should change all custom paths to sd:/ for this option or else it could damage a filesystem."), tr("OK"));
+                WindowPrompt(tr("ERROR:"), tr("Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."), tr("OK"));
                 NewSettingsUSBPort = 0;
             }
         }

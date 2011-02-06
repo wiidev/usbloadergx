@@ -98,8 +98,3 @@ s32 Wbfs::GameSize(u8 *discid, f32 *size)
 
     return 0;
 }
-
-bool Wbfs::ShowFreeSpace(void)
-{
-    return true;
-}

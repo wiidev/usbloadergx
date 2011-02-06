@@ -50,7 +50,7 @@ s32 Wbfs_Fat::Open()
 
     PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
 
-    if(partition >= 0 && (int) partition < usbHandle->GetPartitionTotalCount())
+    if(partition < (u32) usbHandle->GetPartitionTotalCount())
     {
         if (lba == usbHandle->GetLBAStart(partition))
         {
@@ -868,9 +868,4 @@ int Wbfs_Fat::GetFragList(u8 *id)
     if (!ret) return -1;
 
     return get_frag_list_for_file(fname, id, GetFSType(), lba);
-}
-
-bool Wbfs_Fat::ShowFreeSpace(void)
-{
-    return false;
 }
