@@ -39,6 +39,10 @@ class CGameTitles
         //! Set default game titles
         void SetDefault();
     protected:
+        u32 ReadCachedTitles(const char * path);
+        void WriteCachedTitles(const char * path);
+        void RemoveUnusedCache(std::vector<std::string> &MissingTitles);
+
         std::vector<GameTitle> TitleList;
 };
 

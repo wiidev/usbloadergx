@@ -1,14 +1,14 @@
 # USB Loader GX language source file.
-# japanese.lang - r1046J
+# japanese.lang - r1065J
 # don't delete/change this line (e).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-06 19:36+0100\n"
+"POT-Creation-Date: 2011-02-05 17:39+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ichiroling\n"
-"Language-Team: hosigumayuugi, papa\n"
+"Language-Team: hosigumayuugi, papa, ichiroling\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -145,7 +145,7 @@ msgid "App Language"
 msgstr "使用言語"
 
 msgid "Apply"
-msgstr ""
+msgstr "適用"
 
 msgid "Apr"
 msgstr "4月"
@@ -163,13 +163,10 @@ msgid "Aug"
 msgstr "8月"
 
 msgid "Author(s):"
-msgstr ""
+msgstr "制作者:"
 
 msgid "AutoInit Network"
 msgstr "自動ネット接続"
-
-msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr ""
 
 msgid "BCA Codes Path"
 msgstr "ＢＣＡコード"
@@ -245,9 +242,6 @@ msgstr "起動しますか？"
 
 msgid "Both"
 msgstr "IDとﾘｰｼﾞｮﾝを表示"
-
-msgid "Both Ports"
-msgstr ""
 
 msgid "Can't be formatted"
 msgstr "初期化できません"
@@ -445,7 +439,7 @@ msgid "Do you want to apply it now?"
 msgstr "適用しますか?"
 
 msgid "Do you want to apply this theme?"
-msgstr ""
+msgstr "このﾃｰﾏを使いますか？"
 
 msgid "Do you want to change language?"
 msgstr "言語を変更しますか？"
@@ -949,7 +943,7 @@ msgid "No themes found on the site."
 msgstr "テーマが見つかりません"
 
 msgid "No themes found."
-msgstr ""
+msgstr "ﾃｰﾏが見つかりません"
 
 msgid "None"
 msgstr "なし"
@@ -994,7 +988,7 @@ msgid "OFF"
 msgstr "使わない"
 
 msgid "OK"
-msgstr ""
+msgstr "確定する"
 
 msgid "ON"
 msgstr "使う"
@@ -1289,7 +1283,7 @@ msgid "Theme Downloader"
 msgstr "テーマをダウンロード"
 
 msgid "Theme Menu"
-msgstr ""
+msgstr "テーマ"
 
 msgid "Theme Path"
 msgstr "テーマ"
@@ -1326,12 +1320,6 @@ msgstr "USB機器が見つかりません"
 
 msgid "USB Loader GX is protected"
 msgstr "GXは保護されています"
-
-msgid "USB Port"
-msgstr ""
-
-msgid "USB Port changing is only supported on Hermes cIOS."
-msgstr ""
 
 msgid "Uninstall"
 msgstr "ｱﾝｲﾝｽﾄｰﾙ"
@@ -1394,7 +1382,7 @@ msgid "VIDTV Patch"
 msgstr "映像パッチ"
 
 msgid "Version:"
-msgstr ""
+msgstr "バージョン:"
 
 #, c-format
 msgid "Version: %s"

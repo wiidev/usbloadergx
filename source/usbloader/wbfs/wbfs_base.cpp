@@ -79,19 +79,17 @@ s32 Wbfs::CheckGame(u8 *discid)
 
 s32 Wbfs::GameSize(u8 *discid, f32 *size)
 {
-    wbfs_disc_t *disc = NULL;
-
-    u32 sectors;
+    if(!discid) return 0;
 
     /* Open disc */
-    disc = OpenDisc(discid);
+    wbfs_disc_t *disc = OpenDisc(discid);
     if (!disc) return -2;
 
-    /* Get game size in sectors */
-    sectors = wbfs_sector_used(disc->p, disc->header);
+    u32 sectors = wbfs_disc_sector_used(disc);
 
     /* Copy value */
-    *size = (disc->p->wbfs_sec_sz / GB_SIZE) * sectors;
+    if(size)
+        *size = (disc->p->wbfs_sec_sz / GB_SIZE) * sectors;
 
     /* Close disc */
     CloseDisc(disc);

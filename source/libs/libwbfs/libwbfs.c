@@ -289,18 +289,6 @@ u32 wbfs_sector_used(wbfs_t *p, wbfs_disc_info_t *di)
     return tot_blk;
 }
 
-u32 wbfs_sector_used2(wbfs_t *p, wbfs_disc_info_t *di, u32 *last_blk)
-{
-    u32 tot_blk = 0, j;
-    for (j = 0; j < p->n_wbfs_sec_per_disc; j++)
-        if (wbfs_ntohs( di->wlba_table[j] ))
-        {
-            if (last_blk) *last_blk = j;
-            tot_blk++;
-        }
-    return tot_blk;
-}
-
 u32 wbfs_get_disc_info(wbfs_t*p, u32 index, u8 *header, int header_size, u32 *size)//size in 32 bit
 {
     u32 i, count = 0;
@@ -790,7 +778,7 @@ int wbfs_get_fragments(wbfs_disc_t *d, _frag_append_t append_fragment, void *cal
 int wbfs_iso_file_read(wbfs_disc_t*d, u32 offset, u8 *data, u32 len)
 {
     if (!d || d->p != &wbfs_iso_file) return -1;
-    int fd = (int) d->header;
+    int fd = d->i;
     off_t off = ((u64) offset) << 2;
     off_t ret_off;
     int ret;
@@ -801,26 +789,18 @@ int wbfs_iso_file_read(wbfs_disc_t*d, u32 offset, u8 *data, u32 len)
     return 0;
 }
 
-u32 wbfs_disc_sector_used(wbfs_disc_t *d, u32 *num_blk)
+u32 wbfs_disc_sector_used(wbfs_disc_t *d)
 {
+    if(!d) return 0;
+
     if (d->p == &wbfs_iso_file)
     {
-        int fd = (int) d->header;
+        int fd = d->i;
         struct stat st;
         if (fstat(fd, &st) == -1) return 0;
-        if (num_blk)
-        {
-            *num_blk = (st.st_size >> 9); // in 512 units
-        }
-        return st.st_blocks; // in 512 units (can be sparse)
+        return (st.st_size >> 9);
     }
-    u32 last_blk = 0;
-    u32 ret;
-    ret = wbfs_sector_used2(d->p, d->header, &last_blk);
-    if (num_blk)
-    {
-        *num_blk = last_blk + 1;
-    }
-    return ret;
+
+    return wbfs_sector_used(d->p, d->header);
 }
 

@@ -27,11 +27,11 @@ msgstr "不在伺服器上"
 
 #, c-format
 msgid "%i files not found on the server!"
-msgstr ""
+msgstr "伺服器上找不到%i個檔！"
 
 #, c-format
 msgid "%i missing files"
-msgstr ""
+msgstr "缺少%i個檔案"
 
 msgid "0 (Everyone)"
 msgstr "0 (全年齡)"
@@ -145,7 +145,7 @@ msgid "App Language"
 msgstr "語言設定"
 
 msgid "Apply"
-msgstr ""
+msgstr "套用"
 
 msgid "Apr"
 msgstr "四月"
@@ -163,13 +163,13 @@ msgid "Aug"
 msgstr "八月"
 
 msgid "Author(s):"
-msgstr ""
+msgstr "作者(群)"
 
 msgid "AutoInit Network"
 msgstr "自動檢查網路"
 
 msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr ""
+msgstr "快速執行自動槽位切換。首先你需要在SD卡改變所有自訂路徑這個選項，否則可能會損壞檔案系統。"
 
 msgid "BCA Codes Path"
 msgstr "BAC代碼路徑"
@@ -247,7 +247,7 @@ msgid "Both"
 msgstr "全部"
 
 msgid "Both Ports"
-msgstr ""
+msgstr "兩個插槽"
 
 msgid "Can't be formatted"
 msgstr "無法格式化"
@@ -364,7 +364,7 @@ msgid "Credits"
 msgstr "作者信息"
 
 msgid "Custom Discarts"
-msgstr ""
+msgstr "自製光碟圖片"
 
 msgid "Custom Paths"
 msgstr "自訂路徑"
@@ -445,7 +445,7 @@ msgid "Do you want to apply it now?"
 msgstr "要套用設定嗎？"
 
 msgid "Do you want to apply this theme?"
-msgstr ""
+msgstr "要套用這個佈景主題嗎？"
 
 msgid "Do you want to change language?"
 msgstr "要變更語言嗎？"
@@ -484,10 +484,10 @@ msgid "Downloading Flat Covers"
 msgstr "下載一般封面"
 
 msgid "Downloading Full HQ Covers"
-msgstr ""
+msgstr "下載完整高畫質封面"
 
 msgid "Downloading Full LQ Covers"
-msgstr ""
+msgstr "下載完整低畫質封面"
 
 msgid "Downloading custom Discarts"
 msgstr "下載自製光碟圖片"
@@ -622,7 +622,7 @@ msgid "Formatting, please wait..."
 msgstr "格式化中, 請稍候..."
 
 msgid "Found missing images."
-msgstr ""
+msgstr "找到缺少圖片。"
 
 msgid "Free Space"
 msgstr "剩餘空間"
@@ -631,13 +631,13 @@ msgid "French"
 msgstr "法文"
 
 msgid "Full Cover Path"
-msgstr ""
+msgstr "完整封面路徑"
 
 msgid "Full HQ Covers"
-msgstr ""
+msgstr "完整高畫質封面"
 
 msgid "Full LQ Covers"
-msgstr ""
+msgstr "完整低畫質封面"
 
 msgid "Full Menu"
 msgstr "完整選單"
@@ -694,7 +694,7 @@ msgid "Game is already installed:"
 msgstr "已安裝過遊戲:"
 
 msgid "Game/Install Partition"
-msgstr ""
+msgstr "遊戲/安裝磁區"
 
 msgid "Gamename [GAMEID]"
 msgstr "遊戲名稱 [GAMEID]"
@@ -892,7 +892,7 @@ msgid "Mount DVD drive"
 msgstr "掛載DVD光碟"
 
 msgid "Multiple Partitions"
-msgstr ""
+msgstr "多重磁區"
 
 msgid "Music Loop Mode"
 msgstr "音樂循環模式"
@@ -949,7 +949,7 @@ msgid "No themes found on the site."
 msgstr "在網站上找不到主題。"
 
 msgid "No themes found."
-msgstr ""
+msgstr "找不到佈景主題。"
 
 msgid "None"
 msgstr "沒有"
@@ -1018,7 +1018,7 @@ msgid "Only for Install"
 msgstr "安裝遊戲時"
 
 msgid "Original Discarts"
-msgstr ""
+msgstr "原始光碟圖片"
 
 msgid "Original/Customs"
 msgstr "原始/自製"
@@ -1153,7 +1153,7 @@ msgid "Save Game List to"
 msgstr "儲存遊戲清單至"
 
 msgid "Save List"
-msgstr ""
+msgstr "儲存清單"
 
 msgid "Saved"
 msgstr "已儲存"
@@ -1195,7 +1195,7 @@ msgid "Sort alphabetically"
 msgstr "以字母順序排序"
 
 msgid "Sort by number of players"
-msgstr ""
+msgstr "以玩家人數排序"
 
 msgid "Sort by rank"
 msgstr "以等級排序"
@@ -1289,7 +1289,7 @@ msgid "Theme Downloader"
 msgstr "佈景主題下載"
 
 msgid "Theme Menu"
-msgstr ""
+msgstr "佈景主題選單"
 
 msgid "Theme Path"
 msgstr "佈景主題路徑"
@@ -1328,10 +1328,10 @@ msgid "USB Loader GX is protected"
 msgstr "USB Loader GX 被上鎖保護"
 
 msgid "USB Port"
-msgstr ""
+msgstr "USB 插槽"
 
 msgid "USB Port changing is only supported on Hermes cIOS."
-msgstr ""
+msgstr "USB插槽變更僅Hermes cIOS支援。"
 
 msgid "Uninstall"
 msgstr "移除"
@@ -1394,7 +1394,7 @@ msgid "VIDTV Patch"
 msgstr "VIDTV 修改"
 
 msgid "Version:"
-msgstr ""
+msgstr "版本："
 
 #, c-format
 msgid "Version: %s"

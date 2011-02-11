@@ -543,6 +543,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
     mainWindow->SetState(STATE_DISABLED);
     mainWindow->Append(Window);
     mainWindow->ChangeFocus(Window);
+    ResumeGui();
 
     while (choice == -1)
     {

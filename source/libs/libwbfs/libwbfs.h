@@ -151,7 +151,6 @@ extern "C"
     void wbfs_close_disc(wbfs_disc_t*d);
 
     u32 wbfs_sector_used(wbfs_t *p, wbfs_disc_info_t *di);
-    u32 wbfs_sector_used2(wbfs_t *p, wbfs_disc_info_t *di, u32 *last_blk);
 
     /*! @brief accessor to the wii disc
      @param d: a pointer to already open disc
@@ -225,7 +224,7 @@ extern "C"
     int wbfs_get_fragments(wbfs_disc_t *d, _frag_append_t append_fragment, void *callback_data);
 
     extern wbfs_t wbfs_iso_file;
-    u32 wbfs_disc_sector_used(wbfs_disc_t *d, u32 *num_blk);
+    u32 wbfs_disc_sector_used(wbfs_disc_t *d);
     int wbfs_iso_file_read(wbfs_disc_t*d, u32 offset, u8 *data, u32 len);
 
 #ifdef __cplusplus

@@ -191,7 +191,6 @@ void ThemeMenu::SetupMainButtons()
     if (ThemeDir.GetFilecount() == 0)
     {
         WindowPrompt(tr( "No themes found." ), 0, "OK");
-        returnMenu = MENU_SETTINGS;
     }
 
     for(int i = 0; i < ThemeDir.GetFilecount(); ++i)

@@ -92,7 +92,14 @@ wbfs_disc_t* Wbfs_Fat::OpenDisc(u8 *discid)
         // mark with a special wbfs_part
         wbfs_iso_file.wbfs_sec_sz = 512;
         iso_file->p = &wbfs_iso_file;
-        iso_file->header = (wbfs_disc_info_t*) fd;
+        iso_file->header = (wbfs_disc_info_t*) malloc(sizeof(wbfs_disc_info_t));
+        if(!iso_file->header)
+        {
+            free(iso_file);
+            return NULL;
+        }
+        read(fd, iso_file->header, sizeof(wbfs_disc_info_t));
+        iso_file->i = fd;
         return iso_file;
     }
 
@@ -117,7 +124,8 @@ void Wbfs_Fat::CloseDisc(wbfs_disc_t* disc)
     // is this really a .iso file?
     if (part == &wbfs_iso_file)
     {
-        close((int) disc->header);
+        close(disc->i);
+        free(disc->header);
         free(disc);
         return;
     }
@@ -129,37 +137,19 @@ void Wbfs_Fat::CloseDisc(wbfs_disc_t* disc)
 
 s32 Wbfs_Fat::GetCount(u32 *count)
 {
-    *count = 0;
     GetHeadersCount();
-    if (fat_hdr_count && fat_hdr_list)
-    {
-        // for compacter mem - move up as it will be freed later
-        int size = fat_hdr_count * sizeof(struct discHdr);
-        struct discHdr *buf = (struct discHdr *) malloc(size);
-        if (buf)
-        {
-            memcpy(buf, fat_hdr_list, size);
-            SAFE_FREE( fat_hdr_list );
-            fat_hdr_list = buf;
-        }
-    }
     *count = fat_hdr_count;
     return 0;
 }
 
 s32 Wbfs_Fat::GetHeaders(struct discHdr *outbuf, u32 cnt, u32 len)
 {
-    u32 i;
-    if (len > sizeof(struct discHdr))
-    {
-        len = sizeof(struct discHdr);
-    }
+    if(cnt*len > fat_hdr_count*sizeof(struct discHdr))
+        return -1;
 
-    for (i = 0; i < cnt && i < fat_hdr_count; i++)
-    {
-        memcpy(&outbuf[i], &fat_hdr_list[i], len);
-    }
-    SAFE_FREE( fat_hdr_list );
+    memcpy(outbuf, fat_hdr_list, cnt*len);
+
+    SAFE_FREE(fat_hdr_list);
     fat_hdr_count = 0;
 
     return 0;
@@ -187,7 +177,6 @@ s32 Wbfs_Fat::AddGame(void)
     ClosePart(part);
 
     if (ret < 0) return ret;
-    mk_title_txt(&header, path);
 
     return 0;
 }
@@ -368,19 +357,13 @@ s32 Wbfs_Fat::GetHeadersCount()
     char fpath[MAX_FAT_PATH];
     struct discHdr tmpHdr;
     struct stat st;
-    wbfs_t *part = NULL;
     u8 id[8];
-    int ret;
-    char *p;
-    u32 size;
     int is_dir;
     int len;
-    char dir_title[65];
     char fname_title[TITLE_LEN];
     const char *title;
     DIR *dir_iter;
 	struct dirent *dirent;
-    //dbg_time1();
 
     SAFE_FREE( fat_hdr_list );
     fat_hdr_count = 0;
@@ -393,117 +376,95 @@ s32 Wbfs_Fat::GetHeadersCount()
 
     while ((dirent = readdir(dir_iter)) != 0)
     {
-        snprintf(fname, sizeof(fname), "%s/%s", path, dirent->d_name);
-
-        if(stat(fname, &st) != 0)
-            continue;
+        if (dirent->d_name[0] == '.') continue;
 
         snprintf(fname, sizeof(fname), dirent->d_name);
 
-        //printf("found: %s\n", fname); Wpad_WaitButtonsCommon();
-        if ((char) fname[0] == '.') continue;
-        len = strlen(fname);
-        if (len < 8) continue; // "GAMEID_x"
-
-        memcpy(id, fname, 6);
-        id[6] = 0;
+        // reset id and title
+        memset(id, 0, sizeof(id));
         *fname_title = 0;
 
-        is_dir = S_ISDIR( st.st_mode );
-        //printf("mode: %d %d %x\n", is_dir, st.st_mode, st.st_mode);
-        if (is_dir)
-        {
-            int lay_a = 0;
-            int lay_b = 0;
-            if (fname[6] == '_' && is_gameid((char*) id))
-            {
-                // usb:/wbfs/GAMEID_TITLE/GAMEID.wbfs
-                lay_a = 1;
-            }
-            if (CheckLayoutB(fname, len, NULL, fname_title))
-            {
-                // usb:/wbfs/TITLE[GAMEID]/GAMEID.wbfs
-                lay_b = 1;
-            }
-            if (!lay_a && !lay_b) continue;
-            if (lay_a)
-            {
-                strncpy(dir_title, &fname[7], sizeof(dir_title));
-            }
-            else
-            {
-                try_lay_b: if (!CheckLayoutB(fname, len, id, fname_title)) continue;
-            }
-            snprintf(fpath, sizeof(fpath), "%s/%s/%s.wbfs", path, fname, id);
-            //printf("path2: %s\n", fpath);
-            // if more than 50 games, skip second stat to improve speed
-            // but if ambiguous layout check anyway
-            if (fat_hdr_count < 50 || (lay_a && lay_b))
-            {
-                if (stat(fpath, &st) == -1)
-                {
-                    //printf("missing: %s\n", fpath);
-                    // try .iso
-                    strcpy(strrchr(fpath, '.'), ".iso"); // replace .wbfs with .iso
-                    if (stat(fpath, &st) == -1)
-                    {
-                        //printf("missing: %s\n", fpath);
-                        // try .ciso
-                        strcpy(strrchr(fpath, '.'), ".ciso"); // replace .iso with .ciso
-                        if (stat(fpath, &st) == -1)
-                        {
-                            if (lay_a && lay_b == 1)
-                            {
-                                // mark lay_b so that the stat check is still done,
-                                // but lay_b is not re-tried again
-                                lay_b = 2;
-                                // retry with layout b
-                                goto try_lay_b;
-                            }
-                            continue;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                st.st_size = 1024 * 1024;
-            }
-        }
-        else
+        const char * fileext = strrchr(fname, '.');
+        if(fileext && (strcasecmp(fileext, ".wbfs") == 0 ||
+           strcasecmp(fileext, ".iso") == 0 || strcasecmp(fileext, ".ciso") == 0))
         {
             // usb:/wbfs/GAMEID.wbfs
             // or usb:/wbfs/GAMEID.iso
             // or usb:/wbfs/GAMEID.ciso
-            p = strrchr(fname, '.');
-            if (!p) continue;
-            if ((strcasecmp(p, ".wbfs") != 0) && (strcasecmp(p, ".iso") != 0) && (strcasecmp(p, ".ciso") != 0)) continue;
-            int n = p - fname; // length withouth .wbfs
+            int n = fileext - fname; // length withouth .wbfs
+            sprintf((char *) id, "%.6s", fname);
             if (n != 6)
             {
                 // TITLE [GAMEID].wbfs
                 if (!CheckLayoutB(fname, n, id, fname_title)) continue;
             }
             snprintf(fpath, sizeof(fpath), "%s/%s", path, fname);
+            is_dir = 0;
+        }
+        else
+        {
+            snprintf(fname, sizeof(fname), "%s/%s", path, dirent->d_name);
+
+            if(stat(fname, &st) != 0)
+                continue;
+
+            is_dir = S_ISDIR( st.st_mode );
+            if(!is_dir) continue;
+
+            snprintf(fname, sizeof(fname), dirent->d_name);
+
+            len = strlen(fname);
+            if (len < 8) continue; // "GAMEID_x"
+
+            int lay_a = 0;
+            int lay_b = 0;
+            if (CheckLayoutB(fname, len, id, fname_title))
+            {
+                // usb:/wbfs/TITLE[GAMEID]/GAMEID.wbfs
+                lay_b = 1;
+            }
+            else if (fname[6] == '_' && is_gameid((char*) id))
+            {
+                // usb:/wbfs/GAMEID_TITLE/GAMEID.wbfs
+                lay_a = 1;
+                memcpy(id, fname, 6);
+                snprintf(fname_title, sizeof(fname_title), &fname[7]);
+            }
+
+            if (!lay_a && !lay_b) continue;
+
+            // check ahead, make sure it succeeds
+            snprintf(fpath, sizeof(fpath), "%s/%s/%.6s.wbfs", path, fname, (char *) id);
         }
 
-        //printf("found: %s %d MB\n", fpath, (int)(st.st_size/1024/1024));
-        // size must be at least 1MB to be considered a valid wbfs file
-        if (st.st_size < 1024 * 1024) continue;
         // if we have titles.txt entry use that
         title = GameTitles.GetTitle(id);
         // if no titles.txt get title from dir or file name
         if (!title && *fname_title)
-        {
             title = fname_title;
-        }
+
         if (title)
         {
             memset(&tmpHdr, 0, sizeof(tmpHdr));
             memcpy(tmpHdr.id, id, 6);
-            strncpy(tmpHdr.title, title, sizeof(tmpHdr.title) - 1);
+            snprintf(tmpHdr.title, sizeof(tmpHdr.title), title);
             tmpHdr.magic = 0x5D1C9EA3;
             goto add_hdr;
+        }
+
+        if(is_dir)
+        {
+            if (stat(fpath, &st) != 0)
+            {
+                // look for direct .iso file
+                sprintf(strrchr(fpath, '.'), ".iso"); // replace .wbfs with .iso
+                if (stat(fpath, &st) != 0)
+                {
+                    // look for direct .ciso file
+                    sprintf(strrchr(fpath, '.'), ".ciso"); // replace .iso with .ciso
+                    if (stat(fpath, &st) != 0) continue;
+                }
+            }
         }
 
         // else read it from file directly
@@ -525,18 +486,17 @@ s32 Wbfs_Fat::GetHeadersCount()
             // no title found, read it from wbfs file
             // but this is a little bit slower
             // open 'partition' file
-            part = OpenPart(fpath);
+            wbfs_t *part = OpenPart(fpath);
             if (!part)
-            {
                 continue;
-            }
+
+            u32 size;
             // Get header
-            ret = wbfs_get_disc_info(part, 0, (u8*) &tmpHdr, sizeof(struct discHdr), &size);
+            int ret = wbfs_get_disc_info(part, 0, (u8*) &tmpHdr, sizeof(struct discHdr), &size);
             ClosePart(part);
             if (ret == 0)
-            {
                 goto add_hdr;
-            }
+
         }
         else if (strcasecmp(strrchr(fpath, '.'), ".iso") == 0)
         {
@@ -573,19 +533,23 @@ s32 Wbfs_Fat::GetHeadersCount()
         // fail:
         continue;
 
-        // succes: add tmpHdr to list:
-        add_hdr: memset(&st, 0, sizeof(st));
-        //printf("added: %.6s %.20s\n", tmpHdr.id, tmpHdr.title); Wpad_WaitButtons();
+        // success: add tmpHdr to list:
+        add_hdr:
+
         //! First allocate before reallocating
         if(!fat_hdr_list)
             fat_hdr_list = (struct discHdr *) malloc(sizeof(struct discHdr));
 
         fat_hdr_count++;
-        fat_hdr_list = (struct discHdr *) realloc(fat_hdr_list, fat_hdr_count * sizeof(struct discHdr));
+        struct discHdr *tmpList = (struct discHdr *) realloc(fat_hdr_list, fat_hdr_count * sizeof(struct discHdr));
+        if(!tmpList)
+            break; //out of memory, keep the list until now and stop
+
+        fat_hdr_list = tmpList;
         memcpy(&fat_hdr_list[fat_hdr_count - 1], &tmpHdr, sizeof(struct discHdr));
     }
+
     closedir(dir_iter);
-    //dbg_time2("\nFAT_GetCount"); Wpad_WaitButtonsCommon();
 
     return 0;
 }
@@ -602,79 +566,71 @@ int Wbfs_Fat::FindFilename(u8 *id, char *fname, int len)
     // look for direct .ciso file
     strcpy(strrchr(fname, '.'), ".ciso"); // replace .iso with .ciso
     if (stat(fname, &st) == 0) return 1;
+
     // direct file not found, check subdirs
     *fname = 0;
     DIR *dir_iter;
 	struct dirent *dirent;
+    char gameID[7];
+    snprintf(gameID, sizeof(gameID), (char *) id);
     char path[MAX_FAT_PATH];
-    char name[MAX_FAT_PATH];
     strcpy(path, wbfs_fs_drive);
     strcat(path, wbfs_fat_dir);
+
     dir_iter = opendir(path);
-    //printf("dir: %s %p\n", path, dir); Wpad_WaitButtons();
     if (!dir_iter)
-    {
         return 0;
-    }
+
     while ((dirent = readdir(dir_iter)) != 0)
     {
-        snprintf(name, sizeof(name), "%s/%s", path, dirent->d_name);
+        if(strcasestr(dirent->d_name, gameID) == NULL) continue;
 
-        if(stat(name, &st) != 0)
-            continue;
-
-        snprintf(name, sizeof(name), dirent->d_name);
-        //dbg_printf("name:%s\n", name);
-        if (name[0] == '.') continue;
-        int n = strlen(name);
+        if (dirent->d_name[0] == '.') continue;
+        int n = strlen(dirent->d_name);
         if (n < 8) continue;
-        if (S_ISDIR( st.st_mode ))
-        {
-            if (name[6] == '_')
-            {
-                // GAMEID_TITLE
-                if (strncmp(name, (char*) id, 6) != 0) goto try_alter;
-            }
-            else
-            {
-                try_alter:
-                // TITLE [GAMEID]
-                if (name[n - 8] != '[' || name[n - 1] != ']') continue;
-                if (strncmp(&name[n - 7], (char*) id, 6) != 0) continue;
-            }
-            // look for .wbfs file
-            snprintf(fname, len, "%s/%s/%.6s.wbfs", path, name, id);
-            if (stat(fname, &st) == 0) break;
-            // look for .iso file
-            snprintf(fname, len, "%s/%s/%.6s.iso", path, name, id);
-            if (stat(fname, &st) == 0) break;
-            // look for .ciso file
-            snprintf(fname, len, "%s/%s/%.6s.ciso", path, name, id);
-        }
-        else
+
+        const char *fileext = strrchr(dirent->d_name, '.');
+        if(fileext && (strcasecmp(fileext, ".wbfs") == 0 ||
+           strcasecmp(fileext, ".iso") == 0 || strcasecmp(fileext, ".ciso") == 0))
         {
             // TITLE [GAMEID].wbfs
             char fn_title[TITLE_LEN];
             u8 fn_id[8];
-            char *p = strrchr(name, '.');
-            if (!p) continue;
-            if ((strcasecmp(p, ".wbfs") != 0) && (strcasecmp(p, ".iso") != 0) && (strcasecmp(p, ".ciso") != 0)) continue;
-            int n = p - name; // length withouth .wbfs
-            if (!CheckLayoutB(name, n, fn_id, fn_title)) continue;
-            if (strncmp((char*) fn_id, (char*) id, 6) != 0) continue;
-            snprintf(fname, len, "%s/%s", path, name);
+            int n = fileext - dirent->d_name; // length withouth .wbfs
+            if (!CheckLayoutB(dirent->d_name, n, fn_id, fn_title)) continue;
+            if (strncmp((char*) fn_id, gameID, 6) != 0) continue;
+            snprintf(fname, len, "%s/%s", path, dirent->d_name);
+            if (stat(fname, &st) == 0) break;
         }
-        if (stat(fname, &st) == 0) break;
+
+        snprintf(fname, sizeof(fname), "%s/%s", path, dirent->d_name);
+
+        if(stat(fname, &st) != 0)
+        {
+            *fname = 0;
+            continue;
+        }
+
+        if (S_ISDIR( st.st_mode ))
+        {
+            // look for .wbfs file
+            snprintf(fname, len, "%s/%s/%.6s.wbfs", path, dirent->d_name, gameID);
+            if (stat(fname, &st) == 0) break;
+            // look for .iso file
+            snprintf(fname, len, "%s/%s/%.6s.iso", path, dirent->d_name, gameID);
+            if (stat(fname, &st) == 0) break;
+            // look for .ciso file
+            snprintf(fname, len, "%s/%s/%.6s.ciso", path, dirent->d_name, gameID);
+            if (stat(fname, &st) == 0) break;
+        }
+
         *fname = 0;
     }
     closedir(dir_iter);
+
     if (*fname)
-    {
-        // found
-        //printf("found:%s\n", fname);
         return 2;
-    }
-    // not found
+
     return 0;
 }
 
@@ -775,23 +731,6 @@ wbfs_t* Wbfs_Fat::CreatePart(u8 *id, char *path)
         split_close(&split);
     }
     return part;
-}
-
-void Wbfs_Fat::mk_title_txt(struct discHdr *header, char *path)
-{
-    char fname[MAX_FAT_PATH];
-    FILE *f;
-
-    strcpy(fname, path);
-    strcat(fname, "/");
-    mk_gameid_title(header, fname + strlen(fname), 1, 0);
-    strcat(fname, ".txt");
-
-    f = fopen(fname, "wb");
-    if (!f) return;
-    fprintf(f, "%.6s = %.64s\n", header->id, GameTitles.GetTitle(header));
-    fclose(f);
-    printf("Info file: %s\n", fname);
 }
 
 void Wbfs_Fat::mk_gameid_title(struct discHdr *header, char *name, int re_space, int layout)

@@ -49,15 +49,11 @@ class Wbfs_Fat: public Wbfs
         s32 GetHeadersCount();
         void GetDir(struct discHdr *header, char *path);
 
-        void mk_title_txt(struct discHdr *header, char *path);
         void mk_gameid_title(struct discHdr *header, char *name, int re_space, int layout);
         void title_filename(char *title);
         bool is_gameid(char *id);
 
-        static int nop_rw_sector(void *_fp, u32 lba, u32 count, void* buf)
-        {
-            return 0;
-        }
+        static int nop_rw_sector(void *_fp, u32 lba, u32 count, void* buf) { return 0; }
 };
 
 #endif //_WBFS_FAT_H

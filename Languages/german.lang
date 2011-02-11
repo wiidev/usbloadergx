@@ -1,11 +1,11 @@
 # USB Loader GX
-# german language source file - r1061
+# german language source file - r1068
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-06 19:36+0100\n"
+"POT-Creation-Date: 2011-02-06 22:00+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -145,7 +145,7 @@ msgid "App Language"
 msgstr "Sprache"
 
 msgid "Apply"
-msgstr ""
+msgstr "Anwenden"
 
 msgid "Apr"
 msgstr "April"
@@ -163,13 +163,13 @@ msgid "Aug"
 msgstr "August"
 
 msgid "Author(s):"
-msgstr ""
+msgstr "Autor(en)"
 
 msgid "AutoInit Network"
 msgstr "Autoinit. Netzwerk"
 
 msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr ""
+msgstr "Automatische Portumschaltung wird jetzt direkt zur Programmlaufzeit durchgeführt. Für diese Option müssen zuerst alle eigenen Pfade auf die SD Karte verweisen, da ansonsten das Dateisystem beschädigt werden könnte."
 
 msgid "BCA Codes Path"
 msgstr "BCA Codes"
@@ -247,7 +247,7 @@ msgid "Both"
 msgstr "ID und Region"
 
 msgid "Both Ports"
-msgstr ""
+msgstr "Beide Ports"
 
 msgid "Can't be formatted"
 msgstr "Kann nicht formatiert werden."
@@ -445,7 +445,7 @@ msgid "Do you want to apply it now?"
 msgstr "Jetzt übernehmen?"
 
 msgid "Do you want to apply this theme?"
-msgstr ""
+msgstr "Dieses Theme angewenden?"
 
 msgid "Do you want to change language?"
 msgstr "Sprache ändern?"
@@ -460,7 +460,7 @@ msgid "Do you want to load the default theme?"
 msgstr "Soll das DEFAULT Theme geladen werden?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
-msgstr ""
+msgstr "Soll die freier Speicher Info auf allen Partitionen synchronisiert werden?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Alle Sprachdateien aktualisieren?"
@@ -949,7 +949,7 @@ msgid "No themes found on the site."
 msgstr "Keine Themes auf der Seite gefunden."
 
 msgid "No themes found."
-msgstr ""
+msgstr "Keine Themes gefunden."
 
 msgid "None"
 msgstr "Keine"
@@ -1289,7 +1289,7 @@ msgid "Theme Downloader"
 msgstr "Theme Downloader"
 
 msgid "Theme Menu"
-msgstr ""
+msgstr "Theme Menü"
 
 msgid "Theme Path"
 msgstr "Theme"
@@ -1328,10 +1328,10 @@ msgid "USB Loader GX is protected"
 msgstr "USB Loader GX ist jetzt geschützt."
 
 msgid "USB Port"
-msgstr ""
+msgstr "USB Port"
 
 msgid "USB Port changing is only supported on Hermes cIOS."
-msgstr ""
+msgstr "USB-Portwechsel wird nur vom Hermes cIOS unterstützt."
 
 msgid "Uninstall"
 msgstr "Deinstallieren"
@@ -1394,7 +1394,7 @@ msgid "VIDTV Patch"
 msgstr "VIDTV Patch"
 
 msgid "Version:"
-msgstr ""
+msgstr "Version:"
 
 #, c-format
 msgid "Version: %s"

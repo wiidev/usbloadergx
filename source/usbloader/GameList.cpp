@@ -129,6 +129,8 @@ int GameList::InternalReadList(int part)
     u32 oldSize = FullGameList.size();
     std::vector<struct discHdr> PartGameList(cnt);
     memcpy(&PartGameList[0], buffer, len);
+    free(buffer);
+
     for (u32 i = 0; i < PartGameList.size(); i++)
     {
         for(u32 j = 0; j < FullGameList.size(); j++)
@@ -143,8 +145,6 @@ int GameList::InternalReadList(int part)
     }
     FullGameList.resize(oldSize+PartGameList.size());
     memcpy(&FullGameList[oldSize], &PartGameList[0], PartGameList.size()*sizeof(struct discHdr));
-
-    free(buffer);
 
     GamePartitionList.resize(oldSize+PartGameList.size());
 
