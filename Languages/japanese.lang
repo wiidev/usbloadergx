@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-05 17:39+0100\n"
+"POT-Creation-Date: 2011-02-12 10:25+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ichiroling\n"
 "Language-Team: hosigumayuugi, papa, ichiroling\n"
@@ -168,6 +168,9 @@ msgstr "制作者:"
 msgid "AutoInit Network"
 msgstr "自動ネット接続"
 
+msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
+msgstr ""
+
 msgid "BCA Codes Path"
 msgstr "ＢＣＡコード"
 
@@ -242,6 +245,12 @@ msgstr "起動しますか？"
 
 msgid "Both"
 msgstr "IDとﾘｰｼﾞｮﾝを表示"
+
+msgid "Both Ports"
+msgstr ""
+
+msgid "Cache Titles"
+msgstr ""
 
 msgid "Can't be formatted"
 msgstr "初期化できません"
@@ -401,6 +410,9 @@ msgstr "ディスク画像を削除"
 
 msgid "Design:"
 msgstr "デザイン:"
+
+msgid "Details"
+msgstr ""
 
 msgid "Developed by"
 msgstr "開発者："
@@ -1320,6 +1332,12 @@ msgstr "USB機器が見つかりません"
 
 msgid "USB Loader GX is protected"
 msgstr "GXは保護されています"
+
+msgid "USB Port"
+msgstr ""
+
+msgid "USB Port changing is only supported on Hermes cIOS."
+msgstr ""
 
 msgid "Uninstall"
 msgstr "ｱﾝｲﾝｽﾄｰﾙ"

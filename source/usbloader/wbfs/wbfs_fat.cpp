@@ -603,7 +603,7 @@ int Wbfs_Fat::FindFilename(u8 *id, char *fname, int len)
             if (stat(fname, &st) == 0) break;
         }
 
-        snprintf(fname, sizeof(fname), "%s/%s", path, dirent->d_name);
+        snprintf(fname, len, "%s/%s", path, dirent->d_name);
 
         if(stat(fname, &st) != 0)
         {

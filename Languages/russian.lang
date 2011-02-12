@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-06 19:36+0100\n"
+"POT-Creation-Date: 2011-02-12 10:25+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nikolai_ca\n"
 "Language-Team: Kir, alendit, nikolai_ca\n"
@@ -249,6 +249,9 @@ msgstr "Оба"
 msgid "Both Ports"
 msgstr ""
 
+msgid "Cache Titles"
+msgstr ""
+
 msgid "Can't be formatted"
 msgstr "Невозможно отформатировать"
 
@@ -407,6 +410,9 @@ msgstr "Удалить картинку диска"
 
 msgid "Design:"
 msgstr "Дизайн:"
+
+msgid "Details"
+msgstr ""
 
 msgid "Developed by"
 msgstr "Создано "

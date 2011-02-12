@@ -2,6 +2,9 @@
 
 GuiDiskCover::GuiDiskCover()
 {
+    PosZ = 50;
+    Distance = 55;
+    OldDegBeta = 0.0;
     deg_beta = 0.0;
     eff_step = 0;
     //  spin_angle = 0;
@@ -11,6 +14,9 @@ GuiDiskCover::GuiDiskCover()
 GuiDiskCover::GuiDiskCover(GuiImageData *Disk) :
     GuiImage(Disk)
 {
+    PosZ = 50;
+    Distance = 55;
+    OldDegBeta = 0.0;
     deg_beta = 0.0;
     eff_step = 0;
     //  spin_angle = 0;
@@ -40,6 +46,25 @@ void GuiDiskCover::SetSpin(bool Up)
     spin_up = Up;
 }
 
+void GuiDiskCover::SetState(int s, int c)
+{
+    if(state == STATE_DEFAULT && s == STATE_DISABLED)
+    {
+        PosZ = 0;
+        Distance = 0;
+        OldDegBeta = deg_beta;
+        deg_beta = 0.0f;
+    }
+    else if(state == STATE_DISABLED && s == STATE_DEFAULT)
+    {
+        PosZ = 50;
+        Distance = 55;
+        deg_beta = OldDegBeta;
+    }
+
+    GuiImage::SetState(s, c);
+}
+
 void Menu_DrawDiskCover(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16 distance, u8 data[], f32 deg_alpha,
         f32 deg_beta, f32 scaleX, f32 scaleY, u8 alpha, bool shadow);
 void Menu_DrawDiskCoverShadow(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16 distance, u8 data[],
@@ -51,9 +76,9 @@ void GuiDiskCover::Draw()
     if (!image || !this->IsVisible()) return;
     float currScale = this->GetScale();
     //  Menu_DrawDiskCoverShadow(this->GetLeft(), this->GetTop(), 190, width, height, 40, image, imageangle, deg_beta, widescreen ? currScale*0.8 : currScale, currScale, this->GetAlpha(), true);
-    Menu_DrawDiskCover(this->GetLeft(), this->GetTop(), 50, width, height, 55, image, imageangle, deg_beta,
+    Menu_DrawDiskCover(this->GetLeft(), this->GetTop(), PosZ, width, height, Distance, image, imageangle, deg_beta,
             widescreen ? currScale * 0.8 : currScale, currScale, 64, true);
-    Menu_DrawDiskCover(this->GetLeft(), this->GetTop(), 50, width, height, 55, image, imageangle, deg_beta,
+    Menu_DrawDiskCover(this->GetLeft(), this->GetTop(), PosZ, width, height, Distance, image, imageangle, deg_beta,
             widescreen ? currScale * 0.8 : currScale, currScale, this->GetAlpha(), false);
 
     if (eff_step)

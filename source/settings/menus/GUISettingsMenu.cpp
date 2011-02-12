@@ -117,6 +117,7 @@ GuiSettingsMenu::GuiSettingsMenu()
     Options->SetName(Idx++, "%s", tr( "Rumble" ));
     Options->SetName(Idx++, "%s", tr( "AutoInit Network" ));
     Options->SetName(Idx++, "%s", tr( "Titles from WiiTDB" ));
+    Options->SetName(Idx++, "%s", tr( "Cache Titles" ));
     Options->SetName(Idx++, "%s", tr( "Screensaver" ));
     Options->SetName(Idx++, "%s", tr( "Mark new games" ));
     Options->SetName(Idx++, "%s", tr( "Show Free Space" ));
@@ -184,6 +185,9 @@ void GuiSettingsMenu::SetOptionValues()
 
     //! Settings: Titles from WiiTDB
     Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.titlesOverride] ));
+
+    //! Settings: Cache Titles
+    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.CacheTitles] ));
 
     //! Settings: Screensaver
     Options->SetValue(Idx++, "%s", tr( ScreensaverText[Settings.screensaver] ));
@@ -311,6 +315,15 @@ int GuiSettingsMenu::GetMenuInternal()
     else if (ret == ++Idx)
     {
         if (++Settings.titlesOverride >= MAX_ON_OFF) Settings.titlesOverride = 0;
+    }
+
+    //! Settings: Cache Titles
+    else if (ret == ++Idx)
+    {
+        if (++Settings.CacheTitles >= MAX_ON_OFF) Settings.CacheTitles = 0;
+
+        if(Settings.CacheTitles) //! create new cache file
+            GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
     }
 
     //! Settings: Screensaver

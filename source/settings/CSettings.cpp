@@ -115,6 +115,7 @@ void CSettings::SetDefault()
     HomeMenu = HOME_MENU_DEFAULT;
     MultiplePartitions = OFF;
     USBPort = 0;
+    CacheTitles = ON;
 }
 
 bool CSettings::Load()

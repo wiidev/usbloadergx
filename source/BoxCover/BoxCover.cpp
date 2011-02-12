@@ -101,22 +101,30 @@ void BoxCover::WiiPADControl(GuiTrigger *t)
 
     if(t->wpad.btns_h & WPAD_BUTTON_UP)
     {
-        RotX -= 1.0f;
+        RotX -= 2.0f;
         last_manual_move_frame = frameCount;
     }
     if(t->wpad.btns_h & WPAD_BUTTON_DOWN)
     {
-        RotX += 1.0f;
+        RotX += 2.0f;
         last_manual_move_frame = frameCount;
     }
     if(t->wpad.btns_h & WPAD_BUTTON_LEFT)
     {
-        RotY -= 1.0f;
+        RotY -= 2.0f;
         last_manual_move_frame = frameCount;
     }
     if(t->wpad.btns_h & WPAD_BUTTON_RIGHT)
     {
-        RotY += 1.0f;
+        RotY += 2.0f;
+        last_manual_move_frame = frameCount;
+    }
+    if(t->wpad.btns_d & WPAD_BUTTON_2)
+    {
+        if(RotY < 180.0f)
+            SetEffect(EFFECT_BOX_ROTATE_X, 10, 180);
+        else
+            SetEffect(EFFECT_BOX_ROTATE_X, -10, -180);
         last_manual_move_frame = frameCount;
     }
     if(t->wpad.btns_h & WPAD_BUTTON_PLUS)
@@ -357,6 +365,18 @@ void BoxCover::UpdateEffects()
             PosZ = PosZOrig;
             effects = 0;
             effectAmount = 0;
+        }
+    }
+    else if(effects & EFFECT_BOX_ROTATE_X)
+    {
+        RotY += effectAmount;
+        effectTarget -= effectAmount;
+
+        if(fabs(effectTarget) < fabs(effectAmount))
+        {
+            effects = 0;
+            effectAmount = 0;
+            effectTarget = 0;
         }
     }
 }

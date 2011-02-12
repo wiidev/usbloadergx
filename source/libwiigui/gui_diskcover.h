@@ -14,6 +14,7 @@ class GuiDiskCover: public GuiImage
         bool GetBetaRotateEffect();
 
         void SetSpin(bool Up);
+        void SetState(int s, int c = -1);
         void Draw();
     private:
         f32 deg_beta;
@@ -22,6 +23,9 @@ class GuiDiskCover: public GuiImage
 
         //  f32 spin_angle;
         f32 spin_speedup;
+        int PosZ;
+        int Distance;
+        f32 OldDegBeta;
         bool spin_up;
 };
 

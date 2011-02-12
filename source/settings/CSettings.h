@@ -112,6 +112,7 @@ class CSettings
         short HomeMenu;
         short MultiplePartitions;
         short USBPort;
+        short CacheTitles;
         u32 InstallPartitions;
         u32 ParentalBlocks;
     protected:

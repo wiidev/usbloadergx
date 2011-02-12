@@ -10,6 +10,7 @@
 #include "settings/GameTitles.h"
 #include "settings/Settings.h"
 #include "prompts/PromptWindows.h"
+#include "prompts/gameinfo.h"
 #include "language/gettext.h"
 #include "menu/menus.h"
 #include "banner/OpeningBNR.hpp"
@@ -156,9 +157,20 @@ GameWindow::GameWindow(int Selected)
     btnRight->SetTrigger(trigR);
     btnRight->SetTrigger(trigPlus);
 
+    detailsBtnTxt = new GuiText(tr( "Details" ), 22, thColor("r=0 g=0 b=0 a=255 - game window details button text color"));
+    detailsBtnOverTxt = new GuiText(tr( "Details" ), 22, thColor("r=30 g=30 b=240 a=255 - game window details button over text color"));
+    detailsBtn = new GuiButton(detailsBtnTxt->GetTextWidth(), 25);
+    detailsBtn->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+    detailsBtn->SetPosition(120, 45);
+    detailsBtn->SetLabel(detailsBtnTxt);
+    detailsBtn->SetLabelOver(detailsBtnOverTxt);
+    detailsBtn->SetTrigger(trigA);
+    detailsBtn->SetEffectGrow();
+
     Append(dialogBoxImg);
     Append(playcntTxt);
     Append(backBtn);
+    Append(detailsBtn);
     if (!mountMethod)//stuff we don't show if it is a DVD mounted
     {
         Append(nameBtn);
@@ -232,6 +244,8 @@ GameWindow::~GameWindow()
     delete nameTxt;
     delete backBtnTxt;
     delete settingsBtnTxt;
+    delete detailsBtnTxt;
+    delete detailsBtnOverTxt;
 
     delete nameBtn;
     delete gameBtn;
@@ -239,6 +253,7 @@ GameWindow::~GameWindow()
     delete settingsBtn;
     delete btnLeft;
     delete btnRight;
+    delete detailsBtn;
 
     for(int i = 0; i < FAVORITE_STARS; ++i)
     {
@@ -557,6 +572,18 @@ int GameWindow::MainLoop()
         }
 
         btnLeft->ResetState();
+    }
+    else if(detailsBtn->GetState() == STATE_CLICKED)
+    {
+        char gameID[7];
+        struct discHdr * header = (mountMethod ? dvdheader : gameList[gameSelected]);
+        snprintf(gameID, sizeof(gameID), (char *) header->id);
+        diskImg->SetState(STATE_DISABLED);
+        showGameInfo(gameID);
+        mainWindow->SetState(STATE_DISABLED);
+        this->SetState(STATE_DEFAULT);
+        diskImg->SetState(STATE_DEFAULT);
+        detailsBtn->ResetState();
     }
 
     if (reducedVol)

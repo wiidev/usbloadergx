@@ -26,8 +26,9 @@
 
 #include "libwiigui/gui.h"
 
-#define EFFECT_BOX_FLY_CENTRE   0x4000000
-#define EFFECT_BOX_FLY_BACK     0x8000000
+#define EFFECT_BOX_FLY_CENTRE   0x2000000
+#define EFFECT_BOX_FLY_BACK     0x4000000
+#define EFFECT_BOX_ROTATE_X     0x8000000
 
 class BoxCover : public GuiImage
 {

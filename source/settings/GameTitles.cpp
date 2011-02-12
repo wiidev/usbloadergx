@@ -215,7 +215,8 @@ void CGameTitles::LoadTitlesFromWiiTDB(const char * path)
     Filepath += "wiitdb.xml";
 
     //! Read game titles cache database
-    ReadCachedTitles(Cachepath.c_str());
+    if(Settings.CacheTitles)
+        ReadCachedTitles(Cachepath.c_str());
 
     //! Read game list
     gameList.LoadUnfiltered();
@@ -259,5 +260,6 @@ void CGameTitles::LoadTitlesFromWiiTDB(const char * path)
             TitleList[TitleList.size()-1].PlayersCount = ret;
     }
 
-    WriteCachedTitles(Cachepath.c_str());
+    if(Settings.CacheTitles)
+        WriteCachedTitles(Cachepath.c_str());
 }

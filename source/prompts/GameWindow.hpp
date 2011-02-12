@@ -57,11 +57,14 @@ class GameWindow : public GuiWindow
         GuiText * nameTxt;
         GuiText * backBtnTxt;
         GuiText * settingsBtnTxt;
+        GuiText * detailsBtnTxt;
+        GuiText * detailsBtnOverTxt;
 
         GuiButton * nameBtn;
         GuiButton * gameBtn;
         GuiButton * backBtn;
         GuiButton * settingsBtn;
+        GuiButton * detailsBtn;
         GuiButton * btnLeft;
         GuiButton * btnRight;
         GuiButton * FavoriteBtn[FAVORITE_STARS];
