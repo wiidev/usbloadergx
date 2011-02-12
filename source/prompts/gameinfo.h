@@ -8,7 +8,7 @@
 #ifndef _GAMEINFO_H_
 #define _GAMEINFO_H_
 
-int showGameInfo(char *ID);
+int showGameInfo(int selectedGame);
 bool save_gamelist(int txt);
-void MemInfoPrompt();
+
 #endif

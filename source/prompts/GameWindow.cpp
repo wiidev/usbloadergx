@@ -575,11 +575,8 @@ int GameWindow::MainLoop()
     }
     else if(detailsBtn->GetState() == STATE_CLICKED)
     {
-        char gameID[7];
-        struct discHdr * header = (mountMethod ? dvdheader : gameList[gameSelected]);
-        snprintf(gameID, sizeof(gameID), (char *) header->id);
         diskImg->SetState(STATE_DISABLED);
-        showGameInfo(gameID);
+        showGameInfo(gameSelected);
         mainWindow->SetState(STATE_DISABLED);
         this->SetState(STATE_DEFAULT);
         diskImg->SetState(STATE_DEFAULT);

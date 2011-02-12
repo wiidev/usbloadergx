@@ -60,7 +60,7 @@
 #define isMEM2Buffer(p) (((u32) p & 0x10000000) != 0)
 
 #define MAX_BUFFER_SECTORS      256
-#define UMS_HEAPSIZE            0x1000
+#define UMS_HEAPSIZE            0x8000
 
 /* Variables */
 static char fs[] ATTRIBUTE_ALIGN(32) = "/dev/usb2";
@@ -96,7 +96,6 @@ s32 USBStorage2_Init(void)
 
     /* Initialize USB storage */
     ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_UMS_INIT, ":");
-    if (ret < 0) goto err;
 
     /* Get device capacity */
     if (USBStorage2_GetCapacity(&hdd_sector_size) == 0)
@@ -105,7 +104,7 @@ s32 USBStorage2_Init(void)
         goto err;
     }
 
-    return ret; // 0->HDD, 1->DVD
+    return 0; // 0->HDD, 1->DVD
 
     err:
     /* Close USB device */

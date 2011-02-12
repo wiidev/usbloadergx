@@ -258,6 +258,7 @@ bool CSettings::Save()
     fprintf(file, "HomeMenu = %d\n ", HomeMenu);
     fprintf(file, "MultiplePartitions = %d\n ", MultiplePartitions);
     fprintf(file, "USBPort = %d\n ", USBPort);
+    fprintf(file, "CacheTitles = %d\n ", CacheTitles);
     fclose(file);
 
     return true;
@@ -468,6 +469,11 @@ bool CSettings::SetSetting(char *name, char *value)
     else if (strcmp(name, "USBPort") == 0)
     {
         if (sscanf(value, "%d", &i) == 1) USBPort = i;
+        return true;
+    }
+    else if (strcmp(name, "CacheTitles") == 0)
+    {
+        if (sscanf(value, "%d", &i) == 1) CacheTitles = i;
         return true;
     }
     else if (strcmp(name, "patchcountrystrings") == 0)

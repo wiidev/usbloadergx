@@ -52,7 +52,7 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, int select
     width = w;
     height = h;
     pagesize = (gameList.size() < 11) ? gameList.size() : 11;
-    listOffset = (selectedGame >= 0 && selectedGame < gameList.size()) ? selectedGame : 0;
+    listOffset = (gameList.size() < 11) ? 0 : gameList.size()-2;
     selectable = true;
     selectedItem = -1;
     focus = 1; // allow focus

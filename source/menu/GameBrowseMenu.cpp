@@ -980,11 +980,8 @@ int GameBrowseMenu::MainLoop()
         if (SelectedGame >= 0 && SelectedGame < (s32) gameList.size())
         {
             rockout(SelectedGame);
-            struct discHdr *header = gameList[SelectedGame];
-            char IDfull[7];
-            snprintf(IDfull, sizeof(IDfull), "%s", (char *) header->id);
             SetState(STATE_DISABLED);
-            int choice = showGameInfo(IDfull);
+            int choice = showGameInfo(SelectedGame);
             SetState(STATE_DEFAULT);
             rockout(SelectedGame, 2);
             if (choice == 2)

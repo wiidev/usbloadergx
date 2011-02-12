@@ -25,10 +25,13 @@
 #include "utils/ShowError.h"
 #include "BoxCover/BoxCover.hpp"
 
+extern int mountMethod;
+extern struct discHdr *dvdheader;
+
 /****************************************************************************
  * gameinfo
  ***************************************************************************/
-int showGameInfo(char *ID)
+static int InternalShowGameInfo(char *ID)
 {
     HaltGui();//put this first to try to get rid of the code dump caused by loading this window at the same time as loading images from the SD card
     mainWindow->SetState(STATE_DISABLED);
@@ -56,8 +59,6 @@ int showGameInfo(char *ID)
     }
 
     XML_DB.CloseFile();
-
-    bool showmeminfo = false;
 
     int choice = -1;
     int titley = 10;
@@ -136,9 +137,8 @@ int showGameInfo(char *ID)
     gameinfoWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     gameinfoWindow.SetPosition(0, -50);
 
-    GuiWindow gameinfoWindow2(600, 308);
-    gameinfoWindow2.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-    gameinfoWindow2.SetPosition(0, -50);
+    GuiWindow InfoWindow(600, 308);
+    InfoWindow.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 
     GuiWindow txtWindow(350, 270);
     txtWindow.SetAlignment(ALIGN_CENTRE, ALIGN_RIGHT);
@@ -171,6 +171,20 @@ int showGameInfo(char *ID)
 
     GuiTrigger trigA_Simple;
     trigA_Simple.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+
+    GuiTrigger trigLeft;
+    trigLeft.SetButtonOnlyTrigger(-1, WPAD_BUTTON_LEFT | WPAD_CLASSIC_BUTTON_LEFT, PAD_BUTTON_LEFT);
+
+    GuiTrigger trigRight;
+    trigRight.SetButtonOnlyTrigger(-1, WPAD_BUTTON_RIGHT | WPAD_CLASSIC_BUTTON_RIGHT, PAD_BUTTON_RIGHT);
+
+    GuiButton LeftBtn(0, 0);
+    LeftBtn.SetTrigger(&trigLeft);
+    if(mountMethod == 0) gameinfoWindow.Append(&LeftBtn);
+
+    GuiButton RightBtn(0, 0);
+    RightBtn.SetTrigger(&trigRight);
+    if(mountMethod == 0) gameinfoWindow.Append(&RightBtn);
 
     GuiButton coverBtn(180, 250);
     coverBtn.SetPosition(20, 20);
@@ -381,7 +395,7 @@ int showGameInfo(char *ID)
         playersImg->SetWidescreen(Settings.widescreen);
         playersImg->SetPosition(intputX, inputY);
         playersImg->SetAlignment(0, 4);
-        gameinfoWindow.Append(playersImg);
+        InfoWindow.Append(playersImg);
         intputX += (Settings.widescreen ? playersImg->GetWidth() * .8 : playersImg->GetWidth()) + 5;
     }
 
@@ -392,7 +406,7 @@ int showGameInfo(char *ID)
         motionplusImg->SetWidescreen(Settings.widescreen);
         motionplusImg->SetPosition(intputX, inputY);
         motionplusImg->SetAlignment(0, 4);
-        gameinfoWindow.Append(motionplusImg);
+        InfoWindow.Append(motionplusImg);
         intputX += (Settings.widescreen ? motionplusImg->GetWidth() * .8 : motionplusImg->GetWidth()) + 5;
     }
     if (nunchuk == 1)
@@ -401,7 +415,7 @@ int showGameInfo(char *ID)
         nunchukImg->SetWidescreen(Settings.widescreen);
         nunchukImg->SetPosition(intputX, inputY);
         nunchukImg->SetAlignment(0, 4);
-        gameinfoWindow.Append(nunchukImg);
+        InfoWindow.Append(nunchukImg);
         intputX += (Settings.widescreen ? nunchukImg->GetWidth() * .8 : nunchukImg->GetWidth()) + 5;
     }
     if (classiccontroller == 1)
@@ -410,7 +424,7 @@ int showGameInfo(char *ID)
         classiccontrollerImg->SetWidescreen(Settings.widescreen);
         classiccontrollerImg->SetPosition(intputX, inputY);
         classiccontrollerImg->SetAlignment(0, 4);
-        gameinfoWindow.Append(classiccontrollerImg);
+        InfoWindow.Append(classiccontrollerImg);
         intputX += (Settings.widescreen ? classiccontrollerImg->GetWidth() * .8 : classiccontrollerImg->GetWidth()) + 5;
     }
     if (gamecube == 1)
@@ -419,7 +433,7 @@ int showGameInfo(char *ID)
         gcImg->SetWidescreen(Settings.widescreen);
         gcImg->SetPosition(intputX, inputY);
         gcImg->SetAlignment(0, 4);
-        gameinfoWindow.Append(gcImg);
+        InfoWindow.Append(gcImg);
         intputX += (Settings.widescreen ? gcImg->GetWidth() * .8 : gcImg->GetWidth()) + 5;
     }
     if (wheel == 1)
@@ -428,7 +442,7 @@ int showGameInfo(char *ID)
         wheelImg->SetWidescreen(Settings.widescreen);
         wheelImg->SetPosition(intputX, inputY);
         wheelImg->SetAlignment(0, 4);
-        gameinfoWindow.Append(wheelImg);
+        InfoWindow.Append(wheelImg);
         intputX += (Settings.widescreen ? wheelImg->GetWidth() * .8 : wheelImg->GetWidth()) + 5;
     }
     if (guitar == 1)
@@ -437,7 +451,7 @@ int showGameInfo(char *ID)
         guitarImg->SetWidescreen(Settings.widescreen);
         guitarImg->SetPosition(intputX, inputY);
         guitarImg->SetAlignment(0, 4);
-        gameinfoWindow.Append(guitarImg);
+        InfoWindow.Append(guitarImg);
         intputX += (Settings.widescreen ? guitarImg->GetWidth() * .8 : guitarImg->GetWidth()) + 5;
     }
     if (drums == 1)
@@ -446,7 +460,7 @@ int showGameInfo(char *ID)
         drumsImg->SetWidescreen(Settings.widescreen);
         drumsImg->SetPosition(intputX, inputY);
         drumsImg->SetAlignment(0, 4);
-        gameinfoWindow.Append(drumsImg);
+        InfoWindow.Append(drumsImg);
         intputX += (Settings.widescreen ? drumsImg->GetWidth() * .8 : drumsImg->GetWidth()) + 5;
     }
     if (microphone == 1)
@@ -455,7 +469,7 @@ int showGameInfo(char *ID)
         microphoneImg->SetWidescreen(Settings.widescreen);
         microphoneImg->SetPosition(intputX, inputY);
         microphoneImg->SetAlignment(0, 4);
-        gameinfoWindow.Append(microphoneImg);
+        InfoWindow.Append(microphoneImg);
         intputX += (Settings.widescreen ? microphoneImg->GetWidth() * .8 : microphoneImg->GetWidth()) + 5;
     }
     if (zapper == 1)
@@ -464,7 +478,7 @@ int showGameInfo(char *ID)
         zapperImg->SetWidescreen(Settings.widescreen);
         zapperImg->SetPosition(intputX, inputY);
         zapperImg->SetAlignment(0, 4);
-        gameinfoWindow.Append(zapperImg);
+        InfoWindow.Append(zapperImg);
         intputX += (Settings.widescreen ? zapperImg->GetWidth() * .8 : zapperImg->GetWidth()) + 5;
     }
     if (wiispeak == 1)
@@ -473,7 +487,7 @@ int showGameInfo(char *ID)
         wiispeakImg->SetWidescreen(Settings.widescreen);
         wiispeakImg->SetPosition(intputX, inputY);
         wiispeakImg->SetAlignment(0, 4);
-        gameinfoWindow.Append(wiispeakImg);
+        InfoWindow.Append(wiispeakImg);
         intputX += (Settings.widescreen ? wiispeakImg->GetWidth() * .8 : wiispeakImg->GetWidth()) + 5;
     }
     if (nintendods == 1)
@@ -482,7 +496,7 @@ int showGameInfo(char *ID)
         nintendodsImg->SetWidescreen(Settings.widescreen);
         nintendodsImg->SetPosition(intputX, inputY);
         nintendodsImg->SetAlignment(0, 4);
-        gameinfoWindow.Append(nintendodsImg);
+        InfoWindow.Append(nintendodsImg);
         intputX += (Settings.widescreen ? nintendodsImg->GetWidth() * .8 : nintendodsImg->GetWidth()) + 5;
     }
     if (dancepad == 1)
@@ -491,7 +505,7 @@ int showGameInfo(char *ID)
         dancepadImg->SetWidescreen(Settings.widescreen);
         dancepadImg->SetPosition(intputX, inputY);
         dancepadImg->SetAlignment(0, 4);
-        gameinfoWindow.Append(dancepadImg);
+        InfoWindow.Append(dancepadImg);
         intputX += (Settings.widescreen ? dancepadImg->GetWidth() * .8 : dancepadImg->GetWidth()) + 5;
     }
     if (balanceboard == 1)
@@ -500,7 +514,7 @@ int showGameInfo(char *ID)
         balanceboardImg->SetWidescreen(Settings.widescreen);
         balanceboardImg->SetPosition(intputX, inputY);
         balanceboardImg->SetAlignment(0, 4);
-        gameinfoWindow.Append(balanceboardImg);
+        InfoWindow.Append(balanceboardImg);
         intputX += (Settings.widescreen ? balanceboardImg->GetWidth() * .8 : balanceboardImg->GetWidth()) + 5;
     }
 
@@ -532,7 +546,7 @@ int showGameInfo(char *ID)
         wifiplayersImg->SetWidescreen(Settings.widescreen);
         wifiplayersImg->SetPosition(intputX, inputY);
         wifiplayersImg->SetAlignment(0, 4);
-        gameinfoWindow.Append(wifiplayersImg);
+        InfoWindow.Append(wifiplayersImg);
         intputX += (Settings.widescreen ? wifiplayersImg->GetWidth() * .8 : wifiplayersImg->GetWidth()) + 5;
     }
 
@@ -599,19 +613,8 @@ int showGameInfo(char *ID)
         ratingImg->SetWidescreen(Settings.widescreen);
         ratingImg->SetPosition(-25, inputY);
         ratingImg->SetAlignment(1, 4);
-        gameinfoWindow.Append(ratingImg);
+        InfoWindow.Append(ratingImg);
         intputX += (Settings.widescreen ? ratingImg->GetWidth() * .8 : ratingImg->GetWidth()) + 5;
-    }
-
-    // memory info
-    if (showmeminfo)
-    {
-        char meminfotxt[200];
-        strlcpy(meminfotxt, MemInfo(), sizeof(meminfotxt));
-        memTxt = new GuiText(meminfotxt, 18, ( GXColor ) {0, 0, 0, 255});
-        memTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-        memTxt->SetPosition(0, 0);
-        gameinfoWindow.Append(memTxt);
     }
 
     // title
@@ -622,7 +625,7 @@ int showGameInfo(char *ID)
         titleTxt->SetMaxWidth(350, SCROLL_HORIZONTAL);
         titleTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
         titleTxt->SetPosition(txtXOffset, 12 + titley);
-        gameinfoWindow.Append(titleTxt);
+        InfoWindow.Append(titleTxt);
     }
 
     //date
@@ -682,7 +685,7 @@ int showGameInfo(char *ID)
         releasedTxt->SetPosition(-17, 12 + indexy);
         indexy += (20 * newline);
         newline = 1;
-        gameinfoWindow.Append(releasedTxt);
+        InfoWindow.Append(releasedTxt);
     }
 
     //publisher
@@ -696,7 +699,7 @@ int showGameInfo(char *ID)
         publisherTxt->SetPosition(-17, 12 + indexy);
         indexy += (20 * newline);
         newline = 1;
-        gameinfoWindow.Append(publisherTxt);
+        InfoWindow.Append(publisherTxt);
     }
 
     //developer
@@ -710,7 +713,7 @@ int showGameInfo(char *ID)
         developerTxt->SetPosition(-17, 12 + indexy);
         indexy += (20 * newline);
         newline = 1;
-        gameinfoWindow.Append(developerTxt);
+        InfoWindow.Append(developerTxt);
     }
 
     //genre
@@ -721,7 +724,7 @@ int showGameInfo(char *ID)
         genreTitleTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
         genreTitleTxt->SetPosition(205, 12 + genreY);
         genreY += 20;
-        gameinfoWindow.Append(genreTitleTxt);
+        InfoWindow.Append(genreTitleTxt);
     }
 
     genreTxt = new GuiText *[GameInfo.GenreList.size()+1]; //to not alloc a 0 vector
@@ -731,7 +734,7 @@ int showGameInfo(char *ID)
         genreTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
         genreTxt[i]->SetPosition(215, 12 + genreY);
         genreY += 20;
-        gameinfoWindow.Append(genreTxt[i]);
+        InfoWindow.Append(genreTxt[i]);
     }
 
     //online
@@ -750,7 +753,7 @@ int showGameInfo(char *ID)
         wifiTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
         wifiTxt[i]->SetPosition(215, 200 + wifiY);
         wifiY -= 20;
-        gameinfoWindow.Append(wifiTxt[i]);
+        InfoWindow.Append(wifiTxt[i]);
     }
     if (GameInfo.WifiFeatureList.size() > 0)
     {
@@ -763,7 +766,7 @@ int showGameInfo(char *ID)
     wifiTxt[0] = new GuiText(linebuf2, 16, ( GXColor ) {0, 0, 0, 255});
     wifiTxt[0]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     wifiTxt[0]->SetPosition(205, 200 + wifiY);
-    gameinfoWindow.Append(wifiTxt[0]);
+    InfoWindow.Append(wifiTxt[0]);
 
     //synopsis
     int pagesize = 12;
@@ -776,31 +779,9 @@ int showGameInfo(char *ID)
         synopsisTxt->SetLinesToDraw(pagesize);
         synopsisTxt->Refresh();
 
-        dialogBoxImg11 = new GuiImage(&dialogBox1);
-        dialogBoxImg11->SetAlignment(0, 3);
-        dialogBoxImg11->SetPosition(-9, 0);
-
-        dialogBoxImg22 = new GuiImage(&dialogBox2);
-        dialogBoxImg22->SetAlignment(0, 3);
-        dialogBoxImg22->SetPosition(145, 0);
-
-        dialogBoxImg33 = new GuiImage(&dialogBox3);
-        dialogBoxImg33->SetAlignment(0, 3);
-        dialogBoxImg33->SetPosition(301, 0);
-
-        dialogBoxImg44 = new GuiImage(&dialogBox4);
-        dialogBoxImg44->SetAlignment(0, 3);
-        dialogBoxImg44->SetPosition(457, 0);
-
-        gameinfoWindow2.Append(dialogBoxImg11);
-        gameinfoWindow2.Append(dialogBoxImg22);
-        gameinfoWindow2.Append(dialogBoxImg33);
-        gameinfoWindow2.Append(dialogBoxImg44);
-
         txtWindow.Append(synopsisTxt);
         txtWindow.Append(&upBtn);
         txtWindow.Append(&dnBtn);
-        gameinfoWindow2.Append(&txtWindow);
     }
 
     wiitdb1Txt = new GuiText("http://wiitdb.com", 16, ( GXColor ) {0, 0, 0, 255});
@@ -808,6 +789,9 @@ int showGameInfo(char *ID)
     wiitdb1Txt->SetPosition(40, -15);
     gameinfoWindow.Append(wiitdb1Txt);
     if(coverImg) gameinfoWindow.Append(coverImg);
+
+    // Set info window first
+    gameinfoWindow.Append(&InfoWindow);
 
     HaltGui();
     //mainWindow->SetState(STATE_DISABLED);
@@ -828,32 +812,31 @@ int showGameInfo(char *ID)
         else if (reset == 1)
             Sys_Reboot();
 
+        else if(LeftBtn.GetState() == STATE_CLICKED)
+        {
+            choice = 3;
+            break;
+        }
+
+        else if(RightBtn.GetState() == STATE_CLICKED)
+        {
+            choice = 4;
+            break;
+        }
+
         else if ((backBtn.GetState() == STATE_CLICKED) || (backBtn.GetState() == STATE_HELD))
         {
             backBtn.ResetState();
             if (page == 1)
             {
                 choice = 1;
-                if (synopsisTxt) delete synopsisTxt;
-                synopsisTxt = NULL;
                 break;
             }
             else if (page == 2)
             {
                 HaltGui();
-                gameinfoWindow2.Remove(&nextBtn);
-                gameinfoWindow2.Remove(&backBtn);
-                gameinfoWindow2.Remove(&homeBtn);
-                gameinfoWindow2.Remove(&coverBtn);
-                gameinfoWindow2.Remove(coverImg);
-                gameinfoWindow2.SetVisible(false);
-                gameinfoWindow.SetVisible(true);
-                gameinfoWindow.Append(&backBtn);
-                gameinfoWindow.Append(&nextBtn);
-                gameinfoWindow.Append(&homeBtn);
-                gameinfoWindow.Append(&coverBtn);
-                gameinfoWindow.Append(coverImg);
-                mainWindow->Remove(&gameinfoWindow2);
+                gameinfoWindow.Remove(&txtWindow);
+                gameinfoWindow.Append(&InfoWindow);
                 ResumeGui();
                 page = 1;
             }
@@ -861,10 +844,10 @@ int showGameInfo(char *ID)
         else if(coverBtn.GetState() == STATE_CLICKED && boxCov)
         {
             boxCov->SetEffect(EFFECT_BOX_FLY_CENTRE, 100);
-            gameinfoWindow2.Remove(&nextBtn);
-            gameinfoWindow2.Remove(&homeBtn);
             gameinfoWindow.Remove(&nextBtn);
             gameinfoWindow.Remove(&homeBtn);
+            gameinfoWindow.Remove(&LeftBtn);
+            gameinfoWindow.Remove(&RightBtn);
             boxCov->SetZoomable(true);
 
             while(backBtn.GetState() != STATE_CLICKED && homeBtn.GetState() != STATE_CLICKED)
@@ -876,16 +859,10 @@ int showGameInfo(char *ID)
                     Sys_Reboot();
             }
 
-            if (page == 1)
-            {
-                gameinfoWindow.Append(&nextBtn);
-                gameinfoWindow.Append(&homeBtn);
-            }
-            else
-            {
-                gameinfoWindow2.Append(&nextBtn);
-                gameinfoWindow2.Append(&homeBtn);
-            }
+            gameinfoWindow.Append(&nextBtn);
+            gameinfoWindow.Append(&homeBtn);
+            gameinfoWindow.Append(&LeftBtn);
+            gameinfoWindow.Append(&RightBtn);
 
             boxCov->SetZoomable(false);
             boxCov->SetEffect(EFFECT_BOX_FLY_BACK, 100);
@@ -900,42 +877,16 @@ int showGameInfo(char *ID)
             if (page == 1)
             {
                 HaltGui();
-                gameinfoWindow.Remove(&nextBtn);
-                gameinfoWindow.Remove(&backBtn);
-                gameinfoWindow.Remove(&homeBtn);
-                gameinfoWindow.Remove(&coverBtn);
-                gameinfoWindow.Remove(wiitdb1Txt);
-                gameinfoWindow.Remove(coverImg);
-                gameinfoWindow.SetVisible(false);
-                gameinfoWindow2.SetVisible(true);
-                gameinfoWindow2.Append(&nextBtn);
-                gameinfoWindow2.Append(&backBtn);
-                gameinfoWindow2.Append(&homeBtn);
-                gameinfoWindow2.Append(&coverBtn);
-                gameinfoWindow2.Append(wiitdb1Txt);
-                gameinfoWindow2.Append(coverImg);
-                mainWindow->Append(&gameinfoWindow2);
+                gameinfoWindow.Remove(&InfoWindow);
+                gameinfoWindow.Append(&txtWindow);
                 ResumeGui();
                 page = 2;
             }
             else
             {
                 HaltGui();
-                gameinfoWindow2.Remove(&nextBtn);
-                gameinfoWindow2.Remove(&backBtn);
-                gameinfoWindow2.Remove(&homeBtn);
-                gameinfoWindow2.Remove(&coverBtn);
-                gameinfoWindow2.Remove(wiitdb1Txt);
-                gameinfoWindow2.Remove(coverImg);
-                gameinfoWindow2.SetVisible(false);
-                gameinfoWindow.SetVisible(true);
-                gameinfoWindow.Append(&backBtn);
-                gameinfoWindow.Append(&nextBtn);
-                gameinfoWindow.Append(&homeBtn);
-                gameinfoWindow.Append(&coverBtn);
-                gameinfoWindow.Append(wiitdb1Txt);
-                gameinfoWindow.Append(coverImg);
-                mainWindow->Remove(&gameinfoWindow2);
+                gameinfoWindow.Remove(&txtWindow);
+                gameinfoWindow.Append(&InfoWindow);
                 ResumeGui();
                 page = 1;
             }
@@ -958,22 +909,8 @@ int showGameInfo(char *ID)
         }
         else if (homeBtn.GetState() == STATE_CLICKED)
         {
-            if (page == 1)
-            {
-                choice = 2;
-                if (synopsisTxt) delete synopsisTxt;
-                synopsisTxt = NULL;
-                break;
-            }
-            else if (page == 2)
-            {
-                HaltGui();
-                gameinfoWindow2.SetVisible(false);
-                gameinfoWindow.SetVisible(true);
-                mainWindow->Remove(&gameinfoWindow2);
-                ResumeGui();
-                page = 1;
-            }
+            choice = 2;
+            break;
         }
     }
 
@@ -1055,6 +992,33 @@ int showGameInfo(char *ID)
     return choice;
 }
 
+int showGameInfo(int gameSelected)
+{
+    char gameID[7];
+    int choice = 5;
+
+    while(choice > 2)
+    {
+        struct discHdr * header = (mountMethod ? dvdheader : gameList[gameSelected]);
+        snprintf(gameID, sizeof(gameID), (char *) header->id);
+
+        choice = InternalShowGameInfo(gameID);
+
+        if(choice == 3)
+        {
+            --gameSelected;
+            if(gameSelected < 0)
+                gameSelected = 0;
+        }
+        else if(choice == 4)
+        {
+            gameSelected = (gameSelected + 1) % gameList.size();
+        }
+    }
+
+    return choice;
+}
+
 bool save_gamelist(int txt) // save gamelist
 {
     mainWindow->SetState(STATE_DISABLED);
@@ -1131,11 +1095,4 @@ bool save_gamelist(int txt) // save gamelist
     gameList.FilterList();
     mainWindow->SetState(STATE_DEFAULT);
     return true;
-}
-
-void MemInfoPrompt()
-{
-    char meminfotxt[200];
-    strlcpy(meminfotxt, MemInfo(), sizeof(meminfotxt));
-    WindowPrompt(0, meminfotxt, tr( "OK" ));
 }
