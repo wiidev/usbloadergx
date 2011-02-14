@@ -5,16 +5,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-12 10:25+0100\n"
+"POT-Creation-Date: 2011-02-14 19:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nikolai_ca\n"
 "Language-Team: Kir, alendit, nikolai_ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid " Wad Saved as:"
-msgstr " Wad сохранен как:"
 
 msgid " could not be downloaded."
 msgstr " не мог быть загружен"
@@ -392,9 +389,6 @@ msgstr "Установки по умолчанию"
 
 msgid "Delete"
 msgstr "Удалить"
-
-msgid "Delete ?"
-msgstr "Удалить ?"
 
 msgid "Delete Cheat GCT"
 msgstr "Удалить чит-код GCT"
@@ -806,9 +800,6 @@ msgstr "Июл"
 msgid "June"
 msgstr "Июн"
 
-msgid "Keep"
-msgstr "Сохранить"
-
 msgid "Keyboard"
 msgstr "Клавиатура"
 
@@ -962,9 +953,6 @@ msgstr ""
 
 msgid "Normal"
 msgstr "Обычный"
-
-msgid "Not a WAD file."
-msgstr ""
 
 msgid "Not a Wii Disc"
 msgstr "Это не диск Wii"
@@ -1339,9 +1327,6 @@ msgstr ""
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr ""
 
-msgid "Uninstall"
-msgstr "Деинсталлировать"
-
 msgid "Uninstall Game"
 msgstr "Деинсталлировать игру"
 
@@ -1519,6 +1504,18 @@ msgstr "из"
 
 msgid "seconds left"
 msgstr "секунд осталось"
+
+#~ msgid " Wad Saved as:"
+#~ msgstr " Wad сохранен как:"
+
+#~ msgid "Delete ?"
+#~ msgstr "Удалить ?"
+
+#~ msgid "Keep"
+#~ msgstr "Сохранить"
+
+#~ msgid "Uninstall"
+#~ msgstr "Деинсталлировать"
 
 #~ msgid "Author:"
 #~ msgstr "Автор:"

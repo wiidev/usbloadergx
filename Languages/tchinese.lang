@@ -5,16 +5,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-12 10:25+0100\n"
+"POT-Creation-Date: 2011-02-14 19:44+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid " Wad Saved as:"
-msgstr "WAD 儲存為:"
 
 msgid " could not be downloaded."
 msgstr "不能下載。"
@@ -392,9 +389,6 @@ msgstr "初始化設定"
 
 msgid "Delete"
 msgstr "刪除"
-
-msgid "Delete ?"
-msgstr "刪除?"
 
 msgid "Delete Cheat GCT"
 msgstr "刪除GCT金手指檔"
@@ -806,9 +800,6 @@ msgstr "七月"
 msgid "June"
 msgstr "六月"
 
-msgid "Keep"
-msgstr "保留"
-
 msgid "Keyboard"
 msgstr "鍵盤"
 
@@ -962,9 +953,6 @@ msgstr "沒有"
 
 msgid "Normal"
 msgstr "一般"
-
-msgid "Not a WAD file."
-msgstr "不是 WAD 檔案。"
 
 msgid "Not a Wii Disc"
 msgstr "不是 Wii 的光碟"
@@ -1339,9 +1327,6 @@ msgstr "USB 插槽"
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr "USB插槽變更僅Hermes cIOS支援。"
 
-msgid "Uninstall"
-msgstr "移除"
-
 msgid "Uninstall Game"
 msgstr "移除遊戲"
 
@@ -1519,6 +1504,21 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid " Wad Saved as:"
+#~ msgstr "WAD 儲存為:"
+
+#~ msgid "Delete ?"
+#~ msgstr "刪除?"
+
+#~ msgid "Keep"
+#~ msgstr "保留"
+
+#~ msgid "Not a WAD file."
+#~ msgstr "不是 WAD 檔案。"
+
+#~ msgid "Uninstall"
+#~ msgstr "移除"
 
 #~ msgid "Author:"
 #~ msgstr "作者"

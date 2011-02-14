@@ -25,7 +25,7 @@
 #define HOMEBREWBROWSER_HPP_
 
 #include "settings/menus/FlyingButtonsMenu.hpp"
-#include "HomebrewFiles.h"
+#include "FileOperations/DirList.h"
 
 #define DISPLAY_BUTTONS 4
 
@@ -43,7 +43,7 @@ class HomebrewBrowser : public FlyingButtonsMenu
         virtual void SetupMainButtons();
         virtual void AddMainButtons();
 
-        HomebrewFiles * HomebrewList;
+        DirList * HomebrewList;
         GuiImageData * IconImgData[DISPLAY_BUTTONS];
         GuiImage * IconImg[DISPLAY_BUTTONS];
         std::vector<GuiText *> MainButtonDesc;

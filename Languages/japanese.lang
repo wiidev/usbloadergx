@@ -5,16 +5,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-12 10:25+0100\n"
+"POT-Creation-Date: 2011-02-14 19:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ichiroling\n"
 "Language-Team: hosigumayuugi, papa, ichiroling\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid " Wad Saved as:"
-msgstr "WADを保存しました:"
 
 msgid " could not be downloaded."
 msgstr "ﾀﾞｳﾝﾛｰﾄﾞできませんでした"
@@ -392,9 +389,6 @@ msgstr "設定を初期化"
 
 msgid "Delete"
 msgstr "削除しますか"
-
-msgid "Delete ?"
-msgstr "削除しますか？"
 
 msgid "Delete Cheat GCT"
 msgstr "GCTファイルを削除"
@@ -806,9 +800,6 @@ msgstr "7月"
 msgid "June"
 msgstr "6月"
 
-msgid "Keep"
-msgstr "保存"
-
 msgid "Keyboard"
 msgstr "キーボードのタイプ"
 
@@ -962,9 +953,6 @@ msgstr "なし"
 
 msgid "Normal"
 msgstr "ワイド"
-
-msgid "Not a WAD file."
-msgstr "WADﾌｧｲﾙではありません"
 
 msgid "Not a Wii Disc"
 msgstr "Wiiﾃﾞｨｽｸではありません"
@@ -1339,9 +1327,6 @@ msgstr ""
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr ""
 
-msgid "Uninstall"
-msgstr "ｱﾝｲﾝｽﾄｰﾙ"
-
 msgid "Uninstall Game"
 msgstr "ゲームをｱﾝｲﾝｽﾄｰﾙ"
 
@@ -1519,6 +1504,21 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid " Wad Saved as:"
+#~ msgstr "WADを保存しました:"
+
+#~ msgid "Delete ?"
+#~ msgstr "削除しますか？"
+
+#~ msgid "Keep"
+#~ msgstr "保存"
+
+#~ msgid "Not a WAD file."
+#~ msgstr "WADﾌｧｲﾙではありません"
+
+#~ msgid "Uninstall"
+#~ msgstr "ｱﾝｲﾝｽﾄｰﾙ"
 
 #~ msgid "Author:"
 #~ msgstr "制作者:"

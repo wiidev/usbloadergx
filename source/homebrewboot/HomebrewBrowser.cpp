@@ -42,7 +42,7 @@ extern int connection;
 HomebrewBrowser::HomebrewBrowser()
     : FlyingButtonsMenu(tr( "Homebrew Launcher" ))
 {
-    HomebrewList = new HomebrewFiles(Settings.homebrewapps_path);
+    HomebrewList = new DirList(Settings.homebrewapps_path, ".dol,.elf", DirList::Files | DirList::Dirs | DirList::CheckSubfolders);
 
     if (IsNetworkInit())
         ResumeNetworkWait();
@@ -95,8 +95,6 @@ HomebrewBrowser::HomebrewBrowser()
         MainButtonDescOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
         MainButtonDescOver[i]->SetPosition(148, 15);
     }
-
-    SetupMainButtons();
 }
 
 HomebrewBrowser::~HomebrewBrowser()
@@ -144,13 +142,17 @@ void HomebrewBrowser::AddMainButtons()
     for(u32 i = 0; i < MainButton.size(); ++i)
         MainButton[i]->SetIcon(NULL);
 
-    char iconpath[200];
     int FirstItem = currentPage*DISPLAY_BUTTONS;
 
     for(int i = FirstItem, n = 0; i < (int) MainButton.size() && i < FirstItem+DISPLAY_BUTTONS; ++i, ++n)
     {
-        snprintf(iconpath, sizeof(iconpath), "%sicon.png", HomebrewList->GetFilepath(i));
-        IconImgData[n] = new GuiImageData(iconpath);
+        std::string iconpath = HomebrewList->GetFilepath(i);
+        size_t pos = iconpath.rfind('/');
+        if(pos != std::string::npos && pos < iconpath.size()-1)
+            iconpath.erase(pos+1);
+        iconpath += "icon.png";
+
+        IconImgData[n] = new GuiImageData(iconpath.c_str());
         IconImg[n] = new GuiImage(IconImgData[n]);
         IconImg[n]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
         IconImg[n]->SetPosition(12, 0);
@@ -164,14 +166,17 @@ void HomebrewBrowser::AddMainButtons()
 void HomebrewBrowser::SetupMainButtons()
 {
     HomebrewXML MetaXML;
-    char metapath[200];
 
     for(int i = 0; i < HomebrewList->GetFilecount(); ++i)
     {
         const char * HomebrewName = NULL;
-        snprintf(metapath, sizeof(metapath), "%smeta.xml", HomebrewList->GetFilepath(i));
+        std::string metapath = HomebrewList->GetFilepath(i);
+        size_t pos = metapath.rfind('/');
+        if(pos != std::string::npos && pos < metapath.size()-1)
+            metapath.erase(pos+1);
+        metapath += "meta.xml";
 
-        if (MetaXML.LoadHomebrewXMLData(metapath) > 0)
+        if (MetaXML.LoadHomebrewXMLData(metapath.c_str()) > 0)
         {
             HomebrewName = MetaXML.GetName();
             MainButtonDesc[i]->SetText(MetaXML.GetShortDescription());
@@ -182,8 +187,10 @@ void HomebrewBrowser::SetupMainButtons()
             const char * shortpath = strrchr(HomebrewList->GetFilename(i), '/');
             if(shortpath)
             {
-                snprintf(metapath, sizeof(metapath), "%s/%s", shortpath, HomebrewList->GetFilename(i));
-                HomebrewName = metapath;
+                metapath = shortpath;
+                metapath = '/';
+                metapath = HomebrewList->GetFilename(i);
+                HomebrewName = metapath.c_str();
             }
             else
                 HomebrewName = HomebrewList->GetFilename(i);
@@ -240,9 +247,12 @@ int HomebrewBrowser::MainLoop()
 void HomebrewBrowser::MainButtonClicked(int button)
 {
     HomebrewXML MetaXML;
-    char metapath[200];
-    snprintf(metapath, sizeof(metapath), "%smeta.xml", HomebrewList->GetFilepath(button));
-    MetaXML.LoadHomebrewXMLData(metapath);
+    std::string metapath = HomebrewList->GetFilepath(button);
+    size_t pos = metapath.rfind('/');
+    if(pos != std::string::npos && pos < metapath.size()-1)
+        metapath.erase(pos+1);
+    metapath += "meta.xml";
+    MetaXML.LoadHomebrewXMLData(metapath.c_str());
 
     u64 filesize = HomebrewList->GetFilesize(button);
 
@@ -253,9 +263,7 @@ void HomebrewBrowser::MainButtonClicked(int button)
 
     if (choice == 1)
     {
-        char homebrewpath[200];
-        snprintf(homebrewpath, sizeof(homebrewpath), "%s%s", HomebrewList->GetFilepath(button), HomebrewList->GetFilename(button));
-        BootHomebrew(homebrewpath);
+        BootHomebrew(HomebrewList->GetFilepath(button));
     }
 }
 

@@ -21,26 +21,13 @@
 #include "menu.h"
 #include "audio.h"
 #include "wad/wad.h"
-#include "xml/xml.h"
+#include "xml/WiiTDB.hpp"
 #include "wad/nandtitle.h"
 #include "../usbloader/utils.h"
 #include "../gecko.h"
 
-u32 titleCnt;
-extern u32 infilesize;
-extern u32 uncfilesize;
-extern char wiiloadVersion[2];
-
-/*** Extern functions ***/
-extern void ResumeGui();
-extern void HaltGui();
-
-/*** Extern variables ***/
-extern GuiWindow * mainWindow;
 extern u8 shutdown;
 extern u8 reset;
-extern u32 infilesize;
-extern wchar_t *gameFilter;
 
 /********************************************************************************
  * TitleBrowser- opens a browser with a list of installed Titles
@@ -59,7 +46,7 @@ bool TitleSelector(char output[])
     // Get count of titles of the good titles
     num_titles = NandTitles.SetType(0x10001);
     u32 n = num_titles;
-    //gprintf("num_titles: %u\n", num_titles );
+
     for (u32 i = 0; i < n; i++)
     {
         u64 tid = NandTitles.Next();
@@ -74,7 +61,6 @@ bool TitleSelector(char output[])
             num_titles--;
         }
     }
-    //gprintf("num_titles: %u\n", num_titles );
 
     //make a list of just the tids we are adding to the titlebrowser
     titleList = (u64*) memalign(32, num_titles * sizeof(u64));
@@ -85,6 +71,12 @@ bool TitleSelector(char output[])
     }
     OptionList options4;
     //write the titles on the option browser
+
+    std::string Filepath = Settings.titlestxt_path;
+    Filepath += "wiitdb.xml";
+
+    WiiTDB *XML_DB = new WiiTDB(Filepath.c_str());
+    XML_DB->SetLanguageCode(Settings.db_language);
 
     s32 i = 0;
     NandTitles.SetType(0x10001);
@@ -98,23 +90,28 @@ bool TitleSelector(char output[])
         }
 
         if (!NandTitles.Exists(tid))
-        {
             continue;
-        }
 
         char id[5];
         NandTitles.AsciiTID(tid, (char*) &id);
 
-        const char* name = NandTitles.NameOf(tid);
+        const char* name = NULL;
+        std::string TitleName;
+
+        if(XML_DB->GetTitle(id, TitleName))
+            name = TitleName.c_str();
+        else
+            name = NandTitles.NameOf(tid);
         //gprintf("%016llx: %s: %s\n%p\t%p\n", tid, id, name, &id, name );
 
         options4.SetName(i, "%s", id);
-        options4.SetValue(i, "%s", name ? NandTitles.NameOf(tid) : tr( "Unknown" ));
+        options4.SetValue(i, "%s", name ? name : tr( "Unknown" ));
         titleList[i] = tid;
         i++;
     }
-    // gprintf("i: %u\n", i );
-    //hexdump( titleList, num_titles * sizeof( u64 ) );
+
+    delete XML_DB;
+    XML_DB = NULL;
 
     options4.SetName(i, " ");
     options4.SetValue(i, "%s", tr( "Clear" ));
@@ -262,6 +259,12 @@ int TitleBrowser()
     OptionList options3;
     //write the titles on the option browser
 
+    std::string Filepath = Settings.titlestxt_path;
+    Filepath += "wiitdb.xml";
+
+    WiiTDB *XML_DB = new WiiTDB(Filepath.c_str());
+    XML_DB->SetLanguageCode(Settings.db_language);
+
     u32 i = 0;
     NandTitles.SetType(0x10001);
     //first add the good stuff
@@ -283,10 +286,16 @@ int TitleBrowser()
         char id[5];
         NandTitles.AsciiTID(tid, (char*) &id);
 
-        const char* name = NandTitles.NameOf(tid);
+        const char* name = NULL;
+        std::string TitleName;
+
+        if(XML_DB->GetTitle(id, TitleName))
+            name = TitleName.c_str();
+        else
+            name = NandTitles.NameOf(tid);
 
         options3.SetName(i, "%s", id);
-        options3.SetValue(i, "%s", name ? NandTitles.NameOf(tid) : tr( "Unknown" ));
+        options3.SetValue(i, "%s", name ? name : tr( "Unknown" ));
         titleList[i] = tid;
         i++;
     }
@@ -308,15 +317,25 @@ int TitleBrowser()
 
         char id[5];
         NandTitles.AsciiTID(tid, (char*) &id);
-        const char* name = NandTitles.NameOf(tid);
+
+        const char* name = NULL;
+        std::string TitleName;
+
+        if(XML_DB->GetTitle(id, TitleName))
+            name = TitleName.c_str();
+        else
+            name = NandTitles.NameOf(tid);
 
         options3.SetName(i, "%s", id);
-        options3.SetValue(i, "%s", name ? NandTitles.NameOf(tid) : tr( "Unknown" ));
+        options3.SetValue(i, "%s", name ? name : tr( "Unknown" ));
         titleList[i] = tid;
         i++;
     }
 
     ISFS_Deinitialize();
+
+    delete XML_DB;
+    XML_DB = NULL;
 
     if (i == num_titles + num_sys_titles)
     {
@@ -428,10 +447,7 @@ int TitleBrowser()
                 //prompt to boot selected title
                 if (WindowPrompt(tr( "Boot?" ), text, tr( "OK" ), tr( "Cancel" )))
                 { //if they say yes
-                    CloseXMLDatabase();
-                    ExitGUIThreads();
-                    ShutdownAudio();
-                    StopGX();
+                    ExitApp();
                     WII_Initialize();
                     WII_LaunchTitle(titleList[ret]);
                     //this really shouldn't be needed because the title will be booted
@@ -448,191 +464,11 @@ int TitleBrowser()
             }
             else if (ret == total)
             { //if they clicked to go to the wii settings
-                CloseXMLDatabase();
-                ExitGUIThreads();
-                ShutdownAudio();
-                StopGX();
+                ExitApp();
                 WII_Initialize();
                 WII_ReturnToSettings();
             }
         }
-#if 0
-        if ( infilesize > 0 )
-        {
-
-            char filesizetxt[50];
-            char temp[50];
-            char filepath[100];
-            //              u32 read = 0;
-
-            //make sure there is a folder for this to be saved in
-            struct stat st;
-            snprintf( filepath, sizeof( filepath ), "%s/wad/", bootDevice );
-            if ( stat( filepath, &st ) != 0 )
-            {
-                if ( subfoldercreate( filepath ) != 1 )
-                {
-                    WindowPrompt( tr( "Error !" ), tr( "Can't create directory" ), tr( "OK" ) );
-                }
-            }
-            snprintf( filepath, sizeof( filepath ), "%s/wad/tmp.tmp", bootDevice );
-
-            if ( infilesize < MB_SIZE )
-            snprintf( filesizetxt, sizeof( filesizetxt ), tr( "Incoming file %0.2fKB" ), infilesize / KB_SIZE );
-            else
-            snprintf( filesizetxt, sizeof( filesizetxt ), tr( "Incoming file %0.2fMB" ), infilesize / MB_SIZE );
-
-            snprintf( temp, sizeof( temp ), tr( "Load file from: %s ?" ), GetIncommingIP() );
-
-            int choice = WindowPrompt( filesizetxt, temp, tr( "OK" ), tr( "Cancel" ) );
-            gprintf( "\nchoice:%d", choice );
-
-            if ( choice == 1 )
-            {
-
-                u32 read = 0;
-                u8 *temp = NULL;
-                int len = NETWORKBLOCKSIZE;
-                temp = ( u8 * ) malloc( infilesize );
-
-                bool error = false;
-                u8 *ptr = temp;
-                gprintf( "\nrecieving shit" );
-                while ( read < infilesize )
-                {
-
-                    ShowProgress( tr( "Receiving file from:" ), GetIncommingIP(), NULL, read, infilesize, true );
-
-                    if ( infilesize - read < ( u32 ) len )
-                    len = infilesize - read;
-                    else
-                    len = NETWORKBLOCKSIZE;
-
-                    int result = network_read( ptr, len );
-
-                    if ( result < 0 )
-                    {
-                        WindowPrompt( tr( "Error while transfering data." ), 0, tr( "OK" ) );
-                        error = true;
-                        break;
-                    }
-                    if ( !result )
-                    {
-                        gprintf( "\n!RESULT" );
-                        break;
-                    }
-                    ptr += result;
-                    read += result;
-                }
-                ProgressStop();
-
-                char filename[101];
-                char tmptxt[200];
-
-                //bool installWad=0;
-                if ( !error )
-                {
-                    gprintf( "\nno error yet" );
-
-                    network_read( ( u8* ) &filename, 100 );
-                    gprintf( "\nfilename: %s", filename );
-
-                    // Do we need to unzip this thing?
-                    if ( wiiloadVersion[0] > 0 || wiiloadVersion[1] > 4 )
-                    {
-                        gprintf( "\nusing newer wiiload version" );
-
-                        if ( uncfilesize != 0 ) // if uncfilesize == 0, it's not compressed
-
-                        {
-                            gprintf( "\ntrying to uncompress" );
-                            // It's compressed, uncompress
-                            u8 *unc = ( u8 * ) malloc( uncfilesize );
-                            uLongf f = uncfilesize;
-                            error = uncompress( unc, &f, temp, infilesize ) != Z_OK;
-                            uncfilesize = f;
-
-                            free( temp );
-                            temp = unc;
-                        }
-                    }
-
-                    if ( !error )
-                    {
-                        sprintf( tmptxt, "%s", filename );
-                        //if we got a wad
-                        if ( strcasestr( tmptxt, ".wad" ) )
-                        {
-                            FILE *file = fopen( filepath, "wb" );
-                            fwrite( temp, 1, ( uncfilesize > 0 ? uncfilesize : infilesize ), file );
-                            fclose( file );
-
-                            sprintf( tmptxt, "%s/wad/%s", bootDevice, filename );
-                            if ( checkfile( tmptxt ) )remove( tmptxt );
-                            rename( filepath, tmptxt );
-
-                            //check and make sure the wad we just saved is the correct size
-                            u32 lSize;
-                            file = fopen( tmptxt, "rb" );
-
-                            // obtain file size:
-                            fseek ( file , 0 , SEEK_END );
-                            lSize = ftell ( file );
-
-                            rewind ( file );
-                            if ( lSize == ( uncfilesize > 0 ? uncfilesize : infilesize ) )
-                            {
-                                gprintf( "\nsize is ok" );
-                                int pick = WindowPrompt( tr( " Wad Saved as:" ), tmptxt, tr( "Install" ), tr( "Uninstall" ), tr( "Cancel" ) );
-                                //install or uninstall it
-                                if ( pick == 1 )
-                                {
-                                    HaltGui();
-                                    w.Remove( &titleTxt );
-                                    w.Remove( &cancelBtn );
-                                    w.Remove( &wifiBtn );
-                                    w.Remove( &optionBrowser3 );
-                                    ResumeGui();
-
-                                    Wad_Install( file );
-
-                                    HaltGui();
-                                    w.Append( &titleTxt );
-                                    w.Append( &cancelBtn );
-                                    w.Append( &wifiBtn );
-                                    w.Append( &optionBrowser3 );
-                                    ResumeGui();
-
-                                }
-                                if ( pick == 2 )Wad_Uninstall( file );
-                            }
-                            else gprintf( "\nBad size" );
-                            //close that beast, we're done with it
-                            fclose ( file );
-
-                            //do we want to keep the file in the wad folder
-                            if ( WindowPrompt( tr( "Delete ?" ), tmptxt, tr( "Delete" ), tr( "Keep" ) ) != 0 )
-                            remove( tmptxt );
-                        }
-                        else
-                        {
-                            WindowPrompt( tr( "ERROR:" ), tr( "Not a WAD file." ), tr( "OK" ) );
-                        }
-                    }
-                }
-
-                if ( error || read != infilesize )
-                {
-                    WindowPrompt( tr( "Error:" ), tr( "No data could be read." ), tr( "OK" ) );
-
-                }
-                if ( temp )free( temp );
-            }
-
-            CloseConnection();
-            ResumeNetworkWait();
-        }
-#endif
         if (cancelBtn.GetState() == STATE_CLICKED)
         {
             //break the loop and end the function

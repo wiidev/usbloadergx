@@ -5,16 +5,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-12 10:25+0100\n"
+"POT-Creation-Date: 2011-02-14 19:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid " Wad Saved as:"
-msgstr " Wad zapisano jako:"
 
 msgid " could not be downloaded."
 msgstr " nie udalo sie pobrac"
@@ -392,9 +389,6 @@ msgstr "Domyslne ustawienia"
 
 msgid "Delete"
 msgstr "Usun"
-
-msgid "Delete ?"
-msgstr "Usunac ?"
 
 msgid "Delete Cheat GCT"
 msgstr "Usun plik z kodami GCT"
@@ -806,9 +800,6 @@ msgstr "lipiec"
 msgid "June"
 msgstr "czerwiec"
 
-msgid "Keep"
-msgstr "Trzymaj"
-
 msgid "Keyboard"
 msgstr "Klawiatura"
 
@@ -962,9 +953,6 @@ msgstr ""
 
 msgid "Normal"
 msgstr "Standardowe"
-
-msgid "Not a WAD file."
-msgstr ""
 
 msgid "Not a Wii Disc"
 msgstr "To nie jest plyta Wii"
@@ -1339,9 +1327,6 @@ msgstr ""
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr ""
 
-msgid "Uninstall"
-msgstr "Odinstaluj"
-
 msgid "Uninstall Game"
 msgstr "Odinstaluj gre"
 
@@ -1519,6 +1504,18 @@ msgstr "z"
 
 msgid "seconds left"
 msgstr "sekund pozostalo"
+
+#~ msgid " Wad Saved as:"
+#~ msgstr " Wad zapisano jako:"
+
+#~ msgid "Delete ?"
+#~ msgstr "Usunac ?"
+
+#~ msgid "Keep"
+#~ msgstr "Trzymaj"
+
+#~ msgid "Uninstall"
+#~ msgstr "Odinstaluj"
 
 #~ msgid "Author:"
 #~ msgstr "Autor: "

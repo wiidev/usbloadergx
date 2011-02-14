@@ -1,20 +1,17 @@
 # USB Loader GX
-# german language source file - r1068
+# german language source file - r1071
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-12 10:25+0100\n"
+"POT-Creation-Date: 2011-02-14 19:47+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid " Wad Saved as:"
-msgstr " WAD gespeichert als:"
 
 msgid " could not be downloaded."
 msgstr " konnte nicht heruntergeladen werden."
@@ -250,7 +247,7 @@ msgid "Both Ports"
 msgstr "Beide Ports"
 
 msgid "Cache Titles"
-msgstr ""
+msgstr "Titel cachen"
 
 msgid "Can't be formatted"
 msgstr "Kann nicht formatiert werden."
@@ -393,9 +390,6 @@ msgstr "Einstellungen zurücksetzen"
 msgid "Delete"
 msgstr "Löschen"
 
-msgid "Delete ?"
-msgstr "Wirklich löschen?"
-
 msgid "Delete Cheat GCT"
 msgstr "Lösche GCT Cheatdatei"
 
@@ -412,7 +406,7 @@ msgid "Design:"
 msgstr "Design:"
 
 msgid "Details"
-msgstr ""
+msgstr "Details"
 
 msgid "Developed by"
 msgstr "Entwickelt von"
@@ -806,9 +800,6 @@ msgstr "Juli"
 msgid "June"
 msgstr "Juni"
 
-msgid "Keep"
-msgstr "Behalten"
-
 msgid "Keyboard"
 msgstr "Tastatur"
 
@@ -962,9 +953,6 @@ msgstr "Keine"
 
 msgid "Normal"
 msgstr "Normal (4:3)"
-
-msgid "Not a WAD file."
-msgstr "Das ist keine WAD Datei."
 
 msgid "Not a Wii Disc"
 msgstr "Keine Wii Disk."
@@ -1339,9 +1327,6 @@ msgstr "USB Port"
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr "USB-Portwechsel wird nur vom Hermes cIOS unterstützt."
 
-msgid "Uninstall"
-msgstr "Deinstallieren"
-
 msgid "Uninstall Game"
 msgstr "Spiel deinstallieren"
 
@@ -1519,6 +1504,21 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid " Wad Saved as:"
+#~ msgstr " WAD gespeichert als:"
+
+#~ msgid "Delete ?"
+#~ msgstr "Wirklich löschen?"
+
+#~ msgid "Keep"
+#~ msgstr "Behalten"
+
+#~ msgid "Not a WAD file."
+#~ msgstr "Das ist keine WAD Datei."
+
+#~ msgid "Uninstall"
+#~ msgstr "Deinstallieren"
 
 #~ msgid "Author:"
 #~ msgstr "Autor:"

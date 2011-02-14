@@ -5,16 +5,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-12 10:25+0100\n"
+"POT-Creation-Date: 2011-02-14 19:44+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid " Wad Saved as:"
-msgstr "Wad elmentve mint:"
 
 msgid " could not be downloaded."
 msgstr "nem letölthetõ."
@@ -392,9 +389,6 @@ msgstr "Alapértelmezett beállítások"
 
 msgid "Delete"
 msgstr "Törlés"
-
-msgid "Delete ?"
-msgstr "Törlés?"
 
 msgid "Delete Cheat GCT"
 msgstr "Cheat GCT törlés"
@@ -806,9 +800,6 @@ msgstr "Júl"
 msgid "June"
 msgstr "Jún"
 
-msgid "Keep"
-msgstr "Megtartás"
-
 msgid "Keyboard"
 msgstr "Billenyûzet"
 
@@ -962,9 +953,6 @@ msgstr ""
 
 msgid "Normal"
 msgstr "Normális"
-
-msgid "Not a WAD file."
-msgstr ""
 
 msgid "Not a Wii Disc"
 msgstr "Nem Wii lemez"
@@ -1339,9 +1327,6 @@ msgstr ""
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr ""
 
-msgid "Uninstall"
-msgstr "Törlés"
-
 msgid "Uninstall Game"
 msgstr "Játék törlése"
 
@@ -1519,6 +1504,18 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
+
+#~ msgid " Wad Saved as:"
+#~ msgstr "Wad elmentve mint:"
+
+#~ msgid "Delete ?"
+#~ msgstr "Törlés?"
+
+#~ msgid "Keep"
+#~ msgstr "Megtartás"
+
+#~ msgid "Uninstall"
+#~ msgstr "Törlés"
 
 #~ msgid "Author:"
 #~ msgstr "Készítõ:"

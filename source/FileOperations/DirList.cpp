@@ -32,6 +32,8 @@
 #include <sys/stat.h>
 #include <sys/dirent.h>
 
+#define MAXPATHLEN  1024
+
 #include "utils/StringTools.h"
 #include "DirList.h"
 
@@ -67,7 +69,7 @@ bool DirList::LoadPath(const char * folder, const char *filter, u32 flags)
     if (dir == NULL)
         return false;
 
-    char * filename = new (std::nothrow) char[1024];
+    char * filename = new (std::nothrow) char[MAXPATHLEN];
     if(!filename)
     {
         closedir(dir);
@@ -76,12 +78,12 @@ bool DirList::LoadPath(const char * folder, const char *filter, u32 flags)
 
     while ((dirent = readdir(dir)) != 0)
     {
-        snprintf(filename, 1024, "%s/%s", folderpath.c_str(), dirent->d_name);
+        snprintf(filename, MAXPATHLEN, "%s/%s", folderpath.c_str(), dirent->d_name);
 
         if(stat(filename, &st) != 0)
             continue;
 
-        snprintf(filename, 1024, dirent->d_name);
+        snprintf(filename, MAXPATHLEN, dirent->d_name);
 
         if(st.st_mode & S_IFDIR)
         {

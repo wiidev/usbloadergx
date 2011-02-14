@@ -5,16 +5,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-12 10:25+0100\n"
+"POT-Creation-Date: 2011-02-14 19:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid " Wad Saved as:"
-msgstr " บันทึก Wad เป็น:"
 
 msgid " could not be downloaded."
 msgstr " ไม่สามารถดาวน์โหลดได้"
@@ -392,9 +389,6 @@ msgstr "ค่าแรกกำหนด"
 
 msgid "Delete"
 msgstr "ลบ"
-
-msgid "Delete ?"
-msgstr "ลบ ?"
 
 msgid "Delete Cheat GCT"
 msgstr "ลบไฟล์โกงเกมส์"
@@ -806,9 +800,6 @@ msgstr "กค."
 msgid "June"
 msgstr "มิย."
 
-msgid "Keep"
-msgstr "เก็บ"
-
 msgid "Keyboard"
 msgstr "แป้นพิมพ์"
 
@@ -962,9 +953,6 @@ msgstr ""
 
 msgid "Normal"
 msgstr "ปกติ"
-
-msgid "Not a WAD file."
-msgstr ""
 
 msgid "Not a Wii Disc"
 msgstr "ไม่ใช่แผ่นเกมส์ Wii"
@@ -1339,9 +1327,6 @@ msgstr ""
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr ""
 
-msgid "Uninstall"
-msgstr "ถอนการติดตั้ง"
-
 msgid "Uninstall Game"
 msgstr "ถอนการติดตั้ง"
 
@@ -1519,6 +1504,18 @@ msgstr "จาก"
 
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
+
+#~ msgid " Wad Saved as:"
+#~ msgstr " บันทึก Wad เป็น:"
+
+#~ msgid "Delete ?"
+#~ msgstr "ลบ ?"
+
+#~ msgid "Keep"
+#~ msgstr "เก็บ"
+
+#~ msgid "Uninstall"
+#~ msgstr "ถอนการติดตั้ง"
 
 #~ msgid "Author:"
 #~ msgstr "ผู้แต่ง:"

@@ -5,16 +5,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-12 10:25+0100\n"
+"POT-Creation-Date: 2011-02-14 19:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid " Wad Saved as:"
-msgstr " WAD uložen jako:"
 
 msgid " could not be downloaded."
 msgstr " nelze stáhnout."
@@ -392,9 +389,6 @@ msgstr "Puvodní nastavení"
 
 msgid "Delete"
 msgstr "Smazat"
-
-msgid "Delete ?"
-msgstr "Smazat?"
 
 msgid "Delete Cheat GCT"
 msgstr "Smazat Cheat GCT"
@@ -806,9 +800,6 @@ msgstr "Cervenec"
 msgid "June"
 msgstr "Cerven"
 
-msgid "Keep"
-msgstr "Držet"
-
 msgid "Keyboard"
 msgstr "Klávesnice"
 
@@ -962,9 +953,6 @@ msgstr "Žádný"
 
 msgid "Normal"
 msgstr "Normální"
-
-msgid "Not a WAD file."
-msgstr "Nejedná se o WAD soubor."
 
 msgid "Not a Wii Disc"
 msgstr "Toto není Wii disk"
@@ -1339,9 +1327,6 @@ msgstr ""
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr ""
 
-msgid "Uninstall"
-msgstr "Odinstalace"
-
 msgid "Uninstall Game"
 msgstr "Odinstalace hry"
 
@@ -1519,6 +1504,21 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid " Wad Saved as:"
+#~ msgstr " WAD uložen jako:"
+
+#~ msgid "Delete ?"
+#~ msgstr "Smazat?"
+
+#~ msgid "Keep"
+#~ msgstr "Držet"
+
+#~ msgid "Not a WAD file."
+#~ msgstr "Nejedná se o WAD soubor."
+
+#~ msgid "Uninstall"
+#~ msgstr "Odinstalace"
 
 #~ msgid "Author:"
 #~ msgstr "Autor:"

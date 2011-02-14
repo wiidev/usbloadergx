@@ -1,20 +1,17 @@
 # USB Loader GX language source file.
-# danish.lang - r1063
+# danish.lang - r1070
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-12 10:25+0100\n"
+"POT-Creation-Date: 2011-02-14 19:47+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid " Wad Saved as:"
-msgstr " WAD gemt som:"
 
 msgid " could not be downloaded."
 msgstr " kunne ikke downloades."
@@ -250,7 +247,7 @@ msgid "Both Ports"
 msgstr "Begge porte"
 
 msgid "Cache Titles"
-msgstr ""
+msgstr "Cache titler"
 
 msgid "Can't be formatted"
 msgstr "Kan ikke formateres"
@@ -393,9 +390,6 @@ msgstr "Standardindstillinger"
 msgid "Delete"
 msgstr "Slet"
 
-msgid "Delete ?"
-msgstr "Slet?"
-
 msgid "Delete Cheat GCT"
 msgstr "Slet cheat GCT"
 
@@ -412,7 +406,7 @@ msgid "Design:"
 msgstr ""
 
 msgid "Details"
-msgstr ""
+msgstr "Detaljer"
 
 msgid "Developed by"
 msgstr "Udviklet af"
@@ -806,9 +800,6 @@ msgstr "Juli"
 msgid "June"
 msgstr "Juni"
 
-msgid "Keep"
-msgstr "Behold"
-
 msgid "Keyboard"
 msgstr "Tastatur"
 
@@ -962,9 +953,6 @@ msgstr "Ingen"
 
 msgid "Normal"
 msgstr "Normal"
-
-msgid "Not a WAD file."
-msgstr "Ikke en WAD-fil."
 
 msgid "Not a Wii Disc"
 msgstr "Ikke en Wii-DVD"
@@ -1337,10 +1325,7 @@ msgid "USB Port"
 msgstr ""
 
 msgid "USB Port changing is only supported on Hermes cIOS."
-msgstr "Skift af USB port er kun muligt med Hermess cIOS."
-
-msgid "Uninstall"
-msgstr "Afinstallér"
+msgstr "Skift af USB port er kun muligt med Hermes cIOS."
 
 msgid "Uninstall Game"
 msgstr "Afinstallér spil"
@@ -1519,6 +1504,21 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid " Wad Saved as:"
+#~ msgstr " WAD gemt som:"
+
+#~ msgid "Delete ?"
+#~ msgstr "Slet?"
+
+#~ msgid "Keep"
+#~ msgstr "Behold"
+
+#~ msgid "Not a WAD file."
+#~ msgstr "Ikke en WAD-fil."
+
+#~ msgid "Uninstall"
+#~ msgstr "Afinstallér"
 
 #~ msgid "Author:"
 #~ msgstr "Forfatter:"

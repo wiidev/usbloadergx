@@ -5,16 +5,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-12 10:25+0100\n"
+"POT-Creation-Date: 2011-02-14 19:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid " Wad Saved as:"
-msgstr " Kaydedilen Wad:"
 
 msgid " could not be downloaded."
 msgstr " indirilemedi."
@@ -392,9 +389,6 @@ msgstr "Varsayılan Ayarlar"
 
 msgid "Delete"
 msgstr "Sil"
-
-msgid "Delete ?"
-msgstr "Silinsin mi?"
 
 msgid "Delete Cheat GCT"
 msgstr "GCT Hile sil"
@@ -806,9 +800,6 @@ msgstr "Tem"
 msgid "June"
 msgstr "Haz"
 
-msgid "Keep"
-msgstr "Sakla"
-
 msgid "Keyboard"
 msgstr "Klavye"
 
@@ -961,9 +952,6 @@ msgid "None"
 msgstr ""
 
 msgid "Normal"
-msgstr ""
-
-msgid "Not a WAD file."
 msgstr ""
 
 msgid "Not a Wii Disc"
@@ -1339,9 +1327,6 @@ msgstr ""
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr ""
 
-msgid "Uninstall"
-msgstr "Kaldır"
-
 msgid "Uninstall Game"
 msgstr "Oyun Kaldır"
 
@@ -1519,6 +1504,18 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "saniye kaldı"
+
+#~ msgid " Wad Saved as:"
+#~ msgstr " Kaydedilen Wad:"
+
+#~ msgid "Delete ?"
+#~ msgstr "Silinsin mi?"
+
+#~ msgid "Keep"
+#~ msgstr "Sakla"
+
+#~ msgid "Uninstall"
+#~ msgstr "Kaldır"
 
 #~ msgid "Author:"
 #~ msgstr "Yazar:"
