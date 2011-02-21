@@ -12,9 +12,7 @@
 #include <ogcsys.h>
 
 void InitVideo();
-void InitVideodebug();
 void StopGX();
-void ResetVideo_Menu();
 void Menu_Render();
 void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, u8 data[], f32 degrees, f32 scaleX, f32 scaleY,
         u8 alphaF, int XX1, int YY1, int XX2, int YY2, int XX3, int YY3, int XX4, int YY4);

@@ -106,15 +106,17 @@ static void * UpdateGUI(void *arg)
         }
 
         mainWindow->Draw();
-        if (Settings.tooltips == ON && Theme::ShowTooltips && mainWindow->GetState() != STATE_DISABLED) mainWindow->DrawTooltip();
+        if (Settings.tooltips && Theme::ShowTooltips && mainWindow->GetState() != STATE_DISABLED) mainWindow->DrawTooltip();
 
         for (i = 3; i >= 0; i--)
         {
             if (userInput[i].wpad.ir.valid)
             {
-                Menu_DrawImg(userInput[i].wpad.ir.x - 48, userInput[i].wpad.ir.y - 48, 200.0, 96, 96,
-                        pointer[i]->GetImage(), userInput[i].wpad.ir.angle, Settings.widescreen ? 0.8 : 1, 1, 255, 0,
-                        0, 0, 0, 0, 0, 0, 0);
+                Menu_DrawImg(userInput[i].wpad.ir.x - pointer[i]->GetWidth()/2,
+                             userInput[i].wpad.ir.y - pointer[i]->GetHeight()/2,
+                             9900.0f, pointer[i]->GetWidth(), pointer[i]->GetHeight(),
+                             pointer[i]->GetImage(), userInput[i].wpad.ir.angle,
+                             Settings.widescreen ? 0.8f : 1.f, 1.f, 255, 0, 0, 0, 0, 0, 0, 0, 0);
             }
         }
 

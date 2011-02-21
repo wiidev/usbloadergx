@@ -52,13 +52,24 @@ DATA		:=	data
 INCLUDES	:=	source
 
 #---------------------------------------------------------------------------------
+# Default cIOS to load into to load the settings
+#---------------------------------------------------------------------------------
+ifndef $(IOS)
+IOS = 222
+endif
+
+#---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
-
-CFLAGS		=	-g -O3 -Wall -Wno-multichar -Wno-unused-parameter -Wextra $(MACHDEP) $(INCLUDE)
+CFLAGS		=	-g -O3 -Wall -Wno-multichar -Wno-unused-parameter -Wextra $(MACHDEP) $(INCLUDE) -DBUILD_IOS=$(IOS)
 CXXFLAGS	=	-Xassembler -aln=$@.lst $(CFLAGS)
 LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80B00000,-wrap,malloc,-wrap,free,-wrap,memalign,-wrap,calloc,-wrap,realloc,-wrap,malloc_usable_size
 -include $(PROJECTDIR)/Make.config
+
+ifeq ($(BUILDMODE),channel)
+CFLAGS += -DFULLCHANNEL
+CXXFLAGS += -DFULLCHANNEL
+endif
 
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
@@ -137,15 +148,11 @@ export OUTPUT	:=	$(CURDIR)/$(TARGET)
 #---------------------------------------------------------------------------------
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
-	@/bin/bash ./buildtype.sh
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
-#	@echo debug...
-#	start geckoreader.exe
 
 channel:
 	@[ -d build ] || mkdir -p build
-	@/bin/bash ./buildtype.sh FULLCHANNEL
-	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
+	@$(MAKE) BUILDMODE=channel --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
 #---------------------------------------------------------------------------------
 lang:
@@ -160,7 +167,6 @@ theme:
 #---------------------------------------------------------------------------------
 all:
 	@[ -d build ] || mkdir -p build
-	@./buildtype.sh
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile language
 

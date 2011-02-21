@@ -24,7 +24,6 @@
 #include "gecko.h"
 #include "xml/xml.h"
 #include "wad/nandtitle.h"
-#include "buildtype.h"
 
 extern "C"
 {

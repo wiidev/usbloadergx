@@ -58,7 +58,6 @@ class BoxCover : public GuiImage
         f32 PosXOrig;
         f32 PosYOrig;
         f32 PosZOrig;
-        f32 BoxScale;
         f32 AnimRotate;
         f32 Animation;
         f32 Animation2;
@@ -73,6 +72,8 @@ class BoxCover : public GuiImage
         guVector camera, up, look;
         GuiImageData boxBorder;
         GuiImageData *defaultBox;
+        GuiImageData *NormalPointers[4];
+        GuiImageData *GrabPointers[4];
         Mtx	view;
         GXTexObj coverTex;
         GXTexObj boxBorderTex;

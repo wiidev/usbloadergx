@@ -184,16 +184,25 @@ void HomebrewBrowser::SetupMainButtons()
         }
         else
         {
-            const char * shortpath = strrchr(HomebrewList->GetFilename(i), '/');
-            if(shortpath)
+            const char * shortpath = HomebrewList->GetFilepath(i);
+            const char * ptr = shortpath;
+            const char * ptr2 = NULL;
+            while(*ptr != '\0')
             {
-                metapath = shortpath;
-                metapath = '/';
-                metapath = HomebrewList->GetFilename(i);
-                HomebrewName = metapath.c_str();
+                if(*ptr == '/')
+                {
+                    shortpath = ptr2;
+                    ptr2 = ptr;
+                }
+
+                ++ptr;
             }
-            else
-                HomebrewName = HomebrewList->GetFilename(i);
+            if(!shortpath && ptr2)
+                shortpath = ptr2;
+            else if(!shortpath)
+                shortpath = HomebrewList->GetFilename(i);
+
+            HomebrewName = shortpath;
             MainButtonDesc[i]->SetText(" ");
             MainButtonDescOver[i]->SetText(" ");
         }
@@ -369,6 +378,14 @@ int HomebrewBrowser::ReceiveFile()
         {
             // It's compressed, uncompress
             u8 *unc = (u8 *) malloc(uncfilesize);
+            if(!unc)
+            {
+                ProgressStop();
+                free(buffer);
+                CloseConnection();
+                WindowPrompt(tr( "Not enough memory." ), 0, tr( "OK" ));
+                return MENU_NONE;
+            }
             uLongf f = uncfilesize;
             error = uncompress(unc, &f, buffer, infilesize) != Z_OK;
             uncfilesize = f;

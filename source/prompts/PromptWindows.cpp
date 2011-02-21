@@ -41,7 +41,6 @@
 #include "language/UpdateLanguage.h"
 #include "gecko.h"
 #include "lstub.h"
-#include "buildtype.h"
 
 /*** Extern variables ***/
 s32 gameStart = 0;

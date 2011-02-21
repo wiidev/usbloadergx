@@ -25,6 +25,10 @@
 
 void GuiBox::Draw()
 {
+    GX_SetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
+    GX_SetVtxDesc(GX_VA_POS, GX_DIRECT);
+    GX_SetVtxDesc(GX_VA_CLR0, GX_DIRECT);
+    GX_SetVtxDesc(GX_VA_TEX0, GX_NONE);
     u32 n = filled ? 4 : 5;
     f32 x = GetLeft();
     f32 y = GetTop();
@@ -39,4 +43,5 @@ void GuiBox::Draw()
         GX_Color4u8(color[i].r, color[i].g, color[i].b, color[i].a);
     }
     GX_End();
+    GX_SetTevOp(GX_TEVSTAGE0, GX_MODULATE);
 }

@@ -363,7 +363,7 @@ static int InternalShowGameInfo(char *ID)
     else
     {
         boxCov = new BoxCover(cover, loadFlatCover);
-        boxCov->SetPosition(-1.75f, 0.4f, -5.0f);
+        boxCov->SetPosition(-1.6f, 0.4f, -27.0f);
         boxCov->SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 40);
 
         if(GameInfo.CaseColor == 0xFF0000)

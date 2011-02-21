@@ -49,7 +49,6 @@
 #include "xml/WiiTDB.hpp"
 #include "wad/nandtitle.h"
 #include "wad/wad.h"
-#include "buildtype.h"
 #include "sys.h"
 #include "svnrev.h"
 

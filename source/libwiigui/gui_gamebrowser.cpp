@@ -23,7 +23,10 @@
 #include <sstream>
 
 #define GAMESELECTSIZE      30
-int txtscroll = 0;
+// scrolldelay affects how fast the list scrolls
+// when the arrows are clicked
+static const u32 DEFAULT_SCROLL_DELAY = 4;
+
 /**
  * Constructor for the GuiGameBrowser class.
  */
@@ -359,12 +362,16 @@ void GuiGameBrowser::Update(GuiTrigger * t)
     LOCK( this );
     if (state == STATE_DISABLED || !t || !gameList.size()) return;
 
+    static int pressedChan = -1;
     int next, prev;
     int old_listOffset = listOffset;
     static int position2;
-    // scrolldelay affects how fast the list scrolls
-    // when the arrows are clicked
-    float scrolldelay = 3.5;
+    static u32 scrolldelay = 0;
+
+    if(t->wpad.btns_d)
+    {
+        pressedChan = t->chan;
+    }
 
     if (scrollbaron == 1)
     {
@@ -376,11 +383,9 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 
     next = listOffset;
 
-    u32 buttonshold = ButtonsHold();
-
-    if (buttonshold != WPAD_BUTTON_UP && buttonshold != WPAD_BUTTON_DOWN)
+    if(pressedChan == -1 || (pressedChan == t->chan && !(t->wpad.btns_h & WPAD_BUTTON_UP) &&
+       !(t->wpad.btns_h & WPAD_BUTTON_DOWN) && !(t->wpad.btns_h & WPAD_BUTTON_B)))
     {
-
         for (int i = 0; i < pagesize; i++)
         {
             if (next >= 0) next = this->FindMenuItem(next, 1);
@@ -389,8 +394,8 @@ void GuiGameBrowser::Update(GuiTrigger * t)
             {
                 if (i != selectedItem && game[i]->GetState() == STATE_SELECTED)
                     game[i]->ResetState();
-                else if (i == selectedItem && game[i]->GetState() == STATE_DEFAULT) game[selectedItem]->SetState(
-                        STATE_SELECTED, t->chan);
+                else if (i == selectedItem && game[i]->GetState() == STATE_DEFAULT)
+                    game[selectedItem]->SetState(STATE_SELECTED, t->chan);
             }
 
             game[i]->Update(t);
@@ -407,86 +412,14 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 
     if (scrollbaron == 1)
     {
-
         if (t->Down() || arrowDownBtn->GetState() == STATE_CLICKED || arrowDownBtn->GetState() == STATE_HELD) //down
         {
-
-            next = this->FindMenuItem(gameIndex[selectedItem], 1);
-
-            if (next >= 0)
+            if(scrolldelay > 0)
+                --scrolldelay;
+            else
             {
-                if (selectedItem == pagesize - 1)
-                {
-                    // move list down by 1
-                    listOffset = this->FindMenuItem(listOffset, 1);
-                }
-                else if (game[selectedItem + 1]->IsVisible())
-                {
-                    game[selectedItem]->ResetState();
-                    game[selectedItem + 1]->SetState(STATE_SELECTED, t->chan);
-                    selectedItem++;
-                }
-                //              scrollbarBoxBtn->Draw();
-                usleep(10000 * scrolldelay);
-            }
-            if (!(ButtonsHold() & WPAD_BUTTON_A)) arrowDownBtn->ResetState();
-        }
-        else if (t->Up() || arrowUpBtn->GetState() == STATE_CLICKED || arrowUpBtn->GetState() == STATE_HELD) //up
-        {
-            prev = this->FindMenuItem(gameIndex[selectedItem], -1);
-
-            if (prev >= 0)
-            {
-                if (selectedItem == 0)
-                {
-                    // move list up by 1
-                    listOffset = prev;
-                }
-                else
-                {
-                    game[selectedItem]->ResetState();
-                    game[selectedItem - 1]->SetState(STATE_SELECTED, t->chan);
-                    selectedItem--;
-                }
-                //              scrollbarBoxBtn->Draw();
-                usleep(10000 * scrolldelay);
-            }
-            if (!(ButtonsHold() & WPAD_BUTTON_A)) arrowUpBtn->ResetState();
-        }
-        int position1 = t->wpad.ir.y;
-
-        if (position2 == 0 && position1 > 0)
-        {
-            position2 = position1;
-        }
-
-        if ((buttonshold & WPAD_BUTTON_B) && position1 > 0)
-        {
-            scrollbarBoxBtn->ScrollIsOn(1);
-            if (position2 > position1)
-            {
-
-                prev = this->FindMenuItem(gameIndex[selectedItem], -1);
-
-                if (prev >= 0)
-                {
-                    if (selectedItem == 0)
-                    {
-                        // move list up by 1
-                        listOffset = prev;
-                    }
-                    else
-                    {
-                        game[selectedItem]->ResetState();
-                        game[selectedItem - 1]->SetState(STATE_SELECTED, t->chan);
-                        selectedItem--;
-                    }
-                    //                  scrollbarBoxBtn->Draw();
-                    usleep(10000 * scrolldelay);
-                }
-            }
-            else if (position2 < position1)
-            {
+                if(arrowDownBtn->GetState() == STATE_CLICKED || arrowDownBtn->GetState() == STATE_HELD)
+                    scrolldelay = DEFAULT_SCROLL_DELAY;
                 next = this->FindMenuItem(gameIndex[selectedItem], 1);
 
                 if (next >= 0)
@@ -502,13 +435,94 @@ void GuiGameBrowser::Update(GuiTrigger * t)
                         game[selectedItem + 1]->SetState(STATE_SELECTED, t->chan);
                         selectedItem++;
                     }
-                    //                  scrollbarBoxBtn->Draw();
-                    usleep(10000 * scrolldelay);
                 }
             }
-
+            if (pressedChan == -1 || (pressedChan == t->chan && !(t->wpad.btns_d & WPAD_BUTTON_A) && !(t->wpad.btns_h & WPAD_BUTTON_A)))
+                arrowDownBtn->ResetState();
         }
-        else if (!(buttonshold & WPAD_BUTTON_B))
+        else if (t->Up() || arrowUpBtn->GetState() == STATE_CLICKED || arrowUpBtn->GetState() == STATE_HELD) //up
+        {
+            if(scrolldelay > 0)
+                --scrolldelay;
+            else
+            {
+                if(arrowUpBtn->GetState() == STATE_CLICKED || arrowUpBtn->GetState() == STATE_HELD)
+                    scrolldelay = DEFAULT_SCROLL_DELAY;
+                prev = this->FindMenuItem(gameIndex[selectedItem], -1);
+
+                if (prev >= 0)
+                {
+                    if (selectedItem == 0)
+                    {
+                        // move list up by 1
+                        listOffset = prev;
+                    }
+                    else
+                    {
+                        game[selectedItem]->ResetState();
+                        game[selectedItem - 1]->SetState(STATE_SELECTED, t->chan);
+                        selectedItem--;
+                    }
+                }
+            }
+            if (pressedChan == -1 || (pressedChan == t->chan && !(t->wpad.btns_d & WPAD_BUTTON_A) && !(t->wpad.btns_h & WPAD_BUTTON_A)))
+                arrowUpBtn->ResetState();
+        }
+        int position1 = t->wpad.ir.y;
+
+        if (position2 == 0 && t->wpad.ir.valid)
+        {
+            position2 = position1;
+        }
+
+        if (pressedChan == t->chan && (t->wpad.btns_h & WPAD_BUTTON_B) && t->wpad.ir.valid)
+        {
+            if(scrolldelay > 0)
+                --scrolldelay;
+            else
+            {
+                scrolldelay = DEFAULT_SCROLL_DELAY-2;
+                scrollbarBoxBtn->ScrollIsOn(1);
+                if (position2 > position1)
+                {
+                    prev = this->FindMenuItem(gameIndex[selectedItem], -1);
+
+                    if (prev >= 0)
+                    {
+                        if (selectedItem == 0)
+                        {
+                            // move list up by 1
+                            listOffset = prev;
+                        }
+                        else
+                        {
+                            game[selectedItem]->ResetState();
+                            game[selectedItem - 1]->SetState(STATE_SELECTED, t->chan);
+                            selectedItem--;
+                        }
+                    }
+                }
+                else if (position2 < position1)
+                {
+                    next = this->FindMenuItem(gameIndex[selectedItem], 1);
+                    if (next >= 0)
+                    {
+                        if (selectedItem == pagesize - 1)
+                        {
+                            // move list down by 1
+                            listOffset = this->FindMenuItem(listOffset, 1);
+                        }
+                        else if (game[selectedItem + 1]->IsVisible())
+                        {
+                            game[selectedItem]->ResetState();
+                            game[selectedItem + 1]->SetState(STATE_SELECTED, t->chan);
+                            selectedItem++;
+                        }
+                    }
+                }
+            }
+        }
+        else if (pressedChan == -1 || (pressedChan == t->chan && !(t->wpad.btns_h & WPAD_BUTTON_B)))
         {
             scrollbarBoxBtn->ScrollIsOn(0);
             position2 = 0;
@@ -598,6 +612,11 @@ void GuiGameBrowser::Update(GuiTrigger * t)
                 }
             }
         }
+    }
+
+    if(pressedChan == t->chan && !t->wpad.btns_d && !t->wpad.btns_h)
+    {
+        pressedChan = -1;
     }
 
     if (old_listOffset != listOffset) UpdateListEntries();

@@ -25,6 +25,8 @@
 #include "BoxMesh.hpp"
 #include "themes/CTheme.h"
 
+extern GuiImageData * pointer[4];
+
 BoxCover::BoxCover(GuiImageData * img, bool flat)
     :   GuiImage(img),
         boxBorder(Resources::GetFile("boxBorder.png"), Resources::GetFileSize("boxBorder.png")),
@@ -42,8 +44,7 @@ BoxCover::BoxCover(GuiImageData * img, bool flat)
     RotZ = 0.0f;
     PosX = 0.0f;
     PosY = 0.0f;
-    PosZ = -4.5f;
-    BoxScale = 1.0f;
+    PosZ = -27.f;
     AnimRotate = 0.0f;
     last_manual_move_frame = 0;
     camera = (guVector) {0.0F, 0.0F, 0.0F};
@@ -52,6 +53,15 @@ BoxCover::BoxCover(GuiImageData * img, bool flat)
     boxColor = (GXColor) {233, 233, 233, 255};
 
     guLookAt(view, &camera,	&up, &look);
+
+    //! Remove me later
+    for(int i = 0; i < 4; ++i)
+    {
+        char name[50];
+        snprintf(name, sizeof(name), "player%i_grab.png", i+1);
+        GrabPointers[i] = Resources::GetImageData(name);
+        NormalPointers[i] = pointer[i];
+    }
 
     if(flatCover || !image)
     {
@@ -73,8 +83,14 @@ BoxCover::BoxCover(GuiImageData * img, bool flat)
 BoxCover::~BoxCover()
 {
     delete defaultBox;
+    for(int i = 0; i < 4; ++i)
+    {
+        pointer[i] = NormalPointers[i];
+        delete GrabPointers[i];
+    }
 }
 
+//! Remove me later
 void BoxCover::WiiPADControl(GuiTrigger *t)
 {
     if(t->wpad.btns_d & WPAD_BUTTON_A)
@@ -88,15 +104,22 @@ void BoxCover::WiiPADControl(GuiTrigger *t)
             PosY += movePosY;
             movePosX = 0.0f;
             movePosY = 0.0f;
+            for(int i = 0; i < 4; ++i)
+                pointer[i] = GrabPointers[i];
         }
         else
             moveChan = -1;
     }
     else if((t->wpad.btns_h & WPAD_BUTTON_A) && moveChan == t->chan && t->wpad.ir.valid)
     {
-        movePosX = (t->wpad.ir.x-moveStartPosX) / 180.0f;
-        movePosY = (moveStartPosY-t->wpad.ir.y) / 180.0f;
+        movePosX = (t->wpad.ir.x-moveStartPosX) * fabs(PosZ)/3400.f;
+        movePosY = (moveStartPosY-t->wpad.ir.y) * fabs(PosZ)/3400.f;
         last_manual_move_frame = frameCount;
+    }
+    else if(!(t->wpad.btns_h & WPAD_BUTTON_A) && moveChan == t->chan)
+    {
+        for(int i = 0; i < 4; ++i)
+            pointer[i] = NormalPointers[i];
     }
 
     if(t->wpad.btns_h & WPAD_BUTTON_UP)
@@ -129,21 +152,13 @@ void BoxCover::WiiPADControl(GuiTrigger *t)
     }
     if(t->wpad.btns_h & WPAD_BUTTON_PLUS)
     {
-        if(PosZ < -3.4f)
-            PosZ += 0.1f;
-        else if(BoxScale < 2.4f)
-            BoxScale += 0.05f;
+        if(PosZ < -2.8f)
+            PosZ += 0.4f*fabs(PosZ)/19.f;
     }
     if(t->wpad.btns_h & WPAD_BUTTON_MINUS)
     {
-        if(BoxScale > 1.0f)
-            BoxScale -= 0.05f;
-        else
-        {
-            BoxScale = 1.0f;
-            PosZ -= 0.1f;
-            if(PosZ < -6.0f) PosZ = -6.0f;
-        }
+        if(PosZ > -43.0f)
+            PosZ -= 0.4f*fabs(PosZ)/19.f;
     }
 }
 
@@ -180,9 +195,8 @@ void BoxCover::Draw()
     u8 BoxAlpha = (int) (alpha+angleDyn) & 0xFF;
 
     Mtx44 projection;
-    guPerspective(projection, 45, (f32)screenwidth/(f32)screenheight, fabs(PosZ)-1.3f > 1.0f ? fabs(PosZ)-1.3f : 1.0f, -300.0F);
+    guPerspective(projection, 8, (f32)screenwidth/(f32)screenheight, 1.0f, 300.0F);
     GX_LoadProjectionMtx(projection, GX_PERSPECTIVE);
-    GX_SetTevOp(GX_TEVSTAGE0, GX_MODULATE);
 
     GX_SetVtxDesc(GX_VA_POS, GX_INDEX8);
     GX_SetVtxDesc(GX_VA_CLR0, GX_DIRECT);
@@ -201,7 +215,7 @@ void BoxCover::Draw()
     guMtxRotAxisDeg(modelView, &cubeAxis, RotZ-Animation);
     guMtxConcat(modelView3, modelView2, modelView2);
     guMtxConcat(modelView2, modelView, modelView);
-    guMtxScaleApply(modelView, modelView, BoxScale, BoxScale, BoxScale);
+    //guMtxScaleApply(modelView, modelView, BoxScale, BoxScale, BoxScale);
     guMtxTransApply(modelView, modelView, PosX+xoffsetDyn/680.0f+movePosX, PosY+yoffsetDyn/680.0f+movePosY, PosZ);
     guMtxConcat(view,modelView,modelView);
 
@@ -289,11 +303,6 @@ void BoxCover::Draw()
         GX_End();
     }
 
-    GX_SetVtxDesc(GX_VA_POS, GX_DIRECT);
-    GX_SetVtxDesc(GX_VA_CLR0, GX_DIRECT);
-    GX_SetVtxDesc(GX_VA_TEX0, GX_DIRECT);
-    GX_SetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
-
     UpdateEffects();
 }
 
@@ -309,17 +318,17 @@ void BoxCover::UpdateEffects()
     if(effects & EFFECT_BOX_FLY_CENTRE)
     {
         if(PosX > 0.01f)
-            PosX -= effectAmount/1000.0f;
+            PosX -= effectAmount/1200.0f;
         if(PosY > 0.01f)
-            PosY -= effectAmount/1000.0f;
+            PosY -= effectAmount/1200.0f;
         if(PosX < -0.01f)
-            PosX += effectAmount/1000.0f;
+            PosX += effectAmount/1200.0f;
         if(PosY < -0.01f)
-            PosY += effectAmount/1000.0f;
+            PosY += effectAmount/1200.0f;
 
         movePosX = 0.0f;
         movePosY = 0.0f;
-        PosZ += 0.1f;
+        PosZ += 0.4f;
         RotY += effectAmount/4.9f;
 
         if(fabs(PosX) < 0.1f && fabs(PosY) < 0.1f)
@@ -333,18 +342,16 @@ void BoxCover::UpdateEffects()
     else if(effects & EFFECT_BOX_FLY_BACK)
     {
         if(PosX > PosXOrig+0.1f)
-            PosX -= effectAmount/1000.0f;
+            PosX -= effectAmount/1200.0f;
         if(PosY > PosYOrig+0.1f)
-            PosY -= effectAmount/1000.0f;
+            PosY -= effectAmount/1200.0f;
         if(PosX < PosXOrig-0.1f)
-            PosX += effectAmount/1000.0f;
+            PosX += effectAmount/1200.0f;
         if(PosY < PosYOrig-0.1f)
-            PosY += effectAmount/1000.0f;
+            PosY += effectAmount/1200.0f;
 
-        PosZ -= 0.1f;
+        PosZ -= 0.4f;
         RotY -= effectAmount/4.9f;
-        if(BoxScale > 1.0f)
-            BoxScale -= 0.08f;
 
         if(movePosX > 0.1f)
             movePosX -= 0.1f;
@@ -359,7 +366,6 @@ void BoxCover::UpdateEffects()
         {
             movePosX = 0.0f;
             movePosY = 0.0f;
-            BoxScale = 1.0f;
             PosX = PosXOrig;
             PosY = PosYOrig;
             PosZ = PosZOrig;

@@ -28,6 +28,7 @@
 #define ___DIRLIST_H_
 
 #include <vector>
+#include <string>
 #include <gctypes.h>
 
 typedef struct
@@ -49,6 +50,7 @@ class DirList
         ~DirList();
         //! Load all the files from a directory
         bool LoadPath(const char * path, const char *filter = NULL, u32 flags = Files | Dirs);
+        bool LoadPath(std::string &path, const char *filter = NULL, u32 flags = Files | Dirs);
         //! Get a filename of the list
         //!\param list index
         const char * GetFilename(int index);
@@ -65,6 +67,8 @@ class DirList
         int GetFilecount() { return FileInfo.size(); };
         //! Sort list by filepath
         void SortList();
+        //! Custom sort command for custom sort functions definitions
+        void SortList(bool (*SortFunc)(const FileInfos &a, const FileInfos &b));
 		//! Get the index of the specified filename
 		int GetFileIndex(const char *filename);
 		//! Enum for search/filter flags

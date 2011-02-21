@@ -21,9 +21,13 @@
  */
 
 #include "FreeTypeGX.h"
-#include "utils/tools.h"
 
 using namespace std;
+
+#define EXPLODE_UINT8_TO_UINT32(x) ((x << 24) | (x << 16) | (x << 8) | x)
+#define ALIGN8(x) (((x) + 7) & ~7)
+#define ALIGN32(x) (((x) + 31) & ~31)
+#define RGBA_TO_IA4(x) (((x & 0x0000f000) >> 8) | ((x & 0x000000f0) >> 4))
 
 /**
  * Convert a short char string to a wide char string.
@@ -132,14 +136,10 @@ void FreeTypeGX::unloadFont()
  */
 ftgxCharData * FreeTypeGX::cacheGlyphData(wchar_t charCode, int16_t pixelSize)
 {
-    map<int16_t, map<wchar_t, ftgxCharData> >::iterator itr;
-    map<wchar_t, ftgxCharData>::iterator itr2;
-
-    itr = fontData.find(pixelSize);
+    map<int16_t, map<wchar_t, ftgxCharData> >::iterator itr = fontData.find(pixelSize);
     if (itr != fontData.end())
     {
-        itr2 = itr->second.find(charCode);
-
+        map<wchar_t, ftgxCharData>::iterator itr2 = itr->second.find(charCode);
         if (itr2 != itr->second.end())
         {
             return &itr2->second;
@@ -172,12 +172,12 @@ ftgxCharData * FreeTypeGX::cacheGlyphData(wchar_t charCode, int16_t pixelSize)
         {
             FT_Bitmap *glyphBitmap = &ftFace->glyph->bitmap;
 
-            textureWidth = ALIGN(glyphBitmap->width);
-            textureHeight = ALIGN(glyphBitmap->rows);
+            textureWidth = ALIGN8(glyphBitmap->width);
+            textureHeight = ALIGN8(glyphBitmap->rows);
             if(textureWidth == 0)
-                textureWidth = 4;
+                textureWidth = 8;
             if(textureHeight == 0)
-                textureHeight = 4;
+                textureHeight = 8;
 
             fontData[pixelSize][charCode].renderOffsetX = (int16_t) ftFace->glyph->bitmap_left;
             fontData[pixelSize][charCode].glyphAdvanceX = (uint16_t) (ftFace->glyph->advance.x >> 6);
@@ -225,37 +225,52 @@ uint16_t FreeTypeGX::cacheGlyphDataComplete(int16_t pixelSize)
  *
  * @param bmp   A pointer to the most recently rendered glyph's bitmap.
  * @param charData  A pointer to an allocated ftgxCharData structure whose data represent that of the last rendered glyph.
- *
- *
- * Optimized for RGBA8 use by Dimok.
  */
+
 void FreeTypeGX::loadGlyphData(FT_Bitmap *bmp, ftgxCharData *charData)
 {
-    int length = ALIGN32(((charData->textureWidth+3)>>2)*((charData->textureHeight+3)>>2)*32*2);
+    uint32_t *glyphData = (uint32_t *) memalign(32, charData->textureWidth * charData->textureHeight * 4);
+	memset(glyphData, 0x00, charData->textureWidth * charData->textureHeight * 4);
 
-    uint8_t * glyphData = (uint8_t *) memalign(32, length);
-    if (!glyphData) return;
+	uint8_t *bmsrc = (uint8_t *)bmp->buffer;
+	uint32_t *dest = glyphData, *ptr = dest;
 
-    memset(glyphData, 0x00, length);
+	for (uint16_t imagePosY = 0; imagePosY < bmp->rows; ++imagePosY)
+	{
+		for (uint16_t imagePosX = 0; imagePosX < bmp->width; ++imagePosX)
+		{
+			*ptr++ = EXPLODE_UINT8_TO_UINT32(*bmsrc);
+			++bmsrc;
+		}
+		ptr = dest += charData->textureWidth;
+	}
 
-    uint8_t *src = (uint8_t *) bmp->buffer;
-    uint32_t offset;
+	uint32_t bufferSize = charData->textureWidth * charData->textureHeight;
+	uint32_t* dataBufferIA4 = (uint32_t *)memalign(32, ALIGN32(bufferSize));
+	memset(dataBufferIA4, 0x00, bufferSize);
 
-    for (int imagePosY = 0; imagePosY < bmp->rows; ++imagePosY)
-    {
-        for (int imagePosX = 0; imagePosX < bmp->width; ++imagePosX)
-        {
-            offset = (((((imagePosY >> 2) * (charData->textureWidth >> 2) + (imagePosX >> 2)) << 5) + ((imagePosY & 3) << 2) + (imagePosX & 3)) << 1);
-            glyphData[offset] = *src;
-            glyphData[offset + 1] = *src;
-            glyphData[offset + 32] = *src;
-            glyphData[offset + 33] = *src;
-            ++src;
-        }
-    }
-    DCFlushRange(glyphData, length);
+	uint32_t *src = glyphData;
+	uint8_t* dst = (uint8_t *) dataBufferIA4;
 
-    charData->glyphDataTexture = glyphData;
+	for(uint16_t y = 0; y < charData->textureHeight; y += 4) {
+		for(uint16_t x = 0; x < charData->textureWidth; x += 8) {
+			for(uint16_t rows = 0; rows < 4; rows++) {
+				*dst++ = RGBA_TO_IA4(src[((y + rows) * charData->textureWidth) + (x + 0)]);
+				*dst++ = RGBA_TO_IA4(src[((y + rows) * charData->textureWidth) + (x + 1)]);
+				*dst++ = RGBA_TO_IA4(src[((y + rows) * charData->textureWidth) + (x + 2)]);
+				*dst++ = RGBA_TO_IA4(src[((y + rows) * charData->textureWidth) + (x + 3)]);
+				*dst++ = RGBA_TO_IA4(src[((y + rows) * charData->textureWidth) + (x + 4)]);
+				*dst++ = RGBA_TO_IA4(src[((y + rows) * charData->textureWidth) + (x + 5)]);
+				*dst++ = RGBA_TO_IA4(src[((y + rows) * charData->textureWidth) + (x + 6)]);
+				*dst++ = RGBA_TO_IA4(src[((y + rows) * charData->textureWidth) + (x + 7)]);
+			}
+		}
+	}
+
+	DCFlushRange(dataBufferIA4, bufferSize);
+	free(glyphData);
+
+    charData->glyphDataTexture = (uint8_t *) dataBufferIA4;
 }
 
 /**
@@ -368,7 +383,7 @@ uint16_t FreeTypeGX::drawText(int16_t x, int16_t y, int16_t z, const wchar_t *te
             }
 
             GX_InitTexObj(&glyphTexture, glyphData->glyphDataTexture, glyphData->textureWidth,
-                    glyphData->textureHeight, GX_TF_RGBA8, GX_CLAMP, GX_CLAMP, GX_FALSE);
+                    glyphData->textureHeight, GX_TF_IA4, GX_CLAMP, GX_CLAMP, GX_FALSE);
             copyTextureToFramebuffer(&glyphTexture, glyphData->textureWidth, glyphData->textureHeight, x_pos
                     + glyphData->renderOffsetX + x_offset, y - glyphData->renderOffsetY + y_offset, z, color);
 
@@ -540,8 +555,9 @@ void FreeTypeGX::copyTextureToFramebuffer(GXTexObj *texObj, f32 texWidth, f32 te
     GX_LoadTexObj(texObj, GX_TEXMAP0);
     GX_InvalidateTexAll();
 
-    GX_SetTevOp(GX_TEVSTAGE0, GX_MODULATE);
+    GX_SetVtxDesc(GX_VA_POS, GX_DIRECT);
     GX_SetVtxDesc(GX_VA_TEX0, GX_DIRECT);
+    GX_SetVtxDesc(GX_VA_CLR0, GX_DIRECT);
 
     GX_Begin(GX_QUADS, this->vertexIndex, 4);
     GX_Position3s16(screenX, screenY, screenZ);
@@ -560,9 +576,6 @@ void FreeTypeGX::copyTextureToFramebuffer(GXTexObj *texObj, f32 texWidth, f32 te
     GX_Color4u8(color.r, color.g, color.b, color.a);
     GX_TexCoord2f32(0.0f, 1.0f);
     GX_End();
-
-    GX_SetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
-    GX_SetVtxDesc(GX_VA_TEX0, GX_NONE);
 }
 
 /**
@@ -580,6 +593,8 @@ void FreeTypeGX::copyFeatureToFramebuffer(f32 featureWidth, f32 featureHeight, i
         int16_t screenZ, GXColor color)
 {
     GX_SetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
+    GX_SetVtxDesc(GX_VA_POS, GX_DIRECT);
+    GX_SetVtxDesc(GX_VA_CLR0, GX_DIRECT);
     GX_SetVtxDesc(GX_VA_TEX0, GX_NONE);
 
     GX_Begin(GX_QUADS, this->vertexIndex, 4);
@@ -596,6 +611,5 @@ void FreeTypeGX::copyFeatureToFramebuffer(f32 featureWidth, f32 featureHeight, i
     GX_Color4u8(color.r, color.g, color.b, color.a);
     GX_End();
 
-    GX_SetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
-    GX_SetVtxDesc(GX_VA_TEX0, GX_NONE);
+    GX_SetTevOp(GX_TEVSTAGE0, GX_MODULATE);
 }

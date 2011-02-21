@@ -26,19 +26,16 @@ static GXRModeObj *vmode; // Menu video mode
 static unsigned char gp_fifo[DEFAULT_FIFO_SIZE] ATTRIBUTE_ALIGN ( 32 );
 static Mtx GXmodelView2D;
 static Mtx44 projection;
-int screenheight;
-int screenwidth;
+int screenheight = 480;
+int screenwidth = 640;
 u32 frameCount = 0;
-
-u8 * gameScreenTex = NULL; // a GX texture screen capture of the game
-u8 * gameScreenTex2 = NULL; // a GX texture screen capture of the game (copy)
 
 /****************************************************************************
  * ResetVideo_Menu
  *
  * Reset the video/rendering mode for the menu
  ****************************************************************************/
-void ResetVideo_Menu()
+static void ResetVideo_Menu()
 {
     f32 yscale;
     u32 xfbHeight;
@@ -85,15 +82,15 @@ void ResetVideo_Menu()
 
     GX_SetNumChans(1);
     GX_SetNumTexGens(1);
-    GX_SetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
+    GX_SetTevOp(GX_TEVSTAGE0, GX_MODULATE);
     GX_SetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR0A0);
     GX_SetTexCoordGen(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY);
 
     guMtxIdentity(GXmodelView2D);
-    guMtxTransApply(GXmodelView2D, GXmodelView2D, 0.0F, 0.0F, -200.0F);
+    guMtxTransApply(GXmodelView2D, GXmodelView2D, 0.0F, 0.0F, -9900.0F);
     GX_LoadPosMtxImm(GXmodelView2D, GX_PNMTX0);
 
-    guOrtho(projection, 0, 479, 0, 639, 0, 300);
+    guOrtho(projection, 0, screenheight-1, 0, screenwidth-1, 0, 10000);
     GX_LoadProjectionMtx(projection, GX_ORTHOGRAPHIC);
 
     GX_SetViewport(0.0f, 0.0f, vmode->fbWidth, vmode->efbHeight, 0.0f, 1.0f);
@@ -220,7 +217,8 @@ void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, u8 data[]
     GX_LoadTexObj(&texObj, GX_TEXMAP0);
     GX_InvalidateTexAll();
 
-    GX_SetTevOp(GX_TEVSTAGE0, GX_MODULATE);
+    GX_SetVtxDesc(GX_VA_POS, GX_DIRECT);
+    GX_SetVtxDesc(GX_VA_CLR0, GX_DIRECT);
     GX_SetVtxDesc(GX_VA_TEX0, GX_DIRECT);
 
     Mtx m, m1, m2, mv;
@@ -228,18 +226,13 @@ void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, u8 data[]
     height *= 0.5f;
     guMtxIdentity(m1);
     guMtxScaleApply(m1, m1, scaleX, scaleY, 1.0f);
-    guVector axis = ( guVector )
-    {
-        0 , 0, 1
-    };
-    guMtxRotAxisDeg ( m2, &axis, degrees );
-    //  guMtxConcat(m2,m1,m);
+    guVector axis = (guVector) {0 , 0, 1};
+    guMtxRotAxisDeg (m2, &axis, degrees);
     guMtxConcat(m1, m2, m);
 
     guMtxTransApply(m, m, xpos + width + 0.5f, ypos + height + 0.5f, zpos);
     guMtxConcat(GXmodelView2D, m, mv);
     GX_LoadPosMtxImm(mv, GX_PNMTX0);
-    //
 
     GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
     GX_Position3f32(-width + XX1, -height + YY1, 0);
@@ -258,13 +251,9 @@ void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, u8 data[]
     GX_Color4u8(0xFF, 0xFF, 0xFF, alpha);
     GX_TexCoord2f32(0, 1);
 
-    //
-
     GX_End();
-    GX_LoadPosMtxImm(GXmodelView2D, GX_PNMTX0);
 
-    GX_SetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
-    GX_SetVtxDesc(GX_VA_TEX0, GX_NONE);
+    GX_LoadPosMtxImm(GXmodelView2D, GX_PNMTX0);
 }
 
 /****************************************************************************
@@ -274,7 +263,11 @@ void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, u8 data[]
  ***************************************************************************/
 void Menu_DrawRectangle(f32 x, f32 y, f32 width, f32 height, GXColor color, u8 filled)
 {
+    GX_SetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
 	GX_LoadProjectionMtx(projection, GX_ORTHOGRAPHIC);
+    GX_SetVtxDesc(GX_VA_POS, GX_DIRECT);
+    GX_SetVtxDesc(GX_VA_CLR0, GX_DIRECT);
+    GX_SetVtxDesc(GX_VA_TEX0, GX_NONE);
 
     u8 fmt;
     long n;
@@ -301,6 +294,7 @@ void Menu_DrawRectangle(f32 x, f32 y, f32 width, f32 height, GXColor color, u8 f
         GX_Color4u8(color.r, color.g, color.b, color.a);
     }
     GX_End();
+    GX_SetTevOp(GX_TEVSTAGE0, GX_MODULATE);
 }
 
 void Menu_DrawDiskCover(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16 distance, u8 data[], f32 deg_alpha,
@@ -316,7 +310,8 @@ void Menu_DrawDiskCover(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16
     GX_LoadTexObj(&texObj, GX_TEXMAP0);
     GX_InvalidateTexAll();
 
-    GX_SetTevOp(GX_TEVSTAGE0, GX_MODULATE);
+    GX_SetVtxDesc(GX_VA_POS, GX_DIRECT);
+    GX_SetVtxDesc(GX_VA_CLR0, GX_DIRECT);
     GX_SetVtxDesc(GX_VA_TEX0, GX_DIRECT);
 
     f32 cos_beta = cos(DegToRad( deg_beta ));
@@ -332,17 +327,10 @@ void Menu_DrawDiskCover(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16
 
     guMtxIdentity(m1);
     guMtxScaleApply(m1, m1, scaleX, scaleY, 1.0);
-    guVector axis2 = ( guVector )
-    {
-        0 , 1, 0
-    };
+    guVector axis2 = (guVector) {0 , 1, 0};
     guMtxRotAxisDeg ( m2, &axis2, deg_beta );
-    guVector axis = ( guVector )
-    {
-        0 , 0, 1
-    };
+    guVector axis = (guVector) {0 , 0, 1};
     guMtxRotAxisDeg ( m3, &axis, deg_alpha );
-    //  guMtxConcat(m2,m1,m);
     guMtxConcat(m3, m4, m3); // move distance then rotate z-axis
     guMtxConcat(m2, m3, m2); // rotate y-axis
     guMtxConcat(m1, m2, m); // scale
@@ -355,9 +343,9 @@ void Menu_DrawDiskCover(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16
     guMtxConcat(GXmodelView2D, m, mv);
     GX_LoadPosMtxImm(mv, GX_PNMTX0);
 
+    GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
     if (shadow)
     {
-        GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
         GX_Position3f32(-width, -height, 0);
         GX_Color4u8(0, 0, 0, alpha);
         GX_TexCoord2f32(0, 0);
@@ -376,7 +364,6 @@ void Menu_DrawDiskCover(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16
     }
     else
     {
-        GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
         GX_Position3f32(-width, -height, 0);
         GX_Color4u8(0xFF, 0xFF, 0xFF, alpha);
         GX_TexCoord2f32(0, 0);
@@ -396,9 +383,6 @@ void Menu_DrawDiskCover(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16
 
     GX_End();
     GX_LoadPosMtxImm(GXmodelView2D, GX_PNMTX0);
-
-    GX_SetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
-    GX_SetVtxDesc(GX_VA_TEX0, GX_NONE);
 }
 
 void Menu_DrawTPLImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, GXTexObj *texObj, f32 degrees, f32 scaleX,
@@ -409,7 +393,8 @@ void Menu_DrawTPLImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, GXTexO
     GX_LoadTexObj(texObj, GX_TEXMAP0);
     GX_InvalidateTexAll();
 
-    GX_SetTevOp(GX_TEVSTAGE0, GX_REPLACE);
+    GX_SetVtxDesc(GX_VA_POS, GX_DIRECT);
+    GX_SetVtxDesc(GX_VA_CLR0, GX_DIRECT);
     GX_SetVtxDesc(GX_VA_TEX0, GX_DIRECT);
 
     Mtx m, m1, m2, mv;
@@ -417,10 +402,7 @@ void Menu_DrawTPLImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, GXTexO
     height *= .5;
     guMtxIdentity(m1);
     guMtxScaleApply(m1, m1, scaleX, scaleY, 1.0);
-    guVector axis = ( guVector )
-    {
-        0 , 0, 1
-    };
+    guVector axis = (guVector) {0 , 0, 1};
     guMtxRotAxisDeg ( m2, &axis, degrees );
     guMtxConcat(m1, m2, m);
 
@@ -446,10 +428,8 @@ void Menu_DrawTPLImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, GXTexO
     GX_TexCoord2f32(0, 1);
 
     GX_End();
-    GX_LoadPosMtxImm(GXmodelView2D, GX_PNMTX0);
 
-    GX_SetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
-    GX_SetVtxDesc(GX_VA_TEX0, GX_NONE);
+    GX_LoadPosMtxImm(GXmodelView2D, GX_PNMTX0);
 }
 /****************************************************************************
  * TakeScreenshot

@@ -10,7 +10,7 @@
 
 #include "gui.h"
 
-static int scrollison;
+static int scrollison = 0;
 
 /**
  * Constructor for the GuiButton class.
@@ -351,9 +351,9 @@ void GuiButton::DrawTooltip()
 }
 void GuiButton::ScrollIsOn(int f)
 {
-    LOCK( this );
     scrollison = f;
 }
+
 void GuiButton::Update(GuiTrigger * t)
 {
     LOCK( this );

@@ -47,6 +47,11 @@ void GuiCircle::SetLinewidth(float s)
 
 void GuiCircle::Draw()
 {
+    GX_SetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
+    GX_SetVtxDesc(GX_VA_POS, GX_DIRECT);
+    GX_SetVtxDesc(GX_VA_CLR0, GX_DIRECT);
+    GX_SetVtxDesc(GX_VA_TEX0, GX_NONE);
+
     int loopAmount = filled ? accuracy : accuracy+1;
 
     GX_Begin(filled ? GX_TRIANGLEFAN : GX_LINESTRIP, GX_VTXFMT0, loopAmount);
@@ -60,4 +65,5 @@ void GuiCircle::Draw()
         GX_Color4u8(color.r, color.g, color.b, color.a);
     }
     GX_End();
+    GX_SetTevOp(GX_TEVSTAGE0, GX_MODULATE);
 }

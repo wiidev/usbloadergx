@@ -91,7 +91,7 @@ void CSettings::SetDefault()
     tooltips = ON;
     gamesound = ON;
     parentalcontrol = PARENTAL_LVL_ADULT;
-    cios = 249;
+    cios = BUILD_IOS;
     gridRows = 3;
     error002 = 2;
     partition = -1;
