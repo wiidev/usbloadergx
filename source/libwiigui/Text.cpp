@@ -1,3 +1,4 @@
+#include "settings/CSettings.h"
 #include "Text.hpp"
 
 Text::Text(const char * t, int s, GXColor c) :
@@ -312,7 +313,7 @@ void Text::Draw()
     GXColor c = color;
     c.a = this->GetAlpha();
 
-    int newSize = size * GetScale();
+    int newSize = size * GetScale() * Settings.FontScaleFactor;
 
     if (newSize != currentSize)
     {

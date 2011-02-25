@@ -11,7 +11,7 @@ class GuiGameBrowser: public GuiElement
         ~GuiGameBrowser();
         int FindMenuItem(int c, int d);
         int GetClickedOption();
-        int GetSelectedOption();
+        int GetSelectedOption() { return listOffset+selectedItem; }
         void ResetState();
         void SetFocus(int f);
         void Draw();

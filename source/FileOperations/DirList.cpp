@@ -81,7 +81,7 @@ bool DirList::LoadPath(std::string &folderpath, const char *filter, u32 flags)
     if(!filename || !st)
     {
         delete [] filename;
-        delete filename;
+        delete st;
         closedir(dir);
         return false;
     }

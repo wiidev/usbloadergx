@@ -248,21 +248,6 @@ int GuiGameBrowser::GetClickedOption()
     return found;
 }
 
-int GuiGameBrowser::GetSelectedOption()
-{
-    int found = -1;
-    for (int i = 0; i < pagesize; i++)
-    {
-        if (game[i]->GetState() == STATE_SELECTED)
-        {
-            game[i]->SetState(STATE_SELECTED);
-            found = gameIndex[i];
-            break;
-        }
-    }
-    return found;
-}
-
 /****************************************************************************
  * FindMenuItem
  *

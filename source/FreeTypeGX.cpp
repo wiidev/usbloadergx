@@ -377,15 +377,12 @@ uint16_t FreeTypeGX::drawText(int16_t x, int16_t y, int16_t z, const wchar_t *te
         {
             if (ftKerningEnabled && i > 0)
             {
-                FT_Get_Kerning(ftFace, fontData[pixelSize][text[i - 1]].glyphIndex, glyphData->glyphIndex,
-                        FT_KERNING_DEFAULT, &pairDelta);
+                FT_Get_Kerning(ftFace, fontData[pixelSize][text[i - 1]].glyphIndex, glyphData->glyphIndex, FT_KERNING_DEFAULT, &pairDelta);
                 x_pos += pairDelta.x >> 6;
             }
 
-            GX_InitTexObj(&glyphTexture, glyphData->glyphDataTexture, glyphData->textureWidth,
-                    glyphData->textureHeight, GX_TF_IA4, GX_CLAMP, GX_CLAMP, GX_FALSE);
-            copyTextureToFramebuffer(&glyphTexture, glyphData->textureWidth, glyphData->textureHeight, x_pos
-                    + glyphData->renderOffsetX + x_offset, y - glyphData->renderOffsetY + y_offset, z, color);
+            GX_InitTexObj(&glyphTexture, glyphData->glyphDataTexture, glyphData->textureWidth, glyphData->textureHeight, GX_TF_IA4, GX_CLAMP, GX_CLAMP, GX_FALSE);
+            copyTextureToFramebuffer(&glyphTexture, glyphData->textureWidth, glyphData->textureHeight, x_pos + glyphData->renderOffsetX + x_offset, y - glyphData->renderOffsetY + y_offset, z, color);
 
             x_pos += glyphData->glyphAdvanceX;
             ++printed;

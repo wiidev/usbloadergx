@@ -216,10 +216,10 @@ class GuiElement
         int GetMaxX();
         //!Gets the current width of the element. Does not currently consider the scale
         //!\return width
-        int GetWidth();
+        virtual int GetWidth();
         //!Gets the height of the element. Does not currently consider the scale
         //!\return height
-        int GetHeight();
+        virtual int GetHeight();
         //!Sets the size (width/height) of the element
         //!\param w Width of element
         //!\param h Height of element
@@ -662,6 +662,8 @@ class GuiText: public GuiElement
         void SetFont(FreeTypeGX *f);
         //!Get the original text as char
         virtual const wchar_t * GetText();
+        //!Overload for GetWidth()
+        int GetWidth() { return GetTextWidth(); }
         //!Get the Horizontal Size of Text
         int GetTextWidth();
         int GetTextWidth(int ind);

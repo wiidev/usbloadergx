@@ -69,7 +69,7 @@ class BoxCover : public GuiImage
         int moveChan;
         bool flatCover;
         bool Zoomable;
-        guVector camera, up, look;
+        Mtx44 projection;
         GuiImageData boxBorder;
         GuiImageData *defaultBox;
         GuiImageData *NormalPointers[4];
@@ -79,8 +79,6 @@ class BoxCover : public GuiImage
         GXTexObj boxBorderTex;
         GXTexObj defaultBoxTex;
         GXColor boxColor;
-
-
 };
 
 #endif

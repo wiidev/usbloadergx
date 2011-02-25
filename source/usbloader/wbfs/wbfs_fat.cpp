@@ -423,12 +423,16 @@ s32 Wbfs_Fat::GetHeadersCount()
                 // usb:/wbfs/TITLE[GAMEID]/GAMEID.wbfs
                 lay_b = 1;
             }
-            else if (fname[6] == '_' && is_gameid((char*) id))
+            else if (fname[6] == '_')
             {
                 // usb:/wbfs/GAMEID_TITLE/GAMEID.wbfs
-                lay_a = 1;
                 memcpy(id, fname, 6);
-                snprintf(fname_title, sizeof(fname_title), &fname[7]);
+
+                if(is_gameid((char*) id))
+                {
+                    lay_a = 1;
+                    snprintf(fname_title, sizeof(fname_title), &fname[7]);
+                }
             }
 
             if (!lay_a && !lay_b) continue;

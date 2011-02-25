@@ -116,7 +116,7 @@ static void * UpdateGUI(void *arg)
                              userInput[i].wpad.ir.y - pointer[i]->GetHeight()/2,
                              9900.0f, pointer[i]->GetWidth(), pointer[i]->GetHeight(),
                              pointer[i]->GetImage(), userInput[i].wpad.ir.angle,
-                             Settings.widescreen ? 0.8f : 1.f, 1.f, 255, 0, 0, 0, 0, 0, 0, 0, 0);
+                             Settings.widescreen ? Settings.WSFactor : 1.f, 1.f, 255, 0, 0, 0, 0, 0, 0, 0, 0);
             }
         }
 

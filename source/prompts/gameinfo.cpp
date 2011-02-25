@@ -396,7 +396,7 @@ static int InternalShowGameInfo(char *ID)
         playersImg->SetPosition(intputX, inputY);
         playersImg->SetAlignment(0, 4);
         InfoWindow.Append(playersImg);
-        intputX += (Settings.widescreen ? playersImg->GetWidth() * .8 : playersImg->GetWidth()) + 5;
+        intputX += (Settings.widescreen ? playersImg->GetWidth() * Settings.WSFactor : playersImg->GetWidth()) + 5;
     }
 
     //draw the input types for this game
@@ -407,7 +407,7 @@ static int InternalShowGameInfo(char *ID)
         motionplusImg->SetPosition(intputX, inputY);
         motionplusImg->SetAlignment(0, 4);
         InfoWindow.Append(motionplusImg);
-        intputX += (Settings.widescreen ? motionplusImg->GetWidth() * .8 : motionplusImg->GetWidth()) + 5;
+        intputX += (Settings.widescreen ? motionplusImg->GetWidth() * Settings.WSFactor : motionplusImg->GetWidth()) + 5;
     }
     if (nunchuk == 1)
     {
@@ -416,7 +416,7 @@ static int InternalShowGameInfo(char *ID)
         nunchukImg->SetPosition(intputX, inputY);
         nunchukImg->SetAlignment(0, 4);
         InfoWindow.Append(nunchukImg);
-        intputX += (Settings.widescreen ? nunchukImg->GetWidth() * .8 : nunchukImg->GetWidth()) + 5;
+        intputX += (Settings.widescreen ? nunchukImg->GetWidth() * Settings.WSFactor : nunchukImg->GetWidth()) + 5;
     }
     if (classiccontroller == 1)
     {
@@ -425,7 +425,7 @@ static int InternalShowGameInfo(char *ID)
         classiccontrollerImg->SetPosition(intputX, inputY);
         classiccontrollerImg->SetAlignment(0, 4);
         InfoWindow.Append(classiccontrollerImg);
-        intputX += (Settings.widescreen ? classiccontrollerImg->GetWidth() * .8 : classiccontrollerImg->GetWidth()) + 5;
+        intputX += (Settings.widescreen ? classiccontrollerImg->GetWidth() * Settings.WSFactor : classiccontrollerImg->GetWidth()) + 5;
     }
     if (gamecube == 1)
     {
@@ -434,7 +434,7 @@ static int InternalShowGameInfo(char *ID)
         gcImg->SetPosition(intputX, inputY);
         gcImg->SetAlignment(0, 4);
         InfoWindow.Append(gcImg);
-        intputX += (Settings.widescreen ? gcImg->GetWidth() * .8 : gcImg->GetWidth()) + 5;
+        intputX += (Settings.widescreen ? gcImg->GetWidth() * Settings.WSFactor : gcImg->GetWidth()) + 5;
     }
     if (wheel == 1)
     {
@@ -443,7 +443,7 @@ static int InternalShowGameInfo(char *ID)
         wheelImg->SetPosition(intputX, inputY);
         wheelImg->SetAlignment(0, 4);
         InfoWindow.Append(wheelImg);
-        intputX += (Settings.widescreen ? wheelImg->GetWidth() * .8 : wheelImg->GetWidth()) + 5;
+        intputX += (Settings.widescreen ? wheelImg->GetWidth() * Settings.WSFactor : wheelImg->GetWidth()) + 5;
     }
     if (guitar == 1)
     {
@@ -452,7 +452,7 @@ static int InternalShowGameInfo(char *ID)
         guitarImg->SetPosition(intputX, inputY);
         guitarImg->SetAlignment(0, 4);
         InfoWindow.Append(guitarImg);
-        intputX += (Settings.widescreen ? guitarImg->GetWidth() * .8 : guitarImg->GetWidth()) + 5;
+        intputX += (Settings.widescreen ? guitarImg->GetWidth() * Settings.WSFactor : guitarImg->GetWidth()) + 5;
     }
     if (drums == 1)
     {
@@ -461,7 +461,7 @@ static int InternalShowGameInfo(char *ID)
         drumsImg->SetPosition(intputX, inputY);
         drumsImg->SetAlignment(0, 4);
         InfoWindow.Append(drumsImg);
-        intputX += (Settings.widescreen ? drumsImg->GetWidth() * .8 : drumsImg->GetWidth()) + 5;
+        intputX += (Settings.widescreen ? drumsImg->GetWidth() * Settings.WSFactor : drumsImg->GetWidth()) + 5;
     }
     if (microphone == 1)
     {
@@ -470,7 +470,7 @@ static int InternalShowGameInfo(char *ID)
         microphoneImg->SetPosition(intputX, inputY);
         microphoneImg->SetAlignment(0, 4);
         InfoWindow.Append(microphoneImg);
-        intputX += (Settings.widescreen ? microphoneImg->GetWidth() * .8 : microphoneImg->GetWidth()) + 5;
+        intputX += (Settings.widescreen ? microphoneImg->GetWidth() * Settings.WSFactor : microphoneImg->GetWidth()) + 5;
     }
     if (zapper == 1)
     {
@@ -479,7 +479,7 @@ static int InternalShowGameInfo(char *ID)
         zapperImg->SetPosition(intputX, inputY);
         zapperImg->SetAlignment(0, 4);
         InfoWindow.Append(zapperImg);
-        intputX += (Settings.widescreen ? zapperImg->GetWidth() * .8 : zapperImg->GetWidth()) + 5;
+        intputX += (Settings.widescreen ? zapperImg->GetWidth() * Settings.WSFactor : zapperImg->GetWidth()) + 5;
     }
     if (wiispeak == 1)
     {
@@ -488,7 +488,7 @@ static int InternalShowGameInfo(char *ID)
         wiispeakImg->SetPosition(intputX, inputY);
         wiispeakImg->SetAlignment(0, 4);
         InfoWindow.Append(wiispeakImg);
-        intputX += (Settings.widescreen ? wiispeakImg->GetWidth() * .8 : wiispeakImg->GetWidth()) + 5;
+        intputX += (Settings.widescreen ? wiispeakImg->GetWidth() * Settings.WSFactor : wiispeakImg->GetWidth()) + 5;
     }
     if (nintendods == 1)
     {
@@ -497,7 +497,7 @@ static int InternalShowGameInfo(char *ID)
         nintendodsImg->SetPosition(intputX, inputY);
         nintendodsImg->SetAlignment(0, 4);
         InfoWindow.Append(nintendodsImg);
-        intputX += (Settings.widescreen ? nintendodsImg->GetWidth() * .8 : nintendodsImg->GetWidth()) + 5;
+        intputX += (Settings.widescreen ? nintendodsImg->GetWidth() * Settings.WSFactor : nintendodsImg->GetWidth()) + 5;
     }
     if (dancepad == 1)
     {
@@ -506,7 +506,7 @@ static int InternalShowGameInfo(char *ID)
         dancepadImg->SetPosition(intputX, inputY);
         dancepadImg->SetAlignment(0, 4);
         InfoWindow.Append(dancepadImg);
-        intputX += (Settings.widescreen ? dancepadImg->GetWidth() * .8 : dancepadImg->GetWidth()) + 5;
+        intputX += (Settings.widescreen ? dancepadImg->GetWidth() * Settings.WSFactor : dancepadImg->GetWidth()) + 5;
     }
     if (balanceboard == 1)
     {
@@ -515,7 +515,7 @@ static int InternalShowGameInfo(char *ID)
         balanceboardImg->SetPosition(intputX, inputY);
         balanceboardImg->SetAlignment(0, 4);
         InfoWindow.Append(balanceboardImg);
-        intputX += (Settings.widescreen ? balanceboardImg->GetWidth() * .8 : balanceboardImg->GetWidth()) + 5;
+        intputX += (Settings.widescreen ? balanceboardImg->GetWidth() * Settings.WSFactor : balanceboardImg->GetWidth()) + 5;
     }
 
     // # online players
@@ -547,7 +547,7 @@ static int InternalShowGameInfo(char *ID)
         wifiplayersImg->SetPosition(intputX, inputY);
         wifiplayersImg->SetAlignment(0, 4);
         InfoWindow.Append(wifiplayersImg);
-        intputX += (Settings.widescreen ? wifiplayersImg->GetWidth() * .8 : wifiplayersImg->GetWidth()) + 5;
+        intputX += (Settings.widescreen ? wifiplayersImg->GetWidth() * Settings.WSFactor : wifiplayersImg->GetWidth()) + 5;
     }
 
     // ratings
@@ -614,7 +614,7 @@ static int InternalShowGameInfo(char *ID)
         ratingImg->SetPosition(-25, inputY);
         ratingImg->SetAlignment(1, 4);
         InfoWindow.Append(ratingImg);
-        intputX += (Settings.widescreen ? ratingImg->GetWidth() * .8 : ratingImg->GetWidth()) + 5;
+        intputX += (Settings.widescreen ? ratingImg->GetWidth() * Settings.WSFactor : ratingImg->GetWidth()) + 5;
     }
 
     // title
@@ -680,7 +680,7 @@ static int InternalShowGameInfo(char *ID)
         char linebuf[300];
         snprintf(linebuf, sizeof(linebuf), "%s : %s%i", tr( "Released" ), linebuf2, year);
         releasedTxt = new GuiText(linebuf, 16, ( GXColor ) {0, 0, 0, 255});
-        if (releasedTxt->GetWidth() > 300) newline = 2;
+        if (releasedTxt->GetTextWidth() > 300) newline = 2;
         releasedTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
         releasedTxt->SetPosition(-17, 12 + indexy);
         indexy += (20 * newline);
@@ -693,7 +693,7 @@ static int InternalShowGameInfo(char *ID)
     {
         snprintf(linebuf2, sizeof(linebuf2), "%s %s", tr( "Published by" ), GameInfo.Publisher.c_str());
         publisherTxt = new GuiText(linebuf2, 16, ( GXColor ) {0, 0, 0, 255});
-        if (publisherTxt->GetWidth() > 250) newline = 2;
+        if (publisherTxt->GetTextWidth() > 250) newline = 2;
         publisherTxt->SetMaxWidth(250, WRAP);
         publisherTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
         publisherTxt->SetPosition(-17, 12 + indexy);
@@ -707,7 +707,7 @@ static int InternalShowGameInfo(char *ID)
     {
         snprintf(linebuf2, sizeof(linebuf2), "%s %s", tr( "Developed by" ), GameInfo.Developer.c_str());
         developerTxt = new GuiText(linebuf2, 16, ( GXColor ) {0, 0, 0, 255});
-        if (developerTxt->GetWidth() > 250) newline = 2;
+        if (developerTxt->GetTextWidth() > 250) newline = 2;
         developerTxt->SetMaxWidth(250, WRAP);
         developerTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
         developerTxt->SetPosition(-17, 12 + indexy);

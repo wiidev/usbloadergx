@@ -111,6 +111,8 @@ GuiSettingsMenu::GuiSettingsMenu()
     Options->SetName(Idx++, "%s", tr( "Tooltips" ));
     Options->SetName(Idx++, "%s", tr( "Flip-X" ));
     Options->SetName(Idx++, "%s", tr( "Prompts Buttons" ));
+    Options->SetName(Idx++, "%s", tr( "Widescreen Factor" ));
+    Options->SetName(Idx++, "%s", tr( "Font Scale Factor" ));
     Options->SetName(Idx++, "%s", tr( "Keyboard" ));
     Options->SetName(Idx++, "%s", tr( "Disc Artwork Download" ));
     Options->SetName(Idx++, "%s", tr( "Wiilight" ));
@@ -167,6 +169,12 @@ void GuiSettingsMenu::SetOptionValues()
 
     //! Settings: Prompts Buttons
     Options->SetValue(Idx++, "%s", tr( PromptButtonsText[Settings.wsprompt] ));
+
+    //! Settings: Widescreen Factor
+    Options->SetValue(Idx++, "%0.3f", Settings.WSFactor);
+
+    //! Settings: Font Scale Factor
+    Options->SetValue(Idx++, "%0.3f", Settings.FontScaleFactor);
 
     //! Settings: Keyboard
     Options->SetValue(Idx++, "%s", KeyboardText[Settings.keyset]);
@@ -279,6 +287,26 @@ int GuiSettingsMenu::GetMenuInternal()
     else if (ret == ++Idx)
     {
         if (++Settings.wsprompt >= MAX_ON_OFF) Settings.wsprompt = 0;
+    }
+
+    //! Settings: Widescreen Factor
+    else if (ret == ++Idx)
+    {
+        char entrie[20];
+        snprintf(entrie, sizeof(entrie), "%0.3f", Settings.WSFactor);
+        int ret = OnScreenKeyboard(entrie, sizeof(entrie), 0);
+        if(ret)
+            Settings.WSFactor = atof(entrie);
+    }
+
+    //! Settings: Font Scale Factor
+    else if (ret == ++Idx)
+    {
+        char entrie[20];
+        snprintf(entrie, sizeof(entrie), "%0.3f", Settings.FontScaleFactor);
+        int ret = OnScreenKeyboard(entrie, sizeof(entrie), 0);
+        if(ret)
+            Settings.FontScaleFactor = atof(entrie);
     }
 
     //! Settings: Keyboard

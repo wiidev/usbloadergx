@@ -240,11 +240,10 @@ void WindowCredits()
     txt[i]->SetPosition(0, 12);
     i++;
 
+    char SvnRev[30];
 #ifdef FULLCHANNEL
-    char SvnRev[30];
-    snprintf( SvnRev, sizeof( SvnRev ), "Rev%sc   IOS%u (Rev %u)", GetRev(), IOS_GetVersion(), IOS_GetRevision() );
+    snprintf(SvnRev, sizeof(SvnRev), "Rev%sc   IOS%u (Rev %u)", GetRev(), IOS_GetVersion(), IOS_GetRevision());
 #else
-    char SvnRev[30];
     snprintf(SvnRev, sizeof(SvnRev), "Rev%s   IOS%u (Rev %u)", GetRev(), IOS_GetVersion(), IOS_GetRevision());
 #endif
 
@@ -362,35 +361,35 @@ void WindowCredits()
     sprintf(text, "Waninkoko, Kwiirk & Hermes %s", tr( "for the USB Loader source" ));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(60, y);
+    txt[i]->SetPosition(10, y);
     i++;
     y += 20;
 
     sprintf(text, "Tantric %s", tr( "for his awesome tool LibWiiGui" ));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(60, y);
+    txt[i]->SetPosition(10, y);
     i++;
     y += 20;
 
     sprintf(text, "Fishears/Nuke %s", tr( "for Ocarina" ));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(60, y);
+    txt[i]->SetPosition(10, y);
     i++;
     y += 20;
 
     sprintf(text, "WiiPower %s", tr( "for diverse patches" ));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(60, y);
+    txt[i]->SetPosition(10, y);
     i++;
     y += 20;
 
     sprintf(text, "Oggzee %s", tr( "for FAT/NTFS support" ));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(60, y);
+    txt[i]->SetPosition(10, y);
     i++;
     y += 20;
 

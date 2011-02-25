@@ -10,6 +10,7 @@
 
 #include "gui.h"
 #include "wstring.hpp"
+#include "settings/CSettings.h"
 
 #define MAX_LINES_TO_DRAW   9
 
@@ -18,8 +19,7 @@ static int presetMaxWidth = 0;
 static int presetAlignmentHor = 0;
 static int presetAlignmentVert = 0;
 static u16 presetStyle = 0;
-static GXColor presetColor = ( GXColor )
-{   255, 255, 255, 255};
+static GXColor presetColor = (GXColor) {255, 255, 255, 255};
 
 #define TEXT_SCROLL_DELAY           5
 #define TEXT_SCROLL_INITIAL_DELAY   8
@@ -527,7 +527,7 @@ void GuiText::Draw()
     GXColor c = color;
     c.a = GetAlpha();
 
-    int newSize = size * GetScale();
+    int newSize = size * GetScale() * Settings.FontScaleFactor;
 
     if (newSize != currentSize)
     {
@@ -540,18 +540,19 @@ void GuiText::Draw()
     {
         if (wrapMode == DOTTED) // text dotted
         {
-            if (textDyn.size() == 0) MakeDottedText();
+            if (textDyn.size() == 0)
+                MakeDottedText();
 
-            if (textDyn.size() > 0) (font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop(), 0,
-                    textDyn[textDyn.size() - 1], currentSize, c, style);
+            if (textDyn.size() > 0)
+                (font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop(), 0, textDyn[textDyn.size() - 1], currentSize, c, style);
         }
 
         else if (wrapMode == SCROLL_HORIZONTAL)
         {
             ScrollText();
 
-            if (textDyn.size() > 0) (font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop(), 0,
-                    textDyn[textDyn.size() - 1], currentSize, c, style);
+            if (textDyn.size() > 0)
+                (font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop(), 0, textDyn[textDyn.size() - 1], currentSize, c, style);
         }
         else if (wrapMode == WRAP)
         {
@@ -563,8 +564,7 @@ void GuiText::Draw()
 
             for (u32 i = 0; i < textDyn.size(); i++)
             {
-                (font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop() + voffset + i * lineheight, 0,
-                        textDyn[i], currentSize, c, style);
+                (font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop() + voffset + i * lineheight, 0, textDyn[i], currentSize, c, style);
             }
         }
     }

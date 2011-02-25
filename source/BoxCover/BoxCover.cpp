@@ -23,6 +23,7 @@
  ***************************************************************************/
 #include "BoxCover.hpp"
 #include "BoxMesh.hpp"
+#include "settings/CSettings.h"
 #include "themes/CTheme.h"
 
 extern GuiImageData * pointer[4];
@@ -47,12 +48,13 @@ BoxCover::BoxCover(GuiImageData * img, bool flat)
     PosZ = -27.f;
     AnimRotate = 0.0f;
     last_manual_move_frame = 0;
-    camera = (guVector) {0.0F, 0.0F, 0.0F};
-    up = (guVector) {0.0F, 1.0F, 0.0F};
-    look = (guVector) {0.0F, 0.0F, -1.0F};
+    guVector camera = (guVector) {0.0F, 0.0F, 0.0F};
+    guVector up = (guVector) {0.0F, 1.0F, 0.0F};
+    guVector look = (guVector) {0.0F, 0.0F, -1.0F};
     boxColor = (GXColor) {233, 233, 233, 255};
 
     guLookAt(view, &camera,	&up, &look);
+    guPerspective(projection, 8, 640.f/480.f, 1.0f, 300.0F);
 
     //! Remove me later
     for(int i = 0; i < 4; ++i)
@@ -110,7 +112,7 @@ void BoxCover::WiiPADControl(GuiTrigger *t)
         else
             moveChan = -1;
     }
-    else if((t->wpad.btns_h & WPAD_BUTTON_A) && moveChan == t->chan && t->wpad.ir.valid)
+    else if((t->wpad.btns_h & WPAD_BUTTON_A) && moveChan == t->chan && t->wpad.ir.valid && !effects)
     {
         movePosX = (t->wpad.ir.x-moveStartPosX) * fabs(PosZ)/3400.f;
         movePosY = (moveStartPosY-t->wpad.ir.y) * fabs(PosZ)/3400.f;
@@ -194,8 +196,6 @@ void BoxCover::Draw()
 {
     u8 BoxAlpha = (int) (alpha+angleDyn) & 0xFF;
 
-    Mtx44 projection;
-    guPerspective(projection, 8, (f32)screenwidth/(f32)screenheight, 1.0f, 300.0F);
     GX_LoadProjectionMtx(projection, GX_PERSPECTIVE);
 
     GX_SetVtxDesc(GX_VA_POS, GX_INDEX8);
@@ -215,7 +215,8 @@ void BoxCover::Draw()
     guMtxRotAxisDeg(modelView, &cubeAxis, RotZ-Animation);
     guMtxConcat(modelView3, modelView2, modelView2);
     guMtxConcat(modelView2, modelView, modelView);
-    //guMtxScaleApply(modelView, modelView, BoxScale, BoxScale, BoxScale);
+    if(Settings.widescreen)
+        guMtxScaleApply(modelView, modelView, Settings.WSFactor, 1.0f, 1.0f);
     guMtxTransApply(modelView, modelView, PosX+xoffsetDyn/680.0f+movePosX, PosY+yoffsetDyn/680.0f+movePosY, PosZ);
     guMtxConcat(view,modelView,modelView);
 
@@ -317,14 +318,14 @@ void BoxCover::UpdateEffects()
 
     if(effects & EFFECT_BOX_FLY_CENTRE)
     {
-        if(PosX > 0.01f)
-            PosX -= effectAmount/1200.0f;
-        if(PosY > 0.01f)
-            PosY -= effectAmount/1200.0f;
-        if(PosX < -0.01f)
-            PosX += effectAmount/1200.0f;
-        if(PosY < -0.01f)
-            PosY += effectAmount/1200.0f;
+        if(PosX > 0.1f)
+            PosX -= effectAmount/1200.f;
+        if(PosY > 0.1f)
+            PosY -= effectAmount/1200.f;
+        if(PosX < -0.1f)
+            PosX += effectAmount/1200.f;
+        if(PosY < -0.1f)
+            PosY += effectAmount/1200.f;
 
         movePosX = 0.0f;
         movePosY = 0.0f;
@@ -342,13 +343,13 @@ void BoxCover::UpdateEffects()
     else if(effects & EFFECT_BOX_FLY_BACK)
     {
         if(PosX > PosXOrig+0.1f)
-            PosX -= effectAmount/1200.0f;
+            PosX -= effectAmount/1200.f;
         if(PosY > PosYOrig+0.1f)
-            PosY -= effectAmount/1200.0f;
+            PosY -= effectAmount/1200.f;
         if(PosX < PosXOrig-0.1f)
-            PosX += effectAmount/1200.0f;
+            PosX += effectAmount/1200.f;
         if(PosY < PosYOrig-0.1f)
-            PosY += effectAmount/1200.0f;
+            PosY += effectAmount/1200.f;
 
         PosZ -= 0.4f;
         RotY -= effectAmount/4.9f;

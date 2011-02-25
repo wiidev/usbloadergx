@@ -115,6 +115,8 @@ class CSettings
         short CacheTitles;
         u32 InstallPartitions;
         u32 ParentalBlocks;
+        f32 WSFactor;
+        f32 FontScaleFactor;
     protected:
         bool ValidVersion(FILE * file);
         bool SetSetting(char *name, char *value);

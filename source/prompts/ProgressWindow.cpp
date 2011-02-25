@@ -181,9 +181,9 @@ static void UpdateProgressValues(GuiImage *progressbarImg, GuiText *prTxt, GuiTe
     prTxt->SetTextf("%.2f", progressPercent);
 
     if (Settings.widescreen && Settings.wsprompt)
-        progressbarImg->SetSkew(0, 0, static_cast<int> (progressbarImg->GetWidth() * progressPercent * 0.8)
+        progressbarImg->SetSkew(0, 0, static_cast<int> (progressbarImg->GetWidth() * progressPercent * Settings.WSFactor)
                 - progressbarImg->GetWidth(), 0, static_cast<int> (progressbarImg->GetWidth() * progressPercent
-                * 0.8) - progressbarImg->GetWidth(), 0, 0, 0);
+                * Settings.WSFactor) - progressbarImg->GetWidth(), 0, 0, 0);
     else
         progressbarImg->SetSkew(0, 0, static_cast<int> (progressbarImg->GetWidth() * progressPercent)
             - progressbarImg->GetWidth(), 0, static_cast<int> (progressbarImg->GetWidth() * progressPercent)

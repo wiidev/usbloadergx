@@ -116,6 +116,8 @@ void CSettings::SetDefault()
     MultiplePartitions = OFF;
     USBPort = 0;
     CacheTitles = ON;
+    WSFactor = 0.8f; //actually should be 0.75 for real widescreen
+    FontScaleFactor = 1.0f;
 }
 
 bool CSettings::Load()
@@ -259,6 +261,8 @@ bool CSettings::Save()
     fprintf(file, "MultiplePartitions = %d\n ", MultiplePartitions);
     fprintf(file, "USBPort = %d\n ", USBPort);
     fprintf(file, "CacheTitles = %d\n ", CacheTitles);
+    fprintf(file, "WSFactor = %0.3f\n ", WSFactor);
+    fprintf(file, "FontScaleFactor = %0.3f\n ", FontScaleFactor);
     fclose(file);
 
     return true;
@@ -514,6 +518,16 @@ bool CSettings::SetSetting(char *name, char *value)
     else if (strcmp(name, "InstallPartitions") == 0)
     {
         InstallPartitions = strtoul(value, 0, 16);
+        return true;
+    }
+    else if (strcmp(name, "WSFactor") == 0)
+    {
+        WSFactor = atof(value);
+        return true;
+    }
+    else if (strcmp(name, "FontScaleFactor") == 0)
+    {
+        FontScaleFactor = atof(value);
         return true;
     }
     else if (strcmp(name, "ParentalBlocks") == 0)
