@@ -11,7 +11,7 @@
 
 #include "libwiigui/gui.h"
 #include "homebrewboot/BootHomebrew.h"
-#include "homebrewboot/HomebrewBrowse.h"
+#include "homebrewboot/HomebrewBrowser.hpp"
 #include "prompts/ProgressWindow.h"
 #include "menu/GameBrowseMenu.hpp"
 #include "menu/menus.h"
@@ -227,7 +227,7 @@ int MainMenu(int menu)
                 currentMenu = ThemeDownloader::Run();
                 break;
             case MENU_HOMEBREWBROWSE:
-                currentMenu = MenuHomebrewBrowse();
+                currentMenu = HomebrewBrowser::Execute();
                 break;
             case MENU_DISCLIST:
             default: // unrecognized menu

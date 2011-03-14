@@ -357,7 +357,6 @@ bool CheckConnection(const char *url, float timeout)
  ***************************************************************************/
 int NetworkWait()
 {
-
     if (!checkincomming) return -3;
 
     struct sockaddr_in sin;
@@ -479,7 +478,6 @@ static void * networkinitcallback(void *arg)
             //suspend thread
             updatechecked = true;
             networkHalt = true;
-            checkincomming = false;
         }
 
         if (checkincomming) NetworkWait();

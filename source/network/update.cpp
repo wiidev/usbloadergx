@@ -161,7 +161,7 @@ int UpdateWiiTDB()
     remove(ZipPath.c_str());
 
     //! Reload all titles because the file changed now.
-    GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
+    GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path, true);
 
     return (result ? filesize : -1);
 }

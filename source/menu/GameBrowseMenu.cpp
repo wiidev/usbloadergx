@@ -449,7 +449,7 @@ GameBrowseMenu::~GameBrowseMenu()
     delete DownloadBtnTT;
     delete IDBtnTT;
 
-    lastSelectedGame = cut_bounds(GetSelectedGame(), 0, gameList.size()-1);
+    lastSelectedGame = LIMIT(GetSelectedGame(), 0, gameList.size()-1);
 
     delete gameBrowser;
     delete gameGrid;
@@ -573,9 +573,9 @@ void GameBrowseMenu::ReloadBrowser()
     }
 
     if(GetSelectedGame() >= 0)
-        lastSelectedGame = cut_bounds(GetSelectedGame(), 0, gameList.size()-1);
+        lastSelectedGame = LIMIT(GetSelectedGame(), 0, gameList.size()-1);
     else
-        lastSelectedGame = cut_bounds(lastSelectedGame, 0, gameList.size()-1);
+        lastSelectedGame = LIMIT(lastSelectedGame, 0, gameList.size()-1);
 
     delete gameBrowser;
     delete gameGrid;

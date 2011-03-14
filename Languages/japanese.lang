@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-14 19:44+0100\n"
+"POT-Creation-Date: 2011-03-14 22:04+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ichiroling\n"
 "Language-Team: hosigumayuugi, papa, ichiroling\n"
@@ -166,7 +166,7 @@ msgid "AutoInit Network"
 msgstr "自動ネット接続"
 
 msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr ""
+msgstr "ﾎﾟｰﾄの自動切換の利用に際し、ﾌｧｲﾙｼｽﾃﾑの破損を避けるため、独自のﾊﾟｽ設定は全てSDｶｰﾄﾞにしてください。"
 
 msgid "BCA Codes Path"
 msgstr "ＢＣＡコード"
@@ -244,10 +244,10 @@ msgid "Both"
 msgstr "IDとﾘｰｼﾞｮﾝを表示"
 
 msgid "Both Ports"
-msgstr ""
+msgstr "両方のﾎﾟｰﾄ"
 
 msgid "Cache Titles"
-msgstr ""
+msgstr "ｹﾞｰﾑ名のｷｬｯｼｭ"
 
 msgid "Can't be formatted"
 msgstr "初期化できません"
@@ -406,7 +406,7 @@ msgid "Design:"
 msgstr "デザイン:"
 
 msgid "Details"
-msgstr ""
+msgstr "詳細"
 
 msgid "Developed by"
 msgstr "開発者："
@@ -605,6 +605,9 @@ msgstr "正面カバー"
 
 msgid "Flip-X"
 msgstr "ゲームリストの回転"
+
+msgid "Font Scale Factor"
+msgstr "文字サイズの補正率"
 
 msgid "Force NTSC"
 msgstr "NTSCに強制"
@@ -1322,10 +1325,10 @@ msgid "USB Loader GX is protected"
 msgstr "GXは保護されています"
 
 msgid "USB Port"
-msgstr ""
+msgstr "USBﾎﾟｰﾄ"
 
 msgid "USB Port changing is only supported on Hermes cIOS."
-msgstr ""
+msgstr "USBﾎﾟｰﾄの切替機能は、Hermes cIOS使用時のみ有効です。"
 
 msgid "Uninstall Game"
 msgstr "ゲームをｱﾝｲﾝｽﾄｰﾙ"
@@ -1414,6 +1417,9 @@ msgstr "このゲームの何を削除しますか:"
 
 msgid "WiFi Features"
 msgstr "ネットワーク対応"
+
+msgid "Widescreen Factor"
+msgstr "ワイド画面の補正率"
 
 msgid "Widescreen Fix"
 msgstr "普通"

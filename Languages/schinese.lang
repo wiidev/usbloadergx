@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-14 19:44+0100\n"
+"POT-Creation-Date: 2011-03-14 22:04+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -606,6 +606,9 @@ msgstr "普通封面"
 msgid "Flip-X"
 msgstr "按键规则"
 
+msgid "Font Scale Factor"
+msgstr "字体比例因数"
+
 msgid "Force NTSC"
 msgstr "强制 NTSC"
 
@@ -634,10 +637,10 @@ msgid "Full Cover Path"
 msgstr "完整封面路径"
 
 msgid "Full HQ Covers"
-msgstr "完整高清晰封面路径"
+msgstr "完整高清晰封面"
 
 msgid "Full LQ Covers"
-msgstr "完整低清晰封面路径"
+msgstr "完整低清晰封面"
 
 msgid "Full Menu"
 msgstr "完整菜单"
@@ -985,13 +988,13 @@ msgid "Nov"
 msgstr "十一月"
 
 msgid "OFF"
-msgstr "关闭"
+msgstr "禁止"
 
 msgid "OK"
 msgstr "确定"
 
 msgid "ON"
-msgstr "开启"
+msgstr "未禁止"
 
 msgid "Ocarina"
 msgstr "Ocarina金手指"
@@ -1414,6 +1417,9 @@ msgstr "要删除这个游戏的什么:"
 
 msgid "WiFi Features"
 msgstr "WiFi 功能"
+
+msgid "Widescreen Factor"
+msgstr "宽屏因数"
 
 msgid "Widescreen Fix"
 msgstr "宽屏校正"

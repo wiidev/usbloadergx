@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# dutch.lang - r1071
+# dutch.lang - r1074
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-14 19:47+0100\n"
-"PO-Revision-Date: 2011-02-14 15:07+0100\n"
+"POT-Creation-Date: 2011-03-14 22:04+0100\n"
+"PO-Revision-Date: 2011-02-28 07:16+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
 "MIME-Version: 1.0\n"
@@ -605,6 +605,9 @@ msgstr "Platte hoesjes"
 
 msgid "Flip-X"
 msgstr "X omwisselen"
+
+msgid "Font Scale Factor"
+msgstr ""
 
 msgid "Force NTSC"
 msgstr "Forceer NTSC"
@@ -1415,6 +1418,9 @@ msgstr "Wat er verwijderd moet worden voor deze spel titel:"
 msgid "WiFi Features"
 msgstr "WiFi functies"
 
+msgid "Widescreen Factor"
+msgstr ""
+
 msgid "Widescreen Fix"
 msgstr "Breedbeeld"
 
@@ -1512,7 +1518,7 @@ msgstr "seconden over"
 #~ msgstr "Verwijderen ?"
 
 #~ msgid "Keep"
-#~ msgstr "Bijhouden"
+#~ msgstr "Behouden"
 
 #~ msgid "Not a WAD file."
 #~ msgstr "Geen WAD bestand."

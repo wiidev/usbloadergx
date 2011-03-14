@@ -34,6 +34,7 @@ class HomebrewBrowser : public FlyingButtonsMenu
     public:
         HomebrewBrowser();
         ~HomebrewBrowser();
+        static int Execute();
         virtual int MainLoop();
     protected:
         void MainButtonClicked(int index);

@@ -487,7 +487,7 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
         scrollbarBoxBtn->SetPosition(width / 2 - 18 + 7, 0);
 
         int position = t->wpad.ir.y - scrollbarBoxBtn->GetHeight()/2 - scrollbarBoxBtn->GetTop();
-        position = cut_bounds(position, 0, 237);
+        position = LIMIT(position, 0, 237);
 
         listOffset = (int) (((float) position / 237.0f)*length);
         selectedItem = (int) (((float) listOffset / (float) length)*(PAGESIZE-1));

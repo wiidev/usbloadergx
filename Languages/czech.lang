@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-14 19:44+0100\n"
+"POT-Creation-Date: 2011-03-04 18:36+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -604,6 +604,9 @@ msgid "Flat Covers"
 msgstr "Ploché obaly"
 
 msgid "Flip-X"
+msgstr ""
+
+msgid "Font Scale Factor"
 msgstr ""
 
 msgid "Force NTSC"
@@ -1414,6 +1417,9 @@ msgstr "Co si prejete smazat pro tento titul:"
 
 msgid "WiFi Features"
 msgstr "WiFi možnosti"
+
+msgid "Widescreen Factor"
+msgstr ""
 
 msgid "Widescreen Fix"
 msgstr "Korekce širokoúhlé obrazovky"

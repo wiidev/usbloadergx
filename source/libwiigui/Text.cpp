@@ -1,4 +1,5 @@
 #include "settings/CSettings.h"
+#include "utils/tools.h"
 #include "Text.hpp"
 
 Text::Text(const char * t, int s, GXColor c) :
@@ -313,11 +314,11 @@ void Text::Draw()
     GXColor c = color;
     c.a = this->GetAlpha();
 
-    int newSize = size * GetScale() * Settings.FontScaleFactor;
+    int newSize = (int) (size * GetScale() * Settings.FontScaleFactor);
 
     if (newSize != currentSize)
     {
-        currentSize = newSize;
+        currentSize = LIMIT(newSize, 1, 100);
 
         if (wText) textWidth = (font ? font : fontSystem)->getWidth(wText->data(), currentSize);
     }

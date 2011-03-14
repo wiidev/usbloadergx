@@ -213,6 +213,9 @@ int GuiGameCarousel::GetClickedOption()
     int found = -1;
     if (clickedItem >= 0)
     {
+        for (int i = pagesize - 1; i >= 0; i--)
+            game[i]->ResetState();
+
         game[clickedItem]->SetState(STATE_SELECTED);
         found = gameIndex[clickedItem];
         clickedItem = -1;

@@ -11,6 +11,7 @@
 #include "gui.h"
 #include "wstring.hpp"
 #include "settings/CSettings.h"
+#include "utils/tools.h"
 
 #define MAX_LINES_TO_DRAW   9
 
@@ -527,11 +528,11 @@ void GuiText::Draw()
     GXColor c = color;
     c.a = GetAlpha();
 
-    int newSize = size * GetScale() * Settings.FontScaleFactor;
+    int newSize = (int) (size * GetScale() * Settings.FontScaleFactor);
 
     if (newSize != currentSize)
     {
-        currentSize = newSize;
+        currentSize = LIMIT(newSize, 1, 100);
 
         if (text) textWidth = (font ? font : fontSystem)->getWidth(text, currentSize);
     }

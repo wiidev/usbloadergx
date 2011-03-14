@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# italian.lang - v69 - r1053
+# italian.lang - v70 - r1074
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-14 19:44+0100\n"
-"PO-Revision-Date: 2011-01-22 20:00+0200\n"
+"POT-Creation-Date: 2011-03-14 22:04+0100\n"
+"PO-Revision-Date: 2011-03-10 21:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: Cambo\n"
 "MIME-Version: 1.0\n"
@@ -24,11 +24,11 @@ msgstr " non è disponibile sul server."
 
 #, c-format
 msgid "%i files not found on the server!"
-msgstr ""
+msgstr "%i file non trovati sul server!"
 
 #, c-format
 msgid "%i missing files"
-msgstr ""
+msgstr "%i file mancanti"
 
 msgid "0 (Everyone)"
 msgstr "0 (Tutti)"
@@ -142,7 +142,7 @@ msgid "App Language"
 msgstr "Lingua Utilizzata"
 
 msgid "Apply"
-msgstr ""
+msgstr "Applica"
 
 msgid "Apr"
 msgstr "aprile"
@@ -160,13 +160,13 @@ msgid "Aug"
 msgstr "agosto"
 
 msgid "Author(s):"
-msgstr ""
+msgstr "Autore/i:"
 
 msgid "AutoInit Network"
 msgstr "Inizializz. Rete Automatica"
 
 msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr ""
+msgstr "Il cambio automatico di porta è istantaneo. Per utilizzare questa opzione si devono preliminarmente impostare tutti i percorsi verso la scheda SD, altrimenti si rischia di danneggiare il filesystem del disco."
 
 msgid "BCA Codes Path"
 msgstr "Cart. Codici BCA"
@@ -244,10 +244,10 @@ msgid "Both"
 msgstr "Entrambi"
 
 msgid "Both Ports"
-msgstr ""
+msgstr "Entrambe Porte"
 
 msgid "Cache Titles"
-msgstr ""
+msgstr "Cache Titoli"
 
 msgid "Can't be formatted"
 msgstr "Non si può formattare"
@@ -300,7 +300,7 @@ msgid "Coding:"
 msgstr "Sviluppo:"
 
 msgid "Connection to server timed out."
-msgstr ""
+msgstr "Connessione al server scaduta."
 
 msgid "Console"
 msgstr "Terminale"
@@ -364,7 +364,7 @@ msgid "Credits"
 msgstr "Ringraziamenti"
 
 msgid "Custom Discarts"
-msgstr ""
+msgstr "Imm. Disco Person."
 
 msgid "Custom Paths"
 msgstr "Impostazioni Cartelle"
@@ -406,7 +406,7 @@ msgid "Design:"
 msgstr "Grafica:"
 
 msgid "Details"
-msgstr ""
+msgstr "Dettagli"
 
 msgid "Developed by"
 msgstr "Sviluppato da"
@@ -445,7 +445,7 @@ msgid "Do you want to apply it now?"
 msgstr "Applicare immediatamente?"
 
 msgid "Do you want to apply this theme?"
-msgstr ""
+msgstr "Vuoi utilizzare questo tema?"
 
 msgid "Do you want to change language?"
 msgstr "Vuoi cambiare lingua?"
@@ -478,16 +478,16 @@ msgid "Download finished"
 msgstr "Ho finito di scaricare"
 
 msgid "Downloading 3D Covers"
-msgstr ""
+msgstr "Sto scaricando le copertine 3D"
 
 msgid "Downloading Flat Covers"
-msgstr ""
+msgstr "Sto scaricando le copertine 2D"
 
 msgid "Downloading Full HQ Covers"
-msgstr ""
+msgstr "Sto scaricando le copertine Fronte/Retro HQ"
 
 msgid "Downloading Full LQ Covers"
-msgstr ""
+msgstr "Sto scaricando le copertine Fronte/Retro LQ"
 
 msgid "Downloading custom Discarts"
 msgstr "Sto scaricando le imm. disco personalizzate"
@@ -606,6 +606,9 @@ msgstr "Copertine 2D"
 msgid "Flip-X"
 msgstr "Scorrimento Dischi"
 
+msgid "Font Scale Factor"
+msgstr ""
+
 msgid "Force NTSC"
 msgstr "Forza NTSC"
 
@@ -622,7 +625,7 @@ msgid "Formatting, please wait..."
 msgstr "Sto Formattando, prego attendere..."
 
 msgid "Found missing images."
-msgstr ""
+msgstr "Trovate immagini mancanti."
 
 msgid "Free Space"
 msgstr "Spazio libero"
@@ -631,13 +634,13 @@ msgid "French"
 msgstr "Francese"
 
 msgid "Full Cover Path"
-msgstr ""
+msgstr "Cart. Cop. Fronte/Retro"
 
 msgid "Full HQ Covers"
-msgstr ""
+msgstr "Cop. Fronte/Retro HQ"
 
 msgid "Full LQ Covers"
-msgstr ""
+msgstr "Cop. Fronte/Retro LQ"
 
 msgid "Full Menu"
 msgstr "Menu Completo"
@@ -694,7 +697,7 @@ msgid "Game is already installed:"
 msgstr "Gioco già installato:"
 
 msgid "Game/Install Partition"
-msgstr ""
+msgstr "Partizione Giochi/Inst."
 
 msgid "Gamename [GAMEID]"
 msgstr "Nomegioco [IDGIOCO]"
@@ -889,7 +892,7 @@ msgid "Mount DVD drive"
 msgstr "Avvia DVD"
 
 msgid "Multiple Partitions"
-msgstr ""
+msgstr "Partizioni Multiple"
 
 msgid "Music Loop Mode"
 msgstr "Ripetizione Musica Sottof."
@@ -946,7 +949,7 @@ msgid "No themes found on the site."
 msgstr "Nessun tema trovato sul sito."
 
 msgid "No themes found."
-msgstr ""
+msgstr "Nessun tema trovato."
 
 msgid "None"
 msgstr "Nessuno"
@@ -1012,7 +1015,7 @@ msgid "Only for Install"
 msgstr "Installa Solamente"
 
 msgid "Original Discarts"
-msgstr ""
+msgstr "Imm. Disco Originali"
 
 msgid "Original/Customs"
 msgstr "Origin./Modific."
@@ -1147,7 +1150,7 @@ msgid "Save Game List to"
 msgstr "Salvataggio Elenco Giochi in"
 
 msgid "Save List"
-msgstr ""
+msgstr "Salva Lista"
 
 msgid "Saved"
 msgstr "Salvataggio Eseguito"
@@ -1189,7 +1192,7 @@ msgid "Sort alphabetically"
 msgstr "Ordine Alfabetico"
 
 msgid "Sort by number of players"
-msgstr ""
+msgstr "Ordine per Num. Giocatori"
 
 msgid "Sort by rank"
 msgstr "Ordine Preferenza"
@@ -1283,7 +1286,7 @@ msgid "Theme Downloader"
 msgstr "Scaricamento Temi"
 
 msgid "Theme Menu"
-msgstr ""
+msgstr "Menu Temi"
 
 msgid "Theme Path"
 msgstr "Cart. Temi"
@@ -1322,10 +1325,10 @@ msgid "USB Loader GX is protected"
 msgstr "USB Loader GX è Protetto"
 
 msgid "USB Port"
-msgstr ""
+msgstr "Porta USB"
 
 msgid "USB Port changing is only supported on Hermes cIOS."
-msgstr ""
+msgstr "Il cambio della Porta USB è possibile solo con il cIOS di Hermes."
 
 msgid "Uninstall Game"
 msgstr "Disinstalla il gioco"
@@ -1385,7 +1388,7 @@ msgid "VIDTV Patch"
 msgstr "Video Forzato"
 
 msgid "Version:"
-msgstr ""
+msgstr "Versione:"
 
 #, c-format
 msgid "Version: %s"
@@ -1414,6 +1417,9 @@ msgstr "Cosa vuoi eliminare per questo gioco?"
 
 msgid "WiFi Features"
 msgstr "Caratteristiche WiFi"
+
+msgid "Widescreen Factor"
+msgstr ""
 
 msgid "Widescreen Fix"
 msgstr "Widescreen"

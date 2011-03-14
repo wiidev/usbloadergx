@@ -199,7 +199,7 @@ void CGameTitles::RemoveUnusedCache(std::vector<std::string> &MissingTitles)
     }
 }
 
-void CGameTitles::LoadTitlesFromWiiTDB(const char * path)
+void CGameTitles::LoadTitlesFromWiiTDB(const char * path, bool forceCacheReload)
 {
     this->SetDefault();
 
@@ -215,7 +215,7 @@ void CGameTitles::LoadTitlesFromWiiTDB(const char * path)
     Filepath += "wiitdb.xml";
 
     //! Read game titles cache database
-    if(Settings.CacheTitles)
+    if(!forceCacheReload && Settings.CacheTitles)
         ReadCachedTitles(Cachepath.c_str());
 
     //! Read game list

@@ -125,6 +125,22 @@ HomebrewBrowser::~HomebrewBrowser()
         HaltNetworkThread();
 }
 
+int HomebrewBrowser::Execute()
+{
+    HomebrewBrowser * Menu = new HomebrewBrowser();
+    mainWindow->Append(Menu);
+
+    Menu->ShowMenu();
+
+    int returnMenu = MENU_NONE;
+
+    while((returnMenu = Menu->MainLoop()) == MENU_NONE);
+
+    delete Menu;
+
+    return returnMenu;
+}
+
 void HomebrewBrowser::AddMainButtons()
 {
     HaltGui();
@@ -303,7 +319,8 @@ int HomebrewBrowser::ReceiveFile()
         return MENU_NONE;
     }
 
-    bool error = false;
+    int error = 0;
+
     while (read < infilesize)
     {
         ShowProgress(tr( "Receiving file from:" ), GetIncommingIP(), NULL, read, infilesize, true);
@@ -329,7 +346,9 @@ int HomebrewBrowser::ReceiveFile()
     }
 
     char filename[101];
-    network_read(connection, (u8*) &filename, 100);
+    memset(filename, 0, sizeof(filename));
+
+    network_read(connection, (u8*) filename, 100);
 
     // Do we need to unzip this thing?
     if (wiiloadVersion[0] > 0 || wiiloadVersion[1] > 4)
@@ -401,7 +420,7 @@ int HomebrewBrowser::ReceiveFile()
 
     ProgressStop();
 
-    if (error || read != infilesize || strcasestr(filename, ".dol") || strcasestr(filename, ".elf"))
+    if (error || read != infilesize || (strcasestr(filename, ".dol") == 0 && strcasestr(filename, ".elf") == 0))
     {
         WindowPrompt(tr( "Error:" ), tr( "No data could be read." ), tr( "OK" ));
         FreeHomebrewBuffer();

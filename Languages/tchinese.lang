@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-14 19:44+0100\n"
+"POT-Creation-Date: 2011-03-04 18:36+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -166,7 +166,7 @@ msgid "AutoInit Network"
 msgstr "自動檢查網路"
 
 msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr "快速執行自動槽位切換。首先你需要在SD卡改變所有自訂路徑這個選項，否則可能會損壞檔案系統。"
+msgstr "立即生效連接埠自動切換功能。首先你需要在這選項改變所有自訂路徑為SD卡，否則可能會損壞檔案系統。"
 
 msgid "BCA Codes Path"
 msgstr "BAC代碼路徑"
@@ -244,10 +244,10 @@ msgid "Both"
 msgstr "全部"
 
 msgid "Both Ports"
-msgstr "兩個插槽"
+msgstr "兩個連接埠"
 
 msgid "Cache Titles"
-msgstr ""
+msgstr "遊戲標題緩衝"
 
 msgid "Can't be formatted"
 msgstr "無法格式化"
@@ -406,7 +406,7 @@ msgid "Design:"
 msgstr "設計者："
 
 msgid "Details"
-msgstr ""
+msgstr "詳細資訊"
 
 msgid "Developed by"
 msgstr "開發商"
@@ -605,6 +605,9 @@ msgstr "普通封面"
 
 msgid "Flip-X"
 msgstr "按鍵規則"
+
+msgid "Font Scale Factor"
+msgstr ""
 
 msgid "Force NTSC"
 msgstr "強制 NTSC"
@@ -1322,10 +1325,10 @@ msgid "USB Loader GX is protected"
 msgstr "USB Loader GX 被上鎖保護"
 
 msgid "USB Port"
-msgstr "USB 插槽"
+msgstr "USB 連接埠"
 
 msgid "USB Port changing is only supported on Hermes cIOS."
-msgstr "USB插槽變更僅Hermes cIOS支援。"
+msgstr "USB連接埠變更僅Hermes cIOS支援。"
 
 msgid "Uninstall Game"
 msgstr "移除遊戲"
@@ -1414,6 +1417,9 @@ msgstr "這遊戲title應刪除什麼："
 
 msgid "WiFi Features"
 msgstr "WiFi功能設定"
+
+msgid "Widescreen Factor"
+msgstr ""
 
 msgid "Widescreen Fix"
 msgstr "寬螢幕校正"

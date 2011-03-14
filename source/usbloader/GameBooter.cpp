@@ -53,7 +53,7 @@ u32 GameBooter::BootPartition(char * dolpath, u8 videoselected, u8 languageChoic
     u64 offset;
 
     /* Find game partition offset */
-    ret = __Disc_FindPartition(&offset);
+    ret = Disc_FindPartition(&offset);
     if (ret < 0)
         return 0;
 
@@ -69,7 +69,10 @@ u32 GameBooter::BootPartition(char * dolpath, u8 videoselected, u8 languageChoic
     NSMBPatch();
 
     /* Setup low memory */
-    __Disc_SetLowMem();
+    Disc_SetLowMem();
+
+    /* Setup video mode */
+    Disc_SelectVMode(videoselected);
 
     /* Run apploader */
     ret = Apploader_Run(&p_entry, dolpath, cheat, videoselected, languageChoice, vipatch, patchcountrystring,
@@ -290,5 +293,5 @@ int GameBooter::BootGame(const char * gameID)
 
     //! Jump to the entrypoint of the game - the last function of the USB Loader
     gprintf("Jumping to game entrypoint: 0x%08X.\n", AppEntrypoint);
-    return Disc_JumpToEntrypoint(videoChoice, enablecheat, WDMMenu::GetDolParameter());
+    return Disc_JumpToEntrypoint(enablecheat, WDMMenu::GetDolParameter());
 }

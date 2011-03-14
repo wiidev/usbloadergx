@@ -46,14 +46,14 @@ extern "C"
     s32 Disc_Init(void);
     s32 Disc_Open(void);
     s32 Disc_Wait(void);
-    void __Disc_SetLowMem(void);
+    void Disc_SetLowMem(void);
     s32 Disc_SetUSB(const u8 *);
     s32 Disc_ReadHeader(void *);
     s32 Disc_IsWii(void);
-    s32 __Disc_FindPartition(u64 *outbuf);
+    s32 Disc_FindPartition(u64 *outbuf);
     void PatchCountryStrings(void *Address, int Size);
-    s32 __Disc_FindPartition(u64 *outbuf);
-    s32 Disc_JumpToEntrypoint(u8 videoselected, bool enablecheat, u32 dolparameter);
+    void Disc_SelectVMode(u8 videoselected);
+    s32 Disc_JumpToEntrypoint(bool enablecheat, u32 dolparameter);
 
 #ifdef __cplusplus
 }

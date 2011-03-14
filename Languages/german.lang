@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-14 19:47+0100\n"
+"POT-Creation-Date: 2011-03-04 18:36+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -605,6 +605,9 @@ msgstr "2D Cover"
 
 msgid "Flip-X"
 msgstr "Flip-X"
+
+msgid "Font Scale Factor"
+msgstr ""
 
 msgid "Force NTSC"
 msgstr "Erzwinge NTSC"
@@ -1414,6 +1417,9 @@ msgstr "Was sollte bei diesem Spiel gelöscht werden:"
 
 msgid "WiFi Features"
 msgstr "WiFi Fähigkeiten"
+
+msgid "Widescreen Factor"
+msgstr ""
 
 msgid "Widescreen Fix"
 msgstr "Breitbild (16:9)"

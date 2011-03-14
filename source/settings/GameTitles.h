@@ -35,7 +35,7 @@ class CGameTitles
         //! Get possible number of players for this game
         int GetPlayersCount(const char * id) const;
         //! Load Game Titles from WiiTDB
-        void LoadTitlesFromWiiTDB(const char * path);
+        void LoadTitlesFromWiiTDB(const char * path, bool forceCacheReload = false);
         //! Set default game titles
         void SetDefault();
     protected:

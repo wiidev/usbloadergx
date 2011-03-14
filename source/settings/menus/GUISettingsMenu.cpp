@@ -31,6 +31,7 @@
 #include "settings/GameTitles.h"
 #include "xml/xml.h"
 #include "usbloader/wbfs.h"
+#include "utils/tools.h"
 
 static const char * OnOffText[MAX_ON_OFF] =
 {
@@ -133,7 +134,7 @@ GuiSettingsMenu::GuiSettingsMenu()
 GuiSettingsMenu::~GuiSettingsMenu()
 {
     if (Settings.titlesOverride != OldTitlesOverride)
-        GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
+        GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path, true);
 }
 
 void GuiSettingsMenu::SetOptionValues()
@@ -296,7 +297,15 @@ int GuiSettingsMenu::GetMenuInternal()
         snprintf(entrie, sizeof(entrie), "%0.3f", Settings.WSFactor);
         int ret = OnScreenKeyboard(entrie, sizeof(entrie), 0);
         if(ret)
-            Settings.WSFactor = atof(entrie);
+        {
+            for(u32 i = 0; i < sizeof(entrie); ++i)
+            {
+                if(entrie[i] == ',')
+                    entrie[i] = '.';
+            }
+
+            Settings.WSFactor = LIMIT(atof(entrie), 0.01f, 1.5f);
+        }
     }
 
     //! Settings: Font Scale Factor
@@ -306,7 +315,15 @@ int GuiSettingsMenu::GetMenuInternal()
         snprintf(entrie, sizeof(entrie), "%0.3f", Settings.FontScaleFactor);
         int ret = OnScreenKeyboard(entrie, sizeof(entrie), 0);
         if(ret)
-            Settings.FontScaleFactor = atof(entrie);
+        {
+            for(u32 i = 0; i < sizeof(entrie); ++i)
+            {
+                if(entrie[i] == ',')
+                    entrie[i] = '.';
+            }
+
+            Settings.FontScaleFactor = LIMIT(atof(entrie), 0.01f, 1.5f);
+        }
     }
 
     //! Settings: Keyboard
