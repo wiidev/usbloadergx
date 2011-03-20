@@ -111,7 +111,7 @@ RecourceFile Resources::RecourceFiles[] =
     {"settings_title_over.png", settings_title_over_png, settings_title_over_png_size, NULL, 0},
     {"pageindicator.png", pageindicator_png, pageindicator_png_size, NULL, 0},
     {"Wiimote1.png", Wiimote1_png, Wiimote1_png_size, NULL, 0},
-    {"Wiimote2.png", Wiimote2_png, Wiimote1_png_size, NULL, 0},
+    {"Wiimote2.png", Wiimote2_png, Wiimote2_png_size, NULL, 0},
     {"Wiimote4.png", Wiimote4_png, Wiimote4_png_size, NULL, 0},
     {"wifi1.png", wifi1_png, wifi1_png_size, NULL, 0},
     {"wifi2.png", wifi2_png, wifi2_png_size, NULL, 0},

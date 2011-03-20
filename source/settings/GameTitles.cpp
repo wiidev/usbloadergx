@@ -176,7 +176,7 @@ void CGameTitles::RemoveUnusedCache(std::vector<std::string> &MissingTitles)
 
         for(u32 n = 0; n < TitleList.size(); ++n)
         {
-            if(strncmp(TitleList[n].GameID, (const char *) gameList[i]->id, 6) == 0)
+            if(strncasecmp(TitleList[n].GameID, (const char *) gameList[i]->id, 6) == 0)
             {
                 UsedCachedList[n] = true;
                 isCached = true;

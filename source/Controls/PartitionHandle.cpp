@@ -162,7 +162,7 @@ bool PartitionHandle::Mount(int pos, const char * name, bool forceFAT)
 
     if(strncmp(GetFSName(pos), "NTFS", 4) == 0 || strcmp(GetFSName(pos), "GUID-Entry") == 0)
     {
-        if(ntfsMount(MountNameList[pos].c_str(), interface, GetLBAStart(pos), CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_IGNORE_CASE | NTFS_RECOVER))
+        if(ntfsMount(MountNameList[pos].c_str(), interface, GetLBAStart(pos), CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER))
         {
             PartitionList[pos].FSName = "NTFS";
             return true;

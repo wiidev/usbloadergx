@@ -30,6 +30,7 @@
 #include "settings/SettingsPrompts.h"
 #include "settings/GameTitles.h"
 #include "xml/xml.h"
+#include "usbloader/GameList.h"
 #include "usbloader/wbfs.h"
 #include "utils/tools.h"
 
@@ -134,7 +135,11 @@ GuiSettingsMenu::GuiSettingsMenu()
 GuiSettingsMenu::~GuiSettingsMenu()
 {
     if (Settings.titlesOverride != OldTitlesOverride)
+    {
         GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path, true);
+        if(!Settings.titlesOverride)
+            gameList.ReadGameList();
+    }
 }
 
 void GuiSettingsMenu::SetOptionValues()

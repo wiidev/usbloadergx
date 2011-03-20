@@ -194,7 +194,7 @@ void BoxCover::Update(GuiTrigger * t)
 
 void BoxCover::Draw()
 {
-    u8 BoxAlpha = (int) (alpha+angleDyn) & 0xFF;
+    u8 BoxAlpha = (int) (alpha+alphaDyn) & 0xFF;
 
     GX_LoadProjectionMtx(projection, GX_PERSPECTIVE);
 

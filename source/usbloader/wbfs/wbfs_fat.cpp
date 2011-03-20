@@ -208,7 +208,7 @@ s32 Wbfs_Fat::RemoveGame(u8 *discid)
 		snprintf(name, sizeof(name), dirent->d_name);
         if (name[0] == '.') continue;
         if (name[6] != '_') continue;
-        if (strncmp(name, (char*) discid, 6) != 0) continue;
+        if (strncasecmp(name, (char*) discid, 6) != 0) continue;
         p = strrchr(name, '.');
         if (!p) continue;
         if (strcasecmp(p, ".txt") != 0) continue;
@@ -549,6 +549,9 @@ s32 Wbfs_Fat::GetHeadersCount()
         if(!tmpList)
             break; //out of memory, keep the list until now and stop
 
+        for(int j = 0; j < 6; ++j)
+            tmpHdr.id[j] = toupper((int) tmpHdr.id[j]);
+
         fat_hdr_list = tmpList;
         memcpy(&fat_hdr_list[fat_hdr_count - 1], &tmpHdr, sizeof(struct discHdr));
     }
@@ -602,7 +605,7 @@ int Wbfs_Fat::FindFilename(u8 *id, char *fname, int len)
             u8 fn_id[8];
             int n = fileext - dirent->d_name; // length withouth .wbfs
             if (!CheckLayoutB(dirent->d_name, n, fn_id, fn_title)) continue;
-            if (strncmp((char*) fn_id, gameID, 6) != 0) continue;
+            if (strncasecmp((char*) fn_id, gameID, 6) != 0) continue;
             snprintf(fname, len, "%s/%s", path, dirent->d_name);
             if (stat(fname, &st) == 0) break;
         }

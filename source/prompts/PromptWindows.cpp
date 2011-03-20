@@ -242,9 +242,9 @@ void WindowCredits()
 
     char SvnRev[30];
 #ifdef FULLCHANNEL
-    snprintf(SvnRev, sizeof(SvnRev), "v2.1c RC1   IOS%u (Rev %u)", IOS_GetVersion(), IOS_GetRevision());
+    snprintf(SvnRev, sizeof(SvnRev), "v2.1c   IOS%u (Rev %u)", IOS_GetVersion(), IOS_GetRevision());
 #else
-    snprintf(SvnRev, sizeof(SvnRev), "v2.1 RC1   IOS%u (Rev %u)", IOS_GetVersion(), IOS_GetRevision());
+    snprintf(SvnRev, sizeof(SvnRev), "v2.1   IOS%u (Rev %u)", IOS_GetVersion(), IOS_GetRevision());
 #endif
 
     txt[i] = new GuiText(SvnRev, 16, ( GXColor ) {255, 255, 255, 255});

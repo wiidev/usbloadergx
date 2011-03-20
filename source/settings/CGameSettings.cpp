@@ -50,7 +50,7 @@ GameCFG * CGameSettings::GetGameCFG(const char * id)
 
     for(u32 i = 0; i < GameList.size(); ++i)
     {
-        if(strncmp(id, GameList[i].id, 6) == 0)
+        if(strncasecmp(id, GameList[i].id, 6) == 0)
         {
             return &GameList[i];
         }
@@ -66,7 +66,7 @@ bool CGameSettings::AddGame(const GameCFG & NewGame)
 {
     for(u32 i = 0; i < GameList.size(); ++i)
     {
-        if(strncmp(NewGame.id, GameList[i].id, 6) == 0)
+        if(strncasecmp(NewGame.id, GameList[i].id, 6) == 0)
         {
             memcpy(&GameList[i], &NewGame, sizeof(GameCFG));
             return true;
@@ -93,7 +93,7 @@ bool CGameSettings::Remove(const char * id)
 
     for(u32 i = 0; i < GameList.size(); ++i)
     {
-        if(strncmp(id, GameList[i].id, 6) == 0)
+        if(strncasecmp(id, GameList[i].id, 6) == 0)
         {
             GameList.erase(GameList.begin()+i);
             break;

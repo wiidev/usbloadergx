@@ -27,7 +27,7 @@ GameStatus * CGameStatistics::GetGameStatus(const char * id) const
 
     for(u32 i = 0; i < GameList.size(); ++i)
     {
-        if(strncmp(id, GameList[i].id, 6) == 0)
+        if(strncasecmp(id, GameList[i].id, 6) == 0)
         {
             return (GameStatus *) &GameList[i];
         }
@@ -40,7 +40,7 @@ bool CGameStatistics::AddGame(const GameStatus & NewGame)
 {
     for(u32 i = 0; i < GameList.size(); ++i)
     {
-        if(strncmp(NewGame.id, GameList[i].id, 6) == 0)
+        if(strncasecmp(NewGame.id, GameList[i].id, 6) == 0)
         {
             memcpy(&GameList[i], &NewGame, sizeof(GameStatus));
             return true;
@@ -67,7 +67,7 @@ bool CGameStatistics::Remove(const char * id)
 
     for(u32 i = 0; i < GameList.size(); ++i)
     {
-        if(strncmp(id, GameList[i].id, 6) == 0)
+        if(strncasecmp(id, GameList[i].id, 6) == 0)
         {
             GameList.erase(GameList.begin()+i);
             break;

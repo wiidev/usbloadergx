@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# French.lang for r1065
+# French.lang for r1076 (2.1)
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -166,7 +166,7 @@ msgid "AutoInit Network"
 msgstr "AutoInit réseau"
 
 msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr ""
+msgstr "Vous devez placer tous les dossiers personnalisés sur la carte SD avant d'utiliser cette option, sinon vous risquez d'endommager les données de vos disques USB."
 
 msgid "BCA Codes Path"
 msgstr "Dossier codes BCA"
@@ -244,10 +244,10 @@ msgid "Both"
 msgstr "Les deux"
 
 msgid "Both Ports"
-msgstr ""
+msgstr "Les deux ports"
 
 msgid "Cache Titles"
-msgstr ""
+msgstr "Titres en cache"
 
 msgid "Can't be formatted"
 msgstr "Formatage impossible"
@@ -406,7 +406,7 @@ msgid "Design:"
 msgstr "Graphisme:"
 
 msgid "Details"
-msgstr ""
+msgstr "Détails"
 
 msgid "Developed by"
 msgstr "Développé par"
@@ -607,7 +607,7 @@ msgid "Flip-X"
 msgstr "Inversion-X"
 
 msgid "Font Scale Factor"
-msgstr ""
+msgstr "Échelle police"
 
 msgid "Force NTSC"
 msgstr "Forcer NTSC"
@@ -1325,10 +1325,10 @@ msgid "USB Loader GX is protected"
 msgstr "USB Loader GX est verrouillé"
 
 msgid "USB Port"
-msgstr ""
+msgstr "Port USB"
 
 msgid "USB Port changing is only supported on Hermes cIOS."
-msgstr ""
+msgstr "Le changement de port USB n'est supporté qu'avec les cIOS d'Hermes."
 
 msgid "Uninstall Game"
 msgstr "Désinstaller le jeu"
@@ -1419,7 +1419,7 @@ msgid "WiFi Features"
 msgstr "Connexion WiFi"
 
 msgid "Widescreen Factor"
-msgstr ""
+msgstr "Échelle interface 16:9"
 
 msgid "Widescreen Fix"
 msgstr "16:9"

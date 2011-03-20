@@ -225,7 +225,7 @@ void app_loadgameconfig(char *discid)
                     gameidmatch = 0;
                     goto idmatch;
                 }
-                if (strncmp(discid, parsebuffer, strlen(parsebuffer)) == 0)
+                if (strncasecmp(discid, parsebuffer, strlen(parsebuffer)) == 0)
                 {
                     gameidmatch += strlen(parsebuffer);
                     idmatch: if (gameidmatch > maxgameidmatch2)
