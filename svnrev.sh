@@ -43,7 +43,7 @@ EOF
 	<app version="1">
 		<name> USB Loader GX</name>
 		<coder>USB Loader GX Team</coder>
-		<version>2.0 r$rev_new</version>
+		<version>2.1 r$rev_new</version>
 		<release_date>$rev_date</release_date>
 		<no_ios_reload/>
 		<short_description>Loads games from USB-devices</short_description>
