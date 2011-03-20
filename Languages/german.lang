@@ -1,11 +1,11 @@
 # USB Loader GX
-# german language source file - r1071
+# german language source file - r1075 RC1
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-04 18:36+0100\n"
+"POT-Creation-Date: 2011-03-14 23:27+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -607,7 +607,7 @@ msgid "Flip-X"
 msgstr "Flip-X"
 
 msgid "Font Scale Factor"
-msgstr ""
+msgstr "Schriftskalierwert"
 
 msgid "Force NTSC"
 msgstr "Erzwinge NTSC"
@@ -1419,7 +1419,7 @@ msgid "WiFi Features"
 msgstr "WiFi Fähigkeiten"
 
 msgid "Widescreen Factor"
-msgstr ""
+msgstr "Breitbildwert"
 
 msgid "Widescreen Fix"
 msgstr "Breitbild (16:9)"

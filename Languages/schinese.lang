@@ -184,55 +184,55 @@ msgid "Big thanks to:"
 msgstr "非常感谢:"
 
 msgid "Block Cover Downloads"
-msgstr "禁止下载封面"
+msgstr "下载封面"
 
 msgid "Block Custom Paths"
-msgstr "禁止自制路径"
+msgstr "自制路径"
 
 msgid "Block Game Install"
-msgstr "禁止安装游戏"
+msgstr "安装游戏"
 
 msgid "Block Game Settings"
-msgstr "禁止设置游戏"
+msgstr "设置游戏"
 
 msgid "Block GameID Change"
-msgstr "禁止更改游戏ID"
+msgstr "更改游戏ID"
 
 msgid "Block Global Settings"
-msgstr "禁止全局设置"
+msgstr "全局设置"
 
 msgid "Block Gui Settings"
-msgstr "禁止图形界面设置"
+msgstr "图形界面设置"
 
 msgid "Block HBC Menu"
-msgstr "禁止HBC菜单"
+msgstr "HBC菜单"
 
 msgid "Block IOS Reload"
 msgstr "阻止IOS重新载入"
 
 msgid "Block Loader Settings"
-msgstr "禁止Loader设置"
+msgstr "Loader设置"
 
 msgid "Block Parental Settings"
-msgstr "禁止家长控制设置"
+msgstr "家长控制设置"
 
 msgid "Block Reset Settings"
-msgstr "禁止重置设置"
+msgstr "重置设置"
 
 msgid "Block Sound Settings"
-msgstr "禁止声音设置"
+msgstr "声音设置"
 
 msgid "Block Theme Downloader"
-msgstr "禁止主题下载"
+msgstr "主题下载"
 
 msgid "Block Theme Menu"
 msgstr "禁止主题菜单"
 
 msgid "Block Title Launcher"
-msgstr "禁止Title启动"
+msgstr "Title启动器"
 
 msgid "Block Updates"
-msgstr "禁止更新"
+msgstr "更新"
 
 msgid "Boot/Standard"
 msgstr "启动/标准"
@@ -988,13 +988,13 @@ msgid "Nov"
 msgstr "十一月"
 
 msgid "OFF"
-msgstr "禁止"
+msgstr "关闭"
 
 msgid "OK"
 msgstr "确定"
 
 msgid "ON"
-msgstr "未禁止"
+msgstr "开启"
 
 msgid "Ocarina"
 msgstr "Ocarina金手指"

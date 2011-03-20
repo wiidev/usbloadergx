@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# portuguese_pt.lang - r1073
+# portuguese_pt.lang - r1075
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-14 22:04+0100\n"
+"POT-Creation-Date: 2011-03-14 22:04+0000\n"
 "PO-Revision-Date: 2011-03-11 20:00-0000\n"
 "Last-Translator: pplucky (Sky8000)\n"
 "Language-Team: pplucky <pplucky@gmail.com> (Sky8000 <sky8000@hotmail.com>)\n"
@@ -272,7 +272,7 @@ msgid "Change Play Path"
 msgstr "Alterar Caminho de Músicas"
 
 msgid "Cheatfile is blank"
-msgstr "Ficheiro de truques vazio"
+msgstr "Ficheiro de batota vazio"
 
 msgid "Clear"
 msgstr "Limpar"
@@ -391,10 +391,10 @@ msgid "Delete"
 msgstr "Eliminar"
 
 msgid "Delete Cheat GCT"
-msgstr "Eliminar Truques GCT"
+msgstr "Eliminar Batota GCT"
 
 msgid "Delete Cheat TXT"
-msgstr "Eliminar Truques TXT"
+msgstr "Eliminar Batota TXT"
 
 msgid "Delete Cover Artwork"
 msgstr "Eliminar Capas"
@@ -607,7 +607,7 @@ msgid "Flip-X"
 msgstr "Paginação Horizontal"
 
 msgid "Font Scale Factor"
-msgstr ""
+msgstr "Factor Escala Fonte"
 
 msgid "Force NTSC"
 msgstr "Forçar NTSC"
@@ -652,7 +652,7 @@ msgid "GAMEID_Gamename"
 msgstr "IDJOGO_NomeJogo"
 
 msgid "GCT Cheatcodes Path"
-msgstr "Cam. Truques GCT"
+msgstr "Cam. Cód. Batota GCT"
 
 msgid "GCT File created"
 msgstr "Ficheiro GCT criado"
@@ -916,7 +916,7 @@ msgid "No"
 msgstr "Não"
 
 msgid "No Cheatfile found"
-msgstr "Ficheiro de truques não encontrado"
+msgstr "Ficheiro de Batota não encontrado"
 
 msgid "No DOL file found on disc."
 msgstr "Não foi encontrado nenhum ficheiro DOL no disco"
@@ -931,7 +931,7 @@ msgid "No WBFS or FAT/NTFS/EXT partition found"
 msgstr "Nenhuma partição WBFS ou FAT/NTFS/EXT encontrada"
 
 msgid "No cheats were selected"
-msgstr "Não foram seleccionados truques"
+msgstr "Não foram seleccionados batotas"
 
 msgid "No data could be read."
 msgstr "Não foi possível ler dados."
@@ -1264,7 +1264,7 @@ msgid "TChinese"
 msgstr "Chinês Tradicional"
 
 msgid "TXT Cheatcodes Path"
-msgstr "Cam. TXT Truques"
+msgstr "Cam. TXT Cód. Batotas"
 
 msgid "The .them file was not found in the zip."
 msgstr "O ficheiro .them não foi encontrado no zip"
@@ -1419,7 +1419,7 @@ msgid "WiFi Features"
 msgstr "Rede sem fios"
 
 msgid "Widescreen Factor"
-msgstr ""
+msgstr "Factor Ecrã Panorâmico"
 
 msgid "Widescreen Fix"
 msgstr "Correcção 16:9"
@@ -1467,7 +1467,7 @@ msgid "does not exist!"
 msgstr "não existe!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr "não existe!  Carregando jogo sem truques."
+msgstr "não existe!  Carregando jogo sem batotas."
 
 msgid "files left"
 msgstr "ficheiros restantes"
@@ -1737,7 +1737,7 @@ msgstr "segundos restantes"
 #~ msgstr "Forçar"
 
 #~ msgid "GCT Cheatcodes Path changed"
-#~ msgstr "Caminho Truques GCT alterado"
+#~ msgstr "Caminho Cód. Batota GCT alterado"
 
 #~ msgid "Hermes cIOS"
 #~ msgstr "cIOS Hermes"
@@ -1794,7 +1794,7 @@ msgstr "segundos restantes"
 #~ msgstr "Standard"
 
 #~ msgid "TXT Cheatcodes Path changed"
-#~ msgstr "Caminho de TXT de Truques alterado"
+#~ msgstr "Caminho de TXT de Cód. Batota alterado"
 
 #~ msgid "Theme Download Path changed"
 #~ msgstr "Caminho para Download de Temas alterado"

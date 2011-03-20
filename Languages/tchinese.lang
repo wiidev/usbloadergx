@@ -607,7 +607,7 @@ msgid "Flip-X"
 msgstr "按鍵規則"
 
 msgid "Font Scale Factor"
-msgstr ""
+msgstr "字型比例因數"
 
 msgid "Force NTSC"
 msgstr "強制 NTSC"
@@ -1419,7 +1419,7 @@ msgid "WiFi Features"
 msgstr "WiFi功能設定"
 
 msgid "Widescreen Factor"
-msgstr ""
+msgstr "寬螢幕因數"
 
 msgid "Widescreen Fix"
 msgstr "寬螢幕校正"
