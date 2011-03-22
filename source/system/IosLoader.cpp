@@ -117,7 +117,7 @@ s32 IosLoader::ReloadIosSafe(s32 ios)
     else if(IsWaninkokoIOS(ios))
     {
         s32 iosRev = NandTitles.VersionOf(TITLE_ID(1, ios));
-        if((iosRev < 9 || iosRev > 30) && iosRev != 65535)  //let's see if Waninkoko actually gets to 30
+        if((iosRev < 9 || iosRev > 30000) && iosRev != 65535)  //let's see if Waninkoko actually gets to 30
             return -22;
     }
     else
@@ -152,13 +152,6 @@ void IosLoader::LoadIOSModules(s32 ios, s32 ios_rev)
         dip_plugin_size = odip_frag_size;
         gprintf("Loading ehc v5 and opendip module\n");
 
-  //      u8 *ehc_cfg = search_for_ehcmodule_cfg((u8 *) ech_module, ehc_module_size);
-  //      if (ehc_cfg)
-  //      {
-  //          ehc_cfg += 12;
-  //          ehc_cfg[0] = 0; // USB Port 0
-  //          gprintf("Patched ehc module to use usb port 0.\n");
-  //      }
         load_modules(ech_module, ehc_module_size, dip_plugin, dip_plugin_size);
     }
     //! Waninkoko IOS
