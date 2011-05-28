@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-14 22:04+0100\n"
+"POT-Creation-Date: 2011-05-28 21:44+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -226,7 +226,7 @@ msgid "Block Theme Downloader"
 msgstr "主题下载"
 
 msgid "Block Theme Menu"
-msgstr "禁止主题菜单"
+msgstr "主题菜单"
 
 msgid "Block Title Launcher"
 msgstr "Title启动器"
@@ -611,6 +611,12 @@ msgstr "字体比例因数"
 
 msgid "Force NTSC"
 msgstr "强制 NTSC"
+
+msgid "Force NTSC480p"
+msgstr ""
+
+msgid "Force PAL480p"
+msgstr ""
 
 msgid "Force PAL50"
 msgstr "强制 PAL50"
@@ -1383,6 +1389,9 @@ msgstr "正在升级语言文件:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "上传已安装Zip文件到自制程序目录"
+
+msgid "Use global"
+msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "VIDTV修改"

@@ -10,20 +10,20 @@
 typedef struct _GameCFG
 {
     char id[7];
-    u8 video;
-    u8 language;
-    u8 ocarina;
-    u8 vipatch;
-    u8 ios;
-    u8 parentalcontrol;
-    u8 errorfix002;
-    u8 iosreloadblock;
-    u8 loadalternatedol;
+    short video;
+    short language;
+    short ocarina;
+    short vipatch;
+    short ios;
+    short parentalcontrol;
+    short errorfix002;
+    short iosreloadblock;
+    short loadalternatedol;
     u32 alternatedolstart;
-    u8 patchcountrystrings;
+    short patchcountrystrings;
     char alternatedolname[40];
-    u8 returnTo;
-    u8 Locked;
+    short returnTo;
+    short Locked;
 } GameCFG;
 
 class CGameSettings

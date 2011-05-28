@@ -9,6 +9,7 @@
 #include "Controls/DeviceHandler.hpp"
 #include "wad/nandtitle.h"
 #include "system/IosLoader.h"
+#include "utils/timer.h"
 #include "settings/CSettings.h"
 #include "settings/CGameSettings.h"
 #include "settings/CGameStatistics.h"
@@ -90,22 +91,20 @@ void StartUpProcess::SetTextf(const char * format, ...)
 bool StartUpProcess::USBSpinUp()
 {
     bool started = false;
-    int retries = 400;
     const DISC_INTERFACE * handle = DeviceHandler::GetUSBInterface();
-
+    Timer countDown;
     // wait 10 sec for the USB to spin up...stupid slow ass HDD
     do
     {
         started = (handle->startup() && handle->isInserted());
-        usleep(50000);
+        if(started)
+            break;
 
-        if(retries < 400 && retries % 20 == 0)
-        {
-            messageTxt->SetTextf("Waiting for HDD: %i sec left\n", retries/20);
-            Draw();
-        }
+        messageTxt->SetTextf("Waiting for HDD: %i sec left\n", 20-(int)countDown.elapsed());
+        Draw();
+        usleep(50000);
     }
-    while(!started && --retries > 0);
+    while(countDown.elapsed() < 20.f);
 
     return started;
 }

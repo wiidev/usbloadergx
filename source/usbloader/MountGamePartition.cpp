@@ -145,8 +145,15 @@ int MountGamePartition(bool ShowGUI)
     }
 
     gprintf("LoadTitlesFromWiiTDB\n");
+    //! Clear list if available
+    GameTitles.Clear();
 
-    GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
+    //! gameList is loaded in GameTitles.LoadTitlesFromWiiTDB after cache file load
+    //! for speed up purpose. If titles override active, load game list here.
+    if(Settings.titlesOverride)
+        GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
+    else
+        gameList.LoadUnfiltered();
 
     return ret;
 }

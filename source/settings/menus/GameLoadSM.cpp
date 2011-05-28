@@ -32,13 +32,13 @@
 #include "wad/nandtitle.h"
 #include "GameLoadSM.hpp"
 
-static const char * OnOffText[MAX_ON_OFF] =
+static const char * OnOffText[] =
 {
     trNOOP( "OFF" ),
     trNOOP( "ON" )
 };
 
-static const char * VideoModeText[VIDEO_MODE_MAX] =
+static const char * VideoModeText[] =
 {
     trNOOP( "System Default" ),
     trNOOP( "Disc Default" ),
@@ -46,9 +46,11 @@ static const char * VideoModeText[VIDEO_MODE_MAX] =
     trNOOP( "Force PAL60" ),
     trNOOP( "Force NTSC" ),
     trNOOP( "Region Patch" ),
+    trNOOP( "Force PAL480p" ),
+    trNOOP( "Force NTSC480p" ),
 };
 
-static const char * LanguageText[MAX_LANGUAGE] =
+static const char * LanguageText[] =
 {
     trNOOP( "Japanese" ),
     trNOOP( "English" ),
@@ -63,14 +65,14 @@ static const char * LanguageText[MAX_LANGUAGE] =
     trNOOP( "Console Default" ),
 };
 
-static const char * Error002Text[3] =
+static const char * Error002Text[] =
 {
     trNOOP( "No" ),
     trNOOP( "Yes" ),
     trNOOP( "Anti" )
 };
 
-static const char * ParentalText[5] =
+static const char * ParentalText[] =
 {
     trNOOP( "0 (Everyone)" ),
     trNOOP( "1 (Child 7+)" ),
@@ -158,28 +160,49 @@ void GameLoadSM::SetOptionValues()
     int Idx = 0;
 
     //! Settings: Video Mode
-    Options->SetValue(Idx++, "%s", tr(VideoModeText[GameConfig.video]));
+    if(GameConfig.video == -1)
+        Options->SetValue(Idx++, tr("Use global"));
+    else
+        Options->SetValue(Idx++, "%s", tr(VideoModeText[GameConfig.video]));
 
     //! Settings: VIDTV Patch
-    Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.vipatch]));
+    if(GameConfig.vipatch == -1)
+        Options->SetValue(Idx++, tr("Use global"));
+    else
+        Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.vipatch]));
 
     //! Settings: Game Language
-    Options->SetValue(Idx++, "%s", tr(LanguageText[GameConfig.language]));
+    if(GameConfig.language == -1)
+        Options->SetValue(Idx++, tr("Use global"));
+    else
+        Options->SetValue(Idx++, "%s", tr(LanguageText[GameConfig.language]));
 
     //! Settings: Patch Country Strings
-    Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.patchcountrystrings]));
+    if(GameConfig.patchcountrystrings == -1)
+        Options->SetValue(Idx++, tr("Use global"));
+    else
+        Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.patchcountrystrings]));
 
     //! Settings: Ocarina
-    Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.ocarina]));
+    if(GameConfig.ocarina == -1)
+        Options->SetValue(Idx++, tr("Use global"));
+    else
+        Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.ocarina]));
 
     //! Settings: Game IOS
-    Options->SetValue(Idx++, "%i", GameConfig.ios);
+    if(GameConfig.ios == -1)
+        Options->SetValue(Idx++, tr("Use global"));
+    else
+        Options->SetValue(Idx++, "%i", GameConfig.ios);
 
     //! Settings: Parental Control
     Options->SetValue(Idx++, "%s", tr(ParentalText[GameConfig.parentalcontrol]));
 
     //! Settings: Error 002 fix
-    Options->SetValue(Idx++, "%s", tr(Error002Text[GameConfig.errorfix002]));
+    if(GameConfig.errorfix002 == -1)
+        Options->SetValue(Idx++, tr("Use global"));
+    else
+        Options->SetValue(Idx++, "%s", tr(Error002Text[GameConfig.errorfix002]));
 
     //! Settings: Return To
     if(GameConfig.returnTo)
@@ -241,31 +264,31 @@ int GameLoadSM::GetMenuInternal()
     //! Settings: Video Mode
     if (ret == ++Idx)
     {
-        if (++GameConfig.video >= VIDEO_MODE_MAX) GameConfig.video = 0;
+        if (++GameConfig.video >= VIDEO_MODE_MAX) GameConfig.video = INHERIT;
     }
 
     //! Settings: VIDTV Patch
     else if (ret == ++Idx)
     {
-        if (++GameConfig.vipatch >= MAX_ON_OFF) GameConfig.vipatch = 0;
+        if (++GameConfig.vipatch >= MAX_ON_OFF) GameConfig.vipatch = INHERIT;
     }
 
     //! Settings: Game Language
     else if (ret == ++Idx)
     {
-        if (++GameConfig.language >= MAX_LANGUAGE) GameConfig.language = 0;
+        if (++GameConfig.language >= MAX_LANGUAGE) GameConfig.language = INHERIT;
     }
 
     //! Settings: Patch Country Strings
     else if (ret == ++Idx)
     {
-        if (++GameConfig.patchcountrystrings >= MAX_ON_OFF) GameConfig.patchcountrystrings = 0;
+        if (++GameConfig.patchcountrystrings >= MAX_ON_OFF) GameConfig.patchcountrystrings = INHERIT;
     }
 
     //! Settings: Ocarina
     else if (ret == ++Idx)
     {
-        if (++GameConfig.ocarina >= MAX_ON_OFF) GameConfig.ocarina = 0;
+        if (++GameConfig.ocarina >= MAX_ON_OFF) GameConfig.ocarina = INHERIT;
     }
 
     //! Settings: Game IOS
@@ -298,7 +321,7 @@ int GameLoadSM::GetMenuInternal()
     //! Settings: Error 002 fix
     else if (ret == ++Idx)
     {
-        if (++GameConfig.errorfix002 >= 3) GameConfig.errorfix002 = 0;
+        if (++GameConfig.errorfix002 >= 3) GameConfig.errorfix002 = INHERIT;
     }
 
     //! Settings: Return To

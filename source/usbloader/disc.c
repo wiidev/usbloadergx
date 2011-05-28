@@ -131,6 +131,14 @@ void Disc_SelectVMode(u8 videoselected)
 			vmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
 			vmode_reg = vmode->viTVMode >> 2;
 			break;
+        case VIDEO_MODE_PAL480P:
+            vmode_reg = TVEurgb60Hz480Prog.viTVMode >> 2;
+            vmode = &TVNtsc480Prog;
+            break;
+        case VIDEO_MODE_NTSC480P:
+            vmode_reg = VI_NTSC;
+            vmode = &TVNtsc480Prog;
+            break;
 		case VIDEO_MODE_SYSDEFAULT: // AUTO PATCH TO SYSTEM
 			break;
 	}

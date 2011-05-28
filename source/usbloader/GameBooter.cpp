@@ -1,3 +1,4 @@
+#include <ogc/machine/processor.h>
 #include "menu/menus.h"
 #include "menu/WDMMenu.hpp"
 #include "mload/mload.h"
@@ -194,13 +195,13 @@ int GameBooter::BootGame(const char * gameID)
 
     //! Setup game configuration from game settings. If no game settings exist use global/default.
     GameCFG * game_cfg = GameSettings.GetGameCFG(gameHeader.id);
-    u8 videoChoice = game_cfg->video;
-    u8 languageChoice = game_cfg->language;
-    u8 ocarinaChoice = game_cfg->ocarina;
-    u8 viChoice = game_cfg->vipatch;
-    u8 iosChoice = game_cfg->ios;
-    u8 fix002 = game_cfg->errorfix002;
-    u8 countrystrings = game_cfg->patchcountrystrings;
+    u8 videoChoice = game_cfg->video == INHERIT ? Settings.videomode : game_cfg->video;
+    u8 languageChoice = game_cfg->language == INHERIT ? Settings.language : game_cfg->language;
+    u8 ocarinaChoice = game_cfg->ocarina == INHERIT ? Settings.ocarina : game_cfg->ocarina;
+    u8 viChoice = game_cfg->vipatch == INHERIT ? Settings.videopatch : game_cfg->vipatch;
+    u8 iosChoice = game_cfg->ios == INHERIT ? Settings.cios : game_cfg->ios;
+    u8 fix002 = game_cfg->errorfix002 == INHERIT ? Settings.error002 : game_cfg->errorfix002;
+    u8 countrystrings = game_cfg->patchcountrystrings == INHERIT ? Settings.patchcountrystrings : game_cfg->patchcountrystrings;
     u8 alternatedol = game_cfg->loadalternatedol;
     u32 alternatedoloffset = game_cfg->alternatedolstart;
     u8 reloadblock = game_cfg->iosreloadblock;
@@ -214,7 +215,28 @@ int GameBooter::BootGame(const char * gameID)
     if (returnToLoaderGV)
     {
         int idx = NandTitles.FindU32(Settings.returnTo);
-        if (idx >= 0) channel = TITLE_LOWER( NandTitles.At( idx ) );
+
+        //! this is here for test purpose only and needs be moved later
+        static char es_fs[] ATTRIBUTE_ALIGN(32) = "/dev/es";
+        static u64 sm_title_id  ATTRIBUTE_ALIGN(32);
+	    STACK_ALIGN(ioctlv, vector, 1, 32);
+
+        sm_title_id = NandTitles.At(idx);
+        vector[0].data = &sm_title_id;
+        vector[0].len = sizeof(sm_title_id);
+
+		int es_fd = IOS_Open(es_fs, 0);
+		int result = -1;
+
+        if(es_fd >= 0)
+            result = IOS_Ioctlv(es_fd, 0xA1, 1, 0, vector);
+
+        if(es_fd >= 0)
+            IOS_Close(es_fd);
+
+        //! use old method in case of failure for other IOS versions than d2x
+        if (result < 0 && idx >= 0)
+            channel = TITLE_LOWER(NandTitles.At(idx));
     }
 
     //! This is temporary - C <-> C++ transfer
@@ -277,8 +299,6 @@ int GameBooter::BootGame(const char * gameID)
     //! Flush all caches and close up all devices
     WBFS_CloseAll();
     DeviceHandler::DestroyInstance();
-    USB_Deinitialize();
-
     if(Settings.USBPort == 2)
     {
         //! Reset USB port because device handler changes it for cache flushing
@@ -286,6 +306,7 @@ int GameBooter::BootGame(const char * gameID)
         USBStorage2_SetPort(usbport);
         USBStorage2_Deinit();
     }
+    USB_Deinitialize();
 
     //! Modify Wii Message Board to display the game starting here
     if(Settings.PlaylogUpdate)

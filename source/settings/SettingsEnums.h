@@ -5,6 +5,11 @@
 
 enum
 {
+    INHERIT = -1,
+};
+
+enum
+{
     JAPANESE,
     ENGLISH,
     GERMAN,
@@ -27,6 +32,8 @@ enum
     VIDEO_MODE_PAL60,
     VIDEO_MODE_NTSC,
     VIDEO_MODE_PATCH,
+    VIDEO_MODE_PAL480P,
+    VIDEO_MODE_NTSC480P,
     VIDEO_MODE_MAX
 };
 

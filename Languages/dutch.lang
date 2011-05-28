@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-14 22:04+0100\n"
+"POT-Creation-Date: 2011-05-28 21:42+0200\n"
 "PO-Revision-Date: 2011-03-16 08:16+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -611,6 +611,12 @@ msgstr "Lettertype Schaal Factor"
 
 msgid "Force NTSC"
 msgstr "Forceer NTSC"
+
+msgid "Force NTSC480p"
+msgstr ""
+
+msgid "Force PAL480p"
+msgstr ""
 
 msgid "Force PAL50"
 msgstr "Forceer PAL50"
@@ -1383,6 +1389,9 @@ msgstr "Taalbestanden updaten:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Geuploade ZIP is geïnstalleerd in je homebrew locatie."
+
+msgid "Use global"
+msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "VIDTV patchen"

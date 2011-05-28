@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-14 22:04+0100\n"
+"POT-Creation-Date: 2011-05-28 21:42+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ichiroling\n"
 "Language-Team: hosigumayuugi, papa, ichiroling\n"
@@ -611,6 +611,12 @@ msgstr "文字サイズの補正率"
 
 msgid "Force NTSC"
 msgstr "NTSCに強制"
+
+msgid "Force NTSC480p"
+msgstr ""
+
+msgid "Force PAL480p"
+msgstr ""
 
 msgid "Force PAL50"
 msgstr "PAL50に強制"
@@ -1383,6 +1389,9 @@ msgstr "言語ファイルを更新中:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "ｲﾝｽﾄｰﾙ済みﾃﾞｨﾚｸﾄﾘにZIPを送信しました"
+
+msgid "Use global"
+msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "映像パッチ"

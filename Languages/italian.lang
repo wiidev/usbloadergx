@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-14 22:04+0100\n"
+"POT-Creation-Date: 2011-05-28 21:44+0200\n"
 "PO-Revision-Date: 2011-03-10 21:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: Cambo\n"
@@ -611,6 +611,12 @@ msgstr ""
 
 msgid "Force NTSC"
 msgstr "Forza NTSC"
+
+msgid "Force NTSC480p"
+msgstr ""
+
+msgid "Force PAL480p"
+msgstr ""
 
 msgid "Force PAL50"
 msgstr "Forza PAL50"
@@ -1383,6 +1389,9 @@ msgstr "Aggiornamento file delle lingue:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "File ZIP installato nella cartella Homebrew"
+
+msgid "Use global"
+msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "Video Forzato"

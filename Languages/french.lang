@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-04 18:36+0100\n"
+"POT-Creation-Date: 2011-05-28 21:42+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
@@ -611,6 +611,12 @@ msgstr "Échelle police"
 
 msgid "Force NTSC"
 msgstr "Forcer NTSC"
+
+msgid "Force NTSC480p"
+msgstr ""
+
+msgid "Force PAL480p"
+msgstr ""
 
 msgid "Force PAL50"
 msgstr "Forcer PAL50"
@@ -1383,6 +1389,9 @@ msgstr "Mise à jour du fichier de langue:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Fichier ZIP envoyé et installé dans le répertoire homebrew."
+
+msgid "Use global"
+msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "Patch VIDTV"

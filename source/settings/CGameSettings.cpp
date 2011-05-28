@@ -410,14 +410,14 @@ int CGameSettings::GetPartenalPEGI(int parental)
 GameCFG * CGameSettings::GetDefault()
 {
     memset(DefaultConfig.id, 0, sizeof(DefaultConfig.id));
-    DefaultConfig.video = Settings.videomode;
-    DefaultConfig.language = Settings.language;
-    DefaultConfig.ocarina = Settings.ocarina;
-    DefaultConfig.vipatch = Settings.videopatch;
-    DefaultConfig.ios = Settings.cios;
+    DefaultConfig.video = INHERIT;
+    DefaultConfig.language = INHERIT;
+    DefaultConfig.ocarina = INHERIT;
+    DefaultConfig.vipatch = INHERIT;
+    DefaultConfig.ios = INHERIT;
     DefaultConfig.parentalcontrol = PARENTAL_LVL_EVERYONE;
-    DefaultConfig.errorfix002 = Settings.error002;
-    DefaultConfig.patchcountrystrings = Settings.patchcountrystrings;
+    DefaultConfig.errorfix002 = INHERIT;
+    DefaultConfig.patchcountrystrings = INHERIT;
     DefaultConfig.loadalternatedol = ALT_DOL_DEFAULT;
     DefaultConfig.alternatedolstart = 0;
     DefaultConfig.iosreloadblock = OFF;

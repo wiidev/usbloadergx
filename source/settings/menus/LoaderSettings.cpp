@@ -54,6 +54,8 @@ static const char * VideoModeText[VIDEO_MODE_MAX] =
     trNOOP( "Force PAL60" ),
     trNOOP( "Force NTSC" ),
     trNOOP( "Region Patch" ),
+    trNOOP( "Force PAL480p" ),
+    trNOOP( "Force NTSC480p" ),
 };
 
 static const char * LanguageText[MAX_LANGUAGE] =
@@ -85,7 +87,7 @@ static const char * SplitSizeText[INSTALL_TO_MAX] =
     trNOOP( "Split each 4GB" ),
 };
 
-static const char * Error002Text[3] =
+static const char * Error002Text[] =
 {
     trNOOP( "No" ),
     trNOOP( "Yes" ),

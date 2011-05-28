@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-04 18:36+0100\n"
+"POT-Creation-Date: 2011-05-28 21:44+0200\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -184,55 +184,55 @@ msgid "Big thanks to:"
 msgstr "非常感謝:"
 
 msgid "Block Cover Downloads"
-msgstr "阻止封面下載"
+msgstr "封鎖封面下載"
 
 msgid "Block Custom Paths"
-msgstr "阻止自訂路徑"
+msgstr "封鎖自訂路徑"
 
 msgid "Block Game Install"
-msgstr "阻止遊戲安裝"
+msgstr "封鎖遊戲安裝"
 
 msgid "Block Game Settings"
-msgstr "阻止遊戲設定"
+msgstr "封鎖遊戲設定"
 
 msgid "Block GameID Change"
-msgstr "阻止遊戲ID更改"
+msgstr "封鎖遊戲ID更改"
 
 msgid "Block Global Settings"
-msgstr "阻止整體設定"
+msgstr "封鎖整體設定"
 
 msgid "Block Gui Settings"
-msgstr "阻止介面設定"
+msgstr "封鎖介面設定"
 
 msgid "Block HBC Menu"
-msgstr "阻止 HBC 選單"
+msgstr "封鎖 HBC 選單"
 
 msgid "Block IOS Reload"
-msgstr "阻止 IOS 重新載入"
+msgstr "封鎖 IOS 重新載入"
 
 msgid "Block Loader Settings"
-msgstr "阻止 Loader 設定"
+msgstr "封鎖 Loader 設定"
 
 msgid "Block Parental Settings"
-msgstr "阻止親子設定"
+msgstr "封鎖親子設定"
 
 msgid "Block Reset Settings"
-msgstr "阻止重置設定"
+msgstr "封鎖重置設定"
 
 msgid "Block Sound Settings"
-msgstr "阻止音效設定"
+msgstr "封鎖音效設定"
 
 msgid "Block Theme Downloader"
-msgstr "阻止主題下載"
+msgstr "封鎖主題下載"
 
 msgid "Block Theme Menu"
-msgstr "阻止主題選單"
+msgstr "封鎖主題選單"
 
 msgid "Block Title Launcher"
-msgstr "阻止 Title 啟動"
+msgstr "封鎖 Title 啟動"
 
 msgid "Block Updates"
-msgstr "阻止更新"
+msgstr "封鎖更新"
 
 msgid "Boot/Standard"
 msgstr "啟動/標準"
@@ -481,7 +481,7 @@ msgid "Downloading 3D Covers"
 msgstr "下載 3D封面"
 
 msgid "Downloading Flat Covers"
-msgstr "下載一般封面"
+msgstr "下載平面封面"
 
 msgid "Downloading Full HQ Covers"
 msgstr "下載完整高畫質封面"
@@ -601,16 +601,22 @@ msgid "Finishing installation... Ok!"
 msgstr "正在完成安裝...完成!"
 
 msgid "Flat Covers"
-msgstr "普通封面"
+msgstr "平面封面"
 
 msgid "Flip-X"
 msgstr "按鍵規則"
 
 msgid "Font Scale Factor"
-msgstr "字型比例因數"
+msgstr "字型比例倍數"
 
 msgid "Force NTSC"
 msgstr "強制 NTSC"
+
+msgid "Force NTSC480p"
+msgstr ""
+
+msgid "Force PAL480p"
+msgstr ""
 
 msgid "Force PAL50"
 msgstr "強制 PAL50"
@@ -1384,6 +1390,9 @@ msgstr "正在更新語言檔案："
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "已更新安裝在Homebrew目錄的ZIP檔案"
 
+msgid "Use global"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "VIDTV 修改"
 
@@ -1419,7 +1428,7 @@ msgid "WiFi Features"
 msgstr "WiFi功能設定"
 
 msgid "Widescreen Factor"
-msgstr "寬螢幕因數"
+msgstr "寬螢幕倍數"
 
 msgid "Widescreen Fix"
 msgstr "寬螢幕校正"

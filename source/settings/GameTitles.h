@@ -38,6 +38,8 @@ class CGameTitles
         void LoadTitlesFromWiiTDB(const char * path, bool forceCacheReload = false);
         //! Set default game titles
         void SetDefault();
+        //! Free memory and remove all titles - Same as SetDefault()
+        void Clear() { SetDefault(); }
     protected:
         u32 ReadCachedTitles(const char * path);
         void WriteCachedTitles(const char * path);
