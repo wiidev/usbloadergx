@@ -1,0 +1,3 @@
+---- port = Matches (2 in 2 files) ----
+Ehci.c (c:\devkitpro\soft\uloader_v2.6\cios_mload\tinyehci):                dev->port = i;
+Ehci1.c (c:\devkitpro\soft\uloader_v2.6\cios_mload\tinyehci):                dev->port = i;

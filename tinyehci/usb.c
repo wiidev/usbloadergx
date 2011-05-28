@@ -40,13 +40,41 @@ s32 USB_GetDescriptors(struct ehci_device * fd, usb_devdesc *udd)
 	buffer = USB_Alloc(sizeof(*udd));
 	if(buffer == NULL)
 	{
+		s_printf("buffer == NULL (no mem)\n"); 
 		retval = -ENOMEM;
 		goto free_and_error;
 	}
 
+	ehci_msleep(10);
+
 	retval = __usb_getdesc(fd, buffer, USB_DT_DEVICE, 0, USB_DT_DEVICE_SIZE);
 	if(retval < 0)
-		goto free_and_error;
+	{
+		u32 status;
+		int ret;
+
+		s_printf("__usb_getdesc error USB_DT_DEVICE: retry\n");
+
+
+		ret=ehci_reset_port(current_port);
+		ehci_msleep(20);
+		status=ehci_readl(&ehci->regs->port_status[current_port]);
+		
+		if(ret<0 || (status & 0x3105)!=0x1005)
+		{
+			ret=ehci_reset_port2(current_port);
+			ehci_msleep(20);
+			ehci_readl(&ehci->regs->port_status[current_port]);
+		}
+
+		ehci_msleep(30);
+		retval = __usb_getdesc(fd, buffer, USB_DT_DEVICE, 0, USB_DT_DEVICE_SIZE);
+		if(retval < 0)
+		{
+			s_printf("__usb_getdesc error USB_DT_DEVICE\n"); 
+			goto free_and_error;
+		}
+	}
 	memcpy(udd, buffer, USB_DT_DEVICE_SIZE);
 	USB_Free(buffer);
 
@@ -58,6 +86,7 @@ s32 USB_GetDescriptors(struct ehci_device * fd, usb_devdesc *udd)
 	udd->configurations = USB_Alloc(udd->bNumConfigurations* sizeof(*udd->configurations));
 	if(udd->configurations == NULL)
 	{
+		s_printf("udd->configurations == NULL (no mem)\n"); 
 		retval = -ENOMEM;
 		goto free_and_error;
 	}
@@ -67,6 +96,7 @@ s32 USB_GetDescriptors(struct ehci_device * fd, usb_devdesc *udd)
 		buffer = USB_Alloc( USB_DT_CONFIG_SIZE);
 		if(buffer == NULL)
 		{
+			s_printf("buffer == NULL (no mem)\n"); 
 			retval = -ENOMEM;
 			goto free_and_error;
 		}
@@ -81,13 +111,17 @@ s32 USB_GetDescriptors(struct ehci_device * fd, usb_devdesc *udd)
 		buffer = USB_Alloc( ucd->wTotalLength);
 		if(buffer == NULL)
 		{
+			s_printf("buffer == NULL (no mem)\n"); 
 			retval = -ENOMEM;
 			goto free_and_error;
 		}
 
 		retval = __usb_getdesc(fd, buffer, USB_DT_CONFIG, iConf, ucd->wTotalLength);
 		if(retval < 0)
+		{
+			s_printf("__usb_getdesc error USB_DT_CONFIG: retry\n");
 			goto free_and_error;
+		}
 
 		ptr = buffer;
 		ptr += ucd->bLength;
@@ -96,7 +130,10 @@ s32 USB_GetDescriptors(struct ehci_device * fd, usb_devdesc *udd)
 		retval = -ENOMEM;
 		ucd->interfaces = USB_Alloc(ucd->bNumInterfaces* sizeof(*ucd->interfaces));
 		if(ucd->interfaces == NULL)
+		{
+			s_printf("ucd->interfaces == NULL (no mem)\n"); 
 			goto free_and_error;
+		}
 		memset(ucd->interfaces,0,ucd->bNumInterfaces* sizeof(*ucd->interfaces));
 		for(iInterface = 0; iInterface < ucd->bNumInterfaces; iInterface++)
 		{
@@ -107,7 +144,10 @@ s32 USB_GetDescriptors(struct ehci_device * fd, usb_devdesc *udd)
 
 			uid->endpoints = USB_Alloc(uid->bNumEndpoints* sizeof(*uid->endpoints));
 			if(uid->endpoints == NULL)
+			{
+				s_printf("uid->endpoints == NULL (no mem)\n"); 
 				goto free_and_error;
+			}
 			memset(uid->endpoints,0,uid->bNumEndpoints* sizeof(*uid->endpoints));
 				
 			// This skips vendor and class specific descriptors
@@ -117,7 +157,10 @@ s32 USB_GetDescriptors(struct ehci_device * fd, usb_devdesc *udd)
 			{
 				uid->extra = USB_Alloc(i);
 				if(uid->extra == NULL)
+				{
+					s_printf("uid->extra == NULL (no mem)\n"); 
 					goto free_and_error;
+				}
 				memcpy(uid->extra, ptr, i);
 				ptr += i;
 				size -= i;

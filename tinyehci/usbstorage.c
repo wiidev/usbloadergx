@@ -672,7 +672,8 @@ static s32 __usbstorage_clearerrors(usbstorage_handle *dev, u8 lun)
 			//retval = __cycle(dev, lun, NULL, 0, cmd, 1, 1, &status, NULL, USBSTORAGE_CYCLE_RETRIES);
 
 			
-			if(retval<0) s_printf("    SCSI_TEST_UNIT_READY ret %i\n", retval);
+			//if(retval<0) 
+				s_printf("    SCSI_TEST_UNIT_READY ret %i\n", retval);
 
 			
 		
@@ -1041,8 +1042,8 @@ found:
 
 	if(USB_GetConfiguration(dev->usb_fd, &conf) < 0)
 	{
-		s_printf("USB_GetConfiguration() Error\n");
-		goto free_and_return;
+		s_printf("USB_GetConfiguration() Error. Continue.\n");
+		//goto free_and_return;
 	}
 	s_printf("Actual conf: %x   next conf: %x\n",conf, dev->configuration);
 	try_status=-1202;
@@ -1610,7 +1611,7 @@ s32 USBStorage_Init(void)
 
 	
 
-	try_status=-1; 
+	try_status=-100; 
     unplug_device=1;
 	__mounted=0;
 	use_alternative_timeout=1;
@@ -1664,6 +1665,7 @@ s_printf("\n***************************************************\nRodries ehcmodu
 						if(ret==-1119 || ret==-1120) 
 						{
 							try_status=ret;
+							try_status=-100;
 							continue;
 						}
 								ret=ehci_reset_port2(i);

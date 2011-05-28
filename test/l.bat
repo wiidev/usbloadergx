@@ -1,0 +1,1 @@
+wiiload test.dol
