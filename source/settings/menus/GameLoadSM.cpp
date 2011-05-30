@@ -91,13 +91,6 @@ static const char * AlternateDOLText[] =
     trNOOP( "Default" ),
 };
 
-static const char * IOSReloadBlockText[] =
-{
-    trNOOP( "OFF" ),
-    trNOOP( "Method 1" ),
-    trNOOP( "Method 2" ),
-};
-
 GameLoadSM::GameLoadSM(const char * GameID)
     : SettingsMenu(tr("Game Load"), &GuiOptions, MENU_NONE)
 {
@@ -242,12 +235,7 @@ void GameLoadSM::SetOptionValues()
     }
 
     //! Settings: Block IOS Reload
-    if(IosLoader::IsHermesIOS(GameConfig.ios == INHERIT ? Settings.cios : GameConfig.ios) && GameConfig.iosreloadblock)
-        Options->SetValue(Idx++, tr("ON"));
-    else if(GameConfig.iosreloadblock)
-        Options->SetValue(Idx++, "%s", tr(IOSReloadBlockText[GameConfig.iosreloadblock]));
-    else
-        Options->SetValue(Idx++, tr("OFF"));
+    Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.iosreloadblock]) );
 
     //! Settings: Game Lock
     Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.Locked] ));
@@ -389,11 +377,7 @@ int GameLoadSM::GetMenuInternal()
     //! Settings: Block IOS Reload
     else if (ret == ++Idx)
     {
-        ++GameConfig.iosreloadblock;
-        if(GameConfig.iosreloadblock >= MAX_ON_OFF && IosLoader::IsHermesIOS(GameConfig.ios == INHERIT ? Settings.cios : GameConfig.ios))
-            GameConfig.iosreloadblock = 0;
-        else if (GameConfig.iosreloadblock >= 3)
-            GameConfig.iosreloadblock = 0;
+        if(++GameConfig.iosreloadblock >= MAX_ON_OFF) GameConfig.iosreloadblock = 0;
     }
 
     //! Settings: Game Lock

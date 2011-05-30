@@ -49,7 +49,7 @@ void ClearDOLList()
     dolCount = 0;
 }
 
-void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring, u8 vipatch, u8 cheat, u8 fix002, u8 blockiosreloadselect, u64 returnTo)
+void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring, u8 vipatch, u8 cheat, u8 fix002, u8 blockiosreloadselect, u8 gameIOS, u64 returnTo)
 {
     int i;
     int es_fd = IOS_Open(es_fs, 0);
@@ -87,7 +87,8 @@ void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring, u8 
         DCFlushRange(dst, len);
     }
 
-    BlockIOSReload(blockiosreloadselect);
+    if(blockiosreloadselect)
+        BlockIOSReload(2, gameIOS);
 
     if(es_fd >= 0)
         IOS_Close(es_fd);
@@ -555,7 +556,7 @@ int PatchNewReturnTo(u64 title)
     return result;
 }
 
-bool BlockIOSReload(u8 blockiosreloadselect)
+bool BlockIOSReload(u8 blockiosreloadselect, u8 gameIOS)
 {
     if(blockiosreloadselect == 0)
         return false;
@@ -571,7 +572,7 @@ bool BlockIOSReload(u8 blockiosreloadselect)
     int inlen = 1;
     if (mode == 2) {
         inlen = 2;
-        ios = 249; // ios to be reloaded in place of the requested one
+        ios = gameIOS; // ios to be reloaded in place of the requested one
         vector[1].data = &ios;
         vector[1].len = 4;
     }

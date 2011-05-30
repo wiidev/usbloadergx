@@ -255,7 +255,7 @@ int GameBooter::BootGame(const char * gameID)
     }
 
     //! Do all the game patches
-    gamepatches(videoChoice, languageChoice, countrystrings, viChoice, ocarinaChoice, fix002, reloadblock, returnToChoice);
+    gamepatches(videoChoice, languageChoice, countrystrings, viChoice, ocarinaChoice, fix002, reloadblock, iosChoice, returnToChoice);
 
     //! Load Ocarina codes
     bool enablecheat = false;
