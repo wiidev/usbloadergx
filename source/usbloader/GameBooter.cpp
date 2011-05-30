@@ -1,4 +1,3 @@
-#include <ogc/machine/processor.h>
 #include "menu/menus.h"
 #include "menu/WDMMenu.hpp"
 #include "mload/mload.h"
@@ -45,8 +44,7 @@ int GameBooter::BootGCMode()
 }
 
 
-u32 GameBooter::BootPartition(char * dolpath, u8 videoselected, u8 languageChoice, u8 cheat, u8 vipatch, u8 patchcountrystring,
-                              u8 alternatedol, u32 alternatedoloffset, u32 returnTo, u8 fix002)
+u32 GameBooter::BootPartition(char * dolpath, u8 videoselected, u8 alternatedol, u32 alternatedoloffset)
 {
     gprintf("booting partition IOS %u r%u\n", IOS_GetVersion(), IOS_GetRevision());
     entry_point p_entry;
@@ -76,8 +74,7 @@ u32 GameBooter::BootPartition(char * dolpath, u8 videoselected, u8 languageChoic
     Disc_SelectVMode(videoselected);
 
     /* Run apploader */
-    ret = Apploader_Run(&p_entry, dolpath, cheat, videoselected, languageChoice, vipatch, patchcountrystring,
-            alternatedol, alternatedoloffset, returnTo, fix002);
+    ret = Apploader_Run(&p_entry, dolpath, alternatedol, alternatedoloffset);
 
     if (ret < 0)
         return 0;
@@ -205,39 +202,10 @@ int GameBooter::BootGame(const char * gameID)
     u8 alternatedol = game_cfg->loadalternatedol;
     u32 alternatedoloffset = game_cfg->alternatedolstart;
     u8 reloadblock = game_cfg->iosreloadblock;
-    u8 returnToLoaderGV = game_cfg->returnTo;
+    u64 returnToChoice = game_cfg->returnTo ? NandTitles.At(NandTitles.FindU32(Settings.returnTo)) : 0;
 
     //! Prepare alternate dol settings
     SetupAltDOL(gameHeader.id, alternatedol, alternatedoloffset);
-
-    //! Setup the return to Loader option
-    u32 channel = 0;
-    if (returnToLoaderGV)
-    {
-        int idx = NandTitles.FindU32(Settings.returnTo);
-
-        //! this is here for test purpose only and needs be moved later
-        static char es_fs[] ATTRIBUTE_ALIGN(32) = "/dev/es";
-        static u64 sm_title_id  ATTRIBUTE_ALIGN(32);
-	    STACK_ALIGN(ioctlv, vector, 1, 32);
-
-        sm_title_id = NandTitles.At(idx);
-        vector[0].data = &sm_title_id;
-        vector[0].len = sizeof(sm_title_id);
-
-		int es_fd = IOS_Open(es_fs, 0);
-		int result = -1;
-
-        if(es_fd >= 0)
-            result = IOS_Ioctlv(es_fd, 0xA1, 1, 0, vector);
-
-        if(es_fd >= 0)
-            IOS_Close(es_fd);
-
-        //! use old method in case of failure for other IOS versions than d2x
-        if (result < 0 && idx >= 0)
-            channel = TITLE_LOWER(NandTitles.At(idx));
-    }
 
     //! This is temporary - C <-> C++ transfer
     SetCheatFilepath(Settings.Cheatcodespath);
@@ -263,11 +231,13 @@ int GameBooter::BootGame(const char * gameID)
     gprintf("%d\n", ret);
 
     //! Setup IOS reload block - only possible on Hermes cIOS
-    if (reloadblock == ON && IosLoader::IsHermesIOS())
+    if (reloadblock && IosLoader::IsHermesIOS())
     {
         enable_ES_ioctlv_vector();
         if (gameList.GetGameFS(gameHeader.id) == PART_FS_WBFS)
             mload_close();
+
+        reloadblock = 0;
     }
 
 	//! Now we can free up the memory used by the game list
@@ -275,8 +245,7 @@ int GameBooter::BootGame(const char * gameID)
 
     //! Load main.dol or alternative dol into memory, start the game apploader and get game entrypoint
     gprintf("\tDisc_wiiBoot\n");
-    AppEntrypoint = BootPartition(Settings.dolpath, videoChoice, languageChoice, ocarinaChoice, viChoice, countrystrings,
-                        alternatedol, alternatedoloffset, channel, fix002);
+    AppEntrypoint = BootPartition(Settings.dolpath, videoChoice, alternatedol, alternatedoloffset);
 
     //! No entrypoint found...back to HBC/SystemMenu
     if(AppEntrypoint == 0)
@@ -284,6 +253,9 @@ int GameBooter::BootGame(const char * gameID)
         WDVD_ClosePartition();
         Sys_BackToLoader();
     }
+
+    //! Do all the game patches
+    gamepatches(videoChoice, languageChoice, countrystrings, viChoice, ocarinaChoice, fix002, reloadblock, returnToChoice);
 
     //! Load Ocarina codes
     bool enablecheat = false;

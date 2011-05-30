@@ -1319,7 +1319,7 @@ int GameBrowseMenu::OpenClickedGame()
             else if(game_cfg->loadalternatedol == 4)
                 defaultDolPrompt((char *) header->id);
 
-            if (RunGame && game_cfg->ocarina != OFF && Settings.ocarina != OFF)
+            if (RunGame && (game_cfg->ocarina == ON || (game_cfg->ocarina == INHERIT && Settings.ocarina == ON)))
                 CheckOcarina(IDfull);
 
             if(RunGame)

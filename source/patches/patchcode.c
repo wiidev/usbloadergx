@@ -35,6 +35,8 @@
 //#include "fwrite_patch_slota.h"
 //#include "main.h"
 
+u32 hooktype = 0;
+	
 extern const char * CheatFilepath;
 
 extern void patchhook(u32 address, u32 len);

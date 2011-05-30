@@ -13,8 +13,7 @@ class GameBooter
         static void SetupAltDOL(u8 * gameID, u8 &alternatedol, u32 &alternatedoloffset);
         static int SetupDisc(u8 *gameID);
         static bool LoadOcarina(u8 *gameID);
-        static u32 BootPartition(char * dolpath, u8 videoselected, u8 languageChoice, u8 cheat, u8 vipatch,
-                                 u8 patchcountrystring, u8 alternatedol, u32 alternatedoloffset, u32 returnTo, u8 fix002);
+        static u32 BootPartition(char * dolpath, u8 videoselected, u8 alternatedol, u32 alternatedoloffset);
 };
 
 #endif

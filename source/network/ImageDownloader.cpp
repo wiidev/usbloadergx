@@ -98,16 +98,16 @@ void ImageDownloader::FindMissingImages()
 
     if(choices & CheckedBox5)
     {
-        const char * downloadURL = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS) ? serverURLOrigDiscs : serverURLCustomDiscs;
+        const char * downloadURL = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS || !(choices & CheckedBox6)) ? serverURLOrigDiscs : serverURLCustomDiscs;
         const char * backupURL = (choices & CheckedBox6) ? ((Settings.discart == DISCARTS_ORIGINALS_CUSTOMS) ? serverURLCustomDiscs : serverURLOrigDiscs) : NULL;
-        const char * progressTitle = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS) ? tr("Downloading original Discarts") : tr("Downloading custom Discarts");
+        const char * progressTitle = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS || !(choices & CheckedBox6)) ? tr("Downloading original Discarts") : tr("Downloading custom Discarts");
         FindMissing(Settings.disc_path, downloadURL, backupURL, progressTitle);
     }
 
     if(choices & CheckedBox6)
     {
-        const char * downloadURL = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS) ? serverURLCustomDiscs : serverURLOrigDiscs;
-        const char * progressTitle = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS) ? tr("Downloading custom Discarts") : tr("Downloading original Discarts");
+        const char * downloadURL = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS || !(choices & CheckedBox5)) ? serverURLCustomDiscs : serverURLOrigDiscs;
+        const char * progressTitle = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS || !(choices & CheckedBox5)) ? tr("Downloading custom Discarts") : tr("Downloading original Discarts");
         FindMissing(Settings.disc_path, downloadURL, NULL, progressTitle);
     }
 }

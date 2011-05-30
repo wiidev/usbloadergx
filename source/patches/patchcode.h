@@ -27,10 +27,7 @@ extern "C"
 {
 #endif
     // Globals
-    u32 hooktype;
-    int patched;
-    //u8 configbytes[2];
-    //u32 regionfree;
+    extern u32 hooktype;
 
     // Function prototypes
     bool dogamehooks(void *addr, u32 len);

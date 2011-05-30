@@ -4,6 +4,7 @@
 #include <string.h>
 #include <malloc.h>
 
+#include "patches/gamepatches.h"
 #include "apploader.h"
 #include "wdvd.h"
 #include "fstfile.h"
@@ -85,7 +86,7 @@ bool Load_Dol(void **buffer, int* dollen, const char * filepath)
     return true;
 }
 
-u32 load_dol_image(void *dolstart, u8 videoSelected, u8 languageChoice, u8 patchcountrystring, u8 vipatch, u8 cheat, u8 fix002, u32 returnTo)
+u32 load_dol_image(void *dolstart)
 {
     if (!dolstart)
         return 0;
@@ -98,8 +99,7 @@ u32 load_dol_image(void *dolstart, u8 videoSelected, u8 languageChoice, u8 patch
         if ((!dolfile->text_size[i]) || (dolfile->text_start[i] < 0x100)) continue;
 
         memmove((void *) dolfile->text_start[i], dolstart + dolfile->text_pos[i], dolfile->text_size[i]);
-        gamepatches((void *) dolfile->text_start[i], dolfile->text_size[i], videoSelected, languageChoice, patchcountrystring,
-                    vipatch, cheat, returnTo, fix002);
+        RegisterDOL((u8 *) dolfile->text_start[i], dolfile->text_size[i]);
         Remove_001_Protection((void *) dolfile->data_start[i], dolfile->data_size[i]);
         DCFlushRange((void *) dolfile->data_start[i], dolfile->data_size[i]);
         ICInvalidateRange((void *) dolfile->text_start[i], dolfile->text_size[i]);
@@ -110,8 +110,7 @@ u32 load_dol_image(void *dolstart, u8 videoSelected, u8 languageChoice, u8 patch
         if ((!dolfile->data_size[i]) || (dolfile->data_start[i] < 0x100)) continue;
 
         memmove((void *) dolfile->data_start[i], dolstart + dolfile->data_pos[i], dolfile->data_size[i]);
-        gamepatches((void *) dolfile->data_start[i], dolfile->data_size[i], videoSelected, languageChoice, patchcountrystring,
-                    vipatch, cheat, returnTo, fix002);
+        RegisterDOL((u8 *) dolfile->data_start[i], dolfile->data_size[i]);
         Remove_001_Protection((void *) dolfile->data_start[i], dolfile->data_size[i]);
         DCFlushRange((void *) dolfile->data_start[i], dolfile->data_size[i]);
     }
@@ -119,7 +118,7 @@ u32 load_dol_image(void *dolstart, u8 videoSelected, u8 languageChoice, u8 patch
     return dolfile->entry_point;
 }
 
-u32 Load_Dol_from_disc(u32 offset, u8 videoSelected, u8 languageChoice, u8 patchcountrystring, u8 vipatch, u8 cheat, u8 fix002, u32 returnTo)
+u32 Load_Dol_from_disc(u32 offset)
 {
     s32 ret;
     dolheader * dolfile;
@@ -164,7 +163,7 @@ u32 Load_Dol_from_disc(u32 offset, u8 videoSelected, u8 languageChoice, u8 patch
             return 0;
         }
 
-        gamepatches(buffer, size, videoSelected, languageChoice, patchcountrystring, vipatch, cheat, returnTo, fix002);
+        RegisterDOL((u8 *) buffer, size);
         Remove_001_Protection(buffer, size);
         DCFlushRange(buffer, size);
         ICInvalidateRange(buffer, size);
@@ -185,7 +184,7 @@ u32 Load_Dol_from_disc(u32 offset, u8 videoSelected, u8 languageChoice, u8 patch
             return 0;
         }
 
-        gamepatches(buffer, size, videoSelected, languageChoice, patchcountrystring, vipatch, cheat, returnTo, fix002);
+        RegisterDOL((u8 *) buffer, size);
         Remove_001_Protection(buffer, size);
         DCFlushRange(buffer, size);
     }

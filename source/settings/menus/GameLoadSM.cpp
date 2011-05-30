@@ -30,6 +30,7 @@
 #include "usbloader/AlternateDOLOffsets.h"
 #include "language/gettext.h"
 #include "wad/nandtitle.h"
+#include "system/IosLoader.h"
 #include "GameLoadSM.hpp"
 
 static const char * OnOffText[] =
@@ -88,6 +89,13 @@ static const char * AlternateDOLText[] =
     trNOOP( "Load From SD/USB" ),
     trNOOP( "List on Gamelaunch" ),
     trNOOP( "Default" ),
+};
+
+static const char * IOSReloadBlockText[] =
+{
+    trNOOP( "OFF" ),
+    trNOOP( "Method 1" ),
+    trNOOP( "Method 2" ),
 };
 
 GameLoadSM::GameLoadSM(const char * GameID)
@@ -160,37 +168,37 @@ void GameLoadSM::SetOptionValues()
     int Idx = 0;
 
     //! Settings: Video Mode
-    if(GameConfig.video == -1)
+    if(GameConfig.video == INHERIT)
         Options->SetValue(Idx++, tr("Use global"));
     else
         Options->SetValue(Idx++, "%s", tr(VideoModeText[GameConfig.video]));
 
     //! Settings: VIDTV Patch
-    if(GameConfig.vipatch == -1)
+    if(GameConfig.vipatch == INHERIT)
         Options->SetValue(Idx++, tr("Use global"));
     else
         Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.vipatch]));
 
     //! Settings: Game Language
-    if(GameConfig.language == -1)
+    if(GameConfig.language == INHERIT)
         Options->SetValue(Idx++, tr("Use global"));
     else
         Options->SetValue(Idx++, "%s", tr(LanguageText[GameConfig.language]));
 
     //! Settings: Patch Country Strings
-    if(GameConfig.patchcountrystrings == -1)
+    if(GameConfig.patchcountrystrings == INHERIT)
         Options->SetValue(Idx++, tr("Use global"));
     else
         Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.patchcountrystrings]));
 
     //! Settings: Ocarina
-    if(GameConfig.ocarina == -1)
+    if(GameConfig.ocarina == INHERIT)
         Options->SetValue(Idx++, tr("Use global"));
     else
         Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.ocarina]));
 
     //! Settings: Game IOS
-    if(GameConfig.ios == -1)
+    if(GameConfig.ios == INHERIT)
         Options->SetValue(Idx++, tr("Use global"));
     else
         Options->SetValue(Idx++, "%i", GameConfig.ios);
@@ -199,7 +207,7 @@ void GameLoadSM::SetOptionValues()
     Options->SetValue(Idx++, "%s", tr(ParentalText[GameConfig.parentalcontrol]));
 
     //! Settings: Error 002 fix
-    if(GameConfig.errorfix002 == -1)
+    if(GameConfig.errorfix002 == INHERIT)
         Options->SetValue(Idx++, tr("Use global"));
     else
         Options->SetValue(Idx++, "%s", tr(Error002Text[GameConfig.errorfix002]));
@@ -234,7 +242,12 @@ void GameLoadSM::SetOptionValues()
     }
 
     //! Settings: Block IOS Reload
-    Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.iosreloadblock] ));
+    if(IosLoader::IsHermesIOS(GameConfig.ios == INHERIT ? Settings.cios : GameConfig.ios) && GameConfig.iosreloadblock)
+        Options->SetValue(Idx++, tr("ON"));
+    else if(GameConfig.iosreloadblock)
+        Options->SetValue(Idx++, "%s", tr(IOSReloadBlockText[GameConfig.iosreloadblock]));
+    else
+        Options->SetValue(Idx++, tr("OFF"));
 
     //! Settings: Game Lock
     Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.Locked] ));
@@ -376,7 +389,11 @@ int GameLoadSM::GetMenuInternal()
     //! Settings: Block IOS Reload
     else if (ret == ++Idx)
     {
-        if (++GameConfig.iosreloadblock >= MAX_ON_OFF) GameConfig.iosreloadblock = 0;
+        ++GameConfig.iosreloadblock;
+        if(GameConfig.iosreloadblock >= MAX_ON_OFF && IosLoader::IsHermesIOS(GameConfig.ios == INHERIT ? Settings.cios : GameConfig.ios))
+            GameConfig.iosreloadblock = 0;
+        else if (GameConfig.iosreloadblock >= 3)
+            GameConfig.iosreloadblock = 0;
     }
 
     //! Settings: Game Lock

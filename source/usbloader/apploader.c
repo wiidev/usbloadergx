@@ -3,7 +3,6 @@
 #include <string.h>
 #include <malloc.h>
 
-#include "patches/patchcode.h"
 #include "apploader.h"
 #include "wdvd.h"
 #include "wpad.h"
@@ -11,8 +10,6 @@
 #include "alternatedol.h"
 #include "fstfile.h"
 #include "gecko.h"
-#include "patches/wip.h"
-#include "patches/dolpatcher.h"
 #include "patches/gamepatches.h"
 #include "settings/SettingsEnums.h"
 
@@ -33,33 +30,7 @@ static u8 *appldr = (u8 *) 0x81200000;
 /* Variables */
 static u32 buffer[0x20] ATTRIBUTE_ALIGN( 32 );
 
-void gamepatches( u8 * dst, int len, u8 videoSelected, u8 languageChoice, u8 patchcountrystring, u8 vipatch, u8 cheat, u32 returnTo, u8 fix002 )
-{
-    VideoModePatcher( dst, len, videoSelected );
-
-    if ( cheat )
-        dogamehooks( dst, len );
-
-    if ( vipatch )
-        vidolpatcher( dst, len );
-
-    /*LANGUAGE PATCH - FISHEARS*/
-    langpatcher( dst, len, languageChoice );
-
-    /*Thanks to WiiPower*/
-    if ( patchcountrystring == 1 )
-        PatchCountryStrings( dst, len );
-
-    do_wip_code( ( u8 * ) dst, len );
-
-    if ( fix002 == 2 )
-        Anti_002_fix( dst, len );
-
-    PatchReturnTo( dst, len, returnTo );
-}
-
-s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected, u8 languageChoice, u8 vipatch, u8 patchcountrystring,
-	u8 alternatedol, u32 alternatedoloffset, u32 returnTo, u8 fix002)
+s32 Apploader_Run(entry_point *entry, char * dolpath, u8 alternatedol, u32 alternatedoloffset)
 {
     app_entry appldr_entry;
     app_init appldr_init;
@@ -90,12 +61,6 @@ s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected
     /* Initialize apploader */
     appldr_init(gprintf);
 
-    if (fix002 != 0)
-    {
-        /* ERROR 002 fix (thanks to WiiPower for sharing this)*/
-        *(u32 *) 0x80003188 = *(u32 *) 0x80003140;
-    }
-
     for (;;)
     {
         void *dst = NULL;
@@ -108,8 +73,7 @@ s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected
         /* Read data from DVD */
         WDVD_Read(dst, len, (u64) (offset << 2));
 
-        if( !alternatedol )
-            gamepatches(dst, len, videoSelected, languageChoice, patchcountrystring, vipatch, cheat, returnTo, fix002 );
+        RegisterDOL((u8 *) dst, len);
 
         DCFlushRange(dst, len);
     }
@@ -119,29 +83,26 @@ s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected
     /** Load alternate dol if set **/
     if (alternatedol == ALT_DOL_FROM_SD_USB)
     {
-        wip_reset_counter();
+        ClearDOLList();
         void *dolbuffer = NULL;
         int dollen = 0;
 
         bool dolloaded = Load_Dol(&dolbuffer, &dollen, dolpath);
         if (dolloaded)
-        {
-            *entry = (entry_point) load_dol_image(dolbuffer, videoSelected, languageChoice, patchcountrystring, vipatch, cheat, fix002, returnTo);
-        }
+            *entry = (entry_point) load_dol_image(dolbuffer);
 
         if (dolbuffer) free(dolbuffer);
     }
     else if (alternatedol == ALT_DOL_FROM_GAME && alternatedoloffset != 0)
     {
-        wip_reset_counter();
+        ClearDOLList();
         FST_ENTRY *fst = (FST_ENTRY *) *(u32 *) 0x80000038;
 
         //! Check if it's inside the limits
         if(alternatedoloffset >= fst[0].filelen)
             return 0;
 
-        *entry = (entry_point) Load_Dol_from_disc(fst[alternatedoloffset].fileoffset, videoSelected, languageChoice,
-                                                  patchcountrystring, vipatch, cheat, fix002, returnTo);
+        *entry = (entry_point) Load_Dol_from_disc(fst[alternatedoloffset].fileoffset);
     }
 
     return 0;

@@ -246,14 +246,14 @@ bool NandTitle::Exists(u64 tid)
 
 bool NandTitle::ExistsFromIndex(u32 i)
 {
-    if (i > titleIds.size()) return false;
+    if (i >= titleIds.size()) return false;
 
     return Exists(titleIds.at(i));
 }
 
 u64 NandTitle::At(u32 i)
 {
-    if (i > titleIds.size()) return 0;
+    if (i >= titleIds.size()) return 0;
 
     return titleIds.at(i);
 }
@@ -278,7 +278,7 @@ const char* NandTitle::NameOf(u64 tid)
 
 const char* NandTitle::NameFromIndex(u32 i)
 {
-    if (i > titleIds.size()) return NULL;
+    if (i >= titleIds.size()) return NULL;
 
     map<u64, string>::iterator itr = NameList.find(titleIds.at(i));
     if (itr != NameList.end()) return itr->second.c_str();
@@ -304,7 +304,7 @@ u16 NandTitle::VersionOf(u64 tid)
 
 u16 NandTitle::VersionFromIndex(u32 i)
 {
-    if (i > titleIds.size()) return 0;
+    if (i >= titleIds.size()) return 0;
 
     tmd* Tmd = GetTMD(titleIds.at(i));
     if (!Tmd) return 0;
@@ -377,7 +377,7 @@ void NandTitle::AsciiTID(u64 tid, char* out)
 
 void NandTitle::AsciiFromIndex(u32 i, char* out)
 {
-    if (i > titleIds.size())
+    if (i >= titleIds.size())
     {
         out[0] = 0;
         return;
