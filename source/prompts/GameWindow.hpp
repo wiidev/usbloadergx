@@ -3,6 +3,7 @@
 
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_diskcover.h"
+#include "menu/GameBrowseMenu.hpp"
 
 #define FAVORITE_STARS  5
 
@@ -13,6 +14,7 @@ class GameWindow : public GuiWindow
         ~GameWindow();
         int Show();
         int GetSelectedGame() { return gameSelected; };
+        void SetGameBrowseMenu(GameBrowseMenu *m) { browserMenu = m; };
     protected:
         int MainLoop();
         void LoadGameSound(const u8 * id);
@@ -23,6 +25,7 @@ class GameWindow : public GuiWindow
         bool reducedVol;
         int returnVal;
         int gameSelected;
+        GameBrowseMenu *browserMenu;
 
         GuiTrigger * trigA;
         GuiTrigger * trigB;

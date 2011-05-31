@@ -51,15 +51,15 @@ void ClearDOLList()
 
 void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring, u8 vipatch, u8 cheat, u8 fix002, u8 blockiosreloadselect, u8 gameIOS, u64 returnTo)
 {
+    es_fd = IOS_Open(es_fs, 0);
     int i;
-    int es_fd = IOS_Open(es_fs, 0);
 
     int returnToPatched = PatchNewReturnTo(returnTo);
 
     for(i = 0; i < dolCount; ++i)
     {
-        u8 *dst = dolList[dolCount].dst;
-        int len = dolList[dolCount].len;
+        u8 *dst = dolList[i].dst;
+        int len = dolList[i].len;
 
         VideoModePatcher(dst, len, videoSelected);
 

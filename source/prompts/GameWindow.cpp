@@ -530,6 +530,8 @@ int GameWindow::MainLoop()
             ((GuiWindow *) parentElement)->SetState(STATE_DISABLED);
             ((GuiWindow *) parentElement)->Append(this);
         }
+
+        if(browserMenu) browserMenu->ReloadBrowser();
     }
 
     else if (btnRight->GetState() == STATE_CLICKED) //next game

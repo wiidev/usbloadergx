@@ -14,9 +14,9 @@ class GameBrowseMenu : public GuiWindow
         GameBrowseMenu();
         ~GameBrowseMenu();
         static int Execute();
+        void ReloadBrowser();
     protected:
         int MainLoop();
-        void ReloadBrowser();
         int OpenClickedGame();
         int GetSelectedGame();
         int GetClickedGame();

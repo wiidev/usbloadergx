@@ -1292,6 +1292,7 @@ int GameBrowseMenu::OpenClickedGame()
         {
             SetState(STATE_DISABLED);
 			GameWindow * GamePrompt = new GameWindow(gameSelected);
+			GamePrompt->SetGameBrowseMenu(this);
 			mainWindow->Append(GamePrompt);
             choice = GamePrompt->Show();
 			gameSelected = GamePrompt->GetSelectedGame();

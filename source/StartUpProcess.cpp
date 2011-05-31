@@ -122,7 +122,7 @@ bool StartUpProcess::Execute()
 
     if(IosLoader::LoadAppCios() < 0)
     {
-        SetTextf("Failed loading any cIOS. USB Loader GX requires at least cIOS 222, 249 or 250. Exiting...\n");
+        SetTextf("Failed loading any cIOS. USB Loader GX requires at least cIOS 222 or 245-250. Exiting...\n");
         sleep(5);
         Sys_BackToLoader();
     }
