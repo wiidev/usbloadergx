@@ -4,11 +4,11 @@
 #include "usbloader/wbfs.h"
 #include "usbloader/GameList.h"
 #include "themes/CTheme.h"
+#include "settings/menus/GameSettingsMenu.hpp"
 #include "settings/CSettings.h"
 #include "settings/CGameSettings.h"
 #include "settings/CGameStatistics.h"
 #include "settings/GameTitles.h"
-#include "settings/Settings.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/gameinfo.h"
 #include "language/gettext.h"
@@ -486,7 +486,7 @@ int GameWindow::MainLoop()
         ResumeGui();
 
         wiilight(0);
-        int settret = MenuGameSettings(mountMethod ? dvdheader : gameList[gameSelected]);
+        int settret = GameSettingsMenu::Show(browserMenu, mountMethod ? dvdheader : gameList[gameSelected]);
 
         SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
         if(parentElement)

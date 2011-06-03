@@ -36,11 +36,13 @@ void GuiBox::Draw()
     f32 y2 = y + height;
     guVector v[] = { { x, y, 0.0f }, { x2, y, 0.0f }, { x2, y2, 0.0f }, { x, y2, 0.0f }, { x, y, 0.0f } };
 
+    int alpha = GetAlpha();
+
     GX_Begin(filled ? GX_TRIANGLEFAN : GX_LINESTRIP, GX_VTXFMT0, n);
     for (u32 i = 0; i < n; i++)
     {
         GX_Position3f32(v[i].x, v[i].y, v[i].z);
-        GX_Color4u8(color[i].r, color[i].g, color[i].b, color[i].a);
+        GX_Color4u8(color[i].r, color[i].g, color[i].b, alpha);
     }
     GX_End();
     GX_SetTevOp(GX_TEVSTAGE0, GX_MODULATE);

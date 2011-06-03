@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-28 21:42+0200\n"
+"POT-Creation-Date: 2011-06-03 22:18+0200\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -123,6 +123,12 @@ msgstr ">> WAD adatok olvasása...Ok!"
 msgid "AUTO"
 msgstr ""
 
+msgid "Add category"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "All Partitions"
 msgstr ""
 
@@ -146,6 +152,9 @@ msgstr ""
 
 msgid "Apr"
 msgstr "Ápr"
+
+msgid "Are you sure you want to delete this category?"
+msgstr ""
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr ""
@@ -182,6 +191,9 @@ msgstr "Háttérzene"
 
 msgid "Big thanks to:"
 msgstr "Köszönet:"
+
+msgid "Block Categories Modify"
+msgstr ""
 
 msgid "Block Cover Downloads"
 msgstr ""
@@ -268,6 +280,12 @@ msgstr "Mégse"
 msgid "Cannot write to destination."
 msgstr ""
 
+msgid "Categories"
+msgstr ""
+
+msgid "Categories:"
+msgstr ""
+
 msgid "Change Play Path"
 msgstr ""
 
@@ -312,6 +330,9 @@ msgid "Console Locked"
 msgstr "Konzol Zárolva"
 
 msgid "Console must be unlocked for this option."
+msgstr ""
+
+msgid "Console must be unlocked to be able to use this."
 msgstr ""
 
 msgid "Console should be unlocked to modify it."
@@ -401,6 +422,9 @@ msgstr "Borító törlése"
 
 msgid "Delete Disc Artwork"
 msgstr "Lemezfotó törlése"
+
+msgid "Delete category"
+msgstr ""
 
 msgid "Design:"
 msgstr "Felület:"
@@ -1176,6 +1200,9 @@ msgstr "DOL kiválasztása"
 msgid "Select a DOL from Game"
 msgstr ""
 
+msgid "Select game categories"
+msgstr ""
+
 msgid "Sept"
 msgstr "Szep"
 
@@ -1184,6 +1211,9 @@ msgstr "Keresés"
 
 msgid "Settings"
 msgstr "Beállítások"
+
+msgid "Show Categories"
+msgstr ""
 
 msgid "Show Free Space"
 msgstr ""
@@ -1415,6 +1445,9 @@ msgstr "WIP Patch útvonal"
 msgid "Waiting..."
 msgstr "Várakozás..."
 
+msgid "Warning"
+msgstr ""
+
 msgid "Warning:"
 msgstr ""
 
@@ -1461,6 +1494,9 @@ msgid "You are currently using IOS"
 msgstr ""
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
+msgstr ""
+
+msgid "You cannot delete this category."
 msgstr ""
 
 msgid "You need to select or format a partition"

@@ -168,6 +168,7 @@ enum
     BLOCK_COVER_DOWNLOADS       = 0x2000,
     BLOCK_GAME_INSTALL          = 0x4000,
     BLOCK_GAMEID_CHANGE         = 0x8000,
+    BLOCK_CATEGORIES_MOD        = 0x010000,
     BLOCK_ALL                   = 0xFFFFFFFF,
 };
 

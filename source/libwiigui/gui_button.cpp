@@ -293,6 +293,37 @@ void GuiButton::SetSkew(int *skew)
     if (image) image->SetSkew(skew);
 }
 
+void GuiButton::SetState(int s, int c)
+{
+    GuiElement::SetState(s, c);
+
+	if(c < 0 || c > 3)
+        return;
+
+	if (s == STATE_CLICKED)
+    {
+        POINT p = {0, 0};
+
+        if (userInput[c].wpad.ir.valid)
+        {
+            p.x = userInput[c].wpad.ir.x;
+            p.y = userInput[c].wpad.ir.y;
+        }
+		Clicked(this, c, p);
+	}
+	else if (s == STATE_HELD)
+	{
+        POINT p = {0, 0};
+
+        if (userInput[c].wpad.ir.valid)
+        {
+            p.x = userInput[c].wpad.ir.x;
+            p.y = userInput[c].wpad.ir.y;
+        }
+		Held(this, c, p);
+	}
+}
+
 /**
  * Draw the button on screen
  */
@@ -329,7 +360,7 @@ void GuiButton::DrawTooltip()
             time(&time1);
             time2 = time1;
         }
-        if (time1 != 0) // timer läuft
+        if (time1 != 0) // timer lÃ¤uft
         time(&time1);
 
         if (time1 == 0 || difftime(time1, time2) >= 2)

@@ -26,18 +26,21 @@
 
 #include "FlyingButtonsMenu.hpp"
 #include "settings/CGameSettings.h"
+#include "menu/GameBrowseMenu.hpp"
 #include "usbloader/disc.h"
 
 class GameSettingsMenu : public FlyingButtonsMenu
 {
     public:
-        GameSettingsMenu(struct discHdr * header);
+        GameSettingsMenu(GameBrowseMenu *parent, struct discHdr * header);
         ~GameSettingsMenu();
+        static int Show(GameBrowseMenu *parent, struct discHdr *header);
     protected:
         virtual void CreateSettingsMenu(int index);
         virtual void DeleteSettingsMenu();
         virtual void SetupMainButtons();
 
+        GameBrowseMenu *browserMenu;
         struct discHdr * DiscHeader;
 };
 

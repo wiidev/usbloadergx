@@ -21,18 +21,21 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  ***************************************************************************/
+#include <unistd.h>
 #include "GameSettingsMenu.hpp"
 #include "themes/CTheme.h"
 #include "prompts/PromptWindows.h"
+#include "prompts/CategorySelectPrompt.hpp"
 #include "settings/GameTitles.h"
+#include "usbloader/GameList.h"
 #include "language/gettext.h"
 #include "wad/nandtitle.h"
 #include "cheats/cheatmenu.h"
 #include "GameLoadSM.hpp"
 #include "UninstallSM.hpp"
 
-GameSettingsMenu::GameSettingsMenu(struct discHdr * header)
-    : FlyingButtonsMenu(GameTitles.GetTitle(header))
+GameSettingsMenu::GameSettingsMenu(GameBrowseMenu *parent, struct discHdr * header)
+    : FlyingButtonsMenu(GameTitles.GetTitle(header)), browserMenu(parent)
 {
     DiscHeader = header;
     //! Don't switch menu's by default but return to disc window.
@@ -43,12 +46,29 @@ GameSettingsMenu::~GameSettingsMenu()
 {
 }
 
+int GameSettingsMenu::Show(GameBrowseMenu *parent, struct discHdr * header)
+{
+    GameSettingsMenu * Menu = new GameSettingsMenu(parent, header);
+    mainWindow->Append(Menu);
+
+    Menu->ShowMenu();
+
+    int returnMenu = MENU_NONE;
+
+    while((returnMenu = Menu->MainLoop()) == MENU_NONE);
+
+    delete Menu;
+
+    return returnMenu;
+}
+
 void GameSettingsMenu::SetupMainButtons()
 {
     int pos = 0;
 
     SetMainButton(pos++, tr( "Game Load" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Ocarina" ), MainButtonImgData, MainButtonImgOverData);
+    SetMainButton(pos++, tr( "Categories" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Uninstall Menu" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Default Gamesettings" ), MainButtonImgData, MainButtonImgOverData);
 }
@@ -75,6 +95,42 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
         char ID[7];
         snprintf(ID, sizeof(ID), "%s", (char *) DiscHeader->id);
         CheatMenu(ID);
+    }
+
+    //! Categories
+    else if(menuNr == Idx++)
+    {
+        HideMenu();
+        titleTxt = new GuiText(MenuTitle.c_str(), 28, ( GXColor ) {0, 0, 0, 255});
+        titleTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+        titleTxt->SetPosition(0, 40);
+        titleTxt->SetMaxWidth(310, SCROLL_HORIZONTAL);
+        Append(titleTxt);
+        Remove(backBtn);
+        ResumeGui();
+        SetState(STATE_DISABLED);
+        CategorySelectPrompt promptMenu(DiscHeader);
+        promptMenu.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
+        promptMenu.SetEffect(EFFECT_FADE, 20);
+        mainWindow->Append(&promptMenu);
+
+        promptMenu.Show();
+
+        promptMenu.SetEffect(EFFECT_FADE, -20);
+        while(promptMenu.GetEffect() > 0) usleep(100);
+        mainWindow->Remove(&promptMenu);
+        if(promptMenu.categoriesChanged())
+        {
+            wString oldFilter(gameList.GetCurrentFilter());
+            gameList.FilterList(oldFilter.c_str());
+            browserMenu->ReloadBrowser();
+        }
+        SetState(STATE_DEFAULT);
+        Remove(titleTxt);
+        delete titleTxt;
+        titleTxt = NULL;
+        Append(backBtn);
+        ShowMenu();
     }
 
     //! Uninstall Menu

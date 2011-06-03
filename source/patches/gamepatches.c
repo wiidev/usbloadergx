@@ -8,6 +8,7 @@
 #include "gecko.h"
 #include "patchcode.h"
 #include "gamepatches.h"
+#include "memory/memory.h"
 #include "settings/SettingsEnums.h"
 
 typedef struct _appDOL
@@ -54,6 +55,12 @@ void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring, u8 
     es_fd = IOS_Open(es_fs, 0);
     int i;
 
+    load_wip_code((u8*) Disc_ID);
+
+    /* If a wip file is loaded for this game this does nothing - Dimok */
+    PoPPatch();
+    NSMBPatch();
+
     int returnToPatched = PatchNewReturnTo(returnTo);
 
     for(i = 0; i < dolCount; ++i)
@@ -95,9 +102,12 @@ void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring, u8 
 
     /* ERROR 002 fix (thanks to WiiPower for sharing this)*/
     if (fix002 != 0)
-        *(u32 *) 0x80003188 = *(u32 *) 0x80003140;
+        *(u32 *)0x80003140 = *(u32 *)0x80003188;
 
     DCFlushRange((void*) 0x80000000, 0x3f00);
+
+    free_wip();
+    ClearDOLList();
 }
 
 /** Anti 002 fix for IOS 249 rev > 12 thanks to WiiPower **/

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-28 21:42+0200\n"
+"POT-Creation-Date: 2011-06-03 22:18+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
@@ -123,6 +123,12 @@ msgstr ">> Lecture données WAD...OK!"
 msgid "AUTO"
 msgstr ""
 
+msgid "Add category"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "All Partitions"
 msgstr "Toutes les partitions"
 
@@ -146,6 +152,9 @@ msgstr "Appliquer"
 
 msgid "Apr"
 msgstr "Avr"
+
+msgid "Are you sure you want to delete this category?"
+msgstr ""
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "Êtes-vous sûr de vouloir verrouiller USB loader GX ?"
@@ -182,6 +191,9 @@ msgstr "Fond sonore"
 
 msgid "Big thanks to:"
 msgstr "Grand merci à:"
+
+msgid "Block Categories Modify"
+msgstr ""
 
 msgid "Block Cover Downloads"
 msgstr "Bloquer Téléch. jaquettes"
@@ -268,6 +280,12 @@ msgstr "Annuler"
 msgid "Cannot write to destination."
 msgstr "Écriture impossible."
 
+msgid "Categories"
+msgstr ""
+
+msgid "Categories:"
+msgstr ""
+
 msgid "Change Play Path"
 msgstr "Changer dossier"
 
@@ -313,6 +331,9 @@ msgstr "Console verrouillée"
 
 msgid "Console must be unlocked for this option."
 msgstr "La console doit être déverrouillée."
+
+msgid "Console must be unlocked to be able to use this."
+msgstr ""
 
 msgid "Console should be unlocked to modify it."
 msgstr "La console doit être déverrouillée."
@@ -401,6 +422,9 @@ msgstr "Supprimer la jaquette"
 
 msgid "Delete Disc Artwork"
 msgstr "Supprimer le label DVD"
+
+msgid "Delete category"
+msgstr ""
 
 msgid "Design:"
 msgstr "Graphisme:"
@@ -1176,6 +1200,9 @@ msgstr "Choisir un DOL"
 msgid "Select a DOL from Game"
 msgstr "Sélectionner un DOL à partir du jeu"
 
+msgid "Select game categories"
+msgstr ""
+
 msgid "Sept"
 msgstr ""
 
@@ -1184,6 +1211,9 @@ msgstr "Filtre de Recherche"
 
 msgid "Settings"
 msgstr "Paramètres"
+
+msgid "Show Categories"
+msgstr ""
 
 msgid "Show Free Space"
 msgstr "Montrer l'espace libre"
@@ -1415,6 +1445,9 @@ msgstr "Dossier patchs WIP"
 msgid "Waiting..."
 msgstr "En attente..."
 
+msgid "Warning"
+msgstr ""
+
 msgid "Warning:"
 msgstr "Attention:"
 
@@ -1462,6 +1495,9 @@ msgstr "Vous utilisez actuellement l'IOS"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Vous essayez de sélectionner une partition FAT32/NTFS/EXT avec un cIOS 249 Rev < 18 (non supporté). Continuez à vos risques."
+
+msgid "You cannot delete this category."
+msgstr ""
 
 msgid "You need to select or format a partition"
 msgstr "Vous devez choisir ou formater une partition"

@@ -19,7 +19,7 @@
 #include "mload/mload_modules.h"
 #include "network/networkops.h"
 #include "patches/patchcode.h"
-#include "settings/Settings.h"
+#include "settings/menus/GlobalSettings.hpp"
 #include "settings/CGameSettings.h"
 #include "themes/CTheme.h"
 #include "themes/ThemeMenu.h"
@@ -218,7 +218,7 @@ int MainMenu(int menu)
                 currentMenu = MenuInstall();
                 break;
             case MENU_SETTINGS:
-                currentMenu = MenuSettings();
+                currentMenu = GlobalSettings::Show();
                 break;
             case MENU_THEMEMENU:
                 currentMenu = ThemeMenu::Run();

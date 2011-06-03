@@ -157,7 +157,7 @@ void IosLoader::LoadIOSModules(s32 ios, s32 ios_rev)
     //! Waninkoko IOS
     else if(IsWaninkokoIOS(ios))
     {
-        if(ios_rev >= 18)
+        if(ios_rev >= 18 && !(ios_rev >= 21006 && ios_rev < 30000))
         {
             if(mload_init() < 0)
                 return;

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-28 21:44+0200\n"
+"POT-Creation-Date: 2011-06-03 22:18+0200\n"
 "PO-Revision-Date: 2011-03-11 20:00-0000\n"
 "Last-Translator: pplucky (Sky8000)\n"
 "Language-Team: pplucky <pplucky@gmail.com> (Sky8000 <sky8000@hotmail.com>)\n"
@@ -123,6 +123,12 @@ msgstr ">> Lendo ficheiro WAD... Ok!"
 msgid "AUTO"
 msgstr "AUTO"
 
+msgid "Add category"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "All Partitions"
 msgstr "Todas as Partições"
 
@@ -146,6 +152,9 @@ msgstr "Aplicar"
 
 msgid "Apr"
 msgstr "Abr"
+
+msgid "Are you sure you want to delete this category?"
+msgstr ""
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "Tem a certeza que quer bloquear o USB Loader GX?"
@@ -182,6 +191,9 @@ msgstr "Música de fundo"
 
 msgid "Big thanks to:"
 msgstr "Agradecimentos:"
+
+msgid "Block Categories Modify"
+msgstr ""
 
 msgid "Block Cover Downloads"
 msgstr "Bloquear Descarregar Capas"
@@ -268,6 +280,12 @@ msgstr "Cancelar"
 msgid "Cannot write to destination."
 msgstr "Não foi possível escrever no destino."
 
+msgid "Categories"
+msgstr ""
+
+msgid "Categories:"
+msgstr ""
+
 msgid "Change Play Path"
 msgstr "Alterar Caminho de Músicas"
 
@@ -313,6 +331,9 @@ msgstr "Configuração Bloqueada"
 
 msgid "Console must be unlocked for this option."
 msgstr "Configuração tem de estar desbloqueada para esta opção."
+
+msgid "Console must be unlocked to be able to use this."
+msgstr ""
 
 msgid "Console should be unlocked to modify it."
 msgstr "Configuração tem de estar desbloqueada para modificar o parâmetro."
@@ -401,6 +422,9 @@ msgstr "Eliminar Capas"
 
 msgid "Delete Disc Artwork"
 msgstr "Eliminar Img. Disco"
+
+msgid "Delete category"
+msgstr ""
 
 msgid "Design:"
 msgstr "Design:"
@@ -1176,6 +1200,9 @@ msgstr "Seleccionar um DOL"
 msgid "Select a DOL from Game"
 msgstr "Seleccionar um DOL do Jogo"
 
+msgid "Select game categories"
+msgstr ""
+
 msgid "Sept"
 msgstr "Set"
 
@@ -1184,6 +1211,9 @@ msgstr "Filtro de pesquisa"
 
 msgid "Settings"
 msgstr "Configurações"
+
+msgid "Show Categories"
+msgstr ""
 
 msgid "Show Free Space"
 msgstr "Mostrar Espaço Livre"
@@ -1415,6 +1445,9 @@ msgstr "Cam. Patches WIP"
 msgid "Waiting..."
 msgstr "Aguardando..."
 
+msgid "Warning"
+msgstr ""
+
 msgid "Warning:"
 msgstr "Aviso:"
 
@@ -1462,6 +1495,9 @@ msgstr "Está a usar o IOS"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Está a tentar seleccionar uma partição FAT32/NTFS/EXT com um cIOS 249 Rev < 18. Isto não é suportado. Continue por sua conta e risco."
+
+msgid "You cannot delete this category."
+msgstr ""
 
 msgid "You need to select or format a partition"
 msgstr "Necessita seleccionar ou formatar uma partição"

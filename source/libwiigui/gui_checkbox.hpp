@@ -27,22 +27,30 @@
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_box.hpp"
 #include "libwiigui/gui_cross.hpp"
+#include "libwiigui/gui_checksign.hpp"
 
 class GuiCheckbox : public GuiButton
 {
     public:
-        GuiCheckbox();
-        GuiCheckbox(int w, int h);
+        GuiCheckbox(int style = CHECKSIGN);
+        GuiCheckbox(int w, int h, int style = CHECKSIGN);
         void SetTransparent(bool b);
         void SetSize(int w, int h);
         void SetChecked(bool c) { LOCK(this); Checked = c; }
         bool IsChecked() const { return Checked; }
         virtual void SetState(int s, int c = -1);
         virtual void Draw();
+        enum
+        {
+            CHECKSIGN,
+            CROSS,
+        };
     protected:
+        GuiChecksign Checksign;
         GuiCross Cross;
         GuiBox Blackbox;
         GuiBox Whitebox;
+        int style;
         bool Checked;
 
 };

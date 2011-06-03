@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-28 21:42+0200\n"
+"POT-Creation-Date: 2011-06-03 22:18+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -123,6 +123,12 @@ msgstr ">> Læser WAD-data...Ok!"
 msgid "AUTO"
 msgstr ""
 
+msgid "Add category"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "All Partitions"
 msgstr "Alle Partitioner"
 
@@ -145,6 +151,9 @@ msgid "Apply"
 msgstr "Indlæs"
 
 msgid "Apr"
+msgstr ""
+
+msgid "Are you sure you want to delete this category?"
 msgstr ""
 
 msgid "Are you sure you want to lock USB Loader GX?"
@@ -182,6 +191,9 @@ msgstr "Baggrundsmusik"
 
 msgid "Big thanks to:"
 msgstr "En stor tak til:"
+
+msgid "Block Categories Modify"
+msgstr ""
 
 msgid "Block Cover Downloads"
 msgstr "Bloker Cover downloads"
@@ -268,6 +280,12 @@ msgstr "Annullér"
 msgid "Cannot write to destination."
 msgstr "Kan ikke skrive til destinationen."
 
+msgid "Categories"
+msgstr ""
+
+msgid "Categories:"
+msgstr ""
+
 msgid "Change Play Path"
 msgstr "Ændre sti til musik"
 
@@ -313,6 +331,9 @@ msgstr "Konsollen er låst"
 
 msgid "Console must be unlocked for this option."
 msgstr "Konsollen skal være låst op for denne mulighed."
+
+msgid "Console must be unlocked to be able to use this."
+msgstr ""
 
 msgid "Console should be unlocked to modify it."
 msgstr "Konsollen skal være låst op for ændre dette."
@@ -401,6 +422,9 @@ msgstr "Slet boxart"
 
 msgid "Delete Disc Artwork"
 msgstr "Slet DVD-billede"
+
+msgid "Delete category"
+msgstr ""
 
 msgid "Design:"
 msgstr ""
@@ -1176,6 +1200,9 @@ msgstr "Vælg en DOL"
 msgid "Select a DOL from Game"
 msgstr "Vælg DOL fra spil"
 
+msgid "Select game categories"
+msgstr ""
+
 msgid "Sept"
 msgstr ""
 
@@ -1184,6 +1211,9 @@ msgstr "Søgefilter"
 
 msgid "Settings"
 msgstr "Indstillinger"
+
+msgid "Show Categories"
+msgstr ""
 
 msgid "Show Free Space"
 msgstr "Vis fri plads"
@@ -1415,6 +1445,9 @@ msgstr "Sti til WIP patches"
 msgid "Waiting..."
 msgstr "Venter..."
 
+msgid "Warning"
+msgstr ""
+
 msgid "Warning:"
 msgstr "Advarsel:"
 
@@ -1462,6 +1495,9 @@ msgstr "Du brug i øjeblikket IOS"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Du prøver at vælge en FAT32/NTFS/EXT partition med cIOS 249 Rev < 18. Dette er ikke understøttet. Fortsætte er på egen risiko"
+
+msgid "You cannot delete this category."
+msgstr ""
 
 msgid "You need to select or format a partition"
 msgstr "Du skal vælge eller formattere en partition"

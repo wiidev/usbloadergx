@@ -31,6 +31,7 @@ class GlobalSettings : public FlyingButtonsMenu
     public:
         GlobalSettings();
         ~GlobalSettings();
+        static int Show();
     protected:
         virtual void CreateSettingsMenu(int index);
         virtual void DeleteSettingsMenu();

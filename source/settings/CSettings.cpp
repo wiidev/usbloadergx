@@ -118,6 +118,8 @@ void CSettings::SetDefault()
     CacheTitles = ON;
     WSFactor = 0.8f; //actually should be 0.75 for real widescreen
     FontScaleFactor = 1.0f;
+    EnabledCategories.resize(1);
+    EnabledCategories[0] = 0;
 }
 
 bool CSettings::Load()
@@ -263,6 +265,14 @@ bool CSettings::Save()
     fprintf(file, "CacheTitles = %d\n ", CacheTitles);
     fprintf(file, "WSFactor = %0.3f\n ", WSFactor);
     fprintf(file, "FontScaleFactor = %0.3f\n ", FontScaleFactor);
+    fprintf(file, "EnabledCategories = ");
+    for(u32 i = 0; i < EnabledCategories.size(); ++i)
+    {
+        fprintf(file, "%i", EnabledCategories[i]);
+        if(i+1 < EnabledCategories.size())
+            fprintf(file, ",");
+    }
+    fprintf(file, "\n ");
     fclose(file);
 
     return true;
@@ -628,6 +638,25 @@ bool CSettings::SetSetting(char *name, char *value)
     else if (strcmp(name, "returnTo") == 0)
     {
         strcpy(returnTo, value);
+        return true;
+    }
+    else if (strcmp(name, "EnabledCategories") == 0)
+    {
+        EnabledCategories.clear();
+        char * strTok = strtok(value, ",");
+        while (strTok != NULL)
+        {
+            u32 id  = atoi(strTok);
+            u32 i;
+            for(i = 0; i < EnabledCategories.size(); ++i)
+            {
+                if(EnabledCategories[i] == id)
+                    break;
+            }
+            if(i == EnabledCategories.size())
+                EnabledCategories.push_back(id);
+            strTok = strtok(NULL,",");
+        }
         return true;
     }
 

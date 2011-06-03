@@ -75,6 +75,8 @@ class GameBrowseMenu : public GuiWindow
         GuiImageData * imgLock_gray;
         GuiImageData * imgUnlock;
         GuiImageData * imgUnlock_gray;
+        GuiImageData * imgCategory;
+        GuiImageData * imgCategory_gray;
         GuiImageData * homebrewImgData;
         GuiImageData * homebrewImgDataOver;
         GuiImageData * gameCover;
@@ -111,6 +113,8 @@ class GameBrowseMenu : public GuiWindow
         GuiImage * unlockBtnImg_g;
         GuiImage * dvdBtnImg;
         GuiImage * dvdBtnImg_g;
+        GuiImage * categBtnImg;
+        GuiImage * categBtnImg_g;
         GuiImage * homebrewImg;
         GuiImage * homebrewImgOver;
         GuiImage * gameCoverImg;
@@ -137,6 +141,7 @@ class GameBrowseMenu : public GuiWindow
         GuiButton * carouselBtn;
         GuiButton * lockBtn;
         GuiButton * dvdBtn;
+        GuiButton * categBtn;
         GuiButton * homebrewBtn;
         GuiButton * DownloadBtn;
         GuiButton * idBtn;
@@ -154,6 +159,7 @@ class GameBrowseMenu : public GuiWindow
         GuiTooltip * carouselBtnTT;
         GuiTooltip * lockBtnTT;
         GuiTooltip * dvdBtnTT;
+        GuiTooltip * categBtnTT;
         GuiTooltip * homebrewBtnTT;
         GuiTooltip * DownloadBtnTT;
         GuiTooltip * IDBtnTT;

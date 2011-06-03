@@ -544,6 +544,30 @@ extern const u32 nocoverFull_png_size;
 extern const u8 playersSort_png[];
 extern const u32 playersSort_png_size;
 
+extern const u8 add_png[];
+extern const u32 add_png_size;
+
+extern const u8 back_png[];
+extern const u32 back_png_size;
+
+extern const u8 forward_png[];
+extern const u32 forward_png_size;
+
+extern const u8 categoryPrompt_png[];
+extern const u32 categoryPrompt_png_size;
+
+extern const u8 categoryLine_png[];
+extern const u32 categoryLine_png_size;
+
+extern const u8 remove_png[];
+extern const u32 remove_png_size;
+
+extern const u8 category_png[];
+extern const u32 category_png_size;
+
+extern const u8 category_gray_png[];
+extern const u32 category_gray_png_size;
+
 extern const u8 stub_bin[];
 extern const u32 stub_bin_size;
 

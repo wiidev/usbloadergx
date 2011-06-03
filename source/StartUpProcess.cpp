@@ -13,6 +13,7 @@
 #include "settings/CSettings.h"
 #include "settings/CGameSettings.h"
 #include "settings/CGameStatistics.h"
+#include "settings/CGameCategories.hpp"
 #include "usbloader/usbstorage2.h"
 #include "sys.h"
 
@@ -168,7 +169,8 @@ bool StartUpProcess::Execute()
         DeviceHandler::Instance()->MountAllUSB();
     }
 
-    gprintf("\tLoading font...%s\n", Theme::LoadFont(Settings.theme_path) ? "done" : "failed (using default)");
+    gprintf("\tLoading game categories...%s\n", GameCategories.Load(Settings.ConfigPath) ? "done" : "failed");
+    gprintf("\tLoading font...%s\n", Theme::LoadFont(Settings.ConfigPath) ? "done" : "failed (using default)");
     gprintf("\tLoading theme...%s\n", Theme::Load(Settings.theme) ? "done" : "failed (using default)");
 
     //! Init the rest of the System

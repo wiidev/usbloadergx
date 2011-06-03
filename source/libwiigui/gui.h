@@ -47,6 +47,7 @@
 #include "OptionList.hpp"
 #include "SoundOperations/gui_sound.h"
 #include "SoundOperations/gui_bgm.h"
+#include "sigslot.h"
 
 //! Frequently used variables
 extern FreeTypeGX *fontSystem;
@@ -87,6 +88,12 @@ enum
 {
     WRAP, DOTTED, SCROLL_HORIZONTAL, SCROLL_NONE
 };
+
+
+typedef struct _POINT {
+	s16 x;
+	s16 y;
+} POINT;
 
 typedef struct _paddata
 {
@@ -362,8 +369,8 @@ class GuiElement
         virtual void Draw();
         virtual void DrawTooltip();
     protected:
-        void Lock();
-        void Unlock();
+        void LockElement();
+        void UnlockElement();
         //      static mutex_t mutex;
         static mutex_t _lock_mutex;
         lwp_t _lock_thread;
@@ -388,7 +395,7 @@ class GuiElement
         int yoffsetDyn; //!< Element Y offset, dynamic (added to yoffset value for animation effects)
         int temp_xoffset; //!< Element Temp X offset
         int temp_yoffset; //!< Element Temp Y offset
-        f32 degree; //!< Degree where to start for EFFECT_GOROUND enter it in ° like 60°
+        f32 degree; //!< Degree where to start for EFFECT_GOROUND enter it in Â° like 60Â°
         f32 frequency; //!< Speed for EFFECT_GOROUND || can also be negative for other direction
         int Radius; //!< The radius in which the Element goes round for EFFECT_GOROUND
         f32 circleamount; //!< Circleamount for the EFFECT_GOROUND effect
@@ -490,6 +497,9 @@ class GuiWindow: public GuiElement
         //!Moves the selected element to the element above or below
         //!\param d Direction to move (-1 = up, 1 = down)
         void MoveSelectionVert(int d);
+        //!Allow dim of screen on disable or not
+        void SetAllowDim(bool d) { allowDim = d; }
+        void SetDimScreen(bool d) { forceDim = d; }
         //!Draws all the elements in this GuiWindow
         void Draw();
         void DrawTooltip();
@@ -498,6 +508,8 @@ class GuiWindow: public GuiElement
         //!\param t Pointer to a GuiTrigger, containing the current input data from PAD/WPAD
         void Update(GuiTrigger * t);
     protected:
+        bool forceDim;
+        bool allowDim;
         std::vector<GuiElement*> _elements; //!< Contains all elements within the GuiWindow
 };
 
@@ -670,31 +682,15 @@ class GuiText: public GuiElement
         //!Get the max textwidth
         int GetTextMaxWidth();
         //!Gets the total line number
-        virtual int GetLinesCount()
-        {
-            return 1;
-        }
-        ;
+        virtual int GetLinesCount() { return 1; }
         //!Get fontsize
-        int GetFontSize()
-        {
-            return size;
-        }
-        ;
+        int GetFontSize() { return size; }
         //!Set max lines to draw
         void SetLinesToDraw(int l);
-        void SetWidescreen(bool b)
-        {
-            widescreen = b;
-        }
-        ;
+        void SetWidescreen(bool b) { widescreen = b; }
         //!Get current Textline (for position calculation)
         const wchar_t * GetDynText(int ind = 0);
-        virtual const wchar_t * GetTextLine(int ind)
-        {
-            return GetDynText(ind);
-        }
-        ;
+        virtual const wchar_t * GetTextLine(int ind) { return GetDynText(ind); }
         //!Change the font
         //!\param font bufferblock
         //!\param font filesize
@@ -859,6 +855,9 @@ class GuiButton: public GuiElement
         void ScrollIsOn(int f);
         void SetSkew(int XX1, int YY1, int XX2, int YY2, int XX3, int YY3, int XX4, int YY4);
         void SetSkew(int *skew /* int skew[8] */);
+        virtual void SetState(int s, int c = -1);
+		sigslot::signal3<GuiButton *, int, const POINT&> Clicked;
+		sigslot::signal3<GuiButton *, int, const POINT&> Held;
     protected:
         GuiImage * image; //!< Button image (default)
         GuiImage * imageOver; //!< Button image for STATE_SELECTED

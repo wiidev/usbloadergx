@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-28 21:44+0200\n"
+"POT-Creation-Date: 2011-06-03 22:18+0200\n"
 "PO-Revision-Date: 2011-03-10 21:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: Cambo\n"
@@ -123,6 +123,12 @@ msgstr ">> Lettura dati WAD...OK!"
 msgid "AUTO"
 msgstr "Automatico"
 
+msgid "Add category"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "All Partitions"
 msgstr "Tutte"
 
@@ -146,6 +152,9 @@ msgstr "Applica"
 
 msgid "Apr"
 msgstr "aprile"
+
+msgid "Are you sure you want to delete this category?"
+msgstr ""
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "Sei sicuro di voler bloccare USB Loader GX?"
@@ -182,6 +191,9 @@ msgstr "Musica Sottofondo"
 
 msgid "Big thanks to:"
 msgstr "Grazie mille a:"
+
+msgid "Block Categories Modify"
+msgstr ""
 
 msgid "Block Cover Downloads"
 msgstr "Blocca Scaricam. Copertine"
@@ -268,6 +280,12 @@ msgstr "Annulla"
 msgid "Cannot write to destination."
 msgstr "Impossibile scrivere nella destinazione."
 
+msgid "Categories"
+msgstr ""
+
+msgid "Categories:"
+msgstr ""
+
 msgid "Change Play Path"
 msgstr "Modifica Cartella Suoni"
 
@@ -313,6 +331,9 @@ msgstr "Console Bloccata"
 
 msgid "Console must be unlocked for this option."
 msgstr "La Wii deve essere sbloccata per questa opzione."
+
+msgid "Console must be unlocked to be able to use this."
+msgstr ""
 
 msgid "Console should be unlocked to modify it."
 msgstr "Sbloccare la Console per Modificarla."
@@ -401,6 +422,9 @@ msgstr "Elimina la copertina"
 
 msgid "Delete Disc Artwork"
 msgstr "Elimina l'immagine disco"
+
+msgid "Delete category"
+msgstr ""
 
 msgid "Design:"
 msgstr "Grafica:"
@@ -1176,6 +1200,9 @@ msgstr "Seleziona un file DOL"
 msgid "Select a DOL from Game"
 msgstr "Seleziona un file DOL dal Gioco"
 
+msgid "Select game categories"
+msgstr ""
+
 msgid "Sept"
 msgstr "settembre"
 
@@ -1184,6 +1211,9 @@ msgstr "Cerca Gioco"
 
 msgid "Settings"
 msgstr "Impostazioni"
+
+msgid "Show Categories"
+msgstr ""
 
 msgid "Show Free Space"
 msgstr "Mostra Spazio Libero"
@@ -1415,6 +1445,9 @@ msgstr "Cart. Patch WIP"
 msgid "Waiting..."
 msgstr "Caricamento..."
 
+msgid "Warning"
+msgstr ""
+
 msgid "Warning:"
 msgstr "Attenzione:"
 
@@ -1462,6 +1495,9 @@ msgstr "Al momento stai utilizzando l'IOS"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Stai cercando di accedere ad una partizione FAT32/NTFS/EXT con un cIOS 249 di versione inferiore alla rev18. Ciò è non supportato. Continua a tuo rischio."
+
+msgid "You cannot delete this category."
+msgstr ""
 
 msgid "You need to select or format a partition"
 msgstr "Occorre selezionare o formattare una partizione"

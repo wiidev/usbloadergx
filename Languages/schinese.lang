@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-28 21:44+0200\n"
+"POT-Creation-Date: 2011-06-03 22:18+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -123,6 +123,12 @@ msgstr ">> 读取 WAD 数据... 成功!"
 msgid "AUTO"
 msgstr "自动"
 
+msgid "Add category"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
 msgid "All Partitions"
 msgstr "所有分区"
 
@@ -146,6 +152,9 @@ msgstr "应用"
 
 msgid "Apr"
 msgstr "四月"
+
+msgid "Are you sure you want to delete this category?"
+msgstr ""
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "确定要锁定USB Loader GX吗？"
@@ -182,6 +191,9 @@ msgstr "背景音乐"
 
 msgid "Big thanks to:"
 msgstr "非常感谢:"
+
+msgid "Block Categories Modify"
+msgstr ""
 
 msgid "Block Cover Downloads"
 msgstr "下载封面"
@@ -268,6 +280,12 @@ msgstr "取消"
 msgid "Cannot write to destination."
 msgstr "无法写入目标."
 
+msgid "Categories"
+msgstr ""
+
+msgid "Categories:"
+msgstr ""
+
 msgid "Change Play Path"
 msgstr "更改游戏路径"
 
@@ -313,6 +331,9 @@ msgstr "主机已锁定"
 
 msgid "Console must be unlocked for this option."
 msgstr "需解锁以开启设定功能."
+
+msgid "Console must be unlocked to be able to use this."
+msgstr ""
 
 msgid "Console should be unlocked to modify it."
 msgstr "需解锁以开启设定功能."
@@ -401,6 +422,9 @@ msgstr "删除封面"
 
 msgid "Delete Disc Artwork"
 msgstr "删除光盘图片"
+
+msgid "Delete category"
+msgstr ""
 
 msgid "Design:"
 msgstr "设计:"
@@ -1176,6 +1200,9 @@ msgstr "选择一个 DOL"
 msgid "Select a DOL from Game"
 msgstr "从游戏选择DOL"
 
+msgid "Select game categories"
+msgstr ""
+
 msgid "Sept"
 msgstr "九月"
 
@@ -1184,6 +1211,9 @@ msgstr "设置搜索过滤器"
 
 msgid "Settings"
 msgstr "设置"
+
+msgid "Show Categories"
+msgstr ""
 
 msgid "Show Free Space"
 msgstr "显示剩余空间"
@@ -1415,6 +1445,9 @@ msgstr "WIP补丁路径"
 msgid "Waiting..."
 msgstr "等待中..."
 
+msgid "Warning"
+msgstr ""
+
 msgid "Warning:"
 msgstr "警告:"
 
@@ -1462,6 +1495,9 @@ msgstr "正在使用IOS"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "cIOS 249低于r18版本不支持FAT32/NTFS/EXT分区.如要继续风险自负"
+
+msgid "You cannot delete this category."
+msgstr ""
 
 msgid "You need to select or format a partition"
 msgstr "你需要选择或者格式化一个分区"

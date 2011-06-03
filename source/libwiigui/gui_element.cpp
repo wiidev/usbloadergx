@@ -759,7 +759,7 @@ bool GuiElement::IsInside(int x, int y)
     if (x > this->GetLeft() && x < (this->GetLeft() + width) && y > this->GetTop() && y < (this->GetTop() + height)) return true;
     return false;
 }
-void GuiElement::Lock()
+void GuiElement::LockElement()
 {
     //  LWP_MutexLock(mutex);
     for (;;) // loop while element is locked by self
@@ -789,7 +789,7 @@ void GuiElement::Lock()
         }
     }
 }
-void GuiElement::Unlock()
+void GuiElement::UnlockElement()
 {
     //  LWP_MutexUnlock(mutex);
     LWP_MutexLock(_lock_mutex);
@@ -812,9 +812,9 @@ void GuiElement::Unlock()
 SimpleLock::SimpleLock(GuiElement *e) :
     element(e)
 {
-    element->Lock();
+    element->LockElement();
 }
 SimpleLock::~SimpleLock()
 {
-    element->Unlock();
+    element->UnlockElement();
 }

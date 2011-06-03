@@ -4,15 +4,14 @@
 #include <gccore.h>
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
     typedef struct
     {
-            u32 offset;
-            u32 srcaddress;
-            u32 dstaddress;
+        u32 offset;
+        u32 srcaddress;
+        u32 dstaddress;
     } WIP_Code;
 
     int load_wip_code(u8 *gameid);

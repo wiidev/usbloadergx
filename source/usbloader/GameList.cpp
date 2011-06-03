@@ -31,6 +31,7 @@
 #include "settings/CGameSettings.h"
 #include "settings/CGameStatistics.h"
 #include "settings/GameTitles.h"
+#include "settings/CGameCategories.hpp"
 #include "xml/xml.h"
 #include "FreeTypeGX.h"
 #include "GameList.h"
@@ -240,6 +241,15 @@ int GameList::FilterList(const wchar_t * gameFilter)
         //! Per game lock method
         if(!Settings.godmode && GameConfig && GameConfig->Locked)
             continue;
+
+        //! Category filter
+        u32 n;
+        for(n = 0; n < Settings.EnabledCategories.size(); ++n)
+        {
+            if(GameCategories.isInCategory((char *) header->id, Settings.EnabledCategories[n]))
+                break;
+        }
+        if(n == Settings.EnabledCategories.size()) continue;
 
         wchar_t *gameName = charToWideChar(GameTitles.GetTitle(header));
         if (gameName && *GameFilter.c_str())

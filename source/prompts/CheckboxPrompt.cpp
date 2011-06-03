@@ -56,6 +56,11 @@ CheckboxPrompt::~CheckboxPrompt()
 
 }
 
+void CheckboxPrompt::OnCheckBoxClick(GuiButton *sender, int chan, const POINT &pointer)
+{
+    sender->ResetState();
+}
+
 void CheckboxPrompt::AddCheckBox(const char *text)
 {
     int size = Checkbox.size();
@@ -74,6 +79,7 @@ void CheckboxPrompt::AddCheckBox(const char *text)
     Checkbox[size]->SetSoundClick(btnSoundClick);
     Checkbox[size]->SetSoundOver(btnSoundOver);
     Checkbox[size]->SetTrigger(trigA);
+    Checkbox[size]->Clicked.connect(this, &CheckboxPrompt::OnCheckBoxClick);
     Append(Checkbox[size]);
 
     if (Settings.wsprompt && Settings.widescreen)

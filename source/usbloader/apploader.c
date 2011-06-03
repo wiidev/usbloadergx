@@ -11,6 +11,7 @@
 #include "fstfile.h"
 #include "gecko.h"
 #include "patches/gamepatches.h"
+#include "patches/wip.h"
 #include "settings/SettingsEnums.h"
 
 extern bool geckoinit;
@@ -84,6 +85,7 @@ s32 Apploader_Run(entry_point *entry, char * dolpath, u8 alternatedol, u32 alter
     if (alternatedol == ALT_DOL_FROM_SD_USB)
     {
         ClearDOLList();
+        wip_reset_counter();
         void *dolbuffer = NULL;
         int dollen = 0;
 
@@ -96,6 +98,7 @@ s32 Apploader_Run(entry_point *entry, char * dolpath, u8 alternatedol, u32 alter
     else if (alternatedol == ALT_DOL_FROM_GAME && alternatedoloffset != 0)
     {
         ClearDOLList();
+        wip_reset_counter();
         FST_ENTRY *fst = (FST_ENTRY *) *(u32 *) 0x80000038;
 
         //! Check if it's inside the limits

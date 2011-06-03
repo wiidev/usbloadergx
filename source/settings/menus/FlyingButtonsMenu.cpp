@@ -158,6 +158,9 @@ void FlyingButtonsMenu::SetPageIndicators()
             FirstIndicator = IndicatorCount-MAX_INDICATORS;
         else
             FirstIndicator = currentPage - (int) floor(MAX_INDICATORS/2.0f);
+
+        if(FirstIndicator < 0)
+            FirstIndicator = 0;
     }
 
     int DisplayedIndicators = IndicatorCount > MAX_INDICATORS ? MAX_INDICATORS : IndicatorCount;

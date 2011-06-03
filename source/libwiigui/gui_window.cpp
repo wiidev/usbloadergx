@@ -14,6 +14,8 @@ GuiWindow::GuiWindow()
 {
     width = 0;
     height = 0;
+    forceDim = false;
+    allowDim = true;
     focus = 0; // allow focus
 }
 
@@ -21,6 +23,8 @@ GuiWindow::GuiWindow(int w, int h)
 {
     width = w;
     height = h;
+    forceDim = false;
+    allowDim = true;
     focus = 0; // allow focus
 }
 
@@ -98,10 +102,8 @@ void GuiWindow::Draw()
 
     this->UpdateEffects();
 
-    if (parentElement && state == STATE_DISABLED)
-    //Menu_DrawRectangle(0,0,screenwidth,screenheight,(GXColor){0xbe, 0xca, 0xd5, 0x70},1);
-    Menu_DrawRectangle(0, 0, screenwidth, screenheight, ( GXColor )
-    {   0, 0, 0, 0x70}, 1);
+    if ((parentElement && state == STATE_DISABLED && allowDim) || forceDim)
+        Menu_DrawRectangle(0, 0, screenwidth, screenheight, (GXColor) {0, 0, 0, 0x70}, 1);
 }
 void GuiWindow::DrawTooltip()
 {

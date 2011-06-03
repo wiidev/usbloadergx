@@ -9,7 +9,6 @@
 #include "usbloader/usbstorage2.h"
 #include "usbloader/wdvd.h"
 #include "usbloader/GameList.h"
-#include "settings/Settings.h"
 #include "settings/CGameSettings.h"
 #include "usbloader/frag.h"
 #include "usbloader/wbfs.h"
@@ -61,12 +60,6 @@ u32 GameBooter::BootPartition(char * dolpath, u8 videoselected, u8 alternatedol,
     if (ret < 0)
         return 0;
 
-    load_wip_code((u8*) Disc_ID);
-
-    /* If a wip file is loaded for this game this does nothing - Dimok */
-    PoPPatch();
-    NSMBPatch();
-
     /* Setup low memory */
     Disc_SetLowMem();
 
@@ -78,8 +71,6 @@ u32 GameBooter::BootPartition(char * dolpath, u8 videoselected, u8 alternatedol,
 
     if (ret < 0)
         return 0;
-
-    free_wip();
 
     return (u32) p_entry;
 }

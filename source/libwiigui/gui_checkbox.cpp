@@ -25,12 +25,15 @@
 
 #define WHITEBOX_RED_SIZE   4
 
-GuiCheckbox::GuiCheckbox()
+GuiCheckbox::GuiCheckbox(int s)
     : GuiButton(30, 30), Checked(false)
 {
+	style = s;
+    Checksign.SetParent(this);
     Cross.SetParent(this);
     Blackbox.SetParent(this);
     Whitebox.SetParent(this);
+    Checksign.SetColor((GXColor) {0, 0, 0, 255});
     Cross.SetColor((GXColor) {0, 0, 0, 255});
     Blackbox.SetColor((GXColor) {0, 0, 0, 255});
     Whitebox.SetColor((GXColor) {255, 255, 255, 255});
@@ -38,12 +41,15 @@ GuiCheckbox::GuiCheckbox()
     SetSize(30, 30);
 }
 
-GuiCheckbox::GuiCheckbox(int w, int h)
+GuiCheckbox::GuiCheckbox(int w, int h, int s)
         : GuiButton(w, h), Checked(false)
 {
+	style = s;
+    Checksign.SetParent(this);
     Cross.SetParent(this);
     Blackbox.SetParent(this);
     Whitebox.SetParent(this);
+    Checksign.SetColor((GXColor) {0, 0, 0, 255});
     Cross.SetColor((GXColor) {0, 0, 0, 255});
     Blackbox.SetColor((GXColor) {0, 0, 0, 255});
     Whitebox.SetColor((GXColor) {255, 255, 255, 255});
@@ -55,6 +61,8 @@ void GuiCheckbox::SetSize(int w, int h)
 {
     width = w;
     height = h;
+    Checksign.SetSize(w-WHITEBOX_RED_SIZE, h-WHITEBOX_RED_SIZE);
+    Checksign.SetPosition(WHITEBOX_RED_SIZE/2, WHITEBOX_RED_SIZE/2);
     Cross.SetSize(w-WHITEBOX_RED_SIZE, h-WHITEBOX_RED_SIZE);
     Cross.SetPosition(WHITEBOX_RED_SIZE/2, WHITEBOX_RED_SIZE/2);
     Blackbox.SetSize(w, h);
@@ -72,8 +80,8 @@ void GuiCheckbox::SetState(int s, int c)
 {
     if(s == STATE_CLICKED)
         Checked = !Checked;
-    else
-        GuiButton::SetState(s, c);
+
+    GuiButton::SetState(s, c);
 }
 
 void GuiCheckbox::Draw()
@@ -82,5 +90,10 @@ void GuiCheckbox::Draw()
     Blackbox.Draw();
     Whitebox.Draw();
     if(Checked)
-        Cross.Draw();
+    {
+        if(style == CHECKSIGN)
+            Checksign.Draw();
+        else
+            Cross.Draw();
+    }
 }

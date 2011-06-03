@@ -27,6 +27,7 @@
 #include <string>
 #include <stdio.h>
 #include <gctypes.h>
+#include <vector>
 #include "SettingsEnums.h"
 
 class CSettings
@@ -117,6 +118,7 @@ class CSettings
         u32 ParentalBlocks;
         f32 WSFactor;
         f32 FontScaleFactor;
+        std::vector<u32> EnabledCategories;
     protected:
         bool ValidVersion(FILE * file);
         bool SetSetting(char *name, char *value);

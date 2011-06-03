@@ -69,7 +69,7 @@ static char fs3[] ATTRIBUTE_ALIGN(32) = "/dev/usb/ehc";
 
 static u8 * mem2_ptr = NULL;
 static s32 hid = -1, fd = -1;
-static u32 usb2_port = 0;  //autodetect mode (works only with hermes ios & rodries ehcmodule)
+static u32 usb2_port = 2;  //autodetect mode (works only with hermes ios & rodries ehcmodule)
 u32 hdd_sector_size = 512;
 
 s32 USBStorage2_Init(void)

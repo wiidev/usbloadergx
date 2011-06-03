@@ -6,6 +6,7 @@
 #include <dirent.h>
 
 #include "usbloader/wbfs.h"
+#include "settings/CGameCategories.hpp"
 #include "language/gettext.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/Text.hpp"
@@ -716,6 +717,42 @@ static int InternalShowGameInfo(char *ID)
         InfoWindow.Append(developerTxt);
     }
 
+    GuiText *categoryTitle = NULL;
+    std::vector<GuiText *> categoriesTxt;
+    indexy += 10;
+
+    const std::vector<unsigned int> gameCategories = GameCategories[ID];
+    if(gameCategories.size() > 1)
+    {
+        categoryTitle = new GuiText(tr("Categories:"), 16, ( GXColor ) {0, 0, 0, 255});
+        categoryTitle->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+        categoryTitle->SetPosition(505, 12 + indexy);
+        indexy += 20;
+        InfoWindow.Append(categoryTitle);
+    }
+
+    for (u32 i = 0; i < gameCategories.size(); ++i)
+    {
+        if(gameCategories[i] == 0)
+            continue;
+
+        if(categoriesTxt.size() >= 2 && gameCategories.size() > i+1)
+        {
+            categoriesTxt.push_back(new GuiText("...", 16, ( GXColor ) {0, 0, 0, 255}));
+            categoriesTxt[categoriesTxt.size()-1]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+            categoriesTxt[categoriesTxt.size()-1]->SetPosition(515, 12 + indexy);
+            indexy += 20;
+            InfoWindow.Append(categoriesTxt[categoriesTxt.size()-1]);
+            break;
+        }
+
+        categoriesTxt.push_back(new GuiText(GameCategories.CategoryList[gameCategories[i]], 16, ( GXColor ) {0, 0, 0, 255}));
+        categoriesTxt[categoriesTxt.size()-1]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+        categoriesTxt[categoriesTxt.size()-1]->SetPosition(515, 12 + indexy);
+        indexy += 20;
+        InfoWindow.Append(categoriesTxt[categoriesTxt.size()-1]);
+    }
+
     //genre
     int genreY = marginY;
     if(GameInfo.GenreList.size() > 0)
@@ -978,11 +1015,16 @@ static int InternalShowGameInfo(char *ID)
     delete genreTitleTxt;
     delete wiitdb1Txt;
     delete memTxt;
+    delete categoryTitle;
+
     for (u32 i = 0; i < GameInfo.GenreList.size(); ++i)
         delete genreTxt[i];
 
     for (u32 i = 0; i < GameInfo.WifiFeatureList.size(); ++i)
         delete wifiTxt[i];
+
+    for (u32 i = 0; i < categoriesTxt.size(); ++i)
+        delete categoriesTxt[i];
 
     delete [] genreTxt;
     delete [] wifiTxt;

@@ -37,7 +37,7 @@ enum
     CheckedBox6 = 0x20,
 };
 
-class CheckboxPrompt : private PromptWindow
+class CheckboxPrompt : private PromptWindow, public sigslot::has_slots<>
 {
     public:
         //! Constructor
@@ -54,6 +54,7 @@ class CheckboxPrompt : private PromptWindow
                         const char *chbx3 = 0, const char *chbx4 = 0,
                         const char *chbx5 = 0, const char *chbx6 = 0);
     protected:
+        void OnCheckBoxClick(GuiButton *sender, int chan, const POINT &pointer);
         std::vector<GuiText *> CheckboxTxt;
         std::vector<GuiCheckbox *> Checkbox;
 };

@@ -47,6 +47,22 @@ GlobalSettings::~GlobalSettings()
     delete creditsImgOverData;
 }
 
+int GlobalSettings::Show()
+{
+    GlobalSettings * Menu = new GlobalSettings();
+    mainWindow->Append(Menu);
+
+    Menu->ShowMenu();
+
+    int returnMenu = MENU_NONE;
+
+    while((returnMenu = Menu->MainLoop()) == MENU_NONE);
+
+    delete Menu;
+
+    return returnMenu;
+}
+
 void GlobalSettings::SetupMainButtons()
 {
     int pos = 0;
