@@ -78,7 +78,7 @@ void CCategoryList::RemoveCategory(const string &name)
 {
     for (map<unsigned int, string>::iterator itr = nameList.begin(); itr != nameList.end(); itr++)
     {
-        if(name == itr->second)
+        if(strcasecmp(name.c_str(), itr->second.c_str()) == 0)
         {
             nameList.erase(itr);
             break;
@@ -98,7 +98,7 @@ bool CCategoryList::findCategory(const string &name)
 {
     for (listIter = nameList.begin(); listIter != nameList.end(); listIter++)
     {
-        if(name == listIter->second)
+        if(strcasecmp(name.c_str(), listIter->second.c_str()) == 0)
             return true;
     }
     return false;

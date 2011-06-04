@@ -2,18 +2,19 @@
 
 #include "IosLoader.h"
 #include "Controls/DeviceHandler.hpp"
-#include "../usbloader/usbstorage2.h"
-#include "../usbloader/disc.h"
-#include "../usbloader/wbfs.h"
-#include "../usbloader/wdvd.h"
-#include "../wad/nandtitle.h"
-#include "../mload/mload_modules.h"
-#include "../settings/CSettings.h"
+#include "usbloader/usbstorage2.h"
+#include "usbloader/disc.h"
+#include "usbloader/wbfs.h"
+#include "usbloader/wdvd.h"
+#include "wad/nandtitle.h"
+#include "mload/mload_modules.h"
+#include "settings/CSettings.h"
 #include "wad/nandtitle.h"
 #include "mload/mload.h"
 #include "mload/modules/ehcmodule_5.h"
 #include "mload/modules/dip_plugin_249.h"
 #include "mload/modules/odip_frag.h"
+#include "utils/tools.h"
 #include "gecko.h"
 
 
@@ -37,6 +38,22 @@ bool IosLoader::IsWaninkokoIOS(s32 ios)
         return false;
 
     return !IsHermesIOS(ios);
+}
+
+/*
+ * Check if the ios passed is a d2x ios.
+ */
+bool IosLoader::IsD2X(s32 ios)
+{
+    iosinfo_t *info = GetIOSInfo(ios);
+    if(!info)
+        return false;
+
+    bool res = (strncasecmp(info->name, "d2x", 3) == 0);
+
+    free(info);
+
+    return res;
 }
 
 /*
@@ -157,7 +174,8 @@ void IosLoader::LoadIOSModules(s32 ios, s32 ios_rev)
     //! Waninkoko IOS
     else if(IsWaninkokoIOS(ios))
     {
-        if(ios_rev >= 18 && !(ios_rev >= 21006 && ios_rev < 30000))
+        iosinfo_t *info = GetIOSInfo(ios);
+        if(ios_rev >= 18 && (!info || info->version < 6))
         {
             if(mload_init() < 0)
                 return;
@@ -166,5 +184,55 @@ void IosLoader::LoadIOSModules(s32 ios, s32 ios_rev)
             mload_module((u8 *) dip_plugin_249, dip_plugin_249_size);
             mload_close();
         }
+
+        if(info) free(info);
     }
+}
+
+/*
+ * Reads the ios info struct from the .app file.
+ * @return pointer to iosinfo_t on success else NULL. The user is responsible for freeing the buffer.
+ */
+iosinfo_t *IosLoader::GetIOSInfo(s32 ios)
+{
+	char filepath[ISFS_MAXPATH] ATTRIBUTE_ALIGN(0x20);
+	u64 TicketID = ((((u64) 1) << 32) | ios);
+	u32 TMD_Length;
+
+	s32 ret = ES_GetStoredTMDSize(TicketID, &TMD_Length);
+	if (ret < 0)
+		return NULL;
+
+	signed_blob *TMD = (signed_blob*) memalign(32, ALIGN32(TMD_Length));
+	if (!TMD)
+		return NULL;
+
+	ret = ES_GetStoredTMD(TicketID, TMD, TMD_Length);
+	if (ret < 0)
+	{
+		free(TMD);
+		return NULL;
+	}
+
+	sprintf(filepath, "/title/%08x/%08x/content/%08x.app", 0x00000001, ios, *(u8 *)((u32)TMD+0x1E7));
+
+    free(TMD);
+
+    u8 *buffer = NULL;
+    u32 filesize = 0;
+
+    NandTitle::LoadFileFromNand(filepath, &buffer, &filesize);
+
+    if(!buffer)
+		return NULL;
+
+    iosinfo_t *iosinfo = (iosinfo_t *) buffer;
+
+    if(iosinfo->magicword != 0x1ee7c105 || iosinfo->magicversion != 1)
+    {
+        free(buffer);
+        return NULL;
+    }
+
+    return iosinfo;
 }

@@ -50,6 +50,7 @@ class CGameCategories
         void RemoveGameCategories(const string &gameID);
         const vector<unsigned int> &operator[](const char *gameID) const;
         const vector<unsigned int> &operator[](const unsigned char *gameID) const { return operator[]((const char *) gameID); }
+        bool ImportFromWiiTDB(const string &xmlpath);
         static bool isInCategory(const char *gameID, unsigned int id);
 
         CCategoryList CategoryList;

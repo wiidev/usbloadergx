@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-03 22:18+0200\n"
+"POT-Creation-Date: 2011-06-04 18:25+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -154,6 +154,9 @@ msgid "Apr"
 msgstr ""
 
 msgid "Are you sure you want to delete this category?"
+msgstr ""
+
+msgid "Are you sure you want to import game categories from WiiTDB?"
 msgstr ""
 
 msgid "Are you sure you want to lock USB Loader GX?"
@@ -367,6 +370,9 @@ msgid "Could not initialize network!"
 msgstr ""
 
 msgid "Could not open Disc"
+msgstr ""
+
+msgid "Could not open the WiiTDB.xml file."
 msgstr ""
 
 msgid "Could not open wiitdb.xml."
@@ -763,6 +769,15 @@ msgid "How do you want to update?"
 msgstr ""
 
 msgid "How to Shutdown?"
+msgstr ""
+
+msgid "Import categories"
+msgstr ""
+
+msgid "Import categories from WiiTDB"
+msgstr ""
+
+msgid "Import operation successfully completed."
 msgstr ""
 
 #, c-format

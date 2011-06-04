@@ -1,5 +1,7 @@
+#include <ogc/isfs.h>
 #include "nandtitle.h"
 #include "usbloader/playlog.h"
+#include "utils/tools.h"
 #include "gecko.h"
 
 NandTitle NandTitles;
@@ -432,4 +434,61 @@ int NandTitle::FindU32(const char *s)
         if (TITLE_LOWER( titleIds.at( i ) ) == TITLE_LOWER( tid )) return i;
     }
     return WII_EINSTALL;
+}
+
+int NandTitle::LoadFileFromNand(const char *filepath, u8 **outbuffer, u32 *outfilesize)
+{
+    if(!filepath)
+        return -1;
+
+	fstats *stats = (fstats *) memalign(32, ALIGN32(sizeof(fstats)));
+	if(!stats)
+        return IPC_ENOMEM;
+
+    ISFS_Initialize();
+
+	int fd = ISFS_Open(filepath, ISFS_OPEN_READ);
+	if(fd < 0)
+	{
+	    free(stats);
+        ISFS_Deinitialize();
+	    return fd;
+	}
+
+	int ret = ISFS_GetFileStats(fd, stats);
+	if (ret < 0)
+	{
+	    free(stats);
+	    ISFS_Close(fd);
+        ISFS_Deinitialize();
+	    return ret;
+	}
+
+    u32 filesize = stats->file_length;
+
+    free(stats);
+
+	u8 *buffer = (u8 *) memalign(32, ALIGN32(filesize));
+	if(!buffer)
+	{
+	    ISFS_Close(fd);
+        ISFS_Deinitialize();
+	    return IPC_ENOMEM;
+	}
+
+	ret = ISFS_Read(fd, buffer, filesize);
+
+    ISFS_Close(fd);
+    ISFS_Deinitialize();
+
+	if (ret < 0)
+	{
+	    free(buffer);
+	    return ret;
+	}
+
+    *outbuffer = buffer;
+    *outfilesize = filesize;
+
+    return 0;
 }

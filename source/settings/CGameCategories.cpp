@@ -26,10 +26,12 @@
 #include <string.h>
 #include "CGameCategories.hpp"
 #include "GameTitles.h"
+#include "settings/CSettings.h"
+#include "usbloader/GameList.h"
 #include "language/gettext.h"
 #include "FileOperations/fileops.h"
+#include "xml/WiiTDB.hpp"
 #include "xml/xml.h"
-#include "gecko.h"
 #include "svnrev.h"
 
 #define VALID_CONFIG_REV    1084
@@ -355,4 +357,36 @@ bool CGameCategories::isInCategory(const char *gameID, unsigned int id)
     }
 
     return false;
+}
+
+bool CGameCategories::ImportFromWiiTDB(const string &xmlpath)
+{
+    WiiTDB XML_DB;
+
+    if(!XML_DB.OpenFile(xmlpath.c_str()))
+        return false;
+
+    XML_DB.SetLanguageCode(Settings.db_language);
+    wString filter(gameList.GetCurrentFilter());
+    gameList.LoadUnfiltered();
+
+    for(int i = 0; i < gameList.size(); ++i)
+    {
+        vector<string> genreList;
+
+        if(!XML_DB.GetGenreList((const char *) gameList[i]->id, genreList))
+            continue;
+
+        for(u32 n = 0; n < genreList.size(); ++n)
+        {
+            if(!CategoryList.findCategory(genreList[n]))
+                CategoryList.AddCategory(genreList[n]);
+
+            this->SetCategory(gameList[i]->id, CategoryList.getCurrentID());
+        }
+    }
+
+    XML_DB.CloseFile();
+
+	return true;
 }

@@ -21,6 +21,14 @@ void gprintf(const char *format, ...)
 	if((vasprintf(&tmp, format, va) >= 0) && tmp)
 	{
         usb_sendbuffer(1, tmp, strlen(tmp));
+        #ifdef DEBUG_TO_FILE
+        FILE *debugF = fopen("sd:/debug.txt", "a");
+        if(!debugF)
+            debugF = fopen("sd:/debug.txt", "w");
+        if(debugF)
+            fprintf(debugF, tmp);
+        fclose(debugF);
+        #endif
 	}
 	va_end(va);
 
@@ -76,8 +84,7 @@ void hexdump(void *d, int len)
 
 static ssize_t __out_write(struct _reent *r, int fd, const char *ptr, size_t len)
 {
-    if(geckoinit && ptr)
-        usb_sendbuffer(1, ptr, len);
+    gprintf(ptr);
 
 	return len;
 }

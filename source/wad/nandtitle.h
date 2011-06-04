@@ -98,6 +98,7 @@ class NandTitle
             return At(i);
         }
 
+        static int LoadFileFromNand(const char *filepath, u8 **outbuffer, u32 *outfilesize);
     private:
         std::vector<u64> titleIds;
         std::map<u64, string> NameList;

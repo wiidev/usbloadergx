@@ -39,6 +39,7 @@
 #include "audio.h"
 #include "xml/xml.h"
 #include "language/UpdateLanguage.h"
+#include "system/IosLoader.h"
 #include "gecko.h"
 #include "lstub.h"
 
@@ -232,24 +233,36 @@ void WindowCredits()
     starImg.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     starImg.SetPosition(505, 350);
 
-    int numEntries = 24;
-    GuiText * txt[numEntries];
+    const int numEntries = 25;
+    std::vector<GuiText *> txt(numEntries);
 
-    txt[i] = new GuiText(tr( "Credits" ), 26, ( GXColor ) {255, 255, 255, 255});
+    txt[i] = new GuiText(tr( "Credits" ), 28, ( GXColor ) {255, 255, 255, 255});
     txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     txt[i]->SetPosition(0, 12);
     i++;
 
-    char SvnRev[30];
+    char SvnRev[80];
 #ifdef FULLCHANNEL
     snprintf(SvnRev, sizeof(SvnRev), "Rev%sc   IOS%u (Rev %u)", GetRev(), IOS_GetVersion(), IOS_GetRevision());
 #else
     snprintf(SvnRev, sizeof(SvnRev), "Rev%s   IOS%u (Rev %u)", GetRev(), IOS_GetVersion(), IOS_GetRevision());
 #endif
 
+    char IosInfo[80] = "";
+    iosinfo_t * info = IosLoader::GetIOSInfo(IOS_GetVersion());
+    if(info)
+        snprintf(IosInfo, sizeof(IosInfo), "(%s v%i%s base%i)", info->name, info->version, info->versionstring, info->baseios);
+
     txt[i] = new GuiText(SvnRev, 16, ( GXColor ) {255, 255, 255, 255});
     txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
-    txt[i]->SetPosition(0, y);
+    txt[i]->SetPosition(0, info ? y-10 : y);
+    i++;
+
+    free(info);
+
+    txt[i] = new GuiText(IosInfo, 16, ( GXColor ) {255, 255, 255, 255});
+    txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
+    txt[i]->SetPosition(0, y+6);
     i++;
     y += 34;
 

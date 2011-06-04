@@ -29,6 +29,7 @@
 #include "language/gettext.h"
 #include "settings/SettingsPrompts.h"
 #include "settings/GameTitles.h"
+#include "settings/CGameCategories.hpp"
 #include "xml/xml.h"
 #include "usbloader/GameList.h"
 #include "usbloader/wbfs.h"
@@ -126,6 +127,7 @@ GuiSettingsMenu::GuiSettingsMenu()
     Options->SetName(Idx++, "%s", tr( "Mark new games" ));
     Options->SetName(Idx++, "%s", tr( "Show Free Space" ));
     Options->SetName(Idx++, "%s", tr( "HOME Menu" ));
+    Options->SetName(Idx++, "%s", tr( "Import categories from WiiTDB" ));
 
     SetOptionValues();
 
@@ -214,6 +216,9 @@ void GuiSettingsMenu::SetOptionValues()
 
     //! Settings: Home Menu style
     Options->SetValue(Idx++, "%s", tr( HomeMenuText[Settings.HomeMenu] ));
+
+    //! Settings: Import categories from WiiTDB
+    Options->SetValue(Idx++, " ");
 }
 
 int GuiSettingsMenu::GetMenuInternal()
@@ -400,6 +405,27 @@ int GuiSettingsMenu::GetMenuInternal()
     else if (ret == ++Idx)
     {
         if (++Settings.HomeMenu >= HOME_MENU_MAX_CHOICE) Settings.HomeMenu = 0;
+    }
+
+    //! Settings: Import categories from WiiTDB
+    else if (ret == ++Idx)
+    {
+        int choice = WindowPrompt(tr("Import categories"), tr("Are you sure you want to import game categories from WiiTDB?"), tr("Yes"), tr("Cancel"));
+        if(choice)
+        {
+            char xmlpath[300];
+            snprintf(xmlpath, sizeof(xmlpath), "%swiitdb.xml", Settings.titlestxt_path);
+            if(!GameCategories.ImportFromWiiTDB(xmlpath))
+            {
+                WindowPrompt(tr("Error"), tr("Could not open the WiiTDB.xml file."), tr("OK"));
+            }
+            else
+            {
+                GameCategories.Save();
+                GameCategories.CategoryList.goToFirst();
+                WindowPrompt(tr("Import categories"), tr("Import operation successfully completed."), tr("OK"));
+            }
+        }
     }
 
     SetOptionValues();

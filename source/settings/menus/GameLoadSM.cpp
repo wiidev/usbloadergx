@@ -300,9 +300,9 @@ int GameLoadSM::GetMenuInternal()
         if(OnScreenKeyboard(entered, sizeof(entered), 0))
         {
             GameConfig.ios = atoi(entered) & 0xFF;
-            if(GameConfig.ios < 200) GameConfig.ios = 200;
+            if(GameConfig.ios < 200 && GameConfig.ios != INHERIT) GameConfig.ios = 200;
 
-            if(NandTitles.IndexOf(TITLE_ID(1, GameConfig.ios)) < 0)
+            if(GameConfig.ios != INHERIT && NandTitles.IndexOf(TITLE_ID(1, GameConfig.ios)) < 0)
             {
                 WindowPrompt(tr("Warning:"), tr("This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."), tr("OK"));
             }
