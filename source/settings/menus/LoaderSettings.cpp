@@ -228,9 +228,9 @@ void LoaderSettings::SetOptionValues()
 
     //! Settings: Return To
     const char* TitleName = NULL;
-    int haveTitle = NandTitles.FindU32(Settings.returnTo);
-    if (haveTitle >= 0)
-        TitleName = NandTitles.NameFromIndex(haveTitle);
+    u64 tid = NandTitles.FindU32(Settings.returnTo);
+    if (tid > 0)
+        TitleName = NandTitles.NameOf(tid);
     TitleName = TitleName ? TitleName : strlen(Settings.returnTo) > 0 ? Settings.returnTo : tr(OnOffText[0]);
     Options->SetValue(Idx++, "%s", TitleName);
 

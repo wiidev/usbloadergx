@@ -1,4 +1,5 @@
 #include <ogc/isfs.h>
+#include <stdlib.h>
 #include "nandtitle.h"
 #include "usbloader/playlog.h"
 #include "utils/tools.h"
@@ -7,28 +8,6 @@
 NandTitle NandTitles;
 
 static u8 tmd_buf[MAX_SIGNED_TMD_SIZE] ATTRIBUTE_ALIGN( 32 );
-
-//based on one from comex's nand formatter
-static u64 atoi_hex(const char *s)
-{
-    u64 ret = 0;
-    u32 n = strlen(s);
-
-    for (u32 i = 0; i < n; i++)
-    {
-        if (s[i] > 0x39)
-        {
-            ret += (s[i] & ~0x20) - 0x37;
-        }
-        else
-        {
-            ret += (s[i] - 0x30);
-        }
-        if (i != (n - 1)) ret *= 16;
-    }
-
-    return ret;
-}
 
 NandTitle::NandTitle()
 {
@@ -97,25 +76,21 @@ s32 NandTitle::Get()
 
 tmd* NandTitle::GetTMD(u64 tid)
 {
-    //gprintf("GetTMD( %016llx ): ", tid );
     signed_blob *s_tmd = (signed_blob *) tmd_buf;
     u32 tmd_size;
 
     if (ES_GetStoredTMDSize(tid, &tmd_size) < 0)
     {
-        //gprintf("!size\n");
         return NULL;
     }
 
     s32 ret = ES_GetStoredTMD(tid, s_tmd, tmd_size);
     if (ret < 0)
     {
-        //gprintf("!tmd - %04x\n", ret );
         return NULL;
     }
 
     tmd *t = (tmd*) SIGNATURE_PAYLOAD(s_tmd);
-    //gprintf("ok\n");
 
     return t;
 }
@@ -420,20 +395,31 @@ s32 NandTitle::GetTicketViews(u64 tid, tikview **outbuf, u32 *outlen)
     return ret;
 }
 
-int NandTitle::FindU64(const char *s)
+u64 NandTitle::FindU64(const char *s)
 {
-    u64 tid = atoi_hex(s);
-    return IndexOf(tid);
-}
+    u64 tid = strtoull(s, NULL, 16);
 
-int NandTitle::FindU32(const char *s)
-{
-    u64 tid = atoi_hex(s);
     for (u32 i = 0; i < titleIds.size(); i++)
     {
-        if (TITLE_LOWER( titleIds.at( i ) ) == TITLE_LOWER( tid )) return i;
+        if(titleIds[i] == tid)
+            return titleIds[i];
     }
-    return WII_EINSTALL;
+
+    return 0;
+}
+
+u64 NandTitle::FindU32(const char *s)
+{
+    u32 tid = (u32) strtoull(s, NULL, 16);
+	if(!tid)
+		return 0;
+
+    for (u32 i = 0; i < titleIds.size(); i++)
+    {
+        if (TITLE_LOWER(titleIds[i]) == tid)
+            return titleIds[i];
+    }
+    return 0;
 }
 
 int NandTitle::LoadFileFromNand(const char *filepath, u8 **outbuffer, u32 *outfilesize)

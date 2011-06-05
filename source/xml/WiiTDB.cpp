@@ -650,7 +650,7 @@ bool WiiTDB::GetGenreList(const char * id, vector<string> & genre)
             ptr++;
             while(*ptr == ' ') ptr++;
 
-            while(genre[genre_num][genre[genre_num].size()-1] == ' ')
+            while(genre[genre_num].size() > 0 && genre[genre_num][genre[genre_num].size()-1] == ' ')
                 genre[genre_num].erase(genre[genre_num].size()-1);
 
             genre_num++;
@@ -664,6 +664,9 @@ bool WiiTDB::GetGenreList(const char * id, vector<string> & genre)
 
         ++ptr;
     }
+
+    while(genre[genre_num].size() > 0 && genre[genre_num][genre[genre_num].size()-1] == ' ')
+        genre[genre_num].erase(genre[genre_num].size()-1);
 
     delete [] data;
 

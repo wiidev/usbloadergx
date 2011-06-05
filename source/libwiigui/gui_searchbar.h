@@ -27,11 +27,14 @@ class GuiSearchBar: public GuiWindow
         GuiImage* ClearBtnImg_Over;
         GuiButton* ClearBtn;
 
+        GuiButton* CloseBtn;
+
         cSearchButton **buttons;
         int cnt;
         GuiImageData keyImageData;
         GuiImageData keyOverImageData;
         GuiTrigger trig;
+        GuiTrigger trigB;
 
 };
 

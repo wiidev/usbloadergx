@@ -193,7 +193,7 @@ int GameBooter::BootGame(const char * gameID)
     u8 alternatedol = game_cfg->loadalternatedol;
     u32 alternatedoloffset = game_cfg->alternatedolstart;
     u8 reloadblock = game_cfg->iosreloadblock;
-    u64 returnToChoice = game_cfg->returnTo ? NandTitles.At(NandTitles.FindU32(Settings.returnTo)) : 0;
+    u64 returnToChoice = game_cfg->returnTo ? NandTitles.FindU32(Settings.returnTo) : 0;
 
     //! Prepare alternate dol settings
     SetupAltDOL(gameHeader.id, alternatedol, alternatedoloffset);

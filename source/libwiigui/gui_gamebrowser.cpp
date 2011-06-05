@@ -380,7 +380,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
                 if (i != selectedItem && game[i]->GetState() == STATE_SELECTED)
                     game[i]->ResetState();
                 else if (i == selectedItem && game[i]->GetState() == STATE_DEFAULT)
-                    game[selectedItem]->SetState(STATE_SELECTED, t->chan);
+                    game[selectedItem]->SetState(STATE_SELECTED, -1);
             }
 
             game[i]->Update(t);

@@ -36,6 +36,7 @@ GuiSearchBar::GuiSearchBar(const wchar_t *SearchChars) :
 	keyOverImageData(Resources::GetFile("keyboard_key_over.png"), Resources::GetFileSize("keyboard_key_over.png"))
 {
     trig.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+    trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
     SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 
     cnt = wcslen(SearchChars);
@@ -83,6 +84,10 @@ GuiSearchBar::GuiSearchBar(const wchar_t *SearchChars) :
     ClearBtn = new GuiButton(ClearBtnImg, ClearBtnImg_Over, ALIGN_RIGHT, ALIGN_TOP, -10, 10, &trig, btnSoundOver, btnSoundClick, 1);
     this->Append(ClearBtn);
 
+    CloseBtn = new GuiButton(0, 0);
+    CloseBtn->SetTrigger(&trigB);
+    this->Append(CloseBtn);
+
     //  SetPosition(100,100);
 
 }
@@ -98,6 +103,8 @@ GuiSearchBar::~GuiSearchBar()
     delete ClearBtnImg;
     delete ClearBtnImg_Over;
     delete imgClearBtn;
+
+    delete CloseBtn;
 
     delete BacspaceBtn;
     delete BacspaceBtnImg;
@@ -151,7 +158,8 @@ wchar_t GuiSearchBar::GetClicked()
         }
     }
     if (BacspaceBtn->GetState() == STATE_CLICKED) return 8;
-    if (ClearBtn->GetState() == STATE_CLICKED) return 7;
+    else if (ClearBtn->GetState() == STATE_CLICKED) return 7;
+    else if (CloseBtn->GetState() == STATE_CLICKED) return 27;
 
     return 0;
 }

@@ -193,6 +193,7 @@ GameBrowseMenu::GameBrowseMenu()
     favoriteBtnImg_g->SetWidescreen(Settings.widescreen);
     favoriteBtn = new GuiButton(favoriteBtnImg_g, favoriteBtnImg_g, ALIGN_LEFT, ALIGN_TOP, 0, 0,
                                 trigA, btnSoundOver, btnSoundClick2, 1, favoriteBtnTT, -15, 52, 0, 3);
+    favoriteBtn->SetSelectable(false);
 
     searchBtnTT = new GuiTooltip(tr( "Set Search-Filter" ));
     if (Settings.wsprompt) searchBtnTT->SetWidescreen(Settings.widescreen);
@@ -203,6 +204,7 @@ GameBrowseMenu::GameBrowseMenu()
     searchBtnImg_g->SetWidescreen(Settings.widescreen);
     searchBtn = new GuiButton(searchBtnImg_g, searchBtnImg_g, ALIGN_LEFT, ALIGN_TOP, 0, 0,
                               trigA, btnSoundOver, btnSoundClick2, 1, searchBtnTT, -15, 52, 0, 3);
+    searchBtn->SetSelectable(false);
 
     sortBtnTT = new GuiTooltip(" ");
     if (Settings.wsprompt) sortBtnTT->SetWidescreen(Settings.widescreen);
@@ -211,6 +213,7 @@ GameBrowseMenu::GameBrowseMenu()
     sortBtnImg = new GuiImage(imgabcIcon);
     sortBtnImg->SetWidescreen(Settings.widescreen);
     sortBtn = new GuiButton(sortBtnImg, sortBtnImg, ALIGN_LEFT, ALIGN_TOP, 0, 0, trigA, btnSoundOver, btnSoundClick2, 1, sortBtnTT, -15, 52, 0, 3);
+    sortBtn->SetSelectable(false);
 
     categBtnTT = new GuiTooltip(tr("Select game categories"));
     if (Settings.wsprompt) sortBtnTT->SetWidescreen(Settings.widescreen);
@@ -221,6 +224,7 @@ GameBrowseMenu::GameBrowseMenu()
     categBtnImg_g = new GuiImage(imgCategory_gray);
     categBtnImg_g->SetWidescreen(Settings.widescreen);
     categBtn = new GuiButton(categBtnImg, categBtnImg, ALIGN_LEFT, ALIGN_TOP, 0, 0, trigA, btnSoundOver, btnSoundClick2, 1, categBtnTT, -15, 52, 0, 3);
+    categBtn->SetSelectable(false);
 
     listBtnTT = new GuiTooltip(tr( "Display as a list" ));
     if (Settings.wsprompt) listBtnTT->SetWidescreen(Settings.widescreen);
@@ -230,6 +234,7 @@ GameBrowseMenu::GameBrowseMenu()
     listBtnImg_g = new GuiImage(imgarrangeList_gray);
     listBtnImg_g->SetWidescreen(Settings.widescreen);
     listBtn = new GuiButton(listBtnImg_g, listBtnImg_g, ALIGN_LEFT, ALIGN_TOP, 0, 0, trigA, btnSoundOver, btnSoundClick2, 1, listBtnTT, 15, 52, 1, 3);
+    listBtn->SetSelectable(false);
 
     gridBtnTT = new GuiTooltip(tr( "Display as a grid" ));
     if (Settings.wsprompt) gridBtnTT->SetWidescreen(Settings.widescreen);
@@ -239,6 +244,7 @@ GameBrowseMenu::GameBrowseMenu()
     gridBtnImg_g = new GuiImage(imgarrangeGrid_gray);
     gridBtnImg_g->SetWidescreen(Settings.widescreen);
     gridBtn = new GuiButton(gridBtnImg_g, gridBtnImg_g, ALIGN_LEFT, ALIGN_TOP, 0, 0, trigA, btnSoundOver, btnSoundClick2, 1, gridBtnTT, 15, 52, 1, 3);
+    gridBtn->SetSelectable(false);
 
     carouselBtnTT = new GuiTooltip(tr( "Display as a carousel" ));
     if (Settings.wsprompt) carouselBtnTT->SetWidescreen(Settings.widescreen);
@@ -248,6 +254,7 @@ GameBrowseMenu::GameBrowseMenu()
     carouselBtnImg_g = new GuiImage(imgarrangeCarousel_gray);
     carouselBtnImg_g->SetWidescreen(Settings.widescreen);
     carouselBtn = new GuiButton(carouselBtnImg_g, carouselBtnImg_g, ALIGN_LEFT, ALIGN_TOP, 0, 0, trigA, btnSoundOver, btnSoundClick2, 1, carouselBtnTT, 15, 52, 1, 3);
+    carouselBtn->SetSelectable(false);
 
     lockBtnTT = new GuiTooltip(NULL);
     if (Settings.wsprompt) lockBtnTT->SetWidescreen(Settings.widescreen);
@@ -257,6 +264,7 @@ GameBrowseMenu::GameBrowseMenu()
     lockBtnImg_g = new GuiImage(imgLock_gray);
     lockBtnImg_g->SetWidescreen(Settings.widescreen);
     lockBtn = new GuiButton(lockBtnImg_g, lockBtnImg_g, ALIGN_LEFT, ALIGN_TOP, 0, 0, trigA, btnSoundOver, btnSoundClick2, 1, lockBtnTT, 15, 52, 1, 3);
+    lockBtn->SetSelectable(false);
 
     unlockBtnImg = new GuiImage(imgUnlock);
     unlockBtnImg->SetWidescreen(Settings.widescreen);
@@ -272,6 +280,7 @@ GameBrowseMenu::GameBrowseMenu()
     dvdBtnImg_g->SetWidescreen(Settings.widescreen);
     dvdBtn = new GuiButton(dvdBtnImg_g, dvdBtnImg_g, ALIGN_LEFT, ALIGN_TOP, 0, 0,
                            trigA, btnSoundOver, btnSoundClick2, 1, dvdBtnTT, 15, 52, 1, 3);
+    dvdBtn->SetSelectable(false);
 
     homebrewBtnTT = new GuiTooltip(tr( "Homebrew Launcher" ));
     if (Settings.wsprompt) homebrewBtnTT->SetWidescreen(Settings.widescreen);
@@ -293,6 +302,7 @@ GameBrowseMenu::GameBrowseMenu()
     DownloadBtn->SetTrigger(0, trigA);
     DownloadBtn->SetTrigger(1, trig1);
     DownloadBtn->SetToolTip(DownloadBtnTT, 205, -30);
+    DownloadBtn->SetSelectable(false);
 
     gameCoverImg = new GuiImage();
     gameCoverImg->SetPosition(thInt("26 - cover/download btn pos x"), thInt("58 - cover/download btn pos y"));
@@ -307,6 +317,7 @@ GameBrowseMenu::GameBrowseMenu()
     idBtn->SetSoundOver(btnSoundOver);
     idBtn->SetTrigger(0, trigA);
     idBtn->SetToolTip(IDBtnTT, 205, -30);
+    idBtn->SetSelectable(false);
 
     GXColor clockColor = thColor("r=138 g=138 b=138 a=240 - clock color");
     clockTimeBack = new GuiText("88:88", 40, (GXColor) {clockColor.r, clockColor.g, clockColor.b, clockColor.a / 6});
@@ -917,10 +928,15 @@ int GameBrowseMenu::MainLoop()
 
             gameList.FilterList(newFilter);
         }
-        else if (searchChar == 7) //! Close
+        else if (searchChar == 27) //! Close
         {
             show_searchwindow = false;
             searchBtn->StopEffect();
+        }
+        else if (searchChar == 7) //! Clear
+        {
+            gameList.FilterList(L"");
+            Settings.gridRows = GridRowsPreSearch; //! restore old rows amount so we don't stay on one row
         }
         else if (searchChar == 8) //! Backspace
         {
