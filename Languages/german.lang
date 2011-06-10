@@ -1,11 +1,11 @@
 # USB Loader GX
-# german language source file - r1075 RC1
+# german language source file - r1087
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-04 18:25+0200\n"
+"POT-Creation-Date: 2011-06-10 14:09+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -124,10 +124,10 @@ msgid "AUTO"
 msgstr "AUTO"
 
 msgid "Add category"
-msgstr ""
+msgstr "Ketegorie hinzuf."
 
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 msgid "All Partitions"
 msgstr "Alle Partitionen"
@@ -154,10 +154,10 @@ msgid "Apr"
 msgstr "April"
 
 msgid "Are you sure you want to delete this category?"
-msgstr ""
+msgstr "Soll diese Kategorie gelöscht werden?"
 
 msgid "Are you sure you want to import game categories from WiiTDB?"
-msgstr ""
+msgstr "Sollen die Spiele-Kategorien aus der WiiTDB importiert werden?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "Bist du sicher, dass du USB Loader GX sperren willst?"
@@ -173,6 +173,9 @@ msgstr "August"
 
 msgid "Author(s):"
 msgstr "Autor(en)"
+
+msgid "Auto"
+msgstr ""
 
 msgid "AutoInit Network"
 msgstr "Autoinit. Netzwerk"
@@ -196,7 +199,7 @@ msgid "Big thanks to:"
 msgstr "Großen Dank an:"
 
 msgid "Block Categories Modify"
-msgstr ""
+msgstr "Sperre Kategorieänderung"
 
 msgid "Block Cover Downloads"
 msgstr "Blocke Cover-Downloads"
@@ -284,10 +287,10 @@ msgid "Cannot write to destination."
 msgstr "Ziel kann nicht beschrieben werden."
 
 msgid "Categories"
-msgstr ""
+msgstr "Kategorien"
 
 msgid "Categories:"
-msgstr ""
+msgstr "Kategorien:"
 
 msgid "Change Play Path"
 msgstr "Pfad ändern"
@@ -336,7 +339,7 @@ msgid "Console must be unlocked for this option."
 msgstr "Gerät muss für diese Option entsperrt werden."
 
 msgid "Console must be unlocked to be able to use this."
-msgstr ""
+msgstr "Gerät muss für diese Nutzung entsperrt werden."
 
 msgid "Console should be unlocked to modify it."
 msgstr "Konsole muss zum Bearbeiten entsperrt werden."
@@ -373,7 +376,7 @@ msgid "Could not open Disc"
 msgstr "Disk konnte nicht geöffnet werden."
 
 msgid "Could not open the WiiTDB.xml file."
-msgstr ""
+msgstr "WiiTDB.xml konnte nicht geöffnet werden."
 
 msgid "Could not open wiitdb.xml."
 msgstr "Konnte wiitdb.xml nicht öffnen."
@@ -430,7 +433,7 @@ msgid "Delete Disc Artwork"
 msgstr "Lösche Disc Cover"
 
 msgid "Delete category"
-msgstr ""
+msgstr "Lösche Kategorie"
 
 msgid "Design:"
 msgstr "Design:"
@@ -640,19 +643,19 @@ msgid "Font Scale Factor"
 msgstr "Schriftskalierwert"
 
 msgid "Force NTSC"
-msgstr "Erzwinge NTSC"
+msgstr "NTSC erzw."
 
 msgid "Force NTSC480p"
-msgstr ""
+msgstr "NTSC480p erzw."
 
 msgid "Force PAL480p"
-msgstr ""
+msgstr "PAL480p erzw."
 
 msgid "Force PAL50"
-msgstr "Erzwinge PAL50"
+msgstr "PAL50 erzw."
 
 msgid "Force PAL60"
-msgstr "Erzwinge PAL60"
+msgstr "PAL60 erzw."
 
 msgid "Format"
 msgstr "Formatieren"
@@ -772,13 +775,13 @@ msgid "How to Shutdown?"
 msgstr "Wie soll ausgeschaltet werden?"
 
 msgid "Import categories"
-msgstr ""
+msgstr "Importiere Kategorien"
 
 msgid "Import categories from WiiTDB"
-msgstr ""
+msgstr "Import. Kategorien (WiiTDB)"
 
 msgid "Import operation successfully completed."
-msgstr ""
+msgstr "Import erfolgreich."
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -873,7 +876,7 @@ msgid "Like SysMenu"
 msgstr "System Menü"
 
 msgid "List on Gamelaunch"
-msgstr ""
+msgstr "Auflisten beim Spielstart"
 
 msgid "Load"
 msgstr "Laden"
@@ -1216,7 +1219,7 @@ msgid "Select a DOL from Game"
 msgstr "Wähle eine DOL vom Spiel"
 
 msgid "Select game categories"
-msgstr ""
+msgstr "Wähle Spiele-Kategorien"
 
 msgid "Sept"
 msgstr "September"
@@ -1228,7 +1231,7 @@ msgid "Settings"
 msgstr "Einstellungen"
 
 msgid "Show Categories"
-msgstr ""
+msgstr "Zeige Kategorien"
 
 msgid "Show Free Space"
 msgstr "Zeige frei. Speicher"
@@ -1436,7 +1439,7 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Die hochgeladene ZIP Datei wurde ins Homebrew Verzeichnis installiert."
 
 msgid "Use global"
-msgstr ""
+msgstr "Benutze global"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV Patch"
@@ -1461,7 +1464,7 @@ msgid "Waiting..."
 msgstr "Warte..."
 
 msgid "Warning"
-msgstr ""
+msgstr "Warnung"
 
 msgid "Warning:"
 msgstr "Warnung:"
@@ -1512,7 +1515,7 @@ msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 1
 msgstr "Es wird versucht eine FAT32/NTFS/EXT Partition mit dem cIOS 249 Rev < 18 auszuwählen. Das wird nicht unterstützt. Weiter auf eigene Gefahr."
 
 msgid "You cannot delete this category."
-msgstr ""
+msgstr "Kategorie kann nicht gelöscht werden."
 
 msgid "You need to select or format a partition"
 msgstr "Du must eine Partition auswählen oder formatieren."

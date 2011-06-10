@@ -6,6 +6,7 @@
 enum
 {
     INHERIT = -1,
+    AUTO = 2
 };
 
 enum

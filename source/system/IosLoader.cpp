@@ -18,6 +18,12 @@
 #include "gecko.h"
 
 
+/*
+ * Buffer variables for the IOS info to avoid loading it several times
+ */
+static int currentIOS = -1;
+static iosinfo_t *currentIOSInfo = NULL;
+
 /******************************************************************************
  * Public Methods:
  ******************************************************************************/
@@ -50,8 +56,6 @@ bool IosLoader::IsD2X(s32 ios)
         return false;
 
     bool res = (strncasecmp(info->name, "d2x", 3) == 0);
-
-    free(info);
 
     return res;
 }
@@ -184,8 +188,6 @@ void IosLoader::LoadIOSModules(s32 ios, s32 ios_rev)
             mload_module((u8 *) dip_plugin_249, dip_plugin_249_size);
             mload_close();
         }
-
-        if(info) free(info);
     }
 }
 
@@ -195,6 +197,16 @@ void IosLoader::LoadIOSModules(s32 ios, s32 ios_rev)
  */
 iosinfo_t *IosLoader::GetIOSInfo(s32 ios)
 {
+    if(currentIOS == ios && currentIOSInfo)
+        return currentIOSInfo;
+
+    if(currentIOSInfo)
+    {
+        free(currentIOSInfo);
+        currentIOSInfo = NULL;
+    }
+
+    currentIOS = ios;
 	char filepath[ISFS_MAXPATH] ATTRIBUTE_ALIGN(0x20);
 	u64 TicketID = ((((u64) 1) << 32) | ios);
 	u32 TMD_Length;
@@ -233,6 +245,12 @@ iosinfo_t *IosLoader::GetIOSInfo(s32 ios)
         free(buffer);
         return NULL;
     }
+
+    iosinfo = (iosinfo_t *) realloc(buffer, sizeof(iosinfo_t));
+    if(!iosinfo)
+        iosinfo = (iosinfo_t *) buffer;
+
+    currentIOSInfo = iosinfo;
 
     return iosinfo;
 }

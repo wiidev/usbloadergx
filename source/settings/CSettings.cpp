@@ -114,6 +114,7 @@ void CSettings::SetDefault()
     widescreen = (CONF_GetAspectRatio() == CONF_ASPECT_16_9);
     HomeMenu = HOME_MENU_DEFAULT;
     MultiplePartitions = OFF;
+    BlockIOSReload = AUTO;
     USBPort = 0;
     CacheTitles = ON;
     WSFactor = 0.8f; //actually should be 0.75 for real widescreen
@@ -263,6 +264,7 @@ bool CSettings::Save()
     fprintf(file, "MultiplePartitions = %d\n ", MultiplePartitions);
     fprintf(file, "USBPort = %d\n ", USBPort);
     fprintf(file, "CacheTitles = %d\n ", CacheTitles);
+    fprintf(file, "BlockIOSReload = %d\n ", BlockIOSReload);
     fprintf(file, "WSFactor = %0.3f\n ", WSFactor);
     fprintf(file, "FontScaleFactor = %0.3f\n ", FontScaleFactor);
     fprintf(file, "EnabledCategories = ");
@@ -478,6 +480,11 @@ bool CSettings::SetSetting(char *name, char *value)
     else if (strcmp(name, "MultiplePartitions") == 0)
     {
         if (sscanf(value, "%d", &i) == 1) MultiplePartitions = i;
+        return true;
+    }
+    else if (strcmp(name, "BlockIOSReload") == 0)
+    {
+        if (sscanf(value, "%d", &i) == 1) BlockIOSReload = i;
         return true;
     }
     else if (strcmp(name, "USBPort") == 0)

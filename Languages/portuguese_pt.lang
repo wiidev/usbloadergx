@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-04 18:25+0200\n"
+"POT-Creation-Date: 2011-06-10 14:06+0200\n"
 "PO-Revision-Date: 2011-03-11 20:00-0000\n"
 "Last-Translator: pplucky (Sky8000)\n"
 "Language-Team: pplucky <pplucky@gmail.com> (Sky8000 <sky8000@hotmail.com>)\n"
@@ -173,6 +173,9 @@ msgstr "Ago"
 
 msgid "Author(s):"
 msgstr "Autor(es):"
+
+msgid "Auto"
+msgstr ""
 
 msgid "AutoInit Network"
 msgstr "Auto-iniciar Rede"

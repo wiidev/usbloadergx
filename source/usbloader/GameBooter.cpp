@@ -192,7 +192,7 @@ int GameBooter::BootGame(const char * gameID)
     u8 countrystrings = game_cfg->patchcountrystrings == INHERIT ? Settings.patchcountrystrings : game_cfg->patchcountrystrings;
     u8 alternatedol = game_cfg->loadalternatedol;
     u32 alternatedoloffset = game_cfg->alternatedolstart;
-    u8 reloadblock = game_cfg->iosreloadblock;
+    u8 reloadblock = game_cfg->iosreloadblock == INHERIT ? Settings.BlockIOSReload : game_cfg->iosreloadblock;
     u64 returnToChoice = game_cfg->returnTo ? NandTitles.FindU32(Settings.returnTo) : 0;
 
     //! Prepare alternate dol settings
@@ -221,14 +221,23 @@ int GameBooter::BootGame(const char * gameID)
     ret = do_bca_code(gameHeader.id);
     gprintf("%d\n", ret);
 
-    //! Setup IOS reload block - only possible on Hermes cIOS
-    if (reloadblock && IosLoader::IsHermesIOS())
+    //! Setup IOS reload block
+    if (IosLoader::IsHermesIOS())
     {
-        enable_ES_ioctlv_vector();
-        if (gameList.GetGameFS(gameHeader.id) == PART_FS_WBFS)
-            mload_close();
+        if(reloadblock == ON)
+        {
+            enable_ES_ioctlv_vector();
+            if (gameList.GetGameFS(gameHeader.id) == PART_FS_WBFS)
+                mload_close();
+        }
 
         reloadblock = 0;
+    }
+    else if(reloadblock == AUTO)
+    {
+        iosinfo_t * iosinfo = IosLoader::GetIOSInfo(IOS_GetVersion());
+        if(!iosinfo || iosinfo->version < 6)
+            reloadblock = 0;
     }
 
 	//! Now we can free up the memory used by the game list

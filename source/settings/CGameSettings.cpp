@@ -420,7 +420,7 @@ GameCFG * CGameSettings::GetDefault()
     DefaultConfig.patchcountrystrings = INHERIT;
     DefaultConfig.loadalternatedol = ALT_DOL_DEFAULT;
     DefaultConfig.alternatedolstart = 0;
-    DefaultConfig.iosreloadblock = OFF;
+    DefaultConfig.iosreloadblock = INHERIT;
     DefaultConfig.alternatedolname[0] = '\0';
     DefaultConfig.returnTo = 1;
     DefaultConfig.Locked = OFF;

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-04 18:25+0200\n"
+"POT-Creation-Date: 2011-06-10 14:06+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -173,6 +173,9 @@ msgstr "八月"
 
 msgid "Author(s):"
 msgstr "作者:"
+
+msgid "Auto"
+msgstr ""
 
 msgid "AutoInit Network"
 msgstr "自动检测网络"

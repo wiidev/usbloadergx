@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-04 18:25+0200\n"
+"POT-Creation-Date: 2011-06-10 14:06+0200\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -17,7 +17,7 @@ msgid " could not be downloaded."
 msgstr "不能下載。"
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr "已經被儲存。內容尚未驗證。部分代碼可能無法作用。如果你遇到問題，請用文字編輯器打開文本文件以獲得更多的信息。"
+msgstr ""
 
 msgid " is not on the server."
 msgstr "不在伺服器上"
@@ -173,6 +173,9 @@ msgstr "八月"
 
 msgid "Author(s):"
 msgstr "作者(群)"
+
+msgid "Auto"
+msgstr ""
 
 msgid "AutoInit Network"
 msgstr "自動檢查網路"
@@ -643,10 +646,10 @@ msgid "Force NTSC"
 msgstr "強制 NTSC"
 
 msgid "Force NTSC480p"
-msgstr ""
+msgstr "強制 NTSC480p"
 
 msgid "Force PAL480p"
-msgstr ""
+msgstr "強制 PAL480p"
 
 msgid "Force PAL50"
 msgstr "強制 PAL50"
@@ -1436,7 +1439,7 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "已更新安裝在Homebrew目錄的ZIP檔案"
 
 msgid "Use global"
-msgstr ""
+msgstr "使用整體設定"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV 修改"
@@ -1527,7 +1530,7 @@ msgid "does not exist!"
 msgstr "不存在!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr "不存在!載入遊戲但不啟用金手指"
+msgstr ""
 
 msgid "files left"
 msgstr "剩下的檔案"
@@ -1570,6 +1573,12 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid " has been Saved. The text has not been verified. Some of the code may not work right with each other. If you experience trouble, open the text in a real text editor for more information."
+#~ msgstr "已經被儲存。內容尚未驗證。部分代碼可能無法作用。如果你遇到問題，請用文字編輯器打開文本文件以獲得更多的信息。"
+
+#~ msgid "does not exist! Loading game without cheats."
+#~ msgstr "不存在!載入遊戲但不啟用金手指"
 
 #~ msgid " Wad Saved as:"
 #~ msgstr "WAD 儲存為:"

@@ -16,7 +16,7 @@ bool PoPPatch();
 void VideoModePatcher(u8 * dst, int len, u8 videoSelected);
 bool PatchReturnTo(void *Address, int Size, u32 id);
 int PatchNewReturnTo(u64 title);
-bool BlockIOSReload(u8 blockiosreloadselect, u8 gameIOS);
+bool BlockIOSReload(u8 gameIOS);
 
 #ifdef __cplusplus
 }

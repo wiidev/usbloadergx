@@ -95,7 +95,7 @@ void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring, u8 
     }
 
     if(blockiosreloadselect)
-        BlockIOSReload(2, gameIOS);
+        BlockIOSReload(gameIOS);
 
     if(es_fd >= 0)
         IOS_Close(es_fd);
@@ -566,16 +566,13 @@ int PatchNewReturnTo(u64 title)
     return result;
 }
 
-bool BlockIOSReload(u8 blockiosreloadselect, u8 gameIOS)
+bool BlockIOSReload(u8 gameIOS)
 {
-    if(blockiosreloadselect == 0)
-        return false;
-
     static int mode ATTRIBUTE_ALIGN(32);
     static int ios ATTRIBUTE_ALIGN(32);
     STACK_ALIGN(ioctlv, vector, 2, 32);
 
-    mode = blockiosreloadselect;
+    mode = 2;
     vector[0].data = &mode;
     vector[0].len = 4;
 

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-04 18:25+0200\n"
+"POT-Creation-Date: 2011-06-10 14:06+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -172,6 +172,9 @@ msgid "Aug"
 msgstr "Srp"
 
 msgid "Author(s):"
+msgstr ""
+
+msgid "Auto"
 msgstr ""
 
 msgid "AutoInit Network"

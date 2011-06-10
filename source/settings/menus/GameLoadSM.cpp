@@ -36,7 +36,8 @@
 static const char * OnOffText[] =
 {
     trNOOP( "OFF" ),
-    trNOOP( "ON" )
+    trNOOP( "ON" ),
+    trNOOP( "Auto" )
 };
 
 static const char * VideoModeText[] =
@@ -235,7 +236,10 @@ void GameLoadSM::SetOptionValues()
     }
 
     //! Settings: Block IOS Reload
-    Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.iosreloadblock]) );
+    if(GameConfig.iosreloadblock == INHERIT)
+        Options->SetValue(Idx++, tr("Use global"));
+    else
+        Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.iosreloadblock]) );
 
     //! Settings: Game Lock
     Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.Locked] ));
@@ -377,7 +381,7 @@ int GameLoadSM::GetMenuInternal()
     //! Settings: Block IOS Reload
     else if (ret == ++Idx)
     {
-        if(++GameConfig.iosreloadblock >= MAX_ON_OFF) GameConfig.iosreloadblock = 0;
+        if(++GameConfig.iosreloadblock >= 3) GameConfig.iosreloadblock = INHERIT;
     }
 
     //! Settings: Game Lock

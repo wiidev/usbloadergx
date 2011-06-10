@@ -114,6 +114,7 @@ class CSettings
         short MultiplePartitions;
         short USBPort;
         short CacheTitles;
+        short BlockIOSReload;
         u32 InstallPartitions;
         u32 ParentalBlocks;
         f32 WSFactor;

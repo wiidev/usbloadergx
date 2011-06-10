@@ -3,7 +3,6 @@
 #include <string.h>
 #include <ogcsys.h>
 #include <ogc/lwp_watchdog.h>
-#include <wiiuse/wpad.h>
 
 #include "patches/fst.h"
 #include "patches/gamepatches.h"
@@ -31,7 +30,7 @@ static u32 vmode_reg = 0;
 
 void Disc_SetLowMem(void)
 {
-
+    /* Setup low memory */
     *Sys_Magic = 0x0D15EA5E; // Standard Boot Code
     *Version = 0x00000001; // Version
     *Arena_L = 0x00000000; // Arena Low
@@ -46,11 +45,9 @@ void Disc_SetLowMem(void)
     *Simulated_Mem = 0x01800000; // Simulated Memory Size
     *(vu32 *) 0xCD00643C = 0x00000000; // 32Mhz on Bus
 
-    //If the game is sam & max: season 1  put this shit in
-    if ((strncmp((char*) Disc_ID, "R3XE6U", 6) == 0) || (strncmp((char*) Disc_ID, "R3XP6V", 6) == 0))
-    {
+    int iosVer = IOS_GetVersion();
+    if(iosVer != 222 && iosVer != 223 && iosVer != 224 && IOS_GetRevision() >= 18)
         *GameID_Address = 0x80000000; // Game ID Address
-    }
 
     /* Copy disc ID */
     memcpy((void *) Online_Check, (void *) Disc_ID, 4);

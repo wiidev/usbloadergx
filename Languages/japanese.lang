@@ -5,9 +5,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-04 18:25+0200\n"
+"POT-Creation-Date: 2011-06-10 14:06+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
-"Last-Translator: ichiroling\n"
+"Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi, papa, ichiroling\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -17,18 +17,18 @@ msgid " could not be downloaded."
 msgstr "ﾀﾞｳﾝﾛｰﾄﾞできませんでした"
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr "に保存されました。使用は 自己責任でお願いします。"
+msgstr "に保存されました。使用は 自己責任でお願いします"
 
 msgid " is not on the server."
 msgstr "はｻｰﾊﾞｰにありません"
 
 #, c-format
 msgid "%i files not found on the server!"
-msgstr "%i 個のﾌｧｲﾙがｻｰﾊﾞｰにありません。"
+msgstr "%i 個のﾌｧｲﾙがｻｰﾊﾞｰにありません"
 
 #, c-format
 msgid "%i missing files"
-msgstr "%i 個のﾌｧｲﾙが足りません。"
+msgstr "%i 個のﾌｧｲﾙが不足しています"
 
 msgid "0 (Everyone)"
 msgstr "セットしない"
@@ -61,10 +61,10 @@ msgid "30 min"
 msgstr "30分"
 
 msgid "3D Cover Path"
-msgstr "３Ｄカバー"
+msgstr "3Dカバー"
 
 msgid "3D Covers"
-msgstr "３Ｄカバー"
+msgstr "3Dカバー"
 
 msgid "4 (Adults Only 18+)"
 msgstr "CERO Zを制限"
@@ -124,10 +124,10 @@ msgid "AUTO"
 msgstr "自動"
 
 msgid "Add category"
-msgstr ""
+msgstr "カテゴリを追加"
 
 msgid "All"
-msgstr ""
+msgstr "全て"
 
 msgid "All Partitions"
 msgstr "全ての領域"
@@ -136,10 +136,10 @@ msgid "All images downloaded successfully."
 msgstr "全ての画像をダウンロードしました"
 
 msgid "All the features of USB Loader GX are unlocked."
-msgstr "GXの使用制限が解除されました"
+msgstr "使用制限が解除されました"
 
 msgid "Alternate DOL"
-msgstr "代理DOL起動"
+msgstr "代替DOL起動"
 
 msgid "Anti"
 msgstr "アンチ"
@@ -154,10 +154,10 @@ msgid "Apr"
 msgstr "4月"
 
 msgid "Are you sure you want to delete this category?"
-msgstr ""
+msgstr "カテゴリを削除しますか?"
 
 msgid "Are you sure you want to import game categories from WiiTDB?"
-msgstr ""
+msgstr "WiiTDBからカテゴリをインポートしますか?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "USB Loader GXをロックしますか?"
@@ -174,14 +174,17 @@ msgstr "8月"
 msgid "Author(s):"
 msgstr "制作者:"
 
+msgid "Auto"
+msgstr ""
+
 msgid "AutoInit Network"
 msgstr "自動ネット接続"
 
 msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr "ﾎﾟｰﾄの自動切換の利用に際し、ﾌｧｲﾙｼｽﾃﾑの破損を避けるため、独自のﾊﾟｽ設定は全てSDｶｰﾄﾞにしてください。"
+msgstr "ﾎﾟｰﾄの自動切換を使用する場合ﾌｧｲﾙｼｽﾃﾑの破損を避けるため、独自のﾊﾟｽ設定は全てSDｶｰﾄﾞにしてください"
 
 msgid "BCA Codes Path"
-msgstr "ＢＣＡコード"
+msgstr "BCAコード"
 
 msgid "Back"
 msgstr "もどる"
@@ -196,7 +199,7 @@ msgid "Big thanks to:"
 msgstr "協力:"
 
 msgid "Block Categories Modify"
-msgstr ""
+msgstr "カテゴリの編集を制限"
 
 msgid "Block Cover Downloads"
 msgstr "カバーのダウンロードを制限"
@@ -214,10 +217,10 @@ msgid "Block GameID Change"
 msgstr "ゲームIDの変更を制限"
 
 msgid "Block Global Settings"
-msgstr "基本設定を制限"
+msgstr "設定を全て制限"
 
 msgid "Block Gui Settings"
-msgstr "GUI設定を制限"
+msgstr "基本設定を制限"
 
 msgid "Block HBC Menu"
 msgstr "HBCメニューを制限"
@@ -284,10 +287,10 @@ msgid "Cannot write to destination."
 msgstr "出力先に書き込めません"
 
 msgid "Categories"
-msgstr ""
+msgstr "カテゴリ"
 
 msgid "Categories:"
-msgstr ""
+msgstr "カテゴリ:"
 
 msgid "Change Play Path"
 msgstr "パスの変更"
@@ -336,7 +339,7 @@ msgid "Console must be unlocked for this option."
 msgstr "変更にはロックの解除が必要です"
 
 msgid "Console must be unlocked to be able to use this."
-msgstr ""
+msgstr "これを使うにはロックの解除が必要です"
 
 msgid "Console should be unlocked to modify it."
 msgstr "変更にはロックの解除が必要です"
@@ -430,7 +433,7 @@ msgid "Delete Disc Artwork"
 msgstr "ディスク画像を削除"
 
 msgid "Delete category"
-msgstr ""
+msgstr "カテゴリを削除"
 
 msgid "Design:"
 msgstr "デザイン:"
@@ -511,7 +514,7 @@ msgid "Downloading 3D Covers"
 msgstr "両面ｶﾊﾞｰをﾀﾞｳﾝﾛｰﾄﾞ中"
 
 msgid "Downloading Flat Covers"
-msgstr "片面ｶﾊﾞｰをﾀﾞｳﾝﾛｰﾄﾞ中"
+msgstr "正面ｶﾊﾞｰをﾀﾞｳﾝﾛｰﾄﾞ中"
 
 msgid "Downloading Full HQ Covers"
 msgstr "ﾌﾙｶﾊﾞｰ(精細)をﾀﾞｳﾝﾛｰﾄﾞ中"
@@ -529,7 +532,7 @@ msgid "Downloading image:"
 msgstr "画像をダウンロード中"
 
 msgid "Downloading original Discarts"
-msgstr "純正ﾚｰﾍﾞﾙをダウンロード中"
+msgstr "公式ﾚｰﾍﾞﾙをダウンロード中"
 
 msgid "Downloading pagelist:"
 msgstr "リストをダウンロード中:"
@@ -643,10 +646,10 @@ msgid "Force NTSC"
 msgstr "NTSCに強制"
 
 msgid "Force NTSC480p"
-msgstr ""
+msgstr "NTSC480pに強制"
 
 msgid "Force PAL480p"
-msgstr ""
+msgstr "PAL480pに強制"
 
 msgid "Force PAL50"
 msgstr "PAL50に強制"
@@ -679,7 +682,7 @@ msgid "Full LQ Covers"
 msgstr "フルカバー(普通)"
 
 msgid "Full Menu"
-msgstr "フルメニュー"
+msgstr "完全なメニュー"
 
 msgid "Full shutdown"
 msgstr "シャットダウン"
@@ -688,7 +691,7 @@ msgid "GAMEID_Gamename"
 msgstr "ゲームID_ゲーム名"
 
 msgid "GCT Cheatcodes Path"
-msgstr "ＧＣＴチート"
+msgstr "GCTチート"
 
 msgid "GCT File created"
 msgstr "GCTファイルを作成しました"
@@ -724,7 +727,7 @@ msgid "Game Sound Mode"
 msgstr "サウンドモード"
 
 msgid "Game Sound Volume"
-msgstr "音量"
+msgstr "サウンドの音量"
 
 msgid "Game Split Size"
 msgstr "ゲームの分割サイズ"
@@ -733,7 +736,7 @@ msgid "Game is already installed:"
 msgstr "このｹﾞｰﾑは既にｲﾝｽﾄｰﾙされています:"
 
 msgid "Game/Install Partition"
-msgstr "ｹﾞｰﾑ/ｲﾝｽﾄｰﾙ 領域"
+msgstr "ｹﾞｰﾑのｲﾝｽﾄｰﾙ領域"
 
 msgid "Gamename [GAMEID]"
 msgstr "ゲーム名 [ゲームID]"
@@ -754,7 +757,7 @@ msgid "HOME Menu"
 msgstr "HOMEﾎﾞﾀﾝﾒﾆｭｰ"
 
 msgid "Homebrew Apps Path"
-msgstr "Homebrew"
+msgstr "Homebrewアプリ"
 
 msgid "Homebrew Channel"
 msgstr "ＨＢＣへ"
@@ -772,13 +775,13 @@ msgid "How to Shutdown?"
 msgstr "終了方法の選択"
 
 msgid "Import categories"
-msgstr ""
+msgstr "カテゴリをインポート"
 
 msgid "Import categories from WiiTDB"
-msgstr ""
+msgstr "WiiTDBからカテゴリをインポート"
 
 msgid "Import operation successfully completed."
-msgstr ""
+msgstr "インポートに成功しました"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -807,7 +810,7 @@ msgid "Install a game"
 msgstr "ゲームをインストール"
 
 msgid "Install directories"
-msgstr "インストールフォルダ"
+msgstr "フォルダの構成"
 
 msgid "Install partitions"
 msgstr "保存する領域"
@@ -828,7 +831,7 @@ msgid "Installing wad"
 msgstr "WADをｲﾝｽﾄｰﾙします"
 
 msgid "Issue manager /"
-msgstr "課題管理者:"
+msgstr "問題管理者 /"
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "この情報は開発者までお知らせください"
@@ -1060,7 +1063,7 @@ msgid "Only for Install"
 msgstr "インストール中のみ"
 
 msgid "Original Discarts"
-msgstr "純正レーベル"
+msgstr "公式レーベル"
 
 msgid "Original/Customs"
 msgstr "公式を優先"
@@ -1207,7 +1210,7 @@ msgid "Select"
 msgstr "選択"
 
 msgid "Select DOL Offset"
-msgstr "代理DOLの選択"
+msgstr "代替DOLの選択"
 
 msgid "Select a DOL"
 msgstr "DOLを選択"
@@ -1216,7 +1219,7 @@ msgid "Select a DOL from Game"
 msgstr "ゲームからDOLを選択"
 
 msgid "Select game categories"
-msgstr ""
+msgstr "ゲームカテゴリを選択"
 
 msgid "Sept"
 msgstr "9月"
@@ -1228,7 +1231,7 @@ msgid "Settings"
 msgstr "設定"
 
 msgid "Show Categories"
-msgstr ""
+msgstr "カテゴリを表示"
 
 msgid "Show Free Space"
 msgstr "空き容量の表示"
@@ -1315,7 +1318,7 @@ msgid "TChinese"
 msgstr "繁体中国語"
 
 msgid "TXT Cheatcodes Path"
-msgstr "ＴＸＴチート"
+msgstr "テキストチート"
 
 msgid "The .them file was not found in the zip."
 msgstr ".themファイルがzip内にありません"
@@ -1376,7 +1379,7 @@ msgid "USB Loader GX is protected"
 msgstr "GXは保護されています"
 
 msgid "USB Port"
-msgstr "USBﾎﾟｰﾄ"
+msgstr "USBポート"
 
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr "USBﾎﾟｰﾄの切替機能は、Hermes cIOS使用時のみ有効です。"
@@ -1433,10 +1436,10 @@ msgid "Updating Language Files:"
 msgstr "言語ファイルを更新中:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr "ｲﾝｽﾄｰﾙ済みﾃﾞｨﾚｸﾄﾘにZIPを送信しました"
+msgstr "ｲﾝｽﾄｰﾙ済みﾃﾞｨﾚｸﾄﾘにZIPを転送しました"
 
 msgid "Use global"
-msgstr ""
+msgstr "基本設定を使う"
 
 msgid "VIDTV Patch"
 msgstr "映像パッチ"
@@ -1461,7 +1464,7 @@ msgid "Waiting..."
 msgstr "待機中…"
 
 msgid "Warning"
-msgstr ""
+msgstr "警告"
 
 msgid "Warning:"
 msgstr "警告:"
@@ -1512,13 +1515,13 @@ msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 1
 msgstr "rev17以前のcIOS249ではFAT32/NTFS/EXTに対応していません"
 
 msgid "You cannot delete this category."
-msgstr ""
+msgstr "このカテゴリは削除できません"
 
 msgid "You need to select or format a partition"
 msgstr "領域を選択するか初期化してください"
 
 msgid "and translators for language files updates"
-msgstr "/ K-M / ichiroling …多言語化"
+msgstr "/ K-M / ichiroling …日本語化"
 
 msgid "available"
 msgstr "があります"

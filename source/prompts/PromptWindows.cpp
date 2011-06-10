@@ -258,8 +258,6 @@ void WindowCredits()
     txt[i]->SetPosition(0, info ? y-10 : y);
     i++;
 
-    free(info);
-
     txt[i] = new GuiText(IosInfo, 16, ( GXColor ) {255, 255, 255, 255});
     txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
     txt[i]->SetPosition(0, y+6);

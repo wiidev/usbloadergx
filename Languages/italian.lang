@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-04 18:25+0200\n"
+"POT-Creation-Date: 2011-06-10 14:06+0200\n"
 "PO-Revision-Date: 2011-03-10 21:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: Cambo\n"
@@ -173,6 +173,9 @@ msgstr "agosto"
 
 msgid "Author(s):"
 msgstr "Autore/i:"
+
+msgid "Auto"
+msgstr ""
 
 msgid "AutoInit Network"
 msgstr "Inizializz. Rete Automatica"

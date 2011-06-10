@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-04 18:25+0200\n"
-"PO-Revision-Date: 2011-03-16 08:16+0100\n"
+"POT-Creation-Date: 2011-06-10 14:09+0200\n"
+"PO-Revision-Date: 2011-06-10 08:07+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
 "MIME-Version: 1.0\n"
@@ -124,10 +124,10 @@ msgid "AUTO"
 msgstr ""
 
 msgid "Add category"
-msgstr ""
+msgstr "Categorie toevoegen"
 
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 msgid "All Partitions"
 msgstr "Alle partities"
@@ -154,10 +154,10 @@ msgid "Apr"
 msgstr ""
 
 msgid "Are you sure you want to delete this category?"
-msgstr ""
+msgstr "Weet je zeker dat je deze categorie wilt verwijderen?"
 
 msgid "Are you sure you want to import game categories from WiiTDB?"
-msgstr ""
+msgstr "Weet je zeker dat je spel categorieën wilt importeren van WiiTDB?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "Weet je zeker dat je USB Loader GX wilt vergrendelen"
@@ -173,6 +173,9 @@ msgstr ""
 
 msgid "Author(s):"
 msgstr "Auteur(s):"
+
+msgid "Auto"
+msgstr ""
 
 msgid "AutoInit Network"
 msgstr "Netwerk Auto init."
@@ -196,7 +199,7 @@ msgid "Big thanks to:"
 msgstr "Grote dank aan:"
 
 msgid "Block Categories Modify"
-msgstr ""
+msgstr "Blokkeer categorieën wijzigen"
 
 msgid "Block Cover Downloads"
 msgstr "Blokkeer Downloads van Hoesjes"
@@ -284,10 +287,10 @@ msgid "Cannot write to destination."
 msgstr "Kan niet naar bestemming schrijven."
 
 msgid "Categories"
-msgstr ""
+msgstr "Categorieën"
 
 msgid "Categories:"
-msgstr ""
+msgstr "Categorieën:"
 
 msgid "Change Play Path"
 msgstr "Verander afspeel locatie"
@@ -336,7 +339,7 @@ msgid "Console must be unlocked for this option."
 msgstr "Console moet ontgrendeld zijn voor deze optie."
 
 msgid "Console must be unlocked to be able to use this."
-msgstr ""
+msgstr "Console moet worden vrijgegeven om dit te kunnen gebruiken."
 
 msgid "Console should be unlocked to modify it."
 msgstr "Console moet worden vrijgegeven om te wijzigen."
@@ -373,7 +376,7 @@ msgid "Could not open Disc"
 msgstr "Kan disk niet openen"
 
 msgid "Could not open the WiiTDB.xml file."
-msgstr ""
+msgstr "Kan het WiiTDB.xml bestand niet openen."
 
 msgid "Could not open wiitdb.xml."
 msgstr "Kan wiitdb.xml niet openen."
@@ -430,7 +433,7 @@ msgid "Delete Disc Artwork"
 msgstr "Disk labels verwijderen"
 
 msgid "Delete category"
-msgstr ""
+msgstr "Verwijder categorie"
 
 msgid "Design:"
 msgstr "Ontwerp:"
@@ -643,10 +646,10 @@ msgid "Force NTSC"
 msgstr "Forceer NTSC"
 
 msgid "Force NTSC480p"
-msgstr ""
+msgstr "Forceer NTSC480p"
 
 msgid "Force PAL480p"
-msgstr ""
+msgstr "Forceer PAL480p"
 
 msgid "Force PAL50"
 msgstr "Forceer PAL50"
@@ -772,13 +775,13 @@ msgid "How to Shutdown?"
 msgstr "Hoe uitzetten?"
 
 msgid "Import categories"
-msgstr ""
+msgstr "Importeer categorieën"
 
 msgid "Import categories from WiiTDB"
-msgstr ""
+msgstr "Importeer categorieën van WiiTDB"
 
 msgid "Import operation successfully completed."
-msgstr ""
+msgstr "Importeren succesvol afgerond"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -1216,7 +1219,7 @@ msgid "Select a DOL from Game"
 msgstr "Selecteer een DOL van Spel"
 
 msgid "Select game categories"
-msgstr ""
+msgstr "Selecteer spel categorieën"
 
 msgid "Sept"
 msgstr "Sep"
@@ -1228,7 +1231,7 @@ msgid "Settings"
 msgstr "Instellingen"
 
 msgid "Show Categories"
-msgstr ""
+msgstr "Toon categorieën"
 
 msgid "Show Free Space"
 msgstr "Vrije ruimte weergeven"
@@ -1436,7 +1439,7 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Geuploade ZIP is geïnstalleerd in je homebrew locatie."
 
 msgid "Use global"
-msgstr ""
+msgstr "Gebruik globaal"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV patchen"
@@ -1461,7 +1464,7 @@ msgid "Waiting..."
 msgstr "Wachten..."
 
 msgid "Warning"
-msgstr ""
+msgstr "Waarschuwing"
 
 msgid "Warning:"
 msgstr "Waarschuwing:"
@@ -1512,7 +1515,7 @@ msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 1
 msgstr "Je probeert een FAT32/NTFS/EXT partitie te selecteren met cIOS 249 Rev < 18. Dit word niet ondersteund. Verder gaan is op eigen risico."
 
 msgid "You cannot delete this category."
-msgstr ""
+msgstr "Je kunt deze categorie niet verwijderen."
 
 msgid "You need to select or format a partition"
 msgstr "Je moet een partitie selecteren of formatteren"

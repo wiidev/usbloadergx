@@ -40,10 +40,11 @@
 #include "xml/xml.h"
 #include "menu.h"
 
-static const char * OnOffText[MAX_ON_OFF] =
+static const char * OnOffText[] =
 {
     trNOOP( "OFF" ),
-    trNOOP( "ON" )
+    trNOOP( "ON" ),
+    trNOOP( "Auto" )
 };
 
 static const char * VideoModeText[VIDEO_MODE_MAX] =
@@ -124,6 +125,7 @@ LoaderSettings::LoaderSettings()
     Options->SetName(Idx++, "%s", tr( "Game Split Size" ));
     Options->SetName(Idx++, "%s", tr( "Quick Boot" ));
     Options->SetName(Idx++, "%s", tr( "Error 002 fix" ));
+    Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
     Options->SetName(Idx++, "%s", tr( "Install partitions" ));
     Options->SetName(Idx++, "%s", tr( "Return To" ));
     Options->SetName(Idx++, "%s", tr( "Messageboard Update" ));
@@ -217,6 +219,9 @@ void LoaderSettings::SetOptionValues()
 
     //! Settings: Error 002 fix
     Options->SetValue(Idx++, "%s", tr( Error002Text[Settings.error002] ));
+
+    //! Settings: Block IOS Reload
+    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.BlockIOSReload] ));
 
     //! Settings: Install partitions
     if(Settings.InstallPartitions == ONLY_GAME_PARTITION)
@@ -410,6 +415,12 @@ int LoaderSettings::GetMenuInternal()
     else if (ret == ++Idx )
     {
         if (++Settings.error002 >= 3) Settings.error002 = 0;
+    }
+
+    //! Settings: Block IOS Reload
+    else if (ret == ++Idx )
+    {
+        if (++Settings.BlockIOSReload >= 3) Settings.BlockIOSReload = 0;
     }
 
     //! Settings: Install partitions
