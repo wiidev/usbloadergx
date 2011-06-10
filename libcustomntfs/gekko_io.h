@@ -30,6 +30,8 @@
 #include <gccore.h>
 #include <ogc/disc_io.h>
 
+#define MAX_SECTOR_SIZE     4096
+
 /**
  * gekko_fd - Gekko device driver descriptor
  */

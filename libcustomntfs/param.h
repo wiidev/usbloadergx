@@ -55,7 +55,7 @@ enum {
  */
 
 	/* only update the final extent of a runlist when appending data */
-#define PARTIAL_RUNLIST_UPDATING 1
+#define PARTIAL_RUNLIST_UPDATING 0
 
 /*
  *		Parameters for user and xattr mappings

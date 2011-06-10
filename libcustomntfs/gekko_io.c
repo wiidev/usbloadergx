@@ -112,25 +112,35 @@ static int ntfs_device_gekko_io_open(struct ntfs_device *dev, int flags)
     }
 
     // Check that there is a valid NTFS boot sector at the start of the device
-    NTFS_BOOT_SECTOR boot;
-    if (interface->readSectors(fd->startSector, 1, &boot)) {
-        if (!ntfs_boot_sector_is_ntfs(&boot)) {
-            errno = EINVALPART;
-            return -1;
-        }
-    } else {
+    NTFS_BOOT_SECTOR *boot = (NTFS_BOOT_SECTOR *) ntfs_alloc(MAX_SECTOR_SIZE);
+    if(boot == NULL) {
+        errno = ENOMEM;
+        return -1;
+    }
+
+    if (!interface->readSectors(fd->startSector, 1, boot)) {
         ntfs_log_perror("read failure @ sector %d\n", fd->startSector);
         errno = EIO;
+        ntfs_free(boot);
+        return -1;
+    }
+
+    if (!ntfs_boot_sector_is_ntfs(boot)) {
+        errno = EINVALPART;
+        ntfs_free(boot);
         return -1;
     }
 
     // Parse the boot sector
-    fd->hiddenSectors = le32_to_cpu(boot.bpb.hidden_sectors);
-    fd->sectorSize = le16_to_cpu(boot.bpb.bytes_per_sector);
-    fd->sectorCount = sle64_to_cpu(boot.number_of_sectors);
+    fd->hiddenSectors = le32_to_cpu(boot->bpb.hidden_sectors);
+    fd->sectorSize = le16_to_cpu(boot->bpb.bytes_per_sector);
+    fd->sectorCount = sle64_to_cpu(boot->number_of_sectors);
     fd->pos = 0;
     fd->len = (fd->sectorCount * fd->sectorSize);
-    fd->ino = le64_to_cpu(boot.volume_serial_number);
+    fd->ino = le64_to_cpu(boot->volume_serial_number);
+
+    // Free memory for boot sector
+    ntfs_free(boot);
 
     // Mark the device as read-only (if required)
     if (flags & O_RDONLY) {
@@ -507,6 +517,7 @@ static int ntfs_device_gekko_io_sync(struct ntfs_device *dev)
 
     // Mark the device as clean
     NDevClearDirty(dev);
+    NDevClearSync(dev);
 
     // Flush any sectors in the disc cache (if required)
     if (fd->cache) {

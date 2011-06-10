@@ -70,7 +70,7 @@
 #include "misc.h"
 
 const char *ntfs_home = 
-"Ntfs-3g news, support and information:  http://ntfs-3g.org\n";
+"News, support and information:  http://tuxera.com\n";
 
 static const char *invalid_ntfs_msg =
 "The device '%s' doesn't seem to have a valid NTFS.\n"
@@ -113,7 +113,7 @@ static const char *fakeraid_msg =
 static const char *access_denied_msg =
 "Please check '%s' and the ntfs-3g binary permissions,\n"
 "and the mounting user ID. More explanation is provided at\n"
-"http://ntfs-3g.org/support.html#unprivileged\n";
+"http://tuxera.com/community/ntfs-3g-faq/#unprivileged\n";
 
 /**
  * ntfs_volume_alloc - Create an NTFS volume object and initialise it
@@ -482,13 +482,10 @@ ntfs_volume *ntfs_volume_startup(struct ntfs_device *dev, unsigned long flags)
 		goto error_exit;
 	
 	/* Create the default upcase table. */
-	vol->upcase_len = 65536;
-	vol->upcase = ntfs_malloc(vol->upcase_len * sizeof(ntfschar));
-	if (!vol->upcase)
+	vol->upcase_len = ntfs_upcase_build_default(&vol->upcase);
+	if (!vol->upcase_len || !vol->upcase)
 		goto error_exit;
-	
-	ntfs_upcase_table_build(vol->upcase,
-			vol->upcase_len * sizeof(ntfschar));
+
 	/* Default with no locase table and case sensitive file names */
 	vol->locase = (ntfschar*)NULL;
 	NVolSetCaseSensitive(vol);
@@ -1184,7 +1181,7 @@ ntfs_volume *ntfs_device_mount(struct ntfs_device *dev, unsigned long flags)
 	 * Check for dirty logfile and hibernated Windows.
 	 * We care only about read-write mounts.
 	 */
-	if (!(flags & MS_RDONLY)) {
+	if (!(flags & (MS_RDONLY | MS_FORENSIC))) {
 		if (!(flags & MS_IGNORE_HIBERFILE) && 
 		    ntfs_volume_check_hiberfile(vol, 1) < 0)
 			goto error_exit;
@@ -1196,10 +1193,10 @@ ntfs_volume *ntfs_device_mount(struct ntfs_device *dev, unsigned long flags)
 			if (ntfs_logfile_reset(vol))
 				goto error_exit;
 		}
-	}
 		/* make $TXF_DATA resident if present on the root directory */
-	if (!NVolReadOnly(vol) && fix_txf_data(vol))
-		goto error_exit;
+		if (fix_txf_data(vol))
+			goto error_exit;
+	}
 
 	return vol;
 io_error_exit:

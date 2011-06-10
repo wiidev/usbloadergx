@@ -99,7 +99,7 @@ int ntfsFindPartitions (const DISC_INTERFACE *interface, sec_t **partitions)
     int i;
 
     union {
-        u8 buffer[512];
+        u8 buffer[MAX_SECTOR_SIZE];
         MASTER_BOOT_RECORD mbr;
         EXTENDED_BOOT_RECORD ebr;
         NTFS_BOOT_SECTOR boot;

@@ -1,10 +1,18 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
+/* Define this to 1 if you want to enable support of encrypted files in
+   libntfs and utilities. */
+#undef ENABLE_CRYPTO
+
 /* Define to 1 if debug should be enabled */
 #undef ENABLE_DEBUG
 
 /* Define to 1 if the nfconv patch should be enabled */
 #undef ENABLE_NFCONV
+
+/* Define this to 1 if you want to enable generation of DCE compliant UUIDs.
+   */
+#undef ENABLE_UUID
 
 /* Define to 1 if using internal fuse */
 #undef FUSE_INTERNAL
@@ -119,6 +127,9 @@
 
 /* Define to 1 if you have the <mntent.h> header file. */
 #undef HAVE_MNTENT_H
+
+/* Define to 1 if you have the <pwd.h> header file. */
+#define HAVE_PWD_H 1
 
 /* Define to 1 if you have the `realpath' function. */
 #undef HAVE_REALPATH
@@ -298,13 +309,13 @@
 #define PACKAGE_NAME "ntfs-3g"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "ntfs-3g 2011.1.15"
+#define PACKAGE_STRING "ntfs-3g 2011.4.12"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "ntfs-3g"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "2011.1.15"
+#define PACKAGE_VERSION "2011.4.12"
 
 /* POSIX ACL support */
 #undef POSIXACLS
@@ -334,7 +345,7 @@
 #endif
 
 /* Version number of package */
-#define VERSION "2010.8.8"
+#define VERSION "2011.4.12"
 
 /* Define to 1 if this is a Windows OS */
 #undef WINDOWS

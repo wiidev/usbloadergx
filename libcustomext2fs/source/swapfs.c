@@ -31,9 +31,9 @@ void ext2fs_swap_super(struct ext2_super_block * sb)
 	sb->s_free_inodes_count = ext2fs_swab32(sb->s_free_inodes_count);
 	sb->s_first_data_block = ext2fs_swab32(sb->s_first_data_block);
 	sb->s_log_block_size = ext2fs_swab32(sb->s_log_block_size);
-	sb->s_log_frag_size = ext2fs_swab32(sb->s_log_frag_size);
+	sb->s_log_cluster_size = ext2fs_swab32(sb->s_log_cluster_size);
 	sb->s_blocks_per_group = ext2fs_swab32(sb->s_blocks_per_group);
-	sb->s_frags_per_group = ext2fs_swab32(sb->s_frags_per_group);
+	sb->s_clusters_per_group = ext2fs_swab32(sb->s_clusters_per_group);
 	sb->s_inodes_per_group = ext2fs_swab32(sb->s_inodes_per_group);
 	sb->s_mtime = ext2fs_swab32(sb->s_mtime);
 	sb->s_wtime = ext2fs_swab32(sb->s_wtime);
@@ -76,6 +76,8 @@ void ext2fs_swap_super(struct ext2_super_block * sb)
 	sb->s_snapshot_r_blocks_count =
 		ext2fs_swab64(sb->s_snapshot_r_blocks_count);
 	sb->s_snapshot_list = ext2fs_swab32(sb->s_snapshot_list);
+	sb->s_usr_quota_inum = ext2fs_swab32(sb->s_usr_quota_inum);
+	sb->s_grp_quota_inum = ext2fs_swab32(sb->s_grp_quota_inum);
 
 	for (i=0; i < 4; i++)
 		sb->s_hash_seed[i] = ext2fs_swab32(sb->s_hash_seed[i]);

@@ -247,7 +247,7 @@ void ntfsDeinitVolume (ntfs_vd *vd)
     //}
 
     // Force the underlying device to sync
-    vd->dev->d_ops->sync(vd->dev);
+    ntfs_device_sync(vd->dev);
 
     // Unlock
     ntfsUnlock(vd);
@@ -647,7 +647,7 @@ int ntfsUnlink (ntfs_vd *vd, const char *path)
     }
 
     // Force the underlying device to sync
-    vd->dev->d_ops->sync(vd->dev);
+    ntfs_device_sync(vd->dev);
 
     // ntfs_delete() ALWAYS closes ni and dir_ni; so no need for us to anymore
     dir_ni = ni = NULL;
@@ -696,7 +696,7 @@ int ntfsSync (ntfs_vd *vd, ntfs_inode *ni)
     res = ntfs_inode_sync(ni);
 
     // Force the underlying device to sync
-    vd->dev->d_ops->sync(vd->dev);
+    ntfs_device_sync(vd->dev);
 
     // Unlock
     ntfsUnlock(vd);
