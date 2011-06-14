@@ -24,7 +24,7 @@
 #ifndef BOX_COVER_HPP_
 #define BOX_COVER_HPP_
 
-#include "libwiigui/gui.h"
+#include "GUI/gui.h"
 
 #define EFFECT_BOX_FLY_CENTRE   0x2000000
 #define EFFECT_BOX_FLY_BACK     0x4000000

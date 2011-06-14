@@ -27,7 +27,7 @@
 #include <string.h>
 
 #include "CTheme.h"
-#include "libwiigui/gui.h"
+#include "GUI/gui.h"
 #include "settings/CSettings.h"
 #include "FileOperations/fileops.h"
 #include "menu/menus.h"

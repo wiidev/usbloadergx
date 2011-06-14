@@ -31,13 +31,11 @@ class CategorySelectPrompt : public CategoryPrompt
 {
     public:
         CategorySelectPrompt(struct discHdr * header);
-        ~CategorySelectPrompt();
-        int Show() { return CategoryPrompt::MainLoop(); };
     private:
-        void OnCheckboxClicked(GuiCheckbox *checkBox);
-        void OnCategoryChange(GuiText *categoryTxt, GuiText *posTxt, GuiCheckbox *checkBox);
-        void OnNextCategory();
-        void OnPreviousCategory();
+        void OnCheckboxClick(GuiCheckbox *checkBox, int index);
+        void onBrowserRefresh();
+        void onResetChanges();
+
         struct discHdr * gameHeader;
 };
 

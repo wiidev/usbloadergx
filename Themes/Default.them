@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-03 22:18+0200\n"
+"POT-Creation-Date: 2011-06-14 16:37+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -19,13 +19,34 @@ msgstr ""
 "Theme-Team: Example\n"
 "Theme-Version: Example\n"
 
-msgid "r=0 g=0 b=0 a=255 - prompt windows text color"
+msgid "right - checkbox browser scrollbar align hor"
 msgstr ""
 
-msgid "r=0 g=0 b=0 a=255 - settings text color"
+msgid "top - checkbox browser scrollbar align ver"
+msgstr ""
+
+msgid "0 - checkbox browser scrollbar pos x"
+msgstr ""
+
+msgid "5 - checkbox browser scrollbar pos y"
+msgstr ""
+
+msgid "r=0 g=0 b=0 a=255 - checkbox browser text color"
 msgstr ""
 
 msgid "9 - game list browser page size"
+msgstr ""
+
+msgid "right - game browser scrollbar align hor"
+msgstr ""
+
+msgid "top - game browser scrollbar align ver"
+msgstr ""
+
+msgid "0 - game browser scrollbar pos x"
+msgstr ""
+
+msgid "5 - game browser scrollbar pos y"
 msgstr ""
 
 msgid "r=0 g=0 b=0 a=255 - game browser list text color"
@@ -68,6 +89,24 @@ msgid "20 - game grid layout pos y"
 msgstr ""
 
 msgid "255 - tooltip alpha"
+msgstr ""
+
+msgid "right - options browser scrollbar align hor"
+msgstr ""
+
+msgid "top - options browser scrollbar align ver"
+msgstr ""
+
+msgid "0 - options browser scrollbar pos x"
+msgstr ""
+
+msgid "5 - options browser scrollbar pos y"
+msgstr ""
+
+msgid "r=0 g=0 b=0 a=255 - settings text color"
+msgstr ""
+
+msgid "r=0 g=0 b=0 a=255 - prompt windows button text color"
 msgstr ""
 
 msgid "r=55 g=190 b=237 a=255 - hdd info color"
@@ -376,6 +415,9 @@ msgstr ""
 msgid "288 - carousel layout category btn pos x widescreen"
 msgstr ""
 
+msgid "13 - carousel layout category btn pos y"
+msgstr ""
+
 msgid "320 - carousel layout list btn pos x"
 msgstr ""
 
@@ -451,10 +493,175 @@ msgstr ""
 msgid "68 - region info text pos x"
 msgstr ""
 
+msgid "r=0 g=0 b=0 a=255 - category prompt title text color"
+msgstr ""
+
+msgid "center - category prompt title text align hor"
+msgstr ""
+
+msgid "top - category prompt title text align ver"
+msgstr ""
+
+msgid "0 - category prompt title text pos x"
+msgstr ""
+
+msgid "10 - category prompt title text pos y"
+msgstr ""
+
+msgid "center - category prompt browser align hor"
+msgstr ""
+
+msgid "top - category prompt browser align ver"
+msgstr ""
+
+msgid "0 - category prompt browser pos x"
+msgstr ""
+
+msgid "45 - category prompt browser pos y"
+msgstr ""
+
+msgid "left - category prompt add button text align hor"
+msgstr ""
+
+msgid "top - category prompt add button text align ver"
+msgstr ""
+
+msgid "10 - category prompt add button text pos x"
+msgstr ""
+
+msgid "6 - category prompt add button text pos y"
+msgstr ""
+
+msgid "left - category prompt add button align hor"
+msgstr ""
+
+msgid "top - category prompt add button align ver"
+msgstr ""
+
+msgid "180 - category prompt add button pos x"
+msgstr ""
+
+msgid "330 - category prompt add button pos y"
+msgstr ""
+
+msgid "left - category prompt delete button text align hor"
+msgstr ""
+
+msgid "top - category prompt delete button text align ver"
+msgstr ""
+
+msgid "10 - category prompt delete button text pos x"
+msgstr ""
+
+msgid "6 - category prompt delete button text pos y"
+msgstr ""
+
+msgid "left - category prompt delete button align hor"
+msgstr ""
+
+msgid "top - category prompt delete button align ver"
+msgstr ""
+
+msgid "330 - category prompt delete button pos y"
+msgstr ""
+
+msgid "5 - category prompt delete button pos x"
+msgstr ""
+
+msgid "left - category prompt edit button text align hor"
+msgstr ""
+
+msgid "top - category prompt edit button text align ver"
+msgstr ""
+
+msgid "10 - category prompt edit button text pos x"
+msgstr ""
+
+msgid "6 - category prompt edit button text pos y"
+msgstr ""
+
+msgid "left - category prompt edit button align hor"
+msgstr ""
+
+msgid "top - category prompt edit button align ver"
+msgstr ""
+
+msgid "180 - category prompt edit button pos x"
+msgstr ""
+
+msgid "362 - category prompt edit button pos y"
+msgstr ""
+
+msgid "bottom - category prompt save button align ver"
+msgstr ""
+
+msgid "center - category prompt save button align hor"
+msgstr ""
+
+msgid "-110 - category prompt save button pos x"
+msgstr ""
+
+msgid "0 - category prompt save button pos y"
+msgstr ""
+
+msgid "bottom - category prompt back button align ver"
+msgstr ""
+
+msgid "center - category prompt back button align hor"
+msgstr ""
+
+msgid "0 - category prompt back button pos y"
+msgstr ""
+
+msgid "110 - category prompt back button pos x"
+msgstr ""
+
+msgid "r=0 g=0 b=0 a=255 - prompt windows text color"
+msgstr ""
+
+msgid "r=0 g=0 b=0 a=255 - game window name text color"
+msgstr ""
+
+msgid "r=0 g=0 b=0 a=255 - game window size text color"
+msgstr ""
+
+msgid "r=0 g=0 b=0 a=255 - game window playcount text color"
+msgstr ""
+
 msgid "r=0 g=0 b=0 a=255 - game window details button text color"
 msgstr ""
 
 msgid "r=30 g=30 b=240 a=255 - game window details button over text color"
+msgstr ""
+
+msgid "center - settings option browser align hor"
+msgstr ""
+
+msgid "top - settings option browser align ver"
+msgstr ""
+
+msgid "0 - settings option browser pos x"
+msgstr ""
+
+msgid "90 - settings option browser pos y"
+msgstr ""
+
+msgid "r=0 g=0 b=0 a=255 - settings title text color"
+msgstr ""
+
+msgid "center - settings title text align hor"
+msgstr ""
+
+msgid "top - settings title text align ver"
+msgstr ""
+
+msgid "0 - settings title text pos x"
+msgstr ""
+
+msgid "40 - settings title text pos y"
+msgstr ""
+
+msgid "310 - settings title text max width"
 msgstr ""
 
 msgid "1 - Enable tooltips: 0 for off and 1 for on"

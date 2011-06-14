@@ -27,49 +27,61 @@
 #include "language/gettext.h"
 
 CategorySwitchPrompt::CategorySwitchPrompt()
-    : CategoryPrompt(tr("Show Categories"))
+    : CategoryPrompt(tr("Show Categories")), oldSetting(Settings.EnabledCategories)
 {
-    categoryChanged.connect(this, &CategorySwitchPrompt::OnCategoryChange);
-    nextCategory.connect(this, &CategorySwitchPrompt::OnNextCategory);
-    previousCategory.connect(this, &CategorySwitchPrompt::OnPreviousCategory);
-    checkBoxClicked.connect(this, &CategorySwitchPrompt::OnCheckboxClicked);
+    browser->checkBoxClicked.connect(this, &CategorySwitchPrompt::OnCheckboxClick);
+    browserRefresh.connect(this, &CategorySwitchPrompt::onBrowserRefresh);
+    resetChanges.connect(this, &CategorySwitchPrompt::onResetChanges);
+
+    browserRefresh();
 }
 
-void CategorySwitchPrompt::OnNextCategory()
+void CategorySwitchPrompt::onResetChanges()
 {
-    GameCategories.CategoryList.goToNextCicle();
+    Settings.EnabledCategories = oldSetting;
+    GameCategories.Load(Settings.ConfigPath);
 }
 
-void CategorySwitchPrompt::OnPreviousCategory()
+void CategorySwitchPrompt::onBrowserRefresh()
 {
-    GameCategories.CategoryList.goToPreviousCicle();
-}
-
-void CategorySwitchPrompt::OnCategoryChange(GuiText *catTxt, GuiText *positionTxt, GuiCheckbox *checkBox)
-{
-    catTxt->SetText(tr(GameCategories.CategoryList.getCurrentName().c_str()));
-    positionTxt->SetTextf("%i / %i", GameCategories.CategoryList.pos()+1, GameCategories.CategoryList.size());
-    checkBox->SetChecked(false);
-
-    for(u32 i = 0; i < Settings.EnabledCategories.size(); ++i)
+    browser->Clear();
+    GameCategories.CategoryList.goToFirst();
+    do
     {
-        if(Settings.EnabledCategories[i] == GameCategories.CategoryList.getCurrentID())
+        bool checked = false;
+
+        for(u32 i = 0; i < Settings.EnabledCategories.size(); ++i)
         {
-            checkBox->SetChecked(true);
-            break;
+            if(Settings.EnabledCategories[i] == GameCategories.CategoryList.getCurrentID())
+            {
+                checked = true;
+                break;
+            }
         }
+
+        browser->AddEntrie(GameCategories.CategoryList.getCurrentName(), checked);
     }
+    while(GameCategories.CategoryList.goToNext());
+
+    GameCategories.CategoryList.goToFirst();
 }
 
-void CategorySwitchPrompt::OnCheckboxClicked(GuiCheckbox *checkBox)
+void CategorySwitchPrompt::OnCheckboxClick(GuiCheckbox *checkBox, int index)
 {
+    GameCategories.CategoryList.goToFirst();
+    for(int i = 0; i < index; ++i)
+        GameCategories.CategoryList.goToNext();
+
     u32 i;
     for(i = 0; i < Settings.EnabledCategories.size(); ++i)
     {
         if(Settings.EnabledCategories[i] == GameCategories.CategoryList.getCurrentID())
         {
             if(!checkBox->IsChecked())
+            {
                 Settings.EnabledCategories.erase(Settings.EnabledCategories.begin()+i);
+                markChanged();
+            }
             break;
         }
     }
@@ -77,5 +89,6 @@ void CategorySwitchPrompt::OnCheckboxClicked(GuiCheckbox *checkBox)
     if(i == Settings.EnabledCategories.size() && checkBox->IsChecked())
     {
         Settings.EnabledCategories.push_back(GameCategories.CategoryList.getCurrentID());
+        markChanged();
     }
 }

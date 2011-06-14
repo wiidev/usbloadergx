@@ -1,7 +1,7 @@
 #ifndef RECOURCES_H_
 #define RECOURCES_H_
 
-#include "libwiigui/gui_imagedata.h"
+#include "GUI/gui_imagedata.h"
 
 typedef struct _RecourceFile
 {

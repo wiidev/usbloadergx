@@ -24,8 +24,8 @@
 #ifndef SETTINGS_MENU_HPP_
 #define SETTINGS_MENU_HPP_
 
-#include "libwiigui/gui.h"
-#include "libwiigui/gui_customoptionbrowser.h"
+#include "GUI/gui.h"
+#include "GUI/gui_optionbrowser.h"
 #include "menu.h"
 
 enum
@@ -64,7 +64,7 @@ class SettingsMenu : public GuiWindow
         GuiImage * backBtnImg;
         GuiButton * backBtn;
 
-        GuiCustomOptionBrowser * optionBrowser;
+        GuiOptionBrowser * optionBrowser;
 
 };
 

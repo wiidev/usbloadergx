@@ -255,6 +255,7 @@ int GameBooter::BootGame(const char * gameID)
     }
 
     //! Do all the game patches
+    gprintf("Applying game patches...\n");
     gamepatches(videoChoice, languageChoice, countrystrings, viChoice, ocarinaChoice, fix002, reloadblock, iosChoice, returnToChoice);
 
     //! Load Ocarina codes
@@ -268,6 +269,7 @@ int GameBooter::BootGame(const char * gameID)
     //! Remember game's USB port
     int usbport = USBStorage2_GetPort();
 
+    gprintf("Shutting down devices...\n");
     //! Flush all caches and close up all devices
     WBFS_CloseAll();
     DeviceHandler::DestroyInstance();

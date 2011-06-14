@@ -10,7 +10,7 @@
 #define _MENU_H_
 
 #include <ogcsys.h>
-#include "libwiigui/gui.h"
+#include "GUI/gui.h"
 #include "settings/CSettings.h"
 #include "main.h"
 

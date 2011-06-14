@@ -17,10 +17,7 @@ include $(DEVKITPPC)/wii_rules
 TARGET		:=	boot
 BUILD		:=	build
 SOURCES		:=	source \
-				source/libwiigui \
-				source/images \
-				source/fonts \
-				source/sounds \
+				source/GUI \
 				source/Controls \
 				source/system \
 				source/libs/libwbfs \
@@ -48,7 +45,10 @@ SOURCES		:=	source \
 				source/utils \
 				source/utils/minizip \
 				source/usbloader/wbfs
-DATA		:=	data
+DATA		:=	data \
+				data/images \
+				data/fonts \
+				data/sounds
 INCLUDES	:=	source
 
 #---------------------------------------------------------------------------------
@@ -97,19 +97,20 @@ export DEPSDIR	:=	$(CURDIR)/$(BUILD)
 # automatically build a list of object files for our project
 #---------------------------------------------------------------------------------
 SVNREV		:=	$(shell bash ./svnrev.sh)
+IMPORTFILES	:=  $(shell bash ./filelist.sh)
 export CFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
 export CPPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
 sFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.s)))
 SFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.S)))
-ELFFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.elf)))
+ELFFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.elf)))
 BINFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.bin)))
-TTFFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.ttf)))
-PNGFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.png)))
-OGGFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.ogg)))
-PCMFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.pcm)))
-WAVFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.wav)))
+TTFFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.ttf)))
+PNGFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.png)))
+OGGFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.ogg)))
+PCMFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.pcm)))
+WAVFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.wav)))
 DOLFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.dol)))
-MP3FILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.mp3)))
+MP3FILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.mp3)))
 
 #---------------------------------------------------------------------------------
 # use CXX for linking C++ projects, CC for standard C
@@ -120,12 +121,12 @@ else
 	export LD	:=	$(CXX)
 endif
 
-export OFILES	:=	$(addsuffix .o,$(BINFILES)) \
-					$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) \
+export OFILES	:=	$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) \
 					$(sFILES:.s=.o) $(SFILES:.S=.o) \
-					$(TTFFILES:.ttf=.ttf.o) $(PNGFILES:.png=.png.o) $(addsuffix .o,$(DOLFILES))\
+					$(TTFFILES:.ttf=.ttf.o) $(PNGFILES:.png=.png.o) $(addsuffix .o,$(DOLFILES)) \
 					$(OGGFILES:.ogg=.ogg.o) $(PCMFILES:.pcm=.pcm.o) $(MP3FILES:.mp3=.mp3.o) \
-					$(WAVFILES:.wav=.wav.o) $(addsuffix .o,$(ELFFILES)) $(CURDIR)/data/magic_patcher.o
+					$(WAVFILES:.wav=.wav.o) $(addsuffix .o,$(ELFFILES)) $(addsuffix .o,$(BINFILES)) \
+					$(CURDIR)/data/magic_patcher.o
 
 #---------------------------------------------------------------------------------
 # build a list of include paths

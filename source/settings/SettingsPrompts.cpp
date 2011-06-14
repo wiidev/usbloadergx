@@ -6,8 +6,8 @@
 #include "language/UpdateLanguage.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/ProgressWindow.h"
-#include "libwiigui/gui.h"
-#include "libwiigui/gui_customoptionbrowser.h"
+#include "GUI/gui.h"
+#include "GUI/gui_optionbrowser.h"
 #include "settings/CSettings.h"
 #include "settings/GameTitles.h"
 #include "themes/CTheme.h"
@@ -128,7 +128,7 @@ int MenuLanguageSelect()
     oggmenubackground.SetAlignment( ALIGN_LEFT, ALIGN_TOP );
     oggmenubackground.SetPosition( 0, 0 );
 
-    GuiText backBtnTxt( tr( "Back" ) , 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText backBtnTxt( tr( "Back" ) , 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     backBtnTxt.SetMaxWidth( btnOutline.GetWidth() - 30 );
     GuiImage backBtnImg( &btnOutline );
     if ( Settings.wsprompt == ON )
@@ -147,7 +147,7 @@ int MenuLanguageSelect()
     backBtn.SetTrigger( &trigB );
     backBtn.SetEffectGrow();
 
-    GuiText defaultBtnTxt( tr( "Default" ) , 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText defaultBtnTxt( tr( "Default" ) , 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     defaultBtnTxt.SetMaxWidth( btnOutline.GetWidth() - 30 );
     GuiImage defaultBtnImg( &btnOutline );
     if ( Settings.wsprompt == ON )
@@ -165,7 +165,7 @@ int MenuLanguageSelect()
     defaultBtn.SetTrigger( &trigA );
     defaultBtn.SetEffectGrow();
 
-    GuiText updateBtnTxt( tr( "Update Files" ) , 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText updateBtnTxt( tr( "Update Files" ) , 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     updateBtnTxt.SetMaxWidth( btnOutline.GetWidth() - 30 );
     GuiImage updateBtnImg( &btnOutline );
     if ( Settings.wsprompt == ON )
@@ -196,7 +196,7 @@ int MenuLanguageSelect()
 
     }
 
-    GuiCustomOptionBrowser optionBrowser4( 396, 280, &options2, "bg_options_settings.png");
+    GuiOptionBrowser optionBrowser4( 396, 280, &options2, "bg_options_settings.png");
     optionBrowser4.SetPosition( 0, 90 );
     optionBrowser4.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
 

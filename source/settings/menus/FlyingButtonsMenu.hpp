@@ -26,7 +26,7 @@
 
 #include <vector>
 #include <string>
-#include "libwiigui/gui.h"
+#include "GUI/gui.h"
 #include "SettingsMenu.hpp"
 #include "menu.h"
 

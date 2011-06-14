@@ -63,7 +63,7 @@ WDMMenu::WDMMenu(const struct discHdr * header)
     backBtn->SetTrigger(trigB);
     Append(backBtn);
 
-	optionBrowser = new GuiCustomOptionBrowser(396, 280, Options, "bg_options_settings.png");
+	optionBrowser = new GuiOptionBrowser(396, 280, Options, "bg_options_settings.png");
     optionBrowser->SetPosition(0, 90);
     optionBrowser->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	Append(optionBrowser);

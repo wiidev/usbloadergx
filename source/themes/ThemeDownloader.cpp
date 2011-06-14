@@ -69,7 +69,7 @@ ThemeDownloader::ThemeDownloader()
         ThemePreviews[i] = NULL;
 
 
-    defaultBtnTxt = new GuiText(tr( "Default" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    defaultBtnTxt = new GuiText(tr( "Default" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     defaultBtnTxt->SetMaxWidth(btnOutline->GetWidth() - 30);
     defaultBtnImg = new GuiImage(btnOutline);
     if (Settings.wsprompt)
@@ -326,7 +326,7 @@ void ThemeDownloader::MainButtonClicked(int button)
     authorTxt2.SetPosition(230, 120);
     authorTxt2.SetMaxWidth(dialogBox.GetWidth() - 220, DOTTED);
 
-    GuiText downloadBtnTxt(tr( "Download" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText downloadBtnTxt(tr( "Download" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     downloadBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage downloadBtnImg(&btnOutline);
     if (Settings.wsprompt)
@@ -338,7 +338,7 @@ void ThemeDownloader::MainButtonClicked(int button)
     downloadBtn.SetLabel(&downloadBtnTxt);
     downloadBtn.SetScale(0.9);
 
-    GuiText backBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText backBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt)

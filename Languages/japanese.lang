@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-10 14:06+0200\n"
+"POT-Creation-Date: 2011-06-14 16:22+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi, papa, ichiroling\n"
@@ -774,11 +774,11 @@ msgstr "更新方法の選択"
 msgid "How to Shutdown?"
 msgstr "終了方法の選択"
 
+msgid "Import Categories"
+msgstr ""
+
 msgid "Import categories"
 msgstr "カテゴリをインポート"
-
-msgid "Import categories from WiiTDB"
-msgstr "WiiTDBからカテゴリをインポート"
 
 msgid "Import operation successfully completed."
 msgstr "インポートに成功しました"
@@ -1151,6 +1151,9 @@ msgstr "更新を取り除く"
 
 msgid "Rename Game on WBFS"
 msgstr "WBFS内のゲーム名を変更"
+
+msgid "Rename category"
+msgstr ""
 
 msgid "Reset"
 msgstr "リセット"
@@ -1573,6 +1576,9 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "Import categories from WiiTDB"
+#~ msgstr "WiiTDBからカテゴリをインポート"
 
 #~ msgid " Wad Saved as:"
 #~ msgstr "WADを保存しました:"

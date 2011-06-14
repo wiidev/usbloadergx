@@ -191,7 +191,7 @@ void PromptWindow::AddButton(const char *text)
     ButtonImg.resize(size+1);
     Button.resize(size+1);
 
-    ButtonTxt[size] = new GuiText(text, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    ButtonTxt[size] = new GuiText(text, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     ButtonImg[size] = new GuiImage(btnOutline);
     if (Settings.wsprompt)
     {

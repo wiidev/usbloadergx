@@ -6,8 +6,8 @@
  ***************************************************************************/
 #include <unistd.h>
 #include "language/gettext.h"
-#include "libwiigui/gui.h"
-#include "libwiigui/gui_customoptionbrowser.h"
+#include "GUI/gui.h"
+#include "GUI/gui_optionbrowser.h"
 #include "prompts/PromptWindows.h"
 #include "menu/menus.h"
 #include "usbloader/disc.h"
@@ -116,7 +116,7 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
     settingsbackgroundbtn.SetPosition(0, 0);
     settingsbackgroundbtn.SetImage(&settingsbackground);
 
-    GuiText cancelBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText cancelBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt == ON)
@@ -129,7 +129,7 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
     cancelBtn.SetLabel(&cancelBtnTxt);
     cancelBtn.SetTrigger(&trigB);
 
-    GuiCustomOptionBrowser optionBrowser3(396, 280, &options, "bg_options_settings.png");
+    GuiOptionBrowser optionBrowser3(396, 280, &options, "bg_options_settings.png");
     optionBrowser3.SetPosition(0, 90);
     optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 

@@ -60,7 +60,7 @@ GameWindow::GameWindow(int Selected)
 
     nameBtnTT = new GuiTooltip(tr( "Rename Game on WBFS" ));
     if (Settings.wsprompt) nameBtnTT->SetWidescreen(Settings.widescreen);
-    nameTxt = new GuiText("", 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    nameTxt = new GuiText("", 22, thColor("r=0 g=0 b=0 a=255 - game window name text color"));
     if (Settings.wsprompt) nameTxt->SetWidescreen(Settings.widescreen);
     nameTxt->SetMaxWidth(350, SCROLL_HORIZONTAL);
     nameBtn = new GuiButton(120, 50);
@@ -77,7 +77,7 @@ GameWindow::GameWindow(int Selected)
         nameBtn->SetEffectGrow();
     }
 
-    sizeTxt = new GuiText((char*) NULL, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    sizeTxt = new GuiText((char*) NULL, 22, thColor("r=0 g=0 b=0 a=255 - game window size text color"));
     sizeTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
     sizeTxt->SetPosition(-60, 70);
 
@@ -92,7 +92,7 @@ GameWindow::GameWindow(int Selected)
     diskImg2->SetAngle(0);
     diskImg2->SetBeta(180);
 
-    playcntTxt = new GuiText((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    playcntTxt = new GuiText((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - game window playcount text color"));
     playcntTxt->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     playcntTxt->SetPosition(-115, 45);
 
@@ -105,7 +105,7 @@ GameWindow::GameWindow(int Selected)
     gameBtn->SetTrigger(trigA);
     gameBtn->SetState(STATE_SELECTED);
 
-    backBtnTxt = new GuiText(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    backBtnTxt = new GuiText(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     backBtnImg = new GuiImage(btnOutline);
     if (Settings.wsprompt)
     {
@@ -118,7 +118,7 @@ GameWindow::GameWindow(int Selected)
     backBtn->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
     backBtn->SetPosition(0, -40);
 
-    settingsBtnTxt = new GuiText(tr( "Settings" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    settingsBtnTxt = new GuiText(tr( "Settings" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     settingsBtnImg = new GuiImage(btnOutline);
     if (Settings.wsprompt)
     {

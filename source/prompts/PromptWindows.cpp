@@ -14,9 +14,9 @@
 #include "usbloader/GameList.h"
 #include "usbloader/utils.h"
 #include "language/gettext.h"
-#include "libwiigui/gui.h"
-#include "libwiigui/gui_diskcover.h"
-#include "libwiigui/Text.hpp"
+#include "GUI/gui.h"
+#include "GUI/gui_diskcover.h"
+#include "GUI/Text.hpp"
 #include "settings/CGameStatistics.h"
 #include "settings/GameTitles.h"
 #include "network/networkops.h"
@@ -72,7 +72,7 @@ int OnScreenNumpad(char * var, u32 maxlen)
     GuiTrigger trigB;
     trigB.SetSimpleTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText okBtnTxt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText okBtnTxt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     GuiImage okBtnImg(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -81,7 +81,7 @@ int OnScreenNumpad(char * var, u32 maxlen)
     }
     GuiButton okBtn(&okBtnImg, &okBtnImg, 0, 4, 5, -15, &trigA, btnSoundOver, btnSoundClick2, 1);
     okBtn.SetLabel(&okBtnTxt);
-    GuiText cancelBtnTxt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText cancelBtnTxt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -94,6 +94,8 @@ int OnScreenNumpad(char * var, u32 maxlen)
 
     numpad.Append(&okBtn);
     numpad.Append(&cancelBtn);
+
+    int oldState = mainWindow->GetState();
 
     HaltGui();
     mainWindow->SetState(STATE_DISABLED);
@@ -117,7 +119,7 @@ int OnScreenNumpad(char * var, u32 maxlen)
 
     HaltGui();
     mainWindow->Remove(&numpad);
-    mainWindow->SetState(STATE_DEFAULT);
+    mainWindow->SetState(oldState);
     ResumeGui();
     gprintf("\t%s", (save == 1 ? "saved" : "discarded"));
     return save;
@@ -145,7 +147,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
     GuiTrigger trigB;
     trigB.SetSimpleTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText okBtnTxt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText okBtnTxt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     GuiImage okBtnImg(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -154,7 +156,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
     }
     GuiButton okBtn(&okBtnImg, &okBtnImg, 0, 4, 5, 15, &trigA, btnSoundOver, btnSoundClick2, 1);
     okBtn.SetLabel(&okBtnTxt);
-    GuiText cancelBtnTxt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText cancelBtnTxt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -167,6 +169,8 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
 
     keyboard.Append(&okBtn);
     keyboard.Append(&cancelBtn);
+
+    int oldState = mainWindow->GetState();
 
     HaltGui();
     mainWindow->SetState(STATE_DISABLED);
@@ -190,7 +194,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
 
     HaltGui();
     mainWindow->Remove(&keyboard);
-    mainWindow->SetState(STATE_DEFAULT);
+    mainWindow->SetState(oldState);
     ResumeGui();
     gprintf("\t%s", (save ? "saved" : "discarded"));
     return save;
@@ -549,6 +553,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
     if(btn4Label)
         Window->AddButton(btn4Label);
 
+    int oldState = mainWindow->GetState();
     mainWindow->SetState(STATE_DISABLED);
     mainWindow->Append(Window);
     mainWindow->ChangeFocus(Window);
@@ -574,7 +579,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
 
     delete Window;
 
-    mainWindow->SetState(STATE_DEFAULT);
+    mainWindow->SetState(oldState);
     gprintf(" %i\n", choice);
 
     return choice;
@@ -645,7 +650,7 @@ int WindowExitPrompt()
         batteryImg[i] = new GuiImage(&battery);
         batteryImg[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
         batteryImg[i]->SetPosition(36, 0);
-        batteryImg[i]->SetTile(0);
+        batteryImg[i]->SetTileHorizontal(0);
         batteryBarImg[i] = new GuiImage(&batteryBar);
         batteryBarImg[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
         batteryBarImg[i]->SetPosition(33, 0);
@@ -769,6 +774,8 @@ int WindowExitPrompt()
     promptWindow.Append(batteryBtn[2]);
     promptWindow.Append(batteryBtn[3]);
 
+    int oldState = mainWindow->GetState();
+
     HaltGui();
     mainWindow->SetState(STATE_DISABLED);
     mainWindow->Append(&promptWindow);
@@ -796,13 +803,13 @@ int WindowExitPrompt()
                     batteryBarImg[i]->SetImage(&batteryBar);
                 }
 
-                batteryImg[i]->SetTile(level);
+                batteryImg[i]->SetTileHorizontal(level);
 
                 batteryBtn[i]->SetAlpha(255);
             }
             else // controller not connected
             {
-                batteryImg[i]->SetTile(0);
+                batteryImg[i]->SetTileHorizontal(0);
                 batteryImg[i]->SetImage(&battery);
                 batteryBtn[i]->SetAlpha(70);
             }
@@ -908,7 +915,7 @@ int WindowExitPrompt()
     homein->Stop();
     delete homein;
     mainWindow->Remove(&promptWindow);
-    mainWindow->SetState(STATE_DEFAULT);
+    mainWindow->SetState(oldState);
     while (homeout->IsPlaying() > 0)
         usleep(100);
     homeout->Stop();
@@ -961,7 +968,7 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
     msgTxt.SetPosition(0, -40);
     msgTxt.SetMaxWidth(430);
 
-    GuiText btn1Txt(btn1Label, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText btn1Txt(btn1Label, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -985,7 +992,7 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
     btn1.SetTrigger(&trigB);
     btn1.SetState(STATE_SELECTED);
 
-    GuiText btn2Txt(btn2Label, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText btn2Txt(btn2Label, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     GuiImage btn2Img(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -1185,7 +1192,7 @@ bool NetworkInitPrompt()
     msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     msgTxt.SetPosition(0, -40);
 
-    GuiText btn1Txt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText btn1Txt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -1283,7 +1290,7 @@ int CodeDownload(const char *id)
     msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     msg2Txt.SetPosition(0, 50);
 
-    GuiText btn1Txt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText btn1Txt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -1397,219 +1404,5 @@ int CodeDownload(const char *id)
     ResumeGui();
 
     return ret;
-}
-
-/****************************************************************************
- * HBCWindowPrompt
- *
- * Displays a prompt window to user, with information, an error message, or
- * presenting a user with a choice of up to 2 Buttons.
- *
- ***************************************************************************/
-int HBCWindowPrompt(const char *name, const char *coder, const char *version, const char *release_date,
-        const char *long_description, GuiImageData * iconImgData, u64 filesize)
-{
-    int choice = -1;
-
-    GuiWindow promptWindow(472, 320);
-    promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-    promptWindow.SetPosition(0, 6);
-
-    GuiTrigger trigA;
-    trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-    GuiTrigger trigB;
-    trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
-    GuiTrigger trigU;
-    trigU.SetButtonOnlyTrigger(-1, WPAD_BUTTON_UP | WPAD_CLASSIC_BUTTON_UP, PAD_BUTTON_UP);
-    GuiTrigger trigD;
-    trigD.SetButtonOnlyTrigger(-1, WPAD_BUTTON_DOWN | WPAD_CLASSIC_BUTTON_DOWN, PAD_BUTTON_DOWN);
-
-    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
-    GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
-    GuiImageData whiteBox(Resources::GetFile("bg_options.png"), Resources::GetFileSize("bg_options.png"));
-
-    GuiImageData scrollbar(Resources::GetFile("scrollbar.png"), Resources::GetFileSize("scrollbar.png"));
-    GuiImage scrollbarImg(&scrollbar);
-    scrollbarImg.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
-    scrollbarImg.SetPosition(-40, 114);
-    scrollbarImg.SetSkew(0, 0, 0, 0, 0, -120, 0, -120);
-
-    GuiImageData arrowDown(Resources::GetFile("scrollbar_arrowdown.png"), Resources::GetFileSize("scrollbar_arrowdown.png"));
-    GuiImage arrowDownImg(&arrowDown);
-    arrowDownImg.SetScale(.8);
-
-    GuiImageData arrowUp(Resources::GetFile("scrollbar_arrowup.png"), Resources::GetFileSize("scrollbar_arrowup.png"));
-    GuiImage arrowUpImg(&arrowUp);
-    arrowUpImg.SetScale(.8);
-
-    GuiButton arrowUpBtn(arrowUpImg.GetWidth(), arrowUpImg.GetHeight());
-    arrowUpBtn.SetImage(&arrowUpImg);
-    arrowUpBtn.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
-    arrowUpBtn.SetPosition(-25, 91);
-    arrowUpBtn.SetTrigger(&trigA);
-    arrowUpBtn.SetTrigger(&trigU);
-    arrowUpBtn.SetEffectOnOver(EFFECT_SCALE, 50, 130);
-    arrowUpBtn.SetSoundClick(btnSoundClick2);
-
-    GuiButton arrowDownBtn(arrowDownImg.GetWidth(), arrowDownImg.GetHeight());
-    arrowDownBtn.SetImage(&arrowDownImg);
-    arrowDownBtn.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-    arrowDownBtn.SetPosition(-25, -27);
-    arrowDownBtn.SetTrigger(&trigA);
-    arrowDownBtn.SetTrigger(&trigD);
-    arrowDownBtn.SetEffectOnOver(EFFECT_SCALE, 50, 130);
-    arrowDownBtn.SetSoundClick(btnSoundClick2);
-
-    GuiImage *iconImg = new GuiImage(iconImgData);
-    iconImg->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    iconImg->SetPosition(45, 10);
-
-    GuiImage dialogBoxImg(&dialogBox);
-    dialogBoxImg.SetSkew(0, -80, 0, -80, 0, 50, 0, 50);
-
-    GuiImage whiteBoxImg(&whiteBox);
-    whiteBoxImg.SetPosition(0, 110);
-    whiteBoxImg.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-    whiteBoxImg.SetSkew(0, 0, 0, 0, 0, -120, 0, -120);
-
-    GuiText nameTxt(name, 30, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    nameTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-    nameTxt.SetPosition(0, -15);
-    nameTxt.SetMaxWidth(430, SCROLL_HORIZONTAL);
-
-    GuiText coderTxt(fmt(tr( "Coded by: %s" ), coder), 16, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    coderTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    coderTxt.SetPosition(180, 30);
-    coderTxt.SetMaxWidth(280);
-
-    GuiText versionTxt(fmt(tr( "Version: %s" ), version), 16, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    versionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    versionTxt.SetPosition(40, 65);
-    versionTxt.SetMaxWidth(430);
-
-    GuiText release_dateTxt(release_date, 16, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    release_dateTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    release_dateTxt.SetPosition(40, 85);
-    release_dateTxt.SetMaxWidth(430);
-
-    int pagesize = 6;
-    Text long_descriptionTxt(long_description, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    long_descriptionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    long_descriptionTxt.SetPosition(46, 117);
-    long_descriptionTxt.SetMaxWidth(360);
-    long_descriptionTxt.SetLinesToDraw(pagesize);
-    long_descriptionTxt.Refresh();
-
-    //convert filesize from u64 to char and put unit of measurement after it
-    char filesizeCH[15];
-    if (filesize <= 1024.0)
-        snprintf(filesizeCH, sizeof(filesizeCH), "%lld B", filesize);
-    if (filesize > 1024.0)
-        snprintf(filesizeCH, sizeof(filesizeCH), "%0.2f KB", filesize / 1024.0);
-    if (filesize > 1048576.0)
-        snprintf(filesizeCH, sizeof(filesizeCH), "%0.2f MB", filesize / 1048576.0);
-
-    GuiText filesizeTxt(filesizeCH, 16, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    filesizeTxt.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
-    filesizeTxt.SetPosition(-40, 12);
-
-    GuiText btn1Txt(tr( "Load" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    GuiImage btn1Img(&btnOutline);
-    if (Settings.wsprompt)
-    {
-        btn1Txt.SetWidescreen(Settings.widescreen);
-        btn1Img.SetWidescreen(Settings.widescreen);
-    }
-
-    GuiButton btn1(&btn1Img, &btn1Img, 0, 3, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
-    btn1.SetLabel(&btn1Txt);
-    btn1.SetState(STATE_SELECTED);
-
-    GuiText btn2Txt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    GuiImage btn2Img(&btnOutline);
-    if (Settings.wsprompt)
-    {
-        btn2Txt.SetWidescreen(Settings.widescreen);
-        btn2Img.SetWidescreen(Settings.widescreen);
-    }
-    GuiButton btn2(&btn2Img, &btn2Img, 0, 3, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
-    btn2.SetLabel(&btn2Txt);
-    btn2.SetTrigger(&trigB);
-
-    btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-    btn1.SetPosition(40, 2);
-    btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-    btn2.SetPosition(-40, 2);
-
-    promptWindow.Append(&dialogBoxImg);
-    promptWindow.Append(&whiteBoxImg);
-    promptWindow.Append(&scrollbarImg);
-    promptWindow.Append(&arrowDownBtn);
-    promptWindow.Append(&arrowUpBtn);
-
-    if(strcmp(name, "") != 0) promptWindow.Append(&nameTxt);
-    if(strcmp(version, "") != 0) promptWindow.Append(&versionTxt);
-    if(strcmp(coder, "") != 0) promptWindow.Append(&coderTxt);
-    if(strcmp(release_date, "") != 0) promptWindow.Append(&release_dateTxt);
-    if(strcmp(long_description, "") != 0) promptWindow.Append(&long_descriptionTxt);
-    promptWindow.Append(&filesizeTxt);
-    promptWindow.Append(iconImg);
-    promptWindow.Append(&btn1);
-    promptWindow.Append(&btn2);
-
-    promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
-    HaltGui();
-    mainWindow->SetState(STATE_DISABLED);
-    mainWindow->Append(&promptWindow);
-    mainWindow->ChangeFocus(&promptWindow);
-    ResumeGui();
-
-    while (choice == -1)
-    {
-        VIDEO_WaitVSync();
-
-        if (shutdown == 1)
-        {
-            wiilight(0);
-            Sys_Shutdown();
-        }
-        else if (reset == 1)
-        {
-            wiilight(0);
-            Sys_Reboot();
-        }
-
-        if (btn1.GetState() == STATE_CLICKED)
-            choice = 1;
-        else if (btn2.GetState() == STATE_CLICKED)
-            choice = 0;
-
-        else if (arrowUpBtn.GetState() == STATE_CLICKED || arrowUpBtn.GetState() == STATE_HELD)
-        {
-            long_descriptionTxt.PreviousLine();
-
-            usleep(6000);
-            if (!((ButtonsHold() & WPAD_BUTTON_UP) || (ButtonsHold() & PAD_BUTTON_UP))) arrowUpBtn.ResetState();
-        }
-        else if (arrowDownBtn.GetState() == STATE_CLICKED || arrowDownBtn.GetState() == STATE_HELD)
-        {
-            long_descriptionTxt.NextLine();
-
-            usleep(60000);
-            if (!((ButtonsHold() & WPAD_BUTTON_DOWN) || (ButtonsHold() & PAD_BUTTON_DOWN))) arrowDownBtn.ResetState();
-        }
-    }
-
-    promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-    while (promptWindow.GetEffect() > 0)
-        usleep(100);
-    HaltGui();
-    mainWindow->Remove(&promptWindow);
-    mainWindow->SetState(STATE_DEFAULT);
-    ResumeGui();
-
-    delete iconImg;
-
-    return choice;
 }
 

@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include "GameBrowseMenu.hpp"
 #include "Controls/DeviceHandler.hpp"
-#include "libwiigui/LoadCoverImage.h"
+#include "GUI/LoadCoverImage.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/gameinfo.h"
 #include "prompts/DiscBrowser.h"
@@ -709,7 +709,7 @@ void GameBrowseMenu::ReloadBrowser()
         sortBtn->SetPosition(Settings.widescreen ? thInt("256 - carousel layout abc/sort btn pos x widescreen") : thInt("240 - carousel layout abc/sort btn pos x"),
                                 thInt("13 - carousel layout abc/sort btn pos y"));
         categBtn->SetPosition(Settings.widescreen ? thInt("288 - carousel layout category btn pos x widescreen") : thInt("280 - carousel layout category btn pos x"),
-                                thInt("13 - carousel layout abc/sort btn pos y"));
+                                thInt("13 - carousel layout category btn pos y"));
         listBtn->SetPosition(Settings.widescreen ? thInt("320 - carousel layout list btn pos x widescreen") : thInt("320 - carousel layout list btn pos x"),
                                 thInt("13 - carousel layout list btn pos y"));
         gridBtn->SetPosition(Settings.widescreen ? thInt("352 - carousel layout grid btn pos x widescreen") : thInt("360 - carousel layout grid btn pos x"),
@@ -846,6 +846,7 @@ int GameBrowseMenu::MainLoop()
         HaltGui();
         bgMusic->Pause();
         Settings.Save();
+        DeviceHandler::Instance()->UnMountSD();
         DeviceHandler::Instance()->MountSD();
         gprintf("\tLoading config...%s\n", Settings.Load() ? "done" : "failed");
         gprintf("\tLoading language...%s\n", Settings.LoadLanguage(Settings.language_path, CONSOLE_DEFAULT) ? "done" : "failed");
@@ -1154,7 +1155,7 @@ void GameBrowseMenu::CheckDiscSlotUpdate()
 
     else if(categBtn->GetState() == STATE_CLICKED)
     {
-        SetState(STATE_DISABLED);
+        mainWindow->SetState(STATE_DISABLED);
         CategorySwitchPrompt promptMenu;
         promptMenu.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
         promptMenu.SetEffect(EFFECT_FADE, 20);
@@ -1166,7 +1167,7 @@ void GameBrowseMenu::CheckDiscSlotUpdate()
         while(promptMenu.GetEffect() > 0) usleep(100);
         mainWindow->Remove(&promptMenu);
         categBtn->ResetState();
-        SetState(STATE_DEFAULT);
+        mainWindow->SetState(STATE_DEFAULT);
         if(promptMenu.categoriesChanged())
         {
             wString oldFilter(gameList.GetCurrentFilter());

@@ -1,4 +1,4 @@
-#include "libwiigui/gui.h"
+#include "GUI/gui.h"
 #include "themes/CTheme.h"
 #include "usbloader/GameList.h"
 #include "settings/GameTitles.h"

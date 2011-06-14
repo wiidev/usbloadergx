@@ -9,7 +9,7 @@
  ***************************************************************************/
 #include <unistd.h>
 
-#include "libwiigui/gui.h"
+#include "GUI/gui.h"
 #include "homebrewboot/BootHomebrew.h"
 #include "homebrewboot/HomebrewBrowser.hpp"
 #include "prompts/ProgressWindow.h"
@@ -42,7 +42,7 @@
 
 /*** Variables that are also used extern ***/
 GuiWindow * mainWindow = NULL;
-GuiImageData * pointer[4];
+GuiImageData * pointer[4] = { NULL, NULL, NULL, NULL };
 GuiImage * bgImg = NULL;
 GuiImageData * background = NULL;
 GuiBGM * bgMusic = NULL;

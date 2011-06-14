@@ -18,7 +18,7 @@
 #include "menu.h"
 #include "video.h"
 #include "input.h"
-#include "libwiigui/gui.h"
+#include "GUI/gui.h"
 #include "sys.h"
 
 int rumbleRequest[4] = { 0, 0, 0, 0 };

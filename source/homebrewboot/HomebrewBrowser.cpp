@@ -24,12 +24,14 @@
 #include "HomebrewBrowser.hpp"
 #include "themes/CTheme.h"
 #include "prompts/PromptWindows.h"
+#include "prompts/HomebrewPrompt.hpp"
 #include "language/gettext.h"
 #include "network/networkops.h"
 #include "utils/minizip/miniunz.h"
 #include "usbloader/utils.h"
 #include "prompts/TitleBrowser.h"
 #include "homebrewboot/BootHomebrew.h"
+#include "FileOperations/fileops.h"
 #include "prompts/ProgressWindow.h"
 #include "wstring.hpp"
 #include "HomebrewXML.h"
@@ -48,7 +50,7 @@ HomebrewBrowser::HomebrewBrowser()
         ResumeNetworkWait();
 
     wifiNotSet = true;
-    wifiImgData = Resources::GetImageData("Wifi_btn.png");
+    wifiImgData = Resources::GetImageData("wifi_btn.png");
     wifiToolTip = new GuiTooltip(" ");
     wifiImg = new GuiImage(wifiImgData);
     wifiBtn = new GuiButton(wifiImgData->GetWidth(), wifiImgData->GetHeight());
@@ -61,7 +63,7 @@ HomebrewBrowser::HomebrewBrowser()
     wifiBtn->SetTrigger(trigA);
     Append(wifiBtn);
 
-    channelImgData = Resources::GetImageData("Channel_btn.png");
+    channelImgData = Resources::GetImageData("channel_btn.png");
     channelBtnImg = new GuiImage(channelImgData);
     channelBtnImg->SetWidescreen(Settings.widescreen);
     channelBtn = new GuiButton(channelBtnImg->GetWidth(), channelBtnImg->GetHeight());
@@ -283,12 +285,39 @@ void HomebrewBrowser::MainButtonClicked(int button)
 
     wString HomebrewName(MainButtonTxt[button]->GetText());
 
-    int choice = HBCWindowPrompt(HomebrewName.toUTF8().c_str(), MetaXML.GetCoder(), MetaXML.GetVersion(),
+    HomebrewPrompt *HBCWindowPrompt = new HomebrewPrompt(HomebrewName.toUTF8().c_str(), MetaXML.GetCoder(), MetaXML.GetVersion(),
                             MetaXML.GetReleasedate(), MetaXML.GetLongDescription(), IconImgData[button % 4], filesize);
+
+    mainWindow->SetState(STATE_DISABLED);
+    mainWindow->Append(HBCWindowPrompt);
+
+    int choice = HBCWindowPrompt->MainLoop();
+
+    delete HBCWindowPrompt;
+
+    mainWindow->SetState(STATE_DEFAULT);
 
     if (choice == 1)
     {
-        BootHomebrew(HomebrewList->GetFilepath(button));
+        u8 *buffer = NULL;
+        u64 filesize = 0;
+        LoadFileToMem(HomebrewList->GetFilepath(button), &buffer, &filesize);
+        if(!buffer)
+        {
+            WindowPrompt(tr("Error"), tr("Not enough memory."), tr("OK"));
+            return;
+        }
+        FreeHomebrewBuffer();
+        CopyHomebrewMemory(buffer, 0, filesize);
+
+        AddBootArgument(HomebrewList->GetFilepath(button));
+
+        for(u32 i = 0; i < MetaXML.GetArguments().size(); ++i)
+        {
+            AddBootArgument(MetaXML.GetArguments().at(i).c_str());
+        }
+
+        BootHomebrewFromMem();
     }
 }
 

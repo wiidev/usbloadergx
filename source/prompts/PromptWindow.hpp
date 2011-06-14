@@ -24,7 +24,7 @@
 #ifndef _PROMPTWINDOW_HPP_
 #define _PROMPTWINDOW_HPP_
 
-#include "libwiigui/gui.h"
+#include "GUI/gui.h"
 
 class PromptWindow : public GuiWindow
 {

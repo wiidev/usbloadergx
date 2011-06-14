@@ -51,6 +51,7 @@ class CGameCategories
         const vector<unsigned int> &operator[](const char *gameID) const;
         const vector<unsigned int> &operator[](const unsigned char *gameID) const { return operator[]((const char *) gameID); }
         bool ImportFromWiiTDB(const string &xmlpath);
+        void clear() { List.clear(); CategoryList.clear(); };
         static bool isInCategory(const char *gameID, unsigned int id);
 
         CCategoryList CategoryList;

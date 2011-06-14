@@ -101,14 +101,9 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
     else if(menuNr == Idx++)
     {
         HideMenu();
-        titleTxt = new GuiText(MenuTitle.c_str(), 28, ( GXColor ) {0, 0, 0, 255});
-        titleTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-        titleTxt->SetPosition(0, 40);
-        titleTxt->SetMaxWidth(310, SCROLL_HORIZONTAL);
-        Append(titleTxt);
         Remove(backBtn);
         ResumeGui();
-        SetState(STATE_DISABLED);
+        mainWindow->SetState(STATE_DISABLED);
         CategorySelectPrompt promptMenu(DiscHeader);
         promptMenu.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
         promptMenu.SetEffect(EFFECT_FADE, 20);
@@ -125,10 +120,7 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
             gameList.FilterList(oldFilter.c_str());
             browserMenu->ReloadBrowser();
         }
-        SetState(STATE_DEFAULT);
-        Remove(titleTxt);
-        delete titleTxt;
-        titleTxt = NULL;
+        mainWindow->SetState(STATE_DEFAULT);
         Append(backBtn);
         ShowMenu();
     }

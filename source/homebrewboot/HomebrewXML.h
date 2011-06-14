@@ -6,6 +6,7 @@
 #define ___HOMEBREWXML_H_
 
 #include <string>
+#include <vector>
 
 class HomebrewXML
 {
@@ -22,6 +23,7 @@ class HomebrewXML
         const char * GetReleasedate() const;
         const char * GetShortDescription() const;
         const char * GetLongDescription() const;
+        const std::vector<std::string> & GetArguments() const { return Arguments; };
 
     protected:
         std::string Name;
@@ -30,6 +32,7 @@ class HomebrewXML
         std::string Releasedate;
         std::string ShortDescription;
         std::string LongDescription;
+        std::vector<std::string> Arguments;
 };
 
 #endif

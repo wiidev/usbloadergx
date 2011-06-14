@@ -53,7 +53,7 @@ ThemeMenu::ThemeMenu()
     for(int i = 0; i < 4; ++i)
         ThemePreviews[i] = NULL;
 
-    defaultBtnTxt = new GuiText(tr( "Default" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    defaultBtnTxt = new GuiText(tr( "Default" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     defaultBtnTxt->SetMaxWidth(btnOutline->GetWidth() - 30);
     defaultBtnImg = new GuiImage(btnOutline);
     if (Settings.wsprompt)
@@ -348,7 +348,7 @@ void ThemeMenu::MainButtonClicked(int button)
     versionTxt2.SetPosition(235+versionTxt.GetTextWidth(), PositionY);
     versionTxt2.SetMaxWidth(dialogBox.GetWidth() - 220, DOTTED);
 
-    GuiText applyBtnTxt(tr( "Apply" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText applyBtnTxt(tr( "Apply" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     applyBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage applyBtnImg(&btnOutline);
     if (Settings.wsprompt)
@@ -360,7 +360,7 @@ void ThemeMenu::MainButtonClicked(int button)
     applyBtn.SetLabel(&applyBtnTxt);
     applyBtn.SetScale(0.9);
 
-    GuiText backBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText backBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt)

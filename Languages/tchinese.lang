@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-10 14:06+0200\n"
+"POT-Creation-Date: 2011-06-14 16:22+0200\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -774,10 +774,10 @@ msgstr "是否執行更新？"
 msgid "How to Shutdown?"
 msgstr "關機選項？"
 
-msgid "Import categories"
+msgid "Import Categories"
 msgstr ""
 
-msgid "Import categories from WiiTDB"
+msgid "Import categories"
 msgstr ""
 
 msgid "Import operation successfully completed."
@@ -1151,6 +1151,9 @@ msgstr "移除更新"
 
 msgid "Rename Game on WBFS"
 msgstr "變更WBFS上的遊戲名稱"
+
+msgid "Rename category"
+msgstr ""
 
 msgid "Reset"
 msgstr "重新啟動"

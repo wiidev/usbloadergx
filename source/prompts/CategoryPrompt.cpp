@@ -24,226 +24,173 @@
 #include <unistd.h>
 #include "CategoryPrompt.hpp"
 #include "settings/CGameCategories.hpp"
-#include "themes/Resources.h"
+#include "settings/CSettings.h"
 #include "language/gettext.h"
+#include "themes/gettheme.h"
+#include "themes/Resources.h"
 #include "menu/menus.h"
 
 CategoryPrompt::CategoryPrompt(const string &title)
     : GuiWindow(0, 0)
 {
-    int posX = 15;
-    const int posY = 50;
-    const int distance = 10;
+    changed = false;
 
+    trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+    trigB.SetSimpleTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
+    trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, PAD_BUTTON_START);
+
+    btnOutline = Resources::GetImageData("button_dialogue_box.png");
     bgImgData = Resources::GetImageData("categoryPrompt.png");
+    browserImgData = Resources::GetImageData("bg_options.png");
     addImgData = Resources::GetImageData("add.png");
-    prevImgData = Resources::GetImageData("back.png");
-    forwardImgData = Resources::GetImageData("forward.png");
-    trashImgData = Resources::GetImageData("remove.png");
-    lineImgData = Resources::GetImageData("categoryLine.png");
+    deleteImgData = Resources::GetImageData("remove.png");
+    editImgData = Resources::GetImageData("rename.png");
 
     bgImg = new GuiImage(bgImgData);
     Append(bgImg);
 
-    width = bgImgData->GetWidth();
-    height = bgImgData->GetHeight();
+    width = bgImg->GetWidth();
+    height = bgImg->GetHeight()+btnOutline->GetHeight()*0.9f;
 
-    addImg = new GuiImage(addImgData);
-    prevImg = new GuiImage(prevImgData);
-    forwardImg = new GuiImage(forwardImgData);
-    trashImg = new GuiImage(trashImgData);
-    lineImg = new GuiImage(lineImgData);
-
-    trigA = new GuiTrigger;
-    trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-    trigB = new GuiTrigger;
-    trigB->SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
-    trigHome = new GuiTrigger;
-    trigHome->SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, PAD_BUTTON_START);
-    trigLeft = new GuiTrigger;
-    trigLeft->SetButtonOnlyTrigger(-1, WPAD_BUTTON_LEFT | WPAD_CLASSIC_BUTTON_LEFT, PAD_BUTTON_LEFT);
-    trigRight = new GuiTrigger;
-    trigRight->SetButtonOnlyTrigger(-1, WPAD_BUTTON_RIGHT | WPAD_CLASSIC_BUTTON_RIGHT, PAD_BUTTON_RIGHT);
-    trigMinus = new GuiTrigger;
-    trigMinus->SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, 0);
-    trigPlus = new GuiTrigger;
-    trigPlus->SetButtonOnlyTrigger(-1, WPAD_BUTTON_PLUS | WPAD_CLASSIC_BUTTON_PLUS, 0);
-
-    homeButton = new GuiButton(0, 0);
-    homeButton->SetTrigger(trigHome);
-    Append(homeButton);
-
-    backButton = new GuiButton(0, 0);
-    backButton->SetTrigger(trigB);
-    Append(backButton);
-
-    titleTxt = new GuiText(title.c_str(), 30, (GXColor) {0, 0, 0, 255});
-    titleTxt->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
-    titleTxt->SetPosition(0, 10);
+    titleTxt = new GuiText(title.c_str(), 30, thColor("r=0 g=0 b=0 a=255 - category prompt title text color"));
+    titleTxt->SetAlignment(thAlign("center - category prompt title text align hor"), thAlign("top - category prompt title text align ver"));
+    titleTxt->SetPosition(thInt("0 - category prompt title text pos x"), thInt("10 - category prompt title text pos y"));
     Append(titleTxt);
 
-    previousButton = new GuiButton(prevImg->GetWidth(), prevImg->GetHeight());
-    previousButton->SetImage(prevImg);
-    previousButton->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    previousButton->SetPosition(posX, posY);
-    previousButton->SetSoundOver(btnSoundOver);
-    previousButton->SetSoundClick(btnSoundClick);
-    previousButton->SetTrigger(trigA);
-    previousButton->SetTrigger(trigLeft);
-    previousButton->SetTrigger(trigMinus);
-    previousButton->SetEffectGrow();
-    previousButton->Clicked.connect(this, &CategoryPrompt::OnPreviousButtonClick);
-    Append(previousButton);
-    posX += distance + previousButton->GetWidth();
+    browserImg = new GuiImage(browserImgData);
+    browser = new GuiCheckboxBrowser(browserImg->GetWidth(), browserImg->GetHeight());
+    browser->SetImage(browserImg);
+    browser->SetAlignment(thAlign("center - category prompt browser align hor"), thAlign("top - category prompt browser align ver"));
+    browser->SetPosition(thInt("0 - category prompt browser pos x"), thInt("45 - category prompt browser pos y"));
+    Append(browser);
 
-    categoryTxt = new GuiText((char *) NULL, 26, (GXColor) {0, 0, 0, 255});
-    categoryTxt->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
-    categoryTxt->SetMaxWidth(lineImg->GetWidth()-10, DOTTED);
-    categoryTxt->SetPosition(0, 2);
+    homeButton = new GuiButton(0, 0);
+    homeButton->SetTrigger(&trigHome);
+    Append(homeButton);
 
-    editButton = new GuiButton(lineImg->GetWidth(), lineImg->GetHeight());
-    editButton->SetImage(lineImg);
-    editButton->SetLabel(categoryTxt);
-    editButton->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    editButton->SetPosition(posX, posY);
-    editButton->SetSoundOver(btnSoundOver);
-    editButton->SetSoundClick(btnSoundClick);
-    editButton->SetTrigger(trigA);
-    editButton->SetEffectGrow();
-    Append(editButton);
-    posX += distance + editButton->GetWidth();
-
-    enabledButton = new GuiCheckbox(32, 32);
-    enabledButton->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    enabledButton->SetPosition(posX, posY);
-    enabledButton->SetSoundOver(btnSoundOver);
-    enabledButton->SetSoundClick(btnSoundClick);
-    enabledButton->SetTrigger(trigA);
-    enabledButton->Clicked.connect(this, &CategoryPrompt::OnEnableButtonClick);
-    Append(enabledButton);
-    posX += distance + enabledButton->GetWidth();
-
-    forwardButton = new GuiButton(forwardImg->GetWidth(), forwardImg->GetHeight());
-    forwardButton->SetImage(forwardImg);
-    forwardButton->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    forwardButton->SetPosition(posX, posY);
-    forwardButton->SetSoundOver(btnSoundOver);
-    forwardButton->SetSoundClick(btnSoundClick);
-    forwardButton->SetTrigger(trigA);
-    forwardButton->SetTrigger(trigRight);
-    forwardButton->SetTrigger(trigPlus);
-    forwardButton->SetEffectGrow();
-    forwardButton->Clicked.connect(this, &CategoryPrompt::OnForwardButtonClick);
-    Append(forwardButton);
-    posX += 35 + forwardImg->GetWidth();
-
-    posTxt = new GuiText((char *) NULL, 26, (GXColor) {0, 0, 0, 255});
-    posTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    posTxt->SetPosition(posX, posY+4);
-    Append(posTxt);
-
-    addTxt = new GuiText(tr("Add category"), 24, (GXColor) {0, 0, 0, 255});
-    addTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    addImg = new GuiImage(addImgData);
+    addTxt = new GuiText(tr("Add category"), 24, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     addTxt->SetMaxWidth(180, DOTTED);
-    addTxt->SetPosition(10+addImg->GetWidth(), 6);
+    addTxt->SetAlignment(thAlign("left - category prompt add button text align hor"), thAlign("top - category prompt add button text align ver"));
+    addTxt->SetPosition(thInt("10 - category prompt add button text pos x")+addImg->GetWidth(), thInt("6 - category prompt add button text pos y"));
 
     addButton = new GuiButton(addImg->GetWidth()+10+addTxt->GetTextWidth(), addImg->GetHeight());
     addButton->SetImage(addImg);
     addButton->SetLabel(addTxt);
-    addButton->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    addButton->SetPosition(15, 100);
+    addButton->SetAlignment(thAlign("left - category prompt add button align hor"), thAlign("top - category prompt add button align ver"));
+    addButton->SetPosition(width/2-thInt("180 - category prompt add button pos x")-addImg->GetWidth()/2, thInt("330 - category prompt add button pos y"));
     addButton->SetSoundOver(btnSoundOver);
     addButton->SetSoundClick(btnSoundClick);
-    addButton->SetTrigger(trigA);
+    addButton->SetTrigger(&trigA);
     addButton->SetEffectGrow();
     Append(addButton);
 
-    deleteTxt = new GuiText(tr("Delete category"), 24, (GXColor) {0, 0, 0, 255});
-    deleteTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    deleteImg = new GuiImage(deleteImgData);
+    deleteTxt = new GuiText(tr("Delete category"), 24, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     deleteTxt->SetMaxWidth(180, DOTTED);
-    deleteTxt->SetPosition(trashImg->GetWidth()+10, 6);
+    deleteTxt->SetAlignment(thAlign("left - category prompt delete button text align hor"), thAlign("top - category prompt delete button text align ver"));
+    deleteTxt->SetPosition(thInt("10 - category prompt delete button text pos x")+deleteImg->GetWidth(), thInt("6 - category prompt delete button text pos y"));
 
-    deleteButton = new GuiButton(trashImg->GetWidth()+10+deleteTxt->GetTextWidth(), trashImg->GetHeight());
-    deleteButton->SetImage(trashImg);
+    deleteButton = new GuiButton(deleteImg->GetWidth()+10+deleteTxt->GetTextWidth(), deleteImg->GetHeight());
+    deleteButton->SetImage(deleteImg);
     deleteButton->SetLabel(deleteTxt);
-    deleteButton->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    deleteButton->SetPosition(10+180+addImg->GetWidth(), 100);
+    deleteButton->SetAlignment(thAlign("left - category prompt delete button align hor"), thAlign("top - category prompt delete button align ver"));
+    deleteButton->SetPosition(width/2+thInt("5 - category prompt delete button pos x"), thInt("330 - category prompt delete button pos y"));
     deleteButton->SetSoundOver(btnSoundOver);
     deleteButton->SetSoundClick(btnSoundClick);
-    deleteButton->SetTrigger(trigA);
+    deleteButton->SetTrigger(&trigA);
     deleteButton->SetEffectGrow();
     Append(deleteButton);
+
+    editImg = new GuiImage(editImgData);
+    editTxt = new GuiText(tr("Rename category"), 24, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
+    editTxt->SetAlignment(thAlign("left - category prompt edit button text align hor"), thAlign("top - category prompt edit button text align ver"));
+    editTxt->SetPosition(thInt("10 - category prompt edit button text pos x")+editImg->GetWidth(), thInt("6 - category prompt edit button text pos y"));
+    editTxt->SetMaxWidth(180, DOTTED);
+
+    editButton = new GuiButton(editImg->GetWidth()+10+editTxt->GetTextWidth(), editImg->GetHeight());
+    editButton->SetImage(editImg);
+    editButton->SetLabel(editTxt);
+    editButton->SetAlignment(thAlign("left - category prompt edit button align hor"), thAlign("top - category prompt edit button align ver"));
+    editButton->SetPosition(width/2-thInt("180 - category prompt edit button pos x")-addImg->GetWidth()/2, thInt("362 - category prompt edit button pos y"));
+    editButton->SetSoundOver(btnSoundOver);
+    editButton->SetSoundClick(btnSoundClick);
+    editButton->SetTrigger(&trigA);
+    editButton->SetEffectGrow();
+    Append(editButton);
+
+    saveImg = new GuiImage(btnOutline);
+    saveImg->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+    saveImg->SetScale(0.9f);
+    saveTxt = new GuiText(tr("Save"), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
+    saveButton = new GuiButton(saveImg->GetWidth()*0.9f, saveImg->GetHeight()*0.9f);
+    saveButton->SetImage(saveImg);
+    saveButton->SetLabel(saveTxt);
+    saveButton->SetAlignment(thAlign("center - category prompt save button align hor"), thAlign("bottom - category prompt save button align ver"));
+    saveButton->SetPosition(thInt("-110 - category prompt save button pos x"), thInt("0 - category prompt save button pos y"));
+    saveButton->SetSoundOver(btnSoundOver);
+    saveButton->SetSoundClick(btnSoundClick);
+    saveButton->SetTrigger(&trigA);
+    saveButton->SetEffectGrow();
+    Append(saveButton);
+
+    backImg = new GuiImage(btnOutline);
+    backImg->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+    backImg->SetScale(0.9f);
+    backTxt = new GuiText(tr("Back"), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
+    backBtn = new GuiButton(backImg->GetWidth()*0.9f, backImg->GetHeight()*0.9f);
+    backBtn->SetImage(backImg);
+    backBtn->SetLabel(backTxt);
+    backBtn->SetAlignment(thAlign("center - category prompt back button align hor"), thAlign("bottom - category prompt back button align ver"));
+    backBtn->SetPosition(thInt("110 - category prompt back button pos x"), thInt("0 - category prompt back button pos y"));
+    backBtn->SetSoundOver(btnSoundOver);
+    backBtn->SetSoundClick(btnSoundClick);
+    backBtn->SetTrigger(&trigA);
+    backBtn->SetEffectGrow();
+    Append(backBtn);
+
+    browserRefresh();
 }
 
 CategoryPrompt::~CategoryPrompt()
 {
+    RemoveAll();
+    delete browser;
+
+    delete btnOutline;
     delete bgImgData;
-    delete addImgData;
-    delete prevImgData;
-    delete forwardImgData;
-    delete trashImgData;
-    delete lineImgData;
-
     delete bgImg;
+    delete browserImgData;
+    delete browserImg;
+    delete addImgData;
     delete addImg;
-    delete prevImg;
-    delete forwardImg;
-    delete trashImg;
-    delete lineImg;
+    delete deleteImgData;
+    delete deleteImg;
+    delete editImgData;
+    delete editImg;
+    delete backImg;
+    delete saveImg;
 
+    delete backBtn;
+    delete homeButton;
     delete addButton;
-    delete previousButton;
-    delete backButton;
-    delete forwardButton;
     delete deleteButton;
     delete editButton;
-    delete homeButton;
-    delete enabledButton;
+    delete saveButton;
 
     delete titleTxt;
-    delete categoryTxt;
-    delete posTxt;
     delete addTxt;
     delete deleteTxt;
-
-    delete trigA;
-    delete trigB;
-    delete trigHome;
-    delete trigLeft;
-    delete trigRight;
-    delete trigPlus;
-    delete trigMinus;
+    delete editTxt;
+    delete backTxt;
+    delete saveTxt;
 }
 
-void CategoryPrompt::OnForwardButtonClick(GuiButton *sender, int chan, const POINT &pointer)
+int CategoryPrompt::Show()
 {
-    nextCategory();
-    categoryChanged(categoryTxt, posTxt, enabledButton);
-    sender->ResetState();
-}
-
-void CategoryPrompt::OnPreviousButtonClick(GuiButton *sender, int chan, const POINT &pointer)
-{
-    previousCategory();
-    categoryChanged(categoryTxt, posTxt, enabledButton);
-    sender->ResetState();
-}
-
-void CategoryPrompt::OnEnableButtonClick(GuiButton *sender, int chan, const POINT &pointer)
-{
-    changed = true;
-    checkBoxClicked(enabledButton);
-    sender->ResetState();
-}
-
-int CategoryPrompt::MainLoop()
-{
-    categoryChanged(categoryTxt, posTxt, enabledButton);
-
-    while(backButton->GetState() != STATE_CLICKED)
+    while(backBtn->GetState() != STATE_CLICKED)
     {
         usleep(100);
-
         if (shutdown)
             Sys_Shutdown();
         else if (reset)
@@ -253,8 +200,15 @@ int CategoryPrompt::MainLoop()
         {
             gprintf("\thomeButton clicked\n");
             WindowExitPrompt();
-
+            SetState(STATE_DEFAULT);
             homeButton->ResetState();
+        }
+
+        else if(saveButton->GetState() == STATE_CLICKED)
+        {
+            if(categoriesChanged())
+                GameCategories.Save();
+            return 1;
         }
 
         else if(addButton->GetState() == STATE_CLICKED)
@@ -262,6 +216,7 @@ int CategoryPrompt::MainLoop()
             if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_CATEGORIES_MOD))
             {
                 WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked to be able to use this." ), tr( "OK" ));
+                SetState(STATE_DEFAULT);
                 addButton->ResetState();
                 continue;
             }
@@ -272,11 +227,12 @@ int CategoryPrompt::MainLoop()
             if(result)
             {
                 GameCategories.CategoryList.AddCategory(entered);
-                GameCategories.Save();
                 GameCategories.CategoryList.findCategory(entered);
-                categoryChanged(categoryTxt, posTxt, enabledButton);
+                browserRefresh();
+                markChanged();
             }
 
+            SetState(STATE_DEFAULT);
             addButton->ResetState();
         }
 
@@ -285,13 +241,15 @@ int CategoryPrompt::MainLoop()
             if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_CATEGORIES_MOD))
             {
                 WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked to be able to use this." ), tr( "OK" ));
+                SetState(STATE_DEFAULT);
                 deleteButton->ResetState();
                 continue;
             }
 
-            if(GameCategories.CategoryList.getCurrentID() == 0)
+            if(browser->GetSelected() == 0)
             {
                 WindowPrompt(tr("Error"), tr("You cannot delete this category."), tr("OK"));
+                SetState(STATE_DEFAULT);
                 deleteButton->ResetState();
                 continue;
             }
@@ -299,18 +257,19 @@ int CategoryPrompt::MainLoop()
             int choice = WindowPrompt(tr("Warning"), tr("Are you sure you want to delete this category?"), tr("Yes"), tr("Cancel"));
             if(choice)
             {
-                int pos = GameCategories.CategoryList.pos()-1;
+                GameCategories.CategoryList.goToFirst();
+                for(int i = 0; i < browser->GetSelected(); ++i)
+                    GameCategories.CategoryList.goToNext();
                 int categoryID = GameCategories.CategoryList.getCurrentID();
                 GameCategories.CategoryList.RemoveCategory(categoryID);
                 GameCategories.RemoveCategory(categoryID);
-                GameCategories.Save();
                 GameCategories.CategoryList.goToFirst();
-                for(int i = 0; i < pos; ++i)
-                    GameCategories.CategoryList.goToNext();
 
-                categoryChanged(categoryTxt, posTxt, enabledButton);
+                browserRefresh();
+                markChanged();
             }
 
+            SetState(STATE_DEFAULT);
             deleteButton->ResetState();
         }
 
@@ -319,9 +278,14 @@ int CategoryPrompt::MainLoop()
             if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_CATEGORIES_MOD))
             {
                 WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked to be able to use this." ), tr( "OK" ));
+                SetState(STATE_DEFAULT);
                 editButton->ResetState();
                 continue;
             }
+
+            GameCategories.CategoryList.goToFirst();
+            for(int i = 0; i < browser->GetSelected(); ++i)
+                GameCategories.CategoryList.goToNext();
 
             char entered[512];
             snprintf(entered, sizeof(entered), tr(GameCategories.CategoryList.getCurrentName().c_str()));
@@ -330,18 +294,21 @@ int CategoryPrompt::MainLoop()
             if(result)
             {
                 GameCategories.CategoryList.SetCategory(GameCategories.CategoryList.getCurrentID(), entered);
-                int pos = GameCategories.CategoryList.pos();
-                GameCategories.Save();
                 GameCategories.CategoryList.goToFirst();
-                for(int i = 0; i < pos; ++i)
-                    GameCategories.CategoryList.goToNext();
-                categoryChanged(categoryTxt, posTxt, enabledButton);
+                browserRefresh();
+                markChanged();
             }
 
+            SetState(STATE_DEFAULT);
             editButton->ResetState();
         }
     }
 
+    //! Reset to old file in case of cancel
+    if(categoriesChanged())
+        resetChanges();
+
     return 0;
 }
+
 

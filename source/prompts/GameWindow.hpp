@@ -1,8 +1,8 @@
 #ifndef GAMEWINDOW_HPP_
 #define GAMEWINDOW_HPP_
 
-#include "libwiigui/gui.h"
-#include "libwiigui/gui_diskcover.h"
+#include "GUI/gui.h"
+#include "GUI/gui_diskcover.h"
 #include "menu/GameBrowseMenu.hpp"
 
 #define FAVORITE_STARS  5

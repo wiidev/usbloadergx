@@ -1,9 +1,8 @@
 #include <string.h>
 #include <unistd.h>
 
-#include <fat.h>
-#include "libwiigui/gui.h"
-#include "libwiigui/gui_customoptionbrowser.h"
+#include "GUI/gui.h"
+#include "GUI/gui_optionbrowser.h"
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
 #include "themes/CTheme.h"
@@ -30,14 +29,14 @@ int CheatMenu(const char * gameID)
     GuiTrigger trigB;
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText backBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText backBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage backBtnImg(&btnOutline);
     GuiButton backBtn(&backBtnImg, &backBtnImg, 2, 3, -140, 400, &trigA, NULL, btnSoundClick2, 1);
     backBtn.SetLabel(&backBtnTxt);
     backBtn.SetTrigger(&trigB);
 
-    GuiText createBtnTxt(tr( "Create" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText createBtnTxt(tr( "Create" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     createBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage createBtnImg(&btnOutline);
     GuiButton createBtn(&createBtnImg, &createBtnImg, 2, 3, 160, 400, &trigA, NULL, btnSoundClick2, 1);
@@ -67,7 +66,7 @@ int CheatMenu(const char * gameID)
         case 1:
             int cntcheats = c.getCnt();
             OptionList cheatslst;
-            GuiCustomOptionBrowser chtBrowser(400, 280, &cheatslst, "bg_options_settings.png");
+            GuiOptionBrowser chtBrowser(400, 280, &cheatslst, "bg_options_settings.png");
             chtBrowser.SetPosition(0, 90);
             chtBrowser.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
             chtBrowser.SetClickable(true);

@@ -8,8 +8,8 @@
 #include "usbloader/wbfs.h"
 #include "settings/CGameCategories.hpp"
 #include "language/gettext.h"
-#include "libwiigui/gui.h"
-#include "libwiigui/Text.hpp"
+#include "GUI/gui.h"
+#include "GUI/Text.hpp"
 #include "xml/xml.h"
 #include "menu.h"
 #include "menu/menus.h"
@@ -388,6 +388,9 @@ static int InternalShowGameInfo(char *ID)
 
         else if (GameInfo.Players == 2)
             playersImgData = Resources::GetImageData("wiimote2.png");
+
+        else if (GameInfo.Players == 3)
+            playersImgData = Resources::GetImageData("wiimote3.png");
 
         else if (GameInfo.Players == 4)
             playersImgData = Resources::GetImageData("wiimote4.png");

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-10 14:06+0200\n"
+"POT-Creation-Date: 2011-06-14 16:22+0200\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -774,10 +774,10 @@ msgstr "Hogyan szeretnél frissíteni?"
 msgid "How to Shutdown?"
 msgstr "Hogyan kapcsoljon ki?"
 
-msgid "Import categories"
+msgid "Import Categories"
 msgstr ""
 
-msgid "Import categories from WiiTDB"
+msgid "Import categories"
 msgstr ""
 
 msgid "Import operation successfully completed."
@@ -1151,6 +1151,9 @@ msgstr ""
 
 msgid "Rename Game on WBFS"
 msgstr "WBFS játék átnevezése"
+
+msgid "Rename category"
+msgstr ""
 
 msgid "Reset"
 msgstr ""

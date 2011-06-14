@@ -8,6 +8,7 @@
 #include <string.h>
 #include "FileOperations/fileops.h"
 #include "xml/xml.h"
+#include "gecko.h"
 
 #include "HomebrewXML.h"
 
@@ -74,6 +75,16 @@ int HomebrewXML::LoadHomebrewXMLData(const char* filename)
     else snprintf(Entrie, ENTRIE_SIZE, "%s", Entrie);
 
     Releasedate = Entrie;
+
+    node = mxmlFindElement(node, nodetree, "arguments", NULL, NULL, MXML_DESCEND_FIRST);
+
+    while(node)
+    {
+        Entrie[0] = '\0';
+        node = GetTextFromNode(node, nodetree, (char*) "arg", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
+        if(node)
+            Arguments.push_back(std::string(Entrie));
+    }
 
     delete[] Entrie;
 

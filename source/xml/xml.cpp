@@ -82,7 +82,7 @@ void CloseXMLDatabase()
     }
 }
 
-void GetTextFromNode(mxml_node_t *currentnode, mxml_node_t *topnode, const char *nodename, const char *attributename,
+mxml_node_t *GetTextFromNode(mxml_node_t *currentnode, mxml_node_t *topnode, const char *nodename, const char *attributename,
         char *value, int descend, char *dest, int destsize)
 {
     *element_text = 0;
@@ -103,12 +103,12 @@ void GetTextFromNode(mxml_node_t *currentnode, mxml_node_t *topnode, const char 
     {
         strcpy(dest, "");
     }
+
+    return nodefound;
 }
 
 bool OpenXMLFile(char *filename)
 {
-    //if (xmldebug) dbg_time1();
-
     if (xml_loaded) return false;
 
     nodedata = NULL;

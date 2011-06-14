@@ -127,7 +127,7 @@ GuiSettingsMenu::GuiSettingsMenu()
     Options->SetName(Idx++, "%s", tr( "Mark new games" ));
     Options->SetName(Idx++, "%s", tr( "Show Free Space" ));
     Options->SetName(Idx++, "%s", tr( "HOME Menu" ));
-    Options->SetName(Idx++, "%s", tr( "Import categories from WiiTDB" ));
+    Options->SetName(Idx++, "%s", tr( "Import Categories" ));
 
     SetOptionValues();
 

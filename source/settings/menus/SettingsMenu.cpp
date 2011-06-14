@@ -57,14 +57,14 @@ SettingsMenu::SettingsMenu(const char * title, OptionList * opts, int returnTo)
         Append(backBtn);
     }
 
-	optionBrowser = new GuiCustomOptionBrowser(396, 280, Options, "bg_options_settings.png");
-    optionBrowser->SetPosition(0, 90);
-    optionBrowser->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	optionBrowser = new GuiOptionBrowser(396, 280, Options, "bg_options_settings.png");
+    optionBrowser->SetAlignment(thAlign("center - settings option browser align hor"), thAlign("top - settings option browser align ver"));
+    optionBrowser->SetPosition(thInt("0 - settings option browser pos x"), thInt("90 - settings option browser pos y"));
 
-	titleTxt = new GuiText(title, 28, (GXColor) {0, 0, 0, 255});
-    titleTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-    titleTxt->SetPosition(0, 40);
-    titleTxt->SetMaxWidth(310, SCROLL_HORIZONTAL);
+	titleTxt = new GuiText(title, 28, thColor("r=0 g=0 b=0 a=255 - settings title text color"));
+    titleTxt->SetAlignment(thAlign("center - settings title text align hor"), thAlign("top - settings title text align ver"));
+    titleTxt->SetPosition(thInt("0 - settings title text pos x"), thInt("40 - settings title text pos y"));
+    titleTxt->SetMaxWidth(thInt("310 - settings title text max width"), SCROLL_HORIZONTAL);
 
 	Append(optionBrowser);
 	Append(titleTxt);

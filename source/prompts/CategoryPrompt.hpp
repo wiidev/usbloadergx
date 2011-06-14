@@ -21,67 +21,58 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  ***************************************************************************/
-#ifndef CATEGORYPROMPT_HPP_
-#define CATEGORYPROMPT_HPP_
+#ifndef CATEGORY_PROMPT_HPP_
+#define CATEGORY_PROMPT_HPP_
 
-#include "libwiigui/gui.h"
-#include "libwiigui/gui_checkbox.hpp"
+#include "GUI/gui_checkboxbrowser.hpp"
 
 class CategoryPrompt : public GuiWindow, public sigslot::has_slots<>
 {
     public:
-        CategoryPrompt(const std::string &title);
+        CategoryPrompt(const string &title);
         ~CategoryPrompt();
+        int Show();
         bool categoriesChanged() const { return changed; }
     protected:
-        int MainLoop();
-		sigslot::signal3<GuiText *, GuiText *, GuiCheckbox *> categoryChanged;
-		sigslot::signal0<> nextCategory;
-		sigslot::signal0<> previousCategory;
-		sigslot::signal1<GuiCheckbox *> checkBoxClicked;
+        void markChanged() { changed = true; }
+		sigslot::signal0<> browserRefresh;
+		sigslot::signal0<> resetChanges;
+        GuiCheckboxBrowser *browser;
     private:
-        void OnForwardButtonClick(GuiButton *sender, int chan, const POINT &pointer);
-        void OnPreviousButtonClick(GuiButton *sender, int chan, const POINT &pointer);
-        void OnEnableButtonClick(GuiButton *sender, int chan, const POINT &pointer);
-
         bool changed;
 
         GuiImageData *bgImgData;
+        GuiImageData *browserImgData;
+        GuiImageData *btnOutline;
         GuiImageData *addImgData;
-        GuiImageData *prevImgData;
-        GuiImageData *forwardImgData;
-        GuiImageData *trashImgData;
-        GuiImageData *lineImgData;
+        GuiImageData *deleteImgData;
+        GuiImageData *editImgData;
 
+        GuiImage *browserImg;
         GuiImage *bgImg;
         GuiImage *addImg;
-        GuiImage *prevImg;
-        GuiImage *forwardImg;
-        GuiImage *trashImg;
-        GuiImage *lineImg;
+        GuiImage *deleteImg;
+        GuiImage *editImg;
+        GuiImage *backImg;
+        GuiImage *saveImg;
 
+        GuiButton *backBtn;
+        GuiButton *homeButton;
         GuiButton *addButton;
-        GuiButton *previousButton;
-        GuiButton *forwardButton;
-        GuiButton *backButton;
         GuiButton *deleteButton;
         GuiButton *editButton;
-        GuiButton *homeButton;
-        GuiCheckbox *enabledButton;
+        GuiButton *saveButton;
 
         GuiText *titleTxt;
-        GuiText *categoryTxt;
-        GuiText *posTxt;
         GuiText *addTxt;
         GuiText *deleteTxt;
+        GuiText *editTxt;
+        GuiText *backTxt;
+        GuiText *saveTxt;
 
-        GuiTrigger *trigA;
-        GuiTrigger *trigB;
-        GuiTrigger *trigHome;
-        GuiTrigger *trigLeft;
-        GuiTrigger *trigRight;
-        GuiTrigger *trigMinus;
-        GuiTrigger *trigPlus;
+        GuiTrigger trigA;
+        GuiTrigger trigB;
+        GuiTrigger trigHome;
 };
 
 #endif

@@ -98,6 +98,8 @@ bool CGameCategories::Load(string filepath)
     if(!buffer)
         return false;
 
+    clear();
+
     mxml_node_t *xmlfile = mxmlLoadString(NULL, (const char *) buffer, MXML_OPAQUE_CALLBACK);
 
     if(!ValidVersion(xmlfile))

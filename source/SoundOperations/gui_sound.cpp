@@ -24,7 +24,7 @@
  * for WiiXplorer 2010
  ***************************************************************************/
 #include <unistd.h>
-#include "libwiigui/gui.h"
+#include "GUI/gui.h"
 #include "utils/uncompress.h"
 #include "FileOperations/fileops.h"
 #include "SoundHandler.hpp"

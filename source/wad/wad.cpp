@@ -11,7 +11,7 @@
 #include "nandtitle.h"
 
 #include "prompts/PromptWindows.h"
-#include "libwiigui/gui.h"
+#include "GUI/gui.h"
 #include "language/gettext.h"
 #include "menu.h"
 #include "themes/CTheme.h"
@@ -124,7 +124,7 @@ s32 Wad_Install(FILE *fp)
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
-    GuiText btn1Txt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText btn1Txt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -148,7 +148,7 @@ s32 Wad_Install(FILE *fp)
     GuiImage progressbarEmptyImg(&progressbarEmpty);
     progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     progressbarEmptyImg.SetPosition(25, 50);
-    progressbarEmptyImg.SetTile(100);
+    progressbarEmptyImg.SetTileHorizontal(100);
 
     GuiImageData progressbar(Resources::GetFile("progressbar.png"), Resources::GetFileSize("progressbar.png"));
     GuiImage progressbarImg(&progressbar);
@@ -192,7 +192,7 @@ s32 Wad_Install(FILE *fp)
         progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
         progressbarOutlineImg.SetPosition(0, 50);
         progressbarEmptyImg.SetPosition(80, 50);
-        progressbarEmptyImg.SetTile(78);
+        progressbarEmptyImg.SetTileHorizontal(78);
         progressbarImg.SetPosition(80, 50);
 
         msg1Txt.SetPosition(90, 75);
@@ -358,11 +358,11 @@ s32 Wad_Install(FILE *fp)
             prTxt.SetTextf("%i%%", 100 * (cnt * len + idx) / (tmd_data->num_contents * len));
             if ((Settings.wsprompt) && (Settings.widescreen))
             {
-                progressbarImg.SetTile(78 * (cnt * len + idx) / (tmd_data->num_contents * len));
+                progressbarImg.SetTileHorizontal(78 * (cnt * len + idx) / (tmd_data->num_contents * len));
             }
             else
             {
-                progressbarImg.SetTile(100 * (cnt * len + idx) / (tmd_data->num_contents * len));
+                progressbarImg.SetTileHorizontal(100 * (cnt * len + idx) / (tmd_data->num_contents * len));
             }
 
         }
@@ -438,7 +438,7 @@ s32 Wad_Uninstall(FILE *fp)
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
-    GuiText btn1Txt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText btn1Txt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt)
     {

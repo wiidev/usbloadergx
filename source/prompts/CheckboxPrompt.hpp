@@ -24,7 +24,7 @@
 #ifndef _CHECKBOXPROMPT_HPP_
 #define _CHECKBOXPROMPT_HPP_
 
-#include "libwiigui/gui_checkbox.hpp"
+#include "GUI/gui_checkbox.hpp"
 #include "PromptWindow.hpp"
 
 enum

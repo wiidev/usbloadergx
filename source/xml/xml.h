@@ -15,7 +15,7 @@ void GetPublisherFromGameid(char *idtxt, char *dest, int destsize);
 const char *ConvertLangTextToCode(char *langtext);
 int ConvertRating(const char *ratingvalue, const char *fromrating, const char *torating);
 char *MemInfo();
-void GetTextFromNode(mxml_node_t *currentnode, mxml_node_t *topnode, const char *nodename, const char *attributename,
+mxml_node_t *GetTextFromNode(mxml_node_t *currentnode, mxml_node_t *topnode, const char *nodename, const char *attributename,
         char *value, int descend, char *dest, int destsize);
 char * get_nodetext(mxml_node_t *node, char *buffer, int buflen);
 

@@ -161,11 +161,12 @@ static inline bool USBSpinUp()
     return started;
 }
 
-bool DeviceHandler::SetUSBPort(int port)
+bool DeviceHandler::SetUSBPort(int port, bool spinup)
 {
     int ret = USBStorage2_SetPort(port);
 
-    USBSpinUp();
+    if(spinup)
+        USBSpinUp();
 
     return ret >= 0;
 }

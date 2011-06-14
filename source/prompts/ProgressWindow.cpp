@@ -14,7 +14,7 @@
 #include "menu/menus.h"
 #include "sys.h"
 #include "language/gettext.h"
-#include "libwiigui/gui.h"
+#include "GUI/gui.h"
 #include "prompts/ProgressWindow.h"
 #include "usbloader/wbfs.h"
 #include "usbloader/utils.h"
@@ -246,7 +246,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
     GuiImage progressbarEmptyImg(&progressbarEmpty);
     progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     progressbarEmptyImg.SetPosition(35, 40);
-    progressbarEmptyImg.SetTile(100);
+    progressbarEmptyImg.SetTileHorizontal(100);
 
     GuiImageData progressbar(Resources::GetFile("progressbar.png"), Resources::GetFileSize("progressbar.png"));
     GuiImage progressbarImg(&progressbar);
@@ -295,7 +295,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
         progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
         progressbarOutlineImg.SetPosition(0, 40);
         progressbarEmptyImg.SetPosition(80, 40);
-        progressbarEmptyImg.SetTile(78);
+        progressbarEmptyImg.SetTileHorizontal(78);
         progressbarImg.SetPosition(80, 40);
         msg1Txt.SetMaxWidth(380, DOTTED);
         msg2Txt.SetMaxWidth(380, DOTTED);
@@ -308,7 +308,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
         sizeTxt.SetFontSize(20);
     }
 
-    GuiText cancelTxt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText cancelTxt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     GuiImage cancelImg(&btnOutline);
     if (Settings.wsprompt)
     {

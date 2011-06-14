@@ -25,7 +25,7 @@
 #include "FileOperations/fileops.h"
 #include "language/gettext.h"
 #include "PromptWindows.h"
-#include "libwiigui/gui.h"
+#include "GUI/gui_filebrowser.h"
 #include "sys.h"
 #include "filebrowser.h"
 
@@ -355,7 +355,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
     usbBtn.SetTrigger(&trigA);
     usbBtn.SetEffectGrow();
 
-    GuiText okBtnTxt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText okBtnTxt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     GuiImage okBtnImg(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -444,7 +444,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
                         LOCK( &fileBrowser );
                         ParseDirectory((char*) NULL, Flags, Filter);
                         fileBrowser.ResetState();
-                        fileBrowser.TriggerUpdate();
+                        fileBrowser.UpdateList();
                         AdressText.SetTextf("%s%s", browser->rootdir, browser->dir);
                     }
                     clickedIndex = -1;
@@ -480,7 +480,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
                 if (ParseDirectory((curDevice + i) % browsers.size(), Flags, Filter) == 0)
                 {
                     fileBrowser.ResetState();
-                    fileBrowser.TriggerUpdate();
+                    fileBrowser.UpdateList();
                     AdressText.SetTextf("%s%s", browser->rootdir, browser->dir);
                     usbBtnTxt.SetText(browsers[(curDevice + 1) % browsers.size()].rootdir);
                     break;
@@ -520,7 +520,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
                 if (ParseDirectory(newfolder, Flags, Filter) == 0)
                 {
                     fileBrowser.ResetState();
-                    fileBrowser.TriggerUpdate();
+                    fileBrowser.UpdateList();
                     AdressText.SetTextf("%s%s", browser->rootdir, browser->dir);
                     usbBtnTxt.SetText(browsers[(curDevice + 1) % browsers.size()].rootdir);
                 }

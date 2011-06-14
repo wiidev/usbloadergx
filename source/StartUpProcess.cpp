@@ -1,6 +1,6 @@
 #include <unistd.h>
 #include "StartUpProcess.h"
-#include "libwiigui/gui.h"
+#include "GUI/gui.h"
 #include "video.h"
 #include "audio.h"
 #include "input.h"
@@ -15,6 +15,10 @@
 #include "settings/CGameStatistics.h"
 #include "settings/CGameCategories.hpp"
 #include "usbloader/usbstorage2.h"
+#include "usbloader/MountGamePartition.h"
+#include "usbloader/GameBooter.hpp"
+#include "usbloader/GameList.h"
+#include "utils/tools.h"
 #include "sys.h"
 
 StartUpProcess::StartUpProcess()
@@ -45,6 +49,35 @@ StartUpProcess::~StartUpProcess()
     delete GXImage;
     delete titleTxt;
     delete messageTxt;
+}
+
+int StartUpProcess::ParseArguments(int argc, char *argv[])
+{
+    int quickBoot = -1;
+
+    //! The arguments override
+    for(int i = 0; i < argc; ++i)
+    {
+        if(!argv[i]) continue;
+
+        gprintf("Boot argument %i: %s\n", i+1, argv[i]);
+
+        char *ptr = strcasestr(argv[i], "-ios=");
+        if(ptr)
+            Settings.cios = LIMIT(atoi(ptr+strlen("-ios=")), 200, 255);
+
+        ptr = strcasestr(argv[i], "-usbport=");
+        if(ptr)
+        {
+            Settings.USBPort = LIMIT(atoi(ptr+strlen("-usbport=")), 0, 1);
+            DeviceHandler::SetUSBPort(Settings.USBPort, false);
+        }
+
+        if(strlen(argv[i]) == 6 && strchr(argv[i], '=') == 0 && strchr(argv[i], '-') == 0)
+            quickBoot = i;
+    }
+
+    return quickBoot;
 }
 
 void StartUpProcess::TextFade(int direction)
@@ -110,14 +143,21 @@ bool StartUpProcess::USBSpinUp()
     return started;
 }
 
-bool StartUpProcess::Run()
+int StartUpProcess::Run(int argc, char *argv[])
 {
+    int quickGameBoot = ParseArguments(argc, argv);
+
     StartUpProcess Process;
 
-    return Process.Execute();
+    int ret = Process.Execute();
+
+    if(quickGameBoot != -1)
+        return QuickGameBoot(argv[quickGameBoot]);
+
+    return ret;
 }
 
-bool StartUpProcess::Execute()
+int StartUpProcess::Execute()
 {
     SetTextf("Start up\n");
 
@@ -150,7 +190,7 @@ bool StartUpProcess::Execute()
         // Loading now the cios setup in the settings
         IosLoader::LoadAppCios();
 
-        SetTextf("Loaded cIOS %i R%i\n", IOS_GetVersion(), IOS_GetRevision());
+        SetTextf("Reloading into cIOS %i R%i\n", IOS_GetVersion(), IOS_GetRevision());
 
         DeviceHandler::Instance()->MountSD();
         USBSpinUp();
@@ -161,7 +201,7 @@ bool StartUpProcess::Execute()
     {
         Settings.USBPort = 0;
     }
-    else if(Settings.USBPort == 1)
+    else if(Settings.USBPort == 1 && USBStorage2_GetPort() != Settings.USBPort)
     {
         SetTextf("Changing USB Port to %i\n", Settings.USBPort);
         DeviceHandler::Instance()->UnMountAllUSB();
@@ -180,7 +220,7 @@ bool StartUpProcess::Execute()
     setlocale(LC_CTYPE, "C-UTF-8");
     setlocale(LC_MESSAGES, "C-UTF-8");
 
-    return true;
+    return 0;
 }
 
 void StartUpProcess::Draw()
@@ -190,4 +230,24 @@ void StartUpProcess::Draw()
     titleTxt->Draw();
     messageTxt->Draw();
     Menu_Render();
+}
+
+int StartUpProcess::QuickGameBoot(const char * gameID)
+{
+    MountGamePartition(false);
+
+    struct discHdr *header = NULL;
+    for(int i = 0; i < gameList.size(); ++i)
+    {
+        if(strncasecmp((char *) gameList[i]->id, gameID, 6) == 0)
+            header = gameList[i];
+    }
+
+    if(!header)
+        return -1;
+
+    GameStatistics.SetPlayCount(header->id, GameStatistics.GetPlayCount(header->id)+1);
+    GameStatistics.Save();
+
+    return GameBooter::BootGame(gameID);
 }

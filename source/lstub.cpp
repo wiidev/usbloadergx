@@ -6,10 +6,12 @@
 #include <stdio.h>
 
 #include "lstub.h"
-#include "filelist.h"
 #include "gecko.h"
 
 #include "wad/nandtitle.h"
+
+extern const u8 stub_bin[];
+extern const u32 stub_bin_size;
 
 static char* determineStubTIDLocation()
 {

@@ -1,8 +1,8 @@
 #ifndef WDMMENU_HPP_
 #define WDMMENU_HPP_
 
-#include "libwiigui/gui.h"
-#include "libwiigui/gui_customoptionbrowser.h"
+#include "GUI/gui.h"
+#include "GUI/gui_optionbrowser.h"
 #include "usbloader/disc.h"
 #include "usbloader/WDMFile.hpp"
 
@@ -38,7 +38,7 @@ class WDMMenu : public GuiWindow
         GuiImage * defaultBtnImg;
         GuiButton * defaultBtn;
 
-        GuiCustomOptionBrowser * optionBrowser;
+        GuiOptionBrowser * optionBrowser;
 };
 
 #endif

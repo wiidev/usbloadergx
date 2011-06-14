@@ -1,11 +1,11 @@
 #ifndef GAMEBROWSEMENU_HPP_
 #define GAMEBROWSEMENU_HPP_
 
-#include "libwiigui/gui.h"
-#include "libwiigui/gui_gamebrowser.h"
-#include "libwiigui/gui_gamegrid.h"
-#include "libwiigui/gui_gamecarousel.h"
-#include "libwiigui/gui_searchbar.h"
+#include "GUI/gui.h"
+#include "GUI/gui_gamebrowser.h"
+#include "GUI/gui_gamegrid.h"
+#include "GUI/gui_gamecarousel.h"
+#include "GUI/gui_searchbar.h"
 #include "utils/ThreadedTask.hpp"
 
 class GameBrowseMenu : public GuiWindow

@@ -4,7 +4,7 @@
 #include "usbloader/usbstorage2.h"
 #include "usbloader/utils.h"
 #include "usbloader/wbfs.h"
-#include "libwiigui/gui_customoptionbrowser.h"
+#include "GUI/gui_optionbrowser.h"
 #include "Controls/DeviceHandler.hpp"
 #include "themes/CTheme.h"
 
@@ -71,7 +71,7 @@ int SelectPartitionMenu()
 						&trigA, btnSoundOver, btnSoundClick2, 1);
     exitBtn.SetTrigger(&trigHome);
 
-    GuiCustomOptionBrowser optionBrowser(396, 280, &options, "bg_options_settings.png");
+    GuiOptionBrowser optionBrowser(396, 280, &options, "bg_options_settings.png");
     optionBrowser.SetPosition(0, 40);
     optionBrowser.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 

@@ -9,8 +9,8 @@
 #include <zlib.h>
 
 #include "language/gettext.h"
-#include "libwiigui/gui.h"
-#include "libwiigui/gui_customoptionbrowser.h"
+#include "GUI/gui.h"
+#include "GUI/gui_optionbrowser.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/ProgressWindow.h"
 #include "network/networkops.h"
@@ -134,7 +134,7 @@ bool TitleSelector(char output[])
     GuiTrigger trigB;
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText cancelBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText cancelBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt)
@@ -146,7 +146,7 @@ bool TitleSelector(char output[])
     cancelBtn.SetLabel(&cancelBtnTxt);
     cancelBtn.SetTrigger(&trigB);
 
-    GuiCustomOptionBrowser optionBrowser4(396, 280, &options4, "bg_options_settings.png");
+    GuiOptionBrowser optionBrowser4(396, 280, &options4, "bg_options_settings.png");
     optionBrowser4.SetPosition(0, 90);
     optionBrowser4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 
@@ -370,7 +370,7 @@ int TitleBrowser()
     settingsbackgroundbtn.SetPosition(0, 0);
     settingsbackgroundbtn.SetImage(&settingsbackground);
 
-    GuiText cancelBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText cancelBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
     cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt)
@@ -383,11 +383,11 @@ int TitleBrowser()
     cancelBtn.SetLabel(&cancelBtnTxt);
     cancelBtn.SetTrigger(&trigB);
 
-    GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, "bg_options_settings.png");
+    GuiOptionBrowser optionBrowser3(396, 280, &options3, "bg_options_settings.png");
     optionBrowser3.SetPosition(0, 90);
     optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 
-    GuiImageData wifiImgData(Resources::GetFile("Wifi_btn.png"), Resources::GetFileSize("Wifi_btn.png"));
+    GuiImageData wifiImgData(Resources::GetFile("wifi_btn.png"), Resources::GetFileSize("wifi_btn.png"));
     GuiImage wifiImg(&wifiImgData);
     if (Settings.wsprompt)
     {

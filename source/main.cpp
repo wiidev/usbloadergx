@@ -19,16 +19,9 @@
 #include <sys/iosupport.h>
 
 #include "video.h"
-#include "themes/CTheme.h"
 #include "menu/menus.h"
-#include "main.h"
-#include "Controls/DeviceHandler.hpp"
-#include "settings/CSettings.h"
 #include "memory/mem2.h"
 #include "wad/nandtitle.h"
-#include "system/IosLoader.h"
-#include "usbloader/MountGamePartition.h"
-#include "usbloader/GameBooter.hpp"
 #include "StartUpProcess.h"
 #include "sys.h"
 
@@ -36,15 +29,6 @@ extern "C"
 {
     extern s32 MagicPatches(s32);
     void __exception_setreload(int t);
-}
-
-static int QuickGameBoot(const char * gameID)
-{
-    DeviceHandler::Instance()->MountAll();
-    Settings.Load();
-
-    MountGamePartition(false);
-    return GameBooter::BootGame(gameID);
 }
 
 int main(int argc, char *argv[])
@@ -58,10 +42,8 @@ int main(int argc, char *argv[])
     NandTitles.Get();
     setlocale(LC_ALL, "en.UTF-8");
 
-    if(argc > 1 && argv[1])
-        return QuickGameBoot(argv[1]);
-
-	StartUpProcess::Run();
+	if(StartUpProcess::Run(argc, argv) < 0)
+	    return -1;
 
     MainMenu(MENU_DISCLIST);
     return 0;
