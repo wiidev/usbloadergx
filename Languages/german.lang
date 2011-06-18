@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 08:50+0200\n"
+"POT-Creation-Date: 2011-06-18 11:39+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -624,6 +624,9 @@ msgid "Failed updating"
 msgstr "Updaten fehlgeschlagen"
 
 msgid "Features"
+msgstr ""
+
+msgid "Features Settings"
 msgstr ""
 
 msgid "Feb"

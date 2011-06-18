@@ -1255,8 +1255,7 @@ void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
         Remove(GameRegionTxt);
         delete GameRegionTxt;
         GameRegionTxt = NULL;
-        Remove(idBtn);
-        idBtn->SetLabel(NULL);
+        Remove(GameIDTxt);
         delete GameIDTxt;
         GameIDTxt = NULL;
         return;
@@ -1303,18 +1302,9 @@ void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
         delete GameIDTxt;
         GameIDTxt = new GuiText(IDfull, 22, thColor("r=55 g=190 b=237 a=255 - game id text color"));
         GameIDTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-        if(Settings.godmode || !(Settings.ParentalBlocks & BLOCK_GAMEID_CHANGE))
-        {
-            idBtn->SetEffect(EFFECT_FADE, 20);
-            idBtn->SetLabel(GameIDTxt);
-            Append(idBtn);
-        }
-        else
-        {
-            GameIDTxt->SetPosition(thInt("68 - gameID btn pos x"), thInt("305 - gameID btn pos y"));
-            GameIDTxt->SetEffect(EFFECT_FADE, 20);
-            Append(GameIDTxt);
-        }
+        GameIDTxt->SetPosition(thInt("68 - gameID btn pos x"), thInt("305 - gameID btn pos y"));
+        GameIDTxt->SetEffect(EFFECT_FADE, 20);
+        Append(GameIDTxt);
     }
     //don't try to show region for channels because all the custom channels wont follow the rules
     if ((Settings.sinfo == GAMEINFO_REGION) || (Settings.sinfo == GAMEINFO_BOTH))

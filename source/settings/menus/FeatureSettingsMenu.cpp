@@ -40,7 +40,7 @@ static const char * OnOffText[] =
 };
 
 FeatureSettingsMenu::FeatureSettingsMenu()
-    : SettingsMenu(tr("Sound Settings"), &GuiOptions, MENU_NONE)
+    : SettingsMenu(tr("Features Settings"), &GuiOptions, MENU_NONE)
 {
     int Idx = 0;
     Options->SetName(Idx++, "%s", tr( "Titles from WiiTDB" ));

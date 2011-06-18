@@ -523,6 +523,7 @@ int GameWindow::MainLoop()
             wString oldFilter(gameList.GetCurrentFilter());
             gameList.ReadGameList();
             gameList.FilterList(oldFilter.c_str());
+            if(browserMenu) browserMenu->ReloadBrowser();
         }
         SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
         if(parentElement)
