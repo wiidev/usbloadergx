@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-14 16:22+0200\n"
-"PO-Revision-Date: 2011-06-10 08:07+0100\n"
+"POT-Creation-Date: 2011-06-18 08:50+0200\n"
+"PO-Revision-Date: 2011-06-16 08:02+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
 "MIME-Version: 1.0\n"
@@ -141,6 +141,9 @@ msgstr "Alle functies van USB Loader GX zijn vrijgegeven."
 msgid "Alternate DOL"
 msgstr "Alternatieve DOL"
 
+msgid "An example file was created here:"
+msgstr ""
+
 msgid "Anti"
 msgstr ""
 
@@ -206,6 +209,9 @@ msgstr "Blokkeer Downloads van Hoesjes"
 
 msgid "Block Custom Paths"
 msgstr "Blokkeer Aangepaste Paden"
+
+msgid "Block Feature Settings"
+msgstr ""
 
 msgid "Block Game Install"
 msgstr "Blokkeer Spel Installatie"
@@ -617,6 +623,9 @@ msgstr "Partitie openen mislukt"
 msgid "Failed updating"
 msgstr "Updaten mislukt"
 
+msgid "Features"
+msgstr ""
+
 msgid "Feb"
 msgstr ""
 
@@ -775,10 +784,7 @@ msgid "How to Shutdown?"
 msgstr "Hoe uitzetten?"
 
 msgid "Import Categories"
-msgstr ""
-
-msgid "Import categories"
-msgstr "Importeer categorieën"
+msgstr "Importeer Categorieën"
 
 msgid "Import operation successfully completed."
 msgstr "Importeren succesvol afgerond"
@@ -978,6 +984,9 @@ msgstr "Geen URL of pad gespecificeerd."
 msgid "No WBFS or FAT/NTFS/EXT partition found"
 msgstr "Geen WBFS of FAT/NTFS/EXT partitie gevonden"
 
+msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
+msgstr ""
+
 msgid "No cheats were selected"
 msgstr "Geen cheats geselecteerd"
 
@@ -1153,7 +1162,7 @@ msgid "Rename Game on WBFS"
 msgstr "Spel hernoemen op WBFS"
 
 msgid "Rename category"
-msgstr ""
+msgstr "Hernoem categorie"
 
 msgid "Reset"
 msgstr ""
@@ -1505,6 +1514,15 @@ msgstr ""
 msgid "Wiilight"
 msgstr "Wii verlichting"
 
+msgid "Wiinnertag"
+msgstr ""
+
+msgid "Wiinnertag Path"
+msgstr ""
+
+msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
+msgstr ""
+
 msgid "Wrong Password"
 msgstr "Fout wachtwoord"
 
@@ -1576,6 +1594,9 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "Import categories"
+#~ msgstr "Importeer categorieën"
 
 #~ msgid "Import categories from WiiTDB"
 #~ msgstr "Importeer categorieën van WiiTDB"

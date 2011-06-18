@@ -73,6 +73,9 @@ class CategoryPrompt : public GuiWindow, public sigslot::has_slots<>
         GuiTrigger trigA;
         GuiTrigger trigB;
         GuiTrigger trigHome;
+        GuiTrigger trigPlus;
+        GuiTrigger trigMinus;
+        GuiTrigger trig1;
 };
 
 #endif

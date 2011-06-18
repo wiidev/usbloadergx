@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-14 16:22+0200\n"
+"POT-Creation-Date: 2011-06-18 08:44+0200\n"
 "PO-Revision-Date: 2011-03-10 21:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: Cambo\n"
@@ -141,6 +141,9 @@ msgstr "Tutte le funzioni di USB Loader GX sono sbloccate."
 msgid "Alternate DOL"
 msgstr "DOL Alternativo"
 
+msgid "An example file was created here:"
+msgstr ""
+
 msgid "Anti"
 msgstr ""
 
@@ -206,6 +209,9 @@ msgstr "Blocca Scaricam. Copertine"
 
 msgid "Block Custom Paths"
 msgstr "Blocca Modifica Cartelle"
+
+msgid "Block Feature Settings"
+msgstr ""
 
 msgid "Block Game Install"
 msgstr "Blocca Install. Giochi"
@@ -617,6 +623,9 @@ msgstr "Non si accede alla partizione"
 msgid "Failed updating"
 msgstr "Aggiornamento fallito"
 
+msgid "Features"
+msgstr ""
+
 msgid "Feb"
 msgstr "febbraio"
 
@@ -775,9 +784,6 @@ msgid "How to Shutdown?"
 msgstr "Spegnimento Wii?"
 
 msgid "Import Categories"
-msgstr ""
-
-msgid "Import categories"
 msgstr ""
 
 msgid "Import operation successfully completed."
@@ -977,6 +983,9 @@ msgstr "Nessuna cartella o URL specificata."
 
 msgid "No WBFS or FAT/NTFS/EXT partition found"
 msgstr "Nessuna partizione WBFS o FAT/NTFS/EXT trovata"
+
+msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr "Non è stato selezionato alcun trucco"
@@ -1504,6 +1513,15 @@ msgstr "WiiTDB è aggiornato."
 
 msgid "Wiilight"
 msgstr "Illuminazione Wii"
+
+msgid "Wiinnertag"
+msgstr ""
+
+msgid "Wiinnertag Path"
+msgstr ""
+
+msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
+msgstr ""
 
 msgid "Wrong Password"
 msgstr "Password Errata"

@@ -38,6 +38,7 @@ enum
     CCustomPathsSM,
     CGameLoadSM,
     CUninstallSM,
+    CFeatureSettings,
 };
 
 class SettingsMenu : public GuiWindow

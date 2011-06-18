@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-14 16:22+0200\n"
+"POT-Creation-Date: 2011-06-18 08:44+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -141,6 +141,9 @@ msgstr "Kaikki asetukset on nyt käytettävissä."
 msgid "Alternate DOL"
 msgstr "Vaihtoehto DOL"
 
+msgid "An example file was created here:"
+msgstr ""
+
 msgid "Anti"
 msgstr ""
 
@@ -205,6 +208,9 @@ msgid "Block Cover Downloads"
 msgstr ""
 
 msgid "Block Custom Paths"
+msgstr ""
+
+msgid "Block Feature Settings"
 msgstr ""
 
 msgid "Block Game Install"
@@ -617,6 +623,9 @@ msgstr "Osion avaus epäonnistui"
 msgid "Failed updating"
 msgstr ""
 
+msgid "Features"
+msgstr ""
+
 msgid "Feb"
 msgstr "helmi"
 
@@ -775,9 +784,6 @@ msgid "How to Shutdown?"
 msgstr "Miten sammutetaan?"
 
 msgid "Import Categories"
-msgstr ""
-
-msgid "Import categories"
 msgstr ""
 
 msgid "Import operation successfully completed."
@@ -976,6 +982,9 @@ msgid "No URL or Path specified."
 msgstr ""
 
 msgid "No WBFS or FAT/NTFS/EXT partition found"
+msgstr ""
+
+msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
 msgstr ""
 
 msgid "No cheats were selected"
@@ -1503,6 +1512,15 @@ msgid "WiiTDB is up to date."
 msgstr ""
 
 msgid "Wiilight"
+msgstr ""
+
+msgid "Wiinnertag"
+msgstr ""
+
+msgid "Wiinnertag Path"
+msgstr ""
+
+msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
 msgstr ""
 
 msgid "Wrong Password"

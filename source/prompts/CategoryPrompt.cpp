@@ -38,13 +38,16 @@ CategoryPrompt::CategoryPrompt(const string &title)
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     trigB.SetSimpleTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
     trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, PAD_BUTTON_START);
+    trigPlus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_PLUS | WPAD_CLASSIC_BUTTON_PLUS, PAD_TRIGGER_R);
+    trigMinus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, PAD_TRIGGER_L);
+    trig1.SetButtonOnlyTrigger(-1, WPAD_BUTTON_1 | WPAD_CLASSIC_BUTTON_Y, PAD_TRIGGER_Z);
 
     btnOutline = Resources::GetImageData("button_dialogue_box.png");
     bgImgData = Resources::GetImageData("categoryPrompt.png");
     browserImgData = Resources::GetImageData("bg_options.png");
     addImgData = Resources::GetImageData("add.png");
     deleteImgData = Resources::GetImageData("remove.png");
-    editImgData = Resources::GetImageData("rename.png");
+    editImgData = Resources::GetImageData("one.png");
 
     bgImg = new GuiImage(bgImgData);
     Append(bgImg);
@@ -82,6 +85,7 @@ CategoryPrompt::CategoryPrompt(const string &title)
     addButton->SetSoundOver(btnSoundOver);
     addButton->SetSoundClick(btnSoundClick);
     addButton->SetTrigger(&trigA);
+    addButton->SetTrigger(&trigPlus);
     addButton->SetEffectGrow();
     Append(addButton);
 
@@ -99,6 +103,7 @@ CategoryPrompt::CategoryPrompt(const string &title)
     deleteButton->SetSoundOver(btnSoundOver);
     deleteButton->SetSoundClick(btnSoundClick);
     deleteButton->SetTrigger(&trigA);
+    deleteButton->SetTrigger(&trigMinus);
     deleteButton->SetEffectGrow();
     Append(deleteButton);
 
@@ -116,6 +121,7 @@ CategoryPrompt::CategoryPrompt(const string &title)
     editButton->SetSoundOver(btnSoundOver);
     editButton->SetSoundClick(btnSoundClick);
     editButton->SetTrigger(&trigA);
+    editButton->SetTrigger(&trig1);
     editButton->SetEffectGrow();
     Append(editButton);
 
@@ -200,6 +206,7 @@ int CategoryPrompt::Show()
         {
             gprintf("\thomeButton clicked\n");
             WindowExitPrompt();
+            mainWindow->SetState(STATE_DISABLED);
             SetState(STATE_DEFAULT);
             homeButton->ResetState();
         }
@@ -216,6 +223,7 @@ int CategoryPrompt::Show()
             if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_CATEGORIES_MOD))
             {
                 WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked to be able to use this." ), tr( "OK" ));
+                mainWindow->SetState(STATE_DISABLED);
                 SetState(STATE_DEFAULT);
                 addButton->ResetState();
                 continue;
@@ -227,11 +235,11 @@ int CategoryPrompt::Show()
             if(result)
             {
                 GameCategories.CategoryList.AddCategory(entered);
-                GameCategories.CategoryList.findCategory(entered);
                 browserRefresh();
                 markChanged();
             }
 
+            mainWindow->SetState(STATE_DISABLED);
             SetState(STATE_DEFAULT);
             addButton->ResetState();
         }
@@ -241,6 +249,7 @@ int CategoryPrompt::Show()
             if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_CATEGORIES_MOD))
             {
                 WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked to be able to use this." ), tr( "OK" ));
+                mainWindow->SetState(STATE_DISABLED);
                 SetState(STATE_DEFAULT);
                 deleteButton->ResetState();
                 continue;
@@ -249,6 +258,7 @@ int CategoryPrompt::Show()
             if(browser->GetSelected() == 0)
             {
                 WindowPrompt(tr("Error"), tr("You cannot delete this category."), tr("OK"));
+                mainWindow->SetState(STATE_DISABLED);
                 SetState(STATE_DEFAULT);
                 deleteButton->ResetState();
                 continue;
@@ -263,12 +273,12 @@ int CategoryPrompt::Show()
                 int categoryID = GameCategories.CategoryList.getCurrentID();
                 GameCategories.CategoryList.RemoveCategory(categoryID);
                 GameCategories.RemoveCategory(categoryID);
-                GameCategories.CategoryList.goToFirst();
 
                 browserRefresh();
                 markChanged();
             }
 
+            mainWindow->SetState(STATE_DISABLED);
             SetState(STATE_DEFAULT);
             deleteButton->ResetState();
         }
@@ -278,8 +288,8 @@ int CategoryPrompt::Show()
             if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_CATEGORIES_MOD))
             {
                 WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked to be able to use this." ), tr( "OK" ));
+                mainWindow->SetState(STATE_DISABLED);
                 SetState(STATE_DEFAULT);
-                editButton->ResetState();
                 continue;
             }
 
@@ -294,11 +304,11 @@ int CategoryPrompt::Show()
             if(result)
             {
                 GameCategories.CategoryList.SetCategory(GameCategories.CategoryList.getCurrentID(), entered);
-                GameCategories.CategoryList.goToFirst();
                 browserRefresh();
                 markChanged();
             }
 
+            mainWindow->SetState(STATE_DISABLED);
             SetState(STATE_DEFAULT);
             editButton->ResetState();
         }

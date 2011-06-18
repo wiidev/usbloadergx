@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-14 16:22+0200\n"
+"POT-Creation-Date: 2011-06-18 08:44+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -141,6 +141,9 @@ msgstr "USB Loader GX 功能已解锁."
 msgid "Alternate DOL"
 msgstr "可选择DOL文件"
 
+msgid "An example file was created here:"
+msgstr ""
+
 msgid "Anti"
 msgstr "防止"
 
@@ -206,6 +209,9 @@ msgstr "下载封面"
 
 msgid "Block Custom Paths"
 msgstr "自制路径"
+
+msgid "Block Feature Settings"
+msgstr ""
 
 msgid "Block Game Install"
 msgstr "安装游戏"
@@ -617,6 +623,9 @@ msgstr "打开分区失败"
 msgid "Failed updating"
 msgstr "升级失败"
 
+msgid "Features"
+msgstr ""
+
 msgid "Feb"
 msgstr "二月"
 
@@ -775,9 +784,6 @@ msgid "How to Shutdown?"
 msgstr "如何关机?"
 
 msgid "Import Categories"
-msgstr ""
-
-msgid "Import categories"
 msgstr ""
 
 msgid "Import operation successfully completed."
@@ -977,6 +983,9 @@ msgstr "未指定URL或路径."
 
 msgid "No WBFS or FAT/NTFS/EXT partition found"
 msgstr "找不到 WBFS 或 FAT/NTFS/EXT 分区"
+
+msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr "没有选择作弊码"
@@ -1504,6 +1513,15 @@ msgstr "WiiTDB已更新."
 
 msgid "Wiilight"
 msgstr "光驱灯"
+
+msgid "Wiinnertag"
+msgstr ""
+
+msgid "Wiinnertag Path"
+msgstr ""
+
+msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
+msgstr ""
 
 msgid "Wrong Password"
 msgstr "密码错误"

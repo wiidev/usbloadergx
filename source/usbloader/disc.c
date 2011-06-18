@@ -148,10 +148,12 @@ void __Disc_SetVMode(void)
 
 	/* Set video mode */
 	if (vmode != NULL)
+	{
 		VIDEO_Configure(vmode);
+	}
 
 	/* Setup video  */
-	VIDEO_SetBlack(FALSE);
+	VIDEO_SetBlack(TRUE);
 	VIDEO_Flush();
 	VIDEO_WaitVSync();
 	if (vmode->viTVMode & VI_NON_INTERLACE)
@@ -273,13 +275,6 @@ s32 Disc_JumpToEntrypoint(bool enablecheat, u32 dolparameter)
 
     /* Set time */
     __Disc_SetTime();
-
-    // Anti-green screen fix
-    VIDEO_SetBlack(TRUE);
-    VIDEO_Flush();
-    VIDEO_WaitVSync();
-	VIDEO_WaitVSync();
-    gprintf("USB Loader GX is done.\n");
 
     /* Shutdown IOS subsystems */
     extern void __exception_closeall();

@@ -105,7 +105,8 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
         ResumeGui();
         mainWindow->SetState(STATE_DISABLED);
         CategorySelectPrompt promptMenu(DiscHeader);
-        promptMenu.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
+        promptMenu.SetAlignment(thAlign("center - category game prompt align hor"), thAlign("middle - category game prompt align ver"));
+        promptMenu.SetPosition(thInt("0 - category game prompt pos x"), thInt("0 - category game prompt pos y"));
         promptMenu.SetEffect(EFFECT_FADE, 20);
         mainWindow->Append(&promptMenu);
 

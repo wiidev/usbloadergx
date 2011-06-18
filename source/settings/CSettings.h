@@ -73,6 +73,7 @@ class CSettings
         char update_path[100];
         char homebrewapps_path[100];
         char WDMpath[100];
+        char WiinnertagPath[100];
         short videomode;
         short language;
         short ocarina;
@@ -119,6 +120,7 @@ class CSettings
         u32 ParentalBlocks;
         f32 WSFactor;
         f32 FontScaleFactor;
+        short Wiinnertag;
         std::vector<u32> EnabledCategories;
     protected:
         bool ValidVersion(FILE * file);

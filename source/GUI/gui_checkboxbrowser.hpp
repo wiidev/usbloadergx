@@ -51,6 +51,8 @@ class GuiCheckboxBrowser : public GuiElement, public sigslot::has_slots<>
         int selectedItem;
         int pageIndex;
         int pressedChan;
+        bool blocked;
+
         GuiScrollbar scrollBar;
         GuiTrigger trigA;
         GuiImage *backgroundImg;

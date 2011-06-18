@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-14 16:22+0200\n"
+"POT-Creation-Date: 2011-06-18 08:50+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi, papa, ichiroling\n"
@@ -141,6 +141,9 @@ msgstr "使用制限が解除されました"
 msgid "Alternate DOL"
 msgstr "代替DOL起動"
 
+msgid "An example file was created here:"
+msgstr ""
+
 msgid "Anti"
 msgstr "アンチ"
 
@@ -175,7 +178,7 @@ msgid "Author(s):"
 msgstr "制作者:"
 
 msgid "Auto"
-msgstr ""
+msgstr "自動"
 
 msgid "AutoInit Network"
 msgstr "自動ネット接続"
@@ -207,6 +210,9 @@ msgstr "カバーのダウンロードを制限"
 msgid "Block Custom Paths"
 msgstr "パスの変更を制限"
 
+msgid "Block Feature Settings"
+msgstr ""
+
 msgid "Block Game Install"
 msgstr "ゲームの追加を制限"
 
@@ -226,10 +232,10 @@ msgid "Block HBC Menu"
 msgstr "HBCメニューを制限"
 
 msgid "Block IOS Reload"
-msgstr "IOSの再読み込みを制限"
+msgstr "IOS再読み込み防止"
 
 msgid "Block Loader Settings"
-msgstr "読み込み設定を制限"
+msgstr "ローダーの設定を制限"
 
 msgid "Block Parental Settings"
 msgstr "使用制限設定を制限"
@@ -376,7 +382,7 @@ msgid "Could not open Disc"
 msgstr "ﾃﾞｨｽｸを開けませんでした"
 
 msgid "Could not open the WiiTDB.xml file."
-msgstr ""
+msgstr "wiitdb.xmlを開けませんでした"
 
 msgid "Could not open wiitdb.xml."
 msgstr "wiitdb.xmlを開けませんでした"
@@ -617,6 +623,9 @@ msgstr "領域を開けませんでした"
 msgid "Failed updating"
 msgstr "更新に失敗しました"
 
+msgid "Features"
+msgstr ""
+
 msgid "Feb"
 msgstr "2月"
 
@@ -775,9 +784,6 @@ msgid "How to Shutdown?"
 msgstr "終了方法の選択"
 
 msgid "Import Categories"
-msgstr ""
-
-msgid "Import categories"
 msgstr "カテゴリをインポート"
 
 msgid "Import operation successfully completed."
@@ -978,6 +984,9 @@ msgstr "URLかパスが指定されていません"
 msgid "No WBFS or FAT/NTFS/EXT partition found"
 msgstr "使用できる領域が見つかりません"
 
+msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
+msgstr ""
+
 msgid "No cheats were selected"
 msgstr "何も選ばれていません"
 
@@ -1153,7 +1162,7 @@ msgid "Rename Game on WBFS"
 msgstr "WBFS内のゲーム名を変更"
 
 msgid "Rename category"
-msgstr ""
+msgstr "カテゴリの名前を変更"
 
 msgid "Reset"
 msgstr "リセット"
@@ -1505,6 +1514,15 @@ msgstr "WiiTDBが更新されました"
 msgid "Wiilight"
 msgstr "スロット点灯機能"
 
+msgid "Wiinnertag"
+msgstr ""
+
+msgid "Wiinnertag Path"
+msgstr ""
+
+msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
+msgstr ""
+
 msgid "Wrong Password"
 msgstr "暗証番号が違います"
 
@@ -1576,6 +1594,9 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "Import categories"
+#~ msgstr "カテゴリをインポート"
 
 #~ msgid "Import categories from WiiTDB"
 #~ msgstr "WiiTDBからカテゴリをインポート"

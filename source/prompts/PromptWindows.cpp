@@ -95,8 +95,6 @@ int OnScreenNumpad(char * var, u32 maxlen)
     numpad.Append(&okBtn);
     numpad.Append(&cancelBtn);
 
-    int oldState = mainWindow->GetState();
-
     HaltGui();
     mainWindow->SetState(STATE_DISABLED);
     mainWindow->Append(&numpad);
@@ -119,7 +117,7 @@ int OnScreenNumpad(char * var, u32 maxlen)
 
     HaltGui();
     mainWindow->Remove(&numpad);
-    mainWindow->SetState(oldState);
+    mainWindow->SetState(STATE_DEFAULT);
     ResumeGui();
     gprintf("\t%s", (save == 1 ? "saved" : "discarded"));
     return save;
@@ -170,8 +168,6 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
     keyboard.Append(&okBtn);
     keyboard.Append(&cancelBtn);
 
-    int oldState = mainWindow->GetState();
-
     HaltGui();
     mainWindow->SetState(STATE_DISABLED);
     mainWindow->Append(&keyboard);
@@ -194,7 +190,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
 
     HaltGui();
     mainWindow->Remove(&keyboard);
-    mainWindow->SetState(oldState);
+    mainWindow->SetState(STATE_DEFAULT);
     ResumeGui();
     gprintf("\t%s", (save ? "saved" : "discarded"));
     return save;
@@ -553,7 +549,6 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
     if(btn4Label)
         Window->AddButton(btn4Label);
 
-    int oldState = mainWindow->GetState();
     mainWindow->SetState(STATE_DISABLED);
     mainWindow->Append(Window);
     mainWindow->ChangeFocus(Window);
@@ -579,7 +574,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
 
     delete Window;
 
-    mainWindow->SetState(oldState);
+    mainWindow->SetState(STATE_DEFAULT);
     gprintf(" %i\n", choice);
 
     return choice;
@@ -774,8 +769,6 @@ int WindowExitPrompt()
     promptWindow.Append(batteryBtn[2]);
     promptWindow.Append(batteryBtn[3]);
 
-    int oldState = mainWindow->GetState();
-
     HaltGui();
     mainWindow->SetState(STATE_DISABLED);
     mainWindow->Append(&promptWindow);
@@ -915,7 +908,7 @@ int WindowExitPrompt()
     homein->Stop();
     delete homein;
     mainWindow->Remove(&promptWindow);
-    mainWindow->SetState(oldState);
+    mainWindow->SetState(STATE_DEFAULT);
     while (homeout->IsPlaying() > 0)
         usleep(100);
     homeout->Stop();

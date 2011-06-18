@@ -144,3 +144,39 @@ inline const char * FullpathToFilename(const char *path)
 
     return Filename;
 }
+
+int replaceString(char *string, const char *replace, const char *replacement)
+{
+    if(!string || !replace || !replacement)
+        return -1;
+
+    char *strCpy = strdup(string);
+    if(!strCpy)
+        return -1;
+
+    char *ptr;
+    int replacelen = strlen(replace);
+
+    for(ptr = strCpy; *ptr != 0; string++, ptr++)
+    {
+        if(strncasecmp(ptr, replace, replacelen) == 0)
+        {
+            const char *ptr2 = replacement;
+            while(*ptr2 != 0)
+            {
+                *string = *ptr2;
+                string++;
+                ptr2++;
+            }
+            ptr += replacelen;
+        }
+
+        *string = *ptr;
+    }
+
+    *string = 0;
+
+    free(strCpy);
+
+    return 0;
+}

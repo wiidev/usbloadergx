@@ -67,6 +67,9 @@ void GuiCheckboxBrowser::SetImage(GuiImage *Img)
 void GuiCheckboxBrowser::Clear()
 {
     LOCK(this);
+    checkBoxDrawn.clear();
+    textLineDrawn.clear();
+
     for(u32 i = 0; i < checkBoxList.size(); ++i)
     {
         delete textLineList[i];
@@ -122,6 +125,7 @@ void GuiCheckboxBrowser::OnCheckboxClick(GuiButton *sender, int chan, const POIN
 
 void GuiCheckboxBrowser::onListChange(int SelItem, int SelInd)
 {
+    LOCK(this);
 	selectedItem = SelItem;
 	pageIndex = SelInd;
 	RefreshList();
@@ -130,6 +134,14 @@ void GuiCheckboxBrowser::onListChange(int SelItem, int SelInd)
 void GuiCheckboxBrowser::RefreshList()
 {
     LOCK(this);
+    while(pageIndex+checkBoxDrawn.size() > checkBoxList.size())
+        --pageIndex;
+
+    if(checkBoxDrawn.size() == 0)
+        selectedItem = 0;
+    else if(selectedItem >= (int) checkBoxDrawn.size())
+        selectedItem = checkBoxDrawn.size()-1;
+
 	for(u32 i = 0; i < checkBoxDrawn.size(); i++)
 	{
         checkBoxDrawn[i] = checkBoxList[pageIndex+i];
@@ -138,15 +150,15 @@ void GuiCheckboxBrowser::RefreshList()
         textLineDrawn[i] = textLineList[pageIndex+i];
         textLineDrawn[i]->SetPosition(25, 15+i*(checkBoxDrawn[i]->GetHeight()+6)+(checkBoxDrawn[i]->GetHeight()-textLineDrawn[i]->GetFontSize())/2+2);
 	}
+    scrollBar.SetSelectedItem(selectedItem);
+    scrollBar.SetSelectedIndex(pageIndex);
 }
 
 void GuiCheckboxBrowser::Draw()
 {
+    LOCK(this);
     if(backgroundImg)
         backgroundImg->Draw();
-
-    if(checkBoxList.size() >= (u32) maxSize)
-        scrollBar.Draw();
 
     for(u32 i = 0; i < checkBoxDrawn.size(); ++i)
     {
@@ -155,6 +167,9 @@ void GuiCheckboxBrowser::Draw()
     }
 
     markImg->Draw();
+
+    if(checkBoxList.size() >= (u32) maxSize)
+        scrollBar.Draw();
 }
 
 void GuiCheckboxBrowser::Update(GuiTrigger *t)
@@ -162,6 +177,7 @@ void GuiCheckboxBrowser::Update(GuiTrigger *t)
 	if(state == STATE_DISABLED || !t)
 		return;
 
+    LOCK(this);
     if(checkBoxList.size() >= maxSize)
 	    scrollBar.Update(t);
 
@@ -178,7 +194,6 @@ void GuiCheckboxBrowser::Update(GuiTrigger *t)
                 checkBoxDrawn[i]->ResetState();
             else if(i == (u32) selectedItem && checkBoxDrawn[i]->GetState() == STATE_DEFAULT)
                 checkBoxDrawn[selectedItem]->SetState(STATE_SELECTED, -1);
-
 
             checkBoxDrawn[i]->Update(t);
 

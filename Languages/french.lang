@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-14 16:22+0200\n"
+"POT-Creation-Date: 2011-06-18 08:44+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
@@ -141,6 +141,9 @@ msgstr "Toutes les fonctionnalités sont déverrouillées."
 msgid "Alternate DOL"
 msgstr "DOL alternatif"
 
+msgid "An example file was created here:"
+msgstr ""
+
 msgid "Anti"
 msgstr ""
 
@@ -206,6 +209,9 @@ msgstr "Bloquer Téléch. jaquettes"
 
 msgid "Block Custom Paths"
 msgstr "Bloquer Person. dossiers"
+
+msgid "Block Feature Settings"
+msgstr ""
 
 msgid "Block Game Install"
 msgstr "Bloquer Installation jeu"
@@ -617,6 +623,9 @@ msgstr "Échec accès partition"
 msgid "Failed updating"
 msgstr "Échec de la mise à jour"
 
+msgid "Features"
+msgstr ""
+
 msgid "Feb"
 msgstr "Fév"
 
@@ -776,9 +785,6 @@ msgstr "Arrêt de la Wii ?"
 
 msgid "Import Categories"
 msgstr ""
-
-msgid "Import categories"
-msgstr "Importer les catégories"
 
 msgid "Import operation successfully completed."
 msgstr "Catégories importées avec succès."
@@ -977,6 +983,9 @@ msgstr "Pas d'adresse ou de chemin spécifié"
 
 msgid "No WBFS or FAT/NTFS/EXT partition found"
 msgstr "Partition WBFS ou FAT/NTFS/EXT non trouvée"
+
+msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr "Aucune sélection de triches"
@@ -1505,6 +1514,15 @@ msgstr "WiiTDB est à jour."
 msgid "Wiilight"
 msgstr "Illumination Wii"
 
+msgid "Wiinnertag"
+msgstr ""
+
+msgid "Wiinnertag Path"
+msgstr ""
+
+msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
+msgstr ""
+
 msgid "Wrong Password"
 msgstr "Mot de passe incorrect"
 
@@ -1576,6 +1594,9 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "Import categories"
+#~ msgstr "Importer les catégories"
 
 #~ msgid "Import categories from WiiTDB"
 #~ msgstr "Importer les catégories"

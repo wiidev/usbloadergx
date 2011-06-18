@@ -64,6 +64,7 @@ void CategorySwitchPrompt::onBrowserRefresh()
     while(GameCategories.CategoryList.goToNext());
 
     GameCategories.CategoryList.goToFirst();
+    browser->RefreshList();
 }
 
 void CategorySwitchPrompt::OnCheckboxClick(GuiCheckbox *checkBox, int index)

@@ -854,13 +854,17 @@ static int InternalShowGameInfo(char *ID)
 
         else if(LeftBtn.GetState() == STATE_CLICKED)
         {
-            choice = 3;
+            if(gameList.size() > 0)
+                choice = 3;
+            LeftBtn.ResetState();
             break;
         }
 
         else if(RightBtn.GetState() == STATE_CLICKED)
         {
-            choice = 4;
+            if(gameList.size() > 0)
+                choice = 4;
+            RightBtn.ResetState();
             break;
         }
 
@@ -1053,7 +1057,7 @@ int showGameInfo(int gameSelected)
         {
             --gameSelected;
             if(gameSelected < 0)
-                gameSelected = 0;
+                gameSelected = gameList.size()-1;
         }
         else if(choice == 4)
         {

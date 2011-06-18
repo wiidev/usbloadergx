@@ -323,6 +323,9 @@ extern const u32 nunchuk_png_size;
 extern const u8 nunchukR_png[];
 extern const u32 nunchukR_png_size;
 
+extern const u8 one_png[];
+extern const u32 one_png_size;
+
 extern const u8 oneButtonScroll_png[];
 extern const u32 oneButtonScroll_png_size;
 
@@ -388,9 +391,6 @@ extern const u32 rankIcon_png_size;
 
 extern const u8 remove_png[];
 extern const u32 remove_png_size;
-
-extern const u8 rename_png[];
-extern const u32 rename_png_size;
 
 extern const u8 rplayer1_point_png[];
 extern const u32 rplayer1_point_png_size;
@@ -684,6 +684,7 @@ RecourceFile Resources::RecourceFiles[] =
 	{"not_favorite.png", not_favorite_png, not_favorite_png_size, NULL, 0},
 	{"nunchuk.png", nunchuk_png, nunchuk_png_size, NULL, 0},
 	{"nunchukR.png", nunchukR_png, nunchukR_png_size, NULL, 0},
+	{"one.png", one_png, one_png_size, NULL, 0},
 	{"oneButtonScroll.png", oneButtonScroll_png, oneButtonScroll_png_size, NULL, 0},
 	{"pageindicator.png", pageindicator_png, pageindicator_png_size, NULL, 0},
 	{"pegi_12.png", pegi_12_png, pegi_12_png_size, NULL, 0},
@@ -706,7 +707,6 @@ RecourceFile Resources::RecourceFiles[] =
 	{"progressbar_outline.png", progressbar_outline_png, progressbar_outline_png_size, NULL, 0},
 	{"rankIcon.png", rankIcon_png, rankIcon_png_size, NULL, 0},
 	{"remove.png", remove_png, remove_png_size, NULL, 0},
-	{"rename.png", rename_png, rename_png_size, NULL, 0},
 	{"rplayer1_point.png", rplayer1_point_png, rplayer1_point_png_size, NULL, 0},
 	{"rplayer2_point.png", rplayer2_point_png, rplayer2_point_png_size, NULL, 0},
 	{"rplayer3_point.png", rplayer3_point_png, rplayer3_point_png_size, NULL, 0},

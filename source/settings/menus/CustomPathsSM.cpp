@@ -49,6 +49,7 @@ CustomPathsSM::CustomPathsSM()
     Options->SetName(Idx++, tr("WIP Patches Path"));
     Options->SetName(Idx++, tr("Languagefiles Path"));
     Options->SetName(Idx++, tr("WDM Files Path"));
+    Options->SetName(Idx++, tr("Wiinnertag Path"));
 
     SetOptionValues();
 }
@@ -101,6 +102,9 @@ void CustomPathsSM::SetOptionValues()
 
     //! Settings: WDM Files Path
     Options->SetValue(Idx++, Settings.WDMpath);
+
+    //! Settings: Wiinnertag Path
+    Options->SetValue(Idx++, Settings.WiinnertagPath);
 }
 
 int CustomPathsSM::GetMenuInternal()
@@ -215,6 +219,13 @@ int CustomPathsSM::GetMenuInternal()
     {
         titleTxt->SetText(tr( "WDM Files Path" ));
         ChangePath(Settings.WDMpath, sizeof(Settings.WDMpath));
+    }
+
+    //! Settings: Wiinnertag Path
+    else if (ret == ++Idx)
+    {
+        titleTxt->SetText(tr( "Wiinnertag Path" ));
+        ChangePath(Settings.WiinnertagPath, sizeof(Settings.WiinnertagPath));
     }
 
     //! Global set back of the titleTxt after a change

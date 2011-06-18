@@ -1,11 +1,11 @@
 # USB Loader GX
-# german language source file - r1087
+# german language source file - r1089
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-14 16:22+0200\n"
+"POT-Creation-Date: 2011-06-18 08:50+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -141,6 +141,9 @@ msgstr "Alle Funktionen des USB Loader GX sind jetzt freigeschaltet."
 msgid "Alternate DOL"
 msgstr "Alternative DOL"
 
+msgid "An example file was created here:"
+msgstr ""
+
 msgid "Anti"
 msgstr "Anti"
 
@@ -175,7 +178,7 @@ msgid "Author(s):"
 msgstr "Autor(en)"
 
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 msgid "AutoInit Network"
 msgstr "Autoinit. Netzwerk"
@@ -206,6 +209,9 @@ msgstr "Blocke Cover-Downloads"
 
 msgid "Block Custom Paths"
 msgstr "Blocke eigene Pfade"
+
+msgid "Block Feature Settings"
+msgstr ""
 
 msgid "Block Game Install"
 msgstr "Blocke Spieleinstallation"
@@ -617,6 +623,9 @@ msgstr "Öffnen der Partition fehlgeschlagen"
 msgid "Failed updating"
 msgstr "Updaten fehlgeschlagen"
 
+msgid "Features"
+msgstr ""
+
 msgid "Feb"
 msgstr "Februar"
 
@@ -775,9 +784,6 @@ msgid "How to Shutdown?"
 msgstr "Wie soll ausgeschaltet werden?"
 
 msgid "Import Categories"
-msgstr ""
-
-msgid "Import categories"
 msgstr "Importiere Kategorien"
 
 msgid "Import operation successfully completed."
@@ -978,6 +984,9 @@ msgstr "Keine URL oder kein Pfad spezifiziert"
 msgid "No WBFS or FAT/NTFS/EXT partition found"
 msgstr "Keine WBFS oder FAT/NTFS/EXT Partition vorhanden"
 
+msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
+msgstr ""
+
 msgid "No cheats were selected"
 msgstr "Es wurden keine Cheats ausgewählt."
 
@@ -1153,7 +1162,7 @@ msgid "Rename Game on WBFS"
 msgstr "Spiel umbenennen"
 
 msgid "Rename category"
-msgstr ""
+msgstr "Kategorie umbenennen"
 
 msgid "Reset"
 msgstr "Zurücksetzen"
@@ -1505,6 +1514,15 @@ msgstr "WiiTDB ist aktuell."
 msgid "Wiilight"
 msgstr "Licht am Laufwerk"
 
+msgid "Wiinnertag"
+msgstr ""
+
+msgid "Wiinnertag Path"
+msgstr ""
+
+msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
+msgstr ""
+
 msgid "Wrong Password"
 msgstr "Falsches Passwort"
 
@@ -1576,6 +1594,9 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "Import categories"
+#~ msgstr "Importiere Kategorien"
 
 #~ msgid "Import categories from WiiTDB"
 #~ msgstr "Import. Kategorien (WiiTDB)"

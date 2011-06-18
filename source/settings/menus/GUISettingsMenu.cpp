@@ -121,13 +121,10 @@ GuiSettingsMenu::GuiSettingsMenu()
     Options->SetName(Idx++, "%s", tr( "Wiilight" ));
     Options->SetName(Idx++, "%s", tr( "Rumble" ));
     Options->SetName(Idx++, "%s", tr( "AutoInit Network" ));
-    Options->SetName(Idx++, "%s", tr( "Titles from WiiTDB" ));
-    Options->SetName(Idx++, "%s", tr( "Cache Titles" ));
     Options->SetName(Idx++, "%s", tr( "Screensaver" ));
     Options->SetName(Idx++, "%s", tr( "Mark new games" ));
     Options->SetName(Idx++, "%s", tr( "Show Free Space" ));
     Options->SetName(Idx++, "%s", tr( "HOME Menu" ));
-    Options->SetName(Idx++, "%s", tr( "Import Categories" ));
 
     SetOptionValues();
 
@@ -199,12 +196,6 @@ void GuiSettingsMenu::SetOptionValues()
     //! Settings: AutoInit Network
     Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.autonetwork] ));
 
-    //! Settings: Titles from WiiTDB
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.titlesOverride] ));
-
-    //! Settings: Cache Titles
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.CacheTitles] ));
-
     //! Settings: Screensaver
     Options->SetValue(Idx++, "%s", tr( ScreensaverText[Settings.screensaver] ));
 
@@ -216,9 +207,6 @@ void GuiSettingsMenu::SetOptionValues()
 
     //! Settings: Home Menu style
     Options->SetValue(Idx++, "%s", tr( HomeMenuText[Settings.HomeMenu] ));
-
-    //! Settings: Import categories from WiiTDB
-    Options->SetValue(Idx++, " ");
 }
 
 int GuiSettingsMenu::GetMenuInternal()
@@ -366,21 +354,6 @@ int GuiSettingsMenu::GetMenuInternal()
         if (++Settings.autonetwork >= MAX_ON_OFF) Settings.autonetwork = 0;
     }
 
-    //! Settings: Titles from WiiTDB
-    else if (ret == ++Idx)
-    {
-        if (++Settings.titlesOverride >= MAX_ON_OFF) Settings.titlesOverride = 0;
-    }
-
-    //! Settings: Cache Titles
-    else if (ret == ++Idx)
-    {
-        if (++Settings.CacheTitles >= MAX_ON_OFF) Settings.CacheTitles = 0;
-
-        if(Settings.CacheTitles) //! create new cache file
-            GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
-    }
-
     //! Settings: Screensaver
     else if (ret == ++Idx)
     {
@@ -405,27 +378,6 @@ int GuiSettingsMenu::GetMenuInternal()
     else if (ret == ++Idx)
     {
         if (++Settings.HomeMenu >= HOME_MENU_MAX_CHOICE) Settings.HomeMenu = 0;
-    }
-
-    //! Settings: Import categories from WiiTDB
-    else if (ret == ++Idx)
-    {
-        int choice = WindowPrompt(tr("Import categories"), tr("Are you sure you want to import game categories from WiiTDB?"), tr("Yes"), tr("Cancel"));
-        if(choice)
-        {
-            char xmlpath[300];
-            snprintf(xmlpath, sizeof(xmlpath), "%swiitdb.xml", Settings.titlestxt_path);
-            if(!GameCategories.ImportFromWiiTDB(xmlpath))
-            {
-                WindowPrompt(tr("Error"), tr("Could not open the WiiTDB.xml file."), tr("OK"));
-            }
-            else
-            {
-                GameCategories.Save();
-                GameCategories.CategoryList.goToFirst();
-                WindowPrompt(tr("Import categories"), tr("Import operation successfully completed."), tr("OK"));
-            }
-        }
     }
 
     SetOptionValues();

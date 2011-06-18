@@ -1157,7 +1157,8 @@ void GameBrowseMenu::CheckDiscSlotUpdate()
     {
         mainWindow->SetState(STATE_DISABLED);
         CategorySwitchPrompt promptMenu;
-        promptMenu.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
+        promptMenu.SetAlignment(thAlign("center - category switch prompt align hor"), thAlign("middle - category switch prompt align ver"));
+        promptMenu.SetPosition(thInt("0 - category switch prompt pos x"), thInt("0 - category switch prompt pos y"));
         promptMenu.SetEffect(EFFECT_FADE, 20);
         mainWindow->Append(&promptMenu);
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-14 16:37+0200\n"
+"POT-Creation-Date: 2011-06-14 20:50+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -481,6 +481,18 @@ msgstr ""
 msgid "1 - show game count: 1 for on and 0 for off"
 msgstr ""
 
+msgid "center - category switch prompt align hor"
+msgstr ""
+
+msgid "middle - category switch prompt align ver"
+msgstr ""
+
+msgid "0 - category switch prompt pos x"
+msgstr ""
+
+msgid "0 - category switch prompt pos y"
+msgstr ""
+
 msgid "r=55 g=190 b=237 a=255 - game id text color"
 msgstr ""
 
@@ -632,6 +644,18 @@ msgid "r=0 g=0 b=0 a=255 - game window details button text color"
 msgstr ""
 
 msgid "r=30 g=30 b=240 a=255 - game window details button over text color"
+msgstr ""
+
+msgid "center - category game prompt align hor"
+msgstr ""
+
+msgid "middle - category game prompt align ver"
+msgstr ""
+
+msgid "0 - category game prompt pos x"
+msgstr ""
+
+msgid "0 - category game prompt pos y"
 msgstr ""
 
 msgid "center - settings option browser align hor"

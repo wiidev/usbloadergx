@@ -546,6 +546,11 @@ int GameWindow::MainLoop()
             gameSelected = (gameSelected + 1) % gameList.size();
             ChangeGame(LEFT);
         }
+        else if(Settings.xflip == XFLIP_WTF)
+        {
+            gameSelected = (gameSelected - 1 + gameList.size()) % gameList.size();
+            ChangeGame(RIGHT);
+        }
         else
         {
             gameSelected = (gameSelected + 1) % gameList.size();
@@ -566,6 +571,11 @@ int GameWindow::MainLoop()
         {
             gameSelected = (gameSelected - 1 + gameList.size()) % gameList.size();
             ChangeGame(RIGHT);
+        }
+        else if(Settings.xflip == XFLIP_WTF)
+        {
+            gameSelected = (gameSelected + 1) % gameList.size();
+            ChangeGame(LEFT);
         }
         else
         {

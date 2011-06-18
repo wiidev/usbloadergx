@@ -31,6 +31,7 @@
 #include "ParentalControlSM.hpp"
 #include "SoundSettingsMenu.hpp"
 #include "CustomPathsSM.hpp"
+#include "FeatureSettingsMenu.hpp"
 
 GlobalSettings::GlobalSettings()
     : FlyingButtonsMenu(tr("Global Settings"))
@@ -70,6 +71,7 @@ void GlobalSettings::SetupMainButtons()
     SetMainButton(pos++, tr( "GUI Settings" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Loader Settings" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Parental Control" ), MainButtonImgData, MainButtonImgOverData);
+    SetMainButton(pos++, tr( "Features" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Sound" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Custom Paths" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Theme Menu" ), MainButtonImgData, MainButtonImgOverData);
@@ -126,6 +128,20 @@ void GlobalSettings::CreateSettingsMenu(int menuNr)
         HideMenu();
         ResumeGui();
         CurrentMenu = new ParentalControlSM();
+        Append(CurrentMenu);
+    }
+    //! Feature
+    else if(menuNr == Idx++)
+    {
+        if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_FEATURE_SETTINGS))
+        {
+            WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+            return;
+        }
+
+        HideMenu();
+        ResumeGui();
+        CurrentMenu = new FeatureSettingsMenu();
         Append(CurrentMenu);
     }
     //! Sound
@@ -250,6 +266,9 @@ void GlobalSettings::DeleteSettingsMenu()
             break;
         case CCustomPathsSM:
             delete ((CustomPathsSM *) CurrentMenu);
+            break;
+        case CFeatureSettings:
+            delete ((FeatureSettingsMenu *) CurrentMenu);
             break;
         case CSettingsMenu:
         default:

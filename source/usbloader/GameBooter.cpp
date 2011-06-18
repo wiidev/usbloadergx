@@ -16,6 +16,7 @@
 #include "usbloader/MountGamePartition.h"
 #include "usbloader/AlternateDOLOffsets.h"
 #include "settings/newtitles.h"
+#include "network/Wiinnertag.h"
 #include "patches/fst.h"
 #include "patches/gamepatches.h"
 #include "patches/wip.h"
@@ -169,6 +170,9 @@ int GameBooter::BootGame(const char * gameID)
 
     if (mountMethod == 2)
         return BootGCMode();
+
+    if(Settings.Wiinnertag)
+        Wiinnertag::TagGame(gameID);
 
     AppCleanUp();
 

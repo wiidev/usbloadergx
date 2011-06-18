@@ -1,5 +1,5 @@
-/***************************************************************************
- * Copyright (C) 2010
+/****************************************************************************
+ * Copyright (C) 2011
  * by Dimok
  *
  * This software is provided 'as-is', without any express or implied
@@ -20,28 +20,23 @@
  *
  * 3. This notice may not be removed or altered from any source
  * distribution.
- *
- * for WiiXplorer 2010
  ***************************************************************************/
-#ifndef __STRING_TOOLS_H
-#define __STRING_TOOLS_H
+#ifndef FEATURESETTINGS_MENU_HPP_
+#define FEATURESETTINGS_MENU_HPP_
 
-#ifdef __cplusplus
-extern "C" {
+#include "SettingsMenu.hpp"
+
+class FeatureSettingsMenu : public SettingsMenu
+{
+    public:
+        FeatureSettingsMenu();
+        virtual int GetType() { return CFeatureSettings; };
+    protected:
+        void SetOptionValues();
+        int GetMenuInternal();
+
+        OptionList GuiOptions;
+};
+
+
 #endif
-
-//! fmt and wfmt can only be used once at a session and the strings needs
-//! to be copied afterwards. A second use overwrites the first string.
-const char * fmt(const char * format, ...);
-const wchar_t * wfmt(const char * format, ...);
-bool char2wchar_t(const char * src, wchar_t * dest);
-int strtokcmp(const char * string, const char * compare, const char * separator);
-const char * FullpathToFilename(const char *path);
-int replaceString(char *string, const char *replace, const char *replacement);
-
-#ifdef __cplusplus
-}
-#endif //__cplusplus
-
-#endif /* __STRING_TOOLS_H */
-

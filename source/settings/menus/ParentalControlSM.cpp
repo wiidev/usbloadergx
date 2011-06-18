@@ -60,6 +60,7 @@ ParentalControlSM::ParentalControlSM()
     Options->SetName(Idx++, "%s", tr( "Block Gui Settings" ));
     Options->SetName(Idx++, "%s", tr( "Block Loader Settings" ));
     Options->SetName(Idx++, "%s", tr( "Block Parental Settings" ));
+    Options->SetName(Idx++, "%s", tr( "Block Feature Settings" ));
     Options->SetName(Idx++, "%s", tr( "Block Sound Settings" ));
     Options->SetName(Idx++, "%s", tr( "Block Custom Paths" ));
     Options->SetName(Idx++, "%s", tr( "Block Updates" ));
@@ -112,6 +113,9 @@ void ParentalControlSM::SetOptionValues()
 
     //! Settings: Block Parental Settings
     Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_PARENTAL_SETTINGS) != 0)]));
+
+    //! Settings: Block Feature Settings
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_FEATURE_SETTINGS) != 0)]));
 
     //! Settings: Block Sound Settings
     Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_SOUND_SETTINGS) != 0)]));
@@ -240,6 +244,12 @@ int ParentalControlSM::GetMenuInternal()
     else if (ret == ++Idx)
     {
         Settings.ParentalBlocks ^= BLOCK_PARENTAL_SETTINGS;
+    }
+
+    //! Settings: Block Feature Settings
+    else if (ret == ++Idx)
+    {
+        Settings.ParentalBlocks ^= BLOCK_FEATURE_SETTINGS;
     }
 
     //! Settings: Block Sound Settings
