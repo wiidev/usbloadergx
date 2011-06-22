@@ -1,6 +1,6 @@
 # USB Loader GX language source file.
-# japanese.lang - r1065J
-# don't delete/change this line (e).
+# japanese.lang - r1091
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
@@ -142,7 +142,7 @@ msgid "Alternate DOL"
 msgstr "代替DOL起動"
 
 msgid "An example file was created here:"
-msgstr ""
+msgstr "テンプレファイルが作成されました:"
 
 msgid "Anti"
 msgstr "アンチ"
@@ -211,7 +211,7 @@ msgid "Block Custom Paths"
 msgstr "パスの変更を制限"
 
 msgid "Block Feature Settings"
-msgstr ""
+msgstr "機能設定を制限"
 
 msgid "Block Game Install"
 msgstr "ゲームの追加を制限"
@@ -624,10 +624,10 @@ msgid "Failed updating"
 msgstr "更新に失敗しました"
 
 msgid "Features"
-msgstr ""
+msgstr "機能"
 
 msgid "Features Settings"
-msgstr ""
+msgstr "機能設定"
 
 msgid "Feb"
 msgstr "2月"
@@ -988,7 +988,7 @@ msgid "No WBFS or FAT/NTFS/EXT partition found"
 msgstr "使用できる領域が見つかりません"
 
 msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
-msgstr ""
+msgstr "Wiinnertag.xmlが設定パスにみつかりません。テンプレファイルを作成しますか?"
 
 msgid "No cheats were selected"
 msgstr "何も選ばれていません"
@@ -1521,10 +1521,10 @@ msgid "Wiinnertag"
 msgstr ""
 
 msgid "Wiinnertag Path"
-msgstr ""
+msgstr "Wiinnertag.xmlのパス"
 
 msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
-msgstr ""
+msgstr "Wiinnertagは自動ネット接続が有効になっている必要が有ります。有効にしますか?"
 
 msgid "Wrong Password"
 msgstr "暗証番号が違います"
@@ -1597,150 +1597,3 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
-
-#~ msgid "Import categories"
-#~ msgstr "カテゴリをインポート"
-
-#~ msgid "Import categories from WiiTDB"
-#~ msgstr "WiiTDBからカテゴリをインポート"
-
-#~ msgid " Wad Saved as:"
-#~ msgstr "WADを保存しました:"
-
-#~ msgid "Delete ?"
-#~ msgstr "削除しますか？"
-
-#~ msgid "Keep"
-#~ msgstr "保存"
-
-#~ msgid "Not a WAD file."
-#~ msgstr "WADﾌｧｲﾙではありません"
-
-#~ msgid "Uninstall"
-#~ msgstr "ｱﾝｲﾝｽﾄｰﾙ"
-
-#~ msgid "Author:"
-#~ msgstr "制作者:"
-
-#~ msgid "Do you want to load this theme?"
-#~ msgstr "このテーマに変更しますか？"
-
-#~ msgid "Loading default theme."
-#~ msgstr "標準のテーマにしますか?"
-
-#~ msgid "Theme path is changed."
-#~ msgstr "テーマのパスが変更されました"
-
-#~ msgid "Use IOS58"
-#~ msgstr "IOS58を使う"
-
-#~ msgid "Custom Disc Images"
-#~ msgstr "カスタムレーベル"
-
-#~ msgid "Download Boxart image?"
-#~ msgstr "画像をﾀﾞｳﾝﾛｰﾄﾞしますか？"
-
-#~ msgid "Download Discart image?"
-#~ msgstr "画像をﾀﾞｳﾝﾛｰﾄﾞしますか？"
-
-#~ msgid "Downloading file"
-#~ msgstr "ファイルをダウンロード中"
-
-#~ msgid "Missing files"
-#~ msgstr "個の画像"
-
-#~ msgid "Original Disc Images"
-#~ msgstr "純正レーベル"
-
-#~ msgid "files not found on the server!"
-#~ msgstr "個ｻｰﾊﾞｰにありませんでした…"
-
-#~ msgid "Disc Images"
-#~ msgstr "ディスク画像"
-
-#~ msgid "Downloading covers"
-#~ msgstr "カバーをダウンロード中"
-
-#~ msgid "Only Customs"
-#~ msgstr "カスタムのみ"
-
-#~ msgid "Only Original"
-#~ msgstr "公式のみ"
-
-#~ msgid "Trying custom Discarts"
-#~ msgstr "カスタムを試行中"
-
-#~ msgid "Trying original Discarts"
-#~ msgstr "公式を試行中"
-
-#~ msgid "Do you really want to delete:"
-#~ msgstr "本当に削除しますか?"
-
-#~ msgid "Do you want to use the alternate DOL that is known to be correct?"
-#~ msgstr "既知の代替DOLを利用しますか？"
-
-#~ msgid "0 (Locked and Unlocked Games)"
-#~ msgstr "全ゲーム"
-
-#~ msgid "1 (Unlocked Games Only)"
-#~ msgstr "制限のないゲームのみ"
-
-#~ msgid "All partitions"
-#~ msgstr "全ての領域"
-
-#~ msgid "BETA revisions"
-#~ msgstr "ﾍﾞｰﾀ版(評価版)"
-
-#~ msgid "Can't create file"
-#~ msgstr "ファイルを作れません"
-
-#~ msgid "Downloading Page List:"
-#~ msgstr "ﾘｽﾄをﾀﾞｳﾝﾛｰﾄﾞ中："
-
-#~ msgid "Full Shutdown"
-#~ msgstr "ｼｬｯﾄﾀﾞｳﾝ"
-
-#~ msgid "GXtheme.cfg not found in any subfolder."
-#~ msgstr "設定ﾌｧｲﾙ(GXtheme.cfg)が見つかりません"
-
-#~ msgid "GamesLevel"
-#~ msgstr "レベル"
-
-#~ msgid "Gerne:"
-#~ msgstr "ジャンル:"
-
-#~ msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-#~ msgstr "1ﾎﾞﾀﾝを押すと WiiTDB.zip のURLを表示します"
-
-#~ msgid "Installing content...Ok!"
-#~ msgstr "ｺﾝﾃﾝﾂをｲﾝｽﾄｰﾙ … 成功！"
-
-#~ msgid "No WBFS or FAT/NTFS partition found"
-#~ msgstr "使用できる領域が見つかりません"
-
-#~ msgid "Paste it into your browser to get your WiiTDB.zip."
-#~ msgstr "ﾌﾞﾗｳｻﾞに貼付けるとWiiTDB.zipをﾀﾞｳﾝﾛｰﾄﾞできます。"
-
-#~ msgid "Shutdown to Idle"
-#~ msgstr "スタンバイ"
-
-#~ msgid "Shutdown?"
-#~ msgstr "終了方法の選択"
-
-#~ msgid "Successfully extracted theme"
-#~ msgstr "ﾃｰﾏの解凍に成功しました"
-
-#~ msgid "The wad installation failed with error %ld"
-#~ msgstr "WADのｲﾝｽﾄｰﾙはエラー:%ldで失敗しました"
-
-#~ msgid "Theme Download Path"
-#~ msgstr "ﾃｰﾏのﾀﾞｳﾝﾛｰﾄﾞ先"
-
-#~ msgid "Transfer failed."
-#~ msgstr "転送できませんでした"
-
-#~ msgid "Unlock console to use this option."
-#~ msgstr "このｵﾌﾟｼｮﾝを使用する場合はﾛｯｸを解除してください"
-
-#~ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-#~ msgstr "%sWiiTDB_URL.txtにURLを保存しました"

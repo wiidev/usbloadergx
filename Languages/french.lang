@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# French.lang for r1087
+# French.lang for r1091
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -7,8 +7,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-06-18 11:39+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
-"Last-Translator: Cyan\n"
-"Language-Team: Badablek, Amour, ikya & Kin8\n"
+"Last-Translator: Kin8\n"
+"Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -124,10 +124,10 @@ msgid "AUTO"
 msgstr ""
 
 msgid "Add category"
-msgstr "Nouv. catégorie"
+msgstr "Ajout catégorie"
 
 msgid "All"
-msgstr ""
+msgstr "Tous"
 
 msgid "All Partitions"
 msgstr "Toutes les partitions"
@@ -142,7 +142,7 @@ msgid "Alternate DOL"
 msgstr "DOL alternatif"
 
 msgid "An example file was created here:"
-msgstr ""
+msgstr "Un fichier d'exemple a été créé ici :"
 
 msgid "Anti"
 msgstr ""
@@ -157,13 +157,13 @@ msgid "Apr"
 msgstr "Avr"
 
 msgid "Are you sure you want to delete this category?"
-msgstr "Êtes-vous sûr de vouloir supprimer cette catégorie ?"
+msgstr "Voulez-vous vraiment supprimer cette catégorie ?"
 
 msgid "Are you sure you want to import game categories from WiiTDB?"
-msgstr "Êtes-vous sûr de vouloir importer les catégories de jeux à partir de WiiTDB ?"
+msgstr "Voulez-vous vraiment importer les catégories de jeux à partir de WiiTDB ?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
-msgstr "Êtes-vous sûr de vouloir verrouiller USB loader GX ?"
+msgstr "Voulez-vous vraiment verrouiller USB loader GX ?"
 
 msgid "Are you sure you want to reset?"
 msgstr "Voulez-vous vraiment réinitialiser ?"
@@ -208,10 +208,10 @@ msgid "Block Cover Downloads"
 msgstr "Bloquer Téléch. jaquettes"
 
 msgid "Block Custom Paths"
-msgstr "Bloquer Person. dossiers"
+msgstr "Bloquer dossiers Perso."
 
 msgid "Block Feature Settings"
-msgstr ""
+msgstr "Bloquer futurs réglages"
 
 msgid "Block Game Install"
 msgstr "Bloquer Installation jeu"
@@ -220,7 +220,7 @@ msgid "Block Game Settings"
 msgstr "Bloquer Paramètres jeu"
 
 msgid "Block GameID Change"
-msgstr "Bloquer Modif. IDJEU"
+msgstr "Bloquer Modif. IDJeu"
 
 msgid "Block Global Settings"
 msgstr "Bloquer Paramètres"
@@ -302,7 +302,7 @@ msgid "Change Play Path"
 msgstr "Changer dossier"
 
 msgid "Cheatfile is blank"
-msgstr "Fichier de triches vide"
+msgstr "Fichier de triche vide"
 
 msgid "Clear"
 msgstr "Effacer"
@@ -391,7 +391,7 @@ msgid "Could not save."
 msgstr "Sauvegarde impossible."
 
 msgid "Cover Download"
-msgstr "Téléchargement des jaquettes"
+msgstr "Téléchargement Jaquettes"
 
 msgid "Create"
 msgstr "Créer"
@@ -403,7 +403,7 @@ msgid "Custom Discarts"
 msgstr "Labels DVD persos"
 
 msgid "Custom Paths"
-msgstr "Personnalisation des dossiers"
+msgstr "Personnalisation Dossiers"
 
 msgid "Customs/Original"
 msgstr "Persos/Originaux"
@@ -427,10 +427,10 @@ msgid "Delete"
 msgstr "Supprimer"
 
 msgid "Delete Cheat GCT"
-msgstr "Supprimer GCT de triches"
+msgstr "Supprimer GCT de triche"
 
 msgid "Delete Cheat TXT"
-msgstr "Supprimer TXT de triches"
+msgstr "Supprimer TXT de triche"
 
 msgid "Delete Cover Artwork"
 msgstr "Supprimer la jaquette"
@@ -439,7 +439,7 @@ msgid "Delete Disc Artwork"
 msgstr "Supprimer le label DVD"
 
 msgid "Delete category"
-msgstr "Sup. catégorie"
+msgstr "Supprimer la catégorie"
 
 msgid "Design:"
 msgstr "Graphisme:"
@@ -517,19 +517,19 @@ msgid "Download finished"
 msgstr "Téléchargement terminé"
 
 msgid "Downloading 3D Covers"
-msgstr "Téléchargement des jaquettes 3D"
+msgstr "Téléchargement Jaquettes 3D"
 
 msgid "Downloading Flat Covers"
-msgstr "Téléchargement des jaquettes 2D"
+msgstr "Téléchargement Jaquettes 2D"
 
 msgid "Downloading Full HQ Covers"
-msgstr "Téléch. des jaquettes complètes HD"
+msgstr "Téléch. Jaquettes complètes HD"
 
 msgid "Downloading Full LQ Covers"
-msgstr "Téléch. des jaquettes complètes SD"
+msgstr "Téléch. Jaquettes complètes SD"
 
 msgid "Downloading custom Discarts"
-msgstr "Téléch. des labels DVD persos"
+msgstr "Téléch. labels DVD persos"
 
 msgid "Downloading file..."
 msgstr "Téléchargement du fichier..."
@@ -541,7 +541,7 @@ msgid "Downloading original Discarts"
 msgstr "Téléch. des labels DVD originaux"
 
 msgid "Downloading pagelist:"
-msgstr "Téléchargement de la liste:"
+msgstr "Téléchargement Prévisualisations:"
 
 msgid "Dutch"
 msgstr "Néerlandais"
@@ -569,10 +569,10 @@ msgstr "Correctif Erreur 002"
 
 #, c-format
 msgid "Error creating path: %s"
-msgstr "Erreur lors de la création du chemin: %s"
+msgstr "Erreur à la création du chemin: %s"
 
 msgid "Error opening downloaded file"
-msgstr "Erreur à l'ouverure du fichier téléchargé"
+msgstr "Erreur à l'ouverture du fichier téléchargé"
 
 msgid "Error reading Disc"
 msgstr "Erreur à la lecture du disque"
@@ -621,7 +621,7 @@ msgid "Failed to open partition"
 msgstr "Échec accès partition"
 
 msgid "Failed updating"
-msgstr "Échec de la mise à jour"
+msgstr "Échec mise à jour"
 
 msgid "Features"
 msgstr ""
@@ -703,7 +703,7 @@ msgid "GAMEID_Gamename"
 msgstr "IDJEU_NomJeu"
 
 msgid "GCT Cheatcodes Path"
-msgstr "Dossier GCT de triches"
+msgstr "Dossier GCT de triche"
 
 msgid "GCT File created"
 msgstr "Fichier GCT créé"
@@ -745,7 +745,7 @@ msgid "Game Split Size"
 msgstr "Découpage des jeux"
 
 msgid "Game is already installed:"
-msgstr "Le jeu est déjà installé:"
+msgstr "Jeu déjà installé:"
 
 msgid "Game/Install Partition"
 msgstr "Partition jeu/install."
@@ -781,13 +781,13 @@ msgid "Hour"
 msgstr "heures"
 
 msgid "How do you want to update?"
-msgstr "Comment faire la Mise à jour ?"
+msgstr "Choix Mise à jour :"
 
 msgid "How to Shutdown?"
 msgstr "Arrêt de la Wii ?"
 
 msgid "Import Categories"
-msgstr ""
+msgstr "Importer Catégories"
 
 msgid "Import operation successfully completed."
 msgstr "Catégories importées avec succès."
@@ -867,7 +867,7 @@ msgid "Korean"
 msgstr "Coréen"
 
 msgid "Language File"
-msgstr "Fichier de langue"
+msgstr "Fichier Langue"
 
 msgid "Language change:"
 msgstr "Changement de langue:"
@@ -973,7 +973,7 @@ msgid "No"
 msgstr "Non"
 
 msgid "No Cheatfile found"
-msgstr "Aucun fichier de triches trouvé"
+msgstr "Aucun fichier de triche trouvé"
 
 msgid "No DOL file found on disc."
 msgstr "Aucun DOL trouvé dans ce jeu."
@@ -988,7 +988,7 @@ msgid "No WBFS or FAT/NTFS/EXT partition found"
 msgstr "Partition WBFS ou FAT/NTFS/EXT non trouvée"
 
 msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
-msgstr ""
+msgstr "Fichier Wiinnertag.xml non trouvé. Voulez-vous créer un fichier d'exemple ?"
 
 msgid "No cheats were selected"
 msgstr "Aucune sélection de triches"
@@ -1018,7 +1018,7 @@ msgid "Normal"
 msgstr "4:3"
 
 msgid "Not a Wii Disc"
-msgstr "Ce n'est pas un jeu Wii"
+msgstr "Disque non Wii"
 
 msgid "Not a valid URL"
 msgstr "URL non valide"
@@ -1069,10 +1069,10 @@ msgid "Offset"
 msgstr ""
 
 msgid "Only Game Partition"
-msgstr "Uniquement la partition de jeu"
+msgstr "Partition de jeu uniquement"
 
 msgid "Only for Install"
-msgstr "Uniquement à l'installation"
+msgstr "Installation uniquement"
 
 msgid "Original Discarts"
 msgstr "Labels DVD originaux"
@@ -1093,7 +1093,7 @@ msgid "Password Changed"
 msgstr "Mot de passe modifié"
 
 msgid "Password has been changed"
-msgstr "Le mot de passe a été modifié"
+msgstr "Mot de passe modifié"
 
 msgid "Patch Country Strings"
 msgstr "Patch jeux import"
@@ -1150,7 +1150,7 @@ msgid "Receiving file from:"
 msgstr "Réception du fichier de:"
 
 msgid "Region Patch"
-msgstr "Région patch"
+msgstr "Patch Région"
 
 msgid "Released"
 msgstr "Date de sortie"
@@ -1162,10 +1162,10 @@ msgid "Remove update"
 msgstr "Supprimer MàJ"
 
 msgid "Rename Game on WBFS"
-msgstr "Renommer un jeu"
+msgstr "Renommer Jeu WBFS"
 
 msgid "Rename category"
-msgstr ""
+msgstr "Renommer catégorie"
 
 msgid "Reset"
 msgstr "Réinitialisation"
@@ -1174,10 +1174,10 @@ msgid "Reset BG Music"
 msgstr "Fond sonore par defaut"
 
 msgid "Reset Playcounter"
-msgstr "Remise à zéro du compteur d'utilisations"
+msgstr "Reset compteur d'utilisations"
 
 msgid "Reset to default BGM?"
-msgstr "Remettre le fond sonore par defaut ?"
+msgstr "Fond sonore par defaut ?"
 
 msgid "Restarting..."
 msgstr "Redémarrage..."
@@ -1207,10 +1207,10 @@ msgid "Save"
 msgstr "Enregistrer"
 
 msgid "Save Failed. No device inserted?"
-msgstr "Echec de la sauvegarde. Pas de périphérique inséré ?"
+msgstr "Sauvegarde échouée. Périphérique inséré ?"
 
 msgid "Save Game List to"
-msgstr "Sauvegarder la liste des jeux sous"
+msgstr "Sauver la liste des jeux sous"
 
 msgid "Save List"
 msgstr "Sauvegarder la liste"
@@ -1506,7 +1506,7 @@ msgid "Wii Settings"
 msgstr "Paramètres Wii"
 
 msgid "WiiTDB Files"
-msgstr "Fichier WiiTDB"
+msgstr "WiiTDB"
 
 msgid "WiiTDB Path"
 msgstr "Dossier WiiTDB"
@@ -1521,10 +1521,10 @@ msgid "Wiinnertag"
 msgstr ""
 
 msgid "Wiinnertag Path"
-msgstr ""
+msgstr "Dossier Wiinnertag"
 
 msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
-msgstr ""
+msgstr "Wiinnertag nécessite une connexion automatique au réseau au lancement de l'application. Voulez-vous l'activer ?"
 
 msgid "Wrong Password"
 msgstr "Mot de passe incorrect"
@@ -1597,366 +1597,3 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
-
-#~ msgid "Import categories"
-#~ msgstr "Importer les catégories"
-
-#~ msgid "Import categories from WiiTDB"
-#~ msgstr "Importer les catégories"
-
-#~ msgid " Wad Saved as:"
-#~ msgstr " WAD sauvegardé sous:"
-
-#~ msgid "Delete ?"
-#~ msgstr "Supprimer ?"
-
-#~ msgid "Keep"
-#~ msgstr "Garder"
-
-#~ msgid "Not a WAD file."
-#~ msgstr "Ce n'est pas un fichier WAD"
-
-#~ msgid "Uninstall"
-#~ msgstr "Désinstaller"
-
-#~ msgid "Author:"
-#~ msgstr "Auteur:"
-
-#~ msgid "Do you want to load this theme?"
-#~ msgstr "Voulez-vous charger ce thème ?"
-
-#~ msgid "Loading default theme."
-#~ msgstr "Chargement thème par défaut."
-
-#~ msgid "Theme path is changed."
-#~ msgstr "Dossier thème changé"
-
-#~ msgid "Use IOS58"
-#~ msgstr "Utiliser IOS58"
-
-#~ msgid "Custom Disc Images"
-#~ msgstr "Labels DVD persos"
-
-#~ msgid "Download Boxart image?"
-#~ msgstr "Télécharger les jaquettes ?"
-
-#~ msgid "Download Discart image?"
-#~ msgstr "Télécharger les labels DVD ?"
-
-#~ msgid "Downloading file"
-#~ msgstr "Téléchargement du fichier"
-
-#~ msgid "Missing files"
-#~ msgstr "Fichier(s) manquant(s)"
-
-#~ msgid "Original Disc Images"
-#~ msgstr "Labels DVD originaux"
-
-#~ msgid "files not found on the server!"
-#~ msgstr "fichiers introuvables sur le serveur !"
-
-#~ msgid "Disc Images"
-#~ msgstr "Labels DVD"
-
-#~ msgid "Downloading covers"
-#~ msgstr "Téléchargement des jaquettes"
-
-#~ msgid "Only Customs"
-#~ msgstr "Personnalisés"
-
-#~ msgid "Only Original"
-#~ msgstr "Originaux"
-
-#~ msgid "Trying custom Discarts"
-#~ msgstr "Essai labels DVD persos"
-
-#~ msgid "Trying original Discarts"
-#~ msgstr "Essai labels DVD originaux"
-
-#~ msgid "Do you really want to delete:"
-#~ msgstr "Voulez-vous vraiment supprimer:"
-
-#~ msgid "Do you want to use the alternate DOL that is known to be correct?"
-#~ msgstr "Voulez-vous utiliser le DOL alternatif actuellement connu comme correct ?"
-
-#~ msgid "0 (Locked and Unlocked Games)"
-#~ msgstr "0 (Affiche les jeux verrouillés et non verrouillés)"
-
-#~ msgid "1 (Unlocked Games Only)"
-#~ msgstr "1 (Affiche seulement les jeux non verrouillés)"
-
-#~ msgid "BETA revisions"
-#~ msgstr "Révisions BETA"
-
-#~ msgid "GamesLevel"
-#~ msgstr "Niv. verrou"
-
-#~ msgid "Unlock console to use this option."
-#~ msgstr "Cette option requiert le déverrouillage de l'interface."
-
-#~ msgid "Enabling this option on a FAT partition might slow the startup of the loader."
-#~ msgstr "Activer cette option sur une partition FAT peut ralentir le démarrage du loader."
-
-#~ msgid "Full Shutdown"
-#~ msgstr "Éteindre"
-
-#~ msgid "GXtheme.cfg not found in any subfolder."
-#~ msgstr "GXtheme.cfg non trouvé dans aucun sous-dossier."
-
-#~ msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-#~ msgstr "Pressez 1 pour obtenir un lien personnalisé pour votre WiiTDB.zip"
-
-#~ msgid "Paste it into your browser to get your WiiTDB.zip."
-#~ msgstr "Collez ce lien dans votre navigateur pour télécharger."
-
-#~ msgid "Shutdown to Idle"
-#~ msgstr "Veille"
-
-#~ msgid "Shutdown?"
-#~ msgstr "Éteindre ?"
-
-#~ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-#~ msgstr "Sauvegarde de l'URL sous %sWiiTDB_URL.txt."
-
-#~ msgid "Can't create file"
-#~ msgstr "Création du fichier impossible"
-
-#~ msgid "Connection lost..."
-#~ msgstr "Connexion perdue..."
-
-#~ msgid "Download failed."
-#~ msgstr "Téléchargement échoué."
-
-#~ msgid "Download request failed."
-#~ msgstr "Demande de téléchargement échouée"
-
-#~ msgid "Downloading Page List:"
-#~ msgstr "Chargement Prévisualisations:"
-
-#~ msgid "Theme Download Path"
-#~ msgstr "Dossier Thèmes Téléch."
-
-#~ msgid "Transfer failed."
-#~ msgstr "Echec Transfert"
-
-#~ msgid "Unsupported format, try to extract manually."
-#~ msgstr "Format non supporté, essayez d'extraire manuellement."
-
-#~ msgid "and translaters for language files updates"
-#~ msgstr "et traducteurs pour les MàJ fichiers langues"
-
-#~ msgid "Insert an SD-Card to save."
-#~ msgstr "Insérez une carte SD pour enregistrer."
-
-#~ msgid "Insert an SD-Card to use this option."
-#~ msgstr "Insérez une carte SD pour utiliser cette option."
-
-#~ msgid "No SD-Card inserted!"
-#~ msgstr "Aucune carte SD insérée !"
-
-#~ msgid "Waiting for USB Device"
-#~ msgstr "Attente d'un périphérique USB"
-
-#~ msgid "Back to Loader"
-#~ msgstr "Chaîne Homebrew"
-
-#~ msgid "FAT: Use directories"
-#~ msgstr "FAT: Utiliser dossiers"
-
-#~ msgid "All partitions"
-#~ msgstr "Toutes partitions"
-
-#~ msgid "Game partition"
-#~ msgstr "Partition Jeu"
-
-#~ msgid "Install 1:1 Copy"
-#~ msgstr "Installer Copie 1:1"
-
-#~ msgid "An Error occured"
-#~ msgstr "Une Erreur s'est produite"
-
-#~ msgid "Are you sure you want to enable Parent Control?"
-#~ msgstr "Confirmation activation du Contrôle Parental ?"
-
-#~ msgid "Checking for Updates"
-#~ msgstr "Recherche de Mise à jour"
-
-#~ msgid "Downloading"
-#~ msgstr "Téléchargement"
-
-#~ msgid "Invalid PIN code"
-#~ msgstr "Code PIN invalide"
-
-#~ msgid "Parental Control disabled"
-#~ msgstr "Contrôle Parental désactivé"
-
-#~ msgid "The wad file was installed.  But It could not be deleted from the SD card."
-#~ msgstr "Le Wad a été installé. Mais ne peut être supprimé de la carte SD."
-
-#~ msgid "The wad installation failed with error %ld"
-#~ msgstr "L'installation WAD a échoué avec erreur %ld"
-
-#~ msgid "Unable to open the wad that was just downloaded (%s)."
-#~ msgstr "Ouverture du WAD impossible (%s)."
-
-#~ msgid "Unlock Parental Control"
-#~ msgstr "Déverrouiller Contrôle Parental"
-
-#~ msgid "Update to"
-#~ msgstr "vers la"
-
-#~ msgid "Updating"
-#~ msgstr "Mise à jour"
-
-#~ msgid "Updating Language Files..."
-#~ msgstr "Mise à jour des fichiers Langue..."
-
-#~ msgid "Updating WiiTDB.zip"
-#~ msgstr "Mise à jour de WiiTDB.zip"
-
-#~ msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
-#~ msgstr "Contrôle Parental désactivé. Si vous voulez l'utiliser, activez-le dans les Paramètres de votre Wii."
-
-#~ msgid "%s : %s May not boot correctly if your System Menu is not up to date."
-#~ msgstr "%s : %s Peut ne pas démarrer correctement si votre Menu Système n'est pas à jour."
-
-#~ msgid "BCA Codes Path changed"
-#~ msgstr "Dossier Codes BCA modifié"
-
-#~ msgid "Back to Wii Menu"
-#~ msgstr "Retour Menu Wii"
-
-#~ msgid "Channels"
-#~ msgstr "Chaînes"
-
-#~ msgid "Checking existing artwork"
-#~ msgstr "Contrôle images existantes"
-
-#~ msgid "Confirm"
-#~ msgstr "Confirmer"
-
-#~ msgid "Could not find a WBFS partition."
-#~ msgstr "Impossible de trouver une partition WBFS."
-
-#~ msgid "Could not open WBFS partition"
-#~ msgstr "Ouverture partition WBFS impossible"
-
-#~ msgid "Could not read the disc."
-#~ msgstr "Lecture impossible du DVD."
-
-#~ msgid "Could not set USB."
-#~ msgstr "Accès USB impossible."
-
-#~ msgid "Cover Path Changed"
-#~ msgstr "Dossier des jaquettes modifié"
-
-#~ msgid "DOL path changed"
-#~ msgstr "Dossier DOL alternatif modifié"
-
-#~ msgid "Disc Path Changed"
-#~ msgstr "Dossier des labels DVD modifié"
-
-#~ msgid "Display favorites"
-#~ msgstr "Favoris"
-
-#~ msgid "Do you want to retry for 30 secs?"
-#~ msgstr "Réessayer pendant 30 sec. ?"
-
-#~ msgid "Enable Parental Control"
-#~ msgstr "Contrôle Parental activé"
-
-#~ msgid "Force"
-#~ msgstr "Forcer"
-
-#~ msgid "GCT Cheatcodes Path changed"
-#~ msgstr "Dossier GCT de triches modifié"
-
-#~ msgid "Hermes CIOS"
-#~ msgstr "CIOS d'Hermès"
-
-#~ msgid "Homebrew Appspath changed"
-#~ msgstr "Dossier Homebrew Apps modifié"
-
-#~ msgid "Insert an SD-Card to download images."
-#~ msgstr "Insérez une carte SD pour télécharger les jaquettes."
-
-#~ msgid "Install not possible"
-#~ msgstr "Installation impossible"
-
-#~ msgid "Most likely it has dimensions that are not evenly divisible by 4."
-#~ msgstr "Il est fort probable que les dimensions ne soient pas des multiples de 4."
-
-#~ msgid "Network init error"
-#~ msgstr "Erreur d'initialisation réseau"
-
-#~ msgid "No .dol or .elf files found."
-#~ msgstr "Aucun fichier .dol ou .elf trouvé."
-
-#~ msgid "No Favorites"
-#~ msgstr "Pas de favoris"
-
-#~ msgid "No USB Device"
-#~ msgstr "Aucun périphérique USB"
-
-#~ msgid "No USB Device found."
-#~ msgstr "Aucun périphérique USB trouvé."
-
-#~ msgid "No WBFS or FAT/NTFS partition found"
-#~ msgstr "Partition WBFS/FAT/NTFS introuvable"
-
-#~ msgid "Normal Covers"
-#~ msgstr "Jaquettes 2D"
-
-#~ msgid "Not Found"
-#~ msgstr "Non trouvé"
-
-#~ msgid "Not a DOL/ELF file."
-#~ msgstr "Ce n'est pas un fichier DOL/ELF"
-
-#~ msgid "Reset to standard BGM?"
-#~ msgstr "Restaurer fond sonore standard ?"
-
-#~ msgid "Save Failed"
-#~ msgstr "Échec de sauvegarde"
-
-#~ msgid "Selected DOL"
-#~ msgstr "Choix du DOL"
-
-#~ msgid "TXT Cheatcodes Path changed"
-#~ msgstr "Dossier TXT de triches modifié"
-
-#~ msgid "Theme Download Path changed"
-#~ msgstr "Dossier Thèmes Téléch. modifié"
-
-#~ msgid "Theme Path Changed"
-#~ msgstr "Dossier du thème modifié"
-
-#~ msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-#~ msgstr "USB Loader GX fonctionne avec le CIOS d'Hermès rev4 seulement! Assurez-vous qu'il soit installé!"
-
-#~ msgid "Update Path changed."
-#~ msgstr "Dossier de mise à jour modifié."
-
-#~ msgid "WIP Patches Path changed"
-#~ msgstr "Dossier Patchs WIP modifié"
-
-#~ msgid "WiiTDB Path changed."
-#~ msgstr "Dossier de WiiTDB modifié"
-
-#~ msgid "You are about to delete "
-#~ msgstr "Vous êtes sur le point de supprimer "
-
-#~ msgid "You are choosing to display favorites and you do not have any selected."
-#~ msgstr "Vous choisissez d'afficher des favoris alors que vous n'en avez aucun."
-
-#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-#~ msgstr "Le système de fichier NTFS est utilisé. En raison à de possibles erreurs d'écriture sur une partition de NTFS, l'installation d'un jeu est impossible."
-
-#~ msgid "You have attempted to load a bad image"
-#~ msgstr "Vous avez tenté de charger une image érronée"
-
-#~ msgid "does not exist!  You Messed something up, Idiot."
-#~ msgstr "Inexistant! Quelque chose vous a échappé!"
-
-#~ msgid "file left"
-#~ msgstr "fichier restant"
