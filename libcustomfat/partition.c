@@ -41,11 +41,6 @@
 sec_t _FAT_startSector;
 
 /*
-This device name, as known by devkitPro toolchains
-*/
-const char* DEVICE_NAME = "fat";
-
-/*
 Data offsets
 */
 
@@ -110,17 +105,20 @@ static const char FAT_SIG[3] = {'F', 'A', 'T'};
 static const char FS_INFO_SIG1[4] = {'R', 'R', 'a', 'A'};
 static const char FS_INFO_SIG2[4] = {'r', 'r', 'A', 'a'};
 
-
 sec_t FindFirstValidPartition(const DISC_INTERFACE* disc)
 {
 	uint8_t part_table[16*4];
 	uint8_t *ptr;
 	int i;
 
-	uint8_t sectorBuffer[BYTES_PER_READ] = {0};
+	uint8_t *sectorBuffer = (uint8_t*) _FAT_mem_allocate(MAX_SECTOR_SIZE);
+	if(!sectorBuffer) {
+	    return 0;
+	}
 
 	// Read first sector of disc
 	if (!_FAT_disc_readSectors (disc, 0, 1, sectorBuffer)) {
+	    _FAT_mem_free(sectorBuffer);
 		return 0;
 	}
 
@@ -132,6 +130,7 @@ sec_t FindFirstValidPartition(const DISC_INTERFACE* disc)
 
 		if (!memcmp(sectorBuffer + BPB_FAT16_fileSysType, FAT_SIG, sizeof(FAT_SIG)) ||
 			!memcmp(sectorBuffer + BPB_FAT32_fileSysType, FAT_SIG, sizeof(FAT_SIG))) {
+	        _FAT_mem_free(sectorBuffer);
 			return part_lba;
 		}
 
@@ -144,43 +143,61 @@ sec_t FindFirstValidPartition(const DISC_INTERFACE* disc)
 
 			for(n=0;n<8;n++) // max 8 logic partitions
 			{
-				if(!_FAT_disc_readSectors (disc, part_lba+next_lba2, 1, sectorBuffer)) return 0;
+				if(!_FAT_disc_readSectors (disc, part_lba+next_lba2, 1, sectorBuffer)) {
+	                _FAT_mem_free(sectorBuffer);
+				    return 0;
+				}
 
 				part_lba2 = part_lba + next_lba2 + u8array_to_u32(sectorBuffer, 0x1C6) ;
 				next_lba2 = u8array_to_u32(sectorBuffer, 0x1D6);
 
-				if(!_FAT_disc_readSectors (disc, part_lba2, 1, sectorBuffer)) return 0;
+				if(!_FAT_disc_readSectors (disc, part_lba2, 1, sectorBuffer)) {
+	                _FAT_mem_free(sectorBuffer);
+	                return 0;
+				}
 
 				if (!memcmp(sectorBuffer + BPB_FAT16_fileSysType, FAT_SIG, sizeof(FAT_SIG)) ||
-					!memcmp(sectorBuffer + BPB_FAT32_fileSysType, FAT_SIG, sizeof(FAT_SIG)))
-				{
+					!memcmp(sectorBuffer + BPB_FAT32_fileSysType, FAT_SIG, sizeof(FAT_SIG))) {
+	                _FAT_mem_free(sectorBuffer);
 					return part_lba2;
 				}
 
 				if(next_lba2==0) break;
 			}
 		} else {
-			if(!_FAT_disc_readSectors (disc, part_lba, 1, sectorBuffer)) return 0;
+			if(!_FAT_disc_readSectors (disc, part_lba, 1, sectorBuffer)) {
+	            _FAT_mem_free(sectorBuffer);
+			    return 0;
+			}
 			if (!memcmp(sectorBuffer + BPB_FAT16_fileSysType, FAT_SIG, sizeof(FAT_SIG)) ||
 				!memcmp(sectorBuffer + BPB_FAT32_fileSysType, FAT_SIG, sizeof(FAT_SIG))) {
+                _FAT_mem_free(sectorBuffer);
 				return part_lba;
 			}
 		}
 	}
+	_FAT_mem_free(sectorBuffer);
 	return 0;
 }
 
+
 PARTITION* _FAT_partition_constructor (const DISC_INTERFACE* disc, uint32_t cacheSize, uint32_t sectorsPerPage, sec_t startSector) {
 	PARTITION* partition;
-	uint8_t sectorBuffer[BYTES_PER_READ] = {0};
+
+    uint8_t *sectorBuffer = (uint8_t*) _FAT_mem_allocate(MAX_SECTOR_SIZE);
+	if(!sectorBuffer) {
+	    return NULL;
+	}
 
 	// Read first sector of disc
 	if (!_FAT_disc_readSectors (disc, startSector, 1, sectorBuffer)) {
+        _FAT_mem_free(sectorBuffer);
 		return NULL;
 	}
 
 	// Make sure it is a valid MBR or boot sector
 	if ( (sectorBuffer[BPB_bootSig_55] != 0x55) || (sectorBuffer[BPB_bootSig_AA] != 0xAA)) {
+        _FAT_mem_free(sectorBuffer);
 		return NULL;
 	}
 
@@ -195,26 +212,28 @@ PARTITION* _FAT_partition_constructor (const DISC_INTERFACE* disc, uint32_t cach
 	} else {
 		startSector = FindFirstValidPartition(disc);
 		if (!_FAT_disc_readSectors (disc, startSector, 1, sectorBuffer)) {
+            _FAT_mem_free(sectorBuffer);
 			return NULL;
 		}
 	}
 
+	_FAT_startSector = startSector;
+
 	// Now verify that this is indeed a FAT partition
 	if (memcmp(sectorBuffer + BPB_FAT16_fileSysType, FAT_SIG, sizeof(FAT_SIG)) &&
-		memcmp(sectorBuffer + BPB_FAT32_fileSysType, FAT_SIG, sizeof(FAT_SIG)))
-	{
+		memcmp(sectorBuffer + BPB_FAT32_fileSysType, FAT_SIG, sizeof(FAT_SIG))) {
+        _FAT_mem_free(sectorBuffer);
 		return NULL;
 	}
 
 	partition = (PARTITION*) _FAT_mem_allocate (sizeof(PARTITION));
 	if (partition == NULL) {
+        _FAT_mem_free(sectorBuffer);
 		return NULL;
 	}
 
 	// Init the partition lock
 	_FAT_lock_init(&partition->lock);
-
-	_FAT_startSector = startSector;
 
 	if (!memcmp(sectorBuffer + BPB_FAT16_fileSysType, FAT_SIG, sizeof(FAT_SIG)))
 		strncpy(partition->label, (char*)(sectorBuffer + BPB_FAT16_volumeLabel), 11);
@@ -236,8 +255,19 @@ PARTITION* _FAT_partition_constructor (const DISC_INTERFACE* disc, uint32_t cach
 		partition->numberOfSectors = u8array_to_u32( sectorBuffer, BPB_numSectors);
 	}
 
-	partition->bytesPerSector = BYTES_PER_READ;	// Sector size is redefined to be 512 bytes
-	partition->sectorsPerCluster = sectorBuffer[BPB_sectorsPerCluster] * u8array_to_u16(sectorBuffer, BPB_bytesPerSector) / BYTES_PER_READ;
+    if(disc->features & FEATURE_WII_USB)
+	    partition->bytesPerSector = u8array_to_u16(sectorBuffer, BPB_bytesPerSector);
+    else
+        partition->bytesPerSector = MIN_SECTOR_SIZE;
+
+	if(partition->bytesPerSector < MIN_SECTOR_SIZE || partition->bytesPerSector > MAX_SECTOR_SIZE) {
+        // Unsupported sector size
+        _FAT_mem_free(sectorBuffer);
+        _FAT_mem_free(partition);
+        return NULL;
+    }
+
+	partition->sectorsPerCluster = sectorBuffer[BPB_sectorsPerCluster] * u8array_to_u16(sectorBuffer, BPB_bytesPerSector) / partition->bytesPerSector;
 	partition->bytesPerCluster = partition->bytesPerSector * partition->sectorsPerCluster;
 	partition->fat.fatStart = startSector + u8array_to_u16(sectorBuffer, BPB_reservedSectors);
 
@@ -278,7 +308,7 @@ PARTITION* _FAT_partition_constructor (const DISC_INTERFACE* disc, uint32_t cach
 	}
 
 	// Create a cache to use
-	partition->cache = _FAT_cache_constructor (cacheSize, sectorsPerPage, partition->disc, startSector+partition->numberOfSectors);
+	partition->cache = _FAT_cache_constructor (cacheSize, sectorsPerPage, partition->disc, startSector+partition->numberOfSectors, partition->bytesPerSector);
 
 	// Set current directory to the root
 	partition->cwdCluster = partition->rootDirCluster;
@@ -291,6 +321,8 @@ PARTITION* _FAT_partition_constructor (const DISC_INTERFACE* disc, uint32_t cach
 	partition->firstOpenFile = NULL;
 
 	_FAT_partition_readFSinfo(partition);
+
+    _FAT_mem_free(sectorBuffer);
 
 	return partition;
 }
@@ -338,8 +370,11 @@ void _FAT_partition_createFSinfo(PARTITION * partition)
     if(partition->readOnly || partition->filesysType != FS_FAT32)
         return;
 
-	uint8_t sectorBuffer[BYTES_PER_READ];
-    memset(sectorBuffer, 0, sizeof(sectorBuffer));
+    uint8_t *sectorBuffer = (uint8_t*) _FAT_mem_allocate(partition->bytesPerSector);
+	if(!sectorBuffer) {
+	    return;
+	}
+    memset(sectorBuffer, 0, partition->bytesPerSector);
 
     int i;
     for(i = 0; i < 4; ++i)
@@ -356,6 +391,8 @@ void _FAT_partition_createFSinfo(PARTITION * partition)
     sectorBuffer[FSIB_bootSig_AA] = 0xAA;
 
     _FAT_disc_writeSectors (partition->disc, partition->fsInfoSector, 1, sectorBuffer);
+
+    _FAT_mem_free(sectorBuffer);
 }
 
 void _FAT_partition_readFSinfo(PARTITION * partition)
@@ -363,24 +400,29 @@ void _FAT_partition_readFSinfo(PARTITION * partition)
     if(partition->filesysType != FS_FAT32)
         return;
 
-	uint8_t sectorBuffer[BYTES_PER_READ] = {0};
-
+    uint8_t *sectorBuffer = (uint8_t*) _FAT_mem_allocate(partition->bytesPerSector);
+	if(!sectorBuffer) {
+	    return;
+	}
+    memset(sectorBuffer, 0, partition->bytesPerSector);
 	// Read first sector of disc
 	if (!_FAT_disc_readSectors (partition->disc, partition->fsInfoSector, 1, sectorBuffer)) {
+        _FAT_mem_free(sectorBuffer);
 		return;
 	}
 
     if(memcmp(sectorBuffer+FSIB_SIG1, FS_INFO_SIG1, 4) != 0 ||
        memcmp(sectorBuffer+FSIB_SIG2, FS_INFO_SIG2, 4) != 0 ||
-       u8array_to_u32(sectorBuffer, FSIB_numberOfFreeCluster) == 0)
-    {
+       u8array_to_u32(sectorBuffer, FSIB_numberOfFreeCluster) == 0) {
         //sector does not yet exist, create one!
         _FAT_partition_createFSinfo(partition);
+        _FAT_mem_free(sectorBuffer);
         return;
     }
 
     partition->fat.numberFreeCluster = u8array_to_u32(sectorBuffer, FSIB_numberOfFreeCluster);
     partition->fat.numberLastAllocCluster = u8array_to_u32(sectorBuffer, FSIB_numberLastAllocCluster);
+    _FAT_mem_free(sectorBuffer);
 }
 
 void _FAT_partition_writeFSinfo(PARTITION * partition)
@@ -388,21 +430,26 @@ void _FAT_partition_writeFSinfo(PARTITION * partition)
     if(partition->filesysType != FS_FAT32)
         return;
 
-	uint8_t sectorBuffer[BYTES_PER_READ] = {0};
-
+    uint8_t *sectorBuffer = (uint8_t*) _FAT_mem_allocate(partition->bytesPerSector);
+	if(!sectorBuffer) {
+	    return;
+	}
+    memset(sectorBuffer, 0, partition->bytesPerSector);
 	// Read first sector of disc
 	if (!_FAT_disc_readSectors (partition->disc, partition->fsInfoSector, 1, sectorBuffer)) {
+        _FAT_mem_free(sectorBuffer);
 		return;
 	}
 
-	if(memcmp(sectorBuffer+FSIB_SIG1, FS_INFO_SIG1, 4) || memcmp(sectorBuffer+FSIB_SIG2, FS_INFO_SIG2, 4))
+	if(memcmp(sectorBuffer+FSIB_SIG1, FS_INFO_SIG1, 4) || memcmp(sectorBuffer+FSIB_SIG2, FS_INFO_SIG2, 4)) {
+        _FAT_mem_free(sectorBuffer);
         return;
+	}
 
     u32_to_u8array(sectorBuffer, FSIB_numberOfFreeCluster, partition->fat.numberFreeCluster);
     u32_to_u8array(sectorBuffer, FSIB_numberLastAllocCluster, partition->fat.numberLastAllocCluster);
 
 	// Read first sector of disc
-	if (!_FAT_disc_writeSectors (partition->disc, partition->fsInfoSector, 1, sectorBuffer)) {
-		return;
-	}
+	_FAT_disc_writeSectors (partition->disc, partition->fsInfoSector, 1, sectorBuffer);
+	_FAT_mem_free(sectorBuffer);
 }

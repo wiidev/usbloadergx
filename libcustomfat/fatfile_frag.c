@@ -32,7 +32,7 @@ int _FAT_get_fragments (const char *path, _fat_frag_append_t append_fragment, vo
 	partition = file.partition;
 	_FAT_lock(&partition->lock);
 
-	size = file.filesize / BYTES_PER_READ;
+	size = file.filesize / partition->bytesPerSector;
 	cluster = file.startCluster;
 	offset = 0;
 
