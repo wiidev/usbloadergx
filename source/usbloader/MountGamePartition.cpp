@@ -14,11 +14,12 @@
 
 static int FindGamePartition()
 {
-    PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
+	int partCount = DeviceHandler::GetUSBPartitionCount();
+
     // Loop through all WBFS partitions first to check them in case IOS249 Rev < 18
-    for(int i = 0; i < usbHandle->GetPartitionCount(); ++i)
+    for(int i = 0; i < partCount; ++i)
     {
-        if(strncmp(usbHandle->GetFSName(i), "WBFS", 4) != 0)
+        if(DeviceHandler::GetUSBFilesystemType(i) != PART_FS_WBFS)
             continue;
 
         if (WBFS_OpenPart(i) == 0)
@@ -33,11 +34,11 @@ static int FindGamePartition()
         return -1;
 
     // Loop through FAT/NTFS/EXT partitions, and find the first partition with games on it (if there is one)
-    for(int i = 0; i < usbHandle->GetPartitionCount(); ++i)
+    for(int i = 0; i < partCount; ++i)
     {
-        if(strncmp(usbHandle->GetFSName(i), "NTFS", 4) != 0 &&
-           strncmp(usbHandle->GetFSName(i), "FAT", 3) != 0 &&
-           strncmp(usbHandle->GetFSName(i), "LINUX", 5) != 0)
+        if(DeviceHandler::GetUSBFilesystemType(i) != PART_FS_NTFS &&
+           DeviceHandler::GetUSBFilesystemType(i) != PART_FS_FAT &&
+           DeviceHandler::GetUSBFilesystemType(i) != PART_FS_EXT)
         {
             continue;
         }
@@ -64,7 +65,6 @@ static int FindGamePartition()
 static int PartitionChoice()
 {
     int ret = -1;
-    PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
 
     int choice = WindowPrompt(tr( "No WBFS or FAT/NTFS/EXT partition found" ),
             tr( "You need to select or format a partition" ), tr( "Select" ), tr( "Format" ), tr( "Return" ));
@@ -79,9 +79,9 @@ static int PartitionChoice()
         if(part_num >= 0)
         {
             if(IosLoader::IsWaninkokoIOS() && NandTitles.VersionOf(TITLE_ID(1, IOS_GetVersion())) < 18 &&
-               (strncmp(usbHandle->GetFSName(part_num), "NTFS", 4) == 0 ||
-                strncmp(usbHandle->GetFSName(part_num), "FAT", 3) == 0 ||
-                strncmp(usbHandle->GetFSName(part_num), "LINUX", 5) == 0))
+               (DeviceHandler::GetUSBFilesystemType(part_num) == PART_FS_NTFS ||
+                DeviceHandler::GetUSBFilesystemType(part_num) == PART_FS_FAT ||
+                DeviceHandler::GetUSBFilesystemType(part_num) == PART_FS_EXT))
             {
                 WindowPrompt(tr("Warning:"), tr("You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."), tr("OK"));
             }

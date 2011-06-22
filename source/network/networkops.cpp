@@ -210,7 +210,7 @@ s32 download_request(const char * url, char * filename)
 
     //Form a nice request header to send to the webserver
     char header[strlen(path) + strlen(domain) + strlen(url) + 100];
-    sprintf(header, "GET %s HTTP/1.1\r\nHost: %s\r\nReferer: %s\r\nConnection: close\r\n\r\n", path, domain, url);
+    sprintf(header, "GET %s HTTP/1.1\r\nHost: %s\r\nReferer: %s\r\nUser-Agent: USBLoaderGX\r\nConnection: close\r\n\r\n", path, domain, url);
 
     s32 filesize = network_request(connection, header, filename);
 

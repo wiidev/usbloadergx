@@ -20,17 +20,17 @@ int SelectPartitionMenu()
     int choice = -1;
     int ret = -1;
 
-    PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
-
     //create the partitionlist
-    for (int cnt = 0; cnt < usbHandle->GetPartitionCount(); cnt++)
+    for (int cnt = 0; cnt < DeviceHandler::GetUSBPartitionCount(); cnt++)
     {
+		PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandleFromPartition(cnt);
+		int portPart = DeviceHandler::PartitionToPortPartition(cnt);
         /* Calculate size in gigabytes */
-        f32 size = usbHandle->GetSize(cnt) / GB_SIZE;
+        f32 size = usbHandle->GetSize(portPart) / GB_SIZE;
 
         if (size)
         {
-            options.SetName(counter, "%s %d %s: ", tr( "Partition" ), cnt + 1, usbHandle->GetFSName(cnt));
+            options.SetName(counter, "%s %d %s: ", tr( "Partition" ), cnt + 1, usbHandle->GetFSName(portPart));
             options.SetValue(counter, "%.2fGB", size);
         }
         else
@@ -98,7 +98,7 @@ int SelectPartitionMenu()
 
         if (ret >= 0)
         {
-            if (usbHandle->GetSize(ret))
+            if (strcmp(options.GetValue(ret), tr( "Can't be formatted" )) != 0)
             {
                 choice = ret;
                 ExitSelect = true;

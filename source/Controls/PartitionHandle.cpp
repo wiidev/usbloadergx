@@ -67,10 +67,8 @@ static inline const char * PartFromType(int type)
 }
 
 PartitionHandle::PartitionHandle(const DISC_INTERFACE *discio)
+    : interface(discio)
 {
-    Port0Size = 0;
-    interface = discio;
-
     // Sanity check
     if (!interface)
         return;
@@ -91,23 +89,6 @@ PartitionHandle::~PartitionHandle()
 
     //shutdown device
     interface->shutdown();
-}
-
-void PartitionHandle::GetPort1Partitions()
-{
-    if(Port0Size != 0)
-        return;
-
-    Port0Size = PartitionList.size();
-
-    // Start the device and check that it is inserted
-    if (!interface->startup())
-        return;
-
-    if (!interface->isInserted())
-        return;
-
-    FindPartitions();
 }
 
 bool PartitionHandle::IsMounted(int pos)
@@ -254,7 +235,7 @@ int PartitionHandle::FindPartitions()
 			continue;
         }
 
-        if(le32(partition->block_count) > 0 && (!IsExisting(le32(partition->lba_start)) || Port0Size))
+        if(le32(partition->block_count) > 0 && !IsExisting(le32(partition->lba_start)))
         {
             AddPartition(PartFromType(partition->type), le32(partition->lba_start),
                                       le32(partition->block_count), (partition->status == PARTITION_BOOTABLE),

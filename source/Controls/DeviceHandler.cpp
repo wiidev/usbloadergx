@@ -81,11 +81,14 @@ void DeviceHandler::UnMountAll()
 
     if(sd)
         delete sd;
-    if(usb)
-        delete usb;
+    if(usb0)
+        delete usb0;
+    if(usb1)
+        delete usb1;
 
     sd = NULL;
-    usb = NULL;
+    usb0 = NULL;
+    usb1 = NULL;
 }
 
 bool DeviceHandler::Mount(int dev)
@@ -105,7 +108,12 @@ bool DeviceHandler::IsInserted(int dev)
         return SD_Inserted() && sd->IsMounted(0);
 
     else if(dev >= USB1 && dev <= USB8)
-        return USB_Inserted() && usb->IsMounted(dev-USB1);
+    {
+        int portPart = PartitionToPortPartition(dev-USB1);
+        PartitionHandle *usb = instance->GetUSBHandleFromPartition(dev-USB1);
+        if(usb)
+            return usb->IsMounted(portPart);
+    }
 
     return false;
 }
@@ -135,86 +143,52 @@ bool DeviceHandler::MountSD()
     return sd->Mount(0, DeviceName[SD], true);
 }
 
-const DISC_INTERFACE * DeviceHandler::GetUSBInterface()
-{
-    if(IOS_GetVersion() < 200)
-        return &__io_usbstorage;
-
-    return &__io_usbstorage2;
-}
-
 static inline bool USBSpinUp()
 {
-    bool started = false;
+    bool started0 = true;
+    bool started1 = true;
     int retries = 400;
 
-    const DISC_INTERFACE * handle = DeviceHandler::GetUSBInterface();
+    const DISC_INTERFACE * handle0 = NULL;
+    const DISC_INTERFACE * handle1 = NULL;
+    if(Settings.USBPort == 0 || Settings.USBPort == 2)
+        handle0 = DeviceHandler::GetUSB0Interface();
+    if(Settings.USBPort == 1 || Settings.USBPort == 2)
+        handle1 = DeviceHandler::GetUSB1Interface();
+
     // wait 20 sec for the USB to spin up...stupid slow ass HDD
     do
     {
-        started = (handle->startup() && handle->isInserted());
-        if(started) break;
+        if(handle0)
+            started0 = (handle0->startup() && handle0->isInserted());
+
+        if(handle1)
+            started1 = (handle1->startup() && handle1->isInserted());
+
+        if(started0 && started1) break;
         usleep(50000);
     }
     while(--retries > 0);
 
-    return started;
+    return (started0 && started1);
 }
 
-bool DeviceHandler::SetUSBPort(int port, bool spinup)
+bool DeviceHandler::MountUSB(int pos)
 {
-    int ret = USBStorage2_SetPort(port);
-
-    if(spinup)
-        USBSpinUp();
-
-    return ret >= 0;
-}
-
-void DeviceHandler::SetUSBPortFromPartition(int part)
-{
-    if(Settings.USBPort != 2)
-        return;
-
-    PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
-    if(!usbHandle)
-        return;
-
-    if(part < usbHandle->GetPartitionCount())
-        SetUSBPort(0);
-    else
-        SetUSBPort(1);
-}
-
-bool DeviceHandler::MountUSB(int pos, bool spinup)
-{
-    if(spinup && !USBSpinUp())
+    if(!usb0 && !usb1)
         return false;
 
-    if(!usb)
-    {
-        if(Settings.USBPort == 2) SetUSBPort(0);
-        usb = new PartitionHandle(GetUSBInterface());
-        if(Settings.USBPort == 2 && IosLoader::IsHermesIOS())
-        {
-            SetUSBPort(1);
-            usb->GetPort1Partitions();
-        }
-    }
-
-    if(usb->GetPartitionTotalCount() < 1)
-    {
-        delete usb;
-        usb = NULL;
-        return false;
-    }
-
-    if(pos >= usb->GetPartitionTotalCount())
+    if(pos >= GetUSBPartitionCount())
         return false;
 
-    SetUSBPortFromPartition(pos);
+    int portPart = PartitionToPortPartition(pos);
 
-    return usb->Mount(pos, DeviceName[USB1+pos]);
+    if(PartitionToUSBPort(pos) == 0 && usb0)
+        return usb0->Mount(portPart, DeviceName[USB1+pos]);
+    else if(usb1)
+        return usb1->Mount(portPart, DeviceName[USB1+pos]);
+
+    return false;
 }
 
 bool DeviceHandler::MountAllUSB(bool spinup)
@@ -222,54 +196,88 @@ bool DeviceHandler::MountAllUSB(bool spinup)
     if(spinup && !USBSpinUp())
         return false;
 
-    if(!usb)
+    if(!usb0 && (Settings.USBPort == 0 || Settings.USBPort == 2))
+        usb0 = new PartitionHandle(GetUSB0Interface());
+    if(!usb1 && (Settings.USBPort == 1 || Settings.USBPort == 2))
+        usb1 = new PartitionHandle(GetUSB1Interface());
+
+    if(usb0 && usb0->GetPartitionCount() < 1)
     {
-        if(Settings.USBPort == 2) SetUSBPort(0);
-        usb = new PartitionHandle(GetUSBInterface());
-        if(Settings.USBPort == 2 && IosLoader::IsHermesIOS())
-        {
-            SetUSBPort(1);
-            usb->GetPort1Partitions();
-        }
+        delete usb0;
+        usb0 = NULL;
+    }
+    if(usb1 && usb1->GetPartitionCount() < 1)
+    {
+        delete usb1;
+        usb1 = NULL;
     }
 
     bool result = false;
+    int partCount = GetUSBPartitionCount();
 
-    for(int i = 0; i < usb->GetPartitionTotalCount(); i++)
+    for(int i = 0; i < partCount; i++)
     {
-        if(MountUSB(i, false))
+        if(MountUSB(i))
             result = true;
     }
 
-    if(Settings.USBPort == 2)
-        SetUSBPort(0);
+    return result;
+}
+
+bool DeviceHandler::MountUSBPort1(bool spinup)
+{
+    if(spinup && !USBSpinUp())
+        return false;
+
+    if(!usb1 && (Settings.USBPort == 1 || Settings.USBPort == 2))
+        usb1 = new PartitionHandle(GetUSB1Interface());
+
+    if(usb1 && usb1->GetPartitionCount() < 1)
+    {
+        delete usb1;
+        usb1 = NULL;
+        return false;
+    }
+
+    bool result = false;
+    int partCount = GetUSBPartitionCount();
+    int partCount0 = 0;
+    if(usb0)
+        partCount0 = usb0->GetPartitionCount();
+
+    for(int i = partCount0; i < partCount; i++)
+    {
+        if(MountUSB(i))
+            result = true;
+    }
 
     return result;
 }
 
 void DeviceHandler::UnMountUSB(int pos)
 {
-    if(!usb)
+    if(pos >= GetUSBPartitionCount())
         return;
 
-    if(pos >= usb->GetPartitionTotalCount())
-        return;
+    int portPart = PartitionToPortPartition(pos);
 
-    SetUSBPortFromPartition(pos);
-
-    usb->UnMount(pos);
+    if(PartitionToUSBPort(pos) == 0 && usb0)
+        return usb0->UnMount(portPart);
+    else if(usb1)
+        return usb1->UnMount(portPart);
 }
 
 void DeviceHandler::UnMountAllUSB()
 {
-    if(!usb)
-        return;
+    int partCount = GetUSBPartitionCount();
 
-    for(int i = 0; i < usb->GetPartitionTotalCount(); i++)
+    for(int i = 0; i < partCount; i++)
         UnMountUSB(i);
 
-    delete usb;
-    usb = NULL;
+    delete usb0;
+    usb0 = NULL;
+    delete usb1;
+    usb1 = NULL;
 }
 
 int DeviceHandler::PathToDriveType(const char * path)
@@ -292,9 +300,19 @@ const char * DeviceHandler::GetFSName(int dev)
     {
         return DeviceHandler::instance->sd->GetFSName(0);
     }
-    else if(dev >= USB1 && dev <= USB8 && DeviceHandler::instance->usb)
+    else if(dev >= USB1 && dev <= USB8)
     {
-        return DeviceHandler::instance->usb->GetFSName(dev-USB1);
+        int partCount0 = 0;
+        int partCount1 = 0;
+        if(DeviceHandler::instance->usb0)
+            partCount0 += DeviceHandler::instance->usb0->GetPartitionCount();
+        if(DeviceHandler::instance->usb1)
+            partCount1 += DeviceHandler::instance->usb1->GetPartitionCount();
+
+        if(dev-USB1 > partCount0 && DeviceHandler::instance->usb0)
+            return DeviceHandler::instance->usb0->GetFSName(dev-USB1);
+        else if(DeviceHandler::instance->usb1)
+            return DeviceHandler::instance->usb1->GetFSName(dev-USB1-partCount0);
     }
 
     return NULL;
@@ -305,9 +323,7 @@ int DeviceHandler::GetUSBFilesystemType(int partition)
     if(!instance)
         return -1;
 
-    PartitionHandle * usbHandle = instance->GetUSBHandle();
-
-    const char * FSName = usbHandle->GetFSName(partition);
+    const char *FSName = GetUSBFSName(partition);
     if(!FSName) return -1;
 
     if(strncmp(FSName, "WBFS", 4) == 0)
@@ -320,4 +336,72 @@ int DeviceHandler::GetUSBFilesystemType(int partition)
         return PART_FS_EXT;
 
     return -1;
+}
+
+
+u16 DeviceHandler::GetUSBPartitionCount()
+{
+    if(!instance)
+        return 0;
+
+	u16 partCount0 = 0;
+	u16 partCount1 = 0;
+	if(instance->usb0)
+		partCount0 = instance->usb0->GetPartitionCount();
+	if(instance->usb1)
+		partCount1 = instance->usb1->GetPartitionCount();
+
+    return partCount0+partCount1;
+}
+
+int DeviceHandler::PartitionToUSBPort(int part)
+{
+    if(!DeviceHandler::instance)
+        return 0;
+
+	u16 partCount0 = 0;
+	if(DeviceHandler::instance->usb0)
+		partCount0 = instance->usb0->GetPartitionCount();
+
+    if(!instance->usb0 || part >= partCount0)
+        return 1;
+    else
+        return 0;
+}
+
+int DeviceHandler::PartitionToPortPartition(int part)
+{
+    if(!DeviceHandler::instance)
+        return 0;
+
+	u16 partCount0 = 0;
+	if(instance->usb0)
+		partCount0 = instance->usb0->GetPartitionCount();
+
+    if(!instance->usb0 || part >= partCount0)
+        return part-partCount0;
+    else
+        return part;
+}
+
+const char *DeviceHandler::GetUSBFSName(int partition)
+{
+	if(!instance)
+		return NULL;
+
+    const char * FSName = NULL;
+    PartitionHandle *handle = instance->GetUSBHandleFromPartition(partition);
+
+	if(handle)
+		FSName = handle->GetFSName(PartitionToPortPartition(partition));
+
+    return FSName;
+}
+
+PartitionHandle *DeviceHandler::GetUSBHandleFromPartition(int part) const
+{
+    if(PartitionToUSBPort(part) == 0)
+        return usb0;
+    else
+        return usb1;
 }

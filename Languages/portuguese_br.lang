@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 11:39+0200\n"
+"POT-Creation-Date: 2011-06-22 19:31+0200\n"
 "PO-Revision-Date: 2009-10-23 18:52+0200\n"
 "Last-Translator: aniemotion\n"
 "Language-Team: boto12, aniemotion\n"
@@ -183,9 +183,6 @@ msgstr ""
 msgid "AutoInit Network"
 msgstr "Auto-iniciar Rede"
 
-msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr ""
-
 msgid "BCA Codes Path"
 msgstr "Caminho do BCA Codes"
 
@@ -229,6 +226,9 @@ msgid "Block Gui Settings"
 msgstr ""
 
 msgid "Block HBC Menu"
+msgstr ""
+
+msgid "Block Hard Drive Settings"
 msgstr ""
 
 msgid "Block IOS Reload"
@@ -389,6 +389,9 @@ msgstr ""
 
 msgid "Could not save."
 msgstr "Não foi possível gravar."
+
+msgid "Could not write to:"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "Download de Capas"
@@ -611,6 +614,9 @@ msgstr ""
 msgid "Extracting files..."
 msgstr "Extraindo arquivos..."
 
+msgid "Failed"
+msgstr ""
+
 msgid "Failed formating"
 msgstr "Falha ao formatar"
 
@@ -768,6 +774,9 @@ msgstr ""
 msgid "HOME Menu"
 msgstr "Menu Inicial"
 
+msgid "Hard Drive Settings"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Pasta Apps Homebrew"
 
@@ -812,17 +821,17 @@ msgstr "Insira um Disco do Wii!"
 msgid "Install"
 msgstr "Instalar"
 
+msgid "Install Directories"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "Erro de Instalação!"
 
-msgid "Install a game"
-msgstr "Instalar um jogo"
-
-msgid "Install directories"
+msgid "Install Partitions"
 msgstr ""
 
-msgid "Install partitions"
-msgstr "Instalare partições"
+msgid "Install a game"
+msgstr "Instalar um jogo"
 
 msgid "Installing content... Ok!"
 msgstr "Instalando conteúdo... Ok!"
@@ -1597,6 +1606,9 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Install partitions"
+#~ msgstr "Instalare partições"
 
 #~ msgid " Wad Saved as:"
 #~ msgstr " Wad salvo como:"

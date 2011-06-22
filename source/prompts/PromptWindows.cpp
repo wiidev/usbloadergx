@@ -1077,10 +1077,11 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
  ***************************************************************************/
 int FormatingPartition(const char *title, int part_num)
 {
-    PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
+    PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandleFromPartition(part_num);
+	int portPart = DeviceHandler::PartitionToPortPartition(part_num);
 
     char text[255];
-    sprintf(text, "%s: %.2fGB", tr( "Partition" ), usbHandle->GetSize(part_num) / GB_SIZE);
+    sprintf(text, "%s: %.2fGB", tr( "Partition" ), usbHandle->GetSize(portPart) / GB_SIZE);
     int choice = WindowPrompt(tr( "Do you want to format:" ), text, tr( "Yes" ), tr( "No" ));
     if (choice == 0)
         return -666;
@@ -1117,7 +1118,7 @@ int FormatingPartition(const char *title, int part_num)
     ResumeGui();
 
     VIDEO_WaitVSync();
-    ret = WBFS_Format(usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
+    ret = WBFS_Format(usbHandle->GetLBAStart(portPart), usbHandle->GetSecCount(portPart), DeviceHandler::PartitionToUSBPort(part_num));
 
     if (ret < 0)
     {
@@ -1125,7 +1126,7 @@ int FormatingPartition(const char *title, int part_num)
     }
     else
     {
-		PartitionFS * partition = usbHandle->GetPartitionRecord(part_num);
+		PartitionFS * partition = usbHandle->GetPartitionRecord(portPart);
 		partition->PartitionType = 0xBF;
 		partition->FSName = "WBFS";
         sleep(1);

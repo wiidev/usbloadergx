@@ -113,6 +113,7 @@ s32 IosLoader::LoadGameCios(s32 ios)
     WBFS_CloseAll();
     WDVD_Close();
     DeviceHandler::DestroyInstance();
+    USBStorage2_Deinit();
 
     ret = ReloadIosSafe(ios);
 

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 11:39+0200\n"
+"POT-Creation-Date: 2011-06-22 19:31+0200\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -183,9 +183,6 @@ msgstr ""
 msgid "AutoInit Network"
 msgstr "Autoinitiera Nätverk"
 
-msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr ""
-
 msgid "BCA Codes Path"
 msgstr "BCA kodssökväg"
 
@@ -229,6 +226,9 @@ msgid "Block Gui Settings"
 msgstr ""
 
 msgid "Block HBC Menu"
+msgstr ""
+
+msgid "Block Hard Drive Settings"
 msgstr ""
 
 msgid "Block IOS Reload"
@@ -389,6 +389,9 @@ msgstr ""
 
 msgid "Could not save."
 msgstr "Kunde inte spara."
+
+msgid "Could not write to:"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "Omslagsnedladdning"
@@ -611,6 +614,9 @@ msgstr ""
 msgid "Extracting files..."
 msgstr "Packar upp filer..."
 
+msgid "Failed"
+msgstr ""
+
 msgid "Failed formating"
 msgstr "Formatering misslyckad"
 
@@ -768,6 +774,9 @@ msgstr ""
 msgid "HOME Menu"
 msgstr "Hemmeny"
 
+msgid "Hard Drive Settings"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Apps"
 
@@ -812,17 +821,17 @@ msgstr "Sätt i en Wii-skiva!"
 msgid "Install"
 msgstr "Installera"
 
+msgid "Install Directories"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "Fel vid installering!"
 
-msgid "Install a game"
-msgstr "Installera ett spel"
-
-msgid "Install directories"
+msgid "Install Partitions"
 msgstr ""
 
-msgid "Install partitions"
-msgstr "Installera partitioner"
+msgid "Install a game"
+msgstr "Installera ett spel"
 
 msgid "Installing content... Ok!"
 msgstr "Installerar innehåll... Ok!"
@@ -1597,6 +1606,9 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "Install partitions"
+#~ msgstr "Installera partitioner"
 
 #~ msgid " Wad Saved as:"
 #~ msgstr "Wad sparad som:"

@@ -12,7 +12,6 @@
 
 rw_sector_callback_t readCallback = NULL;
 rw_sector_callback_t writeCallback = NULL;
-const DISC_INTERFACE * currentHandle = NULL;
 
 s32 __ReadDVD(void *fp, u32 lba, u32 len, void *iobuf)
 {
@@ -80,7 +79,7 @@ s32 __ReadUSB(void *fp, u32 lba, u32 count, void *iobuf)
         if (sectors > MAX_NB_SECTORS) sectors = MAX_NB_SECTORS;
 
         /* USB read */
-        ret = currentHandle->readSectors(partition_offset + cnt, sectors, ptr);
+        ret = info->handle->readSectors(partition_offset + cnt, sectors, ptr);
         if (!ret) return -1;
 
         /* Increment counter */
@@ -108,7 +107,7 @@ s32 __WriteUSB(void *fp, u32 lba, u32 count, void *iobuf)
         if (sectors > MAX_NB_SECTORS) sectors = MAX_NB_SECTORS;
 
         /* USB write */
-        ret = currentHandle->writeSectors(partition_offset + cnt, sectors, ptr);
+        ret = info->handle->writeSectors(partition_offset + cnt, sectors, ptr);
         if (!ret) return -1;
 
         /* Increment counter */

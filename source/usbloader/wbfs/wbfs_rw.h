@@ -15,11 +15,11 @@ extern "C"
         u32 hdd_sector_size;
         u32 partition_lba;
         u32 partition_num_sec;
+        const DISC_INTERFACE * handle;
     } WBFS_PartInfo;
 
     extern rw_sector_callback_t readCallback;
     extern rw_sector_callback_t writeCallback;
-    extern const DISC_INTERFACE * currentHandle;
 
     s32 __ReadDVD(void *fp, u32 lba, u32 len, void *iobuf);
     s32 __ReadUSB(void *fp, u32 lba, u32 count, void *iobuf);

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 11:39+0200\n"
+"POT-Creation-Date: 2011-06-22 19:31+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -183,9 +183,6 @@ msgstr ""
 msgid "AutoInit Network"
 msgstr "자동네트웍설정"
 
-msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr ""
-
 msgid "BCA Codes Path"
 msgstr ""
 
@@ -229,6 +226,9 @@ msgid "Block Gui Settings"
 msgstr ""
 
 msgid "Block HBC Menu"
+msgstr ""
+
+msgid "Block Hard Drive Settings"
 msgstr ""
 
 msgid "Block IOS Reload"
@@ -388,6 +388,9 @@ msgid "Could not open wiitdb.xml."
 msgstr ""
 
 msgid "Could not save."
+msgstr ""
+
+msgid "Could not write to:"
 msgstr ""
 
 msgid "Cover Download"
@@ -611,6 +614,9 @@ msgstr ""
 msgid "Extracting files..."
 msgstr ""
 
+msgid "Failed"
+msgstr ""
+
 msgid "Failed formating"
 msgstr "포맷 실패"
 
@@ -768,6 +774,9 @@ msgstr ""
 msgid "HOME Menu"
 msgstr "HOME 메뉴"
 
+msgid "Hard Drive Settings"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "홈브류 경로"
 
@@ -812,17 +821,17 @@ msgstr "Wii 디스크를 넣으세요!"
 msgid "Install"
 msgstr "설치"
 
+msgid "Install Directories"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "설치 에러!"
 
+msgid "Install Partitions"
+msgstr ""
+
 msgid "Install a game"
 msgstr "게임을 설치할까요"
-
-msgid "Install directories"
-msgstr ""
-
-msgid "Install partitions"
-msgstr ""
 
 msgid "Installing content... Ok!"
 msgstr "컨텐츠 인스톨중...성공!"

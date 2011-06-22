@@ -97,7 +97,15 @@ bool Wiinnertag::Send(const char *gameID)
 
 bool Wiinnertag::TagGame(const char *gameID)
 {
-    Wiinnertag Tag(Settings.WiinnertagPath);
+    string fullpath = Settings.WiinnertagPath;
+    if(fullpath.size() == 0)
+        return false;
+
+    if(fullpath[fullpath.size()-1] != '/')
+        fullpath += '/';
+    fullpath += "Wiinnertag.xml";
+
+    Wiinnertag Tag(fullpath);
     return Tag.Send(gameID);
 }
 
@@ -115,7 +123,15 @@ static const char * XMLSaveCallback(mxml_node_t *node, int where)
 
 bool Wiinnertag::CreateExample(const string &filepath)
 {
-    FILE * f = fopen(filepath.c_str(), "wb");
+    if(filepath.size() == 0)
+        return false;
+
+    string fullpath = filepath;
+    if(fullpath[fullpath.size()-1] != '/')
+        fullpath += '/';
+    fullpath += "Wiinnertag.xml";
+
+    FILE * f = fopen(fullpath.c_str(), "wb");
     if(!f)
         return false;
 

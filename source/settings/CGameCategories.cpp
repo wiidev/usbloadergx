@@ -59,6 +59,8 @@ const vector<unsigned int> &CGameCategories::operator[](const char *id) const
 static const char * XMLSaveCallback(mxml_node_t *node, int where)
 {
 	const char *name = node->value.element.name;
+	if(!name)
+	    return NULL;
 
 	if (where == MXML_WS_BEFORE_OPEN)
 	{
@@ -76,7 +78,7 @@ static const char * XMLSaveCallback(mxml_node_t *node, int where)
         else if(!strcmp(name, "Game"))
             return "\n\t";
 	}
-	return (NULL);
+	return NULL;
 }
 
 bool CGameCategories::Load(string filepath)
@@ -389,6 +391,7 @@ bool CGameCategories::ImportFromWiiTDB(const string &xmlpath)
     }
 
     XML_DB.CloseFile();
+    gameList.FilterList(filter.c_str());
 
 	return true;
 }

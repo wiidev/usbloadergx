@@ -10,7 +10,7 @@
 class Wbfs_Fat: public Wbfs
 {
     public:
-        Wbfs_Fat(u32 lba, u32 size, u32 part);
+        Wbfs_Fat(u32 lba, u32 size, u32 part, u32 port);
 
         virtual s32 Open();
         virtual void Close();

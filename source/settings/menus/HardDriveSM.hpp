@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright (C) 2010
+ * Copyright (C) 2011
  * by Dimok
  *
  * This software is provided 'as-is', without any express or implied
@@ -21,19 +21,24 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  ***************************************************************************/
-#ifndef LOADERSETTINGS_HPP_
-#define LOADERSETTINGS_HPP_
+#ifndef HARDDRIVE_MENU_HPP_
+#define HARDDRIVE_MENU_HPP_
 
 #include "SettingsMenu.hpp"
 
-class LoaderSettings : public SettingsMenu
+class HardDriveSM : public SettingsMenu
 {
     public:
-        LoaderSettings();
-        virtual int GetType() { return CLoaderSettings; };
+        HardDriveSM();
+        ~HardDriveSM();
+        virtual int GetType() { return CHardDriveSM; };
     protected:
         void SetOptionValues();
         int GetMenuInternal();
+
+        int OldSettingsPartition;
+        int OldSettingsMultiplePartitions;
+        int NewSettingsUSBPort;
 
         OptionList GuiOptions;
 };

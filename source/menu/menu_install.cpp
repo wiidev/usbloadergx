@@ -91,11 +91,9 @@ int MenuInstall()
         }
         else
         {
-            USBStorage2_Watchdog(0);
 			StartProgress(gametxt, name, 0, true, true);
             ret = WBFS_AddGame();
             ProgressStop();
-            USBStorage2_Watchdog(1);
             wiilight(0);
             if (ret != 0)
             {

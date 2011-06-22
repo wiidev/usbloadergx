@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 17:00+0100\n"
+"POT-Creation-Date: 2011-06-22 19:31+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -183,9 +183,6 @@ msgstr "Auto"
 msgid "AutoInit Network"
 msgstr "Autoinit. Netzwerk"
 
-msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr "Automatische Portumschaltung wird jetzt direkt zur Programmlaufzeit durchgeführt. Für diese Option müssen zuerst alle eigenen Pfade auf die SD Karte verweisen, da ansonsten das Dateisystem beschädigt werden könnte."
-
 msgid "BCA Codes Path"
 msgstr "BCA Codes"
 
@@ -230,6 +227,9 @@ msgstr "Blocke GUI-Optionen"
 
 msgid "Block HBC Menu"
 msgstr "Blocke HBC Menü"
+
+msgid "Block Hard Drive Settings"
+msgstr ""
 
 msgid "Block IOS Reload"
 msgstr "Blocke IOS-Neuladen"
@@ -389,6 +389,9 @@ msgstr "Konnte wiitdb.xml nicht öffnen."
 
 msgid "Could not save."
 msgstr "Es konnte nicht gespeichert werden."
+
+msgid "Could not write to:"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "Welche Cover herunterladen?"
@@ -611,6 +614,9 @@ msgstr "Beenden zum..."
 msgid "Extracting files..."
 msgstr "Entpacke Dateien..."
 
+msgid "Failed"
+msgstr ""
+
 msgid "Failed formating"
 msgstr "Formatieren fehlgeschlagen"
 
@@ -768,6 +774,9 @@ msgstr "Globale Einstellungen"
 msgid "HOME Menu"
 msgstr "HOME Menü"
 
+msgid "Hard Drive Settings"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Apps"
 
@@ -812,17 +821,17 @@ msgstr "Eine Wii Disk einlegen!"
 msgid "Install"
 msgstr "Installieren"
 
+msgid "Install Directories"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "Installationsfehler!"
 
+msgid "Install Partitions"
+msgstr ""
+
 msgid "Install a game"
 msgstr "Spiel installieren"
-
-msgid "Install directories"
-msgstr "Installationsart"
-
-msgid "Install partitions"
-msgstr "Partitionen installier."
 
 msgid "Installing content... Ok!"
 msgstr "Installiere Inhalt... OK!"
@@ -1597,3 +1606,12 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
+#~ msgstr "Automatische Portumschaltung wird jetzt direkt zur Programmlaufzeit durchgeführt. Für diese Option müssen zuerst alle eigenen Pfade auf die SD Karte verweisen, da ansonsten das Dateisystem beschädigt werden könnte."
+
+#~ msgid "Install directories"
+#~ msgstr "Installationsart"
+
+#~ msgid "Install partitions"
+#~ msgstr "Partitionen installier."

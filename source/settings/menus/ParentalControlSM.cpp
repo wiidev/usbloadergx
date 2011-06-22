@@ -59,14 +59,15 @@ ParentalControlSM::ParentalControlSM()
     Options->SetName(Idx++, "%s", tr( "Block Global Settings" ));
     Options->SetName(Idx++, "%s", tr( "Block Gui Settings" ));
     Options->SetName(Idx++, "%s", tr( "Block Loader Settings" ));
-    Options->SetName(Idx++, "%s", tr( "Block Parental Settings" ));
+    Options->SetName(Idx++, "%s", tr( "Block Hard Drive Settings" ));
     Options->SetName(Idx++, "%s", tr( "Block Feature Settings" ));
+    Options->SetName(Idx++, "%s", tr( "Block Parental Settings" ));
     Options->SetName(Idx++, "%s", tr( "Block Sound Settings" ));
+    Options->SetName(Idx++, "%s", tr( "Block Theme Downloader" ));
+    Options->SetName(Idx++, "%s", tr( "Block Theme Menu" ));
     Options->SetName(Idx++, "%s", tr( "Block Custom Paths" ));
     Options->SetName(Idx++, "%s", tr( "Block Updates" ));
     Options->SetName(Idx++, "%s", tr( "Block Reset Settings" ));
-    Options->SetName(Idx++, "%s", tr( "Block Theme Downloader" ));
-    Options->SetName(Idx++, "%s", tr( "Block Theme Menu" ));
     Options->SetName(Idx++, "%s", tr( "Block Game Settings" ));
     Options->SetName(Idx++, "%s", tr( "Block HBC Menu" ));
     Options->SetName(Idx++, "%s", tr( "Block Title Launcher" ));
@@ -111,14 +112,23 @@ void ParentalControlSM::SetOptionValues()
     //! Settings: Block Loader Settings
     Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_LOADER_SETTINGS) != 0)]));
 
-    //! Settings: Block Parental Settings
-    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_PARENTAL_SETTINGS) != 0)]));
+    //! Settings: Block Hard Drive Settings
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_HARD_DRIVE_SETTINGS) != 0)]));
 
     //! Settings: Block Feature Settings
     Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_FEATURE_SETTINGS) != 0)]));
 
+    //! Settings: Block Parental Settings
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_PARENTAL_SETTINGS) != 0)]));
+
     //! Settings: Block Sound Settings
     Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_SOUND_SETTINGS) != 0)]));
+
+    //! Settings: Block Theme Downloader
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_THEME_DOWNLOADER) != 0)]));
+
+    //! Settings: Block Theme Menu
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_THEME_MENU) != 0)]));
 
     //! Settings: Block Custom Paths
     Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_CUSTOMPATH_SETTINGS) != 0)]));
@@ -128,12 +138,6 @@ void ParentalControlSM::SetOptionValues()
 
     //! Settings: Block Reset Settings
     Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_RESET_SETTINGS) != 0)]));
-
-    //! Settings: Block Theme Downloader
-    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_THEME_DOWNLOADER) != 0)]));
-
-    //! Settings: Block Theme Menu
-    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_THEME_MENU) != 0)]));
 
     //! Settings: Block Game Settings
     Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_GAME_SETTINGS) != 0)]));
@@ -240,10 +244,10 @@ int ParentalControlSM::GetMenuInternal()
         Settings.ParentalBlocks ^= BLOCK_LOADER_SETTINGS;
     }
 
-    //! Settings: Block Parental Settings
+    //! Settings: Hard Drive Settings
     else if (ret == ++Idx)
     {
-        Settings.ParentalBlocks ^= BLOCK_PARENTAL_SETTINGS;
+        Settings.ParentalBlocks ^= BLOCK_HARD_DRIVE_SETTINGS;
     }
 
     //! Settings: Block Feature Settings
@@ -252,10 +256,28 @@ int ParentalControlSM::GetMenuInternal()
         Settings.ParentalBlocks ^= BLOCK_FEATURE_SETTINGS;
     }
 
+    //! Settings: Block Parental Settings
+    else if (ret == ++Idx)
+    {
+        Settings.ParentalBlocks ^= BLOCK_PARENTAL_SETTINGS;
+    }
+
     //! Settings: Block Sound Settings
     else if (ret == ++Idx)
     {
         Settings.ParentalBlocks ^= BLOCK_SOUND_SETTINGS;
+    }
+
+    //! Settings: Block Theme Downloader
+    else if (ret == ++Idx)
+    {
+        Settings.ParentalBlocks ^= BLOCK_THEME_DOWNLOADER;
+    }
+
+    //! Settings: Block Theme Menu
+    else if (ret == ++Idx)
+    {
+        Settings.ParentalBlocks ^= BLOCK_THEME_MENU;
     }
 
     //! Settings: Block Custom Paths
@@ -274,18 +296,6 @@ int ParentalControlSM::GetMenuInternal()
     else if (ret == ++Idx)
     {
         Settings.ParentalBlocks ^= BLOCK_RESET_SETTINGS;
-    }
-
-    //! Settings: Block Theme Downloader
-    else if (ret == ++Idx)
-    {
-        Settings.ParentalBlocks ^= BLOCK_THEME_DOWNLOADER;
-    }
-
-    //! Settings: Block Theme Menu
-    else if (ret == ++Idx)
-    {
-        Settings.ParentalBlocks ^= BLOCK_THEME_MENU;
     }
 
     //! Settings: Block Game Settings

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 11:39+0200\n"
+"POT-Creation-Date: 2011-06-22 19:31+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -183,9 +183,6 @@ msgstr ""
 msgid "AutoInit Network"
 msgstr "自动检测网络"
 
-msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr "接口自动切换已生效。你需要立即更改所有自定义路径为SD卡，否则可能会损坏USB分区上的文件系统。"
-
 msgid "BCA Codes Path"
 msgstr "BCA代码路径"
 
@@ -230,6 +227,9 @@ msgstr "图形界面设置"
 
 msgid "Block HBC Menu"
 msgstr "HBC菜单"
+
+msgid "Block Hard Drive Settings"
+msgstr ""
 
 msgid "Block IOS Reload"
 msgstr "阻止IOS重新载入"
@@ -389,6 +389,9 @@ msgstr "无法打开wiitdb.xml."
 
 msgid "Could not save."
 msgstr "无法保存"
+
+msgid "Could not write to:"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "下载封面"
@@ -611,6 +614,9 @@ msgstr "退出到哪里?"
 msgid "Extracting files..."
 msgstr "正在解压缩文件"
 
+msgid "Failed"
+msgstr ""
+
 msgid "Failed formating"
 msgstr "格式化失败"
 
@@ -768,6 +774,9 @@ msgstr "全局设置"
 msgid "HOME Menu"
 msgstr "主菜单"
 
+msgid "Hard Drive Settings"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "自制程序路径"
 
@@ -812,17 +821,17 @@ msgstr "插入 Wii 光盘!"
 msgid "Install"
 msgstr "安装"
 
+msgid "Install Directories"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "安装错误!"
 
+msgid "Install Partitions"
+msgstr ""
+
 msgid "Install a game"
 msgstr "安装游戏"
-
-msgid "Install directories"
-msgstr "安装目录"
-
-msgid "Install partitions"
-msgstr "安装分区"
 
 msgid "Installing content... Ok!"
 msgstr "正在安装程序主体... 完成!"
@@ -1597,6 +1606,15 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
+#~ msgstr "接口自动切换已生效。你需要立即更改所有自定义路径为SD卡，否则可能会损坏USB分区上的文件系统。"
+
+#~ msgid "Install directories"
+#~ msgstr "安装目录"
+
+#~ msgid "Install partitions"
+#~ msgstr "安装分区"
 
 #~ msgid " Wad Saved as:"
 #~ msgstr "WAD 保存为:"

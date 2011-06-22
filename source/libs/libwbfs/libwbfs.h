@@ -221,7 +221,7 @@ extern "C"
             partition_selector_t sel, u32 *comp_size, u32 *real_size);
 
     typedef int (*_frag_append_t)(void *ff, u32 offset, u32 sector, u32 count);
-    int wbfs_get_fragments(wbfs_disc_t *d, _frag_append_t append_fragment, void *callback_data);
+    int wbfs_get_fragments(wbfs_disc_t *d, _frag_append_t append_fragment, void *callback_data, u32 hdd_sector_size);
 
     extern wbfs_t wbfs_iso_file;
     u32 wbfs_disc_sector_used(wbfs_disc_t *d);

@@ -39,6 +39,7 @@ enum
     CGameLoadSM,
     CUninstallSM,
     CFeatureSettings,
+    CHardDriveSM,
 };
 
 class SettingsMenu : public GuiWindow

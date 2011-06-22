@@ -67,7 +67,7 @@ void CSettings::SetDefault()
     snprintf(BcaCodepath, sizeof(BcaCodepath), "%s/bca/", BootDevice);
     snprintf(WipCodepath, sizeof(WipCodepath), "%s/wip/", BootDevice);
     snprintf(WDMpath, sizeof(WDMpath), "%s/wdm/", BootDevice);
-    snprintf(WiinnertagPath, sizeof(WiinnertagPath), "%s/Wiinnertag.xml", ConfigPath);
+    snprintf(WiinnertagPath, sizeof(WiinnertagPath), "%s/", ConfigPath);
     snprintf(theme_path, sizeof(theme_path), "%stheme/", ConfigPath);
     snprintf(dolpath, sizeof(dolpath), "%s/", BootDevice);
     strcpy(theme, "");

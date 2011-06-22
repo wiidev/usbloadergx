@@ -621,7 +621,6 @@ u32 wbfs_extract_disc(wbfs_disc_t*d, rw_sector_callback_t write_dst_wii_sector, 
 
 u64 wbfs_estimate_disc(wbfs_t *p, read_wiidisc_callback_t read_src_wii_disc, void *callback_data, partition_selector_t sel)
 {
-    u8 *b;
     int i;
     u32 tot;
     u32 wii_sec_per_wbfs_sect = 1 << (p->wbfs_sec_sz_s - p->wii_sec_sz_s);
@@ -648,7 +647,6 @@ u64 wbfs_estimate_disc(wbfs_t *p, read_wiidisc_callback_t read_src_wii_disc, voi
     d = 0;
 
     info = wbfs_ioalloc( p->disc_info_sz );
-    b = (u8 *) info;
     read_src_wii_disc(callback_data, 0, 0x100, info->disc_header_copy);
 
     for (i = 0; i < p->n_wbfs_sec_per_disc; i++)
@@ -739,12 +737,10 @@ int wbfs_extract_file(wbfs_disc_t*d, char *path, void **data)
     error: return ret;
 }
 
-int wbfs_get_fragments(wbfs_disc_t *d, _frag_append_t append_fragment, void *callback_data)
+int wbfs_get_fragments(wbfs_disc_t *d, _frag_append_t append_fragment, void *callback_data, u32 hdd_sector_size)
 {
     if (!d) return -1;
 
-    //! Use here real physical HDD sector size
-    extern u32 hdd_sector_size;
     wbfs_t *p = d->p;
     int src_wbs_nlb = p->wbfs_sec_sz / hdd_sector_size;
     int i, ret, last = 0;

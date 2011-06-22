@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 11:39+0200\n"
+"POT-Creation-Date: 2011-06-22 19:31+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi, papa, ichiroling\n"
@@ -183,9 +183,6 @@ msgstr "自動"
 msgid "AutoInit Network"
 msgstr "自動ネット接続"
 
-msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr "ﾎﾟｰﾄの自動切換を使用する場合ﾌｧｲﾙｼｽﾃﾑの破損を避けるため、独自のﾊﾟｽ設定は全てSDｶｰﾄﾞにしてください"
-
 msgid "BCA Codes Path"
 msgstr "BCAコード"
 
@@ -230,6 +227,9 @@ msgstr "基本設定を制限"
 
 msgid "Block HBC Menu"
 msgstr "HBCメニューを制限"
+
+msgid "Block Hard Drive Settings"
+msgstr ""
 
 msgid "Block IOS Reload"
 msgstr "IOS再読み込み防止"
@@ -389,6 +389,9 @@ msgstr "wiitdb.xmlを開けませんでした"
 
 msgid "Could not save."
 msgstr "保存できませんでした"
+
+msgid "Could not write to:"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "何をダウンロードしますか"
@@ -611,6 +614,9 @@ msgstr "どこに移動しますか?"
 msgid "Extracting files..."
 msgstr "解凍中です…"
 
+msgid "Failed"
+msgstr ""
+
 msgid "Failed formating"
 msgstr "初期化に失敗しました"
 
@@ -768,6 +774,9 @@ msgstr "基本設定"
 msgid "HOME Menu"
 msgstr "HOMEﾎﾞﾀﾝﾒﾆｭｰ"
 
+msgid "Hard Drive Settings"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Homebrewアプリ"
 
@@ -812,17 +821,17 @@ msgstr "Wiiディスクを入れて下さい!"
 msgid "Install"
 msgstr "ｲﾝｽﾄｰﾙ"
 
+msgid "Install Directories"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "インストールエラー!"
 
+msgid "Install Partitions"
+msgstr ""
+
 msgid "Install a game"
 msgstr "ゲームをインストール"
-
-msgid "Install directories"
-msgstr "フォルダの構成"
-
-msgid "Install partitions"
-msgstr "保存する領域"
 
 msgid "Installing content... Ok!"
 msgstr "ｺﾝﾃﾝﾂをｲﾝｽﾄｰﾙ...成功！"
@@ -1597,3 +1606,12 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
+#~ msgstr "ﾎﾟｰﾄの自動切換を使用する場合ﾌｧｲﾙｼｽﾃﾑの破損を避けるため、独自のﾊﾟｽ設定は全てSDｶｰﾄﾞにしてください"
+
+#~ msgid "Install directories"
+#~ msgstr "フォルダの構成"
+
+#~ msgid "Install partitions"
+#~ msgstr "保存する領域"

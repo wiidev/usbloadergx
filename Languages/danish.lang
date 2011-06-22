@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 11:39+0200\n"
+"POT-Creation-Date: 2011-06-22 19:31+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -183,9 +183,6 @@ msgstr ""
 msgid "AutoInit Network"
 msgstr "AutoInit netværk"
 
-msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr "Automatisk skift af port er gjort on the fly. For denne mulighed skal du skifte alle brugerdefinerede stier til SD kortet først, for ellers kan det skade dit fil system."
-
 msgid "BCA Codes Path"
 msgstr "Sti til BCA koder"
 
@@ -230,6 +227,9 @@ msgstr "Bloker Gui indstillinger"
 
 msgid "Block HBC Menu"
 msgstr "Bloker HBC menu"
+
+msgid "Block Hard Drive Settings"
+msgstr ""
 
 msgid "Block IOS Reload"
 msgstr "Blokér IOS-reload"
@@ -389,6 +389,9 @@ msgstr "Kunne ikke åbne wiitdb.xml"
 
 msgid "Could not save."
 msgstr "Kunne ikke gemme."
+
+msgid "Could not write to:"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "Cover-download"
@@ -611,6 +614,9 @@ msgstr "Hvorhen?"
 msgid "Extracting files..."
 msgstr "Pakker filer ud..."
 
+msgid "Failed"
+msgstr ""
+
 msgid "Failed formating"
 msgstr "Formateringen mislykkedes"
 
@@ -768,6 +774,9 @@ msgstr "Almindelig Indstillinger"
 msgid "HOME Menu"
 msgstr ""
 
+msgid "Hard Drive Settings"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Sti til homebrew-programmer"
 
@@ -812,17 +821,17 @@ msgstr "Indsæt en Wii-DVD!"
 msgid "Install"
 msgstr "Installér"
 
+msgid "Install Directories"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "Installationsfejl!"
 
+msgid "Install Partitions"
+msgstr ""
+
 msgid "Install a game"
 msgstr "Installér nyt spil"
-
-msgid "Install directories"
-msgstr "Installer mappe"
-
-msgid "Install partitions"
-msgstr "Installationspartitioner"
 
 msgid "Installing content... Ok!"
 msgstr "Installerer indhold... Ok!"
@@ -1597,6 +1606,15 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
+#~ msgstr "Automatisk skift af port er gjort on the fly. For denne mulighed skal du skifte alle brugerdefinerede stier til SD kortet først, for ellers kan det skade dit fil system."
+
+#~ msgid "Install directories"
+#~ msgstr "Installer mappe"
+
+#~ msgid "Install partitions"
+#~ msgstr "Installationspartitioner"
 
 #~ msgid " Wad Saved as:"
 #~ msgstr " WAD gemt som:"

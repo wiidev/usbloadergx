@@ -69,8 +69,8 @@ void GameSettingsMenu::SetupMainButtons()
     SetMainButton(pos++, tr( "Game Load" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Ocarina" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Categories" ), MainButtonImgData, MainButtonImgOverData);
-    SetMainButton(pos++, tr( "Uninstall Menu" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Default Gamesettings" ), MainButtonImgData, MainButtonImgOverData);
+    SetMainButton(pos++, tr( "Uninstall Menu" ), MainButtonImgData, MainButtonImgOverData);
 }
 
 void GameSettingsMenu::CreateSettingsMenu(int menuNr)
@@ -126,15 +126,6 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
         ShowMenu();
     }
 
-    //! Uninstall Menu
-    else if(menuNr == Idx++)
-    {
-        HideMenu();
-        ResumeGui();
-        CurrentMenu = new UninstallSM(DiscHeader);
-        Append(CurrentMenu);
-    }
-
     //! Default Gamesettings
     else if(menuNr == Idx++)
     {
@@ -144,6 +135,15 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
             GameSettings.Remove(DiscHeader->id);
             GameSettings.Save();
         }
+    }
+
+    //! Uninstall Menu
+    else if(menuNr == Idx++)
+    {
+        HideMenu();
+        ResumeGui();
+        CurrentMenu = new UninstallSM(DiscHeader);
+        Append(CurrentMenu);
     }
 }
 

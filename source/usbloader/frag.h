@@ -39,7 +39,7 @@ int frag_get(FragList *ff, u32 offset, u32 count, u32 *poffset, u32 *psector, u3
 
 int frag_remap(FragList *ff, FragList *log, FragList *phy);
 
-int get_frag_list_for_file(char *fname, u8 *id, const u8 wbfs_part_fs, const u32 lba_offset);
+int get_frag_list_for_file(char *fname, u8 *id, const u8 wbfs_part_fs, const u32 lba_offset, const u32 hdd_sector_size);
 int get_frag_list(u8 *id);
 int set_frag_list(u8 *id);
 

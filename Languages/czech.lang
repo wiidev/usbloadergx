@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 11:39+0200\n"
+"POT-Creation-Date: 2011-06-22 19:31+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -183,9 +183,6 @@ msgstr ""
 msgid "AutoInit Network"
 msgstr "Automatický start síte"
 
-msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr ""
-
 msgid "BCA Codes Path"
 msgstr "Cesta pro BCA kódy"
 
@@ -230,6 +227,9 @@ msgstr "Zablokovat GUI nastavení"
 
 msgid "Block HBC Menu"
 msgstr "Zablokovat HBC nabídku"
+
+msgid "Block Hard Drive Settings"
+msgstr ""
 
 msgid "Block IOS Reload"
 msgstr "Zablokovat opetovné zavedení IOS"
@@ -389,6 +389,9 @@ msgstr "Nelze otevrít wiitdb.xml."
 
 msgid "Could not save."
 msgstr "Nelze uložit."
+
+msgid "Could not write to:"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "Stažení obalu"
@@ -611,6 +614,9 @@ msgstr "Opustit kam?"
 msgid "Extracting files..."
 msgstr "Rozbaluji soubory..."
 
+msgid "Failed"
+msgstr ""
+
 msgid "Failed formating"
 msgstr "Neúspešné formátování"
 
@@ -768,6 +774,9 @@ msgstr "Hlavní nastavení"
 msgid "HOME Menu"
 msgstr "Hlavní menu"
 
+msgid "Hard Drive Settings"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Cesta pro Homebrew aplikace"
 
@@ -812,17 +821,17 @@ msgstr "Vložte Wii disk"
 msgid "Install"
 msgstr "Instalace"
 
+msgid "Install Directories"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "Chyba pri instalaci"
 
+msgid "Install Partitions"
+msgstr ""
+
 msgid "Install a game"
 msgstr "Nainstalovat hru"
-
-msgid "Install directories"
-msgstr "Instalacní adresáre"
-
-msgid "Install partitions"
-msgstr "Instalacní oddíly"
 
 msgid "Installing content... Ok!"
 msgstr "Instaluji obsah... Ok!"
@@ -1597,6 +1606,12 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid "Install directories"
+#~ msgstr "Instalacní adresáre"
+
+#~ msgid "Install partitions"
+#~ msgstr "Instalacní oddíly"
 
 #~ msgid " Wad Saved as:"
 #~ msgstr " WAD uložen jako:"

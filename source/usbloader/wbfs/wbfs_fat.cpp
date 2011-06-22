@@ -36,10 +36,10 @@ using namespace std;
 
 static const char wbfs_fat_dir[] = "/wbfs";
 static const char invalid_path[] = "/\\:|<>?*\"'";
-extern u32 hdd_sector_size;
+extern u32 hdd_sector_size[2];
 
-Wbfs_Fat::Wbfs_Fat(u32 lba, u32 size, u32 part) :
-    Wbfs(lba, size, part), fat_hdr_list(NULL), fat_hdr_count(0)
+Wbfs_Fat::Wbfs_Fat(u32 lba, u32 size, u32 part, u32 port) :
+    Wbfs(lba, size, part, port), fat_hdr_list(NULL), fat_hdr_count(0)
 {
     memset(wbfs_fs_drive, 0, sizeof(wbfs_fs_drive));
 }
@@ -48,13 +48,13 @@ s32 Wbfs_Fat::Open()
 {
     Close();
 
-    PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
-
-    if(partition < (u32) usbHandle->GetPartitionTotalCount())
+    if(partition < (u32) DeviceHandler::GetUSBPartitionCount())
     {
-        if (lba == usbHandle->GetLBAStart(partition))
+		PartitionHandle *usbHandle = DeviceHandler::Instance()->GetUSBHandleFromPartition(partition);
+		int portPart = DeviceHandler::PartitionToPortPartition(partition);
+        if (lba == usbHandle->GetLBAStart(portPart))
         {
-            sprintf(wbfs_fs_drive, "%s:", usbHandle->MountName(partition));
+            sprintf(wbfs_fs_drive, "%s:", usbHandle->MountName(portPart));
             return 0;
         }
     }
@@ -90,7 +90,7 @@ wbfs_disc_t* Wbfs_Fat::OpenDisc(u8 *discid)
         wbfs_disc_t *iso_file = (wbfs_disc_t *) calloc(sizeof(wbfs_disc_t), 1);
         if (iso_file == NULL) return NULL;
         // mark with a special wbfs_part
-        wbfs_iso_file.wbfs_sec_sz = 512;
+        wbfs_iso_file.wbfs_sec_sz = hdd_sector_size[usbport];
         iso_file->p = &wbfs_iso_file;
         iso_file->header = (wbfs_disc_info_t*) malloc(sizeof(wbfs_disc_info_t));
         if(!iso_file->header)
@@ -307,14 +307,14 @@ u64 Wbfs_Fat::EstimateGameSize()
 {
     wbfs_t *part = NULL;
     u64 size = (u64) 143432 * 2 * 0x8000ULL;
-    u32 n_sector = size / hdd_sector_size;
-    u32 wii_sec_sz;
+    u32 n_sector = size / hdd_sector_size[usbport];
 
     // init a temporary dummy part
     // as a placeholder for wbfs_size_disc
-    part = wbfs_open_partition(nop_rw_sector, nop_rw_sector, NULL, hdd_sector_size, n_sector, 0, 1);
+    wbfs_set_force_mode(1);
+    part = wbfs_open_partition(nop_rw_sector, nop_rw_sector, NULL, hdd_sector_size[usbport], n_sector, 0, 1);
+    wbfs_set_force_mode(0);
     if (!part) return -1;
-    wii_sec_sz = part->wii_sec_sz;
 
     partition_selector_t part_sel = (partition_selector_t) Settings.InstallPartitions;
 
@@ -649,12 +649,17 @@ wbfs_t* Wbfs_Fat::OpenPart(char *fname)
     // wbfs 'partition' file
     ret = split_open(&split, fname);
     if (ret) return NULL;
+
+    wbfs_set_force_mode(1);
+
     part = wbfs_open_partition(split_read_sector, nop_rw_sector, //readonly //split_write_sector,
-            &split, hdd_sector_size, split.total_sec, 0, 0);
+            &split, hdd_sector_size[usbport], split.total_sec, 0, 0);
+
+    wbfs_set_force_mode(0);
+
     if (!part)
-    {
         split_close(&split);
-    }
+
     return part;
 }
 
@@ -732,11 +737,15 @@ wbfs_t* Wbfs_Fat::CreatePart(u8 *id, char *path)
         return NULL;
     }
 
-    part = wbfs_open_partition(split_read_sector, split_write_sector, &split, hdd_sector_size, n_sector, 0, 1);
+    wbfs_set_force_mode(1);
+
+    part = wbfs_open_partition(split_read_sector, split_write_sector, &split, hdd_sector_size[usbport], n_sector, 0, 1);
+
+    wbfs_set_force_mode(0);
+
     if (!part)
-    {
         split_close(&split);
-    }
+
     return part;
 }
 
@@ -813,5 +822,5 @@ int Wbfs_Fat::GetFragList(u8 *id)
     int ret = FindFilename(id, fname, sizeof(fname));
     if (!ret) return -1;
 
-    return get_frag_list_for_file(fname, id, GetFSType(), lba);
+    return get_frag_list_for_file(fname, id, GetFSType(), lba, hdd_sector_size[usbport]);
 }

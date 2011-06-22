@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 11:39+0200\n"
+"POT-Creation-Date: 2011-06-22 19:31+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -183,9 +183,6 @@ msgstr ""
 msgid "AutoInit Network"
 msgstr "Ağı ototanımla"
 
-msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr ""
-
 msgid "BCA Codes Path"
 msgstr "BCA Kod Yolu"
 
@@ -229,6 +226,9 @@ msgid "Block Gui Settings"
 msgstr ""
 
 msgid "Block HBC Menu"
+msgstr ""
+
+msgid "Block Hard Drive Settings"
 msgstr ""
 
 msgid "Block IOS Reload"
@@ -389,6 +389,9 @@ msgstr ""
 
 msgid "Could not save."
 msgstr "Kaydedilemedi"
+
+msgid "Could not write to:"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "Kapak Indirme"
@@ -611,6 +614,9 @@ msgstr ""
 msgid "Extracting files..."
 msgstr "Dosyalar çıkarılıyor..."
 
+msgid "Failed"
+msgstr ""
+
 msgid "Failed formating"
 msgstr "Biçimlendirme başarısız"
 
@@ -768,6 +774,9 @@ msgstr ""
 msgid "HOME Menu"
 msgstr "HOME Menü"
 
+msgid "Hard Drive Settings"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Yazılımlarının Yolu"
 
@@ -812,17 +821,17 @@ msgstr "Bir Wii Diski Takın!"
 msgid "Install"
 msgstr "Kur"
 
+msgid "Install Directories"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "Kurulum Hatasi!"
 
+msgid "Install Partitions"
+msgstr ""
+
 msgid "Install a game"
 msgstr "Oyun kur"
-
-msgid "Install directories"
-msgstr ""
-
-msgid "Install partitions"
-msgstr ""
 
 msgid "Installing content... Ok!"
 msgstr "İçerik kuruluyor.. OK!"

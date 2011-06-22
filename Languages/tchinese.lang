@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 11:39+0200\n"
+"POT-Creation-Date: 2011-06-22 19:31+0200\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -183,9 +183,6 @@ msgstr ""
 msgid "AutoInit Network"
 msgstr "自動檢查網路"
 
-msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr "立即生效連接埠自動切換功能。首先你需要在這選項改變所有自訂路徑為SD卡，否則可能會損壞檔案系統。"
-
 msgid "BCA Codes Path"
 msgstr "BAC代碼路徑"
 
@@ -230,6 +227,9 @@ msgstr "封鎖介面設定"
 
 msgid "Block HBC Menu"
 msgstr "封鎖 HBC 選單"
+
+msgid "Block Hard Drive Settings"
+msgstr ""
 
 msgid "Block IOS Reload"
 msgstr "封鎖 IOS 重新載入"
@@ -389,6 +389,9 @@ msgstr "無法開啟wiitdb.xml。"
 
 msgid "Could not save."
 msgstr "無法儲存"
+
+msgid "Could not write to:"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "下載封面"
@@ -611,6 +614,9 @@ msgstr "退出到？"
 msgid "Extracting files..."
 msgstr "提取檔案中..."
 
+msgid "Failed"
+msgstr ""
+
 msgid "Failed formating"
 msgstr "格式化失敗"
 
@@ -768,6 +774,9 @@ msgstr "整體設定"
 msgid "HOME Menu"
 msgstr "主選單"
 
+msgid "Hard Drive Settings"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "HBC 應用程式路徑"
 
@@ -812,17 +821,17 @@ msgstr "插入 Wii 光碟！"
 msgid "Install"
 msgstr "安裝"
 
+msgid "Install Directories"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "安裝錯誤！"
 
+msgid "Install Partitions"
+msgstr ""
+
 msgid "Install a game"
 msgstr "安裝遊戲"
-
-msgid "Install directories"
-msgstr "安裝目錄"
-
-msgid "Install partitions"
-msgstr "安裝磁區"
 
 msgid "Installing content... Ok!"
 msgstr "正在安裝內容...完成！"
@@ -1597,6 +1606,15 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
+#~ msgstr "立即生效連接埠自動切換功能。首先你需要在這選項改變所有自訂路徑為SD卡，否則可能會損壞檔案系統。"
+
+#~ msgid "Install directories"
+#~ msgstr "安裝目錄"
+
+#~ msgid "Install partitions"
+#~ msgstr "安裝磁區"
 
 #~ msgid " has been Saved. The text has not been verified. Some of the code may not work right with each other. If you experience trouble, open the text in a real text editor for more information."
 #~ msgstr "已經被儲存。內容尚未驗證。部分代碼可能無法作用。如果你遇到問題，請用文字編輯器打開文本文件以獲得更多的信息。"

@@ -51,7 +51,7 @@ class CCategoryList
         bool findCategory(unsigned int id) { listIter = nameList.find(id); return listIter != nameList.end(); };
         int pos() const { return distance(nameList.begin(), listIter); }
         int size() const { return nameList.size(); }
-        void clear() { nameList.clear(); }
+        void clear();
     private:
         string configPath;
         map<unsigned int, string>::const_iterator listIter;

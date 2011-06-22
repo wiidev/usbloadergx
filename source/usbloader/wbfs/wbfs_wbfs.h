@@ -9,8 +9,8 @@
 class Wbfs_Wbfs: public Wbfs
 {
     public:
-        Wbfs_Wbfs(u32 device, u32 lba, u32 size) :
-            Wbfs(device, lba, size)
+        Wbfs_Wbfs(u32 device, u32 lba, u32 size, u32 port) :
+            Wbfs(device, lba, size, port)
         {
         }
 

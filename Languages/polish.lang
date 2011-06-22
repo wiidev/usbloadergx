@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 11:39+0200\n"
+"POT-Creation-Date: 2011-06-22 19:31+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -183,9 +183,6 @@ msgstr ""
 msgid "AutoInit Network"
 msgstr "Autoinicjalizacja sieci"
 
-msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr ""
-
 msgid "BCA Codes Path"
 msgstr "Sciezka kodow BCA"
 
@@ -229,6 +226,9 @@ msgid "Block Gui Settings"
 msgstr ""
 
 msgid "Block HBC Menu"
+msgstr ""
+
+msgid "Block Hard Drive Settings"
 msgstr ""
 
 msgid "Block IOS Reload"
@@ -389,6 +389,9 @@ msgstr ""
 
 msgid "Could not save."
 msgstr "Nie mozna zapisac"
+
+msgid "Could not write to:"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "Pobierz okladki"
@@ -611,6 +614,9 @@ msgstr ""
 msgid "Extracting files..."
 msgstr "Rozpakowywanie plikow..."
 
+msgid "Failed"
+msgstr ""
+
 msgid "Failed formating"
 msgstr "Nie udalo sie sformatowac"
 
@@ -768,6 +774,9 @@ msgstr ""
 msgid "HOME Menu"
 msgstr "Menu"
 
+msgid "Hard Drive Settings"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Sciezka plikacji homebrew"
 
@@ -812,17 +821,17 @@ msgstr "Wloz plyte Wii!"
 msgid "Install"
 msgstr "Zainstaluj"
 
+msgid "Install Directories"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "Blad instalacji"
 
-msgid "Install a game"
-msgstr "Zainstaluj gre"
-
-msgid "Install directories"
+msgid "Install Partitions"
 msgstr ""
 
-msgid "Install partitions"
-msgstr "Zainstaluj partycje"
+msgid "Install a game"
+msgstr "Zainstaluj gre"
 
 msgid "Installing content... Ok!"
 msgstr "Instalowanie zawartosci...Ok!"
@@ -1597,6 +1606,9 @@ msgstr "z"
 
 msgid "seconds left"
 msgstr "sekund pozostalo"
+
+#~ msgid "Install partitions"
+#~ msgstr "Zainstaluj partycje"
 
 #~ msgid " Wad Saved as:"
 #~ msgstr " Wad zapisano jako:"

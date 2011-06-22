@@ -32,7 +32,6 @@
 u32 AppEntrypoint = 0;
 
 struct discHdr *dvdheader = NULL;
-extern u32 hdd_sector_size;
 extern int mountMethod;
 
 int GameBooter::BootGCMode()
@@ -126,8 +125,7 @@ int GameBooter::SetupDisc(u8 * gameID)
 
     int ret = -1;
 
-    if(((IosLoader::IsWaninkokoIOS() && IOS_GetRevision() < 18) ||
-        hdd_sector_size != 512) && gameList.GetGameFS(gameID) == PART_FS_WBFS)
+    if(IosLoader::IsWaninkokoIOS() && IOS_GetRevision() < 18)
     {
         gprintf("Disc_SetUSB...");
         ret = Disc_SetUSB(gameID);
@@ -184,6 +182,10 @@ int GameBooter::BootGame(const char * gameID)
     int ret = FindDiscHeader(gameID, gameHeader);
     if(ret < 0)
         return ret;
+
+    //! Remember game's USB port
+    int partition = gameList.GetPartitionNumber(gameHeader.id);
+    int usbport = DeviceHandler::PartitionToUSBPort(partition);
 
     //! Setup game configuration from game settings. If no game settings exist use global/default.
     GameCFG * game_cfg = GameSettings.GetGameCFG(gameHeader.id);
@@ -270,20 +272,14 @@ int GameBooter::BootGame(const char * gameID)
     //! Shadow mload - Only needed on some games with Hermes v5.1 (Check is inside the function)
     shadow_mload();
 
-    //! Remember game's USB port
-    int usbport = USBStorage2_GetPort();
-
     gprintf("Shutting down devices...\n");
     //! Flush all caches and close up all devices
     WBFS_CloseAll();
     DeviceHandler::DestroyInstance();
     if(Settings.USBPort == 2)
-    {
         //! Reset USB port because device handler changes it for cache flushing
-        USBStorage2_Init();
         USBStorage2_SetPort(usbport);
-        USBStorage2_Deinit();
-    }
+    USBStorage2_Deinit();
     USB_Deinitialize();
 
     //! Modify Wii Message Board to display the game starting here

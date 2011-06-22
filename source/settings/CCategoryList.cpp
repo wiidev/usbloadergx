@@ -35,8 +35,14 @@ CCategoryList CategoryList;
 
 CCategoryList::CCategoryList()
 {
-    nameList[0] = tr("All");
+    clear();
     goToFirst();
+}
+
+void CCategoryList::clear()
+{
+    nameList.clear();
+    nameList[0] = tr("All");
 }
 
 const char * CCategoryList::operator[](unsigned int id)

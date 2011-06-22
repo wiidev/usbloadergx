@@ -69,8 +69,7 @@ int StartUpProcess::ParseArguments(int argc, char *argv[])
         ptr = strcasestr(argv[i], "-usbport=");
         if(ptr)
         {
-            Settings.USBPort = LIMIT(atoi(ptr+strlen("-usbport=")), 0, 1);
-            DeviceHandler::SetUSBPort(Settings.USBPort, false);
+            Settings.USBPort = LIMIT(atoi(ptr+strlen("-usbport=")), 0, 2);
         }
 
         if(strlen(argv[i]) == 6 && strchr(argv[i], '=') == 0 && strchr(argv[i], '-') == 0)
@@ -125,7 +124,7 @@ void StartUpProcess::SetTextf(const char * format, ...)
 bool StartUpProcess::USBSpinUp()
 {
     bool started = false;
-    const DISC_INTERFACE * handle = DeviceHandler::GetUSBInterface();
+    const DISC_INTERFACE * handle = Settings.USBPort == 1 ? DeviceHandler::GetUSB1Interface() : DeviceHandler::GetUSB0Interface();
     Timer countDown;
     // wait 10 sec for the USB to spin up...stupid slow ass HDD
     do
@@ -186,6 +185,7 @@ int StartUpProcess::Execute()
         SetTextf("Loading cIOS %i\n", Settings.cios);
 
         DeviceHandler::DestroyInstance();
+        USBStorage2_Deinit();
 
         // Loading now the cios setup in the settings
         IosLoader::LoadAppCios();
@@ -205,8 +205,12 @@ int StartUpProcess::Execute()
     {
         SetTextf("Changing USB Port to %i\n", Settings.USBPort);
         DeviceHandler::Instance()->UnMountAllUSB();
-        DeviceHandler::SetUSBPort(Settings.USBPort);
         DeviceHandler::Instance()->MountAllUSB();
+    }
+    else if(Settings.USBPort == 2)
+    {
+        SetTextf("Mounting USB Port to 1\n");
+        DeviceHandler::Instance()->MountUSBPort1();
     }
 
     gprintf("\tLoading game categories...%s\n", GameCategories.Load(Settings.ConfigPath) ? "done" : "failed");

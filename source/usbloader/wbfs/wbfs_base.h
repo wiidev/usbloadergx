@@ -12,7 +12,7 @@
 class Wbfs
 {
     public:
-        Wbfs(u32 lba, u32 size, u32 part);
+        Wbfs(u32 lba, u32 size, u32 part, u32 usbport);
         ~Wbfs() { Close(); };
         static s32 Init(u32);
         s32 CheckGame(u8 *);
@@ -40,6 +40,7 @@ class Wbfs
         const u32 lba;
         const u32 size;
         const u32 partition;
+        const u32 usbport;
 };
 
 #endif //_H

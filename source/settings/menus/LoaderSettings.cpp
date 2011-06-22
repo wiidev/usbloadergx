@@ -22,22 +22,13 @@
  * distribution.
  ***************************************************************************/
 #include <unistd.h>
-#include <sys/statvfs.h>
 #include "LoaderSettings.hpp"
-#include "Controls/DeviceHandler.hpp"
 #include "usbloader/usbstorage2.h"
 #include "settings/CSettings.h"
-#include "prompts/ProgressWindow.h"
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
 #include "wad/nandtitle.h"
 #include "prompts/TitleBrowser.h"
-#include "usbloader/GameList.h"
-#include "usbloader/wbfs.h"
-#include "usbloader/utils.h"
-#include "system/IosLoader.h"
-#include "settings/GameTitles.h"
-#include "xml/xml.h"
 #include "menu.h"
 
 static const char * OnOffText[] =
@@ -74,38 +65,12 @@ static const char * LanguageText[MAX_LANGUAGE] =
     trNOOP( "Console Default" )
 };
 
-static const char * InstallToText[INSTALL_TO_MAX] =
-{
-    trNOOP( "None" ),
-    trNOOP( "GAMEID_Gamename" ),
-    trNOOP( "Gamename [GAMEID]" )
-};
-
-static const char * SplitSizeText[INSTALL_TO_MAX] =
-{
-    trNOOP( "No Splitting" ),
-    trNOOP( "Split each 2GB" ),
-    trNOOP( "Split each 4GB" ),
-};
-
 static const char * Error002Text[] =
 {
     trNOOP( "No" ),
     trNOOP( "Yes" ),
     trNOOP( "Anti" )
 };
-
-static inline bool IsValidPartition(int fs_type, int cios)
-{
-    if (IosLoader::IsWaninkokoIOS() && NandTitles.VersionOf(TITLE_ID(1, cios)) < 18)
-    {
-        return fs_type == PART_FS_WBFS;
-    }
-    else
-    {
-        return fs_type == PART_FS_WBFS || fs_type == PART_FS_FAT || fs_type == PART_FS_NTFS || fs_type == PART_FS_EXT;
-    }
-}
 
 LoaderSettings::LoaderSettings()
     : SettingsMenu(tr("Loader Settings"), &GuiOptions, MENU_NONE)
@@ -118,55 +83,12 @@ LoaderSettings::LoaderSettings()
     Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
     Options->SetName(Idx++, "%s", tr( "Ocarina" ));
     Options->SetName(Idx++, "%s", tr( "Boot/Standard" ));
-    Options->SetName(Idx++, "%s", tr( "Game/Install Partition" ));
-    Options->SetName(Idx++, "%s", tr( "Multiple Partitions" ));
-    Options->SetName(Idx++, "%s", tr( "USB Port" ));
-    Options->SetName(Idx++, "%s", tr( "Install directories" ));
-    Options->SetName(Idx++, "%s", tr( "Game Split Size" ));
     Options->SetName(Idx++, "%s", tr( "Quick Boot" ));
     Options->SetName(Idx++, "%s", tr( "Error 002 fix" ));
     Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
-    Options->SetName(Idx++, "%s", tr( "Install partitions" ));
     Options->SetName(Idx++, "%s", tr( "Return To" ));
-    Options->SetName(Idx++, "%s", tr( "Messageboard Update" ));
-    Options->SetName(Idx++, "%s", tr( "Sync FAT32 FS Info" ));
-
-    OldSettingsPartition = Settings.partition;
-    OldSettingsMultiplePartitions = Settings.MultiplePartitions;
-    NewSettingsUSBPort = Settings.USBPort;
 
     SetOptionValues();
-}
-
-LoaderSettings::~LoaderSettings()
-{
-    //! if partition has changed, Reinitialize it
-    if (Settings.partition != OldSettingsPartition ||
-        Settings.MultiplePartitions != OldSettingsMultiplePartitions ||
-        Settings.USBPort != NewSettingsUSBPort)
-    {
-        WBFS_CloseAll();
-
-        if(Settings.USBPort != NewSettingsUSBPort)
-        {
-            DeviceHandler::Instance()->UnMountAllUSB();
-            Settings.USBPort = NewSettingsUSBPort;
-            DeviceHandler::SetUSBPort(Settings.USBPort);
-            DeviceHandler::Instance()->MountAllUSB();
-
-            if(Settings.partition >= DeviceHandler::Instance()->GetUSBHandle()->GetPartitionTotalCount())
-                Settings.partition = 0;
-        }
-
-        if(Settings.MultiplePartitions)
-            WBFS_OpenAll();
-        else
-            WBFS_OpenPart(Settings.partition);
-
-        //! Reload the new game titles
-        gameList.ReadGameList();
-        GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
-    }
 }
 
 void LoaderSettings::SetOptionValues()
@@ -194,25 +116,6 @@ void LoaderSettings::SetOptionValues()
     else
         Options->SetValue(Idx++, "********");
 
-    //! Settings: Game/Install Partition
-    PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
-    // Get the partition name and it's size in GB's
-    Options->SetValue(Idx++, "%s (%.2fGB)", usbHandle->GetFSName(Settings.partition), usbHandle->GetSize(Settings.partition)/GB_SIZE);
-
-    //! Settings: Multiple Partitions
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.MultiplePartitions] ));
-
-    //! Settings: USB Port
-    if(NewSettingsUSBPort == 2)
-        Options->SetValue(Idx++, tr("Both Ports"));
-    else
-        Options->SetValue(Idx++, "%i", NewSettingsUSBPort);
-
-    //! Settings: Install directories
-    Options->SetValue(Idx++, "%s", tr( InstallToText[Settings.InstallToDir] ));
-
-    //! Settings: Game Split Size
-    Options->SetValue(Idx++, "%s", tr( SplitSizeText[Settings.GameSplit] ));
 
     //! Settings: Quick Boot
     Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.quickboot] ));
@@ -223,14 +126,6 @@ void LoaderSettings::SetOptionValues()
     //! Settings: Block IOS Reload
     Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.BlockIOSReload] ));
 
-    //! Settings: Install partitions
-    if(Settings.InstallPartitions == ONLY_GAME_PARTITION)
-        Options->SetValue(Idx++, "%s", tr("Only Game Partition"));
-    else if(Settings.InstallPartitions == ALL_PARTITIONS)
-        Options->SetValue(Idx++, "%s", tr("All Partitions"));
-    else if(Settings.InstallPartitions == REMOVE_UPDATE_PARTITION)
-        Options->SetValue(Idx++, "%s", tr("Remove update"));
-
     //! Settings: Return To
     const char* TitleName = NULL;
     u64 tid = NandTitles.FindU32(Settings.returnTo);
@@ -238,12 +133,6 @@ void LoaderSettings::SetOptionValues()
         TitleName = NandTitles.NameOf(tid);
     TitleName = TitleName ? TitleName : strlen(Settings.returnTo) > 0 ? Settings.returnTo : tr(OnOffText[0]);
     Options->SetValue(Idx++, "%s", TitleName);
-
-    //! Settings: Messageboard Update
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.PlaylogUpdate] ));
-
-    //! Settings: Sync FAT32 FS Info
-    Options->SetValue(Idx++, " ");
 }
 
 int LoaderSettings::GetMenuInternal()
@@ -310,101 +199,6 @@ int LoaderSettings::GetMenuInternal()
         }
     }
 
-    //! Settings: Game/Install Partition
-    else if (ret == ++Idx)
-    {
-        // Select the next valid partition, even if that's the same one
-        int fs_type = 0;
-        int ios = IOS_GetVersion();
-        int retries = 20;
-        do
-        {
-            Settings.partition = (Settings.partition + 1) % DeviceHandler::Instance()->GetUSBHandle()->GetPartitionTotalCount();
-			fs_type = DeviceHandler::GetUSBFilesystemType(Settings.partition);
-        }
-        while (!IsValidPartition(fs_type, ios) && --retries > 0);
-
-        if(fs_type == PART_FS_FAT && Settings.GameSplit == GAMESPLIT_NONE)
-            Settings.GameSplit = GAMESPLIT_4GB;
-    }
-
-    //! Settings: Multiple Partitions
-    else if (ret == ++Idx)
-    {
-        if (++Settings.MultiplePartitions >= MAX_ON_OFF) Settings.MultiplePartitions = 0;
-    }
-
-    //! Settings: USB Port
-    else if (ret == ++Idx)
-    {
-        if(!IosLoader::IsHermesIOS())
-        {
-            WindowPrompt(tr("ERROR:"), tr("USB Port changing is only supported on Hermes cIOS."), tr("OK"));
-            NewSettingsUSBPort = 0;
-            Settings.USBPort = 0;
-        }
-
-        else if (++NewSettingsUSBPort >= 3) // 2 = both ports
-            NewSettingsUSBPort = 0;
-
-        if(NewSettingsUSBPort == 2)
-        {
-            bool allSDPaths = true;
-            if(strncmp(Settings.covers_path, "usb", 3) == 0)
-                allSDPaths = false;
-            else if(strncmp(Settings.coversFull_path, "usb", 3) == 0)
-                allSDPaths = false;
-            else if(strncmp(Settings.disc_path, "usb", 3) == 0)
-                allSDPaths = false;
-            else if(strncmp(Settings.theme_path, "usb", 3) == 0)
-                allSDPaths = false;
-            else if(strncmp(Settings.titlestxt_path, "usb", 3) == 0)
-                allSDPaths = false;
-            else if(strncmp(Settings.update_path, "usb", 3) == 0)
-                allSDPaths = false;
-            else if(strncmp(Settings.Cheatcodespath, "usb", 3) == 0)
-                allSDPaths = false;
-            else if(strncmp(Settings.TxtCheatcodespath, "usb", 3) == 0)
-                allSDPaths = false;
-            else if(strncmp(Settings.dolpath, "usb", 3) == 0)
-                allSDPaths = false;
-            else if(strncmp(Settings.homebrewapps_path, "usb", 3) == 0)
-                allSDPaths = false;
-            else if(strncmp(Settings.BcaCodepath, "usb", 3) == 0)
-                allSDPaths = false;
-            else if(strncmp(Settings.WipCodepath, "usb", 3) == 0)
-                allSDPaths = false;
-            else if(strncmp(Settings.languagefiles_path, "usb", 3) == 0)
-                allSDPaths = false;
-            else if(strncmp(Settings.WDMpath, "usb", 3) == 0)
-                allSDPaths = false;
-
-            if(!allSDPaths)
-            {
-                WindowPrompt(tr("ERROR:"), tr("Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."), tr("OK"));
-                NewSettingsUSBPort = 0;
-            }
-        }
-    }
-
-    //! Settings: Install directories
-    else if (ret == ++Idx)
-    {
-        if (++Settings.InstallToDir >= INSTALL_TO_MAX) Settings.InstallToDir = 0;
-    }
-
-    //! Settings: Game Split Size
-    else if (ret == ++Idx)
-    {
-        if (++Settings.GameSplit >= GAMESPLIT_MAX)
-        {
-            if(DeviceHandler::GetUSBFilesystemType(Settings.partition) == PART_FS_FAT)
-                Settings.GameSplit = GAMESPLIT_2GB;
-            else
-                Settings.GameSplit = GAMESPLIT_NONE;
-        }
-    }
-
     //! Settings: Quick Boot
     else if (ret == ++Idx)
     {
@@ -423,24 +217,6 @@ int LoaderSettings::GetMenuInternal()
         if (++Settings.BlockIOSReload >= 3) Settings.BlockIOSReload = 0;
     }
 
-    //! Settings: Install partitions
-    else if (ret == ++Idx)
-    {
-        switch(Settings.InstallPartitions)
-        {
-            case ONLY_GAME_PARTITION:
-                Settings.InstallPartitions = ALL_PARTITIONS;
-                break;
-            case ALL_PARTITIONS:
-                Settings.InstallPartitions = REMOVE_UPDATE_PARTITION;
-                break;
-            default:
-            case REMOVE_UPDATE_PARTITION:
-                Settings.InstallPartitions = ONLY_GAME_PARTITION;
-                break;
-        }
-    }
-
     //! Settings: Return To
     else if (ret == ++Idx)
     {
@@ -448,37 +224,6 @@ int LoaderSettings::GetMenuInternal()
         bool getChannel = TitleSelector(tidChar);
         if (getChannel)
             snprintf(Settings.returnTo, sizeof(Settings.returnTo), "%s", tidChar);
-    }
-
-    //! Settings: Messageboard Update
-    else if (ret == ++Idx )
-    {
-        if (++Settings.PlaylogUpdate >= MAX_ON_OFF) Settings.PlaylogUpdate = 0;
-    }
-
-    //! Settings: Sync FAT32 FS Info
-    else if (ret == ++Idx )
-    {
-        int choice = WindowPrompt(0, tr("Do you want to sync free space info sector on all FAT32 partitions?"), tr("Yes"), tr("Cancel"));
-        if(choice)
-        {
-            StartProgress(tr("Synchronizing..."), tr("Please wait..."), 0, false, false);
-            PartitionHandle * usb = DeviceHandler::Instance()->GetUSBHandle();
-            for(int i = 0; i < usb->GetPartitionCount(); ++i)
-            {
-                ShowProgress(i, usb->GetPartitionCount());
-                if(strncmp(usb->GetFSName(i), "FAT", 3) == 0)
-                {
-                    struct statvfs stats;
-                    char drive[20];
-                    snprintf(drive, sizeof(drive), "%s:/", usb->MountName(i));
-                    memset(&stats, 0, sizeof(stats));
-                    memcpy(&stats.f_flag, "SCAN", 4);
-                    statvfs(drive, &stats);
-                }
-            }
-            ProgressStop();
-        }
     }
 
     SetOptionValues();

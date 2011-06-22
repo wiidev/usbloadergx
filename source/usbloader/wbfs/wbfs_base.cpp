@@ -12,24 +12,22 @@
 
 #include "wbfs_base.h"
 
-Wbfs::Wbfs(u32 l, u32 s, u32 part)
-    : hdd(NULL), lba(l), size(s), partition(part)
+Wbfs::Wbfs(u32 l, u32 s, u32 part, u32 port)
+    : hdd(NULL), lba(l), size(s), partition(part), usbport(port)
 {
 }
 
 s32 Wbfs::Init(u32 device)
 {
     s32 ret;
-	const DISC_INTERFACE * handle = DeviceHandler::GetUSBInterface();
 
     switch (WBFS_DEVICE_USB)
     {
         case WBFS_DEVICE_USB:
             /* Initialize USB storage */
-            ret = handle->startup();
-            if (ret)
+
+            if (DeviceHandler::GetUSBPartitionCount() > 0)
             {
-                currentHandle = handle;
                 /* Setup callbacks */
                 readCallback = __ReadUSB;
                 writeCallback = __WriteUSB;

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 11:39+0200\n"
+"POT-Creation-Date: 2011-06-22 19:31+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -183,9 +183,6 @@ msgstr ""
 msgid "AutoInit Network"
 msgstr "Autostart nettverk"
 
-msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr ""
-
 msgid "BCA Codes Path"
 msgstr "BCA kode sti"
 
@@ -229,6 +226,9 @@ msgid "Block Gui Settings"
 msgstr ""
 
 msgid "Block HBC Menu"
+msgstr ""
+
+msgid "Block Hard Drive Settings"
 msgstr ""
 
 msgid "Block IOS Reload"
@@ -389,6 +389,9 @@ msgstr "Kan ikke åpne wiitdb.xml."
 
 msgid "Could not save."
 msgstr "Kan ikke lagre."
+
+msgid "Could not write to:"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "Cover nedlasting"
@@ -611,6 +614,9 @@ msgstr "Avslutt til?"
 msgid "Extracting files..."
 msgstr "Pakker ut filer..."
 
+msgid "Failed"
+msgstr ""
+
 msgid "Failed formating"
 msgstr "Feil ved formatering"
 
@@ -768,6 +774,9 @@ msgstr "Globale innstillinger"
 msgid "HOME Menu"
 msgstr "HOME Meny"
 
+msgid "Hard Drive Settings"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Apps sti"
 
@@ -812,17 +821,17 @@ msgstr "Sett inn en Wii plate!"
 msgid "Install"
 msgstr "Installér"
 
+msgid "Install Directories"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "Installasjonsfeil!"
 
+msgid "Install Partitions"
+msgstr ""
+
 msgid "Install a game"
 msgstr "Installér et spill"
-
-msgid "Install directories"
-msgstr "Installasjonsmapper"
-
-msgid "Install partitions"
-msgstr "Installasjonspartisjoner"
 
 msgid "Installing content... Ok!"
 msgstr "Installerer innhold... OK!"
@@ -1597,6 +1606,12 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
+
+#~ msgid "Install directories"
+#~ msgstr "Installasjonsmapper"
+
+#~ msgid "Install partitions"
+#~ msgstr "Installasjonspartisjoner"
 
 #~ msgid " Wad Saved as:"
 #~ msgstr " WAD lagret som:"

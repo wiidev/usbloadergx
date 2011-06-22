@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 11:39+0200\n"
+"POT-Creation-Date: 2011-06-22 19:31+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -183,9 +183,6 @@ msgstr ""
 msgid "AutoInit Network"
 msgstr "ทำการเชื่อมต่อเครือข่าย"
 
-msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr ""
-
 msgid "BCA Codes Path"
 msgstr ""
 
@@ -229,6 +226,9 @@ msgid "Block Gui Settings"
 msgstr ""
 
 msgid "Block HBC Menu"
+msgstr ""
+
+msgid "Block Hard Drive Settings"
 msgstr ""
 
 msgid "Block IOS Reload"
@@ -389,6 +389,9 @@ msgstr ""
 
 msgid "Could not save."
 msgstr "บันทึกไม่ได้"
+
+msgid "Could not write to:"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "ดาวน์โหลดปก"
@@ -611,6 +614,9 @@ msgstr ""
 msgid "Extracting files..."
 msgstr "กำลังขยายไฟล์..."
 
+msgid "Failed"
+msgstr ""
+
 msgid "Failed formating"
 msgstr "ฟอร์แมตไม่ได้"
 
@@ -768,6 +774,9 @@ msgstr ""
 msgid "HOME Menu"
 msgstr "เมนู HOME"
 
+msgid "Hard Drive Settings"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "ที่เก็บโปรแกรม Homebrew"
 
@@ -812,17 +821,17 @@ msgstr "ใส่แผ่น Wii !"
 msgid "Install"
 msgstr "ติดตั้ง"
 
+msgid "Install Directories"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "ผิดพลาดขณะติดตั้ง!"
 
+msgid "Install Partitions"
+msgstr ""
+
 msgid "Install a game"
 msgstr "ติดตั้งเกมส์"
-
-msgid "Install directories"
-msgstr ""
-
-msgid "Install partitions"
-msgstr ""
 
 msgid "Installing content... Ok!"
 msgstr "ติดตั้งเนื้อหา... สำเร็จ!"

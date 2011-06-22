@@ -145,17 +145,13 @@ class PartitionHandle
         //! Get the entrie number in MBR of this partition
         int GetPartitionNum(int pos) { if(valid(pos)) return PartitionList[pos].PartitionNum; else return -1; };
         //! Get the count of found partitions
-        int GetPartitionCount() const { if(Port0Size) return Port0Size; else return PartitionList.size(); };
+        int GetPartitionCount() const { return PartitionList.size(); };
         //! Get the partition size in bytes
         u64 GetSize(int pos) { if(valid(pos)) return (u64) PartitionList[pos].SecCount*BYTES_PER_SECTOR; else return 0; };
         //! Get the whole partition record struct
         PartitionFS * GetPartitionRecord(int pos) { if(valid(pos)) return &PartitionList[pos]; else return NULL; };
         //! Get the disc interface of this handle
         const DISC_INTERFACE * GetDiscInterface() { return interface; };
-        //! Get the port 1 partitions on usb
-        void GetPort1Partitions();
-        //! Get the count of found partitions including second port partitions on usb
-        int GetPartitionTotalCount() const { return PartitionList.size(); };
     protected:
         bool valid(int pos) { return (pos >= 0 && pos < (int) PartitionList.size()); }
         void AddPartition(const char * name, u64 lba_start, u64 sec_count, bool bootable, u8 part_type, u8 part_num);
@@ -167,7 +163,6 @@ class PartitionHandle
         const DISC_INTERFACE *interface;
         std::vector<PartitionFS> PartitionList;
         std::vector<std::string> MountNameList;
-        int Port0Size;
 };
 
 #endif

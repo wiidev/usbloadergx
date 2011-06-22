@@ -28,8 +28,6 @@ wbfs_disc_t* WBFS_OpenDisc(u8 *discid)
     if(!VALID(part))
         return NULL;
 
-    DeviceHandler::SetUSBPortFromPartition(part);
-
     return WbfsList[part]->OpenDisc(discid);
 }
 
@@ -42,8 +40,6 @@ void WBFS_CloseDisc(wbfs_disc_t *disc)
     if(!VALID(part_num))
         return;
 
-    DeviceHandler::SetUSBPortFromPartition(part_num);
-
     WbfsList[part_num]->CloseDisc(disc);
 }
 
@@ -55,10 +51,9 @@ s32 WBFS_Init(u32 device)
 s32 WBFS_OpenAll()
 {
     int ret = -1;
+    int partCount = DeviceHandler::GetUSBPartitionCount();
 
-    PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
-
-    for(int i = 0; i < usbHandle->GetPartitionTotalCount(); ++i)
+    for(int i = 0; i < partCount; ++i)
     {
         if(WBFS_OpenPart(i) == 0)
             ret = 0;
@@ -69,14 +64,9 @@ s32 WBFS_OpenAll()
 
 s32 WBFS_OpenPart(int part_num)
 {
-    PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
-    if(part_num < 0 || part_num >= usbHandle->GetPartitionTotalCount())
-        return -1;
-
-    //! No need to switch ports on other partitions than WBFS
-    //! the open() function does not actually read from drive there.
-    if(strncmp(usbHandle->GetFSName(part_num), "WBFS", 4) == 0)
-        DeviceHandler::SetUSBPortFromPartition(part_num);
+    PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandleFromPartition(part_num);
+	if(!usbHandle || part_num < 0 || part_num >= DeviceHandler::GetUSBPartitionCount())
+		return -1;
 
     // close
     WBFS_Close(part_num);
@@ -84,23 +74,26 @@ s32 WBFS_OpenPart(int part_num)
     if(part_num >= (int) WbfsList.size())
         WbfsList.resize(part_num+1);
 
-    gprintf("\tWBFS_OpenPart: filesystem: %s, start sector %u, sector count: %u\n", usbHandle->GetFSName(part_num), usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
+    int portPart = DeviceHandler::PartitionToPortPartition(part_num);
+    int usbPort = DeviceHandler::PartitionToUSBPort(part_num);
 
-    if (strncmp(usbHandle->GetFSName(part_num), "FAT", 3) == 0)
+    gprintf("\tWBFS_OpenPart: filesystem: %s, start sector %u, sector count: %u\n", usbHandle->GetFSName(portPart), usbHandle->GetLBAStart(portPart), usbHandle->GetSecCount(portPart));
+
+    if (strncmp(usbHandle->GetFSName(portPart), "FAT", 3) == 0)
     {
-        WbfsList[part_num] = new Wbfs_Fat(usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num), part_num);
+        WbfsList[part_num] = new Wbfs_Fat(usbHandle->GetLBAStart(portPart), usbHandle->GetSecCount(portPart), part_num, usbPort);
     }
-    else if (strncmp(usbHandle->GetFSName(part_num), "NTFS", 4) == 0)
+    else if (strncmp(usbHandle->GetFSName(portPart), "NTFS", 4) == 0)
     {
-        WbfsList[part_num] = new Wbfs_Ntfs(usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num), part_num);
+        WbfsList[part_num] = new Wbfs_Ntfs(usbHandle->GetLBAStart(portPart), usbHandle->GetSecCount(portPart), part_num, usbPort);
     }
-    else if (strncmp(usbHandle->GetFSName(part_num), "LINUX", 5) == 0)
+    else if (strncmp(usbHandle->GetFSName(portPart), "LINUX", 5) == 0)
     {
-        WbfsList[part_num] = new Wbfs_Ext(usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num), part_num);
+        WbfsList[part_num] = new Wbfs_Ext(usbHandle->GetLBAStart(portPart), usbHandle->GetSecCount(portPart), part_num, usbPort);
     }
-    else if (strncmp(usbHandle->GetFSName(part_num), "WBFS", 4) == 0)
+    else if (strncmp(usbHandle->GetFSName(portPart), "WBFS", 4) == 0)
     {
-        WbfsList[part_num] = new Wbfs_Wbfs(usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num), part_num);
+        WbfsList[part_num] = new Wbfs_Wbfs(usbHandle->GetLBAStart(portPart), usbHandle->GetSecCount(portPart), part_num, usbPort);
     }
     else
     {
@@ -122,11 +115,6 @@ bool WBFS_Close(int part_num)
     if(!VALID(part_num))
         return false;
 
-    //! No need to switch ports on other partitions than WBFS
-    //! the close() function does not actually write to drive there.
-    if(WbfsList[part_num]->GetFSType() == PART_FS_WBFS)
-        DeviceHandler::SetUSBPortFromPartition(part_num);
-
     delete WbfsList[part_num];
     WbfsList[part_num] = NULL;
 
@@ -143,9 +131,9 @@ void WBFS_CloseAll()
         WBFS_Close(i);
 }
 
-s32 WBFS_Format(u32 lba, u32 size)
+s32 WBFS_Format(u32 lba, u32 size, u32 port)
 {
-    Wbfs_Wbfs Part(WBFS_MIN_DEVICE, lba, size);
+    Wbfs_Wbfs Part(WBFS_MIN_DEVICE, lba, size, port);
 
     return Part.Format();
 }
@@ -155,7 +143,6 @@ s32 WBFS_GetCount(int part_num, u32 *count)
     if(!VALID(part_num))
         return -1;
 
-    DeviceHandler::SetUSBPortFromPartition(part_num);
     int ret = WbfsList[part_num]->GetCount(count);
 
     return ret;
@@ -166,8 +153,6 @@ s32 WBFS_GetHeaders(int part_num, struct discHdr *outbuf, u32 cnt, u32 len)
     if(!VALID(part_num))
         return -1;
 
-    DeviceHandler::SetUSBPortFromPartition(part_num);
-
     return WbfsList[part_num]->GetHeaders(outbuf, cnt, len);
 }
 
@@ -177,8 +162,6 @@ s32 WBFS_CheckGame(u8 *discid)
     if(!VALID(part_num))
         return 0;
 
-    DeviceHandler::SetUSBPortFromPartition(part_num);
-
     return WbfsList[part_num]->CheckGame(discid);
 }
 
@@ -186,8 +169,6 @@ s32 WBFS_AddGame(void)
 {
     if(!VALID(Settings.partition))
         return -1;
-
-    DeviceHandler::SetUSBPortFromPartition(Settings.partition);
 
     return WbfsList[Settings.partition]->AddGame();
 }
@@ -198,8 +179,6 @@ s32 WBFS_RemoveGame(u8 *discid)
     if(!VALID(part_num))
         return -1;
 
-    DeviceHandler::SetUSBPortFromPartition(part_num);
-
     return WbfsList[part_num]->RemoveGame(discid);
 }
 
@@ -209,8 +188,6 @@ s32 WBFS_GameSize(u8 *discid, f32 *size)
     if(!VALID(part_num))
         return -1;
 
-    DeviceHandler::SetUSBPortFromPartition(part_num);
-
     return WbfsList[part_num]->GameSize(discid, size);
 }
 
@@ -218,8 +195,6 @@ s32 WBFS_DiskSpace(f32 *used, f32 *free)
 {
     if(!VALID(Settings.partition))
         return -1;
-
-    DeviceHandler::SetUSBPortFromPartition(Settings.partition);
 
     return WbfsList[Settings.partition]->DiskSpace(used, free);
 }
@@ -230,8 +205,6 @@ s32 WBFS_RenameGame(u8 *discid, const void *newname)
     if(!VALID(part_num))
         return -1;
 
-    DeviceHandler::SetUSBPortFromPartition(part_num);
-
     return WbfsList[part_num]->RenameGame(discid, newname);
 }
 
@@ -241,8 +214,6 @@ s32 WBFS_ReIDGame(u8 *discid, const void *newID)
     if(!VALID(part_num))
         return -1;
 
-    DeviceHandler::SetUSBPortFromPartition(part_num);
-
     return WbfsList[part_num]->ReIDGame(discid, newID);
 }
 
@@ -250,8 +221,6 @@ u64 WBFS_EstimeGameSize(void)
 {
     if(!VALID(Settings.partition))
         return 0;
-
-    DeviceHandler::SetUSBPortFromPartition(Settings.partition);
 
     return WbfsList[Settings.partition]->EstimateGameSize();
 }
@@ -261,8 +230,6 @@ int WBFS_GetFragList(u8 *id)
     int part_num = gameList.GetPartitionNumber(id);
     if(!VALID(part_num))
         return -1;
-
-    DeviceHandler::SetUSBPortFromPartition(part_num);
 
     return WbfsList[part_num]->GetFragList(id);
 }

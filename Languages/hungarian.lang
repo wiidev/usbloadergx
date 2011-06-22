@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-18 11:39+0200\n"
+"POT-Creation-Date: 2011-06-22 19:31+0200\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -183,9 +183,6 @@ msgstr ""
 msgid "AutoInit Network"
 msgstr "Hálózat AutoInit"
 
-msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-msgstr ""
-
 msgid "BCA Codes Path"
 msgstr "BCA kód útvonal"
 
@@ -229,6 +226,9 @@ msgid "Block Gui Settings"
 msgstr ""
 
 msgid "Block HBC Menu"
+msgstr ""
+
+msgid "Block Hard Drive Settings"
 msgstr ""
 
 msgid "Block IOS Reload"
@@ -389,6 +389,9 @@ msgstr ""
 
 msgid "Could not save."
 msgstr "A mentés nem sikerült."
+
+msgid "Could not write to:"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "Boritó Letöltés"
@@ -611,6 +614,9 @@ msgstr ""
 msgid "Extracting files..."
 msgstr "Fájlok kicsomagolása..."
 
+msgid "Failed"
+msgstr ""
+
 msgid "Failed formating"
 msgstr "Formázás sikertelen"
 
@@ -768,6 +774,9 @@ msgstr ""
 msgid "HOME Menu"
 msgstr "HOME Menü"
 
+msgid "Hard Drive Settings"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Útvonal"
 
@@ -812,17 +821,17 @@ msgstr "Helyezz be Wii lemezt!"
 msgid "Install"
 msgstr "Telepítés"
 
+msgid "Install Directories"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "Telepítési Hiba!"
 
-msgid "Install a game"
-msgstr "Játék telepítése"
-
-msgid "Install directories"
+msgid "Install Partitions"
 msgstr ""
 
-msgid "Install partitions"
-msgstr "Partíciók telepítése"
+msgid "Install a game"
+msgstr "Játék telepítése"
 
 msgid "Installing content... Ok!"
 msgstr "Tartalom telepítése... Ok!"
@@ -1597,6 +1606,9 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
+
+#~ msgid "Install partitions"
+#~ msgstr "Partíciók telepítése"
 
 #~ msgid " Wad Saved as:"
 #~ msgstr "Wad elmentve mint:"

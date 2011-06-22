@@ -41,13 +41,6 @@ static const char * OnOffText[MAX_ON_OFF] =
     trNOOP( "ON" )
 };
 
-static const char * WiilightText[WIILIGHT_MAX] =
-{
-    trNOOP( "OFF" ),
-    trNOOP( "ON" ),
-    trNOOP( "Only for Install" )
-};
-
 static const char * GameInfoText[GAMEINFO_MAX] =
 {
     trNOOP( "Game ID" ),
@@ -118,9 +111,6 @@ GuiSettingsMenu::GuiSettingsMenu()
     Options->SetName(Idx++, "%s", tr( "Font Scale Factor" ));
     Options->SetName(Idx++, "%s", tr( "Keyboard" ));
     Options->SetName(Idx++, "%s", tr( "Disc Artwork Download" ));
-    Options->SetName(Idx++, "%s", tr( "Wiilight" ));
-    Options->SetName(Idx++, "%s", tr( "Rumble" ));
-    Options->SetName(Idx++, "%s", tr( "AutoInit Network" ));
     Options->SetName(Idx++, "%s", tr( "Screensaver" ));
     Options->SetName(Idx++, "%s", tr( "Mark new games" ));
     Options->SetName(Idx++, "%s", tr( "Show Free Space" ));
@@ -186,15 +176,6 @@ void GuiSettingsMenu::SetOptionValues()
 
     //! Settings: Disc Artwork Download
     Options->SetValue(Idx++, "%s", tr( DiscArtDownloadText[Settings.discart] ));
-
-    //! Settings: Wiilight
-    Options->SetValue(Idx++, "%s", tr( WiilightText[Settings.wiilight] ));
-
-    //! Settings: Rumble
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.rumble] ));
-
-    //! Settings: AutoInit Network
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.autonetwork] ));
 
     //! Settings: Screensaver
     Options->SetValue(Idx++, "%s", tr( ScreensaverText[Settings.screensaver] ));
@@ -334,24 +315,6 @@ int GuiSettingsMenu::GetMenuInternal()
     else if (ret == ++Idx)
     {
         if (++Settings.discart >= DISCARTS_MAX_CHOICE) Settings.discart = 0;
-    }
-
-    //! Settings: Wiilight
-    else if (ret == ++Idx)
-    {
-        if (++Settings.wiilight >= WIILIGHT_MAX) Settings.wiilight = 0;
-    }
-
-    //! Settings: Rumble
-    else if (ret == ++Idx)
-    {
-        if (++Settings.rumble >= MAX_ON_OFF) Settings.rumble = 0; //RUMBLE
-    }
-
-    //! Settings: AutoInit Network
-    else if (ret == ++Idx)
-    {
-        if (++Settings.autonetwork >= MAX_ON_OFF) Settings.autonetwork = 0;
     }
 
     //! Settings: Screensaver
