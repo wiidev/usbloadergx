@@ -104,7 +104,8 @@ wbfs_disc_t * wbfs_init_with_partition(u8*discid, int partition)
 		// opens the hd only is is not opened
 		if(!p)
 			{
-			USBStorage_Init();			
+			extern u32 current_port;
+			USBStorage_Init(current_port);			
 			n_sec =  USBStorage_Get_Capacity(&sec_size);
 			//debug_printf("hd found n_sec:%x sec_size %x\n",n_sec,sec_size);
 			if (n_sec==0)

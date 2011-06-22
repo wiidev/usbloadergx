@@ -170,8 +170,8 @@ write_access_perm:
 
 	.string "EHC_CFG"
 	.long 0x12340001
-	.global use_usb_port1
-use_usb_port1:
+	.global initial_port
+initial_port:
 	.byte 0x0
 
 	.global use_reset_bulk

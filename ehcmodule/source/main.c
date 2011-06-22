@@ -256,13 +256,13 @@ int copy_int_vect(u32 ios, u32 none)
 return 0;
 }
 
-extern char use_usb_port1;
+extern char initial_port;
 extern u32 current_port;
 
 int main(void)
 {
 
-current_port= ((u32) use_usb_port1)!=0;
+current_port=initial_port;
 // changes IOS vector interrupt to crt0.s routine
 
 //swi_mload_led_on();

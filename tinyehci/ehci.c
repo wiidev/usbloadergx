@@ -25,8 +25,6 @@
  * Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
-extern char use_usb_port1;
-
 /* magic numbers that can affect system performance */
 #define	EHCI_TUNE_CERR		0	/* 0-3 qtd retries; 0 == don't stop */ /* by  Hermes: i have replaced 3 by 0 and now it don´t hang when i extract the device*/
 #define	EHCI_TUNE_RL_HS		4 //4	/* nak throttle; see 4.9 */ 
@@ -175,7 +173,7 @@ void dump_qh(struct ehci_qh	*qh)
  * bridge shutdown:  shutting down the bridge before the devices using it.
  */
 
-int unplug_device=0;
+int unplug_device[2]={0,0};
 
 #define INTR_MASK (STS_IAA | STS_FATAL | STS_PCD | STS_ERR | STS_INT)
 
@@ -535,7 +533,7 @@ cleanup:
 	return NULL;
 }
 
-u32 usb_timeout=1000*1000;
+u32 usb_timeout=500*1000;
 
 int mode_int=0;
 
@@ -659,7 +657,7 @@ u32 temp;
 				{
 				if((temp & 1)!=1)  // off
 					{
-					unplug_device=2;
+					unplug_device[current_port]=2;
 //					*((volatile u32 *)0x0d8000c0) &=~0x20; // LED OFF (you can do it in Interrupt mode)
 	
 					}
@@ -752,7 +750,7 @@ u32 temp;
 					{
 				   
 															
-						unplug_device=1;
+						unplug_device[current_port]=1;
 //						*((volatile u32 *)0x0d8000c0) &=~0x20; // LED OFF (you can do it in Interrupt mode)
 						ret=-ENODEV;
 					
@@ -813,7 +811,7 @@ extern int qtd_alt_mem;
 	 
 		 if(urb->ep==0) //control message
 				 {
-				 unplug_device=0;
+				 unplug_device[current_port]=0;
 				 urb->setup_dma = ehci_dma_map_to(urb->setup_buffer,sizeof (usbctrlrequest));
 				 }
  
@@ -938,9 +936,9 @@ extern int qtd_alt_mem;
 		 }while(retval==-9);
 		 mode_int=0;
 		 if(enable_urb_debug) s_printf("urb retval: %i\n",retval);
-		 if(retval!=0 || unplug_device!=0) 
+		 if(retval!=0 || unplug_device[current_port]!=0) 
 			 {
-			 if((ehci_readl(&ehci->regs->port_status[current_port]) & 5) !=5) unplug_device=1; 
+			 if((ehci_readl(&ehci->regs->port_status[current_port]) & 5) !=5) unplug_device[current_port]=1; 
 			 //retval=-ETIMEDOUT;
 			 }
 		 
@@ -1503,8 +1501,8 @@ int  ehci_adquire_usb_port(int port)
     ehci_mdelay(60);
     return 1;
 }
-
-int ehci_discover(void)
+/*
+int ehci_discover(void)  //NOT USED
 {
         int i,ret,from,to;
 		u32 status;
@@ -1551,6 +1549,7 @@ int ehci_discover(void)
         }        
         return ret;
 }
+*/
 int ehci_release_port(int port)
 {
 	u32 __iomem	*status_reg = &ehci->regs->port_status[port];
@@ -1601,15 +1600,12 @@ int ehci_release_externals_usb_ports(void)
         }
         return 0;
 }
-
+/*
 int ehci_open_device(int vid,int pid,int fd)
 {
         int i;
-       // for(i=0;i<ehci->num_port;i++)
-       // {
-		
-		i=use_usb_port1!=0;
-		
+        for(i=0;i<ehci->num_port;i++)
+        {		
                 //ehci_dbg("try device: %d\n",i);
                 if(ehci->devices[i].fd == 0 &&
                    le16_to_cpu(ehci->devices[i].desc.idVendor) == vid &&
@@ -1619,14 +1615,19 @@ int ehci_open_device(int vid,int pid,int fd)
                         ehci->devices[i].fd = fd;
                         return fd;
                 }
-        //}
+        }
         return -6;
 }
+*/
 int ehci_close_device(struct ehci_device *dev)
 {
-        if (dev)
-                dev->fd = -1;
-        return 0;
+	if (dev)
+	{
+		dev->fd = -1;
+		dev->id=0;
+	}
+                
+	return 0;
 }
 
 void ehci_close_devices()
@@ -1641,45 +1642,27 @@ void ehci_close_devices()
 
 }
 
- void * ehci_fd_to_dev(int fd)
+void * ehci_fd_to_dev(int fd)
 {
-        int i;
-       // for(i=0;i<ehci->num_port;i++)
-	    current_port=use_usb_port1!=0;
-	    
-		i=use_usb_port1!=0;
-		
-       
-		{
-		  
-                struct ehci_device *dev = &ehci->devices[i];
-
-				return dev; // return always device[0]
-
-				#if 0
-                //ehci_dbg ( "device %d:fd:%d %X %X...\n", dev->id,dev->fd,le16_to_cpu(dev->desc.idVendor),le16_to_cpu(dev->desc.idProduct));
-                if(dev->fd == fd){
-                        return dev;
-				
-                }
-				#endif
-        }
-        ehci_dbg("unknown fd! %d\n",fd);
-        return 0;
+	int i;
+	for(i=0;i<ehci->num_port;i++)       
+	{
+		struct ehci_device *dev = &ehci->devices[i];
+		if(dev->fd == fd) return dev;
+	}
+	//ehci_dbg("unknown fd! %d\n",fd);
+	return 0;
 }
 #define g_ehci #error
 int ehci_get_device_list(u8 maxdev,u8 b0,u8*num,u16*buf)
 {
         int i,j = 0;
-      //  for(i=0;i<ehci->num_port && j<maxdev ;i++)
-	    current_port=use_usb_port1!=0;
-		i=current_port;
-		
+        for(i=0;i<ehci->num_port && j<maxdev ;i++)
         {
                 struct ehci_device *dev = &ehci->devices[i];
                 if(dev->id != 0){
                         //ehci_dbg ( "device %d: %X %X...\n", dev->id,le16_to_cpu(dev->desc.idVendor),le16_to_cpu(dev->desc.idProduct));
-                        buf[j*4] = 0;
+                        buf[j*4] = i; //port
                         buf[j*4+1] = 0;
                         buf[j*4+2] = le16_to_cpu(dev->desc.idVendor);
                         buf[j*4+3] = le16_to_cpu(dev->desc.idProduct);
@@ -1688,7 +1671,7 @@ int ehci_get_device_list(u8 maxdev,u8 b0,u8*num,u16*buf)
         }
         //ehci_dbg("found %d devices\n",j);
         *num = j;
-        return 0;
+        return j;
 }
 
 

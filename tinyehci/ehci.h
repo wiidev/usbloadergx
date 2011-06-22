@@ -258,7 +258,7 @@ void create_qtd_dummy(void);
 
 s32 ehci_control_message(struct ehci_device *dev,u8 bmRequestType,u8 bmRequest,u16 wValue,u16 wIndex,u16 wLength,void *buf);
 s32 ehci_bulk_message(struct ehci_device *dev,u8 bEndpoint,u32 wLength,void *rpData);
-int ehci_discover(void);
+//int ehci_discover(void);
 int ehci_get_device_list(u8 maxdev,u8 b0,u8*num,u16*buf);
 
 int ehci_reset_port2(int port);
@@ -266,12 +266,13 @@ int ehci_reset_port2(int port);
 extern struct ehci_hcd *ehci; /* @todo put ehci as a static global and remove ehci from APIs.. */
 extern int ehci_open_device(int vid,int pid,int fd);
 extern int ehci_close_device(struct ehci_device *dev);
+extern void ehci_close_devices(void);
 extern void * ehci_fd_to_dev(int fd);
 extern int ehci_release_ports(void);
 
 /* UMS API */
 
-s32 USBStorage_Init(void);
+s32 USBStorage_Init(int mode);
 u32 USBStorage_Get_Capacity(u32*sector_size);
 s32 USBStorage_Read_Sectors(u32 sector, u32 numSectors, void *buffer);
 s32 USBStorage_Read_Stress(u32 sector, u32 numSectors, void *buffer);

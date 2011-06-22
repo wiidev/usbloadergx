@@ -46,7 +46,7 @@ typedef struct
 	u8 *buffer;
 } usbstorage_handle;
 
-s32 USBStorage_Init(void);
+s32 USBStorage_Init(int mode);
 void USBStorage_Umount(void);
 
 s32 USBStorage_Open(usbstorage_handle *dev, struct ehci_device *fd);

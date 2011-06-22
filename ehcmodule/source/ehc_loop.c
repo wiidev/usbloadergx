@@ -113,8 +113,6 @@ int verbose = 0;
 
 wbfs_disc_t * wbfs_init_with_partition(u8*discid, int partition);
 
-extern char use_usb_port1;
-
 
 int USBStorage_DVD_Test(void);
 
@@ -144,6 +142,8 @@ char *parse_hex(char *base,int *val)
         *val = v;
         return ptr-1;
 }
+
+/*
 int parse_and_open_device(char *devname,int fd)
 {
         char *ptr = devname;
@@ -159,7 +159,7 @@ int parse_and_open_device(char *devname,int fd)
                 return -6;
         return ehci_open_device(vid,pid,fd);
 }
-
+*/
 
 int DVD_speed_limit=0; // ingame it can fix x6 speed
 
@@ -345,7 +345,7 @@ extern int is_watchdog_read_sector;
 
 extern u32 n_sec,sec_size;
 
-int last_sector=0;
+u32 last_sector=0;
 
 
 void direct_os_sync_before_read(void* ptr, int size);
@@ -439,11 +439,13 @@ int ehc_loop(void)
 {
 	ipcmessage* message;
 	int timer2_id=-1;
+	extern char initial_port;
+	int init_mode=initial_port;
 	static bool first_read=true;
 	char port;
 
-	extern int ums_init_done;
-
+	extern int ums_init_done[2];
+	extern u32 current_port;
 	
 
 	int must_read_sectors=0;
@@ -464,7 +466,7 @@ int ehc_loop(void)
 	timer2_id=os_create_timer(WATCHDOG_TIMER, WATCHDOG_TIMER, queuehandle, 0x0);
 	
      int ums_mode = 0;
-     int already_discovered = 0;
+//     int already_discovered = 0;
      wbfs_disc_t *d = 0;
       
 	 int usb_lock=0;
@@ -515,16 +517,16 @@ int ehc_loop(void)
 			if(unplug_device==0)
 				{
 
-				if(sec_size!=0 && sec_size<4096) // only support sector size minor to 2048
+				if(sec_size!=0 && sec_size<=4096) 
 					{
-					
+					extern int is_dvd[2];
 
 					is_watchdog_read_sector=1;
 
 					r=USBStorage_Read_Sectors(last_sector, 1, mem_sector);
 
 					is_watchdog_read_sector=0;
-					if(r!=0 && sec_size==512)
+					if(r!=0 && !is_dvd[current_port])
 						last_sector+=0x1000000/sec_size; // steps of 16MB
 					if(last_sector>=n_sec) last_sector=0;
 					}
@@ -645,8 +647,8 @@ int ehc_loop(void)
                                         break;
                                 case  USB_IOCTL_GETDEVLIST:
                                         debug_printf("get dev list\n");
-                                        if(dev)result= -6;
-                                        else
+                                        //if(dev)result= -6;
+                                        //else
                                         result = ehci_get_device_list(ioctlv_u8(vec[0]),ioctlv_u8(vec[1]),
                                                                       ioctlv_voidp(vec[2]),ioctlv_voidp(vec[3]));
                                         break;
@@ -658,12 +660,14 @@ int ehc_loop(void)
                                 case USB_IOCTL_UMS_INIT: 
 										must_read_sectors=0;
 
-										if(!already_discovered )
-                                          ehci_discover();
-                                        already_discovered=1;
-										
-                                        result = USBStorage_Init();
-																			
+                                        result = USBStorage_Init(init_mode);
+                                        if(result>=0 && result <3) 
+                                        {
+                                        	if(result==0 || result==2)
+	                                        	current_port = 0;
+	                                        else
+		                                        current_port = 1;
+		                                }																			
 										
 										//result=-os_thread_get_priority();
 										if(result>=0) {must_read_sectors=1;watchdog_enable=1;}
@@ -673,7 +677,7 @@ int ehc_loop(void)
 								case USB_IOCTL_UMS_UMOUNT:
 										must_read_sectors=0;
 										watchdog_enable=0;
-                                       // USBStorage_Umount();
+                                        USBStorage_Umount();
 										result =0;
 										break;
 								case USB_IOCTL_UMS_TESTMODE:
@@ -684,19 +688,14 @@ int ehc_loop(void)
 								case USB_IOCTL_SET_PORT:										
 										result =0;
 										port=ioctlv_u32(vec[0]);
-										if(use_usb_port1!=port)
+										init_mode=port;
+										//if(ums_init_done==0) init_mode=port;
+										//else
 										{
-											if(ums_init_done)
-											{											
-												USBStorage_Umount();
-												ehci_close_devices();
-												ehci_release_externals_usb_ports();
-												use_usb_port1=port;
-												ehci_discover();
-												result = USBStorage_Init();
-											}
-										}										
-										use_usb_port1=port;
+											if(port==0 || port==1) current_port=port;
+											result = current_port;
+										}
+										
 										break;
 
 								case USB_IOCTL_UMS_OFF:
@@ -727,6 +726,12 @@ int ehc_loop(void)
 										#ifdef VIGILANTE
 										enable_button=1;
 										#endif
+										if(watchdog_enable && timer2_id!=-1)
+										{
+											os_stop_timer(timer2_id); // stops the timeout timer
+											os_destroy_timer(timer2_id);
+											timer2_id=-1;
+										}	
 										result =   USBStorage_Read_Sectors(ioctlv_u32(vec[0]),ioctlv_u32(vec[1]), ioctlv_voidp(vec[2]));
 										if(first_read)
 										{
@@ -739,6 +744,7 @@ int ehc_loop(void)
 											else
 												s_printf("first read sector (%i) ERROR\n",ioctlv_u32(vec[0]));									
 										}
+										if(watchdog_enable && timer2_id==-1)timer2_id=os_create_timer(WATCHDOG_TIMER, WATCHDOG_TIMER, queuehandle, 0x0);
 							
                                         break;
                                 case USB_IOCTL_UMS_WRITE_SECTORS:
@@ -806,7 +812,14 @@ int ehc_loop(void)
 								case USB_IOCTL_WBFS_READ_DIRECT_DISC: // used to read USB DVD
 									    usb_lock=1;
 										watchdog_enable=1;
+										if(watchdog_enable && timer2_id!=-1)
+										{
+											os_stop_timer(timer2_id); // stops the timeout timer
+											os_destroy_timer(timer2_id);
+											timer2_id=-1;
+										}
                                         result = WBFS_direct_disc_read(ioctlv_u32(vec[0]),ioctlv_voidp(vec[2]),ioctlv_u32(vec[1]));
+                                        if(watchdog_enable)timer2_id=os_create_timer(WATCHDOG_TIMER, WATCHDOG_TIMER, queuehandle, 0x0);
 										usb_lock=0;
 										break;
 									 
@@ -823,7 +836,14 @@ int ehc_loop(void)
 									
 											usb_lock=1;
 											//os_stop_timer(timer2_id);
-                                                result = wbfs_disc_read(d,ioctlv_u32(vec[0]),ioctlv_voidp(vec[2]),ioctlv_u32(vec[1]));
+											if(watchdog_enable && timer2_id!=-1)
+											{
+												os_stop_timer(timer2_id); // stops the timeout timer
+												os_destroy_timer(timer2_id);
+												timer2_id=-1;
+											}
+                                            result = wbfs_disc_read(d,ioctlv_u32(vec[0]),ioctlv_voidp(vec[2]),ioctlv_u32(vec[1]));
+                                            if(watchdog_enable)timer2_id=os_create_timer(WATCHDOG_TIMER, WATCHDOG_TIMER, queuehandle, 0x0);
 											usb_lock=0;
                                        if(result){
                                           //debug_printf("wbfs failed! %d\n",result);

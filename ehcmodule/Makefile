@@ -98,13 +98,13 @@ LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib)
 
 ARCH	=	-mcpu=arm9tdmi -mtune=arm9tdmi -mthumb -mthumb-interwork -mbig-endian
 
-CFLAGS	+=  -g $(ARCH) $(INCLUDE) -fno-strict-aliasing -Wall -Os -fomit-frame-pointer -ffast-math -fverbose-asm -Wpointer-arith -Winline -Wundef -g -ffunction-sections -fdata-sections -fno-exceptions 
+CFLAGS	+=  $(ARCH) $(INCLUDE) -fno-strict-aliasing -Wall -Os -fomit-frame-pointer -ffast-math -fverbose-asm -Wpointer-arith -Winline -Wundef -g -ffunction-sections -fdata-sections -fno-exceptions 
 CFLAGS	+= -Wstrict-prototypes
 
 
-AFLAGS	=	-g $(ARCH) -x assembler-with-cpp
+AFLAGS	=	$(ARCH) -x assembler-with-cpp
 
-LDFLAGS	= -g $(ARCH) -specs=$(SPECS) -T$(LINKSCRIPT)  $(LIBPATHS) $(LIBS) -Wl,--gc-sections -Wl,-static -Wl,-Map,$(TARGET).map -nostartfiles
+LDFLAGS	= $(ARCH) -specs=$(SPECS) -T$(LINKSCRIPT)  $(LIBPATHS) $(LIBS) -Wl,--gc-sections -Wl,-static -Wl,-Map,$(TARGET).map -nostartfiles
 
 
 $(OUTPUT).elf: $(TARGET).elf
@@ -114,7 +114,7 @@ $(OUTPUT).elf: $(TARGET).elf
 
 %.elf: $(OFILES)
 	@echo linking $(notdir $@)
-	@$(LD) -g -o $@ $(OFILES) $(LDFLAGS) $(STYLEFIX)
+	@$(LD) -o $@ $(OFILES) $(LDFLAGS) $(STYLEFIX)
 
 
 %_cpp.o : %.cpp
