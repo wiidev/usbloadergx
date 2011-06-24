@@ -62,7 +62,7 @@
 #include "ntfs.h"
 #include "ntfsfile_frag.h"
 
-static u8 size_to_shift(u32 size)
+static inline u8 size_to_shift(u32 size)
 {
     u8 ret = 0;
     while (size)
