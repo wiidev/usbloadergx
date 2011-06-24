@@ -30,7 +30,6 @@ class UninstallSM : public SettingsMenu
 {
     public:
         UninstallSM(struct discHdr * header);
-        virtual int GetType() { return CUninstallSM; };
     protected:
         void SetOptionValues();
         int GetMenuInternal();

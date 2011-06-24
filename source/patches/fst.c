@@ -71,8 +71,6 @@ extern const u32 gxdrawhooks[4];
 extern const u32 gxflushhooks[4];
 extern const u32 ossleepthreadhooks[4];
 extern const u32 axnextframehooks[4];
-extern const u32 wpadbuttonsdownhooks[4];
-extern const u32 wpadbuttonsdown2hooks[4];
 
 void SetCheatFilepath(const char * path)
 {

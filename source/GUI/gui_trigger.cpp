@@ -144,10 +144,10 @@ bool GuiTrigger::Left()
     if(wpad.exp.type == WPAD_EXP_CLASSIC)
         wiibtn = WPAD_CLASSIC_BUTTON_LEFT;
 
-    if ((wpad.btns_d | wpad.btns_h) & wiibtn || (pad.btns_d | pad.btns_h)
-            & PAD_BUTTON_LEFT || pad.stickX < -PADCAL || WPAD_Stick(0, 0) < -PADCAL)
+    if (((wpad.btns_d | wpad.btns_h) & wiibtn) || ((pad.btns_d | pad.btns_h)
+            & PAD_BUTTON_LEFT) || pad.stickX < -PADCAL || WPAD_Stick(0, 0) < -PADCAL)
     {
-        if (wpad.btns_d & wiibtn || pad.btns_d & PAD_BUTTON_LEFT)
+        if ((wpad.btns_d & wiibtn) || (pad.btns_d & PAD_BUTTON_LEFT))
         {
             scrollDelay = SCROLL_INITIAL_DELAY; // reset scroll delay.
             return true;
@@ -171,10 +171,10 @@ bool GuiTrigger::Right()
     if(wpad.exp.type == WPAD_EXP_CLASSIC)
         wiibtn = WPAD_CLASSIC_BUTTON_RIGHT;
 
-    if ((wpad.btns_d | wpad.btns_h) & wiibtn || (pad.btns_d | pad.btns_h)
-            & PAD_BUTTON_RIGHT || pad.stickX > PADCAL || WPAD_Stick(0, 0) > PADCAL)
+    if (((wpad.btns_d | wpad.btns_h) & wiibtn) || ((pad.btns_d | pad.btns_h)
+            & PAD_BUTTON_RIGHT) || pad.stickX > PADCAL || WPAD_Stick(0, 0) > PADCAL)
     {
-        if (wpad.btns_d & wiibtn || pad.btns_d & PAD_BUTTON_RIGHT)
+        if ((wpad.btns_d & wiibtn) || (pad.btns_d & PAD_BUTTON_RIGHT))
         {
             scrollDelay = SCROLL_INITIAL_DELAY; // reset scroll delay.
             return true;
@@ -198,10 +198,10 @@ bool GuiTrigger::Up()
     if(wpad.exp.type == WPAD_EXP_CLASSIC)
         wiibtn = WPAD_CLASSIC_BUTTON_UP;
 
-    if ((wpad.btns_d | wpad.btns_h) & wiibtn || (pad.btns_d | pad.btns_h) & PAD_BUTTON_UP
+    if (((wpad.btns_d | wpad.btns_h) & wiibtn) || ((pad.btns_d | pad.btns_h) & PAD_BUTTON_UP)
             || pad.stickY > PADCAL || WPAD_Stick(0, 1) > PADCAL)
     {
-        if (wpad.btns_d & wiibtn || pad.btns_d & PAD_BUTTON_UP)
+        if ((wpad.btns_d & wiibtn) || (pad.btns_d & PAD_BUTTON_UP))
         {
             scrollDelay = SCROLL_INITIAL_DELAY; // reset scroll delay.
             return true;
@@ -225,10 +225,10 @@ bool GuiTrigger::Down()
     if(wpad.exp.type == WPAD_EXP_CLASSIC)
         wiibtn = WPAD_CLASSIC_BUTTON_DOWN;
 
-    if ((wpad.btns_d | wpad.btns_h) & wiibtn || (pad.btns_d | pad.btns_h)
-            & PAD_BUTTON_DOWN || pad.stickY < -PADCAL || WPAD_Stick(0, 1) < -PADCAL)
+    if (((wpad.btns_d | wpad.btns_h) & wiibtn) || ((pad.btns_d | pad.btns_h)
+            & PAD_BUTTON_DOWN) || pad.stickY < -PADCAL || WPAD_Stick(0, 1) < -PADCAL)
     {
-        if (wpad.btns_d & wiibtn || pad.btns_d & PAD_BUTTON_DOWN)
+        if ((wpad.btns_d & wiibtn) || (pad.btns_d & PAD_BUTTON_DOWN))
         {
             scrollDelay = SCROLL_INITIAL_DELAY; // reset scroll delay.
             return true;

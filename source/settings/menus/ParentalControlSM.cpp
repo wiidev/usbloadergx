@@ -74,6 +74,7 @@ ParentalControlSM::ParentalControlSM()
     Options->SetName(Idx++, "%s", tr( "Block Cover Downloads" ));
     Options->SetName(Idx++, "%s", tr( "Block Game Install" ));
     Options->SetName(Idx++, "%s", tr( "Block GameID Change" ));
+    Options->SetName(Idx++, "%s", tr( "Block Categories Menu" ));
     Options->SetName(Idx++, "%s", tr( "Block Categories Modify" ));
 
     SetOptionValues();
@@ -156,6 +157,9 @@ void ParentalControlSM::SetOptionValues()
 
     //! Settings: Block GameID Change
     Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_GAMEID_CHANGE) != 0)]));
+
+    //! Settings: Block Categories Menu
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_CATEGORIES_MENU) != 0)]));
 
     //! Settings: Block Categories Modify
     Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_CATEGORIES_MOD) != 0)]));
@@ -332,6 +336,12 @@ int ParentalControlSM::GetMenuInternal()
     else if (ret == ++Idx)
     {
         Settings.ParentalBlocks ^= BLOCK_GAMEID_CHANGE;
+    }
+
+    //! Settings: Block Categories Menu
+    else if (ret == ++Idx)
+    {
+        Settings.ParentalBlocks ^= BLOCK_CATEGORIES_MENU;
     }
 
     //! Settings: Block Categories Modify

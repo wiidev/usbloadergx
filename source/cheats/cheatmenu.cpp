@@ -60,9 +60,11 @@ int CheatMenu(const char * gameID)
             if (download == 1)
             {
                 download = CodeDownload(gameID);
-                if (download < 0 || c.openTxtfile(txtfilename) != 1) break;
+                if (download < 0 || c.openTxtfile(txtfilename) != 1)
+                	break;
             }
-            else break;
+            else
+            	break;
         case 1:
             int cntcheats = c.getCnt();
             OptionList cheatslst;

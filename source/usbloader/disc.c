@@ -350,6 +350,7 @@ void PatchCountryStrings(void *Address, int Size)
             SearchPattern[0] = 0x01;
             SearchPattern[1] = 0x55; // U
             SearchPattern[2] = 0x53; // S
+            break;
     }
 
     switch (diskid[3])
@@ -372,6 +373,7 @@ void PatchCountryStrings(void *Address, int Size)
         default:
             PatchData[1] = 0x55; // U
             PatchData[2] = 0x53; // S
+            break;
     }
 
     while (Size >= 4)

@@ -30,7 +30,7 @@ class CategoryPrompt : public GuiWindow, public sigslot::has_slots<>
 {
     public:
         CategoryPrompt(const string &title);
-        ~CategoryPrompt();
+        virtual ~CategoryPrompt();
         int Show();
         bool categoriesChanged() const { return changed; }
     protected:

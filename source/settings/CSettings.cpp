@@ -123,6 +123,8 @@ void CSettings::SetDefault()
     EnabledCategories.resize(1);
     EnabledCategories[0] = 0;
     Wiinnertag = OFF;
+    SelectedGame = 0;
+    GameListOffset = 0;
 }
 
 bool CSettings::Load()
@@ -279,6 +281,8 @@ bool CSettings::Save()
     fprintf(file, "\n");
     fprintf(file, "Wiinnertag = %d\n", Wiinnertag);
     fprintf(file, "WiinnertagPath = %s\n", WiinnertagPath);
+    fprintf(file, "SelectedGame = %d\n", SelectedGame);
+    fprintf(file, "GameListOffset = %d\n", GameListOffset);
     fclose(file);
 
     return true;
@@ -539,6 +543,14 @@ bool CSettings::SetSetting(char *name, char *value)
     else if(strcmp(name, "Wiinnertag") == 0)
     {
         if (sscanf(value, "%d", &i) == 1) Wiinnertag = i;
+    }
+    else if(strcmp(name, "SelectedGame") == 0)
+    {
+        if (sscanf(value, "%d", &i) == 1) SelectedGame = i;
+    }
+    else if(strcmp(name, "GameListOffset") == 0)
+    {
+        if (sscanf(value, "%d", &i) == 1) GameListOffset = i;
     }
     else if (strcmp(name, "InstallPartitions") == 0)
     {

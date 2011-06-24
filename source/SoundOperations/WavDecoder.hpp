@@ -58,7 +58,7 @@ class WavDecoder : public SoundDecoder
     public:
         WavDecoder(const char * filepath);
         WavDecoder(const u8 * snd, int len);
-        ~WavDecoder();
+        virtual ~WavDecoder();
         int GetFormat() { return Format; };
         int GetSampleRate() { return SampleRate; };
         int Read(u8 * buffer, int buffer_size, int pos);

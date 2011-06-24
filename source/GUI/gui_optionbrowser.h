@@ -10,7 +10,7 @@ class GuiOptionBrowser: public GuiElement, public sigslot::has_slots<>
 {
     public:
         GuiOptionBrowser(int w, int h, OptionList * l, const char * background);
-        ~GuiOptionBrowser();
+        virtual ~GuiOptionBrowser();
         int FindMenuItem(int c, int d);
         int GetClickedOption();
         int GetSelectedOption();

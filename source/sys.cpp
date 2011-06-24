@@ -30,9 +30,6 @@ extern "C"
     extern s32 MagicPatches(s32);
 }
 
-extern char game_partition[6];
-extern u8 load_from_fs;
-
 //Wiilight stuff
 static vu32 *_wiilight_reg = (u32*) 0xCD0000C0;
 void wiilight(int enable) // Toggle wiilight (thanks Bool for wiilight source)

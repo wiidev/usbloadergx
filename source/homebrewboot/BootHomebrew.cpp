@@ -20,7 +20,6 @@ static u32 homebrewsize = 0;
 static std::vector<std::string> Arguments;
 
 extern const u8 app_booter_dol[];
-extern const u32 app_booter_dol_size;
 
 void AddBootArgument(const char * argv)
 {

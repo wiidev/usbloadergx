@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-22 19:31+0200\n"
+"POT-Creation-Date: 2011-06-24 21:05+0200\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -197,6 +197,9 @@ msgstr "Háttérzene"
 
 msgid "Big thanks to:"
 msgstr "Köszönet:"
+
+msgid "Block Categories Menu"
+msgstr ""
 
 msgid "Block Categories Modify"
 msgstr ""

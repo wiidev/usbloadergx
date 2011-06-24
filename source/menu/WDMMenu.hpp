@@ -10,7 +10,7 @@ class WDMMenu : public GuiWindow
 {
 	public:
         WDMMenu(const struct discHdr * header);
-        ~WDMMenu();
+        virtual ~WDMMenu();
         int GetChoice();
         static int Show(const struct discHdr * header);
         static u32 GetAlternateDolOffset() { return AlternateDolOffset; }

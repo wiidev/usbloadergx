@@ -30,7 +30,6 @@ class CustomPathsSM : public SettingsMenu
 {
     public:
         CustomPathsSM();
-        virtual int GetType() { return CCustomPathsSM; };
     protected:
         void SetOptionValues();
         int GetMenuInternal();

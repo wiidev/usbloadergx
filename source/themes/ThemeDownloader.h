@@ -31,7 +31,7 @@ class ThemeDownloader : public FlyingButtonsMenu
 {
     public:
         ThemeDownloader();
-        ~ThemeDownloader();
+        virtual ~ThemeDownloader();
         static int Run();
         int MainLoop();
     protected:

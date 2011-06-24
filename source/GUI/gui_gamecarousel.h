@@ -2,24 +2,26 @@
 #define _GUIGAMECAROUSEL_H_
 
 #include <vector>
-#include "gui.h"
+#include "gui_gamebrowser.h"
+#include "gui_image_async.h"
 #include "usbloader/disc.h"
-class GuiImageAsync;
-class GuiGameCarousel: public GuiElement
+
+class GuiGameCarousel : public GuiGameBrowser
 {
     public:
-        GuiGameCarousel(int w, int h, const char *themePath, int selectedGame = 0);
-        ~GuiGameCarousel();
+        GuiGameCarousel(int w, int h, const char *themePath, int listOffset = 0);
+        virtual ~GuiGameCarousel();
         int FindMenuItem(int c, int d);
         int GetClickedOption();
         int GetSelectedOption();
+        void SetSelectedOption(int ind);
+        void setListOffset(int off);
+        int getListOffset() const;
+        void Refresh();
         void ResetState();
         void SetFocus(int f);
         void Draw();
         void Update(GuiTrigger * t);
-        int GetOffset();
-        void Reload();
-        //GuiText * optionVal[PAGESIZE];
     protected:
         GuiImageData noCover;
         int selectedItem;

@@ -29,6 +29,8 @@
 #include <unistd.h>
 #include "BNSDecoder.hpp"
 
+SoundBlock DecodefromBNS(const u8 *buffer, u32 size);
+
 BNSDecoder::BNSDecoder(const char * filepath)
     : SoundDecoder(filepath)
 {

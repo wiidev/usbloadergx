@@ -2,23 +2,25 @@
 #define _GUIGAMEGRID_H_
 
 #include <vector>
-#include "gui.h"
+#include "gui_gamebrowser.h"
+#include "gui_image_async.h"
 #include "usbloader/disc.h"
 
-class GuiImageAsync;
-class GuiGameGrid: public GuiElement
+class GuiGameGrid : public GuiGameBrowser
 {
     public:
         GuiGameGrid(int w, int h, const char *themePath, int selectedGame = 0);
-        ~GuiGameGrid();
+        virtual ~GuiGameGrid();
         int FindMenuItem(int c, int d);
         int GetClickedOption();
         int GetSelectedOption();
+        void SetSelectedOption(int ind);
+		void setListOffset(int off) { listOffset = off; Reload(rows, listOffset); }
+		int getListOffset() const { return listOffset; }
         void ResetState();
         void SetFocus(int f);
         void Draw();
         void Update(GuiTrigger * t);
-        int GetOffset();
         void Reload(int Rows, int ListOffset);
         void ChangeRows(int n);
     protected:

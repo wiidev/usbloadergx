@@ -30,7 +30,7 @@ class GlobalSettings : public FlyingButtonsMenu
 {
     public:
         GlobalSettings();
-        ~GlobalSettings();
+        virtual ~GlobalSettings();
         static int Show();
     protected:
         virtual void CreateSettingsMenu(int index);

@@ -68,15 +68,13 @@ void GuiDiskCover::SetState(int s, int c)
 
 void Menu_DrawDiskCover(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16 distance, u8 data[], f32 deg_alpha,
         f32 deg_beta, f32 scaleX, f32 scaleY, u8 alpha, bool shadow);
-void Menu_DrawDiskCoverShadow(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16 distance, u8 data[],
-        f32 deg_alpha, f32 deg_beta, f32 scaleX, f32 scaleY, u8 alpha, bool shadow);
 
 void GuiDiskCover::Draw()
 {
     LOCK( this );
     if (!image || !this->IsVisible()) return;
     float currScale = this->GetScale();
-	
+
     Menu_DrawDiskCover(this->GetLeft(), this->GetTop(), PosZ, width, height, Distance, image, imageangle, deg_beta,
             widescreen ? currScale * Settings.WSFactor : currScale, currScale, 64, true);
     Menu_DrawDiskCover(this->GetLeft(), this->GetTop(), PosZ, width, height, Distance, image, imageangle, deg_beta,

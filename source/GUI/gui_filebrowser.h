@@ -9,7 +9,7 @@ class GuiFileBrowser: public GuiElement, public sigslot::has_slots<>
 {
     public:
         GuiFileBrowser(int w, int h);
-        ~GuiFileBrowser();
+        virtual ~GuiFileBrowser();
         void DisableTriggerUpdate(bool set);
         void ResetState();
         void SetFocus(int f);

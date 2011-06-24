@@ -13,7 +13,7 @@ class Wbfs
 {
     public:
         Wbfs(u32 lba, u32 size, u32 part, u32 usbport);
-        ~Wbfs() { Close(); };
+        virtual ~Wbfs() { Close(); };
         static s32 Init(u32);
         s32 CheckGame(u8 *);
         s32 GameSize(u8 *, f32 *);

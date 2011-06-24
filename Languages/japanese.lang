@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-22 19:31+0200\n"
+"POT-Creation-Date: 2011-06-24 21:05+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi, papa, ichiroling\n"
@@ -197,6 +197,9 @@ msgstr "BGM"
 
 msgid "Big thanks to:"
 msgstr "協力:"
+
+msgid "Block Categories Menu"
+msgstr ""
 
 msgid "Block Categories Modify"
 msgstr "カテゴリの編集を制限"

@@ -92,22 +92,21 @@ int frag_concat(FragList *ff, FragList *src)
 // in case a sparse block is requested,
 // the returned poffset might not be equal to requested offset
 // the difference should be filled with 0
-int frag_get(FragList *ff, u32 offset, u32 count,
-		u32 *poffset, u32 *psector, u32 *pcount)
+int frag_get(FragList *ff, u32 offset, u32 count, u32 *poffset, u32 *psector, u32 *pcount)
 {
 	u32 i;
 	u32 delta;
 	//printf("frag_get(%u %u)\n", offset, count);
 	for (i=0; i<ff->num; i++) {
-		if (ff->frag[i].offset <= offset
-			&& ff->frag[i].offset + ff->frag[i].count > offset)
+		if (ff->frag[i].offset <= offset && ff->frag[i].offset + ff->frag[i].count > offset)
 		{
 			delta = offset - ff->frag[i].offset;
 			*poffset = offset;
 			*psector = ff->frag[i].sector + delta;
 			*pcount = ff->frag[i].count - delta;
-			if (*pcount > count) *pcount = count;
-			goto out;
+			if (*pcount > count)
+				*pcount = count;
+			return 0;
 		}
 		if (ff->frag[i].offset > offset
 			&& ff->frag[i].offset < offset + count)
@@ -117,8 +116,9 @@ int frag_get(FragList *ff, u32 offset, u32 count,
 			*psector = ff->frag[i].sector;
 			*pcount = ff->frag[i].count;
 			count -= delta;
-			if (*pcount > count) *pcount = count;
-			goto out;
+			if (*pcount > count)
+				*pcount = count;
+			return 0;
 		}
 	}
 	// not found
@@ -131,8 +131,7 @@ int frag_get(FragList *ff, u32 offset, u32 count,
 	*poffset = offset + count;
 	*psector = 0;
 	*pcount = 0;
-	out:
-	//printf("=>(%u %u %u)\n", *poffset, *psector, *pcount);
+
 	return 0;
 }
 

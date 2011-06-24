@@ -43,7 +43,7 @@ class CheckboxPrompt : private PromptWindow, public sigslot::has_slots<>
         //! Constructor
         CheckboxPrompt(const char * title = 0, const char *msg = 0);
         //! Destructor
-        ~CheckboxPrompt();
+        virtual ~CheckboxPrompt();
         //! Add new checkbox
         void AddCheckBox(const char *text);
         //! Default function to get the button pressed

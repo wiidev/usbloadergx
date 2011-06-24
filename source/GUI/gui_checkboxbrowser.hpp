@@ -35,7 +35,7 @@ class GuiCheckboxBrowser : public GuiElement, public sigslot::has_slots<>
 {
     public:
         GuiCheckboxBrowser(int w, int h, int maxSize = 7);
-        ~GuiCheckboxBrowser();
+        virtual ~GuiCheckboxBrowser();
         bool AddEntrie(const string &text, bool checked = false);
         int GetSelected() const { return pageIndex+selectedItem; };
         void SetImage(GuiImage *Img);

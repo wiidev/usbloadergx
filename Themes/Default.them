@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-14 20:50+0200\n"
+"POT-Creation-Date: 2011-06-24 21:05+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -32,27 +32,6 @@ msgid "5 - checkbox browser scrollbar pos y"
 msgstr ""
 
 msgid "r=0 g=0 b=0 a=255 - checkbox browser text color"
-msgstr ""
-
-msgid "9 - game list browser page size"
-msgstr ""
-
-msgid "right - game browser scrollbar align hor"
-msgstr ""
-
-msgid "top - game browser scrollbar align ver"
-msgstr ""
-
-msgid "0 - game browser scrollbar pos x"
-msgstr ""
-
-msgid "5 - game browser scrollbar pos y"
-msgstr ""
-
-msgid "r=0 g=0 b=0 a=255 - game browser list text color"
-msgstr ""
-
-msgid "r=0 g=0 b=0 a=255 - game browser list text color over"
 msgstr ""
 
 msgid "left - carousel layout left arrow align hor"
@@ -89,6 +68,27 @@ msgid "20 - game grid layout pos y"
 msgstr ""
 
 msgid "255 - tooltip alpha"
+msgstr ""
+
+msgid "9 - game list browser page size"
+msgstr ""
+
+msgid "right - game browser scrollbar align hor"
+msgstr ""
+
+msgid "top - game browser scrollbar align ver"
+msgstr ""
+
+msgid "0 - game browser scrollbar pos x"
+msgstr ""
+
+msgid "5 - game browser scrollbar pos y"
+msgstr ""
+
+msgid "r=0 g=0 b=0 a=255 - game browser list text color"
+msgstr ""
+
+msgid "r=0 g=0 b=0 a=255 - game browser list text color over"
 msgstr ""
 
 msgid "right - options browser scrollbar align hor"

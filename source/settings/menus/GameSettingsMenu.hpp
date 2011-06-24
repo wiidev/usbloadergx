@@ -33,7 +33,7 @@ class GameSettingsMenu : public FlyingButtonsMenu
 {
     public:
         GameSettingsMenu(GameBrowseMenu *parent, struct discHdr * header);
-        ~GameSettingsMenu();
+        virtual ~GameSettingsMenu();
         static int Show(GameBrowseMenu *parent, struct discHdr *header);
     protected:
         virtual void CreateSettingsMenu(int index);

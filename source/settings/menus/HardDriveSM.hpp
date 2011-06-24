@@ -30,8 +30,7 @@ class HardDriveSM : public SettingsMenu
 {
     public:
         HardDriveSM();
-        ~HardDriveSM();
-        virtual int GetType() { return CHardDriveSM; };
+        virtual ~HardDriveSM();
     protected:
         void SetOptionValues();
         int GetMenuInternal();

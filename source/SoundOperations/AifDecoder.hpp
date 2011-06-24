@@ -34,7 +34,7 @@ class AifDecoder : public SoundDecoder
     public:
         AifDecoder(const char * filepath);
         AifDecoder(const u8 * snd, int len);
-        ~AifDecoder();
+        virtual ~AifDecoder();
         int GetFormat() { return Format; };
         int GetSampleRate() { return SampleRate; };
         int Read(u8 * buffer, int buffer_size, int pos);

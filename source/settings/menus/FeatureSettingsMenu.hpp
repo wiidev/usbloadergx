@@ -30,7 +30,6 @@ class FeatureSettingsMenu : public SettingsMenu
 {
     public:
         FeatureSettingsMenu();
-        virtual int GetType() { return CFeatureSettings; };
     protected:
         void SetOptionValues();
         int GetMenuInternal();

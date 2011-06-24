@@ -32,7 +32,7 @@ class Mp3Decoder : public SoundDecoder
     public:
         Mp3Decoder(const char * filepath);
         Mp3Decoder(const u8 * sound, int len);
-        ~Mp3Decoder();
+        virtual ~Mp3Decoder();
         int GetFormat() { return Format; };
         int GetSampleRate() { return SampleRate; };
         int Rewind();

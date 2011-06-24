@@ -121,6 +121,8 @@ class CSettings
         f32 WSFactor;
         f32 FontScaleFactor;
         short Wiinnertag;
+        short SelectedGame;
+        short GameListOffset;
         std::vector<u32> EnabledCategories;
     protected:
         bool ValidVersion(FILE * file);

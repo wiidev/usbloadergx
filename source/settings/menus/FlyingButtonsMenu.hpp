@@ -34,7 +34,7 @@ class FlyingButtonsMenu : public GuiWindow
 {
     public:
         FlyingButtonsMenu(const char * menu_title);
-        ~FlyingButtonsMenu();
+        virtual ~FlyingButtonsMenu();
         virtual int MainLoop();
         virtual void HideMenu();
         virtual void ShowMenu();

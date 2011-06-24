@@ -601,7 +601,10 @@ u32 wbfs_extract_disc(wbfs_disc_t*d, rw_sector_callback_t write_dst_wii_sector, 
     int dst_wbs_nlb = p->wbfs_sec_sz / p->wii_sec_sz;
     copy_buffer = wbfs_ioalloc( p->wbfs_sec_sz );
     if (!copy_buffer)
-    ERROR( "alloc memory" );
+    {
+    	wbfs_error( "alloc memory" );
+    	return 1;
+    }
 
     for (i = 0; i < p->n_wbfs_sec_per_disc; i++)
     {
@@ -616,7 +619,6 @@ u32 wbfs_extract_disc(wbfs_disc_t*d, rw_sector_callback_t write_dst_wii_sector, 
     }
     wbfs_iofree( copy_buffer );
     return 0;
-    error: return 1;
 }
 
 u64 wbfs_estimate_disc(wbfs_t *p, read_wiidisc_callback_t read_src_wii_disc, void *callback_data, partition_selector_t sel)
@@ -722,7 +724,7 @@ int wbfs_extract_file(wbfs_disc_t*d, char *path, void **data)
     wd = wd_open_disc(read_wiidisc_wbfsdisc, d);
     if (!wd)
     {
-        ERROR( "opening wbfs disc" );
+    	wbfs_error( "opening wbfs disc" );
         return -1;
     }
     wd->extracted_size = 0;
@@ -734,7 +736,8 @@ int wbfs_extract_file(wbfs_disc_t*d, char *path, void **data)
         ret = -1;
     }
     wd_close_disc(wd);
-    error: return ret;
+
+    return ret;
 }
 
 int wbfs_get_fragments(wbfs_disc_t *d, _frag_append_t append_fragment, void *callback_data, u32 hdd_sector_size)

@@ -181,7 +181,7 @@ GameWindow::GameWindow(int Selected)
             Append(FavoriteBtn[i]);
     }
     //check if unlocked
-    if (mountMethod != 2 && (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_GAME_INSTALL)))
+    if (mountMethod != 2 && (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_GAME_SETTINGS)))
     {
         backBtn->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
         backBtn->SetPosition(-50, -40);

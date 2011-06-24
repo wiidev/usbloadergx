@@ -34,7 +34,7 @@ class ThemeMenu : public FlyingButtonsMenu
 {
     public:
         ThemeMenu();
-        ~ThemeMenu();
+        virtual ~ThemeMenu();
         static int Run();
         int MainLoop();
     protected:

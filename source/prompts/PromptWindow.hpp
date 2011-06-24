@@ -32,7 +32,7 @@ class PromptWindow : public GuiWindow
         //! Constructor
         PromptWindow(const char *title = 0, const char *msg = 0);
         //! Destructor
-        ~PromptWindow();
+        virtual ~PromptWindow();
         //! Set title text
         void SetTitle(const char *text) { titleTxt->SetText(text); };
         //! Set message text

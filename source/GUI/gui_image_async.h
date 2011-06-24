@@ -11,7 +11,7 @@ class GuiImageAsync: public GuiImage
     public:
         GuiImageAsync(const char *Filename, GuiImageData * PreloadImg);
         GuiImageAsync(ImageLoaderCallback Callback, const void *Arg, int ArgLen, GuiImageData * PreloadImg);
-        ~GuiImageAsync();
+        virtual ~GuiImageAsync();
 
         static void ClearQueue();
     private:

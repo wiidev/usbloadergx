@@ -34,7 +34,7 @@ class HomebrewPrompt : public PromptWindow, public sigslot::has_slots<>
         HomebrewPrompt(const char *name, const char *coder, const char *version,
                        const char *release_date, const char *long_description,
                        GuiImageData * iconImgData, u64 filesize);
-        ~HomebrewPrompt();
+        virtual ~HomebrewPrompt();
         int MainLoop();
     private:
         void onListChange(int SelItem, int SelInd);

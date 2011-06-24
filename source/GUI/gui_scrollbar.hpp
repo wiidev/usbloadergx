@@ -30,7 +30,7 @@ class GuiScrollbar : public GuiElement, public sigslot::has_slots<>
 {
     public:
         GuiScrollbar(int height, u8 mode = LISTMODE);
-        ~GuiScrollbar();
+        virtual ~GuiScrollbar();
         void SetDPadControl(bool a) { AllowDPad = a; }
         void SetButtonScroll(u32 button) { ButtonScroll = button; }
         void ScrollOneUp();

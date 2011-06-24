@@ -19,6 +19,7 @@
 #include "themes/CTheme.h"
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
+#include "utils/tools.h"
 #include "menu.h"
 
 #include <string.h>
@@ -34,8 +35,6 @@
 //#define SAFETY        320
 #define goSteps     10
 #include "../main.h"
-
-extern const int vol;
 
 static int Skew1[7][8] = { { -14, -66, 14, -34, 14, 34, -14, 66 }, { -10, -44, 10, -26, 10, 26, -10, 44 }, { -6, -22,
         6, -14, 6, 14, -6, 22 }, { 0, -11, 0, -11, 0, 11, 0, 11 }, { -6, -14, 6, -22, 6, 22, -6, 14 }, { -10, -26, 10,
@@ -201,11 +200,12 @@ static GuiImageData *GameGridLoadCoverImage(void * Arg)
 /**
  * Constructor for the GuiGamegrid class.
  */
-GuiGameGrid::GuiGameGrid(int w, int h, const char *themePath, int selectedGame) :
+GuiGameGrid::GuiGameGrid(int w, int h, const char *themePath, int offset) :
     noCover(Resources::GetFile("nocoverFlat.png"), Resources::GetFileSize("nocoverFlat.png"))
 {
     width = w;
     height = h;
+    listOffset = MIN(offset, gameList.size()-1);
     theme_posX = thInt("0 - game grid layout pos x");
     theme_posY = thInt("20 - game grid layout pos y");
 
@@ -264,7 +264,7 @@ GuiGameGrid::GuiGameGrid(int w, int h, const char *themePath, int selectedGame) 
     // Page-Stuff
     gameIndex = NULL;
 
-    Reload(Settings.gridRows, 0);
+    Reload(Settings.gridRows, listOffset);
 }
 
 /**
@@ -332,12 +332,6 @@ void GuiGameGrid::ResetState()
     }
 }
 
-int GuiGameGrid::GetOffset()
-{
-    LOCK( this );
-    return listOffset;
-}
-
 int GuiGameGrid::GetClickedOption()
 {
     LOCK( this );
@@ -365,6 +359,12 @@ int GuiGameGrid::GetSelectedOption()
         }
     }
     return found;
+}
+
+void GuiGameGrid::SetSelectedOption(int ind)
+{
+	LOCK(this);
+	selectedItem = LIMIT(ind, 0, MIN(pagesize, MAX(0, gameList.size()-1)));
 }
 
 /**

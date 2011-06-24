@@ -1,10 +1,7 @@
 #ifndef GAMEBROWSEMENU_HPP_
 #define GAMEBROWSEMENU_HPP_
 
-#include "GUI/gui.h"
 #include "GUI/gui_gamebrowser.h"
-#include "GUI/gui_gamegrid.h"
-#include "GUI/gui_gamecarousel.h"
 #include "GUI/gui_searchbar.h"
 #include "utils/ThreadedTask.hpp"
 
@@ -12,14 +9,13 @@ class GameBrowseMenu : public GuiWindow
 {
     public:
         GameBrowseMenu();
-        ~GameBrowseMenu();
+        virtual ~GameBrowseMenu();
         static int Execute();
         void ReloadBrowser();
-    protected:
+    private:
         int MainLoop();
         int OpenClickedGame();
-        int GetSelectedGame();
-        int GetClickedGame();
+        int GetSelectedGame() { return (gameBrowser ? gameBrowser->GetSelectedOption() : -1); }
         void UpdateGameInfoText(const u8 * gameId);
         void LoadCover(struct discHdr *header);
         void CheckAlternativeDOL(const char * IDfull);
@@ -41,8 +37,6 @@ class GameBrowseMenu : public GuiWindow
         std::vector<GuiButton *> ToolBar;
 
         GuiGameBrowser * gameBrowser;
-        GuiGameGrid * gameGrid;
-        GuiGameCarousel * gameCarousel;
         GuiSearchBar * searchBar;
 
         GuiImageData * btnInstall;

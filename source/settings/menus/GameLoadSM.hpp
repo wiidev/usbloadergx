@@ -31,8 +31,7 @@ class GameLoadSM : public SettingsMenu
 {
     public:
         GameLoadSM(const char * GameID);
-        ~GameLoadSM();
-        virtual int GetType() { return CGameLoadSM; };
+        virtual ~GameLoadSM();
     protected:
         void SetDefaultConfig();
         void SetOptionNames();

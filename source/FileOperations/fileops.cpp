@@ -361,23 +361,6 @@ extern "C" int CopyFile(const char * src, const char * dest)
 }
 
 /****************************************************************************
-* ClearList
-*
-* Clearing a vector list
-****************************************************************************/
-static inline void ClearList(std::vector<char *> &List)
-{
-    for(u32 i = 0; i < List.size(); ++i)
-    {
-        if(List[i])
-            free(List[i]);
-        List[i] = NULL;
-    }
-    List.clear();
-    std::vector<char *>().swap(List);
-}
-
-/****************************************************************************
  * MoveFile
  *
  * Move a file from srcpath to destdir

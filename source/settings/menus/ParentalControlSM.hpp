@@ -30,7 +30,6 @@ class ParentalControlSM : public SettingsMenu
 {
     public:
         ParentalControlSM();
-        virtual int GetType() { return CParentalControlSM; };
     protected:
         void SetOptionValues();
         int GetMenuInternal();

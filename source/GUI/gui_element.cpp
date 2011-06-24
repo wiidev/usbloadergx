@@ -471,7 +471,7 @@ void GuiElement::SetEffect(int eff, int speed, f32 circles, int r, f32 startdegr
         xoffsetDyn = 0; //!position of circle in x
         yoffsetDyn = 0; //!position of circle in y
         Radius = r; //!radius of the circle
-        degree = startdegree; //!for example -90 (°) to start at top of circle
+        degree = startdegree; //!for example -90 (ï¿½) to start at top of circle
         circleamount = circles; //!circleamoutn in degrees for example 360 for 1 circle
         angleDyn = 0.0f; //!this is used by the code to calc the angle
         anglespeed = anglespeedset; //!This is anglespeed depending on circle speed 1 is same speed and 0.5 half speed
@@ -497,11 +497,11 @@ void GuiElement::SetEffect(int eff, int amount, int target)
         else if (eff & EFFECT_SLIDE_RIGHT) xoffsetDyn = screenwidth;
     }
 
-    if (eff & EFFECT_FADE && amount > 0)
+    if ((eff & EFFECT_FADE) && amount > 0)
     {
         alphaDyn = 0;
     }
-    else if (eff & EFFECT_FADE && amount < 0)
+    else if ((eff & EFFECT_FADE) && amount < 0)
     {
         alphaDyn = alpha;
 
@@ -814,7 +814,7 @@ void GuiElement::UnlockElement()
     //  LWP_MutexUnlock(mutex);
     LWP_MutexLock(_lock_mutex);
     // only the thread was locked this element, can call unlock
-    if (_lock_thread == LWP_GetSelf()) // but we check it here – safe is safe
+    if (_lock_thread == LWP_GetSelf()) // but we check it here ï¿½ safe is safe
     {
         if (--_lock_count == 0) // dec count of locks and check if it last lock;
         {

@@ -8,7 +8,7 @@ class GuiSearchBar: public GuiWindow
 {
     public:
         GuiSearchBar(const wchar_t *SearchChars);
-        ~GuiSearchBar();
+        virtual ~GuiSearchBar();
         void Draw();
         void Update(GuiTrigger * t);
         wchar_t GetClicked();

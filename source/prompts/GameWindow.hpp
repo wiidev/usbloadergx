@@ -11,7 +11,7 @@ class GameWindow : public GuiWindow
 {
     public:
         GameWindow(int GameSelected);
-        ~GameWindow();
+        virtual ~GameWindow();
         int Show();
         int GetSelectedGame() { return gameSelected; };
         void SetGameBrowseMenu(GameBrowseMenu *m) { browserMenu = m; };

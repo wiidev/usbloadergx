@@ -53,7 +53,7 @@ void UpdatePads()
 
         if(userInput[i].wpad.exp.type == WPAD_EXP_NUNCHUK)
         {
-            if(userInput[i].wpad.btns_h & WPAD_NUNCHUK_BUTTON_Z && userInput[i].wpad.btns_d & WPAD_NUNCHUK_BUTTON_C)
+            if((userInput[i].wpad.btns_h & WPAD_NUNCHUK_BUTTON_Z) && (userInput[i].wpad.btns_d & WPAD_NUNCHUK_BUTTON_C))
                 ScreenShot();
 		}
     }

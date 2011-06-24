@@ -20,7 +20,7 @@ class GuiBGM: public GuiSound
 {
     public:
         GuiBGM(const u8 *s, int l, int v);
-        ~GuiBGM();
+        virtual ~GuiBGM();
         bool Load(const char *path);
         bool LoadStandard();
         bool ParsePath(const char * folderpath);

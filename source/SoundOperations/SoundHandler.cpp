@@ -106,14 +106,7 @@ void SoundHandler::RemoveDecoder(int voice)
         return;
 
     if(DecoderList[voice] != NULL)
-    {
-        if(DecoderList[voice]->GetSoundType() == SOUND_OGG) delete ((OggDecoder *) DecoderList[voice]);
-        else if(DecoderList[voice]->GetSoundType() == SOUND_MP3) delete ((Mp3Decoder *) DecoderList[voice]);
-        else if(DecoderList[voice]->GetSoundType() == SOUND_WAV) delete ((WavDecoder *) DecoderList[voice]);
-        else if(DecoderList[voice]->GetSoundType() == SOUND_AIF) delete ((AifDecoder *) DecoderList[voice]);
-        else if(DecoderList[voice]->GetSoundType() == SOUND_BNS) delete ((BNSDecoder *) DecoderList[voice]);
-        else delete DecoderList[voice];
-    }
+    	delete DecoderList[voice];
 
     DecoderList[voice] = NULL;
 }

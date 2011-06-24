@@ -30,8 +30,7 @@ class GuiSettingsMenu : public SettingsMenu
 {
     public:
         GuiSettingsMenu();
-        ~GuiSettingsMenu();
-        virtual int GetType() { return CGUISettingsMenu; };
+        virtual ~GuiSettingsMenu();
     protected:
         void SetOptionValues();
         int GetMenuInternal();

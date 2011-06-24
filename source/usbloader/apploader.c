@@ -14,8 +14,6 @@
 #include "patches/wip.h"
 #include "settings/SettingsEnums.h"
 
-extern bool geckoinit;
-
 /* Apploader function pointers */
 typedef int (*app_main)(void **dst, int *size, int *offset);
 typedef void (*app_init)(void(*report)(const char *fmt, ...));

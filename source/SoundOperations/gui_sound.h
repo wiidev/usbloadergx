@@ -38,7 +38,7 @@ class GuiSound
         GuiSound(const char * filepath);
 		GuiSound(const u8 * sound, int filesize, int volume, bool allocated = false, int voice = -1);
 		//!Destructor
-		~GuiSound();
+		virtual ~GuiSound();
 		//!Load a file and replace the old one
 		virtual bool Load(const char * filepath);
 		//!Load a file and replace the old one

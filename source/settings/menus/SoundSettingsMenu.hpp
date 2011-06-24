@@ -30,7 +30,6 @@ class SoundSettingsMenu : public SettingsMenu
 {
     public:
         SoundSettingsMenu();
-        virtual int GetType() { return CSoundSettingsMenu; };
     protected:
         void SetOptionValues();
         int GetMenuInternal();

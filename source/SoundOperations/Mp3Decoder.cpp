@@ -213,4 +213,6 @@ int Mp3Decoder::Read(u8 * buffer, int buffer_size, int pos)
         mad_synth_frame(&Synth,&Frame);
         SynthPos = 0;
     }
+
+    return 0;
 }

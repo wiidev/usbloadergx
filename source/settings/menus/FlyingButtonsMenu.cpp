@@ -354,7 +354,7 @@ void FlyingButtonsMenu::ShowButtonsEffects(int effect, int effect_speed)
         return;
 
     //! Don't lock on fade in for initiation purpose
-    if(effect & EFFECT_FADE && effect_speed > 0)
+    if((effect & EFFECT_FADE) && effect_speed > 0)
         return;
 
     while (parentElement && MainButton[FirstItem]->GetEffect() > 0)

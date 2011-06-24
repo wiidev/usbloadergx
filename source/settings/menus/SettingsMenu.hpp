@@ -28,28 +28,13 @@
 #include "GUI/gui_optionbrowser.h"
 #include "menu.h"
 
-enum
-{
-    CSettingsMenu = 0,
-    CGUISettingsMenu,
-    CLoaderSettings,
-    CParentalControlSM,
-    CSoundSettingsMenu,
-    CCustomPathsSM,
-    CGameLoadSM,
-    CUninstallSM,
-    CFeatureSettings,
-    CHardDriveSM,
-};
-
 class SettingsMenu : public GuiWindow
 {
     public:
         SettingsMenu(const char * title, OptionList * option, int returnTo);
-        ~SettingsMenu();
+        virtual ~SettingsMenu();
         int GetClickedOption();
         int GetMenu();
-        virtual int GetType() { return CSettingsMenu; }
     protected:
         virtual int GetMenuInternal() { return MENU_NONE; };
         int returnToMenu;

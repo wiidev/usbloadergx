@@ -20,7 +20,7 @@ class Text: public GuiText
         //!\param c Font color
         Text(const char * t, int s, GXColor c);
         Text(const wchar_t * t, int s, GXColor c);
-        ~Text();
+        virtual ~Text();
         //!Sets the text of the GuiText element
         //!\param t Text
         void SetText(const char * t);

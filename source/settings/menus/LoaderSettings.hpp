@@ -30,7 +30,6 @@ class LoaderSettings : public SettingsMenu
 {
     public:
         LoaderSettings();
-        virtual int GetType() { return CLoaderSettings; };
     protected:
         void SetOptionValues();
         int GetMenuInternal();

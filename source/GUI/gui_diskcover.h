@@ -8,7 +8,7 @@ class GuiDiskCover: public GuiImage
     public:
         GuiDiskCover();
         GuiDiskCover(GuiImageData * img);
-        ~GuiDiskCover();
+        virtual ~GuiDiskCover();
         void SetBeta(f32 beta);
         void SetBetaRotateEffect(f32 beta, u16 Step);
         bool GetBetaRotateEffect();

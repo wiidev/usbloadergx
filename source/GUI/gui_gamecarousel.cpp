@@ -18,6 +18,7 @@
 #include "settings/CSettings.h"
 #include "GUI/LoadCoverImage.h"
 #include "themes/CTheme.h"
+#include "utils/tools.h"
 #include "main.h"
 
 #include <string.h>
@@ -46,13 +47,13 @@ static GuiImageData *GameCarouselLoadCoverImage(void * Arg)
 /**
  * Constructor for the GuiGameCarousel class.
  */
-GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, int selectedGame) :
+GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, int offset) :
     noCover(Resources::GetFile("nocover.png"), Resources::GetFileSize("nocover.png"))
 {
     width = w;
     height = h;
     pagesize = (gameList.size() < 11) ? gameList.size() : 11;
-    listOffset = (gameList.size() < 11) ? 0 : gameList.size()-2;
+    listOffset = (gameList.size() < 11) ? MIN(offset, gameList.size()-1) : MIN(offset, gameList.size())-2;
     selectable = true;
     selectedItem = -1;
     focus = 1; // allow focus
@@ -110,37 +111,7 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, int select
     game.resize(pagesize);
     coverImg.resize(pagesize);
 
-    for (int i = 0; i < pagesize; i++)
-    {
-        //------------------------
-        // Index
-        //------------------------
-        gameIndex[i] = GetGameIndex( i, listOffset, gameList.size() );
-
-        //------------------------
-        // Image
-        //------------------------
-        coverImg[i] = new (std::nothrow) GuiImageAsync(GameCarouselLoadCoverImage, gameList[gameIndex[i]],
-                sizeof(struct discHdr), &noCover);
-        if (coverImg[i]) coverImg[i]->SetWidescreen(Settings.widescreen);
-
-        //------------------------
-        // GameButton
-        //------------------------
-
-        game[i] = new GuiButton(122, 244);
-        game[i]->SetParent(this);
-        game[i]->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-        game[i]->SetPosition(0, 740);
-        game[i]->SetImage(coverImg[i]);
-        game[i]->SetScale(SCALE);
-        game[i]->SetRumble(false);
-        game[i]->SetTrigger(trigA);
-        game[i]->SetSoundClick(btnSoundClick);
-        game[i]->SetClickable(true);
-        game[i]->SetEffect(EFFECT_GOROUND, IN_SPEED, 90 - (pagesize - 2 * i - 1) * DEG_OFFSET / 2, RADIUS, 180, 1, 0,
-                RADIUS);
-    }
+    Refresh();
 }
 
 /**
@@ -173,6 +144,65 @@ GuiGameCarousel::~GuiGameCarousel()
 
 }
 
+void GuiGameCarousel::setListOffset(int off)
+{
+    LOCK( this );
+	if(gameList.size() < 11)
+		listOffset = MIN(off, gameList.size()-1);
+	else
+		listOffset = MIN(off, gameList.size()) - 2;
+
+	Refresh();
+}
+
+int GuiGameCarousel::getListOffset() const
+{
+	if(gameList.size() < 11)
+		return listOffset;
+	else
+		return (listOffset + 2) % gameList.size();
+}
+
+void GuiGameCarousel::SetSelectedOption(int ind)
+{
+	LOCK(this);
+	selectedItem = LIMIT(ind, 0, MIN(pagesize, MAX(0, gameList.size()-1)));
+}
+
+void GuiGameCarousel::Refresh()
+{
+    for (int i = 0; i < pagesize; i++)
+    {
+        //------------------------
+        // Index
+        //------------------------
+        gameIndex[i] = GetGameIndex( i, listOffset, gameList.size() );
+
+        //------------------------
+        // Image
+        //------------------------
+        delete coverImg[i];
+        coverImg[i] = new (std::nothrow) GuiImageAsync(GameCarouselLoadCoverImage, gameList[gameIndex[i]], sizeof(struct discHdr), &noCover);
+        if (coverImg[i]) coverImg[i]->SetWidescreen(Settings.widescreen);
+
+        //------------------------
+        // GameButton
+        //------------------------
+        delete game[i];
+        game[i] = new GuiButton(122, 244);
+        game[i]->SetParent(this);
+        game[i]->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+        game[i]->SetPosition(0, 740);
+        game[i]->SetImage(coverImg[i]);
+        game[i]->SetScale(SCALE);
+        game[i]->SetRumble(false);
+        game[i]->SetTrigger(trigA);
+        game[i]->SetSoundClick(btnSoundClick);
+        game[i]->SetClickable(true);
+        game[i]->SetEffect(EFFECT_GOROUND, IN_SPEED, 90 - (pagesize - 2 * i - 1) * DEG_OFFSET / 2, RADIUS, 180, 1, 0, RADIUS);
+    }
+}
+
 void GuiGameCarousel::SetFocus(int f)
 {
     LOCK( this );
@@ -199,12 +229,6 @@ void GuiGameCarousel::ResetState()
     {
         game[i]->ResetState();
     }
-}
-
-int GuiGameCarousel::GetOffset()
-{
-    LOCK( this );
-    return listOffset;
 }
 
 int GuiGameCarousel::GetClickedOption()
@@ -273,7 +297,7 @@ void GuiGameCarousel::Update(GuiTrigger * t)
     btnRight->Update(t);
     btnLeft->Update(t);
 
-    if (game[0]->GetEffect() & EFFECT_GOROUND || game[pagesize - 1]->GetEffect() & EFFECT_GOROUND)
+    if ((game[0]->GetEffect() & EFFECT_GOROUND) || (game[pagesize - 1]->GetEffect() & EFFECT_GOROUND))
     {
         return; // skip when rotate
     }

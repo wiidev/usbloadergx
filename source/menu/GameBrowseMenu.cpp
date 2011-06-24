@@ -1,6 +1,9 @@
 #include <unistd.h>
 #include "GameBrowseMenu.hpp"
 #include "Controls/DeviceHandler.hpp"
+#include "GUI/gui_gamelist.h"
+#include "GUI/gui_gamegrid.h"
+#include "GUI/gui_gamecarousel.h"
 #include "GUI/LoadCoverImage.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/gameinfo.h"
@@ -33,13 +36,10 @@
 #include "wpad.h"
 #include "sys.h"
 
-extern int load_from_fs;
 extern u8 mountMethod;
 extern bool updateavailable;
 extern struct discHdr *dvdheader;
-extern int cntMissFiles;
 
-static int lastSelectedGame = 0;
 static bool WiiMoteInitiated = false;
 static bool Exiting = false;
 
@@ -52,8 +52,6 @@ GameBrowseMenu::GameBrowseMenu()
     Exiting = false;
     show_searchwindow = false;
     gameBrowser = NULL;
-    gameGrid = NULL;
-    gameCarousel = NULL;
     searchBar = NULL;
     gameCover = NULL;
     gameCoverImg = NULL;
@@ -476,11 +474,7 @@ GameBrowseMenu::~GameBrowseMenu()
     delete DownloadBtnTT;
     delete IDBtnTT;
 
-    lastSelectedGame = LIMIT(GetSelectedGame(), 0, gameList.size()-1);
-
     delete gameBrowser;
-    delete gameGrid;
-    delete gameCarousel;
     mainWindow->Remove(searchBar);
     delete searchBar;
 
@@ -609,18 +603,13 @@ void GameBrowseMenu::ReloadBrowser()
         }
     }
 
-    if(GetSelectedGame() >= 0)
-        lastSelectedGame = LIMIT(GetSelectedGame(), 0, gameList.size()-1);
-    else
-        lastSelectedGame = LIMIT(lastSelectedGame, 0, gameList.size()-1);
+	//! Check if the loaded setting is still in range
+	Settings.SelectedGame = LIMIT(Settings.SelectedGame, 0, gameList.size()-1);
+	Settings.GameListOffset = LIMIT(Settings.GameListOffset, 0, gameList.size()-1);
 
     delete gameBrowser;
-    delete gameGrid;
-    delete gameCarousel;
     delete searchBar;
     gameBrowser = NULL;
-    gameGrid = NULL;
-    gameCarousel = NULL;
     searchBar = NULL;
 
     if (Settings.gameDisplay == LIST_MODE)
@@ -653,9 +642,10 @@ void GameBrowseMenu::ReloadBrowser()
         dvdBtn->SetPosition(Settings.widescreen ? thInt("512 - list layout dvd btn pos x widescreen") : thInt("540 - list layout dvd btn pos x"),
                                 thInt("13 - list layout dvd btn pos y"));
 
-        gameBrowser = new GuiGameBrowser(thInt("396 - game list layout width"), thInt("280 - game list layout height"), lastSelectedGame);
+        gameBrowser = new GuiGameList(thInt("396 - game list layout width"), thInt("280 - game list layout height"), Settings.GameListOffset);
         gameBrowser->SetPosition(thInt("200 - game list layout pos x"), thInt("49 - game list layout pos y"));
         gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
+        gameBrowser->SetSelectedOption(Settings.SelectedGame);
     }
     else if (Settings.gameDisplay == GRID_MODE)
     {
@@ -687,9 +677,9 @@ void GameBrowseMenu::ReloadBrowser()
         dvdBtn->SetPosition(Settings.widescreen ? thInt("448 - grid layout dvd btn pos x widescreen") : thInt("480 - grid layout dvd btn pos x"),
                                 thInt("13 - grid layout dvd btn pos y"));
 
-        gameGrid = new GuiGameGrid(thInt("640 - game grid layout width"), thInt("400 - game grid layout height"), Settings.theme_path, lastSelectedGame);
-        gameGrid->SetPosition(thInt("0 - game grid layout pos x"), thInt("20 - game grid layout pos y"));
-        gameGrid->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
+        gameBrowser = new GuiGameGrid(thInt("640 - game grid layout width"), thInt("400 - game grid layout height"), Settings.theme_path, Settings.GameListOffset);
+        gameBrowser->SetPosition(thInt("0 - game grid layout pos x"), thInt("20 - game grid layout pos y"));
+        gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     }
     else if (Settings.gameDisplay == CAROUSEL_MODE)
     {
@@ -721,9 +711,9 @@ void GameBrowseMenu::ReloadBrowser()
         dvdBtn->SetPosition(Settings.widescreen ? thInt("448 - carousel layout dvd btn pos x widescreen") : thInt("480 - carousel layout dvd btn pos x"),
                                 thInt("13 - carousel layout dvd btn pos y"));
 
-        gameCarousel = new GuiGameCarousel(thInt("640 - game carousel layout width"), thInt("400 - game carousel layout height"), Settings.theme_path, lastSelectedGame);
-        gameCarousel->SetPosition(thInt("0 - game carousel layout pos x"), thInt("-20 - game carousel layout pos y"));
-        gameCarousel->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
+        gameBrowser = new GuiGameCarousel(thInt("640 - game carousel layout width"), thInt("400 - game carousel layout height"), Settings.theme_path, Settings.GameListOffset);
+        gameBrowser->SetPosition(thInt("0 - game carousel layout pos x"), thInt("-20 - game carousel layout pos y"));
+        gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     }
 
 
@@ -767,12 +757,6 @@ void GameBrowseMenu::ReloadBrowser()
 
     if (gameBrowser)
         Append(gameBrowser);
-
-    else if (gameGrid)
-        Append(gameGrid);
-
-    else if (gameCarousel)
-        Append(gameCarousel);
 
     if (show_searchwindow)
     {
@@ -895,7 +879,7 @@ int GameBrowseMenu::MainLoop()
         wString oldFilter(gameList.GetCurrentFilter());
         gameList.FilterList(oldFilter.c_str());
 
-        if(Settings.GameSort & SORT_FAVORITE && gameList.size() == 0)
+        if((Settings.GameSort & SORT_FAVORITE) && gameList.size() == 0)
         {
             Settings.GameSort &= ~SORT_FAVORITE;
             gameList.FilterList(oldFilter.c_str());
@@ -1072,6 +1056,37 @@ int GameBrowseMenu::MainLoop()
         }
     }
 
+    else if(categBtn->GetState() == STATE_CLICKED)
+    {
+        if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_CATEGORIES_MENU))
+        {
+            WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+            categBtn->ResetState();
+        	return returnMenu;
+        }
+
+        mainWindow->SetState(STATE_DISABLED);
+        CategorySwitchPrompt promptMenu;
+        promptMenu.SetAlignment(thAlign("center - category switch prompt align hor"), thAlign("middle - category switch prompt align ver"));
+        promptMenu.SetPosition(thInt("0 - category switch prompt pos x"), thInt("0 - category switch prompt pos y"));
+        promptMenu.SetEffect(EFFECT_FADE, 20);
+        mainWindow->Append(&promptMenu);
+
+        promptMenu.Show();
+
+        promptMenu.SetEffect(EFFECT_FADE, -20);
+        while(promptMenu.GetEffect() > 0) usleep(100);
+        mainWindow->Remove(&promptMenu);
+        categBtn->ResetState();
+        mainWindow->SetState(STATE_DEFAULT);
+        if(promptMenu.categoriesChanged())
+        {
+            wString oldFilter(gameList.GetCurrentFilter());
+            gameList.FilterList(oldFilter.c_str());
+            ReloadBrowser();
+        }
+    }
+
     else if (Settings.gameDisplay == LIST_MODE && idBtn->GetState() == STATE_CLICKED)
     {
         gprintf("\tidBtn Clicked\n");
@@ -1103,7 +1118,14 @@ int GameBrowseMenu::MainLoop()
         }
     }
 
-	gameClicked = GetClickedGame();
+    if(gameBrowser)
+    {
+    	//! This is bad, but for saving pupose it will be in main loop
+    	Settings.GameListOffset = gameBrowser->getListOffset();
+    	Settings.SelectedGame = gameBrowser->GetSelectedOption()-Settings.GameListOffset;
+    }
+
+	gameClicked = gameBrowser ? gameBrowser->GetClickedOption() : -1;
     if ((gameClicked >= 0 && gameClicked < (s32) gameList.size()) || mountMethod != 0)
     {
         OpenClickedGame();
@@ -1153,30 +1175,6 @@ void GameBrowseMenu::CheckDiscSlotUpdate()
         rockout(GetSelectedGame());
     }
 
-    else if(categBtn->GetState() == STATE_CLICKED)
-    {
-        mainWindow->SetState(STATE_DISABLED);
-        CategorySwitchPrompt promptMenu;
-        promptMenu.SetAlignment(thAlign("center - category switch prompt align hor"), thAlign("middle - category switch prompt align ver"));
-        promptMenu.SetPosition(thInt("0 - category switch prompt pos x"), thInt("0 - category switch prompt pos y"));
-        promptMenu.SetEffect(EFFECT_FADE, 20);
-        mainWindow->Append(&promptMenu);
-
-        promptMenu.Show();
-
-        promptMenu.SetEffect(EFFECT_FADE, -20);
-        while(promptMenu.GetEffect() > 0) usleep(100);
-        mainWindow->Remove(&promptMenu);
-        categBtn->ResetState();
-        mainWindow->SetState(STATE_DEFAULT);
-        if(promptMenu.categoriesChanged())
-        {
-            wString oldFilter(gameList.GetCurrentFilter());
-            gameList.FilterList(oldFilter.c_str());
-            ReloadBrowser();
-        }
-    }
-
     if(DiscDriveCoverOld != DiscDriveCover)
     {
         if(DiscDriveCover & 0x02)
@@ -1218,34 +1216,6 @@ void GameBrowseMenu::UpdateClock()
             strftime(theTime, sizeof(theTime), "%H %M", timeinfo);
     }
     clockTime->SetText(theTime);
-}
-
-int GameBrowseMenu::GetSelectedGame()
-{
-    if(gameBrowser)
-        return gameBrowser->GetSelectedOption();
-
-    else if(gameCarousel)
-        return gameCarousel->GetSelectedOption();
-
-    else if(gameGrid)
-        return gameGrid->GetSelectedOption();
-
-    return -1;
-}
-
-int GameBrowseMenu::GetClickedGame()
-{
-    if(gameBrowser)
-        return gameBrowser->GetClickedOption();
-
-    else if(gameCarousel)
-        return gameCarousel->GetClickedOption();
-
-    else if(gameGrid)
-        return gameGrid->GetClickedOption();
-
-    return -1;
 }
 
 void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
@@ -1334,6 +1304,7 @@ int GameBrowseMenu::OpenClickedGame()
     }
 
     rockout(gameSelected);
+    if(gameBrowser) gameBrowser->SetState(STATE_DISABLED);
 
     struct discHdr *header = (mountMethod ? dvdheader : gameList[gameSelected]);
 
@@ -1362,6 +1333,7 @@ int GameBrowseMenu::OpenClickedGame()
 			gameSelected = GamePrompt->GetSelectedGame();
 			delete GamePrompt;
             SetState(STATE_DEFAULT);
+            if(gameBrowser) gameBrowser->SetState(STATE_DISABLED);
             //update header and id if it was changed
             header = (mountMethod ? dvdheader : gameList[gameSelected]);
             snprintf(IDfull, sizeof(IDfull), "%s", (char *) header->id);
@@ -1409,6 +1381,7 @@ int GameBrowseMenu::OpenClickedGame()
 
     rockout(-1, -1);
     mountMethod = 0;
+    if(gameBrowser) gameBrowser->SetState(STATE_DEFAULT);
 
     if (searchBar)
     {

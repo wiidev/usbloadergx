@@ -34,7 +34,7 @@ class BoxCover : public GuiImage
 {
     public:
         BoxCover(GuiImageData * img, bool flat = false);
-        ~BoxCover();
+        virtual ~BoxCover();
         //! Colors:
         //! Gray Box (Default): r:233 g:233 b:233
         //! Red Box (NSMB): r:198 g:34 b:4

@@ -261,39 +261,6 @@ void GlobalSettings::CreateSettingsMenu(int menuNr)
 
 void GlobalSettings::DeleteSettingsMenu()
 {
-    if(!CurrentMenu)
-        return;
-
-    int type = CurrentMenu->GetType();
-
-    switch(type)
-    {
-        case CGUISettingsMenu:
-            delete ((GuiSettingsMenu *) CurrentMenu);
-            break;
-        case CLoaderSettings:
-            delete ((LoaderSettings *) CurrentMenu);
-            break;
-        case CParentalControlSM:
-            delete ((ParentalControlSM *) CurrentMenu);
-            break;
-        case CSoundSettingsMenu:
-            delete ((SoundSettingsMenu *) CurrentMenu);
-            break;
-        case CCustomPathsSM:
-            delete ((CustomPathsSM *) CurrentMenu);
-            break;
-        case CFeatureSettings:
-            delete ((FeatureSettingsMenu *) CurrentMenu);
-            break;
-        case CHardDriveSM:
-            delete ((HardDriveSM *) CurrentMenu);
-            break;
-        case CSettingsMenu:
-        default:
-            delete CurrentMenu;
-            break;
-    }
-
+	delete CurrentMenu;
     CurrentMenu = NULL;
 }

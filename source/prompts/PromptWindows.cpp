@@ -45,13 +45,8 @@
 
 /*** Extern variables ***/
 s32 gameStart = 0;
-extern float gamesize;
 extern u8 shutdown;
 extern u8 reset;
-extern u8 mountMethod;
-extern struct discHdr *dvdheader;
-extern char game_partition[6];
-extern int connection;
 
 /****************************************************************************
  * OnScreenNumpad

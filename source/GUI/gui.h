@@ -126,7 +126,7 @@ class GuiTrigger
         //!Constructor
         GuiTrigger();
         //!Destructor
-        ~GuiTrigger();
+        virtual ~GuiTrigger();
         //!Sets a simple trigger. Requires: element is selected, and trigger button is pressed
         //!\param ch Controller channel number
         //!\param wiibtns Wii controller trigger button(s) - classic controller buttons are considered separately
@@ -180,7 +180,7 @@ class GuiElement
         //!Constructor
         GuiElement();
         //!Destructor
-        ~GuiElement();
+        virtual ~GuiElement();
         //!Set the element's parent
         //!\param e Pointer to parent element
         void SetParent(GuiElement * e);
@@ -451,7 +451,7 @@ class GuiWindow: public GuiElement
         //!\param h Height of window
         GuiWindow(int w, int h);
         //!Destructor
-        ~GuiWindow();
+        virtual ~GuiWindow();
         //!Appends a GuiElement to the GuiWindow
         //!\param e The GuiElement to append. If it is already in the GuiWindow, it is removed first
         void Append(GuiElement* e);
@@ -544,7 +544,7 @@ class GuiImage: public GuiElement
         //! = operator for copying images
         GuiImage &operator=(GuiImage &srcimage);
         //!Destructor
-        ~GuiImage();
+        virtual ~GuiImage();
         //!Sets the image rotation angle for drawing
         //!\param a Angle (in degrees)
         void SetAngle(float a);
@@ -638,7 +638,7 @@ class GuiText: public GuiElement
         //!\param t Text
         GuiText(const char * t);
         //!Destructor
-        ~GuiText();
+        virtual ~GuiText();
         //!Sets the text of the GuiText element
         //!\param t Text
         virtual void SetText(const char * t);
@@ -740,7 +740,7 @@ class GuiTooltip: public GuiElement
         GuiTooltip(const char *t, int Alpha = 255);
 
         //!Destructor
-        ~ GuiTooltip();
+        virtual ~GuiTooltip();
 
         //!Gets the element's current scale
         //!Considers scale, scaleDyn, and the parent element's GetScale() value
@@ -790,7 +790,7 @@ class GuiButton: public GuiElement
                 GuiSound* sndOver, GuiSound* sndClick, u8 grow, GuiTooltip* tt, int ttx, int tty, int h_align,
                 int v_align);
         //!Destructor
-        ~GuiButton();
+        virtual ~GuiButton();
         //!Sets the button's image
         //!\param i Pointer to GuiImage object
         void SetImage(GuiImage* i);
@@ -894,7 +894,7 @@ class GuiKeyboard: public GuiWindow
 {
     public:
         GuiKeyboard(char * t, u32 m, int min, int lang);
-        ~GuiKeyboard();
+        virtual ~GuiKeyboard();
         void Update(GuiTrigger * t);
         char kbtextstr[256];
     protected:
@@ -951,7 +951,7 @@ class GuiNumpad: public GuiWindow
 {
     public:
         GuiNumpad(char * t, u32 max);
-        ~GuiNumpad();
+        virtual ~GuiNumpad();
         void Update(GuiTrigger * t);
         char kbtextstr[256];
     protected:

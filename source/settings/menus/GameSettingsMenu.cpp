@@ -100,6 +100,11 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
     //! Categories
     else if(menuNr == Idx++)
     {
+        if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_CATEGORIES_MENU))
+        {
+            WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+        	return;
+        }
         HideMenu();
         Remove(backBtn);
         ResumeGui();
@@ -149,24 +154,6 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 
 void GameSettingsMenu::DeleteSettingsMenu()
 {
-    if(!CurrentMenu)
-        return;
-
-    int type = CurrentMenu->GetType();
-
-    switch(type)
-    {
-        case CGameLoadSM:
-            delete ((GameLoadSM *) CurrentMenu);
-            break;
-        case CUninstallSM:
-            delete ((UninstallSM *) CurrentMenu);
-            break;
-        case CSettingsMenu:
-        default:
-            delete CurrentMenu;
-            break;
-    }
-
+    delete CurrentMenu;
     CurrentMenu = NULL;
 }

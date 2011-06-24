@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-22 19:31+0200\n"
+"POT-Creation-Date: 2011-06-24 21:05+0200\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -197,6 +197,9 @@ msgstr "Bakgrundsmusik"
 
 msgid "Big thanks to:"
 msgstr "Stort tack till:"
+
+msgid "Block Categories Menu"
+msgstr ""
 
 msgid "Block Categories Modify"
 msgstr ""
