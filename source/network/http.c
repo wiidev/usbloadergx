@@ -213,8 +213,7 @@ struct block downloadfile(const char *url)
     u32 i;
     for (i = 3; i < response.size; i++)
     {
-        if (response.data[i] == '\n' && response.data[i - 1] == '\r' && response.data[i - 2] == '\n' && response.data[i
-                - 3] == '\r')
+        if (response.data[i] == '\n' && response.data[i - 1] == '\r' && response.data[i - 2] == '\n' && response.data[i - 3] == '\r')
         {
             filestart = response.data + i + 1;
             filesize = response.size - i - 1;

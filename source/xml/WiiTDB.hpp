@@ -125,6 +125,10 @@ class WiiTDB
         bool GetGameXMLInfo(const char * id, GameXMLInfo * gameInfo);
         //! Convert a specific game rating to a string
         static const char * RatingToString(int rating);
+        //! Convert a rating string to a rating number
+        static int StringToRating(const char *rate_string);
+        //! Convert a rating to another rating
+        static int ConvertRating(const char *value, const char *from, const char *to);
         //! Get the version of the wiitdb xml database
         unsigned long long GetWiiTDBVersion();
         //! Get the entry count in the xml database

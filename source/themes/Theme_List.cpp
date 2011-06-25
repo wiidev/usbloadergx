@@ -29,78 +29,81 @@
 #include <string.h>
 #include <gctypes.h>
 
+#include "network/networkops.h"
 #include "Theme_List.h"
-#include "xml/xml.h"
+#include "xml/tinyxml.h"
 
 Theme_List::Theme_List(const char * url)
 {
     if (!IsNetworkInit())
         return;
 
-    struct block file = downloadfile(url);
+	u8 *buffer = NULL;
+	u32 size = 0;
 
-    if (!file.data)
-        return;
+    DownloadWithResponse(url, &buffer, &size);
 
-    ParseXML(file.data);
+    if(!buffer)
+    	return;
 
-    free(file.data);
+    const char *xml = strstr((char *) buffer, "<?xml version=");
+    if(!xml)
+	{
+		free(buffer);
+		return;
+	}
+
+    ParseXML(xml);
+
+    free(buffer);
 }
 
 Theme_List::~Theme_List()
 {
 }
 
-bool Theme_List::ParseXML(const u8 * xmlfile)
+bool Theme_List::ParseXML(const char * xmlfile)
 {
-    char element_text[1024];
-    memset(element_text, 0, sizeof(element_text));
-    mxml_node_t *nodetree = NULL;
-    mxml_node_t *nodedata = NULL;
-    mxml_node_t *nodeid = NULL;
-    mxml_index_t *nodeindex = NULL;
+    TiXmlDocument xmlDoc;
 
-    nodetree = mxmlLoadString(NULL, (const char *) xmlfile, MXML_OPAQUE_CALLBACK);
+    if(!xmlDoc.Parse(xmlfile))
+    	return false;
 
-    if (nodetree == NULL)
+	TiXmlElement *themesNode =  xmlDoc.FirstChildElement("themes");
+    if (!themesNode)
         return false;
 
-    nodedata = mxmlFindElement(nodetree, nodetree, "themes", NULL, NULL, MXML_DESCEND);
-    if (nodedata == NULL)
-        return false;
+    TiXmlElement *theme = themesNode->FirstChildElement("theme");
 
-    nodeindex = mxmlIndexNew(nodedata, "name", NULL);
-    nodeid = mxmlIndexReset(nodeindex);
-
-    while((nodeid = mxmlIndexFind(nodeindex, "name", NULL)) != NULL)
+    while(theme)
     {
         int i = ThemesList.size();
         ThemesList.resize(i+1);
 
-        element_text[0] = '\0';
-        get_nodetext(nodeid, element_text, sizeof(element_text));
-        ThemesList[i].themetitle = element_text;
+        TiXmlElement *node = NULL;
 
-        element_text[0] = '\0';
-        GetTextFromNode(nodeid, nodedata, (char *) "creator", NULL, NULL, MXML_NO_DESCEND, element_text, sizeof(element_text));
-        ThemesList[i].author = element_text;
+		node = theme->FirstChildElement("name");
+		if(node && node->FirstChild() && node->FirstChild()->Value())
+			ThemesList[i].themetitle = node->FirstChild()->Value();
 
-        element_text[0] = '\0';
-        GetTextFromNode(nodeid, nodedata, (char *) "thumbpath", NULL, NULL, MXML_NO_DESCEND, element_text, sizeof(element_text));
-        ThemesList[i].imagelink = element_text;
+		node = theme->FirstChildElement("creator");
+		if(node && node->FirstChild() && node->FirstChild()->Value())
+			ThemesList[i].author = node->FirstChild()->Value();
 
-        element_text[0] = '\0';
-        GetTextFromNode(nodeid, nodedata, (char *) "downloadpath", NULL, NULL, MXML_NO_DESCEND, element_text, sizeof(element_text));
-        ThemesList[i].downloadlink = element_text;
+		node = theme->FirstChildElement("thumbpath");
+		if(node && node->FirstChild() && node->FirstChild()->Value())
+			ThemesList[i].imagelink = node->FirstChild()->Value();
 
-        element_text[0] = '\0';
-        GetTextFromNode(nodeid, nodedata, (char *) "averagerating", NULL, NULL, MXML_NO_DESCEND, element_text, sizeof(element_text));
-        ThemesList[i].rating = atoi(element_text);
+		node = theme->FirstChildElement("downloadpath");
+		if(node && node->FirstChild() && node->FirstChild()->Value())
+			ThemesList[i].downloadlink = node->FirstChild()->Value();
+
+		node = theme->FirstChildElement("averagerating");
+		if(node && node->FirstChild() && node->FirstChild()->Value())
+			ThemesList[i].rating = atoi(node->FirstChild()->Value());
+
+        theme = theme->NextSiblingElement();
     }
-
-    mxmlIndexDelete(nodeindex);
-    mxmlDelete(nodedata);
-    mxmlDelete(nodetree);
 
     return true;
 }

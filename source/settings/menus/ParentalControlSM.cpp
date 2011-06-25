@@ -76,6 +76,7 @@ ParentalControlSM::ParentalControlSM()
     Options->SetName(Idx++, "%s", tr( "Block GameID Change" ));
     Options->SetName(Idx++, "%s", tr( "Block Categories Menu" ));
     Options->SetName(Idx++, "%s", tr( "Block Categories Modify" ));
+    Options->SetName(Idx++, "%s", tr( "Block SD Reload Button" ));
 
     SetOptionValues();
 }
@@ -163,6 +164,9 @@ void ParentalControlSM::SetOptionValues()
 
     //! Settings: Block Categories Modify
     Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_CATEGORIES_MOD) != 0)]));
+
+    //! Settings: Block SD Reload Button
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_SD_RELOAD_BUTTON) != 0)]));
 }
 
 int ParentalControlSM::GetMenuInternal()
@@ -348,6 +352,12 @@ int ParentalControlSM::GetMenuInternal()
     else if (ret == ++Idx)
     {
         Settings.ParentalBlocks ^= BLOCK_CATEGORIES_MOD;
+    }
+
+    //! Settings: Block SD Reload Button
+    else if (ret == ++Idx)
+    {
+        Settings.ParentalBlocks ^= BLOCK_SD_RELOAD_BUTTON;
     }
 
     SetOptionValues();

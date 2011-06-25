@@ -26,6 +26,7 @@
 #include "settings/CSettings.h"
 #include "network/networkops.h"
 #include "utils/StringTools.h"
+#include "xml/tinyxml.h"
 #include "gecko.h"
 
 Wiinnertag::Wiinnertag(const string &filepath)
@@ -35,27 +36,16 @@ Wiinnertag::Wiinnertag(const string &filepath)
 
 bool Wiinnertag::ReadXML(const string &filepath)
 {
-    u8 *buffer = NULL;
-    u64 filesize = 0;
+    TiXmlDocument xmlDoc(filepath.c_str());
+    if(!xmlDoc.LoadFile())
+    	return false;
 
-    LoadFileToMem(filepath.c_str(), &buffer, &filesize);
-
-    if(!buffer)
-        return false;
-
-    mxml_node_t *xmlfile = mxmlLoadString(NULL, (const char *) buffer, MXML_OPAQUE_CALLBACK);
-    if(!xmlfile)
-    {
-        free(buffer);
-        return false;
-    }
-
-    mxml_node_t *node = mxmlFindElement(xmlfile, xmlfile, "Tag", NULL, NULL, MXML_DESCEND_FIRST);
+	TiXmlElement * node =  xmlDoc.FirstChildElement("Tag");
 
     while(node != NULL)
     {
-        const char * URL = mxmlElementGetAttr(node, "URL");
-        const char * Key = mxmlElementGetAttr(node, "Key");
+        const char * URL = node->Attribute("URL");
+        const char * Key = node->Attribute("Key");
 
         if(URL && Key)
         {
@@ -65,11 +55,8 @@ bool Wiinnertag::ReadXML(const string &filepath)
             tagList[size].second = Key;
         }
 
-        node = mxmlFindElement(node, xmlfile, "Tag", NULL, NULL, MXML_DESCEND);
+        node = node->NextSiblingElement();
     }
-
-    mxmlDelete(xmlfile);
-    free(buffer);
 
     return true;
 }
@@ -109,43 +96,29 @@ bool Wiinnertag::TagGame(const char *gameID)
     return Tag.Send(gameID);
 }
 
-static const char * XMLSaveCallback(mxml_node_t *node, int where)
-{
-	const char *name = node->value.element.name;
-
-	if (where == MXML_WS_BEFORE_OPEN)
-	{
-		if(!strcmp(name, "Tag"))
-			return "\n";
-	}
-	return (NULL);
-}
-
 bool Wiinnertag::CreateExample(const string &filepath)
 {
     if(filepath.size() == 0)
         return false;
+
+    CreateSubfolder(filepath.c_str());
 
     string fullpath = filepath;
     if(fullpath[fullpath.size()-1] != '/')
         fullpath += '/';
     fullpath += "Wiinnertag.xml";
 
-    FILE * f = fopen(fullpath.c_str(), "wb");
-    if(!f)
-        return false;
+    TiXmlDocument xmlDoc;
 
-    mxml_node_t *xmlfile = mxmlNewXML("1.0");
-    mxmlSetWrapMargin(0);
+    TiXmlDeclaration declaration("1.0", "UTF-8", "");
+    xmlDoc.InsertEndChild(declaration);
 
-    mxml_node_t	*node = mxmlNewElement(xmlfile, "Tag");
-    mxmlElementSetAttr(node, "URL", "http://www.wiinnertag.com/wiinnertag_scripts/update_sign.php?key={KEY}&game_id={ID6}");
-    mxmlElementSetAttr(node, "Key", "1234567890");
+    TiXmlElement Tag("Tag");
+	Tag.SetAttribute("URL", "http://www.wiinnertag.com/wiinnertag_scripts/update_sign.php?key={KEY}&game_id={ID6}");
+	Tag.SetAttribute("Key", "1234567890");
+	xmlDoc.InsertEndChild(Tag);
 
-    mxmlSaveFile(xmlfile, f, XMLSaveCallback);
-    fclose(f);
-
-    mxmlDelete(xmlfile);
+	xmlDoc.SaveFile(fullpath);
 
     return true;
 }

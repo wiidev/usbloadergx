@@ -23,6 +23,7 @@ typedef struct _GameCFG
     short patchcountrystrings;
     char alternatedolname[40];
     short returnTo;
+    short sneekVideoPatch;
     short Locked;
 } GameCFG;
 

@@ -239,6 +239,7 @@ void ThemeDownloader::SetupMainButtons()
 
     if(!CheckConnection(ThemeListURL.c_str()))
     {
+        ProgressStop();
         ShowError(tr("Connection to server timed out."));
         return;
     }
@@ -247,9 +248,9 @@ void ThemeDownloader::SetupMainButtons()
 
     if (ThemeList->GetThemeCount() == 0)
     {
+        ProgressStop();
         WindowPrompt(tr( "No themes found on the site." ), 0, "OK");
         returnMenu = MENU_SETTINGS;
-        ProgressStop();
     }
 
     for(int i = 0; i < ThemeList->GetThemeCount(); ++i)

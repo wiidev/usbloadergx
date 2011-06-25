@@ -103,6 +103,9 @@ char * GetIncommingIP(void)
 
 s32 network_request(s32 connect, const char * request, char * filename)
 {
+	if(connect == NET_DEFAULT_SOCK)
+		connect = connection;
+
     char buf[1024];
     char *ptr = NULL;
 
@@ -139,10 +142,10 @@ s32 network_request(s32 connect, const char * request, char * filename)
             }
         }
     }
-
+	gprintf("%s\n", (char*) buf);
     /* Retrieve content size */
     ptr = strstr(buf, "Content-Length:");
-    if (!ptr) return -1;
+    if (!ptr) return NET_SIZE_UNKNOWN;
 
     sscanf(ptr, "Content-Length: %u", &size);
     return size;
@@ -150,6 +153,9 @@ s32 network_request(s32 connect, const char * request, char * filename)
 
 s32 network_read(s32 connect, u8 *buf, u32 len)
 {
+	if(connect == NET_DEFAULT_SOCK)
+		connect = connection;
+
     u32 read = 0;
     s32 ret = -1;
 
@@ -175,7 +181,6 @@ s32 network_read(s32 connect, u8 *buf, u32 len)
  ***************************************************************************/
 s32 download_request(const char * url, char * filename)
 {
-
     //Check if the url starts with "http://", if not it is not considered a valid url
     if (strncmp(url, "http://", strlen("http://")) != 0)
     {
@@ -351,6 +356,102 @@ bool CheckConnection(const char *url, float timeout)
 
     return !(res < 0 && res != -127);
 }
+
+
+/****************************************************************************
+ * Download request
+ ***************************************************************************/
+s32 DownloadWithResponse(const char * url, u8 **outbuffer, u32 *outsize)
+{
+    //Check if the url starts with "http://", if not it is not considered a valid url
+    if (strncmp(url, "http://", strlen("http://")) != 0)
+        return -1;
+
+    //Locate the path part of the url by searching for '/' past "http://"
+    char *path = strchr(url + strlen("http://"), '/');
+
+    //At the very least the url has to end with '/', ending with just a domain is invalid
+    if (path == NULL)
+        return -1;
+
+    //Extract the domain part out of the url
+    int domainlength = path - url - strlen("http://");
+
+    if (domainlength == 0)
+        return -1;
+
+    char domain[domainlength + 1];
+    strlcpy(domain, url + strlen("http://"), domainlength + 1);
+
+    int connect = GetConnection(domain);
+    if (connection < 0)
+        return -1;
+
+    //Form a nice request header to send to the webserver
+    char header[strlen(path) + strlen(domain) + strlen(url) + 100];
+    sprintf(header, "GET %s HTTP/1.1\r\nHost: %s\r\nReferer: %s\r\nUser-Agent: USBLoaderGX\r\nConnection: close\r\n\r\n", path, domain, url);
+
+	int ret = net_send(connect, header, strlen(header), 0);
+	if(ret < 0)
+	{
+		net_close(connect);
+		return ret;
+	}
+
+	int blocksize = 4096;
+
+	u8 *buffer = (u8 *) malloc(blocksize);
+	if(!buffer)
+	{
+		net_close(connect);
+		return -1;
+	}
+
+	int done = 0;
+
+	while(1)
+	{
+		int ret = network_read(connect, buffer+done, blocksize);
+
+		if(ret < 0)
+		{
+			free(buffer);
+			net_close(connect);
+			return -1;
+		}
+		else if(ret == 0)
+			break;
+
+		done += ret;
+		u8 *tmp = (u8 *) realloc(buffer, done+blocksize);
+		if(!tmp)
+		{
+			free(buffer);
+			net_close(connect);
+			return -1;
+		}
+
+		buffer = tmp;
+	}
+
+	net_close(connect);
+
+	u8 *tmp = (u8 *) realloc(buffer, done+1);
+	if(!tmp)
+	{
+		free(buffer);
+		return -1;
+	}
+
+	buffer = tmp;
+	buffer[done] = 0;
+
+	*outbuffer = buffer;
+	*outsize = done;
+
+    return done;
+}
+
 
 /****************************************************************************
  * NetworkWait

@@ -144,6 +144,7 @@ void GameLoadSM::SetOptionNames()
 
     Options->SetName(Idx++, "%s", tr( "Video Mode" ));
     Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
+    Options->SetName(Idx++, "%s", tr( "Sneek Video Patch" ));
     Options->SetName(Idx++, "%s", tr( "Game Language" ));
     Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
     Options->SetName(Idx++, "%s", tr( "Ocarina" ));
@@ -172,6 +173,12 @@ void GameLoadSM::SetOptionValues()
         Options->SetValue(Idx++, tr("Use global"));
     else
         Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.vipatch]));
+
+    //! Settings: Sneek Video Patch
+    if(GameConfig.sneekVideoPatch == INHERIT)
+        Options->SetValue(Idx++, tr("Use global"));
+    else
+        Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.sneekVideoPatch]));
 
     //! Settings: Game Language
     if(GameConfig.language == INHERIT)
@@ -276,6 +283,12 @@ int GameLoadSM::GetMenuInternal()
     else if (ret == ++Idx)
     {
         if (++GameConfig.vipatch >= MAX_ON_OFF) GameConfig.vipatch = INHERIT;
+    }
+
+    //! Settings: Sneek Video Patch
+    else if (ret == ++Idx)
+    {
+        if (++GameConfig.sneekVideoPatch >= MAX_ON_OFF) GameConfig.sneekVideoPatch = INHERIT;
     }
 
     //! Settings: Game Language

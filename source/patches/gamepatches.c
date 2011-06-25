@@ -50,7 +50,7 @@ void ClearDOLList()
     dolCount = 0;
 }
 
-void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring, u8 vipatch, u8 cheat, u8 fix002, u8 blockiosreloadselect, u8 gameIOS, u64 returnTo)
+void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring, u8 vipatch, u8 sneekVideoPatch, u8 cheat, u8 fix002, u8 blockiosreloadselect, u8 gameIOS, u64 returnTo)
 {
     es_fd = IOS_Open(es_fs, 0);
     int i;
@@ -75,6 +75,9 @@ void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring, u8 
 
         if (vipatch)
             vidolpatcher(dst, len);
+
+        if(sneekVideoPatch)
+            sneek_video_patch(dst, len);
 
         /*LANGUAGE PATCH - FISHEARS*/
         langpatcher(dst, len, languageChoice);
@@ -407,6 +410,24 @@ void VideoModePatcher(u8 * dst, int len, u8 videoSelected)
             break;
         }
         Search_and_patch_Video_Modes(dst, len, table);
+    }
+}
+
+void sneek_video_patch(void *addr, u32 len)
+{
+    u8 *addr_start = addr;
+    u8 *addr_end = addr+len;
+
+    while(addr_start < addr_end)
+    {
+        if(*(vu32*)(addr_start) == 0x3C608000)
+        {
+            if( ((*(vu32*)(addr_start+4) & 0xFC1FFFFF ) == 0x800300CC) && ((*(vu32*)(addr_start+8) >> 24) == 0x54 ) )
+            {
+                *(vu32*)(addr_start+4) = 0x5400F0BE | ((*(vu32*)(addr_start+4) & 0x3E00000) >> 5);
+            }
+        }
+        addr_start += 4;
     }
 }
 

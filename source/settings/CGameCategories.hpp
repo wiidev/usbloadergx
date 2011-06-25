@@ -28,7 +28,7 @@
 #include <map>
 #include <string>
 #include <vector>
-#include <mxml.h>
+#include "xml/tinyxml.h"
 #include "CCategoryList.hpp"
 
 class CGameCategories
@@ -56,7 +56,7 @@ class CGameCategories
 
         CCategoryList CategoryList;
     protected:
-        bool ValidVersion(mxml_node_t *xmlfile);
+        bool ValidVersion(TiXmlElement *xmlfile);
 
         string configPath;
         const vector<unsigned int> defaultCategory;

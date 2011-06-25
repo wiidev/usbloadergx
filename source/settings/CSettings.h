@@ -123,6 +123,7 @@ class CSettings
         short Wiinnertag;
         short SelectedGame;
         short GameListOffset;
+        short sneekVideoPatch;
         std::vector<u32> EnabledCategories;
     protected:
         bool ValidVersion(FILE * file);

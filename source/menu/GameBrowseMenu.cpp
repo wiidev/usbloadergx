@@ -25,6 +25,7 @@
 #include "settings/CGameStatistics.h"
 #include "settings/CGameSettings.h"
 #include "settings/GameTitles.h"
+#include "system/IosLoader.h"
 #include "utils/StringTools.h"
 #include "utils/rockout.h"
 #include "utils/ShowError.h"
@@ -614,7 +615,8 @@ void GameBrowseMenu::ReloadBrowser()
 
     if (Settings.gameDisplay == LIST_MODE)
     {
-        Append(gameCoverImg);
+    	if(gameList.size() > 0)
+    		Append(gameCoverImg);
         DownloadBtn->SetSize(160, 224);
         listBtn->SetImage(listBtnImg);
         listBtn->SetImageOver(listBtnImg);
@@ -721,7 +723,8 @@ void GameBrowseMenu::ReloadBrowser()
         Append(usedSpaceTxt);
     if (thInt("1 - show game count: 1 for on and 0 for off") == 1) //force show game cnt info
         Append(gamecntBtn);
-    Append(sdcardBtn);
+    if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_SD_RELOAD_BUTTON))
+    	Append(sdcardBtn);
     Append(poweroffBtn);
     Append(gameInfo);
     Append(homeBtn);
@@ -1354,7 +1357,11 @@ int GameBrowseMenu::OpenClickedGame()
                 returnHere = true;
             }
             else if(game_cfg->loadalternatedol == 4)
-                defaultDolPrompt((char *) header->id);
+            {
+            	iosinfo_t *info = IosLoader::GetIOSInfo(game_cfg->ios == INHERIT ? Settings.cios : game_cfg->ios);
+            	if(!info || info->version < 6)
+                	defaultDolPrompt((char *) header->id);
+            }
 
             if (RunGame && (game_cfg->ocarina == ON || (game_cfg->ocarina == INHERIT && Settings.ocarina == ON)))
                 CheckOcarina(IDfull);

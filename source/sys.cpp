@@ -22,7 +22,6 @@
 #include "menu.h"
 #include "video.h"
 #include "gecko.h"
-#include "xml/xml.h"
 #include "wad/nandtitle.h"
 
 extern "C"

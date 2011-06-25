@@ -188,6 +188,7 @@ bool CGameSettings::Save()
         fprintf(f, "alternatedolstart:%d; ", GameList[i].alternatedolstart);
         fprintf(f, "alternatedolname:%s; ", GameList[i].alternatedolname);
         fprintf(f, "returnTo:%d; ", GameList[i].returnTo);
+        fprintf(f, "sneekVideoPatch:%d; ", GameList[i].sneekVideoPatch);
         fprintf(f, "Locked:%d;\n", GameList[i].Locked);
     }
     fprintf(f, "# END\n");
@@ -298,6 +299,14 @@ bool CGameSettings::SetSetting(GameCFG & game, char *name, char *value)
         if (sscanf(value, "%d", &i) == 1)
         {
             game.returnTo = i;
+        }
+        return true;
+    }
+    else if(strcmp(name, "sneekVideoPatch") == 0)
+    {
+        if (sscanf(value, "%d", &i) == 1)
+        {
+            game.sneekVideoPatch = i;
         }
         return true;
     }
@@ -423,6 +432,7 @@ GameCFG * CGameSettings::GetDefault()
     DefaultConfig.iosreloadblock = INHERIT;
     DefaultConfig.alternatedolname[0] = '\0';
     DefaultConfig.returnTo = 1;
+    DefaultConfig.sneekVideoPatch = INHERIT;
     DefaultConfig.Locked = OFF;
 
     return &DefaultConfig;

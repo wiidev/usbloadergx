@@ -67,7 +67,7 @@ void CSettings::SetDefault()
     snprintf(BcaCodepath, sizeof(BcaCodepath), "%s/bca/", BootDevice);
     snprintf(WipCodepath, sizeof(WipCodepath), "%s/wip/", BootDevice);
     snprintf(WDMpath, sizeof(WDMpath), "%s/wdm/", BootDevice);
-    snprintf(WiinnertagPath, sizeof(WiinnertagPath), "%s/", ConfigPath);
+    snprintf(WiinnertagPath, sizeof(WiinnertagPath), "%s", ConfigPath);
     snprintf(theme_path, sizeof(theme_path), "%stheme/", ConfigPath);
     snprintf(dolpath, sizeof(dolpath), "%s/", BootDevice);
     strcpy(theme, "");
@@ -125,6 +125,7 @@ void CSettings::SetDefault()
     Wiinnertag = OFF;
     SelectedGame = 0;
     GameListOffset = 0;
+    sneekVideoPatch = OFF;
 }
 
 bool CSettings::Load()
@@ -283,6 +284,7 @@ bool CSettings::Save()
     fprintf(file, "WiinnertagPath = %s\n", WiinnertagPath);
     fprintf(file, "SelectedGame = %d\n", SelectedGame);
     fprintf(file, "GameListOffset = %d\n", GameListOffset);
+    fprintf(file, "sneekVideoPatch = %d\n", sneekVideoPatch);
     fclose(file);
 
     return true;
@@ -551,6 +553,10 @@ bool CSettings::SetSetting(char *name, char *value)
     else if(strcmp(name, "GameListOffset") == 0)
     {
         if (sscanf(value, "%d", &i) == 1) GameListOffset = i;
+    }
+    else if(strcmp(name, "sneekVideoPatch") == 0)
+    {
+        if (sscanf(value, "%d", &i) == 1) sneekVideoPatch = i;
     }
     else if (strcmp(name, "InstallPartitions") == 0)
     {

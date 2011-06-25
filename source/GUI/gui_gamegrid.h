@@ -35,7 +35,7 @@ class GuiGameGrid : public GuiGameBrowser
         int theme_posX;
         int theme_posY;
 
-        int * gameIndex;
+        std::vector<int> gameIndex;
         std::vector<GuiButton *> game;
         std::vector<GuiTooltip *> titleTT;
         std::vector<GuiImageAsync *> coverImg;

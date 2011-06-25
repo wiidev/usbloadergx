@@ -79,6 +79,7 @@ LoaderSettings::LoaderSettings()
 
     Options->SetName(Idx++, "%s", tr( "Video Mode" ));
     Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
+    Options->SetName(Idx++, "%s", tr( "Sneek Video Patch" ));
     Options->SetName(Idx++, "%s", tr( "Game Language" ));
     Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
     Options->SetName(Idx++, "%s", tr( "Ocarina" ));
@@ -100,6 +101,9 @@ void LoaderSettings::SetOptionValues()
 
     //! Settings: VIDTV Patch
     Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.videopatch] ));
+
+    //! Settings: Sneek Video Patch
+    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.sneekVideoPatch] ));
 
     //! Settings: Game Language
     Options->SetValue(Idx++, "%s", tr( LanguageText[Settings.language] ));
@@ -154,6 +158,12 @@ int LoaderSettings::GetMenuInternal()
     else if (ret == ++Idx)
     {
         if (++Settings.videopatch >= MAX_ON_OFF) Settings.videopatch = 0;
+    }
+
+    //! Settings: Sneek Video Patch
+    else if (ret == ++Idx )
+    {
+        if (++Settings.sneekVideoPatch >= MAX_ON_OFF) Settings.sneekVideoPatch = 0;
     }
 
     //! Settings: Game Language

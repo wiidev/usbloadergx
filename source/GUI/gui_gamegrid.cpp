@@ -205,7 +205,7 @@ GuiGameGrid::GuiGameGrid(int w, int h, const char *themePath, int offset) :
 {
     width = w;
     height = h;
-    listOffset = MIN(offset, gameList.size()-1);
+    listOffset = LIMIT(offset, 0, MAX(0, gameList.size()-1));
     theme_posX = thInt("0 - game grid layout pos x");
     theme_posY = thInt("20 - game grid layout pos y");
 
@@ -261,9 +261,6 @@ GuiGameGrid::GuiGameGrid(int w, int h, const char *themePath, int offset) :
     btnRowDown->SetPosition(0, 0);
     btnRowDown->SetTrigger(trig1);
 
-    // Page-Stuff
-    gameIndex = NULL;
-
     Reload(Settings.gridRows, listOffset);
 }
 
@@ -297,24 +294,23 @@ GuiGameGrid::~GuiGameGrid()
     for (u32 i = 0; i < titleTT.size(); ++i)
         delete titleTT[i];
 
-    if(gameIndex)
-        delete [] gameIndex;
     game.clear();
     coverImg.clear();
     titleTT.clear();
+    gameIndex.clear();
 }
 
 void GuiGameGrid::SetFocus(int f)
 {
     LOCK( this );
-    if (!gameList.size()) return;
 
     focus = f;
 
-    for (int i = 0; i < pagesize; i++)
+    for (u32 i = 0; i < game.size(); i++)
         game[i]->ResetState();
 
-    if (f == 1 && selectedItem >= 0) game[selectedItem]->SetState(STATE_SELECTED);
+    if (f == 1 && selectedItem >= 0 && selectedItem < (int) game.size())
+    	game[selectedItem]->SetState(STATE_SELECTED);
 }
 
 void GuiGameGrid::ResetState()
@@ -326,7 +322,7 @@ void GuiGameGrid::ResetState()
         stateChan = -1;
     }
 
-    for (int i = 0; i < pagesize; i++)
+    for (u32 i = 0; i < game.size(); i++)
     {
         game[i]->ResetState();
     }
@@ -336,7 +332,7 @@ int GuiGameGrid::GetClickedOption()
 {
     LOCK( this );
     int found = -1;
-    if (clickedItem >= 0)
+    if (clickedItem >= 0 && clickedItem < (int) game.size())
     {
         game[clickedItem]->SetState(STATE_SELECTED);
         found = gameIndex[clickedItem];
@@ -349,7 +345,7 @@ int GuiGameGrid::GetSelectedOption()
 {
     LOCK( this );
     int found = -1;
-    for (int i = 0; i < pagesize; i++)
+    for (u32 i = 0; i < game.size(); i++)
     {
         if (game[i]->GetState() == STATE_SELECTED)
         {
@@ -426,8 +422,9 @@ void GuiGameGrid::Draw()
     btnRowUp->Draw();
     btnRowDown->Draw();
 
-    if (focus && Settings.tooltips == ON) for (int i = 0; i < pagesize; i++)
-        game[i]->DrawTooltip();
+    if (focus && Settings.tooltips == ON)
+    	for (int i = 0; i < pagesize; i++)
+    		game[i]->DrawTooltip();
 
     this->UpdateEffects();
 }
@@ -442,9 +439,9 @@ void GuiGameGrid::ChangeRows(int n)
 
 void GuiGameGrid::Update(GuiTrigger * t)
 {
-    LOCK( this );
     if (state == STATE_DISABLED || !t || !gameList.size()) return;
 
+    LOCK( this );
     if (!(game[0]->GetEffect() || game[0]->GetEffectOnOver()))
     {
         for (int i = 0; i < pagesize; i++)
@@ -454,7 +451,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
     btnRight->Update(t);
     btnLeft->Update(t);
     btnRowUp->Update(t);
-    btnRowDown->Update(t);
+	btnRowDown->Update(t);
 
     selectedItem = -1;
     clickedItem = -1;
@@ -683,7 +680,8 @@ void GuiGameGrid::Update(GuiTrigger * t)
     {
         if ((rows == 1) && (gameList.size() >= 18))
             this->ChangeRows(2);
-        else if ((rows == 2) && (gameList.size() >= 45)) this->ChangeRows(3);
+        else if ((rows == 2) && (gameList.size() >= 45))
+        	this->ChangeRows(3);
         btnRowUp->ResetState();
         return;
     }
@@ -692,12 +690,15 @@ void GuiGameGrid::Update(GuiTrigger * t)
     {
         if (rows == 3)
             this->ChangeRows(2);
-        else if (rows == 2) this->ChangeRows(1);
+        else if (rows == 2)
+        	this->ChangeRows(1);
+
         btnRowDown->ResetState();
         return;
     }
 
-    if (updateCB) updateCB(this);
+    if (updateCB)
+    	updateCB(this);
 }
 
 void GuiGameGrid::Reload(int Rows, int ListOffset)
@@ -717,11 +718,10 @@ void GuiGameGrid::Reload(int Rows, int ListOffset)
     for (u32 i = 0; i < titleTT.size(); ++i)
         delete titleTT[i];
 
-    if(gameIndex)
-        delete [] gameIndex;
     game.clear();
     coverImg.clear();
     titleTT.clear();
+    gameIndex.clear();
 
     goLeft = 0;
     goRight = 0;
@@ -731,7 +731,7 @@ void GuiGameGrid::Reload(int Rows, int ListOffset)
     if ((gameList.size() < 18) && (rows == 2)) rows = 1;
 
     if (ListOffset >= 0) // if ListOffset < 0 then no change
-    listOffset = ListOffset;
+    	listOffset = ListOffset;
     listOffset = OFFSETLIMIT(listOffset, rows, gameList.size());
 
     selectedItem = -1;
@@ -739,8 +739,14 @@ void GuiGameGrid::Reload(int Rows, int ListOffset)
 
     pagesize = ROWS2PAGESIZE( rows );
 
+    if(gameList.size() == 0)
+    {
+    	pagesize = 0;
+    	return;
+    }
+
     // Page-Stuff
-    gameIndex = new int[pagesize];
+    gameIndex.resize(pagesize);
     titleTT.resize(pagesize);
     coverImg.resize(pagesize);
     game.resize(pagesize);

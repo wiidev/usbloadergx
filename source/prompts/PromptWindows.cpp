@@ -37,7 +37,6 @@
 #include "zlib.h"
 #include "svnrev.h"
 #include "audio.h"
-#include "xml/xml.h"
 #include "language/UpdateLanguage.h"
 #include "system/IosLoader.h"
 #include "gecko.h"

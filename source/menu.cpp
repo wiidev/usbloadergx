@@ -28,7 +28,6 @@
 #include "usbloader/GameList.h"
 #include "usbloader/MountGamePartition.h"
 #include "mload/mload_modules.h"
-#include "xml/xml.h"
 #include "audio.h"
 #include "gecko.h"
 #include "menu.h"

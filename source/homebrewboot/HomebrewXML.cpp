@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "FileOperations/fileops.h"
-#include "xml/xml.h"
+#include "xml/tinyxml.h"
 #include "gecko.h"
 
 #include "HomebrewXML.h"
@@ -24,73 +24,64 @@ int HomebrewXML::LoadHomebrewXMLData(const char* filename)
     LongDescription.clear();
     Releasedate.clear();
 
-    /* Load XML file */
-    u8 * xmlbuffer = NULL;
-    u64 size = 0;
-    LoadFileToMem(filename, &xmlbuffer, &size);
+    TiXmlDocument xmlDoc(filename);
+    if(!xmlDoc.LoadFile())
+    	return false;
 
-    if(!xmlbuffer)
-        return -1;
+    TiXmlElement *appNode =  xmlDoc.FirstChildElement("app");
 
-    mxml_node_t * nodetree = mxmlLoadString(NULL, (const char *) xmlbuffer, MXML_OPAQUE_CALLBACK);
+	TiXmlElement *node = NULL;
 
-    if (!nodetree)
-        return -2;
+	node = appNode->FirstChildElement("name");
+	if(node && node->FirstChild() && node->FirstChild()->Value())
+    	Name = node->FirstChild()->Value();
 
-    mxml_node_t * node = mxmlFindElement(nodetree, nodetree, "app", NULL, NULL, MXML_DESCEND_FIRST);
-    if (!node)
-        return -5;
+	node = appNode->FirstChildElement("coder");
+	if(node && node->FirstChild() && node->FirstChild()->Value())
+    	Coder = node->FirstChild()->Value();
 
-    char * Entrie = new char[ENTRIE_SIZE];
+	node = appNode->FirstChildElement("version");
+	if(node && node->FirstChild() && node->FirstChild()->Value())
+    	Version = node->FirstChild()->Value();
 
-    Entrie[0] = '\0';
-    GetTextFromNode(node, nodetree, (char*) "name", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
-    Name = Entrie;
+	node = appNode->FirstChildElement("short_description");
+	if(node && node->FirstChild() && node->FirstChild()->Value())
+    	ShortDescription = node->FirstChild()->Value();
 
-    Entrie[0] = '\0';
-    GetTextFromNode(node, nodetree, (char*) "coder", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
-    Coder = Entrie;
+	node = appNode->FirstChildElement("long_description");
+	if(node && node->FirstChild() && node->FirstChild()->Value())
+    	LongDescription = node->FirstChild()->Value();
 
-    Entrie[0] = '\0';
-    GetTextFromNode(node, nodetree, (char*) "version", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
-    Version = Entrie;
+	char ReleaseText[200];
+	memset(ReleaseText, 0, sizeof(ReleaseText));
 
-    Entrie[0] = '\0';
-    GetTextFromNode(node, nodetree, (char*) "short_description", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
-    ShortDescription = Entrie;
+	node = appNode->FirstChildElement("release_date");
+	if(node && node->FirstChild() && node->FirstChild()->Value())
+    	snprintf(ReleaseText, sizeof(ReleaseText), node->FirstChild()->Value());
 
-    Entrie[0] = '\0';
-    GetTextFromNode(node, nodetree, (char*) "long_description", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
-    LongDescription = Entrie;
-
-    Entrie[0] = '\0';
-    GetTextFromNode(node, nodetree, (char*) "release_date", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
-
-    int len = (strlen(Entrie) - 6); //length of the date string without the 200000 at the end
+    int len = (strlen(ReleaseText) - 6); //length of the date string without the 200000 at the end
     if (len == 8)
-        snprintf(Entrie, ENTRIE_SIZE, "%c%c/%c%c/%c%c%c%c", Entrie[4], Entrie[5], Entrie[6], Entrie[7], Entrie[0],
-                Entrie[1], Entrie[2], Entrie[3]);
+        snprintf(ReleaseText, sizeof(ReleaseText), "%c%c/%c%c/%c%c%c%c", ReleaseText[4], ReleaseText[5], ReleaseText[6], ReleaseText[7], ReleaseText[0], ReleaseText[1], ReleaseText[2], ReleaseText[3]);
     else if (len == 6)
-        snprintf(Entrie, ENTRIE_SIZE, "%c%c/%c%c%c%c", Entrie[4], Entrie[5], Entrie[0], Entrie[1], Entrie[2], Entrie[3]);
-    else snprintf(Entrie, ENTRIE_SIZE, "%s", Entrie);
+        snprintf(ReleaseText, sizeof(ReleaseText), "%c%c/%c%c%c%c", ReleaseText[4], ReleaseText[5], ReleaseText[0], ReleaseText[1], ReleaseText[2], ReleaseText[3]);
+    else
+    	snprintf(ReleaseText, sizeof(ReleaseText), "%s", ReleaseText);
 
-    Releasedate = Entrie;
+    Releasedate = ReleaseText;
 
-    node = mxmlFindElement(node, nodetree, "arguments", NULL, NULL, MXML_DESCEND_FIRST);
+	node = appNode->FirstChildElement("arguments");
+	if(!node)
+		return 1;
 
-    while(node)
+	TiXmlElement *argNode = node->FirstChildElement("arg");
+
+    while(argNode)
     {
-        Entrie[0] = '\0';
-        node = GetTextFromNode(node, nodetree, (char*) "arg", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
-        if(node)
-            Arguments.push_back(std::string(Entrie));
+        if(argNode->FirstChild() && argNode->FirstChild()->Value())
+            Arguments.push_back(std::string(argNode->FirstChild()->Value()));
+
+		argNode = argNode->NextSiblingElement();
     }
-
-    delete[] Entrie;
-
-    mxmlDelete(node);
-    mxmlDelete(nodetree);
-    free(xmlbuffer);
 
     return 1;
 }

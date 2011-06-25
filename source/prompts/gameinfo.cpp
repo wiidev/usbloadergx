@@ -10,7 +10,6 @@
 #include "language/gettext.h"
 #include "GUI/gui.h"
 #include "GUI/Text.hpp"
-#include "xml/xml.h"
 #include "menu.h"
 #include "menu/menus.h"
 #include "sys.h"
@@ -739,7 +738,7 @@ static int InternalShowGameInfo(char *ID)
         if(gameCategories[i] == 0)
             continue;
 
-        if(categoriesTxt.size() >= 2 && gameCategories.size() > i+1)
+        if(indexy > 170 && gameCategories.size() > i+1)
         {
             categoriesTxt.push_back(new GuiText("...", 16, ( GXColor ) {0, 0, 0, 255}));
             categoriesTxt[categoriesTxt.size()-1]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
@@ -752,6 +751,7 @@ static int InternalShowGameInfo(char *ID)
         categoriesTxt.push_back(new GuiText(GameCategories.CategoryList[gameCategories[i]], 16, ( GXColor ) {0, 0, 0, 255}));
         categoriesTxt[categoriesTxt.size()-1]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
         categoriesTxt[categoriesTxt.size()-1]->SetPosition(515, 12 + indexy);
+        categoriesTxt[categoriesTxt.size()-1]->SetMaxWidth(74, DOTTED);
         indexy += 20;
         InfoWindow.Append(categoriesTxt[categoriesTxt.size()-1]);
     }

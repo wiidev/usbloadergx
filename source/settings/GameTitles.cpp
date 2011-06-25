@@ -2,7 +2,6 @@
 #include "GameTitles.h"
 #include "CSettings.h"
 #include "usbloader/GameList.h"
-#include "xml/xml.h"
 #include "xml/WiiTDB.hpp"
 
 CGameTitles GameTitles;
@@ -254,7 +253,7 @@ void CGameTitles::LoadTitlesFromWiiTDB(const char * path, bool forceCacheReload)
         if(!XML_DB.GetRatingValue(MissingTitles[i].c_str(), RatValTxt))
             continue;
 
-        TitleList[TitleList.size()-1].ParentalRating = ConvertRating(RatValTxt.c_str(), WiiTDB::RatingToString(Rating), "PEGI");
+        TitleList[TitleList.size()-1].ParentalRating = WiiTDB::ConvertRating(RatValTxt.c_str(), WiiTDB::RatingToString(Rating), "PEGI");
         int ret = XML_DB.GetPlayers(MissingTitles[i].c_str());
         if(ret > 0)
             TitleList[TitleList.size()-1].PlayersCount = ret;

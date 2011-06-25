@@ -690,6 +690,86 @@ const char * WiiTDB::RatingToString(int rating)
 	return NULL;
 }
 
+int WiiTDB::StringToRating(const char *rate_string)
+{
+    if (strcasecmp(rate_string, "CERO") == 0)
+    	return 0;
+
+    if (strcasecmp(rate_string, "ESRB") == 0)
+    	return 1;
+
+    if (strcasecmp(rate_string, "PEGI") == 0)
+    	return 2;
+
+	return -1;
+}
+
+int WiiTDB::ConvertRating(const char *value, const char *from, const char *to)
+{
+    if (strcasecmp(from, to) == 0)
+    {
+        int ret = atoi(value);
+        if(ret < 7)
+            return 0;
+        else if(ret < 12)
+            return 1;
+        else if(ret < 16)
+            return 2;
+        else if(ret < 18)
+            return 3;
+        else
+            return 4;
+    }
+
+    int type = -1;
+    int desttype = -1;
+
+    type = StringToRating(from);
+    desttype = StringToRating(to);
+    if (type == -1 || desttype == -1) return -1;
+
+    /* rating conversion table */
+    /* the list is ordered to pick the most likely value first: */
+    /* EC and AO are less likely to be used so they are moved down to only be picked up when converting ESRB to PEGI or CERO */
+    /* the conversion can never be perfect because ratings can differ between regions for the same game */
+    const int table_size = 12;
+    char ratingtable[table_size][3][5] =
+    {
+        { { "A" }, { "E" }, { "3" } },
+        { { "A" }, { "E" }, { "4" } },
+        { { "A" }, { "E" }, { "6" } },
+        { { "A" }, { "E" }, { "7" } },
+        { { "A" }, { "EC" }, { "3" } },
+        { { "A" }, { "E10+" }, { "7" } },
+        { { "B" }, { "T" }, { "12" } },
+        { { "D" }, { "M" }, { "18" } },
+        { { "D" }, { "M" }, { "16" } },
+        { { "C" }, { "T" }, { "16" } },
+        { { "C" }, { "T" }, { "15" } },
+        { { "Z" }, { "AO" }, { "18" } },
+    };
+
+    for (int i = 0; i < table_size; i++)
+    {
+        if (strcasecmp(ratingtable[i][type], value) == 0)
+        {
+            int res = atoi(ratingtable[i][desttype]);
+            if(res < 7)
+                return 0;
+            else if(res < 12)
+                return 1;
+            else if(res < 16)
+                return 2;
+            else if(res < 18)
+                return 3;
+            else
+                return 4;
+        }
+    }
+
+    return -1;
+}
+
 int WiiTDB::GetRating(const char * id)
 {
     int rating = -1;

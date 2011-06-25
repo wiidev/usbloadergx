@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-24 21:05+0200\n"
+"POT-Creation-Date: 2011-06-25 21:43+0200\n"
 "PO-Revision-Date: 2011-06-20 07:25+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -245,6 +245,9 @@ msgstr "Blokkeer Ouderlijk toezicht"
 
 msgid "Block Reset Settings"
 msgstr "Blokkeer Reset Instellingen"
+
+msgid "Block SD Reload Button"
+msgstr ""
 
 msgid "Block Sound Settings"
 msgstr "Blokkeer Geluid Instellingen"
@@ -1268,6 +1271,9 @@ msgstr "Systeem uitzetten"
 
 msgid "Shutdown Wii"
 msgstr "Wii uitzetten"
+
+msgid "Sneek Video Patch"
+msgstr ""
 
 msgid "Sort alphabetically"
 msgstr "Alfabetisch sorteren"

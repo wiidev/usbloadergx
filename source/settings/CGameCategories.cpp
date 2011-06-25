@@ -31,7 +31,7 @@
 #include "language/gettext.h"
 #include "FileOperations/fileops.h"
 #include "xml/WiiTDB.hpp"
-#include "xml/xml.h"
+#include "utils/StringTools.h"
 #include "svnrev.h"
 
 #define VALID_CONFIG_REV    1084
@@ -56,31 +56,6 @@ const vector<unsigned int> &CGameCategories::operator[](const char *id) const
     return defaultCategory;
 }
 
-static const char * XMLSaveCallback(mxml_node_t *node, int where)
-{
-	const char *name = node->value.element.name;
-	if(!name)
-	    return NULL;
-
-	if (where == MXML_WS_BEFORE_OPEN)
-	{
-		if(!strcmp(name, "Revision") || !strcmp(name, "Categories") || !strcmp(name, "GameCategories"))
-			return "\n";
-		else if(!strcmp(name, "Game"))
-			return "\n\t";
-		else if(!strcmp(name, "Category"))
-			return "\n\t\t";
-	}
-	else if(where == MXML_WS_BEFORE_CLOSE)
-	{
-		if(!strcmp(name, "Categories") || !strcmp(name, "GameCategories"))
-			return "\n";
-        else if(!strcmp(name, "Game"))
-            return "\n\t";
-	}
-	return NULL;
-}
-
 bool CGameCategories::Load(string filepath)
 {
     if(filepath.size() == 0)
@@ -92,75 +67,55 @@ bool CGameCategories::Load(string filepath)
     filepath += "GXGameCategories.xml";
     configPath = filepath;
 
-    u8 *buffer = NULL;
-    u64 filesize = 0;
-
-    LoadFileToMem(filepath.c_str(), &buffer, &filesize);
-
-    if(!buffer)
-        return false;
-
     clear();
 
-    mxml_node_t *xmlfile = mxmlLoadString(NULL, (const char *) buffer, MXML_OPAQUE_CALLBACK);
+    TiXmlDocument xmlDoc(filepath.c_str());
+    if(!xmlDoc.LoadFile())
+    	return false;
 
-    if(!ValidVersion(xmlfile))
-    {
-        mxmlDelete(xmlfile);
-        free(buffer);
-        return false;
-    }
+	if(!ValidVersion(xmlDoc.FirstChildElement("Revision")))
+		return false;
 
-    mxml_node_t *node = mxmlFindElement(xmlfile, xmlfile, "Categories", NULL, NULL, MXML_DESCEND_FIRST);
-    if(!node)
-    {
-        mxmlDelete(xmlfile);
-        free(buffer);
-        return false;
-    }
+	TiXmlElement * node =  xmlDoc.FirstChildElement("Categories");
+	if(!node)
+		return false;
 
-    node = mxmlFindElement(node, xmlfile, "Category", NULL, NULL, MXML_DESCEND_FIRST);
+	node = node->FirstChildElement("Category");
 
-    while(node != NULL)
-    {
-		const char * ID = mxmlElementGetAttr(node, "ID");
-		const char * Name = mxmlElementGetAttr(node, "Name");
+	while(node != NULL)
+	{
+		const char * ID = node->Attribute("ID");
+		const char * Name = node->Attribute("Name");
 
 		if(ID && Name)
             CategoryList.SetCategory(atoi(ID), Name);
 
-        node = mxmlFindElement(node, xmlfile, "Category", NULL, NULL, MXML_NO_DESCEND);
-    }
+		node = node->NextSiblingElement();
+	}
 
-    node = mxmlFindElement(xmlfile, xmlfile, "GameCategories", NULL, NULL, MXML_DESCEND_FIRST);
-    if(!node)
-    {
-        mxmlDelete(xmlfile);
-        free(buffer);
-        return false;
-    }
+	node =  xmlDoc.FirstChildElement("GameCategories");
+	if(!node)
+		return false;
 
-    node = mxmlFindElement(node, xmlfile, "Game", NULL, NULL, MXML_DESCEND_FIRST);
+	node = node->FirstChildElement("Game");
 
     while(node != NULL)
     {
-		const char * gameID = mxmlElementGetAttr(node, "ID");
+		const char * gameID = node->Attribute("ID");
 
-		mxml_node_t *category = mxmlFindElement(node, xmlfile, "Category", NULL, NULL, MXML_DESCEND_FIRST);
+    	TiXmlElement * category = node->FirstChildElement("Category");
 
         while(category != NULL)
-        {
-		    const char * categoryID = mxmlElementGetAttr(category, "ID");
+		{
+		    const char * categoryID = category->Attribute("ID");
 		    if(gameID && categoryID)
 		        SetCategory(gameID, atoi(categoryID));
-		    category = mxmlFindElement(category, xmlfile, "Category", NULL, NULL, MXML_NO_DESCEND);
+
+			category = category->NextSiblingElement();
         }
 
-        node = mxmlFindElement(node, xmlfile, "Game", NULL, NULL, MXML_NO_DESCEND);
+		node = node->NextSiblingElement();
     }
-
-    mxmlDelete(xmlfile);
-    free(buffer);
 
     CategoryList.goToFirst();
 
@@ -178,60 +133,72 @@ bool CGameCategories::Save()
 
     CreateSubfolder(filepath);
 
-    FILE * f = fopen(configPath.c_str(), "wb");
-    if(!f)
-        return false;
+    TiXmlDocument xmlDoc;
 
-    mxml_node_t *xmlfile = mxmlNewXML("1.0");
-    mxmlSetWrapMargin(0);
+    TiXmlDeclaration declaration("1.0", "UTF-8", "");
+    xmlDoc.InsertEndChild(declaration);
 
-    mxml_node_t	*node = mxmlNewElement(xmlfile, "Revision");
-    mxmlNewInteger(node, atoi(GetRev()));
+    TiXmlElement Revision("Revision");
+    TiXmlText revText(GetRev());
+    Revision.InsertEndChild(revText);
+    xmlDoc.InsertEndChild(Revision);
 
-    node = mxmlNewElement(xmlfile, "Categories");
+	//! Add all categories as an ID map
+	{
+		TiXmlElement Categories("Categories");
 
-    CategoryList.goToFirst();
-    do
-    {
-        mxml_node_t	*category = mxmlNewElement(node, "Category");
-        mxmlElementSetAttrf(category, "ID", "%02u", CategoryList.getCurrentID());
-        mxmlElementSetAttr(category, "Name", CategoryList.getCurrentName().c_str());
-    }
-    while(CategoryList.goToNext());
+		CategoryList.goToFirst();
+		do
+		{
+			TiXmlElement Category("Category");
+			Category.SetAttribute("ID", fmt("%02i", CategoryList.getCurrentID()));
+			Category.SetAttribute("Name", CategoryList.getCurrentName().c_str());
 
-    node = mxmlNewElement(xmlfile, "GameCategories");
+			Categories.InsertEndChild(Category);
+		}
+		while(CategoryList.goToNext());
 
-    for(map<string, vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
-    {
-        mxml_node_t	*game = mxmlNewElement(node, "Game");
-        mxmlElementSetAttr(game, "ID", itr->first.c_str());
-        mxmlElementSetAttr(game, "Title", GameTitles.GetTitle(itr->first.c_str()));
+		xmlDoc.InsertEndChild(Categories);
+	}
 
-        for(u32 i = 0; i < itr->second.size(); ++i)
-        {
-            mxml_node_t	*category = mxmlNewElement(game, "Category");
-            mxmlElementSetAttrf(category, "ID", "%02u", itr->second[i]);
-            mxmlElementSetAttr(category, "Name", CategoryList[itr->second[i]]);
-        }
-    }
+	//! Add game specific categories now
+	{
+		TiXmlElement GameCategories("GameCategories");
 
-    mxmlSaveFile(xmlfile, f, XMLSaveCallback);
-    fclose(f);
+		for(map<string, vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
+		{
+			TiXmlElement Game("Game");
+			Game.SetAttribute("ID", itr->first.c_str());
+			Game.SetAttribute("Title", GameTitles.GetTitle(itr->first.c_str()));
 
-    mxmlDelete(xmlfile);
+			for(u32 i = 0; i < itr->second.size(); ++i)
+			{
+				TiXmlElement Category("Category");
+				Category.SetAttribute("ID", fmt("%02i", itr->second[i]));
+				Category.SetAttribute("Name", CategoryList[itr->second[i]]);
+
+				Game.InsertEndChild(Category);
+			}
+
+			GameCategories.InsertEndChild(Game);
+		}
+
+		xmlDoc.InsertEndChild(GameCategories);
+	}
+
+	xmlDoc.SaveFile(configPath);
 
     return true;
 }
 
-bool CGameCategories::ValidVersion(mxml_node_t *xmlfile)
+bool CGameCategories::ValidVersion(TiXmlElement *revisionNode)
 {
-    if(!xmlfile) return false;
+    if(!revisionNode) return false;
 
-    mxml_node_t *node = mxmlFindElement(xmlfile, xmlfile, "Revision", NULL, NULL, MXML_DESCEND_FIRST);
-    if(!node || !node->child || !node->child->value.opaque)
+    if(!revisionNode->FirstChild() || !revisionNode->FirstChild()->Value())
         return false;
 
-    return atoi(node->child->value.opaque) >= VALID_CONFIG_REV;
+    return atoi(revisionNode->FirstChild()->Value()) >= VALID_CONFIG_REV;
 }
 
 bool CGameCategories::SetCategory(const char *gameID, unsigned int id)

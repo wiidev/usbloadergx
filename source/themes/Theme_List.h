@@ -44,7 +44,7 @@ class Theme_List
         int GetThemeCount() const { return ThemesList.size(); };
     protected:
         //!Get Themes into a struct from the XML file amount
-        bool ParseXML(const u8 * xmlfile);
+        bool ParseXML(const char * xmlfile);
         std::vector<Theme_Info> ThemesList;
 };
 
