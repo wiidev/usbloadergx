@@ -48,9 +48,11 @@ distribution.
  	#include <iostream>
 	#include <sstream>
 	#define TIXML_STRING		std::string
+	#define TIXML_NOTHROW		(std::nothrow)
 #else
 	#include "tinystr.h"
 	#define TIXML_STRING		TiXmlString
+	#define TIXML_NOTHROW
 #endif
 
 // Deprecated library function hell. Compilers want to use the

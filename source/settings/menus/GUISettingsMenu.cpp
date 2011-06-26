@@ -30,8 +30,6 @@
 #include "settings/SettingsPrompts.h"
 #include "settings/GameTitles.h"
 #include "settings/CGameCategories.hpp"
-#include "xml/xml.h"
-#include "usbloader/GameList.h"
 #include "usbloader/wbfs.h"
 #include "utils/tools.h"
 
@@ -117,18 +115,6 @@ GuiSettingsMenu::GuiSettingsMenu()
     Options->SetName(Idx++, "%s", tr( "HOME Menu" ));
 
     SetOptionValues();
-
-    OldTitlesOverride = Settings.titlesOverride;
-}
-
-GuiSettingsMenu::~GuiSettingsMenu()
-{
-    if (Settings.titlesOverride != OldTitlesOverride)
-    {
-        GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path, true);
-        if(!Settings.titlesOverride)
-            gameList.ReadGameList();
-    }
 }
 
 void GuiSettingsMenu::SetOptionValues()

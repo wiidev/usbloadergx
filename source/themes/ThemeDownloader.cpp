@@ -231,7 +231,7 @@ void ThemeDownloader::SetupMainButtons()
 
     if (!IsNetworkInit() && !NetworkInitPrompt())
     {
-        ShowError("Could not initialize network!");
+        ShowError(tr("Could not initialize network!"));
         return;
     }
 

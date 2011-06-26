@@ -384,7 +384,7 @@ s32 DownloadWithResponse(const char * url, u8 **outbuffer, u32 *outsize)
     strlcpy(domain, url + strlen("http://"), domainlength + 1);
 
     int connect = GetConnection(domain);
-    if (connection < 0)
+    if (connect < 0)
         return -1;
 
     //Form a nice request header to send to the webserver

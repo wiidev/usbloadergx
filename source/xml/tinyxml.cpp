@@ -887,7 +887,7 @@ bool TiXmlElement::Accept( TiXmlVisitor* visitor ) const
 
 TiXmlNode* TiXmlElement::Clone() const
 {
-	TiXmlElement* clone = new TiXmlElement( Value() );
+	TiXmlElement* clone = new TIXML_NOTHROW TiXmlElement( Value() );
 	if ( !clone )
 		return 0;
 
@@ -1028,7 +1028,11 @@ bool TiXmlDocument::LoadFile( FILE* file, TiXmlEncoding encoding )
 	}
 	*/
 
-	char* buf = new char[ length+1 ];
+	char* buf = new TIXML_NOTHROW char[ length+1 ];
+	if(!buf) {
+		SetError( TIXML_ERROR, 0, 0, TIXML_ENCODING_UNKNOWN );
+		return false;
+	}
 	buf[0] = 0;
 
 	if ( fread( buf, length, 1, file ) != 1 ) {
@@ -1132,7 +1136,7 @@ void TiXmlDocument::CopyTo( TiXmlDocument* target ) const
 
 TiXmlNode* TiXmlDocument::Clone() const
 {
-	TiXmlDocument* clone = new TiXmlDocument();
+	TiXmlDocument* clone = new TIXML_NOTHROW TiXmlDocument();
 	if ( !clone )
 		return 0;
 
@@ -1318,7 +1322,7 @@ bool TiXmlComment::Accept( TiXmlVisitor* visitor ) const
 
 TiXmlNode* TiXmlComment::Clone() const
 {
-	TiXmlComment* clone = new TiXmlComment();
+	TiXmlComment* clone = new TIXML_NOTHROW TiXmlComment();
 
 	if ( !clone )
 		return 0;
@@ -1365,7 +1369,7 @@ bool TiXmlText::Accept( TiXmlVisitor* visitor ) const
 TiXmlNode* TiXmlText::Clone() const
 {
 	TiXmlText* clone = 0;
-	clone = new TiXmlText( "" );
+	clone = new TIXML_NOTHROW TiXmlText( "" );
 
 	if ( !clone )
 		return 0;
@@ -1454,7 +1458,7 @@ bool TiXmlDeclaration::Accept( TiXmlVisitor* visitor ) const
 
 TiXmlNode* TiXmlDeclaration::Clone() const
 {
-	TiXmlDeclaration* clone = new TiXmlDeclaration();
+	TiXmlDeclaration* clone = new TIXML_NOTHROW TiXmlDeclaration();
 
 	if ( !clone )
 		return 0;
@@ -1486,7 +1490,7 @@ bool TiXmlUnknown::Accept( TiXmlVisitor* visitor ) const
 
 TiXmlNode* TiXmlUnknown::Clone() const
 {
-	TiXmlUnknown* clone = new TiXmlUnknown();
+	TiXmlUnknown* clone = new TIXML_NOTHROW TiXmlUnknown();
 
 	if ( !clone )
 		return 0;
@@ -1559,9 +1563,12 @@ TiXmlAttribute* TiXmlAttributeSet::FindOrCreate( const std::string& _name )
 {
 	TiXmlAttribute* attrib = Find( _name );
 	if ( !attrib ) {
-		attrib = new TiXmlAttribute();
-		Add( attrib );
-		attrib->SetName( _name );
+		attrib = new TIXML_NOTHROW TiXmlAttribute();
+		if(attrib)
+		{
+			Add( attrib );
+			attrib->SetName( _name );
+		}
 	}
 	return attrib;
 }
@@ -1583,9 +1590,12 @@ TiXmlAttribute* TiXmlAttributeSet::FindOrCreate( const char* _name )
 {
 	TiXmlAttribute* attrib = Find( _name );
 	if ( !attrib ) {
-		attrib = new TiXmlAttribute();
-		Add( attrib );
-		attrib->SetName( _name );
+		attrib = new TIXML_NOTHROW TiXmlAttribute();
+		if(attrib)
+		{
+			Add( attrib );
+			attrib->SetName( _name );
+		}
 	}
 	return attrib;
 }

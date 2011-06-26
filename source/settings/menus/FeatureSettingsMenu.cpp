@@ -31,6 +31,7 @@
 #include "network/networkops.h"
 #include "FileOperations/fileops.h"
 #include "prompts/PromptWindows.h"
+#include "usbloader/GameList.h"
 #include "language/gettext.h"
 
 static const char * OnOffText[] =
@@ -59,7 +60,19 @@ FeatureSettingsMenu::FeatureSettingsMenu()
     Options->SetName(Idx++, "%s", tr( "Wiinnertag" ));
     Options->SetName(Idx++, "%s", tr( "Import Categories" ));
 
+    OldTitlesOverride = Settings.titlesOverride;
+
     SetOptionValues();
+}
+
+FeatureSettingsMenu::~FeatureSettingsMenu()
+{
+    if (Settings.titlesOverride != OldTitlesOverride)
+    {
+        GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path, true);
+        if(!Settings.titlesOverride)
+            gameList.ReadGameList();
+    }
 }
 
 void FeatureSettingsMenu::SetOptionValues()

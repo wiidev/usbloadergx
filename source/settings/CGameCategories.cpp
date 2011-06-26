@@ -30,6 +30,7 @@
 #include "usbloader/GameList.h"
 #include "language/gettext.h"
 #include "FileOperations/fileops.h"
+#include "prompts/ProgressWindow.h"
 #include "xml/WiiTDB.hpp"
 #include "utils/StringTools.h"
 #include "svnrev.h"
@@ -133,60 +134,81 @@ bool CGameCategories::Save()
 
     CreateSubfolder(filepath);
 
+    StartProgress(tr("Generating GXGameCategories.xml"), tr("Please wait..."), 0, false, true);
     TiXmlDocument xmlDoc;
 
     TiXmlDeclaration declaration("1.0", "UTF-8", "");
     xmlDoc.InsertEndChild(declaration);
-
     TiXmlElement Revision("Revision");
     TiXmlText revText(GetRev());
     Revision.InsertEndChild(revText);
     xmlDoc.InsertEndChild(Revision);
 
+    int progressSize = CategoryList.size() + List.size();
+    int progress = 0;
+
 	//! Add all categories as an ID map
 	{
-		TiXmlElement Categories("Categories");
+		//! On LinkEndChild TinyXML owns and deletes the elements allocated here.
+		//! This is more memory efficient than making another copy of the elements.
+		TiXmlElement *Categories = new TiXmlElement("Categories");
 
 		CategoryList.goToFirst();
 		do
 		{
-			TiXmlElement Category("Category");
-			Category.SetAttribute("ID", fmt("%02i", CategoryList.getCurrentID()));
-			Category.SetAttribute("Name", CategoryList.getCurrentName().c_str());
+    		ShowProgress(progress, progressSize);
 
-			Categories.InsertEndChild(Category);
+			TiXmlElement *Category = new TiXmlElement("Category");
+			Category->SetAttribute("ID", fmt("%02i", CategoryList.getCurrentID()));
+			Category->SetAttribute("Name", CategoryList.getCurrentName().c_str());
+
+			Categories->LinkEndChild(Category);
+
+			++progress;
 		}
 		while(CategoryList.goToNext());
 
-		xmlDoc.InsertEndChild(Categories);
+		xmlDoc.LinkEndChild(Categories);
 	}
 
 	//! Add game specific categories now
 	{
-		TiXmlElement GameCategories("GameCategories");
+		//! On LinkEndChild TinyXML owns and deletes the elements allocated here.
+		//! This is more memory efficient than making another copy of the elements.
+		TiXmlElement *GameCategories = new TiXmlElement("GameCategories");
 
 		for(map<string, vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
 		{
-			TiXmlElement Game("Game");
-			Game.SetAttribute("ID", itr->first.c_str());
-			Game.SetAttribute("Title", GameTitles.GetTitle(itr->first.c_str()));
+    		ShowProgress(progress, progressSize);
+
+			TiXmlElement *Game = new TiXmlElement("Game");
+			Game->SetAttribute("ID", itr->first.c_str());
+			Game->SetAttribute("Title", GameTitles.GetTitle(itr->first.c_str()));
 
 			for(u32 i = 0; i < itr->second.size(); ++i)
 			{
-				TiXmlElement Category("Category");
-				Category.SetAttribute("ID", fmt("%02i", itr->second[i]));
-				Category.SetAttribute("Name", CategoryList[itr->second[i]]);
+				const char *CatName = CategoryList[itr->second[i]];
+				if(!CatName)
+					CatName = "";
 
-				Game.InsertEndChild(Category);
+				TiXmlElement *Category = new TiXmlElement("Category");
+				Category->SetAttribute("ID", fmt("%02i", itr->second[i]));
+				Category->SetAttribute("Name", CatName);
+
+				Game->LinkEndChild(Category);
 			}
 
-			GameCategories.InsertEndChild(Game);
+			GameCategories->LinkEndChild(Game);
+			++progress;
 		}
 
-		xmlDoc.InsertEndChild(GameCategories);
+		xmlDoc.LinkEndChild(GameCategories);
 	}
 
+	ShowProgress(tr("Writing GXGameCategories.xml"), tr("Please wait..."), 0, progressSize, progressSize, false, true);
+
 	xmlDoc.SaveFile(configPath);
+    ProgressStop();
 
     return true;
 }
@@ -337,12 +359,16 @@ bool CGameCategories::ImportFromWiiTDB(const string &xmlpath)
     if(!XML_DB.OpenFile(xmlpath.c_str()))
         return false;
 
+    StartProgress(tr("Importing categories"), tr("Please wait..."), 0, false, true);
+
     XML_DB.SetLanguageCode(Settings.db_language);
     wString filter(gameList.GetCurrentFilter());
     gameList.LoadUnfiltered();
 
     for(int i = 0; i < gameList.size(); ++i)
     {
+    	ShowProgress(i, gameList.size());
+
         vector<string> genreList;
 
         if(!XML_DB.GetGenreList((const char *) gameList[i]->id, genreList))
@@ -359,6 +385,8 @@ bool CGameCategories::ImportFromWiiTDB(const string &xmlpath)
 
     XML_DB.CloseFile();
     gameList.FilterList(filter.c_str());
+
+    ProgressStop();
 
 	return true;
 }

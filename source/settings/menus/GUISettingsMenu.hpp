@@ -30,12 +30,9 @@ class GuiSettingsMenu : public SettingsMenu
 {
     public:
         GuiSettingsMenu();
-        virtual ~GuiSettingsMenu();
     protected:
         void SetOptionValues();
         int GetMenuInternal();
-
-        int OldTitlesOverride;
 
         OptionList GuiOptions;
 };

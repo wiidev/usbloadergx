@@ -30,7 +30,7 @@ void CGameTitles::SetGameTitle(const char * id, const char * title)
 const char * CGameTitles::GetTitle(const char * id) const
 {
     if(!id)
-        return NULL;
+        return "";
 
     for(u32 i = 0; i < TitleList.size(); ++i)
     {
@@ -38,13 +38,24 @@ const char * CGameTitles::GetTitle(const char * id) const
             return TitleList[i].Title.c_str();
     }
 
-    return NULL;
+	//! Since not found in the WiiTDB search in the game header for a title
+	if(gameList.GameCount() != gameList.size())
+		gameList.LoadUnfiltered();
+
+    for(int i = 0; i < gameList.size(); ++i)
+    {
+        if(strncasecmp(id, (char *) gameList[i]->id, 6) == 0)
+            return gameList[i]->title;
+
+    }
+
+    return "";
 }
 
 const char * CGameTitles::GetTitle(const struct discHdr *header) const
 {
     if(!header)
-        return NULL;
+        return "";
 
     for(u32 i = 0; i < TitleList.size(); ++i)
     {

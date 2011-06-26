@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-25 21:43+0200\n"
+"POT-Creation-Date: 2011-06-26 23:33+0200\n"
 "PO-Revision-Date: 2011-06-14 00:00-0000\n"
 "Last-Translator: pplucky <pplucky@gmail.com>\n"
 "Language-Team: Sky8000, pplucky\n"
@@ -768,6 +768,9 @@ msgstr "NomeJogo [IDJOGO]"
 msgid "Games"
 msgstr "Jogos"
 
+msgid "Generating GXGameCategories.xml"
+msgstr ""
+
 msgid "Genre:"
 msgstr "Tipo:"
 
@@ -806,6 +809,9 @@ msgstr "Importar Categorias"
 
 msgid "Import operation successfully completed."
 msgstr "Operação de importação completada com sucesso."
+
+msgid "Importing categories"
+msgstr ""
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -1543,6 +1549,9 @@ msgstr "Caminho Wiinnertag"
 
 msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
 msgstr "Wiinnertag necessita ligação automática à rede no arranque da aplicação. Quer habilitar agora?"
+
+msgid "Writing GXGameCategories.xml"
+msgstr ""
 
 msgid "Wrong Password"
 msgstr "Password Incorrecta"

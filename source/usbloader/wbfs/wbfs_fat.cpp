@@ -444,7 +444,7 @@ s32 Wbfs_Fat::GetHeadersCount()
         // if we have titles.txt entry use that
         title = GameTitles.GetTitle(id);
         // if no titles.txt get title from dir or file name
-        if (!title && *fname_title)
+        if ((!title || strlen(title) == 0) && *fname_title)
             title = fname_title;
 
         if (title)

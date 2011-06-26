@@ -32,7 +32,6 @@
 #include "settings/CGameStatistics.h"
 #include "settings/GameTitles.h"
 #include "settings/CGameCategories.hpp"
-#include "xml/xml.h"
 #include "FreeTypeGX.h"
 #include "GameList.h"
 #include "memory/memory.h"

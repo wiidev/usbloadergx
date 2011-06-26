@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-25 21:43+0200\n"
+"POT-Creation-Date: 2011-06-26 23:33+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi, papa, ichiroling\n"
@@ -768,6 +768,9 @@ msgstr "ゲーム名 [ゲームID]"
 msgid "Games"
 msgstr "ゲーム総数"
 
+msgid "Generating GXGameCategories.xml"
+msgstr ""
+
 msgid "Genre:"
 msgstr "ジャンル:"
 
@@ -806,6 +809,9 @@ msgstr "カテゴリをインポート"
 
 msgid "Import operation successfully completed."
 msgstr "インポートに成功しました"
+
+msgid "Importing categories"
+msgstr ""
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -1543,6 +1549,9 @@ msgstr "Wiinnertag.xmlのパス"
 
 msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
 msgstr "Wiinnertagは自動ネット接続が有効になっている必要が有ります。有効にしますか?"
+
+msgid "Writing GXGameCategories.xml"
+msgstr ""
 
 msgid "Wrong Password"
 msgstr "暗証番号が違います"
