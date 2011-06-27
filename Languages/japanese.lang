@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# japanese.lang - r1091
+# japanese.lang - r1097
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -199,7 +199,7 @@ msgid "Big thanks to:"
 msgstr "協力:"
 
 msgid "Block Categories Menu"
-msgstr ""
+msgstr "カテゴリメニューを制限"
 
 msgid "Block Categories Modify"
 msgstr "カテゴリの編集を制限"
@@ -232,7 +232,7 @@ msgid "Block HBC Menu"
 msgstr "HBCメニューを制限"
 
 msgid "Block Hard Drive Settings"
-msgstr ""
+msgstr "HDD設定を制限"
 
 msgid "Block IOS Reload"
 msgstr "IOS再読み込み防止"
@@ -247,7 +247,7 @@ msgid "Block Reset Settings"
 msgstr "設定の初期化を制限"
 
 msgid "Block SD Reload Button"
-msgstr ""
+msgstr "SD再読み込みボタンを制限"
 
 msgid "Block Sound Settings"
 msgstr "サウンド設定を制限"
@@ -397,7 +397,7 @@ msgid "Could not save."
 msgstr "保存できませんでした"
 
 msgid "Could not write to:"
-msgstr ""
+msgstr "書き込めません:"
 
 msgid "Cover Download"
 msgstr "何をダウンロードしますか"
@@ -621,7 +621,7 @@ msgid "Extracting files..."
 msgstr "解凍中です…"
 
 msgid "Failed"
-msgstr ""
+msgstr "失敗"
 
 msgid "Failed formating"
 msgstr "初期化に失敗しました"
@@ -769,7 +769,7 @@ msgid "Games"
 msgstr "ゲーム総数"
 
 msgid "Generating GXGameCategories.xml"
-msgstr ""
+msgstr "GXGameCategories.xmlを作成中です"
 
 msgid "Genre:"
 msgstr "ジャンル:"
@@ -784,7 +784,7 @@ msgid "HOME Menu"
 msgstr "HOMEﾎﾞﾀﾝﾒﾆｭｰ"
 
 msgid "Hard Drive Settings"
-msgstr ""
+msgstr "HDD設定"
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrewアプリ"
@@ -811,7 +811,7 @@ msgid "Import operation successfully completed."
 msgstr "インポートに成功しました"
 
 msgid "Importing categories"
-msgstr ""
+msgstr "カテゴリをインポート中です"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -834,13 +834,13 @@ msgid "Install"
 msgstr "ｲﾝｽﾄｰﾙ"
 
 msgid "Install Directories"
-msgstr ""
+msgstr "インストールフォルダ"
 
 msgid "Install Error!"
 msgstr "インストールエラー!"
 
 msgid "Install Partitions"
-msgstr ""
+msgstr "インストール領域"
 
 msgid "Install a game"
 msgstr "ゲームをインストール"
@@ -1279,7 +1279,7 @@ msgid "Shutdown Wii"
 msgstr "シャットダウン"
 
 msgid "Sneek Video Patch"
-msgstr ""
+msgstr "SNEEK映像パッチ"
 
 msgid "Sort alphabetically"
 msgstr "名前順に並び替え"
@@ -1551,7 +1551,7 @@ msgid "Wiinnertag requires you to enable automatic network connect on applicatio
 msgstr "Wiinnertagは自動ネット接続が有効になっている必要が有ります。有効にしますか?"
 
 msgid "Writing GXGameCategories.xml"
-msgstr ""
+msgstr "GXGameCategories.xmlを書き込み中です"
 
 msgid "Wrong Password"
 msgstr "暗証番号が違います"
@@ -1624,12 +1624,3 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
-
-#~ msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-#~ msgstr "ﾎﾟｰﾄの自動切換を使用する場合ﾌｧｲﾙｼｽﾃﾑの破損を避けるため、独自のﾊﾟｽ設定は全てSDｶｰﾄﾞにしてください"
-
-#~ msgid "Install directories"
-#~ msgstr "フォルダの構成"
-
-#~ msgid "Install partitions"
-#~ msgstr "保存する領域"

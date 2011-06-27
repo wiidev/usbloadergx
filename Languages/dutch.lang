@@ -1624,12 +1624,3 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
-
-#~ msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-#~ msgstr "Automatisch poort wisselen word zonder onderbreking gedaan. Je moet eerst alle aangepaste paden veranderen naar SD-kaart voor deze optie anders kan het je bestandssysteem beschadigen."
-
-#~ msgid "Install directories"
-#~ msgstr "Installeer mappen"
-
-#~ msgid "Install partitions"
-#~ msgstr "Installatie partitie"

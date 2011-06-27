@@ -1,11 +1,11 @@
 # USB Loader GX
-# german language source file - r1091
+# german language source file - r1097
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-26 23:33+0200\n"
+"POT-Creation-Date: 2011-06-26 23:50+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -124,7 +124,7 @@ msgid "AUTO"
 msgstr "AUTO"
 
 msgid "Add category"
-msgstr "Ketegorie hinzuf."
+msgstr "Kategorie hinzuf."
 
 msgid "All"
 msgstr "Alle"
@@ -199,7 +199,7 @@ msgid "Big thanks to:"
 msgstr "Großen Dank an:"
 
 msgid "Block Categories Menu"
-msgstr ""
+msgstr "Sperre Kategorienmenü"
 
 msgid "Block Categories Modify"
 msgstr "Sperre Kategorieänderung"
@@ -232,7 +232,7 @@ msgid "Block HBC Menu"
 msgstr "Blocke HBC Menü"
 
 msgid "Block Hard Drive Settings"
-msgstr ""
+msgstr "Blocke Festpl. Optionen"
 
 msgid "Block IOS Reload"
 msgstr "Blocke IOS-Neuladen"
@@ -247,7 +247,7 @@ msgid "Block Reset Settings"
 msgstr "Blocke Resetoptionen"
 
 msgid "Block SD Reload Button"
-msgstr ""
+msgstr "Blocke SD Reload Button"
 
 msgid "Block Sound Settings"
 msgstr "Blocke Soundoptionen"
@@ -397,7 +397,7 @@ msgid "Could not save."
 msgstr "Es konnte nicht gespeichert werden."
 
 msgid "Could not write to:"
-msgstr ""
+msgstr "Konnte nicht schreiben zu:"
 
 msgid "Cover Download"
 msgstr "Welche Cover herunterladen?"
@@ -532,13 +532,13 @@ msgid "Downloading Flat Covers"
 msgstr "Lade 2D Cover herunter"
 
 msgid "Downloading Full HQ Covers"
-msgstr "Lade Box HQ Cover runter"
+msgstr "Lade Box HQ Cover herunter"
 
 msgid "Downloading Full LQ Covers"
-msgstr "Lade Box LQ Cover runter"
+msgstr "Lade Box LQ Cover herunter"
 
 msgid "Downloading custom Discarts"
-msgstr "Lade Community Diskcovers herunter"
+msgstr "Lade Community Diskcover herunter"
 
 msgid "Downloading file..."
 msgstr "Lade Datei herunter..."
@@ -547,7 +547,7 @@ msgid "Downloading image:"
 msgstr "Lade Bilder herunter:"
 
 msgid "Downloading original Discarts"
-msgstr "Lade Diskcovers herunter"
+msgstr "Lade Diskcover herunter"
 
 msgid "Downloading pagelist:"
 msgstr "Lade Seitenliste herunter:"
@@ -621,7 +621,7 @@ msgid "Extracting files..."
 msgstr "Entpacke Dateien..."
 
 msgid "Failed"
-msgstr ""
+msgstr "Fehlgeschlagen"
 
 msgid "Failed formating"
 msgstr "Formatieren fehlgeschlagen"
@@ -769,7 +769,7 @@ msgid "Games"
 msgstr "Spiele"
 
 msgid "Generating GXGameCategories.xml"
-msgstr ""
+msgstr "Generiere GXGameCategories.xml"
 
 msgid "Genre:"
 msgstr "Genre:"
@@ -784,7 +784,7 @@ msgid "HOME Menu"
 msgstr "HOME Menü"
 
 msgid "Hard Drive Settings"
-msgstr ""
+msgstr "Festplatten Optionen"
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Apps"
@@ -811,7 +811,7 @@ msgid "Import operation successfully completed."
 msgstr "Import erfolgreich."
 
 msgid "Importing categories"
-msgstr ""
+msgstr "Importiere Kategorien"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -834,13 +834,13 @@ msgid "Install"
 msgstr "Installieren"
 
 msgid "Install Directories"
-msgstr ""
+msgstr "Installationsart"
 
 msgid "Install Error!"
 msgstr "Installationsfehler!"
 
 msgid "Install Partitions"
-msgstr ""
+msgstr "Inst. Partitionen"
 
 msgid "Install a game"
 msgstr "Spiel installieren"
@@ -1279,7 +1279,7 @@ msgid "Shutdown Wii"
 msgstr "Wii ausschalten"
 
 msgid "Sneek Video Patch"
-msgstr ""
+msgstr "Sneek Video Patch"
 
 msgid "Sort alphabetically"
 msgstr "Alphabetisch ordnen"
@@ -1551,7 +1551,7 @@ msgid "Wiinnertag requires you to enable automatic network connect on applicatio
 msgstr "Wiinnertag braucht eine aktivierte Netzwerkverbindung beim Start der Anwendung. Soll diese jetzt aktiviert werden?"
 
 msgid "Writing GXGameCategories.xml"
-msgstr ""
+msgstr "Schreibe GXGameCategories.xml"
 
 msgid "Wrong Password"
 msgstr "Falsches Passwort"

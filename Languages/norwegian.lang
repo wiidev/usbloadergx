@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# norwegian.lang - r1036
+# norwegian.lang - r1097
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -24,11 +24,11 @@ msgstr " finnes ikke på serveren."
 
 #, c-format
 msgid "%i files not found on the server!"
-msgstr ""
+msgstr "%i filer ikke funnet på server!"
 
 #, c-format
 msgid "%i missing files"
-msgstr ""
+msgstr "%i filer mangler"
 
 msgid "0 (Everyone)"
 msgstr "0 (Alle)"
@@ -100,7 +100,7 @@ msgid ">> Deleting title..."
 msgstr ">> Sletter tittel..."
 
 msgid ">> Finishing installation..."
-msgstr ">> Sluttfører installasjon..."
+msgstr ">> Fullfører installasjon..."
 
 msgid ">> Installing content #"
 msgstr ">> Installerer innhold #"
@@ -124,10 +124,10 @@ msgid "AUTO"
 msgstr ""
 
 msgid "Add category"
-msgstr ""
+msgstr "Legg til kategori"
 
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 msgid "All Partitions"
 msgstr "Alle partisjoner"
@@ -142,7 +142,7 @@ msgid "Alternate DOL"
 msgstr "Alternativ DOL"
 
 msgid "An example file was created here:"
-msgstr ""
+msgstr "En eksempelfil ble opprettet her:"
 
 msgid "Anti"
 msgstr ""
@@ -151,16 +151,16 @@ msgid "App Language"
 msgstr "Program språk"
 
 msgid "Apply"
-msgstr ""
+msgstr "Bruk"
 
 msgid "Apr"
 msgstr ""
 
 msgid "Are you sure you want to delete this category?"
-msgstr ""
+msgstr "Er du sikker på at du vil slette denne kategorien?"
 
 msgid "Are you sure you want to import game categories from WiiTDB?"
-msgstr ""
+msgstr "Er du sikker på at du vil importere kategorier fra WiiTDB?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "Er du sikker på at du vil låse USB Loader GX?"
@@ -199,70 +199,70 @@ msgid "Big thanks to:"
 msgstr "Stor takk til:"
 
 msgid "Block Categories Menu"
-msgstr ""
+msgstr "Blokkér kategorimeny"
 
 msgid "Block Categories Modify"
-msgstr ""
+msgstr "Blokkér kategorimodifisering"
 
 msgid "Block Cover Downloads"
-msgstr ""
+msgstr "Blokkér covernedlasting"
 
 msgid "Block Custom Paths"
-msgstr ""
+msgstr "Blokkér egendefinerte stier"
 
 msgid "Block Feature Settings"
-msgstr ""
+msgstr "Blokkér funksjonsinnstillinger"
 
 msgid "Block Game Install"
-msgstr ""
+msgstr "Blokkér spillinstallering"
 
 msgid "Block Game Settings"
-msgstr ""
+msgstr "Blokkér spillinnstillinger"
 
 msgid "Block GameID Change"
-msgstr ""
+msgstr "Blokkér endring av SpillID"
 
 msgid "Block Global Settings"
-msgstr ""
+msgstr "Blokkér globale innstillinger"
 
 msgid "Block Gui Settings"
-msgstr ""
+msgstr "Blokkér GUI innstillinger"
 
 msgid "Block HBC Menu"
-msgstr ""
+msgstr "Blokkér HBC meny"
 
 msgid "Block Hard Drive Settings"
-msgstr ""
+msgstr "Blokkér harddisk innstillinger"
 
 msgid "Block IOS Reload"
 msgstr "Blokkér IOS Reload"
 
 msgid "Block Loader Settings"
-msgstr ""
+msgstr "Blokkér loader innstillinger"
 
 msgid "Block Parental Settings"
-msgstr ""
+msgstr "Blokkér foreldrekontroll"
 
 msgid "Block Reset Settings"
-msgstr ""
+msgstr "Blokkér reset innstillinger"
 
 msgid "Block SD Reload Button"
-msgstr ""
+msgstr "Blokkér SD reload knapp"
 
 msgid "Block Sound Settings"
-msgstr ""
+msgstr "Blokkér lydinnstillinger"
 
 msgid "Block Theme Downloader"
-msgstr ""
+msgstr "Blokkér temanedlaster"
 
 msgid "Block Theme Menu"
-msgstr ""
+msgstr "Blokkér temameny"
 
 msgid "Block Title Launcher"
-msgstr ""
+msgstr "Blokkér title launcher"
 
 msgid "Block Updates"
-msgstr ""
+msgstr "Blokkér oppdateringer"
 
 msgid "Boot/Standard"
 msgstr "Boot/Standard"
@@ -274,10 +274,10 @@ msgid "Both"
 msgstr "Begge"
 
 msgid "Both Ports"
-msgstr ""
+msgstr "Begge porter"
 
 msgid "Cache Titles"
-msgstr ""
+msgstr "Cache titler"
 
 msgid "Can't be formatted"
 msgstr "Kan ikke formateres"
@@ -299,16 +299,16 @@ msgid "Cannot write to destination."
 msgstr "Kan ikke skrive til mål."
 
 msgid "Categories"
-msgstr ""
+msgstr "Kategorier"
 
 msgid "Categories:"
-msgstr ""
+msgstr "Kategorier:"
 
 msgid "Change Play Path"
 msgstr "Endre spill sti"
 
 msgid "Cheatfile is blank"
-msgstr "Juksefil er blank"
+msgstr "Juksefil er tom"
 
 msgid "Clear"
 msgstr "Fjern"
@@ -336,7 +336,7 @@ msgid "Coding:"
 msgstr "Koding:"
 
 msgid "Connection to server timed out."
-msgstr ""
+msgstr "Servertilkobling timet ut."
 
 msgid "Console"
 msgstr "Konsoll"
@@ -348,10 +348,10 @@ msgid "Console Locked"
 msgstr "Konsoll låst"
 
 msgid "Console must be unlocked for this option."
-msgstr ""
+msgstr "Konsoll må være opplåst for denne innstillingen."
 
 msgid "Console must be unlocked to be able to use this."
-msgstr ""
+msgstr "Konsoll må være opplåst for å bruke dette."
 
 msgid "Console should be unlocked to modify it."
 msgstr "Konsoll må være opplåst for å modifisere."
@@ -388,7 +388,7 @@ msgid "Could not open Disc"
 msgstr "Kan ikke åpne plate"
 
 msgid "Could not open the WiiTDB.xml file."
-msgstr ""
+msgstr "Kan ikke åpne WiiTDB.xml fil."
 
 msgid "Could not open wiitdb.xml."
 msgstr "Kan ikke åpne wiitdb.xml."
@@ -397,7 +397,7 @@ msgid "Could not save."
 msgstr "Kan ikke lagre."
 
 msgid "Could not write to:"
-msgstr ""
+msgstr "Kan ikke skrive til:"
 
 msgid "Cover Download"
 msgstr "Cover nedlasting"
@@ -409,10 +409,10 @@ msgid "Credits"
 msgstr "Medvirkende"
 
 msgid "Custom Discarts"
-msgstr ""
+msgstr "Cust. platebilde"
 
 msgid "Custom Paths"
-msgstr "Endre stier"
+msgstr "Egendefinerte stier"
 
 msgid "Customs/Original"
 msgstr "Custom/Original"
@@ -448,13 +448,13 @@ msgid "Delete Disc Artwork"
 msgstr "Slett platebilde"
 
 msgid "Delete category"
-msgstr ""
+msgstr "Slett kategori"
 
 msgid "Design:"
 msgstr ""
 
 msgid "Details"
-msgstr ""
+msgstr "Detaljer"
 
 msgid "Developed by"
 msgstr "Utviklet av"
@@ -493,7 +493,7 @@ msgid "Do you want to apply it now?"
 msgstr "Vil du legge til nå?"
 
 msgid "Do you want to apply this theme?"
-msgstr ""
+msgstr "Vil du aktivere dette temaet?"
 
 msgid "Do you want to change language?"
 msgstr "Vil du endre språk?"
@@ -508,7 +508,7 @@ msgid "Do you want to load the default theme?"
 msgstr "Vil du laste standard tema?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
-msgstr ""
+msgstr "Vil du synkronisere ledig plass info sektor på alle FAT32 partisjoner?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Vil du oppdatere/laste ned alle språkfiler?"
@@ -526,16 +526,16 @@ msgid "Download finished"
 msgstr "Nedlasting ferdig"
 
 msgid "Downloading 3D Covers"
-msgstr ""
+msgstr "Laster ned 3D cover"
 
 msgid "Downloading Flat Covers"
-msgstr ""
+msgstr "Laster ned 2D cover"
 
 msgid "Downloading Full HQ Covers"
-msgstr ""
+msgstr "Laster ned HQ fullcover"
 
 msgid "Downloading Full LQ Covers"
-msgstr ""
+msgstr "Laster ned LQ fullcover"
 
 msgid "Downloading custom Discarts"
 msgstr "Laster ned custom platebilde"
@@ -621,7 +621,7 @@ msgid "Extracting files..."
 msgstr "Pakker ut filer..."
 
 msgid "Failed"
-msgstr ""
+msgstr "Feilet"
 
 msgid "Failed formating"
 msgstr "Feil ved formatering"
@@ -636,10 +636,10 @@ msgid "Failed updating"
 msgstr "Feil ved oppdatering"
 
 msgid "Features"
-msgstr ""
+msgstr "Funksjoner"
 
 msgid "Features Settings"
-msgstr ""
+msgstr "Funksjonsinnstillinger"
 
 msgid "Feb"
 msgstr ""
@@ -664,16 +664,16 @@ msgid "Flip-X"
 msgstr ""
 
 msgid "Font Scale Factor"
-msgstr ""
+msgstr "Tekst størrelsesfaktor"
 
 msgid "Force NTSC"
 msgstr "Tving NTSC"
 
 msgid "Force NTSC480p"
-msgstr ""
+msgstr "Tving NTSC480p"
 
 msgid "Force PAL480p"
-msgstr ""
+msgstr "Tving PAL480p"
 
 msgid "Force PAL50"
 msgstr "Tving PAL50"
@@ -688,7 +688,7 @@ msgid "Formatting, please wait..."
 msgstr "Formaterer, vennligst vent..."
 
 msgid "Found missing images."
-msgstr ""
+msgstr "Funnet manglende bilder."
 
 msgid "Free Space"
 msgstr "Ledig plass"
@@ -697,13 +697,13 @@ msgid "French"
 msgstr "Fransk"
 
 msgid "Full Cover Path"
-msgstr ""
+msgstr "Fullcover sti"
 
 msgid "Full HQ Covers"
-msgstr ""
+msgstr "HQ fullcover"
 
 msgid "Full LQ Covers"
-msgstr ""
+msgstr "LQ fullcover"
 
 msgid "Full Menu"
 msgstr ""
@@ -739,7 +739,7 @@ msgid "Game Lock"
 msgstr "Lås spill"
 
 msgid "Game Only"
-msgstr ""
+msgstr "Kun spill"
 
 msgid "Game Region"
 msgstr "Region"
@@ -760,7 +760,7 @@ msgid "Game is already installed:"
 msgstr "Spillet er allerede installert:"
 
 msgid "Game/Install Partition"
-msgstr ""
+msgstr "Spill/installer partisjon"
 
 msgid "Gamename [GAMEID]"
 msgstr "Spillnavn [SPILLID]"
@@ -769,7 +769,7 @@ msgid "Games"
 msgstr "Spill"
 
 msgid "Generating GXGameCategories.xml"
-msgstr ""
+msgstr "Genererer GXGameCategories.xml"
 
 msgid "Genre:"
 msgstr "Sjanger:"
@@ -784,7 +784,7 @@ msgid "HOME Menu"
 msgstr "HOME Meny"
 
 msgid "Hard Drive Settings"
-msgstr ""
+msgstr "Harddisk innstillinger"
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Apps sti"
@@ -805,13 +805,13 @@ msgid "How to Shutdown?"
 msgstr "Hvordan skru av?"
 
 msgid "Import Categories"
-msgstr ""
+msgstr "Importer kategorier"
 
 msgid "Import operation successfully completed."
-msgstr ""
+msgstr "Vellykket importering."
 
 msgid "Importing categories"
-msgstr ""
+msgstr "Importerer kategorier"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -834,13 +834,13 @@ msgid "Install"
 msgstr "Installér"
 
 msgid "Install Directories"
-msgstr ""
+msgstr "Installer mapper"
 
 msgid "Install Error!"
 msgstr "Installasjonsfeil!"
 
 msgid "Install Partitions"
-msgstr ""
+msgstr "Installer partisjoner"
 
 msgid "Install a game"
 msgstr "Installér et spill"
@@ -906,7 +906,7 @@ msgid "Like SysMenu"
 msgstr "Lik Systemmeny"
 
 msgid "List on Gamelaunch"
-msgstr ""
+msgstr "Liste ved starting av spill"
 
 msgid "Load"
 msgstr "Start"
@@ -964,13 +964,13 @@ msgid "Messageboard Update"
 msgstr "Messageboard oppdatering"
 
 msgid "Motion+ Video"
-msgstr ""
+msgstr "Motion+ film"
 
 msgid "Mount DVD drive"
 msgstr "Last DVD stasjon"
 
 msgid "Multiple Partitions"
-msgstr ""
+msgstr "Flere partisjoner"
 
 msgid "Music Loop Mode"
 msgstr "Musikk loop modus"
@@ -1009,7 +1009,7 @@ msgid "No WBFS or FAT/NTFS/EXT partition found"
 msgstr "Ingen WBFS eller FAT/NTFS/EXT partisjon funnet"
 
 msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
-msgstr ""
+msgstr "Ingen Wiinnertag.xml funnet. Vil du opprette en eksempelfil?"
 
 msgid "No cheats were selected"
 msgstr "Ingen juksefiler valgt"
@@ -1030,7 +1030,7 @@ msgid "No themes found on the site."
 msgstr "Ingen temaer funnet på websiden."
 
 msgid "No themes found."
-msgstr ""
+msgstr "Ingen temaer funnet."
 
 msgid "None"
 msgstr "Ingen"
@@ -1096,7 +1096,7 @@ msgid "Only for Install"
 msgstr "Kun for installering"
 
 msgid "Original Discarts"
-msgstr ""
+msgstr "Orig. platebilde"
 
 msgid "Original/Customs"
 msgstr "Original/Custom"
@@ -1123,7 +1123,7 @@ msgid "Path Changed"
 msgstr "Sti endret"
 
 msgid "Permission denied."
-msgstr ""
+msgstr "Ingen tilgang."
 
 msgid "Pick from a list"
 msgstr "Velg fra liste"
@@ -1186,10 +1186,10 @@ msgid "Rename Game on WBFS"
 msgstr "Gi nytt navn til spill på WBFS"
 
 msgid "Rename category"
-msgstr ""
+msgstr "Gi nytt navn til kategori"
 
 msgid "Reset"
-msgstr ""
+msgstr "Tilbakestill"
 
 msgid "Reset BG Music"
 msgstr "Tilbakestill BG musikk"
@@ -1234,7 +1234,7 @@ msgid "Save Game List to"
 msgstr "Lagre spilliste som"
 
 msgid "Save List"
-msgstr ""
+msgstr "Lagre liste"
 
 msgid "Saved"
 msgstr "Lagret"
@@ -1255,7 +1255,7 @@ msgid "Select a DOL from Game"
 msgstr "Velg en DOL fra spill"
 
 msgid "Select game categories"
-msgstr ""
+msgstr "Velg spillkategorier"
 
 msgid "Sept"
 msgstr "Sep"
@@ -1267,7 +1267,7 @@ msgid "Settings"
 msgstr "Innstillinger"
 
 msgid "Show Categories"
-msgstr ""
+msgstr "Vis kategorier"
 
 msgid "Show Free Space"
 msgstr "Vis ledig plass"
@@ -1285,7 +1285,7 @@ msgid "Sort alphabetically"
 msgstr "Sortér alfabetisk"
 
 msgid "Sort by number of players"
-msgstr ""
+msgstr "Sortér etter antall spillere"
 
 msgid "Sort by rank"
 msgstr "Sortér etter rangering"
@@ -1318,7 +1318,7 @@ msgid "Split each 4GB"
 msgstr "Splitt ved 4GB"
 
 msgid "Standby"
-msgstr ""
+msgstr "Hvilemodus"
 
 msgid "Success"
 msgstr "Suksess"
@@ -1345,10 +1345,10 @@ msgid "Successfully installed:"
 msgstr "Vellykket installering:"
 
 msgid "Sync FAT32 FS Info"
-msgstr ""
+msgstr "Synkroniser FAT32 FS info"
 
 msgid "Synchronizing..."
-msgstr ""
+msgstr "Synkroniserer..."
 
 msgid "System Default"
 msgstr "System Standard"
@@ -1366,7 +1366,7 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Valgt mappe finnes ikke. Vil du opprette den?"
 
 msgid "The game installation is disabled under this IOS because of instability in usb write."
-msgstr ""
+msgstr "Spillinstallasjon er deaktivert under dette IOS pga ustabilitet ved skriving til USB."
 
 msgid "The wad file was installed"
 msgstr "WAD filen ble installert"
@@ -1379,7 +1379,7 @@ msgid "Theme Downloader"
 msgstr "Tema Nedlaster"
 
 msgid "Theme Menu"
-msgstr ""
+msgstr "Tema meny"
 
 msgid "Theme Path"
 msgstr "Tema sti"
@@ -1418,10 +1418,10 @@ msgid "USB Loader GX is protected"
 msgstr "USB Loader GX er beskyttet"
 
 msgid "USB Port"
-msgstr ""
+msgstr "USB port"
 
 msgid "USB Port changing is only supported on Hermes cIOS."
-msgstr ""
+msgstr "Endring av USB port er kun støttet under Hermes cIOS."
 
 msgid "Uninstall Game"
 msgstr "Avinstallér spill"
@@ -1430,7 +1430,7 @@ msgid "Uninstall Menu"
 msgstr "Avinstallér Meny"
 
 msgid "Uninstall all"
-msgstr ""
+msgstr "Avistallér alle"
 
 msgid "Uninstalling wad"
 msgstr "Avinstallerer WAD"
@@ -1478,13 +1478,13 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Opplastet ZIP fil installert i homebrew mappen."
 
 msgid "Use global"
-msgstr ""
+msgstr "Bruk global"
 
 msgid "VIDTV Patch"
 msgstr ""
 
 msgid "Version:"
-msgstr ""
+msgstr "Versjon:"
 
 #, c-format
 msgid "Version: %s"
@@ -1494,7 +1494,7 @@ msgid "Video Mode"
 msgstr "Video modus"
 
 msgid "WDM Files Path"
-msgstr ""
+msgstr "WDM sti"
 
 msgid "WIP Patches Path"
 msgstr "WIP patches sti"
@@ -1503,7 +1503,7 @@ msgid "Waiting..."
 msgstr "Venter..."
 
 msgid "Warning"
-msgstr ""
+msgstr "Advarsel"
 
 msgid "Warning:"
 msgstr "Advarsel:"
@@ -1512,13 +1512,13 @@ msgid "What do you want to update?"
 msgstr "Hva vil du oppdatere?"
 
 msgid "What should be deleted for this game title:"
-msgstr ""
+msgstr "Hva skal slettes for denne spilltittel:"
 
 msgid "WiFi Features"
 msgstr "WiFi egenskaper"
 
 msgid "Widescreen Factor"
-msgstr ""
+msgstr "Widescreen faktor"
 
 msgid "Widescreen Fix"
 msgstr "Widescreen fiks"
@@ -1545,13 +1545,13 @@ msgid "Wiinnertag"
 msgstr ""
 
 msgid "Wiinnertag Path"
-msgstr ""
+msgstr "Wiinnertag sti"
 
 msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
-msgstr ""
+msgstr "Wiinnertag krever at du aktiverer automatisk nettverkstilkobling ved oppstart. Vil du aktivere denne nå?"
 
 msgid "Writing GXGameCategories.xml"
-msgstr ""
+msgstr "Oppretter GXGameCategories.xml"
 
 msgid "Wrong Password"
 msgstr "Feil passord"
@@ -1560,13 +1560,13 @@ msgid "Yes"
 msgstr "Ja"
 
 msgid "You are currently using IOS"
-msgstr ""
+msgstr "Du bruker IOS"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Du prøver å velge en FAT32/NTFS/EXT partisjon med cIOS 249 rev < 18. Dette er ikke støttet. Fortsett på eget ansvar."
 
 msgid "You cannot delete this category."
-msgstr ""
+msgstr "Du kan ikke slette denne kategori."
 
 msgid "You need to select or format a partition"
 msgstr "Du må velge en partisjon"
@@ -1624,297 +1624,3 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
-
-#~ msgid "Install directories"
-#~ msgstr "Installasjonsmapper"
-
-#~ msgid "Install partitions"
-#~ msgstr "Installasjonspartisjoner"
-
-#~ msgid " Wad Saved as:"
-#~ msgstr " WAD lagret som:"
-
-#~ msgid "Delete ?"
-#~ msgstr "Slett ?"
-
-#~ msgid "Keep"
-#~ msgstr "Behold"
-
-#~ msgid "Not a WAD file."
-#~ msgstr "Ikke en WAD fil."
-
-#~ msgid "Uninstall"
-#~ msgstr "Avinstallér"
-
-#~ msgid "Author:"
-#~ msgstr "Forfatter:"
-
-#~ msgid "Do you want to load this theme?"
-#~ msgstr "Vil du laste dette tema?"
-
-#~ msgid "Loading default theme."
-#~ msgstr "Laster standard tema."
-
-#~ msgid "Theme path is changed."
-#~ msgstr "Tema sti er endret."
-
-#~ msgid "0 (Locked and Unlocked Games)"
-#~ msgstr "0 (Låste og ulåste spill)"
-
-#~ msgid "1 (Unlocked Games Only)"
-#~ msgstr "1 (Kun ulåste spill)"
-
-#~ msgid "BETA revisions"
-#~ msgstr "BETA revisjoner"
-
-#~ msgid "Disc Images"
-#~ msgstr "Plate bilder"
-
-#~ msgid "Do you really want to delete:"
-#~ msgstr "Er du sikker på at du vil slette:"
-
-#~ msgid "Do you want to use the alternate DOL that is known to be correct?"
-#~ msgstr "Vil du bruke alt DOL filen som er kjent for å være riktig?"
-
-#~ msgid "Download Boxart image?"
-#~ msgstr "Last ned cover bilde?"
-
-#~ msgid "Download Discart image?"
-#~ msgstr "Last ned plate bilde?"
-
-#~ msgid "Downloading covers"
-#~ msgstr "Laster ned cover"
-
-#~ msgid "Downloading file"
-#~ msgstr "Laster ned fil"
-
-#~ msgid "Enabling this option on a FAT partition might slow the startup of the loader."
-#~ msgstr "Aktivering av dette valget på en FAT partisjon kan føre til treg oppstart."
-
-#~ msgid "GamesLevel"
-#~ msgstr "SpillNivå"
-
-#~ msgid "Missing files"
-#~ msgstr "Manglende filer"
-
-#~ msgid "Only Customs"
-#~ msgstr "Kun custom"
-
-#~ msgid "Only Original"
-#~ msgstr "Kun original"
-
-#~ msgid "Trying custom Discarts"
-#~ msgstr "Prøver custom platebilder"
-
-#~ msgid "Trying original Discarts"
-#~ msgstr "Prøver originale platebilder"
-
-#~ msgid "Unlock console to use this option."
-#~ msgstr "Lås opp konsollen for å bruke denne innstillingen."
-
-#~ msgid "files not found on the server!"
-#~ msgstr "filer ikke funnet på serveren!"
-
-#~ msgid "Full Shutdown"
-#~ msgstr "Skru helt av"
-
-#~ msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-#~ msgstr "Hvis du ikke har WiFi, klikk 1 for å få en URL til din WiiTDB.zip"
-
-#~ msgid "Paste it into your browser to get your WiiTDB.zip."
-#~ msgstr "Lim den inn i nettleseren din for å få WiiTDB.zip."
-
-#~ msgid "Shutdown to Idle"
-#~ msgstr "Skru av"
-
-#~ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-#~ msgstr "Din URL ble lagret i %sWiiTDB_URL.txt."
-
-#~ msgid "Can't create file"
-#~ msgstr "Kan ikke opprette fil"
-
-#~ msgid "Download failed."
-#~ msgstr "Nedlasting feilet."
-
-#~ msgid "Download request failed."
-#~ msgstr "Nedlast spørring feilet."
-
-#~ msgid "Downloading Page List:"
-#~ msgstr "Laster ned side liste:"
-
-#~ msgid "Theme Download Path"
-#~ msgstr "Tema nedlasting sti"
-
-#~ msgid "Transfer failed."
-#~ msgstr "Overføring feilet."
-
-#~ msgid "Unsupported format, try to extract manually."
-#~ msgstr "Format ikke støttet, prøv å pakk ut manuelt."
-
-#~ msgid "and translaters for language files updates"
-#~ msgstr "og oversettere for språkfiler"
-
-#~ msgid "Insert an SD-Card to save."
-#~ msgstr "Sett inn et SD-kort for å lagre."
-
-#~ msgid "Insert an SD-Card to use this option."
-#~ msgstr "Sett inn et SD-kort for å bruke innstillingen."
-
-#~ msgid "No SD-Card inserted!"
-#~ msgstr "Intet SD-kort satt i!"
-
-#~ msgid "Waiting for USB Device"
-#~ msgstr "Venter på USB enhet"
-
-#~ msgid "Back to Loader"
-#~ msgstr "HBC/Loader"
-
-#~ msgid "An Error occured"
-#~ msgstr "En feil oppstod"
-
-#~ msgid "Checking for Updates"
-#~ msgstr "Søker etter oppdateringer"
-
-#~ msgid "Downloading"
-#~ msgstr "Laster ned"
-
-#~ msgid "The wad file was installed.  But It could not be deleted from the SD card."
-#~ msgstr "WAD filen ble installert.  Men ble ikke slettet fra SD kort."
-
-#~ msgid "The wad installation failed with error %ld"
-#~ msgstr "WAD installasjonen feilet med feilkode %ld"
-
-#~ msgid "Unable to open the wad that was just downloaded (%s)."
-#~ msgstr "Kan ikke åpne nedlastet WAD fil (%s)."
-
-#~ msgid "Update to"
-#~ msgstr "Oppdater til"
-
-#~ msgid "Updating"
-#~ msgstr "Oppdaterer"
-
-#~ msgid "Updating Language Files..."
-#~ msgstr "Oppdaterer språkfiler..."
-
-#~ msgid "Updating WiiTDB.zip"
-#~ msgstr "Oppdaterer WiiTDB.zip"
-
-#~ msgid "%s : %s May not boot correctly if your System Menu is not up to date."
-#~ msgstr "%s : %s vil kanskje ikke starte riktig hvis System Menyen ikke er oppdatert."
-
-#~ msgid "Back to Wii Menu"
-#~ msgstr "Wii meny"
-
-#~ msgid "Channels"
-#~ msgstr "Kanaler"
-
-#~ msgid "Checking existing artwork"
-#~ msgstr "Sjekker eksisterende bilder"
-
-#~ msgid "Confirm"
-#~ msgstr "Bekreft"
-
-#~ msgid "Could not find a WBFS partition."
-#~ msgstr "Kan ikke finne en WBFS partisjon."
-
-#~ msgid "Could not open WBFS partition"
-#~ msgstr "Kan ikke åpne WBFS partisjon"
-
-#~ msgid "Could not read the disc."
-#~ msgstr "Kan ikke lese plate."
-
-#~ msgid "Could not set USB."
-#~ msgstr "Kan ikke velge USB."
-
-#~ msgid "Cover Path Changed"
-#~ msgstr "Cover sti endret"
-
-#~ msgid "DOL path changed"
-#~ msgstr "DOL sti endret"
-
-#~ msgid "Disc Path Changed"
-#~ msgstr "Plate sti endret"
-
-#~ msgid "Display favorites"
-#~ msgstr "Vis favoritter"
-
-#~ msgid "Do you want to retry for 30 secs?"
-#~ msgstr "Vil du fortsette å prøve i 30 sekunder?"
-
-#~ msgid "Force"
-#~ msgstr "Tving"
-
-#~ msgid "GCT Cheatcodes Path changed"
-#~ msgstr "GCT Juksekode sti endret"
-
-#~ msgid "Homebrew Appspath changed"
-#~ msgstr "Homebrew Apps sti endret"
-
-#~ msgid "Insert an SD-Card to download images."
-#~ msgstr "Sett inn et SD-kort for å laste ned bilder."
-
-#~ msgid "Most likely it has dimensions that are not evenly divisible by 4."
-#~ msgstr "Sannsynligvis har bildet dimensjoner som ikke kan deles med 4."
-
-#~ msgid "Network init error"
-#~ msgstr "Nettverk init feil"
-
-#~ msgid "No .dol or .elf files found."
-#~ msgstr "Ingen .dol eller .elf filer funnet."
-
-#~ msgid "No Favorites"
-#~ msgstr "Ingen favoritter"
-
-#~ msgid "No USB Device"
-#~ msgstr "Ingen USB enhet"
-
-#~ msgid "No USB Device found."
-#~ msgstr "Ingen USB enhet funnet."
-
-#~ msgid "Normal Covers"
-#~ msgstr "Normale cover"
-
-#~ msgid "Not Found"
-#~ msgstr "Ikke funnet"
-
-#~ msgid "Not a DOL/ELF file."
-#~ msgstr "Ikke en DOL/ELF fil."
-
-#~ msgid "Save Failed"
-#~ msgstr "Lagring feilet"
-
-#~ msgid "Selected DOL"
-#~ msgstr "Valgt DOL fil"
-
-#~ msgid "Standard"
-#~ msgstr "Standard"
-
-#~ msgid "TXT Cheatcodes Path changed"
-#~ msgstr "TXTjuksekode sti endret"
-
-#~ msgid "Theme Download Path changed"
-#~ msgstr "Tema nedlasting sti endret"
-
-#~ msgid "Theme Path Changed"
-#~ msgstr "Tema sti endret"
-
-#~ msgid "Update Path changed."
-#~ msgstr "Oppdatering sti endret."
-
-#~ msgid "WiiTDB Path changed."
-#~ msgstr "WiiTDB sti endret."
-
-#~ msgid "You are about to delete "
-#~ msgstr "Du er i ferd med å slette "
-
-#~ msgid "You are choosing to display favorites and you do not have any selected."
-#~ msgstr "Du prøver å vise favoritter når du ikke har noen valgt."
-
-#~ msgid "You have attempted to load a bad image"
-#~ msgstr "Du har forsøkt å vise et korrupt bilde"
-
-#~ msgid "does not exist!  You Messed something up, Idiot."
-#~ msgstr "finnes ikke!  Du har gjort noe galt."
-
-#~ msgid "file left"
-#~ msgstr "fil gjenstår"
