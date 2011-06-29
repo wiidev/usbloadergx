@@ -46,7 +46,7 @@ void Disc_SetLowMem(void)
     *(vu32 *) 0xCD00643C = 0x00000000; // 32Mhz on Bus
 
     int iosVer = IOS_GetVersion();
-    if(iosVer != 222 && iosVer != 223 && iosVer != 224 && IOS_GetRevision() >= 18)
+    if(iosVer != 222 && iosVer != 223 && iosVer != 224 && iosVer != 225 && IOS_GetRevision() >= 18)
         *GameID_Address = 0x80000000; // Game ID Address
 
     /* Copy disc ID */

@@ -43,8 +43,14 @@ EOF
 	<app version="1">
 		<name> USB Loader GX</name>
 		<coder>USB Loader GX Team</coder>
-		<version>2.1 r$rev_new</version>
+		<version>2.2 r$rev_new</version>
 		<release_date>$rev_date</release_date>
+        <!--   // remove this line to enable arguments
+        <arguments>
+                <arg>--ios=250</arg>
+                <arg>--usbport=0</arg>
+        </arguments>
+        -->  // remove this line to enable arguments
 		<no_ios_reload/>
 		<short_description>Loads games from USB-devices</short_description>
 		<long_description>USB Loader GX is a libwiigui based USB iso loader with a wii-like GUI. You can install games to your HDDs and boot them with shorter loading times.
@@ -54,9 +60,12 @@ Features are automatic widescreen detection, coverdownload, parental control, th
 Credits:
 Coding: Dimok, nIxx, giantpune, ardi, Hungyip84, DrayX7, Lustar, r-win, WiiShizzza
 Artworks: cyrex, NeoRame
+Validation: Cyan and many others
+Issue management: Cyan / Dimok
 WiiTDB / Hosting covers: Lustar
 Hosting updates files: CorneliousJD
 USBLoader sources: Waninkoko, Kwiirk, Hermes
+cIOS maintenance: davebaol, xabby666, XFlak and Rodries
 Languages files updates: Kinyo and translaters
 Hosting themes: Deak Phreak
 

@@ -32,7 +32,7 @@ static iosinfo_t *currentIOSInfo = NULL;
  */
 bool IosLoader::IsHermesIOS(s32 ios)
 {
-    return (ios == 222 || ios == 223 || ios == 224 || ios == 202);
+    return (ios == 222 || ios == 223 || ios == 224 || ios == 225 || ios == 202);
 }
 
 /*
