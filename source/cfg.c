@@ -6,72 +6,67 @@
 #include <ctype.h>
 #include <ogcsys.h>
 
-#include "cfg.h"
-
-char update_path[150];
-
-static char *cfg_name, *cfg_val;
-
-char* strcopy(char *dest, char *src, int size)
+static char *trimcopy(char *src, char *dest, int size)
 {
-	strncpy(dest,src,size);
-	dest[size-1] = 0;
-	return dest;
-}
-
-char* trimcopy(char *dest, char *src, int size)
-{
-	int len;
+	int i = 0;
 	while (*src == ' ') src++;
-	len = strlen(src);
-	// trim trailing " \r\n"
-	while (len > 0 && strchr(" \r\n", src[len-1])) len--;
-	if (len >= size) len = size-1;
-	strncpy(dest, src, len);
-	dest[len] = 0;
+
+	while (*src != 0 && *src != '\n' && *src != '\r' && i < size-1)
+	{
+		dest[i] = *src;
+		i++;
+		src++;
+	}
+	dest[i] = 0;
+	i--;
+
+	while(i > 0 && dest[i] == ' ')
+	{
+		dest[i] = 0;
+		i--;
+	}
+
 	return dest;
 }
 
-void cfg_parseline(char *line, void (*set_func)(char*, char*))
+static char *cfg_parseline(char *line)
 {
-	// split name = value
-	char tmp[200], name[100], val[100];
-	strcopy(tmp, line, sizeof(tmp));
+	char tmp[300], name[200];
+	snprintf(tmp, sizeof(tmp), line);
 	char *eq = strchr(tmp, '=');
-	if (!eq) return;
+	if (!eq)
+		return NULL;
+
 	*eq = 0;
-	trimcopy(name, tmp, sizeof(name));
-	trimcopy(val, eq+1, sizeof(val));
-	//printf("CFG: %s = %s\n", name, val);
-	set_func(name, val);
+
+	trimcopy(tmp, name, sizeof(name));
+
+	if(strcmp(name, "update_path") == 0)
+		return eq+1;
+
+	return NULL;
 }
 
-
-bool cfg_parsefile(char *fname, void (*set_func)(char*, char*))
+bool cfg_parsefile(char *fname, int size)
 {
-	FILE *f;
-	char line[200];
-
-	//printf("opening(%s)\n", fname);
-	f = fopen(fname, "r");
-	if (!f) {
-		//printf("error opening(%s)\n", fname);
+	FILE *f = fopen(fname, "r");
+	if (!f)
 		return false;
-	}
-	while (fgets(line, sizeof(line), f)) {
-		// lines starting with # are comments
+
+	char line[300];
+
+	while (fgets(line, sizeof(line), f))
+	{
 		if (line[0] == '#') continue;
-		cfg_parseline(line, set_func);
+
+		char * value = cfg_parseline(line);
+		if(value)
+		{
+			trimcopy(value, fname, size);
+			break;
+		}
 	}
 	fclose(f);
 	return true;
 }
 
-void cfg_set(char *name, char *val)
-{
-    cfg_name = name;
-    cfg_val = val;
-	if (strcmp(name, "update_path") == 0) {
-		strcopy(update_path, val, sizeof(update_path));
-	}
-}

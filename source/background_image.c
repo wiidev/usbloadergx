@@ -18,7 +18,6 @@ u8 * GetImageData()
     else
         ctx = PNGU_SelectImageFromBuffer(background_png);
 
-
 	if (!ctx)
 		return NULL;
 

@@ -39,6 +39,78 @@
 
 void __exception_setreload(int t);
 
+static int GetXMLArguments(const char *path, struct __argv *args)
+{
+	char xmlpath[200];
+	snprintf(xmlpath, sizeof(xmlpath), "%s", path);
+
+	char *ptr = strrchr(xmlpath, '/');
+	if(ptr)
+		ptr[1] = '\0';
+	else
+		return -1; // only take full path
+
+	strncat(xmlpath, "meta.xml", sizeof(xmlpath));
+
+	FILE *fp = fopen(xmlpath, "rb");
+	if(!fp)
+		return -1;
+
+	fseek(fp, 0, SEEK_END);
+	int size = ftell(fp);
+	rewind(fp);
+
+	char *fileBuf = (char *) malloc(size+1);
+	if(!fileBuf)
+	{
+		fclose(fp);
+		return -1;
+	}
+
+	fread(fileBuf, 1, size, fp);
+	fclose(fp);
+
+	fileBuf[size] = '\0';
+
+	const int max_len = 1024;
+	char *entry = (char *) malloc(max_len);
+	ptr = fileBuf;
+
+	while(ptr)
+	{
+		char *comment = strstr(ptr, "<!--");
+		ptr = strstr(ptr, "<arg>");
+		if(!ptr)
+			break;
+
+		if(comment && comment < ptr)
+		{
+			ptr = strstr(ptr, "-->");
+			continue;
+		}
+
+		ptr += strlen("<arg>");
+		int len;
+		for(len = 0; *ptr != '\0' && !(ptr[0] == '<' && ptr[1]  == '/') && len < max_len-1; ptr++, len++)
+			entry[len] = *ptr;
+
+		entry[len] = '\0';
+
+		char *tmp = (char *) realloc(args->commandLine, args->length + len + 1);
+		if(!tmp)
+			break; //out of memory, take what we got until now
+
+		args->commandLine = tmp;
+		strcpy(args->commandLine + args->length - 1, entry);
+		args->length += len + 1;
+	}
+
+	free(entry);
+	free(fileBuf);
+
+	return 0;
+}
+
 static FILE * open_file(const char * dev, char * filepath)
 {
     sprintf(filepath, "%s:/apps/usbloader_gx/boot.dol", dev);
@@ -58,21 +130,21 @@ static FILE * open_file(const char * dev, char * filepath)
     return exeFile;
 }
 
-static bool FindConfigPath(const char * device, char *cfgpath)
+static bool FindConfigPath(const char * device, char *cfgpath, int maxsize)
 {
     bool result = false;
-	sprintf(cfgpath, "%s:/config/GXGlobal.cfg", device);
-	result = cfg_parsefile(cfgpath, &cfg_set);
+	snprintf(cfgpath, maxsize, "%s:/config/GXGlobal.cfg", device);
+	result = cfg_parsefile(cfgpath, maxsize);
 
 	if(!result)
 	{
-        sprintf(cfgpath, "%s:/apps/usbloader_gx/GXGlobal.cfg", device);
-        result = cfg_parsefile(cfgpath, &cfg_set);
+        snprintf(cfgpath, maxsize, "%s:/apps/usbloader_gx/GXGlobal.cfg", device);
+        result = cfg_parsefile(cfgpath, maxsize);
 	}
 	if(!result)
 	{
-        sprintf(cfgpath, "%s:/apps/usbloadergx/GXGlobal.cfg", device);
-        result = cfg_parsefile(cfgpath, &cfg_set);
+        snprintf(cfgpath, maxsize, "%s:/apps/usbloadergx/GXGlobal.cfg", device);
+        result = cfg_parsefile(cfgpath, maxsize);
 	}
 
 	return result;
@@ -99,7 +171,7 @@ int main(int argc, char **argv)
 	// try SD Card First
 	SDCard_Init();
 
-	if(FindConfigPath(DeviceName[SD], filepath))
+	if(FindConfigPath(DeviceName[SD], filepath, sizeof(filepath)))
 	{
 	    strcat(filepath, "boot.dol");
         exeFile = fopen(filepath, "rb");
@@ -113,7 +185,7 @@ int main(int argc, char **argv)
 		int dev;
 		for(dev = USB1; dev < MAXDEVICES; ++dev)
 		{
-            if(FindConfigPath(DeviceName[dev], filepath))
+            if(FindConfigPath(DeviceName[dev], filepath, sizeof(filepath)))
             {
                 strcat(filepath, "boot.dol");
                 exeFile = fopen(filepath, "rb");
@@ -159,6 +231,7 @@ int main(int argc, char **argv)
 	args.commandLine = (char*)malloc(args.length);
 	if (!args.commandLine) SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 	strcpy(args.commandLine, filepath);
+	GetXMLArguments(filepath, &args);
 	args.commandLine[args.length - 1] = '\0';
 	args.argc = 1;
 	args.argv = &args.commandLine;
@@ -188,8 +261,9 @@ int main(int argc, char **argv)
 	StopGX();
 	free(imgdata);
 
-    //! Reset HBC stub so we can leave correct from usb loader
+    //! Reset HBC stub so we can leave correct from USB Loader to System Menu
     memset((char *) 0x80001804, 0, 8);
+    DCFlushRange((char *) 0x80001804, 8);
 
 	if (exeEntryPointAddress == 0)
 		SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);

@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <fat.h>
 #include <ntfs.h>
+#include <ext2.h>
 #include <sdcard/wiisd_io.h>
 #include <unistd.h>
 #include <time.h>
@@ -33,6 +34,7 @@ typedef struct _MASTER_BOOT_RECORD {
 } __attribute__((__packed__)) MASTER_BOOT_RECORD;
 
 
+#define PARTITION_TYPE_LINUX	0x83
 #define le32(i) (((((u32) i) & 0xFF) << 24) | ((((u32) i) & 0xFF00) << 8) | \
                 ((((u32) i) & 0xFF0000) >> 8) | ((((u32) i) & 0xFF000000) >> 24))
 
@@ -75,6 +77,10 @@ int USBDevice_Init()
             {
                 ntfsMount(DeviceName[USB1+i], &__io_usbstorage, le32(mbr.partitions[i].lba_start), CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER | NTFS_IGNORE_CASE);
             }
+        }
+        else if(mbr.partitions[i].type == PARTITION_TYPE_LINUX)
+        {
+			ext2Mount(DeviceName[USB1+i], &__io_usbstorage, le32(mbr.partitions[i].lba_start), CACHE, SECTORS, EXT2_FLAG_DEFAULT);
         }
     }
 
