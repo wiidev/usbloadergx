@@ -125,6 +125,7 @@ class CSettings
         short GameListOffset;
         short sneekVideoPatch;
         std::vector<u32> EnabledCategories;
+        u8 EntryIOS;
     protected:
         bool ValidVersion(FILE * file);
         bool SetSetting(char *name, char *value);

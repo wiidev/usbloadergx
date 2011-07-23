@@ -63,15 +63,23 @@ wchar_t* charToWideChar(const char* strChar)
 /**
  * Default constructor for the FreeTypeGX class for WiiXplorer.
  */
-FreeTypeGX::FreeTypeGX(const uint8_t* fontBuffer, FT_Long bufferSize)
+FreeTypeGX::FreeTypeGX(const uint8_t* fontBuffer, FT_Long bufferSize, bool lastFace)
 {
+	int faceIndex = 0;
     ftPointSize = 0;
 
     FT_Init_FreeType(&ftLibrary);
-    FT_New_Memory_Face(ftLibrary, (FT_Byte *) fontBuffer, bufferSize, 0, &ftFace);
+    if(lastFace)
+    {
+		FT_New_Memory_Face(ftLibrary, (FT_Byte *)fontBuffer, bufferSize, -1, &ftFace);
+		faceIndex = ftFace->num_faces - 1; // Use the last face
+		FT_Done_Face(ftFace);
+		ftFace = NULL;
+    }
+    FT_New_Memory_Face(ftLibrary, (FT_Byte *) fontBuffer, bufferSize, faceIndex, &ftFace);
 
     setVertexFormat(GX_VTXFMT1);
-    ftKerningEnabled = false;
+    ftKerningEnabled = false;//FT_HAS_KERNING(ftFace);
 }
 
 /**

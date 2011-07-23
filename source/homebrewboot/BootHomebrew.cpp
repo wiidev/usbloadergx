@@ -9,17 +9,24 @@
 #include <vector>
 #include <string>
 #include "Controls/DeviceHandler.hpp"
-#include "../lstub.h"
-#include "../sys.h"
-#include "../gecko.h"
+#include "settings/CSettings.h"
+#include "lstub.h"
+#include "sys.h"
+#include "gecko.h"
 
-#include "dolloader.h"
+#define EXECUTE_ADDR	((u8 *) 0x92000000)
+#define BOOTER_ADDR		((u8 *) 0x93000000)
+#define ARGS_ADDR		((u8 *) 0x93200000)
 
-static u8 *homebrewbuffer = (u8 *) 0x92000000;
+extern const u8 app_booter_bin[];
+extern const u32 app_booter_bin_size;
+
+typedef void (*entrypoint) (void);
+extern "C" { void __exception_closeall(); }
+
+static u8 *homebrewbuffer = EXECUTE_ADDR;
 static u32 homebrewsize = 0;
 static std::vector<std::string> Arguments;
-
-extern const u8 app_booter_dol[];
 
 void AddBootArgument(const char * argv)
 {
@@ -37,7 +44,7 @@ int CopyHomebrewMemory(u8 *temp, u32 pos, u32 len)
 
 void FreeHomebrewBuffer()
 {
-    homebrewbuffer = (u8 *) 0x92000000;
+    homebrewbuffer = EXECUTE_ADDR;
     homebrewsize = 0;
 
     Arguments.clear();
@@ -91,18 +98,24 @@ static int RunAppbooter()
 
     ExitApp();
 
+	if(Settings.EntryIOS != IOS_GetVersion())
+    	IOS_ReloadIOS(Settings.EntryIOS);
+
     struct __argv args;
     SetupARGV(&args);
 
     u32 cpu_isr;
 
-    entrypoint entry = (entrypoint) load_dol((void*) app_booter_dol, &args);
+	memcpy(BOOTER_ADDR, app_booter_bin, app_booter_bin_size);
+	DCFlushRange(BOOTER_ADDR, app_booter_bin_size);
 
-    if (!entry)
-    {
-        FreeHomebrewBuffer();
-        return -1;
-    }
+    entrypoint entry = (entrypoint) BOOTER_ADDR;
+
+	if (args.argvMagic == ARGV_MAGIC)
+	{
+		memmove(ARGS_ADDR, &args, sizeof(args));
+		DCFlushRange(ARGS_ADDR, sizeof(args));
+	}
 
     u64 currentStub = getStubDest();
     loadStub();

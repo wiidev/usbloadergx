@@ -5,44 +5,6 @@
 #include "utils/uncompress.h"
 #include "OpeningBNR.hpp"
 
-typedef struct _IMD5Header
-{
-    u32 fcc;
-    u32 filesize;
-    u8 zeroes[8];
-    u8 crypto[16];
-} __attribute__((packed)) IMD5Header;
-
-typedef struct _U8Header
-{
-    u32 fcc;
-    u32 rootNodeOffset;
-    u32 headerSize;
-    u32 dataOffset;
-    u8 zeroes[16];
-} __attribute__((packed)) U8Header;
-
-typedef struct _U8Entry
-{
-    struct
-    {
-        u32 fileType :8;
-        u32 nameOffset :24;
-    };
-    u32 fileOffset;
-    union
-    {
-        u32 fileLength;
-        u32 numEntries;
-    };
-} __attribute__( ( packed ) ) U8Entry;
-
-
-static inline const char * u8Filename(const U8Entry *fst, int i)
-{
-    return (char *) (fst + fst[0].numEntries) + fst[i].nameOffset;
-}
-
 BNRInstance * BNRInstance::instance = NULL;
 
 OpeningBNR::OpeningBNR()

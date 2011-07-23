@@ -312,7 +312,7 @@ void Text::Draw()
     GXColor c = color;
     c.a = this->GetAlpha();
 
-    int newSize = (int) (size * GetScale() * Settings.FontScaleFactor);
+    int newSize = (int) (size * GetScale());
 
     if (newSize != currentSize)
     {

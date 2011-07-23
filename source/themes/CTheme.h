@@ -24,6 +24,8 @@ class Theme
         //!Enable tooltips: special case treaded because it is called every frame
         static bool ShowTooltips;
     private:
+    	//!Load the original Wii System Menu font
+		static bool loadSystemFont(bool korean);
         //!Clear the font data and free the memory
         static void ClearFontData();
 };

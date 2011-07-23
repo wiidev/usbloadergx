@@ -282,9 +282,9 @@ int set_frag_list(u8 *id)
 		return ret;
 
 	// verify id matches
-	char discid[8];
+	char discid[32] ATTRIBUTE_ALIGN(32);
 	memset(discid, 0, sizeof(discid));
-	ret = WDVD_UnencryptedRead(discid, 8, 0);
+	ret = WDVD_UnencryptedRead(discid, 32, 0);
 	gprintf("Reading ID after setting fraglist: %s (expected: %s)\n", discid, id);
 	return (strncasecmp((char *) id, discid, 6) != 0) ? -3 : 0;
 }

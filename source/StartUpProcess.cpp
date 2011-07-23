@@ -158,6 +158,7 @@ int StartUpProcess::Run(int argc, char *argv[])
 
 int StartUpProcess::Execute()
 {
+	Settings.EntryIOS = IOS_GetVersion();
     SetTextf("Start up\n");
 
     if(IosLoader::LoadAppCios() < 0)

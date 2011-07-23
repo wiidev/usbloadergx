@@ -32,7 +32,7 @@ static GXColor presetColor = (GXColor) {255, 255, 255, 255};
 GuiText::GuiText(const char * t, int s, GXColor c)
 {
     text = NULL;
-    size = s;
+    size = (int) (s * Settings.FontScaleFactor);
     currentSize = size;
     color = c;
     alpha = c.a;
@@ -61,7 +61,7 @@ GuiText::GuiText(const char * t, int s, GXColor c)
 GuiText::GuiText(const wchar_t * t, int s, GXColor c)
 {
     text = NULL;
-    size = s;
+    size = (int) (s * Settings.FontScaleFactor);
     currentSize = size;
     color = c;
     alpha = c.a;
@@ -95,7 +95,7 @@ GuiText::GuiText(const wchar_t * t, int s, GXColor c)
 GuiText::GuiText(const char * t)
 {
     text = NULL;
-    size = presetSize;
+    size = (int) (presetSize * Settings.FontScaleFactor);
     currentSize = size;
     color = presetColor;
     alpha = presetColor.a;
@@ -531,7 +531,7 @@ void GuiText::Draw()
     GXColor c = color;
     c.a = GetAlpha();
 
-    int newSize = (int) (size * GetScale() * Settings.FontScaleFactor);
+    int newSize = (int) (size * GetScale());
 
     if (newSize != currentSize)
     {

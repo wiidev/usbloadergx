@@ -119,7 +119,7 @@ void CSettings::SetDefault()
     USBPort = 0;
     CacheTitles = ON;
     WSFactor = 0.8f; //actually should be 0.75 for real widescreen
-    FontScaleFactor = 1.0f;
+    FontScaleFactor = 0.8f; //it's a work around to not have to change ALL fonts now
     EnabledCategories.resize(1);
     EnabledCategories[0] = 0;
     Wiinnertag = OFF;

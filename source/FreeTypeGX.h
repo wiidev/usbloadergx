@@ -132,7 +132,7 @@ class FreeTypeGX
                 int16_t screenZ, GXColor color);
 
     public:
-        FreeTypeGX(const uint8_t* fontBuffer, FT_Long bufferSize);
+        FreeTypeGX(const uint8_t* fontBuffer, FT_Long bufferSize, bool lastFace = false);
         ~FreeTypeGX();
 
         void setVertexFormat(uint8_t vertexIndex);

@@ -29,13 +29,27 @@
 #include "CTheme.h"
 #include "GUI/gui.h"
 #include "settings/CSettings.h"
+#include "banner/OpeningBNR.hpp"
 #include "FileOperations/fileops.h"
 #include "menu/menus.h"
+#include "wad/nandtitle.h"
 #include "FreeTypeGX.h"
 
+typedef struct map_entry
+{
+	char name[8];
+	u8 hash[20];
+} __attribute__((packed)) map_entry_t;
+
+static const char contentMapPath[] ATTRIBUTE_ALIGN(32) = "/shared1/content.map";
+static const u8 WIIFONT_HASH[]		= {0x32, 0xb3, 0x39, 0xcb, 0xbb, 0x50, 0x7d, 0x50, 0x27, 0x79, 0x25, 0x9a, 0x78, 0x66, 0x99, 0x5d, 0x03, 0x0b, 0x1d, 0x88};
+static const u8 WIIFONT_HASH_KOR[]	= {0xb7, 0x15, 0x6d, 0xf0, 0xf4, 0xae, 0x07, 0x8f, 0xd1, 0x53, 0x58, 0x3e, 0x93, 0x6e, 0x07, 0xc0, 0x98, 0x77, 0x49, 0x0e};
+
 FreeTypeGX * fontSystem = NULL;
-static FT_Byte * MainFont = NULL;
-static u32 MainFontSize = 0;
+static FT_Byte * systemFont = NULL;
+static u32 systemFontSize = 0;
+static FT_Byte * customFont = NULL;
+static u32 customFontSize = 0;
 
 bool Theme::ShowTooltips = true;
 
@@ -149,13 +163,76 @@ bool Theme::Load(const char * theme_file_path)
     return result;
 }
 
+bool Theme::loadSystemFont(bool korean)
+{
+	u8 *contentMap = NULL;
+	u32 mapsize = 0;
+
+	NandTitle::LoadFileFromNand(contentMapPath, &contentMap, &mapsize);
+	if(!contentMap)
+		return false;
+
+	int fileCount = mapsize / sizeof(map_entry_t);
+
+	map_entry_t *mapEntryList = (map_entry_t *) contentMap;
+
+	for (int i = 0; i < fileCount; i++)
+	{
+		if (memcmp(mapEntryList[i].hash, korean ? WIIFONT_HASH_KOR : WIIFONT_HASH, 20) != 0)
+			continue;
+
+		// Name found, load it and unpack it
+		char font_filename[32] ATTRIBUTE_ALIGN(32);
+		snprintf(font_filename, sizeof(font_filename), "/shared1/%.8s.app", mapEntryList[i].name);
+
+		u8 *fontArchive = NULL;
+		u32 filesize = 0;
+
+		NandTitle::LoadFileFromNand(font_filename, &fontArchive, &filesize);
+		if(!fontArchive)
+			continue;
+
+		const U8Header *u8Archive = (U8Header *) fontArchive;
+		const U8Entry *fst = (const U8Entry *) (((const u8 *) u8Archive) + u8Archive->rootNodeOffset);
+
+		if(fst[0].numEntries < 1)
+		{
+			free(fontArchive);
+			continue;
+		}
+
+		if(systemFont)
+			delete [] systemFont;
+
+		systemFontSize = fst[1].fileLength;
+		systemFont = new (std::nothrow) FT_Byte[systemFontSize];
+		if(!systemFont)
+		{
+			free(fontArchive);
+			continue;
+		}
+
+		memcpy(systemFont, fontArchive + fst[1].fileOffset, systemFontSize);
+
+		free(fontArchive);
+		free(contentMap);
+		gprintf("Loaded Wii System Font: %s\n", u8Filename(fst, 1));
+		return true;
+	}
+
+	free(contentMap);
+
+	return false;
+}
+
 bool Theme::LoadFont(const char *path)
 {
     char FontPath[300];
     bool result = false;
     FILE *pfile = NULL;
 
-    ClearFontData();
+	delete [] customFont;
+	customFont = NULL;
 
     snprintf(FontPath, sizeof(FontPath), "%s/font.ttf", path);
 
@@ -164,22 +241,32 @@ bool Theme::LoadFont(const char *path)
     if (pfile)
     {
         fseek(pfile, 0, SEEK_END);
-        MainFontSize = ftell(pfile);
+        customFontSize = ftell(pfile);
         rewind(pfile);
 
-        MainFont = new (std::nothrow) FT_Byte[MainFontSize];
-        if (MainFont)
+        customFont = new (std::nothrow) FT_Byte[customFontSize];
+        if (customFont)
         {
-            fread(MainFont, 1, MainFontSize, pfile);
+            fread(customFont, 1, customFontSize, pfile);
             result = true;
         }
         fclose(pfile);
     }
 
-    FT_Byte * loadedFont = MainFont ? MainFont : (FT_Byte *) Resources::GetFile("font.ttf");
-    u32 loadedFontSize = MainFont ? MainFontSize : Resources::GetFileSize("font.ttf");
+	FT_Byte *loadedFont = customFont;
+	u32 loadedFontSize = customFontSize;
 
-    fontSystem = new FreeTypeGX(loadedFont, loadedFontSize);
+	if(!loadedFont)
+	{
+		if(!systemFont)
+			loadSystemFont(CONF_GetLanguage() == CONF_LANG_KOREAN);
+
+		//! Default to system font if no custom is loaded
+		loadedFont = systemFont;
+		loadedFontSize = systemFontSize;
+	}
+
+    fontSystem = new FreeTypeGX(loadedFont, loadedFontSize, loadedFont == systemFont);
 
     return result;
 }
@@ -190,7 +277,11 @@ void Theme::ClearFontData()
         delete fontSystem;
     fontSystem = NULL;
 
-    if (MainFont)
-        delete [] MainFont;
-    MainFont = NULL;
+	if(customFont)
+    	delete [] customFont;
+	customFont = NULL;
+
+    if (systemFont)
+        delete [] systemFont;
+    systemFont = NULL;
 }
