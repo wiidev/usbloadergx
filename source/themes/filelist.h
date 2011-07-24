@@ -1,7 +1,7 @@
 /****************************************************************************
  * USB Loader GX resource files.
  * This file is generated automatically.
- * Includes 188 files.
+ * Includes 189 files.
  *
  * NOTE:
  * Any manual modification of this file will be overwriten by the generation.
@@ -575,6 +575,9 @@ extern const u32 success_ogg_size;
 extern const u8 clock_ttf[];
 extern const u32 clock_ttf_size;
 
+extern const u8 font_ttf[];
+extern const u32 font_ttf_size;
+
 RecourceFile Resources::RecourceFiles[] =
 {
 	{"abcIcon.png", abcIcon_png, abcIcon_png_size, NULL, 0},
@@ -765,6 +768,7 @@ RecourceFile Resources::RecourceFiles[] =
 	{"menuout.ogg", menuout_ogg, menuout_ogg_size, NULL, 0},
 	{"success.ogg", success_ogg, success_ogg_size, NULL, 0},
 	{"clock.ttf", clock_ttf, clock_ttf_size, NULL, 0},
+	{"font.ttf", font_ttf, font_ttf_size, NULL, 0},
 	{NULL, NULL, 0, NULL, 0}
 };
 

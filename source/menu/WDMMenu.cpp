@@ -194,7 +194,7 @@ void WDMMenu::CheckGameFiles(const struct discHdr * header)
         return;
     }
 
-    FST_ENTRY * fstbuffer = (FST_ENTRY *) wd_get_fst(wdisc, ONLY_GAME_PARTITION);
+    FST_ENTRY * fstbuffer = (FST_ENTRY *) wd_extract_file(wdisc, ONLY_GAME_PARTITION, (char*) "FST");
     if (!fstbuffer)
     {
         WindowPrompt(tr( "ERROR:" ), tr( "Not enough free memory." ), tr( "OK" ));

@@ -70,6 +70,7 @@ void CSettings::SetDefault()
     snprintf(WiinnertagPath, sizeof(WiinnertagPath), "%s", ConfigPath);
     snprintf(theme_path, sizeof(theme_path), "%stheme/", ConfigPath);
     snprintf(dolpath, sizeof(dolpath), "%s/", BootDevice);
+    snprintf(NandEmuPath, sizeof(NandEmuPath), "%s/nand/", BootDevice);
     strcpy(theme, "");
     strcpy(language_path, "");
     strcpy(ogg_path, "");
@@ -126,6 +127,8 @@ void CSettings::SetDefault()
     SelectedGame = 0;
     GameListOffset = 0;
     sneekVideoPatch = OFF;
+    NandEmuMode = OFF;
+    UseSystemFont = ON;
 }
 
 bool CSettings::Load()
@@ -285,6 +288,9 @@ bool CSettings::Save()
     fprintf(file, "SelectedGame = %d\n", SelectedGame);
     fprintf(file, "GameListOffset = %d\n", GameListOffset);
     fprintf(file, "sneekVideoPatch = %d\n", sneekVideoPatch);
+    fprintf(file, "NandEmuMode = %d\n", NandEmuMode);
+    fprintf(file, "NandEmuPath = %s\n", NandEmuPath);
+    fprintf(file, "UseSystemFont = %d\n", UseSystemFont);
     fclose(file);
 
     return true;
@@ -558,6 +564,14 @@ bool CSettings::SetSetting(char *name, char *value)
     {
         if (sscanf(value, "%d", &i) == 1) sneekVideoPatch = i;
     }
+    else if(strcmp(name, "UseSystemFont") == 0)
+    {
+        if (sscanf(value, "%d", &i) == 1) UseSystemFont = i;
+    }
+    else if(strcmp(name, "NandEmuMode") == 0)
+    {
+        if (sscanf(value, "%d", &i) == 1) NandEmuMode = i;
+    }
     else if (strcmp(name, "InstallPartitions") == 0)
     {
         InstallPartitions = strtoul(value, 0, 16);
@@ -676,6 +690,11 @@ bool CSettings::SetSetting(char *name, char *value)
     else if (strcmp(name, "WiinnertagPath") == 0)
     {
         strcpy(WiinnertagPath, value);
+        return true;
+    }
+    else if (strcmp(name, "NandEmuPath") == 0)
+    {
+        strcpy(NandEmuPath, value);
         return true;
     }
     else if (strcmp(name, "EnabledCategories") == 0)

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-26 23:33+0200\n"
+"POT-Creation-Date: 2011-07-24 18:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -696,6 +696,9 @@ msgstr "Volné místo"
 msgid "French"
 msgstr "Francouzky"
 
+msgid "Full"
+msgstr ""
+
 msgid "Full Cover Path"
 msgstr ""
 
@@ -978,6 +981,18 @@ msgstr "Mód hudební smycky"
 msgid "Music Volume"
 msgstr "Hlasitost hudby"
 
+msgid "Nand Emu Path"
+msgstr ""
+
+msgid "Nand Emulation"
+msgstr ""
+
+msgid "Nand Emulation is only available on D2X cIOS!"
+msgstr ""
+
+msgid "Nand Emulation only works on FAT/FAT32 partitions!"
+msgstr ""
+
 msgid "Neither"
 msgstr "Žádný"
 
@@ -1103,6 +1118,9 @@ msgstr "Originál/Upravené"
 
 msgid "Parental Control"
 msgstr "Rodicovský zámek"
+
+msgid "Partial"
+msgstr ""
 
 msgid "Partition"
 msgstr "Oddíl"
@@ -1476,6 +1494,9 @@ msgstr "Aktualizuji jazykové soubory:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Odeslaný ZIP soubor nainstalován do adresáre homebrew"
+
+msgid "Use System Font"
+msgstr ""
 
 msgid "Use global"
 msgstr ""

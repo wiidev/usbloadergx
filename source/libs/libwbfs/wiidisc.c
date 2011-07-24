@@ -7,7 +7,6 @@
 
 void aes_set_key(u8 *key);
 void aes_decrypt(u8 *iv, u8 *inbuf, u8 *outbuf, unsigned long long len);
-static u8 get_fst = 0;
 
 static void _decrypt_title_key(u8 *tik, u8 *title_key)
 {
@@ -124,6 +123,7 @@ static u32 do_fst(wiidisc_t *d, u8 *fst, const char *names, u32 i)
     else
     {
         offset = _be32(fst + 12 * i + 4);
+
         if (d->extract_pathname && strcasecmp(name, d->extract_pathname) == 0)
         {
             d->extracted_buffer = wbfs_ioalloc( size );
@@ -167,13 +167,8 @@ static void do_files(wiidisc_t*d)
         partition_read(d, fst_offset, fst, fst_size, 0);
         n_files = _be32(fst + 8);
 
-        if(get_fst && !d->extracted_buffer)
-        {
-            d->extracted_buffer = wbfs_ioalloc(fst_size);
-            memcpy(d->extracted_buffer, fst, fst_size);
-        }
 
-        if (d->extract_pathname && *d->extract_pathname == 0)
+        if (d->extract_pathname && strcmp(d->extract_pathname, "FST") == 0)
         {
             // if empty pathname requested return fst
             d->extracted_buffer = fst;
@@ -222,18 +217,26 @@ static void do_partition(wiidisc_t*d)
     wbfs_fatal( "malloc tmd" );
     partition_raw_read(d, tmd_offset, tmd, tmd_size);
 
-    cert = wbfs_ioalloc( cert_size );
-    if (cert == 0)
-    wbfs_fatal( "malloc cert" );
-    partition_raw_read(d, cert_offset, cert, cert_size);
+    if(d->extract_pathname && strcmp(d->extract_pathname, "TMD") == 0 && !d->extracted_buffer)
+    {
+		d->extracted_buffer = tmd;
+		d->extracted_size = tmd_size;
+    }
 
-    _decrypt_title_key(tik, d->disc_key);
+	cert = wbfs_ioalloc( cert_size );
+	if (cert == 0)
+	wbfs_fatal( "malloc cert" );
+	partition_raw_read(d, cert_offset, cert, cert_size);
 
-    partition_raw_read(d, h3_offset, 0, 0x18000);
+	_decrypt_title_key(tik, d->disc_key);
+
+	partition_raw_read(d, h3_offset, 0, 0x18000);
+
     wbfs_iofree( b );
     wbfs_iofree( tik );
     wbfs_iofree( cert );
-    wbfs_iofree( tmd );
+    if(tmd != d->extracted_buffer)
+    	wbfs_iofree( tmd );
 
     do_files(d);
 
@@ -316,23 +319,6 @@ u8 * wd_extract_file(wiidisc_t *d, partition_selector_t partition_type, char *pa
     d->extract_pathname = 0;
     d->part_sel = ALL_PARTITIONS;
     retval = d->extracted_buffer;
-    d->extracted_buffer = 0;
-    return retval;
-}
-
-u8 * wd_get_fst(wiidisc_t *d, partition_selector_t partition_type)
-{
-    get_fst = 1;
-    u8 *retval = 0;
-    d->extract_pathname = 0;
-    d->extracted_buffer = 0;
-    d->part_sel = partition_type;
-    do_disc(d);
-    d->extract_pathname = 0;
-    d->part_sel = ALL_PARTITIONS;
-    retval = d->extracted_buffer;
-    d->extracted_buffer = 0;
-    get_fst = 0;
     return retval;
 }
 

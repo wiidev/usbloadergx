@@ -74,6 +74,7 @@ class CSettings
         char homebrewapps_path[100];
         char WDMpath[100];
         char WiinnertagPath[100];
+        char NandEmuPath[50];
         short videomode;
         short language;
         short ocarina;
@@ -126,6 +127,8 @@ class CSettings
         short sneekVideoPatch;
         std::vector<u32> EnabledCategories;
         u8 EntryIOS;
+        short NandEmuMode;
+        short UseSystemFont;
     protected:
         bool ValidVersion(FILE * file);
         bool SetSetting(char *name, char *value);

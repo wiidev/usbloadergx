@@ -29,6 +29,7 @@
 #include "language/gettext.h"
 #include "wad/nandtitle.h"
 #include "prompts/TitleBrowser.h"
+#include "system/IosLoader.h"
 #include "menu.h"
 
 static const char * OnOffText[] =
@@ -72,6 +73,13 @@ static const char * Error002Text[] =
     trNOOP( "Anti" )
 };
 
+static const char * NandEmuText[] =
+{
+    trNOOP( "OFF" ),
+    trNOOP( "Partial" ),
+    trNOOP( "Full" )
+};
+
 LoaderSettings::LoaderSettings()
     : SettingsMenu(tr("Loader Settings"), &GuiOptions, MENU_NONE)
 {
@@ -88,6 +96,7 @@ LoaderSettings::LoaderSettings()
     Options->SetName(Idx++, "%s", tr( "Error 002 fix" ));
     Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
     Options->SetName(Idx++, "%s", tr( "Return To" ));
+    Options->SetName(Idx++, "%s", tr( "Nand Emulation" ));
 
     SetOptionValues();
 }
@@ -137,6 +146,9 @@ void LoaderSettings::SetOptionValues()
         TitleName = NandTitles.NameOf(tid);
     TitleName = TitleName ? TitleName : strlen(Settings.returnTo) > 0 ? Settings.returnTo : tr(OnOffText[0]);
     Options->SetValue(Idx++, "%s", TitleName);
+
+    //! Settings: Nand Emulation
+    Options->SetValue(Idx++, "%s", tr( NandEmuText[Settings.NandEmuMode] ));
 }
 
 int LoaderSettings::GetMenuInternal()
@@ -234,6 +246,14 @@ int LoaderSettings::GetMenuInternal()
         bool getChannel = TitleSelector(tidChar);
         if (getChannel)
             snprintf(Settings.returnTo, sizeof(Settings.returnTo), "%s", tidChar);
+    }
+
+    //! Settings: Nand Emulation
+    else if (ret == ++Idx )
+    {
+    	if(!IosLoader::IsD2X())
+    		WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
+        else if (++Settings.NandEmuMode >= 3) Settings.NandEmuMode = 0;
     }
 
     SetOptionValues();

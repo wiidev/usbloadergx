@@ -113,6 +113,7 @@ GuiSettingsMenu::GuiSettingsMenu()
     Options->SetName(Idx++, "%s", tr( "Mark new games" ));
     Options->SetName(Idx++, "%s", tr( "Show Free Space" ));
     Options->SetName(Idx++, "%s", tr( "HOME Menu" ));
+    Options->SetName(Idx++, "%s", tr( "Use System Font" ));
 
     SetOptionValues();
 }
@@ -174,6 +175,9 @@ void GuiSettingsMenu::SetOptionValues()
 
     //! Settings: Home Menu style
     Options->SetValue(Idx++, "%s", tr( HomeMenuText[Settings.HomeMenu] ));
+
+    //! Settings: Use System Font
+    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.UseSystemFont] ));
 }
 
 int GuiSettingsMenu::GetMenuInternal()
@@ -327,6 +331,12 @@ int GuiSettingsMenu::GetMenuInternal()
     else if (ret == ++Idx)
     {
         if (++Settings.HomeMenu >= HOME_MENU_MAX_CHOICE) Settings.HomeMenu = 0;
+    }
+
+    //! Settings: Use System Font
+    else if (ret == ++Idx)
+    {
+        if (++Settings.UseSystemFont >= MAX_ON_OFF) Settings.UseSystemFont = 0;
     }
 
     SetOptionValues();

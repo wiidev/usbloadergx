@@ -16,6 +16,8 @@ class Theme
         static bool Load(const char * path);
         //!Load font data
         static bool LoadFont(const char *path);
+    	//!Load the original Wii System Menu font into memory only. It is not applied.
+		static bool loadSystemFont(bool korean);
         //!Reload the main images/sounds for the new theme
         static void Reload();
         //!Clear all image/font/theme data and free the memory
@@ -24,8 +26,6 @@ class Theme
         //!Enable tooltips: special case treaded because it is called every frame
         static bool ShowTooltips;
     private:
-    	//!Load the original Wii System Menu font
-		static bool loadSystemFont(bool korean);
         //!Clear the font data and free the memory
         static void ClearFontData();
 };

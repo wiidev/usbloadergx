@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-26 23:33+0200\n"
+"POT-Creation-Date: 2011-07-24 18:27+0200\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -696,6 +696,9 @@ msgstr "Szabad Hely"
 msgid "French"
 msgstr "Francia"
 
+msgid "Full"
+msgstr ""
+
 msgid "Full Cover Path"
 msgstr ""
 
@@ -978,6 +981,18 @@ msgstr ""
 msgid "Music Volume"
 msgstr "Zene Hangerõ"
 
+msgid "Nand Emu Path"
+msgstr ""
+
+msgid "Nand Emulation"
+msgstr ""
+
+msgid "Nand Emulation is only available on D2X cIOS!"
+msgstr ""
+
+msgid "Nand Emulation only works on FAT/FAT32 partitions!"
+msgstr ""
+
 msgid "Neither"
 msgstr "Egyik sem"
 
@@ -1103,6 +1118,9 @@ msgstr "Eredeti/Egyéni"
 
 msgid "Parental Control"
 msgstr "Szülõi Felügyelet"
+
+msgid "Partial"
+msgstr ""
 
 msgid "Partition"
 msgstr "Partició"
@@ -1476,6 +1494,9 @@ msgstr "Nyelvi fájlok frissítése:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Feltöltött ZIP fájl telepítve a Homebrew mappába."
+
+msgid "Use System Font"
+msgstr ""
 
 msgid "Use global"
 msgstr ""

@@ -142,7 +142,7 @@ s32 network_request(s32 connect, const char * request, char * filename)
             }
         }
     }
-	gprintf("%s\n", (char*) buf);
+
     /* Retrieve content size */
     ptr = strstr(buf, "Content-Length:");
     if (!ptr) return NET_SIZE_UNKNOWN;

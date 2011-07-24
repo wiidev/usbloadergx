@@ -41,7 +41,6 @@ typedef struct map_entry
 	u8 hash[20];
 } __attribute__((packed)) map_entry_t;
 
-static const char contentMapPath[] ATTRIBUTE_ALIGN(32) = "/shared1/content.map";
 static const u8 WIIFONT_HASH[]		= {0x32, 0xb3, 0x39, 0xcb, 0xbb, 0x50, 0x7d, 0x50, 0x27, 0x79, 0x25, 0x9a, 0x78, 0x66, 0x99, 0x5d, 0x03, 0x0b, 0x1d, 0x88};
 static const u8 WIIFONT_HASH_KOR[]	= {0xb7, 0x15, 0x6d, 0xf0, 0xf4, 0xae, 0x07, 0x8f, 0xd1, 0x53, 0x58, 0x3e, 0x93, 0x6e, 0x07, 0xc0, 0x98, 0x77, 0x49, 0x0e};
 
@@ -165,6 +164,7 @@ bool Theme::Load(const char * theme_file_path)
 
 bool Theme::loadSystemFont(bool korean)
 {
+	const char contentMapPath[] ATTRIBUTE_ALIGN(32) = "/shared1/content.map";
 	u8 *contentMap = NULL;
 	u32 mapsize = 0;
 
@@ -256,15 +256,23 @@ bool Theme::LoadFont(const char *path)
 	FT_Byte *loadedFont = customFont;
 	u32 loadedFontSize = customFontSize;
 
-	if(!loadedFont)
+	if(!loadedFont && Settings.UseSystemFont)
 	{
 		if(!systemFont)
 			loadSystemFont(CONF_GetLanguage() == CONF_LANG_KOREAN);
+		if(!systemFont)
+			loadSystemFont(CONF_GetLanguage() != CONF_LANG_KOREAN);
 
 		//! Default to system font if no custom is loaded
 		loadedFont = systemFont;
 		loadedFontSize = systemFontSize;
 	}
+	if(!loadedFont)
+	{
+    	loadedFont = (FT_Byte *) Resources::GetFile("font.ttf");
+    	loadedFontSize = Resources::GetFileSize("font.ttf");
+	}
+
 
     fontSystem = new FreeTypeGX(loadedFont, loadedFontSize, loadedFont == systemFont);
 

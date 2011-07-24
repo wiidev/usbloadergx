@@ -53,7 +53,7 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
     }
 
     gprintf("wd_get_fst\n");
-    FST_ENTRY * fstbuffer = (FST_ENTRY *) wd_get_fst(wdisc, ONLY_GAME_PARTITION);
+    FST_ENTRY * fstbuffer = (FST_ENTRY *) wd_extract_file(wdisc, ONLY_GAME_PARTITION, (char *) "FST");
     if (!fstbuffer)
     {
         ResumeGui();

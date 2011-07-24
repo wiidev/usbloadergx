@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-26 23:33+0200\n"
+"POT-Creation-Date: 2011-07-24 18:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -696,6 +696,9 @@ msgstr "剩余空间"
 msgid "French"
 msgstr "法文"
 
+msgid "Full"
+msgstr ""
+
 msgid "Full Cover Path"
 msgstr "完整封面路径"
 
@@ -978,6 +981,18 @@ msgstr "音乐循环模式"
 msgid "Music Volume"
 msgstr "音量"
 
+msgid "Nand Emu Path"
+msgstr ""
+
+msgid "Nand Emulation"
+msgstr ""
+
+msgid "Nand Emulation is only available on D2X cIOS!"
+msgstr ""
+
+msgid "Nand Emulation only works on FAT/FAT32 partitions!"
+msgstr ""
+
 msgid "Neither"
 msgstr "全不"
 
@@ -1103,6 +1118,9 @@ msgstr "官方/自制"
 
 msgid "Parental Control"
 msgstr "家长控制"
+
+msgid "Partial"
+msgstr ""
 
 msgid "Partition"
 msgstr "分区"
@@ -1476,6 +1494,9 @@ msgstr "正在升级语言文件:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "上传已安装Zip文件到自制程序目录"
+
+msgid "Use System Font"
+msgstr ""
 
 msgid "Use global"
 msgstr ""

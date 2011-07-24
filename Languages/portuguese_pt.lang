@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-26 23:33+0200\n"
+"POT-Creation-Date: 2011-07-24 18:27+0200\n"
 "PO-Revision-Date: 2011-06-26 23:30+0100\n"
 "Last-Translator: pplucky <pplucky@gmail.com>\n"
 "Language-Team: Sky8000, pplucky\n"
@@ -198,8 +198,8 @@ msgstr "Música de fundo"
 msgid "Big thanks to:"
 msgstr "Agradecimentos:"
 
-msgid "Block Categories Menu"   
-msgstr "Bloquear Menu Categorias" 
+msgid "Block Categories Menu"
+msgstr "Bloquear Menu Categorias"
 
 msgid "Block Categories Modify"
 msgstr "Bloquear Modif. Categorias"
@@ -696,6 +696,9 @@ msgstr "Espaço Livre"
 msgid "French"
 msgstr "Francês"
 
+msgid "Full"
+msgstr ""
+
 msgid "Full Cover Path"
 msgstr "Cam. Capas Completas"
 
@@ -978,6 +981,18 @@ msgstr "Modo de Repetição"
 msgid "Music Volume"
 msgstr "Volume Música"
 
+msgid "Nand Emu Path"
+msgstr ""
+
+msgid "Nand Emulation"
+msgstr ""
+
+msgid "Nand Emulation is only available on D2X cIOS!"
+msgstr ""
+
+msgid "Nand Emulation only works on FAT/FAT32 partitions!"
+msgstr ""
+
 msgid "Neither"
 msgstr "Nenhum"
 
@@ -1103,6 +1118,9 @@ msgstr "Originais/Personalizadas"
 
 msgid "Parental Control"
 msgstr "Controlo Parental"
+
+msgid "Partial"
+msgstr ""
 
 msgid "Partition"
 msgstr "Partição"
@@ -1476,6 +1494,9 @@ msgstr "A actualizar ficheiros de Idioma:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Ficheiro ZIP instalado na pasta de Homebrew."
+
+msgid "Use System Font"
+msgstr ""
 
 msgid "Use global"
 msgstr "Usar global"

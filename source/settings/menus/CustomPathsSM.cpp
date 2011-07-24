@@ -22,6 +22,7 @@
  * distribution.
  ***************************************************************************/
 #include <unistd.h>
+#include "Controls/DeviceHandler.hpp"
 #include "CustomPathsSM.hpp"
 #include "settings/SettingsPrompts.h"
 #include "settings/CSettings.h"
@@ -50,6 +51,7 @@ CustomPathsSM::CustomPathsSM()
     Options->SetName(Idx++, tr("Languagefiles Path"));
     Options->SetName(Idx++, tr("WDM Files Path"));
     Options->SetName(Idx++, tr("Wiinnertag Path"));
+    Options->SetName(Idx++, tr("Nand Emu Path"));
 
     SetOptionValues();
 }
@@ -105,6 +107,9 @@ void CustomPathsSM::SetOptionValues()
 
     //! Settings: Wiinnertag Path
     Options->SetValue(Idx++, Settings.WiinnertagPath);
+
+    //! Settings: Nand Emu Path
+    Options->SetValue(Idx++, Settings.NandEmuPath);
 }
 
 int CustomPathsSM::GetMenuInternal()
@@ -226,6 +231,15 @@ int CustomPathsSM::GetMenuInternal()
     {
         titleTxt->SetText(tr( "Wiinnertag Path" ));
         ChangePath(Settings.WiinnertagPath, sizeof(Settings.WiinnertagPath));
+    }
+
+    //! Settings: Nand Emu Path
+    else if (ret == ++Idx)
+    {
+        titleTxt->SetText(tr( "Nand Emu Path" ));
+        ChangePath(Settings.NandEmuPath, sizeof(Settings.NandEmuPath));
+        if(strncasecmp(DeviceHandler::PathToFSName(Settings.NandEmuPath), "FAT", 3) != 0)
+        	WindowPrompt(tr("Warning:"), tr("Nand Emulation only works on FAT/FAT32 partitions!"), tr("OK"));
     }
 
     //! Global set back of the titleTxt after a change

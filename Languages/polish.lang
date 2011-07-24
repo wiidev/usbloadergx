@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-26 23:33+0200\n"
+"POT-Creation-Date: 2011-07-24 18:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -696,6 +696,9 @@ msgstr "Wolnego miejsca"
 msgid "French"
 msgstr "francuski"
 
+msgid "Full"
+msgstr ""
+
 msgid "Full Cover Path"
 msgstr ""
 
@@ -978,6 +981,18 @@ msgstr ""
 msgid "Music Volume"
 msgstr "Poziom glosnosci"
 
+msgid "Nand Emu Path"
+msgstr ""
+
+msgid "Nand Emulation"
+msgstr ""
+
+msgid "Nand Emulation is only available on D2X cIOS!"
+msgstr ""
+
+msgid "Nand Emulation only works on FAT/FAT32 partitions!"
+msgstr ""
+
 msgid "Neither"
 msgstr "zadne"
 
@@ -1103,6 +1118,9 @@ msgstr "Mieszane"
 
 msgid "Parental Control"
 msgstr "Kontrola rodzicielska"
+
+msgid "Partial"
+msgstr ""
 
 msgid "Partition"
 msgstr "Partycja"
@@ -1476,6 +1494,9 @@ msgstr "Aktualizacja plikow jezykowych:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Wyslany plik ZIP zainstalowano w katalogu homebrew"
+
+msgid "Use System Font"
+msgstr ""
 
 msgid "Use global"
 msgstr ""

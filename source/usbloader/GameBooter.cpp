@@ -26,6 +26,8 @@
 #include "menu/menus.h"
 #include "memory/memory.h"
 #include "GameBooter.hpp"
+#include "nand.h"
+#include "SavePath.h"
 #include "sys.h"
 
 //appentrypoint has to be global because of asm
@@ -202,6 +204,10 @@ int GameBooter::BootGame(const char * gameID)
     u8 reloadblock = game_cfg->iosreloadblock == INHERIT ? Settings.BlockIOSReload : game_cfg->iosreloadblock;
     u64 returnToChoice = game_cfg->returnTo ? NandTitles.FindU32(Settings.returnTo) : 0;
 
+	//! Create save game path and title.tmd for not existing saves
+	if(Settings.NandEmuMode)
+		CreateSavePath(&gameHeader);
+
     //! Prepare alternate dol settings
     SetupAltDOL(gameHeader.id, alternatedol, alternatedoloffset);
 
@@ -283,9 +289,20 @@ int GameBooter::BootGame(const char * gameID)
     USBStorage2_Deinit();
     USB_Deinitialize();
 
-    //! Modify Wii Message Board to display the game starting here
+    //! Modify Wii Message Board to display the game starting here (before Nand Emu)
     if(Settings.PlaylogUpdate)
         Playlog_Update((char *) gameHeader.id, BNRInstance::Instance()->GetIMETTitle(CONF_GetLanguage()));
+
+	//! Setup NAND emulation
+	if(Settings.NandEmuMode && strchr(Settings.NandEmuPath, '/'))
+	{
+		gprintf("Enabling Nand Emulation on: %s\n", Settings.NandEmuPath);
+		Set_FullMode(Settings.NandEmuMode == 2);
+		Set_Path(strchr(Settings.NandEmuPath, '/'));
+		if(strncmp(Settings.NandEmuPath, "usb", 3) == 0)
+			Set_Partition(atoi(Settings.NandEmuPath+3)-1);
+		Enable_Emu(strncmp(Settings.NandEmuPath, "usb", 3) == 0 ? EMU_USB : EMU_SD);
+	}
 
     //! Jump to the entrypoint of the game - the last function of the USB Loader
     gprintf("Jumping to game entrypoint: 0x%08X.\n", AppEntrypoint);
