@@ -8,8 +8,8 @@
 
 #include <gccore.h>
 
-extern const u8		app_booter_dol[];
-extern const u32	app_booter_dol_size;
+extern const u8		app_booter_bin[];
+extern const u32	app_booter_bin_size;
 
 extern const u8		background_png[];
 extern const u32	background_png_size;

@@ -3,6 +3,8 @@
 #include "video.h"
 #include "filelist.h"
 
+extern int screenwidth;
+extern int screenheight;
 static int imagewidth = 0;
 static int imageheight = 0;
 
@@ -56,7 +58,7 @@ void fadein(u8 * imgdata)
 	for(i = 0; i < 255; i = i+10)
 	{
 		if(i>255) i = 255;
-		Background_Show(0, 0, 0, imgdata, 0, 1, 1, i);
+		Background_Show(screenwidth/2-imagewidth/2, screenheight/2-imageheight/2, 0, imgdata, 0, (float)screenwidth/(float)imagewidth, 1, i);
 	}
 }
 
@@ -68,6 +70,6 @@ void fadeout(u8 * imgdata)
 	for(i = 255; i > 1; i = i-7)
 	{
 		if(i < 0) i = 0;
-		Background_Show(0, 0, 0, imgdata, 0, 1, 1, i);
+		Background_Show(screenwidth/2-imagewidth/2, screenheight/2-imageheight/2, 0, imgdata, 0, (float)screenwidth/(float)imagewidth, 1, i);
 	}
 }

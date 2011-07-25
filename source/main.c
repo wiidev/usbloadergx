@@ -1,8 +1,6 @@
  /****************************************************************************
  * Copyright 2009 The Lemon Man and thanks to luccax, Wiipower, Aurelio and crediar
- * Copyright 2010 Dimok
- *
- * Original forwarder source by
+ * Copyright 2010-2011 Dimok
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any
@@ -32,12 +30,17 @@
 
 #include "video.h"
 #include "background_image.h"
-#include "dolloader.h"
 #include "filelist.h"
 #include "devicemounter.h"
 #include "cfg.h"
 
-void __exception_setreload(int t);
+#define EXECUTE_ADDR	((u8 *) 0x92000000)
+#define BOOTER_ADDR		((u8 *) 0x93000000)
+#define ARGS_ADDR		((u8 *) 0x93200000)
+
+typedef void (*entrypoint) (void);
+extern void __exception_setreload(int t);
+extern void __exception_closeall();
 
 static int GetXMLArguments(const char *path, struct __argv *args)
 {
@@ -96,11 +99,6 @@ static int GetXMLArguments(const char *path, struct __argv *args)
 
 		entry[len] = '\0';
 
-		char *tmp = (char *) realloc(args->commandLine, args->length + len + 1);
-		if(!tmp)
-			break; //out of memory, take what we got until now
-
-		args->commandLine = tmp;
 		strcpy(args->commandLine + args->length - 1, entry);
 		args->length += len + 1;
 	}
@@ -154,10 +152,9 @@ int main(int argc, char **argv)
 {
 	u32 cookie;
 	FILE *exeFile = NULL;
-	void * exeBuffer = (void *)EXECUTABLE_MEM_ADDR;
 	u32 exeSize = 0;
-	u32 exeEntryPointAddress = 0;
-	entrypoint exeEntryPoint;
+	void * exeBuffer = (void *)EXECUTE_ADDR;
+	entrypoint exeEntryPoint = (entrypoint) BOOTER_ADDR;
 	__exception_setreload(0);
 
 	/* int videomod */
@@ -223,53 +220,42 @@ int main(int argc, char **argv)
 	}
 	fclose (exeFile);
 
-	/* load entry point */
+	//! Setup argument struct
 	struct __argv args;
 	bzero(&args, sizeof(args));
 	args.argvMagic = ARGV_MAGIC;
 	args.length = strlen(filepath) + 2;
-	args.commandLine = (char*)malloc(args.length);
-	if (!args.commandLine) SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
+	//! Put the argument into mem2 too, to avoid overwriting it
+	args.commandLine = (char *) ARGS_ADDR + sizeof(args);
+	//! Add executable file path as first argument
 	strcpy(args.commandLine, filepath);
+	//! Append the arguments from the meta.xml
 	GetXMLArguments(filepath, &args);
+	//! Finishing sequence "\0\0"
 	args.commandLine[args.length - 1] = '\0';
 	args.argc = 1;
 	args.argv = &args.commandLine;
 	args.endARGV = args.argv + 1;
 
-	u8 * appboot_buff = (u8 *) malloc(app_booter_dol_size);
-	if(!appboot_buff)
-	{
-		fadeout(imgdata);
-        SDCard_deInit();
-        USBDevice_deInit();
-        StopGX();
-        free(imgdata);
-		SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
-	}
+	//! Put the booter code to it's expected address
+	memcpy(BOOTER_ADDR, app_booter_bin, app_booter_bin_size);
+	DCFlushRange(BOOTER_ADDR, app_booter_bin_size);
 
-    memcpy(appboot_buff, app_booter_dol, app_booter_dol_size);
+	//! Put the argument struct to it's expected address
+	memcpy(ARGS_ADDR, &args, sizeof(args));
+	DCFlushRange(ARGS_ADDR, sizeof(args) + args.length);
 
-	exeEntryPointAddress = load_dol_image(appboot_buff, &args);
+    //! Reset HBC stub so we can leave correct from USB Loader GX to System Menu
+    memset((char *) 0x80001804, 0, 8);
+    DCFlushRange((char *) 0x80001804, 8);
 
-    if(appboot_buff)
-        free(appboot_buff);
-
+	/* cleaning up and load booter */
 	fadeout(imgdata);
 	SDCard_deInit();
 	USBDevice_deInit();
 	StopGX();
 	free(imgdata);
 
-    //! Reset HBC stub so we can leave correct from USB Loader to System Menu
-    memset((char *) 0x80001804, 0, 8);
-    DCFlushRange((char *) 0x80001804, 8);
-
-	if (exeEntryPointAddress == 0)
-		SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
-
-	exeEntryPoint = (entrypoint) exeEntryPointAddress;
-	/* cleaning up and load dol */
 	SYS_ResetSystem(SYS_SHUTDOWN, 0, 0);
 	_CPU_ISR_Disable (cookie);
 	__exception_closeall ();

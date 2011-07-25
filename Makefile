@@ -81,11 +81,9 @@ else
 	export LD	:=	$(CXX)
 endif
 
-export OFILES	:=	$(addsuffix .o,$(BINFILES)) \
-					$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) \
+export OFILES	:=	$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) \
 					$(sFILES:.s=.o) $(SFILES:.S=.o) \
-					$(PNGFILES:.png=.png.o) $(addsuffix .o,$(DOLFILES)) \
-					$(addsuffix .o,$(ELFFILES))
+					$(PNGFILES:.png=.png.o) $(addsuffix .o,$(BINFILES))
 
 #---------------------------------------------------------------------------------
 # build a list of include paths
@@ -142,11 +140,7 @@ $(OUTPUT).elf: $(OFILES)
 	@echo $(notdir $<)
 	@bin2s -a 32 $< | $(AS) -o $(@)
 
-%.dol.o : %.dol
-	@echo $(notdir $<)
-	@bin2s -a 32 $< | $(AS) -o $(@)
-
-%.elf.o : %.elf
+%.bin.o : %.bin
 	@echo $(notdir $<)
 	@bin2s -a 32 $< | $(AS) -o $(@)
 
