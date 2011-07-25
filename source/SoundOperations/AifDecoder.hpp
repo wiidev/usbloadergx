@@ -31,20 +31,20 @@
 
 class AifDecoder : public SoundDecoder
 {
-    public:
-        AifDecoder(const char * filepath);
-        AifDecoder(const u8 * snd, int len);
-        virtual ~AifDecoder();
-        int GetFormat() { return Format; };
-        int GetSampleRate() { return SampleRate; };
-        int Read(u8 * buffer, int buffer_size, int pos);
-    protected:
-        void OpenFile();
-        void CloseFile();
-        u32 DataOffset;
-        u32 DataSize;
-        u32 SampleRate;
-        u8 Format;
+	public:
+		AifDecoder(const char * filepath);
+		AifDecoder(const u8 * snd, int len);
+		virtual ~AifDecoder();
+		int GetFormat() { return Format; };
+		int GetSampleRate() { return SampleRate; };
+		int Read(u8 * buffer, int buffer_size, int pos);
+	protected:
+		void OpenFile();
+		void CloseFile();
+		u32 DataOffset;
+		u32 DataSize;
+		u32 SampleRate;
+		u8 Format;
 };
 
 #endif

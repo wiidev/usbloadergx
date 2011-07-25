@@ -28,16 +28,16 @@
 
 class FeatureSettingsMenu : public SettingsMenu
 {
-    public:
-        FeatureSettingsMenu();
-        virtual ~FeatureSettingsMenu();
-    protected:
-        void SetOptionValues();
-        int GetMenuInternal();
+	public:
+		FeatureSettingsMenu();
+		virtual ~FeatureSettingsMenu();
+	protected:
+		void SetOptionValues();
+		int GetMenuInternal();
 
-        int OldTitlesOverride;
+		int OldTitlesOverride;
 
-        OptionList GuiOptions;
+		OptionList GuiOptions;
 };
 
 

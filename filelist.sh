@@ -9,8 +9,8 @@ count_old=$(cat $outFile 2>/dev/null | tr -d '\n\n' | sed 's/[^0-9]*\([0-9]*\).*
 count=0
 for i in $(find ./data/images/ ./data/sounds/ ./data/fonts/ -maxdepth 1 -type f  \( ! -printf "%f\n" \))
 do
-    files[count]=$i
-    count=$((count+1))
+	files[count]=$i
+	count=$((count+1))
 done
 
 if [ "$count_old" != "$count" ] || [ ! -f $outFile ]
@@ -35,11 +35,11 @@ EOF
 
 for i in ${files[@]}
 do
-    filename=${i%.*}
-    extension=${i##*.}
-    echo 'extern const u8 '$filename'_'$extension'[];' >> $outFile
-    echo 'extern const u32 '$filename'_'$extension'_size;' >> $outFile
-    echo '' >> $outFile
+	filename=${i%.*}
+	extension=${i##*.}
+	echo 'extern const u8 '$filename'_'$extension'[];' >> $outFile
+	echo 'extern const u32 '$filename'_'$extension'_size;' >> $outFile
+	echo '' >> $outFile
 done
 
 echo 'RecourceFile Resources::RecourceFiles[] =' >> $outFile
@@ -47,9 +47,9 @@ echo '{' >> $outFile
 
 for i in ${files[@]}
 do
-    filename=${i%.*}
-    extension=${i##*.}
-    echo -e '\t{"'$i'", '$filename'_'$extension', '$filename'_'$extension'_size, NULL, 0},' >> $outFile
+	filename=${i%.*}
+	extension=${i##*.}
+	echo -e '\t{"'$i'", '$filename'_'$extension', '$filename'_'$extension'_size, NULL, 0},' >> $outFile
 done
 
 echo -e '\t{NULL, NULL, 0, NULL, 0}' >> $outFile

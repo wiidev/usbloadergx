@@ -31,22 +31,22 @@ extern "C"
 {
 #endif /* __cplusplus */
 
-    typedef void (*dvdcallbacklow)(s32 result);
+	typedef void (*dvdcallbacklow)(s32 result);
 
-    s32 bwDVD_LowInit();
-    s32 bwDVD_LowInquiry(dvddrvinfo *info, dvdcallbacklow cb);
-    s32 bwDVD_LowReadID(dvddiskid *diskID, dvdcallbacklow cb);
-    s32 bwDVD_LowClosePartition(dvdcallbacklow cb);
-    s32 bwDVD_LowOpenPartition(u32 offset, void *eticket, u32 certin_len, void *certificate_in, void *certificate_out,
-            dvdcallbacklow cb);
-    s32 bwDVD_LowUnencryptedRead(void *buf, u32 len, u32 offset, dvdcallbacklow cb);
-    s32 bwDVD_LowReset(dvdcallbacklow cb);
-    s32 bwDVD_LowWaitCoverClose(dvdcallbacklow cb);
-    s32 bwDVD_LowRead(void *buf, u32 len, u32 offset, dvdcallbacklow cb);
-    s32 bwDVD_EnableVideo(dvdcallbacklow cb);
-    s32 bwDVD_LowReadVideo(void *buf, u32 len, u32 offset, dvdcallbacklow cb);
-    s32 bwDVD_SetDecryption(s32 mode, dvdcallbacklow cb);
-    s32 bwDVD_SetOffset(u32 offset, dvdcallbacklow cb);
+	s32 bwDVD_LowInit();
+	s32 bwDVD_LowInquiry(dvddrvinfo *info, dvdcallbacklow cb);
+	s32 bwDVD_LowReadID(dvddiskid *diskID, dvdcallbacklow cb);
+	s32 bwDVD_LowClosePartition(dvdcallbacklow cb);
+	s32 bwDVD_LowOpenPartition(u32 offset, void *eticket, u32 certin_len, void *certificate_in, void *certificate_out,
+			dvdcallbacklow cb);
+	s32 bwDVD_LowUnencryptedRead(void *buf, u32 len, u32 offset, dvdcallbacklow cb);
+	s32 bwDVD_LowReset(dvdcallbacklow cb);
+	s32 bwDVD_LowWaitCoverClose(dvdcallbacklow cb);
+	s32 bwDVD_LowRead(void *buf, u32 len, u32 offset, dvdcallbacklow cb);
+	s32 bwDVD_EnableVideo(dvdcallbacklow cb);
+	s32 bwDVD_LowReadVideo(void *buf, u32 len, u32 offset, dvdcallbacklow cb);
+	s32 bwDVD_SetDecryption(s32 mode, dvdcallbacklow cb);
+	s32 bwDVD_SetOffset(u32 offset, dvdcallbacklow cb);
 
 #ifdef __cplusplus
 }

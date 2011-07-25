@@ -35,27 +35,27 @@
 
 Theme_List::Theme_List(const char * url)
 {
-    if (!IsNetworkInit())
-        return;
+	if (!IsNetworkInit())
+		return;
 
 	u8 *buffer = NULL;
 	u32 size = 0;
 
-    DownloadWithResponse(url, &buffer, &size);
+	DownloadWithResponse(url, &buffer, &size);
 
-    if(!buffer)
-    	return;
+	if(!buffer)
+		return;
 
-    const char *xml = strstr((char *) buffer, "<?xml version=");
-    if(!xml)
+	const char *xml = strstr((char *) buffer, "<?xml version=");
+	if(!xml)
 	{
 		free(buffer);
 		return;
 	}
 
-    ParseXML(xml);
+	ParseXML(xml);
 
-    free(buffer);
+	free(buffer);
 }
 
 Theme_List::~Theme_List()
@@ -64,23 +64,23 @@ Theme_List::~Theme_List()
 
 bool Theme_List::ParseXML(const char * xmlfile)
 {
-    TiXmlDocument xmlDoc;
+	TiXmlDocument xmlDoc;
 
-    if(!xmlDoc.Parse(xmlfile))
-    	return false;
+	if(!xmlDoc.Parse(xmlfile))
+		return false;
 
 	TiXmlElement *themesNode =  xmlDoc.FirstChildElement("themes");
-    if (!themesNode)
-        return false;
+	if (!themesNode)
+		return false;
 
-    TiXmlElement *theme = themesNode->FirstChildElement("theme");
+	TiXmlElement *theme = themesNode->FirstChildElement("theme");
 
-    while(theme)
-    {
-        int i = ThemesList.size();
-        ThemesList.resize(i+1);
+	while(theme)
+	{
+		int i = ThemesList.size();
+		ThemesList.resize(i+1);
 
-        TiXmlElement *node = NULL;
+		TiXmlElement *node = NULL;
 
 		node = theme->FirstChildElement("name");
 		if(node && node->FirstChild() && node->FirstChild()->Value())
@@ -102,40 +102,40 @@ bool Theme_List::ParseXML(const char * xmlfile)
 		if(node && node->FirstChild() && node->FirstChild()->Value())
 			ThemesList[i].rating = atoi(node->FirstChild()->Value());
 
-        theme = theme->NextSiblingElement();
-    }
+		theme = theme->NextSiblingElement();
+	}
 
-    return true;
+	return true;
 }
 
 const char * Theme_List::GetThemeTitle(int ind) const
 {
-    if (ind < 0 || ind >= (int) ThemesList.size())
-        return NULL;
+	if (ind < 0 || ind >= (int) ThemesList.size())
+		return NULL;
 
-    else return ThemesList[ind].themetitle.c_str();
+	else return ThemesList[ind].themetitle.c_str();
 }
 
 const char * Theme_List::GetThemeAuthor(int ind) const
 {
-    if (ind < 0 || ind >= (int) ThemesList.size())
-        return NULL;
+	if (ind < 0 || ind >= (int) ThemesList.size())
+		return NULL;
 
-    return ThemesList[ind].author.c_str();
+	return ThemesList[ind].author.c_str();
 }
 
 const char * Theme_List::GetImageLink(int ind) const
 {
-    if (ind < 0 || ind >= (int) ThemesList.size())
-        return NULL;
+	if (ind < 0 || ind >= (int) ThemesList.size())
+		return NULL;
 
-    return ThemesList[ind].imagelink.c_str();
+	return ThemesList[ind].imagelink.c_str();
 }
 
 const char * Theme_List::GetDownloadLink(int ind) const
 {
-    if (ind < 0 || ind >= (int) ThemesList.size())
-        return NULL;
+	if (ind < 0 || ind >= (int) ThemesList.size())
+		return NULL;
 
-    return ThemesList[ind].downloadlink.c_str();
+	return ThemesList[ind].downloadlink.c_str();
 }

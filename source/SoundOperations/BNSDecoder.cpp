@@ -32,112 +32,112 @@
 SoundBlock DecodefromBNS(const u8 *buffer, u32 size);
 
 BNSDecoder::BNSDecoder(const char * filepath)
-    : SoundDecoder(filepath)
+	: SoundDecoder(filepath)
 {
-    SoundType = SOUND_BNS;
-    memset(&SoundData, 0, sizeof(SoundBlock));
+	SoundType = SOUND_BNS;
+	memset(&SoundData, 0, sizeof(SoundBlock));
 
-    if(!file_fd)
-        return;
+	if(!file_fd)
+		return;
 
-    OpenFile();
+	OpenFile();
 }
 
 BNSDecoder::BNSDecoder(const u8 * snd, int len)
-    : SoundDecoder(snd, len)
+	: SoundDecoder(snd, len)
 {
-    SoundType = SOUND_BNS;
-    memset(&SoundData, 0, sizeof(SoundBlock));
+	SoundType = SOUND_BNS;
+	memset(&SoundData, 0, sizeof(SoundBlock));
 
-    if(!file_fd)
-        return;
+	if(!file_fd)
+		return;
 
-    OpenFile();
+	OpenFile();
 }
 
 BNSDecoder::~BNSDecoder()
 {
-    ExitRequested = true;
-    while(Decoding)
-        usleep(100);
+	ExitRequested = true;
+	while(Decoding)
+		usleep(100);
 
-    if(SoundData.buffer != NULL)
-        free(SoundData.buffer);
+	if(SoundData.buffer != NULL)
+		free(SoundData.buffer);
 
-    SoundData.buffer = NULL;
+	SoundData.buffer = NULL;
 }
 
 void BNSDecoder::OpenFile()
 {
-    u8 * tempbuff = new (std::nothrow) u8[file_fd->size()];
-    if(!tempbuff)
-    {
-        CloseFile();
-        return;
-    }
+	u8 * tempbuff = new (std::nothrow) u8[file_fd->size()];
+	if(!tempbuff)
+	{
+		CloseFile();
+		return;
+	}
 
-    int done = 0;
+	int done = 0;
 
-    while(done < file_fd->size())
-    {
-        int read = file_fd->read(tempbuff, file_fd->size());
-        if(read > 0)
-            done += read;
-        else
-        {
-            CloseFile();
-            return;
-        }
-    }
+	while(done < file_fd->size())
+	{
+		int read = file_fd->read(tempbuff, file_fd->size());
+		if(read > 0)
+			done += read;
+		else
+		{
+			CloseFile();
+			return;
+		}
+	}
 
-    SoundData = DecodefromBNS(tempbuff, done);
-    if(SoundData.buffer == NULL)
-    {
-        CloseFile();
-        return;
-    }
+	SoundData = DecodefromBNS(tempbuff, done);
+	if(SoundData.buffer == NULL)
+	{
+		CloseFile();
+		return;
+	}
 
-    delete [] tempbuff;
-    tempbuff = NULL;
+	delete [] tempbuff;
+	tempbuff = NULL;
 
-    Decode();
+	Decode();
 }
 
 void BNSDecoder::CloseFile()
 {
-    if(file_fd)
-        delete file_fd;
+	if(file_fd)
+		delete file_fd;
 
-    file_fd = NULL;
+	file_fd = NULL;
 }
 
 int BNSDecoder::Read(u8 * buffer, int buffer_size, int pos)
 {
-    if(!SoundData.buffer)
-        return -1;
+	if(!SoundData.buffer)
+		return -1;
 
-    if(SoundData.loopFlag)
-    {
-        int factor = SoundData.format == VOICE_STEREO_16BIT ? 4 : 2;
-        if(CurPos >= (int) SoundData.loopEnd*factor)
-            CurPos = SoundData.loopStart*factor;
+	if(SoundData.loopFlag)
+	{
+		int factor = SoundData.format == VOICE_STEREO_16BIT ? 4 : 2;
+		if(CurPos >= (int) SoundData.loopEnd*factor)
+			CurPos = SoundData.loopStart*factor;
 
-        if(buffer_size > (int) SoundData.loopEnd*factor-CurPos)
-            buffer_size = SoundData.loopEnd*factor-CurPos;
-    }
-    else
-    {
-        if(CurPos >= (int) SoundData.size)
-            return 0;
+		if(buffer_size > (int) SoundData.loopEnd*factor-CurPos)
+			buffer_size = SoundData.loopEnd*factor-CurPos;
+	}
+	else
+	{
+		if(CurPos >= (int) SoundData.size)
+			return 0;
 
-        if(buffer_size > (int) SoundData.size-CurPos)
-            buffer_size = SoundData.size-CurPos;
-    }
+		if(buffer_size > (int) SoundData.size-CurPos)
+			buffer_size = SoundData.size-CurPos;
+	}
 
-    memcpy(buffer, SoundData.buffer+CurPos, buffer_size);
-    CurPos += buffer_size;
+	memcpy(buffer, SoundData.buffer+CurPos, buffer_size);
+	CurPos += buffer_size;
 
-    return buffer_size;
+	return buffer_size;
 }
 
 struct BNSHeader
@@ -309,8 +309,8 @@ static u8 * decodeBNS(u32 &size, const BNSInfo &bnsInfo, const BNSData &bnsData)
 
 SoundBlock DecodefromBNS(const u8 *buffer, u32 size)
 {
-    SoundBlock OutBlock;
-    memset(&OutBlock, 0, sizeof(SoundBlock));
+	SoundBlock OutBlock;
+	memset(&OutBlock, 0, sizeof(SoundBlock));
 
 	const BNSHeader &hdr = *(BNSHeader *)buffer;
 	if (size < sizeof hdr)

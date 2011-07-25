@@ -28,14 +28,14 @@
 
 class CustomPathsSM : public SettingsMenu
 {
-    public:
-        CustomPathsSM();
-    protected:
-        void SetOptionValues();
-        int GetMenuInternal();
-        int ChangePath(char * SettingsPath, int SizeOfPath);
+	public:
+		CustomPathsSM();
+	protected:
+		void SetOptionValues();
+		int GetMenuInternal();
+		int ChangePath(char * SettingsPath, int SizeOfPath);
 
-        OptionList GuiOptions;
+		OptionList GuiOptions;
 };
 
 

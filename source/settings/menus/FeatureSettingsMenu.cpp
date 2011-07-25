@@ -36,185 +36,185 @@
 
 static const char * OnOffText[] =
 {
-    trNOOP( "OFF" ),
-    trNOOP( "ON" )
+	trNOOP( "OFF" ),
+	trNOOP( "ON" )
 };
 
 static const char * WiilightText[WIILIGHT_MAX] =
 {
-    trNOOP( "OFF" ),
-    trNOOP( "ON" ),
-    trNOOP( "Only for Install" )
+	trNOOP( "OFF" ),
+	trNOOP( "ON" ),
+	trNOOP( "Only for Install" )
 };
 
 FeatureSettingsMenu::FeatureSettingsMenu()
-    : SettingsMenu(tr("Features Settings"), &GuiOptions, MENU_NONE)
+	: SettingsMenu(tr("Features Settings"), &GuiOptions, MENU_NONE)
 {
-    int Idx = 0;
-    Options->SetName(Idx++, "%s", tr( "Titles from WiiTDB" ));
-    Options->SetName(Idx++, "%s", tr( "Cache Titles" ));
-    Options->SetName(Idx++, "%s", tr( "Wiilight" ));
-    Options->SetName(Idx++, "%s", tr( "Rumble" ));
-    Options->SetName(Idx++, "%s", tr( "AutoInit Network" ));
-    Options->SetName(Idx++, "%s", tr( "Messageboard Update" ));
-    Options->SetName(Idx++, "%s", tr( "Wiinnertag" ));
-    Options->SetName(Idx++, "%s", tr( "Import Categories" ));
+	int Idx = 0;
+	Options->SetName(Idx++, "%s", tr( "Titles from WiiTDB" ));
+	Options->SetName(Idx++, "%s", tr( "Cache Titles" ));
+	Options->SetName(Idx++, "%s", tr( "Wiilight" ));
+	Options->SetName(Idx++, "%s", tr( "Rumble" ));
+	Options->SetName(Idx++, "%s", tr( "AutoInit Network" ));
+	Options->SetName(Idx++, "%s", tr( "Messageboard Update" ));
+	Options->SetName(Idx++, "%s", tr( "Wiinnertag" ));
+	Options->SetName(Idx++, "%s", tr( "Import Categories" ));
 
-    OldTitlesOverride = Settings.titlesOverride;
+	OldTitlesOverride = Settings.titlesOverride;
 
-    SetOptionValues();
+	SetOptionValues();
 }
 
 FeatureSettingsMenu::~FeatureSettingsMenu()
 {
-    if (Settings.titlesOverride != OldTitlesOverride)
-    {
-        GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path, true);
-        if(!Settings.titlesOverride)
-            gameList.ReadGameList();
-    }
+	if (Settings.titlesOverride != OldTitlesOverride)
+	{
+		GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path, true);
+		if(!Settings.titlesOverride)
+			gameList.ReadGameList();
+	}
 }
 
 void FeatureSettingsMenu::SetOptionValues()
 {
-    int Idx = 0;
+	int Idx = 0;
 
-    //! Settings: Titles from WiiTDB
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.titlesOverride] ));
+	//! Settings: Titles from WiiTDB
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.titlesOverride] ));
 
-    //! Settings: Cache Titles
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.CacheTitles] ));
+	//! Settings: Cache Titles
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.CacheTitles] ));
 
-    //! Settings: Wiilight
-    Options->SetValue(Idx++, "%s", tr( WiilightText[Settings.wiilight] ));
+	//! Settings: Wiilight
+	Options->SetValue(Idx++, "%s", tr( WiilightText[Settings.wiilight] ));
 
-    //! Settings: Rumble
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.rumble] ));
+	//! Settings: Rumble
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.rumble] ));
 
-    //! Settings: AutoInit Network
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.autonetwork] ));
+	//! Settings: AutoInit Network
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.autonetwork] ));
 
-    //! Settings: Messageboard Update
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.PlaylogUpdate] ));
+	//! Settings: Messageboard Update
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.PlaylogUpdate] ));
 
-    //! Settings: Wiinnertag
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.Wiinnertag] ));
+	//! Settings: Wiinnertag
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.Wiinnertag] ));
 
-    //! Settings: Import categories from WiiTDB
-    Options->SetValue(Idx++, " ");
+	//! Settings: Import categories from WiiTDB
+	Options->SetValue(Idx++, " ");
 }
 
 int FeatureSettingsMenu::GetMenuInternal()
 {
-    int ret = optionBrowser->GetClickedOption();
+	int ret = optionBrowser->GetClickedOption();
 
-    if (ret < 0)
-        return MENU_NONE;
+	if (ret < 0)
+		return MENU_NONE;
 
-    int Idx = -1;
+	int Idx = -1;
 
 
-    //! Settings: Titles from WiiTDB
-    if (ret == ++Idx)
-    {
-        if (++Settings.titlesOverride >= MAX_ON_OFF) Settings.titlesOverride = 0;
-    }
+	//! Settings: Titles from WiiTDB
+	if (ret == ++Idx)
+	{
+		if (++Settings.titlesOverride >= MAX_ON_OFF) Settings.titlesOverride = 0;
+	}
 
-    //! Settings: Cache Titles
-    else if (ret == ++Idx)
-    {
-        if (++Settings.CacheTitles >= MAX_ON_OFF) Settings.CacheTitles = 0;
+	//! Settings: Cache Titles
+	else if (ret == ++Idx)
+	{
+		if (++Settings.CacheTitles >= MAX_ON_OFF) Settings.CacheTitles = 0;
 
-        if(Settings.CacheTitles) //! create new cache file
-            GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
-    }
+		if(Settings.CacheTitles) //! create new cache file
+			GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
+	}
 
-    //! Settings: Wiilight
-    else if (ret == ++Idx)
-    {
-        if (++Settings.wiilight >= WIILIGHT_MAX) Settings.wiilight = 0;
-    }
+	//! Settings: Wiilight
+	else if (ret == ++Idx)
+	{
+		if (++Settings.wiilight >= WIILIGHT_MAX) Settings.wiilight = 0;
+	}
 
-    //! Settings: Rumble
-    else if (ret == ++Idx)
-    {
-        if (++Settings.rumble >= MAX_ON_OFF) Settings.rumble = 0; //RUMBLE
-    }
+	//! Settings: Rumble
+	else if (ret == ++Idx)
+	{
+		if (++Settings.rumble >= MAX_ON_OFF) Settings.rumble = 0; //RUMBLE
+	}
 
-    //! Settings: AutoInit Network
-    else if (ret == ++Idx)
-    {
-        if (++Settings.autonetwork >= MAX_ON_OFF) Settings.autonetwork = 0;
-    }
+	//! Settings: AutoInit Network
+	else if (ret == ++Idx)
+	{
+		if (++Settings.autonetwork >= MAX_ON_OFF) Settings.autonetwork = 0;
+	}
 
-    //! Settings: Messageboard Update
-    else if (ret == ++Idx )
-    {
-        if (++Settings.PlaylogUpdate >= MAX_ON_OFF) Settings.PlaylogUpdate = 0;
-    }
+	//! Settings: Messageboard Update
+	else if (ret == ++Idx )
+	{
+		if (++Settings.PlaylogUpdate >= MAX_ON_OFF) Settings.PlaylogUpdate = 0;
+	}
 
-    //! Settings: Winnertag
-    else if (ret == ++Idx)
-    {
-        if (++Settings.Wiinnertag >= MAX_ON_OFF) Settings.Wiinnertag = 0;
+	//! Settings: Winnertag
+	else if (ret == ++Idx)
+	{
+		if (++Settings.Wiinnertag >= MAX_ON_OFF) Settings.Wiinnertag = 0;
 
-        if(Settings.Wiinnertag == ON && !Settings.autonetwork)
-        {
-            int choice = WindowPrompt(tr("Warning"), tr("Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"), tr("Yes"), tr("Cancel"));
-            if(choice)
-            {
-                Settings.autonetwork = ON;
-                if(!IsNetworkInit())
-                    Initialize_Network();
-            }
-        }
+		if(Settings.Wiinnertag == ON && !Settings.autonetwork)
+		{
+			int choice = WindowPrompt(tr("Warning"), tr("Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"), tr("Yes"), tr("Cancel"));
+			if(choice)
+			{
+				Settings.autonetwork = ON;
+				if(!IsNetworkInit())
+					Initialize_Network();
+			}
+		}
 
-        char filepath[200];
-        snprintf(filepath, sizeof(filepath), "%sWiinnertag.xml", Settings.WiinnertagPath);
+		char filepath[200];
+		snprintf(filepath, sizeof(filepath), "%sWiinnertag.xml", Settings.WiinnertagPath);
 
-        if(Settings.Wiinnertag == ON && !CheckFile(filepath))
-        {
-            int choice = WindowPrompt(tr("Warning"), tr("No Wiinnertag.xml found in the config path. Do you want an example file created?"), tr("Yes"), tr("No"));
-            if(choice)
-            {
-                if(Wiinnertag::CreateExample(Settings.WiinnertagPath))
-                {
-                    char text[200];
-                    snprintf(text, sizeof(text), "%s %s", tr("An example file was created here:"), filepath);
-                    WindowPrompt(tr("Success"), text, tr("OK"));
-                }
-                else
-                {
-                    char text[200];
-                    snprintf(text, sizeof(text), "%s %s", tr("Could not write to:"), filepath);
-                    WindowPrompt(tr("Failed"), text, tr("OK"));
-                }
-            }
-        }
-    }
+		if(Settings.Wiinnertag == ON && !CheckFile(filepath))
+		{
+			int choice = WindowPrompt(tr("Warning"), tr("No Wiinnertag.xml found in the config path. Do you want an example file created?"), tr("Yes"), tr("No"));
+			if(choice)
+			{
+				if(Wiinnertag::CreateExample(Settings.WiinnertagPath))
+				{
+					char text[200];
+					snprintf(text, sizeof(text), "%s %s", tr("An example file was created here:"), filepath);
+					WindowPrompt(tr("Success"), text, tr("OK"));
+				}
+				else
+				{
+					char text[200];
+					snprintf(text, sizeof(text), "%s %s", tr("Could not write to:"), filepath);
+					WindowPrompt(tr("Failed"), text, tr("OK"));
+				}
+			}
+		}
+	}
 
-    //! Settings: Import categories from WiiTDB
-    else if (ret == ++Idx)
-    {
-        int choice = WindowPrompt(tr("Import Categories"), tr("Are you sure you want to import game categories from WiiTDB?"), tr("Yes"), tr("Cancel"));
-        if(choice)
-        {
-            char xmlpath[300];
-            snprintf(xmlpath, sizeof(xmlpath), "%swiitdb.xml", Settings.titlestxt_path);
-            if(!GameCategories.ImportFromWiiTDB(xmlpath))
-            {
-                WindowPrompt(tr("Error"), tr("Could not open the WiiTDB.xml file."), tr("OK"));
-            }
-            else
-            {
-                GameCategories.Save();
-                GameCategories.CategoryList.goToFirst();
-                WindowPrompt(tr("Import Categories"), tr("Import operation successfully completed."), tr("OK"));
-            }
-        }
-    }
+	//! Settings: Import categories from WiiTDB
+	else if (ret == ++Idx)
+	{
+		int choice = WindowPrompt(tr("Import Categories"), tr("Are you sure you want to import game categories from WiiTDB?"), tr("Yes"), tr("Cancel"));
+		if(choice)
+		{
+			char xmlpath[300];
+			snprintf(xmlpath, sizeof(xmlpath), "%swiitdb.xml", Settings.titlestxt_path);
+			if(!GameCategories.ImportFromWiiTDB(xmlpath))
+			{
+				WindowPrompt(tr("Error"), tr("Could not open the WiiTDB.xml file."), tr("OK"));
+			}
+			else
+			{
+				GameCategories.Save();
+				GameCategories.CategoryList.goToFirst();
+				WindowPrompt(tr("Import Categories"), tr("Import operation successfully completed."), tr("OK"));
+			}
+		}
+	}
 
-    SetOptionValues();
+	SetOptionValues();
 
-    return MENU_NONE;
+	return MENU_NONE;
 }

@@ -55,21 +55,21 @@ typedef struct
 
 class WavDecoder : public SoundDecoder
 {
-    public:
-        WavDecoder(const char * filepath);
-        WavDecoder(const u8 * snd, int len);
-        virtual ~WavDecoder();
-        int GetFormat() { return Format; };
-        int GetSampleRate() { return SampleRate; };
-        int Read(u8 * buffer, int buffer_size, int pos);
-    protected:
-        void OpenFile();
-        void CloseFile();
-        u32 DataOffset;
-        u32 DataSize;
-        u32 SampleRate;
-        u8 Format;
-        bool Is16Bit;
+	public:
+		WavDecoder(const char * filepath);
+		WavDecoder(const u8 * snd, int len);
+		virtual ~WavDecoder();
+		int GetFormat() { return Format; };
+		int GetSampleRate() { return SampleRate; };
+		int Read(u8 * buffer, int buffer_size, int pos);
+	protected:
+		void OpenFile();
+		void CloseFile();
+		u32 DataOffset;
+		u32 DataSize;
+		u32 SampleRate;
+		u8 Format;
+		bool Is16Bit;
 };
 
 #endif

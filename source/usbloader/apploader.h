@@ -6,11 +6,11 @@ extern "C"
 {
 #endif
 
-    /* Entry point */
-    typedef void (*entry_point)(void);
+	/* Entry point */
+	typedef void (*entry_point)(void);
 
-    /* Prototypes */
-    s32 Apploader_Run(entry_point *entry, char * dolpath, u8 alternatedol, u32 alternatedoloffset);
+	/* Prototypes */
+	s32 Apploader_Run(entry_point *entry, char * dolpath, u8 alternatedol, u32 alternatedoloffset);
 
 #ifdef __cplusplus
 }

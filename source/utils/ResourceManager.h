@@ -32,10 +32,10 @@
 
 typedef struct _ImageData
 {
-    u8 * data;
-    int width;
-    int height;
-    u8 format;
+	u8 * data;
+	int width;
+	int height;
+	u8 format;
 } ImageData;
 
 class ResourceManager
@@ -48,7 +48,7 @@ class ResourceManager
 		static ImageData * GetImageData(const u8 *img);
 		static void Remove(u8 * img);
 	private:
-        void InternalAddImageData(const u8 * img, ImageData & Data);
+		void InternalAddImageData(const u8 * img, ImageData & Data);
 		ImageData *InternalGetImageData(const u8 *img);
 		void InternalRemoveImageData(u8 * img);
 

@@ -34,123 +34,123 @@
 
 SoundDecoder::SoundDecoder()
 {
-    file_fd = NULL;
-    Init();
+	file_fd = NULL;
+	Init();
 }
 
 SoundDecoder::SoundDecoder(const char * filepath)
 {
-    file_fd = new CFile(filepath, "rb");
-    Init();
+	file_fd = new CFile(filepath, "rb");
+	Init();
 }
 
 SoundDecoder::SoundDecoder(const u8 * buffer, int size)
 {
-    file_fd = new CFile(buffer, size);
-    Init();
+	file_fd = new CFile(buffer, size);
+	Init();
 }
 
 SoundDecoder::~SoundDecoder()
 {
-    ExitRequested = true;
-    while(Decoding)
-        usleep(100);
+	ExitRequested = true;
+	while(Decoding)
+		usleep(100);
 
-    if(file_fd)
-        delete file_fd;
-    file_fd = NULL;
+	if(file_fd)
+		delete file_fd;
+	file_fd = NULL;
 }
 
 void SoundDecoder::Init()
 {
-    SoundType = SOUND_RAW;
-    SoundBlocks = 8;
-    SoundBlockSize = 8192;
-    CurPos = 0;
-    Loop = false;
-    EndOfFile = false;
-    Decoding = false;
-    ExitRequested = false;
-    SoundBuffer.SetBufferBlockSize(SoundBlockSize);
-    SoundBuffer.Resize(SoundBlocks);
+	SoundType = SOUND_RAW;
+	SoundBlocks = 8;
+	SoundBlockSize = 8192;
+	CurPos = 0;
+	Loop = false;
+	EndOfFile = false;
+	Decoding = false;
+	ExitRequested = false;
+	SoundBuffer.SetBufferBlockSize(SoundBlockSize);
+	SoundBuffer.Resize(SoundBlocks);
 }
 
 int SoundDecoder::Rewind()
 {
-    CurPos = 0;
-    EndOfFile = false;
-    file_fd->rewind();
+	CurPos = 0;
+	EndOfFile = false;
+	file_fd->rewind();
 
-    return 0;
+	return 0;
 }
 
 int SoundDecoder::Read(u8 * buffer, int buffer_size, int pos)
 {
-    int ret = file_fd->read(buffer, buffer_size);
-    CurPos += ret;
+	int ret = file_fd->read(buffer, buffer_size);
+	CurPos += ret;
 
-    return ret;
+	return ret;
 }
 
 void SoundDecoder::Decode()
 {
-    if(!file_fd || ExitRequested || EndOfFile)
-        return;
+	if(!file_fd || ExitRequested || EndOfFile)
+		return;
 
-    u16 newWhich = SoundBuffer.Which();
-    u16 i = 0;
-    for (i = 0; i < SoundBuffer.Size()-2; i++)
-    {
-        if(!SoundBuffer.IsBufferReady(newWhich))
-            break;
+	u16 newWhich = SoundBuffer.Which();
+	u16 i = 0;
+	for (i = 0; i < SoundBuffer.Size()-2; i++)
+	{
+		if(!SoundBuffer.IsBufferReady(newWhich))
+			break;
 
-        newWhich = (newWhich+1) % SoundBuffer.Size();
-    }
+		newWhich = (newWhich+1) % SoundBuffer.Size();
+	}
 
-    if(i == SoundBuffer.Size()-2)
-        return;
+	if(i == SoundBuffer.Size()-2)
+		return;
 
-    Decoding = true;
+	Decoding = true;
 
-    int done  = 0;
-    u8 * write_buf = SoundBuffer.GetBuffer(newWhich);
-    if(!write_buf)
-    {
-        ExitRequested = true;
-        Decoding = false;
-        return;
-    }
+	int done  = 0;
+	u8 * write_buf = SoundBuffer.GetBuffer(newWhich);
+	if(!write_buf)
+	{
+		ExitRequested = true;
+		Decoding = false;
+		return;
+	}
 
-    while(done < SoundBlockSize)
-    {
-        int ret = Read(&write_buf[done], SoundBlockSize-done, Tell());
+	while(done < SoundBlockSize)
+	{
+		int ret = Read(&write_buf[done], SoundBlockSize-done, Tell());
 
-        if(ret <= 0)
-        {
-            if(Loop)
-            {
-                Rewind();
-                continue;
-            }
-            else
-            {
-                EndOfFile = true;
-                break;
-            }
-        }
+		if(ret <= 0)
+		{
+			if(Loop)
+			{
+				Rewind();
+				continue;
+			}
+			else
+			{
+				EndOfFile = true;
+				break;
+			}
+		}
 
-        done += ret;
-    }
+		done += ret;
+	}
 
-    if(done > 0)
-    {
-        SoundBuffer.SetBufferSize(newWhich, done);
-        SoundBuffer.SetBufferReady(newWhich, true);
-    }
+	if(done > 0)
+	{
+		SoundBuffer.SetBufferSize(newWhich, done);
+		SoundBuffer.SetBufferReady(newWhich, true);
+	}
 
 	if(!SoundBuffer.IsBufferReady((newWhich+1) % SoundBuffer.Size()))
-        Decode();
+		Decode();
 
-    Decoding = false;
+	Decoding = false;
 }
 

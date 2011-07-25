@@ -27,99 +27,99 @@
 #include "language/gettext.h"
 
 SettingsMenu::SettingsMenu(const char * title, OptionList * opts, int returnTo)
-    : GuiWindow(screenwidth, screenheight)
+	: GuiWindow(screenwidth, screenheight)
 {
-    Options = opts;
-    returnToMenu = returnTo;
-    trigA = NULL;
-    trigB = NULL;
-    backBtnTxt = NULL;
-    backBtnImg = NULL;
-    backBtn = NULL;
-    btnOutline = NULL;
+	Options = opts;
+	returnToMenu = returnTo;
+	trigA = NULL;
+	trigB = NULL;
+	backBtnTxt = NULL;
+	backBtnImg = NULL;
+	backBtn = NULL;
+	btnOutline = NULL;
 
-    //! Skipping back button if there is no menu defined to go back to
-    if(returnToMenu != MENU_NONE)
-    {
-        btnOutline = Resources::GetImageData("button_dialogue_box.png");
+	//! Skipping back button if there is no menu defined to go back to
+	if(returnToMenu != MENU_NONE)
+	{
+		btnOutline = Resources::GetImageData("button_dialogue_box.png");
 
-        trigA = new GuiTrigger();
-        trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+		trigA = new GuiTrigger();
+		trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
-        trigB = new GuiTrigger();
-        trigB->SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
+		trigB = new GuiTrigger();
+		trigB->SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-        backBtnTxt = new GuiText(tr("Back"), 22, (GXColor){0, 0, 0, 255});
-        backBtnImg = new GuiImage(btnOutline);
-        backBtn = new GuiButton(backBtnImg, backBtnImg, 2, 3, -180, 400, trigA, btnSoundOver, btnSoundClick2, 1);
-        backBtn->SetLabel(backBtnTxt);
-        backBtn->SetTrigger(trigB);
-        Append(backBtn);
-    }
+		backBtnTxt = new GuiText(tr("Back"), 22, (GXColor){0, 0, 0, 255});
+		backBtnImg = new GuiImage(btnOutline);
+		backBtn = new GuiButton(backBtnImg, backBtnImg, 2, 3, -180, 400, trigA, btnSoundOver, btnSoundClick2, 1);
+		backBtn->SetLabel(backBtnTxt);
+		backBtn->SetTrigger(trigB);
+		Append(backBtn);
+	}
 
 	optionBrowser = new GuiOptionBrowser(396, 280, Options, "bg_options_settings.png");
-    optionBrowser->SetAlignment(thAlign("center - settings option browser align hor"), thAlign("top - settings option browser align ver"));
-    optionBrowser->SetPosition(thInt("0 - settings option browser pos x"), thInt("90 - settings option browser pos y"));
+	optionBrowser->SetAlignment(thAlign("center - settings option browser align hor"), thAlign("top - settings option browser align ver"));
+	optionBrowser->SetPosition(thInt("0 - settings option browser pos x"), thInt("90 - settings option browser pos y"));
 
 	titleTxt = new GuiText(title, 28, thColor("r=0 g=0 b=0 a=255 - settings title text color"));
-    titleTxt->SetAlignment(thAlign("center - settings title text align hor"), thAlign("top - settings title text align ver"));
-    titleTxt->SetPosition(thInt("0 - settings title text pos x"), thInt("40 - settings title text pos y"));
-    titleTxt->SetMaxWidth(thInt("310 - settings title text max width"), SCROLL_HORIZONTAL);
+	titleTxt->SetAlignment(thAlign("center - settings title text align hor"), thAlign("top - settings title text align ver"));
+	titleTxt->SetPosition(thInt("0 - settings title text pos x"), thInt("40 - settings title text pos y"));
+	titleTxt->SetMaxWidth(thInt("310 - settings title text max width"), SCROLL_HORIZONTAL);
 
 	Append(optionBrowser);
 	Append(titleTxt);
 
-    SetEffect(EFFECT_FADE, 50);
+	SetEffect(EFFECT_FADE, 50);
 }
 
 SettingsMenu::~SettingsMenu()
 {
-    ResumeGui();
+	ResumeGui();
 
-    SetEffect(EFFECT_FADE, -50);
-    while(this->GetEffect() > 0)
-        usleep(100);
+	SetEffect(EFFECT_FADE, -50);
+	while(this->GetEffect() > 0)
+		usleep(100);
 
-    HaltGui();
-    if(parentElement)
-        ((GuiWindow *) parentElement)->Remove(this);
+	HaltGui();
+	if(parentElement)
+		((GuiWindow *) parentElement)->Remove(this);
 
-    RemoveAll();
+	RemoveAll();
 
-    if(btnOutline)
-        delete btnOutline;
+	if(btnOutline)
+		delete btnOutline;
 
-    if(backBtnTxt)
-        delete backBtnTxt;
-    if(backBtnImg)
-        delete backBtnImg;
-    if(backBtn)
-        delete backBtn;
+	if(backBtnTxt)
+		delete backBtnTxt;
+	if(backBtnImg)
+		delete backBtnImg;
+	if(backBtn)
+		delete backBtn;
 
-    if(trigA)
-        delete trigA;
-    if(trigB)
-        delete trigB;
+	if(trigA)
+		delete trigA;
+	if(trigB)
+		delete trigB;
 
-    delete titleTxt;
+	delete titleTxt;
 
-    delete optionBrowser;
+	delete optionBrowser;
 
-    ResumeGui();
+	ResumeGui();
 }
 
 int SettingsMenu::GetClickedOption()
 {
-    if(!optionBrowser)
-        return -1;
+	if(!optionBrowser)
+		return -1;
 
-    return optionBrowser->GetClickedOption();
+	return optionBrowser->GetClickedOption();
 }
 
 int SettingsMenu::GetMenu()
 {
-    if(backBtn && backBtn->GetState() == STATE_CLICKED)
-        return returnToMenu;
+	if(backBtn && backBtn->GetState() == STATE_CLICKED)
+		return returnToMenu;
 
-    return GetMenuInternal();
+	return GetMenuInternal();
 }

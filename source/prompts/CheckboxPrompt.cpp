@@ -28,25 +28,25 @@
 #include "language/gettext.h"
 
 CheckboxPrompt::CheckboxPrompt(const char * title, const char *msg)
-    : PromptWindow(title, msg)
+	: PromptWindow(title, msg)
 {
-    PromptWindow::AddButton(tr("OK"));
-    PromptWindow::AddButton(tr("Cancel"));
+	PromptWindow::AddButton(tr("OK"));
+	PromptWindow::AddButton(tr("Cancel"));
 }
 
 CheckboxPrompt::~CheckboxPrompt()
 {
-    ResumeGui();
+	ResumeGui();
 
-    SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-    while(parentElement && this->GetEffect() > 0) usleep(100);
+	SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+	while(parentElement && this->GetEffect() > 0) usleep(100);
 
-    HaltGui();
-    if(parentElement)
-        ((GuiWindow *) parentElement)->Remove(this);
-    parentElement = NULL;
+	HaltGui();
+	if(parentElement)
+		((GuiWindow *) parentElement)->Remove(this);
+	parentElement = NULL;
 
-    RemoveAll();
+	RemoveAll();
 
 	for(u32 i = 0; i < Checkbox.size(); ++i)
 	{
@@ -58,162 +58,162 @@ CheckboxPrompt::~CheckboxPrompt()
 
 void CheckboxPrompt::OnCheckBoxClick(GuiButton *sender, int chan, const POINT &pointer)
 {
-    sender->ResetState();
+	sender->ResetState();
 }
 
 void CheckboxPrompt::AddCheckBox(const char *text)
 {
-    int size = Checkbox.size();
-    if(size > 5)
-        return;
+	int size = Checkbox.size();
+	if(size > 5)
+		return;
 
-    CheckboxTxt.resize(size+1);
-    Checkbox.resize(size+1);
+	CheckboxTxt.resize(size+1);
+	Checkbox.resize(size+1);
 
-    CheckboxTxt[size] = new GuiText(text, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    CheckboxTxt[size]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-    CheckboxTxt[size]->SetPosition(30, 0);
+	CheckboxTxt[size] = new GuiText(text, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	CheckboxTxt[size]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+	CheckboxTxt[size]->SetPosition(30, 0);
 
-    Checkbox[size] = new GuiCheckbox(24, 24);
-    Checkbox[size]->SetLabel(CheckboxTxt[size]);
-    Checkbox[size]->SetSoundClick(btnSoundClick);
-    Checkbox[size]->SetSoundOver(btnSoundOver);
-    Checkbox[size]->SetTrigger(trigA);
-    Checkbox[size]->Clicked.connect(this, &CheckboxPrompt::OnCheckBoxClick);
-    Append(Checkbox[size]);
+	Checkbox[size] = new GuiCheckbox(24, 24);
+	Checkbox[size]->SetLabel(CheckboxTxt[size]);
+	Checkbox[size]->SetSoundClick(btnSoundClick);
+	Checkbox[size]->SetSoundOver(btnSoundOver);
+	Checkbox[size]->SetTrigger(trigA);
+	Checkbox[size]->Clicked.connect(this, &CheckboxPrompt::OnCheckBoxClick);
+	Append(Checkbox[size]);
 
-    if (Settings.wsprompt && Settings.widescreen)
-    {
-        if(size == 0)
-        {
-            Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(80, -190);
-        }
-        else if(size == 1)
-        {
-            Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(80, -150);
-        }
-        else if(size == 2)
-        {
-            Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(80, -110);
-        }
-        else if(size == 3)
-        {
-            Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(-210, -190);
-        }
-        else if(size == 4)
-        {
-            Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(-210, -150);
-        }
-        else if(size == 5)
-        {
-            Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(-210, -110);
-        }
-    }
-    else
-    {
-        if(size == 0)
-        {
-            Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(40, -190);
-        }
-        else if(size == 1)
-        {
-            Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(40, -150);
-        }
-        else if(size == 2)
-        {
-            Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(40, -110);
-        }
-        else if(size == 3)
-        {
-            Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(-210, -190);
-        }
-        else if(size == 4)
-        {
-            Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(-210, -150);
-        }
-        else if(size == 5)
-        {
-            Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-            Checkbox[size]->SetPosition(-210, -110);
-        }
-    }
+	if (Settings.wsprompt && Settings.widescreen)
+	{
+		if(size == 0)
+		{
+			Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+			Checkbox[size]->SetPosition(80, -190);
+		}
+		else if(size == 1)
+		{
+			Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+			Checkbox[size]->SetPosition(80, -150);
+		}
+		else if(size == 2)
+		{
+			Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+			Checkbox[size]->SetPosition(80, -110);
+		}
+		else if(size == 3)
+		{
+			Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+			Checkbox[size]->SetPosition(-210, -190);
+		}
+		else if(size == 4)
+		{
+			Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+			Checkbox[size]->SetPosition(-210, -150);
+		}
+		else if(size == 5)
+		{
+			Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+			Checkbox[size]->SetPosition(-210, -110);
+		}
+	}
+	else
+	{
+		if(size == 0)
+		{
+			Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+			Checkbox[size]->SetPosition(40, -190);
+		}
+		else if(size == 1)
+		{
+			Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+			Checkbox[size]->SetPosition(40, -150);
+		}
+		else if(size == 2)
+		{
+			Checkbox[size]->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+			Checkbox[size]->SetPosition(40, -110);
+		}
+		else if(size == 3)
+		{
+			Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+			Checkbox[size]->SetPosition(-210, -190);
+		}
+		else if(size == 4)
+		{
+			Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+			Checkbox[size]->SetPosition(-210, -150);
+		}
+		else if(size == 5)
+		{
+			Checkbox[size]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+			Checkbox[size]->SetPosition(-210, -110);
+		}
+	}
 }
 
 int CheckboxPrompt::GetChoice()
 {
-    int choice  = PromptWindow::GetChoice();
-    if(choice == 0)
-        return 0;
+	int choice  = PromptWindow::GetChoice();
+	if(choice == 0)
+		return 0;
 
-    else if(choice == 1)
-    {
-        int ret = 0;
+	else if(choice == 1)
+	{
+		int ret = 0;
 
-        for(u32 i = 0; i < Checkbox.size(); ++i)
-        {
-            if(Checkbox[i]->IsChecked())
-            {
-                ret ^= (int) pow(2, i);
-            }
-        }
+		for(u32 i = 0; i < Checkbox.size(); ++i)
+		{
+			if(Checkbox[i]->IsChecked())
+			{
+				ret ^= (int) pow(2, i);
+			}
+		}
 
-        return ret;
-    }
+		return ret;
+	}
 
-    return -1;
+	return -1;
 }
 
 
 int CheckboxPrompt::Show(const char *title, const char *msg,
-                         const char *chbx1, const char *chbx2,
-                         const char *chbx3, const char *chbx4,
-                         const char *chbx5, const char *chbx6)
+						 const char *chbx1, const char *chbx2,
+						 const char *chbx3, const char *chbx4,
+						 const char *chbx5, const char *chbx6)
 {
-    CheckboxPrompt * Window = new CheckboxPrompt(title, msg);
-    if(chbx1)
-        Window->AddCheckBox(chbx1);
-    if(chbx2)
-        Window->AddCheckBox(chbx2);
-    if(chbx3)
-        Window->AddCheckBox(chbx3);
-    if(chbx4)
-        Window->AddCheckBox(chbx4);
-    if(chbx5)
-        Window->AddCheckBox(chbx5);
-    if(chbx6)
-        Window->AddCheckBox(chbx6);
+	CheckboxPrompt * Window = new CheckboxPrompt(title, msg);
+	if(chbx1)
+		Window->AddCheckBox(chbx1);
+	if(chbx2)
+		Window->AddCheckBox(chbx2);
+	if(chbx3)
+		Window->AddCheckBox(chbx3);
+	if(chbx4)
+		Window->AddCheckBox(chbx4);
+	if(chbx5)
+		Window->AddCheckBox(chbx5);
+	if(chbx6)
+		Window->AddCheckBox(chbx6);
 
-    mainWindow->SetState(STATE_DISABLED);
-    mainWindow->Append(Window);
-    mainWindow->ChangeFocus(Window);
+	mainWindow->SetState(STATE_DISABLED);
+	mainWindow->Append(Window);
+	mainWindow->ChangeFocus(Window);
 
-    int choice = -1;
+	int choice = -1;
 
-    while (choice == -1)
-    {
-        usleep(100);
+	while (choice == -1)
+	{
+		usleep(100);
 
-        if (shutdown)
-            Sys_Shutdown();
-        if (reset)
-            Sys_Reboot();
+		if (shutdown)
+			Sys_Shutdown();
+		if (reset)
+			Sys_Reboot();
 
-        choice = Window->GetChoice();
-    }
+		choice = Window->GetChoice();
+	}
 
-    delete Window;
-    mainWindow->SetState(STATE_DEFAULT);
+	delete Window;
+	mainWindow->SetState(STATE_DEFAULT);
 
-    return choice;
+	return choice;
 }

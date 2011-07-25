@@ -32,74 +32,74 @@
 
 class FlyingButtonsMenu : public GuiWindow
 {
-    public:
-        FlyingButtonsMenu(const char * menu_title);
-        virtual ~FlyingButtonsMenu();
-        virtual int MainLoop();
-        virtual void HideMenu();
-        virtual void ShowMenu();
-    protected:
-        virtual void CreateSettingsMenu(int index) { };
-        virtual void DeleteSettingsMenu() { };
-        virtual void SetupMainButtons() { };
-        virtual void AddMainButtons();
-        virtual void ShowButtonsEffects(int effect, int effect_speed);
-        virtual void SlideButtons(int slide_direction);
-        virtual void SetPageIndicators();
-        virtual void SetMainButton(int position, const char * ButtonText, GuiImageData * imageData, GuiImageData * imageOver);
+	public:
+		FlyingButtonsMenu(const char * menu_title);
+		virtual ~FlyingButtonsMenu();
+		virtual int MainLoop();
+		virtual void HideMenu();
+		virtual void ShowMenu();
+	protected:
+		virtual void CreateSettingsMenu(int index) { };
+		virtual void DeleteSettingsMenu() { };
+		virtual void SetupMainButtons() { };
+		virtual void AddMainButtons();
+		virtual void ShowButtonsEffects(int effect, int effect_speed);
+		virtual void SlideButtons(int slide_direction);
+		virtual void SetPageIndicators();
+		virtual void SetMainButton(int position, const char * ButtonText, GuiImageData * imageData, GuiImageData * imageOver);
 
-        int currentPage;
-        int returnMenu;
-        int ParentMenu;
-        int FirstIndicator;
-        std::string MenuTitle;
-        enum
-        {
-            SLIDE_LEFT, SLIDE_RIGHT
-        };
+		int currentPage;
+		int returnMenu;
+		int ParentMenu;
+		int FirstIndicator;
+		std::string MenuTitle;
+		enum
+		{
+			SLIDE_LEFT, SLIDE_RIGHT
+		};
 
-        //!The main settings gui with browser
-        SettingsMenu * CurrentMenu;
+		//!The main settings gui with browser
+		SettingsMenu * CurrentMenu;
 
-        GuiImageData * btnOutline;
-        GuiImageData * settingsbg;
-        GuiImageData * MainButtonImgData;
-        GuiImageData * MainButtonImgOverData;
-        GuiImageData * PageindicatorImgData;
-        GuiImageData * arrow_left;
-        GuiImageData * arrow_right;
+		GuiImageData * btnOutline;
+		GuiImageData * settingsbg;
+		GuiImageData * MainButtonImgData;
+		GuiImageData * MainButtonImgOverData;
+		GuiImageData * PageindicatorImgData;
+		GuiImageData * arrow_left;
+		GuiImageData * arrow_right;
 
-        GuiImage * settingsbackground;
-        GuiImage * backBtnImg;
-        GuiImage * PageindicatorImg2;
-        GuiImage * GoLeftImg;
-        GuiImage * GoRightImg;
+		GuiImage * settingsbackground;
+		GuiImage * backBtnImg;
+		GuiImage * PageindicatorImg2;
+		GuiImage * GoLeftImg;
+		GuiImage * GoRightImg;
 
-        GuiTrigger * trigA;
-        GuiTrigger * trigHome;
-        GuiTrigger * trigB;
-        GuiTrigger * trigL;
-        GuiTrigger * trigR;
-        GuiTrigger * trigMinus;
-        GuiTrigger * trigPlus;
+		GuiTrigger * trigA;
+		GuiTrigger * trigHome;
+		GuiTrigger * trigB;
+		GuiTrigger * trigL;
+		GuiTrigger * trigR;
+		GuiTrigger * trigMinus;
+		GuiTrigger * trigPlus;
 
-        GuiText * titleTxt;
-        GuiText * backBtnTxt;
-        GuiText * PageindicatorTxt1;
+		GuiText * titleTxt;
+		GuiText * backBtnTxt;
+		GuiText * PageindicatorTxt1;
 
-        GuiButton * backBtn;
-        GuiButton * homeBtn;
-        GuiButton * GoLeftBtn;
-        GuiButton * GoRightBtn;
+		GuiButton * backBtn;
+		GuiButton * homeBtn;
+		GuiButton * GoLeftBtn;
+		GuiButton * GoRightBtn;
 
-        std::vector<GuiImage *>PageindicatorImg;
-        std::vector<GuiText *>PageindicatorTxt;
-        std::vector<GuiButton *>PageIndicatorBtn;
+		std::vector<GuiImage *>PageindicatorImg;
+		std::vector<GuiText *>PageindicatorTxt;
+		std::vector<GuiButton *>PageIndicatorBtn;
 
-        std::vector<GuiImage *> MainButtonImg;
-        std::vector<GuiImage *> MainButtonImgOver;
-        std::vector<GuiText *> MainButtonTxt;
-        std::vector<GuiButton *> MainButton;
+		std::vector<GuiImage *> MainButtonImg;
+		std::vector<GuiImage *> MainButtonImgOver;
+		std::vector<GuiText *> MainButtonTxt;
+		std::vector<GuiButton *> MainButton;
 };
 
 #endif

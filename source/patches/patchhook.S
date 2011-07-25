@@ -22,19 +22,19 @@ findblr:
 	b	exit		# stop unhooked game hanging
 
 writebranch:
-	lis     r4, 0x8000	# 800018A0 hook location (source)
-	ori     r4, r4, 0x18A8
-	subf    r4, r3, r4	# subtract r3 from r4 and place in r4
-	lis     r5, 0x3FF	
-	ori     r5, r5, 0xFFFF	# 0x3FFFFFF
-	and     r4, r4, r5
-	lis     r5, 0x4800	# 0x48000000
-	or      r4, r4, r5
-	stw     r4, 0(r3)	# result in r3
-	dcbf    r0, r3		# data cache block flush
-	icbi    r0, r3
+	lis	 r4, 0x8000	# 800018A0 hook location (source)
+	ori	 r4, r4, 0x18A8
+	subf	r4, r3, r4	# subtract r3 from r4 and place in r4
+	lis	 r5, 0x3FF	
+	ori	 r5, r5, 0xFFFF	# 0x3FFFFFF
+	and	 r4, r4, r5
+	lis	 r5, 0x4800	# 0x48000000
+	or	  r4, r4, r5
+	stw	 r4, 0(r3)	# result in r3
+	dcbf	r0, r3		# data cache block flush
+	icbi	r0, r3
 exit:
-	blr                     # return
+	blr					 # return
 	
 	.globl patchhook2		# r3 address
 patchhook2:
@@ -50,19 +50,19 @@ findblr2:
 	b	exit2		# stop unhooked game hanging
 
 writebranch2:
-	lis     r4, 0x8000	# 81700000 our temp patcher
-	ori     r4, r4, 0x18a8
-	subf    r4, r3, r4	# subtract r3 from r4 and place in r4
-	lis     r5, 0x3FF	
-	ori     r5, r5, 0xFFFF	# 0x3FFFFFF
-	and     r4, r4, r5
-	lis     r5, 0x4800	# 0x48000000
-	or      r4, r4, r5
-	stw     r4, 0(r3)	# result in r3
-	dcbf    r0, r3		# data cache block flush
-	icbi    r0, r3
+	lis	 r4, 0x8000	# 81700000 our temp patcher
+	ori	 r4, r4, 0x18a8
+	subf	r4, r3, r4	# subtract r3 from r4 and place in r4
+	lis	 r5, 0x3FF	
+	ori	 r5, r5, 0xFFFF	# 0x3FFFFFF
+	and	 r4, r4, r5
+	lis	 r5, 0x4800	# 0x48000000
+	or	  r4, r4, r5
+	stw	 r4, 0(r3)	# result in r3
+	dcbf	r0, r3		# data cache block flush
+	icbi	r0, r3
 exit2:
-	blr                     # return
+	blr					 # return
 
 .globl patchhook3		# r3 address
 patchhook3:
@@ -78,13 +78,13 @@ findbne:
 	b	exit3		# stop unhooked game hanging
 
 writebl:
-	lis     r4, 0x4BFF	# 81700000 our temp patcher
-	ori     r4, r4, 0xEA91
-	stw     r4, 0(r3)	# result in r3
-	dcbf    r0, r3		# data cache block flush
-	icbi    r0, r3
+	lis	 r4, 0x4BFF	# 81700000 our temp patcher
+	ori	 r4, r4, 0xEA91
+	stw	 r4, 0(r3)	# result in r3
+	dcbf	r0, r3		# data cache block flush
+	icbi	r0, r3
 exit3:
-	blr                     # return
+	blr					 # return
 
 .globl multidolpatchone		# r3 address
 multidolpatchone:
@@ -100,8 +100,8 @@ findmulti:
 	b	exit5		# stop unhooked game hanging
 
 writemulti:
-	lis     r4, 0x8170	# 81700000
-	ori     r4, r4, 0x0020
+	lis	 r4, 0x8170	# 81700000
+	ori	 r4, r4, 0x0020
 	subf	r18, r3, r4	# subf r18,(source),(dest)
 	lis	r6, 0x4800
 	ori	r6,r6,1
@@ -114,7 +114,7 @@ writemulti:
 	icbi r0, r3
 	isync
 exit5:
-	blr                     # return
+	blr					 # return
 
 .globl multidolpatchtwo		# r3 address
 multidolpatchtwo:
@@ -130,8 +130,8 @@ findmulti2:
 	b	exit6		# stop unhooked game hanging
 
 writemulti2:
-	lis     r4, 0x8170	# 81700020
-	ori     r4, r4, 0x0000
+	lis	 r4, 0x8170	# 81700020
+	ori	 r4, r4, 0x0000
 	subf	r18, r3, r4	# subf r18,(source),(dest)
 	lis	r6, 0x4800
 	ori	r6,r6,1
@@ -144,29 +144,29 @@ writemulti2:
 	icbi r0, r3
 	isync
 exit6:
-	blr                     # return
+	blr					 # return
 	
 .globl multidolhook		# r3 address
 multidolhook:
-	lis     r4, 0x8000	# 80001000 hook location (source)
-	ori     r4, r4, 0x1000
-	subf    r4, r3, r4	# subtract r3 from r4 and place in r4
-	lis     r5, 0x3FF	
-	ori     r5, r5, 0xFFFF	# 0x3FFFFFF
-	and     r4, r4, r5
-	lis     r5, 0x4800	# 0x48000000
-	or      r4, r4, r5
-	stw     r4, 0(r3)	# result in r3
-	dcbf    r0, r3		# data cache block flush
-	icbi    r0, r3
-	blr                     # return
+	lis	 r4, 0x8000	# 80001000 hook location (source)
+	ori	 r4, r4, 0x1000
+	subf	r4, r3, r4	# subtract r3 from r4 and place in r4
+	lis	 r5, 0x3FF	
+	ori	 r5, r5, 0xFFFF	# 0x3FFFFFF
+	and	 r4, r4, r5
+	lis	 r5, 0x4800	# 0x48000000
+	or	  r4, r4, r5
+	stw	 r4, 0(r3)	# result in r3
+	dcbf	r0, r3		# data cache block flush
+	icbi	r0, r3
+	blr					 # return
 
 
 .globl langvipatch		# r3 address, r4 len, r5 lang byte
 langvipatch:
 	mtctr	r4
 	lis	r6, 0x8861 
-	ori	r6, r6, 0x0008	# lbz     r3, 8(sp)
+	ori	r6, r6, 0x0008	# lbz	 r3, 8(sp)
 findlang:
 	lwz	r7, 0(r3)
 	cmpw	r6, r7
@@ -177,14 +177,14 @@ findlang:
 
 patchlang:
 	
-	lis     r4, 0x3860	# 0x38600001	 li      %r3, 1          # eng
-	add     r4, r4, r5
+	lis	 r4, 0x3860	# 0x38600001	 li	  %r3, 1		  # eng
+	add	 r4, r4, r5
 gofinal:
-	stw     r4, 0(r3)	# result in r3
-	dcbf    r0, r3		# data cache block flush
-	icbi    r0, r3
+	stw	 r4, 0(r3)	# result in r3
+	dcbf	r0, r3		# data cache block flush
+	icbi	r0, r3
 exitlang:
-	blr                     # return
+	blr					 # return
 	
 .globl vipatch		# r3 address
 vipatch:
@@ -209,18 +209,18 @@ patchvi:
 	beq	patchjap2	# JAP
 	b	exitvi
 patchjap2:
-	lis     r4, 0x3800	
-	ori     r4, r4, 0x0001
+	lis	 r4, 0x3800	
+	ori	 r4, r4, 0x0001
 	b	gofinal2
 patchusa:
-	lis     r4, 0x3800	
-	ori     r4, r4, 0x0000
+	lis	 r4, 0x3800	
+	ori	 r4, r4, 0x0000
 gofinal2:
-	stw     r4, 0(r3)	# result in r3
-	dcbf    r0, r3		# data cache block flush
-	icbi    r0, r3
+	stw	 r4, 0(r3)	# result in r3
+	dcbf	r0, r3		# data cache block flush
+	icbi	r0, r3
 exitvi:
-	blr                     # return
+	blr					 # return
 
 .globl regionfreejap		# r3 address
 regionfreejap:
@@ -237,13 +237,13 @@ findjap:
 
 writenop:
 	addi	r3, r3, 4	# next word
-	lis     r4, 0x6000	# nop
-	ori     r4, r4, 0x0000
-	stw     r4, 0(r3)	# result in r3
-	dcbf    r0, r3		# data cache block flush
-	icbi    r0, r3
+	lis	 r4, 0x6000	# nop
+	ori	 r4, r4, 0x0000
+	stw	 r4, 0(r3)	# result in r3
+	dcbf	r0, r3		# data cache block flush
+	icbi	r0, r3
 exitjap:
-	blr                     # return
+	blr					 # return
 
 .globl regionfreeusa		# r3 address
 regionfreeusa:
@@ -260,13 +260,13 @@ findusa:
 
 writenop1:
 	addi	r3, r3, 4	# next word
-	lis     r4, 0x6000	# nop
-	ori     r4, r4, 0x0000
-	stw     r4, 0(r3)	# result in r3
-	dcbf    r0, r3		# data cache block flush
-	icbi    r0, r3
+	lis	 r4, 0x6000	# nop
+	ori	 r4, r4, 0x0000
+	stw	 r4, 0(r3)	# result in r3
+	dcbf	r0, r3		# data cache block flush
+	icbi	r0, r3
 exitusa:
-	blr                     # return
+	blr					 # return
 
 .globl regionfreepal		# r3 address
 regionfreepal:
@@ -283,14 +283,14 @@ findpal:
 
 writenop2:
 	addi	r3, r3, 4	# next word
-	lis     r4, 0x6000	# nop
-	ori     r4, r4, 0x0000
-	stw     r4, 0(r3)	# result in r3
-	dcbf    r0, r3		# data cache block flush
-	icbi    r0, r3
+	lis	 r4, 0x6000	# nop
+	ori	 r4, r4, 0x0000
+	stw	 r4, 0(r3)	# result in r3
+	dcbf	r0, r3		# data cache block flush
+	icbi	r0, r3
 
 	lis	r6, 0x4082
-	ori	r6, r6, 0x001C	# bne     loc_81377A2C
+	ori	r6, r6, 0x001C	# bne	 loc_81377A2C
 findextra:			#this is just the bne to b patch
 	lwz	r5, 0(r3)
 	cmpw	r6, r5
@@ -301,13 +301,13 @@ findextra:			#this is just the bne to b patch
 
 writeb:
 	addi	r3, r3, 4	# next word
-	lis     r4, 0x4800
-	ori     r4, r4, 0x001c  # b     loc_81377A2C
-	stw     r4, 0(r3)	# result in r3
-	dcbf    r0, r3		# data cache block flush
-	icbi    r0, r3
+	lis	 r4, 0x4800
+	ori	 r4, r4, 0x001c  # b	 loc_81377A2C
+	stw	 r4, 0(r3)	# result in r3
+	dcbf	r0, r3		# data cache block flush
+	icbi	r0, r3
 exitpal:
-	blr                     # return
+	blr					 # return
 
 .globl removehealthcheck		# r3 address
 removehealthcheck:
@@ -323,13 +323,13 @@ findhe:
 	b	exithe		# stop unhooked game hanging
 
 writebhe:
-	lis     r4, 0x6000
-	ori     r4, r4, 0x0000
-	stw     r4, 0(r3)	# result in r3
-	dcbf    r0, r3		# data cache block flush
-	icbi    r0, r3
+	lis	 r4, 0x6000
+	ori	 r4, r4, 0x0000
+	stw	 r4, 0(r3)	# result in r3
+	dcbf	r0, r3		# data cache block flush
+	icbi	r0, r3
 exithe:
-	blr                     # return
+	blr					 # return
 
 	
 
@@ -347,13 +347,13 @@ finduc:
 	b	exituc		# stop unhooked game hanging
 
 writenopuc:
-	lis     r4, 0x6000
-	ori     r4, r4, 0x0000
-	stw     r4, 0(r3)	# result in r3
-	dcbf    r0, r3		# data cache block flush
-	icbi    r0, r3
+	lis	 r4, 0x6000
+	ori	 r4, r4, 0x0000
+	stw	 r4, 0(r3)	# result in r3
+	dcbf	r0, r3		# data cache block flush
+	icbi	r0, r3
 exituc:
-	blr                     # return
+	blr					 # return
 
 
 
@@ -372,13 +372,13 @@ findncf1:
 	b	exitncf1		# stop unhooked game hanging
 
 writencf1:
-	lis     r4, 0x7C00
-	ori     r4, r4, 0x0000
-	stw     r4, 0(r3)	# result in r3
-	dcbf    r0, r3		# data cache block flush
-	icbi    r0, r3
+	lis	 r4, 0x7C00
+	ori	 r4, r4, 0x0000
+	stw	 r4, 0(r3)	# result in r3
+	dcbf	r0, r3		# data cache block flush
+	icbi	r0, r3
 exitncf1:
-	blr                     # return
+	blr					 # return
 
 .globl copyflagcheck2	# r3 address
 copyflagcheck2:
@@ -394,13 +394,13 @@ findncf2:
 	b	exitncf2		# stop unhooked game hanging
 
 writencf2:
-	lis     r4, 0x7C00
-	ori     r4, r4, 0x0000
-	stw     r4, 0(r3)	# result in r3
-	dcbf    r0, r3		# data cache block flush
-	icbi    r0, r3
+	lis	 r4, 0x7C00
+	ori	 r4, r4, 0x0000
+	stw	 r4, 0(r3)	# result in r3
+	dcbf	r0, r3		# data cache block flush
+	icbi	r0, r3
 exitncf2:
-	blr                     # return
+	blr					 # return
 
 
 .globl copyflagcheck3	# r3 address
@@ -409,13 +409,13 @@ findncf3:
 	addi	r3, r3, 20	# go back one dword (4 bytes)
 	lwz	r5, 0(r3)
 writencf3:
-	lis     r4, 0x3860
-	ori     r4, r4, 0x0001  # li r3,1
-	stw     r4, 0(r3)	# result in r3
-	dcbf    r0, r3		# data cache block flush
-	icbi    r0, r3
+	lis	 r4, 0x3860
+	ori	 r4, r4, 0x0001  # li r3,1
+	stw	 r4, 0(r3)	# result in r3
+	dcbf	r0, r3		# data cache block flush
+	icbi	r0, r3
 exitncf3:
-	blr                     # return
+	blr					 # return
 
 
 .globl copyflagcheck4	# r3 address
@@ -432,19 +432,19 @@ findncf4:
 	b	exitncf4	# stop unhooked game hanging
 
 writencf4:
-	lis     r4, 0x3BE0
-	ori     r4, r4, 0x0000	# change this to 3BE00000 (li r31,0)
-	stw     r4, 0(r3)	# result in r3
-	dcbf    r0, r3		# data cache block flush
-	icbi    r0, r3
+	lis	 r4, 0x3BE0
+	ori	 r4, r4, 0x0000	# change this to 3BE00000 (li r31,0)
+	stw	 r4, 0(r3)	# result in r3
+	dcbf	r0, r3		# data cache block flush
+	icbi	r0, r3
 exitncf4:
-	blr                     # return
+	blr					 # return
 
 .globl copyflagcheck5	# r3 address
 copyflagcheck5:
 	mtctr	r4
 	lis	r6, 0x4182
-	ori	r6, r6, 0x0024	# beq     loc_8134AA60
+	ori	r6, r6, 0x0024	# beq	 loc_8134AA60
 findncf5:
 	lwz	r5, 0(r3)
 	cmpw	r6, r5
@@ -456,50 +456,50 @@ findncf5:
 writencf5:
 	#addi	r3, r3, 8	# skip 2
 	
-	lis     r4, 0x801D
-	ori     r4, r4, 0x0024	# change to 801D0024 (lwz r0,36(r29))
-	stw     r4, 0(r3)	
-	dcbf    r0, r3		
-	icbi    r0, r3
+	lis	 r4, 0x801D
+	ori	 r4, r4, 0x0024	# change to 801D0024 (lwz r0,36(r29))
+	stw	 r4, 0(r3)	
+	dcbf	r0, r3		
+	icbi	r0, r3
 	
 	addi	r3, r3, 4	# next word
 
-	lis     r4, 0x5400
-	ori     r4, r4, 0x003C	# change to 5400003C (rlwinm r0,r0,0,0,30)
-	stw     r4, 0(r3)	
-	dcbf    r0, r3		
-	icbi    r0, r3
+	lis	 r4, 0x5400
+	ori	 r4, r4, 0x003C	# change to 5400003C (rlwinm r0,r0,0,0,30)
+	stw	 r4, 0(r3)	
+	dcbf	r0, r3		
+	icbi	r0, r3
 
 	addi	r3, r3, 4	# next word
 
-	lis     r4, 0x901D
-	ori     r4, r4, 0x0024	# change to 901D0024 (stw r0,36(r29))
-	stw     r4, 0(r3)	
-	dcbf    r0, r3		
-	icbi    r0, r3
+	lis	 r4, 0x901D
+	ori	 r4, r4, 0x0024	# change to 901D0024 (stw r0,36(r29))
+	stw	 r4, 0(r3)	
+	dcbf	r0, r3		
+	icbi	r0, r3
 
 	addi	r3, r3, 4	# next word
 
-	lis     r4, 0x4800
-	ori     r4, r4, 0x0018	# change to 48000018 (b 0x8134aa60)
-	stw     r4, 0(r3)	
-	dcbf    r0, r3		
-	icbi    r0, r3
+	lis	 r4, 0x4800
+	ori	 r4, r4, 0x0018	# change to 48000018 (b 0x8134aa60)
+	stw	 r4, 0(r3)	
+	dcbf	r0, r3		
+	icbi	r0, r3
 exitncf5:
-	blr                     # return
+	blr					 # return
 
 .globl movedvdhooks	# r3 address
 movedvdhooks:
 	lis	r6, 0x4182 
-	ori	r6, r6, 0x0120 # beq     loc_813A7938
+	ori	r6, r6, 0x0120 # beq	 loc_813A7938
 findmd1:
 	addi	r3, r3, 4	# next word
 	lwz	r5, 0(r3)
 writemd1:
-	lis     r4, 0x6000
-	ori     r4, r4, 0x0000	# nop
-	stw     r4, 0(r3)	# result in r3
-	dcbf    r0, r3		# data cache block flush
-	icbi    r0, r3
+	lis	 r4, 0x6000
+	ori	 r4, r4, 0x0000	# nop
+	stw	 r4, 0(r3)	# result in r3
+	dcbf	r0, r3		# data cache block flush
+	icbi	r0, r3
 exitmd1:
-	blr                     # return
+	blr					 # return

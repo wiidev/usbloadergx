@@ -32,31 +32,31 @@ static int rumbleCount[4] = { 0, 0, 0, 0 };
  ***************************************************************************/
 void UpdatePads()
 {
-    WPAD_ScanPads();
-    PAD_ScanPads();
+	WPAD_ScanPads();
+	PAD_ScanPads();
 
-    for (int i = 3; i >= 0; i--)
-    {
-        memcpy(&userInput[i].wpad, WPAD_Data(i), sizeof(WPADData));
-        userInput[i].chan = i;
-        userInput[i].pad.btns_d = PAD_ButtonsDown(i);
-        userInput[i].pad.btns_u = PAD_ButtonsUp(i);
-        userInput[i].pad.btns_h = PAD_ButtonsHeld(i);
-        userInput[i].pad.stickX = PAD_StickX(i);
-        userInput[i].pad.stickY = PAD_StickY(i);
-        userInput[i].pad.substickX = PAD_SubStickX(i);
-        userInput[i].pad.substickY = PAD_SubStickY(i);
-        userInput[i].pad.triggerL = PAD_TriggerL(i);
-        userInput[i].pad.triggerR = PAD_TriggerR(i);
+	for (int i = 3; i >= 0; i--)
+	{
+		memcpy(&userInput[i].wpad, WPAD_Data(i), sizeof(WPADData));
+		userInput[i].chan = i;
+		userInput[i].pad.btns_d = PAD_ButtonsDown(i);
+		userInput[i].pad.btns_u = PAD_ButtonsUp(i);
+		userInput[i].pad.btns_h = PAD_ButtonsHeld(i);
+		userInput[i].pad.stickX = PAD_StickX(i);
+		userInput[i].pad.stickY = PAD_StickY(i);
+		userInput[i].pad.substickX = PAD_SubStickX(i);
+		userInput[i].pad.substickY = PAD_SubStickY(i);
+		userInput[i].pad.triggerL = PAD_TriggerL(i);
+		userInput[i].pad.triggerR = PAD_TriggerR(i);
 
-        if (Settings.rumble == ON) DoRumble(i);
+		if (Settings.rumble == ON) DoRumble(i);
 
-        if(userInput[i].wpad.exp.type == WPAD_EXP_NUNCHUK)
-        {
-            if((userInput[i].wpad.btns_h & WPAD_NUNCHUK_BUTTON_Z) && (userInput[i].wpad.btns_d & WPAD_NUNCHUK_BUTTON_C))
-                ScreenShot();
+		if(userInput[i].wpad.exp.type == WPAD_EXP_NUNCHUK)
+		{
+			if((userInput[i].wpad.btns_h & WPAD_NUNCHUK_BUTTON_Z) && (userInput[i].wpad.btns_d & WPAD_NUNCHUK_BUTTON_C))
+				ScreenShot();
 		}
-    }
+	}
 }
 
 /****************************************************************************
@@ -64,32 +64,32 @@ void UpdatePads()
  ***************************************************************************/
 void SetWPADTimeout()
 {
-    switch (Settings.screensaver)
-    {
-        case 0:
-            WPAD_SetIdleTimeout(0xFFFFFF);
-            break;
-        case 1:
-            WPAD_SetIdleTimeout(180);
-            break;
-        case 2:
-            WPAD_SetIdleTimeout(300);
-            break;
-        case 3:
-            WPAD_SetIdleTimeout(600);
-            break;
-        case 4:
-            WPAD_SetIdleTimeout(1200);
-            break;
-        case 5:
-            WPAD_SetIdleTimeout(1800);
-            break;
-        case 6:
-            WPAD_SetIdleTimeout(3600);
-            break;
-        default:
-            break;
-    }
+	switch (Settings.screensaver)
+	{
+		case 0:
+			WPAD_SetIdleTimeout(0xFFFFFF);
+			break;
+		case 1:
+			WPAD_SetIdleTimeout(180);
+			break;
+		case 2:
+			WPAD_SetIdleTimeout(300);
+			break;
+		case 3:
+			WPAD_SetIdleTimeout(600);
+			break;
+		case 4:
+			WPAD_SetIdleTimeout(1200);
+			break;
+		case 5:
+			WPAD_SetIdleTimeout(1800);
+			break;
+		case 6:
+			WPAD_SetIdleTimeout(3600);
+			break;
+		default:
+			break;
+	}
 }
 
 /****************************************************************************
@@ -99,19 +99,19 @@ void SetWPADTimeout()
  ***************************************************************************/
 void SetupPads()
 {
-    PAD_Init();
-    WPAD_Init();
+	PAD_Init();
+	WPAD_Init();
 
-    // read wiimote accelerometer and IR data
-    WPAD_SetDataFormat(WPAD_CHAN_ALL, WPAD_FMT_BTNS_ACC_IR);
-    WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
+	// read wiimote accelerometer and IR data
+	WPAD_SetDataFormat(WPAD_CHAN_ALL, WPAD_FMT_BTNS_ACC_IR);
+	WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
-    for (int i = 0; i < 4; i++)
-    {
-        userInput[i].chan = i;
-    }
+	for (int i = 0; i < 4; i++)
+	{
+		userInput[i].chan = i;
+	}
 
-    SetWPADTimeout();
+	SetWPADTimeout();
 }
 
 /****************************************************************************
@@ -120,11 +120,11 @@ void SetupPads()
 
 void ShutoffRumble()
 {
-    for (int i = 0; i < 4; i++)
-    {
-        WPAD_Rumble(i, 0);
-        rumbleCount[i] = 0;
-    }
+	for (int i = 0; i < 4; i++)
+	{
+		WPAD_Rumble(i, 0);
+		rumbleCount[i] = 0;
+	}
 }
 
 /****************************************************************************
@@ -133,21 +133,21 @@ void ShutoffRumble()
 
 void DoRumble(int i)
 {
-    if (rumbleRequest[i] && rumbleCount[i] < 3)
-    {
-        WPAD_Rumble(i, 1); // rumble on
-        rumbleCount[i]++;
-    }
-    else if (rumbleRequest[i])
-    {
-        rumbleCount[i] = 20;
-        rumbleRequest[i] = 0;
-    }
-    else
-    {
-        if (rumbleCount[i]) rumbleCount[i]--;
-        WPAD_Rumble(i, 0); // rumble off
-    }
+	if (rumbleRequest[i] && rumbleCount[i] < 3)
+	{
+		WPAD_Rumble(i, 1); // rumble on
+		rumbleCount[i]++;
+	}
+	else if (rumbleRequest[i])
+	{
+		rumbleCount[i] = 20;
+		rumbleRequest[i] = 0;
+	}
+	else
+	{
+		if (rumbleCount[i]) rumbleCount[i]--;
+		WPAD_Rumble(i, 0); // rumble off
+	}
 }
 
 /****************************************************************************
@@ -158,48 +158,48 @@ void DoRumble(int i)
 
 s8 WPAD_Stick(u8 chan, u8 right, int axis)
 {
-    float mag = 0.0;
-    float ang = 0.0;
-    WPADData *data = WPAD_Data(chan);
+	float mag = 0.0;
+	float ang = 0.0;
+	WPADData *data = WPAD_Data(chan);
 
-    switch (data->exp.type)
-    {
-        case WPAD_EXP_NUNCHUK:
-        case WPAD_EXP_GUITARHERO3:
-            if (right == 0)
-            {
-                mag = data->exp.nunchuk.js.mag;
-                ang = data->exp.nunchuk.js.ang;
-            }
-            break;
+	switch (data->exp.type)
+	{
+		case WPAD_EXP_NUNCHUK:
+		case WPAD_EXP_GUITARHERO3:
+			if (right == 0)
+			{
+				mag = data->exp.nunchuk.js.mag;
+				ang = data->exp.nunchuk.js.ang;
+			}
+			break;
 
-        case WPAD_EXP_CLASSIC:
-            if (right == 0)
-            {
-                mag = data->exp.classic.ljs.mag;
-                ang = data->exp.classic.ljs.ang;
-            }
-            else
-            {
-                mag = data->exp.classic.rjs.mag;
-                ang = data->exp.classic.rjs.ang;
-            }
-            break;
+		case WPAD_EXP_CLASSIC:
+			if (right == 0)
+			{
+				mag = data->exp.classic.ljs.mag;
+				ang = data->exp.classic.ljs.ang;
+			}
+			else
+			{
+				mag = data->exp.classic.rjs.mag;
+				ang = data->exp.classic.rjs.ang;
+			}
+			break;
 
-        default:
-            break;
-    }
+		default:
+			break;
+	}
 
-    /* calculate x/y value (angle need to be converted into radian) */
-    if (mag > 1.0)
-        mag = 1.0;
-    else if (mag < -1.0) mag = -1.0;
-    double val;
+	/* calculate x/y value (angle need to be converted into radian) */
+	if (mag > 1.0)
+		mag = 1.0;
+	else if (mag < -1.0) mag = -1.0;
+	double val;
 
-    if (axis == 0) // x-axis
-        val = mag * sin((PI * ang) / 180.0f);
-    else // y-axis
-    val = mag * cos((PI * ang) / 180.0f);
+	if (axis == 0) // x-axis
+		val = mag * sin((PI * ang) / 180.0f);
+	else // y-axis
+	val = mag * cos((PI * ang) / 180.0f);
 
-    return (s8) (val * 128.0f);
+	return (s8) (val * 128.0f);
 }

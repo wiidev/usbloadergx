@@ -34,15 +34,15 @@
 
 typedef struct
 {
-    u32 magic;
-    u32 num_textures;
-    u32 head_size;
+	u32 magic;
+	u32 num_textures;
+	u32 head_size;
 } TPL_Header;
 
 typedef struct
 {
-    u32 text_header_offset;
-    u32 text_palette_offset;
+	u32 text_header_offset;
+	u32 text_palette_offset;
 } TPL_Texture;
 
 typedef struct
@@ -73,26 +73,26 @@ typedef struct
 
 class TplImage
 {
-    public:
-        TplImage(const char * filepath);
-        TplImage(const u8 * imgBuffer, u32 imgSize);
-        ~TplImage();
-        bool LoadImage(const u8 * imgBuffer, u32 imgSize);
-        int GetWidth(int Texture);
-        int GetHeight(int Texture);
-        u32 GetFormat(int Texture);
-        const u8 * GetTextureBuffer(int Texture);
-        int GetTextureSize(int Texture);
-        gdImagePtr ConvertToGD(int Texture);
-    private:
-        bool ParseTplFile();
+	public:
+		TplImage(const char * filepath);
+		TplImage(const u8 * imgBuffer, u32 imgSize);
+		~TplImage();
+		bool LoadImage(const u8 * imgBuffer, u32 imgSize);
+		int GetWidth(int Texture);
+		int GetHeight(int Texture);
+		u32 GetFormat(int Texture);
+		const u8 * GetTextureBuffer(int Texture);
+		int GetTextureSize(int Texture);
+		gdImagePtr ConvertToGD(int Texture);
+	private:
+		bool ParseTplFile();
 
-        u8 * TPLBuffer;
-        u32 TPLSize;
-        const TPL_Header * TPLHeader;
-        std::vector<const TPL_Texture *> Texture;
-        std::vector<const TPL_Texture_Header *> TextureHeader;
-        std::vector<const u8 *> TplTextureBuffer;
+		u8 * TPLBuffer;
+		u32 TPLSize;
+		const TPL_Header * TPLHeader;
+		std::vector<const TPL_Texture *> Texture;
+		std::vector<const TPL_Texture_Header *> TextureHeader;
+		std::vector<const u8 *> TplTextureBuffer;
 };
 
 #endif

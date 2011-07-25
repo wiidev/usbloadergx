@@ -19,21 +19,21 @@
 /* 'WAD Header' structure */
 typedef struct
 {
-        /* Header length */
-        u32 header_len;
+		/* Header length */
+		u32 header_len;
 
-        /* WAD type */
-        u16 type;
+		/* WAD type */
+		u16 type;
 
-        u16 padding;
+		u16 padding;
 
-        /* Data length */
-        u32 certs_len;
-        u32 crl_len;
-        u32 tik_len;
-        u32 tmd_len;
-        u32 data_len;
-        u32 footer_len;
+		/* Data length */
+		u32 certs_len;
+		u32 crl_len;
+		u32 tik_len;
+		u32 tmd_len;
+		u32 data_len;
+		u32 footer_len;
 }ATTRIBUTE_PACKED wadHeader;
 
 /* Variables */
@@ -41,583 +41,583 @@ static u8 wadBuffer[BLOCK_SIZE] ATTRIBUTE_ALIGN( 32 );
 
 s32 __Wad_ReadFile(FILE *fp, void *outbuf, u32 offset, u32 len)
 {
-    s32 ret;
+	s32 ret;
 
-    /* Seek to offset */
-    fseek(fp, offset, SEEK_SET);
+	/* Seek to offset */
+	fseek(fp, offset, SEEK_SET);
 
-    /* Read data */
-    ret = fread(outbuf, len, 1, fp);
-    if (ret < 0) return ret;
+	/* Read data */
+	ret = fread(outbuf, len, 1, fp);
+	if (ret < 0) return ret;
 
-    return 0;
+	return 0;
 }
 
 s32 __Wad_ReadAlloc(FILE *fp, void **outbuf, u32 offset, u32 len)
 {
-    void *buffer = NULL;
-    s32 ret;
+	void *buffer = NULL;
+	s32 ret;
 
-    /* Allocate memory */
-    buffer = memalign(32, len);
-    if (!buffer) return -1;
+	/* Allocate memory */
+	buffer = memalign(32, len);
+	if (!buffer) return -1;
 
-    /* Read file */
-    ret = __Wad_ReadFile(fp, buffer, offset, len);
-    if (ret < 0)
-    {
-        free(buffer);
-        return ret;
-    }
+	/* Read file */
+	ret = __Wad_ReadFile(fp, buffer, offset, len);
+	if (ret < 0)
+	{
+		free(buffer);
+		return ret;
+	}
 
-    /* Set pointer */
-    *outbuf = buffer;
-    return 0;
+	/* Set pointer */
+	*outbuf = buffer;
+	return 0;
 }
 
 s32 __Wad_GetTitleID(FILE *fp, wadHeader *header, u64 *tid)
 {
-    //signed_blob *p_tik    = NULL;
-    void *p_tik = NULL;
-    tik *tik_data = NULL;
+	//signed_blob *p_tik	= NULL;
+	void *p_tik = NULL;
+	tik *tik_data = NULL;
 
-    u32 offset = 0;
-    s32 ret;
+	u32 offset = 0;
+	s32 ret;
 
-    /* Ticket offset */
-    offset += round_up( header->header_len, 64 );
-    offset += round_up( header->certs_len, 64 );
-    offset += round_up( header->crl_len, 64 );
+	/* Ticket offset */
+	offset += round_up( header->header_len, 64 );
+	offset += round_up( header->certs_len, 64 );
+	offset += round_up( header->crl_len, 64 );
 
-    /* Read ticket */
-    ret = __Wad_ReadAlloc(fp, &p_tik, offset, header->tik_len);
-    if (ret < 0) goto out;
+	/* Read ticket */
+	ret = __Wad_ReadAlloc(fp, &p_tik, offset, header->tik_len);
+	if (ret < 0) goto out;
 
-    /* Ticket data */
-    tik_data = (tik *) SIGNATURE_PAYLOAD((signed_blob *) p_tik);
+	/* Ticket data */
+	tik_data = (tik *) SIGNATURE_PAYLOAD((signed_blob *) p_tik);
 
-    /* Copy title ID */
-    *tid = tik_data->titleid;
+	/* Copy title ID */
+	*tid = tik_data->titleid;
 
-    out:
-    /* Free memory */
-    if (p_tik) free(p_tik);
+	out:
+	/* Free memory */
+	if (p_tik) free(p_tik);
 
-    return ret;
+	return ret;
 }
 
 s32 Wad_Install(FILE *fp)
 {
-    //////start the gui shit
-    GuiWindow promptWindow(472, 320);
-    promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-    promptWindow.SetPosition(0, -10);
+	//////start the gui shit
+	GuiWindow promptWindow(472, 320);
+	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	promptWindow.SetPosition(0, -10);
 
-    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
-    GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
-    GuiTrigger trigA;
-    trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+	GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+	GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
+	GuiTrigger trigA;
+	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
-    GuiImage dialogBoxImg(&dialogBox);
-    if (Settings.wsprompt)
-    {
-        dialogBoxImg.SetWidescreen(Settings.widescreen);
-    }
+	GuiImage dialogBoxImg(&dialogBox);
+	if (Settings.wsprompt)
+	{
+		dialogBoxImg.SetWidescreen(Settings.widescreen);
+	}
 
-    GuiText btn1Txt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
-    GuiImage btn1Img(&btnOutline);
-    if (Settings.wsprompt)
-    {
-        btn1Txt.SetWidescreen(Settings.widescreen);
-        btn1Img.SetWidescreen(Settings.widescreen);
-    }
-    GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -35, &trigA, btnSoundOver, btnSoundClick2, 1);
-    btn1.SetLabel(&btn1Txt);
-    btn1.SetState(STATE_SELECTED);
+	GuiText btn1Txt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
+	GuiImage btn1Img(&btnOutline);
+	if (Settings.wsprompt)
+	{
+		btn1Txt.SetWidescreen(Settings.widescreen);
+		btn1Img.SetWidescreen(Settings.widescreen);
+	}
+	GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -35, &trigA, btnSoundOver, btnSoundClick2, 1);
+	btn1.SetLabel(&btn1Txt);
+	btn1.SetState(STATE_SELECTED);
 
-    GuiImageData progressbarOutline(Resources::GetFile("progressbar_outline.png"), Resources::GetFileSize("progressbar_outline.png"));
-    GuiImage progressbarOutlineImg(&progressbarOutline);
-    if (Settings.wsprompt)
-    {
-        progressbarOutlineImg.SetWidescreen(Settings.widescreen);
-    }
-    progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-    progressbarOutlineImg.SetPosition(25, 50);
+	GuiImageData progressbarOutline(Resources::GetFile("progressbar_outline.png"), Resources::GetFileSize("progressbar_outline.png"));
+	GuiImage progressbarOutlineImg(&progressbarOutline);
+	if (Settings.wsprompt)
+	{
+		progressbarOutlineImg.SetWidescreen(Settings.widescreen);
+	}
+	progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+	progressbarOutlineImg.SetPosition(25, 50);
 
-    GuiImageData progressbarEmpty(Resources::GetFile("progressbar_empty.png"), Resources::GetFileSize("progressbar_empty.png"));
-    GuiImage progressbarEmptyImg(&progressbarEmpty);
-    progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-    progressbarEmptyImg.SetPosition(25, 50);
-    progressbarEmptyImg.SetTileHorizontal(100);
+	GuiImageData progressbarEmpty(Resources::GetFile("progressbar_empty.png"), Resources::GetFileSize("progressbar_empty.png"));
+	GuiImage progressbarEmptyImg(&progressbarEmpty);
+	progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+	progressbarEmptyImg.SetPosition(25, 50);
+	progressbarEmptyImg.SetTileHorizontal(100);
 
-    GuiImageData progressbar(Resources::GetFile("progressbar.png"), Resources::GetFileSize("progressbar.png"));
-    GuiImage progressbarImg(&progressbar);
-    progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-    progressbarImg.SetPosition(25, 50);
+	GuiImageData progressbar(Resources::GetFile("progressbar.png"), Resources::GetFileSize("progressbar.png"));
+	GuiImage progressbarImg(&progressbar);
+	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+	progressbarImg.SetPosition(25, 50);
 
-    char title[50];
-    sprintf(title, "%s", tr( "Installing wad" ));
-    GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-    titleTxt.SetPosition(0, 40);
-    char msg[50];
-    sprintf(msg, " ");
-    // sprintf(msg, "%s", tr("Initializing Network"));
-    GuiText msg1Txt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    msg1Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    msg1Txt.SetPosition(50, 75);
-    //  char msg2[50] = " ";
-    GuiText msg2Txt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    msg2Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    msg2Txt.SetPosition(50, 98);
+	char title[50];
+	sprintf(title, "%s", tr( "Installing wad" ));
+	GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	titleTxt.SetPosition(0, 40);
+	char msg[50];
+	sprintf(msg, " ");
+	// sprintf(msg, "%s", tr("Initializing Network"));
+	GuiText msg1Txt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	msg1Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	msg1Txt.SetPosition(50, 75);
+	//  char msg2[50] = " ";
+	GuiText msg2Txt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	msg2Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	msg2Txt.SetPosition(50, 98);
 
-    GuiText msg3Txt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    msg3Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    msg3Txt.SetPosition(50, 121);
+	GuiText msg3Txt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	msg3Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	msg3Txt.SetPosition(50, 121);
 
-    GuiText msg4Txt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    msg4Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    msg4Txt.SetPosition(50, 144);
+	GuiText msg4Txt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	msg4Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	msg4Txt.SetPosition(50, 144);
 
-    GuiText msg5Txt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    msg5Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    msg5Txt.SetPosition(50, 167);
+	GuiText msg5Txt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	msg5Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	msg5Txt.SetPosition(50, 167);
 
-    GuiText prTxt((char*) NULL, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-    prTxt.SetPosition(0, 50);
+	GuiText prTxt((char*) NULL, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	prTxt.SetPosition(0, 50);
 
-    if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust for widescreen
-    {
-        progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-        progressbarOutlineImg.SetPosition(0, 50);
-        progressbarEmptyImg.SetPosition(80, 50);
-        progressbarEmptyImg.SetTileHorizontal(78);
-        progressbarImg.SetPosition(80, 50);
+	if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust for widescreen
+	{
+		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+		progressbarOutlineImg.SetPosition(0, 50);
+		progressbarEmptyImg.SetPosition(80, 50);
+		progressbarEmptyImg.SetTileHorizontal(78);
+		progressbarImg.SetPosition(80, 50);
 
-        msg1Txt.SetPosition(90, 75);
-        msg2Txt.SetPosition(90, 98);
-        msg3Txt.SetPosition(90, 121);
-        msg4Txt.SetPosition(90, 144);
-        msg5Txt.SetPosition(90, 167);
+		msg1Txt.SetPosition(90, 75);
+		msg2Txt.SetPosition(90, 98);
+		msg3Txt.SetPosition(90, 121);
+		msg4Txt.SetPosition(90, 144);
+		msg5Txt.SetPosition(90, 167);
 
-    }
-    promptWindow.Append(&dialogBoxImg);
-    promptWindow.Append(&titleTxt);
-    promptWindow.Append(&msg5Txt);
-    promptWindow.Append(&msg4Txt);
-    promptWindow.Append(&msg3Txt);
-    promptWindow.Append(&msg1Txt);
-    promptWindow.Append(&msg2Txt);
+	}
+	promptWindow.Append(&dialogBoxImg);
+	promptWindow.Append(&titleTxt);
+	promptWindow.Append(&msg5Txt);
+	promptWindow.Append(&msg4Txt);
+	promptWindow.Append(&msg3Txt);
+	promptWindow.Append(&msg1Txt);
+	promptWindow.Append(&msg2Txt);
 
-    //promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
+	//promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 
-    HaltGui();
-    mainWindow->SetState(STATE_DISABLED);
-    mainWindow->Append(&promptWindow);
-    mainWindow->ChangeFocus(&promptWindow);
-    //sleep(1);
+	HaltGui();
+	mainWindow->SetState(STATE_DISABLED);
+	mainWindow->Append(&promptWindow);
+	mainWindow->ChangeFocus(&promptWindow);
+	//sleep(1);
 
 
-    ///start the wad shit
-    bool fail = false;
-    wadHeader *header = NULL;
-    void *pvoid;
-    signed_blob *p_certs = NULL, *p_crl = NULL, *p_tik = NULL, *p_tmd = NULL;
+	///start the wad shit
+	bool fail = false;
+	wadHeader *header = NULL;
+	void *pvoid;
+	signed_blob *p_certs = NULL, *p_crl = NULL, *p_tik = NULL, *p_tmd = NULL;
 
-    tmd *tmd_data = NULL;
+	tmd *tmd_data = NULL;
 
-    u32 cnt, offset = 0;
-    s32 ret = 666;
+	u32 cnt, offset = 0;
+	s32 ret = 666;
 
-    ResumeGui();
-    msg1Txt.SetText(tr( ">> Reading WAD data..." ));
-    HaltGui();
+	ResumeGui();
+	msg1Txt.SetText(tr( ">> Reading WAD data..." ));
+	HaltGui();
 #define SetPointer(a, p) a=(typeof(a))p
-    // WAD header
-    //ret = __Wad_ReadAlloc(fp, (void *)header, offset, sizeof(wadHeader));
-    ret = __Wad_ReadAlloc(fp, &pvoid, offset, sizeof(wadHeader));
+	// WAD header
+	//ret = __Wad_ReadAlloc(fp, (void *)header, offset, sizeof(wadHeader));
+	ret = __Wad_ReadAlloc(fp, &pvoid, offset, sizeof(wadHeader));
 
-    if (ret < 0) goto err;
-    SetPointer( header, pvoid );
-    offset += round_up( header->header_len, 64 );
+	if (ret < 0) goto err;
+	SetPointer( header, pvoid );
+	offset += round_up( header->header_len, 64 );
 
-    // WAD certificates
-    //ret = __Wad_ReadAlloc(fp, (void *)&p_certs, offset, header->certs_len);
-    ret = __Wad_ReadAlloc(fp, &pvoid, offset, header->certs_len);
-    if (ret < 0) goto err;
-    SetPointer( p_certs, pvoid );
-    offset += round_up( header->certs_len, 64 );
+	// WAD certificates
+	//ret = __Wad_ReadAlloc(fp, (void *)&p_certs, offset, header->certs_len);
+	ret = __Wad_ReadAlloc(fp, &pvoid, offset, header->certs_len);
+	if (ret < 0) goto err;
+	SetPointer( p_certs, pvoid );
+	offset += round_up( header->certs_len, 64 );
 
-    // WAD crl
+	// WAD crl
 
-    if (header->crl_len)
-    {
-        //ret = __Wad_ReadAlloc(fp, (void *)&p_crl, offset, header->crl_len);
-        ret = __Wad_ReadAlloc(fp, &pvoid, offset, header->crl_len);
-        if (ret < 0) goto err;
-        SetPointer( p_crl, pvoid );
-        offset += round_up( header->crl_len, 64 );
-    }
+	if (header->crl_len)
+	{
+		//ret = __Wad_ReadAlloc(fp, (void *)&p_crl, offset, header->crl_len);
+		ret = __Wad_ReadAlloc(fp, &pvoid, offset, header->crl_len);
+		if (ret < 0) goto err;
+		SetPointer( p_crl, pvoid );
+		offset += round_up( header->crl_len, 64 );
+	}
 
-    // WAD ticket
-    //ret = __Wad_ReadAlloc(fp, (void *)&p_tik, offset, header->tik_len);
-    ret = __Wad_ReadAlloc(fp, &pvoid, offset, header->tik_len);
-    if (ret < 0) goto err;
-    SetPointer( p_tik, pvoid );
-    offset += round_up( header->tik_len, 64 );
+	// WAD ticket
+	//ret = __Wad_ReadAlloc(fp, (void *)&p_tik, offset, header->tik_len);
+	ret = __Wad_ReadAlloc(fp, &pvoid, offset, header->tik_len);
+	if (ret < 0) goto err;
+	SetPointer( p_tik, pvoid );
+	offset += round_up( header->tik_len, 64 );
 
-    // WAD TMD
-    //ret = __Wad_ReadAlloc(fp, (void *)&p_tmd, offset, header->tmd_len);
-    ret = __Wad_ReadAlloc(fp, &pvoid, offset, header->tmd_len);
-    if (ret < 0) goto err;
-    SetPointer( p_tmd, pvoid );
-    offset += round_up( header->tmd_len, 64 );
+	// WAD TMD
+	//ret = __Wad_ReadAlloc(fp, (void *)&p_tmd, offset, header->tmd_len);
+	ret = __Wad_ReadAlloc(fp, &pvoid, offset, header->tmd_len);
+	if (ret < 0) goto err;
+	SetPointer( p_tmd, pvoid );
+	offset += round_up( header->tmd_len, 64 );
 
-    ResumeGui();
-    msg1Txt.SetText(tr( "Reading WAD data... Ok!" ));
-    msg2Txt.SetText(tr( ">> Installing ticket..." ));
-    HaltGui();
-    // Install ticket
-    ret = ES_AddTicket(p_tik, header->tik_len, p_certs, header->certs_len, p_crl, header->crl_len);
-    if (ret < 0) goto err;
+	ResumeGui();
+	msg1Txt.SetText(tr( "Reading WAD data... Ok!" ));
+	msg2Txt.SetText(tr( ">> Installing ticket..." ));
+	HaltGui();
+	// Install ticket
+	ret = ES_AddTicket(p_tik, header->tik_len, p_certs, header->certs_len, p_crl, header->crl_len);
+	if (ret < 0) goto err;
 
-    ResumeGui();
-    msg2Txt.SetText(tr( "Installing ticket... Ok!" ));
-    msg3Txt.SetText(tr( ">> Installing title..." ));
-    //WindowPrompt(">> Installing title...",0,0,0,0,0,200);
-    HaltGui();
-    // Install title
-    ret = ES_AddTitleStart(p_tmd, header->tmd_len, p_certs, header->certs_len, p_crl, header->crl_len);
-    if (ret < 0) goto err;
+	ResumeGui();
+	msg2Txt.SetText(tr( "Installing ticket... Ok!" ));
+	msg3Txt.SetText(tr( ">> Installing title..." ));
+	//WindowPrompt(">> Installing title...",0,0,0,0,0,200);
+	HaltGui();
+	// Install title
+	ret = ES_AddTitleStart(p_tmd, header->tmd_len, p_certs, header->certs_len, p_crl, header->crl_len);
+	if (ret < 0) goto err;
 
-    // Get TMD info
-    tmd_data = (tmd *) SIGNATURE_PAYLOAD(p_tmd);
+	// Get TMD info
+	tmd_data = (tmd *) SIGNATURE_PAYLOAD(p_tmd);
 
 	char imgPath[150];
 
-    // Install contents
-    //ResumeGui();
-    //HaltGui();
-    promptWindow.Append(&progressbarEmptyImg);
-    promptWindow.Append(&progressbarImg);
-    promptWindow.Append(&progressbarOutlineImg);
-    promptWindow.Append(&prTxt);
-    ResumeGui();
-    msg3Txt.SetText(tr( "Installing title... Ok!" ));
-    for (cnt = 0; cnt < tmd_data->num_contents; cnt++)
-    {
+	// Install contents
+	//ResumeGui();
+	//HaltGui();
+	promptWindow.Append(&progressbarEmptyImg);
+	promptWindow.Append(&progressbarImg);
+	promptWindow.Append(&progressbarOutlineImg);
+	promptWindow.Append(&prTxt);
+	ResumeGui();
+	msg3Txt.SetText(tr( "Installing title... Ok!" ));
+	for (cnt = 0; cnt < tmd_data->num_contents; cnt++)
+	{
 
-        tmd_content *content = &tmd_data->contents[cnt];
+		tmd_content *content = &tmd_data->contents[cnt];
 
-        u32 idx = 0, len;
-        s32 cfd;
-        ResumeGui();
+		u32 idx = 0, len;
+		s32 cfd;
+		ResumeGui();
 
-        //printf("\r\t\t>> Installing content #%02d...", content->cid);
-        // Encrypted content size
-        len = round_up( content->size, 64 );
+		//printf("\r\t\t>> Installing content #%02d...", content->cid);
+		// Encrypted content size
+		len = round_up( content->size, 64 );
 
-        // Install content
-        cfd = ES_AddContentStart(tmd_data->title_id, content->cid);
-        if (cfd < 0)
-        {
-            ret = cfd;
-            goto err;
-        }
-        snprintf(imgPath, sizeof(imgPath), "%s%d...", tr( ">> Installing content #" ), content->cid);
-        msg4Txt.SetText(imgPath);
-        // Install content data
-        while (idx < len)
-        {
+		// Install content
+		cfd = ES_AddContentStart(tmd_data->title_id, content->cid);
+		if (cfd < 0)
+		{
+			ret = cfd;
+			goto err;
+		}
+		snprintf(imgPath, sizeof(imgPath), "%s%d...", tr( ">> Installing content #" ), content->cid);
+		msg4Txt.SetText(imgPath);
+		// Install content data
+		while (idx < len)
+		{
 
-            //VIDEO_WaitVSync ();
+			//VIDEO_WaitVSync ();
 
-            u32 size;
+			u32 size;
 
-            // Data length
-            size = (len - idx);
-            if (size > BLOCK_SIZE) size = BLOCK_SIZE;
+			// Data length
+			size = (len - idx);
+			if (size > BLOCK_SIZE) size = BLOCK_SIZE;
 
-            // Read data
-            ret = __Wad_ReadFile(fp, &wadBuffer, offset, size);
-            if (ret < 0) goto err;
+			// Read data
+			ret = __Wad_ReadFile(fp, &wadBuffer, offset, size);
+			if (ret < 0) goto err;
 
-            // Install data
-            ret = ES_AddContentData(cfd, wadBuffer, size);
-            if (ret < 0) goto err;
+			// Install data
+			ret = ES_AddContentData(cfd, wadBuffer, size);
+			if (ret < 0) goto err;
 
-            // Increase variables
-            idx += size;
-            offset += size;
+			// Increase variables
+			idx += size;
+			offset += size;
 
-            //snprintf(imgPath, sizeof(imgPath), "%s%d (%d)...",tr(">> Installing content #"),content->cid,idx);
+			//snprintf(imgPath, sizeof(imgPath), "%s%d (%d)...",tr(">> Installing content #"),content->cid,idx);
 
-            //msg4Txt.SetText(imgPath);
+			//msg4Txt.SetText(imgPath);
 
-            prTxt.SetTextf("%i%%", 100 * (cnt * len + idx) / (tmd_data->num_contents * len));
-            if ((Settings.wsprompt) && (Settings.widescreen))
-            {
-                progressbarImg.SetTileHorizontal(78 * (cnt * len + idx) / (tmd_data->num_contents * len));
-            }
-            else
-            {
-                progressbarImg.SetTileHorizontal(100 * (cnt * len + idx) / (tmd_data->num_contents * len));
-            }
+			prTxt.SetTextf("%i%%", 100 * (cnt * len + idx) / (tmd_data->num_contents * len));
+			if ((Settings.wsprompt) && (Settings.widescreen))
+			{
+				progressbarImg.SetTileHorizontal(78 * (cnt * len + idx) / (tmd_data->num_contents * len));
+			}
+			else
+			{
+				progressbarImg.SetTileHorizontal(100 * (cnt * len + idx) / (tmd_data->num_contents * len));
+			}
 
-        }
+		}
 
-        // Finish content installation
-        ret = ES_AddContentFinish(cfd);
-        if (ret < 0) goto err;
-    }
+		// Finish content installation
+		ret = ES_AddContentFinish(cfd);
+		if (ret < 0) goto err;
+	}
 
-    msg4Txt.SetText(tr( "Installing content... Ok!" ));
-    msg5Txt.SetText(tr( ">> Finishing installation..." ));
+	msg4Txt.SetText(tr( "Installing content... Ok!" ));
+	msg5Txt.SetText(tr( ">> Finishing installation..." ));
 
-    // Finish title install
-    ret = ES_AddTitleFinish();
-    if (ret >= 0)
-    {
-        //      printf(" OK!\n");
-        goto out;
-    }
+	// Finish title install
+	ret = ES_AddTitleFinish();
+	if (ret >= 0)
+	{
+		//	  printf(" OK!\n");
+		goto out;
+	}
 
-    err:
-    //char titties[100];
-    ResumeGui();
-    prTxt.SetTextf("%s%d", tr( "Error..." ), ret);
-    promptWindow.Append(&prTxt);
-    fail = true;
-    //snprintf(titties, sizeof(titties), "%d", ret);
-    //printf(" ERROR! (ret = %d)\n", ret);
-    //WindowPrompt("ERROR!",titties,"Back",0,0);
-    // Cancel install
-    ES_AddTitleCancel();
-    goto exit;
-    //return ret;
+	err:
+	//char titties[100];
+	ResumeGui();
+	prTxt.SetTextf("%s%d", tr( "Error..." ), ret);
+	promptWindow.Append(&prTxt);
+	fail = true;
+	//snprintf(titties, sizeof(titties), "%d", ret);
+	//printf(" ERROR! (ret = %d)\n", ret);
+	//WindowPrompt("ERROR!",titties,"Back",0,0);
+	// Cancel install
+	ES_AddTitleCancel();
+	goto exit;
+	//return ret;
 
-    out:
-    // Free memory
-    if (header) free(header);
-    if (p_certs) free(p_certs);
-    if (p_crl) free(p_crl);
-    if (p_tik) free(p_tik);
-    if (p_tmd) free(p_tmd);
-    goto exit;
+	out:
+	// Free memory
+	if (header) free(header);
+	if (p_certs) free(p_certs);
+	if (p_crl) free(p_crl);
+	if (p_tik) free(p_tik);
+	if (p_tmd) free(p_tmd);
+	goto exit;
 
-    exit: if (!fail) msg5Txt.SetText(tr( "Finishing installation... Ok!" ));
-    promptWindow.Append(&btn1);
-    while (btn1.GetState() != STATE_CLICKED)
-    {
-    }
+	exit: if (!fail) msg5Txt.SetText(tr( "Finishing installation... Ok!" ));
+	promptWindow.Append(&btn1);
+	while (btn1.GetState() != STATE_CLICKED)
+	{
+	}
 
-    HaltGui();
-    mainWindow->Remove(&promptWindow);
-    mainWindow->SetState(STATE_DEFAULT);
-    ResumeGui();
+	HaltGui();
+	mainWindow->Remove(&promptWindow);
+	mainWindow->SetState(STATE_DEFAULT);
+	ResumeGui();
 
-    return ret;
+	return ret;
 }
 
 s32 Wad_Uninstall(FILE *fp)
 {
-    //////start the gui shit
-    GuiWindow promptWindow(472, 320);
-    promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-    promptWindow.SetPosition(0, -10);
+	//////start the gui shit
+	GuiWindow promptWindow(472, 320);
+	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	promptWindow.SetPosition(0, -10);
 
-    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
-    GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
-    GuiTrigger trigA;
-    trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+	GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+	GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
+	GuiTrigger trigA;
+	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
-    GuiImage dialogBoxImg(&dialogBox);
-    if (Settings.wsprompt)
-    {
-        dialogBoxImg.SetWidescreen(Settings.widescreen);
-    }
+	GuiImage dialogBoxImg(&dialogBox);
+	if (Settings.wsprompt)
+	{
+		dialogBoxImg.SetWidescreen(Settings.widescreen);
+	}
 
-    GuiText btn1Txt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
-    GuiImage btn1Img(&btnOutline);
-    if (Settings.wsprompt)
-    {
-        btn1Txt.SetWidescreen(Settings.widescreen);
-        btn1Img.SetWidescreen(Settings.widescreen);
-    }
-    GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -55, &trigA, btnSoundOver, btnSoundClick2, 1);
-    btn1.SetLabel(&btn1Txt);
-    btn1.SetState(STATE_SELECTED);
+	GuiText btn1Txt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
+	GuiImage btn1Img(&btnOutline);
+	if (Settings.wsprompt)
+	{
+		btn1Txt.SetWidescreen(Settings.widescreen);
+		btn1Img.SetWidescreen(Settings.widescreen);
+	}
+	GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -55, &trigA, btnSoundOver, btnSoundClick2, 1);
+	btn1.SetLabel(&btn1Txt);
+	btn1.SetState(STATE_SELECTED);
 
-    char title[50];
-    sprintf(title, "%s", tr( "Uninstalling wad" ));
-    GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-    titleTxt.SetPosition(0, 40);
+	char title[50];
+	sprintf(title, "%s", tr( "Uninstalling wad" ));
+	GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	titleTxt.SetPosition(0, 40);
 
-    GuiText msg1Txt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    msg1Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    msg1Txt.SetPosition(50, 75);
+	GuiText msg1Txt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	msg1Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	msg1Txt.SetPosition(50, 75);
 
-    GuiText msg2Txt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    msg2Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    msg2Txt.SetPosition(50, 98);
+	GuiText msg2Txt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	msg2Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	msg2Txt.SetPosition(50, 98);
 
-    GuiText msg3Txt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    msg3Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    msg3Txt.SetPosition(50, 121);
+	GuiText msg3Txt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	msg3Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	msg3Txt.SetPosition(50, 121);
 
-    GuiText msg4Txt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    msg4Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    msg4Txt.SetPosition(50, 144);
+	GuiText msg4Txt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	msg4Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	msg4Txt.SetPosition(50, 144);
 
-    GuiText msg5Txt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-    msg5Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    msg5Txt.SetPosition(50, 167);
+	GuiText msg5Txt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	msg5Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	msg5Txt.SetPosition(50, 167);
 
-    if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust for widescreen
-    {
+	if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust for widescreen
+	{
 
-        msg1Txt.SetPosition(70, 95);
-        msg2Txt.SetPosition(70, 118);
-        msg3Txt.SetPosition(70, 141);
-        msg4Txt.SetPosition(70, 164);
-        msg5Txt.SetPosition(70, 187);
+		msg1Txt.SetPosition(70, 95);
+		msg2Txt.SetPosition(70, 118);
+		msg3Txt.SetPosition(70, 141);
+		msg4Txt.SetPosition(70, 164);
+		msg5Txt.SetPosition(70, 187);
 
-    }
-    promptWindow.Append(&dialogBoxImg);
-    promptWindow.Append(&titleTxt);
-    promptWindow.Append(&msg5Txt);
-    promptWindow.Append(&msg4Txt);
-    promptWindow.Append(&msg3Txt);
-    promptWindow.Append(&msg1Txt);
-    promptWindow.Append(&msg2Txt);
+	}
+	promptWindow.Append(&dialogBoxImg);
+	promptWindow.Append(&titleTxt);
+	promptWindow.Append(&msg5Txt);
+	promptWindow.Append(&msg4Txt);
+	promptWindow.Append(&msg3Txt);
+	promptWindow.Append(&msg1Txt);
+	promptWindow.Append(&msg2Txt);
 
-    HaltGui();
-    mainWindow->SetState(STATE_DISABLED);
-    mainWindow->Append(&promptWindow);
-    mainWindow->ChangeFocus(&promptWindow);
-    ResumeGui();
-    //sleep(3);
+	HaltGui();
+	mainWindow->SetState(STATE_DISABLED);
+	mainWindow->Append(&promptWindow);
+	mainWindow->ChangeFocus(&promptWindow);
+	ResumeGui();
+	//sleep(3);
 
-    ///start the wad shit
-    wadHeader *header = NULL;
-    void *pvoid = NULL;
-    tikview *viewData = NULL;
+	///start the wad shit
+	wadHeader *header = NULL;
+	void *pvoid = NULL;
+	tikview *viewData = NULL;
 
-    u64 tid;
-    u32 viewCnt;
-    s32 ret;
+	u64 tid;
+	u32 viewCnt;
+	s32 ret;
 
-    msg1Txt.SetText(tr( ">> Reading WAD data..." ));
+	msg1Txt.SetText(tr( ">> Reading WAD data..." ));
 
-    // WAD header
-    ret = __Wad_ReadAlloc(fp, &pvoid, 0, sizeof(wadHeader));
-    if (ret < 0)
-    {
-        char errTxt[50];
-        sprintf(errTxt, "%sret = %d", tr( ">> Reading WAD data...ERROR! " ), ret);
-        msg1Txt.SetText(errTxt);
-        //printf(" ERROR! (ret = %d)\n", ret);
-        goto out;
-    }
-    SetPointer( header, pvoid );
+	// WAD header
+	ret = __Wad_ReadAlloc(fp, &pvoid, 0, sizeof(wadHeader));
+	if (ret < 0)
+	{
+		char errTxt[50];
+		sprintf(errTxt, "%sret = %d", tr( ">> Reading WAD data...ERROR! " ), ret);
+		msg1Txt.SetText(errTxt);
+		//printf(" ERROR! (ret = %d)\n", ret);
+		goto out;
+	}
+	SetPointer( header, pvoid );
 
-    // Get title ID
-    ret = __Wad_GetTitleID(fp, header, &tid);
-    if (ret < 0)
-    {
-        //printf(" ERROR! (ret = %d)\n", ret);
-        char errTxt[50];
-        sprintf(errTxt, "%sret = %d", tr( ">> Reading WAD data...ERROR! " ), ret);
-        msg1Txt.SetText(errTxt);
-        goto out;
-    }
+	// Get title ID
+	ret = __Wad_GetTitleID(fp, header, &tid);
+	if (ret < 0)
+	{
+		//printf(" ERROR! (ret = %d)\n", ret);
+		char errTxt[50];
+		sprintf(errTxt, "%sret = %d", tr( ">> Reading WAD data...ERROR! " ), ret);
+		msg1Txt.SetText(errTxt);
+		goto out;
+	}
 
-    msg1Txt.SetText(tr( ">> Reading WAD data...Ok!" ));
-    msg2Txt.SetText(tr( ">> Deleting tickets..." ));
+	msg1Txt.SetText(tr( ">> Reading WAD data...Ok!" ));
+	msg2Txt.SetText(tr( ">> Deleting tickets..." ));
 
-    // Get ticket views
-    ret = NandTitles.GetTicketViews(tid, &viewData, &viewCnt);
-    if (ret < 0)
-    {
-        char errTxt[50];
-        sprintf(errTxt, "%sret = %d", tr( ">> Deleting tickets...ERROR! " ), ret);
-        msg2Txt.SetText(errTxt);
-        //printf(" ERROR! (ret = %d)\n", ret);
-    }
-    // Delete tickets
-    if (ret >= 0)
-    {
-        u32 cnt;
+	// Get ticket views
+	ret = NandTitles.GetTicketViews(tid, &viewData, &viewCnt);
+	if (ret < 0)
+	{
+		char errTxt[50];
+		sprintf(errTxt, "%sret = %d", tr( ">> Deleting tickets...ERROR! " ), ret);
+		msg2Txt.SetText(errTxt);
+		//printf(" ERROR! (ret = %d)\n", ret);
+	}
+	// Delete tickets
+	if (ret >= 0)
+	{
+		u32 cnt;
 
-        // Delete all tickets
-        for (cnt = 0; cnt < viewCnt; cnt++)
-        {
-            ret = ES_DeleteTicket(&viewData[cnt]);
-            if (ret < 0) break;
-        }
+		// Delete all tickets
+		for (cnt = 0; cnt < viewCnt; cnt++)
+		{
+			ret = ES_DeleteTicket(&viewData[cnt]);
+			if (ret < 0) break;
+		}
 
-        if (ret < 0)
-        {
-            char errTxt[50];
-            sprintf(errTxt, "%sret = %d", tr( ">> Deleting tickets...ERROR! " ), ret);
-            msg2Txt.SetText(errTxt);
-        }
-        //printf(" ERROR! (ret = %d\n", ret);
-        else
-        //printf(" OK!\n");
-        msg2Txt.SetText(tr( ">> Deleting tickets...Ok! " ));
+		if (ret < 0)
+		{
+			char errTxt[50];
+			sprintf(errTxt, "%sret = %d", tr( ">> Deleting tickets...ERROR! " ), ret);
+			msg2Txt.SetText(errTxt);
+		}
+		//printf(" ERROR! (ret = %d\n", ret);
+		else
+		//printf(" OK!\n");
+		msg2Txt.SetText(tr( ">> Deleting tickets...Ok! " ));
 
-    }
+	}
 
-    msg3Txt.SetText(tr( ">> Deleting title contents..." ));
-    //WindowPrompt(">> Deleting title contents...",0,"Back",0,0);
+	msg3Txt.SetText(tr( ">> Deleting title contents..." ));
+	//WindowPrompt(">> Deleting title contents...",0,"Back",0,0);
 
-    // Delete title contents
-    ret = ES_DeleteTitleContent(tid);
-    if (ret < 0)
-    {
-        char errTxt[50];
-        sprintf(errTxt, "%sret = %d", tr( ">> Deleting title contents...ERROR! " ), ret);
-        msg3Txt.SetText(errTxt);
-    }
-    //printf(" ERROR! (ret = %d)\n", ret);
-    else
-    //printf(" OK!\n");
-    msg3Txt.SetText(tr( ">> Deleting title contents...Ok!" ));
+	// Delete title contents
+	ret = ES_DeleteTitleContent(tid);
+	if (ret < 0)
+	{
+		char errTxt[50];
+		sprintf(errTxt, "%sret = %d", tr( ">> Deleting title contents...ERROR! " ), ret);
+		msg3Txt.SetText(errTxt);
+	}
+	//printf(" ERROR! (ret = %d)\n", ret);
+	else
+	//printf(" OK!\n");
+	msg3Txt.SetText(tr( ">> Deleting title contents...Ok!" ));
 
-    msg4Txt.SetText(tr( ">> Deleting title..." ));
-    // Delete title
-    ret = ES_DeleteTitle(tid);
-    if (ret < 0)
-    {
-        char errTxt[50];
-        sprintf(errTxt, "%sret = %d", tr( ">> Deleting title ...ERROR! " ), ret);
-        msg4Txt.SetText(errTxt);
-    }
-    //printf(" ERROR! (ret = %d)\n", ret);
-    else
-    //printf(" OK!\n");
-    msg4Txt.SetText(tr( ">> Deleting title ...Ok!" ));
+	msg4Txt.SetText(tr( ">> Deleting title..." ));
+	// Delete title
+	ret = ES_DeleteTitle(tid);
+	if (ret < 0)
+	{
+		char errTxt[50];
+		sprintf(errTxt, "%sret = %d", tr( ">> Deleting title ...ERROR! " ), ret);
+		msg4Txt.SetText(errTxt);
+	}
+	//printf(" ERROR! (ret = %d)\n", ret);
+	else
+	//printf(" OK!\n");
+	msg4Txt.SetText(tr( ">> Deleting title ...Ok!" ));
 
-    out:
-    // Free memory
-    if (header) free(header);
+	out:
+	// Free memory
+	if (header) free(header);
 
-    goto exit;
+	goto exit;
 
-    exit: msg5Txt.SetText(tr( "Done!" ));
-    promptWindow.Append(&btn1);
-    while (btn1.GetState() != STATE_CLICKED)
-    {
-    }
+	exit: msg5Txt.SetText(tr( "Done!" ));
+	promptWindow.Append(&btn1);
+	while (btn1.GetState() != STATE_CLICKED)
+	{
+	}
 
-    HaltGui();
-    mainWindow->Remove(&promptWindow);
-    mainWindow->SetState(STATE_DEFAULT);
-    ResumeGui();
+	HaltGui();
+	mainWindow->Remove(&promptWindow);
+	mainWindow->SetState(STATE_DEFAULT);
+	ResumeGui();
 
-    return ret;
+	return ret;
 }
 

@@ -32,14 +32,14 @@ using namespace std;
 
 class Wiinnertag
 {
-    public:
+	public:
 		static bool CreateExample(const string &filepath);
 		static bool TagGame(const char *gameID);
-    private:
-        Wiinnertag(const string &filepath);
+	private:
+		Wiinnertag(const string &filepath);
 		bool Send(const char *gameID);
 		bool ReadXML(const string &filepath);
-        vector<pair<string, string> > tagList;
+		vector<pair<string, string> > tagList;
 };
 
 #endif

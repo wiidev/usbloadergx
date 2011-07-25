@@ -30,28 +30,28 @@
 
 class SettingsMenu : public GuiWindow
 {
-    public:
-        SettingsMenu(const char * title, OptionList * option, int returnTo);
-        virtual ~SettingsMenu();
-        int GetClickedOption();
-        int GetMenu();
-    protected:
-        virtual int GetMenuInternal() { return MENU_NONE; };
-        int returnToMenu;
+	public:
+		SettingsMenu(const char * title, OptionList * option, int returnTo);
+		virtual ~SettingsMenu();
+		int GetClickedOption();
+		int GetMenu();
+	protected:
+		virtual int GetMenuInternal() { return MENU_NONE; };
+		int returnToMenu;
 
-        GuiImageData * btnOutline;
+		GuiImageData * btnOutline;
 
-        GuiTrigger * trigA;
-        GuiTrigger * trigB;
+		GuiTrigger * trigA;
+		GuiTrigger * trigB;
 
-        OptionList * Options;
+		OptionList * Options;
 
-        GuiText * titleTxt;
-        GuiText * backBtnTxt;
-        GuiImage * backBtnImg;
-        GuiButton * backBtn;
+		GuiText * titleTxt;
+		GuiText * backBtnTxt;
+		GuiImage * backBtnImg;
+		GuiButton * backBtn;
 
-        GuiOptionBrowser * optionBrowser;
+		GuiOptionBrowser * optionBrowser;
 
 };
 

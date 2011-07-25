@@ -35,10 +35,10 @@
 #include "UninstallSM.hpp"
 
 GameSettingsMenu::GameSettingsMenu(GameBrowseMenu *parent, struct discHdr * header)
-    : FlyingButtonsMenu(GameTitles.GetTitle(header)), browserMenu(parent)
+	: FlyingButtonsMenu(GameTitles.GetTitle(header)), browserMenu(parent)
 {
-    DiscHeader = header;
-    //! Don't switch menu's by default but return to disc window.
+	DiscHeader = header;
+	//! Don't switch menu's by default but return to disc window.
 	ParentMenu = -2;
 }
 
@@ -48,112 +48,112 @@ GameSettingsMenu::~GameSettingsMenu()
 
 int GameSettingsMenu::Show(GameBrowseMenu *parent, struct discHdr * header)
 {
-    GameSettingsMenu * Menu = new GameSettingsMenu(parent, header);
-    mainWindow->Append(Menu);
+	GameSettingsMenu * Menu = new GameSettingsMenu(parent, header);
+	mainWindow->Append(Menu);
 
-    Menu->ShowMenu();
+	Menu->ShowMenu();
 
-    int returnMenu = MENU_NONE;
+	int returnMenu = MENU_NONE;
 
-    while((returnMenu = Menu->MainLoop()) == MENU_NONE);
+	while((returnMenu = Menu->MainLoop()) == MENU_NONE);
 
-    delete Menu;
+	delete Menu;
 
-    return returnMenu;
+	return returnMenu;
 }
 
 void GameSettingsMenu::SetupMainButtons()
 {
-    int pos = 0;
+	int pos = 0;
 
-    SetMainButton(pos++, tr( "Game Load" ), MainButtonImgData, MainButtonImgOverData);
-    SetMainButton(pos++, tr( "Ocarina" ), MainButtonImgData, MainButtonImgOverData);
-    SetMainButton(pos++, tr( "Categories" ), MainButtonImgData, MainButtonImgOverData);
-    SetMainButton(pos++, tr( "Default Gamesettings" ), MainButtonImgData, MainButtonImgOverData);
-    SetMainButton(pos++, tr( "Uninstall Menu" ), MainButtonImgData, MainButtonImgOverData);
+	SetMainButton(pos++, tr( "Game Load" ), MainButtonImgData, MainButtonImgOverData);
+	SetMainButton(pos++, tr( "Ocarina" ), MainButtonImgData, MainButtonImgOverData);
+	SetMainButton(pos++, tr( "Categories" ), MainButtonImgData, MainButtonImgOverData);
+	SetMainButton(pos++, tr( "Default Gamesettings" ), MainButtonImgData, MainButtonImgOverData);
+	SetMainButton(pos++, tr( "Uninstall Menu" ), MainButtonImgData, MainButtonImgOverData);
 }
 
 void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 {
-    if(CurrentMenu)
-        return;
+	if(CurrentMenu)
+		return;
 
-    int Idx = 0;
+	int Idx = 0;
 
-    //! Game Load
-    if(menuNr == Idx++)
-    {
-        HideMenu();
-        ResumeGui();
-        CurrentMenu = new GameLoadSM((const char *) DiscHeader->id);
-        Append(CurrentMenu);
-    }
+	//! Game Load
+	if(menuNr == Idx++)
+	{
+		HideMenu();
+		ResumeGui();
+		CurrentMenu = new GameLoadSM((const char *) DiscHeader->id);
+		Append(CurrentMenu);
+	}
 
-    //! Ocarina
-    else if(menuNr == Idx++)
-    {
-        char ID[7];
-        snprintf(ID, sizeof(ID), "%s", (char *) DiscHeader->id);
-        CheatMenu(ID);
-    }
+	//! Ocarina
+	else if(menuNr == Idx++)
+	{
+		char ID[7];
+		snprintf(ID, sizeof(ID), "%s", (char *) DiscHeader->id);
+		CheatMenu(ID);
+	}
 
-    //! Categories
-    else if(menuNr == Idx++)
-    {
-        if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_CATEGORIES_MENU))
-        {
-            WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
-        	return;
-        }
-        HideMenu();
-        Remove(backBtn);
-        ResumeGui();
-        mainWindow->SetState(STATE_DISABLED);
-        CategorySelectPrompt promptMenu(DiscHeader);
-        promptMenu.SetAlignment(thAlign("center - category game prompt align hor"), thAlign("middle - category game prompt align ver"));
-        promptMenu.SetPosition(thInt("0 - category game prompt pos x"), thInt("0 - category game prompt pos y"));
-        promptMenu.SetEffect(EFFECT_FADE, 20);
-        mainWindow->Append(&promptMenu);
+	//! Categories
+	else if(menuNr == Idx++)
+	{
+		if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_CATEGORIES_MENU))
+		{
+			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			return;
+		}
+		HideMenu();
+		Remove(backBtn);
+		ResumeGui();
+		mainWindow->SetState(STATE_DISABLED);
+		CategorySelectPrompt promptMenu(DiscHeader);
+		promptMenu.SetAlignment(thAlign("center - category game prompt align hor"), thAlign("middle - category game prompt align ver"));
+		promptMenu.SetPosition(thInt("0 - category game prompt pos x"), thInt("0 - category game prompt pos y"));
+		promptMenu.SetEffect(EFFECT_FADE, 20);
+		mainWindow->Append(&promptMenu);
 
-        promptMenu.Show();
+		promptMenu.Show();
 
-        promptMenu.SetEffect(EFFECT_FADE, -20);
-        while(promptMenu.GetEffect() > 0) usleep(100);
-        mainWindow->Remove(&promptMenu);
-        if(promptMenu.categoriesChanged())
-        {
-            wString oldFilter(gameList.GetCurrentFilter());
-            gameList.FilterList(oldFilter.c_str());
-            browserMenu->ReloadBrowser();
-        }
-        mainWindow->SetState(STATE_DEFAULT);
-        Append(backBtn);
-        ShowMenu();
-    }
+		promptMenu.SetEffect(EFFECT_FADE, -20);
+		while(promptMenu.GetEffect() > 0) usleep(100);
+		mainWindow->Remove(&promptMenu);
+		if(promptMenu.categoriesChanged())
+		{
+			wString oldFilter(gameList.GetCurrentFilter());
+			gameList.FilterList(oldFilter.c_str());
+			browserMenu->ReloadBrowser();
+		}
+		mainWindow->SetState(STATE_DEFAULT);
+		Append(backBtn);
+		ShowMenu();
+	}
 
-    //! Default Gamesettings
-    else if(menuNr == Idx++)
-    {
-        int choice = WindowPrompt(tr( "Are you sure?" ), 0, tr( "Yes" ), tr( "Cancel" ));
-        if (choice == 1)
-        {
-            GameSettings.Remove(DiscHeader->id);
-            GameSettings.Save();
-        }
-    }
+	//! Default Gamesettings
+	else if(menuNr == Idx++)
+	{
+		int choice = WindowPrompt(tr( "Are you sure?" ), 0, tr( "Yes" ), tr( "Cancel" ));
+		if (choice == 1)
+		{
+			GameSettings.Remove(DiscHeader->id);
+			GameSettings.Save();
+		}
+	}
 
-    //! Uninstall Menu
-    else if(menuNr == Idx++)
-    {
-        HideMenu();
-        ResumeGui();
-        CurrentMenu = new UninstallSM(DiscHeader);
-        Append(CurrentMenu);
-    }
+	//! Uninstall Menu
+	else if(menuNr == Idx++)
+	{
+		HideMenu();
+		ResumeGui();
+		CurrentMenu = new UninstallSM(DiscHeader);
+		Append(CurrentMenu);
+	}
 }
 
 void GameSettingsMenu::DeleteSettingsMenu()
 {
-    delete CurrentMenu;
-    CurrentMenu = NULL;
+	delete CurrentMenu;
+	CurrentMenu = NULL;
 }

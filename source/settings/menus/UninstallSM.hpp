@@ -28,15 +28,15 @@
 
 class UninstallSM : public SettingsMenu
 {
-    public:
-        UninstallSM(struct discHdr * header);
-    protected:
-        void SetOptionValues();
-        int GetMenuInternal();
+	public:
+		UninstallSM(struct discHdr * header);
+	protected:
+		void SetOptionValues();
+		int GetMenuInternal();
 
-        struct discHdr * DiscHeader;
+		struct discHdr * DiscHeader;
 
-        OptionList GuiOptions;
+		OptionList GuiOptions;
 };
 
 

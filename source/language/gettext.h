@@ -6,13 +6,13 @@ extern "C"
 {
 #endif
 
-    bool gettextLoadLanguage(const char* langFile);
-    void gettextCleanUp(void);
-    /*
-     * input msg = a text in ASCII
-     * output = the translated msg in utf-8
-     */
-    const char *gettext(const char *msg);
+	bool gettextLoadLanguage(const char* langFile);
+	void gettextCleanUp(void);
+	/*
+	 * input msg = a text in ASCII
+	 * output = the translated msg in utf-8
+	 */
+	const char *gettext(const char *msg);
 #define tr(s) gettext(s)
 #define trNOOP(s) (s)
 

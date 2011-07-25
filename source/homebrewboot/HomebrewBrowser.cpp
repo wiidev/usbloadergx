@@ -42,423 +42,423 @@ extern char wiiloadVersion[2];
 extern int connection;
 
 HomebrewBrowser::HomebrewBrowser()
-    : FlyingButtonsMenu(tr( "Homebrew Launcher" ))
+	: FlyingButtonsMenu(tr( "Homebrew Launcher" ))
 {
-    HomebrewList = new DirList(Settings.homebrewapps_path, ".dol,.elf", DirList::Files | DirList::Dirs | DirList::CheckSubfolders);
+	HomebrewList = new DirList(Settings.homebrewapps_path, ".dol,.elf", DirList::Files | DirList::Dirs | DirList::CheckSubfolders);
 
-    if (IsNetworkInit())
-        ResumeNetworkWait();
+	if (IsNetworkInit())
+		ResumeNetworkWait();
 
-    wifiNotSet = true;
-    wifiImgData = Resources::GetImageData("wifi_btn.png");
-    wifiToolTip = new GuiTooltip(" ");
-    wifiImg = new GuiImage(wifiImgData);
-    wifiBtn = new GuiButton(wifiImgData->GetWidth(), wifiImgData->GetHeight());
-    wifiBtn->SetImage(wifiImg);
-    wifiBtn->SetPosition(300, 400);
-    wifiBtn->SetSoundOver(btnSoundOver);
-    wifiBtn->SetSoundClick(btnSoundClick);
-    wifiBtn->SetEffectGrow();
-    wifiBtn->SetAlpha(80);
-    wifiBtn->SetTrigger(trigA);
-    Append(wifiBtn);
+	wifiNotSet = true;
+	wifiImgData = Resources::GetImageData("wifi_btn.png");
+	wifiToolTip = new GuiTooltip(" ");
+	wifiImg = new GuiImage(wifiImgData);
+	wifiBtn = new GuiButton(wifiImgData->GetWidth(), wifiImgData->GetHeight());
+	wifiBtn->SetImage(wifiImg);
+	wifiBtn->SetPosition(300, 400);
+	wifiBtn->SetSoundOver(btnSoundOver);
+	wifiBtn->SetSoundClick(btnSoundClick);
+	wifiBtn->SetEffectGrow();
+	wifiBtn->SetAlpha(80);
+	wifiBtn->SetTrigger(trigA);
+	Append(wifiBtn);
 
-    channelImgData = Resources::GetImageData("channel_btn.png");
-    channelBtnImg = new GuiImage(channelImgData);
-    channelBtnImg->SetWidescreen(Settings.widescreen);
-    channelBtn = new GuiButton(channelBtnImg->GetWidth(), channelBtnImg->GetHeight());
-    channelBtn->SetPosition(240, 400);
-    channelBtn->SetImage(channelBtnImg);
-    channelBtn->SetSoundOver(btnSoundOver);
-    channelBtn->SetSoundClick(btnSoundClick2);
-    channelBtn->SetEffectGrow();
-    channelBtn->SetTrigger(trigA);
-    if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_TITLE_LAUNCHER_MENU))
-        Append(channelBtn);
+	channelImgData = Resources::GetImageData("channel_btn.png");
+	channelBtnImg = new GuiImage(channelImgData);
+	channelBtnImg->SetWidescreen(Settings.widescreen);
+	channelBtn = new GuiButton(channelBtnImg->GetWidth(), channelBtnImg->GetHeight());
+	channelBtn->SetPosition(240, 400);
+	channelBtn->SetImage(channelBtnImg);
+	channelBtn->SetSoundOver(btnSoundOver);
+	channelBtn->SetSoundClick(btnSoundClick2);
+	channelBtn->SetEffectGrow();
+	channelBtn->SetTrigger(trigA);
+	if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_TITLE_LAUNCHER_MENU))
+		Append(channelBtn);
 
-    MainButtonDesc.resize(HomebrewList->GetFilecount());
-    MainButtonDescOver.resize(HomebrewList->GetFilecount());
+	MainButtonDesc.resize(HomebrewList->GetFilecount());
+	MainButtonDescOver.resize(HomebrewList->GetFilecount());
 
-    for(u32 i = 0; i < 4; ++i)
-    {
-        IconImgData[i] = NULL;
-        IconImg[i] = NULL;
-    }
+	for(u32 i = 0; i < 4; ++i)
+	{
+		IconImgData[i] = NULL;
+		IconImg[i] = NULL;
+	}
 
-    for(int i = 0; i < HomebrewList->GetFilecount(); ++i)
-    {
-        MainButtonDesc[i] = new GuiText((char *) NULL, 18, (GXColor) {0, 0, 0, 255});
-        MainButtonDesc[i]->SetMaxWidth(MainButtonImgData->GetWidth() - 150, DOTTED);
-        MainButtonDesc[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-        MainButtonDesc[i]->SetPosition(148, 15);
+	for(int i = 0; i < HomebrewList->GetFilecount(); ++i)
+	{
+		MainButtonDesc[i] = new GuiText((char *) NULL, 18, (GXColor) {0, 0, 0, 255});
+		MainButtonDesc[i]->SetMaxWidth(MainButtonImgData->GetWidth() - 150, DOTTED);
+		MainButtonDesc[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+		MainButtonDesc[i]->SetPosition(148, 15);
 
-        MainButtonDescOver[i] = new GuiText((char *) NULL, 18, (GXColor) {0, 0, 0, 255});
-        MainButtonDescOver[i]->SetMaxWidth(MainButtonImgData->GetWidth() - 150, SCROLL_HORIZONTAL);
-        MainButtonDescOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-        MainButtonDescOver[i]->SetPosition(148, 15);
-    }
+		MainButtonDescOver[i] = new GuiText((char *) NULL, 18, (GXColor) {0, 0, 0, 255});
+		MainButtonDescOver[i]->SetMaxWidth(MainButtonImgData->GetWidth() - 150, SCROLL_HORIZONTAL);
+		MainButtonDescOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+		MainButtonDescOver[i]->SetPosition(148, 15);
+	}
 }
 
 HomebrewBrowser::~HomebrewBrowser()
 {
-    HaltGui();
-    delete HomebrewList;
+	HaltGui();
+	delete HomebrewList;
 
-    Remove(wifiBtn);
-    delete wifiImgData;
-    delete wifiImg;
-    delete wifiToolTip;
-    delete wifiBtn;
+	Remove(wifiBtn);
+	delete wifiImgData;
+	delete wifiImg;
+	delete wifiToolTip;
+	delete wifiBtn;
 
-    Remove(channelBtn);
-    delete channelImgData;
-    delete channelBtnImg;
-    delete channelBtn;
+	Remove(channelBtn);
+	delete channelImgData;
+	delete channelBtnImg;
+	delete channelBtn;
 
-    for(u32 i = 0; i < MainButtonDesc.size(); ++i)
-    {
-        delete MainButtonDesc[i];
-        delete MainButtonDescOver[i];
-        MainButton[i]->SetLabel(NULL, 1);
-        MainButton[i]->SetLabelOver(NULL, 1);
-    }
+	for(u32 i = 0; i < MainButtonDesc.size(); ++i)
+	{
+		delete MainButtonDesc[i];
+		delete MainButtonDescOver[i];
+		MainButton[i]->SetLabel(NULL, 1);
+		MainButton[i]->SetLabelOver(NULL, 1);
+	}
 
-    if (IsNetworkInit())
-        HaltNetworkThread();
+	if (IsNetworkInit())
+		HaltNetworkThread();
 }
 
 int HomebrewBrowser::Execute()
 {
-    HomebrewBrowser * Menu = new HomebrewBrowser();
-    mainWindow->Append(Menu);
+	HomebrewBrowser * Menu = new HomebrewBrowser();
+	mainWindow->Append(Menu);
 
-    Menu->ShowMenu();
+	Menu->ShowMenu();
 
-    int returnMenu = MENU_NONE;
+	int returnMenu = MENU_NONE;
 
-    while((returnMenu = Menu->MainLoop()) == MENU_NONE);
+	while((returnMenu = Menu->MainLoop()) == MENU_NONE);
 
-    delete Menu;
+	delete Menu;
 
-    return returnMenu;
+	return returnMenu;
 }
 
 void HomebrewBrowser::AddMainButtons()
 {
-    HaltGui();
+	HaltGui();
 
-    for(u32 i = 0; i < 4; ++i)
-    {
-        if(IconImgData[i])
-            delete IconImgData[i];
-        if(IconImg[i])
-            delete IconImg[i];
-        IconImgData[i] = NULL;
-        IconImg[i] = NULL;
-    }
+	for(u32 i = 0; i < 4; ++i)
+	{
+		if(IconImgData[i])
+			delete IconImgData[i];
+		if(IconImg[i])
+			delete IconImg[i];
+		IconImgData[i] = NULL;
+		IconImg[i] = NULL;
+	}
 
-    for(u32 i = 0; i < MainButton.size(); ++i)
-        MainButton[i]->SetIcon(NULL);
+	for(u32 i = 0; i < MainButton.size(); ++i)
+		MainButton[i]->SetIcon(NULL);
 
-    int FirstItem = currentPage*DISPLAY_BUTTONS;
+	int FirstItem = currentPage*DISPLAY_BUTTONS;
 
-    for(int i = FirstItem, n = 0; i < (int) MainButton.size() && i < FirstItem+DISPLAY_BUTTONS; ++i, ++n)
-    {
-        std::string iconpath = HomebrewList->GetFilepath(i);
-        size_t pos = iconpath.rfind('/');
-        if(pos != std::string::npos && pos < iconpath.size()-1)
-            iconpath.erase(pos+1);
-        iconpath += "icon.png";
+	for(int i = FirstItem, n = 0; i < (int) MainButton.size() && i < FirstItem+DISPLAY_BUTTONS; ++i, ++n)
+	{
+		std::string iconpath = HomebrewList->GetFilepath(i);
+		size_t pos = iconpath.rfind('/');
+		if(pos != std::string::npos && pos < iconpath.size()-1)
+			iconpath.erase(pos+1);
+		iconpath += "icon.png";
 
-        IconImgData[n] = new GuiImageData(iconpath.c_str());
-        IconImg[n] = new GuiImage(IconImgData[n]);
-        IconImg[n]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-        IconImg[n]->SetPosition(12, 0);
-        IconImg[n]->SetScale(0.95);
-        MainButton[i]->SetIcon(IconImg[n]);
-    }
+		IconImgData[n] = new GuiImageData(iconpath.c_str());
+		IconImg[n] = new GuiImage(IconImgData[n]);
+		IconImg[n]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+		IconImg[n]->SetPosition(12, 0);
+		IconImg[n]->SetScale(0.95);
+		MainButton[i]->SetIcon(IconImg[n]);
+	}
 
-    FlyingButtonsMenu::AddMainButtons();
+	FlyingButtonsMenu::AddMainButtons();
 }
 
 void HomebrewBrowser::SetupMainButtons()
 {
-    HomebrewXML MetaXML;
+	HomebrewXML MetaXML;
 
-    for(int i = 0; i < HomebrewList->GetFilecount(); ++i)
-    {
-        const char * HomebrewName = NULL;
-        std::string metapath = HomebrewList->GetFilepath(i);
-        size_t pos = metapath.rfind('/');
-        if(pos != std::string::npos && pos < metapath.size()-1)
-            metapath.erase(pos+1);
-        metapath += "meta.xml";
+	for(int i = 0; i < HomebrewList->GetFilecount(); ++i)
+	{
+		const char * HomebrewName = NULL;
+		std::string metapath = HomebrewList->GetFilepath(i);
+		size_t pos = metapath.rfind('/');
+		if(pos != std::string::npos && pos < metapath.size()-1)
+			metapath.erase(pos+1);
+		metapath += "meta.xml";
 
-        if (MetaXML.LoadHomebrewXMLData(metapath.c_str()) > 0)
-        {
-            HomebrewName = MetaXML.GetName();
-            MainButtonDesc[i]->SetText(MetaXML.GetShortDescription());
-            MainButtonDescOver[i]->SetText(MetaXML.GetShortDescription());
-        }
-        else
-        {
-            const char * shortpath = HomebrewList->GetFilepath(i);
-            const char * ptr = shortpath;
-            const char * ptr2 = NULL;
-            while(*ptr != '\0')
-            {
-                if(*ptr == '/')
-                {
-                    shortpath = ptr2;
-                    ptr2 = ptr;
-                }
+		if (MetaXML.LoadHomebrewXMLData(metapath.c_str()) > 0)
+		{
+			HomebrewName = MetaXML.GetName();
+			MainButtonDesc[i]->SetText(MetaXML.GetShortDescription());
+			MainButtonDescOver[i]->SetText(MetaXML.GetShortDescription());
+		}
+		else
+		{
+			const char * shortpath = HomebrewList->GetFilepath(i);
+			const char * ptr = shortpath;
+			const char * ptr2 = NULL;
+			while(*ptr != '\0')
+			{
+				if(*ptr == '/')
+				{
+					shortpath = ptr2;
+					ptr2 = ptr;
+				}
 
-                ++ptr;
-            }
-            if(!shortpath && ptr2)
-                shortpath = ptr2;
-            else if(!shortpath)
-                shortpath = HomebrewList->GetFilename(i);
+				++ptr;
+			}
+			if(!shortpath && ptr2)
+				shortpath = ptr2;
+			else if(!shortpath)
+				shortpath = HomebrewList->GetFilename(i);
 
-            HomebrewName = shortpath;
-            MainButtonDesc[i]->SetText(" ");
-            MainButtonDescOver[i]->SetText(" ");
-        }
+			HomebrewName = shortpath;
+			MainButtonDesc[i]->SetText(" ");
+			MainButtonDescOver[i]->SetText(" ");
+		}
 
-        SetMainButton(i, HomebrewName, MainButtonImgData, MainButtonImgOverData);
+		SetMainButton(i, HomebrewName, MainButtonImgData, MainButtonImgOverData);
 
-        MainButtonTxt[i]->SetFontSize(18);
-        MainButtonTxt[i]->SetMaxWidth(MainButtonImgData->GetWidth() - 150, DOTTED);
-        MainButtonTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-        MainButtonTxt[i]->SetPosition(148, -12);
-        MainButton[i]->SetLabel(MainButtonDesc[i], 1);
-        MainButton[i]->SetLabelOver(MainButtonDescOver[i], 1);
-    }
+		MainButtonTxt[i]->SetFontSize(18);
+		MainButtonTxt[i]->SetMaxWidth(MainButtonImgData->GetWidth() - 150, DOTTED);
+		MainButtonTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+		MainButtonTxt[i]->SetPosition(148, -12);
+		MainButton[i]->SetLabel(MainButtonDesc[i], 1);
+		MainButton[i]->SetLabelOver(MainButtonDescOver[i], 1);
+	}
 }
 
 int HomebrewBrowser::MainLoop()
 {
-    if (IsNetworkInit() && wifiNotSet)
-    {
-        wifiToolTip->SetText(GetNetworkIP());
-        wifiBtn->SetAlpha(255);
-        wifiBtn->SetToolTip(wifiToolTip, 0, -50, 0, 5);
-        wifiNotSet = false;
-    }
+	if (IsNetworkInit() && wifiNotSet)
+	{
+		wifiToolTip->SetText(GetNetworkIP());
+		wifiBtn->SetAlpha(255);
+		wifiBtn->SetToolTip(wifiToolTip, 0, -50, 0, 5);
+		wifiNotSet = false;
+	}
 
-    if(wifiBtn->GetState() == STATE_CLICKED)
-    {
-        ResumeNetworkWait();
-        wifiBtn->ResetState();
-    }
-    else if(channelBtn->GetState() == STATE_CLICKED)
-    {
-        SetState(STATE_DISABLED);
-        TitleBrowser();
-        SetState(STATE_DEFAULT);
-        channelBtn->ResetState();
-    }
-    else if (infilesize > 0)
-    {
-        int menu = ReceiveFile();
-        if(menu != MENU_NONE)
-            return menu;
-        CloseConnection();
-        ResumeNetworkWait();
-    }
+	if(wifiBtn->GetState() == STATE_CLICKED)
+	{
+		ResumeNetworkWait();
+		wifiBtn->ResetState();
+	}
+	else if(channelBtn->GetState() == STATE_CLICKED)
+	{
+		SetState(STATE_DISABLED);
+		TitleBrowser();
+		SetState(STATE_DEFAULT);
+		channelBtn->ResetState();
+	}
+	else if (infilesize > 0)
+	{
+		int menu = ReceiveFile();
+		if(menu != MENU_NONE)
+			return menu;
+		CloseConnection();
+		ResumeNetworkWait();
+	}
 
-    return FlyingButtonsMenu::MainLoop();
+	return FlyingButtonsMenu::MainLoop();
 }
 
 //! Callback for MainButton clicked
 void HomebrewBrowser::MainButtonClicked(int button)
 {
-    HomebrewXML MetaXML;
-    std::string metapath = HomebrewList->GetFilepath(button);
-    size_t pos = metapath.rfind('/');
-    if(pos != std::string::npos && pos < metapath.size()-1)
-        metapath.erase(pos+1);
-    metapath += "meta.xml";
-    MetaXML.LoadHomebrewXMLData(metapath.c_str());
+	HomebrewXML MetaXML;
+	std::string metapath = HomebrewList->GetFilepath(button);
+	size_t pos = metapath.rfind('/');
+	if(pos != std::string::npos && pos < metapath.size()-1)
+		metapath.erase(pos+1);
+	metapath += "meta.xml";
+	MetaXML.LoadHomebrewXMLData(metapath.c_str());
 
-    u64 filesize = HomebrewList->GetFilesize(button);
+	u64 filesize = HomebrewList->GetFilesize(button);
 
-    wString HomebrewName(MainButtonTxt[button]->GetText());
+	wString HomebrewName(MainButtonTxt[button]->GetText());
 
-    HomebrewPrompt *HBCWindowPrompt = new HomebrewPrompt(HomebrewName.toUTF8().c_str(), MetaXML.GetCoder(), MetaXML.GetVersion(),
-                            MetaXML.GetReleasedate(), MetaXML.GetLongDescription(), IconImgData[button % 4], filesize);
+	HomebrewPrompt *HBCWindowPrompt = new HomebrewPrompt(HomebrewName.toUTF8().c_str(), MetaXML.GetCoder(), MetaXML.GetVersion(),
+							MetaXML.GetReleasedate(), MetaXML.GetLongDescription(), IconImgData[button % 4], filesize);
 
-    mainWindow->SetState(STATE_DISABLED);
-    mainWindow->Append(HBCWindowPrompt);
+	mainWindow->SetState(STATE_DISABLED);
+	mainWindow->Append(HBCWindowPrompt);
 
-    int choice = HBCWindowPrompt->MainLoop();
+	int choice = HBCWindowPrompt->MainLoop();
 
-    delete HBCWindowPrompt;
+	delete HBCWindowPrompt;
 
-    mainWindow->SetState(STATE_DEFAULT);
+	mainWindow->SetState(STATE_DEFAULT);
 
-    if (choice == 1)
-    {
-        u8 *buffer = NULL;
-        u64 filesize = 0;
-        LoadFileToMem(HomebrewList->GetFilepath(button), &buffer, &filesize);
-        if(!buffer)
-        {
-            WindowPrompt(tr("Error"), tr("Not enough memory."), tr("OK"));
-            return;
-        }
-        FreeHomebrewBuffer();
-        CopyHomebrewMemory(buffer, 0, filesize);
+	if (choice == 1)
+	{
+		u8 *buffer = NULL;
+		u64 filesize = 0;
+		LoadFileToMem(HomebrewList->GetFilepath(button), &buffer, &filesize);
+		if(!buffer)
+		{
+			WindowPrompt(tr("Error"), tr("Not enough memory."), tr("OK"));
+			return;
+		}
+		FreeHomebrewBuffer();
+		CopyHomebrewMemory(buffer, 0, filesize);
 
-        AddBootArgument(HomebrewList->GetFilepath(button));
+		AddBootArgument(HomebrewList->GetFilepath(button));
 
-        for(u32 i = 0; i < MetaXML.GetArguments().size(); ++i)
-        {
-            AddBootArgument(MetaXML.GetArguments().at(i).c_str());
-        }
+		for(u32 i = 0; i < MetaXML.GetArguments().size(); ++i)
+		{
+			AddBootArgument(MetaXML.GetArguments().at(i).c_str());
+		}
 
-        BootHomebrewFromMem();
-    }
+		BootHomebrewFromMem();
+	}
 }
 
 int HomebrewBrowser::ReceiveFile()
 {
-    char filesizetxt[50];
-    char temp[50];
-    u32 filesize = 0;
+	char filesizetxt[50];
+	char temp[50];
+	u32 filesize = 0;
 
-    if (infilesize < MB_SIZE)
-        snprintf(filesizetxt, sizeof(filesizetxt), tr( "Incoming file %0.2fKB" ), infilesize / KB_SIZE);
-    else snprintf(filesizetxt, sizeof(filesizetxt), tr( "Incoming file %0.2fMB" ), infilesize / MB_SIZE);
+	if (infilesize < MB_SIZE)
+		snprintf(filesizetxt, sizeof(filesizetxt), tr( "Incoming file %0.2fKB" ), infilesize / KB_SIZE);
+	else snprintf(filesizetxt, sizeof(filesizetxt), tr( "Incoming file %0.2fMB" ), infilesize / MB_SIZE);
 
-    snprintf(temp, sizeof(temp), tr( "Load file from: %s ?" ), GetIncommingIP());
+	snprintf(temp, sizeof(temp), tr( "Load file from: %s ?" ), GetIncommingIP());
 
-    int choice = WindowPrompt(filesizetxt, temp, tr( "OK" ), tr( "Cancel" ));
+	int choice = WindowPrompt(filesizetxt, temp, tr( "OK" ), tr( "Cancel" ));
 
-    if (choice == 0)
-        return MENU_NONE;
+	if (choice == 0)
+		return MENU_NONE;
 
-    u32 read = 0;
-    int len = NETWORKBLOCKSIZE;
-    filesize = infilesize;
-    u8 * buffer = (u8 *) malloc(infilesize);
-    if(!buffer)
-    {
-        WindowPrompt(tr( "Not enough memory." ), 0, tr( "OK" ));
-        return MENU_NONE;
-    }
+	u32 read = 0;
+	int len = NETWORKBLOCKSIZE;
+	filesize = infilesize;
+	u8 * buffer = (u8 *) malloc(infilesize);
+	if(!buffer)
+	{
+		WindowPrompt(tr( "Not enough memory." ), 0, tr( "OK" ));
+		return MENU_NONE;
+	}
 
-    int error = 0;
+	int error = 0;
 
-    while (read < infilesize)
-    {
-        ShowProgress(tr( "Receiving file from:" ), GetIncommingIP(), NULL, read, infilesize, true);
+	while (read < infilesize)
+	{
+		ShowProgress(tr( "Receiving file from:" ), GetIncommingIP(), NULL, read, infilesize, true);
 
-        if (infilesize - read < (u32) len)
-            len = infilesize - read;
-        else len = NETWORKBLOCKSIZE;
+		if (infilesize - read < (u32) len)
+			len = infilesize - read;
+		else len = NETWORKBLOCKSIZE;
 
-        int result = network_read(connection, buffer+read, len);
+		int result = network_read(connection, buffer+read, len);
 
-        if (result < 0)
-        {
-            WindowPrompt(tr( "Error while transfering data." ), 0, tr( "OK" ));
-            free(buffer);
-            return MENU_NONE;
-        }
-        if (!result)
-        {
-            break;
-        }
+		if (result < 0)
+		{
+			WindowPrompt(tr( "Error while transfering data." ), 0, tr( "OK" ));
+			free(buffer);
+			return MENU_NONE;
+		}
+		if (!result)
+		{
+			break;
+		}
 
-        read += result;
-    }
+		read += result;
+	}
 
-    char filename[101];
-    memset(filename, 0, sizeof(filename));
+	char filename[101];
+	memset(filename, 0, sizeof(filename));
 
-    network_read(connection, (u8*) filename, 100);
+	network_read(connection, (u8*) filename, 100);
 
-    // Do we need to unzip this thing?
-    if (wiiloadVersion[0] > 0 || wiiloadVersion[1] > 4)
-    {
-        // We need to unzip...
-        if (buffer[0] == 'P' && buffer[1] == 'K' && buffer[2] == 0x03 && buffer[3] == 0x04)
-        {
-            // It's a zip file, unzip to the apps directory
-            // Zip archive, ask for permission to install the zip
-            char zippath[255];
-            sprintf(zippath, "%s%s", Settings.homebrewapps_path, filename);
+	// Do we need to unzip this thing?
+	if (wiiloadVersion[0] > 0 || wiiloadVersion[1] > 4)
+	{
+		// We need to unzip...
+		if (buffer[0] == 'P' && buffer[1] == 'K' && buffer[2] == 0x03 && buffer[3] == 0x04)
+		{
+			// It's a zip file, unzip to the apps directory
+			// Zip archive, ask for permission to install the zip
+			char zippath[255];
+			sprintf(zippath, "%s%s", Settings.homebrewapps_path, filename);
 
-            FILE *fp = fopen(zippath, "wb");
-            if (!fp)
-            {
-                WindowPrompt(tr( "Error writing the data." ), 0, tr( "OK" ));
-                return MENU_NONE;
-            }
+			FILE *fp = fopen(zippath, "wb");
+			if (!fp)
+			{
+				WindowPrompt(tr( "Error writing the data." ), 0, tr( "OK" ));
+				return MENU_NONE;
+			}
 
-            fwrite(buffer, 1, infilesize, fp);
-            fclose(fp);
+			fwrite(buffer, 1, infilesize, fp);
+			fclose(fp);
 
-            free(buffer);
-            buffer = NULL;
+			free(buffer);
+			buffer = NULL;
 
-            // Now unzip the zip file...
-            unzFile uf = unzOpen(zippath);
-            if (uf == NULL)
-            {
-                WindowPrompt(tr( "Error while opening the zip." ), 0, tr( "OK" ));
-                return MENU_NONE;
-            }
+			// Now unzip the zip file...
+			unzFile uf = unzOpen(zippath);
+			if (uf == NULL)
+			{
+				WindowPrompt(tr( "Error while opening the zip." ), 0, tr( "OK" ));
+				return MENU_NONE;
+			}
 
-            extractZip(uf, 0, 1, 0, Settings.homebrewapps_path);
-            unzCloseCurrentFile(uf);
+			extractZip(uf, 0, 1, 0, Settings.homebrewapps_path);
+			unzCloseCurrentFile(uf);
 
-            remove(zippath);
+			remove(zippath);
 
-            WindowPrompt(tr( "Success:" ),
-                    tr( "Uploaded ZIP file installed to homebrew directory." ), tr( "OK" ));
+			WindowPrompt(tr( "Success:" ),
+					tr( "Uploaded ZIP file installed to homebrew directory." ), tr( "OK" ));
 
-            // Reload this menu here...
-            return MENU_HOMEBREWBROWSE;
-        }
-        else if (uncfilesize != 0) // if uncfilesize == 0, it's not compressed
-        {
-            // It's compressed, uncompress
-            u8 *unc = (u8 *) malloc(uncfilesize);
-            if(!unc)
-            {
-                ProgressStop();
-                free(buffer);
-                CloseConnection();
-                WindowPrompt(tr( "Not enough memory." ), 0, tr( "OK" ));
-                return MENU_NONE;
-            }
-            uLongf f = uncfilesize;
-            error = uncompress(unc, &f, buffer, infilesize) != Z_OK;
-            uncfilesize = f;
-            filesize = uncfilesize;
+			// Reload this menu here...
+			return MENU_HOMEBREWBROWSE;
+		}
+		else if (uncfilesize != 0) // if uncfilesize == 0, it's not compressed
+		{
+			// It's compressed, uncompress
+			u8 *unc = (u8 *) malloc(uncfilesize);
+			if(!unc)
+			{
+				ProgressStop();
+				free(buffer);
+				CloseConnection();
+				WindowPrompt(tr( "Not enough memory." ), 0, tr( "OK" ));
+				return MENU_NONE;
+			}
+			uLongf f = uncfilesize;
+			error = uncompress(unc, &f, buffer, infilesize) != Z_OK;
+			uncfilesize = f;
+			filesize = uncfilesize;
 
-            free(buffer);
-            buffer = unc;
-        }
-    }
+			free(buffer);
+			buffer = unc;
+		}
+	}
 
-    CopyHomebrewMemory(buffer, 0, filesize);
-    free(buffer);
+	CopyHomebrewMemory(buffer, 0, filesize);
+	free(buffer);
 
-    ProgressStop();
+	ProgressStop();
 
-    if (error || read != infilesize || (strcasestr(filename, ".dol") == 0 && strcasestr(filename, ".elf") == 0))
-    {
-        WindowPrompt(tr( "Error:" ), tr( "No data could be read." ), tr( "OK" ));
-        FreeHomebrewBuffer();
-        return MENU_NONE;
-    }
+	if (error || read != infilesize || (strcasestr(filename, ".dol") == 0 && strcasestr(filename, ".elf") == 0))
+	{
+		WindowPrompt(tr( "Error:" ), tr( "No data could be read." ), tr( "OK" ));
+		FreeHomebrewBuffer();
+		return MENU_NONE;
+	}
 
-    CloseConnection();
+	CloseConnection();
 
-    AddBootArgument(filename);
+	AddBootArgument(filename);
 
-    return BootHomebrewFromMem();
+	return BootHomebrewFromMem();
 }

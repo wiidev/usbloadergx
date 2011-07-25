@@ -29,7 +29,7 @@
 
 extern "C"  int ogg_read(void * punt, int bytes, int blocks, int *f)
 {
-    return ((CFile *) f)->read((u8 *) punt, bytes*blocks);
+	return ((CFile *) f)->read((u8 *) punt, bytes*blocks);
 }
 
 extern "C" int ogg_seek(int *f, ogg_int64_t offset, int mode)
@@ -39,7 +39,7 @@ extern "C" int ogg_seek(int *f, ogg_int64_t offset, int mode)
 
 extern "C" int ogg_close(int *f)
 {
-    ((CFile *) f)->close();
+	((CFile *) f)->close();
 	return 0;
 }
 
@@ -50,95 +50,95 @@ extern "C" long ogg_tell(int *f)
 
 static ov_callbacks callbacks = {
 	(size_t (*)(void *, size_t, size_t, void *))  ogg_read,
-	(int (*)(void *, ogg_int64_t, int))           ogg_seek,
-	(int (*)(void *))                             ogg_close,
-	(long (*)(void *))                            ogg_tell
+	(int (*)(void *, ogg_int64_t, int))		   ogg_seek,
+	(int (*)(void *))							 ogg_close,
+	(long (*)(void *))							ogg_tell
 };
 
 OggDecoder::OggDecoder(const char * filepath)
-    : SoundDecoder(filepath)
+	: SoundDecoder(filepath)
 {
-    SoundType = SOUND_OGG;
+	SoundType = SOUND_OGG;
 
-    if(!file_fd)
-        return;
+	if(!file_fd)
+		return;
 
-    OpenFile();
+	OpenFile();
 }
 
 OggDecoder::OggDecoder(const u8 * snd, int len)
-    : SoundDecoder(snd, len)
+	: SoundDecoder(snd, len)
 {
-    SoundType = SOUND_OGG;
+	SoundType = SOUND_OGG;
 
-    if(!file_fd)
-        return;
+	if(!file_fd)
+		return;
 
-    OpenFile();
+	OpenFile();
 }
 
 OggDecoder::~OggDecoder()
 {
-    ExitRequested = true;
-    while(Decoding)
-        usleep(100);
+	ExitRequested = true;
+	while(Decoding)
+		usleep(100);
 
-    if(file_fd)
-        ov_clear(&ogg_file);
+	if(file_fd)
+		ov_clear(&ogg_file);
 }
 
 void OggDecoder::OpenFile()
 {
-    if (ov_open_callbacks(file_fd, &ogg_file, NULL, 0, callbacks) < 0)
-    {
-        delete file_fd;
-        file_fd = NULL;
-        return;
-    }
+	if (ov_open_callbacks(file_fd, &ogg_file, NULL, 0, callbacks) < 0)
+	{
+		delete file_fd;
+		file_fd = NULL;
+		return;
+	}
 
-    ogg_info = ov_info(&ogg_file, -1);
-    Decode();
+	ogg_info = ov_info(&ogg_file, -1);
+	Decode();
 }
 
 int OggDecoder::GetFormat()
 {
-    if(!file_fd)
-        return VOICE_STEREO_16BIT;
+	if(!file_fd)
+		return VOICE_STEREO_16BIT;
 
-    return ((ogg_info->channels == 2) ? VOICE_STEREO_16BIT : VOICE_MONO_16BIT);
+	return ((ogg_info->channels == 2) ? VOICE_STEREO_16BIT : VOICE_MONO_16BIT);
 }
 
 int OggDecoder::GetSampleRate()
 {
-    if(!file_fd)
-        return 0;
+	if(!file_fd)
+		return 0;
 
-    return (int) ogg_info->rate;
+	return (int) ogg_info->rate;
 }
 
 int OggDecoder::Rewind()
 {
-    if(!file_fd)
-        return -1;
+	if(!file_fd)
+		return -1;
 
-    int ret = ov_time_seek(&ogg_file, 0);
-    CurPos = 0;
-    EndOfFile = false;
+	int ret = ov_time_seek(&ogg_file, 0);
+	CurPos = 0;
+	EndOfFile = false;
 
-    return ret;
+	return ret;
 }
 
 int OggDecoder::Read(u8 * buffer, int buffer_size, int pos)
 {
-    if(!file_fd)
-        return -1;
+	if(!file_fd)
+		return -1;
 
-    int bitstream = 0;
+	int bitstream = 0;
 
-    int read = ov_read(&ogg_file, (char *) buffer, buffer_size, &bitstream);
+	int read = ov_read(&ogg_file, (char *) buffer, buffer_size, &bitstream);
 
-    if(read > 0)
-        CurPos += read;
+	if(read > 0)
+		CurPos += read;
 
-    return read;
+	return read;
 }

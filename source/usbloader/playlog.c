@@ -53,29 +53,29 @@ int Playlog_Create(void)
 	s32 fd = IOS_Open(PLAYRECPATH, IPC_OPEN_RW);
 	if(fd >= 0)
 	{
-	    //exists
-	    IOS_Close(fd);
-	    return 0;
+		//exists
+		IOS_Close(fd);
+		return 0;
 	}
 
-    ISFS_Initialize();
+	ISFS_Initialize();
 
-    //In case the play_rec.dat wasn´t found create one and try again
-    int ret = ISFS_CreateFile(PLAYRECPATH, 0, 3, 3, 3);
-    if(ret >= 0)
-        ISFS_SetAttr(PLAYRECPATH, 0x1000, 1, 0, 3, 3, 3);
+	//In case the play_rec.dat wasn´t found create one and try again
+	int ret = ISFS_CreateFile(PLAYRECPATH, 0, 3, 3, 3);
+	if(ret >= 0)
+		ISFS_SetAttr(PLAYRECPATH, 0x1000, 1, 0, 3, 3, 3);
 
-    ISFS_Deinitialize();
+	ISFS_Deinitialize();
 
-    return ret;
+	return ret;
 }
 
 int Playlog_Update(const char * ID, const u16 * title)
 {
-    if(!ID || !title)
-        return -1;
+	if(!ID || !title)
+		return -1;
 
-    s32 fd = -1, res = -1;
+	s32 fd = -1, res = -1;
 	u32 sum = 0;
 	u8 i;
 
@@ -92,18 +92,18 @@ int Playlog_Update(const char * ID, const u16 * title)
 	}
 
 	if(fd < 0)
-        return res;
+		return res;
 
-    PlayRec * playrec_buf = memalign(32, ALIGN32(sizeof(PlayRec))); //! Should be 32 byte aligned
-    if(!playrec_buf)
-    {
-        IOS_Close(fd);
-        return res;
-    }
+	PlayRec * playrec_buf = memalign(32, ALIGN32(sizeof(PlayRec))); //! Should be 32 byte aligned
+	if(!playrec_buf)
+	{
+		IOS_Close(fd);
+		return res;
+	}
 
-    memset(playrec_buf, 0, sizeof(PlayRec));
+	memset(playrec_buf, 0, sizeof(PlayRec));
 
-    u64 stime = getWiiTime();
+	u64 stime = getWiiTime();
 	playrec_buf->ticks_boot = stime;
 	playrec_buf->ticks_last = stime;
 
@@ -130,15 +130,15 @@ int Playlog_Update(const char * ID, const u16 * title)
 
 int Playlog_Delete(void)
 {
-    s32 res = -1;
+	s32 res = -1;
 
 	//Open play_rec.dat
 	s32 fd = IOS_Open(PLAYRECPATH, IPC_OPEN_RW);
 	if(fd < 0)
 		return fd;
 
-    PlayRec * playrec_buf = memalign(32, ALIGN32(sizeof(PlayRec)));
-    if(!playrec_buf)
+	PlayRec * playrec_buf = memalign(32, ALIGN32(sizeof(PlayRec)));
+	if(!playrec_buf)
 		goto cleanup;
 
 	//Read play_rec.dat
@@ -154,10 +154,10 @@ int Playlog_Delete(void)
 	if(IOS_Write(fd, playrec_buf, sizeof(PlayRec)) != sizeof(PlayRec))
 		goto cleanup;
 
-    res = 0;
+	res = 0;
 
 cleanup:
-    free(playrec_buf);
-    IOS_Close(fd);
-    return res;
+	free(playrec_buf);
+	IOS_Close(fd);
+	return res;
 }

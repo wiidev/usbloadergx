@@ -45,12 +45,12 @@ EOF
 		<coder>USB Loader GX Team</coder>
 		<version>2.2 r$rev_new</version>
 		<release_date>$rev_date</release_date>
-        <!--   // remove this line to enable arguments
-        <arguments>
-                <arg>--ios=250</arg>
-                <arg>--usbport=0</arg>
-        </arguments>
-        // remove this line to enable arguments -->
+		<!--   // remove this line to enable arguments
+		<arguments>
+				<arg>--ios=250</arg>
+				<arg>--usbport=0</arg>
+		</arguments>
+		// remove this line to enable arguments -->
 		<no_ios_reload/>
 		<short_description>Loads games from USB-devices</short_description>
 		<long_description>USB Loader GX is a libwiigui based USB iso loader with a wii-like GUI. You can install games to your HDDs and boot them with shorter loading times.

@@ -29,78 +29,78 @@
 #include "gecko.h"
 
 CategorySelectPrompt::CategorySelectPrompt(struct discHdr * header)
-    : CategoryPrompt(fmt("%s - %s", (char *) header->id, tr("Categories"))),
-      gameHeader(header)
+	: CategoryPrompt(fmt("%s - %s", (char *) header->id, tr("Categories"))),
+	  gameHeader(header)
 {
-    browser->checkBoxClicked.connect(this, &CategorySelectPrompt::OnCheckboxClick);
-    browserRefresh.connect(this, &CategorySelectPrompt::onBrowserRefresh);
-    resetChanges.connect(this, &CategorySelectPrompt::onResetChanges);
+	browser->checkBoxClicked.connect(this, &CategorySelectPrompt::OnCheckboxClick);
+	browserRefresh.connect(this, &CategorySelectPrompt::onBrowserRefresh);
+	resetChanges.connect(this, &CategorySelectPrompt::onResetChanges);
 
-    browserRefresh();
+	browserRefresh();
 }
 
 void CategorySelectPrompt::onResetChanges()
 {
-    GameCategories.Load(Settings.ConfigPath);
+	GameCategories.Load(Settings.ConfigPath);
 }
 
 void CategorySelectPrompt::onBrowserRefresh()
 {
-    browser->Clear();
-    GameCategories.CategoryList.goToFirst();
-    do
-    {
-        bool checked = false;
-        const vector<unsigned int> gameCat = GameCategories[gameHeader->id];
+	browser->Clear();
+	GameCategories.CategoryList.goToFirst();
+	do
+	{
+		bool checked = false;
+		const vector<unsigned int> gameCat = GameCategories[gameHeader->id];
 
-        for(u32 i = 0; i < gameCat.size(); ++i)
-        {
-            if(gameCat[i] == GameCategories.CategoryList.getCurrentID())
-            {
-                checked = true;
-                break;
-            }
-        }
+		for(u32 i = 0; i < gameCat.size(); ++i)
+		{
+			if(gameCat[i] == GameCategories.CategoryList.getCurrentID())
+			{
+				checked = true;
+				break;
+			}
+		}
 
-        browser->AddEntrie(tr(GameCategories.CategoryList.getCurrentName().c_str()), checked);
-    }
-    while(GameCategories.CategoryList.goToNext());
+		browser->AddEntrie(tr(GameCategories.CategoryList.getCurrentName().c_str()), checked);
+	}
+	while(GameCategories.CategoryList.goToNext());
 
-    GameCategories.CategoryList.goToFirst();
-    browser->RefreshList();
+	GameCategories.CategoryList.goToFirst();
+	browser->RefreshList();
 }
 
 void CategorySelectPrompt::OnCheckboxClick(GuiCheckbox *checkBox, int index)
 {
-    GameCategories.CategoryList.goToFirst();
-    for(int i = 0; i < index; ++i)
-        GameCategories.CategoryList.goToNext();
+	GameCategories.CategoryList.goToFirst();
+	for(int i = 0; i < index; ++i)
+		GameCategories.CategoryList.goToNext();
 
-    if(GameCategories.CategoryList.getCurrentID() == 0)
-    {
-        checkBox->SetChecked(true);
-        return;
-    }
+	if(GameCategories.CategoryList.getCurrentID() == 0)
+	{
+		checkBox->SetChecked(true);
+		return;
+	}
 
-    const vector<unsigned int> gameCat = GameCategories[gameHeader->id];
+	const vector<unsigned int> gameCat = GameCategories[gameHeader->id];
 
-    u32 i;
-    for(i = 0; i < gameCat.size(); ++i)
-    {
-        if(gameCat[i] == GameCategories.CategoryList.getCurrentID())
-        {
-            if(!checkBox->IsChecked())
-            {
-                GameCategories.RemoveCategory((const char *) gameHeader->id, gameCat[i]);
-                markChanged();
-            }
-            break;
-        }
-    }
+	u32 i;
+	for(i = 0; i < gameCat.size(); ++i)
+	{
+		if(gameCat[i] == GameCategories.CategoryList.getCurrentID())
+		{
+			if(!checkBox->IsChecked())
+			{
+				GameCategories.RemoveCategory((const char *) gameHeader->id, gameCat[i]);
+				markChanged();
+			}
+			break;
+		}
+	}
 
-    if(i == gameCat.size() && checkBox->IsChecked())
-    {
-        GameCategories.SetCategory(gameHeader->id, GameCategories.CategoryList.getCurrentID());
-        markChanged();
-    }
+	if(i == gameCat.size() && checkBox->IsChecked())
+	{
+		GameCategories.SetCategory(gameHeader->id, GameCategories.CategoryList.getCurrentID());
+		markChanged();
+	}
 }

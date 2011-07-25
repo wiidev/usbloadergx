@@ -6,35 +6,35 @@ class cSearchButton;
 
 class GuiSearchBar: public GuiWindow
 {
-    public:
-        GuiSearchBar(const wchar_t *SearchChars);
-        virtual ~GuiSearchBar();
-        void Draw();
-        void Update(GuiTrigger * t);
-        wchar_t GetClicked();
-    private:
-        u16 inSide;
+	public:
+		GuiSearchBar(const wchar_t *SearchChars);
+		virtual ~GuiSearchBar();
+		void Draw();
+		void Update(GuiTrigger * t);
+		wchar_t GetClicked();
+	private:
+		u16 inSide;
 
-        GuiText text;
+		GuiText text;
 
-        GuiImageData* imgBacspaceBtn;
-        GuiImage* BacspaceBtnImg;
-        GuiImage* BacspaceBtnImg_Over;
-        GuiButton* BacspaceBtn;
+		GuiImageData* imgBacspaceBtn;
+		GuiImage* BacspaceBtnImg;
+		GuiImage* BacspaceBtnImg_Over;
+		GuiButton* BacspaceBtn;
 
-        GuiImageData* imgClearBtn;
-        GuiImage* ClearBtnImg;
-        GuiImage* ClearBtnImg_Over;
-        GuiButton* ClearBtn;
+		GuiImageData* imgClearBtn;
+		GuiImage* ClearBtnImg;
+		GuiImage* ClearBtnImg_Over;
+		GuiButton* ClearBtn;
 
-        GuiButton* CloseBtn;
+		GuiButton* CloseBtn;
 
-        cSearchButton **buttons;
-        int cnt;
-        GuiImageData keyImageData;
-        GuiImageData keyOverImageData;
-        GuiTrigger trig;
-        GuiTrigger trigB;
+		cSearchButton **buttons;
+		int cnt;
+		GuiImageData keyImageData;
+		GuiImageData keyOverImageData;
+		GuiTrigger trig;
+		GuiTrigger trigB;
 
 };
 

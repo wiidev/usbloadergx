@@ -28,13 +28,13 @@
 
 class SoundSettingsMenu : public SettingsMenu
 {
-    public:
-        SoundSettingsMenu();
-    protected:
-        void SetOptionValues();
-        int GetMenuInternal();
+	public:
+		SoundSettingsMenu();
+	protected:
+		void SetOptionValues();
+		int GetMenuInternal();
 
-        OptionList GuiOptions;
+		OptionList GuiOptions;
 };
 
 

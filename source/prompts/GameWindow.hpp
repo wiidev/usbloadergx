@@ -9,70 +9,70 @@
 
 class GameWindow : public GuiWindow
 {
-    public:
-        GameWindow(int GameSelected);
-        virtual ~GameWindow();
-        int Show();
-        int GetSelectedGame() { return gameSelected; };
-        void SetGameBrowseMenu(GameBrowseMenu *m) { browserMenu = m; };
-    protected:
-        int MainLoop();
-        void LoadGameSound(const u8 * id);
-        void LoadDiscImage(const u8 * id);
-        void SetWindowEffect(int direction, int in_out);
-        void ChangeGame(int EffectDirection);
+	public:
+		GameWindow(int GameSelected);
+		virtual ~GameWindow();
+		int Show();
+		int GetSelectedGame() { return gameSelected; };
+		void SetGameBrowseMenu(GameBrowseMenu *m) { browserMenu = m; };
+	protected:
+		int MainLoop();
+		void LoadGameSound(const u8 * id);
+		void LoadDiscImage(const u8 * id);
+		void SetWindowEffect(int direction, int in_out);
+		void ChangeGame(int EffectDirection);
 
-        bool reducedVol;
-        int returnVal;
-        int gameSelected;
-        GameBrowseMenu *browserMenu;
+		bool reducedVol;
+		int returnVal;
+		int gameSelected;
+		GameBrowseMenu *browserMenu;
 
-        GuiTrigger * trigA;
-        GuiTrigger * trigB;
-        GuiTrigger * trigL;
-        GuiTrigger * trigR;
-        GuiTrigger * trigPlus;
-        GuiTrigger * trigMinus;
+		GuiTrigger * trigA;
+		GuiTrigger * trigB;
+		GuiTrigger * trigL;
+		GuiTrigger * trigR;
+		GuiTrigger * trigPlus;
+		GuiTrigger * trigMinus;
 
-        GuiImageData * diskImgData;
-        GuiImageData * diskImgData2;
-        GuiImageData * dialogBox;
-        GuiImageData * btnOutline;
-        GuiImageData * imgFavorite;
-        GuiImageData * imgNotFavorite;
-        GuiImageData * imgLeft;
-        GuiImageData * imgRight;
+		GuiImageData * diskImgData;
+		GuiImageData * diskImgData2;
+		GuiImageData * dialogBox;
+		GuiImageData * btnOutline;
+		GuiImageData * imgFavorite;
+		GuiImageData * imgNotFavorite;
+		GuiImageData * imgLeft;
+		GuiImageData * imgRight;
 
-        GuiDiskCover * diskImg;
-        GuiDiskCover * diskImg2;
+		GuiDiskCover * diskImg;
+		GuiDiskCover * diskImg2;
 
-        GuiImage * dialogBoxImg;
-        GuiImage * backBtnImg;
-        GuiImage * settingsBtnImg;
-        GuiImage * btnLeftImg;
-        GuiImage * btnRightImg;
-        GuiImage * FavoriteBtnImg[FAVORITE_STARS];
+		GuiImage * dialogBoxImg;
+		GuiImage * backBtnImg;
+		GuiImage * settingsBtnImg;
+		GuiImage * btnLeftImg;
+		GuiImage * btnRightImg;
+		GuiImage * FavoriteBtnImg[FAVORITE_STARS];
 
-        GuiTooltip * nameBtnTT;
+		GuiTooltip * nameBtnTT;
 
-        GuiText * sizeTxt;
-        GuiText * playcntTxt;
-        GuiText * nameTxt;
-        GuiText * backBtnTxt;
-        GuiText * settingsBtnTxt;
-        GuiText * detailsBtnTxt;
-        GuiText * detailsBtnOverTxt;
+		GuiText * sizeTxt;
+		GuiText * playcntTxt;
+		GuiText * nameTxt;
+		GuiText * backBtnTxt;
+		GuiText * settingsBtnTxt;
+		GuiText * detailsBtnTxt;
+		GuiText * detailsBtnOverTxt;
 
-        GuiButton * nameBtn;
-        GuiButton * gameBtn;
-        GuiButton * backBtn;
-        GuiButton * settingsBtn;
-        GuiButton * detailsBtn;
-        GuiButton * btnLeft;
-        GuiButton * btnRight;
-        GuiButton * FavoriteBtn[FAVORITE_STARS];
+		GuiButton * nameBtn;
+		GuiButton * gameBtn;
+		GuiButton * backBtn;
+		GuiButton * settingsBtn;
+		GuiButton * detailsBtn;
+		GuiButton * btnLeft;
+		GuiButton * btnRight;
+		GuiButton * FavoriteBtn[FAVORITE_STARS];
 
-        GuiSound * gameSound;
+		GuiSound * gameSound;
 };
 
 #endif

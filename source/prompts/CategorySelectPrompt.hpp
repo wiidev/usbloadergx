@@ -29,14 +29,14 @@
 
 class CategorySelectPrompt : public CategoryPrompt
 {
-    public:
-        CategorySelectPrompt(struct discHdr * header);
-    private:
-        void OnCheckboxClick(GuiCheckbox *checkBox, int index);
-        void onBrowserRefresh();
-        void onResetChanges();
+	public:
+		CategorySelectPrompt(struct discHdr * header);
+	private:
+		void OnCheckboxClick(GuiCheckbox *checkBox, int index);
+		void onBrowserRefresh();
+		void onResetChanges();
 
-        struct discHdr * gameHeader;
+		struct discHdr * gameHeader;
 };
 
 #endif

@@ -6,7 +6,7 @@ extern "C"
 {
 #endif
 
-    const char *GetRev();
+	const char *GetRev();
 
 #ifdef __cplusplus
 }

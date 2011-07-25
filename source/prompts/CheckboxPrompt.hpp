@@ -29,34 +29,34 @@
 
 enum
 {
-    CheckedBox1 = 0x01,
-    CheckedBox2 = 0x02,
-    CheckedBox3 = 0x04,
-    CheckedBox4 = 0x08,
-    CheckedBox5 = 0x10,
-    CheckedBox6 = 0x20,
+	CheckedBox1 = 0x01,
+	CheckedBox2 = 0x02,
+	CheckedBox3 = 0x04,
+	CheckedBox4 = 0x08,
+	CheckedBox5 = 0x10,
+	CheckedBox6 = 0x20,
 };
 
 class CheckboxPrompt : private PromptWindow, public sigslot::has_slots<>
 {
-    public:
-        //! Constructor
-        CheckboxPrompt(const char * title = 0, const char *msg = 0);
-        //! Destructor
-        virtual ~CheckboxPrompt();
-        //! Add new checkbox
-        void AddCheckBox(const char *text);
-        //! Default function to get the button pressed
-        int GetChoice();
-        //! Show window and wait for the user to press OK/Cancel
-        static int Show(const char *title = 0, const char *msg = 0,
-                        const char *chbx1 = 0, const char *chbx2 = 0,
-                        const char *chbx3 = 0, const char *chbx4 = 0,
-                        const char *chbx5 = 0, const char *chbx6 = 0);
-    protected:
-        void OnCheckBoxClick(GuiButton *sender, int chan, const POINT &pointer);
-        std::vector<GuiText *> CheckboxTxt;
-        std::vector<GuiCheckbox *> Checkbox;
+	public:
+		//! Constructor
+		CheckboxPrompt(const char * title = 0, const char *msg = 0);
+		//! Destructor
+		virtual ~CheckboxPrompt();
+		//! Add new checkbox
+		void AddCheckBox(const char *text);
+		//! Default function to get the button pressed
+		int GetChoice();
+		//! Show window and wait for the user to press OK/Cancel
+		static int Show(const char *title = 0, const char *msg = 0,
+						const char *chbx1 = 0, const char *chbx2 = 0,
+						const char *chbx3 = 0, const char *chbx4 = 0,
+						const char *chbx5 = 0, const char *chbx6 = 0);
+	protected:
+		void OnCheckBoxClick(GuiButton *sender, int chan, const POINT &pointer);
+		std::vector<GuiText *> CheckboxTxt;
+		std::vector<GuiCheckbox *> Checkbox;
 };
 
 #define CheckboxWindow CheckboxPrompt::Show

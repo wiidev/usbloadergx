@@ -35,7 +35,7 @@ class GuiSound
 		//!Constructor
 		//!\param sound Pointer to the sound data
 		//!\param filesize Length of sound data
-        GuiSound(const char * filepath);
+		GuiSound(const char * filepath);
 		GuiSound(const u8 * sound, int filesize, int volume, bool allocated = false, int voice = -1);
 		//!Destructor
 		virtual ~GuiSound();
@@ -64,10 +64,10 @@ class GuiSound
 		//!\param l Loop (true to loop)
 		virtual void SetLoop(u8 l);
 		//!Special sound case for sound.bin
-        void UncompressSoundbin(const u8 * snd, int len, bool isallocated);
+		void UncompressSoundbin(const u8 * snd, int len, bool isallocated);
 	protected:
-        //!Stops sound and frees all memory/closes files
-        void FreeMemory();
+		//!Stops sound and frees all memory/closes files
+		void FreeMemory();
 		u8 * sound; //!< Pointer to the sound data
 		int length; //!< Length of sound data
 		s32 voice; //!< Currently assigned ASND voice channel

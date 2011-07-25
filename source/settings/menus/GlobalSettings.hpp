@@ -28,17 +28,17 @@
 
 class GlobalSettings : public FlyingButtonsMenu
 {
-    public:
-        GlobalSettings();
-        virtual ~GlobalSettings();
-        static int Show();
-    protected:
-        virtual void CreateSettingsMenu(int index);
-        virtual void DeleteSettingsMenu();
-        virtual void SetupMainButtons();
+	public:
+		GlobalSettings();
+		virtual ~GlobalSettings();
+		static int Show();
+	protected:
+		virtual void CreateSettingsMenu(int index);
+		virtual void DeleteSettingsMenu();
+		virtual void SetupMainButtons();
 
-        GuiImageData * creditsImgData;
-        GuiImageData * creditsImgOverData;
+		GuiImageData * creditsImgData;
+		GuiImageData * creditsImgOverData;
 };
 
 #endif

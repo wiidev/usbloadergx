@@ -27,24 +27,24 @@
 
 extern "C"
 {
-    extern s32 MagicPatches(s32);
-    void __exception_setreload(int t);
+	extern s32 MagicPatches(s32);
+	void __exception_setreload(int t);
 }
 
 int main(int argc, char *argv[])
 {
-    MEM2_init(48);
-    __exception_setreload(20);
-    MagicPatches(1);
-    InitVideo();
-    InitGecko();
-    USBGeckoOutput();
-    NandTitles.Get();
-    setlocale(LC_ALL, "en.UTF-8");
+	MEM2_init(48);
+	__exception_setreload(20);
+	MagicPatches(1);
+	InitVideo();
+	InitGecko();
+	USBGeckoOutput();
+	NandTitles.Get();
+	setlocale(LC_ALL, "en.UTF-8");
 
 	if(StartUpProcess::Run(argc, argv) < 0)
-	    return -1;
+		return -1;
 
-    MainMenu(MENU_DISCLIST);
-    return 0;
+	MainMenu(MENU_DISCLIST);
+	return 0;
 }

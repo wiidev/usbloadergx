@@ -9,25 +9,25 @@
 
 class Theme
 {
-    public:
-        //!Set Default
-        static void SetDefault();
-        //!Load
-        static bool Load(const char * path);
-        //!Load font data
-        static bool LoadFont(const char *path);
-    	//!Load the original Wii System Menu font into memory only. It is not applied.
+	public:
+		//!Set Default
+		static void SetDefault();
+		//!Load
+		static bool Load(const char * path);
+		//!Load font data
+		static bool LoadFont(const char *path);
+		//!Load the original Wii System Menu font into memory only. It is not applied.
 		static bool loadSystemFont(bool korean);
-        //!Reload the main images/sounds for the new theme
-        static void Reload();
-        //!Clear all image/font/theme data and free the memory
-        static void CleanUp();
+		//!Reload the main images/sounds for the new theme
+		static void Reload();
+		//!Clear all image/font/theme data and free the memory
+		static void CleanUp();
 
-        //!Enable tooltips: special case treaded because it is called every frame
-        static bool ShowTooltips;
-    private:
-        //!Clear the font data and free the memory
-        static void ClearFontData();
+		//!Enable tooltips: special case treaded because it is called every frame
+		static bool ShowTooltips;
+	private:
+		//!Clear the font data and free the memory
+		static void ClearFontData();
 };
 
 #endif

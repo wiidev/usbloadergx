@@ -32,37 +32,37 @@
 
 class HTML_Stream
 {
-    public:
-        //!Constructor
-        HTML_Stream();
-        //!\param url from where to the HTML file
-        HTML_Stream(const char * url);
-        //!Destructor
-        ~HTML_Stream();
-        //!Load url
-        bool LoadLink(const char * url);
-        //! Find start of a string from current position in the html
-        //!\param string to find
-        const char * FindStringStart(const char * string);
-        //! Find end of a string from current position in the html
-        //!\param string to find
-        const char * FindStringEnd(const char * string);
-        //!CopyString from current position in html till stopat string
-        //!\param stopat string before which to stop copying (e.g. </html>)
-        //!\param outtext variable is allocated with malloc and must be set 0 before
-        char * CopyString(const char * stopat);
-        //!Seek position in file
-        //!\param position seeked
-        //!\param seek origin (SEEK_SET, SEEK_CUR, SEEK_END)
-        int Seek(u32 pos, int origin);
-        //!Rewind to the start of the html
-        void Rewind();
-        //!Get current position
-        int GetPosition();
-    protected:
-        int position;
-        u32 filesize;
-        char * HTML_File;
+	public:
+		//!Constructor
+		HTML_Stream();
+		//!\param url from where to the HTML file
+		HTML_Stream(const char * url);
+		//!Destructor
+		~HTML_Stream();
+		//!Load url
+		bool LoadLink(const char * url);
+		//! Find start of a string from current position in the html
+		//!\param string to find
+		const char * FindStringStart(const char * string);
+		//! Find end of a string from current position in the html
+		//!\param string to find
+		const char * FindStringEnd(const char * string);
+		//!CopyString from current position in html till stopat string
+		//!\param stopat string before which to stop copying (e.g. </html>)
+		//!\param outtext variable is allocated with malloc and must be set 0 before
+		char * CopyString(const char * stopat);
+		//!Seek position in file
+		//!\param position seeked
+		//!\param seek origin (SEEK_SET, SEEK_CUR, SEEK_END)
+		int Seek(u32 pos, int origin);
+		//!Rewind to the start of the html
+		void Rewind();
+		//!Get current position
+		int GetPosition();
+	protected:
+		int position;
+		u32 filesize;
+		char * HTML_File;
 };
 
 #endif

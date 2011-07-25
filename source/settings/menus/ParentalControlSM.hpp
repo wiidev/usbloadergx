@@ -28,13 +28,13 @@
 
 class ParentalControlSM : public SettingsMenu
 {
-    public:
-        ParentalControlSM();
-    protected:
-        void SetOptionValues();
-        int GetMenuInternal();
+	public:
+		ParentalControlSM();
+	protected:
+		void SetOptionValues();
+		int GetMenuInternal();
 
-        OptionList GuiOptions;
+		OptionList GuiOptions;
 };
 
 

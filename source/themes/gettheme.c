@@ -6,7 +6,7 @@
 
 enum
 {
-    ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTRE, ALIGN_TOP, ALIGN_BOTTOM, ALIGN_MIDDLE
+	ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTRE, ALIGN_TOP, ALIGN_BOTTOM, ALIGN_MIDDLE
 };
 
 typedef struct _MSG
@@ -25,23 +25,23 @@ static MSG *baseMSG=0;
    1986, 1987 Bell Telephone Laboratories, Inc.]  */
 static inline u32 hash_string (const char *str_param)
 {
-    u32 hval, g;
-    const char *str = str_param;
+	u32 hval, g;
+	const char *str = str_param;
 
-    /* Compute the hash value for the given string.  */
-    hval = 0;
-    while (*str != '\0')
-    {
-        hval <<= 4;
-        hval += (u8) *str++;
-        g = hval & ((u32) 0xf << (HASHWORDBITS - 4));
-        if (g != 0)
-        {
-            hval ^= g >> (HASHWORDBITS - 8);
-            hval ^= g;
-        }
-    }
-    return hval;
+	/* Compute the hash value for the given string.  */
+	hval = 0;
+	while (*str != '\0')
+	{
+		hval <<= 4;
+		hval += (u8) *str++;
+		g = hval & ((u32) 0xf << (HASHWORDBITS - 4));
+		if (g != 0)
+		{
+			hval ^= g >> (HASHWORDBITS - 8);
+			hval ^= g;
+		}
+	}
+	return hval;
 }
 
 
@@ -82,27 +82,27 @@ static MSG *setMSG(const char *msgid, const char *msgstr)
 
 static inline void ClearPrefixes(char * msg)
 {
-    if(!msg)
-        return;
+	if(!msg)
+		return;
 
-    const char * ptr = msg;
+	const char * ptr = msg;
 
-    int i = 0;
+	int i = 0;
 
-    while(ptr[0] != '\0')
-    {
-        if(ptr[0] == '\\' && (ptr[1] == '\\' || ptr[1] == '"'))
-        {
-            ++ptr;
-        }
+	while(ptr[0] != '\0')
+	{
+		if(ptr[0] == '\\' && (ptr[1] == '\\' || ptr[1] == '"'))
+		{
+			++ptr;
+		}
 
-        msg[i] = ptr[0];
+		msg[i] = ptr[0];
 
-        ++i;
-        ++ptr;
-    }
+		++i;
+		++ptr;
+	}
 
-    msg[i] = '\0';
+	msg[i] = '\0';
 }
 
 void ThemeCleanUp(void)
@@ -182,27 +182,27 @@ int getThemeAlignment(const char *msgid)
 
 	const char * string = msgid;
 	if(msg)
-	    string = msg->msgstr;
+		string = msg->msgstr;
 
-    while(*string == ' ') string++;
+	while(*string == ' ') string++;
 
-    if(strncasecmp(string, "left", strlen("left")) == 0)
-        return ALIGN_LEFT;
+	if(strncasecmp(string, "left", strlen("left")) == 0)
+		return ALIGN_LEFT;
 
-    else if(strncasecmp(string, "right", strlen("right")) == 0)
-        return ALIGN_RIGHT;
+	else if(strncasecmp(string, "right", strlen("right")) == 0)
+		return ALIGN_RIGHT;
 
-    else if(strncasecmp(string, "center", strlen("center")) == 0)
-        return ALIGN_CENTRE;
+	else if(strncasecmp(string, "center", strlen("center")) == 0)
+		return ALIGN_CENTRE;
 
-    else if(strncasecmp(string, "top", strlen("top")) == 0)
-        return ALIGN_TOP;
+	else if(strncasecmp(string, "top", strlen("top")) == 0)
+		return ALIGN_TOP;
 
-    else if(strncasecmp(string, "bottom", strlen("bottom")) == 0)
-        return ALIGN_BOTTOM;
+	else if(strncasecmp(string, "bottom", strlen("bottom")) == 0)
+		return ALIGN_BOTTOM;
 
-    else if(strncasecmp(string, "middle", strlen("middle")) == 0)
-        return ALIGN_MIDDLE;
+	else if(strncasecmp(string, "middle", strlen("middle")) == 0)
+		return ALIGN_MIDDLE;
 
 	return -1;
 }
@@ -213,61 +213,61 @@ GXColor getThemeColor(const char *msgid)
 
 	const char * string = msgid;
 	if(msg)
-	    string = msg->msgstr;
+		string = msg->msgstr;
 
-    GXColor color = (GXColor) {0, 0, 0, 0};
+	GXColor color = (GXColor) {0, 0, 0, 0};
 
-    while(*string == ' ') string++;
+	while(*string == ' ') string++;
 
-    while(*string != '\0')
-    {
-        if(*string == 'r')
-        {
-            string++;
-            while(*string == ' ' || *string == '=' || *string == ',') string++;
+	while(*string != '\0')
+	{
+		if(*string == 'r')
+		{
+			string++;
+			while(*string == ' ' || *string == '=' || *string == ',') string++;
 
-            if(*string == '\0')
-                break;
+			if(*string == '\0')
+				break;
 
-            color.r = atoi(string) & 0xFF;
-        }
-        else if(*string == 'g')
-        {
-            string++;
-            while(*string == ' ' || *string == '=' || *string == ',') string++;
+			color.r = atoi(string) & 0xFF;
+		}
+		else if(*string == 'g')
+		{
+			string++;
+			while(*string == ' ' || *string == '=' || *string == ',') string++;
 
-            if(*string == '\0')
-                break;
+			if(*string == '\0')
+				break;
 
-            color.g = atoi(string) & 0xFF;
-        }
-        else if(*string == 'b')
-        {
-            string++;
-            while(*string == ' ' || *string == '=' || *string == ',') string++;
+			color.g = atoi(string) & 0xFF;
+		}
+		else if(*string == 'b')
+		{
+			string++;
+			while(*string == ' ' || *string == '=' || *string == ',') string++;
 
-            if(*string == '\0')
-                break;
+			if(*string == '\0')
+				break;
 
-            color.b = atoi(string) & 0xFF;
-        }
-        else if(*string == 'a')
-        {
-            string++;
-            while(*string == ' ' || *string == '=' || *string == ',') string++;
+			color.b = atoi(string) & 0xFF;
+		}
+		else if(*string == 'a')
+		{
+			string++;
+			while(*string == ' ' || *string == '=' || *string == ',') string++;
 
-            if(*string == '\0')
-                break;
+			if(*string == '\0')
+				break;
 
-            color.a = atoi(string) & 0xFF;
-        }
-        else if(*string == '-')
-        {
-            break;
-        }
+			color.a = atoi(string) & 0xFF;
+		}
+		else if(*string == '-')
+		{
+			break;
+		}
 
-        ++string;
-    }
+		++string;
+	}
 
 	return color;
 }

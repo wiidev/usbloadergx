@@ -31,94 +31,94 @@
 
 Wiinnertag::Wiinnertag(const string &filepath)
 {
-    ReadXML(filepath);
+	ReadXML(filepath);
 }
 
 bool Wiinnertag::ReadXML(const string &filepath)
 {
-    TiXmlDocument xmlDoc(filepath.c_str());
-    if(!xmlDoc.LoadFile())
-    	return false;
+	TiXmlDocument xmlDoc(filepath.c_str());
+	if(!xmlDoc.LoadFile())
+		return false;
 
 	TiXmlElement * node =  xmlDoc.FirstChildElement("Tag");
 
-    while(node != NULL)
-    {
-        const char * URL = node->Attribute("URL");
-        const char * Key = node->Attribute("Key");
+	while(node != NULL)
+	{
+		const char * URL = node->Attribute("URL");
+		const char * Key = node->Attribute("Key");
 
-        if(URL && Key)
-        {
-            int size = tagList.size();
-            tagList.resize(size+1);
-            tagList[size].first = URL;
-            tagList[size].second = Key;
-        }
+		if(URL && Key)
+		{
+			int size = tagList.size();
+			tagList.resize(size+1);
+			tagList[size].first = URL;
+			tagList[size].second = Key;
+		}
 
-        node = node->NextSiblingElement();
-    }
+		node = node->NextSiblingElement();
+	}
 
-    return true;
+	return true;
 }
 
 bool Wiinnertag::Send(const char *gameID)
 {
-    if(!IsNetworkInit())
-        return false;
+	if(!IsNetworkInit())
+		return false;
 
-    char sendURL[1024];
+	char sendURL[1024];
 
-    for(u32 i = 0; i < tagList.size(); ++i)
-    {
-        strcpy(sendURL, tagList[i].first.c_str());
+	for(u32 i = 0; i < tagList.size(); ++i)
+	{
+		strcpy(sendURL, tagList[i].first.c_str());
 
-        replaceString(sendURL, "{ID6}", gameID);
-        replaceString(sendURL, "{KEY}", tagList[i].second.c_str());
+		replaceString(sendURL, "{ID6}", gameID);
+		replaceString(sendURL, "{KEY}", tagList[i].second.c_str());
 
-	    download_request(sendURL);
-	    CloseConnection();
-    }
+		download_request(sendURL);
+		CloseConnection();
+	}
 
-    return true;
+	return true;
 }
 
 bool Wiinnertag::TagGame(const char *gameID)
 {
-    string fullpath = Settings.WiinnertagPath;
-    if(fullpath.size() == 0)
-        return false;
+	string fullpath = Settings.WiinnertagPath;
+	if(fullpath.size() == 0)
+		return false;
 
-    if(fullpath[fullpath.size()-1] != '/')
-        fullpath += '/';
-    fullpath += "Wiinnertag.xml";
+	if(fullpath[fullpath.size()-1] != '/')
+		fullpath += '/';
+	fullpath += "Wiinnertag.xml";
 
-    Wiinnertag Tag(fullpath);
-    return Tag.Send(gameID);
+	Wiinnertag Tag(fullpath);
+	return Tag.Send(gameID);
 }
 
 bool Wiinnertag::CreateExample(const string &filepath)
 {
-    if(filepath.size() == 0)
-        return false;
+	if(filepath.size() == 0)
+		return false;
 
-    CreateSubfolder(filepath.c_str());
+	CreateSubfolder(filepath.c_str());
 
-    string fullpath = filepath;
-    if(fullpath[fullpath.size()-1] != '/')
-        fullpath += '/';
-    fullpath += "Wiinnertag.xml";
+	string fullpath = filepath;
+	if(fullpath[fullpath.size()-1] != '/')
+		fullpath += '/';
+	fullpath += "Wiinnertag.xml";
 
-    TiXmlDocument xmlDoc;
+	TiXmlDocument xmlDoc;
 
-    TiXmlDeclaration declaration("1.0", "UTF-8", "");
-    xmlDoc.InsertEndChild(declaration);
+	TiXmlDeclaration declaration("1.0", "UTF-8", "");
+	xmlDoc.InsertEndChild(declaration);
 
-    TiXmlElement Tag("Tag");
+	TiXmlElement Tag("Tag");
 	Tag.SetAttribute("URL", "http://www.wiinnertag.com/wiinnertag_scripts/update_sign.php?key={KEY}&game_id={ID6}");
 	Tag.SetAttribute("Key", "1234567890");
 	xmlDoc.InsertEndChild(Tag);
 
 	xmlDoc.SaveFile(fullpath);
 
-    return true;
+	return true;
 }

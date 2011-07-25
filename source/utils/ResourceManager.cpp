@@ -50,7 +50,7 @@ ResourceManager::~ResourceManager()
 	for (imgitr = images.begin(); imgitr != images.end(); imgitr++)
 	{
 		if(imgitr->second.data)
-            free(imgitr->second.data);
+			free(imgitr->second.data);
 	}
 	images.clear();
 	imageCount.clear();
@@ -77,8 +77,8 @@ void ResourceManager::InternalAddImageData(const u8 * img, ImageData & Data)
 	if (itr != images.end())
 		return;
 
-    images[img] = Data;
-    imageCount[Data.data] = 1;
+	images[img] = Data;
+	imageCount[Data.data] = 1;
 }
 
 ImageData * ResourceManager::InternalGetImageData(const u8 *img)
@@ -108,8 +108,8 @@ void ResourceManager::InternalRemoveImageData(u8 * img)
 			{
 				if (iitr->second.data == img)
 				{
-				    if(iitr->second.data)
-                        free(iitr->second.data);
+					if(iitr->second.data)
+						free(iitr->second.data);
 					images.erase(iitr);
 					break;
 				}
@@ -118,7 +118,7 @@ void ResourceManager::InternalRemoveImageData(u8 * img)
 	}
 	else if(img)
 	{
-	    //! This case should actually never accur
-	    free(img);
+		//! This case should actually never accur
+		free(img);
 	}
 }

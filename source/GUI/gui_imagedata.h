@@ -38,7 +38,7 @@ class GuiImageData
 		//!\param cache True if the resource manager should cache that address
 		GuiImageData(const u8 * img, int imgSize, bool cache = true);
 		//!Overload
-        GuiImageData(const char * filepath);
+		GuiImageData(const char * filepath);
 		//!Destructor
 		~GuiImageData();
 		//!Gets a pointer to the image data
@@ -53,7 +53,7 @@ class GuiImageData
 		//!Gets the texture format
 		u8 GetTextureFormat() { return format; };
 	protected:
-        void LoadImage(const u8 * img, int imgSize);
+		void LoadImage(const u8 * img, int imgSize);
 		void LoadPNG(const u8 *img, int imgSize);
 		void LoadBMP(const u8 *img, int imgSize);
 		void LoadJpeg(const u8 *img, int imgSize);

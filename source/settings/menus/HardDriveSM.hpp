@@ -28,18 +28,18 @@
 
 class HardDriveSM : public SettingsMenu
 {
-    public:
-        HardDriveSM();
-        virtual ~HardDriveSM();
-    protected:
-        void SetOptionValues();
-        int GetMenuInternal();
+	public:
+		HardDriveSM();
+		virtual ~HardDriveSM();
+	protected:
+		void SetOptionValues();
+		int GetMenuInternal();
 
-        int OldSettingsPartition;
-        int OldSettingsMultiplePartitions;
-        int NewSettingsUSBPort;
+		int OldSettingsPartition;
+		int OldSettingsMultiplePartitions;
+		int NewSettingsUSBPort;
 
-        OptionList GuiOptions;
+		OptionList GuiOptions;
 };
 
 

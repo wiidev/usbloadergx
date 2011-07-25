@@ -81,7 +81,7 @@ static  u32 dip_plugin_size = 0;
 int load_modules(const u8 * ehcmodule, int ehcmodule_size, const u8 * dip, int dip_size)
 {
 	if(mload_init() < 0)
-        return -1;
+		return -1;
 
 	dip_plugin = (u8 *) dip;
 	dip_plugin_size = dip_size;
@@ -90,7 +90,7 @@ int load_modules(const u8 * ehcmodule, int ehcmodule_size, const u8 * dip, int d
 	my_thread_id= mload_run_thread(my_data_elf.start, my_data_elf.stack, my_data_elf.size_stack, my_data_elf.prio);
 
 	if(my_thread_id < 0)
-        return -2;
+		return -2;
 	usleep(350*1000);
 
 	// Test for IOS
@@ -115,7 +115,7 @@ int load_modules(const u8 * ehcmodule, int ehcmodule_size, const u8 * dip, int d
 
 		case 37:
 
-			memcpy(ios_37, dip_plugin, 4);	    // copy the entry_point
+			memcpy(ios_37, dip_plugin, 4);		// copy the entry_point
 			memcpy(dip_plugin, ios_37, 4*10);   // copy the adresses from the array
 
 			mload_seek(dip_address, SEEK_SET);	// copy dip_plugin in the starlet
@@ -128,7 +128,7 @@ int load_modules(const u8 * ehcmodule, int ehcmodule_size, const u8 * dip, int d
 
 		case 38:
 
-			memcpy(ios_38, dip_plugin, 4);	    // copy the entry_point
+			memcpy(ios_38, dip_plugin, 4);		// copy the entry_point
 			memcpy(dip_plugin, ios_38, 4*10);   // copy the adresses from the array
 
 			mload_seek(dip_address, SEEK_SET);	// copy dip_plugin in the starlet
@@ -141,7 +141,7 @@ int load_modules(const u8 * ehcmodule, int ehcmodule_size, const u8 * dip, int d
 
 		case 57:
 
-			memcpy(ios_57, dip_plugin, 4);	    // copy the entry_point
+			memcpy(ios_57, dip_plugin, 4);		// copy the entry_point
 			memcpy(dip_plugin, ios_57, 4*10);   // copy the adresses from the array
 
 			mload_seek(dip_address, SEEK_SET);	// copy dip_plugin in the starlet
@@ -154,7 +154,7 @@ int load_modules(const u8 * ehcmodule, int ehcmodule_size, const u8 * dip, int d
 
 		case 60:
 
-			memcpy(ios_60, dip_plugin, 4);	    // copy the entry_point
+			memcpy(ios_60, dip_plugin, 4);		// copy the entry_point
 			memcpy(dip_plugin, ios_60, 4*10);   // copy the adresses from the array
 
 			mload_seek(dip_address, SEEK_SET);	// copy dip_plugin in the starlet
@@ -213,18 +213,18 @@ void disableIOSReload(void)
 
 bool shadow_mload()
 {
-    int ios = IOS_GetVersion();
+	int ios = IOS_GetVersion();
 
-    if(ios != 222 || ios != 223 || ios != 224)
-        return false;
+	if(ios != 222 || ios != 223 || ios != 224)
+		return false;
 
-    int v51 = (5 << 4) & 1;
-    if (IOS_GetRevision() >= 5 && mload_get_version() >= v51)
-    {
-        char fs[] ATTRIBUTE_ALIGN(32) = "/dev/mload/OFF";
-        // shadow /dev/mload supported in hermes cios v5.1char fs[] ATTRIBUTE_ALIGN(32) = "/dev/usb2";
-        IOS_Open(fs,0);
-        return true;
-    }
-    return false;
+	int v51 = (5 << 4) & 1;
+	if (IOS_GetRevision() >= 5 && mload_get_version() >= v51)
+	{
+		char fs[] ATTRIBUTE_ALIGN(32) = "/dev/mload/OFF";
+		// shadow /dev/mload supported in hermes cios v5.1char fs[] ATTRIBUTE_ALIGN(32) = "/dev/usb2";
+		IOS_Open(fs,0);
+		return true;
+	}
+	return false;
 }

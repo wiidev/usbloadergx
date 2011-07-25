@@ -37,7 +37,7 @@
 
 #include "fileops.h"
 
-#define BLOCKSIZE               70*1024      //70KB
+#define BLOCKSIZE			   70*1024	  //70KB
 #define VectorResize(List) if(List.capacity()-List.size() == 0) List.reserve(List.size()+100)
 
 
@@ -50,27 +50,27 @@ static bool actioncanceled  = false;
  ***************************************************************************/
 extern "C" bool CheckFile(const char * filepath)
 {
-    if(!filepath)
-        return false;
+	if(!filepath)
+		return false;
 
-    struct stat filestat;
+	struct stat filestat;
 
-    char dirnoslash[strlen(filepath)+2];
-    snprintf(dirnoslash, sizeof(dirnoslash), "%s", filepath);
+	char dirnoslash[strlen(filepath)+2];
+	snprintf(dirnoslash, sizeof(dirnoslash), "%s", filepath);
 
-    while(dirnoslash[strlen(dirnoslash)-1] == '/')
-        dirnoslash[strlen(dirnoslash)-1] = '\0';
+	while(dirnoslash[strlen(dirnoslash)-1] == '/')
+		dirnoslash[strlen(dirnoslash)-1] = '\0';
 
 	char * notRoot = strrchr(dirnoslash, '/');
 	if(!notRoot)
 	{
-	    strcat(dirnoslash, "/");
+		strcat(dirnoslash, "/");
 	}
 
-    if (stat(dirnoslash, &filestat) == 0)
-        return true;
+	if (stat(dirnoslash, &filestat) == 0)
+		return true;
 
-    return false;
+	return false;
 }
 
 /****************************************************************************
@@ -83,7 +83,7 @@ extern "C" u64 FileSize(const char * filepath)
   struct stat filestat;
 
   if (stat(filepath, &filestat) != 0)
-    return 0;
+	return 0;
 
   return filestat.st_size;
 }
@@ -95,72 +95,72 @@ extern "C" u64 FileSize(const char * filepath)
  ***************************************************************************/
 extern "C" int LoadFileToMem(const char *filepath, u8 **inbuffer, u64 *size)
 {
-    int ret = -1;
-    u64 filesize = FileSize(filepath);
+	int ret = -1;
+	u64 filesize = FileSize(filepath);
 	char * filename = strrchr(filepath, '/');
 	if(filename)
-        filename++;
+		filename++;
 
-    *inbuffer = NULL;
-    *size = 0;
+	*inbuffer = NULL;
+	*size = 0;
 
-    FILE *file = fopen(filepath, "rb");
+	FILE *file = fopen(filepath, "rb");
 
-    if (file == NULL)
-        return -1;
+	if (file == NULL)
+		return -1;
 
-    u8 *buffer = (u8 *) malloc(filesize);
-    if (buffer == NULL)
-    {
-        fclose(file);
-        return -2;
-    }
+	u8 *buffer = (u8 *) malloc(filesize);
+	if (buffer == NULL)
+	{
+		fclose(file);
+		return -2;
+	}
 
-    u64 done = 0;
-    u32 blocksize = BLOCKSIZE;
+	u64 done = 0;
+	u32 blocksize = BLOCKSIZE;
 
-    do
-    {
-        if(actioncanceled)
-        {
-            free(buffer);
-            fclose(file);
-            return -10;
-        }
+	do
+	{
+		if(actioncanceled)
+		{
+			free(buffer);
+			fclose(file);
+			return -10;
+		}
 
-        if(blocksize > filesize-done)
-            blocksize = filesize-done;
+		if(blocksize > filesize-done)
+			blocksize = filesize-done;
 
-        ret = fread(buffer+done, 1, blocksize, file);
-        if(ret < 0)
-        {
-            free(buffer);
-            fclose(file);
-            return -3;
-        }
-        else if(ret == 0)
-        {
-            //we are done
-            break;
-        }
+		ret = fread(buffer+done, 1, blocksize, file);
+		if(ret < 0)
+		{
+			free(buffer);
+			fclose(file);
+			return -3;
+		}
+		else if(ret == 0)
+		{
+			//we are done
+			break;
+		}
 
-        done += ret;
+		done += ret;
 
-    }
-    while(done < filesize);
+	}
+	while(done < filesize);
 
-    fclose(file);
+	fclose(file);
 
-    if (done != filesize)
-    {
-        free(buffer);
-        return -3;
-    }
+	if (done != filesize)
+	{
+		free(buffer);
+		return -3;
+	}
 
-    *inbuffer = buffer;
-    *size = filesize;
+	*inbuffer = buffer;
+	*size = filesize;
 
-    return 1;
+	return 1;
 }
 
 /****************************************************************************
@@ -171,7 +171,7 @@ extern "C" int LoadFileToMem(const char *filepath, u8 **inbuffer, u64 *size)
 extern "C" int LoadFileToMemWithProgress(const char *progressText, const char *filepath, u8 **inbuffer, u64 *size)
 {
 
-    int ret = LoadFileToMem(filepath, inbuffer, size);
+	int ret = LoadFileToMem(filepath, inbuffer, size);
 
 	return ret;
 }
@@ -183,57 +183,57 @@ extern "C" int LoadFileToMemWithProgress(const char *progressText, const char *f
  ***************************************************************************/
 extern "C" bool CreateSubfolder(const char * fullpath)
 {
-    if(!fullpath)
-        return false;
+	if(!fullpath)
+		return false;
 
-    bool result  = false;
+	bool result  = false;
 
-    char dirnoslash[strlen(fullpath)+1];
-    strcpy(dirnoslash, fullpath);
+	char dirnoslash[strlen(fullpath)+1];
+	strcpy(dirnoslash, fullpath);
 
-    int pos = strlen(dirnoslash)-1;
-    while(dirnoslash[pos] == '/')
-    {
-        dirnoslash[pos] = '\0';
-        pos--;
-    }
+	int pos = strlen(dirnoslash)-1;
+	while(dirnoslash[pos] == '/')
+	{
+		dirnoslash[pos] = '\0';
+		pos--;
+	}
 
-    if(CheckFile(dirnoslash))
-    {
-        return true;
-    }
-    else
-    {
-        char parentpath[strlen(dirnoslash)+2];
-        strcpy(parentpath, dirnoslash);
-        char * ptr = strrchr(parentpath, '/');
+	if(CheckFile(dirnoslash))
+	{
+		return true;
+	}
+	else
+	{
+		char parentpath[strlen(dirnoslash)+2];
+		strcpy(parentpath, dirnoslash);
+		char * ptr = strrchr(parentpath, '/');
 
-        if(!ptr)
-        {
-            //!Device root directory (must be with '/')
-            strcat(parentpath, "/");
-            struct stat filestat;
-            if (stat(parentpath, &filestat) == 0)
-                return true;
+		if(!ptr)
+		{
+			//!Device root directory (must be with '/')
+			strcat(parentpath, "/");
+			struct stat filestat;
+			if (stat(parentpath, &filestat) == 0)
+				return true;
 
-            return false;
-        }
+			return false;
+		}
 
-        ptr++;
-        ptr[0] = '\0';
+		ptr++;
+		ptr[0] = '\0';
 
-        result = CreateSubfolder(parentpath);
-    }
+		result = CreateSubfolder(parentpath);
+	}
 
-    if(!result)
-        return false;
+	if(!result)
+		return false;
 
-    if (mkdir(dirnoslash, 0777) == -1)
-    {
-        return false;
-    }
+	if (mkdir(dirnoslash, 0777) == -1)
+	{
+		return false;
+	}
 
-    return true;
+	return true;
 }
 
 /****************************************************************************
@@ -243,14 +243,14 @@ extern "C" bool CreateSubfolder(const char * fullpath)
  ***************************************************************************/
 static bool CompareDevices(const char *src, const char *dest)
 {
-    if(!src || !dest)
-        return false;
+	if(!src || !dest)
+		return false;
 
-    char *device1 = strchr(src, ':');
-    char *device2 = strchr(dest, ':');
+	char *device1 = strchr(src, ':');
+	char *device2 = strchr(dest, ':');
 
 	if(!device1 || !device2)
-        return false;
+		return false;
 
 	int position1 = device1-src+1;
 	int position2 = device2-dest+1;
@@ -261,10 +261,10 @@ static bool CompareDevices(const char *src, const char *dest)
 	snprintf(temp1, position1, "%s", src);
 	snprintf(temp2, position2, "%s", dest);
 
-    if(strcasecmp(temp1, temp2) == 0)
-        return true;
+	if(strcasecmp(temp1, temp2) == 0)
+		return true;
 
-    return false;
+	return false;
 }
 
 /****************************************************************************
@@ -279,83 +279,83 @@ extern "C" int CopyFile(const char * src, const char * dest)
 
 	char * filename = strrchr(src, '/');
 	if(filename)
-        filename++;
-    else
-        return -1;
+		filename++;
+	else
+		return -1;
 
-    u64 sizesrc = FileSize(src);
+	u64 sizesrc = FileSize(src);
 
 	FILE * source = fopen(src, "rb");
 
 	if(!source)
 		return -2;
 
-    u32 blksize = BLOCKSIZE;
+	u32 blksize = BLOCKSIZE;
 
 	u8 * buffer = (u8 *) malloc(blksize);
 
 	if(buffer == NULL){
-	    //no memory
-        fclose(source);
+		//no memory
+		fclose(source);
 		return -1;
 	}
 
 	FILE * destination = fopen(dest, "wb");
 
-    if(destination == NULL)
-    {
-        free(buffer);
-        fclose(source);
-        return -3;
-    }
+	if(destination == NULL)
+	{
+		free(buffer);
+		fclose(source);
+		return -3;
+	}
 
-    u64 done = 0;
+	u64 done = 0;
 
-    do
-    {
-        if(actioncanceled)
-        {
-            fclose(source);
-            fclose(destination);
-            free(buffer);
-            RemoveFile((char *) dest);
-            return -10;
-        }
+	do
+	{
+		if(actioncanceled)
+		{
+			fclose(source);
+			fclose(destination);
+			free(buffer);
+			RemoveFile((char *) dest);
+			return -10;
+		}
 
-        if(blksize > sizesrc - done)
-            blksize = sizesrc - done;
+		if(blksize > sizesrc - done)
+			blksize = sizesrc - done;
 
-        //Display progress
-        read = fread(buffer, 1, blksize, source);
-        if(read < 0)
-        {
-            fclose(source);
-            fclose(destination);
-            free(buffer);
-            RemoveFile((char *) dest);
-            return -3;
-        }
+		//Display progress
+		read = fread(buffer, 1, blksize, source);
+		if(read < 0)
+		{
+			fclose(source);
+			fclose(destination);
+			free(buffer);
+			RemoveFile((char *) dest);
+			return -3;
+		}
 
-        wrote = fwrite(buffer, 1, read, destination);
-        if(wrote < 0)
-        {
-            fclose(source);
-            fclose(destination);
-            free(buffer);
-            RemoveFile((char *) dest);
-            return -3;
-        }
+		wrote = fwrite(buffer, 1, read, destination);
+		if(wrote < 0)
+		{
+			fclose(source);
+			fclose(destination);
+			free(buffer);
+			RemoveFile((char *) dest);
+			return -3;
+		}
 
-        done += wrote;
-    }
-    while (read > 0);
+		done += wrote;
+	}
+	while (read > 0);
 
-    free(buffer);
-    fclose(source);
-    fclose(destination);
+	free(buffer);
+	fclose(source);
+	fclose(destination);
 
-    if(sizesrc != done)
-        return -4;
+	if(sizesrc != done)
+		return -4;
 
 	return 1;
 }
@@ -367,22 +367,22 @@ extern "C" int CopyFile(const char * src, const char * dest)
  ***************************************************************************/
 extern "C" int MoveFile(const char *srcpath, char *destdir)
 {
-    if(CompareDevices(srcpath, destdir))
-    {
-        if(RenameFile(srcpath, destdir))
-            return 1;
-        else
-            return -1;
-    }
+	if(CompareDevices(srcpath, destdir))
+	{
+		if(RenameFile(srcpath, destdir))
+			return 1;
+		else
+			return -1;
+	}
 
-    int res = CopyFile(srcpath, destdir);
-    if(res < 0)
-        return -1;
+	int res = CopyFile(srcpath, destdir);
+	if(res < 0)
+		return -1;
 
-    if(RemoveFile(srcpath))
-        return 1;
+	if(RemoveFile(srcpath))
+		return 1;
 
-    return -1;
+	return -1;
 }
 
 /****************************************************************************
@@ -392,7 +392,7 @@ extern "C" int MoveFile(const char *srcpath, char *destdir)
  ***************************************************************************/
 extern "C" bool RemoveFile(const char * filepath)
 {
-    return (remove(filepath) == 0);
+	return (remove(filepath) == 0);
 }
 
 /****************************************************************************
@@ -402,5 +402,5 @@ extern "C" bool RemoveFile(const char * filepath)
  ***************************************************************************/
 extern "C" bool RenameFile(const char * srcpath, const char * destpath)
 {
-    return (rename(srcpath, destpath) == 0);
+	return (rename(srcpath, destpath) == 0);
 }

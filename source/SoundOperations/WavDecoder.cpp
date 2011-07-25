@@ -28,29 +28,29 @@
 #include "utils/uncompress.h"
 
 WavDecoder::WavDecoder(const char * filepath)
-    : SoundDecoder(filepath)
+	: SoundDecoder(filepath)
 {
-    SoundType = SOUND_WAV;
-    SampleRate = 48000;
-    Format = VOICE_STEREO_16BIT;
+	SoundType = SOUND_WAV;
+	SampleRate = 48000;
+	Format = VOICE_STEREO_16BIT;
 
-    if(!file_fd)
-        return;
+	if(!file_fd)
+		return;
 
-    OpenFile();
+	OpenFile();
 }
 
 WavDecoder::WavDecoder(const u8 * snd, int len)
-    : SoundDecoder(snd, len)
+	: SoundDecoder(snd, len)
 {
-    SoundType = SOUND_WAV;
-    SampleRate = 48000;
-    Format = VOICE_STEREO_16BIT;
+	SoundType = SOUND_WAV;
+	SampleRate = 48000;
+	Format = VOICE_STEREO_16BIT;
 
-    if(!file_fd)
-        return;
+	if(!file_fd)
+		return;
 
-    OpenFile();
+	OpenFile();
 }
 
 WavDecoder::~WavDecoder()
@@ -59,13 +59,13 @@ WavDecoder::~WavDecoder()
 
 void WavDecoder::OpenFile()
 {
-    SWaveHdr Header;
-    SWaveFmtChunk FmtChunk;
-    memset(&Header, 0, sizeof(SWaveHdr));
-    memset(&FmtChunk, 0, sizeof(SWaveFmtChunk));
+	SWaveHdr Header;
+	SWaveFmtChunk FmtChunk;
+	memset(&Header, 0, sizeof(SWaveHdr));
+	memset(&FmtChunk, 0, sizeof(SWaveFmtChunk));
 
-    file_fd->read((u8 *) &Header, sizeof(SWaveHdr));
-    file_fd->read((u8 *) &FmtChunk, sizeof(SWaveFmtChunk));
+	file_fd->read((u8 *) &Header, sizeof(SWaveHdr));
+	file_fd->read((u8 *) &FmtChunk, sizeof(SWaveFmtChunk));
 
 	if (Header.magicRIFF != 'RIFF')
 	{
@@ -83,27 +83,27 @@ void WavDecoder::OpenFile()
 		return;
 	}
 
-    DataOffset = sizeof(SWaveHdr)+le32(FmtChunk.size)+8;
-    file_fd->seek(DataOffset, SEEK_SET);
-    SWaveChunk DataChunk;
-    file_fd->read((u8 *) &DataChunk, sizeof(SWaveChunk));
+	DataOffset = sizeof(SWaveHdr)+le32(FmtChunk.size)+8;
+	file_fd->seek(DataOffset, SEEK_SET);
+	SWaveChunk DataChunk;
+	file_fd->read((u8 *) &DataChunk, sizeof(SWaveChunk));
 
-    if(DataChunk.magicDATA == 'fact')
-    {
-        DataOffset += 8+le32(DataChunk.size);
-        file_fd->seek(DataOffset, SEEK_SET);
-        file_fd->read((u8 *) &DataChunk, sizeof(SWaveChunk));
-    }
-    if(DataChunk.magicDATA != 'data')
-    {
+	if(DataChunk.magicDATA == 'fact')
+	{
+		DataOffset += 8+le32(DataChunk.size);
+		file_fd->seek(DataOffset, SEEK_SET);
+		file_fd->read((u8 *) &DataChunk, sizeof(SWaveChunk));
+	}
+	if(DataChunk.magicDATA != 'data')
+	{
 		CloseFile();
 		return;
-    }
+	}
 
-    DataOffset += 8;
-    DataSize = le32(DataChunk.size);
-    Is16Bit = (le16(FmtChunk.bps) == 16);
-    SampleRate = le32(FmtChunk.freq);
+	DataOffset += 8;
+	DataSize = le32(DataChunk.size);
+	Is16Bit = (le16(FmtChunk.bps) == 16);
+	SampleRate = le32(FmtChunk.freq);
 
 	if (le16(FmtChunk.channels) == 1 && le16(FmtChunk.bps) == 8 && le16(FmtChunk.alignment) <= 1)
 		Format = VOICE_MONO_8BIT;
@@ -114,42 +114,42 @@ void WavDecoder::OpenFile()
 	else if (le16(FmtChunk.channels) == 2 && le16(FmtChunk.bps) == 16 && le16(FmtChunk.alignment) <= 4)
 		Format = VOICE_STEREO_16BIT;
 
-    Decode();
+	Decode();
 }
 
 void WavDecoder::CloseFile()
 {
-    if(file_fd)
-        delete file_fd;
+	if(file_fd)
+		delete file_fd;
 
-    file_fd = NULL;
+	file_fd = NULL;
 }
 
 int WavDecoder::Read(u8 * buffer, int buffer_size, int pos)
 {
-    if(!file_fd)
-        return -1;
+	if(!file_fd)
+		return -1;
 
-    if(CurPos >= (int) DataSize)
-        return 0;
+	if(CurPos >= (int) DataSize)
+		return 0;
 
-    file_fd->seek(DataOffset+CurPos, SEEK_SET);
+	file_fd->seek(DataOffset+CurPos, SEEK_SET);
 
-    if(buffer_size > (int) DataSize-CurPos)
-        buffer_size = DataSize-CurPos;
+	if(buffer_size > (int) DataSize-CurPos)
+		buffer_size = DataSize-CurPos;
 
-    int read = file_fd->read(buffer, buffer_size);
-    if(read > 0)
-    {
-        if (Is16Bit)
-        {
-            read &= ~0x0001;
+	int read = file_fd->read(buffer, buffer_size);
+	if(read > 0)
+	{
+		if (Is16Bit)
+		{
+			read &= ~0x0001;
 
-            for (u32 i = 0; i < (u32) (read / sizeof (u16)); ++i)
-                ((u16 *) buffer)[i] = le16(((u16 *) buffer)[i]);
-        }
-        CurPos += read;
-    }
+			for (u32 i = 0; i < (u32) (read / sizeof (u16)); ++i)
+				((u16 *) buffer)[i] = le16(((u16 *) buffer)[i]);
+		}
+		CurPos += read;
+	}
 
-    return read;
+	return read;
 }

@@ -1,6 +1,6 @@
 /****************************************************************************
  * languagefile updater
- * for USB Loader GX    *giantpune*
+ * for USB Loader GX	*giantpune*
  ***************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,118 +23,118 @@ static const char * LanguageFilesURL = "http://usbloader-gui.googlecode.com/svn/
 
 int DownloadAllLanguageFiles()
 {
-    if(!CreateSubfolder(Settings.languagefiles_path))
-    {
-        ShowError(tr("Could not create path: %s"), Settings.languagefiles_path);
-        return -1;
-    }
+	if(!CreateSubfolder(Settings.languagefiles_path))
+	{
+		ShowError(tr("Could not create path: %s"), Settings.languagefiles_path);
+		return -1;
+	}
 
-    if(!IsNetworkInit())
-    {
-        ShowError(tr("Network is not initiated."));
-        return -2;
-    }
-    char fullURL[300];
+	if(!IsNetworkInit())
+	{
+		ShowError(tr("Network is not initiated."));
+		return -2;
+	}
+	char fullURL[300];
 
-    URL_List LinkList(LanguageFilesURL);
-    int listsize = LinkList.GetURLCount();
-    int files_downloaded = 0;
+	URL_List LinkList(LanguageFilesURL);
+	int listsize = LinkList.GetURLCount();
+	int files_downloaded = 0;
 
-    ShowProgress(tr("Updating Language Files:"), 0, 0, 0, listsize, false, true);
+	ShowProgress(tr("Updating Language Files:"), 0, 0, 0, listsize, false, true);
 
-    for (int i = 0; i < listsize; i++)
-    {
-        const char * filename = strrchr(LinkList.GetURL(i), '/');
-        if(filename) filename++;
-        else filename = LinkList.GetURL(i);
+	for (int i = 0; i < listsize; i++)
+	{
+		const char * filename = strrchr(LinkList.GetURL(i), '/');
+		if(filename) filename++;
+		else filename = LinkList.GetURL(i);
 
-        if(!filename)
-            continue;
+		if(!filename)
+			continue;
 
-        const char * FileExt = strrchr(filename, '.');
-        if (!FileExt || strcasecmp(FileExt, ".lang") != 0)
-            continue;
+		const char * FileExt = strrchr(filename, '.');
+		if (!FileExt || strcasecmp(FileExt, ".lang") != 0)
+			continue;
 
-        gprintf("%s\n", filename);
+		gprintf("%s\n", filename);
 
-        ShowProgress(tr("Updating Language Files:"), 0, filename, i, listsize, false, true);
+		ShowProgress(tr("Updating Language Files:"), 0, filename, i, listsize, false, true);
 
-        snprintf(fullURL, sizeof(fullURL), "%s%s", LanguageFilesURL, filename);
+		snprintf(fullURL, sizeof(fullURL), "%s%s", LanguageFilesURL, filename);
 
-        struct block file = downloadfile(fullURL);
-        if (file.data)
-        {
-            char filepath[300];
-            snprintf(filepath, sizeof(filepath), "%s/%s", Settings.languagefiles_path, filename);
-            FILE * pfile = fopen(filepath, "wb");
-            if(pfile)
-            {
-                fwrite(file.data, 1, file.size, pfile);
-                fclose(pfile);
-                files_downloaded++;
-            }
-            free(file.data);
-        }
-    }
+		struct block file = downloadfile(fullURL);
+		if (file.data)
+		{
+			char filepath[300];
+			snprintf(filepath, sizeof(filepath), "%s/%s", Settings.languagefiles_path, filename);
+			FILE * pfile = fopen(filepath, "wb");
+			if(pfile)
+			{
+				fwrite(file.data, 1, file.size, pfile);
+				fclose(pfile);
+				files_downloaded++;
+			}
+			free(file.data);
+		}
+	}
 
-    ProgressStop();
+	ProgressStop();
 
-    return files_downloaded;
+	return files_downloaded;
 }
 
 int UpdateLanguageFiles()
 {
-    if(!CreateSubfolder(Settings.languagefiles_path))
-    {
-        ShowError(tr("Could not create path: %s"), Settings.languagefiles_path);
-        return -1;
-    }
+	if(!CreateSubfolder(Settings.languagefiles_path))
+	{
+		ShowError(tr("Could not create path: %s"), Settings.languagefiles_path);
+		return -1;
+	}
 
-    if(!IsNetworkInit())
-    {
-        ShowError(tr("Network is not initiated."));
-        return -2;
-    }
+	if(!IsNetworkInit())
+	{
+		ShowError(tr("Network is not initiated."));
+		return -2;
+	}
 
 	DirList Dir(Settings.languagefiles_path, ".lang");
 
-    //give up now if we didn't find any
-    if (Dir.GetFilecount() == 0) return -2;
+	//give up now if we didn't find any
+	if (Dir.GetFilecount() == 0) return -2;
 
-    char savepath[150];
-    char codeurl[200];
+	char savepath[150];
+	char codeurl[200];
 
-    //we assume that the network will already be init by another function
-    // ( that has gui eletents in it because this one doesn't)
-    int done = 0;
+	//we assume that the network will already be init by another function
+	// ( that has gui eletents in it because this one doesn't)
+	int done = 0;
 
-    //build the URL, save path, and download each file and save it
-    for(int i = 0; i < Dir.GetFilecount(); ++i)
-    {
-        snprintf(codeurl, sizeof(codeurl), "%s%s", LanguageFilesURL, Dir.GetFilename(i));
-        snprintf(savepath, sizeof(savepath), "%s/%s", Settings.languagefiles_path, Dir.GetFilename(i));
+	//build the URL, save path, and download each file and save it
+	for(int i = 0; i < Dir.GetFilecount(); ++i)
+	{
+		snprintf(codeurl, sizeof(codeurl), "%s%s", LanguageFilesURL, Dir.GetFilename(i));
+		snprintf(savepath, sizeof(savepath), "%s/%s", Settings.languagefiles_path, Dir.GetFilename(i));
 
-        struct block file = downloadfile(codeurl);
+		struct block file = downloadfile(codeurl);
 
-        ShowProgress(tr("Updating Language Files:"), 0, Dir.GetFilename(i), i, Dir.GetFilecount(), false, true);
+		ShowProgress(tr("Updating Language Files:"), 0, Dir.GetFilename(i), i, Dir.GetFilecount(), false, true);
 
-        if (file.data != NULL)
-        {
-            FILE * pfile;
-            pfile = fopen(savepath, "wb");
-            if (pfile != NULL)
-            {
-                fwrite(file.data, 1, file.size, pfile);
-                fclose(pfile);
-                done++;
-            }
-            free(file.data);
-        }
-    }
+		if (file.data != NULL)
+		{
+			FILE * pfile;
+			pfile = fopen(savepath, "wb");
+			if (pfile != NULL)
+			{
+				fwrite(file.data, 1, file.size, pfile);
+				fclose(pfile);
+				done++;
+			}
+			free(file.data);
+		}
+	}
 
-    ProgressStop();
+	ProgressStop();
 
-    // return the number of files we updated
-    return done;
+	// return the number of files we updated
+	return done;
 }
 

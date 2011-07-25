@@ -35,44 +35,44 @@
 #include "utils/StringTools.h"
 #include "svnrev.h"
 
-#define VALID_CONFIG_REV    1084
+#define VALID_CONFIG_REV	1084
 
 CGameCategories GameCategories;
 
 CGameCategories::CGameCategories()
-    : defaultCategory(1, 0)
+	: defaultCategory(1, 0)
 {
 }
 
 const vector<unsigned int> &CGameCategories::operator[](const char *id) const
 {
-    if(!id) return defaultCategory;
+	if(!id) return defaultCategory;
 
-    for(map<string, vector<unsigned int> >::const_iterator itr = List.begin(); itr != List.end(); itr++)
-    {
-        if(strncasecmp(itr->first.c_str(), id, 6) == 0)
-            return itr->second;
-    }
+	for(map<string, vector<unsigned int> >::const_iterator itr = List.begin(); itr != List.end(); itr++)
+	{
+		if(strncasecmp(itr->first.c_str(), id, 6) == 0)
+			return itr->second;
+	}
 
-    return defaultCategory;
+	return defaultCategory;
 }
 
 bool CGameCategories::Load(string filepath)
 {
-    if(filepath.size() == 0)
-        return false;
+	if(filepath.size() == 0)
+		return false;
 
-    if(filepath[filepath.size()-1] != '/')
-        filepath += '/';
+	if(filepath[filepath.size()-1] != '/')
+		filepath += '/';
 
-    filepath += "GXGameCategories.xml";
-    configPath = filepath;
+	filepath += "GXGameCategories.xml";
+	configPath = filepath;
 
-    clear();
+	clear();
 
-    TiXmlDocument xmlDoc(filepath.c_str());
-    if(!xmlDoc.LoadFile())
-    	return false;
+	TiXmlDocument xmlDoc(filepath.c_str());
+	if(!xmlDoc.LoadFile())
+		return false;
 
 	if(!ValidVersion(xmlDoc.FirstChildElement("Revision")))
 		return false;
@@ -89,7 +89,7 @@ bool CGameCategories::Load(string filepath)
 		const char * Name = node->Attribute("Name");
 
 		if(ID && Name)
-            CategoryList.SetCategory(atoi(ID), Name);
+			CategoryList.SetCategory(atoi(ID), Name);
 
 		node = node->NextSiblingElement();
 	}
@@ -100,52 +100,52 @@ bool CGameCategories::Load(string filepath)
 
 	node = node->FirstChildElement("Game");
 
-    while(node != NULL)
-    {
+	while(node != NULL)
+	{
 		const char * gameID = node->Attribute("ID");
 
-    	TiXmlElement * category = node->FirstChildElement("Category");
+		TiXmlElement * category = node->FirstChildElement("Category");
 
-        while(category != NULL)
+		while(category != NULL)
 		{
-		    const char * categoryID = category->Attribute("ID");
-		    if(gameID && categoryID)
-		        SetCategory(gameID, atoi(categoryID));
+			const char * categoryID = category->Attribute("ID");
+			if(gameID && categoryID)
+				SetCategory(gameID, atoi(categoryID));
 
 			category = category->NextSiblingElement();
-        }
+		}
 
 		node = node->NextSiblingElement();
-    }
+	}
 
-    CategoryList.goToFirst();
+	CategoryList.goToFirst();
 
-    return true;
+	return true;
 }
 
 bool CGameCategories::Save()
 {
-    char filepath[300];
-    snprintf(filepath, sizeof(filepath), configPath.c_str());
+	char filepath[300];
+	snprintf(filepath, sizeof(filepath), configPath.c_str());
 
-    char * ptr = strrchr(filepath, '/');
-    if(ptr)
-        ptr[0] = 0;
+	char * ptr = strrchr(filepath, '/');
+	if(ptr)
+		ptr[0] = 0;
 
-    CreateSubfolder(filepath);
+	CreateSubfolder(filepath);
 
-    StartProgress(tr("Generating GXGameCategories.xml"), tr("Please wait..."), 0, false, true);
-    TiXmlDocument xmlDoc;
+	StartProgress(tr("Generating GXGameCategories.xml"), tr("Please wait..."), 0, false, true);
+	TiXmlDocument xmlDoc;
 
-    TiXmlDeclaration declaration("1.0", "UTF-8", "");
-    xmlDoc.InsertEndChild(declaration);
-    TiXmlElement Revision("Revision");
-    TiXmlText revText(GetRev());
-    Revision.InsertEndChild(revText);
-    xmlDoc.InsertEndChild(Revision);
+	TiXmlDeclaration declaration("1.0", "UTF-8", "");
+	xmlDoc.InsertEndChild(declaration);
+	TiXmlElement Revision("Revision");
+	TiXmlText revText(GetRev());
+	Revision.InsertEndChild(revText);
+	xmlDoc.InsertEndChild(Revision);
 
-    int progressSize = CategoryList.size() + List.size();
-    int progress = 0;
+	int progressSize = CategoryList.size() + List.size();
+	int progress = 0;
 
 	//! Add all categories as an ID map
 	{
@@ -156,7 +156,7 @@ bool CGameCategories::Save()
 		CategoryList.goToFirst();
 		do
 		{
-    		ShowProgress(progress, progressSize);
+			ShowProgress(progress, progressSize);
 
 			TiXmlElement *Category = new TiXmlElement("Category");
 			Category->SetAttribute("ID", fmt("%02i", CategoryList.getCurrentID()));
@@ -179,7 +179,7 @@ bool CGameCategories::Save()
 
 		for(map<string, vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
 		{
-    		ShowProgress(progress, progressSize);
+			ShowProgress(progress, progressSize);
 
 			TiXmlElement *Game = new TiXmlElement("Game");
 			Game->SetAttribute("ID", itr->first.c_str());
@@ -208,185 +208,185 @@ bool CGameCategories::Save()
 	ShowProgress(tr("Writing GXGameCategories.xml"), tr("Please wait..."), 0, progressSize, progressSize, false, true);
 
 	xmlDoc.SaveFile(configPath);
-    ProgressStop();
+	ProgressStop();
 
-    return true;
+	return true;
 }
 
 bool CGameCategories::ValidVersion(TiXmlElement *revisionNode)
 {
-    if(!revisionNode) return false;
+	if(!revisionNode) return false;
 
-    if(!revisionNode->FirstChild() || !revisionNode->FirstChild()->Value())
-        return false;
+	if(!revisionNode->FirstChild() || !revisionNode->FirstChild()->Value())
+		return false;
 
-    return atoi(revisionNode->FirstChild()->Value()) >= VALID_CONFIG_REV;
+	return atoi(revisionNode->FirstChild()->Value()) >= VALID_CONFIG_REV;
 }
 
 bool CGameCategories::SetCategory(const char *gameID, unsigned int id)
 {
-    if(!gameID) return false;
+	if(!gameID) return false;
 
 	char gameID6[7];
 	snprintf(gameID6, sizeof(gameID6), gameID);
 
 	string stringGameID(gameID6);
 
-    return SetCategory(stringGameID, id);
+	return SetCategory(stringGameID, id);
 }
 
 bool CGameCategories::SetCategory(const string &gameID, unsigned int id)
 {
 	if(List[gameID].empty())
-	    List[gameID] = defaultCategory;
+		List[gameID] = defaultCategory;
 
-    vector<unsigned int> tmpVect(List[gameID]);
+	vector<unsigned int> tmpVect(List[gameID]);
 
-    for(u32 i = 0; i < tmpVect.size(); ++i)
-    {
-        if(tmpVect[i] == id)
-            return false;
-    }
+	for(u32 i = 0; i < tmpVect.size(); ++i)
+	{
+		if(tmpVect[i] == id)
+			return false;
+	}
 
-    List[gameID].push_back(id);
-    return true;
+	List[gameID].push_back(id);
+	return true;
 }
 
 bool CGameCategories::ReplaceCategory(const char *gameID, unsigned int id)
 {
-    if(!gameID) return false;
+	if(!gameID) return false;
 
 	char gameID6[7];
 	snprintf(gameID6, sizeof(gameID6), gameID);
 
-    List[string(gameID6)] = defaultCategory;
-    List[string(gameID6)].push_back(id);
-    return true;
+	List[string(gameID6)] = defaultCategory;
+	List[string(gameID6)].push_back(id);
+	return true;
 }
 
 
 bool CGameCategories::ReplaceCategory(const string &gameID, unsigned int id)
 {
-    List[gameID] = defaultCategory;
-    List[gameID].push_back(id);
-    return true;
+	List[gameID] = defaultCategory;
+	List[gameID].push_back(id);
+	return true;
 }
 
 void CGameCategories::RemoveCategory(unsigned int id)
 {
-    for(map<string, vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
-    {
-        for(u32 i = 0; i < itr->second.size(); ++i)
-        {
-            if(itr->second[i] == id)
-                itr->second.erase(itr->second.begin()+ i);
-        }
-    }
+	for(map<string, vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
+	{
+		for(u32 i = 0; i < itr->second.size(); ++i)
+		{
+			if(itr->second[i] == id)
+				itr->second.erase(itr->second.begin()+ i);
+		}
+	}
 }
 
 void CGameCategories::RemoveGameCategories(const string &gameID)
 {
-    for (map<string, vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
-    {
-        if(gameID == itr->first)
-        {
-            List.erase(itr);
-        }
-    }
+	for (map<string, vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
+	{
+		if(gameID == itr->first)
+		{
+			List.erase(itr);
+		}
+	}
 }
 
 void CGameCategories::RemoveCategory(const char *gameID, unsigned int id)
 {
-    if(!gameID) return;
+	if(!gameID) return;
 
-    string gameID6;
-    for(int i = 0; i < 6; ++i)
-        gameID6.push_back(gameID[i]);
+	string gameID6;
+	for(int i = 0; i < 6; ++i)
+		gameID6.push_back(gameID[i]);
 
-    RemoveCategory(gameID6, id);
+	RemoveCategory(gameID6, id);
 }
 
 void CGameCategories::RemoveCategory(const string &gameID, unsigned int id)
 {
-    for (map<string, vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
-    {
-        if(gameID == itr->first)
-        {
-            for(u32 i = 0; i < itr->second.size(); ++i)
-            {
-                if(itr->second[i] == id)
+	for (map<string, vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
+	{
+		if(gameID == itr->first)
+		{
+			for(u32 i = 0; i < itr->second.size(); ++i)
+			{
+				if(itr->second[i] == id)
 				{
-                    itr->second.erase(itr->second.begin()+ i);
+					itr->second.erase(itr->second.begin()+ i);
 					break;
 				}
-            }
-            break;
-        }
-    }
+			}
+			break;
+		}
+	}
 }
 
 bool CGameCategories::isInCategory(const char *gameID, unsigned int id)
 {
-    if(id == 0) //! ID = 0 means category 'All' so it is always true
-        return true;
+	if(id == 0) //! ID = 0 means category 'All' so it is always true
+		return true;
 
-    if(!gameID) return false;
+	if(!gameID) return false;
 
-    string gameID6;
-    for(int i = 0; i < 6; ++i)
-        gameID6.push_back(gameID[i]);
+	string gameID6;
+	for(int i = 0; i < 6; ++i)
+		gameID6.push_back(gameID[i]);
 
-    for (map<string, vector<unsigned int> >::iterator itr = GameCategories.List.begin(); itr != GameCategories.List.end(); itr++)
-    {
-        if(itr->first == gameID6)
-        {
-            for(u32 i = 0; i < itr->second.size(); ++i)
-            {
-                if(itr->second[i] == id)
-                    return true;
-            }
-            break;
-        }
-    }
+	for (map<string, vector<unsigned int> >::iterator itr = GameCategories.List.begin(); itr != GameCategories.List.end(); itr++)
+	{
+		if(itr->first == gameID6)
+		{
+			for(u32 i = 0; i < itr->second.size(); ++i)
+			{
+				if(itr->second[i] == id)
+					return true;
+			}
+			break;
+		}
+	}
 
-    return false;
+	return false;
 }
 
 bool CGameCategories::ImportFromWiiTDB(const string &xmlpath)
 {
-    WiiTDB XML_DB;
+	WiiTDB XML_DB;
 
-    if(!XML_DB.OpenFile(xmlpath.c_str()))
-        return false;
+	if(!XML_DB.OpenFile(xmlpath.c_str()))
+		return false;
 
-    StartProgress(tr("Importing categories"), tr("Please wait..."), 0, false, true);
+	StartProgress(tr("Importing categories"), tr("Please wait..."), 0, false, true);
 
-    XML_DB.SetLanguageCode(Settings.db_language);
-    wString filter(gameList.GetCurrentFilter());
-    gameList.LoadUnfiltered();
+	XML_DB.SetLanguageCode(Settings.db_language);
+	wString filter(gameList.GetCurrentFilter());
+	gameList.LoadUnfiltered();
 
-    for(int i = 0; i < gameList.size(); ++i)
-    {
-    	ShowProgress(i, gameList.size());
+	for(int i = 0; i < gameList.size(); ++i)
+	{
+		ShowProgress(i, gameList.size());
 
-        vector<string> genreList;
+		vector<string> genreList;
 
-        if(!XML_DB.GetGenreList((const char *) gameList[i]->id, genreList))
-            continue;
+		if(!XML_DB.GetGenreList((const char *) gameList[i]->id, genreList))
+			continue;
 
-        for(u32 n = 0; n < genreList.size(); ++n)
-        {
-            if(!CategoryList.findCategory(genreList[n]))
-                CategoryList.AddCategory(genreList[n]);
+		for(u32 n = 0; n < genreList.size(); ++n)
+		{
+			if(!CategoryList.findCategory(genreList[n]))
+				CategoryList.AddCategory(genreList[n]);
 
-            this->SetCategory(gameList[i]->id, CategoryList.getCurrentID());
-        }
-    }
+			this->SetCategory(gameList[i]->id, CategoryList.getCurrentID());
+		}
+	}
 
-    XML_DB.CloseFile();
-    gameList.FilterList(filter.c_str());
+	XML_DB.CloseFile();
+	gameList.FilterList(filter.c_str());
 
-    ProgressStop();
+	ProgressStop();
 
 	return true;
 }

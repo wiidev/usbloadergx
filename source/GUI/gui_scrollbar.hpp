@@ -28,57 +28,57 @@
 
 class GuiScrollbar : public GuiElement, public sigslot::has_slots<>
 {
-    public:
-        GuiScrollbar(int height, u8 mode = LISTMODE);
-        virtual ~GuiScrollbar();
-        void SetDPadControl(bool a) { AllowDPad = a; }
-        void SetButtonScroll(u32 button) { ButtonScroll = button; }
-        void ScrollOneUp();
-        void ScrollOneDown();
-        int GetSelectedItem() { return SelItem; };
-        int GetSelectedIndex() { return SelInd; };
-        void SetScrollSpeed(u16 speed) { ScrollSpeed = speed; };
-        void SetButtonScrollSpeed(u16 speed) { ButtonScrollSpeed = speed; };
-        void Draw();
-        void Update(GuiTrigger * t);
-        enum
-        {
-            ICONMODE = 0,
-            LISTMODE,
-        };
-        //! Signals
+	public:
+		GuiScrollbar(int height, u8 mode = LISTMODE);
+		virtual ~GuiScrollbar();
+		void SetDPadControl(bool a) { AllowDPad = a; }
+		void SetButtonScroll(u32 button) { ButtonScroll = button; }
+		void ScrollOneUp();
+		void ScrollOneDown();
+		int GetSelectedItem() { return SelItem; };
+		int GetSelectedIndex() { return SelInd; };
+		void SetScrollSpeed(u16 speed) { ScrollSpeed = speed; };
+		void SetButtonScrollSpeed(u16 speed) { ButtonScrollSpeed = speed; };
+		void Draw();
+		void Update(GuiTrigger * t);
+		enum
+		{
+			ICONMODE = 0,
+			LISTMODE,
+		};
+		//! Signals
 		sigslot::signal2<int, int> listChanged;
 		//! Slots
-        void SetPageSize(int size);
-        void SetRowSize(int size);
-        void SetSelectedItem(int pos);
-        void SetSelectedIndex(int pos);
-        void SetEntrieCount(int cnt);
-    protected:
-        void setScrollboxPosition(int SelItem, int SelInd);
-        void OnUpButtonHold(GuiButton *sender, int pointer, const POINT &p);
-        void OnDownButtonHold(GuiButton *sender, int pointer, const POINT &p);
-        void OnBoxButtonHold(GuiButton *sender, int pointer, const POINT &p);
-        void CheckDPadControls(GuiTrigger *t);
-        void ScrollByButton(GuiTrigger *t);
+		void SetPageSize(int size);
+		void SetRowSize(int size);
+		void SetSelectedItem(int pos);
+		void SetSelectedIndex(int pos);
+		void SetEntrieCount(int cnt);
+	protected:
+		void setScrollboxPosition(int SelItem, int SelInd);
+		void OnUpButtonHold(GuiButton *sender, int pointer, const POINT &p);
+		void OnDownButtonHold(GuiButton *sender, int pointer, const POINT &p);
+		void OnBoxButtonHold(GuiButton *sender, int pointer, const POINT &p);
+		void CheckDPadControls(GuiTrigger *t);
+		void ScrollByButton(GuiTrigger *t);
 
-        u8 Mode;
-        u32 ScrollState;
-        u16 ScrollSpeed;
-        u16 ButtonScrollSpeed;
-        u32 ButtonScroll;
-        bool AllowDPad;
+		u8 Mode;
+		u32 ScrollState;
+		u16 ScrollSpeed;
+		u16 ButtonScrollSpeed;
+		u32 ButtonScroll;
+		bool AllowDPad;
 
-        int MinHeight;
-        int MaxHeight;
-        int SelItem;
-        int SelInd;
-        int RowSize;
-        int PageSize;
-        int EntrieCount;
-        int ButtonPositionX;
-        int pressedChan;
-        bool listchanged;
+		int MinHeight;
+		int MaxHeight;
+		int SelItem;
+		int SelInd;
+		int RowSize;
+		int PageSize;
+		int EntrieCount;
+		int ButtonPositionX;
+		int pressedChan;
+		bool listchanged;
 
 		GuiButton * arrowUpBtn;
 		GuiButton * arrowDownBtn;

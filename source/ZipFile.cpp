@@ -41,144 +41,144 @@
 
 ZipFile::ZipFile(const char *filepath)
 {
-    File = unzOpen(filepath);
-    if (File) this->LoadList();
+	File = unzOpen(filepath);
+	if (File) this->LoadList();
 }
 
 ZipFile::~ZipFile()
 {
-    unzClose(File);
+	unzClose(File);
 }
 
 bool ZipFile::LoadList()
 {
-    return true;
+	return true;
 }
 
 bool ZipFile::FindFile(const char *file)
 {
-    if (!File) return false;
+	if (!File) return false;
 
-    char filename[MAXPATHLEN];
+	char filename[MAXPATHLEN];
 
-    int ret = unzGoToFirstFile(File);
-    if (ret != UNZ_OK) return false;
+	int ret = unzGoToFirstFile(File);
+	if (ret != UNZ_OK) return false;
 
-    do
-    {
-        if(unzGetCurrentFileInfo(File, &cur_file_info, filename, sizeof(filename), NULL, 0, NULL, 0) != UNZ_OK)
-            continue;
+	do
+	{
+		if(unzGetCurrentFileInfo(File, &cur_file_info, filename, sizeof(filename), NULL, 0, NULL, 0) != UNZ_OK)
+			continue;
 
-        const char *realfilename = strrchr(filename, '/');
-        if(!realfilename || strlen(realfilename) == 0)
-            realfilename = filename;
+		const char *realfilename = strrchr(filename, '/');
+		if(!realfilename || strlen(realfilename) == 0)
+			realfilename = filename;
 
-        if(strcasecmp(realfilename, file) == 0)
-            return true;
-    }
-    while(unzGoToNextFile(File) == UNZ_OK);
+		if(strcasecmp(realfilename, file) == 0)
+			return true;
+	}
+	while(unzGoToNextFile(File) == UNZ_OK);
 
-    return false;
+	return false;
 }
 
 bool ZipFile::FindFilePart(const char *partfilename, std::string &realname)
 {
-    if (!File) return false;
+	if (!File) return false;
 
-    char filename[MAXPATHLEN];
+	char filename[MAXPATHLEN];
 
-    int ret = unzGoToFirstFile(File);
-    if (ret != UNZ_OK) return false;
+	int ret = unzGoToFirstFile(File);
+	if (ret != UNZ_OK) return false;
 
-    do
-    {
-        if(unzGetCurrentFileInfo(File, &cur_file_info, filename, sizeof(filename), NULL, 0, NULL, 0) != UNZ_OK)
-            continue;
+	do
+	{
+		if(unzGetCurrentFileInfo(File, &cur_file_info, filename, sizeof(filename), NULL, 0, NULL, 0) != UNZ_OK)
+			continue;
 
-        if(strcasestr(filename, partfilename) != 0)
-        {
-            realname = filename;
-            return true;
-        }
-    }
-    while(unzGoToNextFile(File) == UNZ_OK);
+		if(strcasestr(filename, partfilename) != 0)
+		{
+			realname = filename;
+			return true;
+		}
+	}
+	while(unzGoToNextFile(File) == UNZ_OK);
 
-    return false;
+	return false;
 }
 
 bool ZipFile::ExtractAll(const char *dest)
 {
-    if (!File) return false;
+	if (!File) return false;
 
-    bool Stop = false;
+	bool Stop = false;
 
-    u32 blocksize = 1024 * 50;
-    u8 *buffer = new u8[blocksize];
+	u32 blocksize = 1024 * 50;
+	u8 *buffer = new u8[blocksize];
 
-    if (!buffer) return false;
+	if (!buffer) return false;
 
-    char writepath[MAXPATHLEN];
-    char filename[MAXPATHLEN];
-    memset(filename, 0, sizeof(filename));
+	char writepath[MAXPATHLEN];
+	char filename[MAXPATHLEN];
+	memset(filename, 0, sizeof(filename));
 
-    int ret = unzGoToFirstFile(File);
-    if (ret != UNZ_OK) Stop = true;
+	int ret = unzGoToFirstFile(File);
+	if (ret != UNZ_OK) Stop = true;
 
-    while (!Stop)
-    {
-        if (unzGetCurrentFileInfo(File, &cur_file_info, filename, sizeof(filename), NULL, 0, NULL, 0) != UNZ_OK) Stop
-                = true;
+	while (!Stop)
+	{
+		if (unzGetCurrentFileInfo(File, &cur_file_info, filename, sizeof(filename), NULL, 0, NULL, 0) != UNZ_OK) Stop
+				= true;
 
-        if (!Stop && filename[strlen(filename) - 1] != '/')
-        {
-            u32 uncompressed_size = cur_file_info.uncompressed_size;
+		if (!Stop && filename[strlen(filename) - 1] != '/')
+		{
+			u32 uncompressed_size = cur_file_info.uncompressed_size;
 
-            u32 done = 0;
-            char *pointer = NULL;
+			u32 done = 0;
+			char *pointer = NULL;
 
-            ret = unzOpenCurrentFile(File);
+			ret = unzOpenCurrentFile(File);
 
-            snprintf(writepath, sizeof(writepath), "%s/%s", dest, filename);
+			snprintf(writepath, sizeof(writepath), "%s/%s", dest, filename);
 
-            pointer = strrchr(writepath, '/');
-            int position = pointer - writepath + 2;
+			pointer = strrchr(writepath, '/');
+			int position = pointer - writepath + 2;
 
-            char temppath[strlen(writepath)];
-            snprintf(temppath, position, "%s", writepath);
+			char temppath[strlen(writepath)];
+			snprintf(temppath, position, "%s", writepath);
 
-            CreateSubfolder(temppath);
+			CreateSubfolder(temppath);
 
-            if (ret == UNZ_OK)
-            {
-                FILE *pfile = fopen(writepath, "wb");
+			if (ret == UNZ_OK)
+			{
+				FILE *pfile = fopen(writepath, "wb");
 
-                do
-                {
-                    ShowProgress(tr( "Extracting files..." ), 0, pointer + 1, done, uncompressed_size, true);
+				do
+				{
+					ShowProgress(tr( "Extracting files..." ), 0, pointer + 1, done, uncompressed_size, true);
 
-                    if (uncompressed_size - done < blocksize) blocksize = uncompressed_size - done;
+					if (uncompressed_size - done < blocksize) blocksize = uncompressed_size - done;
 
-                    ret = unzReadCurrentFile(File, buffer, blocksize);
+					ret = unzReadCurrentFile(File, buffer, blocksize);
 
-                    if (ret == 0) break;
+					if (ret == 0) break;
 
-                    fwrite(buffer, 1, blocksize, pfile);
+					fwrite(buffer, 1, blocksize, pfile);
 
-                    done += ret;
+					done += ret;
 
-                } while (done < uncompressed_size);
+				} while (done < uncompressed_size);
 
-                fclose(pfile);
-                unzCloseCurrentFile(File);
-            }
-        }
-        if (unzGoToNextFile(File) != UNZ_OK) Stop = true;
-    }
+				fclose(pfile);
+				unzCloseCurrentFile(File);
+			}
+		}
+		if (unzGoToNextFile(File) != UNZ_OK) Stop = true;
+	}
 
-    delete[] buffer;
-    buffer = NULL;
+	delete[] buffer;
+	buffer = NULL;
 
-    ProgressStop();
+	ProgressStop();
 
-    return true;
+	return true;
 }

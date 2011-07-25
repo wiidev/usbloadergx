@@ -65,8 +65,8 @@ static bool ExitRequested = false;
  ***************************************************************************/
 void ResumeGui()
 {
-    guiHalt = false;
-    LWP_ResumeThread(guithread);
+	guiHalt = false;
+	LWP_ResumeThread(guithread);
 }
 
 /****************************************************************************
@@ -79,12 +79,12 @@ void ResumeGui()
  ***************************************************************************/
 void HaltGui()
 {
-    if (guiHalt) return;
-    guiHalt = true;
+	if (guiHalt) return;
+	guiHalt = true;
 
-    // wait for thread to finish
-    while (!LWP_ThreadIsSuspended(guithread))
-        usleep(100);
+	// wait for thread to finish
+	while (!LWP_ThreadIsSuspended(guithread))
+		usleep(100);
 }
 
 /****************************************************************************
@@ -94,52 +94,52 @@ void HaltGui()
  ***************************************************************************/
 static void * UpdateGUI(void *arg)
 {
-    int i;
+	int i;
 
-    while (!ExitRequested)
-    {
-        if (guiHalt)
-        {
-            LWP_SuspendThread(guithread);
-            continue;
-        }
+	while (!ExitRequested)
+	{
+		if (guiHalt)
+		{
+			LWP_SuspendThread(guithread);
+			continue;
+		}
 
-        mainWindow->Draw();
-        if (Settings.tooltips && Theme::ShowTooltips && mainWindow->GetState() != STATE_DISABLED) mainWindow->DrawTooltip();
+		mainWindow->Draw();
+		if (Settings.tooltips && Theme::ShowTooltips && mainWindow->GetState() != STATE_DISABLED) mainWindow->DrawTooltip();
 
-        for (i = 3; i >= 0; i--)
-        {
-            if (userInput[i].wpad.ir.valid)
-            {
-                Menu_DrawImg(userInput[i].wpad.ir.x - pointer[i]->GetWidth()/2,
-                             userInput[i].wpad.ir.y - pointer[i]->GetHeight()/2,
-                             9900.0f, pointer[i]->GetWidth(), pointer[i]->GetHeight(),
-                             pointer[i]->GetImage(), userInput[i].wpad.ir.angle,
-                             Settings.widescreen ? Settings.WSFactor : 1.f, 1.f, 255, 0, 0, 0, 0, 0, 0, 0, 0);
-            }
-        }
+		for (i = 3; i >= 0; i--)
+		{
+			if (userInput[i].wpad.ir.valid)
+			{
+				Menu_DrawImg(userInput[i].wpad.ir.x - pointer[i]->GetWidth()/2,
+							 userInput[i].wpad.ir.y - pointer[i]->GetHeight()/2,
+							 9900.0f, pointer[i]->GetWidth(), pointer[i]->GetHeight(),
+							 pointer[i]->GetImage(), userInput[i].wpad.ir.angle,
+							 Settings.widescreen ? Settings.WSFactor : 1.f, 1.f, 255, 0, 0, 0, 0, 0, 0, 0, 0);
+			}
+		}
 
-        Menu_Render();
+		Menu_Render();
 
-        UpdatePads();
+		UpdatePads();
 
-        for (i = 0; i < 4; i++)
-            mainWindow->Update(&userInput[i]);
+		for (i = 0; i < 4; i++)
+			mainWindow->Update(&userInput[i]);
 
-        if (bgMusic) bgMusic->UpdateState();
+		if (bgMusic) bgMusic->UpdateState();
 	}
 
-    for (i = 5; i < 255; i += 10)
-    {
-        mainWindow->Draw();
-        Menu_DrawRectangle(0, 0, screenwidth, screenheight, (GXColor) {0, 0, 0, i}, 1);
-        Menu_Render();
-    }
+	for (i = 5; i < 255; i += 10)
+	{
+		mainWindow->Draw();
+		Menu_DrawRectangle(0, 0, screenwidth, screenheight, (GXColor) {0, 0, 0, i}, 1);
+		Menu_Render();
+	}
 
-    mainWindow->RemoveAll();
-    ShutoffRumble();
+	mainWindow->RemoveAll();
+	ShutoffRumble();
 
-    return NULL;
+	return NULL;
 }
 
 /****************************************************************************
@@ -149,22 +149,22 @@ static void * UpdateGUI(void *arg)
  ***************************************************************************/
 void InitGUIThreads()
 {
-    ExitRequested = false;
+	ExitRequested = false;
 
-    if(guithread == LWP_THREAD_NULL)
-        LWP_CreateThread(&guithread, UpdateGUI, NULL, NULL, 65536, LWP_PRIO_HIGHEST);
+	if(guithread == LWP_THREAD_NULL)
+		LWP_CreateThread(&guithread, UpdateGUI, NULL, NULL, 65536, LWP_PRIO_HIGHEST);
 }
 
 void ExitGUIThreads()
 {
-    ExitRequested = true;
+	ExitRequested = true;
 
-    if(guithread != LWP_THREAD_NULL)
-    {
-        ResumeGui();
-        LWP_JoinThread(guithread, NULL);
-        guithread = LWP_THREAD_NULL;
-    }
+	if(guithread != LWP_THREAD_NULL)
+	{
+		ResumeGui();
+		LWP_JoinThread(guithread, NULL);
+		guithread = LWP_THREAD_NULL;
+	}
 }
 
 /****************************************************************************
@@ -172,71 +172,71 @@ void ExitGUIThreads()
  ***************************************************************************/
 int MainMenu(int menu)
 {
-    currentMenu = menu;
+	currentMenu = menu;
 
-    InitGUIThreads();
+	InitGUIThreads();
 
-    InitProgressThread();
-    InitNetworkThread();
+	InitProgressThread();
+	InitNetworkThread();
 
-    if (Settings.autonetwork)
-        ResumeNetworkThread();
+	if (Settings.autonetwork)
+		ResumeNetworkThread();
 
-    btnSoundClick = new GuiSound(Resources::GetFile("button_click.wav"), Resources::GetFileSize("button_click.wav"), Settings.sfxvolume);
-    btnSoundClick2 = new GuiSound(Resources::GetFile("button_click2.wav"), Resources::GetFileSize("button_click2.wav"), Settings.sfxvolume);
-    btnSoundOver = new GuiSound(Resources::GetFile("button_over.wav"), Resources::GetFileSize("button_over.wav"), Settings.sfxvolume);
+	btnSoundClick = new GuiSound(Resources::GetFile("button_click.wav"), Resources::GetFileSize("button_click.wav"), Settings.sfxvolume);
+	btnSoundClick2 = new GuiSound(Resources::GetFile("button_click2.wav"), Resources::GetFileSize("button_click2.wav"), Settings.sfxvolume);
+	btnSoundOver = new GuiSound(Resources::GetFile("button_over.wav"), Resources::GetFileSize("button_over.wav"), Settings.sfxvolume);
 
-    pointer[0] = Resources::GetImageData("player1_point.png");
-    pointer[1] = Resources::GetImageData("player2_point.png");
-    pointer[2] = Resources::GetImageData("player3_point.png");
-    pointer[3] = Resources::GetImageData("player4_point.png");
+	pointer[0] = Resources::GetImageData("player1_point.png");
+	pointer[1] = Resources::GetImageData("player2_point.png");
+	pointer[2] = Resources::GetImageData("player3_point.png");
+	pointer[3] = Resources::GetImageData("player4_point.png");
 
-    mainWindow = new GuiWindow(screenwidth, screenheight);
+	mainWindow = new GuiWindow(screenwidth, screenheight);
 
-    background = Resources::GetImageData(Settings.widescreen ? "wbackground.png" : "background.png");
+	background = Resources::GetImageData(Settings.widescreen ? "wbackground.png" : "background.png");
 
-    bgImg = new GuiImage(background);
-    mainWindow->Append(bgImg);
+	bgImg = new GuiImage(background);
+	mainWindow->Append(bgImg);
 
-    ResumeGui();
+	ResumeGui();
 
-    bgMusic = new GuiBGM(Resources::GetFile("bg_music.ogg"), Resources::GetFileSize("bg_music.ogg"), Settings.volume);
-    bgMusic->SetLoop(Settings.musicloopmode); //loop music
-    bgMusic->Load(Settings.ogg_path);
-    bgMusic->Play();
+	bgMusic = new GuiBGM(Resources::GetFile("bg_music.ogg"), Resources::GetFileSize("bg_music.ogg"), Settings.volume);
+	bgMusic->SetLoop(Settings.musicloopmode); //loop music
+	bgMusic->Load(Settings.ogg_path);
+	bgMusic->Play();
 
-    MountGamePartition();
+	MountGamePartition();
 
-    while (currentMenu != MENU_EXIT)
-    {
-        bgMusic->SetVolume(Settings.volume);
+	while (currentMenu != MENU_EXIT)
+	{
+		bgMusic->SetVolume(Settings.volume);
 
-        switch (currentMenu)
-        {
-            case MENU_INSTALL:
-                currentMenu = MenuInstall();
-                break;
-            case MENU_SETTINGS:
-                currentMenu = GlobalSettings::Show();
-                break;
-            case MENU_THEMEMENU:
-                currentMenu = ThemeMenu::Run();
-                break;
-            case MENU_THEMEDOWNLOADER:
-                currentMenu = ThemeDownloader::Run();
-                break;
-            case MENU_HOMEBREWBROWSE:
-                currentMenu = HomebrewBrowser::Execute();
-                break;
-            case MENU_DISCLIST:
-            default: // unrecognized menu
-                currentMenu = GameBrowseMenu::Execute();
-                break;
-        }
-    }
+		switch (currentMenu)
+		{
+			case MENU_INSTALL:
+				currentMenu = MenuInstall();
+				break;
+			case MENU_SETTINGS:
+				currentMenu = GlobalSettings::Show();
+				break;
+			case MENU_THEMEMENU:
+				currentMenu = ThemeMenu::Run();
+				break;
+			case MENU_THEMEDOWNLOADER:
+				currentMenu = ThemeDownloader::Run();
+				break;
+			case MENU_HOMEBREWBROWSE:
+				currentMenu = HomebrewBrowser::Execute();
+				break;
+			case MENU_DISCLIST:
+			default: // unrecognized menu
+				currentMenu = GameBrowseMenu::Execute();
+				break;
+		}
+	}
 
-    //! THIS SHOULD NEVER HAPPEN ANYMORE
-    ExitApp();
+	//! THIS SHOULD NEVER HAPPEN ANYMORE
+	ExitApp();
 
-    return -1;
+	return -1;
 }

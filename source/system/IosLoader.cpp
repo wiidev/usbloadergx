@@ -32,7 +32,7 @@ static iosinfo_t *currentIOSInfo = NULL;
  */
 bool IosLoader::IsHermesIOS(s32 ios)
 {
-    return (ios == 222 || ios == 223 || ios == 224 || ios == 225 || ios == 202);
+	return (ios == 222 || ios == 223 || ios == 224 || ios == 225 || ios == 202);
 }
 
 /*
@@ -40,10 +40,10 @@ bool IosLoader::IsHermesIOS(s32 ios)
  */
 bool IosLoader::IsWaninkokoIOS(s32 ios)
 {
-    if(ios < 200 || ios > 255)
-        return false;
+	if(ios < 200 || ios > 255)
+		return false;
 
-    return !IsHermesIOS(ios);
+	return !IsHermesIOS(ios);
 }
 
 /*
@@ -51,13 +51,13 @@ bool IosLoader::IsWaninkokoIOS(s32 ios)
  */
 bool IosLoader::IsD2X(s32 ios)
 {
-    iosinfo_t *info = GetIOSInfo(ios);
-    if(!info)
-        return false;
+	iosinfo_t *info = GetIOSInfo(ios);
+	if(!info)
+		return false;
 
-    bool res = (strncasecmp(info->name, "d2x", 3) == 0);
+	bool res = (strncasecmp(info->name, "d2x", 3) == 0);
 
-    return res;
+	return res;
 }
 
 /*
@@ -66,35 +66,35 @@ bool IosLoader::IsD2X(s32 ios)
  */
 s32 IosLoader::LoadAppCios()
 {
-    u32 activeCios = IOS_GetVersion();
-    s32 ret = -1;
+	u32 activeCios = IOS_GetVersion();
+	s32 ret = -1;
 
-    // We have what we need
-    if((int) activeCios == Settings.cios)
-        return 0;
+	// We have what we need
+	if((int) activeCios == Settings.cios)
+		return 0;
 
-    u32 ciosLoadPriority[] = { Settings.cios, 222, 249, 250, 245, 246, 247, 248 }; // Ascending.
+	u32 ciosLoadPriority[] = { Settings.cios, 222, 249, 250, 245, 246, 247, 248 }; // Ascending.
 
 
-    for (u32 i = 0; i < (sizeof(ciosLoadPriority)/sizeof(ciosLoadPriority[0])); ++i)
-    {
-        u32 cios = ciosLoadPriority[i];
+	for (u32 i = 0; i < (sizeof(ciosLoadPriority)/sizeof(ciosLoadPriority[0])); ++i)
+	{
+		u32 cios = ciosLoadPriority[i];
 
-        if (activeCios == cios)
-        {
-            ret = 0;
-            break;
-        }
+		if (activeCios == cios)
+		{
+			ret = 0;
+			break;
+		}
 
-        if ((ret = ReloadIosSafe(cios)) > -1)
-        {
-            // Remember working cios.
-            Settings.cios = cios;
-            break;
-        }
-    }
+		if ((ret = ReloadIosSafe(cios)) > -1)
+		{
+			// Remember working cios.
+			Settings.cios = cios;
+			break;
+		}
+	}
 
-    return ret;
+	return ret;
 }
 
 
@@ -104,24 +104,24 @@ s32 IosLoader::LoadAppCios()
  */
 s32 IosLoader::LoadGameCios(s32 ios)
 {
-    if(ios == IOS_GetVersion())
-        return 0;
+	if(ios == IOS_GetVersion())
+		return 0;
 
-    s32 ret = -1;
+	s32 ret = -1;
 
-    // Unmount fat before reloading IOS.
-    WBFS_CloseAll();
-    WDVD_Close();
-    DeviceHandler::DestroyInstance();
-    USBStorage2_Deinit();
+	// Unmount fat before reloading IOS.
+	WBFS_CloseAll();
+	WDVD_Close();
+	DeviceHandler::DestroyInstance();
+	USBStorage2_Deinit();
 
-    ret = ReloadIosSafe(ios);
+	ret = ReloadIosSafe(ios);
 
-    // Remount devices after reloading IOS.
-    DeviceHandler::Instance()->MountAll();
-    Disc_Init();
+	// Remount devices after reloading IOS.
+	DeviceHandler::Instance()->MountAll();
+	Disc_Init();
 
-    return ret;
+	return ret;
 }
 
 /*
@@ -130,29 +130,29 @@ s32 IosLoader::LoadGameCios(s32 ios)
  */
 s32 IosLoader::ReloadIosSafe(s32 ios)
 {
-    if(IsHermesIOS(ios))
-    {
-        s32 iosRev = NandTitles.VersionOf(TITLE_ID(1, ios));
-        if((iosRev < 4 || iosRev > 6) && iosRev != 65535)
-            return -11;
-    }
-    else if(IsWaninkokoIOS(ios))
-    {
-        s32 iosRev = NandTitles.VersionOf(TITLE_ID(1, ios));
-        if((iosRev < 9 || iosRev > 30000) && iosRev != 65535)  //let's see if Waninkoko actually gets to 30
-            return -22;
-    }
-    else
-    {
-        return -33;
-    }
+	if(IsHermesIOS(ios))
+	{
+		s32 iosRev = NandTitles.VersionOf(TITLE_ID(1, ios));
+		if((iosRev < 4 || iosRev > 6) && iosRev != 65535)
+			return -11;
+	}
+	else if(IsWaninkokoIOS(ios))
+	{
+		s32 iosRev = NandTitles.VersionOf(TITLE_ID(1, ios));
+		if((iosRev < 9 || iosRev > 30000) && iosRev != 65535)  //let's see if Waninkoko actually gets to 30
+			return -22;
+	}
+	else
+	{
+		return -33;
+	}
 
-    s32 r = IOS_ReloadIOS(ios);
-    if (r >= 0) WII_Initialize();
+	s32 r = IOS_ReloadIOS(ios);
+	if (r >= 0) WII_Initialize();
 
-    IosLoader::LoadIOSModules(IOS_GetVersion(), IOS_GetRevision());
+	IosLoader::LoadIOSModules(IOS_GetVersion(), IOS_GetRevision());
 
-    return r;
+	return r;
 }
 
 /******************************************************************************
@@ -160,36 +160,36 @@ s32 IosLoader::ReloadIosSafe(s32 ios)
  ******************************************************************************/
 void IosLoader::LoadIOSModules(s32 ios, s32 ios_rev)
 {
-    //! Hermes IOS
-    if(IsHermesIOS(ios))
-    {
-        const u8 * ech_module = NULL;
-        int ehc_module_size = 0;
-        const u8 * dip_plugin = NULL;
-        int dip_plugin_size = 0;
+	//! Hermes IOS
+	if(IsHermesIOS(ios))
+	{
+		const u8 * ech_module = NULL;
+		int ehc_module_size = 0;
+		const u8 * dip_plugin = NULL;
+		int dip_plugin_size = 0;
 
-        ech_module = ehcmodule_5;
-        ehc_module_size = size_ehcmodule_5;
-        dip_plugin = odip_frag;
-        dip_plugin_size = odip_frag_size;
-        gprintf("Loading ehc v5 and opendip module\n");
+		ech_module = ehcmodule_5;
+		ehc_module_size = size_ehcmodule_5;
+		dip_plugin = odip_frag;
+		dip_plugin_size = odip_frag_size;
+		gprintf("Loading ehc v5 and opendip module\n");
 
-        load_modules(ech_module, ehc_module_size, dip_plugin, dip_plugin_size);
-    }
-    //! Waninkoko IOS
-    else if(IsWaninkokoIOS(ios))
-    {
-        iosinfo_t *info = GetIOSInfo(ios);
-        if(ios_rev >= 18 && (!info || info->version < 6))
-        {
-            if(mload_init() < 0)
-                return;
+		load_modules(ech_module, ehc_module_size, dip_plugin, dip_plugin_size);
+	}
+	//! Waninkoko IOS
+	else if(IsWaninkokoIOS(ios))
+	{
+		iosinfo_t *info = GetIOSInfo(ios);
+		if(ios_rev >= 18 && (!info || info->version < 6))
+		{
+			if(mload_init() < 0)
+				return;
 
-            gprintf("Loading dip module for Waninkoko's cios\n");
-            mload_module((u8 *) dip_plugin_249, dip_plugin_249_size);
-            mload_close();
-        }
-    }
+			gprintf("Loading dip module for Waninkoko's cios\n");
+			mload_module((u8 *) dip_plugin_249, dip_plugin_249_size);
+			mload_close();
+		}
+	}
 }
 
 /*
@@ -198,16 +198,16 @@ void IosLoader::LoadIOSModules(s32 ios, s32 ios_rev)
  */
 iosinfo_t *IosLoader::GetIOSInfo(s32 ios)
 {
-    if(currentIOS == ios && currentIOSInfo)
-        return currentIOSInfo;
+	if(currentIOS == ios && currentIOSInfo)
+		return currentIOSInfo;
 
-    if(currentIOSInfo)
-    {
-        free(currentIOSInfo);
-        currentIOSInfo = NULL;
-    }
+	if(currentIOSInfo)
+	{
+		free(currentIOSInfo);
+		currentIOSInfo = NULL;
+	}
 
-    currentIOS = ios;
+	currentIOS = ios;
 	char filepath[ISFS_MAXPATH] ATTRIBUTE_ALIGN(0x20);
 	u64 TicketID = ((((u64) 1) << 32) | ios);
 	u32 TMD_Length;
@@ -229,29 +229,29 @@ iosinfo_t *IosLoader::GetIOSInfo(s32 ios)
 
 	sprintf(filepath, "/title/%08x/%08x/content/%08x.app", 0x00000001, ios, *(u8 *)((u32)TMD+0x1E7));
 
-    free(TMD);
+	free(TMD);
 
-    u8 *buffer = NULL;
-    u32 filesize = 0;
+	u8 *buffer = NULL;
+	u32 filesize = 0;
 
-    NandTitle::LoadFileFromNand(filepath, &buffer, &filesize);
+	NandTitle::LoadFileFromNand(filepath, &buffer, &filesize);
 
-    if(!buffer)
+	if(!buffer)
 		return NULL;
 
-    iosinfo_t *iosinfo = (iosinfo_t *) buffer;
+	iosinfo_t *iosinfo = (iosinfo_t *) buffer;
 
-    if(iosinfo->magicword != 0x1ee7c105 || iosinfo->magicversion != 1)
-    {
-        free(buffer);
-        return NULL;
-    }
+	if(iosinfo->magicword != 0x1ee7c105 || iosinfo->magicversion != 1)
+	{
+		free(buffer);
+		return NULL;
+	}
 
-    iosinfo = (iosinfo_t *) realloc(buffer, sizeof(iosinfo_t));
-    if(!iosinfo)
-        iosinfo = (iosinfo_t *) buffer;
+	iosinfo = (iosinfo_t *) realloc(buffer, sizeof(iosinfo_t));
+	if(!iosinfo)
+		iosinfo = (iosinfo_t *) buffer;
 
-    currentIOSInfo = iosinfo;
+	currentIOSInfo = iosinfo;
 
-    return iosinfo;
+	return iosinfo;
 }

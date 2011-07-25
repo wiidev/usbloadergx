@@ -37,145 +37,145 @@
 
 HTML_Stream::HTML_Stream()
 {
-    HTML_File = NULL;
-    position = 0;
-    filesize = 0;
+	HTML_File = NULL;
+	position = 0;
+	filesize = 0;
 }
 
 HTML_Stream::HTML_Stream(const char * url)
 {
-    HTML_File = NULL;
-    position = 0;
-    filesize = 0;
+	HTML_File = NULL;
+	position = 0;
+	filesize = 0;
 
-    LoadLink(url);
+	LoadLink(url);
 }
 
 HTML_Stream::~HTML_Stream()
 {
-    if (HTML_File) free(HTML_File);
+	if (HTML_File) free(HTML_File);
 }
 
 bool HTML_Stream::LoadLink(const char * url)
 {
-    if (!IsNetworkInit()) return false;
+	if (!IsNetworkInit()) return false;
 
-    struct block file = downloadfile(url);
+	struct block file = downloadfile(url);
 
-    if (!file.data || !file.size) return false;
+	if (!file.data || !file.size) return false;
 
-    if (HTML_File) free(HTML_File);
+	if (HTML_File) free(HTML_File);
 
-    HTML_File = (char *) file.data;
-    filesize = file.size;
-    position = 0;
+	HTML_File = (char *) file.data;
+	filesize = file.size;
+	position = 0;
 
-    return true;
+	return true;
 }
 
 const char * HTML_Stream::FindStringStart(const char * string)
 {
-    if (!HTML_File) return NULL;
+	if (!HTML_File) return NULL;
 
-    while ((u32) position < filesize)
-    {
-        if (htmlstringcompare( HTML_File, string, position ) == 0) break;
+	while ((u32) position < filesize)
+	{
+		if (htmlstringcompare( HTML_File, string, position ) == 0) break;
 
-        position++;
-    }
+		position++;
+	}
 
-    return &HTML_File[position];
+	return &HTML_File[position];
 }
 
 const char * HTML_Stream::FindStringEnd(const char * string)
 {
-    if (!HTML_File) return NULL;
+	if (!HTML_File) return NULL;
 
-    while ((u32) position < filesize)
-    {
-        if (htmlstringcompare( HTML_File, string, position ) == 0) break;
+	while ((u32) position < filesize)
+	{
+		if (htmlstringcompare( HTML_File, string, position ) == 0) break;
 
-        position++;
-    }
+		position++;
+	}
 
-    if ((u32) position >= filesize)
-    {
-        return NULL;
-    }
+	if ((u32) position >= filesize)
+	{
+		return NULL;
+	}
 
-    position += strlen(string);
+	position += strlen(string);
 
-    return &HTML_File[position];
+	return &HTML_File[position];
 }
 
 char * HTML_Stream::CopyString(const char * stopat)
 {
-    if (!stopat || !HTML_File) return NULL;
+	if (!stopat || !HTML_File) return NULL;
 
-    u32 blocksize = 1024;
-    u32 counter = 0;
+	u32 blocksize = 1024;
+	u32 counter = 0;
 
-    char * outtext = (char*) malloc(blocksize);
-    if (!outtext) return NULL;
+	char * outtext = (char*) malloc(blocksize);
+	if (!outtext) return NULL;
 
-    memset(outtext, 0, blocksize);
+	memset(outtext, 0, blocksize);
 
-    while ((htmlstringcompare( HTML_File, stopat, position ) != 0) && (position + strlen(stopat) < filesize))
-    {
-        if (counter > blocksize)
-        {
-            blocksize += 1024;
-            char * tmpblock = (char*) realloc(outtext, blocksize);
-            if (!tmpblock)
-            {
-                free(outtext);
-                outtext = NULL;
-                free(tmpblock);
-                return NULL;
-            }
+	while ((htmlstringcompare( HTML_File, stopat, position ) != 0) && (position + strlen(stopat) < filesize))
+	{
+		if (counter > blocksize)
+		{
+			blocksize += 1024;
+			char * tmpblock = (char*) realloc(outtext, blocksize);
+			if (!tmpblock)
+			{
+				free(outtext);
+				outtext = NULL;
+				free(tmpblock);
+				return NULL;
+			}
 
-            outtext = tmpblock;
-        }
+			outtext = tmpblock;
+		}
 
-        outtext[counter] = HTML_File[position];
-        position++;
-        counter++;
-    }
+		outtext[counter] = HTML_File[position];
+		position++;
+		counter++;
+	}
 
-    outtext[counter] = '\0';
-    outtext = (char*) realloc(outtext, counter + 1);
+	outtext[counter] = '\0';
+	outtext = (char*) realloc(outtext, counter + 1);
 
-    return outtext;
+	return outtext;
 }
 
 int HTML_Stream::Seek(u32 pos, int origin)
 {
-    if (!HTML_File) return -1;
+	if (!HTML_File) return -1;
 
-    switch (origin)
-    {
-        case SEEK_SET:
-            position = pos;
-            break;
-        case SEEK_CUR:
-            position += pos;
-            break;
-        case SEEK_END:
-            position = filesize + pos;
-            break;
-    }
+	switch (origin)
+	{
+		case SEEK_SET:
+			position = pos;
+			break;
+		case SEEK_CUR:
+			position += pos;
+			break;
+		case SEEK_END:
+			position = filesize + pos;
+			break;
+	}
 
-    return 0;
+	return 0;
 }
 
 void HTML_Stream::Rewind()
 {
-    if (!HTML_File) return;
+	if (!HTML_File) return;
 
-    position = 0;
+	position = 0;
 }
 
 int HTML_Stream::GetPosition()
 {
-    return position;
+	return position;
 }

@@ -7,22 +7,22 @@
 #define debug_printf(fmt, ...);
 
 #include <stdio.h>
-#define wbfs_fatal(x)       do { printf("\nwbfs panic: %s\n\n",x); return; } while(0)
-#define wbfs_error(x)       do { printf("\nwbfs error: %s\n\n",x); } while(0)
+#define wbfs_fatal(x)	   do { printf("\nwbfs panic: %s\n\n",x); return; } while(0)
+#define wbfs_error(x)	   do { printf("\nwbfs error: %s\n\n",x); } while(0)
 
 #include <stdlib.h>
 #include <malloc.h>
 
-#define wbfs_malloc(x)      MEM2_alloc(x)
-#define wbfs_free(x)        free(x)
-#define wbfs_ioalloc(x)     MEM2_alloc(((x) + 31) & ~31)
-#define wbfs_iofree(x)      free(x)
-#define wbfs_be16(x)        (*((u16*)(x)))
-#define wbfs_be32(x)        (*((u32*)(x)))
-#define wbfs_ntohl(x)       (x)
-#define wbfs_htonl(x)       (x)
-#define wbfs_ntohs(x)       (x)
-#define wbfs_htons(x)       (x)
+#define wbfs_malloc(x)	  MEM2_alloc(x)
+#define wbfs_free(x)		free(x)
+#define wbfs_ioalloc(x)	 MEM2_alloc(((x) + 31) & ~31)
+#define wbfs_iofree(x)	  free(x)
+#define wbfs_be16(x)		(*((u16*)(x)))
+#define wbfs_be32(x)		(*((u32*)(x)))
+#define wbfs_ntohl(x)	   (x)
+#define wbfs_htonl(x)	   (x)
+#define wbfs_ntohs(x)	   (x)
+#define wbfs_htons(x)	   (x)
 
 #include <string.h>
 

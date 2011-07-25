@@ -28,13 +28,13 @@
 
 class GuiSettingsMenu : public SettingsMenu
 {
-    public:
-        GuiSettingsMenu();
-    protected:
-        void SetOptionValues();
-        int GetMenuInternal();
+	public:
+		GuiSettingsMenu();
+	protected:
+		void SetOptionValues();
+		int GetMenuInternal();
 
-        OptionList GuiOptions;
+		OptionList GuiOptions;
 };
 
 

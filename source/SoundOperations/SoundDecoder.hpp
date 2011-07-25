@@ -45,45 +45,45 @@ enum
 
 class SoundDecoder
 {
-    public:
-        SoundDecoder();
-        SoundDecoder(const char * filepath);
-        SoundDecoder(const u8 * buffer, int size);
-        virtual ~SoundDecoder();
-        virtual int Read(u8 * buffer, int buffer_size, int pos);
-        virtual int Tell() { return CurPos; };
-        virtual int Seek(int pos) { CurPos = pos; return file_fd->seek(CurPos, SEEK_SET); };
-        virtual int Rewind();
-        virtual int GetFormat() { return VOICE_STEREO_16BIT; };
-        virtual int GetSampleRate() { return 48000; };
-        virtual void Decode();
-        virtual u32 GetBufferSize() { return SoundBuffer.GetBufferSize(); };
-        virtual u8 * GetBuffer() { return SoundBuffer.GetBuffer(); };
-        virtual u8 * GetNextBuffer() { return SoundBuffer.GetNextBuffer(); };
-        virtual u8 * GetLastBuffer() { return SoundBuffer.GetLastBuffer(); };
-        virtual void LoadNext() { SoundBuffer.LoadNext(); };
-        virtual bool IsBufferReady() { return SoundBuffer.IsBufferReady(); };
-        virtual bool IsNextBufferReady() { return SoundBuffer.IsNextBufferReady(); };
-        virtual bool IsLastBufferReady() { return SoundBuffer.IsLastBufferReady(); };
-        virtual bool IsEOF() { return EndOfFile; };
-        virtual void SetLoop(bool l) { Loop = l; };
-        virtual u8 GetSoundType() { return SoundType; };
-        virtual void ClearBuffer() { SoundBuffer.ClearBuffer(); };
-        virtual bool IsStereo() { return (GetFormat() == VOICE_STEREO_16BIT || GetFormat() == VOICE_STEREO_8BIT); };
-        virtual bool Is16Bit() { return (GetFormat() == VOICE_STEREO_16BIT || GetFormat() == VOICE_MONO_16BIT); };
-    protected:
-        void Init();
+	public:
+		SoundDecoder();
+		SoundDecoder(const char * filepath);
+		SoundDecoder(const u8 * buffer, int size);
+		virtual ~SoundDecoder();
+		virtual int Read(u8 * buffer, int buffer_size, int pos);
+		virtual int Tell() { return CurPos; };
+		virtual int Seek(int pos) { CurPos = pos; return file_fd->seek(CurPos, SEEK_SET); };
+		virtual int Rewind();
+		virtual int GetFormat() { return VOICE_STEREO_16BIT; };
+		virtual int GetSampleRate() { return 48000; };
+		virtual void Decode();
+		virtual u32 GetBufferSize() { return SoundBuffer.GetBufferSize(); };
+		virtual u8 * GetBuffer() { return SoundBuffer.GetBuffer(); };
+		virtual u8 * GetNextBuffer() { return SoundBuffer.GetNextBuffer(); };
+		virtual u8 * GetLastBuffer() { return SoundBuffer.GetLastBuffer(); };
+		virtual void LoadNext() { SoundBuffer.LoadNext(); };
+		virtual bool IsBufferReady() { return SoundBuffer.IsBufferReady(); };
+		virtual bool IsNextBufferReady() { return SoundBuffer.IsNextBufferReady(); };
+		virtual bool IsLastBufferReady() { return SoundBuffer.IsLastBufferReady(); };
+		virtual bool IsEOF() { return EndOfFile; };
+		virtual void SetLoop(bool l) { Loop = l; };
+		virtual u8 GetSoundType() { return SoundType; };
+		virtual void ClearBuffer() { SoundBuffer.ClearBuffer(); };
+		virtual bool IsStereo() { return (GetFormat() == VOICE_STEREO_16BIT || GetFormat() == VOICE_STEREO_8BIT); };
+		virtual bool Is16Bit() { return (GetFormat() == VOICE_STEREO_16BIT || GetFormat() == VOICE_MONO_16BIT); };
+	protected:
+		void Init();
 
-        CFile * file_fd;
-        BufferCircle SoundBuffer;
-        u8 SoundType;
-        u16 SoundBlocks;
-        int SoundBlockSize;
-        int CurPos;
-        bool Loop;
-        bool EndOfFile;
-        bool Decoding;
-        bool ExitRequested;
+		CFile * file_fd;
+		BufferCircle SoundBuffer;
+		u8 SoundType;
+		u16 SoundBlocks;
+		int SoundBlockSize;
+		int CurPos;
+		bool Loop;
+		bool EndOfFile;
+		bool Decoding;
+		bool ExitRequested;
 };
 
 #endif

@@ -33,35 +33,35 @@
 
 void CreateTitleTMD(const char *path, const struct discHdr *hdr)
 {
-    wbfs_disc_t *disc = WBFS_OpenDisc((u8 *) hdr->id);
-    if (!disc)
-        return;
+	wbfs_disc_t *disc = WBFS_OpenDisc((u8 *) hdr->id);
+	if (!disc)
+		return;
 
-    wiidisc_t *wdisc = wd_open_disc((int(*)(void *, u32, u32, void *)) wbfs_disc_read, disc);
-    if (!wdisc)
-    {
-        WBFS_CloseDisc(disc);
-        return;
-    }
+	wiidisc_t *wdisc = wd_open_disc((int(*)(void *, u32, u32, void *)) wbfs_disc_read, disc);
+	if (!wdisc)
+	{
+		WBFS_CloseDisc(disc);
+		return;
+	}
 
-    u8 *titleTMD = wd_extract_file(wdisc, ONLY_GAME_PARTITION, (char *) "TMD");
+	u8 *titleTMD = wd_extract_file(wdisc, ONLY_GAME_PARTITION, (char *) "TMD");
 	int tmd_size = wdisc->extracted_size;
 
-    wd_close_disc(wdisc);
-    WBFS_CloseDisc(disc);
+	wd_close_disc(wdisc);
+	WBFS_CloseDisc(disc);
 
-    if(!titleTMD)
-    	return;
+	if(!titleTMD)
+		return;
 
-    FILE *f = fopen(path, "wb");
-    if(f)
-    {
-    	fwrite(titleTMD, 1, tmd_size, f);
-    	fclose(f);
+	FILE *f = fopen(path, "wb");
+	if(f)
+	{
+		fwrite(titleTMD, 1, tmd_size, f);
+		fclose(f);
 		gprintf("Written Game Title TDM to: %s\n", path);
-    }
+	}
 
-    free(titleTMD);
+	free(titleTMD);
 }
 
 void CreateSavePath(const struct discHdr *hdr)

@@ -51,64 +51,64 @@ typedef struct
 # define HUGE_VAL HUGE
 #endif
 
-# define UnsignedToFloat(u)         (((double)((long)(u - 2147483647L - 1))) + 2147483648.0)
+# define UnsignedToFloat(u)		 (((double)((long)(u - 2147483647L - 1))) + 2147483648.0)
 
 static double ConvertFromIeeeExtended(const unsigned char* bytes)
 {
-    double    f;
-    int    expon;
-    unsigned long hiMant, loMant;
+	double	f;
+	int	expon;
+	unsigned long hiMant, loMant;
 
-    expon = ((bytes[0] & 0x7F) << 8) | (bytes[1] & 0xFF);
-    hiMant    =    ((unsigned long)(bytes[2] & 0xFF) << 24)
-            |    ((unsigned long)(bytes[3] & 0xFF) << 16)
-            |    ((unsigned long)(bytes[4] & 0xFF) << 8)
-            |    ((unsigned long)(bytes[5] & 0xFF));
-    loMant    =    ((unsigned long)(bytes[6] & 0xFF) << 24)
-            |    ((unsigned long)(bytes[7] & 0xFF) << 16)
-            |    ((unsigned long)(bytes[8] & 0xFF) << 8)
-            |    ((unsigned long)(bytes[9] & 0xFF));
+	expon = ((bytes[0] & 0x7F) << 8) | (bytes[1] & 0xFF);
+	hiMant	=	((unsigned long)(bytes[2] & 0xFF) << 24)
+			|	((unsigned long)(bytes[3] & 0xFF) << 16)
+			|	((unsigned long)(bytes[4] & 0xFF) << 8)
+			|	((unsigned long)(bytes[5] & 0xFF));
+	loMant	=	((unsigned long)(bytes[6] & 0xFF) << 24)
+			|	((unsigned long)(bytes[7] & 0xFF) << 16)
+			|	((unsigned long)(bytes[8] & 0xFF) << 8)
+			|	((unsigned long)(bytes[9] & 0xFF));
 
-    if (expon == 0 && hiMant == 0 && loMant == 0) {
-        f = 0;
-    }
-    else {
-        if (expon == 0x7FFF) {
-            f = HUGE_VAL;
-        }
-        else {
-            expon -= 16383;
-            f  = ldexp(UnsignedToFloat(hiMant), expon-=31);
-            f += ldexp(UnsignedToFloat(loMant), expon-=32);
-        }
-    }
+	if (expon == 0 && hiMant == 0 && loMant == 0) {
+		f = 0;
+	}
+	else {
+		if (expon == 0x7FFF) {
+			f = HUGE_VAL;
+		}
+		else {
+			expon -= 16383;
+			f  = ldexp(UnsignedToFloat(hiMant), expon-=31);
+			f += ldexp(UnsignedToFloat(loMant), expon-=32);
+		}
+	}
 
-    if (bytes[0] & 0x80)
-        return -f;
-    else
-        return f;
+	if (bytes[0] & 0x80)
+		return -f;
+	else
+		return f;
 }
 
 AifDecoder::AifDecoder(const char * filepath)
-    : SoundDecoder(filepath)
+	: SoundDecoder(filepath)
 {
-    SoundType = SOUND_AIF;
+	SoundType = SOUND_AIF;
 
-    if(!file_fd)
-        return;
+	if(!file_fd)
+		return;
 
-    OpenFile();
+	OpenFile();
 }
 
 AifDecoder::AifDecoder(const u8 * snd, int len)
-    : SoundDecoder(snd, len)
+	: SoundDecoder(snd, len)
 {
-    SoundType = SOUND_AIF;
+	SoundType = SOUND_AIF;
 
-    if(!file_fd)
-        return;
+	if(!file_fd)
+		return;
 
-    OpenFile();
+	OpenFile();
 }
 
 AifDecoder::~AifDecoder()
@@ -117,8 +117,8 @@ AifDecoder::~AifDecoder()
 
 void AifDecoder::OpenFile()
 {
-    SWaveHdr Header;
-    file_fd->read((u8 *) &Header, sizeof(SWaveHdr));
+	SWaveHdr Header;
+	file_fd->read((u8 *) &Header, sizeof(SWaveHdr));
 
 	if (Header.magicRIFF != 'FORM')
 	{
@@ -134,20 +134,20 @@ void AifDecoder::OpenFile()
 	SWaveChunk WaveChunk;
 	do
 	{
-        int ret = file_fd->read((u8 *) &WaveChunk, sizeof(SWaveChunk));
-        if(ret <= 0)
-        {
-            CloseFile();
-            return;
-        }
+		int ret = file_fd->read((u8 *) &WaveChunk, sizeof(SWaveChunk));
+		if(ret <= 0)
+		{
+			CloseFile();
+			return;
+		}
 	}
 	while(WaveChunk.magicDATA != 'COMM');
 
-    DataOffset = file_fd->tell()+WaveChunk.size;
+	DataOffset = file_fd->tell()+WaveChunk.size;
 
-    SAIFFCommChunk CommHdr;
-    file_fd->seek(file_fd->tell()-sizeof(SWaveChunk), SEEK_SET);
-    file_fd->read((u8 *) &CommHdr, sizeof(SAIFFCommChunk));
+	SAIFFCommChunk CommHdr;
+	file_fd->seek(file_fd->tell()-sizeof(SWaveChunk), SEEK_SET);
+	file_fd->read((u8 *) &CommHdr, sizeof(SAIFFCommChunk));
 
 	if(CommHdr.fccCOMM != 'COMM')
 	{
@@ -155,12 +155,12 @@ void AifDecoder::OpenFile()
 		return;
 	}
 
-    file_fd->seek(DataOffset, SEEK_SET);
+	file_fd->seek(DataOffset, SEEK_SET);
 
-    SAIFFSSndChunk SSndChunk;
-    file_fd->read((u8 *) &SSndChunk, sizeof(SAIFFSSndChunk));
+	SAIFFSSndChunk SSndChunk;
+	file_fd->read((u8 *) &SSndChunk, sizeof(SAIFFSSndChunk));
 
-    if(SSndChunk.fccSSND != 'SSND')
+	if(SSndChunk.fccSSND != 'SSND')
 	{
 		CloseFile();
 		return;
@@ -169,7 +169,7 @@ void AifDecoder::OpenFile()
 	DataOffset += sizeof(SAIFFSSndChunk);
 	DataSize = SSndChunk.size-8;
 	SampleRate = (u32) ConvertFromIeeeExtended(CommHdr.freq);
-    Format = VOICE_STEREO_16BIT;
+	Format = VOICE_STEREO_16BIT;
 
 	if(CommHdr.channels == 1 && CommHdr.bps == 8)
 		Format = VOICE_MONO_8BIT;
@@ -180,35 +180,35 @@ void AifDecoder::OpenFile()
 	else if (CommHdr.channels == 2 && CommHdr.bps == 16)
 		Format = VOICE_STEREO_16BIT;
 
-    Decode();
+	Decode();
 }
 
 void AifDecoder::CloseFile()
 {
-    if(file_fd)
-        delete file_fd;
+	if(file_fd)
+		delete file_fd;
 
-    file_fd = NULL;
+	file_fd = NULL;
 }
 
 int AifDecoder::Read(u8 * buffer, int buffer_size, int pos)
 {
-    if(!file_fd)
-        return -1;
+	if(!file_fd)
+		return -1;
 
-    if(CurPos >= (int) DataSize)
-        return 0;
+	if(CurPos >= (int) DataSize)
+		return 0;
 
-    file_fd->seek(DataOffset+CurPos, SEEK_SET);
+	file_fd->seek(DataOffset+CurPos, SEEK_SET);
 
-    if(buffer_size > (int) DataSize-CurPos)
-        buffer_size = DataSize-CurPos;
+	if(buffer_size > (int) DataSize-CurPos)
+		buffer_size = DataSize-CurPos;
 
-    int read = file_fd->read(buffer, buffer_size);
-    if(read > 0)
-    {
-        CurPos += read;
-    }
+	int read = file_fd->read(buffer, buffer_size);
+	if(read > 0)
+	{
+		CurPos += read;
+	}
 
-    return read;
+	return read;
 }

@@ -28,104 +28,104 @@
 
 
 GuiCheckboxBrowser::GuiCheckboxBrowser(int w, int h, int s)
-    : scrollBar(h-10)
+	: scrollBar(h-10)
 {
-    width = w;
-    height = h;
-    backgroundImg = NULL;
-    selectedItem = 0;
-    pageIndex = 0;
-    pressedChan = -1;
-    maxSize = s;
-    scrollBar.SetParent(this);
-    scrollBar.SetAlignment(thAlign("right - checkbox browser scrollbar align hor"), thAlign("top - checkbox browser scrollbar align ver"));
-    scrollBar.SetPosition(thInt("0 - checkbox browser scrollbar pos x"), thInt("5 - checkbox browser scrollbar pos y"));
-    scrollBar.SetButtonScroll(WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B);
-    scrollBar.listChanged.connect(this, &GuiCheckboxBrowser::onListChange);
-    trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-    markImgData = Resources::GetImageData("checkBoxSelection.png");
-    markImg = new GuiImage(markImgData);
-    markImg->SetParent(this);
+	width = w;
+	height = h;
+	backgroundImg = NULL;
+	selectedItem = 0;
+	pageIndex = 0;
+	pressedChan = -1;
+	maxSize = s;
+	scrollBar.SetParent(this);
+	scrollBar.SetAlignment(thAlign("right - checkbox browser scrollbar align hor"), thAlign("top - checkbox browser scrollbar align ver"));
+	scrollBar.SetPosition(thInt("0 - checkbox browser scrollbar pos x"), thInt("5 - checkbox browser scrollbar pos y"));
+	scrollBar.SetButtonScroll(WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B);
+	scrollBar.listChanged.connect(this, &GuiCheckboxBrowser::onListChange);
+	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+	markImgData = Resources::GetImageData("checkBoxSelection.png");
+	markImg = new GuiImage(markImgData);
+	markImg->SetParent(this);
 }
 
 GuiCheckboxBrowser::~GuiCheckboxBrowser()
 {
-    Clear();
+	Clear();
 
-    delete markImg;
-    delete markImgData;
+	delete markImg;
+	delete markImgData;
 }
 
 void GuiCheckboxBrowser::SetImage(GuiImage *Img)
 {
-    LOCK(this);
-    backgroundImg = Img;
-    if(backgroundImg)
-        backgroundImg->SetParent(this);
+	LOCK(this);
+	backgroundImg = Img;
+	if(backgroundImg)
+		backgroundImg->SetParent(this);
 }
 
 void GuiCheckboxBrowser::Clear()
 {
-    LOCK(this);
-    checkBoxDrawn.clear();
-    textLineDrawn.clear();
+	LOCK(this);
+	checkBoxDrawn.clear();
+	textLineDrawn.clear();
 
-    for(u32 i = 0; i < checkBoxList.size(); ++i)
-    {
-        delete textLineList[i];
-        delete checkBoxList[i];
-    }
+	for(u32 i = 0; i < checkBoxList.size(); ++i)
+	{
+		delete textLineList[i];
+		delete checkBoxList[i];
+	}
 
-    textLineList.clear();
-    checkBoxList.clear();
+	textLineList.clear();
+	checkBoxList.clear();
 }
 
 bool GuiCheckboxBrowser::AddEntrie(const string &text, bool checked)
 {
-    LOCK(this);
-    int currentSize = checkBoxList.size();
-    textLineList.resize(currentSize+1);
-    checkBoxList.resize(currentSize+1);
+	LOCK(this);
+	int currentSize = checkBoxList.size();
+	textLineList.resize(currentSize+1);
+	checkBoxList.resize(currentSize+1);
 
-    checkBoxList[currentSize] = new GuiCheckbox(30, 30);
-    checkBoxList[currentSize]->SetParent(this);
-    checkBoxList[currentSize]->SetChecked(checked);
-    checkBoxList[currentSize]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
-    checkBoxList[currentSize]->SetTrigger(&trigA);
-    checkBoxList[currentSize]->SetClickSize(width-30-scrollBar.GetWidth(), 30);
-    checkBoxList[currentSize]->Clicked.connect(this, &GuiCheckboxBrowser::OnCheckboxClick);
+	checkBoxList[currentSize] = new GuiCheckbox(30, 30);
+	checkBoxList[currentSize]->SetParent(this);
+	checkBoxList[currentSize]->SetChecked(checked);
+	checkBoxList[currentSize]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
+	checkBoxList[currentSize]->SetTrigger(&trigA);
+	checkBoxList[currentSize]->SetClickSize(width-30-scrollBar.GetWidth(), 30);
+	checkBoxList[currentSize]->Clicked.connect(this, &GuiCheckboxBrowser::OnCheckboxClick);
 
-    textLineList[currentSize] = new GuiText(text.c_str(), 18, thColor("r=0 g=0 b=0 a=255 - checkbox browser text color"));
-    textLineList[currentSize]->SetParent(this);
-    textLineList[currentSize]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	textLineList[currentSize] = new GuiText(text.c_str(), 18, thColor("r=0 g=0 b=0 a=255 - checkbox browser text color"));
+	textLineList[currentSize]->SetParent(this);
+	textLineList[currentSize]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 
-    if(textLineDrawn.size() < (u32) maxSize)
-    {
-        textLineDrawn.push_back(textLineList[currentSize]);
-        checkBoxDrawn.push_back(checkBoxList[currentSize]);
-    }
+	if(textLineDrawn.size() < (u32) maxSize)
+	{
+		textLineDrawn.push_back(textLineList[currentSize]);
+		checkBoxDrawn.push_back(checkBoxList[currentSize]);
+	}
 
 	return true;
 }
 
 void GuiCheckboxBrowser::OnCheckboxClick(GuiButton *sender, int chan, const POINT &pointer)
 {
-    LOCK(this);
-    sender->ResetState();
+	LOCK(this);
+	sender->ResetState();
 
-    for(u32 i = 0; i < checkBoxDrawn.size(); ++i)
-    {
-        if(sender == checkBoxDrawn[i])
-        {
-            checkBoxClicked(checkBoxDrawn[i], pageIndex+i);
-            return;
-        }
-    }
+	for(u32 i = 0; i < checkBoxDrawn.size(); ++i)
+	{
+		if(sender == checkBoxDrawn[i])
+		{
+			checkBoxClicked(checkBoxDrawn[i], pageIndex+i);
+			return;
+		}
+	}
 }
 
 void GuiCheckboxBrowser::onListChange(int SelItem, int SelInd)
 {
-    LOCK(this);
+	LOCK(this);
 	selectedItem = SelItem;
 	pageIndex = SelInd;
 	RefreshList();
@@ -133,43 +133,43 @@ void GuiCheckboxBrowser::onListChange(int SelItem, int SelInd)
 
 void GuiCheckboxBrowser::RefreshList()
 {
-    LOCK(this);
-    while(pageIndex+checkBoxDrawn.size() > checkBoxList.size())
-        --pageIndex;
+	LOCK(this);
+	while(pageIndex+checkBoxDrawn.size() > checkBoxList.size())
+		--pageIndex;
 
-    if(checkBoxDrawn.size() == 0)
-        selectedItem = 0;
-    else if(selectedItem >= (int) checkBoxDrawn.size())
-        selectedItem = checkBoxDrawn.size()-1;
+	if(checkBoxDrawn.size() == 0)
+		selectedItem = 0;
+	else if(selectedItem >= (int) checkBoxDrawn.size())
+		selectedItem = checkBoxDrawn.size()-1;
 
 	for(u32 i = 0; i < checkBoxDrawn.size(); i++)
 	{
-        checkBoxDrawn[i] = checkBoxList[pageIndex+i];
-        checkBoxDrawn[i]->SetPosition(-scrollBar.GetWidth()-10, 15+i*(checkBoxDrawn[i]->GetHeight()+6));
+		checkBoxDrawn[i] = checkBoxList[pageIndex+i];
+		checkBoxDrawn[i]->SetPosition(-scrollBar.GetWidth()-10, 15+i*(checkBoxDrawn[i]->GetHeight()+6));
 
-        textLineDrawn[i] = textLineList[pageIndex+i];
-        textLineDrawn[i]->SetPosition(25, 15+i*(checkBoxDrawn[i]->GetHeight()+6)+(checkBoxDrawn[i]->GetHeight()-textLineDrawn[i]->GetFontSize())/2+2);
+		textLineDrawn[i] = textLineList[pageIndex+i];
+		textLineDrawn[i]->SetPosition(25, 15+i*(checkBoxDrawn[i]->GetHeight()+6)+(checkBoxDrawn[i]->GetHeight()-textLineDrawn[i]->GetFontSize())/2+2);
 	}
-    scrollBar.SetSelectedItem(selectedItem);
-    scrollBar.SetSelectedIndex(pageIndex);
+	scrollBar.SetSelectedItem(selectedItem);
+	scrollBar.SetSelectedIndex(pageIndex);
 }
 
 void GuiCheckboxBrowser::Draw()
 {
-    LOCK(this);
-    if(backgroundImg)
-        backgroundImg->Draw();
+	LOCK(this);
+	if(backgroundImg)
+		backgroundImg->Draw();
 
-    for(u32 i = 0; i < checkBoxDrawn.size(); ++i)
-    {
-        textLineDrawn[i]->Draw();
-        checkBoxDrawn[i]->Draw();
-    }
+	for(u32 i = 0; i < checkBoxDrawn.size(); ++i)
+	{
+		textLineDrawn[i]->Draw();
+		checkBoxDrawn[i]->Draw();
+	}
 
-    markImg->Draw();
+	markImg->Draw();
 
-    if(checkBoxList.size() >= (u32) maxSize)
-        scrollBar.Draw();
+	if(checkBoxList.size() >= (u32) maxSize)
+		scrollBar.Draw();
 }
 
 void GuiCheckboxBrowser::Update(GuiTrigger *t)
@@ -177,39 +177,39 @@ void GuiCheckboxBrowser::Update(GuiTrigger *t)
 	if(state == STATE_DISABLED || !t)
 		return;
 
-    LOCK(this);
-    if(checkBoxList.size() >= maxSize)
-	    scrollBar.Update(t);
+	LOCK(this);
+	if(checkBoxList.size() >= maxSize)
+		scrollBar.Update(t);
 
-    if((t->wpad.btns_d & (WPAD_BUTTON_B | WPAD_BUTTON_DOWN | WPAD_BUTTON_UP | WPAD_BUTTON_LEFT | WPAD_BUTTON_RIGHT |
-                          WPAD_CLASSIC_BUTTON_B | WPAD_CLASSIC_BUTTON_UP | WPAD_CLASSIC_BUTTON_DOWN | WPAD_CLASSIC_BUTTON_LEFT | WPAD_CLASSIC_BUTTON_RIGHT)) ||
-       (t->pad.btns_d & (PAD_BUTTON_UP | PAD_BUTTON_DOWN)))
-        pressedChan = t->chan;
+	if((t->wpad.btns_d & (WPAD_BUTTON_B | WPAD_BUTTON_DOWN | WPAD_BUTTON_UP | WPAD_BUTTON_LEFT | WPAD_BUTTON_RIGHT |
+						  WPAD_CLASSIC_BUTTON_B | WPAD_CLASSIC_BUTTON_UP | WPAD_CLASSIC_BUTTON_DOWN | WPAD_CLASSIC_BUTTON_LEFT | WPAD_CLASSIC_BUTTON_RIGHT)) ||
+	   (t->pad.btns_d & (PAD_BUTTON_UP | PAD_BUTTON_DOWN)))
+		pressedChan = t->chan;
 
 	for(u32 i = 0; i < checkBoxDrawn.size(); i++)
 	{
-        if(pressedChan == -1 || (!t->wpad.btns_h && !t->pad.btns_h))
-        {
-            if(i != (u32) selectedItem && checkBoxDrawn[i]->GetState() == STATE_SELECTED)
-                checkBoxDrawn[i]->ResetState();
-            else if(i == (u32) selectedItem && checkBoxDrawn[i]->GetState() == STATE_DEFAULT)
-                checkBoxDrawn[selectedItem]->SetState(STATE_SELECTED, -1);
+		if(pressedChan == -1 || (!t->wpad.btns_h && !t->pad.btns_h))
+		{
+			if(i != (u32) selectedItem && checkBoxDrawn[i]->GetState() == STATE_SELECTED)
+				checkBoxDrawn[i]->ResetState();
+			else if(i == (u32) selectedItem && checkBoxDrawn[i]->GetState() == STATE_DEFAULT)
+				checkBoxDrawn[selectedItem]->SetState(STATE_SELECTED, -1);
 
-            checkBoxDrawn[i]->Update(t);
+			checkBoxDrawn[i]->Update(t);
 
-            if(checkBoxDrawn[i]->GetState() == STATE_SELECTED)
-                selectedItem = i;
-        }
+			if(checkBoxDrawn[i]->GetState() == STATE_SELECTED)
+				selectedItem = i;
+		}
 
 		if(i == (u32) selectedItem)
-		    markImg->SetPosition(5, 15+i*(checkBoxDrawn[i]->GetHeight()+6)+(checkBoxDrawn[i]->GetHeight()-markImg->GetHeight())/2);
+			markImg->SetPosition(5, 15+i*(checkBoxDrawn[i]->GetHeight()+6)+(checkBoxDrawn[i]->GetHeight()-markImg->GetHeight())/2);
 	}
 
-    if(pressedChan == t->chan && !t->wpad.btns_d && !t->wpad.btns_h)
-        pressedChan = -1;
+	if(pressedChan == t->chan && !t->wpad.btns_d && !t->wpad.btns_h)
+		pressedChan = -1;
 
-    scrollBar.SetPageSize(checkBoxDrawn.size());
-    scrollBar.SetSelectedItem(selectedItem);
-    scrollBar.SetSelectedIndex(pageIndex);
-    scrollBar.SetEntrieCount(checkBoxList.size());
+	scrollBar.SetPageSize(checkBoxDrawn.size());
+	scrollBar.SetSelectedItem(selectedItem);
+	scrollBar.SetSelectedIndex(pageIndex);
+	scrollBar.SetEntrieCount(checkBoxList.size());
 }

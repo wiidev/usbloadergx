@@ -15,46 +15,46 @@
  **************************************************************************************/
 int GetMissingGameFiles(const char * path, const char * fileext, std::vector<std::string> & MissingFilesList)
 {
-    char gameID[7];
-    char filepath[512];
-    MissingFilesList.clear();
-    wString oldFilter(gameList.GetCurrentFilter());
+	char gameID[7];
+	char filepath[512];
+	MissingFilesList.clear();
+	wString oldFilter(gameList.GetCurrentFilter());
 
-    //! make sure that all games are added to the gamelist
-    gameList.LoadUnfiltered();
+	//! make sure that all games are added to the gamelist
+	gameList.LoadUnfiltered();
 
-    for (int i = 0; i < gameList.size(); ++i)
-    {
-        struct discHdr* header = gameList[i];
-        snprintf(gameID, sizeof(gameID), "%s", (char *) header->id);
-        snprintf(filepath, sizeof(filepath), "%s/%s%s", path, gameID, fileext);
+	for (int i = 0; i < gameList.size(); ++i)
+	{
+		struct discHdr* header = gameList[i];
+		snprintf(gameID, sizeof(gameID), "%s", (char *) header->id);
+		snprintf(filepath, sizeof(filepath), "%s/%s%s", path, gameID, fileext);
 
-        if (CheckFile(filepath))
-            continue;
+		if (CheckFile(filepath))
+			continue;
 
-        //! Not found. Try 4 ID path.
-        gameID[4] = '\0';
-        snprintf(filepath, sizeof(filepath), "%s/%s%s", path, gameID, fileext);
+		//! Not found. Try 4 ID path.
+		gameID[4] = '\0';
+		snprintf(filepath, sizeof(filepath), "%s/%s%s", path, gameID, fileext);
 
-        if (CheckFile(filepath))
-            continue;
+		if (CheckFile(filepath))
+			continue;
 
-        //! Not found. Try 3 ID path.
-        gameID[3] = '\0';
-        snprintf(filepath, sizeof(filepath), "%s/%s%s", path, gameID, fileext);
+		//! Not found. Try 3 ID path.
+		gameID[3] = '\0';
+		snprintf(filepath, sizeof(filepath), "%s/%s%s", path, gameID, fileext);
 
-        if (CheckFile(filepath))
-            continue;
+		if (CheckFile(filepath))
+			continue;
 
-        //! Not found add to missing list
-        snprintf(gameID, sizeof(gameID), "%s", (char *) header->id);
-        MissingFilesList.push_back(std::string(gameID));
-    }
+		//! Not found add to missing list
+		snprintf(gameID, sizeof(gameID), "%s", (char *) header->id);
+		MissingFilesList.push_back(std::string(gameID));
+	}
 
-    //! Bring game list to the old state
-    gameList.FilterList(oldFilter.c_str());
+	//! Bring game list to the old state
+	gameList.FilterList(oldFilter.c_str());
 
-    gprintf(" = %i", MissingFilesList.size());
+	gprintf(" = %i", MissingFilesList.size());
 
-    return MissingFilesList.size();
+	return MissingFilesList.size();
 }

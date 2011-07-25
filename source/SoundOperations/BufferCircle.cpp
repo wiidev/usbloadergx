@@ -30,115 +30,115 @@
 
 BufferCircle::BufferCircle()
 {
-    which = 0;
-    BufferBlockSize = 0;
+	which = 0;
+	BufferBlockSize = 0;
 }
 
 BufferCircle::~BufferCircle()
 {
-    FreeBuffer();
-    SoundBuffer.clear();
-    BufferSize.clear();
-    BufferReady.clear();
+	FreeBuffer();
+	SoundBuffer.clear();
+	BufferSize.clear();
+	BufferReady.clear();
 }
 
 void BufferCircle::SetBufferBlockSize(int size)
 {
-    if(size < 0)
-        return;
+	if(size < 0)
+		return;
 
-    BufferBlockSize = size;
+	BufferBlockSize = size;
 
-    for(int i = 0; i < Size(); i++)
-    {
-        if(SoundBuffer[i] != NULL)
-            free(SoundBuffer[i]);
+	for(int i = 0; i < Size(); i++)
+	{
+		if(SoundBuffer[i] != NULL)
+			free(SoundBuffer[i]);
 
-        SoundBuffer[i] = (u8 *) memalign(32, ALIGN32(BufferBlockSize));
-        BufferSize[i] = 0;
-        BufferReady[i] = false;
-    }
+		SoundBuffer[i] = (u8 *) memalign(32, ALIGN32(BufferBlockSize));
+		BufferSize[i] = 0;
+		BufferReady[i] = false;
+	}
 }
 
 void BufferCircle::Resize(int size)
 {
-    while(size < Size())
-        RemoveBuffer(Size()-1);
+	while(size < Size())
+		RemoveBuffer(Size()-1);
 
-    int oldSize = Size();
+	int oldSize = Size();
 
-    SoundBuffer.resize(size);
-    BufferSize.resize(size);
-    BufferReady.resize(size);
+	SoundBuffer.resize(size);
+	BufferSize.resize(size);
+	BufferReady.resize(size);
 
-    for(int i = oldSize; i < Size(); i++)
-    {
-        if(BufferBlockSize > 0)
-            SoundBuffer[i] = (u8 *) memalign(32, ALIGN32(BufferBlockSize));
-        else
-            SoundBuffer[i] = NULL;
-        BufferSize[i] = 0;
-        BufferReady[i] = false;
-    }
+	for(int i = oldSize; i < Size(); i++)
+	{
+		if(BufferBlockSize > 0)
+			SoundBuffer[i] = (u8 *) memalign(32, ALIGN32(BufferBlockSize));
+		else
+			SoundBuffer[i] = NULL;
+		BufferSize[i] = 0;
+		BufferReady[i] = false;
+	}
 }
 
 void BufferCircle::RemoveBuffer(int pos)
 {
-    if(!Valid(pos))
-        return;
+	if(!Valid(pos))
+		return;
 
-    if(SoundBuffer[pos] != NULL)
-        free(SoundBuffer[pos]);
+	if(SoundBuffer[pos] != NULL)
+		free(SoundBuffer[pos]);
 
-    SoundBuffer.erase(SoundBuffer.begin()+pos);
-    BufferSize.erase(BufferSize.begin()+pos);
-    BufferReady.erase(BufferReady.begin()+pos);
+	SoundBuffer.erase(SoundBuffer.begin()+pos);
+	BufferSize.erase(BufferSize.begin()+pos);
+	BufferReady.erase(BufferReady.begin()+pos);
 }
 
 void BufferCircle::ClearBuffer()
 {
-    for(int i = 0; i < Size(); i++)
-    {
-        BufferSize[i] = 0;
-        BufferReady[i] = false;
-    }
-    which = 0;
+	for(int i = 0; i < Size(); i++)
+	{
+		BufferSize[i] = 0;
+		BufferReady[i] = false;
+	}
+	which = 0;
 }
 
 void BufferCircle::FreeBuffer()
 {
-    for(int i = 0; i < Size(); i++)
-    {
-        if(SoundBuffer[i] != NULL)
-            free(SoundBuffer[i]);
+	for(int i = 0; i < Size(); i++)
+	{
+		if(SoundBuffer[i] != NULL)
+			free(SoundBuffer[i]);
 
-        SoundBuffer[i] = NULL;
-        BufferSize[i] = 0;
-        BufferReady[i] = false;
-    }
+		SoundBuffer[i] = NULL;
+		BufferSize[i] = 0;
+		BufferReady[i] = false;
+	}
 }
 
 void BufferCircle::LoadNext()
 {
-    int pos = (which+Size()-1) % Size();
-    BufferReady[pos] = false;
-    BufferSize[pos] = 0;
+	int pos = (which+Size()-1) % Size();
+	BufferReady[pos] = false;
+	BufferSize[pos] = 0;
 
-    which = (which+1) % Size();
+	which = (which+1) % Size();
 }
 
 void BufferCircle::SetBufferReady(int pos, bool state)
 {
-    if(!Valid(pos))
-        return;
+	if(!Valid(pos))
+		return;
 
-    BufferReady[pos] = state;
+	BufferReady[pos] = state;
 }
 
 void BufferCircle::SetBufferSize(int pos, int size)
 {
-    if(!Valid(pos))
-        return;
+	if(!Valid(pos))
+		return;
 
-    BufferSize[pos] = size;
+	BufferSize[pos] = size;
 }

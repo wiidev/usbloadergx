@@ -30,27 +30,27 @@
 
 class HomebrewPrompt : public PromptWindow, public sigslot::has_slots<>
 {
-    public:
-        HomebrewPrompt(const char *name, const char *coder, const char *version,
-                       const char *release_date, const char *long_description,
-                       GuiImageData * iconImgData, u64 filesize);
-        virtual ~HomebrewPrompt();
-        int MainLoop();
-    private:
-        void onListChange(int SelItem, int SelInd);
+	public:
+		HomebrewPrompt(const char *name, const char *coder, const char *version,
+					   const char *release_date, const char *long_description,
+					   GuiImageData * iconImgData, u64 filesize);
+		virtual ~HomebrewPrompt();
+		int MainLoop();
+	private:
+		void onListChange(int SelItem, int SelInd);
 
-        GuiImageData *whiteBox;
+		GuiImageData *whiteBox;
 
-        GuiImage *whiteBoxImg;
-        GuiImage *iconImg;
+		GuiImage *whiteBoxImg;
+		GuiImage *iconImg;
 
-        GuiText *nameTxt;
-        GuiText *coderTxt;
-        GuiText *versionTxt;
-        GuiText *release_dateTxt;
-        GuiText *filesizeTxt;
-        Text *long_descriptionTxt;
-        GuiScrollbar *scrollBar;
+		GuiText *nameTxt;
+		GuiText *coderTxt;
+		GuiText *versionTxt;
+		GuiText *release_dateTxt;
+		GuiText *filesizeTxt;
+		Text *long_descriptionTxt;
+		GuiScrollbar *scrollBar;
 };
 
 #endif

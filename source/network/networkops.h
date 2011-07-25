@@ -8,7 +8,7 @@
 #ifndef _NETWORKOPS_H_
 #define _NETWORKOPS_H_
 
-#define NETWORKBLOCKSIZE       5*1024      //5KB
+#define NETWORKBLOCKSIZE	   5*1024	  //5KB
 #define NET_SIZE_UNKNOWN	   -0xFFFFFFF
 #define NET_DEFAULT_SOCK	   -0xFFFFFFE
 

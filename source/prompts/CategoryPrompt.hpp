@@ -28,54 +28,54 @@
 
 class CategoryPrompt : public GuiWindow, public sigslot::has_slots<>
 {
-    public:
-        CategoryPrompt(const string &title);
-        virtual ~CategoryPrompt();
-        int Show();
-        bool categoriesChanged() const { return changed; }
-    protected:
-        void markChanged() { changed = true; }
+	public:
+		CategoryPrompt(const string &title);
+		virtual ~CategoryPrompt();
+		int Show();
+		bool categoriesChanged() const { return changed; }
+	protected:
+		void markChanged() { changed = true; }
 		sigslot::signal0<> browserRefresh;
 		sigslot::signal0<> resetChanges;
-        GuiCheckboxBrowser *browser;
-    private:
-        bool changed;
+		GuiCheckboxBrowser *browser;
+	private:
+		bool changed;
 
-        GuiImageData *bgImgData;
-        GuiImageData *browserImgData;
-        GuiImageData *btnOutline;
-        GuiImageData *addImgData;
-        GuiImageData *deleteImgData;
-        GuiImageData *editImgData;
+		GuiImageData *bgImgData;
+		GuiImageData *browserImgData;
+		GuiImageData *btnOutline;
+		GuiImageData *addImgData;
+		GuiImageData *deleteImgData;
+		GuiImageData *editImgData;
 
-        GuiImage *browserImg;
-        GuiImage *bgImg;
-        GuiImage *addImg;
-        GuiImage *deleteImg;
-        GuiImage *editImg;
-        GuiImage *backImg;
-        GuiImage *saveImg;
+		GuiImage *browserImg;
+		GuiImage *bgImg;
+		GuiImage *addImg;
+		GuiImage *deleteImg;
+		GuiImage *editImg;
+		GuiImage *backImg;
+		GuiImage *saveImg;
 
-        GuiButton *backBtn;
-        GuiButton *homeButton;
-        GuiButton *addButton;
-        GuiButton *deleteButton;
-        GuiButton *editButton;
-        GuiButton *saveButton;
+		GuiButton *backBtn;
+		GuiButton *homeButton;
+		GuiButton *addButton;
+		GuiButton *deleteButton;
+		GuiButton *editButton;
+		GuiButton *saveButton;
 
-        GuiText *titleTxt;
-        GuiText *addTxt;
-        GuiText *deleteTxt;
-        GuiText *editTxt;
-        GuiText *backTxt;
-        GuiText *saveTxt;
+		GuiText *titleTxt;
+		GuiText *addTxt;
+		GuiText *deleteTxt;
+		GuiText *editTxt;
+		GuiText *backTxt;
+		GuiText *saveTxt;
 
-        GuiTrigger trigA;
-        GuiTrigger trigB;
-        GuiTrigger trigHome;
-        GuiTrigger trigPlus;
-        GuiTrigger trigMinus;
-        GuiTrigger trig1;
+		GuiTrigger trigA;
+		GuiTrigger trigB;
+		GuiTrigger trigHome;
+		GuiTrigger trigPlus;
+		GuiTrigger trigMinus;
+		GuiTrigger trig1;
 };
 
 #endif

@@ -7,41 +7,41 @@
 
 class GuiGameList : public GuiGameBrowser, public sigslot::has_slots<>
 {
-    public:
-        GuiGameList(int w, int h, int listOffset = 0);
-        virtual ~GuiGameList();
-        int GetClickedOption();
-        int GetSelectedOption() { return listOffset+selectedItem; }
-        void SetSelectedOption(int ind);
+	public:
+		GuiGameList(int w, int h, int listOffset = 0);
+		virtual ~GuiGameList();
+		int GetClickedOption();
+		int GetSelectedOption() { return listOffset+selectedItem; }
+		void SetSelectedOption(int ind);
 		void setListOffset(int off);
 		int getListOffset() const { return listOffset; }
-        void ResetState();
-        void SetFocus(int f);
-        void Draw();
-        void Update(GuiTrigger * t);
-    protected:
-        void onListChange(int SelItem, int SelInd);
-        void UpdateListEntries();
-        int selectedItem;
-        int listOffset;
-        int scrollbaron;
-        int pagesize;
-        int maxTextWidth;
+		void ResetState();
+		void SetFocus(int f);
+		void Draw();
+		void Update(GuiTrigger * t);
+	protected:
+		void onListChange(int SelItem, int SelInd);
+		void UpdateListEntries();
+		int selectedItem;
+		int listOffset;
+		int scrollbaron;
+		int pagesize;
+		int maxTextWidth;
 
-        GuiButton ** game;
-        GuiText ** gameTxt;
-        GuiText ** gameTxtOver;
-        GuiImage ** gameBg;
-        GuiImage ** newImg;
+		GuiButton ** game;
+		GuiText ** gameTxt;
+		GuiText ** gameTxtOver;
+		GuiImage ** gameBg;
+		GuiImage ** newImg;
 
-        GuiImage * bgGameImg;
+		GuiImage * bgGameImg;
 
-        GuiImageData * bgGames;
-        GuiImageData * bgGamesEntry;
-        GuiImageData * newGames;
+		GuiImageData * bgGames;
+		GuiImageData * bgGamesEntry;
+		GuiImageData * newGames;
 
-        GuiTrigger * trigA;
+		GuiTrigger * trigA;
 
-        GuiScrollbar scrollBar;
+		GuiScrollbar scrollBar;
 };
 #endif

@@ -41,17 +41,17 @@ typedef struct _SoundBlock
 
 class BNSDecoder : public SoundDecoder
 {
-    public:
-        BNSDecoder(const char * filepath);
-        BNSDecoder(const u8 * snd, int len);
-        virtual ~BNSDecoder();
-        int GetFormat() { return SoundData.format; };
-        int GetSampleRate() { return SoundData.frequency; };
-        int Read(u8 * buffer, int buffer_size, int pos);
-    protected:
-        void OpenFile();
-        void CloseFile();
-        SoundBlock SoundData;
+	public:
+		BNSDecoder(const char * filepath);
+		BNSDecoder(const u8 * snd, int len);
+		virtual ~BNSDecoder();
+		int GetFormat() { return SoundData.format; };
+		int GetSampleRate() { return SoundData.frequency; };
+		int Read(u8 * buffer, int buffer_size, int pos);
+	protected:
+		void OpenFile();
+		void CloseFile();
+		SoundBlock SoundData;
 };
 
 #endif

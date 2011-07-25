@@ -28,16 +28,16 @@
 
 class GuiChecksign : public GuiElement
 {
-    public:
-        GuiChecksign() : Linewidth(2.0f) { color = (GXColor) {0, 0, 0, 255}; GX_SetLineWidth((u8) (Linewidth*6.0f), 0); }
-        //! Max line width is 42.5 pixel
-        void SetLinewidth(float w) { LOCK(this); Linewidth = w; GX_SetLineWidth((u8) (Linewidth*6.0f), 0); }
-        void SetColor(const GXColor c) { LOCK(this); color = c; }
-        void SetSize(int w, int h) { LOCK(this); width = w; height = h; }
-        void Draw();
-    protected:
-        GXColor color;
-        float Linewidth;
+	public:
+		GuiChecksign() : Linewidth(2.0f) { color = (GXColor) {0, 0, 0, 255}; GX_SetLineWidth((u8) (Linewidth*6.0f), 0); }
+		//! Max line width is 42.5 pixel
+		void SetLinewidth(float w) { LOCK(this); Linewidth = w; GX_SetLineWidth((u8) (Linewidth*6.0f), 0); }
+		void SetColor(const GXColor c) { LOCK(this); color = c; }
+		void SetSize(int w, int h) { LOCK(this); width = w; height = h; }
+		void Draw();
+	protected:
+		GXColor color;
+		float Linewidth;
 };
 
 #endif

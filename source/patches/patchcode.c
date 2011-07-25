@@ -100,8 +100,8 @@ extern void vipatch(u32 address, u32 len);
 //static const u32 cIOSblock[16] = { 0x2C1800F9, 0x40820008, 0x3B000024 };
 
 //static const u32 fwritepatch[8] = { 0x9421FFD0, 0x7C0802A6, 0x90010034, 0xBF210014, 0x7C9B2378, 0x7CDC3378, 0x7C7A1B78,
-//        0x7CB92B78 // bushing fwrite
-//        };
+//		0x7CB92B78 // bushing fwrite
+//		};
 
 static const u32 vipatchcode[3] = { 0x4182000C, 0x4180001C, 0x48000018 };
 
@@ -139,164 +139,164 @@ const u32 langpatch[3] = { 0x7C600775, 0x40820010, 0x38000000 };
 bool dogamehooks(void *addr, u32 len)
 //---------------------------------------------------------------------------------
 {
-    if (!CheatFilepath) return false;
+	if (!CheatFilepath) return false;
 
-    //this is temporary since the screen freezes without a file loaded
-    char filepath[150];
-    char GameId[10];
-    memcpy(GameId, (u8 *) 0x80000000, 6);
-    GameId[6] = 0;
-    sprintf(filepath, "%s%s.gct", CheatFilepath, GameId);
+	//this is temporary since the screen freezes without a file loaded
+	char filepath[150];
+	char GameId[10];
+	memcpy(GameId, (u8 *) 0x80000000, 6);
+	GameId[6] = 0;
+	sprintf(filepath, "%s%s.gct", CheatFilepath, GameId);
 
-    if (!CheckFile(filepath)) return false;
+	if (!CheckFile(filepath)) return false;
 
-    //TODO for oggzee: when using Ocarina check if a hook as patched
+	//TODO for oggzee: when using Ocarina check if a hook as patched
 
-    hooktype = 1; // TODO for oggzee: Create an option for hooktype
-    /*
-     0 No Hook
-     1 VBI
-     2 KPAD read
-     3 Joypad Hook
-     4 GXDraw Hook
-     5 GXFlush Hook
-     6 OSSleepThread Hook
-     7 AXNextFrame Hook
-     */
+	hooktype = 1; // TODO for oggzee: Create an option for hooktype
+	/*
+	 0 No Hook
+	 1 VBI
+	 2 KPAD read
+	 3 Joypad Hook
+	 4 GXDraw Hook
+	 5 GXFlush Hook
+	 6 OSSleepThread Hook
+	 7 AXNextFrame Hook
+	 */
 
-    void *addr_start = addr;
-    void *addr_end = addr + len;
-    bool hookpatched = false;
+	void *addr_start = addr;
+	void *addr_end = addr + len;
+	bool hookpatched = false;
 
-    while (addr_start < addr_end)
-    {
-        switch (hooktype)
-        {
+	while (addr_start < addr_end)
+	{
+		switch (hooktype)
+		{
 
-            case 0x00:
-                hookpatched = true;
-                break;
+			case 0x00:
+				hookpatched = true;
+				break;
 
-            case 0x01:
-                if (memcmp(addr_start, viwiihooks, sizeof(viwiihooks)) == 0)
-                {
-                    patchhook((u32) addr_start, len);
-                    hookpatched = true;
-                }
-                if (memcmp(addr_start, multidolhooks, sizeof(multidolhooks)) == 0)
-                {
-                    multidolhook((u32) addr_start + sizeof(multidolhooks) - 4);
-                    hookpatched = true;
-                }
-                break;
+			case 0x01:
+				if (memcmp(addr_start, viwiihooks, sizeof(viwiihooks)) == 0)
+				{
+					patchhook((u32) addr_start, len);
+					hookpatched = true;
+				}
+				if (memcmp(addr_start, multidolhooks, sizeof(multidolhooks)) == 0)
+				{
+					multidolhook((u32) addr_start + sizeof(multidolhooks) - 4);
+					hookpatched = true;
+				}
+				break;
 
-            case 0x02:
+			case 0x02:
 
-                if (memcmp(addr_start, kpadhooks, sizeof(kpadhooks)) == 0)
-                {
-                    patchhook((u32) addr_start, len);
-                    hookpatched = true;
-                }
+				if (memcmp(addr_start, kpadhooks, sizeof(kpadhooks)) == 0)
+				{
+					patchhook((u32) addr_start, len);
+					hookpatched = true;
+				}
 
-                if (memcmp(addr_start, kpadoldhooks, sizeof(kpadoldhooks)) == 0)
-                {
-                    patchhook((u32) addr_start, len);
-                    hookpatched = true;
-                }
-                if (memcmp(addr_start, multidolhooks, sizeof(multidolhooks)) == 0)
-                {
-                    multidolhook((u32) addr_start + sizeof(multidolhooks) - 4);
-                    hookpatched = true;
-                }
-                break;
+				if (memcmp(addr_start, kpadoldhooks, sizeof(kpadoldhooks)) == 0)
+				{
+					patchhook((u32) addr_start, len);
+					hookpatched = true;
+				}
+				if (memcmp(addr_start, multidolhooks, sizeof(multidolhooks)) == 0)
+				{
+					multidolhook((u32) addr_start + sizeof(multidolhooks) - 4);
+					hookpatched = true;
+				}
+				break;
 
-            case 0x03:
+			case 0x03:
 
-                if (memcmp(addr_start, joypadhooks, sizeof(joypadhooks)) == 0)
-                {
-                    patchhook((u32) addr_start, len);
-                    hookpatched = true;
-                }
-                if (memcmp(addr_start, multidolhooks, sizeof(multidolhooks)) == 0)
-                {
-                    multidolhook((u32) addr_start + sizeof(multidolhooks) - 4);
-                    hookpatched = true;
-                }
-                break;
+				if (memcmp(addr_start, joypadhooks, sizeof(joypadhooks)) == 0)
+				{
+					patchhook((u32) addr_start, len);
+					hookpatched = true;
+				}
+				if (memcmp(addr_start, multidolhooks, sizeof(multidolhooks)) == 0)
+				{
+					multidolhook((u32) addr_start + sizeof(multidolhooks) - 4);
+					hookpatched = true;
+				}
+				break;
 
-            case 0x04:
+			case 0x04:
 
-                if (memcmp(addr_start, gxdrawhooks, sizeof(gxdrawhooks)) == 0)
-                {
-                    patchhook((u32) addr_start, len);
-                    hookpatched = true;
-                }
-                if (memcmp(addr_start, multidolhooks, sizeof(multidolhooks)) == 0)
-                {
-                    multidolhook((u32) addr_start + sizeof(multidolhooks) - 4);
-                    hookpatched = true;
-                }
-                break;
+				if (memcmp(addr_start, gxdrawhooks, sizeof(gxdrawhooks)) == 0)
+				{
+					patchhook((u32) addr_start, len);
+					hookpatched = true;
+				}
+				if (memcmp(addr_start, multidolhooks, sizeof(multidolhooks)) == 0)
+				{
+					multidolhook((u32) addr_start + sizeof(multidolhooks) - 4);
+					hookpatched = true;
+				}
+				break;
 
-            case 0x05:
+			case 0x05:
 
-                if (memcmp(addr_start, gxflushhooks, sizeof(gxflushhooks)) == 0)
-                {
-                    patchhook((u32) addr_start, len);
-                    hookpatched = true;
-                }
-                if (memcmp(addr_start, multidolhooks, sizeof(multidolhooks)) == 0)
-                {
-                    multidolhook((u32) addr_start + sizeof(multidolhooks) - 4);
-                    hookpatched = true;
-                }
-                break;
+				if (memcmp(addr_start, gxflushhooks, sizeof(gxflushhooks)) == 0)
+				{
+					patchhook((u32) addr_start, len);
+					hookpatched = true;
+				}
+				if (memcmp(addr_start, multidolhooks, sizeof(multidolhooks)) == 0)
+				{
+					multidolhook((u32) addr_start + sizeof(multidolhooks) - 4);
+					hookpatched = true;
+				}
+				break;
 
-            case 0x06:
+			case 0x06:
 
-                if (memcmp(addr_start, ossleepthreadhooks, sizeof(ossleepthreadhooks)) == 0)
-                {
-                    patchhook((u32) addr_start, len);
-                    hookpatched = true;
-                }
-                if (memcmp(addr_start, multidolhooks, sizeof(multidolhooks)) == 0)
-                {
-                    multidolhook((u32) addr_start + sizeof(multidolhooks) - 4);
-                    hookpatched = true;
-                }
-                break;
+				if (memcmp(addr_start, ossleepthreadhooks, sizeof(ossleepthreadhooks)) == 0)
+				{
+					patchhook((u32) addr_start, len);
+					hookpatched = true;
+				}
+				if (memcmp(addr_start, multidolhooks, sizeof(multidolhooks)) == 0)
+				{
+					multidolhook((u32) addr_start + sizeof(multidolhooks) - 4);
+					hookpatched = true;
+				}
+				break;
 
-            case 0x07:
+			case 0x07:
 
-                if (memcmp(addr_start, axnextframehooks, sizeof(axnextframehooks)) == 0)
-                {
-                    patchhook((u32) addr_start, len);
-                    hookpatched = true;
-                }
-                if (memcmp(addr_start, multidolhooks, sizeof(multidolhooks)) == 0)
-                {
-                    multidolhook((u32) addr_start + sizeof(multidolhooks) - 4);
-                    hookpatched = true;
-                }
-                break;
+				if (memcmp(addr_start, axnextframehooks, sizeof(axnextframehooks)) == 0)
+				{
+					patchhook((u32) addr_start, len);
+					hookpatched = true;
+				}
+				if (memcmp(addr_start, multidolhooks, sizeof(multidolhooks)) == 0)
+				{
+					multidolhook((u32) addr_start + sizeof(multidolhooks) - 4);
+					hookpatched = true;
+				}
+				break;
 
-            case 0x08:
+			case 0x08:
 
-                //if(memcmp(addr_start, customhook, customhooksize)==0)
-                //{
-                //  patchhook((u32)addr_start, len);
-                //  hookpatched = true;
-                //}
-                if (memcmp(addr_start, multidolhooks, sizeof(multidolhooks)) == 0)
-                {
-                    multidolhook((u32) addr_start + sizeof(multidolhooks) - 4);
-                    hookpatched = true;
-                }
-                break;
-        }
-        addr_start += 4;
-    }
-    return hookpatched;
+				//if(memcmp(addr_start, customhook, customhooksize)==0)
+				//{
+				//  patchhook((u32)addr_start, len);
+				//  hookpatched = true;
+				//}
+				if (memcmp(addr_start, multidolhooks, sizeof(multidolhooks)) == 0)
+				{
+					multidolhook((u32) addr_start + sizeof(multidolhooks) - 4);
+					hookpatched = true;
+				}
+				break;
+		}
+		addr_start += 4;
+	}
+	return hookpatched;
 }
 
 // Not used yet, for patching DOL once loaded into memory and befor execution
@@ -310,10 +310,10 @@ bool dogamehooks(void *addr, u32 len)
  while(addr_start < addr_end)
  {
  if(memcmp(addr_start, wpadlibogc, sizeof(wpadlibogc))==0) {
- //      printf("\n\n\n");
- //      printf("found at address %x\n", addr_start);
+ //	  printf("\n\n\n");
+ //	  printf("found at address %x\n", addr_start);
  //  sleep(10);
- //      patchhookdol((u32)addr_start, len);
+ //	  patchhookdol((u32)addr_start, len);
  patched = 1;
  break;
  }
@@ -323,55 +323,55 @@ bool dogamehooks(void *addr, u32 len)
  */
 void langpatcher(void *addr, u32 len, u8 languageChoice)
 {
-    u8 ocarinaLangPatchByte = 1;
-    switch (languageChoice)
-    {
-        case JAPANESE:
-            ocarinaLangPatchByte = 0x00;
-            break;
-        case ENGLISH:
-            ocarinaLangPatchByte = 0x01;
-            break;
-        case GERMAN:
-            ocarinaLangPatchByte = 0x02;
-            break;
-        case FRENCH:
-            ocarinaLangPatchByte = 0x03;
-            break;
-        case SPANISH:
-            ocarinaLangPatchByte = 0x04;
-            break;
-        case ITALIAN:
-            ocarinaLangPatchByte = 0x05;
-            break;
-        case DUTCH:
-            ocarinaLangPatchByte = 0x06;
-            break;
-        case S_CHINESE:
-            ocarinaLangPatchByte = 0x07;
-            break;
-        case T_CHINESE:
-            ocarinaLangPatchByte = 0x08;
-            break;
-        case KOREAN:
-            ocarinaLangPatchByte = 0x09;
-            break;
-        default:
-            return;
-    }
+	u8 ocarinaLangPatchByte = 1;
+	switch (languageChoice)
+	{
+		case JAPANESE:
+			ocarinaLangPatchByte = 0x00;
+			break;
+		case ENGLISH:
+			ocarinaLangPatchByte = 0x01;
+			break;
+		case GERMAN:
+			ocarinaLangPatchByte = 0x02;
+			break;
+		case FRENCH:
+			ocarinaLangPatchByte = 0x03;
+			break;
+		case SPANISH:
+			ocarinaLangPatchByte = 0x04;
+			break;
+		case ITALIAN:
+			ocarinaLangPatchByte = 0x05;
+			break;
+		case DUTCH:
+			ocarinaLangPatchByte = 0x06;
+			break;
+		case S_CHINESE:
+			ocarinaLangPatchByte = 0x07;
+			break;
+		case T_CHINESE:
+			ocarinaLangPatchByte = 0x08;
+			break;
+		case KOREAN:
+			ocarinaLangPatchByte = 0x09;
+			break;
+		default:
+			return;
+	}
 
-    u8 * addr_start = addr;
-    u8 * addr_end = addr + len;
+	u8 * addr_start = addr;
+	u8 * addr_end = addr + len;
 
-    while (addr_start < addr_end)
-    {
+	while (addr_start < addr_end)
+	{
 
-        if (memcmp(addr_start, langpatch, sizeof(langpatch)) == 0)
-        {
-            langvipatch((u32) addr_start, len, ocarinaLangPatchByte);
-        }
-        addr_start += 4;
-    }
+		if (memcmp(addr_start, langpatch, sizeof(langpatch)) == 0)
+		{
+			langvipatch((u32) addr_start, len, ocarinaLangPatchByte);
+		}
+		addr_start += 4;
+	}
 }
 /*
  void patchdebug(void *addr, u32 len)
@@ -395,16 +395,16 @@ void langpatcher(void *addr, u32 len, u8 languageChoice)
 void vidolpatcher(void *addr, u32 len)
 {
 
-    void *addr_start = addr;
-    void *addr_end = addr + len;
+	void *addr_start = addr;
+	void *addr_end = addr + len;
 
-    while (addr_start < addr_end)
-    {
-        if (memcmp(addr_start, vipatchcode, sizeof(vipatchcode)) == 0)
-        {
-            vipatch((u32) addr_start, len);
-        }
-        addr_start += 4;
-    }
+	while (addr_start < addr_end)
+	{
+		if (memcmp(addr_start, vipatchcode, sizeof(vipatchcode)) == 0)
+		{
+			vipatch((u32) addr_start, len);
+		}
+		addr_start += 4;
+	}
 }
 

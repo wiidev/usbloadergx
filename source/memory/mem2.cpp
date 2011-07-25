@@ -6,8 +6,8 @@
 #include <string.h>
 #include <ogc/system.h>
 
-#define MAX_MEM1_ARENA_LO	((void *) (0x81700000-size))      // Preserve 1MB for other stuff if MEM1 almost out
-#define MEM2_PRIORITY_SIZE	2097152         		   //2MB
+#define MAX_MEM1_ARENA_LO	((void *) (0x81700000-size))	  // Preserve 1MB for other stuff if MEM1 almost out
+#define MEM2_PRIORITY_SIZE	2097152		 		   //2MB
 
 // Forbid the use of MEM2 through malloc
 u32 MALLOC_MEM2 = 0;
@@ -56,7 +56,7 @@ unsigned int MEM2_usableSize(void *p)
 
 unsigned int MEM2_freesize()
 {
-    return g_mem2gp.FreeSize();
+	return g_mem2gp.FreeSize();
 }
 
 extern __typeof(malloc) __real_malloc;
@@ -132,8 +132,8 @@ void *__wrap_memalign(size_t a, size_t size)
 
 void __wrap_free(void *p)
 {
-    if(!p)
-        return;
+	if(!p)
+		return;
 
 	if (((u32)p & 0x10000000) != 0)
 	{

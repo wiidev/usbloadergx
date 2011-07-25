@@ -44,7 +44,7 @@ void frag_dump(FragList *ff)
 
 int frag_append(void *f, u32 offset, u32 sector, u32 count)
 {
-    FragList *ff = (FragList *) f;
+	FragList *ff = (FragList *) f;
 	int n;
 	if (count) {
 		n = ff->num - 1;
@@ -216,12 +216,12 @@ int get_frag_list_for_file(char *fname, u8 *id, const u8 wbfs_part_fs, const u32
 				fs->frag[j].sector += lba_offset;
 			}
 		} else if (wbfs_part_fs == PART_FS_WBFS) {
-            // if wbfs file format, remap.
-            wbfs_disc_t *d = WBFS_OpenDisc(id);
-            if (!d) { ret_val = -4; WBFS_CloseDisc(d); goto out; }
-            ret = wbfs_get_fragments(d, &frag_append, fs, hdd_sector_size);
-            WBFS_CloseDisc(d);
-            if (ret) { ret_val = -5; goto out; }
+			// if wbfs file format, remap.
+			wbfs_disc_t *d = WBFS_OpenDisc(id);
+			if (!d) { ret_val = -4; WBFS_CloseDisc(d); goto out; }
+			ret = wbfs_get_fragments(d, &frag_append, fs, hdd_sector_size);
+			WBFS_CloseDisc(d);
+			if (ret) { ret_val = -5; goto out; }
 		}
 		frag_concat(fa, fs);
 	}

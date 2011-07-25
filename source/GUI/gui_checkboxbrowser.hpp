@@ -33,35 +33,35 @@ using namespace std;
 
 class GuiCheckboxBrowser : public GuiElement, public sigslot::has_slots<>
 {
-    public:
-        GuiCheckboxBrowser(int w, int h, int maxSize = 7);
-        virtual ~GuiCheckboxBrowser();
-        bool AddEntrie(const string &text, bool checked = false);
-        int GetSelected() const { return pageIndex+selectedItem; };
-        void SetImage(GuiImage *Img);
-        void RefreshList();
-        void Clear();
-        void Draw();
-        void Update(GuiTrigger *t);
+	public:
+		GuiCheckboxBrowser(int w, int h, int maxSize = 7);
+		virtual ~GuiCheckboxBrowser();
+		bool AddEntrie(const string &text, bool checked = false);
+		int GetSelected() const { return pageIndex+selectedItem; };
+		void SetImage(GuiImage *Img);
+		void RefreshList();
+		void Clear();
+		void Draw();
+		void Update(GuiTrigger *t);
 		sigslot::signal2<GuiCheckbox *, int> checkBoxClicked;
-    private:
-        void onListChange(int SelItem, int SelInd);
-        void OnCheckboxClick(GuiButton *sender, int chan, const POINT &pointer);
-        u16 maxSize;
-        int selectedItem;
-        int pageIndex;
-        int pressedChan;
-        bool blocked;
+	private:
+		void onListChange(int SelItem, int SelInd);
+		void OnCheckboxClick(GuiButton *sender, int chan, const POINT &pointer);
+		u16 maxSize;
+		int selectedItem;
+		int pageIndex;
+		int pressedChan;
+		bool blocked;
 
-        GuiScrollbar scrollBar;
-        GuiTrigger trigA;
-        GuiImage *backgroundImg;
-        GuiImageData *markImgData;
-        GuiImage *markImg;
-        vector<GuiText *> textLineDrawn;
-        vector<GuiCheckbox *> checkBoxDrawn;
-        vector<GuiText *> textLineList;
-        vector<GuiCheckbox *> checkBoxList;
+		GuiScrollbar scrollBar;
+		GuiTrigger trigA;
+		GuiImage *backgroundImg;
+		GuiImageData *markImgData;
+		GuiImage *markImg;
+		vector<GuiText *> textLineDrawn;
+		vector<GuiCheckbox *> checkBoxDrawn;
+		vector<GuiText *> textLineList;
+		vector<GuiCheckbox *> checkBoxList;
 };
 
 #endif

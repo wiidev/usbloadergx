@@ -8,114 +8,114 @@
 BNRInstance * BNRInstance::instance = NULL;
 
 OpeningBNR::OpeningBNR()
-    : imetHdr(0)
+	: imetHdr(0)
 {
 	memset(gameID, 0, sizeof(gameID));
 }
 
 OpeningBNR::~OpeningBNR()
 {
-    if(imetHdr)
-        free(imetHdr);
+	if(imetHdr)
+		free(imetHdr);
 }
 
 bool OpeningBNR::Load(const u8 * discid)
 {
-    if(!discid)
-        return false;
+	if(!discid)
+		return false;
 
-    if(memcmp(gameID, discid, 6) == 0)
-        return true;
+	if(memcmp(gameID, discid, 6) == 0)
+		return true;
 
-    if(imetHdr)
-        free(imetHdr);
-    imetHdr = NULL;
-    snprintf(gameID, sizeof(gameID), (const char *) discid);
+	if(imetHdr)
+		free(imetHdr);
+	imetHdr = NULL;
+	snprintf(gameID, sizeof(gameID), (const char *) discid);
 
-    wbfs_disc_t *disc = WBFS_OpenDisc((u8 *) gameID);
-    if (!disc)
-        return false;
+	wbfs_disc_t *disc = WBFS_OpenDisc((u8 *) gameID);
+	if (!disc)
+		return false;
 
-    wiidisc_t *wdisc = wd_open_disc((int(*)(void *, u32, u32, void *)) wbfs_disc_read, disc);
-    if (!wdisc)
-    {
-        WBFS_CloseDisc(disc);
-        return false;
-    }
+	wiidisc_t *wdisc = wd_open_disc((int(*)(void *, u32, u32, void *)) wbfs_disc_read, disc);
+	if (!wdisc)
+	{
+		WBFS_CloseDisc(disc);
+		return false;
+	}
 
-    imetHdr = (IMETHeader*) wd_extract_file(wdisc, ALL_PARTITIONS, (char *) "opening.bnr");
+	imetHdr = (IMETHeader*) wd_extract_file(wdisc, ALL_PARTITIONS, (char *) "opening.bnr");
 
-    wd_close_disc(wdisc);
-    WBFS_CloseDisc(disc);
+	wd_close_disc(wdisc);
+	WBFS_CloseDisc(disc);
 
-    if(!imetHdr)
-        return false;
+	if(!imetHdr)
+		return false;
 
-    if (imetHdr->fcc != 'IMET')
-    {
-        free(imetHdr);
-        imetHdr = NULL;
-        return false;
-    }
+	if (imetHdr->fcc != 'IMET')
+	{
+		free(imetHdr);
+		imetHdr = NULL;
+		return false;
+	}
 
-    return true;
+	return true;
 }
 
 const u16 * OpeningBNR::GetIMETTitle(int lang)
 {
-    if(!imetHdr || lang < 0 || lang >= 10)
-        return NULL;
+	if(!imetHdr || lang < 0 || lang >= 10)
+		return NULL;
 
-    if(imetHdr->names[lang][0] == 0)
-        lang = CONF_LANG_ENGLISH;
+	if(imetHdr->names[lang][0] == 0)
+		lang = CONF_LANG_ENGLISH;
 
-    return imetHdr->names[lang];
+	return imetHdr->names[lang];
 }
 
 const u8 * OpeningBNR::GetBannerSound(u32 * size)
 {
-    if(!imetHdr)
-        return NULL;
+	if(!imetHdr)
+		return NULL;
 
-    const U8Header *bnrArcHdr = (U8Header *) (imetHdr + 1);
-    const U8Entry *fst = (const U8Entry *) (((const u8 *) bnrArcHdr) + bnrArcHdr->rootNodeOffset);
+	const U8Header *bnrArcHdr = (U8Header *) (imetHdr + 1);
+	const U8Entry *fst = (const U8Entry *) (((const u8 *) bnrArcHdr) + bnrArcHdr->rootNodeOffset);
 
-    u32 i;
-    for (i = 1; i < fst[0].numEntries; ++i)
-        if (fst[i].fileType == 0 && strcasecmp(u8Filename(fst, i), "sound.bin") == 0) break;
+	u32 i;
+	for (i = 1; i < fst[0].numEntries; ++i)
+		if (fst[i].fileType == 0 && strcasecmp(u8Filename(fst, i), "sound.bin") == 0) break;
 
-    if (i >= fst[0].numEntries)
-    {
-        return NULL;
-    }
+	if (i >= fst[0].numEntries)
+	{
+		return NULL;
+	}
 
-    const u8 *sound_bin = ((const u8 *) bnrArcHdr) + fst[i].fileOffset;
-    if (((IMD5Header *) sound_bin)->fcc != 'IMD5')
-    {
-        return NULL;
-    }
-    const u8 *soundChunk = sound_bin + sizeof(IMD5Header);
-    u32 soundChunkSize = fst[i].fileLength - sizeof(IMD5Header);
+	const u8 *sound_bin = ((const u8 *) bnrArcHdr) + fst[i].fileOffset;
+	if (((IMD5Header *) sound_bin)->fcc != 'IMD5')
+	{
+		return NULL;
+	}
+	const u8 *soundChunk = sound_bin + sizeof(IMD5Header);
+	u32 soundChunkSize = fst[i].fileLength - sizeof(IMD5Header);
 
-    if (*((u32*) soundChunk) == 'LZ77')
-    {
-        u32 uncSize = 0;
-        u8 * uncompressed_data = uncompressLZ77(soundChunk, soundChunkSize, &uncSize);
-        if (!uncompressed_data)
-        {
-            return NULL;
-        }
-        if (size) *size = uncSize;
+	if (*((u32*) soundChunk) == 'LZ77')
+	{
+		u32 uncSize = 0;
+		u8 * uncompressed_data = uncompressLZ77(soundChunk, soundChunkSize, &uncSize);
+		if (!uncompressed_data)
+		{
+			return NULL;
+		}
+		if (size) *size = uncSize;
 
-        return uncompressed_data;
-    }
+		return uncompressed_data;
+	}
 
-    u8 *out = (u8 *) malloc(soundChunkSize);
-    if (out)
-    {
-        memcpy(out, soundChunk, soundChunkSize);
-        if (size) *size = soundChunkSize;
-    }
+	u8 *out = (u8 *) malloc(soundChunkSize);
+	if (out)
+	{
+		memcpy(out, soundChunk, soundChunkSize);
+		if (size) *size = soundChunkSize;
+	}
 
-    return out;
+	return out;
 }

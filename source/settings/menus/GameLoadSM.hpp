@@ -29,21 +29,21 @@
 
 class GameLoadSM : public SettingsMenu
 {
-    public:
-        GameLoadSM(const char * GameID);
-        virtual ~GameLoadSM();
-    protected:
-        void SetDefaultConfig();
-        void SetOptionNames();
-        void SetOptionValues();
-        int GetMenuInternal();
+	public:
+		GameLoadSM(const char * GameID);
+		virtual ~GameLoadSM();
+	protected:
+		void SetDefaultConfig();
+		void SetOptionNames();
+		void SetOptionValues();
+		int GetMenuInternal();
 
-        GameCFG GameConfig;
-        OptionList GuiOptions;
+		GameCFG GameConfig;
+		OptionList GuiOptions;
 
-        GuiText * saveBtnTxt;
-        GuiImage * saveBtnImg;
-        GuiButton * saveBtn;
+		GuiText * saveBtnTxt;
+		GuiImage * saveBtnImg;
+		GuiButton * saveBtn;
 };
 
 

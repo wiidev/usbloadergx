@@ -36,14 +36,14 @@ SoundHandler * SoundHandler::instance = NULL;
 
 SoundHandler::SoundHandler()
 {
-    Decoding = false;
-    ExitRequested = false;
+	Decoding = false;
+	ExitRequested = false;
 	for(u32 i = 0; i < MAX_DECODERS; ++i)
-        DecoderList[i] = NULL;
+		DecoderList[i] = NULL;
 
-    ThreadStack = (u8 *) memalign(32, 32768);
+	ThreadStack = (u8 *) memalign(32, 32768);
 	if(!ThreadStack)
-        return;
+		return;
 
 	LWP_CreateThread(&SoundThread, UpdateThread, this, ThreadStack, 32768, 80);
 }
@@ -55,7 +55,7 @@ SoundHandler::~SoundHandler()
 	LWP_JoinThread(SoundThread, NULL);
 	SoundThread = LWP_THREAD_NULL;
 	if(ThreadStack)
-        free(ThreadStack);
+		free(ThreadStack);
 
 	ClearDecoderList();
 }
@@ -71,168 +71,168 @@ SoundHandler * SoundHandler::Instance()
 
 void SoundHandler::DestroyInstance()
 {
-    if(instance)
-    {
-        delete instance;
-    }
-    instance = NULL;
+	if(instance)
+	{
+		delete instance;
+	}
+	instance = NULL;
 }
 
 void SoundHandler::AddDecoder(int voice, const char * filepath)
 {
-    if(voice < 0 || voice >= MAX_DECODERS)
-        return;
+	if(voice < 0 || voice >= MAX_DECODERS)
+		return;
 
-    if(DecoderList[voice] != NULL)
-        RemoveDecoder(voice);
+	if(DecoderList[voice] != NULL)
+		RemoveDecoder(voice);
 
-    DecoderList[voice] = GetSoundDecoder(filepath);
+	DecoderList[voice] = GetSoundDecoder(filepath);
 }
 
 void SoundHandler::AddDecoder(int voice, const u8 * snd, int len)
 {
-    if(voice < 0 || voice >= MAX_DECODERS)
-        return;
+	if(voice < 0 || voice >= MAX_DECODERS)
+		return;
 
-    if(DecoderList[voice] != NULL)
-        RemoveDecoder(voice);
+	if(DecoderList[voice] != NULL)
+		RemoveDecoder(voice);
 
-    DecoderList[voice] = GetSoundDecoder(snd, len);
+	DecoderList[voice] = GetSoundDecoder(snd, len);
 }
 
 void SoundHandler::RemoveDecoder(int voice)
 {
-    if(voice < 0 || voice >= MAX_DECODERS)
-        return;
+	if(voice < 0 || voice >= MAX_DECODERS)
+		return;
 
-    if(DecoderList[voice] != NULL)
-    	delete DecoderList[voice];
+	if(DecoderList[voice] != NULL)
+		delete DecoderList[voice];
 
-    DecoderList[voice] = NULL;
+	DecoderList[voice] = NULL;
 }
 
 void SoundHandler::ClearDecoderList()
 {
-    for(u32 i = 0; i < MAX_DECODERS; ++i)
-        RemoveDecoder(i);
+	for(u32 i = 0; i < MAX_DECODERS; ++i)
+		RemoveDecoder(i);
 }
 
 static inline bool CheckMP3Signature(const u8 * buffer)
 {
-    const char MP3_Magic[][3] =
-    {
-        {'I', 'D', '3'},    //'ID3'
-        {0xff, 0xfe},       //'MPEG ADTS, layer III, v1.0 [protected]', 'mp3', 'audio/mpeg'),
-        {0xff, 0xff},       //'MPEG ADTS, layer III, v1.0', 'mp3', 'audio/mpeg'),
-        {0xff, 0xfa},       //'MPEG ADTS, layer III, v1.0 [protected]', 'mp3', 'audio/mpeg'),
-        {0xff, 0xfb},       //'MPEG ADTS, layer III, v1.0', 'mp3', 'audio/mpeg'),
-        {0xff, 0xf2},       //'MPEG ADTS, layer III, v2.0 [protected]', 'mp3', 'audio/mpeg'),
-        {0xff, 0xf3},       //'MPEG ADTS, layer III, v2.0', 'mp3', 'audio/mpeg'),
-        {0xff, 0xf4},       //'MPEG ADTS, layer III, v2.0 [protected]', 'mp3', 'audio/mpeg'),
-        {0xff, 0xf5},       //'MPEG ADTS, layer III, v2.0', 'mp3', 'audio/mpeg'),
-        {0xff, 0xf6},       //'MPEG ADTS, layer III, v2.0 [protected]', 'mp3', 'audio/mpeg'),
-        {0xff, 0xf7},       //'MPEG ADTS, layer III, v2.0', 'mp3', 'audio/mpeg'),
-        {0xff, 0xe2},       //'MPEG ADTS, layer III, v2.5 [protected]', 'mp3', 'audio/mpeg'),
-        {0xff, 0xe3},       //'MPEG ADTS, layer III, v2.5', 'mp3', 'audio/mpeg'),
-    };
+	const char MP3_Magic[][3] =
+	{
+		{'I', 'D', '3'},	//'ID3'
+		{0xff, 0xfe},	   //'MPEG ADTS, layer III, v1.0 [protected]', 'mp3', 'audio/mpeg'),
+		{0xff, 0xff},	   //'MPEG ADTS, layer III, v1.0', 'mp3', 'audio/mpeg'),
+		{0xff, 0xfa},	   //'MPEG ADTS, layer III, v1.0 [protected]', 'mp3', 'audio/mpeg'),
+		{0xff, 0xfb},	   //'MPEG ADTS, layer III, v1.0', 'mp3', 'audio/mpeg'),
+		{0xff, 0xf2},	   //'MPEG ADTS, layer III, v2.0 [protected]', 'mp3', 'audio/mpeg'),
+		{0xff, 0xf3},	   //'MPEG ADTS, layer III, v2.0', 'mp3', 'audio/mpeg'),
+		{0xff, 0xf4},	   //'MPEG ADTS, layer III, v2.0 [protected]', 'mp3', 'audio/mpeg'),
+		{0xff, 0xf5},	   //'MPEG ADTS, layer III, v2.0', 'mp3', 'audio/mpeg'),
+		{0xff, 0xf6},	   //'MPEG ADTS, layer III, v2.0 [protected]', 'mp3', 'audio/mpeg'),
+		{0xff, 0xf7},	   //'MPEG ADTS, layer III, v2.0', 'mp3', 'audio/mpeg'),
+		{0xff, 0xe2},	   //'MPEG ADTS, layer III, v2.5 [protected]', 'mp3', 'audio/mpeg'),
+		{0xff, 0xe3},	   //'MPEG ADTS, layer III, v2.5', 'mp3', 'audio/mpeg'),
+	};
 
-    if(buffer[0] == MP3_Magic[0][0] && buffer[1] == MP3_Magic[0][1] &&
-       buffer[2] == MP3_Magic[0][2])
-    {
-        return true;
-    }
+	if(buffer[0] == MP3_Magic[0][0] && buffer[1] == MP3_Magic[0][1] &&
+	   buffer[2] == MP3_Magic[0][2])
+	{
+		return true;
+	}
 
-    for(int i = 1; i < 13; i++)
-    {
-        if(buffer[0] == MP3_Magic[i][0] && buffer[1] == MP3_Magic[i][1])
-            return true;
-    }
+	for(int i = 1; i < 13; i++)
+	{
+		if(buffer[0] == MP3_Magic[i][0] && buffer[1] == MP3_Magic[i][1])
+			return true;
+	}
 
-    return false;
+	return false;
 }
 
 SoundDecoder * SoundHandler::GetSoundDecoder(const char * filepath)
 {
-    u32 magic;
-    CFile f(filepath, "rb");
-    if(f.size() == 0)
-        return NULL;
+	u32 magic;
+	CFile f(filepath, "rb");
+	if(f.size() == 0)
+		return NULL;
 
-    do
-    {
-        f.read((u8 *) &magic, 1);
-    }
-    while(((u8 *) &magic)[0] == 0 && f.tell() < f.size());
+	do
+	{
+		f.read((u8 *) &magic, 1);
+	}
+	while(((u8 *) &magic)[0] == 0 && f.tell() < f.size());
 
-    if(f.tell() == f.size())
-        return NULL;
+	if(f.tell() == f.size())
+		return NULL;
 
-    f.seek(f.tell()-1, SEEK_SET);
-    f.read((u8 *) &magic, 4);
-    f.close();
+	f.seek(f.tell()-1, SEEK_SET);
+	f.read((u8 *) &magic, 4);
+	f.close();
 
-    if(magic == 'OggS')
-    {
-        return new OggDecoder(filepath);
-    }
-    else if(magic == 'RIFF')
-    {
-        return new WavDecoder(filepath);
-    }
-    else if(magic == 'BNS ')
-    {
-        return new BNSDecoder(filepath);
-    }
-    else if(magic == 'FORM')
-    {
-        return new AifDecoder(filepath);
-    }
-    else if(CheckMP3Signature((u8 *) &magic) == true)
-    {
-        return new Mp3Decoder(filepath);
-    }
+	if(magic == 'OggS')
+	{
+		return new OggDecoder(filepath);
+	}
+	else if(magic == 'RIFF')
+	{
+		return new WavDecoder(filepath);
+	}
+	else if(magic == 'BNS ')
+	{
+		return new BNSDecoder(filepath);
+	}
+	else if(magic == 'FORM')
+	{
+		return new AifDecoder(filepath);
+	}
+	else if(CheckMP3Signature((u8 *) &magic) == true)
+	{
+		return new Mp3Decoder(filepath);
+	}
 
-    return new SoundDecoder(filepath);
+	return new SoundDecoder(filepath);
 }
 
 SoundDecoder * SoundHandler::GetSoundDecoder(const u8 * sound, int length)
 {
-    const u8 * check = sound;
-    int counter = 0;
+	const u8 * check = sound;
+	int counter = 0;
 
-    while(check[0] == 0 && counter < length)
-    {
-        check++;
-        counter++;
-    }
+	while(check[0] == 0 && counter < length)
+	{
+		check++;
+		counter++;
+	}
 
-    if(counter >= length)
-        return NULL;
+	if(counter >= length)
+		return NULL;
 
-    u32 * magic = (u32 *) check;
+	u32 * magic = (u32 *) check;
 
-    if(magic[0] == 'OggS')
-    {
-        return new OggDecoder(sound, length);
-    }
-    else if(magic[0] == 'RIFF')
-    {
-        return new WavDecoder(sound, length);
-    }
-    else if(magic[0] == 'BNS ')
-    {
-        return new BNSDecoder(sound, length);
-    }
-    else if(magic[0] == 'FORM')
-    {
-        return new AifDecoder(sound, length);
-    }
-    else if(CheckMP3Signature(check) == true)
-    {
-        return new Mp3Decoder(sound, length);
-    }
+	if(magic[0] == 'OggS')
+	{
+		return new OggDecoder(sound, length);
+	}
+	else if(magic[0] == 'RIFF')
+	{
+		return new WavDecoder(sound, length);
+	}
+	else if(magic[0] == 'BNS ')
+	{
+		return new BNSDecoder(sound, length);
+	}
+	else if(magic[0] == 'FORM')
+	{
+		return new AifDecoder(sound, length);
+	}
+	else if(CheckMP3Signature(check) == true)
+	{
+		return new Mp3Decoder(sound, length);
+	}
 
-    return new SoundDecoder(sound, length);
+	return new SoundDecoder(sound, length);
 }
 
 void * SoundHandler::UpdateThread(void *arg)
@@ -243,22 +243,22 @@ void * SoundHandler::UpdateThread(void *arg)
 
 void SoundHandler::InternalSoundUpdates()
 {
-    u16 i = 0;
+	u16 i = 0;
 	LWP_InitQueue(&ThreadQueue);
 	while (!ExitRequested)
 	{
-        LWP_ThreadSleep(ThreadQueue);
+		LWP_ThreadSleep(ThreadQueue);
 
-	    for(i = 0; i < MAX_DECODERS; ++i)
-	    {
-	        if(DecoderList[i] == NULL)
-                continue;
+		for(i = 0; i < MAX_DECODERS; ++i)
+		{
+			if(DecoderList[i] == NULL)
+				continue;
 
-            Decoding = true;
-            DecoderList[i]->Decode();
-	    }
-	    Decoding = false;
+			Decoding = true;
+			DecoderList[i]->Decode();
+		}
+		Decoding = false;
 	}
-    LWP_CloseQueue(ThreadQueue);
-    ThreadQueue = LWP_TQUEUE_NULL;
+	LWP_CloseQueue(ThreadQueue);
+	ThreadQueue = LWP_TQUEUE_NULL;
 }

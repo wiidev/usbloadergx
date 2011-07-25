@@ -33,34 +33,34 @@
 
 class CGameCategories
 {
-    public:
-        CGameCategories();
-        bool Load(string filepath);
-        bool Save();
-        bool SetCategory(const string &gameID, unsigned int id);
-        bool SetCategory(const char *gameID, unsigned int id);
-        bool SetCategory(const unsigned char *gameID, int unsigned id) { return SetCategory((const char *) gameID, id); };
-        bool ReplaceCategory(const string &gameID, unsigned int id);
-        bool ReplaceCategory(const char *gameID, unsigned int id);
-        bool ReplaceCategory(const unsigned char *gameID, int unsigned id) { return SetCategory((const char *) gameID, id); };
-        void RemoveCategory(unsigned int id);
-        void RemoveCategory(const string &gameID, unsigned int id);
-        void RemoveCategory(const char *gameID, unsigned int id);
-        void RemoveCategory(const unsigned char *gameID, unsigned int id)  { RemoveCategory((const char *) gameID, id); };
-        void RemoveGameCategories(const string &gameID);
-        const vector<unsigned int> &operator[](const char *gameID) const;
-        const vector<unsigned int> &operator[](const unsigned char *gameID) const { return operator[]((const char *) gameID); }
-        bool ImportFromWiiTDB(const string &xmlpath);
-        void clear() { List.clear(); CategoryList.clear(); };
-        static bool isInCategory(const char *gameID, unsigned int id);
+	public:
+		CGameCategories();
+		bool Load(string filepath);
+		bool Save();
+		bool SetCategory(const string &gameID, unsigned int id);
+		bool SetCategory(const char *gameID, unsigned int id);
+		bool SetCategory(const unsigned char *gameID, int unsigned id) { return SetCategory((const char *) gameID, id); };
+		bool ReplaceCategory(const string &gameID, unsigned int id);
+		bool ReplaceCategory(const char *gameID, unsigned int id);
+		bool ReplaceCategory(const unsigned char *gameID, int unsigned id) { return SetCategory((const char *) gameID, id); };
+		void RemoveCategory(unsigned int id);
+		void RemoveCategory(const string &gameID, unsigned int id);
+		void RemoveCategory(const char *gameID, unsigned int id);
+		void RemoveCategory(const unsigned char *gameID, unsigned int id)  { RemoveCategory((const char *) gameID, id); };
+		void RemoveGameCategories(const string &gameID);
+		const vector<unsigned int> &operator[](const char *gameID) const;
+		const vector<unsigned int> &operator[](const unsigned char *gameID) const { return operator[]((const char *) gameID); }
+		bool ImportFromWiiTDB(const string &xmlpath);
+		void clear() { List.clear(); CategoryList.clear(); };
+		static bool isInCategory(const char *gameID, unsigned int id);
 
-        CCategoryList CategoryList;
-    protected:
-        bool ValidVersion(TiXmlElement *xmlfile);
+		CCategoryList CategoryList;
+	protected:
+		bool ValidVersion(TiXmlElement *xmlfile);
 
-        string configPath;
-        const vector<unsigned int> defaultCategory;
-        map<string, vector<unsigned int> > List;
+		string configPath;
+		const vector<unsigned int> defaultCategory;
+		map<string, vector<unsigned int> > List;
 };
 
 extern CGameCategories GameCategories;

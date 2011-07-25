@@ -26,14 +26,14 @@
 extern "C"
 {
 #endif
-    // Globals
-    extern u32 hooktype;
+	// Globals
+	extern u32 hooktype;
 
-    // Function prototypes
-    bool dogamehooks(void *addr, u32 len);
-    void langpatcher(void *addr, u32 len, u8 languageChoice);
-    void vidolpatcher(void *addr, u32 len);
-    void patchdebug(void *addr, u32 len);
+	// Function prototypes
+	bool dogamehooks(void *addr, u32 len);
+	void langpatcher(void *addr, u32 len, u8 languageChoice);
+	void vidolpatcher(void *addr, u32 len);
+	void patchdebug(void *addr, u32 len);
 
 #ifdef __cplusplus
 }

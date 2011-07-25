@@ -30,84 +30,84 @@ static std::vector<std::string> Arguments;
 
 void AddBootArgument(const char * argv)
 {
-    std::string arg(argv);
-    Arguments.push_back(arg);
+	std::string arg(argv);
+	Arguments.push_back(arg);
 }
 
 int CopyHomebrewMemory(u8 *temp, u32 pos, u32 len)
 {
-    homebrewsize += len;
-    memcpy((homebrewbuffer) + pos, temp, len);
+	homebrewsize += len;
+	memcpy((homebrewbuffer) + pos, temp, len);
 
-    return 1;
+	return 1;
 }
 
 void FreeHomebrewBuffer()
 {
-    homebrewbuffer = EXECUTE_ADDR;
-    homebrewsize = 0;
+	homebrewbuffer = EXECUTE_ADDR;
+	homebrewsize = 0;
 
-    Arguments.clear();
+	Arguments.clear();
 }
 
 static int SetupARGV(struct __argv * args)
 {
-    if (!args) return -1;
+	if (!args) return -1;
 
-    bzero(args, sizeof(struct __argv));
-    args->argvMagic = ARGV_MAGIC;
+	bzero(args, sizeof(struct __argv));
+	args->argvMagic = ARGV_MAGIC;
 
-    u32 argc = 0;
-    u32 position = 0;
-    u32 stringlength = 1;
+	u32 argc = 0;
+	u32 position = 0;
+	u32 stringlength = 1;
 
-    /** Append Arguments **/
-    for (u32 i = 0; i < Arguments.size(); i++)
-    {
-        stringlength += Arguments[i].size() + 1;
-    }
+	/** Append Arguments **/
+	for (u32 i = 0; i < Arguments.size(); i++)
+	{
+		stringlength += Arguments[i].size() + 1;
+	}
 
-    args->length = stringlength;
+	args->length = stringlength;
 	//! Put the argument into mem2 too, to avoid overwriting it
-	args.commandLine = (char *) ARGS_ADDR + sizeof(struct __argv);
+	args->commandLine = (char *) ARGS_ADDR + sizeof(struct __argv);
 
-    /** Append Arguments **/
-    for (u32 i = 0; i < Arguments.size(); i++)
-    {
-        strcpy(&args->commandLine[position], Arguments[i].c_str());
-        position += Arguments[i].size() + 1;
-        argc++;
-    }
+	/** Append Arguments **/
+	for (u32 i = 0; i < Arguments.size(); i++)
+	{
+		strcpy(&args->commandLine[position], Arguments[i].c_str());
+		position += Arguments[i].size() + 1;
+		argc++;
+	}
 
-    args->argc = argc;
+	args->argc = argc;
 
-    args->commandLine[args->length - 1] = '\0';
-    args->argv = &args->commandLine;
-    args->endARGV = args->argv + 1;
+	args->commandLine[args->length - 1] = '\0';
+	args->argv = &args->commandLine;
+	args->endARGV = args->argv + 1;
 
-    Arguments.clear();
+	Arguments.clear();
 
-    return 0;
+	return 0;
 }
 
 static int RunAppbooter()
 {
-    if (homebrewsize == 0) return -1;
+	if (homebrewsize == 0) return -1;
 
-    ExitApp();
+	ExitApp();
 
 	if(Settings.EntryIOS != IOS_GetVersion())
-    	IOS_ReloadIOS(Settings.EntryIOS);
+		IOS_ReloadIOS(Settings.EntryIOS);
 
-    struct __argv args;
-    SetupARGV(&args);
+	struct __argv args;
+	SetupARGV(&args);
 
-    u32 cpu_isr;
+	u32 cpu_isr;
 
 	memcpy(BOOTER_ADDR, app_booter_bin, app_booter_bin_size);
 	DCFlushRange(BOOTER_ADDR, app_booter_bin_size);
 
-    entrypoint entry = (entrypoint) BOOTER_ADDR;
+	entrypoint entry = (entrypoint) BOOTER_ADDR;
 
 	if (args.argvMagic == ARGV_MAGIC)
 	{
@@ -115,66 +115,66 @@ static int RunAppbooter()
 		DCFlushRange(ARGS_ADDR, sizeof(args) + args.length);
 	}
 
-    u64 currentStub = getStubDest();
-    loadStub();
+	u64 currentStub = getStubDest();
+	loadStub();
 
-    if (Set_Stub_Split(0x00010001, "UNEO") < 0)
-    {
-        if (Set_Stub_Split(0x00010001, "ULNR") < 0)
-        {
-            if (!currentStub) currentStub = 0x100000002ULL;
+	if (Set_Stub_Split(0x00010001, "UNEO") < 0)
+	{
+		if (Set_Stub_Split(0x00010001, "ULNR") < 0)
+		{
+			if (!currentStub) currentStub = 0x100000002ULL;
 
-            Set_Stub(currentStub);
-        }
-    }
+			Set_Stub(currentStub);
+		}
+	}
 
-    SYS_ResetSystem(SYS_SHUTDOWN, 0, 0);
-    _CPU_ISR_Disable( cpu_isr );
-    __exception_closeall();
-    entry();
-    _CPU_ISR_Restore( cpu_isr );
+	SYS_ResetSystem(SYS_SHUTDOWN, 0, 0);
+	_CPU_ISR_Disable( cpu_isr );
+	__exception_closeall();
+	entry();
+	_CPU_ISR_Restore( cpu_isr );
 
-    return 0;
+	return 0;
 }
 
 int BootHomebrew(const char * filepath)
 {
-    void *buffer = NULL;
-    u32 filesize = 0;
+	void *buffer = NULL;
+	u32 filesize = 0;
 
-    FILE *file = fopen(filepath, "rb");
+	FILE *file = fopen(filepath, "rb");
 
-    if (!file) return -1;
+	if (!file) return -1;
 
-    fseek(file, 0, SEEK_END);
-    filesize = ftell(file);
-    rewind(file);
+	fseek(file, 0, SEEK_END);
+	filesize = ftell(file);
+	rewind(file);
 
-    buffer = malloc(filesize);
+	buffer = malloc(filesize);
 
-    if (fread(buffer, 1, filesize, file) != filesize)
-    {
-        fclose(file);
-        free(buffer);
-        DeviceHandler::DestroyInstance();
-        Sys_BackToLoader();
-    }
+	if (fread(buffer, 1, filesize, file) != filesize)
+	{
+		fclose(file);
+		free(buffer);
+		DeviceHandler::DestroyInstance();
+		Sys_BackToLoader();
+	}
 
-    fclose(file);
+	fclose(file);
 
-    CopyHomebrewMemory((u8*) buffer, 0, filesize);
+	CopyHomebrewMemory((u8*) buffer, 0, filesize);
 
-    if (buffer)
-    {
-        free(buffer);
-        buffer = NULL;
-    }
+	if (buffer)
+	{
+		free(buffer);
+		buffer = NULL;
+	}
 
-    AddBootArgument(filepath);
-    return RunAppbooter();
+	AddBootArgument(filepath);
+	return RunAppbooter();
 }
 
 int BootHomebrewFromMem()
 {
-    return RunAppbooter();
+	return RunAppbooter();
 }

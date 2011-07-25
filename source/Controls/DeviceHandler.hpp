@@ -31,44 +31,44 @@
 
 enum
 {
-    SD = 0,
-    USB1,
-    USB2,
-    USB3,
-    USB4,
-    USB5,
-    USB6,
-    USB7,
-    USB8,
-    MAXDEVICES
+	SD = 0,
+	USB1,
+	USB2,
+	USB3,
+	USB4,
+	USB5,
+	USB6,
+	USB7,
+	USB8,
+	MAXDEVICES
 };
 
 const char DeviceName[MAXDEVICES][6] =
 {
-    "sd",
-    "usb1",
-    "usb2",
-    "usb3",
-    "usb4",
-    "usb5",
-    "usb6",
-    "usb7",
-    "usb8",
+	"sd",
+	"usb1",
+	"usb2",
+	"usb3",
+	"usb4",
+	"usb5",
+	"usb6",
+	"usb7",
+	"usb8",
 };
 
 class DeviceHandler
 {
-    public:
+	public:
 		static DeviceHandler * Instance();
 		static void DestroyInstance();
 
-        bool MountAll();
-        void UnMountAll();
-        bool Mount(int dev);
-        bool IsInserted(int dev);
-        void UnMount(int dev);
+		bool MountAll();
+		void UnMountAll();
+		bool Mount(int dev);
+		bool IsInserted(int dev);
+		void UnMount(int dev);
 
-        //! Individual Mounts/UnMounts...
+		//! Individual Mounts/UnMounts...
 		bool MountSD();
 		bool MountAllUSB(bool spinUp = true);
 		bool MountUSBPort1(bool spinUp = true);
@@ -86,24 +86,24 @@ class DeviceHandler
 		static const DISC_INTERFACE *GetUSB1Interface() { return &__io_usbstorage2_port1; }
 		static int GetUSBFilesystemType(int part);
 		static int PathToDriveType(const char * path);
-        static const char * GetFSName(int dev);
-        static const char * PathToFSName(const char * path) { return GetFSName(PathToDriveType(path)); };
-        static int PartitionToUSBPort(int part);
-        static u16 GetUSBPartitionCount();
-        static int PartitionToPortPartition(int part);
-        static const char *GetUSBFSName(int partition);
-    private:
-        DeviceHandler() : sd(0), gca(0), gcb(0), usb0(0), usb1(0) { };
-        ~DeviceHandler();
+		static const char * GetFSName(int dev);
+		static const char * PathToFSName(const char * path) { return GetFSName(PathToDriveType(path)); };
+		static int PartitionToUSBPort(int part);
+		static u16 GetUSBPartitionCount();
+		static int PartitionToPortPartition(int part);
+		static const char *GetUSBFSName(int partition);
+	private:
+		DeviceHandler() : sd(0), gca(0), gcb(0), usb0(0), usb1(0) { };
+		~DeviceHandler();
 		bool MountUSB(int part);
 
 		static DeviceHandler *instance;
 
-        PartitionHandle * sd;
-        PartitionHandle * gca;
-        PartitionHandle * gcb;
-        PartitionHandle * usb0;
-        PartitionHandle * usb1;
+		PartitionHandle * sd;
+		PartitionHandle * gca;
+		PartitionHandle * gcb;
+		PartitionHandle * usb0;
+		PartitionHandle * usb1;
 };
 
 #endif

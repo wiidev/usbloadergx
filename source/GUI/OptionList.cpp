@@ -36,55 +36,55 @@ OptionList::OptionList()
 
 OptionList::~OptionList()
 {
-    ClearList();
+	ClearList();
 }
 
 void OptionList::SetName(int i, const char *format, ...)
 {
-    if(i < (int) name.size())
-        name[i].clear();
+	if(i < (int) name.size())
+		name[i].clear();
 
-    if(!format)
-        return;
+	if(!format)
+		return;
 
 	char *tmp=0;
 	va_list va;
 	va_start(va, format);
 	if((vasprintf(&tmp, format, va)>=0) && tmp)
 	{
-	    if(i >= (int) name.size())
-	    {
-	        Resize(i+1);
-	    }
+		if(i >= (int) name.size())
+		{
+			Resize(i+1);
+		}
 
 		name[i].assign(tmp);
 
-        listChanged = true;
+		listChanged = true;
 	}
 	va_end(va);
 
 	if(tmp)
-        free(tmp);
+		free(tmp);
 }
 
 void OptionList::SetValue(int i, const char *format, ...)
 {
-    if(i < (int) value.size())
-        value[i].clear();
+	if(i < (int) value.size())
+		value[i].clear();
 
 	char *tmp=0;
 	va_list va;
 	va_start(va, format);
 	if((vasprintf(&tmp, format, va)>=0) && tmp)
 	{
-	    if(i >= (int) value.size())
-	    {
-	        Resize(i+1);
-	    }
+		if(i >= (int) value.size())
+		{
+			Resize(i+1);
+		}
 
 		value[i].assign(tmp);
 
-        listChanged = true;
+		listChanged = true;
 	}
 	va_end(va);
 
@@ -94,35 +94,35 @@ void OptionList::SetValue(int i, const char *format, ...)
 
 const char * OptionList::GetName(int i)
 {
-    if(i < 0 || i >= (int) name.size())
-        return NULL;
+	if(i < 0 || i >= (int) name.size())
+		return NULL;
 
-    return name.at(i).c_str();
+	return name.at(i).c_str();
 }
 
 const char * OptionList::GetValue(int i)
 {
-    if(i < 0 || i >= (int) value.size())
-        return NULL;
+	if(i < 0 || i >= (int) value.size())
+		return NULL;
 
-    return value.at(i).c_str();
+	return value.at(i).c_str();
 }
 
 void OptionList::Resize(int size)
 {
-    name.resize(size);
-    value.resize(size);
-    listChanged = true;
+	name.resize(size);
+	value.resize(size);
+	listChanged = true;
 }
 
 void OptionList::RemoveOption(int i)
 {
-    if(i < 0 || i >= (int) name.size())
-        return;
+	if(i < 0 || i >= (int) name.size())
+		return;
 
-    name.erase(name.begin()+i);
-    value.erase(value.begin()+i);
-    listChanged = true;
+	name.erase(name.begin()+i);
+	value.erase(value.begin()+i);
+	listChanged = true;
 }
 
 void OptionList::ClearList()
@@ -131,5 +131,5 @@ void OptionList::ClearList()
 	value.clear();
 	std::vector<std::string>().swap(name);
 	std::vector<std::string>().swap(value);
-    listChanged = true;
+	listChanged = true;
 }

@@ -27,69 +27,69 @@
 #include "language/gettext.h"
 
 CategorySwitchPrompt::CategorySwitchPrompt()
-    : CategoryPrompt(tr("Show Categories")), oldSetting(Settings.EnabledCategories)
+	: CategoryPrompt(tr("Show Categories")), oldSetting(Settings.EnabledCategories)
 {
-    browser->checkBoxClicked.connect(this, &CategorySwitchPrompt::OnCheckboxClick);
-    browserRefresh.connect(this, &CategorySwitchPrompt::onBrowserRefresh);
-    resetChanges.connect(this, &CategorySwitchPrompt::onResetChanges);
+	browser->checkBoxClicked.connect(this, &CategorySwitchPrompt::OnCheckboxClick);
+	browserRefresh.connect(this, &CategorySwitchPrompt::onBrowserRefresh);
+	resetChanges.connect(this, &CategorySwitchPrompt::onResetChanges);
 
-    browserRefresh();
+	browserRefresh();
 }
 
 void CategorySwitchPrompt::onResetChanges()
 {
-    Settings.EnabledCategories = oldSetting;
-    GameCategories.Load(Settings.ConfigPath);
+	Settings.EnabledCategories = oldSetting;
+	GameCategories.Load(Settings.ConfigPath);
 }
 
 void CategorySwitchPrompt::onBrowserRefresh()
 {
-    browser->Clear();
-    GameCategories.CategoryList.goToFirst();
-    do
-    {
-        bool checked = false;
+	browser->Clear();
+	GameCategories.CategoryList.goToFirst();
+	do
+	{
+		bool checked = false;
 
-        for(u32 i = 0; i < Settings.EnabledCategories.size(); ++i)
-        {
-            if(Settings.EnabledCategories[i] == GameCategories.CategoryList.getCurrentID())
-            {
-                checked = true;
-                break;
-            }
-        }
+		for(u32 i = 0; i < Settings.EnabledCategories.size(); ++i)
+		{
+			if(Settings.EnabledCategories[i] == GameCategories.CategoryList.getCurrentID())
+			{
+				checked = true;
+				break;
+			}
+		}
 
-        browser->AddEntrie(tr(GameCategories.CategoryList.getCurrentName().c_str()), checked);
-    }
-    while(GameCategories.CategoryList.goToNext());
+		browser->AddEntrie(tr(GameCategories.CategoryList.getCurrentName().c_str()), checked);
+	}
+	while(GameCategories.CategoryList.goToNext());
 
-    GameCategories.CategoryList.goToFirst();
-    browser->RefreshList();
+	GameCategories.CategoryList.goToFirst();
+	browser->RefreshList();
 }
 
 void CategorySwitchPrompt::OnCheckboxClick(GuiCheckbox *checkBox, int index)
 {
-    GameCategories.CategoryList.goToFirst();
-    for(int i = 0; i < index; ++i)
-        GameCategories.CategoryList.goToNext();
+	GameCategories.CategoryList.goToFirst();
+	for(int i = 0; i < index; ++i)
+		GameCategories.CategoryList.goToNext();
 
-    u32 i;
-    for(i = 0; i < Settings.EnabledCategories.size(); ++i)
-    {
-        if(Settings.EnabledCategories[i] == GameCategories.CategoryList.getCurrentID())
-        {
-            if(!checkBox->IsChecked())
-            {
-                Settings.EnabledCategories.erase(Settings.EnabledCategories.begin()+i);
-                markChanged();
-            }
-            break;
-        }
-    }
+	u32 i;
+	for(i = 0; i < Settings.EnabledCategories.size(); ++i)
+	{
+		if(Settings.EnabledCategories[i] == GameCategories.CategoryList.getCurrentID())
+		{
+			if(!checkBox->IsChecked())
+			{
+				Settings.EnabledCategories.erase(Settings.EnabledCategories.begin()+i);
+				markChanged();
+			}
+			break;
+		}
+	}
 
-    if(i == Settings.EnabledCategories.size() && checkBox->IsChecked())
-    {
-        Settings.EnabledCategories.push_back(GameCategories.CategoryList.getCurrentID());
-        markChanged();
-    }
+	if(i == Settings.EnabledCategories.size() && checkBox->IsChecked())
+	{
+		Settings.EnabledCategories.push_back(GameCategories.CategoryList.getCurrentID());
+		markChanged();
+	}
 }

@@ -9,36 +9,36 @@
 class WDMMenu : public GuiWindow
 {
 	public:
-        WDMMenu(const struct discHdr * header);
-        virtual ~WDMMenu();
-        int GetChoice();
-        static int Show(const struct discHdr * header);
-        static u32 GetAlternateDolOffset() { return AlternateDolOffset; }
-        static u32 GetDolParameter() { return AlternateDolParameter; }
-    private:
+		WDMMenu(const struct discHdr * header);
+		virtual ~WDMMenu();
+		int GetChoice();
+		static int Show(const struct discHdr * header);
+		static u32 GetAlternateDolOffset() { return AlternateDolOffset; }
+		static u32 GetDolParameter() { return AlternateDolParameter; }
+	private:
 		void CheckGameFiles(const struct discHdr * header);
 
 		static u32 AlternateDolOffset;
 		static u32 AlternateDolParameter;
 
-        WDMFile * wdmFile;
-        vector<pair<int, int> > DOLOffsetList;
-        GuiImageData * btnOutline;
+		WDMFile * wdmFile;
+		vector<pair<int, int> > DOLOffsetList;
+		GuiImageData * btnOutline;
 
-        GuiTrigger * trigA;
-        GuiTrigger * trigB;
+		GuiTrigger * trigA;
+		GuiTrigger * trigB;
 
-        OptionList * Options;
+		OptionList * Options;
 
-        GuiText * backBtnTxt;
-        GuiImage * backBtnImg;
-        GuiButton * backBtn;
+		GuiText * backBtnTxt;
+		GuiImage * backBtnImg;
+		GuiButton * backBtn;
 
-        GuiText * defaultBtnTxt;
-        GuiImage * defaultBtnImg;
-        GuiButton * defaultBtn;
+		GuiText * defaultBtnTxt;
+		GuiImage * defaultBtnImg;
+		GuiButton * defaultBtn;
 
-        GuiOptionBrowser * optionBrowser;
+		GuiOptionBrowser * optionBrowser;
 };
 
 #endif

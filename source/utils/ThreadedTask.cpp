@@ -26,38 +26,38 @@
 ThreadedTask * ThreadedTask::instance = NULL;
 
 ThreadedTask::ThreadedTask()
-    : ExitRequested(false)
+	: ExitRequested(false)
 {
 	LWP_CreateThread (&Thread, ThreadCallback, this, NULL, 16384, 80);
 }
 
 ThreadedTask::~ThreadedTask()
 {
-    ExitRequested = true;
-    Execute();
-    LWP_JoinThread(Thread, NULL);
+	ExitRequested = true;
+	Execute();
+	LWP_JoinThread(Thread, NULL);
 }
 
 void * ThreadedTask::ThreadCallback(void *arg)
 {
-    ThreadedTask * myInstance = (ThreadedTask *) arg;
+	ThreadedTask * myInstance = (ThreadedTask *) arg;
 
-    while(!myInstance->ExitRequested)
-    {
-        LWP_SuspendThread(myInstance->Thread);
+	while(!myInstance->ExitRequested)
+	{
+		LWP_SuspendThread(myInstance->Thread);
 
-        while(!myInstance->CallbackList.empty())
-        {
-            if(myInstance->CallbackList[0].first)
-                myInstance->CallbackList[0].first->Execute(myInstance->ArgList[0]);
+		while(!myInstance->CallbackList.empty())
+		{
+			if(myInstance->CallbackList[0].first)
+				myInstance->CallbackList[0].first->Execute(myInstance->ArgList[0]);
 
-            else if(myInstance->CallbackList[0].second)
-                myInstance->CallbackList[0].second(myInstance->ArgList[0]);
+			else if(myInstance->CallbackList[0].second)
+				myInstance->CallbackList[0].second(myInstance->ArgList[0]);
 
-            myInstance->CallbackList.erase(myInstance->CallbackList.begin());
-            myInstance->ArgList.erase(myInstance->ArgList.begin());
-        }
-    }
+			myInstance->CallbackList.erase(myInstance->CallbackList.begin());
+			myInstance->ArgList.erase(myInstance->ArgList.begin());
+		}
+	}
 
-    return NULL;
+	return NULL;
 }

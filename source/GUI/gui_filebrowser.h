@@ -7,34 +7,34 @@
 //!Display a list of files
 class GuiFileBrowser: public GuiElement, public sigslot::has_slots<>
 {
-    public:
-        GuiFileBrowser(int w, int h);
-        virtual ~GuiFileBrowser();
-        void DisableTriggerUpdate(bool set);
-        void ResetState();
-        void SetFocus(int f);
-        void Draw();
-        void UpdateList();
-        void Update(GuiTrigger * t);
-        GuiButton * fileList[PAGESIZE];
-    protected:
-        void onListChange(int SelItem, int SelInd);
-        int selectedItem;
-        bool triggerdisabled;
+	public:
+		GuiFileBrowser(int w, int h);
+		virtual ~GuiFileBrowser();
+		void DisableTriggerUpdate(bool set);
+		void ResetState();
+		void SetFocus(int f);
+		void Draw();
+		void UpdateList();
+		void Update(GuiTrigger * t);
+		GuiButton * fileList[PAGESIZE];
+	protected:
+		void onListChange(int SelItem, int SelInd);
+		int selectedItem;
+		bool triggerdisabled;
 
-        GuiText * fileListText[PAGESIZE];
-        GuiText * fileListTextOver[PAGESIZE];
-        GuiImage * fileListBg[PAGESIZE];
-        GuiImage * fileListFolder[PAGESIZE];
+		GuiText * fileListText[PAGESIZE];
+		GuiText * fileListTextOver[PAGESIZE];
+		GuiImage * fileListBg[PAGESIZE];
+		GuiImage * fileListFolder[PAGESIZE];
 
-        GuiImage * bgFileSelectionImg;
+		GuiImage * bgFileSelectionImg;
 
-        GuiImageData * bgFileSelection;
-        GuiImageData * bgFileSelectionEntry;
-        GuiImageData * fileFolder;
+		GuiImageData * bgFileSelection;
+		GuiImageData * bgFileSelectionEntry;
+		GuiImageData * fileFolder;
 
-        GuiTrigger * trigA;
-        GuiScrollbar scrollBar;
+		GuiTrigger * trigA;
+		GuiScrollbar scrollBar;
 };
 
 

@@ -35,12 +35,12 @@ extern "C" {
 
 typedef struct _TimeStruct
 {
-    u32 tm_sec;            /* seconds after the minute - [0,59] */
-    u32 tm_min;            /* minutes after the hour - [0,59] */
-    u32 tm_hour;           /* hours since midnight - [0,23] */
-    u32 tm_mday;           /* day of the month - [1,31] */
-    u32 tm_mon;            /* months since January - [0,11] */
-    u32 tm_year;           /* years - [1980..2044] */
+	u32 tm_sec;			/* seconds after the minute - [0,59] */
+	u32 tm_min;			/* minutes after the hour - [0,59] */
+	u32 tm_hour;		   /* hours since midnight - [0,23] */
+	u32 tm_mday;		   /* day of the month - [1,31] */
+	u32 tm_mon;			/* months since January - [0,11] */
+	u32 tm_year;		   /* years - [1980..2044] */
 } TimeStruct;
 
 bool TimePassed(int limit);
@@ -53,14 +53,14 @@ void ConvertNTFSDate(u64 ulNTFSDate,  TimeStruct * ptm);
 
 class Timer
 {
-    public:
-        Timer() { starttick = gettime(); };
-        ~Timer() { };
-        float elapsed() { return (float) (gettime()-starttick)/(1000.0f*TB_TIMER_CLOCK); };
-        float elapsed_millisecs() { return 1000.0f*elapsed(); };
-        void reset() { starttick = gettime(); };
-    protected:
-        u64 starttick;
+	public:
+		Timer() { starttick = gettime(); };
+		~Timer() { };
+		float elapsed() { return (float) (gettime()-starttick)/(1000.0f*TB_TIMER_CLOCK); };
+		float elapsed_millisecs() { return 1000.0f*elapsed(); };
+		void reset() { starttick = gettime(); };
+	protected:
+		u64 starttick;
 };
 
 #endif //__cplusplus

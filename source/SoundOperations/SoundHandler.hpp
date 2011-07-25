@@ -30,11 +30,11 @@
 #include <gccore.h>
 #include "SoundDecoder.hpp"
 
-#define MAX_DECODERS    16
+#define MAX_DECODERS	16
 
 class SoundHandler
 {
-    public:
+	public:
 		static SoundHandler * Instance();
 		static void DestroyInstance();
 
@@ -43,8 +43,8 @@ class SoundHandler
 		void RemoveDecoder(int voice);
 		void DestroyDecoder(SoundDecoder * decoder);
 
-        SoundDecoder * Decoder(int i) { return ((i < 0 || i >= MAX_DECODERS) ? NULL : DecoderList[i]); };
-        void ThreadSignal() { LWP_ThreadSignal(ThreadQueue); };
+		SoundDecoder * Decoder(int i) { return ((i < 0 || i >= MAX_DECODERS) ? NULL : DecoderList[i]); };
+		void ThreadSignal() { LWP_ThreadSignal(ThreadQueue); };
 		bool IsDecoding() { return Decoding; };
 	protected:
 		SoundHandler();
@@ -52,13 +52,13 @@ class SoundHandler
 		static void * UpdateThread(void *arg);
 		void InternalSoundUpdates();
 		void ClearDecoderList();
-        SoundDecoder * GetSoundDecoder(const char * filepath);
-        SoundDecoder * GetSoundDecoder(const u8 * sound, int length);
+		SoundDecoder * GetSoundDecoder(const char * filepath);
+		SoundDecoder * GetSoundDecoder(const u8 * sound, int length);
 
 		static SoundHandler * instance;
 		u8 * ThreadStack;
 		lwp_t SoundThread;
-        lwpq_t ThreadQueue;
+		lwpq_t ThreadQueue;
 		bool Decoding;
 		bool ExitRequested;
 

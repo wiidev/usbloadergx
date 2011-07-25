@@ -33,31 +33,31 @@
 
 typedef struct
 {
-        u64 offset; // ZipFile offset
-        u64 length; // uncompressed file length in 64 bits for sizes higher than 4GB
-        bool isdir; // 0 - file, 1 - directory
-        char filename[256]; // full filename
+		u64 offset; // ZipFile offset
+		u64 length; // uncompressed file length in 64 bits for sizes higher than 4GB
+		bool isdir; // 0 - file, 1 - directory
+		char filename[256]; // full filename
 } FileStructure;
 
 class ZipFile
 {
-    public:
-        //!Constructor
-        ZipFile(const char *filepath);
-        //!Destructor
-        ~ZipFile();
-        //!Extract all files from a zip file to a directory
-        //!\param dest Destination path to where to extract
-        bool ExtractAll(const char *dest);
-        //!Find a file inside the zip and return if it is existent or not
-        bool FindFile(const char *filename);
-        //!Only needed a part of a filename to find the real one
-        bool FindFilePart(const char *partfilename, std::string &realname);
-    protected:
-        bool LoadList();
-        unzFile File;
-        unz_file_info cur_file_info;
-        FileStructure *FileList;
+	public:
+		//!Constructor
+		ZipFile(const char *filepath);
+		//!Destructor
+		~ZipFile();
+		//!Extract all files from a zip file to a directory
+		//!\param dest Destination path to where to extract
+		bool ExtractAll(const char *dest);
+		//!Find a file inside the zip and return if it is existent or not
+		bool FindFile(const char *filename);
+		//!Only needed a part of a filename to find the real one
+		bool FindFilePart(const char *partfilename, std::string &realname);
+	protected:
+		bool LoadList();
+		unzFile File;
+		unz_file_info cur_file_info;
+		FileStructure *FileList;
 };
 
 #endif

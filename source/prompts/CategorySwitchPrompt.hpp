@@ -28,14 +28,14 @@
 
 class CategorySwitchPrompt : public CategoryPrompt
 {
-    public:
-        CategorySwitchPrompt();
-    private:
-        void OnCheckboxClick(GuiCheckbox *checkBox, int index);
-        void onBrowserRefresh();
-        void onResetChanges();
+	public:
+		CategorySwitchPrompt();
+	private:
+		void OnCheckboxClick(GuiCheckbox *checkBox, int index);
+		void onBrowserRefresh();
+		void onResetChanges();
 
-        const std::vector<u32> oldSetting;
+		const std::vector<u32> oldSetting;
 };
 
 #endif

@@ -31,29 +31,29 @@
 
 class GuiCheckbox : public GuiButton
 {
-    public:
-        GuiCheckbox(int style = CHECKSIGN);
-        GuiCheckbox(int w, int h, int style = CHECKSIGN);
-        void SetTransparent(bool b);
-        void SetSize(int w, int h);
-        void SetClickSize(int w, int h);
-        void SetAlignment(int h, int v);
-        void SetChecked(bool c) { LOCK(this); Checked = c; }
-        bool IsChecked() const { return Checked; }
-        virtual void SetState(int s, int c = -1);
-        virtual void Draw();
-        enum
-        {
-            CHECKSIGN,
-            CROSS,
-        };
-    protected:
-        GuiChecksign Checksign;
-        GuiCross Cross;
-        GuiBox Blackbox;
-        GuiBox Whitebox;
-        int style;
-        bool Checked;
+	public:
+		GuiCheckbox(int style = CHECKSIGN);
+		GuiCheckbox(int w, int h, int style = CHECKSIGN);
+		void SetTransparent(bool b);
+		void SetSize(int w, int h);
+		void SetClickSize(int w, int h);
+		void SetAlignment(int h, int v);
+		void SetChecked(bool c) { LOCK(this); Checked = c; }
+		bool IsChecked() const { return Checked; }
+		virtual void SetState(int s, int c = -1);
+		virtual void Draw();
+		enum
+		{
+			CHECKSIGN,
+			CROSS,
+		};
+	protected:
+		GuiChecksign Checksign;
+		GuiCross Cross;
+		GuiBox Blackbox;
+		GuiBox Whitebox;
+		int style;
+		bool Checked;
 
 };
 

@@ -28,13 +28,13 @@
 
 class LoaderSettings : public SettingsMenu
 {
-    public:
-        LoaderSettings();
-    protected:
-        void SetOptionValues();
-        int GetMenuInternal();
+	public:
+		LoaderSettings();
+	protected:
+		void SetOptionValues();
+		int GetMenuInternal();
 
-        OptionList GuiOptions;
+		OptionList GuiOptions;
 };
 
 

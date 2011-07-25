@@ -28,38 +28,38 @@
 
 class PromptWindow : public GuiWindow
 {
-    public:
-        //! Constructor
-        PromptWindow(const char *title = 0, const char *msg = 0);
-        //! Destructor
-        virtual ~PromptWindow();
-        //! Set title text
-        void SetTitle(const char *text) { titleTxt->SetText(text); };
-        //! Set message text
-        void SetMessageText(const char *text) { msgTxt->SetText(text); };
-        //! Add new button and rearrange all buttons position. MAX 4 buttons.
-        void AddButton(const char *text);
-        //! Removes/deletes the last button and rearranges positions
-        void RemoveButton();
-        //! Removes a button in the position from the window but does not completely delete it
-        void RemoveButton(int pos);
-        //! Default function to get the button pressed
-        int GetChoice();
-        //! Forbid = operation
-        PromptWindow& operator=(const PromptWindow &w);
-    protected:
-        void PositionButtons();
+	public:
+		//! Constructor
+		PromptWindow(const char *title = 0, const char *msg = 0);
+		//! Destructor
+		virtual ~PromptWindow();
+		//! Set title text
+		void SetTitle(const char *text) { titleTxt->SetText(text); };
+		//! Set message text
+		void SetMessageText(const char *text) { msgTxt->SetText(text); };
+		//! Add new button and rearrange all buttons position. MAX 4 buttons.
+		void AddButton(const char *text);
+		//! Removes/deletes the last button and rearranges positions
+		void RemoveButton();
+		//! Removes a button in the position from the window but does not completely delete it
+		void RemoveButton(int pos);
+		//! Default function to get the button pressed
+		int GetChoice();
+		//! Forbid = operation
+		PromptWindow& operator=(const PromptWindow &w);
+	protected:
+		void PositionButtons();
 
-        GuiImageData *btnOutline;
-        GuiImageData *dialogBox;
-        GuiImage *dialogBoxImg;
-        GuiText *titleTxt;
-        GuiText *msgTxt;
-        GuiTrigger *trigA;
-        GuiTrigger *trigB;
-        std::vector<GuiText *> ButtonTxt;
-        std::vector<GuiImage *> ButtonImg;
-        std::vector<GuiButton *> Button;
+		GuiImageData *btnOutline;
+		GuiImageData *dialogBox;
+		GuiImage *dialogBoxImg;
+		GuiText *titleTxt;
+		GuiText *msgTxt;
+		GuiTrigger *trigA;
+		GuiTrigger *trigB;
+		std::vector<GuiText *> ButtonTxt;
+		std::vector<GuiImage *> ButtonImg;
+		std::vector<GuiButton *> Button;
 };
 
 #endif

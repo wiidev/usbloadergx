@@ -38,9 +38,9 @@ extern "C" {
 
 typedef struct
 {
-    u32 magic;   //Yaz0
-    u32 decompressed_size;
-    u8 zeros[8];
+	u32 magic;   //Yaz0
+	u32 decompressed_size;
+	u8 zeros[8];
 } Yaz0_Header;
 
 u8 * uncompressLZ77(const u8 *inBuf, u32 inLength, u32 * uncSize);

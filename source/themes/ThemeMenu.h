@@ -32,33 +32,33 @@
 
 class ThemeMenu : public FlyingButtonsMenu
 {
-    public:
-        ThemeMenu();
-        virtual ~ThemeMenu();
-        static int Run();
-        int MainLoop();
-    protected:
-        void CreateSettingsMenu(int index) { MainButtonClicked(index); };
-        void MainButtonClicked(int button);
-        void AddMainButtons();
-        void SetupMainButtons();
-        void SetMainButton(int position, const char * ButtonText, GuiImageData * imageData, GuiImageData * imageOver);
-        GuiImageData * GetImageData(int theme);
-        bool GetNodeText(const u8 *buffer, const char *node, std::string &outtext);
+	public:
+		ThemeMenu();
+		virtual ~ThemeMenu();
+		static int Run();
+		int MainLoop();
+	protected:
+		void CreateSettingsMenu(int index) { MainButtonClicked(index); };
+		void MainButtonClicked(int button);
+		void AddMainButtons();
+		void SetupMainButtons();
+		void SetMainButton(int position, const char * ButtonText, GuiImageData * imageData, GuiImageData * imageOver);
+		GuiImageData * GetImageData(int theme);
+		bool GetNodeText(const u8 *buffer, const char *node, std::string &outtext);
 
-        struct ThemeInfoStruct
-        {
-            std::string Filepath;
-            std::string Title;
-            std::string Team;
-            std::string Version;
-            std::string ImageFolder;
-        };
-        std::vector<ThemeInfoStruct> ThemeList;
-        GuiText * defaultBtnTxt;
-        GuiImage * defaultBtnImg;
-        GuiButton * defaultBtn;
-        GuiImageData * ThemePreviews[4];
+		struct ThemeInfoStruct
+		{
+			std::string Filepath;
+			std::string Title;
+			std::string Team;
+			std::string Version;
+			std::string ImageFolder;
+		};
+		std::vector<ThemeInfoStruct> ThemeList;
+		GuiText * defaultBtnTxt;
+		GuiImage * defaultBtnImg;
+		GuiButton * defaultBtn;
+		GuiImageData * ThemePreviews[4];
 };
 
 #endif

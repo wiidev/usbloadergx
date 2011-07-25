@@ -31,34 +31,34 @@
 
 class HomebrewBrowser : public FlyingButtonsMenu
 {
-    public:
-        HomebrewBrowser();
-        ~HomebrewBrowser();
-        static int Execute();
-        virtual int MainLoop();
-    protected:
-        void MainButtonClicked(int index);
-        int ReceiveFile();
-        virtual void CreateSettingsMenu(int index) { MainButtonClicked(index); };
-        virtual void DeleteSettingsMenu() { };
-        virtual void SetupMainButtons();
-        virtual void AddMainButtons();
+	public:
+		HomebrewBrowser();
+		~HomebrewBrowser();
+		static int Execute();
+		virtual int MainLoop();
+	protected:
+		void MainButtonClicked(int index);
+		int ReceiveFile();
+		virtual void CreateSettingsMenu(int index) { MainButtonClicked(index); };
+		virtual void DeleteSettingsMenu() { };
+		virtual void SetupMainButtons();
+		virtual void AddMainButtons();
 
-        DirList * HomebrewList;
-        GuiImageData * IconImgData[DISPLAY_BUTTONS];
-        GuiImage * IconImg[DISPLAY_BUTTONS];
-        std::vector<GuiText *> MainButtonDesc;
-        std::vector<GuiText *> MainButtonDescOver;
+		DirList * HomebrewList;
+		GuiImageData * IconImgData[DISPLAY_BUTTONS];
+		GuiImage * IconImg[DISPLAY_BUTTONS];
+		std::vector<GuiText *> MainButtonDesc;
+		std::vector<GuiText *> MainButtonDescOver;
 
-        bool wifiNotSet;
-        GuiTooltip * wifiToolTip;
-        GuiImageData * wifiImgData;
-        GuiImage * wifiImg;
-        GuiButton * wifiBtn;
+		bool wifiNotSet;
+		GuiTooltip * wifiToolTip;
+		GuiImageData * wifiImgData;
+		GuiImage * wifiImg;
+		GuiButton * wifiBtn;
 
-        GuiImageData * channelImgData;
-        GuiImage * channelBtnImg;
-        GuiButton * channelBtn;
+		GuiImageData * channelImgData;
+		GuiImage * channelBtnImg;
+		GuiButton * channelBtn;
 };
 
 #endif
