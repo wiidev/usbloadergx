@@ -57,6 +57,8 @@ static int SetupARGV(struct __argv * args)
     bzero(args, sizeof(struct __argv));
     args->argvMagic = ARGV_MAGIC;
 
+    u32 argc = 0;
+    u32 position = 0;
     u32 stringlength = 1;
 
     /** Append Arguments **/
@@ -66,12 +68,8 @@ static int SetupARGV(struct __argv * args)
     }
 
     args->length = stringlength;
-    args->commandLine = (char*) malloc(args->length);
-
-    if (!args->commandLine) return -1;
-
-    u32 argc = 0;
-    u32 position = 0;
+	//! Put the argument into mem2 too, to avoid overwriting it
+	args.commandLine = (char *) ARGS_ADDR + sizeof(struct __argv);
 
     /** Append Arguments **/
     for (u32 i = 0; i < Arguments.size(); i++)
@@ -114,7 +112,7 @@ static int RunAppbooter()
 	if (args.argvMagic == ARGV_MAGIC)
 	{
 		memmove(ARGS_ADDR, &args, sizeof(args));
-		DCFlushRange(ARGS_ADDR, sizeof(args));
+		DCFlushRange(ARGS_ADDR, sizeof(args) + args.length);
 	}
 
     u64 currentStub = getStubDest();

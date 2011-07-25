@@ -179,6 +179,9 @@ void StopGX()
 
     VIDEO_SetBlack(TRUE);
     VIDEO_Flush();
+	VIDEO_WaitVSync();
+	if (vmode->viTVMode & VI_NON_INTERLACE)
+		VIDEO_WaitVSync();
 }
 
 /****************************************************************************
