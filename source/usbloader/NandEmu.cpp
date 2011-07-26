@@ -86,9 +86,6 @@ static s32 Nand_Mount(nandDevice *dev)
 
 static s32 Nand_Unmount(nandDevice *dev)
 {
-	if(!IosLoader::IsD2X())
-		return -1;
-
 	s32 fd, ret;
 
 	// Open FAT module
@@ -170,9 +167,6 @@ static s32 Nand_Disable(void)
 
 s32 Enable_Emu(int selection)
 {
-	if(!IosLoader::IsD2X())
-		return -1;
-
 	if(mounted != 0)
 		return -1;
 
@@ -200,9 +194,6 @@ s32 Enable_Emu(int selection)
 
 s32 Disable_Emu()
 {
-	if(!IosLoader::IsD2X())
-		return -1;
-
 	if(mounted==0)
 		return 0;
 
