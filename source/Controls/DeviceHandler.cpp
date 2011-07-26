@@ -287,7 +287,7 @@ int DeviceHandler::PathToDriveType(const char * path)
 
 	for(int i = SD; i < MAXDEVICES; i++)
 	{
-		if(strncmp(path, DeviceName[i], strlen(DeviceName[i])) == 0)
+		if(strncasecmp(path, DeviceName[i], strlen(DeviceName[i])) == 0)
 			return i;
 	}
 
@@ -309,21 +309,21 @@ const char * DeviceHandler::GetFSName(int dev)
 		if(DeviceHandler::instance->usb1)
 			partCount1 += DeviceHandler::instance->usb1->GetPartitionCount();
 
-		if(dev-USB1 > partCount0 && DeviceHandler::instance->usb0)
+		if(dev-USB1 < partCount0 && DeviceHandler::instance->usb0)
 			return DeviceHandler::instance->usb0->GetFSName(dev-USB1);
 		else if(DeviceHandler::instance->usb1)
 			return DeviceHandler::instance->usb1->GetFSName(dev-USB1-partCount0);
 	}
 
-	return NULL;
+	return "";
 }
 
-int DeviceHandler::GetUSBFilesystemType(int partition)
+int DeviceHandler::GetFilesystemType(int dev)
 {
 	if(!instance)
 		return -1;
 
-	const char *FSName = GetUSBFSName(partition);
+	const char *FSName = GetFSName(dev);
 	if(!FSName) return -1;
 
 	if(strncmp(FSName, "WBFS", 4) == 0)
@@ -382,20 +382,6 @@ int DeviceHandler::PartitionToPortPartition(int part)
 		return part-partCount0;
 	else
 		return part;
-}
-
-const char *DeviceHandler::GetUSBFSName(int partition)
-{
-	if(!instance)
-		return NULL;
-
-	const char * FSName = NULL;
-	PartitionHandle *handle = instance->GetUSBHandleFromPartition(partition);
-
-	if(handle)
-		FSName = handle->GetFSName(PartitionToPortPartition(partition));
-
-	return FSName;
 }
 
 PartitionHandle *DeviceHandler::GetUSBHandleFromPartition(int part) const

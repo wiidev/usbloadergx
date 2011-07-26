@@ -84,14 +84,13 @@ class DeviceHandler
 		PartitionHandle * GetUSBHandleFromPartition(int part) const;
 		static const DISC_INTERFACE *GetUSB0Interface() { return &__io_usbstorage2_port0; }
 		static const DISC_INTERFACE *GetUSB1Interface() { return &__io_usbstorage2_port1; }
-		static int GetUSBFilesystemType(int part);
-		static int PathToDriveType(const char * path);
+		static int GetFilesystemType(int dev);
 		static const char * GetFSName(int dev);
+		static int PathToDriveType(const char * path);
 		static const char * PathToFSName(const char * path) { return GetFSName(PathToDriveType(path)); };
 		static int PartitionToUSBPort(int part);
 		static u16 GetUSBPartitionCount();
 		static int PartitionToPortPartition(int part);
-		static const char *GetUSBFSName(int partition);
 	private:
 		DeviceHandler() : sd(0), gca(0), gcb(0), usb0(0), usb1(0) { };
 		~DeviceHandler();

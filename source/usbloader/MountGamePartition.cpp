@@ -19,7 +19,7 @@ static int FindGamePartition()
 	// Loop through all WBFS partitions first to check them in case IOS249 Rev < 18
 	for(int i = 0; i < partCount; ++i)
 	{
-		if(DeviceHandler::GetUSBFilesystemType(i) != PART_FS_WBFS)
+		if(DeviceHandler::GetFilesystemType(USB1+i) != PART_FS_WBFS)
 			continue;
 
 		if (WBFS_OpenPart(i) == 0)
@@ -36,9 +36,9 @@ static int FindGamePartition()
 	// Loop through FAT/NTFS/EXT partitions, and find the first partition with games on it (if there is one)
 	for(int i = 0; i < partCount; ++i)
 	{
-		if(DeviceHandler::GetUSBFilesystemType(i) != PART_FS_NTFS &&
-		   DeviceHandler::GetUSBFilesystemType(i) != PART_FS_FAT &&
-		   DeviceHandler::GetUSBFilesystemType(i) != PART_FS_EXT)
+		if(DeviceHandler::GetFilesystemType(USB1+i) != PART_FS_NTFS &&
+		   DeviceHandler::GetFilesystemType(USB1+i) != PART_FS_FAT &&
+		   DeviceHandler::GetFilesystemType(USB1+i) != PART_FS_EXT)
 		{
 			continue;
 		}
@@ -79,9 +79,9 @@ static int PartitionChoice()
 		if(part_num >= 0)
 		{
 			if(IosLoader::IsWaninkokoIOS() && NandTitles.VersionOf(TITLE_ID(1, IOS_GetVersion())) < 18 &&
-			   (DeviceHandler::GetUSBFilesystemType(part_num) == PART_FS_NTFS ||
-				DeviceHandler::GetUSBFilesystemType(part_num) == PART_FS_FAT ||
-				DeviceHandler::GetUSBFilesystemType(part_num) == PART_FS_EXT))
+			   (DeviceHandler::GetFilesystemType(USB1+part_num) == PART_FS_NTFS ||
+				DeviceHandler::GetFilesystemType(USB1+part_num) == PART_FS_FAT ||
+				DeviceHandler::GetFilesystemType(USB1+part_num) == PART_FS_EXT))
 			{
 				WindowPrompt(tr("Warning:"), tr("You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."), tr("OK"));
 			}

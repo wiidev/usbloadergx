@@ -32,7 +32,7 @@ class GameList
 		int operator--(int i) { return operator--(); }
 		struct discHdr * GetCurrentSelected() const { return operator[](selectedGame); }
 		int GetPartitionNumber(const u8 *gameid) const;
-		int GetGameFS(const u8 *gameID) const { return DeviceHandler::Instance()->GetUSBFilesystemType(GetPartitionNumber(gameID)); }
+		int GetGameFS(const u8 *gameID) const { return DeviceHandler::Instance()->GetFilesystemType(USB1+GetPartitionNumber(gameID)); }
 		void RemovePartition(int part_num);
 	protected:
 		int InternalReadList(int part);

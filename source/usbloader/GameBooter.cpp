@@ -26,7 +26,7 @@
 #include "menu/menus.h"
 #include "memory/memory.h"
 #include "GameBooter.hpp"
-#include "nand.h"
+#include "NandEmu.h"
 #include "SavePath.h"
 #include "sys.h"
 

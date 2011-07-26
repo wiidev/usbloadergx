@@ -30,7 +30,6 @@
 #include "FileOperations/fileops.h"
 #include "gecko.h"
 
-
 void CreateTitleTMD(const char *path, const struct discHdr *hdr)
 {
 	wbfs_disc_t *disc = WBFS_OpenDisc((u8 *) hdr->id);
@@ -64,22 +63,47 @@ void CreateTitleTMD(const char *path, const struct discHdr *hdr)
 	free(titleTMD);
 }
 
-void CreateSavePath(const struct discHdr *hdr)
+static void CreateNandPath(const char *path)
 {
-	char contentPath[512];
-	char dataPath[512];
-	snprintf(contentPath, sizeof(contentPath), "%s/title/00010000/%02x%02x%02x%02x/content", Settings.NandEmuPath, hdr->id[0], hdr->id[1], hdr->id[2], hdr->id[3]);
-	snprintf(dataPath, sizeof(dataPath), "%s/title/00010000/%02x%02x%02x%02x/data", Settings.NandEmuPath, hdr->id[0], hdr->id[1], hdr->id[2], hdr->id[3]);
-
-	if(CheckFile(contentPath) && CheckFile(dataPath))
+	if(CheckFile(path))
 		return;
 
-	gprintf("Creating Save Path: %s\n", contentPath);
-	gprintf("Creating Save Path: %s\n", dataPath);
+	gprintf("Creating Nand Path: %s\n", path);
+	CreateSubfolder(path);
+}
 
-	CreateSubfolder(contentPath);
-	CreateSubfolder(dataPath);
+void CreateSavePath(const struct discHdr *hdr)
+{
+	char nandPath[512];
 
-	strcat(contentPath, "/title.tmd");
-	CreateTitleTMD(contentPath, hdr);
+	snprintf(nandPath, sizeof(nandPath), "%s/import", Settings.NandEmuPath);
+	CreateNandPath(nandPath);
+
+	snprintf(nandPath, sizeof(nandPath), "%s/meta", Settings.NandEmuPath);
+	CreateNandPath(nandPath);
+
+	snprintf(nandPath, sizeof(nandPath), "%s/shared1", Settings.NandEmuPath);
+	CreateNandPath(nandPath);
+
+	snprintf(nandPath, sizeof(nandPath), "%s/shared2", Settings.NandEmuPath);
+	CreateNandPath(nandPath);
+
+	snprintf(nandPath, sizeof(nandPath), "%s/sys", Settings.NandEmuPath);
+	CreateNandPath(nandPath);
+
+	snprintf(nandPath, sizeof(nandPath), "%s/ticket", Settings.NandEmuPath);
+	CreateNandPath(nandPath);
+
+	snprintf(nandPath, sizeof(nandPath), "%s/tmp", Settings.NandEmuPath);
+	CreateNandPath(nandPath);
+
+	snprintf(nandPath, sizeof(nandPath), "%s/title/00010000/%02x%02x%02x%02x/data", Settings.NandEmuPath, hdr->id[0], hdr->id[1], hdr->id[2], hdr->id[3]);
+	CreateNandPath(nandPath);
+
+	snprintf(nandPath, sizeof(nandPath), "%s/title/00010000/%02x%02x%02x%02x/content", Settings.NandEmuPath, hdr->id[0], hdr->id[1], hdr->id[2], hdr->id[3]);
+	CreateNandPath(nandPath);
+
+	strcat(nandPath, "/title.tmd");
+	if(!CheckFile(nandPath))
+		CreateTitleTMD(nandPath, hdr);
 }

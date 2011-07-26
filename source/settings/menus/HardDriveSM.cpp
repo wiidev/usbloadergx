@@ -174,7 +174,7 @@ int HardDriveSM::GetMenuInternal()
 		do
 		{
 			Settings.partition = (Settings.partition + 1) % DeviceHandler::GetUSBPartitionCount();
-			fs_type = DeviceHandler::GetUSBFilesystemType(Settings.partition);
+			fs_type = DeviceHandler::GetFilesystemType(USB1+Settings.partition);
 		}
 		while (!IsValidPartition(fs_type, ios) && --retries > 0);
 
@@ -213,7 +213,7 @@ int HardDriveSM::GetMenuInternal()
 	{
 		if (++Settings.GameSplit >= GAMESPLIT_MAX)
 		{
-			if(DeviceHandler::GetUSBFilesystemType(Settings.partition) == PART_FS_FAT)
+			if(DeviceHandler::GetFilesystemType(USB1+Settings.partition) == PART_FS_FAT)
 				Settings.GameSplit = GAMESPLIT_2GB;
 			else
 				Settings.GameSplit = GAMESPLIT_NONE;
@@ -249,7 +249,7 @@ int HardDriveSM::GetMenuInternal()
 			for(int i = 0; i < partCount; ++i)
 			{
 				ShowProgress(i, partCount);
-				if(DeviceHandler::GetUSBFilesystemType(i) == PART_FS_FAT)
+				if(DeviceHandler::GetFilesystemType(USB1+i) == PART_FS_FAT)
 				{
 					PartitionHandle *usb = DeviceHandler::Instance()->GetUSBHandleFromPartition(i);
 					if(!usb) continue;

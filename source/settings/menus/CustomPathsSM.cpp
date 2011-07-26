@@ -30,6 +30,7 @@
 #include "language/gettext.h"
 #include "prompts/filebrowser.h"
 #include "themes/CTheme.h"
+#include "gecko.h"
 
 CustomPathsSM::CustomPathsSM()
 	: SettingsMenu(tr("Custom Paths"), &GuiOptions, MENU_NONE)
@@ -236,10 +237,16 @@ int CustomPathsSM::GetMenuInternal()
 	//! Settings: Nand Emu Path
 	else if (ret == ++Idx)
 	{
+		char oldPath[sizeof(Settings.NandEmuPath)];
+		snprintf(oldPath, sizeof(oldPath), Settings.NandEmuPath);
+
 		titleTxt->SetText(tr( "Nand Emu Path" ));
 		ChangePath(Settings.NandEmuPath, sizeof(Settings.NandEmuPath));
 		if(strncasecmp(DeviceHandler::PathToFSName(Settings.NandEmuPath), "FAT", 3) != 0)
-			WindowPrompt(tr("Warning:"), tr("Nand Emulation only works on FAT/FAT32 partitions!"), tr("OK"));
+		{
+			snprintf(Settings.NandEmuPath, sizeof(Settings.NandEmuPath), oldPath);
+			WindowPrompt(tr("Error:"), tr("Nand Emulation only works on FAT/FAT32 partitions!"), tr("OK"));
+		}
 	}
 
 	//! Global set back of the titleTxt after a change
