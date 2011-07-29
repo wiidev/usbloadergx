@@ -129,6 +129,9 @@ void CSettings::SetDefault()
 	sneekVideoPatch = OFF;
 	NandEmuMode = OFF;
 	UseSystemFont = ON;
+	Hooktype = 0;
+	WiirdDebugger = OFF;
+	WiirdDebuggerPause = OFF;
 }
 
 bool CSettings::Load()
@@ -291,6 +294,9 @@ bool CSettings::Save()
 	fprintf(file, "NandEmuMode = %d\n", NandEmuMode);
 	fprintf(file, "NandEmuPath = %s\n", NandEmuPath);
 	fprintf(file, "UseSystemFont = %d\n", UseSystemFont);
+	fprintf(file, "Hooktype = %d\n", Hooktype);
+	fprintf(file, "WiirdDebugger = %d\n", WiirdDebugger);
+	fprintf(file, "WiirdDebuggerPause = %d\n", WiirdDebuggerPause);
 	fclose(file);
 
 	return true;
@@ -567,6 +573,18 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if(strcmp(name, "UseSystemFont") == 0)
 	{
 		if (sscanf(value, "%d", &i) == 1) UseSystemFont = i;
+	}
+	else if(strcmp(name, "Hooktype") == 0)
+	{
+		if (sscanf(value, "%d", &i) == 1) Hooktype = i;
+	}
+	else if(strcmp(name, "WiirdDebugger") == 0)
+	{
+		if (sscanf(value, "%d", &i) == 1) WiirdDebugger = i;
+	}
+	else if(strcmp(name, "WiirdDebuggerPause") == 0)
+	{
+		if (sscanf(value, "%d", &i) == 1) WiirdDebuggerPause = i;
 	}
 	else if(strcmp(name, "NandEmuMode") == 0)
 	{

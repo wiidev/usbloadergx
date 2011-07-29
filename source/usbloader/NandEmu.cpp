@@ -167,6 +167,9 @@ static s32 Nand_Disable(void)
 
 s32 Enable_Emu(int selection)
 {
+	if(!IosLoader::IsD2X())
+		return -1;
+
 	if(mounted != 0)
 		return -1;
 
@@ -194,6 +197,9 @@ s32 Enable_Emu(int selection)
 
 s32 Disable_Emu()
 {
+	if(!IosLoader::IsD2X())
+		return -1;
+
 	if(mounted==0)
 		return 0;
 

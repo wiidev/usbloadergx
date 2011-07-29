@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-24 18:27+0200\n"
+"POT-Creation-Date: 2011-07-29 22:53+0200\n"
 "PO-Revision-Date: 2011-06-20 07:25+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -121,6 +121,9 @@ msgid ">> Reading WAD data...Ok!"
 msgstr ">> WAD data lezen...Ok!"
 
 msgid "AUTO"
+msgstr ""
+
+msgid "AXNextFrame"
 msgstr ""
 
 msgid "Add category"
@@ -419,6 +422,9 @@ msgstr "Aangepast/Origineel"
 
 msgid "DOL Path"
 msgstr "Locatie DOL"
+
+msgid "Debugger Paused Start"
+msgstr ""
 
 msgid "Dec"
 msgstr ""
@@ -726,6 +732,12 @@ msgstr "GCT bestand aangemaakt"
 msgid "GUI Settings"
 msgstr "Menu opties"
 
+msgid "GXDraw"
+msgstr ""
+
+msgid "GXFlush"
+msgstr ""
+
 msgid "Game ID"
 msgstr "Spel ID"
 
@@ -797,6 +809,9 @@ msgstr ""
 
 msgid "Homebrew Launcher"
 msgstr "Homebrew starter"
+
+msgid "Hooktype"
+msgstr ""
 
 msgid "Hour"
 msgstr "Uur"
@@ -878,11 +893,17 @@ msgstr ""
 msgid "Japanese"
 msgstr "Japans"
 
+msgid "Joypad"
+msgstr ""
+
 msgid "July"
 msgstr "Jul"
 
 msgid "June"
 msgstr "Jun"
+
+msgid "KPAD Read"
+msgstr ""
 
 msgid "Keyboard"
 msgstr "Toetsenbord"
@@ -1091,6 +1112,9 @@ msgstr ""
 
 msgid "ON"
 msgstr "Aan"
+
+msgid "OSSleepThread"
+msgstr ""
 
 msgid "Ocarina"
 msgstr ""
@@ -1501,6 +1525,9 @@ msgstr ""
 msgid "Use global"
 msgstr "Gebruik globaal"
 
+msgid "VBI (Default)"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "VIDTV patchen"
 
@@ -1570,6 +1597,9 @@ msgstr "Wiinnertag Pad"
 
 msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
 msgstr "Wiinnertag vereist dat automatisch netwerk verbinden bij applicatie start aan staat. Wil je dit nu aanzetten?"
+
+msgid "Wiird Debugger"
+msgstr ""
 
 msgid "Writing GXGameCategories.xml"
 msgstr ""

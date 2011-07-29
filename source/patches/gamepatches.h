@@ -9,7 +9,9 @@ extern "C" {
 
 void RegisterDOL(u8 *dst, int len);
 void ClearDOLList();
-void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring, u8 vipatch, u8 sneekVideoPatch, u8 cheat, u8 fix002, u8 blockiosreloadselect, u8 gameIOS, u64 returnTo);
+void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring, u8 vipatch,
+				 u8 sneekVideoPatch, u8 hooktype, u8 fix002, u8 blockiosreloadselect,
+				 u8 gameIOS, u64 returnTo);
 bool Anti_002_fix(u8 * Address, int Size);
 bool NSMBPatch();
 bool PoPPatch();

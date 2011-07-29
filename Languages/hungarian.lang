@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-24 18:27+0200\n"
+"POT-Creation-Date: 2011-07-29 22:53+0200\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -121,6 +121,9 @@ msgid ">> Reading WAD data...Ok!"
 msgstr ">> WAD adatok olvasása...Ok!"
 
 msgid "AUTO"
+msgstr ""
+
+msgid "AXNextFrame"
 msgstr ""
 
 msgid "Add category"
@@ -419,6 +422,9 @@ msgstr "Egyéni/Eredeti"
 
 msgid "DOL Path"
 msgstr "DOL Útvonal"
+
+msgid "Debugger Paused Start"
+msgstr ""
 
 msgid "Dec"
 msgstr ""
@@ -726,6 +732,12 @@ msgstr "GCT Fájl létrehozva"
 msgid "GUI Settings"
 msgstr "Kezelõfelület"
 
+msgid "GXDraw"
+msgstr ""
+
+msgid "GXFlush"
+msgstr ""
+
 msgid "Game ID"
 msgstr "Játék ID"
 
@@ -797,6 +809,9 @@ msgstr ""
 
 msgid "Homebrew Launcher"
 msgstr "Homebrew indító"
+
+msgid "Hooktype"
+msgstr ""
 
 msgid "Hour"
 msgstr "Óra"
@@ -878,11 +893,17 @@ msgstr ""
 msgid "Japanese"
 msgstr "Japán"
 
+msgid "Joypad"
+msgstr ""
+
 msgid "July"
 msgstr "Júl"
 
 msgid "June"
 msgstr "Jún"
+
+msgid "KPAD Read"
+msgstr ""
 
 msgid "Keyboard"
 msgstr "Billenyûzet"
@@ -1091,6 +1112,9 @@ msgstr ""
 
 msgid "ON"
 msgstr "BE"
+
+msgid "OSSleepThread"
+msgstr ""
 
 msgid "Ocarina"
 msgstr ""
@@ -1501,6 +1525,9 @@ msgstr ""
 msgid "Use global"
 msgstr ""
 
+msgid "VBI (Default)"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr ""
 
@@ -1569,6 +1596,9 @@ msgid "Wiinnertag Path"
 msgstr ""
 
 msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
+msgstr ""
+
+msgid "Wiird Debugger"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"

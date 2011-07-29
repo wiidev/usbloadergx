@@ -80,6 +80,18 @@ static const char * NandEmuText[] =
 	trNOOP( "Full" )
 };
 
+static const char * HooktypeText[] =
+{
+	trNOOP( "None" ),
+	trNOOP( "VBI (Default)" ),
+	trNOOP( "KPAD Read" ),
+	trNOOP( "Joypad" ),
+	trNOOP( "GXDraw" ),
+	trNOOP( "GXFlush" ),
+	trNOOP( "OSSleepThread" ),
+	trNOOP( "AXNextFrame" ),
+};
+
 LoaderSettings::LoaderSettings()
 	: SettingsMenu(tr("Loader Settings"), &GuiOptions, MENU_NONE)
 {
@@ -97,6 +109,9 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
 	Options->SetName(Idx++, "%s", tr( "Return To" ));
 	Options->SetName(Idx++, "%s", tr( "Nand Emulation" ));
+	Options->SetName(Idx++, "%s", tr( "Hooktype" ));
+	Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
+	Options->SetName(Idx++, "%s", tr( "Debugger Paused Start" ));
 
 	SetOptionValues();
 }
@@ -149,6 +164,15 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: Nand Emulation
 	Options->SetValue(Idx++, "%s", tr( NandEmuText[Settings.NandEmuMode] ));
+
+	//! Settings: Hooktype
+	Options->SetValue(Idx++, "%s", tr( HooktypeText[Settings.Hooktype] ));
+
+	//! Settings: Wiird Debugger
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.WiirdDebugger] ));
+
+	//! Settings: Wiird Debugger Pause on Start
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.WiirdDebuggerPause] ));
 }
 
 int LoaderSettings::GetMenuInternal()
@@ -254,6 +278,24 @@ int LoaderSettings::GetMenuInternal()
 		if(!IosLoader::IsD2X())
 			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
 		else if (++Settings.NandEmuMode >= 3) Settings.NandEmuMode = 0;
+	}
+
+	//! Settings: Hooktype
+	else if (ret == ++Idx )
+	{
+		if (++Settings.Hooktype >= 8) Settings.Hooktype = 0;
+	}
+
+	//! Settings: Wiird Debugger
+	else if (ret == ++Idx )
+	{
+		if (++Settings.WiirdDebugger >= MAX_ON_OFF) Settings.WiirdDebugger = 0;
+	}
+
+	//! Settings: Wiird Debugger Pause on Start
+	else if (ret == ++Idx )
+	{
+		if (++Settings.WiirdDebuggerPause >= MAX_ON_OFF) Settings.WiirdDebuggerPause = 0;
 	}
 
 	SetOptionValues();

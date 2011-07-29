@@ -4,11 +4,11 @@ Visit http://www.devkitpro.org
 */
 
 //---------------------------------------------------------------------------------
-#ifndef _codehandler_h_
-#define _codehandler_h_
+#ifndef _codehandlerslota_h_
+#define _codehandlerslota_h_
 //---------------------------------------------------------------------------------
-extern const unsigned char codehandler[];
-extern const int codehandler_size;
+extern const unsigned char codehandlerslota[];
+extern const int codehandlerslota_size;
 //---------------------------------------------------------------------------------
-#endif //_codehandler_h_
+#endif //_codehandlerslota_h_
 //---------------------------------------------------------------------------------

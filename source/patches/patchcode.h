@@ -26,14 +26,16 @@
 extern "C"
 {
 #endif
-	// Globals
-	extern u32 hooktype;
 
-	// Function prototypes
-	bool dogamehooks(void *addr, u32 len);
-	void langpatcher(void *addr, u32 len, u8 languageChoice);
-	void vidolpatcher(void *addr, u32 len);
-	void patchdebug(void *addr, u32 len);
+#define MAX_GCT_SIZE 2056
+
+// Function prototypes
+void dogamehooks(u32 hooktype, void *addr, u32 len);
+void load_handler(const char *gameconfigPath, u32 hooktype, u32 debugger, u32 pauseAtStart);
+void langpatcher(void *addr, u32 len, u8 languageChoice);
+void vidolpatcher(void *addr, u32 len);
+void patchdebug(void *addr, u32 len);
+int ocarina_load_code(const char *CheatFilepath);
 
 #ifdef __cplusplus
 }

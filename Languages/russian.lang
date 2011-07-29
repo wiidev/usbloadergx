@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-24 18:27+0200\n"
+"POT-Creation-Date: 2011-07-29 22:53+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nikolai_ca\n"
 "Language-Team: Kir, alendit, nikolai_ca\n"
@@ -122,6 +122,9 @@ msgstr ">> Чтение данных WAD...Успешно!"
 
 msgid "AUTO"
 msgstr "АВТО"
+
+msgid "AXNextFrame"
+msgstr ""
 
 msgid "Add category"
 msgstr ""
@@ -419,6 +422,9 @@ msgstr "Измененный/Оригинальные"
 
 msgid "DOL Path"
 msgstr "Путь к DOL"
+
+msgid "Debugger Paused Start"
+msgstr ""
 
 msgid "Dec"
 msgstr "Дек"
@@ -726,6 +732,12 @@ msgstr "Файл GCT создан"
 msgid "GUI Settings"
 msgstr "Настройки интерфейса"
 
+msgid "GXDraw"
+msgstr ""
+
+msgid "GXFlush"
+msgstr ""
+
 msgid "Game ID"
 msgstr "ID игры"
 
@@ -797,6 +809,9 @@ msgstr ""
 
 msgid "Homebrew Launcher"
 msgstr "Загрузчик хоумбрю"
+
+msgid "Hooktype"
+msgstr ""
 
 msgid "Hour"
 msgstr "Час"
@@ -878,11 +893,17 @@ msgstr "Янв"
 msgid "Japanese"
 msgstr "Японский"
 
+msgid "Joypad"
+msgstr ""
+
 msgid "July"
 msgstr "Июл"
 
 msgid "June"
 msgstr "Июн"
+
+msgid "KPAD Read"
+msgstr ""
 
 msgid "Keyboard"
 msgstr "Клавиатура"
@@ -1091,6 +1112,9 @@ msgstr "OK"
 
 msgid "ON"
 msgstr "ВКЛ"
+
+msgid "OSSleepThread"
+msgstr ""
 
 msgid "Ocarina"
 msgstr ""
@@ -1501,6 +1525,9 @@ msgstr ""
 msgid "Use global"
 msgstr ""
 
+msgid "VBI (Default)"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "Патч VIDTV"
 
@@ -1569,6 +1596,9 @@ msgid "Wiinnertag Path"
 msgstr ""
 
 msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
+msgstr ""
+
+msgid "Wiird Debugger"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"

@@ -26,7 +26,6 @@
 #include "settings/CSettings.h"
 #include "usbloader/disc.h"
 #include "usbloader/wbfs.h"
-#include "usbloader/nand.h"
 #include "FileOperations/fileops.h"
 #include "gecko.h"
 

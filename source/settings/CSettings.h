@@ -129,6 +129,9 @@ class CSettings
 		u8 EntryIOS;
 		short NandEmuMode;
 		short UseSystemFont;
+		short Hooktype;
+		short WiirdDebugger;
+		short WiirdDebuggerPause;
 	protected:
 		bool ValidVersion(FILE * file);
 		bool SetSetting(char *name, char *value);

@@ -4,7 +4,6 @@
 #include <ogcsys.h>
 #include <ogc/lwp_watchdog.h>
 
-#include "patches/fst.h"
 #include "patches/gamepatches.h"
 #include "patches/wip.h"
 #include "apploader.h"

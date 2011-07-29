@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-24 18:27+0200\n"
+"POT-Creation-Date: 2011-07-29 22:53+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -122,6 +122,9 @@ msgstr ">> 读取 WAD 数据... 成功!"
 
 msgid "AUTO"
 msgstr "自动"
+
+msgid "AXNextFrame"
+msgstr ""
 
 msgid "Add category"
 msgstr ""
@@ -419,6 +422,9 @@ msgstr "自制/官方"
 
 msgid "DOL Path"
 msgstr "DOL路径"
+
+msgid "Debugger Paused Start"
+msgstr ""
 
 msgid "Dec"
 msgstr "十二月"
@@ -726,6 +732,12 @@ msgstr "GCT 文件已建立"
 msgid "GUI Settings"
 msgstr "界面设置"
 
+msgid "GXDraw"
+msgstr ""
+
+msgid "GXFlush"
+msgstr ""
+
 msgid "Game ID"
 msgstr "游戏 ID"
 
@@ -797,6 +809,9 @@ msgstr "自制程序频道"
 
 msgid "Homebrew Launcher"
 msgstr "自制程序管理器"
+
+msgid "Hooktype"
+msgstr ""
 
 msgid "Hour"
 msgstr "小时"
@@ -878,11 +893,17 @@ msgstr "一月"
 msgid "Japanese"
 msgstr "日文"
 
+msgid "Joypad"
+msgstr ""
+
 msgid "July"
 msgstr "七月"
 
 msgid "June"
 msgstr "六月"
+
+msgid "KPAD Read"
+msgstr ""
 
 msgid "Keyboard"
 msgstr "键盘"
@@ -1091,6 +1112,9 @@ msgstr "确定"
 
 msgid "ON"
 msgstr "开启"
+
+msgid "OSSleepThread"
+msgstr ""
 
 msgid "Ocarina"
 msgstr "Ocarina金手指"
@@ -1501,6 +1525,9 @@ msgstr ""
 msgid "Use global"
 msgstr ""
 
+msgid "VBI (Default)"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "VIDTV修改"
 
@@ -1569,6 +1596,9 @@ msgid "Wiinnertag Path"
 msgstr ""
 
 msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
+msgstr ""
+
+msgid "Wiird Debugger"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"

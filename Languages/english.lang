@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-24 18:27+0200\n"
+"POT-Creation-Date: 2011-07-29 22:53+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -121,6 +121,9 @@ msgid ">> Reading WAD data...Ok!"
 msgstr ""
 
 msgid "AUTO"
+msgstr ""
+
+msgid "AXNextFrame"
 msgstr ""
 
 msgid "Add category"
@@ -418,6 +421,9 @@ msgid "Customs/Original"
 msgstr ""
 
 msgid "DOL Path"
+msgstr ""
+
+msgid "Debugger Paused Start"
 msgstr ""
 
 msgid "Dec"
@@ -726,6 +732,12 @@ msgstr ""
 msgid "GUI Settings"
 msgstr ""
 
+msgid "GXDraw"
+msgstr ""
+
+msgid "GXFlush"
+msgstr ""
+
 msgid "Game ID"
 msgstr ""
 
@@ -796,6 +808,9 @@ msgid "Homebrew Channel"
 msgstr ""
 
 msgid "Homebrew Launcher"
+msgstr ""
+
+msgid "Hooktype"
 msgstr ""
 
 msgid "Hour"
@@ -878,10 +893,16 @@ msgstr ""
 msgid "Japanese"
 msgstr ""
 
+msgid "Joypad"
+msgstr ""
+
 msgid "July"
 msgstr ""
 
 msgid "June"
+msgstr ""
+
+msgid "KPAD Read"
 msgstr ""
 
 msgid "Keyboard"
@@ -1090,6 +1111,9 @@ msgid "OK"
 msgstr ""
 
 msgid "ON"
+msgstr ""
+
+msgid "OSSleepThread"
 msgstr ""
 
 msgid "Ocarina"
@@ -1501,6 +1525,9 @@ msgstr ""
 msgid "Use global"
 msgstr ""
 
+msgid "VBI (Default)"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr ""
 
@@ -1569,6 +1596,9 @@ msgid "Wiinnertag Path"
 msgstr ""
 
 msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
+msgstr ""
+
+msgid "Wiird Debugger"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"

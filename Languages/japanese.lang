@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-24 18:27+0200\n"
+"POT-Creation-Date: 2011-07-29 22:53+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi, papa, ichiroling\n"
@@ -122,6 +122,9 @@ msgstr ">> WADﾃﾞｰﾀの読込 … 成功!"
 
 msgid "AUTO"
 msgstr "自動"
+
+msgid "AXNextFrame"
+msgstr ""
 
 msgid "Add category"
 msgstr "カテゴリを追加"
@@ -419,6 +422,9 @@ msgstr "カスタムを優先"
 
 msgid "DOL Path"
 msgstr "代替ＤＯＬ"
+
+msgid "Debugger Paused Start"
+msgstr ""
 
 msgid "Dec"
 msgstr "12月"
@@ -726,6 +732,12 @@ msgstr "GCTファイルを作成しました"
 msgid "GUI Settings"
 msgstr "基本設定"
 
+msgid "GXDraw"
+msgstr ""
+
+msgid "GXFlush"
+msgstr ""
+
 msgid "Game ID"
 msgstr "IDのみ"
 
@@ -797,6 +809,9 @@ msgstr "ＨＢＣへ"
 
 msgid "Homebrew Launcher"
 msgstr "Homebrewランチャー"
+
+msgid "Hooktype"
+msgstr ""
 
 msgid "Hour"
 msgstr "時間"
@@ -878,11 +893,17 @@ msgstr "1月"
 msgid "Japanese"
 msgstr "日本語"
 
+msgid "Joypad"
+msgstr ""
+
 msgid "July"
 msgstr "7月"
 
 msgid "June"
 msgstr "6月"
+
+msgid "KPAD Read"
+msgstr ""
 
 msgid "Keyboard"
 msgstr "キーボードのタイプ"
@@ -1091,6 +1112,9 @@ msgstr "確定する"
 
 msgid "ON"
 msgstr "使う"
+
+msgid "OSSleepThread"
+msgstr ""
 
 msgid "Ocarina"
 msgstr "改造コード"
@@ -1501,6 +1525,9 @@ msgstr ""
 msgid "Use global"
 msgstr "基本設定を使う"
 
+msgid "VBI (Default)"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "映像パッチ"
 
@@ -1570,6 +1597,9 @@ msgstr "Wiinnertag.xmlのパス"
 
 msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
 msgstr "Wiinnertagは自動ネット接続が有効になっている必要が有ります。有効にしますか?"
+
+msgid "Wiird Debugger"
+msgstr ""
 
 msgid "Writing GXGameCategories.xml"
 msgstr "GXGameCategories.xmlを書き込み中です"

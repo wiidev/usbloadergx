@@ -34,7 +34,6 @@
 #include "sys.h"
 #include "wpad.h"
 #include "settings/newtitles.h"
-#include "patches/fst.h"
 #include "usbloader/frag.h"
 #include "usbloader/wbfs.h"
 #include "wad/nandtitle.h"

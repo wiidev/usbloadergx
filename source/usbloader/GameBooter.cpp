@@ -1,3 +1,19 @@
+/****************************************************************************
+ * Copyright (C) 2011 Dimok
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ ****************************************************************************/
 #include "menu/menus.h"
 #include "menu/WDMMenu.hpp"
 #include "mload/mload.h"
@@ -17,9 +33,10 @@
 #include "usbloader/AlternateDOLOffsets.h"
 #include "settings/newtitles.h"
 #include "network/Wiinnertag.h"
-#include "patches/fst.h"
+#include "patches/patchcode.h"
 #include "patches/gamepatches.h"
 #include "patches/wip.h"
+#include "patches/bca.h"
 #include "system/IosLoader.h"
 #include "banner/OpeningBNR.hpp"
 #include "wad/nandtitle.h"
@@ -117,6 +134,32 @@ void GameBooter::SetupAltDOL(u8 * gameID, u8 &alternatedol, u32 &alternatedoloff
 		alternatedol = OFF;
 }
 
+void GameBooter::SetupNandEmu(struct discHdr &gameHeader)
+{
+	if(Settings.NandEmuMode && strchr(Settings.NandEmuPath, '/'))
+	{
+		//! Create save game path and title.tmd for not existing saves
+		CreateSavePath(&gameHeader);
+
+		gprintf("Enabling Nand Emulation on: %s\n", Settings.NandEmuPath);
+		Set_FullMode(Settings.NandEmuMode == 2);
+		Set_Path(strchr(Settings.NandEmuPath, '/'));
+
+		//! Set which partition to use (USB only)
+		if(strncmp(Settings.NandEmuPath, "usb", 3) == 0)
+			Set_Partition(atoi(Settings.NandEmuPath+3)-1);
+		//! Unmount SD since NAND Emu mount fails otherwise
+		else if(strncmp(Settings.NandEmuPath, "sd", 2) == 0)
+			DeviceHandler::Instance()->UnMountSD();
+
+		Enable_Emu(strncmp(Settings.NandEmuPath, "usb", 3) == 0 ? EMU_USB : EMU_SD);
+
+		//! Remount SD again after activating NAND emu
+		if(strncmp(Settings.NandEmuPath, "sd", 2) == 0)
+			DeviceHandler::Instance()->MountSD();
+	}
+}
+
 int GameBooter::SetupDisc(u8 * gameID)
 {
 	if (mountMethod)
@@ -150,17 +193,6 @@ int GameBooter::SetupDisc(u8 * gameID)
 	gprintf("%d\n", ret);
 
 	return ret;
-}
-
-bool GameBooter::LoadOcarina(u8 *gameID)
-{
-	if (ocarina_load_code(gameID) > 0)
-	{
-		ocarina_do_code();
-		return true;
-	}
-
-	return false;
 }
 
 int GameBooter::BootGame(const char * gameID)
@@ -204,16 +236,11 @@ int GameBooter::BootGame(const char * gameID)
 	u8 reloadblock = game_cfg->iosreloadblock == INHERIT ? Settings.BlockIOSReload : game_cfg->iosreloadblock;
 	u64 returnToChoice = game_cfg->returnTo ? NandTitles.FindU32(Settings.returnTo) : 0;
 
-	//! Create save game path and title.tmd for not existing saves
-	if(Settings.NandEmuMode)
-		CreateSavePath(&gameHeader);
+	if(ocarinaChoice && Settings.Hooktype == OFF)
+		Settings.Hooktype = 1;
 
 	//! Prepare alternate dol settings
 	SetupAltDOL(gameHeader.id, alternatedol, alternatedoloffset);
-
-	//! This is temporary - C <-> C++ transfer
-	SetCheatFilepath(Settings.Cheatcodespath);
-	SetBCAFilepath(Settings.BcaCodepath);
 
 	//! Reload game settings cIOS for this game
 	if(iosChoice != IOS_GetVersion())
@@ -224,6 +251,13 @@ int GameBooter::BootGame(const char * gameID)
 			return -1;
 	}
 
+	//! Modify Wii Message Board to display the game starting here (before Nand Emu)
+	if(Settings.PlaylogUpdate)
+		Playlog_Update((char *) gameHeader.id, BNRInstance::Instance()->GetIMETTitle(CONF_GetLanguage()));
+
+	//! Setup NAND emulation
+	SetupNandEmu(gameHeader);
+
 	//! Setup disc in cIOS and open it
 	ret = SetupDisc(gameHeader.id);
 	if (ret < 0)
@@ -231,7 +265,7 @@ int GameBooter::BootGame(const char * gameID)
 
 	//! Load BCA data for the game
 	gprintf("Loading BCA data...");
-	ret = do_bca_code(gameHeader.id);
+	ret = do_bca_code(Settings.BcaCodepath, gameHeader.id);
 	gprintf("%d\n", ret);
 
 	//! Setup IOS reload block
@@ -269,12 +303,14 @@ int GameBooter::BootGame(const char * gameID)
 
 	//! Do all the game patches
 	gprintf("Applying game patches...\n");
-	gamepatches(videoChoice, languageChoice, countrystrings, viChoice, sneekChoice, ocarinaChoice, fix002, reloadblock, iosChoice, returnToChoice);
+	gamepatches(videoChoice, languageChoice, countrystrings, viChoice, sneekChoice, Settings.Hooktype, fix002, reloadblock, iosChoice, returnToChoice);
 
 	//! Load Ocarina codes
-	bool enablecheat = false;
 	if (ocarinaChoice)
-		enablecheat = LoadOcarina(gameHeader.id);
+		ocarina_load_code(Settings.Cheatcodespath);
+
+	//! Load Code handler if needed
+	load_handler(Settings.Cheatcodespath, Settings.Hooktype, Settings.WiirdDebugger, Settings.WiirdDebuggerPause);
 
 	//! Shadow mload - Only needed on some games with Hermes v5.1 (Check is inside the function)
 	shadow_mload();
@@ -289,22 +325,7 @@ int GameBooter::BootGame(const char * gameID)
 	USBStorage2_Deinit();
 	USB_Deinitialize();
 
-	//! Modify Wii Message Board to display the game starting here (before Nand Emu)
-	if(Settings.PlaylogUpdate)
-		Playlog_Update((char *) gameHeader.id, BNRInstance::Instance()->GetIMETTitle(CONF_GetLanguage()));
-
-	//! Setup NAND emulation
-	if(Settings.NandEmuMode && strchr(Settings.NandEmuPath, '/'))
-	{
-		gprintf("Enabling Nand Emulation on: %s\n", Settings.NandEmuPath);
-		Set_FullMode(Settings.NandEmuMode == 2);
-		Set_Path(strchr(Settings.NandEmuPath, '/'));
-		if(strncmp(Settings.NandEmuPath, "usb", 3) == 0)
-			Set_Partition(atoi(Settings.NandEmuPath+3)-1);
-		Enable_Emu(strncmp(Settings.NandEmuPath, "usb", 3) == 0 ? EMU_USB : EMU_SD);
-	}
-
 	//! Jump to the entrypoint of the game - the last function of the USB Loader
 	gprintf("Jumping to game entrypoint: 0x%08X.\n", AppEntrypoint);
-	return Disc_JumpToEntrypoint(enablecheat, WDMMenu::GetDolParameter());
+	return Disc_JumpToEntrypoint(Settings.Hooktype, WDMMenu::GetDolParameter());
 }

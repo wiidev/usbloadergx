@@ -50,7 +50,9 @@ void ClearDOLList()
 	dolCount = 0;
 }
 
-void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring, u8 vipatch, u8 sneekVideoPatch, u8 cheat, u8 fix002, u8 blockiosreloadselect, u8 gameIOS, u64 returnTo)
+void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring,
+				 u8 vipatch, u8 sneekVideoPatch, u8 hooktype, u8 fix002,
+				 u8 blockiosreloadselect, u8 gameIOS, u64 returnTo)
 {
 	es_fd = IOS_Open(es_fs, 0);
 	int i;
@@ -70,8 +72,7 @@ void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring, u8 
 
 		VideoModePatcher(dst, len, videoSelected);
 
-		if (cheat)
-			dogamehooks(dst, len);
+		dogamehooks(hooktype, dst, len);
 
 		if (vipatch)
 			vidolpatcher(dst, len);

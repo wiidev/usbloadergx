@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-24 18:27+0200\n"
+"POT-Creation-Date: 2011-07-29 22:53+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -122,6 +122,9 @@ msgstr ">> WAD 데이터 읽기...성공!"
 
 msgid "AUTO"
 msgstr "자동"
+
+msgid "AXNextFrame"
+msgstr ""
 
 msgid "Add category"
 msgstr ""
@@ -419,6 +422,9 @@ msgstr "커스텀/오리지널"
 
 msgid "DOL Path"
 msgstr "DOL 패치"
+
+msgid "Debugger Paused Start"
+msgstr ""
 
 msgid "Dec"
 msgstr "12월"
@@ -726,6 +732,12 @@ msgstr "GCT 파일 생성됨"
 msgid "GUI Settings"
 msgstr "GUI 설정"
 
+msgid "GXDraw"
+msgstr ""
+
+msgid "GXFlush"
+msgstr ""
+
 msgid "Game ID"
 msgstr "게임 ID"
 
@@ -797,6 +809,9 @@ msgstr ""
 
 msgid "Homebrew Launcher"
 msgstr "홈브류 런처"
+
+msgid "Hooktype"
+msgstr ""
 
 msgid "Hour"
 msgstr "시간"
@@ -878,11 +893,17 @@ msgstr "1월"
 msgid "Japanese"
 msgstr "일본어"
 
+msgid "Joypad"
+msgstr ""
+
 msgid "July"
 msgstr "7월"
 
 msgid "June"
 msgstr "6월"
+
+msgid "KPAD Read"
+msgstr ""
 
 msgid "Keyboard"
 msgstr "키보드"
@@ -1091,6 +1112,9 @@ msgstr "확인"
 
 msgid "ON"
 msgstr "켜짐"
+
+msgid "OSSleepThread"
+msgstr ""
 
 msgid "Ocarina"
 msgstr ""
@@ -1501,6 +1525,9 @@ msgstr ""
 msgid "Use global"
 msgstr ""
 
+msgid "VBI (Default)"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "VIDTV 패치"
 
@@ -1569,6 +1596,9 @@ msgid "Wiinnertag Path"
 msgstr ""
 
 msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
+msgstr ""
+
+msgid "Wiird Debugger"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"

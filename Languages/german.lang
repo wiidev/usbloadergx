@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-24 18:27+0200\n"
+"POT-Creation-Date: 2011-07-29 22:53+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -122,6 +122,9 @@ msgstr ">> Lese WAD Daten...OK!"
 
 msgid "AUTO"
 msgstr "AUTO"
+
+msgid "AXNextFrame"
+msgstr ""
 
 msgid "Add category"
 msgstr "Kategorie hinzuf."
@@ -419,6 +422,9 @@ msgstr "Community/Original"
 
 msgid "DOL Path"
 msgstr "Alternative DOL"
+
+msgid "Debugger Paused Start"
+msgstr ""
 
 msgid "Dec"
 msgstr "Dezember"
@@ -726,6 +732,12 @@ msgstr "GCT Datei erstellt"
 msgid "GUI Settings"
 msgstr "GUI Einstellungen"
 
+msgid "GXDraw"
+msgstr ""
+
+msgid "GXFlush"
+msgstr ""
+
 msgid "Game ID"
 msgstr "Spiel ID"
 
@@ -797,6 +809,9 @@ msgstr "Homebrew Kanal"
 
 msgid "Homebrew Launcher"
 msgstr "Homebrew Starter"
+
+msgid "Hooktype"
+msgstr ""
 
 msgid "Hour"
 msgstr "Stunden"
@@ -878,11 +893,17 @@ msgstr "Januar"
 msgid "Japanese"
 msgstr "Japanisch"
 
+msgid "Joypad"
+msgstr ""
+
 msgid "July"
 msgstr "Juli"
 
 msgid "June"
 msgstr "Juni"
+
+msgid "KPAD Read"
+msgstr ""
 
 msgid "Keyboard"
 msgstr "Tastatur"
@@ -1091,6 +1112,9 @@ msgstr "OK"
 
 msgid "ON"
 msgstr "AN"
+
+msgid "OSSleepThread"
+msgstr ""
 
 msgid "Ocarina"
 msgstr "Ocarina"
@@ -1501,6 +1525,9 @@ msgstr ""
 msgid "Use global"
 msgstr "Benutze global"
 
+msgid "VBI (Default)"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "VIDTV Patch"
 
@@ -1570,6 +1597,9 @@ msgstr "Wiinertag Pfad"
 
 msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
 msgstr "Wiinnertag braucht eine aktivierte Netzwerkverbindung beim Start der Anwendung. Soll diese jetzt aktiviert werden?"
+
+msgid "Wiird Debugger"
+msgstr ""
 
 msgid "Writing GXGameCategories.xml"
 msgstr "Schreibe GXGameCategories.xml"
