@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# danish.lang - r1070
+# danish.lang - r1102
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-29 22:53+0200\n"
+"POT-Creation-Date: 2011-08-08 03:32+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -127,10 +127,10 @@ msgid "AXNextFrame"
 msgstr ""
 
 msgid "Add category"
-msgstr ""
+msgstr "Tilføje kategori  "
 
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 msgid "All Partitions"
 msgstr "Alle Partitioner"
@@ -145,7 +145,7 @@ msgid "Alternate DOL"
 msgstr "Alternativ DOL"
 
 msgid "An example file was created here:"
-msgstr ""
+msgstr "En f.eks. fil er lavet her:"
 
 msgid "Anti"
 msgstr ""
@@ -160,10 +160,10 @@ msgid "Apr"
 msgstr ""
 
 msgid "Are you sure you want to delete this category?"
-msgstr ""
+msgstr "Er du sikker på at du ville slette denne kategori?"
 
 msgid "Are you sure you want to import game categories from WiiTDB?"
-msgstr ""
+msgstr "Er du sikker på at du ville importere spille kategorier fra WiiTDB?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "Er du sikker på at du vil låse USB Loader GX?"
@@ -202,10 +202,10 @@ msgid "Big thanks to:"
 msgstr "En stor tak til:"
 
 msgid "Block Categories Menu"
-msgstr ""
+msgstr "Bloker kategori menu"
 
 msgid "Block Categories Modify"
-msgstr ""
+msgstr "Bloker kategori modificering"
 
 msgid "Block Cover Downloads"
 msgstr "Bloker Cover downloads"
@@ -214,7 +214,7 @@ msgid "Block Custom Paths"
 msgstr "Bloker brugdefineret sti"
 
 msgid "Block Feature Settings"
-msgstr ""
+msgstr "Bloker særlige indstillinger"
 
 msgid "Block Game Install"
 msgstr "Bloker spil installering"
@@ -235,7 +235,7 @@ msgid "Block HBC Menu"
 msgstr "Bloker HBC menu"
 
 msgid "Block Hard Drive Settings"
-msgstr ""
+msgstr "Bloker Hard disk indstillinger"
 
 msgid "Block IOS Reload"
 msgstr "Blokér IOS-reload"
@@ -250,7 +250,7 @@ msgid "Block Reset Settings"
 msgstr "Bloker nulstils indstillinger"
 
 msgid "Block SD Reload Button"
-msgstr ""
+msgstr "Blocker SD reload knap"
 
 msgid "Block Sound Settings"
 msgstr "Bloker lyd indstillinger"
@@ -302,10 +302,10 @@ msgid "Cannot write to destination."
 msgstr "Kan ikke skrive til destinationen."
 
 msgid "Categories"
-msgstr ""
+msgstr "Kategorier"
 
 msgid "Categories:"
-msgstr ""
+msgstr "Kategorier:"
 
 msgid "Change Play Path"
 msgstr "Ændre sti til musik"
@@ -354,7 +354,7 @@ msgid "Console must be unlocked for this option."
 msgstr "Konsollen skal være låst op for denne mulighed."
 
 msgid "Console must be unlocked to be able to use this."
-msgstr ""
+msgstr "Konsollen skal være låst op for at kunne bruge dette."
 
 msgid "Console should be unlocked to modify it."
 msgstr "Konsollen skal være låst op for ændre dette."
@@ -391,7 +391,7 @@ msgid "Could not open Disc"
 msgstr "Kunne ikke åbne DVD"
 
 msgid "Could not open the WiiTDB.xml file."
-msgstr ""
+msgstr "Kunne ikke åbne WiiTDB.xml fil."
 
 msgid "Could not open wiitdb.xml."
 msgstr "Kunne ikke åbne wiitdb.xml"
@@ -400,7 +400,7 @@ msgid "Could not save."
 msgstr "Kunne ikke gemme."
 
 msgid "Could not write to:"
-msgstr ""
+msgstr "Kunne ikke skrive til:"
 
 msgid "Cover Download"
 msgstr "Cover-download"
@@ -454,7 +454,7 @@ msgid "Delete Disc Artwork"
 msgstr "Slet DVD-billede"
 
 msgid "Delete category"
-msgstr ""
+msgstr "Slet kategori"
 
 msgid "Design:"
 msgstr ""
@@ -627,7 +627,7 @@ msgid "Extracting files..."
 msgstr "Pakker filer ud..."
 
 msgid "Failed"
-msgstr ""
+msgstr "Fejlede"
 
 msgid "Failed formating"
 msgstr "Formateringen mislykkedes"
@@ -642,10 +642,10 @@ msgid "Failed updating"
 msgstr "Opdatering fejlede"
 
 msgid "Features"
-msgstr ""
+msgstr "Særlige"
 
 msgid "Features Settings"
-msgstr ""
+msgstr "Særlige indstillinger"
 
 msgid "Feb"
 msgstr ""
@@ -676,10 +676,10 @@ msgid "Force NTSC"
 msgstr "Tving NTSC"
 
 msgid "Force NTSC480p"
-msgstr ""
+msgstr "Tving NTSC480p"
 
 msgid "Force PAL480p"
-msgstr ""
+msgstr "Tving PAL480p"
 
 msgid "Force PAL50"
 msgstr "Tving PAL50"
@@ -703,7 +703,7 @@ msgid "French"
 msgstr "Fransk"
 
 msgid "Full"
-msgstr ""
+msgstr "Fuld"
 
 msgid "Full Cover Path"
 msgstr "Sti til Fuld Cover"
@@ -784,10 +784,10 @@ msgid "Games"
 msgstr "Spil"
 
 msgid "Generating GXGameCategories.xml"
-msgstr ""
+msgstr "Opretter GXGameCategories.xml"
 
 msgid "Genre:"
-msgstr ""
+msgstr "Genre:"
 
 msgid "German"
 msgstr "Tysk"
@@ -799,7 +799,7 @@ msgid "HOME Menu"
 msgstr ""
 
 msgid "Hard Drive Settings"
-msgstr ""
+msgstr "Hard Disk instillinger"
 
 msgid "Homebrew Apps Path"
 msgstr "Sti til homebrew-programmer"
@@ -823,13 +823,13 @@ msgid "How to Shutdown?"
 msgstr "Hvordan skal der slukkes?"
 
 msgid "Import Categories"
-msgstr ""
+msgstr "Importer kategorier"
 
 msgid "Import operation successfully completed."
-msgstr ""
+msgstr "Import operation er færdig med succes"
 
 msgid "Importing categories"
-msgstr ""
+msgstr "Importere kategorier"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -852,13 +852,13 @@ msgid "Install"
 msgstr "Installér"
 
 msgid "Install Directories"
-msgstr ""
+msgstr "Installer mappe"
 
 msgid "Install Error!"
 msgstr "Installationsfejl!"
 
 msgid "Install Partitions"
-msgstr ""
+msgstr "Installer partitioner"
 
 msgid "Install a game"
 msgstr "Installér nyt spil"
@@ -979,7 +979,7 @@ msgid "Mar"
 msgstr ""
 
 msgid "Mark new games"
-msgstr "Makér nye spil"
+msgstr "Maker nye spil"
 
 msgid "May"
 msgstr "Maj"
@@ -1003,16 +1003,16 @@ msgid "Music Volume"
 msgstr "Lydstyrke"
 
 msgid "Nand Emu Path"
-msgstr ""
+msgstr "Sti til Nand Emu."
 
 msgid "Nand Emulation"
-msgstr ""
+msgstr "Nand emulering"
 
 msgid "Nand Emulation is only available on D2X cIOS!"
-msgstr ""
+msgstr "Nand emulering er kun mulig med d2x cIOS"
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
-msgstr ""
+msgstr "Nand emulering virker kun med FAT/FAT32 partitioner!"
 
 msgid "Neither"
 msgstr "Ingen"
@@ -1045,7 +1045,7 @@ msgid "No WBFS or FAT/NTFS/EXT partition found"
 msgstr "Ingen WBFS eller FAT/NTFS/EXT partition er fundet"
 
 msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
-msgstr ""
+msgstr "Ingen Wiinnertag.xml fundet i config stien. Vil du oprette en prøve fil?"
 
 msgid "No cheats were selected"
 msgstr "Der blev ikke valgt nogle cheats"
@@ -1144,7 +1144,7 @@ msgid "Parental Control"
 msgstr "Børnelås"
 
 msgid "Partial"
-msgstr ""
+msgstr "Delvis"
 
 msgid "Partition"
 msgstr "Partition"
@@ -1228,7 +1228,7 @@ msgid "Rename Game on WBFS"
 msgstr "Omdøb spil på WBFS"
 
 msgid "Rename category"
-msgstr ""
+msgstr "Omdøb kategori"
 
 msgid "Reset"
 msgstr "Nulstil"
@@ -1297,7 +1297,7 @@ msgid "Select a DOL from Game"
 msgstr "Vælg DOL fra spil"
 
 msgid "Select game categories"
-msgstr ""
+msgstr "Vælg spille Kategorier"
 
 msgid "Sept"
 msgstr ""
@@ -1309,7 +1309,7 @@ msgid "Settings"
 msgstr "Indstillinger"
 
 msgid "Show Categories"
-msgstr ""
+msgstr "Vis kategorier"
 
 msgid "Show Free Space"
 msgstr "Vis fri plads"
@@ -1520,10 +1520,10 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Den uploadede ZIP-fil er installeret i homebrew-mappen."
 
 msgid "Use System Font"
-msgstr ""
+msgstr "Brug system font"
 
 msgid "Use global"
-msgstr ""
+msgstr "Brug global"
 
 msgid "VBI (Default)"
 msgstr ""
@@ -1551,7 +1551,7 @@ msgid "Waiting..."
 msgstr "Venter..."
 
 msgid "Warning"
-msgstr ""
+msgstr "Advarsel"
 
 msgid "Warning:"
 msgstr "Advarsel:"
@@ -1593,16 +1593,16 @@ msgid "Wiinnertag"
 msgstr ""
 
 msgid "Wiinnertag Path"
-msgstr ""
+msgstr "Sti til Wiinnertag"
 
 msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
-msgstr ""
+msgstr "Wiinnertag kræver at du har automatisk netværk forbindelse sat til ved prg. opstart. Vil du sætte det TIL nu?"
 
 msgid "Wiird Debugger"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"
-msgstr ""
+msgstr "Skriver GXGameCategories.xml"
 
 msgid "Wrong Password"
 msgstr "Forkert password"
@@ -1617,7 +1617,7 @@ msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 1
 msgstr "Du prøver at vælge en FAT32/NTFS/EXT partition med cIOS 249 Rev < 18. Dette er ikke understøttet. Fortsætte er på egen risiko"
 
 msgid "You cannot delete this category."
-msgstr ""
+msgstr "Du kan ikke slette denne kategori."
 
 msgid "You need to select or format a partition"
 msgstr "Du skal vælge eller formattere en partition"
@@ -1675,363 +1675,3 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
-
-#~ msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
-#~ msgstr "Automatisk skift af port er gjort on the fly. For denne mulighed skal du skifte alle brugerdefinerede stier til SD kortet først, for ellers kan det skade dit fil system."
-
-#~ msgid "Install directories"
-#~ msgstr "Installer mappe"
-
-#~ msgid "Install partitions"
-#~ msgstr "Installationspartitioner"
-
-#~ msgid " Wad Saved as:"
-#~ msgstr " WAD gemt som:"
-
-#~ msgid "Delete ?"
-#~ msgstr "Slet?"
-
-#~ msgid "Keep"
-#~ msgstr "Behold"
-
-#~ msgid "Not a WAD file."
-#~ msgstr "Ikke en WAD-fil."
-
-#~ msgid "Uninstall"
-#~ msgstr "Afinstallér"
-
-#~ msgid "Author:"
-#~ msgstr "Forfatter:"
-
-#~ msgid "Do you want to load this theme?"
-#~ msgstr "Vil du indlæse dette tema?"
-
-#~ msgid "Loading default theme."
-#~ msgstr "Indlæser standard tema."
-
-#~ msgid "Theme path is changed."
-#~ msgstr "Sti til temaer er ændret."
-
-#~ msgid "Custom Disc Images"
-#~ msgstr "Tilpasset DVD billeder"
-
-#~ msgid "Download Boxart image?"
-#~ msgstr "Download boxart-billede?"
-
-#~ msgid "Download Discart image?"
-#~ msgstr "Download DVD-billede?"
-
-#~ msgid "Downloading file"
-#~ msgstr "Downloader fil"
-
-#~ msgid "Missing files"
-#~ msgstr "Manglende filer"
-
-#~ msgid "Original Disc Images"
-#~ msgstr "Originale DVD billeder"
-
-#~ msgid "Use IOS58"
-#~ msgstr "Brug IOS58"
-
-#~ msgid "files not found on the server!"
-#~ msgstr "filer blev ikke fundet på serveren!"
-
-#~ msgid "Disc Images"
-#~ msgstr "DVD-billeder"
-
-#~ msgid "Downloading covers"
-#~ msgstr "Downloader covers"
-
-#~ msgid "Only Customs"
-#~ msgstr "Kun tilpassede"
-
-#~ msgid "Only Original"
-#~ msgstr "Kun originale"
-
-#~ msgid "Trying custom Discarts"
-#~ msgstr "Prøver tilpassede DVD billeder"
-
-#~ msgid "Trying original Discarts"
-#~ msgstr "Prøver orginale DVD billeder"
-
-#~ msgid "Do you really want to delete:"
-#~ msgstr "Vil du slette:"
-
-#~ msgid "Do you want to use the alternate DOL that is known to be correct?"
-#~ msgstr "Skal den alternative DOL, der med sikkerhed er korrekt, bruges?"
-
-#~ msgid "0 (Locked and Unlocked Games)"
-#~ msgstr "0 (låste og oplåste spil)"
-
-#~ msgid "1 (Unlocked Games Only)"
-#~ msgstr "1 (kun oplåste spil)"
-
-#~ msgid "BETA revisions"
-#~ msgstr "BETA-versioner"
-
-#~ msgid "Enabling this option on a FAT partition might slow the startup of the loader."
-#~ msgstr "Aktiver denne muligheh på en FAT partition, vil gøre opstarten af denne loader langsommer."
-
-#~ msgid "GamesLevel"
-#~ msgstr "Spil niveau"
-
-#~ msgid "Unlock console to use this option."
-#~ msgstr "Lås op for konsollen for at benytte denne indstilling."
-
-#~ msgid "Full Shutdown"
-#~ msgstr "Sluk helt"
-
-#~ msgid "GXtheme.cfg not found in any subfolder."
-#~ msgstr "GXtheme.cfg blev ikke fundet i nogle undermapper"
-
-#~ msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-#~ msgstr "Hvis der ikke er netforbindelse, tryk da på 1 for at få en URL til WiiTDB.zip"
-
-#~ msgid "Paste it into your browser to get your WiiTDB.zip."
-#~ msgstr "Brug den i en browser for at hente WiiTDB.zip."
-
-#~ msgid "Shutdown to Idle"
-#~ msgstr "Standby"
-
-#~ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-#~ msgstr "URLen er blevet gemt som %sWiiTDB_URL.txt."
-
-#~ msgid "Can't create file"
-#~ msgstr "Kan ikke oprette fil"
-
-#~ msgid "Connection lost..."
-#~ msgstr "Forbindelsen er væk..."
-
-#~ msgid "Download failed."
-#~ msgstr "Download mislykkedes."
-
-#~ msgid "Download request failed."
-#~ msgstr "Anmodning om download mislykkedes."
-
-#~ msgid "Downloading Page List:"
-#~ msgstr "Downloader side:"
-
-#~ msgid "Theme Download Path"
-#~ msgstr "Sti til download af temaer"
-
-#~ msgid "Transfer failed."
-#~ msgstr "Overførslen mislykkedes"
-
-#~ msgid "Unsupported format, try to extract manually."
-#~ msgstr "Formatet er ikke understøttet - prøv at udpakke manuelt."
-
-#~ msgid "and translaters for language files updates"
-#~ msgstr "og oversætterne for opdateringer til sprogfilerne"
-
-#~ msgid "Insert an SD-Card to save."
-#~ msgstr "Indsæt et SD-kort for at gemme."
-
-#~ msgid "Insert an SD-Card to use this option."
-#~ msgstr "Indsæt et SD-kort for at bruge denne indstilling."
-
-#~ msgid "No SD-Card inserted!"
-#~ msgstr "Intet SD-kort fundet!"
-
-#~ msgid "Waiting for USB Device"
-#~ msgstr "Venter på USB-enhed"
-
-#~ msgid "Back to Loader"
-#~ msgstr "Tilbage til Loaderen"
-
-#~ msgid "FAT: Use directories"
-#~ msgstr "FAT: Brug mapper"
-
-#~ msgid "All partitions"
-#~ msgstr "Alle partitioner"
-
-#~ msgid "Game partition"
-#~ msgstr "Spilpartition"
-
-#~ msgid "Install 1:1 Copy"
-#~ msgstr "Installér 1:1-kopi"
-
-#~ msgid "An Error occured"
-#~ msgstr "Der skete en fejl"
-
-#~ msgid "Are you sure you want to enable Parent Control?"
-#~ msgstr "Skal børnelåsen slås til?"
-
-#~ msgid "Checking for Updates"
-#~ msgstr "Leder efter opdateringer"
-
-#~ msgid "Downloading"
-#~ msgstr "Downloader"
-
-#~ msgid "Invalid PIN code"
-#~ msgstr "Forkert PIN-kode"
-
-#~ msgid "Parental Control disabled"
-#~ msgstr "Børnelåsen er slået fra"
-
-#~ msgid "The wad file was installed.  But It could not be deleted from the SD card."
-#~ msgstr "WAD-filen blev installeret. Den kunne ikke slettes fra SD-kortet."
-
-#~ msgid "The wad installation failed with error %ld"
-#~ msgstr "WAD-installationen mislykkedes med fejl %ld"
-
-#~ msgid "Unable to open the wad that was just downloaded (%s)."
-#~ msgstr "Ikke i stand til at åbne den WAD, der blev downloadet (%s)."
-
-#~ msgid "Unlock Parental Control"
-#~ msgstr "Lås børnelåsen op"
-
-#~ msgid "Update to"
-#~ msgstr "Opdatér til"
-
-#~ msgid "Updating"
-#~ msgstr "Opdaterer..."
-
-#~ msgid "Updating Language Files..."
-#~ msgstr "Opdaterer sprogfiler..."
-
-#~ msgid "Updating WiiTDB.zip"
-#~ msgstr "Opdaterer WiiTDB.zip"
-
-#~ msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
-#~ msgstr "Børnelåsen er ikke slået til. Hvis børnelåsen skal bruges, skal den slås til i Wiiens indstillinger."
-
-#~ msgid "%s : %s May not boot correctly if your System Menu is not up to date."
-#~ msgstr "%s : %s booter måske ikke korrekt, hvis system menuen ikke er opdateret."
-
-#~ msgid "BCA Codes Path changed"
-#~ msgstr "Sti til BCA koder ændret"
-
-#~ msgid "Back to Wii Menu"
-#~ msgstr "Tilbage til HBC"
-
-#~ msgid "Channels"
-#~ msgstr "Kanaler"
-
-#~ msgid "Checking existing artwork"
-#~ msgstr "Kontrollerer eksisterende billeder"
-
-#~ msgid "Confirm"
-#~ msgstr "Bekræft"
-
-#~ msgid "Could not find a WBFS partition."
-#~ msgstr "Kunne ikke finde en WBFS-partition."
-
-#~ msgid "Could not open WBFS partition"
-#~ msgstr "Kunne ikke åbne WBFS-partition"
-
-#~ msgid "Could not read the disc."
-#~ msgstr "Kunne ikke læse DVD."
-
-#~ msgid "Could not set USB."
-#~ msgstr "Kunne ikke sætte USB."
-
-#~ msgid "Cover Path Changed"
-#~ msgstr "Sti til covers ændret"
-
-#~ msgid "DOL path changed"
-#~ msgstr "Sti til DOL ændret"
-
-#~ msgid "Disc Path Changed"
-#~ msgstr "Sti til DVD-billeder"
-
-#~ msgid "Display favorites"
-#~ msgstr "Vis favoritter"
-
-#~ msgid "Do you want to retry for 30 secs?"
-#~ msgstr "Forsøg igen (i 30 sek.)?"
-
-#~ msgid "Enable Parental Control"
-#~ msgstr "Slå børnelåsen til"
-
-#~ msgid "Force"
-#~ msgstr "Tving"
-
-#~ msgid "GCT Cheatcodes Path changed"
-#~ msgstr "Sti til cheatcodes ændret"
-
-#~ msgid "Homebrew Appspath changed"
-#~ msgstr "Sti til homebrew-programmer ændret"
-
-#~ msgid "Insert an SD-Card to download images."
-#~ msgstr "Indsæt et SD-kort for at downloade billeder."
-
-#~ msgid "Install not possible"
-#~ msgstr "Kan ikke installere"
-
-#~ msgid "Most likely it has dimensions that are not evenly divisible by 4."
-#~ msgstr "Sandsynligvis har det dimensioner, der ikke er delelige med fire."
-
-#~ msgid "Network init error"
-#~ msgstr "Netforbindelsen kunne ikke intialiseres"
-
-#~ msgid "No .dol or .elf files found."
-#~ msgstr "Der blev ikke fundet nogle .dol- eller .elf-filer."
-
-#~ msgid "No Favorites"
-#~ msgstr "Ingen favoritter"
-
-#~ msgid "No USB Device"
-#~ msgstr "Ingen USB-enhed tilsluttet"
-
-#~ msgid "No USB Device found."
-#~ msgstr "Ingen USB-enhed fundet."
-
-#~ msgid "No WBFS or FAT/NTFS partition found"
-#~ msgstr "Der blev ikke fundet en WBFS- eller FAT/NTFS-partition"
-
-#~ msgid "Normal Covers"
-#~ msgstr "Normale Covers"
-
-#~ msgid "Not Found"
-#~ msgstr "Ikke fundet"
-
-#~ msgid "Not a DOL/ELF file."
-#~ msgstr "Ikke en DOL/ELF-fil."
-
-#~ msgid "Reset to standard BGM?"
-#~ msgstr "Nulstil til standard-BGM"
-
-#~ msgid "Save Failed"
-#~ msgstr "Gem mislykkedes"
-
-#~ msgid "Selected DOL"
-#~ msgstr "Valgt DOL"
-
-#~ msgid "TXT Cheatcodes Path changed"
-#~ msgstr "Sti til TXTCheatcodes ændret"
-
-#~ msgid "Theme Download Path changed"
-#~ msgstr "Sti til download af temaer ændret"
-
-#~ msgid "Theme Path Changed"
-#~ msgstr "Sti til temaer ændret"
-
-#~ msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-#~ msgstr "USB Loader GX fungerer kun med Hermes CIOS rev 4! Kontrollér, at revision 4 er installeret!"
-
-#~ msgid "Update Path changed."
-#~ msgstr "Sti til opdateringer ændret."
-
-#~ msgid "WIP Patches Path changed"
-#~ msgstr "Sti til WIP patches ændret"
-
-#~ msgid "WiiTDB Path changed."
-#~ msgstr "Sti til WiiTDB ændret"
-
-#~ msgid "You are about to delete "
-#~ msgstr "Du er ved at slette "
-
-#~ msgid "You are choosing to display favorites and you do not have any selected."
-#~ msgstr "Du har valgt at vise favoritter, men ingen spil er markerede som favoritter."
-
-#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-#~ msgstr "Der bruges et NTFS filsystem. Da der kan forekomme skrivefejl på NTFS-partitioner, kan der ikke installeres spil."
-
-#~ msgid "You have attempted to load a bad image"
-#~ msgstr "Du har forsøgt at indlæse et dårligt billede"
-
-#~ msgid "does not exist!  You Messed something up, Idiot."
-#~ msgstr "eksisterer ikke!"
-
-#~ msgid "file left"
-#~ msgstr "fil tilbage"

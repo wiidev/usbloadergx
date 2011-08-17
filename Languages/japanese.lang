@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# japanese.lang - r1097
+# japanese.lang - r1108
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -424,7 +424,7 @@ msgid "DOL Path"
 msgstr "代替ＤＯＬ"
 
 msgid "Debugger Paused Start"
-msgstr ""
+msgstr "デバッガ待機スタート"
 
 msgid "Dec"
 msgstr "12月"
@@ -703,7 +703,7 @@ msgid "French"
 msgstr "フランス語"
 
 msgid "Full"
-msgstr ""
+msgstr "フル"
 
 msgid "Full Cover Path"
 msgstr "フルカバー"
@@ -811,7 +811,7 @@ msgid "Homebrew Launcher"
 msgstr "Homebrewランチャー"
 
 msgid "Hooktype"
-msgstr ""
+msgstr "フックタイプ"
 
 msgid "Hour"
 msgstr "時間"
@@ -1003,16 +1003,16 @@ msgid "Music Volume"
 msgstr "BGMの音量"
 
 msgid "Nand Emu Path"
-msgstr ""
+msgstr "NANDエミュ"
 
 msgid "Nand Emulation"
-msgstr ""
+msgstr "NANDエミュレーション"
 
 msgid "Nand Emulation is only available on D2X cIOS!"
-msgstr ""
+msgstr "NANDエミュレーションはd2x cIOSのみで動作します!"
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
-msgstr ""
+msgstr "NANDエミュレーションはFAT/FAT32領域のみで動作します!"
 
 msgid "Neither"
 msgstr "非表示"
@@ -1108,7 +1108,7 @@ msgid "OFF"
 msgstr "使わない"
 
 msgid "OK"
-msgstr "確定する"
+msgstr ""
 
 msgid "ON"
 msgstr "使う"
@@ -1144,7 +1144,7 @@ msgid "Parental Control"
 msgstr "使用制限の設定"
 
 msgid "Partial"
-msgstr ""
+msgstr "部分的"
 
 msgid "Partition"
 msgstr "使用する領域"
@@ -1520,13 +1520,13 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "ｲﾝｽﾄｰﾙ済みﾃﾞｨﾚｸﾄﾘにZIPを転送しました"
 
 msgid "Use System Font"
-msgstr ""
+msgstr "システムフォントを使う"
 
 msgid "Use global"
 msgstr "基本設定を使う"
 
 msgid "VBI (Default)"
-msgstr ""
+msgstr "VBI(デフォルト)"
 
 msgid "VIDTV Patch"
 msgstr "映像パッチ"
@@ -1599,7 +1599,7 @@ msgid "Wiinnertag requires you to enable automatic network connect on applicatio
 msgstr "Wiinnertagは自動ネット接続が有効になっている必要が有ります。有効にしますか?"
 
 msgid "Wiird Debugger"
-msgstr ""
+msgstr "WiiRDデバッガ"
 
 msgid "Writing GXGameCategories.xml"
 msgstr "GXGameCategories.xmlを書き込み中です"

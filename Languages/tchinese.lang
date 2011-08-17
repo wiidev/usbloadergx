@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# tchinese.lang - r1093
+# tchinese.lang - r1098
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-29 22:53+0200\n"
+"POT-Creation-Date: 2011-08-08 03:32+0200\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -202,7 +202,7 @@ msgid "Big thanks to:"
 msgstr "非常感謝:"
 
 msgid "Block Categories Menu"
-msgstr ""
+msgstr "封鎖類別選單"
 
 msgid "Block Categories Modify"
 msgstr "封鎖類別修改"
@@ -250,7 +250,7 @@ msgid "Block Reset Settings"
 msgstr "封鎖重置設定"
 
 msgid "Block SD Reload Button"
-msgstr ""
+msgstr "封鎖 SD 重新載入按鈕"
 
 msgid "Block Sound Settings"
 msgstr "封鎖音效設定"
@@ -784,7 +784,7 @@ msgid "Games"
 msgstr "遊戲數量"
 
 msgid "Generating GXGameCategories.xml"
-msgstr ""
+msgstr "正在產生 GXGameCategories.xml"
 
 msgid "Genre:"
 msgstr "類型："
@@ -829,7 +829,7 @@ msgid "Import operation successfully completed."
 msgstr "輸入操作順利完成。"
 
 msgid "Importing categories"
-msgstr ""
+msgstr "正在輸入類別"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -1321,7 +1321,7 @@ msgid "Shutdown Wii"
 msgstr "關閉Wii主機"
 
 msgid "Sneek Video Patch"
-msgstr ""
+msgstr "Sneek視訊修正"
 
 msgid "Sort alphabetically"
 msgstr "以字母順序排序"
@@ -1602,7 +1602,7 @@ msgid "Wiird Debugger"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"
-msgstr ""
+msgstr "正在寫入 GXGameCategories.xml"
 
 msgid "Wrong Password"
 msgstr "密碼錯誤"

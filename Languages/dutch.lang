@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# dutch.lang - r1091
+# dutch.lang - r1100
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-07-29 22:53+0200\n"
-"PO-Revision-Date: 2011-06-20 07:25+0100\n"
+"PO-Revision-Date: 2011-06-30 14:22+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
 "MIME-Version: 1.0\n"
@@ -202,7 +202,7 @@ msgid "Big thanks to:"
 msgstr "Grote dank aan:"
 
 msgid "Block Categories Menu"
-msgstr ""
+msgstr "Blokkeer Categorie Menu"
 
 msgid "Block Categories Modify"
 msgstr "Blokkeer categorieën wijzigen"
@@ -235,7 +235,7 @@ msgid "Block HBC Menu"
 msgstr "Blokkeer HBC Menu"
 
 msgid "Block Hard Drive Settings"
-msgstr ""
+msgstr "Blokkeer Harddisk instellingen"
 
 msgid "Block IOS Reload"
 msgstr "Stop IOS herladen"
@@ -250,7 +250,7 @@ msgid "Block Reset Settings"
 msgstr "Blokkeer Reset Instellingen"
 
 msgid "Block SD Reload Button"
-msgstr ""
+msgstr "Blokkeer SD Herlaad Knop"
 
 msgid "Block Sound Settings"
 msgstr "Blokkeer Geluid Instellingen"
@@ -400,7 +400,7 @@ msgid "Could not save."
 msgstr "Kan niet opslaan."
 
 msgid "Could not write to:"
-msgstr ""
+msgstr "Kon niet schrijven naar:"
 
 msgid "Cover Download"
 msgstr "Download hoesjes"
@@ -627,7 +627,7 @@ msgid "Extracting files..."
 msgstr "Bestanden uitpakken..."
 
 msgid "Failed"
-msgstr ""
+msgstr "Mislukt"
 
 msgid "Failed formating"
 msgstr "Formatteren mislukt"
@@ -784,7 +784,7 @@ msgid "Games"
 msgstr "Spellen"
 
 msgid "Generating GXGameCategories.xml"
-msgstr ""
+msgstr "Genereren GXGameCategories.xml"
 
 msgid "Genre:"
 msgstr ""
@@ -799,7 +799,7 @@ msgid "HOME Menu"
 msgstr ""
 
 msgid "Hard Drive Settings"
-msgstr ""
+msgstr "Harddisk Instellingen"
 
 msgid "Homebrew Apps Path"
 msgstr "Locatie homebrew apps"
@@ -829,7 +829,7 @@ msgid "Import operation successfully completed."
 msgstr "Importeren succesvol afgerond"
 
 msgid "Importing categories"
-msgstr ""
+msgstr "Categorieën importeren"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -852,13 +852,13 @@ msgid "Install"
 msgstr "Installeer"
 
 msgid "Install Directories"
-msgstr ""
+msgstr "Installeer mappen"
 
 msgid "Install Error!"
 msgstr "Installatiefout!"
 
 msgid "Install Partitions"
-msgstr ""
+msgstr "Installatie Partitie"
 
 msgid "Install a game"
 msgstr "Spel installeren"
@@ -1602,7 +1602,7 @@ msgid "Wiird Debugger"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"
-msgstr ""
+msgstr "GXGameCategories.xml schrijven"
 
 msgid "Wrong Password"
 msgstr "Fout wachtwoord"

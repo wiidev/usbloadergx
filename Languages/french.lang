@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# French.lang for r1097
+# French.lang - r1108
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -424,7 +424,7 @@ msgid "DOL Path"
 msgstr "Dossier DOL alternatif"
 
 msgid "Debugger Paused Start"
-msgstr ""
+msgstr "Démarrer WiiRd en pause"
 
 msgid "Dec"
 msgstr "Déc"
@@ -703,7 +703,7 @@ msgid "French"
 msgstr "Français"
 
 msgid "Full"
-msgstr ""
+msgstr "Complète"
 
 msgid "Full Cover Path"
 msgstr "Dossier jaqu. complètes"
@@ -1003,16 +1003,16 @@ msgid "Music Volume"
 msgstr "Volume musique"
 
 msgid "Nand Emu Path"
-msgstr ""
+msgstr "Dossier Émulation Nand"
 
 msgid "Nand Emulation"
-msgstr ""
+msgstr "Émulation Nand"
 
 msgid "Nand Emulation is only available on D2X cIOS!"
-msgstr ""
+msgstr "L'Émulation Nand n'est disponible qu'avec le cIOS D2X!"
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
-msgstr ""
+msgstr "L'Émulation Nand ne fonctionne qu'avec une partition FAT/FAT32!"
 
 msgid "Neither"
 msgstr "Aucun"
@@ -1144,7 +1144,7 @@ msgid "Parental Control"
 msgstr "Contrôle parental"
 
 msgid "Partial"
-msgstr ""
+msgstr "Partielle"
 
 msgid "Partition"
 msgstr ""
@@ -1520,13 +1520,13 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Fichier ZIP envoyé et installé dans le répertoire homebrew."
 
 msgid "Use System Font"
-msgstr ""
+msgstr "Police d'écriture système"
 
 msgid "Use global"
 msgstr "Paramètre du loader"
 
 msgid "VBI (Default)"
-msgstr ""
+msgstr "VBI (Défaut)"
 
 msgid "VIDTV Patch"
 msgstr "Patch VIDTV"
@@ -1599,7 +1599,7 @@ msgid "Wiinnertag requires you to enable automatic network connect on applicatio
 msgstr "Wiinnertag nécessite une connexion automatique au réseau au lancement de l'application. Voulez-vous l'activer ?"
 
 msgid "Wiird Debugger"
-msgstr ""
+msgstr "Débugger WiiRd"
 
 msgid "Writing GXGameCategories.xml"
 msgstr "Ecriture GXGameCategories.xml"

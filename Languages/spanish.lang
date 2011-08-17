@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# spanish.lang - r1095
+# spanish.lang - r1102
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-29 22:53+0200\n"
-"PO-Revision-Date: 2011-06-25 17:00+0200\n"
+"POT-Creation-Date: 2011-08-08 03:32+0200\n"
+"PO-Revision-Date: 2011-07-25 16:40+0200\n"
 "Last-Translator: hvy109\n"
 "Language-Team: Penn, SirPalax, hvy109\n"
 "MIME-Version: 1.0\n"
@@ -211,7 +211,7 @@ msgid "Block Cover Downloads"
 msgstr "Bloq. Descarga Carátulas"
 
 msgid "Block Custom Paths"
-msgstr "Bloquear Rutas Person."
+msgstr "Bloquear Rutas Personal."
 
 msgid "Block Feature Settings"
 msgstr "Bloq. Conf. Característ."
@@ -250,7 +250,7 @@ msgid "Block Reset Settings"
 msgstr "Bloq. Resetear Config."
 
 msgid "Block SD Reload Button"
-msgstr ""
+msgstr "Bloq. Botón Recarga SD"
 
 msgid "Block Sound Settings"
 msgstr "Bloquear Config. Sonido"
@@ -703,7 +703,7 @@ msgid "French"
 msgstr "Francés"
 
 msgid "Full"
-msgstr ""
+msgstr "Completa"
 
 msgid "Full Cover Path"
 msgstr "Ruta Carátulas Comp."
@@ -784,7 +784,7 @@ msgid "Games"
 msgstr "Juegos"
 
 msgid "Generating GXGameCategories.xml"
-msgstr ""
+msgstr "Generando GXGameCategories.xml"
 
 msgid "Genre:"
 msgstr "Género:"
@@ -805,7 +805,7 @@ msgid "Homebrew Apps Path"
 msgstr "Ruta Apps Homebrew"
 
 msgid "Homebrew Channel"
-msgstr "Canal Homebrew"
+msgstr ""
 
 msgid "Homebrew Launcher"
 msgstr "Ejecutar Homebrew"
@@ -829,7 +829,7 @@ msgid "Import operation successfully completed."
 msgstr "Importación completada con éxito."
 
 msgid "Importing categories"
-msgstr ""
+msgstr "Importando categorías"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -1003,16 +1003,16 @@ msgid "Music Volume"
 msgstr "Volumen de la Música"
 
 msgid "Nand Emu Path"
-msgstr ""
+msgstr "Ruta Emul. Nand"
 
 msgid "Nand Emulation"
-msgstr ""
+msgstr "Emulación Nand"
 
 msgid "Nand Emulation is only available on D2X cIOS!"
-msgstr ""
+msgstr "¡La emulación Nand solo está disponible en cIOS D2X!"
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
-msgstr ""
+msgstr "¡La emulación Nand solo funciona en particiones FAT/FAT32!"
 
 msgid "Neither"
 msgstr "Ninguno"
@@ -1093,7 +1093,7 @@ msgid "Not enough free space!"
 msgstr "¡No hay suficiente espacio libre!"
 
 msgid "Not enough memory."
-msgstr "No hay suficiento memoria."
+msgstr "No hay suficiente memoria."
 
 msgid "Not required"
 msgstr "No requerido"
@@ -1144,7 +1144,7 @@ msgid "Parental Control"
 msgstr "Control Parental"
 
 msgid "Partial"
-msgstr ""
+msgstr "Parcial"
 
 msgid "Partition"
 msgstr "Partición"
@@ -1321,7 +1321,7 @@ msgid "Shutdown Wii"
 msgstr "Apagar Wii"
 
 msgid "Sneek Video Patch"
-msgstr ""
+msgstr "Parche Vídeo Sneek"
 
 msgid "Sort alphabetically"
 msgstr "Ordenar alfabéticamente"
@@ -1421,10 +1421,10 @@ msgid "Theme Downloader"
 msgstr "Descarga de Temas"
 
 msgid "Theme Menu"
-msgstr "Menú del Tema"
+msgstr "Menú de Temas"
 
 msgid "Theme Path"
-msgstr "Ruta del Tema"
+msgstr "Ruta de Temas"
 
 msgid "Theme Title:"
 msgstr "Título del Tema:"
@@ -1520,7 +1520,7 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Enviado archivo ZIP instalado en la carpeta homebrew."
 
 msgid "Use System Font"
-msgstr ""
+msgstr "Usar Fuente del Sistema"
 
 msgid "Use global"
 msgstr "Usar global"
@@ -1602,7 +1602,7 @@ msgid "Wiird Debugger"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"
-msgstr ""
+msgstr "Escribiendo GXGameCategories.xml"
 
 msgid "Wrong Password"
 msgstr "Contraseña incorrecta"
@@ -1644,7 +1644,7 @@ msgid "for Ocarina"
 msgstr "por Ocarina"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr "por WiiTDB y alojar caráturas e imágenes"
+msgstr "por WiiTDB y alojar carátulas e imágenes"
 
 msgid "for diverse patches"
 msgstr "por diversos parches"
