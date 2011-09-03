@@ -1170,12 +1170,17 @@ void GameBrowseMenu::CheckDiscSlotUpdate()
 	else if (dvdBtn->GetState() == STATE_CLICKED)
 	{
 		gprintf("\tdvdBtn Clicked\n");
-		if(!dvdheader)
-			dvdheader = new struct discHdr;
-		mountMethod = DiscMount(dvdheader);
-		dvdBtn->ResetState();
+		if(DiscDriveCover & 0x02)
+		{
+			if(!dvdheader)
+				dvdheader = new struct discHdr;
+			mountMethod = DiscMount(dvdheader);
+			rockout(GetSelectedGame());
+		}
+		else
+			WindowPrompt(tr( "No disc inserted." ), 0, tr( "OK" ));
 
-		rockout(GetSelectedGame());
+		dvdBtn->ResetState();
 	}
 
 	if(DiscDriveCoverOld != DiscDriveCover)

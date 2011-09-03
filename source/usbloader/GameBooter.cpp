@@ -134,15 +134,15 @@ void GameBooter::SetupAltDOL(u8 * gameID, u8 &alternatedol, u32 &alternatedoloff
 		alternatedol = OFF;
 }
 
-void GameBooter::SetupNandEmu(struct discHdr &gameHeader)
+void GameBooter::SetupNandEmu(u8 NandEmuMode, struct discHdr &gameHeader)
 {
-	if(Settings.NandEmuMode && strchr(Settings.NandEmuPath, '/'))
+	if(NandEmuMode && strchr(Settings.NandEmuPath, '/'))
 	{
 		//! Create save game path and title.tmd for not existing saves
 		CreateSavePath(&gameHeader);
 
 		gprintf("Enabling Nand Emulation on: %s\n", Settings.NandEmuPath);
-		Set_FullMode(Settings.NandEmuMode == 2);
+		Set_FullMode(NandEmuMode == 2);
 		Set_Path(strchr(Settings.NandEmuPath, '/'));
 
 		//! Set which partition to use (USB only)
@@ -234,6 +234,9 @@ int GameBooter::BootGame(const char * gameID)
 	u8 alternatedol = game_cfg->loadalternatedol;
 	u32 alternatedoloffset = game_cfg->alternatedolstart;
 	u8 reloadblock = game_cfg->iosreloadblock == INHERIT ? Settings.BlockIOSReload : game_cfg->iosreloadblock;
+	u8 NandEmuMode = game_cfg->NandEmuMode == INHERIT ? Settings.NandEmuMode : game_cfg->NandEmuMode;
+	u8 Hooktype = game_cfg->Hooktype == INHERIT ? Settings.Hooktype : game_cfg->Hooktype;
+	u8 WiirdDebugger = game_cfg->WiirdDebugger == INHERIT ? Settings.WiirdDebugger : game_cfg->WiirdDebugger;
 	u64 returnToChoice = game_cfg->returnTo ? NandTitles.FindU32(Settings.returnTo) : 0;
 
 	if(ocarinaChoice && Settings.Hooktype == OFF)
@@ -256,7 +259,7 @@ int GameBooter::BootGame(const char * gameID)
 		Playlog_Update((char *) gameHeader.id, BNRInstance::Instance()->GetIMETTitle(CONF_GetLanguage()));
 
 	//! Setup NAND emulation
-	SetupNandEmu(gameHeader);
+	SetupNandEmu(NandEmuMode, gameHeader);
 
 	//! Setup disc in cIOS and open it
 	ret = SetupDisc(gameHeader.id);
@@ -303,14 +306,14 @@ int GameBooter::BootGame(const char * gameID)
 
 	//! Do all the game patches
 	gprintf("Applying game patches...\n");
-	gamepatches(videoChoice, languageChoice, countrystrings, viChoice, sneekChoice, Settings.Hooktype, fix002, reloadblock, iosChoice, returnToChoice);
+	gamepatches(videoChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, fix002, reloadblock, iosChoice, returnToChoice);
 
 	//! Load Ocarina codes
 	if (ocarinaChoice)
 		ocarina_load_code(Settings.Cheatcodespath);
 
 	//! Load Code handler if needed
-	load_handler(Settings.Cheatcodespath, Settings.Hooktype, Settings.WiirdDebugger, Settings.WiirdDebuggerPause);
+	load_handler(Settings.Cheatcodespath, Hooktype, WiirdDebugger, Settings.WiirdDebuggerPause);
 
 	//! Shadow mload - Only needed on some games with Hermes v5.1 (Check is inside the function)
 	shadow_mload();

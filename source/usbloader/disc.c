@@ -267,7 +267,7 @@ s32 Disc_IsWii(void)
 	return 0;
 }
 
-s32 Disc_JumpToEntrypoint(bool enablecheat, u32 dolparameter)
+s32 Disc_JumpToEntrypoint(s32 hooktype, u32 dolparameter)
 {
 	/* Set an appropiate video mode */
 	__Disc_SetVMode();
@@ -284,7 +284,7 @@ s32 Disc_JumpToEntrypoint(bool enablecheat, u32 dolparameter)
 	 /* Originally from tueidj - taken from NeoGamme (thx) */
 	*(vu32*)0xCC003024 = dolparameter != 0 ? dolparameter : 1;
 
-	if (enablecheat)
+	if (hooktype)
 	{
 		__asm__(
 				"lis %r3, AppEntrypoint@h\n"

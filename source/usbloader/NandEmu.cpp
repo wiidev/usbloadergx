@@ -74,8 +74,7 @@ static s32 Nand_Mount(nandDevice *dev)
 	ret = IOS_Ioctlv(fd, dev->mountCmd, inlen, 0, vector);
 
 	/* Close FAT module */
-	//!TODO: Figure out why this causes a freeze
-	//IOS_Close(fd);
+	IOS_Close(fd);
 
 	/* Free memory */
 	if(buffer != NULL)

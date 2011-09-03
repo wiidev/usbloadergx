@@ -188,6 +188,9 @@ static const u32 dczeropatch[4] = {
 void dogamehooks(u32 hooktype, void *addr, u32 len)
 //---------------------------------------------------------------------------------
 {
+	if(hooktype == 0x00)
+		return;
+
 	void *addr_start = addr;
 	void *addr_end = addr+len;
 
@@ -195,7 +198,6 @@ void dogamehooks(u32 hooktype, void *addr, u32 len)
 	{
 		switch(hooktype)
 		{
-
 			default:
 			case 0x00:
 

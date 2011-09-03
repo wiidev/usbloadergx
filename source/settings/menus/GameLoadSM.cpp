@@ -92,6 +92,25 @@ static const char * AlternateDOLText[] =
 	trNOOP( "Default" ),
 };
 
+static const char * NandEmuText[] =
+{
+	trNOOP( "OFF" ),
+	trNOOP( "Partial" ),
+	trNOOP( "Full" )
+};
+
+static const char * HooktypeText[] =
+{
+	trNOOP( "None" ),
+	trNOOP( "VBI (Default)" ),
+	trNOOP( "KPAD Read" ),
+	trNOOP( "Joypad" ),
+	trNOOP( "GXDraw" ),
+	trNOOP( "GXFlush" ),
+	trNOOP( "OSSleepThread" ),
+	trNOOP( "AXNextFrame" ),
+};
+
 GameLoadSM::GameLoadSM(const char * GameID)
 	: SettingsMenu(tr("Game Load"), &GuiOptions, MENU_NONE)
 {
@@ -155,6 +174,9 @@ void GameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Alternate DOL" ));
 	Options->SetName(Idx++, "%s", tr( "Select DOL Offset" ));
 	Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
+	Options->SetName(Idx++, "%s", tr( "Nand Emulation" ));
+	Options->SetName(Idx++, "%s", tr( "Hooktype" ));
+	Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
 	Options->SetName(Idx++, "%s", tr( "Game Lock" ));
 }
 
@@ -247,6 +269,24 @@ void GameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.iosreloadblock]) );
+
+	//! Settings: Nand Emulation
+	if(GameConfig.NandEmuMode == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr( NandEmuText[GameConfig.NandEmuMode] ));
+
+	//! Settings: Hooktype
+	if(GameConfig.Hooktype == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr( HooktypeText[GameConfig.Hooktype] ));
+
+	//! Settings: Wiird Debugger
+	if(GameConfig.WiirdDebugger == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.WiirdDebugger] ));
 
 	//! Settings: Game Lock
 	Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.Locked] ));
@@ -395,6 +435,26 @@ int GameLoadSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if(++GameConfig.iosreloadblock >= 3) GameConfig.iosreloadblock = INHERIT;
+	}
+
+	//! Settings: Nand Emulation
+	else if (ret == ++Idx)
+	{
+		if(!IosLoader::IsD2X())
+			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
+		else if (++GameConfig.NandEmuMode >= 3) GameConfig.NandEmuMode = INHERIT;
+	}
+
+	//! Settings: Hooktype
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.Hooktype >= 8) GameConfig.Hooktype = INHERIT;
+	}
+
+	//! Settings: Wiird Debugger
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.WiirdDebugger >= MAX_ON_OFF) GameConfig.WiirdDebugger = INHERIT;
 	}
 
 	//! Settings: Game Lock

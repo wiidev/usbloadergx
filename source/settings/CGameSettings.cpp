@@ -189,6 +189,9 @@ bool CGameSettings::Save()
 		fprintf(f, "alternatedolname:%s; ", GameList[i].alternatedolname);
 		fprintf(f, "returnTo:%d; ", GameList[i].returnTo);
 		fprintf(f, "sneekVideoPatch:%d; ", GameList[i].sneekVideoPatch);
+		fprintf(f, "NandEmuMode:%d; ", GameList[i].NandEmuMode);
+		fprintf(f, "Hooktype:%d; ", GameList[i].Hooktype);
+		fprintf(f, "WiirdDebugger:%d; ", GameList[i].WiirdDebugger);
 		fprintf(f, "Locked:%d;\n", GameList[i].Locked);
 	}
 	fprintf(f, "# END\n");
@@ -310,6 +313,30 @@ bool CGameSettings::SetSetting(GameCFG & game, char *name, char *value)
 		}
 		return true;
 	}
+	else if(strcmp(name, "NandEmuMode") == 0)
+	{
+		if (sscanf(value, "%d", &i) == 1)
+		{
+			game.NandEmuMode = i;
+		}
+		return true;
+	}
+	else if(strcmp(name, "Hooktype") == 0)
+	{
+		if (sscanf(value, "%d", &i) == 1)
+		{
+			game.Hooktype = i;
+		}
+		return true;
+	}
+	else if(strcmp(name, "WiirdDebugger") == 0)
+	{
+		if (sscanf(value, "%d", &i) == 1)
+		{
+			game.WiirdDebugger = i;
+		}
+		return true;
+	}
 	else if(strcmp(name, "Locked") == 0)
 	{
 		if (sscanf(value, "%d", &i) == 1)
@@ -360,7 +387,7 @@ void CGameSettings::ParseLine(char *line)
 		return;
 
 	GameCFG NewCFG;
-	memset(&NewCFG, 0, sizeof(GameCFG));
+	memcpy(&NewCFG, GetDefault(), sizeof(GameCFG));
 
 	strcpy(NewCFG.id, GameID);
 
@@ -433,6 +460,9 @@ GameCFG * CGameSettings::GetDefault()
 	DefaultConfig.alternatedolname[0] = '\0';
 	DefaultConfig.returnTo = 1;
 	DefaultConfig.sneekVideoPatch = INHERIT;
+	DefaultConfig.NandEmuMode = INHERIT;
+	DefaultConfig.Hooktype = INHERIT;
+	DefaultConfig.WiirdDebugger = INHERIT;
 	DefaultConfig.Locked = OFF;
 
 	return &DefaultConfig;

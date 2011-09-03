@@ -24,6 +24,9 @@ typedef struct _GameCFG
 	char alternatedolname[40];
 	short returnTo;
 	short sneekVideoPatch;
+	short NandEmuMode;
+	short Hooktype;
+	short WiirdDebugger;
 	short Locked;
 } GameCFG;
 

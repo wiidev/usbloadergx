@@ -96,10 +96,18 @@ void CreateSavePath(const struct discHdr *hdr)
 	snprintf(nandPath, sizeof(nandPath), "%s/tmp", Settings.NandEmuPath);
 	CreateNandPath(nandPath);
 
-	snprintf(nandPath, sizeof(nandPath), "%s/title/00010000/%02x%02x%02x%02x/data", Settings.NandEmuPath, hdr->id[0], hdr->id[1], hdr->id[2], hdr->id[3]);
+	const char *titlePath = "title/00010000";
+
+	if(	memcmp(hdr->id, "RGWX41", 6) == 0 || memcmp(hdr->id, "RGWP41", 6) == 0 ||
+		memcmp(hdr->id, "RGWJ41", 6) == 0 || memcmp(hdr->id, "RGWE41", 6) == 0)
+	{
+		titlePath = "title/00010004";
+	}
+
+	snprintf(nandPath, sizeof(nandPath), "%s/%s/%02x%02x%02x%02x/data", Settings.NandEmuPath, titlePath, hdr->id[0], hdr->id[1], hdr->id[2], hdr->id[3]);
 	CreateNandPath(nandPath);
 
-	snprintf(nandPath, sizeof(nandPath), "%s/title/00010000/%02x%02x%02x%02x/content", Settings.NandEmuPath, hdr->id[0], hdr->id[1], hdr->id[2], hdr->id[3]);
+	snprintf(nandPath, sizeof(nandPath), "%s/%s/%02x%02x%02x%02x/content", Settings.NandEmuPath, titlePath, hdr->id[0], hdr->id[1], hdr->id[2], hdr->id[3]);
 	CreateNandPath(nandPath);
 
 	strcat(nandPath, "/title.tmd");

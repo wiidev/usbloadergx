@@ -53,7 +53,7 @@ extern "C"
 	s32 Disc_FindPartition(u64 *outbuf);
 	void PatchCountryStrings(void *Address, int Size);
 	void Disc_SelectVMode(u8 videoselected);
-	s32 Disc_JumpToEntrypoint(bool enablecheat, u32 dolparameter);
+	s32 Disc_JumpToEntrypoint(s32 hooktype, u32 dolparameter);
 
 #ifdef __cplusplus
 }
