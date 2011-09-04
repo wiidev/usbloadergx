@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-29 22:53+0200\n"
+"POT-Creation-Date: 2011-09-04 11:18+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -1053,6 +1053,9 @@ msgstr "Hile seçilmedi"
 msgid "No data could be read."
 msgstr "Hiç veri okunamadı."
 
+msgid "No disc inserted."
+msgstr ""
+
 msgid "No favorites selected."
 msgstr ""
 
@@ -1312,6 +1315,9 @@ msgid "Show Categories"
 msgstr ""
 
 msgid "Show Free Space"
+msgstr ""
+
+msgid "Show Play Count"
 msgstr ""
 
 msgid "Shutdown System"

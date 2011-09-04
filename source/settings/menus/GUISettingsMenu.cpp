@@ -111,6 +111,7 @@ GuiSettingsMenu::GuiSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Disc Artwork Download" ));
 	Options->SetName(Idx++, "%s", tr( "Screensaver" ));
 	Options->SetName(Idx++, "%s", tr( "Mark new games" ));
+	Options->SetName(Idx++, "%s", tr( "Show Play Count" ));
 	Options->SetName(Idx++, "%s", tr( "Show Free Space" ));
 	Options->SetName(Idx++, "%s", tr( "HOME Menu" ));
 	Options->SetName(Idx++, "%s", tr( "Use System Font" ));
@@ -169,6 +170,9 @@ void GuiSettingsMenu::SetOptionValues()
 
 	//! Settings: Mark new games
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.marknewtitles] ));
+
+	//! Settings: Show Play Count
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.ShowPlayCount] ));
 
 	//! Settings: Show Free Space
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.ShowFreeSpace] ));
@@ -319,6 +323,12 @@ int GuiSettingsMenu::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.marknewtitles >= MAX_ON_OFF) Settings.marknewtitles = 0;
+	}
+
+	//! Settings: Show Play Count
+	else if (ret == ++Idx)
+	{
+		if (++Settings.ShowPlayCount >= MAX_ON_OFF) Settings.ShowPlayCount = 0;
 	}
 
 	//! Settings: Show Free Space

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-30 03:50+0100\n"
+"POT-Creation-Date: 2011-09-04 11:18+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -1053,6 +1053,9 @@ msgstr "Es wurden keine Cheats ausgewählt."
 msgid "No data could be read."
 msgstr "Daten konnten nicht gelesen werden."
 
+msgid "No disc inserted."
+msgstr ""
+
 msgid "No favorites selected."
 msgstr "Keine Favoriten ausgewählt"
 
@@ -1313,6 +1316,9 @@ msgstr "Zeige Kategorien"
 
 msgid "Show Free Space"
 msgstr "Zeige frei. Speicher"
+
+msgid "Show Play Count"
+msgstr ""
 
 msgid "Shutdown System"
 msgstr "System herunterfahren"

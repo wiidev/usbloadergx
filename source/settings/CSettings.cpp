@@ -132,6 +132,7 @@ void CSettings::SetDefault()
 	Hooktype = 0;
 	WiirdDebugger = OFF;
 	WiirdDebuggerPause = OFF;
+	ShowPlayCount = ON;
 }
 
 bool CSettings::Load()
@@ -297,6 +298,7 @@ bool CSettings::Save()
 	fprintf(file, "Hooktype = %d\n", Hooktype);
 	fprintf(file, "WiirdDebugger = %d\n", WiirdDebugger);
 	fprintf(file, "WiirdDebuggerPause = %d\n", WiirdDebuggerPause);
+	fprintf(file, "ShowPlayCount = %d\n", ShowPlayCount);
 	fclose(file);
 
 	return true;
@@ -487,6 +489,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "marknewtitles") == 0)
 	{
 		if (sscanf(value, "%d", &i) == 1) marknewtitles = i;
+		return true;
+	}
+	else if (strcmp(name, "ShowPlayCount") == 0)
+	{
+		if (sscanf(value, "%d", &i) == 1) ShowPlayCount = i;
 		return true;
 	}
 	else if (strcmp(name, "ShowFreeSpace") == 0)

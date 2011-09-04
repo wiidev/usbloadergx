@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-29 22:53+0200\n"
+"POT-Creation-Date: 2011-09-04 11:18+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -1053,6 +1053,9 @@ msgstr "Ingen juksefiler valgt"
 msgid "No data could be read."
 msgstr "Ingen data kan leses."
 
+msgid "No disc inserted."
+msgstr ""
+
 msgid "No favorites selected."
 msgstr "Ingen favoritter valgt."
 
@@ -1313,6 +1316,9 @@ msgstr "Vis kategorier"
 
 msgid "Show Free Space"
 msgstr "Vis ledig plass"
+
+msgid "Show Play Count"
+msgstr ""
 
 msgid "Shutdown System"
 msgstr "Skru helt av"

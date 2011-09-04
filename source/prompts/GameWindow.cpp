@@ -168,7 +168,7 @@ GameWindow::GameWindow(int Selected)
 	detailsBtn->SetEffectGrow();
 
 	Append(dialogBoxImg);
-	Append(playcntTxt);
+	if (Settings.ShowPlayCount) Append(playcntTxt);
 	Append(backBtn);
 	Append(detailsBtn);
 	if (!mountMethod)//stuff we don't show if it is a DVD mounted

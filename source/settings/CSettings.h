@@ -132,6 +132,7 @@ class CSettings
 		short Hooktype;
 		short WiirdDebugger;
 		short WiirdDebuggerPause;
+		short ShowPlayCount;
 	protected:
 		bool ValidVersion(FILE * file);
 		bool SetSetting(char *name, char *value);

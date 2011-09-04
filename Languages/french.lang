@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1108
+# French.lang - r1111
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-29 22:53+0200\n"
+"POT-Creation-Date: 2011-09-04 11:18+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan, Kin8\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -1053,6 +1053,9 @@ msgstr "Aucune sélection de triches"
 msgid "No data could be read."
 msgstr "Lecture des données impossible."
 
+msgid "No disc inserted."
+msgstr "Aucun disque inséré."
+
 msgid "No favorites selected."
 msgstr "Pas de favoris sélectionnés"
 
@@ -1313,6 +1316,9 @@ msgstr "Afficher les catégories"
 
 msgid "Show Free Space"
 msgstr "Afficher l'espace libre"
+
+msgid "Show Play Count"
+msgstr "Afficher le compteur d'utilis."
 
 msgid "Shutdown System"
 msgstr "Arrêt"

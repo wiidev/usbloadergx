@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-29 22:53+0200\n"
+"POT-Creation-Date: 2011-09-04 11:18+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -1053,6 +1053,9 @@ msgstr "Nebyly vybrány žádné cheaty"
 msgid "No data could be read."
 msgstr "Nelze císt data?"
 
+msgid "No disc inserted."
+msgstr ""
+
 msgid "No favorites selected."
 msgstr "Oblíbené nejsou oznaceny"
 
@@ -1313,6 +1316,9 @@ msgstr ""
 
 msgid "Show Free Space"
 msgstr "Zobrazit volné místo"
+
+msgid "Show Play Count"
+msgstr ""
 
 msgid "Shutdown System"
 msgstr "Ukoncit systém"

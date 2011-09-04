@@ -239,8 +239,8 @@ int GameBooter::BootGame(const char * gameID)
 	u8 WiirdDebugger = game_cfg->WiirdDebugger == INHERIT ? Settings.WiirdDebugger : game_cfg->WiirdDebugger;
 	u64 returnToChoice = game_cfg->returnTo ? NandTitles.FindU32(Settings.returnTo) : 0;
 
-	if(ocarinaChoice && Settings.Hooktype == OFF)
-		Settings.Hooktype = 1;
+	if(ocarinaChoice && Hooktype == OFF)
+		Hooktype = 1;
 
 	//! Prepare alternate dol settings
 	SetupAltDOL(gameHeader.id, alternatedol, alternatedoloffset);
@@ -330,5 +330,5 @@ int GameBooter::BootGame(const char * gameID)
 
 	//! Jump to the entrypoint of the game - the last function of the USB Loader
 	gprintf("Jumping to game entrypoint: 0x%08X.\n", AppEntrypoint);
-	return Disc_JumpToEntrypoint(Settings.Hooktype, WDMMenu::GetDolParameter());
+	return Disc_JumpToEntrypoint(Hooktype, WDMMenu::GetDolParameter());
 }
