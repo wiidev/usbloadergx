@@ -336,7 +336,6 @@ void GuiScrollbar::SetSelectedItem(int pos)
 		return;
 
 	SelItem = pos;
-	listChanged(SelItem, SelInd);
 }
 
 void GuiScrollbar::SetSelectedIndex(int pos)

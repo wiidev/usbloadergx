@@ -30,9 +30,9 @@ extern "C"
 }
 
 //Wiilight stuff
-static vu32 *_wiilight_reg = (u32*) 0xCD0000C0;
 void wiilight(int enable) // Toggle wiilight (thanks Bool for wiilight source)
 {
+	static vu32 *_wiilight_reg = (u32*) 0xCD0000C0;
 	u32 val = (*_wiilight_reg & ~0x20);
 	if (enable && Settings.wiilight) val |= 0x20;
 	*_wiilight_reg = val;
@@ -168,6 +168,11 @@ void Sys_ShutdownToStandby(void)
 void Sys_LoadMenu(void)
 {
 	ExitApp();
+
+	// Preloader shutup
+	*(u32 *)0x8132fffb = 0x50756e65;
+	DCFlushRange((u32 *)0x8132fffb, 4);
+
 	/* Return to the Wii system menu */
 	SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 }

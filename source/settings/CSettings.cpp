@@ -133,6 +133,7 @@ void CSettings::SetDefault()
 	WiirdDebugger = OFF;
 	WiirdDebuggerPause = OFF;
 	ShowPlayCount = ON;
+	RememberUnlock = ON;
 }
 
 bool CSettings::Load()
@@ -224,6 +225,7 @@ bool CSettings::Save()
 	fprintf(file, "sfxvolume = %d\n", sfxvolume);
 	fprintf(file, "gamesoundvolume = %d\n", gamesoundvolume);
 	fprintf(file, "tooltips = %d\n", tooltips);
+	fprintf(file, "RememberUnlock = %d\n", RememberUnlock);
 	char EncryptedTxt[50];
 	EncryptString(unlockCode, EncryptedTxt);
 	fprintf(file, "password = %s\n", EncryptedTxt);
@@ -404,11 +406,22 @@ bool CSettings::SetSetting(char *name, char *value)
 		}
 		return true;
 	}
+	else if (strcmp(name, "RememberUnlock") == 0)
+	{
+		if (sscanf(value, "%d", &i) == 1)
+		{
+			RememberUnlock = i;
+		}
+		return true;
+	}
 	else if (strcmp(name, "password") == 0)
 	{
 		char EncryptedTxt[50];
 		strcpy(EncryptedTxt, value);
 		DecryptString(EncryptedTxt, unlockCode);
+
+		if(!RememberUnlock && strlen(unlockCode) > 0 && strcmp(unlockCode, "not set") != 0)
+			godmode = 0;
 		return true;
 	}
 	else if (strcmp(name, "GameSort") == 0)

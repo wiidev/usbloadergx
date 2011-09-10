@@ -117,7 +117,7 @@ int OnScreenNumpad(char * var, u32 maxlen)
  * Opens an on-screen keyboard window, with the data entered being stored
  * into the specified variable.
  ***************************************************************************/
-int OnScreenKeyboard(char * var, u32 maxlen, int min)
+int OnScreenKeyboard(char * var, u32 maxlen, int min, bool hide)
 {
 
 	int save = -1;
@@ -125,6 +125,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
 	gprintf("\nOnScreenKeyboard(%s, %i, %i) \n\tkeyset = %i", var, maxlen, min, Settings.keyset);
 
 	GuiKeyboard keyboard(var, maxlen, min, Settings.keyset);
+	keyboard.SetVisibleText(!hide);
 
 	GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
 
@@ -173,7 +174,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
 
 	if (save)
 	{
-		snprintf(var, maxlen, "%s", keyboard.kbtextstr);
+		snprintf(var, maxlen, "%s", keyboard.GetText());
 	}
 
 	HaltGui();

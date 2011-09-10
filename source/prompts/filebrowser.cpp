@@ -87,7 +87,7 @@ int InitBrowsers()
 			{
 				closedir(dir);
 				BROWSERINFO browser;
-				browser.dir[0] = '\0';
+				memset(&browser, 0, sizeof(BROWSERINFO));
 				strcpy(browser.rootdir, rootdir);
 				ResetBrowser(&browser);
 				browsers.push_back(browser);

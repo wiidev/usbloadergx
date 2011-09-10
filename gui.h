@@ -909,7 +909,7 @@ class GuiKeyboard: public GuiWindow
 		int caps;
 		int alt;
 		int alt2;
-		u16 min;
+		int min;
 		GuiText * kbText;
 		GuiImage * keyTextboxImg;
 		GuiText * keyCapsText;

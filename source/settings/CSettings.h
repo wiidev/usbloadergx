@@ -133,6 +133,7 @@ class CSettings
 		short WiirdDebugger;
 		short WiirdDebuggerPause;
 		short ShowPlayCount;
+		short RememberUnlock;
 	protected:
 		bool ValidVersion(FILE * file);
 		bool SetSetting(char *name, char *value);

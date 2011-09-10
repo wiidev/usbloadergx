@@ -56,6 +56,7 @@ ParentalControlSM::ParentalControlSM()
 	Options->SetName(Idx++, "%s", tr( "Console" ));
 	Options->SetName(Idx++, "%s", tr( "Password" ));
 	Options->SetName(Idx++, "%s", tr( "Controllevel" ));
+	Options->SetName(Idx++, "%s", tr( "Remember Unlock" ));
 	Options->SetName(Idx++, "%s", tr( "Block Global Settings" ));
 	Options->SetName(Idx++, "%s", tr( "Block Gui Settings" ));
 	Options->SetName(Idx++, "%s", tr( "Block Loader Settings" ));
@@ -104,6 +105,9 @@ void ParentalControlSM::SetOptionValues()
 
 	//! Settings: Controllevel
 	Options->SetValue(Idx++, "%s", tr(ParentalText[Settings.parentalcontrol]));
+
+	//! Settings: Remember Unlock
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.RememberUnlock]));
 
 	//! Settings: Block Global Settings
 	Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_GLOBAL_SETTINGS) != 0)]));
@@ -232,6 +236,12 @@ int ParentalControlSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.parentalcontrol >= 5) Settings.parentalcontrol = 0;
+	}
+
+	//! Settings: Remember Unlock
+	else if (ret == ++Idx)
+	{
+		if (++Settings.RememberUnlock >= MAX_ON_OFF) Settings.RememberUnlock = 0;
 	}
 
 	//! Settings: Block Global Settings
