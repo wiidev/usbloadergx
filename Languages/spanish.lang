@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-10 22:02+0200\n"
+"POT-Creation-Date: 2011-09-24 01:47+0200\n"
 "PO-Revision-Date: 2011-07-25 16:40+0200\n"
 "Last-Translator: hvy109\n"
 "Language-Team: Penn, SirPalax, hvy109\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " no se han podido descargar."
@@ -135,6 +135,9 @@ msgstr "Todas"
 
 msgid "All Partitions"
 msgstr "Todas las particiones"
+
+msgid "All files extracted."
+msgstr ""
 
 msgid "All images downloaded successfully."
 msgstr "Todas las imagenes descargadas con éxito."
@@ -363,6 +366,9 @@ msgstr "Debes desbloquear la consola para modificarlo."
 msgid "Continue to install game?"
 msgstr "¿Continuar instalando juego?"
 
+msgid "Continue?"
+msgstr ""
+
 msgid "Controllevel"
 msgstr "Control de Nivel"
 
@@ -378,6 +384,9 @@ msgstr "¡No se pudo crear el archivo GCT!"
 #, c-format
 msgid "Could not create path: %s"
 msgstr "No se pudo crear la ruta: %s"
+
+msgid "Could not extract files for:"
+msgstr ""
 
 msgid "Could not find info for this game in the wiitdb.xml."
 msgstr "No se pudo encontrar información del juego en wiitdb.xml."
@@ -399,6 +408,9 @@ msgstr "No se pudo abrir wiitdb.xml."
 
 msgid "Could not save."
 msgstr "¡No se pudo guardar!"
+
+msgid "Could not write file."
+msgstr ""
 
 msgid "Could not write to:"
 msgstr "No se pudo escribir en:"
@@ -507,6 +519,9 @@ msgstr "¿Quieres cambiar el idioma?"
 
 msgid "Do you want to download this theme?"
 msgstr "¿Quieres descargar este Tema?"
+
+msgid "Do you want to extract the save game?"
+msgstr ""
 
 msgid "Do you want to format:"
 msgstr "Quieres formatear:"
@@ -618,20 +633,38 @@ msgstr ""
 msgid "Error:"
 msgstr ""
 
+msgid "Errors occured."
+msgstr ""
+
 msgid "Exit"
 msgstr "Salir"
 
 msgid "Exit to where?"
 msgstr "¿Salir a dónde?"
 
+msgid "Export All Saves to EmuNand"
+msgstr ""
+
+msgid "Extract Save to EmuNand"
+msgstr ""
+
+msgid "Extracting file:"
+msgstr ""
+
 msgid "Extracting files..."
 msgstr "Extrayendo archivos..."
+
+msgid "Extracting files:"
+msgstr ""
 
 msgid "Failed"
 msgstr "Fallo"
 
 msgid "Failed formating"
 msgstr "No se ha podido formatear"
+
+msgid "Failed to extract all files. Savegame might not exist."
+msgstr ""
 
 msgid "Failed to extract."
 msgstr "No se ha podido extraer."
@@ -653,6 +686,9 @@ msgstr ""
 
 msgid "File not found."
 msgstr "Archivo no encontrado."
+
+msgid "Files extracted successfully."
+msgstr ""
 
 #, c-format
 msgid "Filesize is %i Byte."
@@ -863,6 +899,9 @@ msgstr "Instalar Particiones"
 
 msgid "Install a game"
 msgstr "Instalar un juego"
+
+msgid "Install finished"
+msgstr ""
 
 msgid "Installing content... Ok!"
 msgstr "Instalando contenido... ¡Correcto!"
@@ -1198,6 +1237,9 @@ msgstr "Apagar la Wii"
 msgid "Prev"
 msgstr "Ant."
 
+msgid "Process finished."
+msgstr ""
+
 msgid "Prompts Buttons"
 msgstr "Botones"
 
@@ -1224,6 +1266,9 @@ msgstr "Comercializado el"
 
 msgid "Reload SD"
 msgstr "Recargar SD"
+
+msgid "Reloading game list now, please wait..."
+msgstr ""
 
 msgid "Remember Unlock"
 msgstr ""
@@ -1288,6 +1333,9 @@ msgstr "Guardar Lista"
 msgid "Saved"
 msgstr "Guardado"
 
+msgid "Savegame might not exist for this game."
+msgstr ""
+
 msgid "Screensaver"
 msgstr "Salvapantallas"
 
@@ -1329,6 +1377,9 @@ msgstr "Apagar Sistema"
 
 msgid "Shutdown Wii"
 msgstr "Apagar Wii"
+
+msgid "Skip Errors"
+msgstr ""
 
 msgid "Sneek Video Patch"
 msgstr "Parche Vídeo Sneek"
@@ -1375,6 +1426,9 @@ msgstr ""
 msgid "Success"
 msgstr "Conseguido"
 
+msgid "Success."
+msgstr ""
+
 msgid "Success:"
 msgstr "Conseguido:"
 
@@ -1419,6 +1473,9 @@ msgstr "La carpeta especificada no existe. ¿Quieres crearla?"
 
 msgid "The game installation is disabled under this IOS because of instability in usb write."
 msgstr "La instalación de juegos está desabilitada bajo este IOS porque la escritura USB es inestable."
+
+msgid "The save game will be extracted to your emu nand path."
+msgstr ""
 
 msgid "The wad file was installed"
 msgstr "Se instaló el archivo wad"

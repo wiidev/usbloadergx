@@ -454,12 +454,16 @@ void GuiScrollbar::ScrollByButton(GuiTrigger *t)
 
 void GuiScrollbar::Draw()
 {
-	scrollbarTileImg->Draw();
-	scrollbarTopImg->Draw();
-	scrollbarBottomImg->Draw();
-	arrowUpBtn->Draw();
-	arrowDownBtn->Draw();
-	scrollbarBoxBtn->Draw();
+	if(PageSize >= EntrieCount)
+	{
+		scrollbarTileImg->Draw();
+		scrollbarTopImg->Draw();
+		scrollbarBottomImg->Draw();
+		arrowUpBtn->Draw();
+		arrowDownBtn->Draw();
+		scrollbarBoxBtn->Draw();
+	}
+
 	if(pressedChan >= 0 && userInput[pressedChan].wpad.ir.valid)
 		oneButtonScrollImg->Draw();
 
@@ -468,9 +472,13 @@ void GuiScrollbar::Draw()
 
 void GuiScrollbar::Update(GuiTrigger * t)
 {
-	arrowUpBtn->Update(t);
-	arrowDownBtn->Update(t);
-	scrollbarBoxBtn->Update(t);
+	if(PageSize >= EntrieCount)
+	{
+		arrowUpBtn->Update(t);
+		arrowDownBtn->Update(t);
+		scrollbarBoxBtn->Update(t);
+	}
+
 	if(AllowDPad)
 		CheckDPadControls(t);
 	if(ButtonScroll)

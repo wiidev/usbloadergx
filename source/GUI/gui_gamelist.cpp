@@ -34,7 +34,6 @@ GuiGameList::GuiGameList(int w, int h, int offset)
 	width = w;
 	height = h;
 	pagesize = thInt("9 - game list browser page size");
-	scrollbaron = (gameList.size() > pagesize) ? 1 : 0;
 	selectable = true;
 	listOffset = LIMIT(offset, 0, MAX(0, gameList.size()-pagesize));
 	selectedItem = 0;
@@ -208,8 +207,7 @@ void GuiGameList::Draw()
 			game[i]->Draw();
 	}
 
-	if (scrollbaron == 1)
-		scrollBar.Draw();
+	scrollBar.Draw();
 
 	this->UpdateEffects();
 }
@@ -266,9 +264,8 @@ void GuiGameList::Update(GuiTrigger * t)
 	   (t->pad.btns_d & (PAD_BUTTON_UP | PAD_BUTTON_DOWN)))
 		pressedChan = t->chan;
 
-	if (scrollbaron == 1)
-		// update the location of the scroll box based on the position in the option list
-		scrollBar.Update(t);
+	// update the location of the scroll box based on the position in the option list
+	scrollBar.Update(t);
 
 	if(pressedChan == -1 || (!t->wpad.btns_h && !t->pad.btns_h))
 	{

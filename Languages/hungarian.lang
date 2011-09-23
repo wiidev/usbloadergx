@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-10 22:02+0200\n"
+"POT-Creation-Date: 2011-09-24 01:47+0200\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid " could not be downloaded."
 msgstr "nem letölthetõ."
@@ -134,6 +134,9 @@ msgid "All"
 msgstr ""
 
 msgid "All Partitions"
+msgstr ""
+
+msgid "All files extracted."
 msgstr ""
 
 msgid "All images downloaded successfully."
@@ -363,6 +366,9 @@ msgstr "A konzol zárolva, ezért nem változtatható meg."
 msgid "Continue to install game?"
 msgstr "Játék telepítésének folytatása?"
 
+msgid "Continue?"
+msgstr ""
+
 msgid "Controllevel"
 msgstr "Kontrollszint"
 
@@ -377,6 +383,9 @@ msgstr "Nem hozható létre GCT fájl"
 
 #, c-format
 msgid "Could not create path: %s"
+msgstr ""
+
+msgid "Could not extract files for:"
 msgstr ""
 
 msgid "Could not find info for this game in the wiitdb.xml."
@@ -399,6 +408,9 @@ msgstr ""
 
 msgid "Could not save."
 msgstr "A mentés nem sikerült."
+
+msgid "Could not write file."
+msgstr ""
 
 msgid "Could not write to:"
 msgstr ""
@@ -507,6 +519,9 @@ msgstr "Nyelv megváltoztatása?"
 
 msgid "Do you want to download this theme?"
 msgstr "Téma letöltése?"
+
+msgid "Do you want to extract the save game?"
+msgstr ""
 
 msgid "Do you want to format:"
 msgstr "Formázás?"
@@ -618,20 +633,38 @@ msgstr "Hiba..."
 msgid "Error:"
 msgstr "Hiba:"
 
+msgid "Errors occured."
+msgstr ""
+
 msgid "Exit"
 msgstr ""
 
 msgid "Exit to where?"
 msgstr ""
 
+msgid "Export All Saves to EmuNand"
+msgstr ""
+
+msgid "Extract Save to EmuNand"
+msgstr ""
+
+msgid "Extracting file:"
+msgstr ""
+
 msgid "Extracting files..."
 msgstr "Fájlok kicsomagolása..."
+
+msgid "Extracting files:"
+msgstr ""
 
 msgid "Failed"
 msgstr ""
 
 msgid "Failed formating"
 msgstr "Formázás sikertelen"
+
+msgid "Failed to extract all files. Savegame might not exist."
+msgstr ""
 
 msgid "Failed to extract."
 msgstr "A kicsomagolás nem sikerült."
@@ -653,6 +686,9 @@ msgstr ""
 
 msgid "File not found."
 msgstr "Fájl nem található"
+
+msgid "Files extracted successfully."
+msgstr ""
 
 #, c-format
 msgid "Filesize is %i Byte."
@@ -863,6 +899,9 @@ msgstr ""
 
 msgid "Install a game"
 msgstr "Játék telepítése"
+
+msgid "Install finished"
+msgstr ""
 
 msgid "Installing content... Ok!"
 msgstr "Tartalom telepítése... Ok!"
@@ -1198,6 +1237,9 @@ msgstr "Wii kikapcsolása"
 msgid "Prev"
 msgstr "Elõzõ"
 
+msgid "Process finished."
+msgstr ""
+
 msgid "Prompts Buttons"
 msgstr "Gyors Gombok"
 
@@ -1224,6 +1266,9 @@ msgstr "Kiadva"
 
 msgid "Reload SD"
 msgstr "SD Újratöltése"
+
+msgid "Reloading game list now, please wait..."
+msgstr ""
 
 msgid "Remember Unlock"
 msgstr ""
@@ -1288,6 +1333,9 @@ msgstr ""
 msgid "Saved"
 msgstr "Elmentve"
 
+msgid "Savegame might not exist for this game."
+msgstr ""
+
 msgid "Screensaver"
 msgstr "Képernyõkimélõ"
 
@@ -1328,6 +1376,9 @@ msgid "Shutdown System"
 msgstr "Leállítás"
 
 msgid "Shutdown Wii"
+msgstr ""
+
+msgid "Skip Errors"
 msgstr ""
 
 msgid "Sneek Video Patch"
@@ -1375,6 +1426,9 @@ msgstr ""
 msgid "Success"
 msgstr "Sikeres"
 
+msgid "Success."
+msgstr ""
+
 msgid "Success:"
 msgstr "Sikeres:"
 
@@ -1418,6 +1472,9 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "A megadott könyvtár nem létezik. Létrehozzuk?"
 
 msgid "The game installation is disabled under this IOS because of instability in usb write."
+msgstr ""
+
+msgid "The save game will be extracted to your emu nand path."
 msgstr ""
 
 msgid "The wad file was installed"

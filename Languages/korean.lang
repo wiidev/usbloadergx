@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-10 22:02+0200\n"
+"POT-Creation-Date: 2011-09-24 01:47+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " 다운로드할수 없음."
@@ -134,6 +134,9 @@ msgid "All"
 msgstr ""
 
 msgid "All Partitions"
+msgstr ""
+
+msgid "All files extracted."
 msgstr ""
 
 msgid "All images downloaded successfully."
@@ -363,6 +366,9 @@ msgstr "변경하려면 콘솔 잠김을 해제하세요."
 msgid "Continue to install game?"
 msgstr "계속 설치하겠습니까?"
 
+msgid "Continue?"
+msgstr ""
+
 msgid "Controllevel"
 msgstr "조정 레벨"
 
@@ -377,6 +383,9 @@ msgstr "GCT 파일을 생성할수 없음"
 
 #, c-format
 msgid "Could not create path: %s"
+msgstr ""
+
+msgid "Could not extract files for:"
 msgstr ""
 
 msgid "Could not find info for this game in the wiitdb.xml."
@@ -398,6 +407,9 @@ msgid "Could not open wiitdb.xml."
 msgstr ""
 
 msgid "Could not save."
+msgstr ""
+
+msgid "Could not write file."
 msgstr ""
 
 msgid "Could not write to:"
@@ -506,6 +518,9 @@ msgid "Do you want to change language?"
 msgstr "정말로 언어를 변경할까요?"
 
 msgid "Do you want to download this theme?"
+msgstr ""
+
+msgid "Do you want to extract the save game?"
 msgstr ""
 
 msgid "Do you want to format:"
@@ -618,13 +633,28 @@ msgstr "에러..."
 msgid "Error:"
 msgstr "에러:"
 
+msgid "Errors occured."
+msgstr ""
+
 msgid "Exit"
 msgstr ""
 
 msgid "Exit to where?"
 msgstr ""
 
+msgid "Export All Saves to EmuNand"
+msgstr ""
+
+msgid "Extract Save to EmuNand"
+msgstr ""
+
+msgid "Extracting file:"
+msgstr ""
+
 msgid "Extracting files..."
+msgstr ""
+
+msgid "Extracting files:"
 msgstr ""
 
 msgid "Failed"
@@ -632,6 +662,9 @@ msgstr ""
 
 msgid "Failed formating"
 msgstr "포맷 실패"
+
+msgid "Failed to extract all files. Savegame might not exist."
+msgstr ""
 
 msgid "Failed to extract."
 msgstr ""
@@ -653,6 +686,9 @@ msgstr "2월"
 
 msgid "File not found."
 msgstr "파일을 찾을수가 없네요."
+
+msgid "Files extracted successfully."
+msgstr ""
 
 #, c-format
 msgid "Filesize is %i Byte."
@@ -863,6 +899,9 @@ msgstr ""
 
 msgid "Install a game"
 msgstr "게임을 설치할까요"
+
+msgid "Install finished"
+msgstr ""
 
 msgid "Installing content... Ok!"
 msgstr "컨텐츠 인스톨중...성공!"
@@ -1198,6 +1237,9 @@ msgstr "Wii 전원 끄기"
 msgid "Prev"
 msgstr "이전"
 
+msgid "Process finished."
+msgstr ""
+
 msgid "Prompts Buttons"
 msgstr "프롬프트/버튼"
 
@@ -1224,6 +1266,9 @@ msgstr "릴리즈됨"
 
 msgid "Reload SD"
 msgstr "SD카드 읽기"
+
+msgid "Reloading game list now, please wait..."
+msgstr ""
 
 msgid "Remember Unlock"
 msgstr ""
@@ -1288,6 +1333,9 @@ msgstr ""
 msgid "Saved"
 msgstr ""
 
+msgid "Savegame might not exist for this game."
+msgstr ""
+
 msgid "Screensaver"
 msgstr "화면보호기"
 
@@ -1328,6 +1376,9 @@ msgid "Shutdown System"
 msgstr "시스템 종료"
 
 msgid "Shutdown Wii"
+msgstr ""
+
+msgid "Skip Errors"
 msgstr ""
 
 msgid "Sneek Video Patch"
@@ -1375,6 +1426,9 @@ msgstr ""
 msgid "Success"
 msgstr "성공"
 
+msgid "Success."
+msgstr ""
+
 msgid "Success:"
 msgstr "성공:"
 
@@ -1418,6 +1472,9 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr ""
 
 msgid "The game installation is disabled under this IOS because of instability in usb write."
+msgstr ""
+
+msgid "The save game will be extracted to your emu nand path."
 msgstr ""
 
 msgid "The wad file was installed"

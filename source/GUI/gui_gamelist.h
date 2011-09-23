@@ -24,7 +24,6 @@ class GuiGameList : public GuiGameBrowser, public sigslot::has_slots<>
 		void UpdateListEntries();
 		int selectedItem;
 		int listOffset;
-		int scrollbaron;
 		int pagesize;
 		int maxTextWidth;
 

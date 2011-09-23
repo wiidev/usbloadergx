@@ -101,6 +101,7 @@ int MenuInstall()
 			}
 			else
 			{
+				ShowProgress(tr("Install finished"), name, tr("Reloading game list now, please wait..."), gamesize, gamesize, true, true)
 				gameList.ReadGameList(); //get the entries again
 				gameList.FilterList();
 				GuiSound * instsuccess = NULL;

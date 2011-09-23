@@ -186,7 +186,7 @@ class GuiElement
 		void SetParent(GuiElement * e);
 		//!Gets the element's parent
 		//!\return Pointer to parent element
-		GuiElement * GetParent();
+		GuiElement * GetParent() { return parentElement; }
 		//!Gets the current leftmost coordinate of the element
 		//!Considers horizontal alignment, x offset, width, and parent element's GetLeft() / GetWidth() values
 		//!\return left coordinate
@@ -200,38 +200,38 @@ class GuiElement
 		void SetMinY(int y);
 		//!Gets the minimum y offset of the element
 		//!\return Minimum Y offset
-		int GetMinY();
+		int GetMinY() { return ymin; }
 		//!Sets the maximum y offset of the element
 		//!\param y Y offset
 		void SetMaxY(int y);
 		//!Gets the maximum y offset of the element
 		//!\return Maximum Y offset
-		int GetMaxY();
+		int GetMaxY() { return ymax; }
 		//!Sets the minimum x offset of the element
 		//!\param x X offset
 		void SetMinX(int x);
 		//!Gets the minimum x offset of the element
 		//!\return Minimum X offset
-		int GetMinX();
+		int GetMinX() { return xmin; }
 		//!Sets the maximum x offset of the element
 		//!\param x X offset
 		void SetMaxX(int x);
 		//!Gets the maximum x offset of the element
 		//!\return Maximum X offset
-		int GetMaxX();
+		int GetMaxX() { return xmax; }
 		//!Gets the current width of the element. Does not currently consider the scale
 		//!\return width
-		virtual int GetWidth();
+		virtual int GetWidth() { return width; }
 		//!Gets the height of the element. Does not currently consider the scale
 		//!\return height
-		virtual int GetHeight();
+		virtual int GetHeight() { return height; }
 		//!Sets the size (width/height) of the element
 		//!\param w Width of element
 		//!\param h Height of element
 		void SetSize(int w, int h);
 		//!Checks whether or not the element is visible
 		//!\return true if visible, false otherwise
-		bool IsVisible();
+		bool IsVisible() { return visible; }
 		//!Checks whether or not the element is selectable
 		//!\return true if selectable, false otherwise
 		bool IsSelectable();
@@ -252,10 +252,10 @@ class GuiElement
 		void SetHoldable(bool d);
 		//!Gets the element's current state
 		//!\return state
-		int GetState();
+		int GetState() { return state; }
 		//!Gets the controller channel that last changed the element's state
 		//!\return Channel number (0-3, -1 = no channel)
-		int GetStateChan();
+		int GetStateChan() { return stateChan; }
 		//!Sets the element's alpha value
 		//!\param a alpha value
 		void SetAlpha(int a);
@@ -284,7 +284,7 @@ class GuiElement
 		void RemoveTrigger(u8 i);
 		//!Checks whether rumble was requested by the element
 		//!\return true is rumble was requested, false otherwise
-		bool Rumble();
+		bool Rumble() { return rumble; }
 		//!Sets whether or not the element is requesting a rumble event
 		//!\param r true if requesting rumble, false if not
 		void SetRumble(bool r);
@@ -319,10 +319,10 @@ class GuiElement
 		void StopEffect();
 		//!Gets the current element effects
 		//!\return element effects
-		int GetEffect();
+		int GetEffect() { return effects; }
 		//!Gets the current element on over effects
 		//!\return element on over effects
-		int GetEffectOnOver();
+		int GetEffectOnOver() { return effectsOver; }
 		//!Checks whether the specified coordinates are within the element's boundaries
 		//!\param x X coordinate
 		//!\param y Y coordinate
@@ -346,7 +346,7 @@ class GuiElement
 		void SetUpdateCallback(UpdateCallback u);
 		//!Checks whether the element is in focus
 		//!\return true if element is in focus, false otherwise
-		int IsFocused();
+		int IsFocused() { return focus; }
 		//!Sets the element's visibility
 		//!\param v Visibility (true = visible)
 		virtual void SetVisible(bool v);

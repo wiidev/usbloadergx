@@ -1241,7 +1241,13 @@ bool NetworkInitPrompt()
 
 int CodeDownload(const char *id)
 {
-	int ret = 0;
+	if (!CreateSubfolder(Settings.TxtCheatcodespath))
+	{
+		WindowPrompt(tr( "Error !" ), tr( "Can't create directory" ), tr( "OK" ));
+		return -1;
+	}
+
+	int ret = -1;
 
 	GuiWindow promptWindow(472, 320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -1295,23 +1301,10 @@ int CodeDownload(const char *id)
 	HaltGui();
 	mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(&promptWindow);
-	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
-
-	struct stat st;
-	if (stat(Settings.TxtCheatcodespath, &st) != 0)
-	{
-		if (!CreateSubfolder(Settings.TxtCheatcodespath))
-		{
-			WindowPrompt(tr( "Error !" ), tr( "Can't create directory" ), tr( "OK" ));
-			ret = -1;
-			goto exit;
-		}
-	}
 
 	while (!IsNetworkInit())
 	{
-
 		VIDEO_WaitVSync();
 
 		Initialize_Network();
@@ -1326,58 +1319,64 @@ int CodeDownload(const char *id)
 		}
 		if (btn1.GetState() == STATE_CLICKED)
 		{
-			ret = -1;
 			btn1.ResetState();
-			goto exit;
+			ret = 0;
+			break;
 		}
 	}
 
-	if (IsNetworkInit() && ret >= 0)
+	if (IsNetworkInit())
 	{
-
-		char txtpath[150];
+		char txtpath[250];
 		snprintf(txtpath, sizeof(txtpath), "%s%s.txt", Settings.TxtCheatcodespath, id);
 
-		char codeurl[150];
+		char codeurl[250];
 		snprintf(codeurl, sizeof(codeurl), "http://geckocodes.org/codes/R/%s.txt", id);
 
 		struct block file = downloadfile(codeurl);
 
-		if (file.size == 333 || file.size == 216 || file.size == 284)
-		{
-			strcat(codeurl, tr( " is not on the server." ));
-
-			WindowPrompt(tr( "Error" ), codeurl, tr( "OK" ));
-			ret = -1;
-			goto exit;
-		}
-
 		if (file.data != NULL)
 		{
+			bool validUrl = false;
+			char *textCpy = new (std::nothrow) char[file.size+1];
+			if(textCpy)
+			{
+				memcpy(textCpy, file.data, file.size);
+				textCpy[file.size] = '\0';
+				validUrl = (strcasestr(textCpy, "404 Not Found") == 0);
+				delete [] textCpy;
+			}
 
-			FILE * pfile;
-			pfile = fopen(txtpath, "wb");
-			fwrite(file.data, 1, file.size, pfile);
-			fclose(pfile);
+			if(!validUrl)
+			{
+				snprintf(codeurl, sizeof(codeurl), "%s%s", codeurl, tr( " is not on the server." ));
+				WindowPrompt(tr( "Error" ), codeurl, tr( "OK" ));
+			}
+			else
+			{
+				FILE * pfile = fopen(txtpath, "wb");
+				if(pfile)
+				{
+					fwrite(file.data, 1, file.size, pfile);
+					fclose(pfile);
+					snprintf(txtpath, sizeof(txtpath), "%s%s", txtpath, tr(" has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information." ));
+					WindowPrompt(0, txtpath, tr( "OK" ));
+					ret = 0;
+				}
+				else
+					WindowPrompt(tr("Error"), tr("Could not write file."), tr( "OK" ));
+			}
 			free(file.data);
-			ret = 1;
-			strcat(
-					txtpath,
-					tr( " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information." ));
-
-			WindowPrompt(0, txtpath, tr( "OK" ));
 		}
 		else
 		{
-			strcat(codeurl, tr( " could not be downloaded." ));
-
+			snprintf(codeurl, sizeof(codeurl), "%s%s", codeurl, tr(" could not be downloaded."));
 			WindowPrompt(tr( "Error" ), codeurl, tr( "OK" ));
-			ret = -1;
 		}
-
-		CloseConnection();
 	}
-	exit: promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+
+
+	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
 	while (promptWindow.GetEffect() > 0)
 		usleep(100);
 

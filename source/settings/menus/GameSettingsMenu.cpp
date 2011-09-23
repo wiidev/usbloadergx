@@ -25,6 +25,7 @@
 #include "GameSettingsMenu.hpp"
 #include "themes/CTheme.h"
 #include "prompts/PromptWindows.h"
+#include "prompts/ProgressWindow.h"
 #include "prompts/CategorySelectPrompt.hpp"
 #include "settings/GameTitles.h"
 #include "usbloader/GameList.h"
@@ -69,6 +70,7 @@ void GameSettingsMenu::SetupMainButtons()
 	SetMainButton(pos++, tr( "Game Load" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Ocarina" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Categories" ), MainButtonImgData, MainButtonImgOverData);
+	SetMainButton(pos++, tr( "Extract Save to EmuNand" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Default Gamesettings" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Uninstall Menu" ), MainButtonImgData, MainButtonImgOverData);
 }
@@ -129,6 +131,28 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 		mainWindow->SetState(STATE_DEFAULT);
 		Append(backBtn);
 		ShowMenu();
+	}
+
+	//! Extract Save to EmuNand
+	else if(menuNr == Idx++)
+	{
+		int choice = WindowPrompt(tr( "Do you want to extract the save game?" ), tr("The save game will be extracted to your emu nand path."), tr( "Yes" ), tr( "Cancel" ));
+		if (choice == 1)
+		{
+			char filePath[512];
+			char nandPath[512];
+			snprintf(nandPath, sizeof(nandPath), "/title/00010000/%02x%02x%02x%02x", DiscHeader->id[0], DiscHeader->id[1], DiscHeader->id[2], DiscHeader->id[3]);
+			snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuPath, nandPath);
+
+			StartProgress(tr("Extracting file:"), 0, 0, true, false);
+			int ret = NandTitle::ExtractDir(nandPath, filePath);
+			ProgressStop();
+
+			if(ret < 0)
+				WindowPrompt(tr("Error:"), tr("Failed to extract all files. Savegame might not exist."), tr("OK"));
+			else
+				WindowPrompt(tr("Files extracted successfully."), 0, tr("OK"));
+		}
 	}
 
 	//! Default Gamesettings

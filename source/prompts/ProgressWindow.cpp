@@ -25,9 +25,9 @@
 static lwp_t progressthread = LWP_THREAD_NULL;
 static mutex_t ProgressMutex = LWP_MUTEX_NULL;
 static ProgressAbortCallback AbortCallback = NULL;
-static const char * progressTitle = NULL;
-static const char * progressMsg1 = NULL;
-static const char * progressMsg2 = NULL;
+static char progressTitle[75];
+static char progressMsg1[75];
+static char progressMsg2[75];
 static Timer ProgressTimer;
 static int showProgress = 0;
 static s64 progressDone = -1;
@@ -42,9 +42,21 @@ static bool changedMessages = true;
  ***************************************************************************/
 extern "C" void StartProgress(const char * title, const char * msg1, const char * msg2, bool swSize, bool swTime)
 {
-	progressTitle = title;
-	progressMsg1 = msg1;
-	progressMsg2 = msg2;
+	if(title)
+		strncpy(progressTitle, title, sizeof(progressTitle)-1);
+	else
+		progressTitle[0] = '\0';
+
+	if(msg1)
+		strncpy(progressMsg1, msg1, sizeof(progressMsg1)-1);
+	else
+		progressMsg1[0] = '\0';
+
+	if(msg2)
+		strncpy(progressMsg2, msg2, sizeof(progressMsg2)-1);
+	else
+		progressMsg2[0] = '\0';
+
 	showSize = swSize;
 	showTime = swTime;
 	showProgress = 1;
@@ -74,22 +86,64 @@ extern "C" void ShowProgress(s64 done, s64 total)
 	LWP_MutexUnlock(ProgressMutex);
 }
 
-void ShowProgress(const char *title, const char *msg1, const char *msg2, s64 done, s64 total, bool swSize, bool swTime)
+void ShowProgress(const char *msg2, s64 done, s64 total)
 {
-	if (total <= 0)
-		return;
-
-	else if (done > total)
+	if (done > total)
 		done = total;
 
 	LWP_MutexLock(ProgressMutex);
 
-	progressDone = done;
-	progressTotal = total;
+	if(total >= 0)
+	{
+		progressDone = done;
+		progressTotal = total;
+	}
 
-	progressTitle = title;
-	progressMsg1 = msg1;
-	progressMsg2 = msg2;
+	if(msg2)
+		strncpy(progressMsg2, msg2, sizeof(progressMsg2)-1);
+	else
+		progressMsg2[0] = '\0';
+
+	if(!done)
+	{
+		ProgressTimer.reset();
+		LWP_ResumeThread(progressthread);
+		showProgress = 1;
+	}
+
+	changedMessages = true;
+	changed = true;
+
+	LWP_MutexUnlock(ProgressMutex);
+}
+
+void ShowProgress(const char *title, const char *msg1, const char *msg2, s64 done, s64 total, bool swSize, bool swTime)
+{
+	if (done > total)
+		done = total;
+
+	LWP_MutexLock(ProgressMutex);
+
+	if(total >= 0)
+	{
+		progressDone = done;
+		progressTotal = total;
+	}
+
+	if(title)
+		strncpy(progressTitle, title, sizeof(progressTitle)-1);
+	else
+		progressTitle[0] = '\0';
+
+	if(msg1)
+		strncpy(progressMsg1, msg1, sizeof(progressMsg1)-1);
+	else
+		progressMsg1[0] = '\0';
+
+	if(msg2)
+		strncpy(progressMsg2, msg2, sizeof(progressMsg2)-1);
+	else
+		progressMsg2[0] = '\0';
 
 	showSize = swSize;
 	showTime = swTime;
@@ -113,9 +167,9 @@ void ShowProgress(const char *title, const char *msg1, const char *msg2, s64 don
 extern "C" void ProgressStop()
 {
 	showProgress = 0;
-	progressTitle = NULL;
-	progressMsg1 = NULL;
-	progressMsg2 = NULL;
+	progressTitle[0] = 0;
+	progressMsg1[0] = 0;
+	progressMsg2[0] = 0;
 	progressDone = -1;
 	progressTotal = -1;
 	showTime = false;
@@ -360,9 +414,9 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
 		if (changed)
 		{
-			if (changedMessages && progressTitle) titleTxt.SetText(progressTitle);
-			if (changedMessages && progressMsg1) msg1Txt.SetText(progressMsg1);
-			if (changedMessages && progressMsg2) msg2Txt.SetText(progressMsg2);
+			if (changedMessages) titleTxt.SetText(progressTitle);
+			if (changedMessages) msg1Txt.SetText(progressMsg1);
+			if (changedMessages) msg2Txt.SetText(progressMsg2);
 
 			UpdateProgressValues(&progressbarImg, &prTxt, &timeTxt, &speedTxt, &sizeTxt);
 		}
@@ -407,6 +461,10 @@ void InitProgressThread()
 {
 	LWP_MutexInit(&ProgressMutex, true);
 	LWP_CreateThread(&progressthread, ProgressThread, NULL, NULL, 16384, 70);
+
+	memset(progressTitle, 0, sizeof(progressTitle));
+	memset(progressMsg1, 0, sizeof(progressMsg1));
+	memset(progressMsg2, 0, sizeof(progressMsg2));
 }
 
 /****************************************************************************

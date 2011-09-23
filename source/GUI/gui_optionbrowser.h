@@ -11,31 +11,26 @@ class GuiOptionBrowser: public GuiElement, public sigslot::has_slots<>
 	public:
 		GuiOptionBrowser(int w, int h, OptionList * l, const char * background);
 		virtual ~GuiOptionBrowser();
-		int FindMenuItem(int c, int d);
 		int GetClickedOption();
 		int GetSelectedOption();
-		void SetClickable(bool enable);
 		void SetOffset(int optionnumber);
 		void ResetState();
-		void SetFocus(int f);
 		void Draw();
 		void Update(GuiTrigger * t);
 	protected:
 		void onListChange(int SelItem, int SelInd);
 		void UpdateListEntries();
+
+		int oldSelectedItem;
 		int selectedItem;
 		int listOffset;
 		int coL2;
-		bool scrollbaron;
-		bool listChanged;
 
 		OptionList * options;
-		int optionIndex[PAGESIZE];
-		GuiButton * optionBtn[PAGESIZE];
-		GuiText * optionTxt[PAGESIZE];
-		GuiText * optionVal[PAGESIZE];
-		GuiText * optionValOver[PAGESIZE];
-		GuiImage * optionBg[PAGESIZE];
+		std::vector<GuiButton *> optionBtn;
+		std::vector<GuiText *> optionTxt;
+		std::vector<GuiText *> optionVal;
+		std::vector<GuiImage *> optionBg;
 
 		GuiImage * bgOptionsImg;
 

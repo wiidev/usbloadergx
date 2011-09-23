@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-10 22:02+0200\n"
+"POT-Creation-Date: 2011-09-24 01:47+0200\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid " could not be downloaded."
 msgstr "Kunde inte laddas ner."
@@ -134,6 +134,9 @@ msgid "All"
 msgstr ""
 
 msgid "All Partitions"
+msgstr ""
+
+msgid "All files extracted."
 msgstr ""
 
 msgid "All images downloaded successfully."
@@ -363,6 +366,9 @@ msgstr "Konsolen måste vara upplåst för att kunna ändra det."
 msgid "Continue to install game?"
 msgstr "Fortsätt installera spel?"
 
+msgid "Continue?"
+msgstr ""
+
 msgid "Controllevel"
 msgstr "Kontrollnivå"
 
@@ -377,6 +383,9 @@ msgstr "Kunde inte skapa GCT fil"
 
 #, c-format
 msgid "Could not create path: %s"
+msgstr ""
+
+msgid "Could not extract files for:"
 msgstr ""
 
 msgid "Could not find info for this game in the wiitdb.xml."
@@ -399,6 +408,9 @@ msgstr ""
 
 msgid "Could not save."
 msgstr "Kunde inte spara."
+
+msgid "Could not write file."
+msgstr ""
 
 msgid "Could not write to:"
 msgstr ""
@@ -507,6 +519,9 @@ msgstr "Vill du byta språk?"
 
 msgid "Do you want to download this theme?"
 msgstr "Vill du ladda ner detta tema?"
+
+msgid "Do you want to extract the save game?"
+msgstr ""
 
 msgid "Do you want to format:"
 msgstr "Vill du formatera:"
@@ -618,20 +633,38 @@ msgstr "Fel..."
 msgid "Error:"
 msgstr "Fel:"
 
+msgid "Errors occured."
+msgstr ""
+
 msgid "Exit"
 msgstr ""
 
 msgid "Exit to where?"
 msgstr ""
 
+msgid "Export All Saves to EmuNand"
+msgstr ""
+
+msgid "Extract Save to EmuNand"
+msgstr ""
+
+msgid "Extracting file:"
+msgstr ""
+
 msgid "Extracting files..."
 msgstr "Packar upp filer..."
+
+msgid "Extracting files:"
+msgstr ""
 
 msgid "Failed"
 msgstr ""
 
 msgid "Failed formating"
 msgstr "Formatering misslyckad"
+
+msgid "Failed to extract all files. Savegame might not exist."
+msgstr ""
 
 msgid "Failed to extract."
 msgstr "Uppackning misslyckades."
@@ -653,6 +686,9 @@ msgstr ""
 
 msgid "File not found."
 msgstr "Kunde inte hitta fil"
+
+msgid "Files extracted successfully."
+msgstr ""
 
 #, c-format
 msgid "Filesize is %i Byte."
@@ -863,6 +899,9 @@ msgstr ""
 
 msgid "Install a game"
 msgstr "Installera ett spel"
+
+msgid "Install finished"
+msgstr ""
 
 msgid "Installing content... Ok!"
 msgstr "Installerar innehåll... Ok!"
@@ -1198,6 +1237,9 @@ msgstr "Stäng av Wii"
 msgid "Prev"
 msgstr "Förra"
 
+msgid "Process finished."
+msgstr ""
+
 msgid "Prompts Buttons"
 msgstr "Dialogknappar"
 
@@ -1224,6 +1266,9 @@ msgstr "Släppt"
 
 msgid "Reload SD"
 msgstr "Ladda om SD"
+
+msgid "Reloading game list now, please wait..."
+msgstr ""
 
 msgid "Remember Unlock"
 msgstr ""
@@ -1288,6 +1333,9 @@ msgstr ""
 msgid "Saved"
 msgstr "Sparat"
 
+msgid "Savegame might not exist for this game."
+msgstr ""
+
 msgid "Screensaver"
 msgstr "Skärmsläckare"
 
@@ -1328,6 +1376,9 @@ msgid "Shutdown System"
 msgstr "Stäng av helt"
 
 msgid "Shutdown Wii"
+msgstr ""
+
+msgid "Skip Errors"
 msgstr ""
 
 msgid "Sneek Video Patch"
@@ -1375,6 +1426,9 @@ msgstr ""
 msgid "Success"
 msgstr "Lyckat"
 
+msgid "Success."
+msgstr ""
+
 msgid "Success:"
 msgstr "Lyckat:"
 
@@ -1418,6 +1472,9 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Den angivna katalogen existerar inte. Vill du skapa den?"
 
 msgid "The game installation is disabled under this IOS because of instability in usb write."
+msgstr ""
+
+msgid "The save game will be extracted to your emu nand path."
 msgstr ""
 
 msgid "The wad file was installed"

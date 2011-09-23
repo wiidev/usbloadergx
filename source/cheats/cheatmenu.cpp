@@ -101,14 +101,14 @@ int CheatMenu(const char * gameID)
 				VIDEO_WaitVSync();
 
 				ret = chtBrowser.GetClickedOption();
-				if (ret != -1)
+				if (ret >= 0)
 				{
 					const char *strCheck = cheatslst.GetName(ret);
-					if (strncmp(strCheck, "ON", 2) == 0)
+					if (strCheck && strncmp(strCheck, "ON", 2) == 0)
 					{
 						cheatslst.SetName(ret, "%s", "OFF");
 					}
-					else if (strncmp(strCheck, "OFF", 3) == 0)
+					else if (strCheck && strncmp(strCheck, "OFF", 3) == 0)
 					{
 						cheatslst.SetName(ret, "%s", "ON");
 					}
@@ -124,7 +124,7 @@ int CheatMenu(const char * gameID)
 						for (int i = 0; i < cntcheats; i++)
 						{
 							const char *strCheck = cheatslst.GetName(i);
-							if (strncmp(strCheck, "ON", 2) == 0)
+							if (strCheck && strncmp(strCheck, "ON", 2) == 0)
 							{
 								selectednrs[x] = i;
 								x++;

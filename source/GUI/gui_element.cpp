@@ -88,10 +88,6 @@ void GuiElement::SetParent(GuiElement * e)
 	parentElement = e;
 }
 
-GuiElement * GuiElement::GetParent()
-{
-	return parentElement;
-}
 /**
  * Get the left position of the GuiElement.
  * @see SetLeft()
@@ -186,20 +182,10 @@ void GuiElement::SetMinX(int x)
 	xmin = x;
 }
 
-int GuiElement::GetMinX()
-{
-	return xmin;
-}
-
 void GuiElement::SetMaxX(int x)
 {
 	LOCK( this );
 	xmax = x;
-}
-
-int GuiElement::GetMaxX()
-{
-	return xmax;
 }
 
 void GuiElement::SetMinY(int y)
@@ -208,40 +194,10 @@ void GuiElement::SetMinY(int y)
 	ymin = y;
 }
 
-int GuiElement::GetMinY()
-{
-	return ymin;
-}
-
 void GuiElement::SetMaxY(int y)
 {
 	LOCK( this );
 	ymax = y;
-}
-
-int GuiElement::GetMaxY()
-{
-	return ymax;
-}
-
-/**
- * Get the width of the GuiElement.
- * @see SetWidth()
- * @return Width of the GuiElement.
- */
-int GuiElement::GetWidth()
-{
-	return width;
-}
-
-/**
- * Get the height of the GuiElement.
- * @see SetHeight()
- * @return Height of the GuiElement.
- */
-int GuiElement::GetHeight()
-{
-	return height;
 }
 
 /**
@@ -257,16 +213,6 @@ void GuiElement::SetSize(int w, int h)
 
 	width = w;
 	height = h;
-}
-
-/**
- * Get visible.
- * @see SetVisible()
- * @return true if visible, false otherwise.
- */
-bool GuiElement::IsVisible()
-{
-	return visible;
 }
 
 /**
@@ -323,16 +269,6 @@ float GuiElement::GetScale()
 	if (parentElement) s *= parentElement->GetScale();
 
 	return s;
-}
-
-int GuiElement::GetState()
-{
-	return state;
-}
-
-int GuiElement::GetStateChan()
-{
-	return stateChan;
 }
 
 void GuiElement::SetState(int s, int c)
@@ -397,11 +333,6 @@ void GuiElement::SetFocus(int f)
 	focus = f;
 }
 
-int GuiElement::IsFocused()
-{
-	return focus;
-}
-
 void GuiElement::SetTrigger(GuiTrigger * t)
 {
 	LOCK( this );
@@ -433,27 +364,10 @@ void GuiElement::RemoveTrigger(u8 i)
 	trigger[i] = NULL;
 }
 
-bool GuiElement::Rumble()
-{
-	return rumble;
-}
-
 void GuiElement::SetRumble(bool r)
 {
 	LOCK( this );
 	rumble = r;
-}
-
-int GuiElement::GetEffect()
-{
-	LOCK( this );
-	return effects;
-}
-
-int GuiElement::GetEffectOnOver()
-{
-	LOCK( this );
-	return effectsOver;
 }
 
 float GuiElement::GetFrequency()

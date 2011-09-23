@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-10 22:02+0200\n"
+"POT-Creation-Date: 2011-09-24 01:47+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " ไม่สามารถดาวน์โหลดได้"
@@ -134,6 +134,9 @@ msgid "All"
 msgstr ""
 
 msgid "All Partitions"
+msgstr ""
+
+msgid "All files extracted."
 msgstr ""
 
 msgid "All images downloaded successfully."
@@ -363,6 +366,9 @@ msgstr "ปลดล๊อคคอนโซลก่อน ถึงจะท�
 msgid "Continue to install game?"
 msgstr "ทำต่อ เพื่อติดตั้งเกมส์?"
 
+msgid "Continue?"
+msgstr ""
+
 msgid "Controllevel"
 msgstr "ระดับการควบคุม"
 
@@ -377,6 +383,9 @@ msgstr "ไม่สามารถสร้างไฟล์ GCT"
 
 #, c-format
 msgid "Could not create path: %s"
+msgstr ""
+
+msgid "Could not extract files for:"
 msgstr ""
 
 msgid "Could not find info for this game in the wiitdb.xml."
@@ -399,6 +408,9 @@ msgstr ""
 
 msgid "Could not save."
 msgstr "บันทึกไม่ได้"
+
+msgid "Could not write file."
+msgstr ""
 
 msgid "Could not write to:"
 msgstr ""
@@ -507,6 +519,9 @@ msgstr "ต้องการจะเปลี่ยนภาษา ?"
 
 msgid "Do you want to download this theme?"
 msgstr "ต้องการดาวน์โหลดธีมนี้ ?"
+
+msgid "Do you want to extract the save game?"
+msgstr ""
 
 msgid "Do you want to format:"
 msgstr "ต้องการฟอร์แมต:"
@@ -618,20 +633,38 @@ msgstr "ผิดพลาด..."
 msgid "Error:"
 msgstr "ผิดพลาด:"
 
+msgid "Errors occured."
+msgstr ""
+
 msgid "Exit"
 msgstr ""
 
 msgid "Exit to where?"
 msgstr ""
 
+msgid "Export All Saves to EmuNand"
+msgstr ""
+
+msgid "Extract Save to EmuNand"
+msgstr ""
+
+msgid "Extracting file:"
+msgstr ""
+
 msgid "Extracting files..."
 msgstr "กำลังขยายไฟล์..."
+
+msgid "Extracting files:"
+msgstr ""
 
 msgid "Failed"
 msgstr ""
 
 msgid "Failed formating"
 msgstr "ฟอร์แมตไม่ได้"
+
+msgid "Failed to extract all files. Savegame might not exist."
+msgstr ""
 
 msgid "Failed to extract."
 msgstr "ขยายไฟล์ไม่ได้"
@@ -653,6 +686,9 @@ msgstr "กพ."
 
 msgid "File not found."
 msgstr "ไม่พบไฟล์"
+
+msgid "Files extracted successfully."
+msgstr ""
 
 #, c-format
 msgid "Filesize is %i Byte."
@@ -863,6 +899,9 @@ msgstr ""
 
 msgid "Install a game"
 msgstr "ติดตั้งเกมส์"
+
+msgid "Install finished"
+msgstr ""
 
 msgid "Installing content... Ok!"
 msgstr "ติดตั้งเนื้อหา... สำเร็จ!"
@@ -1198,6 +1237,9 @@ msgstr "ปิดเครื่อง Wii"
 msgid "Prev"
 msgstr "ที่ผ่านมา"
 
+msgid "Process finished."
+msgstr ""
+
 msgid "Prompts Buttons"
 msgstr "ปุ่มเตรียมตัว"
 
@@ -1224,6 +1266,9 @@ msgstr "ปล่อย"
 
 msgid "Reload SD"
 msgstr "โหลด SD ใหม่"
+
+msgid "Reloading game list now, please wait..."
+msgstr ""
 
 msgid "Remember Unlock"
 msgstr ""
@@ -1288,6 +1333,9 @@ msgstr ""
 msgid "Saved"
 msgstr "บันทึกแล้ว"
 
+msgid "Savegame might not exist for this game."
+msgstr ""
+
 msgid "Screensaver"
 msgstr "รักษาหน้าจอ"
 
@@ -1328,6 +1376,9 @@ msgid "Shutdown System"
 msgstr "ปิดระบบ"
 
 msgid "Shutdown Wii"
+msgstr ""
+
+msgid "Skip Errors"
 msgstr ""
 
 msgid "Sneek Video Patch"
@@ -1375,6 +1426,9 @@ msgstr ""
 msgid "Success"
 msgstr "สำเร็จ"
 
+msgid "Success."
+msgstr ""
+
 msgid "Success:"
 msgstr "สำเร็จ:"
 
@@ -1418,6 +1472,9 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "ไม่พบไดเรคทอรี่นี้ ต้องการสร้างใหม่รึไม่ ?"
 
 msgid "The game installation is disabled under this IOS because of instability in usb write."
+msgstr ""
+
+msgid "The save game will be extracted to your emu nand path."
 msgstr ""
 
 msgid "The wad file was installed"

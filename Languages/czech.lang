@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-10 22:02+0200\n"
+"POT-Creation-Date: 2011-09-24 01:47+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " nelze stáhnout."
@@ -135,6 +135,9 @@ msgstr ""
 
 msgid "All Partitions"
 msgstr "Vsechny oddíly"
+
+msgid "All files extracted."
+msgstr ""
 
 msgid "All images downloaded successfully."
 msgstr "Všechny obrázky staženy úspešně."
@@ -363,6 +366,9 @@ msgstr "Konzole musí být odemcena pro tuto zmenu"
 msgid "Continue to install game?"
 msgstr "Pokracovat pri instalaci hry"
 
+msgid "Continue?"
+msgstr ""
+
 msgid "Controllevel"
 msgstr "Úroven rízení"
 
@@ -378,6 +384,9 @@ msgstr "Nelze vytvorit GCT soubor"
 #, c-format
 msgid "Could not create path: %s"
 msgstr "Nelze vytvorit adresar: %s"
+
+msgid "Could not extract files for:"
+msgstr ""
 
 msgid "Could not find info for this game in the wiitdb.xml."
 msgstr "Nelze nalézt informace pro tuto hru v wiitdb.xml."
@@ -399,6 +408,9 @@ msgstr "Nelze otevrít wiitdb.xml."
 
 msgid "Could not save."
 msgstr "Nelze uložit."
+
+msgid "Could not write file."
+msgstr ""
 
 msgid "Could not write to:"
 msgstr ""
@@ -507,6 +519,9 @@ msgstr "Prejete si zmenit jazyk?"
 
 msgid "Do you want to download this theme?"
 msgstr "Prejete si stáhnout toto téma?"
+
+msgid "Do you want to extract the save game?"
+msgstr ""
 
 msgid "Do you want to format:"
 msgstr "Prejete si formátovat"
@@ -618,20 +633,38 @@ msgstr "Chyba..."
 msgid "Error:"
 msgstr "Chyba:"
 
+msgid "Errors occured."
+msgstr ""
+
 msgid "Exit"
 msgstr "Ukoncit"
 
 msgid "Exit to where?"
 msgstr "Opustit kam?"
 
+msgid "Export All Saves to EmuNand"
+msgstr ""
+
+msgid "Extract Save to EmuNand"
+msgstr ""
+
+msgid "Extracting file:"
+msgstr ""
+
 msgid "Extracting files..."
 msgstr "Rozbaluji soubory..."
+
+msgid "Extracting files:"
+msgstr ""
 
 msgid "Failed"
 msgstr ""
 
 msgid "Failed formating"
 msgstr "Neúspešné formátování"
+
+msgid "Failed to extract all files. Savegame might not exist."
+msgstr ""
 
 msgid "Failed to extract."
 msgstr "Nemohu rozbalit."
@@ -653,6 +686,9 @@ msgstr "Ún"
 
 msgid "File not found."
 msgstr "Soubor nenalezen"
+
+msgid "Files extracted successfully."
+msgstr ""
 
 #, c-format
 msgid "Filesize is %i Byte."
@@ -863,6 +899,9 @@ msgstr ""
 
 msgid "Install a game"
 msgstr "Nainstalovat hru"
+
+msgid "Install finished"
+msgstr ""
 
 msgid "Installing content... Ok!"
 msgstr "Instaluji obsah... Ok!"
@@ -1198,6 +1237,9 @@ msgstr "Vypnout Wii"
 msgid "Prev"
 msgstr "Predchozí"
 
+msgid "Process finished."
+msgstr ""
+
 msgid "Prompts Buttons"
 msgstr "Potvrzovací tlacítka"
 
@@ -1224,6 +1266,9 @@ msgstr "Uvolnil"
 
 msgid "Reload SD"
 msgstr "Znovunactení SD"
+
+msgid "Reloading game list now, please wait..."
+msgstr ""
 
 msgid "Remember Unlock"
 msgstr ""
@@ -1288,6 +1333,9 @@ msgstr ""
 msgid "Saved"
 msgstr "Uloženo"
 
+msgid "Savegame might not exist for this game."
+msgstr ""
+
 msgid "Screensaver"
 msgstr "Sporic obrazovky"
 
@@ -1329,6 +1377,9 @@ msgstr "Ukoncit systém"
 
 msgid "Shutdown Wii"
 msgstr "Vypnout Wii"
+
+msgid "Skip Errors"
+msgstr ""
 
 msgid "Sneek Video Patch"
 msgstr ""
@@ -1375,6 +1426,9 @@ msgstr "Uspání"
 msgid "Success"
 msgstr "Úspešne"
 
+msgid "Success."
+msgstr ""
+
 msgid "Success:"
 msgstr "Úspešne:"
 
@@ -1419,6 +1473,9 @@ msgstr "Zadaný adresár neexistuje. Chcete ho vytvorit?"
 
 msgid "The game installation is disabled under this IOS because of instability in usb write."
 msgstr "Instalace her je zakázána s tímto IOS kvuli nestabilite v USB zápisu."
+
+msgid "The save game will be extracted to your emu nand path."
+msgstr ""
 
 msgid "The wad file was installed"
 msgstr "Soubor WAD byl nainstalován"

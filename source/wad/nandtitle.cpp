@@ -1,6 +1,9 @@
 #include <ogc/isfs.h>
 #include <stdlib.h>
 #include "nandtitle.h"
+#include "FileOperations/fileops.h"
+#include "prompts/ProgressWindow.h"
+#include "language/gettext.h"
 #include "usbloader/playlog.h"
 #include "utils/tools.h"
 #include "gecko.h"
@@ -477,4 +480,221 @@ int NandTitle::LoadFileFromNand(const char *filepath, u8 **outbuffer, u32 *outfi
 	*outfilesize = filesize;
 
 	return 0;
+}
+
+typedef struct _ReplaceStruct
+{
+	const char * replace;
+	char orig;
+	short size;
+} ReplaceStruct;
+
+//! More replacements can be added if needed
+static const ReplaceStruct Replacements[] =
+{
+	{ "&gt;", '>', 4 },
+	{ "&lt;", '<', 4 },
+	{ "&st;", '*', 4 },
+	{ "&cl;", ':', 4 },
+	{ "&qt;", '\"', 6 },
+	{ "&qm;", '?', 6 },
+	{ "&vb;", '|', 5 },
+	{ NULL, '\0', 0 }
+};
+
+static void ConvertInvalidCharacters(std::string &filepath)
+{
+	size_t startPos;
+	size_t pos;
+
+	for(int i = 0; Replacements[i].replace != 0; ++i)
+	{
+		//! Skip the first ':' because it is the device delimiter
+		if(Replacements[i].orig == ':')
+			startPos = filepath.find(Replacements[i].orig)+1;
+		else
+			startPos = 0;
+
+		while((pos = filepath.find(Replacements[i].orig, startPos)) != std::string::npos)
+		{
+			filepath.erase(pos, 1);
+			filepath.insert(pos, Replacements[i].replace);
+		}
+	}
+}
+
+int NandTitle::ExtractFile(const char *nandPath, const char *filepath, bool isfsInit)
+{
+	if(!nandPath || !filepath)
+		return -1;
+
+	char *strDup = strdup(filepath);
+	if(!strDup)
+		return -666;
+
+	char *ptr = strrchr(strDup, '/');
+	if(!ptr)
+	{
+		free(strDup);
+		return -333;
+	}
+	else
+	{
+		*ptr = 0;
+		CreateSubfolder(strDup);
+		free(strDup);
+	}
+
+	const char *filename = strrchr(filepath, '/')+1;
+	u32 done = 0;
+	int fd = -1;
+	u32 blocksize = 32*1024;
+	u8 *buffer = (u8 *) memalign(32, ALIGN32(blocksize));
+	if(!buffer)
+		return -666;
+
+	fstats *stats = (fstats *) memalign(32, ALIGN32(sizeof(fstats)));
+	if(!stats)
+	{
+		free(buffer);
+		return -666;
+	}
+
+	if(isfsInit)
+		ISFS_Initialize();
+
+	do
+	{
+		fd = ISFS_Open(nandPath, ISFS_OPEN_READ);
+		if(fd < 0)
+			break;
+
+		int ret = ISFS_GetFileStats(fd, stats);
+		if (ret < 0)
+			break;
+
+		u32 filesize = stats->file_length;
+
+		FILE *pFile = fopen(filepath, "wb");
+		if(!pFile)
+			break;
+
+		while(done < filesize)
+		{
+			if(filesize-done < blocksize)
+				blocksize = filesize-done;
+
+			ShowProgress(filename, done, filesize);
+
+			ret = ISFS_Read(fd, buffer, blocksize);
+			if(ret < 0)
+			{
+				done = 0;
+				break;
+			}
+
+			fwrite(buffer, 1, ret, pFile);
+
+			done += ret;
+		}
+
+		fclose(pFile);
+
+	} while(0);
+
+	free(buffer);
+	free(stats);
+
+	if(fd >= 0)
+		ISFS_Close(fd);
+
+	if(isfsInit)
+		ISFS_Deinitialize();
+
+	return done;
+
+}
+
+int NandTitle::InternalExtractDir(char *nandPath, std::string &filepath)
+{
+	int ret = -1;
+
+	u32 list_len = 0;
+	ret = ISFS_ReadDir(nandPath, NULL, &list_len);
+	if(ret < 0)
+		return ret;
+
+	char * name_list = (char *) memalign(32, ALIGN32(list_len * ISFS_MAXPATH));
+	if(!name_list)
+		return -666;
+
+	ret = ISFS_ReadDir(nandPath, name_list, &list_len);
+	if(ret < 0)
+	{
+		free(name_list);
+		return ret;
+	}
+
+	char *entry = name_list;
+
+	for(u32 i = 0; i < list_len; ++i)
+	{
+		u32 dummy;
+		int posNandPath = strlen(nandPath);
+		int posFilePath = filepath.size();
+
+		filepath += '/';
+		filepath += entry;
+		strcat(nandPath, "/");
+		strcat(nandPath, entry);
+
+		if(ISFS_ReadDir(nandPath, NULL, &dummy) < 0)
+		{
+			std::string filepathCpy = filepath;
+			ConvertInvalidCharacters(filepathCpy);
+
+			int res = ExtractFile(nandPath, filepathCpy.c_str(), false);
+			if(res == 0)
+				ret = -2;
+		}
+		else
+		{
+			int res = InternalExtractDir(nandPath, filepath);
+			if(res < 0)
+				ret = -3;
+		}
+
+		nandPath[posNandPath] = 0;
+		filepath.erase(posFilePath);
+		entry += strlen(entry) + 1;
+	}
+
+	free(name_list);
+
+	return ret;
+}
+
+int NandTitle::ExtractDir(const char *nandPath, const char *filepath, bool isfsInit)
+{
+	if(!filepath || !nandPath)
+		return -1;
+
+	std::string internFilePath = filepath;
+	char *internNandPath = (char *) memalign(32, ISFS_MAXPATH);
+	if(!internNandPath)
+		return -666;
+
+	snprintf(internNandPath, ISFS_MAXPATH, nandPath);
+
+	if(isfsInit)
+		ISFS_Initialize();
+
+	int ret = InternalExtractDir(internNandPath, internFilePath);
+
+	if(isfsInit)
+		ISFS_Deinitialize();
+
+	free(internNandPath);
+
+	return ret;
 }

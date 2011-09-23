@@ -96,7 +96,11 @@ class NandTitle
 		u64 operator[](u32 i) { return At(i); }
 
 		static int LoadFileFromNand(const char *filepath, u8 **outbuffer, u32 *outfilesize);
+		static int ExtractFile(const char *nandPath, const char *filepath, bool isfsInit = true);
+		static int ExtractDir(const char *wiipath, const char *filepath, bool isfsInit = true);
 	private:
+		static int InternalExtractDir(char *nandPath, std::string &filepath);
+
 		std::vector<u64> titleIds;
 		std::map<u64, string> NameList;
 		bool GetName(u64 tid, int language, wchar_t* name);
