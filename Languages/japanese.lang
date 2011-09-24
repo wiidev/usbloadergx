@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
 # japanese.lang - r1108
-# don't delete/change this line (é).
+# don't delete/change this line (e).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-24 01:47+0200\n"
+"POT-Creation-Date: 2011-09-24 15:12+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi, papa, ichiroling\n"
@@ -137,7 +137,7 @@ msgid "All Partitions"
 msgstr "全ての領域"
 
 msgid "All files extracted."
-msgstr ""
+msgstr "全てのファイルを書き出しました"
 
 msgid "All images downloaded successfully."
 msgstr "全ての画像をダウンロードしました"
@@ -367,7 +367,7 @@ msgid "Continue to install game?"
 msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしますか？"
 
 msgid "Continue?"
-msgstr ""
+msgstr "続行しますか?"
 
 msgid "Controllevel"
 msgstr "制限レベル"
@@ -386,7 +386,7 @@ msgid "Could not create path: %s"
 msgstr "パスを作成できません: %s"
 
 msgid "Could not extract files for:"
-msgstr ""
+msgstr "書き出しできません:"
 
 msgid "Could not find info for this game in the wiitdb.xml."
 msgstr "wiitdb.xmlにこのゲームの情報が見つかりませんでした"
@@ -410,7 +410,7 @@ msgid "Could not save."
 msgstr "保存できませんでした"
 
 msgid "Could not write file."
-msgstr ""
+msgstr "ファイルを書き込めません"
 
 msgid "Could not write to:"
 msgstr "書き込めません:"
@@ -520,8 +520,11 @@ msgstr "言語を変更しますか？"
 msgid "Do you want to download this theme?"
 msgstr "ダウンロードしますか?"
 
-msgid "Do you want to extract the save game?"
+msgid "Do you want to extract all the save games?"
 msgstr ""
+
+msgid "Do you want to extract the save game?"
+msgstr "セーブデータを書き出しますか?"
 
 msgid "Do you want to format:"
 msgstr "初期化しますか?"
@@ -634,7 +637,7 @@ msgid "Error:"
 msgstr "エラー:"
 
 msgid "Errors occured."
-msgstr ""
+msgstr "エラーが発生しました"
 
 msgid "Exit"
 msgstr "終了"
@@ -643,19 +646,19 @@ msgid "Exit to where?"
 msgstr "どこに移動しますか?"
 
 msgid "Export All Saves to EmuNand"
-msgstr ""
+msgstr "全てのセーブをエミュNANDに転送"
 
 msgid "Extract Save to EmuNand"
-msgstr ""
+msgstr "セーブをエミュNANDに書き出す"
 
 msgid "Extracting file:"
-msgstr ""
+msgstr "書き出し中:"
 
 msgid "Extracting files..."
 msgstr "解凍中です…"
 
 msgid "Extracting files:"
-msgstr ""
+msgstr "書き出し中:"
 
 msgid "Failed"
 msgstr "失敗"
@@ -664,7 +667,7 @@ msgid "Failed formating"
 msgstr "初期化に失敗しました"
 
 msgid "Failed to extract all files. Savegame might not exist."
-msgstr ""
+msgstr "全てのファイルを書き出せません。セーブがありません"
 
 msgid "Failed to extract."
 msgstr "解凍に失敗しました"
@@ -688,7 +691,7 @@ msgid "File not found."
 msgstr "ファイルが見つかりません"
 
 msgid "Files extracted successfully."
-msgstr ""
+msgstr "ファイルを書き出しました"
 
 #, c-format
 msgid "Filesize is %i Byte."
@@ -901,7 +904,7 @@ msgid "Install a game"
 msgstr "ゲームをインストール"
 
 msgid "Install finished"
-msgstr ""
+msgstr "インストールが終了しました"
 
 msgid "Installing content... Ok!"
 msgstr "ｺﾝﾃﾝﾂをｲﾝｽﾄｰﾙ...成功！"
@@ -1094,7 +1097,7 @@ msgid "No data could be read."
 msgstr "読み込みに失敗しました"
 
 msgid "No disc inserted."
-msgstr ""
+msgstr "ディスクが挿入されていません"
 
 msgid "No favorites selected."
 msgstr "お気に入りはありません"
@@ -1238,7 +1241,7 @@ msgid "Prev"
 msgstr "左"
 
 msgid "Process finished."
-msgstr ""
+msgstr "プロセスが終了しました"
 
 msgid "Prompts Buttons"
 msgstr "ウインドウサイズ"
@@ -1268,10 +1271,10 @@ msgid "Reload SD"
 msgstr "SDを再読み込み"
 
 msgid "Reloading game list now, please wait..."
-msgstr ""
+msgstr "ゲームリストを再読み込み中、お待ちください..."
 
 msgid "Remember Unlock"
-msgstr ""
+msgstr "ロック解除を記憶"
 
 msgid "Remove update"
 msgstr "更新を取り除く"
@@ -1334,7 +1337,7 @@ msgid "Saved"
 msgstr "保存しました"
 
 msgid "Savegame might not exist for this game."
-msgstr ""
+msgstr "このゲームのセーブはありません"
 
 msgid "Screensaver"
 msgstr "スクリーンセーバー"
@@ -1370,7 +1373,7 @@ msgid "Show Free Space"
 msgstr "空き容量の表示"
 
 msgid "Show Play Count"
-msgstr ""
+msgstr "プレイ回数の表示"
 
 msgid "Shutdown System"
 msgstr "シャットダウン"
@@ -1379,7 +1382,7 @@ msgid "Shutdown Wii"
 msgstr "シャットダウン"
 
 msgid "Skip Errors"
-msgstr ""
+msgstr "エラーをスキップ"
 
 msgid "Sneek Video Patch"
 msgstr "SNEEK映像パッチ"
@@ -1427,7 +1430,7 @@ msgid "Success"
 msgstr "成功"
 
 msgid "Success."
-msgstr ""
+msgstr "成功しました"
 
 msgid "Success:"
 msgstr "成功:"
@@ -1475,6 +1478,9 @@ msgid "The game installation is disabled under this IOS because of instability i
 msgstr "このIOSでのゲームの追加は不安定なため無効になっています"
 
 msgid "The save game will be extracted to your emu nand path."
+msgstr "セーブデータはエミュNANDパスに書き出されます"
+
+msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
 msgstr ""
 
 msgid "The wad file was installed"

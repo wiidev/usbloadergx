@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-24 01:47+0200\n"
+"POT-Creation-Date: 2011-09-24 15:12+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan, Kin8\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -137,7 +137,7 @@ msgid "All Partitions"
 msgstr "Toutes les partitions"
 
 msgid "All files extracted."
-msgstr ""
+msgstr "Extraction des fichiers terminée."
 
 msgid "All images downloaded successfully."
 msgstr "Images correctement téléchargées"
@@ -367,7 +367,7 @@ msgid "Continue to install game?"
 msgstr "Continuer l'installation ?"
 
 msgid "Continue?"
-msgstr ""
+msgstr "Continuer ?"
 
 msgid "Controllevel"
 msgstr "Niveau moral"
@@ -386,7 +386,7 @@ msgid "Could not create path: %s"
 msgstr "Impossible de créer: %s"
 
 msgid "Could not extract files for:"
-msgstr ""
+msgstr "L'extraction des fichiers a échoué pour :"
 
 msgid "Could not find info for this game in the wiitdb.xml."
 msgstr "Pas d'information pour ce jeu dans wiitdb.xml."
@@ -410,10 +410,10 @@ msgid "Could not save."
 msgstr "Sauvegarde impossible."
 
 msgid "Could not write file."
-msgstr ""
+msgstr "Écriture du fichier impossible."
 
 msgid "Could not write to:"
-msgstr "Ecriture impossible vers:"
+msgstr "Écriture impossible vers:"
 
 msgid "Cover Download"
 msgstr "Téléchargement des jaquettes"
@@ -520,8 +520,11 @@ msgstr "Changer de langue ?"
 msgid "Do you want to download this theme?"
 msgstr "Voulez-vous télécharger ce thème ?"
 
+msgid "Do you want to extract all the save games?"
+msgstr "Extraire toutes les sauvegardes ?"
+
 msgid "Do you want to extract the save game?"
-msgstr ""
+msgstr "Voulez-vous extraire la sauvegarde ?"
 
 msgid "Do you want to format:"
 msgstr "Voulez-vous formater:"
@@ -634,7 +637,7 @@ msgid "Error:"
 msgstr "Erreur:"
 
 msgid "Errors occured."
-msgstr ""
+msgstr "Des erreurs sont survenues."
 
 msgid "Exit"
 msgstr "Quitter"
@@ -643,19 +646,19 @@ msgid "Exit to where?"
 msgstr "Quitter vers où ?"
 
 msgid "Export All Saves to EmuNand"
-msgstr ""
+msgstr "Extraire tous les sauvegardes"
 
 msgid "Extract Save to EmuNand"
-msgstr ""
+msgstr "Extraire la sauvegarde vers Émulation Nand"
 
 msgid "Extracting file:"
-msgstr ""
+msgstr "Extraction du fichier :"
 
 msgid "Extracting files..."
 msgstr "Extraction des fichiers..."
 
 msgid "Extracting files:"
-msgstr ""
+msgstr "Extraction des fichiers :"
 
 msgid "Failed"
 msgstr "Échec"
@@ -664,7 +667,7 @@ msgid "Failed formating"
 msgstr "Échec du formatage"
 
 msgid "Failed to extract all files. Savegame might not exist."
-msgstr ""
+msgstr "Échec lors de l'extraction des fichiers. La sauvegarde est peut-être inexistante."
 
 msgid "Failed to extract."
 msgstr "Échec de l'extraction"
@@ -688,7 +691,7 @@ msgid "File not found."
 msgstr "Fichier introuvable."
 
 msgid "Files extracted successfully."
-msgstr ""
+msgstr "Fichiers extraits avec succès."
 
 #, c-format
 msgid "Filesize is %i Byte."
@@ -901,7 +904,7 @@ msgid "Install a game"
 msgstr "Installer un jeu"
 
 msgid "Install finished"
-msgstr ""
+msgstr "Installation terminée"
 
 msgid "Installing content... Ok!"
 msgstr "Installation contenu... OK!"
@@ -1238,7 +1241,7 @@ msgid "Prev"
 msgstr "Précédent"
 
 msgid "Process finished."
-msgstr ""
+msgstr "Opération terminée."
 
 msgid "Prompts Buttons"
 msgstr "Interface"
@@ -1268,10 +1271,10 @@ msgid "Reload SD"
 msgstr "Recharger la SD"
 
 msgid "Reloading game list now, please wait..."
-msgstr ""
+msgstr "Rechargement de la liste des jeux, veuillez patienter..."
 
 msgid "Remember Unlock"
-msgstr ""
+msgstr "Mémoriser le verrouillage"
 
 msgid "Remove update"
 msgstr "Supprimer MàJ"
@@ -1334,7 +1337,7 @@ msgid "Saved"
 msgstr "Sauvegardé"
 
 msgid "Savegame might not exist for this game."
-msgstr ""
+msgstr "La sauvegarde de ce jeu est peut-être existante."
 
 msgid "Screensaver"
 msgstr "Économiseur d'écran"
@@ -1379,7 +1382,7 @@ msgid "Shutdown Wii"
 msgstr "Éteindre la Wii"
 
 msgid "Skip Errors"
-msgstr ""
+msgstr "Omettre les erreurs"
 
 msgid "Sneek Video Patch"
 msgstr "Patch vidéo Sneek"
@@ -1427,7 +1430,7 @@ msgid "Success"
 msgstr "Succès"
 
 msgid "Success."
-msgstr ""
+msgstr "Succès"
 
 msgid "Success:"
 msgstr "Succès:"
@@ -1475,7 +1478,10 @@ msgid "The game installation is disabled under this IOS because of instability i
 msgstr "L'installation d'un jeu est désactivée en utilisant cet IOS pour cause d'instabilité en écriture sur l'USB."
 
 msgid "The save game will be extracted to your emu nand path."
-msgstr ""
+msgstr "La sauvegarde du jeu sera extraite vers votre dossier d'Émulation Nand."
+
+msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
+msgstr "Les sauvegardes des jeux seront extraites vers votre dossier d'Émulation Nand. Attention: Toutes les sauvegardes existantes seront remplacées."
 
 msgid "The wad file was installed"
 msgstr "Le fichier wad a été installé"

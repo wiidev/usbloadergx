@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-24 01:47+0200\n"
+"POT-Creation-Date: 2011-09-24 15:12+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -519,6 +519,9 @@ msgstr "Zmienic jezyk?"
 
 msgid "Do you want to download this theme?"
 msgstr "Pobrac temat?"
+
+msgid "Do you want to extract all the save games?"
+msgstr ""
 
 msgid "Do you want to extract the save game?"
 msgstr ""
@@ -1475,6 +1478,9 @@ msgid "The game installation is disabled under this IOS because of instability i
 msgstr ""
 
 msgid "The save game will be extracted to your emu nand path."
+msgstr ""
+
+msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
 msgstr ""
 
 msgid "The wad file was installed"

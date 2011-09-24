@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# portuguese_pt.lang - r1108
+# portuguese_pt.lang - r1114
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-24 01:47+0200\n"
-"PO-Revision-Date: 2011-07-30 19:45+0100\n"
+"POT-Creation-Date: 2011-09-24 15:12+0200\n"
+"PO-Revision-Date: 2011-09-19 13:30+0100\n"
 "Last-Translator: pplucky <pplucky@gmail.com>\n"
 "Language-Team: Sky8000, pplucky\n"
 "MIME-Version: 1.0\n"
@@ -122,10 +122,10 @@ msgid ">> Reading WAD data...Ok!"
 msgstr ">> A ler ficheiro WAD... Ok!"
 
 msgid "AUTO"
-msgstr ""
+msgstr "AUTO"
 
 msgid "AXNextFrame"
-msgstr ""
+msgstr "AXProxFrame"
 
 msgid "Add category"
 msgstr "Adicionar categ."
@@ -152,7 +152,7 @@ msgid "An example file was created here:"
 msgstr "Ficheiro de exemplo criado aqui:"
 
 msgid "Anti"
-msgstr ""
+msgstr "Anti"
 
 msgid "App Language"
 msgstr "Idioma"
@@ -185,7 +185,7 @@ msgid "Author(s):"
 msgstr "Autor(es):"
 
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 msgid "AutoInit Network"
 msgstr "Auto-iniciar Rede"
@@ -520,6 +520,9 @@ msgstr "Deseja alterar o idioma?"
 msgid "Do you want to download this theme?"
 msgstr "Deseja descarregar este tema?"
 
+msgid "Do you want to extract all the save games?"
+msgstr ""
+
 msgid "Do you want to extract the save game?"
 msgstr ""
 
@@ -770,10 +773,10 @@ msgid "GUI Settings"
 msgstr "Definições do Interface"
 
 msgid "GXDraw"
-msgstr ""
+msgstr "GXDraw"
 
 msgid "GXFlush"
-msgstr ""
+msgstr "GXFlush"
 
 msgid "Game ID"
 msgstr "ID do Jogo"
@@ -848,7 +851,7 @@ msgid "Homebrew Launcher"
 msgstr "Gestor de Homebrew"
 
 msgid "Hooktype"
-msgstr ""
+msgstr "Tipo Hook"
 
 msgid "Hour"
 msgstr "Horas"
@@ -928,13 +931,13 @@ msgid "Italian"
 msgstr "Italiano"
 
 msgid "Jan"
-msgstr ""
+msgstr "Jan"
 
 msgid "Japanese"
 msgstr "Japonês"
 
 msgid "Joypad"
-msgstr ""
+msgstr "Joypad"
 
 msgid "July"
 msgstr "Jul"
@@ -1016,7 +1019,7 @@ msgid "Main tester:"
 msgstr "Tester principal:"
 
 msgid "Mar"
-msgstr ""
+msgstr "Mar"
 
 msgid "Mark new games"
 msgstr "Marcar jogos novos"
@@ -1094,7 +1097,7 @@ msgid "No data could be read."
 msgstr "Não foi possível ler dados."
 
 msgid "No disc inserted."
-msgstr ""
+msgstr "Nenhum disco inserido."
 
 msgid "No favorites selected."
 msgstr "Nenhum favorito seleccionado"
@@ -1145,22 +1148,22 @@ msgid "Not supported format!"
 msgstr "Formato não suportado!"
 
 msgid "Nov"
-msgstr ""
+msgstr "Nov"
 
 msgid "OFF"
-msgstr ""
+msgstr "OFF"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "ON"
-msgstr ""
+msgstr "ON"
 
 msgid "OSSleepThread"
-msgstr ""
+msgstr "OSSleepThread"
 
 msgid "Ocarina"
-msgstr ""
+msgstr "Ocarina"
 
 msgid "Oct"
 msgstr "Out"
@@ -1169,7 +1172,7 @@ msgid "Official Site:"
 msgstr "Site Oficial:"
 
 msgid "Offset"
-msgstr ""
+msgstr "Offset"
 
 msgid "Only Game Partition"
 msgstr "Apenas Partição Jogos"
@@ -1193,7 +1196,7 @@ msgid "Partition"
 msgstr "Partição"
 
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 msgid "Password Changed"
 msgstr "Password Alterada"
@@ -1271,7 +1274,7 @@ msgid "Reloading game list now, please wait..."
 msgstr ""
 
 msgid "Remember Unlock"
-msgstr ""
+msgstr "Lembrar Desbloqueio"
 
 msgid "Remove update"
 msgstr "Remover actualização"
@@ -1370,7 +1373,7 @@ msgid "Show Free Space"
 msgstr "Mostrar Espaço Livre"
 
 msgid "Show Play Count"
-msgstr ""
+msgstr "Mostrar Contagem Jogos"
 
 msgid "Shutdown System"
 msgstr "Desligar"
@@ -1421,7 +1424,7 @@ msgid "Split each 4GB"
 msgstr "Partir a cada 4GB"
 
 msgid "Standby"
-msgstr ""
+msgstr "Standby"
 
 msgid "Success"
 msgstr "Exito"
@@ -1475,6 +1478,9 @@ msgid "The game installation is disabled under this IOS because of instability i
 msgstr "A instalação de jogo está desabilitada neste IOS devido a instabilidade na escrita usb"
 
 msgid "The save game will be extracted to your emu nand path."
+msgstr ""
+
+msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
 msgstr ""
 
 msgid "The wad file was installed"
@@ -1657,7 +1663,7 @@ msgid "Wiilight"
 msgstr "Iluminação Leitor"
 
 msgid "Wiinnertag"
-msgstr ""
+msgstr "Wiinnertag"
 
 msgid "Wiinnertag Path"
 msgstr "Cam. Wiinnertag"

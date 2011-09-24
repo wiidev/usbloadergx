@@ -454,7 +454,7 @@ void GuiScrollbar::ScrollByButton(GuiTrigger *t)
 
 void GuiScrollbar::Draw()
 {
-	if(PageSize >= EntrieCount)
+	if(PageSize <= EntrieCount)
 	{
 		scrollbarTileImg->Draw();
 		scrollbarTopImg->Draw();
@@ -472,7 +472,7 @@ void GuiScrollbar::Draw()
 
 void GuiScrollbar::Update(GuiTrigger * t)
 {
-	if(PageSize >= EntrieCount)
+	if(PageSize <= EntrieCount)
 	{
 		arrowUpBtn->Update(t);
 		arrowDownBtn->Update(t);

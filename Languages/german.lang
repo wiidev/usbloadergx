@@ -1,18 +1,18 @@
 # USB Loader GX
-# german.lang - r1108
+# german.lang - r1114
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-24 01:47+0200\n"
+"POT-Creation-Date: 2011-09-24 15:12+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
+"Language: German\n"
 
 msgid " could not be downloaded."
 msgstr " konnte nicht heruntergeladen werden."
@@ -519,6 +519,9 @@ msgstr "Sprache ändern?"
 
 msgid "Do you want to download this theme?"
 msgstr "Dieses Theme herunterladen?"
+
+msgid "Do you want to extract all the save games?"
+msgstr ""
 
 msgid "Do you want to extract the save game?"
 msgstr ""
@@ -1094,7 +1097,7 @@ msgid "No data could be read."
 msgstr "Daten konnten nicht gelesen werden."
 
 msgid "No disc inserted."
-msgstr ""
+msgstr "Keine DVD eingelegt"
 
 msgid "No favorites selected."
 msgstr "Keine Favoriten ausgewählt"
@@ -1271,7 +1274,7 @@ msgid "Reloading game list now, please wait..."
 msgstr ""
 
 msgid "Remember Unlock"
-msgstr ""
+msgstr "Entsperrung behalten"
 
 msgid "Remove update"
 msgstr "Update entfernen"
@@ -1370,7 +1373,7 @@ msgid "Show Free Space"
 msgstr "Zeige frei. Speicher"
 
 msgid "Show Play Count"
-msgstr ""
+msgstr "Zeige Spielzähler"
 
 msgid "Shutdown System"
 msgstr "System herunterfahren"
@@ -1475,6 +1478,9 @@ msgid "The game installation is disabled under this IOS because of instability i
 msgstr "Das Installieren von Spielen ist bei Verwendung dieses IOS wegen Instabilität beim USB-Schreiben deaktiviert."
 
 msgid "The save game will be extracted to your emu nand path."
+msgstr ""
+
+msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
 msgstr ""
 
 msgid "The wad file was installed"
