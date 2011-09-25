@@ -150,6 +150,7 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 			if(ret < 0) //! Games with installable channels: Mario Kart, Wii Fit, etc.
 			{
 				snprintf(nandPath, sizeof(nandPath), "/title/00010004/%02x%02x%02x%02x", DiscHeader->id[0], DiscHeader->id[1], DiscHeader->id[2], DiscHeader->id[3]);
+				snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuPath, nandPath);
 				ret = NandTitle::ExtractDir(nandPath, filePath);
 			}
 			ProgressStop();

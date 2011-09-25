@@ -1,11 +1,11 @@
 # USB Loader GX
-# german.lang - r1114
+# german.lang - r1117
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-24 15:12+0200\n"
+"POT-Creation-Date: 2011-09-24 16:37+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -137,7 +137,7 @@ msgid "All Partitions"
 msgstr "Alle Partitionen"
 
 msgid "All files extracted."
-msgstr ""
+msgstr "Alle Dateien entpackt."
 
 msgid "All images downloaded successfully."
 msgstr "Alle Bilder erfolgreich heruntergeladen"
@@ -367,7 +367,7 @@ msgid "Continue to install game?"
 msgstr "Fortfahren um Spiel zu installieren?"
 
 msgid "Continue?"
-msgstr ""
+msgstr "Weiter?"
 
 msgid "Controllevel"
 msgstr "Alterseinstufung"
@@ -386,7 +386,7 @@ msgid "Could not create path: %s"
 msgstr "Konnte Pfad nicht erstellen: %s"
 
 msgid "Could not extract files for:"
-msgstr ""
+msgstr "Konnte Dateien nicht entpacken für:"
 
 msgid "Could not find info for this game in the wiitdb.xml."
 msgstr "Konnte keine Info für das Spiel in der wiitdb.xml finden."
@@ -410,7 +410,7 @@ msgid "Could not save."
 msgstr "Es konnte nicht gespeichert werden."
 
 msgid "Could not write file."
-msgstr ""
+msgstr "Konnte Datei nicht erstellen."
 
 msgid "Could not write to:"
 msgstr "Konnte nicht schreiben zu:"
@@ -521,10 +521,10 @@ msgid "Do you want to download this theme?"
 msgstr "Dieses Theme herunterladen?"
 
 msgid "Do you want to extract all the save games?"
-msgstr ""
+msgstr "Sollen alle Spielstände entpackt werden?"
 
 msgid "Do you want to extract the save game?"
-msgstr ""
+msgstr "Soll der Spielstand entpackt werden?"
 
 msgid "Do you want to format:"
 msgstr "Formatieren:"
@@ -637,7 +637,7 @@ msgid "Error:"
 msgstr "Fehler:"
 
 msgid "Errors occured."
-msgstr ""
+msgstr "Fehler aufgetreten."
 
 msgid "Exit"
 msgstr "Beenden"
@@ -646,19 +646,19 @@ msgid "Exit to where?"
 msgstr "Beenden zum..."
 
 msgid "Export All Saves to EmuNand"
-msgstr ""
+msgstr "Alle Spielstände nach EmuNand exportiren."
 
 msgid "Extract Save to EmuNand"
-msgstr ""
+msgstr "Spielstand auf EmuNand entpacken"
 
 msgid "Extracting file:"
-msgstr ""
+msgstr "Entpacke Datei:"
 
 msgid "Extracting files..."
 msgstr "Entpacke Dateien..."
 
 msgid "Extracting files:"
-msgstr ""
+msgstr "Entpacke Dateien:"
 
 msgid "Failed"
 msgstr "Fehlgeschlagen"
@@ -667,7 +667,7 @@ msgid "Failed formating"
 msgstr "Formatieren fehlgeschlagen"
 
 msgid "Failed to extract all files. Savegame might not exist."
-msgstr ""
+msgstr "Fehler! Nicht alle Dateien entpackt. Spielstände existieren möglicherweise nicht."
 
 msgid "Failed to extract."
 msgstr "Entpacken fehlgeschlagen."
@@ -691,7 +691,7 @@ msgid "File not found."
 msgstr "Datei nicht gefunden."
 
 msgid "Files extracted successfully."
-msgstr ""
+msgstr "Dateien erfolgreich entpackt."
 
 #, c-format
 msgid "Filesize is %i Byte."
@@ -904,7 +904,7 @@ msgid "Install a game"
 msgstr "Spiel installieren"
 
 msgid "Install finished"
-msgstr ""
+msgstr "Installation beendet"
 
 msgid "Installing content... Ok!"
 msgstr "Installiere Inhalt... OK!"
@@ -1241,7 +1241,7 @@ msgid "Prev"
 msgstr "Zurück"
 
 msgid "Process finished."
-msgstr ""
+msgstr "Vorgang abgeschlossen."
 
 msgid "Prompts Buttons"
 msgstr "Anzeige"
@@ -1271,7 +1271,7 @@ msgid "Reload SD"
 msgstr "SD Karte neuladen"
 
 msgid "Reloading game list now, please wait..."
-msgstr ""
+msgstr "Aktualisiere Spieleliste, bitte warten..."
 
 msgid "Remember Unlock"
 msgstr "Entsperrung behalten"
@@ -1337,7 +1337,7 @@ msgid "Saved"
 msgstr "Gespeichert"
 
 msgid "Savegame might not exist for this game."
-msgstr ""
+msgstr "Möglicherweise existiert kein Spielstand für dieses Spiel."
 
 msgid "Screensaver"
 msgstr "Bildschirmschoner"
@@ -1382,7 +1382,7 @@ msgid "Shutdown Wii"
 msgstr "Wii ausschalten"
 
 msgid "Skip Errors"
-msgstr ""
+msgstr "Fehler überspringen"
 
 msgid "Sneek Video Patch"
 msgstr "Sneek Video Patch"
@@ -1430,10 +1430,10 @@ msgid "Success"
 msgstr "Erfolgreich"
 
 msgid "Success."
-msgstr ""
+msgstr "Erfolg."
 
 msgid "Success:"
-msgstr "Erfolgreich:"
+msgstr "Erfolg:"
 
 msgid "Successfully Saved"
 msgstr "Erfolgreich gespeichert"
@@ -1478,10 +1478,10 @@ msgid "The game installation is disabled under this IOS because of instability i
 msgstr "Das Installieren von Spielen ist bei Verwendung dieses IOS wegen Instabilität beim USB-Schreiben deaktiviert."
 
 msgid "The save game will be extracted to your emu nand path."
-msgstr ""
+msgstr "Der Spielstand wird zum EmuNand Pfad entpackt."
 
 msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
-msgstr ""
+msgstr "Die Spielstände werden zum EmuNand-Pfad entpackt. Achtung: Alle vorhandenen Spielstände werden überschrieben."
 
 msgid "The wad file was installed"
 msgstr "Die Wad Datei wurde installiert"
