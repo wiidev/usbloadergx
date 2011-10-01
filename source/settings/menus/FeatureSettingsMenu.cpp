@@ -62,6 +62,7 @@ FeatureSettingsMenu::FeatureSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Wiinnertag" ));
 	Options->SetName(Idx++, "%s", tr( "Import Categories" ));
 	Options->SetName(Idx++, "%s", tr( "Export All Saves to EmuNand" ));
+	Options->SetName(Idx++, "%s", tr( "Dump NAND to EmuNand" ));
 
 	OldTitlesOverride = Settings.titlesOverride;
 
@@ -107,6 +108,9 @@ void FeatureSettingsMenu::SetOptionValues()
 	Options->SetValue(Idx++, " ");
 
 	//! Settings: Export Savegames to EmuNand
+	Options->SetValue(Idx++, " ");
+
+	//! Settings: Dump NAND to EmuNand
 	Options->SetValue(Idx++, " ");
 }
 
@@ -226,6 +230,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 		int choice = WindowPrompt(tr( "Do you want to extract all the save games?" ), tr("The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."), tr( "Yes" ), tr( "Cancel" ));
 		if (choice == 1)
 		{
+			ProgressCancelEnable(true);
 			StartProgress(tr("Extracting files:"), 0, 0, true, false);
 			char filePath[512];
 			char nandPath[ISFS_MAXPATH];
@@ -242,7 +247,11 @@ int FeatureSettingsMenu::GetMenuInternal()
 				ShowProgress(tr("Extracting files:"), GameTitles.GetTitle(gameList[i]), 0, 0, -1, true, false);
 
 				int ret = NandTitle::ExtractDir(nandPath, filePath);
-				if(ret < 0) //! Games with installable channels: Mario Kart, Wii Fit, etc.
+				if(ret == PROGRESS_CANCELED)
+				{
+					break;
+				}
+				else if(ret < 0) //! Games with installable channels: Mario Kart, Wii Fit, etc.
 				{
 					snprintf(nandPath, sizeof(nandPath), "/title/00010004/%02x%02x%02x%02x", gameList[i]->id[0], gameList[i]->id[1], gameList[i]->id[2], gameList[i]->id[3]);
 					snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuPath, nandPath);
@@ -264,13 +273,74 @@ int FeatureSettingsMenu::GetMenuInternal()
 			}
 
 			ProgressStop();
+			ProgressCancelEnable(false);
 
-			if(noErrors)
-				WindowPrompt(tr("Success."), tr("All files extracted."), tr("OK"));
-			else
-				WindowPrompt(tr("Process finished."), tr("Errors occured."), tr("OK"));
-
+			if(ret != PROGRESS_CANCELED)
+			{
+				if(noErrors)
+					WindowPrompt(tr("Success."), tr("All files extracted."), tr("OK"));
+				else
+					WindowPrompt(tr("Process finished."), tr("Errors occured."), tr("OK"));
+			}
 			gameList.FilterList(filter.c_str());
+		}
+	}
+
+	//! Settings: Dump NAND to EmuNand
+	else if (ret == ++Idx)
+	{
+		int choice = WindowPrompt(tr( "What to extract from NAND?" ), tr("The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."), tr( "Everything" ), tr("Enter Path"), tr( "Cancel" ));
+		if (choice)
+		{
+			char filePath[255];
+			char *nandPath = (char *) memalign(32, ISFS_MAXPATH);
+			if(!nandPath)
+			{
+				WindowPrompt(tr("Error"), tr("Not enough memory."), tr("OK"));
+				return MENU_NONE;
+			}
+
+			snprintf(nandPath, sizeof(nandPath), "/");
+
+			if(choice == 2)
+			{
+				choice = OnScreenKeyboard(nandPath, ISFS_MAXPATH, 1);
+
+				if(strlen(nandPath) > 1 && nandPath[strlen(nandPath)-1] == '/')
+					nandPath[strlen(nandPath)-1] = 0;
+			}
+
+			snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuPath, nandPath);
+
+			if(choice)
+			{
+				u32 dummy;
+				int ret = -1;
+				ProgressCancelEnable(true);
+				StartProgress(tr("Extracting nand files:"), 0, 0, true, false);
+				ShowProgress(tr("Extracting nand files:"), 0, 0, -1, true, false);
+
+				ISFS_Initialize();
+
+				if(ISFS_ReadDir(nandPath, NULL, &dummy) < 0)
+					ret = NandTitle::ExtractFile(nandPath, filePath, false);
+				else
+					ret = NandTitle::ExtractDir(nandPath, filePath, false);
+
+				ISFS_Deinitialize();
+
+				ProgressStop();
+				ProgressCancelEnable(false);
+
+				if(ret != PROGRESS_CANCELED)
+				{
+					if(ret < 0)
+						WindowPrompt(tr("Process finished."), tr("Errors occured."), tr("OK"));
+					else
+						WindowPrompt(tr("Success."), tr("All files extracted."), tr("OK"));
+				}
+			}
+			free(nandPath);
 		}
 	}
 

@@ -8,9 +8,9 @@
 #ifndef _PROGRESSWINDOW_H_
 #define _PROGRESSWINDOW_H_
 
-typedef void (*ProgressAbortCallback)(void);
-
 #ifdef __cplusplus
+
+#define PROGRESS_CANCELED	-12345
 
 void InitProgressThread();
 void ExitProgressThread();
@@ -21,9 +21,10 @@ extern "C"
 {
 #endif
 
+void ProgressCancelEnable(bool allowCancel);
 void StartProgress(const char * title, const char * msg1, const char * msg2, bool swSize, bool swTime);
 void ShowProgress(s64 done, s64 total);
-void ProgressSetAbortCallback(ProgressAbortCallback callback);
+bool ProgressCanceled();
 void ProgressStop();
 
 #ifdef __cplusplus

@@ -24,7 +24,8 @@
 /*** Variables used only in this file ***/
 static lwp_t progressthread = LWP_THREAD_NULL;
 static mutex_t ProgressMutex = LWP_MUTEX_NULL;
-static ProgressAbortCallback AbortCallback = NULL;
+static bool CancelEnabled = false;
+static bool progressCanceled = false;
 static char progressTitle[75];
 static char progressMsg1[75];
 static char progressMsg2[75];
@@ -57,6 +58,7 @@ extern "C" void StartProgress(const char * title, const char * msg1, const char 
 	else
 		progressMsg2[0] = '\0';
 
+	progressCanceled = false;
 	showSize = swSize;
 	showTime = swTime;
 	showProgress = 1;
@@ -166,6 +168,7 @@ void ShowProgress(const char *title, const char *msg1, const char *msg2, s64 don
  ***************************************************************************/
 extern "C" void ProgressStop()
 {
+	progressCanceled = false;
 	showProgress = 0;
 	progressTitle[0] = 0;
 	progressMsg1[0] = 0;
@@ -181,13 +184,21 @@ extern "C" void ProgressStop()
 }
 
 /****************************************************************************
- * ProgressSetAbortCallback
+ * ProgressCancelEnable
  *
- * Set a callback for the cancel button
+ * Enable/disable the progress cancel button
  ***************************************************************************/
-extern "C" void ProgressSetAbortCallback(ProgressAbortCallback callback)
+extern "C" void ProgressCancelEnable(bool enable)
 {
-	AbortCallback = callback;
+	CancelEnabled = enable;
+}
+
+/****************************************************************************
+ * ProgressCanceled
+ ***************************************************************************/
+extern "C" bool ProgressCanceled()
+{
+	return progressCanceled;
 }
 
 /****************************************************************************
@@ -270,6 +281,11 @@ static void UpdateProgressValues(GuiImage *progressbarImg, GuiText *prTxt, GuiTe
  ***************************************************************************/
 static void ProgressWindow(const char *title, const char *msg1, const char *msg2)
 {
+	progressCanceled = false;
+
+	usleep(500000); // wait to see if progress flag changes soon
+	if (!showProgress) return;
+
 	GuiWindow promptWindow(472, 320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
@@ -328,19 +344,19 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 	prsTxt.SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
 	prsTxt.SetPosition(-178, 40);
 
-	GuiText timeTxt((char*) NULL, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	GuiText timeTxt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
 	timeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
 	timeTxt.SetPosition(280, -50);
 
-	GuiText sizeTxt((char*) NULL, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	GuiText sizeTxt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
 	sizeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
 	sizeTxt.SetPosition(50, -50);
 
-	GuiText speedTxt((char*) NULL, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	GuiText speedTxt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
 	speedTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
 	speedTxt.SetPosition(50, -74);
 
-	GuiText prTxt((char*) NULL, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	GuiText prTxt((char*) NULL, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
 	prTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	prTxt.SetPosition(210, 40);
 
@@ -369,12 +385,10 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 		cancelTxt.SetWidescreen(Settings.widescreen);
 		cancelImg.SetWidescreen(Settings.widescreen);
 	}
+
 	GuiButton cancelBtn(&cancelImg, &cancelImg, 2, 4, 0, -45, &trigA, btnSoundOver, btnSoundClick2, 1);
 	cancelBtn.SetLabel(&cancelTxt);
 	cancelBtn.SetState(STATE_SELECTED);
-
-	usleep(400000); // wait to see if progress flag changes soon
-	if (!showProgress) return;
 
 	promptWindow.Append(&dialogBoxImg);
 	promptWindow.Append(&progressbarEmptyImg);
@@ -391,8 +405,12 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 		promptWindow.Append(&sizeTxt);
 		promptWindow.Append(&speedTxt);
 	}
-	if(AbortCallback)
+	if(CancelEnabled)
+	{
 		promptWindow.Append(&cancelBtn);
+		if(showSize)
+			cancelBtn.SetPosition(90, -45);
+	}
 
 	HaltGui();
 	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
@@ -423,7 +441,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
 		if(cancelBtn.GetState() == STATE_CLICKED)
 		{
-			if(AbortCallback) AbortCallback();
+			progressCanceled = true;
 			cancelBtn.ResetState();
 		}
 	}

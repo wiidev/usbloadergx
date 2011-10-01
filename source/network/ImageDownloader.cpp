@@ -22,13 +22,6 @@ static const char *serverURLFull = "http://wiitdb.com/wiitdb/artwork/coverfull/"
 static const char *serverURLOrigDiscs = "http://wiitdb.com/wiitdb/artwork/disc/";
 static const char *serverURLCustomDiscs = "http://wiitdb.com/wiitdb/artwork/disccustom/";
 
-static bool AbortRequested = false;
-
-static void AbortCallback(void)
-{
-	AbortRequested = true;
-}
-
 void ImageDownloader::DownloadImages()
 {
 	int choice = CheckboxWindow(tr( "Cover Download" ), 0, tr( "3D Covers" ), tr( "Flat Covers" ), tr("Full HQ Covers"), tr("Full LQ Covers"), tr( "Original Discarts" ), tr( "Custom Discarts" )); // ask for download choice
@@ -64,12 +57,12 @@ void ImageDownloader::Start()
 		return;
 	}
 
-	AbortRequested = false;
-	ProgressSetAbortCallback(AbortCallback);
+	ProgressCancelEnable(true);
 
 	DownloadProcess(TotalDownloadCount);
 
-	ProgressSetAbortCallback(NULL);
+	ProgressCancelEnable(false);
+
 	ProgressStop();
 
 	if(MissingImagesCount == 0)
@@ -145,7 +138,7 @@ int ImageDownloader::DownloadProcess(int TotalDownloadCount)
 
 	for(u32 i = 0, pos = 0; i < MissingImages.size(); ++i, ++pos)
 	{
-		if(AbortRequested)
+		if(ProgressCanceled())
 			break;
 
 		snprintf(progressMsg, sizeof(progressMsg), "http://wiitdb.com : %s.png", MissingImages[i].gameID.c_str());
