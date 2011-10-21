@@ -46,13 +46,13 @@
 #include "utils/ShowError.h"
 #include "prompts/PromptWindows.h"
 #include "FileOperations/fileops.h"
-#include "xml/WiiTDB.hpp"
+#include "xml/GameTDB.hpp"
 #include "wad/nandtitle.h"
 #include "wad/wad.h"
 #include "sys.h"
 #include "svnrev.h"
 
-static const char * WiiTDB_URL = "http://wiitdb.com/wiitdb.zip";
+static const char * GameTDB_URL = "http://gametdb.com/wiitdb.zip";
 
 /****************************************************************************
  * Checking if an Update is available
@@ -97,7 +97,7 @@ int CheckForBetaUpdate()
 	return revnumber;
 }
 
-static bool CheckNewWiiTDBVersion(const char *url)
+static bool CheckNewGameTDBVersion(const char *url)
 {
 	u64 Version = 0;
 
@@ -105,10 +105,10 @@ static bool CheckNewWiiTDBVersion(const char *url)
 	if(!HEAD_Responde)
 		return false;
 
-	char * version_ptr = strstr(HEAD_Responde, "X-WiiTDB-Timestamp: ");
+	char * version_ptr = strstr(HEAD_Responde, "X-GameTDB-Timestamp: ");
 	if(version_ptr)
 	{
-		version_ptr += strlen("X-WiiTDB-Timestamp: ");
+		version_ptr += strlen("X-GameTDB-Timestamp: ");
 		Version = strtoull(version_ptr, NULL, 10);
 	}
 
@@ -120,27 +120,27 @@ static bool CheckNewWiiTDBVersion(const char *url)
 		Filepath += '/';
 	Filepath += "wiitdb.xml";
 
-	WiiTDB XML_DB;
+	GameTDB XML_DB;
 
 	if(!XML_DB.OpenFile((Filepath.c_str())))
 		return true;	//! If no file exists we need the file
 
-	u64 ExistingVersion = XML_DB.GetWiiTDBVersion();
+	u64 ExistingVersion = XML_DB.GetGameTDBVersion();
 
-	gprintf("Existing WiiTDB Version: %llu Online WiiTDB Version: %llu\n", ExistingVersion, Version);
+	gprintf("Existing GameTDB Version: %llu Online GameTDB Version: %llu\n", ExistingVersion, Version);
 
 	return (ExistingVersion != Version);
 }
 
-int UpdateWiiTDB()
+int UpdateGameTDB()
 {
-	if(CheckNewWiiTDBVersion(WiiTDB_URL) == false)
+	if(CheckNewGameTDBVersion(GameTDB_URL) == false)
 	{
-		gprintf("Not updating WiiTDB: Version is the same\n");
+		gprintf("Not updating GameTDB: Version is the same\n");
 		return -1;
 	}
 
-	gprintf("Updating WiiTDB...\n");
+	gprintf("Updating GameTDB...\n");
 
 	string ZipPath = Settings.titlestxt_path;
 	if(Settings.titlestxt_path[ZipPath.size()-1] != '/')
@@ -148,7 +148,7 @@ int UpdateWiiTDB()
 
 	ZipPath += "wiitdb.zip";
 
-	int filesize = DownloadFileToPath(WiiTDB_URL, ZipPath.c_str(), false);
+	int filesize = DownloadFileToPath(GameTDB_URL, ZipPath.c_str(), false);
 
 	if(filesize <= 0)
 		return -1;
@@ -161,7 +161,7 @@ int UpdateWiiTDB()
 	remove(ZipPath.c_str());
 
 	//! Reload all titles because the file changed now.
-	GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path, true);
+	GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, true);
 
 	return (result ? filesize : -1);
 }
@@ -288,7 +288,7 @@ static int ApplicationDownload(int newrev)
 	{
 		UpdateIconPng();
 		UpdateMetaXml();
-		UpdateWiiTDB();
+		UpdateGameTDB();
 		DownloadAllLanguageFiles();
 	}
 
@@ -321,7 +321,7 @@ int UpdateApp()
 		return -1;
 	}
 
-	int choice = WindowPrompt(tr( "What do you want to update?" ), 0, "USB Loader GX", tr( "WiiTDB Files" ), tr( "Language File" ), tr( "Cancel" ));
+	int choice = WindowPrompt(tr( "What do you want to update?" ), 0, "USB Loader GX", tr( "GameTDB Files" ), tr( "Language File" ), tr( "Cancel" ));
 	if(choice == 0)
 		return -1;
 
@@ -338,9 +338,9 @@ int UpdateApp()
 	}
 	else if (choice == 2)
 	{
-		if(UpdateWiiTDB() < 0)
+		if(UpdateGameTDB() < 0)
 		{
-			WindowPrompt(fmt("%s", tr( "WiiTDB is up to date." )), 0, tr("OK"));
+			WindowPrompt(fmt("%s", tr( "GameTDB is up to date." )), 0, tr("OK"));
 			return 1;
 		}
 		else

@@ -21,8 +21,8 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  ***************************************************************************/
-#ifndef WIITDB_HPP_
-#define WIITDB_HPP_
+#ifndef GAMETDB_HPP_
+#define GAMETDB_HPP_
 
 #include <vector>
 #include <string>
@@ -63,19 +63,19 @@ typedef struct _GameOffsets
 	unsigned int nodesize;
 } __attribute__((__packed__)) GameOffsets;
 
-class WiiTDB
+class GameTDB
 {
 	public:
 		//! Constructor
-		WiiTDB();
+		GameTDB();
 		//! Constructor
 		//! If filepath is passed the xml file is opened and the node offsets are loaded
-		WiiTDB(const char * filepath);
+		GameTDB(const char * filepath);
 		//! Destructor
-		~WiiTDB();
+		~GameTDB();
 		//! If filepath is passed the xml file is opened and the node offsets are loaded
 		bool OpenFile(const char * filepath);
-		//! Closes the WiiTDB xml file
+		//! Closes the GameTDB xml file
 		void CloseFile();
 		//! Set the language code which should be use to find the appropriate language
 		//! If the language code is not found, the language code defaults to EN
@@ -99,7 +99,7 @@ class WiiTDB
 		//! Get the genre list of a game for a specific game id
 		bool GetGenreList(const char * id, vector<string> & genre);
 		//! Get the rating type for a specific game id
-		//! The rating type can be converted to a string with WiiTDB::RatingToString(rating)
+		//! The rating type can be converted to a string with GameTDB::RatingToString(rating)
 		int GetRating(const char * id);
 		//! Get the rating value for a specific game id
 		bool GetRatingValue(const char * id, string & rating_value);
@@ -129,8 +129,8 @@ class WiiTDB
 		static int StringToRating(const char *rate_string);
 		//! Convert a rating to another rating
 		static int ConvertRating(const char *value, const char *from, const char *to);
-		//! Get the version of the wiitdb xml database
-		unsigned long long GetWiiTDBVersion();
+		//! Get the version of the gametdb xml database
+		unsigned long long GetGameTDBVersion();
 		//! Get the entry count in the xml database
 		inline size_t GetEntryCount() { return OffsetMap.size(); };
 	private:

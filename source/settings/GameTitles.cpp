@@ -2,7 +2,7 @@
 #include "GameTitles.h"
 #include "CSettings.h"
 #include "usbloader/GameList.h"
-#include "xml/WiiTDB.hpp"
+#include "xml/GameTDB.hpp"
 
 CGameTitles GameTitles;
 
@@ -38,7 +38,7 @@ const char * CGameTitles::GetTitle(const char * id) const
 			return TitleList[i].Title.c_str();
 	}
 
-	//! Since not found in the WiiTDB search in the game header for a title
+	//! Since not found in the GameTDB search in the game header for a title
 	if(gameList.GameCount() != gameList.size())
 		gameList.LoadUnfiltered();
 
@@ -209,7 +209,7 @@ void CGameTitles::RemoveUnusedCache(std::vector<std::string> &MissingTitles)
 	}
 }
 
-void CGameTitles::LoadTitlesFromWiiTDB(const char * path, bool forceCacheReload)
+void CGameTitles::LoadTitlesFromGameTDB(const char * path, bool forceCacheReload)
 {
 	this->SetDefault();
 
@@ -242,7 +242,7 @@ void CGameTitles::LoadTitlesFromWiiTDB(const char * path, bool forceCacheReload)
 
 	std::string Title;
 
-	WiiTDB XML_DB(Filepath.c_str());
+	GameTDB XML_DB(Filepath.c_str());
 	XML_DB.SetLanguageCode(Settings.db_language);
 	int Rating;
 	std::string RatValTxt;
@@ -264,7 +264,7 @@ void CGameTitles::LoadTitlesFromWiiTDB(const char * path, bool forceCacheReload)
 		if(!XML_DB.GetRatingValue(MissingTitles[i].c_str(), RatValTxt))
 			continue;
 
-		TitleList[TitleList.size()-1].ParentalRating = WiiTDB::ConvertRating(RatValTxt.c_str(), WiiTDB::RatingToString(Rating), "PEGI");
+		TitleList[TitleList.size()-1].ParentalRating = GameTDB::ConvertRating(RatValTxt.c_str(), GameTDB::RatingToString(Rating), "PEGI");
 		int ret = XML_DB.GetPlayers(MissingTitles[i].c_str());
 		if(ret > 0)
 			TitleList[TitleList.size()-1].PlayersCount = ret;

@@ -31,7 +31,7 @@
 #include "language/gettext.h"
 #include "FileOperations/fileops.h"
 #include "prompts/ProgressWindow.h"
-#include "xml/WiiTDB.hpp"
+#include "xml/GameTDB.hpp"
 #include "utils/StringTools.h"
 #include "svnrev.h"
 
@@ -352,9 +352,9 @@ bool CGameCategories::isInCategory(const char *gameID, unsigned int id)
 	return false;
 }
 
-bool CGameCategories::ImportFromWiiTDB(const string &xmlpath)
+bool CGameCategories::ImportFromGameTDB(const string &xmlpath)
 {
-	WiiTDB XML_DB;
+	GameTDB XML_DB;
 
 	if(!XML_DB.OpenFile(xmlpath.c_str()))
 		return false;

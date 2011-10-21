@@ -21,7 +21,7 @@
 #include "menu.h"
 #include "audio.h"
 #include "wad/wad.h"
-#include "xml/WiiTDB.hpp"
+#include "xml/GameTDB.hpp"
 #include "wad/nandtitle.h"
 #include "../usbloader/utils.h"
 #include "../gecko.h"
@@ -75,7 +75,7 @@ bool TitleSelector(char output[])
 	std::string Filepath = Settings.titlestxt_path;
 	Filepath += "wiitdb.xml";
 
-	WiiTDB *XML_DB = new WiiTDB(Filepath.c_str());
+	GameTDB *XML_DB = new GameTDB(Filepath.c_str());
 	XML_DB->SetLanguageCode(Settings.db_language);
 
 	s32 i = 0;
@@ -262,7 +262,7 @@ int TitleBrowser()
 	std::string Filepath = Settings.titlestxt_path;
 	Filepath += "wiitdb.xml";
 
-	WiiTDB *XML_DB = new WiiTDB(Filepath.c_str());
+	GameTDB *XML_DB = new GameTDB(Filepath.c_str());
 	XML_DB->SetLanguageCode(Settings.db_language);
 
 	u32 i = 0;

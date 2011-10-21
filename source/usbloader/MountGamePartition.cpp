@@ -10,7 +10,7 @@
 #include "usbloader/wbfs.h"
 #include "usbloader/GameList.h"
 #include "settings/GameTitles.h"
-#include "xml/WiiTDB.hpp"
+#include "xml/GameTDB.hpp"
 
 static int FindGamePartition()
 {
@@ -144,14 +144,14 @@ int MountGamePartition(bool ShowGUI)
 		Sys_LoadMenu();
 	}
 
-	gprintf("LoadTitlesFromWiiTDB\n");
+	gprintf("LoadTitlesFromGameTDB\n");
 	//! Clear list if available
 	GameTitles.Clear();
 
-	//! gameList is loaded in GameTitles.LoadTitlesFromWiiTDB after cache file load
+	//! gameList is loaded in GameTitles.LoadTitlesFromGameTDB after cache file load
 	//! for speed up purpose. If titles override active, load game list here.
 	if(Settings.titlesOverride)
-		GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
+		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
 	else
 		gameList.LoadUnfiltered();
 

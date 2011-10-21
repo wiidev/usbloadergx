@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-24 16:37+0200\n"
+"POT-Creation-Date: 2011-10-21 20:31+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
+"Language: German\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: German\n"
 
 msgid " could not be downloaded."
 msgstr " konnte nicht heruntergeladen werden."
@@ -166,8 +166,8 @@ msgstr "April"
 msgid "Are you sure you want to delete this category?"
 msgstr "Soll diese Kategorie gelöscht werden?"
 
-msgid "Are you sure you want to import game categories from WiiTDB?"
-msgstr "Sollen die Spiele-Kategorien aus der WiiTDB importiert werden?"
+msgid "Are you sure you want to import game categories from GameTDB?"
+msgstr ""
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "Bist du sicher, dass du USB Loader GX sperren willst?"
@@ -577,6 +577,9 @@ msgstr "Lade Diskcover herunter"
 msgid "Downloading pagelist:"
 msgstr "Lade Seitenliste herunter:"
 
+msgid "Dump NAND to EmuNand"
+msgstr ""
+
 msgid "Dutch"
 msgstr "Niederländisch"
 
@@ -591,6 +594,9 @@ msgstr "FEHLER: Theme kann nicht eingerichtet werden."
 
 msgid "English"
 msgstr "Englisch"
+
+msgid "Enter Path"
+msgstr ""
 
 msgid "Error"
 msgstr "Fehler"
@@ -639,6 +645,9 @@ msgstr "Fehler:"
 msgid "Errors occured."
 msgstr "Fehler aufgetreten."
 
+msgid "Everything"
+msgstr ""
+
 msgid "Exit"
 msgstr "Beenden"
 
@@ -659,6 +668,9 @@ msgstr "Entpacke Dateien..."
 
 msgid "Extracting files:"
 msgstr "Entpacke Dateien:"
+
+msgid "Extracting nand files:"
+msgstr ""
 
 msgid "Failed"
 msgstr "Fehlgeschlagen"
@@ -816,6 +828,15 @@ msgstr "Spiel ist bereits installiert:"
 
 msgid "Game/Install Partition"
 msgstr "Spiel/Instal. Partition"
+
+msgid "GameTDB Files"
+msgstr ""
+
+msgid "GameTDB Path"
+msgstr ""
+
+msgid "GameTDB is up to date."
+msgstr ""
 
 msgid "Gamename [GAMEID]"
 msgstr "Spielname [SPIELID]"
@@ -1474,6 +1495,9 @@ msgstr "Die .them Datei wurde in der zip nicht gefunden."
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Das eingegebene Verzeichnis existiert nicht. Möchtest du es erstellen?"
 
+msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
+msgstr ""
+
 msgid "The game installation is disabled under this IOS because of instability in usb write."
 msgstr "Das Installieren von Spielen ist bei Verwendung dieses IOS wegen Instabilität beim USB-Schreiben deaktiviert."
 
@@ -1517,8 +1541,8 @@ msgstr "Noch:"
 msgid "Title Launcher"
 msgstr "Channel Launcher"
 
-msgid "Titles from WiiTDB"
-msgstr "Namen aus WiiTDB"
+msgid "Titles from GameTDB"
+msgstr ""
 
 msgid "Tooltips"
 msgstr "Quickinfo"
@@ -1635,6 +1659,9 @@ msgstr "Was möchtest du aktualisieren?"
 msgid "What should be deleted for this game title:"
 msgstr "Was sollte bei diesem Spiel gelöscht werden:"
 
+msgid "What to extract from NAND?"
+msgstr ""
+
 msgid "WiFi Features"
 msgstr "WiFi Fähigkeiten"
 
@@ -1649,15 +1676,6 @@ msgstr "Wii Menü"
 
 msgid "Wii Settings"
 msgstr "Wii Datenverwaltung"
-
-msgid "WiiTDB Files"
-msgstr "WiiTDB Dateien"
-
-msgid "WiiTDB Path"
-msgstr "WiiTDB"
-
-msgid "WiiTDB is up to date."
-msgstr "WiiTDB ist aktuell."
 
 msgid "Wiilight"
 msgstr "Licht am Laufwerk"
@@ -1713,11 +1731,11 @@ msgstr "Dateien fehlen"
 msgid "for FAT/NTFS support"
 msgstr "für den FAT/NTFS Support"
 
+msgid "for GameTDB and hosting covers / disc images"
+msgstr ""
+
 msgid "for Ocarina"
 msgstr "für Ocarina"
-
-msgid "for WiiTDB and hosting covers / disc images"
-msgstr "für WiiTDB und dem Hosten der (Disc) Cover"
 
 msgid "for diverse patches"
 msgstr "für diverse Patches"
@@ -1748,6 +1766,24 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "Are you sure you want to import game categories from WiiTDB?"
+#~ msgstr "Sollen die Spiele-Kategorien aus der WiiTDB importiert werden?"
+
+#~ msgid "Titles from WiiTDB"
+#~ msgstr "Namen aus WiiTDB"
+
+#~ msgid "WiiTDB Files"
+#~ msgstr "WiiTDB Dateien"
+
+#~ msgid "WiiTDB Path"
+#~ msgstr "WiiTDB"
+
+#~ msgid "WiiTDB is up to date."
+#~ msgstr "WiiTDB ist aktuell."
+
+#~ msgid "for WiiTDB and hosting covers / disc images"
+#~ msgstr "für WiiTDB und dem Hosten der (Disc) Cover"
 
 #~ msgid "Automatic port switching is done on the fly. You need to change all custom paths to SD-Card first for this option or else it could damage a filesystem."
 #~ msgstr "Automatische Portumschaltung wird jetzt direkt zur Programmlaufzeit durchgeführt. Für diese Option müssen zuerst alle eigenen Pfade auf die SD Karte verweisen, da ansonsten das Dateisystem beschädigt werden könnte."

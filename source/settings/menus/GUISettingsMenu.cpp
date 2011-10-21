@@ -31,6 +31,7 @@
 #include "settings/GameTitles.h"
 #include "settings/CGameCategories.hpp"
 #include "usbloader/wbfs.h"
+#include "themes/CTheme.h"
 #include "utils/tools.h"
 
 static const char * OnOffText[MAX_ON_OFF] =
@@ -218,7 +219,7 @@ int GuiSettingsMenu::GetMenuInternal()
 		if (returnhere == 2)
 		{
 			//! Language changed. Reload game titles with new lang code.
-			GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
+			GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
 			return MENU_SETTINGS;
 		}
 
@@ -347,6 +348,15 @@ int GuiSettingsMenu::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.UseSystemFont >= MAX_ON_OFF) Settings.UseSystemFont = 0;
+
+		HaltGui();
+		Theme::LoadFont(Settings.ConfigPath);
+		ResumeGui();
+
+		if(Settings.FontScaleFactor == 1.0f && Settings.UseSystemFont == ON)
+			Settings.FontScaleFactor = 0.8f;
+		else if(Settings.FontScaleFactor == 0.8f && Settings.UseSystemFont == OFF)
+			Settings.FontScaleFactor = 1.0f;
 	}
 
 	SetOptionValues();

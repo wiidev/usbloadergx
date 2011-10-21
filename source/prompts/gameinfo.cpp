@@ -21,7 +21,7 @@
 #include "gameinfo.h"
 #include "usbloader/GameList.h"
 #include "gecko.h"
-#include "xml/WiiTDB.hpp"
+#include "xml/GameTDB.hpp"
 #include "utils/ShowError.h"
 #include "BoxCover/BoxCover.hpp"
 
@@ -40,7 +40,7 @@ static int InternalShowGameInfo(char *ID)
 	char xmlpath[300];
 	snprintf(xmlpath, sizeof(xmlpath), "%swiitdb.xml", Settings.titlestxt_path);
 
-	WiiTDB XML_DB;
+	GameTDB XML_DB;
 
 	if(!XML_DB.OpenFile(xmlpath))
 	{
@@ -130,7 +130,7 @@ static int InternalShowGameInfo(char *ID)
 	GuiText * genreTitleTxt = NULL;
 	GuiText ** genreTxt = NULL;
 	GuiText ** wifiTxt = NULL;
-	GuiText * wiitdb1Txt = NULL;
+	GuiText * gametdb1Txt = NULL;
 	GuiText * memTxt = NULL;
 
 	GuiWindow gameinfoWindow(600, 308);
@@ -824,10 +824,10 @@ static int InternalShowGameInfo(char *ID)
 		txtWindow.Append(&dnBtn);
 	}
 
-	wiitdb1Txt = new GuiText("http://wiitdb.com", 16, ( GXColor ) {0, 0, 0, 255});
-	wiitdb1Txt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-	wiitdb1Txt->SetPosition(40, -15);
-	gameinfoWindow.Append(wiitdb1Txt);
+	gametdb1Txt = new GuiText("http://gametdb.com", 16, ( GXColor ) {0, 0, 0, 255});
+	gametdb1Txt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+	gametdb1Txt->SetPosition(40, -15);
+	gameinfoWindow.Append(gametdb1Txt);
 	if(coverImg) gameinfoWindow.Append(coverImg);
 
 	// Set info window first
@@ -1020,7 +1020,7 @@ static int InternalShowGameInfo(char *ID)
 	delete titleTxt;
 	delete synopsisTxt;
 	delete genreTitleTxt;
-	delete wiitdb1Txt;
+	delete gametdb1Txt;
 	delete memTxt;
 	delete categoryTitle;
 

@@ -1,5 +1,5 @@
-#ifndef WIITDB_TITLES_H_
-#define WIITDB_TITLES_H_
+#ifndef GAMETDB_TITLES_H_
+#define GAMETDB_TITLES_H_
 
 #include <string>
 #include <vector>
@@ -18,7 +18,7 @@ typedef struct _GameTitle
 class CGameTitles
 {
 	public:
-		//! Set a game title from wiitdb
+		//! Set a game title from GameTDB
 		void SetGameTitle(const char * id, const char * title);
 		//! Overload
 		void SetGameTitle(const u8 * id, const char * title) { SetGameTitle((const char *) id, title); };
@@ -34,8 +34,8 @@ class CGameTitles
 		int GetParentalRating(const char * id) const;
 		//! Get possible number of players for this game
 		int GetPlayersCount(const char * id) const;
-		//! Load Game Titles from WiiTDB
-		void LoadTitlesFromWiiTDB(const char * path, bool forceCacheReload = false);
+		//! Load Game Titles from GameTDB
+		void LoadTitlesFromGameTDB(const char * path, bool forceCacheReload = false);
 		//! Set default game titles
 		void SetDefault();
 		//! Free memory and remove all titles - Same as SetDefault()

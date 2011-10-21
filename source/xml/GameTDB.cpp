@@ -25,7 +25,7 @@
 #include <stdlib.h>
 #include <string>
 #include <cstring>
-#include "WiiTDB.hpp"
+#include "GameTDB.hpp"
 
 #define NAME_OFFSET_DB  "wiitdb_offsets.bin"
 #define MAXREADSIZE	 1024*1024   // Cache size only for parsing the offsets: 1MB
@@ -48,23 +48,23 @@ static const ReplaceStruct Replacements[] =
 	{ NULL, '\0', 0 }
 };
 
-WiiTDB::WiiTDB()
+GameTDB::GameTDB()
 	: file(0), LangCode("EN"), GameNodeCache(0)
 {
 }
 
-WiiTDB::WiiTDB(const char * filepath)
+GameTDB::GameTDB(const char * filepath)
 	: file(0), LangCode("EN"), GameNodeCache(0)
 {
 	OpenFile(filepath);
 }
 
-WiiTDB::~WiiTDB()
+GameTDB::~GameTDB()
 {
 	CloseFile();
 }
 
-bool WiiTDB::OpenFile(const char * filepath)
+bool GameTDB::OpenFile(const char * filepath)
 {
 	if(!filepath)
 		return false;
@@ -85,7 +85,7 @@ bool WiiTDB::OpenFile(const char * filepath)
 	return (file != NULL);
 }
 
-void WiiTDB::CloseFile()
+void GameTDB::CloseFile()
 {
 	OffsetMap.clear();
 	vector<GameOffsets>().swap(OffsetMap);
@@ -99,7 +99,7 @@ void WiiTDB::CloseFile()
 	file = NULL;
 }
 
-bool WiiTDB::LoadGameOffsets(const char * path)
+bool GameTDB::LoadGameOffsets(const char * path)
 {
 	if(!path)
 		return false;
@@ -119,7 +119,7 @@ bool WiiTDB::LoadGameOffsets(const char * path)
 		return result;
 	}
 
-	unsigned long long ExistingVersion = GetWiiTDBVersion();
+	unsigned long long ExistingVersion = GetGameTDBVersion();
 	unsigned long long Version = 0;
 	unsigned int NodeCount = 0;
 
@@ -164,7 +164,7 @@ bool WiiTDB::LoadGameOffsets(const char * path)
 	return true;
 }
 
-bool WiiTDB::SaveGameOffsets(const char * path)
+bool GameTDB::SaveGameOffsets(const char * path)
 {
 	if(OffsetMap.size() == 0 || !path)
 		return false;
@@ -173,7 +173,7 @@ bool WiiTDB::SaveGameOffsets(const char * path)
 	if(!fp)
 		return false;
 
-	unsigned long long ExistingVersion = GetWiiTDBVersion();
+	unsigned long long ExistingVersion = GetGameTDBVersion();
 	unsigned int NodeCount = OffsetMap.size();
 
 	if(fwrite(&ExistingVersion, 1, sizeof(ExistingVersion), fp) != sizeof(ExistingVersion))
@@ -199,7 +199,7 @@ bool WiiTDB::SaveGameOffsets(const char * path)
 	return true;
 }
 
-unsigned long long WiiTDB::GetWiiTDBVersion()
+unsigned long long GameTDB::GetGameTDBVersion()
 {
 	if(!file)
 		return 0;
@@ -216,7 +216,7 @@ unsigned long long WiiTDB::GetWiiTDBVersion()
 	return strtoull(VersionText, NULL, 10);
 }
 
-int WiiTDB::GetData(char * data, int offset, int size)
+int GameTDB::GetData(char * data, int offset, int size)
 {
 	if(!file || !data)
 		return -1;
@@ -226,7 +226,7 @@ int WiiTDB::GetData(char * data, int offset, int size)
 	return fread(data, 1, size, file);
 }
 
-char * WiiTDB::LoadGameNode(const char * id)
+char * GameTDB::LoadGameNode(const char * id)
 {
 	unsigned int read = 0;
 
@@ -249,7 +249,7 @@ char * WiiTDB::LoadGameNode(const char * id)
 	return data;
 }
 
-char * WiiTDB::GetGameNode(const char * id)
+char * GameTDB::GetGameNode(const char * id)
 {
 	char * data = NULL;
 
@@ -278,7 +278,7 @@ char * WiiTDB::GetGameNode(const char * id)
 	return data;
 }
 
-GameOffsets * WiiTDB::GetGameOffset(const char * gameID)
+GameOffsets * GameTDB::GetGameOffset(const char * gameID)
 {
 	for(unsigned int i = 0; i < OffsetMap.size(); ++i)
 	{
@@ -327,7 +327,7 @@ static inline char * CleanText(char * in_text)
 	return in_text;
 }
 
-char * WiiTDB::GetNodeText(char * data, const char * nodestart, const char * nodeend)
+char * GameTDB::GetNodeText(char * data, const char * nodestart, const char * nodeend)
 {
 	if(!data || !nodestart || !nodeend)
 		return NULL;
@@ -347,7 +347,7 @@ char * WiiTDB::GetNodeText(char * data, const char * nodestart, const char * nod
 	return CleanText(position);
 }
 
-char * WiiTDB::SeekLang(char * text, const char * langcode)
+char * GameTDB::SeekLang(char * text, const char * langcode)
 {
 	if(!text || !langcode) return NULL;
 
@@ -373,7 +373,7 @@ char * WiiTDB::SeekLang(char * text, const char * langcode)
 	return NULL;
 }
 
-bool WiiTDB::ParseFile()
+bool GameTDB::ParseFile()
 {
 	OffsetMap.clear();
 
@@ -437,7 +437,7 @@ bool WiiTDB::ParseFile()
 	return true;
 }
 
-bool WiiTDB::GetTitle(const char * id, string & title)
+bool GameTDB::GetTitle(const char * id, string & title)
 {
 	if(!id)
 		return false;
@@ -471,7 +471,7 @@ bool WiiTDB::GetTitle(const char * id, string & title)
 	return true;
 }
 
-bool WiiTDB::GetSynopsis(const char * id, string & synopsis)
+bool GameTDB::GetSynopsis(const char * id, string & synopsis)
 {
 	if(!id)
 		return false;
@@ -505,7 +505,7 @@ bool WiiTDB::GetSynopsis(const char * id, string & synopsis)
 	return true;
 }
 
-bool WiiTDB::GetRegion(const char * id, string & region)
+bool GameTDB::GetRegion(const char * id, string & region)
 {
 	if(!id)
 		return false;
@@ -528,7 +528,7 @@ bool WiiTDB::GetRegion(const char * id, string & region)
 	return true;
 }
 
-bool WiiTDB::GetDeveloper(const char * id, string & dev)
+bool GameTDB::GetDeveloper(const char * id, string & dev)
 {
 	if(!id)
 		return false;
@@ -551,7 +551,7 @@ bool WiiTDB::GetDeveloper(const char * id, string & dev)
 	return true;
 }
 
-bool WiiTDB::GetPublisher(const char * id, string & pub)
+bool GameTDB::GetPublisher(const char * id, string & pub)
 {
 	if(!id)
 		return false;
@@ -574,7 +574,7 @@ bool WiiTDB::GetPublisher(const char * id, string & pub)
 	return true;
 }
 
-unsigned int WiiTDB::GetPublishDate(const char * id)
+unsigned int GameTDB::GetPublishDate(const char * id)
 {
 	if(!id)
 		return 0;
@@ -621,7 +621,7 @@ unsigned int WiiTDB::GetPublishDate(const char * id)
 	return ((year & 0xFFFF) << 16 | (month & 0xFF) << 8 | (day & 0xFF));
 }
 
-bool WiiTDB::GetGenreList(const char * id, vector<string> & genre)
+bool GameTDB::GetGenreList(const char * id, vector<string> & genre)
 {
 	if(!id)
 		return false;
@@ -673,7 +673,7 @@ bool WiiTDB::GetGenreList(const char * id, vector<string> & genre)
 	return true;
 }
 
-const char * WiiTDB::RatingToString(int rating)
+const char * GameTDB::RatingToString(int rating)
 {
 	switch(rating)
 	{
@@ -690,7 +690,7 @@ const char * WiiTDB::RatingToString(int rating)
 	return NULL;
 }
 
-int WiiTDB::StringToRating(const char *rate_string)
+int GameTDB::StringToRating(const char *rate_string)
 {
 	if (strcasecmp(rate_string, "CERO") == 0)
 		return 0;
@@ -704,7 +704,7 @@ int WiiTDB::StringToRating(const char *rate_string)
 	return -1;
 }
 
-int WiiTDB::ConvertRating(const char *value, const char *from, const char *to)
+int GameTDB::ConvertRating(const char *value, const char *from, const char *to)
 {
 	if (strcasecmp(from, to) == 0)
 	{
@@ -770,7 +770,7 @@ int WiiTDB::ConvertRating(const char *value, const char *from, const char *to)
 	return -1;
 }
 
-int WiiTDB::GetRating(const char * id)
+int GameTDB::GetRating(const char * id)
 {
 	int rating = -1;
 
@@ -802,7 +802,7 @@ int WiiTDB::GetRating(const char * id)
 	return rating;
 }
 
-bool WiiTDB::GetRatingValue(const char * id, string & rating_value)
+bool GameTDB::GetRatingValue(const char * id, string & rating_value)
 {
 	if(!id)
 		return false;
@@ -832,7 +832,7 @@ bool WiiTDB::GetRatingValue(const char * id, string & rating_value)
 	return true;
 }
 
-int WiiTDB::GetRatingDescriptorList(const char * id, vector<string> & desc_list)
+int GameTDB::GetRatingDescriptorList(const char * id, vector<string> & desc_list)
 {
 	if(!id)
 		return -1;
@@ -876,7 +876,7 @@ int WiiTDB::GetRatingDescriptorList(const char * id, vector<string> & desc_list)
 	return desc_list.size();
 }
 
-int WiiTDB::GetWifiPlayers(const char * id)
+int GameTDB::GetWifiPlayers(const char * id)
 {
 	int players = -1;
 
@@ -899,7 +899,7 @@ int WiiTDB::GetWifiPlayers(const char * id)
 	return players;
 }
 
-int WiiTDB::GetWifiFeatureList(const char * id, vector<string> & feat_list)
+int GameTDB::GetWifiFeatureList(const char * id, vector<string> & feat_list)
 {
 	if(!id)
 		return -1;
@@ -948,7 +948,7 @@ int WiiTDB::GetWifiFeatureList(const char * id, vector<string> & feat_list)
 	return feat_list.size();
 }
 
-int WiiTDB::GetPlayers(const char * id)
+int GameTDB::GetPlayers(const char * id)
 {
 	int players = -1;
 
@@ -971,7 +971,7 @@ int WiiTDB::GetPlayers(const char * id)
 	return players;
 }
 
-int WiiTDB::GetAccessoirList(const char * id, vector<Accessoir> & acc_list)
+int GameTDB::GetAccessoirList(const char * id, vector<Accessoir> & acc_list)
 {
 	if(!id)
 		return -1;
@@ -1031,7 +1031,7 @@ int WiiTDB::GetAccessoirList(const char * id, vector<Accessoir> & acc_list)
 	return acc_list.size();
 }
 
-int WiiTDB::GetCaseColor(const char * id)
+int GameTDB::GetCaseColor(const char * id)
 {
 	int color = -1;
 
@@ -1054,7 +1054,7 @@ int WiiTDB::GetCaseColor(const char * id)
 	return color;
 }
 
-bool WiiTDB::GetGameXMLInfo(const char * id, GameXMLInfo * gameInfo)
+bool GameTDB::GetGameXMLInfo(const char * id, GameXMLInfo * gameInfo)
 {
 	if(!id || !gameInfo)
 		return false;

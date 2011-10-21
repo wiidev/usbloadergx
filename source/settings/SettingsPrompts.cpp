@@ -320,7 +320,7 @@ int MenuLanguageSelect()
 	//! Reload game list in new language
 	if(strcmp(Settings.db_language, OldLangCode) != 0)
 	{
-		GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
+		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
 	}
 
 	w.SetEffect( EFFECT_FADE, -20 );

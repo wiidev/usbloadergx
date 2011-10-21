@@ -231,7 +231,7 @@ int GameList::FilterList(const wchar_t * gameFilter)
 			if (GameConfig && GameConfig->parentalcontrol > Settings.parentalcontrol)
 				continue;
 
-			// Check game rating in WiiTDB, since the default Wii parental control setting is enabled
+			// Check game rating in GameTDB, since the default Wii parental control setting is enabled
 			int rating = GameTitles.GetParentalRating((char *) header->id);
 			if (rating > Settings.parentalcontrol)
 				continue;

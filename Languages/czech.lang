@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-24 15:12+0200\n"
+"POT-Creation-Date: 2011-10-21 20:31+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " nelze stáhnout."
@@ -166,7 +166,7 @@ msgstr "Dub"
 msgid "Are you sure you want to delete this category?"
 msgstr ""
 
-msgid "Are you sure you want to import game categories from WiiTDB?"
+msgid "Are you sure you want to import game categories from GameTDB?"
 msgstr ""
 
 msgid "Are you sure you want to lock USB Loader GX?"
@@ -577,6 +577,9 @@ msgstr "Stahuji originální potisky"
 msgid "Downloading pagelist:"
 msgstr "Stahuji stránku:"
 
+msgid "Dump NAND to EmuNand"
+msgstr ""
+
 msgid "Dutch"
 msgstr "Dánsky"
 
@@ -591,6 +594,9 @@ msgstr "CHYBA: Nelze nastavit téma."
 
 msgid "English"
 msgstr "Anglicky"
+
+msgid "Enter Path"
+msgstr ""
 
 msgid "Error"
 msgstr "Chyba"
@@ -639,6 +645,9 @@ msgstr "Chyba:"
 msgid "Errors occured."
 msgstr ""
 
+msgid "Everything"
+msgstr ""
+
 msgid "Exit"
 msgstr "Ukoncit"
 
@@ -658,6 +667,9 @@ msgid "Extracting files..."
 msgstr "Rozbaluji soubory..."
 
 msgid "Extracting files:"
+msgstr ""
+
+msgid "Extracting nand files:"
 msgstr ""
 
 msgid "Failed"
@@ -815,6 +827,15 @@ msgid "Game is already installed:"
 msgstr "Hra je již nainstalována:"
 
 msgid "Game/Install Partition"
+msgstr ""
+
+msgid "GameTDB Files"
+msgstr ""
+
+msgid "GameTDB Path"
+msgstr ""
+
+msgid "GameTDB is up to date."
 msgstr ""
 
 msgid "Gamename [GAMEID]"
@@ -1474,6 +1495,9 @@ msgstr "Soubor .them nebyl nalezen v ZIP."
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Zadaný adresár neexistuje. Chcete ho vytvorit?"
 
+msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
+msgstr ""
+
 msgid "The game installation is disabled under this IOS because of instability in usb write."
 msgstr "Instalace her je zakázána s tímto IOS kvuli nestabilite v USB zápisu."
 
@@ -1517,8 +1541,8 @@ msgstr "Zbývá:"
 msgid "Title Launcher"
 msgstr "Spouštec kanálu"
 
-msgid "Titles from WiiTDB"
-msgstr "Názvy z WiiTDB"
+msgid "Titles from GameTDB"
+msgstr ""
 
 msgid "Tooltips"
 msgstr "Popisky"
@@ -1635,6 +1659,9 @@ msgstr "Co si prejete zaktualizovat?"
 msgid "What should be deleted for this game title:"
 msgstr "Co si prejete smazat pro tento titul:"
 
+msgid "What to extract from NAND?"
+msgstr ""
+
 msgid "WiFi Features"
 msgstr "WiFi možnosti"
 
@@ -1649,15 +1676,6 @@ msgstr "Wii menu"
 
 msgid "Wii Settings"
 msgstr "Nastavení Wii"
-
-msgid "WiiTDB Files"
-msgstr "WiiTDB Soubory"
-
-msgid "WiiTDB Path"
-msgstr "Cesta k WiiTDB"
-
-msgid "WiiTDB is up to date."
-msgstr "WiiTDB je aktuální"
 
 msgid "Wiilight"
 msgstr "Wii svetlo"
@@ -1713,11 +1731,11 @@ msgstr "souboru zbývá"
 msgid "for FAT/NTFS support"
 msgstr "pro FAT/NTFS podporu"
 
+msgid "for GameTDB and hosting covers / disc images"
+msgstr ""
+
 msgid "for Ocarina"
 msgstr "za Ocarina"
-
-msgid "for WiiTDB and hosting covers / disc images"
-msgstr "za WiiTDB a hostování obalu / potisku DVD"
 
 msgid "for diverse patches"
 msgstr "za ruzné opravy"
@@ -1748,6 +1766,21 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid "Titles from WiiTDB"
+#~ msgstr "Názvy z WiiTDB"
+
+#~ msgid "WiiTDB Files"
+#~ msgstr "WiiTDB Soubory"
+
+#~ msgid "WiiTDB Path"
+#~ msgstr "Cesta k WiiTDB"
+
+#~ msgid "WiiTDB is up to date."
+#~ msgstr "WiiTDB je aktuální"
+
+#~ msgid "for WiiTDB and hosting covers / disc images"
+#~ msgstr "za WiiTDB a hostování obalu / potisku DVD"
 
 #~ msgid "Install directories"
 #~ msgstr "Instalacní adresáre"

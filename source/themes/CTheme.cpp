@@ -273,6 +273,7 @@ bool Theme::LoadFont(const char *path)
 		loadedFontSize = Resources::GetFileSize("font.ttf");
 	}
 
+	delete fontSystem;
 
 	fontSystem = new FreeTypeGX(loadedFont, loadedFontSize, loadedFont == systemFont);
 

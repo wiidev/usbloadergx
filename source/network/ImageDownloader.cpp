@@ -15,12 +15,12 @@
 
 #define VALID_IMAGE(x) (!(x.size == 36864 || x.size <= 1024 || x.size == 7386 || x.size <= 1174 || x.size == 4446 || x.data == NULL))
 
-static const char *serverURL3D = "http://wiitdb.com/wiitdb/artwork/cover3D/";
-static const char *serverURL2D = "http://wiitdb.com/wiitdb/artwork/cover/";
-static const char *serverURLFullHQ = "http://wiitdb.com/wiitdb/artwork/coverfullHQ/";
-static const char *serverURLFull = "http://wiitdb.com/wiitdb/artwork/coverfull/";
-static const char *serverURLOrigDiscs = "http://wiitdb.com/wiitdb/artwork/disc/";
-static const char *serverURLCustomDiscs = "http://wiitdb.com/wiitdb/artwork/disccustom/";
+static const char *serverURL3D = "http://art.gametdb.com/wii/cover3D/";
+static const char *serverURL2D = "http://art.gametdb.com/wii/cover/";
+static const char *serverURLFullHQ = "http://art.gametdb.com/wii/coverfullHQ/";
+static const char *serverURLFull = "http://art.gametdb.com/wii/coverfull/";
+static const char *serverURLOrigDiscs = "http://art.gametdb.com/wii/disc/";
+static const char *serverURLCustomDiscs = "http://art.gametdb.com/wii/disccustom/";
 
 void ImageDownloader::DownloadImages()
 {
@@ -141,7 +141,7 @@ int ImageDownloader::DownloadProcess(int TotalDownloadCount)
 		if(ProgressCanceled())
 			break;
 
-		snprintf(progressMsg, sizeof(progressMsg), "http://wiitdb.com : %s.png", MissingImages[i].gameID.c_str());
+		snprintf(progressMsg, sizeof(progressMsg), "http://gametdb.com : %s.png", MissingImages[i].gameID.c_str());
 
 		ShowProgress(MissingImages[i].progressTitle, fmt("%i %s", TotalDownloadCount - pos, tr( "files left" )), progressMsg, pos, TotalDownloadCount);
 

@@ -53,7 +53,7 @@ FeatureSettingsMenu::FeatureSettingsMenu()
 	: SettingsMenu(tr("Features Settings"), &GuiOptions, MENU_NONE)
 {
 	int Idx = 0;
-	Options->SetName(Idx++, "%s", tr( "Titles from WiiTDB" ));
+	Options->SetName(Idx++, "%s", tr( "Titles from GameTDB" ));
 	Options->SetName(Idx++, "%s", tr( "Cache Titles" ));
 	Options->SetName(Idx++, "%s", tr( "Wiilight" ));
 	Options->SetName(Idx++, "%s", tr( "Rumble" ));
@@ -73,7 +73,7 @@ FeatureSettingsMenu::~FeatureSettingsMenu()
 {
 	if (Settings.titlesOverride != OldTitlesOverride)
 	{
-		GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path, true);
+		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, true);
 		if(!Settings.titlesOverride)
 			gameList.ReadGameList();
 	}
@@ -83,7 +83,7 @@ void FeatureSettingsMenu::SetOptionValues()
 {
 	int Idx = 0;
 
-	//! Settings: Titles from WiiTDB
+	//! Settings: Titles from GameTDB
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.titlesOverride] ));
 
 	//! Settings: Cache Titles
@@ -104,7 +104,7 @@ void FeatureSettingsMenu::SetOptionValues()
 	//! Settings: Wiinnertag
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.Wiinnertag] ));
 
-	//! Settings: Import categories from WiiTDB
+	//! Settings: Import categories from GameTDB
 	Options->SetValue(Idx++, " ");
 
 	//! Settings: Export Savegames to EmuNand
@@ -124,7 +124,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 	int Idx = -1;
 
 
-	//! Settings: Titles from WiiTDB
+	//! Settings: Titles from GameTDB
 	if (ret == ++Idx)
 	{
 		if (++Settings.titlesOverride >= MAX_ON_OFF) Settings.titlesOverride = 0;
@@ -136,7 +136,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 		if (++Settings.CacheTitles >= MAX_ON_OFF) Settings.CacheTitles = 0;
 
 		if(Settings.CacheTitles) //! create new cache file
-			GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
+			GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
 	}
 
 	//! Settings: Wiilight
@@ -203,15 +203,15 @@ int FeatureSettingsMenu::GetMenuInternal()
 		}
 	}
 
-	//! Settings: Import categories from WiiTDB
+	//! Settings: Import categories from GameTDB
 	else if (ret == ++Idx)
 	{
-		int choice = WindowPrompt(tr("Import Categories"), tr("Are you sure you want to import game categories from WiiTDB?"), tr("Yes"), tr("Cancel"));
+		int choice = WindowPrompt(tr("Import Categories"), tr("Are you sure you want to import game categories from GameTDB?"), tr("Yes"), tr("Cancel"));
 		if(choice)
 		{
 			char xmlpath[300];
 			snprintf(xmlpath, sizeof(xmlpath), "%swiitdb.xml", Settings.titlestxt_path);
-			if(!GameCategories.ImportFromWiiTDB(xmlpath))
+			if(!GameCategories.ImportFromGameTDB(xmlpath))
 			{
 				WindowPrompt(tr("Error"), tr("Could not open the WiiTDB.xml file."), tr("OK"));
 			}

@@ -113,7 +113,7 @@ HardDriveSM::~HardDriveSM()
 
 		//! Reload the new game titles
 		gameList.ReadGameList();
-		GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
+		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
 	}
 }
 

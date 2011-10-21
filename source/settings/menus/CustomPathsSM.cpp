@@ -41,7 +41,7 @@ CustomPathsSM::CustomPathsSM()
 	Options->SetName(Idx++, tr("Full Cover Path"));
 	Options->SetName(Idx++, tr("Disc Artwork Path"));
 	Options->SetName(Idx++, tr("Theme Path"));
-	Options->SetName(Idx++, tr("WiiTDB Path"));
+	Options->SetName(Idx++, tr("GameTDB Path"));
 	Options->SetName(Idx++, tr("Update Path"));
 	Options->SetName(Idx++, tr("GCT Cheatcodes Path"));
 	Options->SetName(Idx++, tr("TXT Cheatcodes Path"));
@@ -76,7 +76,7 @@ void CustomPathsSM::SetOptionValues()
 	//! Settings: Theme Path
 	Options->SetValue(Idx++, Settings.theme_path);
 
-	//! Settings: WiiTDB Path
+	//! Settings: GameTDB Path
 	Options->SetValue(Idx++, Settings.titlestxt_path);
 
 	//! Settings: Update Path
@@ -157,10 +157,10 @@ int CustomPathsSM::GetMenuInternal()
 		ChangePath(Settings.theme_path, sizeof(Settings.theme_path));
 	}
 
-	//! Settings: WiiTDB Path
+	//! Settings: GameTDB Path
 	else if (ret == ++Idx)
 	{
-		titleTxt->SetText(tr( "WiiTDB Path" ));
+		titleTxt->SetText(tr( "GameTDB Path" ));
 		ChangePath(Settings.titlestxt_path, sizeof(Settings.titlestxt_path));
 	}
 

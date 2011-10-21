@@ -31,7 +31,7 @@
 
 int CheckUpdate();
 int CheckForBetaUpdate();
-int UpdateWiiTDB();
+int UpdateGameTDB();
 int UpdateApp();
 
 #endif
