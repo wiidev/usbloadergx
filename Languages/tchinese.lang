@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-21 20:31+0200\n"
+"POT-Creation-Date: 2011-10-22 12:10+0200\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -532,6 +532,9 @@ msgstr "是否格式化："
 msgid "Do you want to load the default theme?"
 msgstr "是否要載入預設佈景主題嗎？"
 
+msgid "Do you want to re-init network?"
+msgstr ""
+
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "是否要同步所有FAT32磁區可用空間資訊？"
 
@@ -829,13 +832,7 @@ msgstr "已安裝過遊戲:"
 msgid "Game/Install Partition"
 msgstr "遊戲/安裝磁區"
 
-msgid "GameTDB Files"
-msgstr ""
-
 msgid "GameTDB Path"
-msgstr ""
-
-msgid "GameTDB is up to date."
 msgstr ""
 
 msgid "Gamename [GAMEID]"
@@ -975,8 +972,8 @@ msgstr "鍵盤"
 msgid "Korean"
 msgstr "韓文"
 
-msgid "Language File"
-msgstr "語言檔案"
+msgid "Language Files"
+msgstr ""
 
 msgid "Language change:"
 msgstr "變更語言為："
@@ -1677,6 +1674,12 @@ msgstr "Wii系統選單"
 msgid "Wii Settings"
 msgstr "Wii主機設定"
 
+msgid "WiiTDB.xml"
+msgstr ""
+
+msgid "WiiTDB.xml is up to date."
+msgstr ""
+
 msgid "Wiilight"
 msgstr "光碟機藍光"
 
@@ -1766,6 +1769,9 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "Language File"
+#~ msgstr "語言檔案"
 
 #~ msgid "Are you sure you want to import game categories from WiiTDB?"
 #~ msgstr "確定要從WiiTDB匯入遊戲類別嗎？"

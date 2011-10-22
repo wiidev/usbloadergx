@@ -52,7 +52,7 @@
 #include "sys.h"
 #include "svnrev.h"
 
-static const char * GameTDB_URL = "http://gametdb.com/wiitdb.zip";
+static const char * GameTDB_URL = "http://www.gametdb.com/wiitdb.zip";
 
 /****************************************************************************
  * Checking if an Update is available
@@ -321,9 +321,9 @@ int UpdateApp()
 		return -1;
 	}
 
-	int choice = WindowPrompt(tr( "What do you want to update?" ), 0, "USB Loader GX", tr( "GameTDB Files" ), tr( "Language File" ), tr( "Cancel" ));
+	int choice = WindowPrompt(tr( "What do you want to update?" ), 0, "USB Loader GX", tr( "WiiTDB.xml" ), tr( "Language Files" ), tr( "Cancel" ));
 	if(choice == 0)
-		return -1;
+		return 0;
 
 	if(choice == 1)
 	{
@@ -340,7 +340,7 @@ int UpdateApp()
 	{
 		if(UpdateGameTDB() < 0)
 		{
-			WindowPrompt(fmt("%s", tr( "GameTDB is up to date." )), 0, tr("OK"));
+			WindowPrompt(fmt("%s", tr( "WiiTDB.xml is up to date." )), 0, tr("OK"));
 			return 1;
 		}
 		else

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-21 20:31+0200\n"
+"POT-Creation-Date: 2011-10-22 12:10+0200\n"
 "PO-Revision-Date: 2011-06-30 14:22+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -532,6 +532,9 @@ msgstr "Wil je formatteren:"
 msgid "Do you want to load the default theme?"
 msgstr "Wil je het standaard thema laden?"
 
+msgid "Do you want to re-init network?"
+msgstr ""
+
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Wil je de vrije ruimte informatie sector synchroniseren op alle FAT32 partities?"
 
@@ -829,13 +832,7 @@ msgstr "Spel is al geïnstalleerd:"
 msgid "Game/Install Partition"
 msgstr "Spel/Installatie partitie"
 
-msgid "GameTDB Files"
-msgstr ""
-
 msgid "GameTDB Path"
-msgstr ""
-
-msgid "GameTDB is up to date."
 msgstr ""
 
 msgid "Gamename [GAMEID]"
@@ -975,8 +972,8 @@ msgstr "Toetsenbord"
 msgid "Korean"
 msgstr "Koreaans"
 
-msgid "Language File"
-msgstr "Taal bestand"
+msgid "Language Files"
+msgstr ""
 
 msgid "Language change:"
 msgstr "Taal wijzigen:"
@@ -1677,6 +1674,12 @@ msgstr ""
 msgid "Wii Settings"
 msgstr "Wii instellingen"
 
+msgid "WiiTDB.xml"
+msgstr ""
+
+msgid "WiiTDB.xml is up to date."
+msgstr ""
+
 msgid "Wiilight"
 msgstr "Wii verlichting"
 
@@ -1766,6 +1769,9 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "Language File"
+#~ msgstr "Taal bestand"
 
 #~ msgid "Are you sure you want to import game categories from WiiTDB?"
 #~ msgstr "Weet je zeker dat je spel categorieën wilt importeren van WiiTDB?"

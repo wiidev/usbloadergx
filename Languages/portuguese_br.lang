@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-21 20:31+0200\n"
+"POT-Creation-Date: 2011-10-22 12:10+0200\n"
 "PO-Revision-Date: 2009-10-23 18:52+0200\n"
 "Last-Translator: aniemotion\n"
 "Language-Team: boto12, aniemotion\n"
@@ -532,6 +532,9 @@ msgstr "Deseja FORMATAR:"
 msgid "Do you want to load the default theme?"
 msgstr ""
 
+msgid "Do you want to re-init network?"
+msgstr ""
+
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr ""
 
@@ -829,13 +832,7 @@ msgstr "Este jogo já está instalado:"
 msgid "Game/Install Partition"
 msgstr ""
 
-msgid "GameTDB Files"
-msgstr ""
-
 msgid "GameTDB Path"
-msgstr ""
-
-msgid "GameTDB is up to date."
 msgstr ""
 
 msgid "Gamename [GAMEID]"
@@ -975,8 +972,8 @@ msgstr "Teclado"
 msgid "Korean"
 msgstr "Coreano"
 
-msgid "Language File"
-msgstr "Idiomas"
+msgid "Language Files"
+msgstr ""
 
 msgid "Language change:"
 msgstr "Alteração de idioma:"
@@ -1677,6 +1674,12 @@ msgstr "Menu do Wii"
 msgid "Wii Settings"
 msgstr "Configuração do Wii"
 
+msgid "WiiTDB.xml"
+msgstr ""
+
+msgid "WiiTDB.xml is up to date."
+msgstr ""
+
 msgid "Wiilight"
 msgstr "Iluminação Leitor"
 
@@ -1766,6 +1769,9 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Language File"
+#~ msgstr "Idiomas"
 
 #~ msgid "Are you sure you want to import game categories from WiiTDB?"
 #~ msgstr "Tem certeza que quer importar as categorias do WiiTDB?"

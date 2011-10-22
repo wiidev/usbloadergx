@@ -248,6 +248,13 @@ int HomebrewBrowser::MainLoop()
 
 	if(wifiBtn->GetState() == STATE_CLICKED)
 	{
+		if(IsNetworkInit() && WindowPrompt(tr("Do you want to re-init network?"), 0, tr("Yes"), tr("Cancel")))
+		{
+			DeinitNetwork();
+			wifiBtn->SetAlpha(80);
+			wifiBtn->SetToolTip(NULL, 0, -50, 0, 5);
+			wifiNotSet = true;
+		}
 		ResumeNetworkWait();
 		wifiBtn->ResetState();
 	}

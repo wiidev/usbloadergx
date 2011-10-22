@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-21 20:31+0200\n"
+"POT-Creation-Date: 2011-10-22 12:10+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -532,6 +532,9 @@ msgstr ""
 msgid "Do you want to load the default theme?"
 msgstr ""
 
+msgid "Do you want to re-init network?"
+msgstr ""
+
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr ""
 
@@ -829,13 +832,7 @@ msgstr ""
 msgid "Game/Install Partition"
 msgstr ""
 
-msgid "GameTDB Files"
-msgstr ""
-
 msgid "GameTDB Path"
-msgstr ""
-
-msgid "GameTDB is up to date."
 msgstr ""
 
 msgid "Gamename [GAMEID]"
@@ -975,7 +972,7 @@ msgstr ""
 msgid "Korean"
 msgstr ""
 
-msgid "Language File"
+msgid "Language Files"
 msgstr ""
 
 msgid "Language change:"
@@ -1675,6 +1672,12 @@ msgid "Wii Menu"
 msgstr ""
 
 msgid "Wii Settings"
+msgstr ""
+
+msgid "WiiTDB.xml"
+msgstr ""
+
+msgid "WiiTDB.xml is up to date."
 msgstr ""
 
 msgid "Wiilight"

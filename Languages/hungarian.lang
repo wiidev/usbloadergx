@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-21 20:31+0200\n"
+"POT-Creation-Date: 2011-10-22 12:10+0200\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -532,6 +532,9 @@ msgstr "Formázás?"
 msgid "Do you want to load the default theme?"
 msgstr ""
 
+msgid "Do you want to re-init network?"
+msgstr ""
+
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr ""
 
@@ -829,13 +832,7 @@ msgstr "A játék már fel van telepítve:"
 msgid "Game/Install Partition"
 msgstr ""
 
-msgid "GameTDB Files"
-msgstr ""
-
 msgid "GameTDB Path"
-msgstr ""
-
-msgid "GameTDB is up to date."
 msgstr ""
 
 msgid "Gamename [GAMEID]"
@@ -975,8 +972,8 @@ msgstr "Billenyûzet"
 msgid "Korean"
 msgstr "Koreai"
 
-msgid "Language File"
-msgstr "Nyelvi fájl"
+msgid "Language Files"
+msgstr ""
 
 msgid "Language change:"
 msgstr "Nyelv választás:"
@@ -1677,6 +1674,12 @@ msgstr "Wii Menü"
 msgid "Wii Settings"
 msgstr "Wii Beállítások"
 
+msgid "WiiTDB.xml"
+msgstr ""
+
+msgid "WiiTDB.xml is up to date."
+msgstr ""
+
 msgid "Wiilight"
 msgstr "WiiFény"
 
@@ -1766,6 +1769,9 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
+
+#~ msgid "Language File"
+#~ msgstr "Nyelvi fájl"
 
 #~ msgid "Titles from WiiTDB"
 #~ msgstr "Címek WiiTDB fájlból"
