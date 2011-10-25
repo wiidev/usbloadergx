@@ -118,6 +118,8 @@ int UninstallSM::GetMenuInternal()
 			if (CheckFile(filepath)) remove(filepath);
 			snprintf(filepath, sizeof(filepath), "%s%s.png", Settings.covers2d_path, GameID);
 			if (CheckFile(filepath)) remove(filepath);
+			snprintf(filepath, sizeof(filepath), "%s%s.png", Settings.coversFull_path, GameID);
+			if (CheckFile(filepath)) remove(filepath);
 			snprintf(filepath, sizeof(filepath), "%s%s.png", Settings.disc_path, GameID);
 			if (CheckFile(filepath)) remove(filepath);
 			snprintf(filepath, sizeof(filepath), "%s%s.txt", Settings.TxtCheatcodespath, GameID);
@@ -158,6 +160,8 @@ int UninstallSM::GetMenuInternal()
 		snprintf(filepath, sizeof(filepath), "%s%s.png", Settings.covers_path, GameID);
 		if (CheckFile(filepath)) remove(filepath);
 		snprintf(filepath, sizeof(filepath), "%s%s.png", Settings.covers2d_path, GameID);
+		if (CheckFile(filepath)) remove(filepath);
+		snprintf(filepath, sizeof(filepath), "%s%s.png", Settings.coversFull_path, GameID);
 		if (CheckFile(filepath)) remove(filepath);
 	}
 

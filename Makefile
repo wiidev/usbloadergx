@@ -62,9 +62,8 @@ endif
 # options for code generation
 #---------------------------------------------------------------------------------
 CFLAGS		=	-g -O3 -Wall -Wno-multichar -Wno-unused-parameter -Wextra $(MACHDEP) $(INCLUDE) -DBUILD_IOS=$(IOS)
-CXXFLAGS	=	-Xassembler -aln=$@.lst $(CFLAGS)
+CXXFLAGS	=	$(CFLAGS)
 LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80B00000,-wrap,malloc,-wrap,free,-wrap,memalign,-wrap,calloc,-wrap,realloc,-wrap,malloc_usable_size
--include $(PROJECTDIR)/Make.config
 
 ifeq ($(BUILDMODE),channel)
 CFLAGS += -DFULLCHANNEL
@@ -149,6 +148,9 @@ export OUTPUT	:=	$(CURDIR)/$(TARGET)
 #---------------------------------------------------------------------------------
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
+ifneq ($(IOS),249)
+	@rm -f $(BUILD)/CSettings.o
+endif
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
 channel:
@@ -167,9 +169,8 @@ theme:
 
 #---------------------------------------------------------------------------------
 all:
-	@[ -d build ] || mkdir -p build
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
-	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile language
+	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile lang
 
 #---------------------------------------------------------------------------------
 clean:
