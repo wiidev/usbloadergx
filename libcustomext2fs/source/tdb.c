@@ -38,6 +38,7 @@ Last Changed Date: 2007-06-22 13:36:10 -0400 (Fri, 22 Jun 2007)
 #endif
 #define _XOPEN_SOURCE 600
 
+#include "config.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>

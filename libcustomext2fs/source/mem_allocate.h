@@ -8,6 +8,14 @@ extern __inline__ void* mem_alloc (size_t size) {
     return MEM2_alloc(size);
 }
 
+extern __inline__ void* mem_calloc (size_t count, size_t size) {
+	void *p = MEM2_alloc(count * size);
+	if(p) {
+		memset(p, 0, count * size);
+	}
+    return p;
+}
+
 extern __inline__ void* mem_realloc (void *p, size_t size) {
     return MEM2_realloc(p, size);
 }

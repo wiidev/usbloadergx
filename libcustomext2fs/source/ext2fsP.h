@@ -138,6 +138,6 @@ extern errcode_t ext2fs_set_generic_bmap_range(ext2fs_generic_bitmap bitmap,
 extern errcode_t ext2fs_get_generic_bmap_range(ext2fs_generic_bitmap bitmap,
 					       __u64 start, unsigned int num,
 					       void *out);
-extern int ext2fs_warn_bitmap32(ext2fs_generic_bitmap bitmap, const char *func);
+extern void ext2fs_warn_bitmap32(ext2fs_generic_bitmap bitmap,const char *func);
 
 extern int ext2fs_mem_is_zero(const char *mem, size_t len);

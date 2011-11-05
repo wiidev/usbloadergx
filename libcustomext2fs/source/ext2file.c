@@ -41,11 +41,7 @@ void ext2CloseFile (ext2_file_state *file)
 
     // Sync the file (and its attributes) to disc
     if(file->write)
-    {
-        // Read in node changes before writing them
-        ext2fs_read_inode(file->vd->fs, file->ni->ino, &file->ni->ni);
         ext2UpdateTimes(file->vd, file->ni, EXT2_UPDATE_ACTIME);
-    }
 
     if (file->read)
         ext2UpdateTimes(file->vd, file->ni, EXT2_UPDATE_ATIME);
@@ -243,11 +239,25 @@ ssize_t ext2_write_r (struct _reent *r, int fd, const char *ptr, size_t len)
     // Lock
     ext2Lock(file->vd);
 
-    u32 writen = 0;
+    errcode_t err = 0;
+    u32 written = 0;
 
     // Write to the files data atrribute
-    errcode_t err = ext2fs_file_write(file->fd, ptr, len, &writen);
-    if (writen <= 0 || err) {
+    while (len > 0)
+    {
+        u32 wrote = 0;
+
+        err = ext2fs_file_write(file->fd, ptr, len, &wrote);
+        if (err)
+            break;
+
+        len -= wrote;
+        ptr += wrote;
+        written += wrote;
+    }
+
+    // Check for errors
+    if (err) {
         ext2Unlock(file->vd);
         r->_errno = errno;
         return (err ? err : -1);
@@ -256,7 +266,7 @@ ssize_t ext2_write_r (struct _reent *r, int fd, const char *ptr, size_t len)
     // Unlock
     ext2Unlock(file->vd);
 
-    return (writen == 0 ? -1 : writen);
+    return (written == 0 ? -1 : written);
 }
 
 ssize_t ext2_read_r (struct _reent *r, int fd, char *ptr, size_t len)

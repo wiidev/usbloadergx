@@ -9,6 +9,7 @@
  * %End-Header%
  */
 
+#include "config.h"
 #include <stdio.h>
 #include <string.h>
 #if HAVE_UNISTD_H
@@ -34,10 +35,10 @@ static errcode_t write_bitmaps(ext2_filsys fs, int do_inode, int do_block)
 	int		block_nbytes, inode_nbytes;
 	unsigned int	nbits;
 	errcode_t	retval;
-	char 		*block_buf = 0, *inode_buf = 0;
+	char		*block_buf = NULL, *inode_buf = NULL;
 	int		csum_flag = 0;
 	blk64_t		blk;
-	blk64_t		blk_itr = fs->super->s_first_data_block;
+	blk64_t		blk_itr = EXT2FS_B2C(fs, fs->super->s_first_data_block);
 	ext2_ino_t	ino_itr = 1;
 
 	EXT2_CHECK_MAGIC(fs, EXT2_ET_MAGIC_EXT2FS_FILSYS);
@@ -51,11 +52,11 @@ static errcode_t write_bitmaps(ext2_filsys fs, int do_inode, int do_block)
 
 	inode_nbytes = block_nbytes = 0;
 	if (do_block) {
-		block_nbytes = EXT2_BLOCKS_PER_GROUP(fs->super) / 8;
+		block_nbytes = EXT2_CLUSTERS_PER_GROUP(fs->super) / 8;
 		retval = ext2fs_get_memalign(fs->blocksize, fs->blocksize,
 					     &block_buf);
 		if (retval)
-			return retval;
+			goto errout;
 		memset(block_buf, 0xff, fs->blocksize);
 	}
 	if (do_inode) {
@@ -64,7 +65,7 @@ static errcode_t write_bitmaps(ext2_filsys fs, int do_inode, int do_block)
 		retval = ext2fs_get_memalign(fs->blocksize, fs->blocksize,
 					     &inode_buf);
 		if (retval)
-			return retval;
+			goto errout;
 		memset(inode_buf, 0xff, fs->blocksize);
 	}
 
@@ -79,13 +80,14 @@ static errcode_t write_bitmaps(ext2_filsys fs, int do_inode, int do_block)
 		retval = ext2fs_get_block_bitmap_range2(fs->block_map,
 				blk_itr, block_nbytes << 3, block_buf);
 		if (retval)
-			return retval;
+			goto errout;
 
 		if (i == fs->group_desc_count - 1) {
 			/* Force bitmap padding for the last group */
-			nbits = ((ext2fs_blocks_count(fs->super)
+			nbits = EXT2FS_NUM_B2C(fs,
+				((ext2fs_blocks_count(fs->super)
 				  - (__u64) fs->super->s_first_data_block)
-				 % (__u64) EXT2_BLOCKS_PER_GROUP(fs->super));
+				 % (__u64) EXT2_BLOCKS_PER_GROUP(fs->super)));
 			if (nbits)
 				for (j = nbits; j < fs->blocksize * 8; j++)
 					ext2fs_set_bit(j, block_buf);
@@ -94,8 +96,10 @@ static errcode_t write_bitmaps(ext2_filsys fs, int do_inode, int do_block)
 		if (blk) {
 			retval = io_channel_write_blk64(fs->io, blk, 1,
 							block_buf);
-			if (retval)
-				return EXT2_ET_BLOCK_BITMAP_WRITE;
+			if (retval) {
+				retval = EXT2_ET_BLOCK_BITMAP_WRITE;
+				goto errout;
+			}
 		}
 	skip_this_block_bitmap:
 		blk_itr += block_nbytes << 3;
@@ -111,14 +115,16 @@ static errcode_t write_bitmaps(ext2_filsys fs, int do_inode, int do_block)
 		retval = ext2fs_get_inode_bitmap_range2(fs->inode_map,
 				ino_itr, inode_nbytes << 3, inode_buf);
 		if (retval)
-			return retval;
+			goto errout;
 
 		blk = ext2fs_inode_bitmap_loc(fs, i);
 		if (blk) {
 			retval = io_channel_write_blk64(fs->io, blk, 1,
 						      inode_buf);
-			if (retval)
-				return EXT2_ET_INODE_BITMAP_WRITE;
+			if (retval) {
+				retval = EXT2_ET_INODE_BITMAP_WRITE;
+				goto errout;
+			}
 		}
 	skip_this_inode_bitmap:
 		ino_itr += inode_nbytes << 3;
@@ -133,6 +139,12 @@ static errcode_t write_bitmaps(ext2_filsys fs, int do_inode, int do_block)
 		ext2fs_free_mem(&inode_buf);
 	}
 	return 0;
+errout:
+	if (inode_buf)
+		ext2fs_free_mem(&inode_buf);
+	if (block_buf)
+		ext2fs_free_mem(&block_buf);
+	return retval;
 }
 
 static errcode_t read_bitmaps(ext2_filsys fs, int do_inode, int do_block)
@@ -141,13 +153,13 @@ static errcode_t read_bitmaps(ext2_filsys fs, int do_inode, int do_block)
 	char *block_bitmap = 0, *inode_bitmap = 0;
 	char *buf;
 	errcode_t retval;
-	int block_nbytes = EXT2_BLOCKS_PER_GROUP(fs->super) / 8;
+	int block_nbytes = EXT2_CLUSTERS_PER_GROUP(fs->super) / 8;
 	int inode_nbytes = EXT2_INODES_PER_GROUP(fs->super) / 8;
 	int csum_flag = 0;
 	int do_image = fs->flags & EXT2_FLAG_IMAGE_FILE;
 	unsigned int	cnt;
 	blk64_t	blk;
-	blk64_t	blk_itr = fs->super->s_first_data_block;
+	blk64_t	blk_itr = EXT2FS_B2C(fs, fs->super->s_first_data_block);
 	blk64_t   blk_cnt;
 	ext2_ino_t ino_itr = 1;
 	ext2_ino_t ino_cnt;
@@ -219,7 +231,7 @@ static errcode_t read_bitmaps(ext2_filsys fs, int do_inode, int do_block)
 		}
 		blk = (fs->image_header->offset_blockmap /
 		       fs->blocksize);
-		blk_cnt = (blk64_t)EXT2_BLOCKS_PER_GROUP(fs->super) *
+		blk_cnt = (blk64_t)EXT2_CLUSTERS_PER_GROUP(fs->super) *
 			fs->group_desc_count;
 		while (block_nbytes > 0) {
 			retval = io_channel_read_blk64(fs->image_io, blk++,

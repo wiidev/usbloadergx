@@ -9,6 +9,7 @@
  * %End-Header%
  */
 
+#include "config.h"
 #if HAVE_UNISTD_H
 #include <unistd.h>
 #endif
@@ -18,6 +19,7 @@
 
 #include "ext2_fs.h"
 #include "ext2fs.h"
+
 
 static const char *lib_version = "";
 static const char *lib_date = "";

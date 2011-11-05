@@ -10,6 +10,7 @@
  * %End-Header%
  */
 
+#include "config.h"
 #include <stdio.h>
 #include <string.h>
 #if HAVE_UNISTD_H
@@ -163,7 +164,7 @@ static errcode_t inode_open(const char *name, int flags, io_channel *channel)
 	return 0;
 
 cleanup:
-	if (io->name)
+	if (io && io->name)
 		ext2fs_free_mem(&io->name);
 	if (data)
 		ext2fs_free_mem(&data);

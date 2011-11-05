@@ -9,6 +9,7 @@
  * %End-Header%
  */
 
+#include "config.h"
 #include <stdio.h>
 #include <string.h>
 #if HAVE_UNISTD_H
@@ -453,6 +454,17 @@ errcode_t ext2fs_block_iterate3(ext2_filsys fs,
 			uninit = 0;
 			if (extent.e_flags & EXT2_EXTENT_FLAGS_UNINIT)
 				uninit = EXT2_EXTENT_SET_BMAP_UNINIT;
+#if 0
+			printf("lblk %llu pblk %llu len %d blockcnt %llu\n",
+			       extent.e_lblk, extent.e_pblk,
+			       extent.e_len, blockcnt);
+#endif
+			if (extent.e_lblk + extent.e_len <= blockcnt)
+				continue;
+			if (extent.e_lblk > blockcnt)
+				blockcnt = extent.e_lblk;
+			j = blockcnt - extent.e_lblk;
+			blk += j;
 			for (blockcnt = extent.e_lblk, j = 0;
 			     j < extent.e_len;
 			     blk++, blockcnt++, j++) {

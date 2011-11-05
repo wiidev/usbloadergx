@@ -12,6 +12,8 @@
 #ifndef _BITOPS_H_
 #define _BITOPS_H_
 
+#include "config.h"
+
 extern int ext2fs_set_bit(unsigned int nr,void * addr);
 extern int ext2fs_clear_bit(unsigned int nr, void * addr);
 extern int ext2fs_test_bit(unsigned int nr, const void * addr);
@@ -33,6 +35,8 @@ extern __u64 ext2fs_swab64(__u64 val);
 #define ext2fs_le32_to_cpu(x) ext2fs_swab32((x))
 #define ext2fs_cpu_to_le16(x) ext2fs_swab16((x))
 #define ext2fs_le16_to_cpu(x) ext2fs_swab16((x))
+#define ext2fs_cpu_to_be64(x) ((__u64)(x))
+#define ext2fs_be64_to_cpu(x) ((__u64)(x))
 #define ext2fs_cpu_to_be32(x) ((__u32)(x))
 #define ext2fs_be32_to_cpu(x) ((__u32)(x))
 #define ext2fs_cpu_to_be16(x) ((__u16)(x))
@@ -44,6 +48,8 @@ extern __u64 ext2fs_swab64(__u64 val);
 #define ext2fs_le32_to_cpu(x) ((__u32)(x))
 #define ext2fs_cpu_to_le16(x) ((__u16)(x))
 #define ext2fs_le16_to_cpu(x) ((__u16)(x))
+#define ext2fs_cpu_to_be64(x) ext2fs_swab64((x))
+#define ext2fs_be64_to_cpu(x) ext2fs_swab64((x))
 #define ext2fs_cpu_to_be32(x) ext2fs_swab32((x))
 #define ext2fs_be32_to_cpu(x) ext2fs_swab32((x))
 #define ext2fs_cpu_to_be16(x) ext2fs_swab16((x))
@@ -634,5 +640,4 @@ _INLINE_ void ext2fs_fast_unmark_block_bitmap_range2(ext2fs_block_bitmap bitmap,
 
 #undef _INLINE_
 #endif
-
 #endif

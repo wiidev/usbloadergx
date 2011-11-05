@@ -52,12 +52,12 @@ CACHE* cache_constructor (unsigned int numberOfPages, unsigned int sectorsPerPag
 
 	if(numberOfPages==0 || sectorsPerPage==0) return NULL;
 
-	if (numberOfPages < 4) {
-		numberOfPages = 4;
+	if (numberOfPages < 32) {
+		numberOfPages = 32;
 	}
 
-	if (sectorsPerPage < 32) {
-		sectorsPerPage = 32;
+	if (sectorsPerPage < 16) {
+		sectorsPerPage = 16;
 	}
 
 	cache = (CACHE*) mem_alloc (sizeof(CACHE));

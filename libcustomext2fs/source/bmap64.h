@@ -16,6 +16,7 @@ struct ext2fs_struct_generic_bitmap {
 	int			flags;
 	__u64			start, end;
 	__u64			real_end;
+	int			cluster_bits;
 	char			*description;
 	void			*private;
 	errcode_t		base_error_code;

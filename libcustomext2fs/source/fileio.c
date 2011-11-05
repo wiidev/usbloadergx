@@ -9,6 +9,7 @@
  * %End-Header%
  */
 
+#include "config.h"
 #include <stdio.h>
 #include <string.h>
 #if HAVE_UNISTD_H
@@ -22,7 +23,7 @@ struct ext2_file {
 	errcode_t		magic;
 	ext2_filsys 		fs;
 	ext2_ino_t		ino;
-	struct ext2_inode	inode;
+	struct ext2_inode	*inode;
 	int 			flags;
 	__u64			pos;
 	blk64_t			blockno;
@@ -56,13 +57,9 @@ errcode_t ext2fs_file_open2(ext2_filsys fs, ext2_ino_t ino,
 	file->fs = fs;
 	file->ino = ino;
 	file->flags = flags & EXT2_FILE_MASK;
-
-	if (inode) {
-		memcpy(&file->inode, inode, sizeof(struct ext2_inode));
-	} else {
-		retval = ext2fs_read_inode(fs, ino, &file->inode);
-		if (retval)
-			goto fail;
+    file->inode = inode;
+	if (!inode) {
+        goto fail;
 	}
 
 	retval = ext2fs_get_array(3, fs->blocksize, &file->buf);
@@ -102,7 +99,7 @@ struct ext2_inode *ext2fs_file_get_inode(ext2_file_t file)
 {
 	if (file->magic != EXT2_ET_MAGIC_EXT2_FILE)
 		return NULL;
-	return &file->inode;
+	return file->inode;
 }
 
 /*
@@ -121,15 +118,12 @@ errcode_t ext2fs_file_flush(ext2_file_t file)
 	    !(file->flags & EXT2_FILE_BUF_DIRTY))
 		return 0;
 
-    // Flushing out the new size - Dimok
-    ext2fs_write_inode(file->fs, file->ino, &file->inode);
-
 	/*
 	 * OK, the physical block hasn't been allocated yet.
 	 * Allocate it.
 	 */
 	if (!file->physblock) {
-		retval = ext2fs_bmap2(fs, file->ino, &file->inode,
+		retval = ext2fs_bmap2(fs, file->ino, file->inode,
 				     BMAP_BUFFER, file->ino ? BMAP_ALLOC : 0,
 				     file->blockno, 0, &file->physblock);
 		if (retval)
@@ -181,7 +175,7 @@ static errcode_t load_buffer(ext2_file_t file, int dontfill)
 	errcode_t	retval;
 
 	if (!(file->flags & EXT2_FILE_BUF_VALID)) {
-		retval = ext2fs_bmap2(fs, file->ino, &file->inode,
+		retval = ext2fs_bmap2(fs, file->ino, file->inode,
 				     BMAP_BUFFER, 0, file->blockno, 0,
 				     &file->physblock);
 		if (retval)
@@ -230,7 +224,7 @@ errcode_t ext2fs_file_read(ext2_file_t file, void *buf,
 	EXT2_CHECK_MAGIC(file, EXT2_ET_MAGIC_EXT2_FILE);
 	fs = file->fs;
 
-	while ((file->pos < EXT2_I_SIZE(&file->inode)) && (wanted > 0)) {
+	while ((file->pos < EXT2_I_SIZE(file->inode)) && (wanted > 0)) {
 		retval = sync_buffer_position(file);
 		if (retval)
 			goto fail;
@@ -242,7 +236,7 @@ errcode_t ext2fs_file_read(ext2_file_t file, void *buf,
 		c = fs->blocksize - start;
 		if (c > wanted)
 			c = wanted;
-		left = EXT2_I_SIZE(&file->inode) - file->pos ;
+		left = EXT2_I_SIZE(file->inode) - file->pos ;
 		if (c > left)
 			c = left;
 
@@ -300,11 +294,11 @@ errcode_t ext2fs_file_write(ext2_file_t file, const void *buf,
 		nbytes -= c;
 	}
 
-    // I don't see why changing size is my duty - Dimok
-    if(EXT2_I_SIZE(&file->inode) < file->pos)
+    // Modify file size in inode if required
+    if(EXT2_I_SIZE(file->inode) < file->pos)
     {
-        file->inode.i_size = file->pos & 0xFFFFFFFF;
-        file->inode.i_size_high = (file->pos >> 32) & 0xFFFFFFFF;
+        file->inode->i_size = file->pos & 0xFFFFFFFF;
+        file->inode->i_size_high = (file->pos >> 32) & 0xFFFFFFFF;
     }
 
 fail:
@@ -323,7 +317,7 @@ errcode_t ext2fs_file_llseek(ext2_file_t file, __u64 offset,
 	else if (whence == EXT2_SEEK_CUR)
 		file->pos += offset;
 	else if (whence == EXT2_SEEK_END)
-		file->pos = EXT2_I_SIZE(&file->inode) + offset;
+		file->pos = EXT2_I_SIZE(file->inode) + offset;
 	else
 		return EXT2_ET_INVALID_ARGUMENT;
 
@@ -336,7 +330,7 @@ errcode_t ext2fs_file_llseek(ext2_file_t file, __u64 offset,
 errcode_t ext2fs_file_lseek(ext2_file_t file, ext2_off_t offset,
 			    int whence, ext2_off_t *ret_pos)
 {
-	__u64		loffset, ret_loffset = 0;
+	__u64		loffset, ret_loffset;
 	errcode_t	retval;
 
 	loffset = offset;
@@ -354,7 +348,7 @@ errcode_t ext2fs_file_get_lsize(ext2_file_t file, __u64 *ret_size)
 {
 	if (file->magic != EXT2_ET_MAGIC_EXT2_FILE)
 		return EXT2_ET_MAGIC_EXT2_FILE;
-	*ret_size = EXT2_I_SIZE(&file->inode);
+	*ret_size = EXT2_I_SIZE(file->inode);
 	return 0;
 }
 
@@ -386,15 +380,14 @@ errcode_t ext2fs_file_set_size2(ext2_file_t file, ext2_off64_t size)
 
 	truncate_block = ((size + file->fs->blocksize - 1) >>
 			  EXT2_BLOCK_SIZE_BITS(file->fs->super)) + 1;
-	old_size = file->inode.i_size +
-		(((blk64_t) file->inode.i_size_high) << 32);
+	old_size = EXT2_I_SIZE(file->inode);
 	old_truncate = ((old_size + file->fs->blocksize - 1) >>
 		      EXT2_BLOCK_SIZE_BITS(file->fs->super)) + 1;
 
-	file->inode.i_size = size & 0xffffffff;
-	file->inode.i_size_high = (size >> 32);
+	file->inode->i_size = size & 0xffffffff;
+	file->inode->i_size_high = (size >> 32);
 	if (file->ino) {
-		retval = ext2fs_write_inode(file->fs, file->ino, &file->inode);
+		retval = ext2fs_write_inode(file->fs, file->ino, file->inode);
 		if (retval)
 			return retval;
 	}
@@ -402,7 +395,7 @@ errcode_t ext2fs_file_set_size2(ext2_file_t file, ext2_off64_t size)
 	if (truncate_block <= old_truncate)
 		return 0;
 
-	return ext2fs_punch(file->fs, file->ino, &file->inode, 0,
+	return ext2fs_punch(file->fs, file->ino, file->inode, 0,
 			    truncate_block, ~0ULL);
 }
 

@@ -27,7 +27,7 @@
 #include "disc_cache.h"
 #include "ext2fs.h"
 
-#define BYTES_PER_SECTOR    512
+#define MAX_SECTOR_SIZE     (4096)
 
 /**
  * gekko_fd - Gekko device driver descriptor

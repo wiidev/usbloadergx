@@ -26,8 +26,9 @@ typedef struct struct_io_manager *io_manager;
 typedef struct struct_io_channel *io_channel;
 typedef struct struct_io_stats *io_stats;
 
-#define CHANNEL_FLAGS_WRITETHROUGH	    0x01
+#define CHANNEL_FLAGS_WRITETHROUGH	0x01
 #define CHANNEL_FLAGS_DISCARD_ZEROES	0x02
+#define CHANNEL_FLAGS_BLOCK_DEVICE	0x04
 
 #define io_channel_discard_zeroes_data(i) (i->flags & CHANNEL_FLAGS_DISCARD_ZEROES)
 

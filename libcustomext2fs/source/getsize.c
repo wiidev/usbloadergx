@@ -15,6 +15,7 @@
 #define _LARGEFILE_SOURCE
 #define _LARGEFILE64_SOURCE
 
+#include "config.h"
 #include <stdio.h>
 #if HAVE_UNISTD_H
 #include <unistd.h>
@@ -142,10 +143,12 @@ errcode_t ext2fs_get_device_size2(const char *file, int blocksize,
 				 blk64_t *retblocks)
 {
 	int	fd, rc = 0;
+	int valid_blkgetsize64 = 1;
 #ifdef __linux__
 	struct 		utsname ut;
 #endif
 	unsigned long long size64;
+	unsigned long	size;
 	ext2_loff_t high, low;
 #ifdef FDGETPRM
 	struct floppy_struct this_floppy;
@@ -157,11 +160,7 @@ errcode_t ext2fs_get_device_size2(const char *file, int blocksize,
 	char ch;
 #endif /* HAVE_SYS_DISKLABEL_H */
 
-#ifdef HAVE_OPEN64
-	fd = open64(file, O_RDONLY);
-#else
-	fd = open(file, O_RDONLY);
-#endif
+	fd = ext2fs_open_file(file, O_RDONLY, 0);
 	if (fd < 0)
 		return errno;
 
@@ -233,13 +232,9 @@ errcode_t ext2fs_get_device_size2(const char *file, int blocksize,
 #endif /* HAVE_SYS_DISKLABEL_H */
 
 	{
-#ifdef HAVE_FSTAT64
-		struct stat64   st;
-		if (fstat64(fd, &st) == 0)
-#else
-		struct stat	st;
-		if (fstat(fd, &st) == 0)
-#endif
+		ext2fs_struct_stat st;
+
+		if (ext2fs_fstat(fd, &st) == 0)
 			if (S_ISREG(st.st_mode)) {
 				*retblocks = st.st_size / blocksize;
 				goto out;

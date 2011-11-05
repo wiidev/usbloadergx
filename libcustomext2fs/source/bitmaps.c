@@ -10,6 +10,7 @@
  * %End-Header%
  */
 
+#include "config.h"
 #include <stdio.h>
 #include <string.h>
 #if HAVE_UNISTD_H
@@ -27,6 +28,7 @@
 #include "ext2_fs.h"
 #include "ext2fs.h"
 #include "ext2fsP.h"
+#include "bmap64.h"
 
 void ext2fs_free_inode_bitmap(ext2fs_inode_bitmap bitmap)
 {
@@ -90,9 +92,9 @@ errcode_t ext2fs_allocate_block_bitmap(ext2_filsys fs,
 
 	fs->write_bitmaps = ext2fs_write_bitmaps;
 
-	start = fs->super->s_first_data_block;
-	end = ext2fs_blocks_count(fs->super)-1;
-	real_end = ((__u64) EXT2_BLOCKS_PER_GROUP(fs->super)
+	start = EXT2FS_B2C(fs, fs->super->s_first_data_block);
+	end = EXT2FS_B2C(fs, ext2fs_blocks_count(fs->super)-1);
+	real_end = ((__u64) EXT2_CLUSTERS_PER_GROUP(fs->super)
 		    * (__u64) fs->group_desc_count)-1 + start;
 
 	if (fs->flags & EXT2_FLAG_64BITS)
@@ -108,6 +110,56 @@ errcode_t ext2fs_allocate_block_bitmap(ext2_filsys fs,
 					   start, end, real_end,
 					   descr, 0,
 					   (ext2fs_generic_bitmap *) ret));
+}
+
+/*
+ * ext2fs_allocate_block_bitmap() really allocates a per-cluster
+ * bitmap for backwards compatibility.  This function allocates a
+ * block bitmap which is truly per-block, even if clusters/bigalloc
+ * are enabled.  mke2fs and e2fsck need this for tracking the
+ * allocation of the file system metadata blocks.
+ */
+errcode_t ext2fs_allocate_subcluster_bitmap(ext2_filsys fs,
+					    const char *descr,
+					    ext2fs_block_bitmap *ret)
+{
+	__u64			start, end, real_end;
+	ext2fs_generic_bitmap	bmap;
+	errcode_t		retval;
+
+	EXT2_CHECK_MAGIC(fs, EXT2_ET_MAGIC_EXT2FS_FILSYS);
+
+	fs->write_bitmaps = ext2fs_write_bitmaps;
+
+	if (!fs->cluster_ratio_bits)
+		return ext2fs_allocate_block_bitmap(fs, descr, ret);
+
+	if ((fs->flags & EXT2_FLAG_64BITS) == 0)
+		return EXT2_ET_CANT_USE_LEGACY_BITMAPS;
+
+	start = fs->super->s_first_data_block;
+	end = ext2fs_blocks_count(fs->super)-1;
+	real_end = ((__u64) EXT2_BLOCKS_PER_GROUP(fs->super)
+		    * (__u64) fs->group_desc_count)-1 + start;
+
+	retval = ext2fs_alloc_generic_bmap(fs, EXT2_ET_MAGIC_BLOCK_BITMAP64,
+					   EXT2FS_BMAP64_BITARRAY, start,
+					   end, real_end, descr, &bmap);
+	if (retval)
+		return retval;
+	bmap->cluster_bits = 0;
+	*ret = bmap;
+	return 0;
+}
+
+int ext2fs_get_bitmap_granularity(ext2fs_block_bitmap bitmap)
+{
+	ext2fs_generic_bitmap bmap = bitmap;
+
+	if (!EXT2FS_IS_64_BITMAP(bmap))
+		return 0;
+
+	return bmap->cluster_bits;
 }
 
 errcode_t ext2fs_fudge_inode_bitmap_end(ext2fs_inode_bitmap bitmap,

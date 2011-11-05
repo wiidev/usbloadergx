@@ -10,6 +10,7 @@
  */
 
 
+#include "config.h"
 #include <stdio.h>
 #include <string.h>
 #if HAVE_UNISTD_H
@@ -25,7 +26,6 @@
 #endif
 
 #include "ext2_fs.h"
-#include "ext2fs.h"
 #include "ext2fsP.h"
 
 struct ext2fs_struct_generic_bitmap {
@@ -179,8 +179,8 @@ int ext2fs_test_generic_bitmap(ext2fs_generic_bitmap bitmap,
 #ifndef OMIT_COM_ERR
 		com_err(0, EXT2_ET_MAGIC_GENERIC_BITMAP,
 			"test_bitmap(%lu)", (unsigned long) bitno);
-		return 0;
 #endif
+		return 0;
 	}
 
 	if ((bitno < bitmap->start) || (bitno > bitmap->end)) {
@@ -201,8 +201,8 @@ int ext2fs_mark_generic_bitmap(ext2fs_generic_bitmap bitmap,
 #ifndef OMIT_COM_ERR
 		com_err(0, EXT2_ET_MAGIC_GENERIC_BITMAP,
 			"mark_bitmap(%lu)", (unsigned long) bitno);
-		return 0;
 #endif
+		return 0;
 	}
 
 	if ((bitno < bitmap->start) || (bitno > bitmap->end)) {
@@ -223,8 +223,8 @@ int ext2fs_unmark_generic_bitmap(ext2fs_generic_bitmap bitmap,
 #ifndef OMIT_COM_ERR
 		com_err(0, EXT2_ET_MAGIC_GENERIC_BITMAP,
 			"mark_bitmap(%lu)", (unsigned long) bitno);
-		return 0;
 #endif
+		return 0;
 	}
 
 	if ((bitno < bitmap->start) || (bitno > bitmap->end)) {
@@ -244,8 +244,8 @@ __u32 ext2fs_get_generic_bitmap_start(ext2fs_generic_bitmap bitmap)
 #ifndef OMIT_COM_ERR
 		com_err(0, EXT2_ET_MAGIC_GENERIC_BITMAP,
 			"get_bitmap_start");
-		return 0;
 #endif
+		return 0;
 	}
 
 	return bitmap->start;
@@ -261,8 +261,8 @@ __u32 ext2fs_get_generic_bitmap_end(ext2fs_generic_bitmap bitmap)
 #ifndef OMIT_COM_ERR
 		com_err(0, EXT2_ET_MAGIC_GENERIC_BITMAP,
 			"get_bitmap_end");
-		return 0;
 #endif
+		return 0;
 	}
 	return bitmap->end;
 }
@@ -278,8 +278,8 @@ void ext2fs_clear_generic_bitmap(ext2fs_generic_bitmap bitmap)
 #ifndef OMIT_COM_ERR
 		com_err(0, EXT2_ET_MAGIC_GENERIC_BITMAP,
 			"clear_generic_bitmap");
-		return;
 #endif
+		return;
 	}
 
 	memset(bitmap->bitmap, 0,

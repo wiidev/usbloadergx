@@ -10,6 +10,7 @@
  * %End-Header%
  */
 
+#include "config.h"
 #include <stdio.h>
 #include <string.h>
 #if HAVE_UNISTD_H
@@ -91,9 +92,11 @@ errcode_t ext2fs_initialize(const char *name, int flags,
 	unsigned int	overhead = 0;
 	unsigned int	ipg;
 	dgrp_t		i;
+	blk64_t		free_blocks;
 	blk_t		numblocks;
 	int		rsv_gdt;
 	int		csum_flag;
+	int		bigalloc_flag;
 	int		io_flags;
 	char		*buf = 0;
 	char		c;
@@ -134,13 +137,26 @@ errcode_t ext2fs_initialize(const char *name, int flags,
 
 #define set_field(field, default) (super->field = param->field ? \
 				   param->field : (default))
+#define assign_field(field)	(super->field = param->field)
 
 	super->s_magic = EXT2_SUPER_MAGIC;
 	super->s_state = EXT2_VALID_FS;
 
-	set_field(s_log_block_size, 0);	/* default blocksize: 1024 bytes */
-	set_field(s_log_cluster_size, 0);
-	set_field(s_first_data_block, super->s_log_block_size ? 0 : 1);
+	bigalloc_flag = EXT2_HAS_RO_COMPAT_FEATURE(param,
+				   EXT4_FEATURE_RO_COMPAT_BIGALLOC);
+
+	assign_field(s_log_block_size);
+
+	if (bigalloc_flag) {
+		set_field(s_log_cluster_size, super->s_log_block_size+4);
+		if (super->s_log_block_size > super->s_log_cluster_size) {
+			retval = EXT2_ET_INVALID_ARGUMENT;
+			goto cleanup;
+		}
+	} else
+		super->s_log_cluster_size = super->s_log_block_size;
+
+	set_field(s_first_data_block, super->s_log_cluster_size ? 0 : 1);
 	set_field(s_max_mnt_count, 0);
 	set_field(s_errors, EXT2_ERRORS_DEFAULT);
 	set_field(s_feature_compat, 0);
@@ -181,16 +197,39 @@ errcode_t ext2fs_initialize(const char *name, int flags,
 
 	super->s_creator_os = CREATOR_OS;
 
-	fs->blocksize = EXT2_BLOCK_SIZE(super);
-	fs->clustersize = EXT2_CLUSTER_SIZE(super);
+	fs->fragsize = fs->blocksize = EXT2_BLOCK_SIZE(super);
+	fs->cluster_ratio_bits = super->s_log_cluster_size -
+		super->s_log_block_size;
 
-	/* default: (fs->blocksize*8) blocks/group, up to 2^16 (GDT limit) */
-	set_field(s_blocks_per_group, fs->blocksize * 8);
-	if (super->s_blocks_per_group > EXT2_MAX_BLOCKS_PER_GROUP(super))
-		super->s_blocks_per_group = EXT2_MAX_BLOCKS_PER_GROUP(super);
-	super->s_clusters_per_group = super->s_blocks_per_group;
+	if (bigalloc_flag) {
+		if (param->s_blocks_per_group &&
+		    param->s_clusters_per_group &&
+		    ((param->s_clusters_per_group * EXT2FS_CLUSTER_RATIO(fs)) !=
+		     param->s_blocks_per_group)) {
+			retval = EXT2_ET_INVALID_ARGUMENT;
+			goto cleanup;
+		}
+		if (param->s_clusters_per_group)
+			assign_field(s_clusters_per_group);
+		else if (param->s_blocks_per_group)
+			super->s_clusters_per_group = 
+				param->s_blocks_per_group /
+				EXT2FS_CLUSTER_RATIO(fs);
+		else
+			super->s_clusters_per_group = fs->blocksize * 8;
+		if (super->s_clusters_per_group > EXT2_MAX_CLUSTERS_PER_GROUP(super))
+			super->s_clusters_per_group = EXT2_MAX_CLUSTERS_PER_GROUP(super);
+		super->s_blocks_per_group = EXT2FS_C2B(fs,
+				       super->s_clusters_per_group);
+	} else {
+		set_field(s_blocks_per_group, fs->blocksize * 8);
+		if (super->s_blocks_per_group > EXT2_MAX_BLOCKS_PER_GROUP(super))
+			super->s_blocks_per_group = EXT2_MAX_BLOCKS_PER_GROUP(super);
+		super->s_clusters_per_group = super->s_blocks_per_group;
+	}
 
-	ext2fs_blocks_count_set(super, ext2fs_blocks_count(param));
+	ext2fs_blocks_count_set(super, ext2fs_blocks_count(param) &
+				~((blk64_t) EXT2FS_CLUSTER_MASK(fs)));
 	ext2fs_r_blocks_count_set(super, ext2fs_r_blocks_count(param));
 	if (ext2fs_r_blocks_count(super) >= ext2fs_blocks_count(param)) {
 		retval = EXT2_ET_INVALID_ARGUMENT;
@@ -209,7 +248,7 @@ errcode_t ext2fs_initialize(const char *name, int flags,
 	}
 
 retry:
-	fs->group_desc_count = (blk_t) ext2fs_div64_ceil(
+	fs->group_desc_count = (dgrp_t) ext2fs_div64_ceil(
 		ext2fs_blocks_count(super) - super->s_first_data_block,
 		EXT2_BLOCKS_PER_GROUP(super));
 	if (fs->group_desc_count == 0) {
@@ -246,7 +285,7 @@ retry:
 	 */
 	ipg = ext2fs_div_ceil(super->s_inodes_count, fs->group_desc_count);
 	if (ipg > fs->blocksize * 8) {
-		if (super->s_blocks_per_group >= 256) {
+		if (!bigalloc_flag && super->s_blocks_per_group >= 256) {
 			/* Try again with slightly different parameters */
 			super->s_blocks_per_group -= 8;
 			ext2fs_blocks_count_set(super,
@@ -364,7 +403,7 @@ ipg_retry:
 
 	strcpy(buf, "block bitmap for ");
 	strcat(buf, fs->device_name);
-	retval = ext2fs_allocate_block_bitmap(fs, buf, &fs->block_map);
+	retval = ext2fs_allocate_subcluster_bitmap(fs, buf, &fs->block_map);
 	if (retval)
 		goto cleanup;
 
@@ -394,7 +433,7 @@ ipg_retry:
 	 * superblock and group descriptors (the inode tables and
 	 * bitmaps will be accounted for when allocated).
 	 */
-	ext2fs_free_blocks_count_set(super, 0);
+	free_blocks = 0;
 	csum_flag = EXT2_HAS_RO_COMPAT_FEATURE(fs->super,
 					       EXT4_FEATURE_RO_COMPAT_GDT_CSUM);
 	for (i = 0; i < fs->group_desc_count; i++) {
@@ -416,14 +455,14 @@ ipg_retry:
 		if (fs->super->s_log_groups_per_flex)
 			numblocks += 2 + fs->inode_blocks_per_group;
 
-		ext2fs_free_blocks_count_set(super,
-					     ext2fs_free_blocks_count(super) +
-					     numblocks);
+		free_blocks += numblocks;
 		ext2fs_bg_free_blocks_count_set(fs, i, numblocks);
 		ext2fs_bg_free_inodes_count_set(fs, i, fs->super->s_inodes_per_group);
 		ext2fs_bg_used_dirs_count_set(fs, i, 0);
 		ext2fs_group_desc_csum_set(fs, i);
 	}
+	free_blocks &= ~EXT2FS_CLUSTER_MASK(fs);
+	ext2fs_free_blocks_count_set(super, free_blocks);
 
 	c = (char) 255;
 	if (((int) c) == -1) {

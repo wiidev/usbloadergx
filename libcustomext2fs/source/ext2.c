@@ -89,7 +89,7 @@ bool ext2Mount(const char *name, const DISC_INTERFACE *interface, sec_t startSec
     io_chan->private_data = fd;
 	io_chan->flags = flags;
 
-    retval = ext2fs_open2(io_chan->name, 0, io_chan->flags, 0, 0, &io_chan, &fs);
+    retval = ext2fs_open2(io_chan->name, 0, io_chan->flags, 0, 0, io_chan, &fs);
     if(retval)
     {
         ext2_log_trace("error mounting %i\n", (int) retval);
@@ -223,7 +223,7 @@ int ext2FindPartitions (const DISC_INTERFACE *interface, sec_t **out_partitions)
     int i;
 
     union {
-        u8 buffer[512];
+        u8 buffer[MAX_SECTOR_SIZE];
         MASTER_BOOT_RECORD mbr;
         EXTENDED_BOOT_RECORD ebr;
     } sector;
@@ -249,27 +249,30 @@ int ext2FindPartitions (const DISC_INTERFACE *interface, sec_t **out_partitions)
         return 0;
     }
 
-    struct ext2_super_block	* super = (struct ext2_super_block	*) malloc(SUPERBLOCK_SIZE);	//1024 bytes
-    if(!super)
+    // Allocate 4 x max sector size in case of 4096 sector size
+    u8 *buffer = (u8 *) mem_alloc(4 * MAX_SECTOR_SIZE);
+    if(!buffer)
     {
         ext2_log_trace("no memory for superblock");
         errno = ENOMEM;
         return -1;
     }
+    // Super is always at offset SUPERBLOCK_OFFSET
+    struct ext2_super_block	* super = (struct ext2_super_block	*) (buffer + SUPERBLOCK_OFFSET);	//1024 bytes
 
     partitions = (sec_t *) malloc(sizeof(sec_t));
     if(!partitions)
     {
         ext2_log_trace("no memory for partitions");
         errno = ENOMEM;
-        mem_free(super);
+        mem_free(buffer);
         return -1;
     }
     // Read the first sector on the device
     if (!interface->readSectors(0, 1, &sector.buffer)) {
         errno = EIO;
         mem_free(partitions);
-        mem_free(super);
+        mem_free(buffer);
         return -1;
     }
 
@@ -295,7 +298,7 @@ int ext2FindPartitions (const DISC_INTERFACE *interface, sec_t **out_partitions)
                 case PARTITION_TYPE_LINUX:
 
                     // Read and validate the EXT partition
-                    if (interface->readSectors(part_lba+SUPERBLOCK_OFFSET/BYTES_PER_SECTOR, SUPERBLOCK_SIZE/BYTES_PER_SECTOR, super))
+                    if (interface->readSectors(part_lba, 4, buffer))
                     {
                         if (ext2fs_le16_to_cpu(super->s_magic) == EXT2_SUPER_MAGIC)
                         {
@@ -334,7 +337,7 @@ int ext2FindPartitions (const DISC_INTERFACE *interface, sec_t **out_partitions)
                                 next_erb_lba = ext2fs_le32_to_cpu(sector.ebr.next_ebr.lba_start);
 
                                 // Check if this partition has a valid EXT boot record
-                                if (interface->readSectors(part_lba+SUPERBLOCK_OFFSET/BYTES_PER_SECTOR, SUPERBLOCK_SIZE/BYTES_PER_SECTOR, super))
+                                if (interface->readSectors(part_lba, 4, buffer))
                                 {
                                     if (ext2fs_le16_to_cpu(super->s_magic) == EXT2_SUPER_MAGIC)
                                     {
@@ -361,7 +364,7 @@ int ext2FindPartitions (const DISC_INTERFACE *interface, sec_t **out_partitions)
                 {
                     // Check if this partition has a valid EXT boot record anyway,
                     // it might be misrepresented due to a lazy partition editor
-                    if (interface->readSectors(part_lba+SUPERBLOCK_OFFSET/BYTES_PER_SECTOR, SUPERBLOCK_SIZE/BYTES_PER_SECTOR, super))
+                    if (interface->readSectors(part_lba, 4, buffer))
                     {
                         if (ext2fs_le16_to_cpu(super->s_magic) == EXT2_SUPER_MAGIC)
                         {
@@ -386,7 +389,7 @@ int ext2FindPartitions (const DISC_INTERFACE *interface, sec_t **out_partitions)
         // As a last-ditched effort, search the first 64 sectors of the device for stray EXT partitions
         for (i = 1; i < 64; i++)
         {
-            if (interface->readSectors(i+SUPERBLOCK_OFFSET/BYTES_PER_SECTOR, SUPERBLOCK_SIZE/BYTES_PER_SECTOR, super))
+            if (interface->readSectors(i, 4, buffer))
             {
                 if (ext2fs_le16_to_cpu(super->s_magic) == EXT2_SUPER_MAGIC)
                 {
@@ -412,8 +415,8 @@ cleanup:
 
     if(partitions && partition_count == 0)
         mem_free(partitions);
-    if(super)
-        mem_free(super);
+    if(buffer)
+        mem_free(buffer);
 
     return ret;
 }

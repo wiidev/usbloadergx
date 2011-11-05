@@ -28,9 +28,7 @@ LIBDIR		:=	../lib
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
-CFLAGS		=	-O3 -Wall $(MACHDEP) $(INCLUDE) -DGEKKO \
-				-DHAVE_UNISTD_H -DHAVE_SYS_STAT_H -DHAVE_SYS_TYPES_H -DHAVE_UTIME_H -DWORDS_BIGENDIAN \
-				-DHAVE_ERRNO_H -DHAVE_STRDUP -DHAVE_SYS_RESOURCE_H
+CFLAGS		=	-Os -Wall -Wno-unused $(MACHDEP) $(INCLUDE) -DGEKKO -DWORDS_BIGENDIAN
 CXXFLAGS	=	$(CFLAGS)
 ASFLAGS		:=	-g
 export EXT2BIN	:=	$(LIBDIR)/$(PLATFORM)/libext2fs.a

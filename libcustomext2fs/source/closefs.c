@@ -9,6 +9,7 @@
  * %End-Header%
  */
 
+#include "config.h"
 #include <stdio.h>
 #if HAVE_UNISTD_H
 #include <unistd.h>
@@ -73,6 +74,8 @@ errcode_t ext2fs_super_and_bgd_loc2(ext2_filsys fs,
 	int	has_super;
 
 	group_block = ext2fs_group_first_block2(fs, group);
+	if (group_block == 0 && fs->blocksize == 1024)
+		group_block = 1; /* Deal with 1024 blocksize && bigalloc */
 
 	if (fs->super->s_feature_incompat & EXT2_FEATURE_INCOMPAT_META_BG)
 		old_desc_blocks = fs->super->s_first_meta_bg;
@@ -150,14 +153,7 @@ int ext2fs_super_and_bgd_loc(ext2_filsys fs,
 					&ret_new_desc_blk2,
 					&ret_used_blks);
 
-	if (group == fs->group_desc_count-1) {
-		numblocks = (ext2fs_blocks_count(fs->super) -
-			     (blk64_t) fs->super->s_first_data_block) %
-			(blk64_t) fs->super->s_blocks_per_group;
-		if (!numblocks)
-			numblocks = fs->super->s_blocks_per_group;
-	} else
-		numblocks = fs->super->s_blocks_per_group;
+	numblocks = ext2fs_group_blocks_count(fs, group);
 
 	if (ret_super_blk)
 		*ret_super_blk = (blk_t)ret_super_blk2;
@@ -265,6 +261,11 @@ static errcode_t write_backup_super(ext2_filsys fs, dgrp_t group,
 }
 
 errcode_t ext2fs_flush(ext2_filsys fs)
+{
+	return ext2fs_flush2(fs, 0);
+}
+
+errcode_t ext2fs_flush2(ext2_filsys fs, int flags)
 {
 	dgrp_t		i;
 	errcode_t	retval;
@@ -406,14 +407,16 @@ write_primary_superblock_only:
 	ext2fs_swap_super(super_shadow);
 #endif
 
-	retval = io_channel_flush(fs->io);
+	if (!(flags & EXT2_FLAG_FLUSH_NO_SYNC))
+		retval = io_channel_flush(fs->io);
 	retval = write_primary_superblock(fs, super_shadow);
 	if (retval)
 		goto errout;
 
 	fs->flags &= ~EXT2_FLAG_DIRTY;
 
-	retval = io_channel_flush(fs->io);
+	if (!(flags & EXT2_FLAG_FLUSH_NO_SYNC))
+		retval = io_channel_flush(fs->io);
 errout:
 	fs->super->s_state = fs_state;
 #ifdef WORDS_BIGENDIAN
@@ -426,6 +429,11 @@ errout:
 }
 
 errcode_t ext2fs_close(ext2_filsys fs)
+{
+	return ext2fs_close2(fs, 0);
+}
+
+errcode_t ext2fs_close2(ext2_filsys fs, int flags)
 {
 	errcode_t	retval;
 	int		meta_blks;
@@ -451,10 +459,15 @@ errcode_t ext2fs_close(ext2_filsys fs)
 			fs->flags |= EXT2_FLAG_SUPER_ONLY | EXT2_FLAG_DIRTY;
 	}
 	if (fs->flags & EXT2_FLAG_DIRTY) {
-		retval = ext2fs_flush(fs);
+		retval = ext2fs_flush2(fs, flags);
 		if (retval)
 			return retval;
 	}
+
+	retval = ext2fs_mmp_stop(fs);
+	if (retval)
+		return retval;
+
 	ext2fs_free(fs);
 	return 0;
 }

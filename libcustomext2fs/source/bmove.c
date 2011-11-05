@@ -10,6 +10,7 @@
  * %End-Header%
  */
 
+#include "config.h"
 #include <stdio.h>
 #include <string.h>
 #if HAVE_UNISTD_H
@@ -140,7 +141,7 @@ errcode_t ext2fs_move_blocks(ext2_filsys fs,
 
 	while (ino) {
 		if ((inode.i_links_count == 0) ||
-		    !ext2fs_inode_has_valid_blocks(&inode))
+		    !ext2fs_inode_has_valid_blocks2(fs, &inode))
 			goto next;
 
 		pb.ino = ino;

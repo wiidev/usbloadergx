@@ -9,6 +9,7 @@
  * %End-Header%
  */
 
+#include "config.h"
 #include <stdio.h>
 #include <string.h>
 #if HAVE_UNISTD_H
@@ -522,7 +523,8 @@ errcode_t ext2fs_get_next_inode(ext2_inode_scan scan, ext2_ino_t *ino,
 errcode_t ext2fs_read_inode_full(ext2_filsys fs, ext2_ino_t ino,
 				 struct ext2_inode * inode, int bufsize)
 {
-	unsigned long 	group, block, block_nr, offset;
+	blk64_t		block_nr;
+	unsigned long 	group, block, offset;
 	char 		*ptr;
 	errcode_t	retval;
 	int 		clen, i, inodes_per_block, length;
@@ -628,7 +630,8 @@ errcode_t ext2fs_read_inode(ext2_filsys fs, ext2_ino_t ino,
 errcode_t ext2fs_write_inode_full(ext2_filsys fs, ext2_ino_t ino,
 				  struct ext2_inode * inode, int bufsize)
 {
-	unsigned long group, block, block_nr, offset;
+	blk64_t block_nr;
+	unsigned long group, block, offset;
 	errcode_t retval = 0;
 	struct ext2_inode_large temp_inode, *w_inode;
 	char *ptr;
@@ -669,8 +672,10 @@ errcode_t ext2fs_write_inode_full(ext2_filsys fs, ext2_ino_t ino,
 
 	if (length > (int) sizeof(struct ext2_inode_large)) {
 		w_inode = malloc(length);
-		if (!w_inode)
-			return ENOMEM;
+		if (!w_inode) {
+			retval = ENOMEM;
+			goto errout;
+		}
 	} else
 		w_inode = &temp_inode;
 	memset(w_inode, 0, length);

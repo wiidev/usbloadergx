@@ -10,6 +10,7 @@
  * %End-Header%
  */
 
+#include "config.h"
 #include <stdio.h>
 #if HAVE_ERRNO_H
 #include <errno.h>
@@ -65,9 +66,13 @@ errcode_t ext2fs_sync_device(int fd, int flushb)
 #ifdef BLKFLSBUF
 		if (ioctl (fd, BLKFLSBUF, 0) == 0)
 			return 0;
+#elif defined(__linux__)
+#warning BLKFLSBUF not defined
 #endif
 #ifdef FDFLUSH
 		ioctl (fd, FDFLUSH, 0);   /* In case this is a floppy */
+#elif defined(__linux__)
+#warning FDFLUSH not defined
 #endif
 	}
 	return 0;

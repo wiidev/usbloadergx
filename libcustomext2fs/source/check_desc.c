@@ -9,6 +9,7 @@
  * %End-Header%
  */
 
+#include "config.h"
 #include <stdio.h>
 #include <string.h>
 #if HAVE_UNISTD_H
@@ -37,11 +38,11 @@ errcode_t ext2fs_check_desc(ext2_filsys fs)
 	blk64_t first_block = fs->super->s_first_data_block;
 	blk64_t last_block = ext2fs_blocks_count(fs->super)-1;
 	blk64_t blk, b;
-	int j;
+	unsigned int j;
 
 	EXT2_CHECK_MAGIC(fs, EXT2_ET_MAGIC_EXT2FS_FILSYS);
 
-	retval = ext2fs_allocate_block_bitmap(fs, "check_desc map", &bmap);
+	retval = ext2fs_allocate_subcluster_bitmap(fs, "check_desc map", &bmap);
 	if (retval)
 		return retval;
 
@@ -53,8 +54,6 @@ errcode_t ext2fs_check_desc(ext2_filsys fs)
 					       EXT4_FEATURE_INCOMPAT_FLEX_BG)) {
 			first_block = ext2fs_group_first_block2(fs, i);
 			last_block = ext2fs_group_last_block2(fs, i);
-			if (i == (fs->group_desc_count - 1))
-				last_block = ext2fs_blocks_count(fs->super)-1;
 		}
 
 		/*

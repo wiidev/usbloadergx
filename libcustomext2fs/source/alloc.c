@@ -9,6 +9,7 @@
  * %End-Header%
  */
 
+#include "config.h"
 #include <stdio.h>
 #if HAVE_UNISTD_H
 #include <unistd.h>
@@ -52,6 +53,11 @@ static void check_block_uninit(ext2_filsys fs, ext2fs_block_bitmap map,
 	else
 		old_desc_blocks = fs->desc_blocks + fs->super->s_reserved_gdt_blocks;
 
+	for (i=0; i < fs->super->s_blocks_per_group; i++, blk++)
+		ext2fs_fast_unmark_block_bitmap2(map, blk);
+
+	blk = (group * fs->super->s_blocks_per_group) +
+		fs->super->s_first_data_block;
 	for (i=0; i < fs->super->s_blocks_per_group; i++, blk++) {
 		if ((blk == super_blk) ||
 		    (old_desc_blk && old_desc_blocks &&
@@ -64,8 +70,6 @@ static void check_block_uninit(ext2_filsys fs, ext2fs_block_bitmap map,
 		     (blk < ext2fs_inode_table_loc(fs, group)
 		      + fs->inode_blocks_per_group)))
 			ext2fs_fast_mark_block_bitmap2(map, blk);
-		else
-			ext2fs_fast_unmark_block_bitmap2(map, blk);
 	}
 	ext2fs_bg_flags_clear(fs, group, EXT2_BG_BLOCK_UNINIT);
 	ext2fs_group_desc_csum_set(fs, group);
@@ -149,6 +153,7 @@ errcode_t ext2fs_new_block2(ext2_filsys fs, blk64_t goal,
 			   ext2fs_block_bitmap map, blk64_t *ret)
 {
 	blk64_t	i;
+	int	c_ratio;
 
 	EXT2_CHECK_MAGIC(fs, EXT2_ET_MAGIC_EXT2FS_FILSYS);
 
@@ -159,6 +164,9 @@ errcode_t ext2fs_new_block2(ext2_filsys fs, blk64_t goal,
 	if (!goal || (goal >= ext2fs_blocks_count(fs->super)))
 		goal = fs->super->s_first_data_block;
 	i = goal;
+	c_ratio = 1 << ext2fs_get_bitmap_granularity(map);
+	if (c_ratio > 1)
+		goal &= ~EXT2FS_CLUSTER_MASK(fs);
 	check_block_uninit(fs, map,
 			   (i - fs->super->s_first_data_block) /
 			   EXT2_BLOCKS_PER_GROUP(fs->super));
@@ -173,7 +181,7 @@ errcode_t ext2fs_new_block2(ext2_filsys fs, blk64_t goal,
 			*ret = i;
 			return 0;
 		}
-		i++;
+		i = (i + c_ratio) & ~(c_ratio - 1);
 		if (i >= ext2fs_blocks_count(fs->super))
 			i = fs->super->s_first_data_block;
 	} while (i != goal);
@@ -254,6 +262,7 @@ errcode_t ext2fs_get_free_blocks2(ext2_filsys fs, blk64_t start, blk64_t finish,
 				 int num, ext2fs_block_bitmap map, blk64_t *ret)
 {
 	blk64_t	b = start;
+	int	c_ratio;
 
 	EXT2_CHECK_MAGIC(fs, EXT2_ET_MAGIC_EXT2FS_FILSYS);
 
@@ -267,6 +276,9 @@ errcode_t ext2fs_get_free_blocks2(ext2_filsys fs, blk64_t start, blk64_t finish,
 		finish = start;
 	if (!num)
 		num = 1;
+	c_ratio = 1 << ext2fs_get_bitmap_granularity(map);
+	b &= ~(c_ratio - 1);
+	finish &= ~(c_ratio -1);
 	do {
 		if (b+num-1 > ext2fs_blocks_count(fs->super))
 			b = fs->super->s_first_data_block;
@@ -274,7 +286,7 @@ errcode_t ext2fs_get_free_blocks2(ext2_filsys fs, blk64_t start, blk64_t finish,
 			*ret = b;
 			return 0;
 		}
-		b++;
+		b += c_ratio;
 	} while (b != finish);
 	return EXT2_ET_BLOCK_ALLOC_FAIL;
 }

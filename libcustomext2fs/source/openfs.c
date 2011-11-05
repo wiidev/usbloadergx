@@ -9,6 +9,7 @@
  * %End-Header%
  */
 
+#include "config.h"
 #include <stdio.h>
 #include <string.h>
 #if HAVE_UNISTD_H
@@ -21,6 +22,9 @@
 #endif
 #if HAVE_SYS_TYPES_H
 #include <sys/types.h>
+#endif
+#ifdef HAVE_ERRNO_H
+#include <errno.h>
 #endif
 
 #include "ext2_fs.h"
@@ -65,7 +69,7 @@ blk_t ext2fs_descriptor_block_loc(ext2_filsys fs, blk_t group_block, dgrp_t i)
 }
 
 errcode_t ext2fs_open(const char *name, int flags, int superblock,
-		      unsigned int block_size, io_channel * io,
+		      unsigned int block_size, io_channel io,
 		      ext2_filsys *ret_fs)
 {
 	return ext2fs_open2(name, 0, flags, superblock, block_size,
@@ -82,18 +86,19 @@ errcode_t ext2fs_open(const char *name, int flags, int superblock,
  * 	EXT2_FLAG_FORCE - Open the filesystem even if some of the
  *				features aren't supported.
  *	EXT2_FLAG_JOURNAL_DEV_OK - Open an ext3 journal device
+ *	EXT2_FLAG_SKIP_MMP - Open without multi-mount protection check.
  */
 errcode_t ext2fs_open2(const char *name, const char *io_options,
 		       int flags, int superblock,
-		       unsigned int block_size, io_channel * io,
+		       unsigned int block_size, io_channel io,
 		       ext2_filsys *ret_fs)
 {
 	ext2_filsys	fs;
-	io_manager manager = (*io)->manager;
+	io_manager manager = io->manager;
 	errcode_t	retval;
 	unsigned long	i, first_meta_bg;
 	__u32		features;
-	int		groups_per_block, blocks_per_group, io_flags;
+	unsigned int	groups_per_block, blocks_per_group, io_flags;
 	blk64_t		group_block, blk;
 	char		*dest, *cp;
 #ifdef WORDS_BIGENDIAN
@@ -109,7 +114,7 @@ errcode_t ext2fs_open2(const char *name, const char *io_options,
 
 	memset(fs, 0, sizeof(struct struct_ext2_filsys));
 	fs->magic = EXT2_ET_MAGIC_EXT2FS_FILSYS;
-	fs->io = *io;
+	fs->io = io;
 	fs->flags = flags;
 	/* don't overwrite sb backups unless flag is explicitly cleared */
 	fs->flags |= EXT2_FLAG_MASTER_SB_ONLY;
@@ -216,7 +221,7 @@ errcode_t ext2fs_open2(const char *name, const char *io_options,
 		features = fs->super->s_feature_incompat;
 #ifdef EXT2_LIB_SOFTSUPP_INCOMPAT
 		if (flags & EXT2_FLAG_SOFTSUPP_FEATURES)
-			features &= !EXT2_LIB_SOFTSUPP_INCOMPAT;
+			features &= ~EXT2_LIB_SOFTSUPP_INCOMPAT;
 #endif
 		if (features & ~EXT2_LIB_FEATURE_INCOMPAT_SUPP) {
 			retval = EXT2_ET_UNSUPP_FEATURE;
@@ -226,7 +231,7 @@ errcode_t ext2fs_open2(const char *name, const char *io_options,
 		features = fs->super->s_feature_ro_compat;
 #ifdef EXT2_LIB_SOFTSUPP_RO_COMPAT
 		if (flags & EXT2_FLAG_SOFTSUPP_FEATURES)
-			features &= !EXT2_LIB_SOFTSUPP_RO_COMPAT;
+			features &= ~EXT2_LIB_SOFTSUPP_RO_COMPAT;
 #endif
 		if ((flags & EXT2_FLAG_RW) &&
 		    (features & ~EXT2_LIB_FEATURE_RO_COMPAT_SUPP)) {
@@ -247,12 +252,24 @@ errcode_t ext2fs_open2(const char *name, const char *io_options,
 		retval = EXT2_ET_CORRUPT_SUPERBLOCK;
 		goto cleanup;
 	}
-	fs->blocksize = EXT2_BLOCK_SIZE(fs->super);
+	if (!EXT2_HAS_RO_COMPAT_FEATURE(fs->super,
+					EXT4_FEATURE_RO_COMPAT_BIGALLOC) &&
+	    (fs->super->s_log_block_size != fs->super->s_log_cluster_size)) {
+		retval = EXT2_ET_CORRUPT_SUPERBLOCK;
+		goto cleanup;
+	}
+	fs->fragsize = fs->blocksize = EXT2_BLOCK_SIZE(fs->super);
 	if (EXT2_INODE_SIZE(fs->super) < EXT2_GOOD_OLD_INODE_SIZE) {
 		retval = EXT2_ET_CORRUPT_SUPERBLOCK;
 		goto cleanup;
 	}
-	fs->clustersize = EXT2_CLUSTER_SIZE(fs->super);
+	fs->cluster_ratio_bits = fs->super->s_log_cluster_size -
+		fs->super->s_log_block_size;
+	if (EXT2_BLOCKS_PER_GROUP(fs->super) !=
+	    EXT2_CLUSTERS_PER_GROUP(fs->super) << fs->cluster_ratio_bits) {
+		retval = EXT2_ET_CORRUPT_SUPERBLOCK;
+		goto cleanup;
+	}
 	fs->inode_blocks_per_group = ((EXT2_INODES_PER_GROUP(fs->super) *
 				       EXT2_INODE_SIZE(fs->super) +
 				       EXT2_BLOCK_SIZE(fs->super) - 1) /
@@ -312,6 +329,8 @@ errcode_t ext2fs_open2(const char *name, const char *io_options,
 		goto cleanup;
 	if (!group_block)
 		group_block = fs->super->s_first_data_block;
+	if (group_block == 0 && fs->blocksize == 1024)
+		group_block = 1; /* Deal with 1024 blocksize && bigalloc */
 	dest = (char *) fs->group_desc;
 	groups_per_block = EXT2_DESC_PER_BLOCK(fs->super);
 	if (fs->super->s_feature_incompat & EXT2_FEATURE_INCOMPAT_META_BG)
@@ -367,6 +386,18 @@ errcode_t ext2fs_open2(const char *name, const char *io_options,
 
 	fs->flags &= ~EXT2_FLAG_NOFREE_ON_ERROR;
 	*ret_fs = fs;
+
+	if ((fs->super->s_feature_incompat & EXT4_FEATURE_INCOMPAT_MMP) &&
+	    !(flags & EXT2_FLAG_SKIP_MMP) &&
+	    (flags & (EXT2_FLAG_RW | EXT2_FLAG_EXCLUSIVE))) {
+		retval = ext2fs_mmp_start(fs);
+		if (retval) {
+			fs->flags |= EXT2_FLAG_SKIP_MMP; /* just do cleanup */
+			ext2fs_mmp_stop(fs);
+			goto cleanup;
+		}
+	}
+
 	return 0;
 cleanup:
 	if (flags & EXT2_FLAG_NOFREE_ON_ERROR)

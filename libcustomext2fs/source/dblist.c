@@ -9,6 +9,7 @@
  * %End-Header%
  */
 
+#include "config.h"
 #include <stdio.h>
 #if HAVE_UNISTD_H
 #include <unistd.h>
@@ -60,7 +61,7 @@ static errcode_t make_dblist(ext2_filsys fs, ext2_ino_t size,
 			     struct ext2_db_entry2 *list,
 			     ext2_dblist *ret_dblist)
 {
-	ext2_dblist	dblist;
+	ext2_dblist	dblist = 0;
 	errcode_t	retval;
 	ext2_ino_t	num_dirs;
 	size_t		len;
@@ -73,7 +74,7 @@ static errcode_t make_dblist(ext2_filsys fs, ext2_ino_t size,
 
 	retval = ext2fs_get_mem(sizeof(struct ext2_struct_dblist), &dblist);
 	if (retval)
-		return retval;
+		goto cleanup;
 	memset(dblist, 0, sizeof(struct ext2_struct_dblist));
 
 	dblist->magic = EXT2_ET_MAGIC_DBLIST;
@@ -172,7 +173,7 @@ errcode_t ext2fs_add_dir_block2(ext2_dblist dblist, ext2_ino_t ino,
 					   sizeof(struct ext2_db_entry2),
 					   &dblist->list);
 		if (retval) {
-			dblist->size -= 100;
+			dblist->size = old_size / sizeof(struct ext2_db_entry2);
 			return retval;
 		}
 	}

@@ -10,6 +10,7 @@
  * %End-Header%
  */
 
+#include "config.h"
 #include "ext2fs.h"
 #include "ext2fsP.h"
 
@@ -68,7 +69,7 @@ void ext2fs_numeric_progress_update(ext2_filsys fs,
 	if (progress->skip_progress)
 		return;
 
-	fprintf(stdout, "%*llu/%*llu", progress->log_max, val,
+	printf("%*llu/%*llu", progress->log_max, val,
 	       progress->log_max, progress->max);
 	fprintf(stdout, "%.*s", (2*progress->log_max)+1, backspaces);
 }

@@ -10,6 +10,7 @@
  * %End-Header%
  */
 
+#include "config.h"
 #if HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif
@@ -46,7 +47,7 @@ STATIC __u16 ext2fs_group_desc_csum(ext2_filsys fs, dgrp_t group)
 	desc = ext2fs_group_desc(fs, fs->group_desc, group);
 
 	if (fs->super->s_feature_ro_compat & EXT4_FEATURE_RO_COMPAT_GDT_CSUM) {
-		int offset = offsetof(struct ext2_group_desc, bg_checksum);
+		size_t offset = offsetof(struct ext2_group_desc, bg_checksum);
 
 #ifdef WORDS_BIGENDIAN
 		struct ext4_group_desc swabdesc;
@@ -127,10 +128,10 @@ errcode_t ext2fs_set_gdt_csum(ext2_filsys fs)
 		return 0;
 
 	for (i = 0; i < fs->group_desc_count; i++) {
-		unsigned int old_csum = ext2fs_bg_checksum(fs, i);
-		int old_unused = ext2fs_bg_itable_unused(fs, i);
-		unsigned int old_flags = ext2fs_bg_flags(fs, i);
-		int old_free_inodes_count = ext2fs_bg_free_inodes_count(fs, i);
+		__u32 old_csum = ext2fs_bg_checksum(fs, i);
+		__u32 old_unused = ext2fs_bg_itable_unused(fs, i);
+		__u32 old_flags = ext2fs_bg_flags(fs, i);
+		__u32 old_free_inodes_count = ext2fs_bg_free_inodes_count(fs, i);
 
 		if (old_free_inodes_count == sb->s_inodes_per_group) {
 			ext2fs_bg_flags_set(fs, i, EXT2_BG_INODE_UNINIT);

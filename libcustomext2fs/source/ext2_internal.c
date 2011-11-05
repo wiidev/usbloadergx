@@ -249,7 +249,7 @@ static ext2_ino_t ext2PathToInode(ext2_vd *vd, const char * path)
 
         filename[i] = '\0';
 
-        errorcode = ext2fs_namei(vd->fs, vd->root, parent, filename, &ino);
+        errorcode = ext2fs_namei_follow(vd->fs, vd->root, parent, filename, &ino);
         if(errorcode != EXT2_ET_OK)
             return 0;
 
@@ -389,7 +389,7 @@ static ext2_ino_t ext2CreateSymlink(ext2_vd *vd, const char *path, const char * 
             if (!err)
             {
                 inode.i_block[0] = blk;
-                inode.i_blocks = vd->fs->blocksize / BYTES_PER_SECTOR;
+                inode.i_blocks = vd->fs->blocksize / 512;
                 vd->fs->io->manager->write_blk(vd->fs->io, blk, 1, buffer);
                 ext2fs_block_alloc_stats(vd->fs, blk, +1);
             }

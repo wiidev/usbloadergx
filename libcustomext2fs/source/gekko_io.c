@@ -48,6 +48,59 @@ static s64 device_gekko_io_writebytes(io_channel dev, s64 offset, s64 count, con
 static bool device_gekko_io_writesectors(io_channel dev, sec_t sector, sec_t numSectors, const void* buffer);
 
 /**
+ * Get the sector size of the device
+ */
+static int readSectorSize(const DISC_INTERFACE* interace)
+{
+    int counter1 = 0;
+    int counter2 = 0;
+    int i;
+
+    u8 *memblock = (u8 *) mem_alloc(MAX_SECTOR_SIZE);
+    if(!memblock)
+        return 512;
+
+    memset(memblock, 0x00, MAX_SECTOR_SIZE);
+
+    if(!interace->readSectors(0, 1, memblock)) {
+        mem_free(memblock);
+        return 512;
+    }
+
+    for(i = 0; i < MAX_SECTOR_SIZE; ++i)
+    {
+        if(memblock[i] != 0x00)
+            counter1++;
+    }
+
+    memset(memblock, 0xFF, MAX_SECTOR_SIZE);
+
+    if(!interace->readSectors(0, 1, memblock)) {
+        mem_free(memblock);
+        return 512;
+    }
+
+    for(i = 0; i < MAX_SECTOR_SIZE; ++i)
+    {
+        if(memblock[i] != 0xFF)
+            counter2++;
+    }
+
+    mem_free(memblock);
+
+    if(counter1 <= 512 && counter2 <= 512)
+        return 512;
+
+    if(counter1 <= 1024 && counter2 <= 1024)
+        return 1024;
+
+    if(counter1 <= 2048 && counter2 <= 2048)
+        return 2048;
+
+    return 4096;
+}
+
+/**
  *
  */
 static errcode_t device_gekko_io_open(const char *name, int flags, io_channel *dev)
@@ -78,8 +131,9 @@ static errcode_t device_gekko_io_open(const char *name, int flags, io_channel *d
         return -1;
     }
 
-    struct ext2_super_block	* super = (struct ext2_super_block	*) mem_alloc(SUPERBLOCK_SIZE);	//1024 bytes
-    if(!super)
+    // Allocate 4 x max sector size in case of 4096 sector size
+    u8 *buffer = (u8 *) mem_alloc(4 * MAX_SECTOR_SIZE);
+    if(!buffer)
     {
         ext2_log_trace("no memory for superblock");
         errno = ENOMEM;
@@ -87,44 +141,49 @@ static errcode_t device_gekko_io_open(const char *name, int flags, io_channel *d
     }
 
     // Check that there is a valid EXT boot sector at the start of the device
-    if (!interface->readSectors(fd->startSector+SUPERBLOCK_OFFSET/BYTES_PER_SECTOR, SUPERBLOCK_SIZE/BYTES_PER_SECTOR, super))
+    if (!interface->readSectors(fd->startSector, 4, buffer))
     {
         ext2_log_trace("read failure @ sector %d\n", fd->startSector);
         errno = EROFS;
-        mem_free(super);
+        mem_free(buffer);
         return -1;
     }
+
+    struct ext2_super_block	* super = (struct ext2_super_block	*) (buffer + SUPERBLOCK_OFFSET);
 
     if(ext2fs_le16_to_cpu(super->s_magic) != EXT2_SUPER_MAGIC)
     {
-        mem_free(super);
+        ext2_log_trace("super mismatch: read %04X - expected %04X\n", ext2fs_le16_to_cpu(super->s_magic), EXT2_SUPER_MAGIC);
+        mem_free(buffer);
         errno = EROFS;
         return -1;
     }
-
-    // Parse the boot sector
-    fd->sectorSize = BYTES_PER_SECTOR;
-    fd->offset = 0;
-    fd->sectorCount = 0;
 
     switch(ext2fs_le32_to_cpu(super->s_log_block_size))
     {
         case 1:
-            fd->sectorCount = (sec_t) ((u64) ext2fs_le32_to_cpu(super->s_blocks_count) * (u64) 2048 / (u64) BYTES_PER_SECTOR);
+            (*dev)->block_size = 2048;
             break;
         case 2:
-            fd->sectorCount = (sec_t) ((u64) ext2fs_le32_to_cpu(super->s_blocks_count) * (u64) 4096 / (u64) BYTES_PER_SECTOR);
+            (*dev)->block_size = 4096;
             break;
         case 3:
-            fd->sectorCount = (sec_t) ((u64) ext2fs_le32_to_cpu(super->s_blocks_count) * (u64) 8192 / (u64) BYTES_PER_SECTOR);
+            (*dev)->block_size = 8192;
             break;
         default:
         case 0:
-            fd->sectorCount = (sec_t) ((u64) ext2fs_le32_to_cpu(super->s_blocks_count) * (u64) 1024 / (u64) BYTES_PER_SECTOR);
+            (*dev)->block_size = 1024;
             break;
     }
 
-    mem_free(super);
+
+    // Parse the boot sector
+    fd->sectorSize = readSectorSize(interface);
+    fd->offset = 0;
+    fd->sectorCount = 0;
+    fd->sectorCount = (sec_t) ((u64) ext2fs_le32_to_cpu(super->s_blocks_count) * (u64) ((*dev)->block_size) / (u64) fd->sectorSize);
+
+    mem_free(buffer);
 
     // Create the cache
     fd->cache = cache_constructor(fd->cachePageCount, fd->cachePageSize, interface, fd->startSector + fd->sectorCount, fd->sectorSize);

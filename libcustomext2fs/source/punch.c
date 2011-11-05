@@ -9,6 +9,7 @@
  * %End-Header%
  */
 
+#include "config.h"
 #include <stdio.h>
 #include <string.h>
 #if HAVE_UNISTD_H
@@ -203,7 +204,7 @@ static errcode_t ext2fs_punch_extent(ext2_filsys fs, ext2_ino_t ino,
 		if (start <= extent.e_lblk) {
 			if (end < extent.e_lblk)
 				goto next_extent;
-			dbg_printf("Case #1\n");
+			dbg_printf("Case #%d\n", 1);
 			/* Start of deleted region before extent; 
 			   adjust beginning of extent */
 			free_start = extent.e_pblk;
@@ -219,7 +220,7 @@ static errcode_t ext2fs_punch_extent(ext2_filsys fs, ext2_ino_t ino,
 				break;
 			/* End of deleted region after extent;
 			   adjust end of extent */
-			dbg_printf("Case #2\n");
+			dbg_printf("Case #%d\n", 2);
 			newlen = start - extent.e_lblk;
 			free_start = extent.e_pblk + newlen;
 			free_count = extent.e_len - newlen;
@@ -227,7 +228,7 @@ static errcode_t ext2fs_punch_extent(ext2_filsys fs, ext2_ino_t ino,
 		} else {
 			struct ext2fs_extent	newex;
 
-			dbg_printf("Case #3\n");
+			dbg_printf("Case #%d\n", 3);
 			/* The hard case; we need to split the extent */
 			newex.e_pblk = extent.e_pblk +
 				(end + 1 - extent.e_lblk);
@@ -255,7 +256,7 @@ static errcode_t ext2fs_punch_extent(ext2_filsys fs, ext2_ino_t ino,
 			dbg_print_extent("replacing", &extent);
 			retval = ext2fs_extent_replace(handle, 0, &extent);
 		} else {
-			dbg_printf("deleting current extent\n");
+			dbg_printf("deleting current extent%s\n", "");
 			retval = ext2fs_extent_delete(handle, 0);
 		}
 		if (retval)
