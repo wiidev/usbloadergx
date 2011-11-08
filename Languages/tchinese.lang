@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# tchinese.lang - r1098
+# tchinese.lang - r1120
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-22 12:10+0200\n"
+"POT-Creation-Date: 2011-11-08 20:25+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -125,7 +125,7 @@ msgid "AUTO"
 msgstr "自動"
 
 msgid "AXNextFrame"
-msgstr ""
+msgstr "AXNextFrame"
 
 msgid "Add category"
 msgstr "增加類別"
@@ -137,7 +137,7 @@ msgid "All Partitions"
 msgstr "所有磁區"
 
 msgid "All files extracted."
-msgstr ""
+msgstr "所有檔案已解壓縮。"
 
 msgid "All images downloaded successfully."
 msgstr "所有圖片已下載成功。"
@@ -367,7 +367,7 @@ msgid "Continue to install game?"
 msgstr "繼續安裝遊戲？"
 
 msgid "Continue?"
-msgstr ""
+msgstr "繼續嗎？"
 
 msgid "Controllevel"
 msgstr "遊戲分級"
@@ -386,7 +386,7 @@ msgid "Could not create path: %s"
 msgstr "無法建立路徑： %s"
 
 msgid "Could not extract files for:"
-msgstr ""
+msgstr "無法解壓縮檔案對："
 
 msgid "Could not find info for this game in the wiitdb.xml."
 msgstr "無法從wiitdb.xml找到遊戲資訊。"
@@ -410,7 +410,7 @@ msgid "Could not save."
 msgstr "無法儲存"
 
 msgid "Could not write file."
-msgstr ""
+msgstr "無法寫入檔案。"
 
 msgid "Could not write to:"
 msgstr "無法寫入到："
@@ -437,7 +437,7 @@ msgid "DOL Path"
 msgstr "DOL 路徑"
 
 msgid "Debugger Paused Start"
-msgstr ""
+msgstr "偵錯器暫停啟動"
 
 msgid "Dec"
 msgstr "十二月"
@@ -521,10 +521,10 @@ msgid "Do you want to download this theme?"
 msgstr "是否要下載這個佈景主題嗎？"
 
 msgid "Do you want to extract all the save games?"
-msgstr ""
+msgstr "是否要提取所有遊戲存檔嗎？"
 
 msgid "Do you want to extract the save game?"
-msgstr ""
+msgstr "是否要提取這遊戲存檔嗎？"
 
 msgid "Do you want to format:"
 msgstr "是否格式化："
@@ -646,7 +646,7 @@ msgid "Error:"
 msgstr "錯誤："
 
 msgid "Errors occured."
-msgstr ""
+msgstr "發生錯誤。"
 
 msgid "Everything"
 msgstr ""
@@ -658,19 +658,19 @@ msgid "Exit to where?"
 msgstr "退出到？"
 
 msgid "Export All Saves to EmuNand"
-msgstr ""
+msgstr "輸出所有存檔到模擬Nand"
 
 msgid "Extract Save to EmuNand"
-msgstr ""
+msgstr "提取存檔到模擬Nand"
 
 msgid "Extracting file:"
-msgstr ""
+msgstr "提取檔案："
 
 msgid "Extracting files..."
 msgstr "提取檔案中..."
 
 msgid "Extracting files:"
-msgstr ""
+msgstr "提取檔案："
 
 msgid "Extracting nand files:"
 msgstr ""
@@ -682,7 +682,7 @@ msgid "Failed formating"
 msgstr "格式化失敗"
 
 msgid "Failed to extract all files. Savegame might not exist."
-msgstr ""
+msgstr "所有檔案提取失敗。遊戲存檔可能不存在。"
 
 msgid "Failed to extract."
 msgstr "提取失敗。"
@@ -706,7 +706,7 @@ msgid "File not found."
 msgstr "找不到該檔案。"
 
 msgid "Files extracted successfully."
-msgstr ""
+msgstr "檔案提取成功。"
 
 #, c-format
 msgid "Filesize is %i Byte."
@@ -758,7 +758,7 @@ msgid "French"
 msgstr "法文"
 
 msgid "Full"
-msgstr ""
+msgstr "全部"
 
 msgid "Full Cover Path"
 msgstr "完整封面路徑"
@@ -788,10 +788,10 @@ msgid "GUI Settings"
 msgstr "介面設定"
 
 msgid "GXDraw"
-msgstr ""
+msgstr "GXDraw"
 
 msgid "GXFlush"
-msgstr ""
+msgstr "GXFlush"
 
 msgid "Game ID"
 msgstr "遊戲 ID"
@@ -869,7 +869,7 @@ msgid "Homebrew Launcher"
 msgstr "HBC 應用程式"
 
 msgid "Hooktype"
-msgstr ""
+msgstr "鉤狀類型"
 
 msgid "Hour"
 msgstr "小時制"
@@ -922,7 +922,7 @@ msgid "Install a game"
 msgstr "安裝遊戲"
 
 msgid "Install finished"
-msgstr ""
+msgstr "已安裝完成"
 
 msgid "Installing content... Ok!"
 msgstr "正在安裝內容...完成！"
@@ -946,7 +946,7 @@ msgid "It seems that you have some information that will be helpful to us. Pleas
 msgstr "請將這些訊息傳送至開發小組以幫助本軟體開發"
 
 msgid "Italian"
-msgstr "意大利文"
+msgstr "義大利文"
 
 msgid "Jan"
 msgstr "一月"
@@ -955,7 +955,7 @@ msgid "Japanese"
 msgstr "日文"
 
 msgid "Joypad"
-msgstr ""
+msgstr "手把"
 
 msgid "July"
 msgstr "七月"
@@ -964,7 +964,7 @@ msgid "June"
 msgstr "六月"
 
 msgid "KPAD Read"
-msgstr ""
+msgstr "KPAD 讀取"
 
 msgid "Keyboard"
 msgstr "鍵盤"
@@ -1064,16 +1064,16 @@ msgid "Music Volume"
 msgstr "音樂音量"
 
 msgid "Nand Emu Path"
-msgstr ""
+msgstr "Nand 模擬器路徑"
 
 msgid "Nand Emulation"
-msgstr ""
+msgstr "Nand 模擬器"
 
 msgid "Nand Emulation is only available on D2X cIOS!"
-msgstr ""
+msgstr "Nand 模擬器僅可用D2X cIOS!"
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
-msgstr ""
+msgstr "Nand 模擬器僅能在 FAT/FAT32 格式磁區執行!"
 
 msgid "Neither"
 msgstr "皆不顯示"
@@ -1115,7 +1115,7 @@ msgid "No data could be read."
 msgstr "無法讀取數據"
 
 msgid "No disc inserted."
-msgstr ""
+msgstr "未插入光碟。"
 
 msgid "No favorites selected."
 msgstr "沒有選取最愛。"
@@ -1178,7 +1178,7 @@ msgid "ON"
 msgstr "開啟"
 
 msgid "OSSleepThread"
-msgstr ""
+msgstr "系統睡眠主題"
 
 msgid "Ocarina"
 msgstr "金手指"
@@ -1208,7 +1208,7 @@ msgid "Parental Control"
 msgstr "親子控制"
 
 msgid "Partial"
-msgstr ""
+msgstr "部分的"
 
 msgid "Partition"
 msgstr "磁區"
@@ -1259,7 +1259,7 @@ msgid "Prev"
 msgstr "往前"
 
 msgid "Process finished."
-msgstr ""
+msgstr "程序已完成。"
 
 msgid "Prompts Buttons"
 msgstr "顯示校正"
@@ -1289,10 +1289,10 @@ msgid "Reload SD"
 msgstr "重新載入 SD 卡"
 
 msgid "Reloading game list now, please wait..."
-msgstr ""
+msgstr "現在重新載入遊戲清單，請稍候..."
 
 msgid "Remember Unlock"
-msgstr ""
+msgstr "記憶解鎖"
 
 msgid "Remove update"
 msgstr "移除更新"
@@ -1355,7 +1355,7 @@ msgid "Saved"
 msgstr "已儲存"
 
 msgid "Savegame might not exist for this game."
-msgstr ""
+msgstr "這個遊戲的遊戲存檔可能不存在。"
 
 msgid "Screensaver"
 msgstr "螢幕保護"
@@ -1391,7 +1391,7 @@ msgid "Show Free Space"
 msgstr "顯示可用空間"
 
 msgid "Show Play Count"
-msgstr ""
+msgstr "顯示遊戲執行次數"
 
 msgid "Shutdown System"
 msgstr "關閉系統"
@@ -1400,7 +1400,7 @@ msgid "Shutdown Wii"
 msgstr "關閉Wii主機"
 
 msgid "Skip Errors"
-msgstr ""
+msgstr "略過錯誤"
 
 msgid "Sneek Video Patch"
 msgstr "Sneek視訊修正"
@@ -1448,7 +1448,7 @@ msgid "Success"
 msgstr "成功"
 
 msgid "Success."
-msgstr ""
+msgstr "成功。"
 
 msgid "Success:"
 msgstr "成功："
@@ -1499,10 +1499,10 @@ msgid "The game installation is disabled under this IOS because of instability i
 msgstr "用此IOS遊戲安裝選項會被關閉，因為USB寫入資料不穩定。"
 
 msgid "The save game will be extracted to your emu nand path."
-msgstr ""
+msgstr "遊戲存檔將被提取到你的模擬 nand 路徑。"
 
 msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
-msgstr ""
+msgstr "遊戲存檔將被提取到你的模擬 nand 路徑。注意：所有存在的存檔將被覆蓋。"
 
 msgid "The wad file was installed"
 msgstr "wad檔已安裝"
@@ -1614,13 +1614,13 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "已更新安裝在Homebrew目錄的ZIP檔案"
 
 msgid "Use System Font"
-msgstr ""
+msgstr "使用系統字型"
 
 msgid "Use global"
 msgstr "使用整體設定"
 
 msgid "VBI (Default)"
-msgstr ""
+msgstr "VBI (預設)"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV 修改"
@@ -1693,7 +1693,7 @@ msgid "Wiinnertag requires you to enable automatic network connect on applicatio
 msgstr "在程式啟動時Wiinnertag要求能夠自動連接網路。現在是否要啟動它？"
 
 msgid "Wiird Debugger"
-msgstr ""
+msgstr "Wiird 偵錯器"
 
 msgid "Writing GXGameCategories.xml"
 msgstr "正在寫入 GXGameCategories.xml"
@@ -1770,11 +1770,11 @@ msgstr "的"
 msgid "seconds left"
 msgstr "剩餘秒數"
 
-#~ msgid "Language File"
-#~ msgstr "語言檔案"
-
 #~ msgid "Are you sure you want to import game categories from WiiTDB?"
 #~ msgstr "確定要從WiiTDB匯入遊戲類別嗎？"
+
+#~ msgid "Language File"
+#~ msgstr "語言檔案"
 
 #~ msgid "Titles from WiiTDB"
 #~ msgstr "從WiiTDB顯示遊戲名稱"

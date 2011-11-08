@@ -1,11 +1,11 @@
 # USB Loader GX
-# german.lang - r1117
+# german.lang - r1124
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-22 12:10+0200\n"
+"POT-Creation-Date: 2011-10-22 16:15+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -167,7 +167,7 @@ msgid "Are you sure you want to delete this category?"
 msgstr "Soll diese Kategorie gelöscht werden?"
 
 msgid "Are you sure you want to import game categories from GameTDB?"
-msgstr ""
+msgstr "Sollen die Spiele-Kategorien aus der WiiTDB importiert werden?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "Bist du sicher, dass du USB Loader GX sperren willst?"
@@ -533,7 +533,7 @@ msgid "Do you want to load the default theme?"
 msgstr "Soll das DEFAULT Theme geladen werden?"
 
 msgid "Do you want to re-init network?"
-msgstr ""
+msgstr "Netzwerk re-initialisieren?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Soll die freier Speicher Info auf allen Partitionen synchronisiert werden?"
@@ -581,7 +581,7 @@ msgid "Downloading pagelist:"
 msgstr "Lade Seitenliste herunter:"
 
 msgid "Dump NAND to EmuNand"
-msgstr ""
+msgstr "NAND zu EmuNand dumpen"
 
 msgid "Dutch"
 msgstr "Niederländisch"
@@ -599,7 +599,7 @@ msgid "English"
 msgstr "Englisch"
 
 msgid "Enter Path"
-msgstr ""
+msgstr "Pfad eintragen"
 
 msgid "Error"
 msgstr "Fehler"
@@ -649,7 +649,7 @@ msgid "Errors occured."
 msgstr "Fehler aufgetreten."
 
 msgid "Everything"
-msgstr ""
+msgstr "Alles"
 
 msgid "Exit"
 msgstr "Beenden"
@@ -658,10 +658,10 @@ msgid "Exit to where?"
 msgstr "Beenden zum..."
 
 msgid "Export All Saves to EmuNand"
-msgstr "Alle Spielstände nach EmuNand exportiren."
+msgstr "Alle Spielstände in EmuNand exportieren"
 
 msgid "Extract Save to EmuNand"
-msgstr "Spielstand auf EmuNand entpacken"
+msgstr "Spielstand auf EmuNand kopieren"
 
 msgid "Extracting file:"
 msgstr "Entpacke Datei:"
@@ -673,7 +673,7 @@ msgid "Extracting files:"
 msgstr "Entpacke Dateien:"
 
 msgid "Extracting nand files:"
-msgstr ""
+msgstr "Extrahiere Nand Dateien:"
 
 msgid "Failed"
 msgstr "Fehlgeschlagen"
@@ -833,7 +833,7 @@ msgid "Game/Install Partition"
 msgstr "Spiel/Instal. Partition"
 
 msgid "GameTDB Path"
-msgstr ""
+msgstr "GameTDB Pfad"
 
 msgid "Gamename [GAMEID]"
 msgstr "Spielname [SPIELID]"
@@ -973,7 +973,7 @@ msgid "Korean"
 msgstr "Koreanisch"
 
 msgid "Language Files"
-msgstr ""
+msgstr "Sprachdateien"
 
 msgid "Language change:"
 msgstr "Sprache ändern:"
@@ -1493,13 +1493,13 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Das eingegebene Verzeichnis existiert nicht. Möchtest du es erstellen?"
 
 msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
-msgstr ""
+msgstr "DAtein werden in den EmuNand Pfad kopiert. Achtung: Alle vorhandenen Dateien werden überschrieben."
 
 msgid "The game installation is disabled under this IOS because of instability in usb write."
 msgstr "Das Installieren von Spielen ist bei Verwendung dieses IOS wegen Instabilität beim USB-Schreiben deaktiviert."
 
 msgid "The save game will be extracted to your emu nand path."
-msgstr "Der Spielstand wird zum EmuNand Pfad entpackt."
+msgstr "Der Spielstand wird in den EmuNand Pfad kopiert."
 
 msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
 msgstr "Die Spielstände werden zum EmuNand-Pfad entpackt. Achtung: Alle vorhandenen Spielstände werden überschrieben."
@@ -1530,7 +1530,7 @@ msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you ha
 msgstr "Dieses IOS ist das BootMii IOS. Solltest du sicher sein, dass es nicht das BootMii IOS ist und du dort etwas anderes installiert hast, ignoriere diese Warnung."
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
-msgstr "Dieses IOS wurde nicht in der Titelliste gefunden. Wenn su sicher bist sie installiert zu haben, ignoriere die Warnung."
+msgstr "Dieses IOS wurde nicht in der Titelliste gefunden. Wenn du sicher bist es installiert zu haben, ignoriere die Warnung."
 
 msgid "Time left:"
 msgstr "Noch:"
@@ -1539,7 +1539,7 @@ msgid "Title Launcher"
 msgstr "Channel Launcher"
 
 msgid "Titles from GameTDB"
-msgstr ""
+msgstr "Namen aus der WiiTDB"
 
 msgid "Tooltips"
 msgstr "Quickinfo"
@@ -1657,7 +1657,7 @@ msgid "What should be deleted for this game title:"
 msgstr "Was sollte bei diesem Spiel gelöscht werden:"
 
 msgid "What to extract from NAND?"
-msgstr ""
+msgstr "Was soll aus dem NAND kopiert werden?"
 
 msgid "WiFi Features"
 msgstr "WiFi Fähigkeiten"
@@ -1675,10 +1675,10 @@ msgid "Wii Settings"
 msgstr "Wii Datenverwaltung"
 
 msgid "WiiTDB.xml"
-msgstr ""
+msgstr "WiiTDB.xml"
 
 msgid "WiiTDB.xml is up to date."
-msgstr ""
+msgstr "WiiTDB.xml ist aktuell."
 
 msgid "Wiilight"
 msgstr "Licht am Laufwerk"
@@ -1714,7 +1714,7 @@ msgid "You cannot delete this category."
 msgstr "Kategorie kann nicht gelöscht werden."
 
 msgid "You need to select or format a partition"
-msgstr "Du must eine Partition auswählen oder formatieren."
+msgstr "Du musst eine Partition auswählen oder formatieren."
 
 msgid "and translators for language files updates"
 msgstr "und Übersetzer für Sprachdateien Updates"
@@ -1735,7 +1735,7 @@ msgid "for FAT/NTFS support"
 msgstr "für den FAT/NTFS Support"
 
 msgid "for GameTDB and hosting covers / disc images"
-msgstr ""
+msgstr "für GameTDB und gehostete Cover / DVD Bilder"
 
 msgid "for Ocarina"
 msgstr "für Ocarina"

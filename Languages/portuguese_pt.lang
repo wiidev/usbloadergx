@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# portuguese_pt.lang - r1114
+# portuguese_pt.lang - r1119
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-10-22 12:10+0200\n"
-"PO-Revision-Date: 2011-09-19 13:30+0100\n"
+"PO-Revision-Date: 2011-11-03 11:00+0000\n"
 "Last-Translator: pplucky <pplucky@gmail.com>\n"
 "Language-Team: Sky8000, pplucky\n"
 "Language: \n"
@@ -125,7 +125,7 @@ msgid "AUTO"
 msgstr "AUTO"
 
 msgid "AXNextFrame"
-msgstr "AXProxFrame"
+msgstr "AXNextFrame"
 
 msgid "Add category"
 msgstr "Adicionar categ."
@@ -137,7 +137,7 @@ msgid "All Partitions"
 msgstr "Todas as Partições"
 
 msgid "All files extracted."
-msgstr ""
+msgstr "Todos os ficheiros extraídos."
 
 msgid "All images downloaded successfully."
 msgstr "Todas as imagens descarregadas com sucesso."
@@ -167,7 +167,7 @@ msgid "Are you sure you want to delete this category?"
 msgstr "Tem a certeza que quer apagar esta categoria?"
 
 msgid "Are you sure you want to import game categories from GameTDB?"
-msgstr ""
+msgstr "Tem a certeza que quer importar as categorias de jogos da GameTDB?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "Tem a certeza que quer bloquear o USB Loader GX?"
@@ -367,7 +367,7 @@ msgid "Continue to install game?"
 msgstr "Continuar instalação do jogo?"
 
 msgid "Continue?"
-msgstr ""
+msgstr "Continuar?"
 
 msgid "Controllevel"
 msgstr "Nível de Controle"
@@ -386,7 +386,7 @@ msgid "Could not create path: %s"
 msgstr "Não foi possível criar caminho: %s"
 
 msgid "Could not extract files for:"
-msgstr ""
+msgstr "Não foi possível extrair ficheiros para:"
 
 msgid "Could not find info for this game in the wiitdb.xml."
 msgstr "Não foi encontrada info do jogo no wiitdb.xml"
@@ -410,7 +410,7 @@ msgid "Could not save."
 msgstr "Não foi possível gravar."
 
 msgid "Could not write file."
-msgstr ""
+msgstr "Não foi possível escrever ficheiro."
 
 msgid "Could not write to:"
 msgstr "Não foi possível escrever para:"
@@ -521,11 +521,11 @@ msgid "Do you want to download this theme?"
 msgstr "Deseja descarregar este tema?"
 
 msgid "Do you want to extract all the save games?"
-msgstr ""
+msgstr "Deseja extrair todas as gravações?"
 
 msgid "Do you want to extract the save game?"
-msgstr ""
-
+msgstr "Deseja extrair esta gravação?"
+	
 msgid "Do you want to format:"
 msgstr "Deseja FORMATAR:"
 
@@ -533,7 +533,7 @@ msgid "Do you want to load the default theme?"
 msgstr "Deseja carregar o tema por defeito?"
 
 msgid "Do you want to re-init network?"
-msgstr ""
+msgstr "Deseja reinicializar a rede?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Deseja sincronizar a info de espaço livre em todas as partições FAT32?"
@@ -581,7 +581,7 @@ msgid "Downloading pagelist:"
 msgstr "A Descarregar a lista:"
 
 msgid "Dump NAND to EmuNand"
-msgstr ""
+msgstr "Sacar NAND para EmuNand"
 
 msgid "Dutch"
 msgstr "Holandês"
@@ -599,7 +599,7 @@ msgid "English"
 msgstr "Inglês"
 
 msgid "Enter Path"
-msgstr ""
+msgstr "Entrar Caminho"
 
 msgid "Error"
 msgstr "Erro"
@@ -646,10 +646,10 @@ msgid "Error:"
 msgstr "Erro:"
 
 msgid "Errors occured."
-msgstr ""
+msgstr "Ocorreram erros."
 
 msgid "Everything"
-msgstr ""
+msgstr "Tudo"
 
 msgid "Exit"
 msgstr "Sair"
@@ -658,22 +658,22 @@ msgid "Exit to where?"
 msgstr "Sair para onde?"
 
 msgid "Export All Saves to EmuNand"
-msgstr ""
+msgstr "Extrair Todas as Gravações para EmuNand"
 
 msgid "Extract Save to EmuNand"
-msgstr ""
+msgstr "Extrair Gravação para EmuNand"
 
 msgid "Extracting file:"
-msgstr ""
+msgstr "A extrair ficheiro:"
 
 msgid "Extracting files..."
 msgstr "A Extrair ficheiros..."
 
 msgid "Extracting files:"
-msgstr ""
+msgstr "A extrair ficheiros:"
 
 msgid "Extracting nand files:"
-msgstr ""
+msgstr "A extrair ficheiros nand:"
 
 msgid "Failed"
 msgstr "Falhou"
@@ -682,7 +682,7 @@ msgid "Failed formating"
 msgstr "Falha ao formatar"
 
 msgid "Failed to extract all files. Savegame might not exist."
-msgstr ""
+msgstr "Falha ao extrair todos os ficheiros. Gravação pode não existir."
 
 msgid "Failed to extract."
 msgstr "Falha ao extrair."
@@ -706,7 +706,7 @@ msgid "File not found."
 msgstr "Ficheiro não encontrado."
 
 msgid "Files extracted successfully."
-msgstr ""
+msgstr "Ficheiros extraídos com sucesso."
 
 #, c-format
 msgid "Filesize is %i Byte."
@@ -833,7 +833,7 @@ msgid "Game/Install Partition"
 msgstr "Jogo/Partição Instalação"
 
 msgid "GameTDB Path"
-msgstr ""
+msgstr "Cam. GameTDB"
 
 msgid "Gamename [GAMEID]"
 msgstr "Nome Jogo [IDJOGO]"
@@ -922,7 +922,7 @@ msgid "Install a game"
 msgstr "Instalar um jogo"
 
 msgid "Install finished"
-msgstr ""
+msgstr "Instalação finalizada"
 
 msgid "Installing content... Ok!"
 msgstr "A instalar conteúdo... Ok!"
@@ -973,7 +973,7 @@ msgid "Korean"
 msgstr "Coreano"
 
 msgid "Language Files"
-msgstr ""
+msgstr "Ficheiros Idioma"
 
 msgid "Language change:"
 msgstr "Alteração de idioma:"
@@ -1259,7 +1259,7 @@ msgid "Prev"
 msgstr "Anterior"
 
 msgid "Process finished."
-msgstr ""
+msgstr "Processo finalizado."
 
 msgid "Prompts Buttons"
 msgstr "Mensagens/Botões"
@@ -1289,7 +1289,7 @@ msgid "Reload SD"
 msgstr "Ler cartão SD"
 
 msgid "Reloading game list now, please wait..."
-msgstr ""
+msgstr "A reler lista de jogos, pf aguarde..."
 
 msgid "Remember Unlock"
 msgstr "Lembrar Desbloqueio"
@@ -1355,7 +1355,7 @@ msgid "Saved"
 msgstr "Gravado"
 
 msgid "Savegame might not exist for this game."
-msgstr ""
+msgstr "Gravação pode não existir para este jogo."
 
 msgid "Screensaver"
 msgstr "Protector de ecrã"
@@ -1400,7 +1400,7 @@ msgid "Shutdown Wii"
 msgstr "Desligar Wii"
 
 msgid "Skip Errors"
-msgstr ""
+msgstr "Saltar Erros"
 
 msgid "Sneek Video Patch"
 msgstr "Patch Vídeo Sneek"
@@ -1445,10 +1445,10 @@ msgid "Standby"
 msgstr "Standby"
 
 msgid "Success"
-msgstr "Exito"
+msgstr "Sucesso"
 
 msgid "Success."
-msgstr ""
+msgstr "Sucesso."
 
 msgid "Success:"
 msgstr "Sucesso:"
@@ -1493,16 +1493,16 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "A pasta não existe, pretende criá-la?"
 
 msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
-msgstr ""
+msgstr "Os ficheiros serão extraídos para o caminho da emu nand. Atenção: Todos os ficheiros existentes serão sobrepostos."
 
 msgid "The game installation is disabled under this IOS because of instability in usb write."
 msgstr "A instalação de jogo está desabilitada neste IOS devido a instabilidade na escrita usb"
 
 msgid "The save game will be extracted to your emu nand path."
-msgstr ""
+msgstr "A gravação vai ser extraída para o caminho da emu nand."
 
 msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
-msgstr ""
+msgstr "As gravações vão ser extraídas para o caminho da emu nand. Atenção: Todas as gravações existentes serão sobrepostas."
 
 msgid "The wad file was installed"
 msgstr "O ficheiro wad foi instalado"
@@ -1539,7 +1539,7 @@ msgid "Title Launcher"
 msgstr "Gestor de Títulos"
 
 msgid "Titles from GameTDB"
-msgstr ""
+msgstr "Títulos do GameTDB"
 
 msgid "Tooltips"
 msgstr "Dicas"
@@ -1657,7 +1657,7 @@ msgid "What should be deleted for this game title:"
 msgstr "O que deve ser apagado para este jogo:"
 
 msgid "What to extract from NAND?"
-msgstr ""
+msgstr "O que extrair da NAND?"
 
 msgid "WiFi Features"
 msgstr "Rede sem fios"
@@ -1675,10 +1675,10 @@ msgid "Wii Settings"
 msgstr "Definições Wii"
 
 msgid "WiiTDB.xml"
-msgstr ""
+msgstr "WiiTDB.xml"
 
 msgid "WiiTDB.xml is up to date."
-msgstr ""
+msgstr "WiiTDB.xml está actualizado."
 
 msgid "Wiilight"
 msgstr "Iluminação Leitor"
@@ -1735,7 +1735,7 @@ msgid "for FAT/NTFS support"
 msgstr "pelo suporte FAT/NTFS"
 
 msgid "for GameTDB and hosting covers / disc images"
-msgstr ""
+msgstr "por GameTDB e alojar img. capas / discos"
 
 msgid "for Ocarina"
 msgstr "pelo Ocarina"

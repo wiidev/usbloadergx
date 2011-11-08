@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-22 12:10+0200\n"
+"POT-Creation-Date: 2011-11-08 20:25+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi, papa, ichiroling\n"
@@ -167,7 +167,7 @@ msgid "Are you sure you want to delete this category?"
 msgstr "カテゴリを削除しますか?"
 
 msgid "Are you sure you want to import game categories from GameTDB?"
-msgstr ""
+msgstr "GameTDBからカテゴリをインポートしますか?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "USB Loader GXをロックしますか?"
@@ -581,7 +581,7 @@ msgid "Downloading pagelist:"
 msgstr "リストをダウンロード中:"
 
 msgid "Dump NAND to EmuNand"
-msgstr ""
+msgstr "NANDをエミュNANDへダンプ"
 
 msgid "Dutch"
 msgstr "オランダ語"
@@ -649,7 +649,7 @@ msgid "Errors occured."
 msgstr "エラーが発生しました"
 
 msgid "Everything"
-msgstr ""
+msgstr "全て"
 
 msgid "Exit"
 msgstr "終了"
@@ -673,7 +673,7 @@ msgid "Extracting files:"
 msgstr "書き出し中:"
 
 msgid "Extracting nand files:"
-msgstr ""
+msgstr "NANDファイルを書き出し中:"
 
 msgid "Failed"
 msgstr "失敗"
@@ -833,7 +833,7 @@ msgid "Game/Install Partition"
 msgstr "ｹﾞｰﾑのｲﾝｽﾄｰﾙ領域"
 
 msgid "GameTDB Path"
-msgstr ""
+msgstr "ゲーム名リスト"
 
 msgid "Gamename [GAMEID]"
 msgstr "ゲーム名 [ゲームID]"
@@ -1493,7 +1493,7 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "フォルダがありません。作成しますか？"
 
 msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
-msgstr ""
+msgstr "ファイルはエミュNANDパスに書き出されます 注意:すでにあるファイルは上書きされます"
 
 msgid "The game installation is disabled under this IOS because of instability in usb write."
 msgstr "このIOSでのゲームの追加は不安定なため無効になっています"
@@ -1539,7 +1539,7 @@ msgid "Title Launcher"
 msgstr "ランチャー"
 
 msgid "Titles from GameTDB"
-msgstr ""
+msgstr "ｹﾞｰﾑ名の日本語化"
 
 msgid "Tooltips"
 msgstr "ヒントバルーン"
@@ -1657,7 +1657,7 @@ msgid "What should be deleted for this game title:"
 msgstr "このゲームの何を削除しますか:"
 
 msgid "What to extract from NAND?"
-msgstr ""
+msgstr "何をNANDから書き出しますか?"
 
 msgid "WiFi Features"
 msgstr "ネットワーク対応"
@@ -1735,7 +1735,7 @@ msgid "for FAT/NTFS support"
 msgstr "…FATとNTFSへの対応"
 
 msgid "for GameTDB and hosting covers / disc images"
-msgstr ""
+msgstr "GameTDB…カバー･ディスク画像の保管"
 
 msgid "for Ocarina"
 msgstr "…Ocarinaを制作"
@@ -1769,6 +1769,12 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "GameTDB Files"
+#~ msgstr "ゲーム名リスト"
+
+#~ msgid "GameTDB is up to date."
+#~ msgstr "ゲーム名リストが更新されました"
 
 #~ msgid "Language File"
 #~ msgstr "言語ファイル"
