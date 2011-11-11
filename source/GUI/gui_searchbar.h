@@ -1,13 +1,14 @@
 #ifndef GUI_SEARCHBAR_H_
 #define GUI_SEARCHBAR_H_
 #include "gui.h"
+#include <set>
 
 class cSearchButton;
 
 class GuiSearchBar: public GuiWindow
 {
 	public:
-		GuiSearchBar(const wchar_t *SearchChars);
+		GuiSearchBar(const std::set<wchar_t> &SearchChars);
 		virtual ~GuiSearchBar();
 		void Draw();
 		void Update(GuiTrigger * t);

@@ -29,7 +29,7 @@ class cSearchButton
 
 };
 
-GuiSearchBar::GuiSearchBar(const wchar_t *SearchChars) :
+GuiSearchBar::GuiSearchBar(const std::set<wchar_t> &SearchChars) :
 	inSide(0), text((char *) NULL, 22, ( GXColor )
 	{   0, 0, 0, 255}), buttons(0),
 	keyImageData(Resources::GetFile("keyboard_key.png"), Resources::GetFileSize("keyboard_key.png")),
@@ -39,24 +39,24 @@ GuiSearchBar::GuiSearchBar(const wchar_t *SearchChars) :
 	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 	SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 
-	cnt = wcslen(SearchChars);
+	cnt = SearchChars.size();
 	buttons = new cSearchButton*[cnt];
 
 	wchar_t charstr[2] = { 0, 0 };
 	int lines = (cnt + 9) / 10;
 	int buttonsPerLine = (cnt + lines - 1) / lines;
 	width = 10 + buttonsPerLine * 42 + 10;
-	int x_start = 10, x = 0, y_start = 10 + 42, y = 0;
-	if (width < 200)
+	int i = 0, x_start = 10, x = 0, y_start = 10 + 42, y = 0;
+	if (width < 320)
 	{
-		x_start += (200 - width) >> 1;
-		width = 200;
+		x_start += (320 - width) >> 1;
+		width = 320;
 	}
-	for (int i = 0; i < cnt; i++, x++)
+	for (std::set<wchar_t>::iterator it=SearchChars.begin() ; it != SearchChars.end(); it++, i++, x++)
 	{
 		if (x >= buttonsPerLine) x = 0;
 		if (x == 0) y++;
-		charstr[0] = SearchChars[i];
+		charstr[0] = *it;
 		buttons[i] = new cSearchButton(charstr, &keyImageData, &keyOverImageData, x_start + x * 42, y_start - 42 + y
 				* 42, &trig, btnSoundOver, btnSoundClick);
 		this->Append(&(buttons[i]->button));

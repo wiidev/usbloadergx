@@ -908,13 +908,39 @@ int GameBrowseMenu::MainLoop()
 	{
 		if (searchChar > 27) //! Character clicked
 		{
-			int len = gameList.GetCurrentFilter() ? wcslen(gameList.GetCurrentFilter()) : 0;
-			wchar_t newFilter[len + 2];
-			if (gameList.GetCurrentFilter()) wcscpy(newFilter, gameList.GetCurrentFilter());
-			newFilter[len] = searchChar;
-			newFilter[len + 1] = 0;
+			for(;;)
+			{
+				int len = wcslen(gameList.GetCurrentFilter());
+				wchar_t newFilter[len + 2];
+				wcscpy(newFilter, gameList.GetCurrentFilter());
+				newFilter[len] = searchChar;
+				newFilter[len + 1] = 0;
 
-			gameList.FilterList(newFilter);
+				gameList.FilterList(newFilter);
+				if(gameList.GetAvailableSearchChars().size() != 1) 
+					break;
+				searchChar = *gameList.GetAvailableSearchChars().begin();
+			}
+			bool autoClose = false;
+			switch(Settings.gameDisplay)
+			{
+				case LIST_MODE:
+					autoClose = gameList.size()<=9;
+					break;
+				case CAROUSEL_MODE:
+					autoClose = gameList.size()<=5;
+					break;
+				case GRID_MODE:
+					autoClose = gameList.size()<=3;
+				default:
+					break;
+			}
+
+			if(autoClose) // Close Searchwindow when less than 5 Games found
+			{
+				show_searchwindow = false;
+				searchBtn->StopEffect();
+			}
 		}
 		else if (searchChar == 27) //! Close
 		{
@@ -930,11 +956,16 @@ int GameBrowseMenu::MainLoop()
 		{
 			int len = wcslen(gameList.GetCurrentFilter());
 			wchar_t newFilter[len + 1];
-			if (gameList.GetCurrentFilter()) wcscpy(newFilter, gameList.GetCurrentFilter());
-			newFilter[len > 0 ? len - 1 : 0] = 0;
-			gameList.FilterList(newFilter);
-			if(len == 1)
-				Settings.gridRows = GridRowsPreSearch; //! restore old rows amount so we don't stay on one row
+			wcscpy(newFilter, gameList.GetCurrentFilter());
+			int old_game_count = gameList.size();
+			for(; len > 0; len--)
+			{
+				newFilter[len - 1] = 0; // remove last char
+				if(len == 1)
+					Settings.gridRows = GridRowsPreSearch; //! restore old rows amount so we don't stay on one row
+				if(gameList.FilterList(newFilter) != old_game_count)
+					break;
+			}
 		}
 		ReloadBrowser();
 		return MENU_NONE;

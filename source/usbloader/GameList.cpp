@@ -181,14 +181,6 @@ int GameList::ReadGameList()
 	return LoadUnfiltered();
 }
 
-static bool WCharSortCallback(const wchar_t char1, const wchar_t char2)
-{
-	if (char2 == 0) return true;
-	if (char1 == 0) return false;
-
-	return char2 > char1;
-}
-
 int GameList::FilterList(const wchar_t * gameFilter)
 {
 	if (FullGameList.size() == 0) ReadGameList();
@@ -251,22 +243,30 @@ int GameList::FilterList(const wchar_t * gameFilter)
 		if(n == Settings.EnabledCategories.size()) continue;
 
 		wchar_t *gameName = charToWideChar(GameTitles.GetTitle(header));
-		if (gameName && *GameFilter.c_str())
-		{
-			if (wcsnicmp(gameName, GameFilter.c_str(), GameFilter.size()) != 0)
-			{
-				delete [] gameName;
-				continue;
-			}
-		}
-
 		if (gameName)
 		{
-			if (wcslen(gameName) > GameFilter.size() &&
-				AvailableSearchChars.find(towupper(gameName[GameFilter.size()])) == std::string::npos &&
-				AvailableSearchChars.find(towlower(gameName[GameFilter.size()])) == std::string::npos)
+			if ( GameFilter.size() ) // has Filter 
 			{
-				AvailableSearchChars.push_back(gameName[GameFilter.size()]);
+				bool found = false;
+				wchar_t *s1 = gameName, *s2;
+				while( (s2 = wcscasestr(s1, GameFilter.c_str())) ) // search filter in gameName
+				{
+					found = true;
+					wchar_t ch = towupper(s2[GameFilter.size()]);
+					if(ch) AvailableSearchChars.insert(ch);
+					s1++; // try search filter in gameName more times
+				}
+				if(!found)
+				{
+					delete [] gameName;
+					continue;
+				}
+			}
+			else // no Filter -> makes all chars as aviable
+			{
+				for(wchar_t *ch = gameName; *ch; ch++)
+					if(*ch >= '@') // limit chars by empty filter
+						AvailableSearchChars.insert(towupper(*ch));
 			}
 
 			delete [] gameName;
@@ -277,7 +277,7 @@ int GameList::FilterList(const wchar_t * gameFilter)
 
 	NewTitles::Instance()->Save();
 
-	AvailableSearchChars.push_back(L'\0');
+	if (FilteredList.size() < 2)
 
 	if (FilteredList.size() < 2)
 		AvailableSearchChars.clear();
@@ -305,12 +305,9 @@ int GameList::LoadUnfiltered()
 		wchar_t *gameName = charToWideChar(GameTitles.GetTitle(header));
 		if (gameName)
 		{
-			if (wcslen(gameName) > GameFilter.size() &&
-				AvailableSearchChars.find(towupper(gameName[GameFilter.size()])) == std::string::npos &&
-				AvailableSearchChars.find(towlower(gameName[GameFilter.size()])) == std::string::npos)
-			{
-				AvailableSearchChars.push_back(gameName[GameFilter.size()]);
-			}
+			for(wchar_t *ch = gameName; *ch; ch++)
+				if(*ch >= '@') // limit chars by unfiltered list
+					AvailableSearchChars.insert(towupper(*ch));
 
 			delete [] gameName;
 		}
@@ -319,8 +316,6 @@ int GameList::LoadUnfiltered()
 	}
 
 	NewTitles::Instance()->Save();
-
-	AvailableSearchChars.push_back(L'\0');
 
 	if (FilteredList.size() < 2)
 		AvailableSearchChars.clear();
@@ -350,10 +345,6 @@ void GameList::SortList()
 	{
 		std::sort(FilteredList.begin(), FilteredList.end(), NameSortCallback);
 	}
-
-	if (AvailableSearchChars.size() > 1)
-		std::sort(AvailableSearchChars.begin(), AvailableSearchChars.end(), WCharSortCallback);
-
 }
 
 bool GameList::NameSortCallback(const struct discHdr *a, const struct discHdr *b)

@@ -22,6 +22,7 @@ class wString: public std::basic_string<wchar_t, std::char_traits<wchar_t>, std:
 };
 
 size_t utf8Len(const char *s);
-int wcsnicmp(const wchar_t *s1, const wchar_t *s2, int len);
+
+wchar_t *wcscasestr(const wchar_t *s1, const wchar_t *s2);
 
 #endif // !defined(__WSTRING_HPP)
