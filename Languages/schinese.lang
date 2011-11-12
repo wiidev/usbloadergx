@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 20:25+0100\n"
+"POT-Creation-Date: 2011-11-12 18:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -202,6 +202,9 @@ msgstr "返回 HBC 或 Wii 系统菜单"
 msgid "Backgroundmusic"
 msgstr "背景音乐"
 
+msgid "Beginning"
+msgstr ""
+
 msgid "Big thanks to:"
 msgstr "非常感谢:"
 
@@ -314,6 +317,9 @@ msgstr ""
 msgid "Change Play Path"
 msgstr "更改游戏路径"
 
+msgid "Channels"
+msgstr "频道"
+
 msgid "Cheatfile is blank"
 msgstr "作弊码文件是空的"
 
@@ -362,6 +368,9 @@ msgstr ""
 
 msgid "Console should be unlocked to modify it."
 msgstr "需解锁以开启设定功能."
+
+msgid "Content"
+msgstr ""
 
 msgid "Continue to install game?"
 msgstr "继续安装游戏?"
@@ -1006,6 +1015,9 @@ msgstr "从%s 加载文件?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "加载这个 DOL 作为 ALT DOL?"
 
+msgid "Loader Mode"
+msgstr ""
+
 msgid "Loader Settings"
 msgstr "Loader设置"
 
@@ -1063,6 +1075,12 @@ msgstr "音乐循环模式"
 msgid "Music Volume"
 msgstr "音量"
 
+msgid "Nand Channel Emulation"
+msgstr ""
+
+msgid "Nand Emu Channel Path"
+msgstr ""
+
 msgid "Nand Emu Path"
 msgstr ""
 
@@ -1073,6 +1091,9 @@ msgid "Nand Emulation is only available on D2X cIOS!"
 msgstr ""
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
+msgstr ""
+
+msgid "Nand Saves Emulation"
 msgstr ""
 
 msgid "Neither"
@@ -1359,6 +1380,9 @@ msgstr ""
 
 msgid "Screensaver"
 msgstr "屏幕保护"
+
+msgid "Search Mode"
+msgstr ""
 
 msgid "Select"
 msgstr "选择"
@@ -1955,9 +1979,6 @@ msgstr "剩余秒数"
 
 #~ msgid "Back to Wii Menu"
 #~ msgstr "返回 Wii 系统菜单"
-
-#~ msgid "Channels"
-#~ msgstr "频道"
 
 #~ msgid "Checking existing artwork"
 #~ msgstr "检测已存在的插图"

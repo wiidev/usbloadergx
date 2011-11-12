@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-22 12:10+0200\n"
+"POT-Creation-Date: 2011-11-12 18:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -202,6 +202,9 @@ msgstr "Tilbage til HBC eller Wii-menuen"
 msgid "Backgroundmusic"
 msgstr "Baggrundsmusik"
 
+msgid "Beginning"
+msgstr ""
+
 msgid "Big thanks to:"
 msgstr "En stor tak til:"
 
@@ -314,6 +317,9 @@ msgstr "Kategorier:"
 msgid "Change Play Path"
 msgstr "Ændre sti til musik"
 
+msgid "Channels"
+msgstr ""
+
 msgid "Cheatfile is blank"
 msgstr "Cheatfilen er tom"
 
@@ -362,6 +368,9 @@ msgstr "Konsollen skal være låst op for at kunne bruge dette."
 
 msgid "Console should be unlocked to modify it."
 msgstr "Konsollen skal være låst op for ændre dette."
+
+msgid "Content"
+msgstr ""
 
 msgid "Continue to install game?"
 msgstr "Fortsæt med at installere spillet?"
@@ -1006,6 +1015,9 @@ msgstr "Indlæs fil fra %s ?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "Indlæs denne DOL som alternativ DOL?"
 
+msgid "Loader Mode"
+msgstr ""
+
 msgid "Loader Settings"
 msgstr "Loader Indstillinger"
 
@@ -1063,6 +1075,12 @@ msgstr "Musik i løkke"
 msgid "Music Volume"
 msgstr "Lydstyrke"
 
+msgid "Nand Channel Emulation"
+msgstr ""
+
+msgid "Nand Emu Channel Path"
+msgstr ""
+
 msgid "Nand Emu Path"
 msgstr "Sti til Nand Emu."
 
@@ -1074,6 +1092,9 @@ msgstr "Nand emulering er kun mulig med d2x cIOS"
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
 msgstr "Nand emulering virker kun med FAT/FAT32 partitioner!"
+
+msgid "Nand Saves Emulation"
+msgstr ""
 
 msgid "Neither"
 msgstr "Ingen"
@@ -1359,6 +1380,9 @@ msgstr ""
 
 msgid "Screensaver"
 msgstr "Pauseskærm"
+
+msgid "Search Mode"
+msgstr ""
 
 msgid "Select"
 msgstr "Vælg"

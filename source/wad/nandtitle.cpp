@@ -425,7 +425,7 @@ u64 NandTitle::FindU32(const char *s)
 	return 0;
 }
 
-int NandTitle::LoadFileFromNand(const char *filepath, u8 **outbuffer, u32 *outfilesize)
+int NandTitle::LoadFileFromNand(const char *filepath, u8 **outbuffer, u32 *outfilesize, bool isfsInit)
 {
 	if(!filepath)
 		return -1;
@@ -434,13 +434,13 @@ int NandTitle::LoadFileFromNand(const char *filepath, u8 **outbuffer, u32 *outfi
 	if(!stats)
 		return IPC_ENOMEM;
 
-	ISFS_Initialize();
+    if(isfsInit) ISFS_Initialize();
 
 	int fd = ISFS_Open(filepath, ISFS_OPEN_READ);
 	if(fd < 0)
 	{
 		free(stats);
-		ISFS_Deinitialize();
+        if(isfsInit) ISFS_Deinitialize();
 		return fd;
 	}
 
@@ -449,7 +449,7 @@ int NandTitle::LoadFileFromNand(const char *filepath, u8 **outbuffer, u32 *outfi
 	{
 		free(stats);
 		ISFS_Close(fd);
-		ISFS_Deinitialize();
+        if(isfsInit) ISFS_Deinitialize();
 		return ret;
 	}
 
@@ -461,14 +461,14 @@ int NandTitle::LoadFileFromNand(const char *filepath, u8 **outbuffer, u32 *outfi
 	if(!buffer)
 	{
 		ISFS_Close(fd);
-		ISFS_Deinitialize();
+        if(isfsInit) ISFS_Deinitialize();
 		return IPC_ENOMEM;
 	}
 
 	ret = ISFS_Read(fd, buffer, filesize);
 
 	ISFS_Close(fd);
-	ISFS_Deinitialize();
+	if(isfsInit) ISFS_Deinitialize();
 
 	if (ret < 0)
 	{

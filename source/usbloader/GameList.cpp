@@ -23,8 +23,8 @@
  ***************************************************************************/
 #include <algorithm>
 #include <string>
-#include <wctype.h>
 #include <malloc.h>
+#include "GUI/gui_searchbar.h"
 #include "usbloader/wbfs.h"
 #include "settings/newtitles.h"
 #include "settings/CSettings.h"
@@ -35,13 +35,13 @@
 #include "FreeTypeGX.h"
 #include "GameList.h"
 #include "memory/memory.h"
+#include "Channels/channels.h"
 
 GameList gameList;
 
 void GameList::clear()
 {
 	GameFilter.clear();
-	AvailableSearchChars.clear();
 	FullGameList.clear();
 	GamePartitionList.clear();
 	FilteredList.clear();
@@ -90,10 +90,7 @@ void GameList::RemovePartition(int part)
 	}
 
 	if(FullGameList.size() > 0)
-	{
-		wString filter(GameFilter);
-		FilterList(filter.c_str());
-	}
+		FilterList();
 }
 
 int GameList::InternalReadList(int part)
@@ -156,6 +153,9 @@ int GameList::InternalReadList(int part)
 
 int GameList::ReadGameList()
 {
+	if(Settings.LoaderMode == LOAD_CHANNELS)
+		return 0;
+
 	// Clear list
 	clear();
 
@@ -183,15 +183,22 @@ int GameList::ReadGameList()
 
 int GameList::FilterList(const wchar_t * gameFilter)
 {
-	if (FullGameList.size() == 0) ReadGameList();
-	if (gameFilter) GameFilter.assign(gameFilter);
+	std::vector<struct discHdr> *FullList = &FullGameList;
+
+	if(Settings.LoaderMode == LOAD_CHANNELS)
+		FullList = &(Channels::Instance()->GetDiscHeaderList());
+
+	else if (FullGameList.size() == 0)
+		ReadGameList();
+
+	if (gameFilter)
+		GameFilter.assign(gameFilter);
 
 	FilteredList.clear();
-	AvailableSearchChars.clear();
 
-	for (u32 i = 0; i < FullGameList.size(); ++i)
+	for (u32 i = 0; i < FullList->size(); ++i)
 	{
-		struct discHdr *header = &FullGameList[i];
+		struct discHdr *header = &FullList->at(i);
 
 		/* Register game */
 		NewTitles::Instance()->CheckGame(header->id);
@@ -240,47 +247,14 @@ int GameList::FilterList(const wchar_t * gameFilter)
 			if(GameCategories.isInCategory((char *) header->id, Settings.EnabledCategories[n]))
 				break;
 		}
-		if(n == Settings.EnabledCategories.size()) continue;
-
-		wchar_t *gameName = charToWideChar(GameTitles.GetTitle(header));
-		if (gameName)
-		{
-			if ( GameFilter.size() ) // has Filter 
-			{
-				bool found = false;
-				wchar_t *s1 = gameName, *s2;
-				while( (s2 = wcscasestr(s1, GameFilter.c_str())) ) // search filter in gameName
-				{
-					found = true;
-					wchar_t ch = towupper(s2[GameFilter.size()]);
-					if(ch) AvailableSearchChars.insert(ch);
-					s1++; // try search filter in gameName more times
-				}
-				if(!found)
-				{
-					delete [] gameName;
-					continue;
-				}
-			}
-			else // no Filter -> makes all chars as aviable
-			{
-				for(wchar_t *ch = gameName; *ch; ch++)
-					if(*ch >= '@') // limit chars by empty filter
-						AvailableSearchChars.insert(towupper(*ch));
-			}
-
-			delete [] gameName;
-		}
+		if(n == Settings.EnabledCategories.size())
+			continue;
 
 		FilteredList.push_back(header);
 	}
 
 	NewTitles::Instance()->Save();
-
-	if (FilteredList.size() < 2)
-
-	if (FilteredList.size() < 2)
-		AvailableSearchChars.clear();
+	GuiSearchBar::FilterList(FilteredList, GameFilter);
 
 	SortList();
 
@@ -289,36 +263,29 @@ int GameList::FilterList(const wchar_t * gameFilter)
 
 int GameList::LoadUnfiltered()
 {
-	if (FullGameList.size() == 0) ReadGameList();
+	std::vector<struct discHdr> *FullList = &FullGameList;
+
+	if(Settings.LoaderMode == LOAD_CHANNELS)
+		FullList = &(Channels::Instance()->GetDiscHeaderList());
+
+	else if (FullGameList.size() == 0)
+		ReadGameList();
 
 	GameFilter.clear();
-	AvailableSearchChars.clear();
 	FilteredList.clear();
 
-	for (u32 i = 0; i < FullGameList.size(); ++i)
+	for (u32 i = 0; i < FullList->size(); ++i)
 	{
-		struct discHdr *header = &FullGameList[i];
+		struct discHdr *header = &FullList->at(i);
 
 		/* Register game */
 		NewTitles::Instance()->CheckGame(header->id);
-
-		wchar_t *gameName = charToWideChar(GameTitles.GetTitle(header));
-		if (gameName)
-		{
-			for(wchar_t *ch = gameName; *ch; ch++)
-				if(*ch >= '@') // limit chars by unfiltered list
-					AvailableSearchChars.insert(towupper(*ch));
-
-			delete [] gameName;
-		}
 
 		FilteredList.push_back(header);
 	}
 
 	NewTitles::Instance()->Save();
-
-	if (FilteredList.size() < 2)
-		AvailableSearchChars.clear();
+	GuiSearchBar::FilterList(FilteredList, GameFilter);
 
 	SortList();
 

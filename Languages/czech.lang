@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-22 12:10+0200\n"
+"POT-Creation-Date: 2011-11-12 18:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -202,6 +202,9 @@ msgstr "Zpet do HBC nebo Wii nabídky"
 msgid "Backgroundmusic"
 msgstr "Hudba na pozadí"
 
+msgid "Beginning"
+msgstr ""
+
 msgid "Big thanks to:"
 msgstr "Velké díky pro:"
 
@@ -314,6 +317,9 @@ msgstr ""
 msgid "Change Play Path"
 msgstr "Zmena cesty prehrávání"
 
+msgid "Channels"
+msgstr ""
+
 msgid "Cheatfile is blank"
 msgstr "Soubor s cheaty je prázdný"
 
@@ -362,6 +368,9 @@ msgstr ""
 
 msgid "Console should be unlocked to modify it."
 msgstr "Konzole musí být odemcena pro tuto zmenu"
+
+msgid "Content"
+msgstr ""
 
 msgid "Continue to install game?"
 msgstr "Pokracovat pri instalaci hry"
@@ -1006,6 +1015,9 @@ msgstr "Nahrát soubor z: %s ?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "Spustit tento DOL jako náhradní DOL?"
 
+msgid "Loader Mode"
+msgstr ""
+
 msgid "Loader Settings"
 msgstr "Nstavení spoustení"
 
@@ -1063,6 +1075,12 @@ msgstr "Mód hudební smycky"
 msgid "Music Volume"
 msgstr "Hlasitost hudby"
 
+msgid "Nand Channel Emulation"
+msgstr ""
+
+msgid "Nand Emu Channel Path"
+msgstr ""
+
 msgid "Nand Emu Path"
 msgstr ""
 
@@ -1073,6 +1091,9 @@ msgid "Nand Emulation is only available on D2X cIOS!"
 msgstr ""
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
+msgstr ""
+
+msgid "Nand Saves Emulation"
 msgstr ""
 
 msgid "Neither"
@@ -1359,6 +1380,9 @@ msgstr ""
 
 msgid "Screensaver"
 msgstr "Sporic obrazovky"
+
+msgid "Search Mode"
+msgstr ""
 
 msgid "Select"
 msgstr "Vyber"

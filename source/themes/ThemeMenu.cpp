@@ -89,7 +89,7 @@ ThemeMenu::~ThemeMenu()
 		delete ThemePreviews[i];
 }
 
-int ThemeMenu::Run()
+int ThemeMenu::Execute()
 {
 	ThemeMenu * Menu = new ThemeMenu();
 	mainWindow->Append(Menu);

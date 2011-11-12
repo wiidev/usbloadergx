@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-22 12:10+0200\n"
+"POT-Creation-Date: 2011-11-12 18:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -202,6 +202,9 @@ msgstr "HBC veya Wii Menüye dönüş"
 msgid "Backgroundmusic"
 msgstr "Arkaplan müziği"
 
+msgid "Beginning"
+msgstr ""
+
 msgid "Big thanks to:"
 msgstr "Teşekkürler:"
 
@@ -314,6 +317,9 @@ msgstr ""
 msgid "Change Play Path"
 msgstr ""
 
+msgid "Channels"
+msgstr "Kanallar"
+
 msgid "Cheatfile is blank"
 msgstr "Hile dosyası boş"
 
@@ -362,6 +368,9 @@ msgstr ""
 
 msgid "Console should be unlocked to modify it."
 msgstr "Degiştirmek için konsolun kilidini açmalısın."
+
+msgid "Content"
+msgstr ""
 
 msgid "Continue to install game?"
 msgstr "Oyunu kurmaya devam et?"
@@ -1006,6 +1015,9 @@ msgstr "Dosya %s 'ten yüklensin mi?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "Bu DOL alternatif DOL olarak mı yüklensin?"
 
+msgid "Loader Mode"
+msgstr ""
+
 msgid "Loader Settings"
 msgstr ""
 
@@ -1063,6 +1075,12 @@ msgstr ""
 msgid "Music Volume"
 msgstr "Ses Seviyesi"
 
+msgid "Nand Channel Emulation"
+msgstr ""
+
+msgid "Nand Emu Channel Path"
+msgstr ""
+
 msgid "Nand Emu Path"
 msgstr ""
 
@@ -1073,6 +1091,9 @@ msgid "Nand Emulation is only available on D2X cIOS!"
 msgstr ""
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
+msgstr ""
+
+msgid "Nand Saves Emulation"
 msgstr ""
 
 msgid "Neither"
@@ -1359,6 +1380,9 @@ msgstr ""
 
 msgid "Screensaver"
 msgstr "Ekran Koruyucu"
+
+msgid "Search Mode"
+msgstr ""
 
 msgid "Select"
 msgstr "Seç"
@@ -1931,9 +1955,6 @@ msgstr "saniye kaldı"
 
 #~ msgid "Back to Wii Menu"
 #~ msgstr "Wii Menüye dönüş"
-
-#~ msgid "Channels"
-#~ msgstr "Kanallar"
 
 #~ msgid "Checking existing artwork"
 #~ msgstr "Hazır görsel kontrol ediliyor"

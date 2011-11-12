@@ -300,7 +300,7 @@ void CGameCategories::RemoveCategory(const char *gameID, unsigned int id)
 	if(!gameID) return;
 
 	string gameID6;
-	for(int i = 0; i < 6; ++i)
+	for(int i = 0; i < 6 && gameID[i] != 0; ++i)
 		gameID6.push_back(gameID[i]);
 
 	RemoveCategory(gameID6, id);
@@ -333,7 +333,7 @@ bool CGameCategories::isInCategory(const char *gameID, unsigned int id)
 	if(!gameID) return false;
 
 	string gameID6;
-	for(int i = 0; i < 6; ++i)
+	for(int i = 0; i < 6 && gameID[i] != 0; ++i)
 		gameID6.push_back(gameID[i]);
 
 	for (map<string, vector<unsigned int> >::iterator itr = GameCategories.List.begin(); itr != GameCategories.List.end(); itr++)

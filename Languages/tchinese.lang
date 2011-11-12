@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 20:25+0100\n"
+"POT-Creation-Date: 2011-11-12 18:58+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -202,6 +202,9 @@ msgstr "返回 HBC 或 Wii 系統選單"
 msgid "Backgroundmusic"
 msgstr "背景音樂"
 
+msgid "Beginning"
+msgstr ""
+
 msgid "Big thanks to:"
 msgstr "非常感謝:"
 
@@ -314,6 +317,9 @@ msgstr "類別："
 msgid "Change Play Path"
 msgstr "變更執行路徑"
 
+msgid "Channels"
+msgstr ""
+
 msgid "Cheatfile is blank"
 msgstr "金手指檔是空的"
 
@@ -362,6 +368,9 @@ msgstr "控制台必須解鎖才可使用此項。"
 
 msgid "Console should be unlocked to modify it."
 msgstr "控制台須解鎖才可變更設定。"
+
+msgid "Content"
+msgstr ""
 
 msgid "Continue to install game?"
 msgstr "繼續安裝遊戲？"
@@ -1006,6 +1015,9 @@ msgstr "檔案載入位置： %s"
 msgid "Load this DOL as alternate DOL?"
 msgstr "載入這個 DOL 作為替代 DOL？"
 
+msgid "Loader Mode"
+msgstr ""
+
 msgid "Loader Settings"
 msgstr "Loader設定"
 
@@ -1063,6 +1075,12 @@ msgstr "音樂循環模式"
 msgid "Music Volume"
 msgstr "音樂音量"
 
+msgid "Nand Channel Emulation"
+msgstr ""
+
+msgid "Nand Emu Channel Path"
+msgstr ""
+
 msgid "Nand Emu Path"
 msgstr "Nand 模擬器路徑"
 
@@ -1074,6 +1092,9 @@ msgstr "Nand 模擬器僅可用D2X cIOS!"
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
 msgstr "Nand 模擬器僅能在 FAT/FAT32 格式磁區執行!"
+
+msgid "Nand Saves Emulation"
+msgstr ""
 
 msgid "Neither"
 msgstr "皆不顯示"
@@ -1359,6 +1380,9 @@ msgstr "這個遊戲的遊戲存檔可能不存在。"
 
 msgid "Screensaver"
 msgstr "螢幕保護"
+
+msgid "Search Mode"
+msgstr ""
 
 msgid "Select"
 msgstr "選取"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-22 12:10+0200\n"
+"POT-Creation-Date: 2011-11-12 18:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -202,6 +202,9 @@ msgstr "กลับไป HBC หรือ เมนู Wii"
 msgid "Backgroundmusic"
 msgstr "ดนตรีเบื้องหลัง"
 
+msgid "Beginning"
+msgstr ""
+
 msgid "Big thanks to:"
 msgstr "ขอขอบคุณ:"
 
@@ -314,6 +317,9 @@ msgstr ""
 msgid "Change Play Path"
 msgstr ""
 
+msgid "Channels"
+msgstr "แชนแนล"
+
 msgid "Cheatfile is blank"
 msgstr "ไฟล์สูตรโกง ว่างเปล่า"
 
@@ -362,6 +368,9 @@ msgstr ""
 
 msgid "Console should be unlocked to modify it."
 msgstr "ปลดล๊อคคอนโซลก่อน ถึงจะทำการเปลี่ยนแปลงได้"
+
+msgid "Content"
+msgstr ""
 
 msgid "Continue to install game?"
 msgstr "ทำต่อ เพื่อติดตั้งเกมส์?"
@@ -1006,6 +1015,9 @@ msgstr "โหลดไฟล์จาก: %s ?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "โหลด DOL นี้เป็น alternate DOL?"
 
+msgid "Loader Mode"
+msgstr ""
+
 msgid "Loader Settings"
 msgstr ""
 
@@ -1063,6 +1075,12 @@ msgstr ""
 msgid "Music Volume"
 msgstr "ความดังเสียงเพลง"
 
+msgid "Nand Channel Emulation"
+msgstr ""
+
+msgid "Nand Emu Channel Path"
+msgstr ""
+
 msgid "Nand Emu Path"
 msgstr ""
 
@@ -1073,6 +1091,9 @@ msgid "Nand Emulation is only available on D2X cIOS!"
 msgstr ""
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
+msgstr ""
+
+msgid "Nand Saves Emulation"
 msgstr ""
 
 msgid "Neither"
@@ -1359,6 +1380,9 @@ msgstr ""
 
 msgid "Screensaver"
 msgstr "รักษาหน้าจอ"
+
+msgid "Search Mode"
+msgstr ""
 
 msgid "Select"
 msgstr ""
@@ -1925,9 +1949,6 @@ msgstr "วินาทีที่เหลือ"
 
 #~ msgid "Back to Wii Menu"
 #~ msgstr "กลับไป เมนู Wii"
-
-#~ msgid "Channels"
-#~ msgstr "แชนแนล"
 
 #~ msgid "Checking existing artwork"
 #~ msgstr "ตรวจหาอาร์ตเวิรค์"

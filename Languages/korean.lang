@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 20:25+0100\n"
+"POT-Creation-Date: 2011-11-12 18:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -202,6 +202,9 @@ msgstr "홈브류 메뉴 또는 Wii 메뉴로"
 msgid "Backgroundmusic"
 msgstr "배경음악"
 
+msgid "Beginning"
+msgstr ""
+
 msgid "Big thanks to:"
 msgstr "감사 :"
 
@@ -314,6 +317,9 @@ msgstr ""
 msgid "Change Play Path"
 msgstr ""
 
+msgid "Channels"
+msgstr ""
+
 msgid "Cheatfile is blank"
 msgstr "치트화일 내용없음"
 
@@ -362,6 +368,9 @@ msgstr ""
 
 msgid "Console should be unlocked to modify it."
 msgstr "변경하려면 콘솔 잠김을 해제하세요."
+
+msgid "Content"
+msgstr ""
 
 msgid "Continue to install game?"
 msgstr "계속 설치하겠습니까?"
@@ -1006,6 +1015,9 @@ msgstr "화일 로드는 %s 에서?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "이 DOL화일을 alternate DOL로 로딩할까요?"
 
+msgid "Loader Mode"
+msgstr ""
+
 msgid "Loader Settings"
 msgstr ""
 
@@ -1063,6 +1075,12 @@ msgstr ""
 msgid "Music Volume"
 msgstr "음량"
 
+msgid "Nand Channel Emulation"
+msgstr ""
+
+msgid "Nand Emu Channel Path"
+msgstr ""
+
 msgid "Nand Emu Path"
 msgstr ""
 
@@ -1073,6 +1091,9 @@ msgid "Nand Emulation is only available on D2X cIOS!"
 msgstr ""
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
+msgstr ""
+
+msgid "Nand Saves Emulation"
 msgstr ""
 
 msgid "Neither"
@@ -1359,6 +1380,9 @@ msgstr ""
 
 msgid "Screensaver"
 msgstr "화면보호기"
+
+msgid "Search Mode"
+msgstr ""
 
 msgid "Select"
 msgstr ""

@@ -9,6 +9,7 @@
 #include <string.h>
 
 #include "system/IosLoader.h"
+#include "utils/tools.h"
 #include "gecko.h"
 #include "NandEmu.h"
 
@@ -33,20 +34,18 @@ static nandDevice ndevList[] =
 };
 
 /* Buffer */
-static u32 inbuf[8] ATTRIBUTE_ALIGN(32);
 static const char fs[] ATTRIBUTE_ALIGN(32) = "/dev/fs";
 static const char fat[] ATTRIBUTE_ALIGN(32) = "fat";
-static int mounted = 0;
-static int partition = 0;
+static u32 partition ATTRIBUTE_ALIGN(32) = 0;
+static u32 mode ATTRIBUTE_ALIGN(32) = 0;
+static char path[32] ATTRIBUTE_ALIGN(32) = "\0";
 static int fullmode = 0;
-static char path[32] = "\0";
+static int mounted = 0;
 
 static s32 Nand_Mount(nandDevice *dev)
 {
 	s32 fd, ret;
-	u32 inlen = 0;
 	ioctlv *vector = NULL;
-	u32 *buffer = NULL;
 
 	/* Open FAT module */
 	fd = IOS_Open(fat, 0);
@@ -58,27 +57,27 @@ static s32 Nand_Mount(nandDevice *dev)
 	// and the nand is always expected to be on the 1st partition.
 	// However this way earlier d2x betas having revision 21 take in
 	// consideration the partition argument.
-	inlen = 1;
 
 	/* Allocate memory */
-	buffer = (u32 *)memalign(32, sizeof(u32)*3);
+	vector = (ioctlv *) memalign(32, sizeof(ioctlv));
+	if(vector == NULL)
+	{
+	    /* Close FAT module */
+        IOS_Close(fd);
+	    return -2;
+	}
 
-	/* Set vector pointer */
-	vector = (ioctlv *)buffer;
-
-	buffer[0] = (u32)(buffer + 2);
-	buffer[1] = sizeof(u32);
-	buffer[2] = (u32)partition;
+    vector[0].data = &partition;
+    vector[0].len = sizeof(u32);
 
 	/* Mount device */
-	ret = IOS_Ioctlv(fd, dev->mountCmd, inlen, 0, vector);
+	ret = IOS_Ioctlv(fd, dev->mountCmd, 1, 0, vector);
 
 	/* Close FAT module */
 	IOS_Close(fd);
 
 	/* Free memory */
-	if(buffer != NULL)
-		free(buffer);
+	free(vector);
 
 	return ret;
 }
@@ -104,7 +103,7 @@ static s32 Nand_Unmount(nandDevice *dev)
 static s32 Nand_Enable(nandDevice *dev)
 {
 	s32 fd, ret;
-	u32 *buffer = NULL;
+	ioctlv *vector = NULL;
 
 	// Open /dev/fs
 	fd = IOS_Open(fs, 0);
@@ -113,29 +112,31 @@ static s32 Nand_Enable(nandDevice *dev)
 
 	//FULL NAND emulation since rev18
 	//needed for reading images on triiforce mrc folder using ISFS commands
-	inbuf[0] = dev->mode | fullmode;
+	mode = dev->mode | fullmode;
 
 	// NOTE:
 	// The official cIOSX rev21 by Waninkoko provides an undocumented feature
 	// to set nand path when mounting the device.
 	// This feature has been discovered during d2x development.
-	int pathlen = strlen(path)+1;
 
 	/* Allocate memory */
-	buffer = (u32 *)memalign(32, (sizeof(u32)*5)+pathlen);
+	vector = (ioctlv *)memalign(32, sizeof(ioctlv)*2);
+	if(vector == NULL)
+	{
+	    /* Close FAT module */
+        IOS_Close(fd);
+	    return -2;
+	}
 
-	buffer[0] = (u32)(buffer + 4);
-	buffer[1] = sizeof(u32);   // actually not used by cios
-	buffer[2] = (u32)(buffer + 5);
-	buffer[3] = pathlen;	   // actually not used by cios
-	buffer[4] = inbuf[0];
-	strcpy((char*)(buffer+5), path);
+    vector[0].data = &mode;
+    vector[0].len = sizeof(u32);
+    vector[1].data = path;
+    vector[1].len = sizeof(path);
 
-	ret = IOS_Ioctlv(fd, 100, 2, 0, (ioctlv *)buffer);
+	ret = IOS_Ioctlv(fd, 100, 2, 0, vector);
 
 	/* Free memory */
-	if(buffer != NULL)
-		free(buffer);
+	free(vector);
 
 	// Close /dev/fs
 	IOS_Close(fd);
@@ -153,10 +154,10 @@ static s32 Nand_Disable(void)
 		return fd;
 
 	// Set input buffer
-	inbuf[0] = 0;
+	mode = 0;
 
 	// Disable NAND emulator
-	ret = IOS_Ioctl(fd, 100, inbuf, sizeof(inbuf), NULL, 0);
+	ret = IOS_Ioctl(fd, 100, &mode, sizeof(mode), NULL, 0);
 
 	// Close /dev/fs
 	IOS_Close(fd);

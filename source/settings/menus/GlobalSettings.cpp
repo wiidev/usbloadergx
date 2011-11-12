@@ -49,7 +49,7 @@ GlobalSettings::~GlobalSettings()
 	delete creditsImgOverData;
 }
 
-int GlobalSettings::Show()
+int GlobalSettings::Execute()
 {
 	GlobalSettings * Menu = new GlobalSettings();
 	mainWindow->Append(Menu);

@@ -1,26 +1,25 @@
 #include <gccore.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdarg.h>
 #include <malloc.h>
 #include <sys/iosupport.h>
 
 /* init-globals */
 static bool geckoinit = false;
 
-#ifndef NO_DEBUG
-#include <stdarg.h>
-
 void gprintf(const char *format, ...)
 {
 	if (!geckoinit)
 		return;
 
-	char * tmp = NULL;
+	static char stringBuf[4096];
+	int len;
 	va_list va;
 	va_start(va, format);
-	if((vasprintf(&tmp, format, va) >= 0) && tmp)
+	if((len = vsnprintf(stringBuf, sizeof(stringBuf), format, va)) > 0)
 	{
-		usb_sendbuffer(1, tmp, strlen(tmp));
+		usb_sendbuffer(1, stringBuf, len);
 		#ifdef DEBUG_TO_FILE
 		FILE *debugF = fopen("sd:/debug.txt", "a");
 		if(!debugF)
@@ -31,9 +30,6 @@ void gprintf(const char *format, ...)
 		#endif
 	}
 	va_end(va);
-
-	if(tmp)
-		free(tmp);
 }
 
 bool InitGecko()
@@ -84,7 +80,7 @@ void hexdump(void *d, int len)
 
 static ssize_t __out_write(struct _reent *r, int fd, const char *ptr, size_t len)
 {
-	gprintf(ptr);
+	gprintf("%s", ptr);
 
 	return len;
 }
@@ -122,5 +118,3 @@ void USBGeckoOutput()
 	devoptab_list[STD_OUT] = &gecko_out;
 	devoptab_list[STD_ERR] = &gecko_out;
 }
-
-#endif /* NO_DEBUG */

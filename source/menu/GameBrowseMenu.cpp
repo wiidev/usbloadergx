@@ -59,8 +59,7 @@ GameBrowseMenu::GameBrowseMenu()
 	GameIDTxt = NULL;
 	GameRegionTxt = NULL;
 	WDVD_GetCoverStatus(&DiscDriveCoverOld);
-	wString oldFilter(gameList.GetCurrentFilter());
-	gameList.FilterList(oldFilter.c_str());
+	gameList.FilterList();
 	HDDSizeCallback.SetCallback(this, &GameBrowseMenu::UpdateFreeSpace);
 
 	btnInstall = Resources::GetImageData("button_install.png");
@@ -763,7 +762,7 @@ void GameBrowseMenu::ReloadBrowser()
 
 	if (show_searchwindow)
 	{
-		searchBar = new GuiSearchBar(gameList.GetAvailableSearchChars());
+		searchBar = new GuiSearchBar;
 		mainWindow->Append(searchBar);
 	}
 
@@ -842,8 +841,7 @@ int GameBrowseMenu::MainLoop()
 		gprintf("\tLoading font...%s\n", Theme::LoadFont(Settings.theme_path) ? "done" : "failed (using default)");
 		gprintf("\tLoading theme...%s\n", Theme::Load(Settings.theme) ? "done" : "failed (using default)");
 		bgMusic->Resume();
-		wString oldFilter(gameList.GetCurrentFilter());
-		gameList.FilterList(oldFilter.c_str());
+		gameList.FilterList();
 		ReloadBrowser();
 		ResumeGui();
 		sdcardBtn->ResetState();
@@ -879,13 +877,12 @@ int GameBrowseMenu::MainLoop()
 		else
 			Settings.GameSort |= SORT_FAVORITE;
 
-		wString oldFilter(gameList.GetCurrentFilter());
-		gameList.FilterList(oldFilter.c_str());
+		gameList.FilterList();
 
 		if((Settings.GameSort & SORT_FAVORITE) && gameList.size() == 0)
 		{
 			Settings.GameSort &= ~SORT_FAVORITE;
-			gameList.FilterList(oldFilter.c_str());
+			gameList.FilterList();
 			ShowError(tr("No favorites selected."));
 		}
 		else
@@ -896,8 +893,7 @@ int GameBrowseMenu::MainLoop()
 	{
 		gprintf("\tsearchBtn Clicked\n");
 		show_searchwindow = !show_searchwindow;
-		wString oldFilter(gameList.GetCurrentFilter());
-		gameList.FilterList(oldFilter.c_str());
+		gameList.FilterList();
 		ReloadBrowser();
 		searchBtn->ResetState();
 		if(show_searchwindow && wcslen(gameList.GetCurrentFilter()) == 0)
@@ -908,39 +904,13 @@ int GameBrowseMenu::MainLoop()
 	{
 		if (searchChar > 27) //! Character clicked
 		{
-			for(;;)
-			{
-				int len = wcslen(gameList.GetCurrentFilter());
-				wchar_t newFilter[len + 2];
-				wcscpy(newFilter, gameList.GetCurrentFilter());
-				newFilter[len] = searchChar;
-				newFilter[len + 1] = 0;
+			int len = gameList.GetCurrentFilter() ? wcslen(gameList.GetCurrentFilter()) : 0;
+			wchar_t newFilter[len + 2];
+			if (gameList.GetCurrentFilter()) wcscpy(newFilter, gameList.GetCurrentFilter());
+			newFilter[len] = searchChar;
+			newFilter[len + 1] = 0;
 
-				gameList.FilterList(newFilter);
-				if(gameList.GetAvailableSearchChars().size() != 1) 
-					break;
-				searchChar = *gameList.GetAvailableSearchChars().begin();
-			}
-			bool autoClose = false;
-			switch(Settings.gameDisplay)
-			{
-				case LIST_MODE:
-					autoClose = gameList.size()<=9;
-					break;
-				case CAROUSEL_MODE:
-					autoClose = gameList.size()<=5;
-					break;
-				case GRID_MODE:
-					autoClose = gameList.size()<=3;
-				default:
-					break;
-			}
-
-			if(autoClose) // Close Searchwindow when less than 5 Games found
-			{
-				show_searchwindow = false;
-				searchBtn->StopEffect();
-			}
+			gameList.FilterList(newFilter);
 		}
 		else if (searchChar == 27) //! Close
 		{
@@ -956,16 +926,16 @@ int GameBrowseMenu::MainLoop()
 		{
 			int len = wcslen(gameList.GetCurrentFilter());
 			wchar_t newFilter[len + 1];
-			wcscpy(newFilter, gameList.GetCurrentFilter());
-			int old_game_count = gameList.size();
-			for(; len > 0; len--)
-			{
-				newFilter[len - 1] = 0; // remove last char
-				if(len == 1)
-					Settings.gridRows = GridRowsPreSearch; //! restore old rows amount so we don't stay on one row
-				if(gameList.FilterList(newFilter) != old_game_count)
-					break;
-			}
+			if (gameList.GetCurrentFilter()) wcscpy(newFilter, gameList.GetCurrentFilter());
+			newFilter[len > 0 ? len - 1 : 0] = 0;
+			gameList.FilterList(newFilter);
+			if(len == 1)
+				Settings.gridRows = GridRowsPreSearch; //! restore old rows amount so we don't stay on one row
+		}
+		else if (searchChar == 6)
+		{
+			Settings.SearchMode = Settings.SearchMode == SEARCH_BEGINNING ? SEARCH_CONTENT : SEARCH_BEGINNING;
+			gameList.FilterList();
 		}
 		ReloadBrowser();
 		return MENU_NONE;
@@ -996,8 +966,7 @@ int GameBrowseMenu::MainLoop()
 			Settings.GameSort |= SORT_ABC;
 		}
 
-		wString oldFilter(gameList.GetCurrentFilter());
-		gameList.FilterList(oldFilter.c_str());
+		gameList.FilterList();
 		ReloadBrowser();
 	}
 
@@ -1065,8 +1034,7 @@ int GameBrowseMenu::MainLoop()
 			if(WindowPrompt(tr( "Parental Control" ), tr( "Are you sure you want to lock USB Loader GX?" ), tr( "Yes" ), tr( "No" )) == 1)
 			{
 				Settings.godmode = 0;
-				wString oldFilter(gameList.GetCurrentFilter());
-				gameList.FilterList(oldFilter.c_str());
+				gameList.FilterList();
 				ReloadBrowser();
 			}
 		}
@@ -1081,8 +1049,7 @@ int GameBrowseMenu::MainLoop()
 				if(result == 1)
 					WindowPrompt( tr( "Correct Password" ), tr( "All the features of USB Loader GX are unlocked." ), tr( "OK" ));
 				Settings.godmode = 1;
-				wString oldFilter(gameList.GetCurrentFilter());
-				gameList.FilterList(oldFilter.c_str());
+				gameList.FilterList();
 				ReloadBrowser();
 			}
 			else if(result < 0)
@@ -1115,8 +1082,7 @@ int GameBrowseMenu::MainLoop()
 		mainWindow->SetState(STATE_DEFAULT);
 		if(promptMenu.categoriesChanged())
 		{
-			wString oldFilter(gameList.GetCurrentFilter());
-			gameList.FilterList(oldFilter.c_str());
+			gameList.FilterList();
 			ReloadBrowser();
 		}
 	}

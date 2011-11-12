@@ -108,7 +108,7 @@ ThemeDownloader::~ThemeDownloader()
 		delete ThemePreviews[i];
 }
 
-int ThemeDownloader::Run()
+int ThemeDownloader::Execute()
 {
 	ThemeDownloader * Menu = new ThemeDownloader();
 	mainWindow->Append(Menu);

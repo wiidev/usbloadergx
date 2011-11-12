@@ -32,7 +32,7 @@ class ThemeDownloader : public FlyingButtonsMenu
 	public:
 		ThemeDownloader();
 		virtual ~ThemeDownloader();
-		static int Run();
+		static int Execute();
 		int MainLoop();
 	protected:
 		void CreateSettingsMenu(int index) { MainButtonClicked(index); };

@@ -47,7 +47,7 @@ GameSettingsMenu::~GameSettingsMenu()
 {
 }
 
-int GameSettingsMenu::Show(GameBrowseMenu *parent, struct discHdr * header)
+int GameSettingsMenu::Execute(GameBrowseMenu *parent, struct discHdr * header)
 {
 	GameSettingsMenu * Menu = new GameSettingsMenu(parent, header);
 	mainWindow->Append(Menu);
@@ -124,8 +124,7 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 		mainWindow->Remove(&promptMenu);
 		if(promptMenu.categoriesChanged())
 		{
-			wString oldFilter(gameList.GetCurrentFilter());
-			gameList.FilterList(oldFilter.c_str());
+			gameList.FilterList();
 			browserMenu->ReloadBrowser();
 		}
 		mainWindow->SetState(STATE_DEFAULT);

@@ -17,6 +17,10 @@
 #include "../settings/SettingsEnums.h"
 #include "../gecko.h"
 
+// Global app entry point
+extern u32 AppEntrypoint;
+void _unstub_start();
+
 /* Constants */
 #define PTABLE_OFFSET   0x40000
 #define WII_MAGIC   0x5D1C9EA3
@@ -284,7 +288,33 @@ s32 Disc_JumpToEntrypoint(s32 hooktype, u32 dolparameter)
 	 /* Originally from tueidj - taken from NeoGamme (thx) */
 	*(vu32*)0xCC003024 = dolparameter != 0 ? dolparameter : 1;
 
-	if (hooktype)
+ 	if(AppEntrypoint == 0x3400 && hooktype)
+	{
+		__asm__(
+			"lis %r3, returnpoint@h\n"
+			"ori %r3, %r3, returnpoint@l\n"
+			"mtlr %r3\n"
+			"lis %r3, 0x8000\n"
+			"ori %r3, %r3, 0x18A8\n"
+			"mtctr %r3\n"
+			"bctr\n"
+			"returnpoint:\n"
+			"bl DCDisable\n"
+			"bl ICDisable\n"
+			"li %r3, 0\n"
+			"mtsrr1 %r3\n"
+			"lis %r4, AppEntrypoint@h\n"
+			"ori %r4,%r4,AppEntrypoint@l\n"
+			"lwz %r4, 0(%r4)\n"
+			"mtsrr0 %r4\n"
+			"rfi\n"
+		);
+	}
+ 	else if(AppEntrypoint == 0x3400)
+ 	{
+ 		_unstub_start();
+ 	}
+ 	else if (hooktype)
 	{
 		__asm__(
 				"lis %r3, AppEntrypoint@h\n"

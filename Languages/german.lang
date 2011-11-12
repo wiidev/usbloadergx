@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-22 16:15+0200\n"
+"POT-Creation-Date: 2011-11-12 18:58+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -202,6 +202,9 @@ msgstr "Zurück zum Homebrewkanal oder Wii Menü"
 msgid "Backgroundmusic"
 msgstr "Hintergrundmusik"
 
+msgid "Beginning"
+msgstr ""
+
 msgid "Big thanks to:"
 msgstr "Großen Dank an:"
 
@@ -314,6 +317,9 @@ msgstr "Kategorien:"
 msgid "Change Play Path"
 msgstr "Pfad ändern"
 
+msgid "Channels"
+msgstr ""
+
 msgid "Cheatfile is blank"
 msgstr "Cheatdatei ist leer"
 
@@ -362,6 +368,9 @@ msgstr "Gerät muss für diese Nutzung entsperrt werden."
 
 msgid "Console should be unlocked to modify it."
 msgstr "Konsole muss zum Bearbeiten entsperrt werden."
+
+msgid "Content"
+msgstr ""
 
 msgid "Continue to install game?"
 msgstr "Fortfahren um Spiel zu installieren?"
@@ -1006,6 +1015,9 @@ msgstr "Datei von %s laden?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "Diese DOL als Alternative DOL laden?"
 
+msgid "Loader Mode"
+msgstr ""
+
 msgid "Loader Settings"
 msgstr "Loader Einstellungen"
 
@@ -1063,6 +1075,12 @@ msgstr "HGM Wiederholung"
 msgid "Music Volume"
 msgstr "Musik Lautstärke"
 
+msgid "Nand Channel Emulation"
+msgstr ""
+
+msgid "Nand Emu Channel Path"
+msgstr ""
+
 msgid "Nand Emu Path"
 msgstr "Nand Emu Pfad"
 
@@ -1074,6 +1092,9 @@ msgstr "Nand Emulation ist nur für D2X cIOS verfügbar!"
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
 msgstr "Nand Emulation funktionier nut mit FAT/FAT32 Partitionen!"
+
+msgid "Nand Saves Emulation"
+msgstr ""
 
 msgid "Neither"
 msgstr "Keine"
@@ -1359,6 +1380,9 @@ msgstr "Möglicherweise existiert kein Spielstand für dieses Spiel."
 
 msgid "Screensaver"
 msgstr "Bildschirmschoner"
+
+msgid "Search Mode"
+msgstr ""
 
 msgid "Select"
 msgstr "Auswählen"

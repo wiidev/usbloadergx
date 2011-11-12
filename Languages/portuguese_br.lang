@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 20:25+0100\n"
+"POT-Creation-Date: 2011-11-12 18:58+0100\n"
 "PO-Revision-Date: 2009-10-23 18:52+0200\n"
 "Last-Translator: aniemotion\n"
 "Language-Team: boto12, aniemotion\n"
@@ -202,6 +202,9 @@ msgstr "Voltar ao Loader/Menu do Wii"
 msgid "Backgroundmusic"
 msgstr "Música de fundo"
 
+msgid "Beginning"
+msgstr ""
+
 msgid "Big thanks to:"
 msgstr "Agradecimentos:"
 
@@ -314,6 +317,9 @@ msgstr "Categorias:"
 msgid "Change Play Path"
 msgstr "Alterar Caminho para Play"
 
+msgid "Channels"
+msgstr ""
+
 msgid "Cheatfile is blank"
 msgstr "arquivo de truques vazio"
 
@@ -362,6 +368,9 @@ msgstr "Configuração deve está destravada para habilitar esta."
 
 msgid "Console should be unlocked to modify it."
 msgstr "É necessário desbloquear a configuração para poder modificar o parâmetro."
+
+msgid "Content"
+msgstr ""
 
 msgid "Continue to install game?"
 msgstr "Continuar instalação do jogo?"
@@ -1006,6 +1015,9 @@ msgstr "Carregar arquivo de: %s ?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "Carregar este DOL como DOL alternativo?"
 
+msgid "Loader Mode"
+msgstr ""
+
 msgid "Loader Settings"
 msgstr ""
 
@@ -1063,6 +1075,12 @@ msgstr "Modo Repetição de Música"
 msgid "Music Volume"
 msgstr "Volume da Música"
 
+msgid "Nand Channel Emulation"
+msgstr ""
+
+msgid "Nand Emu Channel Path"
+msgstr ""
+
 msgid "Nand Emu Path"
 msgstr ""
 
@@ -1073,6 +1091,9 @@ msgid "Nand Emulation is only available on D2X cIOS!"
 msgstr ""
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
+msgstr ""
+
+msgid "Nand Saves Emulation"
 msgstr ""
 
 msgid "Neither"
@@ -1359,6 +1380,9 @@ msgstr ""
 
 msgid "Screensaver"
 msgstr "Proteção de tela"
+
+msgid "Search Mode"
+msgstr ""
 
 msgid "Select"
 msgstr "selecionar"

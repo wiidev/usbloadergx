@@ -174,7 +174,8 @@ GameWindow::GameWindow(int Selected)
 	if (!mountMethod)//stuff we don't show if it is a DVD mounted
 	{
 		Append(nameBtn);
-		Append(sizeTxt);
+		if(Settings.LoaderMode != LOAD_CHANNELS)
+			Append(sizeTxt);
 		Append(btnLeft);
 		Append(btnRight);
 		for(int i = 0; i < FAVORITE_STARS; ++i)
@@ -411,13 +412,14 @@ void GameWindow::SetWindowEffect(int direction, int in_out)
 void GameWindow::ChangeGame(int EffectDirection)
 {
 	struct discHdr * header = (mountMethod ? dvdheader : gameList[gameSelected]);
-	LoadGameSound(header->id);
+	if(Settings.LoaderMode != LOAD_CHANNELS)
+		LoadGameSound(header->id); // Temporary no sounds for channels, will be added later
 	LoadDiscImage(header->id);
 	SetWindowEffect(EffectDirection, OUT);
 
 	HaltGui();
 
-	if (!mountMethod)
+	if (!mountMethod && Settings.LoaderMode != LOAD_CHANNELS)
 	{
 		float size = 0.0f;
 		WBFS_GameSize(header->id, &size);
@@ -486,7 +488,7 @@ int GameWindow::MainLoop()
 		ResumeGui();
 
 		wiilight(0);
-		int settret = GameSettingsMenu::Show(browserMenu, mountMethod ? dvdheader : gameList[gameSelected]);
+		int settret = GameSettingsMenu::Execute(browserMenu, mountMethod ? dvdheader : gameList[gameSelected]);
 
 		SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 		if(parentElement)

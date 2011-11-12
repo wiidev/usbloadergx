@@ -44,6 +44,8 @@ static int code_size = 0;
 
 static u32 gameconfsize = 0;
 static u32 *gameconf = NULL;
+static u32 tempgameconfsize = 0;
+static u8 *tempgameconf = NULL;
 
 extern void patchhook(u32 address, u32 len);
 
@@ -342,69 +344,28 @@ void app_pokevalues()
 }
 
 //---------------------------------------------------------------------------------
-static void app_loadgameconfig(const char *CheatFilepath)
+static void app_loadgameconfig()
 //---------------------------------------------------------------------------------
 {
-	gameconfsize = 0;
-
 	if (gameconf == NULL)
 	{
 		gameconf = (u32*) malloc(65536);
 		if (gameconf == NULL)
 			return;
 	}
-
-	FILE* fp;
 	const char *discid = (const char *) Disc_ID;
+	if(!tempgameconf)
+	{
+		tempgameconf = (u8 *) defaultgameconfig;
+		tempgameconfsize = defaultgameconfig_size;
+	}
+
 	u32 ret;
-	u32 filesize;
 	s32 gameidmatch, maxgameidmatch = -1, maxgameidmatch2 = -1;
 	u32 i, numnonascii, parsebufpos;
 	u32 codeaddr, codeval, codeaddr2, codeval2, codeoffset;
 	u32 temp, tempoffset = 0;
 	char parsebuffer[18];
-
-	u8 *tempgameconf = (u8 *) defaultgameconfig;
-	u32 tempgameconfsize = defaultgameconfig_size;
-
-	char filepath[200];
-	snprintf(filepath, sizeof(filepath), "%s/gameconfig.txt", CheatFilepath);
-
-	fp = fopen(filepath, "rb");
-
-	if (!fp)
-	{
-		snprintf(filepath, sizeof(filepath), "sd:/gameconfig.txt");
-		fp = fopen(filepath, "rb");
-
-		for(i = 1; i <= 8; ++i)
-		{
-			if(fp) break;
-
-			snprintf(filepath, sizeof(filepath), "usb%i:/gameconfig.txt", i);
-			fp = fopen(filepath, "rb");
-		}
-	}
-
-	if (fp)
-	{
-		fseek(fp, 0, SEEK_END);
-		filesize = ftell(fp);
-		fseek(fp, 0, SEEK_SET);
-
-		tempgameconf = (u8*) malloc(filesize);
-		if (tempgameconf == NULL)
-			return;
-
-		ret = fread((void*) tempgameconf, 1, filesize, fp);
-		fclose(fp);
-		if (ret != filesize)
-		{
-			free(tempgameconf);
-			return;
-		}
-		tempgameconfsize = filesize;
-	}
 
 	// Remove non-ASCII characters
 	numnonascii = 0;
@@ -582,7 +543,7 @@ static void app_loadgameconfig(const char *CheatFilepath)
 }
 
 //---------------------------------------------------------------------------------
-void load_handler(const char *gameconfigPath, u32 hooktype, u32 debugger, u32 pauseAtStart)
+void load_handler(u32 hooktype, u32 debugger, u32 pauseAtStart)
 //---------------------------------------------------------------------------------
 {
 	if (hooktype != 0x00)
@@ -590,7 +551,7 @@ void load_handler(const char *gameconfigPath, u32 hooktype, u32 debugger, u32 pa
 		if (debugger == 0x01)
 			codelist = (u8 *) 0x800028B8;
 		codelistend = (u8 *) 0x80003000;
-		app_loadgameconfig(gameconfigPath);
+		app_loadgameconfig();
 
 		if (debugger == 0x01)
 		{
@@ -707,6 +668,60 @@ void load_handler(const char *gameconfigPath, u32 hooktype, u32 debugger, u32 pa
 	}
 }
 
+static int LoadGameConfig(const char *CheatFilepath)
+{
+	int filesize = 0;
+	tempgameconf = (u8 *) defaultgameconfig;
+	tempgameconfsize = defaultgameconfig_size;
+	gameconfsize = 0;
+
+	FILE* fp;
+	char filepath[200];
+	snprintf(filepath, sizeof(filepath), "%s/gameconfig.txt", CheatFilepath);
+
+	fp = fopen(filepath, "rb");
+
+	if (!fp)
+	{
+		snprintf(filepath, sizeof(filepath), "sd:/gameconfig.txt");
+		fp = fopen(filepath, "rb");
+		int i;
+		for(i = 1; i <= 8; ++i)
+		{
+			if(fp) break;
+
+			snprintf(filepath, sizeof(filepath), "usb%i:/gameconfig.txt", i);
+			fp = fopen(filepath, "rb");
+		}
+	}
+
+	if (!fp)
+		return 0;
+
+	fseek(fp, 0, SEEK_END);
+	filesize = ftell(fp);
+	fseek(fp, 0, SEEK_SET);
+
+	tempgameconf = (u8*) malloc(filesize);
+	if (tempgameconf == NULL) {
+		fclose(fp);
+		return -1;
+	}
+
+	int ret = fread((void*) tempgameconf, 1, filesize, fp);
+
+	fclose(fp);
+
+	if (ret != filesize)
+	{
+		free(tempgameconf);
+		return -1;
+	}
+	tempgameconfsize = filesize;
+
+	return 0;
+}
+
 int ocarina_load_code(const char *CheatFilepath)
 {
 	char filepath[150];
@@ -764,6 +779,8 @@ int ocarina_load_code(const char *CheatFilepath)
 	}
 
 	gprintf("Ocarina: Codes found.\n");
+
+	LoadGameConfig(CheatFilepath);
 
 	return code_size;
 }

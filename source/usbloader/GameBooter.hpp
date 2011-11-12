@@ -27,7 +27,7 @@ class GameBooter
 	private:
 		static int FindDiscHeader(const char * gameID, struct discHdr &gameHeader);
 		static void SetupAltDOL(u8 * gameID, u8 &alternatedol, u32 &alternatedoloffset);
-		static void SetupNandEmu(u8 NandEmuMode, struct discHdr &gameHeader);
+		static void SetupNandEmu(u8 NandEmuMode, const char *NandEmuPath, struct discHdr &gameHeader);
 		static int SetupDisc(u8 *gameID);
 		static u32 BootPartition(char * dolpath, u8 videoselected, u8 alternatedol, u32 alternatedoloffset);
 };

@@ -217,7 +217,7 @@ void CGameStatistics::ParseLine(char *line)
 	if(!ReadGameID(line, GameID, 6))
 		return;
 
-	if(strlen(GameID) != 6)
+	if(strlen(GameID) != 6 && strlen(GameID) != 4)
 		return;
 
 	GameStatus NewGame;

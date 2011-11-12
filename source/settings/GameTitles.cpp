@@ -2,6 +2,7 @@
 #include "GameTitles.h"
 #include "CSettings.h"
 #include "usbloader/GameList.h"
+#include "Channels/channels.h"
 #include "xml/GameTDB.hpp"
 
 CGameTitles GameTitles;
@@ -37,10 +38,6 @@ const char * CGameTitles::GetTitle(const char * id) const
 		if(strncasecmp(id, TitleList[i].GameID, 6) == 0)
 			return TitleList[i].Title.c_str();
 	}
-
-	//! Since not found in the GameTDB search in the game header for a title
-	if(gameList.GameCount() != gameList.size())
-		gameList.LoadUnfiltered();
 
 	for(int i = 0; i < gameList.size(); ++i)
 	{
@@ -178,15 +175,21 @@ void CGameTitles::WriteCachedTitles(const char * path)
 
 void CGameTitles::RemoveUnusedCache(std::vector<std::string> &MissingTitles)
 {
+	std::vector<struct discHdr> &FullList = gameList.GetFullGameList();
+	if(FullList.empty())
+		gameList.ReadGameList();
+
+	std::vector<struct discHdr> &ChanList = Channels::Instance()->GetDiscHeaderList();
+
 	std::vector<bool> UsedCachedList(TitleList.size(), false);
 
-	for(int i = 0; i < gameList.GameCount(); ++i)
+	for(u32 i = 0; i < FullList.size(); ++i)
 	{
 		bool isCached = false;
 
 		for(u32 n = 0; n < TitleList.size(); ++n)
 		{
-			if(strncasecmp(TitleList[n].GameID, (const char *) gameList[i]->id, 6) == 0)
+			if(strncasecmp(TitleList[n].GameID, (const char *) FullList[i].id, 6) == 0)
 			{
 				UsedCachedList[n] = true;
 				isCached = true;
@@ -197,7 +200,29 @@ void CGameTitles::RemoveUnusedCache(std::vector<std::string> &MissingTitles)
 		if(!isCached)
 		{
 			char gameID[7];
-			snprintf(gameID, sizeof(gameID), (const char *) gameList[i]->id);
+			snprintf(gameID, sizeof(gameID), (const char *) FullList[i].id);
+			MissingTitles.push_back(std::string(gameID));
+		}
+	}
+
+	for(u32 i = 0; i < ChanList.size(); ++i)
+	{
+		bool isCached = false;
+
+		for(u32 n = 0; n < TitleList.size(); ++n)
+		{
+			if(strncasecmp(TitleList[n].GameID, (const char *) ChanList[i].id, 4) == 0)
+			{
+				UsedCachedList[n] = true;
+				isCached = true;
+				break;
+			}
+		}
+
+		if(!isCached)
+		{
+			char gameID[7];
+			snprintf(gameID, sizeof(gameID), (const char *) ChanList[i].id);
 			MissingTitles.push_back(std::string(gameID));
 		}
 	}

@@ -33,6 +33,7 @@ SOURCES		:=	source \
 				source/prompts \
 				source/wad \
 				source/banner \
+				source/Channels \
 				source/BoxCover \
 				source/cheats \
 				source/homebrewboot \

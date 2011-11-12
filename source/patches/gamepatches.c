@@ -57,8 +57,6 @@ void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring,
 	es_fd = IOS_Open(es_fs, 0);
 	int i;
 
-	load_wip_code((u8*) Disc_ID);
-
 	/* If a wip file is loaded for this game this does nothing - Dimok */
 	PoPPatch();
 	NSMBPatch();

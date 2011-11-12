@@ -20,6 +20,7 @@
 #include "mload/mload_modules.h"
 #include "system/IosLoader.h"
 #include "Controls/DeviceHandler.hpp"
+#include "Channels/channels.h"
 #include "usbloader/disc.h"
 #include "usbloader/apploader.h"
 #include "usbloader/usbstorage2.h"
@@ -134,28 +135,28 @@ void GameBooter::SetupAltDOL(u8 * gameID, u8 &alternatedol, u32 &alternatedoloff
 		alternatedol = OFF;
 }
 
-void GameBooter::SetupNandEmu(u8 NandEmuMode, struct discHdr &gameHeader)
+void GameBooter::SetupNandEmu(u8 NandEmuMode, const char *NandEmuPath, struct discHdr &gameHeader)
 {
-	if(NandEmuMode && strchr(Settings.NandEmuPath, '/'))
+	if(NandEmuMode && strchr(NandEmuPath, '/'))
 	{
 		//! Create save game path and title.tmd for not existing saves
 		CreateSavePath(&gameHeader);
 
-		gprintf("Enabling Nand Emulation on: %s\n", Settings.NandEmuPath);
+		gprintf("Enabling Nand Emulation on: %s\n", NandEmuPath);
 		Set_FullMode(NandEmuMode == 2);
-		Set_Path(strchr(Settings.NandEmuPath, '/'));
+		Set_Path(strchr(NandEmuPath, '/'));
 
 		//! Set which partition to use (USB only)
-		if(strncmp(Settings.NandEmuPath, "usb", 3) == 0)
-			Set_Partition(atoi(Settings.NandEmuPath+3)-1);
+		if(strncmp(NandEmuPath, "usb", 3) == 0)
+			Set_Partition(atoi(NandEmuPath+3)-1);
 		//! Unmount SD since NAND Emu mount fails otherwise
-		else if(strncmp(Settings.NandEmuPath, "sd", 2) == 0)
+		else if(strncmp(NandEmuPath, "sd", 2) == 0)
 			DeviceHandler::Instance()->UnMountSD();
 
-		Enable_Emu(strncmp(Settings.NandEmuPath, "usb", 3) == 0 ? EMU_USB : EMU_SD);
+		Enable_Emu(strncmp(NandEmuPath, "usb", 3) == 0 ? EMU_USB : EMU_SD);
 
 		//! Remount SD again after activating NAND emu
-		if(strncmp(Settings.NandEmuPath, "sd", 2) == 0)
+		if(strncmp(NandEmuPath, "sd", 2) == 0)
 			DeviceHandler::Instance()->MountSD();
 	}
 }
@@ -259,17 +260,31 @@ int GameBooter::BootGame(const char * gameID)
 		Playlog_Update((char *) gameHeader.id, BNRInstance::Instance()->GetIMETTitle(CONF_GetLanguage()));
 
 	//! Setup NAND emulation
-	SetupNandEmu(NandEmuMode, gameHeader);
+	if(Settings.LoaderMode != LOAD_CHANNELS)
+		SetupNandEmu(NandEmuMode, Settings.NandEmuPath, gameHeader);
+	else
+		SetupNandEmu(Settings.NandEmuChanMode, Settings.NandEmuChanPath, gameHeader);
 
-	//! Setup disc in cIOS and open it
-	ret = SetupDisc(gameHeader.id);
-	if (ret < 0)
-		Sys_BackToLoader();
+	// Load wip codes
+	load_wip_code(gameHeader.id);
 
-	//! Load BCA data for the game
-	gprintf("Loading BCA data...");
-	ret = do_bca_code(Settings.BcaCodepath, gameHeader.id);
-	gprintf("%d\n", ret);
+	//! Load Ocarina codes
+	if (ocarinaChoice)
+		ocarina_load_code(Settings.Cheatcodespath);
+
+	//! Setup disc stuff if we load a game
+	if(Settings.LoaderMode != LOAD_CHANNELS)
+	{
+		//! Setup disc in cIOS and open it
+		ret = SetupDisc(gameHeader.id);
+		if (ret < 0)
+			Sys_BackToLoader();
+
+		//! Load BCA data for the game
+		gprintf("Loading BCA data...");
+		ret = do_bca_code(Settings.BcaCodepath, gameHeader.id);
+		gprintf("%d\n", ret);
+	}
 
 	//! Setup IOS reload block
 	if (IosLoader::IsHermesIOS())
@@ -290,16 +305,38 @@ int GameBooter::BootGame(const char * gameID)
 			reloadblock = 0;
 	}
 
-	//! Now we can free up the memory used by the game list
+	//! Now we can free up the memory used by the game/channel lists
 	gameList.clear();
+	Channels::DestroyInstance();
 
 	//! Load main.dol or alternative dol into memory, start the game apploader and get game entrypoint
-	gprintf("\tDisc_wiiBoot\n");
-	AppEntrypoint = BootPartition(Settings.dolpath, videoChoice, alternatedol, alternatedoloffset);
+	if(Settings.LoaderMode != LOAD_CHANNELS)
+	{
+		gprintf("\tGame Boot\n");
+		AppEntrypoint = BootPartition(Settings.dolpath, videoChoice, alternatedol, alternatedoloffset);
+		//! Flush all caches and close up all devices
+		DeviceHandler::DestroyInstance();
+	}
+	else
+	{
+		gprintf("\tChannel Boot\n");
+		//! Flush all caches and close up all devices
+		//! Avoid later crashs with free if memory gets overwritten by game
+		DeviceHandler::DestroyInstance();
+		/* Setup low memory */
+		Disc_SetLowMem();
+		/* Setup video mode */
+		Disc_SelectVMode(videoChoice);
+		// Load dol
+		u64 tid;
+		memcpy(&tid, gameHeader.tid, 8);
+		AppEntrypoint = Channels::LoadChannel(tid);
+	}
 
 	//! No entrypoint found...back to HBC/SystemMenu
 	if(AppEntrypoint == 0)
 	{
+		gprintf("AppEntryPoint is 0, something went wrong\n");
 		WDVD_ClosePartition();
 		Sys_BackToLoader();
 	}
@@ -308,20 +345,15 @@ int GameBooter::BootGame(const char * gameID)
 	gprintf("Applying game patches...\n");
 	gamepatches(videoChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, fix002, reloadblock, iosChoice, returnToChoice);
 
-	//! Load Ocarina codes
-	if (ocarinaChoice)
-		ocarina_load_code(Settings.Cheatcodespath);
-
 	//! Load Code handler if needed
-	load_handler(Settings.Cheatcodespath, Hooktype, WiirdDebugger, Settings.WiirdDebuggerPause);
+	load_handler(Hooktype, WiirdDebugger, Settings.WiirdDebuggerPause);
 
 	//! Shadow mload - Only needed on some games with Hermes v5.1 (Check is inside the function)
 	shadow_mload();
 
 	gprintf("Shutting down devices...\n");
-	//! Flush all caches and close up all devices
+	// Close all handlers
 	WBFS_CloseAll();
-	DeviceHandler::DestroyInstance();
 	if(Settings.USBPort == 2)
 		//! Reset USB port because device handler changes it for cache flushing
 		USBStorage2_SetPort(usbport);

@@ -35,7 +35,7 @@ class ThemeMenu : public FlyingButtonsMenu
 	public:
 		ThemeMenu();
 		virtual ~ThemeMenu();
-		static int Run();
+		static int Execute();
 		int MainLoop();
 	protected:
 		void CreateSettingsMenu(int index) { MainButtonClicked(index); };

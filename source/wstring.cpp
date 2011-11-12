@@ -147,15 +147,21 @@ size_t utf8Len(const char *s)
 	return len;
 }
 
-wchar_t *wcscasestr(const wchar_t *s1, const wchar_t *s2)
+const wchar_t *wcscasestr(const wchar_t *s1, const wchar_t *s2)
 {
-	if(*s2==0) return (wchar_t *)s1;
+	if(*s2 == 0)
+        return (wchar_t *)s1;
+
 	int s1_len = wcslen(s1);
 	int s2_len = wcslen(s2);
-	if(s1_len < s2_len) return 0;
+
+	if(s1_len < s2_len)
+        return 0;
+
 	const wchar_t *end = &s1[s1_len-s2_len];
-	for(wchar_t *s=(wchar_t *)s1; s<=end; s++)
+	for(const wchar_t *s = s1; s <= end; s++)
 		if(wcsncasecmp(s, s2, s2_len)==0)
 			return s;
+
 	return 0;
 }

@@ -22,10 +22,12 @@
  * distribution.
  ***************************************************************************/
 #include <unistd.h>
+#include "Channels/channels.h"
 #include "Controls/DeviceHandler.hpp"
 #include "CustomPathsSM.hpp"
 #include "settings/SettingsPrompts.h"
 #include "settings/CSettings.h"
+#include "settings/SettingsEnums.h"
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
 #include "prompts/filebrowser.h"
@@ -53,6 +55,7 @@ CustomPathsSM::CustomPathsSM()
 	Options->SetName(Idx++, tr("WDM Files Path"));
 	Options->SetName(Idx++, tr("Wiinnertag Path"));
 	Options->SetName(Idx++, tr("Nand Emu Path"));
+	Options->SetName(Idx++, tr("Nand Emu Channel Path"));
 
 	SetOptionValues();
 }
@@ -111,6 +114,9 @@ void CustomPathsSM::SetOptionValues()
 
 	//! Settings: Nand Emu Path
 	Options->SetValue(Idx++, Settings.NandEmuPath);
+
+	//! Settings: Nand Emu Channel Path
+	Options->SetValue(Idx++, Settings.NandEmuChanPath);
 }
 
 int CustomPathsSM::GetMenuInternal()
@@ -246,6 +252,25 @@ int CustomPathsSM::GetMenuInternal()
 		{
 			snprintf(Settings.NandEmuPath, sizeof(Settings.NandEmuPath), oldPath);
 			WindowPrompt(tr("Error:"), tr("Nand Emulation only works on FAT/FAT32 partitions!"), tr("OK"));
+		}
+	}
+
+	//! Settings: Nand Emu Channel Path
+	else if (ret == ++Idx)
+	{
+		char oldPath[sizeof(Settings.NandEmuChanPath)];
+		snprintf(oldPath, sizeof(oldPath), Settings.NandEmuChanPath);
+
+		titleTxt->SetText(tr( "Nand Emu Channel Path" ));
+		ChangePath(Settings.NandEmuChanPath, sizeof(Settings.NandEmuChanPath));
+		if(strncasecmp(DeviceHandler::PathToFSName(Settings.NandEmuChanPath), "FAT", 3) != 0)
+		{
+			snprintf(Settings.NandEmuChanPath, sizeof(Settings.NandEmuChanPath), oldPath);
+			WindowPrompt(tr("Error:"), tr("Nand Emulation only works on FAT/FAT32 partitions!"), tr("OK"));
+		}
+		else if(Settings.NandEmuChanMode != OFF)
+		{
+			Channels::Instance()->GetEmuChannelList();
 		}
 	}
 

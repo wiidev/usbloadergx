@@ -75,6 +75,7 @@ class CSettings
 		char WDMpath[100];
 		char WiinnertagPath[100];
 		char NandEmuPath[50];
+		char NandEmuChanPath[50];
 		short videomode;
 		short language;
 		short ocarina;
@@ -128,12 +129,15 @@ class CSettings
 		std::vector<u32> EnabledCategories;
 		u8 EntryIOS;
 		short NandEmuMode;
+		short NandEmuChanMode;
 		short UseSystemFont;
 		short Hooktype;
 		short WiirdDebugger;
 		short WiirdDebuggerPause;
 		short ShowPlayCount;
 		short RememberUnlock;
+		short LoaderMode;
+		short SearchMode;
 	protected:
 		bool ValidVersion(FILE * file);
 		bool SetSetting(char *name, char *value);

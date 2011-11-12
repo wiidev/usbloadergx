@@ -71,6 +71,7 @@ void CSettings::SetDefault()
 	snprintf(theme_path, sizeof(theme_path), "%stheme/", ConfigPath);
 	snprintf(dolpath, sizeof(dolpath), "%s/", BootDevice);
 	snprintf(NandEmuPath, sizeof(NandEmuPath), "%s/nand/", BootDevice);
+	strcpy(NandEmuChanPath, NandEmuPath);
 	strcpy(theme, "");
 	strcpy(language_path, "");
 	strcpy(ogg_path, "");
@@ -128,12 +129,15 @@ void CSettings::SetDefault()
 	GameListOffset = 0;
 	sneekVideoPatch = OFF;
 	NandEmuMode = OFF;
+	NandEmuChanMode = OFF;
 	UseSystemFont = ON;
 	Hooktype = 0;
 	WiirdDebugger = OFF;
 	WiirdDebuggerPause = OFF;
 	ShowPlayCount = ON;
 	RememberUnlock = ON;
+	LoaderMode = LOAD_GAMES;
+	SearchMode = SEARCH_BEGINNING;
 }
 
 bool CSettings::Load()
@@ -296,11 +300,15 @@ bool CSettings::Save()
 	fprintf(file, "sneekVideoPatch = %d\n", sneekVideoPatch);
 	fprintf(file, "NandEmuMode = %d\n", NandEmuMode);
 	fprintf(file, "NandEmuPath = %s\n", NandEmuPath);
+	fprintf(file, "NandEmuChanMode = %d\n", NandEmuChanMode);
+	fprintf(file, "NandEmuChanPath = %s\n", NandEmuChanPath);
 	fprintf(file, "UseSystemFont = %d\n", UseSystemFont);
 	fprintf(file, "Hooktype = %d\n", Hooktype);
 	fprintf(file, "WiirdDebugger = %d\n", WiirdDebugger);
 	fprintf(file, "WiirdDebuggerPause = %d\n", WiirdDebuggerPause);
 	fprintf(file, "ShowPlayCount = %d\n", ShowPlayCount);
+	fprintf(file, "LoaderMode = %d\n", LoaderMode);
+	fprintf(file, "SearchMode = %d\n", SearchMode);
 	fclose(file);
 
 	return true;
@@ -610,6 +618,18 @@ bool CSettings::SetSetting(char *name, char *value)
 	{
 		if (sscanf(value, "%d", &i) == 1) NandEmuMode = i;
 	}
+	else if(strcmp(name, "NandEmuChanMode") == 0)
+	{
+		if (sscanf(value, "%d", &i) == 1) NandEmuChanMode = i;
+	}
+	else if(strcmp(name, "LoaderMode") == 0)
+	{
+		if (sscanf(value, "%d", &i) == 1) LoaderMode = i;
+	}
+	else if(strcmp(name, "SearchMode") == 0)
+	{
+		if (sscanf(value, "%d", &i) == 1) SearchMode = i;
+	}
 	else if (strcmp(name, "InstallPartitions") == 0)
 	{
 		InstallPartitions = strtoul(value, 0, 16);
@@ -733,6 +753,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "NandEmuPath") == 0)
 	{
 		strcpy(NandEmuPath, value);
+		return true;
+	}
+	else if (strcmp(name, "NandEmuChanPath") == 0)
+	{
+		strcpy(NandEmuChanPath, value);
 		return true;
 	}
 	else if (strcmp(name, "EnabledCategories") == 0)

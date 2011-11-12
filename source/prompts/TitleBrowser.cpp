@@ -26,6 +26,8 @@
 #include "../usbloader/utils.h"
 #include "../gecko.h"
 
+#include "Controls/DeviceHandler.hpp"
+#include "usbloader/NandEmu.h"
 extern u8 shutdown;
 extern u8 reset;
 
@@ -199,7 +201,6 @@ bool TitleSelector(char output[])
 
 int TitleBrowser()
 {
-
 	u32 num_titles;
 	u32 num_sys_titles;
 	s32 ret = -1;

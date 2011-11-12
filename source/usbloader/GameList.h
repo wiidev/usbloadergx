@@ -2,7 +2,6 @@
 #define GAME_LIST_H_
 
 #include <vector>
-#include <set>
 #include "Controls/DeviceHandler.hpp"
 #include "wstring.hpp"
 #include "usbloader/disc.h"
@@ -20,7 +19,6 @@ class GameList
 		struct discHdr * operator[](int i) const { if (i < 0 || i >= (int) FilteredList.size()) return NULL; return FilteredList[i]; }
 		struct discHdr * GetDiscHeader(const char * gameID) const;
 		const wchar_t * GetCurrentFilter() const { return GameFilter.c_str(); }
-		const std::set<wchar_t> &GetAvailableSearchChars() const { return AvailableSearchChars; }
 		void SortList();
 		void clear();
 		bool operator!() const { return (FullGameList.size() == 0); }
@@ -35,6 +33,8 @@ class GameList
 		int GetPartitionNumber(const u8 *gameid) const;
 		int GetGameFS(const u8 *gameID) const { return DeviceHandler::Instance()->GetFilesystemType(USB1+GetPartitionNumber(gameID)); }
 		void RemovePartition(int part_num);
+		std::vector<struct discHdr *> &GetFilteredList(void) { return FilteredList; }
+		std::vector<struct discHdr> &GetFullGameList(void) { return FullGameList; }
 	protected:
 		int InternalReadList(int part);
 		static bool NameSortCallback(const struct discHdr *a, const struct discHdr *b);
@@ -42,7 +42,6 @@ class GameList
 		static bool RankingSortCallback(const struct discHdr *a, const struct discHdr *b);
 		static bool PlayersSortCallback(const struct discHdr *a, const struct discHdr *b);
 
-		std::set<wchar_t> AvailableSearchChars;
 		wString GameFilter;
 		int selectedGame;
 		std::vector<struct discHdr *> FilteredList;

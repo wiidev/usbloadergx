@@ -30,10 +30,12 @@ class LoaderSettings : public SettingsMenu
 {
 	public:
 		LoaderSettings();
+		~LoaderSettings();
 	protected:
 		void SetOptionValues();
 		int GetMenuInternal();
 
+		short oldLoaderMode;
 		OptionList GuiOptions;
 };
 

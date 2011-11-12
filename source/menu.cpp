@@ -216,13 +216,13 @@ int MainMenu(int menu)
 				currentMenu = MenuInstall();
 				break;
 			case MENU_SETTINGS:
-				currentMenu = GlobalSettings::Show();
+				currentMenu = GlobalSettings::Execute();
 				break;
 			case MENU_THEMEMENU:
-				currentMenu = ThemeMenu::Run();
+				currentMenu = ThemeMenu::Execute();
 				break;
 			case MENU_THEMEDOWNLOADER:
-				currentMenu = ThemeDownloader::Run();
+				currentMenu = ThemeDownloader::Execute();
 				break;
 			case MENU_HOMEBREWBROWSE:
 				currentMenu = HomebrewBrowser::Execute();

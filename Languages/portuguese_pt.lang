@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-22 12:10+0200\n"
+"POT-Creation-Date: 2011-11-12 18:58+0100\n"
 "PO-Revision-Date: 2011-11-03 11:00+0000\n"
 "Last-Translator: pplucky <pplucky@gmail.com>\n"
 "Language-Team: Sky8000, pplucky\n"
@@ -202,6 +202,9 @@ msgstr "Voltar ao HBC ou Menu Wii"
 msgid "Backgroundmusic"
 msgstr "Música de fundo"
 
+msgid "Beginning"
+msgstr ""
+
 msgid "Big thanks to:"
 msgstr "Agradecimentos:"
 
@@ -314,6 +317,9 @@ msgstr "Categorias:"
 msgid "Change Play Path"
 msgstr "Alterar Caminho de Músicas"
 
+msgid "Channels"
+msgstr ""
+
 msgid "Cheatfile is blank"
 msgstr "Ficheiro de batota vazio"
 
@@ -362,6 +368,9 @@ msgstr "Consola tem de estar desbloqueada para usar isto."
 
 msgid "Console should be unlocked to modify it."
 msgstr "Consola deve estar desbloqueada para modificar o parâmetro."
+
+msgid "Content"
+msgstr ""
 
 msgid "Continue to install game?"
 msgstr "Continuar instalação do jogo?"
@@ -525,7 +534,7 @@ msgstr "Deseja extrair todas as gravações?"
 
 msgid "Do you want to extract the save game?"
 msgstr "Deseja extrair esta gravação?"
-	
+
 msgid "Do you want to format:"
 msgstr "Deseja FORMATAR:"
 
@@ -1006,6 +1015,9 @@ msgstr "Carregar ficheiro de: %s ?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "Carregar este DOL como DOL alternativo?"
 
+msgid "Loader Mode"
+msgstr ""
+
 msgid "Loader Settings"
 msgstr "Definições do Loader"
 
@@ -1063,6 +1075,12 @@ msgstr "Modo de Repetição"
 msgid "Music Volume"
 msgstr "Volume Música"
 
+msgid "Nand Channel Emulation"
+msgstr ""
+
+msgid "Nand Emu Channel Path"
+msgstr ""
+
 msgid "Nand Emu Path"
 msgstr "Caminho Nand Emu"
 
@@ -1074,6 +1092,9 @@ msgstr "Emulação Nand apenas disponível em cIOS D2X!"
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
 msgstr "Emulação Nand apenas funciona em partições FAT/FAT32!"
+
+msgid "Nand Saves Emulation"
+msgstr ""
 
 msgid "Neither"
 msgstr "Nenhum"
@@ -1359,6 +1380,9 @@ msgstr "Gravação pode não existir para este jogo."
 
 msgid "Screensaver"
 msgstr "Protector de ecrã"
+
+msgid "Search Mode"
+msgstr ""
 
 msgid "Select"
 msgstr "Seleccionar"

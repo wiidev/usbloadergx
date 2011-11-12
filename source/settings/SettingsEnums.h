@@ -11,6 +11,12 @@ enum
 
 enum
 {
+    LOAD_GAMES = 0,
+    LOAD_CHANNELS = 1
+};
+
+enum
+{
 	JAPANESE,
 	ENGLISH,
 	GERMAN,
@@ -193,6 +199,13 @@ enum
 	HOME_MENU_FULL,
 	HOME_MENU_DEFAULT,
 	HOME_MENU_MAX_CHOICE,
+};
+
+enum
+{
+	SEARCH_BEGINNING,
+	SEARCH_CONTENT,
+	SEARCH_MAX_CHOICE
 };
 
 #endif

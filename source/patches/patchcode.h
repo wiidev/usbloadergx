@@ -31,7 +31,7 @@ extern "C"
 
 // Function prototypes
 void dogamehooks(u32 hooktype, void *addr, u32 len);
-void load_handler(const char *gameconfigPath, u32 hooktype, u32 debugger, u32 pauseAtStart);
+void load_handler(u32 hooktype, u32 debugger, u32 pauseAtStart);
 void langpatcher(void *addr, u32 len, u8 languageChoice);
 void vidolpatcher(void *addr, u32 len);
 void patchdebug(void *addr, u32 len);

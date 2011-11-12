@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 20:25+0100\n"
+"POT-Creation-Date: 2011-11-12 18:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -202,6 +202,9 @@ msgstr "Retour HBC / Menu Wii"
 msgid "Backgroundmusic"
 msgstr "Fond sonore"
 
+msgid "Beginning"
+msgstr ""
+
 msgid "Big thanks to:"
 msgstr "Grand merci à:"
 
@@ -314,6 +317,9 @@ msgstr "Catégories:"
 msgid "Change Play Path"
 msgstr "Changer dossier"
 
+msgid "Channels"
+msgstr ""
+
 msgid "Cheatfile is blank"
 msgstr "Fichier de triche vide"
 
@@ -362,6 +368,9 @@ msgstr "La console doit être déverrouillée."
 
 msgid "Console should be unlocked to modify it."
 msgstr "La console doit être déverrouillée."
+
+msgid "Content"
+msgstr ""
 
 msgid "Continue to install game?"
 msgstr "Continuer l'installation ?"
@@ -1006,6 +1015,9 @@ msgstr "Charger le fichier de: %s ?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "Charger comme DOL alternatif ?"
 
+msgid "Loader Mode"
+msgstr ""
+
 msgid "Loader Settings"
 msgstr "Paramètres du Loader"
 
@@ -1063,6 +1075,12 @@ msgstr "Type de boucle"
 msgid "Music Volume"
 msgstr "Volume musique"
 
+msgid "Nand Channel Emulation"
+msgstr ""
+
+msgid "Nand Emu Channel Path"
+msgstr ""
+
 msgid "Nand Emu Path"
 msgstr "Dossier Émulation Nand"
 
@@ -1074,6 +1092,9 @@ msgstr "L'Émulation Nand n'est disponible qu'avec le cIOS D2X!"
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
 msgstr "L'Émulation Nand ne fonctionne qu'avec une partition FAT/FAT32!"
+
+msgid "Nand Saves Emulation"
+msgstr ""
 
 msgid "Neither"
 msgstr "Aucun"
@@ -1359,6 +1380,9 @@ msgstr "La sauvegarde de ce jeu est peut-être existante."
 
 msgid "Screensaver"
 msgstr "Économiseur d'écran"
+
+msgid "Search Mode"
+msgstr ""
 
 msgid "Select"
 msgstr "Choisir"

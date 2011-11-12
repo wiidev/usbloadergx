@@ -25,12 +25,19 @@
 #include "LoaderSettings.hpp"
 #include "usbloader/usbstorage2.h"
 #include "settings/CSettings.h"
+#include "settings/GameTitles.h"
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
 #include "wad/nandtitle.h"
 #include "prompts/TitleBrowser.h"
 #include "system/IosLoader.h"
 #include "menu.h"
+
+static const char * dispMethText[] =
+{
+	trNOOP( "Games" ),
+	trNOOP( "Channels" )
+};
 
 static const char * OnOffText[] =
 {
@@ -97,6 +104,7 @@ LoaderSettings::LoaderSettings()
 {
 	int Idx = 0;
 
+	Options->SetName(Idx++, "%s", tr( "Loader Mode" ));
 	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
 	Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
 	Options->SetName(Idx++, "%s", tr( "Sneek Video Patch" ));
@@ -108,17 +116,29 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Error 002 fix" ));
 	Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
 	Options->SetName(Idx++, "%s", tr( "Return To" ));
-	Options->SetName(Idx++, "%s", tr( "Nand Emulation" ));
+	Options->SetName(Idx++, "%s", tr( "Nand Saves Emulation" ));
+	Options->SetName(Idx++, "%s", tr( "Nand Channel Emulation" ));
 	Options->SetName(Idx++, "%s", tr( "Hooktype" ));
 	Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
 	Options->SetName(Idx++, "%s", tr( "Debugger Paused Start" ));
 
 	SetOptionValues();
+
+	oldLoaderMode = Settings.LoaderMode;
+}
+
+LoaderSettings::~LoaderSettings()
+{
+	if(oldLoaderMode != Settings.LoaderMode)
+		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
 }
 
 void LoaderSettings::SetOptionValues()
 {
 	int Idx = 0;
+
+	//! Settings: Loader Mode
+	Options->SetValue(Idx++, "%s", tr(dispMethText[Settings.LoaderMode]));
 
 	//! Settings: Video Mode
 	Options->SetValue(Idx++, "%s", tr(VideoModeText[Settings.videomode]));
@@ -165,6 +185,9 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: Nand Emulation
 	Options->SetValue(Idx++, "%s", tr( NandEmuText[Settings.NandEmuMode] ));
 
+	//! Settings: Nand Channel Emulation
+	Options->SetValue(Idx++, "%s", tr( NandEmuText[Settings.NandEmuChanMode] ));
+
 	//! Settings: Hooktype
 	Options->SetValue(Idx++, "%s", tr( HooktypeText[Settings.Hooktype] ));
 
@@ -183,6 +206,12 @@ int LoaderSettings::GetMenuInternal()
 		return MENU_NONE;
 
 	int Idx = -1;
+
+	//! Settings: Loader Mode
+	if (ret == ++Idx)
+	{
+		if (++Settings.LoaderMode >= MAX_ON_OFF) Settings.LoaderMode = LOAD_GAMES;
+	}
 
 	//! Settings: Video Mode
 	if (ret == ++Idx)
@@ -278,6 +307,14 @@ int LoaderSettings::GetMenuInternal()
 		if(!IosLoader::IsD2X())
 			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
 		else if (++Settings.NandEmuMode >= 3) Settings.NandEmuMode = 0;
+	}
+
+	//! Settings: Nand Channel Emulation
+	else if (ret == ++Idx )
+	{
+		if(!IosLoader::IsD2X())
+			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
+		else if (++Settings.NandEmuChanMode >= 3) Settings.NandEmuChanMode = 0;
 	}
 
 	//! Settings: Hooktype

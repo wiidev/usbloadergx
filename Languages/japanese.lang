@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 20:25+0100\n"
+"POT-Creation-Date: 2011-11-12 18:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi, papa, ichiroling\n"
@@ -202,6 +202,9 @@ msgstr "HBC/Wiiﾒﾆｭｰへ"
 msgid "Backgroundmusic"
 msgstr "BGM"
 
+msgid "Beginning"
+msgstr ""
+
 msgid "Big thanks to:"
 msgstr "協力:"
 
@@ -314,6 +317,9 @@ msgstr "カテゴリ:"
 msgid "Change Play Path"
 msgstr "パスの変更"
 
+msgid "Channels"
+msgstr ""
+
 msgid "Cheatfile is blank"
 msgstr "チートファイルがありません"
 
@@ -362,6 +368,9 @@ msgstr "これを使うにはロックの解除が必要です"
 
 msgid "Console should be unlocked to modify it."
 msgstr "変更にはロックの解除が必要です"
+
+msgid "Content"
+msgstr ""
 
 msgid "Continue to install game?"
 msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしますか？"
@@ -1006,6 +1015,9 @@ msgstr "%sからﾌｧｲﾙをﾛｰﾄﾞしますか？"
 msgid "Load this DOL as alternate DOL?"
 msgstr "このDOLを代替DOLとしてﾛｰﾄﾞしますか？"
 
+msgid "Loader Mode"
+msgstr ""
+
 msgid "Loader Settings"
 msgstr "ローダーの設定"
 
@@ -1063,6 +1075,12 @@ msgstr "ループ機能"
 msgid "Music Volume"
 msgstr "BGMの音量"
 
+msgid "Nand Channel Emulation"
+msgstr ""
+
+msgid "Nand Emu Channel Path"
+msgstr ""
+
 msgid "Nand Emu Path"
 msgstr "NANDエミュ"
 
@@ -1074,6 +1092,9 @@ msgstr "NANDエミュレーションはd2x cIOSのみで動作します!"
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
 msgstr "NANDエミュレーションはFAT/FAT32領域のみで動作します!"
+
+msgid "Nand Saves Emulation"
+msgstr ""
 
 msgid "Neither"
 msgstr "非表示"
@@ -1359,6 +1380,9 @@ msgstr "このゲームのセーブはありません"
 
 msgid "Screensaver"
 msgstr "スクリーンセーバー"
+
+msgid "Search Mode"
+msgstr ""
 
 msgid "Select"
 msgstr "選択"

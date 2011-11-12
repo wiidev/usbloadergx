@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 20:25+0100\n"
+"POT-Creation-Date: 2011-11-12 18:58+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -202,6 +202,9 @@ msgstr "Visszatérés a HBC-be vagy Wii Menübe"
 msgid "Backgroundmusic"
 msgstr "Háttérzene"
 
+msgid "Beginning"
+msgstr ""
+
 msgid "Big thanks to:"
 msgstr "Köszönet:"
 
@@ -314,6 +317,9 @@ msgstr ""
 msgid "Change Play Path"
 msgstr ""
 
+msgid "Channels"
+msgstr "Csatornák"
+
 msgid "Cheatfile is blank"
 msgstr "A cheat-fájl üres"
 
@@ -362,6 +368,9 @@ msgstr ""
 
 msgid "Console should be unlocked to modify it."
 msgstr "A konzol zárolva, ezért nem változtatható meg."
+
+msgid "Content"
+msgstr ""
 
 msgid "Continue to install game?"
 msgstr "Játék telepítésének folytatása?"
@@ -1006,6 +1015,9 @@ msgstr "Fájl betöltése innen: %s ?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "DOL betöltése alternatív DOL-ként?"
 
+msgid "Loader Mode"
+msgstr ""
+
 msgid "Loader Settings"
 msgstr ""
 
@@ -1063,6 +1075,12 @@ msgstr ""
 msgid "Music Volume"
 msgstr "Zene Hangerõ"
 
+msgid "Nand Channel Emulation"
+msgstr ""
+
+msgid "Nand Emu Channel Path"
+msgstr ""
+
 msgid "Nand Emu Path"
 msgstr ""
 
@@ -1073,6 +1091,9 @@ msgid "Nand Emulation is only available on D2X cIOS!"
 msgstr ""
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
+msgstr ""
+
+msgid "Nand Saves Emulation"
 msgstr ""
 
 msgid "Neither"
@@ -1359,6 +1380,9 @@ msgstr ""
 
 msgid "Screensaver"
 msgstr "Képernyõkimélõ"
+
+msgid "Search Mode"
+msgstr ""
 
 msgid "Select"
 msgstr "Válassz"
@@ -1964,9 +1988,6 @@ msgstr "hátralévõ másodperc"
 
 #~ msgid "Back to Wii Menu"
 #~ msgstr "Visszatérés a Wii Menübe"
-
-#~ msgid "Channels"
-#~ msgstr "Csatornák"
 
 #~ msgid "Checking existing artwork"
 #~ msgstr "Meglévõ képek ellenõrzése"

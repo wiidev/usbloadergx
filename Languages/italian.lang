@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-08 20:25+0100\n"
+"POT-Creation-Date: 2011-11-12 18:58+0100\n"
 "PO-Revision-Date: 2011-09-11 12:19+0100\n"
 "Last-Translator: xFede, Bovirus \n"
 "Language-Team: Cambo\n"
@@ -202,6 +202,9 @@ msgstr "Torna a HBC/Menu Wii"
 msgid "Backgroundmusic"
 msgstr "Musica di sottofondo"
 
+msgid "Beginning"
+msgstr ""
+
 msgid "Big thanks to:"
 msgstr "Grazie mille a:"
 
@@ -314,6 +317,9 @@ msgstr "Categorie:"
 msgid "Change Play Path"
 msgstr "Cambia Percorso Musica"
 
+msgid "Channels"
+msgstr ""
+
 msgid "Cheatfile is blank"
 msgstr "Il file dei trucchi è vuoto"
 
@@ -362,6 +368,9 @@ msgstr "La Wii deve essere sbloccata per usare questa opzione."
 
 msgid "Console should be unlocked to modify it."
 msgstr "La Wii deve essere sbloccata per modificarla."
+
+msgid "Content"
+msgstr ""
 
 msgid "Continue to install game?"
 msgstr "Proseguire con l'installarazione del gioco?"
@@ -1006,6 +1015,9 @@ msgstr "Caricare il file da: %s ?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "Usare questo DOL come DOL alternativo?"
 
+msgid "Loader Mode"
+msgstr ""
+
 msgid "Loader Settings"
 msgstr "Impostazioni Loader"
 
@@ -1063,6 +1075,12 @@ msgstr "Ripeti Musica Sottof."
 msgid "Music Volume"
 msgstr "Volume Musica"
 
+msgid "Nand Channel Emulation"
+msgstr ""
+
+msgid "Nand Emu Channel Path"
+msgstr ""
+
 msgid "Nand Emu Path"
 msgstr "Percorso NAND Emulata"
 
@@ -1074,6 +1092,9 @@ msgstr "L'emulazione della NAND è disponibile solo con i cIOS d2x!"
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
 msgstr "L'emulazione della NAND funziona solo con le partizioni FAT/FAT32!"
+
+msgid "Nand Saves Emulation"
+msgstr ""
 
 msgid "Neither"
 msgstr "Neanche"
@@ -1359,6 +1380,9 @@ msgstr "Il salvataggio potrebbe non esistere per questo gioco."
 
 msgid "Screensaver"
 msgstr "Salvaschermo"
+
+msgid "Search Mode"
+msgstr ""
 
 msgid "Select"
 msgstr "Seleziona"
