@@ -1,5 +1,6 @@
 #include <malloc.h>
 #include <stdio.h>
+#include "Channels/channels.h"
 #include "usbloader/disc.h"
 #include "usbloader/wbfs.h"
 #include "utils/uncompress.h"
@@ -19,6 +20,39 @@ OpeningBNR::~OpeningBNR()
 		free(imetHdr);
 }
 
+bool OpeningBNR::Load(const u64 &tid)
+{
+	if(tid == 0)
+		return false;
+
+	u32 tidLow = (u32) (tid & 0xFFFFFFFF);
+	char id[6];
+	memset(id, 0, sizeof(id));
+	memcpy(id, &tidLow, 4);
+
+	if(memcmp(gameID, id, 6) == 0)
+		return true;
+
+	memcpy(gameID, id, 6);
+
+	if(imetHdr)
+		free(imetHdr);
+	imetHdr = NULL;
+
+	imetHdr = (IMETHeader*) Channels::GetOpeningBnr(tid);
+	if(!imetHdr)
+		return false;
+
+	if (imetHdr->fcc != 'IMET')
+	{
+		free(imetHdr);
+		imetHdr = NULL;
+		return false;
+	}
+
+	return true;
+}
+
 bool OpeningBNR::Load(const u8 * discid)
 {
 	if(!discid)
@@ -27,10 +61,11 @@ bool OpeningBNR::Load(const u8 * discid)
 	if(memcmp(gameID, discid, 6) == 0)
 		return true;
 
+	memcpy(gameID, discid, 6);
+
 	if(imetHdr)
 		free(imetHdr);
 	imetHdr = NULL;
-	snprintf(gameID, sizeof(gameID), (const char *) discid);
 
 	wbfs_disc_t *disc = WBFS_OpenDisc((u8 *) gameID);
 	if (!disc)

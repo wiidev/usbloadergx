@@ -269,7 +269,7 @@ GameWindow::~GameWindow()
 	ResumeGui();
 }
 
-void GameWindow::LoadGameSound(const u8 * id)
+void GameWindow::LoadGameSound(const struct discHdr * header)
 {
 	if (Settings.gamesoundvolume == 0)
 		return;
@@ -282,7 +282,15 @@ void GameWindow::LoadGameSound(const u8 * id)
 	}
 
 	u32 gameSoundDataLen;
-	const u8 *gameSoundData = BNRInstance::Instance()->GetBannerSound(id, &gameSoundDataLen);
+	const u8 *gameSoundData = NULL;
+
+	if(Settings.LoaderMode != LOAD_CHANNELS)
+		gameSoundData = BNRInstance::Instance()->GetBannerSound(header->id, &gameSoundDataLen);
+	else
+	{
+		gameSoundData = BNRInstance::Instance()->GetBannerSound(header->tid, &gameSoundDataLen);
+	}
+
 	if (gameSoundData)
 	{
 		gameSound = new GuiSound(gameSoundData, gameSoundDataLen, Settings.gamesoundvolume, true);
@@ -412,8 +420,7 @@ void GameWindow::SetWindowEffect(int direction, int in_out)
 void GameWindow::ChangeGame(int EffectDirection)
 {
 	struct discHdr * header = (mountMethod ? dvdheader : gameList[gameSelected]);
-	if(Settings.LoaderMode != LOAD_CHANNELS)
-		LoadGameSound(header->id); // Temporary no sounds for channels, will be added later
+	LoadGameSound(header);
 	LoadDiscImage(header->id);
 	SetWindowEffect(EffectDirection, OUT);
 

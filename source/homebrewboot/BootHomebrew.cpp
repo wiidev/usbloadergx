@@ -139,36 +139,23 @@ static int RunAppbooter()
 
 int BootHomebrew(const char * filepath)
 {
-	void *buffer = NULL;
-	u32 filesize = 0;
-
 	FILE *file = fopen(filepath, "rb");
-
 	if (!file) return -1;
 
 	fseek(file, 0, SEEK_END);
-	filesize = ftell(file);
+	u32 filesize = ftell(file);
 	rewind(file);
 
-	buffer = malloc(filesize);
-
-	if (fread(buffer, 1, filesize, file) != filesize)
+	if (fread(homebrewbuffer, 1, filesize, file) != filesize)
 	{
 		fclose(file);
-		free(buffer);
 		DeviceHandler::DestroyInstance();
 		Sys_BackToLoader();
 	}
 
+	homebrewsize = filesize;
+
 	fclose(file);
-
-	CopyHomebrewMemory((u8*) buffer, 0, filesize);
-
-	if (buffer)
-	{
-		free(buffer);
-		buffer = NULL;
-	}
 
 	AddBootArgument(filepath);
 	return RunAppbooter();

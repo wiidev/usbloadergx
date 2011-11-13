@@ -4,6 +4,7 @@
 #include "GUI/gui.h"
 #include "GUI/gui_diskcover.h"
 #include "menu/GameBrowseMenu.hpp"
+#include "usbloader/disc.h"
 
 #define FAVORITE_STARS  5
 
@@ -17,7 +18,7 @@ class GameWindow : public GuiWindow
 		void SetGameBrowseMenu(GameBrowseMenu *m) { browserMenu = m; };
 	protected:
 		int MainLoop();
-		void LoadGameSound(const u8 * id);
+		void LoadGameSound(const struct discHdr * header);
 		void LoadDiscImage(const u8 * id);
 		void SetWindowEffect(int direction, int in_out);
 		void ChangeGame(int EffectDirection);

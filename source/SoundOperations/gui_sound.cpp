@@ -151,7 +151,7 @@ bool GuiSound::Load(const char * filepath)
 	if(magic == 'IMD5')
 	{
 		u8 * snd = NULL;
-		u64 filesize = 0;
+		u32 filesize = 0;
 		LoadFileToMem(filepath, &snd, &filesize);
 		return Load(snd, filesize, true);
 	}

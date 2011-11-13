@@ -38,7 +38,7 @@ TplImage::TplImage(const char * filepath)
 	TPLSize = 0;
 
 	u8 * buffer = NULL;
-	u64 filesize = 0;
+	u32 filesize = 0;
 	LoadFileToMem(filepath, &buffer, &filesize);
 
 	if(buffer)

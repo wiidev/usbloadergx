@@ -25,7 +25,10 @@ extern "C"
 			u8 is_ciso;
 
 			/* Unused, on channel list mode this is the full 64 bit tid and zeros */
-			u8 tid[13];
+			u64 tid;
+
+			/* rest of unused */
+			u8 unused[5];
 
 			/* Magic word */
 			u32 magic;

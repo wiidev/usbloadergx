@@ -93,7 +93,7 @@ extern "C" u64 FileSize(const char * filepath)
  *
  * Load up the file into a block of memory
  ***************************************************************************/
-extern "C" int LoadFileToMem(const char *filepath, u8 **inbuffer, u64 *size)
+extern "C" int LoadFileToMem(const char *filepath, u8 **inbuffer, u32 *size)
 {
 	int ret = -1;
 	u64 filesize = FileSize(filepath);
@@ -168,7 +168,7 @@ extern "C" int LoadFileToMem(const char *filepath, u8 **inbuffer, u64 *size)
  *
  * Load up the file into a block of memory, while showing a progress dialog
  ***************************************************************************/
-extern "C" int LoadFileToMemWithProgress(const char *progressText, const char *filepath, u8 **inbuffer, u64 *size)
+extern "C" int LoadFileToMemWithProgress(const char *progressText, const char *filepath, u8 **inbuffer, u32 *size)
 {
 
 	int ret = LoadFileToMem(filepath, inbuffer, size);

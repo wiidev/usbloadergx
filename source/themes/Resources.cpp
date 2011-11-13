@@ -36,7 +36,7 @@ bool Resources::LoadFiles(const char * path)
 		if(CheckFile(fullpath))
 		{
 			u8 * buffer = NULL;
-			u64 filesize = 0;
+			u32 filesize = 0;
 
 			LoadFileToMem(fullpath, &buffer, &filesize);
 

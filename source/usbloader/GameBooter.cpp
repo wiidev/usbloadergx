@@ -328,9 +328,7 @@ int GameBooter::BootGame(const char * gameID)
 		/* Setup video mode */
 		Disc_SelectVMode(videoChoice);
 		// Load dol
-		u64 tid;
-		memcpy(&tid, gameHeader.tid, 8);
-		AppEntrypoint = Channels::LoadChannel(tid);
+		AppEntrypoint = Channels::LoadChannel(gameHeader.tid);
 	}
 
 	//! No entrypoint found...back to HBC/SystemMenu

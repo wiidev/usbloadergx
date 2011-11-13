@@ -307,7 +307,7 @@ void HomebrewBrowser::MainButtonClicked(int button)
 	if (choice == 1)
 	{
 		u8 *buffer = NULL;
-		u64 filesize = 0;
+		u32 filesize = 0;
 		LoadFileToMem(HomebrewList->GetFilepath(button), &buffer, &filesize);
 		if(!buffer)
 		{

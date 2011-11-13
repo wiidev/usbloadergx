@@ -196,7 +196,7 @@ void ThemeMenu::SetupMainButtons()
 	for(int i = 0; i < ThemeDir.GetFilecount(); ++i)
 	{
 		u8 *buffer = NULL;
-		u64 filesize;
+		u32 filesize;
 		gprintf("%i %s\n", i, ThemeDir.GetFilepath(i));
 		LoadFileToMem(ThemeDir.GetFilepath(i), &buffer, &filesize);
 
