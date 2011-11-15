@@ -722,14 +722,14 @@ static int LoadGameConfig(const char *CheatFilepath)
 	return 0;
 }
 
-int ocarina_load_code(const char *CheatFilepath)
+int ocarina_load_code(const char *CheatFilepath, u8 *gameid)
 {
 	char filepath[150];
 
 	gprintf("Ocarina: Searching codes...");
 	gprintf("\n");
 
-	sprintf(filepath, "%s%.6s", CheatFilepath, (char *) Disc_ID);
+	sprintf(filepath, "%s%.6s", CheatFilepath, gameid);
 	filepath[strlen(CheatFilepath) + 6] = 0x2E;
 	filepath[strlen(CheatFilepath) + 7] = 0x67;
 	filepath[strlen(CheatFilepath) + 8] = 0x63;

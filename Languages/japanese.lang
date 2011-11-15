@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# japanese.lang - r1117
+# japanese.lang - r1128
 # don't delete/change this line (e).
 msgid ""
 msgstr ""
@@ -8,11 +8,11 @@ msgstr ""
 "POT-Creation-Date: 2011-11-12 18:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
-"Language-Team: hosigumayuugi, papa, ichiroling\n"
-"Language: \n"
+"Language-Team: hosigumayuugi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid " could not be downloaded."
 msgstr "ﾀﾞｳﾝﾛｰﾄﾞできませんでした"
@@ -203,7 +203,7 @@ msgid "Backgroundmusic"
 msgstr "BGM"
 
 msgid "Beginning"
-msgstr ""
+msgstr "前方一致"
 
 msgid "Big thanks to:"
 msgstr "協力:"
@@ -318,7 +318,7 @@ msgid "Change Play Path"
 msgstr "パスの変更"
 
 msgid "Channels"
-msgstr ""
+msgstr "チャンネル"
 
 msgid "Cheatfile is blank"
 msgstr "チートファイルがありません"
@@ -370,7 +370,7 @@ msgid "Console should be unlocked to modify it."
 msgstr "変更にはロックの解除が必要です"
 
 msgid "Content"
-msgstr ""
+msgstr "含む"
 
 msgid "Continue to install game?"
 msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしますか？"
@@ -542,7 +542,7 @@ msgid "Do you want to load the default theme?"
 msgstr "標準のテーマを読み込みますか?"
 
 msgid "Do you want to re-init network?"
-msgstr ""
+msgstr "ネットワークに再接続しますか?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "全てのFAT32領域のセクタで空き容量情報を同期しますか？"
@@ -848,7 +848,7 @@ msgid "Gamename [GAMEID]"
 msgstr "ゲーム名 [ゲームID]"
 
 msgid "Games"
-msgstr "ゲーム総数"
+msgstr "ゲーム"
 
 msgid "Generating GXGameCategories.xml"
 msgstr "GXGameCategories.xmlを作成中です"
@@ -982,7 +982,7 @@ msgid "Korean"
 msgstr "韓国語"
 
 msgid "Language Files"
-msgstr ""
+msgstr "言語ファイル"
 
 msgid "Language change:"
 msgstr "言語の変更"
@@ -1016,7 +1016,7 @@ msgid "Load this DOL as alternate DOL?"
 msgstr "このDOLを代替DOLとしてﾛｰﾄﾞしますか？"
 
 msgid "Loader Mode"
-msgstr ""
+msgstr "ローダーモード"
 
 msgid "Loader Settings"
 msgstr "ローダーの設定"
@@ -1076,25 +1076,25 @@ msgid "Music Volume"
 msgstr "BGMの音量"
 
 msgid "Nand Channel Emulation"
-msgstr ""
+msgstr "NANDチャンネルエミュ"
 
 msgid "Nand Emu Channel Path"
-msgstr ""
+msgstr "NANDエミュチャンネル"
 
 msgid "Nand Emu Path"
 msgstr "NANDエミュ"
 
 msgid "Nand Emulation"
-msgstr "NANDエミュレーション"
+msgstr "NANDエミュ"
 
 msgid "Nand Emulation is only available on D2X cIOS!"
-msgstr "NANDエミュレーションはd2x cIOSのみで動作します!"
+msgstr "NANDエミュはd2x cIOSのみで動作します!"
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
-msgstr "NANDエミュレーションはFAT/FAT32領域のみで動作します!"
+msgstr "NANDエミュはFAT/FAT32領域のみで動作します!"
 
 msgid "Nand Saves Emulation"
-msgstr ""
+msgstr "NANDセーブエミュ"
 
 msgid "Neither"
 msgstr "非表示"
@@ -1382,7 +1382,7 @@ msgid "Screensaver"
 msgstr "スクリーンセーバー"
 
 msgid "Search Mode"
-msgstr ""
+msgstr "検索方法"
 
 msgid "Select"
 msgstr "選択"
@@ -1699,10 +1699,10 @@ msgid "Wii Settings"
 msgstr "データ管理"
 
 msgid "WiiTDB.xml"
-msgstr ""
+msgstr "ゲーム名リスト"
 
 msgid "WiiTDB.xml is up to date."
-msgstr ""
+msgstr "ゲーム名リストが更新されました"
 
 msgid "Wiilight"
 msgstr "スロット点灯機能"

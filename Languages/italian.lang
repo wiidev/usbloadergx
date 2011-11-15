@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-12 18:58+0100\n"
+"POT-Creation-Date: 2011-11-15 21:46+0100\n"
 "PO-Revision-Date: 2011-09-11 12:19+0100\n"
-"Last-Translator: xFede, Bovirus \n"
+"Last-Translator: xFede\n"
 "Language-Team: Cambo\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " non può essere scaricato."
@@ -203,7 +203,7 @@ msgid "Backgroundmusic"
 msgstr "Musica di sottofondo"
 
 msgid "Beginning"
-msgstr ""
+msgstr "Dall'inizio"
 
 msgid "Big thanks to:"
 msgstr "Grazie mille a:"
@@ -318,7 +318,7 @@ msgid "Change Play Path"
 msgstr "Cambia Percorso Musica"
 
 msgid "Channels"
-msgstr ""
+msgstr "Canali"
 
 msgid "Cheatfile is blank"
 msgstr "Il file dei trucchi è vuoto"
@@ -370,7 +370,7 @@ msgid "Console should be unlocked to modify it."
 msgstr "La Wii deve essere sbloccata per modificarla."
 
 msgid "Content"
-msgstr ""
+msgstr "Nel contenuto"
 
 msgid "Continue to install game?"
 msgstr "Proseguire con l'installarazione del gioco?"
@@ -542,7 +542,7 @@ msgid "Do you want to load the default theme?"
 msgstr "Vuoi caricare il tema predefinito?"
 
 msgid "Do you want to re-init network?"
-msgstr "Reiniziallizzare la rete?"
+msgstr "Vuoi reinizializzare la rete?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Vuoi sincronizzare le info sullo spazio libero in tutte le partizioni FAT32?"
@@ -590,7 +590,7 @@ msgid "Downloading pagelist:"
 msgstr "Scaricando l'anteprima di:"
 
 msgid "Dump NAND to EmuNand"
-msgstr "Dump NAND in EmuNand"
+msgstr "Dumpa la NAND sulla NAND Emulata"
 
 msgid "Dutch"
 msgstr "Olandese"
@@ -608,7 +608,7 @@ msgid "English"
 msgstr "Inglese"
 
 msgid "Enter Path"
-msgstr "Ins. percorso"
+msgstr "Ins. Percorso"
 
 msgid "Error"
 msgstr "Errore"
@@ -682,7 +682,7 @@ msgid "Extracting files:"
 msgstr "Estraendo i file:"
 
 msgid "Extracting nand files:"
-msgstr "Estrazione file NAND:"
+msgstr "Estraendo il file della NAND:"
 
 msgid "Failed"
 msgstr "Fallito"
@@ -767,7 +767,7 @@ msgid "French"
 msgstr "Francese"
 
 msgid "Full"
-msgstr "Pieno"
+msgstr "Completa"
 
 msgid "Full Cover Path"
 msgstr "Percorso Cop. Complete"
@@ -985,13 +985,13 @@ msgid "Language Files"
 msgstr "File di Lingua"
 
 msgid "Language change:"
-msgstr "Cambia lingua:"
+msgstr "Cambia Lingua:"
 
 msgid "Languagefiles Path"
-msgstr "Percorso dei file di lingua"
+msgstr "Percorso File di Lingua"
 
 msgid "Languagepath changed."
-msgstr "Percorso dei file di lingua cambiato."
+msgstr "Percorso dei File di Lingua cambiato."
 
 msgid "Left"
 msgstr "Sinistra"
@@ -1016,7 +1016,7 @@ msgid "Load this DOL as alternate DOL?"
 msgstr "Usare questo DOL come DOL alternativo?"
 
 msgid "Loader Mode"
-msgstr ""
+msgstr "Modalità"
 
 msgid "Loader Settings"
 msgstr "Impostazioni Loader"
@@ -1076,10 +1076,10 @@ msgid "Music Volume"
 msgstr "Volume Musica"
 
 msgid "Nand Channel Emulation"
-msgstr ""
+msgstr "Emulazione Canali"
 
 msgid "Nand Emu Channel Path"
-msgstr ""
+msgstr "Percorso Emulazione Canali "
 
 msgid "Nand Emu Path"
 msgstr "Percorso NAND Emulata"
@@ -1094,7 +1094,7 @@ msgid "Nand Emulation only works on FAT/FAT32 partitions!"
 msgstr "L'emulazione della NAND funziona solo con le partizioni FAT/FAT32!"
 
 msgid "Nand Saves Emulation"
-msgstr ""
+msgstr "Emulazione Salvataggi"
 
 msgid "Neither"
 msgstr "Neanche"
@@ -1517,7 +1517,7 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "La cartella specificata non esiste. Vuoi crearla ora?"
 
 msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
-msgstr "I file verranno estratti nel percorso emu nand. Attenzione: i file esistenti verranno sovrascritti."
+msgstr "I file verranno estratti nel percorso della NAND Emulata. NB: Tutti I file esistenti verranno sovrascritti."
 
 msgid "The game installation is disabled under this IOS because of instability in usb write."
 msgstr "L'installazione dei giochi è disabilitata con questo IOS dato che la scrittura sul disco rigido è instabile"
@@ -1681,7 +1681,7 @@ msgid "What should be deleted for this game title:"
 msgstr "Cosa deve essere eliminato per questo gioco:"
 
 msgid "What to extract from NAND?"
-msgstr "Cosa estrarre dalla NAND"
+msgstr "Che cosa vuoi estrarre dalla NAND?"
 
 msgid "WiFi Features"
 msgstr "Funzionalità WiFi"
@@ -1699,10 +1699,10 @@ msgid "Wii Settings"
 msgstr "Impostazioni Wii"
 
 msgid "WiiTDB.xml"
-msgstr "WiiTDB.xml"
+msgstr ""
 
 msgid "WiiTDB.xml is up to date."
-msgstr ""
+msgstr "WiiTDB.xml è già aggiornato"
 
 msgid "Wiilight"
 msgstr "Illuminazione Wii"

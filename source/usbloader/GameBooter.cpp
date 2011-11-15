@@ -270,7 +270,7 @@ int GameBooter::BootGame(const char * gameID)
 
 	//! Load Ocarina codes
 	if (ocarinaChoice)
-		ocarina_load_code(Settings.Cheatcodespath);
+		ocarina_load_code(Settings.Cheatcodespath, gameHeader.id);
 
 	//! Setup disc stuff if we load a game
 	if(Settings.LoaderMode != LOAD_CHANNELS)

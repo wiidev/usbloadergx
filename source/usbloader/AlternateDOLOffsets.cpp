@@ -192,6 +192,20 @@ int autoSelectDolPrompt(const char *gameid)
 		else if(choice == 0)
 			return 0;
 	}
+	//The Legend of Zelda - Skyward Sword
+	else if (strcmp(id, "SOUE01") == 0)
+	{
+		int choice = WindowPrompt(tr( "Select a DOL" ), 0, tr("Motion+ Video"), tr("Pick from a list"), tr( "Cancel" ));
+		if(choice == 1)
+			return 836;//from cheatfreak47
+	}
+	//The Legend of Zelda - Skyward Sword
+	else if (strcmp(id, "SOUP01") == 0)
+	{
+		int choice = WindowPrompt(tr( "Select a DOL" ), 0, tr("Motion+ Video"), tr("Pick from a list"), tr( "Cancel" ));
+		if(choice == 1)
+			return 974;//from Cyan
+	}
 	//Virtual Tennis 2009
 	else if (strcmp(id, "RVUP8P") == 0)
 	{

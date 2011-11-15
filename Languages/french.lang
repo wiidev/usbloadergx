@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-12 18:58+0100\n"
+"POT-Creation-Date: 2011-11-15 21:46+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " ne peut pas être téléchargé."
@@ -203,7 +203,7 @@ msgid "Backgroundmusic"
 msgstr "Fond sonore"
 
 msgid "Beginning"
-msgstr ""
+msgstr "Début"
 
 msgid "Big thanks to:"
 msgstr "Grand merci à:"
@@ -318,7 +318,7 @@ msgid "Change Play Path"
 msgstr "Changer dossier"
 
 msgid "Channels"
-msgstr ""
+msgstr "Chaînes"
 
 msgid "Cheatfile is blank"
 msgstr "Fichier de triche vide"
@@ -370,7 +370,7 @@ msgid "Console should be unlocked to modify it."
 msgstr "La console doit être déverrouillée."
 
 msgid "Content"
-msgstr ""
+msgstr "Contenu"
 
 msgid "Continue to install game?"
 msgstr "Continuer l'installation ?"
@@ -667,7 +667,7 @@ msgid "Exit to where?"
 msgstr "Quitter vers où ?"
 
 msgid "Export All Saves to EmuNand"
-msgstr "Extraire tous les sauvegardes"
+msgstr "Extraire toutes les sauvegardes"
 
 msgid "Extract Save to EmuNand"
 msgstr "Extraire la sauvegarde vers Émulation Nand"
@@ -1016,7 +1016,7 @@ msgid "Load this DOL as alternate DOL?"
 msgstr "Charger comme DOL alternatif ?"
 
 msgid "Loader Mode"
-msgstr ""
+msgstr "Mode du Loader"
 
 msgid "Loader Settings"
 msgstr "Paramètres du Loader"
@@ -1076,10 +1076,10 @@ msgid "Music Volume"
 msgstr "Volume musique"
 
 msgid "Nand Channel Emulation"
-msgstr ""
+msgstr "Émulation Nand Chaînes"
 
 msgid "Nand Emu Channel Path"
-msgstr ""
+msgstr "Dossier ÉmuNand Chaînes"
 
 msgid "Nand Emu Path"
 msgstr "Dossier Émulation Nand"
@@ -1094,7 +1094,7 @@ msgid "Nand Emulation only works on FAT/FAT32 partitions!"
 msgstr "L'Émulation Nand ne fonctionne qu'avec une partition FAT/FAT32!"
 
 msgid "Nand Saves Emulation"
-msgstr ""
+msgstr "Émul. Nand Sauvegardes"
 
 msgid "Neither"
 msgstr "Aucun"
@@ -1382,7 +1382,7 @@ msgid "Screensaver"
 msgstr "Économiseur d'écran"
 
 msgid "Search Mode"
-msgstr ""
+msgstr "Mode de recherche"
 
 msgid "Select"
 msgstr "Choisir"
