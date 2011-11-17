@@ -80,7 +80,7 @@ LIBS :=  -lpngu -lpng -lgd -lm -lz -lwiiuse -lbte -lasnd -logc -lfreetype -lvorb
 # list of directories containing libraries, this must be the top level containing
 # include and lib
 #---------------------------------------------------------------------------------
-LIBDIRS	:= $(DEVKITPPC)/lib $(CURDIR)
+LIBDIRS	:= $(DEVKITPPC)/lib $(CURDIR) $(PORTLIBS)
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
 # rules for different file extensions
@@ -134,7 +134,7 @@ export OFILES	:=	$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) \
 export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 					$(foreach dir,$(LIBDIRS),-I$(dir)/include) \
 					-I$(CURDIR)/$(BUILD) \
-					-I$(LIBOGC_INC)
+					-I$(LIBOGC_INC) -I$(PORTLIBS)/include/freetype2
 
 #---------------------------------------------------------------------------------
 # build a list of library paths
