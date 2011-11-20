@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-12 18:58+0100\n"
+"POT-Creation-Date: 2011-11-20 10:55+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 msgid " could not be downloaded."
 msgstr "ﾀﾞｳﾝﾛｰﾄﾞできませんでした"
@@ -1495,6 +1495,9 @@ msgstr "テーマの解凍を完了しました."
 msgid "Successfully installed:"
 msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしました"
 
+msgid "Switching to channel list mode."
+msgstr ""
+
 msgid "Sync FAT32 FS Info"
 msgstr "FAT32FS情報を同期"
 
@@ -1571,8 +1574,8 @@ msgstr "ヒントバルーン"
 msgid "Transfer failed"
 msgstr "転送に失敗しました"
 
-msgid "USB Device not found"
-msgstr "USB機器が見つかりません"
+msgid "USB Device not found."
+msgstr ""
 
 msgid "USB Loader GX is protected"
 msgstr "GXは保護されています"
@@ -1734,11 +1737,11 @@ msgstr "使用中のIOS:IOS"
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "rev17以前のcIOS249ではFAT32/NTFS/EXTに対応していません"
 
+msgid "You can select or format a partition or use the channel loader mode."
+msgstr ""
+
 msgid "You cannot delete this category."
 msgstr "このカテゴリは削除できません"
-
-msgid "You need to select or format a partition"
-msgstr "領域を選択するか初期化してください"
 
 msgid "and translators for language files updates"
 msgstr "/ K-M / ichiroling …日本語化"
@@ -1793,6 +1796,12 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "USB Device not found"
+#~ msgstr "USB機器が見つかりません"
+
+#~ msgid "You need to select or format a partition"
+#~ msgstr "領域を選択するか初期化してください"
 
 #~ msgid "GameTDB Files"
 #~ msgstr "ゲーム名リスト"

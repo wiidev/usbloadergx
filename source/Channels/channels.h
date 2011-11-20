@@ -35,27 +35,28 @@ using namespace std;
 class Channels
 {
 public:
-    static Channels *Instance(void) { if(!instance) instance = new Channels(); return instance; }
-    static void DestroyInstance(void) { if(instance) delete instance; instance = NULL; }
+	static Channels *Instance(void) { if(!instance) instance = new Channels(); return instance; }
+	static void DestroyInstance(void) { if(instance) delete instance; instance = NULL; }
 
-    static u32 LoadChannel(u64 chantitle);
-    static u8 GetRequestedIOS(u64 title);
-    static u8 *GetDol(u64 title);
-    static u8 *GetOpeningBnr(u64 title);
+	static u32 LoadChannel(const u64 &chantitle);
+	static u8 GetRequestedIOS(const u64 &title);
+	static u8 *GetTMD(const u64 &tid, u32 *size, bool isfsInit, const char *prefix);
+	static u8 *GetDol(const u64 &title, u8 *tmdBuffer);
+	static u8 *GetOpeningBnr(const u64 &title);
 
-    void GetChannelList();
-    void GetEmuChannelList();
-    vector<struct discHdr> & GetDiscHeaderList(void);
+	void GetChannelList();
+	void GetEmuChannelList();
+	vector<struct discHdr> & GetDiscHeaderList(void);
 private:
-    static Channels *instance;
+	static Channels *instance;
 
-    static bool Identify(u64 titleid, u32 *ios);
+	static bool Identify(const u64 &titleid, u8 *tmdBuffer, u32 tmdSize);
 
-    bool ParseTitleDir(char *path, int language);
-    bool GetEmuChanTitle(char *tmdpath, int language, std::string &Title);
+	bool ParseTitleDir(char *path, int language);
+	bool GetEmuChanTitle(char *tmdpath, int language, std::string &Title);
 
-    vector<struct discHdr> NandChannels;
-    vector<struct discHdr> EmuChannels;
+	vector<struct discHdr> NandChannels;
+	vector<struct discHdr> EmuChannels;
 };
 
 #endif

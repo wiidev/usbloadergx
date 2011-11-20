@@ -704,6 +704,7 @@ static int LoadGameConfig(const char *CheatFilepath)
 
 	tempgameconf = (u8*) malloc(filesize);
 	if (tempgameconf == NULL) {
+		tempgameconf = (u8 *) defaultgameconfig;
 		fclose(fp);
 		return -1;
 	}
@@ -715,6 +716,7 @@ static int LoadGameConfig(const char *CheatFilepath)
 	if (ret != filesize)
 	{
 		free(tempgameconf);
+		tempgameconf = (u8 *) defaultgameconfig;
 		return -1;
 	}
 	tempgameconfsize = filesize;
@@ -725,16 +727,13 @@ static int LoadGameConfig(const char *CheatFilepath)
 int ocarina_load_code(const char *CheatFilepath, u8 *gameid)
 {
 	char filepath[150];
+	char id[7];
 
-	gprintf("Ocarina: Searching codes...");
-	gprintf("\n");
+	memset(id, 0, sizeof(id));
+	memcpy(id, gameid, 6);
+	snprintf(filepath, sizeof(filepath), "%s%s.gct", CheatFilepath, id);
 
-	sprintf(filepath, "%s%.6s", CheatFilepath, gameid);
-	filepath[strlen(CheatFilepath) + 6] = 0x2E;
-	filepath[strlen(CheatFilepath) + 7] = 0x67;
-	filepath[strlen(CheatFilepath) + 8] = 0x63;
-	filepath[strlen(CheatFilepath) + 9] = 0x74;
-	filepath[strlen(CheatFilepath) + 10] = 0;
+	gprintf("Ocarina: Searching codes...%s\n", filepath);
 
 	FILE * fp = fopen(filepath, "rb");
 	if (!fp)

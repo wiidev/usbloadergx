@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-15 21:46+0100\n"
+"POT-Creation-Date: 2011-11-20 10:55+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " indirilemedi."
@@ -1495,6 +1495,9 @@ msgstr "Tema başarıyla çıkarıldı."
 msgid "Successfully installed:"
 msgstr "Başarıyla kuruldu:"
 
+msgid "Switching to channel list mode."
+msgstr ""
+
 msgid "Sync FAT32 FS Info"
 msgstr ""
 
@@ -1571,8 +1574,8 @@ msgstr "Yardımlar"
 msgid "Transfer failed"
 msgstr ""
 
-msgid "USB Device not found"
-msgstr "USB Aygıtı bulunamadı"
+msgid "USB Device not found."
+msgstr ""
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX koruma altında"
@@ -1734,11 +1737,11 @@ msgstr ""
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr ""
 
-msgid "You cannot delete this category."
+msgid "You can select or format a partition or use the channel loader mode."
 msgstr ""
 
-msgid "You need to select or format a partition"
-msgstr "Bir bölüm seçmeniz ya da formatlamanız gerekiyor"
+msgid "You cannot delete this category."
+msgstr ""
 
 msgid "and translators for language files updates"
 msgstr ""
@@ -1793,6 +1796,12 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "saniye kaldı"
+
+#~ msgid "USB Device not found"
+#~ msgstr "USB Aygıtı bulunamadı"
+
+#~ msgid "You need to select or format a partition"
+#~ msgstr "Bir bölüm seçmeniz ya da formatlamanız gerekiyor"
 
 #~ msgid "Language File"
 #~ msgstr "Dil dosyası"

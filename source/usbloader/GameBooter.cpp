@@ -196,6 +196,23 @@ int GameBooter::SetupDisc(u8 * gameID)
 	return ret;
 }
 
+void GameBooter::ShutDownDevices(int gameUSBPort)
+{
+	gprintf("Shutting down devices...\n");
+	//! Flush all caches and close up all devices
+	WBFS_CloseAll();
+	DeviceHandler::DestroyInstance();
+
+	//! Shadow mload - Only needed on some games with Hermes v5.1 (Check is inside the function)
+	shadow_mload();
+
+	if(Settings.USBPort == 2)
+		//! Reset USB port because device handler changes it for cache flushing
+		USBStorage2_SetPort(gameUSBPort);
+	USBStorage2_Deinit();
+	USB_Deinitialize();
+}
+
 int GameBooter::BootGame(const char * gameID)
 {
 	if(!gameID || strlen(gameID) < 3)
@@ -314,15 +331,14 @@ int GameBooter::BootGame(const char * gameID)
 	{
 		gprintf("\tGame Boot\n");
 		AppEntrypoint = BootPartition(Settings.dolpath, videoChoice, alternatedol, alternatedoloffset);
-		//! Flush all caches and close up all devices
-		DeviceHandler::DestroyInstance();
+		// Reading of game is done we can close devices now
+		ShutDownDevices(usbport);
 	}
 	else
 	{
+		//! shutdown now and avoid later crashs with free if memory gets overwritten by channel
+		ShutDownDevices(usbport);
 		gprintf("\tChannel Boot\n");
-		//! Flush all caches and close up all devices
-		//! Avoid later crashs with free if memory gets overwritten by game
-		DeviceHandler::DestroyInstance();
 		/* Setup low memory */
 		Disc_SetLowMem();
 		/* Setup video mode */
@@ -345,18 +361,6 @@ int GameBooter::BootGame(const char * gameID)
 
 	//! Load Code handler if needed
 	load_handler(Hooktype, WiirdDebugger, Settings.WiirdDebuggerPause);
-
-	//! Shadow mload - Only needed on some games with Hermes v5.1 (Check is inside the function)
-	shadow_mload();
-
-	gprintf("Shutting down devices...\n");
-	// Close all handlers
-	WBFS_CloseAll();
-	if(Settings.USBPort == 2)
-		//! Reset USB port because device handler changes it for cache flushing
-		USBStorage2_SetPort(usbport);
-	USBStorage2_Deinit();
-	USB_Deinitialize();
 
 	//! Jump to the entrypoint of the game - the last function of the USB Loader
 	gprintf("Jumping to game entrypoint: 0x%08X.\n", AppEntrypoint);

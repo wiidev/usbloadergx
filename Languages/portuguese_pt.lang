@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-15 21:46+0100\n"
+"POT-Creation-Date: 2011-11-20 10:55+0100\n"
 "PO-Revision-Date: 2011-11-03 11:00+0000\n"
 "Last-Translator: pplucky <pplucky@gmail.com>\n"
 "Language-Team: Sky8000, pplucky\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " não foi descarregado."
@@ -1495,6 +1495,9 @@ msgstr "Tema extraído com sucesso."
 msgid "Successfully installed:"
 msgstr "Instalado com Sucesso:"
 
+msgid "Switching to channel list mode."
+msgstr ""
+
 msgid "Sync FAT32 FS Info"
 msgstr "Sincronizar Info FAT32"
 
@@ -1571,8 +1574,8 @@ msgstr "Dicas"
 msgid "Transfer failed"
 msgstr "Transferência falhada"
 
-msgid "USB Device not found"
-msgstr "Dispositivo USB não encontrado"
+msgid "USB Device not found."
+msgstr ""
 
 msgid "USB Loader GX is protected"
 msgstr "O USB Loader GX está bloqueado"
@@ -1734,11 +1737,11 @@ msgstr "Está a usar o IOS"
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Está a tentar seleccionar uma partição FAT32/NTFS/EXT com um cIOS 249 Rev < 18. Isto não é suportado. Continue por sua conta e risco."
 
+msgid "You can select or format a partition or use the channel loader mode."
+msgstr ""
+
 msgid "You cannot delete this category."
 msgstr "Não pode apagar esta categoria."
-
-msgid "You need to select or format a partition"
-msgstr "Necessita seleccionar ou formatar uma partição"
 
 msgid "and translators for language files updates"
 msgstr "e tradutores para as actualizações de idioma"
@@ -1793,6 +1796,12 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "USB Device not found"
+#~ msgstr "Dispositivo USB não encontrado"
+
+#~ msgid "You need to select or format a partition"
+#~ msgstr "Necessita seleccionar ou formatar uma partição"
 
 #~ msgid "Language File"
 #~ msgstr "Idiomas"

@@ -25,63 +25,63 @@
 
 u32 packBytes(int a, int b, int c, int d)
 {
-    return (d << 24) | (c << 16) | (b << 8) | (a);
+	return (d << 24) | (c << 16) | (b << 8) | (a);
 }
 
 s32 __decompressLZ77_11(u8 *in, u32 inputLen, u8 **output, u32 *outputLen)
 {
-    int x, y;
+	int x, y;
 
-    u8 *out = NULL;
+	u8 *out = NULL;
 
-    u32 compressedPos = 0x4;
-    u32 decompressedPos = 0x0;
-    u32 decompressedSize = 0;
+	u32 compressedPos = 0x4;
+	u32 decompressedPos = 0x0;
+	u32 decompressedSize = 0;
 
-    decompressedSize = packBytes(in[0], in[1], in[2], in[3]) >> 8;
+	decompressedSize = packBytes(in[0], in[1], in[2], in[3]) >> 8;
 
-    if (!decompressedSize)
-    {
-        decompressedSize = packBytes(in[4], in[5], in[6], in[7]);
-        compressedPos += 0x4;
-    }
+	if (!decompressedSize)
+	{
+		decompressedSize = packBytes(in[4], in[5], in[6], in[7]);
+		compressedPos += 0x4;
+	}
 
-    printf("Decompressed size : %i\n", decompressedSize);
+	printf("Decompressed size : %i\n", decompressedSize);
 
-    out = memalign(32, ALIGN32(decompressedSize));
+	out = memalign(32, ALIGN32(decompressedSize));
 	if (out == NULL)
 	{
 		printf("Out of memory\n");
 		return -1;
 	}
 
-    while (compressedPos < inputLen && decompressedPos < decompressedSize)
-    {
-        u8 byteFlag = in[compressedPos];
-        compressedPos++;
+	while (compressedPos < inputLen && decompressedPos < decompressedSize)
+	{
+		u8 byteFlag = in[compressedPos];
+		compressedPos++;
 
-        for (x = 7; x >= 0; x--)
-        {
-            if ((byteFlag & (1 << x)) > 0)
-            {
-                u8 first = in[compressedPos];
-                u8 second = in[compressedPos + 1];
+		for (x = 7; x >= 0; x--)
+		{
+			if ((byteFlag & (1 << x)) > 0)
+			{
+				u8 first = in[compressedPos];
+				u8 second = in[compressedPos + 1];
 
-                u32 pos, copyLen;
+				u32 pos, copyLen;
 
-                if (first < 0x20)
-                {
-                    u8 third = in[compressedPos + 2];
+				if (first < 0x20)
+				{
+					u8 third = in[compressedPos + 2];
 
-                    if (first >= 0x10)
-                    {
-                    u32 fourth = in[compressedPos + 3];
+					if (first >= 0x10)
+					{
+					u32 fourth = in[compressedPos + 3];
 
-                    pos = (u32)(((third & 0xF) << 8) | fourth) + 1;
-                    copyLen = (u32)((second << 4) | ((first & 0xF) << 12) | (third >> 4)) + 273;
+					pos = (u32)(((third & 0xF) << 8) | fourth) + 1;
+					copyLen = (u32)((second << 4) | ((first & 0xF) << 12) | (third >> 4)) + 273;
 
-                    compressedPos += 4;
-                    } else
+					compressedPos += 4;
+					} else
 					{
 						pos = (u32)(((second & 0xF) << 8) | third) + 1;
 						copyLen = (u32)(((first & 0xF) << 4) | (second >> 4)) + 17;
@@ -135,7 +135,7 @@ s32 __decompressLZ77_10(u8 *in, u32 inputLen, u8 **output, u32 *outputLen)
 
 	printf("Decompressed size : %i\n", decompressedSize);
 
-    out = memalign(32, ALIGN32(decompressedSize));
+	out = memalign(32, ALIGN32(decompressedSize));
 	if (out == NULL)
 	{
 		printf("Out of memory\n");
@@ -197,18 +197,18 @@ int isLZ77compressed(u8 *buffer)
 
 int decompressLZ77content(u8 *buffer, u32 length, u8 **output, u32 *outputLen)
 {
-    int ret;
+	int ret;
 	switch (buffer[0])
-    {
-        case LZ77_0x10_FLAG:
-            ret = __decompressLZ77_10(buffer, length, output, outputLen);
+	{
+		case LZ77_0x10_FLAG:
+			ret = __decompressLZ77_10(buffer, length, output, outputLen);
 			break;
-        case LZ77_0x11_FLAG:
-            ret = __decompressLZ77_11(buffer, length, output, outputLen);
+		case LZ77_0x11_FLAG:
+			ret = __decompressLZ77_11(buffer, length, output, outputLen);
 			break;
-        default:
+		default:
 			ret = -1;
 			break;
-    }
+	}
 	return ret;
 }

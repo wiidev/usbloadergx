@@ -233,29 +233,3 @@ int WBFS_GetFragList(u8 *id)
 
 	return WbfsList[part_num]->GetFragList(id);
 }
-
-int MountWBFS(bool ShowGUI)
-{
-	if(ShowGUI)
-		return WBFS_Init(WBFS_DEVICE_USB);
-
-	int ret = -1;
-	time_t currTime = time(0);
-
-	while (time(0) - currTime < 30)
-	{
-		ret = WBFS_Init(WBFS_DEVICE_USB);
-		printf("%i...", int(time(0) - currTime));
-		if (ret < 0)
-			sleep(1);
-		else
-			break;
-
-		DeviceHandler::Instance()->UnMountAllUSB();
-		DeviceHandler::Instance()->MountAllUSB();
-	}
-
-	printf("\n");
-
-	return ret;
-}

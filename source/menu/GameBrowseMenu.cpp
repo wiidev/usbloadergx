@@ -1238,23 +1238,22 @@ void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
 
 	char gameregion[10];
 	char IDfull[7];
-	memset(IDfull, 0, sizeof(IDfull));
 	snprintf(IDfull, sizeof(IDfull), (char *) gameId);
 
 	switch (IDfull[3])
 	{
 		case 'E':
-			sprintf(gameregion, "NTSC U");
+			strcpy(gameregion, "NTSC U");
 			break;
 		case 'J':
-			sprintf(gameregion, "NTSC J");
+			strcpy(gameregion, "NTSC J");
 			break;
 		case 'W':
-			sprintf(gameregion, "NTSC T");
+			strcpy(gameregion, "NTSC T");
 			break;
 		default:
 		case 'K':
-			sprintf(gameregion, "NTSC K");
+			strcpy(gameregion, "NTSC K");
 			break;
 		case 'P':
 		case 'D':
@@ -1266,7 +1265,7 @@ void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
 		case 'X':
 		case 'Y':
 		case 'Z':
-			sprintf(gameregion, "  PAL ");
+			strcpy(gameregion, "  PAL ");
 			break;
 	}
 
@@ -1476,3 +1475,4 @@ void GameBrowseMenu::UpdateFreeSpace(void * arg)
 
 	usedSpaceTxt->SetText(spaceinfo);
 }
+

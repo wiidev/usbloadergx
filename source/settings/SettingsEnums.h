@@ -11,8 +11,8 @@ enum
 
 enum
 {
-    LOAD_GAMES = 0,
-    LOAD_CHANNELS = 1
+	LOAD_GAMES = 0,
+	LOAD_CHANNELS = 1
 };
 
 enum

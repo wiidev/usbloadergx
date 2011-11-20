@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-15 21:46+0100\n"
+"POT-Creation-Date: 2011-11-20 10:55+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " nie udalo sie pobrac"
@@ -1495,6 +1495,9 @@ msgstr "Pomyslnie rozpakowano temat."
 msgid "Successfully installed:"
 msgstr "Pomyslnie zainstalowano:"
 
+msgid "Switching to channel list mode."
+msgstr ""
+
 msgid "Sync FAT32 FS Info"
 msgstr ""
 
@@ -1571,8 +1574,8 @@ msgstr "Chmurki z podpowiedziami"
 msgid "Transfer failed"
 msgstr ""
 
-msgid "USB Device not found"
-msgstr "Nie znaleziono urzadzenia USB"
+msgid "USB Device not found."
+msgstr ""
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX zabezpieczony"
@@ -1734,11 +1737,11 @@ msgstr ""
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr ""
 
-msgid "You cannot delete this category."
+msgid "You can select or format a partition or use the channel loader mode."
 msgstr ""
 
-msgid "You need to select or format a partition"
-msgstr "Musisz wybrac, lub sformatowac partycje"
+msgid "You cannot delete this category."
+msgstr ""
 
 msgid "and translators for language files updates"
 msgstr ""
@@ -1793,6 +1796,12 @@ msgstr "z"
 
 msgid "seconds left"
 msgstr "sekund pozostalo"
+
+#~ msgid "USB Device not found"
+#~ msgstr "Nie znaleziono urzadzenia USB"
+
+#~ msgid "You need to select or format a partition"
+#~ msgstr "Musisz wybrac, lub sformatowac partycje"
 
 #~ msgid "Language File"
 #~ msgstr "Plik jezykowy"

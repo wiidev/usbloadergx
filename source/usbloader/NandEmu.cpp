@@ -62,13 +62,13 @@ static s32 Nand_Mount(nandDevice *dev)
 	vector = (ioctlv *) memalign(32, sizeof(ioctlv));
 	if(vector == NULL)
 	{
-	    /* Close FAT module */
-        IOS_Close(fd);
-	    return -2;
+		/* Close FAT module */
+		IOS_Close(fd);
+		return -2;
 	}
 
-    vector[0].data = &partition;
-    vector[0].len = sizeof(u32);
+	vector[0].data = &partition;
+	vector[0].len = sizeof(u32);
 
 	/* Mount device */
 	ret = IOS_Ioctlv(fd, dev->mountCmd, 1, 0, vector);
@@ -123,15 +123,15 @@ static s32 Nand_Enable(nandDevice *dev)
 	vector = (ioctlv *)memalign(32, sizeof(ioctlv)*2);
 	if(vector == NULL)
 	{
-	    /* Close FAT module */
-        IOS_Close(fd);
-	    return -2;
+		/* Close FAT module */
+		IOS_Close(fd);
+		return -2;
 	}
 
-    vector[0].data = &mode;
-    vector[0].len = sizeof(u32);
-    vector[1].data = path;
-    vector[1].len = sizeof(path);
+	vector[0].data = &mode;
+	vector[0].len = sizeof(u32);
+	vector[1].data = path;
+	vector[1].len = sizeof(path);
 
 	ret = IOS_Ioctlv(fd, 100, 2, 0, vector);
 

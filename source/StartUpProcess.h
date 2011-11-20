@@ -18,11 +18,16 @@ class StartUpProcess
 		static int ParseArguments(int argc, char *argv[]);
 		static int QuickGameBoot(const char * gameID);
 
+		bool drawCancel;
+
 		GuiImageData * GXImageData;
 		GuiImage * background;
 		GuiImage * GXImage;
 		GuiText * titleTxt;
 		GuiText * messageTxt;
+		GuiText * cancelTxt;
+		GuiButton * cancelBtn;
+		GuiTrigger * trigB;
 };
 
 #endif

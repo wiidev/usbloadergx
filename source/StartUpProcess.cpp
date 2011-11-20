@@ -40,6 +40,18 @@ StartUpProcess::StartUpProcess()
 	messageTxt = new GuiText(" ", 22, (GXColor) {255, 255, 255, 255});
 	messageTxt->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	messageTxt->SetPosition(screenwidth/2, screenheight/2+60);
+
+	cancelTxt = new GuiText("Press B to cancel", 18, (GXColor) {255, 255, 255, 255});
+	cancelTxt->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
+	cancelTxt->SetPosition(screenwidth/2, screenheight/2+90);
+
+	trigB = new GuiTrigger;
+	trigB->SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
+
+	cancelBtn = new GuiButton(0, 0);
+	cancelBtn->SetTrigger(trigB);
+
+	drawCancel = false;
 }
 
 StartUpProcess::~StartUpProcess()
@@ -48,7 +60,9 @@ StartUpProcess::~StartUpProcess()
 	delete GXImageData;
 	delete GXImage;
 	delete titleTxt;
-	delete messageTxt;
+	delete cancelTxt;
+	delete cancelBtn;
+	delete trigB;
 }
 
 int StartUpProcess::ParseArguments(int argc, char *argv[])
@@ -123,14 +137,23 @@ void StartUpProcess::SetTextf(const char * format, ...)
 
 bool StartUpProcess::USBSpinUp()
 {
+	drawCancel = true;
 	bool started = false;
 	const DISC_INTERFACE * handle = Settings.USBPort == 1 ? DeviceHandler::GetUSB1Interface() : DeviceHandler::GetUSB0Interface();
 	Timer countDown;
-	// wait 10 sec for the USB to spin up...stupid slow ass HDD
+	// wait 20 sec for the USB to spin up...stupid slow ass HDD
 	do
 	{
 		started = (handle->startup() && handle->isInserted());
 		if(started)
+			break;
+
+
+		UpdatePads();
+		for(int i = 0; i < 4; ++i)
+			cancelBtn->Update(&userInput[i]);
+
+		if(cancelBtn->GetState() == STATE_CLICKED)
 			break;
 
 		messageTxt->SetTextf("Waiting for HDD: %i sec left\n", 20-(int)countDown.elapsed());
@@ -138,6 +161,8 @@ bool StartUpProcess::USBSpinUp()
 		usleep(50000);
 	}
 	while(countDown.elapsed() < 20.f);
+
+	drawCancel = false;
 
 	return started;
 }
@@ -168,6 +193,8 @@ int StartUpProcess::Execute()
 		Sys_BackToLoader();
 	}
 
+	SetupPads();
+
 	SetTextf("Initialize sd card\n");
 	DeviceHandler::Instance()->MountSD();
 
@@ -185,17 +212,25 @@ int StartUpProcess::Execute()
 	{
 		SetTextf("Loading cIOS %i\n", Settings.cios);
 
+		// Unmount devices
 		DeviceHandler::DestroyInstance();
 		USBStorage2_Deinit();
+
+		// Shut down pads
+		WPAD_Shutdown();
 
 		// Loading now the cios setup in the settings
 		IosLoader::LoadAppCios();
 
 		SetTextf("Reloading into cIOS %i R%i\n", IOS_GetVersion(), IOS_GetRevision());
 
+		// Re-Mount devices
 		DeviceHandler::Instance()->MountSD();
 		USBSpinUp();
 		DeviceHandler::Instance()->MountAllUSB(false);
+
+		// Start pads again
+		SetupPads();
 	}
 
 	if(!IosLoader::IsHermesIOS())
@@ -220,7 +255,6 @@ int StartUpProcess::Execute()
 
 	//! Init the rest of the System
 	Sys_Init();
-	SetupPads();
 	InitAudio();
 	setlocale(LC_CTYPE, "C-UTF-8");
 	setlocale(LC_MESSAGES, "C-UTF-8");
@@ -234,6 +268,8 @@ void StartUpProcess::Draw()
 	GXImage->Draw();
 	titleTxt->Draw();
 	messageTxt->Draw();
+	if(drawCancel)
+		cancelTxt->Draw();
 	Menu_Render();
 }
 

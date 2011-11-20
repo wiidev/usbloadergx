@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-15 21:46+0100\n"
+"POT-Creation-Date: 2011-11-20 10:55+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " kunne ikke downloades."
@@ -1495,6 +1495,9 @@ msgstr "Udpakning af tema lykkedes."
 msgid "Successfully installed:"
 msgstr "Installationen lykkedes:"
 
+msgid "Switching to channel list mode."
+msgstr ""
+
 msgid "Sync FAT32 FS Info"
 msgstr "Synkronisere FAT32 FS Info"
 
@@ -1571,8 +1574,8 @@ msgstr "Værktøjstips"
 msgid "Transfer failed"
 msgstr "Overførelse fejlede"
 
-msgid "USB Device not found"
-msgstr "USB-enhed ikke fundet"
+msgid "USB Device not found."
+msgstr ""
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX er beskyttet"
@@ -1734,11 +1737,11 @@ msgstr "Du brug i øjeblikket IOS"
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Du prøver at vælge en FAT32/NTFS/EXT partition med cIOS 249 Rev < 18. Dette er ikke understøttet. Fortsætte er på egen risiko"
 
+msgid "You can select or format a partition or use the channel loader mode."
+msgstr ""
+
 msgid "You cannot delete this category."
 msgstr "Du kan ikke slette denne kategori."
-
-msgid "You need to select or format a partition"
-msgstr "Du skal vælge eller formattere en partition"
 
 msgid "and translators for language files updates"
 msgstr "og oversættere for sprog filer"
@@ -1793,6 +1796,12 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "USB Device not found"
+#~ msgstr "USB-enhed ikke fundet"
+
+#~ msgid "You need to select or format a partition"
+#~ msgstr "Du skal vælge eller formattere en partition"
 
 #~ msgid "Language File"
 #~ msgstr "Sprog Fil"

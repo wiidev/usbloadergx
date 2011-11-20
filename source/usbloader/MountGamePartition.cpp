@@ -11,6 +11,7 @@
 #include "usbloader/GameList.h"
 #include "settings/GameTitles.h"
 #include "xml/GameTDB.hpp"
+#include "utils/ShowError.h"
 
 static int FindGamePartition()
 {
@@ -66,12 +67,11 @@ static int PartitionChoice()
 {
 	int ret = -1;
 
-	int choice = WindowPrompt(tr( "No WBFS or FAT/NTFS/EXT partition found" ),
-			tr( "You need to select or format a partition" ), tr( "Select" ), tr( "Format" ), tr( "Return" ));
-
+	int choice = WindowPrompt(tr( "No WBFS or FAT/NTFS/EXT partition found" ), tr( "You can select or format a partition or use the channel loader mode." ), tr( "Select" ), tr( "Format" ), tr( "Channels" ));
 	if (choice == 0)
 	{
-		Sys_LoadMenu();
+		Settings.LoaderMode = LOAD_CHANNELS;
+		return 0;
 	}
 	else if(choice == 1)
 	{
@@ -110,30 +110,34 @@ static int PartitionChoice()
  ***************************************************************************/
 int MountGamePartition(bool ShowGUI)
 {
+	s32 ret = -1;
 	gprintf("MountGamePartition()\n");
 
-	s32 wbfsinit = MountWBFS(ShowGUI);
-	if (wbfsinit < 0)
+	s32 wbfsinit = WBFS_Init(WBFS_DEVICE_USB);
+	if (wbfsinit < 0 && Settings.LoaderMode == LOAD_GAMES)
 	{
-		if(ShowGUI) WindowPrompt(tr( "Error !" ), tr( "USB Device not found" ), tr( "OK" ));
-		Sys_LoadMenu();
+		if(ShowGUI)
+			ShowError("%s %s", tr( "USB Device not found." ), tr("Switching to channel list mode."));
+
+		Settings.LoaderMode = LOAD_CHANNELS;
 	}
-
-	s32 ret = -1;
-
-	if(Settings.MultiplePartitions)
-		ret = WBFS_OpenAll();
 	else
-		ret = WBFS_OpenPart(Settings.partition);
+	{
+		if(Settings.MultiplePartitions)
+			ret = WBFS_OpenAll();
+		else
+			ret = WBFS_OpenPart(Settings.partition);
 
-	if(ret < 0)
-		ret = FindGamePartition();
+		if(ret < 0)
+			ret = FindGamePartition();
 
-	if (ret < 0 && ShowGUI)
-		ret = PartitionChoice();
-
-	if(ret < 0)
-		Sys_LoadMenu();
+		if(ret < 0 && Settings.LoaderMode == LOAD_GAMES)
+		{
+			Settings.LoaderMode = LOAD_CHANNELS;
+			if(ShowGUI)
+				ret = PartitionChoice();
+		}
+	}
 
 	gprintf("\tDisc_Init\n");
 	ret = Disc_Init();

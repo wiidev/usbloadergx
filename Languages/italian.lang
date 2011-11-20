@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-15 21:46+0100\n"
+"POT-Creation-Date: 2011-11-20 10:55+0100\n"
 "PO-Revision-Date: 2011-09-11 12:19+0100\n"
 "Last-Translator: xFede\n"
 "Language-Team: Cambo\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " non può essere scaricato."
@@ -1495,6 +1495,9 @@ msgstr "Tema estratto correttamente."
 msgid "Successfully installed:"
 msgstr "Installato correttamente:"
 
+msgid "Switching to channel list mode."
+msgstr ""
+
 msgid "Sync FAT32 FS Info"
 msgstr "Sincr. info Spazio Lib."
 
@@ -1571,8 +1574,8 @@ msgstr "Suggerimenti"
 msgid "Transfer failed"
 msgstr "Trasferimento fallito"
 
-msgid "USB Device not found"
-msgstr "Periferica USB non trovata"
+msgid "USB Device not found."
+msgstr ""
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX è protetto"
@@ -1734,11 +1737,11 @@ msgstr "Al momento stai utilizzando l'IOS"
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Stai cercando di selezionare una partizione FAT32/NTFS/EXT con un cIOS 249 di versione < 18. Continua a tuo rischio e pericolo."
 
+msgid "You can select or format a partition or use the channel loader mode."
+msgstr ""
+
 msgid "You cannot delete this category."
 msgstr "Non puoi eliminare questa categoria."
-
-msgid "You need to select or format a partition"
-msgstr "Devi selezionare o formattare una partizione"
 
 msgid "and translators for language files updates"
 msgstr "ed ai traduttori per gli aggiornamenti dei file di lingua"
@@ -1793,6 +1796,12 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi rimanenti"
+
+#~ msgid "USB Device not found"
+#~ msgstr "Periferica USB non trovata"
+
+#~ msgid "You need to select or format a partition"
+#~ msgstr "Devi selezionare o formattare una partizione"
 
 #~ msgid "WiiTDB is up to date."
 #~ msgstr "WiiTDB è aggiornato."

@@ -150,13 +150,13 @@ size_t utf8Len(const char *s)
 const wchar_t *wcscasestr(const wchar_t *s1, const wchar_t *s2)
 {
 	if(*s2 == 0)
-        return (wchar_t *)s1;
+		return (wchar_t *)s1;
 
 	int s1_len = wcslen(s1);
 	int s2_len = wcslen(s2);
 
 	if(s1_len < s2_len)
-        return 0;
+		return 0;
 
 	const wchar_t *end = &s1[s1_len-s2_len];
 	for(const wchar_t *s = s1; s <= end; s++)

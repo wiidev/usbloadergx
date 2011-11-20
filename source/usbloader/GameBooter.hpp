@@ -30,6 +30,7 @@ class GameBooter
 		static void SetupNandEmu(u8 NandEmuMode, const char *NandEmuPath, struct discHdr &gameHeader);
 		static int SetupDisc(u8 *gameID);
 		static u32 BootPartition(char * dolpath, u8 videoselected, u8 alternatedol, u32 alternatedoloffset);
+		static void ShutDownDevices(int gameUSBPort);
 };
 
 #endif

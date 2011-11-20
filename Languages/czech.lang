@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-15 21:46+0100\n"
+"POT-Creation-Date: 2011-11-20 10:55+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " nelze stáhnout."
@@ -1495,6 +1495,9 @@ msgstr "Úspešne rozbalené téma."
 msgid "Successfully installed:"
 msgstr "Úspešne nainstalováno"
 
+msgid "Switching to channel list mode."
+msgstr ""
+
 msgid "Sync FAT32 FS Info"
 msgstr "FAT32 volné místo"
 
@@ -1571,8 +1574,8 @@ msgstr "Popisky"
 msgid "Transfer failed"
 msgstr "Prenos selhal"
 
-msgid "USB Device not found"
-msgstr "USB zarízení nenalezeno"
+msgid "USB Device not found."
+msgstr ""
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX je zabezpecen"
@@ -1734,11 +1737,11 @@ msgstr "Nyní pouzíváte IOS:"
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Pokousíte se vybrat oddíl FAT32/NTFS/EXT s cIOS 249 Rev < 18. To není podporováno. Pokracujte na vasi odpovednost."
 
-msgid "You cannot delete this category."
+msgid "You can select or format a partition or use the channel loader mode."
 msgstr ""
 
-msgid "You need to select or format a partition"
-msgstr "Musíte vybrat nebo naformátovat oddíl"
+msgid "You cannot delete this category."
+msgstr ""
 
 msgid "and translators for language files updates"
 msgstr "a prekladatelé pro jazykové aktualizace"
@@ -1793,6 +1796,12 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid "USB Device not found"
+#~ msgstr "USB zarízení nenalezeno"
+
+#~ msgid "You need to select or format a partition"
+#~ msgstr "Musíte vybrat nebo naformátovat oddíl"
 
 #~ msgid "Language File"
 #~ msgstr "Jazykový soubor"

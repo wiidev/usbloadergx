@@ -21,10 +21,6 @@ static void _decrypt_title_key(u8 *tik, u8 *title_key)
 	//_aes_cbc_dec(common_key, iv, tik + 0x01bf, 16, title_key);
 	aes_decrypt(iv, tik + 0x01bf, title_key, 16);
 }
-static u32 _be32(const u8 *p)
-{
-	return (p[0] << 24) | (p[1] << 16) | (p[2] << 8) | p[3];
-}
 
 static void disc_read(wiidisc_t *d, u32 offset, u8 *data, u32 len)
 {
@@ -99,8 +95,8 @@ static u32 do_fst(wiidisc_t *d, u8 *fst, const char *names, u32 i)
 	const char *name;
 	u32 j;
 
-	name = names + (_be32(fst + 12 * i) & 0x00ffffff);
-	size = _be32(fst + 12 * i + 8);
+	name = names + (wbfs_be32(fst + 12 * i) & 0x00ffffff);
+	size = wbfs_be32(fst + 12 * i + 8);
 
 	if (i == 0)
 	{
@@ -122,7 +118,7 @@ static u32 do_fst(wiidisc_t *d, u8 *fst, const char *names, u32 i)
 	}
 	else
 	{
-		offset = _be32(fst + 12 * i + 4);
+		offset = wbfs_be32(fst + 12 * i + 4);
 
 		if (d->extract_pathname && strcasecmp(name, d->extract_pathname) == 0)
 		{
@@ -148,13 +144,13 @@ static void do_files(wiidisc_t*d)
 	u32 n_files;
 	partition_read(d, 0, b, 0x480, 0);
 
-	dol_offset = _be32(b + 0x0420);
-	fst_offset = _be32(b + 0x0424);
-	fst_size = _be32(b + 0x0428) << 2;
+	dol_offset = wbfs_be32(b + 0x0420);
+	fst_offset = wbfs_be32(b + 0x0424);
+	fst_size = wbfs_be32(b + 0x0428) << 2;
 
 	apl_offset = 0x2440 >> 2;
 	partition_read(d, apl_offset, apl_header, 0x20, 0);
-	apl_size = 0x20 + _be32(apl_header + 0x14) + _be32(apl_header + 0x18);
+	apl_size = 0x20 + wbfs_be32(apl_header + 0x14) + wbfs_be32(apl_header + 0x18);
 	// fake read dol and partition
 	if (apl_size) partition_read(d, apl_offset, 0, apl_size, 1);
 	partition_read(d, dol_offset, 0, (fst_offset - dol_offset) << 2, 1);
@@ -165,7 +161,7 @@ static void do_files(wiidisc_t*d)
 		if (fst == 0)
 		wbfs_fatal( "malloc fst" );
 		partition_read(d, fst_offset, fst, fst_size, 0);
-		n_files = _be32(fst + 8);
+		n_files = wbfs_be32(fst + 8);
 
 
 		if (d->extract_pathname && strcmp(d->extract_pathname, "FST") == 0)
@@ -205,12 +201,12 @@ static void do_partition(wiidisc_t*d)
 	partition_raw_read(d, 0, tik, 0x2a4);
 	partition_raw_read(d, 0x2a4 >> 2, b, 0x1c);
 
-	tmd_size = _be32(b);
-	tmd_offset = _be32(b + 4);
-	cert_size = _be32(b + 8);
-	cert_offset = _be32(b + 0x0c);
-	h3_offset = _be32(b + 0x10);
-	d->partition_data_offset = _be32(b + 0x14);
+	tmd_size = wbfs_be32(b);
+	tmd_offset = wbfs_be32(b + 4);
+	cert_size = wbfs_be32(b + 8);
+	cert_offset = wbfs_be32(b + 0x0c);
+	h3_offset = wbfs_be32(b + 0x10);
+	d->partition_data_offset = wbfs_be32(b + 0x14);
 	d->partition_block = (d->partition_raw_offset + d->partition_data_offset) >> 13;
 	tmd = wbfs_ioalloc( tmd_size );
 	if (tmd == 0)
@@ -264,7 +260,7 @@ static void do_disc(wiidisc_t*d)
 	u32 magic;
 	u32 i;
 	disc_read(d, 0, b, 0x100);
-	magic = _be32(b + 24);
+	magic = wbfs_be32(b + 24);
 	if (magic != 0x5D1C9EA3)
 	{
 		wbfs_iofree( b );
@@ -272,12 +268,12 @@ static void do_disc(wiidisc_t*d)
 		return;
 	}
 	disc_read(d, 0x40000 >> 2, b, 0x100);
-	n_partitions = _be32(b);
-	disc_read(d, _be32(b + 4), b, 0x100);
+	n_partitions = wbfs_be32(b);
+	disc_read(d, wbfs_be32(b + 4), b, 0x100);
 	for (i = 0; i < n_partitions; i++)
 	{
-		partition_offset[i] = _be32(b + 8 * i);
-		partition_type[i] = _be32(b + 8 * i + 4);
+		partition_offset[i] = wbfs_be32(b + 8 * i);
+		partition_type[i] = wbfs_be32(b + 8 * i + 4);
 	}
 	for (i = 0; i < n_partitions; i++)
 	{
@@ -340,16 +336,16 @@ void wd_fix_partition_table(wiidisc_t *d, partition_selector_t selector, u8* par
 	u32 n_partitions, i, j;
 	u32 *b32;
 	if (selector == ALL_PARTITIONS) return;
-	n_partitions = _be32(b);
-	if (_be32(b + 4) - (0x40000 >> 2) > 0x50)
+	n_partitions = wbfs_be32(b);
+	if (wbfs_be32(b + 4) - (0x40000 >> 2) > 0x50)
 	wbfs_fatal( "cannot modify this partition table. Please report the bug." );
 
-	b += (_be32(b + 4) - (0x40000 >> 2)) * 4;
+	b += (wbfs_be32(b + 4) - (0x40000 >> 2)) * 4;
 	j = 0;
 	for (i = 0; i < n_partitions; i++)
 	{
-		partition_offset = _be32(b + 8 * i);
-		partition_type = _be32(b + 8 * i + 4);
+		partition_offset = wbfs_be32(b + 8 * i);
+		partition_type = wbfs_be32(b + 8 * i + 4);
 		if (!test_parition_skip(partition_type, selector))
 		{
 			b32 = (u32*) (b + 8 * j);
