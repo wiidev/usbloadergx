@@ -15,13 +15,13 @@
 #include "menu/menus.h"
 #include "banner/OpeningBNR.hpp"
 
-#define NONE			0
-#define LEFT			1
-#define RIGHT		   2
-#define IN			  3
-#define OUT			 4
+#define NONE		0
+#define LEFT		1
+#define RIGHT		2
+#define IN			3
+#define OUT			4
 
-extern int mountMethod;
+extern u8 mountMethod;
 extern struct discHdr *dvdheader;
 
 GameWindow::GameWindow(int Selected)
@@ -69,10 +69,10 @@ GameWindow::GameWindow(int Selected)
 	nameBtn->SetPosition(0, -122);
 	nameBtn->SetSoundOver(btnSoundOver);
 	nameBtn->SetSoundClick(btnSoundClick2);
-	if (!mountMethod) nameBtn->SetToolTip(nameBtnTT, 24, -30, ALIGN_LEFT);
 
 	if (Settings.godmode == 1 && !mountMethod)
 	{
+		nameBtn->SetToolTip(nameBtnTT, 24, -30, ALIGN_LEFT);
 		nameBtn->SetTrigger(trigA);
 		nameBtn->SetEffectGrow();
 	}
@@ -171,11 +171,10 @@ GameWindow::GameWindow(int Selected)
 	if (Settings.ShowPlayCount) Append(playcntTxt);
 	Append(backBtn);
 	Append(detailsBtn);
+	Append(nameBtn);
 	if (!mountMethod)//stuff we don't show if it is a DVD mounted
 	{
-		Append(nameBtn);
-		if(Settings.LoaderMode != LOAD_CHANNELS)
-			Append(sizeTxt);
+		Append(sizeTxt);
 		Append(btnLeft);
 		Append(btnRight);
 		for(int i = 0; i < FAVORITE_STARS; ++i)
@@ -451,7 +450,12 @@ int GameWindow::Show()
 
 	while(choice == -1)
 	{
-		VIDEO_WaitVSync();
+		usleep(1000);
+
+		if (shutdown) //for power button
+			Sys_Shutdown();
+		else if (reset) //for reset button
+			Sys_Reboot();
 
 		choice = MainLoop();
 	}
@@ -464,17 +468,7 @@ int GameWindow::MainLoop()
 	diskImg->SetSpin(gameBtn->GetState() == STATE_SELECTED);
 	diskImg2->SetSpin(gameBtn->GetState() == STATE_SELECTED);
 
-	if (shutdown) //for power button
-	{
-		wiilight(0);
-		Sys_Shutdown();
-	}
-	else if (reset == 1) //for reset button
-	{
-		wiilight(0);
-		Sys_Reboot();
-	}
-	else if (gameBtn->GetState() == STATE_CLICKED)
+	if (gameBtn->GetState() == STATE_CLICKED)
 	{
 		returnVal = 1;
 	}

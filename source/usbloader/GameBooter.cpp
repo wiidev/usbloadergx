@@ -52,7 +52,7 @@
 u32 AppEntrypoint = 0;
 
 struct discHdr *dvdheader = NULL;
-extern int mountMethod;
+extern u8 mountMethod;
 
 int GameBooter::BootGCMode()
 {
@@ -218,11 +218,11 @@ int GameBooter::BootGame(const char * gameID)
 	if(!gameID || strlen(gameID) < 3)
 		return -1;
 
-	if (mountMethod == 2)
-		return BootGCMode();
-
 	if(Settings.Wiinnertag)
 		Wiinnertag::TagGame(gameID);
+
+	if(mountMethod == 2)
+		return BootGCMode();
 
 	AppCleanUp();
 
@@ -234,6 +234,10 @@ int GameBooter::BootGame(const char * gameID)
 	int ret = FindDiscHeader(gameID, gameHeader);
 	if(ret < 0)
 		return ret;
+
+	//! Set game mode if loading a disc
+	if(mountMethod)
+		Settings.LoaderMode = LOAD_GAMES;
 
 	//! Remember game's USB port
 	int partition = gameList.GetPartitionNumber(gameHeader.id);
@@ -252,10 +256,16 @@ int GameBooter::BootGame(const char * gameID)
 	u8 alternatedol = game_cfg->loadalternatedol;
 	u32 alternatedoloffset = game_cfg->alternatedolstart;
 	u8 reloadblock = game_cfg->iosreloadblock == INHERIT ? Settings.BlockIOSReload : game_cfg->iosreloadblock;
-	u8 NandEmuMode = game_cfg->NandEmuMode == INHERIT ? Settings.NandEmuMode : game_cfg->NandEmuMode;
 	u8 Hooktype = game_cfg->Hooktype == INHERIT ? Settings.Hooktype : game_cfg->Hooktype;
 	u8 WiirdDebugger = game_cfg->WiirdDebugger == INHERIT ? Settings.WiirdDebugger : game_cfg->WiirdDebugger;
 	u64 returnToChoice = game_cfg->returnTo ? NandTitles.FindU32(Settings.returnTo) : 0;
+	u8 NandEmuMode = game_cfg->NandEmuMode == INHERIT ? Settings.NandEmuMode : game_cfg->NandEmuMode;
+	const char *NandEmuPath = game_cfg->NandEmuPath.size() == 0 ? Settings.NandEmuPath : game_cfg->NandEmuPath.c_str();
+	if(Settings.LoaderMode == LOAD_CHANNELS)
+	{
+		NandEmuMode = game_cfg->NandEmuMode == INHERIT ? Settings.NandEmuChanMode : game_cfg->NandEmuMode;
+		NandEmuPath = game_cfg->NandEmuPath.size() == 0 ? Settings.NandEmuChanPath : game_cfg->NandEmuPath.c_str();
+	}
 
 	if(ocarinaChoice && Hooktype == OFF)
 		Hooktype = 1;
@@ -277,10 +287,7 @@ int GameBooter::BootGame(const char * gameID)
 		Playlog_Update((char *) gameHeader.id, BNRInstance::Instance()->GetIMETTitle(CONF_GetLanguage()));
 
 	//! Setup NAND emulation
-	if(Settings.LoaderMode != LOAD_CHANNELS)
-		SetupNandEmu(NandEmuMode, Settings.NandEmuPath, gameHeader);
-	else
-		SetupNandEmu(Settings.NandEmuChanMode, Settings.NandEmuChanPath, gameHeader);
+	SetupNandEmu(NandEmuMode, NandEmuPath, gameHeader);
 
 	// Load wip codes
 	load_wip_code(gameHeader.id);

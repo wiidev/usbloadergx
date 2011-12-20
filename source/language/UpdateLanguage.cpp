@@ -15,6 +15,7 @@
 #include "network/networkops.h"
 #include "network/http.h"
 #include "network/URL_List.h"
+#include "prompts/PromptWindows.h"
 #include "prompts/ProgressWindow.h"
 #include "utils/ShowError.h"
 #include "gecko.h"
@@ -99,7 +100,13 @@ int UpdateLanguageFiles()
 	DirList Dir(Settings.languagefiles_path, ".lang");
 
 	//give up now if we didn't find any
-	if (Dir.GetFilecount() == 0) return -2;
+	if (Dir.GetFilecount() == 0)
+	{
+		if(WindowPrompt(tr("Error:"), tr("No language files to update on your devices! Do you want to download new language files?"), tr("Yes"), tr("No")))
+			return DownloadAllLanguageFiles();
+			
+		return -2;
+	}
 
 	char savepath[150];
 	char codeurl[200];

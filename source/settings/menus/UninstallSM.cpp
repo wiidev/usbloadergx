@@ -34,7 +34,7 @@
 #include "usbloader/GameList.h"
 #include "wstring.hpp"
 
-extern int mountMethod;
+extern u8 mountMethod;
 
 UninstallSM::UninstallSM(struct discHdr * header)
 	: SettingsMenu(tr("Uninstall Menu"), &GuiOptions, MENU_NONE)

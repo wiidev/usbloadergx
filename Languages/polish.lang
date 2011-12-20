@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-20 10:55+0100\n"
+"POT-Creation-Date: 2011-12-20 21:54+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -253,6 +253,9 @@ msgstr ""
 msgid "Block Parental Settings"
 msgstr ""
 
+msgid "Block Priiloader Override"
+msgstr ""
+
 msgid "Block Reset Settings"
 msgstr ""
 
@@ -498,6 +501,9 @@ msgstr "Sciezka do obrazkow plyt"
 
 msgid "Disc Default"
 msgstr "Domyslny dysk"
+
+msgid "Disc Insert Detected"
+msgstr ""
 
 msgid "DiskFlip"
 msgstr "Obrot plytami"
@@ -1102,9 +1108,6 @@ msgstr "zadne"
 msgid "Network is not initiated."
 msgstr ""
 
-msgid "New Disc Detected"
-msgstr "Wykryto nowy dysk"
-
 msgid "Next"
 msgstr "nastepny"
 
@@ -1143,6 +1146,9 @@ msgstr ""
 
 msgid "No file missing!"
 msgstr "Brak plikow do pobrania"
+
+msgid "No language files to update on your devices! Do you want to download new language files?"
+msgstr ""
 
 msgid "No new updates."
 msgstr "Posiadasz aktualna wersje"
@@ -1796,6 +1802,9 @@ msgstr "z"
 
 msgid "seconds left"
 msgstr "sekund pozostalo"
+
+#~ msgid "New Disc Detected"
+#~ msgstr "Wykryto nowy dysk"
 
 #~ msgid "USB Device not found"
 #~ msgstr "Nie znaleziono urzadzenia USB"

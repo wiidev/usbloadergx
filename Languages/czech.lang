@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-20 10:55+0100\n"
+"POT-Creation-Date: 2011-12-20 21:54+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -253,6 +253,9 @@ msgstr "Zablokovat nastavení spouštění"
 msgid "Block Parental Settings"
 msgstr "Zablokovat rodičovskou kontrolu"
 
+msgid "Block Priiloader Override"
+msgstr ""
+
 msgid "Block Reset Settings"
 msgstr "Zablokovat původní nastavení"
 
@@ -498,6 +501,9 @@ msgstr "Cesta k potiskum DVD"
 
 msgid "Disc Default"
 msgstr "Puvodní nastavení disku"
+
+msgid "Disc Insert Detected"
+msgstr ""
 
 msgid "DiskFlip"
 msgstr ""
@@ -1102,9 +1108,6 @@ msgstr "Žádný"
 msgid "Network is not initiated."
 msgstr "Sít není inicializována"
 
-msgid "New Disc Detected"
-msgstr "Detekován nový disk"
-
 msgid "Next"
 msgstr "Další"
 
@@ -1143,6 +1146,9 @@ msgstr "Oblíbené nejsou oznaceny"
 
 msgid "No file missing!"
 msgstr "Nechybí žádný soubor!"
+
+msgid "No language files to update on your devices! Do you want to download new language files?"
+msgstr ""
 
 msgid "No new updates."
 msgstr "Není dostupná žádná aktualizace."
@@ -1796,6 +1802,9 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid "New Disc Detected"
+#~ msgstr "Detekován nový disk"
 
 #~ msgid "USB Device not found"
 #~ msgstr "USB zarízení nenalezeno"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-20 10:55+0100\n"
+"POT-Creation-Date: 2011-12-20 21:54+0100\n"
 "PO-Revision-Date: 2011-07-25 16:40+0200\n"
 "Last-Translator: Galen/xFede\n"
 "Language-Team: Penn, SirPalax, hvy109\n"
@@ -253,6 +253,9 @@ msgstr "Bloq. Config. Cargador"
 msgid "Block Parental Settings"
 msgstr "Bloq. Config. Parental"
 
+msgid "Block Priiloader Override"
+msgstr ""
+
 msgid "Block Reset Settings"
 msgstr "Bloq. Resetear Config."
 
@@ -498,6 +501,9 @@ msgstr "Ruta Imagen Discos"
 
 msgid "Disc Default"
 msgstr "Pred. Disco"
+
+msgid "Disc Insert Detected"
+msgstr ""
 
 msgid "DiskFlip"
 msgstr "GiraDiscos"
@@ -1102,9 +1108,6 @@ msgstr "Ninguno"
 msgid "Network is not initiated."
 msgstr "No se inició la red."
 
-msgid "New Disc Detected"
-msgstr "Nuevo Disco Detectado"
-
 msgid "Next"
 msgstr "Siguiente"
 
@@ -1143,6 +1146,9 @@ msgstr "Ningún favorito seleccionado."
 
 msgid "No file missing!"
 msgstr "¡No faltan archivos!"
+
+msgid "No language files to update on your devices! Do you want to download new language files?"
+msgstr ""
 
 msgid "No new updates."
 msgstr "No hay nuevas actualizaciones."
@@ -1796,6 +1802,9 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "New Disc Detected"
+#~ msgstr "Nuevo Disco Detectado"
 
 #~ msgid "USB Device not found"
 #~ msgstr "USB no encontrado"

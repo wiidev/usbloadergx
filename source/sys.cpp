@@ -78,6 +78,7 @@ void AppCleanUp(void)
 
 	ExitGUIThreads();
 	StopGX();
+	wiilight(0);
 
 	delete btnSoundClick;
 	delete btnSoundOver;
@@ -169,9 +170,12 @@ void Sys_LoadMenu(void)
 {
 	ExitApp();
 
-	// Preloader shutup
-	*(u32 *)0x8132fffb = 0x50756e65;
-	DCFlushRange((u32 *)0x8132fffb, 4);
+	// Priiloader shutup
+	if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_PRIILOADER_OVERRIDE))
+	{
+		*(u32 *)0x8132fffb = 0x50756e65;
+		DCFlushRange((u32 *)0x8132fffb, 4);
+	}
 
 	/* Return to the Wii system menu */
 	SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);

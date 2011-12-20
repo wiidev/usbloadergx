@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-20 10:55+0100\n"
+"POT-Creation-Date: 2011-12-20 21:54+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -253,6 +253,9 @@ msgstr "封鎖 Loader 設定"
 msgid "Block Parental Settings"
 msgstr "封鎖親子設定"
 
+msgid "Block Priiloader Override"
+msgstr ""
+
 msgid "Block Reset Settings"
 msgstr "封鎖重置設定"
 
@@ -498,6 +501,9 @@ msgstr "光碟圖片路徑"
 
 msgid "Disc Default"
 msgstr "光碟預設"
+
+msgid "Disc Insert Detected"
+msgstr ""
 
 msgid "DiskFlip"
 msgstr "光碟滑動"
@@ -1102,9 +1108,6 @@ msgstr "皆不顯示"
 msgid "Network is not initiated."
 msgstr "網路無法啟動。"
 
-msgid "New Disc Detected"
-msgstr "新光碟已檢查"
-
 msgid "Next"
 msgstr "往後"
 
@@ -1143,6 +1146,9 @@ msgstr "沒有選取最愛。"
 
 msgid "No file missing!"
 msgstr "沒有檔案缺少！"
+
+msgid "No language files to update on your devices! Do you want to download new language files?"
+msgstr ""
 
 msgid "No new updates."
 msgstr "沒有可用更新。"
@@ -1796,6 +1802,9 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "New Disc Detected"
+#~ msgstr "新光碟已檢查"
 
 #~ msgid "USB Device not found"
 #~ msgstr "找不到 USB 設備"

@@ -27,6 +27,7 @@
 #include "themes/CTheme.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/DiscBrowser.h"
+#include "prompts/filebrowser.h"
 #include "usbloader/AlternateDOLOffsets.h"
 #include "language/gettext.h"
 #include "wad/nandtitle.h"
@@ -114,7 +115,7 @@ static const char * HooktypeText[] =
 GameLoadSM::GameLoadSM(const char * GameID)
 	: SettingsMenu(tr("Game Load"), &GuiOptions, MENU_NONE)
 {
-	memcpy(&GameConfig, GameSettings.GetGameCFG(GameID), sizeof(GameCFG));
+	GameConfig = *GameSettings.GetGameCFG(GameID);
 
 	if(!btnOutline)
 		btnOutline = Resources::GetImageData("button_dialogue_box.png");
@@ -153,7 +154,7 @@ void GameLoadSM::SetDefaultConfig()
 {
 	char id[7];
 	snprintf(id, sizeof(id), GameConfig.id);
-	memcpy(&GameConfig, GameSettings.GetDefault(), sizeof(GameCFG));
+	GameSettings.SetDefault(GameConfig);
 	snprintf(GameConfig.id, sizeof(GameConfig.id), id);
 }
 
@@ -175,6 +176,7 @@ void GameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Select DOL Offset" ));
 	Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
 	Options->SetName(Idx++, "%s", tr( "Nand Emulation" ));
+	Options->SetName(Idx++, "%s", tr( "Nand Emu Path" ));
 	Options->SetName(Idx++, "%s", tr( "Hooktype" ));
 	Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
 	Options->SetName(Idx++, "%s", tr( "Game Lock" ));
@@ -258,8 +260,8 @@ void GameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, tr("Not required"));
 	else
 	{
-		if(strcmp(GameConfig.alternatedolname, "") != 0)
-			Options->SetValue(Idx++, "%i <%s>", GameConfig.alternatedolstart, GameConfig.alternatedolname);
+		if(GameConfig.alternatedolname.size() != 0)
+			Options->SetValue(Idx++, "%i <%s>", GameConfig.alternatedolstart, GameConfig.alternatedolname.c_str());
 		else
 			Options->SetValue(Idx++, "%i", GameConfig.alternatedolstart);
 	}
@@ -275,6 +277,12 @@ void GameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr( NandEmuText[GameConfig.NandEmuMode] ));
+
+	//! Settings: Nand Emu Path
+	if(GameConfig.NandEmuPath.size() == 0)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", GameConfig.NandEmuPath.c_str());
 
 	//! Settings: Hooktype
 	if(GameConfig.Hooktype == INHERIT)
@@ -408,20 +416,23 @@ int GameLoadSM::GetMenuInternal()
 			return MENU_NONE; //Cancel Button pressed
 		}
 
+		char tmp[170];
+
 		if (autodol > 0)
 		{
 			GameConfig.alternatedolstart = autodol;
-			snprintf(GameConfig.alternatedolname, sizeof(GameConfig.alternatedolname), "%s <%i>", tr( "AUTO" ), autodol);
+			snprintf(tmp, sizeof(tmp), "%s <%i>", tr( "AUTO" ), autodol);
+			GameConfig.alternatedolname = tmp;
 			SetOptionValues();
 			if(parentWindow) parentWindow->SetState(STATE_DEFAULT);
 			return MENU_NONE;
 		}
 
-		int res = DiscBrowse(GameConfig.id, GameConfig.alternatedolname, sizeof(GameConfig.alternatedolname));
+		int res = DiscBrowse(GameConfig.id, tmp, sizeof(tmp));
 		if (res >= 0)
 		{
+			GameConfig.alternatedolname = tmp;
 			GameConfig.alternatedolstart = res;
-			char tmp[170];
 			snprintf(tmp, sizeof(tmp), "%s %.6s - %i", tr( "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team." ), (char *) GameConfig.id, GameConfig.alternatedolstart);
 			WindowPrompt(0, tmp, tr( "OK" ));
 		}
@@ -443,6 +454,39 @@ int GameLoadSM::GetMenuInternal()
 		if(!IosLoader::IsD2X())
 			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
 		else if (++GameConfig.NandEmuMode >= 3) GameConfig.NandEmuMode = INHERIT;
+	}
+
+	//! Settings: Nand Emu Path
+	else if (ret == ++Idx)
+	{
+		if(!IosLoader::IsD2X())
+			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
+		else
+		{
+			char entered[300];
+			snprintf(entered, sizeof(entered), GameConfig.NandEmuPath.c_str());
+
+			HaltGui();
+			GuiWindow * parent = (GuiWindow *) parentElement;
+			if(parent) parent->SetState(STATE_DISABLED);
+			this->SetState(STATE_DEFAULT);
+			this->Remove(optionBrowser);
+			ResumeGui();
+
+			int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
+
+			if(parent) parent->SetState(STATE_DEFAULT);
+			this->Append(optionBrowser);
+
+			if (result == 1)
+			{
+				if (entered[strlen(entered)-1] != '/')
+					strcat(entered, "/");
+
+				GameConfig.NandEmuPath = entered;
+				WindowPrompt(tr( "Path Changed" ), 0, tr( "OK" ));
+			}
+		}
 	}
 
 	//! Settings: Hooktype

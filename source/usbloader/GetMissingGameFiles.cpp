@@ -6,6 +6,8 @@
 #include "wstring.hpp"
 #include "gecko.h"
 
+extern struct discHdr *dvdheader;
+
 /**************************************************************************************
  * FindMissingFiles
  * Inputs:
@@ -49,6 +51,17 @@ int GetMissingGameFiles(const char * path, const char * fileext, std::vector<std
 		//! Not found add to missing list
 		snprintf(gameID, sizeof(gameID), "%s", (char *) header->id);
 		MissingFilesList.push_back(std::string(gameID));
+	}
+
+	if(dvdheader)
+	{
+		snprintf(gameID, sizeof(gameID), "%s", (char *) dvdheader->id);
+		snprintf(filepath, sizeof(filepath), "%s/%s%s", path, gameID, fileext);
+
+		if (!CheckFile(filepath)) {
+			//! Not found, add missing dvd header to list
+			MissingFilesList.push_back(std::string(gameID));
+		}
 	}
 
 	//! Bring game list to the old state

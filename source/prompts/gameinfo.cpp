@@ -25,7 +25,7 @@
 #include "utils/ShowError.h"
 #include "BoxCover/BoxCover.hpp"
 
-extern int mountMethod;
+extern u8 mountMethod;
 extern struct discHdr *dvdheader;
 
 /****************************************************************************

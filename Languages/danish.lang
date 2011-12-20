@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-20 10:55+0100\n"
+"POT-Creation-Date: 2011-12-20 21:54+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -253,6 +253,9 @@ msgstr "Bloker loader indstillinger"
 msgid "Block Parental Settings"
 msgstr "Bloker forældre indstillinger"
 
+msgid "Block Priiloader Override"
+msgstr ""
+
 msgid "Block Reset Settings"
 msgstr "Bloker nulstils indstillinger"
 
@@ -498,6 +501,9 @@ msgstr "Sti til DVD-billeder"
 
 msgid "Disc Default"
 msgstr "Spillets standard"
+
+msgid "Disc Insert Detected"
+msgstr ""
 
 msgid "DiskFlip"
 msgstr ""
@@ -1102,9 +1108,6 @@ msgstr "Ingen"
 msgid "Network is not initiated."
 msgstr "Netværk er ikke initialiseret."
 
-msgid "New Disc Detected"
-msgstr "Har opdaget ny DVD"
-
 msgid "Next"
 msgstr "Næste"
 
@@ -1143,6 +1146,9 @@ msgstr "Ingen favoritter er valgt."
 
 msgid "No file missing!"
 msgstr "Ingen filer mangler!"
+
+msgid "No language files to update on your devices! Do you want to download new language files?"
+msgstr ""
 
 msgid "No new updates."
 msgstr "Ingen nye opdateringer."
@@ -1796,6 +1802,9 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "New Disc Detected"
+#~ msgstr "Har opdaget ny DVD"
 
 #~ msgid "USB Device not found"
 #~ msgstr "USB-enhed ikke fundet"

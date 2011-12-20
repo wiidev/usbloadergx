@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-20 10:55+0100\n"
+"POT-Creation-Date: 2011-12-20 21:54+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nikolai_ca\n"
 "Language-Team: Kir, alendit, nikolai_ca\n"
@@ -253,6 +253,9 @@ msgstr ""
 msgid "Block Parental Settings"
 msgstr ""
 
+msgid "Block Priiloader Override"
+msgstr ""
+
 msgid "Block Reset Settings"
 msgstr ""
 
@@ -498,6 +501,9 @@ msgstr "Путь к изображениям дисков"
 
 msgid "Disc Default"
 msgstr "По умолчанию (диск)"
+
+msgid "Disc Insert Detected"
+msgstr ""
 
 msgid "DiskFlip"
 msgstr "ДискФлип"
@@ -1102,9 +1108,6 @@ msgstr "Ни то, ни другое"
 msgid "Network is not initiated."
 msgstr ""
 
-msgid "New Disc Detected"
-msgstr "Обнаружен новый диск"
-
 msgid "Next"
 msgstr "Следующий"
 
@@ -1143,6 +1146,9 @@ msgstr ""
 
 msgid "No file missing!"
 msgstr "Файл не найден!"
+
+msgid "No language files to update on your devices! Do you want to download new language files?"
+msgstr ""
 
 msgid "No new updates."
 msgstr "Нет обновлений"
@@ -1796,6 +1802,9 @@ msgstr "из"
 
 msgid "seconds left"
 msgstr "секунд осталось"
+
+#~ msgid "New Disc Detected"
+#~ msgstr "Обнаружен новый диск"
 
 #~ msgid "USB Device not found"
 #~ msgstr "USB устройство не найдено"

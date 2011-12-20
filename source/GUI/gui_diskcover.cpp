@@ -42,11 +42,6 @@ bool GuiDiskCover::GetBetaRotateEffect()
 	return eff_step != 0;
 }
 
-void GuiDiskCover::SetSpin(bool Up)
-{
-	spin_up = Up;
-}
-
 void GuiDiskCover::SetState(int s, int c)
 {
 	if(state == STATE_DEFAULT && s == STATE_DISABLED)

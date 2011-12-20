@@ -496,7 +496,7 @@ int GameBrowseMenu::Execute()
 
 	while(retMenu == MENU_NONE)
 	{
-		usleep(100);
+		usleep(1000);
 
 		if (shutdown)
 			Sys_Shutdown();
@@ -1144,13 +1144,18 @@ int GameBrowseMenu::MainLoop()
 
 void GameBrowseMenu::CheckDiscSlotUpdate()
 {
+	// No need to update every 1 ms
+	static u32 delayCounter = 0;
+	if(++delayCounter < 100)
+		return;
+
+	delayCounter = 0;
 	u32 DiscDriveCover = 0;
 	WDVD_GetCoverStatus(&DiscDriveCover);//for detecting if i disc has been inserted
 
 	if ((DiscDriveCover & 0x02) && (DiscDriveCover != DiscDriveCoverOld))
 	{
-		gprintf("\tNew Disc Detected\n");
-		int choice = WindowPrompt(tr( "New Disc Detected" ), 0, tr( "Install" ), tr( "Mount DVD drive" ), tr( "Cancel" ));
+		int choice = WindowPrompt(tr( "Disc Insert Detected" ), 0, tr( "Install" ), tr( "Mount DVD drive" ), tr( "Cancel" ));
 		if (choice == 1)
 		{
 			if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_GAME_INSTALL))

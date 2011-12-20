@@ -48,7 +48,7 @@ GuiSound *btnSoundClick = NULL;
 GuiSound *btnSoundClick2 = NULL;
 GuiSound *btnSoundOver = NULL;
 
-int currentMenu = 0;
+static int currentMenu = 0;
 u8 mountMethod = 0;
 
 static lwp_t guithread = LWP_THREAD_NULL;

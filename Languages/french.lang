@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-20 10:55+0100\n"
+"POT-Creation-Date: 2011-12-20 21:54+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -253,6 +253,9 @@ msgstr "Bloquer Param. du Loader"
 msgid "Block Parental Settings"
 msgstr "Bloquer Contrôle parental"
 
+msgid "Block Priiloader Override"
+msgstr ""
+
 msgid "Block Reset Settings"
 msgstr "Bloquer Réinit. paramètres"
 
@@ -498,6 +501,9 @@ msgstr "Dossier labels DVD"
 
 msgid "Disc Default"
 msgstr "Disque par défaut"
+
+msgid "Disc Insert Detected"
+msgstr ""
 
 msgid "DiskFlip"
 msgstr "Inversion disque"
@@ -1102,9 +1108,6 @@ msgstr "Aucun"
 msgid "Network is not initiated."
 msgstr "Réseau non initialisé"
 
-msgid "New Disc Detected"
-msgstr "Nouveau DVD détecté"
-
 msgid "Next"
 msgstr "Suivant"
 
@@ -1143,6 +1146,9 @@ msgstr "Pas de favoris sélectionnés"
 
 msgid "No file missing!"
 msgstr "Aucun fichier manquant !"
+
+msgid "No language files to update on your devices! Do you want to download new language files?"
+msgstr ""
 
 msgid "No new updates."
 msgstr "Pas de nouvelle mise à jour."
@@ -1796,6 +1802,9 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "New Disc Detected"
+#~ msgstr "Nouveau DVD détecté"
 
 #~ msgid "USB Device not found"
 #~ msgstr "Périphérique USB introuvable"

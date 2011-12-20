@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-20 10:55+0100\n"
+"POT-Creation-Date: 2011-12-20 21:54+0100\n"
 "PO-Revision-Date: 2011-06-30 14:22+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -253,6 +253,9 @@ msgstr "Blokkeer Loader Instellingen"
 msgid "Block Parental Settings"
 msgstr "Blokkeer Ouderlijk toezicht"
 
+msgid "Block Priiloader Override"
+msgstr ""
+
 msgid "Block Reset Settings"
 msgstr "Blokkeer Reset Instellingen"
 
@@ -498,6 +501,9 @@ msgstr "Locatie disk labels"
 
 msgid "Disc Default"
 msgstr "Disk standaard"
+
+msgid "Disc Insert Detected"
+msgstr ""
 
 msgid "DiskFlip"
 msgstr ""
@@ -1102,9 +1108,6 @@ msgstr "Geen"
 msgid "Network is not initiated."
 msgstr "Netwerk is niet gestart."
 
-msgid "New Disc Detected"
-msgstr "Nieuwe disk gevonden"
-
 msgid "Next"
 msgstr "Volgende"
 
@@ -1143,6 +1146,9 @@ msgstr "Geen favorieten geselecteerd."
 
 msgid "No file missing!"
 msgstr "Geen missende bestanden!"
+
+msgid "No language files to update on your devices! Do you want to download new language files?"
+msgstr ""
 
 msgid "No new updates."
 msgstr "Geen nieuwe updates."
@@ -1796,6 +1802,9 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "New Disc Detected"
+#~ msgstr "Nieuwe disk gevonden"
 
 #~ msgid "USB Device not found"
 #~ msgstr "USB Apparaat niet gevonden"

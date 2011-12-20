@@ -37,6 +37,7 @@ CGameSettings GameSettings;
 
 CGameSettings::CGameSettings()
 {
+	SetDefault(DefaultConfig);
 }
 
 CGameSettings::~CGameSettings()
@@ -46,20 +47,20 @@ CGameSettings::~CGameSettings()
 GameCFG * CGameSettings::GetGameCFG(const char * id)
 {
 	if(!id)
-		return GetDefault();
+	{
+		DefaultConfig.id[0] = '\0';
+		return &DefaultConfig;
+	}
 
 	for(u32 i = 0; i < GameList.size(); ++i)
 	{
 		if(strncasecmp(id, GameList[i].id, 6) == 0)
-		{
 			return &GameList[i];
-		}
 	}
 
-	GameCFG *defaultCFG = GetDefault();
-	memcpy(defaultCFG->id, id, 6);
+	memcpy(DefaultConfig.id, id, 6);
 
-	return defaultCFG;
+	return &DefaultConfig;
 }
 
 bool CGameSettings::AddGame(const GameCFG & NewGame)
@@ -68,7 +69,7 @@ bool CGameSettings::AddGame(const GameCFG & NewGame)
 	{
 		if(strncasecmp(NewGame.id, GameList[i].id, 6) == 0)
 		{
-			memcpy(&GameList[i], &NewGame, sizeof(GameCFG));
+			GameList[i] = NewGame;
 			return true;
 		}
 	}
@@ -105,7 +106,6 @@ bool CGameSettings::Remove(const char * id)
 
 bool CGameSettings::Load(const char * path)
 {
-	char line[1024];
 	char filepath[300];
 	snprintf(filepath, sizeof(filepath), "%sGXGameSettings.cfg", path);
 
@@ -120,13 +120,24 @@ bool CGameSettings::Load(const char * path)
 		return false;
 	}
 
-	while (fgets(line, sizeof(line), file))
+	const int lineSize = 20*1024;
+
+	char *line = new (std::nothrow) char[lineSize];
+	if(!line) {
+		fclose(file);
+		return false;
+	}
+
+	while (fgets(line, lineSize, file))
 	{
 		if (line[0] == '#')
 			continue;
 
 		this->ParseLine(line);
 	}
+
+	delete [] line;
+
 	fclose(file);
 
 	return true;
@@ -186,10 +197,11 @@ bool CGameSettings::Save()
 		fprintf(f, "patchcountrystrings:%d; ", GameList[i].patchcountrystrings);
 		fprintf(f, "loadalternatedol:%d; ", GameList[i].loadalternatedol);
 		fprintf(f, "alternatedolstart:%d; ", GameList[i].alternatedolstart);
-		fprintf(f, "alternatedolname:%s; ", GameList[i].alternatedolname);
+		fprintf(f, "alternatedolname:%s; ", GameList[i].alternatedolname.c_str());
 		fprintf(f, "returnTo:%d; ", GameList[i].returnTo);
 		fprintf(f, "sneekVideoPatch:%d; ", GameList[i].sneekVideoPatch);
 		fprintf(f, "NandEmuMode:%d; ", GameList[i].NandEmuMode);
+		fprintf(f, "NandEmuPath:%s; ", GameList[i].NandEmuPath.c_str());
 		fprintf(f, "Hooktype:%d; ", GameList[i].Hooktype);
 		fprintf(f, "WiirdDebugger:%d; ", GameList[i].WiirdDebugger);
 		fprintf(f, "Locked:%d;\n", GameList[i].Locked);
@@ -200,7 +212,7 @@ bool CGameSettings::Save()
 	return true;
 }
 
-bool CGameSettings::SetSetting(GameCFG & game, char *name, char *value)
+bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *value)
 {
 	int i = 0;
 
@@ -294,7 +306,7 @@ bool CGameSettings::SetSetting(GameCFG & game, char *name, char *value)
 	}
 	else if(strcmp(name, "alternatedolname") == 0)
 	{
-		snprintf(game.alternatedolname, sizeof(game.alternatedolname), value);
+		game.alternatedolname = value;
 		return true;
 	}
 	else if(strcmp(name, "returnTo") == 0)
@@ -319,6 +331,11 @@ bool CGameSettings::SetSetting(GameCFG & game, char *name, char *value)
 		{
 			game.NandEmuMode = i;
 		}
+		return true;
+	}
+	else if(strcmp(name, "NandEmuPath") == 0)
+	{
+		game.NandEmuPath = value;
 		return true;
 	}
 	else if(strcmp(name, "Hooktype") == 0)
@@ -377,7 +394,6 @@ bool CGameSettings::ReadGameID(const char * src, char * GameID, int size)
 
 void CGameSettings::ParseLine(char *line)
 {
-	char name[1024], value[1024];
 	char GameID[8];
 
 	if(!ReadGameID(line, GameID, 6))
@@ -387,7 +403,7 @@ void CGameSettings::ParseLine(char *line)
 		return;
 
 	GameCFG NewCFG;
-	memcpy(&NewCFG, GetDefault(), sizeof(GameCFG));
+	SetDefault(NewCFG);
 
 	strcpy(NewCFG.id, GameID);
 
@@ -401,10 +417,12 @@ void CGameSettings::ParseLine(char *line)
 
 		if (!eq) break;
 
-		this->TrimLine(name, LinePtr, sizeof(name));
-		this->TrimLine(value, eq + 1, sizeof(value));
+		std::string name, value;
 
-		SetSetting(NewCFG, name, value);
+		this->TrimLine(name, LinePtr, ':');
+		this->TrimLine(value, eq + 1, ';');
+
+		SetSetting(NewCFG, name.c_str(), value.c_str());
 
 		LinePtr = strchr(LinePtr, ';');
 	}
@@ -412,23 +430,22 @@ void CGameSettings::ParseLine(char *line)
 	AddGame(NewCFG);
 }
 
-void CGameSettings::TrimLine(char *dest, const char *src, int size)
+void CGameSettings::TrimLine(std::string &dest, const char *src, char stopChar)
 {
+	if(!src)
+		return;
+
 	while (*src == ' ')
 		src++;
 
-	int i = 0;
-
-	for(i = 0; i < size; i++, src++)
+	while(*src != 0)
 	{
-		if(*src == ':' || *src == ';' || *src == '\n' ||
-		   *src == '\r' || *src == '\0')
+		if(*src == stopChar || *src == '\n' || *src == '\r')
 			break;
 
-		dest[i] = *src;
+		dest.push_back(*src);
+		src++;
 	}
-
-	dest[i] = '\0';
 }
 
 int CGameSettings::GetPartenalPEGI(int parental)
@@ -443,27 +460,26 @@ int CGameSettings::GetPartenalPEGI(int parental)
 	}
 }
 
-GameCFG * CGameSettings::GetDefault()
+void CGameSettings::SetDefault(GameCFG &game)
 {
-	memset(DefaultConfig.id, 0, sizeof(DefaultConfig.id));
-	DefaultConfig.video = INHERIT;
-	DefaultConfig.language = INHERIT;
-	DefaultConfig.ocarina = INHERIT;
-	DefaultConfig.vipatch = INHERIT;
-	DefaultConfig.ios = INHERIT;
-	DefaultConfig.parentalcontrol = PARENTAL_LVL_EVERYONE;
-	DefaultConfig.errorfix002 = INHERIT;
-	DefaultConfig.patchcountrystrings = INHERIT;
-	DefaultConfig.loadalternatedol = ALT_DOL_DEFAULT;
-	DefaultConfig.alternatedolstart = 0;
-	DefaultConfig.iosreloadblock = INHERIT;
-	DefaultConfig.alternatedolname[0] = '\0';
-	DefaultConfig.returnTo = 1;
-	DefaultConfig.sneekVideoPatch = INHERIT;
-	DefaultConfig.NandEmuMode = INHERIT;
-	DefaultConfig.Hooktype = INHERIT;
-	DefaultConfig.WiirdDebugger = INHERIT;
-	DefaultConfig.Locked = OFF;
-
-	return &DefaultConfig;
+	memset(game.id, 0, sizeof(game.id));
+	game.video = INHERIT;
+	game.language = INHERIT;
+	game.ocarina = INHERIT;
+	game.vipatch = INHERIT;
+	game.ios = INHERIT;
+	game.parentalcontrol = PARENTAL_LVL_EVERYONE;
+	game.errorfix002 = INHERIT;
+	game.patchcountrystrings = INHERIT;
+	game.loadalternatedol = ALT_DOL_DEFAULT;
+	game.alternatedolstart = 0;
+	game.iosreloadblock = INHERIT;
+	game.alternatedolname.clear();
+	game.returnTo = 1;
+	game.sneekVideoPatch = INHERIT;
+	game.NandEmuMode = INHERIT;
+	game.NandEmuPath.clear();
+	game.Hooktype = INHERIT;
+	game.WiirdDebugger = INHERIT;
+	game.Locked = OFF;
 }

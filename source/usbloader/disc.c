@@ -65,9 +65,10 @@ void Disc_SelectVMode(u8 videoselected)
 
 	/* Get video mode configuration */
 	bool progressive = (CONF_GetProgressiveScan() > 0) && VIDEO_HaveComponentCable();
+	u32 tvmode = CONF_GetVideo();
 
 	/* Select video mode register */
-	switch (CONF_GetVideo())
+	switch (tvmode)
 	{
 		case CONF_VIDEO_PAL:
 			if (CONF_GetEuRGB60() > 0)
@@ -101,7 +102,7 @@ void Disc_SelectVMode(u8 videoselected)
 				case 'P':
 				case 'X':
 				case 'Y':
-					if (CONF_GetVideo() != CONF_VIDEO_PAL)
+					if (tvmode != CONF_VIDEO_PAL)
 					{
 						vmode_reg = VI_PAL;
 						vmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
@@ -111,7 +112,7 @@ void Disc_SelectVMode(u8 videoselected)
 				case 'E':
 				case 'J':
 				default:
-					if (CONF_GetVideo() != CONF_VIDEO_NTSC)
+					if (tvmode != CONF_VIDEO_NTSC)
 					{
 						vmode_reg = VI_NTSC;
 						vmode = progressive ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
@@ -132,12 +133,12 @@ void Disc_SelectVMode(u8 videoselected)
 			vmode_reg = vmode->viTVMode >> 2;
 			break;
 		case VIDEO_MODE_PAL480P:
-			vmode_reg = TVEurgb60Hz480Prog.viTVMode >> 2;
 			vmode = &TVNtsc480Prog;
+			vmode_reg = TVEurgb60Hz480Prog.viTVMode >> 2;
 			break;
 		case VIDEO_MODE_NTSC480P:
-			vmode_reg = VI_NTSC;
 			vmode = &TVNtsc480Prog;
+			vmode_reg = vmode->viTVMode >> 2;
 			break;
 		case VIDEO_MODE_SYSDEFAULT: // AUTO PATCH TO SYSTEM
 			break;

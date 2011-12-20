@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-20 10:55+0100\n"
+"POT-Creation-Date: 2011-12-20 21:54+0100\n"
 "PO-Revision-Date: 2011-11-03 11:00+0000\n"
 "Last-Translator: pplucky <pplucky@gmail.com>\n"
 "Language-Team: Sky8000, pplucky\n"
@@ -253,6 +253,9 @@ msgstr "Bloquear Def. Loader"
 msgid "Block Parental Settings"
 msgstr "Bloquear Def. Parental"
 
+msgid "Block Priiloader Override"
+msgstr ""
+
 msgid "Block Reset Settings"
 msgstr "Bloquear Reinicialização Def."
 
@@ -498,6 +501,9 @@ msgstr "Cam. Imagens Disco"
 
 msgid "Disc Default"
 msgstr "Predefinição Disco"
+
+msgid "Disc Insert Detected"
+msgstr ""
 
 msgid "DiskFlip"
 msgstr "Voltar Disco"
@@ -1102,9 +1108,6 @@ msgstr "Nenhum"
 msgid "Network is not initiated."
 msgstr "Rede não inicializada."
 
-msgid "New Disc Detected"
-msgstr "Novo Disco Detectado"
-
 msgid "Next"
 msgstr "Próximo"
 
@@ -1143,6 +1146,9 @@ msgstr "Nenhum favorito seleccionado"
 
 msgid "No file missing!"
 msgstr "Nenhum ficheiro em falta!"
+
+msgid "No language files to update on your devices! Do you want to download new language files?"
+msgstr ""
 
 msgid "No new updates."
 msgstr "Não existem novas actualizações."
@@ -1796,6 +1802,9 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "New Disc Detected"
+#~ msgstr "Novo Disco Detectado"
 
 #~ msgid "USB Device not found"
 #~ msgstr "Dispositivo USB não encontrado"

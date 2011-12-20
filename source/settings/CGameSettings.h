@@ -21,13 +21,38 @@ typedef struct _GameCFG
 	short loadalternatedol;
 	u32 alternatedolstart;
 	short patchcountrystrings;
-	char alternatedolname[40];
+	std::string alternatedolname;
 	short returnTo;
 	short sneekVideoPatch;
 	short NandEmuMode;
+	std::string NandEmuPath;
 	short Hooktype;
 	short WiirdDebugger;
 	short Locked;
+
+	void operator=(const struct _GameCFG &game)
+	{
+		memcpy(this->id, game.id, sizeof(game.id));
+		this->video = game.video;
+		this->language = game.language;
+		this->ocarina = game.ocarina;
+		this->vipatch = game.vipatch;
+		this->ios = game.ios;
+		this->parentalcontrol = game.parentalcontrol;
+		this->errorfix002 = game.errorfix002;
+		this->iosreloadblock = game.iosreloadblock;
+		this->loadalternatedol = game.loadalternatedol;
+		this->alternatedolstart = game.alternatedolstart;
+		this->patchcountrystrings = game.patchcountrystrings;
+		this->alternatedolname = game.alternatedolname;
+		this->returnTo = game.returnTo;
+		this->sneekVideoPatch = game.sneekVideoPatch;
+		this->NandEmuMode = game.NandEmuMode;
+		this->NandEmuPath = game.NandEmuPath;
+		this->Hooktype = game.Hooktype;
+		this->WiirdDebugger = game.WiirdDebugger;
+		this->Locked = game.Locked;
+	}
 } GameCFG;
 
 class CGameSettings
@@ -57,17 +82,17 @@ class CGameSettings
 		GameCFG * GetGameCFG(const struct discHdr * game) { if(!game) return NULL; else return GetGameCFG(game->id); };
 		//!Quick settings to PEGI conversion
 		static int GetPartenalPEGI(int parentalsetting);
-		//!Get the default configuration block
-		GameCFG * GetDefault();
+		//!Set the default configuration block
+		void SetDefault(GameCFG &game);
 	protected:
 		bool ReadGameID(const char * src, char * GameID, int size);
-		bool SetSetting(GameCFG & game, char *name, char *value);
+		bool SetSetting(GameCFG & game, const char *name, const char *value);
 		bool ValidVersion(FILE * file);
 		//!Find the config file in the default paths
 		bool FindConfig();
 
 		void ParseLine(char *line);
-		void TrimLine(char *dest, const char *src, int size);
+		void TrimLine(std::string &dest, const char *src, char stopChar);
 		std::string ConfigPath;
 		std::vector<GameCFG> GameList;
 		GameCFG DefaultConfig;

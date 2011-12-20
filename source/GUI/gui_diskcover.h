@@ -13,7 +13,7 @@ class GuiDiskCover: public GuiImage
 		void SetBetaRotateEffect(f32 beta, u16 Step);
 		bool GetBetaRotateEffect();
 
-		void SetSpin(bool Up);
+		void SetSpin(bool Up) { spin_up = Up; }
 		void SetState(int s, int c = -1);
 		void Draw();
 	private:
