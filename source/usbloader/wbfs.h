@@ -20,6 +20,7 @@ extern "C"
 
 	/* Prototypes */
 	s32 WBFS_Init(u32 device);
+	s32 WBFS_ReInit(u32 device);
 	s32 WBFS_Format(u32 lba, u32 size, u32 port);
 	s32 WBFS_GetCount(int part, u32 *count);
 	s32 WBFS_GetHeaders(int part, struct discHdr *, u32, u32);

@@ -147,7 +147,7 @@ s32 USBStorage2_GetCapacity(u32 port, u32 *_sector_size)
 	{
 		s32 ret;
 		u32 sector_size = 0;
-		USBStorage2_SetPort(port);
+		//USBStorage2_SetPort(port);
 
 		ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_UMS_GET_CAPACITY, ":i", &sector_size);
 
@@ -170,7 +170,7 @@ s32 USBStorage2_ReadSectors(u32 port, u32 sector, u32 numSectors, void *buffer)
 	if (!mem2_ptr)
 		mem2_ptr = (u8 *) MEM2_alloc(MAX_SECTOR_SIZE * MAX_BUFFER_SECTORS);
 
-	USBStorage2_SetPort(port);
+	//USBStorage2_SetPort(port);
 
 	s32 read_secs, read_size;
 
@@ -216,7 +216,7 @@ s32 USBStorage2_WriteSectors(u32 port, u32 sector, u32 numSectors, const void *b
 	if (!mem2_ptr)
 		mem2_ptr = (u8 *) MEM2_alloc(MAX_SECTOR_SIZE * MAX_BUFFER_SECTORS);
 
-	USBStorage2_SetPort(port);
+	//USBStorage2_SetPort(port);
 
 	s32 write_size, write_secs;
 

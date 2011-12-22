@@ -43,7 +43,10 @@ UninstallSM::UninstallSM(struct discHdr * header)
 
 	int Idx = 0;
 
-	Options->SetName(Idx++, "%s", tr( "Uninstall Game" ));
+	if(DiscHeader->type == TYPE_GAME_WII)
+	{
+		Options->SetName(Idx++, "%s", tr( "Uninstall Game" ));
+	}
 	Options->SetName(Idx++, "%s", tr( "Reset Playcounter" ));
 	Options->SetName(Idx++, "%s", tr( "Delete Cover Artwork" ));
 	Options->SetName(Idx++, "%s", tr( "Delete Disc Artwork" ));
@@ -57,8 +60,11 @@ void UninstallSM::SetOptionValues()
 {
 	int Idx = 0;
 
-	//! Settings: Uninstall Game
-	Options->SetValue(Idx++, " ");
+	if(DiscHeader->type == TYPE_GAME_WII)
+	{
+		//! Settings: Uninstall Game
+		Options->SetValue(Idx++, " ");
+	}
 
 	//! Settings: Reset Playcounter
 	Options->SetValue(Idx++, " ");
@@ -86,7 +92,7 @@ int UninstallSM::GetMenuInternal()
 	int Idx = -1;
 
 	//! Settings: Uninstall Game
-	if (ret == ++Idx)
+	if((DiscHeader->type == TYPE_GAME_WII) && ret == ++Idx)
 	{
 		int choice = WindowPrompt(GameTitles.GetTitle(DiscHeader), tr( "What should be deleted for this game title:" ), tr( "Game Only" ), tr("Uninstall all"), tr( "Cancel" ));
 		if (choice == 0)

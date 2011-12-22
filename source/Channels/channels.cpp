@@ -68,8 +68,6 @@ void Channels::GetEmuChannelList()
 
 void Channels::GetChannelList()
 {
-	ISFS_Initialize();
-
 	NandChannels.clear();
 
 	// Get count of titles of the good titles
@@ -102,6 +100,7 @@ void Channels::GetChannelList()
 		memset(&NandChannels[s], 0, sizeof(struct discHdr));
 		memcpy(NandChannels[s].id, id, 4);
 		NandChannels[s].tid = tid;
+		NandChannels[s].type = TYPE_GAME_NANDCHAN;
 		strncpy(NandChannels[s].title, name ? name : "", sizeof(NandChannels[s].title)-1);
 	}
 
@@ -139,28 +138,25 @@ void Channels::GetChannelList()
 		memset(&NandChannels[s], 0, sizeof(struct discHdr));
 		memcpy(NandChannels[s].id, id, 4);
 		NandChannels[s].tid = tid;
+		NandChannels[s].type = TYPE_GAME_NANDCHAN;
 		strncpy(NandChannels[s].title, name ? name : "", sizeof(NandChannels[s].title)-1);
 	}
-
-	ISFS_Deinitialize();
 }
 
-vector<struct discHdr> & Channels::GetDiscHeaderList(void)
+vector<struct discHdr> & Channels::GetNandHeaders(void)
 {
-	if(Settings.NandEmuChanMode != 0)
-	{
-		if(EmuChannels.empty())
-			this->GetEmuChannelList();
+	if(NandChannels.empty())
+		this->GetChannelList();
 
-		return EmuChannels;
-	}
-	else
-	{
-		if(NandChannels.empty())
-			this->GetChannelList();
+	return NandChannels;
+}
 
-		return NandChannels;
-	}
+vector<struct discHdr> & Channels::GetEmuHeaders(void)
+{
+	if(EmuChannels.empty())
+		this->GetEmuChannelList();
+
+	return EmuChannels;
 }
 
 u8 * Channels::GetDol(const u64 &title, u8 *tmdBuffer)
@@ -193,7 +189,7 @@ u8 * Channels::GetDol(const u64 &title, u8 *tmdBuffer)
 	snprintf(filepath, ISFS_MAXPATH, "/title/%08x/%08x/content/%08x.app", high, low, bootcontent);
 	gprintf("Loading Channel DOL: %s\n", filepath);
 
-	if (NandTitle::LoadFileFromNand(filepath, &buffer, &filesize, false) < 0)
+	if (NandTitle::LoadFileFromNand(filepath, &buffer, &filesize) < 0)
 	{
 		gprintf("Failed loading DOL file\n");
 		free(filepath);
@@ -225,7 +221,7 @@ u8 Channels::GetRequestedIOS(const u64 &title)
 	u8 IOS = 0;
 
 	u32 tmdSize = 0;
-	u8 *titleTMD = GetTMD(title, &tmdSize, true, "");
+	u8 *titleTMD = GetTMD(title, &tmdSize, "");
 	if (!titleTMD)
 		return 0;
 
@@ -237,7 +233,7 @@ u8 Channels::GetRequestedIOS(const u64 &title)
 	return IOS;
 }
 
-u8 *Channels::GetTMD(const u64 &tid, u32 *size, bool isfsInit, const char *prefix)
+u8 *Channels::GetTMD(const u64 &tid, u32 *size, const char *prefix)
 {
 	char *filepath = (char *) memalign(32, ISFS_MAXPATH);
 	if(!filepath)
@@ -256,7 +252,7 @@ u8 *Channels::GetTMD(const u64 &tid, u32 *size, bool isfsInit, const char *prefi
 	if(*prefix != '\0')
 		ret = LoadFileToMem(filepath, &tmdBuffer, &tmdSize);
 	else
-		ret = NandTitle::LoadFileFromNand(filepath, &tmdBuffer, &tmdSize, isfsInit);
+		ret = NandTitle::LoadFileFromNand(filepath, &tmdBuffer, &tmdSize);
 
 	free(filepath);
 
@@ -280,7 +276,7 @@ u32 Channels::LoadChannel(const u64 &chantitle)
 
 	u32 ios = 0;
 	u32 tmdSize = 0;
-	u8 *tmdBuffer = GetTMD(chantitle, &tmdSize, false, "");
+	u8 *tmdBuffer = GetTMD(chantitle, &tmdSize, "");
 	if(!tmdBuffer)
 	{
 		ISFS_Deinitialize();
@@ -385,7 +381,7 @@ bool Channels::Identify(const u64 &titleid, u8 *tmdBuffer, u32 tmdSize)
 	sprintf(filepath, "/sys/cert.sys");
 	u8 *certBuffer = NULL;
 	u32 certSize = 0;
-	if (NandTitle::LoadFileFromNand(filepath, &certBuffer, &certSize, false) < 0)
+	if (NandTitle::LoadFileFromNand(filepath, &certBuffer, &certSize) < 0)
 	{
 		gprintf("Reading certs...Failed!\n");
 		free(tikBuffer);
@@ -491,6 +487,7 @@ bool Channels::ParseTitleDir(char *path, int language)
 		memset(&EmuChannels[s], 0, sizeof(struct discHdr));
 		memcpy(EmuChannels[s].id, id, 4);
 		EmuChannels[s].tid = tid;
+		EmuChannels[s].type = TYPE_GAME_EMUNANDCHAN;
 		strncpy(EmuChannels[s].title, TitleName.c_str(), sizeof(EmuChannels[s].title)-1);
 	}
 
@@ -590,7 +587,7 @@ bool Channels::GetEmuChanTitle(char *tmdpath, int language, std::string &Title)
 	return true;
 }
 
-u8 *Channels::GetOpeningBnr(const u64 &title)
+u8 *Channels::GetOpeningBnr(const u64 &title, const char *pathPrefix)
 {
 	u8 *banner = NULL;
 	u32 high = TITLE_UPPER(title);
@@ -600,29 +597,19 @@ u8 *Channels::GetOpeningBnr(const u64 &title)
 	if(!filepath)
 		return NULL;
 
-	if(Settings.NandEmuChanMode == 0)
-		ISFS_Initialize();
-
-	char prefix[sizeof(Settings.NandEmuChanPath)];
-
-	if(Settings.NandEmuChanMode != 0)
-		strcpy(prefix, Settings.NandEmuChanPath);
-	else
-		prefix[0] = '\0';
-
 	do
 	{
-		snprintf(filepath, ISFS_MAXPATH, "%s/title/%08x/%08x/content/title.tmd", prefix, high, low);
+		snprintf(filepath, ISFS_MAXPATH, "%s/title/%08x/%08x/content/title.tmd", pathPrefix, high, low);
 
 		u8 *buffer = NULL;
 		u32 filesize = 0;
 
 		int ret = 0;
 
-		if(Settings.NandEmuChanMode != 0)
+		if(pathPrefix && *pathPrefix != 0)
 			ret = LoadFileToMem(filepath, &buffer, &filesize);
 		else
-			ret = NandTitle::LoadFileFromNand(filepath, &buffer, &filesize, false);
+			ret = NandTitle::LoadFileFromNand(filepath, &buffer, &filesize);
 
 		if (ret < 0)
 			break;
@@ -647,12 +634,12 @@ u8 *Channels::GetOpeningBnr(const u64 &title)
 		if(!found)
 			break;
 
-		snprintf(filepath, ISFS_MAXPATH, "%s/title/%08x/%08x/content/%08x.app", prefix, high, low, bootcontent);
+		snprintf(filepath, ISFS_MAXPATH, "%s/title/%08x/%08x/content/%08x.app", pathPrefix, high, low, bootcontent);
 
-		if(Settings.NandEmuChanMode != 0)
+		if(pathPrefix && *pathPrefix != 0)
 			ret = LoadFileToMem(filepath, &buffer, &filesize);
 		else
-			ret = NandTitle::LoadFileFromNand(filepath, &buffer, &filesize, false);
+			ret = NandTitle::LoadFileFromNand(filepath, &buffer, &filesize);
 
 		if (ret < 0)
 			break;
@@ -678,9 +665,6 @@ u8 *Channels::GetOpeningBnr(const u64 &title)
 	while(0);
 
 	free(filepath);
-
-	if(Settings.NandEmuChanMode == 0)
-		ISFS_Deinitialize();
 
 	return banner;
 }

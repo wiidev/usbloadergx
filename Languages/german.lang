@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-20 21:54+0100\n"
+"POT-Creation-Date: 2011-12-22 23:25+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -246,6 +246,9 @@ msgstr "Blocke Festpl. Optionen"
 
 msgid "Block IOS Reload"
 msgstr "Blocke IOS-Neuladen"
+
+msgid "Block Loader Mode Button"
+msgstr ""
 
 msgid "Block Loader Settings"
 msgstr "Blocke Loaderoptionen"
@@ -609,6 +612,12 @@ msgstr "FEHLER:"
 
 msgid "ERROR: Can't set up theme."
 msgstr "FEHLER: Theme kann nicht eingerichtet werden."
+
+msgid "EmuNand Channels"
+msgstr ""
+
+msgid "Emulated Nand"
+msgstr ""
 
 msgid "English"
 msgstr "Englisch"
@@ -999,6 +1008,9 @@ msgstr "Sprachdateien"
 msgid "Languagepath changed."
 msgstr "Pfad geändert"
 
+msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgstr ""
+
 msgid "Left"
 msgstr "Links"
 
@@ -1081,7 +1093,7 @@ msgstr "HGM Wiederholung"
 msgid "Music Volume"
 msgstr "Musik Lautstärke"
 
-msgid "Nand Channel Emulation"
+msgid "Nand Channels"
 msgstr ""
 
 msgid "Nand Emu Channel Path"
@@ -1303,6 +1315,9 @@ msgstr "Zufällig"
 msgid "Reading WAD data... Ok!"
 msgstr "Lese WAD Daten... OK!"
 
+msgid "Real Nand"
+msgstr ""
+
 msgid "Receiving file from:"
 msgstr "Empfange Datei von:"
 
@@ -1404,6 +1419,12 @@ msgstr "Wähle eine DOL vom Spiel"
 
 msgid "Select game categories"
 msgstr "Wähle Spiele-Kategorien"
+
+msgid "Select loader mode"
+msgstr ""
+
+msgid "Select titles sources."
+msgstr ""
 
 msgid "Sept"
 msgstr "September"
@@ -1700,6 +1721,9 @@ msgstr "Breitbildwert"
 
 msgid "Widescreen Fix"
 msgstr "Breitbild (16:9)"
+
+msgid "Wii Games"
+msgstr ""
 
 msgid "Wii Menu"
 msgstr "Wii Menü"

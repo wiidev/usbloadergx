@@ -20,7 +20,7 @@ OpeningBNR::~OpeningBNR()
 		free(imetHdr);
 }
 
-bool OpeningBNR::Load(const u64 &tid)
+bool OpeningBNR::Load(const u64 &tid, const char *pathPrefix)
 {
 	if(tid == 0)
 		return false;
@@ -39,7 +39,7 @@ bool OpeningBNR::Load(const u64 &tid)
 		free(imetHdr);
 	imetHdr = NULL;
 
-	imetHdr = (IMETHeader*) Channels::GetOpeningBnr(tid);
+	imetHdr = (IMETHeader*) Channels::GetOpeningBnr(tid, pathPrefix);
 	if(!imetHdr)
 		return false;
 

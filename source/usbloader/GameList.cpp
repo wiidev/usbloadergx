@@ -153,20 +153,21 @@ int GameList::InternalReadList(int part)
 
 int GameList::ReadGameList()
 {
-	if(Settings.LoaderMode == LOAD_CHANNELS)
-		return 0;
-
 	// Clear list
-	clear();
+	FullGameList.clear();
+	GamePartitionList.clear();
+	//! Clear memory of the vector completely
+	std::vector<struct discHdr>().swap(FullGameList);
+	std::vector<int>().swap(GamePartitionList);
+
+	int cnt = 0;
 
 	if(!Settings.MultiplePartitions)
 	{
-		int ret = InternalReadList(Settings.partition);
-		if(ret <= 0) return ret;
+		cnt = InternalReadList(Settings.partition);
 	}
 	else
 	{
-		int cnt = 0;
 		int partitions = DeviceHandler::GetUSBPartitionCount();
 
 		for(int part = 0; part < partitions; ++part)
@@ -174,31 +175,16 @@ int GameList::ReadGameList()
 			int ret = InternalReadList(part);
 			if(ret > 0) cnt += ret;
 		}
-
-		if(!cnt) return cnt;
 	}
 
-	return LoadUnfiltered();
+	return cnt;
 }
 
-int GameList::FilterList(const wchar_t * gameFilter)
+void GameList::InternalFilterList(std::vector<struct discHdr> &FullList)
 {
-	std::vector<struct discHdr> *FullList = &FullGameList;
-
-	if(Settings.LoaderMode == LOAD_CHANNELS)
-		FullList = &(Channels::Instance()->GetDiscHeaderList());
-
-	else if (FullGameList.size() == 0)
-		ReadGameList();
-
-	if (gameFilter)
-		GameFilter.assign(gameFilter);
-
-	FilteredList.clear();
-
-	for (u32 i = 0; i < FullList->size(); ++i)
+	for (u32 i = 0; i < FullList.size(); ++i)
 	{
-		struct discHdr *header = &FullList->at(i);
+		struct discHdr *header = &FullList[i];
 
 		/* Register game */
 		NewTitles::Instance()->CheckGame(header->id);
@@ -252,6 +238,29 @@ int GameList::FilterList(const wchar_t * gameFilter)
 
 		FilteredList.push_back(header);
 	}
+}
+
+int GameList::FilterList(const wchar_t * gameFilter)
+{
+	if((Settings.LoaderMode & MODE_WIIGAMES) && (FullGameList.size() == 0))
+		ReadGameList();
+
+	if (gameFilter)
+		GameFilter.assign(gameFilter);
+
+	FilteredList.clear();
+
+	// Filter current game list if selected
+	if(Settings.LoaderMode & MODE_WIIGAMES)
+		InternalFilterList(FullGameList);
+
+	// Filter nand channel list if selected
+	if(Settings.LoaderMode & MODE_NANDCHANNELS)
+		InternalFilterList(Channels::Instance()->GetNandHeaders());
+
+	// Filter emu nand channel list if selected
+	if(Settings.LoaderMode & MODE_EMUCHANNELS)
+		InternalFilterList(Channels::Instance()->GetEmuHeaders());
 
 	NewTitles::Instance()->Save();
 	GuiSearchBar::FilterList(FilteredList, GameFilter);
@@ -261,28 +270,38 @@ int GameList::FilterList(const wchar_t * gameFilter)
 	return FilteredList.size();
 }
 
-int GameList::LoadUnfiltered()
+void GameList::InternalLoadUnfiltered(std::vector<struct discHdr> &FullList)
 {
-	std::vector<struct discHdr> *FullList = &FullGameList;
-
-	if(Settings.LoaderMode == LOAD_CHANNELS)
-		FullList = &(Channels::Instance()->GetDiscHeaderList());
-
-	else if (FullGameList.size() == 0)
-		ReadGameList();
-
-	GameFilter.clear();
-	FilteredList.clear();
-
-	for (u32 i = 0; i < FullList->size(); ++i)
+	for (u32 i = 0; i < FullList.size(); ++i)
 	{
-		struct discHdr *header = &FullList->at(i);
+		struct discHdr *header = &FullList[i];
 
 		/* Register game */
 		NewTitles::Instance()->CheckGame(header->id);
 
 		FilteredList.push_back(header);
 	}
+}
+
+int GameList::LoadUnfiltered()
+{
+	if((Settings.LoaderMode & MODE_WIIGAMES) && (FullGameList.size() == 0))
+		ReadGameList();
+
+	GameFilter.clear();
+	FilteredList.clear();
+
+	// Filter current game list if selected
+	if(Settings.LoaderMode & MODE_WIIGAMES)
+		InternalLoadUnfiltered(FullGameList);
+
+	// Filter nand channel list if selected
+	if(Settings.LoaderMode & MODE_NANDCHANNELS)
+		InternalLoadUnfiltered(Channels::Instance()->GetNandHeaders());
+
+	// Filter emu nand channel list if selected
+	if(Settings.LoaderMode & MODE_EMUCHANNELS)
+		InternalLoadUnfiltered(Channels::Instance()->GetEmuHeaders());
 
 	NewTitles::Instance()->Save();
 	GuiSearchBar::FilterList(FilteredList, GameFilter);

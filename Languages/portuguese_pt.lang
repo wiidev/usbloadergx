@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-20 21:54+0100\n"
+"POT-Creation-Date: 2011-12-22 23:25+0100\n"
 "PO-Revision-Date: 2011-11-03 11:00+0000\n"
 "Last-Translator: pplucky <pplucky@gmail.com>\n"
 "Language-Team: Sky8000, pplucky\n"
@@ -246,6 +246,9 @@ msgstr "Bloquear Def. Disco Rígido"
 
 msgid "Block IOS Reload"
 msgstr "Bloquear Reload do IOS"
+
+msgid "Block Loader Mode Button"
+msgstr ""
 
 msgid "Block Loader Settings"
 msgstr "Bloquear Def. Loader"
@@ -609,6 +612,12 @@ msgstr "ERRO:"
 
 msgid "ERROR: Can't set up theme."
 msgstr "ERRO: Impossível configurar tema."
+
+msgid "EmuNand Channels"
+msgstr ""
+
+msgid "Emulated Nand"
+msgstr ""
 
 msgid "English"
 msgstr "Inglês"
@@ -999,6 +1008,9 @@ msgstr "Cam. ficheiros Idioma"
 msgid "Languagepath changed."
 msgstr "Caminho para o ficheiro de Idioma alterado."
 
+msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgstr ""
+
 msgid "Left"
 msgstr "Esquerda"
 
@@ -1081,7 +1093,7 @@ msgstr "Modo de Repetição"
 msgid "Music Volume"
 msgstr "Volume Música"
 
-msgid "Nand Channel Emulation"
+msgid "Nand Channels"
 msgstr ""
 
 msgid "Nand Emu Channel Path"
@@ -1303,6 +1315,9 @@ msgstr "Pasta de Música Aleatória"
 msgid "Reading WAD data... Ok!"
 msgstr "A ler dados do WAD... Ok!"
 
+msgid "Real Nand"
+msgstr ""
+
 msgid "Receiving file from:"
 msgstr "A receber ficheiro de:"
 
@@ -1404,6 +1419,12 @@ msgstr "Seleccionar um DOL do Jogo"
 
 msgid "Select game categories"
 msgstr "Seleccionar categorias de jogos"
+
+msgid "Select loader mode"
+msgstr ""
+
+msgid "Select titles sources."
+msgstr ""
 
 msgid "Sept"
 msgstr "Set"
@@ -1700,6 +1721,9 @@ msgstr "Factor Ecrã Panorâmico"
 
 msgid "Widescreen Fix"
 msgstr "Correcção 16:9"
+
+msgid "Wii Games"
+msgstr ""
 
 msgid "Wii Menu"
 msgstr "Menu Wii"

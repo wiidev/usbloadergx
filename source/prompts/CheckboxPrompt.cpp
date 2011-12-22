@@ -154,7 +154,7 @@ int CheckboxPrompt::GetChoice()
 {
 	int choice  = PromptWindow::GetChoice();
 	if(choice == 0)
-		return 0;
+		return CheckedNone;
 
 	else if(choice == 1)
 	{
@@ -163,44 +163,68 @@ int CheckboxPrompt::GetChoice()
 		for(u32 i = 0; i < Checkbox.size(); ++i)
 		{
 			if(Checkbox[i]->IsChecked())
-			{
-				ret ^= (int) pow(2, i);
-			}
+				ret |= 1 << i;
 		}
 
 		return ret;
 	}
 
-	return -1;
+	return -2;
 }
 
+void CheckboxPrompt::SetChecked(int box, bool checked)
+{
+	if(box < 0 || box >= (int) Checkbox.size())
+		return;
+
+	Checkbox[box]->SetChecked(checked);
+}
 
 int CheckboxPrompt::Show(const char *title, const char *msg,
 						 const char *chbx1, const char *chbx2,
 						 const char *chbx3, const char *chbx4,
-						 const char *chbx5, const char *chbx6)
+						 const char *chbx5, const char *chbx6,
+						 int initChecks)
 {
 	CheckboxPrompt * Window = new CheckboxPrompt(title, msg);
 	if(chbx1)
+	{
 		Window->AddCheckBox(chbx1);
+		Window->SetChecked(0, initChecks & CheckedBox1);
+	}
 	if(chbx2)
+	{
 		Window->AddCheckBox(chbx2);
+		Window->SetChecked(1, initChecks & CheckedBox2);
+	}
 	if(chbx3)
+	{
 		Window->AddCheckBox(chbx3);
+		Window->SetChecked(2, initChecks & CheckedBox3);
+	}
 	if(chbx4)
+	{
 		Window->AddCheckBox(chbx4);
+		Window->SetChecked(3, initChecks & CheckedBox4);
+	}
 	if(chbx5)
+	{
 		Window->AddCheckBox(chbx5);
+		Window->SetChecked(4, initChecks & CheckedBox5);
+	}
 	if(chbx6)
+	{
 		Window->AddCheckBox(chbx6);
+		Window->SetChecked(5, initChecks & CheckedBox6);
+	}
 
 	mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(Window);
 	mainWindow->ChangeFocus(Window);
 
-	int choice = -1;
+	int choice = -2;
 
-	while (choice == -1)
+	while (choice == -2)
 	{
 		usleep(100);
 

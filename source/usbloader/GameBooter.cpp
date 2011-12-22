@@ -213,10 +213,14 @@ void GameBooter::ShutDownDevices(int gameUSBPort)
 	USB_Deinitialize();
 }
 
-int GameBooter::BootGame(const char * gameID)
+int GameBooter::BootGame(struct discHdr *gameHdr)
 {
-	if(!gameID || strlen(gameID) < 3)
+	if(!gameHdr)
 		return -1;
+
+	char gameID[7];
+	snprintf(gameID, sizeof(gameID), "%s", gameHdr->id);
+	gprintf("\tBootGame: %s\n", gameID);
 
 	if(Settings.Wiinnertag)
 		Wiinnertag::TagGame(gameID);
@@ -228,16 +232,9 @@ int GameBooter::BootGame(const char * gameID)
 
 	gprintf("\tSettings.partition: %d\n", Settings.partition);
 
+	s32 ret = -1;
 	struct discHdr gameHeader;
-
-	//! Find disc header in the game list first
-	int ret = FindDiscHeader(gameID, gameHeader);
-	if(ret < 0)
-		return ret;
-
-	//! Set game mode if loading a disc
-	if(mountMethod)
-		Settings.LoaderMode = LOAD_GAMES;
+	memcpy(&gameHeader, gameHdr, sizeof(struct discHdr));
 
 	//! Remember game's USB port
 	int partition = gameList.GetPartitionNumber(gameHeader.id);
@@ -261,9 +258,9 @@ int GameBooter::BootGame(const char * gameID)
 	u64 returnToChoice = game_cfg->returnTo ? NandTitles.FindU32(Settings.returnTo) : 0;
 	u8 NandEmuMode = game_cfg->NandEmuMode == INHERIT ? Settings.NandEmuMode : game_cfg->NandEmuMode;
 	const char *NandEmuPath = game_cfg->NandEmuPath.size() == 0 ? Settings.NandEmuPath : game_cfg->NandEmuPath.c_str();
-	if(Settings.LoaderMode == LOAD_CHANNELS)
+	if(gameHeader.tid != 0)
 	{
-		NandEmuMode = game_cfg->NandEmuMode == INHERIT ? Settings.NandEmuChanMode : game_cfg->NandEmuMode;
+		NandEmuMode = (gameHeader.type == TYPE_GAME_EMUNANDCHAN) ? 2 : 0; // If from emu nand set full emulation mode
 		NandEmuPath = game_cfg->NandEmuPath.size() == 0 ? Settings.NandEmuChanPath : game_cfg->NandEmuPath.c_str();
 	}
 
@@ -297,7 +294,7 @@ int GameBooter::BootGame(const char * gameID)
 		ocarina_load_code(Settings.Cheatcodespath, gameHeader.id);
 
 	//! Setup disc stuff if we load a game
-	if(Settings.LoaderMode != LOAD_CHANNELS)
+	if(gameHeader.tid == 0)
 	{
 		//! Setup disc in cIOS and open it
 		ret = SetupDisc(gameHeader.id);
@@ -310,23 +307,34 @@ int GameBooter::BootGame(const char * gameID)
 		gprintf("%d\n", ret);
 	}
 
-	//! Setup IOS reload block
-	if (IosLoader::IsHermesIOS())
+	if(IosLoader::IsHermesIOS())
 	{
 		if(reloadblock == ON)
 		{
+			//! Setup IOS reload block
 			enable_ES_ioctlv_vector();
 			if (gameList.GetGameFS(gameHeader.id) == PART_FS_WBFS)
 				mload_close();
 		}
-
-		reloadblock = 0;
 	}
-	else if(reloadblock == AUTO)
+	else if(IosLoader::GetIOSInfo(IOS_GetVersion()) != NULL)
 	{
-		iosinfo_t * iosinfo = IosLoader::GetIOSInfo(IOS_GetVersion());
-		if(!iosinfo || iosinfo->version < 6)
-			reloadblock = 0;
+		// Open ES file descriptor for the d2x patches
+		static char es_fs[] ATTRIBUTE_ALIGN(32) = "/dev/es";
+		int es_fd = IOS_Open(es_fs, 0);
+		if(es_fd >= 0)
+		{
+			// IOS Reload Block
+			if(reloadblock != OFF) {
+				BlockIOSReload(es_fd, iosChoice);
+			}
+			// Check if new patch method for return to works otherwise old method will be used
+			if(PatchNewReturnTo(es_fd, returnToChoice) < 0)
+				returnToChoice = 0; // Patch successful, no need for old method
+
+			// Close ES file descriptor
+			IOS_Close(es_fd);
+		}
 	}
 
 	//! Now we can free up the memory used by the game/channel lists
@@ -334,7 +342,7 @@ int GameBooter::BootGame(const char * gameID)
 	Channels::DestroyInstance();
 
 	//! Load main.dol or alternative dol into memory, start the game apploader and get game entrypoint
-	if(Settings.LoaderMode != LOAD_CHANNELS)
+	if(gameHeader.tid == 0)
 	{
 		gprintf("\tGame Boot\n");
 		AppEntrypoint = BootPartition(Settings.dolpath, videoChoice, alternatedol, alternatedoloffset);
@@ -364,7 +372,7 @@ int GameBooter::BootGame(const char * gameID)
 
 	//! Do all the game patches
 	gprintf("Applying game patches...\n");
-	gamepatches(videoChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, fix002, reloadblock, iosChoice, returnToChoice);
+	gamepatches(videoChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, fix002, returnToChoice);
 
 	//! Load Code handler if needed
 	load_handler(Hooktype, WiirdDebugger, Settings.WiirdDebuggerPause);

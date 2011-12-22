@@ -40,13 +40,14 @@ public:
 
 	static u32 LoadChannel(const u64 &chantitle);
 	static u8 GetRequestedIOS(const u64 &title);
-	static u8 *GetTMD(const u64 &tid, u32 *size, bool isfsInit, const char *prefix);
+	static u8 *GetTMD(const u64 &tid, u32 *size, const char *prefix);
 	static u8 *GetDol(const u64 &title, u8 *tmdBuffer);
-	static u8 *GetOpeningBnr(const u64 &title);
+	static u8 *GetOpeningBnr(const u64 &title, const char *pathPrefix);
 
 	void GetChannelList();
 	void GetEmuChannelList();
-	vector<struct discHdr> & GetDiscHeaderList(void);
+	vector<struct discHdr> & GetNandHeaders(void);
+	vector<struct discHdr> & GetEmuHeaders(void);
 private:
 	static Channels *instance;
 

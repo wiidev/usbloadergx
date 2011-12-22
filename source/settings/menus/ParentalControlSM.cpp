@@ -79,6 +79,7 @@ ParentalControlSM::ParentalControlSM()
 	Options->SetName(Idx++, "%s", tr( "Block Categories Modify" ));
 	Options->SetName(Idx++, "%s", tr( "Block SD Reload Button" ));
 	Options->SetName(Idx++, "%s", tr( "Block Priiloader Override" ));
+	Options->SetName(Idx++, "%s", tr( "Block Loader Mode Button" ));
 
 	SetOptionValues();
 }
@@ -175,6 +176,9 @@ void ParentalControlSM::SetOptionValues()
 
 	//! Settings: Block Priiloader Override
 	Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_PRIILOADER_OVERRIDE) != 0)]));
+
+	//! Settings: Block Loader Mode Button
+	Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_LOADER_MODE_BUTTON) != 0)]));
 }
 
 int ParentalControlSM::GetMenuInternal()
@@ -378,6 +382,12 @@ int ParentalControlSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		Settings.ParentalBlocks ^= BLOCK_PRIILOADER_OVERRIDE;
+	}
+
+	//! Settings: Block Loader Mode Button
+	else if (ret == ++Idx)
+	{
+		Settings.ParentalBlocks ^= BLOCK_LOADER_MODE_BUTTON;
 	}
 
 	SetOptionValues();

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-24 21:05+0200\n"
+"POT-Creation-Date: 2011-12-21 19:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -202,82 +202,91 @@ msgstr ""
 msgid "335 - clock pos y"
 msgstr ""
 
-msgid "220 - list layout favorite btn pos x"
+msgid "188 - list layout favorite btn pos x"
 msgstr ""
 
-msgid "256 - list layout favorite btn pos x widescreen"
+msgid "230 - list layout favorite btn pos x widescreen"
 msgstr ""
 
 msgid "13 - list layout favorite btn pos y"
 msgstr ""
 
-msgid "260 - list layout search btn pos x"
+msgid "228 - list layout search btn pos x"
 msgstr ""
 
-msgid "288 - list layout search btn pos x widescreen"
+msgid "262 - list layout search btn pos x widescreen"
 msgstr ""
 
 msgid "13 - list layout search btn pos y"
 msgstr ""
 
-msgid "300 - list layout abc/sort btn pos x"
+msgid "268 - list layout abc/sort btn pos x"
 msgstr ""
 
-msgid "320 - list layout abc/sort btn pos x widescreen"
+msgid "294 - list layout abc/sort btn pos x widescreen"
 msgstr ""
 
 msgid "13 - list layout abc/sort btn pos y"
 msgstr ""
 
-msgid "340 - list layout category btn pos x"
+msgid "308 - list layout loadermode btn pos x"
 msgstr ""
 
-msgid "352 - list layout category btn pos x widescreen"
+msgid "326 - list layout loadermode btn pos x widescreen"
+msgstr ""
+
+msgid "13 - list layout loadermode btn pos y"
+msgstr ""
+
+msgid "348 - list layout category btn pos x"
+msgstr ""
+
+msgid "358 - list layout category btn pos x widescreen"
 msgstr ""
 
 msgid "13 - list layout category btn pos y"
 msgstr ""
 
-msgid "380 - list layout list btn pos x"
+msgid "388 - list layout list btn pos x"
 msgstr ""
 
-msgid "384 - list layout list btn pos x widescreen"
+msgid "390 - list layout list btn pos x widescreen"
 msgstr ""
 
 msgid "13 - list layout list btn pos y"
 msgstr ""
 
-msgid "416 - list layout grid btn pos x widescreen"
+msgid "422 - list layout grid btn pos x widescreen"
 msgstr ""
 
-msgid "420 - list layout grid btn pos x"
+msgid "428 - list layout grid btn pos x"
 msgstr ""
 
 msgid "13 - list layout grid btn pos y"
 msgstr ""
 
-msgid "448 - list layout carousel btn pos x widescreen"
+msgid "454 - list layout carousel btn pos x widescreen"
 msgstr ""
 
-msgid "460 - list layout carousel btn pos x"
+msgid "468 - list layout carousel btn pos x"
 msgstr ""
 
 msgid "13 - list layout carousel btn pos y"
 msgstr ""
 
-msgid "480 - list layout lock btn pos x widescreen"
+msgid "486 - list layout lock btn pos x widescreen"
 msgstr ""
 
-msgid "500 - list layout lock btn pos x"
+msgid "508 - list layout lock btn pos x"
 msgstr ""
 
 msgid "13 - list layout lock btn pos y"
 msgstr ""
 
-msgid "512 - list layout dvd btn pos x widescreen"
+msgid "518 - list layout dvd btn pos x widescreen"
 msgstr ""
 
-msgid "540 - list layout dvd btn pos x"
+msgid "548 - list layout dvd btn pos x"
 msgstr ""
 
 msgid "13 - list layout dvd btn pos y"
@@ -295,31 +304,40 @@ msgstr ""
 msgid "49 - game list layout pos y"
 msgstr ""
 
-msgid "160 - grid layout favorite btn pos x"
+msgid "120 - grid layout favorite btn pos x"
 msgstr ""
 
-msgid "192 - grid layout favorite btn pos x widescreen"
+msgid "160 - grid layout favorite btn pos x widescreen"
 msgstr ""
 
 msgid "13 - grid layout favorite btn pos y"
 msgstr ""
 
-msgid "200 - grid layout search btn pos x"
+msgid "160 - grid layout search btn pos x"
 msgstr ""
 
-msgid "224 - grid layout search btn pos x widescreen"
+msgid "192 - grid layout search btn pos x widescreen"
 msgstr ""
 
 msgid "13 - grid layout search btn pos y"
 msgstr ""
 
-msgid "240 - grid layout abc/sort btn pos x"
+msgid "200 - grid layout abc/sort btn pos x"
 msgstr ""
 
-msgid "256 - grid layout abc/sort btn pos x widescreen"
+msgid "224 - grid layout abc/sort btn pos x widescreen"
 msgstr ""
 
 msgid "13 - grid layout abc/sort btn pos y"
+msgstr ""
+
+msgid "240 - grid layout loadermode btn pos x"
+msgstr ""
+
+msgid "256 - grid layout loadermode btn pos x widescreen"
+msgstr ""
+
+msgid "13 - grid layout loadermode btn pos y"
 msgstr ""
 
 msgid "280 - grid layout category btn pos x"
@@ -382,31 +400,40 @@ msgstr ""
 msgid "640 - game grid layout width"
 msgstr ""
 
-msgid "160 - carousel layout favorite btn pos x"
+msgid "120 - carousel layout favorite btn pos x"
 msgstr ""
 
-msgid "192 - carousel layout favorite btn pos x widescreen"
+msgid "160 - carousel layout favorite btn pos x widescreen"
 msgstr ""
 
 msgid "13 - carousel layout favorite btn pos y"
 msgstr ""
 
-msgid "200 - carousel layout search btn pos x"
+msgid "160 - carousel layout search btn pos x"
 msgstr ""
 
-msgid "224 - carousel layout search btn pos x widescreen"
+msgid "192 - carousel layout search btn pos x widescreen"
 msgstr ""
 
 msgid "13 - carousel layout search btn pos y"
 msgstr ""
 
-msgid "240 - carousel layout abc/sort btn pos x"
+msgid "200 - carousel layout abc/sort btn pos x"
 msgstr ""
 
-msgid "256 - carousel layout abc/sort btn pos x widescreen"
+msgid "224 - carousel layout abc/sort btn pos x widescreen"
 msgstr ""
 
 msgid "13 - carousel layout abc/sort btn pos y"
+msgstr ""
+
+msgid "240 - carousel layout loadermode btn pos x"
+msgstr ""
+
+msgid "256 - carousel layout loadermode btn pos x widescreen"
+msgstr ""
+
+msgid "13 - carousel layout loadermode btn pos y"
 msgstr ""
 
 msgid "280 - carousel layout category btn pos x"

@@ -24,11 +24,14 @@ extern "C"
 			/* Padding */
 			u8 is_ciso;
 
-			/* Unused, on channel list mode this is the full 64 bit tid and zeros */
+			/* Unused, on channel list mode this is the full 64 bit tid */
 			u64 tid;
 
+			/* Unused, using in loader internally to detect title type */
+			u8 type;
+
 			/* rest of unused */
-			u8 unused[5];
+			u8 unused[4];
 
 			/* Magic word */
 			u32 magic;

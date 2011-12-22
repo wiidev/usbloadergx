@@ -129,7 +129,6 @@ class CSettings
 		std::vector<u32> EnabledCategories;
 		u8 EntryIOS;
 		short NandEmuMode;
-		short NandEmuChanMode;
 		short UseSystemFont;
 		short Hooktype;
 		short WiirdDebugger;
@@ -138,6 +137,9 @@ class CSettings
 		short RememberUnlock;
 		short LoaderMode;
 		short SearchMode;
+
+		// This variable is not saved to the settings file
+		bool FirstTimeRun;
 	protected:
 		bool ValidVersion(FILE * file);
 		bool SetSetting(char *name, char *value);

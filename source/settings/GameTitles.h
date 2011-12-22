@@ -35,7 +35,7 @@ class CGameTitles
 		//! Get possible number of players for this game
 		int GetPlayersCount(const char * id) const;
 		//! Load Game Titles from GameTDB
-		void LoadTitlesFromGameTDB(const char * path, bool forceCacheReload = false);
+		void LoadTitlesFromGameTDB(const char * path, bool forceCacheReload = false, bool removeUnused = false);
 		//! Set default game titles
 		void SetDefault();
 		//! Free memory and remove all titles - Same as SetDefault()
@@ -43,7 +43,7 @@ class CGameTitles
 	protected:
 		u32 ReadCachedTitles(const char * path);
 		void WriteCachedTitles(const char * path);
-		void RemoveUnusedCache(std::vector<std::string> &MissingTitles);
+		void GetMissingTitles(std::vector<std::string> &MissingTitles, bool removeUnused);
 
 		std::vector<GameTitle> TitleList;
 };

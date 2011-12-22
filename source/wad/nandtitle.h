@@ -97,9 +97,9 @@ class NandTitle
 
 		bool GetName(u64 tid, int language, wchar_t* name);
 
-		static int LoadFileFromNand(const char *filepath, u8 **outbuffer, u32 *outfilesize, bool isfsInit = true);
-		static int ExtractFile(const char *nandPath, const char *filepath, bool isfsInit = true);
-		static int ExtractDir(const char *wiipath, const char *filepath, bool isfsInit = true);
+		static int LoadFileFromNand(const char *filepath, u8 **outbuffer, u32 *outfilesize);
+		static int ExtractFile(const char *nandPath, const char *filepath);
+		static int ExtractDir(const char *wiipath, const char *filepath);
 	private:
 		static int InternalExtractDir(char *nandPath, std::string &filepath);
 

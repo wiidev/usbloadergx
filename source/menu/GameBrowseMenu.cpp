@@ -10,6 +10,7 @@
 #include "prompts/DiscBrowser.h"
 #include "prompts/GameWindow.hpp"
 #include "prompts/CategorySwitchPrompt.hpp"
+#include "prompts/CheckboxPrompt.hpp"
 #include "themes/CTheme.h"
 #include "language/gettext.h"
 #include "usbloader/wbfs.h"
@@ -95,6 +96,7 @@ GameBrowseMenu::GameBrowseMenu()
 	imgUnlock_gray = Resources::GetImageData("unlock_gray.png");
 	imgCategory = Resources::GetImageData("category.png");
 	imgCategory_gray = Resources::GetImageData("category_gray.png");
+	imgLoaderMode = Resources::GetImageData("loader_mode.png");
 
 	homebrewImgData = Resources::GetImageData("browser.png");
 	homebrewImgDataOver = Resources::GetImageData("browser_over.png");
@@ -213,8 +215,17 @@ GameBrowseMenu::GameBrowseMenu()
 	sortBtn = new GuiButton(sortBtnImg, sortBtnImg, ALIGN_LEFT, ALIGN_TOP, 0, 0, trigA, btnSoundOver, btnSoundClick2, 1, sortBtnTT, -15, 52, 0, 3);
 	sortBtn->SetSelectable(false);
 
+	loaderModeBtnTT = new GuiTooltip(tr("Select loader mode"));
+	if (Settings.wsprompt) loaderModeBtnTT->SetWidescreen(Settings.widescreen);
+	loaderModeBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
+
+	loaderModeBtnImg = new GuiImage(imgLoaderMode);
+	loaderModeBtnImg->SetWidescreen(Settings.widescreen);
+	loaderModeBtn = new GuiButton(loaderModeBtnImg, loaderModeBtnImg, ALIGN_LEFT, ALIGN_TOP, 0, 0, trigA, btnSoundOver, btnSoundClick2, 1, loaderModeBtnTT, -15, 52, 0, 3);
+	loaderModeBtn->SetSelectable(false);
+
 	categBtnTT = new GuiTooltip(tr("Select game categories"));
-	if (Settings.wsprompt) sortBtnTT->SetWidescreen(Settings.widescreen);
+	if (Settings.wsprompt) categBtnTT->SetWidescreen(Settings.widescreen);
 	categBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
 
 	categBtnImg = new GuiImage(imgCategory);
@@ -387,6 +398,7 @@ GameBrowseMenu::~GameBrowseMenu()
 	delete imgUnlock_gray;
 	delete imgCategory;
 	delete imgCategory_gray;
+	delete imgLoaderMode;
 	delete homebrewImgData;
 	delete homebrewImgDataOver;
 	delete gameCover;
@@ -425,6 +437,7 @@ GameBrowseMenu::~GameBrowseMenu()
 	delete dvdBtnImg_g;
 	delete categBtnImg;
 	delete categBtnImg_g;
+	delete loaderModeBtnImg;
 	delete homebrewImg;
 	delete homebrewImgOver;
 	delete gameCoverImg;
@@ -452,6 +465,7 @@ GameBrowseMenu::~GameBrowseMenu()
 	delete lockBtn;
 	delete dvdBtn;
 	delete categBtn;
+	delete loaderModeBtn;
 	delete homebrewBtn;
 	delete DownloadBtn;
 	delete idBtn;
@@ -470,6 +484,7 @@ GameBrowseMenu::~GameBrowseMenu()
 	delete lockBtnTT;
 	delete dvdBtnTT;
 	delete categBtnTT;
+	delete loaderModeBtnTT;
 	delete homebrewBtnTT;
 	delete DownloadBtnTT;
 	delete IDBtnTT;
@@ -624,23 +639,25 @@ void GameBrowseMenu::ReloadBrowser()
 		carouselBtn->SetImage(carouselBtnImg_g);
 		carouselBtn->SetImageOver(carouselBtnImg_g);
 
-		favoriteBtn->SetPosition(Settings.widescreen ? thInt("256 - list layout favorite btn pos x widescreen") : thInt("220 - list layout favorite btn pos x"),
+		favoriteBtn->SetPosition(Settings.widescreen ? thInt("230 - list layout favorite btn pos x widescreen") : thInt("188 - list layout favorite btn pos x"),
 								thInt("13 - list layout favorite btn pos y"));
-		searchBtn->SetPosition(Settings.widescreen ? thInt("288 - list layout search btn pos x widescreen") : thInt("260 - list layout search btn pos x"),
+		searchBtn->SetPosition(Settings.widescreen ? thInt("262 - list layout search btn pos x widescreen") : thInt("228 - list layout search btn pos x"),
 								thInt("13 - list layout search btn pos y"));
-		sortBtn->SetPosition(Settings.widescreen ? thInt("320 - list layout abc/sort btn pos x widescreen") : thInt("300 - list layout abc/sort btn pos x"),
+		sortBtn->SetPosition(Settings.widescreen ? thInt("294 - list layout abc/sort btn pos x widescreen") : thInt("268 - list layout abc/sort btn pos x"),
 								thInt("13 - list layout abc/sort btn pos y"));
-		categBtn->SetPosition(Settings.widescreen ? thInt("352 - list layout category btn pos x widescreen") : thInt("340 - list layout category btn pos x"),
+		loaderModeBtn->SetPosition(Settings.widescreen ? thInt("326 - list layout loadermode btn pos x widescreen") : thInt("308 - list layout loadermode btn pos x"),
+								thInt("13 - list layout loadermode btn pos y"));
+		categBtn->SetPosition(Settings.widescreen ? thInt("358 - list layout category btn pos x widescreen") : thInt("348 - list layout category btn pos x"),
 								thInt("13 - list layout category btn pos y"));
-		listBtn->SetPosition(Settings.widescreen ? thInt("384 - list layout list btn pos x widescreen") : thInt("380 - list layout list btn pos x"),
+		listBtn->SetPosition(Settings.widescreen ? thInt("390 - list layout list btn pos x widescreen") : thInt("388 - list layout list btn pos x"),
 								thInt("13 - list layout list btn pos y"));
-		gridBtn->SetPosition(Settings.widescreen ? thInt("416 - list layout grid btn pos x widescreen") : thInt("420 - list layout grid btn pos x"),
+		gridBtn->SetPosition(Settings.widescreen ? thInt("422 - list layout grid btn pos x widescreen") : thInt("428 - list layout grid btn pos x"),
 								thInt("13 - list layout grid btn pos y"));
-		carouselBtn->SetPosition(Settings.widescreen ? thInt("448 - list layout carousel btn pos x widescreen") : thInt("460 - list layout carousel btn pos x"),
+		carouselBtn->SetPosition(Settings.widescreen ? thInt("454 - list layout carousel btn pos x widescreen") : thInt("468 - list layout carousel btn pos x"),
 								thInt("13 - list layout carousel btn pos y"));
-		lockBtn->SetPosition(Settings.widescreen ? thInt("480 - list layout lock btn pos x widescreen") : thInt("500 - list layout lock btn pos x"),
+		lockBtn->SetPosition(Settings.widescreen ? thInt("486 - list layout lock btn pos x widescreen") : thInt("508 - list layout lock btn pos x"),
 								thInt("13 - list layout lock btn pos y"));
-		dvdBtn->SetPosition(Settings.widescreen ? thInt("512 - list layout dvd btn pos x widescreen") : thInt("540 - list layout dvd btn pos x"),
+		dvdBtn->SetPosition(Settings.widescreen ? thInt("518 - list layout dvd btn pos x widescreen") : thInt("548 - list layout dvd btn pos x"),
 								thInt("13 - list layout dvd btn pos y"));
 
 		gameBrowser = new GuiGameList(thInt("396 - game list layout width"), thInt("280 - game list layout height"), Settings.GameListOffset);
@@ -659,12 +676,14 @@ void GameBrowseMenu::ReloadBrowser()
 		carouselBtn->SetImage(carouselBtnImg_g);
 		carouselBtn->SetImageOver(carouselBtnImg_g);
 
-		favoriteBtn->SetPosition(Settings.widescreen ? thInt("192 - grid layout favorite btn pos x widescreen") : thInt("160 - grid layout favorite btn pos x"),
+		favoriteBtn->SetPosition(Settings.widescreen ? thInt("160 - grid layout favorite btn pos x widescreen") : thInt("120 - grid layout favorite btn pos x"),
 								thInt("13 - grid layout favorite btn pos y"));
-		searchBtn->SetPosition(Settings.widescreen ? thInt("224 - grid layout search btn pos x widescreen") : thInt("200 - grid layout search btn pos x"),
+		searchBtn->SetPosition(Settings.widescreen ? thInt("192 - grid layout search btn pos x widescreen") : thInt("160 - grid layout search btn pos x"),
 								thInt("13 - grid layout search btn pos y"));
-		sortBtn->SetPosition(Settings.widescreen ? thInt("256 - grid layout abc/sort btn pos x widescreen") : thInt("240 - grid layout abc/sort btn pos x"),
+		sortBtn->SetPosition(Settings.widescreen ? thInt("224 - grid layout abc/sort btn pos x widescreen") : thInt("200 - grid layout abc/sort btn pos x"),
 								thInt("13 - grid layout abc/sort btn pos y"));
+		loaderModeBtn->SetPosition(Settings.widescreen ? thInt("256 - grid layout loadermode btn pos x widescreen") : thInt("240 - grid layout loadermode btn pos x"),
+								thInt("13 - grid layout loadermode btn pos y"));
 		categBtn->SetPosition(Settings.widescreen ? thInt("288 - grid layout category btn pos x widescreen") : thInt("280 - grid layout category btn pos x"),
 								thInt("13 - grid layout category btn pos y"));
 		listBtn->SetPosition(Settings.widescreen ? thInt("320 - grid layout list btn pos x widescreen") : thInt("320 - grid layout list btn pos x"),
@@ -693,12 +712,14 @@ void GameBrowseMenu::ReloadBrowser()
 		gridBtn->SetImage(gridBtnImg_g);
 		gridBtn->SetImageOver(gridBtnImg_g);
 
-		favoriteBtn->SetPosition(Settings.widescreen ? thInt("192 - carousel layout favorite btn pos x widescreen") : thInt("160 - carousel layout favorite btn pos x"),
+		favoriteBtn->SetPosition(Settings.widescreen ? thInt("160 - carousel layout favorite btn pos x widescreen") : thInt("120 - carousel layout favorite btn pos x"),
 								thInt("13 - carousel layout favorite btn pos y"));
-		searchBtn->SetPosition(Settings.widescreen ? thInt("224 - carousel layout search btn pos x widescreen") : thInt("200 - carousel layout search btn pos x"),
+		searchBtn->SetPosition(Settings.widescreen ? thInt("192 - carousel layout search btn pos x widescreen") : thInt("160 - carousel layout search btn pos x"),
 								thInt("13 - carousel layout search btn pos y"));
-		sortBtn->SetPosition(Settings.widescreen ? thInt("256 - carousel layout abc/sort btn pos x widescreen") : thInt("240 - carousel layout abc/sort btn pos x"),
+		sortBtn->SetPosition(Settings.widescreen ? thInt("224 - carousel layout abc/sort btn pos x widescreen") : thInt("200 - carousel layout abc/sort btn pos x"),
 								thInt("13 - carousel layout abc/sort btn pos y"));
+		loaderModeBtn->SetPosition(Settings.widescreen ? thInt("256 - carousel layout loadermode btn pos x widescreen") : thInt("240 - carousel layout loadermode btn pos x"),
+								thInt("13 - carousel layout loadermode btn pos y"));
 		categBtn->SetPosition(Settings.widescreen ? thInt("288 - carousel layout category btn pos x widescreen") : thInt("280 - carousel layout category btn pos x"),
 								thInt("13 - carousel layout category btn pos y"));
 		listBtn->SetPosition(Settings.widescreen ? thInt("320 - carousel layout list btn pos x widescreen") : thInt("320 - carousel layout list btn pos x"),
@@ -747,6 +768,7 @@ void GameBrowseMenu::ReloadBrowser()
 	Append(categBtn);
 	Append(listBtn);
 	Append(gridBtn);
+	Append(loaderModeBtn);
 	Append(carouselBtn);
 	Append(lockBtn);
 	Append(dvdBtn);
@@ -1087,6 +1109,34 @@ int GameBrowseMenu::MainLoop()
 		}
 	}
 
+	else if(loaderModeBtn->GetState() == STATE_CLICKED)
+	{
+		if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_LOADER_MODE_BUTTON))
+		{
+			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			loaderModeBtn->ResetState();
+			return returnMenu;
+		}
+
+		int choice = CheckboxWindow(tr( "Select titles sources." ), 0, tr( "Wii Games" ), tr( "Nand Channels" ), tr("EmuNand Channels"), 0, 0, 0, Settings.LoaderMode);
+		if(choice != CheckedNone && choice != Settings.LoaderMode)
+		{
+			Settings.LoaderMode = choice;
+
+			if((Settings.LoaderMode & MODE_WIIGAMES) && (gameList.GameCount() == 0))
+			{
+				WBFS_ReInit(WBFS_DEVICE_USB);
+				gameList.ReadGameList();
+			}
+
+			wString oldFilter(gameList.GetCurrentFilter());
+			GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false, false);
+			gameList.FilterList(oldFilter.c_str());
+			ReloadBrowser();
+		}
+		loaderModeBtn->ResetState();
+	}
+
 	else if (Settings.gameDisplay == LIST_MODE && idBtn->GetState() == STATE_CLICKED)
 	{
 		gprintf("\tidBtn Clicked\n");
@@ -1372,13 +1422,24 @@ int GameBrowseMenu::OpenClickedGame()
 			if (RunGame && (game_cfg->ocarina == ON || (game_cfg->ocarina == INHERIT && Settings.ocarina == ON)))
 				CheckOcarina(IDfull);
 
+			if(header->type == TYPE_GAME_EMUNANDCHAN)
+			{
+				int gameIOS = game_cfg->ios == INHERIT ? Settings.cios : game_cfg->ios;
+				if(!IosLoader::GetIOSInfo(gameIOS))
+				{
+					ShowError(tr("Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."));
+					RunGame = false;
+					returnHere = true;
+				}
+			}
+
 			if(RunGame)
 			{
 				GameStatistics.SetPlayCount(header->id, GameStatistics.GetPlayCount(header->id)+1);
 				GameStatistics.Save();
 
 				//Just calling that shuts down everything and starts game
-				GameBooter::BootGame(IDfull);
+				GameBooter::BootGame(header);
 			}
 		}
 		else if (choice == 2)

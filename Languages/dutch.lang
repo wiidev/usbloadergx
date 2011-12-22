@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-20 21:54+0100\n"
+"POT-Creation-Date: 2011-12-22 23:25+0100\n"
 "PO-Revision-Date: 2011-06-30 14:22+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -246,6 +246,9 @@ msgstr "Blokkeer Harddisk instellingen"
 
 msgid "Block IOS Reload"
 msgstr "Stop IOS herladen"
+
+msgid "Block Loader Mode Button"
+msgstr ""
 
 msgid "Block Loader Settings"
 msgstr "Blokkeer Loader Instellingen"
@@ -609,6 +612,12 @@ msgstr "FOUT:"
 
 msgid "ERROR: Can't set up theme."
 msgstr "FOUT: Kan thema niet instellen"
+
+msgid "EmuNand Channels"
+msgstr ""
+
+msgid "Emulated Nand"
+msgstr ""
 
 msgid "English"
 msgstr "Engels"
@@ -999,6 +1008,9 @@ msgstr "Locatie Taalbestanden"
 msgid "Languagepath changed."
 msgstr "Locatie taal gewijzigd."
 
+msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgstr ""
+
 msgid "Left"
 msgstr "Links"
 
@@ -1081,7 +1093,7 @@ msgstr "Muziek Herhaal Mode"
 msgid "Music Volume"
 msgstr "Muziekvolume"
 
-msgid "Nand Channel Emulation"
+msgid "Nand Channels"
 msgstr ""
 
 msgid "Nand Emu Channel Path"
@@ -1303,6 +1315,9 @@ msgstr "Willekeurige Map Muziek"
 msgid "Reading WAD data... Ok!"
 msgstr "WAD data lezen... Ok!"
 
+msgid "Real Nand"
+msgstr ""
+
 msgid "Receiving file from:"
 msgstr "Bestand ontvangen van:"
 
@@ -1404,6 +1419,12 @@ msgstr "Selecteer een DOL van Spel"
 
 msgid "Select game categories"
 msgstr "Selecteer spel categorieën"
+
+msgid "Select loader mode"
+msgstr ""
+
+msgid "Select titles sources."
+msgstr ""
 
 msgid "Sept"
 msgstr "Sep"
@@ -1700,6 +1721,9 @@ msgstr "Breedbeeld Factor"
 
 msgid "Widescreen Fix"
 msgstr "Breedbeeld"
+
+msgid "Wii Games"
+msgstr ""
 
 msgid "Wii Menu"
 msgstr ""

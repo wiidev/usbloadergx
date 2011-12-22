@@ -70,7 +70,7 @@ static int PartitionChoice()
 	int choice = WindowPrompt(tr( "No WBFS or FAT/NTFS/EXT partition found" ), tr( "You can select or format a partition or use the channel loader mode." ), tr( "Select" ), tr( "Format" ), tr( "Channels" ));
 	if (choice == 0)
 	{
-		Settings.LoaderMode = LOAD_CHANNELS;
+		Settings.LoaderMode = MODE_ALL;
 		return 0;
 	}
 	else if(choice == 1)
@@ -114,28 +114,33 @@ int MountGamePartition(bool ShowGUI)
 	gprintf("MountGamePartition()\n");
 
 	s32 wbfsinit = WBFS_Init(WBFS_DEVICE_USB);
-	if (wbfsinit < 0 && Settings.LoaderMode == LOAD_GAMES)
+
+	if(Settings.LoaderMode & MODE_WIIGAMES)
 	{
-		if(ShowGUI)
-			ShowError("%s %s", tr( "USB Device not found." ), tr("Switching to channel list mode."));
-
-		Settings.LoaderMode = LOAD_CHANNELS;
-	}
-	else
-	{
-		if(Settings.MultiplePartitions)
-			ret = WBFS_OpenAll();
-		else
-			ret = WBFS_OpenPart(Settings.partition);
-
-		if(ret < 0)
-			ret = FindGamePartition();
-
-		if(ret < 0 && Settings.LoaderMode == LOAD_GAMES)
+		if (wbfsinit < 0)
 		{
-			Settings.LoaderMode = LOAD_CHANNELS;
 			if(ShowGUI)
-				ret = PartitionChoice();
+				ShowError("%s %s", tr( "USB Device not found." ), tr("Switching to channel list mode."));
+
+			Settings.LoaderMode = MODE_ALL;
+		}
+		else
+		{
+			if(Settings.MultiplePartitions)
+				ret = WBFS_OpenAll();
+			else
+				ret = WBFS_OpenPart(Settings.partition);
+
+			if(ret < 0)
+				ret = FindGamePartition();
+
+			if(ret < 0)
+			{
+				if(ShowGUI)
+					PartitionChoice();
+				else
+					Settings.LoaderMode = MODE_ALL;
+			}
 		}
 	}
 

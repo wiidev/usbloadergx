@@ -25,7 +25,7 @@ static const char *serverURLCustomDiscs = "http://art.gametdb.com/wii/disccustom
 void ImageDownloader::DownloadImages()
 {
 	int choice = CheckboxWindow(tr( "Cover Download" ), 0, tr( "3D Covers" ), tr( "Flat Covers" ), tr("Full HQ Covers"), tr("Full LQ Covers"), tr( "Original Discarts" ), tr( "Custom Discarts" )); // ask for download choice
-	if (choice == 0)
+	if (choice == 0 || choice == CheckedNone)
 		return;
 
 	ImageDownloader Downloader;

@@ -18,11 +18,12 @@
 #define GAMEBOOTER_HPP_
 
 #include <gctypes.h>
+#include "usbloader/disc.h"
 
 class GameBooter
 {
 	public:
-		static int BootGame(const char * gameID);
+		static int BootGame(struct discHdr *gameHdr);
 		static int BootGCMode();
 	private:
 		static int FindDiscHeader(const char * gameID, struct discHdr &gameHeader);

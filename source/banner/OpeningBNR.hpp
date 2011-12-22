@@ -61,12 +61,12 @@ class OpeningBNR
 		OpeningBNR();
 		~OpeningBNR();
 		bool Load(const u8 * gameID);
-		bool Load(const u64 &tid);
+		bool Load(const u64 &tid, const char *pathPrefix);
 		const u16 * GetIMETTitle(int lang);
 		const u16 * GetIMETTitle(const u8 * gameID, int lang) { Load(gameID); return GetIMETTitle(lang); };
 		const u8 * GetBannerSound(u32 * size);
 		const u8 * GetBannerSound(const u8 * gameID, u32 * size) { Load(gameID); return GetBannerSound(size); };
-		const u8 * GetBannerSound(const u64 &tid, u32 * size) { Load(tid); return GetBannerSound(size); };
+		const u8 * GetBannerSound(const u64 &tid, u32 * size, const char *pathPrefix) { Load(tid, pathPrefix); return GetBannerSound(size); };
 	private:
 		IMETHeader *imetHdr;
 		char gameID[7];

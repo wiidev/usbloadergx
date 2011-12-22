@@ -118,7 +118,8 @@ s32 IosLoader::LoadGameCios(s32 ios)
 	ret = ReloadIosSafe(ios);
 
 	// Remount devices after reloading IOS.
-	DeviceHandler::Instance()->MountAll();
+	DeviceHandler::Instance()->MountSD();
+	DeviceHandler::Instance()->MountAllUSB(true);
 	Disc_Init();
 
 	return ret;

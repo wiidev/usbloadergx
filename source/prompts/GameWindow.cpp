@@ -78,8 +78,8 @@ GameWindow::GameWindow(int Selected)
 	}
 
 	sizeTxt = new GuiText((char*) NULL, 22, thColor("r=0 g=0 b=0 a=255 - game window size text color"));
-	sizeTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
-	sizeTxt->SetPosition(-60, 70);
+	sizeTxt->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
+	sizeTxt->SetPosition(135, 70);
 
 	diskImg = new GuiDiskCover;
 	diskImg->SetWidescreen(Settings.widescreen);
@@ -172,9 +172,9 @@ GameWindow::GameWindow(int Selected)
 	Append(backBtn);
 	Append(detailsBtn);
 	Append(nameBtn);
+	Append(sizeTxt);
 	if (!mountMethod)//stuff we don't show if it is a DVD mounted
 	{
-		Append(sizeTxt);
 		Append(btnLeft);
 		Append(btnRight);
 		for(int i = 0; i < FAVORITE_STARS; ++i)
@@ -283,12 +283,11 @@ void GameWindow::LoadGameSound(const struct discHdr * header)
 	u32 gameSoundDataLen;
 	const u8 *gameSoundData = NULL;
 
-	if(Settings.LoaderMode != LOAD_CHANNELS)
-		gameSoundData = BNRInstance::Instance()->GetBannerSound(header->id, &gameSoundDataLen);
+	if(header->tid != 0)
+		gameSoundData = BNRInstance::Instance()->GetBannerSound(header->tid, &gameSoundDataLen,
+																(header->type == TYPE_GAME_EMUNANDCHAN) ? Settings.NandEmuChanPath : "");
 	else
-	{
-		gameSoundData = BNRInstance::Instance()->GetBannerSound(header->tid, &gameSoundDataLen);
-	}
+		gameSoundData = BNRInstance::Instance()->GetBannerSound(header->id, &gameSoundDataLen);
 
 	if (gameSoundData)
 	{
@@ -425,7 +424,15 @@ void GameWindow::ChangeGame(int EffectDirection)
 
 	HaltGui();
 
-	if (!mountMethod && Settings.LoaderMode != LOAD_CHANNELS)
+	if (header->tid != 0)
+	{
+		if(header->type == TYPE_GAME_NANDCHAN)
+			sizeTxt->SetTextf(tr("Real Nand"));
+		else if(header->type == TYPE_GAME_EMUNANDCHAN)
+			sizeTxt->SetTextf(tr("Emulated Nand"));
+
+	}
+	else if (!mountMethod)
 	{
 		float size = 0.0f;
 		WBFS_GameSize(header->id, &size);

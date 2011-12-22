@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-20 21:54+0100\n"
+"POT-Creation-Date: 2011-12-22 23:25+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -246,6 +246,9 @@ msgstr "Bloquer Param. Disques durs"
 
 msgid "Block IOS Reload"
 msgstr "Bloquer IOS reload"
+
+msgid "Block Loader Mode Button"
+msgstr ""
 
 msgid "Block Loader Settings"
 msgstr "Bloquer Param. du Loader"
@@ -609,6 +612,12 @@ msgstr "ERREUR:"
 
 msgid "ERROR: Can't set up theme."
 msgstr "ERREUR: Configuration thème impossible."
+
+msgid "EmuNand Channels"
+msgstr ""
+
+msgid "Emulated Nand"
+msgstr ""
 
 msgid "English"
 msgstr "Anglais"
@@ -999,6 +1008,9 @@ msgstr "Dossier langue"
 msgid "Languagepath changed."
 msgstr "Dossier langue changé"
 
+msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgstr ""
+
 msgid "Left"
 msgstr "Gauche"
 
@@ -1081,8 +1093,8 @@ msgstr "Type de boucle"
 msgid "Music Volume"
 msgstr "Volume musique"
 
-msgid "Nand Channel Emulation"
-msgstr "Émulation Nand Chaînes"
+msgid "Nand Channels"
+msgstr ""
 
 msgid "Nand Emu Channel Path"
 msgstr "Dossier ÉmuNand Chaînes"
@@ -1303,6 +1315,9 @@ msgstr "Aléatoire"
 msgid "Reading WAD data... Ok!"
 msgstr "Lecture données WAD... OK!"
 
+msgid "Real Nand"
+msgstr ""
+
 msgid "Receiving file from:"
 msgstr "Réception du fichier de:"
 
@@ -1404,6 +1419,12 @@ msgstr "Sélectionner un DOL à partir du jeu"
 
 msgid "Select game categories"
 msgstr "Filtrer par catégories de jeux"
+
+msgid "Select loader mode"
+msgstr ""
+
+msgid "Select titles sources."
+msgstr ""
 
 msgid "Sept"
 msgstr ""
@@ -1701,6 +1722,9 @@ msgstr "Échelle interface 16:9"
 msgid "Widescreen Fix"
 msgstr "16:9"
 
+msgid "Wii Games"
+msgstr ""
+
 msgid "Wii Menu"
 msgstr "Menu Wii"
 
@@ -1802,6 +1826,9 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "Nand Channel Emulation"
+#~ msgstr "Émulation Nand Chaînes"
 
 #~ msgid "New Disc Detected"
 #~ msgstr "Nouveau DVD détecté"

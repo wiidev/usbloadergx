@@ -425,7 +425,7 @@ u64 NandTitle::FindU32(const char *s)
 	return 0;
 }
 
-int NandTitle::LoadFileFromNand(const char *filepath, u8 **outbuffer, u32 *outfilesize, bool isfsInit)
+int NandTitle::LoadFileFromNand(const char *filepath, u8 **outbuffer, u32 *outfilesize)
 {
 	if(!filepath)
 		return -1;
@@ -434,13 +434,10 @@ int NandTitle::LoadFileFromNand(const char *filepath, u8 **outbuffer, u32 *outfi
 	if(!stats)
 		return IPC_ENOMEM;
 
-	if(isfsInit) ISFS_Initialize();
-
 	int fd = ISFS_Open(filepath, ISFS_OPEN_READ);
 	if(fd < 0)
 	{
 		free(stats);
-		if(isfsInit) ISFS_Deinitialize();
 		return fd;
 	}
 
@@ -449,7 +446,6 @@ int NandTitle::LoadFileFromNand(const char *filepath, u8 **outbuffer, u32 *outfi
 	{
 		free(stats);
 		ISFS_Close(fd);
-		if(isfsInit) ISFS_Deinitialize();
 		return ret;
 	}
 
@@ -461,14 +457,12 @@ int NandTitle::LoadFileFromNand(const char *filepath, u8 **outbuffer, u32 *outfi
 	if(!buffer)
 	{
 		ISFS_Close(fd);
-		if(isfsInit) ISFS_Deinitialize();
 		return IPC_ENOMEM;
 	}
 
 	ret = ISFS_Read(fd, buffer, filesize);
 
 	ISFS_Close(fd);
-	if(isfsInit) ISFS_Deinitialize();
 
 	if (ret < 0)
 	{
@@ -523,7 +517,7 @@ static void ConvertInvalidCharacters(std::string &filepath)
 	}
 }
 
-int NandTitle::ExtractFile(const char *nandPath, const char *filepath, bool isfsInit)
+int NandTitle::ExtractFile(const char *nandPath, const char *filepath)
 {
 	if(!nandPath || !filepath)
 		return -1;
@@ -559,9 +553,6 @@ int NandTitle::ExtractFile(const char *nandPath, const char *filepath, bool isfs
 		free(buffer);
 		return -666;
 	}
-
-	if(isfsInit)
-		ISFS_Initialize();
 
 	do
 	{
@@ -614,9 +605,6 @@ int NandTitle::ExtractFile(const char *nandPath, const char *filepath, bool isfs
 	if(fd >= 0)
 		ISFS_Close(fd);
 
-	if(isfsInit)
-		ISFS_Deinitialize();
-
 	if(ProgressCanceled())
 		return PROGRESS_CANCELED;
 
@@ -668,7 +656,7 @@ int NandTitle::InternalExtractDir(char *nandPath, std::string &filepath)
 			std::string filepathCpy = filepath;
 			ConvertInvalidCharacters(filepathCpy);
 
-			int res = ExtractFile(nandPath, filepathCpy.c_str(), false);
+			int res = ExtractFile(nandPath, filepathCpy.c_str());
 			if(res < 0) {
 				gprintf("ExtractFile: Error %i occured on file extract: %s\n", res, nandPath);
 				ret = -2;
@@ -696,7 +684,7 @@ int NandTitle::InternalExtractDir(char *nandPath, std::string &filepath)
 	return ret;
 }
 
-int NandTitle::ExtractDir(const char *nandPath, const char *filepath, bool isfsInit)
+int NandTitle::ExtractDir(const char *nandPath, const char *filepath)
 {
 	if(!filepath || !nandPath)
 		return -1;
@@ -708,13 +696,7 @@ int NandTitle::ExtractDir(const char *nandPath, const char *filepath, bool isfsI
 
 	snprintf(internNandPath, ISFS_MAXPATH, nandPath);
 
-	if(isfsInit)
-		ISFS_Initialize();
-
 	int ret = InternalExtractDir(internNandPath, internFilePath);
-
-	if(isfsInit)
-		ISFS_Deinitialize();
 
 	free(internNandPath);
 

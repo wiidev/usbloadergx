@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-20 21:54+0100\n"
+"POT-Creation-Date: 2011-12-22 23:25+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -246,6 +246,9 @@ msgstr "Blokkér harddisk innstillinger"
 
 msgid "Block IOS Reload"
 msgstr "Blokkér IOS Reload"
+
+msgid "Block Loader Mode Button"
+msgstr ""
 
 msgid "Block Loader Settings"
 msgstr "Blokkér loader innstillinger"
@@ -609,6 +612,12 @@ msgstr "FEIL:"
 
 msgid "ERROR: Can't set up theme."
 msgstr "FEIL: Kan ikke laste tema."
+
+msgid "EmuNand Channels"
+msgstr ""
+
+msgid "Emulated Nand"
+msgstr ""
 
 msgid "English"
 msgstr "Engelsk"
@@ -999,6 +1008,9 @@ msgstr "Språkfil sti"
 msgid "Languagepath changed."
 msgstr "Språksti endret."
 
+msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgstr ""
+
 msgid "Left"
 msgstr "Venstre"
 
@@ -1081,7 +1093,7 @@ msgstr "Musikk loop modus"
 msgid "Music Volume"
 msgstr "Musikk volum"
 
-msgid "Nand Channel Emulation"
+msgid "Nand Channels"
 msgstr ""
 
 msgid "Nand Emu Channel Path"
@@ -1303,6 +1315,9 @@ msgstr "Tilfeldig musikk fra mappe"
 msgid "Reading WAD data... Ok!"
 msgstr "Leser WAD data... OK!"
 
+msgid "Real Nand"
+msgstr ""
+
 msgid "Receiving file from:"
 msgstr "Mottar fil fra:"
 
@@ -1404,6 +1419,12 @@ msgstr "Velg en DOL fra spill"
 
 msgid "Select game categories"
 msgstr "Velg spillkategorier"
+
+msgid "Select loader mode"
+msgstr ""
+
+msgid "Select titles sources."
+msgstr ""
 
 msgid "Sept"
 msgstr "Sep"
@@ -1700,6 +1721,9 @@ msgstr "Widescreen faktor"
 
 msgid "Widescreen Fix"
 msgstr "Widescreen fiks"
+
+msgid "Wii Games"
+msgstr ""
 
 msgid "Wii Menu"
 msgstr "Wii Meny"

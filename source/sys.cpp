@@ -103,6 +103,7 @@ void AppCleanUp(void)
 	ResourceManager::DestroyInstance();
 
 	WPAD_Shutdown();
+	ISFS_Deinitialize();
 }
 
 void ExitApp(void)

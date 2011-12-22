@@ -279,7 +279,10 @@ void CGameCategories::RemoveCategory(unsigned int id)
 		for(u32 i = 0; i < itr->second.size(); ++i)
 		{
 			if(itr->second[i] == id)
+			{
 				itr->second.erase(itr->second.begin()+ i);
+				--i;
+			}
 		}
 	}
 }

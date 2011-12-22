@@ -46,6 +46,7 @@ CSettings::CSettings()
 	strcpy(BootDevice, "sd:");
 	snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/", BootDevice);
 	this->SetDefault();
+	FirstTimeRun = true;
 }
 
 CSettings::~CSettings()
@@ -97,7 +98,7 @@ void CSettings::SetDefault()
 	cios = BUILD_IOS;
 	gridRows = 3;
 	error002 = 2;
-	partition = -1;
+	partition = 0;
 	discart = DISCARTS_ORIGINALS_CUSTOMS;
 	xflip = XFLIP_NO;
 	quickboot = OFF;
@@ -129,14 +130,13 @@ void CSettings::SetDefault()
 	GameListOffset = 0;
 	sneekVideoPatch = OFF;
 	NandEmuMode = OFF;
-	NandEmuChanMode = OFF;
 	UseSystemFont = ON;
 	Hooktype = 0;
 	WiirdDebugger = OFF;
 	WiirdDebuggerPause = OFF;
 	ShowPlayCount = ON;
 	RememberUnlock = ON;
-	LoaderMode = LOAD_GAMES;
+	LoaderMode = MODE_WIIGAMES;
 	SearchMode = SEARCH_BEGINNING;
 }
 
@@ -167,6 +167,10 @@ bool CSettings::Load()
 		this->ParseLine(line);
 	}
 	fclose(file);
+
+	// A valid config file exists on the loader
+	// meaning it is not the first run of the loader.
+	FirstTimeRun = false;
 
 	return true;
 }
@@ -300,7 +304,6 @@ bool CSettings::Save()
 	fprintf(file, "sneekVideoPatch = %d\n", sneekVideoPatch);
 	fprintf(file, "NandEmuMode = %d\n", NandEmuMode);
 	fprintf(file, "NandEmuPath = %s\n", NandEmuPath);
-	fprintf(file, "NandEmuChanMode = %d\n", NandEmuChanMode);
 	fprintf(file, "NandEmuChanPath = %s\n", NandEmuChanPath);
 	fprintf(file, "UseSystemFont = %d\n", UseSystemFont);
 	fprintf(file, "Hooktype = %d\n", Hooktype);
@@ -617,10 +620,6 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if(strcmp(name, "NandEmuMode") == 0)
 	{
 		if (sscanf(value, "%d", &i) == 1) NandEmuMode = i;
-	}
-	else if(strcmp(name, "NandEmuChanMode") == 0)
-	{
-		if (sscanf(value, "%d", &i) == 1) NandEmuChanMode = i;
 	}
 	else if(strcmp(name, "LoaderMode") == 0)
 	{

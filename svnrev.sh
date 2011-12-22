@@ -34,11 +34,13 @@ EOF
 		echo "svnrev.c created" >&2
 	fi
 	echo >&2
+fi
 
-	rev_new=`expr $rev_new + 1`
-	rev_date=`date -u +%Y%m%d%H%M`
 
-	cat <<EOF > ./HBC/META.XML
+rev_new=`expr $rev_new + 1`
+rev_date=`date -u +%Y%m%d%H%M`
+
+cat <<EOF > ./HBC/META.XML
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 	<app version="1">
 		<name> USB Loader GX</name>
@@ -94,6 +96,3 @@ http://www.gnu.org/software/gettext/gettext.html
 		</long_description>
 	</app>
 EOF
-
-fi
-echo $a

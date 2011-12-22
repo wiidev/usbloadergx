@@ -30,7 +30,7 @@
 class GameLoadSM : public SettingsMenu
 {
 	public:
-		GameLoadSM(const char * GameID);
+		GameLoadSM(struct discHdr *Header);
 		virtual ~GameLoadSM();
 	protected:
 		void SetDefaultConfig();
@@ -38,6 +38,7 @@ class GameLoadSM : public SettingsMenu
 		void SetOptionValues();
 		int GetMenuInternal();
 
+		struct discHdr *Header;
 		GameCFG GameConfig;
 		OptionList GuiOptions;
 

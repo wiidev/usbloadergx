@@ -173,14 +173,9 @@ void CGameTitles::WriteCachedTitles(const char * path)
 	fclose(f);
 }
 
-void CGameTitles::RemoveUnusedCache(std::vector<std::string> &MissingTitles)
+void CGameTitles::GetMissingTitles(std::vector<std::string> &MissingTitles, bool removeUnused)
 {
-	std::vector<struct discHdr> &FullList = gameList.GetFullGameList();
-	if(FullList.empty())
-		gameList.ReadGameList();
-
-	std::vector<struct discHdr> &ChanList = Channels::Instance()->GetDiscHeaderList();
-
+	std::vector<struct discHdr *> &FullList = gameList.GetFilteredList();
 	std::vector<bool> UsedCachedList(TitleList.size(), false);
 
 	for(u32 i = 0; i < FullList.size(); ++i)
@@ -189,7 +184,7 @@ void CGameTitles::RemoveUnusedCache(std::vector<std::string> &MissingTitles)
 
 		for(u32 n = 0; n < TitleList.size(); ++n)
 		{
-			if(strncasecmp(TitleList[n].GameID, (const char *) FullList[i].id, 6) == 0)
+			if(strncasecmp(TitleList[n].GameID, (const char *) FullList[i]->id, 6) == 0)
 			{
 				UsedCachedList[n] = true;
 				isCached = true;
@@ -200,41 +195,25 @@ void CGameTitles::RemoveUnusedCache(std::vector<std::string> &MissingTitles)
 		if(!isCached)
 		{
 			char gameID[7];
-			snprintf(gameID, sizeof(gameID), (const char *) FullList[i].id);
+			snprintf(gameID, sizeof(gameID), (const char *) FullList[i]->id);
 			MissingTitles.push_back(std::string(gameID));
 		}
 	}
 
-	for(u32 i = 0; i < ChanList.size(); ++i)
-	{
-		bool isCached = false;
-
-		for(u32 n = 0; n < TitleList.size(); ++n)
-		{
-			if(strncasecmp(TitleList[n].GameID, (const char *) ChanList[i].id, 4) == 0)
-			{
-				UsedCachedList[n] = true;
-				isCached = true;
-				break;
-			}
-		}
-
-		if(!isCached)
-		{
-			char gameID[7];
-			snprintf(gameID, sizeof(gameID), (const char *) ChanList[i].id);
-			MissingTitles.push_back(std::string(gameID));
-		}
-	}
+	if(!removeUnused)
+		return;
 
 	for(u32 n = 0; n < TitleList.size(); ++n)
 	{
 		if(!UsedCachedList[n])
+		{
 			TitleList.erase(TitleList.begin()+n);
+			n--;
+		}
 	}
 }
 
-void CGameTitles::LoadTitlesFromGameTDB(const char * path, bool forceCacheReload)
+void CGameTitles::LoadTitlesFromGameTDB(const char * path, bool forceCacheReload, bool removeUnused)
 {
 	this->SetDefault();
 
@@ -258,7 +237,8 @@ void CGameTitles::LoadTitlesFromGameTDB(const char * path, bool forceCacheReload
 
 	//! Removed unused cache titles and get the still missing ones
 	std::vector<std::string> MissingTitles;
-	RemoveUnusedCache(MissingTitles);
+	GetMissingTitles(MissingTitles, removeUnused);
+
 	if(MissingTitles.size() == 0)
 	{
 		WriteCachedTitles(Cachepath.c_str());

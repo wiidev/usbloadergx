@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-20 21:54+0100\n"
+"POT-Creation-Date: 2011-12-22 23:25+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -246,6 +246,9 @@ msgstr "HDD設定を制限"
 
 msgid "Block IOS Reload"
 msgstr "IOS再読み込み防止"
+
+msgid "Block Loader Mode Button"
+msgstr ""
 
 msgid "Block Loader Settings"
 msgstr "ローダーの設定を制限"
@@ -609,6 +612,12 @@ msgstr "エラー："
 
 msgid "ERROR: Can't set up theme."
 msgstr "テーマを適用できませんでした"
+
+msgid "EmuNand Channels"
+msgstr ""
+
+msgid "Emulated Nand"
+msgstr ""
 
 msgid "English"
 msgstr "英語"
@@ -999,6 +1008,9 @@ msgstr "言語ファイル"
 msgid "Languagepath changed."
 msgstr "言語のパスを変更しました"
 
+msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgstr ""
+
 msgid "Left"
 msgstr "左ボタンで"
 
@@ -1081,8 +1093,8 @@ msgstr "ループ機能"
 msgid "Music Volume"
 msgstr "BGMの音量"
 
-msgid "Nand Channel Emulation"
-msgstr "NANDチャンネルエミュ"
+msgid "Nand Channels"
+msgstr ""
 
 msgid "Nand Emu Channel Path"
 msgstr "NANDエミュチャンネル"
@@ -1303,6 +1315,9 @@ msgstr "フォルダ内でランダム再生"
 msgid "Reading WAD data... Ok!"
 msgstr "WADﾃﾞｰﾀの読み込み...成功！"
 
+msgid "Real Nand"
+msgstr ""
+
 msgid "Receiving file from:"
 msgstr "ファイルを受信中:"
 
@@ -1404,6 +1419,12 @@ msgstr "ゲームからDOLを選択"
 
 msgid "Select game categories"
 msgstr "ゲームカテゴリを選択"
+
+msgid "Select loader mode"
+msgstr ""
+
+msgid "Select titles sources."
+msgstr ""
 
 msgid "Sept"
 msgstr "9月"
@@ -1701,6 +1722,9 @@ msgstr "ワイド画面の補正率"
 msgid "Widescreen Fix"
 msgstr "普通"
 
+msgid "Wii Games"
+msgstr ""
+
 msgid "Wii Menu"
 msgstr "Wiiメニューへ"
 
@@ -1802,6 +1826,9 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "Nand Channel Emulation"
+#~ msgstr "NANDチャンネルエミュ"
 
 #~ msgid "New Disc Detected"
 #~ msgstr "新しいディスクが検出されました"

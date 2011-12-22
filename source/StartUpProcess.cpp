@@ -188,9 +188,10 @@ int StartUpProcess::Execute()
 
 	if(IosLoader::LoadAppCios() < 0)
 	{
-		SetTextf("Failed loading any cIOS. USB Loader GX requires at least cIOS 222 or 245-250. Exiting...\n");
+		SetTextf("Failed loading any cIOS. USB Loader GX requires at least cIOS 222 or 245-250 to work properly.\n");
 		sleep(5);
-		Sys_BackToLoader();
+		// We can allow now operation without cIOS in channel mode with AHPPROT
+		// Sys_BackToLoader();
 	}
 
 	SetupPads();
@@ -245,9 +246,16 @@ int StartUpProcess::Execute()
 	}
 	else if(Settings.USBPort == 2)
 	{
+		// Right now we support only one port at once
+		Settings.USBPort = 0;
+		/*
 		SetTextf("Mounting USB Port to 1\n");
 		DeviceHandler::Instance()->MountUSBPort1();
+		*/
 	}
+
+	// We only initialize once for the whole session
+	ISFS_Initialize();
 
 	gprintf("\tLoading game categories...%s\n", GameCategories.Load(Settings.ConfigPath) ? "done" : "failed");
 	gprintf("\tLoading font...%s\n", Theme::LoadFont(Settings.ConfigPath) ? "done" : "failed (using default)");
@@ -290,5 +298,5 @@ int StartUpProcess::QuickGameBoot(const char * gameID)
 	GameStatistics.SetPlayCount(header->id, GameStatistics.GetPlayCount(header->id)+1);
 	GameStatistics.Save();
 
-	return GameBooter::BootGame(gameID);
+	return GameBooter::BootGame(header);
 }

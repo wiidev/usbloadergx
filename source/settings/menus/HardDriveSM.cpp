@@ -42,14 +42,14 @@ static const char * OnOffText[] =
 	trNOOP( "ON" )
 };
 
-static const char * InstallToText[INSTALL_TO_MAX] =
+static const char * InstallToText[] =
 {
 	trNOOP( "None" ),
 	trNOOP( "GAMEID_Gamename" ),
 	trNOOP( "Gamename [GAMEID]" )
 };
 
-static const char * SplitSizeText[INSTALL_TO_MAX] =
+static const char * SplitSizeText[] =
 {
 	trNOOP( "No Splitting" ),
 	trNOOP( "Split each 2GB" ),
@@ -113,6 +113,7 @@ HardDriveSM::~HardDriveSM()
 
 		//! Reload the new game titles
 		gameList.ReadGameList();
+		gameList.LoadUnfiltered();
 		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
 	}
 }
@@ -198,7 +199,7 @@ int HardDriveSM::GetMenuInternal()
 			Settings.USBPort = 0;
 		}
 
-		else if (++NewSettingsUSBPort >= 3) // 2 = both ports
+		else if (++NewSettingsUSBPort >= 2) // 2 = both ports
 			NewSettingsUSBPort = 0;
 	}
 

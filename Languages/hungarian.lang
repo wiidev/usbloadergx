@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-20 21:54+0100\n"
+"POT-Creation-Date: 2011-12-22 23:25+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -246,6 +246,9 @@ msgstr ""
 
 msgid "Block IOS Reload"
 msgstr "IOS újratöltés blokkolása"
+
+msgid "Block Loader Mode Button"
+msgstr ""
 
 msgid "Block Loader Settings"
 msgstr ""
@@ -609,6 +612,12 @@ msgstr "HIBA:"
 
 msgid "ERROR: Can't set up theme."
 msgstr "HIBA: Téma nem állítható be"
+
+msgid "EmuNand Channels"
+msgstr ""
+
+msgid "Emulated Nand"
+msgstr ""
 
 msgid "English"
 msgstr "Angol"
@@ -999,6 +1008,9 @@ msgstr ""
 msgid "Languagepath changed."
 msgstr "Nyelvek útvonala megváltozott."
 
+msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgstr ""
+
 msgid "Left"
 msgstr "Balra"
 
@@ -1081,7 +1093,7 @@ msgstr ""
 msgid "Music Volume"
 msgstr "Zene Hangerõ"
 
-msgid "Nand Channel Emulation"
+msgid "Nand Channels"
 msgstr ""
 
 msgid "Nand Emu Channel Path"
@@ -1303,6 +1315,9 @@ msgstr ""
 msgid "Reading WAD data... Ok!"
 msgstr "WAD adat olvasás... Ok!"
 
+msgid "Real Nand"
+msgstr ""
+
 msgid "Receiving file from:"
 msgstr "Fájl fogadása innen:"
 
@@ -1403,6 +1418,12 @@ msgid "Select a DOL from Game"
 msgstr ""
 
 msgid "Select game categories"
+msgstr ""
+
+msgid "Select loader mode"
+msgstr ""
+
+msgid "Select titles sources."
 msgstr ""
 
 msgid "Sept"
@@ -1700,6 +1721,9 @@ msgstr ""
 
 msgid "Widescreen Fix"
 msgstr "Szélesvászon Fix"
+
+msgid "Wii Games"
+msgstr ""
 
 msgid "Wii Menu"
 msgstr "Wii Menü"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-20 21:54+0100\n"
+"POT-Creation-Date: 2011-12-22 23:25+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -246,6 +246,9 @@ msgstr ""
 
 msgid "Block IOS Reload"
 msgstr "阻止IOS重新载入"
+
+msgid "Block Loader Mode Button"
+msgstr ""
 
 msgid "Block Loader Settings"
 msgstr "Loader设置"
@@ -609,6 +612,12 @@ msgstr "错误:"
 
 msgid "ERROR: Can't set up theme."
 msgstr "错误: 无法设置主题."
+
+msgid "EmuNand Channels"
+msgstr ""
+
+msgid "Emulated Nand"
+msgstr ""
 
 msgid "English"
 msgstr "英文"
@@ -999,6 +1008,9 @@ msgstr "语言文件路径"
 msgid "Languagepath changed."
 msgstr "语言文件路径已变更"
 
+msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgstr ""
+
 msgid "Left"
 msgstr "左"
 
@@ -1081,7 +1093,7 @@ msgstr "音乐循环模式"
 msgid "Music Volume"
 msgstr "音量"
 
-msgid "Nand Channel Emulation"
+msgid "Nand Channels"
 msgstr ""
 
 msgid "Nand Emu Channel Path"
@@ -1303,6 +1315,9 @@ msgstr "随机目录音乐"
 msgid "Reading WAD data... Ok!"
 msgstr "读取 WAD 数据... 完成!"
 
+msgid "Real Nand"
+msgstr ""
+
 msgid "Receiving file from:"
 msgstr "接收文件:"
 
@@ -1403,6 +1418,12 @@ msgid "Select a DOL from Game"
 msgstr "从游戏选择DOL"
 
 msgid "Select game categories"
+msgstr ""
+
+msgid "Select loader mode"
+msgstr ""
+
+msgid "Select titles sources."
 msgstr ""
 
 msgid "Sept"
@@ -1700,6 +1721,9 @@ msgstr "宽屏因数"
 
 msgid "Widescreen Fix"
 msgstr "宽屏校正"
+
+msgid "Wii Games"
+msgstr ""
 
 msgid "Wii Menu"
 msgstr "Wii 系统菜单"

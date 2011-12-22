@@ -75,7 +75,10 @@ FeatureSettingsMenu::~FeatureSettingsMenu()
 	{
 		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, true);
 		if(!Settings.titlesOverride)
+		{
 			gameList.ReadGameList();
+			gameList.LoadUnfiltered();
+		}
 	}
 }
 
@@ -320,14 +323,10 @@ int FeatureSettingsMenu::GetMenuInternal()
 				StartProgress(tr("Extracting nand files:"), 0, 0, true, false);
 				ShowProgress(tr("Extracting nand files:"), 0, 0, -1, true, false);
 
-				ISFS_Initialize();
-
 				if(ISFS_ReadDir(nandPath, NULL, &dummy) < 0)
-					ret = NandTitle::ExtractFile(nandPath, filePath, false);
+					ret = NandTitle::ExtractFile(nandPath, filePath);
 				else
-					ret = NandTitle::ExtractDir(nandPath, filePath, false);
-
-				ISFS_Deinitialize();
+					ret = NandTitle::ExtractDir(nandPath, filePath);
 
 				ProgressStop();
 				ProgressCancelEnable(false);

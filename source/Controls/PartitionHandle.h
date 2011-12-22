@@ -131,9 +131,9 @@ class PartitionHandle
 		//! UnMount all Partition
 		void UnMountAll() { for(u32 i = 0; i < PartitionList.size(); ++i) UnMount(i); };
 		//! Get the Mountname
-		const char * MountName(int pos) { if(pos < 0 || pos >= (int) MountNameList.size() || !MountNameList[pos].size()) return NULL; else return MountNameList[pos].c_str(); };
+		const char * MountName(int pos) { if(pos < 0 || pos >= (int) MountNameList.size() || !MountNameList[pos].size()) return ""; else return MountNameList[pos].c_str(); };
 		//! Get the Name of the FileSystem e.g. "FAT32"
-		const char * GetFSName(int pos) { if(valid(pos)) return PartitionList[pos].FSName; else return NULL; };
+		const char * GetFSName(int pos) { if(valid(pos)) return PartitionList[pos].FSName; else return ""; };
 		//! Get the LBA where the partition is located
 		u32 GetLBAStart(int pos) { if(valid(pos)) return PartitionList[pos].LBA_Start; else return 0; };
 		//! Get the partition size in sectors of this partition

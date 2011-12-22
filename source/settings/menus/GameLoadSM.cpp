@@ -112,10 +112,11 @@ static const char * HooktypeText[] =
 	trNOOP( "AXNextFrame" ),
 };
 
-GameLoadSM::GameLoadSM(const char * GameID)
-	: SettingsMenu(tr("Game Load"), &GuiOptions, MENU_NONE)
+GameLoadSM::GameLoadSM(struct discHdr *hdr)
+	: SettingsMenu(tr("Game Load"), &GuiOptions, MENU_NONE),
+	  Header(hdr)
 {
-	GameConfig = *GameSettings.GetGameCFG(GameID);
+	GameConfig = *GameSettings.GetGameCFG((const char *) Header->id);
 
 	if(!btnOutline)
 		btnOutline = Resources::GetImageData("button_dialogue_box.png");
@@ -172,11 +173,17 @@ void GameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Parental Control" ));
 	Options->SetName(Idx++, "%s", tr( "Error 002 fix" ));
 	Options->SetName(Idx++, "%s", tr( "Return To" ));
-	Options->SetName(Idx++, "%s", tr( "Alternate DOL" ));
-	Options->SetName(Idx++, "%s", tr( "Select DOL Offset" ));
+	if(Header->type == TYPE_GAME_WII)
+	{
+		Options->SetName(Idx++, "%s", tr( "Alternate DOL" ));
+		Options->SetName(Idx++, "%s", tr( "Select DOL Offset" ));
+	}
 	Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
-	Options->SetName(Idx++, "%s", tr( "Nand Emulation" ));
-	Options->SetName(Idx++, "%s", tr( "Nand Emu Path" ));
+	if(Header->type == TYPE_GAME_WII)
+	{
+		Options->SetName(Idx++, "%s", tr( "Nand Emulation" ));
+		Options->SetName(Idx++, "%s", tr( "Nand Emu Path" ));
+	}
 	Options->SetName(Idx++, "%s", tr( "Hooktype" ));
 	Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
 	Options->SetName(Idx++, "%s", tr( "Game Lock" ));
@@ -252,18 +259,21 @@ void GameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, "%s", tr( OnOffText[0] ));
 	}
 
-	//! Settings: Alternate DOL
-	Options->SetValue(Idx++, "%s", tr( AlternateDOLText[GameConfig.loadalternatedol] ));
-
-	//! Settings: Select DOL Offset
-	if(GameConfig.loadalternatedol != 1)
-		Options->SetValue(Idx++, tr("Not required"));
-	else
+	if(Header->type == TYPE_GAME_WII)
 	{
-		if(GameConfig.alternatedolname.size() != 0)
-			Options->SetValue(Idx++, "%i <%s>", GameConfig.alternatedolstart, GameConfig.alternatedolname.c_str());
+		//! Settings: Alternate DOL
+		Options->SetValue(Idx++, "%s", tr( AlternateDOLText[GameConfig.loadalternatedol] ));
+
+		//! Settings: Select DOL Offset
+		if(GameConfig.loadalternatedol != 1)
+			Options->SetValue(Idx++, tr("Not required"));
 		else
-			Options->SetValue(Idx++, "%i", GameConfig.alternatedolstart);
+		{
+			if(GameConfig.alternatedolname.size() != 0)
+				Options->SetValue(Idx++, "%i <%s>", GameConfig.alternatedolstart, GameConfig.alternatedolname.c_str());
+			else
+				Options->SetValue(Idx++, "%i", GameConfig.alternatedolstart);
+		}
 	}
 
 	//! Settings: Block IOS Reload
@@ -272,17 +282,20 @@ void GameLoadSM::SetOptionValues()
 	else
 		Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.iosreloadblock]) );
 
-	//! Settings: Nand Emulation
-	if(GameConfig.NandEmuMode == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr( NandEmuText[GameConfig.NandEmuMode] ));
+	if(Header->type == TYPE_GAME_WII)
+	{
+		//! Settings: Nand Emulation
+		if(GameConfig.NandEmuMode == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr( NandEmuText[GameConfig.NandEmuMode] ));
 
-	//! Settings: Nand Emu Path
-	if(GameConfig.NandEmuPath.size() == 0)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", GameConfig.NandEmuPath.c_str());
+		//! Settings: Nand Emu Path
+		if(GameConfig.NandEmuPath.size() == 0)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", GameConfig.NandEmuPath.c_str());
+	}
 
 	//! Settings: Hooktype
 	if(GameConfig.Hooktype == INHERIT)
@@ -397,14 +410,14 @@ int GameLoadSM::GetMenuInternal()
 	}
 
 	//! Settings: Alternate DOL
-	else if (ret == ++Idx)
+	else if ((Header->type == TYPE_GAME_WII) && ret == ++Idx)
 	{
 		if (++GameConfig.loadalternatedol >= ALT_DOL_MAX_CHOICE)
 			GameConfig.loadalternatedol = 0;
 	}
 
 	//! Settings: Select DOL Offset from Game
-	else if (ret == ++Idx && GameConfig.loadalternatedol == 1)
+	else if ((Header->type == TYPE_GAME_WII) && ret == ++Idx && GameConfig.loadalternatedol == 1)
 	{
 		GuiWindow * parentWindow = (GuiWindow *) parentElement;
 		if(parentWindow) parentWindow->SetState(STATE_DISABLED);
@@ -449,7 +462,7 @@ int GameLoadSM::GetMenuInternal()
 	}
 
 	//! Settings: Nand Emulation
-	else if (ret == ++Idx)
+	else if ((Header->type == TYPE_GAME_WII) && ret == ++Idx)
 	{
 		if(!IosLoader::IsD2X())
 			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
@@ -457,7 +470,7 @@ int GameLoadSM::GetMenuInternal()
 	}
 
 	//! Settings: Nand Emu Path
-	else if (ret == ++Idx)
+	else if ((Header->type == TYPE_GAME_WII) && ret == ++Idx)
 	{
 		if(!IosLoader::IsD2X())
 			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));

@@ -29,6 +29,7 @@
 
 enum
 {
+	CheckedNone = -0x01,
 	CheckedBox1 = 0x01,
 	CheckedBox2 = 0x02,
 	CheckedBox3 = 0x04,
@@ -48,11 +49,14 @@ class CheckboxPrompt : private PromptWindow, public sigslot::has_slots<>
 		void AddCheckBox(const char *text);
 		//! Default function to get the button pressed
 		int GetChoice();
+		//! Set a checkbox checked/unchecked
+		void SetChecked(int box, bool checked);
 		//! Show window and wait for the user to press OK/Cancel
 		static int Show(const char *title = 0, const char *msg = 0,
 						const char *chbx1 = 0, const char *chbx2 = 0,
 						const char *chbx3 = 0, const char *chbx4 = 0,
-						const char *chbx5 = 0, const char *chbx6 = 0);
+						const char *chbx5 = 0, const char *chbx6 = 0,
+						int initChecks = 0);
 	protected:
 		void OnCheckBoxClick(GuiButton *sender, int chan, const POINT &pointer);
 		std::vector<GuiText *> CheckboxTxt;

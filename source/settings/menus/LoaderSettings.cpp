@@ -31,12 +31,17 @@
 #include "wad/nandtitle.h"
 #include "prompts/TitleBrowser.h"
 #include "system/IosLoader.h"
+#include "usbloader/wbfs.h"
+#include "usbloader/GameList.h"
 #include "menu.h"
 
-static const char * dispMethText[] =
+static const char * loaderModeText[] =
 {
-	trNOOP( "Games" ),
-	trNOOP( "Channels" )
+	trNOOP( "None" ),
+	trNOOP( "Wii Games" ),
+	trNOOP( "Nand Channels" ),
+	trNOOP( "EmuNand Channels" ),
+	trNOOP( "All" )
 };
 
 static const char * OnOffText[] =
@@ -46,7 +51,7 @@ static const char * OnOffText[] =
 	trNOOP( "Auto" )
 };
 
-static const char * VideoModeText[VIDEO_MODE_MAX] =
+static const char * VideoModeText[] =
 {
 	trNOOP( "System Default" ),
 	trNOOP( "Disc Default" ),
@@ -58,7 +63,7 @@ static const char * VideoModeText[VIDEO_MODE_MAX] =
 	trNOOP( "Force NTSC480p" ),
 };
 
-static const char * LanguageText[MAX_LANGUAGE] =
+static const char * LanguageText[] =
 {
 	trNOOP( "Japanese" ),
 	trNOOP( "English" ),
@@ -117,7 +122,6 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
 	Options->SetName(Idx++, "%s", tr( "Return To" ));
 	Options->SetName(Idx++, "%s", tr( "Nand Saves Emulation" ));
-	Options->SetName(Idx++, "%s", tr( "Nand Channel Emulation" ));
 	Options->SetName(Idx++, "%s", tr( "Hooktype" ));
 	Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
 	Options->SetName(Idx++, "%s", tr( "Debugger Paused Start" ));
@@ -130,7 +134,16 @@ LoaderSettings::LoaderSettings()
 LoaderSettings::~LoaderSettings()
 {
 	if(oldLoaderMode != Settings.LoaderMode)
-		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
+	{
+		if(Settings.LoaderMode & MODE_WIIGAMES && (gameList.GameCount() == 0))
+		{
+			WBFS_ReInit(WBFS_DEVICE_USB);
+			gameList.ReadGameList();
+		}
+
+		gameList.LoadUnfiltered();
+		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false, false);
+	}
 }
 
 void LoaderSettings::SetOptionValues()
@@ -138,7 +151,11 @@ void LoaderSettings::SetOptionValues()
 	int Idx = 0;
 
 	//! Settings: Loader Mode
-	Options->SetValue(Idx++, "%s", tr(dispMethText[Settings.LoaderMode]));
+	if(Settings.LoaderMode == MODE_NONE) Options->SetValue(Idx++, "%s", tr(loaderModeText[0]));
+	else if(Settings.LoaderMode == MODE_ALL) Options->SetValue(Idx++, "%s", tr(loaderModeText[4]));
+	else if(Settings.LoaderMode & MODE_WIIGAMES) Options->SetValue(Idx++, "%s", tr(loaderModeText[1]));
+	else if(Settings.LoaderMode & MODE_NANDCHANNELS) Options->SetValue(Idx++, "%s", tr(loaderModeText[2]));
+	else if(Settings.LoaderMode & MODE_EMUCHANNELS) Options->SetValue(Idx++, "%s", tr(loaderModeText[3]));
 
 	//! Settings: Video Mode
 	Options->SetValue(Idx++, "%s", tr(VideoModeText[Settings.videomode]));
@@ -185,9 +202,6 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: Nand Emulation
 	Options->SetValue(Idx++, "%s", tr( NandEmuText[Settings.NandEmuMode] ));
 
-	//! Settings: Nand Channel Emulation
-	Options->SetValue(Idx++, "%s", tr( NandEmuText[Settings.NandEmuChanMode] ));
-
 	//! Settings: Hooktype
 	Options->SetValue(Idx++, "%s", tr( HooktypeText[Settings.Hooktype] ));
 
@@ -210,7 +224,11 @@ int LoaderSettings::GetMenuInternal()
 	//! Settings: Loader Mode
 	if (ret == ++Idx)
 	{
-		if (++Settings.LoaderMode >= MAX_ON_OFF) Settings.LoaderMode = LOAD_GAMES;
+		if (Settings.LoaderMode == MODE_ALL) Settings.LoaderMode = MODE_NONE;
+		else if (Settings.LoaderMode & MODE_WIIGAMES) Settings.LoaderMode = MODE_NANDCHANNELS;
+		else if (Settings.LoaderMode & MODE_NANDCHANNELS) Settings.LoaderMode = MODE_EMUCHANNELS;
+		else if (Settings.LoaderMode & MODE_EMUCHANNELS) Settings.LoaderMode = MODE_ALL;
+		else Settings.LoaderMode = MODE_WIIGAMES;
 	}
 
 	//! Settings: Video Mode
@@ -307,14 +325,6 @@ int LoaderSettings::GetMenuInternal()
 		if(!IosLoader::IsD2X())
 			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
 		else if (++Settings.NandEmuMode >= 3) Settings.NandEmuMode = 0;
-	}
-
-	//! Settings: Nand Channel Emulation
-	else if (ret == ++Idx )
-	{
-		if(!IosLoader::IsD2X())
-			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
-		else if (++Settings.NandEmuChanMode >= 3) Settings.NandEmuChanMode = 0;
 	}
 
 	//! Settings: Hooktype

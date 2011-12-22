@@ -37,6 +37,8 @@ class GameList
 		std::vector<struct discHdr> &GetFullGameList(void) { return FullGameList; }
 	protected:
 		int InternalReadList(int part);
+		void InternalFilterList(std::vector<struct discHdr> &FullList);
+		void InternalLoadUnfiltered(std::vector<struct discHdr> &FullList);
 		static bool NameSortCallback(const struct discHdr *a, const struct discHdr *b);
 		static bool PlaycountSortCallback(const struct discHdr *a, const struct discHdr *b);
 		static bool RankingSortCallback(const struct discHdr *a, const struct discHdr *b);

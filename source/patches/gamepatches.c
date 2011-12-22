@@ -20,9 +20,6 @@ typedef struct _appDOL
 static appDOL *dolList = NULL;
 static int dolCount = 0;
 
-static char es_fs[] ATTRIBUTE_ALIGN(32) = "/dev/es";
-static s32 es_fd = -1;
-
 void RegisterDOL(u8 *dst, int len)
 {
 	if(!dolList)
@@ -52,16 +49,13 @@ void ClearDOLList()
 
 void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring,
 				 u8 vipatch, u8 sneekVideoPatch, u8 hooktype, u8 fix002,
-				 u8 blockiosreloadselect, u8 gameIOS, u64 returnTo)
+				 u64 returnTo)
 {
-	es_fd = IOS_Open(es_fs, 0);
 	int i;
 
 	/* If a wip file is loaded for this game this does nothing - Dimok */
 	PoPPatch();
 	NSMBPatch();
-
-	int returnToPatched = PatchNewReturnTo(returnTo);
 
 	for(i = 0; i < dolCount; ++i)
 	{
@@ -90,17 +84,11 @@ void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring,
 		if (fix002 == 2)
 			Anti_002_fix(dst, len);
 
-		if(returnToPatched < 0)
+		if(returnTo)
 			PatchReturnTo(dst, len, (u32) returnTo);
 
 		DCFlushRange(dst, len);
 	}
-
-	if(blockiosreloadselect)
-		BlockIOSReload(gameIOS);
-
-	if(es_fd >= 0)
-		IOS_Close(es_fd);
 
 	/* ERROR 002 fix (thanks to WiiPower for sharing this)*/
 	if (fix002 != 0)
@@ -566,9 +554,10 @@ bool PatchReturnTo( void *Address, int Size, u32 id )
 	return returnToPatched;
 }
 
-int PatchNewReturnTo(u64 title)
+int PatchNewReturnTo(int es_fd, u64 title)
 {
-	if(title == 0) return -1;
+	if(es_fd < 0 || title == 0)
+		return -1;
 
 	//! this is here for test purpose only and needs be moved later
 	static u64 sm_title_id  ATTRIBUTE_ALIGN(32);
@@ -586,8 +575,11 @@ int PatchNewReturnTo(u64 title)
 	return result;
 }
 
-bool BlockIOSReload(u8 gameIOS)
+int BlockIOSReload(int es_fd, u8 gameIOS)
 {
+	if(es_fd < 0)
+		return 0;
+
 	static int mode ATTRIBUTE_ALIGN(32);
 	static int ios ATTRIBUTE_ALIGN(32);
 	STACK_ALIGN(ioctlv, vector, 2, 32);

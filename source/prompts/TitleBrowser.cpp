@@ -43,8 +43,6 @@ bool TitleSelector(char output[])
 	bool ret = false;
 	u64 *titleList = NULL;
 
-	ISFS_Initialize();//initialize for "titles.Exists()"
-
 	// Get count of titles of the good titles
 	num_titles = NandTitles.SetType(0x10001);
 	u32 n = num_titles;
@@ -117,8 +115,6 @@ bool TitleSelector(char output[])
 
 	options4.SetName(i, " ");
 	options4.SetValue(i, "%s", tr( "Clear" ));
-
-	ISFS_Deinitialize();
 
 	bool exit = false;
 
@@ -205,8 +201,6 @@ int TitleBrowser()
 	u32 num_sys_titles;
 	s32 ret = -1;
 	u64 *titleList = NULL;
-
-	ISFS_Initialize();//initialize for "titles.Exists()"
 
 	// Get count of titles of the good titles
 	num_titles = NandTitles.SetType(0x10001);
@@ -332,8 +326,6 @@ int TitleBrowser()
 		titleList[i] = tid;
 		i++;
 	}
-
-	ISFS_Deinitialize();
 
 	delete XML_DB;
 	XML_DB = NULL;

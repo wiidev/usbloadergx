@@ -48,6 +48,20 @@ s32 WBFS_Init(u32 device)
 	return Wbfs::Init(device);
 }
 
+s32 WBFS_ReInit(u32 device)
+{
+	WBFS_CloseAll();
+
+	s32 ret = -1;
+
+	if(Settings.MultiplePartitions)
+		ret = WBFS_OpenAll();
+	else
+		ret = WBFS_OpenPart(Settings.partition);
+
+	return ret;
+}
+
 s32 WBFS_OpenAll()
 {
 	int ret = -1;
