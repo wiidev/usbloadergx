@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-22 23:25+0100\n"
+"POT-Creation-Date: 2011-12-23 14:21+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -177,6 +177,9 @@ msgstr "Voulez-vous vraiment réinitialiser ?"
 
 msgid "Are you sure?"
 msgstr "Êtes-vous sûr ?"
+
+msgid "Aspect Ratio"
+msgstr ""
 
 msgid "Aug"
 msgstr "Août"
@@ -750,6 +753,12 @@ msgstr "Inversion-X"
 
 msgid "Font Scale Factor"
 msgstr "Échelle police"
+
+msgid "Force 16:9"
+msgstr ""
+
+msgid "Force 4:3"
+msgstr ""
 
 msgid "Force NTSC"
 msgstr "Forcer NTSC"

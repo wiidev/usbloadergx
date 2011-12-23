@@ -80,7 +80,7 @@ void BNSDecoder::OpenFile()
 
 	while(done < file_fd->size())
 	{
-		int read = file_fd->read(tempbuff, file_fd->size());
+		int read = file_fd->read(tempbuff+done, file_fd->size()-done);
 		if(read > 0)
 			done += read;
 		else
@@ -324,7 +324,7 @@ SoundBlock DecodefromBNS(const u8 *buffer, u32 size)
 	// Check sizes
 	if (size < hdr.size || size < hdr.infoOffset + hdr.infoSize || size < hdr.dataOffset + hdr.dataSize
 		|| hdr.infoSize < 0x60 || hdr.dataSize < sizeof dataChunk
-		|| infoChunk.size != hdr.infoSize || dataChunk.size != hdr.dataSize)
+		|| infoChunk.size != hdr.infoSize || dataChunk.size > hdr.dataSize)
 		return OutBlock;
 	// Check format
 	if (infoChunk.codecNum != 0)	// Only codec i've found : 0 = ADPCM. Maybe there's also 1 and 2 for PCM 8 or 16 bits ?

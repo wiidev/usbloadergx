@@ -1127,6 +1127,12 @@ int GameBrowseMenu::MainLoop()
 			{
 				WBFS_ReInit(WBFS_DEVICE_USB);
 				gameList.ReadGameList();
+
+				if(Settings.ShowFreeSpace)
+				{
+					ThreadedTask::Instance()->AddCallback(&HDDSizeCallback);
+					ThreadedTask::Instance()->Execute();
+				}
 			}
 
 			wString oldFilter(gameList.GetCurrentFilter());

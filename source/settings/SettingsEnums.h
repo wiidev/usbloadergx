@@ -57,6 +57,14 @@ enum
 
 enum
 {
+	ASPECT_FORCE_4_3,
+	ASPECT_FORCE_16_9,
+	ASPECT_SYSTEM_DEFAULT,
+	ASPECT_MAX
+};
+
+enum
+{
 	OFF,
 	ON,
 	MAX_ON_OFF

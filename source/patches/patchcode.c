@@ -33,6 +33,7 @@
 #include "patchcode.h"
 #include "settings/SettingsEnums.h"
 #include "FileOperations/fileops.h"
+#include "memory/mem2.h"
 #include "memory/memory.h"
 #include "gecko.h"
 
@@ -349,7 +350,7 @@ static void app_loadgameconfig()
 {
 	if (gameconf == NULL)
 	{
-		gameconf = (u32*) malloc(65536);
+		gameconf = (u32*) MEM2_alloc(65536);
 		if (gameconf == NULL)
 			return;
 	}
@@ -702,7 +703,7 @@ static int LoadGameConfig(const char *CheatFilepath)
 	filesize = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
 
-	tempgameconf = (u8*) malloc(filesize);
+	tempgameconf = (u8*) MEM2_alloc(filesize);
 	if (tempgameconf == NULL) {
 		tempgameconf = (u8 *) defaultgameconfig;
 		fclose(fp);
@@ -715,7 +716,7 @@ static int LoadGameConfig(const char *CheatFilepath)
 
 	if (ret != filesize)
 	{
-		free(tempgameconf);
+		MEM2_free(tempgameconf);
 		tempgameconf = (u8 *) defaultgameconfig;
 		return -1;
 	}
@@ -747,7 +748,7 @@ int ocarina_load_code(const char *CheatFilepath, u8 *gameid)
 	u32 filesize = ftell(fp);
 	rewind(fp);
 
-	code_buf = (u8*) malloc(filesize);
+	code_buf = (u8*) MEM2_alloc(filesize);
 	if (!code_buf)
 	{
 		gprintf("Ocarina: Not enough memory\n");
@@ -762,7 +763,7 @@ int ocarina_load_code(const char *CheatFilepath, u8 *gameid)
 	if (code_size <= 0)
 	{
 		gprintf("Ocarina: could not read file.\n");
-		free(code_buf);
+		MEM2_free(code_buf);
 		code_buf = NULL;
 		code_size = 0;
 		return 0;
@@ -771,7 +772,7 @@ int ocarina_load_code(const char *CheatFilepath, u8 *gameid)
 	if (code_size > (s32) codelistend - (s32) codelist)
 	{
 		gprintf("Ocarina: Too many codes found\n");
-		free(code_buf);
+		MEM2_free(code_buf);
 		code_buf = NULL;
 		code_size = 0;
 		return 0;

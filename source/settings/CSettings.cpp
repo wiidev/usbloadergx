@@ -138,6 +138,7 @@ void CSettings::SetDefault()
 	RememberUnlock = ON;
 	LoaderMode = MODE_WIIGAMES;
 	SearchMode = SEARCH_BEGINNING;
+	GameAspectRatio = ASPECT_SYSTEM_DEFAULT;
 }
 
 bool CSettings::Load()
@@ -312,6 +313,7 @@ bool CSettings::Save()
 	fprintf(file, "ShowPlayCount = %d\n", ShowPlayCount);
 	fprintf(file, "LoaderMode = %d\n", LoaderMode);
 	fprintf(file, "SearchMode = %d\n", SearchMode);
+	fprintf(file, "GameAspectRatio = %d\n", GameAspectRatio);
 	fclose(file);
 
 	return true;
@@ -628,6 +630,10 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if(strcmp(name, "SearchMode") == 0)
 	{
 		if (sscanf(value, "%d", &i) == 1) SearchMode = i;
+	}
+	else if(strcmp(name, "GameAspectRatio") == 0)
+	{
+		if (sscanf(value, "%d", &i) == 1) GameAspectRatio = i;
 	}
 	else if (strcmp(name, "InstallPartitions") == 0)
 	{

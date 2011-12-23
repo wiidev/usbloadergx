@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-22 23:25+0100\n"
+"POT-Creation-Date: 2011-12-23 14:21+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -177,6 +177,9 @@ msgstr ""
 
 msgid "Are you sure?"
 msgstr "Biztos vagy benne?"
+
+msgid "Aspect Ratio"
+msgstr ""
 
 msgid "Aug"
 msgstr ""
@@ -749,6 +752,12 @@ msgid "Flip-X"
 msgstr ""
 
 msgid "Font Scale Factor"
+msgstr ""
+
+msgid "Force 16:9"
+msgstr ""
+
+msgid "Force 4:3"
 msgstr ""
 
 msgid "Force NTSC"

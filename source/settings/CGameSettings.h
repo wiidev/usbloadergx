@@ -11,6 +11,7 @@ typedef struct _GameCFG
 {
 	char id[7];
 	short video;
+	short aspectratio;
 	short language;
 	short ocarina;
 	short vipatch;
@@ -34,6 +35,7 @@ typedef struct _GameCFG
 	{
 		memcpy(this->id, game.id, sizeof(game.id));
 		this->video = game.video;
+		this->aspectratio = game.aspectratio;
 		this->language = game.language;
 		this->ocarina = game.ocarina;
 		this->vipatch = game.vipatch;

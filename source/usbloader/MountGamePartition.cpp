@@ -30,6 +30,7 @@ static int FindGamePartition()
 		}
 	}
 
+	int firstValidPartition = -1;
 
 	if(IosLoader::IsWaninkokoIOS() && NandTitles.VersionOf(TITLE_ID(1, IOS_GetVersion())) < 18)
 		return -1;
@@ -57,7 +58,16 @@ static int FindGamePartition()
 			return 0;
 		}
 
+		if(firstValidPartition < 0)
+			firstValidPartition = i;
+
 		WBFS_Close(i);
+	}
+
+	if(firstValidPartition >= 0)
+	{
+		Settings.partition = firstValidPartition;
+		return 0;
 	}
 
 	return -1;
@@ -128,7 +138,7 @@ int MountGamePartition(bool ShowGUI)
 		{
 			if(Settings.MultiplePartitions)
 				ret = WBFS_OpenAll();
-			else
+			else if(!Settings.FirstTimeRun)
 				ret = WBFS_OpenPart(Settings.partition);
 
 			if(ret < 0)

@@ -137,6 +137,7 @@ class CSettings
 		short RememberUnlock;
 		short LoaderMode;
 		short SearchMode;
+		short GameAspectRatio;
 
 		// This variable is not saved to the settings file
 		bool FirstTimeRun;

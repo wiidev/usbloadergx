@@ -53,6 +53,13 @@ static const char * VideoModeText[] =
 	trNOOP( "Force NTSC480p" ),
 };
 
+static const char * AspectText[] =
+{
+	trNOOP( "Force 4:3" ),
+	trNOOP( "Force 16:9" ),
+	trNOOP( "System Default" )
+};
+
 static const char * LanguageText[] =
 {
 	trNOOP( "Japanese" ),
@@ -166,6 +173,7 @@ void GameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
 	Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
 	Options->SetName(Idx++, "%s", tr( "Sneek Video Patch" ));
+	Options->SetName(Idx++, "%s", tr( "Aspect Ratio" ));
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
 	Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
 	Options->SetName(Idx++, "%s", tr( "Ocarina" ));
@@ -210,6 +218,12 @@ void GameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.sneekVideoPatch]));
+
+	//! Settings: Aspect Ratio
+	if(GameConfig.aspectratio == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(AspectText[GameConfig.aspectratio]));
 
 	//! Settings: Game Language
 	if(GameConfig.language == INHERIT)
@@ -350,6 +364,12 @@ int GameLoadSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.sneekVideoPatch >= MAX_ON_OFF) GameConfig.sneekVideoPatch = INHERIT;
+	}
+
+	//! Settings: Aspect Ratio
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.aspectratio >= ASPECT_MAX) GameConfig.aspectratio = INHERIT;
 	}
 
 	//! Settings: Game Language

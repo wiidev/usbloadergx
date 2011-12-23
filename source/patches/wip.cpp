@@ -5,6 +5,7 @@
 #include "gecko.h"
 
 #include "settings/CSettings.h"
+#include "memory/mem2.h"
 #include "wip.h"
 
 static WIP_Code * CodeList = NULL;
@@ -75,7 +76,8 @@ extern "C" void wip_reset_counter()
 
 extern "C" void free_wip()
 {
-	if (CodeList) free(CodeList);
+	if (CodeList)
+		MEM2_free(CodeList);
 	CodeList = NULL;
 	CodesCount = 0;
 	Counter = 0;
@@ -125,9 +127,9 @@ extern "C" int load_wip_code(u8 *gameid)
 		u32 srcaddress = (u32) strtoul(line + 9, NULL, 16);
 		u32 dstaddress = (u32) strtoul(line + 18, NULL, 16);
 
-		if (!CodeList) CodeList = (WIP_Code *) malloc(sizeof(WIP_Code));
+		if (!CodeList) CodeList = (WIP_Code *) MEM2_alloc(sizeof(WIP_Code));
 
-		WIP_Code * tmp = (WIP_Code *) realloc(CodeList, (CodesCount + 1) * sizeof(WIP_Code));
+		WIP_Code * tmp = (WIP_Code *) MEM2_realloc(CodeList, (CodesCount + 1) * sizeof(WIP_Code));
 		if (!tmp)
 		{
 			fclose(fp);

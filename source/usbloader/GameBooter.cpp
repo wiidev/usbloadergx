@@ -95,29 +95,6 @@ u32 GameBooter::BootPartition(char * dolpath, u8 videoselected, u8 alternatedol,
 	return (u32) p_entry;
 }
 
-int GameBooter::FindDiscHeader(const char * gameID, struct discHdr &gameHeader)
-{
-	gameList.LoadUnfiltered();
-
-	if(mountMethod == 0 && !gameList.GetDiscHeader(gameID))
-	{
-		gprintf("Game was not found: %s\n", gameID);
-		return -1;
-	}
-	else if(mountMethod && !dvdheader)
-	{
-		gprintf("Error: Loading empty disc header from DVD\n");
-		return -1;
-	}
-
-	memcpy(&gameHeader, (mountMethod ? dvdheader : gameList.GetDiscHeader(gameID)), sizeof(struct discHdr));
-
-	delete dvdheader;
-	dvdheader = NULL;
-
-	return 0;
-}
-
 void GameBooter::SetupAltDOL(u8 * gameID, u8 &alternatedol, u32 &alternatedoloffset)
 {
 	if(alternatedol == ALT_DOL_ON_LAUNCH)
@@ -243,6 +220,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	//! Setup game configuration from game settings. If no game settings exist use global/default.
 	GameCFG * game_cfg = GameSettings.GetGameCFG(gameHeader.id);
 	u8 videoChoice = game_cfg->video == INHERIT ? Settings.videomode : game_cfg->video;
+	u8 aspectChoice = game_cfg->aspectratio == INHERIT ? Settings.GameAspectRatio : game_cfg->aspectratio;
 	u8 languageChoice = game_cfg->language == INHERIT ? Settings.language : game_cfg->language;
 	u8 ocarinaChoice = game_cfg->ocarina == INHERIT ? Settings.ocarina : game_cfg->ocarina;
 	u8 viChoice = game_cfg->vipatch == INHERIT ? Settings.videopatch : game_cfg->vipatch;
@@ -372,7 +350,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 
 	//! Do all the game patches
 	gprintf("Applying game patches...\n");
-	gamepatches(videoChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, fix002, returnToChoice);
+	gamepatches(videoChoice, aspectChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, fix002, returnToChoice);
 
 	//! Load Code handler if needed
 	load_handler(Hooktype, WiirdDebugger, Settings.WiirdDebuggerPause);

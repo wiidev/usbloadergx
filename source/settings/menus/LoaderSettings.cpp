@@ -51,6 +51,13 @@ static const char * OnOffText[] =
 	trNOOP( "Auto" )
 };
 
+static const char * AspectText[] =
+{
+	trNOOP( "Force 4:3" ),
+	trNOOP( "Force 16:9" ),
+	trNOOP( "System Default" )
+};
+
 static const char * VideoModeText[] =
 {
 	trNOOP( "System Default" ),
@@ -113,6 +120,7 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
 	Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
 	Options->SetName(Idx++, "%s", tr( "Sneek Video Patch" ));
+	Options->SetName(Idx++, "%s", tr( "Aspect Ratio" ));
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
 	Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
 	Options->SetName(Idx++, "%s", tr( "Ocarina" ));
@@ -165,6 +173,9 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: Sneek Video Patch
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.sneekVideoPatch] ));
+
+	//! Settings: Aspect Ratio
+	Options->SetValue(Idx++, "%s", tr( AspectText[Settings.GameAspectRatio] ));
 
 	//! Settings: Game Language
 	Options->SetValue(Idx++, "%s", tr( LanguageText[Settings.language] ));
@@ -247,6 +258,12 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx )
 	{
 		if (++Settings.sneekVideoPatch >= MAX_ON_OFF) Settings.sneekVideoPatch = 0;
+	}
+
+	//! Settings: Aspect Ratio
+	else if (ret == ++Idx )
+	{
+		if (++Settings.GameAspectRatio >= ASPECT_MAX) Settings.GameAspectRatio = 0;
 	}
 
 	//! Settings: Game Language

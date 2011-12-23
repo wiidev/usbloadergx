@@ -187,6 +187,7 @@ bool CGameSettings::Save()
 	{
 		fprintf(f, "game:%s = ", GameList[i].id);
 		fprintf(f, "video:%d; ", GameList[i].video);
+		fprintf(f, "aspectratio:%d; ", GameList[i].aspectratio);
 		fprintf(f, "language:%d; ", GameList[i].language);
 		fprintf(f, "ocarina:%d; ", GameList[i].ocarina);
 		fprintf(f, "vipatch:%d; ", GameList[i].vipatch);
@@ -221,6 +222,14 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		if (sscanf(value, "%d", &i) == 1)
 		{
 			game.video = i;
+		}
+		return true;
+	}
+	else if(strcmp(name, "aspectratio") == 0)
+	{
+		if (sscanf(value, "%d", &i) == 1)
+		{
+			game.aspectratio = i;
 		}
 		return true;
 	}
@@ -464,6 +473,7 @@ void CGameSettings::SetDefault(GameCFG &game)
 {
 	memset(game.id, 0, sizeof(game.id));
 	game.video = INHERIT;
+	game.aspectratio = INHERIT;
 	game.language = INHERIT;
 	game.ocarina = INHERIT;
 	game.vipatch = INHERIT;

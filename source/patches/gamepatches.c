@@ -9,6 +9,7 @@
 #include "patchcode.h"
 #include "gamepatches.h"
 #include "memory/memory.h"
+#include "memory/mem2.h"
 #include "settings/SettingsEnums.h"
 
 typedef struct _appDOL
@@ -23,12 +24,12 @@ static int dolCount = 0;
 void RegisterDOL(u8 *dst, int len)
 {
 	if(!dolList)
-		dolList = (appDOL *) malloc(sizeof(appDOL));
+		dolList = (appDOL *) MEM2_alloc(sizeof(appDOL));
 
-	appDOL *tmp = (appDOL *) realloc(dolList, (dolCount+1)*sizeof(appDOL));
+	appDOL *tmp = (appDOL *) MEM2_realloc(dolList, (dolCount+1)*sizeof(appDOL));
 	if(!tmp)
 	{
-		free(dolList);
+		MEM2_free(dolList);
 		dolCount = 0;
 		return;
 	}
@@ -42,14 +43,13 @@ void RegisterDOL(u8 *dst, int len)
 void ClearDOLList()
 {
 	if(dolList)
-		free(dolList);
+		MEM2_free(dolList);
 	dolList = NULL;
 	dolCount = 0;
 }
 
-void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring,
-				 u8 vipatch, u8 sneekVideoPatch, u8 hooktype, u8 fix002,
-				 u64 returnTo)
+void gamepatches(u8 videoSelected, u8 aspectForce, u8 languageChoice, u8 patchcountrystring,
+				 u8 vipatch, u8 sneekVideoPatch, u8 hooktype, u8 fix002, u64 returnTo)
 {
 	int i;
 
@@ -87,6 +87,9 @@ void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring,
 		if(returnTo)
 			PatchReturnTo(dst, len, (u32) returnTo);
 
+		if(aspectForce < 2)
+			PatchAspectRatio(dst, len, aspectForce);
+
 		DCFlushRange(dst, len);
 	}
 
@@ -114,7 +117,7 @@ bool NSMBPatch()
 
 	if (memcmp("SMNE01", (char *) 0x80000000, 6) == 0)
 	{
-		CodeList = malloc(3 * sizeof(WIP_Code));
+		CodeList = MEM2_alloc(3 * sizeof(WIP_Code));
 		if(!CodeList)
 			return false;
 
@@ -131,7 +134,7 @@ bool NSMBPatch()
 	}
 	else if (memcmp("SMNP01", (char *) 0x80000000, 6) == 0)
 	{
-		CodeList = malloc(3 * sizeof(WIP_Code));
+		CodeList = MEM2_alloc(3 * sizeof(WIP_Code));
 		if(!CodeList)
 			return false;
 
@@ -147,7 +150,7 @@ bool NSMBPatch()
 	}
 	else if (memcmp("SMNJ01", (char *) 0x80000000, 6) == 0)
 	{
-		CodeList = malloc(3 * sizeof(WIP_Code));
+		CodeList = MEM2_alloc(3 * sizeof(WIP_Code));
 		if(!CodeList)
 			return false;
 
@@ -164,7 +167,7 @@ bool NSMBPatch()
 
 	if (CodeList && set_wip_list(CodeList, 3) == false)
 	{
-		free(CodeList);
+		MEM2_free(CodeList);
 		CodeList = NULL;
 		return false;
 	}
@@ -178,7 +181,7 @@ bool PoPPatch()
 	if (memcmp("SPX", (char *) 0x80000000, 3) != 0 && memcmp("RPW", (char *) 0x80000000, 3) != 0)
 		return false;
 
-	WIP_Code * CodeList = malloc(5 * sizeof(WIP_Code));
+	WIP_Code * CodeList = MEM2_alloc(5 * sizeof(WIP_Code));
 	CodeList[0].offset = 0x007AAC6A;
 	CodeList[0].srcaddress = 0x7A6B6F6A;
 	CodeList[0].dstaddress = 0x6F6A7A6B;
@@ -197,7 +200,7 @@ bool PoPPatch()
 
 	if (set_wip_list(CodeList, 5) == false)
 	{
-		free(CodeList);
+		MEM2_free(CodeList);
 		CodeList = NULL;
 		return false;
 	}
@@ -602,4 +605,36 @@ int BlockIOSReload(int es_fd, u8 gameIOS)
 		result = IOS_Ioctlv(es_fd, 0xA0, inlen, 0, vector);
 
 	return (result >= 0);
+}
+
+
+void PatchAspectRatio(void *addr, u32 len, u8 aspect)
+{
+	if(aspect > 1)
+		return;
+
+	static const u32 aspect_searchpattern1[5] = {
+		0x9421FFF0, 0x7C0802A6, 0x38800001, 0x90010014, 0x38610008
+	};
+
+	static const u32 aspect_searchpattern2[15] = {
+		0x2C030000, 0x40820010, 0x38000000, 0x98010008, 0x48000018,
+		0x88010008, 0x28000001, 0x4182000C, 0x38000000, 0x98010008,
+		0x80010014, 0x88610008, 0x7C0803A6, 0x38210010, 0x4E800020
+	};
+
+	u8 *addr_start = (u8 *) addr;
+	u8 *addr_end = addr_start + len - sizeof(aspect_searchpattern1) - 4 - sizeof(aspect_searchpattern2);
+
+	while(addr_start < addr_end)
+	{
+		if(   (memcmp(addr_start, aspect_searchpattern1, sizeof(aspect_searchpattern1)) == 0)
+		   && (memcmp(addr_start + 4 + sizeof(aspect_searchpattern1), aspect_searchpattern2, sizeof(aspect_searchpattern2)) == 0))
+		{
+			*((u32 *)(addr_start+0x44)) = (0x38600000 | aspect);
+			gprintf("Aspect ratio patched to: %s\n", aspect ? "16:9" : "4:3");
+			break;
+		}
+		addr_start += 4;
+	}
 }

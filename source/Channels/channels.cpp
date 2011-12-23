@@ -213,7 +213,15 @@ u8 * Channels::GetDol(const u64 &title, u8 *tmdBuffer)
 		filesize = size;
 	}
 
-	return buffer;
+	// move dol to mem2
+	u8 *outBuf = (u8 *) MEM2_alloc(filesize);
+	if(!outBuf)
+		return buffer;
+
+	memcpy(outBuf, buffer, filesize);
+	free(buffer);
+
+	return outBuf;
 }
 
 u8 Channels::GetRequestedIOS(const u64 &title)

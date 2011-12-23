@@ -35,7 +35,7 @@ class CGameTitles
 		//! Get possible number of players for this game
 		int GetPlayersCount(const char * id) const;
 		//! Load Game Titles from GameTDB
-		void LoadTitlesFromGameTDB(const char * path, bool forceCacheReload = false, bool removeUnused = false);
+		void LoadTitlesFromGameTDB(const char * path, bool forceCacheReload = false, bool removeUnused = true);
 		//! Set default game titles
 		void SetDefault();
 		//! Free memory and remove all titles - Same as SetDefault()

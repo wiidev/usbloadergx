@@ -9,9 +9,8 @@ extern "C" {
 
 void RegisterDOL(u8 *dst, int len);
 void ClearDOLList();
-void gamepatches(u8 videoSelected, u8 languageChoice, u8 patchcountrystring,
-				 u8 vipatch, u8 sneekVideoPatch, u8 hooktype, u8 fix002,
-				 u64 returnTo);
+void gamepatches(u8 videoSelected, u8 aspectForce, u8 languageChoice, u8 patchcountrystring,
+				 u8 vipatch, u8 sneekVideoPatch, u8 hooktype, u8 fix002, u64 returnTo);
 bool Anti_002_fix(u8 * Address, int Size);
 bool NSMBPatch();
 bool PoPPatch();
@@ -20,6 +19,7 @@ void sneek_video_patch(void *addr, u32 len);
 bool PatchReturnTo(void *Address, int Size, u32 id);
 int PatchNewReturnTo(int es_fd, u64 title);
 int BlockIOSReload(int es_fd, u8 gameIOS);
+void PatchAspectRatio(void *addr, u32 len, u8 aspect);
 
 #ifdef __cplusplus
 }
