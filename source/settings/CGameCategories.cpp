@@ -373,6 +373,15 @@ bool CGameCategories::ImportFromGameTDB(const string &xmlpath)
 		ShowProgress(i, gameList.size());
 
 		vector<string> genreList;
+		string GameType;
+
+		if(XML_DB.GetGameType((const char *) gameList[i]->id, GameType))
+		{
+			if(!CategoryList.findCategory(GameType))
+				CategoryList.AddCategory(GameType);
+
+			this->SetCategory(gameList[i]->id, CategoryList.getCurrentID());
+		}
 
 		if(!XML_DB.GetGenreList((const char *) gameList[i]->id, genreList))
 			continue;
@@ -384,6 +393,7 @@ bool CGameCategories::ImportFromGameTDB(const string &xmlpath)
 
 			this->SetCategory(gameList[i]->id, CategoryList.getCurrentID());
 		}
+
 	}
 
 	XML_DB.CloseFile();

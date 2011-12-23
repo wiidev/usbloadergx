@@ -123,6 +123,12 @@ class GameTDB
 		int GetCaseColor(const char * id);
 		//! Get the complete game info in the GameXMLInfo struct
 		bool GetGameXMLInfo(const char * id, GameXMLInfo * gameInfo);
+		//! Get the type of the game. If blank the game is a Wii game.
+		bool GetGameType(const char * id, string &GameType);
+		//! Translate genre list to configure language code
+		void TranslateGenres(vector<string> &GenreList);
+		//! Translate descriptors list to configure language code
+		void TranslateDescriptors(vector<string> &DescList);
 		//! Convert a specific game rating to a string
 		static const char * RatingToString(int rating);
 		//! Convert a rating string to a rating number

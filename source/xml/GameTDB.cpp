@@ -390,6 +390,8 @@ bool GameTDB::ParseFile()
 	const char * gameNode = NULL;
 	const char * idNode = NULL;
 	const char * gameEndNode = NULL;
+	const char * genreNode = NULL;
+	const char * descriptNode = NULL;
 
 	while((read = GetData(Line, currentPos, MAXREADSIZE)) > 0)
 	{
@@ -398,6 +400,34 @@ bool GameTDB::ParseFile()
 
 		//! Ensure the null termination at the end
 		Line[read] = '\0';
+
+		//! Try to find genre translation map
+		if(!genreNode && (genreNode = strstr(gameNode, "<genres>")) != NULL)
+		{
+			const char *genreNodeEnd = strstr(genreNode, "</genres>");
+			if(genreNodeEnd)
+			{
+				int size = OffsetMap.size();
+				OffsetMap.resize(size+1);
+				strcpy(OffsetMap[size].gameID, "gnrmap");
+				OffsetMap[size].gamenode = currentPos+(genreNode-Line);
+				OffsetMap[size].nodesize = (genreNodeEnd-genreNode);
+			}
+		}
+
+		//! Try to find description translation map
+		if(!descriptNode && (descriptNode = strstr(gameNode, "<descriptors>")) != NULL)
+		{
+			const char *descriptNodeEnd = strstr(descriptNode, "</descriptors>");
+			if(descriptNodeEnd)
+			{
+				int size = OffsetMap.size();
+				OffsetMap.resize(size+1);
+				strcpy(OffsetMap[size].gameID, "dscmap");
+				OffsetMap[size].gamenode = currentPos+(descriptNode-Line);
+				OffsetMap[size].nodesize = (descriptNodeEnd-descriptNode);
+			}
+		}
 
 		while((gameNode = strstr(gameNode, "<game name=\"")) != NULL)
 		{
@@ -670,8 +700,80 @@ bool GameTDB::GetGenreList(const char * id, vector<string> & genre)
 
 	delete [] data;
 
+	if(strcmp(LangCode.c_str(), "EN") != 0)
+		TranslateGenres(genre);
+
 	return true;
 }
+
+void GameTDB::TranslateGenres(vector<string> &GenreList)
+{
+	char * data = GetGameNode("gnrmap");
+	if(!data)
+		return;
+
+	for(unsigned int i = 0; i < GenreList.size(); ++i)
+	{
+		for(unsigned int n = 0; n < 2; n++)
+		{
+			string nodeStart;
+
+			if(n == 0)
+				nodeStart = "<genre name=\"";
+			else
+				nodeStart = "<subgenre name=\"";
+
+			nodeStart += GenreList[i];
+
+			const char *genreNode = strcasestr(data, nodeStart.c_str());
+			if(!genreNode)
+				continue;
+
+			genreNode += nodeStart.size();
+
+			const char *genreNodeEnd = strstr(genreNode, "</genre>");
+			const char *subNodeStart = strstr(genreNode, "<subgenre name=");
+			if(!genreNodeEnd || (subNodeStart && subNodeStart < genreNodeEnd))
+				genreNodeEnd = subNodeStart;
+			if(!genreNodeEnd)
+				continue;
+
+			string localStr = "<locale lang=\"";
+			localStr += LangCode;
+			localStr += "\">";
+
+			const char *langPtr = strcasestr(genreNode, localStr.c_str());
+			if(langPtr && langPtr < genreNodeEnd)
+			{
+				bool firstLetter = true;
+				GenreList[i].clear();
+				langPtr += localStr.size();
+
+				while(*langPtr == ' ')
+					langPtr++;
+
+				while(*langPtr != 0 && !(langPtr[0] == '<' && langPtr[1] == '/'))
+				{
+					if(firstLetter)
+					{
+						GenreList[i].push_back(toupper((int)*langPtr));
+						firstLetter = false;
+					}
+					else
+						GenreList[i].push_back(*langPtr);
+					langPtr++;
+				}
+
+				while(GenreList[i].size() > 0 && GenreList[i][GenreList[i].size()-1] == ' ')
+					GenreList[i].erase(GenreList[i].size()-1);
+			}
+			break;
+		}
+	}
+
+	delete [] data;
+}
+
 
 const char * GameTDB::RatingToString(int rating)
 {
@@ -873,7 +975,65 @@ int GameTDB::GetRatingDescriptorList(const char * id, vector<string> & desc_list
 
 	delete [] data;
 
+	if(strcmp(LangCode.c_str(), "EN") != 0)
+		TranslateDescriptors(desc_list);
+
 	return desc_list.size();
+}
+
+void GameTDB::TranslateDescriptors(vector<string> &DescList)
+{
+	char * data = GetGameNode("dscmap");
+	if(!data)
+		return;
+
+	for(unsigned int i = 0; i < DescList.size(); ++i)
+	{
+		string nodeStart = "<descriptor name=\"";
+		nodeStart += DescList[i];
+
+		const char *genreNode = strcasestr(data, nodeStart.c_str());
+		if(!genreNode)
+			continue;
+
+		genreNode += nodeStart.size();
+
+		const char *genreNodeEnd = strstr(genreNode, "</descriptor>");
+		if(!genreNodeEnd)
+			continue;
+
+		string localStr = "<locale lang=\"";
+		localStr += LangCode;
+		localStr += "\">";
+
+		const char *langPtr = strcasestr(genreNode, localStr.c_str());
+		if(langPtr && langPtr < genreNodeEnd)
+		{
+			bool firstLetter = true;
+			DescList[i].clear();
+			langPtr += localStr.size();
+
+			while(*langPtr == ' ')
+				langPtr++;
+
+			while(*langPtr != 0 && !(langPtr[0] == '<' && langPtr[1] == '/'))
+			{
+				if(firstLetter)
+				{
+					DescList[i].push_back(toupper((int)*langPtr));
+					firstLetter = false;
+				}
+				else
+					DescList[i].push_back(*langPtr);
+				langPtr++;
+			}
+
+			while(DescList[i].size() > 0 && DescList[i][DescList[i].size()-1] == ' ')
+				DescList[i].erase(DescList[i].size()-1);
+		}
+	}
+
+	delete [] data;
 }
 
 int GameTDB::GetWifiPlayers(const char * id)
@@ -895,6 +1055,8 @@ int GameTDB::GetWifiPlayers(const char * id)
 	}
 
 	players = atoi(PlayersNode);
+
+	delete [] data;
 
 	return players;
 }
@@ -967,6 +1129,8 @@ int GameTDB::GetPlayers(const char * id)
 	}
 
 	players = atoi(PlayersNode);
+
+	delete [] data;
 
 	return players;
 }
@@ -1051,7 +1215,32 @@ int GameTDB::GetCaseColor(const char * id)
 
 	color = strtoul(ColorNode, NULL, 16);
 
+	delete [] data;
+
 	return color;
+}
+
+bool GameTDB::GetGameType(const char * id, string &GameType)
+{
+	if(!id)
+		return false;
+
+	char * data = GetGameNode(id);
+	if(!data)
+		return false;
+
+	char * TypeNode = GetNodeText(data, "<type>", "</type>");
+	if(!TypeNode)
+	{
+		delete [] data;
+		return false;
+	}
+
+	GameType = TypeNode;
+
+	delete [] data;
+
+	return true;
 }
 
 bool GameTDB::GetGameXMLInfo(const char * id, GameXMLInfo * gameInfo)
@@ -1072,7 +1261,7 @@ bool GameTDB::GetGameXMLInfo(const char * id, GameXMLInfo * gameInfo)
 	GetGenreList(id, gameInfo->GenreList);
 	gameInfo->RatingType = GetRating(id);
 	GetRatingValue(id, gameInfo->RatingValue);
-	GetRatingDescriptorList(id, gameInfo->RatingDescriptorList);
+	//GetRatingDescriptorList(id, gameInfo->RatingDescriptorList); We don't use it yet
 	gameInfo->WifiPlayers = GetWifiPlayers(id);
 	GetWifiFeatureList(id, gameInfo->WifiFeatureList);
 	gameInfo->Players = GetPlayers(id);
