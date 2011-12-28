@@ -555,7 +555,7 @@ bool PatchReturnTo( void *Address, int Size, u32 id )
 	}
 
 	if(returnToPatched)
-		gprintf("Return to %08X patched with old method.\n", (u32) title);
+		gprintf("Return to %08X patched with old method.\n", (u32) id);
 
 	return returnToPatched;
 }
