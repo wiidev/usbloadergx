@@ -280,10 +280,6 @@ int MenuLanguageSelect()
 				snprintf(Settings.languagefiles_path, sizeof(Settings.languagefiles_path), entered);
 				WindowPrompt(tr("Languagepath changed."), 0, tr("OK"));
 			}
-			if ( Dir.GetFilecount() > 0 )
-			{
-				optionBrowser4.SetFocus( 1 );
-			}
 			pathBtn.ResetState();
 		}
 
@@ -312,7 +308,6 @@ int MenuLanguageSelect()
 				returnhere = 2;
 				break;
 			}
-			optionBrowser4.SetFocus( 1 );
 		}
 
 	}

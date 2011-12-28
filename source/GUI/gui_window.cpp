@@ -16,7 +16,6 @@ GuiWindow::GuiWindow()
 	height = 0;
 	forceDim = false;
 	allowDim = true;
-	focus = 0; // allow focus
 }
 
 GuiWindow::GuiWindow(int w, int h)
@@ -25,7 +24,6 @@ GuiWindow::GuiWindow(int w, int h)
 	height = h;
 	forceDim = false;
 	allowDim = true;
-	focus = 0; // allow focus
 }
 
 GuiWindow::~GuiWindow()
@@ -168,113 +166,6 @@ void GuiWindow::SetVisible(bool v)
 		}
 		catch (const std::exception& e)
 		{
-		}
-	}
-}
-
-void GuiWindow::SetFocus(int f)
-{
-	LOCK( this );
-	focus = f;
-
-	if (f == 1)
-		this->MoveSelectionVert(1);
-	else this->ResetState();
-}
-
-void GuiWindow::ChangeFocus(GuiElement* e)
-{
-	LOCK( this );
-	if (parentElement) return; // this is only intended for the main window
-
-	for (u8 i = 0; i < _elements.size(); i++)
-	{
-		if (e == _elements.at(i))
-			_elements.at(i)->SetFocus(1);
-		else if (_elements.at(i)->IsFocused() == 1) _elements.at(i)->SetFocus(0);
-	}
-}
-
-void GuiWindow::ToggleFocus(GuiTrigger * t)
-{
-	LOCK( this );
-	if (parentElement) return; // this is only intended for the main window
-
-	int found = -1;
-	int newfocus = -1;
-	u8 i;
-
-	// look for currently in focus element
-	for (i = 0; i < _elements.size(); i++)
-	{
-		try
-		{
-			if (_elements.at(i)->IsFocused() == 1)
-			{
-				found = i;
-				break;
-			}
-		}
-		catch (const std::exception& e)
-		{
-		}
-	}
-
-	// element with focus not found, try to give focus
-	if (found == -1)
-	{
-		for (i = 0; i < _elements.size(); i++)
-		{
-			try
-			{
-				if (_elements.at(i)->IsFocused() == 0 && _elements.at(i)->GetState() != STATE_DISABLED) // focus is possible (but not set)
-				{
-					_elements.at(i)->SetFocus(1); // give this element focus
-					break;
-				}
-			}
-			catch (const std::exception& e)
-			{
-			}
-		}
-	}
-	// change focus
-	else if ((t->wpad.btns_d & (WPAD_BUTTON_1 | WPAD_BUTTON_1 | WPAD_CLASSIC_BUTTON_PLUS)) || (t->pad.btns_d & PAD_BUTTON_B))
-	{
-		for (i = found; i < _elements.size(); i++)
-		{
-			try
-			{
-				if (_elements.at(i)->IsFocused() == 0 && _elements.at(i)->GetState() != STATE_DISABLED) // focus is possible (but not set)
-				{
-					newfocus = i;
-					_elements.at(i)->SetFocus(1); // give this element focus
-					_elements.at(found)->SetFocus(0); // disable focus on other element
-					break;
-				}
-			}
-			catch (const std::exception& e)
-			{
-			}
-		}
-
-		if (newfocus == -1)
-		{
-			for (i = 0; i < found; i++)
-			{
-				try
-				{
-					if (_elements.at(i)->IsFocused() == 0 && _elements.at(i)->GetState() != STATE_DISABLED) // focus is possible (but not set)
-					{
-						_elements.at(i)->SetFocus(1); // give this element focus
-						_elements.at(found)->SetFocus(0); // disable focus on other element
-						break;
-					}
-				}
-				catch (const std::exception& e)
-				{
-				}
-			}
 		}
 	}
 }
@@ -432,20 +323,6 @@ void GuiWindow::Update(GuiTrigger * t)
 		catch (const std::exception& e)
 		{
 		}
-	}
-
-	this->ToggleFocus(t);
-
-	if (focus) // only send actions to this window if it's in focus
-	{
-		// pad/joystick navigation
-		if (t->Right())
-			this->MoveSelectionHor(1);
-		else if (t->Left())
-			this->MoveSelectionHor(-1);
-		else if (t->Down())
-			this->MoveSelectionVert(1);
-		else if (t->Up()) this->MoveSelectionVert(-1);
 	}
 
 	if (updateCB) updateCB(this);

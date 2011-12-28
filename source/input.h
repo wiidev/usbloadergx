@@ -22,5 +22,6 @@ void UpdatePads();
 void ShutoffRumble();
 void DoRumble(int i);
 void SetWPADTimeout();
+bool ControlActivityTimeout(void);
 
 #endif

@@ -393,7 +393,6 @@ void ThemeMenu::MainButtonClicked(int button)
 	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 	mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(&promptWindow);
-	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
 
 	while (!leave)
@@ -420,7 +419,6 @@ void ThemeMenu::MainButtonClicked(int button)
 			}
 			mainWindow->SetState(STATE_DISABLED);
 			promptWindow.SetState(STATE_DEFAULT);
-			mainWindow->ChangeFocus(&promptWindow);
 			applyBtn.ResetState();
 		}
 

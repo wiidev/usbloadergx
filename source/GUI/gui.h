@@ -79,7 +79,7 @@ enum
 
 enum
 {
-	TRIGGER_SIMPLE, TRIGGER_HELD, TRIGGER_BUTTON_ONLY, TRIGGER_BUTTON_ONLY_IN_FOCUS
+	TRIGGER_SIMPLE, TRIGGER_HELD, TRIGGER_BUTTON_ONLY
 };
 
 enum
@@ -142,11 +142,6 @@ class GuiTrigger
 		//!\param wiibtns Wii controller trigger button(s) - classic controller buttons are considered separately
 		//!\param gcbtns GameCube controller trigger button(s)
 		void SetButtonOnlyTrigger(s32 ch, u32 wiibtns, u16 gcbtns);
-		//!Sets a button-only trigger. Requires: trigger button is pressed and parent window of element is in focus
-		//!\param ch Controller channel number
-		//!\param wiibtns Wii controller trigger button(s) - classic controller buttons are considered separately
-		//!\param gcbtns GameCube controller trigger button(s)
-		void SetButtonOnlyInFocusTrigger(s32 ch, u32 wiibtns, u16 gcbtns);
 		//!Get X/Y value from Wii Joystick (classic, nunchuk) input
 		//!\param right Controller stick (left = 0, right = 1)
 		//!\param axis Controller stick axis (x-axis = 0, y-axis = 1)
@@ -165,7 +160,7 @@ class GuiTrigger
 		//!\return true if selection should be moved down, false otherwise
 		bool Down();
 
-		u8 type; //!< trigger type (TRIGGER_SIMPLE, TRIGGER_HELD, TRIGGER_BUTTON_ONLY, TRIGGER_BUTTON_ONLY_IN_FOCUS)
+		u8 type; //!< trigger type (TRIGGER_SIMPLE, TRIGGER_HELD, TRIGGER_BUTTON_ONLY)
 		s32 chan; //!< Trigger controller channel (0-3, -1 for all)
 		WPADData wpad; //!< Wii controller trigger data
 		PADData pad; //!< GameCube controller trigger data
@@ -344,15 +339,9 @@ class GuiElement
 		//!Sets a function to called after after Update()
 		//!Callback function can be used to response to changes in the state of the element, and/or update the element's attributes
 		void SetUpdateCallback(UpdateCallback u);
-		//!Checks whether the element is in focus
-		//!\return true if element is in focus, false otherwise
-		int IsFocused() { return focus; }
 		//!Sets the element's visibility
 		//!\param v Visibility (true = visible)
 		virtual void SetVisible(bool v);
-		//!Sets the element's focus
-		//!\param f Focus (true = in focus)
-		virtual void SetFocus(int f);
 		//!Sets the element's state
 		//!\param s State (STATE_DEFAULT, STATE_SELECTED, STATE_CLICKED, STATE_DISABLED)
 		//!\param c Controller channel (0-3, -1 = none)
@@ -384,8 +373,6 @@ class GuiElement
 
 		//int position2; //! B Scrollbariable
 		bool visible; //!< Visibility of the element. If false, Draw() is skipped
-		int focus; //!< Element focus (-1 = focus disabled, 0 = not focused, 1 = focused)
-		int dontsetfocus; //!<If 0 games dont set the focus
 		int width; //!< Element width
 		int height; //!< Element height
 		int xoffset; //!< Element X offset
@@ -482,19 +469,6 @@ class GuiWindow: public GuiElement
 		//!Gets the index of the GuiElement inside the window that is currently selected
 		//!\return index of selected GuiElement
 		int GetSelected();
-		//!Sets the window focus
-		//!\param f Focus
-		void SetFocus(int f);
-		//!Change the focus to the specified element
-		//!This is intended for the primary GuiWindow only
-		//!\param e GuiElement that should have focus
-		void ChangeFocus(GuiElement * e);
-		//!Changes window focus to the next focusable window or element
-		//!If no element is in focus, changes focus to the first available element
-		//!If B or 1 button is pressed, changes focus to the next available element
-		//!This is intended for the primary GuiWindow only
-		//!\param t Pointer to a GuiTrigger, containing the current input data from PAD/WPAD
-		void ToggleFocus(GuiTrigger * t);
 		//!Moves the selected element to the element to the left or right
 		//!\param d Direction to move (-1 = left, 1 = right)
 		void MoveSelectionHor(int d);

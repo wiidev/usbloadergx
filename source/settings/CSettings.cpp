@@ -139,6 +139,7 @@ void CSettings::SetDefault()
 	LoaderMode = MODE_WIIGAMES;
 	SearchMode = SEARCH_BEGINNING;
 	GameAspectRatio = ASPECT_SYSTEM_DEFAULT;
+	PointerSpeed = 0.15f;
 }
 
 bool CSettings::Load()
@@ -314,6 +315,7 @@ bool CSettings::Save()
 	fprintf(file, "LoaderMode = %d\n", LoaderMode);
 	fprintf(file, "SearchMode = %d\n", SearchMode);
 	fprintf(file, "GameAspectRatio = %d\n", GameAspectRatio);
+	fprintf(file, "PointerSpeed = %g\n", PointerSpeed);
 	fclose(file);
 
 	return true;
@@ -648,6 +650,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "FontScaleFactor") == 0)
 	{
 		FontScaleFactor = atof(value);
+		return true;
+	}
+	else if (strcmp(name, "PointerSpeed") == 0)
+	{
+		PointerSpeed = atof(value);
 		return true;
 	}
 	else if (strcmp(name, "ParentalBlocks") == 0)

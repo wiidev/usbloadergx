@@ -123,6 +123,7 @@ GuiSettingsMenu::GuiSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "HOME Menu" ));
 	Options->SetName(Idx++, "%s", tr( "Use System Font" ));
 	Options->SetName(Idx++, "%s", tr( "Search Mode" ));
+	Options->SetName(Idx++, "%s", tr( "Virtual Pointer Speed" ));
 
 	SetOptionValues();
 }
@@ -193,6 +194,9 @@ void GuiSettingsMenu::SetOptionValues()
 
 	//! Settings: Search Mode
 	Options->SetValue(Idx++, "%s", tr( searchModeText[Settings.SearchMode] ));
+
+	//! Settings: Virtual Pointer Speed
+	Options->SetValue(Idx++, "%g", Settings.PointerSpeed);
 }
 
 int GuiSettingsMenu::GetMenuInternal()
@@ -374,6 +378,25 @@ int GuiSettingsMenu::GetMenuInternal()
 	{
 		if (++Settings.SearchMode >= SEARCH_MAX_CHOICE) Settings.SearchMode = 0;
 	}
+
+	//! Settings: Virtual Pointer Speed
+	else if (ret == ++Idx)
+	{
+		char entrie[20];
+		snprintf(entrie, sizeof(entrie), "%g", Settings.PointerSpeed);
+		int ret = OnScreenKeyboard(entrie, sizeof(entrie), 0);
+		if(ret)
+		{
+			for(u32 i = 0; i < sizeof(entrie); ++i)
+			{
+				if(entrie[i] == ',')
+					entrie[i] = '.';
+			}
+
+			Settings.PointerSpeed = atof(entrie);
+		}
+	}
+
 
 	SetOptionValues();
 

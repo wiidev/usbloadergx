@@ -70,7 +70,7 @@ void GameSettingsMenu::SetupMainButtons()
 	SetMainButton(pos++, tr( "Game Load" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Ocarina" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Categories" ), MainButtonImgData, MainButtonImgOverData);
-	if(DiscHeader->type == TYPE_GAME_WII)
+	if(DiscHeader->type == TYPE_GAME_WII || DiscHeader->type == TYPE_GAME_NANDCHAN)
 	{
 		SetMainButton(pos++, tr( "Extract Save to EmuNand" ), MainButtonImgData, MainButtonImgOverData);
 	}
@@ -136,7 +136,7 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 	}
 
 	//! Extract Save to EmuNand
-	else if((DiscHeader->type == TYPE_GAME_WII) && menuNr == Idx++)
+	else if((DiscHeader->type == TYPE_GAME_WII || DiscHeader->type == TYPE_GAME_NANDCHAN) && menuNr == Idx++)
 	{
 		int choice = WindowPrompt(tr( "Do you want to extract the save game?" ), tr("The save game will be extracted to your emu nand path."), tr( "Yes" ), tr( "Cancel" ));
 		if (choice == 1)
@@ -146,6 +146,7 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 			snprintf(nandPath, sizeof(nandPath), "/title/00010000/%02x%02x%02x%02x", DiscHeader->id[0], DiscHeader->id[1], DiscHeader->id[2], DiscHeader->id[3]);
 			snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuPath, nandPath);
 
+			ProgressCancelEnable(true);
 			StartProgress(tr("Extracting file:"), 0, 0, true, false);
 			int ret = NandTitle::ExtractDir(nandPath, filePath);
 
@@ -156,6 +157,7 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 				ret = NandTitle::ExtractDir(nandPath, filePath);
 			}
 			ProgressStop();
+			ProgressCancelEnable(false);
 
 			if(ret < 0)
 				WindowPrompt(tr("Error:"), tr("Failed to extract all files. Savegame might not exist."), tr("OK"));

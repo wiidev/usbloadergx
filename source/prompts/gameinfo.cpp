@@ -837,7 +837,6 @@ static int InternalShowGameInfo(char *ID)
 	//mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(&gameinfoWindow);
 	if(boxCov) mainWindow->Append(boxCov);
-	mainWindow->ChangeFocus(&gameinfoWindow);
 	ResumeGui();
 
 	while (choice == -1)

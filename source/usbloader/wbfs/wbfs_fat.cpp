@@ -37,6 +37,7 @@ using namespace std;
 static const char wbfs_fat_dir[] = "/wbfs";
 static const char invalid_path[] = "/\\:|<>?*\"'";
 extern u32 hdd_sector_size[2];
+extern int install_abort_signal;
 
 Wbfs_Fat::Wbfs_Fat(u32 lba, u32 size, u32 part, u32 port) :
 	Wbfs(lba, size, part, port), fat_hdr_list(NULL), fat_hdr_count(0)
@@ -176,6 +177,8 @@ s32 Wbfs_Fat::AddGame(void)
 	wbfs_trim(part);
 	ClosePart(part);
 
+	if(install_abort_signal)
+		RemoveGame(header.id);
 	if (ret < 0) return ret;
 
 	return 0;

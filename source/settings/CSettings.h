@@ -122,6 +122,7 @@ class CSettings
 		u32 ParentalBlocks;
 		f32 WSFactor;
 		f32 FontScaleFactor;
+		f32 PointerSpeed;
 		short Wiinnertag;
 		short SelectedGame;
 		short GameListOffset;

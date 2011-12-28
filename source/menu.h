@@ -11,6 +11,7 @@
 
 #include <ogcsys.h>
 #include "GUI/gui.h"
+#include "Controls/WiiPointer.h"
 #include "settings/CSettings.h"
 #include "main.h"
 
@@ -25,7 +26,6 @@ enum
 	MENU_NONE,
 	MENU_SETTINGS,
 	MENU_DISCLIST,
-	MENU_INSTALL,
 	MENU_GAME_SETTINGS,
 	MENU_HOMEBREWBROWSE,
 	BOOTHOMEBREW,
@@ -36,7 +36,7 @@ enum
 void ResumeGui();
 void HaltGui();
 
-extern GuiImageData *pointer[4];
+extern WiiPointer *pointer[4];
 extern GuiImageData *background;
 extern GuiImage *bgImg;
 extern GuiWindow *mainWindow;

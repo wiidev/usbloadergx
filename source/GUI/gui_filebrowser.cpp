@@ -24,7 +24,6 @@ GuiFileBrowser::GuiFileBrowser(int w, int h)
 	selectedItem = 0;
 	selectable = true;
 	triggerdisabled = false; // trigger disable
-	focus = 0; // allow focus
 
 	trigA = new GuiTrigger;
 	trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -90,18 +89,6 @@ GuiFileBrowser::~GuiFileBrowser()
 		delete fileListBg[i];
 		delete fileListFolder[i];
 	}
-}
-
-void GuiFileBrowser::SetFocus(int f)
-{
-	LOCK( this );
-	focus = f;
-
-	for (int i = 0; i < FILEBROWSERSIZE; i++)
-		fileList[i]->ResetState();
-
-	if (f == 1)
-		fileList[selectedItem]->SetState(STATE_SELECTED);
 }
 
 void GuiFileBrowser::DisableTriggerUpdate(bool set)

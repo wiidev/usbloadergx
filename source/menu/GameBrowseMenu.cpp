@@ -42,7 +42,6 @@ extern u8 mountMethod;
 extern bool updateavailable;
 extern struct discHdr *dvdheader;
 
-static bool WiiMoteInitiated = false;
 static bool Exiting = false;
 
 GameBrowseMenu::GameBrowseMenu()
@@ -287,7 +286,7 @@ GameBrowseMenu::GameBrowseMenu()
 	dvdBtnImg->SetWidescreen(Settings.widescreen);
 	dvdBtnImg_g = new GuiImage(imgdvd_gray);
 	dvdBtnImg_g->SetWidescreen(Settings.widescreen);
-	dvdBtn = new GuiButton(dvdBtnImg_g, dvdBtnImg_g, ALIGN_LEFT, ALIGN_TOP, 0, 0,
+	dvdBtn = new GuiButton(dvdBtnImg_g, 0, ALIGN_LEFT, ALIGN_TOP, 0, 0,
 						   trigA, btnSoundOver, btnSoundClick2, 1, dvdBtnTT, 15, 52, 1, 3);
 	dvdBtn->SetSelectable(false);
 
@@ -845,6 +844,7 @@ int GameBrowseMenu::MainLoop()
 		int choice = WindowPrompt(tr( "Install a game" ), 0, tr( "Yes" ), tr( "No" ));
 		if (choice == 1)
 		{
+			this->SetState(STATE_DISABLED);
 			if(!(Settings.LoaderMode & MODE_WIIGAMES) && (gameList.GameCount() == 0))
 			{
 				if(WBFS_ReInit(WBFS_DEVICE_USB) < 0)
@@ -858,11 +858,13 @@ int GameBrowseMenu::MainLoop()
 						ThreadedTask::Instance()->AddCallback(&HDDSizeCallback);
 						ThreadedTask::Instance()->Execute();
 					}
-					return MENU_INSTALL;
+					return MenuInstall();
 				}
 			}
 			else
-				return MENU_INSTALL;
+				return MenuInstall();
+
+			this->SetState(STATE_DEFAULT);
 		}
 		installBtn->ResetState();
 	}
@@ -1205,14 +1207,6 @@ int GameBrowseMenu::MainLoop()
 		OpenClickedGame();
 	}
 
-	if (!IsWpadConnected())
-	{
-		if(Settings.screensaver != 0 && WiiMoteInitiated)
-			WindowScreensaver();
-	}
-	else if(!WiiMoteInitiated)
-		WiiMoteInitiated = true;
-
 	return returnMenu;
 }
 
@@ -1238,7 +1232,7 @@ void GameBrowseMenu::CheckDiscSlotUpdate()
 				return;
 			}
 
-			returnMenu = MENU_INSTALL;
+			returnMenu = MenuInstall();
 		}
 		else if (choice == 2)
 			dvdBtn->SetState(STATE_CLICKED);
@@ -1300,6 +1294,11 @@ void GameBrowseMenu::UpdateClock()
 			strftime(theTime, sizeof(theTime), "%H %M", timeinfo);
 	}
 	clockTime->SetText(theTime);
+
+	if (Settings.screensaver != 0 && ControlActivityTimeout())
+	{
+		WindowScreensaver();
+	}
 }
 
 void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)

@@ -60,8 +60,7 @@ void Theme::Reload()
 	{
 		char image[50];
 		snprintf(image, sizeof(image), "player%i_point.png", i+1);
-		delete pointer[i];
-		pointer[i] = Resources::GetImageData(image);
+		pointer[i]->SetImage(image);
 	}
 	delete btnSoundClick;
 	delete btnSoundClick2;

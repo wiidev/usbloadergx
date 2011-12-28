@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-28 10:29+0100\n"
+"POT-Creation-Date: 2011-12-28 16:35+0100\n"
 "PO-Revision-Date: 2011-06-30 14:22+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -945,6 +945,9 @@ msgstr "Voer een Wii disk in!"
 msgid "Install"
 msgstr "Installeer"
 
+msgid "Install Canceled"
+msgstr ""
+
 msgid "Install Directories"
 msgstr "Installeer mappen"
 
@@ -1696,6 +1699,9 @@ msgid "Version: %s"
 msgstr "Versie: %s"
 
 msgid "Video Mode"
+msgstr ""
+
+msgid "Virtual Pointer Speed"
 msgstr ""
 
 msgid "WDM Files Path"

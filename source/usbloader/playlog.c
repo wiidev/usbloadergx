@@ -75,6 +75,9 @@ int Playlog_Update(const char * ID, const u16 * title)
 	if(!ID || !title)
 		return -1;
 
+	//If not started from SystemMenu, create playlog
+	Playlog_Create();
+
 	s32 fd = -1, res = -1;
 	u32 sum = 0;
 	u8 i;

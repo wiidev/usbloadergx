@@ -215,7 +215,6 @@ s32 Wad_Install(FILE *fp)
 	HaltGui();
 	mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(&promptWindow);
-	mainWindow->ChangeFocus(&promptWindow);
 	//sleep(1);
 
 
@@ -496,7 +495,6 @@ s32 Wad_Uninstall(FILE *fp)
 	HaltGui();
 	mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(&promptWindow);
-	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
 	//sleep(3);
 

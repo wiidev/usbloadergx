@@ -4,8 +4,6 @@
 #include "settings/GameTitles.h"
 #include "menu/menus.h"
 
-extern GuiImageData * pointer[4];
-
 void rockout(int gameSelected, int f)
 {
 	static bool rockoutSet = false;
@@ -16,23 +14,19 @@ void rockout(int gameSelected, int f)
 			|| strcasestr(GameTitles.GetTitle(gameList[gameSelected]), "band") || strcasestr(GameTitles.GetTitle(gameList[gameSelected]),
 			"rock")))
 	{
-		for (int i = 0; i < 4; i++)
-			delete pointer[i];
-		pointer[0] = Resources::GetImageData("rplayer1_point.png");
-		pointer[1] = Resources::GetImageData("rplayer2_point.png");
-		pointer[2] = Resources::GetImageData("rplayer3_point.png");
-		pointer[3] = Resources::GetImageData("rplayer4_point.png");
+		pointer[0]->SetImage("rplayer1_point.png");
+		pointer[1]->SetImage("rplayer2_point.png");
+		pointer[2]->SetImage("rplayer3_point.png");
+		pointer[3]->SetImage("rplayer4_point.png");
 
 		rockoutSet = true;
 	}
 	else if(rockoutSet)
 	{
-		for (int i = 0; i < 4; i++)
-			delete pointer[i];
-		pointer[0] = Resources::GetImageData("player1_point.png");
-		pointer[1] = Resources::GetImageData("player2_point.png");
-		pointer[2] = Resources::GetImageData("player3_point.png");
-		pointer[3] = Resources::GetImageData("player4_point.png");
+		pointer[0]->SetImage("player1_point.png");
+		pointer[1]->SetImage("player2_point.png");
+		pointer[2]->SetImage("player3_point.png");
+		pointer[3]->SetImage("player4_point.png");
 
 		rockoutSet = false;
 	}

@@ -386,10 +386,12 @@ static void free_block(wbfs_t *p, int bl)
 	p->freeblks[i] = wbfs_htonl( v | 1 << j );
 }
 
+int install_abort_signal = 0;
+
 s32 wbfs_add_disc(wbfs_t*p, read_wiidisc_callback_t read_src_wii_disc, void *callback_data,
 		progress_callback_t spinner, partition_selector_t sel, int copy_1_1)
 {
-	int i, discn;
+	int i, discn, ret;
 	u32 tot, cur;
 	u32 wii_sec_per_wbfs_sect = 1 << (p->wbfs_sec_sz_s - p->wii_sec_sz_s);
 	wiidisc_t *d = 0;
@@ -457,6 +459,8 @@ s32 wbfs_add_disc(wbfs_t*p, read_wiidisc_callback_t read_src_wii_disc, void *cal
 		}
 		tot = num_wbfs_sect_to_copy * wii_sec_per_wbfs_sect;
 	}
+	
+	install_abort_signal = 0;
 	/*
 	 // num of hd sectors to copy could be specified directly
 	 if (copy_1_1 > 1) {
@@ -464,7 +468,6 @@ s32 wbfs_add_disc(wbfs_t*p, read_wiidisc_callback_t read_src_wii_disc, void *cal
 	 num_wbfs_sect_to_copy = copy_1_1 / hd_sec_per_wii_sec / wii_sec_per_wbfs_sect;
 	 tot = num_wbfs_sect_to_copy * wii_sec_per_wbfs_sect;
 	 }*/
-	int ret = 0;
 	if (spinner) spinner(0, tot);
 	for (i = 0; i < num_wbfs_sect_to_copy; i++)
 	{
@@ -505,8 +508,22 @@ s32 wbfs_add_disc(wbfs_t*p, read_wiidisc_callback_t read_src_wii_disc, void *cal
 				if (spinner) spinner(cur, tot);
 			}
 		}
-		if (ret) break;
+		if (install_abort_signal)
+			break;
 		info->wlba_table[i] = wbfs_htons( bl );
+	}
+
+	if(install_abort_signal)
+	{
+		int n;
+		for(n = 0; n < i; n++)
+		{
+			u32 iwlba = wbfs_ntohs(info->wlba_table[n]);
+			if (iwlba)
+				free_block(p,iwlba);
+		}
+		wbfs_memset(info,0,p->disc_info_sz);
+		p->head->disc_table[discn] = 0;
 	}
 	// write disc info
 	int disc_info_sz_lba = p->disc_info_sz >> p->hd_sec_sz_s;

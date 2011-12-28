@@ -32,7 +32,6 @@ GuiOptionBrowser::GuiOptionBrowser(int w, int h, OptionList * l, const char * cu
 	selectable = true;
 	selectedItem = 0;
 	oldSelectedItem = -1;
-	focus = 1; // allow focus
 	coL2 = 50;
 	listOffset = 0;
 

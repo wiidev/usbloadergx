@@ -42,7 +42,6 @@ GuiElement::GuiElement()
 	clickable = false;
 	holdable = false;
 	visible = true;
-	focus = -1; // cannot be focused
 	updateCB = NULL;
 	yoffsetDyn = 0;
 	xoffsetDyn = 0;
@@ -325,12 +324,6 @@ bool GuiElement::IsHoldable()
 	if (state == STATE_DISABLED)
 		return false;
 	else return holdable;
-}
-
-void GuiElement::SetFocus(int f)
-{
-	LOCK( this );
-	focus = f;
 }
 
 void GuiElement::SetTrigger(GuiTrigger * t)

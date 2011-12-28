@@ -56,7 +56,6 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, int offset
 	listOffset = (gameList.size() < 11) ? LIMIT(offset, 0, MAX(0, gameList.size()-1)) : LIMIT(offset, 0, MAX(0, gameList.size()-1))-2;
 	selectable = true;
 	selectedItem = -1;
-	focus = 1; // allow focus
 	clickedItem = -1;
 
 	speed = 0;
@@ -208,8 +207,6 @@ void GuiGameCarousel::SetFocus(int f)
 	LOCK( this );
 	if (!gameList.size()) return;
 
-	focus = f;
-
 	for (int i = 0; i < pagesize; i++)
 		game[i]->ResetState();
 
@@ -283,8 +280,9 @@ void GuiGameCarousel::Draw()
 	}
 
 	//!Draw tooltip after the Images to have it on top
-	if (focus && Settings.tooltips == ON) for (int i = 0; i < pagesize; i++)
-		game[i]->DrawTooltip();
+	if (Settings.tooltips == ON)
+		for (int i = 0; i < pagesize; i++)
+			game[i]->DrawTooltip();
 
 	this->UpdateEffects();
 }
@@ -332,7 +330,7 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 		if (selectedItem_old >= 0) game[selectedItem_old]->SetEffect(EFFECT_SCALE, -1, 100);
 	}
 	// navigation
-	if (focus && gameList.size() > 6)
+	if (gameList.size() > 6)
 	{
 
 		int newspeed = 0;

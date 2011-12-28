@@ -470,11 +470,6 @@ void GuiButton::Update(GuiTrigger * t)
 							this->SetState(STATE_CLICKED, t->chan);
 							if (soundClick) soundClick->Play();
 						}
-						else if (trigger[i]->type == TRIGGER_BUTTON_ONLY_IN_FOCUS && parentElement->IsFocused())
-						{
-							this->SetState(STATE_CLICKED, t->chan);
-							if (soundClick) soundClick->Play();
-						}
 					}
 				}
 			}

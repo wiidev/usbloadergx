@@ -22,7 +22,6 @@ GuiNumpad::GuiNumpad(char * t, u32 max)
 	width = 400;
 	height = 370;
 	selectable = true;
-	focus = 0; // allow focus
 	alignmentHor = ALIGN_CENTRE;
 	alignmentVert = ALIGN_MIDDLE;
 	kbtextmaxlen = max > sizeof(kbtextstr) ? sizeof(kbtextstr) : max; // limit max up to sizeof(kbtextstr)
@@ -178,18 +177,4 @@ void GuiNumpad::Update(GuiTrigger * t)
 	}
 
 	kbText->SetPosition(0, 53);
-
-	this->ToggleFocus(t);
-
-	if (focus) // only send actions to this window if it's in focus
-	{
-		// pad/joystick navigation
-		if (t->Right())
-			this->MoveSelectionHor(1);
-		else if (t->Left())
-			this->MoveSelectionHor(-1);
-		else if (t->Down())
-			this->MoveSelectionVert(1);
-		else if (t->Up()) this->MoveSelectionVert(-1);
-	}
 }

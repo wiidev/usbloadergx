@@ -86,7 +86,6 @@ int OnScreenNumpad(char * var, u32 maxlen)
 	HaltGui();
 	mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(&numpad);
-	mainWindow->ChangeFocus(&numpad);
 	ResumeGui();
 
 	while (save == -1)
@@ -160,7 +159,6 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min, bool hide)
 	HaltGui();
 	mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(&keyboard);
-	mainWindow->ChangeFocus(&keyboard);
 	ResumeGui();
 
 	while (save == -1)
@@ -449,16 +447,6 @@ void WindowCredits()
  ***************************************************************************/
 int WindowScreensaver()
 {
-	//! 2 Seconds delay in case the wiimote shutdown was pressed
-	time_t start = time(0);
-	while(time(0)-start < 2)
-	{
-		usleep(100);
-
-		if(shutdown)
-			return 0;
-	}
-
 	gprintf("WindowScreenSaver()\n");
 	bool exit = false;
 
@@ -491,11 +479,9 @@ int WindowScreensaver()
 		if (reset)
 			Sys_Reboot();
 
-		if (IsWpadConnected())
-		{
-			exit = true;
+		if(!ControlActivityTimeout())
 			break;
-		}
+
 			/* Set random position */
 		GXlogoImg.SetPosition((rand() % 345), (rand() % 305));
 
@@ -540,7 +526,6 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
 
 	mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(Window);
-	mainWindow->ChangeFocus(Window);
 	ResumeGui();
 
 	while (choice == -1)
@@ -761,7 +746,6 @@ int WindowExitPrompt()
 	HaltGui();
 	mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(&promptWindow);
-	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
 
 	while (choice == -1)
@@ -843,7 +827,6 @@ int WindowExitPrompt()
 			HaltGui();
 			mainWindow->SetState(STATE_DISABLED);
 			promptWindow.SetState(STATE_DEFAULT);
-			mainWindow->ChangeFocus(&promptWindow);
 			ResumeGui();
 			btn2.ResetState();
 		}
@@ -864,7 +847,6 @@ int WindowExitPrompt()
 			HaltGui();
 			mainWindow->SetState(STATE_DISABLED);
 			promptWindow.SetState(STATE_DEFAULT);
-			mainWindow->ChangeFocus(&promptWindow);
 			ResumeGui();
 			btn3.ResetState();
 		}
@@ -1016,7 +998,6 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
 	HaltGui();
 	mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(&promptWindow);
-	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
 
 	if (IsDeviceWait)
@@ -1103,7 +1084,6 @@ int FormatingPartition(const char *title, int part_num)
 	HaltGui();
 	mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(&promptWindow);
-	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
 
 	VIDEO_WaitVSync();
@@ -1201,7 +1181,6 @@ bool NetworkInitPrompt()
 	HaltGui();
 	mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(&promptWindow);
-	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
 
 	while (!IsNetworkInit())

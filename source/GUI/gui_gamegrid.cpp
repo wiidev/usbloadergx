@@ -210,7 +210,6 @@ GuiGameGrid::GuiGameGrid(int w, int h, const char *themePath, int offset) :
 	theme_posY = thInt("20 - game grid layout pos y");
 
 	selectable = true;
-	focus = 1; // allow focus
 
 	trigA = new GuiTrigger;
 	trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -303,8 +302,6 @@ GuiGameGrid::~GuiGameGrid()
 void GuiGameGrid::SetFocus(int f)
 {
 	LOCK( this );
-
-	focus = f;
 
 	for (u32 i = 0; i < game.size(); i++)
 		game[i]->ResetState();
@@ -422,7 +419,7 @@ void GuiGameGrid::Draw()
 	btnRowUp->Draw();
 	btnRowDown->Draw();
 
-	if (focus && Settings.tooltips == ON)
+	if (Settings.tooltips == ON)
 		for (int i = 0; i < pagesize; i++)
 			game[i]->DrawTooltip();
 
@@ -469,7 +466,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 
 	}
 	// navigation
-	if (focus && gameList.size() >= (pagesize - 2 * rows) && goLeft == 0 && goRight == 0)
+	if (gameList.size() >= (pagesize - 2 * rows) && goLeft == 0 && goRight == 0)
 	{
 		// Left/Right Navigation
 

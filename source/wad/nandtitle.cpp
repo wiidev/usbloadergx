@@ -72,8 +72,6 @@ s32 NandTitle::Get()
 	}
 
 	ISFS_Deinitialize();
-	//If not started from SystemMenu, create playlog while we got nand access.
-	Playlog_Create();
 	return 1;
 }
 

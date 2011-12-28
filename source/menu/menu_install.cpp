@@ -7,7 +7,8 @@
 #include "prompts/ProgressWindow.h"
 #include "themes/CTheme.h"
 
-u64 gamesize = 0;
+extern int install_abort_signal;
+float gamesize = 0.0f;
 
 /****************************************************************************
  * MenuInstall
@@ -43,7 +44,7 @@ int MenuInstall()
 		choice = WindowPrompt(tr( "Not a Wii Disc" ), tr( "Insert a Wii Disc!" ), tr( "OK" ), tr( "Back" ));
 
 		if (choice == 1)
-			return MENU_INSTALL;
+			return MenuInstall();
 		else
 			return MENU_DISCLIST;
 	}
@@ -61,7 +62,7 @@ int MenuInstall()
 	f32 freespace, used;
 
 	WBFS_DiskSpace(&used, &freespace);
-	gamesize = WBFS_EstimeGameSize();
+	gamesize = (float) WBFS_EstimeGameSize();
 
 	char gametxt[50];
 
@@ -83,10 +84,16 @@ int MenuInstall()
 		else
 		{
 			StartProgress(gametxt, name, 0, true, true);
+			ProgressCancelEnable(true);
 			ret = WBFS_AddGame();
+			ProgressCancelEnable(false);
 			ProgressStop();
 			wiilight(0);
-			if (ret != 0)
+			if (install_abort_signal)
+			{
+				WindowPrompt(tr( "Install Canceled" ), 0, tr( "OK" ));
+			}
+			else if (ret != 0)
 			{
 				WindowPrompt(tr( "Install Error!" ), 0, tr( "Back" ));
 			}
@@ -111,7 +118,7 @@ int MenuInstall()
 
 	//Turn off the WiiLight
 	wiilight(0);
-	gamesize = 0;
+	gamesize = 0.0f;
 
 	return MENU_DISCLIST;
 }

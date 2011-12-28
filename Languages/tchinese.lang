@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-28 10:29+0100\n"
+"POT-Creation-Date: 2011-12-28 16:35+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -945,6 +945,9 @@ msgstr "插入 Wii 光碟！"
 msgid "Install"
 msgstr "安裝"
 
+msgid "Install Canceled"
+msgstr ""
+
 msgid "Install Directories"
 msgstr "安裝目錄"
 
@@ -1697,6 +1700,9 @@ msgstr "版本: %s"
 
 msgid "Video Mode"
 msgstr "視訊格式"
+
+msgid "Virtual Pointer Speed"
+msgstr ""
 
 msgid "WDM Files Path"
 msgstr "WDM檔案路徑"

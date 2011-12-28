@@ -554,6 +554,9 @@ bool PatchReturnTo( void *Address, int Size, u32 id )
 		returnToPatched = 1;
 	}
 
+	if(returnToPatched)
+		gprintf("Return to %08X patched with old method.\n", (u32) title);
+
 	return returnToPatched;
 }
 
@@ -574,6 +577,9 @@ int PatchNewReturnTo(int es_fd, u64 title)
 
 	if(es_fd >= 0)
 		result = IOS_Ioctlv(es_fd, 0xA1, 1, 0, vector);
+
+	if(result >= 0)
+		gprintf("Return to %08X patched with d2x method.\n", (u32) title);
 
 	return result;
 }
@@ -603,6 +609,9 @@ int BlockIOSReload(int es_fd, u8 gameIOS)
 
 	if(es_fd >= 0)
 		result = IOS_Ioctlv(es_fd, 0xA0, inlen, 0, vector);
+
+	if(result >= 0)
+		gprintf("Block IOS Reload patched with d2x method.\n");
 
 	return (result >= 0);
 }

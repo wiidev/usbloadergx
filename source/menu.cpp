@@ -40,7 +40,7 @@
 
 /*** Variables that are also used extern ***/
 GuiWindow * mainWindow = NULL;
-GuiImageData * pointer[4] = { NULL, NULL, NULL, NULL };
+WiiPointer * pointer[4] = { NULL, NULL, NULL, NULL };
 GuiImage * bgImg = NULL;
 GuiImageData * background = NULL;
 GuiBGM * bgMusic = NULL;
@@ -103,27 +103,21 @@ static void * UpdateGUI(void *arg)
 			continue;
 		}
 
-		mainWindow->Draw();
-		if (Settings.tooltips && Theme::ShowTooltips && mainWindow->GetState() != STATE_DISABLED) mainWindow->DrawTooltip();
-
-		for (i = 3; i >= 0; i--)
-		{
-			if (userInput[i].wpad.ir.valid)
-			{
-				Menu_DrawImg(userInput[i].wpad.ir.x - pointer[i]->GetWidth()/2,
-							 userInput[i].wpad.ir.y - pointer[i]->GetHeight()/2,
-							 9900.0f, pointer[i]->GetWidth(), pointer[i]->GetHeight(),
-							 pointer[i]->GetImage(), userInput[i].wpad.ir.angle,
-							 Settings.widescreen ? Settings.WSFactor : 1.f, 1.f, 255, 0, 0, 0, 0, 0, 0, 0, 0);
-			}
-		}
-
-		Menu_Render();
-
 		UpdatePads();
+
+		mainWindow->Draw();
+		if (Settings.tooltips && Theme::ShowTooltips && mainWindow->GetState() != STATE_DISABLED)
+			mainWindow->DrawTooltip();
+		
+		// Pointer modifies wpad data struct for easy implementation of "virtual pointer" with PAD-Sticks
+		// That is why it has to be called right before updating other gui elements with the triggers
+		for (i = 3; i >= 0; i--)
+			pointer[i]->Draw(&userInput[i]);
 
 		for (i = 0; i < 4; i++)
 			mainWindow->Update(&userInput[i]);
+
+		Menu_Render();
 
 		if (bgMusic) bgMusic->UpdateState();
 	}
@@ -185,10 +179,10 @@ int MainMenu(int menu)
 	btnSoundClick2 = new GuiSound(Resources::GetFile("button_click2.wav"), Resources::GetFileSize("button_click2.wav"), Settings.sfxvolume);
 	btnSoundOver = new GuiSound(Resources::GetFile("button_over.wav"), Resources::GetFileSize("button_over.wav"), Settings.sfxvolume);
 
-	pointer[0] = Resources::GetImageData("player1_point.png");
-	pointer[1] = Resources::GetImageData("player2_point.png");
-	pointer[2] = Resources::GetImageData("player3_point.png");
-	pointer[3] = Resources::GetImageData("player4_point.png");
+	pointer[0] = new WiiPointer("player1_point.png");
+	pointer[1] = new WiiPointer("player2_point.png");
+	pointer[2] = new WiiPointer("player3_point.png");
+	pointer[3] = new WiiPointer("player4_point.png");
 
 	mainWindow = new GuiWindow(screenwidth, screenheight);
 
@@ -212,9 +206,6 @@ int MainMenu(int menu)
 
 		switch (currentMenu)
 		{
-			case MENU_INSTALL:
-				currentMenu = MenuInstall();
-				break;
 			case MENU_SETTINGS:
 				currentMenu = GlobalSettings::Execute();
 				break;

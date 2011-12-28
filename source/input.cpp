@@ -60,38 +60,54 @@ void UpdatePads()
 }
 
 /****************************************************************************
+ * ScreensaverTime
+ ***************************************************************************/
+static inline u32 ScreensaverTime(int setting)
+{
+	switch (setting)
+	{
+		case 0:
+			return 0xFFFFFF;
+		case 1:
+			return 180;
+		case 2:
+			return 300;
+		case 3:
+			return 600;
+		case 4:
+			return 1200;
+		case 5:
+			return 1800;
+		case 6:
+			return 3600;
+		default:
+			break;
+	}
+
+	return 0xFFFFFF;
+}
+
+/****************************************************************************
  * SetWPADTimeout
  ***************************************************************************/
 void SetWPADTimeout()
 {
-	switch (Settings.screensaver)
-	{
-		case 0:
-			WPAD_SetIdleTimeout(0xFFFFFF);
-			break;
-		case 1:
-			WPAD_SetIdleTimeout(180);
-			break;
-		case 2:
-			WPAD_SetIdleTimeout(300);
-			break;
-		case 3:
-			WPAD_SetIdleTimeout(600);
-			break;
-		case 4:
-			WPAD_SetIdleTimeout(1200);
-			break;
-		case 5:
-			WPAD_SetIdleTimeout(1800);
-			break;
-		case 6:
-			WPAD_SetIdleTimeout(3600);
-			break;
-		default:
-			break;
-	}
+	WPAD_SetIdleTimeout(ScreensaverTime(Settings.screensaver));
 }
 
+/****************************************************************************
+ * ControlActivityTimeOut
+ ***************************************************************************/
+bool ControlActivityTimeout(void)
+{
+	u32 minTime = 0xFFFFFF;
+	for(int i = 0; i < 3; ++i)
+		if(pointer[i]->getLastActivCounter() < minTime)
+			minTime = pointer[i]->getLastActivCounter();
+
+	// not very accurate but it's not required here
+	return (minTime/60 > ScreensaverTime(Settings.screensaver));
+}
 /****************************************************************************
  * SetupPads
  *

@@ -12,7 +12,6 @@ class GuiFileBrowser: public GuiElement, public sigslot::has_slots<>
 		virtual ~GuiFileBrowser();
 		void DisableTriggerUpdate(bool set);
 		void ResetState();
-		void SetFocus(int f);
 		void Draw();
 		void UpdateList();
 		void Update(GuiTrigger * t);

@@ -37,7 +37,6 @@ GuiGameList::GuiGameList(int w, int h, int offset)
 	selectable = true;
 	listOffset = LIMIT(offset, 0, MAX(0, gameList.size()-pagesize));
 	selectedItem = 0;
-	focus = 1; // allow focus
 
 	trigA = new GuiTrigger;
 	trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -133,8 +132,6 @@ void GuiGameList::SetFocus(int f)
 {
 	LOCK( this );
 	if (!gameList.size()) return;
-
-	focus = f;
 
 	for (int i = 0; i < pagesize; ++i)
 		game[i]->ResetState();

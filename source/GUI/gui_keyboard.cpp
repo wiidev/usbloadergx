@@ -31,7 +31,6 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int minimum, int lang)
 	int mode = lang;
 	textVisible = true;
 	selectable = true;
-	focus = 0; // allow focus
 	alignmentHor = ALIGN_CENTRE;
 	alignmentVert = ALIGN_MIDDLE;
 	kbtextmaxlen = max > sizeof(kbtextstr) ? sizeof(kbtextstr) : max; // limit max up to sizeof(kbtextstr)
@@ -601,18 +600,4 @@ void GuiKeyboard::Update(GuiTrigger * t)
 			}
 		}
 	} while (update);
-
-	this->ToggleFocus(t);
-
-	if (focus) // only send actions to this window if it's in focus
-	{
-		// pad/joystick navigation
-		if (t->Right())
-			this->MoveSelectionHor(1);
-		else if (t->Left())
-			this->MoveSelectionHor(-1);
-		else if (t->Down())
-			this->MoveSelectionVert(1);
-		else if (t->Up()) this->MoveSelectionVert(-1);
-	}
 }

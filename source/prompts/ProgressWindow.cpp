@@ -21,6 +21,9 @@
 #include "themes/CTheme.h"
 #include "utils/timer.h"
 
+extern float gamesize;
+extern int install_abort_signal;
+
 /*** Variables used only in this file ***/
 static lwp_t progressthread = LWP_THREAD_NULL;
 static mutex_t ProgressMutex = LWP_MUTEX_NULL;
@@ -209,8 +212,6 @@ static void UpdateProgressValues(GuiImage *progressbarImg, GuiText *prTxt, GuiTe
 	if(!changed)
 		return;
 
-	extern u64 gamesize;
-
 	LWP_MutexLock(ProgressMutex);
 	changed = false;
 	changedMessages = false;
@@ -218,10 +219,13 @@ static void UpdateProgressValues(GuiImage *progressbarImg, GuiText *prTxt, GuiTe
 	s64 total = progressTotal;
 	u32 speed = 0;
 
-	if(gamesize > 0)
+	if(gamesize > 0.0f)
 	{
-		done = (s64) ((double) done / (double) total * (double) gamesize);
+		done = (s64) ((float) done / (float) total * gamesize);
 		total = (s64) gamesize;
+
+		if(progressCanceled)
+			install_abort_signal = 1;
 	}
 
 	//Calculate speed in KB/s
@@ -286,6 +290,13 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 	usleep(500000); // wait to see if progress flag changes soon
 	if (!showProgress) return;
 
+	int PosY;
+
+	//if(msg2 != 0)
+	//	PosY = 40;
+	//else
+		PosY = 20;
+
 	GuiWindow promptWindow(472, 320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
@@ -310,29 +321,26 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 		progressbarOutlineImg.SetWidescreen(Settings.widescreen);
 	}
 	progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	progressbarOutlineImg.SetPosition(35, 40);
+	progressbarOutlineImg.SetPosition(35, PosY);
 
 	GuiImageData progressbarEmpty(Resources::GetFile("progressbar_empty.png"), Resources::GetFileSize("button_dialogue_box.png"));
 	GuiImage progressbarEmptyImg(&progressbarEmpty);
 	progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	progressbarEmptyImg.SetPosition(35, 40);
+	progressbarEmptyImg.SetPosition(35, PosY);
 	progressbarEmptyImg.SetTileHorizontal(100);
 
 	GuiImageData progressbar(Resources::GetFile("progressbar.png"), Resources::GetFileSize("progressbar.png"));
 	GuiImage progressbarImg(&progressbar);
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	progressbarImg.SetPosition(35, 40);
+	progressbarImg.SetPosition(35, PosY);
 
 	GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	titleTxt.SetPosition(0, 60);
+	titleTxt.SetPosition(0, 50);
 
 	GuiText msg1Txt(msg1, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
 	msg1Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	if (msg2)
-		msg1Txt.SetPosition(0, 100);
-	else
-		msg1Txt.SetPosition(0, 120);
+	msg1Txt.SetPosition(0, 90);
 	msg1Txt.SetMaxWidth(430, DOTTED);
 
 	GuiText msg2Txt(msg2, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
@@ -342,31 +350,31 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
 	GuiText prsTxt("%", 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
 	prsTxt.SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
-	prsTxt.SetPosition(-178, 40);
+	prsTxt.SetPosition(-178, PosY);
 
-	GuiText timeTxt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	GuiText timeTxt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
 	timeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
 	timeTxt.SetPosition(280, -50);
 
-	GuiText sizeTxt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	GuiText sizeTxt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
 	sizeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
 	sizeTxt.SetPosition(50, -50);
 
-	GuiText speedTxt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+	GuiText speedTxt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
 	speedTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
 	speedTxt.SetPosition(50, -74);
 
 	GuiText prTxt((char*) NULL, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
 	prTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	prTxt.SetPosition(210, 40);
+	prTxt.SetPosition(210, PosY);
 
 	if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust for widescreen
 	{
 		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-		progressbarOutlineImg.SetPosition(0, 40);
-		progressbarEmptyImg.SetPosition(80, 40);
+		progressbarOutlineImg.SetPosition(0, PosY);
+		progressbarEmptyImg.SetPosition(80, PosY);
 		progressbarEmptyImg.SetTileHorizontal(78);
-		progressbarImg.SetPosition(80, 40);
+		progressbarImg.SetPosition(80, PosY);
 		msg1Txt.SetMaxWidth(380, DOTTED);
 		msg2Txt.SetMaxWidth(380, DOTTED);
 
@@ -380,15 +388,20 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
 	GuiText cancelTxt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
 	GuiImage cancelImg(&btnOutline);
+	const float cancelScale = 0.8f;
+	cancelImg.SetScale(cancelScale);
+	cancelTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+	cancelTxt.SetPosition(cancelImg.GetWidth()/2*cancelScale-cancelTxt.GetTextWidth()/2, 0);
 	if (Settings.wsprompt)
 	{
 		cancelTxt.SetWidescreen(Settings.widescreen);
 		cancelImg.SetWidescreen(Settings.widescreen);
 	}
 
-	GuiButton cancelBtn(&cancelImg, &cancelImg, 2, 4, 0, -45, &trigA, btnSoundOver, btnSoundClick2, 1);
+	GuiButton cancelBtn(&cancelImg, &cancelImg, ALIGN_LEFT, ALIGN_MIDDLE, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
 	cancelBtn.SetLabel(&cancelTxt);
 	cancelBtn.SetState(STATE_SELECTED);
+	cancelBtn.SetPosition(dialogBoxImg.GetWidth()/2-cancelImg.GetWidth()/2*cancelScale, PosY + 45);
 
 	promptWindow.Append(&dialogBoxImg);
 	promptWindow.Append(&progressbarEmptyImg);
@@ -406,17 +419,12 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 		promptWindow.Append(&speedTxt);
 	}
 	if(CancelEnabled)
-	{
 		promptWindow.Append(&cancelBtn);
-		if(showSize)
-			cancelBtn.SetPosition(90, -45);
-	}
 
 	HaltGui();
 	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 	mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(&promptWindow);
-	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
 
 	while (promptWindow.GetEffect() > 0) usleep(100);
@@ -432,10 +440,23 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
 		if (changed)
 		{
-			if (changedMessages) titleTxt.SetText(progressTitle);
-			if (changedMessages) msg1Txt.SetText(progressMsg1);
-			if (changedMessages) msg2Txt.SetText(progressMsg2);
+			if (changedMessages)
+			{
+				titleTxt.SetText(progressTitle);
+				msg1Txt.SetText(progressMsg1);
+				msg2Txt.SetText(progressMsg2);
 
+				if(progressMsg1[0] != '\0' && progressMsg2[0] == '\0') {
+					msg1Txt.SetPosition(0, 120);
+				}
+				else if(progressMsg2[0] != '\0' && progressMsg1[0] == '\0') {
+					msg2Txt.SetPosition(0, 120);
+				}
+				else {
+					msg1Txt.SetPosition(0, 90);
+					msg2Txt.SetPosition(0, 125);
+				}
+			}
 			UpdateProgressValues(&progressbarImg, &prTxt, &timeTxt, &speedTxt, &sizeTxt);
 		}
 

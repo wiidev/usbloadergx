@@ -220,7 +220,6 @@ int CheckboxPrompt::Show(const char *title, const char *msg,
 
 	mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(Window);
-	mainWindow->ChangeFocus(Window);
 
 	int choice = -2;
 

@@ -99,7 +99,6 @@ int CheatMenu(const char * gameID)
 			w.Append(&createBtn);
 			w.Append(&chtBrowser);
 			mainWindow->SetState(STATE_DISABLED);
-			mainWindow->ChangeFocus(&w);
 			mainWindow->Append(&w);
 			ResumeGui();
 
@@ -169,7 +168,7 @@ int CheatMenu(const char * gameID)
 					{
 						w.Remove(&chtBrowser);
 						cheatslst.ClearList();
-
+						cntcheats = c.getCnt();
 						for (int i = 0; i < cntcheats; i++)
 						{
 							cheatslst.SetValue(i, "%s", c.getCheatName(i).c_str());
