@@ -307,7 +307,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 				BlockIOSReload(es_fd, iosChoice);
 			}
 			// Check if new patch method for return to works otherwise old method will be used
-			if(PatchNewReturnTo(es_fd, returnToChoice) < 0)
+			if(PatchNewReturnTo(es_fd, returnToChoice) >= 0)
 				returnToChoice = 0; // Patch successful, no need for old method
 
 			// Close ES file descriptor

@@ -32,14 +32,20 @@ int CheatMenu(const char * gameID)
 	GuiText backBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
 	backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
 	GuiImage backBtnImg(&btnOutline);
-	GuiButton backBtn(&backBtnImg, &backBtnImg, 2, 3, -140, 400, &trigA, NULL, btnSoundClick2, 1);
+	GuiButton backBtn(&backBtnImg, &backBtnImg, 2, 3, -195, 400, &trigA, NULL, btnSoundClick2, 1);
 	backBtn.SetLabel(&backBtnTxt);
 	backBtn.SetTrigger(&trigB);
+
+	GuiText updateBtnTxt(tr( "Update" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
+	updateBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
+	GuiImage updateBtnImg(&btnOutline);
+	GuiButton updateBtn(&updateBtnImg, &updateBtnImg, 2, 3, 0, 400, &trigA, NULL, btnSoundClick2, 1);
+	updateBtn.SetLabel(&updateBtnTxt);
 
 	GuiText createBtnTxt(tr( "Create" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
 	createBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
 	GuiImage createBtnImg(&btnOutline);
-	GuiButton createBtn(&createBtnImg, &createBtnImg, 2, 3, 160, 400, &trigA, NULL, btnSoundClick2, 1);
+	GuiButton createBtn(&createBtnImg, &createBtnImg, 2, 3, 195, 400, &trigA, NULL, btnSoundClick2, 1);
 	createBtn.SetLabel(&createBtnTxt);
 
 	char txtfilename[55];
@@ -89,6 +95,7 @@ int CheatMenu(const char * gameID)
 			w.Append(&settingsbackground);
 			w.Append(&titleTxt);
 			w.Append(&backBtn);
+			w.Append(&updateBtn);
 			w.Append(&createBtn);
 			w.Append(&chtBrowser);
 			mainWindow->SetState(STATE_DISABLED);
@@ -153,6 +160,24 @@ int CheatMenu(const char * gameID)
 					backBtn.ResetState();
 					exit = true;
 					break;
+				}
+
+				if(updateBtn.GetState() == STATE_CLICKED)
+				{
+					download = CodeDownload(gameID);
+					if (download >= 0 && c.openTxtfile(txtfilename) == 1)
+					{
+						w.Remove(&chtBrowser);
+						cheatslst.ClearList();
+
+						for (int i = 0; i < cntcheats; i++)
+						{
+							cheatslst.SetValue(i, "%s", c.getCheatName(i).c_str());
+							cheatslst.SetName(i, "OFF");
+						}
+						w.Append(&chtBrowser);
+					}
+					updateBtn.ResetState();
 				}
 			}
 			HaltGui();

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-23 14:21+0100\n"
+"POT-Creation-Date: 2011-12-28 10:29+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -712,6 +712,9 @@ msgid "Failed to extract all files. Savegame might not exist."
 msgstr ""
 
 msgid "Failed to extract."
+msgstr ""
+
+msgid "Failed to initialize the USB storage device."
 msgstr ""
 
 msgid "Failed to open partition"
@@ -1558,9 +1561,6 @@ msgstr ""
 msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
 msgstr ""
 
-msgid "The game installation is disabled under this IOS because of instability in usb write."
-msgstr ""
-
 msgid "The save game will be extracted to your emu nand path."
 msgstr ""
 
@@ -1769,9 +1769,6 @@ msgstr "Väärä salasana"
 
 msgid "Yes"
 msgstr "Kyllä"
-
-msgid "You are currently using IOS"
-msgstr ""
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr ""

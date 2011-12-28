@@ -507,7 +507,6 @@ s32 wbfs_add_disc(wbfs_t*p, read_wiidisc_callback_t read_src_wii_disc, void *cal
 		}
 		if (ret) break;
 		info->wlba_table[i] = wbfs_htons( bl );
-		wbfs_sync(p);
 	}
 	// write disc info
 	int disc_info_sz_lba = p->disc_info_sz >> p->hd_sec_sz_s;

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-23 14:21+0100\n"
+"POT-Creation-Date: 2011-12-28 10:29+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -713,6 +713,9 @@ msgstr "全てのファイルを書き出せません。セーブがありませ
 
 msgid "Failed to extract."
 msgstr "解凍に失敗しました"
+
+msgid "Failed to initialize the USB storage device."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr "領域を開けませんでした"
@@ -1558,9 +1561,6 @@ msgstr "フォルダがありません。作成しますか？"
 msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
 msgstr "ファイルはエミュNANDパスに書き出されます 注意:すでにあるファイルは上書きされます"
 
-msgid "The game installation is disabled under this IOS because of instability in usb write."
-msgstr "このIOSでのゲームの追加は不安定なため無効になっています"
-
 msgid "The save game will be extracted to your emu nand path."
 msgstr "セーブデータはエミュNANDパスに書き出されます"
 
@@ -1770,9 +1770,6 @@ msgstr "暗証番号が違います"
 msgid "Yes"
 msgstr "はい"
 
-msgid "You are currently using IOS"
-msgstr "使用中のIOS:IOS"
-
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "rev17以前のcIOS249ではFAT32/NTFS/EXTに対応していません"
 
@@ -1835,6 +1832,12 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "The game installation is disabled under this IOS because of instability in usb write."
+#~ msgstr "このIOSでのゲームの追加は不安定なため無効になっています"
+
+#~ msgid "You are currently using IOS"
+#~ msgstr "使用中のIOS:IOS"
 
 #~ msgid "Nand Channel Emulation"
 #~ msgstr "NANDチャンネルエミュ"

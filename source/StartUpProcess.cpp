@@ -60,6 +60,7 @@ StartUpProcess::~StartUpProcess()
 	delete GXImageData;
 	delete GXImage;
 	delete titleTxt;
+	delete messageTxt;
 	delete cancelTxt;
 	delete cancelBtn;
 	delete trigB;

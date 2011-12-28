@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-23 14:21+0100\n"
+"POT-Creation-Date: 2011-12-28 10:29+0100\n"
 "PO-Revision-Date: 2011-06-30 14:22+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -713,6 +713,9 @@ msgstr ""
 
 msgid "Failed to extract."
 msgstr "Uitpakken mislukt."
+
+msgid "Failed to initialize the USB storage device."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr "Partitie openen mislukt"
@@ -1558,9 +1561,6 @@ msgstr "De opgegeven map bestaat niet. Wil je deze aanmaken?"
 msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
 msgstr ""
 
-msgid "The game installation is disabled under this IOS because of instability in usb write."
-msgstr "Het installeren van spellen is uitgeschakeld met deze IOS door onstabiliteit met usb schrijven"
-
 msgid "The save game will be extracted to your emu nand path."
 msgstr ""
 
@@ -1770,9 +1770,6 @@ msgstr "Fout wachtwoord"
 msgid "Yes"
 msgstr "Ja"
 
-msgid "You are currently using IOS"
-msgstr "Je gebruikt op dit moment IOS"
-
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Je probeert een FAT32/NTFS/EXT partitie te selecteren met cIOS 249 Rev < 18. Dit word niet ondersteund. Verder gaan is op eigen risico."
 
@@ -1835,6 +1832,12 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "The game installation is disabled under this IOS because of instability in usb write."
+#~ msgstr "Het installeren van spellen is uitgeschakeld met deze IOS door onstabiliteit met usb schrijven"
+
+#~ msgid "You are currently using IOS"
+#~ msgstr "Je gebruikt op dit moment IOS"
 
 #~ msgid "New Disc Detected"
 #~ msgstr "Nieuwe disk gevonden"

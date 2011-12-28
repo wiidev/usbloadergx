@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-23 14:21+0100\n"
+"POT-Creation-Date: 2011-12-28 10:29+0100\n"
 "PO-Revision-Date: 2011-07-25 16:40+0200\n"
 "Last-Translator: Galen/xFede\n"
 "Language-Team: Penn, SirPalax, hvy109\n"
@@ -713,6 +713,9 @@ msgstr "Fallo al extraer los archivos, Pueden no existir partidas guardadas"
 
 msgid "Failed to extract."
 msgstr "No se ha podido extraer."
+
+msgid "Failed to initialize the USB storage device."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr "No se ha podido abrir la partición"
@@ -1558,9 +1561,6 @@ msgstr "La carpeta especificada no existe. ¿Quieres crearla?"
 msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
 msgstr "Los archivos se extraeran en la ruta de tu NAND emulada. ATENCION: los archivos existentes seran sobreescritos"
 
-msgid "The game installation is disabled under this IOS because of instability in usb write."
-msgstr "La instalación de juegos está desabilitada bajo este IOS porque la escritura USB es inestable."
-
 msgid "The save game will be extracted to your emu nand path."
 msgstr "Las partidas guardadas se extraeran en la ruta de tu NAND emulada"
 
@@ -1770,9 +1770,6 @@ msgstr "Contraseña incorrecta"
 msgid "Yes"
 msgstr "Sí"
 
-msgid "You are currently using IOS"
-msgstr "Estás usando el IOS"
-
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Estás intentando seleccionar una partición FAT32/NTFS/EXT con cIOS 249 Rev < 18. Esto no es soportado. Continúa bajo tu propio riesgo."
 
@@ -1835,6 +1832,12 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "The game installation is disabled under this IOS because of instability in usb write."
+#~ msgstr "La instalación de juegos está desabilitada bajo este IOS porque la escritura USB es inestable."
+
+#~ msgid "You are currently using IOS"
+#~ msgstr "Estás usando el IOS"
 
 #~ msgid "New Disc Detected"
 #~ msgstr "Nuevo Disco Detectado"

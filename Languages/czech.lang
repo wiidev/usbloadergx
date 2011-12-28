@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-23 14:21+0100\n"
+"POT-Creation-Date: 2011-12-28 10:29+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -713,6 +713,9 @@ msgstr ""
 
 msgid "Failed to extract."
 msgstr "Nemohu rozbalit."
+
+msgid "Failed to initialize the USB storage device."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr "Nelze otevrít diskový oddíl"
@@ -1558,9 +1561,6 @@ msgstr "Zadaný adresár neexistuje. Chcete ho vytvorit?"
 msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
 msgstr ""
 
-msgid "The game installation is disabled under this IOS because of instability in usb write."
-msgstr "Instalace her je zakázána s tímto IOS kvuli nestabilite v USB zápisu."
-
 msgid "The save game will be extracted to your emu nand path."
 msgstr ""
 
@@ -1770,9 +1770,6 @@ msgstr "Špatné heslo"
 msgid "Yes"
 msgstr "Ano"
 
-msgid "You are currently using IOS"
-msgstr "Nyní pouzíváte IOS:"
-
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Pokousíte se vybrat oddíl FAT32/NTFS/EXT s cIOS 249 Rev < 18. To není podporováno. Pokracujte na vasi odpovednost."
 
@@ -1835,6 +1832,12 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid "The game installation is disabled under this IOS because of instability in usb write."
+#~ msgstr "Instalace her je zakázána s tímto IOS kvuli nestabilite v USB zápisu."
+
+#~ msgid "You are currently using IOS"
+#~ msgstr "Nyní pouzíváte IOS:"
 
 #~ msgid "New Disc Detected"
 #~ msgstr "Detekován nový disk"

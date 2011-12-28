@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-23 14:21+0100\n"
+"POT-Creation-Date: 2011-12-28 10:29+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -713,6 +713,9 @@ msgstr "所有檔案提取失敗。遊戲存檔可能不存在。"
 
 msgid "Failed to extract."
 msgstr "提取失敗。"
+
+msgid "Failed to initialize the USB storage device."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr "開啟磁區失敗"
@@ -1558,9 +1561,6 @@ msgstr "所輸入的目錄不存在。是否要建立一個目錄嗎？"
 msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
 msgstr ""
 
-msgid "The game installation is disabled under this IOS because of instability in usb write."
-msgstr "用此IOS遊戲安裝選項會被關閉，因為USB寫入資料不穩定。"
-
 msgid "The save game will be extracted to your emu nand path."
 msgstr "遊戲存檔將被提取到你的模擬 nand 路徑。"
 
@@ -1770,9 +1770,6 @@ msgstr "密碼錯誤"
 msgid "Yes"
 msgstr "是"
 
-msgid "You are currently using IOS"
-msgstr "目前你使用中的IOS"
-
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "你嘗試用高於 cIOS 249 版本18去選取 FAT32/NTFS/EXT 磁區。這格式不支援。繼續請自行承擔風險。"
 
@@ -1835,6 +1832,12 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "The game installation is disabled under this IOS because of instability in usb write."
+#~ msgstr "用此IOS遊戲安裝選項會被關閉，因為USB寫入資料不穩定。"
+
+#~ msgid "You are currently using IOS"
+#~ msgstr "目前你使用中的IOS"
 
 #~ msgid "New Disc Detected"
 #~ msgstr "新光碟已檢查"

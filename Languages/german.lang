@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-23 14:21+0100\n"
+"POT-Creation-Date: 2011-12-28 10:29+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -713,6 +713,9 @@ msgstr "Fehler! Nicht alle Dateien entpackt. Spielstände existieren möglicherw
 
 msgid "Failed to extract."
 msgstr "Entpacken fehlgeschlagen."
+
+msgid "Failed to initialize the USB storage device."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr "Öffnen der Partition fehlgeschlagen"
@@ -1558,9 +1561,6 @@ msgstr "Das eingegebene Verzeichnis existiert nicht. Möchtest du es erstellen?"
 msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
 msgstr "DAtein werden in den EmuNand Pfad kopiert. Achtung: Alle vorhandenen Dateien werden überschrieben."
 
-msgid "The game installation is disabled under this IOS because of instability in usb write."
-msgstr "Das Installieren von Spielen ist bei Verwendung dieses IOS wegen Instabilität beim USB-Schreiben deaktiviert."
-
 msgid "The save game will be extracted to your emu nand path."
 msgstr "Der Spielstand wird in den EmuNand Pfad kopiert."
 
@@ -1770,9 +1770,6 @@ msgstr "Falsches Passwort"
 msgid "Yes"
 msgstr "Ja"
 
-msgid "You are currently using IOS"
-msgstr "Du benutzt zur Zeit das IOS"
-
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Es wird versucht eine FAT32/NTFS/EXT Partition mit dem cIOS 249 Rev < 18 auszuwählen. Das wird nicht unterstützt. Weiter auf eigene Gefahr."
 
@@ -1835,6 +1832,12 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "The game installation is disabled under this IOS because of instability in usb write."
+#~ msgstr "Das Installieren von Spielen ist bei Verwendung dieses IOS wegen Instabilität beim USB-Schreiben deaktiviert."
+
+#~ msgid "You are currently using IOS"
+#~ msgstr "Du benutzt zur Zeit das IOS"
 
 #~ msgid "New Disc Detected"
 #~ msgstr "Neue Disk im Laufwerk festgestellt"

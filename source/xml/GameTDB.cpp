@@ -957,7 +957,6 @@ int GameTDB::GetRatingDescriptorList(const char * id, vector<string> & desc_list
 	{
 		if(strncmp(descriptor_text, "</descriptor>", strlen("</descriptor>")) == 0)
 		{
-			desc_list[list_num].push_back('\0');
 			descriptor_text = strstr(descriptor_text, "<descriptor>");
 			if(!descriptor_text)
 				break;
@@ -1084,7 +1083,6 @@ int GameTDB::GetWifiFeatureList(const char * id, vector<string> & feat_list)
 	{
 		if(strncmp(feature_text, "</feature>", strlen("</feature>")) == 0)
 		{
-			feat_list[list_num].push_back('\0');
 			feature_text = strstr(feature_text, "<feature>");
 			if(!feature_text)
 				break;
@@ -1160,30 +1158,17 @@ int GameTDB::GetAccessoirList(const char * id, vector<Accessoir> & acc_list)
 			acc_list.resize(list_num+1);
 
 		for(const char * ptr = ControlsNode; *ptr != '"' && *ptr != '\0'; ptr++)
-		{
 			acc_list[list_num].Name.push_back(*ptr);
-		}
-		acc_list[list_num].Name.push_back('\0');
+
+        acc_list[list_num].Required = false;
 
 		char * requiredField = strstr(ControlsNode, "required=\"");
-		if(!requiredField)
+		if(requiredField && strncmp(requiredField + strlen("required=\""), "true", 4) == 0)
 		{
-			delete [] data;
-			return -1;
+            acc_list[list_num].Required = true;
 		}
 
-		requiredField += strlen("required=\"");
-
-		if(strncmp(requiredField, "true", 4) == 0)
-		{
-			acc_list[list_num].Required = true;
-		}
-		else
-		{
-			acc_list[list_num].Required = false;
-		}
-
-		ControlsNode = strstr(requiredField, "<control type=\"");
+		ControlsNode = strstr(ControlsNode, "<control type=\"");
 		if(ControlsNode)
 			ControlsNode += strlen("<control type=\"");
 
@@ -1250,7 +1235,6 @@ bool GameTDB::GetGameXMLInfo(const char * id, GameXMLInfo * gameInfo)
 
 	for(int i = 0; i < 6 && id[i] != 0; ++i)
 		gameInfo->GameID.push_back(id[i]);
-	gameInfo->GameID.push_back('\0');
 
 	GetTitle(id, gameInfo->Title);
 	GetSynopsis(id, gameInfo->Synopsis);

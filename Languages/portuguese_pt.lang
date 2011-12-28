@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-23 14:21+0100\n"
+"POT-Creation-Date: 2011-12-28 10:29+0100\n"
 "PO-Revision-Date: 2011-11-03 11:00+0000\n"
 "Last-Translator: pplucky <pplucky@gmail.com>\n"
 "Language-Team: Sky8000, pplucky\n"
@@ -713,6 +713,9 @@ msgstr "Falha ao extrair todos os ficheiros. Gravação pode não existir."
 
 msgid "Failed to extract."
 msgstr "Falha ao extrair."
+
+msgid "Failed to initialize the USB storage device."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr "Falha ao abrir partição"
@@ -1558,9 +1561,6 @@ msgstr "A pasta não existe, pretende criá-la?"
 msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
 msgstr "Os ficheiros serão extraídos para o caminho da emu nand. Atenção: Todos os ficheiros existentes serão sobrepostos."
 
-msgid "The game installation is disabled under this IOS because of instability in usb write."
-msgstr "A instalação de jogo está desabilitada neste IOS devido a instabilidade na escrita usb"
-
 msgid "The save game will be extracted to your emu nand path."
 msgstr "A gravação vai ser extraída para o caminho da emu nand."
 
@@ -1770,9 +1770,6 @@ msgstr "Password Incorrecta"
 msgid "Yes"
 msgstr "Sim"
 
-msgid "You are currently using IOS"
-msgstr "Está a usar o IOS"
-
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Está a tentar seleccionar uma partição FAT32/NTFS/EXT com um cIOS 249 Rev < 18. Isto não é suportado. Continue por sua conta e risco."
 
@@ -1835,6 +1832,12 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "The game installation is disabled under this IOS because of instability in usb write."
+#~ msgstr "A instalação de jogo está desabilitada neste IOS devido a instabilidade na escrita usb"
+
+#~ msgid "You are currently using IOS"
+#~ msgstr "Está a usar o IOS"
 
 #~ msgid "New Disc Detected"
 #~ msgstr "Novo Disco Detectado"

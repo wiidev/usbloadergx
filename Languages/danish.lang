@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-23 14:21+0100\n"
+"POT-Creation-Date: 2011-12-28 10:29+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -713,6 +713,9 @@ msgstr ""
 
 msgid "Failed to extract."
 msgstr "Udpakningen mislykkedes."
+
+msgid "Failed to initialize the USB storage device."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr "Kunne ikke åbne partition"
@@ -1558,9 +1561,6 @@ msgstr "Den angivne mappe eksisterer ikke. Skal den oprettes?"
 msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
 msgstr ""
 
-msgid "The game installation is disabled under this IOS because of instability in usb write."
-msgstr "Spil installering er ikke aktiveret med denne IOS, på grund af ustabil skrivning til usb enheder."
-
 msgid "The save game will be extracted to your emu nand path."
 msgstr ""
 
@@ -1770,9 +1770,6 @@ msgstr "Forkert password"
 msgid "Yes"
 msgstr "Ja"
 
-msgid "You are currently using IOS"
-msgstr "Du brug i øjeblikket IOS"
-
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Du prøver at vælge en FAT32/NTFS/EXT partition med cIOS 249 Rev < 18. Dette er ikke understøttet. Fortsætte er på egen risiko"
 
@@ -1835,6 +1832,12 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "The game installation is disabled under this IOS because of instability in usb write."
+#~ msgstr "Spil installering er ikke aktiveret med denne IOS, på grund af ustabil skrivning til usb enheder."
+
+#~ msgid "You are currently using IOS"
+#~ msgstr "Du brug i øjeblikket IOS"
 
 #~ msgid "New Disc Detected"
 #~ msgstr "Har opdaget ny DVD"

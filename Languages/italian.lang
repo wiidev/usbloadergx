@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-23 14:21+0100\n"
+"POT-Creation-Date: 2011-12-28 10:29+0100\n"
 "PO-Revision-Date: 2011-09-11 12:19+0100\n"
 "Last-Translator: xFede\n"
 "Language-Team: Cambo\n"
@@ -713,6 +713,9 @@ msgstr "Estrazione di tutti i file fallita. Il salvataggio potrebbe non esistere
 
 msgid "Failed to extract."
 msgstr "Estrazione fallita."
+
+msgid "Failed to initialize the USB storage device."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr "Accesso alla partizione fallito"
@@ -1558,9 +1561,6 @@ msgstr "La cartella specificata non esiste. Vuoi crearla ora?"
 msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
 msgstr "I file verranno estratti nel percorso della NAND Emulata. NB: Tutti I file esistenti verranno sovrascritti."
 
-msgid "The game installation is disabled under this IOS because of instability in usb write."
-msgstr "L'installazione dei giochi è disabilitata con questo IOS dato che la scrittura sul disco rigido è instabile"
-
 msgid "The save game will be extracted to your emu nand path."
 msgstr "Il salvataggio verrà estratto nel percorso della NAND Emulata."
 
@@ -1770,9 +1770,6 @@ msgstr "Password Errata"
 msgid "Yes"
 msgstr "Si"
 
-msgid "You are currently using IOS"
-msgstr "Al momento stai utilizzando l'IOS"
-
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Stai cercando di selezionare una partizione FAT32/NTFS/EXT con un cIOS 249 di versione < 18. Continua a tuo rischio e pericolo."
 
@@ -1835,6 +1832,12 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi rimanenti"
+
+#~ msgid "The game installation is disabled under this IOS because of instability in usb write."
+#~ msgstr "L'installazione dei giochi è disabilitata con questo IOS dato che la scrittura sul disco rigido è instabile"
+
+#~ msgid "You are currently using IOS"
+#~ msgstr "Al momento stai utilizzando l'IOS"
 
 #~ msgid "Nand Channel Emulation"
 #~ msgstr "Emulazione Canali"

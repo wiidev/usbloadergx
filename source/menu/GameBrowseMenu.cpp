@@ -844,8 +844,26 @@ int GameBrowseMenu::MainLoop()
 	{
 		int choice = WindowPrompt(tr( "Install a game" ), 0, tr( "Yes" ), tr( "No" ));
 		if (choice == 1)
-			return MENU_INSTALL;
-
+		{
+			if(!(Settings.LoaderMode & MODE_WIIGAMES) && (gameList.GameCount() == 0))
+			{
+				if(WBFS_ReInit(WBFS_DEVICE_USB) < 0)
+					ShowError(tr("Failed to initialize the USB storage device."));
+				else
+				{
+					gameList.ReadGameList();
+					GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false, false);
+					if(Settings.ShowFreeSpace)
+					{
+						ThreadedTask::Instance()->AddCallback(&HDDSizeCallback);
+						ThreadedTask::Instance()->Execute();
+					}
+					return MENU_INSTALL;
+				}
+			}
+			else
+				return MENU_INSTALL;
+		}
 		installBtn->ResetState();
 	}
 	else if (sdcardBtn->GetState() == STATE_CLICKED)
@@ -1530,15 +1548,18 @@ void GameBrowseMenu::UpdateFreeSpace(void * arg)
 	if(Settings.ShowFreeSpace)
 	{
 		float freespace = 0.0, used = 0.0;
-		WBFS_DiskSpace(&used, &freespace);
-		if (strcmp(Settings.db_language, "JA") == 0)
+		int ret = WBFS_DiskSpace(&used, &freespace);
+		if(ret >= 0)
 		{
-			// needs to be "total...used" for Japanese
-			sprintf(spaceinfo, "%.2fGB %s %.2fGB %s", (freespace + used), tr( "of" ), freespace, tr( "free" ));
-		}
-		else
-		{
-			sprintf(spaceinfo, "%.2fGB %s %.2fGB %s", freespace, tr( "of" ), (freespace + used), tr( "free" ));
+			if (strcmp(Settings.db_language, "JA") == 0)
+			{
+				// needs to be "total...used" for Japanese
+				sprintf(spaceinfo, "%.2fGB %s %.2fGB %s", (freespace + used), tr( "of" ), freespace, tr( "free" ));
+			}
+			else
+			{
+				sprintf(spaceinfo, "%.2fGB %s %.2fGB %s", freespace, tr( "of" ), (freespace + used), tr( "free" ));
+			}
 		}
 	}
 

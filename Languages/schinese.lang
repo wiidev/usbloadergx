@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-23 14:21+0100\n"
+"POT-Creation-Date: 2011-12-28 10:29+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -713,6 +713,9 @@ msgstr ""
 
 msgid "Failed to extract."
 msgstr "解压缩失败."
+
+msgid "Failed to initialize the USB storage device."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr "打开分区失败"
@@ -1558,9 +1561,6 @@ msgstr "已进入的目录不存在.你想要创建一个目录吗？"
 msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
 msgstr ""
 
-msgid "The game installation is disabled under this IOS because of instability in usb write."
-msgstr "由于USB写入不稳定，在这个IOS下游戏安装被禁用"
-
 msgid "The save game will be extracted to your emu nand path."
 msgstr ""
 
@@ -1770,9 +1770,6 @@ msgstr "密码错误"
 msgid "Yes"
 msgstr "是"
 
-msgid "You are currently using IOS"
-msgstr "正在使用IOS"
-
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "cIOS 249低于r18版本不支持FAT32/NTFS/EXT分区.如要继续风险自负"
 
@@ -1835,6 +1832,12 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "The game installation is disabled under this IOS because of instability in usb write."
+#~ msgstr "由于USB写入不稳定，在这个IOS下游戏安装被禁用"
+
+#~ msgid "You are currently using IOS"
+#~ msgstr "正在使用IOS"
 
 #~ msgid "New Disc Detected"
 #~ msgstr "新光盘已检测"

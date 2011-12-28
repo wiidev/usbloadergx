@@ -15,15 +15,6 @@ u64 gamesize = 0;
 
 int MenuInstall()
 {
-	int ios_ver = IOS_GetVersion();
-	if(ios_ver < 200)
-	{
-		char text[100];
-		snprintf(text, sizeof(text), "%s %i.", tr("You are currently using IOS"), ios_ver);
-		WindowPrompt(text, tr("The game installation is disabled under this IOS because of instability in usb write."), tr("OK"));
-		return MENU_DISCLIST;
-	}
-
 	gprintf("\nMenuInstall()");
 
 	static struct discHdr headerdisc ATTRIBUTE_ALIGN( 32 );
