@@ -25,8 +25,7 @@
 #include "BoxMesh.hpp"
 #include "settings/CSettings.h"
 #include "themes/CTheme.h"
-
-extern GuiImageData * pointer[4];
+#include "menu.h"
 
 BoxCover::BoxCover(GuiImageData * img, bool flat)
 	:   GuiImage(img),
@@ -56,15 +55,6 @@ BoxCover::BoxCover(GuiImageData * img, bool flat)
 	guLookAt(view, &camera,	&up, &look);
 	guPerspective(projection, 8, 640.f/480.f, 1.0f, 300.0F);
 
-	//! Remove me later
-	for(int i = 0; i < 4; ++i)
-	{
-		char name[50];
-		snprintf(name, sizeof(name), "player%i_grab.png", i+1);
-		GrabPointers[i] = Resources::GetImageData(name);
-		NormalPointers[i] = pointer[i];
-	}
-
 	if(flatCover || !image)
 	{
 		defaultBox = Resources::GetImageData("nocoverFull.png");
@@ -85,10 +75,12 @@ BoxCover::BoxCover(GuiImageData * img, bool flat)
 BoxCover::~BoxCover()
 {
 	delete defaultBox;
+
 	for(int i = 0; i < 4; ++i)
 	{
-		pointer[i] = NormalPointers[i];
-		delete GrabPointers[i];
+		char name[50];
+		snprintf(name, sizeof(name), "player%i_point.png", i+1);
+		pointer[i]->SetImage(name);
 	}
 }
 
@@ -106,8 +98,13 @@ void BoxCover::WiiPADControl(GuiTrigger *t)
 			PosY += movePosY;
 			movePosX = 0.0f;
 			movePosY = 0.0f;
-			for(int i = 0; i < 4; ++i)
-				pointer[i] = GrabPointers[i];
+
+			if(moveChan >= 0 && moveChan < 3)
+			{
+				char name[50];
+				snprintf(name, sizeof(name), "player%i_grab.png", moveChan+1);
+				pointer[moveChan]->SetImage(name);
+			}
 		}
 		else
 			moveChan = -1;
@@ -120,8 +117,12 @@ void BoxCover::WiiPADControl(GuiTrigger *t)
 	}
 	else if(!(t->wpad.btns_h & WPAD_BUTTON_A) && moveChan == t->chan)
 	{
-		for(int i = 0; i < 4; ++i)
-			pointer[i] = NormalPointers[i];
+		if(moveChan >= 0 && moveChan < 3)
+		{
+			char name[50];
+			snprintf(name, sizeof(name), "player%i_point.png", moveChan+1);
+			pointer[moveChan]->SetImage(name);
+		}
 	}
 
 	if(t->wpad.btns_h & WPAD_BUTTON_UP)

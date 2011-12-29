@@ -290,12 +290,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 	usleep(500000); // wait to see if progress flag changes soon
 	if (!showProgress) return;
 
-	int PosY;
-
-	//if(msg2 != 0)
-	//	PosY = 40;
-	//else
-		PosY = 20;
+	const int ProgressPosY  = 20;
 
 	GuiWindow promptWindow(472, 320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -321,18 +316,18 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 		progressbarOutlineImg.SetWidescreen(Settings.widescreen);
 	}
 	progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	progressbarOutlineImg.SetPosition(35, PosY);
+	progressbarOutlineImg.SetPosition(35, ProgressPosY);
 
 	GuiImageData progressbarEmpty(Resources::GetFile("progressbar_empty.png"), Resources::GetFileSize("button_dialogue_box.png"));
 	GuiImage progressbarEmptyImg(&progressbarEmpty);
 	progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	progressbarEmptyImg.SetPosition(35, PosY);
+	progressbarEmptyImg.SetPosition(35, ProgressPosY);
 	progressbarEmptyImg.SetTileHorizontal(100);
 
 	GuiImageData progressbar(Resources::GetFile("progressbar.png"), Resources::GetFileSize("progressbar.png"));
 	GuiImage progressbarImg(&progressbar);
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	progressbarImg.SetPosition(35, PosY);
+	progressbarImg.SetPosition(35, ProgressPosY);
 
 	GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -350,7 +345,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
 	GuiText prsTxt("%", 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
 	prsTxt.SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
-	prsTxt.SetPosition(-178, PosY);
+	prsTxt.SetPosition(-178, ProgressPosY);
 
 	GuiText timeTxt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
 	timeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
@@ -366,15 +361,15 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
 	GuiText prTxt((char*) NULL, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
 	prTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	prTxt.SetPosition(210, PosY);
+	prTxt.SetPosition(210, ProgressPosY);
 
 	if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust for widescreen
 	{
 		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-		progressbarOutlineImg.SetPosition(0, PosY);
-		progressbarEmptyImg.SetPosition(80, PosY);
+		progressbarOutlineImg.SetPosition(0, ProgressPosY);
+		progressbarEmptyImg.SetPosition(80, ProgressPosY);
 		progressbarEmptyImg.SetTileHorizontal(78);
-		progressbarImg.SetPosition(80, PosY);
+		progressbarImg.SetPosition(80, ProgressPosY);
 		msg1Txt.SetMaxWidth(380, DOTTED);
 		msg2Txt.SetMaxWidth(380, DOTTED);
 
@@ -401,7 +396,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 	GuiButton cancelBtn(&cancelImg, &cancelImg, ALIGN_LEFT, ALIGN_MIDDLE, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
 	cancelBtn.SetLabel(&cancelTxt);
 	cancelBtn.SetState(STATE_SELECTED);
-	cancelBtn.SetPosition(dialogBoxImg.GetWidth()/2-cancelImg.GetWidth()/2*cancelScale, PosY + 45);
+	cancelBtn.SetPosition(dialogBoxImg.GetWidth()/2-cancelImg.GetWidth()/2*cancelScale, ProgressPosY + 45);
 
 	promptWindow.Append(&dialogBoxImg);
 	promptWindow.Append(&progressbarEmptyImg);

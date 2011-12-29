@@ -567,7 +567,9 @@ int PatchNewReturnTo(int es_fd, u64 title)
 
 	//! this is here for test purpose only and needs be moved later
 	static u64 sm_title_id  ATTRIBUTE_ALIGN(32);
-	STACK_ALIGN(ioctlv, vector, 1, 32);
+	ioctlv *vector = (ioctlv *) memalign(32, sizeof(ioctlv));
+	if(!vector)
+		return -1;
 
 	sm_title_id = title;
 	vector[0].data = &sm_title_id;
@@ -581,29 +583,29 @@ int PatchNewReturnTo(int es_fd, u64 title)
 	if(result >= 0)
 		gprintf("Return to %08X patched with d2x method.\n", (u32) title);
 
+	free(vector);
+
 	return result;
 }
 
 int BlockIOSReload(int es_fd, u8 gameIOS)
 {
 	if(es_fd < 0)
-		return 0;
+		return -1;
 
 	static int mode ATTRIBUTE_ALIGN(32);
 	static int ios ATTRIBUTE_ALIGN(32);
-	STACK_ALIGN(ioctlv, vector, 2, 32);
+	ioctlv *vector = (ioctlv *) memalign(32, sizeof(ioctlv) * 2);
+	if(!vector)
+		return -1;
 
+	int inlen = 2;
 	mode = 2;
+	ios = gameIOS; // ios to be reloaded in place of the requested one
 	vector[0].data = &mode;
 	vector[0].len = 4;
-
-	int inlen = 1;
-	if (mode == 2) {
-		inlen = 2;
-		ios = gameIOS; // ios to be reloaded in place of the requested one
-		vector[1].data = &ios;
-		vector[1].len = 4;
-	}
+	vector[1].data = &ios;
+	vector[1].len = 4;
 
 	int result = -1;
 
@@ -611,9 +613,11 @@ int BlockIOSReload(int es_fd, u8 gameIOS)
 		result = IOS_Ioctlv(es_fd, 0xA0, inlen, 0, vector);
 
 	if(result >= 0)
-		gprintf("Block IOS Reload patched with d2x method.\n");
+		gprintf("Block IOS Reload patched with d2x method to IOS%i; result: %i\n", gameIOS, result);
 
-	return (result >= 0);
+	free(vector);
+
+	return result;
 }
 
 

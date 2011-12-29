@@ -72,8 +72,6 @@ class BoxCover : public GuiImage
 		Mtx44 projection;
 		GuiImageData boxBorder;
 		GuiImageData *defaultBox;
-		GuiImageData *NormalPointers[4];
-		GuiImageData *GrabPointers[4];
 		Mtx	view;
 		GXTexObj coverTex;
 		GXTexObj boxBorderTex;

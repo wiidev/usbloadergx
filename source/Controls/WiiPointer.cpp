@@ -83,15 +83,8 @@ void WiiPointer::Draw(GuiTrigger *t)
 				lastActivity = 0;
 			}
 
-			int wpadX = 0;
-			int wpadY = 0;
-
-			// don't use it, if it's a nunchuck
-			 if(t->wpad.exp.type != WPAD_EXP_NUNCHUK)
-			 {
-				 wpadX = t->WPAD_Stick(0, 0);
-				 wpadY = t->WPAD_Stick(0, 1);
-			 }
+			int wpadX = t->WPAD_Stick(0, 0);
+			int wpadY = t->WPAD_Stick(0, 1);
 
 			// Wii Extensions
 			// x-axis

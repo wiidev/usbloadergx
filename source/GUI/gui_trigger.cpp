@@ -80,6 +80,7 @@ s8 GuiTrigger::WPAD_Stick(u8 right, int axis)
 
 	switch ( wpad.exp.type )
 	{
+		default:
 		case WPAD_EXP_NUNCHUK:
 		case WPAD_EXP_GUITARHERO3:
 		{
@@ -104,8 +105,6 @@ s8 GuiTrigger::WPAD_Stick(u8 right, int axis)
 			}
 			break;
 		}
-		default:
-			break;
 	}
 
 	/* calculate x/y value (angle need to be converted into radian) */
@@ -131,8 +130,7 @@ bool GuiTrigger::Left()
 		wiibtn = WPAD_CLASSIC_BUTTON_LEFT;
 
 	if (   ((wpad.btns_d | wpad.btns_h) & wiibtn)
-		|| ((pad.btns_d | pad.btns_h) & PAD_BUTTON_LEFT)
-		|| (wpad.exp.type == WPAD_EXP_NUNCHUK &&  WPAD_Stick(0, 0) < -PADCAL))
+		|| ((pad.btns_d | pad.btns_h) & PAD_BUTTON_LEFT))
 	{
 		if ((wpad.btns_d & wiibtn) || (pad.btns_d & PAD_BUTTON_LEFT))
 		{
@@ -155,8 +153,7 @@ bool GuiTrigger::Right()
 		wiibtn = WPAD_CLASSIC_BUTTON_RIGHT;
 
 	if (   ((wpad.btns_d | wpad.btns_h) & wiibtn)
-		|| ((pad.btns_d | pad.btns_h) & PAD_BUTTON_RIGHT)
-		|| (wpad.exp.type == WPAD_EXP_NUNCHUK &&  WPAD_Stick(0, 0) > PADCAL))
+		|| ((pad.btns_d | pad.btns_h) & PAD_BUTTON_RIGHT))
 	{
 		if ((wpad.btns_d & wiibtn) || (pad.btns_d & PAD_BUTTON_RIGHT))
 		{
@@ -179,8 +176,7 @@ bool GuiTrigger::Up()
 		wiibtn = WPAD_CLASSIC_BUTTON_UP;
 
 	if (   ((wpad.btns_d | wpad.btns_h) & wiibtn)
-		|| ((pad.btns_d | pad.btns_h) & PAD_BUTTON_UP)
-		|| (wpad.exp.type == WPAD_EXP_NUNCHUK &&  WPAD_Stick(0, 1) > PADCAL))
+		|| ((pad.btns_d | pad.btns_h) & PAD_BUTTON_UP))
 	{
 		if ((wpad.btns_d & wiibtn) || (pad.btns_d & PAD_BUTTON_UP))
 		{
@@ -203,8 +199,7 @@ bool GuiTrigger::Down()
 		wiibtn = WPAD_CLASSIC_BUTTON_DOWN;
 
 	if (   ((wpad.btns_d | wpad.btns_h) & wiibtn)
-		|| ((pad.btns_d | pad.btns_h) & PAD_BUTTON_DOWN)
-		|| (wpad.exp.type == WPAD_EXP_NUNCHUK &&  WPAD_Stick(0, 1) < -PADCAL))
+		|| ((pad.btns_d | pad.btns_h) & PAD_BUTTON_DOWN))
 	{
 		if ((wpad.btns_d & wiibtn) || (pad.btns_d & PAD_BUTTON_DOWN))
 		{
