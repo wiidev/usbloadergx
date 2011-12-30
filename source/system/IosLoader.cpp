@@ -180,16 +180,20 @@ void IosLoader::LoadIOSModules(s32 ios, s32 ios_rev)
 	//! Waninkoko IOS
 	else if(IsWaninkokoIOS(ios))
 	{
+		// Init ISFS for d2x check
+		ISFS_Initialize();
+
 		iosinfo_t *info = GetIOSInfo(ios);
 		if(ios_rev >= 18 && (!info || info->version < 6))
 		{
-			if(mload_init() < 0)
-				return;
-
-			gprintf("Loading dip module for Waninkoko's cios\n");
-			mload_module((u8 *) dip_plugin_249, dip_plugin_249_size);
-			mload_close();
+			if(mload_init() >= 0)
+			{
+				gprintf("Loading dip module for Waninkoko's cios\n");
+				mload_module((u8 *) dip_plugin_249, dip_plugin_249_size);
+				mload_close();
+			}
 		}
+		ISFS_Deinitialize();
 	}
 }
 

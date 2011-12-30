@@ -127,7 +127,10 @@ void HardDriveSM::SetOptionValues()
 	int checkPart = DeviceHandler::PartitionToPortPartition(Settings.partition);
 
 	//! Get the partition name and it's size in GB's
-	Options->SetValue(Idx++, "%s (%.2fGB)", usbHandle->GetFSName(checkPart), usbHandle->GetSize(checkPart)/GB_SIZE);
+	if(usbHandle)
+		Options->SetValue(Idx++, "%s (%.2fGB)", usbHandle->GetFSName(checkPart), usbHandle->GetSize(checkPart)/GB_SIZE);
+	else
+		Options->SetValue(Idx++, tr("Not Initialized"));
 
 	//! Settings: Multiple Partitions
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.MultiplePartitions] ));

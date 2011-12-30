@@ -841,6 +841,13 @@ int GameBrowseMenu::MainLoop()
 	}
 	else if (installBtn->GetState() == STATE_CLICKED)
 	{
+		if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_GAME_INSTALL))
+		{
+			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			installBtn->ResetState();
+			return MENU_NONE;
+		}
+
 		int choice = WindowPrompt(tr( "Install a game" ), 0, tr( "Yes" ), tr( "No" ));
 		if (choice == 1)
 		{
@@ -1225,15 +1232,7 @@ void GameBrowseMenu::CheckDiscSlotUpdate()
 	{
 		int choice = WindowPrompt(tr( "Disc Insert Detected" ), 0, tr( "Install" ), tr( "Mount DVD drive" ), tr( "Cancel" ));
 		if (choice == 1)
-		{
-			if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_GAME_INSTALL))
-			{
-				WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
-				return;
-			}
-
-			returnMenu = MenuInstall();
-		}
+			installBtn->SetState(STATE_CLICKED);
 		else if (choice == 2)
 			dvdBtn->SetState(STATE_CLICKED);
 	}

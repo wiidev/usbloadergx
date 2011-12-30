@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-28 16:35+0100\n"
+"POT-Creation-Date: 2011-12-30 19:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -1191,6 +1191,9 @@ msgstr "Žádný"
 
 msgid "Normal"
 msgstr "Normální"
+
+msgid "Not Initialized"
+msgstr ""
 
 msgid "Not a Wii Disc"
 msgstr "Toto není Wii disk"

@@ -51,7 +51,8 @@ s32 WBFS_Init(u32 device)
 s32 WBFS_ReInit(u32 device)
 {
 	WBFS_CloseAll();
-
+	DeviceHandler::Instance()->UnMountAllUSB();
+	DeviceHandler::Instance()->MountAllUSB();
 	s32 ret = -1;
 
 	if(Settings.MultiplePartitions)

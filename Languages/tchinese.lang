@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-28 16:35+0100\n"
+"POT-Creation-Date: 2011-12-30 19:17+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -1191,6 +1191,9 @@ msgstr "沒有"
 
 msgid "Normal"
 msgstr "一般"
+
+msgid "Not Initialized"
+msgstr ""
 
 msgid "Not a Wii Disc"
 msgstr "不是 Wii 的光碟"

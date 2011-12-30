@@ -41,7 +41,7 @@ static u8 *codelistend = (u8 *) 0x80003000;
 static u8 *codelist = (u8 *) 0x800022A8;
 
 static u8 *code_buf = NULL;
-static int code_size = 0;
+static u32 code_size = 0;
 
 static u32 gameconfsize = 0;
 static u32 *gameconf = NULL;
@@ -541,6 +541,14 @@ static void app_loadgameconfig()
 
 	if(tempgameconf != defaultgameconfig)
 		free(tempgameconf);
+
+	if (code_size > (u32) codelistend - (u32) codelist)
+	{
+		gprintf("Ocarina: Too many codes found: filesize %i, maxsize: %i\n", code_size, (u32) codelistend - (u32) codelist);
+		MEM2_free(code_buf);
+		code_buf = NULL;
+		code_size = 0;
+	}
 }
 
 //---------------------------------------------------------------------------------
@@ -660,6 +668,7 @@ void load_handler(u32 hooktype, u32 debugger, u32 pauseAtStart)
 		DCFlushRange(codelist, (u32) codelistend - (u32) codelist);
 		free(code_buf);
 		code_buf = NULL;
+		gprintf("Ocarina codes applied to %p size: %i\n", codelist, (u32) codelistend - (u32) codelist);
 	}
 
 	if(hooktype != 0x00)
@@ -760,18 +769,9 @@ int ocarina_load_code(const char *CheatFilepath, u8 *gameid)
 
 	fclose(fp);
 
-	if (code_size <= 0)
+	if (code_size == 0)
 	{
 		gprintf("Ocarina: could not read file.\n");
-		MEM2_free(code_buf);
-		code_buf = NULL;
-		code_size = 0;
-		return 0;
-	}
-
-	if (code_size > (s32) codelistend - (s32) codelist)
-	{
-		gprintf("Ocarina: Too many codes found\n");
 		MEM2_free(code_buf);
 		code_buf = NULL;
 		code_size = 0;

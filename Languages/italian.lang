@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-28 16:35+0100\n"
+"POT-Creation-Date: 2011-12-30 19:17+0100\n"
 "PO-Revision-Date: 2011-09-11 12:19+0100\n"
 "Last-Translator: xFede\n"
 "Language-Team: Cambo\n"
@@ -1191,6 +1191,9 @@ msgstr "Nessuno"
 
 msgid "Normal"
 msgstr "Normale"
+
+msgid "Not Initialized"
+msgstr ""
 
 msgid "Not a Wii Disc"
 msgstr "Non è un disco Wii"
