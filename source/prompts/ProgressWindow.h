@@ -8,6 +8,8 @@
 #ifndef _PROGRESSWINDOW_H_
 #define _PROGRESSWINDOW_H_
 
+#include <gctypes.h>
+
 #ifdef __cplusplus
 
 #define PROGRESS_CANCELED	-12345

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-30 19:17+0100\n"
+"POT-Creation-Date: 2012-01-01 17:44+0100\n"
 "PO-Revision-Date: 2011-09-11 12:19+0100\n"
 "Last-Translator: xFede\n"
 "Language-Team: Cambo\n"
@@ -72,54 +72,6 @@ msgstr "4 (Solo Maggiorenni 18+)"
 
 msgid "5 min"
 msgstr "5 minuti"
-
-msgid ">> Deleting tickets..."
-msgstr ">> Eliminando i ticket..."
-
-msgid ">> Deleting tickets...ERROR! "
-msgstr ">> Eliminando i ticket...ERRORE! "
-
-msgid ">> Deleting tickets...Ok! "
-msgstr ">> Eliminando i ticket...OK! "
-
-msgid ">> Deleting title ...ERROR! "
-msgstr ">> Eliminando titolo...ERRORE! "
-
-msgid ">> Deleting title ...Ok!"
-msgstr ">> Eliminando titolo...OK! "
-
-msgid ">> Deleting title contents..."
-msgstr ">> Eliminando contenuti..."
-
-msgid ">> Deleting title contents...ERROR! "
-msgstr ">> Eliminando contenuti...ERRORE! "
-
-msgid ">> Deleting title contents...Ok!"
-msgstr ">> Eliminando contenuti...OK! "
-
-msgid ">> Deleting title..."
-msgstr ">> Eliminando titolo..."
-
-msgid ">> Finishing installation..."
-msgstr ">> Ultimando l'installazione..."
-
-msgid ">> Installing content #"
-msgstr ">> Intallando contenuto #..."
-
-msgid ">> Installing ticket..."
-msgstr ">> Installando ticket..."
-
-msgid ">> Installing title..."
-msgstr ">> Installando titolo..."
-
-msgid ">> Reading WAD data..."
-msgstr ">> Leggendo dati WAD..."
-
-msgid ">> Reading WAD data...ERROR! "
-msgstr ">> Leggendo dati WAD...ERRORE! "
-
-msgid ">> Reading WAD data...Ok!"
-msgstr ">> Leggendo dati WAD...OK!"
 
 msgid "AUTO"
 msgstr ""
@@ -305,11 +257,23 @@ msgid "Can't create directory"
 msgstr "Impossibile creare la cartella"
 
 #, c-format
+msgid "Can't create file: %s"
+msgstr ""
+
+#, c-format
 msgid "Can't create path: %s"
 msgstr "Impossibile creare la cartella: %s"
 
 msgid "Can't delete:"
 msgstr "Impossibile eliminare:"
+
+#, c-format
+msgid "Can't open file: %s"
+msgstr ""
+
+#, c-format
+msgid "Can't read file: %s"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Annulla"
@@ -380,6 +344,9 @@ msgstr "La Wii deve essere sbloccata per modificarla."
 
 msgid "Content"
 msgstr "Nel contenuto"
+
+msgid "Continue"
+msgstr ""
 
 msgid "Continue to install game?"
 msgstr "Proseguire con l'installarazione del gioco?"
@@ -562,9 +529,6 @@ msgstr "Vuoi sincronizzare le info sullo spazio libero in tutte le partizioni FA
 msgid "Do you wish to update/download all language files?"
 msgstr "Vuoi scaricare/aggiornare tutti i file di lingua?"
 
-msgid "Done!"
-msgstr "Fatto!"
-
 msgid "Download"
 msgstr "Scarica"
 
@@ -666,9 +630,6 @@ msgstr "Errore durante l'aggiornamento di USB Loader GX."
 msgid "Error writing the data."
 msgstr "Errore scrivendo i dati."
 
-msgid "Error..."
-msgstr "Errore..."
-
 msgid "Error:"
 msgstr "Errore:"
 
@@ -720,6 +681,15 @@ msgstr ""
 msgid "Failed to open partition"
 msgstr "Accesso alla partizione fallito"
 
+msgid "Failed to read ticket."
+msgstr ""
+
+msgid "Failed to read tmd file."
+msgstr ""
+
+msgid "Failed to read wad header."
+msgstr ""
+
 msgid "Failed updating"
 msgstr "Aggiornamento fallito"
 
@@ -735,6 +705,9 @@ msgstr "Febbraio"
 msgid "File not found."
 msgstr "File non trovato."
 
+msgid "File read/write error."
+msgstr ""
+
 msgid "Files extracted successfully."
 msgstr "File estratti con successo."
 
@@ -744,9 +717,6 @@ msgstr "La dimensione del file è di %i byte."
 
 msgid "Filesize is 0 Byte."
 msgstr "La dimensione del file è di 0 byte."
-
-msgid "Finishing installation... Ok!"
-msgstr "Completando l'installazione... OK!"
 
 msgid "Flat Covers"
 msgstr "Copertine 2D"
@@ -957,26 +927,26 @@ msgstr "Errore nell'installazione!"
 msgid "Install Partitions"
 msgstr "Installa Partizioni"
 
+msgid "Install WAD to EmuNand"
+msgstr ""
+
 msgid "Install a game"
 msgstr "Installa un gioco"
 
 msgid "Install finished"
 msgstr "Installazione completata"
 
-msgid "Installing content... Ok!"
-msgstr "Intallando contenuto... OK!"
+msgid "Installing content"
+msgstr ""
 
 msgid "Installing game:"
 msgstr "Intallando gioco:"
 
-msgid "Installing ticket... Ok!"
-msgstr "intallando ticket... OK!"
+msgid "Installing title..."
+msgstr ""
 
-msgid "Installing title... Ok!"
-msgstr "Intallando titolo... OK!"
-
-msgid "Installing wad"
-msgstr "Intallando WAD"
+msgid "Invalid wad file."
+msgstr ""
 
 msgid "Issue manager /"
 msgstr "Gestore problemi /"
@@ -1330,9 +1300,6 @@ msgstr "Avvio Rapido"
 msgid "Random Directory Music"
 msgstr "Riproduci brani in ordine casuale"
 
-msgid "Reading WAD data... Ok!"
-msgstr "Leggendo dati WAD... OK!"
-
 msgid "Real Nand"
 msgstr ""
 
@@ -1628,6 +1595,9 @@ msgstr "Porta USB"
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr "Il cambio della porta USB è possibile solo con i cIOS di Hermes."
 
+msgid "Uninstall"
+msgstr ""
+
 msgid "Uninstall Game"
 msgstr "Disinstalla Gioco"
 
@@ -1636,9 +1606,6 @@ msgstr "Menu Disinstallazioni"
 
 msgid "Uninstall all"
 msgstr "Disinstalla tutto"
-
-msgid "Uninstalling wad"
-msgstr "Disinstallando il WAD"
 
 msgid "Unknown"
 msgstr "Sconosciuto"
@@ -1707,6 +1674,9 @@ msgstr "Modalità Video"
 msgid "Virtual Pointer Speed"
 msgstr ""
 
+msgid "WAD Installation"
+msgstr ""
+
 msgid "WDM Files Path"
 msgstr "Percorso dei file WDM"
 
@@ -1721,6 +1691,9 @@ msgstr "Attenzione"
 
 msgid "Warning:"
 msgstr "Attenzione:"
+
+msgid "What do you want to do?"
+msgstr ""
 
 msgid "What do you want to update?"
 msgstr "Che cosa vuoi aggiornare?"
@@ -1769,6 +1742,10 @@ msgstr "Wiinnertag necessita della connessione automatica delle rete all'avvio. 
 
 msgid "Wiird Debugger"
 msgstr "Debugger Wiird"
+
+#, c-format
+msgid "Write error on file: %s"
+msgstr ""
 
 msgid "Writing GXGameCategories.xml"
 msgstr "Scrivendo GXGameCategories.xml"
@@ -1841,6 +1818,81 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi rimanenti"
+
+#~ msgid ">> Deleting tickets..."
+#~ msgstr ">> Eliminando i ticket..."
+
+#~ msgid ">> Deleting tickets...ERROR! "
+#~ msgstr ">> Eliminando i ticket...ERRORE! "
+
+#~ msgid ">> Deleting tickets...Ok! "
+#~ msgstr ">> Eliminando i ticket...OK! "
+
+#~ msgid ">> Deleting title ...ERROR! "
+#~ msgstr ">> Eliminando titolo...ERRORE! "
+
+#~ msgid ">> Deleting title ...Ok!"
+#~ msgstr ">> Eliminando titolo...OK! "
+
+#~ msgid ">> Deleting title contents..."
+#~ msgstr ">> Eliminando contenuti..."
+
+#~ msgid ">> Deleting title contents...ERROR! "
+#~ msgstr ">> Eliminando contenuti...ERRORE! "
+
+#~ msgid ">> Deleting title contents...Ok!"
+#~ msgstr ">> Eliminando contenuti...OK! "
+
+#~ msgid ">> Deleting title..."
+#~ msgstr ">> Eliminando titolo..."
+
+#~ msgid ">> Finishing installation..."
+#~ msgstr ">> Ultimando l'installazione..."
+
+#~ msgid ">> Installing content #"
+#~ msgstr ">> Intallando contenuto #..."
+
+#~ msgid ">> Installing ticket..."
+#~ msgstr ">> Installando ticket..."
+
+#~ msgid ">> Installing title..."
+#~ msgstr ">> Installando titolo..."
+
+#~ msgid ">> Reading WAD data..."
+#~ msgstr ">> Leggendo dati WAD..."
+
+#~ msgid ">> Reading WAD data...ERROR! "
+#~ msgstr ">> Leggendo dati WAD...ERRORE! "
+
+#~ msgid ">> Reading WAD data...Ok!"
+#~ msgstr ">> Leggendo dati WAD...OK!"
+
+#~ msgid "Done!"
+#~ msgstr "Fatto!"
+
+#~ msgid "Error..."
+#~ msgstr "Errore..."
+
+#~ msgid "Finishing installation... Ok!"
+#~ msgstr "Completando l'installazione... OK!"
+
+#~ msgid "Installing content... Ok!"
+#~ msgstr "Intallando contenuto... OK!"
+
+#~ msgid "Installing ticket... Ok!"
+#~ msgstr "intallando ticket... OK!"
+
+#~ msgid "Installing title... Ok!"
+#~ msgstr "Intallando titolo... OK!"
+
+#~ msgid "Installing wad"
+#~ msgstr "Intallando WAD"
+
+#~ msgid "Reading WAD data... Ok!"
+#~ msgstr "Leggendo dati WAD... OK!"
+
+#~ msgid "Uninstalling wad"
+#~ msgstr "Disinstallando il WAD"
 
 #~ msgid "The game installation is disabled under this IOS because of instability in usb write."
 #~ msgstr "L'installazione dei giochi è disabilitata con questo IOS dato che la scrittura sul disco rigido è instabile"

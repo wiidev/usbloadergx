@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-30 19:17+0100\n"
+"POT-Creation-Date: 2012-01-01 17:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -72,54 +72,6 @@ msgstr "CERO Zを制限"
 
 msgid "5 min"
 msgstr "5分"
-
-msgid ">> Deleting tickets..."
-msgstr ">> ﾁｹｯﾄを削除します"
-
-msgid ">> Deleting tickets...ERROR! "
-msgstr ">> ﾁｹｯﾄを削除 … 失敗!"
-
-msgid ">> Deleting tickets...Ok! "
-msgstr ">> ﾁｹｯﾄを削除 … 成功!"
-
-msgid ">> Deleting title ...ERROR! "
-msgstr ">> ﾀｲﾄﾙを削除 … 失敗!"
-
-msgid ">> Deleting title ...Ok!"
-msgstr ">> ﾀｲﾄﾙを削除 … 成功!"
-
-msgid ">> Deleting title contents..."
-msgstr ">> ﾀｲﾄﾙｺﾝﾃﾝﾂを削除します"
-
-msgid ">> Deleting title contents...ERROR! "
-msgstr ">> ﾀｲﾄﾙｺﾝﾃﾝﾂを削除 … 失敗!"
-
-msgid ">> Deleting title contents...Ok!"
-msgstr ">> ﾀｲﾄﾙｺﾝﾃﾝﾂを削除 … 成功!"
-
-msgid ">> Deleting title..."
-msgstr ">> ﾀｲﾄﾙを削除します"
-
-msgid ">> Finishing installation..."
-msgstr ">> ｲﾝｽﾄｰﾙを終了します"
-
-msgid ">> Installing content #"
-msgstr "ｲﾝｽﾄｰﾙ ｺﾝﾃﾝﾂ #"
-
-msgid ">> Installing ticket..."
-msgstr "ﾁｹｯﾄをｲﾝｽﾄｰﾙ中 …"
-
-msgid ">> Installing title..."
-msgstr "ﾀｲﾄﾙをｲﾝｽﾄｰﾙ中 …"
-
-msgid ">> Reading WAD data..."
-msgstr ">> WADﾃﾞｰﾀを読込み中 …"
-
-msgid ">> Reading WAD data...ERROR! "
-msgstr ">> WADﾃﾞｰﾀの読込 … 失敗!"
-
-msgid ">> Reading WAD data...Ok!"
-msgstr ">> WADﾃﾞｰﾀの読込 … 成功!"
 
 msgid "AUTO"
 msgstr "自動"
@@ -305,11 +257,23 @@ msgid "Can't create directory"
 msgstr "フォルダを作れません"
 
 #, c-format
+msgid "Can't create file: %s"
+msgstr ""
+
+#, c-format
 msgid "Can't create path: %s"
 msgstr "パスを作成できません: %s"
 
 msgid "Can't delete:"
 msgstr "削除できません:"
+
+#, c-format
+msgid "Can't open file: %s"
+msgstr ""
+
+#, c-format
+msgid "Can't read file: %s"
+msgstr ""
 
 msgid "Cancel"
 msgstr "やめる"
@@ -380,6 +344,9 @@ msgstr "変更にはロックの解除が必要です"
 
 msgid "Content"
 msgstr "含む"
+
+msgid "Continue"
+msgstr ""
 
 msgid "Continue to install game?"
 msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしますか？"
@@ -562,9 +529,6 @@ msgstr "全てのFAT32領域のセクタで空き容量情報を同期します�
 msgid "Do you wish to update/download all language files?"
 msgstr "すべての言語をダウンロードしますか？"
 
-msgid "Done!"
-msgstr "完了！"
-
 msgid "Download"
 msgstr "ダウンロード"
 
@@ -666,9 +630,6 @@ msgstr "更新中にエラーが発生しました"
 msgid "Error writing the data."
 msgstr "データの書き込み中にエラーが発生しました"
 
-msgid "Error..."
-msgstr "エラー…"
-
 msgid "Error:"
 msgstr "エラー:"
 
@@ -720,6 +681,15 @@ msgstr ""
 msgid "Failed to open partition"
 msgstr "領域を開けませんでした"
 
+msgid "Failed to read ticket."
+msgstr ""
+
+msgid "Failed to read tmd file."
+msgstr ""
+
+msgid "Failed to read wad header."
+msgstr ""
+
 msgid "Failed updating"
 msgstr "更新に失敗しました"
 
@@ -735,6 +705,9 @@ msgstr "2月"
 msgid "File not found."
 msgstr "ファイルが見つかりません"
 
+msgid "File read/write error."
+msgstr ""
+
 msgid "Files extracted successfully."
 msgstr "ファイルを書き出しました"
 
@@ -744,9 +717,6 @@ msgstr "ファイルサイズが%iバイトです"
 
 msgid "Filesize is 0 Byte."
 msgstr "ファイルサイズが0バイトです"
-
-msgid "Finishing installation... Ok!"
-msgstr "ｲﾝｽﾄｰﾙの完了...完了しました"
 
 msgid "Flat Covers"
 msgstr "正面カバー"
@@ -957,26 +927,26 @@ msgstr "インストールエラー!"
 msgid "Install Partitions"
 msgstr "インストール領域"
 
+msgid "Install WAD to EmuNand"
+msgstr ""
+
 msgid "Install a game"
 msgstr "ゲームをインストール"
 
 msgid "Install finished"
 msgstr "インストールが終了しました"
 
-msgid "Installing content... Ok!"
-msgstr "ｺﾝﾃﾝﾂをｲﾝｽﾄｰﾙ...成功！"
+msgid "Installing content"
+msgstr ""
 
 msgid "Installing game:"
 msgstr "ｹﾞｰﾑをｲﾝｽﾄｰﾙ中:"
 
-msgid "Installing ticket... Ok!"
-msgstr "ﾁｹｯﾄをｲﾝｽﾄｰﾙ...成功！"
+msgid "Installing title..."
+msgstr ""
 
-msgid "Installing title... Ok!"
-msgstr "ﾀｲﾄﾙをｲﾝｽﾄｰﾙ...成功！"
-
-msgid "Installing wad"
-msgstr "WADをｲﾝｽﾄｰﾙします"
+msgid "Invalid wad file."
+msgstr ""
 
 msgid "Issue manager /"
 msgstr "問題管理者 /"
@@ -1330,9 +1300,6 @@ msgstr "クイック起動"
 msgid "Random Directory Music"
 msgstr "フォルダ内でランダム再生"
 
-msgid "Reading WAD data... Ok!"
-msgstr "WADﾃﾞｰﾀの読み込み...成功！"
-
 msgid "Real Nand"
 msgstr ""
 
@@ -1628,6 +1595,9 @@ msgstr "USBポート"
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr "USBﾎﾟｰﾄの切替機能は、Hermes cIOS使用時のみ有効です。"
 
+msgid "Uninstall"
+msgstr ""
+
 msgid "Uninstall Game"
 msgstr "ゲームをｱﾝｲﾝｽﾄｰﾙ"
 
@@ -1636,9 +1606,6 @@ msgstr "アンインストール"
 
 msgid "Uninstall all"
 msgstr "全てアンインストール"
-
-msgid "Uninstalling wad"
-msgstr "WADをｱﾝｲﾝｽﾄｰﾙ"
 
 msgid "Unknown"
 msgstr "不明"
@@ -1707,6 +1674,9 @@ msgstr "映像の出力方法"
 msgid "Virtual Pointer Speed"
 msgstr ""
 
+msgid "WAD Installation"
+msgstr ""
+
 msgid "WDM Files Path"
 msgstr "WDMファイル"
 
@@ -1721,6 +1691,9 @@ msgstr "警告"
 
 msgid "Warning:"
 msgstr "警告:"
+
+msgid "What do you want to do?"
+msgstr ""
 
 msgid "What do you want to update?"
 msgstr "更新の選択"
@@ -1769,6 +1742,10 @@ msgstr "Wiinnertagは自動ネット接続が有効になっている必要が�
 
 msgid "Wiird Debugger"
 msgstr "WiiRDデバッガ"
+
+#, c-format
+msgid "Write error on file: %s"
+msgstr ""
 
 msgid "Writing GXGameCategories.xml"
 msgstr "GXGameCategories.xmlを書き込み中です"
@@ -1841,6 +1818,81 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid ">> Deleting tickets..."
+#~ msgstr ">> ﾁｹｯﾄを削除します"
+
+#~ msgid ">> Deleting tickets...ERROR! "
+#~ msgstr ">> ﾁｹｯﾄを削除 … 失敗!"
+
+#~ msgid ">> Deleting tickets...Ok! "
+#~ msgstr ">> ﾁｹｯﾄを削除 … 成功!"
+
+#~ msgid ">> Deleting title ...ERROR! "
+#~ msgstr ">> ﾀｲﾄﾙを削除 … 失敗!"
+
+#~ msgid ">> Deleting title ...Ok!"
+#~ msgstr ">> ﾀｲﾄﾙを削除 … 成功!"
+
+#~ msgid ">> Deleting title contents..."
+#~ msgstr ">> ﾀｲﾄﾙｺﾝﾃﾝﾂを削除します"
+
+#~ msgid ">> Deleting title contents...ERROR! "
+#~ msgstr ">> ﾀｲﾄﾙｺﾝﾃﾝﾂを削除 … 失敗!"
+
+#~ msgid ">> Deleting title contents...Ok!"
+#~ msgstr ">> ﾀｲﾄﾙｺﾝﾃﾝﾂを削除 … 成功!"
+
+#~ msgid ">> Deleting title..."
+#~ msgstr ">> ﾀｲﾄﾙを削除します"
+
+#~ msgid ">> Finishing installation..."
+#~ msgstr ">> ｲﾝｽﾄｰﾙを終了します"
+
+#~ msgid ">> Installing content #"
+#~ msgstr "ｲﾝｽﾄｰﾙ ｺﾝﾃﾝﾂ #"
+
+#~ msgid ">> Installing ticket..."
+#~ msgstr "ﾁｹｯﾄをｲﾝｽﾄｰﾙ中 …"
+
+#~ msgid ">> Installing title..."
+#~ msgstr "ﾀｲﾄﾙをｲﾝｽﾄｰﾙ中 …"
+
+#~ msgid ">> Reading WAD data..."
+#~ msgstr ">> WADﾃﾞｰﾀを読込み中 …"
+
+#~ msgid ">> Reading WAD data...ERROR! "
+#~ msgstr ">> WADﾃﾞｰﾀの読込 … 失敗!"
+
+#~ msgid ">> Reading WAD data...Ok!"
+#~ msgstr ">> WADﾃﾞｰﾀの読込 … 成功!"
+
+#~ msgid "Done!"
+#~ msgstr "完了！"
+
+#~ msgid "Error..."
+#~ msgstr "エラー…"
+
+#~ msgid "Finishing installation... Ok!"
+#~ msgstr "ｲﾝｽﾄｰﾙの完了...完了しました"
+
+#~ msgid "Installing content... Ok!"
+#~ msgstr "ｺﾝﾃﾝﾂをｲﾝｽﾄｰﾙ...成功！"
+
+#~ msgid "Installing ticket... Ok!"
+#~ msgstr "ﾁｹｯﾄをｲﾝｽﾄｰﾙ...成功！"
+
+#~ msgid "Installing title... Ok!"
+#~ msgstr "ﾀｲﾄﾙをｲﾝｽﾄｰﾙ...成功！"
+
+#~ msgid "Installing wad"
+#~ msgstr "WADをｲﾝｽﾄｰﾙします"
+
+#~ msgid "Reading WAD data... Ok!"
+#~ msgstr "WADﾃﾞｰﾀの読み込み...成功！"
+
+#~ msgid "Uninstalling wad"
+#~ msgstr "WADをｱﾝｲﾝｽﾄｰﾙ"
 
 #~ msgid "The game installation is disabled under this IOS because of instability in usb write."
 #~ msgstr "このIOSでのゲームの追加は不安定なため無効になっています"

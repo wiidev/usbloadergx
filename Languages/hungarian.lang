@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-30 19:17+0100\n"
+"POT-Creation-Date: 2012-01-01 17:44+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -72,54 +72,6 @@ msgstr "4 (Felnõtteknek 18+)"
 
 msgid "5 min"
 msgstr "5 perc"
-
-msgid ">> Deleting tickets..."
-msgstr ">> Ticket-ek törlése..."
-
-msgid ">> Deleting tickets...ERROR! "
-msgstr ">> Ticket-ek törlése...HIBA!"
-
-msgid ">> Deleting tickets...Ok! "
-msgstr ">> Ticket-ek törlése...Ok!"
-
-msgid ">> Deleting title ...ERROR! "
-msgstr ">> Title törlése...HIBA!"
-
-msgid ">> Deleting title ...Ok!"
-msgstr ">> Title törlése...Ok!"
-
-msgid ">> Deleting title contents..."
-msgstr ">> Title tartalom törlése..."
-
-msgid ">> Deleting title contents...ERROR! "
-msgstr ">> Title tartalom törlése...HIBA!"
-
-msgid ">> Deleting title contents...Ok!"
-msgstr ">> Title tartalom törlése...Ok!"
-
-msgid ">> Deleting title..."
-msgstr ">> Title törlése..."
-
-msgid ">> Finishing installation..."
-msgstr ">> Telepítés befejezése..."
-
-msgid ">> Installing content #"
-msgstr ">> Telepítés: tartalom #"
-
-msgid ">> Installing ticket..."
-msgstr ">> Ticket telepítése"
-
-msgid ">> Installing title..."
-msgstr ">> Title telepítése..."
-
-msgid ">> Reading WAD data..."
-msgstr ">> WAD adatok olvasása..."
-
-msgid ">> Reading WAD data...ERROR! "
-msgstr ">> WAD adatok olvasása...HIBA!"
-
-msgid ">> Reading WAD data...Ok!"
-msgstr ">> WAD adatok olvasása...Ok!"
 
 msgid "AUTO"
 msgstr ""
@@ -305,11 +257,23 @@ msgid "Can't create directory"
 msgstr "Mappa nem hozható létre"
 
 #, c-format
+msgid "Can't create file: %s"
+msgstr ""
+
+#, c-format
 msgid "Can't create path: %s"
 msgstr ""
 
 msgid "Can't delete:"
 msgstr "Nem törölhetõ"
+
+#, c-format
+msgid "Can't open file: %s"
+msgstr ""
+
+#, c-format
+msgid "Can't read file: %s"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Mégse"
@@ -379,6 +343,9 @@ msgid "Console should be unlocked to modify it."
 msgstr "A konzol zárolva, ezért nem változtatható meg."
 
 msgid "Content"
+msgstr ""
+
+msgid "Continue"
 msgstr ""
 
 msgid "Continue to install game?"
@@ -562,9 +529,6 @@ msgstr ""
 msgid "Do you wish to update/download all language files?"
 msgstr "Minden nyelvi fájl letöltése/frissítése?"
 
-msgid "Done!"
-msgstr "Kész!"
-
 msgid "Download"
 msgstr "Letöltés"
 
@@ -666,9 +630,6 @@ msgstr ""
 msgid "Error writing the data."
 msgstr ""
 
-msgid "Error..."
-msgstr "Hiba..."
-
 msgid "Error:"
 msgstr "Hiba:"
 
@@ -720,6 +681,15 @@ msgstr ""
 msgid "Failed to open partition"
 msgstr "Hiba a partíció megnyitásakor"
 
+msgid "Failed to read ticket."
+msgstr ""
+
+msgid "Failed to read tmd file."
+msgstr ""
+
+msgid "Failed to read wad header."
+msgstr ""
+
 msgid "Failed updating"
 msgstr ""
 
@@ -735,6 +705,9 @@ msgstr ""
 msgid "File not found."
 msgstr "Fájl nem található"
 
+msgid "File read/write error."
+msgstr ""
+
 msgid "Files extracted successfully."
 msgstr ""
 
@@ -744,9 +717,6 @@ msgstr ""
 
 msgid "Filesize is 0 Byte."
 msgstr ""
-
-msgid "Finishing installation... Ok!"
-msgstr "Telepítés befejezése...Ok!"
 
 msgid "Flat Covers"
 msgstr ""
@@ -957,26 +927,26 @@ msgstr "Telepítési Hiba!"
 msgid "Install Partitions"
 msgstr ""
 
+msgid "Install WAD to EmuNand"
+msgstr ""
+
 msgid "Install a game"
 msgstr "Játék telepítése"
 
 msgid "Install finished"
 msgstr ""
 
-msgid "Installing content... Ok!"
-msgstr "Tartalom telepítése... Ok!"
+msgid "Installing content"
+msgstr ""
 
 msgid "Installing game:"
 msgstr "Játék telepítése"
 
-msgid "Installing ticket... Ok!"
-msgstr "Ticket telepítése... Ok!"
+msgid "Installing title..."
+msgstr ""
 
-msgid "Installing title... Ok!"
-msgstr "Title telepítése... Ok!"
-
-msgid "Installing wad"
-msgstr "Wad telepítése"
+msgid "Invalid wad file."
+msgstr ""
 
 msgid "Issue manager /"
 msgstr ""
@@ -1330,9 +1300,6 @@ msgstr "Gyors Boot"
 msgid "Random Directory Music"
 msgstr ""
 
-msgid "Reading WAD data... Ok!"
-msgstr "WAD adat olvasás... Ok!"
-
 msgid "Real Nand"
 msgstr ""
 
@@ -1628,6 +1595,9 @@ msgstr ""
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr ""
 
+msgid "Uninstall"
+msgstr "Törlés"
+
 msgid "Uninstall Game"
 msgstr "Játék törlése"
 
@@ -1636,9 +1606,6 @@ msgstr "Adatkezelés"
 
 msgid "Uninstall all"
 msgstr ""
-
-msgid "Uninstalling wad"
-msgstr "Wad törlése"
 
 msgid "Unknown"
 msgstr ""
@@ -1707,6 +1674,9 @@ msgstr "Videó Mód"
 msgid "Virtual Pointer Speed"
 msgstr ""
 
+msgid "WAD Installation"
+msgstr ""
+
 msgid "WDM Files Path"
 msgstr ""
 
@@ -1720,6 +1690,9 @@ msgid "Warning"
 msgstr ""
 
 msgid "Warning:"
+msgstr ""
+
+msgid "What do you want to do?"
 msgstr ""
 
 msgid "What do you want to update?"
@@ -1768,6 +1741,10 @@ msgid "Wiinnertag requires you to enable automatic network connect on applicatio
 msgstr ""
 
 msgid "Wiird Debugger"
+msgstr ""
+
+#, c-format
+msgid "Write error on file: %s"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"
@@ -1842,6 +1819,81 @@ msgstr "./"
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
 
+#~ msgid ">> Deleting tickets..."
+#~ msgstr ">> Ticket-ek törlése..."
+
+#~ msgid ">> Deleting tickets...ERROR! "
+#~ msgstr ">> Ticket-ek törlése...HIBA!"
+
+#~ msgid ">> Deleting tickets...Ok! "
+#~ msgstr ">> Ticket-ek törlése...Ok!"
+
+#~ msgid ">> Deleting title ...ERROR! "
+#~ msgstr ">> Title törlése...HIBA!"
+
+#~ msgid ">> Deleting title ...Ok!"
+#~ msgstr ">> Title törlése...Ok!"
+
+#~ msgid ">> Deleting title contents..."
+#~ msgstr ">> Title tartalom törlése..."
+
+#~ msgid ">> Deleting title contents...ERROR! "
+#~ msgstr ">> Title tartalom törlése...HIBA!"
+
+#~ msgid ">> Deleting title contents...Ok!"
+#~ msgstr ">> Title tartalom törlése...Ok!"
+
+#~ msgid ">> Deleting title..."
+#~ msgstr ">> Title törlése..."
+
+#~ msgid ">> Finishing installation..."
+#~ msgstr ">> Telepítés befejezése..."
+
+#~ msgid ">> Installing content #"
+#~ msgstr ">> Telepítés: tartalom #"
+
+#~ msgid ">> Installing ticket..."
+#~ msgstr ">> Ticket telepítése"
+
+#~ msgid ">> Installing title..."
+#~ msgstr ">> Title telepítése..."
+
+#~ msgid ">> Reading WAD data..."
+#~ msgstr ">> WAD adatok olvasása..."
+
+#~ msgid ">> Reading WAD data...ERROR! "
+#~ msgstr ">> WAD adatok olvasása...HIBA!"
+
+#~ msgid ">> Reading WAD data...Ok!"
+#~ msgstr ">> WAD adatok olvasása...Ok!"
+
+#~ msgid "Done!"
+#~ msgstr "Kész!"
+
+#~ msgid "Error..."
+#~ msgstr "Hiba..."
+
+#~ msgid "Finishing installation... Ok!"
+#~ msgstr "Telepítés befejezése...Ok!"
+
+#~ msgid "Installing content... Ok!"
+#~ msgstr "Tartalom telepítése... Ok!"
+
+#~ msgid "Installing ticket... Ok!"
+#~ msgstr "Ticket telepítése... Ok!"
+
+#~ msgid "Installing title... Ok!"
+#~ msgstr "Title telepítése... Ok!"
+
+#~ msgid "Installing wad"
+#~ msgstr "Wad telepítése"
+
+#~ msgid "Reading WAD data... Ok!"
+#~ msgstr "WAD adat olvasás... Ok!"
+
+#~ msgid "Uninstalling wad"
+#~ msgstr "Wad törlése"
+
 #~ msgid "New Disc Detected"
 #~ msgstr "Új lemez észlelve"
 
@@ -1877,9 +1929,6 @@ msgstr "hátralévõ másodperc"
 
 #~ msgid "Keep"
 #~ msgstr "Megtartás"
-
-#~ msgid "Uninstall"
-#~ msgstr "Törlés"
 
 #~ msgid "Author:"
 #~ msgstr "Készítõ:"

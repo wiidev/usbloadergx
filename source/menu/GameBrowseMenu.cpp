@@ -16,23 +16,18 @@
 #include "usbloader/wbfs.h"
 #include "usbloader/wdvd.h"
 #include "usbloader/GameList.h"
-#include "usbloader/AlternateDOLOffsets.h"
-#include "usbloader/GameBooter.hpp"
 #include "network/networkops.h"
 #include "network/update.h"
 #include "network/ImageDownloader.h"
-#include "FileOperations/fileops.h"
 #include "settings/CSettings.h"
 #include "settings/CGameStatistics.h"
 #include "settings/CGameSettings.h"
 #include "settings/GameTitles.h"
-#include "system/IosLoader.h"
 #include "utils/StringTools.h"
 #include "utils/rockout.h"
 #include "utils/ShowError.h"
 #include "utils/tools.h"
 #include "utils/PasswordCheck.h"
-#include "WDMMenu.hpp"
 #include "gecko.h"
 #include "menus.h"
 #include "wpad.h"
@@ -1373,6 +1368,7 @@ void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
 
 int GameBrowseMenu::OpenClickedGame()
 {
+	int choice = -1;
 	int gameSelected = GetSelectedGame();
 	if(gameSelected < 0 || gameSelected >= gameList.size())
 		return -1;
@@ -1385,99 +1381,45 @@ int GameBrowseMenu::OpenClickedGame()
 	}
 
 	rockout(gameSelected);
-	if(gameBrowser) gameBrowser->SetState(STATE_DISABLED);
+	SetState(STATE_DISABLED);
+	if(gameBrowser)
+		gameBrowser->SetState(STATE_DISABLED);
 
-	struct discHdr *header = (mountMethod ? dvdheader : gameList[gameSelected]);
+	if (Settings.wiilight == ON)
+		wiilight(1);
 
-	char IDfull[7];
-	snprintf(IDfull, sizeof(IDfull), "%s", (char *) header->id);
-
-	bool returnHere = true;// prompt to start game
-	int choice = -1;
-
-	while (returnHere)
+	if (Settings.quickboot) { //quickboot game
+		GameWindow::BootGame(mountMethod ? dvdheader : gameList[gameSelected]);
+	}
+	else
 	{
-		returnHere = false;
+		GameWindow * GamePrompt = new GameWindow(gameSelected);
+		GamePrompt->SetGameBrowseMenu(this);
+		mainWindow->Append(GamePrompt);
 
-		if (Settings.wiilight == ON)
-			wiilight(1);
+		choice = GamePrompt->Run();
+		gameSelected = GamePrompt->GetSelectedGame();
 
-		if (Settings.quickboot) //quickboot game
-			choice = 1;
-		else
+		delete GamePrompt;
+	}
+
+	if (choice == 1)
+	{
+		ReloadBrowser();
+		if(Settings.ShowFreeSpace)
 		{
-			SetState(STATE_DISABLED);
-			GameWindow * GamePrompt = new GameWindow(gameSelected);
-			GamePrompt->SetGameBrowseMenu(this);
-			mainWindow->Append(GamePrompt);
-			choice = GamePrompt->Show();
-			gameSelected = GamePrompt->GetSelectedGame();
-			delete GamePrompt;
-			SetState(STATE_DEFAULT);
-			if(gameBrowser) gameBrowser->SetState(STATE_DISABLED);
-			//update header and id if it was changed
-			header = (mountMethod ? dvdheader : gameList[gameSelected]);
-			snprintf(IDfull, sizeof(IDfull), "%s", (char *) header->id);
-		}
-
-		if (choice == 1)
-		{
-			bool RunGame = true;
-			wiilight(0);
-
-			GameCFG* game_cfg = GameSettings.GetGameCFG(header->id);
-
-			if (game_cfg->loadalternatedol == 2)
-				CheckAlternativeDOL(IDfull);
-			else if(game_cfg->loadalternatedol == 3 && WDMMenu::Show(header) == 0)
-			{
-				RunGame = false;
-				returnHere = true;
-			}
-			else if(game_cfg->loadalternatedol == 4)
-			{
-				iosinfo_t *info = IosLoader::GetIOSInfo(game_cfg->ios == INHERIT ? Settings.cios : game_cfg->ios);
-				if(!info || info->version < 6)
-					defaultDolPrompt((char *) header->id);
-			}
-
-			if (RunGame && (game_cfg->ocarina == ON || (game_cfg->ocarina == INHERIT && Settings.ocarina == ON)))
-				CheckOcarina(IDfull);
-
-			if(header->type == TYPE_GAME_EMUNANDCHAN)
-			{
-				int gameIOS = game_cfg->ios == INHERIT ? Settings.cios : game_cfg->ios;
-				if(!IosLoader::GetIOSInfo(gameIOS))
-				{
-					ShowError(tr("Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."));
-					RunGame = false;
-					returnHere = true;
-				}
-			}
-
-			if(RunGame)
-			{
-				GameStatistics.SetPlayCount(header->id, GameStatistics.GetPlayCount(header->id)+1);
-				GameStatistics.Save();
-
-				//Just calling that shuts down everything and starts game
-				GameBooter::BootGame(header);
-			}
-		}
-		else if (choice == 2)
-		{
-			ReloadBrowser();
-			if(Settings.ShowFreeSpace)
-			{
-				ThreadedTask::Instance()->AddCallback(&HDDSizeCallback);
-				ThreadedTask::Instance()->Execute();
-			}
+			ThreadedTask::Instance()->AddCallback(&HDDSizeCallback);
+			ThreadedTask::Instance()->Execute();
 		}
 	}
 
+	wiilight(0);
 	rockout(-1, -1);
 	mountMethod = 0;
-	if(gameBrowser) gameBrowser->SetState(STATE_DEFAULT);
+
+	SetState(STATE_DEFAULT);
+	if(gameBrowser)
+		gameBrowser->SetState(STATE_DEFAULT);
 
 	if (searchBar)
 	{
@@ -1497,29 +1439,6 @@ void GameBrowseMenu::LoadCover(struct discHdr *header)
 	gameCover = LoadCoverImage(header);
 
 	gameCoverImg->SetImage(gameCover);// put the new image on the download button
-}
-
-void GameBrowseMenu::CheckOcarina(const char * IDfull)
-{
-	char filepath[200];
-	snprintf(filepath, sizeof(filepath), "%s%s.gct", Settings.Cheatcodespath, IDfull);
-	if (CheckFile(filepath) == false)
-	{
-		gprintf("\ttried to load missing gct.\n");
-		sprintf(filepath, "%s %s", filepath, tr( "does not exist!  Loading game without cheats." ));
-		WindowPrompt(tr( "Error" ), filepath, NULL, NULL, NULL, NULL, 170);
-	}
-}
-
-void GameBrowseMenu::CheckAlternativeDOL(const char * IDfull)
-{
-	char filepath[200];
-	snprintf(filepath, sizeof(filepath), "%s%s.dol", Settings.dolpath, IDfull);
-	if (CheckFile(filepath) == false)
-	{
-		sprintf(filepath, "%s %s", filepath, tr( "does not exist!" ));
-		WindowPrompt(tr( "Error" ), filepath, tr( "OK" ));
-	}
 }
 
 void GameBrowseMenu::UpdateCallback(void * e)

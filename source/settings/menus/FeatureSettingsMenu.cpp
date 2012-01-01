@@ -23,6 +23,7 @@
  ***************************************************************************/
 #include <unistd.h>
 #include "FeatureSettingsMenu.hpp"
+#include "Channels/channels.h"
 #include "settings/CGameCategories.hpp"
 #include "settings/GameTitles.h"
 #include "settings/CSettings.h"
@@ -32,9 +33,11 @@
 #include "FileOperations/fileops.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/ProgressWindow.h"
-#include "wad/nandtitle.h"
+#include "prompts/filebrowser.h"
 #include "usbloader/GameList.h"
 #include "language/gettext.h"
+#include "wad/nandtitle.h"
+#include "wad/wad.h"
 
 static const char * OnOffText[] =
 {
@@ -63,6 +66,7 @@ FeatureSettingsMenu::FeatureSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Import Categories" ));
 	Options->SetName(Idx++, "%s", tr( "Export All Saves to EmuNand" ));
 	Options->SetName(Idx++, "%s", tr( "Dump NAND to EmuNand" ));
+	Options->SetName(Idx++, "%s", tr( "Install WAD to EmuNand" ));
 
 	OldTitlesOverride = Settings.titlesOverride;
 
@@ -114,6 +118,9 @@ void FeatureSettingsMenu::SetOptionValues()
 	Options->SetValue(Idx++, " ");
 
 	//! Settings: Dump NAND to EmuNand
+	Options->SetValue(Idx++, " ");
+
+	//! Settings: Install WAD to EmuNand
 	Options->SetValue(Idx++, " ");
 }
 
@@ -341,6 +348,40 @@ int FeatureSettingsMenu::GetMenuInternal()
 			}
 			free(nandPath);
 		}
+	}
+
+	//! Settings: Install WAD to EmuNand
+	else if (ret == ++Idx)
+	{
+		GuiWindow * parent = (GuiWindow *) parentElement;
+		if(parent) parent->SetState(STATE_DISABLED);
+		this->SetState(STATE_DEFAULT);
+		this->Remove(optionBrowser);
+
+		char wadpath[150];
+		sprintf(wadpath, "%s/wad/", Settings.BootDevice);
+
+		int result = BrowseDevice(wadpath, sizeof(wadpath), FB_DEFAULT);
+		if(result)
+		{
+			int choice = WindowPrompt(tr("WAD Installation"), tr("What do you want to do?"), tr("Install"), tr("Uninstall"), tr("Cancel"));
+			if(choice == 1)
+			{
+				Wad wadFile(wadpath);
+				wadFile.Install(Settings.NandEmuChanPath);
+				Channels::Instance()->GetEmuChannelList();
+				GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
+			}
+			else if(choice == 2)
+			{
+				Wad wadFile(wadpath);
+				wadFile.UnInstall(Settings.NandEmuChanPath);
+				Channels::Instance()->GetEmuChannelList();
+			}
+		}
+
+		if(parent) parent->SetState(STATE_DEFAULT);
+		this->Append(optionBrowser);
 	}
 
 	SetOptionValues();

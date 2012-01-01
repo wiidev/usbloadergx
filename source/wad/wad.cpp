@@ -1,621 +1,497 @@
+/****************************************************************************
+ * Copyright (C) 2011 Dimok
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ ****************************************************************************/
 #include <stdio.h>
-#include <string.h>
 #include <malloc.h>
-#include <ogcsys.h>
-#include <unistd.h>
-
-#include "utils.h"
-#include "video.h"
+#include <string.h>
+#include "prompts/ProgressWindow.h"
+#include "FileOperations/fileops.h"
+#include "language/gettext.h"
+#include "utils/ShowError.h"
+#include "wad/utils.h"
 #include "wad.h"
 
-#include "nandtitle.h"
-
-#include "prompts/PromptWindows.h"
-#include "GUI/gui.h"
-#include "language/gettext.h"
-#include "menu.h"
-#include "themes/CTheme.h"
-
-/* 'WAD Header' structure */
-typedef struct
+extern "C"
 {
-		/* Header length */
-		u32 header_len;
-
-		/* WAD type */
-		u16 type;
-
-		u16 padding;
-
-		/* Data length */
-		u32 certs_len;
-		u32 crl_len;
-		u32 tik_len;
-		u32 tmd_len;
-		u32 data_len;
-		u32 footer_len;
-}ATTRIBUTE_PACKED wadHeader;
-
-/* Variables */
-static u8 wadBuffer[BLOCK_SIZE] ATTRIBUTE_ALIGN( 32 );
-
-s32 __Wad_ReadFile(FILE *fp, void *outbuf, u32 offset, u32 len)
-{
-	s32 ret;
-
-	/* Seek to offset */
-	fseek(fp, offset, SEEK_SET);
-
-	/* Read data */
-	ret = fread(outbuf, len, 1, fp);
-	if (ret < 0) return ret;
-
-	return 0;
+	void aes_set_key(u8 *key);
+	void aes_decrypt(u8 *iv, u8 *inbuf, u8 *outbuf, unsigned long long len);
+	void _decrypt_title_key(u8 *tik, u8 *title_key);
 }
 
-s32 __Wad_ReadAlloc(FILE *fp, void **outbuf, u32 offset, u32 len)
+typedef struct map_entry
 {
-	void *buffer = NULL;
-	s32 ret;
+	char name[8];
+	u8 hash[20];
+} __attribute__((packed)) map_entry_t;
 
-	/* Allocate memory */
-	buffer = memalign(32, len);
-	if (!buffer) return -1;
+typedef struct uid_entry {
+	u64 title_id;
+	u32 uid;
+} __attribute__((packed)) uid_entry_t;
 
-	/* Read file */
-	ret = __Wad_ReadFile(fp, buffer, offset, len);
-	if (ret < 0)
+Wad::Wad(const char *wadpath)
+	: pFile(0), header(0),
+	  p_tik(0), p_tmd(0),
+	  content_map(0), content_map_size(0),
+	  content_start(0)
+{
+	Open(wadpath);
+}
+
+Wad::~Wad()
+{
+	Close();
+}
+
+void Wad::Close(void)
+{
+	if(pFile)
+		fclose(pFile);
+	if(header)
+		free(header);
+	if(p_tik)
+		free(p_tik);
+	if(p_tmd)
+		free(p_tmd);
+	if(content_map)
+		free(content_map);
+
+	pFile = 0;
+	header = 0;
+	p_tik = 0;
+	p_tmd = 0;
+	content_map = 0;
+	content_map_size = 0;
+}
+
+bool Wad::Open(const char *wadpath)
+{
+	if(!wadpath)
+		return false;
+
+	// Close if another file is opened already
+	Close();
+
+	// Open file
+	pFile = fopen(wadpath, "rb");
+	if(!pFile)
 	{
-		free(buffer);
-		return ret;
+		ShowError(tr("Can't open file: %s"), wadpath);
+		return false;
 	}
 
-	/* Set pointer */
-	*outbuf = buffer;
-	return 0;
-}
+	// Read wad header
+	header = (wadHeader *) malloc(sizeof(wadHeader));
+	if(!header)
+	{
+		ShowError(tr("Not enough memory."));
+		return false;
+	}
 
-s32 __Wad_GetTitleID(FILE *fp, wadHeader *header, u64 *tid)
-{
-	//signed_blob *p_tik	= NULL;
-	void *p_tik = NULL;
-	tik *tik_data = NULL;
+	if(fread(header, 1, sizeof(wadHeader), pFile) != sizeof(wadHeader))
+	{
+		ShowError(tr("Failed to read wad header."));
+		return false;
+	}
 
-	u32 offset = 0;
-	s32 ret;
+	// Check for sanity
+	if(header->header_len != sizeof(wadHeader))
+	{
+		ShowError(tr("Invalid wad file."));
+		return false;
+	}
 
-	/* Ticket offset */
-	offset += round_up( header->header_len, 64 );
+	u32 offset = round_up( header->header_len, 64 );
 	offset += round_up( header->certs_len, 64 );
-	offset += round_up( header->crl_len, 64 );
-
-	/* Read ticket */
-	ret = __Wad_ReadAlloc(fp, &p_tik, offset, header->tik_len);
-	if (ret < 0) goto out;
-
-	/* Ticket data */
-	tik_data = (tik *) SIGNATURE_PAYLOAD((signed_blob *) p_tik);
-
-	/* Copy title ID */
-	*tid = tik_data->titleid;
-
-	out:
-	/* Free memory */
-	if (p_tik) free(p_tik);
-
-	return ret;
-}
-
-s32 Wad_Install(FILE *fp)
-{
-	//////start the gui shit
-	GuiWindow promptWindow(472, 320);
-	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	promptWindow.SetPosition(0, -10);
-
-	GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
-	GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
-	GuiTrigger trigA;
-	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-
-	GuiImage dialogBoxImg(&dialogBox);
-	if (Settings.wsprompt)
-	{
-		dialogBoxImg.SetWidescreen(Settings.widescreen);
-	}
-
-	GuiText btn1Txt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
-	GuiImage btn1Img(&btnOutline);
-	if (Settings.wsprompt)
-	{
-		btn1Txt.SetWidescreen(Settings.widescreen);
-		btn1Img.SetWidescreen(Settings.widescreen);
-	}
-	GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -35, &trigA, btnSoundOver, btnSoundClick2, 1);
-	btn1.SetLabel(&btn1Txt);
-	btn1.SetState(STATE_SELECTED);
-
-	GuiImageData progressbarOutline(Resources::GetFile("progressbar_outline.png"), Resources::GetFileSize("progressbar_outline.png"));
-	GuiImage progressbarOutlineImg(&progressbarOutline);
-	if (Settings.wsprompt)
-	{
-		progressbarOutlineImg.SetWidescreen(Settings.widescreen);
-	}
-	progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	progressbarOutlineImg.SetPosition(25, 50);
-
-	GuiImageData progressbarEmpty(Resources::GetFile("progressbar_empty.png"), Resources::GetFileSize("progressbar_empty.png"));
-	GuiImage progressbarEmptyImg(&progressbarEmpty);
-	progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	progressbarEmptyImg.SetPosition(25, 50);
-	progressbarEmptyImg.SetTileHorizontal(100);
-
-	GuiImageData progressbar(Resources::GetFile("progressbar.png"), Resources::GetFileSize("progressbar.png"));
-	GuiImage progressbarImg(&progressbar);
-	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	progressbarImg.SetPosition(25, 50);
-
-	char title[50];
-	sprintf(title, "%s", tr( "Installing wad" ));
-	GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	titleTxt.SetPosition(0, 40);
-	char msg[50];
-	sprintf(msg, " ");
-	// sprintf(msg, "%s", tr("Initializing Network"));
-	GuiText msg1Txt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	msg1Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	msg1Txt.SetPosition(50, 75);
-	//  char msg2[50] = " ";
-	GuiText msg2Txt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	msg2Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	msg2Txt.SetPosition(50, 98);
-
-	GuiText msg3Txt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	msg3Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	msg3Txt.SetPosition(50, 121);
-
-	GuiText msg4Txt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	msg4Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	msg4Txt.SetPosition(50, 144);
-
-	GuiText msg5Txt((char*) NULL, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	msg5Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	msg5Txt.SetPosition(50, 167);
-
-	GuiText prTxt((char*) NULL, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	prTxt.SetPosition(0, 50);
-
-	if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust for widescreen
-	{
-		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-		progressbarOutlineImg.SetPosition(0, 50);
-		progressbarEmptyImg.SetPosition(80, 50);
-		progressbarEmptyImg.SetTileHorizontal(78);
-		progressbarImg.SetPosition(80, 50);
-
-		msg1Txt.SetPosition(90, 75);
-		msg2Txt.SetPosition(90, 98);
-		msg3Txt.SetPosition(90, 121);
-		msg4Txt.SetPosition(90, 144);
-		msg5Txt.SetPosition(90, 167);
-
-	}
-	promptWindow.Append(&dialogBoxImg);
-	promptWindow.Append(&titleTxt);
-	promptWindow.Append(&msg5Txt);
-	promptWindow.Append(&msg4Txt);
-	promptWindow.Append(&msg3Txt);
-	promptWindow.Append(&msg1Txt);
-	promptWindow.Append(&msg2Txt);
-
-	//promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
-
-	HaltGui();
-	mainWindow->SetState(STATE_DISABLED);
-	mainWindow->Append(&promptWindow);
-	//sleep(1);
-
-
-	///start the wad shit
-	bool fail = false;
-	wadHeader *header = NULL;
-	void *pvoid;
-	signed_blob *p_certs = NULL, *p_crl = NULL, *p_tik = NULL, *p_tmd = NULL;
-
-	tmd *tmd_data = NULL;
-
-	u32 cnt, offset = 0;
-	s32 ret = 666;
-
-	ResumeGui();
-	msg1Txt.SetText(tr( ">> Reading WAD data..." ));
-	HaltGui();
-#define SetPointer(a, p) a=(typeof(a))p
-	// WAD header
-	//ret = __Wad_ReadAlloc(fp, (void *)header, offset, sizeof(wadHeader));
-	ret = __Wad_ReadAlloc(fp, &pvoid, offset, sizeof(wadHeader));
-
-	if (ret < 0) goto err;
-	SetPointer( header, pvoid );
-	offset += round_up( header->header_len, 64 );
-
-	// WAD certificates
-	//ret = __Wad_ReadAlloc(fp, (void *)&p_certs, offset, header->certs_len);
-	ret = __Wad_ReadAlloc(fp, &pvoid, offset, header->certs_len);
-	if (ret < 0) goto err;
-	SetPointer( p_certs, pvoid );
-	offset += round_up( header->certs_len, 64 );
-
-	// WAD crl
-
 	if (header->crl_len)
-	{
-		//ret = __Wad_ReadAlloc(fp, (void *)&p_crl, offset, header->crl_len);
-		ret = __Wad_ReadAlloc(fp, &pvoid, offset, header->crl_len);
-		if (ret < 0) goto err;
-		SetPointer( p_crl, pvoid );
 		offset += round_up( header->crl_len, 64 );
+
+	// Read title ticket
+	p_tik = (u8 *) malloc(header->tik_len);
+	if(!p_tik)
+	{
+		ShowError(tr("Not enough memory."));
+		return false;
 	}
 
-	// WAD ticket
-	//ret = __Wad_ReadAlloc(fp, (void *)&p_tik, offset, header->tik_len);
-	ret = __Wad_ReadAlloc(fp, &pvoid, offset, header->tik_len);
-	if (ret < 0) goto err;
-	SetPointer( p_tik, pvoid );
+	fseek(pFile, offset, SEEK_SET);
+
+	if(fread(p_tik, 1, header->tik_len, pFile) != header->tik_len)
+	{
+		ShowError(tr("Failed to read ticket."));
+		return false;
+	}
+
 	offset += round_up( header->tik_len, 64 );
 
-	// WAD TMD
-	//ret = __Wad_ReadAlloc(fp, (void *)&p_tmd, offset, header->tmd_len);
-	ret = __Wad_ReadAlloc(fp, &pvoid, offset, header->tmd_len);
-	if (ret < 0) goto err;
-	SetPointer( p_tmd, pvoid );
+	// Read title tmd
+	p_tmd = (u8 *) malloc(header->tmd_len);
+	if(!p_tik)
+	{
+		ShowError(tr("Not enough memory."));
+		return false;
+	}
+
+	fseek(pFile, offset, SEEK_SET);
+
+	if(fread(p_tmd, 1, header->tmd_len, pFile) != header->tmd_len)
+	{
+		ShowError(tr("Failed to read tmd file."));
+		return false;
+	}
+
 	offset += round_up( header->tmd_len, 64 );
 
-	ResumeGui();
-	msg1Txt.SetText(tr( "Reading WAD data... Ok!" ));
-	msg2Txt.SetText(tr( ">> Installing ticket..." ));
-	HaltGui();
-	// Install ticket
-	ret = ES_AddTicket(p_tik, header->tik_len, p_certs, header->certs_len, p_crl, header->crl_len);
-	if (ret < 0) goto err;
+	// Prepare offset for install
+	content_start = offset;
 
-	ResumeGui();
-	msg2Txt.SetText(tr( "Installing ticket... Ok!" ));
-	msg3Txt.SetText(tr( ">> Installing title..." ));
-	//WindowPrompt(">> Installing title...",0,0,0,0,0,200);
-	HaltGui();
-	// Install title
-	ret = ES_AddTitleStart(p_tmd, header->tmd_len, p_certs, header->certs_len, p_crl, header->crl_len);
-	if (ret < 0) goto err;
+	return true;
+}
 
-	// Get TMD info
-	tmd_data = (tmd *) SIGNATURE_PAYLOAD(p_tmd);
+bool Wad::UnInstall(const char *installpath)
+{
+	if(!installpath || !pFile || !header || !p_tmd || !p_tik)
+		return false;
 
-	char imgPath[150];
+	char filepath[1024];
+	tmd *tmd_data = (tmd *) SIGNATURE_PAYLOAD((signed_blob *) p_tmd);
 
-	// Install contents
-	//ResumeGui();
-	//HaltGui();
-	promptWindow.Append(&progressbarEmptyImg);
-	promptWindow.Append(&progressbarImg);
-	promptWindow.Append(&progressbarOutlineImg);
-	promptWindow.Append(&prTxt);
-	ResumeGui();
-	msg3Txt.SetText(tr( "Installing title... Ok!" ));
+	int result = true;
+
+	// Remove ticket
+	snprintf(filepath, sizeof(filepath), "%s/ticket/%08x/%08x.tik", installpath, (u32) (tmd_data->title_id >> 32), (u32) tmd_data->title_id);
+	if(!RemoveFile(filepath))
+		result = false;
+
+	// Remove contents / data
+	snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/", installpath, (u32) (tmd_data->title_id >> 32), (u32) tmd_data->title_id);
+	if(!RemoveDirectory(filepath))
+		result = false;
+
+	return result;
+}
+
+bool Wad::Install(const char *installpath)
+{
+	if(!installpath || !pFile || !header || !p_tmd || !p_tik)
+		return false;
+
+	char filepath[1024];
+	u8 title_key[16];
+	tmd *tmd_data = (tmd *) SIGNATURE_PAYLOAD((signed_blob *) p_tmd);
+
+	// Create necessary folders if not existing
+	snprintf(filepath, sizeof(filepath), "%s/ticket/%08x/", installpath, (u32) (tmd_data->title_id >> 32));
+	CreateSubfolder(filepath);
+
+	snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/content/", installpath, (u32) (tmd_data->title_id >> 32), (u32) tmd_data->title_id);
+	CreateSubfolder(filepath);
+
+	snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/data/", installpath, (u32) (tmd_data->title_id >> 32), (u32) tmd_data->title_id);
+	CreateSubfolder(filepath);
+
+	// Write ticket file
+	snprintf(filepath, sizeof(filepath), "%s/ticket/%08x/%08x.tik", installpath, (u32) (tmd_data->title_id >> 32), (u32) tmd_data->title_id);
+	if(!WriteFile(filepath, p_tik, header->tik_len))
+		return false;
+
+	// Write tmd file
+	snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/content/title.tmd", installpath, (u32) (tmd_data->title_id >> 32), (u32) tmd_data->title_id);
+	if(!WriteFile(filepath, p_tmd, header->tmd_len))
+		return false;
+
+	// Get title key and prepare decryption
+	_decrypt_title_key(p_tik, title_key);
+	aes_set_key(title_key);
+
+	// Start progress
+	ProgressCancelEnable(true);
+	StartProgress(0, 0, 0, true, true);
+
+	// Install contens
+	bool result = InstallContents(installpath);
+
+	// Stop progress
+	ProgressStop();
+	ProgressCancelEnable(false);
+
+	if(!result)
+		return false;
+
+	// Update /sys/uid.sys
+	if(!SetTitleUID(installpath, tmd_data->title_id))
+		return false;
+
+	return true;
+}
+
+bool Wad::WriteFile(const char *filepath, u8 *buffer, u32 len)
+{
+	FILE *f = fopen(filepath, "wb");
+	if(!f)
+	{
+		ShowError(tr("Can't create file: %s"), filepath);
+		return false;
+	}
+
+	u32 write = fwrite(buffer, 1, len, f);
+	fclose(f);
+
+	if(write != len)
+		ShowError(tr("Write error on file: %s"), filepath);
+
+	return (write == len);
+}
+
+bool Wad::InstallContents(const char *installpath)
+{
+	const u32 blocksize = 50 * 1024;
+	u16 cnt;
+	u32 totalDone = 0;
+	u32 totalSize = 0;
+	u32 offset = content_start;
+	char filepath[1024];
+	char progressTxt[80];
+	u8 iv[16];
+
+	// tmd
+	tmd *tmd_data = (tmd *) SIGNATURE_PAYLOAD((signed_blob *) p_tmd);
+
+	// Get total size for progress bar
 	for (cnt = 0; cnt < tmd_data->num_contents; cnt++)
 	{
+		if(tmd_data->contents[cnt].type == 0x8001) {
+			// shared content
+			int result = CheckContentMap(installpath, &tmd_data->contents[cnt], filepath);
+			if(result == 1) // exists already, skip file
+				continue;
+		}
+		totalSize += round_up( tmd_data->contents[cnt].size, 64 );
+	}
 
+	for (cnt = 0; cnt < tmd_data->num_contents; cnt++)
+	{
+		if(ProgressCanceled())
+			break;
+
+		if(cnt > 0)
+			offset = round_up( tmd_data->contents[cnt-1].size, 64);
+
+		u32 done = 0, len;
 		tmd_content *content = &tmd_data->contents[cnt];
 
-		u32 idx = 0, len;
-		s32 cfd;
-		ResumeGui();
-
-		//printf("\r\t\t>> Installing content #%02d...", content->cid);
 		// Encrypted content size
 		len = round_up( content->size, 64 );
 
+		// Prepare iv for decryption
+		memset(iv, 0, sizeof(iv));
+		memcpy(iv, &cnt, 2);
+
 		// Install content
-		cfd = ES_AddContentStart(tmd_data->title_id, content->cid);
-		if (cfd < 0)
-		{
-			ret = cfd;
-			goto err;
+		if(content->type == 0x8001) {
+			// shared content
+			int result = CheckContentMap(installpath, content, filepath);
+			if(result == 1) // exists already, skip file
+				continue;
+
+			else if(result < 0) // failure
+				return false;
+			// else it does not exist...install it
 		}
-		snprintf(imgPath, sizeof(imgPath), "%s%d...", tr( ">> Installing content #" ), content->cid);
-		msg4Txt.SetText(imgPath);
-		// Install content data
-		while (idx < len)
+		else {
+			// private content
+			snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/content/%08x.app", installpath, (u32) (tmd_data->title_id >> 32), (u32) tmd_data->title_id, content->cid);
+		}
+
+		// Create file
+		FILE *fp = fopen(filepath, "wb");
+		if(!fp)
 		{
+			ShowError(tr("Can't create file: %s"), filepath);
+			return false;
+		}
 
-			//VIDEO_WaitVSync ();
+		u8 * inbuf = (u8 *) malloc(blocksize);
+		u8 * outbuf = (u8 *) malloc(blocksize);
+		if(!inbuf || !outbuf)
+		{
+			ShowError(tr("Not enough memory."));
+			if(inbuf) free(inbuf);
+			if(outbuf) free(outbuf);
+			fclose(fp);
+			return false;
+		}
 
-			u32 size;
+		snprintf(progressTxt, sizeof(progressTxt), "%s %08x.app", tr("Installing content"), content->cid);
+
+		// Go to position
+		fseek(pFile, offset, SEEK_SET);
+
+		// Install content data
+		while (done < len)
+		{
+			if(ProgressCanceled())
+			{
+				done = len;
+				break;
+			}
+
+			ShowProgress(tr("Installing title..."), progressTxt, 0, totalDone + done, totalSize, true, true);
 
 			// Data length
-			size = (len - idx);
-			if (size > BLOCK_SIZE) size = BLOCK_SIZE;
+			u32 size = (len - done);
+			if (size > blocksize)
+				size = blocksize;
 
 			// Read data
-			ret = __Wad_ReadFile(fp, &wadBuffer, offset, size);
-			if (ret < 0) goto err;
+			if(fread(inbuf, 1, size, pFile) != size)
+				break;
 
-			// Install data
-			ret = ES_AddContentData(cfd, wadBuffer, size);
-			if (ret < 0) goto err;
+			// Decrypt data
+			aes_decrypt(iv, inbuf, outbuf, size);
+
+			// Write data
+			if(fwrite(outbuf, 1, size, fp) != size)
+				break;
+
+			// Set new iv for next read chunk
+			memcpy(iv, inbuf + blocksize - 16, 16);
 
 			// Increase variables
-			idx += size;
-			offset += size;
-
-			//snprintf(imgPath, sizeof(imgPath), "%s%d (%d)...",tr(">> Installing content #"),content->cid,idx);
-
-			//msg4Txt.SetText(imgPath);
-
-			prTxt.SetTextf("%i%%", 100 * (cnt * len + idx) / (tmd_data->num_contents * len));
-			if ((Settings.wsprompt) && (Settings.widescreen))
-			{
-				progressbarImg.SetTileHorizontal(78 * (cnt * len + idx) / (tmd_data->num_contents * len));
-			}
-			else
-			{
-				progressbarImg.SetTileHorizontal(100 * (cnt * len + idx) / (tmd_data->num_contents * len));
-			}
-
+			done += size;
 		}
 
-		// Finish content installation
-		ret = ES_AddContentFinish(cfd);
-		if (ret < 0) goto err;
+		// done
+		free(inbuf);
+		free(outbuf);
+		fclose(fp);
+
+		// update progress variable
+		totalDone = len;
+
+		// Check if the read/write process stopped before finishing
+		if(done < len)
+		{
+			ShowError(tr("File read/write error."));
+			return false;
+		}
 	}
 
-	msg4Txt.SetText(tr( "Installing content... Ok!" ));
-	msg5Txt.SetText(tr( ">> Finishing installation..." ));
-
-	// Finish title install
-	ret = ES_AddTitleFinish();
-	if (ret >= 0)
-	{
-		//	  printf(" OK!\n");
-		goto out;
-	}
-
-	err:
-	//char titties[100];
-	ResumeGui();
-	prTxt.SetTextf("%s%d", tr( "Error..." ), ret);
-	promptWindow.Append(&prTxt);
-	fail = true;
-	//snprintf(titties, sizeof(titties), "%d", ret);
-	//printf(" ERROR! (ret = %d)\n", ret);
-	//WindowPrompt("ERROR!",titties,"Back",0,0);
-	// Cancel install
-	ES_AddTitleCancel();
-	goto exit;
-	//return ret;
-
-	out:
-	// Free memory
-	if (header) free(header);
-	if (p_certs) free(p_certs);
-	if (p_crl) free(p_crl);
-	if (p_tik) free(p_tik);
-	if (p_tmd) free(p_tmd);
-	goto exit;
-
-	exit: if (!fail) msg5Txt.SetText(tr( "Finishing installation... Ok!" ));
-	promptWindow.Append(&btn1);
-	while (btn1.GetState() != STATE_CLICKED)
-	{
-	}
-
-	HaltGui();
-	mainWindow->Remove(&promptWindow);
-	mainWindow->SetState(STATE_DEFAULT);
-	ResumeGui();
-
-	return ret;
+	return true;
 }
 
-s32 Wad_Uninstall(FILE *fp)
+int Wad::CheckContentMap(const char *installpath, tmd_content *content, char *filepath)
 {
-	//////start the gui shit
-	GuiWindow promptWindow(472, 320);
-	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	promptWindow.SetPosition(0, -10);
-
-	GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
-	GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
-	GuiTrigger trigA;
-	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-
-	GuiImage dialogBoxImg(&dialogBox);
-	if (Settings.wsprompt)
+	if(!content_map)
 	{
-		dialogBoxImg.SetWidescreen(Settings.widescreen);
-	}
-
-	GuiText btn1Txt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
-	GuiImage btn1Img(&btnOutline);
-	if (Settings.wsprompt)
-	{
-		btn1Txt.SetWidescreen(Settings.widescreen);
-		btn1Img.SetWidescreen(Settings.widescreen);
-	}
-	GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -55, &trigA, btnSoundOver, btnSoundClick2, 1);
-	btn1.SetLabel(&btn1Txt);
-	btn1.SetState(STATE_SELECTED);
-
-	char title[50];
-	sprintf(title, "%s", tr( "Uninstalling wad" ));
-	GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	titleTxt.SetPosition(0, 40);
-
-	GuiText msg1Txt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	msg1Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	msg1Txt.SetPosition(50, 75);
-
-	GuiText msg2Txt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	msg2Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	msg2Txt.SetPosition(50, 98);
-
-	GuiText msg3Txt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	msg3Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	msg3Txt.SetPosition(50, 121);
-
-	GuiText msg4Txt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	msg4Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	msg4Txt.SetPosition(50, 144);
-
-	GuiText msg5Txt((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	msg5Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	msg5Txt.SetPosition(50, 167);
-
-	if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust for widescreen
-	{
-
-		msg1Txt.SetPosition(70, 95);
-		msg2Txt.SetPosition(70, 118);
-		msg3Txt.SetPosition(70, 141);
-		msg4Txt.SetPosition(70, 164);
-		msg5Txt.SetPosition(70, 187);
-
-	}
-	promptWindow.Append(&dialogBoxImg);
-	promptWindow.Append(&titleTxt);
-	promptWindow.Append(&msg5Txt);
-	promptWindow.Append(&msg4Txt);
-	promptWindow.Append(&msg3Txt);
-	promptWindow.Append(&msg1Txt);
-	promptWindow.Append(&msg2Txt);
-
-	HaltGui();
-	mainWindow->SetState(STATE_DISABLED);
-	mainWindow->Append(&promptWindow);
-	ResumeGui();
-	//sleep(3);
-
-	///start the wad shit
-	wadHeader *header = NULL;
-	void *pvoid = NULL;
-	tikview *viewData = NULL;
-
-	u64 tid;
-	u32 viewCnt;
-	s32 ret;
-
-	msg1Txt.SetText(tr( ">> Reading WAD data..." ));
-
-	// WAD header
-	ret = __Wad_ReadAlloc(fp, &pvoid, 0, sizeof(wadHeader));
-	if (ret < 0)
-	{
-		char errTxt[50];
-		sprintf(errTxt, "%sret = %d", tr( ">> Reading WAD data...ERROR! " ), ret);
-		msg1Txt.SetText(errTxt);
-		//printf(" ERROR! (ret = %d)\n", ret);
-		goto out;
-	}
-	SetPointer( header, pvoid );
-
-	// Get title ID
-	ret = __Wad_GetTitleID(fp, header, &tid);
-	if (ret < 0)
-	{
-		//printf(" ERROR! (ret = %d)\n", ret);
-		char errTxt[50];
-		sprintf(errTxt, "%sret = %d", tr( ">> Reading WAD data...ERROR! " ), ret);
-		msg1Txt.SetText(errTxt);
-		goto out;
-	}
-
-	msg1Txt.SetText(tr( ">> Reading WAD data...Ok!" ));
-	msg2Txt.SetText(tr( ">> Deleting tickets..." ));
-
-	// Get ticket views
-	ret = NandTitles.GetTicketViews(tid, &viewData, &viewCnt);
-	if (ret < 0)
-	{
-		char errTxt[50];
-		sprintf(errTxt, "%sret = %d", tr( ">> Deleting tickets...ERROR! " ), ret);
-		msg2Txt.SetText(errTxt);
-		//printf(" ERROR! (ret = %d)\n", ret);
-	}
-	// Delete tickets
-	if (ret >= 0)
-	{
-		u32 cnt;
-
-		// Delete all tickets
-		for (cnt = 0; cnt < viewCnt; cnt++)
+		// Get and keep content map in memory
+		snprintf(filepath, 1024, "%s/shared1/content.map", installpath);
+		if(LoadFileToMem(filepath, &content_map, &content_map_size) < 0 || content_map_size < sizeof(map_entry_t))
 		{
-			ret = ES_DeleteTicket(&viewData[cnt]);
-			if (ret < 0) break;
+			ShowError(tr("Can't read file: %s"), filepath);
+			return -1;
 		}
 
-		if (ret < 0)
-		{
-			char errTxt[50];
-			sprintf(errTxt, "%sret = %d", tr( ">> Deleting tickets...ERROR! " ), ret);
-			msg2Txt.SetText(errTxt);
-		}
-		//printf(" ERROR! (ret = %d\n", ret);
-		else
-		//printf(" OK!\n");
-		msg2Txt.SetText(tr( ">> Deleting tickets...Ok! " ));
-
+		content_map_size /=  sizeof(map_entry_t);
 	}
 
-	msg3Txt.SetText(tr( ">> Deleting title contents..." ));
-	//WindowPrompt(">> Deleting title contents...",0,"Back",0,0);
+	map_entry_t *map = (map_entry_t *) content_map;
 
-	// Delete title contents
-	ret = ES_DeleteTitleContent(tid);
-	if (ret < 0)
+	for(u32 n = 0; n < content_map_size; n++)
 	{
-		char errTxt[50];
-		sprintf(errTxt, "%sret = %d", tr( ">> Deleting title contents...ERROR! " ), ret);
-		msg3Txt.SetText(errTxt);
+		if(memcmp(map[n].hash, content->hash, 20) == 0)
+			return 1; // content exists already
 	}
-	//printf(" ERROR! (ret = %d)\n", ret);
-	else
-	//printf(" OK!\n");
-	msg3Txt.SetText(tr( ">> Deleting title contents...Ok!" ));
 
-	msg4Txt.SetText(tr( ">> Deleting title..." ));
-	// Delete title
-	ret = ES_DeleteTitle(tid);
-	if (ret < 0)
+	// Content does not exists, append it.
+	u32 next_entry = content_map_size;
+	u8 *tmp = (u8 *) realloc(content_map, (next_entry + 1) * sizeof(map_entry_t));
+	if(!tmp)
 	{
-		char errTxt[50];
-		sprintf(errTxt, "%sret = %d", tr( ">> Deleting title ...ERROR! " ), ret);
-		msg4Txt.SetText(errTxt);
-	}
-	//printf(" ERROR! (ret = %d)\n", ret);
-	else
-	//printf(" OK!\n");
-	msg4Txt.SetText(tr( ">> Deleting title ...Ok!" ));
-
-	out:
-	// Free memory
-	if (header) free(header);
-
-	goto exit;
-
-	exit: msg5Txt.SetText(tr( "Done!" ));
-	promptWindow.Append(&btn1);
-	while (btn1.GetState() != STATE_CLICKED)
-	{
+		ShowError(tr("Not enough memory."));
+		return -1;
 	}
 
-	HaltGui();
-	mainWindow->Remove(&promptWindow);
-	mainWindow->SetState(STATE_DEFAULT);
-	ResumeGui();
+	content_map = tmp;
+	content_map_size++;
 
-	return ret;
+	map = (map_entry_t *) content_map;
+	sprintf(map[next_entry].name, "%08x", next_entry);
+	memcpy(map[next_entry].hash, content->hash, 20);
+
+	// write new content.map
+	snprintf(filepath, 1024, "%s/shared1/content.map", installpath);
+	if(!WriteFile(filepath, content_map, content_map_size * sizeof(map_entry_t)))
+		return -1;
+
+	snprintf(filepath, 1024, "%s/shared1/%08x.app", installpath, next_entry);
+
+	return 0;
 }
 
+bool Wad::SetTitleUID(const char *installpath, const u64 &tid)
+{
+	char filepath[1024];
+	u8 *uid_sys = NULL;
+	u32 uid_sys_size = 0;
+
+	// Read in uid.sys file
+	snprintf(filepath, sizeof(filepath), "%s/sys/uid.sys", installpath);
+
+	if(LoadFileToMem(filepath, &uid_sys, &uid_sys_size) < 0 || uid_sys_size < sizeof(uid_entry_t))
+	{
+		ShowError(tr("Can't read file: %s"), filepath);
+		if(uid_sys) free(uid_sys);
+		return false;
+	}
+
+	uid_sys_size /=  sizeof(uid_entry_t);
+	uid_entry_t *map = (uid_entry_t *) uid_sys;
+
+	for(u32 i = 0; i < uid_sys_size; ++i)
+	{
+		if(map[i].title_id == tid)
+		{
+			// title entry exists already
+			free(uid_sys);
+			return true;
+		}
+	}
+
+	// title entry does not exists, append it
+	u32 next_entry = uid_sys_size;
+	u8 *tmp = (u8 *) realloc(uid_sys, (next_entry + 1) * sizeof(uid_entry_t));
+	if(!tmp)
+	{
+		ShowError(tr("Not enough memory."));
+		free(uid_sys);
+		return -1;
+	}
+
+	uid_sys = tmp;
+	uid_sys_size++;
+
+	map = (uid_entry_t *) uid_sys;
+	map[next_entry].title_id = tid;
+	map[next_entry].uid = map[next_entry-1].uid + 1;
+
+	// write new uid.sys
+	bool result = WriteFile(filepath, uid_sys, uid_sys_size * sizeof(uid_entry_t));
+
+	free(uid_sys);
+
+	return result;
+}

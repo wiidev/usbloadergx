@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-30 19:17+0100\n"
+"POT-Creation-Date: 2012-01-01 17:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -72,54 +72,6 @@ msgstr "4 (18岁以上成人)"
 
 msgid "5 min"
 msgstr "5 分钟"
-
-msgid ">> Deleting tickets..."
-msgstr ">> 删除 tickets..."
-
-msgid ">> Deleting tickets...ERROR! "
-msgstr ">> 删除 tickets... 错误!"
-
-msgid ">> Deleting tickets...Ok! "
-msgstr ">> 删除 tickets... 成功!"
-
-msgid ">> Deleting title ...ERROR! "
-msgstr ">> 删除 title... 错误!"
-
-msgid ">> Deleting title ...Ok!"
-msgstr ">> 删除 title... 成功!"
-
-msgid ">> Deleting title contents..."
-msgstr ">> 删除 title 内容..."
-
-msgid ">> Deleting title contents...ERROR! "
-msgstr ">> 删除 title 内容... 错误!"
-
-msgid ">> Deleting title contents...Ok!"
-msgstr ">> 删除 title 内容... 成功!"
-
-msgid ">> Deleting title..."
-msgstr ">> 删除 title..."
-
-msgid ">> Finishing installation..."
-msgstr ">> 完成安装..."
-
-msgid ">> Installing content #"
-msgstr ">> 安装程序主体#"
-
-msgid ">> Installing ticket..."
-msgstr ">> 安装 ticket..."
-
-msgid ">> Installing title..."
-msgstr ">> 安装 title..."
-
-msgid ">> Reading WAD data..."
-msgstr ">> 读取 WAD 数据..."
-
-msgid ">> Reading WAD data...ERROR! "
-msgstr ">> 读取 WAD 数据... 错误!"
-
-msgid ">> Reading WAD data...Ok!"
-msgstr ">> 读取 WAD 数据... 成功!"
 
 msgid "AUTO"
 msgstr "自动"
@@ -305,11 +257,23 @@ msgid "Can't create directory"
 msgstr "无法建立目录"
 
 #, c-format
+msgid "Can't create file: %s"
+msgstr ""
+
+#, c-format
 msgid "Can't create path: %s"
 msgstr "无法创建路径: %s"
 
 msgid "Can't delete:"
 msgstr "无法删除:"
+
+#, c-format
+msgid "Can't open file: %s"
+msgstr ""
+
+#, c-format
+msgid "Can't read file: %s"
+msgstr ""
 
 msgid "Cancel"
 msgstr "取消"
@@ -379,6 +343,9 @@ msgid "Console should be unlocked to modify it."
 msgstr "需解锁以开启设定功能."
 
 msgid "Content"
+msgstr ""
+
+msgid "Continue"
 msgstr ""
 
 msgid "Continue to install game?"
@@ -562,9 +529,6 @@ msgstr "是否同步剩余空间信息扇区到所有FAT32分区?"
 msgid "Do you wish to update/download all language files?"
 msgstr "升级/下载语言文件?"
 
-msgid "Done!"
-msgstr "完成"
-
 msgid "Download"
 msgstr "下载"
 
@@ -666,9 +630,6 @@ msgstr "升级USB Loader GX错误"
 msgid "Error writing the data."
 msgstr "写入数据错误"
 
-msgid "Error..."
-msgstr "错误..."
-
 msgid "Error:"
 msgstr "错误:"
 
@@ -720,6 +681,15 @@ msgstr ""
 msgid "Failed to open partition"
 msgstr "打开分区失败"
 
+msgid "Failed to read ticket."
+msgstr ""
+
+msgid "Failed to read tmd file."
+msgstr ""
+
+msgid "Failed to read wad header."
+msgstr ""
+
 msgid "Failed updating"
 msgstr "升级失败"
 
@@ -735,6 +705,9 @@ msgstr "二月"
 msgid "File not found."
 msgstr "找不到文件."
 
+msgid "File read/write error."
+msgstr ""
+
 msgid "Files extracted successfully."
 msgstr ""
 
@@ -744,9 +717,6 @@ msgstr "文件大小是%i字节."
 
 msgid "Filesize is 0 Byte."
 msgstr "文件大小是0字节."
-
-msgid "Finishing installation... Ok!"
-msgstr "正在完成安装...完成!"
 
 msgid "Flat Covers"
 msgstr "普通封面"
@@ -957,26 +927,26 @@ msgstr "安装错误!"
 msgid "Install Partitions"
 msgstr ""
 
+msgid "Install WAD to EmuNand"
+msgstr ""
+
 msgid "Install a game"
 msgstr "安装游戏"
 
 msgid "Install finished"
 msgstr ""
 
-msgid "Installing content... Ok!"
-msgstr "正在安装程序主体... 完成!"
+msgid "Installing content"
+msgstr ""
 
 msgid "Installing game:"
 msgstr "正在安装游戏:"
 
-msgid "Installing ticket... Ok!"
-msgstr "安装 ticket... 完成!"
+msgid "Installing title..."
+msgstr ""
 
-msgid "Installing title... Ok!"
-msgstr "安装 title... 完成!"
-
-msgid "Installing wad"
-msgstr "安裝 WAD"
+msgid "Invalid wad file."
+msgstr ""
 
 msgid "Issue manager /"
 msgstr "问题管理 /"
@@ -1330,9 +1300,6 @@ msgstr "快速启动"
 msgid "Random Directory Music"
 msgstr "随机目录音乐"
 
-msgid "Reading WAD data... Ok!"
-msgstr "读取 WAD 数据... 完成!"
-
 msgid "Real Nand"
 msgstr ""
 
@@ -1628,6 +1595,9 @@ msgstr "USB接口"
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr "仅Hermes CIOS支持USB接口的改变"
 
+msgid "Uninstall"
+msgstr "删除"
+
 msgid "Uninstall Game"
 msgstr "删除游戏"
 
@@ -1636,9 +1606,6 @@ msgstr "删除菜单"
 
 msgid "Uninstall all"
 msgstr "卸载所有"
-
-msgid "Uninstalling wad"
-msgstr "卸载 WAD"
 
 msgid "Unknown"
 msgstr "未知"
@@ -1707,6 +1674,9 @@ msgstr "视频制式"
 msgid "Virtual Pointer Speed"
 msgstr ""
 
+msgid "WAD Installation"
+msgstr ""
+
 msgid "WDM Files Path"
 msgstr "WDM文件路径"
 
@@ -1721,6 +1691,9 @@ msgstr ""
 
 msgid "Warning:"
 msgstr "警告:"
+
+msgid "What do you want to do?"
+msgstr ""
 
 msgid "What do you want to update?"
 msgstr "要升级什么?"
@@ -1768,6 +1741,10 @@ msgid "Wiinnertag requires you to enable automatic network connect on applicatio
 msgstr ""
 
 msgid "Wiird Debugger"
+msgstr ""
+
+#, c-format
+msgid "Write error on file: %s"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"
@@ -1842,6 +1819,81 @@ msgstr "的"
 msgid "seconds left"
 msgstr "剩余秒数"
 
+#~ msgid ">> Deleting tickets..."
+#~ msgstr ">> 删除 tickets..."
+
+#~ msgid ">> Deleting tickets...ERROR! "
+#~ msgstr ">> 删除 tickets... 错误!"
+
+#~ msgid ">> Deleting tickets...Ok! "
+#~ msgstr ">> 删除 tickets... 成功!"
+
+#~ msgid ">> Deleting title ...ERROR! "
+#~ msgstr ">> 删除 title... 错误!"
+
+#~ msgid ">> Deleting title ...Ok!"
+#~ msgstr ">> 删除 title... 成功!"
+
+#~ msgid ">> Deleting title contents..."
+#~ msgstr ">> 删除 title 内容..."
+
+#~ msgid ">> Deleting title contents...ERROR! "
+#~ msgstr ">> 删除 title 内容... 错误!"
+
+#~ msgid ">> Deleting title contents...Ok!"
+#~ msgstr ">> 删除 title 内容... 成功!"
+
+#~ msgid ">> Deleting title..."
+#~ msgstr ">> 删除 title..."
+
+#~ msgid ">> Finishing installation..."
+#~ msgstr ">> 完成安装..."
+
+#~ msgid ">> Installing content #"
+#~ msgstr ">> 安装程序主体#"
+
+#~ msgid ">> Installing ticket..."
+#~ msgstr ">> 安装 ticket..."
+
+#~ msgid ">> Installing title..."
+#~ msgstr ">> 安装 title..."
+
+#~ msgid ">> Reading WAD data..."
+#~ msgstr ">> 读取 WAD 数据..."
+
+#~ msgid ">> Reading WAD data...ERROR! "
+#~ msgstr ">> 读取 WAD 数据... 错误!"
+
+#~ msgid ">> Reading WAD data...Ok!"
+#~ msgstr ">> 读取 WAD 数据... 成功!"
+
+#~ msgid "Done!"
+#~ msgstr "完成"
+
+#~ msgid "Error..."
+#~ msgstr "错误..."
+
+#~ msgid "Finishing installation... Ok!"
+#~ msgstr "正在完成安装...完成!"
+
+#~ msgid "Installing content... Ok!"
+#~ msgstr "正在安装程序主体... 完成!"
+
+#~ msgid "Installing ticket... Ok!"
+#~ msgstr "安装 ticket... 完成!"
+
+#~ msgid "Installing title... Ok!"
+#~ msgstr "安装 title... 完成!"
+
+#~ msgid "Installing wad"
+#~ msgstr "安裝 WAD"
+
+#~ msgid "Reading WAD data... Ok!"
+#~ msgstr "读取 WAD 数据... 完成!"
+
+#~ msgid "Uninstalling wad"
+#~ msgstr "卸载 WAD"
+
 #~ msgid "The game installation is disabled under this IOS because of instability in usb write."
 #~ msgstr "由于USB写入不稳定，在这个IOS下游戏安装被禁用"
 
@@ -1895,9 +1947,6 @@ msgstr "剩余秒数"
 
 #~ msgid "Not a WAD file."
 #~ msgstr "不是 WAD 文件"
-
-#~ msgid "Uninstall"
-#~ msgstr "删除"
 
 #~ msgid "Author:"
 #~ msgstr "作者:"

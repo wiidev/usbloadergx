@@ -3,7 +3,10 @@
 #include "usbloader/disc.h"
 #include "usbloader/wbfs.h"
 #include "usbloader/GameList.h"
+#include "usbloader/GameBooter.hpp"
+#include "usbloader/AlternateDOLOffsets.h"
 #include "themes/CTheme.h"
+#include "FileOperations/fileops.h"
 #include "settings/menus/GameSettingsMenu.hpp"
 #include "settings/CSettings.h"
 #include "settings/CGameSettings.h"
@@ -12,8 +15,11 @@
 #include "prompts/PromptWindows.h"
 #include "prompts/gameinfo.h"
 #include "language/gettext.h"
+#include "system/IosLoader.h"
 #include "menu/menus.h"
+#include "menu/WDMMenu.hpp"
 #include "banner/OpeningBNR.hpp"
+#include "utils/ShowError.h"
 
 #define NONE		0
 #define LEFT		1
@@ -451,7 +457,26 @@ void GameWindow::ChangeGame(int EffectDirection)
 	SetWindowEffect(EffectDirection, IN);
 }
 
-int GameWindow::Show()
+void GameWindow::Hide(void)
+{
+	GuiWindow *parentWindow = (GuiWindow *) parentElement;
+	this->SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+	while(parentWindow && this->GetEffect() > 0) usleep(100);
+	if(parentWindow) parentWindow->Remove(this);
+}
+
+void GameWindow::Show(void)
+{
+	this->SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
+	GuiWindow *parentWindow = (GuiWindow *) parentElement;
+	if(parentWindow)
+	{
+		parentWindow->SetState(STATE_DISABLED);
+		parentWindow->Append(this);
+	}
+}
+
+int GameWindow::Run()
 {
 	int choice = -1;
 
@@ -477,51 +502,45 @@ int GameWindow::MainLoop()
 
 	if (gameBtn->GetState() == STATE_CLICKED)
 	{
-		returnVal = 1;
+		// Hide the window
+		Hide();
+
+		// If this function was left then the game start was canceled
+		GameWindow::BootGame(mountMethod ? dvdheader : gameList[gameSelected]);
+
+		// Show the window again
+		Show();
 	}
+
 	else if (backBtn->GetState() == STATE_CLICKED) //back
 	{
 		mainWindow->SetState(STATE_DEFAULT);
-		wiilight(0);
 		returnVal = 0;
 	}
 
 	else if(settingsBtn->GetState() == STATE_CLICKED) //settings
 	{
 		settingsBtn->ResetState();
-		SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-		while(parentElement && this->GetEffect() > 0) usleep(100);
-		HaltGui();
-		if(parentElement) ((GuiWindow *) parentElement)->Remove(this);
-		ResumeGui();
+		// Hide the window
+		Hide();
 
 		wiilight(0);
 		int settret = GameSettingsMenu::Execute(browserMenu, mountMethod ? dvdheader : gameList[gameSelected]);
 
-		SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
-		if(parentElement)
-		{
-			((GuiWindow *) parentElement)->SetState(STATE_DISABLED);
-			((GuiWindow *) parentElement)->Append(this);
-		}
-
+		// Show the window again or return to browser on uninstall
 		if (settret == MENU_DISCLIST)
-			returnVal = 2;
+			returnVal = 1;
 		else
-			SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
+			Show();
 
 	}
+
 	else if (nameBtn->GetState() == STATE_CLICKED) //rename
 	{
-		nameBtn->ResetState();
-		SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-		while(parentElement && this->GetEffect() > 0) usleep(100);
-		HaltGui();
-		if(parentElement) ((GuiWindow *) parentElement)->Remove(this);
-		ResumeGui();
-		wiilight(0);
-		//re-evaluate header now in case they changed games while on the game prompt
-		struct discHdr *header = gameList[gameSelected];
+		// Hide the window
+		Hide();
+
+		struct discHdr *header = mountMethod ? dvdheader : gameList[gameSelected];
 
 		//enter new game title
 		char entered[60];
@@ -530,19 +549,16 @@ int GameWindow::MainLoop()
 		if (result == 1)
 		{
 			WBFS_RenameGame(header->id, entered);
+			GameTitles.SetGameTitle(header->id, entered);
 			wString oldFilter(gameList.GetCurrentFilter());
 			gameList.ReadGameList();
 			gameList.FilterList(oldFilter.c_str());
 			if(browserMenu) browserMenu->ReloadBrowser();
 		}
-		SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
-		if(parentElement)
-		{
-			((GuiWindow *) parentElement)->SetState(STATE_DISABLED);
-			((GuiWindow *) parentElement)->Append(this);
-		}
+		// Show the window again
+		Show();
 
-		if(browserMenu) browserMenu->ReloadBrowser();
+		nameBtn->ResetState();
 	}
 
 	else if (btnRight->GetState() == STATE_CLICKED) //next game
@@ -640,4 +656,66 @@ int GameWindow::MainLoop()
 	}
 
 	return returnVal;
+}
+
+
+void GameWindow::BootGame(struct discHdr *header)
+{
+	wiilight(0);
+
+	GameCFG* game_cfg = GameSettings.GetGameCFG(header->id);
+
+	char IDfull[7];
+	snprintf(IDfull, sizeof(IDfull), "%s", (char *) header->id);
+
+	int gameIOS = game_cfg->ios == INHERIT ? Settings.cios : game_cfg->ios;
+
+	if (game_cfg->loadalternatedol == 2)
+	{
+		char filepath[200];
+		snprintf(filepath, sizeof(filepath), "%s%s.dol", Settings.dolpath, IDfull);
+		if (CheckFile(filepath) == false)
+		{
+			sprintf(filepath, "%s %s", filepath, tr( "does not exist!" ));
+			if(!WindowPrompt(tr( "Error" ), filepath, tr( "Continue" ), tr( "Cancel")))
+				return;
+		}
+	}
+	else if(game_cfg->loadalternatedol == 3 && WDMMenu::Show(header) == 0)
+	{
+		// Canceled
+		return;
+	}
+	else if(game_cfg->loadalternatedol == 4)
+	{
+		if(!IosLoader::IsD2X(gameIOS))
+			defaultDolPrompt((char *) header->id);
+	}
+
+	if (game_cfg->ocarina == ON || (game_cfg->ocarina == INHERIT && Settings.ocarina == ON))
+	{
+		char filepath[200];
+		snprintf(filepath, sizeof(filepath), "%s%s.gct", Settings.Cheatcodespath, IDfull);
+		if (CheckFile(filepath) == false)
+		{
+			sprintf(filepath, "%s %s", filepath, tr( "does not exist!  Loading game without cheats." ));
+			if(!WindowPrompt(tr( "Error" ), filepath, tr( "Continue" ), tr( "Cancel")))
+				return;
+		}
+	}
+
+	if(header->type == TYPE_GAME_EMUNANDCHAN)
+	{
+		if(!IosLoader::IsD2X(gameIOS))
+		{
+			ShowError(tr("Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."));
+			return;
+		}
+	}
+
+	GameStatistics.SetPlayCount(header->id, GameStatistics.GetPlayCount(header->id)+1);
+	GameStatistics.Save();
+
+	//Just calling that shuts down everything and starts game
+	GameBooter::BootGame(header);
 }

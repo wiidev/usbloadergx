@@ -266,7 +266,7 @@ void gkey(int nb, int nk, char *key)
  * Instead of just one ftable[], I could have 4, the other	 *
  * 3 pre-rotated to save the ROTL8, ROTL16 and ROTL24 overhead */
 
-void encrypt(char *buff)
+static inline void encrypt(char *buff)
 {
 	int i, j, k, m;
 	u32 a[8], b[8], *x, *y, *t;
@@ -312,7 +312,7 @@ void encrypt(char *buff)
 	return;
 }
 
-void decrypt(char *buff)
+static inline void decrypt(char *buff)
 {
 	int i, j, k, m;
 	u32 a[8], b[8], *x, *y, *t;

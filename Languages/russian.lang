@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-30 19:17+0100\n"
+"POT-Creation-Date: 2012-01-01 17:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nikolai_ca\n"
 "Language-Team: Kir, alendit, nikolai_ca\n"
@@ -72,54 +72,6 @@ msgstr "4 (Взрослые 18+)"
 
 msgid "5 min"
 msgstr "5 мин."
-
-msgid ">> Deleting tickets..."
-msgstr ">> Удаление тикетов...."
-
-msgid ">> Deleting tickets...ERROR! "
-msgstr ">> Удаление тикетов...ОШИБКА! "
-
-msgid ">> Deleting tickets...Ok! "
-msgstr ">> Удаление тикетов...Успешно! "
-
-msgid ">> Deleting title ...ERROR! "
-msgstr ">> Удаление тайтла ...ОШИБКА! "
-
-msgid ">> Deleting title ...Ok!"
-msgstr ">> Удаление тайтла ...Успешно!"
-
-msgid ">> Deleting title contents..."
-msgstr ">> Удаление содержимого тайтла..."
-
-msgid ">> Deleting title contents...ERROR! "
-msgstr ">> Удаление содержимого тайтла...ОШИБКА!"
-
-msgid ">> Deleting title contents...Ok!"
-msgstr ">> Удаление содержимого тайтла...Успешно!"
-
-msgid ">> Deleting title..."
-msgstr ">> Удаление тайтла..."
-
-msgid ">> Finishing installation..."
-msgstr ">> Заканчиваю установку..."
-
-msgid ">> Installing content #"
-msgstr ">>Установка контента №"
-
-msgid ">> Installing ticket..."
-msgstr ">>Установка тикета..."
-
-msgid ">> Installing title..."
-msgstr ">>Установка тайтла"
-
-msgid ">> Reading WAD data..."
-msgstr ">> Чтение данных WAD..."
-
-msgid ">> Reading WAD data...ERROR! "
-msgstr ">> Чтение данных WAD...ОШИБКА!"
-
-msgid ">> Reading WAD data...Ok!"
-msgstr ">> Чтение данных WAD...Успешно!"
 
 msgid "AUTO"
 msgstr "АВТО"
@@ -305,11 +257,23 @@ msgid "Can't create directory"
 msgstr "Не могу создать папку"
 
 #, c-format
+msgid "Can't create file: %s"
+msgstr ""
+
+#, c-format
 msgid "Can't create path: %s"
 msgstr ""
 
 msgid "Can't delete:"
 msgstr "Невозможно удалить:"
+
+#, c-format
+msgid "Can't open file: %s"
+msgstr ""
+
+#, c-format
+msgid "Can't read file: %s"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Отмена"
@@ -379,6 +343,9 @@ msgid "Console should be unlocked to modify it."
 msgstr "Для изменения консоль должна быть разблокирована."
 
 msgid "Content"
+msgstr ""
+
+msgid "Continue"
 msgstr ""
 
 msgid "Continue to install game?"
@@ -562,9 +529,6 @@ msgstr ""
 msgid "Do you wish to update/download all language files?"
 msgstr "Вы действительно хотите обновить/загрузить все языковые файлы?"
 
-msgid "Done!"
-msgstr "Готово!"
-
 msgid "Download"
 msgstr "Загрузка"
 
@@ -666,9 +630,6 @@ msgstr ""
 msgid "Error writing the data."
 msgstr ""
 
-msgid "Error..."
-msgstr "Ошибка..."
-
 msgid "Error:"
 msgstr "Ошибка:"
 
@@ -720,6 +681,15 @@ msgstr ""
 msgid "Failed to open partition"
 msgstr "Не удалось открыть раздел"
 
+msgid "Failed to read ticket."
+msgstr ""
+
+msgid "Failed to read tmd file."
+msgstr ""
+
+msgid "Failed to read wad header."
+msgstr ""
+
 msgid "Failed updating"
 msgstr ""
 
@@ -735,6 +705,9 @@ msgstr "Фев"
 msgid "File not found."
 msgstr "Файл не найден"
 
+msgid "File read/write error."
+msgstr ""
+
 msgid "Files extracted successfully."
 msgstr ""
 
@@ -744,9 +717,6 @@ msgstr ""
 
 msgid "Filesize is 0 Byte."
 msgstr ""
-
-msgid "Finishing installation... Ok!"
-msgstr "Завершение установки... ОК!"
 
 msgid "Flat Covers"
 msgstr ""
@@ -957,26 +927,26 @@ msgstr "Ошибка установки!"
 msgid "Install Partitions"
 msgstr ""
 
+msgid "Install WAD to EmuNand"
+msgstr ""
+
 msgid "Install a game"
 msgstr "Установить игру"
 
 msgid "Install finished"
 msgstr ""
 
-msgid "Installing content... Ok!"
-msgstr "Установка контента... ОК!"
+msgid "Installing content"
+msgstr ""
 
 msgid "Installing game:"
 msgstr "Устанавливаю игру:"
 
-msgid "Installing ticket... Ok!"
-msgstr "Установка тикета... ОК!"
+msgid "Installing title..."
+msgstr ""
 
-msgid "Installing title... Ok!"
-msgstr "Установка тайтла... ОК!"
-
-msgid "Installing wad"
-msgstr "Установка WAD"
+msgid "Invalid wad file."
+msgstr ""
 
 msgid "Issue manager /"
 msgstr ""
@@ -1330,9 +1300,6 @@ msgstr "Быстрая загрузка"
 msgid "Random Directory Music"
 msgstr ""
 
-msgid "Reading WAD data... Ok!"
-msgstr "Чтение данных WAD... ОК!"
-
 msgid "Real Nand"
 msgstr ""
 
@@ -1628,6 +1595,9 @@ msgstr ""
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr ""
 
+msgid "Uninstall"
+msgstr "Деинсталлировать"
+
 msgid "Uninstall Game"
 msgstr "Деинсталлировать игру"
 
@@ -1636,9 +1606,6 @@ msgstr "Деинсталлировать меню"
 
 msgid "Uninstall all"
 msgstr ""
-
-msgid "Uninstalling wad"
-msgstr "Деинсталлируется wad"
 
 msgid "Unknown"
 msgstr ""
@@ -1707,6 +1674,9 @@ msgstr "Видео режим"
 msgid "Virtual Pointer Speed"
 msgstr ""
 
+msgid "WAD Installation"
+msgstr ""
+
 msgid "WDM Files Path"
 msgstr ""
 
@@ -1720,6 +1690,9 @@ msgid "Warning"
 msgstr ""
 
 msgid "Warning:"
+msgstr ""
+
+msgid "What do you want to do?"
 msgstr ""
 
 msgid "What do you want to update?"
@@ -1768,6 +1741,10 @@ msgid "Wiinnertag requires you to enable automatic network connect on applicatio
 msgstr ""
 
 msgid "Wiird Debugger"
+msgstr ""
+
+#, c-format
+msgid "Write error on file: %s"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"
@@ -1842,6 +1819,81 @@ msgstr "из"
 msgid "seconds left"
 msgstr "секунд осталось"
 
+#~ msgid ">> Deleting tickets..."
+#~ msgstr ">> Удаление тикетов...."
+
+#~ msgid ">> Deleting tickets...ERROR! "
+#~ msgstr ">> Удаление тикетов...ОШИБКА! "
+
+#~ msgid ">> Deleting tickets...Ok! "
+#~ msgstr ">> Удаление тикетов...Успешно! "
+
+#~ msgid ">> Deleting title ...ERROR! "
+#~ msgstr ">> Удаление тайтла ...ОШИБКА! "
+
+#~ msgid ">> Deleting title ...Ok!"
+#~ msgstr ">> Удаление тайтла ...Успешно!"
+
+#~ msgid ">> Deleting title contents..."
+#~ msgstr ">> Удаление содержимого тайтла..."
+
+#~ msgid ">> Deleting title contents...ERROR! "
+#~ msgstr ">> Удаление содержимого тайтла...ОШИБКА!"
+
+#~ msgid ">> Deleting title contents...Ok!"
+#~ msgstr ">> Удаление содержимого тайтла...Успешно!"
+
+#~ msgid ">> Deleting title..."
+#~ msgstr ">> Удаление тайтла..."
+
+#~ msgid ">> Finishing installation..."
+#~ msgstr ">> Заканчиваю установку..."
+
+#~ msgid ">> Installing content #"
+#~ msgstr ">>Установка контента №"
+
+#~ msgid ">> Installing ticket..."
+#~ msgstr ">>Установка тикета..."
+
+#~ msgid ">> Installing title..."
+#~ msgstr ">>Установка тайтла"
+
+#~ msgid ">> Reading WAD data..."
+#~ msgstr ">> Чтение данных WAD..."
+
+#~ msgid ">> Reading WAD data...ERROR! "
+#~ msgstr ">> Чтение данных WAD...ОШИБКА!"
+
+#~ msgid ">> Reading WAD data...Ok!"
+#~ msgstr ">> Чтение данных WAD...Успешно!"
+
+#~ msgid "Done!"
+#~ msgstr "Готово!"
+
+#~ msgid "Error..."
+#~ msgstr "Ошибка..."
+
+#~ msgid "Finishing installation... Ok!"
+#~ msgstr "Завершение установки... ОК!"
+
+#~ msgid "Installing content... Ok!"
+#~ msgstr "Установка контента... ОК!"
+
+#~ msgid "Installing ticket... Ok!"
+#~ msgstr "Установка тикета... ОК!"
+
+#~ msgid "Installing title... Ok!"
+#~ msgstr "Установка тайтла... ОК!"
+
+#~ msgid "Installing wad"
+#~ msgstr "Установка WAD"
+
+#~ msgid "Reading WAD data... Ok!"
+#~ msgstr "Чтение данных WAD... ОК!"
+
+#~ msgid "Uninstalling wad"
+#~ msgstr "Деинсталлируется wad"
+
 #~ msgid "New Disc Detected"
 #~ msgstr "Обнаружен новый диск"
 
@@ -1874,9 +1926,6 @@ msgstr "секунд осталось"
 
 #~ msgid "Keep"
 #~ msgstr "Сохранить"
-
-#~ msgid "Uninstall"
-#~ msgstr "Деинсталлировать"
 
 #~ msgid "Author:"
 #~ msgstr "Автор:"

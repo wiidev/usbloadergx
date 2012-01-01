@@ -13,15 +13,18 @@ class GameWindow : public GuiWindow
 	public:
 		GameWindow(int GameSelected);
 		virtual ~GameWindow();
-		int Show();
+		int Run();
 		int GetSelectedGame() { return gameSelected; };
 		void SetGameBrowseMenu(GameBrowseMenu *m) { browserMenu = m; };
+		static void BootGame(struct discHdr *header);
 	protected:
 		int MainLoop();
 		void LoadGameSound(const struct discHdr * header);
 		void LoadDiscImage(const u8 * id);
 		void SetWindowEffect(int direction, int in_out);
 		void ChangeGame(int EffectDirection);
+		void Hide();
+		void Show();
 
 		bool reducedVol;
 		int returnVal;

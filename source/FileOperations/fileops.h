@@ -43,6 +43,7 @@ int CopyFile(const char * src, const char * dest);
 int MoveFile(const char *srcpath, char *destdir);
 bool RenameFile(const char * srcpath, const char * destpath);
 bool RemoveFile(const char * filepath);
+bool RemoveDirectory(const char *path);
 
 #ifdef __cplusplus
 }

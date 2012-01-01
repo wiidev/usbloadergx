@@ -80,7 +80,8 @@ void hexdump(void *d, int len)
 
 static ssize_t __out_write(struct _reent *r, int fd, const char *ptr, size_t len)
 {
-	gprintf("%s", ptr);
+	if(len > 0)
+		usb_sendbuffer(1, ptr, len);
 
 	return len;
 }

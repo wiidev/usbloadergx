@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-30 19:17+0100\n"
+"POT-Creation-Date: 2012-01-01 17:44+0100\n"
 "PO-Revision-Date: 2011-06-30 14:22+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -72,54 +72,6 @@ msgstr "4 (Volwassen 18+)"
 
 msgid "5 min"
 msgstr ""
-
-msgid ">> Deleting tickets..."
-msgstr ">> Tickets verwijderen..."
-
-msgid ">> Deleting tickets...ERROR! "
-msgstr ">> Tickets verwijderen...FOUT! "
-
-msgid ">> Deleting tickets...Ok! "
-msgstr ">> Tickets verwijderen...Ok! "
-
-msgid ">> Deleting title ...ERROR! "
-msgstr ">> Titel verwijderen ...FOUT! "
-
-msgid ">> Deleting title ...Ok!"
-msgstr ">> Titel verwijderen ...Ok!"
-
-msgid ">> Deleting title contents..."
-msgstr ">> Titel inhoud verwijderen..."
-
-msgid ">> Deleting title contents...ERROR! "
-msgstr ">> Titel inhoud verwijderen...FOUT! "
-
-msgid ">> Deleting title contents...Ok!"
-msgstr ">> Titel inhoud verwijderen...Ok!"
-
-msgid ">> Deleting title..."
-msgstr ">> Titel verwijderen..."
-
-msgid ">> Finishing installation..."
-msgstr ">> Installatie afronden..."
-
-msgid ">> Installing content #"
-msgstr ">> Installeren inhoud #"
-
-msgid ">> Installing ticket..."
-msgstr ">> Ticket installeren..."
-
-msgid ">> Installing title..."
-msgstr ">> Titel installeren..."
-
-msgid ">> Reading WAD data..."
-msgstr ">> WAD data lezen..."
-
-msgid ">> Reading WAD data...ERROR! "
-msgstr ">> WAD data lezen...FOUT! "
-
-msgid ">> Reading WAD data...Ok!"
-msgstr ">> WAD data lezen...Ok!"
 
 msgid "AUTO"
 msgstr ""
@@ -305,11 +257,23 @@ msgid "Can't create directory"
 msgstr "Kan map niet aanmaken"
 
 #, c-format
+msgid "Can't create file: %s"
+msgstr ""
+
+#, c-format
 msgid "Can't create path: %s"
 msgstr "Kan pad niet maken: %s"
 
 msgid "Can't delete:"
 msgstr "Kan niet verwijderen:"
+
+#, c-format
+msgid "Can't open file: %s"
+msgstr ""
+
+#, c-format
+msgid "Can't read file: %s"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Annuleren"
@@ -379,6 +343,9 @@ msgid "Console should be unlocked to modify it."
 msgstr "Console moet worden vrijgegeven om te wijzigen."
 
 msgid "Content"
+msgstr ""
+
+msgid "Continue"
 msgstr ""
 
 msgid "Continue to install game?"
@@ -562,9 +529,6 @@ msgstr "Wil je de vrije ruimte informatie sector synchroniseren op alle FAT32 pa
 msgid "Do you wish to update/download all language files?"
 msgstr "Wil je alle taalbestanden updaten/downloaden?"
 
-msgid "Done!"
-msgstr "Klaar!"
-
 msgid "Download"
 msgstr ""
 
@@ -666,9 +630,6 @@ msgstr "Fout bij het updaten van USB Loader GX"
 msgid "Error writing the data."
 msgstr "Fout bij het schrijven van de data."
 
-msgid "Error..."
-msgstr "Fout..."
-
 msgid "Error:"
 msgstr "Fout:"
 
@@ -720,6 +681,15 @@ msgstr ""
 msgid "Failed to open partition"
 msgstr "Partitie openen mislukt"
 
+msgid "Failed to read ticket."
+msgstr ""
+
+msgid "Failed to read tmd file."
+msgstr ""
+
+msgid "Failed to read wad header."
+msgstr ""
+
 msgid "Failed updating"
 msgstr "Updaten mislukt"
 
@@ -735,6 +705,9 @@ msgstr ""
 msgid "File not found."
 msgstr "Bestand niet gevonden."
 
+msgid "File read/write error."
+msgstr ""
+
 msgid "Files extracted successfully."
 msgstr ""
 
@@ -744,9 +717,6 @@ msgstr "Bestandsgrootte is %i Byte."
 
 msgid "Filesize is 0 Byte."
 msgstr "Bestandsgrootte is 0 Byte."
-
-msgid "Finishing installation... Ok!"
-msgstr "Installatie afronden... Ok!"
 
 msgid "Flat Covers"
 msgstr "Platte hoesjes"
@@ -957,26 +927,26 @@ msgstr "Installatiefout!"
 msgid "Install Partitions"
 msgstr "Installatie Partitie"
 
+msgid "Install WAD to EmuNand"
+msgstr ""
+
 msgid "Install a game"
 msgstr "Spel installeren"
 
 msgid "Install finished"
 msgstr ""
 
-msgid "Installing content... Ok!"
-msgstr "Installeren inhoud... Ok!"
+msgid "Installing content"
+msgstr ""
 
 msgid "Installing game:"
 msgstr "Bezig met installeren:"
 
-msgid "Installing ticket... Ok!"
-msgstr "Ticket installeren... Ok!"
+msgid "Installing title..."
+msgstr ""
 
-msgid "Installing title... Ok!"
-msgstr "Titel installeren... Ok!"
-
-msgid "Installing wad"
-msgstr "Wad installeren"
+msgid "Invalid wad file."
+msgstr ""
 
 msgid "Issue manager /"
 msgstr ""
@@ -1330,9 +1300,6 @@ msgstr "Snelle start"
 msgid "Random Directory Music"
 msgstr "Willekeurige Map Muziek"
 
-msgid "Reading WAD data... Ok!"
-msgstr "WAD data lezen... Ok!"
-
 msgid "Real Nand"
 msgstr ""
 
@@ -1628,6 +1595,9 @@ msgstr "USB Poort"
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr "USB Poort wisselen word alleen door Hermes cIOS ondersteund."
 
+msgid "Uninstall"
+msgstr ""
+
 msgid "Uninstall Game"
 msgstr "Spel verwijderen"
 
@@ -1636,9 +1606,6 @@ msgstr "Verwijderen"
 
 msgid "Uninstall all"
 msgstr "Verwijder alle"
-
-msgid "Uninstalling wad"
-msgstr "Wad verwijderen"
 
 msgid "Unknown"
 msgstr "Onbekend"
@@ -1707,6 +1674,9 @@ msgstr ""
 msgid "Virtual Pointer Speed"
 msgstr ""
 
+msgid "WAD Installation"
+msgstr ""
+
 msgid "WDM Files Path"
 msgstr "Locatie WDM bestanden"
 
@@ -1721,6 +1691,9 @@ msgstr "Waarschuwing"
 
 msgid "Warning:"
 msgstr "Waarschuwing:"
+
+msgid "What do you want to do?"
+msgstr ""
 
 msgid "What do you want to update?"
 msgstr "Wat wil je updaten?"
@@ -1768,6 +1741,10 @@ msgid "Wiinnertag requires you to enable automatic network connect on applicatio
 msgstr "Wiinnertag vereist dat automatisch netwerk verbinden bij applicatie start aan staat. Wil je dit nu aanzetten?"
 
 msgid "Wiird Debugger"
+msgstr ""
+
+#, c-format
+msgid "Write error on file: %s"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"
@@ -1841,6 +1818,81 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid ">> Deleting tickets..."
+#~ msgstr ">> Tickets verwijderen..."
+
+#~ msgid ">> Deleting tickets...ERROR! "
+#~ msgstr ">> Tickets verwijderen...FOUT! "
+
+#~ msgid ">> Deleting tickets...Ok! "
+#~ msgstr ">> Tickets verwijderen...Ok! "
+
+#~ msgid ">> Deleting title ...ERROR! "
+#~ msgstr ">> Titel verwijderen ...FOUT! "
+
+#~ msgid ">> Deleting title ...Ok!"
+#~ msgstr ">> Titel verwijderen ...Ok!"
+
+#~ msgid ">> Deleting title contents..."
+#~ msgstr ">> Titel inhoud verwijderen..."
+
+#~ msgid ">> Deleting title contents...ERROR! "
+#~ msgstr ">> Titel inhoud verwijderen...FOUT! "
+
+#~ msgid ">> Deleting title contents...Ok!"
+#~ msgstr ">> Titel inhoud verwijderen...Ok!"
+
+#~ msgid ">> Deleting title..."
+#~ msgstr ">> Titel verwijderen..."
+
+#~ msgid ">> Finishing installation..."
+#~ msgstr ">> Installatie afronden..."
+
+#~ msgid ">> Installing content #"
+#~ msgstr ">> Installeren inhoud #"
+
+#~ msgid ">> Installing ticket..."
+#~ msgstr ">> Ticket installeren..."
+
+#~ msgid ">> Installing title..."
+#~ msgstr ">> Titel installeren..."
+
+#~ msgid ">> Reading WAD data..."
+#~ msgstr ">> WAD data lezen..."
+
+#~ msgid ">> Reading WAD data...ERROR! "
+#~ msgstr ">> WAD data lezen...FOUT! "
+
+#~ msgid ">> Reading WAD data...Ok!"
+#~ msgstr ">> WAD data lezen...Ok!"
+
+#~ msgid "Done!"
+#~ msgstr "Klaar!"
+
+#~ msgid "Error..."
+#~ msgstr "Fout..."
+
+#~ msgid "Finishing installation... Ok!"
+#~ msgstr "Installatie afronden... Ok!"
+
+#~ msgid "Installing content... Ok!"
+#~ msgstr "Installeren inhoud... Ok!"
+
+#~ msgid "Installing ticket... Ok!"
+#~ msgstr "Ticket installeren... Ok!"
+
+#~ msgid "Installing title... Ok!"
+#~ msgstr "Titel installeren... Ok!"
+
+#~ msgid "Installing wad"
+#~ msgstr "Wad installeren"
+
+#~ msgid "Reading WAD data... Ok!"
+#~ msgstr "WAD data lezen... Ok!"
+
+#~ msgid "Uninstalling wad"
+#~ msgstr "Wad verwijderen"
 
 #~ msgid "The game installation is disabled under this IOS because of instability in usb write."
 #~ msgstr "Het installeren van spellen is uitgeschakeld met deze IOS door onstabiliteit met usb schrijven"

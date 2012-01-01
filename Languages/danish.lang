@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-30 19:17+0100\n"
+"POT-Creation-Date: 2012-01-01 17:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -72,54 +72,6 @@ msgstr "4 (Voksne 18+)"
 
 msgid "5 min"
 msgstr "5 min."
-
-msgid ">> Deleting tickets..."
-msgstr ">> Sletter tickets..."
-
-msgid ">> Deleting tickets...ERROR! "
-msgstr ">> Sletter tickets...FEJL!"
-
-msgid ">> Deleting tickets...Ok! "
-msgstr ">> Sletter tickets...Ok!"
-
-msgid ">> Deleting title ...ERROR! "
-msgstr ">> Sletter titel...FEJL!"
-
-msgid ">> Deleting title ...Ok!"
-msgstr ">> Sletter titel...Ok!"
-
-msgid ">> Deleting title contents..."
-msgstr ">> Sletter titelindhold..."
-
-msgid ">> Deleting title contents...ERROR! "
-msgstr ">> Sletter titelindhold...FEJL!"
-
-msgid ">> Deleting title contents...Ok!"
-msgstr ">> Sletter titelindhold...Ok!"
-
-msgid ">> Deleting title..."
-msgstr ">> Sletter titel..."
-
-msgid ">> Finishing installation..."
-msgstr ">> Færdiggør installationen..."
-
-msgid ">> Installing content #"
-msgstr ">> Installerer content #"
-
-msgid ">> Installing ticket..."
-msgstr ">> Installerer ticket..."
-
-msgid ">> Installing title..."
-msgstr ">> Installerer titel..."
-
-msgid ">> Reading WAD data..."
-msgstr ">> Læser WAD-data"
-
-msgid ">> Reading WAD data...ERROR! "
-msgstr ">> Læser WAD-data...FEJL!"
-
-msgid ">> Reading WAD data...Ok!"
-msgstr ">> Læser WAD-data...Ok!"
 
 msgid "AUTO"
 msgstr ""
@@ -305,11 +257,23 @@ msgid "Can't create directory"
 msgstr "Kan ikke lave ny mappe"
 
 #, c-format
+msgid "Can't create file: %s"
+msgstr ""
+
+#, c-format
 msgid "Can't create path: %s"
 msgstr "Kan ikke lave sti: %s"
 
 msgid "Can't delete:"
 msgstr "Kan ikke slettes:"
+
+#, c-format
+msgid "Can't open file: %s"
+msgstr ""
+
+#, c-format
+msgid "Can't read file: %s"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Annullér"
@@ -379,6 +343,9 @@ msgid "Console should be unlocked to modify it."
 msgstr "Konsollen skal være låst op for ændre dette."
 
 msgid "Content"
+msgstr ""
+
+msgid "Continue"
 msgstr ""
 
 msgid "Continue to install game?"
@@ -562,9 +529,6 @@ msgstr "Vil du synkronisere fri plads info sector på alle FAT32 Partitioner?"
 msgid "Do you wish to update/download all language files?"
 msgstr "Skal alle sprogfiler opdateres/downloades?"
 
-msgid "Done!"
-msgstr "Færdig!"
-
 msgid "Download"
 msgstr ""
 
@@ -666,9 +630,6 @@ msgstr "Fejl under opdatering af USB Loader GX."
 msgid "Error writing the data."
 msgstr "Fejl kunne ikke skrive data."
 
-msgid "Error..."
-msgstr "Fejl..."
-
 msgid "Error:"
 msgstr "Fejl:"
 
@@ -720,6 +681,15 @@ msgstr ""
 msgid "Failed to open partition"
 msgstr "Kunne ikke åbne partition"
 
+msgid "Failed to read ticket."
+msgstr ""
+
+msgid "Failed to read tmd file."
+msgstr ""
+
+msgid "Failed to read wad header."
+msgstr ""
+
 msgid "Failed updating"
 msgstr "Opdatering fejlede"
 
@@ -735,6 +705,9 @@ msgstr ""
 msgid "File not found."
 msgstr "Fil ikke fundet."
 
+msgid "File read/write error."
+msgstr ""
+
 msgid "Files extracted successfully."
 msgstr ""
 
@@ -744,9 +717,6 @@ msgstr "Fil størrelse er %i Byte."
 
 msgid "Filesize is 0 Byte."
 msgstr "Fil størrelse er 0 Byte."
-
-msgid "Finishing installation... Ok!"
-msgstr "Afslutter installationen... Ok!"
 
 msgid "Flat Covers"
 msgstr "Flad Cover"
@@ -957,26 +927,26 @@ msgstr "Installationsfejl!"
 msgid "Install Partitions"
 msgstr "Installer partitioner"
 
+msgid "Install WAD to EmuNand"
+msgstr ""
+
 msgid "Install a game"
 msgstr "Installér nyt spil"
 
 msgid "Install finished"
 msgstr ""
 
-msgid "Installing content... Ok!"
-msgstr "Installerer indhold... Ok!"
+msgid "Installing content"
+msgstr ""
 
 msgid "Installing game:"
 msgstr "Installerer spillet:"
 
-msgid "Installing ticket... Ok!"
-msgstr "Installerer ticket... Ok!"
+msgid "Installing title..."
+msgstr ""
 
-msgid "Installing title... Ok!"
-msgstr "Installerer titel... Ok!"
-
-msgid "Installing wad"
-msgstr "Installerer WAD"
+msgid "Invalid wad file."
+msgstr ""
 
 msgid "Issue manager /"
 msgstr "Problem manager /"
@@ -1330,9 +1300,6 @@ msgstr "Hurtig opstart"
 msgid "Random Directory Music"
 msgstr "Musik fra tilfældig mappe"
 
-msgid "Reading WAD data... Ok!"
-msgstr "Læser WAD-data... Ok!"
-
 msgid "Real Nand"
 msgstr ""
 
@@ -1628,6 +1595,9 @@ msgstr ""
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr "Skift af USB port er kun muligt med Hermes cIOS."
 
+msgid "Uninstall"
+msgstr ""
+
 msgid "Uninstall Game"
 msgstr "Afinstallér spil"
 
@@ -1636,9 +1606,6 @@ msgstr "Afinstallationsmenu"
 
 msgid "Uninstall all"
 msgstr "Afinstaller alle"
-
-msgid "Uninstalling wad"
-msgstr "Afinstallerer WAD"
 
 msgid "Unknown"
 msgstr "Ukendt"
@@ -1707,6 +1674,9 @@ msgstr "Video-mode"
 msgid "Virtual Pointer Speed"
 msgstr ""
 
+msgid "WAD Installation"
+msgstr ""
+
 msgid "WDM Files Path"
 msgstr "Sti til WDM filer"
 
@@ -1721,6 +1691,9 @@ msgstr "Advarsel"
 
 msgid "Warning:"
 msgstr "Advarsel:"
+
+msgid "What do you want to do?"
+msgstr ""
 
 msgid "What do you want to update?"
 msgstr "Hvad skal opdateres?"
@@ -1768,6 +1741,10 @@ msgid "Wiinnertag requires you to enable automatic network connect on applicatio
 msgstr "Wiinnertag kræver at du har automatisk netværk forbindelse sat til ved prg. opstart. Vil du sætte det TIL nu?"
 
 msgid "Wiird Debugger"
+msgstr ""
+
+#, c-format
+msgid "Write error on file: %s"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"
@@ -1841,6 +1818,81 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid ">> Deleting tickets..."
+#~ msgstr ">> Sletter tickets..."
+
+#~ msgid ">> Deleting tickets...ERROR! "
+#~ msgstr ">> Sletter tickets...FEJL!"
+
+#~ msgid ">> Deleting tickets...Ok! "
+#~ msgstr ">> Sletter tickets...Ok!"
+
+#~ msgid ">> Deleting title ...ERROR! "
+#~ msgstr ">> Sletter titel...FEJL!"
+
+#~ msgid ">> Deleting title ...Ok!"
+#~ msgstr ">> Sletter titel...Ok!"
+
+#~ msgid ">> Deleting title contents..."
+#~ msgstr ">> Sletter titelindhold..."
+
+#~ msgid ">> Deleting title contents...ERROR! "
+#~ msgstr ">> Sletter titelindhold...FEJL!"
+
+#~ msgid ">> Deleting title contents...Ok!"
+#~ msgstr ">> Sletter titelindhold...Ok!"
+
+#~ msgid ">> Deleting title..."
+#~ msgstr ">> Sletter titel..."
+
+#~ msgid ">> Finishing installation..."
+#~ msgstr ">> Færdiggør installationen..."
+
+#~ msgid ">> Installing content #"
+#~ msgstr ">> Installerer content #"
+
+#~ msgid ">> Installing ticket..."
+#~ msgstr ">> Installerer ticket..."
+
+#~ msgid ">> Installing title..."
+#~ msgstr ">> Installerer titel..."
+
+#~ msgid ">> Reading WAD data..."
+#~ msgstr ">> Læser WAD-data"
+
+#~ msgid ">> Reading WAD data...ERROR! "
+#~ msgstr ">> Læser WAD-data...FEJL!"
+
+#~ msgid ">> Reading WAD data...Ok!"
+#~ msgstr ">> Læser WAD-data...Ok!"
+
+#~ msgid "Done!"
+#~ msgstr "Færdig!"
+
+#~ msgid "Error..."
+#~ msgstr "Fejl..."
+
+#~ msgid "Finishing installation... Ok!"
+#~ msgstr "Afslutter installationen... Ok!"
+
+#~ msgid "Installing content... Ok!"
+#~ msgstr "Installerer indhold... Ok!"
+
+#~ msgid "Installing ticket... Ok!"
+#~ msgstr "Installerer ticket... Ok!"
+
+#~ msgid "Installing title... Ok!"
+#~ msgstr "Installerer titel... Ok!"
+
+#~ msgid "Installing wad"
+#~ msgstr "Installerer WAD"
+
+#~ msgid "Reading WAD data... Ok!"
+#~ msgstr "Læser WAD-data... Ok!"
+
+#~ msgid "Uninstalling wad"
+#~ msgstr "Afinstallerer WAD"
 
 #~ msgid "The game installation is disabled under this IOS because of instability in usb write."
 #~ msgstr "Spil installering er ikke aktiveret med denne IOS, på grund af ustabil skrivning til usb enheder."

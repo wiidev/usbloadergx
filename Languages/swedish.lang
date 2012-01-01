@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-30 19:17+0100\n"
+"POT-Creation-Date: 2012-01-01 17:44+0100\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -72,54 +72,6 @@ msgstr "4 (Endast Vuxna 18+)"
 
 msgid "5 min"
 msgstr ""
-
-msgid ">> Deleting tickets..."
-msgstr ">> Raderar biljetter..."
-
-msgid ">> Deleting tickets...ERROR! "
-msgstr ">> Raderar biljetter...FEL! "
-
-msgid ">> Deleting tickets...Ok! "
-msgstr ">> Raderar biljetter...Ok! "
-
-msgid ">> Deleting title ...ERROR! "
-msgstr ">> Raderar titel ...FEL! "
-
-msgid ">> Deleting title ...Ok!"
-msgstr ">> Raderar titel ...Ok!"
-
-msgid ">> Deleting title contents..."
-msgstr ">> Raderar titel innehåll..."
-
-msgid ">> Deleting title contents...ERROR! "
-msgstr ">> Raderar titel innehåll...FEL! "
-
-msgid ">> Deleting title contents...Ok!"
-msgstr ">> Raderar titel innehåll...Ok!"
-
-msgid ">> Deleting title..."
-msgstr ">> Raderar titel..."
-
-msgid ">> Finishing installation..."
-msgstr ">> Gör klart installation..."
-
-msgid ">> Installing content #"
-msgstr ">> Installerar innehåll #"
-
-msgid ">> Installing ticket..."
-msgstr ">> Installerar biljett..."
-
-msgid ">> Installing title..."
-msgstr ">> Installerar titel..."
-
-msgid ">> Reading WAD data..."
-msgstr ">> Läser WAD data..."
-
-msgid ">> Reading WAD data...ERROR! "
-msgstr ">> Läser WAD data...FEL! "
-
-msgid ">> Reading WAD data...Ok!"
-msgstr ">> Läser WAD data...Ok!"
 
 msgid "AUTO"
 msgstr ""
@@ -305,11 +257,23 @@ msgid "Can't create directory"
 msgstr "Kan inte skapa mapp"
 
 #, c-format
+msgid "Can't create file: %s"
+msgstr ""
+
+#, c-format
 msgid "Can't create path: %s"
 msgstr ""
 
 msgid "Can't delete:"
 msgstr "Kunde inte radera:"
+
+#, c-format
+msgid "Can't open file: %s"
+msgstr ""
+
+#, c-format
+msgid "Can't read file: %s"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Avbryt"
@@ -379,6 +343,9 @@ msgid "Console should be unlocked to modify it."
 msgstr "Konsolen måste vara upplåst för att kunna ändra det."
 
 msgid "Content"
+msgstr ""
+
+msgid "Continue"
 msgstr ""
 
 msgid "Continue to install game?"
@@ -562,9 +529,6 @@ msgstr ""
 msgid "Do you wish to update/download all language files?"
 msgstr "Vill du uppdatera/ladda ner alla språkfiler?"
 
-msgid "Done!"
-msgstr "Klar!"
-
 msgid "Download"
 msgstr "Ladda ner"
 
@@ -666,9 +630,6 @@ msgstr ""
 msgid "Error writing the data."
 msgstr ""
 
-msgid "Error..."
-msgstr "Fel..."
-
 msgid "Error:"
 msgstr "Fel:"
 
@@ -720,6 +681,15 @@ msgstr ""
 msgid "Failed to open partition"
 msgstr "Misslyckades att öppna partition"
 
+msgid "Failed to read ticket."
+msgstr ""
+
+msgid "Failed to read tmd file."
+msgstr ""
+
+msgid "Failed to read wad header."
+msgstr ""
+
 msgid "Failed updating"
 msgstr ""
 
@@ -735,6 +705,9 @@ msgstr ""
 msgid "File not found."
 msgstr "Kunde inte hitta fil"
 
+msgid "File read/write error."
+msgstr ""
+
 msgid "Files extracted successfully."
 msgstr ""
 
@@ -744,9 +717,6 @@ msgstr ""
 
 msgid "Filesize is 0 Byte."
 msgstr ""
-
-msgid "Finishing installation... Ok!"
-msgstr "Gör klart installation... Ok!"
 
 msgid "Flat Covers"
 msgstr ""
@@ -957,26 +927,26 @@ msgstr "Fel vid installering!"
 msgid "Install Partitions"
 msgstr ""
 
+msgid "Install WAD to EmuNand"
+msgstr ""
+
 msgid "Install a game"
 msgstr "Installera ett spel"
 
 msgid "Install finished"
 msgstr ""
 
-msgid "Installing content... Ok!"
-msgstr "Installerar innehåll... Ok!"
+msgid "Installing content"
+msgstr ""
 
 msgid "Installing game:"
 msgstr "Installerar spel:"
 
-msgid "Installing ticket... Ok!"
-msgstr "Installerar biljett... Ok!"
+msgid "Installing title..."
+msgstr ""
 
-msgid "Installing title... Ok!"
-msgstr "Installerar titel... Ok!"
-
-msgid "Installing wad"
-msgstr "Installerar wad"
+msgid "Invalid wad file."
+msgstr ""
 
 msgid "Issue manager /"
 msgstr ""
@@ -1330,9 +1300,6 @@ msgstr "Snabbstart"
 msgid "Random Directory Music"
 msgstr ""
 
-msgid "Reading WAD data... Ok!"
-msgstr "Läser WAD data... Ok!"
-
 msgid "Real Nand"
 msgstr ""
 
@@ -1628,6 +1595,9 @@ msgstr ""
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr ""
 
+msgid "Uninstall"
+msgstr "Avinstallera"
+
 msgid "Uninstall Game"
 msgstr "Avinstallera spel"
 
@@ -1636,9 +1606,6 @@ msgstr "Avinstallerings meny"
 
 msgid "Uninstall all"
 msgstr ""
-
-msgid "Uninstalling wad"
-msgstr "Avinstallerar wad"
 
 msgid "Unknown"
 msgstr ""
@@ -1707,6 +1674,9 @@ msgstr "Video-läge"
 msgid "Virtual Pointer Speed"
 msgstr ""
 
+msgid "WAD Installation"
+msgstr ""
+
 msgid "WDM Files Path"
 msgstr ""
 
@@ -1720,6 +1690,9 @@ msgid "Warning"
 msgstr ""
 
 msgid "Warning:"
+msgstr ""
+
+msgid "What do you want to do?"
 msgstr ""
 
 msgid "What do you want to update?"
@@ -1768,6 +1741,10 @@ msgid "Wiinnertag requires you to enable automatic network connect on applicatio
 msgstr ""
 
 msgid "Wiird Debugger"
+msgstr ""
+
+#, c-format
+msgid "Write error on file: %s"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"
@@ -1842,6 +1819,81 @@ msgstr "av"
 msgid "seconds left"
 msgstr "sekunder kvar"
 
+#~ msgid ">> Deleting tickets..."
+#~ msgstr ">> Raderar biljetter..."
+
+#~ msgid ">> Deleting tickets...ERROR! "
+#~ msgstr ">> Raderar biljetter...FEL! "
+
+#~ msgid ">> Deleting tickets...Ok! "
+#~ msgstr ">> Raderar biljetter...Ok! "
+
+#~ msgid ">> Deleting title ...ERROR! "
+#~ msgstr ">> Raderar titel ...FEL! "
+
+#~ msgid ">> Deleting title ...Ok!"
+#~ msgstr ">> Raderar titel ...Ok!"
+
+#~ msgid ">> Deleting title contents..."
+#~ msgstr ">> Raderar titel innehåll..."
+
+#~ msgid ">> Deleting title contents...ERROR! "
+#~ msgstr ">> Raderar titel innehåll...FEL! "
+
+#~ msgid ">> Deleting title contents...Ok!"
+#~ msgstr ">> Raderar titel innehåll...Ok!"
+
+#~ msgid ">> Deleting title..."
+#~ msgstr ">> Raderar titel..."
+
+#~ msgid ">> Finishing installation..."
+#~ msgstr ">> Gör klart installation..."
+
+#~ msgid ">> Installing content #"
+#~ msgstr ">> Installerar innehåll #"
+
+#~ msgid ">> Installing ticket..."
+#~ msgstr ">> Installerar biljett..."
+
+#~ msgid ">> Installing title..."
+#~ msgstr ">> Installerar titel..."
+
+#~ msgid ">> Reading WAD data..."
+#~ msgstr ">> Läser WAD data..."
+
+#~ msgid ">> Reading WAD data...ERROR! "
+#~ msgstr ">> Läser WAD data...FEL! "
+
+#~ msgid ">> Reading WAD data...Ok!"
+#~ msgstr ">> Läser WAD data...Ok!"
+
+#~ msgid "Done!"
+#~ msgstr "Klar!"
+
+#~ msgid "Error..."
+#~ msgstr "Fel..."
+
+#~ msgid "Finishing installation... Ok!"
+#~ msgstr "Gör klart installation... Ok!"
+
+#~ msgid "Installing content... Ok!"
+#~ msgstr "Installerar innehåll... Ok!"
+
+#~ msgid "Installing ticket... Ok!"
+#~ msgstr "Installerar biljett... Ok!"
+
+#~ msgid "Installing title... Ok!"
+#~ msgstr "Installerar titel... Ok!"
+
+#~ msgid "Installing wad"
+#~ msgstr "Installerar wad"
+
+#~ msgid "Reading WAD data... Ok!"
+#~ msgstr "Läser WAD data... Ok!"
+
+#~ msgid "Uninstalling wad"
+#~ msgstr "Avinstallerar wad"
+
 #~ msgid "New Disc Detected"
 #~ msgstr "Ny skiva upptäckt"
 
@@ -1877,9 +1929,6 @@ msgstr "sekunder kvar"
 
 #~ msgid "Keep"
 #~ msgstr "Behåll"
-
-#~ msgid "Uninstall"
-#~ msgstr "Avinstallera"
 
 #~ msgid "Author:"
 #~ msgstr "Utgivare:"

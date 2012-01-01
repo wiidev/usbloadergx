@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-30 19:17+0100\n"
+"POT-Creation-Date: 2012-01-01 17:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -72,54 +72,6 @@ msgstr "4 (Pouze dospelí 18+)"
 
 msgid "5 min"
 msgstr "5 minut"
-
-msgid ">> Deleting tickets..."
-msgstr ">> Odstraňuji tikety..."
-
-msgid ">> Deleting tickets...ERROR! "
-msgstr ">> Odstraňuji tikety...CHYBA! "
-
-msgid ">> Deleting tickets...Ok! "
-msgstr ">> Odstraňuji tikety...Ok! "
-
-msgid ">> Deleting title ...ERROR! "
-msgstr ">> Odstraňuji titul...CHYBA! "
-
-msgid ">> Deleting title ...Ok!"
-msgstr ">> Odstraňuji titul...Ok!"
-
-msgid ">> Deleting title contents..."
-msgstr ">> Odstraňuji obsah titulu..."
-
-msgid ">> Deleting title contents...ERROR! "
-msgstr ">> Odstraňuji obsah titulu...CHYBA! "
-
-msgid ">> Deleting title contents...Ok!"
-msgstr ">> Odstraňuji obsah titulu...Ok!"
-
-msgid ">> Deleting title..."
-msgstr ">> Odstraňuji titul..."
-
-msgid ">> Finishing installation..."
-msgstr ">> Ukoncuji instalaci..."
-
-msgid ">> Installing content #"
-msgstr ">> Instaluji obsah #"
-
-msgid ">> Installing ticket..."
-msgstr ">> Instaluji tiket..."
-
-msgid ">> Installing title..."
-msgstr ">> Instaluji titul..."
-
-msgid ">> Reading WAD data..."
-msgstr ">> Nacítám WAD data..."
-
-msgid ">> Reading WAD data...ERROR! "
-msgstr ">> Nacítám WAD data...CHYBA! "
-
-msgid ">> Reading WAD data...Ok!"
-msgstr ">> Nacítám WAD data...Ok! "
 
 msgid "AUTO"
 msgstr ""
@@ -305,11 +257,23 @@ msgid "Can't create directory"
 msgstr "Nelze vytvorit adresár"
 
 #, c-format
+msgid "Can't create file: %s"
+msgstr ""
+
+#, c-format
 msgid "Can't create path: %s"
 msgstr "Nelze vytvorit adresár: %s"
 
 msgid "Can't delete:"
 msgstr "Nelze smazat:"
+
+#, c-format
+msgid "Can't open file: %s"
+msgstr ""
+
+#, c-format
+msgid "Can't read file: %s"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Zrušit"
@@ -379,6 +343,9 @@ msgid "Console should be unlocked to modify it."
 msgstr "Konzole musí být odemcena pro tuto zmenu"
 
 msgid "Content"
+msgstr ""
+
+msgid "Continue"
 msgstr ""
 
 msgid "Continue to install game?"
@@ -562,9 +529,6 @@ msgstr "Prejete si synchronizovat informace o volných sektorech na vsech FAT 32
 msgid "Do you wish to update/download all language files?"
 msgstr "Prejete si zaktualizovat vsechny jazykové soubory?"
 
-msgid "Done!"
-msgstr "Hotovo!"
-
 msgid "Download"
 msgstr "Stažení"
 
@@ -666,9 +630,6 @@ msgstr "Chyba pri aktualizaci USB Loader GX."
 msgid "Error writing the data."
 msgstr "Chyba pri zapisu dat."
 
-msgid "Error..."
-msgstr "Chyba..."
-
 msgid "Error:"
 msgstr "Chyba:"
 
@@ -720,6 +681,15 @@ msgstr ""
 msgid "Failed to open partition"
 msgstr "Nelze otevrít diskový oddíl"
 
+msgid "Failed to read ticket."
+msgstr ""
+
+msgid "Failed to read tmd file."
+msgstr ""
+
+msgid "Failed to read wad header."
+msgstr ""
+
 msgid "Failed updating"
 msgstr "Aktualizace selhala"
 
@@ -735,6 +705,9 @@ msgstr "Ún"
 msgid "File not found."
 msgstr "Soubor nenalezen"
 
+msgid "File read/write error."
+msgstr ""
+
 msgid "Files extracted successfully."
 msgstr ""
 
@@ -744,9 +717,6 @@ msgstr "Velikost souboru je %i Bytu."
 
 msgid "Filesize is 0 Byte."
 msgstr "Velikost souboru je 0 Bytu"
-
-msgid "Finishing installation... Ok!"
-msgstr "Ukoncuji instalaci... Ok!"
 
 msgid "Flat Covers"
 msgstr "Ploché obaly"
@@ -957,26 +927,26 @@ msgstr "Chyba pri instalaci"
 msgid "Install Partitions"
 msgstr ""
 
+msgid "Install WAD to EmuNand"
+msgstr ""
+
 msgid "Install a game"
 msgstr "Nainstalovat hru"
 
 msgid "Install finished"
 msgstr ""
 
-msgid "Installing content... Ok!"
-msgstr "Instaluji obsah... Ok!"
+msgid "Installing content"
+msgstr ""
 
 msgid "Installing game:"
 msgstr "Instalace hry:"
 
-msgid "Installing ticket... Ok!"
-msgstr "Instaluji tiket... Ok!"
+msgid "Installing title..."
+msgstr ""
 
-msgid "Installing title... Ok!"
-msgstr "Instaluji titul... Ok!"
-
-msgid "Installing wad"
-msgstr "Instaluji WAD"
+msgid "Invalid wad file."
+msgstr ""
 
 msgid "Issue manager /"
 msgstr "Správce problému"
@@ -1330,9 +1300,6 @@ msgstr "Rychlé zavedení"
 msgid "Random Directory Music"
 msgstr "Náhodné prehrávání hudby"
 
-msgid "Reading WAD data... Ok!"
-msgstr "Nacítám WAD data... Ok!"
-
 msgid "Real Nand"
 msgstr ""
 
@@ -1628,6 +1595,9 @@ msgstr ""
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr ""
 
+msgid "Uninstall"
+msgstr "Odinstalace"
+
 msgid "Uninstall Game"
 msgstr "Odinstalace hry"
 
@@ -1636,9 +1606,6 @@ msgstr "Menu odinstalací"
 
 msgid "Uninstall all"
 msgstr "Odinstalovat vse"
-
-msgid "Uninstalling wad"
-msgstr "Odinstalace WAD"
 
 msgid "Unknown"
 msgstr "Neznámé"
@@ -1707,6 +1674,9 @@ msgstr "Video mód"
 msgid "Virtual Pointer Speed"
 msgstr ""
 
+msgid "WAD Installation"
+msgstr ""
+
 msgid "WDM Files Path"
 msgstr "Cesta k WDM soborum"
 
@@ -1721,6 +1691,9 @@ msgstr ""
 
 msgid "Warning:"
 msgstr "Varování:"
+
+msgid "What do you want to do?"
+msgstr ""
 
 msgid "What do you want to update?"
 msgstr "Co si prejete zaktualizovat?"
@@ -1768,6 +1741,10 @@ msgid "Wiinnertag requires you to enable automatic network connect on applicatio
 msgstr ""
 
 msgid "Wiird Debugger"
+msgstr ""
+
+#, c-format
+msgid "Write error on file: %s"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"
@@ -1842,6 +1819,81 @@ msgstr "z "
 msgid "seconds left"
 msgstr "sekund zbývá"
 
+#~ msgid ">> Deleting tickets..."
+#~ msgstr ">> Odstraňuji tikety..."
+
+#~ msgid ">> Deleting tickets...ERROR! "
+#~ msgstr ">> Odstraňuji tikety...CHYBA! "
+
+#~ msgid ">> Deleting tickets...Ok! "
+#~ msgstr ">> Odstraňuji tikety...Ok! "
+
+#~ msgid ">> Deleting title ...ERROR! "
+#~ msgstr ">> Odstraňuji titul...CHYBA! "
+
+#~ msgid ">> Deleting title ...Ok!"
+#~ msgstr ">> Odstraňuji titul...Ok!"
+
+#~ msgid ">> Deleting title contents..."
+#~ msgstr ">> Odstraňuji obsah titulu..."
+
+#~ msgid ">> Deleting title contents...ERROR! "
+#~ msgstr ">> Odstraňuji obsah titulu...CHYBA! "
+
+#~ msgid ">> Deleting title contents...Ok!"
+#~ msgstr ">> Odstraňuji obsah titulu...Ok!"
+
+#~ msgid ">> Deleting title..."
+#~ msgstr ">> Odstraňuji titul..."
+
+#~ msgid ">> Finishing installation..."
+#~ msgstr ">> Ukoncuji instalaci..."
+
+#~ msgid ">> Installing content #"
+#~ msgstr ">> Instaluji obsah #"
+
+#~ msgid ">> Installing ticket..."
+#~ msgstr ">> Instaluji tiket..."
+
+#~ msgid ">> Installing title..."
+#~ msgstr ">> Instaluji titul..."
+
+#~ msgid ">> Reading WAD data..."
+#~ msgstr ">> Nacítám WAD data..."
+
+#~ msgid ">> Reading WAD data...ERROR! "
+#~ msgstr ">> Nacítám WAD data...CHYBA! "
+
+#~ msgid ">> Reading WAD data...Ok!"
+#~ msgstr ">> Nacítám WAD data...Ok! "
+
+#~ msgid "Done!"
+#~ msgstr "Hotovo!"
+
+#~ msgid "Error..."
+#~ msgstr "Chyba..."
+
+#~ msgid "Finishing installation... Ok!"
+#~ msgstr "Ukoncuji instalaci... Ok!"
+
+#~ msgid "Installing content... Ok!"
+#~ msgstr "Instaluji obsah... Ok!"
+
+#~ msgid "Installing ticket... Ok!"
+#~ msgstr "Instaluji tiket... Ok!"
+
+#~ msgid "Installing title... Ok!"
+#~ msgstr "Instaluji titul... Ok!"
+
+#~ msgid "Installing wad"
+#~ msgstr "Instaluji WAD"
+
+#~ msgid "Reading WAD data... Ok!"
+#~ msgstr "Nacítám WAD data... Ok!"
+
+#~ msgid "Uninstalling wad"
+#~ msgstr "Odinstalace WAD"
+
 #~ msgid "The game installation is disabled under this IOS because of instability in usb write."
 #~ msgstr "Instalace her je zakázána s tímto IOS kvuli nestabilite v USB zápisu."
 
@@ -1892,9 +1944,6 @@ msgstr "sekund zbývá"
 
 #~ msgid "Not a WAD file."
 #~ msgstr "Nejedná se o WAD soubor."
-
-#~ msgid "Uninstall"
-#~ msgstr "Odinstalace"
 
 #~ msgid "Author:"
 #~ msgstr "Autor:"

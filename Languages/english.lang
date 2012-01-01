@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-30 19:17+0100\n"
+"POT-Creation-Date: 2012-01-01 17:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -71,54 +71,6 @@ msgid "4 (Adults Only 18+)"
 msgstr ""
 
 msgid "5 min"
-msgstr ""
-
-msgid ">> Deleting tickets..."
-msgstr ""
-
-msgid ">> Deleting tickets...ERROR! "
-msgstr ""
-
-msgid ">> Deleting tickets...Ok! "
-msgstr ""
-
-msgid ">> Deleting title ...ERROR! "
-msgstr ""
-
-msgid ">> Deleting title ...Ok!"
-msgstr ""
-
-msgid ">> Deleting title contents..."
-msgstr ""
-
-msgid ">> Deleting title contents...ERROR! "
-msgstr ""
-
-msgid ">> Deleting title contents...Ok!"
-msgstr ""
-
-msgid ">> Deleting title..."
-msgstr ""
-
-msgid ">> Finishing installation..."
-msgstr ""
-
-msgid ">> Installing content #"
-msgstr ""
-
-msgid ">> Installing ticket..."
-msgstr ""
-
-msgid ">> Installing title..."
-msgstr ""
-
-msgid ">> Reading WAD data..."
-msgstr ""
-
-msgid ">> Reading WAD data...ERROR! "
-msgstr ""
-
-msgid ">> Reading WAD data...Ok!"
 msgstr ""
 
 msgid "AUTO"
@@ -305,10 +257,22 @@ msgid "Can't create directory"
 msgstr ""
 
 #, c-format
+msgid "Can't create file: %s"
+msgstr ""
+
+#, c-format
 msgid "Can't create path: %s"
 msgstr ""
 
 msgid "Can't delete:"
+msgstr ""
+
+#, c-format
+msgid "Can't open file: %s"
+msgstr ""
+
+#, c-format
+msgid "Can't read file: %s"
 msgstr ""
 
 msgid "Cancel"
@@ -379,6 +343,9 @@ msgid "Console should be unlocked to modify it."
 msgstr ""
 
 msgid "Content"
+msgstr ""
+
+msgid "Continue"
 msgstr ""
 
 msgid "Continue to install game?"
@@ -562,9 +529,6 @@ msgstr ""
 msgid "Do you wish to update/download all language files?"
 msgstr ""
 
-msgid "Done!"
-msgstr ""
-
 msgid "Download"
 msgstr ""
 
@@ -666,9 +630,6 @@ msgstr ""
 msgid "Error writing the data."
 msgstr ""
 
-msgid "Error..."
-msgstr ""
-
 msgid "Error:"
 msgstr ""
 
@@ -720,6 +681,15 @@ msgstr ""
 msgid "Failed to open partition"
 msgstr ""
 
+msgid "Failed to read ticket."
+msgstr ""
+
+msgid "Failed to read tmd file."
+msgstr ""
+
+msgid "Failed to read wad header."
+msgstr ""
+
 msgid "Failed updating"
 msgstr ""
 
@@ -735,6 +705,9 @@ msgstr ""
 msgid "File not found."
 msgstr ""
 
+msgid "File read/write error."
+msgstr ""
+
 msgid "Files extracted successfully."
 msgstr ""
 
@@ -743,9 +716,6 @@ msgid "Filesize is %i Byte."
 msgstr ""
 
 msgid "Filesize is 0 Byte."
-msgstr ""
-
-msgid "Finishing installation... Ok!"
 msgstr ""
 
 msgid "Flat Covers"
@@ -957,25 +927,25 @@ msgstr ""
 msgid "Install Partitions"
 msgstr ""
 
+msgid "Install WAD to EmuNand"
+msgstr ""
+
 msgid "Install a game"
 msgstr ""
 
 msgid "Install finished"
 msgstr ""
 
-msgid "Installing content... Ok!"
+msgid "Installing content"
 msgstr ""
 
 msgid "Installing game:"
 msgstr ""
 
-msgid "Installing ticket... Ok!"
+msgid "Installing title..."
 msgstr ""
 
-msgid "Installing title... Ok!"
-msgstr ""
-
-msgid "Installing wad"
+msgid "Invalid wad file."
 msgstr ""
 
 msgid "Issue manager /"
@@ -1330,9 +1300,6 @@ msgstr ""
 msgid "Random Directory Music"
 msgstr ""
 
-msgid "Reading WAD data... Ok!"
-msgstr ""
-
 msgid "Real Nand"
 msgstr ""
 
@@ -1628,6 +1595,9 @@ msgstr ""
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr ""
 
+msgid "Uninstall"
+msgstr ""
+
 msgid "Uninstall Game"
 msgstr ""
 
@@ -1635,9 +1605,6 @@ msgid "Uninstall Menu"
 msgstr ""
 
 msgid "Uninstall all"
-msgstr ""
-
-msgid "Uninstalling wad"
 msgstr ""
 
 msgid "Unknown"
@@ -1707,6 +1674,9 @@ msgstr ""
 msgid "Virtual Pointer Speed"
 msgstr ""
 
+msgid "WAD Installation"
+msgstr ""
+
 msgid "WDM Files Path"
 msgstr ""
 
@@ -1720,6 +1690,9 @@ msgid "Warning"
 msgstr ""
 
 msgid "Warning:"
+msgstr ""
+
+msgid "What do you want to do?"
 msgstr ""
 
 msgid "What do you want to update?"
@@ -1768,6 +1741,10 @@ msgid "Wiinnertag requires you to enable automatic network connect on applicatio
 msgstr ""
 
 msgid "Wiird Debugger"
+msgstr ""
+
+#, c-format
+msgid "Write error on file: %s"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"

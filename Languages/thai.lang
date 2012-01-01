@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-30 19:17+0100\n"
+"POT-Creation-Date: 2012-01-01 17:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -72,54 +72,6 @@ msgstr "4 (เฉพาะผู้ใหญ่ 18+)"
 
 msgid "5 min"
 msgstr "5 นาที"
-
-msgid ">> Deleting tickets..."
-msgstr ">> ลบ Tickets..."
-
-msgid ">> Deleting tickets...ERROR! "
-msgstr ">> ลบ tickets...ผิดพลาด ! "
-
-msgid ">> Deleting tickets...Ok! "
-msgstr ">> ลบ tickets...สำเร็จ ! "
-
-msgid ">> Deleting title ...ERROR! "
-msgstr ">> ลบ Title...ผิดพลาด ! "
-
-msgid ">> Deleting title ...Ok!"
-msgstr ">> ลบ Title...สำเร็จ ! "
-
-msgid ">> Deleting title contents..."
-msgstr ">> ลบเนื้อหา Title..."
-
-msgid ">> Deleting title contents...ERROR! "
-msgstr ">> ลบเนื้อหา Title...ผิดพลาด ! "
-
-msgid ">> Deleting title contents...Ok!"
-msgstr ">> ลบเนื้อหา Title...สำเร็จ ! "
-
-msgid ">> Deleting title..."
-msgstr ">> ลบ Title..."
-
-msgid ">> Finishing installation..."
-msgstr ">> ติดตั้งเสร็จแล้ว..."
-
-msgid ">> Installing content #"
-msgstr ">> กำลังติดตั้ง เนื้อหา #"
-
-msgid ">> Installing ticket..."
-msgstr ">> กำลังติดตั้ง ticket..."
-
-msgid ">> Installing title..."
-msgstr ">> กำลังติดตั้ง title..."
-
-msgid ">> Reading WAD data..."
-msgstr ">> กำลังอ่านข้อมูล WAD..."
-
-msgid ">> Reading WAD data...ERROR! "
-msgstr ">> กำลังอ่านข้อมูล WAD...ผิดพลาด ! "
-
-msgid ">> Reading WAD data...Ok!"
-msgstr ">> กำลังอ่านข้อมูล WAD...สำเร็จ !"
 
 msgid "AUTO"
 msgstr "อัตโนมัติ"
@@ -305,11 +257,23 @@ msgid "Can't create directory"
 msgstr "ไม่สามารถสร้างไดเรคทอรี่ได้"
 
 #, c-format
+msgid "Can't create file: %s"
+msgstr ""
+
+#, c-format
 msgid "Can't create path: %s"
 msgstr ""
 
 msgid "Can't delete:"
 msgstr "ไม่สามารถลบได้:"
+
+#, c-format
+msgid "Can't open file: %s"
+msgstr ""
+
+#, c-format
+msgid "Can't read file: %s"
+msgstr ""
 
 msgid "Cancel"
 msgstr "ยกเลิก"
@@ -379,6 +343,9 @@ msgid "Console should be unlocked to modify it."
 msgstr "ปลดล๊อคคอนโซลก่อน ถึงจะทำการเปลี่ยนแปลงได้"
 
 msgid "Content"
+msgstr ""
+
+msgid "Continue"
 msgstr ""
 
 msgid "Continue to install game?"
@@ -562,9 +529,6 @@ msgstr ""
 msgid "Do you wish to update/download all language files?"
 msgstr "ต้องการอัพเดทหรือดาวน์โหลด ไฟล์ภาษา ทั้งหมด?"
 
-msgid "Done!"
-msgstr "เสร็จ!"
-
 msgid "Download"
 msgstr "ดาวน์โหลด"
 
@@ -666,9 +630,6 @@ msgstr ""
 msgid "Error writing the data."
 msgstr ""
 
-msgid "Error..."
-msgstr "ผิดพลาด..."
-
 msgid "Error:"
 msgstr "ผิดพลาด:"
 
@@ -720,6 +681,15 @@ msgstr ""
 msgid "Failed to open partition"
 msgstr "ไม่สามารถเข้าถึงพาร์ทิชั่นได้"
 
+msgid "Failed to read ticket."
+msgstr ""
+
+msgid "Failed to read tmd file."
+msgstr ""
+
+msgid "Failed to read wad header."
+msgstr ""
+
 msgid "Failed updating"
 msgstr ""
 
@@ -735,6 +705,9 @@ msgstr "กพ."
 msgid "File not found."
 msgstr "ไม่พบไฟล์"
 
+msgid "File read/write error."
+msgstr ""
+
 msgid "Files extracted successfully."
 msgstr ""
 
@@ -744,9 +717,6 @@ msgstr ""
 
 msgid "Filesize is 0 Byte."
 msgstr ""
-
-msgid "Finishing installation... Ok!"
-msgstr "การติดตั้งเสร็จแล้ว !"
 
 msgid "Flat Covers"
 msgstr ""
@@ -957,26 +927,26 @@ msgstr "ผิดพลาดขณะติดตั้ง!"
 msgid "Install Partitions"
 msgstr ""
 
+msgid "Install WAD to EmuNand"
+msgstr ""
+
 msgid "Install a game"
 msgstr "ติดตั้งเกมส์"
 
 msgid "Install finished"
 msgstr ""
 
-msgid "Installing content... Ok!"
-msgstr "ติดตั้งเนื้อหา... สำเร็จ!"
+msgid "Installing content"
+msgstr ""
 
 msgid "Installing game:"
 msgstr "กำลังติดตั้งเกมส์:"
 
-msgid "Installing ticket... Ok!"
-msgstr "ติดตั้ง ticket... สำเร็จ!"
+msgid "Installing title..."
+msgstr ""
 
-msgid "Installing title... Ok!"
-msgstr "ติดตั้ง Title... สำเร็จ!"
-
-msgid "Installing wad"
-msgstr "ติดตั้ง WAD"
+msgid "Invalid wad file."
+msgstr ""
 
 msgid "Issue manager /"
 msgstr ""
@@ -1330,9 +1300,6 @@ msgstr "บูตแบบเร็ว"
 msgid "Random Directory Music"
 msgstr ""
 
-msgid "Reading WAD data... Ok!"
-msgstr "อ่านข้อมูล WAD... สำเร็จ!"
-
 msgid "Real Nand"
 msgstr ""
 
@@ -1628,6 +1595,9 @@ msgstr ""
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr ""
 
+msgid "Uninstall"
+msgstr "ถอนการติดตั้ง"
+
 msgid "Uninstall Game"
 msgstr "ถอนการติดตั้ง"
 
@@ -1636,9 +1606,6 @@ msgstr "ถอนการติดตั้ง"
 
 msgid "Uninstall all"
 msgstr ""
-
-msgid "Uninstalling wad"
-msgstr "ถอนการติดตั้ง wad"
 
 msgid "Unknown"
 msgstr ""
@@ -1707,6 +1674,9 @@ msgstr "โหมดการแสดงผลภาพ"
 msgid "Virtual Pointer Speed"
 msgstr ""
 
+msgid "WAD Installation"
+msgstr ""
+
 msgid "WDM Files Path"
 msgstr ""
 
@@ -1720,6 +1690,9 @@ msgid "Warning"
 msgstr ""
 
 msgid "Warning:"
+msgstr ""
+
+msgid "What do you want to do?"
 msgstr ""
 
 msgid "What do you want to update?"
@@ -1768,6 +1741,10 @@ msgid "Wiinnertag requires you to enable automatic network connect on applicatio
 msgstr ""
 
 msgid "Wiird Debugger"
+msgstr ""
+
+#, c-format
+msgid "Write error on file: %s"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"
@@ -1842,6 +1819,81 @@ msgstr "จาก"
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
 
+#~ msgid ">> Deleting tickets..."
+#~ msgstr ">> ลบ Tickets..."
+
+#~ msgid ">> Deleting tickets...ERROR! "
+#~ msgstr ">> ลบ tickets...ผิดพลาด ! "
+
+#~ msgid ">> Deleting tickets...Ok! "
+#~ msgstr ">> ลบ tickets...สำเร็จ ! "
+
+#~ msgid ">> Deleting title ...ERROR! "
+#~ msgstr ">> ลบ Title...ผิดพลาด ! "
+
+#~ msgid ">> Deleting title ...Ok!"
+#~ msgstr ">> ลบ Title...สำเร็จ ! "
+
+#~ msgid ">> Deleting title contents..."
+#~ msgstr ">> ลบเนื้อหา Title..."
+
+#~ msgid ">> Deleting title contents...ERROR! "
+#~ msgstr ">> ลบเนื้อหา Title...ผิดพลาด ! "
+
+#~ msgid ">> Deleting title contents...Ok!"
+#~ msgstr ">> ลบเนื้อหา Title...สำเร็จ ! "
+
+#~ msgid ">> Deleting title..."
+#~ msgstr ">> ลบ Title..."
+
+#~ msgid ">> Finishing installation..."
+#~ msgstr ">> ติดตั้งเสร็จแล้ว..."
+
+#~ msgid ">> Installing content #"
+#~ msgstr ">> กำลังติดตั้ง เนื้อหา #"
+
+#~ msgid ">> Installing ticket..."
+#~ msgstr ">> กำลังติดตั้ง ticket..."
+
+#~ msgid ">> Installing title..."
+#~ msgstr ">> กำลังติดตั้ง title..."
+
+#~ msgid ">> Reading WAD data..."
+#~ msgstr ">> กำลังอ่านข้อมูล WAD..."
+
+#~ msgid ">> Reading WAD data...ERROR! "
+#~ msgstr ">> กำลังอ่านข้อมูล WAD...ผิดพลาด ! "
+
+#~ msgid ">> Reading WAD data...Ok!"
+#~ msgstr ">> กำลังอ่านข้อมูล WAD...สำเร็จ !"
+
+#~ msgid "Done!"
+#~ msgstr "เสร็จ!"
+
+#~ msgid "Error..."
+#~ msgstr "ผิดพลาด..."
+
+#~ msgid "Finishing installation... Ok!"
+#~ msgstr "การติดตั้งเสร็จแล้ว !"
+
+#~ msgid "Installing content... Ok!"
+#~ msgstr "ติดตั้งเนื้อหา... สำเร็จ!"
+
+#~ msgid "Installing ticket... Ok!"
+#~ msgstr "ติดตั้ง ticket... สำเร็จ!"
+
+#~ msgid "Installing title... Ok!"
+#~ msgstr "ติดตั้ง Title... สำเร็จ!"
+
+#~ msgid "Installing wad"
+#~ msgstr "ติดตั้ง WAD"
+
+#~ msgid "Reading WAD data... Ok!"
+#~ msgstr "อ่านข้อมูล WAD... สำเร็จ!"
+
+#~ msgid "Uninstalling wad"
+#~ msgstr "ถอนการติดตั้ง wad"
+
 #~ msgid "New Disc Detected"
 #~ msgstr "พบแผ่นเกมส์ใหม่"
 
@@ -1871,9 +1923,6 @@ msgstr "วินาทีที่เหลือ"
 
 #~ msgid "Keep"
 #~ msgstr "เก็บ"
-
-#~ msgid "Uninstall"
-#~ msgstr "ถอนการติดตั้ง"
 
 #~ msgid "Author:"
 #~ msgstr "ผู้แต่ง:"

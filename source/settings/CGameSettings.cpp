@@ -485,7 +485,7 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.alternatedolstart = 0;
 	game.iosreloadblock = INHERIT;
 	game.alternatedolname.clear();
-	game.returnTo = 1;
+	game.returnTo = ON;
 	game.sneekVideoPatch = INHERIT;
 	game.NandEmuMode = INHERIT;
 	game.NandEmuPath.clear();

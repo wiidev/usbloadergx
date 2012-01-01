@@ -20,7 +20,6 @@
 #include "sys.h"
 #include "menu.h"
 #include "audio.h"
-#include "wad/wad.h"
 #include "xml/GameTDB.hpp"
 #include "wad/nandtitle.h"
 #include "../usbloader/utils.h"

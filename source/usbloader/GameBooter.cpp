@@ -285,7 +285,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 		gprintf("%d\n", ret);
 	}
 
-	if(IosLoader::IsHermesIOS())
+	if(IosLoader::IsHermesIOS(iosChoice))
 	{
 		if(reloadblock == ON)
 		{
@@ -295,7 +295,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 				mload_close();
 		}
 	}
-	else if(IosLoader::GetIOSInfo(IOS_GetVersion()) != NULL)
+	else if(IosLoader::IsD2X(iosChoice))
 	{
 		// Open ES file descriptor for the d2x patches
 		static char es_fs[] ATTRIBUTE_ALIGN(32) = "/dev/es";

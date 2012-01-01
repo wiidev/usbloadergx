@@ -18,8 +18,6 @@ class GameBrowseMenu : public GuiWindow
 		int GetSelectedGame() { return (gameBrowser ? gameBrowser->GetSelectedOption() : -1); }
 		void UpdateGameInfoText(const u8 * gameId);
 		void LoadCover(struct discHdr *header);
-		void CheckAlternativeDOL(const char * IDfull);
-		void CheckOcarina(const char * IDfull);
 		void CheckDiscSlotUpdate();
 		void UpdateFreeSpace(void *arg);
 		void UpdateClock();

@@ -14,7 +14,7 @@ extern "C"
 #define round_up(x,n)   (-(-(x) & -(n)))
 
 	/* Prototypes */
-	u32 swap32(u32);
+	unsigned int swap32(unsigned int);
 
 #ifdef __cplusplus
 }

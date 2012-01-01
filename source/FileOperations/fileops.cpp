@@ -29,6 +29,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <string>
 #include <gccore.h>
 #include <sys/dir.h>
 #include <dirent.h>
@@ -403,4 +404,61 @@ extern "C" bool RemoveFile(const char * filepath)
 extern "C" bool RenameFile(const char * srcpath, const char * destpath)
 {
 	return (rename(srcpath, destpath) == 0);
+}
+
+/****************************************************************************
+ * RemoveDirectory
+ ***************************************************************************/
+extern "C" bool RemoveDirectory(const char *path)
+{
+	struct dirent *dirent = NULL;
+	DIR *dir = NULL;
+
+    std::string folderpath = path;
+	while(folderpath[folderpath.size()-1] == '/')
+		folderpath.erase(folderpath.size()-1);
+
+	bool isRoot = (folderpath.find('/') == std::string::npos);
+	if(isRoot)
+		folderpath += '/';
+
+	dir = opendir(folderpath.c_str());
+	if (dir == NULL)
+		return false;
+
+	char * filepath = new (std::nothrow) char[MAXPATHLEN];
+	if(!filepath)
+	{
+	    closedir(dir);
+	    return false;
+	}
+
+	struct stat st;
+
+	while ((dirent = readdir(dir)) != 0)
+	{
+		if(!dirent->d_name)
+			continue;
+
+		if(!strcmp(dirent->d_name, ".") || !strcmp(dirent->d_name, ".."))
+			continue;
+
+		snprintf(filepath, MAXPATHLEN, "%s%s%s", folderpath.c_str(), isRoot ? "" : "/", dirent->d_name);
+		if(stat(filepath, &st) != 0)
+			continue;
+
+		if(st.st_mode & S_IFDIR)
+		{
+		    RemoveDirectory(filepath);
+		}
+		else
+		{
+		    remove(filepath);
+		}
+	}
+
+    delete [] filepath;
+    closedir(dir);
+
+    return (remove(folderpath.c_str()) == 0);
 }

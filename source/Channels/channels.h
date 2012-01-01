@@ -53,6 +53,7 @@ private:
 
 	static bool Identify(const u64 &titleid, u8 *tmdBuffer, u32 tmdSize);
 
+	void InternalGetNandChannelList(u32 type);
 	bool ParseTitleDir(char *path, int language);
 	bool GetEmuChanTitle(char *tmdpath, int language, std::string &Title);
 

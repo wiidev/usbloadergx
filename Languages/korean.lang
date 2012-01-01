@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-30 19:17+0100\n"
+"POT-Creation-Date: 2012-01-01 17:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -72,54 +72,6 @@ msgstr "4 (성인 18세 이상)"
 
 msgid "5 min"
 msgstr "5 분"
-
-msgid ">> Deleting tickets..."
-msgstr ">> 티켓 삭제중..."
-
-msgid ">> Deleting tickets...ERROR! "
-msgstr ">> 티켓 삭제 ...에러! "
-
-msgid ">> Deleting tickets...Ok! "
-msgstr ">> 티켓 삭제 ...성공! "
-
-msgid ">> Deleting title ...ERROR! "
-msgstr ">> 타이틀 삭제 ...에러! "
-
-msgid ">> Deleting title ...Ok!"
-msgstr ">> 타이틀 삭제 ...성공!"
-
-msgid ">> Deleting title contents..."
-msgstr ">> 타이틀 내용 삭제중 ..."
-
-msgid ">> Deleting title contents...ERROR! "
-msgstr ">> 타이틀 내용 삭제 ...에러! "
-
-msgid ">> Deleting title contents...Ok!"
-msgstr ">> 타이틀 내용 삭제 ...성공!"
-
-msgid ">> Deleting title..."
-msgstr ">> 타이틀 삭제..."
-
-msgid ">> Finishing installation..."
-msgstr ">> 인스톨 종료중..."
-
-msgid ">> Installing content #"
-msgstr ">> 컨텐츠 인스톨중 #"
-
-msgid ">> Installing ticket..."
-msgstr ">> 티켓 인스톨중..."
-
-msgid ">> Installing title..."
-msgstr ">> 타이틀 인스톨중..."
-
-msgid ">> Reading WAD data..."
-msgstr ">> WAD 데이터 읽는중..."
-
-msgid ">> Reading WAD data...ERROR! "
-msgstr ">> WAD 데이타 읽기...에러! "
-
-msgid ">> Reading WAD data...Ok!"
-msgstr ">> WAD 데이터 읽기...성공!"
 
 msgid "AUTO"
 msgstr "자동"
@@ -305,11 +257,23 @@ msgid "Can't create directory"
 msgstr "디렉토리를 만들 수 없습니다"
 
 #, c-format
+msgid "Can't create file: %s"
+msgstr ""
+
+#, c-format
 msgid "Can't create path: %s"
 msgstr ""
 
 msgid "Can't delete:"
 msgstr "삭제할 수 없습니다:"
+
+#, c-format
+msgid "Can't open file: %s"
+msgstr ""
+
+#, c-format
+msgid "Can't read file: %s"
+msgstr ""
 
 msgid "Cancel"
 msgstr "취소"
@@ -379,6 +343,9 @@ msgid "Console should be unlocked to modify it."
 msgstr "변경하려면 콘솔 잠김을 해제하세요."
 
 msgid "Content"
+msgstr ""
+
+msgid "Continue"
 msgstr ""
 
 msgid "Continue to install game?"
@@ -562,9 +529,6 @@ msgstr ""
 msgid "Do you wish to update/download all language files?"
 msgstr "정말로 모든 언어화일을 업데이트하고 다운로드 할까요?"
 
-msgid "Done!"
-msgstr "완료!"
-
 msgid "Download"
 msgstr ""
 
@@ -666,9 +630,6 @@ msgstr ""
 msgid "Error writing the data."
 msgstr ""
 
-msgid "Error..."
-msgstr "에러..."
-
 msgid "Error:"
 msgstr "에러:"
 
@@ -720,6 +681,15 @@ msgstr ""
 msgid "Failed to open partition"
 msgstr "파티션 열기 실패"
 
+msgid "Failed to read ticket."
+msgstr ""
+
+msgid "Failed to read tmd file."
+msgstr ""
+
+msgid "Failed to read wad header."
+msgstr ""
+
 msgid "Failed updating"
 msgstr ""
 
@@ -735,6 +705,9 @@ msgstr "2월"
 msgid "File not found."
 msgstr "파일을 찾을수가 없네요."
 
+msgid "File read/write error."
+msgstr ""
+
 msgid "Files extracted successfully."
 msgstr ""
 
@@ -744,9 +717,6 @@ msgstr ""
 
 msgid "Filesize is 0 Byte."
 msgstr ""
-
-msgid "Finishing installation... Ok!"
-msgstr "설치 종료중... 성공!"
 
 msgid "Flat Covers"
 msgstr ""
@@ -957,26 +927,26 @@ msgstr "설치 에러!"
 msgid "Install Partitions"
 msgstr ""
 
+msgid "Install WAD to EmuNand"
+msgstr ""
+
 msgid "Install a game"
 msgstr "게임을 설치할까요"
 
 msgid "Install finished"
 msgstr ""
 
-msgid "Installing content... Ok!"
-msgstr "컨텐츠 인스톨중...성공!"
+msgid "Installing content"
+msgstr ""
 
 msgid "Installing game:"
 msgstr "게임 설치 중:"
 
-msgid "Installing ticket... Ok!"
-msgstr "티켓 설치중... Ok!"
+msgid "Installing title..."
+msgstr ""
 
-msgid "Installing title... Ok!"
-msgstr "타이틀 설치중... Ok!"
-
-msgid "Installing wad"
-msgstr "Wad 설치중"
+msgid "Invalid wad file."
+msgstr ""
 
 msgid "Issue manager /"
 msgstr ""
@@ -1330,9 +1300,6 @@ msgstr "게임 바로실행"
 msgid "Random Directory Music"
 msgstr ""
 
-msgid "Reading WAD data... Ok!"
-msgstr "WAD 데이터 읽기... 성공!"
-
 msgid "Real Nand"
 msgstr ""
 
@@ -1628,6 +1595,9 @@ msgstr ""
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr ""
 
+msgid "Uninstall"
+msgstr "제거"
+
 msgid "Uninstall Game"
 msgstr "게임 언인스톨"
 
@@ -1636,9 +1606,6 @@ msgstr "메뉴 언인스톨"
 
 msgid "Uninstall all"
 msgstr ""
-
-msgid "Uninstalling wad"
-msgstr "WAD 언인스톨"
 
 msgid "Unknown"
 msgstr ""
@@ -1707,6 +1674,9 @@ msgstr "비디오 모드"
 msgid "Virtual Pointer Speed"
 msgstr ""
 
+msgid "WAD Installation"
+msgstr ""
+
 msgid "WDM Files Path"
 msgstr ""
 
@@ -1720,6 +1690,9 @@ msgid "Warning"
 msgstr ""
 
 msgid "Warning:"
+msgstr ""
+
+msgid "What do you want to do?"
 msgstr ""
 
 msgid "What do you want to update?"
@@ -1768,6 +1741,10 @@ msgid "Wiinnertag requires you to enable automatic network connect on applicatio
 msgstr ""
 
 msgid "Wiird Debugger"
+msgstr ""
+
+#, c-format
+msgid "Write error on file: %s"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"
@@ -1842,6 +1819,81 @@ msgstr "중"
 msgid "seconds left"
 msgstr "초 남았습니다"
 
+#~ msgid ">> Deleting tickets..."
+#~ msgstr ">> 티켓 삭제중..."
+
+#~ msgid ">> Deleting tickets...ERROR! "
+#~ msgstr ">> 티켓 삭제 ...에러! "
+
+#~ msgid ">> Deleting tickets...Ok! "
+#~ msgstr ">> 티켓 삭제 ...성공! "
+
+#~ msgid ">> Deleting title ...ERROR! "
+#~ msgstr ">> 타이틀 삭제 ...에러! "
+
+#~ msgid ">> Deleting title ...Ok!"
+#~ msgstr ">> 타이틀 삭제 ...성공!"
+
+#~ msgid ">> Deleting title contents..."
+#~ msgstr ">> 타이틀 내용 삭제중 ..."
+
+#~ msgid ">> Deleting title contents...ERROR! "
+#~ msgstr ">> 타이틀 내용 삭제 ...에러! "
+
+#~ msgid ">> Deleting title contents...Ok!"
+#~ msgstr ">> 타이틀 내용 삭제 ...성공!"
+
+#~ msgid ">> Deleting title..."
+#~ msgstr ">> 타이틀 삭제..."
+
+#~ msgid ">> Finishing installation..."
+#~ msgstr ">> 인스톨 종료중..."
+
+#~ msgid ">> Installing content #"
+#~ msgstr ">> 컨텐츠 인스톨중 #"
+
+#~ msgid ">> Installing ticket..."
+#~ msgstr ">> 티켓 인스톨중..."
+
+#~ msgid ">> Installing title..."
+#~ msgstr ">> 타이틀 인스톨중..."
+
+#~ msgid ">> Reading WAD data..."
+#~ msgstr ">> WAD 데이터 읽는중..."
+
+#~ msgid ">> Reading WAD data...ERROR! "
+#~ msgstr ">> WAD 데이타 읽기...에러! "
+
+#~ msgid ">> Reading WAD data...Ok!"
+#~ msgstr ">> WAD 데이터 읽기...성공!"
+
+#~ msgid "Done!"
+#~ msgstr "완료!"
+
+#~ msgid "Error..."
+#~ msgstr "에러..."
+
+#~ msgid "Finishing installation... Ok!"
+#~ msgstr "설치 종료중... 성공!"
+
+#~ msgid "Installing content... Ok!"
+#~ msgstr "컨텐츠 인스톨중...성공!"
+
+#~ msgid "Installing ticket... Ok!"
+#~ msgstr "티켓 설치중... Ok!"
+
+#~ msgid "Installing title... Ok!"
+#~ msgstr "타이틀 설치중... Ok!"
+
+#~ msgid "Installing wad"
+#~ msgstr "Wad 설치중"
+
+#~ msgid "Reading WAD data... Ok!"
+#~ msgstr "WAD 데이터 읽기... 성공!"
+
+#~ msgid "Uninstalling wad"
+#~ msgstr "WAD 언인스톨"
+
 #~ msgid "USB Device not found"
 #~ msgstr "USB 장치가 없습니다."
 
@@ -1868,9 +1920,6 @@ msgstr "초 남았습니다"
 
 #~ msgid "Keep"
 #~ msgstr "보관"
-
-#~ msgid "Uninstall"
-#~ msgstr "제거"
 
 #~ msgid "Download Boxart image?"
 #~ msgstr "박스 이미지를 다운로드 할까요?"

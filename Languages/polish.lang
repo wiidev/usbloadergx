@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-30 19:17+0100\n"
+"POT-Creation-Date: 2012-01-01 17:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -72,54 +72,6 @@ msgstr "4 (tylko dla doroslych 18+)"
 
 msgid "5 min"
 msgstr ""
-
-msgid ">> Deleting tickets..."
-msgstr ">> Usuwanie ticketu..."
-
-msgid ">> Deleting tickets...ERROR! "
-msgstr ">> Usuwanie ticketu...ERROR! "
-
-msgid ">> Deleting tickets...Ok! "
-msgstr ">> Usuwanie ticketu...Ok! "
-
-msgid ">> Deleting title ...ERROR! "
-msgstr ">> Usuwanie tytulu ...ERROR! "
-
-msgid ">> Deleting title ...Ok!"
-msgstr ">> Usuwanie tytulu ...Ok!"
-
-msgid ">> Deleting title contents..."
-msgstr ">> Usuwanie title contents..."
-
-msgid ">> Deleting title contents...ERROR! "
-msgstr ">> Usuwanie title contents...ERROR! "
-
-msgid ">> Deleting title contents...Ok!"
-msgstr ">> Usuwanie title contents...Ok!"
-
-msgid ">> Deleting title..."
-msgstr ">> Usuwanie tytulu..."
-
-msgid ">> Finishing installation..."
-msgstr ">> Konczenie instalacji"
-
-msgid ">> Installing content #"
-msgstr ">> Instalowanie zawartoSci #"
-
-msgid ">> Installing ticket..."
-msgstr ">> Instalowanie ticketu..."
-
-msgid ">> Installing title..."
-msgstr ">> Instalowanie tytulu..."
-
-msgid ">> Reading WAD data..."
-msgstr ">> Odczyt danych WAD..."
-
-msgid ">> Reading WAD data...ERROR! "
-msgstr ">> Odczyt danych WAD...ERROR! "
-
-msgid ">> Reading WAD data...Ok!"
-msgstr ">> Odczyt danych WAD...Ok!"
 
 msgid "AUTO"
 msgstr "automatycznie"
@@ -305,11 +257,23 @@ msgid "Can't create directory"
 msgstr "Nie mozna utworzyc folderu"
 
 #, c-format
+msgid "Can't create file: %s"
+msgstr ""
+
+#, c-format
 msgid "Can't create path: %s"
 msgstr ""
 
 msgid "Can't delete:"
 msgstr "Nie mozna usunac"
+
+#, c-format
+msgid "Can't open file: %s"
+msgstr ""
+
+#, c-format
+msgid "Can't read file: %s"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Anuluj"
@@ -379,6 +343,9 @@ msgid "Console should be unlocked to modify it."
 msgstr "Aby zmodyfikowac, odblokuj konsole"
 
 msgid "Content"
+msgstr ""
+
+msgid "Continue"
 msgstr ""
 
 msgid "Continue to install game?"
@@ -562,9 +529,6 @@ msgstr ""
 msgid "Do you wish to update/download all language files?"
 msgstr "Zaktualizowac wszystkie pliki jezykowe?"
 
-msgid "Done!"
-msgstr "Zakonczono!"
-
 msgid "Download"
 msgstr "Pobierz"
 
@@ -666,9 +630,6 @@ msgstr ""
 msgid "Error writing the data."
 msgstr ""
 
-msgid "Error..."
-msgstr "Blad..."
-
 msgid "Error:"
 msgstr "Blad:"
 
@@ -720,6 +681,15 @@ msgstr ""
 msgid "Failed to open partition"
 msgstr "Nie udalo sie otworzyc partycji"
 
+msgid "Failed to read ticket."
+msgstr ""
+
+msgid "Failed to read tmd file."
+msgstr ""
+
+msgid "Failed to read wad header."
+msgstr ""
+
 msgid "Failed updating"
 msgstr ""
 
@@ -735,6 +705,9 @@ msgstr "Luty"
 msgid "File not found."
 msgstr "Nie znaleziono pliku."
 
+msgid "File read/write error."
+msgstr ""
+
 msgid "Files extracted successfully."
 msgstr ""
 
@@ -744,9 +717,6 @@ msgstr ""
 
 msgid "Filesize is 0 Byte."
 msgstr ""
-
-msgid "Finishing installation... Ok!"
-msgstr "Konczenie instalacji...Ok!"
 
 msgid "Flat Covers"
 msgstr ""
@@ -957,26 +927,26 @@ msgstr "Blad instalacji"
 msgid "Install Partitions"
 msgstr ""
 
+msgid "Install WAD to EmuNand"
+msgstr ""
+
 msgid "Install a game"
 msgstr "Zainstaluj gre"
 
 msgid "Install finished"
 msgstr ""
 
-msgid "Installing content... Ok!"
-msgstr "Instalowanie zawartosci...Ok!"
+msgid "Installing content"
+msgstr ""
 
 msgid "Installing game:"
 msgstr "Instalowanie gry:"
 
-msgid "Installing ticket... Ok!"
-msgstr "Instalowanie ticketu... Ok!"
+msgid "Installing title..."
+msgstr ""
 
-msgid "Installing title... Ok!"
-msgstr "Instalowanie tytulu... Ok!"
-
-msgid "Installing wad"
-msgstr "Instalowanie wad"
+msgid "Invalid wad file."
+msgstr ""
 
 msgid "Issue manager /"
 msgstr ""
@@ -1330,9 +1300,6 @@ msgstr "Szybkie ladowanie"
 msgid "Random Directory Music"
 msgstr ""
 
-msgid "Reading WAD data... Ok!"
-msgstr "Odczyt danych WAD...Ok!"
-
 msgid "Real Nand"
 msgstr ""
 
@@ -1628,6 +1595,9 @@ msgstr ""
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr ""
 
+msgid "Uninstall"
+msgstr "Odinstaluj"
+
 msgid "Uninstall Game"
 msgstr "Odinstaluj gre"
 
@@ -1636,9 +1606,6 @@ msgstr "Odinstaluj Menu"
 
 msgid "Uninstall all"
 msgstr ""
-
-msgid "Uninstalling wad"
-msgstr "Odinstalowywanie wad"
 
 msgid "Unknown"
 msgstr ""
@@ -1707,6 +1674,9 @@ msgstr "Tryb video"
 msgid "Virtual Pointer Speed"
 msgstr ""
 
+msgid "WAD Installation"
+msgstr ""
+
 msgid "WDM Files Path"
 msgstr ""
 
@@ -1720,6 +1690,9 @@ msgid "Warning"
 msgstr ""
 
 msgid "Warning:"
+msgstr ""
+
+msgid "What do you want to do?"
 msgstr ""
 
 msgid "What do you want to update?"
@@ -1768,6 +1741,10 @@ msgid "Wiinnertag requires you to enable automatic network connect on applicatio
 msgstr ""
 
 msgid "Wiird Debugger"
+msgstr ""
+
+#, c-format
+msgid "Write error on file: %s"
 msgstr ""
 
 msgid "Writing GXGameCategories.xml"
@@ -1842,6 +1819,81 @@ msgstr "z"
 msgid "seconds left"
 msgstr "sekund pozostalo"
 
+#~ msgid ">> Deleting tickets..."
+#~ msgstr ">> Usuwanie ticketu..."
+
+#~ msgid ">> Deleting tickets...ERROR! "
+#~ msgstr ">> Usuwanie ticketu...ERROR! "
+
+#~ msgid ">> Deleting tickets...Ok! "
+#~ msgstr ">> Usuwanie ticketu...Ok! "
+
+#~ msgid ">> Deleting title ...ERROR! "
+#~ msgstr ">> Usuwanie tytulu ...ERROR! "
+
+#~ msgid ">> Deleting title ...Ok!"
+#~ msgstr ">> Usuwanie tytulu ...Ok!"
+
+#~ msgid ">> Deleting title contents..."
+#~ msgstr ">> Usuwanie title contents..."
+
+#~ msgid ">> Deleting title contents...ERROR! "
+#~ msgstr ">> Usuwanie title contents...ERROR! "
+
+#~ msgid ">> Deleting title contents...Ok!"
+#~ msgstr ">> Usuwanie title contents...Ok!"
+
+#~ msgid ">> Deleting title..."
+#~ msgstr ">> Usuwanie tytulu..."
+
+#~ msgid ">> Finishing installation..."
+#~ msgstr ">> Konczenie instalacji"
+
+#~ msgid ">> Installing content #"
+#~ msgstr ">> Instalowanie zawartoSci #"
+
+#~ msgid ">> Installing ticket..."
+#~ msgstr ">> Instalowanie ticketu..."
+
+#~ msgid ">> Installing title..."
+#~ msgstr ">> Instalowanie tytulu..."
+
+#~ msgid ">> Reading WAD data..."
+#~ msgstr ">> Odczyt danych WAD..."
+
+#~ msgid ">> Reading WAD data...ERROR! "
+#~ msgstr ">> Odczyt danych WAD...ERROR! "
+
+#~ msgid ">> Reading WAD data...Ok!"
+#~ msgstr ">> Odczyt danych WAD...Ok!"
+
+#~ msgid "Done!"
+#~ msgstr "Zakonczono!"
+
+#~ msgid "Error..."
+#~ msgstr "Blad..."
+
+#~ msgid "Finishing installation... Ok!"
+#~ msgstr "Konczenie instalacji...Ok!"
+
+#~ msgid "Installing content... Ok!"
+#~ msgstr "Instalowanie zawartosci...Ok!"
+
+#~ msgid "Installing ticket... Ok!"
+#~ msgstr "Instalowanie ticketu... Ok!"
+
+#~ msgid "Installing title... Ok!"
+#~ msgstr "Instalowanie tytulu... Ok!"
+
+#~ msgid "Installing wad"
+#~ msgstr "Instalowanie wad"
+
+#~ msgid "Reading WAD data... Ok!"
+#~ msgstr "Odczyt danych WAD...Ok!"
+
+#~ msgid "Uninstalling wad"
+#~ msgstr "Odinstalowywanie wad"
+
 #~ msgid "New Disc Detected"
 #~ msgstr "Wykryto nowy dysk"
 
@@ -1877,9 +1929,6 @@ msgstr "sekund pozostalo"
 
 #~ msgid "Keep"
 #~ msgstr "Trzymaj"
-
-#~ msgid "Uninstall"
-#~ msgstr "Odinstaluj"
 
 #~ msgid "Author:"
 #~ msgstr "Autor: "

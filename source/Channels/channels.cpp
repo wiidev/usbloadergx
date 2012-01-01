@@ -71,41 +71,16 @@ void Channels::GetChannelList()
 	NandChannels.clear();
 
 	// Get count of titles of the good titles
-	u32 num_titles = NandTitles.SetType(0x10001);
-	for (u32 i = 0; i < num_titles; i++)
-	{
-		u64 tid = NandTitles.Next();
-		if (!tid)
-			break;
+	InternalGetNandChannelList(0x00010001);
+	InternalGetNandChannelList(0x00010004);
+	InternalGetNandChannelList(0x00010002);
+}
 
-		//remove ones not actually installed on the nand
-		if (!NandTitles.Exists(tid))
-			continue;
-
-		char id[5];
-		NandTitles.AsciiTID(tid, id);
-		const char *name = GameTitles.GetTitle(id);
-		std::string TitleName;
-
-		if(!name || *name == '\0')
-		{
-			name = NandTitles.NameOf(tid);
-			// Set title for caching
-			if(name)
-				GameTitles.SetGameTitle(id, name);
-		}
-
-		int s = NandChannels.size();
-		NandChannels.resize(s + 1);
-		memset(&NandChannels[s], 0, sizeof(struct discHdr));
-		memcpy(NandChannels[s].id, id, 4);
-		NandChannels[s].tid = tid;
-		NandChannels[s].type = TYPE_GAME_NANDCHAN;
-		strncpy(NandChannels[s].title, name ? name : "", sizeof(NandChannels[s].title)-1);
-	}
-
+void Channels::InternalGetNandChannelList(u32 type)
+{
 	// Get count of system titles
-	num_titles = NandTitles.SetType(0x10002);
+	u32 num_titles = NandTitles.SetType(type);
+
 	for (u32 i = 0; i < num_titles; i++)
 	{
 		u64 tid = NandTitles.Next();
@@ -122,6 +97,11 @@ void Channels::GetChannelList()
 
 		char id[5];
 		NandTitles.AsciiTID(tid, id);
+
+		// Force old and new format to be "JODI" which is known by GameTDB
+		if(tid == 0x00010001AF1BF516LL || tid == 0x0001000148415858LL)
+			strcpy(id, "JODI");
+
 		const char *name = GameTitles.GetTitle(id);
 		std::string TitleName;
 
@@ -180,7 +160,10 @@ u8 * Channels::GetDol(const u64 &title, u8 *tmdBuffer)
 	}
 
 	if(!found)
+	{
+		gprintf("Channel main.dol boot index not found\n");
 		return NULL;
+	}
 
 	char *filepath = (char *) memalign(32, ISFS_MAXPATH);
 	if(!filepath)
