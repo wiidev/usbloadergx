@@ -288,7 +288,7 @@ bool Wad::InstallContents(const char *installpath)
 			break;
 
 		if(cnt > 0)
-			offset = round_up( tmd_data->contents[cnt-1].size, 64);
+			offset += round_up( tmd_data->contents[cnt-1].size, 64);
 
 		u32 done = 0, len;
 		tmd_content *content = &tmd_data->contents[cnt];
@@ -380,7 +380,7 @@ bool Wad::InstallContents(const char *installpath)
 		fclose(fp);
 
 		// update progress variable
-		totalDone = len;
+		totalDone += len;
 
 		// Check if the read/write process stopped before finishing
 		if(done < len)
