@@ -1,18 +1,18 @@
 # USB Loader GX language source file.
-# japanese.lang - r1128
+# japanese.lang - r1142
 # don't delete/change this line (e).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-01 17:44+0100\n"
+"POT-Creation-Date: 2012-01-03 19:16+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid " could not be downloaded."
 msgstr "ﾀﾞｳﾝﾛｰﾄﾞできませんでした"
@@ -131,7 +131,7 @@ msgid "Are you sure?"
 msgstr "よろしいですか？"
 
 msgid "Aspect Ratio"
-msgstr ""
+msgstr "アスペクト比"
 
 msgid "Aug"
 msgstr "8月"
@@ -203,7 +203,7 @@ msgid "Block IOS Reload"
 msgstr "IOS再読み込み防止"
 
 msgid "Block Loader Mode Button"
-msgstr ""
+msgstr "ローダーモードボタンを制限"
 
 msgid "Block Loader Settings"
 msgstr "ローダーの設定を制限"
@@ -212,7 +212,7 @@ msgid "Block Parental Settings"
 msgstr "使用制限設定を制限"
 
 msgid "Block Priiloader Override"
-msgstr ""
+msgstr "Priiloader上書きを制限"
 
 msgid "Block Reset Settings"
 msgstr "設定の初期化を制限"
@@ -476,7 +476,7 @@ msgid "Disc Default"
 msgstr "ディスクの初期値"
 
 msgid "Disc Insert Detected"
-msgstr ""
+msgstr "ディスクの挿入を検知しました"
 
 msgid "DiskFlip"
 msgstr "ディスクの回転風"
@@ -566,7 +566,7 @@ msgid "Downloading pagelist:"
 msgstr "リストをダウンロード中:"
 
 msgid "Dump NAND to EmuNand"
-msgstr "NANDをエミュNANDへダンプ"
+msgstr "NANDをｴﾐｭNANDへﾀﾞﾝﾌﾟ"
 
 msgid "Dutch"
 msgstr "オランダ語"
@@ -581,10 +581,10 @@ msgid "ERROR: Can't set up theme."
 msgstr "テーマを適用できませんでした"
 
 msgid "EmuNand Channels"
-msgstr ""
+msgstr "エミュNANDチャンネル"
 
 msgid "Emulated Nand"
-msgstr ""
+msgstr "エミュNAND"
 
 msgid "English"
 msgstr "英語"
@@ -646,10 +646,10 @@ msgid "Exit to where?"
 msgstr "どこに移動しますか?"
 
 msgid "Export All Saves to EmuNand"
-msgstr "全てのセーブをエミュNANDに転送"
+msgstr "全てのｾｰﾌﾞをｴﾐｭNANDに転送"
 
 msgid "Extract Save to EmuNand"
-msgstr "セーブをエミュNANDに書き出す"
+msgstr "ｾｰﾌﾞをｴﾐｭNANDに書き出す"
 
 msgid "Extracting file:"
 msgstr "書き出し中:"
@@ -676,7 +676,7 @@ msgid "Failed to extract."
 msgstr "解凍に失敗しました"
 
 msgid "Failed to initialize the USB storage device."
-msgstr ""
+msgstr "USBデバイスを初期化できませんでした"
 
 msgid "Failed to open partition"
 msgstr "領域を開けませんでした"
@@ -728,10 +728,10 @@ msgid "Font Scale Factor"
 msgstr "文字サイズの補正率"
 
 msgid "Force 16:9"
-msgstr ""
+msgstr "16:9に強制"
 
 msgid "Force 4:3"
-msgstr ""
+msgstr "4:3に強制"
 
 msgid "Force NTSC"
 msgstr "NTSCに強制"
@@ -916,7 +916,7 @@ msgid "Install"
 msgstr "ｲﾝｽﾄｰﾙ"
 
 msgid "Install Canceled"
-msgstr ""
+msgstr "インストールを中止しました"
 
 msgid "Install Directories"
 msgstr "インストールフォルダ"
@@ -994,7 +994,7 @@ msgid "Languagepath changed."
 msgstr "言語のパスを変更しました"
 
 msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
-msgstr ""
+msgstr "エミュNANDチャンネルはd2x cIOSでないと動作しません!IOSをd2x cIOSに変更してください"
 
 msgid "Left"
 msgstr "左ボタンで"
@@ -1079,7 +1079,7 @@ msgid "Music Volume"
 msgstr "BGMの音量"
 
 msgid "Nand Channels"
-msgstr ""
+msgstr "Wii本体NANDチャンネル"
 
 msgid "Nand Emu Channel Path"
 msgstr "NANDエミュチャンネル"
@@ -1145,7 +1145,7 @@ msgid "No file missing!"
 msgstr "必要ありません"
 
 msgid "No language files to update on your devices! Do you want to download new language files?"
-msgstr ""
+msgstr "更新する言語ファイルがありません!新しい言語ファイルをダウンロードしますか?"
 
 msgid "No new updates."
 msgstr "更新はありません"
@@ -1163,7 +1163,7 @@ msgid "Normal"
 msgstr "ワイド"
 
 msgid "Not Initialized"
-msgstr ""
+msgstr "初期化されていません"
 
 msgid "Not a Wii Disc"
 msgstr "Wiiﾃﾞｨｽｸではありません"
@@ -1301,7 +1301,7 @@ msgid "Random Directory Music"
 msgstr "フォルダ内でランダム再生"
 
 msgid "Real Nand"
-msgstr ""
+msgstr "Wii本体NAND"
 
 msgid "Receiving file from:"
 msgstr "ファイルを受信中:"
@@ -1406,10 +1406,10 @@ msgid "Select game categories"
 msgstr "ゲームカテゴリを選択"
 
 msgid "Select loader mode"
-msgstr ""
+msgstr "ローダーモードを選択"
 
 msgid "Select titles sources."
-msgstr ""
+msgstr "タイトルの読み込み元を選んでください"
 
 msgid "Sept"
 msgstr "9月"
@@ -1508,7 +1508,7 @@ msgid "Successfully installed:"
 msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしました"
 
 msgid "Switching to channel list mode."
-msgstr ""
+msgstr "チャンネルリストモードに変更します"
 
 msgid "Sync FAT32 FS Info"
 msgstr "FAT32FS情報を同期"
@@ -1584,7 +1584,7 @@ msgid "Transfer failed"
 msgstr "転送に失敗しました"
 
 msgid "USB Device not found."
-msgstr ""
+msgstr "USB機器が見つかりません"
 
 msgid "USB Loader GX is protected"
 msgstr "GXは保護されています"
@@ -1672,7 +1672,7 @@ msgid "Video Mode"
 msgstr "映像の出力方法"
 
 msgid "Virtual Pointer Speed"
-msgstr ""
+msgstr "ポインタの速度"
 
 msgid "WAD Installation"
 msgstr ""
@@ -1714,7 +1714,7 @@ msgid "Widescreen Fix"
 msgstr "普通"
 
 msgid "Wii Games"
-msgstr ""
+msgstr "Wiiゲーム"
 
 msgid "Wii Menu"
 msgstr "Wiiメニューへ"
@@ -1760,7 +1760,7 @@ msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 1
 msgstr "rev17以前のcIOS249ではFAT32/NTFS/EXTに対応していません"
 
 msgid "You can select or format a partition or use the channel loader mode."
-msgstr ""
+msgstr "領域を選択･初期化したりチャンネルリストモードを使えます"
 
 msgid "You cannot delete this category."
 msgstr "このカテゴリは削除できません"

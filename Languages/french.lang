@@ -1,18 +1,18 @@
 # USB Loader GX language source file.
-# French.lang - r1123 (v2.3)
+# French.lang - r1144
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-01 17:44+0100\n"
+"POT-Creation-Date: 2012-01-03 19:16+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " ne peut pas être téléchargé."
@@ -131,7 +131,7 @@ msgid "Are you sure?"
 msgstr "Êtes-vous sûr ?"
 
 msgid "Aspect Ratio"
-msgstr ""
+msgstr "Format d'image"
 
 msgid "Aug"
 msgstr "Août"
@@ -203,7 +203,7 @@ msgid "Block IOS Reload"
 msgstr "Bloquer IOS reload"
 
 msgid "Block Loader Mode Button"
-msgstr ""
+msgstr "Bloquer Mode du Loader"
 
 msgid "Block Loader Settings"
 msgstr "Bloquer Param. du Loader"
@@ -212,7 +212,7 @@ msgid "Block Parental Settings"
 msgstr "Bloquer Contrôle parental"
 
 msgid "Block Priiloader Override"
-msgstr ""
+msgstr "Annuler contournement Priiloader"
 
 msgid "Block Reset Settings"
 msgstr "Bloquer Réinit. paramètres"
@@ -258,7 +258,7 @@ msgstr "Création du répertoire impossible"
 
 #, c-format
 msgid "Can't create file: %s"
-msgstr ""
+msgstr "Impossible de créer le fichier: %s"
 
 #, c-format
 msgid "Can't create path: %s"
@@ -269,11 +269,11 @@ msgstr "Impossible de supprimer:"
 
 #, c-format
 msgid "Can't open file: %s"
-msgstr ""
+msgstr "Impossible d'ouvrir le fichier: %s"
 
 #, c-format
 msgid "Can't read file: %s"
-msgstr ""
+msgstr "Impossible de lire le fichier: %s"
 
 msgid "Cancel"
 msgstr "Annuler"
@@ -346,7 +346,7 @@ msgid "Content"
 msgstr "Contenu"
 
 msgid "Continue"
-msgstr ""
+msgstr "Continuer"
 
 msgid "Continue to install game?"
 msgstr "Continuer l'installation ?"
@@ -476,7 +476,7 @@ msgid "Disc Default"
 msgstr "Disque par défaut"
 
 msgid "Disc Insert Detected"
-msgstr ""
+msgstr "Insertion de disque détecté"
 
 msgid "DiskFlip"
 msgstr "Inversion disque"
@@ -581,10 +581,10 @@ msgid "ERROR: Can't set up theme."
 msgstr "ERREUR: Configuration thème impossible."
 
 msgid "EmuNand Channels"
-msgstr ""
+msgstr "Chaînes sur Émulation Nand des chaînes"
 
 msgid "Emulated Nand"
-msgstr ""
+msgstr "Nand émulé"
 
 msgid "English"
 msgstr "Anglais"
@@ -676,19 +676,19 @@ msgid "Failed to extract."
 msgstr "Échec de l'extraction"
 
 msgid "Failed to initialize the USB storage device."
-msgstr ""
+msgstr "Échec de l'initialisation du périphérique USB."
 
 msgid "Failed to open partition"
 msgstr "Échec accès partition"
 
 msgid "Failed to read ticket."
-msgstr ""
+msgstr "Échec de lecture du ticket."
 
 msgid "Failed to read tmd file."
-msgstr ""
+msgstr "Échec de lecture du fichier tmd."
 
 msgid "Failed to read wad header."
-msgstr ""
+msgstr "Échec de lecture de l'entête wad."
 
 msgid "Failed updating"
 msgstr "Échec de la mise à jour"
@@ -706,7 +706,7 @@ msgid "File not found."
 msgstr "Fichier introuvable."
 
 msgid "File read/write error."
-msgstr ""
+msgstr "Erreur de lecture/écriture du fichier."
 
 msgid "Files extracted successfully."
 msgstr "Fichiers extraits avec succès."
@@ -728,10 +728,10 @@ msgid "Font Scale Factor"
 msgstr "Échelle police"
 
 msgid "Force 16:9"
-msgstr ""
+msgstr "Forcer 16:9"
 
 msgid "Force 4:3"
-msgstr ""
+msgstr "Forcer 4:3"
 
 msgid "Force NTSC"
 msgstr "Forcer NTSC"
@@ -916,7 +916,7 @@ msgid "Install"
 msgstr "Installer"
 
 msgid "Install Canceled"
-msgstr ""
+msgstr "Installation annulée"
 
 msgid "Install Directories"
 msgstr "Dossiers d'installation"
@@ -928,7 +928,7 @@ msgid "Install Partitions"
 msgstr "Installation"
 
 msgid "Install WAD to EmuNand"
-msgstr ""
+msgstr "Installer WAD sur EmuNand"
 
 msgid "Install a game"
 msgstr "Installer un jeu"
@@ -937,16 +937,16 @@ msgid "Install finished"
 msgstr "Installation terminée"
 
 msgid "Installing content"
-msgstr ""
+msgstr "Installation contenu"
 
 msgid "Installing game:"
 msgstr "Installation du jeu:"
 
 msgid "Installing title..."
-msgstr ""
+msgstr "Installation titre..."
 
 msgid "Invalid wad file."
-msgstr ""
+msgstr "Fichier wad non valide."
 
 msgid "Issue manager /"
 msgstr "Gestion des erreurs/"
@@ -994,7 +994,7 @@ msgid "Languagepath changed."
 msgstr "Dossier langue changé"
 
 msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
-msgstr ""
+msgstr "Le lancement de chaînes sur ÉmuNand ne fonctionne qu'avec un cIOS d2x! Modifiez l'IOS dans les paramètres de ce jeu."
 
 msgid "Left"
 msgstr "Gauche"
@@ -1079,7 +1079,7 @@ msgid "Music Volume"
 msgstr "Volume musique"
 
 msgid "Nand Channels"
-msgstr ""
+msgstr "Chaînes sur Nand réel"
 
 msgid "Nand Emu Channel Path"
 msgstr "Dossier ÉmuNand Chaînes"
@@ -1145,7 +1145,7 @@ msgid "No file missing!"
 msgstr "Aucun fichier manquant !"
 
 msgid "No language files to update on your devices! Do you want to download new language files?"
-msgstr ""
+msgstr "Aucun fichier de langage trouvé! Voulez-vous les télécharger ?"
 
 msgid "No new updates."
 msgstr "Pas de nouvelle mise à jour."
@@ -1163,7 +1163,7 @@ msgid "Normal"
 msgstr "4:3"
 
 msgid "Not Initialized"
-msgstr ""
+msgstr "Disque non initialisé"
 
 msgid "Not a Wii Disc"
 msgstr "Disque non Wii"
@@ -1301,7 +1301,7 @@ msgid "Random Directory Music"
 msgstr "Aléatoire"
 
 msgid "Real Nand"
-msgstr ""
+msgstr "Nand réel"
 
 msgid "Receiving file from:"
 msgstr "Réception du fichier de:"
@@ -1406,10 +1406,10 @@ msgid "Select game categories"
 msgstr "Filtrer par catégories de jeux"
 
 msgid "Select loader mode"
-msgstr ""
+msgstr "Mode du Loader"
 
 msgid "Select titles sources."
-msgstr ""
+msgstr "Choisissez les titres à afficher :"
 
 msgid "Sept"
 msgstr ""
@@ -1508,7 +1508,7 @@ msgid "Successfully installed:"
 msgstr "Installé avec succès:"
 
 msgid "Switching to channel list mode."
-msgstr ""
+msgstr "Passage du loader en mode Chaînes."
 
 msgid "Sync FAT32 FS Info"
 msgstr "Synch. info FAT32"
@@ -1584,7 +1584,7 @@ msgid "Transfer failed"
 msgstr "Échec du transfert"
 
 msgid "USB Device not found."
-msgstr ""
+msgstr "Périphérique USB introuvable."
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX est verrouillé"
@@ -1596,7 +1596,7 @@ msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr "Le changement de port USB n'est supporté qu'avec les cIOS d'Hermes."
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Désinstaller"
 
 msgid "Uninstall Game"
 msgstr "Désinstaller le jeu"
@@ -1672,10 +1672,10 @@ msgid "Video Mode"
 msgstr "Mode vidéo"
 
 msgid "Virtual Pointer Speed"
-msgstr ""
+msgstr "Vitesse du pointeur virtuel"
 
 msgid "WAD Installation"
-msgstr ""
+msgstr "Installation WAD"
 
 msgid "WDM Files Path"
 msgstr "Dossier fichiers WDM"
@@ -1693,7 +1693,7 @@ msgid "Warning:"
 msgstr "Attention:"
 
 msgid "What do you want to do?"
-msgstr ""
+msgstr "Que voulez-vous faire ?"
 
 msgid "What do you want to update?"
 msgstr "Choix de la mise à jour"
@@ -1714,7 +1714,7 @@ msgid "Widescreen Fix"
 msgstr "16:9"
 
 msgid "Wii Games"
-msgstr ""
+msgstr "Jeux Wii"
 
 msgid "Wii Menu"
 msgstr "Menu Wii"
@@ -1745,7 +1745,7 @@ msgstr "Débugger WiiRd"
 
 #, c-format
 msgid "Write error on file: %s"
-msgstr ""
+msgstr "Erreur d'écriture sur le fichier: %s"
 
 msgid "Writing GXGameCategories.xml"
 msgstr "Ecriture GXGameCategories.xml"
@@ -1760,7 +1760,7 @@ msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 1
 msgstr "Vous essayez de sélectionner une partition FAT32/NTFS/EXT avec un cIOS 249 Rev < 18 (non supporté). Continuez à vos risques."
 
 msgid "You can select or format a partition or use the channel loader mode."
-msgstr ""
+msgstr "Vous pouvez choisir ou formater une partition, ou passer le loader en mode Chaînes."
 
 msgid "You cannot delete this category."
 msgstr "Vous ne pouvez pas supprimer cette catégorie."

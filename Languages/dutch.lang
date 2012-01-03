@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-01 17:44+0100\n"
-"PO-Revision-Date: 2011-06-30 14:22+0100\n"
-"Last-Translator: glowy\n"
-"Language-Team: tj_cool, glowy\n"
-"Language: \n"
+"POT-Creation-Date: 2012-01-03 19:16+0100\n"
+"PO-Revision-Date: 2011-12-17 14:22+0100\n"
+"Last-Translator: Arthur117\n"
+"Language-Team: tj_cool, glowy, Arthur117\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: Dutch (Nederlands)\n"
 
 msgid " could not be downloaded."
 msgstr " kon niet worden gedownload."
@@ -53,7 +53,7 @@ msgid "2D Cover Path"
 msgstr "Locatie 2D hoesjes"
 
 msgid "3 (Mature 16+)"
-msgstr "3 (Adolescenten 16+)"
+msgstr "3 (Jongeren 16+)"
 
 msgid "3 min"
 msgstr ""
@@ -74,7 +74,7 @@ msgid "5 min"
 msgstr ""
 
 msgid "AUTO"
-msgstr ""
+msgstr "Automatisch"
 
 msgid "AXNextFrame"
 msgstr ""
@@ -83,13 +83,13 @@ msgid "Add category"
 msgstr "Categorie toevoegen"
 
 msgid "All"
-msgstr "Alle"
+msgstr "Alles"
 
 msgid "All Partitions"
 msgstr "Alle partities"
 
 msgid "All files extracted."
-msgstr ""
+msgstr "ALle bestanden uitgepakt."
 
 msgid "All images downloaded successfully."
 msgstr "Alle plaatjes succesvol gedownload."
@@ -119,10 +119,10 @@ msgid "Are you sure you want to delete this category?"
 msgstr "Weet je zeker dat je deze categorie wilt verwijderen?"
 
 msgid "Are you sure you want to import game categories from GameTDB?"
-msgstr ""
+msgstr "Weet je zeker dat je spel categorieën wilt importeren van GameTBD?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
-msgstr "Weet je zeker dat je USB Loader GX wilt vergrendelen"
+msgstr "Weet je zeker dat je USB Loader GX wilt vergrendelen?"
 
 msgid "Are you sure you want to reset?"
 msgstr "Wet je zeker dat je wilt resetten?"
@@ -140,7 +140,7 @@ msgid "Author(s):"
 msgstr "Auteur(s):"
 
 msgid "Auto"
-msgstr ""
+msgstr "Automatisch"
 
 msgid "AutoInit Network"
 msgstr "Netwerk Auto init."
@@ -322,7 +322,7 @@ msgid "Coding:"
 msgstr "Codering:"
 
 msgid "Connection to server timed out."
-msgstr "Connectie naar de server verlopen"
+msgstr "Verbinding met de server duurt te lang."
 
 msgid "Console"
 msgstr ""
@@ -352,7 +352,7 @@ msgid "Continue to install game?"
 msgstr "Installatie spel voortzetten?"
 
 msgid "Continue?"
-msgstr ""
+msgstr "Doorgaan?"
 
 msgid "Controllevel"
 msgstr "Controle niveau"
@@ -371,10 +371,10 @@ msgid "Could not create path: %s"
 msgstr "Kan pad niet maken: %s"
 
 msgid "Could not extract files for:"
-msgstr ""
+msgstr "Kan bestanden niet uitpakken voor:"
 
 msgid "Could not find info for this game in the wiitdb.xml."
-msgstr "Kan geen info over dit spel vinden in de wiitdb.xml"
+msgstr "Kan geen info over dit spel vinden in de wiitdb.xml."
 
 msgid "Could not initialize DIP module!"
 msgstr "Kan DIP module niet initialiseren!"
@@ -395,7 +395,7 @@ msgid "Could not save."
 msgstr "Kan niet opslaan."
 
 msgid "Could not write file."
-msgstr ""
+msgstr "Kan niet naar bestand schrijven."
 
 msgid "Could not write to:"
 msgstr "Kon niet schrijven naar:"
@@ -422,7 +422,7 @@ msgid "DOL Path"
 msgstr "Locatie DOL"
 
 msgid "Debugger Paused Start"
-msgstr ""
+msgstr "Debugger gepauzeerd starten"
 
 msgid "Dec"
 msgstr ""
@@ -509,10 +509,10 @@ msgid "Do you want to download this theme?"
 msgstr "Wil je dit thema downloaden?"
 
 msgid "Do you want to extract all the save games?"
-msgstr ""
+msgstr "Wil je alle opgeslagen spellen uitpakken?"
 
 msgid "Do you want to extract the save game?"
-msgstr ""
+msgstr "Wil je dit opgeslagen spel uitpakken?"
 
 msgid "Do you want to format:"
 msgstr "Wil je formatteren:"
@@ -521,7 +521,7 @@ msgid "Do you want to load the default theme?"
 msgstr "Wil je het standaard thema laden?"
 
 msgid "Do you want to re-init network?"
-msgstr ""
+msgstr "Wil je het netwerk herinitialiseren?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Wil je de vrije ruimte informatie sector synchroniseren op alle FAT32 partities?"
@@ -566,7 +566,7 @@ msgid "Downloading pagelist:"
 msgstr "Paginalijst downloaden:"
 
 msgid "Dump NAND to EmuNand"
-msgstr ""
+msgstr "NAND Dumpen naar EmuNand"
 
 msgid "Dutch"
 msgstr "Nederlands"
@@ -590,7 +590,7 @@ msgid "English"
 msgstr "Engels"
 
 msgid "Enter Path"
-msgstr ""
+msgstr "Voer pad in"
 
 msgid "Error"
 msgstr "Fout"
@@ -634,10 +634,10 @@ msgid "Error:"
 msgstr "Fout:"
 
 msgid "Errors occured."
-msgstr ""
+msgstr "Fouten opgetreden."
 
 msgid "Everything"
-msgstr ""
+msgstr "ALles"
 
 msgid "Exit"
 msgstr "Stoppen"
@@ -646,22 +646,22 @@ msgid "Exit to where?"
 msgstr "Stoppen naar?"
 
 msgid "Export All Saves to EmuNand"
-msgstr ""
+msgstr "Alle Saves exporteren naar EmuNand"
 
 msgid "Extract Save to EmuNand"
-msgstr ""
+msgstr "Save Exporteren naar EmuNand"
 
 msgid "Extracting file:"
-msgstr ""
+msgstr "Uitpakken:"
 
 msgid "Extracting files..."
 msgstr "Bestanden uitpakken..."
 
 msgid "Extracting files:"
-msgstr ""
+msgstr "Uitpakken:"
 
 msgid "Extracting nand files:"
-msgstr ""
+msgstr "NAND Uitpakken:"
 
 msgid "Failed"
 msgstr "Mislukt"
@@ -670,7 +670,7 @@ msgid "Failed formating"
 msgstr "Formatteren mislukt"
 
 msgid "Failed to extract all files. Savegame might not exist."
-msgstr ""
+msgstr "Uitpakken mislukt. Savegame bestaat wellicht niet."
 
 msgid "Failed to extract."
 msgstr "Uitpakken mislukt."
@@ -709,7 +709,7 @@ msgid "File read/write error."
 msgstr ""
 
 msgid "Files extracted successfully."
-msgstr ""
+msgstr "Bestanden succesvol uitgepakt."
 
 #, c-format
 msgid "Filesize is %i Byte."
@@ -764,7 +764,7 @@ msgid "French"
 msgstr "Frans"
 
 msgid "Full"
-msgstr ""
+msgstr "Volledig"
 
 msgid "Full Cover Path"
 msgstr "Volledige hoesjes pad"
@@ -839,7 +839,7 @@ msgid "Game/Install Partition"
 msgstr "Spel/Installatie partitie"
 
 msgid "GameTDB Path"
-msgstr ""
+msgstr "Map naar GameTBD"
 
 msgid "Gamename [GAMEID]"
 msgstr "Spelnaam [SPELID]"
@@ -934,7 +934,7 @@ msgid "Install a game"
 msgstr "Spel installeren"
 
 msgid "Install finished"
-msgstr ""
+msgstr "Installatie voltooid"
 
 msgid "Installing content"
 msgstr ""
@@ -982,7 +982,7 @@ msgid "Korean"
 msgstr "Koreaans"
 
 msgid "Language Files"
-msgstr ""
+msgstr "Taalbestanden"
 
 msgid "Language change:"
 msgstr "Taal wijzigen:"
@@ -1016,7 +1016,7 @@ msgid "Load file from: %s ?"
 msgstr "Laad bestand van %s ?"
 
 msgid "Load this DOL as alternate DOL?"
-msgstr "Deze DOL als alt DOL gebruiken?"
+msgstr "Deze DOL als alternatieve DOL gebruiken?"
 
 msgid "Loader Mode"
 msgstr ""
@@ -1061,7 +1061,7 @@ msgid "May"
 msgstr "Mei"
 
 msgid "Messageboard Update"
-msgstr ""
+msgstr "Prikbord Update"
 
 msgid "Motion+ Video"
 msgstr ""
@@ -1085,16 +1085,16 @@ msgid "Nand Emu Channel Path"
 msgstr ""
 
 msgid "Nand Emu Path"
-msgstr ""
+msgstr "NAND Emu Pad"
 
 msgid "Nand Emulation"
-msgstr ""
+msgstr "NAND Emulatie"
 
 msgid "Nand Emulation is only available on D2X cIOS!"
-msgstr ""
+msgstr "NAND Emulatie is alleen mogelijk met D2X cIOS!"
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
-msgstr ""
+msgstr "NAND Emulatie werkt alleen met FAT/FAT32 partities!"
 
 msgid "Nand Saves Emulation"
 msgstr ""
@@ -1136,7 +1136,7 @@ msgid "No data could be read."
 msgstr "Data kon niet gelezen worden."
 
 msgid "No disc inserted."
-msgstr ""
+msgstr "Geen schijf ingevoerd."
 
 msgid "No favorites selected."
 msgstr "Geen favorieten geselecteerd."
@@ -1235,7 +1235,7 @@ msgid "Parental Control"
 msgstr "Ouderlijk toezicht"
 
 msgid "Partial"
-msgstr ""
+msgstr "Gedeeltelijk"
 
 msgid "Partition"
 msgstr "Partitie"
@@ -1286,7 +1286,7 @@ msgid "Prev"
 msgstr "Vorige"
 
 msgid "Process finished."
-msgstr ""
+msgstr "Proces afgerond."
 
 msgid "Prompts Buttons"
 msgstr "Weergave knoppen"
@@ -1316,10 +1316,10 @@ msgid "Reload SD"
 msgstr "SD herladen"
 
 msgid "Reloading game list now, please wait..."
-msgstr ""
+msgstr "Spellijst wordt herladen, een moment..."
 
 msgid "Remember Unlock"
-msgstr ""
+msgstr "Unlock onthouden"
 
 msgid "Remove update"
 msgstr "Verwijder update"
@@ -1382,7 +1382,7 @@ msgid "Saved"
 msgstr "Opgeslagen"
 
 msgid "Savegame might not exist for this game."
-msgstr ""
+msgstr "Savegame bestaat wellicht niet voor dit spel."
 
 msgid "Screensaver"
 msgstr "Schermbeveiliging"
@@ -1436,7 +1436,7 @@ msgid "Shutdown Wii"
 msgstr "Wii uitzetten"
 
 msgid "Skip Errors"
-msgstr ""
+msgstr "Fouten overslaan"
 
 msgid "Sneek Video Patch"
 msgstr ""
@@ -1484,7 +1484,7 @@ msgid "Success"
 msgstr "Succes"
 
 msgid "Success."
-msgstr ""
+msgstr "Succes."
 
 msgid "Success:"
 msgstr "Succes:"
@@ -1493,10 +1493,10 @@ msgid "Successfully Saved"
 msgstr "Met succes opgeslagen!"
 
 msgid "Successfully Updated"
-msgstr "Met succes geüpdate!"
+msgstr "Met succes ge-update!"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr "Met succes geüpdate met dank aan www.techjawa.com"
+msgstr "Met succes ge-update met dank aan www.techjawa.com"
 
 msgid "Successfully deleted:"
 msgstr "Met succes verwijderd:"
@@ -1532,13 +1532,13 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "De opgegeven map bestaat niet. Wil je deze aanmaken?"
 
 msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
-msgstr ""
+msgstr "De bestanden worden geëxporteerd naar uw EmuNand pad. Alle bestaande bestanden worden overschreven!"
 
 msgid "The save game will be extracted to your emu nand path."
-msgstr ""
+msgstr "De Savegame wordt geëxporteerd naar uw EmuNand Pad."
 
 msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
-msgstr ""
+msgstr "De Savegame wordt geëxporteerd naar uw EmuNand Pad. Alle bestaande bestanden worden overschreven!"
 
 msgid "The wad file was installed"
 msgstr "Het wad bestand is geïnstalleerd."
@@ -1563,7 +1563,7 @@ msgid "Themes by www.spiffy360.com"
 msgstr "Thema's door www.spiffy360.com"
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
-msgstr "Deze IOS is de BootMii IOS. Als je zeker weet dat dit niet BootMii is en daar iets anders hebt geïnstalleerd kun je deze waarschuwing negeren."
+msgstr "Deze IOS is de BootMii IOS. Als je zeker weet dat dit niet BootMii is en daar iets anders is geïnstalleerd kun je deze waarschuwing negeren."
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
 msgstr "Deze IOS is niet gevonden in de titel lijst. Als je zeker weet dat deze geïnstalleerd is kun je deze waarschuwing negeren."
@@ -1575,7 +1575,7 @@ msgid "Title Launcher"
 msgstr "Titel starter"
 
 msgid "Titles from GameTDB"
-msgstr ""
+msgstr "Titels van GameTDB"
 
 msgid "Tooltips"
 msgstr "Knopinfo"
@@ -1650,7 +1650,7 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Geuploade ZIP is geïnstalleerd in je homebrew locatie."
 
 msgid "Use System Font"
-msgstr ""
+msgstr "Gebruik Systeem lettertype"
 
 msgid "Use global"
 msgstr "Gebruik globaal"
@@ -1702,7 +1702,7 @@ msgid "What should be deleted for this game title:"
 msgstr "Wat er verwijderd moet worden voor deze spel titel:"
 
 msgid "What to extract from NAND?"
-msgstr ""
+msgstr "Wat uitpakken van NAND?"
 
 msgid "WiFi Features"
 msgstr "WiFi functies"
@@ -1784,7 +1784,7 @@ msgid "for FAT/NTFS support"
 msgstr "voor FAT/NTFS ondersteuning"
 
 msgid "for GameTDB and hosting covers / disc images"
-msgstr ""
+msgstr "voor GameTDB en het hosten van covers en Disc plaatjes"
 
 msgid "for Ocarina"
 msgstr "voor Ocarina"
@@ -1888,23 +1888,23 @@ msgstr "seconden over"
 #~ msgid "Installing wad"
 #~ msgstr "Wad installeren"
 
+#~ msgid "New Disc Detected"
+#~ msgstr "Nieuwe disk gevonden"
+
 #~ msgid "Reading WAD data... Ok!"
 #~ msgstr "WAD data lezen... Ok!"
+
+#~ msgid "The game installation is disabled under this IOS because of instability in usb write."
+#~ msgstr "Het installeren van spellen is uitgeschakeld met deze IOS door onstabiliteit met USB schrijven"
+
+#~ msgid "USB Device not found"
+#~ msgstr "USB Apparaat niet gevonden"
 
 #~ msgid "Uninstalling wad"
 #~ msgstr "Wad verwijderen"
 
-#~ msgid "The game installation is disabled under this IOS because of instability in usb write."
-#~ msgstr "Het installeren van spellen is uitgeschakeld met deze IOS door onstabiliteit met usb schrijven"
-
 #~ msgid "You are currently using IOS"
 #~ msgstr "Je gebruikt op dit moment IOS"
-
-#~ msgid "New Disc Detected"
-#~ msgstr "Nieuwe disk gevonden"
-
-#~ msgid "USB Device not found"
-#~ msgstr "USB Apparaat niet gevonden"
 
 #~ msgid "You need to select or format a partition"
 #~ msgstr "Je moet een partitie selecteren of formatteren"
