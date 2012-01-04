@@ -251,8 +251,19 @@ int FeatureSettingsMenu::GetMenuInternal()
 
 			for(int i = 0; i < gameList.size(); ++i)
 			{
-				snprintf(nandPath, sizeof(nandPath), "/title/00010000/%02x%02x%02x%02x", gameList[i]->id[0], gameList[i]->id[1], gameList[i]->id[2], gameList[i]->id[3]);
-				snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuPath, nandPath);
+				if(gameList[i]->type != TYPE_GAME_WII && gameList[i]->type != TYPE_GAME_NANDCHAN)
+					continue;
+				
+				if(gameList[i]->tid != 0) //! Channels
+				{
+					snprintf(nandPath, sizeof(nandPath), "/title/%08x/%08x/data", (u32) (gameList[i]->tid  >> 32), (u32) gameList[i]->tid );
+					snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuChanPath, nandPath);
+				}
+				else //! Wii games
+				{
+					snprintf(nandPath, sizeof(nandPath), "/title/00010000/%02x%02x%02x%02x", gameList[i]->id[0], gameList[i]->id[1], gameList[i]->id[2], gameList[i]->id[3]);
+					snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuPath, nandPath);
+				}
 
 				ShowProgress(tr("Extracting files:"), GameTitles.GetTitle(gameList[i]), 0, 0, -1, true, false);
 

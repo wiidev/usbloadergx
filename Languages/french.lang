@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# French.lang - r1144
+# French.lang - r1146
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -928,7 +928,7 @@ msgid "Install Partitions"
 msgstr "Installation"
 
 msgid "Install WAD to EmuNand"
-msgstr "Installer WAD sur EmuNand"
+msgstr "Installer WAD sur ÉmuNand"
 
 msgid "Install a game"
 msgstr "Installer un jeu"
@@ -937,13 +937,13 @@ msgid "Install finished"
 msgstr "Installation terminée"
 
 msgid "Installing content"
-msgstr "Installation contenu"
+msgstr "Installation du contenu"
 
 msgid "Installing game:"
 msgstr "Installation du jeu:"
 
 msgid "Installing title..."
-msgstr "Installation titre..."
+msgstr "Installation du titre..."
 
 msgid "Invalid wad file."
 msgstr "Fichier wad non valide."

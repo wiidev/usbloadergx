@@ -143,8 +143,16 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 		{
 			char filePath[512];
 			char nandPath[512];
-			snprintf(nandPath, sizeof(nandPath), "/title/00010000/%02x%02x%02x%02x", DiscHeader->id[0], DiscHeader->id[1], DiscHeader->id[2], DiscHeader->id[3]);
-			snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuPath, nandPath);
+			if(DiscHeader->tid != 0) //! Channels
+			{
+				snprintf(nandPath, sizeof(nandPath), "/title/%08x/%08x/data", (u32) (DiscHeader->tid >> 32), (u32) DiscHeader->tid);
+				snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuChanPath, nandPath);
+			}
+			else //! Wii games
+			{
+				snprintf(nandPath, sizeof(nandPath), "/title/00010000/%02x%02x%02x%02x", DiscHeader->id[0], DiscHeader->id[1], DiscHeader->id[2], DiscHeader->id[3]);
+				snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuPath, nandPath);
+			}
 
 			ProgressCancelEnable(true);
 			StartProgress(tr("Extracting file:"), 0, 0, true, false);

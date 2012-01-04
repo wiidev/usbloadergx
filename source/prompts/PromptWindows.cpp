@@ -1310,7 +1310,7 @@ int CodeDownload(const char *id)
 		snprintf(txtpath, sizeof(txtpath), "%s%s.txt", Settings.TxtCheatcodespath, id);
 
 		char codeurl[250];
-		snprintf(codeurl, sizeof(codeurl), "http://geckocodes.org/codes/R/%s.txt", id);
+		snprintf(codeurl, sizeof(codeurl), "http://geckocodes.org/txt.php?txt=%s", id);
 
 		struct block file = downloadfile(codeurl);
 
