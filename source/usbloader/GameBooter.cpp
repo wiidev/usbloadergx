@@ -332,12 +332,12 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 		//! shutdown now and avoid later crashs with free if memory gets overwritten by channel
 		ShutDownDevices(usbport);
 		gprintf("\tChannel Boot\n");
+		// Load dol
+		AppEntrypoint = Channels::LoadChannel(gameHeader.tid);
 		/* Setup low memory */
 		Disc_SetLowMem();
 		/* Setup video mode */
 		Disc_SelectVMode(videoChoice);
-		// Load dol
-		AppEntrypoint = Channels::LoadChannel(gameHeader.tid);
 	}
 
 	//! No entrypoint found...back to HBC/SystemMenu

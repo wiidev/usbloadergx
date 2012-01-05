@@ -53,9 +53,6 @@ void Disc_SetLowMem(void)
 
 	/* Copy disc ID */
 	memcpy((void *) Online_Check, (void *) Disc_ID, 4);
-
-	/* Flush cache */
-	DCFlushRange((void *) Disc_ID, 0x3F00);
 }
 
 void Disc_SelectVMode(u8 videoselected)

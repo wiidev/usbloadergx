@@ -44,12 +44,12 @@ u8 fi[24], ri[24];
 u32 fkey[120];
 u32 rkey[120];
 
-static u32 pack(u8 *b)
+static inline u32 pack(u8 *b)
 { /* pack bytes into a 32-bit Word */
 	return ((u32 ) b[3] << 24) | ((u32 ) b[2] << 16) | ((u32 ) b[1] << 8) | (u32 ) b[0];
 }
 
-static void unpack(u32 a, u8 *b)
+static inline void unpack(u32 a, u8 *b)
 { /* unpack bytes from a word */
 	b[0] = (u8 ) a;
 	b[1] = (u8 ) (a >> 8);
@@ -57,7 +57,7 @@ static void unpack(u32 a, u8 *b)
 	b[3] = (u8 ) (a >> 24);
 }
 
-static u8 xtime(u8 a)
+static inline u8 xtime(u8 a)
 {
 	u8 b;
 	if (a & 0x80)
@@ -68,14 +68,14 @@ static u8 xtime(u8 a)
 	return a;
 }
 
-static u8 bmul(u8 x, u8 y)
+static inline u8 bmul(u8 x, u8 y)
 { /* x.y= AntiLog(Log(x) + Log(y)) */
 	if (x && y)
 		return ptab[(ltab[x] + ltab[y]) % 255];
 	else return 0;
 }
 
-static u32 SubByte(u32 a)
+static inline u32 SubByte(u32 a)
 {
 	u8 b[4];
 	unpack(a, b);
@@ -86,7 +86,7 @@ static u32 SubByte(u32 a)
 	return pack(b);
 }
 
-static u8 product(u32 x, u32 y)
+static inline u8 product(u32 x, u32 y)
 { /* dot product of two 4-byte arrays */
 	u8 xb[4], yb[4];
 	unpack(x, xb);
@@ -94,7 +94,7 @@ static u8 product(u32 x, u32 y)
 	return bmul(xb[0], yb[0]) ^ bmul(xb[1], yb[1]) ^ bmul(xb[2], yb[2]) ^ bmul(xb[3], yb[3]);
 }
 
-static u32 InvMixCol(u32 x)
+static inline u32 InvMixCol(u32 x)
 { /* matrix Multiplication */
 	u32 y, m;
 	u8 b[4];
@@ -111,7 +111,7 @@ static u32 InvMixCol(u32 x)
 	return y;
 }
 
-u8 ByteSub(u8 x)
+static inline u8 ByteSub(u8 x)
 {
 	u8 y = ptab[255 - ltab[x]]; /* multiplicative inverse */
 	x = y;
@@ -127,7 +127,7 @@ u8 ByteSub(u8 x)
 	return y;
 }
 
-void gentables(void)
+static inline void gentables(void)
 { /* generate tables */
 	int i;
 	u8 y, b[4];
@@ -181,7 +181,7 @@ void gentables(void)
 	}
 }
 
-void gkey(int nb, int nk, char *key)
+static inline void gkey(int nb, int nk, char *key)
 { /* blocksize=32*nb bits. Key=32*nk bits */
 	/* currently nb,bk = 4, 6 or 8		  */
 	/* key comes as 4*Nk bytes			  */

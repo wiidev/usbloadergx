@@ -447,10 +447,10 @@ s32 Wbfs_Fat::GetHeadersCount()
 		// if we have titles.txt entry use that
 		title = GameTitles.GetTitle(id);
 		// if no titles.txt get title from dir or file name
-		if ((!title || strlen(title) == 0) && *fname_title)
+		if ((!title || *title == 0) && *fname_title != 0)
 			title = fname_title;
 
-		if (title)
+		if (title && *title != 0)
 		{
 			memset(&tmpHdr, 0, sizeof(tmpHdr));
 			memcpy(tmpHdr.id, id, 6);
@@ -459,6 +459,7 @@ s32 Wbfs_Fat::GetHeadersCount()
 			goto add_hdr;
 		}
 
+		// Check for existing wbfs/iso/ciso file in the directory
 		if(is_dir)
 		{
 			if (stat(fpath, &st) != 0)
@@ -474,8 +475,12 @@ s32 Wbfs_Fat::GetHeadersCount()
 			}
 		}
 
+		// Sanity check
+		if(!fileext)
+			continue;
+
 		// else read it from file directly
-		if (strcasecmp(strrchr(fpath, '.'), ".wbfs") == 0)
+		if (strcasecmp(fileext, ".wbfs") == 0)
 		{
 			// wbfs file directly
 			FILE *fp = fopen(fpath, "rb");
@@ -505,7 +510,7 @@ s32 Wbfs_Fat::GetHeadersCount()
 				goto add_hdr;
 
 		}
-		else if (strcasecmp(strrchr(fpath, '.'), ".iso") == 0)
+		else if (strcasecmp(fileext, ".iso") == 0)
 		{
 			// iso file
 			FILE *fp = fopen(fpath, "rb");
@@ -521,7 +526,7 @@ s32 Wbfs_Fat::GetHeadersCount()
 				}
 			}
 		}
-		else if (strcasecmp(strrchr(fpath, '.'), ".ciso") == 0)
+		else if (strcasecmp(fileext, ".ciso") == 0)
 		{
 			// ciso file
 			FILE *fp = fopen(fpath, "rb");

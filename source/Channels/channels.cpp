@@ -293,6 +293,9 @@ u32 Channels::LoadChannel(const u64 &chantitle)
 
 	if(dolfile->bss_start)
 	{
+		if(!(dolfile->bss_start & 0x80000000))
+			dolfile->bss_start |= 0x80000000;
+
 		ICInvalidateRange((void *)dolfile->bss_start, dolfile->bss_size);
 		memset((void *)dolfile->bss_start, 0, dolfile->bss_size);
 		DCFlushRange((void *)dolfile->bss_start, dolfile->bss_size);
@@ -303,7 +306,8 @@ u32 Channels::LoadChannel(const u64 &chantitle)
 	{
 		if (!dolfile->section_size[i]) continue;
 		if (dolfile->section_pos[i] < sizeof(dolheader)) continue;
-		if(!(dolfile->section_start[i] & 0x80000000)) dolfile->section_start[i] |= 0x80000000;
+		if(!(dolfile->section_start[i] & 0x80000000))
+			dolfile->section_start[i] |= 0x80000000;
 
 		u8 *dolChunkOffset = (u8 *)dolfile->section_start[i];
 		u32 dolChunkSize = dolfile->section_size[i];
@@ -317,17 +321,18 @@ u32 Channels::LoadChannel(const u64 &chantitle)
 
 	u32 chanEntryPoint = dolfile->entry_point;
 
+	free(dolfile);
+
 	// IOS Version Check
 	*(vu32*)0x80003140	= ((ios << 16)) | 0xFFFF;
 	*(vu32*)0x80003188	= ((ios << 16)) | 0xFFFF;
-	DCFlushRange((void *)0x80003140, 32);
-	DCFlushRange((void *)0x80003188, 32);
+	DCFlushRange((void *)0x80003140, 4);
+	DCFlushRange((void *)0x80003188, 4);
 
 	// Game ID Online Check
+	memset((void *)0x80000000, 0, 6);
 	*(vu32 *)0x80000000 = TITLE_LOWER(chantitle);
-	*(vu32 *)0x80003180 = TITLE_LOWER(chantitle);
-	DCFlushRange((void *)0x80000000, 32);
-	DCFlushRange((void *)0x80003180, 32);
+	DCFlushRange((void *)0x80000000, 6);
 
 	ISFS_Deinitialize();
 
