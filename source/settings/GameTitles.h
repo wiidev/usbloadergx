@@ -12,6 +12,7 @@ typedef struct _GameTitle
 	std::string Title;
 	int ParentalRating;
 	int PlayersCount;
+	char FromWiiTDB;
 
 } GameTitle;
 
@@ -35,14 +36,15 @@ class CGameTitles
 		//! Get possible number of players for this game
 		int GetPlayersCount(const char * id) const;
 		//! Load Game Titles from GameTDB
-		void LoadTitlesFromGameTDB(const char * path, bool forceCacheReload = false, bool removeUnused = true);
+		void LoadTitlesFromGameTDB(const char * path, bool removeUnused = true);
 		//! Set default game titles
 		void SetDefault();
 		//! Free memory and remove all titles - Same as SetDefault()
 		void Clear() { SetDefault(); }
-	protected:
+		//! Cache titles functions
 		u32 ReadCachedTitles(const char * path);
 		void WriteCachedTitles(const char * path);
+	protected:
 		void GetMissingTitles(std::vector<std::string> &MissingTitles, bool removeUnused);
 
 		std::vector<GameTitle> TitleList;

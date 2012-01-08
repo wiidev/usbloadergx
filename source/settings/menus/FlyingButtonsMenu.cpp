@@ -278,7 +278,7 @@ void FlyingButtonsMenu::ShowMenu()
 	//! Free memory if not done yet because new is allocated
 	HideMenu();
 
-	titleTxt = new GuiText(MenuTitle.c_str(), 28, ( GXColor ) {0, 0, 0, 255});
+	titleTxt = new GuiText(MenuTitle.c_str(), 28, thColor("r=0 g=0 b=0 a=255 - settings title text color"));
 	titleTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt->SetPosition(0, 40);
 	titleTxt->SetMaxWidth(310, SCROLL_HORIZONTAL);

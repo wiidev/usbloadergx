@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-03 19:16+0100\n"
+"POT-Creation-Date: 2012-01-08 19:07+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -235,6 +235,9 @@ msgstr "Bloker indlæsning af titler"
 msgid "Block Updates"
 msgstr "Bloker opdateringer"
 
+msgid "Boot Content"
+msgstr ""
+
 msgid "Boot/Standard"
 msgstr ""
 
@@ -289,6 +292,9 @@ msgstr "Kategorier:"
 
 msgid "Change Play Path"
 msgstr "Ændre sti til musik"
+
+msgid "Channel Launcher"
+msgstr ""
 
 msgid "Channels"
 msgstr ""
@@ -1048,6 +1054,9 @@ msgstr "Afspil musik i løkke"
 msgid "Loop Sound"
 msgstr "Afspil lyd i løkke"
 
+msgid "Main DOL"
+msgstr ""
+
 msgid "Main tester:"
 msgstr "Hoved tester:"
 
@@ -1077,6 +1086,9 @@ msgstr "Musik i løkke"
 
 msgid "Music Volume"
 msgstr "Lydstyrke"
+
+msgid "Nand Chan. Emulation"
+msgstr ""
 
 msgid "Nand Channels"
 msgstr ""

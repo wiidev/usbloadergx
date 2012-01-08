@@ -111,6 +111,12 @@ static const char * HooktypeText[] =
 	trNOOP( "AXNextFrame" ),
 };
 
+static const char * ChannelLaunchText[] =
+{
+	trNOOP( "Main DOL" ),
+	trNOOP( "Boot Content" ),
+};
+
 LoaderSettings::LoaderSettings()
 	: SettingsMenu(tr("Loader Settings"), &GuiOptions, MENU_NONE)
 {
@@ -130,9 +136,11 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
 	Options->SetName(Idx++, "%s", tr( "Return To" ));
 	Options->SetName(Idx++, "%s", tr( "Nand Saves Emulation" ));
+	Options->SetName(Idx++, "%s", tr( "Nand Chan. Emulation" ));
 	Options->SetName(Idx++, "%s", tr( "Hooktype" ));
 	Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
 	Options->SetName(Idx++, "%s", tr( "Debugger Paused Start" ));
+	Options->SetName(Idx++, "%s", tr( "Channel Launcher" ));
 
 	SetOptionValues();
 
@@ -150,7 +158,7 @@ LoaderSettings::~LoaderSettings()
 		}
 
 		gameList.LoadUnfiltered();
-		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false, false);
+		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false);
 	}
 }
 
@@ -213,6 +221,9 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: Nand Emulation
 	Options->SetValue(Idx++, "%s", tr( NandEmuText[Settings.NandEmuMode] ));
 
+	//! Settings: Nand Chan. Emulation
+	Options->SetValue(Idx++, "%s", tr( NandEmuText[Settings.NandEmuChanMode] ));
+
 	//! Settings: Hooktype
 	Options->SetValue(Idx++, "%s", tr( HooktypeText[Settings.Hooktype] ));
 
@@ -221,6 +232,9 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: Wiird Debugger Pause on Start
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.WiirdDebuggerPause] ));
+
+	//! Settings: Channel Launcher
+	Options->SetValue(Idx++, "%s", tr( ChannelLaunchText[Settings.UseChanLauncher] ));
 }
 
 int LoaderSettings::GetMenuInternal()
@@ -344,6 +358,14 @@ int LoaderSettings::GetMenuInternal()
 		else if (++Settings.NandEmuMode >= 3) Settings.NandEmuMode = 0;
 	}
 
+	//! Settings: Nand Chan. Emulation
+	else if (ret == ++Idx )
+	{
+		if(!IosLoader::IsD2X())
+			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
+		else if (++Settings.NandEmuChanMode >= 3) Settings.NandEmuChanMode = 1;
+	}
+
 	//! Settings: Hooktype
 	else if (ret == ++Idx )
 	{
@@ -360,6 +382,12 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx )
 	{
 		if (++Settings.WiirdDebuggerPause >= MAX_ON_OFF) Settings.WiirdDebuggerPause = 0;
+	}
+
+	//! Settings: Channel Launcher
+	else if (ret == ++Idx )
+	{
+		if (++Settings.UseChanLauncher >= MAX_ON_OFF) Settings.UseChanLauncher = 0;
 	}
 
 	SetOptionValues();

@@ -53,6 +53,9 @@ GameBrowseMenu::GameBrowseMenu()
 	gameCoverImg = NULL;
 	GameIDTxt = NULL;
 	GameRegionTxt = NULL;
+	listBackground = NULL;
+	carouselBackground = NULL;
+	gridBackground = NULL;
 	WDVD_GetCoverStatus(&DiscDriveCoverOld);
 	gameList.FilterList();
 	HDDSizeCallback.SetCallback(this, &GameBrowseMenu::UpdateFreeSpace);
@@ -360,6 +363,12 @@ GameBrowseMenu::~GameBrowseMenu()
 
 	RemoveAll();
 
+	//! Reset optional background image
+	bgImg->SetImage(background);
+
+	delete listBackground;
+	delete carouselBackground;
+	delete gridBackground;
 	delete btnInstall;
 	delete btnInstallOver;
 	delete btnSettings;
@@ -658,6 +667,16 @@ void GameBrowseMenu::ReloadBrowser()
 		gameBrowser->SetPosition(thInt("200 - game list layout pos x"), thInt("49 - game list layout pos y"));
 		gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
 		gameBrowser->SetSelectedOption(Settings.SelectedGame);
+
+		//! Setup optional background image
+		const u8 *backgroundImgData = Resources::GetFile("listBackground.png");
+		u32 backgroundImgDataSize = Resources::GetFileSize("listBackground.png");
+		if(backgroundImgData && !listBackground)
+			listBackground = new GuiImageData(backgroundImgData, backgroundImgDataSize);
+		if(listBackground)
+			bgImg->SetImage(listBackground);
+		else
+			bgImg->SetImage(background);
 	}
 	else if (Settings.gameDisplay == GRID_MODE)
 	{
@@ -694,6 +713,16 @@ void GameBrowseMenu::ReloadBrowser()
 		gameBrowser = new GuiGameGrid(thInt("640 - game grid layout width"), thInt("400 - game grid layout height"), Settings.theme_path, Settings.GameListOffset);
 		gameBrowser->SetPosition(thInt("0 - game grid layout pos x"), thInt("20 - game grid layout pos y"));
 		gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
+
+		//! Setup optional background image
+		const u8 *backgroundImgData = Resources::GetFile("gridBackground.png");
+		u32 backgroundImgDataSize = Resources::GetFileSize("gridBackground.png");
+		if(backgroundImgData && !gridBackground)
+			gridBackground = new GuiImageData(backgroundImgData, backgroundImgDataSize);
+		if(gridBackground)
+			bgImg->SetImage(gridBackground);
+		else
+			bgImg->SetImage(background);
 	}
 	else if (Settings.gameDisplay == CAROUSEL_MODE)
 	{
@@ -730,6 +759,16 @@ void GameBrowseMenu::ReloadBrowser()
 		gameBrowser = new GuiGameCarousel(thInt("640 - game carousel layout width"), thInt("400 - game carousel layout height"), Settings.theme_path, Settings.GameListOffset);
 		gameBrowser->SetPosition(thInt("0 - game carousel layout pos x"), thInt("-20 - game carousel layout pos y"));
 		gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
+
+		//! Setup optional background image
+		const u8 *backgroundImgData = Resources::GetFile("carouselBackground.png");
+		u32 backgroundImgDataSize = Resources::GetFileSize("carouselBackground.png");
+		if(backgroundImgData && !carouselBackground)
+			carouselBackground = new GuiImageData(backgroundImgData, backgroundImgDataSize);
+		if(carouselBackground)
+			bgImg->SetImage(carouselBackground);
+		else
+			bgImg->SetImage(background);
 	}
 
 
@@ -854,7 +893,7 @@ int GameBrowseMenu::MainLoop()
 				else
 				{
 					gameList.ReadGameList();
-					GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false, false);
+					GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false);
 					if(Settings.ShowFreeSpace)
 					{
 						ThreadedTask::Instance()->AddCallback(&HDDSizeCallback);
@@ -1158,7 +1197,7 @@ int GameBrowseMenu::MainLoop()
 			}
 
 			wString oldFilter(gameList.GetCurrentFilter());
-			GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false, false);
+			GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false);
 			gameList.FilterList(oldFilter.c_str());
 			ReloadBrowser();
 		}

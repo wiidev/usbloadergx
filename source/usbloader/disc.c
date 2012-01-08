@@ -61,19 +61,14 @@ void Disc_SelectVMode(u8 videoselected)
 
 	/* Get video mode configuration */
 	bool progressive = (CONF_GetProgressiveScan() > 0) && VIDEO_HaveComponentCable();
+	bool PAL60 = CONF_GetEuRGB60() > 0;
 	u32 tvmode = CONF_GetVideo();
 
 	/* Select video mode register */
 	switch (tvmode)
 	{
 		case CONF_VIDEO_PAL:
-			if (CONF_GetEuRGB60() > 0)
-			{
-				vmode_reg = VI_EURGB60;
-				vmode = progressive ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
-			}
-			else
-				vmode_reg = VI_PAL;
+			vmode_reg = PAL60 ? VI_EURGB60 : VI_PAL;
 			break;
 
 		case CONF_VIDEO_MPAL:
@@ -100,41 +95,42 @@ void Disc_SelectVMode(u8 videoselected)
 				case 'Y':
 					if (tvmode != CONF_VIDEO_PAL)
 					{
-						vmode_reg = VI_PAL;
-						vmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
+						vmode_reg = PAL60 ? VI_EURGB60 : VI_PAL;
+						vmode = progressive ? &TVNtsc480Prog : (PAL60 ? &TVEurgb60Hz480IntDf : &TVPal528IntDf);
 					}
 					break;
 				// NTSC
 				case 'E':
 				case 'J':
-				default:
 					if (tvmode != CONF_VIDEO_NTSC)
 					{
 						vmode_reg = VI_NTSC;
 						vmode = progressive ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
 					}
 					break;
+				default:
+					break;
 			}
 			break;
 		case VIDEO_MODE_PAL50: // PAL50
 			vmode =  &TVPal528IntDf;
-			vmode_reg = vmode->viTVMode >> 2;
+			vmode_reg = VI_PAL;
 			break;
 		case VIDEO_MODE_PAL60: // PAL60
 			vmode = progressive ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
-			vmode_reg = progressive ? TVEurgb60Hz480Prog.viTVMode >> 2 : vmode->viTVMode >> 2;
+			vmode_reg = VI_EURGB60;
 			break;
 		case VIDEO_MODE_NTSC: // NTSC
 			vmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
-			vmode_reg = vmode->viTVMode >> 2;
+			vmode_reg = VI_NTSC;
 			break;
 		case VIDEO_MODE_PAL480P:
 			vmode = &TVNtsc480Prog;
-			vmode_reg = TVEurgb60Hz480Prog.viTVMode >> 2;
+			vmode_reg = VI_EURGB60;
 			break;
 		case VIDEO_MODE_NTSC480P:
 			vmode = &TVNtsc480Prog;
-			vmode_reg = vmode->viTVMode >> 2;
+			vmode_reg = VI_NTSC;
 			break;
 		case VIDEO_MODE_SYSDEFAULT: // AUTO PATCH TO SYSTEM
 			break;
@@ -145,12 +141,11 @@ void __Disc_SetVMode(void)
 {
 	/* Set video mode register */
 	*Video_Mode = vmode_reg;
+	DCFlushRange((void *) Video_Mode, 4);
 
 	/* Set video mode */
 	if (vmode != NULL)
-	{
 		VIDEO_Configure(vmode);
-	}
 
 	/* Setup video  */
 	VIDEO_SetBlack(TRUE);
@@ -289,7 +284,7 @@ s32 Disc_JumpToEntrypoint(s32 hooktype, u32 dolparameter)
 	{
  		if(hooktype)
  		{
-			__asm__(
+			asm volatile (
 				"lis %r3, returnpoint@h\n"
 				"ori %r3, %r3, returnpoint@l\n"
 				"mtlr %r3\n"
@@ -311,7 +306,7 @@ s32 Disc_JumpToEntrypoint(s32 hooktype, u32 dolparameter)
  		}
  		else
  		{
- 			__asm__(
+ 			asm volatile (
  				"isync\n"
 				"lis %r3, AppEntrypoint@h\n"
 				"ori %r3, %r3, AppEntrypoint@l\n"
@@ -327,7 +322,7 @@ s32 Disc_JumpToEntrypoint(s32 hooktype, u32 dolparameter)
 	}
  	else if (hooktype)
 	{
-		__asm__(
+		asm volatile (
 				"lis %r3, AppEntrypoint@h\n"
 				"ori %r3, %r3, AppEntrypoint@l\n"
 				"lwz %r3, 0(%r3)\n"
@@ -341,7 +336,7 @@ s32 Disc_JumpToEntrypoint(s32 hooktype, u32 dolparameter)
 	}
 	else
 	{
-		__asm__(
+		asm volatile (
 				"lis %r3, AppEntrypoint@h\n"
 				"ori %r3, %r3, AppEntrypoint@l\n"
 				"lwz %r3, 0(%r3)\n"

@@ -36,6 +36,7 @@ class FeatureSettingsMenu : public SettingsMenu
 		int GetMenuInternal();
 
 		int OldTitlesOverride;
+		int OldCacheTitles;
 
 		OptionList GuiOptions;
 };

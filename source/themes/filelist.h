@@ -38,6 +38,9 @@ extern const u32 arrangeList_png_size;
 extern const u8 arrangeList_gray_png[];
 extern const u32 arrangeList_gray_png_size;
 
+extern const u8 background_png[];
+extern const u32 background_png_size;
+
 extern const u8 balanceboard_png[];
 extern const u32 balanceboard_png_size;
 
@@ -161,6 +164,9 @@ extern const u32 drums_png_size;
 extern const u8 drumsR_png[];
 extern const u32 drumsR_png_size;
 
+extern const u8 dvd_png[];
+extern const u32 dvd_png_size;
+
 extern const u8 dvd_gray_png[];
 extern const u32 dvd_gray_png_size;
 
@@ -200,32 +206,8 @@ extern const u32 exit_top_over_png_size;
 extern const u8 favIcon_png[];
 extern const u32 favIcon_png_size;
 
-extern const u8 background_png[];
-extern const u32 background_png_size;
-
-extern const u8 dvd_png[];
-extern const u32 dvd_png_size;
-
 extern const u8 favIcon_gray_png[];
 extern const u32 favIcon_gray_png_size;
-
-extern const u8 icon_folder_png[];
-extern const u32 icon_folder_png_size;
-
-extern const u8 nintendodsR_png[];
-extern const u32 nintendodsR_png_size;
-
-extern const u8 playersSort_png[];
-extern const u32 playersSort_png_size;
-
-extern const u8 rplayer3_point_png[];
-extern const u32 rplayer3_point_png_size;
-
-extern const u8 sdcard_png[];
-extern const u32 sdcard_png_size;
-
-extern const u8 startgame_arrow_left_png[];
-extern const u32 startgame_arrow_left_png_size;
 
 extern const u8 favorite_png[];
 extern const u32 favorite_png_size;
@@ -256,6 +238,9 @@ extern const u32 guitarR_png_size;
 
 extern const u8 gxlogo_png[];
 extern const u32 gxlogo_png_size;
+
+extern const u8 icon_folder_png[];
+extern const u32 icon_folder_png_size;
 
 extern const u8 keyboard_backspace_over_png[];
 extern const u32 keyboard_backspace_over_png_size;
@@ -313,6 +298,9 @@ extern const u32 new_png_size;
 
 extern const u8 nintendods_png[];
 extern const u32 nintendods_png_size;
+
+extern const u8 nintendodsR_png[];
+extern const u32 nintendodsR_png_size;
 
 extern const u8 nocover_png[];
 extern const u32 nocover_png_size;
@@ -389,6 +377,9 @@ extern const u32 player4_grab_png_size;
 extern const u8 player4_point_png[];
 extern const u32 player4_point_png_size;
 
+extern const u8 playersSort_png[];
+extern const u32 playersSort_png_size;
+
 extern const u8 progressbar_png[];
 extern const u32 progressbar_png_size;
 
@@ -410,6 +401,9 @@ extern const u32 rplayer1_point_png_size;
 extern const u8 rplayer2_point_png[];
 extern const u32 rplayer2_point_png_size;
 
+extern const u8 rplayer3_point_png[];
+extern const u32 rplayer3_point_png_size;
+
 extern const u8 rplayer4_point_png[];
 extern const u32 rplayer4_point_png_size;
 
@@ -430,6 +424,9 @@ extern const u32 scrollbar_arrowup_png_size;
 
 extern const u8 scrollbar_box_png[];
 extern const u32 scrollbar_box_png_size;
+
+extern const u8 sdcard_png[];
+extern const u32 sdcard_png_size;
 
 extern const u8 sdcard_over_png[];
 extern const u32 sdcard_over_png_size;
@@ -454,6 +451,9 @@ extern const u32 settings_title_png_size;
 
 extern const u8 settings_title_over_png[];
 extern const u32 settings_title_over_png_size;
+
+extern const u8 startgame_arrow_left_png[];
+extern const u32 startgame_arrow_left_png_size;
 
 extern const u8 startgame_arrow_right_png[];
 extern const u32 startgame_arrow_right_png_size;
@@ -592,6 +592,7 @@ RecourceFile Resources::RecourceFiles[] =
 	{"arrangeGrid_gray.png", arrangeGrid_gray_png, arrangeGrid_gray_png_size, NULL, 0},
 	{"arrangeList.png", arrangeList_png, arrangeList_png_size, NULL, 0},
 	{"arrangeList_gray.png", arrangeList_gray_png, arrangeList_gray_png_size, NULL, 0},
+	{"background.png", background_png, background_png_size, NULL, 0},
 	{"balanceboard.png", balanceboard_png, balanceboard_png_size, NULL, 0},
 	{"balanceboardR.png", balanceboardR_png, balanceboardR_png_size, NULL, 0},
 	{"battery.png", battery_png, battery_png_size, NULL, 0},
@@ -633,6 +634,7 @@ RecourceFile Resources::RecourceFiles[] =
 	{"dialogue_box_startgame.png", dialogue_box_startgame_png, dialogue_box_startgame_png_size, NULL, 0},
 	{"drums.png", drums_png, drums_png_size, NULL, 0},
 	{"drumsR.png", drumsR_png, drumsR_png_size, NULL, 0},
+	{"dvd.png", dvd_png, dvd_png_size, NULL, 0},
 	{"dvd_gray.png", dvd_gray_png, dvd_gray_png_size, NULL, 0},
 	{"esrb_ao.png", esrb_ao_png, esrb_ao_png_size, NULL, 0},
 	{"esrb_e.png", esrb_e_png, esrb_e_png_size, NULL, 0},
@@ -646,15 +648,7 @@ RecourceFile Resources::RecourceFiles[] =
 	{"exit_top.png", exit_top_png, exit_top_png_size, NULL, 0},
 	{"exit_top_over.png", exit_top_over_png, exit_top_over_png_size, NULL, 0},
 	{"favIcon.png", favIcon_png, favIcon_png_size, NULL, 0},
-	{"background.png", background_png, background_png_size, NULL, 0},
-	{"dvd.png", dvd_png, dvd_png_size, NULL, 0},
 	{"favIcon_gray.png", favIcon_gray_png, favIcon_gray_png_size, NULL, 0},
-	{"icon_folder.png", icon_folder_png, icon_folder_png_size, NULL, 0},
-	{"nintendodsR.png", nintendodsR_png, nintendodsR_png_size, NULL, 0},
-	{"playersSort.png", playersSort_png, playersSort_png_size, NULL, 0},
-	{"rplayer3_point.png", rplayer3_point_png, rplayer3_point_png_size, NULL, 0},
-	{"sdcard.png", sdcard_png, sdcard_png_size, NULL, 0},
-	{"startgame_arrow_left.png", startgame_arrow_left_png, startgame_arrow_left_png_size, NULL, 0},
 	{"favorite.png", favorite_png, favorite_png_size, NULL, 0},
 	{"gameinfo1.png", gameinfo1_png, gameinfo1_png_size, NULL, 0},
 	{"gameinfo1a.png", gameinfo1a_png, gameinfo1a_png_size, NULL, 0},
@@ -665,6 +659,7 @@ RecourceFile Resources::RecourceFiles[] =
 	{"guitar.png", guitar_png, guitar_png_size, NULL, 0},
 	{"guitarR.png", guitarR_png, guitarR_png_size, NULL, 0},
 	{"gxlogo.png", gxlogo_png, gxlogo_png_size, NULL, 0},
+	{"icon_folder.png", icon_folder_png, icon_folder_png_size, NULL, 0},
 	{"keyboard_backspace_over.png", keyboard_backspace_over_png, keyboard_backspace_over_png_size, NULL, 0},
 	{"keyboard_clear_over.png", keyboard_clear_over_png, keyboard_clear_over_png_size, NULL, 0},
 	{"keyboard_key.png", keyboard_key_png, keyboard_key_png_size, NULL, 0},
@@ -684,6 +679,7 @@ RecourceFile Resources::RecourceFiles[] =
 	{"motionplusR.png", motionplusR_png, motionplusR_png_size, NULL, 0},
 	{"new.png", new_png, new_png_size, NULL, 0},
 	{"nintendods.png", nintendods_png, nintendods_png_size, NULL, 0},
+	{"nintendodsR.png", nintendodsR_png, nintendodsR_png_size, NULL, 0},
 	{"nocover.png", nocover_png, nocover_png_size, NULL, 0},
 	{"nocoverFlat.png", nocoverFlat_png, nocoverFlat_png_size, NULL, 0},
 	{"nocoverFull.png", nocoverFull_png, nocoverFull_png_size, NULL, 0},
@@ -709,6 +705,7 @@ RecourceFile Resources::RecourceFiles[] =
 	{"player3_point.png", player3_point_png, player3_point_png_size, NULL, 0},
 	{"player4_grab.png", player4_grab_png, player4_grab_png_size, NULL, 0},
 	{"player4_point.png", player4_point_png, player4_point_png_size, NULL, 0},
+	{"playersSort.png", playersSort_png, playersSort_png_size, NULL, 0},
 	{"progressbar.png", progressbar_png, progressbar_png_size, NULL, 0},
 	{"progressbar_empty.png", progressbar_empty_png, progressbar_empty_png_size, NULL, 0},
 	{"progressbar_outline.png", progressbar_outline_png, progressbar_outline_png_size, NULL, 0},
@@ -716,6 +713,7 @@ RecourceFile Resources::RecourceFiles[] =
 	{"remove.png", remove_png, remove_png_size, NULL, 0},
 	{"rplayer1_point.png", rplayer1_point_png, rplayer1_point_png_size, NULL, 0},
 	{"rplayer2_point.png", rplayer2_point_png, rplayer2_point_png_size, NULL, 0},
+	{"rplayer3_point.png", rplayer3_point_png, rplayer3_point_png_size, NULL, 0},
 	{"rplayer4_point.png", rplayer4_point_png, rplayer4_point_png_size, NULL, 0},
 	{"scrollBarBottom.png", scrollBarBottom_png, scrollBarBottom_png_size, NULL, 0},
 	{"scrollBarTile.png", scrollBarTile_png, scrollBarTile_png_size, NULL, 0},
@@ -723,6 +721,7 @@ RecourceFile Resources::RecourceFiles[] =
 	{"scrollbar_arrowdown.png", scrollbar_arrowdown_png, scrollbar_arrowdown_png_size, NULL, 0},
 	{"scrollbar_arrowup.png", scrollbar_arrowup_png, scrollbar_arrowup_png_size, NULL, 0},
 	{"scrollbar_box.png", scrollbar_box_png, scrollbar_box_png_size, NULL, 0},
+	{"sdcard.png", sdcard_png, sdcard_png_size, NULL, 0},
 	{"sdcard_over.png", sdcard_over_png, sdcard_over_png_size, NULL, 0},
 	{"searchIcon.png", searchIcon_png, searchIcon_png_size, NULL, 0},
 	{"searchIcon_gray.png", searchIcon_gray_png, searchIcon_gray_png_size, NULL, 0},
@@ -731,6 +730,7 @@ RecourceFile Resources::RecourceFiles[] =
 	{"settings_button_over.png", settings_button_over_png, settings_button_over_png_size, NULL, 0},
 	{"settings_title.png", settings_title_png, settings_title_png_size, NULL, 0},
 	{"settings_title_over.png", settings_title_over_png, settings_title_over_png_size, NULL, 0},
+	{"startgame_arrow_left.png", startgame_arrow_left_png, startgame_arrow_left_png_size, NULL, 0},
 	{"startgame_arrow_right.png", startgame_arrow_right_png, startgame_arrow_right_png_size, NULL, 0},
 	{"theme_box.png", theme_box_png, theme_box_png_size, NULL, 0},
 	{"theme_dialogue_box.png", theme_dialogue_box_png, theme_dialogue_box_png_size, NULL, 0},
@@ -773,6 +773,9 @@ RecourceFile Resources::RecourceFiles[] =
 	{"success.ogg", success_ogg, success_ogg_size, NULL, 0},
 	{"clock.ttf", clock_ttf, clock_ttf_size, NULL, 0},
 	{"font.ttf", font_ttf, font_ttf_size, NULL, 0},
+	{"listBackground.png", NULL, 0, NULL, 0},	// Optional
+	{"carouselBackground.png", NULL, 0, NULL, 0},	// Optional
+	{"gridBackground.png", NULL, 0, NULL, 0},	// Optional
 	{NULL, NULL, 0, NULL, 0}
 };
 

@@ -213,7 +213,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int minimum, int lang)
 	keyTextboxImg->SetPosition(0, 40);//(0,0);
 	this->Append(keyTextboxImg);
 
-	kbText = new GuiText(kbtextstr, 20, ( GXColor ) {0, 0, 0, 0xff});
+	kbText = new GuiText(kbtextstr, 20, thColor("r=0 g=0 b=0 a=255 - keyboard text color"));
 	kbText->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	kbText->SetPosition(0, 53);//(0, 13);
 	this->Append(kbText);
@@ -238,13 +238,11 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int minimum, int lang)
 	keyBackOverImg = new GuiImage(keyMedium);
 	if (mode == 3)
 	{
-		keyBackText = new GuiText("Retour", 20, ( GXColor )
-		{   0, 0, 0, 0xff});
+		keyBackText = new GuiText("Retour", 20, thColor("r=0 g=0 b=0 a=255 - keyboard key text color"));
 	}
 	else
 	{
-		keyBackText = new GuiText("Back", 20, ( GXColor )
-		{   0, 0, 0, 0xff});
+		keyBackText = new GuiText("Back", 20, thColor("r=0 g=0 b=0 a=255 - keyboard key text color"));
 	}
 	//keyBack = new GuiButton(keyMedium->GetWidth(), keyMedium->GetHeight());
 	keyBack = new GuiButton(keyBackImg, keyBackOverImg, 0, 3, 11 * 42 + 40 + eurocheck, 0 * 42 + 120, trigA,
@@ -271,13 +269,11 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int minimum, int lang)
 	keyClearOverImg = new GuiImage(keyMedium);
 	if (mode == 3)
 	{
-		keyClearText = new GuiText("Effacer", 20, ( GXColor )
-		{   0, 0, 0, 0xff});
+		keyClearText = new GuiText("Effacer", 20, thColor("r=0 g=0 b=0 a=255 - keyboard key text color"));
 	}
 	else
 	{
-		keyClearText = new GuiText("Clear", 20, ( GXColor )
-		{   0, 0, 0, 0xff});
+		keyClearText = new GuiText("Clear", 20, thColor("r=0 g=0 b=0 a=255 - keyboard key text color"));
 	}
 	keyClear = new GuiButton(keyClearImg, keyClearOverImg, 0, 3, (10 * 42 + 40) + eurocheck, 4 * 42 + 120, trigA,
 			btnSoundOver, btnSoundClick, 1);
@@ -294,8 +290,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int minimum, int lang)
 
 	keyAltImg = new GuiImage(keyMedium);
 	keyAltOverImg = new GuiImage(keyMedium);
-	keyAltText = new GuiText("Alt Gr", 20, ( GXColor )
-	{   0, 0, 0, 0xff});
+	keyAltText = new GuiText("Alt Gr", 20, thColor("r=0 g=0 b=0 a=255 - keyboard key text color"));
 	keyAlt = new GuiButton(keyAltImg, keyAltOverImg, 0, 3, 84 + eurocheck, 4 * 42 + 120, trigA, btnSoundOver,
 			btnSoundClick, 1);
 	//keyAlt = new GuiButton(keyMedium->GetWidth(), keyMedium->GetHeight());
@@ -314,8 +309,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int minimum, int lang)
 
 	keyAlt2Img = new GuiImage(keyMedium);
 	keyAlt2OverImg = new GuiImage(keyMedium);
-	keyAlt2Text = new GuiText("Accent", 20, ( GXColor )
-	{   0, 0, 0, 0xff});
+	keyAlt2Text = new GuiText("Accent", 20, thColor("r=0 g=0 b=0 a=255 - keyboard key text color"));
 	keyAlt2 = new GuiButton(keyAlt2Img, keyAlt2OverImg, 0, 3, (8 * 42 + 40) + eurocheck, 4 * 42 + 120, trigA,
 			btnSoundOver, btnSoundClick, 1);
 	//keyAlt2 = new GuiButton(keyMedium->GetWidth(), keyMedium->GetHeight());
@@ -334,8 +328,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int minimum, int lang)
 
 	keyCapsImg = new GuiImage(keyMedium);
 	keyCapsOverImg = new GuiImage(keyMedium);
-	keyCapsText = new GuiText("Caps", 20, ( GXColor )
-	{   0, 0, 0, 0xff});
+	keyCapsText = new GuiText("Caps", 20, thColor("r=0 g=0 b=0 a=255 - keyboard key text color"));
 	keyCaps = new GuiButton(keyCapsImg, keyCapsOverImg, 0, 3, 0 + eurocheck, 2 * 42 + 120, trigA, btnSoundOver,
 			btnSoundClick, 1);
 	//keyCaps = new GuiButton(keyMedium->GetWidth(), keyMedium->GetHeight());
@@ -351,8 +344,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int minimum, int lang)
 
 	keyShiftImg = new GuiImage(keyMedium);
 	keyShiftOverImg = new GuiImage(keyMedium);
-	keyShiftText = new GuiText("Shift", 20, ( GXColor )
-	{   0, 0, 0, 0xff});
+	keyShiftText = new GuiText("Shift", 20, thColor("r=0 g=0 b=0 a=255 - keyboard key text color"));
 	keyShift = new GuiButton(keyShiftImg, keyShiftOverImg, 0, 3, 21 + eurocheck, 3 * 42 + 120, trigA, btnSoundOver,
 			btnSoundClick, 1);
 	//keyShift = new GuiButton(keyMedium->GetWidth(), keyMedium->GetHeight());
@@ -391,8 +383,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int minimum, int lang)
 				keyImg[i][j] = new GuiImage(key);
 				keyImgOver[i][j] = new GuiImage(keyOver);
 				txt[0] = keys[i][j].ch;
-				keyTxt[i][j] = new GuiText(txt, 20, ( GXColor )
-				{   0, 0, 0, 0xff});
+				keyTxt[i][j] = new GuiText(txt, 20, thColor("r=0 g=0 b=0 a=255 - keyboard key text color"));
 				keyTxt[i][j]->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
 				keyTxt[i][j]->SetPosition(0, -10);
 				keyBtn[i][j] = new GuiButton(keyImg[i][j], keyImgOver[i][j], 0, 3, (j * 42 + 21 * i + 40) + eurocheck,

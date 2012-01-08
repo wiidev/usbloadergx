@@ -37,6 +37,9 @@ class GameBrowseMenu : public GuiWindow
 		GuiGameBrowser * gameBrowser;
 		GuiSearchBar * searchBar;
 
+		GuiImageData * listBackground;
+		GuiImageData * carouselBackground;
+		GuiImageData * gridBackground;
 		GuiImageData * btnInstall;
 		GuiImageData * btnInstallOver;
 		GuiImageData * btnSettings;

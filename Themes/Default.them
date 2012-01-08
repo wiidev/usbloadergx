@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-21 19:17+0100\n"
+"POT-Creation-Date: 2012-01-08 19:07+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -89,6 +89,12 @@ msgid "r=0 g=0 b=0 a=255 - game browser list text color"
 msgstr ""
 
 msgid "r=0 g=0 b=0 a=255 - game browser list text color over"
+msgstr ""
+
+msgid "r=0 g=0 b=0 a=255 - keyboard text color"
+msgstr ""
+
+msgid "r=0 g=0 b=0 a=255 - keyboard key text color"
 msgstr ""
 
 msgid "right - options browser scrollbar align hor"
@@ -673,6 +679,9 @@ msgstr ""
 msgid "r=30 g=30 b=240 a=255 - game window details button over text color"
 msgstr ""
 
+msgid "r=0 g=0 b=0 a=255 - settings title text color"
+msgstr ""
+
 msgid "center - category game prompt align hor"
 msgstr ""
 
@@ -695,9 +704,6 @@ msgid "0 - settings option browser pos x"
 msgstr ""
 
 msgid "90 - settings option browser pos y"
-msgstr ""
-
-msgid "r=0 g=0 b=0 a=255 - settings title text color"
 msgstr ""
 
 msgid "center - settings title text align hor"

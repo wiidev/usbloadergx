@@ -52,6 +52,9 @@ do
 	echo -e '\t{"'$i'", '$filename'_'$extension', '$filename'_'$extension'_size, NULL, 0},' >> $outFile
 done
 
+echo -e '\t{"listBackground.png", NULL, 0, NULL, 0},\t// Optional' >> $outFile
+echo -e '\t{"carouselBackground.png", NULL, 0, NULL, 0},\t// Optional' >> $outFile
+echo -e '\t{"gridBackground.png", NULL, 0, NULL, 0},\t// Optional' >> $outFile
 echo -e '\t{NULL, NULL, 0, NULL, 0}' >> $outFile
 echo '};' >> $outFile
 

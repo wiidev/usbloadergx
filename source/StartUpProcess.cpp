@@ -14,6 +14,7 @@
 #include "settings/CGameSettings.h"
 #include "settings/CGameStatistics.h"
 #include "settings/CGameCategories.hpp"
+#include "settings/GameTitles.h"
 #include "usbloader/usbstorage2.h"
 #include "usbloader/MountGamePartition.h"
 #include "usbloader/GameBooter.hpp"
@@ -261,6 +262,8 @@ int StartUpProcess::Execute()
 	gprintf("\tLoading game categories...%s\n", GameCategories.Load(Settings.ConfigPath) ? "done" : "failed");
 	gprintf("\tLoading font...%s\n", Theme::LoadFont(Settings.ConfigPath) ? "done" : "failed (using default)");
 	gprintf("\tLoading theme...%s\n", Theme::Load(Settings.theme) ? "done" : "failed (using default)");
+	if(Settings.CacheTitles)
+		gprintf("\tLoading cached titles...%s\n", GameTitles.ReadCachedTitles(Settings.titlestxt_path) ? "done" : "failed (using default)");
 
 	//! Init the rest of the System
 	Sys_Init();

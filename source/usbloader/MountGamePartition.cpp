@@ -164,9 +164,6 @@ int MountGamePartition(bool ShowGUI)
 	}
 
 	gprintf("LoadTitlesFromGameTDB\n");
-	//! Clear list if available
-	GameTitles.Clear();
-
 	//! gameList is loaded in GameTitles.LoadTitlesFromGameTDB after cache file load
 	//! for speed up purpose. If titles override active, load game list here.
 	if(Settings.titlesOverride)

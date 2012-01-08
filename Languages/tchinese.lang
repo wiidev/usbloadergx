@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-03 19:16+0100\n"
+"POT-Creation-Date: 2012-01-08 19:07+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -235,6 +235,9 @@ msgstr "封鎖 Title 啟動"
 msgid "Block Updates"
 msgstr "封鎖更新"
 
+msgid "Boot Content"
+msgstr ""
+
 msgid "Boot/Standard"
 msgstr "啟動/標準"
 
@@ -289,6 +292,9 @@ msgstr "類別："
 
 msgid "Change Play Path"
 msgstr "變更執行路徑"
+
+msgid "Channel Launcher"
+msgstr ""
 
 msgid "Channels"
 msgstr ""
@@ -1048,6 +1054,9 @@ msgstr "重複音樂"
 msgid "Loop Sound"
 msgstr "重複音樂"
 
+msgid "Main DOL"
+msgstr ""
+
 msgid "Main tester:"
 msgstr "主要測試者："
 
@@ -1077,6 +1086,9 @@ msgstr "音樂循環模式"
 
 msgid "Music Volume"
 msgstr "音樂音量"
+
+msgid "Nand Chan. Emulation"
+msgstr ""
 
 msgid "Nand Channels"
 msgstr ""

@@ -19,6 +19,7 @@ class IosLoader
 		static s32 LoadAppCios();
 		static s32 LoadGameCios(s32 ios);
 		static s32 ReloadIosSafe(s32 ios);
+		static s32 ReloadIosKeepingRights(s32 ios);
 		static bool IsHermesIOS(s32 ios = IOS_GetVersion());
 		static bool IsWaninkokoIOS(s32 ios = IOS_GetVersion());
 		static bool IsD2X(s32 ios = IOS_GetVersion());

@@ -69,17 +69,24 @@ FeatureSettingsMenu::FeatureSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Install WAD to EmuNand" ));
 
 	OldTitlesOverride = Settings.titlesOverride;
+	OldCacheTitles = Settings.CacheTitles;
 
 	SetOptionValues();
 }
 
 FeatureSettingsMenu::~FeatureSettingsMenu()
 {
-	if (Settings.titlesOverride != OldTitlesOverride)
+	if (   Settings.titlesOverride != OldTitlesOverride
+		|| Settings.CacheTitles != OldCacheTitles)
 	{
-		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, true);
-		if(!Settings.titlesOverride)
+		//! Remove cached titles and reload new titles
+		GameTitles.SetDefault();
+		if(Settings.titlesOverride) {
+			GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
+		}
+		else
 		{
+			//! Don't override titles, in other words read them from disc header or directory names
 			gameList.ReadGameList();
 			gameList.LoadUnfiltered();
 		}
@@ -144,9 +151,6 @@ int FeatureSettingsMenu::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.CacheTitles >= MAX_ON_OFF) Settings.CacheTitles = 0;
-
-		if(Settings.CacheTitles) //! create new cache file
-			GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
 	}
 
 	//! Settings: Wiilight
@@ -253,7 +257,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 			{
 				if(gameList[i]->type != TYPE_GAME_WII && gameList[i]->type != TYPE_GAME_NANDCHAN)
 					continue;
-				
+
 				if(gameList[i]->tid != 0) //! Channels
 				{
 					snprintf(nandPath, sizeof(nandPath), "/title/%08x/%08x/data", (u32) (gameList[i]->tid  >> 32), (u32) gameList[i]->tid );

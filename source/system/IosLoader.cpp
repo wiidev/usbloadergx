@@ -1,4 +1,5 @@
 #include <gctypes.h>
+#include <ogc/machine/processor.h>
 
 #include "IosLoader.h"
 #include "Controls/DeviceHandler.hpp"
@@ -17,6 +18,11 @@
 #include "utils/tools.h"
 #include "gecko.h"
 
+#define CheckAHBPROT()	(read32(0x0D800064) == 0xFFFFFFFF)
+#define MEM2_PROT		0x0D8B420A
+#define ES_MODULE_START	((u16 *)0x939F0000)
+#define ES_MODULE_END	(ES_MODULE_START + 0x4000)
+#define ES_HACK_OFFSET	4
 
 /*
  * Buffer variables for the IOS info to avoid loading it several times
@@ -148,12 +154,51 @@ s32 IosLoader::ReloadIosSafe(s32 ios)
 		return -33;
 	}
 
-	s32 r = IOS_ReloadIOS(ios);
+	s32 r = ReloadIosKeepingRights(ios);
 	if (r >= 0) WII_Initialize();
 
 	IosLoader::LoadIOSModules(IOS_GetVersion(), IOS_GetRevision());
 
 	return r;
+}
+
+/*
+ * Reloads a certain IOS and keeps the AHBPROT flag enabled if available.
+ */
+s32 IosLoader::ReloadIosKeepingRights(s32 ios)
+{
+	if (CheckAHBPROT())
+	{
+		static const u16 ticket_check[] = {
+			0x685B,          // ldr  r3, [r3, #4] ; Get TMD pointer
+			0x22EC, 0x0052,  // movs r2, 0x1D8    ; Set offset of access rights field in TMD
+			0x189B,          // adds r3, r3, r2   ; Add offset to TMD pointer
+			0x681B,          // ldr  r3, [r3]     ; Load access rights. We'll hack it with full access rights!!!
+			0x4698,          // mov  r8, r3       ; Store it for the DVD video bitcheck later
+			0x07DB           // lsls r3, r3, 0x1F ; check AHBPROT bit
+		};
+
+		/* Disable MEM 2 protection */
+		write16(MEM2_PROT, 2);
+
+		for (u16 *patchme = ES_MODULE_START; patchme < ES_MODULE_END; patchme++)
+		{
+			if (!memcmp(patchme, ticket_check, sizeof(ticket_check)))
+			{
+				gprintf("ReloadIos: Found TMD access rights check at %p\n", patchme);
+
+				/* Apply patch */
+				patchme[ES_HACK_OFFSET] = 0x23FF; // li r3, 0xFF ; Set full access rights
+
+				/* Flush cache */
+				DCFlushRange(patchme+ES_HACK_OFFSET, 2);
+				break;
+			}
+		}
+	}
+
+	/* Reload IOS. MEM2 protection is implicitly re-enabled */
+	return IOS_ReloadIOS(ios);
 }
 
 /******************************************************************************

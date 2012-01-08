@@ -4,6 +4,10 @@
 #include "usbloader/GameList.h"
 #include "Channels/channels.h"
 #include "xml/GameTDB.hpp"
+#include "svnrev.h"
+#include "gecko.h"
+
+#define VALID_CACHE_REVISION	1148
 
 CGameTitles GameTitles;
 
@@ -22,8 +26,11 @@ void CGameTitles::SetGameTitle(const char * id, const char * title)
 	}
 
 	GameTitle newTitle;
-	newTitle.Title = title;
 	snprintf(newTitle.GameID, sizeof(newTitle.GameID), id);
+	newTitle.Title = title;
+	newTitle.ParentalRating = -1;
+	newTitle.PlayersCount = 1;
+	newTitle.FromWiiTDB = 0;
 
 	TitleList.push_back(newTitle);
 }
@@ -103,6 +110,7 @@ typedef struct _CacheTitle
 {
 	char GameID[7];
 	char Title[100];
+	char FromWiiTDB;
 	int ParentalRating;
 	int PlayersCount;
 
@@ -110,9 +118,24 @@ typedef struct _CacheTitle
 
 u32 CGameTitles::ReadCachedTitles(const char * path)
 {
+	std::string Cachepath = path;
+	if(path[strlen(path)-1] != '/')
+		Cachepath += '/';
+	Cachepath += "TitlesCache.bin";
+
 	//! Load cached least so that the titles are preloaded before reading list
-	FILE * f = fopen(path, "rb");
+	FILE * f = fopen(Cachepath.c_str(), "rb");
 	if(!f) return 0;
+
+	u32 revision = 0;
+
+	fread(&revision, 1, 4, f);
+
+	if(revision < VALID_CACHE_REVISION)
+	{
+		fclose(f);
+		return 0;
+	}
 
 	char LangCode[11];
 	memset(LangCode, 0, sizeof(LangCode));
@@ -141,6 +164,7 @@ u32 CGameTitles::ReadCachedTitles(const char * path)
 		TitleList[i].Title = CachedList[i].Title;
 		TitleList[i].ParentalRating = CachedList[i].ParentalRating;
 		TitleList[i].PlayersCount = CachedList[i].PlayersCount;
+		TitleList[i].FromWiiTDB = CachedList[i].FromWiiTDB;
 	}
 
 	return count;
@@ -148,13 +172,19 @@ u32 CGameTitles::ReadCachedTitles(const char * path)
 
 void CGameTitles::WriteCachedTitles(const char * path)
 {
-	FILE *f = fopen(path, "wb");
+	std::string Cachepath = path;
+	if(path[strlen(path)-1] != '/')
+		Cachepath += '/';
+	Cachepath += "TitlesCache.bin";
+
+	FILE *f = fopen(Cachepath.c_str(), "wb");
 	if(!f)
 		return;
 
 	CacheTitle Cache;
 	u32 count = TitleList.size();
-
+	u32 revision = atoi(GetRev());
+	fwrite(&revision, 1, 4, f);
 	fwrite(Settings.db_language, 1, 10, f);
 	fwrite(&count, 1, 4, f);
 
@@ -162,10 +192,11 @@ void CGameTitles::WriteCachedTitles(const char * path)
 	{
 		memset(&Cache, 0, sizeof(CacheTitle));
 
-		strcpy(Cache.GameID, TitleList[i].GameID);
-		snprintf(Cache.Title, sizeof(Cache.Title), TitleList[i].Title.c_str());
+		strncpy(Cache.GameID, TitleList[i].GameID, sizeof(Cache.GameID)-1);
+		strncpy(Cache.Title, TitleList[i].Title.c_str(), sizeof(Cache.Title)-1);
 		Cache.ParentalRating = TitleList[i].ParentalRating;
 		Cache.PlayersCount = TitleList[i].PlayersCount;
+		Cache.FromWiiTDB = TitleList[i].FromWiiTDB;
 
 		fwrite(&Cache, 1, sizeof(CacheTitle), f);
 	}
@@ -187,7 +218,8 @@ void CGameTitles::GetMissingTitles(std::vector<std::string> &MissingTitles, bool
 			if(strncasecmp(TitleList[n].GameID, (const char *) FullList[i]->id, 6) == 0)
 			{
 				UsedCachedList[n] = true;
-				isCached = true;
+				//! If the title is not from WiiTDB, try to reload it
+				isCached = TitleList[n].FromWiiTDB;
 				break;
 			}
 		}
@@ -213,10 +245,8 @@ void CGameTitles::GetMissingTitles(std::vector<std::string> &MissingTitles, bool
 	}
 }
 
-void CGameTitles::LoadTitlesFromGameTDB(const char * path, bool forceCacheReload, bool removeUnused)
+void CGameTitles::LoadTitlesFromGameTDB(const char * path, bool removeUnused)
 {
-	this->SetDefault();
-
 	if(!path || !Settings.titlesOverride)
 		return;
 
@@ -224,13 +254,7 @@ void CGameTitles::LoadTitlesFromGameTDB(const char * path, bool forceCacheReload
 	if(path[strlen(path)-1] != '/')
 		Filepath += '/';
 
-	std::string Cachepath = Filepath;
-	Cachepath += "TitlesCache.bin";
 	Filepath += "wiitdb.xml";
-
-	//! Read game titles cache database
-	if(!forceCacheReload && Settings.CacheTitles)
-		ReadCachedTitles(Cachepath.c_str());
 
 	//! Read game list
 	gameList.LoadUnfiltered();
@@ -240,10 +264,7 @@ void CGameTitles::LoadTitlesFromGameTDB(const char * path, bool forceCacheReload
 	GetMissingTitles(MissingTitles, removeUnused);
 
 	if(MissingTitles.size() == 0)
-	{
-		WriteCachedTitles(Cachepath.c_str());
 		return;
-	}
 
 	std::string Title;
 
@@ -258,9 +279,8 @@ void CGameTitles::LoadTitlesFromGameTDB(const char * path, bool forceCacheReload
 			continue;
 
 		this->SetGameTitle(MissingTitles[i].c_str(), Title.c_str());
-
-		TitleList[TitleList.size()-1].ParentalRating = -1;
-		TitleList[TitleList.size()-1].PlayersCount = 1;
+		//! Title is loaded from WiiTDB, remember that it's good
+		TitleList[TitleList.size()-1].FromWiiTDB = 1;
 
 		Rating = XML_DB.GetRating(MissingTitles[i].c_str());
 		if(Rating < 0)
@@ -274,7 +294,4 @@ void CGameTitles::LoadTitlesFromGameTDB(const char * path, bool forceCacheReload
 		if(ret > 0)
 			TitleList[TitleList.size()-1].PlayersCount = ret;
 	}
-
-	if(Settings.CacheTitles)
-		WriteCachedTitles(Cachepath.c_str());
 }

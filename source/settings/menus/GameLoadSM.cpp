@@ -187,7 +187,7 @@ void GameLoadSM::SetOptionNames()
 		Options->SetName(Idx++, "%s", tr( "Select DOL Offset" ));
 	}
 	Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
-	if(Header->type == TYPE_GAME_WII)
+	if(Header->type == TYPE_GAME_WII || Header->type == TYPE_GAME_EMUNANDCHAN)
 	{
 		Options->SetName(Idx++, "%s", tr( "Nand Emulation" ));
 		Options->SetName(Idx++, "%s", tr( "Nand Emu Path" ));
@@ -296,7 +296,7 @@ void GameLoadSM::SetOptionValues()
 	else
 		Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.iosreloadblock]) );
 
-	if(Header->type == TYPE_GAME_WII)
+	if(Header->type == TYPE_GAME_WII || Header->type == TYPE_GAME_EMUNANDCHAN)
 	{
 		//! Settings: Nand Emulation
 		if(GameConfig.NandEmuMode == INHERIT)
@@ -482,15 +482,19 @@ int GameLoadSM::GetMenuInternal()
 	}
 
 	//! Settings: Nand Emulation
-	else if ((Header->type == TYPE_GAME_WII) && ret == ++Idx)
+	else if ((Header->type == TYPE_GAME_WII || Header->type == TYPE_GAME_EMUNANDCHAN) && ret == ++Idx)
 	{
 		if(!IosLoader::IsD2X())
 			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
 		else if (++GameConfig.NandEmuMode >= 3) GameConfig.NandEmuMode = INHERIT;
+
+		//! On titles from emulated nand path disabling the nand emu mode is not allowed
+		if(Header->type == TYPE_GAME_EMUNANDCHAN && GameConfig.NandEmuMode == OFF)
+			GameConfig.NandEmuMode = 1;
 	}
 
 	//! Settings: Nand Emu Path
-	else if ((Header->type == TYPE_GAME_WII) && ret == ++Idx)
+	else if ((Header->type == TYPE_GAME_WII || Header->type == TYPE_GAME_EMUNANDCHAN) && ret == ++Idx)
 	{
 		if(!IosLoader::IsD2X())
 			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));

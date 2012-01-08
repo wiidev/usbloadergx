@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-03 19:16+0100\n"
+"POT-Creation-Date: 2012-01-08 19:07+0100\n"
 "PO-Revision-Date: 2011-11-03 11:00+0000\n"
 "Last-Translator: pplucky <pplucky@gmail.com>\n"
 "Language-Team: Sky8000, pplucky\n"
@@ -235,6 +235,9 @@ msgstr "Bloquear Gestor de Títulos"
 msgid "Block Updates"
 msgstr "Bloquear Actualizações"
 
+msgid "Boot Content"
+msgstr ""
+
 msgid "Boot/Standard"
 msgstr "Arranque/Std"
 
@@ -289,6 +292,9 @@ msgstr "Categorias:"
 
 msgid "Change Play Path"
 msgstr "Alterar Caminho de Músicas"
+
+msgid "Channel Launcher"
+msgstr ""
 
 msgid "Channels"
 msgstr ""
@@ -1048,6 +1054,9 @@ msgstr "Repetir Música"
 msgid "Loop Sound"
 msgstr "Repetir Sons"
 
+msgid "Main DOL"
+msgstr ""
+
 msgid "Main tester:"
 msgstr "Tester principal:"
 
@@ -1077,6 +1086,9 @@ msgstr "Modo de Repetição"
 
 msgid "Music Volume"
 msgstr "Volume Música"
+
+msgid "Nand Chan. Emulation"
+msgstr ""
 
 msgid "Nand Channels"
 msgstr ""

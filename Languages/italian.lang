@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-03 19:16+0100\n"
+"POT-Creation-Date: 2012-01-08 19:07+0100\n"
 "PO-Revision-Date: 2011-09-11 12:19+0100\n"
 "Last-Translator: xFede\n"
 "Language-Team: Cambo\n"
@@ -235,6 +235,9 @@ msgstr "Blocca Avvia Titoli"
 msgid "Block Updates"
 msgstr "Blocca Aggiornamenti"
 
+msgid "Boot Content"
+msgstr ""
+
 msgid "Boot/Standard"
 msgstr "cIOS Predefinito"
 
@@ -289,6 +292,9 @@ msgstr "Categorie:"
 
 msgid "Change Play Path"
 msgstr "Cambia Percorso Musica"
+
+msgid "Channel Launcher"
+msgstr ""
 
 msgid "Channels"
 msgstr "Canali"
@@ -1048,6 +1054,9 @@ msgstr "Ripeti Brano"
 msgid "Loop Sound"
 msgstr "Suono Ripetuto"
 
+msgid "Main DOL"
+msgstr ""
+
 msgid "Main tester:"
 msgstr "Tester principale:"
 
@@ -1077,6 +1086,9 @@ msgstr "Ripeti Musica Sottof."
 
 msgid "Music Volume"
 msgstr "Volume Musica"
+
+msgid "Nand Chan. Emulation"
+msgstr ""
 
 msgid "Nand Channels"
 msgstr "Canali NAND"

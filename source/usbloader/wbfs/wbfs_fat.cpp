@@ -447,7 +447,7 @@ s32 Wbfs_Fat::GetHeadersCount()
 		// if we have titles.txt entry use that
 		title = GameTitles.GetTitle(id);
 		// if no titles.txt get title from dir or file name
-		if ((!title || *title == 0) && *fname_title != 0)
+		if ((!title || *title == 0) && *fname_title != 0 && Settings.titlesOverride)
 			title = fname_title;
 
 		if (title && *title != 0)
@@ -562,6 +562,7 @@ s32 Wbfs_Fat::GetHeadersCount()
 
 		fat_hdr_list = tmpList;
 		memcpy(&fat_hdr_list[fat_hdr_count - 1], &tmpHdr, sizeof(struct discHdr));
+		GameTitles.SetGameTitle(tmpHdr.id, tmpHdr.title);
 	}
 
 	closedir(dir_iter);

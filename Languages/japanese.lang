@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-03 19:16+0100\n"
+"POT-Creation-Date: 2012-01-08 19:07+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -235,6 +235,9 @@ msgstr "タイトル起動を制限"
 msgid "Block Updates"
 msgstr "更新を制限"
 
+msgid "Boot Content"
+msgstr ""
+
 msgid "Boot/Standard"
 msgstr "使用するcIOS"
 
@@ -289,6 +292,9 @@ msgstr "カテゴリ:"
 
 msgid "Change Play Path"
 msgstr "パスの変更"
+
+msgid "Channel Launcher"
+msgstr ""
 
 msgid "Channels"
 msgstr "チャンネル"
@@ -1048,6 +1054,9 @@ msgstr "ループさせる"
 msgid "Loop Sound"
 msgstr "ループさせる"
 
+msgid "Main DOL"
+msgstr ""
+
 msgid "Main tester:"
 msgstr "メインテスター:"
 
@@ -1077,6 +1086,9 @@ msgstr "ループ機能"
 
 msgid "Music Volume"
 msgstr "BGMの音量"
+
+msgid "Nand Chan. Emulation"
+msgstr ""
 
 msgid "Nand Channels"
 msgstr "Wii本体NANDチャンネル"

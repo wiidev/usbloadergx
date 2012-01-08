@@ -194,6 +194,7 @@ void dogamehooks(u32 hooktype, void *addr, u32 len)
 	if(hooktype == 0x00)
 		return;
 
+	bool isChannel = (*((char *) 0x80000005) == 0) && (*((char *) 0x80000006) == 0);
 	void *addr_start = addr;
 	void *addr_end = addr+len;
 
@@ -210,9 +211,6 @@ void dogamehooks(u32 hooktype, void *addr, u32 len)
 				if(memcmp(addr_start, viwiihooks, sizeof(viwiihooks))==0){
 					patchhook((u32)addr_start, len);
 				}
-				if(memcmp(addr_start, multidolhooks, sizeof(multidolhooks))==0){
-					multidolhook((u32)addr_start+sizeof(multidolhooks)-4);
-				}
 			break;
 
 			case 0x02:
@@ -224,18 +222,12 @@ void dogamehooks(u32 hooktype, void *addr, u32 len)
 				if(memcmp(addr_start, kpadoldhooks, sizeof(kpadoldhooks))==0){
 					patchhook((u32)addr_start, len);
 				}
-				if(memcmp(addr_start, multidolhooks, sizeof(multidolhooks))==0){
-					multidolhook((u32)addr_start+sizeof(multidolhooks)-4);
-				}
 			break;
 
 			case 0x03:
 
 				if(memcmp(addr_start, joypadhooks, sizeof(joypadhooks))==0){
 					patchhook((u32)addr_start, len);
-				}
-				if(memcmp(addr_start, multidolhooks, sizeof(multidolhooks))==0){
-					multidolhook((u32)addr_start+sizeof(multidolhooks)-4);
 				}
 			break;
 
@@ -244,18 +236,12 @@ void dogamehooks(u32 hooktype, void *addr, u32 len)
 				if(memcmp(addr_start, gxdrawhooks, sizeof(gxdrawhooks))==0){
 					patchhook((u32)addr_start, len);
 				}
-				if(memcmp(addr_start, multidolhooks, sizeof(multidolhooks))==0){
-					multidolhook((u32)addr_start+sizeof(multidolhooks)-4);
-				}
 			break;
 
 			case 0x05:
 
 				if(memcmp(addr_start, gxflushhooks, sizeof(gxflushhooks))==0){
 					patchhook((u32)addr_start, len);
-				}
-				if(memcmp(addr_start, multidolhooks, sizeof(multidolhooks))==0){
-					multidolhook((u32)addr_start+sizeof(multidolhooks)-4);
 				}
 			break;
 
@@ -264,18 +250,12 @@ void dogamehooks(u32 hooktype, void *addr, u32 len)
 				if(memcmp(addr_start, ossleepthreadhooks, sizeof(ossleepthreadhooks))==0){
 					patchhook((u32)addr_start, len);
 				}
-				if(memcmp(addr_start, multidolhooks, sizeof(multidolhooks))==0){
-					multidolhook((u32)addr_start+sizeof(multidolhooks)-4);
-				}
 			break;
 
 			case 0x07:
 
 				if(memcmp(addr_start, axnextframehooks, sizeof(axnextframehooks))==0){
 					patchhook((u32)addr_start, len);
-				}
-				if(memcmp(addr_start, multidolhooks, sizeof(multidolhooks))==0){
-					multidolhook((u32)addr_start+sizeof(multidolhooks)-4);
 				}
 			break;
 			/*
@@ -290,6 +270,20 @@ void dogamehooks(u32 hooktype, void *addr, u32 len)
 			break;
 			*/
 		}
+
+		if(memcmp(addr_start, multidolhooks, sizeof(multidolhooks))==0)
+		{
+			multidolhook((u32)addr_start+sizeof(multidolhooks)-4);
+		}
+
+		if(isChannel && memcmp(addr_start, multidolchanhooks, sizeof(multidolchanhooks)) == 0)
+		{
+				*(((u32*)addr_start)+1) = 0x7FE802A6;
+				DCFlushRange(((u32*)addr_start)+1, 4);
+				ICInvalidateRange(((u32*)addr_start)+1, 4);
+				multidolhook((u32)addr_start+sizeof(multidolchanhooks)-4);
+		}
+
 		addr_start += 4;
 	}
 }

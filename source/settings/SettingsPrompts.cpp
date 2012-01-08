@@ -89,8 +89,6 @@ int MenuLanguageSelect()
 	int cnt = 0;
 	int ret = 0, choice = 0;
 	int returnhere = 0;
-	char OldLangCode[10];
-	snprintf(OldLangCode, sizeof(OldLangCode), Settings.db_language);
 
 	GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
 	GuiImageData settingsbg(Resources::GetFile("settings_background.png"), Resources::GetFileSize("settings_background.png"));
@@ -310,12 +308,6 @@ int MenuLanguageSelect()
 			}
 		}
 
-	}
-
-	//! Reload game list in new language
-	if(strcmp(Settings.db_language, OldLangCode) != 0)
-	{
-		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
 	}
 
 	w.SetEffect( EFFECT_FADE, -20 );

@@ -32,6 +32,7 @@
 #include "settings/GameTitles.h"
 #include "patches/gamepatches.h"
 #include "wad/nandtitle.h"
+#include "memory/memory.h"
 #include "utils/lz77.h"
 #include "gecko.h"
 
@@ -141,33 +142,54 @@ vector<struct discHdr> & Channels::GetEmuHeaders(void)
 
 u8 * Channels::GetDol(const u64 &title, u8 *tmdBuffer)
 {
-	bool found = false;
+	static const u8 dolsign[6] = {0x00, 0x00, 0x01, 0x00, 0x00, 0x00};
+	static u8 dolhead[32] ATTRIBUTE_ALIGN(32);
 	u8 *buffer = NULL;
 	u32 filesize = 0;
-	u32 bootcontent;
+	u32 bootcontent = 0xDEADBEAF;
 	u32 high = TITLE_UPPER(title);
 	u32 low  = TITLE_LOWER(title);
-
-	_tmd * tmd_file = (_tmd *) SIGNATURE_PAYLOAD((u32 *)tmdBuffer);
-	for(u32 i = 0; i < tmd_file->num_contents; ++i)
-	{
-		if(tmd_file->contents[i].index == tmd_file->boot_index)
-		{
-			bootcontent = tmd_file->contents[i].cid;
-			found = true;
-			break;
-		}
-	}
-
-	if(!found)
-	{
-		gprintf("Channel main.dol boot index not found\n");
-		return NULL;
-	}
 
 	char *filepath = (char *) memalign(32, ISFS_MAXPATH);
 	if(!filepath)
 		return NULL;
+
+	_tmd * tmd_file = (_tmd *) SIGNATURE_PAYLOAD((u32 *)tmdBuffer);
+
+	if(!Settings.UseChanLauncher)
+	{
+		for(u32 i = 0; i < tmd_file->num_contents; ++i)
+		{
+			if(tmd_file->contents[i].index == tmd_file->boot_index)
+				continue; // Skip loader
+
+			snprintf(filepath, ISFS_MAXPATH, "/title/%08x/%08x/content/%08x.app", high, low, tmd_file->contents[i].cid);
+
+			s32 fd = ISFS_Open(filepath, ISFS_OPEN_READ);
+			if(fd < 0)
+				continue;
+
+			s32 ret = ISFS_Read(fd, dolhead, 32);
+			ISFS_Close(fd);
+
+			if(ret != 32)
+				continue;
+
+			if(memcmp(dolhead, dolsign, sizeof(dolsign)) == 0)
+			{
+				bootcontent = tmd_file->contents[i].cid;
+				break;
+			}
+		}
+	}
+
+	//! Fall back to boot content if dol is not found
+	if(bootcontent == 0xDEADBEAF)
+	{
+		bootcontent = tmd_file->contents[tmd_file->boot_index].cid;
+		if(!Settings.UseChanLauncher) gprintf("Main dol not found -> ");
+		gprintf("Loading boot content index\n");
+	}
 
 	snprintf(filepath, ISFS_MAXPATH, "/title/%08x/%08x/content/%08x.app", high, low, bootcontent);
 	gprintf("Loading Channel DOL: %s\n", filepath);
@@ -293,12 +315,18 @@ u32 Channels::LoadChannel(const u64 &chantitle)
 
 	if(dolfile->bss_start)
 	{
-		if(!(dolfile->bss_start & 0x80000000))
-			dolfile->bss_start |= 0x80000000;
+		dolfile->bss_start |= 0x80000000;
 
-		ICInvalidateRange((void *)dolfile->bss_start, dolfile->bss_size);
-		memset((void *)dolfile->bss_start, 0, dolfile->bss_size);
-		DCFlushRange((void *)dolfile->bss_start, dolfile->bss_size);
+		if(dolfile->bss_start < 0x81800000)
+		{
+			// For homebrews...not all have it clean.
+			if(dolfile->bss_start + dolfile->bss_size >= 0x81800000)
+				dolfile->bss_size = 0x81800000 - dolfile->bss_start;
+
+			memset((void *)dolfile->bss_start, 0, dolfile->bss_size);
+			DCFlushRange((void *)dolfile->bss_start, dolfile->bss_size);
+			ICInvalidateRange((void *)dolfile->bss_start, dolfile->bss_size);
+		}
 	}
 
 	int i;
@@ -312,9 +340,9 @@ u32 Channels::LoadChannel(const u64 &chantitle)
 		u8 *dolChunkOffset = (u8 *)dolfile->section_start[i];
 		u32 dolChunkSize = dolfile->section_size[i];
 
-		ICInvalidateRange(dolChunkOffset, dolChunkSize);
 		memmove (dolChunkOffset, chanDOL + dolfile->section_pos[i], dolChunkSize);
 		DCFlushRange(dolChunkOffset, dolChunkSize);
+		ICInvalidateRange(dolChunkOffset, dolChunkSize);
 
 		RegisterDOL(dolChunkOffset, dolChunkSize);
 	}
@@ -323,16 +351,22 @@ u32 Channels::LoadChannel(const u64 &chantitle)
 
 	free(dolfile);
 
+	// Preparations
+	memset((void *)Disc_ID, 0, 6);
+	*Disc_ID = TITLE_LOWER(chantitle);		// Game ID
+	*Arena_H = 0;							// Arena High, the apploader does this too
+	*BI2 = 0x817FE000;						// BI2, the apploader does this too
+	*Bus_Speed = 0x0E7BE2C0;				// bus speed
+	*CPU_Speed = 0x2B73A840;				// cpu speed
+	*GameID_Address = 0x81000000;        	// Game id address, while there's all 0s at 0x81000000 when using the apploader...
+	memcpy((void *)Online_Check, (void *)Disc_ID, 4);// online check
+
+	memset((void *)0x817FE000, 0, 0x2000); 	// Clearing BI2
+	DCFlushRange((void*)0x817FE000, 0x2000);
+
 	// IOS Version Check
 	*(vu32*)0x80003140	= ((ios << 16)) | 0xFFFF;
 	*(vu32*)0x80003188	= ((ios << 16)) | 0xFFFF;
-	DCFlushRange((void *)0x80003140, 4);
-	DCFlushRange((void *)0x80003188, 4);
-
-	// Game ID Online Check
-	memset((void *)0x80000000, 0, 6);
-	*(vu32 *)0x80000000 = TITLE_LOWER(chantitle);
-	DCFlushRange((void *)0x80000000, 6);
 
 	ISFS_Deinitialize();
 

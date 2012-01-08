@@ -160,8 +160,9 @@ int UpdateGameTDB()
 	//! The zip file is not needed anymore so we can remove it
 	remove(ZipPath.c_str());
 
-	//! Reload all titles because the file changed now.
-	GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, true);
+	//! Reload all titles and reload cached titles because the file changed now.
+	GameTitles.SetDefault();
+	GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
 
 	return (result ? filesize : -1);
 }

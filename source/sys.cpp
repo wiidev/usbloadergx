@@ -74,6 +74,8 @@ void AppCleanUp(void)
 	extern u8 mountMethod;
 	gprintf("Exiting main GUI.  mountMethod = %d\n", mountMethod);
 
+	if(Settings.CacheTitles)
+		GameTitles.WriteCachedTitles(Settings.titlestxt_path);
 	Settings.Save();
 
 	ExitGUIThreads();

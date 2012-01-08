@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-03 19:16+0100\n"
+"POT-Creation-Date: 2012-01-08 19:07+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -235,6 +235,9 @@ msgstr "Bloquer Menu Chaînes"
 msgid "Block Updates"
 msgstr "Bloquer Mise à jour"
 
+msgid "Boot Content"
+msgstr ""
+
 msgid "Boot/Standard"
 msgstr "IOS par défaut"
 
@@ -289,6 +292,9 @@ msgstr "Catégories:"
 
 msgid "Change Play Path"
 msgstr "Changer dossier"
+
+msgid "Channel Launcher"
+msgstr ""
 
 msgid "Channels"
 msgstr "Chaînes"
@@ -1048,6 +1054,9 @@ msgstr "Répéter musique"
 msgid "Loop Sound"
 msgstr "Intro en boucle"
 
+msgid "Main DOL"
+msgstr ""
+
 msgid "Main tester:"
 msgstr "Testeur:"
 
@@ -1077,6 +1086,9 @@ msgstr "Type de boucle"
 
 msgid "Music Volume"
 msgstr "Volume musique"
+
+msgid "Nand Chan. Emulation"
+msgstr ""
 
 msgid "Nand Channels"
 msgstr "Chaînes sur Nand réel"

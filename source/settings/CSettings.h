@@ -130,6 +130,7 @@ class CSettings
 		std::vector<u32> EnabledCategories;
 		u8 EntryIOS;
 		short NandEmuMode;
+		short NandEmuChanMode;
 		short UseSystemFont;
 		short Hooktype;
 		short WiirdDebugger;
@@ -139,6 +140,7 @@ class CSettings
 		short LoaderMode;
 		short SearchMode;
 		short GameAspectRatio;
+		short UseChanLauncher;
 
 		// This variable is not saved to the settings file
 		bool FirstTimeRun;

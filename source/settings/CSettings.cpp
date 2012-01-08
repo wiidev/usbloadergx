@@ -130,6 +130,7 @@ void CSettings::SetDefault()
 	GameListOffset = 0;
 	sneekVideoPatch = OFF;
 	NandEmuMode = OFF;
+	NandEmuChanMode = 2;
 	UseSystemFont = ON;
 	Hooktype = 0;
 	WiirdDebugger = OFF;
@@ -140,6 +141,7 @@ void CSettings::SetDefault()
 	SearchMode = SEARCH_BEGINNING;
 	GameAspectRatio = ASPECT_SYSTEM_DEFAULT;
 	PointerSpeed = 0.15f;
+	UseChanLauncher = OFF;
 }
 
 bool CSettings::Load()
@@ -305,6 +307,7 @@ bool CSettings::Save()
 	fprintf(file, "GameListOffset = %d\n", GameListOffset);
 	fprintf(file, "sneekVideoPatch = %d\n", sneekVideoPatch);
 	fprintf(file, "NandEmuMode = %d\n", NandEmuMode);
+	fprintf(file, "NandEmuChanMode = %d\n", NandEmuChanMode);
 	fprintf(file, "NandEmuPath = %s\n", NandEmuPath);
 	fprintf(file, "NandEmuChanPath = %s\n", NandEmuChanPath);
 	fprintf(file, "UseSystemFont = %d\n", UseSystemFont);
@@ -316,6 +319,7 @@ bool CSettings::Save()
 	fprintf(file, "SearchMode = %d\n", SearchMode);
 	fprintf(file, "GameAspectRatio = %d\n", GameAspectRatio);
 	fprintf(file, "PointerSpeed = %g\n", PointerSpeed);
+	fprintf(file, "UseChanLauncher = %d\n", UseChanLauncher);
 	fclose(file);
 
 	return true;
@@ -625,6 +629,10 @@ bool CSettings::SetSetting(char *name, char *value)
 	{
 		if (sscanf(value, "%d", &i) == 1) NandEmuMode = i;
 	}
+	else if(strcmp(name, "NandEmuChanMode") == 0)
+	{
+		if (sscanf(value, "%d", &i) == 1) NandEmuChanMode = i;
+	}
 	else if(strcmp(name, "LoaderMode") == 0)
 	{
 		if (sscanf(value, "%d", &i) == 1) LoaderMode = i;
@@ -636,6 +644,10 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if(strcmp(name, "GameAspectRatio") == 0)
 	{
 		if (sscanf(value, "%d", &i) == 1) GameAspectRatio = i;
+	}
+	else if(strcmp(name, "UseChanLauncher") == 0)
+	{
+		if (sscanf(value, "%d", &i) == 1) UseChanLauncher = i;
 	}
 	else if (strcmp(name, "InstallPartitions") == 0)
 	{

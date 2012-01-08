@@ -10,6 +10,7 @@
 #include <string>
 #include "Controls/DeviceHandler.hpp"
 #include "settings/CSettings.h"
+#include "system/IosLoader.h"
 #include "lstub.h"
 #include "sys.h"
 #include "gecko.h"
@@ -97,12 +98,14 @@ static int RunAppbooter()
 	ExitApp();
 
 	if(Settings.EntryIOS != IOS_GetVersion())
-		IOS_ReloadIOS(Settings.EntryIOS);
+		IosLoader::ReloadIosKeepingRights(Settings.EntryIOS);
 
 	struct __argv args;
 	SetupARGV(&args);
 
 	u32 cpu_isr;
+
+	DCFlushRange(homebrewbuffer, homebrewsize);
 
 	memcpy(BOOTER_ADDR, app_booter_bin, app_booter_bin_size);
 	DCFlushRange(BOOTER_ADDR, app_booter_bin_size);

@@ -1317,13 +1317,16 @@ int CodeDownload(const char *id)
 		if (file.data != NULL)
 		{
 			bool validUrl = false;
-			char *textCpy = new (std::nothrow) char[file.size+1];
-			if(textCpy)
+			if(file.size > 0)
 			{
-				memcpy(textCpy, file.data, file.size);
-				textCpy[file.size] = '\0';
-				validUrl = (strcasestr(textCpy, "404 Not Found") == 0);
-				delete [] textCpy;
+				char *textCpy = new (std::nothrow) char[file.size+1];
+				if(textCpy)
+				{
+					memcpy(textCpy, file.data, file.size);
+					textCpy[file.size] = '\0';
+					validUrl = (strcasestr(textCpy, "404 Not Found") == 0);
+					delete [] textCpy;
+				}
 			}
 
 			if(!validUrl)

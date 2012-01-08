@@ -131,10 +131,6 @@ void GameBooter::SetupNandEmu(u8 NandEmuMode, const char *NandEmuPath, struct di
 			DeviceHandler::Instance()->UnMountSD();
 
 		Enable_Emu(strncmp(NandEmuPath, "usb", 3) == 0 ? EMU_USB : EMU_SD);
-
-		//! Remount SD again after activating NAND emu
-		if(strncmp(NandEmuPath, "sd", 2) == 0)
-			DeviceHandler::Instance()->MountSD();
 	}
 }
 
@@ -238,7 +234,9 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	const char *NandEmuPath = game_cfg->NandEmuPath.size() == 0 ? Settings.NandEmuPath : game_cfg->NandEmuPath.c_str();
 	if(gameHeader.tid != 0)
 	{
-		NandEmuMode = (gameHeader.type == TYPE_GAME_EMUNANDCHAN) ? 2 : 0; // If from emu nand set full emulation mode
+		NandEmuMode = (gameHeader.type == TYPE_GAME_EMUNANDCHAN)
+					  ? (game_cfg->NandEmuMode == INHERIT ? Settings.NandEmuChanMode : game_cfg->NandEmuMode)	//! Emulated nand title
+					  : 0;																						//! Real nand title
 		NandEmuPath = game_cfg->NandEmuPath.size() == 0 ? Settings.NandEmuChanPath : game_cfg->NandEmuPath.c_str();
 	}
 
@@ -261,15 +259,15 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	if(Settings.PlaylogUpdate)
 		Playlog_Update((char *) gameHeader.id, BNRInstance::Instance()->GetIMETTitle(CONF_GetLanguage()));
 
-	//! Setup NAND emulation
-	SetupNandEmu(NandEmuMode, NandEmuPath, gameHeader);
-
-	// Load wip codes
+	//! Load wip codes
 	load_wip_code(gameHeader.id);
 
 	//! Load Ocarina codes
 	if (ocarinaChoice)
 		ocarina_load_code(Settings.Cheatcodespath, gameHeader.id);
+
+	//! Setup NAND emulation
+	SetupNandEmu(NandEmuMode, NandEmuPath, gameHeader);
 
 	//! Setup disc stuff if we load a game
 	if(gameHeader.tid == 0)
@@ -334,8 +332,6 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 		gprintf("\tChannel Boot\n");
 		// Load dol
 		AppEntrypoint = Channels::LoadChannel(gameHeader.tid);
-		/* Setup low memory */
-		Disc_SetLowMem();
 		/* Setup video mode */
 		Disc_SelectVMode(videoChoice);
 	}
