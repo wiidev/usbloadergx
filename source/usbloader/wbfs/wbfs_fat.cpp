@@ -353,17 +353,37 @@ bool Wbfs_Fat::CheckLayoutB(char *fname, int len, u8* id, char *fname_title)
 	return true;
 }
 
+void Wbfs_Fat::AddHeader(struct discHdr *discHeader)
+{
+	//! First allocate before reallocating
+	if(!fat_hdr_list)
+		fat_hdr_list = (struct discHdr *) malloc(sizeof(struct discHdr));
+
+	struct discHdr *tmpList = (struct discHdr *) realloc(fat_hdr_list, (fat_hdr_count+1) * sizeof(struct discHdr));
+	if(!tmpList)
+		return; //out of memory, keep the list until now and stop
+
+	for(int j = 0; j < 6; ++j)
+		discHeader->id[j] = toupper((int) discHeader->id[j]);
+
+	fat_hdr_list = tmpList;
+	memcpy(&fat_hdr_list[fat_hdr_count], discHeader, sizeof(struct discHdr));
+	GameTitles.SetGameTitle(discHeader->id, discHeader->title);
+	fat_hdr_count++;
+}
+
 s32 Wbfs_Fat::GetHeadersCount()
 {
 	char path[MAX_FAT_PATH];
 	char fname[MAX_FAT_PATH];
 	char fpath[MAX_FAT_PATH];
+	char fname_title[TITLE_LEN];
 	struct discHdr tmpHdr;
 	struct stat st;
-	u8 id[8];
 	int is_dir;
 	int len;
-	char fname_title[TITLE_LEN];
+	u8 id[8];
+	memset(id, 0, sizeof(id));
 	const char *title;
 	DIR *dir_iter;
 	struct dirent *dirent;
@@ -381,7 +401,7 @@ s32 Wbfs_Fat::GetHeadersCount()
 	{
 		if (dirent->d_name[0] == '.') continue;
 
-		snprintf(fname, sizeof(fname), dirent->d_name);
+		snprintf(fname, sizeof(fname), "%s", dirent->d_name);
 
 		// reset id and title
 		memset(id, 0, sizeof(id));
@@ -414,7 +434,7 @@ s32 Wbfs_Fat::GetHeadersCount()
 			is_dir = S_ISDIR( st.st_mode );
 			if(!is_dir) continue;
 
-			snprintf(fname, sizeof(fname), dirent->d_name);
+			snprintf(fname, sizeof(fname), "%s", dirent->d_name);
 
 			len = strlen(fname);
 			if (len < 8) continue; // "GAMEID_x"
@@ -441,22 +461,23 @@ s32 Wbfs_Fat::GetHeadersCount()
 			if (!lay_a && !lay_b) continue;
 
 			// check ahead, make sure it succeeds
-			snprintf(fpath, sizeof(fpath), "%s/%s/%.6s.wbfs", path, fname, (char *) id);
+			snprintf(fpath, sizeof(fpath), "%s/%s/%.6s.wbfs", path, dirent->d_name, (char *) id);
 		}
 
 		// if we have titles.txt entry use that
 		title = GameTitles.GetTitle(id);
 		// if no titles.txt get title from dir or file name
-		if ((!title || *title == 0) && *fname_title != 0 && Settings.titlesOverride)
+		if (strlen(title) == 0 && Settings.titlesOverride && strlen(fname_title) > 0)
 			title = fname_title;
 
-		if (title && *title != 0)
+		if (strlen(title) > 0)
 		{
 			memset(&tmpHdr, 0, sizeof(tmpHdr));
 			memcpy(tmpHdr.id, id, 6);
-			snprintf(tmpHdr.title, sizeof(tmpHdr.title), title);
+			strncpy(tmpHdr.title, title, sizeof(tmpHdr.title)-1);
 			tmpHdr.magic = 0x5D1C9EA3;
-			goto add_hdr;
+			AddHeader(&tmpHdr);
+			continue;
 		}
 
 		// Check for existing wbfs/iso/ciso file in the directory
@@ -475,6 +496,7 @@ s32 Wbfs_Fat::GetHeadersCount()
 			}
 		}
 
+		fileext = strrchr(fpath, '.');
 		// Sanity check
 		if(!fileext)
 			continue;
@@ -492,7 +514,8 @@ s32 Wbfs_Fat::GetHeadersCount()
 				tmpHdr.is_ciso = 0;
 				if ((tmpHdr.magic == 0x5D1C9EA3) && (memcmp(tmpHdr.id, id, 6) == 0))
 				{
-					goto add_hdr;
+					AddHeader(&tmpHdr);
+					continue;
 				}
 			}
 			// no title found, read it from wbfs file
@@ -507,7 +530,10 @@ s32 Wbfs_Fat::GetHeadersCount()
 			int ret = wbfs_get_disc_info(part, 0, (u8*) &tmpHdr, sizeof(struct discHdr), &size);
 			ClosePart(part);
 			if (ret == 0)
-				goto add_hdr;
+			{
+				AddHeader(&tmpHdr);
+				continue;
+			}
 
 		}
 		else if (strcasecmp(fileext, ".iso") == 0)
@@ -522,7 +548,8 @@ s32 Wbfs_Fat::GetHeadersCount()
 				tmpHdr.is_ciso = 0;
 				if ((tmpHdr.magic == 0x5D1C9EA3) && (memcmp(tmpHdr.id, id, 6) == 0))
 				{
-					goto add_hdr;
+					AddHeader(&tmpHdr);
+					continue;
 				}
 			}
 		}
@@ -538,31 +565,11 @@ s32 Wbfs_Fat::GetHeadersCount()
 				tmpHdr.is_ciso = 1;
 				if ((tmpHdr.magic == 0x5D1C9EA3) && (memcmp(tmpHdr.id, id, 6) == 0))
 				{
-					goto add_hdr;
+					AddHeader(&tmpHdr);
+					continue;
 				}
 			}
 		}
-		// fail:
-		continue;
-
-		// success: add tmpHdr to list:
-		add_hdr:
-
-		//! First allocate before reallocating
-		if(!fat_hdr_list)
-			fat_hdr_list = (struct discHdr *) malloc(sizeof(struct discHdr));
-
-		fat_hdr_count++;
-		struct discHdr *tmpList = (struct discHdr *) realloc(fat_hdr_list, fat_hdr_count * sizeof(struct discHdr));
-		if(!tmpList)
-			break; //out of memory, keep the list until now and stop
-
-		for(int j = 0; j < 6; ++j)
-			tmpHdr.id[j] = toupper((int) tmpHdr.id[j]);
-
-		fat_hdr_list = tmpList;
-		memcpy(&fat_hdr_list[fat_hdr_count - 1], &tmpHdr, sizeof(struct discHdr));
-		GameTitles.SetGameTitle(tmpHdr.id, tmpHdr.title);
 	}
 
 	closedir(dir_iter);

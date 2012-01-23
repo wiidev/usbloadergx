@@ -30,10 +30,13 @@ class Wbfs_Fat: public Wbfs
 
 		u64 EstimateGameSize();
 
+		void AddHeader(struct discHdr *discHeader);
+
 		virtual int GetFragList(u8 *);
 		virtual u8 GetFSType(void) { return PART_FS_FAT; }
 
 	protected:
+
 		split_info_t split;
 
 		struct discHdr *fat_hdr_list;

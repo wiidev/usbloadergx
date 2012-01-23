@@ -669,10 +669,8 @@ void GameBrowseMenu::ReloadBrowser()
 		gameBrowser->SetSelectedOption(Settings.SelectedGame);
 
 		//! Setup optional background image
-		const u8 *backgroundImgData = Resources::GetFile("listBackground.png");
-		u32 backgroundImgDataSize = Resources::GetFileSize("listBackground.png");
-		if(backgroundImgData && !listBackground)
-			listBackground = new GuiImageData(backgroundImgData, backgroundImgDataSize);
+		if(!listBackground)
+			listBackground = Resources::GetImageData("listBackground.png");
 		if(listBackground)
 			bgImg->SetImage(listBackground);
 		else
@@ -715,10 +713,8 @@ void GameBrowseMenu::ReloadBrowser()
 		gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
 
 		//! Setup optional background image
-		const u8 *backgroundImgData = Resources::GetFile("gridBackground.png");
-		u32 backgroundImgDataSize = Resources::GetFileSize("gridBackground.png");
-		if(backgroundImgData && !gridBackground)
-			gridBackground = new GuiImageData(backgroundImgData, backgroundImgDataSize);
+		if(!gridBackground)
+			gridBackground = Resources::GetImageData("gridBackground.png");
 		if(gridBackground)
 			bgImg->SetImage(gridBackground);
 		else
@@ -761,10 +757,8 @@ void GameBrowseMenu::ReloadBrowser()
 		gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
 
 		//! Setup optional background image
-		const u8 *backgroundImgData = Resources::GetFile("carouselBackground.png");
-		u32 backgroundImgDataSize = Resources::GetFileSize("carouselBackground.png");
-		if(backgroundImgData && !carouselBackground)
-			carouselBackground = new GuiImageData(backgroundImgData, backgroundImgDataSize);
+		if(!carouselBackground)
+			carouselBackground = Resources::GetImageData("carouselBackground.png");
 		if(carouselBackground)
 			bgImg->SetImage(carouselBackground);
 		else

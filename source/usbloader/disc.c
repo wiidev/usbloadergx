@@ -14,8 +14,8 @@
 #include "alternatedol.h"
 #include "memory/memory.h"
 #include "wbfs.h"
-#include "../settings/SettingsEnums.h"
-#include "../gecko.h"
+#include "settings/SettingsEnums.h"
+#include "gecko.h"
 
 // Global app entry point
 extern u32 AppEntrypoint;
@@ -69,6 +69,8 @@ void Disc_SelectVMode(u8 videoselected)
 	{
 		case CONF_VIDEO_PAL:
 			vmode_reg = PAL60 ? VI_EURGB60 : VI_PAL;
+			if(PAL60)
+				vmode = progressive ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
 			break;
 
 		case CONF_VIDEO_MPAL:

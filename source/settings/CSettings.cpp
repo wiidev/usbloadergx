@@ -140,7 +140,7 @@ void CSettings::SetDefault()
 	LoaderMode = MODE_WIIGAMES;
 	SearchMode = SEARCH_BEGINNING;
 	GameAspectRatio = ASPECT_SYSTEM_DEFAULT;
-	PointerSpeed = 0.15f;
+	PointerSpeed = 0.18f;
 	UseChanLauncher = OFF;
 }
 

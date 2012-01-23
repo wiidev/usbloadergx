@@ -27,62 +27,18 @@
 #include <string.h>
 
 #include "uncompress.h"
-
-struct _LZ77Info
-{
-	u16 length : 4;
-	u16 offset : 12;
-} __attribute__((packed));
-
-typedef struct _LZ77Info LZ77Info;
+#include "lz77.h"
 
 u8 * uncompressLZ77(const u8 *inBuf, u32 inLength, u32 * size)
 {
-	u8 *buffer = NULL;
-	if (inLength <= 0x8 || *((const u32 *)inBuf) != 0x4C5A3737 /*"LZ77"*/ || inBuf[4] != 0x10)
+	if(!inBuf)
 		return NULL;
 
-	u32 uncSize = le32(((const u32 *)inBuf)[1] << 8);
+	u8 *buffer = NULL;
+	if (*((const u32 *)inBuf) != 0x4C5A3737 /*"LZ77"*/)
+		return NULL;
 
-	const u8 *inBufEnd = inBuf + inLength;
-	inBuf += 8;
-
-	buffer = (u8 *) malloc(uncSize);
-
-	if (!buffer)
-		return buffer;
-
-	u8 *bufCur = buffer;
-	u8 *bufEnd = buffer + uncSize;
-
-	while (bufCur < bufEnd && inBuf < inBufEnd)
-	{
-		u8 flags = *inBuf;
-		++inBuf;
-		int i = 0;
-		for (i = 0; i < 8 && bufCur < bufEnd && inBuf < inBufEnd; ++i)
-		{
-			if ((flags & 0x80) != 0)
-			{
-				const LZ77Info  * info = (const LZ77Info *)inBuf;
-				inBuf += sizeof (LZ77Info);
-				int length = info->length + 3;
-				if (bufCur - info->offset - 1 < buffer || bufCur + length > bufEnd)
-					return buffer;
-				memcpy(bufCur, bufCur - info->offset - 1, length);
-				bufCur += length;
-			}
-			else
-			{
-				*bufCur = *inBuf;
-				++inBuf;
-				++bufCur;
-			}
-			flags <<= 1;
-		}
-	}
-
-	*size = uncSize;
+	decompressLZ77content(inBuf + 4, inLength - 4, &buffer, size);
 
 	return buffer;
 }

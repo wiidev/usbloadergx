@@ -51,6 +51,11 @@ void FreeHomebrewBuffer()
 	Arguments.clear();
 }
 
+static inline bool IsDollZ (const u8 *buf)
+{
+	return (buf[0x100] == 0x3C);
+}
+
 static int SetupARGV(struct __argv * args)
 {
 	if (!args) return -1;
@@ -109,14 +114,16 @@ static int RunAppbooter()
 
 	memcpy(BOOTER_ADDR, app_booter_bin, app_booter_bin_size);
 	DCFlushRange(BOOTER_ADDR, app_booter_bin_size);
+	ICInvalidateRange(BOOTER_ADDR, app_booter_bin_size);
 
 	entrypoint entry = (entrypoint) BOOTER_ADDR;
 
-	if (args.argvMagic == ARGV_MAGIC)
-	{
-		memmove(ARGS_ADDR, &args, sizeof(args));
-		DCFlushRange(ARGS_ADDR, sizeof(args) + args.length);
-	}
+	if (!IsDollZ(homebrewbuffer))
+		memcpy(ARGS_ADDR, &args, sizeof(struct __argv));
+	else
+		memset(ARGS_ADDR, 0, sizeof(struct __argv));
+
+	DCFlushRange(ARGS_ADDR, sizeof(struct __argv) + args.length);
 
 	u64 currentStub = getStubDest();
 	loadStub();

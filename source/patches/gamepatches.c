@@ -91,6 +91,7 @@ void gamepatches(u8 videoSelected, u8 aspectForce, u8 languageChoice, u8 patchco
 			PatchAspectRatio(dst, len, aspectForce);
 
 		DCFlushRange(dst, len);
+		ICInvalidateRange(dst, len);
 	}
 
 	/* ERROR 002 fix (thanks to WiiPower for sharing this)*/

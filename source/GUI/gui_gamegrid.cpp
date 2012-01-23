@@ -366,7 +366,7 @@ void GuiGameGrid::SetSelectedOption(int ind)
 void GuiGameGrid::Draw()
 {
 	LOCK( this );
-	if (!this->IsVisible() || !gameList.size()) return;
+	if (!this->IsVisible() || !gameList.size() || !game.size()) return;
 
 	if (goLeft > 0)
 	{
@@ -436,7 +436,7 @@ void GuiGameGrid::ChangeRows(int n)
 
 void GuiGameGrid::Update(GuiTrigger * t)
 {
-	if (state == STATE_DISABLED || !t || !gameList.size()) return;
+	if (state == STATE_DISABLED || !t || !gameList.size() || !game.size()) return;
 
 	LOCK( this );
 	if (!(game[0]->GetEffect() || game[0]->GetEffectOnOver()))

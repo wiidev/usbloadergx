@@ -83,7 +83,11 @@ GuiImageData * Resources::GetImageData(const char * filename)
 		{
 			const u8 * buff = RecourceFiles[i].CustomFile ? RecourceFiles[i].CustomFile : RecourceFiles[i].DefaultFile;
 			const u32 size = RecourceFiles[i].CustomFile ? RecourceFiles[i].CustomFileSize : RecourceFiles[i].DefaultFileSize;
-			return (new GuiImageData(buff, size));
+
+			if(buff != NULL)
+				return (new GuiImageData(buff, size));
+			else
+				return NULL;
 		}
 	}
 

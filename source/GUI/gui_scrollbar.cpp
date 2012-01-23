@@ -412,8 +412,8 @@ void GuiScrollbar::CheckDPadControls(GuiTrigger *t)
 		SelInd += PageSize;
 		if(SelInd+PageSize >= EntrieCount)
 		{
-			SelInd = EntrieCount-PageSize;
-			SelItem = PageSize-1;
+			SelInd = MAX(EntrieCount-PageSize, 0);
+			SelItem = LIMIT(PageSize-1, 0, EntrieCount-1);
 		}
 		listChanged(SelItem, SelInd);
 	}
