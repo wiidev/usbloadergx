@@ -124,6 +124,8 @@ GuiSettingsMenu::GuiSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Use System Font" ));
 	Options->SetName(Idx++, "%s", tr( "Search Mode" ));
 	Options->SetName(Idx++, "%s", tr( "Virtual Pointer Speed" ));
+	Options->SetName(Idx++, "%s", tr( "Adjust Overscan X" ));
+	Options->SetName(Idx++, "%s", tr( "Adjust Overscan Y" ));
 
 	SetOptionValues();
 }
@@ -197,6 +199,12 @@ void GuiSettingsMenu::SetOptionValues()
 
 	//! Settings: Virtual Pointer Speed
 	Options->SetValue(Idx++, "%g", Settings.PointerSpeed);
+
+	//! Settings: Adjust Overscan X
+	Options->SetValue(Idx++, "%i", Settings.AdjustOverscanX);
+
+	//! Settings: Adjust Overscan Y
+	Options->SetValue(Idx++, "%i", Settings.AdjustOverscanY);
 }
 
 int GuiSettingsMenu::GetMenuInternal()
@@ -395,6 +403,32 @@ int GuiSettingsMenu::GetMenuInternal()
 			}
 
 			Settings.PointerSpeed = atof(entrie);
+		}
+	}
+
+	//! Settings: Adjust Overscan X
+	else if (ret == ++Idx)
+	{
+		char entrie[20];
+		snprintf(entrie, sizeof(entrie), "%i", Settings.AdjustOverscanX);
+		int ret = OnScreenKeyboard(entrie, sizeof(entrie), 0);
+		if(ret)
+		{
+			Settings.AdjustOverscanX = atoi(entrie);
+			AdjustOverscan(Settings.AdjustOverscanX, Settings.AdjustOverscanY);
+		}
+	}
+
+	//! Settings: Adjust Overscan Y
+	else if (ret == ++Idx)
+	{
+		char entrie[20];
+		snprintf(entrie, sizeof(entrie), "%i", Settings.AdjustOverscanY);
+		int ret = OnScreenKeyboard(entrie, sizeof(entrie), 0);
+		if(ret)
+		{
+			Settings.AdjustOverscanY = atoi(entrie);
+			AdjustOverscan(Settings.AdjustOverscanX, Settings.AdjustOverscanY);
 		}
 	}
 

@@ -131,19 +131,32 @@ void AifDecoder::OpenFile()
 		return;
 	}
 
-	SWaveChunk WaveChunk;
-	do
+	u32 magic = 0;
+
+	while(1)
 	{
-		int ret = file_fd->read((u8 *) &WaveChunk, sizeof(SWaveChunk));
+		int ret = file_fd->read((u8 *) &magic, sizeof(magic));
 		if(ret <= 0)
 		{
 			CloseFile();
 			return;
 		}
-	}
-	while(WaveChunk.magicDATA != 'COMM');
 
-	DataOffset = file_fd->tell()+WaveChunk.size;
+		if(magic == 'COMM')
+			break;
+		else
+			file_fd->seek(-3, SEEK_CUR);
+	}
+
+	u32 chunk_size = 0;
+	int ret = file_fd->read((u8 *) &chunk_size, sizeof(chunk_size));
+	if(ret <= 0)
+	{
+		CloseFile();
+		return;
+	}
+
+	DataOffset = file_fd->tell()+chunk_size;
 
 	SAIFFCommChunk CommHdr;
 	file_fd->seek(file_fd->tell()-sizeof(SWaveChunk), SEEK_SET);

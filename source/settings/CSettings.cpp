@@ -142,6 +142,8 @@ void CSettings::SetDefault()
 	GameAspectRatio = ASPECT_SYSTEM_DEFAULT;
 	PointerSpeed = 0.18f;
 	UseChanLauncher = OFF;
+	AdjustOverscanX = 0;
+	AdjustOverscanY = 0;
 }
 
 bool CSettings::Load()
@@ -320,6 +322,8 @@ bool CSettings::Save()
 	fprintf(file, "GameAspectRatio = %d\n", GameAspectRatio);
 	fprintf(file, "PointerSpeed = %g\n", PointerSpeed);
 	fprintf(file, "UseChanLauncher = %d\n", UseChanLauncher);
+	fprintf(file, "AdjustOverscanX = %d\n", AdjustOverscanX);
+	fprintf(file, "AdjustOverscanY = %d\n", AdjustOverscanY);
 	fclose(file);
 
 	return true;
@@ -648,6 +652,14 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if(strcmp(name, "UseChanLauncher") == 0)
 	{
 		if (sscanf(value, "%d", &i) == 1) UseChanLauncher = i;
+	}
+	else if(strcmp(name, "AdjustOverscanX") == 0)
+	{
+		AdjustOverscanX = atoi(value);
+	}
+	else if(strcmp(name, "AdjustOverscanY") == 0)
+	{
+		AdjustOverscanY = atoi(value);
 	}
 	else if (strcmp(name, "InstallPartitions") == 0)
 	{

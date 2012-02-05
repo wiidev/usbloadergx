@@ -116,6 +116,8 @@ void GameBooter::SetupNandEmu(u8 NandEmuMode, const char *NandEmuPath, struct di
 {
 	if(NandEmuMode && strchr(NandEmuPath, '/'))
 	{
+		int partition = -1;
+
 		//! Create save game path and title.tmd for not existing saves
 		CreateSavePath(&gameHeader);
 
@@ -123,14 +125,23 @@ void GameBooter::SetupNandEmu(u8 NandEmuMode, const char *NandEmuPath, struct di
 		Set_FullMode(NandEmuMode == 2);
 		Set_Path(strchr(NandEmuPath, '/'));
 
-		//! Set which partition to use (USB only)
+		//! Unmount devices to flush data before activating NAND Emu
 		if(strncmp(NandEmuPath, "usb", 3) == 0)
-			Set_Partition(atoi(NandEmuPath+3)-1);
-		//! Unmount SD since NAND Emu mount fails otherwise
-		else if(strncmp(NandEmuPath, "sd", 2) == 0)
+		{
+			//! Set which partition to use (USB only)
+			partition = atoi(NandEmuPath+3)-1;
+			Set_Partition(partition);
+			DeviceHandler::Instance()->UnMount(USB1 + partition);
+		}
+		else
 			DeviceHandler::Instance()->UnMountSD();
 
 		Enable_Emu(strncmp(NandEmuPath, "usb", 3) == 0 ? EMU_USB : EMU_SD);
+
+		//! Mount USB to start game, SD is not required
+		if(strncmp(NandEmuPath, "usb", 3) == 0)
+			DeviceHandler::Instance()->Mount(USB1 + partition);
+
 	}
 }
 

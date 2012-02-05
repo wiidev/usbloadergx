@@ -270,6 +270,7 @@ int StartUpProcess::Execute()
 	InitAudio();
 	setlocale(LC_CTYPE, "C-UTF-8");
 	setlocale(LC_MESSAGES, "C-UTF-8");
+	AdjustOverscan(Settings.AdjustOverscanX, Settings.AdjustOverscanY);
 
 	return 0;
 }

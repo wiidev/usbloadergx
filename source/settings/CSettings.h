@@ -141,6 +141,8 @@ class CSettings
 		short SearchMode;
 		short GameAspectRatio;
 		short UseChanLauncher;
+		int AdjustOverscanX;
+		int AdjustOverscanY;
 
 		// This variable is not saved to the settings file
 		bool FirstTimeRun;

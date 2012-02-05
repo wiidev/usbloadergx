@@ -21,6 +21,7 @@ void Menu_DrawTPLImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, GXTexO
 void Menu_DrawRectangle(f32 x, f32 y, f32 width, f32 height, GXColor color, u8 filled);
 s32 TakeScreenshot(const char *path);
 void VIDEO_SetWidescreen(bool widescreen);
+void AdjustOverscan(int x, int y);
 
 extern int screenheight;
 extern int screenwidth;

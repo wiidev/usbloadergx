@@ -478,20 +478,19 @@ typedef struct _ReplaceStruct
 {
 	const char * replace;
 	char orig;
-	short size;
 } ReplaceStruct;
 
 //! More replacements can be added if needed
 static const ReplaceStruct Replacements[] =
 {
-	{ "&gt;", '>', 4 },
-	{ "&lt;", '<', 4 },
-	{ "&st;", '*', 4 },
-	{ "&cl;", ':', 4 },
-	{ "&qt;", '\"', 6 },
-	{ "&qm;", '?', 6 },
-	{ "&vb;", '|', 5 },
-	{ NULL, '\0', 0 }
+	{ "&gt;", '>' },
+	{ "&lt;", '<' },
+	{ "&st;", '*' },
+	{ "&cl;", ':' },
+	{ "&qt;", '\"' },
+	{ "&qm;", '?' },
+	{ "&vb;", '|' },
+	{ NULL, '\0' }
 };
 
 static void ConvertInvalidCharacters(std::string &filepath)

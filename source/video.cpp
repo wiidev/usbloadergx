@@ -147,9 +147,13 @@ void InitVideo()
 
 	VIDEO_SetBlack(FALSE);
 	// Finally, the video is up and ready for use :)
-
-	// A console is always useful while debugging
-	//console_init(xfb[0], 80, 100, 500, 350, vmode->fbWidth * 2);
+}
+/****************************************************************************
+ * AdjustOverscan
+ ***************************************************************************/
+void AdjustOverscan(int x, int y)
+{
+	guOrtho(projection, y, screenheight-1 - y, x, screenwidth-1 - x, 0, 10000);
 }
 
 void VIDEO_SetWidescreen(bool widescreen)

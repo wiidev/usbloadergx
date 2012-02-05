@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-08 19:07+0100\n"
+"POT-Creation-Date: 2012-02-05 19:25+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -81,6 +81,12 @@ msgstr "AXNextFrame"
 
 msgid "Add category"
 msgstr "Kategorie hinzuf."
+
+msgid "Adjust Overscan X"
+msgstr ""
+
+msgid "Adjust Overscan Y"
+msgstr ""
 
 msgid "All"
 msgstr "Alle"
