@@ -38,7 +38,7 @@ u8 * uncompressLZ77(const u8 *inBuf, u32 inLength, u32 * size)
 	if (*((const u32 *)inBuf) != 0x4C5A3737 /*"LZ77"*/)
 		return NULL;
 
-	decompressLZ77content(inBuf + 4, inLength - 4, &buffer, size);
+	decompressLZ77content( (u8*)inBuf + 4, inLength - 4, &buffer, size);
 
 	return buffer;
 }
