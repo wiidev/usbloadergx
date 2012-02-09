@@ -76,6 +76,7 @@ class CSettings
 		char WiinnertagPath[100];
 		char NandEmuPath[50];
 		char NandEmuChanPath[50];
+		char GameCubePath[100];
 		short videomode;
 		short language;
 		short ocarina;

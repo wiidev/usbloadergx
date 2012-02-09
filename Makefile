@@ -35,6 +35,7 @@ SOURCES		:=	source \
 				source/banner \
 				source/Channels \
 				source/BoxCover \
+				source/GameCube \
 				source/cheats \
 				source/homebrewboot \
 				source/themes \

@@ -14,6 +14,7 @@
 #include "utils/ResourceManager.h"
 #include "usbloader/playlog.h"
 #include "usbloader/wbfs.h"
+#include "GameCube/GCGames.h"
 #include "themes/CTheme.h"
 #include "SoundOperations/SoundHandler.hpp"
 #include "utils/ThreadedTask.hpp"
@@ -71,8 +72,6 @@ void AppCleanUp(void)
 		return;
 
 	app_clean = true;
-	extern u8 mountMethod;
-	gprintf("Exiting main GUI.  mountMethod = %d\n", mountMethod);
 
 	if(Settings.CacheTitles)
 		GameTitles.WriteCachedTitles(Settings.titlestxt_path);
@@ -97,6 +96,7 @@ void AppCleanUp(void)
 	NewTitles::DestroyInstance();
 	ThreadedTask::DestroyInstance();
 	SoundHandler::DestroyInstance();
+	GCGames::DestroyInstance();
 	DeinitNetwork();
 	GameTitles.SetDefault();
 

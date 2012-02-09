@@ -4,6 +4,7 @@
 #include "settings/CSettings.h"
 #include "usbloader/wbfs.h"
 #include "usbloader/usbstorage2.h"
+#include "utils/tools.h"
 #include "wbfs_rw.h"
 
 #define MAX_WBFS_SECTORSIZE	 4096

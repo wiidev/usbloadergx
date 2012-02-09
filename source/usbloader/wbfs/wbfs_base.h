@@ -2,7 +2,6 @@
 #define _H
 
 #include "libs/libwbfs/libwbfs.h"
-#include "usbloader/utils.h"
 #include "usbloader/frag.h"
 #include "usbloader/wbfs.h"
 

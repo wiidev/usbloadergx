@@ -17,9 +17,9 @@
 #include "GUI/gui.h"
 #include "prompts/ProgressWindow.h"
 #include "usbloader/wbfs.h"
-#include "usbloader/utils.h"
 #include "themes/CTheme.h"
 #include "utils/timer.h"
+#include "utils/tools.h"
 
 extern float gamesize;
 extern int install_abort_signal;

@@ -8,8 +8,9 @@
 #include "usbloader/sdhc.h"
 #include "usbloader/usbstorage2.h"
 #include "usbloader/wbfs.h"
-#include "wbfs_rw.h"
+#include "utils/tools.h"
 
+#include "wbfs_rw.h"
 #include "wbfs_base.h"
 
 Wbfs::Wbfs(u32 l, u32 s, u32 part, u32 port)

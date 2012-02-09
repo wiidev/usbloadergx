@@ -11,7 +11,7 @@
 class GameWindow : public GuiWindow
 {
 	public:
-		GameWindow(int GameSelected);
+		GameWindow(int GameSelected, struct discHdr *dvd);
 		virtual ~GameWindow();
 		int Run();
 		int GetSelectedGame() { return gameSelected; };
@@ -30,6 +30,7 @@ class GameWindow : public GuiWindow
 		int returnVal;
 		int gameSelected;
 		GameBrowseMenu *browserMenu;
+		struct discHdr *dvdheader;
 
 		GuiTrigger * trigA;
 		GuiTrigger * trigB;

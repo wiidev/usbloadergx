@@ -2,11 +2,11 @@
 
 #include "menus.h"
 #include "usbloader/usbstorage2.h"
-#include "usbloader/utils.h"
 #include "usbloader/wbfs.h"
 #include "GUI/gui_optionbrowser.h"
 #include "Controls/DeviceHandler.hpp"
 #include "themes/CTheme.h"
+#include "utils/tools.h"
 
 /****************************************************************************
  * SelectPartitionMenu

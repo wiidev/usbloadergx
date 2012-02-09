@@ -255,7 +255,8 @@ int FeatureSettingsMenu::GetMenuInternal()
 
 			for(int i = 0; i < gameList.size(); ++i)
 			{
-				if(gameList[i]->type != TYPE_GAME_WII && gameList[i]->type != TYPE_GAME_NANDCHAN)
+				if(   gameList[i]->type != TYPE_GAME_WII_IMG
+				   && gameList[i]->type != TYPE_GAME_NANDCHAN)
 					continue;
 
 				if(gameList[i]->tid != 0) //! Channels

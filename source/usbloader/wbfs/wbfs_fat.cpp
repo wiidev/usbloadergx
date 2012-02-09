@@ -25,6 +25,7 @@
 #include "prompts/ProgressWindow.h"
 #include "usbloader/wbfs.h"
 #include "usbloader/GameList.h"
+#include "utils/tools.h"
 #include "wbfs_rw.h"
 
 #include "gecko.h"
@@ -38,6 +39,15 @@ static const char wbfs_fat_dir[] = "/wbfs";
 static const char invalid_path[] = "/\\:|<>?*\"'";
 extern u32 hdd_sector_size[2];
 extern int install_abort_signal;
+
+inline bool isGameID(const char *id)
+{
+	for (int i = 0; i < 6; i++)
+		if (!isalnum((int) id[i]))
+			return false;
+
+	return true;
+}
 
 Wbfs_Fat::Wbfs_Fat(u32 lba, u32 size, u32 part, u32 port) :
 	Wbfs(lba, size, part, port), fat_hdr_list(NULL), fat_hdr_count(0)
@@ -150,7 +160,9 @@ s32 Wbfs_Fat::GetHeaders(struct discHdr *outbuf, u32 cnt, u32 len)
 
 	memcpy(outbuf, fat_hdr_list, cnt*len);
 
-	SAFE_FREE(fat_hdr_list);
+	if(fat_hdr_list)
+		free(fat_hdr_list);
+	fat_hdr_list = NULL;
 	fat_hdr_count = 0;
 
 	return 0;
@@ -221,7 +233,7 @@ s32 Wbfs_Fat::RemoveGame(u8 *discid)
 	}
 	closedir(dir);
 	// remove game subdir
-	unlink(path);
+	remove(path);
 
 	return 0;
 }
@@ -333,7 +345,7 @@ bool Wbfs_Fat::CheckLayoutB(char *fname, int len, u8* id, char *fname_title)
 {
 	if (len <= 8) return false;
 	if (fname[len - 8] != '[' || fname[len - 1] != ']') return false;
-	if (!is_gameid(&fname[len - 7])) return false;
+	if (!isGameID(&fname[len - 7])) return false;
 	strncpy(fname_title, fname, TITLE_LEN);
 	// cut at '['
 	fname_title[len - 8] = 0;
@@ -388,7 +400,9 @@ s32 Wbfs_Fat::GetHeadersCount()
 	DIR *dir_iter;
 	struct dirent *dirent;
 
-	SAFE_FREE( fat_hdr_list );
+	if(fat_hdr_list)
+		free(fat_hdr_list);
+	fat_hdr_list = NULL;
 	fat_hdr_count = 0;
 
 	strcpy(path, wbfs_fs_drive);
@@ -451,7 +465,7 @@ s32 Wbfs_Fat::GetHeadersCount()
 				// usb:/wbfs/GAMEID_TITLE/GAMEID.wbfs
 				memcpy(id, fname, 6);
 
-				if(is_gameid((char*) id))
+				if(isGameID((char*) id))
 				{
 					lay_a = 1;
 					snprintf(fname_title, sizeof(fname_title), &fname[7]);
@@ -819,16 +833,6 @@ void Wbfs_Fat::title_filename(char *title)
 			title[i] = '_';
 		}
 	}
-}
-
-bool Wbfs_Fat::is_gameid(char *id)
-{
-	int i;
-	for (i = 0; i < 6; i++)
-	{
-		if (!isalnum((u32) id[i])) return false;
-	}
-	return true;
 }
 
 int Wbfs_Fat::GetFragList(u8 *id)

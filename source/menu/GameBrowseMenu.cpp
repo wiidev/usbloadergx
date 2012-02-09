@@ -33,10 +33,9 @@
 #include "wpad.h"
 #include "sys.h"
 
-extern u8 mountMethod;
 extern bool updateavailable;
-extern struct discHdr *dvdheader;
 
+struct discHdr *dvdheader = NULL;
 static bool Exiting = false;
 
 GameBrowseMenu::GameBrowseMenu()
@@ -1093,11 +1092,11 @@ int GameBrowseMenu::MainLoop()
 		gameInfo->ResetState();
 		if (SelectedGame >= 0 && SelectedGame < (s32) gameList.size())
 		{
-			rockout(SelectedGame);
+			rockout(gameList[SelectedGame]);
 			SetState(STATE_DISABLED);
-			int choice = showGameInfo(SelectedGame);
+			int choice = showGameInfo(SelectedGame, 0);
 			SetState(STATE_DEFAULT);
-			rockout(SelectedGame, 2);
+			rockout(0);
 			if (choice == 2)
 				homeBtn->SetState(STATE_CLICKED);
 		}
@@ -1173,7 +1172,7 @@ int GameBrowseMenu::MainLoop()
 			return returnMenu;
 		}
 
-		int choice = CheckboxWindow(tr( "Select titles sources." ), 0, tr( "Wii Games" ), tr( "Nand Channels" ), tr("EmuNand Channels"), 0, 0, 0, Settings.LoaderMode);
+		int choice = CheckboxWindow(tr( "Select titles sources." ), 0, tr( "Wii Games" ), tr("GC Games"), tr( "Nand Channels" ), tr("EmuNand Channels"), 0, 0, Settings.LoaderMode);
 		if(choice != CheckedNone && choice != Settings.LoaderMode)
 		{
 			Settings.LoaderMode = choice;
@@ -1237,10 +1236,9 @@ int GameBrowseMenu::MainLoop()
 	}
 
 	gameClicked = gameBrowser ? gameBrowser->GetClickedOption() : -1;
-	if ((gameClicked >= 0 && gameClicked < (s32) gameList.size()) || mountMethod != 0)
-	{
-		OpenClickedGame();
-	}
+
+	if(gameClicked >= 0 && gameClicked < (s32) gameList.size())
+		OpenClickedGame(gameList[gameClicked]);
 
 	return returnMenu;
 }
@@ -1271,8 +1269,15 @@ void GameBrowseMenu::CheckDiscSlotUpdate()
 		{
 			if(!dvdheader)
 				dvdheader = new struct discHdr;
-			mountMethod = DiscMount(dvdheader);
-			rockout(GetSelectedGame());
+
+			if(Disc_Mount(dvdheader) < 0)
+			{
+				delete dvdheader;
+				dvdheader = NULL;
+				ShowError(tr("Can't mount or unknown disc format."));
+			}
+			else
+				OpenClickedGame(dvdheader);
 		}
 		else
 			WindowPrompt(tr( "No disc inserted." ), 0, tr( "OK" ));
@@ -1399,7 +1404,7 @@ void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
 	ResumeGui();
 }
 
-int GameBrowseMenu::OpenClickedGame()
+int GameBrowseMenu::OpenClickedGame(struct discHdr *header)
 {
 	int choice = -1;
 	int gameSelected = GetSelectedGame();
@@ -1413,7 +1418,8 @@ int GameBrowseMenu::OpenClickedGame()
 		ResumeGui();
 	}
 
-	rockout(gameSelected);
+	rockout(header);
+
 	SetState(STATE_DISABLED);
 	if(gameBrowser)
 		gameBrowser->SetState(STATE_DISABLED);
@@ -1422,11 +1428,11 @@ int GameBrowseMenu::OpenClickedGame()
 		wiilight(1);
 
 	if (Settings.quickboot) { //quickboot game
-		GameWindow::BootGame(mountMethod ? dvdheader : gameList[gameSelected]);
+		GameWindow::BootGame(header);
 	}
 	else
 	{
-		GameWindow * GamePrompt = new GameWindow(gameSelected);
+		GameWindow * GamePrompt = new GameWindow(gameSelected, dvdheader == header ? dvdheader : 0);
 		GamePrompt->SetGameBrowseMenu(this);
 		mainWindow->Append(GamePrompt);
 
@@ -1447,8 +1453,7 @@ int GameBrowseMenu::OpenClickedGame()
 	}
 
 	wiilight(0);
-	rockout(-1, -1);
-	mountMethod = 0;
+	rockout(0);
 
 	SetState(STATE_DEFAULT);
 	if(gameBrowser)

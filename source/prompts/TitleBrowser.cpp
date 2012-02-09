@@ -22,8 +22,7 @@
 #include "audio.h"
 #include "xml/GameTDB.hpp"
 #include "wad/nandtitle.h"
-#include "../usbloader/utils.h"
-#include "../gecko.h"
+#include "gecko.h"
 
 #include "Controls/DeviceHandler.hpp"
 #include "usbloader/NandEmu.h"

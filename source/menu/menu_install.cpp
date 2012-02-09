@@ -2,10 +2,10 @@
 #include "usbloader/usbstorage2.h"
 #include "usbloader/wbfs.h"
 #include "usbloader/disc.h"
-#include "usbloader/utils.h"
 #include "usbloader/GameList.h"
 #include "prompts/ProgressWindow.h"
 #include "themes/CTheme.h"
+#include "utils/tools.h"
 
 extern int install_abort_signal;
 float gamesize = 0.0f;

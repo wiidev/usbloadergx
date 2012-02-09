@@ -79,6 +79,7 @@ void CSettings::SetDefault()
 	strcpy(unlockCode, "");
 	strcpy(db_language, "");
 	strcpy(returnTo, "");
+	strcpy(GameCubePath, "sd:/games/");
 
 	godmode = 1;
 	videomode = VIDEO_MODE_DISCDEFAULT;

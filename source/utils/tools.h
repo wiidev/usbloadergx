@@ -1,6 +1,13 @@
 #ifndef TOOLS_H_
 #define TOOLS_H_
 
+	/* Constants */
+#define KB_SIZE	 1024.0f
+#define MB_SIZE	 1048576.0f
+#define GB_SIZE	 1073741824.0f
+
+#define round_up(x,n)   (-(-(x) & -(n)))
+
 #define ABS(x) ( (x) >= (0) ? (x) : (-(x)) )
 #define LIMIT(x, min, max)																	\
 	({																						\

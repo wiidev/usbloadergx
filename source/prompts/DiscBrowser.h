@@ -12,6 +12,5 @@
 #include "usbloader/disc.h"
 
 int DiscBrowse(const char * GameID, char * dolname, int dolname_size);
-u8 DiscMount(struct discHdr * header);
 
 #endif

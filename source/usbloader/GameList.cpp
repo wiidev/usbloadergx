@@ -26,6 +26,7 @@
 #include <malloc.h>
 #include "GUI/gui_searchbar.h"
 #include "usbloader/wbfs.h"
+#include "GameCube/GCGames.h"
 #include "settings/newtitles.h"
 #include "settings/CSettings.h"
 #include "settings/CGameSettings.h"
@@ -254,6 +255,10 @@ int GameList::FilterList(const wchar_t * gameFilter)
 	if(Settings.LoaderMode & MODE_WIIGAMES)
 		InternalFilterList(FullGameList);
 
+	// Filter gc game list if selected
+	if(Settings.LoaderMode & MODE_GCGAMES)
+		InternalFilterList(GCGames::Instance()->GetHeaders());
+
 	// Filter nand channel list if selected
 	if(Settings.LoaderMode & MODE_NANDCHANNELS)
 		InternalFilterList(Channels::Instance()->GetNandHeaders());
@@ -294,6 +299,10 @@ int GameList::LoadUnfiltered()
 	// Filter current game list if selected
 	if(Settings.LoaderMode & MODE_WIIGAMES)
 		InternalLoadUnfiltered(FullGameList);
+
+	// Filter gc game list if selected
+	if(Settings.LoaderMode & MODE_GCGAMES)
+		InternalLoadUnfiltered(GCGames::Instance()->GetHeaders());
 
 	// Filter nand channel list if selected
 	if(Settings.LoaderMode & MODE_NANDCHANNELS)

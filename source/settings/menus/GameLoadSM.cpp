@@ -170,36 +170,56 @@ void GameLoadSM::SetOptionNames()
 {
 	int Idx = 0;
 
+	Options->SetName(Idx++, "%s", tr( "Game Lock" ));
 	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
-	Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
-	Options->SetName(Idx++, "%s", tr( "Sneek Video Patch" ));
-	Options->SetName(Idx++, "%s", tr( "Aspect Ratio" ));
-	Options->SetName(Idx++, "%s", tr( "Game Language" ));
-	Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
-	Options->SetName(Idx++, "%s", tr( "Ocarina" ));
-	Options->SetName(Idx++, "%s", tr( "Game IOS" ));
-	Options->SetName(Idx++, "%s", tr( "Parental Control" ));
-	Options->SetName(Idx++, "%s", tr( "Error 002 fix" ));
-	Options->SetName(Idx++, "%s", tr( "Return To" ));
-	if(Header->type == TYPE_GAME_WII)
+
+	//! Not available on GC
+	if(Header->type != TYPE_GAME_GC_IMG && Header->type != TYPE_GAME_GC_DISC)
 	{
-		Options->SetName(Idx++, "%s", tr( "Alternate DOL" ));
-		Options->SetName(Idx++, "%s", tr( "Select DOL Offset" ));
+		Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
+		Options->SetName(Idx++, "%s", tr( "Sneek Video Patch" ));
+		Options->SetName(Idx++, "%s", tr( "Aspect Ratio" ));
+		Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
 	}
-	Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
-	if(Header->type == TYPE_GAME_WII || Header->type == TYPE_GAME_EMUNANDCHAN)
+
+	Options->SetName(Idx++, "%s", tr( "Game Language" ));
+	Options->SetName(Idx++, "%s", tr( "Ocarina" ));
+	Options->SetName(Idx++, "%s", tr( "Parental Control" ));
+
+	//! Not available on GC
+	if(Header->type != TYPE_GAME_GC_IMG && Header->type != TYPE_GAME_GC_DISC)
+	{
+		Options->SetName(Idx++, "%s", tr( "Hooktype" ));
+		Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
+		Options->SetName(Idx++, "%s", tr( "Game IOS" ));
+		Options->SetName(Idx++, "%s", tr( "Error 002 fix" ));
+		Options->SetName(Idx++, "%s", tr( "Return To" ));
+		Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
+	}
+
+	//! Only wii games and emu nand channels
+	if(   Header->type == TYPE_GAME_WII_IMG
+	   || Header->type == TYPE_GAME_WII_DISC
+	   || Header->type == TYPE_GAME_EMUNANDCHAN)
 	{
 		Options->SetName(Idx++, "%s", tr( "Nand Emulation" ));
 		Options->SetName(Idx++, "%s", tr( "Nand Emu Path" ));
 	}
-	Options->SetName(Idx++, "%s", tr( "Hooktype" ));
-	Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
-	Options->SetName(Idx++, "%s", tr( "Game Lock" ));
+
+	//! Only on Wii games
+	if(Header->type == TYPE_GAME_WII_IMG || Header->type == TYPE_GAME_WII_DISC)
+	{
+		Options->SetName(Idx++, "%s", tr( "Alternate DOL" ));
+		Options->SetName(Idx++, "%s", tr( "Select DOL Offset" ));
+	}
 }
 
 void GameLoadSM::SetOptionValues()
 {
 	int Idx = 0;
+
+	//! Settings: Game Lock
+	Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.Locked] ));
 
 	//! Settings: Video Mode
 	if(GameConfig.video == INHERIT)
@@ -207,23 +227,33 @@ void GameLoadSM::SetOptionValues()
 	else
 		Options->SetValue(Idx++, "%s", tr(VideoModeText[GameConfig.video]));
 
-	//! Settings: VIDTV Patch
-	if(GameConfig.vipatch == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.vipatch]));
+	//! Not available on GC
+	if(Header->type != TYPE_GAME_GC_IMG && Header->type != TYPE_GAME_GC_DISC)
+	{
+		//! Settings: VIDTV Patch
+		if(GameConfig.vipatch == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.vipatch]));
 
-	//! Settings: Sneek Video Patch
-	if(GameConfig.sneekVideoPatch == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.sneekVideoPatch]));
+		//! Settings: Sneek Video Patch
+		if(GameConfig.sneekVideoPatch == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.sneekVideoPatch]));
 
-	//! Settings: Aspect Ratio
-	if(GameConfig.aspectratio == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(AspectText[GameConfig.aspectratio]));
+		//! Settings: Aspect Ratio
+		if(GameConfig.aspectratio == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(AspectText[GameConfig.aspectratio]));
+
+		//! Settings: Patch Country Strings
+		if(GameConfig.patchcountrystrings == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.patchcountrystrings]));
+	}
 
 	//! Settings: Game Language
 	if(GameConfig.language == INHERIT)
@@ -231,49 +261,84 @@ void GameLoadSM::SetOptionValues()
 	else
 		Options->SetValue(Idx++, "%s", tr(LanguageText[GameConfig.language]));
 
-	//! Settings: Patch Country Strings
-	if(GameConfig.patchcountrystrings == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.patchcountrystrings]));
-
 	//! Settings: Ocarina
 	if(GameConfig.ocarina == INHERIT)
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.ocarina]));
 
-	//! Settings: Game IOS
-	if(GameConfig.ios == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%i", GameConfig.ios);
-
 	//! Settings: Parental Control
 	Options->SetValue(Idx++, "%s", tr(ParentalText[GameConfig.parentalcontrol]));
 
-	//! Settings: Error 002 fix
-	if(GameConfig.errorfix002 == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(Error002Text[GameConfig.errorfix002]));
-
-	//! Settings: Return To
-	if(GameConfig.returnTo)
+	//! Not available on GC
+	if(Header->type != TYPE_GAME_GC_IMG && Header->type != TYPE_GAME_GC_DISC)
 	{
-		const char* TitleName = NULL;
-		u64 tid = NandTitles.FindU32(Settings.returnTo);
-		if (tid > 0)
-			TitleName = NandTitles.NameOf(tid);
-		Options->SetValue(Idx++, "%s", TitleName ? TitleName : strlen(Settings.returnTo) > 0 ?
-										Settings.returnTo : tr( OnOffText[0] ));
-	}
-	else
-	{
-		Options->SetValue(Idx++, "%s", tr( OnOffText[0] ));
+		//! Settings: Hooktype
+		if(GameConfig.Hooktype == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr( HooktypeText[GameConfig.Hooktype] ));
+
+		//! Settings: Wiird Debugger
+		if(GameConfig.WiirdDebugger == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.WiirdDebugger] ));
+
+		//! Settings: Game IOS
+		if(GameConfig.ios == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%i", GameConfig.ios);
+
+		//! Settings: Error 002 fix
+		if(GameConfig.errorfix002 == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(Error002Text[GameConfig.errorfix002]));
+
+		//! Settings: Return To
+		if(GameConfig.returnTo)
+		{
+			const char* TitleName = NULL;
+			u64 tid = NandTitles.FindU32(Settings.returnTo);
+			if (tid > 0)
+				TitleName = NandTitles.NameOf(tid);
+			Options->SetValue(Idx++, "%s", TitleName ? TitleName : strlen(Settings.returnTo) > 0 ?
+											Settings.returnTo : tr( OnOffText[0] ));
+		}
+		else
+		{
+			Options->SetValue(Idx++, "%s", tr( OnOffText[0] ));
+		}
+
+		//! Settings: Block IOS Reload
+		if(GameConfig.iosreloadblock == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.iosreloadblock]) );
 	}
 
-	if(Header->type == TYPE_GAME_WII)
+	//! Only wii games and emu nand channels
+	if(   Header->type == TYPE_GAME_WII_IMG
+	   || Header->type == TYPE_GAME_WII_DISC
+	   || Header->type == TYPE_GAME_EMUNANDCHAN)
+	{
+		//! Settings: Nand Emulation
+		if(GameConfig.NandEmuMode == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr( NandEmuText[GameConfig.NandEmuMode] ));
+
+		//! Settings: Nand Emu Path
+		if(GameConfig.NandEmuPath.size() == 0)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", GameConfig.NandEmuPath.c_str());
+	}
+
+	//! Only on Wii games
+	if(Header->type == TYPE_GAME_WII_IMG || Header->type == TYPE_GAME_WII_DISC)
 	{
 		//! Settings: Alternate DOL
 		Options->SetValue(Idx++, "%s", tr( AlternateDOLText[GameConfig.loadalternatedol] ));
@@ -289,42 +354,6 @@ void GameLoadSM::SetOptionValues()
 				Options->SetValue(Idx++, "%i", GameConfig.alternatedolstart);
 		}
 	}
-
-	//! Settings: Block IOS Reload
-	if(GameConfig.iosreloadblock == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.iosreloadblock]) );
-
-	if(Header->type == TYPE_GAME_WII || Header->type == TYPE_GAME_EMUNANDCHAN)
-	{
-		//! Settings: Nand Emulation
-		if(GameConfig.NandEmuMode == INHERIT)
-			Options->SetValue(Idx++, tr("Use global"));
-		else
-			Options->SetValue(Idx++, "%s", tr( NandEmuText[GameConfig.NandEmuMode] ));
-
-		//! Settings: Nand Emu Path
-		if(GameConfig.NandEmuPath.size() == 0)
-			Options->SetValue(Idx++, tr("Use global"));
-		else
-			Options->SetValue(Idx++, "%s", GameConfig.NandEmuPath.c_str());
-	}
-
-	//! Settings: Hooktype
-	if(GameConfig.Hooktype == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr( HooktypeText[GameConfig.Hooktype] ));
-
-	//! Settings: Wiird Debugger
-	if(GameConfig.WiirdDebugger == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.WiirdDebugger] ));
-
-	//! Settings: Game Lock
-	Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.Locked] ));
 }
 
 int GameLoadSM::GetMenuInternal()
@@ -348,40 +377,50 @@ int GameLoadSM::GetMenuInternal()
 
 	int Idx = -1;
 
-	//! Settings: Video Mode
+	//! Settings: Game Lock
 	if (ret == ++Idx)
+	{
+		if (++GameConfig.Locked >= MAX_ON_OFF) GameConfig.Locked = 0;
+	}
+
+	//! Settings: Video Mode
+	else if (ret == ++Idx)
 	{
 		if (++GameConfig.video >= VIDEO_MODE_MAX) GameConfig.video = INHERIT;
 	}
 
-	//! Settings: VIDTV Patch
-	else if (ret == ++Idx)
+	//! Not available on GC
+	if(Header->type != TYPE_GAME_GC_IMG && Header->type != TYPE_GAME_GC_DISC)
 	{
-		if (++GameConfig.vipatch >= MAX_ON_OFF) GameConfig.vipatch = INHERIT;
-	}
+		//! Settings: VIDTV Patch
+		if (ret == ++Idx)
+		{
+			if (++GameConfig.vipatch >= MAX_ON_OFF) GameConfig.vipatch = INHERIT;
+		}
 
-	//! Settings: Sneek Video Patch
-	else if (ret == ++Idx)
-	{
-		if (++GameConfig.sneekVideoPatch >= MAX_ON_OFF) GameConfig.sneekVideoPatch = INHERIT;
-	}
+		//! Settings: Sneek Video Patch
+		else if (ret == ++Idx)
+		{
+			if (++GameConfig.sneekVideoPatch >= MAX_ON_OFF) GameConfig.sneekVideoPatch = INHERIT;
+		}
 
-	//! Settings: Aspect Ratio
-	else if (ret == ++Idx)
-	{
-		if (++GameConfig.aspectratio >= ASPECT_MAX) GameConfig.aspectratio = INHERIT;
+		//! Settings: Aspect Ratio
+		else if (ret == ++Idx)
+		{
+			if (++GameConfig.aspectratio >= ASPECT_MAX) GameConfig.aspectratio = INHERIT;
+		}
+
+		//! Settings: Patch Country Strings
+		if (ret == ++Idx)
+		{
+			if (++GameConfig.patchcountrystrings >= MAX_ON_OFF) GameConfig.patchcountrystrings = INHERIT;
+		}
 	}
 
 	//! Settings: Game Language
-	else if (ret == ++Idx)
+	if (ret == ++Idx)
 	{
 		if (++GameConfig.language >= MAX_LANGUAGE) GameConfig.language = INHERIT;
-	}
-
-	//! Settings: Patch Country Strings
-	else if (ret == ++Idx)
-	{
-		if (++GameConfig.patchcountrystrings >= MAX_ON_OFF) GameConfig.patchcountrystrings = INHERIT;
 	}
 
 	//! Settings: Ocarina
@@ -390,158 +429,167 @@ int GameLoadSM::GetMenuInternal()
 		if (++GameConfig.ocarina >= MAX_ON_OFF) GameConfig.ocarina = INHERIT;
 	}
 
-	//! Settings: Game IOS
-	else if (ret == ++Idx)
-	{
-		char entered[4];
-		snprintf(entered, sizeof(entered), "%i", GameConfig.ios);
-		if(OnScreenKeyboard(entered, sizeof(entered), 0))
-		{
-			GameConfig.ios = atoi(entered) & 0xFF;
-			if(GameConfig.ios < 200 && GameConfig.ios != INHERIT) GameConfig.ios = 200;
-
-			if(GameConfig.ios != INHERIT && NandTitles.IndexOf(TITLE_ID(1, GameConfig.ios)) < 0)
-			{
-				WindowPrompt(tr("Warning:"), tr("This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."), tr("OK"));
-			}
-			else if(GameConfig.ios == 254)
-			{
-				WindowPrompt(tr("Warning:"), tr("This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."), tr("OK"));
-			}
-		}
-	}
-
 	//! Settings: Parental Control
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.parentalcontrol >= 5) GameConfig.parentalcontrol = 0;
 	}
 
-	//! Settings: Error 002 fix
-	else if (ret == ++Idx)
+	//! Not available on GC
+	if(Header->type != TYPE_GAME_GC_IMG && Header->type != TYPE_GAME_GC_DISC)
 	{
-		if (++GameConfig.errorfix002 >= 3) GameConfig.errorfix002 = INHERIT;
-	}
-
-	//! Settings: Return To
-	else if (ret == ++Idx)
-	{
-		if (++GameConfig.returnTo >= MAX_ON_OFF) GameConfig.returnTo = 0;
-	}
-
-	//! Settings: Alternate DOL
-	else if ((Header->type == TYPE_GAME_WII) && ret == ++Idx)
-	{
-		if (++GameConfig.loadalternatedol >= ALT_DOL_MAX_CHOICE)
-			GameConfig.loadalternatedol = 0;
-	}
-
-	//! Settings: Select DOL Offset from Game
-	else if ((Header->type == TYPE_GAME_WII) && ret == ++Idx && GameConfig.loadalternatedol == 1)
-	{
-		GuiWindow * parentWindow = (GuiWindow *) parentElement;
-		if(parentWindow) parentWindow->SetState(STATE_DISABLED);
-		//alt dol menu for games that require more than a single alt dol
-		int autodol = autoSelectDolPrompt((char *) GameConfig.id);
-		if(autodol == 0)
+		//! Settings: Hooktype
+		if (ret == ++Idx)
 		{
-			if(parentWindow) parentWindow->SetState(STATE_DEFAULT);
-			return MENU_NONE; //Cancel Button pressed
+			if (++GameConfig.Hooktype >= 8) GameConfig.Hooktype = INHERIT;
 		}
 
-		char tmp[170];
-
-		if (autodol > 0)
+		//! Settings: Wiird Debugger
+		else if (ret == ++Idx)
 		{
-			GameConfig.alternatedolstart = autodol;
-			snprintf(tmp, sizeof(tmp), "%s <%i>", tr( "AUTO" ), autodol);
-			GameConfig.alternatedolname = tmp;
-			SetOptionValues();
-			if(parentWindow) parentWindow->SetState(STATE_DEFAULT);
-			return MENU_NONE;
+			if (++GameConfig.WiirdDebugger >= MAX_ON_OFF) GameConfig.WiirdDebugger = INHERIT;
 		}
 
-		int res = DiscBrowse(GameConfig.id, tmp, sizeof(tmp));
-		if (res >= 0)
+		//! Settings: Game IOS
+		else if (ret == ++Idx)
 		{
-			GameConfig.alternatedolname = tmp;
-			GameConfig.alternatedolstart = res;
-			snprintf(tmp, sizeof(tmp), "%s %.6s - %i", tr( "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team." ), (char *) GameConfig.id, GameConfig.alternatedolstart);
-			WindowPrompt(0, tmp, tr( "OK" ));
-		}
-
-		if(GameConfig.alternatedolstart == 0)
-			GameConfig.loadalternatedol = 0;
-		if(parentWindow) parentWindow->SetState(STATE_DEFAULT);
-	}
-
-	//! Settings: Block IOS Reload
-	else if (ret == ++Idx)
-	{
-		if(++GameConfig.iosreloadblock >= 3) GameConfig.iosreloadblock = INHERIT;
-	}
-
-	//! Settings: Nand Emulation
-	else if ((Header->type == TYPE_GAME_WII || Header->type == TYPE_GAME_EMUNANDCHAN) && ret == ++Idx)
-	{
-		if(!IosLoader::IsD2X())
-			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
-		else if (++GameConfig.NandEmuMode >= 3) GameConfig.NandEmuMode = INHERIT;
-
-		//! On titles from emulated nand path disabling the nand emu mode is not allowed
-		if(Header->type == TYPE_GAME_EMUNANDCHAN && GameConfig.NandEmuMode == OFF)
-			GameConfig.NandEmuMode = 1;
-	}
-
-	//! Settings: Nand Emu Path
-	else if ((Header->type == TYPE_GAME_WII || Header->type == TYPE_GAME_EMUNANDCHAN) && ret == ++Idx)
-	{
-		if(!IosLoader::IsD2X())
-			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
-		else
-		{
-			char entered[300];
-			snprintf(entered, sizeof(entered), GameConfig.NandEmuPath.c_str());
-
-			HaltGui();
-			GuiWindow * parent = (GuiWindow *) parentElement;
-			if(parent) parent->SetState(STATE_DISABLED);
-			this->SetState(STATE_DEFAULT);
-			this->Remove(optionBrowser);
-			ResumeGui();
-
-			int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
-
-			if(parent) parent->SetState(STATE_DEFAULT);
-			this->Append(optionBrowser);
-
-			if (result == 1)
+			char entered[4];
+			snprintf(entered, sizeof(entered), "%i", GameConfig.ios);
+			if(OnScreenKeyboard(entered, sizeof(entered), 0))
 			{
-				if (entered[strlen(entered)-1] != '/')
-					strcat(entered, "/");
+				GameConfig.ios = atoi(entered) & 0xFF;
+				if(GameConfig.ios < 200 && GameConfig.ios != INHERIT) GameConfig.ios = 200;
 
-				GameConfig.NandEmuPath = entered;
-				WindowPrompt(tr( "Path Changed" ), 0, tr( "OK" ));
+				if(GameConfig.ios != INHERIT && NandTitles.IndexOf(TITLE_ID(1, GameConfig.ios)) < 0)
+				{
+					WindowPrompt(tr("Warning:"), tr("This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."), tr("OK"));
+				}
+				else if(GameConfig.ios == 254)
+				{
+					WindowPrompt(tr("Warning:"), tr("This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."), tr("OK"));
+				}
+			}
+		}
+
+		//! Settings: Error 002 fix
+		else if (ret == ++Idx)
+		{
+			if (++GameConfig.errorfix002 >= 3) GameConfig.errorfix002 = INHERIT;
+		}
+
+		//! Settings: Return To
+		else if (ret == ++Idx)
+		{
+			if (++GameConfig.returnTo >= MAX_ON_OFF) GameConfig.returnTo = 0;
+		}
+
+		//! Settings: Block IOS Reload
+		if (ret == ++Idx)
+		{
+			if(++GameConfig.iosreloadblock >= 3) GameConfig.iosreloadblock = INHERIT;
+		}
+	}
+
+	//! Only wii games and emu nand channels
+	if(	Header->type == TYPE_GAME_WII_IMG
+			||  Header->type == TYPE_GAME_WII_DISC
+			||  Header->type == TYPE_GAME_EMUNANDCHAN)
+	{
+		//! Settings: Nand Emulation
+		if (ret == ++Idx)
+		{
+			if(!IosLoader::IsD2X())
+				WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
+			else if (++GameConfig.NandEmuMode >= 3) GameConfig.NandEmuMode = INHERIT;
+
+			//! On titles from emulated nand path disabling the nand emu mode is not allowed
+			if(Header->type == TYPE_GAME_EMUNANDCHAN && GameConfig.NandEmuMode == OFF)
+				GameConfig.NandEmuMode = 1;
+		}
+
+		//! Settings: Nand Emu Path
+		else if (ret == ++Idx)
+		{
+			if(!IosLoader::IsD2X())
+				WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
+			else
+			{
+				char entered[300];
+				snprintf(entered, sizeof(entered), GameConfig.NandEmuPath.c_str());
+
+				HaltGui();
+				GuiWindow * parent = (GuiWindow *) parentElement;
+				if(parent) parent->SetState(STATE_DISABLED);
+				this->SetState(STATE_DEFAULT);
+				this->Remove(optionBrowser);
+				ResumeGui();
+
+				int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
+
+				if(parent) parent->SetState(STATE_DEFAULT);
+				this->Append(optionBrowser);
+
+				if (result == 1)
+				{
+					if (entered[strlen(entered)-1] != '/')
+						strcat(entered, "/");
+
+					GameConfig.NandEmuPath = entered;
+					WindowPrompt(tr( "Path Changed" ), 0, tr( "OK" ));
+				}
 			}
 		}
 	}
 
-	//! Settings: Hooktype
-	else if (ret == ++Idx)
+	//! Only on Wii games
+	if(Header->type == TYPE_GAME_WII_IMG || Header->type == TYPE_GAME_WII_DISC)
 	{
-		if (++GameConfig.Hooktype >= 8) GameConfig.Hooktype = INHERIT;
-	}
+		//! Settings: Alternate DOL
+		if (ret == ++Idx)
+		{
+			if (++GameConfig.loadalternatedol >= ALT_DOL_MAX_CHOICE)
+				GameConfig.loadalternatedol = 0;
+		}
 
-	//! Settings: Wiird Debugger
-	else if (ret == ++Idx)
-	{
-		if (++GameConfig.WiirdDebugger >= MAX_ON_OFF) GameConfig.WiirdDebugger = INHERIT;
-	}
+		//! Settings: Select DOL Offset from Game
+		else if (    (ret == ++Idx)
+				  && (GameConfig.loadalternatedol == 1))
+		{
+			GuiWindow * parentWindow = (GuiWindow *) parentElement;
+			if(parentWindow) parentWindow->SetState(STATE_DISABLED);
+			//alt dol menu for games that require more than a single alt dol
+			int autodol = autoSelectDolPrompt((char *) GameConfig.id);
+			if(autodol == 0)
+			{
+				if(parentWindow) parentWindow->SetState(STATE_DEFAULT);
+				return MENU_NONE; //Cancel Button pressed
+			}
 
-	//! Settings: Game Lock
-	else if (ret == ++Idx)
-	{
-		if (++GameConfig.Locked >= MAX_ON_OFF) GameConfig.Locked = 0;
+			char tmp[170];
+
+			if (autodol > 0)
+			{
+				GameConfig.alternatedolstart = autodol;
+				snprintf(tmp, sizeof(tmp), "%s <%i>", tr( "AUTO" ), autodol);
+				GameConfig.alternatedolname = tmp;
+				SetOptionValues();
+				if(parentWindow) parentWindow->SetState(STATE_DEFAULT);
+				return MENU_NONE;
+			}
+
+			int res = DiscBrowse(GameConfig.id, tmp, sizeof(tmp));
+			if (res >= 0)
+			{
+				GameConfig.alternatedolname = tmp;
+				GameConfig.alternatedolstart = res;
+				snprintf(tmp, sizeof(tmp), "%s %.6s - %i", tr( "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team." ), (char *) GameConfig.id, GameConfig.alternatedolstart);
+				WindowPrompt(0, tmp, tr( "OK" ));
+			}
+
+			if(GameConfig.alternatedolstart == 0)
+				GameConfig.loadalternatedol = 0;
+			if(parentWindow) parentWindow->SetState(STATE_DEFAULT);
+		}
 	}
 
 	SetOptionValues();

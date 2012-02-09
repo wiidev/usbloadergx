@@ -37,7 +37,7 @@ extern "C"
 			u32 magic;
 
 			/* Padding */
-			u8 unused2[4];
+			u32 gc_magic;
 
 			/* Game title */
 			char title[64];
@@ -59,8 +59,10 @@ extern "C"
 	s32 Disc_ReadHeader(void *);
 	s32 Disc_IsWii(void);
 	s32 Disc_FindPartition(u64 *outbuf);
+	s32 Disc_Mount(struct discHdr *header);
 	void PatchCountryStrings(void *Address, int Size);
-	void Disc_SelectVMode(u8 videoselected);
+	void Disc_SelectVMode(u8 videoselected, u8 ignore_progressive);
+	void Disc_SetVMode(void);
 	s32 Disc_JumpToEntrypoint(s32 hooktype, u32 dolparameter);
 
 #ifdef __cplusplus

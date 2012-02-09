@@ -8,7 +8,9 @@
 #ifndef _GAMEINFO_H_
 #define _GAMEINFO_H_
 
-int showGameInfo(int selectedGame);
+#include "usbloader/disc.h"
+
+int showGameInfo(int selectedGame, struct discHdr *header);
 bool save_gamelist(int txt);
 
 #endif

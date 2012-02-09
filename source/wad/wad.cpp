@@ -21,7 +21,7 @@
 #include "FileOperations/fileops.h"
 #include "language/gettext.h"
 #include "utils/ShowError.h"
-#include "wad/utils.h"
+#include "utils/tools.h"
 #include "wad.h"
 
 extern "C"

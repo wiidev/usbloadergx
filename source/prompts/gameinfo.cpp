@@ -25,17 +25,15 @@
 #include "utils/ShowError.h"
 #include "BoxCover/BoxCover.hpp"
 
-extern u8 mountMethod;
-extern struct discHdr *dvdheader;
-
 /****************************************************************************
  * gameinfo
  ***************************************************************************/
-static int InternalShowGameInfo(char *ID)
+static int InternalShowGameInfo(struct discHdr *header)
 {
-	HaltGui();//put this first to try to get rid of the code dump caused by loading this window at the same time as loading images from the SD card
 	mainWindow->SetState(STATE_DISABLED);
-	ResumeGui();
+
+	char ID[7];
+	snprintf(ID, sizeof(ID), "%s", (char *) header->id);
 
 	char xmlpath[300];
 	snprintf(xmlpath, sizeof(xmlpath), "%swiitdb.xml", Settings.titlestxt_path);
@@ -180,11 +178,13 @@ static int InternalShowGameInfo(char *ID)
 
 	GuiButton LeftBtn(0, 0);
 	LeftBtn.SetTrigger(&trigLeft);
-	if(mountMethod == 0) gameinfoWindow.Append(&LeftBtn);
+	if(header->type != TYPE_GAME_WII_DISC && header->type != TYPE_GAME_GC_DISC)
+		gameinfoWindow.Append(&LeftBtn);
 
 	GuiButton RightBtn(0, 0);
 	RightBtn.SetTrigger(&trigRight);
-	if(mountMethod == 0) gameinfoWindow.Append(&RightBtn);
+	if(header->type != TYPE_GAME_WII_DISC && header->type != TYPE_GAME_GC_DISC)
+		gameinfoWindow.Append(&RightBtn);
 
 	GuiButton coverBtn(180, 250);
 	coverBtn.SetPosition(20, 20);
@@ -1040,17 +1040,15 @@ static int InternalShowGameInfo(char *ID)
 	return choice;
 }
 
-int showGameInfo(int gameSelected)
+int showGameInfo(int gameSelected, struct discHdr *dvdheader)
 {
-	char gameID[7];
 	int choice = 5;
 
 	while(choice > 2)
 	{
-		struct discHdr * header = (mountMethod ? dvdheader : gameList[gameSelected]);
-		snprintf(gameID, sizeof(gameID), (char *) header->id);
+		struct discHdr * header = (dvdheader ? dvdheader : gameList[gameSelected]);
 
-		choice = InternalShowGameInfo(gameID);
+		choice = InternalShowGameInfo(header);
 
 		if(choice == 3)
 		{

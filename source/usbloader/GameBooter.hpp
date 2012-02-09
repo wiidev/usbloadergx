@@ -24,11 +24,11 @@ class GameBooter
 {
 	public:
 		static int BootGame(struct discHdr *gameHdr);
-		static int BootGCMode();
+		static int BootGCMode(struct discHdr *gameHdr);
 	private:
 		static void SetupAltDOL(u8 * gameID, u8 &alternatedol, u32 &alternatedoloffset);
 		static void SetupNandEmu(u8 NandEmuMode, const char *NandEmuPath, struct discHdr &gameHeader);
-		static int SetupDisc(u8 *gameID);
+		static int SetupDisc(struct discHdr &gameHeader);
 		static u32 BootPartition(char * dolpath, u8 videoselected, u8 alternatedol, u32 alternatedoloffset);
 		static void ShutDownDevices(int gameUSBPort);
 };

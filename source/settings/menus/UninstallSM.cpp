@@ -24,6 +24,8 @@
 #include <unistd.h>
 #include "UninstallSM.hpp"
 #include "FileOperations/fileops.h"
+#include "GameCube/GCGames.h"
+#include "Channels/channels.h"
 #include "settings/CSettings.h"
 #include "settings/CGameSettings.h"
 #include "settings/CGameStatistics.h"
@@ -34,8 +36,6 @@
 #include "usbloader/GameList.h"
 #include "wstring.hpp"
 
-extern u8 mountMethod;
-
 UninstallSM::UninstallSM(struct discHdr * header)
 	: SettingsMenu(tr("Uninstall Menu"), &GuiOptions, MENU_NONE)
 {
@@ -43,7 +43,9 @@ UninstallSM::UninstallSM(struct discHdr * header)
 
 	int Idx = 0;
 
-	if(DiscHeader->type == TYPE_GAME_WII)
+	if(	  DiscHeader->type == TYPE_GAME_WII_IMG
+	   || DiscHeader->type == TYPE_GAME_GC_IMG
+	   || DiscHeader->type == TYPE_GAME_EMUNANDCHAN)
 	{
 		Options->SetName(Idx++, "%s", tr( "Uninstall Game" ));
 	}
@@ -60,7 +62,9 @@ void UninstallSM::SetOptionValues()
 {
 	int Idx = 0;
 
-	if(DiscHeader->type == TYPE_GAME_WII)
+	if(	  DiscHeader->type == TYPE_GAME_WII_IMG
+	   || DiscHeader->type == TYPE_GAME_GC_IMG
+	   || DiscHeader->type == TYPE_GAME_EMUNANDCHAN)
 	{
 		//! Settings: Uninstall Game
 		Options->SetValue(Idx++, " ");
@@ -92,7 +96,10 @@ int UninstallSM::GetMenuInternal()
 	int Idx = -1;
 
 	//! Settings: Uninstall Game
-	if((DiscHeader->type == TYPE_GAME_WII) && ret == ++Idx)
+	if(	  (DiscHeader->type == TYPE_GAME_WII_IMG
+	   ||  DiscHeader->type == TYPE_GAME_GC_IMG
+	   ||  DiscHeader->type == TYPE_GAME_EMUNANDCHAN)
+	   && ret == ++Idx)
 	{
 		int choice = WindowPrompt(GameTitles.GetTitle(DiscHeader), tr( "What should be deleted for this game title:" ), tr( "Game Only" ), tr("Uninstall all"), tr( "Cancel" ));
 		if (choice == 0)
@@ -106,20 +113,41 @@ int UninstallSM::GetMenuInternal()
 		GameSettings.Save();
 		GameStatistics.Remove(DiscHeader->id);
 		GameStatistics.Save();
-		int ret = 0;
-		if(!mountMethod)
-			ret = WBFS_RemoveGame(DiscHeader->id);
 
-		if(ret >= 0)
+		int ret = 0;
+		char filepath[512];
+
+		if(DiscHeader->type == TYPE_GAME_WII_IMG)
 		{
-			wString oldFilter(gameList.GetCurrentFilter());
-			gameList.ReadGameList();
-			gameList.FilterList(oldFilter.c_str());
+			ret = WBFS_RemoveGame((u8 *) GameID);
+			if(ret >= 0)
+			{
+				wString oldFilter(gameList.GetCurrentFilter());
+				gameList.ReadGameList();
+				gameList.FilterList(oldFilter.c_str());
+			}
+		}
+		else if(DiscHeader->type == TYPE_GAME_GC_IMG)
+		{
+			GCGames::Instance()->RemoveGame(GameID);
+			// Reload list
+			GCGames::Instance()->LoadGameList(Settings.GameCubePath);
+		}
+		else if(DiscHeader->type == TYPE_GAME_EMUNANDCHAN && DiscHeader->tid != 0)
+		{
+			// Remove ticket
+			snprintf(filepath, sizeof(filepath), "%s/ticket/%08x/%08x.tik", Settings.NandEmuChanPath, (u32) (DiscHeader->tid >> 32), (u32) DiscHeader->tid);
+			RemoveFile(filepath);
+
+			// Remove contents / data
+			snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/", Settings.NandEmuChanPath, (u32) (DiscHeader->tid >> 32), (u32) DiscHeader->tid);
+			RemoveDirectory(filepath);
+
+			Channels::Instance()->GetEmuChannelList();
 		}
 
 		if(choice == 2)
 		{
-			char filepath[200];
 			snprintf(filepath, sizeof(filepath), "%s%s.png", Settings.covers_path, GameID);
 			if (CheckFile(filepath)) remove(filepath);
 			snprintf(filepath, sizeof(filepath), "%s%s.png", Settings.covers2d_path, GameID);

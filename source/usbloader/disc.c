@@ -55,12 +55,12 @@ void Disc_SetLowMem(void)
 	memcpy((void *) Online_Check, (void *) Disc_ID, 4);
 }
 
-void Disc_SelectVMode(u8 videoselected)
+void Disc_SelectVMode(u8 videoselected, u8 ignore_progressive)
 {
 	vmode = VIDEO_GetPreferredMode(0);
 
 	/* Get video mode configuration */
-	bool progressive = (CONF_GetProgressiveScan() > 0) && VIDEO_HaveComponentCable();
+	bool progressive = (CONF_GetProgressiveScan() > 0) && VIDEO_HaveComponentCable() && !ignore_progressive;
 	bool PAL60 = CONF_GetEuRGB60() > 0;
 	u32 tvmode = CONF_GetVideo();
 
@@ -107,7 +107,7 @@ void Disc_SelectVMode(u8 videoselected)
 					if (tvmode != CONF_VIDEO_NTSC)
 					{
 						vmode_reg = VI_NTSC;
-						vmode = progressive ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
+						vmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
 					}
 					break;
 				default:
@@ -139,7 +139,7 @@ void Disc_SelectVMode(u8 videoselected)
 	}
 }
 
-void __Disc_SetVMode(void)
+void Disc_SetVMode(void)
 {
 	/* Set video mode register */
 	*Video_Mode = vmode_reg;
@@ -265,10 +265,53 @@ s32 Disc_IsWii(void)
 	return 0;
 }
 
+s32 Disc_Mount(struct discHdr *header)
+{
+	if(!header)
+		return -1;
+
+	gprintf("\nDiscMount() ");
+	s32 ret;
+
+	u8 tmpBuff[0x60];
+	memcpy(tmpBuff, diskid, 0x60); // Make a backup of the first 96 bytes at 0x80000000
+
+	Disc_SetUSB(NULL);
+
+	ret = WDVD_Reset();
+	if(ret < 0)
+		return ret;
+
+	ret = WDVD_ReadDiskId(diskid);
+	if(ret < 0)
+		return ret;
+
+	ret = WDVD_UnencryptedRead(diskid, 0x60, 0x00);
+	if(ret < 0)
+		return ret;
+
+	memcpy(header, diskid, sizeof(struct discHdr));
+	memcpy(diskid, tmpBuff, 0x60); // Put the backup back, or games won't load
+
+	if(header->magic == 0x5D1C9EA3)
+	{
+		header->type = TYPE_GAME_WII_DISC;
+		return 0;
+	}
+
+	if(header->gc_magic == 0xC2339F3D)
+	{
+		header->type = TYPE_GAME_GC_DISC;
+		return 0;
+	}
+
+	return -1;
+}
+
 s32 Disc_JumpToEntrypoint(s32 hooktype, u32 dolparameter)
 {
 	/* Set an appropiate video mode */
-	__Disc_SetVMode();
+	Disc_SetVMode();
 
 	/* Set time */
 	__Disc_SetTime();

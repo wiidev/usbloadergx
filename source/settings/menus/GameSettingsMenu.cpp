@@ -70,7 +70,9 @@ void GameSettingsMenu::SetupMainButtons()
 	SetMainButton(pos++, tr( "Game Load" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Ocarina" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Categories" ), MainButtonImgData, MainButtonImgOverData);
-	if(DiscHeader->type == TYPE_GAME_WII || DiscHeader->type == TYPE_GAME_NANDCHAN)
+	if(		DiscHeader->type == TYPE_GAME_WII_IMG
+		||	DiscHeader->type == TYPE_GAME_WII_DISC
+		||	DiscHeader->type == TYPE_GAME_NANDCHAN)
 	{
 		SetMainButton(pos++, tr( "Extract Save to EmuNand" ), MainButtonImgData, MainButtonImgOverData);
 	}
@@ -136,7 +138,10 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 	}
 
 	//! Extract Save to EmuNand
-	else if((DiscHeader->type == TYPE_GAME_WII || DiscHeader->type == TYPE_GAME_NANDCHAN) && menuNr == Idx++)
+	else if(	(DiscHeader->type == TYPE_GAME_WII_IMG
+			||	 DiscHeader->type == TYPE_GAME_WII_DISC
+			||	 DiscHeader->type == TYPE_GAME_NANDCHAN)
+			&&	menuNr == Idx++)
 	{
 		int choice = WindowPrompt(tr( "Do you want to extract the save game?" ), tr("The save game will be extracted to your emu nand path."), tr( "Yes" ), tr( "Cancel" ));
 		if (choice == 1)

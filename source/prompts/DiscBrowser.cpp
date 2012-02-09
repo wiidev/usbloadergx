@@ -181,37 +181,3 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
 
 	return ret;
 }
-
-/********************************************************************************
- * Mount a DVD, get the type and ID.
- *********************************************************************************/
-u8 DiscMount(struct discHdr * header)
-{
-	gprintf("\nDiscMount() ");
-	u8 * g_diskID = (u8 *) 0x80000000;
-	int ret;
-	HaltGui();
-
-	u8 tmpBuff[0x60];
-	memcpy(tmpBuff, g_diskID, 0x60); // Make a backup of the first 96 bytes at 0x80000000
-
-	Disc_SetUSB(NULL);
-	ret = WDVD_Reset();
-	if(ret < 0)
-		return 0;
-
-	ret = WDVD_ReadDiskId(g_diskID);
-	if(ret < 0)
-		return 0;
-
-	ret = WDVD_UnencryptedRead(g_diskID, 0x60, 0x00);
-	if(ret < 0)
-		return 0;
-
-	memcpy(header, g_diskID, 0x60);
-	memcpy(g_diskID, tmpBuff, 0x60); // Put the backup back, or games won't load
-
-	ResumeGui();
-
-	return (header->magic == 0x5D1C9EA3) ? 1 : 2; // Don't check gamecube magic (0xC2339F3D)
-}

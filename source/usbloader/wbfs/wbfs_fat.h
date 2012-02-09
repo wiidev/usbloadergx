@@ -35,6 +35,7 @@ class Wbfs_Fat: public Wbfs
 		virtual int GetFragList(u8 *);
 		virtual u8 GetFSType(void) { return PART_FS_FAT; }
 
+		static bool CheckLayoutB(char *fname, int len, u8* id, char *fname_title);
 	protected:
 
 		split_info_t split;
@@ -48,13 +49,11 @@ class Wbfs_Fat: public Wbfs
 		wbfs_t* CreatePart(u8 *id, char *path);
 		int FindFilename(u8 *id, char *fname, int len);
 		void Filename(u8 *id, char *fname, int len, char *path);
-		bool CheckLayoutB(char *fname, int len, u8* id, char *fname_title);
 		s32 GetHeadersCount();
 		void GetDir(struct discHdr *header, char *path);
 
 		void mk_gameid_title(struct discHdr *header, char *name, int re_space, int layout);
 		void title_filename(char *title);
-		bool is_gameid(char *id);
 
 		static int nop_rw_sector(void *_fp, u32 lba, u32 count, void* buf) { return 0; }
 };

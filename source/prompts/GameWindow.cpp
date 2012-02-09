@@ -5,6 +5,7 @@
 #include "usbloader/GameList.h"
 #include "usbloader/GameBooter.hpp"
 #include "usbloader/AlternateDOLOffsets.h"
+#include "GameCube/GCGames.h"
 #include "themes/CTheme.h"
 #include "FileOperations/fileops.h"
 #include "settings/menus/GameSettingsMenu.hpp"
@@ -20,6 +21,7 @@
 #include "menu/WDMMenu.hpp"
 #include "banner/OpeningBNR.hpp"
 #include "utils/ShowError.h"
+#include "utils/tools.h"
 
 #define NONE		0
 #define LEFT		1
@@ -27,14 +29,12 @@
 #define IN			3
 #define OUT			4
 
-extern u8 mountMethod;
-extern struct discHdr *dvdheader;
-
-GameWindow::GameWindow(int Selected)
+GameWindow::GameWindow(int Selected, struct discHdr *dvd)
 	: GuiWindow(472, 320)
 {
 	returnVal = -1;
 	gameSelected = Selected;
+	dvdheader = dvd;
 	gameSound = NULL;
 	diskImgData = NULL;
 	diskImgData2 = NULL;
@@ -76,7 +76,7 @@ GameWindow::GameWindow(int Selected)
 	nameBtn->SetSoundOver(btnSoundOver);
 	nameBtn->SetSoundClick(btnSoundClick2);
 
-	if (Settings.godmode == 1 && !mountMethod)
+	if (Settings.godmode == 1 && !dvdheader)
 	{
 		nameBtn->SetToolTip(nameBtnTT, 24, -30, ALIGN_LEFT);
 		nameBtn->SetTrigger(trigA);
@@ -179,7 +179,7 @@ GameWindow::GameWindow(int Selected)
 	Append(detailsBtn);
 	Append(nameBtn);
 	Append(sizeTxt);
-	if (!mountMethod)//stuff we don't show if it is a DVD mounted
+	if (!dvdheader)//stuff we don't show if it is a DVD mounted
 	{
 		Append(btnLeft);
 		Append(btnRight);
@@ -187,7 +187,7 @@ GameWindow::GameWindow(int Selected)
 			Append(FavoriteBtn[i]);
 	}
 	//check if unlocked
-	if (mountMethod != 2 && (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_GAME_SETTINGS)))
+	if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_GAME_SETTINGS))
 	{
 		backBtn->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
 		backBtn->SetPosition(-50, -40);
@@ -423,7 +423,7 @@ void GameWindow::SetWindowEffect(int direction, int in_out)
 
 void GameWindow::ChangeGame(int EffectDirection)
 {
-	struct discHdr * header = (mountMethod ? dvdheader : gameList[gameSelected]);
+	struct discHdr * header = (dvdheader ? dvdheader : gameList[gameSelected]);
 	LoadGameSound(header);
 	LoadDiscImage(header->id);
 	SetWindowEffect(EffectDirection, OUT);
@@ -438,11 +438,24 @@ void GameWindow::ChangeGame(int EffectDirection)
 			sizeTxt->SetTextf(tr("Emulated Nand"));
 
 	}
-	else if (!mountMethod)
+	else if(header->type == TYPE_GAME_WII_IMG)
 	{
 		float size = 0.0f;
 		WBFS_GameSize(header->id, &size);
 		sizeTxt->SetTextf("%.2fGB", size); //set size text;
+	}
+	else if(header->type == TYPE_GAME_WII_DISC)
+	{
+		float size = (float) WBFS_EstimeGameSize() / GB_SIZE;
+		if(size == 0.0f)
+			size = 4.37f*GB_SIZE; // Use default disc size if can't be determined
+		sizeTxt->SetTextf("%.2fGB", size); //set size text;
+	}
+	else if(header->type == TYPE_GAME_GC_IMG)
+	{
+		float size = GCGames::Instance()->GetGameSize((const char *) header->id);
+		sizeTxt->SetTextf("%.2fGB", size); //set size text;
+		// TODO: Add GC disc size check
 	}
 
 	diskImg->SetImage(diskImgData);
@@ -506,7 +519,7 @@ int GameWindow::MainLoop()
 		Hide();
 
 		// If this function was left then the game start was canceled
-		GameWindow::BootGame(mountMethod ? dvdheader : gameList[gameSelected]);
+		GameWindow::BootGame(dvdheader ? dvdheader : gameList[gameSelected]);
 
 		// Show the window again
 		Show();
@@ -525,7 +538,7 @@ int GameWindow::MainLoop()
 		Hide();
 
 		wiilight(0);
-		int settret = GameSettingsMenu::Execute(browserMenu, mountMethod ? dvdheader : gameList[gameSelected]);
+		int settret = GameSettingsMenu::Execute(browserMenu, dvdheader ? dvdheader : gameList[gameSelected]);
 
 		// Show the window again or return to browser on uninstall
 		if (settret == MENU_DISCLIST)
@@ -540,7 +553,8 @@ int GameWindow::MainLoop()
 		// Hide the window
 		Hide();
 
-		struct discHdr *header = mountMethod ? dvdheader : gameList[gameSelected];
+		// This button can only be clicked when this is not a dvd header
+		struct discHdr *header = gameList[gameSelected];
 
 		//enter new game title
 		char entered[60];
@@ -615,7 +629,7 @@ int GameWindow::MainLoop()
 	else if(detailsBtn->GetState() == STATE_CLICKED)
 	{
 		diskImg->SetState(STATE_DISABLED);
-		showGameInfo(gameSelected);
+		showGameInfo(gameSelected, dvdheader);
 		mainWindow->SetState(STATE_DISABLED);
 		this->SetState(STATE_DEFAULT);
 		diskImg->SetState(STATE_DEFAULT);
@@ -643,7 +657,8 @@ int GameWindow::MainLoop()
 	{
 		if(FavoriteBtn[i]->GetState() == STATE_CLICKED)
 		{
-			struct discHdr * header = (mountMethod ? dvdheader : gameList[gameSelected]);
+			// This button can only be clicked when this is not a dvd header
+			struct discHdr * header = gameList[gameSelected];
 			int FavoriteRank = (i+1 == GameStatistics.GetFavoriteRank(header->id)) ? 0 : i+1; // Press the current rank to reset the rank
 
 			GameStatistics.SetFavoriteRank(header->id, FavoriteRank);

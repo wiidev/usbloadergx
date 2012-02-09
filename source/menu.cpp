@@ -49,7 +49,6 @@ GuiSound *btnSoundClick2 = NULL;
 GuiSound *btnSoundOver = NULL;
 
 static int currentMenu = 0;
-u8 mountMethod = 0;
 
 static lwp_t guithread = LWP_THREAD_NULL;
 static bool guiHalt = true;
@@ -108,7 +107,7 @@ static void * UpdateGUI(void *arg)
 		mainWindow->Draw();
 		if (Settings.tooltips && Theme::ShowTooltips && mainWindow->GetState() != STATE_DISABLED)
 			mainWindow->DrawTooltip();
-		
+
 		// Pointer modifies wpad data struct for easy implementation of "virtual pointer" with PAD-Sticks
 		// That is why it has to be called right before updating other gui elements with the triggers
 		for (i = 3; i >= 0; i--)

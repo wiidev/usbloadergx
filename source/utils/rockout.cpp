@@ -4,15 +4,16 @@
 #include "settings/GameTitles.h"
 #include "menu/menus.h"
 
-void rockout(int gameSelected, int f)
+void rockout(struct discHdr *header)
 {
 	static bool rockoutSet = false;
 
 	HaltGui();
 
-	if (gameSelected >= 0 && gameSelected < gameList.size() && !rockoutSet && (strcasestr(GameTitles.GetTitle(gameList[gameSelected]), "guitar")
-			|| strcasestr(GameTitles.GetTitle(gameList[gameSelected]), "band") || strcasestr(GameTitles.GetTitle(gameList[gameSelected]),
-			"rock")))
+	if (!rockoutSet && header &&
+		(   strcasestr(GameTitles.GetTitle(header), "guitar")
+		 || strcasestr(GameTitles.GetTitle(header), "band")
+		 || strcasestr(GameTitles.GetTitle(header), "rock")))
 	{
 		pointer[0]->SetImage("rplayer1_point.png");
 		pointer[1]->SetImage("rplayer2_point.png");

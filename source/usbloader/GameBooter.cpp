@@ -32,6 +32,7 @@
 #include "usbloader/playlog.h"
 #include "usbloader/MountGamePartition.h"
 #include "usbloader/AlternateDOLOffsets.h"
+#include "GameCube/GCGames.h"
 #include "settings/newtitles.h"
 #include "network/Wiinnertag.h"
 #include "patches/patchcode.h"
@@ -51,13 +52,60 @@
 //appentrypoint has to be global because of asm
 u32 AppEntrypoint = 0;
 
-struct discHdr *dvdheader = NULL;
-extern u8 mountMethod;
-
-int GameBooter::BootGCMode()
+extern "C"
 {
+	syssram* __SYS_LockSram();
+	u32 __SYS_UnlockSram(u32 write);
+	u32 __SYS_SyncSram(void);
+}
+
+int GameBooter::BootGCMode(struct discHdr *gameHdr)
+{
+	if(gameHdr->type == TYPE_GAME_GC_IMG)
+	{
+		char path[50];
+		snprintf(path, sizeof(path), "%sboot.bin", Settings.GameCubePath);
+		FILE *f = fopen(path, "wb");
+		if(f)
+		{
+			const char *gamePath = GCGames::Instance()->GetPath((const char *) gameHdr->id);
+			fwrite(gamePath, 1, strlen(gamePath) + 1, f);
+			fclose(f);
+		}
+	}
+
 	ExitApp();
 	gprintf("\nLoading BC for GameCube");
+
+	GameCFG * game_cfg = GameSettings.GetGameCFG(gameHdr->id);
+	u8 videoChoice = game_cfg->video == INHERIT ? Settings.videomode : game_cfg->video;
+
+	// Game ID
+	memcpy((u8 *)0x80000000, gameHdr->id, 6);
+	DCFlushRange((u8 *)0x80000000, 6);
+
+	if(gameHdr->type == TYPE_GAME_GC_IMG)
+	{
+		// Tell DML to boot the game from sd card
+		*(vu32*)0x80001800 = 0xB002D105;
+		DCFlushRange((u8 *)0x80001800, 4);
+		ICInvalidateRange((u8 *)0x80001800, 4);
+	}
+
+	*(vu32*)0xCC003024 |= 7;
+
+	Disc_SelectVMode(videoChoice, true);
+	Disc_SetVMode();
+
+	syssram *sram = __SYS_LockSram();
+	if (*Video_Mode == VI_NTSC)
+		sram->flags &= ~1;	// Clear bit 0 to set the video mode to NTSC
+	else
+		sram->flags |= 1;	// Set bit 0 to set the video mode to PAL
+
+	__SYS_UnlockSram(1); // 1 -> write changes
+	while(!__SYS_SyncSram());
+
 	WII_Initialize();
 	return WII_LaunchTitle(0x0000000100000100ULL);
 }
@@ -84,7 +132,7 @@ u32 GameBooter::BootPartition(char * dolpath, u8 videoselected, u8 alternatedol,
 	Disc_SetLowMem();
 
 	/* Setup video mode */
-	Disc_SelectVMode(videoselected);
+	Disc_SelectVMode(videoselected, false);
 
 	/* Run apploader */
 	ret = Apploader_Run(&p_entry, dolpath, alternatedol, alternatedoloffset);
@@ -145,9 +193,9 @@ void GameBooter::SetupNandEmu(u8 NandEmuMode, const char *NandEmuPath, struct di
 	}
 }
 
-int GameBooter::SetupDisc(u8 * gameID)
+int GameBooter::SetupDisc(struct discHdr &gameHeader)
 {
-	if (mountMethod)
+	if (gameHeader.type == TYPE_GAME_WII_DISC)
 	{
 		gprintf("\tloading DVD\n");
 		return Disc_Open();
@@ -158,17 +206,17 @@ int GameBooter::SetupDisc(u8 * gameID)
 	if(IosLoader::IsWaninkokoIOS() && IOS_GetRevision() < 18)
 	{
 		gprintf("Disc_SetUSB...");
-		ret = Disc_SetUSB(gameID);
+		ret = Disc_SetUSB(gameHeader.id);
 		gprintf("%d\n", ret);
 		if(ret < 0) return ret;
 	}
 	else
 	{
 		gprintf("Loading fragment list...");
-		ret = get_frag_list(gameID);
+		ret = get_frag_list(gameHeader.id);
 		gprintf("%d\n", ret);
 		if(ret < 0) return ret;
-		ret = set_frag_list(gameID);
+		ret = set_frag_list(gameHeader.id);
 		if(ret < 0) return ret;
 		gprintf("\tUSB set to game\n");
 	}
@@ -202,23 +250,22 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	if(!gameHdr)
 		return -1;
 
-	char gameID[7];
-	snprintf(gameID, sizeof(gameID), "%s", gameHdr->id);
-	gprintf("\tBootGame: %s\n", gameID);
+	struct discHdr gameHeader;
+	memcpy(&gameHeader, gameHdr, sizeof(struct discHdr));
+
+	gprintf("\tBootGame: %.6s\n", gameHeader.id);
 
 	if(Settings.Wiinnertag)
-		Wiinnertag::TagGame(gameID);
+		Wiinnertag::TagGame((const char *) gameHeader.id);
 
-	if(mountMethod == 2)
-		return BootGCMode();
+	if(gameHeader.type == TYPE_GAME_GC_IMG || gameHeader.type == TYPE_GAME_GC_DISC)
+		return BootGCMode(&gameHeader);
 
 	AppCleanUp();
 
 	gprintf("\tSettings.partition: %d\n", Settings.partition);
 
 	s32 ret = -1;
-	struct discHdr gameHeader;
-	memcpy(&gameHeader, gameHdr, sizeof(struct discHdr));
 
 	//! Remember game's USB port
 	int partition = gameList.GetPartitionNumber(gameHeader.id);
@@ -284,7 +331,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	if(gameHeader.tid == 0)
 	{
 		//! Setup disc in cIOS and open it
-		ret = SetupDisc(gameHeader.id);
+		ret = SetupDisc(gameHeader);
 		if (ret < 0)
 			Sys_BackToLoader();
 
@@ -344,7 +391,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 		// Load dol
 		AppEntrypoint = Channels::LoadChannel(gameHeader.tid);
 		/* Setup video mode */
-		Disc_SelectVMode(videoChoice);
+		Disc_SelectVMode(videoChoice, false);
 	}
 
 	//! No entrypoint found...back to HBC/SystemMenu

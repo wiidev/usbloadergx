@@ -28,11 +28,11 @@
 #include "language/gettext.h"
 #include "network/networkops.h"
 #include "utils/minizip/miniunz.h"
-#include "usbloader/utils.h"
 #include "prompts/TitleBrowser.h"
 #include "homebrewboot/BootHomebrew.h"
 #include "FileOperations/fileops.h"
 #include "prompts/ProgressWindow.h"
+#include "utils/tools.h"
 #include "wstring.hpp"
 #include "HomebrewXML.h"
 

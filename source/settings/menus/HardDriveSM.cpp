@@ -30,11 +30,11 @@
 #include "language/gettext.h"
 #include "usbloader/GameList.h"
 #include "usbloader/wbfs.h"
-#include "usbloader/utils.h"
 #include "prompts/ProgressWindow.h"
 #include "settings/GameTitles.h"
 #include "system/IosLoader.h"
 #include "wad/nandtitle.h"
+#include "utils/tools.h"
 
 static const char * OnOffText[] =
 {
