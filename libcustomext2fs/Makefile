@@ -25,7 +25,3 @@ clean:
 install: cube-release wii-release
 	$(MAKE) -C source install
 
-run: install
-	$(MAKE) -C example
-	$(MAKE) -C example run
-

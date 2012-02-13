@@ -180,6 +180,7 @@ errcode_t ext2fs_create_icount_tdb(ext2_filsys fs, char *tdb_dir,
 	ext2_icount_t	icount;
 	errcode_t	retval;
 	char 		*fn, uuid[40];
+	ext2_ino_t	num_inodes;
 	int		fd;
 
 	retval = alloc_icount(fs, flags,  &icount);
@@ -193,8 +194,18 @@ errcode_t ext2fs_create_icount_tdb(ext2_filsys fs, char *tdb_dir,
 	sprintf(fn, "%s/%s-icount-XXXXXX", tdb_dir, uuid);
 	fd = mkstemp(fn);
 
+	/*
+	 * This is an overestimate of the size that we will need; the
+	 * ideal value is the number of used inodes with a count
+	 * greater than 1.  OTOH the times when we really need this is
+	 * with the backup programs that use lots of hard links, in
+	 * which case the number of inodes in use approaches the ideal
+	 * value.
+	 */
+	num_inodes = fs->super->s_inodes_count - fs->super->s_free_inodes_count;
+
 	icount->tdb_fn = fn;
-	icount->tdb = tdb_open(fn, 0, TDB_CLEAR_IF_FIRST,
+	icount->tdb = tdb_open(fn, num_inodes, TDB_NOLOCK | TDB_NOSYNC,
 			       O_RDWR | O_CREAT | O_TRUNC, 0600);
 	if (icount->tdb) {
 		close(fd);

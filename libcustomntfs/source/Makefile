@@ -28,18 +28,18 @@ LIBDIR		:=	../lib
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
-CFLAGS		=	-O2 -Wall -Wno-unused $(MACHDEP) $(INCLUDE) -DGEKKO -DWORDS_BIGENDIAN
+CFLAGS		=	-O2 -Wall -ffast-math -pipe $(MACHDEP) $(INCLUDE) -DHAVE_CONFIG_H
 CXXFLAGS	=	$(CFLAGS)
 ASFLAGS		:=	-g
-export EXT2BIN	:=	$(LIBDIR)/$(PLATFORM)/libext2fs.a
+export NTFSBIN	:= $(LIBDIR)/$(PLATFORM)/libntfs.a
 
 ifeq ($(BUILD),cube_debug)
-CFLAGS += -DDEBUG_GEKKO
-CXXFLAGS += -DDEBUG_GEKKO
+CFLAGS += -DDEBUG
+CXXFLAGS += -DDEBUG
 endif
 ifeq ($(BUILD),wii_debug)
-CFLAGS += -DDEBUG_GEKKO
-CXXFLAGS += -DDEBUG_GEKKO
+CFLAGS += -DDEBUG
+CXXFLAGS += -DDEBUG
 endif
 
 #---------------------------------------------------------------------------------
@@ -95,16 +95,16 @@ clean:
 	@echo clean ...
 	@rm -fr wii_debug wii_release cube_debug cube_release $(LIBDIR)
 
-all: $(EXT2BIN)
+all: $(NTFSBIN)
 
 install:
-	cp ../include/ext2.h $(DEVKITPRO)/libogc/include
-	cp ../lib/wii/libext2fs.a $(DEVKITPRO)/libogc/lib/wii
-	cp ../lib/cube/libext2fs.a $(DEVKITPRO)/libogc/lib/cube
+	cp ../include/ntfs.h $(DEVKITPRO)/libogc/include
+	cp ../lib/wii/libntfs.a $(DEVKITPRO)/libogc/lib/wii
+	cp ../lib/cube/libntfs.a $(DEVKITPRO)/libogc/lib/cube
 
 wii-install:
-	cp ../include/ext2.h $(DEVKITPRO)/libogc/include
-	cp ../lib/wii/libext2fs.a $(DEVKITPRO)/libogc/lib/wii
+	cp ../include/ntfs.h $(DEVKITPRO)/libogc/include
+	cp ../lib/wii/libntfs.a $(DEVKITPRO)/libogc/lib/wii
 
 #---------------------------------------------------------------------------------
 else
@@ -114,9 +114,9 @@ DEPENDS	:=	$(OFILES:.o=.d)
 #---------------------------------------------------------------------------------
 # main targets
 #---------------------------------------------------------------------------------
-$(EXT2BIN): $(OFILES) $(LIBDIR)/$(PLATFORM)
-	@rm -f "../$(EXT2BIN)"
-	@$(AR) rcs "../$(EXT2BIN)" $(OFILES)
+$(NTFSBIN): $(OFILES) $(LIBDIR)/$(PLATFORM)
+	@rm -f "../$(NTFSBIN)"
+	@$(AR) rcs "../$(NTFSBIN)" $(OFILES)
 	@echo built ... $(notdir $@)
 
 $(LIBDIR)/$(PLATFORM):

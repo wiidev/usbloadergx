@@ -358,8 +358,8 @@ errcode_t ext2fs_open2(const char *name, const char *io_options,
 			goto cleanup;
 #ifdef WORDS_BIGENDIAN
 		for (j=0; j < groups_per_block; j++) {
-			/* The below happens to work... be careful. */
-			gdp = ext2fs_group_desc(fs, fs->group_desc, j);
+			gdp = ext2fs_group_desc(fs, fs->group_desc,
+						i * groups_per_block + j);
 			ext2fs_swap_group_desc2(fs, gdp);
 		}
 #endif

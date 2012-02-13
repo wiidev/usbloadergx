@@ -11,6 +11,8 @@
 
 #include "ext2fs.h"
 
+#define EXT2FS_MAX_NESTED_LINKS  8
+
 /*
  * Badblocks list
  */

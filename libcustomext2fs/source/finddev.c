@@ -34,6 +34,7 @@
 
 #include "ext2_fs.h"
 #include "ext2fs.h"
+#include "ext2fsP.h"
 
 struct dir_list {
 	char	*name;
@@ -128,6 +129,7 @@ char *ext2fs_find_block_device(dev_t device)
 	struct dir_list *list = 0, *new_list = 0;
 	struct dir_list *current;
 	char	*ret_path = 0;
+	int    level = 0;
 
 	/*
 	 * Add the starting directories to search...
@@ -154,6 +156,9 @@ char *ext2fs_find_block_device(dev_t device)
 		if (list == 0) {
 			list = new_list;
 			new_list = 0;
+			/* Avoid infinite loop */
+			if (++level >= EXT2FS_MAX_NESTED_LINKS)
+				break;
 		}
 	}
 	free_dirlist(&list);

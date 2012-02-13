@@ -130,7 +130,7 @@ errcode_t ext2fs_mmp_write(ext2_filsys fs, blk64_t mmp_blk, void *buf)
 
 	/* I was tempted to make this use O_DIRECT and the mmp_fd, but
 	 * this caused no end of grief, while leaving it as-is works. */
-	retval = io_channel_write_blk64(fs->io, mmp_blk, -fs->blocksize, buf);
+	retval = io_channel_write_blk64(fs->io, mmp_blk, -(int)sizeof(struct mmp_struct), buf);
 
 #ifdef WORDS_BIGENDIAN
 	ext2fs_swap_mmp(mmp_s);

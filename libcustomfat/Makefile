@@ -1,32 +1,31 @@
-# Quick'n'dirty makefile [BC] v2
-
-ifeq ($(strip $(DEVKITPPC)),)
-$(error "Please set DEVKITPPC in your environment. export DEVKITPPC=<path to>devkitPPC")
+ifeq ($(strip $(DEVKITPRO)),)
+$(error "Please set DEVKITPRO in your environment. export DEVKITPRO=<path to>devkitPro)
 endif
+ 
+export TOPDIR	:=	$(CURDIR)
+ 
+export LIBFAT_MAJOR	:= 1
+export LIBFAT_MINOR	:= 0
+export LIBFAT_PATCH	:= 10
 
-include $(DEVKITPPC)/wii_rules
+export VERSTRING	:=	$(LIBFAT_MAJOR).$(LIBFAT_MINOR).$(LIBFAT_PATCH)
 
-LIBOGC_INC      :=      $(DEVKITPRO)/libogc/include
-LIBOGC_LIB      :=      $(DEVKITPRO)/libogc/lib/wii
 
-CFLAGS  := -O3 $(MACHDEP) -I$(LIBOGC_INC)
+default: release
 
-LIB     := fat
-CFILES  := $(wildcard *.c)
-OFILES  := $(CFILES:.c=.o)
-ARC     := lib$(LIB).a
-HDR     := fat.h
+all: release
 
-all : $(OFILES)
-		$(AR) -r $(ARC) $(OFILES)
+release: include/libfatversion.h wii-release
 
-clean :
-		rm -f $(OFILES) $(ARC)
+wii-release:
+	$(MAKE) -C libogc PLATFORM=wii BUILD=wii_release
 
-install :
-		mkdir -p  $(LIBOGC_LIB)  $(LIBOGC_INC)
-		cp -f $(ARC) $(LIBOGC_LIB)/
-		cp -f $(HDR) $(LIBOGC_INC)/
+clean: ogc-clean
 
-%.o : %.c
-		$(CC) $(CFLAGS) -c $< -o $@
+ogc-clean:
+	$(MAKE) -C libogc clean
+
+install: ogc-install
+
+ogc-install: cube-release wii-release
+	$(MAKE) -C libogc install

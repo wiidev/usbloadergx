@@ -1,10 +1,8 @@
 #---------------------------------------------------------------------------------
-# Clear the implicit built in rules
-#---------------------------------------------------------------------------------
 .SUFFIXES:
 #---------------------------------------------------------------------------------
 ifeq ($(strip $(DEVKITPPC)),)
-$(error "Please set DEVKITPPC in your environment. export DEVKITPPC=<path to>devkitPPC")
+$(error "Please set DEVKITPPC in your environment. export DEVKITPPC=<path to>devkitPPC)
 endif
 
 ifeq ($(PLATFORM),wii)
@@ -19,39 +17,41 @@ endif
 # BUILD is the directory where object files & intermediate files will be placed
 # SOURCES is a list of directories containing source code
 # INCLUDES is a list of directories containing extra header files
+# DATA is a list of directories containing binary files
+# LIBDIR is where the built library will be placed
+# all directories are relative to this makefile
 #---------------------------------------------------------------------------------
 BUILD		?=	wii_release
-SOURCES		:=	.
+SOURCES		:=	../source
 INCLUDES	:=	../include
-LIBDIR		:=	../lib
+DATA		:=
+LIBDIR		:=	$(TOPDIR)/libogc/lib
 
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
-CFLAGS		=	-O2 -Wall -Wno-unused $(MACHDEP) $(INCLUDE) -DGEKKO -DWORDS_BIGENDIAN
+CFLAGS	= -g -O2 -Wall $(MACHDEP) $(INCLUDE)
 CXXFLAGS	=	$(CFLAGS)
-ASFLAGS		:=	-g
-export EXT2BIN	:=	$(LIBDIR)/$(PLATFORM)/libext2fs.a
 
-ifeq ($(BUILD),cube_debug)
-CFLAGS += -DDEBUG_GEKKO
-CXXFLAGS += -DDEBUG_GEKKO
-endif
-ifeq ($(BUILD),wii_debug)
-CFLAGS += -DDEBUG_GEKKO
-CXXFLAGS += -DDEBUG_GEKKO
+ASFLAGS	:=	-g
+
+ifneq ($(BUILD),debug)
+export CUBEBIN	:=	$(LIBDIR)/$(PLATFORM)/libfat.a
+else
+export CUBEBIN	:=	$(LIBDIR)/$(PLATFORM)/libfatd.a
+CFLAGS	+=	-DFAT_DEBUG
 endif
 
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS		:=
+LIBS	:=
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
 #---------------------------------------------------------------------------------
-LIBDIRS		:=
+LIBDIRS	:=
 
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
@@ -60,7 +60,10 @@ LIBDIRS		:=
 ifneq ($(BUILD),$(notdir $(CURDIR)))
 #---------------------------------------------------------------------------------
 
-export DEPSDIR	:=	$(CURDIR)/$(BUILD)
+export TOPDIR ?= $(CURDIR)/..
+
+
+export DEPSDIR := $(CURDIR)/$(BUILD)
 
 export VPATH	:=	$(foreach dir,$(SOURCES),$(CURDIR)/$(dir)) \
 			$(foreach dir,$(DATA),$(CURDIR)/$(dir))
@@ -81,7 +84,7 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 			-I$(LIBOGC_INC)
 
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib) \
-			-L$(LIBOGC_LIB)
+										-L$(LIBOGC_LIB)
 
 .PHONY: $(BUILD) clean
 
@@ -95,16 +98,15 @@ clean:
 	@echo clean ...
 	@rm -fr wii_debug wii_release cube_debug cube_release $(LIBDIR)
 
-all: $(EXT2BIN)
+all: $(CUBEBIN)
+
+dist-bin:
+	@tar --exclude=.svn --exclude=*CVS* -cvjf $(TOPDIR)/distribute/$(VERSTRING)/libfat-ogc-$(VERSTRING).tar.bz2 include lib
 
 install:
-	cp ../include/ext2.h $(DEVKITPRO)/libogc/include
-	cp ../lib/wii/libext2fs.a $(DEVKITPRO)/libogc/lib/wii
-	cp ../lib/cube/libext2fs.a $(DEVKITPRO)/libogc/lib/cube
-
-wii-install:
-	cp ../include/ext2.h $(DEVKITPRO)/libogc/include
-	cp ../lib/wii/libext2fs.a $(DEVKITPRO)/libogc/lib/wii
+	cp lib/wii/libfat.a $(DEVKITPRO)/libogc/lib/wii
+	cp lib/cube/libfat.a $(DEVKITPRO)/libogc/lib/cube
+	cp include/fat.h $(DEVKITPRO)/libogc/include
 
 #---------------------------------------------------------------------------------
 else
@@ -114,13 +116,13 @@ DEPENDS	:=	$(OFILES:.o=.d)
 #---------------------------------------------------------------------------------
 # main targets
 #---------------------------------------------------------------------------------
-$(EXT2BIN): $(OFILES) $(LIBDIR)/$(PLATFORM)
-	@rm -f "../$(EXT2BIN)"
-	@$(AR) rcs "../$(EXT2BIN)" $(OFILES)
+$(CUBEBIN)	:	$(OFILES) $(LIBDIR)/$(PLATFORM)
+	@rm -f "$(CUBEBIN)"
+	@$(AR) rcs "$(CUBEBIN)" $(OFILES)
 	@echo built ... $(notdir $@)
 
 $(LIBDIR)/$(PLATFORM):
-	mkdir -p ../$(LIBDIR)/$(PLATFORM)
+	mkdir  -p $(LIBDIR)/$(PLATFORM)
 
 -include $(DEPENDS)
 
