@@ -34,6 +34,12 @@
 #include "utils/uncompress.h"
 #include "PartitionHandle.h"
 
+//! libfat stuff
+extern "C"
+{
+	sec_t FindFirstValidPartition(const DISC_INTERFACE* disc);
+}
+
 #define PARTITION_TYPE_DOS33_EXTENDED	   0x05 /* DOS 3.3+ extended partition */
 #define PARTITION_TYPE_WIN95_EXTENDED	   0x0F /* Windows 95 extended partition */
 
@@ -125,8 +131,8 @@ bool PartitionHandle::Mount(int pos, const char * name, bool forceFAT)
 	{
 		if (fatMount(MountNameList[pos].c_str(), interface, 0, CACHE, SECTORS))
 		{
-			extern sec_t _FAT_startSector;
-			AddPartition("FAT", _FAT_startSector, 0xdeadbeaf, true, 0x0c, 0);
+			sec_t FAT_startSector = FindFirstValidPartition(interface);
+			AddPartition("FAT", FAT_startSector, 0xdeadbeaf, true, 0x0c, 0);
 			return true;
 		}
 	}

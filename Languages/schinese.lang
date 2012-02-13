@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-05 19:25+0100\n"
+"POT-Creation-Date: 2012-02-09 22:23+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -275,6 +275,9 @@ msgstr "无法创建路径: %s"
 
 msgid "Can't delete:"
 msgstr "无法删除:"
+
+msgid "Can't mount or unknown disc format."
+msgstr ""
 
 #, c-format
 msgid "Can't open file: %s"
@@ -795,6 +798,9 @@ msgstr "完全关机"
 
 msgid "GAMEID_Gamename"
 msgstr "游戏ID_游戏名"
+
+msgid "GC Games"
+msgstr ""
 
 msgid "GCT Cheatcodes Path"
 msgstr "作弊码路径"

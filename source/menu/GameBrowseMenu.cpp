@@ -1408,7 +1408,9 @@ int GameBrowseMenu::OpenClickedGame(struct discHdr *header)
 {
 	int choice = -1;
 	int gameSelected = GetSelectedGame();
-	if(gameSelected < 0 || gameSelected >= gameList.size())
+	if(header == dvdheader)
+		gameSelected = 0;
+	else if(gameSelected < 0 || gameSelected >= gameList.size())
 		return -1;
 
 	if (searchBar)

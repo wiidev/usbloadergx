@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-05 19:25+0100\n"
+"POT-Creation-Date: 2012-02-09 22:23+0100\n"
 "PO-Revision-Date: 2011-07-25 16:40+0200\n"
 "Last-Translator: Galen/xFede\n"
 "Language-Team: Penn, SirPalax, hvy109\n"
@@ -275,6 +275,9 @@ msgstr "No se creó la ruta: %s"
 
 msgid "Can't delete:"
 msgstr "No se eliminó:"
+
+msgid "Can't mount or unknown disc format."
+msgstr ""
 
 #, c-format
 msgid "Can't open file: %s"
@@ -795,6 +798,9 @@ msgstr "Apagado completo"
 
 msgid "GAMEID_Gamename"
 msgstr "IDdelJuego_NombreDelJuego"
+
+msgid "GC Games"
+msgstr ""
 
 msgid "GCT Cheatcodes Path"
 msgstr "Ruta de Trucos GCT"
