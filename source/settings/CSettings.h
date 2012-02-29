@@ -144,6 +144,7 @@ class CSettings
 		short UseChanLauncher;
 		int AdjustOverscanX;
 		int AdjustOverscanY;
+		short ForceDiscTitles;
 
 		// This variable is not saved to the settings file
 		bool FirstTimeRun;

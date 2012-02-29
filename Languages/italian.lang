@@ -1,14 +1,14 @@
 # USB Loader GX language source file.
-# italian.lang - r1146
+# italian.lang - r1148
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-09 22:23+0100\n"
+"POT-Creation-Date: 2012-02-29 20:42+0100\n"
 "PO-Revision-Date: 2011-09-11 12:19+0100\n"
 "Last-Translator: xFede\n"
-"Language-Team: Cambo\n"
+"Language-Team: Cambo, xFede\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,7 +18,7 @@ msgid " could not be downloaded."
 msgstr " non può essere scaricato."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr " è stato salvato. Parte del codice potrebbe non funzionare correttamente. In caso di problemi, aprire il file di testo con un editor per ottenere ulteriori informazioni."
+msgstr ""
 
 msgid " is not on the server."
 msgstr " non disponibile sul server."
@@ -35,7 +35,7 @@ msgid "0 (Everyone)"
 msgstr "0 (Tutti)"
 
 msgid "1 (Child 7+)"
-msgstr "1 (Bambini 7+)"
+msgstr "1 (Bimbi 7+)"
 
 msgid "1 hour"
 msgstr "1 ora"
@@ -44,7 +44,7 @@ msgid "10 min"
 msgstr "10 minuti"
 
 msgid "2 (Teen 12+)"
-msgstr "2 (Ragazzini 12+)"
+msgstr "2 (Ragazzi 12+)"
 
 msgid "20 min"
 msgstr "20 minuti"
@@ -68,7 +68,7 @@ msgid "3D Covers"
 msgstr "Copertine 3D"
 
 msgid "4 (Adults Only 18+)"
-msgstr "4 (Solo Maggiorenni 18+)"
+msgstr "4 (Maggiorenni 18+)"
 
 msgid "5 min"
 msgstr "5 minuti"
@@ -242,7 +242,7 @@ msgid "Block Updates"
 msgstr "Blocca Aggiornamenti"
 
 msgid "Boot Content"
-msgstr ""
+msgstr "Avvio Normale"
 
 msgid "Boot/Standard"
 msgstr "cIOS Predefinito"
@@ -303,7 +303,7 @@ msgid "Change Play Path"
 msgstr "Cambia Percorso Musica"
 
 msgid "Channel Launcher"
-msgstr ""
+msgstr "Modalità Avvio Canali"
 
 msgid "Channels"
 msgstr "Canali"
@@ -763,6 +763,9 @@ msgstr "Forza PAL50"
 msgid "Force PAL60"
 msgstr "Forza PAL60"
 
+msgid "Force Titles from Disc"
+msgstr ""
+
 msgid "Format"
 msgstr "Formatta"
 
@@ -887,7 +890,7 @@ msgid "Homebrew Apps Path"
 msgstr "Percorso Applic. Homebrew"
 
 msgid "Homebrew Channel"
-msgstr ""
+msgstr "Canale Homebrew"
 
 msgid "Homebrew Launcher"
 msgstr "Applicazioni Homebrew"
@@ -955,13 +958,13 @@ msgid "Install finished"
 msgstr "Installazione completata"
 
 msgid "Installing content"
-msgstr "Intallando contenuto"
+msgstr "Installando contenuto"
 
 msgid "Installing game:"
-msgstr "Intallando gioco:"
+msgstr "Installando gioco:"
 
 msgid "Installing title..."
-msgstr "Intallando titolo..."
+msgstr "Installando titolo..."
 
 msgid "Invalid wad file."
 msgstr "File WAD invalido."
@@ -1067,7 +1070,7 @@ msgid "Loop Sound"
 msgstr "Suono Ripetuto"
 
 msgid "Main DOL"
-msgstr ""
+msgstr "Avvio main.dol"
 
 msgid "Main tester:"
 msgstr "Tester principale:"
@@ -1100,7 +1103,7 @@ msgid "Music Volume"
 msgstr "Volume Musica"
 
 msgid "Nand Chan. Emulation"
-msgstr ""
+msgstr "Emulazione Canali NAND"
 
 msgid "Nand Channels"
 msgstr "Canali NAND"
@@ -1247,7 +1250,7 @@ msgid "Only Game Partition"
 msgstr "Solo Partizione Gioco"
 
 msgid "Only for Install"
-msgstr "Solo per Intallare"
+msgstr "Solo per Installare"
 
 msgid "Original Discarts"
 msgstr "Imm. Disco originali"
@@ -1799,7 +1802,7 @@ msgid "does not exist!"
 msgstr "non esiste!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr "non esiste! Caricando il gioco senza i trucchi."
+msgstr ""
 
 msgid "files left"
 msgstr "file mancanti"
@@ -1841,4 +1844,10 @@ msgid "of"
 msgstr "di"
 
 msgid "seconds left"
-msgstr "secondi rimanenti"
+msgstr "secondi rimasti"
+
+#~ msgid " has been Saved. The text has not been verified. Some of the code may not work right with each other. If you experience trouble, open the text in a real text editor for more information."
+#~ msgstr " è stato salvato. Parte del codice potrebbe non funzionare correttamente. In caso di problemi, aprire il file di testo con un editor per ottenere ulteriori informazioni."
+
+#~ msgid "does not exist! Loading game without cheats."
+#~ msgstr "non esiste! Caricando il gioco senza i trucchi."

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-09 22:23+0100\n"
+"POT-Creation-Date: 2012-02-29 20:42+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -242,7 +242,7 @@ msgid "Block Updates"
 msgstr "Bloquer Mise à jour"
 
 msgid "Boot Content"
-msgstr ""
+msgstr "Lancement normal"
 
 msgid "Boot/Standard"
 msgstr "IOS par défaut"
@@ -303,7 +303,7 @@ msgid "Change Play Path"
 msgstr "Changer dossier"
 
 msgid "Channel Launcher"
-msgstr ""
+msgstr "Lancement des Chaînes"
 
 msgid "Channels"
 msgstr "Chaînes"
@@ -494,7 +494,7 @@ msgid "Disc Insert Detected"
 msgstr "Insertion de disque détecté"
 
 msgid "DiskFlip"
-msgstr "Inversion disque"
+msgstr "Disque uniquement"
 
 msgid "Display"
 msgstr "Affichage"
@@ -599,7 +599,7 @@ msgid "EmuNand Channels"
 msgstr "Chaînes sur Émulation Nand des chaînes"
 
 msgid "Emulated Nand"
-msgstr "Nand émulé"
+msgstr "Nand émulée"
 
 msgid "English"
 msgstr "Anglais"
@@ -737,10 +737,10 @@ msgid "Flat Covers"
 msgstr "Jaquettes 2D"
 
 msgid "Flip-X"
-msgstr "Inversion-X"
+msgstr "Anim. jeu suivant"
 
 msgid "Font Scale Factor"
-msgstr "Échelle police"
+msgstr "Échelle de la police"
 
 msgid "Force 16:9"
 msgstr "Forcer 16:9"
@@ -762,6 +762,9 @@ msgstr "Forcer PAL50"
 
 msgid "Force PAL60"
 msgstr "Forcer PAL60"
+
+msgid "Force Titles from Disc"
+msgstr ""
 
 msgid "Format"
 msgstr "Formater"
@@ -1067,7 +1070,7 @@ msgid "Loop Sound"
 msgstr "Intro en boucle"
 
 msgid "Main DOL"
-msgstr ""
+msgstr "Lancer main.dol"
 
 msgid "Main tester:"
 msgstr "Testeur:"
@@ -1100,10 +1103,10 @@ msgid "Music Volume"
 msgstr "Volume musique"
 
 msgid "Nand Chan. Emulation"
-msgstr ""
+msgstr "Émulation Nand Chaînes"
 
 msgid "Nand Channels"
-msgstr "Chaînes sur Nand réel"
+msgstr "Chaînes sur Nand réelle"
 
 msgid "Nand Emu Channel Path"
 msgstr "Dossier ÉmuNand Chaînes"
@@ -1184,7 +1187,7 @@ msgid "None"
 msgstr "Aucun"
 
 msgid "Normal"
-msgstr "4:3"
+msgstr "Normale"
 
 msgid "Not Initialized"
 msgstr "Disque non initialisé"
@@ -1313,7 +1316,7 @@ msgid "Process finished."
 msgstr "Opération terminée."
 
 msgid "Prompts Buttons"
-msgstr "Interface"
+msgstr "Largeur de l'interface"
 
 msgid "Published by"
 msgstr "Publié par"
@@ -1325,7 +1328,7 @@ msgid "Random Directory Music"
 msgstr "Aléatoire"
 
 msgid "Real Nand"
-msgstr "Nand réel"
+msgstr "Nand réelle"
 
 msgid "Receiving file from:"
 msgstr "Réception du fichier de:"
@@ -1732,10 +1735,10 @@ msgid "WiFi Features"
 msgstr "Connexion WiFi"
 
 msgid "Widescreen Factor"
-msgstr "Échelle interface 16:9"
+msgstr "Échelle de l'interface"
 
 msgid "Widescreen Fix"
-msgstr "16:9"
+msgstr "Utiliser un taux d'échelle"
 
 msgid "Wii Games"
 msgstr "Jeux Wii"

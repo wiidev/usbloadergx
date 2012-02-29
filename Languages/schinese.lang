@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-09 22:23+0100\n"
+"POT-Creation-Date: 2012-02-29 20:42+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -762,6 +762,9 @@ msgstr "强制 PAL50"
 
 msgid "Force PAL60"
 msgstr "强制 PAL60"
+
+msgid "Force Titles from Disc"
+msgstr ""
 
 msgid "Format"
 msgstr "格式化"

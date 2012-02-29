@@ -38,6 +38,7 @@ GameWindow::GameWindow(int Selected, struct discHdr *dvd)
 	gameSound = NULL;
 	diskImgData = NULL;
 	diskImgData2 = NULL;
+	hidden = false;
 	reducedVol = false;
 	SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	SetPosition(0, -10);
@@ -205,16 +206,19 @@ GameWindow::GameWindow(int Selected, struct discHdr *dvd)
 
 GameWindow::~GameWindow()
 {
-	StopEffect();
-	SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-	ResumeGui();
+	if(!hidden)
+	{
+		StopEffect();
+		SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+		ResumeGui();
 
-	while(parentElement && this->GetEffect() > 0) usleep(100);
+		while(parentElement && this->GetEffect() > 0) usleep(100);
 
-	HaltGui();
+		HaltGui();
 
-	if(parentElement)
-		((GuiWindow * ) parentElement)->Remove(this);
+		if(parentElement)
+			((GuiWindow * ) parentElement)->Remove(this);
+	}
 
 	RemoveAll();
 
@@ -476,6 +480,7 @@ void GameWindow::Hide(void)
 	this->SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
 	while(parentWindow && this->GetEffect() > 0) usleep(100);
 	if(parentWindow) parentWindow->Remove(this);
+	hidden = true;
 }
 
 void GameWindow::Show(void)
@@ -487,6 +492,7 @@ void GameWindow::Show(void)
 		parentWindow->SetState(STATE_DISABLED);
 		parentWindow->Append(this);
 	}
+	hidden = false;
 }
 
 int GameWindow::Run()

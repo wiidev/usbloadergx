@@ -13,11 +13,12 @@
 #include <string.h>
 #include <unistd.h>
 #include <wiiuse/wpad.h>
-#include <pngu/pngu.h>
 
+#include "GUI/gui.h"
+#include "ImageOperations/TextureConverter.h"
+#include "ImageOperations/ImageWrite.h"
 #include "input.h"
 #include "gecko.h"
-#include "GUI/gui.h"
 
 #define DEFAULT_FIFO_SIZE 256 * 1024
 static unsigned int *xfb[2] = { NULL, NULL }; // Double buffered
@@ -446,9 +447,21 @@ void Menu_DrawTPLImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, GXTexO
 s32 TakeScreenshot(const char *path)
 {
 	gprintf("\nTakeScreenshot(%s)", path);
-	IMGCTX ctx = PNGU_SelectImageFromDevice(path);
-	s32 ret = PNGU_EncodeFromYCbYCr(ctx, vmode->fbWidth, vmode->efbHeight, xfb[whichfb], 0);
-	PNGU_ReleaseImageContext(ctx);
-	gprintf(":%d", ret);
+	int size = (2 * vmode->fbWidth * vmode->xfbHeight + 31) & ~31;
+
+	u8 * buffer = (u8 *) memalign(32, size);
+	if(!buffer)
+		return -1;
+
+	memcpy(buffer, xfb[whichfb], size);
+
+	gdImagePtr gdImg;
+	if(YCbYCrToGD(buffer, vmode->fbWidth, vmode->xfbHeight, &gdImg))
+	{
+		WriteGDImage(path,gdImg, IMAGE_PNG, 0);
+		gdImageDestroy(gdImg);
+	}
+	free(buffer);
+
 	return 1;
 }

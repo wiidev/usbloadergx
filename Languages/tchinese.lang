@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# tchinese.lang - r1120
+# tchinese.lang - r1145
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-09 22:23+0100\n"
+"POT-Creation-Date: 2012-02-29 20:42+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -125,7 +125,7 @@ msgid "Are you sure you want to delete this category?"
 msgstr "確定要刪除此類別嗎？"
 
 msgid "Are you sure you want to import game categories from GameTDB?"
-msgstr ""
+msgstr "確定要從GameTDB匯入遊戲類別嗎？"
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "確定要鎖上 USB Loader GX嗎？"
@@ -137,7 +137,7 @@ msgid "Are you sure?"
 msgstr "確定？"
 
 msgid "Aspect Ratio"
-msgstr ""
+msgstr "圖像縱橫比"
 
 msgid "Aug"
 msgstr "八月"
@@ -164,7 +164,7 @@ msgid "Backgroundmusic"
 msgstr "背景音樂"
 
 msgid "Beginning"
-msgstr ""
+msgstr "開始"
 
 msgid "Big thanks to:"
 msgstr "非常感謝:"
@@ -209,7 +209,7 @@ msgid "Block IOS Reload"
 msgstr "封鎖 IOS 重新載入"
 
 msgid "Block Loader Mode Button"
-msgstr ""
+msgstr "封鎖 Loader 模式按鈕"
 
 msgid "Block Loader Settings"
 msgstr "封鎖 Loader 設定"
@@ -218,7 +218,7 @@ msgid "Block Parental Settings"
 msgstr "封鎖親子設定"
 
 msgid "Block Priiloader Override"
-msgstr ""
+msgstr "封鎖 使Priiloader無效"
 
 msgid "Block Reset Settings"
 msgstr "封鎖重置設定"
@@ -267,7 +267,7 @@ msgstr "無法建立目錄"
 
 #, c-format
 msgid "Can't create file: %s"
-msgstr ""
+msgstr "無法建立檔案: %s"
 
 #, c-format
 msgid "Can't create path: %s"
@@ -281,11 +281,11 @@ msgstr ""
 
 #, c-format
 msgid "Can't open file: %s"
-msgstr ""
+msgstr "無法開啟檔案: %s"
 
 #, c-format
 msgid "Can't read file: %s"
-msgstr ""
+msgstr "無法讀取檔案: %s"
 
 msgid "Cancel"
 msgstr "取消"
@@ -306,7 +306,7 @@ msgid "Channel Launcher"
 msgstr ""
 
 msgid "Channels"
-msgstr ""
+msgstr "頻道"
 
 msgid "Cheatfile is blank"
 msgstr "金手指檔是空的"
@@ -358,10 +358,10 @@ msgid "Console should be unlocked to modify it."
 msgstr "控制台須解鎖才可變更設定。"
 
 msgid "Content"
-msgstr ""
+msgstr "內容"
 
 msgid "Continue"
-msgstr ""
+msgstr "繼續"
 
 msgid "Continue to install game?"
 msgstr "繼續安裝遊戲？"
@@ -491,7 +491,7 @@ msgid "Disc Default"
 msgstr "光碟預設"
 
 msgid "Disc Insert Detected"
-msgstr ""
+msgstr "光碟插入檢查"
 
 msgid "DiskFlip"
 msgstr "光碟滑動"
@@ -536,7 +536,7 @@ msgid "Do you want to load the default theme?"
 msgstr "是否要載入預設佈景主題嗎？"
 
 msgid "Do you want to re-init network?"
-msgstr ""
+msgstr "是否要重新初始化網路？"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "是否要同步所有FAT32磁區可用空間資訊？"
@@ -581,7 +581,7 @@ msgid "Downloading pagelist:"
 msgstr "下載頁面清單："
 
 msgid "Dump NAND to EmuNand"
-msgstr ""
+msgstr "轉儲 NAND 到 模擬Nand"
 
 msgid "Dutch"
 msgstr "荷蘭文"
@@ -596,16 +596,16 @@ msgid "ERROR: Can't set up theme."
 msgstr "錯誤：無法設定佈景主題。"
 
 msgid "EmuNand Channels"
-msgstr ""
+msgstr "模擬Nand 頻道"
 
 msgid "Emulated Nand"
-msgstr ""
+msgstr "啟動模擬 Nand"
 
 msgid "English"
 msgstr "英文"
 
 msgid "Enter Path"
-msgstr ""
+msgstr "輸入路徑"
 
 msgid "Error"
 msgstr "錯誤"
@@ -652,7 +652,7 @@ msgid "Errors occured."
 msgstr "發生錯誤。"
 
 msgid "Everything"
-msgstr ""
+msgstr "所有"
 
 msgid "Exit"
 msgstr "退出"
@@ -676,7 +676,7 @@ msgid "Extracting files:"
 msgstr "提取檔案："
 
 msgid "Extracting nand files:"
-msgstr ""
+msgstr "提取 nand 檔案:"
 
 msgid "Failed"
 msgstr "失敗"
@@ -691,19 +691,19 @@ msgid "Failed to extract."
 msgstr "提取失敗。"
 
 msgid "Failed to initialize the USB storage device."
-msgstr ""
+msgstr "USB儲存裝置初始化失敗。"
 
 msgid "Failed to open partition"
 msgstr "開啟磁區失敗"
 
 msgid "Failed to read ticket."
-msgstr ""
+msgstr "讀取 ticket 失敗。"
 
 msgid "Failed to read tmd file."
-msgstr ""
+msgstr "讀取 tmd 檔失敗。"
 
 msgid "Failed to read wad header."
-msgstr ""
+msgstr "讀取 wad 檔資訊失敗。"
 
 msgid "Failed updating"
 msgstr "更新失敗"
@@ -721,7 +721,7 @@ msgid "File not found."
 msgstr "找不到該檔案。"
 
 msgid "File read/write error."
-msgstr ""
+msgstr "檔案讀取/寫入錯誤。"
 
 msgid "Files extracted successfully."
 msgstr "檔案提取成功。"
@@ -743,10 +743,10 @@ msgid "Font Scale Factor"
 msgstr "字型比例倍數"
 
 msgid "Force 16:9"
-msgstr ""
+msgstr "強制 16:9"
 
 msgid "Force 4:3"
-msgstr ""
+msgstr "強制 4:3"
 
 msgid "Force NTSC"
 msgstr "強制 NTSC"
@@ -762,6 +762,9 @@ msgstr "強制 PAL50"
 
 msgid "Force PAL60"
 msgstr "強制 PAL60"
+
+msgid "Force Titles from Disc"
+msgstr ""
 
 msgid "Format"
 msgstr "格式化"
@@ -857,7 +860,7 @@ msgid "Game/Install Partition"
 msgstr "遊戲/安裝磁區"
 
 msgid "GameTDB Path"
-msgstr ""
+msgstr "GameTDB 路徑"
 
 msgid "Gamename [GAMEID]"
 msgstr "遊戲名稱 [GAMEID]"
@@ -934,7 +937,7 @@ msgid "Install"
 msgstr "安裝"
 
 msgid "Install Canceled"
-msgstr ""
+msgstr "安裝已取消"
 
 msgid "Install Directories"
 msgstr "安裝目錄"
@@ -946,7 +949,7 @@ msgid "Install Partitions"
 msgstr "安裝磁區"
 
 msgid "Install WAD to EmuNand"
-msgstr ""
+msgstr "安裝 WAD 到模擬Nand"
 
 msgid "Install a game"
 msgstr "安裝遊戲"
@@ -955,16 +958,16 @@ msgid "Install finished"
 msgstr "已安裝完成"
 
 msgid "Installing content"
-msgstr ""
+msgstr "正在安裝程式主體"
 
 msgid "Installing game:"
 msgstr "正在安裝遊戲："
 
 msgid "Installing title..."
-msgstr ""
+msgstr "正在安裝 title..."
 
 msgid "Invalid wad file."
-msgstr ""
+msgstr "無效的 wad 檔。"
 
 msgid "Issue manager /"
 msgstr "問題管理者 /"
@@ -1000,7 +1003,7 @@ msgid "Korean"
 msgstr "韓文"
 
 msgid "Language Files"
-msgstr ""
+msgstr "語言檔"
 
 msgid "Language change:"
 msgstr "變更語言為："
@@ -1012,7 +1015,7 @@ msgid "Languagepath changed."
 msgstr "語言路徑已變更"
 
 msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
-msgstr ""
+msgstr "啟動模擬 nand 頻道僅能以d2x cIOS執行!首先變更遊戲IOS為d2x cIOS。 "
 
 msgid "Left"
 msgstr "左"
@@ -1037,7 +1040,7 @@ msgid "Load this DOL as alternate DOL?"
 msgstr "載入這個 DOL 作為替代 DOL？"
 
 msgid "Loader Mode"
-msgstr ""
+msgstr "Loader 模式"
 
 msgid "Loader Settings"
 msgstr "Loader設定"
@@ -1103,10 +1106,10 @@ msgid "Nand Chan. Emulation"
 msgstr ""
 
 msgid "Nand Channels"
-msgstr ""
+msgstr "Nand 頻道"
 
 msgid "Nand Emu Channel Path"
-msgstr ""
+msgstr "Nand 模擬器頻道路徑"
 
 msgid "Nand Emu Path"
 msgstr "Nand 模擬器路徑"
@@ -1121,7 +1124,7 @@ msgid "Nand Emulation only works on FAT/FAT32 partitions!"
 msgstr "Nand 模擬器僅能在 FAT/FAT32 格式磁區執行!"
 
 msgid "Nand Saves Emulation"
-msgstr ""
+msgstr "Nand 儲存模擬器"
 
 msgid "Neither"
 msgstr "皆不顯示"
@@ -1169,7 +1172,7 @@ msgid "No file missing!"
 msgstr "沒有檔案缺少！"
 
 msgid "No language files to update on your devices! Do you want to download new language files?"
-msgstr ""
+msgstr "你的儲存裝置沒有語言檔可供更新！是否要下載新的語言檔？"
 
 msgid "No new updates."
 msgstr "沒有可用更新。"
@@ -1187,7 +1190,7 @@ msgid "Normal"
 msgstr "一般"
 
 msgid "Not Initialized"
-msgstr ""
+msgstr "尚未初始化"
 
 msgid "Not a Wii Disc"
 msgstr "不是 Wii 的光碟"
@@ -1325,7 +1328,7 @@ msgid "Random Directory Music"
 msgstr "隨機選取音樂"
 
 msgid "Real Nand"
-msgstr ""
+msgstr "真實的Nand"
 
 msgid "Receiving file from:"
 msgstr "正在接收檔案來源:"
@@ -1412,7 +1415,7 @@ msgid "Screensaver"
 msgstr "螢幕保護"
 
 msgid "Search Mode"
-msgstr ""
+msgstr "搜尋模式"
 
 msgid "Select"
 msgstr "選取"
@@ -1430,10 +1433,10 @@ msgid "Select game categories"
 msgstr "選擇遊戲類別"
 
 msgid "Select loader mode"
-msgstr ""
+msgstr "選擇 loader 模式"
 
 msgid "Select titles sources."
-msgstr ""
+msgstr "選擇 titles 的來源。"
 
 msgid "Sept"
 msgstr "九月"
@@ -1532,7 +1535,7 @@ msgid "Successfully installed:"
 msgstr "成功安裝："
 
 msgid "Switching to channel list mode."
-msgstr ""
+msgstr "正在切換頻道清單模式。"
 
 msgid "Sync FAT32 FS Info"
 msgstr "同步FAT32檔案系統資訊"
@@ -1556,13 +1559,13 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "所輸入的目錄不存在。是否要建立一個目錄嗎？"
 
 msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
-msgstr ""
+msgstr "檔案將被提取到模擬 nand 路徑內。請注意：所有存在的檔案將被覆蓋。"
 
 msgid "The save game will be extracted to your emu nand path."
-msgstr "遊戲存檔將被提取到你的模擬 nand 路徑。"
+msgstr "遊戲存檔將被提取到模擬 nand 路徑內。"
 
 msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
-msgstr "遊戲存檔將被提取到你的模擬 nand 路徑。注意：所有存在的存檔將被覆蓋。"
+msgstr "遊戲存檔將被提取到模擬 nand 路徑內。請注意：所有存在的存檔將被覆蓋。"
 
 msgid "The wad file was installed"
 msgstr "wad檔已安裝"
@@ -1599,7 +1602,7 @@ msgid "Title Launcher"
 msgstr "系統頻道"
 
 msgid "Titles from GameTDB"
-msgstr ""
+msgstr "從GameTDB顯示遊戲名稱"
 
 msgid "Tooltips"
 msgstr "提示信息"
@@ -1608,7 +1611,7 @@ msgid "Transfer failed"
 msgstr "傳輸失敗"
 
 msgid "USB Device not found."
-msgstr ""
+msgstr "找不到 USB 裝置"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX 被上鎖保護"
@@ -1620,7 +1623,7 @@ msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr "USB連接埠變更僅Hermes cIOS支援。"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "移除"
 
 msgid "Uninstall Game"
 msgstr "移除遊戲"
@@ -1677,7 +1680,7 @@ msgid "Use System Font"
 msgstr "使用系統字型"
 
 msgid "Use global"
-msgstr "使用整體設定"
+msgstr "預設"
 
 msgid "VBI (Default)"
 msgstr "VBI (預設)"
@@ -1696,10 +1699,10 @@ msgid "Video Mode"
 msgstr "視訊格式"
 
 msgid "Virtual Pointer Speed"
-msgstr ""
+msgstr "虛擬指針的速度"
 
 msgid "WAD Installation"
-msgstr ""
+msgstr "WAD 安裝"
 
 msgid "WDM Files Path"
 msgstr "WDM檔案路徑"
@@ -1717,16 +1720,16 @@ msgid "Warning:"
 msgstr "警告："
 
 msgid "What do you want to do?"
-msgstr ""
+msgstr "要做什麼？"
 
 msgid "What do you want to update?"
-msgstr "更新何者？"
+msgstr "要更新什麼？"
 
 msgid "What should be deleted for this game title:"
 msgstr "這遊戲title應刪除什麼："
 
 msgid "What to extract from NAND?"
-msgstr ""
+msgstr "從 NAND 提取什麼？"
 
 msgid "WiFi Features"
 msgstr "WiFi功能設定"
@@ -1738,7 +1741,7 @@ msgid "Widescreen Fix"
 msgstr "寬螢幕校正"
 
 msgid "Wii Games"
-msgstr ""
+msgstr "Wii 遊戲"
 
 msgid "Wii Menu"
 msgstr "Wii系統選單"
@@ -1747,10 +1750,10 @@ msgid "Wii Settings"
 msgstr "Wii主機設定"
 
 msgid "WiiTDB.xml"
-msgstr ""
+msgstr "WiiTDB.xml"
 
 msgid "WiiTDB.xml is up to date."
-msgstr ""
+msgstr "WiiTDB.xml保持最新。"
 
 msgid "Wiilight"
 msgstr "光碟機藍光"
@@ -1769,7 +1772,7 @@ msgstr "Wiird 偵錯器"
 
 #, c-format
 msgid "Write error on file: %s"
-msgstr ""
+msgstr "檔案寫入失敗: %s"
 
 msgid "Writing GXGameCategories.xml"
 msgstr "正在寫入 GXGameCategories.xml"
@@ -1784,7 +1787,7 @@ msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 1
 msgstr "你嘗試用高於 cIOS 249 版本18去選取 FAT32/NTFS/EXT 磁區。這格式不支援。繼續請自行承擔風險。"
 
 msgid "You can select or format a partition or use the channel loader mode."
-msgstr ""
+msgstr "你可選擇或格式化磁區或使用頻道 loader 模式。"
 
 msgid "You cannot delete this category."
 msgstr "無法刪除此類別。"
@@ -1808,7 +1811,7 @@ msgid "for FAT/NTFS support"
 msgstr "FAT/NTFS 格式支援"
 
 msgid "for GameTDB and hosting covers / disc images"
-msgstr ""
+msgstr "設置 GameTDB 與封面 / 光碟圖片檔案存放空間"
 
 msgid "for Ocarina"
 msgstr "的 金手指"

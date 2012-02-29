@@ -1,5 +1,5 @@
-/****************************************************************************
- * Copyright (C) 2011
+/***************************************************************************
+ * Copyright (C) 2010
  * by Dimok
  *
  * This software is provided 'as-is', without any express or implied
@@ -20,27 +20,37 @@
  *
  * 3. This notice may not be removed or altered from any source
  * distribution.
+ *
+ * for WiiXplorer 2010
  ***************************************************************************/
-#ifndef FEATURESETTINGS_MENU_HPP_
-#define FEATURESETTINGS_MENU_HPP_
+#include <stdio.h>
+#include <gctypes.h>
+#include <gd.h>
+#include "ImageWrite.h"
 
-#include "SettingsMenu.hpp"
+#define LIMIT(x, min, max) ( (x < min) ? min : (x > max) ? max : x )
 
-class FeatureSettingsMenu : public SettingsMenu
+bool WriteGDImage(const char * filepath, gdImagePtr gdImg, u8 format, u8 compression)
 {
-	public:
-		FeatureSettingsMenu();
-		virtual ~FeatureSettingsMenu();
-	protected:
-		void SetOptionValues();
-		int GetMenuInternal();
+	if(gdImg == 0)
+		return false;
 
-		int OldTitlesOverride;
-		int OldCacheTitles;
-		int OldForceDiscTitles;
+	FILE * file = fopen(filepath, "wb");
+	if(!file)
+		return false;
 
-		OptionList GuiOptions;
-};
+	switch(format)
+	{
+		default:
+		case IMAGE_PNG:
+			gdImagePng(gdImg, file);
+			break;
+		case IMAGE_JPEG:
+			gdImageJpeg(gdImg, file, LIMIT(100-compression, 0, 100));
+			break;
+	}
 
+	fclose(file);
 
-#endif
+	return true;
+}

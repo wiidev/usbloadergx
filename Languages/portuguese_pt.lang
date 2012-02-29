@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-09 22:23+0100\n"
+"POT-Creation-Date: 2012-02-29 20:42+0100\n"
 "PO-Revision-Date: 2011-11-03 11:00+0000\n"
 "Last-Translator: pplucky <pplucky@gmail.com>\n"
 "Language-Team: Sky8000, pplucky\n"
@@ -762,6 +762,9 @@ msgstr "Forçar PAL50"
 
 msgid "Force PAL60"
 msgstr "Forçar PAL60"
+
+msgid "Force Titles from Disc"
+msgstr ""
 
 msgid "Format"
 msgstr "Formatar"

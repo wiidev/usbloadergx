@@ -29,6 +29,8 @@ int HomebrewXML::LoadHomebrewXMLData(const char* filename)
 		return false;
 
 	TiXmlElement *appNode =  xmlDoc.FirstChildElement("app");
+	if(!appNode)
+		return false;
 
 	TiXmlElement *node = NULL;
 

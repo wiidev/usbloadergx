@@ -237,48 +237,38 @@ uint16_t FreeTypeGX::cacheGlyphDataComplete(int16_t pixelSize)
 
 void FreeTypeGX::loadGlyphData(FT_Bitmap *bmp, ftgxCharData *charData)
 {
-	uint32_t *glyphData = (uint32_t *) memalign(32, charData->textureWidth * charData->textureHeight * 4);
-	memset(glyphData, 0x00, charData->textureWidth * charData->textureHeight * 4);
+	int glyphSize = (charData->textureWidth * charData->textureHeight) >> 1;
 
-	uint8_t *bmsrc = (uint8_t *)bmp->buffer;
-	uint32_t *dest = glyphData, *ptr = dest;
+	uint8_t *glyphData = (uint8_t *) memalign(32, glyphSize);
+	memset(glyphData, 0x00, glyphSize);
 
-	for (uint16_t imagePosY = 0; imagePosY < bmp->rows; ++imagePosY)
+	uint8_t *src = (uint8_t *)bmp->buffer;
+	uint8_t *dst = glyphData;
+	int32_t pos, x1, y1, x, y;
+
+	for(y1 = 0; y1 < bmp->rows; y1 += 8)
 	{
-		for (uint16_t imagePosX = 0; imagePosX < bmp->width; ++imagePosX)
+		for(x1 = 0; x1 < bmp->width; x1 += 8)
 		{
-			*ptr++ = EXPLODE_UINT8_TO_UINT32(*bmsrc);
-			++bmsrc;
-		}
-		ptr = dest += charData->textureWidth;
-	}
+			for(y = y1; y < (y1 + 8); y++)
+			{
+				for(x = x1; x < (x1 + 8); x += 2, dst++)
+				{
+					if(x >= bmp->width || y >= bmp->rows)
+						continue;
 
-	uint32_t bufferSize = charData->textureWidth * charData->textureHeight;
-	uint32_t* dataBufferIA4 = (uint32_t *)memalign(32, ALIGN32(bufferSize));
-	memset(dataBufferIA4, 0x00, bufferSize);
+					pos = y * bmp->width + x;
+					*dst = (src[pos] & 0xF0);
 
-	uint32_t *src = glyphData;
-	uint8_t* dst = (uint8_t *) dataBufferIA4;
-
-	for(uint16_t y = 0; y < charData->textureHeight; y += 4) {
-		for(uint16_t x = 0; x < charData->textureWidth; x += 8) {
-			for(uint16_t rows = 0; rows < 4; rows++) {
-				*dst++ = RGBA_TO_IA4(src[((y + rows) * charData->textureWidth) + (x + 0)]);
-				*dst++ = RGBA_TO_IA4(src[((y + rows) * charData->textureWidth) + (x + 1)]);
-				*dst++ = RGBA_TO_IA4(src[((y + rows) * charData->textureWidth) + (x + 2)]);
-				*dst++ = RGBA_TO_IA4(src[((y + rows) * charData->textureWidth) + (x + 3)]);
-				*dst++ = RGBA_TO_IA4(src[((y + rows) * charData->textureWidth) + (x + 4)]);
-				*dst++ = RGBA_TO_IA4(src[((y + rows) * charData->textureWidth) + (x + 5)]);
-				*dst++ = RGBA_TO_IA4(src[((y + rows) * charData->textureWidth) + (x + 6)]);
-				*dst++ = RGBA_TO_IA4(src[((y + rows) * charData->textureWidth) + (x + 7)]);
+					if(x+1 < bmp->width)
+						*dst |= (src[pos + 1] >> 4);
+				}
 			}
 		}
 	}
 
-	DCFlushRange(dataBufferIA4, bufferSize);
-	free(glyphData);
-
-	charData->glyphDataTexture = (uint8_t *) dataBufferIA4;
+	DCFlushRange(glyphData, glyphSize);
+	charData->glyphDataTexture = glyphData;
 }
 
 /**
@@ -389,7 +379,7 @@ uint16_t FreeTypeGX::drawText(int16_t x, int16_t y, int16_t z, const wchar_t *te
 				x_pos += pairDelta.x >> 6;
 			}
 
-			GX_InitTexObj(&glyphTexture, glyphData->glyphDataTexture, glyphData->textureWidth, glyphData->textureHeight, GX_TF_IA4, GX_CLAMP, GX_CLAMP, GX_FALSE);
+			GX_InitTexObj(&glyphTexture, glyphData->glyphDataTexture, glyphData->textureWidth, glyphData->textureHeight, GX_TF_I4, GX_CLAMP, GX_CLAMP, GX_FALSE);
 			copyTextureToFramebuffer(&glyphTexture, glyphData->textureWidth, glyphData->textureHeight, x_pos + glyphData->renderOffsetX + x_offset, y - glyphData->renderOffsetY + y_offset, z, color);
 
 			x_pos += glyphData->glyphAdvanceX;

@@ -27,6 +27,7 @@ class GameWindow : public GuiWindow
 		void Show();
 
 		bool reducedVol;
+		bool hidden;
 		int returnVal;
 		int gameSelected;
 		GameBrowseMenu *browserMenu;

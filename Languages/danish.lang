@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# danish.lang - r1102
+# danish.lang - r1148
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-09 22:23+0100\n"
+"POT-Creation-Date: 2012-02-29 20:42+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -80,7 +80,7 @@ msgid "AXNextFrame"
 msgstr ""
 
 msgid "Add category"
-msgstr "Tilføje kategori  "
+msgstr "Tilføje kategori"
 
 msgid "Adjust Overscan X"
 msgstr ""
@@ -95,7 +95,7 @@ msgid "All Partitions"
 msgstr "Alle Partitioner"
 
 msgid "All files extracted."
-msgstr ""
+msgstr "Alle filer er udpakket."
 
 msgid "All images downloaded successfully."
 msgstr "Lykkedes at downloade alle billeder."
@@ -125,7 +125,7 @@ msgid "Are you sure you want to delete this category?"
 msgstr "Er du sikker på at du ville slette denne kategori?"
 
 msgid "Are you sure you want to import game categories from GameTDB?"
-msgstr ""
+msgstr "Er du sikker på at du ville hente Spil kategorier fra GameTDB?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "Er du sikker på at du vil låse USB Loader GX?"
@@ -137,7 +137,7 @@ msgid "Are you sure?"
 msgstr "Er du sikker?"
 
 msgid "Aspect Ratio"
-msgstr ""
+msgstr "Formatforhold"
 
 msgid "Aug"
 msgstr ""
@@ -164,7 +164,7 @@ msgid "Backgroundmusic"
 msgstr "Baggrundsmusik"
 
 msgid "Beginning"
-msgstr ""
+msgstr "Begyndelse"
 
 msgid "Big thanks to:"
 msgstr "En stor tak til:"
@@ -209,7 +209,7 @@ msgid "Block IOS Reload"
 msgstr "Blokér IOS-reload"
 
 msgid "Block Loader Mode Button"
-msgstr ""
+msgstr "Bloker Loader mode knap"
 
 msgid "Block Loader Settings"
 msgstr "Bloker loader indstillinger"
@@ -218,7 +218,7 @@ msgid "Block Parental Settings"
 msgstr "Bloker forældre indstillinger"
 
 msgid "Block Priiloader Override"
-msgstr ""
+msgstr " Bloker Priiloader override"
 
 msgid "Block Reset Settings"
 msgstr "Bloker nulstils indstillinger"
@@ -242,7 +242,7 @@ msgid "Block Updates"
 msgstr "Bloker opdateringer"
 
 msgid "Boot Content"
-msgstr ""
+msgstr "indlæs indhold"
 
 msgid "Boot/Standard"
 msgstr ""
@@ -267,7 +267,7 @@ msgstr "Kan ikke lave ny mappe"
 
 #, c-format
 msgid "Can't create file: %s"
-msgstr ""
+msgstr "Kan ikke lave fil: %s"
 
 #, c-format
 msgid "Can't create path: %s"
@@ -281,11 +281,11 @@ msgstr ""
 
 #, c-format
 msgid "Can't open file: %s"
-msgstr ""
+msgstr "Kan ikke åbne fil: %s"
 
 #, c-format
 msgid "Can't read file: %s"
-msgstr ""
+msgstr "Kan ikke læse fil: %s"
 
 msgid "Cancel"
 msgstr "Annullér"
@@ -303,10 +303,10 @@ msgid "Change Play Path"
 msgstr "Ændre sti til musik"
 
 msgid "Channel Launcher"
-msgstr ""
+msgstr "Kanal Launcher"
 
 msgid "Channels"
-msgstr ""
+msgstr "Kanaler"
 
 msgid "Cheatfile is blank"
 msgstr "Cheatfilen er tom"
@@ -358,16 +358,16 @@ msgid "Console should be unlocked to modify it."
 msgstr "Konsollen skal være låst op for ændre dette."
 
 msgid "Content"
-msgstr ""
+msgstr "Indhold"
 
 msgid "Continue"
-msgstr ""
+msgstr "Fortsæt"
 
 msgid "Continue to install game?"
 msgstr "Fortsæt med at installere spillet?"
 
 msgid "Continue?"
-msgstr ""
+msgstr "Fortsæt?"
 
 msgid "Controllevel"
 msgstr "Kontrolniveau"
@@ -386,7 +386,7 @@ msgid "Could not create path: %s"
 msgstr "Kunne ikke lave sti: %s"
 
 msgid "Could not extract files for:"
-msgstr ""
+msgstr "Kunne ikke udpakker filer for:"
 
 msgid "Could not find info for this game in the wiitdb.xml."
 msgstr "Kunne ikke finde information for dette spil i wiitdb.xml"
@@ -410,7 +410,7 @@ msgid "Could not save."
 msgstr "Kunne ikke gemme."
 
 msgid "Could not write file."
-msgstr ""
+msgstr "Kunne ikke skrive fil"
 
 msgid "Could not write to:"
 msgstr "Kunne ikke skrive til:"
@@ -491,7 +491,7 @@ msgid "Disc Default"
 msgstr "Spillets standard"
 
 msgid "Disc Insert Detected"
-msgstr ""
+msgstr "Ny Disc opdaget"
 
 msgid "DiskFlip"
 msgstr ""
@@ -524,10 +524,10 @@ msgid "Do you want to download this theme?"
 msgstr "Skal dette tema downloades?"
 
 msgid "Do you want to extract all the save games?"
-msgstr ""
+msgstr "Vil du udpakke alle save games?"
 
 msgid "Do you want to extract the save game?"
-msgstr ""
+msgstr "Vil du udpakke dette save game?"
 
 msgid "Do you want to format:"
 msgstr "Vil du formatere:"
@@ -536,7 +536,7 @@ msgid "Do you want to load the default theme?"
 msgstr "Vil du indlæse standard tema?"
 
 msgid "Do you want to re-init network?"
-msgstr ""
+msgstr "Vil du genetablere netværket?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Vil du synkronisere fri plads info sector på alle FAT32 Partitioner?"
@@ -581,7 +581,7 @@ msgid "Downloading pagelist:"
 msgstr "Downloader pagelist:"
 
 msgid "Dump NAND to EmuNand"
-msgstr ""
+msgstr "Kopier Wii NAND til EmuNand"
 
 msgid "Dutch"
 msgstr "Hollandsk"
@@ -596,16 +596,16 @@ msgid "ERROR: Can't set up theme."
 msgstr "FEJL: Temaet kan ikke bruges."
 
 msgid "EmuNand Channels"
-msgstr ""
+msgstr "EmuNand kanaler"
 
 msgid "Emulated Nand"
-msgstr ""
+msgstr "Emuleret Nand"
 
 msgid "English"
 msgstr "Engelsk"
 
 msgid "Enter Path"
-msgstr ""
+msgstr "Skriv sti"
 
 msgid "Error"
 msgstr "Fejl"
@@ -649,10 +649,10 @@ msgid "Error:"
 msgstr "Fejl:"
 
 msgid "Errors occured."
-msgstr ""
+msgstr "Fejl opstået"
 
 msgid "Everything"
-msgstr ""
+msgstr "Alt"
 
 msgid "Exit"
 msgstr "Forlad"
@@ -661,22 +661,22 @@ msgid "Exit to where?"
 msgstr "Hvorhen?"
 
 msgid "Export All Saves to EmuNand"
-msgstr ""
+msgstr "Kopier alle saves til EmuNand"
 
 msgid "Extract Save to EmuNand"
-msgstr ""
+msgstr "Kopier Save til EmuNand"
 
 msgid "Extracting file:"
-msgstr ""
+msgstr "Udpakker Fil:"
 
 msgid "Extracting files..."
 msgstr "Pakker filer ud..."
 
 msgid "Extracting files:"
-msgstr ""
+msgstr "Udpakker Filer:"
 
 msgid "Extracting nand files:"
-msgstr ""
+msgstr "Udpakker nand filer:"
 
 msgid "Failed"
 msgstr "Fejlede"
@@ -685,25 +685,25 @@ msgid "Failed formating"
 msgstr "Formateringen mislykkedes"
 
 msgid "Failed to extract all files. Savegame might not exist."
-msgstr ""
+msgstr "Fejlede at udpakke alle filer. Savegame eksistere muligvis ikke."
 
 msgid "Failed to extract."
 msgstr "Udpakningen mislykkedes."
 
 msgid "Failed to initialize the USB storage device."
-msgstr ""
+msgstr "Fejlede at initialisere USB enheden."
 
 msgid "Failed to open partition"
 msgstr "Kunne ikke åbne partition"
 
 msgid "Failed to read ticket."
-msgstr ""
+msgstr "Kunne ikke læse ticket."
 
 msgid "Failed to read tmd file."
-msgstr ""
+msgstr "Kunne ikke læse tmd fil."
 
 msgid "Failed to read wad header."
-msgstr ""
+msgstr "Kunne ikke læse wad header."
 
 msgid "Failed updating"
 msgstr "Opdatering fejlede"
@@ -721,10 +721,10 @@ msgid "File not found."
 msgstr "Fil ikke fundet."
 
 msgid "File read/write error."
-msgstr ""
+msgstr "Fil læse/skrive fejl."
 
 msgid "Files extracted successfully."
-msgstr ""
+msgstr "Lykkes at udpakke filer."
 
 #, c-format
 msgid "Filesize is %i Byte."
@@ -743,10 +743,10 @@ msgid "Font Scale Factor"
 msgstr ""
 
 msgid "Force 16:9"
-msgstr ""
+msgstr "Tving 16:9"
 
 msgid "Force 4:3"
-msgstr ""
+msgstr "Tving 4:3"
 
 msgid "Force NTSC"
 msgstr "Tving NTSC"
@@ -762,6 +762,9 @@ msgstr "Tving PAL50"
 
 msgid "Force PAL60"
 msgstr "Tving PAL60"
+
+msgid "Force Titles from Disc"
+msgstr ""
 
 msgid "Format"
 msgstr "Formater"
@@ -857,7 +860,7 @@ msgid "Game/Install Partition"
 msgstr "Spil/Installation partition"
 
 msgid "GameTDB Path"
-msgstr ""
+msgstr "Sti til GameTDB"
 
 msgid "Gamename [GAMEID]"
 msgstr ""
@@ -934,7 +937,7 @@ msgid "Install"
 msgstr "Installér"
 
 msgid "Install Canceled"
-msgstr ""
+msgstr "installering annulleret"
 
 msgid "Install Directories"
 msgstr "Installer mappe"
@@ -946,16 +949,16 @@ msgid "Install Partitions"
 msgstr "Installer partitioner"
 
 msgid "Install WAD to EmuNand"
-msgstr ""
+msgstr "Installer WAD til EmuNand"
 
 msgid "Install a game"
 msgstr "Installér nyt spil"
 
 msgid "Install finished"
-msgstr ""
+msgstr "Installering færdig"
 
 msgid "Installing content"
-msgstr ""
+msgstr "Installerer indhold"
 
 msgid "Installing game:"
 msgstr "Installerer spillet:"
@@ -964,7 +967,7 @@ msgid "Installing title..."
 msgstr ""
 
 msgid "Invalid wad file."
-msgstr ""
+msgstr "Ugyldig wad fil."
 
 msgid "Issue manager /"
 msgstr "Problem manager /"
@@ -1000,7 +1003,7 @@ msgid "Korean"
 msgstr "Koreansk"
 
 msgid "Language Files"
-msgstr ""
+msgstr "Sprog filer"
 
 msgid "Language change:"
 msgstr "Skift sprog:"
@@ -1012,7 +1015,7 @@ msgid "Languagepath changed."
 msgstr "Sti til sprogfiler ændret."
 
 msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
-msgstr ""
+msgstr "Indlæsning af Emu nand kanaler virker kun med d2x cIOS! Ændre spil IOS til en d2x cIOS først."
 
 msgid "Left"
 msgstr "Venstre"
@@ -1100,16 +1103,16 @@ msgid "Music Volume"
 msgstr "Lydstyrke"
 
 msgid "Nand Chan. Emulation"
-msgstr ""
+msgstr "Nand Kanal emulation"
 
 msgid "Nand Channels"
-msgstr ""
+msgstr "Nand Kanaler"
 
 msgid "Nand Emu Channel Path"
-msgstr ""
+msgstr "Sti til Nand Emu kanal"
 
 msgid "Nand Emu Path"
-msgstr "Sti til Nand Emu."
+msgstr "Sti til Emu Nand."
 
 msgid "Nand Emulation"
 msgstr "Nand emulering"
@@ -1142,7 +1145,7 @@ msgid "No DOL file found on disc."
 msgstr "Der blev ikke fundet nogle DOL-filer på DVDen."
 
 msgid "No Splitting"
-msgstr "Ingen Splitting"
+msgstr "Ingen"
 
 msgid "No URL or Path specified."
 msgstr "Ingen URL eller sti er angivet."
@@ -1160,7 +1163,7 @@ msgid "No data could be read."
 msgstr "Data kunne ikke læses."
 
 msgid "No disc inserted."
-msgstr ""
+msgstr "Ingen Disc indsat"
 
 msgid "No favorites selected."
 msgstr "Ingen favoritter er valgt."
@@ -1169,7 +1172,7 @@ msgid "No file missing!"
 msgstr "Ingen filer mangler!"
 
 msgid "No language files to update on your devices! Do you want to download new language files?"
-msgstr ""
+msgstr "Ingen sprog filer at opdatere på din enhed! Vil du hente nye sprog filer?"
 
 msgid "No new updates."
 msgstr "Ingen nye opdateringer."
@@ -1187,7 +1190,7 @@ msgid "Normal"
 msgstr "Normal"
 
 msgid "Not Initialized"
-msgstr ""
+msgstr "Ikke initialiseret"
 
 msgid "Not a Wii Disc"
 msgstr "Ikke en Wii-DVD"
@@ -1310,7 +1313,7 @@ msgid "Prev"
 msgstr "Forrige"
 
 msgid "Process finished."
-msgstr ""
+msgstr "Proces færdig."
 
 msgid "Prompts Buttons"
 msgstr "Knaptekster"
@@ -1325,7 +1328,7 @@ msgid "Random Directory Music"
 msgstr "Musik fra tilfældig mappe"
 
 msgid "Real Nand"
-msgstr ""
+msgstr "Ægte Nand"
 
 msgid "Receiving file from:"
 msgstr "Henter fil fra:"
@@ -1340,10 +1343,10 @@ msgid "Reload SD"
 msgstr "Genindlæs SD"
 
 msgid "Reloading game list now, please wait..."
-msgstr ""
+msgstr "Genindlæser Spil liste, Vent venligst..."
 
 msgid "Remember Unlock"
-msgstr ""
+msgstr "Husk at låse op"
 
 msgid "Remove update"
 msgstr "Fjern opdatering"
@@ -1406,7 +1409,7 @@ msgid "Saved"
 msgstr "Gemt"
 
 msgid "Savegame might not exist for this game."
-msgstr ""
+msgstr "Savegame eksistere muligvis ikke for dette spil."
 
 msgid "Screensaver"
 msgstr "Pauseskærm"
@@ -1430,10 +1433,10 @@ msgid "Select game categories"
 msgstr "Vælg spille Kategorier"
 
 msgid "Select loader mode"
-msgstr ""
+msgstr "Vælg Loader måde"
 
 msgid "Select titles sources."
-msgstr ""
+msgstr "Vælg title kilde."
 
 msgid "Sept"
 msgstr ""
@@ -1451,7 +1454,7 @@ msgid "Show Free Space"
 msgstr "Vis fri plads"
 
 msgid "Show Play Count"
-msgstr ""
+msgstr "Vis spil tæller"
 
 msgid "Shutdown System"
 msgstr "Sluk (rødt lys)"
@@ -1508,7 +1511,7 @@ msgid "Success"
 msgstr "Succes"
 
 msgid "Success."
-msgstr ""
+msgstr "Succes."
 
 msgid "Success:"
 msgstr "Succes:"
@@ -1532,7 +1535,7 @@ msgid "Successfully installed:"
 msgstr "Installationen lykkedes:"
 
 msgid "Switching to channel list mode."
-msgstr ""
+msgstr "Skift til Kanal list måde."
 
 msgid "Sync FAT32 FS Info"
 msgstr "Synkronisere FAT32 FS Info"
@@ -1556,13 +1559,13 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Den angivne mappe eksisterer ikke. Skal den oprettes?"
 
 msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
-msgstr ""
+msgstr "Filerne vil bliver udpakket til din Emu Nand sti. Advarsel : alle eksisterene filer vil bliver overskrevet."
 
 msgid "The save game will be extracted to your emu nand path."
-msgstr ""
+msgstr "Dette save game vil bliver udpakket til din Emu Nand sti."
 
 msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
-msgstr ""
+msgstr "Alle Save games vil bliver udpakket til din Emu Nand sti. Advarsel: Alle eksisterene save games vil bliver overskrevet."
 
 msgid "The wad file was installed"
 msgstr "Wad fil var installeret"
@@ -1581,7 +1584,7 @@ msgid "Theme Path"
 msgstr "Sti til temaer"
 
 msgid "Theme Title:"
-msgstr "Tematitel:"
+msgstr "Tema titel:"
 
 msgid "Themes by www.spiffy360.com"
 msgstr "Temaer af www.spiffy360.com"
@@ -1599,7 +1602,7 @@ msgid "Title Launcher"
 msgstr "Titel-starter"
 
 msgid "Titles from GameTDB"
-msgstr ""
+msgstr "Titler fra GameTDB"
 
 msgid "Tooltips"
 msgstr "Værktøjstips"
@@ -1608,7 +1611,7 @@ msgid "Transfer failed"
 msgstr "Overførelse fejlede"
 
 msgid "USB Device not found."
-msgstr ""
+msgstr "USB enhed blev ikke fundet."
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX er beskyttet"
@@ -1620,7 +1623,7 @@ msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr "Skift af USB port er kun muligt med Hermes cIOS."
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Afinstaller"
 
 msgid "Uninstall Game"
 msgstr "Afinstallér spil"
@@ -1680,7 +1683,7 @@ msgid "Use global"
 msgstr "Brug global"
 
 msgid "VBI (Default)"
-msgstr ""
+msgstr "VBI (standard)"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV-patch"
@@ -1696,10 +1699,10 @@ msgid "Video Mode"
 msgstr "Video-mode"
 
 msgid "Virtual Pointer Speed"
-msgstr ""
+msgstr "Virtual pointer hastighed"
 
 msgid "WAD Installation"
-msgstr ""
+msgstr " WAD installation"
 
 msgid "WDM Files Path"
 msgstr "Sti til WDM filer"
@@ -1717,7 +1720,7 @@ msgid "Warning:"
 msgstr "Advarsel:"
 
 msgid "What do you want to do?"
-msgstr ""
+msgstr "Hvad ønsker du at gøre?"
 
 msgid "What do you want to update?"
 msgstr "Hvad skal opdateres?"
@@ -1726,7 +1729,7 @@ msgid "What should be deleted for this game title:"
 msgstr "Hvad skal der slettes for dette spil:"
 
 msgid "What to extract from NAND?"
-msgstr ""
+msgstr "Hvad skal der udpakkes fra NAND?"
 
 msgid "WiFi Features"
 msgstr "WiFi-indstillinger"
@@ -1738,7 +1741,7 @@ msgid "Widescreen Fix"
 msgstr "Bredformat-fix"
 
 msgid "Wii Games"
-msgstr ""
+msgstr "Wii Spil"
 
 msgid "Wii Menu"
 msgstr ""
@@ -1750,7 +1753,7 @@ msgid "WiiTDB.xml"
 msgstr ""
 
 msgid "WiiTDB.xml is up to date."
-msgstr ""
+msgstr "WiiTDB.xml er opdateret."
 
 msgid "Wiilight"
 msgstr ""
@@ -1769,7 +1772,7 @@ msgstr ""
 
 #, c-format
 msgid "Write error on file: %s"
-msgstr ""
+msgstr "Fejl skrivening til fil: %s"
 
 msgid "Writing GXGameCategories.xml"
 msgstr "Skriver GXGameCategories.xml"
@@ -1784,7 +1787,7 @@ msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 1
 msgstr "Du prøver at vælge en FAT32/NTFS/EXT partition med cIOS 249 Rev < 18. Dette er ikke understøttet. Fortsætte er på egen risiko"
 
 msgid "You can select or format a partition or use the channel loader mode."
-msgstr ""
+msgstr "Du kan vælge eller formatter en partition eller kanal loader måde."
 
 msgid "You cannot delete this category."
 msgstr "Du kan ikke slette denne kategori."
@@ -1808,7 +1811,7 @@ msgid "for FAT/NTFS support"
 msgstr "for FAT/NTFS understøttelse"
 
 msgid "for GameTDB and hosting covers / disc images"
-msgstr ""
+msgstr "for GameTDB og for at hoste covers/DVD-billeder"
 
 msgid "for Ocarina"
 msgstr ""
@@ -1843,89 +1846,8 @@ msgstr "af"
 msgid "seconds left"
 msgstr "sekunder tilbage"
 
-#~ msgid ">> Deleting tickets..."
-#~ msgstr ">> Sletter tickets..."
-
-#~ msgid ">> Deleting tickets...ERROR! "
-#~ msgstr ">> Sletter tickets...FEJL!"
-
-#~ msgid ">> Deleting tickets...Ok! "
-#~ msgstr ">> Sletter tickets...Ok!"
-
-#~ msgid ">> Deleting title ...ERROR! "
-#~ msgstr ">> Sletter titel...FEJL!"
-
-#~ msgid ">> Deleting title ...Ok!"
-#~ msgstr ">> Sletter titel...Ok!"
-
-#~ msgid ">> Deleting title contents..."
-#~ msgstr ">> Sletter titelindhold..."
-
-#~ msgid ">> Deleting title contents...ERROR! "
-#~ msgstr ">> Sletter titelindhold...FEJL!"
-
-#~ msgid ">> Deleting title contents...Ok!"
-#~ msgstr ">> Sletter titelindhold...Ok!"
-
-#~ msgid ">> Deleting title..."
-#~ msgstr ">> Sletter titel..."
-
-#~ msgid ">> Finishing installation..."
-#~ msgstr ">> Færdiggør installationen..."
-
-#~ msgid ">> Installing content #"
-#~ msgstr ">> Installerer content #"
-
-#~ msgid ">> Installing ticket..."
-#~ msgstr ">> Installerer ticket..."
-
-#~ msgid ">> Installing title..."
-#~ msgstr ">> Installerer titel..."
-
-#~ msgid ">> Reading WAD data..."
-#~ msgstr ">> Læser WAD-data"
-
-#~ msgid ">> Reading WAD data...ERROR! "
-#~ msgstr ">> Læser WAD-data...FEJL!"
-
-#~ msgid ">> Reading WAD data...Ok!"
-#~ msgstr ">> Læser WAD-data...Ok!"
-
-#~ msgid "Done!"
-#~ msgstr "Færdig!"
-
-#~ msgid "Error..."
-#~ msgstr "Fejl..."
-
-#~ msgid "Finishing installation... Ok!"
-#~ msgstr "Afslutter installationen... Ok!"
-
-#~ msgid "Installing content... Ok!"
-#~ msgstr "Installerer indhold... Ok!"
-
-#~ msgid "Installing ticket... Ok!"
-#~ msgstr "Installerer ticket... Ok!"
-
-#~ msgid "Installing title... Ok!"
-#~ msgstr "Installerer titel... Ok!"
-
-#~ msgid "Installing wad"
-#~ msgstr "Installerer WAD"
-
-#~ msgid "Reading WAD data... Ok!"
-#~ msgstr "Læser WAD-data... Ok!"
-
-#~ msgid "Uninstalling wad"
-#~ msgstr "Afinstallerer WAD"
-
-#~ msgid "The game installation is disabled under this IOS because of instability in usb write."
-#~ msgstr "Spil installering er ikke aktiveret med denne IOS, på grund af ustabil skrivning til usb enheder."
-
-#~ msgid "You are currently using IOS"
-#~ msgstr "Du brug i øjeblikket IOS"
-
-#~ msgid "New Disc Detected"
-#~ msgstr "Har opdaget ny DVD"
+#~ msgid "Installing title"
+#~ msgstr "Installerer titel"
 
 #~ msgid "USB Device not found"
 #~ msgstr "USB-enhed ikke fundet"

@@ -29,12 +29,6 @@
 #include <malloc.h>
 #include "TextureConverter.h"
 
-#define cut_bounds(x, min, max) ( (x < min) ? min : (x > max) ? max : x )
-#define ALIGN(x) (((x) + 3) & ~3)
-#define ALIGN32(x) (((x) + 31) & ~31)
-#define coordsRGBA8(x, y, w) (((((y >> 2) * (w >> 2) + (x >> 2)) << 5) + ((y & 3) << 2) + (x & 3)) << 1)
-#define datasizeRGBA8(w, h) ALIGN32(((w+3)>>2)*((h+3)>>2)*32*2)
-
 #define MAXWIDTH 1024.0f
 #define MAXHEIGHT 768.0f
 
@@ -458,16 +452,16 @@ bool YCbYCrToGD(const u8* buffer, u32 width, u32 height, gdImagePtr * im)
 			g = (int) (- 0.698f * (val[3] - 128) - 0.336f * (val[1] - 128));
 			b = (int) (1.732f * (val[1] - 128));
 
-			r1 = cut_bounds(val[0] + r, 0, 255);
-			g1 = cut_bounds(val[0] + g, 0, 255);
-			b1 = cut_bounds(val[0] + b, 0, 255);
+			r1 = LIMIT(val[0] + r, 0, 255);
+			g1 = LIMIT(val[0] + g, 0, 255);
+			b1 = LIMIT(val[0] + b, 0, 255);
 
 			gdImageSetPixel(*im, x1, y, gdTrueColorAlpha(r1, g1, b1, gdAlphaOpaque));
 			x1++;
 
-			r1 = cut_bounds(val[2] + r, 0, 255);
-			g1 = cut_bounds(val[2] + g, 0, 255);
-			b1 = cut_bounds(val[2] + b, 0, 255);
+			r1 = LIMIT(val[2] + r, 0, 255);
+			g1 = LIMIT(val[2] + g, 0, 255);
+			b1 = LIMIT(val[2] + b, 0, 255);
 			gdImageSetPixel(*im, x1, y, gdTrueColorAlpha(r1, g1, b1, gdAlphaOpaque));
 		}
 	}

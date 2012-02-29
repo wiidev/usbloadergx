@@ -1446,6 +1446,7 @@ int GameBrowseMenu::OpenClickedGame(struct discHdr *header)
 
 	if (choice == 1)
 	{
+		gameList.FilterList();
 		ReloadBrowser();
 		if(Settings.ShowFreeSpace)
 		{

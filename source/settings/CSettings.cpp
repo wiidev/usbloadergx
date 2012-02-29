@@ -107,11 +107,12 @@ void CSettings::SetDefault()
 	autonetwork = OFF;
 	patchcountrystrings = OFF;
 	titlesOverride = ON;
+	ForceDiscTitles = OFF;
 	screensaver = SCREENSAVER_10_MIN;
 	musicloopmode = ON;
 	marknewtitles = ON;
 	ShowFreeSpace = ON;
-	PlaylogUpdate = ON;
+	PlaylogUpdate = OFF;
 	ParentalBlocks = BLOCK_ALL;
 	InstallToDir = INSTALL_TO_NAME_GAMEID;
 	GameSplit = GAMESPLIT_4GB;
@@ -274,6 +275,7 @@ bool CSettings::Save()
 	fprintf(file, "WipCodepath = %s\n", WipCodepath);
 	fprintf(file, "WDMpath = %s\n ", WDMpath);
 	fprintf(file, "titlesOverride = %d\n", titlesOverride);
+	fprintf(file, "ForceDiscTitles = %d\n", ForceDiscTitles);
 	fprintf(file, "patchcountrystrings = %d\n", patchcountrystrings);
 	fprintf(file, "screensaver = %d\n", screensaver);
 	fprintf(file, "musicloopmode = %d\n", musicloopmode);
@@ -506,6 +508,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "titlesOverride") == 0)
 	{
 		if (sscanf(value, "%d", &i) == 1) titlesOverride = i;
+		return true;
+	}
+	else if (strcmp(name, "ForceDiscTitles") == 0)
+	{
+		if (sscanf(value, "%d", &i) == 1) ForceDiscTitles = i;
 		return true;
 	}
 	else if (strcmp(name, "musicloopmode") == 0)

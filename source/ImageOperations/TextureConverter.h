@@ -36,6 +36,10 @@ extern "C"
 
 #include <gccore.h>
 #include <gd.h>
+#include "utils/tools.h"
+
+#define coordsRGBA8(x, y, w) (((((y >> 2) * (w >> 2) + (x >> 2)) << 5) + ((y & 3) << 2) + (x & 3)) << 1)
+#define datasizeRGBA8(w, h) ALIGN32(((w+3)>>2)*((h+3)>>2)*32*2)
 
 bool I4ToGD(const u8 * buffer, u32 width, u32 height, gdImagePtr * im);
 bool IA4ToGD(const u8 * buffer, u32 width, u32 height, gdImagePtr * im);

@@ -1,11 +1,11 @@
 # USB Loader GX
-# german.lang - r1144
+# german.lang - r1154
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-09 22:23+0100\n"
+"POT-Creation-Date: 2012-02-29 20:42+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -83,10 +83,10 @@ msgid "Add category"
 msgstr "Kategorie hinzuf."
 
 msgid "Adjust Overscan X"
-msgstr ""
+msgstr "Übersteuerung X anpassen"
 
 msgid "Adjust Overscan Y"
-msgstr ""
+msgstr "Übersteuerung Y anpassen"
 
 msgid "All"
 msgstr "Alle"
@@ -242,7 +242,7 @@ msgid "Block Updates"
 msgstr "Blocke Updates"
 
 msgid "Boot Content"
-msgstr ""
+msgstr "Boote Inhalt"
 
 msgid "Boot/Standard"
 msgstr "Bootstandard (cIOS)"
@@ -277,7 +277,7 @@ msgid "Can't delete:"
 msgstr "Löschen fehlgeschlagen:"
 
 msgid "Can't mount or unknown disc format."
-msgstr ""
+msgstr "Kann nicht gemountet werden oder unbekanntes Discformat"
 
 #, c-format
 msgid "Can't open file: %s"
@@ -303,7 +303,7 @@ msgid "Change Play Path"
 msgstr "Pfad ändern"
 
 msgid "Channel Launcher"
-msgstr ""
+msgstr "Kanal Starter"
 
 msgid "Channels"
 msgstr "Kanäle"
@@ -763,6 +763,9 @@ msgstr "PAL50 erzw."
 msgid "Force PAL60"
 msgstr "PAL60 erzw."
 
+msgid "Force Titles from Disc"
+msgstr ""
+
 msgid "Format"
 msgstr "Formatieren"
 
@@ -800,7 +803,7 @@ msgid "GAMEID_Gamename"
 msgstr "SPIELID_Spielname"
 
 msgid "GC Games"
-msgstr ""
+msgstr "GC Spiele"
 
 msgid "GCT Cheatcodes Path"
 msgstr "GCT Cheatdateien"
@@ -1067,7 +1070,7 @@ msgid "Loop Sound"
 msgstr "Wiederholung"
 
 msgid "Main DOL"
-msgstr ""
+msgstr "Haupt-DOL"
 
 msgid "Main tester:"
 msgstr "Haupttester:"
@@ -1100,7 +1103,7 @@ msgid "Music Volume"
 msgstr "Musik Lautstärke"
 
 msgid "Nand Chan. Emulation"
-msgstr ""
+msgstr "Nand Kan. Emulation"
 
 msgid "Nand Channels"
 msgstr "Nand Kanäle"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-09 22:23+0100\n"
+"POT-Creation-Date: 2012-02-29 20:42+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -83,10 +83,10 @@ msgid "Add category"
 msgstr "カテゴリを追加"
 
 msgid "Adjust Overscan X"
-msgstr ""
+msgstr "ｵｰﾊﾞｰｽｷｬﾝ調整 X"
 
 msgid "Adjust Overscan Y"
-msgstr ""
+msgstr "ｵｰﾊﾞｰｽｷｬﾝ調整 Y"
 
 msgid "All"
 msgstr "全て"
@@ -242,7 +242,7 @@ msgid "Block Updates"
 msgstr "更新を制限"
 
 msgid "Boot Content"
-msgstr ""
+msgstr "起動コンテンツ"
 
 msgid "Boot/Standard"
 msgstr "使用するcIOS"
@@ -267,7 +267,7 @@ msgstr "フォルダを作れません"
 
 #, c-format
 msgid "Can't create file: %s"
-msgstr ""
+msgstr "ファイルを作成できません: %s"
 
 #, c-format
 msgid "Can't create path: %s"
@@ -277,15 +277,15 @@ msgid "Can't delete:"
 msgstr "削除できません:"
 
 msgid "Can't mount or unknown disc format."
-msgstr ""
+msgstr "マウントできないか不明なディスク形式です"
 
 #, c-format
 msgid "Can't open file: %s"
-msgstr ""
+msgstr "ファイルを開けません: %s"
 
 #, c-format
 msgid "Can't read file: %s"
-msgstr ""
+msgstr "ファイルを読み込めません: %s"
 
 msgid "Cancel"
 msgstr "やめる"
@@ -303,7 +303,7 @@ msgid "Change Play Path"
 msgstr "パスの変更"
 
 msgid "Channel Launcher"
-msgstr ""
+msgstr "チャンネルランチャー"
 
 msgid "Channels"
 msgstr "チャンネル"
@@ -361,7 +361,7 @@ msgid "Content"
 msgstr "含む"
 
 msgid "Continue"
-msgstr ""
+msgstr "続行"
 
 msgid "Continue to install game?"
 msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしますか？"
@@ -697,13 +697,13 @@ msgid "Failed to open partition"
 msgstr "領域を開けませんでした"
 
 msgid "Failed to read ticket."
-msgstr ""
+msgstr "チケットを読み込めません"
 
 msgid "Failed to read tmd file."
-msgstr ""
+msgstr "TMDファイルを読み込めません"
 
 msgid "Failed to read wad header."
-msgstr ""
+msgstr "WADヘッダを読み込めません"
 
 msgid "Failed updating"
 msgstr "更新に失敗しました"
@@ -721,7 +721,7 @@ msgid "File not found."
 msgstr "ファイルが見つかりません"
 
 msgid "File read/write error."
-msgstr ""
+msgstr "ファイルの読み書きエラー"
 
 msgid "Files extracted successfully."
 msgstr "ファイルを書き出しました"
@@ -763,6 +763,9 @@ msgstr "PAL50に強制"
 msgid "Force PAL60"
 msgstr "PAL60に強制"
 
+msgid "Force Titles from Disc"
+msgstr ""
+
 msgid "Format"
 msgstr "初期化"
 
@@ -800,7 +803,7 @@ msgid "GAMEID_Gamename"
 msgstr "ゲームID_ゲーム名"
 
 msgid "GC Games"
-msgstr ""
+msgstr "GCゲーム"
 
 msgid "GCT Cheatcodes Path"
 msgstr "GCTチート"
@@ -946,7 +949,7 @@ msgid "Install Partitions"
 msgstr "インストール領域"
 
 msgid "Install WAD to EmuNand"
-msgstr ""
+msgstr "WADをエミュNANDへインストール"
 
 msgid "Install a game"
 msgstr "ゲームをインストール"
@@ -955,16 +958,16 @@ msgid "Install finished"
 msgstr "インストールが終了しました"
 
 msgid "Installing content"
-msgstr ""
+msgstr "ｺﾝﾃﾝﾂをｲﾝｽﾄｰﾙ中"
 
 msgid "Installing game:"
 msgstr "ｹﾞｰﾑをｲﾝｽﾄｰﾙ中:"
 
 msgid "Installing title..."
-msgstr ""
+msgstr "ﾀｲﾄﾙをｲﾝｽﾄｰﾙ中..."
 
 msgid "Invalid wad file."
-msgstr ""
+msgstr "不正なWADファイルです"
 
 msgid "Issue manager /"
 msgstr "問題管理者 /"
@@ -1067,7 +1070,7 @@ msgid "Loop Sound"
 msgstr "ループさせる"
 
 msgid "Main DOL"
-msgstr ""
+msgstr "main.dol"
 
 msgid "Main tester:"
 msgstr "メインテスター:"
@@ -1100,7 +1103,7 @@ msgid "Music Volume"
 msgstr "BGMの音量"
 
 msgid "Nand Chan. Emulation"
-msgstr ""
+msgstr "NANDチャンネルエミュ"
 
 msgid "Nand Channels"
 msgstr "Wii本体NANDチャンネル"
@@ -1620,7 +1623,7 @@ msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr "USBﾎﾟｰﾄの切替機能は、Hermes cIOS使用時のみ有効です。"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "アンインストール"
 
 msgid "Uninstall Game"
 msgstr "ゲームをｱﾝｲﾝｽﾄｰﾙ"
@@ -1699,7 +1702,7 @@ msgid "Virtual Pointer Speed"
 msgstr "ポインタの速度"
 
 msgid "WAD Installation"
-msgstr ""
+msgstr "WADインストール"
 
 msgid "WDM Files Path"
 msgstr "WDMファイル"
@@ -1717,7 +1720,7 @@ msgid "Warning:"
 msgstr "警告:"
 
 msgid "What do you want to do?"
-msgstr ""
+msgstr "何をしますか?"
 
 msgid "What do you want to update?"
 msgstr "更新の選択"
@@ -1769,7 +1772,7 @@ msgstr "WiiRDデバッガ"
 
 #, c-format
 msgid "Write error on file: %s"
-msgstr ""
+msgstr "書き込みエラー: %s"
 
 msgid "Writing GXGameCategories.xml"
 msgstr "GXGameCategories.xmlを書き込み中です"

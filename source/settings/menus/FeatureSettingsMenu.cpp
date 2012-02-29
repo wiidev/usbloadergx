@@ -58,6 +58,7 @@ FeatureSettingsMenu::FeatureSettingsMenu()
 	int Idx = 0;
 	Options->SetName(Idx++, "%s", tr( "Titles from GameTDB" ));
 	Options->SetName(Idx++, "%s", tr( "Cache Titles" ));
+	Options->SetName(Idx++, "%s", tr( "Force Titles from Disc" ));
 	Options->SetName(Idx++, "%s", tr( "Wiilight" ));
 	Options->SetName(Idx++, "%s", tr( "Rumble" ));
 	Options->SetName(Idx++, "%s", tr( "AutoInit Network" ));
@@ -70,6 +71,7 @@ FeatureSettingsMenu::FeatureSettingsMenu()
 
 	OldTitlesOverride = Settings.titlesOverride;
 	OldCacheTitles = Settings.CacheTitles;
+	OldForceDiscTitles = Settings.ForceDiscTitles;
 
 	SetOptionValues();
 }
@@ -77,8 +79,12 @@ FeatureSettingsMenu::FeatureSettingsMenu()
 FeatureSettingsMenu::~FeatureSettingsMenu()
 {
 	if (   Settings.titlesOverride != OldTitlesOverride
-		|| Settings.CacheTitles != OldCacheTitles)
+		|| Settings.CacheTitles != OldCacheTitles
+		|| Settings.ForceDiscTitles != OldForceDiscTitles)
 	{
+		if(Settings.ForceDiscTitles)
+			Settings.titlesOverride = OFF;
+
 		//! Remove cached titles and reload new titles
 		GameTitles.SetDefault();
 		if(Settings.titlesOverride) {
@@ -102,6 +108,9 @@ void FeatureSettingsMenu::SetOptionValues()
 
 	//! Settings: Cache Titles
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.CacheTitles] ));
+
+	//! Settings: Force Titles from Disc
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.ForceDiscTitles] ));
 
 	//! Settings: Wiilight
 	Options->SetValue(Idx++, "%s", tr( WiilightText[Settings.wiilight] ));
@@ -151,6 +160,12 @@ int FeatureSettingsMenu::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.CacheTitles >= MAX_ON_OFF) Settings.CacheTitles = 0;
+	}
+
+	//! Settings: Force Titles from Disc
+	else if (ret == ++Idx)
+	{
+		if (++Settings.ForceDiscTitles >= MAX_ON_OFF) Settings.ForceDiscTitles = 0;
 	}
 
 	//! Settings: Wiilight
