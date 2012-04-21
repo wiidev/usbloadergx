@@ -3,6 +3,7 @@
 #include <ogc/system.h>
 #include <ogc/usbstorage.h>
 #include <ogc/lwp_watchdog.h>
+#include <malloc.h>
 #include <string.h>
 #include <stdio.h>
 #include <fat.h>
@@ -12,6 +13,8 @@
 #include <unistd.h>
 #include <time.h>
 #include "devicemounter.h"
+
+#define MAX_SECTOR_SIZE	4096
 
 //these are the only stable and speed is good
 #define CACHE 8
@@ -54,35 +57,40 @@ int USBDevice_Init()
         return -1;
 
     int i;
-    MASTER_BOOT_RECORD mbr;
-    char BootSector[512];
+    MASTER_BOOT_RECORD *mbr = (MASTER_BOOT_RECORD *) malloc(MAX_SECTOR_SIZE);
+    char *BootSector = (char *) malloc(MAX_SECTOR_SIZE);
+	if(!mbr || !BootSector)
+		return -1;
 
-    __io_usbstorage.readSectors(0, 1, &mbr);
+    __io_usbstorage.readSectors(0, 1, mbr);
 
     for(i = 0; i < 4; ++i)
     {
-        if(mbr.partitions[i].type == 0)
+        if(mbr->partitions[i].type == 0)
             continue;
 
-        __io_usbstorage.readSectors(le32(mbr.partitions[i].lba_start), 1, BootSector);
+        __io_usbstorage.readSectors(le32(mbr->partitions[i].lba_start), 1, BootSector);
 
         if(*((u16 *) (BootSector + 0x1FE)) == 0x55AA)
         {
             //! Partition typ can be missleading the correct partition format. Stupid lazy ass Partition Editors.
             if(memcmp(BootSector + 0x36, "FAT", 3) == 0 || memcmp(BootSector + 0x52, "FAT", 3) == 0)
             {
-                fatMount(DeviceName[USB1+i], &__io_usbstorage, le32(mbr.partitions[i].lba_start), CACHE, SECTORS);
+                fatMount(DeviceName[USB1+i], &__io_usbstorage, le32(mbr->partitions[i].lba_start), CACHE, SECTORS);
             }
             else if (memcmp(BootSector + 0x03, "NTFS", 4) == 0)
             {
-                ntfsMount(DeviceName[USB1+i], &__io_usbstorage, le32(mbr.partitions[i].lba_start), CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER | NTFS_IGNORE_CASE);
+                ntfsMount(DeviceName[USB1+i], &__io_usbstorage, le32(mbr->partitions[i].lba_start), CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER | NTFS_IGNORE_CASE);
             }
         }
-        else if(mbr.partitions[i].type == PARTITION_TYPE_LINUX)
+        else if(mbr->partitions[i].type == PARTITION_TYPE_LINUX)
         {
-			ext2Mount(DeviceName[USB1+i], &__io_usbstorage, le32(mbr.partitions[i].lba_start), CACHE, SECTORS, EXT2_FLAG_DEFAULT);
+			ext2Mount(DeviceName[USB1+i], &__io_usbstorage, le32(mbr->partitions[i].lba_start), CACHE, SECTORS, EXT2_FLAG_DEFAULT);
         }
     }
+
+    free(mbr);
+    free(BootSector);
 
 	return -1;
 }
