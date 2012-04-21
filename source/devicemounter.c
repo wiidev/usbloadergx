@@ -45,7 +45,7 @@ int USBDevice_Init()
 {
     time_t start = time(0);
 
-    while(start-time(0) < 10) // 10 sec
+    while(time(0)-start < 10) // 10 sec
     {
         if(__io_usbstorage.startup() && __io_usbstorage.isInserted())
             break;
@@ -104,6 +104,7 @@ void USBDevice_deInit()
     {
         sprintf(Name, "%s:/", DeviceName[dev]);
         fatUnmount(Name);
+        ext2Unmount(Name);
         ntfsUnmount(Name, true);
     }
 	//Let's not shutdown so it stays awake for the application
