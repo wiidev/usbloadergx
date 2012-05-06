@@ -102,7 +102,7 @@ FlyingButtonsMenu::~FlyingButtonsMenu()
 	ResumeGui();
 
 	SetEffect(EFFECT_FADE, -FADE_SPEED);
-	while(parentElement && this->GetEffect() > 0) usleep(100);
+	while(parentElement && this->GetEffect() > 0) usleep(10000);
 
 	HaltGui();
 	if(parentElement)
@@ -170,7 +170,7 @@ void FlyingButtonsMenu::SetPageIndicators()
 		PageindicatorImg.push_back(new GuiImage(PageindicatorImgData));
 		PageindicatorTxt.push_back(new GuiText(fmt("%i", n+1), 22, ( GXColor ) {0, 0, 0, 255}));
 		PageIndicatorBtn.push_back(new GuiButton(PageindicatorImgData->GetWidth(), PageindicatorImgData->GetHeight()));
-		PageIndicatorBtn[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+		PageIndicatorBtn[i]->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 		PageIndicatorBtn[i]->SetPosition(270-DisplayedIndicators*35+35*i, 400);
 		PageIndicatorBtn[i]->SetImage(PageindicatorImg[i]);
 		PageIndicatorBtn[i]->SetLabel(PageindicatorTxt[i]);
@@ -210,7 +210,7 @@ void FlyingButtonsMenu::SetMainButton(int position, const char * ButtonText, Gui
 	MainButtonTxt[position]->SetMaxWidth(MainButtonImg[position]->GetWidth());
 
 	MainButton[position] = new GuiButton(imageData->GetWidth(), imageData->GetHeight());
-	MainButton[position]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	MainButton[position]->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	MainButton[position]->SetPosition(0, 90+(position % DISPLAY_BUTTONS)*70);
 	MainButton[position]->SetImage(MainButtonImg[position]);
 	MainButton[position]->SetImageOver(MainButtonImgOver[position]);
@@ -279,7 +279,7 @@ void FlyingButtonsMenu::ShowMenu()
 	HideMenu();
 
 	titleTxt = new GuiText(MenuTitle.c_str(), 28, thColor("r=0 g=0 b=0 a=255 - settings title text color"));
-	titleTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	titleTxt->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	titleTxt->SetPosition(0, 40);
 	titleTxt->SetMaxWidth(310, SCROLL_HORIZONTAL);
 	Append(titleTxt);
@@ -344,7 +344,6 @@ void FlyingButtonsMenu::ShowButtonsEffects(int effect, int effect_speed)
 	for(int i = FirstItem; i < (int) MainButton.size() && i < FirstItem+DISPLAY_BUTTONS; ++i)
 	{
 		MainButton[i]->StopEffect();
-		MainButton[i]->SetEffectGrow();
 		MainButton[i]->SetEffect(effect, effect_speed);
 	}
 
@@ -358,7 +357,11 @@ void FlyingButtonsMenu::ShowButtonsEffects(int effect, int effect_speed)
 		return;
 
 	while (parentElement && MainButton[FirstItem]->GetEffect() > 0)
-		usleep(100);
+		usleep(10000);
+
+	//! Allow button grow only after slide animation is done
+	for(int i = FirstItem; i < (int) MainButton.size() && i < FirstItem+DISPLAY_BUTTONS; ++i)
+		MainButton[i]->SetEffectGrow();
 }
 
 void FlyingButtonsMenu::SlideButtons(int direction)
@@ -393,7 +396,7 @@ void FlyingButtonsMenu::SlideButtons(int direction)
 
 int FlyingButtonsMenu::MainLoop()
 {
-	usleep(100);
+	usleep(50000);
 
 	if(shutdown)
 		Sys_Shutdown();

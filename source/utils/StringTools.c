@@ -87,7 +87,7 @@ const wchar_t * wfmt(const char * format, ...)
 	if(tmp)
 		free(tmp);
 
-	return NULL;
+	return (const wchar_t *) strWChar;
 }
 
 bool char2wchar_t(const char * strChar, wchar_t * dest)
@@ -127,7 +127,7 @@ int strtokcmp(const char * string, const char * compare, const char * separator)
 	return -1;
 }
 
-inline const char * FullpathToFilename(const char *path)
+const char * FullpathToFilename(const char *path)
 {
 	if(!path) return path;
 

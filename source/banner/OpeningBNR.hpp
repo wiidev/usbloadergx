@@ -1,7 +1,46 @@
+/*
+Copyright (c) 2012 - Dimok
+
+This software is provided 'as-is', without any express or implied
+warranty. In no event will the authors be held liable for any damages
+arising from the use of this software.
+
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it
+freely, subject to the following restrictions:
+
+1. The origin of this software must not be misrepresented; you must not
+claim that you wrote the original software. If you use this software
+in a product, an acknowledgment in the product documentation would be
+appreciated but is not required.
+
+2. Altered source versions must be plainly marked as such, and must not be
+misrepresented as being the original software.
+
+3. This notice may not be removed or altered from any source
+distribution.
+*/
 #ifndef OPENING_BNR_HPP_
 #define OPENING_BNR_HPP_
 
 #include <gctypes.h>
+#include "usbloader/disc.h"
+#include "CustomBanner.h"
+
+typedef struct _GC_OpeningBnr
+{
+	u32 magic;					  // BNR1 or BNR2
+	u8 pad[0x1C];
+	u8 tpl_data[0x1800];			// 96x32 pixel format GX_TF_RGB5A3
+	struct
+	{
+		u8 disc_title[0x20];		// Gamename
+		u8 developer_short[0x20];   // Company/Developer
+		u8 full_title[0x40];		// Full Game Title
+		u8 developer[0x40];		 // Company/Developer Full name, or description
+		u8 long_description[0x80];  // Game Description
+	} description[6];			   // 6 only on BNR2 => English, German, French, Spanish, Italian, Dutch ??
+} GC_OpeningBnr;
 
 typedef struct _IMETHeader
 {
@@ -60,26 +99,35 @@ class OpeningBNR
 	public:
 		OpeningBNR();
 		~OpeningBNR();
-		bool Load(const u8 * gameID);
-		bool Load(const u64 &tid, const char *pathPrefix);
+		bool Load(const discHdr * header);
+		bool LoadWiiBanner(const discHdr * header);
+		bool LoadChannelBanner(const discHdr *header);
+		CustomBanner *CreateGCBanner(const discHdr * header);
+		CustomBanner *CreateGCIcon(const discHdr * header);
+
+		const u8 * Get() const { return (const u8*) imetHdr; }
+		u32 GetSize() const { return filesize; }
+
+		bool LoadCachedBNR(const char *id);
+		void WriteCachedBNR(const char *id, const u8 *buffer, u32 size);
+
 		const u16 * GetIMETTitle(int lang);
-		const u16 * GetIMETTitle(const u8 * gameID, int lang) { Load(gameID); return GetIMETTitle(lang); };
-		const u8 * GetBannerSound(u32 * size);
-		const u8 * GetBannerSound(const u8 * gameID, u32 * size) { Load(gameID); return GetBannerSound(size); };
-		const u8 * GetBannerSound(const u64 &tid, u32 * size, const char *pathPrefix) { Load(tid, pathPrefix); return GetBannerSound(size); };
+		const u16 * GetIMETTitle(const discHdr * header, int lang) { Load(header); return GetIMETTitle(lang); }
 	private:
+		u8 *LoadGCBNR(const discHdr * header, u32 *len = 0);
 		IMETHeader *imetHdr;
+		u32 filesize;
 		char gameID[7];
 };
 
 class BNRInstance : public OpeningBNR
 {
 	public:
-		static BNRInstance * Instance() { if(!instance) instance = new BNRInstance; return instance; };
-		static void DestroyInstance() { delete instance; instance = NULL; };
+		static BNRInstance * Instance() { if(!instance) instance = new BNRInstance; return instance; }
+		static void DestroyInstance() { delete instance; instance = NULL; }
 	private:
-		BNRInstance() { };
-		~BNRInstance() { };
+		BNRInstance() { }
+		~BNRInstance() { }
 		static BNRInstance * instance;
 };
 

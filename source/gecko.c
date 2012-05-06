@@ -10,8 +10,10 @@ static bool geckoinit = false;
 
 void gprintf(const char *format, ...)
 {
+	#ifndef DEBUG_TO_FILE
 	if (!geckoinit)
 		return;
+	#endif
 
 	static char stringBuf[4096];
 	int len;
@@ -19,14 +21,17 @@ void gprintf(const char *format, ...)
 	va_start(va, format);
 	if((len = vsnprintf(stringBuf, sizeof(stringBuf), format, va)) > 0)
 	{
-		usb_sendbuffer(1, stringBuf, len);
 		#ifdef DEBUG_TO_FILE
 		FILE *debugF = fopen("sd:/debug.txt", "a");
 		if(!debugF)
 			debugF = fopen("sd:/debug.txt", "w");
 		if(debugF)
-			fprintf(debugF, tmp);
-		fclose(debugF);
+		{
+			fwrite(stringBuf, 1, strlen(stringBuf), debugF);
+			fclose(debugF);
+		}
+		#else
+		usb_sendbuffer(1, stringBuf, len);
 		#endif
 	}
 	va_end(va);

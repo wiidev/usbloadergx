@@ -20,15 +20,14 @@
 #include <string.h>
 
 #include "lz77.h"
+#include "tools.h"
 
-#define ALIGN32(x) (((x) + 31) & ~31)
-
-u32 packBytes(int a, int b, int c, int d)
+static inline u32 packBytes(int a, int b, int c, int d)
 {
 	return (d << 24) | (c << 16) | (b << 8) | (a);
 }
 
-s32 __decompressLZ77_11(u8 *in, u32 inputLen, u8 **output, u32 *outputLen)
+s32 __decompressLZ77_11( const u8 *in, u32 inputLen, u8 **output, u32 *outputLen)
 {
 	int x, y;
 
@@ -48,10 +47,7 @@ s32 __decompressLZ77_11(u8 *in, u32 inputLen, u8 **output, u32 *outputLen)
 
 	out = memalign(32, ALIGN32(decompressedSize));
 	if (out == NULL)
-	{
-		printf("Out of memory\n");
 		return -1;
-	}
 
 	while (compressedPos < inputLen && decompressedPos < decompressedSize)
 	{
@@ -117,7 +113,7 @@ s32 __decompressLZ77_11(u8 *in, u32 inputLen, u8 **output, u32 *outputLen)
 	return 0;
 }
 
-s32 __decompressLZ77_10(u8 *in, u32 inputLen, u8 **output, u32 *outputLen)
+s32 __decompressLZ77_10( const u8 *in, u32 inputLen, u8 **output, u32 *outputLen)
 {
 	int x, y;
 
@@ -131,10 +127,7 @@ s32 __decompressLZ77_10(u8 *in, u32 inputLen, u8 **output, u32 *outputLen)
 
 	out = memalign(32, ALIGN32(decompressedSize));
 	if (out == NULL)
-	{
-		printf("Out of memory\n");
 		return -1;
-	}
 
 	compressedPos += 0x4;
 
@@ -179,17 +172,15 @@ s32 __decompressLZ77_10(u8 *in, u32 inputLen, u8 **output, u32 *outputLen)
 	return 0;
 }
 
-int isLZ77compressed(u8 *buffer)
+int isLZ77compressed( const u8 *buffer)
 {
 	if ((buffer[0] == LZ77_0x10_FLAG) || (buffer[0] == LZ77_0x11_FLAG))
-	{
 		return 1;
-	}
 
 	return 0;
 }
 
-int decompressLZ77content(u8 *buffer, u32 length, u8 **output, u32 *outputLen)
+int decompressLZ77content(const u8 *buffer, u32 length, u8 **output, u32 *outputLen)
 {
 	int ret;
 	switch (buffer[0])

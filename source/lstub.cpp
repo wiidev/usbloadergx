@@ -53,10 +53,11 @@ s32 Set_Stub(u64 reqID)
 
 s32 Set_Stub_Split(u32 type, const char* reqID)
 {
-	char tmp[4];
-	u32 lower;
-	sprintf(tmp, "%c%c%c%c", reqID[0], reqID[1], reqID[2], reqID[3]);
-	memcpy(&lower, tmp, 4);
+	const u32 lower = ((u32)reqID[0] << 24) |
+					  ((u32)reqID[1] << 16) |
+					  ((u32)reqID[2] << 8) |
+					  ((u32)reqID[3]);
+
 	u64 reqID64 = TITLE_ID( type, lower );
 	return Set_Stub(reqID64);
 
@@ -96,7 +97,6 @@ u64 getStubDest()
 u8 hbcStubAvailable()
 {
 	char * sig = (char *) 0x80001804;
-	return (sig[0] == 'S' && sig[1] == 'T' && sig[2] == 'U' && sig[3] == 'B' && sig[4] == 'H' && sig[5] == 'A'
-			&& sig[6] == 'X' && sig[7] == 'X') ? 1 : 0;
+	return (strncmp(sig, "STUBHAXX", 8) == 0);
 }
 

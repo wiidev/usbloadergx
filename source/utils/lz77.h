@@ -12,10 +12,9 @@
  * -----------
  *
  ******************************************************************************/
-
 #ifndef _LZ77_MODULE
 #define _LZ77_MODULE
- 
+
 #define LZ77_0x10_FLAG 0x10
 #define LZ77_0x11_FLAG 0x11
 
@@ -23,8 +22,8 @@
 extern "C" {
 #endif /* __cplusplus */
 
-int isLZ77compressed(u8 *buffer);
-int decompressLZ77content(u8 *buffer, u32 length, u8 **output, u32 *outputLen);
+int isLZ77compressed( const u8 *buffer);
+int decompressLZ77content( const u8 *buffer, u32 length, u8 **output, u32 *outputLen);
 
 #ifdef __cplusplus
 }

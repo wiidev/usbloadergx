@@ -3,6 +3,7 @@
 
 #include "GUI/gui.h"
 #include "GUI/gui_diskcover.h"
+#include "banner/BannerAsync.h"
 #include "menu/GameBrowseMenu.hpp"
 #include "usbloader/disc.h"
 
@@ -11,11 +12,10 @@
 class GameWindow : public GuiWindow
 {
 	public:
-		GameWindow(int GameSelected, struct discHdr *dvd);
+		GameWindow(GameBrowseMenu *m, struct discHdr *header);
 		virtual ~GameWindow();
 		int Run();
-		int GetSelectedGame() { return gameSelected; };
-		void SetGameBrowseMenu(GameBrowseMenu *m) { browserMenu = m; };
+		int GetSelectedGame() { return gameSelected; }
 		static void BootGame(struct discHdr *header);
 	protected:
 		int MainLoop();
@@ -32,6 +32,7 @@ class GameWindow : public GuiWindow
 		int gameSelected;
 		GameBrowseMenu *browserMenu;
 		struct discHdr *dvdheader;
+		Banner gameBanner;
 
 		GuiTrigger * trigA;
 		GuiTrigger * trigB;

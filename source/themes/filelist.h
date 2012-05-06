@@ -1,7 +1,7 @@
 /****************************************************************************
  * USB Loader GX resource files.
  * This file is generated automatically.
- * Includes 190 files.
+ * Includes 198 files.
  *
  * NOTE:
  * Any manual modification of this file will be overwriten by the generation.
@@ -19,6 +19,12 @@ extern const u32 add_png_size;
 
 extern const u8 addressbar_textbox_png[];
 extern const u32 addressbar_textbox_png_size;
+
+extern const u8 arrangeBannerGrid_png[];
+extern const u32 arrangeBannerGrid_png_size;
+
+extern const u8 arrangeBannerGrid_gray_png[];
+extern const u32 arrangeBannerGrid_gray_png_size;
 
 extern const u8 arrangeCarousel_png[];
 extern const u32 arrangeCarousel_png_size;
@@ -229,6 +235,12 @@ extern const u32 gcncontroller_png_size;
 
 extern const u8 gcncontrollerR_png[];
 extern const u32 gcncontrollerR_png_size;
+
+extern const u8 gc_banner_bg_png[];
+extern const u32 gc_banner_bg_png_size;
+
+extern const u8 gc_icon_bg_png[];
+extern const u32 gc_icon_bg_png_size;
 
 extern const u8 guitar_png[];
 extern const u32 guitar_png_size;
@@ -566,6 +578,9 @@ extern const u32 button_over_wav_size;
 extern const u8 credits_music_ogg[];
 extern const u32 credits_music_ogg_size;
 
+extern const u8 gc_banner_ogg[];
+extern const u32 gc_banner_ogg_size;
+
 extern const u8 menuin_ogg[];
 extern const u32 menuin_ogg_size;
 
@@ -581,11 +596,22 @@ extern const u32 clock_ttf_size;
 extern const u8 font_ttf[];
 extern const u32 font_ttf_size;
 
+extern const u8 app_booter_bin[];
+extern const u32 app_booter_bin_size;
+
+extern const u8 custom_banner_bnr[];
+extern const u32 custom_banner_bnr_size;
+
+extern const u8 stub_bin[];
+extern const u32 stub_bin_size;
+
 RecourceFile Resources::RecourceFiles[] =
 {
 	{"abcIcon.png", abcIcon_png, abcIcon_png_size, NULL, 0},
 	{"add.png", add_png, add_png_size, NULL, 0},
 	{"addressbar_textbox.png", addressbar_textbox_png, addressbar_textbox_png_size, NULL, 0},
+	{"arrangeBannerGrid.png", arrangeBannerGrid_png, arrangeBannerGrid_png_size, NULL, 0},
+	{"arrangeBannerGrid_gray.png", arrangeBannerGrid_gray_png, arrangeBannerGrid_gray_png_size, NULL, 0},
 	{"arrangeCarousel.png", arrangeCarousel_png, arrangeCarousel_png_size, NULL, 0},
 	{"arrangeCarousel_gray.png", arrangeCarousel_gray_png, arrangeCarousel_gray_png_size, NULL, 0},
 	{"arrangeGrid.png", arrangeGrid_png, arrangeGrid_png_size, NULL, 0},
@@ -656,6 +682,8 @@ RecourceFile Resources::RecourceFiles[] =
 	{"gameinfo2a.png", gameinfo2a_png, gameinfo2a_png_size, NULL, 0},
 	{"gcncontroller.png", gcncontroller_png, gcncontroller_png_size, NULL, 0},
 	{"gcncontrollerR.png", gcncontrollerR_png, gcncontrollerR_png_size, NULL, 0},
+	{"gc_banner_bg.png", gc_banner_bg_png, gc_banner_bg_png_size, NULL, 0},
+	{"gc_icon_bg.png", gc_icon_bg_png, gc_icon_bg_png_size, NULL, 0},
 	{"guitar.png", guitar_png, guitar_png_size, NULL, 0},
 	{"guitarR.png", guitarR_png, guitarR_png_size, NULL, 0},
 	{"gxlogo.png", gxlogo_png, gxlogo_png_size, NULL, 0},
@@ -768,11 +796,15 @@ RecourceFile Resources::RecourceFiles[] =
 	{"button_click2.wav", button_click2_wav, button_click2_wav_size, NULL, 0},
 	{"button_over.wav", button_over_wav, button_over_wav_size, NULL, 0},
 	{"credits_music.ogg", credits_music_ogg, credits_music_ogg_size, NULL, 0},
+	{"gc_banner.ogg", gc_banner_ogg, gc_banner_ogg_size, NULL, 0},
 	{"menuin.ogg", menuin_ogg, menuin_ogg_size, NULL, 0},
 	{"menuout.ogg", menuout_ogg, menuout_ogg_size, NULL, 0},
 	{"success.ogg", success_ogg, success_ogg_size, NULL, 0},
 	{"clock.ttf", clock_ttf, clock_ttf_size, NULL, 0},
 	{"font.ttf", font_ttf, font_ttf_size, NULL, 0},
+	{"app_booter.bin", app_booter_bin, app_booter_bin_size, NULL, 0},
+	{"custom_banner.bnr", custom_banner_bnr, custom_banner_bnr_size, NULL, 0},
+	{"stub.bin", stub_bin, stub_bin_size, NULL, 0},
 	{"listBackground.png", NULL, 0, NULL, 0},	// Optional
 	{"carouselBackground.png", NULL, 0, NULL, 0},	// Optional
 	{"gridBackground.png", NULL, 0, NULL, 0},	// Optional

@@ -36,6 +36,7 @@ GuiCheckboxBrowser::GuiCheckboxBrowser(int w, int h, int s)
 	selectedItem = 0;
 	pageIndex = 0;
 	pressedChan = -1;
+	maxTextWidth = 280;
 	maxSize = s;
 	scrollBar.SetParent(this);
 	scrollBar.SetAlignment(thAlign("right - checkbox browser scrollbar align hor"), thAlign("top - checkbox browser scrollbar align ver"));
@@ -98,6 +99,7 @@ bool GuiCheckboxBrowser::AddEntrie(const string &text, bool checked)
 	textLineList[currentSize] = new GuiText(text.c_str(), 18, thColor("r=0 g=0 b=0 a=255 - checkbox browser text color"));
 	textLineList[currentSize]->SetParent(this);
 	textLineList[currentSize]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	textLineList[currentSize]->SetMaxWidth(maxTextWidth, DOTTED);
 
 	if(textLineDrawn.size() < (u32) maxSize)
 	{
@@ -148,7 +150,7 @@ void GuiCheckboxBrowser::RefreshList()
 		checkBoxDrawn[i]->SetPosition(-scrollBar.GetWidth()-10, 15+i*(checkBoxDrawn[i]->GetHeight()+6));
 
 		textLineDrawn[i] = textLineList[pageIndex+i];
-		textLineDrawn[i]->SetPosition(25, 15+i*(checkBoxDrawn[i]->GetHeight()+6)+(checkBoxDrawn[i]->GetHeight()-textLineDrawn[i]->GetFontSize())/2+2);
+		textLineDrawn[i]->SetPosition(25, 10+i*(checkBoxDrawn[i]->GetHeight()+6)+(checkBoxDrawn[i]->GetHeight()-textLineDrawn[i]->GetFontSize())/2+2);
 	}
 	scrollBar.SetSelectedItem(selectedItem);
 	scrollBar.SetSelectedIndex(pageIndex);
@@ -190,10 +192,14 @@ void GuiCheckboxBrowser::Update(GuiTrigger *t)
 	{
 		if(pressedChan == -1 || (!t->wpad.btns_h && !t->pad.btns_h))
 		{
-			if(i != (u32) selectedItem && checkBoxDrawn[i]->GetState() == STATE_SELECTED)
+			if(i != (u32) selectedItem && checkBoxDrawn[i]->GetState() == STATE_SELECTED) {
+				textLineList[i]->SetMaxWidth(maxTextWidth, DOTTED);
 				checkBoxDrawn[i]->ResetState();
-			else if(i == (u32) selectedItem && checkBoxDrawn[i]->GetState() == STATE_DEFAULT)
+			}
+			else if(i == (u32) selectedItem && checkBoxDrawn[i]->GetState() == STATE_DEFAULT) {
 				checkBoxDrawn[selectedItem]->SetState(STATE_SELECTED, -1);
+				textLineList[i]->SetMaxWidth(maxTextWidth, SCROLL_HORIZONTAL);
+			}
 
 			checkBoxDrawn[i]->Update(t);
 

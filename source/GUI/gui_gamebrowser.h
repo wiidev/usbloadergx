@@ -29,11 +29,11 @@
 class GuiGameBrowser : public GuiElement
 {
 	public:
-		GuiGameBrowser() {};
-		virtual ~GuiGameBrowser() {};
-		virtual int GetClickedOption() { return 0; };
-		virtual int GetSelectedOption() { return 0; };
-		virtual void SetSelectedOption(int ind) {};
+		GuiGameBrowser() {}
+		virtual ~GuiGameBrowser() {}
+		virtual int GetClickedOption() { return -1; }
+		virtual int GetSelectedOption() { return -1; }
+		virtual void SetSelectedOption(int ind) {}
 		virtual void setListOffset(int off) {}
 		virtual int getListOffset() const { return 0; }
 };

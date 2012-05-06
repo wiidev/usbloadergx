@@ -10,7 +10,7 @@
 #include "menu.h"
 
 GuiBGM::GuiBGM(const u8 *s, int l, int v) :
-	GuiSound(s, l, v, false, 0)
+	GuiSound(s, l, v, 0)
 {
 	currentPath = NULL;
 	currentPlaying = 0;
@@ -57,7 +57,7 @@ bool GuiBGM::LoadStandard()
 
 	strcpy(Settings.ogg_path, "");
 
-	bool ret = GuiSound::Load(Resources::GetFile("bg_music.ogg"), Resources::GetFileSize("bg_music.ogg"), false);
+	bool ret = GuiSound::Load(Resources::GetFile("bg_music.ogg"), Resources::GetFileSize("bg_music.ogg"));
 
 	if (ret) Play();
 
@@ -71,7 +71,7 @@ bool GuiBGM::ParsePath(const char * folderpath)
 	if (currentPath) delete[] currentPath;
 
 	currentPath = new char[strlen(folderpath) + 1];
-	sprintf(currentPath, "%s", folderpath);
+	strcpy(currentPath, folderpath);
 
 	char * isdirpath = strrchr(folderpath, '.');
 	if (isdirpath)
@@ -129,7 +129,7 @@ void GuiBGM::AddEntrie(const char * filename)
 	if (!filename) return;
 
 	char * NewEntrie = new char[strlen(filename) + 1];
-	sprintf(NewEntrie, "%s", filename);
+	strcpy(NewEntrie, filename);
 
 	PlayList.push_back(NewEntrie);
 }

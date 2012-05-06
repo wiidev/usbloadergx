@@ -395,7 +395,7 @@ int HomebrewBrowser::ReceiveFile()
 			// It's a zip file, unzip to the apps directory
 			// Zip archive, ask for permission to install the zip
 			char zippath[255];
-			sprintf(zippath, "%s%s", Settings.homebrewapps_path, filename);
+			snprintf(zippath, sizeof(zippath), "%s%s", Settings.homebrewapps_path, filename);
 
 			FILE *fp = fopen(zippath, "wb");
 			if (!fp)

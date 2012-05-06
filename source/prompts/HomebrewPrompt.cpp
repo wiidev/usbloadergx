@@ -34,7 +34,7 @@ HomebrewPrompt::HomebrewPrompt(const char *name, const char *coder, const char *
 							   GuiImageData * iconImgData, u64 filesize)
 		: PromptWindow(NULL, NULL)
 {
-	SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	SetPosition(0, 6);
 
 	whiteBox = Resources::GetImageData("bg_options.png");
@@ -48,11 +48,11 @@ HomebrewPrompt::HomebrewPrompt(const char *name, const char *coder, const char *
 
 	whiteBoxImg = new GuiImage(whiteBox);
 	whiteBoxImg->SetPosition(0, 110);
-	whiteBoxImg->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	whiteBoxImg->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	whiteBoxImg->SetSkew(0, 0, 0, 0, 0, -120, 0, -120);
 
 	nameTxt = new GuiText(name, 30, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	nameTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	nameTxt->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	nameTxt->SetPosition(0, -15);
 	nameTxt->SetMaxWidth(430, SCROLL_HORIZONTAL);
 

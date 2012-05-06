@@ -111,7 +111,7 @@ int GuiElement::GetLeft()
 		case ALIGN_LEFT:
 			x = pLeft;
 			break;
-		case ALIGN_CENTRE:
+		case ALIGN_CENTER:
 			x = pLeft + (pWidth / 2) - (width / 2);
 			break;
 		case ALIGN_RIGHT:
@@ -541,16 +541,16 @@ void GuiElement::UpdateEffects()
 		if (fabs(frequency) < circleamount)
 		{
 			angleDyn = (frequency + degree + 90.0f) * anglespeed;
-			xoffsetDyn = (int) lround(((f32) Radius) * cos((frequency + degree) * PI / 180.0f));
-			yoffsetDyn = (int) lround(((f32) Radius) * sin((frequency + degree) * PI / 180.0f));
+			xoffsetDyn = (int) lround(((f32) Radius) * cosf((frequency + degree) * PI / 180.0f));
+			yoffsetDyn = (int) lround(((f32) Radius) * sinf((frequency + degree) * PI / 180.0f));
 			frequency += ((f32) effectAmount) * 0.01f;
 		}
 		else
 		{
 			f32 temp_frequency = ((effectAmount < 0) ? -1.0f : 1.0f) * circleamount;
 			angleDyn = (temp_frequency + degree + 90.0f) * anglespeed;
-			xoffsetDyn = (int) lround(((f32) Radius) * cos((temp_frequency + degree) * PI / 180.0f));
-			yoffsetDyn = (int) lround(((f32) Radius) * sin((temp_frequency + degree) * PI / 180.0f));
+			xoffsetDyn = (int) lround(((f32) Radius) * cosf((temp_frequency + degree) * PI / 180.0f));
+			yoffsetDyn = (int) lround(((f32) Radius) * sinf((temp_frequency + degree) * PI / 180.0f));
 			xoffset += xoffsetDyn;
 			yoffset += yoffsetDyn;
 			effects ^= EFFECT_GOROUND;
@@ -561,20 +561,20 @@ void GuiElement::UpdateEffects()
 	if (effects & EFFECT_ROCK_VERTICLE)
 	{
 		//move up to 10pixel above 0
-		if (changervar == 0 && yoffsetDynFloat < 11.0)
+		if (changervar == 0 && yoffsetDynFloat < 11.0f)
 		{
-			yoffsetDynFloat += (effectAmount * 0.01);
+			yoffsetDynFloat += (effectAmount * 0.01f);
 		}
-		else if (yoffsetDynFloat > 10.0)
+		else if (yoffsetDynFloat > 10.0f)
 		{
 			changervar = 1;
 		}
 		//move down till 10pixel under 0
-		if (changervar == 1 && yoffsetDynFloat > -11.0)
+		if (changervar == 1 && yoffsetDynFloat > -11.0f)
 		{
-			yoffsetDynFloat -= (effectAmount * 0.01);
+			yoffsetDynFloat -= (effectAmount * 0.01f);
 		}
-		else if (yoffsetDynFloat < -10.0)
+		else if (yoffsetDynFloat < -10.0f)
 		{
 			changervar = 0;
 		}
@@ -598,12 +598,12 @@ void GuiElement::UpdateEffects()
 	}
 	if (effects & EFFECT_SCALE)
 	{
-		scaleDyn += effectAmount / 100.0;
+		scaleDyn += effectAmount / 100.0f;
 
-		if ((effectAmount < 0 && scaleDyn <= effectTarget / 100.0) || (effectAmount > 0 && scaleDyn >= effectTarget
-				/ 100.0))
+		if ((effectAmount < 0 && scaleDyn <= effectTarget / 100.0f) || (effectAmount > 0 && scaleDyn >= effectTarget
+				/ 100.0f))
 		{
-			scaleDyn = effectTarget / 100.0;
+			scaleDyn = effectTarget / 100.0f;
 			effects = 0; // shut off effect
 		}
 	}
@@ -611,19 +611,19 @@ void GuiElement::UpdateEffects()
 	{
 		int percent = 10; //go down from target by this
 
-		if ((scaleDyn <= (effectTarget * 0.01)) && (!changervar))
+		if ((scaleDyn <= (effectTarget * 0.01f)) && (!changervar))
 		{
-			scaleDyn += (effectAmount * 0.001);
+			scaleDyn += (effectAmount * 0.001f);
 		}
-		else if (scaleDyn > (effectTarget * 0.01))
+		else if (scaleDyn > (effectTarget * 0.01f))
 		{
 			changervar = 1;
 		}
-		if ((scaleDyn >= ((effectTarget - percent) * 0.01)) && (changervar))
+		if ((scaleDyn >= ((effectTarget - percent) * 0.01f)) && (changervar))
 		{
-			scaleDyn -= (effectAmount * 0.001);
+			scaleDyn -= (effectAmount * 0.001f);
 		}
-		else if (scaleDyn < ((effectTarget - percent) * 0.01))
+		else if (scaleDyn < ((effectTarget - percent) * 0.01f))
 		{
 			changervar = 0;
 		}

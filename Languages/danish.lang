@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-29 20:42+0100\n"
+"POT-Creation-Date: 2012-05-06 12:19+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -88,6 +88,9 @@ msgstr ""
 msgid "Adjust Overscan Y"
 msgstr ""
 
+msgid "After zoom"
+msgstr ""
+
 msgid "All"
 msgstr "Alle"
 
@@ -109,6 +112,9 @@ msgstr "Alternativ DOL"
 msgid "An example file was created here:"
 msgstr "En f.eks. fil er lavet her:"
 
+msgid "Animation Start"
+msgstr ""
+
 msgid "Anti"
 msgstr ""
 
@@ -121,6 +127,9 @@ msgstr "Indlæs"
 msgid "Apr"
 msgstr ""
 
+msgid "Are you really sure you want to delete all selected games from the SD card?"
+msgstr ""
+
 msgid "Are you sure you want to delete this category?"
 msgstr "Er du sikker på at du ville slette denne kategori?"
 
@@ -130,6 +139,9 @@ msgstr "Er du sikker på at du ville hente Spil kategorier fra GameTDB?"
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "Er du sikker på at du vil låse USB Loader GX?"
 
+msgid "Are you sure you want to remount SD?"
+msgstr ""
+
 msgid "Are you sure you want to reset?"
 msgstr "Er du sikker på at du vil nulstille?"
 
@@ -138,6 +150,9 @@ msgstr "Er du sikker?"
 
 msgid "Aspect Ratio"
 msgstr "Formatforhold"
+
+msgid "Attention!"
+msgstr ""
 
 msgid "Aug"
 msgstr ""
@@ -162,6 +177,18 @@ msgstr "Tilbage til HBC eller Wii-menuen"
 
 msgid "Backgroundmusic"
 msgstr "Baggrundsmusik"
+
+msgid "Banner Animation"
+msgstr ""
+
+msgid "Banner Animation Settings"
+msgstr ""
+
+msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
+msgstr ""
+
+msgid "Banner window is only available with AHBPROT! Please consider installing new HBC version."
+msgstr ""
 
 msgid "Beginning"
 msgstr "Begyndelse"
@@ -256,6 +283,12 @@ msgstr "Begge"
 msgid "Both Ports"
 msgstr "Begge porte"
 
+msgid "Cache BNR Files"
+msgstr ""
+
+msgid "Cache BNR Files Path"
+msgstr ""
+
 msgid "Cache Titles"
 msgstr "Cache titler"
 
@@ -277,6 +310,10 @@ msgid "Can't delete:"
 msgstr "Kan ikke slettes:"
 
 msgid "Can't mount or unknown disc format."
+msgstr ""
+
+#, c-format
+msgid "Can't open file for write: %s"
 msgstr ""
 
 #, c-format
@@ -372,6 +409,18 @@ msgstr "Fortsæt?"
 msgid "Controllevel"
 msgstr "Kontrolniveau"
 
+msgid "Copy"
+msgstr ""
+
+msgid "Copying Canceled"
+msgstr ""
+
+msgid "Copying GC game..."
+msgstr ""
+
+msgid "Copying files..."
+msgstr ""
+
 msgid "Correct Password"
 msgstr "Korrekt Password"
 
@@ -391,11 +440,17 @@ msgstr "Kunne ikke udpakker filer for:"
 msgid "Could not find info for this game in the wiitdb.xml."
 msgstr "Kunne ikke finde information for dette spil i wiitdb.xml"
 
+msgid "Could not get free device space for game."
+msgstr ""
+
 msgid "Could not initialize DIP module!"
 msgstr "Kunne ikke initialisere DIP-modul!"
 
 msgid "Could not initialize network!"
 msgstr "Kunne ikke initialisere netforbindelse!"
+
+msgid "Could not initialize network, time out!"
+msgstr ""
 
 msgid "Could not open Disc"
 msgstr "Kunne ikke åbne DVD"
@@ -433,8 +488,38 @@ msgstr "Sti-indstillinger"
 msgid "Customs/Original"
 msgstr "Tilpassede/Originale"
 
+msgid "DML Auto"
+msgstr ""
+
+msgid "DML Debug"
+msgstr ""
+
+msgid "DML LED Activity"
+msgstr ""
+
+msgid "DML NMM Mode"
+msgstr ""
+
+msgid "DML No Disc"
+msgstr ""
+
+msgid "DML None"
+msgstr ""
+
+msgid "DML PAD Hook"
+msgstr ""
+
+msgid "DML Video Mode"
+msgstr ""
+
 msgid "DOL Path"
 msgstr "Sti til DOL"
+
+msgid "Debug"
+msgstr ""
+
+msgid "Debug Wait"
+msgstr ""
 
 msgid "Debugger Paused Start"
 msgstr ""
@@ -469,6 +554,12 @@ msgstr "Slet DVD-billede"
 msgid "Delete category"
 msgstr "Slet kategori"
 
+msgid "Deleting directories..."
+msgstr ""
+
+msgid "Deleting files..."
+msgstr ""
+
 msgid "Design:"
 msgstr ""
 
@@ -477,6 +568,9 @@ msgstr "Detaljer"
 
 msgid "Developed by"
 msgstr "Udviklet af"
+
+msgid "Developer:"
+msgstr ""
 
 msgid "Directory does not exist!"
 msgstr "Mappen eksisterer ikke!"
@@ -493,6 +587,9 @@ msgstr "Spillets standard"
 msgid "Disc Insert Detected"
 msgstr "Ny Disc opdaget"
 
+msgid "Disc read error."
+msgstr ""
+
 msgid "DiskFlip"
 msgstr ""
 
@@ -501,6 +598,9 @@ msgstr "Spilinfo."
 
 msgid "Display as a carousel"
 msgstr "Vis som karusel"
+
+msgid "Display as a channel grid"
+msgstr ""
 
 msgid "Display as a grid"
 msgstr "Vis som tabel"
@@ -520,6 +620,21 @@ msgstr "Vil du inlæse dette tema?"
 msgid "Do you want to change language?"
 msgstr "Skal sproget ændres?"
 
+msgid "Do you want to continue with next game?"
+msgstr ""
+
+msgid "Do you want to copy now?"
+msgstr ""
+
+msgid "Do you want to copy the game to SD or delete a game on SD?"
+msgstr ""
+
+msgid "Do you want to delete a game on SD?"
+msgstr ""
+
+msgid "Do you want to discart changes?"
+msgstr ""
+
 msgid "Do you want to download this theme?"
 msgstr "Skal dette tema downloades?"
 
@@ -532,11 +647,17 @@ msgstr "Vil du udpakke dette save game?"
 msgid "Do you want to format:"
 msgstr "Vil du formatere:"
 
+msgid "Do you want to install selected games?"
+msgstr ""
+
 msgid "Do you want to load the default theme?"
 msgstr "Vil du indlæse standard tema?"
 
 msgid "Do you want to re-init network?"
 msgstr "Vil du genetablere netværket?"
+
+msgid "Do you want to start the game now?"
+msgstr ""
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Vil du synkronisere fri plads info sector på alle FAT32 Partitioner?"
@@ -583,6 +704,9 @@ msgstr "Downloader pagelist:"
 msgid "Dump NAND to EmuNand"
 msgstr "Kopier Wii NAND til EmuNand"
 
+msgid "During zoom"
+msgstr ""
+
 msgid "Dutch"
 msgstr "Hollandsk"
 
@@ -626,6 +750,9 @@ msgstr "Fejl kunne ikke åbne downloadet fil"
 msgid "Error reading Disc"
 msgstr "DVDen kunne ikke læses"
 
+msgid "Error reading disc"
+msgstr ""
+
 #, c-format
 msgid "Error when downloading file: %i"
 msgstr "Fejl kunne ikke download fil: %i"
@@ -648,6 +775,9 @@ msgstr "Fejl kunne ikke skrive data."
 msgid "Error:"
 msgstr "Fejl:"
 
+msgid "Error: Not enough space on SD."
+msgstr ""
+
 msgid "Errors occured."
 msgstr "Fejl opstået"
 
@@ -662,6 +792,18 @@ msgstr "Hvorhen?"
 
 msgid "Export All Saves to EmuNand"
 msgstr "Kopier alle saves til EmuNand"
+
+msgid "Export Miis to EmuNand"
+msgstr ""
+
+msgid "Export SYSCONF to EmuNand"
+msgstr ""
+
+msgid "Extract Miis to the Emu NAND?"
+msgstr ""
+
+msgid "Extract SYSCONF to the Emu NAND?"
+msgstr ""
 
 msgid "Extract Save to EmuNand"
 msgstr "Kopier Save til EmuNand"
@@ -680,6 +822,9 @@ msgstr "Udpakker nand filer:"
 
 msgid "Failed"
 msgstr "Fejlede"
+
+msgid "Failed copying file"
+msgstr ""
 
 msgid "Failed formating"
 msgstr "Formateringen mislykkedes"
@@ -707,6 +852,9 @@ msgstr "Kunne ikke læse wad header."
 
 msgid "Failed updating"
 msgstr "Opdatering fejlede"
+
+msgid "Favorite Level"
+msgstr ""
 
 msgid "Features"
 msgstr "Særlige"
@@ -775,6 +923,24 @@ msgstr "Formatere, vent venligst..."
 msgid "Found missing images."
 msgstr "Fundet manglende billeder"
 
+msgid "Frame"
+msgstr ""
+
+msgid "Frame Projection Height"
+msgstr ""
+
+msgid "Frame Projection Width"
+msgstr ""
+
+msgid "Frame Projection X-Offset"
+msgstr ""
+
+msgid "Frame Projection Y-Offset"
+msgstr ""
+
+msgid "Frames"
+msgstr ""
+
 msgid "Free Space"
 msgstr "Ledig plads"
 
@@ -802,7 +968,16 @@ msgstr "Luk helt ned"
 msgid "GAMEID_Gamename"
 msgstr ""
 
+msgid "GC Banner Scale"
+msgstr ""
+
 msgid "GC Games"
+msgstr ""
+
+msgid "GC Install 32K Aligned"
+msgstr ""
+
+msgid "GC Install Compressed"
 msgstr ""
 
 msgid "GCT Cheatcodes Path"
@@ -818,6 +993,12 @@ msgid "GXDraw"
 msgstr ""
 
 msgid "GXFlush"
+msgstr ""
+
+msgid "Game Cube Games Delete"
+msgstr ""
+
+msgid "Game Cube Install Menu"
 msgstr ""
 
 msgid "Game ID"
@@ -853,11 +1034,17 @@ msgstr "Spillyd lydstyrke"
 msgid "Game Split Size"
 msgstr "Spil Split størrelse"
 
+msgid "Game Window Mode"
+msgstr ""
+
 msgid "Game is already installed:"
 msgstr "Dette spil er allerede installeret:"
 
 msgid "Game/Install Partition"
 msgstr "Spil/Installation partition"
+
+msgid "GameCube"
+msgstr ""
 
 msgid "GameTDB Path"
 msgstr "Sti til GameTDB"
@@ -877,8 +1064,17 @@ msgstr "Genre:"
 msgid "German"
 msgstr "Tysk"
 
+msgid "Getting file list..."
+msgstr ""
+
+msgid "Getting game folder size..."
+msgstr ""
+
 msgid "Global Settings"
 msgstr "Almindelig Indstillinger"
+
+msgid "Grid Scroll Speed"
+msgstr ""
 
 msgid "HOME Menu"
 msgstr ""
@@ -930,8 +1126,8 @@ msgstr "Initialiserer netforbindelse"
 msgid "Insert Disk"
 msgstr "Indsæt en DVD"
 
-msgid "Insert a Wii Disc!"
-msgstr "Indsæt en Wii-DVD!"
+msgid "Insert a Wii or a Game Cube Disc!"
+msgstr ""
 
 msgid "Install"
 msgstr "Installér"
@@ -957,6 +1153,9 @@ msgstr "Installér nyt spil"
 msgid "Install finished"
 msgstr "Installering færdig"
 
+msgid "Installing Game Cube Game..."
+msgstr ""
+
 msgid "Installing content"
 msgstr "Installerer indhold"
 
@@ -966,11 +1165,11 @@ msgstr "Installerer spillet:"
 msgid "Installing title..."
 msgstr ""
 
+msgid "Invalid IOS number entered. Number must be -1 for inherit or 200 - 255."
+msgstr ""
+
 msgid "Invalid wad file."
 msgstr "Ugyldig wad fil."
-
-msgid "Issue manager /"
-msgstr "Problem manager /"
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Det ser ud til, at du har information, der vil kunne hjælpe os. Vær rar at sende denne information til udviklerne."
@@ -1072,6 +1271,15 @@ msgstr "Afspil lyd i løkke"
 msgid "Main DOL"
 msgstr ""
 
+msgid "Main GameCube Games Path"
+msgstr ""
+
+msgid "Main GameCube Path"
+msgstr ""
+
+msgid "Main Path"
+msgstr ""
+
 msgid "Main tester:"
 msgstr "Hoved tester:"
 
@@ -1086,6 +1294,9 @@ msgstr "Maj"
 
 msgid "Messageboard Update"
 msgstr "Messageboard opdatering"
+
+msgid "Mixed"
+msgstr ""
 
 msgid "Motion+ Video"
 msgstr ""
@@ -1156,8 +1367,8 @@ msgstr "Ingen WBFS eller FAT/NTFS/EXT partition er fundet"
 msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
 msgstr "Ingen Wiinnertag.xml fundet i config stien. Vil du oprette en prøve fil?"
 
-msgid "No cheats were selected"
-msgstr "Der blev ikke valgt nogle cheats"
+msgid "No cheats were selected! Should the GCT file be deleted?"
+msgstr ""
 
 msgid "No data could be read."
 msgstr "Data kunne ikke læses."
@@ -1170,6 +1381,9 @@ msgstr "Ingen favoritter er valgt."
 
 msgid "No file missing!"
 msgstr "Ingen filer mangler!"
+
+msgid "No games found on the disc"
+msgstr ""
 
 msgid "No language files to update on your devices! Do you want to download new language files?"
 msgstr "Ingen sprog filer at opdatere på din enhed! Vil du hente nye sprog filer?"
@@ -1192,8 +1406,8 @@ msgstr "Normal"
 msgid "Not Initialized"
 msgstr "Ikke initialiseret"
 
-msgid "Not a Wii Disc"
-msgstr "Ikke en Wii-DVD"
+msgid "Not a Wii or a Game Cube Disc"
+msgstr ""
 
 msgid "Not a valid URL"
 msgstr "Ikke en gyldig URL"
@@ -1207,8 +1421,14 @@ msgstr "Ikke et gyldig domæne"
 msgid "Not enough free memory."
 msgstr "Ikke nok fri hukommelse."
 
+msgid "Not enough free space on device."
+msgstr ""
+
 msgid "Not enough free space!"
 msgstr "Ikke nok ledig plads!"
+
+msgid "Not enough memory for FST."
+msgstr ""
 
 msgid "Not enough memory."
 msgstr "Ikke nok hukommelse."
@@ -1218,6 +1438,12 @@ msgstr "Ikke påkrævet"
 
 msgid "Not supported format!"
 msgstr "Ikke et understøttet format"
+
+msgid "Nothing selected to delete."
+msgstr ""
+
+msgid "Nothing selected to install."
+msgstr ""
 
 msgid "Nov"
 msgstr ""
@@ -1288,6 +1514,9 @@ msgstr "Tilladelse nægtet."
 msgid "Pick from a list"
 msgstr "Vælg fra en liste"
 
+msgid "Pixels"
+msgstr ""
+
 msgid "Play Count"
 msgstr "Spiltæller"
 
@@ -1302,6 +1531,9 @@ msgstr "Afspil forrige"
 
 msgid "Playing Music:"
 msgstr "Afspiller musik:"
+
+msgid "Please wait"
+msgstr ""
 
 msgid "Please wait..."
 msgstr "Vent venligst..."
@@ -1384,11 +1616,26 @@ msgstr "Tilbage til Wii-menuen"
 msgid "Right"
 msgstr "Højre"
 
+msgid "Rotating Disc"
+msgstr ""
+
 msgid "Rumble"
 msgstr "Vibration"
 
 msgid "SChinese"
 msgstr "Kinesisk (std.)"
+
+msgid "SD Card could not be accessed."
+msgstr ""
+
+msgid "SD GameCube Games Path"
+msgstr ""
+
+msgid "SD GameCube Path"
+msgstr ""
+
+msgid "SD Path"
+msgstr ""
 
 msgid "SFX Volume"
 msgstr "Lydstyrke for effekter"
@@ -1456,6 +1703,9 @@ msgstr "Vis fri plads"
 msgid "Show Play Count"
 msgstr "Vis spil tæller"
 
+msgid "Show SD"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "Sluk (rødt lys)"
 
@@ -1507,6 +1757,9 @@ msgstr "Split hver 4GB"
 msgid "Standby"
 msgstr ""
 
+msgid "Start"
+msgstr ""
+
 msgid "Success"
 msgstr "Succes"
 
@@ -1524,6 +1777,9 @@ msgstr "Opdateringen lykkedes"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
 msgstr "Opdateringen lykkedes takket været www.techjawa.com"
+
+msgid "Successfully copied"
+msgstr ""
 
 msgid "Successfully deleted:"
 msgstr "Det lykkedes at slette:"
@@ -1555,17 +1811,29 @@ msgstr "Sti til TXTCheatcodes"
 msgid "The .them file was not found in the zip."
 msgstr "kunne ikke finde .them fil i zip"
 
+msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
+msgstr ""
+
+msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
+msgstr ""
+
+msgid "The application might crash if there is currently a read/write access to the SD card!"
+msgstr ""
+
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Den angivne mappe eksisterer ikke. Skal den oprettes?"
 
-msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
-msgstr "Filerne vil bliver udpakket til din Emu Nand sti. Advarsel : alle eksisterene filer vil bliver overskrevet."
+msgid "The files will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
+msgstr ""
+
+msgid "The game is on USB."
+msgstr ""
 
 msgid "The save game will be extracted to your emu nand path."
 msgstr "Dette save game vil bliver udpakket til din Emu Nand sti."
 
-msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
-msgstr "Alle Save games vil bliver udpakket til din Emu Nand sti. Advarsel: Alle eksisterene save games vil bliver overskrevet."
+msgid "The save games will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
+msgstr ""
 
 msgid "The wad file was installed"
 msgstr "Wad fil var installeret"
@@ -1595,6 +1863,9 @@ msgstr "Denne IOS er BootMii ios. Hvis du er sikker på at det ikke er BootMii o
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
 msgstr "Denne IOS var ikke fundet i titel listen. Hvis du er sikker på at den er installeret ignorer denne advarsel."
 
+msgid "This path must be on SD!"
+msgstr ""
+
 msgid "Time left:"
 msgstr "Tid tilbage:"
 
@@ -1603,6 +1874,9 @@ msgstr "Titel-starter"
 
 msgid "Titles from GameTDB"
 msgstr "Titler fra GameTDB"
+
+msgid "Tooltip Delay"
+msgstr ""
 
 msgid "Tooltips"
 msgstr "Værktøjstips"
@@ -1731,6 +2005,9 @@ msgstr "Hvad skal der slettes for dette spil:"
 msgid "What to extract from NAND?"
 msgstr "Hvad skal der udpakkes fra NAND?"
 
+msgid "Where should the game be installed to?"
+msgstr ""
+
 msgid "WiFi Features"
 msgstr "WiFi-indstillinger"
 
@@ -1792,6 +2069,9 @@ msgstr "Du kan vælge eller formatter en partition eller kanal loader måde."
 msgid "You cannot delete this category."
 msgstr "Du kan ikke slette denne kategori."
 
+msgid "Zoom Duration (Speed)"
+msgstr ""
+
 msgid "and translators for language files updates"
 msgstr "og oversættere for sprog filer"
 
@@ -1837,6 +2117,9 @@ msgstr "formateret!"
 msgid "free"
 msgstr "ledig"
 
+msgid "ms"
+msgstr ""
+
 msgid "not set"
 msgstr "ikke sat"
 
@@ -1845,6 +2128,24 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "Insert a Wii Disc!"
+#~ msgstr "Indsæt en Wii-DVD!"
+
+#~ msgid "Issue manager /"
+#~ msgstr "Problem manager /"
+
+#~ msgid "No cheats were selected"
+#~ msgstr "Der blev ikke valgt nogle cheats"
+
+#~ msgid "Not a Wii Disc"
+#~ msgstr "Ikke en Wii-DVD"
+
+#~ msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
+#~ msgstr "Filerne vil bliver udpakket til din Emu Nand sti. Advarsel : alle eksisterene filer vil bliver overskrevet."
+
+#~ msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
+#~ msgstr "Alle Save games vil bliver udpakket til din Emu Nand sti. Advarsel: Alle eksisterene save games vil bliver overskrevet."
 
 #~ msgid "Installing title"
 #~ msgstr "Installerer titel"

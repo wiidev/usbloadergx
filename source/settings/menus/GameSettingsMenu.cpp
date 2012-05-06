@@ -24,6 +24,7 @@
 #include <unistd.h>
 #include "GameSettingsMenu.hpp"
 #include "themes/CTheme.h"
+#include "FileOperations/fileops.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/ProgressWindow.h"
 #include "prompts/CategorySelectPrompt.hpp"
@@ -33,6 +34,7 @@
 #include "wad/nandtitle.h"
 #include "cheats/cheatmenu.h"
 #include "GameLoadSM.hpp"
+#include "GCGameLoadSM.hpp"
 #include "UninstallSM.hpp"
 
 GameSettingsMenu::GameSettingsMenu(GameBrowseMenu *parent, struct discHdr * header)
@@ -92,7 +94,16 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 	{
 		HideMenu();
 		ResumeGui();
-		CurrentMenu = new GameLoadSM(DiscHeader);
+		if(   DiscHeader->type == TYPE_GAME_GC_IMG
+		   || DiscHeader->type == TYPE_GAME_GC_DISC
+		   || DiscHeader->type == TYPE_GAME_GC_EXTRACTED)
+		{
+			CurrentMenu = new GCGameLoadSM(DiscHeader);
+		}
+		else
+		{
+			CurrentMenu = new GameLoadSM(DiscHeader);
+		}
 		Append(CurrentMenu);
 	}
 
@@ -169,6 +180,13 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 				snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuPath, nandPath);
 				ret = NandTitle::ExtractDir(nandPath, filePath);
 			}
+
+			//! extract the Mii file if not yet done
+			snprintf(nandPath, sizeof(nandPath), "/shared2/menu/FaceLib/RFL_DB.dat");
+			snprintf(filePath, sizeof(filePath), "%s%s", (DiscHeader->tid != 0) ? Settings.NandEmuChanPath : Settings.NandEmuPath, nandPath);
+			if(!CheckFile(filePath))
+				NandTitle::ExtractDir(nandPath, filePath);
+
 			ProgressStop();
 			ProgressCancelEnable(false);
 

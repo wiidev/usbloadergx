@@ -21,11 +21,18 @@
 #include "video.h"
 #include "input.h"
 
+
+Mtx44 WiiPointer::projection;
+
 WiiPointer::WiiPointer(const char *pntrImg)
 	: posX(screenwidth/2), posY(screenheight/2),
 	  angle(0.0f), lastActivity(301)
 {
 	pointerImg = Resources::GetImageData(pntrImg);
+
+	//! create projection matrix
+	guOrtho(projection, Settings.AdjustOverscanY, screenheight - 1 - Settings.AdjustOverscanY,
+						Settings.AdjustOverscanX, screenwidth  - 1 - Settings.AdjustOverscanX, 0, 10000);
 }
 
 WiiPointer::~WiiPointer()
@@ -116,7 +123,7 @@ void WiiPointer::Draw(GuiTrigger *t)
 			posX = LIMIT(posX, -50.0f, screenwidth+50.0f);
 			posY = LIMIT(posY, -50.0f, screenheight+50.0f);
 
-			if(lastActivity < 300) { // (5s on 60Hz and 6s on 50Hz)
+			if(lastActivity < 180) { // (3s on 60Hz and 3.6s on 50Hz)
 				t->wpad.ir.valid = 1;
 				t->wpad.ir.x = posX;
 				t->wpad.ir.y = posY;
@@ -124,11 +131,51 @@ void WiiPointer::Draw(GuiTrigger *t)
 		}
 
 		if(t->wpad.ir.valid)
-			Menu_DrawImg(posX - pointerImg->GetWidth()/2,
-						 posY - pointerImg->GetHeight()/2,
-						 9900.0f, pointerImg->GetWidth(), pointerImg->GetHeight(),
-						 pointerImg->GetImage(), angle,
-						 Settings.widescreen ? Settings.WSFactor : 1.f, 1.f, 255, 0, 0, 0, 0, 0, 0, 0, 0);
+		{
+			GXTexObj texObj;
+			GX_InitTexObj(&texObj, pointerImg->GetImage(), pointerImg->GetWidth(), pointerImg->GetHeight(), GX_TF_RGBA8, GX_CLAMP, GX_CLAMP, GX_FALSE);
+			GX_LoadTexObj(&texObj, GX_TEXMAP0);
+
+			GX_ClearVtxDesc();
+			GX_InvVtxCache();
+			GX_InvalidateTexAll();
+
+			GX_SetVtxDesc(GX_VA_POS, GX_DIRECT);
+			GX_SetVtxDesc(GX_VA_CLR0, GX_DIRECT);
+			GX_SetVtxDesc(GX_VA_TEX0, GX_DIRECT);
+
+			Mtx mv;
+			guMtxIdentity(mv);
+			guMtxRotDeg (mv, 'z', angle);
+			guMtxTransApply(mv, mv, posX, posY, 9900.f);
+			guMtxConcat(FSModelView2D, mv, mv);
+
+			GX_LoadProjectionMtx(projection, GX_ORTHOGRAPHIC);
+			GX_LoadPosMtxImm(mv, GX_PNMTX0);
+
+			// pointer is pointing to center of the texture
+			f32 width = 0.5f * pointerImg->GetWidth();
+			f32 height = 0.5f * pointerImg->GetHeight();
+
+			GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
+			GX_Position3f32(-width, -height, 0);
+			GX_Color4u8(0xFF, 0xFF, 0xFF, 0xFF);
+			GX_TexCoord2f32(0, 0);
+
+			GX_Position3f32(width, -height, 0);
+			GX_Color4u8(0xFF, 0xFF, 0xFF, 0xFF);
+			GX_TexCoord2f32(1, 0);
+
+			GX_Position3f32(width, height, 0);
+			GX_Color4u8(0xFF, 0xFF, 0xFF, 0xFF);
+			GX_TexCoord2f32(1, 1);
+
+			GX_Position3f32(-width, height, 0);
+			GX_Color4u8(0xFF, 0xFF, 0xFF, 0xFF);
+			GX_TexCoord2f32(0, 1);
+
+			GX_End();
+		}
 	}
 
 	++lastActivity;

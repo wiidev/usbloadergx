@@ -35,8 +35,12 @@ public:
 
 	static u8 *GetOpeningBnr(const char *gameID);
 
-	u32 LoadGameList(const string &path);
+	u32 LoadAllGames(void);
+
+	void LoadGameList(const string &path, vector<struct discHdr> &headerList, vector<string> &pathList);
+
 	bool RemoveGame(const char *gameID);
+	bool RemoveSDGame(const char *gameID);
 	float GetGameSize(const char *gameID);
 
 	const char *GetPath(const char *gameID) const;
@@ -44,15 +48,25 @@ public:
 	vector<struct discHdr> & GetHeaders(void)
 	{
 		if(HeaderList.empty())
-			LoadGameList(Settings.GameCubePath);
+			LoadAllGames();
 
 		return HeaderList;
 	}
+
+	vector<struct discHdr> & GetSDHeaders(void) {
+		return sdGCList;
+	}
+
+	bool CopyUSB2SD(const struct discHdr *header);
+	bool IsInstalled(const char *gameID) const;
 private:
+
 	static GCGames *instance;
 
 	vector<string> PathList;
 	vector<struct discHdr> HeaderList;
+	vector<struct discHdr> sdGCList;
+	vector<string> sdGCPathList;
 };
 
 #endif

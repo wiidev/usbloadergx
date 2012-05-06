@@ -46,7 +46,7 @@ GuiText::GuiText(const char * t, int s, GXColor c)
 	textScrollInitialDelay = TEXT_SCROLL_INITIAL_DELAY;
 	textScrollDelay = TEXT_SCROLL_DELAY;
 
-	alignmentHor = ALIGN_CENTRE;
+	alignmentHor = ALIGN_CENTER;
 	alignmentVert = ALIGN_MIDDLE;
 
 	if (t)
@@ -75,7 +75,7 @@ GuiText::GuiText(const wchar_t * t, int s, GXColor c)
 	textScrollInitialDelay = TEXT_SCROLL_INITIAL_DELAY;
 	textScrollDelay = TEXT_SCROLL_DELAY;
 
-	alignmentHor = ALIGN_CENTRE;
+	alignmentHor = ALIGN_CENTER;
 	alignmentVert = ALIGN_MIDDLE;
 
 	if (t)
@@ -240,6 +240,10 @@ void GuiText::SetFontSize(int s)
 
 void GuiText::SetMaxWidth(int width, int w)
 {
+	//! no need to reset timer on false set
+	if(wrapMode == w && maxWidth == width)
+		return;
+
 	LOCK( this );
 
 	maxWidth = width;
@@ -524,9 +528,12 @@ void GuiText::WrapText()
  */
 void GuiText::Draw()
 {
-	if (!text) return;
+	if (!text || (*text == 0)) return;
 
 	if (!IsVisible()) return;
+
+	GX_LoadProjectionMtx(FSProjection2D, GX_ORTHOGRAPHIC);
+	GX_LoadPosMtxImm(FSModelView2D, GX_PNMTX0);
 
 	GXColor c = color;
 	c.a = GetAlpha();

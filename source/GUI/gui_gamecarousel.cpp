@@ -102,7 +102,7 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, int offset
 
 	gamename = new GuiText(" ", 18, thColor("r=55 g=190 b=237 a=255 - carousel game name text color"));
 	gamename->SetParent(this);
-	gamename->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	gamename->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	gamename->SetPosition(0, 330);
 	gamename->SetMaxWidth(280, DOTTED);
 
@@ -190,7 +190,7 @@ void GuiGameCarousel::Refresh()
 		delete game[i];
 		game[i] = new GuiButton(122, 244);
 		game[i]->SetParent(this);
-		game[i]->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+		game[i]->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 		game[i]->SetPosition(0, 740);
 		game[i]->SetImage(coverImg[i]);
 		game[i]->SetScale(SCALE);

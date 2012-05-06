@@ -66,6 +66,8 @@ FeatureSettingsMenu::FeatureSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Wiinnertag" ));
 	Options->SetName(Idx++, "%s", tr( "Import Categories" ));
 	Options->SetName(Idx++, "%s", tr( "Export All Saves to EmuNand" ));
+	Options->SetName(Idx++, "%s", tr( "Export Miis to EmuNand" ));
+	Options->SetName(Idx++, "%s", tr( "Export SYSCONF to EmuNand" ));
 	Options->SetName(Idx++, "%s", tr( "Dump NAND to EmuNand" ));
 	Options->SetName(Idx++, "%s", tr( "Install WAD to EmuNand" ));
 
@@ -131,6 +133,12 @@ void FeatureSettingsMenu::SetOptionValues()
 	Options->SetValue(Idx++, " ");
 
 	//! Settings: Export Savegames to EmuNand
+	Options->SetValue(Idx++, " ");
+
+	//! Settings: Export Miis to EmuNand
+	Options->SetValue(Idx++, " ");
+
+	//! Settings: Export SYSCONF to EmuNand
 	Options->SetValue(Idx++, " ");
 
 	//! Settings: Dump NAND to EmuNand
@@ -256,7 +264,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 	//! Settings: Export Savegames to EmuNand
 	else if (ret == ++Idx)
 	{
-		int choice = WindowPrompt(tr( "Do you want to extract all the save games?" ), tr("The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."), tr( "Yes" ), tr( "Cancel" ));
+		int choice = WindowPrompt(tr( "Do you want to extract all the save games?" ), tr("The save games will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."), tr( "Yes" ), tr( "Cancel" ));
 		if (choice == 1)
 		{
 			ProgressCancelEnable(true);
@@ -267,6 +275,15 @@ int FeatureSettingsMenu::GetMenuInternal()
 			bool skipErrors = false;
 			wString filter(gameList.GetCurrentFilter());
 			gameList.LoadUnfiltered();
+
+			//! extract the Mii file
+			snprintf(nandPath, sizeof(nandPath), "/shared2/menu/FaceLib/RFL_DB.dat");
+			snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuChanPath, nandPath);
+			if(!CheckFile(filePath))
+				NandTitle::ExtractDir(nandPath, filePath);
+			snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuPath, nandPath);
+			if(!CheckFile(filePath))
+				NandTitle::ExtractDir(nandPath, filePath);
 
 			for(int i = 0; i < gameList.size(); ++i)
 			{
@@ -327,10 +344,72 @@ int FeatureSettingsMenu::GetMenuInternal()
 		}
 	}
 
+	//! Settings: Export Miis to EmuNand
+	else if (ret == ++Idx)
+	{
+		int choice = WindowPrompt(tr( "Extract Miis to the Emu NAND?" ), tr("The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."), tr( "Yes" ), tr( "Cancel" ));
+		if (choice == 1)
+		{
+			char filePath[512];
+			char nandPath[ISFS_MAXPATH];
+			bool Error = false;
+			ProgressCancelEnable(true);
+			StartProgress(tr("Extracting file:"), 0, 0, true, false);
+
+			//! extract the Mii file
+			snprintf(nandPath, sizeof(nandPath), "/shared2/menu/FaceLib/RFL_DB.dat");
+			snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuChanPath, nandPath);
+			if(NandTitle::ExtractFile(nandPath, filePath) < 0)
+			   Error = true;
+			snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuPath, nandPath);
+			if(NandTitle::ExtractFile(nandPath, filePath) < 0)
+				Error = true;
+
+			ProgressStop();
+			ProgressCancelEnable(false);
+
+			if(Error)
+				WindowPrompt(tr("Process finished."), tr("Errors occured."), tr("OK"));
+			else
+				WindowPrompt(tr("Success."), tr("All files extracted."), tr("OK"));
+		}
+	}
+
+	//! Settings: Export SYSCONF to EmuNand
+	else if (ret == ++Idx)
+	{
+		int choice = WindowPrompt(tr( "Extract SYSCONF to the Emu NAND?" ), tr("The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."), tr( "Yes" ), tr( "Cancel" ));
+		if (choice == 1)
+		{
+			char filePath[512];
+			char nandPath[ISFS_MAXPATH];
+			bool Error = false;
+			ProgressCancelEnable(true);
+			StartProgress(tr("Extracting file:"), 0, 0, true, false);
+
+			//! extract the Mii file
+			snprintf(nandPath, sizeof(nandPath), "/shared2/sys/SYSCONF");
+			snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuChanPath, nandPath);
+			if(NandTitle::ExtractFile(nandPath, filePath) < 0)
+			   Error = true;
+			snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuPath, nandPath);
+			if(NandTitle::ExtractFile(nandPath, filePath) < 0)
+				Error = true;
+
+			ProgressStop();
+			ProgressCancelEnable(false);
+
+			if(Error)
+				WindowPrompt(tr("Process finished."), tr("Errors occured."), tr("OK"));
+			else
+				WindowPrompt(tr("Success."), tr("All files extracted."), tr("OK"));
+		}
+	}
+
 	//! Settings: Dump NAND to EmuNand
 	else if (ret == ++Idx)
 	{
-		int choice = WindowPrompt(tr( "What to extract from NAND?" ), tr("The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."), tr( "Everything" ), tr("Enter Path"), tr( "Cancel" ));
+		int choice = WindowPrompt(tr( "What to extract from NAND?" ), tr("The files will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."), tr( "Everything" ), tr("Enter Path"), tr( "Cancel" ));
 		if (choice)
 		{
 			char filePath[255];
@@ -390,7 +469,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 		this->Remove(optionBrowser);
 
 		char wadpath[150];
-		sprintf(wadpath, "%s/wad/", Settings.BootDevice);
+		snprintf(wadpath, sizeof(wadpath), "%s/wad/", Settings.BootDevice);
 
 		int result = BrowseDevice(wadpath, sizeof(wadpath), FB_DEFAULT);
 		if(result)

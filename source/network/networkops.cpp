@@ -566,8 +566,8 @@ static void * networkinitcallback(void *arg)
 {
 	while (1)
 	{
-
-		if (!checkincomming && networkHalt) LWP_SuspendThread(networkthread);
+		if (!checkincomming && networkHalt)
+			LWP_SuspendThread(networkthread);
 
 		Initialize_Network();
 
@@ -582,6 +582,8 @@ static void * networkinitcallback(void *arg)
 		}
 
 		if (checkincomming) NetworkWait();
+
+		usleep(100000);
 	}
 	return NULL;
 }

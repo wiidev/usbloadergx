@@ -8,6 +8,7 @@
 #include "gecko.h"
 #include "Controls/DeviceHandler.hpp"
 #include "wad/nandtitle.h"
+#include "SystemMenu/SystemMenuResources.h"
 #include "system/IosLoader.h"
 #include "utils/timer.h"
 #include "settings/CSettings.h"
@@ -186,7 +187,18 @@ int StartUpProcess::Run(int argc, char *argv[])
 int StartUpProcess::Execute()
 {
 	Settings.EntryIOS = IOS_GetVersion();
-	SetTextf("Start up\n");
+
+	// Initialize to read the system menu resources
+	ISFS_Initialize();
+
+	SetTextf("Loading system menu resources\n");
+	SystemMenuResources::Instance()->Init();
+
+	// Deinitialize ISFS
+	ISFS_Deinitialize();
+
+	// Reload app cios
+	SetTextf("Loading application cIOS\n");
 
 	if(IosLoader::LoadAppCios() < 0)
 	{
@@ -236,7 +248,7 @@ int StartUpProcess::Execute()
 		SetupPads();
 	}
 
-	if(!IosLoader::IsHermesIOS())
+	if(!IosLoader::IsHermesIOS() && !IosLoader::IsD2X())
 	{
 		Settings.USBPort = 0;
 	}
@@ -248,16 +260,22 @@ int StartUpProcess::Execute()
 	}
 	else if(Settings.USBPort == 2)
 	{
-		// Right now we support only one port at once
-		Settings.USBPort = 0;
-		/*
 		SetTextf("Mounting USB Port to 1\n");
 		DeviceHandler::Instance()->MountUSBPort1();
-		*/
 	}
 
 	// We only initialize once for the whole session
 	ISFS_Initialize();
+
+	SetTextf("Loading resources\n");
+	// Do not allow banner grid mode without AHBPROT
+	// this function does nothing if it was already initiated before
+	if(   !SystemMenuResources::Instance()->IsLoaded() && !SystemMenuResources::Instance()->Init()
+		&& Settings.gameDisplay == BANNERGRID_MODE)
+	{
+		Settings.gameDisplay = LIST_MODE;
+		Settings.GameWindowMode = GAMEWINDOW_DISC;
+	}
 
 	gprintf("\tLoading game categories...%s\n", GameCategories.Load(Settings.ConfigPath) ? "done" : "failed");
 	gprintf("\tLoading font...%s\n", Theme::LoadFont(Settings.ConfigPath) ? "done" : "failed (using default)");

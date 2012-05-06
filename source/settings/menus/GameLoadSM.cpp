@@ -24,6 +24,7 @@
 #include <unistd.h>
 #include <gccore.h>
 #include "settings/CSettings.h"
+#include "settings/CGameStatistics.h"
 #include "themes/CTheme.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/DiscBrowser.h"
@@ -171,31 +172,21 @@ void GameLoadSM::SetOptionNames()
 	int Idx = 0;
 
 	Options->SetName(Idx++, "%s", tr( "Game Lock" ));
+	Options->SetName(Idx++, "%s", tr( "Favorite Level" ));
 	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
-
-	//! Not available on GC
-	if(Header->type != TYPE_GAME_GC_IMG && Header->type != TYPE_GAME_GC_DISC)
-	{
-		Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
-		Options->SetName(Idx++, "%s", tr( "Sneek Video Patch" ));
-		Options->SetName(Idx++, "%s", tr( "Aspect Ratio" ));
-		Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
-	}
-
+	Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
+	Options->SetName(Idx++, "%s", tr( "Sneek Video Patch" ));
+	Options->SetName(Idx++, "%s", tr( "Aspect Ratio" ));
+	Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
 	Options->SetName(Idx++, "%s", tr( "Ocarina" ));
 	Options->SetName(Idx++, "%s", tr( "Parental Control" ));
-
-	//! Not available on GC
-	if(Header->type != TYPE_GAME_GC_IMG && Header->type != TYPE_GAME_GC_DISC)
-	{
-		Options->SetName(Idx++, "%s", tr( "Hooktype" ));
-		Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
-		Options->SetName(Idx++, "%s", tr( "Game IOS" ));
-		Options->SetName(Idx++, "%s", tr( "Error 002 fix" ));
-		Options->SetName(Idx++, "%s", tr( "Return To" ));
-		Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
-	}
+	Options->SetName(Idx++, "%s", tr( "Hooktype" ));
+	Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
+	Options->SetName(Idx++, "%s", tr( "Game IOS" ));
+	Options->SetName(Idx++, "%s", tr( "Error 002 fix" ));
+	Options->SetName(Idx++, "%s", tr( "Return To" ));
+	Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
 
 	//! Only wii games and emu nand channels
 	if(   Header->type == TYPE_GAME_WII_IMG
@@ -221,39 +212,38 @@ void GameLoadSM::SetOptionValues()
 	//! Settings: Game Lock
 	Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.Locked] ));
 
+	//! Settings: Favorite Level
+	Options->SetValue(Idx++, "%i", GameStatistics.GetFavoriteRank(Header->id));
+
 	//! Settings: Video Mode
 	if(GameConfig.video == INHERIT)
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(VideoModeText[GameConfig.video]));
 
-	//! Not available on GC
-	if(Header->type != TYPE_GAME_GC_IMG && Header->type != TYPE_GAME_GC_DISC)
-	{
-		//! Settings: VIDTV Patch
-		if(GameConfig.vipatch == INHERIT)
-			Options->SetValue(Idx++, tr("Use global"));
-		else
-			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.vipatch]));
+	//! Settings: VIDTV Patch
+	if(GameConfig.vipatch == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.vipatch]));
 
-		//! Settings: Sneek Video Patch
-		if(GameConfig.sneekVideoPatch == INHERIT)
-			Options->SetValue(Idx++, tr("Use global"));
-		else
-			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.sneekVideoPatch]));
+	//! Settings: Sneek Video Patch
+	if(GameConfig.sneekVideoPatch == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.sneekVideoPatch]));
 
-		//! Settings: Aspect Ratio
-		if(GameConfig.aspectratio == INHERIT)
-			Options->SetValue(Idx++, tr("Use global"));
-		else
-			Options->SetValue(Idx++, "%s", tr(AspectText[GameConfig.aspectratio]));
+	//! Settings: Aspect Ratio
+	if(GameConfig.aspectratio == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(AspectText[GameConfig.aspectratio]));
 
-		//! Settings: Patch Country Strings
-		if(GameConfig.patchcountrystrings == INHERIT)
-			Options->SetValue(Idx++, tr("Use global"));
-		else
-			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.patchcountrystrings]));
-	}
+	//! Settings: Patch Country Strings
+	if(GameConfig.patchcountrystrings == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.patchcountrystrings]));
 
 	//! Settings: Game Language
 	if(GameConfig.language == INHERIT)
@@ -270,54 +260,50 @@ void GameLoadSM::SetOptionValues()
 	//! Settings: Parental Control
 	Options->SetValue(Idx++, "%s", tr(ParentalText[GameConfig.parentalcontrol]));
 
-	//! Not available on GC
-	if(Header->type != TYPE_GAME_GC_IMG && Header->type != TYPE_GAME_GC_DISC)
+	//! Settings: Hooktype
+	if(GameConfig.Hooktype == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr( HooktypeText[GameConfig.Hooktype] ));
+
+	//! Settings: Wiird Debugger
+	if(GameConfig.WiirdDebugger == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.WiirdDebugger] ));
+
+	//! Settings: Game IOS
+	if(GameConfig.ios == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%i", GameConfig.ios);
+
+	//! Settings: Error 002 fix
+	if(GameConfig.errorfix002 == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(Error002Text[GameConfig.errorfix002]));
+
+	//! Settings: Return To
+	if(GameConfig.returnTo)
 	{
-		//! Settings: Hooktype
-		if(GameConfig.Hooktype == INHERIT)
-			Options->SetValue(Idx++, tr("Use global"));
-		else
-			Options->SetValue(Idx++, "%s", tr( HooktypeText[GameConfig.Hooktype] ));
-
-		//! Settings: Wiird Debugger
-		if(GameConfig.WiirdDebugger == INHERIT)
-			Options->SetValue(Idx++, tr("Use global"));
-		else
-			Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.WiirdDebugger] ));
-
-		//! Settings: Game IOS
-		if(GameConfig.ios == INHERIT)
-			Options->SetValue(Idx++, tr("Use global"));
-		else
-			Options->SetValue(Idx++, "%i", GameConfig.ios);
-
-		//! Settings: Error 002 fix
-		if(GameConfig.errorfix002 == INHERIT)
-			Options->SetValue(Idx++, tr("Use global"));
-		else
-			Options->SetValue(Idx++, "%s", tr(Error002Text[GameConfig.errorfix002]));
-
-		//! Settings: Return To
-		if(GameConfig.returnTo)
-		{
-			const char* TitleName = NULL;
-			u64 tid = NandTitles.FindU32(Settings.returnTo);
-			if (tid > 0)
-				TitleName = NandTitles.NameOf(tid);
-			Options->SetValue(Idx++, "%s", TitleName ? TitleName : strlen(Settings.returnTo) > 0 ?
-											Settings.returnTo : tr( OnOffText[0] ));
-		}
-		else
-		{
-			Options->SetValue(Idx++, "%s", tr( OnOffText[0] ));
-		}
-
-		//! Settings: Block IOS Reload
-		if(GameConfig.iosreloadblock == INHERIT)
-			Options->SetValue(Idx++, tr("Use global"));
-		else
-			Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.iosreloadblock]) );
+		const char* TitleName = NULL;
+		u64 tid = NandTitles.FindU32(Settings.returnTo);
+		if (tid > 0)
+			TitleName = NandTitles.NameOf(tid);
+		Options->SetValue(Idx++, "%s", TitleName ? TitleName : strlen(Settings.returnTo) > 0 ?
+										Settings.returnTo : tr( OnOffText[0] ));
 	}
+	else
+	{
+		Options->SetValue(Idx++, "%s", tr( OnOffText[0] ));
+	}
+
+	//! Settings: Block IOS Reload
+	if(GameConfig.iosreloadblock == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.iosreloadblock]) );
 
 	//! Only wii games and emu nand channels
 	if(   Header->type == TYPE_GAME_WII_IMG
@@ -383,38 +369,44 @@ int GameLoadSM::GetMenuInternal()
 		if (++GameConfig.Locked >= MAX_ON_OFF) GameConfig.Locked = 0;
 	}
 
+	//! Settings: Favorite Level
+	else if (ret == ++Idx)
+	{
+		int Level = GameStatistics.GetFavoriteRank(Header->id);
+		if (++Level > 5) Level = 0;
+
+		GameStatistics.SetFavoriteRank(Header->id, Level);
+		GameStatistics.Save();
+	}
+
 	//! Settings: Video Mode
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.video >= VIDEO_MODE_MAX) GameConfig.video = INHERIT;
 	}
 
-	//! Not available on GC
-	if(Header->type != TYPE_GAME_GC_IMG && Header->type != TYPE_GAME_GC_DISC)
+	//! Settings: VIDTV Patch
+	if (ret == ++Idx)
 	{
-		//! Settings: VIDTV Patch
-		if (ret == ++Idx)
-		{
-			if (++GameConfig.vipatch >= MAX_ON_OFF) GameConfig.vipatch = INHERIT;
-		}
+		if (++GameConfig.vipatch >= MAX_ON_OFF) GameConfig.vipatch = INHERIT;
+	}
 
-		//! Settings: Sneek Video Patch
-		else if (ret == ++Idx)
-		{
-			if (++GameConfig.sneekVideoPatch >= MAX_ON_OFF) GameConfig.sneekVideoPatch = INHERIT;
-		}
+	//! Settings: Sneek Video Patch
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.sneekVideoPatch >= MAX_ON_OFF) GameConfig.sneekVideoPatch = INHERIT;
+	}
 
-		//! Settings: Aspect Ratio
-		else if (ret == ++Idx)
-		{
-			if (++GameConfig.aspectratio >= ASPECT_MAX) GameConfig.aspectratio = INHERIT;
-		}
+	//! Settings: Aspect Ratio
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.aspectratio >= ASPECT_MAX) GameConfig.aspectratio = INHERIT;
+	}
 
-		//! Settings: Patch Country Strings
-		if (ret == ++Idx)
-		{
-			if (++GameConfig.patchcountrystrings >= MAX_ON_OFF) GameConfig.patchcountrystrings = INHERIT;
-		}
+	//! Settings: Patch Country Strings
+	if (ret == ++Idx)
+	{
+		if (++GameConfig.patchcountrystrings >= MAX_ON_OFF) GameConfig.patchcountrystrings = INHERIT;
 	}
 
 	//! Settings: Game Language
@@ -435,30 +427,33 @@ int GameLoadSM::GetMenuInternal()
 		if (++GameConfig.parentalcontrol >= 5) GameConfig.parentalcontrol = 0;
 	}
 
-	//! Not available on GC
-	if(Header->type != TYPE_GAME_GC_IMG && Header->type != TYPE_GAME_GC_DISC)
+	//! Settings: Hooktype
+	if (ret == ++Idx)
 	{
-		//! Settings: Hooktype
-		if (ret == ++Idx)
-		{
-			if (++GameConfig.Hooktype >= 8) GameConfig.Hooktype = INHERIT;
-		}
+		if (++GameConfig.Hooktype >= 8) GameConfig.Hooktype = INHERIT;
+	}
 
-		//! Settings: Wiird Debugger
-		else if (ret == ++Idx)
-		{
-			if (++GameConfig.WiirdDebugger >= MAX_ON_OFF) GameConfig.WiirdDebugger = INHERIT;
-		}
+	//! Settings: Wiird Debugger
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.WiirdDebugger >= MAX_ON_OFF) GameConfig.WiirdDebugger = INHERIT;
+	}
 
-		//! Settings: Game IOS
-		else if (ret == ++Idx)
+	//! Settings: Game IOS
+	else if (ret == ++Idx)
+	{
+		char entered[4];
+		snprintf(entered, sizeof(entered), "%i", GameConfig.ios);
+		if(OnScreenNumpad(entered, sizeof(entered)))
 		{
-			char entered[4];
-			snprintf(entered, sizeof(entered), "%i", GameConfig.ios);
-			if(OnScreenKeyboard(entered, sizeof(entered), 0))
+			int newIOS = atoi(entered);
+
+			if(newIOS != INHERIT && (newIOS < 200 ||  newIOS > 255)) {
+				WindowPrompt(tr("Error:"), tr("Invalid IOS number entered. Number must be -1 for inherit or 200 - 255."), tr("OK"));
+			}
+			else
 			{
-				GameConfig.ios = atoi(entered) & 0xFF;
-				if(GameConfig.ios < 200 && GameConfig.ios != INHERIT) GameConfig.ios = 200;
+				GameConfig.ios  = newIOS;
 
 				if(GameConfig.ios != INHERIT && NandTitles.IndexOf(TITLE_ID(1, GameConfig.ios)) < 0)
 				{
@@ -470,24 +465,24 @@ int GameLoadSM::GetMenuInternal()
 				}
 			}
 		}
+	}
 
-		//! Settings: Error 002 fix
-		else if (ret == ++Idx)
-		{
-			if (++GameConfig.errorfix002 >= 3) GameConfig.errorfix002 = INHERIT;
-		}
+	//! Settings: Error 002 fix
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.errorfix002 >= 3) GameConfig.errorfix002 = INHERIT;
+	}
 
-		//! Settings: Return To
-		else if (ret == ++Idx)
-		{
-			if (++GameConfig.returnTo >= MAX_ON_OFF) GameConfig.returnTo = 0;
-		}
+	//! Settings: Return To
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.returnTo >= MAX_ON_OFF) GameConfig.returnTo = 0;
+	}
 
-		//! Settings: Block IOS Reload
-		if (ret == ++Idx)
-		{
-			if(++GameConfig.iosreloadblock >= 3) GameConfig.iosreloadblock = INHERIT;
-		}
+	//! Settings: Block IOS Reload
+	if (ret == ++Idx)
+	{
+		if(++GameConfig.iosreloadblock >= 3) GameConfig.iosreloadblock = INHERIT;
 	}
 
 	//! Only wii games and emu nand channels
@@ -552,7 +547,7 @@ int GameLoadSM::GetMenuInternal()
 		}
 
 		//! Settings: Select DOL Offset from Game
-		else if (    (ret == ++Idx)
+		else if (	(ret == ++Idx)
 				  && (GameConfig.loadalternatedol == 1))
 		{
 			GuiWindow * parentWindow = (GuiWindow *) parentElement;

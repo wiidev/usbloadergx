@@ -62,6 +62,7 @@ void CSettings::SetDefault()
 	snprintf(titlestxt_path, sizeof(titlestxt_path), "%s", ConfigPath);
 	snprintf(languagefiles_path, sizeof(languagefiles_path), "%slanguage/", ConfigPath);
 	snprintf(update_path, sizeof(update_path), "%s/apps/usbloader_gx/", BootDevice);
+	snprintf(BNRCachePath, sizeof(BNRCachePath), "%s/apps/usbloader_gx/cache_bnr/", BootDevice);
 	snprintf(homebrewapps_path, sizeof(homebrewapps_path), "%s/apps/", BootDevice);
 	snprintf(Cheatcodespath, sizeof(Cheatcodespath), "%s/codes/", BootDevice);
 	snprintf(TxtCheatcodespath, sizeof(TxtCheatcodespath), "%s/txtcodes/", BootDevice);
@@ -72,14 +73,19 @@ void CSettings::SetDefault()
 	snprintf(theme_path, sizeof(theme_path), "%stheme/", ConfigPath);
 	snprintf(dolpath, sizeof(dolpath), "%s/", BootDevice);
 	snprintf(NandEmuPath, sizeof(NandEmuPath), "%s/nand/", BootDevice);
-	strcpy(NandEmuChanPath, NandEmuPath);
-	strcpy(theme, "");
-	strcpy(language_path, "");
-	strcpy(ogg_path, "");
-	strcpy(unlockCode, "");
-	strcpy(db_language, "");
-	strcpy(returnTo, "");
-	strcpy(GameCubePath, "sd:/games/");
+	strlcpy(NandEmuChanPath, NandEmuPath, sizeof(NandEmuChanPath));
+	strlcpy(GameCubePath, "sd:/games/", sizeof(GameCubePath));
+	strlcpy(GameCubeSDPath, "sd:/games/", sizeof(GameCubeSDPath));
+	theme[0] = 0;
+	language_path[0] = 0;
+	ogg_path[0] = 0;
+	unlockCode[0] = 0;
+	db_language[0] = 0;
+	returnTo[0] = 0;
+
+	NTSC = (CONF_GetVideo() == CONF_VIDEO_NTSC);
+	PAL50 = (CONF_GetVideo() == CONF_VIDEO_PAL) && (CONF_GetEuRGB60() == 0);
+	widescreen = (CONF_GetAspectRatio() == CONF_ASPECT_16_9);
 
 	godmode = 1;
 	videomode = VIDEO_MODE_DISCDEFAULT;
@@ -117,7 +123,6 @@ void CSettings::SetDefault()
 	InstallToDir = INSTALL_TO_NAME_GAMEID;
 	GameSplit = GAMESPLIT_4GB;
 	InstallPartitions = ONLY_GAME_PARTITION;
-	widescreen = (CONF_GetAspectRatio() == CONF_ASPECT_16_9);
 	HomeMenu = HOME_MENU_DEFAULT;
 	MultiplePartitions = OFF;
 	BlockIOSReload = AUTO;
@@ -146,6 +151,25 @@ void CSettings::SetDefault()
 	UseChanLauncher = OFF;
 	AdjustOverscanX = 0;
 	AdjustOverscanY = 0;
+	TooltipDelay = 1500; // ms
+	GameWindowMode = GAMEWINDOW_BANNER;
+	CacheBNRFiles = ON;
+	BannerAnimStart = BANNER_START_ON_ZOOM;
+	BannerGridSpeed = 25.6f; // pixel/frames
+	BannerZoomDuration = 30; // frames
+	BannerProjectionOffsetX = (!widescreen || PAL50) ? 0.0f : 2.0f;
+	BannerProjectionOffsetY = PAL50 ? -1.0f : (NTSC ? 0.0f : -4.0f);
+	BannerProjectionWidth = (Settings.widescreen ? (Settings.PAL50 ? 616 : 620.0f) : 608.0f);
+	BannerProjectionHeight = (Settings.PAL50 ? 448.0f : (NTSC ? 470.0f : 464.0f));
+	GCBannerScale = 1.5f;
+	DMLVideo = DML_VID_DML_AUTO;
+	DMLNMM = OFF;
+	DMLActivityLED = OFF;
+	DMLPADHOOK = OFF;
+	DMLNoDisc = OFF;
+	DMLDebug = OFF;
+	GCInstallCompressed = OFF;
+	GCInstallAligned = OFF;
 }
 
 bool CSettings::Load()
@@ -270,10 +294,11 @@ bool CSettings::Save()
 	fprintf(file, "gameDisplay = %d\n", gameDisplay);
 	fprintf(file, "update_path = %s\n", update_path);
 	fprintf(file, "homebrewapps_path = %s\n", homebrewapps_path);
+	fprintf(file, "BNRCachePath = %s\n", BNRCachePath);
 	fprintf(file, "Cheatcodespath = %s\n", Cheatcodespath);
 	fprintf(file, "BcaCodepath = %s\n", BcaCodepath);
 	fprintf(file, "WipCodepath = %s\n", WipCodepath);
-	fprintf(file, "WDMpath = %s\n ", WDMpath);
+	fprintf(file, "WDMpath = %s\n", WDMpath);
 	fprintf(file, "titlesOverride = %d\n", titlesOverride);
 	fprintf(file, "ForceDiscTitles = %d\n", ForceDiscTitles);
 	fprintf(file, "patchcountrystrings = %d\n", patchcountrystrings);
@@ -327,6 +352,27 @@ bool CSettings::Save()
 	fprintf(file, "UseChanLauncher = %d\n", UseChanLauncher);
 	fprintf(file, "AdjustOverscanX = %d\n", AdjustOverscanX);
 	fprintf(file, "AdjustOverscanY = %d\n", AdjustOverscanY);
+	fprintf(file, "TooltipDelay = %d\n", TooltipDelay);
+	fprintf(file, "GameWindowMode = %d\n", GameWindowMode);
+	fprintf(file, "CacheBNRFiles = %d\n", CacheBNRFiles);
+	fprintf(file, "BannerAnimStart = %d\n", BannerAnimStart);
+	fprintf(file, "BannerGridSpeed = %g\n", BannerGridSpeed);
+	fprintf(file, "BannerZoomDuration = %d\n", BannerZoomDuration);
+	fprintf(file, "BannerProjectionOffsetX = %g\n", BannerProjectionOffsetX);
+	fprintf(file, "BannerProjectionOffsetY = %g\n", BannerProjectionOffsetY);
+	fprintf(file, "BannerProjectionWidth = %g\n", BannerProjectionWidth);
+	fprintf(file, "BannerProjectionHeight = %g\n", BannerProjectionHeight);
+	fprintf(file, "GCBannerScale = %g\n", GCBannerScale);
+	fprintf(file, "GameCubePath = %s\n", GameCubePath);
+	fprintf(file, "GameCubeSDPath = %s\n", GameCubeSDPath);
+	fprintf(file, "DMLVideo = %d\n", DMLVideo);
+	fprintf(file, "DMLNMM = %d\n", DMLNMM);
+	fprintf(file, "DMLActivityLED = %d\n", DMLActivityLED);
+	fprintf(file, "DMLPADHOOK = %d\n", DMLPADHOOK);
+	fprintf(file, "DMLNoDisc = %d\n", DMLNoDisc);
+	fprintf(file, "DMLDebug = %d\n", DMLDebug);
+	fprintf(file, "GCInstallCompressed = %d\n", GCInstallCompressed);
+	fprintf(file, "GCInstallAligned = %d\n", GCInstallAligned);
 	fclose(file);
 
 	return true;
@@ -334,116 +380,75 @@ bool CSettings::Save()
 
 bool CSettings::SetSetting(char *name, char *value)
 {
-	int i = 0;
-
 	if (strcmp(name, "godmode") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			godmode = i;
-		}
+		godmode = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "videomode") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			videomode = i;
-		}
+		videomode = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "videopatch") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			videopatch = i;
-		}
+		videopatch = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "language") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			language = i;
-		}
+		language = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "ocarina") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			ocarina = i;
-		}
+		ocarina = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "hddinfo") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			hddinfo = i;
-		}
+		hddinfo = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "sinfo") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			sinfo = i;
-		}
+		sinfo = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "rumble") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			rumble = i;
-		}
+		rumble = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "volume") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			volume = i;
-		}
+		volume = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "sfxvolume") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			sfxvolume = i;
-		}
+		sfxvolume = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "gamesoundvolume") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			gamesoundvolume = i;
-		}
+		gamesoundvolume = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "tooltips") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			tooltips = i;
-		}
+		tooltips = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "RememberUnlock") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			RememberUnlock = i;
-		}
+		RememberUnlock = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "password") == 0)
 	{
 		char EncryptedTxt[50];
-		strcpy(EncryptedTxt, value);
+		strlcpy(EncryptedTxt, value, sizeof(EncryptedTxt));
 		DecryptString(EncryptedTxt, unlockCode);
 
 		if(!RememberUnlock && strlen(unlockCode) > 0 && strcmp(unlockCode, "not set") != 0)
@@ -452,214 +457,214 @@ bool CSettings::SetSetting(char *name, char *value)
 	}
 	else if (strcmp(name, "GameSort") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) GameSort = i;
+		GameSort = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "cios") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) cios = i;
+		cios = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "keyset") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) keyset = i;
+		keyset = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "xflip") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) xflip = i;
+		xflip = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "gridRows") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) gridRows = i;
+		gridRows = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "quickboot") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) quickboot = i;
+		quickboot = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "partition") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) partition = i;
+		partition = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "wsprompt") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) wsprompt = i;
+		wsprompt = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "gameDisplay") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) gameDisplay = i;
+		gameDisplay = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "parentalcontrol") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) parentalcontrol = i;
+		parentalcontrol = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "screensaver") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) screensaver = i;
+		screensaver = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "titlesOverride") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) titlesOverride = i;
+		titlesOverride = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "ForceDiscTitles") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) ForceDiscTitles = i;
+		ForceDiscTitles = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "musicloopmode") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) musicloopmode = i;
+		musicloopmode = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "gamesound") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) gamesound = i;
+		gamesound = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "wiilight") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) wiilight = i;
+		wiilight = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "marknewtitles") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) marknewtitles = i;
+		marknewtitles = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "ShowPlayCount") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) ShowPlayCount = i;
+		ShowPlayCount = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "ShowFreeSpace") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) ShowFreeSpace = i;
+		ShowFreeSpace = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "HomeMenu") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) HomeMenu = i;
+		HomeMenu = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "MultiplePartitions") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) MultiplePartitions = i;
+		MultiplePartitions = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "BlockIOSReload") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) BlockIOSReload = i;
+		BlockIOSReload = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "USBPort") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) USBPort = i;
+		USBPort = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "CacheTitles") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) CacheTitles = i;
+		CacheTitles = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "patchcountrystrings") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) patchcountrystrings = i;
+		patchcountrystrings = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "discart") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) discart = i;
+		discart = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "error002") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) error002 = i;
+		error002 = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "autonetwork") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) autonetwork = i;
+		autonetwork = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "InstallToDir") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) InstallToDir = i;
+		InstallToDir = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "GameSplit") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) GameSplit = i;
+		GameSplit = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "PlaylogUpdate") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) PlaylogUpdate = i;
+		PlaylogUpdate = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "Wiinnertag") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) Wiinnertag = i;
+		Wiinnertag = atoi(value);
 	}
 	else if(strcmp(name, "SelectedGame") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) SelectedGame = i;
+		SelectedGame = atoi(value);
 	}
 	else if(strcmp(name, "GameListOffset") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) GameListOffset = i;
+		GameListOffset = atoi(value);
 	}
 	else if(strcmp(name, "sneekVideoPatch") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) sneekVideoPatch = i;
+		sneekVideoPatch = atoi(value);
 	}
 	else if(strcmp(name, "UseSystemFont") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) UseSystemFont = i;
+		UseSystemFont = atoi(value);
 	}
 	else if(strcmp(name, "Hooktype") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) Hooktype = i;
+		Hooktype = atoi(value);
 	}
 	else if(strcmp(name, "WiirdDebugger") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) WiirdDebugger = i;
+		WiirdDebugger = atoi(value);
 	}
 	else if(strcmp(name, "WiirdDebuggerPause") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) WiirdDebuggerPause = i;
+		WiirdDebuggerPause = atoi(value);
 	}
 	else if(strcmp(name, "NandEmuMode") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) NandEmuMode = i;
+		NandEmuMode = atoi(value);
 	}
 	else if(strcmp(name, "NandEmuChanMode") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) NandEmuChanMode = i;
+		NandEmuChanMode = atoi(value);
 	}
 	else if(strcmp(name, "LoaderMode") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) LoaderMode = i;
+		LoaderMode = atoi(value);
 	}
 	else if(strcmp(name, "SearchMode") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) SearchMode = i;
+		SearchMode = atoi(value);
 	}
 	else if(strcmp(name, "GameAspectRatio") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) GameAspectRatio = i;
+		GameAspectRatio = atoi(value);
 	}
 	else if(strcmp(name, "UseChanLauncher") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1) UseChanLauncher = i;
+		UseChanLauncher = atoi(value);
 	}
 	else if(strcmp(name, "AdjustOverscanX") == 0)
 	{
@@ -668,6 +673,26 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if(strcmp(name, "AdjustOverscanY") == 0)
 	{
 		AdjustOverscanY = atoi(value);
+	}
+	else if(strcmp(name, "TooltipDelay") == 0)
+	{
+		TooltipDelay = atoi(value);
+	}
+	else if(strcmp(name, "BannerZoomDuration") == 0)
+	{
+		BannerZoomDuration = atoi(value);
+	}
+	else if(strcmp(name, "GameWindowMode") == 0)
+	{
+		GameWindowMode = atoi(value);
+	}
+	else if(strcmp(name, "BannerAnimStart") == 0)
+	{
+		BannerAnimStart = atoi(value);
+	}
+	else if(strcmp(name, "CacheBNRFiles") == 0)
+	{
+		CacheBNRFiles = atoi(value);
 	}
 	else if (strcmp(name, "InstallPartitions") == 0)
 	{
@@ -689,119 +714,204 @@ bool CSettings::SetSetting(char *name, char *value)
 		PointerSpeed = atof(value);
 		return true;
 	}
+	else if (strcmp(name, "BannerGridSpeed") == 0)
+	{
+		BannerGridSpeed = atof(value);
+		return true;
+	}
+	else if (strcmp(name, "BannerProjectionOffsetX") == 0)
+	{
+		BannerProjectionOffsetX = atof(value);
+		return true;
+	}
+	else if (strcmp(name, "BannerProjectionOffsetY") == 0)
+	{
+		BannerProjectionOffsetY = atof(value);
+		return true;
+	}
+	else if (strcmp(name, "BannerProjectionWidth") == 0)
+	{
+		BannerProjectionWidth = atof(value);
+		return true;
+	}
+	else if (strcmp(name, "BannerProjectionHeight") == 0)
+	{
+		BannerProjectionHeight = atof(value);
+		return true;
+	}
+	else if (strcmp(name, "GCBannerScale") == 0)
+	{
+		GCBannerScale = atof(value);
+		return true;
+	}
 	else if (strcmp(name, "ParentalBlocks") == 0)
 	{
 		ParentalBlocks = strtoul(value, 0, 16);
 		return true;
 	}
+	else if (strcmp(name, "DMLVideo") == 0)
+	{
+		DMLVideo = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "DMLNMM") == 0)
+	{
+		DMLNMM = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "DMLActivityLED") == 0)
+	{
+		DMLActivityLED = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "DMLPADHOOK") == 0)
+	{
+		DMLPADHOOK = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "DMLNoDisc") == 0)
+	{
+		DMLNoDisc = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "DMLDebug") == 0)
+	{
+		DMLDebug = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "GCInstallCompressed") == 0)
+	{
+		GCInstallCompressed = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "GCInstallAligned") == 0)
+	{
+		GCInstallAligned = atoi(value);
+		return true;
+	}
 	else if (strcmp(name, "covers_path") == 0)
 	{
-		strcpy(covers_path, value);
+		strlcpy(covers_path, value, sizeof(covers_path));
 		return true;
 	}
 	else if (strcmp(name, "covers2d_path") == 0)
 	{
-		strcpy(covers2d_path, value);
+		strlcpy(covers2d_path, value, sizeof(covers2d_path));
 		return true;
 	}
 	else if (strcmp(name, "coversFull_path") == 0)
 	{
-		strcpy(coversFull_path, value);
+		strlcpy(coversFull_path, value, sizeof(coversFull_path));
 		return true;
 	}
 	else if (strcmp(name, "theme_path") == 0)
 	{
-		strcpy(theme_path, value);
+		strlcpy(theme_path, value, sizeof(theme_path));
 		return true;
 	}
 	else if (strcmp(name, "theme") == 0)
 	{
-		strcpy(theme, value);
+		strlcpy(theme, value, sizeof(theme));
 		return true;
 	}
 	else if (strcmp(name, "disc_path") == 0)
 	{
-		strcpy(disc_path, value);
+		strlcpy(disc_path, value, sizeof(disc_path));
 		return true;
 	}
 	else if (strcmp(name, "language_path") == 0)
 	{
-		strcpy(language_path, value);
+		strlcpy(language_path, value, sizeof(language_path));
 		return true;
 	}
 	else if (strcmp(name, "languagefiles_path") == 0)
 	{
-		strcpy(languagefiles_path, value);
+		strlcpy(languagefiles_path, value, sizeof(languagefiles_path));
 		return true;
 	}
 	else if (strcmp(name, "TxtCheatcodespath") == 0)
 	{
-		strcpy(TxtCheatcodespath, value);
+		strlcpy(TxtCheatcodespath, value, sizeof(TxtCheatcodespath));
 		return true;
 	}
 	else if (strcmp(name, "titlestxt_path") == 0)
 	{
-		strcpy(titlestxt_path, value);
+		strlcpy(titlestxt_path, value, sizeof(titlestxt_path));
 		return true;
 	}
 	else if (strcmp(name, "dolpath") == 0)
 	{
-		strcpy(dolpath, value);
+		strlcpy(dolpath, value, sizeof(dolpath));
 		return true;
 	}
 	else if (strcmp(name, "ogg_path") == 0)
 	{
-		strcpy(ogg_path, value);
+		strlcpy(ogg_path, value, sizeof(ogg_path));
 		return true;
 	}
 	else if (strcmp(name, "update_path") == 0)
 	{
-		strcpy(update_path, value);
+		strlcpy(update_path, value, sizeof(update_path));
 		return true;
 	}
 	else if (strcmp(name, "homebrewapps_path") == 0)
 	{
-		strcpy(homebrewapps_path, value);
+		strlcpy(homebrewapps_path, value, sizeof(homebrewapps_path));
+		return true;
+	}
+	else if (strcmp(name, "BNRCachePath") == 0)
+	{
+		strlcpy(BNRCachePath, value, sizeof(BNRCachePath));
 		return true;
 	}
 	else if (strcmp(name, "Cheatcodespath") == 0)
 	{
-		strcpy(Cheatcodespath, value);
+		strlcpy(Cheatcodespath, value, sizeof(Cheatcodespath));
 		return true;
 	}
 	else if (strcmp(name, "BcaCodepath") == 0)
 	{
-		strcpy(BcaCodepath, value);
+		strlcpy(BcaCodepath, value, sizeof(BcaCodepath));
 		return true;
 	}
 	else if (strcmp(name, "WipCodepath") == 0)
 	{
-		strcpy(WipCodepath, value);
+		strlcpy(WipCodepath, value, sizeof(WipCodepath));
 		return true;
 	}
 	else if (strcmp(name, "WDMpath") == 0)
 	{
-		strcpy(WDMpath, value);
+		strlcpy(WDMpath, value, sizeof(WDMpath));
 		return true;
 	}
 	else if (strcmp(name, "returnTo") == 0)
 	{
-		strcpy(returnTo, value);
+		strlcpy(returnTo, value, sizeof(returnTo));
 		return true;
 	}
 	else if (strcmp(name, "WiinnertagPath") == 0)
 	{
-		strcpy(WiinnertagPath, value);
+		strlcpy(WiinnertagPath, value, sizeof(WiinnertagPath));
 		return true;
 	}
 	else if (strcmp(name, "NandEmuPath") == 0)
 	{
-		strcpy(NandEmuPath, value);
+		strlcpy(NandEmuPath, value, sizeof(NandEmuPath));
 		return true;
 	}
 	else if (strcmp(name, "NandEmuChanPath") == 0)
 	{
-		strcpy(NandEmuChanPath, value);
+		strlcpy(NandEmuChanPath, value, sizeof(NandEmuChanPath));
+		return true;
+	}
+	else if (strcmp(name, "GameCubePath") == 0)
+	{
+		strlcpy(GameCubePath, value, sizeof(GameCubePath));
+		return true;
+	}
+	else if (strcmp(name, "GameCubeSDPath") == 0)
+	{
+		strlcpy(GameCubeSDPath, value, sizeof(GameCubeSDPath));
 		return true;
 	}
 	else if (strcmp(name, "EnabledCategories") == 0)
@@ -830,56 +940,58 @@ bool CSettings::SetSetting(char *name, char *value)
 bool CSettings::FindConfig()
 {
 	bool found = false;
-	char CheckDevice[10];
+	char CheckDevice[12];
 	char CheckPath[300];
 
-	for (int i = SD; i < MAXDEVICES; ++i)
+	// Enumerate the devices supported by libogc.
+	for (int i = SD; (i < MAXDEVICES) && !found; ++i)
 	{
-		sprintf(CheckDevice, "%s:", DeviceName[i]);
+		snprintf(CheckDevice, sizeof(CheckDevice), "%s:", DeviceName[i]);
 
 		if(!found)
 		{
-			strcpy(BootDevice, CheckDevice);
+			// Check for the config file in the apps directory.
+			strlcpy(BootDevice, CheckDevice, sizeof(BootDevice));
 			snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/", BootDevice);
 			snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
 			found = CheckFile(CheckPath);
 		}
 		if(!found)
 		{
-			strcpy(BootDevice, CheckDevice);
+			// Check for the config file in the config directory.
+			strlcpy(BootDevice, CheckDevice, sizeof(BootDevice));
 			snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/", BootDevice);
 			snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
 			found = CheckFile(CheckPath);
 		}
 	}
 
-	if (!found)
+	FILE * testFp = NULL;
+	//! No existing config so try to find a place where we can write it too
+	for (int i = SD; (i < MAXDEVICES) && !found; ++i)
 	{
-		FILE * testFp = NULL;
-		//! No existing config so try to find a place where we can write it too
-		for (int i = SD; i < MAXDEVICES; ++i)
-		{
-			sprintf(CheckDevice, "%s:", DeviceName[i]);
+		sprintf(CheckDevice, "%s:", DeviceName[i]);
 
-			if (!found)
-			{
-				strcpy(BootDevice, CheckDevice);
-				snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/", BootDevice);
-				snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
-				testFp = fopen(CheckPath, "wb");
-				found = (testFp != NULL);
-				fclose(testFp);
-			}
-			if (!found)
-			{
-				strcpy(BootDevice, CheckDevice);
-				snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/", BootDevice);
-				CreateSubfolder(ConfigPath);
-				snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
-				testFp = fopen(CheckPath, "wb");
-				found = (testFp != NULL);
-				fclose(testFp);
-			}
+		if (!found)
+		{
+			// Check if we can write to the apps directory.
+			strlcpy(BootDevice, CheckDevice, sizeof(BootDevice));
+			snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/", BootDevice);
+			snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
+			testFp = fopen(CheckPath, "wb");
+			found = (testFp != NULL);
+			if(testFp) fclose(testFp);
+		}
+		if (!found)
+		{
+			// Check if we can write to the config directory.
+			strlcpy(BootDevice, CheckDevice, sizeof(BootDevice));
+			snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/", BootDevice);
+			CreateSubfolder(ConfigPath);
+			snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
+			testFp = fopen(CheckPath, "wb");
+			found = (testFp != NULL);
+			if(testFp) fclose(testFp);
 		}
 	}
 
@@ -960,8 +1072,8 @@ bool CSettings::LoadLanguage(const char *path, int lang)
 		ret = gettextLoadLanguage(path);
 		if (ret)
 		{
-			snprintf(language_path, sizeof(language_path), path);
-			strcpy(db_language, GetLangCode(language_path));
+			strlcpy(language_path, path, sizeof(language_path));
+			strlcpy(db_language, GetLangCode(language_path), sizeof(db_language));
 		}
 		else
 			return LoadLanguage(NULL, CONSOLE_DEFAULT);
@@ -970,7 +1082,7 @@ bool CSettings::LoadLanguage(const char *path, int lang)
 	{
 		char filepath[150];
 		char langpath[150];
-		snprintf(langpath, sizeof(langpath), "%s", languagefiles_path);
+		strlcpy(langpath, languagefiles_path, sizeof(langpath));
 		if (langpath[strlen(langpath) - 1] != '/')
 		{
 			char * ptr = strrchr(langpath, '/');
@@ -1026,10 +1138,10 @@ bool CSettings::LoadLanguage(const char *path, int lang)
 			snprintf(filepath, sizeof(filepath), "%s/korean.lang", langpath);
 		}
 
-		strcpy(db_language, GetLangCode(filepath));
+		strlcpy(db_language, GetLangCode(filepath), sizeof(db_language));
 		ret = gettextLoadLanguage(filepath);
 		if (ret)
-			snprintf(language_path, sizeof(language_path), filepath);
+			strlcpy(language_path, filepath, sizeof(language_path));
 	}
 
 	return ret;

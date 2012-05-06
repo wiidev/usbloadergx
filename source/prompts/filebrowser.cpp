@@ -79,9 +79,6 @@ int InitBrowsers()
 	{
 		if (strcmp(devoptab_list[i]->name, "stdnull") && devoptab_list[i]->write_r != NULL)
 		{
-			if(Settings.USBPort == 2 && strcmp(devoptab_list[i]->name, "sd") != 0)
-				continue;
-
 			snprintf(rootdir, sizeof(rootdir), "%s:/", devoptab_list[i]->name);
 			if ( DIR *dir = opendir( rootdir ) )
 			{
@@ -317,7 +314,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 	GuiImageData folderImgData(Resources::GetFile("icon_folder.png"), Resources::GetFileSize("icon_folder.png"));
 	GuiImage folderImg(&folderImgData);
 	GuiButton folderBtn(folderImg.GetWidth(), folderImg.GetHeight());
-	folderBtn.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	folderBtn.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	folderBtn.SetPosition(-210, -145);
 	folderBtn.SetImage(&folderImg);
 	folderBtn.SetTrigger(&trigA);
@@ -348,7 +345,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 		usbBtnImg.SetWidescreen(Settings.widescreen);
 	}
 	GuiButton usbBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
-	usbBtn.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+	usbBtn.SetAlignment(ALIGN_CENTER, ALIGN_BOTTOM);
 	usbBtn.SetPosition(0, -35);
 	usbBtn.SetLabel(&usbBtnTxt);
 	usbBtn.SetImage(&usbBtnImg);
@@ -366,7 +363,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 	okBtn.SetLabel(&okBtnTxt);
 
 	GuiFileBrowser fileBrowser(396, 248);
-	fileBrowser.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	fileBrowser.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	fileBrowser.SetPosition(0, 120);
 
 	GuiImageData Address(Resources::GetFile("addressbar_textbox.png"), Resources::GetFileSize("addressbar_textbox.png"));
@@ -377,7 +374,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 	AdressText.SetMaxWidth(Address.GetWidth() - 40, SCROLL_HORIZONTAL);
 	GuiImage AdressbarImg(&Address);
 	GuiButton Adressbar(Address.GetWidth(), Address.GetHeight());
-	Adressbar.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	Adressbar.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	Adressbar.SetPosition(0, fileBrowser.GetTop() - 45);
 	Adressbar.SetImage(&AdressbarImg);
 	Adressbar.SetLabel(&AdressText);

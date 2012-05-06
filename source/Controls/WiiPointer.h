@@ -32,6 +32,7 @@ private:
 	float posX, posY, angle;
 	u32 lastActivity;
 	GuiImageData * pointerImg;
+	static Mtx44 projection;
 };
 
 #endif /* WIIPOINTER_H_ */

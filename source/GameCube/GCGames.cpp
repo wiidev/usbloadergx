@@ -14,14 +14,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ****************************************************************************/
+#include <unistd.h>
 #include <dirent.h>
 #include <sys/stat.h>
 #include "GCGames.h"
 #include "FileOperations/fileops.h"
 #include "settings/GameTitles.h"
 #include "settings/CSettings.h"
+#include "prompts/GCDeleteMenu.h"
+#include "prompts/PromptWindows.h"
+#include "prompts/ProgressWindow.h"
+#include "language/gettext.h"
 #include "usbloader/wbfs/wbfs_fat.h"
 #include "utils/tools.h"
+#include "menu.h"
+#include "gecko.h"
 
 GCGames *GCGames::instance = NULL;
 
@@ -48,11 +55,8 @@ const char *GCGames::GetPath(const char *gameID) const
 	return "";
 }
 
-u32 GCGames::LoadGameList(const string &path)
+void GCGames::LoadGameList(const string &path, vector<struct discHdr> &headerList, vector<string> &pathList)
 {
-	PathList.clear();
-	HeaderList.clear();
-
 	struct discHdr tmpHdr;
 	struct stat st;
 	u8 id[8];
@@ -62,7 +66,7 @@ u32 GCGames::LoadGameList(const string &path)
 	struct dirent *dirent;
 
 	dir_iter = opendir(path.c_str());
-	if (!dir_iter) return 0;
+	if (!dir_iter) return;
 
 	while ((dirent = readdir(dir_iter)) != 0)
 	{
@@ -71,11 +75,6 @@ u32 GCGames::LoadGameList(const string &path)
 			continue;
 
 		if (dirname[0] == '.') continue;
-
-		snprintf(fpath, sizeof(fpath), "%s/%s/game.iso", path.c_str(), dirname);
-
-		if(stat(fpath, &st) != 0)
-			continue;
 
 		// reset id and title
 		memset(id, 0, sizeof(id));
@@ -99,29 +98,75 @@ u32 GCGames::LoadGameList(const string &path)
 				if(isGameID(id))
 				{
 					lay_a = true;
-					snprintf(fname_title, sizeof(fname_title), &dirname[7]);
+					snprintf(fname_title, sizeof(fname_title), "%s", &dirname[7]);
 				}
 			}
+		}
+		else if(len == 6 && isGameID((u8*)dirname)) {
+			memcpy(id, dirname, 6);
+			lay_a = true;
 		}
 
 		if(!lay_a && !lay_b)
 			memset(id, 0, sizeof(id));
 
+		bool found = false;
+		bool extracted = false;
+
+		for(int i = 0; i < 4; i++)
+		{
+			char name[50];
+			snprintf(name, sizeof(name), "%.6s.%s", (i % 2) == 0 ? "game" : (char *) id, i >= 2 ? "gcm" : "iso");
+			snprintf(fpath, sizeof(fpath), "%s%s/%s", path.c_str(), dirname, name);
+			if((found = (stat(fpath, &st) == 0)) == true)
+			 break;
+		}
+
+		if(!found)
+		{
+			snprintf(fpath, sizeof(fpath), "%s%s/sys/boot.bin", path.c_str(), dirname);
+			if(stat(fpath, &st) != 0)
+				continue;
+			// this game is extracted
+			extracted = true;
+		}
+
+		//! GAMEID was not found
+		if(!lay_a && !lay_b) {
+			// read game ID and title from disc header
+			// iso file
+			FILE *fp = fopen(fpath, "rb");
+			if (fp != NULL)
+			{
+				memset(&tmpHdr, 0, sizeof(tmpHdr));
+				fread(&tmpHdr, sizeof(struct discHdr), 1, fp);
+				fclose(fp);
+
+				if (tmpHdr.gc_magic == GCGames::MAGIC)
+				{
+					memcpy(id, tmpHdr.id, 6);
+					snprintf(fname_title, sizeof(fname_title), "%s", tmpHdr.title);
+				}
+			}
+		}
+
 		// if we have titles.txt entry use that
 		const char *title = GameTitles.GetTitle(id);
+
 		// if no titles.txt get title from dir or file name
 		if (strlen(title) == 0 && !Settings.ForceDiscTitles && strlen(fname_title) > 0)
 			title = fname_title;
 
 		if (*id != 0 && strlen(title) > 0)
 		{
+			string gamePath = string(path) + dirname + (extracted ? "/" : strrchr(fpath, '/'));
 			memset(&tmpHdr, 0, sizeof(tmpHdr));
 			memcpy(tmpHdr.id, id, 6);
 			strncpy(tmpHdr.title, title, sizeof(tmpHdr.title)-1);
 			tmpHdr.magic = GCGames::MAGIC;
-			tmpHdr.type = TYPE_GAME_GC_IMG;
-			HeaderList.push_back(tmpHdr);
-			PathList.push_back(dirname);
+			tmpHdr.type = extracted ? TYPE_GAME_GC_EXTRACTED : TYPE_GAME_GC_IMG;
+			headerList.push_back(tmpHdr);
+			pathList.push_back(gamePath);
 			continue;
 		}
 
@@ -130,15 +175,17 @@ u32 GCGames::LoadGameList(const string &path)
 		FILE *fp = fopen(fpath, "rb");
 		if (fp != NULL)
 		{
+			memset(&tmpHdr, 0, sizeof(tmpHdr));
 			fread(&tmpHdr, sizeof(struct discHdr), 1, fp);
 			fclose(fp);
 
 			if (tmpHdr.gc_magic == GCGames::MAGIC)
 			{
+				string gamePath = string(path) + dirname + (extracted ? "/" : strrchr(fpath, '/'));
 				tmpHdr.magic = tmpHdr.gc_magic;
-				tmpHdr.type = TYPE_GAME_GC_IMG;
-				HeaderList.push_back(tmpHdr);
-				PathList.push_back(dirname);
+				tmpHdr.type = extracted ? TYPE_GAME_GC_EXTRACTED : TYPE_GAME_GC_IMG;
+				headerList.push_back(tmpHdr);
+				pathList.push_back(gamePath);
 
 				// Save title for next start
 				GameTitles.SetGameTitle(tmpHdr.id, tmpHdr.title);
@@ -147,6 +194,42 @@ u32 GCGames::LoadGameList(const string &path)
 	}
 
 	closedir(dir_iter);
+}
+
+u32 GCGames::LoadAllGames(void)
+{
+	PathList.clear();
+	HeaderList.clear();
+	sdGCList.clear();
+	sdGCPathList.clear();
+
+	LoadGameList(Settings.GameCubePath, HeaderList, PathList);
+
+	if(strcmp(Settings.GameCubePath, Settings.GameCubeSDPath) != 0)
+	{
+		LoadGameList(Settings.GameCubeSDPath, sdGCList, sdGCPathList);
+
+		for(u32 i = 0; i < sdGCList.size(); ++i)
+		{
+			u32 n;
+			for(n = 0; n < HeaderList.size(); ++n)
+			{
+				//! replace the one loaded from USB with the same games on SD since we can load them directly
+				if(memcmp(HeaderList[n].id, sdGCList[i].id, 6) == 0)
+				{
+					memcpy(&HeaderList[n], &sdGCList[i], sizeof(struct discHdr));
+					PathList[n] = sdGCPathList[i];
+					break;
+				}
+			}
+
+			// Not available in the main GC path
+			if(n == HeaderList.size()) {
+				HeaderList.push_back(sdGCList[i]);
+				PathList.push_back(sdGCPathList[i]);
+			}
+		}
+	}
 
 	return HeaderList.size();
 }
@@ -157,21 +240,102 @@ bool GCGames::RemoveGame(const char *gameID)
 	if(*path == 0)
 		return false;
 
+	RemoveSDGame(gameID);
+
+	if(strcmp(Settings.GameCubePath, Settings.GameCubeSDPath) == 0)
+		return true;
+
+	struct discHdr *header = NULL;
+	for(u32 i = 0; i < HeaderList.size(); ++i)
+	{
+		if(strncmp(gameID, (char*)HeaderList[i].id, 6) == 0)
+		{
+			header = &HeaderList[i];
+			break;
+		}
+	}
+	if(!header)
+		return false;
+
 	char filepath[512];
 	int result = 0;
 	int ret;
 
-	// Remove game iso
-	snprintf(filepath, sizeof(filepath), "%s%s/game.iso", Settings.GameCubePath, path);
-	ret = RemoveFile(filepath);
-	if(ret != 0)
-		result = -1;
+	// the main path is the SD path as it is prefered, now delete USB
+	char cIsoPath[256];
+	snprintf(cIsoPath, sizeof(cIsoPath), "%s", path + strlen(Settings.GameCubeSDPath));
 
-	// Remove path
-	snprintf(filepath, sizeof(filepath), "%s%s", Settings.GameCubePath, path);
-	ret = RemoveFile(filepath);
-	if(ret != 0)
-		result = -1;
+	if(header->type == TYPE_GAME_GC_IMG)
+	{
+		// Remove game iso
+		snprintf(filepath, sizeof(filepath), "%s%s", Settings.GameCubePath, cIsoPath);
+		ret = RemoveFile(filepath);
+		if(ret != 0)
+			result = -1;
+
+		// Remove path
+		char *pathPtr = strrchr(filepath, '/');
+		if(pathPtr) *pathPtr = 0;
+		ret = RemoveFile(filepath);
+		if(ret != 0)
+			result = -1;
+	}
+	else if(header->type == TYPE_GAME_GC_EXTRACTED)
+	{
+		//! remove extracted gamecube game
+		snprintf(filepath, sizeof(filepath), "%s%s", Settings.GameCubePath, cIsoPath);
+		ret = RemoveDirectory(path);
+		if(ret < 0)
+			result = -1;
+	}
+
+	return (result == 0);
+}
+
+bool GCGames::RemoveSDGame(const char *gameID)
+{
+	const char *path = GetPath(gameID);
+	if(*path == 0)
+		return false;
+
+	struct discHdr *header = NULL;
+	for(u32 i = 0; i < HeaderList.size(); ++i)
+	{
+		if(strncmp(gameID, (char*)HeaderList[i].id, 6) == 0)
+		{
+			header = &HeaderList[i];
+			break;
+		}
+	}
+	if(!header)
+		return false;
+
+	char filepath[512];
+	int result = 0;
+	int ret;
+
+	if(header->type == TYPE_GAME_GC_IMG)
+	{
+		// Remove game iso
+		snprintf(filepath, sizeof(filepath), "%s", path);
+		ret = RemoveFile(filepath);
+		if(ret != 0)
+			result = -1;
+
+		// Remove path
+		char *pathPtr = strrchr(filepath, '/');
+		if(pathPtr) *pathPtr = 0;
+		ret = RemoveFile(filepath);
+		if(ret != 0)
+			result = -1;
+	}
+	else if(header->type == TYPE_GAME_GC_EXTRACTED)
+	{
+		//! remove extracted gamecube game
+		ret = RemoveDirectory(path);
+		if(ret < 0)
+			result = -1;
+	}
 
 	return (result == 0);
 }
@@ -183,11 +347,159 @@ float GCGames::GetGameSize(const char *gameID)
 		return 0.0f;
 
 	struct stat st;
-	char filepath[512];
-	snprintf(filepath, sizeof(filepath), "%s%s/game.iso", Settings.GameCubePath, path);
 
-	if(stat(filepath, &st) != 0)
+	if(stat(path, &st) != 0)
 		return 0.0f;
 
 	return ((float) st.st_size / GB_SIZE);
 }
+
+bool GCGames::IsInstalled(const char *gameID) const
+{
+	for(u32 n = 0; n < HeaderList.size(); n++)
+	{
+		if(memcmp(HeaderList[n].id, gameID, 6) == 0)
+			return true;
+	}
+	return false;
+}
+
+bool GCGames::CopyUSB2SD(const struct discHdr *header)
+{
+	const char *path = GetPath((char*)header->id);
+	if(*path == 0)
+		return false;
+
+	int choice = WindowPrompt(tr("The game is on USB."), tr("Do you want to copy the game to SD or delete a game on SD?"), tr("Copy"), tr("Show SD"), tr("Cancel"));
+	if(choice == 0)
+		return false;
+
+	const char *cpTitle = GameTitles.GetTitle(header);
+
+	if(choice == 2)
+	{
+		GCDeleteMenu gcDeleteMenu;
+		gcDeleteMenu.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
+		gcDeleteMenu.SetEffect(EFFECT_FADE, 20);
+		mainWindow->SetState(STATE_DISABLED);
+		mainWindow->Append(&gcDeleteMenu);
+
+		gcDeleteMenu.Show();
+
+		gcDeleteMenu.SetEffect(EFFECT_FADE, -20);
+		while(gcDeleteMenu.GetEffect() > 0) usleep(1000);
+
+		mainWindow->Remove(&gcDeleteMenu);
+		mainWindow->SetState(STATE_DEFAULT);
+
+		if(!WindowPrompt(tr("Do you want to copy now?"), cpTitle, tr("Yes"), tr("Cancel")))
+			return false;
+	}
+
+	struct statvfs sd_vfs;
+	if(statvfs(Settings.GameCubeSDPath, &sd_vfs) != 0)
+	{
+		WindowPrompt(tr("Error:"), tr("SD Card could not be accessed."), tr("OK"));
+		return false;
+	}
+
+	u64 filesize = 0;
+
+	if(header->type == TYPE_GAME_GC_IMG) {
+		filesize = FileSize(path);
+	}
+	else if(header->type == TYPE_GAME_GC_EXTRACTED) {
+		StartProgress(tr("Getting game folder size..."), tr("Please wait"), 0, true, true);
+		ShowProgress(0, 1);
+		filesize = FileSize(path);
+		ProgressStop();
+	}
+
+	while(((u64)sd_vfs.f_frsize * (u64)sd_vfs.f_bfree) < filesize)
+	{
+		choice = WindowPrompt(tr("Error: Not enough space on SD."), tr("Do you want to delete a game on SD?"), tr("Yes"), tr("Cancel"));
+		if(choice == 0)
+			return false;
+
+		GCDeleteMenu gcDeleteMenu;
+		gcDeleteMenu.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
+		gcDeleteMenu.SetEffect(EFFECT_FADE, 20);
+		mainWindow->SetState(STATE_DISABLED);
+		mainWindow->Append(&gcDeleteMenu);
+
+		gcDeleteMenu.Show();
+
+		gcDeleteMenu.SetEffect(EFFECT_FADE, -20);
+		while(gcDeleteMenu.GetEffect() > 0) usleep(1000);
+
+		mainWindow->Remove(&gcDeleteMenu);
+		mainWindow->SetState(STATE_DEFAULT);
+
+		statvfs(Settings.GameCubeSDPath, &sd_vfs);
+	}
+
+	const char *cIsoPath = path + strlen(Settings.GameCubePath);
+	char destPath[512];
+	snprintf(destPath, sizeof(destPath), "%s%s", Settings.GameCubeSDPath, cIsoPath);
+
+	int res = -1;
+
+	if(header->type == TYPE_GAME_GC_IMG)
+	{
+		ProgressCancelEnable(true);
+		StartProgress(tr("Copying GC game..."), cpTitle, 0, true, true);
+
+		char *ptr = strrchr(destPath, '/');
+		if(ptr) *ptr = 0;
+
+		CreateSubfolder(destPath);
+
+		snprintf(destPath, sizeof(destPath), "%s%s", Settings.GameCubeSDPath, cIsoPath);
+
+		res = CopyFile(path, destPath);
+	}
+	else if(header->type == TYPE_GAME_GC_EXTRACTED)
+	{
+		res = CopyDirectory(path, destPath);
+	}
+
+	// Refresh list
+	GCGames::Instance()->LoadAllGames();
+
+	ProgressStop();
+	ProgressCancelEnable(false);
+
+	if(res == PROGRESS_CANCELED)
+	{
+		if(header->type == TYPE_GAME_GC_IMG)
+		{
+			// remove file and path
+			RemoveFile(destPath);
+			char *ptr = strrchr(destPath, '/');
+			if(ptr) *ptr = 0;
+			RemoveFile(destPath);
+		}
+
+		WindowPrompt(tr("Copying Canceled"), 0, tr("OK"));
+		return false;
+	}
+	else if(res < 0)
+	{
+		if(header->type == TYPE_GAME_GC_IMG)
+		{
+			// remove file and path
+			RemoveFile(destPath);
+			char *ptr = strrchr(destPath, '/');
+			if(ptr) *ptr = 0;
+			RemoveFile(destPath);
+		}
+
+		WindowPrompt(tr("Error:"), tr("Failed copying file"), tr("OK"));
+		return false;
+	}
+	else
+	{
+		return WindowPrompt(tr("Successfully copied"), tr("Do you want to start the game now?"), tr("Yes"), tr("Cancel"));
+	}
+}
+

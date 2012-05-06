@@ -29,6 +29,7 @@
 #include <gctypes.h>
 #include <vector>
 #include "SettingsEnums.h"
+#include "GameCube/DML_Config.h"
 
 class CSettings
 {
@@ -48,6 +49,11 @@ class CSettings
 		//!Load a languagefile
 		//!\param language
 		bool LoadLanguage(const char *path, int language = -1);
+
+		//! System settings stuff
+		bool widescreen;
+		bool PAL50;
+		bool NTSC;
 
 		/** Variables **/
 		char BootDevice[10];
@@ -76,7 +82,9 @@ class CSettings
 		char WiinnertagPath[100];
 		char NandEmuPath[50];
 		char NandEmuChanPath[50];
+		char BNRCachePath[50];
 		char GameCubePath[100];
+		char GameCubeSDPath[100];
 		short videomode;
 		short language;
 		short ocarina;
@@ -101,7 +109,6 @@ class CSettings
 		short screensaver;
 		short partition;
 		short musicloopmode;
-		short widescreen;
 		short godmode;
 		short error002;
 		short titlesOverride; // db_titles
@@ -145,6 +152,25 @@ class CSettings
 		int AdjustOverscanX;
 		int AdjustOverscanY;
 		short ForceDiscTitles;
+		short TooltipDelay;
+		short GameWindowMode;
+		short CacheBNRFiles;
+		short BannerAnimStart;
+		float BannerGridSpeed;
+		short BannerZoomDuration;
+		float BannerProjectionOffsetX;
+		float BannerProjectionOffsetY;
+		float BannerProjectionWidth;
+		float BannerProjectionHeight;
+		float GCBannerScale;
+		short DMLVideo;
+		short DMLNMM;
+		short DMLActivityLED;
+		short DMLPADHOOK;
+		short DMLNoDisc;
+		short DMLDebug;
+		short GCInstallCompressed;
+		short GCInstallAligned;
 
 		// This variable is not saved to the settings file
 		bool FirstTimeRun;

@@ -1,15 +1,25 @@
-/*
- * gct.h
- * Class to handle Ocarina TXT Cheatfiles
+/****************************************************************************
+ * Copyright (C) 2009 nIxx
+ * Copyright (C) 2012 Dimok
  *
- */
-
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ ****************************************************************************/
 #ifndef _GCT_H
 #define _GCT_H
 
-#include <sstream>
-
-#define MAXCHEATS 300
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -19,11 +29,9 @@ class GCTCheats
 	private:
 		string sGameID;
 		string sGameTitle;
-		string sCheatName[MAXCHEATS];
-		string sCheats[MAXCHEATS];
-		string sCheatComment[MAXCHEATS];
-		int iCntCheats;
-
+		vector< string > sCheatName;
+		vector< string > sCheatComment;
+		vector< vector<unsigned int> > sCheats;
 	public:
 		//!Constructor
 		GCTCheats(void);
@@ -33,25 +41,15 @@ class GCTCheats
 		//!\param filename name of TXT file
 		//!\return error code
 		int openTxtfile(const char * filename);
-		//!Creates GCT file for one cheat
-		//!\param nr selected Cheat Numbers
-		//!\param filename name of GCT file
-		//!\return error code
-		int createGCT(int nr, const char * filename);
-		//!Creates GCT file from a buffer
-		//!\param chtbuffer buffer that holds the cheat data
-		//!\param filename name of GCT file
-		//!\return error code
-		int createGCT(const char * chtbuffer, const char * filename);
 		//!Creates GCT file
 		//!\param nr[] array of selected Cheat Numbers
 		//!\param cnt size of array
 		//!\param filename name of GCT file
 		//!\return error code
-		int createGCT(int nr[], int cnt, const char * filename);
+		int createGCT(const vector<int> &vCheats, const char * filename);
 		//!Gets Count cheats
 		//!\return Count cheats
-		int getCnt();
+		int getCnt() const { return sCheats.size(); }
 		//!Gets Game Name
 		//!\return Game Name
 		string getGameName(void);
@@ -60,16 +58,20 @@ class GCTCheats
 		string getGameID(void);
 		//!Gets cheat data
 		//!\return cheat data
-		string getCheat(int nr);
+		vector<unsigned int> getCheat(int nr);
 		//!Gets Cheat Name
 		//!\return Cheat Name
 		string getCheatName(int nr);
 		//!Gets Cheat Comment
 		//!\return Cheat Comment
 		string getCheatComment(int nr);
+		//!Clear all loaded cheats
+		void Clear(void);
 		//!Check if string is a code
 		//!\return true/false
-		bool IsCode(const std::string& s);
+		bool IsCode(const char *s);
+		//!Check if cheat is included in GCT buffer
+		bool IsCheatIncluded(int iCheat, const unsigned char *gctBuf, unsigned int gctSize);
 };
 
 #endif  /* _GCT_H */

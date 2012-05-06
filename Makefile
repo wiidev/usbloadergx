@@ -44,13 +44,15 @@ SOURCES		:=	source \
 				source/FileOperations \
 				source/ImageOperations \
 				source/SoundOperations \
+				source/SystemMenu \
 				source/utils \
 				source/utils/minizip \
 				source/usbloader/wbfs
 DATA		:=	data \
 				data/images \
 				data/fonts \
-				data/sounds
+				data/sounds \
+				data/binary
 INCLUDES	:=	source
 
 #---------------------------------------------------------------------------------
@@ -76,7 +78,7 @@ endif
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
 LIBS := -lcustomfat -lcustomntfs -lcustomext2fs -lvorbisidec -lmad -lfreetype \
-		-lgd -ljpeg -lpng -lzip -lm -lz -lwiiuse -lbte -lasnd -logc 
+		-lgd -ljpeg -lpng -lzip -lm -lz -lwiiuse -lbte -lasnd -logc
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
@@ -112,6 +114,7 @@ PCMFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.pcm)))
 WAVFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.wav)))
 DOLFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.dol)))
 MP3FILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.mp3)))
+BNRFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.bnr)))
 
 #---------------------------------------------------------------------------------
 # use CXX for linking C++ projects, CC for standard C
@@ -127,7 +130,7 @@ export OFILES	:=	$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) \
 					$(TTFFILES:.ttf=.ttf.o) $(PNGFILES:.png=.png.o) $(addsuffix .o,$(DOLFILES)) \
 					$(OGGFILES:.ogg=.ogg.o) $(PCMFILES:.pcm=.pcm.o) $(MP3FILES:.mp3=.mp3.o) \
 					$(WAVFILES:.wav=.wav.o) $(addsuffix .o,$(ELFFILES)) $(addsuffix .o,$(BINFILES)) \
-					$(CURDIR)/data/magic_patcher.o
+					$(BNRFILES:.bnr=.bnr.o) $(CURDIR)/data/magic_patcher.o
 
 #---------------------------------------------------------------------------------
 # build a list of include paths
@@ -163,7 +166,7 @@ channel:
 lang:
 	@[ -d build ] || mkdir -p build
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile language
-	
+
 #---------------------------------------------------------------------------------
 theme:
 	@[ -d build ] || mkdir -p build
@@ -263,8 +266,10 @@ language: $(wildcard $(PROJECTDIR)/Languages/*.lang) $(wildcard $(PROJECTDIR)/Th
 %.tmd.o	:	%.tmd
 	@echo $(notdir $<)
 	@bin2s -a 32 $< | $(AS) -o $(@)
-
-
+	
+%.bnr.o	:	%.bnr
+	@echo $(notdir $<)
+	@bin2s -a 32 $< | $(AS) -o $(@)
 
 export PATH		:=	$(PROJECTDIR)/gettext-bin:$(PATH)
 

@@ -29,19 +29,36 @@
 #define IN			3
 #define OUT			4
 
-GameWindow::GameWindow(int Selected, struct discHdr *dvd)
+GameWindow::GameWindow(GameBrowseMenu *m, struct discHdr *header)
 	: GuiWindow(472, 320)
+	, browserMenu(m)
 {
 	returnVal = -1;
-	gameSelected = Selected;
-	dvdheader = dvd;
+	gameSelected = 0;
+	dvdheader = NULL;
 	gameSound = NULL;
 	diskImgData = NULL;
 	diskImgData2 = NULL;
 	hidden = false;
 	reducedVol = false;
-	SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	SetPosition(0, -10);
+
+	int gameIdx;
+
+	//! get the game index to this header
+	for(gameIdx = 0; gameIdx < gameList.size(); ++gameIdx)
+	{
+		if(gameList[gameIdx] == header)
+		{
+			gameSelected = gameIdx;
+			break;
+		}
+	}
+
+	//! Set dvd header if the header does not match any of the list games
+	if(gameIdx == gameList.size())
+		dvdheader = header;
 
 	dialogBox = Resources::GetImageData(Settings.widescreen ? "wdialogue_box_startgame.png" : "dialogue_box_startgame.png");
 	btnOutline = Resources::GetImageData("button_dialogue_box.png");
@@ -72,7 +89,7 @@ GameWindow::GameWindow(int Selected, struct discHdr *dvd)
 	nameTxt->SetMaxWidth(350, SCROLL_HORIZONTAL);
 	nameBtn = new GuiButton(120, 50);
 	nameBtn->SetLabel(nameTxt);
-	nameBtn->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	nameBtn->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	nameBtn->SetPosition(0, -122);
 	nameBtn->SetSoundOver(btnSoundOver);
 	nameBtn->SetSoundClick(btnSoundClick2);
@@ -94,17 +111,17 @@ GameWindow::GameWindow(int Selected, struct discHdr *dvd)
 	diskImg->SetAngle(0);
 	diskImg2 = new GuiDiskCover;
 	diskImg2->SetWidescreen(Settings.widescreen);
-	diskImg2->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	diskImg2->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	diskImg2->SetPosition(0, -20);
 	diskImg2->SetAngle(0);
 	diskImg2->SetBeta(180);
 
 	playcntTxt = new GuiText((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - game window playcount text color"));
-	playcntTxt->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	playcntTxt->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	playcntTxt->SetPosition(-115, 45);
 
 	gameBtn = new GuiButton(160, 160);
-	gameBtn->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	gameBtn->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	gameBtn->SetPosition(0, -20);
 	gameBtn->SetImage(diskImg);
 	gameBtn->SetSoundOver(btnSoundOver);
@@ -122,7 +139,7 @@ GameWindow::GameWindow(int Selected, struct discHdr *dvd)
 	backBtn = new GuiButton(backBtnImg, backBtnImg, 1, 5, 0, 0, trigA, btnSoundOver, btnSoundClick2, 1);
 	backBtn->SetLabel(backBtnTxt);
 	backBtn->SetTrigger(trigB);
-	backBtn->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+	backBtn->SetAlignment(ALIGN_CENTER, ALIGN_BOTTOM);
 	backBtn->SetPosition(0, -40);
 
 	settingsBtnTxt = new GuiText(tr( "Settings" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
@@ -141,7 +158,7 @@ GameWindow::GameWindow(int Selected, struct discHdr *dvd)
 		FavoriteBtnImg[i] = new GuiImage;
 		FavoriteBtnImg[i]->SetWidescreen(Settings.widescreen);
 		FavoriteBtn[i] = new GuiButton(imgFavorite->GetWidth(), imgFavorite->GetHeight());
-		FavoriteBtn[i]->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+		FavoriteBtn[i]->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 		FavoriteBtn[i]->SetPosition(xPos, -60);
 		FavoriteBtn[i]->SetImage(FavoriteBtnImg[i]);
 		FavoriteBtn[i]->SetSoundOver(btnSoundOver);
@@ -167,7 +184,7 @@ GameWindow::GameWindow(int Selected, struct discHdr *dvd)
 	detailsBtnTxt = new GuiText(tr( "Details" ), 22, thColor("r=0 g=0 b=0 a=255 - game window details button text color"));
 	detailsBtnOverTxt = new GuiText(tr( "Details" ), 22, thColor("r=30 g=30 b=240 a=255 - game window details button over text color"));
 	detailsBtn = new GuiButton(detailsBtnTxt->GetTextWidth(), 25);
-	detailsBtn->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	detailsBtn->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	detailsBtn->SetPosition(120, 45);
 	detailsBtn->SetLabel(detailsBtnTxt);
 	detailsBtn->SetLabelOver(detailsBtnOverTxt);
@@ -283,6 +300,8 @@ void GameWindow::LoadGameSound(const struct discHdr * header)
 	if (Settings.gamesoundvolume == 0)
 		return;
 
+	BNRInstance::Instance()->Load(header);
+
 	if (gameSound)
 	{
 		gameSound->Stop();
@@ -290,20 +309,20 @@ void GameWindow::LoadGameSound(const struct discHdr * header)
 		gameSound = NULL;
 	}
 
-	u32 gameSoundDataLen;
-	const u8 *gameSoundData = NULL;
-
-	if(header->tid != 0)
-		gameSoundData = BNRInstance::Instance()->GetBannerSound(header->tid, &gameSoundDataLen,
-																(header->type == TYPE_GAME_EMUNANDCHAN) ? Settings.NandEmuChanPath : "");
-	else
-		gameSoundData = BNRInstance::Instance()->GetBannerSound(header->id, &gameSoundDataLen);
-
-	if (gameSoundData)
+	if(   (BNRInstance::Instance()->Get() != NULL)
+	   &&  gameBanner.LoadSound(BNRInstance::Instance()->Get(), BNRInstance::Instance()->GetSize())
+	   &&  gameBanner.getSound())
 	{
-		gameSound = new GuiSound(gameSoundData, gameSoundDataLen, Settings.gamesoundvolume, true);
+		gameSound = new GuiSound(gameBanner.getSound(), gameBanner.getSoundSize(), Settings.gamesoundvolume);
+	}
+	else if((header->type == TYPE_GAME_GC_IMG) || (header->type == TYPE_GAME_GC_DISC) || (header->type == TYPE_GAME_GC_EXTRACTED))
+	{
+		//! on game cube load the default sound
+		gameSound = new GuiSound(Resources::GetFile("gc_banner.ogg"), Resources::GetFileSize("gc_banner.ogg"), Settings.gamesoundvolume);
+	}
+	if(gameSound)
+	{
 		bgMusic->SetVolume(0);
-		reducedVol = true;
 		if (Settings.gamesound == 2)
 			gameSound->SetLoop(1);
 		gameSound->Play();
@@ -421,12 +440,16 @@ void GameWindow::SetWindowEffect(int direction, int in_out)
 	while(parentElement && (this->GetEffect() > 0 ||
 		  nameTxt->GetEffect() > 0 || diskImg->GetBetaRotateEffect()))
 	{
-		usleep(100);
+		usleep(1000);
 	}
 }
 
 void GameWindow::ChangeGame(int EffectDirection)
 {
+	//! Stop thread because all the extract functions are not thread safe
+	//! Let it finish the current loading though
+	BannerAsync::HaltThread();
+
 	struct discHdr * header = (dvdheader ? dvdheader : gameList[gameSelected]);
 	LoadGameSound(header);
 	LoadDiscImage(header->id);
@@ -472,6 +495,7 @@ void GameWindow::ChangeGame(int EffectDirection)
 
 	EffectDirection = EffectDirection == LEFT ? RIGHT : EffectDirection == RIGHT ? LEFT : NONE;
 	SetWindowEffect(EffectDirection, IN);
+	BannerAsync::ResumeThread();
 }
 
 void GameWindow::Hide(void)
@@ -501,7 +525,7 @@ int GameWindow::Run()
 
 	while(choice == -1)
 	{
-		usleep(1000);
+		usleep(50000);
 
 		if (shutdown) //for power button
 			Sys_Shutdown();
@@ -527,8 +551,13 @@ int GameWindow::MainLoop()
 		// If this function was left then the game start was canceled
 		GameWindow::BootGame(dvdheader ? dvdheader : gameList[gameSelected]);
 
+		// If it returns from that function reload the list
+		gameList.FilterList();
+
 		// Show the window again
 		Show();
+
+		gameBtn->ResetState();
 	}
 
 	else if (backBtn->GetState() == STATE_CLICKED) //back

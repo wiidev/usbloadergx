@@ -78,6 +78,8 @@ HardDriveSM::HardDriveSM()
 	Options->SetName(Idx++, "%s", tr( "Install Directories" ));
 	Options->SetName(Idx++, "%s", tr( "Game Split Size" ));
 	Options->SetName(Idx++, "%s", tr( "Install Partitions" ));
+	Options->SetName(Idx++, "%s", tr( "GC Install Compressed" ));
+	Options->SetName(Idx++, "%s", tr( "GC Install 32K Aligned" ));
 	Options->SetName(Idx++, "%s", tr( "Sync FAT32 FS Info" ));
 
 	OldSettingsPartition = Settings.partition;
@@ -155,6 +157,12 @@ void HardDriveSM::SetOptionValues()
 	else if(Settings.InstallPartitions == REMOVE_UPDATE_PARTITION)
 		Options->SetValue(Idx++, "%s", tr("Remove update"));
 
+	//! Settings: GC Install Compressed
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.GCInstallCompressed] ));
+
+	//! Settings: GC Install 32K Aligned
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.GCInstallAligned] ));
+
 	//! Settings: Sync FAT32 FS Info
 	Options->SetValue(Idx++, " ");
 }
@@ -195,14 +203,14 @@ int HardDriveSM::GetMenuInternal()
 	//! Settings: USB Port
 	else if (ret == ++Idx)
 	{
-		if(!IosLoader::IsHermesIOS())
+		if(!IosLoader::IsHermesIOS() && !IosLoader::IsD2X())
 		{
 			WindowPrompt(tr("ERROR:"), tr("USB Port changing is only supported on Hermes cIOS."), tr("OK"));
 			NewSettingsUSBPort = 0;
 			Settings.USBPort = 0;
 		}
 
-		else if (++NewSettingsUSBPort >= 2) // 2 = both ports
+		else if (++NewSettingsUSBPort >= 3) // 2 = both ports
 			NewSettingsUSBPort = 0;
 	}
 
@@ -240,6 +248,18 @@ int HardDriveSM::GetMenuInternal()
 				Settings.InstallPartitions = ONLY_GAME_PARTITION;
 				break;
 		}
+	}
+
+	//! Settings: GC Install Compressed
+	else if (ret == ++Idx)
+	{
+		if (++Settings.GCInstallCompressed >= MAX_ON_OFF) Settings.GCInstallCompressed = 0;
+	}
+
+	//! Settings: GC Install 32K Aligned
+	else if (ret == ++Idx)
+	{
+		if (++Settings.GCInstallAligned >= MAX_ON_OFF) Settings.GCInstallAligned = 0;
 	}
 
 	//! Settings: Sync FAT32 FS Info

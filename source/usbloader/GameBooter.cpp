@@ -61,41 +61,120 @@ extern "C"
 
 int GameBooter::BootGCMode(struct discHdr *gameHdr)
 {
-	if(gameHdr->type == TYPE_GAME_GC_IMG)
+	const char *RealPath = GCGames::Instance()->GetPath((const char *) gameHdr->id);
+
+	if(((gameHdr->type == TYPE_GAME_GC_IMG) || (gameHdr->type == TYPE_GAME_GC_EXTRACTED)) && strncmp(RealPath, "usb", 3) == 0)
 	{
-		char path[50];
-		snprintf(path, sizeof(path), "%sboot.bin", Settings.GameCubePath);
-		FILE *f = fopen(path, "wb");
-		if(f)
-		{
-			const char *gamePath = GCGames::Instance()->GetPath((const char *) gameHdr->id);
-			fwrite(gamePath, 1, strlen(gamePath) + 1, f);
-			fclose(f);
-		}
+		if(!GCGames::Instance()->CopyUSB2SD(gameHdr))
+			return 0;
+
+		RealPath = GCGames::Instance()->GetPath((const char *) gameHdr->id);
 	}
+
+	const char *gcPath = strchr(RealPath, '/');
+	if(!gcPath) gcPath = "";
+
+	char gamePath[255];
+	snprintf(gamePath, sizeof(gamePath), "%s", gcPath);
 
 	ExitApp();
 	gprintf("\nLoading BC for GameCube");
 
+	// check the settings
 	GameCFG * game_cfg = GameSettings.GetGameCFG(gameHdr->id);
 	u8 videoChoice = game_cfg->video == INHERIT ? Settings.videomode : game_cfg->video;
+	u8 ocarinaChoice = game_cfg->ocarina == INHERIT ? Settings.ocarina : game_cfg->ocarina;
+	u8 dmlVideoChoice = game_cfg->DMLVideo == INHERIT ? Settings.DMLVideo : game_cfg->DMLVideo;
+	u8 dmlNMMChoice = game_cfg->DMLNMM == INHERIT ? Settings.DMLNMM : game_cfg->DMLNMM;
+	u8 dmlActivityLEDChoice = game_cfg->DMLActivityLED == INHERIT ? Settings.DMLActivityLED : game_cfg->DMLActivityLED;
+	u8 dmlPADHookChoice = game_cfg->DMLPADHOOK == INHERIT ? Settings.DMLPADHOOK : game_cfg->DMLPADHOOK;
+	u8 dmlNoDiscChoice = game_cfg->DMLNoDisc == INHERIT ? Settings.DMLNoDisc : game_cfg->DMLNoDisc;
+	u8 dmlDebugChoice = game_cfg->DMLDebug == INHERIT ? Settings.DMLDebug : game_cfg->DMLDebug;
 
 	// Game ID
-	memcpy((u8 *)0x80000000, gameHdr->id, 6);
-	DCFlushRange((u8 *)0x80000000, 6);
-
-	if(gameHdr->type == TYPE_GAME_GC_IMG)
-	{
-		// Tell DML to boot the game from sd card
-		*(vu32*)0x80001800 = 0xB002D105;
-		DCFlushRange((u8 *)0x80001800, 4);
-		ICInvalidateRange((u8 *)0x80001800, 4);
-	}
+	memcpy((u8 *)Disc_ID, gameHdr->id, 6);
+	DCFlushRange((u8 *)Disc_ID, 6);
 
 	*(vu32*)0xCC003024 |= 7;
 
 	Disc_SelectVMode(videoChoice, true);
 	Disc_SetVMode();
+
+	DML_CFG *dml_config = (DML_CFG *) DML_CONFIG_ADDRESS;
+	memset(dml_config, 0, sizeof(DML_CFG));
+
+	// Magic and version for DML
+	dml_config->Magicbytes = DML_MAGIC;
+	dml_config->Version = DML_VERSION;
+
+	// Select disc source
+	if((gameHdr->type == TYPE_GAME_GC_IMG) || (gameHdr->type == TYPE_GAME_GC_EXTRACTED)) {
+		dml_config->Config |= DML_CFG_GAME_PATH;
+		strncpy(dml_config->GamePath, gamePath, sizeof(dml_config->GamePath));
+		// use no disc patch
+		if(dmlNoDiscChoice)
+			dml_config->Config |= DML_CFG_NODISC;
+
+		gprintf("DML: Loading game %s\n", dml_config->GamePath);
+	}
+	else {
+		dml_config->Config |= DML_CFG_BOOT_DISC;
+	}
+
+	// internal DML video mode methods
+	switch(dmlVideoChoice)
+	{
+	default:
+	case 0:
+		dml_config->VideoMode = DML_VID_DML_AUTO;
+		break;
+	case 1:
+		dml_config->VideoMode = DML_VID_NONE;
+		break;
+	case VIDEO_MODE_PAL50:
+		dml_config->VideoMode = DML_VID_FORCE_PAL50 | DML_VID_FORCE;
+		break;
+	case VIDEO_MODE_PAL60:
+		dml_config->VideoMode = DML_VID_FORCE_PAL60 | DML_VID_FORCE;
+		break;
+	case VIDEO_MODE_NTSC:
+		dml_config->VideoMode = DML_VID_FORCE_NTSC | DML_VID_FORCE;
+		break;
+	case VIDEO_MODE_PAL480P-1:
+		dml_config->VideoMode = DML_VID_FORCE_PAL60 | DML_VID_FORCE_PROG | DML_VID_PROG_PATCH | DML_VID_FORCE;
+		break;
+	case VIDEO_MODE_NTSC480P-1:
+		dml_config->VideoMode = DML_VID_FORCE_NTSC | DML_VID_FORCE_PROG | DML_VID_PROG_PATCH | DML_VID_FORCE;
+		break;
+	}
+
+	// setup cheat and path
+	if(ocarinaChoice) {
+		dml_config->Config |= DML_CFG_CHEATS | DML_CFG_CHEAT_PATH;
+		const char *CheatPath = strchr(Settings.Cheatcodespath, '/');
+		if(!CheatPath) CheatPath = "";
+		snprintf(dml_config->CheatPath, sizeof(dml_config->CheatPath), "%s%.6s.gct", CheatPath, (char *)gameHdr->id);
+
+		gprintf("DML: Loading cheat %s\n", dml_config->CheatPath);
+	}
+
+	// other DMl configs
+	if(dmlPADHookChoice)
+		dml_config->Config |= DML_CFG_PADHOOK;
+	if(dmlActivityLEDChoice)
+		dml_config->Config |= DML_CFG_ACTIVITY_LED;
+	if(dmlNMMChoice)
+		dml_config->Config |= dmlNMMChoice == ON ? DML_CFG_NMM : DML_CFG_NMM_DEBUG;
+	if(dmlDebugChoice)
+		dml_config->Config |= dmlDebugChoice == ON ? DML_CFG_DEBUGGER : DML_CFG_DEBUGWAIT;
+
+	DCFlushRange(dml_config, sizeof(DML_CFG));
+	memcpy((u8*)DML_CONFIG_ADDRESS_V1_2, dml_config, sizeof(DML_CFG));
+	DCFlushRange((u8*)DML_CONFIG_ADDRESS_V1_2, sizeof(DML_CFG));
+
+	// print the config set for DML
+	gprintf("DML: setup configuration 0x%X\n", dml_config->Config);
+	gprintf("DML: setup video mode 0x%X\n", dml_config->VideoMode);
 
 	syssram *sram = __SYS_LockSram();
 	if (*Video_Mode == VI_NTSC)
@@ -178,7 +257,7 @@ void GameBooter::SetupNandEmu(u8 NandEmuMode, const char *NandEmuPath, struct di
 		{
 			//! Set which partition to use (USB only)
 			partition = atoi(NandEmuPath+3)-1;
-			Set_Partition(partition);
+			Set_Partition(DeviceHandler::PartitionToPortPartition(partition));
 			DeviceHandler::Instance()->UnMount(USB1 + partition);
 		}
 		else
@@ -258,7 +337,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	if(Settings.Wiinnertag)
 		Wiinnertag::TagGame((const char *) gameHeader.id);
 
-	if(gameHeader.type == TYPE_GAME_GC_IMG || gameHeader.type == TYPE_GAME_GC_DISC)
+	if(gameHeader.type == TYPE_GAME_GC_IMG || gameHeader.type == TYPE_GAME_GC_DISC  || gameHdr->type == TYPE_GAME_GC_EXTRACTED)
 		return BootGCMode(&gameHeader);
 
 	AppCleanUp();
@@ -315,7 +394,10 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 
 	//! Modify Wii Message Board to display the game starting here (before Nand Emu)
 	if(Settings.PlaylogUpdate)
+	{
+		BNRInstance::Instance()->Load(&gameHeader);
 		Playlog_Update((char *) gameHeader.id, BNRInstance::Instance()->GetIMETTitle(CONF_GetLanguage()));
+	}
 
 	//! Load wip codes
 	load_wip_code(gameHeader.id);
@@ -386,12 +468,12 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	else
 	{
 		//! shutdown now and avoid later crashs with free if memory gets overwritten by channel
-		ShutDownDevices(usbport);
+		ShutDownDevices(DeviceHandler::PartitionToUSBPort(std::max(atoi(NandEmuPath+3)-1, 0)));
 		gprintf("\tChannel Boot\n");
-		// Load dol
-		AppEntrypoint = Channels::LoadChannel(gameHeader.tid);
 		/* Setup video mode */
 		Disc_SelectVMode(videoChoice, false);
+		// Load dol
+		AppEntrypoint = Channels::LoadChannel(gameHeader.tid);
 	}
 
 	//! No entrypoint found...back to HBC/SystemMenu

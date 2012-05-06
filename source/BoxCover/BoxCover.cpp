@@ -186,8 +186,8 @@ void BoxCover::Update(GuiTrigger * t)
 	if(frameCount-last_manual_move_frame < 250)
 		return;
 
-	Animation = sin(DegToRad(AnimRotate))*2.0f;
-	Animation2 = cos(DegToRad(AnimRotate))*5.0f;
+	Animation = sinf(DegToRad(AnimRotate))*2.0f;
+	Animation2 = cosf(DegToRad(AnimRotate))*5.0f;
 	AnimRotate += 0.1f;
 	if(AnimRotate > 360.0f)
 		AnimRotate = 0.0f;
@@ -199,9 +199,14 @@ void BoxCover::Draw()
 
 	GX_LoadProjectionMtx(projection, GX_PERSPECTIVE);
 
+	GX_ClearVtxDesc();
+	GX_InvVtxCache();
 	GX_SetVtxDesc(GX_VA_POS, GX_INDEX8);
 	GX_SetVtxDesc(GX_VA_CLR0, GX_DIRECT);
 	GX_SetVtxDesc(GX_VA_TEX0, GX_INDEX8);
+
+	//! don't draw inside of the box
+	GX_SetCullMode(GX_CULL_FRONT);
 
 	Mtx	modelView;
 	Mtx	modelView2;
@@ -304,6 +309,9 @@ void BoxCover::Draw()
 		}
 		GX_End();
 	}
+
+	//! stop cull
+	GX_SetCullMode(GX_CULL_NONE);
 
 	UpdateEffects();
 }

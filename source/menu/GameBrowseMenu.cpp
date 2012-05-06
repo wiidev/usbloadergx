@@ -4,11 +4,13 @@
 #include "GUI/gui_gamelist.h"
 #include "GUI/gui_gamegrid.h"
 #include "GUI/gui_gamecarousel.h"
+#include "GUI/GuiBannerGrid.h"
 #include "GUI/LoadCoverImage.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/gameinfo.h"
 #include "prompts/DiscBrowser.h"
 #include "prompts/GameWindow.hpp"
+#include "prompts/BannerWindow.hpp"
 #include "prompts/CategorySwitchPrompt.hpp"
 #include "prompts/CheckboxPrompt.hpp"
 #include "themes/CTheme.h"
@@ -23,6 +25,8 @@
 #include "settings/CGameStatistics.h"
 #include "settings/CGameSettings.h"
 #include "settings/GameTitles.h"
+#include "SystemMenu/SystemMenuResources.h"
+#include "system/IosLoader.h"
 #include "utils/StringTools.h"
 #include "utils/rockout.h"
 #include "utils/ShowError.h"
@@ -84,6 +88,8 @@ GameBrowseMenu::GameBrowseMenu()
 	imgarrangeList_gray = Resources::GetImageData("arrangeList_gray.png");
 	imgarrangeCarousel = Resources::GetImageData("arrangeCarousel.png");
 	imgarrangeCarousel_gray = Resources::GetImageData("arrangeCarousel_gray.png");
+	imgBannerGrid = Resources::GetImageData("arrangeBannerGrid.png");
+	imgBannerGrid_gray = Resources::GetImageData("arrangeBannerGrid_gray.png");
 	imgdvd = Resources::GetImageData("dvd.png");
 	imgdvd_gray = Resources::GetImageData("dvd_gray.png");
 	imgLock = Resources::GetImageData("lock.png");
@@ -261,6 +267,16 @@ GameBrowseMenu::GameBrowseMenu()
 	carouselBtn = new GuiButton(carouselBtnImg_g, carouselBtnImg_g, ALIGN_LEFT, ALIGN_TOP, 0, 0, trigA, btnSoundOver, btnSoundClick2, 1, carouselBtnTT, 15, 52, 1, 3);
 	carouselBtn->SetSelectable(false);
 
+	bannerGridBtnTT = new GuiTooltip(tr( "Display as a channel grid" ));
+	if (Settings.wsprompt) bannerGridBtnTT->SetWidescreen(Settings.widescreen);
+	bannerGridBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
+	bannerGridBtnImg = new GuiImage(imgBannerGrid);
+	bannerGridBtnImg->SetWidescreen(Settings.widescreen);
+	bannerGridBtnImg_g = new GuiImage(imgBannerGrid_gray);
+	bannerGridBtnImg_g->SetWidescreen(Settings.widescreen);
+	bannerGridBtn = new GuiButton(bannerGridBtnImg_g, bannerGridBtnImg_g, ALIGN_LEFT, ALIGN_TOP, 0, 0, trigA, btnSoundOver, btnSoundClick2, 1, bannerGridBtnTT, 15, 52, 1, 3);
+	bannerGridBtn->SetSelectable(false);
+
 	lockBtnTT = new GuiTooltip(NULL);
 	if (Settings.wsprompt) lockBtnTT->SetWidescreen(Settings.widescreen);
 	lockBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
@@ -390,6 +406,8 @@ GameBrowseMenu::~GameBrowseMenu()
 	delete imgarrangeGrid_gray;
 	delete imgarrangeCarousel;
 	delete imgarrangeCarousel_gray;
+	delete imgBannerGrid;
+	delete imgBannerGrid_gray;
 	delete imgarrangeList;
 	delete imgarrangeList_gray;
 	delete imgdvd;
@@ -431,6 +449,8 @@ GameBrowseMenu::~GameBrowseMenu()
 	delete gridBtnImg_g;
 	delete carouselBtnImg;
 	delete carouselBtnImg_g;
+	delete bannerGridBtnImg;
+	delete bannerGridBtnImg_g;
 	delete lockBtnImg;
 	delete lockBtnImg_g;
 	delete unlockBtnImg;
@@ -464,6 +484,7 @@ GameBrowseMenu::~GameBrowseMenu()
 	delete listBtn;
 	delete gridBtn;
 	delete carouselBtn;
+	delete bannerGridBtn;
 	delete lockBtn;
 	delete dvdBtn;
 	delete categBtn;
@@ -483,6 +504,7 @@ GameBrowseMenu::~GameBrowseMenu()
 	delete listBtnTT;
 	delete gridBtnTT;
 	delete carouselBtnTT;
+	delete bannerGridBtnTT;
 	delete lockBtnTT;
 	delete dvdBtnTT;
 	delete categBtnTT;
@@ -513,7 +535,7 @@ int GameBrowseMenu::Execute()
 
 	while(retMenu == MENU_NONE)
 	{
-		usleep(1000);
+		usleep(50000);
 
 		if (shutdown)
 			Sys_Shutdown();
@@ -631,6 +653,9 @@ void GameBrowseMenu::ReloadBrowser()
 
 	if (Settings.gameDisplay == LIST_MODE)
 	{
+		//! only one image, reload it since it won't be changeable later
+		if(gameList.size() == 1)
+			LoadCover(gameList[0]);
 		if(gameList.size() > 0)
 			Append(gameCoverImg);
 		DownloadBtn->SetSize(160, 224);
@@ -640,31 +665,35 @@ void GameBrowseMenu::ReloadBrowser()
 		gridBtn->SetImageOver(gridBtnImg_g);
 		carouselBtn->SetImage(carouselBtnImg_g);
 		carouselBtn->SetImageOver(carouselBtnImg_g);
+		bannerGridBtn->SetImage(bannerGridBtnImg_g);
+		bannerGridBtn->SetImageOver(bannerGridBtnImg_g);
 
-		favoriteBtn->SetPosition(Settings.widescreen ? thInt("230 - list layout favorite btn pos x widescreen") : thInt("188 - list layout favorite btn pos x"),
+		favoriteBtn->SetPosition(Settings.widescreen ? thInt("214 - list layout favorite btn pos x widescreen") : thInt("168 - list layout favorite btn pos x"),
 								thInt("13 - list layout favorite btn pos y"));
-		searchBtn->SetPosition(Settings.widescreen ? thInt("262 - list layout search btn pos x widescreen") : thInt("228 - list layout search btn pos x"),
+		searchBtn->SetPosition(Settings.widescreen ? thInt("246 - list layout search btn pos x widescreen") : thInt("208 - list layout search btn pos x"),
 								thInt("13 - list layout search btn pos y"));
-		sortBtn->SetPosition(Settings.widescreen ? thInt("294 - list layout abc/sort btn pos x widescreen") : thInt("268 - list layout abc/sort btn pos x"),
+		sortBtn->SetPosition(Settings.widescreen ? thInt("278 - list layout abc/sort btn pos x widescreen") : thInt("248 - list layout abc/sort btn pos x"),
 								thInt("13 - list layout abc/sort btn pos y"));
-		loaderModeBtn->SetPosition(Settings.widescreen ? thInt("326 - list layout loadermode btn pos x widescreen") : thInt("308 - list layout loadermode btn pos x"),
+		loaderModeBtn->SetPosition(Settings.widescreen ? thInt("310 - list layout loadermode btn pos x widescreen") : thInt("288 - list layout loadermode btn pos x"),
 								thInt("13 - list layout loadermode btn pos y"));
-		categBtn->SetPosition(Settings.widescreen ? thInt("358 - list layout category btn pos x widescreen") : thInt("348 - list layout category btn pos x"),
+		categBtn->SetPosition(Settings.widescreen ? thInt("342 - list layout category btn pos x widescreen") : thInt("328 - list layout category btn pos x"),
 								thInt("13 - list layout category btn pos y"));
-		listBtn->SetPosition(Settings.widescreen ? thInt("390 - list layout list btn pos x widescreen") : thInt("388 - list layout list btn pos x"),
+		listBtn->SetPosition(Settings.widescreen ? thInt("374 - list layout list btn pos x widescreen") : thInt("368 - list layout list btn pos x"),
 								thInt("13 - list layout list btn pos y"));
-		gridBtn->SetPosition(Settings.widescreen ? thInt("422 - list layout grid btn pos x widescreen") : thInt("428 - list layout grid btn pos x"),
+		gridBtn->SetPosition(Settings.widescreen ? thInt("406 - list layout grid btn pos x widescreen") : thInt("408 - list layout grid btn pos x"),
 								thInt("13 - list layout grid btn pos y"));
-		carouselBtn->SetPosition(Settings.widescreen ? thInt("454 - list layout carousel btn pos x widescreen") : thInt("468 - list layout carousel btn pos x"),
+		carouselBtn->SetPosition(Settings.widescreen ? thInt("438 - list layout carousel btn pos x widescreen") : thInt("448 - list layout carousel btn pos x"),
 								thInt("13 - list layout carousel btn pos y"));
-		lockBtn->SetPosition(Settings.widescreen ? thInt("486 - list layout lock btn pos x widescreen") : thInt("508 - list layout lock btn pos x"),
+		bannerGridBtn->SetPosition(Settings.widescreen ? thInt("470 - list layout bannergrid btn pos x widescreen") : thInt("488 - list bannergrid btn pos x"),
+								thInt("13 - list layout bannergrid btn pos y"));
+		lockBtn->SetPosition(Settings.widescreen ? thInt("502 - list layout lock btn pos x widescreen") : thInt("528 - list layout lock btn pos x"),
 								thInt("13 - list layout lock btn pos y"));
-		dvdBtn->SetPosition(Settings.widescreen ? thInt("518 - list layout dvd btn pos x widescreen") : thInt("548 - list layout dvd btn pos x"),
+		dvdBtn->SetPosition(Settings.widescreen ? thInt("534 - list layout dvd btn pos x widescreen") : thInt("568 - list layout dvd btn pos x"),
 								thInt("13 - list layout dvd btn pos y"));
 
 		gameBrowser = new GuiGameList(thInt("396 - game list layout width"), thInt("280 - game list layout height"), Settings.GameListOffset);
 		gameBrowser->SetPosition(thInt("200 - game list layout pos x"), thInt("49 - game list layout pos y"));
-		gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
+		gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTER);
 		gameBrowser->SetSelectedOption(Settings.SelectedGame);
 
 		//! Setup optional background image
@@ -685,31 +714,35 @@ void GameBrowseMenu::ReloadBrowser()
 		listBtn->SetImageOver(listBtnImg_g);
 		carouselBtn->SetImage(carouselBtnImg_g);
 		carouselBtn->SetImageOver(carouselBtnImg_g);
+		bannerGridBtn->SetImage(bannerGridBtnImg_g);
+		bannerGridBtn->SetImageOver(bannerGridBtnImg_g);
 
-		favoriteBtn->SetPosition(Settings.widescreen ? thInt("160 - grid layout favorite btn pos x widescreen") : thInt("120 - grid layout favorite btn pos x"),
+		favoriteBtn->SetPosition(Settings.widescreen ? thInt("144 - grid layout favorite btn pos x widescreen") : thInt("100 - grid layout favorite btn pos x"),
 								thInt("13 - grid layout favorite btn pos y"));
-		searchBtn->SetPosition(Settings.widescreen ? thInt("192 - grid layout search btn pos x widescreen") : thInt("160 - grid layout search btn pos x"),
+		searchBtn->SetPosition(Settings.widescreen ? thInt("176 - grid layout search btn pos x widescreen") : thInt("140 - grid layout search btn pos x"),
 								thInt("13 - grid layout search btn pos y"));
-		sortBtn->SetPosition(Settings.widescreen ? thInt("224 - grid layout abc/sort btn pos x widescreen") : thInt("200 - grid layout abc/sort btn pos x"),
+		sortBtn->SetPosition(Settings.widescreen ? thInt("208 - grid layout abc/sort btn pos x widescreen") : thInt("180 - grid layout abc/sort btn pos x"),
 								thInt("13 - grid layout abc/sort btn pos y"));
-		loaderModeBtn->SetPosition(Settings.widescreen ? thInt("256 - grid layout loadermode btn pos x widescreen") : thInt("240 - grid layout loadermode btn pos x"),
+		loaderModeBtn->SetPosition(Settings.widescreen ? thInt("240 - grid layout loadermode btn pos x widescreen") : thInt("220 - grid layout loadermode btn pos x"),
 								thInt("13 - grid layout loadermode btn pos y"));
-		categBtn->SetPosition(Settings.widescreen ? thInt("288 - grid layout category btn pos x widescreen") : thInt("280 - grid layout category btn pos x"),
+		categBtn->SetPosition(Settings.widescreen ? thInt("272 - grid layout category btn pos x widescreen") : thInt("260 - grid layout category btn pos x"),
 								thInt("13 - grid layout category btn pos y"));
-		listBtn->SetPosition(Settings.widescreen ? thInt("320 - grid layout list btn pos x widescreen") : thInt("320 - grid layout list btn pos x"),
+		listBtn->SetPosition(Settings.widescreen ? thInt("304 - grid layout list btn pos x widescreen") : thInt("300 - grid layout list btn pos x"),
 								thInt("13 - grid layout list btn pos y"));
-		gridBtn->SetPosition(Settings.widescreen ? thInt("352 - grid layout grid btn pos x widescreen") : thInt("360 - grid layout grid btn pos x"),
+		gridBtn->SetPosition(Settings.widescreen ? thInt("336 - grid layout grid btn pos x widescreen") : thInt("340 - grid layout grid btn pos x"),
 								thInt("13 - grid layout grid btn pos y"));
-		carouselBtn->SetPosition(Settings.widescreen ? thInt("384 - grid layout carousel btn pos x widescreen") : thInt("400 - grid layout carousel btn pos x"),
+		carouselBtn->SetPosition(Settings.widescreen ? thInt("368 - grid layout carousel btn pos x widescreen") : thInt("380 - grid layout carousel btn pos x"),
 								thInt("13 - grid layout carousel btn pos y"));
-		lockBtn->SetPosition(Settings.widescreen ? thInt("416 - grid layout lock btn pos x widescreen") : thInt("440 - grid layout lock btn pos x"),
+		bannerGridBtn->SetPosition(Settings.widescreen ? thInt("400 - grid layout bannergrid btn pos x widescreen") : thInt("420 - grid bannergrid btn pos x"),
+								thInt("13 - grid layout bannergrid btn pos y"));
+		lockBtn->SetPosition(Settings.widescreen ? thInt("432 - grid layout lock btn pos x widescreen") : thInt("460 - grid layout lock btn pos x"),
 								thInt("13 - grid layout lock btn pos y"));
-		dvdBtn->SetPosition(Settings.widescreen ? thInt("448 - grid layout dvd btn pos x widescreen") : thInt("480 - grid layout dvd btn pos x"),
+		dvdBtn->SetPosition(Settings.widescreen ? thInt("464 - grid layout dvd btn pos x widescreen") : thInt("500 - grid layout dvd btn pos x"),
 								thInt("13 - grid layout dvd btn pos y"));
 
 		gameBrowser = new GuiGameGrid(thInt("640 - game grid layout width"), thInt("400 - game grid layout height"), Settings.theme_path, Settings.GameListOffset);
 		gameBrowser->SetPosition(thInt("0 - game grid layout pos x"), thInt("20 - game grid layout pos y"));
-		gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
+		gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTER);
 
 		//! Setup optional background image
 		if(!gridBackground)
@@ -729,31 +762,35 @@ void GameBrowseMenu::ReloadBrowser()
 		listBtn->SetImageOver(listBtnImg_g);
 		gridBtn->SetImage(gridBtnImg_g);
 		gridBtn->SetImageOver(gridBtnImg_g);
+		bannerGridBtn->SetImage(bannerGridBtnImg_g);
+		bannerGridBtn->SetImageOver(bannerGridBtnImg_g);
 
-		favoriteBtn->SetPosition(Settings.widescreen ? thInt("160 - carousel layout favorite btn pos x widescreen") : thInt("120 - carousel layout favorite btn pos x"),
+		favoriteBtn->SetPosition(Settings.widescreen ? thInt("144 - carousel layout favorite btn pos x widescreen") : thInt("100 - carousel layout favorite btn pos x"),
 								thInt("13 - carousel layout favorite btn pos y"));
-		searchBtn->SetPosition(Settings.widescreen ? thInt("192 - carousel layout search btn pos x widescreen") : thInt("160 - carousel layout search btn pos x"),
+		searchBtn->SetPosition(Settings.widescreen ? thInt("176 - carousel layout search btn pos x widescreen") : thInt("140 - carousel layout search btn pos x"),
 								thInt("13 - carousel layout search btn pos y"));
-		sortBtn->SetPosition(Settings.widescreen ? thInt("224 - carousel layout abc/sort btn pos x widescreen") : thInt("200 - carousel layout abc/sort btn pos x"),
+		sortBtn->SetPosition(Settings.widescreen ? thInt("208 - carousel layout abc/sort btn pos x widescreen") : thInt("180 - carousel layout abc/sort btn pos x"),
 								thInt("13 - carousel layout abc/sort btn pos y"));
-		loaderModeBtn->SetPosition(Settings.widescreen ? thInt("256 - carousel layout loadermode btn pos x widescreen") : thInt("240 - carousel layout loadermode btn pos x"),
+		loaderModeBtn->SetPosition(Settings.widescreen ? thInt("240 - carousel layout loadermode btn pos x widescreen") : thInt("220 - carousel layout loadermode btn pos x"),
 								thInt("13 - carousel layout loadermode btn pos y"));
-		categBtn->SetPosition(Settings.widescreen ? thInt("288 - carousel layout category btn pos x widescreen") : thInt("280 - carousel layout category btn pos x"),
+		categBtn->SetPosition(Settings.widescreen ? thInt("272 - carousel layout category btn pos x widescreen") : thInt("260 - carousel layout category btn pos x"),
 								thInt("13 - carousel layout category btn pos y"));
-		listBtn->SetPosition(Settings.widescreen ? thInt("320 - carousel layout list btn pos x widescreen") : thInt("320 - carousel layout list btn pos x"),
+		listBtn->SetPosition(Settings.widescreen ? thInt("304 - carousel layout list btn pos x widescreen") : thInt("300 - carousel layout list btn pos x"),
 								thInt("13 - carousel layout list btn pos y"));
-		gridBtn->SetPosition(Settings.widescreen ? thInt("352 - carousel layout grid btn pos x widescreen") : thInt("360 - carousel layout grid btn pos x"),
+		gridBtn->SetPosition(Settings.widescreen ? thInt("336 - carousel layout grid btn pos x widescreen") : thInt("340 - carousel layout grid btn pos x"),
 								thInt("13 - carousel layout grid btn pos y"));
-		carouselBtn->SetPosition(Settings.widescreen ? thInt("384 - carousel layout carousel btn pos x widescreen") : thInt("400 - carousel layout carousel btn pos x"),
+		carouselBtn->SetPosition(Settings.widescreen ? thInt("368 - carousel layout carousel btn pos x widescreen") : thInt("380 - carousel layout carousel btn pos x"),
 								thInt("13 - carousel layout carousel btn pos y"));
-		lockBtn->SetPosition(Settings.widescreen ? thInt("416 - carousel layout lock btn pos x widescreen") : thInt("440 - carousel layout lock btn pos x"),
+		bannerGridBtn->SetPosition(Settings.widescreen ? thInt("400 - carousel layout bannergrid btn pos x widescreen") : thInt("420 - carousel bannergrid btn pos x"),
+								thInt("13 - carousel layout bannergrid btn pos y"));
+		lockBtn->SetPosition(Settings.widescreen ? thInt("432 - carousel layout lock btn pos x widescreen") : thInt("460 - carousel layout lock btn pos x"),
 								thInt("13 - carousel layout lock btn pos y"));
-		dvdBtn->SetPosition(Settings.widescreen ? thInt("448 - carousel layout dvd btn pos x widescreen") : thInt("480 - carousel layout dvd btn pos x"),
+		dvdBtn->SetPosition(Settings.widescreen ? thInt("464 - carousel layout dvd btn pos x widescreen") : thInt("500 - carousel layout dvd btn pos x"),
 								thInt("13 - carousel layout dvd btn pos y"));
 
 		gameBrowser = new GuiGameCarousel(thInt("640 - game carousel layout width"), thInt("400 - game carousel layout height"), Settings.theme_path, Settings.GameListOffset);
 		gameBrowser->SetPosition(thInt("0 - game carousel layout pos x"), thInt("-20 - game carousel layout pos y"));
-		gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
+		gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTER);
 
 		//! Setup optional background image
 		if(!carouselBackground)
@@ -763,7 +800,45 @@ void GameBrowseMenu::ReloadBrowser()
 		else
 			bgImg->SetImage(background);
 	}
+	else if(Settings.gameDisplay == BANNERGRID_MODE)
+	{
+		DownloadBtn->SetSize(0, 0);
+		UpdateGameInfoText(NULL);
+		bannerGridBtn->SetImage(bannerGridBtnImg);
+		bannerGridBtn->SetImageOver(bannerGridBtnImg);
+		listBtn->SetImage(listBtnImg_g);
+		listBtn->SetImageOver(listBtnImg_g);
+		gridBtn->SetImage(gridBtnImg_g);
+		gridBtn->SetImageOver(gridBtnImg_g);
+		carouselBtn->SetImage(carouselBtnImg_g);
+		carouselBtn->SetImageOver(carouselBtnImg_g);
 
+		favoriteBtn->SetPosition(Settings.widescreen ? thInt("144 - bannergrid layout favorite btn pos x widescreen") : thInt("100 - bannergrid layout favorite btn pos x"),
+								thInt("13 - bannergrid layout favorite btn pos y"));
+		searchBtn->SetPosition(Settings.widescreen ? thInt("176 - bannergrid layout search btn pos x widescreen") : thInt("140 - bannergrid layout search btn pos x"),
+								thInt("13 - bannergrid layout search btn pos y"));
+		sortBtn->SetPosition(Settings.widescreen ? thInt("208 - bannergrid layout abc/sort btn pos x widescreen") : thInt("180 - bannergrid layout abc/sort btn pos x"),
+								thInt("13 - bannergrid layout abc/sort btn pos y"));
+		loaderModeBtn->SetPosition(Settings.widescreen ? thInt("240 - bannergrid layout loadermode btn pos x widescreen") : thInt("220 - bannergrid layout loadermode btn pos x"),
+								thInt("13 - bannergrid layout loadermode btn pos y"));
+		categBtn->SetPosition(Settings.widescreen ? thInt("272 - bannergrid layout category btn pos x widescreen") : thInt("260 - bannergrid layout category btn pos x"),
+								thInt("13 - bannergrid layout category btn pos y"));
+		listBtn->SetPosition(Settings.widescreen ? thInt("304 - bannergrid layout list btn pos x widescreen") : thInt("300 - bannergrid layout list btn pos x"),
+								thInt("13 - bannergrid layout list btn pos y"));
+		gridBtn->SetPosition(Settings.widescreen ? thInt("336 - bannergrid layout grid btn pos x widescreen") : thInt("340 - bannergrid layout grid btn pos x"),
+								thInt("13 - bannergrid layout grid btn pos y"));
+		carouselBtn->SetPosition(Settings.widescreen ? thInt("368 - bannergrid layout carousel btn pos x widescreen") : thInt("380 - bannergrid layout carousel btn pos x"),
+								thInt("13 - bannergrid layout carousel btn pos y"));
+		bannerGridBtn->SetPosition(Settings.widescreen ? thInt("400 - bannergrid layout bannergrid btn pos x widescreen") : thInt("420 - bannergrid bannergrid btn pos x"),
+								thInt("13 - bannergrid layout bannergrid btn pos y"));
+		lockBtn->SetPosition(Settings.widescreen ? thInt("432 - bannergrid layout lock btn pos x widescreen") : thInt("460 - bannergrid layout lock btn pos x"),
+								thInt("13 - bannergrid layout lock btn pos y"));
+		dvdBtn->SetPosition(Settings.widescreen ? thInt("464 - bannergrid layout dvd btn pos x widescreen") : thInt("500 - bannergrid layout dvd btn pos x"),
+								thInt("13 - bannergrid layout dvd btn pos y"));
+
+		gameBrowser = new GuiBannerGrid(Settings.GameListOffset + Settings.SelectedGame);
+		gameBrowser->SetPosition(thInt("0 - game bannergrid layout pos x"), thInt("0 - game bannergrid layout pos y"));
+	}
 
 	if (thInt("1 - show hdd info: 1 for on and 0 for off") == 1) //force show hdd info
 		Append(usedSpaceTxt);
@@ -785,7 +860,7 @@ void GameBrowseMenu::ReloadBrowser()
 	if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_COVER_DOWNLOADS))
 		Append(DownloadBtn);
 
-	if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_GAMEID_CHANGE))
+	if ((Settings.gameDisplay == LIST_MODE) && (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_GAMEID_CHANGE)))
 		Append(idBtn);
 
 	Append(favoriteBtn);
@@ -796,6 +871,7 @@ void GameBrowseMenu::ReloadBrowser()
 	Append(gridBtn);
 	Append(loaderModeBtn);
 	Append(carouselBtn);
+	Append(bannerGridBtn);
 	Append(lockBtn);
 	Append(dvdBtn);
 
@@ -853,7 +929,7 @@ int GameBrowseMenu::MainLoop()
 		int choice = WindowPrompt(0, fmt("%s %sGameList ?", tr( "Save Game List to" ), Settings.update_path), "TXT", "CSV", tr( "Back" ));
 		if (choice)
 		{
-			if (save_gamelist(choice - 1))
+			if (save_gamelist(choice == 2))
 				WindowPrompt(0, tr( "Saved" ), tr( "OK" ));
 			else
 				WindowPrompt(tr( "Error" ), tr( "Could not save." ), tr( "OK" ));
@@ -905,21 +981,24 @@ int GameBrowseMenu::MainLoop()
 	else if (sdcardBtn->GetState() == STATE_CLICKED)
 	{
 		gprintf("\tsdCardBtn Clicked\n");
-		HaltGui();
-		bgMusic->Pause();
-		Settings.Save();
-		DeviceHandler::Instance()->UnMountSD();
-		DeviceHandler::Instance()->MountSD();
-		gprintf("\tLoading config...%s\n", Settings.Load() ? "done" : "failed");
-		gprintf("\tLoading language...%s\n", Settings.LoadLanguage(Settings.language_path, CONSOLE_DEFAULT) ? "done" : "failed");
-		gprintf("\tLoading game settings...%s\n", GameSettings.Load(Settings.ConfigPath) ? "done" : "failed");
-		gprintf("\tLoading game statistics...%s\n", GameStatistics.Load(Settings.ConfigPath) ? "done" : "failed");
-		gprintf("\tLoading font...%s\n", Theme::LoadFont(Settings.theme_path) ? "done" : "failed (using default)");
-		gprintf("\tLoading theme...%s\n", Theme::Load(Settings.theme) ? "done" : "failed (using default)");
-		bgMusic->Resume();
-		gameList.FilterList();
-		ReloadBrowser();
-		ResumeGui();
+		if(WindowPrompt(tr("Are you sure you want to remount SD?"), tr("The application might crash if there is currently a read/write access to the SD card!"), tr("Yes"), tr("Cancel")))
+		{
+			HaltGui();
+			bgMusic->Pause();
+			Settings.Save();
+			DeviceHandler::Instance()->UnMountSD();
+			DeviceHandler::Instance()->MountSD();
+			gprintf("\tLoading config...%s\n", Settings.Load() ? "done" : "failed");
+			gprintf("\tLoading language...%s\n", Settings.LoadLanguage(Settings.language_path, CONSOLE_DEFAULT) ? "done" : "failed");
+			gprintf("\tLoading game settings...%s\n", GameSettings.Load(Settings.ConfigPath) ? "done" : "failed");
+			gprintf("\tLoading game statistics...%s\n", GameStatistics.Load(Settings.ConfigPath) ? "done" : "failed");
+			gprintf("\tLoading font...%s\n", Theme::LoadFont(Settings.theme_path) ? "done" : "failed (using default)");
+			gprintf("\tLoading theme...%s\n", Theme::Load(Settings.theme) ? "done" : "failed (using default)");
+			bgMusic->Resume();
+			gameList.FilterList();
+			ReloadBrowser();
+			ResumeGui();
+		}
 		sdcardBtn->ResetState();
 	}
 
@@ -1079,6 +1158,22 @@ int GameBrowseMenu::MainLoop()
 		carouselBtn->ResetState();
 	}
 
+	else if (bannerGridBtn->GetState() == STATE_CLICKED)
+	{
+		gprintf("\tbannerGridBtn Clicked\n");
+		if(!SystemMenuResources::Instance()->IsLoaded()) {
+			WindowPrompt(tr( "Error:" ), tr( "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version." ), tr( "OK" ));
+			bannerGridBtn->ResetState();
+			return MENU_NONE;
+		}
+		if (Settings.gameDisplay != BANNERGRID_MODE)
+		{
+			Settings.gameDisplay = BANNERGRID_MODE;
+			ReloadBrowser();
+		}
+		bannerGridBtn->ResetState();
+	}
+
 	else if (homebrewBtn->GetState() == STATE_CLICKED)
 	{
 		gprintf("\thomebrewBtn Clicked\n");
@@ -1172,7 +1267,7 @@ int GameBrowseMenu::MainLoop()
 			return returnMenu;
 		}
 
-		int choice = CheckboxWindow(tr( "Select titles sources." ), 0, tr( "Wii Games" ), tr("GC Games"), tr( "Nand Channels" ), tr("EmuNand Channels"), 0, 0, Settings.LoaderMode);
+		int choice = CheckboxWindow(tr( "Select titles sources." ), 0, tr( "Wii Games" ), tr( "Nand Channels" ), tr("EmuNand Channels"), tr("GC Games"), 0, 0, Settings.LoaderMode);
 		if(choice != CheckedNone && choice != Settings.LoaderMode)
 		{
 			Settings.LoaderMode = choice;
@@ -1407,11 +1502,6 @@ void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
 int GameBrowseMenu::OpenClickedGame(struct discHdr *header)
 {
 	int choice = -1;
-	int gameSelected = GetSelectedGame();
-	if(header == dvdheader)
-		gameSelected = 0;
-	else if(gameSelected < 0 || gameSelected >= gameList.size())
-		return -1;
 
 	if (searchBar)
 	{
@@ -1422,6 +1512,7 @@ int GameBrowseMenu::OpenClickedGame(struct discHdr *header)
 
 	rockout(header);
 
+	SetAllowDim(false);
 	SetState(STATE_DISABLED);
 	if(gameBrowser)
 		gameBrowser->SetState(STATE_DISABLED);
@@ -1432,16 +1523,20 @@ int GameBrowseMenu::OpenClickedGame(struct discHdr *header)
 	if (Settings.quickboot) { //quickboot game
 		GameWindow::BootGame(header);
 	}
-	else
+	else if(Settings.GameWindowMode == GAMEWINDOW_BANNER)
 	{
-		GameWindow * GamePrompt = new GameWindow(gameSelected, dvdheader == header ? dvdheader : 0);
-		GamePrompt->SetGameBrowseMenu(this);
-		mainWindow->Append(GamePrompt);
+		BannerWindow GamePrompt(this, header);
+		mainWindow->Append(&GamePrompt);
 
-		choice = GamePrompt->Run();
-		gameSelected = GamePrompt->GetSelectedGame();
+		choice = GamePrompt.Run();
+	}
+	else if(Settings.GameWindowMode == GAMEWINDOW_DISC)
+	{
+		SetAllowDim(true);
+		GameWindow GamePrompt(this, header);
+		mainWindow->Append(&GamePrompt);
 
-		delete GamePrompt;
+		choice = GamePrompt.Run();
 	}
 
 	if (choice == 1)
@@ -1459,6 +1554,8 @@ int GameBrowseMenu::OpenClickedGame(struct discHdr *header)
 	rockout(0);
 
 	SetState(STATE_DEFAULT);
+	SetAllowDim(true);
+
 	if(gameBrowser)
 		gameBrowser->SetState(STATE_DEFAULT);
 
@@ -1501,7 +1598,7 @@ void GameBrowseMenu::UpdateCallback(void * e)
 void GameBrowseMenu::UpdateFreeSpace(void * arg)
 {
 	char spaceinfo[30];
-	memset(spaceinfo, 0, 30);
+	spaceinfo[0] = 0;
 
 	if(Settings.ShowFreeSpace)
 	{
@@ -1512,11 +1609,11 @@ void GameBrowseMenu::UpdateFreeSpace(void * arg)
 			if (strcmp(Settings.db_language, "JA") == 0)
 			{
 				// needs to be "total...used" for Japanese
-				sprintf(spaceinfo, "%.2fGB %s %.2fGB %s", (freespace + used), tr( "of" ), freespace, tr( "free" ));
+				snprintf(spaceinfo, sizeof(spaceinfo), "%.2fGB %s %.2fGB %s", (freespace + used), tr( "of" ), freespace, tr( "free" ));
 			}
 			else
 			{
-				sprintf(spaceinfo, "%.2fGB %s %.2fGB %s", freespace, tr( "of" ), (freespace + used), tr( "free" ));
+				snprintf(spaceinfo, sizeof(spaceinfo), "%.2fGB %s %.2fGB %s", freespace, tr( "of" ), (freespace + used), tr( "free" ));
 			}
 		}
 	}

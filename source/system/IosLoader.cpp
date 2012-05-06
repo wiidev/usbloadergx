@@ -18,7 +18,6 @@
 #include "utils/tools.h"
 #include "gecko.h"
 
-#define CheckAHBPROT()	(read32(0x0D800064) == 0xFFFFFFFF)
 #define MEM2_PROT		0x0D8B420A
 #define ES_MODULE_START	((u16 *)0x939F0000)
 #define ES_MODULE_END	(ES_MODULE_START + 0x4000)
@@ -170,12 +169,12 @@ s32 IosLoader::ReloadIosKeepingRights(s32 ios)
 	if (CheckAHBPROT())
 	{
 		static const u16 ticket_check[] = {
-			0x685B,          // ldr  r3, [r3, #4] ; Get TMD pointer
-			0x22EC, 0x0052,  // movs r2, 0x1D8    ; Set offset of access rights field in TMD
-			0x189B,          // adds r3, r3, r2   ; Add offset to TMD pointer
-			0x681B,          // ldr  r3, [r3]     ; Load access rights. We'll hack it with full access rights!!!
-			0x4698,          // mov  r8, r3       ; Store it for the DVD video bitcheck later
-			0x07DB           // lsls r3, r3, 0x1F ; check AHBPROT bit
+			0x685B,		  // ldr  r3, [r3, #4] ; Get TMD pointer
+			0x22EC, 0x0052,  // movs r2, 0x1D8	; Set offset of access rights field in TMD
+			0x189B,		  // adds r3, r3, r2   ; Add offset to TMD pointer
+			0x681B,		  // ldr  r3, [r3]	 ; Load access rights. We'll hack it with full access rights!!!
+			0x4698,		  // mov  r8, r3	   ; Store it for the DVD video bitcheck later
+			0x07DB		   // lsls r3, r3, 0x1F ; check AHBPROT bit
 		};
 
 		/* Disable MEM 2 protection */
@@ -277,7 +276,7 @@ iosinfo_t *IosLoader::GetIOSInfo(s32 ios)
 		return NULL;
 	}
 
-	sprintf(filepath, "/title/%08x/%08x/content/%08x.app", 0x00000001, ios, *(u8 *)((u32)TMD+0x1E7));
+	snprintf(filepath, sizeof(filepath), "/title/%08x/%08x/content/%08x.app", 0x00000001, ios, *(u8 *)((u32)TMD+0x1E7));
 
 	free(TMD);
 

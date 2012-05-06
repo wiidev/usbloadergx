@@ -14,6 +14,7 @@
 #include "usbloader/GameList.h"
 #include "language/gettext.h"
 #include "GUI/gui.h"
+#include "GUI/gui_numpad.h"
 #include "GUI/gui_diskcover.h"
 #include "GUI/Text.hpp"
 #include "settings/CGameStatistics.h"
@@ -90,16 +91,24 @@ int OnScreenNumpad(char * var, u32 maxlen)
 
 	while (save == -1)
 	{
-		VIDEO_WaitVSync();
+		usleep(50000);
 
 		if (okBtn.GetState() == STATE_CLICKED)
 			save = 1;
-		else if (cancelBtn.GetState() == STATE_CLICKED) save = 0;
+		else if (cancelBtn.GetState() == STATE_CLICKED)
+			save = 0;
 	}
 
 	if (save == 1)
 	{
-		snprintf(var, maxlen, "%s", numpad.kbtextstr);
+		snprintf(var, maxlen, "%s", numpad.GetText());
+
+		// convert all , to . characters
+		for(u32 i = 0; i < maxlen; ++i)
+		{
+			if(var[i] == ',')
+				var[i] = '.';
+		}
 	}
 
 	HaltGui();
@@ -118,7 +127,6 @@ int OnScreenNumpad(char * var, u32 maxlen)
  ***************************************************************************/
 int OnScreenKeyboard(char * var, u32 maxlen, int min, bool hide)
 {
-
 	int save = -1;
 
 	gprintf("\nOnScreenKeyboard(%s, %i, %i) \n\tkeyset = %i", var, maxlen, min, Settings.keyset);
@@ -163,11 +171,12 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min, bool hide)
 
 	while (save == -1)
 	{
-		VIDEO_WaitVSync();
+		usleep(50000);
 
 		if (okBtn.GetState() == STATE_CLICKED)
 			save = 1;
-		else if (cancelBtn.GetState() == STATE_CLICKED) save = 0;
+		else if (cancelBtn.GetState() == STATE_CLICKED)
+			save = 0;
 	}
 
 	if (save)
@@ -204,14 +213,16 @@ void WindowCredits()
 	bool exit = false;
 	int i = 0;
 	int y = 20;
+	float oldFontScale = Settings.FontScaleFactor;
+	Settings.FontScaleFactor = 1.0f;
 
 	GuiWindow creditsWindow(screenwidth, screenheight);
 	GuiWindow creditsWindowBox(580, 448);
-	creditsWindowBox.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	creditsWindowBox.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 
 	GuiImageData creditsBox(Resources::GetFile("credits_bg.png"), Resources::GetFileSize("credits_bg.png"));
 	GuiImage creditsBoxImg(&creditsBox);
-	creditsBoxImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	creditsBoxImg.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	creditsWindowBox.Append(&creditsBoxImg);
 
 	GuiImageData star(Resources::GetFile("little_star.png"), Resources::GetFileSize("little_star.png"));
@@ -220,12 +231,16 @@ void WindowCredits()
 	starImg.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	starImg.SetPosition(505, 350);
 
-	const int numEntries = 25;
+	const int numEntries = 24;
 	std::vector<GuiText *> txt(numEntries);
 
+	const u8 *creditsFont = Resources::GetFile("font.ttf");
+	u32 creditsFontSize = Resources::GetFileSize("font.ttf");
+
 	txt[i] = new GuiText(tr( "Credits" ), 28, ( GXColor ) {255, 255, 255, 255});
-	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	txt[i]->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	txt[i]->SetPosition(0, 12);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 
 	char SvnRev[80];
@@ -243,28 +258,33 @@ void WindowCredits()
 	txt[i] = new GuiText(SvnRev, 16, ( GXColor ) {255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
 	txt[i]->SetPosition(0, info ? y-10 : y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 
 	txt[i] = new GuiText(IosInfo, 16, ( GXColor ) {255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
 	txt[i]->SetPosition(0, y+6);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 	y += 34;
 
 	txt[i] = new GuiText("USB Loader GX", 24, ( GXColor ) {255, 255, 255, 255});
-	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	txt[i]->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	txt[i]->SetPosition(0, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 	y += 24;
 
 	txt[i] = new GuiText(tr( "Official Site:" ), 20, ( GXColor ) {255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(10, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 
 	txt[i] = new GuiText("http://code.google.com/p/usbloader-gui/", 20, ( GXColor ) {255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(160, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 	y += 22;
 
@@ -273,17 +293,20 @@ void WindowCredits()
 	txt[i] = new GuiText(tr( "Coding:" ));
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(10, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 
 	txt[i] = new GuiText("Dimok / nIxx / giantpune / ardi");
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(160, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 	y += 20;
 
 	txt[i] = new GuiText("hungyip84 / DrayX7 / lustar / r-win");
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(160, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 	y += 22;
 
@@ -292,40 +315,40 @@ void WindowCredits()
 	txt[i] = new GuiText(tr( "Design:" ));
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(10, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 
 	txt[i] = new GuiText("cyrex / NeoRame");
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(160, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 	y += 22;
-
-	txt[i] = new GuiText(tr( "Issue manager /" ));
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(10, y);
-	i++;
-	y += 20;
 
 	txt[i] = new GuiText(tr( "Main tester:" ));
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(10, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 
 	txt[i] = new GuiText("Cyan");
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(160, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 	y += 22;
 
 	txt[i] = new GuiText(tr( "Big thanks to:" ));
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(10, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 
 	sprintf(text, "lustar %s", tr( "for GameTDB and hosting covers / disc images" ));
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(160, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 	y += 20;
 
@@ -333,6 +356,7 @@ void WindowCredits()
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(160, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 	y += 20;
 
@@ -340,6 +364,7 @@ void WindowCredits()
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(160, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 	y += 20;
 
@@ -347,12 +372,14 @@ void WindowCredits()
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(160, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
-	y += 22;
+	y += 24;
 
 	txt[i] = new GuiText(tr( "Special thanks to:" ));
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(10, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 	y += 20;
 
@@ -360,6 +387,7 @@ void WindowCredits()
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(10, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 	y += 20;
 
@@ -367,6 +395,7 @@ void WindowCredits()
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(10, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 	y += 20;
 
@@ -374,6 +403,7 @@ void WindowCredits()
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(10, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 	y += 20;
 
@@ -381,6 +411,7 @@ void WindowCredits()
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(10, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 	y += 20;
 
@@ -388,6 +419,7 @@ void WindowCredits()
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(10, y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 	y += 20;
 
@@ -436,6 +468,7 @@ void WindowCredits()
 		delete txt[i];
 		txt[i] = NULL;
 	}
+	Settings.FontScaleFactor = oldFontScale;
 	ResumeGui();
 
 	bgMusic->Resume();
@@ -647,7 +680,7 @@ int WindowExitPrompt()
 	trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, 0);
 
 	GuiText titleTxt(tr( "HOME Menu" ), 36, ( GXColor ) {255, 255, 255, 255});
-	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	titleTxt.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	titleTxt.SetPosition(-180, 40);
 	titleTxt.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 
@@ -661,7 +694,7 @@ int WindowExitPrompt()
 	}
 	GuiButton closeBtn(close.GetWidth(), close.GetHeight());
 	closeBtn.SetImage(&closeImg);
-	closeBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	closeBtn.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	closeBtn.SetPosition(190, 30);
 	closeBtn.SetLabel(&closeTxt);
 	closeBtn.SetRumble(false);
@@ -908,7 +941,7 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
 	u32 cover = 0;
 
 	GuiWindow promptWindow(472, 320);
-	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	promptWindow.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
 
 	GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
@@ -925,10 +958,10 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
 	}
 
 	GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	titleTxt.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	titleTxt.SetPosition(0, 60);
 	GuiText msgTxt(msg, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	msgTxt.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	msgTxt.SetPosition(0, -40);
 	msgTxt.SetMaxWidth(430);
 
@@ -948,7 +981,7 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
 	}
 	else
 	{
-		btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+		btn1.SetAlignment(ALIGN_CENTER, ALIGN_BOTTOM);
 		btn1.SetPosition(0, -45);
 	}
 
@@ -977,13 +1010,13 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
 		}
 		else
 		{
-			btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+			btn1.SetAlignment(ALIGN_CENTER, ALIGN_BOTTOM);
 			btn1.SetPosition(0, -80);
 		}
 	}
 
 	GuiText timerTxt((char*) NULL, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	timerTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	timerTxt.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	timerTxt.SetPosition(0, 160);
 
 	promptWindow.Append(&dialogBoxImg);
@@ -1058,7 +1091,7 @@ int FormatingPartition(const char *title, int part_num)
 
 	int ret;
 	GuiWindow promptWindow(472, 320);
-	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	promptWindow.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
 
 	GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
@@ -1074,7 +1107,7 @@ int FormatingPartition(const char *title, int part_num)
 	}
 
 	GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	titleTxt.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	titleTxt.SetPosition(0, 60);
 
 	promptWindow.Append(&dialogBoxImg);
@@ -1124,14 +1157,13 @@ int FormatingPartition(const char *title, int part_num)
  ***************************************************************************/
 bool NetworkInitPrompt()
 {
-
 	gprintf("\nNetworkinitPrompt()");
 	if (IsNetworkInit()) return true;
 
 	bool success = true;
 
 	GuiWindow promptWindow(472, 320);
-	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	promptWindow.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
 
 	GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
@@ -1147,12 +1179,12 @@ bool NetworkInitPrompt()
 	}
 
 	GuiText titleTxt(tr( "Initializing Network" ), 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	titleTxt.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	titleTxt.SetPosition(0, 60);
 
 	char msg[20] = " ";
 	GuiText msgTxt(msg, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	msgTxt.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	msgTxt.SetPosition(0, -40);
 
 	GuiText btn1Txt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
@@ -1168,7 +1200,7 @@ bool NetworkInitPrompt()
 
 	if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust buttons for widescreen
 	{
-		btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+		btn1.SetAlignment(ALIGN_CENTER, ALIGN_BOTTOM);
 		btn1.SetPosition(0, -80);
 	}
 
@@ -1183,16 +1215,17 @@ bool NetworkInitPrompt()
 	mainWindow->Append(&promptWindow);
 	ResumeGui();
 
+	int iTimeout = 100 * 200;   // 20s
+
+	ResumeNetworkThread();
+
 	while (!IsNetworkInit())
 	{
+		usleep(100000);
 
-		VIDEO_WaitVSync();
-
-		Initialize_Network();
-
-		if (!IsNetworkInit())
+		if (--iTimeout == 0)
 		{
-			msgTxt.SetText(tr( "Could not initialize network!" ));
+			msgTxt.SetText(tr( "Could not initialize network, time out!" ));
 			sleep(3);
 			success = false;
 			break;
@@ -1208,12 +1241,15 @@ bool NetworkInitPrompt()
 
 	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
 	while (promptWindow.GetEffect() > 0)
-		usleep(100);
+		usleep(1000);
 
 	HaltGui();
 	mainWindow->Remove(&promptWindow);
 	mainWindow->SetState(STATE_DEFAULT);
 	ResumeGui();
+
+	if (IsNetworkInit())
+		HaltNetworkThread();
 
 	return success;
 }
@@ -1229,7 +1265,7 @@ int CodeDownload(const char *id)
 	int ret = -1;
 
 	GuiWindow promptWindow(472, 320);
-	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	promptWindow.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
 
 	GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
@@ -1246,16 +1282,16 @@ int CodeDownload(const char *id)
 	char title[50];
 	sprintf(title, "%s", tr( "Code Download" ));
 	GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	titleTxt.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	titleTxt.SetPosition(0, 50);
 	char msg[50];
 	sprintf(msg, "%s", tr( "Initializing Network" ));
 	GuiText msgTxt(msg, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	msgTxt.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	msgTxt.SetPosition(0, 140);
 	char msg2[50] = " ";
 	GuiText msg2Txt(msg2, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	msg2Txt.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	msg2Txt.SetPosition(0, 50);
 
 	GuiText btn1Txt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));

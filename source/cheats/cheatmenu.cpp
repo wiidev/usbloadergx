@@ -51,8 +51,8 @@ int CheatMenu(const char * gameID)
 	char txtfilename[55];
 	snprintf(txtfilename, sizeof(txtfilename), "%s%s.txt", Settings.TxtCheatcodespath, gameID);
 
-	GCTCheats c;
-	int check = c.openTxtfile(txtfilename);
+	GCTCheats gctCheats;
+	int check = gctCheats.openTxtfile(txtfilename);
 
 	int download = 0;
 
@@ -66,28 +66,38 @@ int CheatMenu(const char * gameID)
 			if (download == 1)
 			{
 				download = CodeDownload(gameID);
-				if (download < 0 || c.openTxtfile(txtfilename) != 1)
+				if (download < 0 || gctCheats.openTxtfile(txtfilename) != 1)
 					break;
 			}
 			else
 				break;
 		case 1:
-			int cntcheats = c.getCnt();
+			int cntcheats = gctCheats.getCnt();
 			OptionList cheatslst;
 			GuiOptionBrowser chtBrowser(400, 280, &cheatslst, "bg_options_settings.png");
 			chtBrowser.SetPosition(0, 90);
-			chtBrowser.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+			chtBrowser.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 			chtBrowser.SetClickable(true);
 
-			GuiText titleTxt(c.getGameName().c_str(), 28, ( GXColor ) {0, 0, 0, 255});
-			titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+			GuiText titleTxt(gctCheats.getGameName().c_str(), 28, ( GXColor ) {0, 0, 0, 255});
+			titleTxt.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 			titleTxt.SetMaxWidth(350, SCROLL_HORIZONTAL);
 			titleTxt.SetPosition(12, 40);
 
+			char gctPath[200];
+			snprintf(gctPath, sizeof(gctPath), "%s%.6s.gct", Settings.Cheatcodespath, gameID);
+			u8 *gctBuf = NULL;
+			u32 gctSize = 0;
+			LoadFileToMem(gctPath, &gctBuf, &gctSize);
+
 			for (int i = 0; i < cntcheats; i++)
 			{
-				cheatslst.SetValue(i, "%s", c.getCheatName(i).c_str());
-				cheatslst.SetName(i, "OFF");
+				cheatslst.SetValue(i, "%s", gctCheats.getCheatName(i).c_str());
+				// search after header and before footer
+				if(gctBuf && gctCheats.IsCheatIncluded(i, gctBuf, gctSize))
+					cheatslst.SetName(i, tr("ON"));
+				else
+					cheatslst.SetName(i, tr("OFF"));
 			}
 
 			HaltGui();
@@ -104,54 +114,57 @@ int CheatMenu(const char * gameID)
 
 			while (!exit)
 			{
-				VIDEO_WaitVSync();
+				usleep(100000);
 
 				ret = chtBrowser.GetClickedOption();
 				if (ret >= 0)
 				{
 					const char *strCheck = cheatslst.GetName(ret);
-					if (strCheck && strncmp(strCheck, "ON", 2) == 0)
+					if (strCheck && strncmp(strCheck, tr("ON"), 2) == 0)
 					{
-						cheatslst.SetName(ret, "%s", "OFF");
+						cheatslst.SetName(ret, "%s", tr("OFF"));
 					}
-					else if (strCheck && strncmp(strCheck, "OFF", 3) == 0)
+					else if (strCheck && strncmp(strCheck, tr("OFF"), 3) == 0)
 					{
-						cheatslst.SetName(ret, "%s", "ON");
+						cheatslst.SetName(ret, "%s", tr("ON"));
 					}
 				}
 
 				if (createBtn.GetState() == STATE_CLICKED)
 				{
-					createBtn.ResetState();
 					if (cntcheats > 0)
 					{
-						int selectednrs[30];
-						int x = 0;
+						vector<int> vActiveCheats;
 						for (int i = 0; i < cntcheats; i++)
 						{
 							const char *strCheck = cheatslst.GetName(i);
-							if (strCheck && strncmp(strCheck, "ON", 2) == 0)
-							{
-								selectednrs[x] = i;
-								x++;
-							}
+							if (strCheck && strncmp(strCheck, tr("ON"), 2) == 0)
+								vActiveCheats.push_back(i);
 						}
-						if (x == 0)
+						if (vActiveCheats.size() == 0)
 						{
-							WindowPrompt(tr( "Error" ), tr( "No cheats were selected" ), tr( "OK" ));
+							if(WindowPrompt(tr( "Error" ), tr( "No cheats were selected! Should the GCT file be deleted?" ), tr("Yes"), tr("Cancel")))
+							{
+								RemoveFile(gctPath);
+								w.Remove(&chtBrowser);
+								for (int i = 0; i < gctCheats.getCnt(); i++)
+									cheatslst.SetName(i, tr("OFF"));
+								w.Append(&chtBrowser);
+							}
 						}
 						else
 						{
 							CreateSubfolder(Settings.Cheatcodespath);
-							string chtpath = Settings.Cheatcodespath;
-							string gctfname = chtpath + c.getGameID() + ".gct";
-							c.createGCT(selectednrs, x, gctfname.c_str());
+							gctCheats.createGCT(vActiveCheats, gctPath);
 							WindowPrompt(tr( "GCT File created" ), NULL, tr( "OK" ));
-							exit = true;
-							break;
 						}
 					}
-					else WindowPrompt(tr( "Error" ), tr( "Could not create GCT file" ), tr( "OK" ));
+					else
+						WindowPrompt(tr( "Error" ), tr( "Could not create GCT file" ), tr( "OK" ));
+
+					mainWindow->SetState(STATE_DISABLED);
+					w.SetState(STATE_DEFAULT);
+					createBtn.ResetState();
 				}
 
 				if (backBtn.GetState() == STATE_CLICKED)
@@ -164,21 +177,27 @@ int CheatMenu(const char * gameID)
 				if(updateBtn.GetState() == STATE_CLICKED)
 				{
 					download = CodeDownload(gameID);
-					if (download >= 0 && c.openTxtfile(txtfilename) == 1)
+					if (download >= 0 && gctCheats.openTxtfile(txtfilename) == 1)
 					{
 						w.Remove(&chtBrowser);
 						cheatslst.ClearList();
-						cntcheats = c.getCnt();
+						cntcheats = gctCheats.getCnt();
 						for (int i = 0; i < cntcheats; i++)
 						{
-							cheatslst.SetValue(i, "%s", c.getCheatName(i).c_str());
-							cheatslst.SetName(i, "OFF");
+							cheatslst.SetValue(i, "%s", gctCheats.getCheatName(i).c_str());
+							// search after header and before footer
+							if(gctBuf && gctCheats.IsCheatIncluded(i, gctBuf, gctSize))
+								cheatslst.SetName(i, tr("ON"));
+							else
+								cheatslst.SetName(i, tr("OFF"));
 						}
 						w.Append(&chtBrowser);
 					}
 					updateBtn.ResetState();
 				}
 			}
+			if(gctBuf)
+				free(gctBuf);
 			HaltGui();
 			mainWindow->SetState(STATE_DEFAULT);
 			mainWindow->Remove(&w);

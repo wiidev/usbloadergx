@@ -574,7 +574,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 						game[i]->SetToolTip(titleTT[i], ttoffset_x, ttoffset_y, ALIGN_LEFT, ALIGN_MIDDLE);
 						break;
 					case 1:
-						game[i]->SetToolTip(titleTT[i], 0, ttoffset_y, ALIGN_CENTRE, ALIGN_MIDDLE);
+						game[i]->SetToolTip(titleTT[i], 0, ttoffset_y, ALIGN_CENTER, ALIGN_MIDDLE);
 						break;
 					case 2:
 						game[i]->SetToolTip(titleTT[i], -ttoffset_x, ttoffset_y, ALIGN_RIGHT, ALIGN_MIDDLE);
@@ -661,7 +661,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 						game[i]->SetToolTip(titleTT[i], ttoffset_x, ttoffset_y, ALIGN_LEFT, ALIGN_MIDDLE);
 						break;
 					case 1:
-						game[i]->SetToolTip(titleTT[i], 0, ttoffset_y, ALIGN_CENTRE, ALIGN_MIDDLE);
+						game[i]->SetToolTip(titleTT[i], 0, ttoffset_y, ALIGN_CENTER, ALIGN_MIDDLE);
 						break;
 					case 2:
 						game[i]->SetToolTip(titleTT[i], -ttoffset_x, ttoffset_y, ALIGN_RIGHT, ALIGN_MIDDLE);
@@ -814,7 +814,7 @@ void GuiGameGrid::Reload(int Rows, int ListOffset)
 				game[i]->SetToolTip(titleTT[i], ttoffset_x, ttoffset_y, ALIGN_LEFT, ALIGN_MIDDLE);
 				break;
 			case 1:
-				game[i]->SetToolTip(titleTT[i], 0, ttoffset_y, ALIGN_CENTRE, ALIGN_MIDDLE);
+				game[i]->SetToolTip(titleTT[i], 0, ttoffset_y, ALIGN_CENTER, ALIGN_MIDDLE);
 				break;
 			case 2:
 				game[i]->SetToolTip(titleTT[i], -ttoffset_x, ttoffset_y, ALIGN_RIGHT, ALIGN_MIDDLE);

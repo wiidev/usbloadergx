@@ -131,7 +131,7 @@ int UninstallSM::GetMenuInternal()
 		{
 			GCGames::Instance()->RemoveGame(GameID);
 			// Reload list
-			GCGames::Instance()->LoadGameList(Settings.GameCubePath);
+			GCGames::Instance()->LoadAllGames();
 		}
 		else if(DiscHeader->type == TYPE_GAME_EMUNANDCHAN && DiscHeader->tid != 0)
 		{

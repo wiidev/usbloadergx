@@ -21,13 +21,11 @@
  */
 
 #include "FreeTypeGX.h"
+#include "memory/mem2.h"
 
 using namespace std;
 
-#define EXPLODE_UINT8_TO_UINT32(x) ((x << 24) | (x << 16) | (x << 8) | x)
 #define ALIGN8(x) (((x) + 7) & ~7)
-#define ALIGN32(x) (((x) + 31) & ~31)
-#define RGBA_TO_IA4(x) (((x & 0x0000f000) >> 8) | ((x & 0x000000f0) >> 4))
 
 /**
  * Convert a short char string to a wide char string.
@@ -124,7 +122,7 @@ void FreeTypeGX::unloadFont()
 	for (itr = fontData.begin(); itr != fontData.end(); itr++)
 	{
 		for (itr2 = itr->second.begin(); itr2 != itr->second.end(); itr2++)
-			free(itr2->second.glyphDataTexture);
+			MEM2_free(itr2->second.glyphDataTexture);
 
 		itr->second.clear();
 	}
@@ -239,7 +237,7 @@ void FreeTypeGX::loadGlyphData(FT_Bitmap *bmp, ftgxCharData *charData)
 {
 	int glyphSize = (charData->textureWidth * charData->textureHeight) >> 1;
 
-	uint8_t *glyphData = (uint8_t *) memalign(32, glyphSize);
+	uint8_t *glyphData = (uint8_t *) MEM2_alloc(glyphSize);
 	memset(glyphData, 0x00, glyphSize);
 
 	uint8_t *src = (uint8_t *)bmp->buffer;

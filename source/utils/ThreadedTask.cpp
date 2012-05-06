@@ -28,7 +28,7 @@ ThreadedTask * ThreadedTask::instance = NULL;
 ThreadedTask::ThreadedTask()
 	: ExitRequested(false)
 {
-	LWP_CreateThread (&Thread, ThreadCallback, this, NULL, 16384, 80);
+	LWP_CreateThread (&Thread, ThreadCallback, this, NULL, 16384, 70);
 }
 
 ThreadedTask::~ThreadedTask()

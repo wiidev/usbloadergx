@@ -29,6 +29,12 @@ typedef struct _GameCFG
 	std::string NandEmuPath;
 	short Hooktype;
 	short WiirdDebugger;
+	short DMLVideo;
+	short DMLNMM;
+	short DMLActivityLED;
+	short DMLPADHOOK;
+	short DMLNoDisc;
+	short DMLDebug;
 	short Locked;
 
 	void operator=(const struct _GameCFG &game)
@@ -53,6 +59,12 @@ typedef struct _GameCFG
 		this->NandEmuPath = game.NandEmuPath;
 		this->Hooktype = game.Hooktype;
 		this->WiirdDebugger = game.WiirdDebugger;
+		this->DMLVideo = game.DMLVideo;
+		this->DMLNMM = game.DMLNMM;
+		this->DMLActivityLED = game.DMLActivityLED;
+		this->DMLPADHOOK = game.DMLPADHOOK;
+		this->DMLNoDisc = game.DMLNoDisc;
+		this->DMLDebug = game.DMLDebug;
 		this->Locked = game.Locked;
 	}
 } GameCFG;
@@ -74,14 +86,14 @@ class CGameSettings
 		bool RemoveAll();
 		//!Overload Reset for one Game
 		bool Remove(const char * id);
-		bool Remove(const u8 * id) { return Remove((const char *) id); };
-		bool Remove(const struct discHdr * game) { if(!game) return false; else return Remove(game->id); };
+		bool Remove(const u8 * id) { return Remove((const char *) id); }
+		bool Remove(const struct discHdr * game) { if(!game) return false; else return Remove(game->id); }
 		//!Get GameCFG
 		GameCFG * GetGameCFG(const char * id);
 		//!Overload
-		GameCFG * GetGameCFG(const u8 * id) { return GetGameCFG((const char *) id); };
+		GameCFG * GetGameCFG(const u8 * id) { return GetGameCFG((const char *) id); }
 		//!Overload
-		GameCFG * GetGameCFG(const struct discHdr * game) { if(!game) return NULL; else return GetGameCFG(game->id); };
+		GameCFG * GetGameCFG(const struct discHdr * game) { if(!game) return NULL; else return GetGameCFG(game->id); }
 		//!Quick settings to PEGI conversion
 		static int GetPartenalPEGI(int parentalsetting);
 		//!Set the default configuration block

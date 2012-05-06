@@ -45,6 +45,7 @@
 #include "OptionList.hpp"
 #include "SoundOperations/gui_sound.h"
 #include "SoundOperations/gui_bgm.h"
+#include "utils/timer.h"
 #include "sigslot.h"
 
 //! Frequently used variables
@@ -64,9 +65,9 @@ typedef void (*UpdateCallback)(void * e);
 
 enum
 {
-	ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTRE, ALIGN_TOP, ALIGN_BOTTOM, ALIGN_MIDDLE
+	ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTER, ALIGN_TOP, ALIGN_BOTTOM, ALIGN_MIDDLE
 };
-#define ALIGN_CENTER ALIGN_CENTRE
+
 enum
 {
 	STATE_DEFAULT, STATE_SELECTED, STATE_CLICKED, STATE_HELD, STATE_DISABLED
@@ -352,7 +353,7 @@ class GuiElement
 		//!\return true if selected, false otherwise
 		virtual int GetSelected();
 		//!Sets the element's alignment respective to its parent element
-		//!\param hor Horizontal alignment (ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTRE)
+		//!\param hor Horizontal alignment (ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTER)
 		//!\param vert Vertical alignment (ALIGN_TOP, ALIGN_BOTTOM, ALIGN_MIDDLE)
 		virtual void SetAlignment(int hor, int vert);
 		//!Called constantly to allow the element to respond to the current input data
@@ -644,7 +645,7 @@ class GuiText: public GuiElement
 		//!\param m Style-Mask attributes
 		void SetStyle(u16 s);
 		//!Sets the text alignment
-		//!\param hor Horizontal alignment (ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTRE)
+		//!\param hor Horizontal alignment (ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTER)
 		//!\param vert Vertical alignment (ALIGN_TOP, ALIGN_BOTTOM, ALIGN_MIDDLE)
 		void SetAlignment(int hor, int vert);
 		//!Set PassChar
@@ -712,10 +713,8 @@ class GuiTooltip: public GuiElement
 		//!Constructor
 		//!\param t Text
 		GuiTooltip(const char *t, int Alpha = 255);
-
 		//!Destructor
 		virtual ~GuiTooltip();
-
 		//!Gets the element's current scale
 		//!Considers scale, scaleDyn, and the parent element's GetScale() value
 		float GetScale();
@@ -725,7 +724,6 @@ class GuiTooltip: public GuiElement
 		void SetWidescreen(bool w); // timely a dummy
 		//!Constantly called to draw the GuiButton
 		void Draw();
-
 	protected:
 		GuiImageData * tooltipLeft;
 		GuiImageData * tooltipTile;
@@ -848,7 +846,8 @@ class GuiButton: public GuiElement
 		GuiImage * iconHold; //!< Button icon for STATE_HELD
 		GuiImage * iconClick; //!< Button icon for STATE_CLICKED
 		GuiTooltip *toolTip;
-		time_t time1, time2;//!< Tooltip timeconstants
+		Timer ToolTipDelay;
+		bool bOldTooltipVisible;
 		GuiText * label[3]; //!< Label(s) to display (default)
 		GuiText * labelOver[3]; //!< Label(s) to display for STATE_SELECTED
 		GuiText * labelHold[3]; //!< Label(s) to display for STATE_HELD
@@ -922,38 +921,6 @@ class GuiKeyboard: public GuiWindow
 		GuiImageData * keyOver;
 		GuiImageData * keyMedium;
 		GuiImageData * keyLarge;
-		GuiTrigger * trigA;
-		GuiTrigger * trigB;
-};
-
-//!On-screen keyboard
-class GuiNumpad: public GuiWindow
-{
-	public:
-		GuiNumpad(char * t, u32 max);
-		virtual ~GuiNumpad();
-		void Update(GuiTrigger * t);
-		char kbtextstr[256];
-	protected:
-		u32 kbtextmaxlen;
-		char keys[11];
-		GuiText * kbText;
-		GuiImage * keyTextboxImg;
-
-		GuiText * keyBackText;
-		GuiImage * keyBackImg;
-		GuiImage * keyBackOverImg;
-		GuiButton * keyBack;
-		GuiText * keyClearText;
-		GuiImage * keyClearImg;
-		GuiImage * keyClearOverImg;
-		GuiButton * keyClear;
-		GuiButton * keyBtn[11];
-		GuiImage * keyImg[11];
-		GuiImage * keyImgOver[11];
-		GuiText * keyTxt[11];
-		GuiImageData * keyTextbox;
-		GuiImageData * keyMedium;
 		GuiTrigger * trigA;
 		GuiTrigger * trigB;
 };

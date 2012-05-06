@@ -124,6 +124,8 @@ bool ZipFile::ExtractAll(const char *dest)
 	int ret = unzGoToFirstFile(File);
 	if (ret != UNZ_OK) Stop = true;
 
+	ProgressCancelEnable(true);
+
 	while (!Stop)
 	{
 		if (unzGetCurrentFileInfo(File, &cur_file_info, filename, sizeof(filename), NULL, 0, NULL, 0) != UNZ_OK) Stop
@@ -154,7 +156,11 @@ bool ZipFile::ExtractAll(const char *dest)
 
 				do
 				{
-					ShowProgress(tr( "Extracting files..." ), 0, pointer + 1, done, uncompressed_size, true);
+					if(ProgressCanceled()) {
+						Stop = true;
+						break;
+					}
+					ShowProgress(tr( "Extracting files..." ), 0, pointer + 1, done, uncompressed_size, true, false);
 
 					if (uncompressed_size - done < blocksize) blocksize = uncompressed_size - done;
 
@@ -179,6 +185,7 @@ bool ZipFile::ExtractAll(const char *dest)
 	buffer = NULL;
 
 	ProgressStop();
+	ProgressCancelEnable(false);
 
 	return true;
 }

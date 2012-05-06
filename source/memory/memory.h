@@ -10,7 +10,7 @@ extern "C"
 #define	 Disc_Region	((vu32*) 0x80000003)
 #define	 Disc_Magic		((vu32*) 0x80000018)
 #define	 Sys_Magic		((vu32*) 0x80000020)
-#define	 Version		((vu32*) 0x80000024)
+#define	 Sys_Version	((vu32*) 0x80000024)
 #define	 Mem_Size		((vu32*) 0x80000028)
 #define	 Board_Model	((vu32*) 0x8000002C)
 #define	 Arena_L		((vu32*) 0x80000030)

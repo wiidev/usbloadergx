@@ -6,7 +6,7 @@
 
 enum
 {
-	ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTRE, ALIGN_TOP, ALIGN_BOTTOM, ALIGN_MIDDLE
+	ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTER, ALIGN_TOP, ALIGN_BOTTOM, ALIGN_MIDDLE
 };
 
 typedef struct _MSG
@@ -193,7 +193,7 @@ int getThemeAlignment(const char *msgid)
 		return ALIGN_RIGHT;
 
 	else if(strncasecmp(string, "center", strlen("center")) == 0)
-		return ALIGN_CENTRE;
+		return ALIGN_CENTER;
 
 	else if(strncasecmp(string, "top", strlen("top")) == 0)
 		return ALIGN_TOP;

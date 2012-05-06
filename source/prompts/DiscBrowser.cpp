@@ -106,7 +106,7 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
 	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
 	GuiText titleTxt(GameTitles.GetTitle(GameID), 28, ( GXColor ) {0, 0, 0, 255});
-	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	titleTxt.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	titleTxt.SetPosition(12, 40);
 	titleTxt.SetMaxWidth(356, SCROLL_HORIZONTAL);
 
@@ -131,7 +131,7 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
 
 	GuiOptionBrowser optionBrowser3(396, 280, &options, "bg_options_settings.png");
 	optionBrowser3.SetPosition(0, 90);
-	optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	optionBrowser3.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 
 	HaltGui();
 	GuiWindow w(screenwidth, screenheight);

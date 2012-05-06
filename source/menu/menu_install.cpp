@@ -1,29 +1,169 @@
+#include <unistd.h>
 #include "menus.h"
+#include "GameCube/GCGames.h"
+#include "GameCube/GCDumper.hpp"
 #include "usbloader/usbstorage2.h"
 #include "usbloader/wbfs.h"
 #include "usbloader/disc.h"
 #include "usbloader/GameList.h"
 #include "prompts/ProgressWindow.h"
+#include "prompts/GCMultiDiscMenu.h"
 #include "themes/CTheme.h"
 #include "utils/tools.h"
+
+#define WII_MAGIC   0x5D1C9EA3
 
 extern int install_abort_signal;
 float gamesize = 0.0f;
 
 /****************************************************************************
+ * MenuGCInstall
+ ***************************************************************************/
+int MenuGCInstall()
+{
+	GCDumper gcDumper;
+	if(gcDumper.ReadDiscHeader() < 0)
+	{
+		WindowPrompt(tr("Error"), tr("Error reading disc"), tr("OK"));
+		return MENU_DISCLIST;
+	}
+
+	std::vector<u32> installGames;
+
+	if(gcDumper.GetDiscHeaders().size() == 0)
+	{
+		WindowPrompt(tr("Error"), tr("No games found on the disc"), tr("OK"));
+		return MENU_DISCLIST;
+	}
+	else if(gcDumper.GetDiscHeaders().size() > 1)
+	{
+		//! Multi game disc, lets ask the user which games to install
+		GCMultiDiscMenu gcMenu(gcDumper.GetDiscHeaders());
+		gcMenu.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
+		gcMenu.SetEffect(EFFECT_FADE, 20);
+		mainWindow->SetState(STATE_DISABLED);
+		mainWindow->Append(&gcMenu);
+
+		int choice = gcMenu.ShowSelection();
+
+		gcMenu.SetEffect(EFFECT_FADE, -20);
+		while(gcMenu.GetEffect() > 0) usleep(1000);
+
+		mainWindow->Remove(&gcMenu);
+		mainWindow->SetState(STATE_DEFAULT);
+
+		installGames = gcMenu.GetSelectedGames();
+
+		if(choice == 0 || installGames.size() == 0)
+			return MENU_DISCLIST;
+	}
+	else
+	{
+		if(!WindowPrompt(tr( "Continue to install game?" ), gcDumper.GetDiscHeaders().at(0).title, tr("Yes"), tr( "Cancel" )))
+			return MENU_DISCLIST;
+
+		installGames.push_back(0);
+	}
+
+	//! setup dumper settings
+	gcDumper.SetCompressed(Settings.GCInstallCompressed);
+	gcDumper.SetCompressed(Settings.GCInstallAligned);
+
+	//! If a different main path then the SD path is selected ask where to install
+	int destination = 1;
+	if(strcmp(Settings.GameCubePath, Settings.GameCubeSDPath) != 0)
+		destination = WindowPrompt(tr("Where should the game be installed to?"), 0, tr("Main Path"), tr("SD Path"), tr("Cancel"));
+	if(!destination)
+		return MENU_DISCLIST;
+
+	const char *InstallPath = destination == 1 ? Settings.GameCubePath : Settings.GameCubeSDPath;
+
+	//! Start of install process, enable wii slot light
+	wiilight(1);
+
+	int result = 0;
+	int installed_games = 0;
+
+	for(u32 i = 0; i < installGames.size(); ++i)
+	{
+		//! check if the game is already installed on SD/USB
+		if(GCGames::Instance()->IsInstalled((char *)gcDumper.GetDiscHeaders().at(installGames[i]).id))
+		{
+			WindowPrompt(tr("Game is already installed:"), gcDumper.GetDiscHeaders().at(installGames[i]).title, tr("OK"));
+			if(i+1 < installGames.size()) {
+				continue;
+			}
+			else if(i == 0)
+			{
+				result = MENU_DISCLIST;
+				break;
+			}
+		}
+
+		// game is not yet installed so let's install it
+		int ret = gcDumper.InstallGame(InstallPath, installGames[i]);
+		if(ret >= 0) {
+			//! success
+			installed_games++;
+		}
+		else if(ret == PROGRESS_CANCELED)
+		{
+			result = MENU_DISCLIST;
+			break;
+		}
+		else if(ret < 0)
+		{
+			//! Error occured, ask the user what to do if there are more games to install
+			if(i+1 < installGames.size())
+			{
+				if(!WindowPrompt(tr( "Install Error!" ), tr("Do you want to continue with next game?"), tr("Yes"), tr( "Cancel" )))
+				{
+					result = MENU_DISCLIST;
+					break;
+				}
+			}
+			else
+			{
+				WindowPrompt(tr( "Install Error!" ), 0, tr( "Back" ));
+				result = MENU_DISCLIST;
+				break;
+			}
+		}
+	}
+
+	wiilight(0);
+	GCGames::Instance()->LoadAllGames();
+
+	//! no game was installed so don't show successfully installed prompt
+	if(installed_games == 0)
+		return result;
+
+	bgMusic->Pause();
+	GuiSound instsuccess(Resources::GetFile("success.ogg"), Resources::GetFileSize("success.ogg"), Settings.sfxvolume);
+	instsuccess.SetVolume(Settings.sfxvolume);
+	instsuccess.SetLoop(0);
+	instsuccess.Play();
+	char gamesTxt[20];
+	snprintf(gamesTxt, sizeof(gamesTxt), "%i %s", installed_games, tr("Games"));
+	WindowPrompt(tr("Successfully installed:"), installGames.size() > 1 ? gamesTxt : gcDumper.GetDiscHeaders().at(installGames[0]).title, tr( "OK" ));
+	instsuccess.Stop();
+	bgMusic->Resume();
+
+	return MENU_DISCLIST;
+}
+
+/****************************************************************************
  * MenuInstall
  ***************************************************************************/
-
 int MenuInstall()
 {
-	gprintf("\nMenuInstall()");
+	gprintf("\nMenuInstall()\n");
 
 	static struct discHdr headerdisc ATTRIBUTE_ALIGN( 32 );
 
 	Disc_SetUSB(NULL);
 
 	int ret, choice = 0;
-	char name[200];
 
 	ret = DiscWait(tr( "Insert Disk" ), tr( "Waiting..." ), tr( "Cancel" ), 0, 0);
 	if (ret < 0)
@@ -38,24 +178,28 @@ int MenuInstall()
 		return MENU_DISCLIST;
 	}
 
-	ret = Disc_IsWii();
-	if (ret < 0)
-	{
-		choice = WindowPrompt(tr( "Not a Wii Disc" ), tr( "Insert a Wii Disc!" ), tr( "OK" ), tr( "Back" ));
+	memset(&headerdisc, 0, sizeof(struct discHdr));
 
+	Disc_ReadHeader(&headerdisc);
+
+	if ((headerdisc.magic != WII_MAGIC) && (headerdisc.gc_magic != GCGames::MAGIC))
+	{
+		choice = WindowPrompt(tr( "Not a Wii or a Game Cube Disc" ), tr( "Insert a Wii or a Game Cube Disc!" ), tr( "OK" ), tr( "Back" ));
 		if (choice == 1)
 			return MenuInstall();
 		else
 			return MENU_DISCLIST;
 	}
 
-	Disc_ReadHeader(&headerdisc);
-	snprintf(name, sizeof(name), "%s", headerdisc.title);
+	if(headerdisc.gc_magic == GCGames::MAGIC)
+	{
+		return MenuGCInstall();
+	}
 
 	ret = WBFS_CheckGame(headerdisc.id);
 	if (ret)
 	{
-		WindowPrompt(tr( "Game is already installed:" ), name, tr( "Back" ));
+		WindowPrompt(tr( "Game is already installed:" ), headerdisc.title, tr( "Back" ));
 		return MENU_DISCLIST;
 	}
 
@@ -64,9 +208,8 @@ int MenuInstall()
 	WBFS_DiskSpace(&used, &freespace);
 	gamesize = (float) WBFS_EstimeGameSize();
 
-	char gametxt[50];
-
-	sprintf(gametxt, "%s : %.2fGB", name, gamesize/GB_SIZE);
+	char gametxt[strlen(headerdisc.title) + 16];
+	snprintf(gametxt, sizeof(gametxt), "%s : %.2fGB", headerdisc.title, gamesize/GB_SIZE);
 
 	wiilight(1);
 	choice = WindowPrompt(tr( "Continue to install game?" ), gametxt, tr( "OK" ), tr( "Cancel" ));
@@ -83,7 +226,7 @@ int MenuInstall()
 		}
 		else
 		{
-			StartProgress(gametxt, name, 0, true, true);
+			StartProgress(gametxt, headerdisc.title, 0, true, true);
 			ProgressCancelEnable(true);
 			ret = WBFS_AddGame();
 			ProgressCancelEnable(false);
@@ -99,18 +242,16 @@ int MenuInstall()
 			}
 			else
 			{
-				ShowProgress(tr("Install finished"), name, tr("Reloading game list now, please wait..."), gamesize, gamesize, true, true);
+				ShowProgress(tr("Install finished"), headerdisc.title, tr("Reloading game list now, please wait..."), gamesize, gamesize, true, true);
 				gameList.ReadGameList(); //get the entries again
 				gameList.FilterList();
-				GuiSound * instsuccess = NULL;
 				bgMusic->Pause();
-				instsuccess = new GuiSound(Resources::GetFile("success.ogg"), Resources::GetFileSize("success.ogg"), Settings.sfxvolume);
-				instsuccess->SetVolume(Settings.sfxvolume);
-				instsuccess->SetLoop(0);
-				instsuccess->Play();
-				WindowPrompt(tr( "Successfully installed:" ), name, tr( "OK" ));
-				instsuccess->Stop();
-				delete instsuccess;
+				GuiSound instsuccess(Resources::GetFile("success.ogg"), Resources::GetFileSize("success.ogg"), Settings.sfxvolume);
+				instsuccess.SetVolume(Settings.sfxvolume);
+				instsuccess.SetLoop(0);
+				instsuccess.Play();
+				WindowPrompt(tr( "Successfully installed:" ), headerdisc.title, tr( "OK" ));
+				instsuccess.Stop();
 				bgMusic->Resume();
 			}
 		}

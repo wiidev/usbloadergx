@@ -33,7 +33,7 @@ static int InternalShowGameInfo(struct discHdr *header)
 	mainWindow->SetState(STATE_DISABLED);
 
 	char ID[7];
-	snprintf(ID, sizeof(ID), "%s", (char *) header->id);
+	strlcpy(ID, (char *) header->id, sizeof(ID));
 
 	char xmlpath[300];
 	snprintf(xmlpath, sizeof(xmlpath), "%swiitdb.xml", Settings.titlestxt_path);
@@ -132,17 +132,16 @@ static int InternalShowGameInfo(struct discHdr *header)
 	GuiText * memTxt = NULL;
 
 	GuiWindow gameinfoWindow(600, 308);
-	gameinfoWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	gameinfoWindow.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	gameinfoWindow.SetPosition(0, -50);
 
 	GuiWindow InfoWindow(600, 308);
 	InfoWindow.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 
 	GuiWindow txtWindow(350, 270);
-	txtWindow.SetAlignment(ALIGN_CENTRE, ALIGN_RIGHT);
-	txtWindow.SetPosition(95, 55);
+	txtWindow.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
+	txtWindow.SetPosition(95, 40);
 
-	GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
 	GuiImageData dialogBox1(Resources::GetFile("gameinfo1.png"), Resources::GetFileSize("gameinfo1.png"));
 	GuiImageData dialogBox2(Resources::GetFile("gameinfo1a.png"), Resources::GetFileSize("gameinfo1a.png"));
 	GuiImageData dialogBox3(Resources::GetFile("gameinfo2.png"), Resources::GetFileSize("gameinfo2.png"));
@@ -626,7 +625,7 @@ static int InternalShowGameInfo(struct discHdr *header)
 	{
 		titleTxt = new GuiText(GameInfo.Title.c_str(), titlefontsize, ( GXColor ) {0, 0, 0, 255});
 		titleTxt->SetMaxWidth(350, SCROLL_HORIZONTAL);
-		titleTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+		titleTxt->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 		titleTxt->SetPosition(txtXOffset, 12 + titley);
 		InfoWindow.Append(titleTxt);
 	}
@@ -801,7 +800,7 @@ static int InternalShowGameInfo(struct discHdr *header)
 	}
 	else
 	{
-		strcpy(linebuf2, "");
+		linebuf2[0] = 0;
 	}
 	wifiTxt[0] = new GuiText(linebuf2, 16, ( GXColor ) {0, 0, 0, 255});
 	wifiTxt[0]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
@@ -828,8 +827,12 @@ static int InternalShowGameInfo(struct discHdr *header)
 	gametdb1Txt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
 	gametdb1Txt->SetPosition(40, -15);
 	gameinfoWindow.Append(gametdb1Txt);
-	if(coverImg) gameinfoWindow.Append(coverImg);
-
+	if(coverImg)
+	{
+		gameinfoWindow.Append(coverImg);
+		txtWindow.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
+		txtWindow.SetPosition(0, -170);
+	}
 	// Set info window first
 	gameinfoWindow.Append(&InfoWindow);
 
@@ -895,7 +898,7 @@ static int InternalShowGameInfo(struct discHdr *header)
 
 			while(backBtn.GetState() != STATE_CLICKED && homeBtn.GetState() != STATE_CLICKED)
 			{
-				usleep(100);
+				usleep(10000);
 				if (shutdown)
 					Sys_Shutdown();
 				else if (reset)
@@ -1065,20 +1068,23 @@ int showGameInfo(int gameSelected, struct discHdr *dvdheader)
 	return choice;
 }
 
-bool save_gamelist(int txt) // save gamelist
+/**
+ * Save the game list.
+ * @param csv If true, saves in CSV format; otherwise, saves in TXT format.
+ */
+bool save_gamelist(bool bCSV) // save gamelist
 {
 	mainWindow->SetState(STATE_DISABLED);
-	char tmp[200];
-	sprintf(tmp, "%s", Settings.update_path);
-	struct stat st;
-	if (stat(tmp, &st) != 0)
-	{
-		mkdir(tmp, 0777);
-	}
-	FILE *f;
-	sprintf(tmp, "%sGameList.txt", Settings.update_path);
-	if (txt == 1) sprintf(tmp, "%sGameList.csv", Settings.update_path);
-	f = fopen(tmp, "w");
+	CreateSubfolder(Settings.update_path);
+
+	// Save the game list.
+	char tmp[256];
+	if(bCSV)
+		snprintf(tmp, sizeof(tmp), "%sGameList.csv", Settings.update_path);
+	else
+		snprintf(tmp, sizeof(tmp), "%sGameList.txt", Settings.update_path);
+
+	FILE *f = fopen(tmp, "w");
 	if (!f)
 	{
 		mainWindow->SetState(STATE_DEFAULT);
@@ -1093,13 +1099,18 @@ bool save_gamelist(int txt) // save gamelist
 
 	WBFS_DiskSpace(&used, &freespace);
 
-	fprintf(f, "# USB Loader Has Saved this file\n");
-	fprintf(f, "# This file was created based on your list of games and language settings.\n");
-	fclose(f);
-	/* Closing and reopening because of a write issue we are having right now */
-	f = fopen(tmp, "w");
+	if (bCSV)
+	{
+		fprintf(f, "\"ID\",\"Size(GB)\",\"Name\"\n");
 
-	if (txt == 0)
+		for (i = 0; i < gameList.size(); i++)
+		{
+			struct discHdr* header = gameList[i];
+			WBFS_GameSize(header->id, &size);
+			fprintf(f, "\"%.6s\",\"%.2f\",\"%s\"\n", (char*)header->id, size, GameTitles.GetTitle(header));
+		}
+	}
+	else
 	{
 		fprintf(f, "# USB Loader Has Saved this file\n");
 		fprintf(f, "# This file was created based on your list of games and language settings.\n\n");
@@ -1111,23 +1122,10 @@ bool save_gamelist(int txt) // save gamelist
 		{
 			struct discHdr* header = gameList[i];
 			WBFS_GameSize(header->id, &size);
-			fprintf(f, "%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4],
-					header->id[5]);
+			fprintf(f, "%.6s", (char*)header->id);
 			fprintf(f, " [%.2f]   ", size);
 			fprintf(f, " %s", GameTitles.GetTitle(header));
 			fprintf(f, "\n");
-		}
-	}
-	else
-	{
-		fprintf(f, "\"ID\",\"Size(GB)\",\"Name\"\n");
-
-		for (i = 0; i < gameList.size(); i++)
-		{
-			struct discHdr* header = gameList[i];
-			WBFS_GameSize(header->id, &size);
-			fprintf(f, "\"%c%c%c%c%c%c\",\"%.2f\",\"%s\"\n", header->id[0], header->id[1], header->id[2],
-					header->id[3], header->id[4], header->id[5], size, GameTitles.GetTitle(header));
 		}
 	}
 	fclose(f);

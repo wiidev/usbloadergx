@@ -37,10 +37,12 @@ extern "C" {
 bool CreateSubfolder(const char * fullpath);
 bool CheckFile(const char * filepath);
 u64 FileSize(const char * filepath);
+u64 GetDirectorySize(const char *path);
 int LoadFileToMem(const char * filepath, u8 **buffer, u32 *size);
 int LoadFileToMemWithProgress(const char *progressText, const char *filePath, u8 **buffer, u32 *size);
 int CopyFile(const char * src, const char * dest);
 int MoveFile(const char *srcpath, char *destdir);
+int CopyDirectory(const char *path, const char *dst);
 bool RenameFile(const char * srcpath, const char * destpath);
 bool RemoveFile(const char * filepath);
 bool RemoveDirectory(const char *path);

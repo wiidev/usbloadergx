@@ -41,7 +41,7 @@ GuiSearchBar::GuiSearchBar() :
 {
 	trig.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
-	SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 
 	cnt = SearchChars.size();
 	buttons = new cSearchButton*[cnt];

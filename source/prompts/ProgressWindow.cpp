@@ -25,8 +25,8 @@ extern float gamesize;
 extern int install_abort_signal;
 
 /*** Variables used only in this file ***/
+static const float fFilterTime = 15.0f; // seconds
 static lwp_t progressthread = LWP_THREAD_NULL;
-static mutex_t ProgressMutex = LWP_MUTEX_NULL;
 static bool CancelEnabled = false;
 static bool progressCanceled = false;
 static char progressTitle[75];
@@ -34,8 +34,11 @@ static char progressMsg1[75];
 static char progressMsg2[75];
 static Timer ProgressTimer;
 static int showProgress = 0;
-static s64 progressDone = -1;
-static s64 progressTotal = -1;
+static s64 progressDone = 0.0f;
+static s64 progressTotal = 0.0f;
+static float fLastProgressDone = 0.0f;
+static float fLastElapsedTime = 0.0f;
+static float fSpeed = 0.0f;
 static bool showTime = false;
 static bool showSize = false;
 static bool changed = true;
@@ -61,6 +64,10 @@ extern "C" void StartProgress(const char * title, const char * msg1, const char 
 	else
 		progressMsg2[0] = '\0';
 
+	fSpeed = 0.0f;
+	fLastElapsedTime = 0.0f;
+	fLastProgressDone = 0.0f;
+	progressTotal = progressDone = 0.0f;
 	progressCanceled = false;
 	showSize = swSize;
 	showTime = swTime;
@@ -78,63 +85,40 @@ extern "C" void StartProgress(const char * title, const char * msg1, const char 
  ***************************************************************************/
 extern "C" void ShowProgress(s64 done, s64 total)
 {
-	LWP_MutexLock(ProgressMutex);
-	progressDone = done;
-	progressTotal = total;
+	if (done > total)
+		done = total;
+
 	if(!done)
 	{
+		fLastElapsedTime = 0.0f;
+		fLastProgressDone = 0.0f;
+		progressTotal = progressDone = 0.0f;
 		ProgressTimer.reset();
 		LWP_ResumeThread(progressthread);
 		showProgress = 1;
 	}
-	changed = true;
-	LWP_MutexUnlock(ProgressMutex);
-}
-
-void ShowProgress(const char *msg2, s64 done, s64 total)
-{
-	if (done > total)
-		done = total;
-
-	LWP_MutexLock(ProgressMutex);
 
 	if(total >= 0)
 	{
 		progressDone = done;
 		progressTotal = total;
 	}
+	changed = true;
+}
 
+void ShowProgress(const char *msg2, s64 done, s64 total)
+{
 	if(msg2)
 		strncpy(progressMsg2, msg2, sizeof(progressMsg2)-1);
 	else
 		progressMsg2[0] = '\0';
 
-	if(!done)
-	{
-		ProgressTimer.reset();
-		LWP_ResumeThread(progressthread);
-		showProgress = 1;
-	}
-
+	ShowProgress(done, total);
 	changedMessages = true;
-	changed = true;
-
-	LWP_MutexUnlock(ProgressMutex);
 }
 
 void ShowProgress(const char *title, const char *msg1, const char *msg2, s64 done, s64 total, bool swSize, bool swTime)
 {
-	if (done > total)
-		done = total;
-
-	LWP_MutexLock(ProgressMutex);
-
-	if(total >= 0)
-	{
-		progressDone = done;
-		progressTotal = total;
-	}
-
 	if(title)
 		strncpy(progressTitle, title, sizeof(progressTitle)-1);
 	else
@@ -153,17 +137,8 @@ void ShowProgress(const char *title, const char *msg1, const char *msg2, s64 don
 	showSize = swSize;
 	showTime = swTime;
 
-	if(!done)
-	{
-		ProgressTimer.reset();
-		LWP_ResumeThread(progressthread);
-		showProgress = 1;
-	}
-
+	ShowProgress(done, total);
 	changedMessages = true;
-	changed = true;
-
-	LWP_MutexUnlock(ProgressMutex);
 }
 
 /****************************************************************************
@@ -176,8 +151,6 @@ extern "C" void ProgressStop()
 	progressTitle[0] = 0;
 	progressMsg1[0] = 0;
 	progressMsg2[0] = 0;
-	progressDone = -1;
-	progressTotal = -1;
 	showTime = false;
 	showSize = false;
 
@@ -212,31 +185,42 @@ static void UpdateProgressValues(GuiImage *progressbarImg, GuiText *prTxt, GuiTe
 	if(!changed)
 		return;
 
-	LWP_MutexLock(ProgressMutex);
 	changed = false;
 	changedMessages = false;
-	s64 done = progressDone;
-	s64 total = progressTotal;
-	u32 speed = 0;
 
-	if(gamesize > 0.0f)
+	float done;
+	float total;
+
+	if(gamesize > 0.0f && progressTotal > 0.0f)
 	{
-		done = (s64) ((float) done / (float) total * gamesize);
-		total = (s64) gamesize;
+		done = ((float) progressDone / (float) progressTotal * gamesize);
+		total = gamesize;
 
 		if(progressCanceled)
 			install_abort_signal = 1;
 	}
+	else
+	{
+		done = (float) progressDone;
+		total = (float) progressTotal;
+	}
 
-	//Calculate speed in KB/s
-	if (ProgressTimer.elapsed() > 0.0f)
-		speed = (u32) (done/ProgressTimer.elapsed());
+	float fElapsedTime = ProgressTimer.elapsed();
+	float fTimeDiff = fElapsedTime - fLastElapsedTime;
+	//! initialize filter to current value on 2nd run
+	if(fLastProgressDone == 0.0f && done > 0.0f && fTimeDiff > 0.0f) {
+		fSpeed = done / fTimeDiff;
+	}
+	else if(fTimeDiff > 0.0f) {
+		//! low pass filtering the speed
+		fSpeed += ((done - fLastProgressDone) - fSpeed * fTimeDiff) / fFilterTime;
+		//! store current elapse value for next cycle
+		fLastElapsedTime = fElapsedTime;
+	}
 
-	LWP_MutexUnlock(ProgressMutex);
-
-	u32 TimeLeft = 0, h = 0, m = 0, s = 0;
-	if(speed > 0)
-		TimeLeft = (total-done)/speed;
+	s32 TimeLeft = 0, h = 0, m = 0, s = 0;
+	if(fSpeed > 0.0f)
+		TimeLeft = (total-done)/fSpeed;
 
 	if(TimeLeft > 0)
 	{
@@ -245,17 +229,22 @@ static void UpdateProgressValues(GuiImage *progressbarImg, GuiText *prTxt, GuiTe
 		s =  TimeLeft % 60;
 	}
 
-	float progressPercent = 100.0 * done / total;
+	float progressPercent;
+	if(total > 0.0f)
+	   progressPercent = LIMIT(100.0f * done / total, 0.f, 100.f);
+	else
+		progressPercent = 100.0f; // total is 0 or below? i guess we are done...
 
 	prTxt->SetTextf("%.2f", progressPercent);
 
 	if (Settings.widescreen && Settings.wsprompt)
-		progressbarImg->SetSkew(0, 0, static_cast<int> (progressbarImg->GetWidth() * progressPercent * Settings.WSFactor)
-				- progressbarImg->GetWidth(), 0, static_cast<int> (progressbarImg->GetWidth() * progressPercent
-				* Settings.WSFactor) - progressbarImg->GetWidth(), 0, 0, 0);
+		progressbarImg->SetSkew(0, 0, (progressbarImg->GetWidth() * progressPercent
+										- progressbarImg->GetWidth()) * Settings.WSFactor,
+								0,	(progressbarImg->GetWidth() * progressPercent
+										- progressbarImg->GetWidth()) * Settings.WSFactor, 0, 0, 0);
 	else
-		progressbarImg->SetSkew(0, 0, static_cast<int> (progressbarImg->GetWidth() * progressPercent)
-			- progressbarImg->GetWidth(), 0, static_cast<int> (progressbarImg->GetWidth() * progressPercent)
+		progressbarImg->SetSkew(0, 0, (progressbarImg->GetWidth() * progressPercent)
+			- progressbarImg->GetWidth(), 0, (progressbarImg->GetWidth() * progressPercent)
 			- progressbarImg->GetWidth(), 0, 0, 0);
 
 	if (showTime == true)
@@ -272,8 +261,11 @@ static void UpdateProgressValues(GuiImage *progressbarImg, GuiText *prTxt, GuiTe
 		else
 			sizeTxt->SetTextf("%0.2fGB/%0.2fGB", done / GB_SIZE, total / GB_SIZE);
 
-		speedTxt->SetTextf("%dKB/s", (int) (speed/KB_SIZE));
+		speedTxt->SetTextf("%dKB/s", (int) (fSpeed/KB_SIZE));
 	}
+
+	//! store current done value for next cycle
+	fLastProgressDone = done;
 }
 
 /****************************************************************************
@@ -293,7 +285,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 	const int ProgressPosY  = 20;
 
 	GuiWindow promptWindow(472, 320);
-	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	promptWindow.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
 
 	GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
@@ -330,16 +322,16 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 	progressbarImg.SetPosition(35, ProgressPosY);
 
 	GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	titleTxt.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	titleTxt.SetPosition(0, 50);
 
 	GuiText msg1Txt(msg1, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	msg1Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	msg1Txt.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	msg1Txt.SetPosition(0, 90);
 	msg1Txt.SetMaxWidth(430, DOTTED);
 
 	GuiText msg2Txt(msg2, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	msg2Txt.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	msg2Txt.SetPosition(0, 125);
 	msg2Txt.SetMaxWidth(430, DOTTED);
 
@@ -365,7 +357,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
 	if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust for widescreen
 	{
-		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+		progressbarOutlineImg.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 		progressbarOutlineImg.SetPosition(0, ProgressPosY);
 		progressbarEmptyImg.SetPosition(80, ProgressPosY);
 		progressbarEmptyImg.SetTileHorizontal(78);
@@ -374,11 +366,8 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 		msg2Txt.SetMaxWidth(380, DOTTED);
 
 		timeTxt.SetPosition(250, -50);
-		timeTxt.SetFontSize(20);
 		speedTxt.SetPosition(90, -74);
-		speedTxt.SetFontSize(20);
 		sizeTxt.SetPosition(90, -50);
-		sizeTxt.SetFontSize(20);
 	}
 
 	GuiText cancelTxt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows button text color"));
@@ -426,7 +415,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
 	while (showProgress)
 	{
-		usleep(50000);
+		usleep(100000);
 
 		if (shutdown)
 			Sys_Shutdown();
@@ -493,8 +482,7 @@ static void * ProgressThread(void *arg)
  ***************************************************************************/
 void InitProgressThread()
 {
-	LWP_MutexInit(&ProgressMutex, true);
-	LWP_CreateThread(&progressthread, ProgressThread, NULL, NULL, 16384, 70);
+	LWP_CreateThread(&progressthread, ProgressThread, NULL, NULL, 16384, 60);
 
 	memset(progressTitle, 0, sizeof(progressTitle));
 	memset(progressMsg1, 0, sizeof(progressMsg1));
@@ -510,6 +498,4 @@ void ExitProgressThread()
 {
 	LWP_JoinThread(progressthread, NULL);
 	progressthread = LWP_THREAD_NULL;
-	LWP_MutexUnlock(ProgressMutex);
-	LWP_MutexDestroy(ProgressMutex);
 }

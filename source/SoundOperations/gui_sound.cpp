@@ -87,11 +87,10 @@ GuiSound::GuiSound(const char * filepath)
 	volume = 255;
 	SoundEffectLength = 0;
 	loop = 0;
-	allocated = false;
 	Load(filepath);
 }
 
-GuiSound::GuiSound(const u8 * snd, s32 len, int vol, bool isallocated, int v)
+GuiSound::GuiSound(const u8 * snd, s32 len, int vol, int v)
 {
 	sound = NULL;
 	length = 0;
@@ -106,8 +105,7 @@ GuiSound::GuiSound(const u8 * snd, s32 len, int vol, bool isallocated, int v)
 	volume = vol;
 	SoundEffectLength = 0;
 	loop = 0;
-	allocated = false;
-	Load(snd, len, isallocated);
+	Load(snd, len);
 }
 
 GuiSound::~GuiSound()
@@ -123,13 +121,10 @@ void GuiSound::FreeMemory()
 
 	SoundHandler::Instance()->RemoveDecoder(voice);
 
-	if(allocated && sound != NULL)
-	{
+	if(sound != NULL && SoundEffectLength != 0)
 		free(sound);
-		sound = NULL;
-		allocated = false;
-	}
 
+	sound = NULL;
 	SoundEffectLength = 0;
 }
 
@@ -139,22 +134,6 @@ bool GuiSound::Load(const char * filepath)
 
 	if(!filepath)
 		return false;
-
-	u32 magic;
-	FILE * f = fopen(filepath, "rb");
-	if(!f)
-		return false;
-
-	fread(&magic, 1, 4, f);
-	fclose(f);
-
-	if(magic == 'IMD5')
-	{
-		u8 * snd = NULL;
-		u32 filesize = 0;
-		LoadFileToMem(filepath, &snd, &filesize);
-		return Load(snd, filesize, true);
-	}
 
 	SoundHandler::Instance()->AddDecoder(voice, filepath);
 
@@ -173,28 +152,15 @@ bool GuiSound::Load(const char * filepath)
 	return true;
 }
 
-bool GuiSound::Load(const u8 * snd, s32 len, bool isallocated)
+bool GuiSound::Load(const u8 * snd, s32 len)
 {
 	FreeMemory();
 
 	if(!snd)
 		return false;
 
-	if(!isallocated && *((u32 *) snd) == 'RIFF')
-	{
-		return LoadSoundEffect(snd, len);
-	}
-
-	if(*((u32 *) snd) == 'IMD5')
-	{
-		UncompressSoundbin(snd, len, isallocated);
-	}
-	else
-	{
-		sound = (u8 *) snd;
-		length = len;
-		allocated = isallocated;
-	}
+	sound = (u8 *) snd;
+	length = len;
 
 	SoundHandler::Instance()->AddDecoder(voice, sound, length);
 
@@ -243,7 +209,6 @@ bool GuiSound::LoadSoundEffect(const u8 * snd, s32 len)
 
 	sound = (u8 *) realloc(sound, done);
 	SoundEffectLength = done;
-	allocated = true;
 
 	return true;
 }
@@ -333,7 +298,10 @@ void GuiSound::SetVolume(int vol)
 	if(vol < 0)
 		return;
 
-	volume = 255*(vol/100.0);
+	volume = (255 * vol)/100;
+	if(volume > 255)
+		volume = 255;
+
 	ASND_ChangeVolumeVoice(voice, volume, volume);
 }
 
@@ -355,26 +323,4 @@ void GuiSound::Rewind()
 		return;
 
 	decoder->Rewind();
-}
-
-void GuiSound::UncompressSoundbin(const u8 * snd, int len, bool isallocated)
-{
-	const u8 * file = snd+32;
-	if(*((u32 *) file) == 'LZ77')
-	{
-		u32 size = 0;
-		sound = uncompressLZ77(file, len-32, &size);
-		length = size;
-	}
-	else
-	{
-		length = len-32;
-		sound = (u8 *) malloc(length);
-		memcpy(sound, file, length);
-	}
-
-	if(isallocated)
-		free((u8 *) snd);
-
-	allocated = true;
 }

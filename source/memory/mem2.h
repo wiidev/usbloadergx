@@ -8,6 +8,8 @@
 extern "C" {
 #endif
 
+#define isMEM2Buffer(p) (((u32) p & 0x10000000) != 0)
+
 void *MEM1_alloc(unsigned int s);
 void *MEM1_memalign(unsigned int a, unsigned int s);
 void *MEM1_realloc(void *p, unsigned int s);

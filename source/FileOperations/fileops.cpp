@@ -36,7 +36,11 @@
 #include <unistd.h>
 #include <vector>
 
+#include "prompts/ProgressWindow.h"
+#include "language/gettext.h"
+#include "DirList.h"
 #include "fileops.h"
+#include "gecko.h"
 
 #define BLOCKSIZE			   70*1024	  //70KB
 #define VectorResize(List) if(List.capacity()-List.size() == 0) List.reserve(List.size()+100)
@@ -126,7 +130,7 @@ extern "C" int LoadFileToMem(const char *filepath, u8 **inbuffer, u32 *size)
 		{
 			free(buffer);
 			fclose(file);
-			return -10;
+			return PROGRESS_CANCELED;
 		}
 
 		if(blocksize > filesize-done)
@@ -314,14 +318,16 @@ extern "C" int CopyFile(const char * src, const char * dest)
 
 	do
 	{
-		if(actioncanceled)
+		if(ProgressCanceled())
 		{
 			fclose(source);
 			fclose(destination);
 			free(buffer);
 			RemoveFile((char *) dest);
-			return -10;
+			return PROGRESS_CANCELED;
 		}
+
+		ShowProgress(done, sizesrc);
 
 		if(blksize > sizesrc - done)
 			blksize = sizesrc - done;
@@ -411,10 +417,7 @@ extern "C" bool RenameFile(const char * srcpath, const char * destpath)
  ***************************************************************************/
 extern "C" bool RemoveDirectory(const char *path)
 {
-	struct dirent *dirent = NULL;
-	DIR *dir = NULL;
-
-    std::string folderpath = path;
+	std::string folderpath = path;
 	while(folderpath[folderpath.size()-1] == '/')
 		folderpath.erase(folderpath.size()-1);
 
@@ -422,43 +425,177 @@ extern "C" bool RemoveDirectory(const char *path)
 	if(isRoot)
 		folderpath += '/';
 
-	dir = opendir(folderpath.c_str());
-	if (dir == NULL)
-		return false;
+	ProgressCancelEnable(true);
+	StartProgress(tr("Getting file list..."), tr("Please wait"), 0, false, false);
+	ShowProgress(0, 1);
 
-	char * filepath = new (std::nothrow) char[MAXPATHLEN];
-	if(!filepath)
+	//! load list not sorted, to remove in correct order
+	DirList dir;
+	dir.LoadPath(folderpath.c_str(), 0, DirList::Dirs | DirList::Files | DirList::CheckSubfolders);
+
+	int done = 0;
+	int fileCount = dir.GetFilecount();
+
+	//! remove files first
+	for(int i = 0; i < fileCount; i++)
 	{
-	    closedir(dir);
-	    return false;
-	}
-
-	struct stat st;
-
-	while ((dirent = readdir(dir)) != 0)
-	{
-		if(!dirent->d_name)
-			continue;
-
-		if(!strcmp(dirent->d_name, ".") || !strcmp(dirent->d_name, ".."))
-			continue;
-
-		snprintf(filepath, MAXPATHLEN, "%s%s%s", folderpath.c_str(), isRoot ? "" : "/", dirent->d_name);
-		if(stat(filepath, &st) != 0)
-			continue;
-
-		if(st.st_mode & S_IFDIR)
+		if(!dir.IsDir(i))
 		{
-		    RemoveDirectory(filepath);
-		}
-		else
-		{
-		    remove(filepath);
+			ShowProgress(tr("Deleting files..."), dir.GetFilename(i), 0, done, fileCount, false, false);
+			RemoveFile(dir.GetFilepath(i));
+			done++;
 		}
 	}
 
-    delete [] filepath;
-    closedir(dir);
+	//! now remove all folders
+	for(int i = 0; i < fileCount; i++)
+	{
+		if(dir.IsDir(i))
+		{
+			ShowProgress(tr("Deleting directories..."), dir.GetFilename(i), 0, done, fileCount, false, false);
+			RemoveFile(dir.GetFilepath(i));
+			done++;
+			gprintf("%s\n", dir.GetFilepath(i));
+		}
+	}
 
-    return (remove(folderpath.c_str()) == 0);
+	ProgressStop();
+	ProgressCancelEnable(false);
+
+	return (RemoveFile(folderpath.c_str()) == 0);
+}
+
+/****************************************************************************
+ * RemoveDirectory
+ ***************************************************************************/
+extern "C" int CopyDirectory(const char *path, const char *dst)
+{
+	if(!path || !dst)
+		return -1;
+
+	ProgressCancelEnable(true);
+	StartProgress(tr("Getting file list..."), tr("Please wait"), 0, true, true);
+	ShowProgress(0, 1);
+
+	//! load list not sorted as there is no need to
+	DirList dir;
+	dir.LoadPath(path, 0, DirList::Dirs | DirList::Files | DirList::CheckSubfolders);
+
+	int result = 0;
+	int fileCount = dir.GetFilecount();
+	int pathlen = strlen(path);
+
+	// we are done
+	if(fileCount == 0) {
+		ProgressStop();
+		ProgressCancelEnable(false);
+		return 0;
+	}
+
+	u64 totalDone = 0;
+	u64 totalSize = 0;
+
+	for(int i = 0; i < fileCount; i++)
+		totalSize += dir.GetFilesize(i);
+
+	char filepath[1024];
+
+	u32 blksize = BLOCKSIZE;
+	u8 * buffer = (u8 *) malloc(blksize);
+	if(buffer == NULL){
+		ProgressStop();
+		ProgressCancelEnable(false);
+		return -2;
+	}
+
+	for(int i = 0; i < fileCount; i++)
+	{
+		const char *srcPath = dir.GetFilepath(i);
+		if(!srcPath)
+			continue;
+
+		const char *filename = dir.GetFilename(i);
+
+		snprintf(filepath, sizeof(filepath), "%s/%s", dst, srcPath+pathlen);
+		char *ptr = strrchr(filepath, '/');
+		if(ptr) *ptr = 0;
+		//! create path for the file
+		CreateSubfolder(filepath);
+
+		snprintf(filepath, sizeof(filepath), "%s/%s", dst, srcPath+pathlen);
+
+		// Start copying file
+		FILE * source = fopen(srcPath, "rb");
+		if(!source)
+			continue;
+
+		FILE * destination = fopen(filepath, "wb");
+		if(destination == NULL)
+		{
+			fclose(source);
+			continue;
+		}
+
+		ShowProgress(tr("Copying files..."), filename, 0, totalDone, totalSize, true, true);
+
+		blksize = BLOCKSIZE;
+		u64 done = 0;
+		u64 filesize = dir.GetFilesize(i);
+
+		while(done < filesize)
+		{
+			if(ProgressCanceled())
+			{
+				fclose(source);
+				fclose(destination);
+				free(buffer);
+				ProgressStop();
+				ProgressCancelEnable(false);
+				return PROGRESS_CANCELED;
+			}
+
+			//Display progress
+			ShowProgress(totalDone, totalSize);
+
+			if(blksize > filesize - done)
+				blksize = filesize - done;
+
+			if(fread(buffer, 1, blksize, source) != blksize)
+			{
+				result = -5;
+				break;
+			}
+
+			if(fwrite(buffer, 1, blksize, destination) != blksize)
+			{
+				result = -5;
+				break;
+			}
+
+			done += blksize;
+			totalDone += blksize;
+		}
+
+		fclose(source);
+		fclose(destination);
+	}
+
+	free(buffer);
+	ProgressStop();
+	ProgressCancelEnable(false);
+
+	return result;
+}
+
+u64 GetDirectorySize(const char *path)
+{
+	DirList dir(path, 0, DirList::Files | DirList::CheckSubfolders);
+
+	int fileCount = dir.GetFilecount();
+	u64 totalSize = 0;
+
+	for(int i = 0; i < fileCount; i++)
+		totalSize += dir.GetFilesize(i);
+
+	return totalSize;
 }

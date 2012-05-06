@@ -9,6 +9,7 @@
  ***************************************************************************/
 
 #include "gui.h"
+#include "settings/CSettings.h"
 
 static int scrollison = 0;
 
@@ -44,8 +45,7 @@ GuiButton::GuiButton(int w, int h)
 	selectable = true;
 	holdable = false;
 	clickable = true;
-
-	time1 = time2 = 0;
+	bOldTooltipVisible = false;
 }
 
 GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x, int y, GuiTrigger* trig,
@@ -84,6 +84,7 @@ GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x,
 	selectable = true;
 	holdable = false;
 	clickable = true;
+	bOldTooltipVisible = false;
 
 	if (grow == 1)
 	{
@@ -91,7 +92,6 @@ GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x,
 		effectAmountOver = 4;
 		effectTargetOver = 110;
 	}
-	time1 = time2 = 0;
 }
 
 GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x, int y, GuiTrigger* trig,
@@ -130,6 +130,7 @@ GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x,
 	selectable = true;
 	holdable = false;
 	clickable = true;
+	bOldTooltipVisible = false;
 
 	if (grow == 1)
 	{
@@ -144,9 +145,8 @@ GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x,
 		toolTip->SetParent(this);
 		toolTip->SetAlignment(h_align, v_align);
 		toolTip->SetPosition(ttx, tty);
+		toolTip->SetVisible(false);
 	}
-
-	time1 = time2 = 0;
 }
 
 /**
@@ -253,7 +253,7 @@ void GuiButton::SetToolTip(GuiTooltip* tt, int x, int y, int h_align, int v_alig
 		toolTip->SetParent(this);
 		toolTip->SetAlignment(h_align, v_align);
 		toolTip->SetPosition(x, y);
-
+		toolTip->SetVisible(false);
 	}
 }
 
@@ -341,33 +341,36 @@ void GuiButton::Draw()
 }
 void GuiButton::DrawTooltip()
 {
-	LOCK( this );
-	if (this->IsVisible() && state == STATE_SELECTED && toolTip)
-	{
-		if (time2 == 0)
-		{
-			time(&time1);
-			time2 = time1;
-		}
-		if (time1 != 0) // timer läuft
-		time(&time1);
+	if (!toolTip)
+		return;
 
-		if (time1 == 0 || difftime(time1, time2) >= 2)
+	LOCK( this );
+
+	bool isVisible = this->IsVisible() && state == STATE_SELECTED;
+
+	if (isVisible)
+	{
+		if(!bOldTooltipVisible) {
+			ToolTipDelay.reset();
+		}
+		else if(!toolTip->IsVisible() && (int) ToolTipDelay.elapsed_millisecs() > Settings.TooltipDelay)
 		{
-			if (time1 != 0) // timer gerade abgelaufen
 			toolTip->SetEffect(EFFECT_FADE, 20);
-			time1 = 0;
-			toolTip->Draw();
-			return;
+			toolTip->SetVisible(true);
 		}
 	}
 	else
 	{
-		if (time2 != 0 && time1 == 0) // timer abgelaufen, gerade DESELECT
-		if (toolTip) toolTip->SetEffect(EFFECT_FADE, -20);
-		time2 = 0;
+		if(bOldTooltipVisible)
+			toolTip->SetEffect(EFFECT_FADE, -20);
+
+		if(toolTip->GetEffect() == 0)
+			toolTip->SetVisible(false);
 	}
-	if (toolTip && toolTip->GetEffect()) toolTip->Draw();
+
+	toolTip->Draw();
+
+	bOldTooltipVisible = isVisible;
 }
 void GuiButton::ScrollIsOn(int f)
 {

@@ -31,7 +31,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int minimum, int lang)
 	int mode = lang;
 	textVisible = true;
 	selectable = true;
-	alignmentHor = ALIGN_CENTRE;
+	alignmentHor = ALIGN_CENTER;
 	alignmentVert = ALIGN_MIDDLE;
 	kbtextmaxlen = max > sizeof(kbtextstr) ? sizeof(kbtextstr) : max; // limit max up to sizeof(kbtextstr)
 	memset(kbtextstr, 0, sizeof(kbtextstr));
@@ -209,12 +209,12 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int minimum, int lang)
 
 	keyTextbox = Resources::GetImageData("keyboard_textbox.png");
 	keyTextboxImg = new GuiImage(keyTextbox);
-	keyTextboxImg->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	keyTextboxImg->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	keyTextboxImg->SetPosition(0, 40);//(0,0);
 	this->Append(keyTextboxImg);
 
 	kbText = new GuiText(kbtextstr, 20, thColor("r=0 g=0 b=0 a=255 - keyboard text color"));
-	kbText->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	kbText->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	kbText->SetPosition(0, 53);//(0, 13);
 	this->Append(kbText);
 
@@ -369,7 +369,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int minimum, int lang)
 	//keySpace->SetSoundClick(btnSoundClick);
 	//keySpace->SetTrigger(trigA);
 	//keySpace->SetPosition(0+eurocheck, 4*42+120);//(0, 4*42+80);
-	//keySpace->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	//keySpace->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	//keySpace->SetEffectGrow();
 	this->Append(keySpace);
 
@@ -384,7 +384,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int minimum, int lang)
 				keyImgOver[i][j] = new GuiImage(keyOver);
 				txt[0] = keys[i][j].ch;
 				keyTxt[i][j] = new GuiText(txt, 20, thColor("r=0 g=0 b=0 a=255 - keyboard key text color"));
-				keyTxt[i][j]->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+				keyTxt[i][j]->SetAlignment(ALIGN_CENTER, ALIGN_BOTTOM);
 				keyTxt[i][j]->SetPosition(0, -10);
 				keyBtn[i][j] = new GuiButton(keyImg[i][j], keyImgOver[i][j], 0, 3, (j * 42 + 21 * i + 40) + eurocheck,
 						i * 42 + 120, trigA, btnSoundOver, btnSoundClick, 1);

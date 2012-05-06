@@ -7,7 +7,7 @@ outFile="./source/themes/filelist.h"
 count_old=$(cat $outFile 2>/dev/null | tr -d '\n\n' | sed 's/[^0-9]*\([0-9]*\).*/\1/')
 
 count=0
-for i in $(find ./data/images/ ./data/sounds/ ./data/fonts/ -maxdepth 1 -type f  \( ! -printf "%f\n" \))
+for i in $(find ./data/images/ ./data/sounds/ ./data/fonts/ ./data/binary/ -maxdepth 1 -type f  \( ! -printf "%f\n" \))
 do
 	files[count]=$i
 	count=$((count+1))

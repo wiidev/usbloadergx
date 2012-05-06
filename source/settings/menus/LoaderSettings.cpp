@@ -33,6 +33,7 @@
 #include "system/IosLoader.h"
 #include "usbloader/wbfs.h"
 #include "usbloader/GameList.h"
+#include "utils/tools.h"
 #include "menu.h"
 
 static const char * loaderModeText[] =
@@ -117,6 +118,31 @@ static const char * ChannelLaunchText[] =
 	trNOOP( "Boot Content" ),
 };
 
+static const char * DMLVideoModeText[] =
+{
+	trNOOP( "DML Auto" ),
+	trNOOP( "DML None" ),
+	trNOOP( "Force PAL50" ),
+	trNOOP( "Force PAL60" ),
+	trNOOP( "Force NTSC" ),
+	trNOOP( "Force PAL480p" ),
+	trNOOP( "Force NTSC480p" ),
+};
+
+static const char * DMLNMMMode[] =
+{
+	trNOOP( "OFF" ),
+	trNOOP( "ON" ),
+	trNOOP( "Debug" ),
+};
+
+static const char * DMLDebug[] =
+{
+	trNOOP( "OFF" ),
+	trNOOP( "ON" ),
+	trNOOP( "Debug Wait" ),
+};
+
 LoaderSettings::LoaderSettings()
 	: SettingsMenu(tr("Loader Settings"), &GuiOptions, MENU_NONE)
 {
@@ -141,6 +167,12 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
 	Options->SetName(Idx++, "%s", tr( "Debugger Paused Start" ));
 	Options->SetName(Idx++, "%s", tr( "Channel Launcher" ));
+	Options->SetName(Idx++, "%s", tr( "DML Video Mode" ));
+	Options->SetName(Idx++, "%s", tr( "DML NMM Mode" ));
+	Options->SetName(Idx++, "%s", tr( "DML LED Activity" ));
+	Options->SetName(Idx++, "%s", tr( "DML PAD Hook" ));
+	Options->SetName(Idx++, "%s", tr( "DML No Disc" ));
+	Options->SetName(Idx++, "%s", tr( "DML Debug" ));
 
 	SetOptionValues();
 
@@ -172,6 +204,7 @@ void LoaderSettings::SetOptionValues()
 	else if(Settings.LoaderMode & MODE_WIIGAMES) Options->SetValue(Idx++, "%s", tr(loaderModeText[1]));
 	else if(Settings.LoaderMode & MODE_NANDCHANNELS) Options->SetValue(Idx++, "%s", tr(loaderModeText[2]));
 	else if(Settings.LoaderMode & MODE_EMUCHANNELS) Options->SetValue(Idx++, "%s", tr(loaderModeText[3]));
+	else Options->SetValue(Idx++, "%s", tr("Mixed"));
 
 	//! Settings: Video Mode
 	Options->SetValue(Idx++, "%s", tr(VideoModeText[Settings.videomode]));
@@ -199,7 +232,6 @@ void LoaderSettings::SetOptionValues()
 		Options->SetValue(Idx++, "IOS %i", Settings.cios);
 	else
 		Options->SetValue(Idx++, "********");
-
 
 	//! Settings: Quick Boot
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.quickboot] ));
@@ -235,6 +267,24 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: Channel Launcher
 	Options->SetValue(Idx++, "%s", tr( ChannelLaunchText[Settings.UseChanLauncher] ));
+
+	//! Settings: DML Video Mode
+	Options->SetValue(Idx++, "%s", tr(DMLVideoModeText[Settings.DMLVideo]));
+
+	//! Settings: DML NMM Mode
+	Options->SetValue(Idx++, "%s", tr(DMLNMMMode[Settings.DMLNMM]));
+
+	//! Settings: DML LED Activity
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLActivityLED]));
+
+	//! Settings: DML PAD Hook
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLPADHOOK]));
+
+	//! Settings: DML No Disc
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLNoDisc]));
+
+	//! Settings: DML Debug
+	Options->SetValue(Idx++, "%s", tr(DMLDebug[Settings.DMLDebug]));
 }
 
 int LoaderSettings::GetMenuInternal()
@@ -257,7 +307,7 @@ int LoaderSettings::GetMenuInternal()
 	}
 
 	//! Settings: Video Mode
-	if (ret == ++Idx)
+	else if (ret == ++Idx)
 	{
 		if (++Settings.videomode >= VIDEO_MODE_MAX) Settings.videomode = 0;
 	}
@@ -306,11 +356,9 @@ int LoaderSettings::GetMenuInternal()
 
 		char entered[4];
 		snprintf(entered, sizeof(entered), "%i", Settings.cios);
-		if(OnScreenKeyboard(entered, sizeof(entered), 0))
+		if(OnScreenNumpad(entered, sizeof(entered)))
 		{
-			Settings.cios = atoi(entered);
-			if(Settings.cios < 200) Settings.cios = 200;
-			else if(Settings.cios > 255) Settings.cios = 255;
+			Settings.cios = LIMIT(atoi(entered), 200, 255);
 
 			if(NandTitles.IndexOf(TITLE_ID(1, Settings.cios)) < 0)
 			{
@@ -388,6 +436,42 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx )
 	{
 		if (++Settings.UseChanLauncher >= MAX_ON_OFF) Settings.UseChanLauncher = 0;
+	}
+
+	//! Settings: DML Video Mode
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DMLVideo >= 7) Settings.DMLVideo = 0;
+	}
+
+	//! Settings: DML NMM Mode
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DMLNMM >= 3) Settings.DMLNMM = 0;
+	}
+
+	//! Settings: DML LED Activity
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DMLActivityLED >= MAX_ON_OFF) Settings.DMLActivityLED = 0;
+	}
+
+	//! Settings: DML PAD Hook
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DMLPADHOOK >= MAX_ON_OFF) Settings.DMLPADHOOK = 0;
+	}
+
+	//! Settings: DML No Disc
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DMLNoDisc >= MAX_ON_OFF) Settings.DMLNoDisc = 0;
+	}
+
+	//! Settings: DML Debug
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DMLDebug >= 3) Settings.DMLDebug = 0;
 	}
 
 	SetOptionValues();

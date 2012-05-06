@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-29 20:42+0100\n"
+"POT-Creation-Date: 2012-05-06 12:19+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -88,6 +88,9 @@ msgstr "ｵｰﾊﾞｰｽｷｬﾝ調整 X"
 msgid "Adjust Overscan Y"
 msgstr "ｵｰﾊﾞｰｽｷｬﾝ調整 Y"
 
+msgid "After zoom"
+msgstr ""
+
 msgid "All"
 msgstr "全て"
 
@@ -109,6 +112,9 @@ msgstr "代替DOL起動"
 msgid "An example file was created here:"
 msgstr "テンプレファイルが作成されました:"
 
+msgid "Animation Start"
+msgstr ""
+
 msgid "Anti"
 msgstr "アンチ"
 
@@ -121,6 +127,9 @@ msgstr "適用"
 msgid "Apr"
 msgstr "4月"
 
+msgid "Are you really sure you want to delete all selected games from the SD card?"
+msgstr ""
+
 msgid "Are you sure you want to delete this category?"
 msgstr "カテゴリを削除しますか?"
 
@@ -130,6 +139,9 @@ msgstr "GameTDBからカテゴリをインポートしますか?"
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "USB Loader GXをロックしますか?"
 
+msgid "Are you sure you want to remount SD?"
+msgstr ""
+
 msgid "Are you sure you want to reset?"
 msgstr "リセットしますか?"
 
@@ -138,6 +150,9 @@ msgstr "よろしいですか？"
 
 msgid "Aspect Ratio"
 msgstr "アスペクト比"
+
+msgid "Attention!"
+msgstr ""
 
 msgid "Aug"
 msgstr "8月"
@@ -162,6 +177,18 @@ msgstr "HBC/Wiiﾒﾆｭｰへ"
 
 msgid "Backgroundmusic"
 msgstr "BGM"
+
+msgid "Banner Animation"
+msgstr ""
+
+msgid "Banner Animation Settings"
+msgstr ""
+
+msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
+msgstr ""
+
+msgid "Banner window is only available with AHBPROT! Please consider installing new HBC version."
+msgstr ""
 
 msgid "Beginning"
 msgstr "前方一致"
@@ -256,6 +283,12 @@ msgstr "IDとﾘｰｼﾞｮﾝを表示"
 msgid "Both Ports"
 msgstr "両方のﾎﾟｰﾄ"
 
+msgid "Cache BNR Files"
+msgstr ""
+
+msgid "Cache BNR Files Path"
+msgstr ""
+
 msgid "Cache Titles"
 msgstr "ｹﾞｰﾑ名のｷｬｯｼｭ"
 
@@ -278,6 +311,10 @@ msgstr "削除できません:"
 
 msgid "Can't mount or unknown disc format."
 msgstr "マウントできないか不明なディスク形式です"
+
+#, c-format
+msgid "Can't open file for write: %s"
+msgstr ""
 
 #, c-format
 msgid "Can't open file: %s"
@@ -372,6 +409,18 @@ msgstr "続行しますか?"
 msgid "Controllevel"
 msgstr "制限レベル"
 
+msgid "Copy"
+msgstr ""
+
+msgid "Copying Canceled"
+msgstr ""
+
+msgid "Copying GC game..."
+msgstr ""
+
+msgid "Copying files..."
+msgstr ""
+
 msgid "Correct Password"
 msgstr "正しい暗証番号です"
 
@@ -391,11 +440,17 @@ msgstr "書き出しできません:"
 msgid "Could not find info for this game in the wiitdb.xml."
 msgstr "wiitdb.xmlにこのゲームの情報が見つかりませんでした"
 
+msgid "Could not get free device space for game."
+msgstr ""
+
 msgid "Could not initialize DIP module!"
 msgstr "DIPﾓｼﾞｭｰﾙを初期化できません!"
 
 msgid "Could not initialize network!"
 msgstr "ネットに接続できませんでした!"
+
+msgid "Could not initialize network, time out!"
+msgstr ""
 
 msgid "Could not open Disc"
 msgstr "ﾃﾞｨｽｸを開けませんでした"
@@ -433,8 +488,38 @@ msgstr "パスを変更"
 msgid "Customs/Original"
 msgstr "カスタムを優先"
 
+msgid "DML Auto"
+msgstr ""
+
+msgid "DML Debug"
+msgstr ""
+
+msgid "DML LED Activity"
+msgstr ""
+
+msgid "DML NMM Mode"
+msgstr ""
+
+msgid "DML No Disc"
+msgstr ""
+
+msgid "DML None"
+msgstr ""
+
+msgid "DML PAD Hook"
+msgstr ""
+
+msgid "DML Video Mode"
+msgstr ""
+
 msgid "DOL Path"
 msgstr "代替ＤＯＬ"
+
+msgid "Debug"
+msgstr ""
+
+msgid "Debug Wait"
+msgstr ""
 
 msgid "Debugger Paused Start"
 msgstr "デバッガ待機スタート"
@@ -469,6 +554,12 @@ msgstr "ディスク画像を削除"
 msgid "Delete category"
 msgstr "カテゴリを削除"
 
+msgid "Deleting directories..."
+msgstr ""
+
+msgid "Deleting files..."
+msgstr ""
+
 msgid "Design:"
 msgstr "デザイン:"
 
@@ -477,6 +568,9 @@ msgstr "詳細"
 
 msgid "Developed by"
 msgstr "開発者："
+
+msgid "Developer:"
+msgstr ""
 
 msgid "Directory does not exist!"
 msgstr "フォルダがありません"
@@ -493,6 +587,9 @@ msgstr "ディスクの初期値"
 msgid "Disc Insert Detected"
 msgstr "ディスクの挿入を検知しました"
 
+msgid "Disc read error."
+msgstr ""
+
 msgid "DiskFlip"
 msgstr "ディスクの回転風"
 
@@ -501,6 +598,9 @@ msgstr "ゲーム情報"
 
 msgid "Display as a carousel"
 msgstr "回転トレイ風に表示"
+
+msgid "Display as a channel grid"
+msgstr ""
 
 msgid "Display as a grid"
 msgstr "格子風に表示"
@@ -520,6 +620,21 @@ msgstr "このﾃｰﾏを使いますか？"
 msgid "Do you want to change language?"
 msgstr "言語を変更しますか？"
 
+msgid "Do you want to continue with next game?"
+msgstr ""
+
+msgid "Do you want to copy now?"
+msgstr ""
+
+msgid "Do you want to copy the game to SD or delete a game on SD?"
+msgstr ""
+
+msgid "Do you want to delete a game on SD?"
+msgstr ""
+
+msgid "Do you want to discart changes?"
+msgstr ""
+
 msgid "Do you want to download this theme?"
 msgstr "ダウンロードしますか?"
 
@@ -532,11 +647,17 @@ msgstr "セーブデータを書き出しますか?"
 msgid "Do you want to format:"
 msgstr "初期化しますか?"
 
+msgid "Do you want to install selected games?"
+msgstr ""
+
 msgid "Do you want to load the default theme?"
 msgstr "標準のテーマを読み込みますか?"
 
 msgid "Do you want to re-init network?"
 msgstr "ネットワークに再接続しますか?"
+
+msgid "Do you want to start the game now?"
+msgstr ""
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "全てのFAT32領域のセクタで空き容量情報を同期しますか？"
@@ -583,6 +704,9 @@ msgstr "リストをダウンロード中:"
 msgid "Dump NAND to EmuNand"
 msgstr "NANDをｴﾐｭNANDへﾀﾞﾝﾌﾟ"
 
+msgid "During zoom"
+msgstr ""
+
 msgid "Dutch"
 msgstr "オランダ語"
 
@@ -626,6 +750,9 @@ msgstr "ダウンロードしたファイルを開けません"
 msgid "Error reading Disc"
 msgstr "読み込みに失敗しました"
 
+msgid "Error reading disc"
+msgstr ""
+
 #, c-format
 msgid "Error when downloading file: %i"
 msgstr "ダウンロードに失敗: %i"
@@ -648,6 +775,9 @@ msgstr "データの書き込み中にエラーが発生しました"
 msgid "Error:"
 msgstr "エラー:"
 
+msgid "Error: Not enough space on SD."
+msgstr ""
+
 msgid "Errors occured."
 msgstr "エラーが発生しました"
 
@@ -662,6 +792,18 @@ msgstr "どこに移動しますか?"
 
 msgid "Export All Saves to EmuNand"
 msgstr "全てのｾｰﾌﾞをｴﾐｭNANDに転送"
+
+msgid "Export Miis to EmuNand"
+msgstr ""
+
+msgid "Export SYSCONF to EmuNand"
+msgstr ""
+
+msgid "Extract Miis to the Emu NAND?"
+msgstr ""
+
+msgid "Extract SYSCONF to the Emu NAND?"
+msgstr ""
 
 msgid "Extract Save to EmuNand"
 msgstr "ｾｰﾌﾞをｴﾐｭNANDに書き出す"
@@ -680,6 +822,9 @@ msgstr "NANDファイルを書き出し中:"
 
 msgid "Failed"
 msgstr "失敗"
+
+msgid "Failed copying file"
+msgstr ""
 
 msgid "Failed formating"
 msgstr "初期化に失敗しました"
@@ -707,6 +852,9 @@ msgstr "WADヘッダを読み込めません"
 
 msgid "Failed updating"
 msgstr "更新に失敗しました"
+
+msgid "Favorite Level"
+msgstr ""
 
 msgid "Features"
 msgstr "機能"
@@ -775,6 +923,24 @@ msgstr "初期化中です、お待ち下さい..."
 msgid "Found missing images."
 msgstr "不足画像が見つかりました"
 
+msgid "Frame"
+msgstr ""
+
+msgid "Frame Projection Height"
+msgstr ""
+
+msgid "Frame Projection Width"
+msgstr ""
+
+msgid "Frame Projection X-Offset"
+msgstr ""
+
+msgid "Frame Projection Y-Offset"
+msgstr ""
+
+msgid "Frames"
+msgstr ""
+
 msgid "Free Space"
 msgstr "空き"
 
@@ -802,8 +968,17 @@ msgstr "シャットダウン"
 msgid "GAMEID_Gamename"
 msgstr "ゲームID_ゲーム名"
 
+msgid "GC Banner Scale"
+msgstr ""
+
 msgid "GC Games"
 msgstr "GCゲーム"
+
+msgid "GC Install 32K Aligned"
+msgstr ""
+
+msgid "GC Install Compressed"
+msgstr ""
 
 msgid "GCT Cheatcodes Path"
 msgstr "GCTチート"
@@ -818,6 +993,12 @@ msgid "GXDraw"
 msgstr ""
 
 msgid "GXFlush"
+msgstr ""
+
+msgid "Game Cube Games Delete"
+msgstr ""
+
+msgid "Game Cube Install Menu"
 msgstr ""
 
 msgid "Game ID"
@@ -853,11 +1034,17 @@ msgstr "サウンドの音量"
 msgid "Game Split Size"
 msgstr "ゲームの分割サイズ"
 
+msgid "Game Window Mode"
+msgstr ""
+
 msgid "Game is already installed:"
 msgstr "このｹﾞｰﾑは既にｲﾝｽﾄｰﾙされています:"
 
 msgid "Game/Install Partition"
 msgstr "ｹﾞｰﾑのｲﾝｽﾄｰﾙ領域"
+
+msgid "GameCube"
+msgstr ""
 
 msgid "GameTDB Path"
 msgstr "ゲーム名リスト"
@@ -877,8 +1064,17 @@ msgstr "ジャンル:"
 msgid "German"
 msgstr "ドイツ語"
 
+msgid "Getting file list..."
+msgstr ""
+
+msgid "Getting game folder size..."
+msgstr ""
+
 msgid "Global Settings"
 msgstr "基本設定"
+
+msgid "Grid Scroll Speed"
+msgstr ""
 
 msgid "HOME Menu"
 msgstr "HOMEﾎﾞﾀﾝﾒﾆｭｰ"
@@ -930,8 +1126,8 @@ msgstr "接続中･･･"
 msgid "Insert Disk"
 msgstr "ﾃﾞｨｽｸを入れてください"
 
-msgid "Insert a Wii Disc!"
-msgstr "Wiiディスクを入れて下さい!"
+msgid "Insert a Wii or a Game Cube Disc!"
+msgstr ""
 
 msgid "Install"
 msgstr "ｲﾝｽﾄｰﾙ"
@@ -957,6 +1153,9 @@ msgstr "ゲームをインストール"
 msgid "Install finished"
 msgstr "インストールが終了しました"
 
+msgid "Installing Game Cube Game..."
+msgstr ""
+
 msgid "Installing content"
 msgstr "ｺﾝﾃﾝﾂをｲﾝｽﾄｰﾙ中"
 
@@ -966,11 +1165,11 @@ msgstr "ｹﾞｰﾑをｲﾝｽﾄｰﾙ中:"
 msgid "Installing title..."
 msgstr "ﾀｲﾄﾙをｲﾝｽﾄｰﾙ中..."
 
+msgid "Invalid IOS number entered. Number must be -1 for inherit or 200 - 255."
+msgstr ""
+
 msgid "Invalid wad file."
 msgstr "不正なWADファイルです"
-
-msgid "Issue manager /"
-msgstr "問題管理者 /"
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "この情報は開発者までお知らせください"
@@ -1072,6 +1271,15 @@ msgstr "ループさせる"
 msgid "Main DOL"
 msgstr "main.dol"
 
+msgid "Main GameCube Games Path"
+msgstr ""
+
+msgid "Main GameCube Path"
+msgstr ""
+
+msgid "Main Path"
+msgstr ""
+
 msgid "Main tester:"
 msgstr "メインテスター:"
 
@@ -1086,6 +1294,9 @@ msgstr "5月"
 
 msgid "Messageboard Update"
 msgstr "Wii伝言板の更新"
+
+msgid "Mixed"
+msgstr ""
 
 msgid "Motion+ Video"
 msgstr "ﾓｰｼｮﾝ＋説明ﾑｰﾋﾞｰ"
@@ -1156,8 +1367,8 @@ msgstr "使用できる領域が見つかりません"
 msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
 msgstr "Wiinnertag.xmlが設定パスにみつかりません。テンプレファイルを作成しますか?"
 
-msgid "No cheats were selected"
-msgstr "何も選ばれていません"
+msgid "No cheats were selected! Should the GCT file be deleted?"
+msgstr ""
 
 msgid "No data could be read."
 msgstr "読み込みに失敗しました"
@@ -1170,6 +1381,9 @@ msgstr "お気に入りはありません"
 
 msgid "No file missing!"
 msgstr "必要ありません"
+
+msgid "No games found on the disc"
+msgstr ""
 
 msgid "No language files to update on your devices! Do you want to download new language files?"
 msgstr "更新する言語ファイルがありません!新しい言語ファイルをダウンロードしますか?"
@@ -1192,8 +1406,8 @@ msgstr "ワイド"
 msgid "Not Initialized"
 msgstr "初期化されていません"
 
-msgid "Not a Wii Disc"
-msgstr "Wiiﾃﾞｨｽｸではありません"
+msgid "Not a Wii or a Game Cube Disc"
+msgstr ""
 
 msgid "Not a valid URL"
 msgstr "無効なURLです"
@@ -1207,8 +1421,14 @@ msgstr "無効なドメインです"
 msgid "Not enough free memory."
 msgstr "空ﾒﾓﾘが不足しています"
 
+msgid "Not enough free space on device."
+msgstr ""
+
 msgid "Not enough free space!"
 msgstr "空容量が不足しています!"
+
+msgid "Not enough memory for FST."
+msgstr ""
 
 msgid "Not enough memory."
 msgstr "メモリが足りません"
@@ -1218,6 +1438,12 @@ msgstr "必要なし"
 
 msgid "Not supported format!"
 msgstr "対応していない形式です!"
+
+msgid "Nothing selected to delete."
+msgstr ""
+
+msgid "Nothing selected to install."
+msgstr ""
 
 msgid "Nov"
 msgstr "11月"
@@ -1288,6 +1514,9 @@ msgstr "権限がありません"
 msgid "Pick from a list"
 msgstr "リストから選択"
 
+msgid "Pixels"
+msgstr ""
+
 msgid "Play Count"
 msgstr "プレイ回数"
 
@@ -1302,6 +1531,9 @@ msgstr "前へ"
 
 msgid "Playing Music:"
 msgstr "再生中"
+
+msgid "Please wait"
+msgstr ""
 
 msgid "Please wait..."
 msgstr "しばらくお待ちください"
@@ -1384,11 +1616,26 @@ msgstr "Wiiメニューへもどる"
 msgid "Right"
 msgstr "右ボタンで"
 
+msgid "Rotating Disc"
+msgstr ""
+
 msgid "Rumble"
 msgstr "振動機能"
 
 msgid "SChinese"
 msgstr "簡体中国語"
+
+msgid "SD Card could not be accessed."
+msgstr ""
+
+msgid "SD GameCube Games Path"
+msgstr ""
+
+msgid "SD GameCube Path"
+msgstr ""
+
+msgid "SD Path"
+msgstr ""
 
 msgid "SFX Volume"
 msgstr "効果音の音量"
@@ -1456,6 +1703,9 @@ msgstr "空き容量の表示"
 msgid "Show Play Count"
 msgstr "プレイ回数の表示"
 
+msgid "Show SD"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "シャットダウン"
 
@@ -1507,6 +1757,9 @@ msgstr "4GBごとに分割"
 msgid "Standby"
 msgstr "スタンバイ"
 
+msgid "Start"
+msgstr ""
+
 msgid "Success"
 msgstr "成功"
 
@@ -1524,6 +1777,9 @@ msgstr "更新しました"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
 msgstr "更新しました www.techjawa.comに感謝!"
+
+msgid "Successfully copied"
+msgstr ""
 
 msgid "Successfully deleted:"
 msgstr "削除に成功しました"
@@ -1555,17 +1811,29 @@ msgstr "テキストチート"
 msgid "The .them file was not found in the zip."
 msgstr ".themファイルがzip内にありません"
 
+msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
+msgstr ""
+
+msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
+msgstr ""
+
+msgid "The application might crash if there is currently a read/write access to the SD card!"
+msgstr ""
+
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "フォルダがありません。作成しますか？"
 
-msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
-msgstr "ファイルはエミュNANDパスに書き出されます 注意:すでにあるファイルは上書きされます"
+msgid "The files will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
+msgstr ""
+
+msgid "The game is on USB."
+msgstr ""
 
 msgid "The save game will be extracted to your emu nand path."
 msgstr "セーブデータはエミュNANDパスに書き出されます"
 
-msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
-msgstr "セーブデータはエミュNANDパスに書き出されます 注意:すでにあるセーブは上書きされます"
+msgid "The save games will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
+msgstr ""
 
 msgid "The wad file was installed"
 msgstr "wadがインストールされました"
@@ -1595,6 +1863,9 @@ msgstr "このIOSはBootMiiのIOSです"
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
 msgstr "このIOSはタイトルリストにありませんでした"
 
+msgid "This path must be on SD!"
+msgstr ""
+
 msgid "Time left:"
 msgstr "残り時間:"
 
@@ -1603,6 +1874,9 @@ msgstr "ランチャー"
 
 msgid "Titles from GameTDB"
 msgstr "ｹﾞｰﾑ名の日本語化"
+
+msgid "Tooltip Delay"
+msgstr ""
 
 msgid "Tooltips"
 msgstr "ヒントバルーン"
@@ -1731,6 +2005,9 @@ msgstr "このゲームの何を削除しますか:"
 msgid "What to extract from NAND?"
 msgstr "何をNANDから書き出しますか?"
 
+msgid "Where should the game be installed to?"
+msgstr ""
+
 msgid "WiFi Features"
 msgstr "ネットワーク対応"
 
@@ -1792,6 +2069,9 @@ msgstr "領域を選択･初期化したりチャンネルリストモードを
 msgid "You cannot delete this category."
 msgstr "このカテゴリは削除できません"
 
+msgid "Zoom Duration (Speed)"
+msgstr ""
+
 msgid "and translators for language files updates"
 msgstr "/ K-M / ichiroling …日本語化"
 
@@ -1837,6 +2117,9 @@ msgstr "初期化を完了しました!"
 msgid "free"
 msgstr "空き"
 
+msgid "ms"
+msgstr ""
+
 msgid "not set"
 msgstr "セットされていません"
 
@@ -1845,6 +2128,24 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "Insert a Wii Disc!"
+#~ msgstr "Wiiディスクを入れて下さい!"
+
+#~ msgid "Issue manager /"
+#~ msgstr "問題管理者 /"
+
+#~ msgid "No cheats were selected"
+#~ msgstr "何も選ばれていません"
+
+#~ msgid "Not a Wii Disc"
+#~ msgstr "Wiiﾃﾞｨｽｸではありません"
+
+#~ msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
+#~ msgstr "ファイルはエミュNANDパスに書き出されます 注意:すでにあるファイルは上書きされます"
+
+#~ msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
+#~ msgstr "セーブデータはエミュNANDパスに書き出されます 注意:すでにあるセーブは上書きされます"
 
 #~ msgid ">> Deleting tickets..."
 #~ msgstr ">> ﾁｹｯﾄを削除します"

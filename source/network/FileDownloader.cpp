@@ -94,7 +94,7 @@ int DownloadFileToMem(const char *url, u8 **inbuffer, u32 *size)
 		return -5;
 	}
 
-	int blocksize = 10*1024;
+	int blocksize = 4*1024;
 
 	u8 * buffer = (u8 *) malloc(filesize);
 	if(!buffer)
@@ -104,11 +104,20 @@ int DownloadFileToMem(const char *url, u8 **inbuffer, u32 *size)
 		return -6;
 	}
 
+	ProgressCancelEnable(true);
+	StartProgress(tr("Downloading file..."), 0, filename, true, true);
+
 	int done = 0;
 
 	while(done < filesize)
 	{
-		ShowProgress(tr("Downloading file..."), 0, filename, (f32) done, (f32) filesize, true, true);
+		if(ProgressCanceled())
+		{
+			done = PROGRESS_CANCELED;
+			break;
+		}
+
+		ShowProgress(done, filesize);
 
 		if(blocksize > filesize - done)
 			blocksize = filesize - done;
@@ -118,11 +127,9 @@ int DownloadFileToMem(const char *url, u8 **inbuffer, u32 *size)
 
 		if(read < 0)
 		{
-			free(buffer);
-			ProgressStop();
-			net_close(connection);
+			done = -8;
 			ShowError(tr("Transfer failed"));
-			return -8;
+			break;
 		}
 		else if(!read)
 			break;
@@ -131,12 +138,19 @@ int DownloadFileToMem(const char *url, u8 **inbuffer, u32 *size)
 	}
 
 	ProgressStop();
+	ProgressCancelEnable(false);
 	net_close(connection);
+
+	if(done < 0)
+	{
+		free(buffer);
+		return done;
+	}
 
 	*inbuffer = buffer;
 	*size = filesize;
 
-	return 1;
+	return done;
 }
 
 /****************************************************************************
@@ -214,7 +228,7 @@ int DownloadFileToPath(const char *orig_url, const char *dest, bool UseFilename)
 		return -5;
 	}
 
-	int blocksize = 10*1024;
+	int blocksize = 4*1024;
 
 	u8 *buffer = (u8 *) malloc(blocksize);
 	if(!buffer)
@@ -252,11 +266,20 @@ int DownloadFileToPath(const char *orig_url, const char *dest, bool UseFilename)
 		return -7;
 	}
 
+	ProgressCancelEnable(true);
+	StartProgress(tr("Downloading file..."), 0, filename, true, true);
+
 	int done = 0;
 
 	while(done < filesize)
 	{
-		ShowProgress(tr("Downloading file..."), 0, filename, (f32) done, (f32) filesize, true, true);
+		if(ProgressCanceled())
+		{
+			done = PROGRESS_CANCELED;
+			break;
+		}
+
+		ShowProgress(done, filesize);
 
 		if(blocksize > filesize - done)
 			blocksize = filesize - done;
@@ -265,12 +288,9 @@ int DownloadFileToPath(const char *orig_url, const char *dest, bool UseFilename)
 
 		if(read < 0)
 		{
-			free(buffer);
-			ProgressStop();
-			net_close(connection);
-			fclose(file);
+			done = -8;
 			ShowError(tr("Transfer failed"));
-			return -8;
+			break;
 		}
 		else if(!read)
 			break;
@@ -284,6 +304,8 @@ int DownloadFileToPath(const char *orig_url, const char *dest, bool UseFilename)
 	ProgressStop();
 	net_close(connection);
 	fclose(file);
+	ProgressStop();
+	ProgressCancelEnable(false);
 
 	return done;
 }

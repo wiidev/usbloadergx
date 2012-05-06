@@ -37,7 +37,10 @@ class GuiCheckboxBrowser : public GuiElement, public sigslot::has_slots<>
 		GuiCheckboxBrowser(int w, int h, int maxSize = 7);
 		virtual ~GuiCheckboxBrowser();
 		bool AddEntrie(const string &text, bool checked = false);
-		int GetSelected() const { return pageIndex+selectedItem; };
+		int GetSelected() const { return pageIndex+selectedItem; }
+		bool IsChecked(u32 i) { if(i >= checkBoxList.size()) return false; else return checkBoxList[i]->IsChecked(); }
+		GuiCheckbox *GetCheckbox(u32 i) { if(i >= checkBoxList.size()) return NULL; else return checkBoxList[i]; }
+		void SetMaxTextWidth(u32 w) { maxTextWidth = w; }
 		void SetImage(GuiImage *Img);
 		void RefreshList();
 		void Clear();
@@ -51,6 +54,7 @@ class GuiCheckboxBrowser : public GuiElement, public sigslot::has_slots<>
 		int selectedItem;
 		int pageIndex;
 		int pressedChan;
+		int maxTextWidth;
 		bool blocked;
 
 		GuiScrollbar scrollBar;

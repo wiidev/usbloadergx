@@ -1,18 +1,31 @@
 /****************************************************************************
- * USB Loader GX
+ * Copyright (C) 2009 r-win
+ * Copyright (C) 2012 Dimok
  *
- * r-win 2009
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any
+ * damages arising from the use of this software.
  *
- * gui_numpad.cpp
+ * Permission is granted to anyone to use this software for any
+ * purpose, including commercial applications, and to alter it and
+ * redistribute it freely, subject to the following restrictions:
  *
- * GUI class definitions
+ * 1. The origin of this software must not be misrepresented; you
+ * must not claim that you wrote the original software. If you use
+ * this software in a product, an acknowledgment in the product
+ * documentation would be appreciated but is not required.
+ *
+ * 2. Altered source versions must be plainly marked as such, and
+ * must not be misrepresented as being the original software.
+ *
+ * 3. This notice may not be removed or altered from any source
+ * distribution.
  ***************************************************************************/
-
-#include "gui.h"
-#include "../main.h"
-#include "../settings/CSettings.h"
-#include <stdio.h>
-#include <string.h>
+#include "gui_numpad.h"
+#include "main.h"
+#include "language/gettext.h"
+#include "settings/CSettings.h"
+#include "themes/CTheme.h"
 /**
  * Constructor for the GuiNumpad class.
  */
@@ -22,30 +35,27 @@ GuiNumpad::GuiNumpad(char * t, u32 max)
 	width = 400;
 	height = 370;
 	selectable = true;
-	alignmentHor = ALIGN_CENTRE;
+	alignmentHor = ALIGN_CENTER;
 	alignmentVert = ALIGN_MIDDLE;
 	kbtextmaxlen = max > sizeof(kbtextstr) ? sizeof(kbtextstr) : max; // limit max up to sizeof(kbtextstr)
-	//  strlcpy(kbtextstr, t, kbtextmaxlen);
 	strncpy(kbtextstr, t, kbtextmaxlen); // strncpy is needed to fill the rest with \0
 	kbtextstr[sizeof(kbtextstr) - 1] = 0; // terminate with \0
 
-	char thekeys[11] = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '\0', '0' };
+	char thekeys[12] = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '0', '.'};
 	memcpy(keys, thekeys, sizeof(thekeys));
 
-	keyTextbox = new GuiImageData("keyboard_textbox.png");
+	keyTextbox = Resources::GetImageData("keyboard_textbox.png");
 	keyTextboxImg = new GuiImage(keyTextbox);
-	keyTextboxImg->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	keyTextboxImg->SetPosition(0, 40);//(0,0);
+	keyTextboxImg->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
+	keyTextboxImg->SetPosition(0, 0);
 	this->Append(keyTextboxImg);
 
-	kbText = new GuiText(kbtextstr, 20, ( GXColor )
-	{   0, 0, 0, 0xff});
-	kbText->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	kbText->SetPosition(0, 53);//(0, 13);
-	kbText->SetPassChar('*');
+	kbText = new GuiText(kbtextstr, 20, ( GXColor ) thColor("r=0 g=0 b=0 a=255 - numpad text color"));
+	kbText->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
+	kbText->SetPosition(0, 10);
 	this->Append(kbText);
 
-	keyMedium = new GuiImageData("keyboard_mediumkey_over.png");
+	keyMedium = Resources::GetImageData("keyboard_mediumkey_over.png");
 
 	trigA = new GuiTrigger;
 	trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -53,44 +63,35 @@ GuiNumpad::GuiNumpad(char * t, u32 max)
 	trigB->SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
 	keyBackImg = new GuiImage(keyMedium);
-	keyBackOverImg = new GuiImage(keyMedium);
-	keyBackText = new GuiText("Back", 20, ( GXColor )
-	{   0, 0, 0, 0xff});
+	keyBackText = new GuiText(tr("Back"), 20, (GXColor) thColor("r=0 g=0 b=0 a=255 - numpad key text color"));
 
-	keyBack = new GuiButton(keyBackImg, keyBackOverImg, ALIGN_CENTRE, ALIGN_MIDDLE, 90, 80, trigA, btnSoundOver, btnSoundClick, 1);
+	keyBack = new GuiButton(keyBackImg, keyBackImg, ALIGN_CENTER, ALIGN_MIDDLE, 90, 90, trigA, btnSoundOver, btnSoundClick, 1);
 	keyBack->SetLabel(keyBackText);
 	keyBack->SetTrigger(trigB);
 	this->Append(keyBack);
 
 	keyClearImg = new GuiImage(keyMedium);
-	keyClearOverImg = new GuiImage(keyMedium);
-	keyClearText = new GuiText("Clear", 20, ( GXColor )
-	{   0, 0, 0, 0xff});
-	keyClear = new GuiButton(keyClearImg, keyClearOverImg, ALIGN_CENTRE, ALIGN_MIDDLE, -90, 80, trigA, btnSoundOver, btnSoundClick, 1);
+	keyClearText = new GuiText(tr("Clear"), 20, ( GXColor ) thColor("r=0 g=0 b=0 a=255 - numpad key text color"));
+	keyClear = new GuiButton(keyClearImg, keyClearImg, ALIGN_CENTER, ALIGN_MIDDLE, -90, 90, trigA, btnSoundOver, btnSoundClick, 1);
 	keyClear->SetLabel(keyClearText);
 	this->Append(keyClear);
 
 	char txt[2] = { 0, 0 };
-	for (int i = 0; i < 11; i++)
+	for (int i = 0; i < NUMPAD_BUTTONS; i++)
 	{
-		if (keys[i] != '\0')
-		{
-			int col = i % 3;
-			int row = i / 3;
+		int col = i % 3;
+		int row = i / 3;
 
-			keyImg[i] = new GuiImage(keyMedium);
-			keyImgOver[i] = new GuiImage(keyMedium);
-			txt[0] = keys[i];
-			keyTxt[i] = new GuiText(txt, 20, ( GXColor )
-			{   0, 0, 0, 0xff});
-			keyTxt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-			keyTxt[i]->SetPosition(0, -10);
-			keyBtn[i] = new GuiButton(keyImg[i], keyImgOver[i], ALIGN_CENTRE, ALIGN_MIDDLE, -90 + 90 * col, -70 + 50
-					* row, trigA, btnSoundOver, btnSoundClick, 1);
-			keyBtn[i]->SetLabel(keyTxt[i]);
+		txt[0] = keys[i];
+		keyImg[i] = new GuiImage(keyMedium);
+		keyTxt[i] = new GuiText(txt, 20, (GXColor) thColor("r=0 g=0 b=0 a=255 - numpad key text color"));
+		keyTxt[i]->SetAlignment(ALIGN_CENTER, ALIGN_BOTTOM);
+		keyTxt[i]->SetPosition(0, -10);
+		keyBtn[i] = new GuiButton(keyImg[i], keyImg[i], ALIGN_CENTER, ALIGN_MIDDLE, -90 + 90 * col, -110 + 50
+				* row, trigA, btnSoundOver, btnSoundClick, 1);
+		keyBtn[i]->SetLabel(keyTxt[i]);
 
-			this->Append(keyBtn[i]);
-		}
+		this->Append(keyBtn[i]);
 	}
 }
 
@@ -104,43 +105,27 @@ GuiNumpad::~GuiNumpad()
 	delete keyTextboxImg;
 	delete keyBackText;
 	delete keyBackImg;
-	delete keyBackOverImg;
 	delete keyBack;
-	delete keyClear;
-	delete keyClearImg;
-	delete keyClearOverImg;
 	delete keyClearText;
+	delete keyClearImg;
+	delete keyClear;
 	delete keyMedium;
 	delete trigA;
 	delete trigB;
 
-	for (int i = 0; i < 11; i++)
+	for (int i = 0; i < NUMPAD_BUTTONS; i++)
 	{
-		if (keys[i] != '\0')
-		{
-			delete keyImg[i];
-			delete keyImgOver[i];
-			delete keyTxt[i];
-			delete keyBtn[i];
-		}
+		delete keyImg[i];
+		delete keyTxt[i];
+		delete keyBtn[i];
 	}
 }
 
 void GuiNumpad::Update(GuiTrigger * t)
 {
-	LOCK( this );
-	if (_elements.size() == 0 || (state == STATE_DISABLED && parentElement)) return;
+	GuiWindow::Update(t);
 
-	for (u8 i = 0; i < _elements.size(); i++)
-	{
-		try
-		{
-			_elements.at(i)->Update(t);
-		}
-		catch (const std::exception& e)
-		{
-		}
-	}
+	LOCK( this );
 
 	if (keyBack->GetState() == STATE_CLICKED)
 	{
@@ -158,23 +143,18 @@ void GuiNumpad::Update(GuiTrigger * t)
 		keyClear->SetState(STATE_SELECTED, t->chan);
 	}
 
-	char txt[2] = { 0, 0 };
-	for (int i = 0; i < 11; i++)
+	for (int i = 0; i < NUMPAD_BUTTONS; i++)
 	{
-		if (keys[i] != '\0')
+		if (keyBtn[i]->GetState() == STATE_CLICKED)
 		{
-			if (keyBtn[i]->GetState() == STATE_CLICKED)
+			if (strlen(kbtextstr) < kbtextmaxlen - 1) // -1 --> kbtextmaxlen means with term. '\0'
 			{
-				txt[0] = keys[i];
-				if (strlen(kbtextstr) < kbtextmaxlen - 1) // -1 --> kbtextmaxlen means with term. '\0'
-				{
-					kbtextstr[strlen(kbtextstr)] = txt[0];
-					kbText->SetText(kbtextstr);
-				}
-				keyBtn[i]->SetState(STATE_SELECTED, t->chan);
+				int len = strlen(kbtextstr);
+				kbtextstr[len] = keys[i];
+				kbtextstr[len+1] = 0;
+				kbText->SetText(kbtextstr);
 			}
+			keyBtn[i]->SetState(STATE_SELECTED, t->chan);
 		}
 	}
-
-	kbText->SetPosition(0, 53);
 }

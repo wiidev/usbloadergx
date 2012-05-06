@@ -12,6 +12,7 @@ class GameBrowseMenu : public GuiWindow
 		virtual ~GameBrowseMenu();
 		static int Execute();
 		void ReloadBrowser();
+		GuiGameBrowser *GetGameBrowser() { return gameBrowser; }
 	private:
 		int MainLoop();
 		int OpenClickedGame(struct discHdr *header);
@@ -66,6 +67,8 @@ class GameBrowseMenu : public GuiWindow
 		GuiImageData * imgarrangeList_gray;
 		GuiImageData * imgdvd;
 		GuiImageData * imgdvd_gray;
+		GuiImageData * imgBannerGrid;
+		GuiImageData * imgBannerGrid_gray;
 		GuiImageData * imgLock;
 		GuiImageData * imgLock_gray;
 		GuiImageData * imgUnlock;
@@ -103,6 +106,8 @@ class GameBrowseMenu : public GuiWindow
 		GuiImage * gridBtnImg_g;
 		GuiImage * carouselBtnImg;
 		GuiImage * carouselBtnImg_g;
+		GuiImage * bannerGridBtnImg;
+		GuiImage * bannerGridBtnImg_g;
 		GuiImage * lockBtnImg;
 		GuiImage * lockBtnImg_g;
 		GuiImage * unlockBtnImg;
@@ -136,6 +141,7 @@ class GameBrowseMenu : public GuiWindow
 		GuiButton * listBtn;
 		GuiButton * gridBtn;
 		GuiButton * carouselBtn;
+		GuiButton * bannerGridBtn;
 		GuiButton * lockBtn;
 		GuiButton * dvdBtn;
 		GuiButton * categBtn;
@@ -155,6 +161,7 @@ class GameBrowseMenu : public GuiWindow
 		GuiTooltip * listBtnTT;
 		GuiTooltip * gridBtnTT;
 		GuiTooltip * carouselBtnTT;
+		GuiTooltip * bannerGridBtnTT;
 		GuiTooltip * lockBtnTT;
 		GuiTooltip * dvdBtnTT;
 		GuiTooltip * categBtnTT;

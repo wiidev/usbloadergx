@@ -106,7 +106,7 @@ bool ControlActivityTimeout(void)
 			minTime = pointer[i]->getLastActivCounter();
 
 	// not very accurate but it's not required here
-	return (minTime/60 > ScreensaverTime(Settings.screensaver));
+	return (minTime/(Settings.PAL50 ? 50 : 60) > ScreensaverTime(Settings.screensaver));
 }
 /****************************************************************************
  * SetupPads

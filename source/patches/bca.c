@@ -12,7 +12,7 @@
 
 u32 do_bca_code(const char *BCAFilepath, u8 *gameid)
 {
-	if (!BCAFilepath) return 0;
+	if (!BCAFilepath || !gameid) return 0;
 
 	if (IOS_GetVersion() == 222 || IOS_GetVersion() == 223)
 	{
@@ -22,26 +22,19 @@ u32 do_bca_code(const char *BCAFilepath, u8 *gameid)
 		memset(filepath, 0, 150);
 		u8 bcaCode[64] ATTRIBUTE_ALIGN( 32 );
 
-		sprintf(filepath, "%s%6s", BCAFilepath, gameid);
-		filepath[strlen(BCAFilepath) + 6] = '.';
-		filepath[strlen(BCAFilepath) + 7] = 'b';
-		filepath[strlen(BCAFilepath) + 8] = 'c';
-		filepath[strlen(BCAFilepath) + 9] = 'a';
+		// Attempt to open the BCA file using the full game ID.
+		snprintf(filepath, sizeof(filepath), "%s%.6s.bca", BCAFilepath, gameid);
 
 		fp = fopen(filepath, "rb");
 		if (!fp)
 		{
-			memset(filepath, 0, 150);
-			sprintf(filepath, "%s%3s", BCAFilepath, gameid + 1);
-			filepath[strlen(BCAFilepath) + 3] = '.';
-			filepath[strlen(BCAFilepath) + 4] = 'b';
-			filepath[strlen(BCAFilepath) + 5] = 'c';
-			filepath[strlen(BCAFilepath) + 6] = 'a';
-			fp = fopen(filepath, "rb");
+			// Not found. Try again without the system code or company code.
+			snprintf(filepath, sizeof(filepath), "%s%.3s.bca", BCAFilepath, gameid+1);
 
+			fp = fopen(filepath, "rb");
 			if (!fp)
 			{
-				// Set default bcaCode
+				// Not found. Use the default BCA.
 				memset(bcaCode, 0, 64);
 				bcaCode[0x33] = 1;
 			}
@@ -49,6 +42,7 @@ u32 do_bca_code(const char *BCAFilepath, u8 *gameid)
 
 		if (fp)
 		{
+			// BCA file opened.
 			u32 ret = 0;
 
 			fseek(fp, 0, SEEK_END);
@@ -63,7 +57,8 @@ u32 do_bca_code(const char *BCAFilepath, u8 *gameid)
 
 			if (ret != 64)
 			{
-				// Set default bcaCode
+				// Error reading the BCA file.
+				// Use the default BCA.
 				memset(bcaCode, 0, 64);
 				bcaCode[0x33] = 1;
 			}

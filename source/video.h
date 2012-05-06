@@ -22,7 +22,11 @@ void Menu_DrawRectangle(f32 x, f32 y, f32 width, f32 height, GXColor color, u8 f
 s32 TakeScreenshot(const char *path);
 void VIDEO_SetWidescreen(bool widescreen);
 void AdjustOverscan(int x, int y);
+void ReSetup_GX(void);
 
+extern GXRModeObj *vmode;
+extern Mtx44 FSProjection2D;
+extern Mtx FSModelView2D;
 extern int screenheight;
 extern int screenwidth;
 extern u32 frameCount;

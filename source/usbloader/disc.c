@@ -27,14 +27,14 @@ extern u32 AppEntrypoint;
 /* Disc pointers */
 static u32 *buffer = (u32 *) 0x93000000;
 static u8 *diskid = (u8 *) Disc_ID;
-static GXRModeObj *vmode = NULL;
-static u32 vmode_reg = 0;
+static GXRModeObj *rmode = NULL;
+static u32 rmode_reg = 0;
 
 void Disc_SetLowMem(void)
 {
 	/* Setup low memory */
 	*Sys_Magic = 0x0D15EA5E; // Standard Boot Code
-	*Version = 0x00000001; // Version
+	*Sys_Version = 0x00000001; // Version
 	*Arena_L = 0x00000000; // Arena Low
 	*BI2 = 0x817E5480; // BI2
 	*Bus_Speed = 0x0E7BE2C0; // Console Bus Speed
@@ -57,7 +57,7 @@ void Disc_SetLowMem(void)
 
 void Disc_SelectVMode(u8 videoselected, u8 ignore_progressive)
 {
-	vmode = VIDEO_GetPreferredMode(0);
+	rmode = VIDEO_GetPreferredMode(0);
 
 	/* Get video mode configuration */
 	bool progressive = (CONF_GetProgressiveScan() > 0) && VIDEO_HaveComponentCable() && !ignore_progressive;
@@ -68,17 +68,17 @@ void Disc_SelectVMode(u8 videoselected, u8 ignore_progressive)
 	switch (tvmode)
 	{
 		case CONF_VIDEO_PAL:
-			vmode_reg = PAL60 ? VI_EURGB60 : VI_PAL;
+			rmode_reg = PAL60 ? VI_EURGB60 : VI_PAL;
 			if(PAL60)
-				vmode = progressive ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
+				rmode = progressive ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
 			break;
 
 		case CONF_VIDEO_MPAL:
-			vmode_reg = VI_MPAL;
+			rmode_reg = VI_MPAL;
 			break;
 
 		case CONF_VIDEO_NTSC:
-			vmode_reg = VI_NTSC;
+			rmode_reg = VI_NTSC;
 			break;
 	}
 
@@ -97,8 +97,8 @@ void Disc_SelectVMode(u8 videoselected, u8 ignore_progressive)
 				case 'Y':
 					if (tvmode != CONF_VIDEO_PAL)
 					{
-						vmode_reg = PAL60 ? VI_EURGB60 : VI_PAL;
-						vmode = progressive ? &TVNtsc480Prog : (PAL60 ? &TVEurgb60Hz480IntDf : &TVPal528IntDf);
+						rmode_reg = PAL60 ? VI_EURGB60 : VI_PAL;
+						rmode = progressive ? &TVNtsc480Prog : (PAL60 ? &TVEurgb60Hz480IntDf : &TVPal528IntDf);
 					}
 					break;
 				// NTSC
@@ -106,8 +106,8 @@ void Disc_SelectVMode(u8 videoselected, u8 ignore_progressive)
 				case 'J':
 					if (tvmode != CONF_VIDEO_NTSC)
 					{
-						vmode_reg = VI_NTSC;
-						vmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
+						rmode_reg = VI_NTSC;
+						rmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
 					}
 					break;
 				default:
@@ -115,24 +115,24 @@ void Disc_SelectVMode(u8 videoselected, u8 ignore_progressive)
 			}
 			break;
 		case VIDEO_MODE_PAL50: // PAL50
-			vmode =  &TVPal528IntDf;
-			vmode_reg = VI_PAL;
+			rmode =  &TVPal528IntDf;
+			rmode_reg = VI_PAL;
 			break;
 		case VIDEO_MODE_PAL60: // PAL60
-			vmode = progressive ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
-			vmode_reg = VI_EURGB60;
+			rmode = progressive ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
+			rmode_reg = VI_EURGB60;
 			break;
 		case VIDEO_MODE_NTSC: // NTSC
-			vmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
-			vmode_reg = VI_NTSC;
+			rmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
+			rmode_reg = VI_NTSC;
 			break;
 		case VIDEO_MODE_PAL480P:
-			vmode = &TVNtsc480Prog;
-			vmode_reg = VI_EURGB60;
+			rmode = &TVNtsc480Prog;
+			rmode_reg = VI_EURGB60;
 			break;
 		case VIDEO_MODE_NTSC480P:
-			vmode = &TVNtsc480Prog;
-			vmode_reg = VI_NTSC;
+			rmode = &TVNtsc480Prog;
+			rmode_reg = VI_NTSC;
 			break;
 		case VIDEO_MODE_SYSDEFAULT: // AUTO PATCH TO SYSTEM
 			break;
@@ -142,18 +142,18 @@ void Disc_SelectVMode(u8 videoselected, u8 ignore_progressive)
 void Disc_SetVMode(void)
 {
 	/* Set video mode register */
-	*Video_Mode = vmode_reg;
+	*Video_Mode = rmode_reg;
 	DCFlushRange((void *) Video_Mode, 4);
 
 	/* Set video mode */
-	if (vmode != NULL)
-		VIDEO_Configure(vmode);
+	if (rmode != NULL)
+		VIDEO_Configure(rmode);
 
 	/* Setup video  */
 	VIDEO_SetBlack(TRUE);
 	VIDEO_Flush();
 	VIDEO_WaitVSync();
-	if (vmode->viTVMode & VI_NON_INTERLACE)
+	if (rmode->viTVMode & VI_NON_INTERLACE)
 		VIDEO_WaitVSync();
 }
 

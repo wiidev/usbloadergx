@@ -2,6 +2,9 @@
 #define _IOSLOADER_H_
 
 #include <gccore.h>
+#include <ogc/machine/processor.h>
+
+#define CheckAHBPROT()	(read32(0x0D800064) == 0xFFFFFFFF)
 
 typedef struct _iosinfo_t
 {

@@ -144,7 +144,7 @@ bool TitleSelector(char output[])
 
 	GuiOptionBrowser optionBrowser4(396, 280, &options4, "bg_options_settings.png");
 	optionBrowser4.SetPosition(0, 90);
-	optionBrowser4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	optionBrowser4.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 
 	HaltGui();
 	GuiWindow w(screenwidth, screenheight);
@@ -351,7 +351,7 @@ int TitleBrowser()
 
 	GuiText titleTxt(tr( "Title Launcher" ), 28, ( GXColor )
 	{   0, 0, 0, 255});
-	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	titleTxt.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	titleTxt.SetPosition(12, 40);
 	titleTxt.SetMaxWidth(356, SCROLL_HORIZONTAL);
 
@@ -376,7 +376,7 @@ int TitleBrowser()
 
 	GuiOptionBrowser optionBrowser3(396, 280, &options3, "bg_options_settings.png");
 	optionBrowser3.SetPosition(0, 90);
-	optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	optionBrowser3.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 
 	GuiImageData wifiImgData(Resources::GetFile("wifi_btn.png"), Resources::GetFileSize("wifi_btn.png"));
 	GuiImage wifiImg(&wifiImgData);

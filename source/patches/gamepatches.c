@@ -248,7 +248,7 @@ static GXRModeObj* vmodes[] =
 
 static GXRModeObj* PAL2NTSC[] = { &TVMpal480IntDf, &TVNtsc480IntDf, &TVPal264Ds, &TVNtsc240Ds, &TVPal264DsAa,
 								  &TVNtsc240DsAa, &TVPal264Int, &TVNtsc240Int, &TVPal264IntAa, &TVNtsc240IntAa, &TVPal524IntAa, &TVNtsc480IntAa,
-								  &TVPal528Int, &TVNtsc480IntAa, &TVPal528IntDf, &TVNtsc480IntDf, &TVPal574IntDfScale, &TVNtsc480IntDf,
+								  &TVPal528Int, &TVNtsc480IntAa, &TVPal528IntDf, &TVNtsc480IntDf, &TVPal576IntDfScale, &TVNtsc480IntDf,
 								  &TVEurgb60Hz240Ds, &TVNtsc240Ds, &TVEurgb60Hz240DsAa, &TVNtsc240DsAa, &TVEurgb60Hz240Int, &TVNtsc240Int,
 								  &TVEurgb60Hz240IntAa, &TVNtsc240IntAa, &TVEurgb60Hz480Int, &TVNtsc480IntAa, &TVEurgb60Hz480IntDf,
 								  &TVNtsc480IntDf, &TVEurgb60Hz480IntAa, &TVNtsc480IntAa, &TVEurgb60Hz480Prog, &TVNtsc480Prog,

@@ -255,7 +255,7 @@ u8 *Channels::GetTMD(const u64 &tid, u32 *size, const char *prefix)
 	if(!prefix)
 		prefix = "";
 
-	sprintf(filepath, "%s/title/%08x/%08x/content/title.tmd", prefix, TITLE_UPPER(tid), TITLE_LOWER(tid));
+	snprintf(filepath, ISFS_MAXPATH, "%s/title/%08x/%08x/content/title.tmd", prefix, TITLE_UPPER(tid), TITLE_LOWER(tid));
 
 	u8 *tmdBuffer = NULL;
 	u32 tmdSize = 0;
@@ -358,7 +358,7 @@ u32 Channels::LoadChannel(const u64 &chantitle)
 	*BI2 = 0x817FE000;						// BI2, the apploader does this too
 	*Bus_Speed = 0x0E7BE2C0;				// bus speed
 	*CPU_Speed = 0x2B73A840;				// cpu speed
-	*GameID_Address = 0x81000000;        	// Game id address, while there's all 0s at 0x81000000 when using the apploader...
+	*GameID_Address = 0x81000000;			// Game id address, while there's all 0s at 0x81000000 when using the apploader...
 	memcpy((void *)Online_Check, (void *)Disc_ID, 4);// online check
 
 	memset((void *)0x817FE000, 0, 0x2000); 	// Clearing BI2
@@ -408,7 +408,7 @@ bool Channels::Identify(const u64 &titleid, u8 *tmdBuffer, u32 tmdSize)
 		return false;
 	}
 
-	sprintf(filepath, "/sys/cert.sys");
+	strlcpy(filepath, "/sys/cert.sys", ISFS_MAXPATH);
 	u8 *certBuffer = NULL;
 	u32 certSize = 0;
 	if (NandTitle::LoadFileFromNand(filepath, &certBuffer, &certSize) < 0)
@@ -557,7 +557,8 @@ bool Channels::GetEmuChanTitle(char *tmdpath, int language, std::string &Title)
 	if(!ptr)
 		return false;
 
-	sprintf(ptr+1, "%08x.app", cid);
+	//! tmdpath has length of 1024
+	snprintf(ptr+1, 1024-(ptr+1-tmdpath), "%08x.app", cid);
 
 	FILE *f = fopen(tmdpath, "rb");
 	if(!f)
@@ -617,7 +618,7 @@ bool Channels::GetEmuChanTitle(char *tmdpath, int language, std::string &Title)
 	return true;
 }
 
-u8 *Channels::GetOpeningBnr(const u64 &title, const char *pathPrefix)
+u8 *Channels::GetOpeningBnr(const u64 &title, u32 * outsize, const char *pathPrefix)
 {
 	u8 *banner = NULL;
 	u32 high = TITLE_UPPER(title);
@@ -681,16 +682,22 @@ u8 *Channels::GetOpeningBnr(const u64 &title, const char *pathPrefix)
 			break;
 		}
 
-		banner = (u8 *) memalign(32, filesize-IMET_OFFSET);
+		// move IMET_OFFSET bytes back
+		filesize -= IMET_OFFSET;
+
+		banner = (u8 *) memalign(32, filesize);
 		if(!banner)
 		{
 			free(buffer);
 			break;
 		}
 
-		memcpy(banner, buffer + IMET_OFFSET, filesize-IMET_OFFSET);
+		memcpy(banner, buffer + IMET_OFFSET, filesize);
 
 		free(buffer);
+
+		if(outsize)
+			*outsize = filesize;
 	}
 	while(0);
 

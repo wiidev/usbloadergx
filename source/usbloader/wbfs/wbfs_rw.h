@@ -26,6 +26,7 @@ extern "C"
 	s32 __WriteUSB(void *fp, u32 lba, u32 count, void *iobuf);
 	s32 __ReadSDHC(void *fp, u32 lba, u32 count, void *iobuf);
 	s32 __WriteSDHC(void *fp, u32 lba, u32 count, void *iobuf);
+	s32 __ReadDVDPlain(void *iobuf, u32 len, u64 offset);
 
 #ifdef __cplusplus
 }

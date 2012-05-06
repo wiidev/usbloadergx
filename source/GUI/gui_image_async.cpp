@@ -121,7 +121,7 @@ u32 GuiImageAsync::ThreadInit()
 	if (Thread == LWP_THREAD_NULL)
 	{
 		LWP_MutexInit(&ListLock, false);
-		LWP_CreateThread(&Thread, GuiImageAsyncThread, NULL, NULL, 32768, 80);
+		LWP_CreateThread(&Thread, GuiImageAsyncThread, NULL, NULL, 32768, 70);
 	}
 	return ++ThreadCount;
 }

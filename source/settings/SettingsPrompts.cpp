@@ -30,13 +30,15 @@ extern u8 reset;
 bool MenuBackgroundMusic()
 {
 	bool ret = false;
-	char entered[1024];
 	int result = -1;
-	snprintf( entered, sizeof( entered ), "%s", Settings.ogg_path );
+	char entered[1024];
+	strlcpy(entered, Settings.ogg_path, sizeof(entered));
 
-	if ( strcmp( entered, "" ) == 0 )
+	// Check the OGG path.
+	if (entered[0] == 0 )
 	{
-		sprintf( entered, "%s", Settings.BootDevice );
+		// OGG path is empty.
+		strlcpy(entered, Settings.BootDevice, sizeof(entered));
 	}
 	else
 	{
@@ -61,7 +63,7 @@ bool MenuBackgroundMusic()
 				return true;
 		}
 		else
-			sprintf( entered, "%s", Settings.BootDevice );
+			strlcpy(entered, Settings.BootDevice, sizeof(entered));
 	}
 
 	result = BrowseDevice( entered, sizeof( entered ), FB_DEFAULT );
@@ -98,23 +100,20 @@ int MenuLanguageSelect()
 	GuiTrigger trigB;
 	trigB.SetButtonOnlyTrigger( -1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B );
 
-	char fullpath[100];
+	char fullpath[150];
 	DirList Dir(Settings.languagefiles_path, ".lang");
 
-	if ( !strcmp( "", Settings.language_path ) )
-	{
-		sprintf( fullpath, "%s", tr( "Default" ) );
-	}
+	// Check if a language is specified.
+	if (Settings.language_path[0] == 0)
+		strlcpy(fullpath, tr( "Default" ), sizeof(fullpath));
 	else
-	{
-		sprintf( fullpath, "%s", Settings.languagefiles_path );
-	}
+		strlcpy(fullpath, Settings.languagefiles_path, sizeof(fullpath));
 
 	GuiText titleTxt( fullpath, 24, ( GXColor ) {0, 0, 0, 255} );
-	titleTxt.SetAlignment( ALIGN_CENTRE, ALIGN_MIDDLE );
+	titleTxt.SetAlignment( ALIGN_CENTER, ALIGN_MIDDLE );
 	titleTxt.SetPosition( 0, 0 );
 	GuiButton pathBtn( 300, 50 );
-	pathBtn.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
+	pathBtn.SetAlignment( ALIGN_CENTER, ALIGN_TOP );
 	pathBtn.SetPosition( 0, 28 );
 	pathBtn.SetLabel( &titleTxt );
 	pathBtn.SetSoundOver( btnSoundOver );
@@ -135,7 +134,7 @@ int MenuLanguageSelect()
 		backBtnImg.SetWidescreen( Settings.widescreen );
 	}
 	GuiButton backBtn( btnOutline.GetWidth(), btnOutline.GetHeight() );
-	backBtn.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
+	backBtn.SetAlignment( ALIGN_CENTER, ALIGN_TOP );
 	backBtn.SetPosition( -190, 400 );
 	backBtn.SetLabel( &backBtnTxt );
 	backBtn.SetImage( &backBtnImg );
@@ -154,7 +153,7 @@ int MenuLanguageSelect()
 		defaultBtnImg.SetWidescreen( Settings.widescreen );
 	}
 	GuiButton defaultBtn( btnOutline.GetWidth(), btnOutline.GetHeight() );
-	defaultBtn.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
+	defaultBtn.SetAlignment( ALIGN_CENTER, ALIGN_TOP );
 	defaultBtn.SetPosition( 190, 400 );
 	defaultBtn.SetLabel( &defaultBtnTxt );
 	defaultBtn.SetImage( &defaultBtnImg );
@@ -172,7 +171,7 @@ int MenuLanguageSelect()
 		updateBtnImg.SetWidescreen( Settings.widescreen );
 	}
 	GuiButton updateBtn( btnOutline.GetWidth(), btnOutline.GetHeight() );
-	updateBtn.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
+	updateBtn.SetAlignment( ALIGN_CENTER, ALIGN_TOP );
 	updateBtn.SetPosition( 0, 400 );
 	updateBtn.SetLabel( &updateBtnTxt );
 	updateBtn.SetImage( &updateBtnImg );
@@ -185,6 +184,9 @@ int MenuLanguageSelect()
 
 	for ( cnt = 0; cnt < Dir.GetFilecount(); cnt++ )
 	{
+		if(!Dir.GetFilename( cnt ))
+			continue;
+
 		char filename[64];
 		strlcpy( filename, Dir.GetFilename( cnt ), sizeof( filename ) );
 		char *dot = strchr( filename, '.' );
@@ -196,7 +198,7 @@ int MenuLanguageSelect()
 
 	GuiOptionBrowser optionBrowser4( 396, 280, &options2, "bg_options_settings.png");
 	optionBrowser4.SetPosition( 0, 90 );
-	optionBrowser4.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
+	optionBrowser4.SetAlignment( ALIGN_CENTER, ALIGN_TOP );
 
 	HaltGui();
 	GuiWindow w( screenwidth, screenheight );

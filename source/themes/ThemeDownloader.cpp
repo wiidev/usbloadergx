@@ -78,7 +78,7 @@ ThemeDownloader::ThemeDownloader()
 		defaultBtnImg->SetWidescreen(Settings.widescreen);
 	}
 	defaultBtn = new GuiButton(btnOutline->GetWidth(), btnOutline->GetHeight());
-	defaultBtn->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	defaultBtn->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	defaultBtn->SetPosition(-20, 400);
 	defaultBtn->SetLabel(defaultBtnTxt);
 	defaultBtn->SetImage(defaultBtnImg);
@@ -301,7 +301,7 @@ void ThemeDownloader::MainButtonClicked(int button)
 	GuiImage dialogBoxImg(&dialogBox);
 
 	GuiWindow promptWindow(dialogBox.GetWidth(), dialogBox.GetHeight());
-	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	promptWindow.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
 
 	GuiTrigger trigA;

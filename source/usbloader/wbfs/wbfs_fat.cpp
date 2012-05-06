@@ -65,7 +65,7 @@ s32 Wbfs_Fat::Open()
 		int portPart = DeviceHandler::PartitionToPortPartition(partition);
 		if (lba == usbHandle->GetLBAStart(portPart))
 		{
-			sprintf(wbfs_fs_drive, "%s:", usbHandle->MountName(portPart));
+			snprintf(wbfs_fs_drive, sizeof(wbfs_fs_drive), "%s:", usbHandle->MountName(portPart));
 			return 0;
 		}
 	}
@@ -429,7 +429,7 @@ s32 Wbfs_Fat::GetHeadersCount()
 			// or usb:/wbfs/GAMEID.iso
 			// or usb:/wbfs/GAMEID.ciso
 			int n = fileext - fname; // length withouth .wbfs
-			sprintf((char *) id, "%.6s", fname);
+			memcpy(id, fname, 6);
 			if (n != 6)
 			{
 				// TITLE [GAMEID].wbfs
@@ -500,11 +500,11 @@ s32 Wbfs_Fat::GetHeadersCount()
 			if (stat(fpath, &st) != 0)
 			{
 				// look for direct .iso file
-				sprintf(strrchr(fpath, '.'), ".iso"); // replace .wbfs with .iso
+				strcpy(strrchr(fpath, '.'), ".iso"); // replace .wbfs with .iso
 				if (stat(fpath, &st) != 0)
 				{
 					// look for direct .ciso file
-					sprintf(strrchr(fpath, '.'), ".ciso"); // replace .iso with .ciso
+					strcpy(strrchr(fpath, '.'), ".ciso"); // replace .iso with .ciso
 					if (stat(fpath, &st) != 0) continue;
 				}
 			}
@@ -787,7 +787,7 @@ void Wbfs_Fat::mk_gameid_title(struct discHdr *header, char *name, int re_space,
 
 	snprintf(id, sizeof(id), (char *) header->id);
 	snprintf(title, sizeof(title), header->title);
-	title_filename(title);
+	CleanTitleCharacters(title);
 
 	if (layout == 0)
 	{
@@ -809,7 +809,7 @@ void Wbfs_Fat::mk_gameid_title(struct discHdr *header, char *name, int re_space,
 	}
 }
 
-void Wbfs_Fat::title_filename(char *title)
+void Wbfs_Fat::CleanTitleCharacters(char *title)
 {
 	int i, len;
 	// trim leading space

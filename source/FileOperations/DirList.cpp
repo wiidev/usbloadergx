@@ -100,9 +100,6 @@ bool DirList::LoadPath(std::string &folderpath, const char *filter, u32 flags)
 
 		if(st->st_mode & S_IFDIR)
 		{
-			if(!(flags & Dirs))
-				continue;
-
 			if(strcmp(filename,".") == 0 || strcmp(filename,"..") == 0)
 				continue;
 
@@ -114,6 +111,9 @@ bool DirList::LoadPath(std::string &folderpath, const char *filter, u32 flags)
 				LoadPath(folderpath, filter, flags);
 				folderpath.erase(length);
 			}
+
+			if(!(flags & Dirs))
+				continue;
 		}
 		else
 		{

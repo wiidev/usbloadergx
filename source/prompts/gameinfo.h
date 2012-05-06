@@ -11,6 +11,6 @@
 #include "usbloader/disc.h"
 
 int showGameInfo(int selectedGame, struct discHdr *header);
-bool save_gamelist(int txt);
+bool save_gamelist(bool bCSV);
 
 #endif

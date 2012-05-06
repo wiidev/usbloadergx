@@ -169,7 +169,7 @@ bool CGameSettings::ValidVersion(FILE * file)
 bool CGameSettings::Save()
 {
 	char filepath[300];
-	strcpy(filepath, ConfigPath.c_str());
+	strlcpy(filepath, ConfigPath.c_str(), sizeof(filepath));
 
 	char * ptr = strrchr(filepath, '/');
 	if(ptr)
@@ -205,6 +205,12 @@ bool CGameSettings::Save()
 		fprintf(f, "NandEmuPath:%s; ", GameList[i].NandEmuPath.c_str());
 		fprintf(f, "Hooktype:%d; ", GameList[i].Hooktype);
 		fprintf(f, "WiirdDebugger:%d; ", GameList[i].WiirdDebugger);
+		fprintf(f, "DMLVideo:%d; ", GameList[i].DMLVideo);
+		fprintf(f, "DMLNMM:%d; ", GameList[i].DMLNMM);
+		fprintf(f, "DMLActivityLED:%d; ", GameList[i].DMLActivityLED);
+		fprintf(f, "DMLPADHOOK:%d; ", GameList[i].DMLPADHOOK);
+		fprintf(f, "DMLNoDisc:%d; ", GameList[i].DMLNoDisc);
+		fprintf(f, "DMLDebug:%d; ", GameList[i].DMLDebug);
 		fprintf(f, "Locked:%d;\n", GameList[i].Locked);
 	}
 	fprintf(f, "# END\n");
@@ -215,102 +221,64 @@ bool CGameSettings::Save()
 
 bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *value)
 {
-	int i = 0;
-
 	if (strcmp(name, "video") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			game.video = i;
-		}
+		game.video = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "aspectratio") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			game.aspectratio = i;
-		}
+		game.aspectratio = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "language") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			game.language = i;
-		}
+		game.language = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "ocarina") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			game.ocarina = i;
-		}
+		game.ocarina = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "vipatch") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			game.vipatch = i;
-		}
+		game.vipatch = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "ios") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			game.ios = i;
-		}
+		game.ios = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "parentalcontrol") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			game.parentalcontrol = i;
-		}
+		game.parentalcontrol = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "errorfix002") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			game.errorfix002 = i;
-		}
+		game.errorfix002 = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "iosreloadblock") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			game.iosreloadblock = i;
-		}
+		game.iosreloadblock = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "loadalternatedol") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			game.loadalternatedol = i;
-		}
+		game.loadalternatedol = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "alternatedolstart") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			game.alternatedolstart = i;
-		}
+		game.alternatedolstart = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "patchcountrystrings") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			game.patchcountrystrings = i;
-		}
+		game.patchcountrystrings = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "alternatedolname") == 0)
@@ -320,26 +288,17 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 	}
 	else if(strcmp(name, "returnTo") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			game.returnTo = i;
-		}
+		game.returnTo = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "sneekVideoPatch") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			game.sneekVideoPatch = i;
-		}
+		game.sneekVideoPatch = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "NandEmuMode") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			game.NandEmuMode = i;
-		}
+		game.NandEmuMode = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "NandEmuPath") == 0)
@@ -349,26 +308,47 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 	}
 	else if(strcmp(name, "Hooktype") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			game.Hooktype = i;
-		}
+		game.Hooktype = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "WiirdDebugger") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			game.WiirdDebugger = i;
-		}
+		game.WiirdDebugger = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "Locked") == 0)
 	{
-		if (sscanf(value, "%d", &i) == 1)
-		{
-			game.Locked = i;
-		}
+		game.Locked = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "DMLVideo") == 0)
+	{
+		game.DMLVideo = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "DMLNMM") == 0)
+	{
+		game.DMLNMM = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "DMLActivityLED") == 0)
+	{
+		game.DMLActivityLED = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "DMLPADHOOK") == 0)
+	{
+		game.DMLPADHOOK = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "DMLNoDisc") == 0)
+	{
+		game.DMLNoDisc = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "DMLDebug") == 0)
+	{
+		game.DMLDebug = atoi(value);
 		return true;
 	}
 
@@ -491,5 +471,11 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.NandEmuPath.clear();
 	game.Hooktype = INHERIT;
 	game.WiirdDebugger = INHERIT;
+	game.DMLVideo = INHERIT;
+	game.DMLNMM = INHERIT;
+	game.DMLActivityLED = INHERIT;
+	game.DMLPADHOOK = INHERIT;
+	game.DMLNoDisc = INHERIT;
+	game.DMLDebug = INHERIT;
 	game.Locked = OFF;
 }

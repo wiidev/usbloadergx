@@ -96,6 +96,8 @@ class NandTitle
 		u64 operator[](u32 i) { return At(i); }
 
 		bool GetName(u64 tid, int language, wchar_t* name);
+		
+		tmd* GetTMD(u64 tid);
 
 		static int LoadFileFromNand(const char *filepath, u8 **outbuffer, u32 *outfilesize);
 		static int ExtractFile(const char *nandPath, const char *filepath);
@@ -105,7 +107,6 @@ class NandTitle
 
 		std::vector<u64> titleIds;
 		std::map<u64, string> NameList;
-		tmd* GetTMD(u64 tid);
 
 		u32 currentIndex;
 		u32 currentType;

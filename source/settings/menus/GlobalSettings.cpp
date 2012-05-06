@@ -33,6 +33,7 @@
 #include "CustomPathsSM.hpp"
 #include "FeatureSettingsMenu.hpp"
 #include "HardDriveSM.hpp"
+#include "BannerSettingsMenu.hpp"
 
 GlobalSettings::GlobalSettings()
 	: FlyingButtonsMenu(tr("Global Settings"))
@@ -73,11 +74,12 @@ void GlobalSettings::SetupMainButtons()
 	SetMainButton(pos++, tr( "Loader Settings" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Hard Drive Settings" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Features" ), MainButtonImgData, MainButtonImgOverData);
-	SetMainButton(pos++, tr( "Parental Control" ), MainButtonImgData, MainButtonImgOverData);
+	SetMainButton(pos++, tr( "Banner Animation Settings" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Sound" ), MainButtonImgData, MainButtonImgOverData);
+	SetMainButton(pos++, tr( "Parental Control" ), MainButtonImgData, MainButtonImgOverData);
+	SetMainButton(pos++, tr( "Custom Paths" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Theme Menu" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Theme Downloader" ), MainButtonImgData, MainButtonImgOverData);
-	SetMainButton(pos++, tr( "Custom Paths" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Update" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Default Settings" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Credits" ), creditsImgData, creditsImgOverData);
@@ -146,10 +148,10 @@ void GlobalSettings::CreateSettingsMenu(int menuNr)
 		CurrentMenu = new FeatureSettingsMenu();
 		Append(CurrentMenu);
 	}
-	//! Parental Control
+	//! Banner Animation Settings
 	else if(menuNr == Idx++)
 	{
-		if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_PARENTAL_SETTINGS))
+		if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_BANNER_SETTINGS))
 		{
 			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
 			return;
@@ -157,7 +159,7 @@ void GlobalSettings::CreateSettingsMenu(int menuNr)
 
 		HideMenu();
 		ResumeGui();
-		CurrentMenu = new ParentalControlSM();
+		CurrentMenu = new BannerSettingsMenu();
 		Append(CurrentMenu);
 	}
 	//! Sound
@@ -172,6 +174,34 @@ void GlobalSettings::CreateSettingsMenu(int menuNr)
 		HideMenu();
 		ResumeGui();
 		CurrentMenu = new SoundSettingsMenu();
+		Append(CurrentMenu);
+	}
+	//! Parental Control
+	else if(menuNr == Idx++)
+	{
+		if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_PARENTAL_SETTINGS))
+		{
+			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			return;
+		}
+
+		HideMenu();
+		ResumeGui();
+		CurrentMenu = new ParentalControlSM();
+		Append(CurrentMenu);
+	}
+	//! Custom Paths
+	else if(menuNr == Idx++)
+	{
+		if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_CUSTOMPATH_SETTINGS))
+		{
+			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			return;
+		}
+
+		HideMenu();
+		ResumeGui();
+		CurrentMenu = new CustomPathsSM();
 		Append(CurrentMenu);
 	}
 	//! Theme Menu
@@ -195,20 +225,6 @@ void GlobalSettings::CreateSettingsMenu(int menuNr)
 		}
 
 		returnMenu = MENU_THEMEDOWNLOADER;
-	}
-	//! Custom Paths
-	else if(menuNr == Idx++)
-	{
-		if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_CUSTOMPATH_SETTINGS))
-		{
-			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
-			return;
-		}
-
-		HideMenu();
-		ResumeGui();
-		CurrentMenu = new CustomPathsSM();
-		Append(CurrentMenu);
 	}
 	//! Update
 	else if(menuNr == Idx++)

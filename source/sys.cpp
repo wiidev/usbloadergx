@@ -3,6 +3,7 @@
 #include <wiiuse/wpad.h>
 
 #include "mload/mload.h"
+#include "banner/BannerAsync.h"
 #include "Controls/DeviceHandler.hpp"
 #include "FileOperations/fileops.h"
 #include "homebrewboot/BootHomebrew.h"
@@ -93,6 +94,7 @@ void AppCleanUp(void)
 
 	gettextCleanUp();
 	Theme::CleanUp();
+	BannerAsync::ThreadExit();
 	NewTitles::DestroyInstance();
 	ThreadedTask::DestroyInstance();
 	SoundHandler::DestroyInstance();
@@ -231,14 +233,24 @@ void ScreenShot()
 {
 	time_t rawtime;
 	struct tm * timeinfo;
-	char buffer[150];
-	char buffer2[300];
+	char filename[100];	// Filename, with current date/time.
+	char fullPath[300];	// Full pathname: ConfigPath + filename.
 
 	time(&rawtime);
 	timeinfo = localtime(&rawtime);
-	//USBLoader_GX_ScreenShot-Month_Day_Hour_Minute_Second_Year.png
-	strftime(buffer, 80, "USBLoader_GX_ScreenShot-%b%d%H%M%S%y.png", timeinfo);
-	sprintf(buffer2, "%s%s", Settings.ConfigPath, buffer);
+
+	// Create the filename with the current date/time.
+	// Format: USBLoader_GX_ScreenShot-Month_Day_Hour_Minute_Second_Year.png
+	int ret = strftime(filename, sizeof(filename), "USBLoader_GX_ScreenShot-%b%d%H%M%S%y.png", timeinfo);
+	if (ret == 0)
+	{
+		// Error formatting the time.
+		// Use the raw time in seconds as a fallback.
+		snprintf(filename, sizeof(filename), "USBLoader_GX_ScreenShot-%ld.png", rawtime);
+	}
+
+	// Create the full pathname.
+	snprintf(fullPath, sizeof(fullPath), "%s%s", Settings.ConfigPath, filename);
 
 	if(!CreateSubfolder(Settings.ConfigPath))
 	{
@@ -246,5 +258,5 @@ void ScreenShot()
 		return;
 	}
 
-	TakeScreenshot(buffer2);
+	TakeScreenshot(fullPath);
 }

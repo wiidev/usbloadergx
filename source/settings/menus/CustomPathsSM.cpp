@@ -24,6 +24,7 @@
 #include <unistd.h>
 #include "Channels/channels.h"
 #include "Controls/DeviceHandler.hpp"
+#include "GameCube/GCGames.h"
 #include "CustomPathsSM.hpp"
 #include "settings/SettingsPrompts.h"
 #include "settings/CSettings.h"
@@ -56,6 +57,9 @@ CustomPathsSM::CustomPathsSM()
 	Options->SetName(Idx++, tr("Wiinnertag Path"));
 	Options->SetName(Idx++, tr("Nand Emu Path"));
 	Options->SetName(Idx++, tr("Nand Emu Channel Path"));
+	Options->SetName(Idx++, tr("Main GameCube Path"));
+	Options->SetName(Idx++, tr("SD GameCube Path"));
+	Options->SetName(Idx++, tr("Cache BNR Files Path"));
 
 	SetOptionValues();
 }
@@ -117,6 +121,15 @@ void CustomPathsSM::SetOptionValues()
 
 	//! Settings: Nand Emu Channel Path
 	Options->SetValue(Idx++, Settings.NandEmuChanPath);
+
+	//! Settings: GameCube Games Path
+	Options->SetValue(Idx++, Settings.GameCubePath);
+
+	//! Settings: SD GameCube Games Path
+	Options->SetValue(Idx++, Settings.GameCubeSDPath);
+
+	//! Settings: Cache BNR Files Path
+	Options->SetValue(Idx++, Settings.BNRCachePath);
 }
 
 int CustomPathsSM::GetMenuInternal()
@@ -272,6 +285,44 @@ int CustomPathsSM::GetMenuInternal()
 		{
 			Channels::Instance()->GetEmuChannelList();
 		}
+	}
+
+	//! Settings: GameCube Games Path
+	else if (ret == ++Idx)
+	{
+		titleTxt->SetText(tr( "Main GameCube Games Path" ));
+		if(ChangePath(Settings.GameCubePath, sizeof(Settings.GameCubePath)))
+		{
+			GCGames::Instance()->LoadAllGames();
+		}
+	}
+
+	//! Settings: SD GameCube Games Path
+	else if (ret == ++Idx)
+	{
+		char tmp_path[sizeof(Settings.GameCubeSDPath)];
+		snprintf(tmp_path, sizeof(tmp_path), "%s", Settings.GameCubeSDPath);
+
+		titleTxt->SetText(tr( "SD GameCube Games Path" ));
+		if(ChangePath(tmp_path, sizeof(tmp_path)))
+		{
+			if(strncmp(tmp_path, "sd", 2) != 0)
+			{
+				WindowPrompt(tr("Error:"), tr("This path must be on SD!"), tr("OK"));
+			}
+			else
+			{
+				snprintf(Settings.GameCubeSDPath, sizeof(Settings.GameCubeSDPath), "%s", tmp_path);
+				GCGames::Instance()->LoadAllGames();
+			}
+		}
+	}
+
+	//! Settings: Cache BNR Files Path
+	else if (ret == ++Idx)
+	{
+		titleTxt->SetText(tr( "Cache BNR Files Path" ));
+		ChangePath(Settings.BNRCachePath, sizeof(Settings.BNRCachePath));
 	}
 
 	//! Global set back of the titleTxt after a change

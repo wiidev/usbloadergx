@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-08 19:07+0100\n"
+"POT-Creation-Date: 2012-05-06 12:19+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -18,6 +18,21 @@ msgstr ""
 "Last-Themer: Example\n"
 "Theme-Team: Example\n"
 "Theme-Version: Example\n"
+
+msgid "r=237 g=237 b=237 a=255 - banner icon frame color"
+msgstr ""
+
+msgid "r=52 g=190 b=237 a=255 - banner icon highlite color"
+msgstr ""
+
+msgid "r=130 g=130 b=130 a=0 - banner icon frame edge tev color 1"
+msgstr ""
+
+msgid "r=180 g=180 b=180 a=255 - banner icon frame edge tev color 2"
+msgstr ""
+
+msgid "r=255 g=255 b=255 a=255 - banner icon frame edge tev color 3"
+msgstr ""
 
 msgid "right - checkbox browser scrollbar align hor"
 msgstr ""
@@ -95,6 +110,12 @@ msgid "r=0 g=0 b=0 a=255 - keyboard text color"
 msgstr ""
 
 msgid "r=0 g=0 b=0 a=255 - keyboard key text color"
+msgstr ""
+
+msgid "r=0 g=0 b=0 a=255 - numpad text color"
+msgstr ""
+
+msgid "r=0 g=0 b=0 a=255 - numpad key text color"
 msgstr ""
 
 msgid "right - options browser scrollbar align hor"
@@ -208,91 +229,100 @@ msgstr ""
 msgid "335 - clock pos y"
 msgstr ""
 
-msgid "188 - list layout favorite btn pos x"
+msgid "168 - list layout favorite btn pos x"
 msgstr ""
 
-msgid "230 - list layout favorite btn pos x widescreen"
+msgid "214 - list layout favorite btn pos x widescreen"
 msgstr ""
 
 msgid "13 - list layout favorite btn pos y"
 msgstr ""
 
-msgid "228 - list layout search btn pos x"
+msgid "208 - list layout search btn pos x"
 msgstr ""
 
-msgid "262 - list layout search btn pos x widescreen"
+msgid "246 - list layout search btn pos x widescreen"
 msgstr ""
 
 msgid "13 - list layout search btn pos y"
 msgstr ""
 
-msgid "268 - list layout abc/sort btn pos x"
+msgid "248 - list layout abc/sort btn pos x"
 msgstr ""
 
-msgid "294 - list layout abc/sort btn pos x widescreen"
+msgid "278 - list layout abc/sort btn pos x widescreen"
 msgstr ""
 
 msgid "13 - list layout abc/sort btn pos y"
 msgstr ""
 
-msgid "308 - list layout loadermode btn pos x"
+msgid "288 - list layout loadermode btn pos x"
 msgstr ""
 
-msgid "326 - list layout loadermode btn pos x widescreen"
+msgid "310 - list layout loadermode btn pos x widescreen"
 msgstr ""
 
 msgid "13 - list layout loadermode btn pos y"
 msgstr ""
 
-msgid "348 - list layout category btn pos x"
+msgid "328 - list layout category btn pos x"
 msgstr ""
 
-msgid "358 - list layout category btn pos x widescreen"
+msgid "342 - list layout category btn pos x widescreen"
 msgstr ""
 
 msgid "13 - list layout category btn pos y"
 msgstr ""
 
-msgid "388 - list layout list btn pos x"
+msgid "368 - list layout list btn pos x"
 msgstr ""
 
-msgid "390 - list layout list btn pos x widescreen"
+msgid "374 - list layout list btn pos x widescreen"
 msgstr ""
 
 msgid "13 - list layout list btn pos y"
 msgstr ""
 
-msgid "422 - list layout grid btn pos x widescreen"
+msgid "406 - list layout grid btn pos x widescreen"
 msgstr ""
 
-msgid "428 - list layout grid btn pos x"
+msgid "408 - list layout grid btn pos x"
 msgstr ""
 
 msgid "13 - list layout grid btn pos y"
 msgstr ""
 
-msgid "454 - list layout carousel btn pos x widescreen"
+msgid "438 - list layout carousel btn pos x widescreen"
 msgstr ""
 
-msgid "468 - list layout carousel btn pos x"
+msgid "448 - list layout carousel btn pos x"
 msgstr ""
 
 msgid "13 - list layout carousel btn pos y"
 msgstr ""
 
-msgid "486 - list layout lock btn pos x widescreen"
+msgid "470 - list layout bannergrid btn pos x widescreen"
 msgstr ""
 
-msgid "508 - list layout lock btn pos x"
+msgid "488 - list bannergrid btn pos x"
+msgstr ""
+
+msgid "13 - list layout bannergrid btn pos y"
+msgstr ""
+
+msgid "502 - list layout lock btn pos x widescreen"
+msgstr ""
+
+msgid "528 - list layout lock btn pos x"
 msgstr ""
 
 msgid "13 - list layout lock btn pos y"
 msgstr ""
 
-msgid "518 - list layout dvd btn pos x widescreen"
+msgid "534 - list layout dvd btn pos x widescreen"
 msgstr ""
 
-msgid "548 - list layout dvd btn pos x"
+msgid "568 - list layout dvd btn pos x"
 msgstr ""
 
 msgid "13 - list layout dvd btn pos y"
@@ -310,91 +340,100 @@ msgstr ""
 msgid "49 - game list layout pos y"
 msgstr ""
 
-msgid "120 - grid layout favorite btn pos x"
+msgid "100 - grid layout favorite btn pos x"
 msgstr ""
 
-msgid "160 - grid layout favorite btn pos x widescreen"
+msgid "144 - grid layout favorite btn pos x widescreen"
 msgstr ""
 
 msgid "13 - grid layout favorite btn pos y"
 msgstr ""
 
-msgid "160 - grid layout search btn pos x"
+msgid "140 - grid layout search btn pos x"
 msgstr ""
 
-msgid "192 - grid layout search btn pos x widescreen"
+msgid "176 - grid layout search btn pos x widescreen"
 msgstr ""
 
 msgid "13 - grid layout search btn pos y"
 msgstr ""
 
-msgid "200 - grid layout abc/sort btn pos x"
+msgid "180 - grid layout abc/sort btn pos x"
 msgstr ""
 
-msgid "224 - grid layout abc/sort btn pos x widescreen"
+msgid "208 - grid layout abc/sort btn pos x widescreen"
 msgstr ""
 
 msgid "13 - grid layout abc/sort btn pos y"
 msgstr ""
 
-msgid "240 - grid layout loadermode btn pos x"
+msgid "220 - grid layout loadermode btn pos x"
 msgstr ""
 
-msgid "256 - grid layout loadermode btn pos x widescreen"
+msgid "240 - grid layout loadermode btn pos x widescreen"
 msgstr ""
 
 msgid "13 - grid layout loadermode btn pos y"
 msgstr ""
 
-msgid "280 - grid layout category btn pos x"
+msgid "260 - grid layout category btn pos x"
 msgstr ""
 
-msgid "288 - grid layout category btn pos x widescreen"
+msgid "272 - grid layout category btn pos x widescreen"
 msgstr ""
 
 msgid "13 - grid layout category btn pos y"
 msgstr ""
 
-msgid "320 - grid layout list btn pos x"
+msgid "300 - grid layout list btn pos x"
 msgstr ""
 
-msgid "320 - grid layout list btn pos x widescreen"
+msgid "304 - grid layout list btn pos x widescreen"
 msgstr ""
 
 msgid "13 - grid layout list btn pos y"
 msgstr ""
 
-msgid "352 - grid layout grid btn pos x widescreen"
+msgid "336 - grid layout grid btn pos x widescreen"
 msgstr ""
 
-msgid "360 - grid layout grid btn pos x"
+msgid "340 - grid layout grid btn pos x"
 msgstr ""
 
 msgid "13 - grid layout grid btn pos y"
 msgstr ""
 
-msgid "384 - grid layout carousel btn pos x widescreen"
+msgid "368 - grid layout carousel btn pos x widescreen"
 msgstr ""
 
-msgid "400 - grid layout carousel btn pos x"
+msgid "380 - grid layout carousel btn pos x"
 msgstr ""
 
 msgid "13 - grid layout carousel btn pos y"
 msgstr ""
 
-msgid "416 - grid layout lock btn pos x widescreen"
+msgid "400 - grid layout bannergrid btn pos x widescreen"
 msgstr ""
 
-msgid "440 - grid layout lock btn pos x"
+msgid "420 - grid bannergrid btn pos x"
+msgstr ""
+
+msgid "13 - grid layout bannergrid btn pos y"
+msgstr ""
+
+msgid "432 - grid layout lock btn pos x widescreen"
+msgstr ""
+
+msgid "460 - grid layout lock btn pos x"
 msgstr ""
 
 msgid "13 - grid layout lock btn pos y"
 msgstr ""
 
-msgid "448 - grid layout dvd btn pos x widescreen"
+msgid "464 - grid layout dvd btn pos x widescreen"
 msgstr ""
 
-msgid "480 - grid layout dvd btn pos x"
+msgid "500 - grid layout dvd btn pos x"
 msgstr ""
 
 msgid "13 - grid layout dvd btn pos y"
@@ -406,91 +445,100 @@ msgstr ""
 msgid "640 - game grid layout width"
 msgstr ""
 
-msgid "120 - carousel layout favorite btn pos x"
+msgid "100 - carousel layout favorite btn pos x"
 msgstr ""
 
-msgid "160 - carousel layout favorite btn pos x widescreen"
+msgid "144 - carousel layout favorite btn pos x widescreen"
 msgstr ""
 
 msgid "13 - carousel layout favorite btn pos y"
 msgstr ""
 
-msgid "160 - carousel layout search btn pos x"
+msgid "140 - carousel layout search btn pos x"
 msgstr ""
 
-msgid "192 - carousel layout search btn pos x widescreen"
+msgid "176 - carousel layout search btn pos x widescreen"
 msgstr ""
 
 msgid "13 - carousel layout search btn pos y"
 msgstr ""
 
-msgid "200 - carousel layout abc/sort btn pos x"
+msgid "180 - carousel layout abc/sort btn pos x"
 msgstr ""
 
-msgid "224 - carousel layout abc/sort btn pos x widescreen"
+msgid "208 - carousel layout abc/sort btn pos x widescreen"
 msgstr ""
 
 msgid "13 - carousel layout abc/sort btn pos y"
 msgstr ""
 
-msgid "240 - carousel layout loadermode btn pos x"
+msgid "220 - carousel layout loadermode btn pos x"
 msgstr ""
 
-msgid "256 - carousel layout loadermode btn pos x widescreen"
+msgid "240 - carousel layout loadermode btn pos x widescreen"
 msgstr ""
 
 msgid "13 - carousel layout loadermode btn pos y"
 msgstr ""
 
-msgid "280 - carousel layout category btn pos x"
+msgid "260 - carousel layout category btn pos x"
 msgstr ""
 
-msgid "288 - carousel layout category btn pos x widescreen"
+msgid "272 - carousel layout category btn pos x widescreen"
 msgstr ""
 
 msgid "13 - carousel layout category btn pos y"
 msgstr ""
 
-msgid "320 - carousel layout list btn pos x"
+msgid "300 - carousel layout list btn pos x"
 msgstr ""
 
-msgid "320 - carousel layout list btn pos x widescreen"
+msgid "304 - carousel layout list btn pos x widescreen"
 msgstr ""
 
 msgid "13 - carousel layout list btn pos y"
 msgstr ""
 
-msgid "352 - carousel layout grid btn pos x widescreen"
+msgid "336 - carousel layout grid btn pos x widescreen"
 msgstr ""
 
-msgid "360 - carousel layout grid btn pos x"
+msgid "340 - carousel layout grid btn pos x"
 msgstr ""
 
 msgid "13 - carousel layout grid btn pos y"
 msgstr ""
 
-msgid "384 - carousel layout carousel btn pos x widescreen"
+msgid "368 - carousel layout carousel btn pos x widescreen"
 msgstr ""
 
-msgid "400 - carousel layout carousel btn pos x"
+msgid "380 - carousel layout carousel btn pos x"
 msgstr ""
 
 msgid "13 - carousel layout carousel btn pos y"
 msgstr ""
 
-msgid "416 - carousel layout lock btn pos x widescreen"
+msgid "400 - carousel layout bannergrid btn pos x widescreen"
 msgstr ""
 
-msgid "440 - carousel layout lock btn pos x"
+msgid "420 - carousel bannergrid btn pos x"
+msgstr ""
+
+msgid "13 - carousel layout bannergrid btn pos y"
+msgstr ""
+
+msgid "432 - carousel layout lock btn pos x widescreen"
+msgstr ""
+
+msgid "460 - carousel layout lock btn pos x"
 msgstr ""
 
 msgid "13 - carousel layout lock btn pos y"
 msgstr ""
 
-msgid "448 - carousel layout dvd btn pos x widescreen"
+msgid "464 - carousel layout dvd btn pos x widescreen"
 msgstr ""
 
-msgid "480 - carousel layout dvd btn pos x"
+msgid "500 - carousel layout dvd btn pos x"
 msgstr ""
 
 msgid "13 - carousel layout dvd btn pos y"
@@ -506,6 +554,111 @@ msgid "-20 - game carousel layout pos y"
 msgstr ""
 
 msgid "0 - game carousel layout pos x"
+msgstr ""
+
+msgid "100 - bannergrid layout favorite btn pos x"
+msgstr ""
+
+msgid "144 - bannergrid layout favorite btn pos x widescreen"
+msgstr ""
+
+msgid "13 - bannergrid layout favorite btn pos y"
+msgstr ""
+
+msgid "140 - bannergrid layout search btn pos x"
+msgstr ""
+
+msgid "176 - bannergrid layout search btn pos x widescreen"
+msgstr ""
+
+msgid "13 - bannergrid layout search btn pos y"
+msgstr ""
+
+msgid "180 - bannergrid layout abc/sort btn pos x"
+msgstr ""
+
+msgid "208 - bannergrid layout abc/sort btn pos x widescreen"
+msgstr ""
+
+msgid "13 - bannergrid layout abc/sort btn pos y"
+msgstr ""
+
+msgid "220 - bannergrid layout loadermode btn pos x"
+msgstr ""
+
+msgid "240 - bannergrid layout loadermode btn pos x widescreen"
+msgstr ""
+
+msgid "13 - bannergrid layout loadermode btn pos y"
+msgstr ""
+
+msgid "260 - bannergrid layout category btn pos x"
+msgstr ""
+
+msgid "272 - bannergrid layout category btn pos x widescreen"
+msgstr ""
+
+msgid "13 - bannergrid layout category btn pos y"
+msgstr ""
+
+msgid "300 - bannergrid layout list btn pos x"
+msgstr ""
+
+msgid "304 - bannergrid layout list btn pos x widescreen"
+msgstr ""
+
+msgid "13 - bannergrid layout list btn pos y"
+msgstr ""
+
+msgid "336 - bannergrid layout grid btn pos x widescreen"
+msgstr ""
+
+msgid "340 - bannergrid layout grid btn pos x"
+msgstr ""
+
+msgid "13 - bannergrid layout grid btn pos y"
+msgstr ""
+
+msgid "368 - bannergrid layout carousel btn pos x widescreen"
+msgstr ""
+
+msgid "380 - bannergrid layout carousel btn pos x"
+msgstr ""
+
+msgid "13 - bannergrid layout carousel btn pos y"
+msgstr ""
+
+msgid "400 - bannergrid layout bannergrid btn pos x widescreen"
+msgstr ""
+
+msgid "420 - bannergrid bannergrid btn pos x"
+msgstr ""
+
+msgid "13 - bannergrid layout bannergrid btn pos y"
+msgstr ""
+
+msgid "432 - bannergrid layout lock btn pos x widescreen"
+msgstr ""
+
+msgid "460 - bannergrid layout lock btn pos x"
+msgstr ""
+
+msgid "13 - bannergrid layout lock btn pos y"
+msgstr ""
+
+msgid "464 - bannergrid layout dvd btn pos x widescreen"
+msgstr ""
+
+msgid "500 - bannergrid layout dvd btn pos x"
+msgstr ""
+
+msgid "13 - bannergrid layout dvd btn pos y"
+msgstr ""
+
+msgid "0 - game bannergrid layout pos x"
+msgstr ""
+
+msgid "0 - game bannergrid layout pos y"
 msgstr ""
 
 msgid "1 - show hdd info: 1 for on and 0 for off"
@@ -536,6 +689,15 @@ msgid "30 - region info text pos y"
 msgstr ""
 
 msgid "68 - region info text pos x"
+msgstr ""
+
+msgid "r=0 g=0 b=0 a=255 - banner window playcount text color"
+msgstr ""
+
+msgid "0 - banner window play count pos x"
+msgstr ""
+
+msgid "215 - banner window play count pos y"
 msgstr ""
 
 msgid "r=0 g=0 b=0 a=255 - category prompt title text color"
@@ -659,6 +821,57 @@ msgid "0 - category prompt back button pos y"
 msgstr ""
 
 msgid "110 - category prompt back button pos x"
+msgstr ""
+
+msgid "r=0 g=0 b=0 a=255 - check box browser prompt title text color"
+msgstr ""
+
+msgid "center - check box browser prompt title text align hor"
+msgstr ""
+
+msgid "top - check box browser prompt title text align ver"
+msgstr ""
+
+msgid "0 - check box browser prompt title text pos x"
+msgstr ""
+
+msgid "10 - check box browser prompt title text pos y"
+msgstr ""
+
+msgid "center - check box browser prompt browser align hor"
+msgstr ""
+
+msgid "top - check box browser prompt browser align ver"
+msgstr ""
+
+msgid "0 - check box browser prompt browser pos x"
+msgstr ""
+
+msgid "45 - check box browser prompt browser pos y"
+msgstr ""
+
+msgid "bottom - check box browser prompt install button align ver"
+msgstr ""
+
+msgid "center - check box browser prompt install button align hor"
+msgstr ""
+
+msgid "-110 - check box browser prompt install button pos x"
+msgstr ""
+
+msgid "0 - check box browser prompt install button pos y"
+msgstr ""
+
+msgid "bottom - check box browser prompt back button align ver"
+msgstr ""
+
+msgid "center - check box browser prompt back button align hor"
+msgstr ""
+
+msgid "0 - check box browser prompt back button pos y"
+msgstr ""
+
+msgid "110 - check box browser prompt back button pos x"
 msgstr ""
 
 msgid "r=0 g=0 b=0 a=255 - prompt windows text color"

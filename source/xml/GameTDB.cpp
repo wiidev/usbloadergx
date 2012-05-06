@@ -1160,12 +1160,12 @@ int GameTDB::GetAccessoirList(const char * id, vector<Accessoir> & acc_list)
 		for(const char * ptr = ControlsNode; *ptr != '"' && *ptr != '\0'; ptr++)
 			acc_list[list_num].Name.push_back(*ptr);
 
-        acc_list[list_num].Required = false;
+		acc_list[list_num].Required = false;
 
 		char * requiredField = strstr(ControlsNode, "required=\"");
 		if(requiredField && strncmp(requiredField + strlen("required=\""), "true", 4) == 0)
 		{
-            acc_list[list_num].Required = true;
+			acc_list[list_num].Required = true;
 		}
 
 		ControlsNode = strstr(ControlsNode, "<control type=\"");

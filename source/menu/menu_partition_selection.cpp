@@ -73,7 +73,7 @@ int SelectPartitionMenu()
 
 	GuiOptionBrowser optionBrowser(396, 280, &options, "bg_options_settings.png");
 	optionBrowser.SetPosition(0, 40);
-	optionBrowser.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	optionBrowser.SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 
 	HaltGui();
 	GuiWindow w(screenwidth, screenheight);

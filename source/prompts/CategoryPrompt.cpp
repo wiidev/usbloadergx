@@ -196,7 +196,8 @@ int CategoryPrompt::Show()
 {
 	while(backBtn->GetState() != STATE_CLICKED)
 	{
-		usleep(100);
+		usleep(10000);
+
 		if (shutdown)
 			Sys_Shutdown();
 		else if (reset)

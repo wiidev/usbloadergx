@@ -30,7 +30,7 @@
 PromptWindow::PromptWindow(const char *title, const char *msg)
 	: GuiWindow(472, 320)
 {
-	SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	SetPosition(0, -10);
 
 	btnOutline = Resources::GetImageData("button_dialogue_box.png");
@@ -50,7 +50,7 @@ PromptWindow::PromptWindow(const char *title, const char *msg)
 	Append(dialogBoxImg);
 
 	titleTxt = new GuiText(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	titleTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	titleTxt->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
 	titleTxt->SetPosition(0, 55);
 	if(Settings.wsprompt && Settings.widescreen)
 		titleTxt->SetMaxWidth(width-140, DOTTED);
@@ -59,7 +59,7 @@ PromptWindow::PromptWindow(const char *title, const char *msg)
 	Append(titleTxt);
 
 	msgTxt = new GuiText(msg, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
-	msgTxt->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	msgTxt->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	msgTxt->SetPosition(0, -40);
 	if(Settings.wsprompt && Settings.widescreen)
 		msgTxt->SetMaxWidth(width-140, WRAP);
@@ -114,7 +114,7 @@ void PromptWindow::PositionButtons()
 			default:
 				break;
 			case 1:
-				Button[0]->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+				Button[0]->SetAlignment(ALIGN_CENTER, ALIGN_BOTTOM);
 				Button[0]->SetPosition(0, -55);
 				break;
 			case 2:
@@ -128,7 +128,7 @@ void PromptWindow::PositionButtons()
 				Button[0]->SetPosition(70, -120);
 				Button[1]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
 				Button[1]->SetPosition(-70, -120);
-				Button[2]->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+				Button[2]->SetAlignment(ALIGN_CENTER, ALIGN_BOTTOM);
 				Button[2]->SetPosition(0, -55);
 				break;
 			case 4:
@@ -150,7 +150,7 @@ void PromptWindow::PositionButtons()
 			default:
 				break;
 			case 1:
-				Button[0]->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+				Button[0]->SetAlignment(ALIGN_CENTER, ALIGN_BOTTOM);
 				Button[0]->SetPosition(0, -55);
 				break;
 			case 2:
@@ -164,7 +164,7 @@ void PromptWindow::PositionButtons()
 				Button[0]->SetPosition(50, -120);
 				Button[1]->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
 				Button[1]->SetPosition(-50, -120);
-				Button[2]->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+				Button[2]->SetAlignment(ALIGN_CENTER, ALIGN_BOTTOM);
 				Button[2]->SetPosition(0, -55);
 				break;
 			case 4:

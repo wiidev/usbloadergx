@@ -30,6 +30,8 @@
 #include "settings/SettingsPrompts.h"
 #include "settings/GameTitles.h"
 #include "settings/CGameCategories.hpp"
+#include "SystemMenu/SystemMenuResources.h"
+#include "system/IosLoader.h"
 #include "usbloader/wbfs.h"
 #include "themes/CTheme.h"
 #include "utils/tools.h"
@@ -61,6 +63,12 @@ static const char * PromptButtonsText[MAX_ON_OFF] =
 {
 	trNOOP( "Normal" ),
 	trNOOP( "Widescreen Fix" ),
+};
+
+static const char * GameWindowText[2] =
+{
+	trNOOP( "Banner Animation" ),
+	trNOOP( "Rotating Disc" ),
 };
 
 static const char * KeyboardText[KEYBOARD_MAX] =
@@ -110,7 +118,9 @@ GuiSettingsMenu::GuiSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Display" ));
 	Options->SetName(Idx++, "%s", tr( "Clock" ));
 	Options->SetName(Idx++, "%s", tr( "Tooltips" ));
+	Options->SetName(Idx++, "%s", tr( "Tooltip Delay" ));
 	Options->SetName(Idx++, "%s", tr( "Flip-X" ));
+	Options->SetName(Idx++, "%s", tr( "Game Window Mode" ));
 	Options->SetName(Idx++, "%s", tr( "Prompts Buttons" ));
 	Options->SetName(Idx++, "%s", tr( "Widescreen Factor" ));
 	Options->SetName(Idx++, "%s", tr( "Font Scale Factor" ));
@@ -157,18 +167,24 @@ void GuiSettingsMenu::SetOptionValues()
 	//! Settings: Tooltips
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.tooltips]));
 
+	//! Settings: Tooltip Delay
+	Options->SetValue(Idx++, "%i %s", Settings.TooltipDelay, tr("ms"));
+
 	//! Settings: Flip-X
 	Options->SetValue(Idx++, "%s%s%s", tr(FlipXText[Settings.xflip][0]),
 				FlipXText[Settings.xflip][1], tr( FlipXText[Settings.xflip][2] ));
+
+	//! Settings: Game Window Mode
+	Options->SetValue(Idx++, "%s", tr( GameWindowText[Settings.GameWindowMode] ));
 
 	//! Settings: Prompts Buttons
 	Options->SetValue(Idx++, "%s", tr( PromptButtonsText[Settings.wsprompt] ));
 
 	//! Settings: Widescreen Factor
-	Options->SetValue(Idx++, "%0.3f", Settings.WSFactor);
+	Options->SetValue(Idx++, "%g", Settings.WSFactor);
 
 	//! Settings: Font Scale Factor
-	Options->SetValue(Idx++, "%0.3f", Settings.FontScaleFactor);
+	Options->SetValue(Idx++, "%g", Settings.FontScaleFactor);
 
 	//! Settings: Keyboard
 	Options->SetValue(Idx++, "%s", KeyboardText[Settings.keyset]);
@@ -275,10 +291,31 @@ int GuiSettingsMenu::GetMenuInternal()
 		if (++Settings.tooltips >= MAX_ON_OFF) Settings.tooltips = 0;
 	}
 
+	//! Settings: Tooltip Delay
+	else if (ret == ++Idx)
+	{
+		char entrie[20];
+		snprintf(entrie, sizeof(entrie), "%i", Settings.TooltipDelay);
+		int ret = OnScreenNumpad(entrie, sizeof(entrie));
+		if(ret)
+			Settings.TooltipDelay = atoi(entrie);
+	}
+
 	//! Settings: Flip-X
 	else if (ret == ++Idx)
 	{
 		if (++Settings.xflip >= XFLIP_MAX) Settings.xflip = 0;
+	}
+
+	//! Settings: Game Window Mode
+	else if (ret == ++Idx)
+	{
+		if (++Settings.GameWindowMode >= 2) Settings.GameWindowMode = 0;
+
+		if(Settings.GameWindowMode == GAMEWINDOW_BANNER && !SystemMenuResources::Instance()->IsLoaded()) {
+			WindowPrompt(tr( "Error:" ), tr( "Banner window is only available with AHBPROT! Please consider installing new HBC version." ), tr( "OK" ));
+			Settings.GameWindowMode = GAMEWINDOW_DISC;
+		}
 	}
 
 	//! Settings: Prompts Buttons
@@ -291,36 +328,20 @@ int GuiSettingsMenu::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		char entrie[20];
-		snprintf(entrie, sizeof(entrie), "%0.3f", Settings.WSFactor);
-		int ret = OnScreenKeyboard(entrie, sizeof(entrie), 0);
+		snprintf(entrie, sizeof(entrie), "%g", Settings.WSFactor);
+		int ret = OnScreenNumpad(entrie, sizeof(entrie));
 		if(ret)
-		{
-			for(u32 i = 0; i < sizeof(entrie); ++i)
-			{
-				if(entrie[i] == ',')
-					entrie[i] = '.';
-			}
-
 			Settings.WSFactor = LIMIT(atof(entrie), 0.01f, 1.5f);
-		}
 	}
 
 	//! Settings: Font Scale Factor
 	else if (ret == ++Idx)
 	{
 		char entrie[20];
-		snprintf(entrie, sizeof(entrie), "%0.3f", Settings.FontScaleFactor);
-		int ret = OnScreenKeyboard(entrie, sizeof(entrie), 0);
+		snprintf(entrie, sizeof(entrie), "%g", Settings.FontScaleFactor);
+		int ret = OnScreenNumpad(entrie, sizeof(entrie));
 		if(ret)
-		{
-			for(u32 i = 0; i < sizeof(entrie); ++i)
-			{
-				if(entrie[i] == ',')
-					entrie[i] = '.';
-			}
-
 			Settings.FontScaleFactor = LIMIT(atof(entrie), 0.01f, 1.5f);
-		}
 	}
 
 	//! Settings: Keyboard
@@ -393,17 +414,9 @@ int GuiSettingsMenu::GetMenuInternal()
 	{
 		char entrie[20];
 		snprintf(entrie, sizeof(entrie), "%g", Settings.PointerSpeed);
-		int ret = OnScreenKeyboard(entrie, sizeof(entrie), 0);
+		int ret = OnScreenNumpad(entrie, sizeof(entrie));
 		if(ret)
-		{
-			for(u32 i = 0; i < sizeof(entrie); ++i)
-			{
-				if(entrie[i] == ',')
-					entrie[i] = '.';
-			}
-
 			Settings.PointerSpeed = atof(entrie);
-		}
 	}
 
 	//! Settings: Adjust Overscan X
@@ -411,7 +424,7 @@ int GuiSettingsMenu::GetMenuInternal()
 	{
 		char entrie[20];
 		snprintf(entrie, sizeof(entrie), "%i", Settings.AdjustOverscanX);
-		int ret = OnScreenKeyboard(entrie, sizeof(entrie), 0);
+		int ret = OnScreenNumpad(entrie, sizeof(entrie));
 		if(ret)
 		{
 			Settings.AdjustOverscanX = atoi(entrie);
@@ -424,7 +437,7 @@ int GuiSettingsMenu::GetMenuInternal()
 	{
 		char entrie[20];
 		snprintf(entrie, sizeof(entrie), "%i", Settings.AdjustOverscanY);
-		int ret = OnScreenKeyboard(entrie, sizeof(entrie), 0);
+		int ret = OnScreenNumpad(entrie, sizeof(entrie));
 		if(ret)
 		{
 			Settings.AdjustOverscanY = atoi(entrie);
