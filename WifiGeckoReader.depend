@@ -1,0 +1,273 @@
+# depslib dependency file v1.0
+1279792267 source:c:\dokumente und einstellungen\dima\desktop\wifigeckoreader\source\network.c
+	<stdio.h>
+	<sys/types.h>
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	<conio.h>
+	<conio.h>
+	<fcntl.h>
+	"network.h"
+
+1334304754 "
+
+1279792340 source:c:\dokumente und einstellungen\dima\desktop\wifigeckoreader\source\main.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	"network.h"
+
+1279798227 source:/home/dima/Desktop/WifiGeckoReader/source/main.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	"Input.h"
+	"network.h"
+
+1279798084 /home/dima/Desktop/WifiGeckoReader/source/network.h
+	"winsock/winsock.h"
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+
+1279798084 n.h>
+
+1279797916 source:/home/dima/Desktop/WifiGeckoReader/source/network.c
+	<stdio.h>
+	<sys/types.h>
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	<fcntl.h>
+	"network.h"
+
+1279798221 /home/dima/Desktop/WifiGeckoReader/source/Input.h
+	<conio.h>
+	<termios.h>
+
+1325182250 >
+
+1279798252 source:/home/dima/Desktop/WifiGeckoReader/source/Input.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Input.h"
+	<termios.h>
+
+1198764450 /home/dima/Desktop/WifiGeckoReader/source/winsock/winsock.h
+	<windows.h>
+	<mswsock.h>
+
+1279798227 source:d:\wifigeckoreader\source\main.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	"Input.h"
+	"network.h"
+
+1279799401 d:\wifigeckoreader\source\input.h
+	<conio.h>
+	<termios.h>
+
+1279799400 d:\wifigeckoreader\source\network.h
+	"winsock/winsock.h"
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<fcntl.h>
+
+1334304019 
+
+1198768050 d:\wifigeckoreader\source\winsock\winsock.h
+	<windows.h>
+	<mswsock.h>
+
+1279799399 source:d:\wifigeckoreader\source\network.c
+	<stdio.h>
+	<sys/types.h>
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	"network.h"
+
+1279798252 source:d:\wifigeckoreader\source\input.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Input.h"
+	<termios.h>
+
+1291665385 source:d:\code\windowstools\wifigeckoreader\source\network.c
+	<stdio.h>
+	<sys/types.h>
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	"network.h"
+
+1291665388 d:\code\windowstools\wifigeckoreader\source\network.h
+	"winsock/winsock.h"
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<fcntl.h>
+
+1198764450 d:\code\windowstools\wifigeckoreader\source\winsock\winsock.h
+	<windows.h>
+	<mswsock.h>
+
+1291665361 source:d:\code\windowstools\wifigeckoreader\source\input.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Input.h"
+	<termios.h>
+
+1291665378 d:\code\windowstools\wifigeckoreader\source\input.h
+	<conio.h>
+	<termios.h>
+
+1293478462 source:d:\code\windowstools\wifigeckoreader\source\main.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	"Input.h"
+	"network.h"
+
+1325182250 source:/media/truecrypt1/code/LocalTrunk/Tools/WifiGeckoReader/source/Input.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Input.h"
+	<termios.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Input.h"
+	<termios.h>
+
+1325182250 /media/truecrypt1/code/LocalTrunk/Tools/WifiGeckoReader/source/Input.h
+	<conio.h>
+	<termios.h>
+	<conio.h>
+	<termios.h>
+
+1334304767 source:/media/truecrypt1/code/LocalTrunk/Tools/WifiGeckoReader/source/main.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	"Input.h"
+	"network.h"
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	"Input.h"
+	"network.h"
+
+1334304019 /media/truecrypt1/code/LocalTrunk/Tools/WifiGeckoReader/source/network.h
+	"winsock/winsock.h"
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<fcntl.h>
+	"winsock/winsock.h"
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<fcntl.h>
+
+1325182250 /media/truecrypt1/code/LocalTrunk/Tools/WifiGeckoReader/source/winsock/winsock.h
+	<windows.h>
+	<mswsock.h>
+	<windows.h>
+	<mswsock.h>
+
+1334308770 source:/media/truecrypt1/code/LocalTrunk/Tools/WifiGeckoReader/source/network.c
+	<stdio.h>
+	<sys/types.h>
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	"network.h"
+	<stdio.h>
+	<sys/types.h>
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	"network.h"
+
+1334910814 source:d:\code\localtrunk\tools\wifigeckoreader\source\main.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	"Input.h"
+	"network.h"
+
+1334909941 d:\code\localtrunk\tools\wifigeckoreader\source\input.h
+	<conio.h>
+	<termios.h>
+
+1334910353 d:\code\localtrunk\tools\wifigeckoreader\source\network.h
+	"winsock/winsock.h"
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<fcntl.h>
+
+1325182250 d:\code\localtrunk\tools\wifigeckoreader\source\winsock\winsock.h
+	<windows.h>
+	<mswsock.h>
+
+1334910629 source:d:\code\localtrunk\tools\wifigeckoreader\source\network.c
+	<stdio.h>
+	<sys/types.h>
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	"network.h"
+
+1334909938 source:d:\code\localtrunk\tools\wifigeckoreader\source\input.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Input.h"
+	<termios.h>
+
+1334909938 source:/media/truecrypt1/test/WifiGeckoReader/source/Input.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Input.h"
+	<termios.h>
+
+1334909941 /media/truecrypt1/test/WifiGeckoReader/source/Input.h
+	<conio.h>
+	<termios.h>
+
+1334910431 source:/media/truecrypt1/test/WifiGeckoReader/source/main.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	"Input.h"
+	"network.h"
+
+1334910353 /media/truecrypt1/test/WifiGeckoReader/source/network.h
+	"winsock/winsock.h"
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<fcntl.h>
+
+1325182250 /media/truecrypt1/test/WifiGeckoReader/source/winsock/winsock.h
+	<windows.h>
+	<mswsock.h>
+
+1334910629 source:/media/truecrypt1/test/WifiGeckoReader/source/network.c
+	<stdio.h>
+	<sys/types.h>
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	"network.h"
+

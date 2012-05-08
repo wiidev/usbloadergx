@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Release" />
+	<File name="source\Input.c" open="1" top="0" tabpos="4">
+		<Cursor position="104" topLine="0" />
+	</File>
+	<File name="source\Input.h" open="1" top="1" tabpos="5">
+		<Cursor position="104" topLine="18" />
+	</File>
+	<File name="source\main.c" open="1" top="0" tabpos="1">
+		<Cursor position="1691" topLine="49" />
+	</File>
+	<File name="source\network.c" open="1" top="0" tabpos="2">
+		<Cursor position="2400" topLine="62" />
+	</File>
+	<File name="source\network.h" open="1" top="0" tabpos="3">
+		<Cursor position="1368" topLine="19" />
+	</File>
+</CodeBlocks_layout_file>
