@@ -243,7 +243,6 @@ static int ApplicationDownload(void)
     {
         // first line of the text file is the revisionc
         newrev = atoi((char *) file.data);
-        newrev = 1800;
         // 2nd line of the text file is the url
         char *ptr = strchr((char *)file.data, '\n');
         while(ptr && (*ptr == '\r' || *ptr == '\n' || *ptr == ' '))
