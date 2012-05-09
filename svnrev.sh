@@ -65,7 +65,6 @@ Artworks: cyrex, NeoRame
 Validation: Cyan and many others
 Issue management: Cyan / Dimok
 WiiTDB / Hosting covers: Lustar
-Hosting updates files: CorneliousJD
 USBLoader sources: Waninkoko, Kwiirk, Hermes
 cIOS maintenance: davebaol, xabby666, XFlak and Rodries
 Languages files updates: Kinyo and translaters

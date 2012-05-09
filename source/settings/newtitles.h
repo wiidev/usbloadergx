@@ -9,7 +9,9 @@ class NewTitles
 		static NewTitles *Instance() { if(!instance) instance = new NewTitles(); return instance; }
 		static void DestroyInstance() { delete instance; instance = NULL; }
 
-		void Save();
+		void Save(void);
+		void Clean(void);
+		void Reload(void);
 		void CheckGame(const u8 *titleid);
 		bool IsNew(const u8 *titleid) const;
 		void Remove(const u8 *titleid);
@@ -19,13 +21,12 @@ class NewTitles
 
 		static NewTitles *instance;
 
-		class Title
+		struct Title
 		{
-			public:
-				char titleId[7];
-				time_t timestamp;
-				Title *next;
-				bool isNew;
+			char titleId[7];
+			time_t timestamp;
+			Title *next;
+			bool isNew;
 		};
 
 		Title *firstTitle;

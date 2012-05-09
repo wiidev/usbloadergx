@@ -84,7 +84,7 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 	GameCFG * game_cfg = GameSettings.GetGameCFG(gameHdr->id);
 	u8 videoChoice = game_cfg->video == INHERIT ? Settings.videomode : game_cfg->video;
 	u8 ocarinaChoice = game_cfg->ocarina == INHERIT ? Settings.ocarina : game_cfg->ocarina;
-	u8 dmlVideoChoice = game_cfg->DMLVideo == INHERIT ? Settings.DMLVideo : game_cfg->DMLVideo;
+	u8 gcForceInterlace = game_cfg->GCForceInterlace == INHERIT ? Settings.GCForceInterlace : game_cfg->GCForceInterlace;
 	u8 dmlNMMChoice = game_cfg->DMLNMM == INHERIT ? Settings.DMLNMM : game_cfg->DMLNMM;
 	u8 dmlActivityLEDChoice = game_cfg->DMLActivityLED == INHERIT ? Settings.DMLActivityLED : game_cfg->DMLActivityLED;
 	u8 dmlPADHookChoice = game_cfg->DMLPADHOOK == INHERIT ? Settings.DMLPADHOOK : game_cfg->DMLPADHOOK;
@@ -97,7 +97,7 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 
 	*(vu32*)0xCC003024 |= 7;
 
-	Disc_SelectVMode(videoChoice, true);
+	Disc_SelectVMode(videoChoice, gcForceInterlace);
 	Disc_SetVMode();
 
 	DML_CFG *dml_config = (DML_CFG *) DML_CONFIG_ADDRESS;
@@ -121,33 +121,6 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 		dml_config->Config |= DML_CFG_BOOT_DISC;
 	}
 
-	// internal DML video mode methods
-	switch(dmlVideoChoice)
-	{
-	default:
-	case 0:
-		dml_config->VideoMode = DML_VID_DML_AUTO;
-		break;
-	case 1:
-		dml_config->VideoMode = DML_VID_NONE;
-		break;
-	case VIDEO_MODE_PAL50:
-		dml_config->VideoMode = DML_VID_FORCE_PAL50 | DML_VID_FORCE;
-		break;
-	case VIDEO_MODE_PAL60:
-		dml_config->VideoMode = DML_VID_FORCE_PAL60 | DML_VID_FORCE;
-		break;
-	case VIDEO_MODE_NTSC:
-		dml_config->VideoMode = DML_VID_FORCE_NTSC | DML_VID_FORCE;
-		break;
-	case VIDEO_MODE_PAL480P-1:
-		dml_config->VideoMode = DML_VID_FORCE_PAL60 | DML_VID_FORCE_PROG | DML_VID_PROG_PATCH | DML_VID_FORCE;
-		break;
-	case VIDEO_MODE_NTSC480P-1:
-		dml_config->VideoMode = DML_VID_FORCE_NTSC | DML_VID_FORCE_PROG | DML_VID_PROG_PATCH | DML_VID_FORCE;
-		break;
-	}
-
 	// setup cheat and path
 	if(ocarinaChoice) {
 		dml_config->Config |= DML_CFG_CHEATS | DML_CFG_CHEAT_PATH;
@@ -168,6 +141,12 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 	if(dmlDebugChoice)
 		dml_config->Config |= dmlDebugChoice == ON ? DML_CFG_DEBUGGER : DML_CFG_DEBUGWAIT;
 
+	// internal DML video mode methods
+	dml_config->VideoMode = DML_VID_NONE;
+	bool progressive = (CONF_GetProgressiveScan() > 0) && VIDEO_HaveComponentCable() && !gcForceInterlace;
+	if(progressive)
+		dml_config->VideoMode |= DML_VID_PROG_PATCH;
+
 	DCFlushRange(dml_config, sizeof(DML_CFG));
 	memcpy((u8*)DML_CONFIG_ADDRESS_V1_2, dml_config, sizeof(DML_CFG));
 	DCFlushRange((u8*)DML_CONFIG_ADDRESS_V1_2, sizeof(DML_CFG));
@@ -177,13 +156,25 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 	gprintf("DML: setup video mode 0x%X\n", dml_config->VideoMode);
 
 	syssram *sram = __SYS_LockSram();
-	if (*Video_Mode == VI_NTSC)
+	if(progressive) {
+		sram->flags |= 0x80; //set progressive flag
+	}
+	else {
+		sram->flags &= 0x7F; //clear progressive flag
+	}
+	// setup video mode flags
+	if (*Video_Mode == VI_NTSC) {
 		sram->flags &= ~1;	// Clear bit 0 to set the video mode to NTSC
-	else
+		sram->ntd &= 0xBF; //clear pal60 flag
+	}
+	else {
 		sram->flags |= 1;	// Set bit 0 to set the video mode to PAL
-
+		sram->ntd |= 0x40; //set pal60 flag
+	}
 	__SYS_UnlockSram(1); // 1 -> write changes
-	while(!__SYS_SyncSram());
+
+	while(!__SYS_SyncSram())
+		usleep(100);
 
 	WII_Initialize();
 	return WII_LaunchTitle(0x0000000100000100ULL);

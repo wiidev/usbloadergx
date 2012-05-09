@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-06 12:19+0100\n"
+"POT-Creation-Date: 2012-05-09 21:15+0200\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 msgid " could not be downloaded."
 msgstr "nem letölthetõ."
@@ -188,9 +188,6 @@ msgid "Banner grid layout is only available with AHBPROT! Please consider instal
 msgstr ""
 
 msgid "Banner window is only available with AHBPROT! Please consider installing new HBC version."
-msgstr ""
-
-msgid "Beginning"
 msgstr ""
 
 msgid "Big thanks to:"
@@ -394,9 +391,6 @@ msgstr ""
 msgid "Console should be unlocked to modify it."
 msgstr "A konzol zárolva, ezért nem változtatható meg."
 
-msgid "Content"
-msgstr ""
-
 msgid "Continue"
 msgstr ""
 
@@ -488,9 +482,6 @@ msgstr "Egyéni útvonalak"
 msgid "Customs/Original"
 msgstr "Egyéni/Eredeti"
 
-msgid "DML Auto"
-msgstr ""
-
 msgid "DML Debug"
 msgstr ""
 
@@ -503,13 +494,7 @@ msgstr ""
 msgid "DML No Disc"
 msgstr ""
 
-msgid "DML None"
-msgstr ""
-
 msgid "DML PAD Hook"
-msgstr ""
-
-msgid "DML Video Mode"
 msgstr ""
 
 msgid "DOL Path"
@@ -971,6 +956,9 @@ msgstr ""
 msgid "GC Banner Scale"
 msgstr ""
 
+msgid "GC Force Interlace"
+msgstr ""
+
 msgid "GC Games"
 msgstr ""
 
@@ -1238,9 +1226,6 @@ msgstr "Fájl betöltése innen: %s ?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "DOL betöltése alternatív DOL-ként?"
 
-msgid "Loader Mode"
-msgstr ""
-
 msgid "Loader Settings"
 msgstr ""
 
@@ -1293,9 +1278,6 @@ msgid "May"
 msgstr "Máj"
 
 msgid "Messageboard Update"
-msgstr ""
-
-msgid "Mixed"
 msgstr ""
 
 msgid "Motion+ Video"
@@ -1661,9 +1643,6 @@ msgstr ""
 msgid "Screensaver"
 msgstr "Képernyõkimélõ"
 
-msgid "Search Mode"
-msgstr ""
-
 msgid "Select"
 msgstr "Válassz"
 
@@ -1775,9 +1754,6 @@ msgstr "Sikeresen Mentve"
 msgid "Successfully Updated"
 msgstr "Sikeres frissítés"
 
-msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr ""
-
 msgid "Successfully copied"
 msgstr ""
 
@@ -1789,6 +1765,9 @@ msgstr "Téma kicsomagolva."
 
 msgid "Successfully installed:"
 msgstr "Sikeresen telepítve:"
+
+msgid "Successfully updated."
+msgstr ""
 
 msgid "Switching to channel list mode."
 msgstr ""
@@ -2105,11 +2084,11 @@ msgstr "-nak kiváló eszközéért: LibWiiGui"
 msgid "for hosting the themes"
 msgstr ": témák tárhelye"
 
-msgid "for hosting the update files"
-msgstr ": frissítési fájlok tárhelye"
-
 msgid "for the USB Loader source"
 msgstr ": USB Loader forráskód"
+
+msgid "for their work on the wiki page"
+msgstr ""
 
 msgid "formatted!"
 msgstr "Formázva!"
@@ -2128,6 +2107,9 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
+
+#~ msgid "for hosting the update files"
+#~ msgstr ": frissítési fájlok tárhelye"
 
 #~ msgid "Insert a Wii Disc!"
 #~ msgstr "Helyezz be Wii lemezt!"

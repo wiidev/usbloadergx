@@ -170,7 +170,7 @@ int UpdateGameTDB()
 static void UpdateIconPng()
 {
 	char iconpath[200];
-	struct block file = downloadfile("http://www.techjawa.com/usbloadergx/icon.png");
+    struct block file = downloadfile("http://usbloader-gui.googlecode.com/svn/branches/updates/icon.png");
 	if (file.data != NULL)
 	{
 		snprintf(iconpath, sizeof(iconpath), "%sicon.png", Settings.update_path);
@@ -187,7 +187,7 @@ static void UpdateIconPng()
 static void UpdateMetaXml()
 {
 	char xmlpath[200];
-	struct block file = downloadfile("http://www.techjawa.com/usbloadergx/meta.file");
+    struct block file = downloadfile("http://usbloader-gui.googlecode.com/svn/branches/updates/meta.xml");
 	if (file.data != NULL)
 	{
 		snprintf(xmlpath, sizeof(xmlpath), "%smeta.xml", Settings.update_path);
@@ -210,9 +210,9 @@ int CheckUpdate()
 	int currentrev = atoi(GetRev());
 
 #ifdef FULLCHANNEL
-	struct block file = downloadfile( "http://www.techjawa.com/usbloadergx/wadrev.txt" );
+    struct block file = downloadfile( "http://usbloader-gui.googlecode.com/svn/branches/updates/update_wad.txt" );
 #else
-	struct block file = downloadfile("http://www.techjawa.com/usbloadergx/rev.txt");
+    struct block file = downloadfile("http://usbloader-gui.googlecode.com/svn/branches/updates/update_dol.txt");
 #endif
 
 	if (file.data != NULL)
@@ -227,18 +227,50 @@ int CheckUpdate()
 	return -1;
 }
 
-static int ApplicationDownload(int newrev)
+static int ApplicationDownload(void)
 {
+    std::string DownloadURL;
+    int newrev = 0;
+    int currentrev = atoi(GetRev());
+
+#ifdef FULLCHANNEL
+    struct block file = downloadfile( "http://usbloader-gui.googlecode.com/svn/branches/updates/update_wad.txt" );
+#else
+    struct block file = downloadfile("http://usbloader-gui.googlecode.com/svn/branches/updates/update_dol.txt");
+#endif
+
+    if (file.data != NULL)
+    {
+        // first line of the text file is the revisionc
+        newrev = atoi((char *) file.data);
+        newrev = 1800;
+        // 2nd line of the text file is the url
+        char *ptr = strchr((char *)file.data, '\n');
+        while(ptr && (*ptr == '\r' || *ptr == '\n' || *ptr == ' '))
+            ptr++;
+        while(ptr && *ptr != '\0' && *ptr != '\r' && *ptr != '\n')
+        {
+            DownloadURL.push_back(*ptr);
+            ptr++;
+        }
+
+        free(file.data);
+    }
+
+    if (newrev <= currentrev)
+    {
+        WindowPrompt(tr( "No new updates." ), 0, tr( "OK" ));
+        return 0;
+    }
+
 	bool update_error = false;
 	char tmppath[250];
 
 	#ifdef FULLCHANNEL
-		const char * DownloadURL = "http://www.techjawa.com/usbloadergx/ULNR.wad";
 		snprintf(tmppath, sizeof(tmppath), "%s/ULNR.wad", Settings.BootDevice);
 	#else
 		char realpath[250];
 		snprintf(realpath, sizeof(realpath), "%sboot.dol", Settings.update_path);
-		const char * DownloadURL = "http://www.techjawa.com/usbloadergx/boot.dol";
 		snprintf(tmppath, sizeof(tmppath), "%sboot.tmp", Settings.update_path);
 	#endif
 
@@ -246,7 +278,7 @@ static int ApplicationDownload(int newrev)
 	if (update_choice == 0)
 		return 0;
 
-	int ret = DownloadFileToPath(DownloadURL, tmppath, false);
+    int ret = DownloadFileToPath(DownloadURL.c_str(), tmppath, false);
 	if(ret < 1024*1024)
 	{
 		remove(tmppath);
@@ -301,7 +333,7 @@ static int ApplicationDownload(int newrev)
 
 	if (update_choice > 0)
 	{
-		WindowPrompt(tr( "Restarting..." ), tr( "Successfully Updated thanks to www.techjawa.com" ), 0, 0, 0, 0, 150);
+        WindowPrompt(tr( "Successfully updated." ), tr( "Restarting..." ), 0, 0, 0, 0, 150);
 		RebootApp();
 	}
 
@@ -327,15 +359,8 @@ int UpdateApp()
 		return 0;
 
 	if(choice == 1)
-	{
-		int newrev = CheckUpdate();
-		if (newrev < 0)
-		{
-			WindowPrompt(tr( "No new updates." ), 0, tr( "OK" ));
-			return 0;
-		}
-
-		return ApplicationDownload(newrev);
+    {
+        return ApplicationDownload();
 	}
 	else if (choice == 2)
 	{

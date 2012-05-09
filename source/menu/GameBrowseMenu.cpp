@@ -684,7 +684,7 @@ void GameBrowseMenu::ReloadBrowser()
 								thInt("13 - list layout grid btn pos y"));
 		carouselBtn->SetPosition(Settings.widescreen ? thInt("438 - list layout carousel btn pos x widescreen") : thInt("448 - list layout carousel btn pos x"),
 								thInt("13 - list layout carousel btn pos y"));
-		bannerGridBtn->SetPosition(Settings.widescreen ? thInt("470 - list layout bannergrid btn pos x widescreen") : thInt("488 - list bannergrid btn pos x"),
+        bannerGridBtn->SetPosition(Settings.widescreen ? thInt("470 - list layout bannergrid btn pos x widescreen") : thInt("488 - list layout bannergrid btn pos x"),
 								thInt("13 - list layout bannergrid btn pos y"));
 		lockBtn->SetPosition(Settings.widescreen ? thInt("502 - list layout lock btn pos x widescreen") : thInt("528 - list layout lock btn pos x"),
 								thInt("13 - list layout lock btn pos y"));
@@ -733,7 +733,7 @@ void GameBrowseMenu::ReloadBrowser()
 								thInt("13 - grid layout grid btn pos y"));
 		carouselBtn->SetPosition(Settings.widescreen ? thInt("368 - grid layout carousel btn pos x widescreen") : thInt("380 - grid layout carousel btn pos x"),
 								thInt("13 - grid layout carousel btn pos y"));
-		bannerGridBtn->SetPosition(Settings.widescreen ? thInt("400 - grid layout bannergrid btn pos x widescreen") : thInt("420 - grid bannergrid btn pos x"),
+        bannerGridBtn->SetPosition(Settings.widescreen ? thInt("400 - grid layout bannergrid btn pos x widescreen") : thInt("420 - grid layout bannergrid btn pos x"),
 								thInt("13 - grid layout bannergrid btn pos y"));
 		lockBtn->SetPosition(Settings.widescreen ? thInt("432 - grid layout lock btn pos x widescreen") : thInt("460 - grid layout lock btn pos x"),
 								thInt("13 - grid layout lock btn pos y"));
@@ -781,7 +781,7 @@ void GameBrowseMenu::ReloadBrowser()
 								thInt("13 - carousel layout grid btn pos y"));
 		carouselBtn->SetPosition(Settings.widescreen ? thInt("368 - carousel layout carousel btn pos x widescreen") : thInt("380 - carousel layout carousel btn pos x"),
 								thInt("13 - carousel layout carousel btn pos y"));
-		bannerGridBtn->SetPosition(Settings.widescreen ? thInt("400 - carousel layout bannergrid btn pos x widescreen") : thInt("420 - carousel bannergrid btn pos x"),
+        bannerGridBtn->SetPosition(Settings.widescreen ? thInt("400 - carousel layout bannergrid btn pos x widescreen") : thInt("420 - carousel layout bannergrid btn pos x"),
 								thInt("13 - carousel layout bannergrid btn pos y"));
 		lockBtn->SetPosition(Settings.widescreen ? thInt("432 - carousel layout lock btn pos x widescreen") : thInt("460 - carousel layout lock btn pos x"),
 								thInt("13 - carousel layout lock btn pos y"));
@@ -829,7 +829,7 @@ void GameBrowseMenu::ReloadBrowser()
 								thInt("13 - bannergrid layout grid btn pos y"));
 		carouselBtn->SetPosition(Settings.widescreen ? thInt("368 - bannergrid layout carousel btn pos x widescreen") : thInt("380 - bannergrid layout carousel btn pos x"),
 								thInt("13 - bannergrid layout carousel btn pos y"));
-		bannerGridBtn->SetPosition(Settings.widescreen ? thInt("400 - bannergrid layout bannergrid btn pos x widescreen") : thInt("420 - bannergrid bannergrid btn pos x"),
+        bannerGridBtn->SetPosition(Settings.widescreen ? thInt("400 - bannergrid layout bannergrid btn pos x widescreen") : thInt("420 - bannergrid layout bannergrid btn pos x"),
 								thInt("13 - bannergrid layout bannergrid btn pos y"));
 		lockBtn->SetPosition(Settings.widescreen ? thInt("432 - bannergrid layout lock btn pos x widescreen") : thInt("460 - bannergrid layout lock btn pos x"),
 								thInt("13 - bannergrid layout lock btn pos y"));

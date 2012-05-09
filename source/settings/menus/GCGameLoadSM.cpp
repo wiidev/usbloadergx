@@ -56,17 +56,6 @@ static const char * ParentalText[] =
 	trNOOP( "4 (Adults Only 18+)" )
 };
 
-static const char * DMLVideoModeText[] =
-{
-	trNOOP( "DML Auto" ),
-	trNOOP( "DML None" ),
-	trNOOP( "Force PAL50" ),
-	trNOOP( "Force PAL60" ),
-	trNOOP( "Force NTSC" ),
-	trNOOP( "Force PAL480p" ),
-	trNOOP( "Force NTSC480p" ),
-};
-
 static const char * DMLNMMMode[] =
 {
 	trNOOP( "OFF" ),
@@ -137,7 +126,7 @@ void GCGameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
 	Options->SetName(Idx++, "%s", tr( "Ocarina" ));
 	Options->SetName(Idx++, "%s", tr( "Parental Control" ));
-	Options->SetName(Idx++, "%s", tr( "DML Video Mode" ));
+	Options->SetName(Idx++, "%s", tr( "GC Force Interlace" ));
 	Options->SetName(Idx++, "%s", tr( "DML NMM Mode" ));
 	Options->SetName(Idx++, "%s", tr( "DML LED Activity" ));
 	Options->SetName(Idx++, "%s", tr( "DML PAD Hook" ));
@@ -170,11 +159,11 @@ void GCGameLoadSM::SetOptionValues()
 	//! Settings: Parental Control
 	Options->SetValue(Idx++, "%s", tr(ParentalText[GameConfig.parentalcontrol]));
 
-	//! Settings: DML Video Mode
-	if(GameConfig.DMLVideo == INHERIT)
+	//! Settings: GC Force Interlace
+	if(GameConfig.GCForceInterlace == INHERIT)
 		Options->SetValue(Idx++, tr("Use global"));
 	else
-		Options->SetValue(Idx++, "%s", tr(DMLVideoModeText[GameConfig.DMLVideo]));
+		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.GCForceInterlace]));
 
 	//! Settings: DML NMM Mode
 	if(GameConfig.DMLNMM == INHERIT)
@@ -262,10 +251,10 @@ int GCGameLoadSM::GetMenuInternal()
 		if (++GameConfig.parentalcontrol >= 5) GameConfig.parentalcontrol = 0;
 	}
 
-	//! Settings: DML Video Mode
+	//! Settings: GC Force Interlace
 	else if (ret == ++Idx)
 	{
-		if (++GameConfig.DMLVideo >= 7) GameConfig.DMLVideo = INHERIT;
+		if (++GameConfig.GCForceInterlace >= MAX_ON_OFF) GameConfig.GCForceInterlace = INHERIT;
 	}
 
 	//! Settings: DML NMM Mode

@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-06 12:19+0100\n"
+"POT-Creation-Date: 2012-05-09 21:15+0200\n"
 "PO-Revision-Date: 2011-12-17 14:22+0100\n"
 "Last-Translator: Arthur117\n"
 "Language-Team: tj_cool, glowy, Arthur117\n"
+"Language: Dutch (Nederlands)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: Dutch (Nederlands)\n"
 
 msgid " could not be downloaded."
 msgstr " kon niet worden gedownload."
@@ -188,9 +188,6 @@ msgid "Banner grid layout is only available with AHBPROT! Please consider instal
 msgstr ""
 
 msgid "Banner window is only available with AHBPROT! Please consider installing new HBC version."
-msgstr ""
-
-msgid "Beginning"
 msgstr ""
 
 msgid "Big thanks to:"
@@ -394,9 +391,6 @@ msgstr "Console moet worden vrijgegeven om dit te kunnen gebruiken."
 msgid "Console should be unlocked to modify it."
 msgstr "Console moet worden vrijgegeven om te wijzigen."
 
-msgid "Content"
-msgstr ""
-
 msgid "Continue"
 msgstr ""
 
@@ -488,9 +482,6 @@ msgstr "Bestandslocaties"
 msgid "Customs/Original"
 msgstr "Aangepast/Origineel"
 
-msgid "DML Auto"
-msgstr ""
-
 msgid "DML Debug"
 msgstr ""
 
@@ -503,13 +494,7 @@ msgstr ""
 msgid "DML No Disc"
 msgstr ""
 
-msgid "DML None"
-msgstr ""
-
 msgid "DML PAD Hook"
-msgstr ""
-
-msgid "DML Video Mode"
 msgstr ""
 
 msgid "DOL Path"
@@ -971,6 +956,9 @@ msgstr "SPELID_Spelnaam"
 msgid "GC Banner Scale"
 msgstr ""
 
+msgid "GC Force Interlace"
+msgstr ""
+
 msgid "GC Games"
 msgstr ""
 
@@ -1238,9 +1226,6 @@ msgstr "Laad bestand van %s ?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "Deze DOL als alternatieve DOL gebruiken?"
 
-msgid "Loader Mode"
-msgstr ""
-
 msgid "Loader Settings"
 msgstr "Loader Instellingen"
 
@@ -1294,9 +1279,6 @@ msgstr "Mei"
 
 msgid "Messageboard Update"
 msgstr "Prikbord Update"
-
-msgid "Mixed"
-msgstr ""
 
 msgid "Motion+ Video"
 msgstr ""
@@ -1661,9 +1643,6 @@ msgstr "Savegame bestaat wellicht niet voor dit spel."
 msgid "Screensaver"
 msgstr "Schermbeveiliging"
 
-msgid "Search Mode"
-msgstr ""
-
 msgid "Select"
 msgstr "Selecteer"
 
@@ -1775,9 +1754,6 @@ msgstr "Met succes opgeslagen!"
 msgid "Successfully Updated"
 msgstr "Met succes ge-update!"
 
-msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr "Met succes ge-update met dank aan www.techjawa.com"
-
 msgid "Successfully copied"
 msgstr ""
 
@@ -1789,6 +1765,9 @@ msgstr "Thema succesvol uitgepakt."
 
 msgid "Successfully installed:"
 msgstr "Met succes geïnstalleerd:"
+
+msgid "Successfully updated."
+msgstr ""
 
 msgid "Switching to channel list mode."
 msgstr ""
@@ -2105,11 +2084,11 @@ msgstr "voor zijn geweldige tool LibWiiGui"
 msgid "for hosting the themes"
 msgstr "voor het hosten van de thema's"
 
-msgid "for hosting the update files"
-msgstr "voor het hosten van update bestanden"
-
 msgid "for the USB Loader source"
 msgstr "voor USB Loader source"
+
+msgid "for their work on the wiki page"
+msgstr ""
 
 msgid "formatted!"
 msgstr "geformatteerd!"
@@ -2128,6 +2107,12 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "Successfully Updated thanks to www.techjawa.com"
+#~ msgstr "Met succes ge-update met dank aan www.techjawa.com"
+
+#~ msgid "for hosting the update files"
+#~ msgstr "voor het hosten van update bestanden"
 
 #~ msgid "Insert a Wii Disc!"
 #~ msgstr "Voer een Wii disk in!"

@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-06 12:19+0100\n"
+"POT-Creation-Date: 2012-05-09 21:15+0200\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 msgid " could not be downloaded."
 msgstr "Kunde inte laddas ner."
@@ -188,9 +188,6 @@ msgid "Banner grid layout is only available with AHBPROT! Please consider instal
 msgstr ""
 
 msgid "Banner window is only available with AHBPROT! Please consider installing new HBC version."
-msgstr ""
-
-msgid "Beginning"
 msgstr ""
 
 msgid "Big thanks to:"
@@ -394,9 +391,6 @@ msgstr ""
 msgid "Console should be unlocked to modify it."
 msgstr "Konsolen måste vara upplåst för att kunna ändra det."
 
-msgid "Content"
-msgstr ""
-
 msgid "Continue"
 msgstr ""
 
@@ -488,9 +482,6 @@ msgstr "Anpassade sökvägar"
 msgid "Customs/Original"
 msgstr "Anpassade/Original"
 
-msgid "DML Auto"
-msgstr ""
-
 msgid "DML Debug"
 msgstr ""
 
@@ -503,13 +494,7 @@ msgstr ""
 msgid "DML No Disc"
 msgstr ""
 
-msgid "DML None"
-msgstr ""
-
 msgid "DML PAD Hook"
-msgstr ""
-
-msgid "DML Video Mode"
 msgstr ""
 
 msgid "DOL Path"
@@ -971,6 +956,9 @@ msgstr ""
 msgid "GC Banner Scale"
 msgstr ""
 
+msgid "GC Force Interlace"
+msgstr ""
+
 msgid "GC Games"
 msgstr ""
 
@@ -1238,9 +1226,6 @@ msgstr "Ladda fil från: %s?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "Ladda denna DOL som alternativ DOL?"
 
-msgid "Loader Mode"
-msgstr ""
-
 msgid "Loader Settings"
 msgstr ""
 
@@ -1293,9 +1278,6 @@ msgid "May"
 msgstr "Maj"
 
 msgid "Messageboard Update"
-msgstr ""
-
-msgid "Mixed"
 msgstr ""
 
 msgid "Motion+ Video"
@@ -1661,9 +1643,6 @@ msgstr ""
 msgid "Screensaver"
 msgstr "Skärmsläckare"
 
-msgid "Search Mode"
-msgstr ""
-
 msgid "Select"
 msgstr "Välj"
 
@@ -1775,9 +1754,6 @@ msgstr "Lyckad sparning"
 msgid "Successfully Updated"
 msgstr "Uppdateringen lyckades"
 
-msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr ""
-
 msgid "Successfully copied"
 msgstr ""
 
@@ -1789,6 +1765,9 @@ msgstr "Extrahering av tema lyckades."
 
 msgid "Successfully installed:"
 msgstr "Lyckad installation av:"
+
+msgid "Successfully updated."
+msgstr ""
 
 msgid "Switching to channel list mode."
 msgstr ""
@@ -2105,11 +2084,11 @@ msgstr "för hans underbara verktyg LibWiiGui"
 msgid "for hosting the themes"
 msgstr "för hostning av teman"
 
-msgid "for hosting the update files"
-msgstr "för lagring av uppdateringar"
-
 msgid "for the USB Loader source"
 msgstr "och släppet av källkoden"
+
+msgid "for their work on the wiki page"
+msgstr ""
 
 msgid "formatted!"
 msgstr "formaterad!"
@@ -2128,6 +2107,9 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "for hosting the update files"
+#~ msgstr "för lagring av uppdateringar"
 
 #~ msgid "Insert a Wii Disc!"
 #~ msgstr "Sätt i en Wii-skiva!"

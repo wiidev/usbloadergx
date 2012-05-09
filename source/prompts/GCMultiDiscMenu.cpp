@@ -74,7 +74,7 @@ int GCMultiDiscMenu::ShowSelection()
 		{
 			if(!changed)
 			{
-				WindowPrompt(tr("Error:"), tr("Nothing selected to install."));
+				WindowPrompt(tr("Error:"), tr("Nothing selected to install."), tr("OK"));
 			}
 			else if(WindowPrompt(tr("Do you want to install selected games?"), 0, tr("Yes"), tr("Cancel")))
 			{

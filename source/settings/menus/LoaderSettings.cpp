@@ -36,15 +36,6 @@
 #include "utils/tools.h"
 #include "menu.h"
 
-static const char * loaderModeText[] =
-{
-	trNOOP( "None" ),
-	trNOOP( "Wii Games" ),
-	trNOOP( "Nand Channels" ),
-	trNOOP( "EmuNand Channels" ),
-	trNOOP( "All" )
-};
-
 static const char * OnOffText[] =
 {
 	trNOOP( "OFF" ),
@@ -118,17 +109,6 @@ static const char * ChannelLaunchText[] =
 	trNOOP( "Boot Content" ),
 };
 
-static const char * DMLVideoModeText[] =
-{
-	trNOOP( "DML Auto" ),
-	trNOOP( "DML None" ),
-	trNOOP( "Force PAL50" ),
-	trNOOP( "Force PAL60" ),
-	trNOOP( "Force NTSC" ),
-	trNOOP( "Force PAL480p" ),
-	trNOOP( "Force NTSC480p" ),
-};
-
 static const char * DMLNMMMode[] =
 {
 	trNOOP( "OFF" ),
@@ -148,7 +128,6 @@ LoaderSettings::LoaderSettings()
 {
 	int Idx = 0;
 
-	Options->SetName(Idx++, "%s", tr( "Loader Mode" ));
 	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
 	Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
 	Options->SetName(Idx++, "%s", tr( "Sneek Video Patch" ));
@@ -167,7 +146,7 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
 	Options->SetName(Idx++, "%s", tr( "Debugger Paused Start" ));
 	Options->SetName(Idx++, "%s", tr( "Channel Launcher" ));
-	Options->SetName(Idx++, "%s", tr( "DML Video Mode" ));
+	Options->SetName(Idx++, "%s", tr( "GC Force Interlace" ));
 	Options->SetName(Idx++, "%s", tr( "DML NMM Mode" ));
 	Options->SetName(Idx++, "%s", tr( "DML LED Activity" ));
 	Options->SetName(Idx++, "%s", tr( "DML PAD Hook" ));
@@ -197,14 +176,6 @@ LoaderSettings::~LoaderSettings()
 void LoaderSettings::SetOptionValues()
 {
 	int Idx = 0;
-
-	//! Settings: Loader Mode
-	if(Settings.LoaderMode == MODE_NONE) Options->SetValue(Idx++, "%s", tr(loaderModeText[0]));
-	else if(Settings.LoaderMode == MODE_ALL) Options->SetValue(Idx++, "%s", tr(loaderModeText[4]));
-	else if(Settings.LoaderMode & MODE_WIIGAMES) Options->SetValue(Idx++, "%s", tr(loaderModeText[1]));
-	else if(Settings.LoaderMode & MODE_NANDCHANNELS) Options->SetValue(Idx++, "%s", tr(loaderModeText[2]));
-	else if(Settings.LoaderMode & MODE_EMUCHANNELS) Options->SetValue(Idx++, "%s", tr(loaderModeText[3]));
-	else Options->SetValue(Idx++, "%s", tr("Mixed"));
 
 	//! Settings: Video Mode
 	Options->SetValue(Idx++, "%s", tr(VideoModeText[Settings.videomode]));
@@ -268,8 +239,8 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: Channel Launcher
 	Options->SetValue(Idx++, "%s", tr( ChannelLaunchText[Settings.UseChanLauncher] ));
 
-	//! Settings: DML Video Mode
-	Options->SetValue(Idx++, "%s", tr(DMLVideoModeText[Settings.DMLVideo]));
+	//! Settings: GC Force Interlace
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.GCForceInterlace]));
 
 	//! Settings: DML NMM Mode
 	Options->SetValue(Idx++, "%s", tr(DMLNMMMode[Settings.DMLNMM]));
@@ -296,18 +267,8 @@ int LoaderSettings::GetMenuInternal()
 
 	int Idx = -1;
 
-	//! Settings: Loader Mode
-	if (ret == ++Idx)
-	{
-		if (Settings.LoaderMode == MODE_ALL) Settings.LoaderMode = MODE_NONE;
-		else if (Settings.LoaderMode & MODE_WIIGAMES) Settings.LoaderMode = MODE_NANDCHANNELS;
-		else if (Settings.LoaderMode & MODE_NANDCHANNELS) Settings.LoaderMode = MODE_EMUCHANNELS;
-		else if (Settings.LoaderMode & MODE_EMUCHANNELS) Settings.LoaderMode = MODE_ALL;
-		else Settings.LoaderMode = MODE_WIIGAMES;
-	}
-
 	//! Settings: Video Mode
-	else if (ret == ++Idx)
+	if (ret == ++Idx)
 	{
 		if (++Settings.videomode >= VIDEO_MODE_MAX) Settings.videomode = 0;
 	}
@@ -438,10 +399,10 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.UseChanLauncher >= MAX_ON_OFF) Settings.UseChanLauncher = 0;
 	}
 
-	//! Settings: DML Video Mode
+	//! Settings: GC Force Interlace
 	else if (ret == ++Idx)
 	{
-		if (++Settings.DMLVideo >= 7) Settings.DMLVideo = 0;
+		if (++Settings.GCForceInterlace >= MAX_ON_OFF) Settings.GCForceInterlace = 0;
 	}
 
 	//! Settings: DML NMM Mode

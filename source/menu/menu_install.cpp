@@ -138,6 +138,7 @@ int MenuGCInstall()
 	if(installed_games == 0)
 		return result;
 
+	gameList.FilterList();
 	bgMusic->Pause();
 	GuiSound instsuccess(Resources::GetFile("success.ogg"), Resources::GetFileSize("success.ogg"), Settings.sfxvolume);
 	instsuccess.SetVolume(Settings.sfxvolume);

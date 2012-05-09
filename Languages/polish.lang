@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-06 12:19+0100\n"
+"POT-Creation-Date: 2012-05-09 21:15+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " nie udalo sie pobrac"
@@ -188,9 +188,6 @@ msgid "Banner grid layout is only available with AHBPROT! Please consider instal
 msgstr ""
 
 msgid "Banner window is only available with AHBPROT! Please consider installing new HBC version."
-msgstr ""
-
-msgid "Beginning"
 msgstr ""
 
 msgid "Big thanks to:"
@@ -394,9 +391,6 @@ msgstr ""
 msgid "Console should be unlocked to modify it."
 msgstr "Aby zmodyfikowac, odblokuj konsole"
 
-msgid "Content"
-msgstr ""
-
 msgid "Continue"
 msgstr ""
 
@@ -488,9 +482,6 @@ msgstr "Sciezki"
 msgid "Customs/Original"
 msgstr ""
 
-msgid "DML Auto"
-msgstr ""
-
 msgid "DML Debug"
 msgstr ""
 
@@ -503,13 +494,7 @@ msgstr ""
 msgid "DML No Disc"
 msgstr ""
 
-msgid "DML None"
-msgstr ""
-
 msgid "DML PAD Hook"
-msgstr ""
-
-msgid "DML Video Mode"
 msgstr ""
 
 msgid "DOL Path"
@@ -971,6 +956,9 @@ msgstr ""
 msgid "GC Banner Scale"
 msgstr ""
 
+msgid "GC Force Interlace"
+msgstr ""
+
 msgid "GC Games"
 msgstr ""
 
@@ -1238,9 +1226,6 @@ msgstr "Zaladowac plik z: %s ?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "Zaladowac ten DOL jako alternatywnt?"
 
-msgid "Loader Mode"
-msgstr ""
-
 msgid "Loader Settings"
 msgstr ""
 
@@ -1293,9 +1278,6 @@ msgid "May"
 msgstr "Maj"
 
 msgid "Messageboard Update"
-msgstr ""
-
-msgid "Mixed"
 msgstr ""
 
 msgid "Motion+ Video"
@@ -1661,9 +1643,6 @@ msgstr ""
 msgid "Screensaver"
 msgstr "Wygaszacz ekranu"
 
-msgid "Search Mode"
-msgstr ""
-
 msgid "Select"
 msgstr "Wybierz"
 
@@ -1775,9 +1754,6 @@ msgstr "Pomyslnie zapisano"
 msgid "Successfully Updated"
 msgstr "Pomyslnie zaktualizowano"
 
-msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr ""
-
 msgid "Successfully copied"
 msgstr ""
 
@@ -1789,6 +1765,9 @@ msgstr "Pomyslnie rozpakowano temat."
 
 msgid "Successfully installed:"
 msgstr "Pomyslnie zainstalowano:"
+
+msgid "Successfully updated."
+msgstr ""
 
 msgid "Switching to channel list mode."
 msgstr ""
@@ -2105,11 +2084,11 @@ msgstr "za jego niesamowite narzedzie LibWiiGui"
 msgid "for hosting the themes"
 msgstr "za hosting tematow"
 
-msgid "for hosting the update files"
-msgstr "za hostowanie plikow aktualizacji"
-
 msgid "for the USB Loader source"
 msgstr "za zrodla USB Loader"
+
+msgid "for their work on the wiki page"
+msgstr ""
 
 msgid "formatted!"
 msgstr "sformatowano"
@@ -2128,6 +2107,9 @@ msgstr "z"
 
 msgid "seconds left"
 msgstr "sekund pozostalo"
+
+#~ msgid "for hosting the update files"
+#~ msgstr "za hostowanie plikow aktualizacji"
 
 #~ msgid "Insert a Wii Disc!"
 #~ msgstr "Wloz plyte Wii!"

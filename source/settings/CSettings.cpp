@@ -162,7 +162,7 @@ void CSettings::SetDefault()
 	BannerProjectionWidth = (Settings.widescreen ? (Settings.PAL50 ? 616 : 620.0f) : 608.0f);
 	BannerProjectionHeight = (Settings.PAL50 ? 448.0f : (NTSC ? 470.0f : 464.0f));
 	GCBannerScale = 1.5f;
-	DMLVideo = DML_VID_DML_AUTO;
+	GCForceInterlace = OFF;
 	DMLNMM = OFF;
 	DMLActivityLED = OFF;
 	DMLPADHOOK = OFF;
@@ -365,7 +365,7 @@ bool CSettings::Save()
 	fprintf(file, "GCBannerScale = %g\n", GCBannerScale);
 	fprintf(file, "GameCubePath = %s\n", GameCubePath);
 	fprintf(file, "GameCubeSDPath = %s\n", GameCubeSDPath);
-	fprintf(file, "DMLVideo = %d\n", DMLVideo);
+	fprintf(file, "GCForceInterlace = %d\n", GCForceInterlace);
 	fprintf(file, "DMLNMM = %d\n", DMLNMM);
 	fprintf(file, "DMLActivityLED = %d\n", DMLActivityLED);
 	fprintf(file, "DMLPADHOOK = %d\n", DMLPADHOOK);
@@ -749,9 +749,9 @@ bool CSettings::SetSetting(char *name, char *value)
 		ParentalBlocks = strtoul(value, 0, 16);
 		return true;
 	}
-	else if (strcmp(name, "DMLVideo") == 0)
+	else if (strcmp(name, "GCForceInterlace") == 0)
 	{
-		DMLVideo = atoi(value);
+		GCForceInterlace = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "DMLNMM") == 0)

@@ -352,7 +352,7 @@ void WindowCredits()
 	i++;
 	y += 20;
 
-	sprintf(text, "CorneliousJD %s", tr( "for hosting the update files" ));
+	sprintf(text, "Cyan and Shano56 %s", tr( "for their work on the wiki page" ));
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(160, y);

@@ -2,8 +2,8 @@
 	<app version="1">
 		<name> USB Loader GX</name>
 		<coder>USB Loader GX Team</coder>
-		<version>2.3 r1166</version>
-		<release_date>201205061159</release_date>
+		<version>2.3 r1174</version>
+		<release_date>201205091915</release_date>
 		<!--   // remove this line to enable arguments
 		<arguments>
 				<arg>--ios=250</arg>
@@ -22,7 +22,6 @@ Artworks: cyrex, NeoRame
 Validation: Cyan and many others
 Issue management: Cyan / Dimok
 WiiTDB / Hosting covers: Lustar
-Hosting updates files: CorneliousJD
 USBLoader sources: Waninkoko, Kwiirk, Hermes
 cIOS maintenance: davebaol, xabby666, XFlak and Rodries
 Languages files updates: Kinyo and translaters

@@ -29,7 +29,7 @@ typedef struct _GameCFG
 	std::string NandEmuPath;
 	short Hooktype;
 	short WiirdDebugger;
-	short DMLVideo;
+	short GCForceInterlace;
 	short DMLNMM;
 	short DMLActivityLED;
 	short DMLPADHOOK;
@@ -59,7 +59,7 @@ typedef struct _GameCFG
 		this->NandEmuPath = game.NandEmuPath;
 		this->Hooktype = game.Hooktype;
 		this->WiirdDebugger = game.WiirdDebugger;
-		this->DMLVideo = game.DMLVideo;
+		this->GCForceInterlace = game.GCForceInterlace;
 		this->DMLNMM = game.DMLNMM;
 		this->DMLActivityLED = game.DMLActivityLED;
 		this->DMLPADHOOK = game.DMLPADHOOK;

@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-06 12:19+0100\n"
+"POT-Creation-Date: 2012-05-09 21:15+0200\n"
 "PO-Revision-Date: 2011-11-03 11:00+0000\n"
 "Last-Translator: pplucky <pplucky@gmail.com>\n"
 "Language-Team: Sky8000, pplucky\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " não foi descarregado."
@@ -188,9 +188,6 @@ msgid "Banner grid layout is only available with AHBPROT! Please consider instal
 msgstr ""
 
 msgid "Banner window is only available with AHBPROT! Please consider installing new HBC version."
-msgstr ""
-
-msgid "Beginning"
 msgstr ""
 
 msgid "Big thanks to:"
@@ -394,9 +391,6 @@ msgstr "Consola tem de estar desbloqueada para usar isto."
 msgid "Console should be unlocked to modify it."
 msgstr "Consola deve estar desbloqueada para modificar o parâmetro."
 
-msgid "Content"
-msgstr ""
-
 msgid "Continue"
 msgstr ""
 
@@ -488,9 +482,6 @@ msgstr "Caminhos Personalizados"
 msgid "Customs/Original"
 msgstr "Personalizadas/Originais"
 
-msgid "DML Auto"
-msgstr ""
-
 msgid "DML Debug"
 msgstr ""
 
@@ -503,13 +494,7 @@ msgstr ""
 msgid "DML No Disc"
 msgstr ""
 
-msgid "DML None"
-msgstr ""
-
 msgid "DML PAD Hook"
-msgstr ""
-
-msgid "DML Video Mode"
 msgstr ""
 
 msgid "DOL Path"
@@ -971,6 +956,9 @@ msgstr "IDJOGO_NomeJogo"
 msgid "GC Banner Scale"
 msgstr ""
 
+msgid "GC Force Interlace"
+msgstr ""
+
 msgid "GC Games"
 msgstr ""
 
@@ -1238,9 +1226,6 @@ msgstr "Carregar ficheiro de: %s ?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "Carregar este DOL como DOL alternativo?"
 
-msgid "Loader Mode"
-msgstr ""
-
 msgid "Loader Settings"
 msgstr "Definições do Loader"
 
@@ -1294,9 +1279,6 @@ msgstr "Mai"
 
 msgid "Messageboard Update"
 msgstr "Update Placard Mensagens"
-
-msgid "Mixed"
-msgstr ""
 
 msgid "Motion+ Video"
 msgstr "Vídeo Motion+"
@@ -1661,9 +1643,6 @@ msgstr "Gravação pode não existir para este jogo."
 msgid "Screensaver"
 msgstr "Protector de ecrã"
 
-msgid "Search Mode"
-msgstr ""
-
 msgid "Select"
 msgstr "Seleccionar"
 
@@ -1775,9 +1754,6 @@ msgstr "Gravado com Sucesso"
 msgid "Successfully Updated"
 msgstr "Actualização Concluída"
 
-msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr "Actualizado com sucesso graças a www.techjawa.com"
-
 msgid "Successfully copied"
 msgstr ""
 
@@ -1789,6 +1765,9 @@ msgstr "Tema extraído com sucesso."
 
 msgid "Successfully installed:"
 msgstr "Instalado com Sucesso:"
+
+msgid "Successfully updated."
+msgstr ""
 
 msgid "Switching to channel list mode."
 msgstr ""
@@ -2105,11 +2084,11 @@ msgstr "pela sua espectacular ferramenta LibWiiGui"
 msgid "for hosting the themes"
 msgstr "por alojar os temas"
 
-msgid "for hosting the update files"
-msgstr "por alojar actualizações"
-
 msgid "for the USB Loader source"
 msgstr "pelo código do USB Loader"
+
+msgid "for their work on the wiki page"
+msgstr ""
 
 msgid "formatted!"
 msgstr "formatado!"
@@ -2128,6 +2107,12 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Successfully Updated thanks to www.techjawa.com"
+#~ msgstr "Actualizado com sucesso graças a www.techjawa.com"
+
+#~ msgid "for hosting the update files"
+#~ msgstr "por alojar actualizações"
 
 #~ msgid "Insert a Wii Disc!"
 #~ msgstr "Insira um Disco da Wii!"

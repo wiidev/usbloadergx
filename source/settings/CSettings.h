@@ -163,7 +163,7 @@ class CSettings
 		float BannerProjectionWidth;
 		float BannerProjectionHeight;
 		float GCBannerScale;
-		short DMLVideo;
+		short GCForceInterlace;
 		short DMLNMM;
 		short DMLActivityLED;
 		short DMLPADHOOK;

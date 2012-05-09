@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-06 12:19+0100\n"
+"POT-Creation-Date: 2012-05-09 21:15+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " nelze stáhnout."
@@ -188,9 +188,6 @@ msgid "Banner grid layout is only available with AHBPROT! Please consider instal
 msgstr ""
 
 msgid "Banner window is only available with AHBPROT! Please consider installing new HBC version."
-msgstr ""
-
-msgid "Beginning"
 msgstr ""
 
 msgid "Big thanks to:"
@@ -394,9 +391,6 @@ msgstr ""
 msgid "Console should be unlocked to modify it."
 msgstr "Konzole musí být odemcena pro tuto zmenu"
 
-msgid "Content"
-msgstr ""
-
 msgid "Continue"
 msgstr ""
 
@@ -488,9 +482,6 @@ msgstr "Vlastní cesty"
 msgid "Customs/Original"
 msgstr "Upravené/Originál"
 
-msgid "DML Auto"
-msgstr ""
-
 msgid "DML Debug"
 msgstr ""
 
@@ -503,13 +494,7 @@ msgstr ""
 msgid "DML No Disc"
 msgstr ""
 
-msgid "DML None"
-msgstr ""
-
 msgid "DML PAD Hook"
-msgstr ""
-
-msgid "DML Video Mode"
 msgstr ""
 
 msgid "DOL Path"
@@ -971,6 +956,9 @@ msgstr "IdHry_NazevHry"
 msgid "GC Banner Scale"
 msgstr ""
 
+msgid "GC Force Interlace"
+msgstr ""
+
 msgid "GC Games"
 msgstr ""
 
@@ -1238,9 +1226,6 @@ msgstr "Nahrát soubor z: %s ?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "Spustit tento DOL jako náhradní DOL?"
 
-msgid "Loader Mode"
-msgstr ""
-
 msgid "Loader Settings"
 msgstr "Nstavení spoustení"
 
@@ -1294,9 +1279,6 @@ msgstr "Kvet"
 
 msgid "Messageboard Update"
 msgstr "Aktualizace nástenky"
-
-msgid "Mixed"
-msgstr ""
 
 msgid "Motion+ Video"
 msgstr "WiiMotion+ Video"
@@ -1661,9 +1643,6 @@ msgstr ""
 msgid "Screensaver"
 msgstr "Sporic obrazovky"
 
-msgid "Search Mode"
-msgstr ""
-
 msgid "Select"
 msgstr "Vyber"
 
@@ -1775,9 +1754,6 @@ msgstr "Úspešne uloženo"
 msgid "Successfully Updated"
 msgstr "Úspešne zaktualizováno"
 
-msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr "Úspešne zaktualizováno díky www.techjawa.com"
-
 msgid "Successfully copied"
 msgstr ""
 
@@ -1789,6 +1765,9 @@ msgstr "Úspešne rozbalené téma."
 
 msgid "Successfully installed:"
 msgstr "Úspešne nainstalováno"
+
+msgid "Successfully updated."
+msgstr ""
 
 msgid "Switching to channel list mode."
 msgstr ""
@@ -2105,11 +2084,11 @@ msgstr "za jeho hrozný nástroj LibWiiGui"
 msgid "for hosting the themes"
 msgstr "pro hostování témat"
 
-msgid "for hosting the update files"
-msgstr "za umístení souboru pro aktualizaci "
-
 msgid "for the USB Loader source"
 msgstr "za zdrojový kód pro USB Loader"
+
+msgid "for their work on the wiki page"
+msgstr ""
 
 msgid "formatted!"
 msgstr "formátováno!"
@@ -2128,6 +2107,12 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid "Successfully Updated thanks to www.techjawa.com"
+#~ msgstr "Úspešne zaktualizováno díky www.techjawa.com"
+
+#~ msgid "for hosting the update files"
+#~ msgstr "za umístení souboru pro aktualizaci "
 
 #~ msgid "Insert a Wii Disc!"
 #~ msgstr "Vložte Wii disk"

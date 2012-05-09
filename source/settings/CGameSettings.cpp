@@ -205,7 +205,7 @@ bool CGameSettings::Save()
 		fprintf(f, "NandEmuPath:%s; ", GameList[i].NandEmuPath.c_str());
 		fprintf(f, "Hooktype:%d; ", GameList[i].Hooktype);
 		fprintf(f, "WiirdDebugger:%d; ", GameList[i].WiirdDebugger);
-		fprintf(f, "DMLVideo:%d; ", GameList[i].DMLVideo);
+		fprintf(f, "GCForceInterlace:%d; ", GameList[i].GCForceInterlace);
 		fprintf(f, "DMLNMM:%d; ", GameList[i].DMLNMM);
 		fprintf(f, "DMLActivityLED:%d; ", GameList[i].DMLActivityLED);
 		fprintf(f, "DMLPADHOOK:%d; ", GameList[i].DMLPADHOOK);
@@ -321,9 +321,9 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		game.Locked = atoi(value);
 		return true;
 	}
-	else if(strcmp(name, "DMLVideo") == 0)
+	else if(strcmp(name, "GCForceInterlace") == 0)
 	{
-		game.DMLVideo = atoi(value);
+		game.GCForceInterlace = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "DMLNMM") == 0)
@@ -471,7 +471,7 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.NandEmuPath.clear();
 	game.Hooktype = INHERIT;
 	game.WiirdDebugger = INHERIT;
-	game.DMLVideo = INHERIT;
+	game.GCForceInterlace = INHERIT;
 	game.DMLNMM = INHERIT;
 	game.DMLActivityLED = INHERIT;
 	game.DMLPADHOOK = INHERIT;

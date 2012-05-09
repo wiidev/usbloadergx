@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-06 12:19+0100\n"
+"POT-Creation-Date: 2012-05-09 21:15+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 msgid " could not be downloaded."
 msgstr "不能下载."
@@ -188,9 +188,6 @@ msgid "Banner grid layout is only available with AHBPROT! Please consider instal
 msgstr ""
 
 msgid "Banner window is only available with AHBPROT! Please consider installing new HBC version."
-msgstr ""
-
-msgid "Beginning"
 msgstr ""
 
 msgid "Big thanks to:"
@@ -394,9 +391,6 @@ msgstr ""
 msgid "Console should be unlocked to modify it."
 msgstr "需解锁以开启设定功能."
 
-msgid "Content"
-msgstr ""
-
 msgid "Continue"
 msgstr ""
 
@@ -488,9 +482,6 @@ msgstr "自定义路径"
 msgid "Customs/Original"
 msgstr "自制/官方"
 
-msgid "DML Auto"
-msgstr ""
-
 msgid "DML Debug"
 msgstr ""
 
@@ -503,13 +494,7 @@ msgstr ""
 msgid "DML No Disc"
 msgstr ""
 
-msgid "DML None"
-msgstr ""
-
 msgid "DML PAD Hook"
-msgstr ""
-
-msgid "DML Video Mode"
 msgstr ""
 
 msgid "DOL Path"
@@ -971,6 +956,9 @@ msgstr "游戏ID_游戏名"
 msgid "GC Banner Scale"
 msgstr ""
 
+msgid "GC Force Interlace"
+msgstr ""
+
 msgid "GC Games"
 msgstr ""
 
@@ -1238,9 +1226,6 @@ msgstr "从%s 加载文件?"
 msgid "Load this DOL as alternate DOL?"
 msgstr "加载这个 DOL 作为 ALT DOL?"
 
-msgid "Loader Mode"
-msgstr ""
-
 msgid "Loader Settings"
 msgstr "Loader设置"
 
@@ -1294,9 +1279,6 @@ msgstr "五月"
 
 msgid "Messageboard Update"
 msgstr "留言板更新"
-
-msgid "Mixed"
-msgstr ""
 
 msgid "Motion+ Video"
 msgstr "移动+视频"
@@ -1661,9 +1643,6 @@ msgstr ""
 msgid "Screensaver"
 msgstr "屏幕保护"
 
-msgid "Search Mode"
-msgstr ""
-
 msgid "Select"
 msgstr "选择"
 
@@ -1775,9 +1754,6 @@ msgstr "保存成功"
 msgid "Successfully Updated"
 msgstr "升级成功!"
 
-msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr "更新成功.感谢www.techjawa.com"
-
 msgid "Successfully copied"
 msgstr ""
 
@@ -1789,6 +1765,9 @@ msgstr "解压主题成功"
 
 msgid "Successfully installed:"
 msgstr "成功安装:"
+
+msgid "Successfully updated."
+msgstr ""
 
 msgid "Switching to channel list mode."
 msgstr ""
@@ -2105,11 +2084,11 @@ msgstr "的优秀工具 LibWiiGui"
 msgid "for hosting the themes"
 msgstr "的主题服务器"
 
-msgid "for hosting the update files"
-msgstr "的升级服务器"
-
 msgid "for the USB Loader source"
 msgstr "放出源代码"
+
+msgid "for their work on the wiki page"
+msgstr ""
 
 msgid "formatted!"
 msgstr "完成格式化!"
@@ -2128,6 +2107,12 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "Successfully Updated thanks to www.techjawa.com"
+#~ msgstr "更新成功.感谢www.techjawa.com"
+
+#~ msgid "for hosting the update files"
+#~ msgstr "的升级服务器"
 
 #~ msgid "Insert a Wii Disc!"
 #~ msgstr "插入 Wii 光盘!"

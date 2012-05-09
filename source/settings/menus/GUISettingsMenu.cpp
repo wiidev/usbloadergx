@@ -104,12 +104,6 @@ static const char * HomeMenuText[HOME_MENU_MAX_CHOICE] =
 	trNOOP( "Default" )
 };
 
-static const char * searchModeText[] =
-{
-	trNOOP( "Beginning" ),
-	trNOOP( "Content" ),
-};
-
 GuiSettingsMenu::GuiSettingsMenu()
 	: SettingsMenu(tr("GUI Settings"), &GuiOptions, MENU_NONE)
 {
@@ -132,7 +126,6 @@ GuiSettingsMenu::GuiSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Show Free Space" ));
 	Options->SetName(Idx++, "%s", tr( "HOME Menu" ));
 	Options->SetName(Idx++, "%s", tr( "Use System Font" ));
-	Options->SetName(Idx++, "%s", tr( "Search Mode" ));
 	Options->SetName(Idx++, "%s", tr( "Virtual Pointer Speed" ));
 	Options->SetName(Idx++, "%s", tr( "Adjust Overscan X" ));
 	Options->SetName(Idx++, "%s", tr( "Adjust Overscan Y" ));
@@ -209,9 +202,6 @@ void GuiSettingsMenu::SetOptionValues()
 
 	//! Settings: Use System Font
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.UseSystemFont] ));
-
-	//! Settings: Search Mode
-	Options->SetValue(Idx++, "%s", tr( searchModeText[Settings.SearchMode] ));
 
 	//! Settings: Virtual Pointer Speed
 	Options->SetValue(Idx++, "%g", Settings.PointerSpeed);
@@ -401,12 +391,6 @@ int GuiSettingsMenu::GetMenuInternal()
 			Settings.FontScaleFactor = 0.8f;
 		else if(Settings.FontScaleFactor == 0.8f && Settings.UseSystemFont == OFF)
 			Settings.FontScaleFactor = 1.0f;
-	}
-
-	//! Settings: Search Mode
-	else if (ret == ++Idx)
-	{
-		if (++Settings.SearchMode >= SEARCH_MAX_CHOICE) Settings.SearchMode = 0;
 	}
 
 	//! Settings: Virtual Pointer Speed

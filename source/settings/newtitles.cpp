@@ -14,14 +14,36 @@ NewTitles::NewTitles()
 {
 	firstTitle = lastTitle = NULL;
 	isDirty = isNewFile = false;
+	Reload();
+}
+
+NewTitles::~NewTitles()
+{
+	Save();
+	Clean();
+}
+
+void NewTitles::Clean(void)
+{
+	Title *t = firstTitle;
+	while (t != NULL)
+	{
+		Title *temp = t->next;
+		delete t;
+		t = temp;
+	}
+	firstTitle = lastTitle = NULL;
+	isDirty = isNewFile = false;
+}
+
+void NewTitles::Reload(void)
+{
+	Save();
+	Clean();
 
 	// Read the text file
 	char path[255];
-	snprintf(path, sizeof(path), Settings.titlestxt_path);
-	if(path[strlen(path)-1] != '/')
-		strcat(path, "/");
-
-	snprintf(path, sizeof(path), "%s%s", path, GAMETITLES);
+	snprintf(path, sizeof(path), "%s/%s", Settings.titlestxt_path, GAMETITLES);
 
 	char line[50];
 	FILE *fp = fopen(path, "rb");
@@ -39,15 +61,19 @@ NewTitles::NewTitles()
 		if (line[0] == '#' || line[0] == ';')
 			continue;
 
-		Title *title = new Title();
-		if (sscanf(line, "%6c:%lu", title->titleId, &title->timestamp) != 2)
-		{
-			delete title; // Invalid title entry, ignore
-			continue;
-		}
+		Title *title = new Title;
+		memset(title, 0, sizeof(Title));
 
-		title->next = NULL;
+        char *delimeter = strchr(line, ':');
+        if(!delimeter || ((delimeter-line) > 6)) // check for valid delimiter
+            continue;
+
+        *delimeter = '\0';
+
+        snprintf(title->titleId, sizeof(title->titleId), "%s", line);
+        title->timestamp = strtoul(delimeter+1, 0, 10);
 		title->isNew = ((currenttime - title->timestamp) < NEW_SECONDS);
+        title->next = NULL;
 
 		if (firstTitle == NULL)
 		{
@@ -64,20 +90,6 @@ NewTitles::NewTitles()
 	fclose(fp);
 }
 
-NewTitles::~NewTitles()
-{
-	Save();
-
-	Title *t = firstTitle;
-	while (t != NULL)
-	{
-		Title *temp = t->next;
-		delete t;
-		t = temp;
-	}
-	firstTitle = lastTitle = NULL;
-}
-
 void NewTitles::CheckGame(const u8 *titleid)
 {
 	if (titleid == NULL || strlen((char *) titleid) == 0)
@@ -87,7 +99,7 @@ void NewTitles::CheckGame(const u8 *titleid)
 	while (t != NULL)
 	{
 		// Loop all titles, search for the correct titleid
-		if (memcmp(titleid, t->titleId, 6) == 0)
+		if (strncmp((char*)titleid, t->titleId, 6) == 0)
 			return; // Game found, which is excellent
 
 		t = t->next;
@@ -95,7 +107,9 @@ void NewTitles::CheckGame(const u8 *titleid)
 
 	// Not found, add it
 	t = new Title;
-	snprintf(t->titleId, sizeof(t->titleId), (char *) titleid);
+	memset(t, 0, sizeof(Title));
+
+	snprintf(t->titleId, sizeof(t->titleId), "%s", (char *) titleid);
 	t->timestamp = time(0);
 	t->next = NULL;
 
@@ -132,7 +146,7 @@ bool NewTitles::IsNew(const u8 *titleid) const
 	while(t != NULL)
 	{
 		// Loop all titles, search for the correct titleid
-		if (memcmp(titleid, t->titleId, 6) == 0)
+		if (strncmp((char*)titleid, t->titleId, 6) == 0)
 			return t->isNew;
 
 		t = t->next;
@@ -148,7 +162,7 @@ void NewTitles::Remove(const u8 *titleid)
 	Title *t = firstTitle, *prev = NULL;
 	while (t != NULL)
 	{
-		if (memcmp(titleid, t->titleId, 6) == 0)
+		if (strncmp((char*)titleid, t->titleId, 6) == 0)
 		{
 			if (prev == NULL)
 				firstTitle = t->next;
@@ -164,16 +178,12 @@ void NewTitles::Remove(const u8 *titleid)
 	}
 }
 
-void NewTitles::Save()
+void NewTitles::Save(void)
 {
 	if (!isDirty) return;
 
 	char path[255];
-	snprintf(path, sizeof(path), Settings.titlestxt_path);
-	if(path[strlen(path)-1] != '/')
-		strcat(path, "/");
-
-	snprintf(path, sizeof(path), "%s%s", path, GAMETITLES);
+	snprintf(path, sizeof(path), "%s/%s", Settings.titlestxt_path, GAMETITLES);
 
 	FILE *fp = fopen(path, "wb");
 	if (fp == NULL)
@@ -182,7 +192,7 @@ void NewTitles::Save()
 	Title *t = firstTitle;
 	while (t != NULL && strlen(t->titleId) > 0)
 	{
-		fprintf(fp, "%s:%lu\n", t->titleId, t->timestamp);
+        fprintf(fp, "%.6s:%lu\n", t->titleId, t->timestamp);
 		t = t->next;
 	}
 	fclose(fp);

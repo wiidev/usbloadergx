@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-06 12:19+0100\n"
+"POT-Creation-Date: 2012-05-09 21:15+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 msgid " could not be downloaded."
 msgstr "ﾀﾞｳﾝﾛｰﾄﾞできませんでした"
@@ -189,9 +189,6 @@ msgstr ""
 
 msgid "Banner window is only available with AHBPROT! Please consider installing new HBC version."
 msgstr ""
-
-msgid "Beginning"
-msgstr "前方一致"
 
 msgid "Big thanks to:"
 msgstr "協力:"
@@ -394,9 +391,6 @@ msgstr "これを使うにはロックの解除が必要です"
 msgid "Console should be unlocked to modify it."
 msgstr "変更にはロックの解除が必要です"
 
-msgid "Content"
-msgstr "含む"
-
 msgid "Continue"
 msgstr "続行"
 
@@ -488,9 +482,6 @@ msgstr "パスを変更"
 msgid "Customs/Original"
 msgstr "カスタムを優先"
 
-msgid "DML Auto"
-msgstr ""
-
 msgid "DML Debug"
 msgstr ""
 
@@ -503,13 +494,7 @@ msgstr ""
 msgid "DML No Disc"
 msgstr ""
 
-msgid "DML None"
-msgstr ""
-
 msgid "DML PAD Hook"
-msgstr ""
-
-msgid "DML Video Mode"
 msgstr ""
 
 msgid "DOL Path"
@@ -971,6 +956,9 @@ msgstr "ゲームID_ゲーム名"
 msgid "GC Banner Scale"
 msgstr ""
 
+msgid "GC Force Interlace"
+msgstr ""
+
 msgid "GC Games"
 msgstr "GCゲーム"
 
@@ -1238,9 +1226,6 @@ msgstr "%sからﾌｧｲﾙをﾛｰﾄﾞしますか？"
 msgid "Load this DOL as alternate DOL?"
 msgstr "このDOLを代替DOLとしてﾛｰﾄﾞしますか？"
 
-msgid "Loader Mode"
-msgstr "ローダーモード"
-
 msgid "Loader Settings"
 msgstr "ローダーの設定"
 
@@ -1294,9 +1279,6 @@ msgstr "5月"
 
 msgid "Messageboard Update"
 msgstr "Wii伝言板の更新"
-
-msgid "Mixed"
-msgstr ""
 
 msgid "Motion+ Video"
 msgstr "ﾓｰｼｮﾝ＋説明ﾑｰﾋﾞｰ"
@@ -1661,9 +1643,6 @@ msgstr "このゲームのセーブはありません"
 msgid "Screensaver"
 msgstr "スクリーンセーバー"
 
-msgid "Search Mode"
-msgstr "検索方法"
-
 msgid "Select"
 msgstr "選択"
 
@@ -1775,9 +1754,6 @@ msgstr "保存に成功しました"
 msgid "Successfully Updated"
 msgstr "更新しました"
 
-msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr "更新しました www.techjawa.comに感謝!"
-
 msgid "Successfully copied"
 msgstr ""
 
@@ -1789,6 +1765,9 @@ msgstr "テーマの解凍を完了しました."
 
 msgid "Successfully installed:"
 msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしました"
+
+msgid "Successfully updated."
+msgstr ""
 
 msgid "Switching to channel list mode."
 msgstr "チャンネルリストモードに変更します"
@@ -2105,11 +2084,11 @@ msgstr "…LibWiiGuiを制作"
 msgid "for hosting the themes"
 msgstr "…テーマを配布"
 
-msgid "for hosting the update files"
-msgstr "…更新ファイルを配布"
-
 msgid "for the USB Loader source"
 msgstr "…ソースを制作"
+
+msgid "for their work on the wiki page"
+msgstr ""
 
 msgid "formatted!"
 msgstr "初期化を完了しました!"
@@ -2128,6 +2107,24 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "Successfully Updated thanks to www.techjawa.com"
+#~ msgstr "更新しました www.techjawa.comに感謝!"
+
+#~ msgid "Beginning"
+#~ msgstr "前方一致"
+
+#~ msgid "Content"
+#~ msgstr "含む"
+
+#~ msgid "Loader Mode"
+#~ msgstr "ローダーモード"
+
+#~ msgid "Search Mode"
+#~ msgstr "検索方法"
+
+#~ msgid "for hosting the update files"
+#~ msgstr "…更新ファイルを配布"
 
 #~ msgid "Insert a Wii Disc!"
 #~ msgstr "Wiiディスクを入れて下さい!"
