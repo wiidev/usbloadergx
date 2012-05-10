@@ -144,6 +144,14 @@ Section "USB Loader GX" SecMain
   ; remove line endings
   ${CharStrip} "$\n" $R0 $R0
   ${CharStrip} "$\r" $R0 $R0
+  ;get download link for languages
+  Push 3 ;line number to read from
+  Push "$INSTDIR\rev.txt" ;text file to read
+   Call ReadFileLine
+  Pop $R6 ;output string (read from meta.txt)
+  ; remove line endings
+  ${CharStrip} "$\n" $R6 $R6
+  ${CharStrip} "$\r" $R6 $R6
   ; remove file again
   Delete "$INSTDIR\rev.txt"
   
@@ -208,7 +216,7 @@ SectionGroup "$(DESC_Op_Lang)" SecOptional1
  Section /o "Czech" g1o19
   AddSize "14"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/czech.lang czech.lang
+  NSISdl::download "$R6/czech.lang" czech.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -224,7 +232,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "Danish" g1o2
   AddSize "13"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/danish.lang danish.lang
+  NSISdl::download "$R6/danish.lang" danish.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -240,7 +248,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "Dutch" g1o3
   AddSize "14"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/dutch.lang dutch.lang
+  NSISdl::download "$R6/dutch.lang" dutch.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -256,7 +264,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section "English" g1o4
   AddSize "9"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/english.lang english.lang
+  NSISdl::download "$R6/english.lang" english.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -272,7 +280,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "Finnish" g1o5
   AddSize "13"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/finnish.lang finnish.lang
+  NSISdl::download "$R6/finnish.lang" finnish.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -288,7 +296,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "French" g1o6
   AddSize "14"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/french.lang french.lang
+  NSISdl::download "$R6/french.lang" french.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -304,7 +312,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "German" g1o1
   AddSize "14"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/german.lang german.lang
+  NSISdl::download "$R6/german.lang" german.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -320,7 +328,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "Hungarian" g1o20
   AddSize "14"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/hungarian.lang hungarian.lang
+  NSISdl::download "$R6/hungarian.lang" hungarian.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -336,7 +344,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "Italian" g1o7
   AddSize "14"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/italian.lang italian.lang
+  NSISdl::download "$R6/italian.lang" italian.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -352,7 +360,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "Japanese" g1o8
   AddSize "16"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/japanese.lang japanese.lang
+  NSISdl::download "$R6/japanese.lang" japanese.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -368,7 +376,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "Korean" g1o9
   AddSize "13"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/korean.lang korean.lang
+  NSISdl::download "$R6/korean.lang" korean.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -384,7 +392,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "Norwegian" g1o10
   AddSize "14"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/norwegian.lang norwegian.lang
+  NSISdl::download "$R6/norwegian.lang" norwegian.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -400,7 +408,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "Polish" g1o21
   AddSize "14"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/polish.lang polish.lang
+  NSISdl::download "$R6/polish.lang" polish.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -416,7 +424,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "Portuguese_br" g1o11
   AddSize "14"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/portuguese_br.lang portuguese_br.lang
+  NSISdl::download "$R6/portuguese_br.lang" portuguese_br.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -432,7 +440,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "Portuguese_pt" g1o12
   AddSize "15"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/portuguese_pt.lang portuguese_pt.lang
+  NSISdl::download "$R6/portuguese_pt.lang" portuguese_pt.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -448,7 +456,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "Russian" g1o13
   AddSize "16"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/russian.lang russian.lang
+  NSISdl::download "$R6/russian.lang" russian.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -464,7 +472,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "S.Chinese" g1o14
   AddSize "12"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/schinese.lang schinese.lang
+  NSISdl::download "$R6/schinese.lang" schinese.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -480,7 +488,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "T.Chinese" g1o15
   AddSize "13"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/tchinese.lang tchinese.lang
+  NSISdl::download "$R6/tchinese.lang" tchinese.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -496,7 +504,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "Spanish" g1o16
   AddSize "14"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/spanish.lang spanish.lang
+  NSISdl::download "$R6/spanish.lang" spanish.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -512,7 +520,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "Swedish" g1o17
   AddSize "13"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/swedish.lang swedish.lang
+  NSISdl::download "$R6/swedish.lang" swedish.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -528,7 +536,7 @@ FileOpen $4 "$INSTDIR\GXGlobal.cfg" a
  Section /o "Turkish" g1o18
   AddSize "13"
   SetOutPath "$INSTDIR\language"
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/trunk/Languages/turkish.lang turkish.lang
+  NSISdl::download "$R6/turkish.lang" turkish.lang
   Pop $0
   StrCmp $0 success success
     SetDetailsView show
@@ -565,8 +573,16 @@ Section /o  "$(DESC_Op_Chan)" SecOptional3
   ; remove line endings
   ${CharStrip} "$\n" $R0 $R0
   ${CharStrip} "$\r" $R0 $R0
+  ;get download link for languages
+  Push 3 ;line number to read from
+  Push "$INSTDIR\rev.txt" ;text file to read
+   Call ReadFileLine
+  Pop $R6 ;output string (read from meta.txt)
+  ; remove line endings
+  ${CharStrip} "$\n" $R6 $R6
+  ${CharStrip} "$\r" $R6 $R6
   ; remove file again
-  Delete "$INSTDIR\..\..\wad\rev.txt"
+  Delete "$INSTDIR\rev.txt"
   
   NSISdl::download $R0 USBLoaderGX_UNLR.wad
   Pop $0
