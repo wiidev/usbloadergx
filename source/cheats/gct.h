@@ -29,9 +29,13 @@ class GCTCheats
 	private:
 		string sGameID;
 		string sGameTitle;
-		vector< string > sCheatName;
-		vector< string > sCheatComment;
-		vector< vector<unsigned int> > sCheats;
+        struct CheatEntry
+        {
+            string sCheatName;
+            string sCheatComment;
+            vector<unsigned int> sCheats;
+        };
+        vector<CheatEntry> cheatList;
 	public:
 		//!Constructor
 		GCTCheats(void);
@@ -49,7 +53,7 @@ class GCTCheats
 		int createGCT(const vector<int> &vCheats, const char * filename);
 		//!Gets Count cheats
 		//!\return Count cheats
-		int getCnt() const { return sCheats.size(); }
+        int getCnt() const { return cheatList.size(); }
 		//!Gets Game Name
 		//!\return Game Name
 		string getGameName(void);
@@ -64,7 +68,7 @@ class GCTCheats
 		string getCheatName(int nr);
 		//!Gets Cheat Comment
 		//!\return Cheat Comment
-		string getCheatComment(int nr);
+        string getCheatComment(int nr);
 		//!Clear all loaded cheats
 		void Clear(void);
 		//!Check if string is a code
