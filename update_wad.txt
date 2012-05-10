@@ -1,2 +1,3 @@
 1123
 http://usbloader-gui.googlecode.com/files/USBLoaderGX_v2.3_IOS249.wad
+http://usbloader-gui.googlecode.com/svn/tags/USBLoaderGX_v2_3/Languages/
