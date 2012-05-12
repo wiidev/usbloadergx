@@ -36,9 +36,9 @@ GCTCheats::~GCTCheats(void)
 
 void GCTCheats::Clear(void)
 {
-    cheatList.clear();
-    sGameID.clear();
-    sGameTitle.clear();
+	cheatList.clear();
+	sGameID.clear();
+	sGameTitle.clear();
 
 }
 
@@ -54,26 +54,26 @@ string GCTCheats::getGameID(void)
 
 vector<unsigned int> GCTCheats::getCheat(int nr)
 {
-    if((unsigned int)nr >= cheatList.size())
+	if((unsigned int)nr >= cheatList.size())
 		return vector<unsigned int>();
 
-    return cheatList[nr].sCheats;
+	return cheatList[nr].sCheats;
 }
 
 string GCTCheats::getCheatName(int nr)
 {
-    if((unsigned int)nr >= cheatList.size())
+	if((unsigned int)nr >= cheatList.size())
 		return ERRORRANGE;
 
-    return cheatList[nr].sCheatName;
+	return cheatList[nr].sCheatName;
 }
 
 string GCTCheats::getCheatComment(int nr)
 {
-    if((unsigned int)nr >= cheatList.size())
+	if((unsigned int)nr >= cheatList.size())
 		return ERRORRANGE;
 
-    return cheatList[nr].sCheatComment;
+	return cheatList[nr].sCheatComment;
 }
 
 int GCTCheats::createGCT(const vector<int> &vCheats, const char * filename)
@@ -88,16 +88,16 @@ int GCTCheats::createGCT(const vector<int> &vCheats, const char * filename)
 
 	fwrite(GCT_Header, sizeof(GCT_Header), 1, pFile);
 
-    int cnt = vCheats.size();
+	int cnt = vCheats.size();
 	int c = 0;
 	while (c < cnt)
 	{
-        if((unsigned int)vCheats[c] >= cheatList.size())
+		if((unsigned int)vCheats[c] >= cheatList.size())
 			continue;
 
-        vector<unsigned int> &cheatBuf = cheatList[vCheats[c]].sCheats;
-        if(cheatBuf.size() > 0)
-            fwrite((char*)&cheatBuf[0], cheatBuf.size() * sizeof(unsigned int), 1, pFile);
+		vector<unsigned int> &cheatBuf = cheatList[vCheats[c]].sCheats;
+		if(cheatBuf.size() > 0)
+			fwrite((char*)&cheatBuf[0], cheatBuf.size() * sizeof(unsigned int), 1, pFile);
 
 		c++;
 	}
@@ -160,9 +160,9 @@ int GCTCheats::openTxtfile(const char * filename)
 		if(*line == 0)
 			continue;
 
-        // first line is the cheat name
-        CheatEntry cheatEntry;
-        cheatEntry.sCheatName = line;
+		// first line is the cheat name
+		CheatEntry cheatEntry;
+		cheatEntry.sCheatName = line;
 
 		while (fgets(line, max_line_size, pFile))
 		{
@@ -177,17 +177,17 @@ int GCTCheats::openTxtfile(const char * filename)
 				line[8] = 0;
 				line[17] = 0;
 
-                cheatEntry.sCheats.push_back(strtoul(&line[0], 0, 16));
-                cheatEntry.sCheats.push_back(strtoul(&line[9], 0, 16));
+				cheatEntry.sCheats.push_back(strtoul(&line[0], 0, 16));
+				cheatEntry.sCheats.push_back(strtoul(&line[9], 0, 16));
 			}
 			else
 			{
-                cheatEntry.sCheatComment = line;
+				cheatEntry.sCheatComment = line;
 			}
 		}
 
-        if(!cheatEntry.sCheats.empty())
-            cheatList.push_back(cheatEntry);
+		if(!cheatEntry.sCheats.empty())
+			cheatList.push_back(cheatEntry);
 	}
 	fclose(pFile);
 	delete [] line;
@@ -215,10 +215,10 @@ bool GCTCheats::IsCode(const char *str)
 
 bool GCTCheats::IsCheatIncluded(int iCheat, const unsigned char *gctBuf, unsigned int gctSize)
 {
-    if(!gctBuf || (unsigned int)iCheat >= cheatList.size())
+	if(!gctBuf || (unsigned int)iCheat >= cheatList.size())
 		return false;
 
-    vector<unsigned int> &Cheat = cheatList[iCheat].sCheats;
+	vector<unsigned int> &Cheat = cheatList[iCheat].sCheats;
 	int len = Cheat.size() * sizeof(unsigned int);
 
 	for(unsigned int i = sizeof(GCT_Header); i + len <= gctSize - sizeof(GCT_Footer); i += 4)

@@ -20,7 +20,7 @@
 #include "utils/ShowError.h"
 #include "gecko.h"
 
-static const char * LanguageFilesURL = "http://usbloader-gui.googlecode.com/svn/trunk/Languages/";
+static const char * LanguageFilesURL = "http://usbloader-gui.googlecode.com/svn/tags/USBLoaderGX_v3_0/";
 
 int DownloadAllLanguageFiles()
 {
@@ -104,7 +104,7 @@ int UpdateLanguageFiles()
 	{
 		if(WindowPrompt(tr("Error:"), tr("No language files to update on your devices! Do you want to download new language files?"), tr("Yes"), tr("No")))
 			return DownloadAllLanguageFiles();
-			
+
 		return -2;
 	}
 

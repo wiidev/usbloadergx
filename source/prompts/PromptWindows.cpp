@@ -245,9 +245,9 @@ void WindowCredits()
 
 	char SvnRev[80];
 #ifdef FULLCHANNEL
-	snprintf(SvnRev, sizeof(SvnRev), "Rev%sc   IOS%u (Rev %u)", GetRev(), IOS_GetVersion(), IOS_GetRevision());
+	snprintf(SvnRev, sizeof(SvnRev), "v3.0c   IOS%u (Rev %u)", IOS_GetVersion(), IOS_GetRevision());
 #else
-	snprintf(SvnRev, sizeof(SvnRev), "Rev%s   IOS%u (Rev %u)", GetRev(), IOS_GetVersion(), IOS_GetRevision());
+	snprintf(SvnRev, sizeof(SvnRev), "v3.0   IOS%u (Rev %u)", IOS_GetVersion(), IOS_GetRevision());
 #endif
 
 	char IosInfo[80] = "";

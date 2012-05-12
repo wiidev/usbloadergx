@@ -45,7 +45,7 @@ cat <<EOF > ./HBC/META.XML
 	<app version="1">
 		<name> USB Loader GX</name>
 		<coder>USB Loader GX Team</coder>
-		<version>2.3 r$rev_new</version>
+		<version>3.0 r$rev_new</version>
 		<release_date>$rev_date</release_date>
 		<!--   // remove this line to enable arguments
 		<arguments>

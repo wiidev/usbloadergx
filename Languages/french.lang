@@ -1,18 +1,18 @@
 # USB Loader GX language source file.
-# French.lang - r116
+# French.lang - r1180 (v3.0)
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-11 19:04+0200\n"
+"POT-Creation-Date: 2012-05-12 07:11+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " ne peut pas être téléchargé."
@@ -957,7 +957,7 @@ msgid "GC Banner Scale"
 msgstr "Échelle des bannières GC"
 
 msgid "GC Force Interlace"
-msgstr ""
+msgstr "Entrelacement GameCube"
 
 msgid "GC Games"
 msgstr "Jeux GameCube"
@@ -1767,7 +1767,7 @@ msgid "Successfully installed:"
 msgstr "Installé avec succès:"
 
 msgid "Successfully updated."
-msgstr ""
+msgstr "Mise à jour terminée."
 
 msgid "Switching to channel list mode."
 msgstr "Passage du loader en mode Chaînes."
@@ -2088,7 +2088,7 @@ msgid "for the USB Loader source"
 msgstr "pour les sources USBLoader"
 
 msgid "for their work on the wiki page"
-msgstr ""
+msgstr "pour leur travail sur les pages wiki"
 
 msgid "formatted!"
 msgstr "formaté !"

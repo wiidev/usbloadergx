@@ -120,11 +120,11 @@ int CheatMenu(const char * gameID)
 				if (ret >= 0)
 				{
 					const char *strCheck = cheatslst.GetName(ret);
-                    if (strCheck && strcmp(strCheck, tr("ON")) == 0)
+					if (strCheck && strcmp(strCheck, tr("ON")) == 0)
 					{
 						cheatslst.SetName(ret, "%s", tr("OFF"));
 					}
-                    else if (strCheck && strcmp(strCheck, tr("OFF")) == 0)
+					else if (strCheck && strcmp(strCheck, tr("OFF")) == 0)
 					{
 						cheatslst.SetName(ret, "%s", tr("ON"));
 					}
@@ -138,7 +138,7 @@ int CheatMenu(const char * gameID)
 						for (int i = 0; i < cntcheats; i++)
 						{
 							const char *strCheck = cheatslst.GetName(i);
-                            if (strCheck && strcmp(strCheck, tr("ON")) == 0)
+							if (strCheck && strcmp(strCheck, tr("ON")) == 0)
 								vActiveCheats.push_back(i);
 						}
 						if (vActiveCheats.size() == 0)
