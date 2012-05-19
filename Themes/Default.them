@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-09 20:15+0200\n"
+"POT-Creation-Date: 2012-05-19 12:24+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -18,6 +18,12 @@ msgstr ""
 "Last-Themer: Example\n"
 "Theme-Team: Example\n"
 "Theme-Version: Example\n"
+
+msgid "0 - game bannergrid layout pos x"
+msgstr ""
+
+msgid "-50 - game bannergrid layout pos y"
+msgstr ""
 
 msgid "r=237 g=237 b=237 a=255 - banner icon frame color"
 msgstr ""
@@ -32,6 +38,9 @@ msgid "r=180 g=180 b=180 a=255 - banner icon frame edge tev color 2"
 msgstr ""
 
 msgid "r=255 g=255 b=255 a=255 - banner icon frame edge tev color 3"
+msgstr ""
+
+msgid "255 - tooltip alpha"
 msgstr ""
 
 msgid "right - checkbox browser scrollbar align hor"
@@ -80,9 +89,6 @@ msgid "0 - game grid layout pos x"
 msgstr ""
 
 msgid "20 - game grid layout pos y"
-msgstr ""
-
-msgid "255 - tooltip alpha"
 msgstr ""
 
 msgid "9 - game list browser page size"
@@ -215,6 +221,9 @@ msgid "68 - gameID btn pos x"
 msgstr ""
 
 msgid "r=138 g=138 b=138 a=240 - clock color"
+msgstr ""
+
+msgid "1.0 - Overrided clock scale factor. 1.0=allow user setting"
 msgstr ""
 
 msgid "left - clock align hor"
@@ -653,12 +662,6 @@ msgid "500 - bannergrid layout dvd btn pos x"
 msgstr ""
 
 msgid "13 - bannergrid layout dvd btn pos y"
-msgstr ""
-
-msgid "0 - game bannergrid layout pos x"
-msgstr ""
-
-msgid "0 - game bannergrid layout pos y"
 msgstr ""
 
 msgid "1 - show hdd info: 1 for on and 0 for off"

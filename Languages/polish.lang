@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-12 07:11+0100\n"
+"POT-Creation-Date: 2012-05-18 16:22+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -356,6 +356,9 @@ msgstr "Kliknij zeby zmienic ID gry"
 
 msgid "Clock"
 msgstr "Zegar"
+
+msgid "Clock Scale Factor"
+msgstr ""
 
 msgid "Close"
 msgstr "Zamknij"

@@ -150,7 +150,7 @@ GameBrowseMenu::GameBrowseMenu()
 
 	homeBtnTT = new GuiTooltip(tr( "Back to HBC or Wii Menu" ));
 	if (Settings.wsprompt) homeBtnTT->SetWidescreen(Settings.widescreen);
-	settingsBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
+	homeBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
 	homeBtnImg = new GuiImage(btnhome);
 	homeBtnImg->SetWidescreen(Settings.widescreen);
 	homeBtnImgOver = new GuiImage(btnhomeOver);
@@ -342,12 +342,13 @@ GameBrowseMenu::GameBrowseMenu()
 	idBtn->SetSelectable(false);
 
 	GXColor clockColor = thColor("r=138 g=138 b=138 a=240 - clock color");
-	clockTimeBack = new GuiText("88:88", 40, (GXColor) {clockColor.r, clockColor.g, clockColor.b, clockColor.a / 6});
+	float clockFontScaleFactor = thFloat("1.0 - Overrided clock scale factor. 1.0=allow user setting") != 1.0f ? thFloat("1.0 - Overrided clock scale factor. 1.0=allow user setting") : Settings.ClockFontScaleFactor;
+	clockTimeBack = new GuiText("88:88", 40 / Settings.FontScaleFactor * clockFontScaleFactor, (GXColor) {clockColor.r, clockColor.g, clockColor.b, clockColor.a / 6});
 	clockTimeBack->SetAlignment(thAlign("left - clock align hor"), thAlign("top - clock align ver"));
 	clockTimeBack->SetPosition(thInt("275 - clock pos x"), thInt("335 - clock pos y"));
 	clockTimeBack->SetFont(Resources::GetFile("clock.ttf"), Resources::GetFileSize("clock.ttf"));
 
-	clockTime = new GuiText("", 40, clockColor);
+	clockTime = new GuiText("", 40 / Settings.FontScaleFactor * clockFontScaleFactor, clockColor);
 	clockTime->SetAlignment(thAlign("left - clock align hor"), thAlign("top - clock align ver"));
 	clockTime->SetPosition(thInt("275 - clock pos x"), thInt("335 - clock pos y"));
 	clockTime->SetFont(Resources::GetFile("clock.ttf"), Resources::GetFileSize("clock.ttf"));
@@ -355,9 +356,12 @@ GameBrowseMenu::GameBrowseMenu()
 	ToolBar.push_back(favoriteBtn);
 	ToolBar.push_back(searchBtn);
 	ToolBar.push_back(sortBtn);
+	ToolBar.push_back(categBtn);
 	ToolBar.push_back(listBtn);
 	ToolBar.push_back(gridBtn);
+	ToolBar.push_back(loaderModeBtn);
 	ToolBar.push_back(carouselBtn);
+	ToolBar.push_back(bannerGridBtn);
 	ToolBar.push_back(lockBtn);
 	ToolBar.push_back(dvdBtn);
 	SetUpdateCallback(UpdateCallback);
@@ -838,7 +842,6 @@ void GameBrowseMenu::ReloadBrowser()
 								thInt("13 - bannergrid layout dvd btn pos y"));
 
 		gameBrowser = new GuiBannerGrid(Settings.GameListOffset + Settings.SelectedGame);
-		gameBrowser->SetPosition(thInt("0 - game bannergrid layout pos x"), thInt("0 - game bannergrid layout pos y"));
 	}
 
 	if (thInt("1 - show hdd info: 1 for on and 0 for off") == 1) //force show hdd info

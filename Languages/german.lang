@@ -1,11 +1,11 @@
 # USB Loader GX
-# german.lang - r1166
+# german.lang - r1186 v3.0 final
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-12 07:11+0100\n"
+"POT-Creation-Date: 2012-05-19 12:18+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -182,22 +182,22 @@ msgid "Banner Animation"
 msgstr "Banner Animation"
 
 msgid "Banner Animation Settings"
-msgstr "Banner Animations-Einstellungen"
+msgstr "Banner Animationen"
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
-msgstr "Banner Grid-Layout ist nur verfügbar mit AHBPROT! Bitte installiere eine neue HBC Version."
+msgstr "Banner Raster-Layout ist nur verfügbar mit AHBPROT! Bitte installiere die aktuelle HBC-Version."
 
 msgid "Banner window is only available with AHBPROT! Please consider installing new HBC version."
-msgstr "Banner Fenster ist nur verfügbar mit AHBPROT! Bitte installiere eine neue HBC Version."
+msgstr "Banner-Fenster ist nur verfügbar mit AHBPROT! Bitte installiere die aktuelle HBC-Version."
 
 msgid "Big thanks to:"
-msgstr "Großen Dank an:"
+msgstr "Vielen Dank an:"
 
 msgid "Block Categories Menu"
-msgstr "Sperre Kategorienmenü"
+msgstr "Sperre Kategorie-Menü"
 
 msgid "Block Categories Modify"
-msgstr "Sperre Kategorieänderung"
+msgstr "Sperre Kategorie-Änderung"
 
 msgid "Block Cover Downloads"
 msgstr "Blocke Cover-Downloads"
@@ -215,10 +215,10 @@ msgid "Block Game Settings"
 msgstr "Blocke Spieleoptionen"
 
 msgid "Block GameID Change"
-msgstr "Blocke SpieleID-Änderung"
+msgstr "Blocke GameID-Änderung"
 
 msgid "Block Global Settings"
-msgstr "Blocke globale Optionen"
+msgstr "Sperre alle Einstellungen"
 
 msgid "Block Gui Settings"
 msgstr "Blocke GUI-Optionen"
@@ -281,7 +281,7 @@ msgid "Both Ports"
 msgstr "Beide Ports"
 
 msgid "Cache BNR Files"
-msgstr "Cache BNR Dateien"
+msgstr "BNR-Cache"
 
 msgid "Cache BNR Files Path"
 msgstr "Cache BNR Dateien"
@@ -356,6 +356,9 @@ msgstr "Spiel ID ändern"
 
 msgid "Clock"
 msgstr "Uhr"
+
+msgid "Clock Scale Factor"
+msgstr ""
 
 msgid "Close"
 msgstr "Schließen"
@@ -585,10 +588,10 @@ msgid "Display as a carousel"
 msgstr "Karussell-Ansicht"
 
 msgid "Display as a channel grid"
-msgstr "Grid-Kanal-Ansicht"
+msgstr "Raster-Kanal-Ansicht"
 
 msgid "Display as a grid"
-msgstr "Grid-Ansicht"
+msgstr "Raster-Ansicht"
 
 msgid "Display as a list"
 msgstr "Listen-Ansicht"
@@ -957,13 +960,13 @@ msgid "GC Banner Scale"
 msgstr "GC Banner Skalierung"
 
 msgid "GC Force Interlace"
-msgstr ""
+msgstr "GC Interlace erzw."
 
 msgid "GC Games"
 msgstr "GC Spiele"
 
 msgid "GC Install 32K Aligned"
-msgstr "GC Installiere 32K angepasst"
+msgstr "GC Inst. 32K-aligned"
 
 msgid "GC Install Compressed"
 msgstr "GC Installiere gepackt"
@@ -1062,7 +1065,7 @@ msgid "Global Settings"
 msgstr "Globale Einstellungen"
 
 msgid "Grid Scroll Speed"
-msgstr "Grid Scrollgeschwindigkeit"
+msgstr "Raster Scrollgeschwindigkeit"
 
 msgid "HOME Menu"
 msgstr "HOME Menü"
@@ -1443,7 +1446,7 @@ msgid "OSSleepThread"
 msgstr "OSSleepThread"
 
 msgid "Ocarina"
-msgstr "Ocarina"
+msgstr "Ocarina (Cheats)"
 
 msgid "Oct"
 msgstr "Oktober"
@@ -1629,7 +1632,7 @@ msgid "Save Failed. No device inserted?"
 msgstr "Speichern fehlgeschlagen. Kein Gerät eingefügt?"
 
 msgid "Save Game List to"
-msgstr "Liste speicheren unter"
+msgstr "Liste speichern unter"
 
 msgid "Save List"
 msgstr "Speichere Liste"
@@ -1767,7 +1770,7 @@ msgid "Successfully installed:"
 msgstr "Erfolgreich installiert:"
 
 msgid "Successfully updated."
-msgstr ""
+msgstr "Update erfolgreich."
 
 msgid "Switching to channel list mode."
 msgstr "Zum Kanallisten-Modus schalten."
@@ -2049,7 +2052,7 @@ msgid "You cannot delete this category."
 msgstr "Kategorie kann nicht gelöscht werden."
 
 msgid "Zoom Duration (Speed)"
-msgstr "Zoom Dauer (Geschwindigkeit)"
+msgstr "Zoom Dauer"
 
 msgid "and translators for language files updates"
 msgstr "und Übersetzer für Sprachdateien Updates"
@@ -2088,7 +2091,7 @@ msgid "for the USB Loader source"
 msgstr "für die Veröffentlichung des USB Loader-Quellcodes"
 
 msgid "for their work on the wiki page"
-msgstr ""
+msgstr "für ihre Arbeit an der Wiki Seite"
 
 msgid "formatted!"
 msgstr "formatiert!"

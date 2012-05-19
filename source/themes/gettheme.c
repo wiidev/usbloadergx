@@ -176,6 +176,13 @@ int getThemeInt(const char *msgid)
 	return atoi(msgid);
 }
 
+float getThemeFloat(const char *msgid)
+{
+	MSG *msg = findMSG(hash_string(msgid));
+	if(msg) return atof(msg->msgstr);
+	return atof(msgid);
+}
+
 int getThemeAlignment(const char *msgid)
 {
 	MSG *msg = findMSG(hash_string(msgid));

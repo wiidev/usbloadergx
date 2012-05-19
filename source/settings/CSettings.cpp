@@ -130,6 +130,7 @@ void CSettings::SetDefault()
 	CacheTitles = ON;
 	WSFactor = 0.8f; //actually should be 0.75 for real widescreen
 	FontScaleFactor = 0.8f; //it's a work around to not have to change ALL fonts now
+	ClockFontScaleFactor = 1.0f; // Scale of 1 to prevent misaligned clock.
 	EnabledCategories.resize(1);
 	EnabledCategories[0] = 0;
 	Wiinnertag = OFF;
@@ -323,6 +324,7 @@ bool CSettings::Save()
 	fprintf(file, "BlockIOSReload = %d\n", BlockIOSReload);
 	fprintf(file, "WSFactor = %0.3f\n", WSFactor);
 	fprintf(file, "FontScaleFactor = %0.3f\n", FontScaleFactor);
+	fprintf(file, "ClockFontScaleFactor = %0.3f\n", ClockFontScaleFactor);
 	fprintf(file, "EnabledCategories = ");
 	for(u32 i = 0; i < EnabledCategories.size(); ++i)
 	{
@@ -707,6 +709,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "FontScaleFactor") == 0)
 	{
 		FontScaleFactor = atof(value);
+		return true;
+	}
+	else if (strcmp(name, "ClockFontScaleFactor") == 0)
+	{
+		ClockFontScaleFactor = atof(value);
 		return true;
 	}
 	else if (strcmp(name, "PointerSpeed") == 0)

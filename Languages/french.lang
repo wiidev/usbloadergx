@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1180 (v3.0)
+# French.lang - r1188
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-12 07:11+0100\n"
+"POT-Creation-Date: 2012-05-18 16:22+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -356,6 +356,9 @@ msgstr "Changer l'ID du jeu"
 
 msgid "Clock"
 msgstr "Horloge"
+
+msgid "Clock Scale Factor"
+msgstr "Échelle de l'horloge"
 
 msgid "Close"
 msgstr "Fermer"

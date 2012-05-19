@@ -54,8 +54,8 @@ static inline int Idx2Column(int sIdx)
 }
 
 GuiBannerGrid::GuiBannerGrid(int listOffset)
-	: XOffset(0)
-	, YOffset(-50)
+	: XOffset(thInt("0 - game bannergrid layout pos x"))
+	, YOffset(thInt("-50 - game bannergrid layout pos y"))
 	, fAnimation(0.f)
 	, fAnimStep(Settings.BannerGridSpeed)
 	, AnimationRunning(false)
@@ -139,6 +139,7 @@ GuiBannerGrid::GuiBannerGrid(int listOffset)
 
 		gridTT[i] = new GuiTooltip(NULL);
 		gridTT[i]->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
+		gridTT[i]->SetAlpha(thInt("255 - tooltip alpha"));
 
 		gridBtn[i] = new GuiButton(chanWidth, chanHeight);
 		gridBtn[i]->SetPosition(fx, fy);

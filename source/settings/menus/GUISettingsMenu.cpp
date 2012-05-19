@@ -111,6 +111,7 @@ GuiSettingsMenu::GuiSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "App Language" ));
 	Options->SetName(Idx++, "%s", tr( "Display" ));
 	Options->SetName(Idx++, "%s", tr( "Clock" ));
+	Options->SetName(Idx++, "%s", tr( "Clock Scale Factor" ));
 	Options->SetName(Idx++, "%s", tr( "Tooltips" ));
 	Options->SetName(Idx++, "%s", tr( "Tooltip Delay" ));
 	Options->SetName(Idx++, "%s", tr( "Flip-X" ));
@@ -156,6 +157,9 @@ void GuiSettingsMenu::SetOptionValues()
 		Options->SetValue(Idx++, "24 %s", tr( "Hour" ));
 	else if (Settings.hddinfo == OFF)
 		Options->SetValue(Idx++, "%s", tr( "OFF" ));
+
+	//! Settings: Clock Font Scale Factor
+	Options->SetValue(Idx++, "%g", Settings.ClockFontScaleFactor);
 
 	//! Settings: Tooltips
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.tooltips]));
@@ -273,6 +277,16 @@ int GuiSettingsMenu::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.hddinfo >= CLOCK_MAX) Settings.hddinfo = 0; //CLOCK
+	}
+
+	//! Settings: Clock Font Scale Factor
+	else if (ret == ++Idx)
+	{
+		char entrie[20];
+		snprintf(entrie, sizeof(entrie), "%g", Settings.ClockFontScaleFactor);
+		int ret = OnScreenNumpad(entrie, sizeof(entrie));
+		if(ret)
+			Settings.ClockFontScaleFactor = LIMIT(atof(entrie), 0.01f, 1.5f);
 	}
 
 	//! Settings: Tooltips

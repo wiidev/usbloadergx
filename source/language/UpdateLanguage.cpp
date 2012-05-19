@@ -20,7 +20,7 @@
 #include "utils/ShowError.h"
 #include "gecko.h"
 
-static const char * LanguageFilesURL = "http://usbloader-gui.googlecode.com/svn/tags/USBLoaderGX_v3_0/";
+static const char * LanguageFilesURL = "http://usbloader-gui.googlecode.com/svn/trunk/Languages/";
 
 int DownloadAllLanguageFiles()
 {

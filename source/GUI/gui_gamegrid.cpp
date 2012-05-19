@@ -176,7 +176,7 @@ static int GetGameIndex(int pageEntry, int rows, int listOffset, int gameCnt)
 	int skip = (rows - (gameCnt % rows)) % rows; // count of skiped Entries at end if List
 	int pagesize = ROWS2PAGESIZE( rows );
 
-	if (gameCnt < (pagesize - 2 * rows))
+	if (gameCnt < (pagesize - 3 * rows))
 	{
 		int listStart = (pagesize - gameCnt) >> 1; // align list on the center
 		listStart = listStart - (listStart % rows); // align listStart to the top row
@@ -186,7 +186,7 @@ static int GetGameIndex(int pageEntry, int rows, int listOffset, int gameCnt)
 	else
 	{
 		listOffset = listOffset - (listOffset % rows); // align listOffset to the top row
-		listOffset = listOffset - 2 * rows; // align listOffset to the left full visible column
+		listOffset = listOffset - 3 * rows; // align listOffset to the left full visible column
 		if (listOffset < 0) listOffset += gameCnt + skip; // set the correct Offset
 		pageEntry = (listOffset + pageEntry) % (gameCnt + skip); // get offset of pageEntry
 		if (pageEntry >= gameCnt) return -1;
@@ -466,7 +466,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 
 	}
 	// navigation
-	if (gameList.size() >= (pagesize - 2 * rows) && goLeft == 0 && goRight == 0)
+	if (gameList.size() >= (pagesize - 3 * rows) && goLeft == 0 && goRight == 0)
 	{
 		// Left/Right Navigation
 
