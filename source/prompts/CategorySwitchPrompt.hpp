@@ -35,7 +35,16 @@ class CategorySwitchPrompt : public CategoryPrompt
 		void onBrowserRefresh();
 		void onResetChanges();
 
-		const std::vector<u32> oldSetting;
+		const std::vector<u32> oldSettingEnabled;
+		const std::vector<u32> oldSettingRequired;
+		const std::vector<u32> oldSettingForbidden;
 };
 
+enum
+{
+	CHECKSIGN,
+	CROSS,
+	PLUS,
+	MAX_CHECKBOX_STYLE
+};
 #endif

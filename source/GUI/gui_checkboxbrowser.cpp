@@ -110,6 +110,37 @@ bool GuiCheckboxBrowser::AddEntrie(const string &text, bool checked)
 	return true;
 }
 
+bool GuiCheckboxBrowser::AddEntrieMultiStates(const string &text, bool checked, int style)
+{
+	LOCK(this);
+	int currentSize = checkBoxList.size();
+	textLineList.resize(currentSize+1);
+	checkBoxList.resize(currentSize+1);
+
+	checkBoxList[currentSize] = new GuiCheckbox(30, 30);
+	checkBoxList[currentSize]->SetParent(this);
+	checkBoxList[currentSize]->SetChecked(checked);
+	checkBoxList[currentSize]->SetStyle(style);
+	checkBoxList[currentSize]->SetMultiStates(true);
+	checkBoxList[currentSize]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
+	checkBoxList[currentSize]->SetTrigger(&trigA);
+	checkBoxList[currentSize]->SetClickSize(width-30-scrollBar.GetWidth(), 30);
+	checkBoxList[currentSize]->Clicked.connect(this, &GuiCheckboxBrowser::OnCheckboxClick);
+
+	textLineList[currentSize] = new GuiText(text.c_str(), 18, thColor("r=0 g=0 b=0 a=255 - checkbox browser text color"));
+	textLineList[currentSize]->SetParent(this);
+	textLineList[currentSize]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	textLineList[currentSize]->SetMaxWidth(maxTextWidth, DOTTED);
+
+	if(textLineDrawn.size() < (u32) maxSize)
+	{
+		textLineDrawn.push_back(textLineList[currentSize]);
+		checkBoxDrawn.push_back(checkBoxList[currentSize]);
+	}
+
+	return true;
+}
+
 void GuiCheckboxBrowser::OnCheckboxClick(GuiButton *sender, int chan, const POINT &pointer)
 {
 	LOCK(this);

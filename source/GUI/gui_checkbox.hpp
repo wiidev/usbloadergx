@@ -28,6 +28,7 @@
 #include "GUI/gui_box.hpp"
 #include "GUI/gui_cross.hpp"
 #include "GUI/gui_checksign.hpp"
+#include "GUI/gui_plus.hpp"
 
 class GuiCheckbox : public GuiButton
 {
@@ -39,21 +40,28 @@ class GuiCheckbox : public GuiButton
 		void SetClickSize(int w, int h);
 		void SetAlignment(int h, int v);
 		void SetChecked(bool c) { LOCK(this); Checked = c; }
+		void SetStyle(int st) { LOCK(this); style = st; }
+		void SetMultiStates(bool m) { LOCK(this); MultiStates = m; }
 		bool IsChecked() const { return Checked; }
+		int  GetStyle() { return style; }
 		virtual void SetState(int s, int c = -1);
 		virtual void Draw();
 		enum
 		{
 			CHECKSIGN,
 			CROSS,
+			PLUS,
+			MAX_CHECKBOX_STYLE
 		};
 	protected:
 		GuiChecksign Checksign;
 		GuiCross Cross;
+		GuiPlus Plus;
 		GuiBox Blackbox;
 		GuiBox Whitebox;
 		int style;
 		bool Checked;
+		bool MultiStates;
 
 };
 

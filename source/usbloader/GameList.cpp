@@ -229,14 +229,72 @@ void GameList::InternalFilterList(std::vector<struct discHdr> &FullList)
 
 		//! Category filter
 		u32 n;
-		for(n = 0; n < Settings.EnabledCategories.size(); ++n)
+		enum { DISABLED, ENABLED, HIDEFORBIDDEN };
+		int allType = DISABLED;
+		// verify the display mode for category "All"
+		for(u32 n = 0; n < Settings.EnabledCategories.size(); ++n)
 		{
-			if(GameCategories.isInCategory((char *) header->id, Settings.EnabledCategories[n]))
+			if(Settings.EnabledCategories[n] == 0)
+			{
+				allType = ENABLED; // All = Enabled
 				break;
+			}
 		}
-		if(n == Settings.EnabledCategories.size())
-			continue;
-
+		for(u32 n = 0; n < Settings.ForbiddenCategories.size(); ++n)
+		{
+			if(Settings.ForbiddenCategories[n] == 0)
+			{
+				allType = HIDEFORBIDDEN; // All = Enabled but hide Forbidden categories
+				break;
+			}
+		}
+		
+		if(allType == DISABLED)
+		{
+			// Remove TitleID if it contains a forbidden categories
+			for(n = 0; n < Settings.ForbiddenCategories.size(); ++n)
+			{
+				if(GameCategories.isInCategory((char *) header->id, Settings.ForbiddenCategories[n]))
+					break;
+			}
+			if(n < Settings.ForbiddenCategories.size())
+				continue;
+			
+			// Remove TitleID is it doesn't contain a required categories
+			for(n = 0; n < Settings.RequiredCategories.size(); ++n)
+			{
+				if(!GameCategories.isInCategory((char *) header->id, Settings.RequiredCategories[n]))
+					break;
+			}
+			if(n < Settings.RequiredCategories.size())
+				continue;
+			
+			// If there's no required categories, verify if the TitleID should be kept or removed
+			if(Settings.RequiredCategories.size() == 0)
+			{
+				for(n = 0; n < Settings.EnabledCategories.size(); ++n)
+				{
+					if(GameCategories.isInCategory((char *) header->id, Settings.EnabledCategories[n]))
+						break;
+				}
+				if(n == Settings.EnabledCategories.size())
+					continue;
+			}
+		}
+		
+		if(allType == HIDEFORBIDDEN)
+		{
+			// Remove TitleID if it contains a forbidden categories
+			for(n = 0; n < Settings.ForbiddenCategories.size(); ++n)
+			{
+				if(GameCategories.isInCategory((char *) header->id, Settings.ForbiddenCategories[n]))
+					if(Settings.ForbiddenCategories[n] >0)
+						break;
+			}
+			if(n < Settings.ForbiddenCategories.size())
+				continue;
+		}	
+		
 		FilteredList.push_back(header);
 	}
 }

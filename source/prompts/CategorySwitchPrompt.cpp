@@ -27,7 +27,8 @@
 #include "language/gettext.h"
 
 CategorySwitchPrompt::CategorySwitchPrompt()
-	: CategoryPrompt(tr("Show Categories")), oldSetting(Settings.EnabledCategories)
+	: CategoryPrompt(tr("Show Categories")), oldSettingEnabled(Settings.EnabledCategories),
+	oldSettingRequired(Settings.RequiredCategories), oldSettingForbidden(Settings.ForbiddenCategories)
 {
 	browser->checkBoxClicked.connect(this, &CategorySwitchPrompt::OnCheckboxClick);
 	browserRefresh.connect(this, &CategorySwitchPrompt::onBrowserRefresh);
@@ -38,7 +39,9 @@ CategorySwitchPrompt::CategorySwitchPrompt()
 
 void CategorySwitchPrompt::onResetChanges()
 {
-	Settings.EnabledCategories = oldSetting;
+	Settings.EnabledCategories = oldSettingEnabled;
+	Settings.RequiredCategories = oldSettingRequired;
+	Settings.ForbiddenCategories = oldSettingForbidden;
 	GameCategories.Load(Settings.ConfigPath);
 }
 
@@ -49,7 +52,9 @@ void CategorySwitchPrompt::onBrowserRefresh()
 	do
 	{
 		bool checked = false;
+		int style = CHECKSIGN;
 
+		// Verify the Enabled Categories [v]
 		for(u32 i = 0; i < Settings.EnabledCategories.size(); ++i)
 		{
 			if(Settings.EnabledCategories[i] == GameCategories.CategoryList.getCurrentID())
@@ -58,8 +63,32 @@ void CategorySwitchPrompt::onBrowserRefresh()
 				break;
 			}
 		}
-
-		browser->AddEntrie(tr(GameCategories.CategoryList.getCurrentName().c_str()), checked);
+		
+		// Verify the Forbidden Categories [X]
+		if(!checked)
+		for(u32 i = 0; i < Settings.ForbiddenCategories.size(); ++i)
+		{
+			if(Settings.ForbiddenCategories[i] == GameCategories.CategoryList.getCurrentID())
+			{
+				checked = true;
+				style = CROSS;
+				break;
+			}
+		}
+		
+		// Verify the Required Categories [+]
+		if(!checked)
+		for(u32 i = 0; i < Settings.RequiredCategories.size(); ++i)
+		{
+			if(Settings.RequiredCategories[i] == GameCategories.CategoryList.getCurrentID())
+			{
+				checked = true;
+				style = PLUS;
+				break;
+			}
+		}
+		
+		browser->AddEntrieMultiStates(tr(GameCategories.CategoryList.getCurrentName().c_str()), checked, style);
 	}
 	while(GameCategories.CategoryList.goToNext());
 
@@ -74,22 +103,69 @@ void CategorySwitchPrompt::OnCheckboxClick(GuiCheckbox *checkBox, int index)
 		GameCategories.CategoryList.goToNext();
 
 	u32 i;
-	for(i = 0; i < Settings.EnabledCategories.size(); ++i)
+	if(!checkBox->IsChecked())
 	{
-		if(Settings.EnabledCategories[i] == GameCategories.CategoryList.getCurrentID())
+		// Remove from Required
+		for(i = 0; i < Settings.RequiredCategories.size(); ++i)
 		{
-			if(!checkBox->IsChecked())
+			if(Settings.RequiredCategories[i] == GameCategories.CategoryList.getCurrentID())
 			{
-				Settings.EnabledCategories.erase(Settings.EnabledCategories.begin()+i);
+				Settings.RequiredCategories.erase(Settings.RequiredCategories.begin()+i);
 				markChanged();
+				break;
 			}
-			break;
 		}
 	}
-
-	if(i == Settings.EnabledCategories.size() && checkBox->IsChecked())
+	else if(checkBox->GetStyle() == CHECKSIGN)
 	{
+		// Add to Enabled
 		Settings.EnabledCategories.push_back(GameCategories.CategoryList.getCurrentID());
 		markChanged();
+	}
+	else if(checkBox->GetStyle() == CROSS)
+	{
+		// Remove from Enabled
+		for(i = 0; i < Settings.EnabledCategories.size(); ++i)
+		{
+			if(Settings.EnabledCategories[i] == GameCategories.CategoryList.getCurrentID())
+			{
+				Settings.EnabledCategories.erase(Settings.EnabledCategories.begin()+i);
+				break;
+			}
+		}
+		// Add to Forbidden
+		Settings.ForbiddenCategories.push_back(GameCategories.CategoryList.getCurrentID());
+		markChanged();
+	}
+	else if(checkBox->GetStyle() == PLUS && index > 0)
+	{
+		// Remove from Forbidden
+		for(i = 0; i < Settings.ForbiddenCategories.size(); ++i)
+		{
+			if(Settings.ForbiddenCategories[i] == GameCategories.CategoryList.getCurrentID())
+			{
+				Settings.ForbiddenCategories.erase(Settings.ForbiddenCategories.begin()+i);
+				break;
+			}
+		}
+		// Add to Required
+		Settings.RequiredCategories.push_back(GameCategories.CategoryList.getCurrentID());
+		markChanged();
+	}
+
+	// Override Style cycling for category "All"
+	if(index == 0 && checkBox->GetStyle() == PLUS)
+	{
+		checkBox->SetStyle(CHECKSIGN);
+		checkBox->SetChecked(false);
+		for(i = 0; i < Settings.ForbiddenCategories.size(); ++i)
+		{
+			if(Settings.ForbiddenCategories[i] == GameCategories.CategoryList.getCurrentID())
+			{
+				Settings.ForbiddenCategories.erase(Settings.ForbiddenCategories.begin()+i);
+				markChanged();
+				break;
+			}
+		}
 	}
 }

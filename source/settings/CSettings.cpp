@@ -133,6 +133,8 @@ void CSettings::SetDefault()
 	ClockFontScaleFactor = 1.0f; // Scale of 1 to prevent misaligned clock.
 	EnabledCategories.resize(1);
 	EnabledCategories[0] = 0;
+	RequiredCategories.resize(0);
+	ForbiddenCategories.resize(0);
 	Wiinnertag = OFF;
 	SelectedGame = 0;
 	GameListOffset = 0;
@@ -330,6 +332,22 @@ bool CSettings::Save()
 	{
 		fprintf(file, "%i", EnabledCategories[i]);
 		if(i+1 < EnabledCategories.size())
+			fprintf(file, ",");
+	}
+	fprintf(file, "\n");
+	fprintf(file, "RequiredCategories = ");
+	for(u32 i = 0; i < RequiredCategories.size(); ++i)
+	{
+		fprintf(file, "%i", RequiredCategories[i]);
+		if(i+1 < RequiredCategories.size())
+			fprintf(file, ",");
+	}
+	fprintf(file, "\n");
+	fprintf(file, "ForbiddenCategories = ");
+	for(u32 i = 0; i < ForbiddenCategories.size(); ++i)
+	{
+		fprintf(file, "%i", ForbiddenCategories[i]);
+		if(i+1 < ForbiddenCategories.size())
 			fprintf(file, ",");
 	}
 	fprintf(file, "\n");
@@ -936,6 +954,44 @@ bool CSettings::SetSetting(char *name, char *value)
 			}
 			if(i == EnabledCategories.size())
 				EnabledCategories.push_back(id);
+			strTok = strtok(NULL,",");
+		}
+		return true;
+	}
+	else if (strcmp(name, "RequiredCategories") == 0)
+	{
+		RequiredCategories.clear();
+		char * strTok = strtok(value, ",");
+		while (strTok != NULL)
+		{
+			u32 id  = atoi(strTok);
+			u32 i;
+			for(i = 0; i < RequiredCategories.size(); ++i)
+			{
+				if(RequiredCategories[i] == id)
+					break;
+			}
+			if(i == RequiredCategories.size())
+				RequiredCategories.push_back(id);
+			strTok = strtok(NULL,",");
+		}
+		return true;
+	}
+	else if (strcmp(name, "ForbiddenCategories") == 0)
+	{
+		ForbiddenCategories.clear();
+		char * strTok = strtok(value, ",");
+		while (strTok != NULL)
+		{
+			u32 id  = atoi(strTok);
+			u32 i;
+			for(i = 0; i < ForbiddenCategories.size(); ++i)
+			{
+				if(ForbiddenCategories[i] == id)
+					break;
+			}
+			if(i == ForbiddenCategories.size())
+				ForbiddenCategories.push_back(id);
 			strTok = strtok(NULL,",");
 		}
 		return true;

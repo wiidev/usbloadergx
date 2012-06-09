@@ -137,6 +137,8 @@ class CSettings
 		short GameListOffset;
 		short sneekVideoPatch;
 		std::vector<u32> EnabledCategories;
+		std::vector<u32> RequiredCategories;
+		std::vector<u32> ForbiddenCategories;
 		u8 EntryIOS;
 		short NandEmuMode;
 		short NandEmuChanMode;
