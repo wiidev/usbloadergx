@@ -36,8 +36,7 @@ class GuiCheckboxBrowser : public GuiElement, public sigslot::has_slots<>
 	public:
 		GuiCheckboxBrowser(int w, int h, int maxSize = 7);
 		virtual ~GuiCheckboxBrowser();
-		bool AddEntrie(const string &text, bool checked = false);
-		bool AddEntrieMultiStates(const string &text, bool checked = false, int style = CHECKSIGN);
+		bool AddEntrie(const string &text, bool checked = false, int style = GuiCheckbox::CHECKSIGN, bool multistates = false);
 		int GetSelected() const { return pageIndex+selectedItem; }
 		bool IsChecked(u32 i) { if(i >= checkBoxList.size()) return false; else return checkBoxList[i]->IsChecked(); }
 		GuiCheckbox *GetCheckbox(u32 i) { if(i >= checkBoxList.size()) return NULL; else return checkBoxList[i]; }
@@ -48,13 +47,6 @@ class GuiCheckboxBrowser : public GuiElement, public sigslot::has_slots<>
 		void Draw();
 		void Update(GuiTrigger *t);
 		sigslot::signal2<GuiCheckbox *, int> checkBoxClicked;
-		enum
-		{
-			CHECKSIGN,
-			CROSS,
-			PLUS,
-			MAX_CHECKBOX_STYLE
-		};
 	private:
 		void onListChange(int SelItem, int SelInd);
 		void OnCheckboxClick(GuiButton *sender, int chan, const POINT &pointer);

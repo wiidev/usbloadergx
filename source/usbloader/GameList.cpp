@@ -38,6 +38,8 @@
 #include "memory/memory.h"
 #include "Channels/channels.h"
 
+enum { DISABLED, ENABLED, HIDEFORBIDDEN };
+
 GameList gameList;
 
 void GameList::clear()
@@ -229,10 +231,9 @@ void GameList::InternalFilterList(std::vector<struct discHdr> &FullList)
 
 		//! Category filter
 		u32 n;
-		enum { DISABLED, ENABLED, HIDEFORBIDDEN };
 		int allType = DISABLED;
 		// verify the display mode for category "All"
-		for(u32 n = 0; n < Settings.EnabledCategories.size(); ++n)
+		for(n = 0; n < Settings.EnabledCategories.size(); ++n)
 		{
 			if(Settings.EnabledCategories[n] == 0)
 			{
@@ -240,7 +241,7 @@ void GameList::InternalFilterList(std::vector<struct discHdr> &FullList)
 				break;
 			}
 		}
-		for(u32 n = 0; n < Settings.ForbiddenCategories.size(); ++n)
+		for(n = 0; n < Settings.ForbiddenCategories.size(); ++n)
 		{
 			if(Settings.ForbiddenCategories[n] == 0)
 			{

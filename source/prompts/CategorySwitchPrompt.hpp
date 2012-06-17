@@ -40,11 +40,4 @@ class CategorySwitchPrompt : public CategoryPrompt
 		const std::vector<u32> oldSettingForbidden;
 };
 
-enum
-{
-	CHECKSIGN,
-	CROSS,
-	PLUS,
-	MAX_CHECKBOX_STYLE
-};
 #endif

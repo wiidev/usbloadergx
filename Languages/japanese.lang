@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-18 16:22+0200\n"
+"POT-Creation-Date: 2012-06-17 19:45+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -1568,8 +1568,8 @@ msgstr "ロック解除を記憶"
 msgid "Remove update"
 msgstr "更新を取り除く"
 
-msgid "Rename Game on WBFS"
-msgstr "WBFS内のゲーム名を変更"
+msgid "Rename Game Title"
+msgstr ""
 
 msgid "Rename category"
 msgstr "カテゴリの名前を変更"
@@ -2110,6 +2110,12 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "Rename Game on WBFS"
+#~ msgstr "WBFS内のゲーム名を変更"
+
+#~ msgid "Do you want to discart changes?"
+#~ msgstr "変更を破棄しますか?"
 
 #~ msgid "Successfully Updated thanks to www.techjawa.com"
 #~ msgstr "更新しました www.techjawa.comに感謝!"

@@ -82,7 +82,7 @@ GameWindow::GameWindow(GameBrowseMenu *m, struct discHdr *header)
 
 	dialogBoxImg = new GuiImage(dialogBox);
 
-	nameBtnTT = new GuiTooltip(tr( "Rename Game on WBFS" ));
+	nameBtnTT = new GuiTooltip(tr( "Rename Game Title" ));
 	if (Settings.wsprompt) nameBtnTT->SetWidescreen(Settings.widescreen);
 	nameTxt = new GuiText("", 22, thColor("r=0 g=0 b=0 a=255 - game window name text color"));
 	if (Settings.wsprompt) nameTxt->SetWidescreen(Settings.widescreen);

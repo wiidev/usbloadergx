@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-18 16:22+0200\n"
+"POT-Creation-Date: 2012-06-17 19:45+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -620,7 +620,7 @@ msgstr ""
 msgid "Do you want to delete a game on SD?"
 msgstr ""
 
-msgid "Do you want to discart changes?"
+msgid "Do you want to discard changes?"
 msgstr ""
 
 msgid "Do you want to download this theme?"
@@ -1568,8 +1568,8 @@ msgstr ""
 msgid "Remove update"
 msgstr ""
 
-msgid "Rename Game on WBFS"
-msgstr "WBFS에서 게임 이름 변경"
+msgid "Rename Game Title"
+msgstr ""
 
 msgid "Rename category"
 msgstr ""
@@ -2110,6 +2110,9 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
+
+#~ msgid "Rename Game on WBFS"
+#~ msgstr "WBFS에서 게임 이름 변경"
 
 #~ msgid "for hosting the update files"
 #~ msgstr "업데이트 화일 호스팅을 위하여"

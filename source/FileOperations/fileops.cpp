@@ -357,6 +357,8 @@ extern "C" int CopyFile(const char * src, const char * dest)
 	}
 	while (read > 0);
 
+	ProgressStop();
+	
 	free(buffer);
 	fclose(source);
 	fclose(destination);

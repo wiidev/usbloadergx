@@ -55,7 +55,7 @@ int GCMultiDiscMenu::ShowSelection()
 
 		else if(backBtn->GetState() == STATE_CLICKED)
 		{
-			if(!changed || !WindowPrompt(tr("Do you want to discart changes?"), 0, tr("Yes"), tr("No")))
+			if(!changed || WindowPrompt(tr("Do you want to discard changes?"), 0, tr("Yes"), tr("No")))
 				break;
 
 			backBtn->ResetState();

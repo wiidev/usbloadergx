@@ -52,7 +52,7 @@ void CategorySwitchPrompt::onBrowserRefresh()
 	do
 	{
 		bool checked = false;
-		int style = CHECKSIGN;
+		int style = GuiCheckbox::CHECKSIGN;
 
 		// Verify the Enabled Categories [v]
 		for(u32 i = 0; i < Settings.EnabledCategories.size(); ++i)
@@ -66,29 +66,33 @@ void CategorySwitchPrompt::onBrowserRefresh()
 		
 		// Verify the Forbidden Categories [X]
 		if(!checked)
-		for(u32 i = 0; i < Settings.ForbiddenCategories.size(); ++i)
 		{
-			if(Settings.ForbiddenCategories[i] == GameCategories.CategoryList.getCurrentID())
+			for(u32 i = 0; i < Settings.ForbiddenCategories.size(); ++i)
 			{
-				checked = true;
-				style = CROSS;
-				break;
+				if(Settings.ForbiddenCategories[i] == GameCategories.CategoryList.getCurrentID())
+				{
+					checked = true;
+					style = GuiCheckbox::CROSS;
+					break;
+				}
 			}
 		}
 		
 		// Verify the Required Categories [+]
 		if(!checked)
-		for(u32 i = 0; i < Settings.RequiredCategories.size(); ++i)
 		{
-			if(Settings.RequiredCategories[i] == GameCategories.CategoryList.getCurrentID())
+			for(u32 i = 0; i < Settings.RequiredCategories.size(); ++i)
 			{
-				checked = true;
-				style = PLUS;
-				break;
+				if(Settings.RequiredCategories[i] == GameCategories.CategoryList.getCurrentID())
+				{
+					checked = true;
+					style = GuiCheckbox::PLUS;
+					break;
+				}
 			}
 		}
 		
-		browser->AddEntrieMultiStates(tr(GameCategories.CategoryList.getCurrentName().c_str()), checked, style);
+		browser->AddEntrie(tr(GameCategories.CategoryList.getCurrentName().c_str()), checked, style, true);
 	}
 	while(GameCategories.CategoryList.goToNext());
 
@@ -116,13 +120,13 @@ void CategorySwitchPrompt::OnCheckboxClick(GuiCheckbox *checkBox, int index)
 			}
 		}
 	}
-	else if(checkBox->GetStyle() == CHECKSIGN)
+	else if(checkBox->GetStyle() == GuiCheckbox::CHECKSIGN)
 	{
 		// Add to Enabled
 		Settings.EnabledCategories.push_back(GameCategories.CategoryList.getCurrentID());
 		markChanged();
 	}
-	else if(checkBox->GetStyle() == CROSS)
+	else if(checkBox->GetStyle() == GuiCheckbox::CROSS)
 	{
 		// Remove from Enabled
 		for(i = 0; i < Settings.EnabledCategories.size(); ++i)
@@ -137,7 +141,7 @@ void CategorySwitchPrompt::OnCheckboxClick(GuiCheckbox *checkBox, int index)
 		Settings.ForbiddenCategories.push_back(GameCategories.CategoryList.getCurrentID());
 		markChanged();
 	}
-	else if(checkBox->GetStyle() == PLUS && index > 0)
+	else if(checkBox->GetStyle() == GuiCheckbox::PLUS && index > 0)
 	{
 		// Remove from Forbidden
 		for(i = 0; i < Settings.ForbiddenCategories.size(); ++i)
@@ -154,9 +158,9 @@ void CategorySwitchPrompt::OnCheckboxClick(GuiCheckbox *checkBox, int index)
 	}
 
 	// Override Style cycling for category "All"
-	if(index == 0 && checkBox->GetStyle() == PLUS)
+	if(index == 0 && checkBox->GetStyle() == GuiCheckbox::PLUS)
 	{
-		checkBox->SetStyle(CHECKSIGN);
+		checkBox->SetStyle(GuiCheckbox::CHECKSIGN);
 		checkBox->SetChecked(false);
 		for(i = 0; i < Settings.ForbiddenCategories.size(); ++i)
 		{

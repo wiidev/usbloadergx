@@ -74,6 +74,8 @@ void AppCleanUp(void)
 
 	app_clean = true;
 
+	BannerAsync::ThreadExit();
+
 	if(Settings.CacheTitles)
 		GameTitles.WriteCachedTitles(Settings.titlestxt_path);
 	Settings.Save();
@@ -94,7 +96,6 @@ void AppCleanUp(void)
 
 	gettextCleanUp();
 	Theme::CleanUp();
-	BannerAsync::ThreadExit();
 	NewTitles::DestroyInstance();
 	ThreadedTask::DestroyInstance();
 	SoundHandler::DestroyInstance();
