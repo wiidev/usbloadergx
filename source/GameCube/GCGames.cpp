@@ -370,12 +370,15 @@ bool GCGames::CopyUSB2SD(const struct discHdr *header)
 	if(*path == 0)
 		return false;
 
-	int choice = WindowPrompt(tr("The game is on USB."), tr("Do you want to copy the game to SD or delete a game on SD?"), tr("Copy"), tr("Show SD"), tr("Cancel"));
+	int choice = WindowPrompt(tr("The game is on USB."), tr("Do you want to copy the game to SD or delete a game on SD?"), tr("Copy"), tr("Show SD"), ("Launch from USB"), tr("Cancel"));
 	if(choice == 0)
 		return false;
 
 	const char *cpTitle = GameTitles.GetTitle(header);
 
+	if(choice == 3)
+		return true;
+	
 	if(choice == 2)
 	{
 		GCDeleteMenu gcDeleteMenu;

@@ -1,5 +1,5 @@
 # USB Loader GX
-# german.lang - r1186 v3.0 final
+# german.lang - r1190
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -358,7 +358,7 @@ msgid "Clock"
 msgstr "Uhr"
 
 msgid "Clock Scale Factor"
-msgstr ""
+msgstr "Uhr-Skalierwert"
 
 msgid "Close"
 msgstr "Schließen"
@@ -876,7 +876,7 @@ msgid "Flip-X"
 msgstr "Flip-X"
 
 msgid "Font Scale Factor"
-msgstr "Schriftskalierwert"
+msgstr "Schrift-Skalierwert"
 
 msgid "Force 16:9"
 msgstr "Erzw. 16:9"
