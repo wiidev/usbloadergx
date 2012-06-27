@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-17 19:45+0200\n"
+"POT-Creation-Date: 2012-06-27 20:29+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -135,6 +135,9 @@ msgstr "Soll diese Kategorie gelöscht werden?"
 
 msgid "Are you sure you want to import game categories from GameTDB?"
 msgstr "Sollen die Spiele-Kategorien aus der WiiTDB importiert werden?"
+
+msgid "Are you sure you want to install on SD?"
+msgstr ""
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "Bist du sicher, dass du USB Loader GX sperren willst?"
@@ -1808,6 +1811,9 @@ msgstr "Das eingegebene Verzeichnis existiert nicht. Möchtest du es erstellen?"
 msgid "The files will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
 msgstr "Datein werden in den EmuNand Speicher- und Kanal-Pfad kopiert. Achtung: Alle vorhandenen Dateien werden überschrieben."
 
+msgid "The game is on SD Card."
+msgstr ""
+
 msgid "The game is on USB."
 msgstr "Das Spiel befindet sich auf USB."
 
@@ -1856,6 +1862,12 @@ msgstr "Channel Launcher"
 
 msgid "Titles from GameTDB"
 msgstr "Namen aus der WiiTDB"
+
+msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
+msgstr ""
+
+msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
+msgstr ""
 
 msgid "Tooltip Delay"
 msgstr "Tooltip Verzögerung"
@@ -2050,6 +2062,9 @@ msgstr "Du kannst eine Partition auswählen oder formatieren oder den Kanal-Load
 
 msgid "You cannot delete this category."
 msgstr "Kategorie kann nicht gelöscht werden."
+
+msgid "You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"
+msgstr ""
 
 msgid "Zoom Duration (Speed)"
 msgstr "Zoom Dauer"

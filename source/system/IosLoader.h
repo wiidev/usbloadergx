@@ -6,6 +6,14 @@
 
 #define CheckAHBPROT()	(read32(0x0D800064) == 0xFFFFFFFF)
 
+enum MiosInfo
+{
+	DEFAULT_MIOS,
+	DIOS_MIOS,
+	DIOS_MIOS_LITE,
+	QUADFORCE,
+};
+
 typedef struct _iosinfo_t
 {
 	u32 magicword;			  //0x1ee7c105
@@ -27,6 +35,7 @@ class IosLoader
 		static bool IsWaninkokoIOS(s32 ios = IOS_GetVersion());
 		static bool IsD2X(s32 ios = IOS_GetVersion());
 		static iosinfo_t *GetIOSInfo(s32 ios);
+		static u8 GetMIOSInfo();
 	private:
 		static void LoadIOSModules(s32 ios, s32 ios_rev);
 };

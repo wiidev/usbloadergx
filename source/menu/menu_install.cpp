@@ -10,6 +10,7 @@
 #include "prompts/GCMultiDiscMenu.h"
 #include "themes/CTheme.h"
 #include "utils/tools.h"
+#include "system/IosLoader.h"
 
 #define WII_MAGIC   0x5D1C9EA3
 
@@ -75,6 +76,13 @@ int MenuGCInstall()
 		destination = WindowPrompt(tr("Where should the game be installed to?"), 0, tr("Main Path"), tr("SD Path"), tr("Cancel"));
 	if(!destination)
 		return MENU_DISCLIST;
+		
+	//! Alert the user if he is dumping on SD with DIOS MIOS (USB) installed
+	if(destination == 2 && IosLoader::GetMIOSInfo() == DIOS_MIOS)
+	{
+		if(!WindowPrompt(tr("Are you sure you want to install on SD?"), ("You have DIOS-MIOS installed so the game need to be on a FAT32 USB. You will need to install DIOS-MIOS Lite to run this game from SD."), tr("Yes"), tr( "Cancel" )))
+			return MENU_DISCLIST;
+	}
 
 	const char *InstallPath = destination == 1 ? Settings.GameCubePath : Settings.GameCubeSDPath;
 

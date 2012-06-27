@@ -255,6 +255,14 @@ void WindowCredits()
 	if(info)
 		snprintf(IosInfo, sizeof(IosInfo), "(%s v%i%s base%i)", info->name, info->version, info->versionstring, info->baseios);
 
+	int currentMIOS = IosLoader::GetMIOSInfo();
+	if(currentMIOS == DIOS_MIOS)
+		snprintf(IosInfo, sizeof(IosInfo), "%s + DIOS-MIOS", IosInfo);
+	else if (currentMIOS == DIOS_MIOS_LITE)
+		snprintf(IosInfo, sizeof(IosInfo), "%s + DIOS-MIOS Lite", IosInfo);
+	else if (currentMIOS == QUADFORCE)
+		snprintf(IosInfo, sizeof(IosInfo), "%s + QuadForce", IosInfo);
+
 	txt[i] = new GuiText(SvnRev, 16, ( GXColor ) {255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
 	txt[i]->SetPosition(0, info ? y-10 : y);

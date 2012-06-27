@@ -63,13 +63,45 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 {
 	const char *RealPath = GCGames::Instance()->GetPath((const char *) gameHdr->id);
 
-	if(((gameHdr->type == TYPE_GAME_GC_IMG) || (gameHdr->type == TYPE_GAME_GC_EXTRACTED)) && strncmp(RealPath, "usb", 3) == 0)
+	int currentMIOS = IosLoader::GetMIOSInfo();
+	// DIOS MIOS
+	if(currentMIOS == DIOS_MIOS)
 	{
-		if(!GCGames::Instance()->CopyUSB2SD(gameHdr))
+		// Check Main GameCube Path location
+		if(strncmp(Settings.GameCubePath, "sd", 2) == 0 || strncmp(DeviceHandler::PathToFSName(Settings.GameCubePath), "FAT", 3) != 0)
+		{
+			WindowPrompt(tr("Error:"), tr("To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."), tr("OK"));
 			return 0;
+		}
 
-		RealPath = GCGames::Instance()->GetPath((const char *) gameHdr->id);
+		// Check current game location
+		if(strncmp(RealPath, "sd", 2) == 0)
+		{
+			WindowPrompt(tr("The game is on SD Card."), tr("To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."), tr("OK"));
+			// Todo: Add here copySD2USB.
+			return 0;
+		}
 	}
+
+	// DIOS MIOS Lite
+	else if(currentMIOS == DIOS_MIOS_LITE || currentMIOS == QUADFORCE)
+	{
+		if(((gameHdr->type == TYPE_GAME_GC_IMG) || (gameHdr->type == TYPE_GAME_GC_EXTRACTED)) && strncmp(RealPath, "usb", 3) == 0)
+		{
+			if(!GCGames::Instance()->CopyUSB2SD(gameHdr))
+				return 0;
+
+			RealPath = GCGames::Instance()->GetPath((const char *) gameHdr->id);
+		}
+	}
+
+	// MIOS
+	else
+	{
+		WindowPrompt(tr("Error:"), tr("You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"), tr("OK"));
+		return 0;
+	}
+
 
 	const char *gcPath = strchr(RealPath, '/');
 	if(!gcPath) gcPath = "";

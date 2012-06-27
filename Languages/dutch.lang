@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-17 19:45+0200\n"
+"POT-Creation-Date: 2012-06-27 20:29+0200\n"
 "PO-Revision-Date: 2011-12-17 14:22+0100\n"
 "Last-Translator: Arthur117\n"
 "Language-Team: tj_cool, glowy, Arthur117\n"
@@ -135,6 +135,9 @@ msgstr "Weet je zeker dat je deze categorie wilt verwijderen?"
 
 msgid "Are you sure you want to import game categories from GameTDB?"
 msgstr "Weet je zeker dat je spel categorieën wilt importeren van GameTBD?"
+
+msgid "Are you sure you want to install on SD?"
+msgstr ""
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "Weet je zeker dat je USB Loader GX wilt vergrendelen?"
@@ -1808,6 +1811,9 @@ msgstr "De opgegeven map bestaat niet. Wil je deze aanmaken?"
 msgid "The files will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
 msgstr ""
 
+msgid "The game is on SD Card."
+msgstr ""
+
 msgid "The game is on USB."
 msgstr ""
 
@@ -1856,6 +1862,12 @@ msgstr "Titel starter"
 
 msgid "Titles from GameTDB"
 msgstr "Titels van GameTDB"
+
+msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
+msgstr ""
+
+msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
+msgstr ""
 
 msgid "Tooltip Delay"
 msgstr ""
@@ -2050,6 +2062,9 @@ msgstr ""
 
 msgid "You cannot delete this category."
 msgstr "Je kunt deze categorie niet verwijderen."
+
+msgid "You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"
+msgstr ""
 
 msgid "Zoom Duration (Speed)"
 msgstr ""

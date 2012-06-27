@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-17 19:45+0200\n"
+"POT-Creation-Date: 2012-06-27 20:29+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -135,6 +135,9 @@ msgstr "Voulez-vous vraiment supprimer cette catégorie ?"
 
 msgid "Are you sure you want to import game categories from GameTDB?"
 msgstr "Voulez-vous vraiment importer les catégories de jeux à partir de WiiTDB.xml ?"
+
+msgid "Are you sure you want to install on SD?"
+msgstr "Voulez-vous vraiment installer sur SD ?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "Voulez-vous vraiment verrouiller USB loader GX ?"
@@ -1808,6 +1811,9 @@ msgstr "Répertoire indiqué inexistant. Souhaitez-vous le créer ?"
 msgid "The files will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
 msgstr "Les fichiers seront extraits vers vos dossiers d'ÉmuNand et d'ÉmuNand Chaînes. Attention: Tous les fichiers existants seront remplacés."
 
+msgid "The game is on SD Card."
+msgstr "Le jeu est sur la carte SD."
+
 msgid "The game is on USB."
 msgstr "Le jeu est sur USB"
 
@@ -1856,6 +1862,12 @@ msgstr "Menu Chaînes"
 
 msgid "Titles from GameTDB"
 msgstr "Titres de GameTDB"
+
+msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
+msgstr "Pour jouer aux jeux GameCube avec DIOS MIOS vouz devez les copier sur une partition USB FAT32."
+
+msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
+msgstr "Pour jouer aux jeux GameCube avec DIOS MIOS vouz devez placer votre 'Dossier GameCube principal' sur une partition USB FAT32."
 
 msgid "Tooltip Delay"
 msgstr "Délai des Info-bulles"
@@ -2050,6 +2062,9 @@ msgstr "Vous pouvez choisir ou formater une partition, ou passer le loader en mo
 
 msgid "You cannot delete this category."
 msgstr "Vous ne pouvez pas supprimer cette catégorie."
+
+msgid "You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"
+msgstr "Vous devez installer DIOS MIOS pour lancer les jeux GameCube sur USB ou DIOS MIOS Lite pour ceux sur carte SD."
 
 msgid "Zoom Duration (Speed)"
 msgstr "Durée du zoom (Vitesse)"

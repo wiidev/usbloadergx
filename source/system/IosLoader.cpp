@@ -28,6 +28,7 @@
  */
 static int currentIOS = -1;
 static iosinfo_t *currentIOSInfo = NULL;
+static int currentMIOS = -1;
 
 /******************************************************************************
  * Public Methods:
@@ -198,6 +199,49 @@ s32 IosLoader::ReloadIosKeepingRights(s32 ios)
 
 	/* Reload IOS. MEM2 protection is implicitly re-enabled */
 	return IOS_ReloadIOS(ios);
+}
+
+/*
+ * Check if MIOS is DIOS MIOS, DIOS MIOS Lite or official MIOS.
+ */
+u8 IosLoader::GetMIOSInfo()
+{
+	if(currentMIOS > -1)
+		return currentMIOS;
+
+	currentMIOS = DEFAULT_MIOS;
+
+	u8 *appfile = NULL;
+	u32 filesize = 0;
+
+	NandTitle::LoadFileFromNand("/title/00000001/00000101/content/0000000c.app", &appfile, &filesize);
+
+	if(appfile)
+	{
+		for(u32 i = 0; i < filesize-4; ++i)
+		{
+			if((*(u32*)(appfile+i)) == 'DIOS' && (*(u32*)(appfile+i+5)) == 'MIOS')
+			{
+				if((*(u32*)(appfile+i+10)) == 'Lite')
+				{
+					currentMIOS = DIOS_MIOS_LITE;
+				}
+				else
+				{
+					currentMIOS = DIOS_MIOS;
+				}
+				break;
+			}
+			else if((*(u32*)(appfile+i)) == 'Quad' && (*(u32*)(appfile+i+4)) == 'Forc')
+			{
+				currentMIOS = QUADFORCE;
+				break;
+			}
+		}
+		free(appfile);
+	}
+
+	return currentMIOS;
 }
 
 /******************************************************************************

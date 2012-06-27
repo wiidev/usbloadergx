@@ -27,6 +27,7 @@
 #include "language/gettext.h"
 #include "usbloader/wbfs/wbfs_fat.h"
 #include "utils/tools.h"
+#include "system/IosLoader.h"
 #include "menu.h"
 #include "gecko.h"
 
@@ -214,12 +215,19 @@ u32 GCGames::LoadAllGames(void)
 			u32 n;
 			for(n = 0; n < HeaderList.size(); ++n)
 			{
-				//! replace the one loaded from USB with the same games on SD since we can load them directly
+				//! Display only one game if it is present on both SD and USB.
 				if(memcmp(HeaderList[n].id, sdGCList[i].id, 6) == 0)
 				{
-					memcpy(&HeaderList[n], &sdGCList[i], sizeof(struct discHdr));
-					PathList[n] = sdGCPathList[i];
-					break;
+					if(IosLoader::GetMIOSInfo() == DIOS_MIOS) // DIOS MIOS - Show only the game on USB
+					{
+						break;
+					}
+					else // replace the one loaded from USB with the same games on SD since we can load them directly
+					{
+						memcpy(&HeaderList[n], &sdGCList[i], sizeof(struct discHdr));
+						PathList[n] = sdGCPathList[i];
+						break;
+					}
 				}
 			}
 
@@ -370,14 +378,11 @@ bool GCGames::CopyUSB2SD(const struct discHdr *header)
 	if(*path == 0)
 		return false;
 
-	int choice = WindowPrompt(tr("The game is on USB."), tr("Do you want to copy the game to SD or delete a game on SD?"), tr("Copy"), tr("Show SD"), ("Launch from USB"), tr("Cancel"));
+	int choice = WindowPrompt(tr("The game is on USB."), tr("Do you want to copy the game to SD or delete a game on SD?"), tr("Copy"), tr("Show SD"), tr("Cancel"));
 	if(choice == 0)
 		return false;
 
 	const char *cpTitle = GameTitles.GetTitle(header);
-
-	if(choice == 3)
-		return true;
 	
 	if(choice == 2)
 	{
