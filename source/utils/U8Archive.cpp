@@ -23,6 +23,7 @@
 #include "lz77.h"
 #include "gecko.h"
 #include "U8Archive.h"
+#include "uncompress.h"
 
 #define RU(N, S) ((((N) + (S) - 1) / (S)) * (S))
 
@@ -160,6 +161,22 @@ u8 *U8Archive::DecompressCopy( const u8 * stuff, u32 len, u32 *size ) const
 			return NULL;
 		}
 	}
+	else if( (len > 8) && *(u32*)( stuff ) == 0x59617a30 )// Yaz0
+	{
+		// Yaz0 with a magic word
+		Yaz0_Header *header = (Yaz0_Header *) stuff;
+		// set decompress length
+		len = header->decompressed_size;
+		// allocate memory
+		ret = (u8*) memalign(32, ALIGN32(len));
+		if(!ret)
+		{
+			gprintf("out of memory\n");
+			return NULL;
+		}
+		// function can not fail at this point
+		uncompressYaz0(stuff, ret, len);
+	}
 	else if( isLZ77compressed( stuff ) )
 	{
 		// LZ77 with no magic word
@@ -179,7 +196,7 @@ u8 *U8Archive::DecompressCopy( const u8 * stuff, u32 len, u32 *size ) const
 	else
 	{
 		// just copy the data out of the archive
-		ret = (u8*)memalign( 32, len );
+		ret = (u8*)memalign( 32, ALIGN32( len ) );
 		if( !ret )
 		{
 			gprintf( "out of memory\n" );

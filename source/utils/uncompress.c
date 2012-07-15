@@ -49,9 +49,12 @@ u8 * uncompressLZ77(const u8 *inBuf, u32 inLength, u32 * size)
 //the second 4 bytes in the Yaz0 header).
 void uncompressYaz0(const u8* srcBuf, u8* dst, int uncompressedSize)
 {
+	if(!srcBuf || !dst)
+		return;
+
 	const u8 * src = srcBuf;
 
-	if(memcmp(src, "Yaz0", 4) == 0)
+	if(*((u32*)src) == 'Yaz0')
 	{
 		src += sizeof(Yaz0_Header);
 	}
