@@ -59,6 +59,7 @@ CustomPathsSM::CustomPathsSM()
 	Options->SetName(Idx++, tr("Nand Emu Channel Path"));
 	Options->SetName(Idx++, tr("Main GameCube Path"));
 	Options->SetName(Idx++, tr("SD GameCube Path"));
+	Options->SetName(Idx++, tr("Devolution Loader Path"));
 	Options->SetName(Idx++, tr("Cache BNR Files Path"));
 
 	SetOptionValues();
@@ -127,6 +128,9 @@ void CustomPathsSM::SetOptionValues()
 
 	//! Settings: SD GameCube Games Path
 	Options->SetValue(Idx++, Settings.GameCubeSDPath);
+
+	//! Settings: GameCube Devolution loader.bin Path
+	Options->SetValue(Idx++, Settings.DEVOLoaderPath);
 
 	//! Settings: Cache BNR Files Path
 	Options->SetValue(Idx++, Settings.BNRCachePath);
@@ -316,6 +320,13 @@ int CustomPathsSM::GetMenuInternal()
 				GCGames::Instance()->LoadAllGames();
 			}
 		}
+	}
+
+	//! Settings: GameCube Devolution loader.bin path
+	else if (ret == ++Idx)
+	{
+		titleTxt->SetText(tr( "Devolution Loader Path" ));
+		ChangePath(Settings.DEVOLoaderPath, sizeof(Settings.DEVOLoaderPath));
 	}
 
 	//! Settings: Cache BNR Files Path

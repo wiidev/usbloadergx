@@ -55,12 +55,12 @@ void Disc_SetLowMem(void)
 	memcpy((void *) Online_Check, (void *) Disc_ID, 4);
 }
 
-void Disc_SelectVMode(u8 videoselected, u8 ignore_progressive)
+void Disc_SelectVMode(u8 videoselected, u8 force_progressive)
 {
 	rmode = VIDEO_GetPreferredMode(0);
 
 	/* Get video mode configuration */
-	bool progressive = (CONF_GetProgressiveScan() > 0) && VIDEO_HaveComponentCable() && !ignore_progressive;
+	bool progressive = (CONF_GetProgressiveScan() > 0) && VIDEO_HaveComponentCable() && force_progressive;
 	bool PAL60 = CONF_GetEuRGB60() > 0;
 	u32 tvmode = CONF_GetVideo();
 

@@ -205,12 +205,14 @@ bool CGameSettings::Save()
 		fprintf(f, "NandEmuPath:%s; ", GameList[i].NandEmuPath.c_str());
 		fprintf(f, "Hooktype:%d; ", GameList[i].Hooktype);
 		fprintf(f, "WiirdDebugger:%d; ", GameList[i].WiirdDebugger);
-		fprintf(f, "GCForceInterlace:%d; ", GameList[i].GCForceInterlace);
+		fprintf(f, "GameCubeMode:%d; ", GameList[i].GameCubeMode);
+		fprintf(f, "DMLProgPatch:%d; ", GameList[i].DMLProgPatch);
 		fprintf(f, "DMLNMM:%d; ", GameList[i].DMLNMM);
 		fprintf(f, "DMLActivityLED:%d; ", GameList[i].DMLActivityLED);
 		fprintf(f, "DMLPADHOOK:%d; ", GameList[i].DMLPADHOOK);
 		fprintf(f, "DMLNoDisc:%d; ", GameList[i].DMLNoDisc);
 		fprintf(f, "DMLDebug:%d; ", GameList[i].DMLDebug);
+		fprintf(f, "DEVOMCEmulation:%d; ", GameList[i].DEVOMCEmulation);
 		fprintf(f, "Locked:%d;\n", GameList[i].Locked);
 	}
 	fprintf(f, "# END\n");
@@ -321,9 +323,14 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		game.Locked = atoi(value);
 		return true;
 	}
-	else if(strcmp(name, "GCForceInterlace") == 0)
+	else if(strcmp(name, "GameCubeMode") == 0)
 	{
-		game.GCForceInterlace = atoi(value);
+		game.GameCubeMode = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "DMLProgPatch") == 0)
+	{
+		game.DMLProgPatch = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "DMLNMM") == 0)
@@ -349,6 +356,11 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 	else if(strcmp(name, "DMLDebug") == 0)
 	{
 		game.DMLDebug = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "DEVOMCEmulation") == 0)
+	{
+		game.DEVOMCEmulation = atoi(value);
 		return true;
 	}
 
@@ -471,11 +483,13 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.NandEmuPath.clear();
 	game.Hooktype = INHERIT;
 	game.WiirdDebugger = INHERIT;
-	game.GCForceInterlace = INHERIT;
+	game.GameCubeMode = INHERIT;
+	game.DMLProgPatch = INHERIT;
 	game.DMLNMM = INHERIT;
 	game.DMLActivityLED = INHERIT;
 	game.DMLPADHOOK = INHERIT;
 	game.DMLNoDisc = INHERIT;
 	game.DMLDebug = INHERIT;
+	game.DEVOMCEmulation = INHERIT;
 	game.Locked = OFF;
 }

@@ -318,6 +318,13 @@ const char * DeviceHandler::GetFSName(int dev)
 	return "";
 }
 
+const char * DeviceHandler::GetDevicePrefix(const char * path)
+{
+	if(PathToDriveType(path) == -1)
+		return "";
+	return DeviceName[PathToDriveType(path)];
+}
+
 int DeviceHandler::GetFilesystemType(int dev)
 {
 	if(!instance)

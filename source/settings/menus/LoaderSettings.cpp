@@ -109,6 +109,12 @@ static const char * ChannelLaunchText[] =
 	trNOOP( "Boot Content" ),
 };
 
+static const char * GCMode[] =
+{
+	trNOOP( "MIOS (Default & Customs)" ),
+	trNOOP( "Devolution" ),
+};
+
 static const char * DMLNMMMode[] =
 {
 	trNOOP( "OFF" ),
@@ -121,6 +127,13 @@ static const char * DMLDebug[] =
 	trNOOP( "OFF" ),
 	trNOOP( "ON" ),
 	trNOOP( "Debug Wait" ),
+};
+
+static const char * DEVOMCText[] =
+{
+	trNOOP( "OFF" ),
+	trNOOP( "ON" ),
+	trNOOP( "Individual" ),
 };
 
 LoaderSettings::LoaderSettings()
@@ -146,12 +159,14 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
 	Options->SetName(Idx++, "%s", tr( "Debugger Paused Start" ));
 	Options->SetName(Idx++, "%s", tr( "Channel Launcher" ));
-	Options->SetName(Idx++, "%s", tr( "GC Force Interlace" ));
+	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
+	Options->SetName(Idx++, "%s", tr( "DML Progressive Patch" ));
 	Options->SetName(Idx++, "%s", tr( "DML NMM Mode" ));
 	Options->SetName(Idx++, "%s", tr( "DML LED Activity" ));
 	Options->SetName(Idx++, "%s", tr( "DML PAD Hook" ));
 	Options->SetName(Idx++, "%s", tr( "DML No Disc" ));
 	Options->SetName(Idx++, "%s", tr( "DML Debug" ));
+	Options->SetName(Idx++, "%s", tr( "DEVO MemCard Emulation" ));
 
 	SetOptionValues();
 
@@ -239,8 +254,11 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: Channel Launcher
 	Options->SetValue(Idx++, "%s", tr( ChannelLaunchText[Settings.UseChanLauncher] ));
 
-	//! Settings: GC Force Interlace
-	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.GCForceInterlace]));
+	//! Settings: GameCube Mode
+	Options->SetValue(Idx++, "%s", tr(GCMode[Settings.GameCubeMode]));
+
+	//! Settings: DML Progressive Patch
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLProgPatch]));
 
 	//! Settings: DML NMM Mode
 	Options->SetValue(Idx++, "%s", tr(DMLNMMMode[Settings.DMLNMM]));
@@ -256,6 +274,9 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: DML Debug
 	Options->SetValue(Idx++, "%s", tr(DMLDebug[Settings.DMLDebug]));
+
+	//! Settings: DEVO Memory Card Emulation
+	Options->SetValue(Idx++, "%s", tr(DEVOMCText[Settings.DEVOMCEmulation]));
 }
 
 int LoaderSettings::GetMenuInternal()
@@ -399,10 +420,16 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.UseChanLauncher >= MAX_ON_OFF) Settings.UseChanLauncher = 0;
 	}
 
-	//! Settings: GC Force Interlace
+	//! Settings: GameCube Mode
 	else if (ret == ++Idx)
 	{
-		if (++Settings.GCForceInterlace >= MAX_ON_OFF) Settings.GCForceInterlace = 0;
+		if (++Settings.GameCubeMode >= CG_MODE_MAX_CHOICE) Settings.GameCubeMode = 0;
+	}
+
+	//! Settings: DML Progressive Patch
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DMLProgPatch >= MAX_ON_OFF) Settings.DMLProgPatch = 0;
 	}
 
 	//! Settings: DML NMM Mode
@@ -433,6 +460,12 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.DMLDebug >= 3) Settings.DMLDebug = 0;
+	}
+
+	//! Settings: DEVO Memory Card Emulation
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DEVOMCEmulation >= DEVO_MC_MAX_CHOICE) Settings.DEVOMCEmulation = 0;
 	}
 
 	SetOptionValues();

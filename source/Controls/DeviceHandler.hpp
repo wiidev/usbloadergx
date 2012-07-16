@@ -94,6 +94,7 @@ class DeviceHandler
 		static const char * GetFSName(int dev);
 		static int PathToDriveType(const char * path);
 		static const char * PathToFSName(const char * path) { return GetFSName(PathToDriveType(path)); }
+		static const char * GetDevicePrefix(const char * path);
 		static int PartitionToUSBPort(int part);
 		static u16 GetUSBPartitionCount();
 		static int PartitionToPortPartition(int part);

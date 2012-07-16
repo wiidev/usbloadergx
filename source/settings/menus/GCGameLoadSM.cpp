@@ -47,6 +47,17 @@ static const char * VideoModeText[] =
 	trNOOP( "Force NTSC480p" ),
 };
 
+static const char * LanguageText[] =
+{
+	trNOOP( "English" ),
+	trNOOP( "German" ),
+	trNOOP( "French" ),
+	trNOOP( "Spanish" ),
+	trNOOP( "Italian" ),
+	trNOOP( "Dutch" ),
+	trNOOP( "Console Default" ),
+};
+
 static const char * ParentalText[] =
 {
 	trNOOP( "0 (Everyone)" ),
@@ -54,6 +65,12 @@ static const char * ParentalText[] =
 	trNOOP( "2 (Teen 12+)" ),
 	trNOOP( "3 (Mature 16+)" ),
 	trNOOP( "4 (Adults Only 18+)" )
+};
+
+static const char * GCMode[] =
+{
+	trNOOP( "MIOS (Default & Customs)" ),
+	trNOOP( "Devolution" ),
 };
 
 static const char * DMLNMMMode[] =
@@ -68,6 +85,13 @@ static const char * DMLDebug[] =
 	trNOOP( "OFF" ),
 	trNOOP( "ON" ),
 	trNOOP( "Debug Wait" ),
+};
+
+static const char * DEVOMCText[] =
+{
+	trNOOP( "OFF" ),
+	trNOOP( "ON" ),
+	trNOOP( "Individual" ),
 };
 
 GCGameLoadSM::GCGameLoadSM(struct discHdr *hdr)
@@ -124,14 +148,17 @@ void GCGameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Game Lock" ));
 	Options->SetName(Idx++, "%s", tr( "Favorite Level" ));
 	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
+	Options->SetName(Idx++, "%s", tr( "Game Language" ));
 	Options->SetName(Idx++, "%s", tr( "Ocarina" ));
 	Options->SetName(Idx++, "%s", tr( "Parental Control" ));
-	Options->SetName(Idx++, "%s", tr( "GC Force Interlace" ));
+	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
+	Options->SetName(Idx++, "%s", tr( "DML Progressive Patch" ));
 	Options->SetName(Idx++, "%s", tr( "DML NMM Mode" ));
 	Options->SetName(Idx++, "%s", tr( "DML LED Activity" ));
 	Options->SetName(Idx++, "%s", tr( "DML PAD Hook" ));
 	Options->SetName(Idx++, "%s", tr( "DML No Disc" ));
 	Options->SetName(Idx++, "%s", tr( "DML Debug" ));
+	Options->SetName(Idx++, "%s", tr( "DEVO MemCard Emulation" ));
 }
 
 void GCGameLoadSM::SetOptionValues()
@@ -150,6 +177,11 @@ void GCGameLoadSM::SetOptionValues()
 	else
 		Options->SetValue(Idx++, "%s", tr(VideoModeText[GameConfig.video]));
 
+	//! Settings: Game Language
+	if(GameConfig.language == INHERIT)
+		GameConfig.language = GC_LANG_CONSOLE_DEFAULT;
+	Options->SetValue(Idx++, "%s", tr(LanguageText[GameConfig.language]));
+	
 	//! Settings: Ocarina
 	if(GameConfig.ocarina == INHERIT)
 		Options->SetValue(Idx++, tr("Use global"));
@@ -159,11 +191,17 @@ void GCGameLoadSM::SetOptionValues()
 	//! Settings: Parental Control
 	Options->SetValue(Idx++, "%s", tr(ParentalText[GameConfig.parentalcontrol]));
 
-	//! Settings: GC Force Interlace
-	if(GameConfig.GCForceInterlace == INHERIT)
+	//! Settings: GameCube Mode
+	if(GameConfig.GameCubeMode == INHERIT)
 		Options->SetValue(Idx++, tr("Use global"));
 	else
-		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.GCForceInterlace]));
+		Options->SetValue(Idx++, "%s", tr(GCMode[GameConfig.GameCubeMode]));
+
+	//! Settings: DML Progressive Patch
+	if(GameConfig.DMLProgPatch == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLProgPatch]));
 
 	//! Settings: DML NMM Mode
 	if(GameConfig.DMLNMM == INHERIT)
@@ -194,6 +232,12 @@ void GCGameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(DMLDebug[GameConfig.DMLDebug]));
+
+	//! Settings: DEVO Memory Card Emulation
+	if(GameConfig.DEVOMCEmulation == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(DEVOMCText[GameConfig.DEVOMCEmulation]));
 }
 
 int GCGameLoadSM::GetMenuInternal()
@@ -239,6 +283,12 @@ int GCGameLoadSM::GetMenuInternal()
 		if (++GameConfig.video >= VIDEO_MODE_MAX) GameConfig.video = INHERIT;
 	}
 
+	//! Settings: Game Language
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.language >= GC_MAX_LANGUAGE) GameConfig.language = GC_ENGLISH;
+	}
+
 	//! Settings: Ocarina
 	else if (ret == ++Idx)
 	{
@@ -251,10 +301,16 @@ int GCGameLoadSM::GetMenuInternal()
 		if (++GameConfig.parentalcontrol >= 5) GameConfig.parentalcontrol = 0;
 	}
 
-	//! Settings: GC Force Interlace
+	//! Settings: GameCube Mode
 	else if (ret == ++Idx)
 	{
-		if (++GameConfig.GCForceInterlace >= MAX_ON_OFF) GameConfig.GCForceInterlace = INHERIT;
+		if (++GameConfig.GameCubeMode >= CG_MODE_MAX_CHOICE) GameConfig.GameCubeMode = INHERIT;
+	}
+
+	//! Settings: DML Progressive Patch
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.DMLProgPatch >= MAX_ON_OFF) GameConfig.DMLProgPatch = INHERIT;
 	}
 
 	//! Settings: DML NMM Mode
@@ -285,6 +341,12 @@ int GCGameLoadSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.DMLDebug >= 3) GameConfig.DMLDebug = INHERIT;
+	}
+
+	//! Settings: DEVO Memory Card Emulation
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.DEVOMCEmulation >= DEVO_MC_MAX_CHOICE) GameConfig.DEVOMCEmulation = INHERIT;
 	}
 
 	SetOptionValues();

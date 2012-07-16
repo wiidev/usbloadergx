@@ -30,6 +30,7 @@
 #include <vector>
 #include "SettingsEnums.h"
 #include "GameCube/DML_Config.h"
+#include "GameCube/DEVO_Config.h"
 
 class CSettings
 {
@@ -85,6 +86,7 @@ class CSettings
 		char BNRCachePath[50];
 		char GameCubePath[100];
 		char GameCubeSDPath[100];
+		char DEVOLoaderPath[100];
 		short videomode;
 		short language;
 		short ocarina;
@@ -166,12 +168,14 @@ class CSettings
 		float BannerProjectionWidth;
 		float BannerProjectionHeight;
 		float GCBannerScale;
-		short GCForceInterlace;
+		short GameCubeMode;
+		short DMLProgPatch;
 		short DMLNMM;
 		short DMLActivityLED;
 		short DMLPADHOOK;
 		short DMLNoDisc;
 		short DMLDebug;
+		short DEVOMCEmulation;
 		short GCInstallCompressed;
 		short GCInstallAligned;
 

@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1190
+# French.lang - r1195
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-27 20:29+0200\n"
+"POT-Creation-Date: 2012-07-15 22:44+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -488,6 +488,9 @@ msgstr "Personnalisation des dossiers"
 msgid "Customs/Original"
 msgstr "Persos/Originaux"
 
+msgid "DEVO MemCard Emulation"
+msgstr "DEVO MemCard Émulation"
+
 msgid "DML Debug"
 msgstr "DML Débug"
 
@@ -502,6 +505,9 @@ msgstr "DML Sans disque"
 
 msgid "DML PAD Hook"
 msgstr ""
+
+msgid "DML Progressive Patch"
+msgstr "DML Patch Progressif"
 
 msgid "DOL Path"
 msgstr "Dossier DOL alternatif"
@@ -562,6 +568,12 @@ msgstr "Développé par"
 
 msgid "Developer:"
 msgstr "Développeur:"
+
+msgid "Devolution"
+msgstr ""
+
+msgid "Devolution Loader Path"
+msgstr "Dossier Loader Devolution"
 
 msgid "Directory does not exist!"
 msgstr "Répertoire inexistant!"
@@ -962,9 +974,6 @@ msgstr "IDJEU_NomJeu"
 msgid "GC Banner Scale"
 msgstr "Échelle des bannières GC"
 
-msgid "GC Force Interlace"
-msgstr "Entrelacement GameCube"
-
 msgid "GC Games"
 msgstr "Jeux GameCube"
 
@@ -1040,6 +1049,9 @@ msgstr "Partition jeu/install."
 msgid "GameCube"
 msgstr ""
 
+msgid "GameCube Mode"
+msgstr "Mode GameCube"
+
 msgid "GameTDB Path"
 msgstr "Dossier GameTDB"
 
@@ -1113,6 +1125,9 @@ msgstr "Fichier entrant %0.2fKo"
 #, c-format
 msgid "Incoming file %0.2fMB"
 msgstr "Fichier entrant %0.2fMo"
+
+msgid "Individual"
+msgstr "Individuelle"
 
 msgid "Initializing Network"
 msgstr "Initialisation du réseau"
@@ -1258,6 +1273,9 @@ msgstr "Répéter musique"
 
 msgid "Loop Sound"
 msgstr "Intro en boucle"
+
+msgid "MIOS (Default & Customs)"
+msgstr "MIOS (Défaut & Customs)"
 
 msgid "Main DOL"
 msgstr "Lancer main.dol"
@@ -1796,8 +1814,17 @@ msgstr "Dossier TXT de triches"
 msgid "The .them file was not found in the zip."
 msgstr "Fichier .them non trouvé dans le zip."
 
+msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
+msgstr "The dossier GCT de triche et ce jeu ne sont pas sur la même partition. Lancer le jeu sans Ocarina ?"
+
+msgid "The GCT Cheatcodes Path must be on SD card. Run the game without Ocarina?"
+msgstr "The dossier GCT de triche doit se trouver sur la carte SD. Lancer le jeu sans Ocarina ?"
+
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "Les Miis seront extraits vers vos dossiers d'Émulation Nand et d'Émulation Nand Chaînes. Attention: Tous les fichiers existants seront remplacés."
+
+msgid "The No Disc setting is not used anymore by DIOS MIOS v2. Now you need to place a disc in your drive."
+msgstr "L'option No Disc n'est plus utilisée par DIOS MIOS v2. Vous devez désormais placer un disque dans votre lecteur."
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "Le fichier SYSCONF sera extrait vers vos dossiers d'Émulation Nand et d'Émulation Nand Chaînes. Attention: Le fichier existant sera remplacé."
@@ -1863,11 +1890,17 @@ msgstr "Menu Chaînes"
 msgid "Titles from GameTDB"
 msgstr "Titres de GameTDB"
 
+msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
+msgstr "Pour lancer les jeux GameCube à partir du disque vous devez placer le Mode GameCube sur MIOS dans les paramètres du jeu."
+
 msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
 msgstr "Pour jouer aux jeux GameCube avec DIOS MIOS vouz devez les copier sur une partition USB FAT32."
 
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
 msgstr "Pour jouer aux jeux GameCube avec DIOS MIOS vouz devez placer votre 'Dossier GameCube principal' sur une partition USB FAT32."
+
+msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
+msgstr "Pour lancer les jeux GameCube avec Devolution vous devez placer le fichier loader.bin dans le Dossier Loader Devolution."
 
 msgid "Tooltip Delay"
 msgstr "Délai des Info-bulles"
@@ -2125,6 +2158,9 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "GC Force Interlace"
+#~ msgstr "Entrelacement GameCube"
 
 #~ msgid "Rename Game on WBFS"
 #~ msgstr "Renommer le jeu"

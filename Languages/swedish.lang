@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-27 20:35+0200\n"
+"POT-Creation-Date: 2012-07-15 22:44+0200\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -488,6 +488,9 @@ msgstr "Anpassade sökvägar"
 msgid "Customs/Original"
 msgstr "Anpassade/Original"
 
+msgid "DEVO MemCard Emulation"
+msgstr ""
+
 msgid "DML Debug"
 msgstr ""
 
@@ -501,6 +504,9 @@ msgid "DML No Disc"
 msgstr ""
 
 msgid "DML PAD Hook"
+msgstr ""
+
+msgid "DML Progressive Patch"
 msgstr ""
 
 msgid "DOL Path"
@@ -561,6 +567,12 @@ msgid "Developed by"
 msgstr "Utvecklat av"
 
 msgid "Developer:"
+msgstr ""
+
+msgid "Devolution"
+msgstr ""
+
+msgid "Devolution Loader Path"
 msgstr ""
 
 msgid "Directory does not exist!"
@@ -962,9 +974,6 @@ msgstr ""
 msgid "GC Banner Scale"
 msgstr ""
 
-msgid "GC Force Interlace"
-msgstr ""
-
 msgid "GC Games"
 msgstr ""
 
@@ -1040,6 +1049,9 @@ msgstr ""
 msgid "GameCube"
 msgstr ""
 
+msgid "GameCube Mode"
+msgstr ""
+
 msgid "GameTDB Path"
 msgstr ""
 
@@ -1113,6 +1125,9 @@ msgstr "Inkommande fil %0.2fKB"
 #, c-format
 msgid "Incoming file %0.2fMB"
 msgstr "Inkommande fil %0.2fMB"
+
+msgid "Individual"
+msgstr ""
 
 msgid "Initializing Network"
 msgstr "Startar nätverk"
@@ -1258,6 +1273,9 @@ msgstr ""
 
 msgid "Loop Sound"
 msgstr "Loopa ljudet"
+
+msgid "MIOS (Default & Customs)"
+msgstr ""
 
 msgid "Main DOL"
 msgstr ""
@@ -1796,7 +1814,16 @@ msgstr "Sökväg till txt koder"
 msgid "The .them file was not found in the zip."
 msgstr ""
 
+msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
+msgstr ""
+
+msgid "The GCT Cheatcodes Path must be on SD card. Run the game without Ocarina?"
+msgstr ""
+
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
+msgstr ""
+
+msgid "The No Disc setting is not used anymore by DIOS MIOS v2. Now you need to place a disc in your drive."
 msgstr ""
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
@@ -1863,10 +1890,16 @@ msgstr "Titel startare"
 msgid "Titles from GameTDB"
 msgstr ""
 
+msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
+msgstr ""
+
 msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
 msgstr ""
 
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
+msgstr ""
+
+msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
 msgstr ""
 
 msgid "Tooltip Delay"

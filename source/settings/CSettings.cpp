@@ -76,6 +76,7 @@ void CSettings::SetDefault()
 	strlcpy(NandEmuChanPath, NandEmuPath, sizeof(NandEmuChanPath));
 	strlcpy(GameCubePath, "sd:/games/", sizeof(GameCubePath));
 	strlcpy(GameCubeSDPath, "sd:/games/", sizeof(GameCubeSDPath));
+	strlcpy(DEVOLoaderPath, "sd:/apps/gc_devo/", sizeof(DEVOLoaderPath));
 	theme[0] = 0;
 	language_path[0] = 0;
 	ogg_path[0] = 0;
@@ -165,12 +166,14 @@ void CSettings::SetDefault()
 	BannerProjectionWidth = (Settings.widescreen ? (Settings.PAL50 ? 616 : 620.0f) : 608.0f);
 	BannerProjectionHeight = (Settings.PAL50 ? 448.0f : (NTSC ? 470.0f : 464.0f));
 	GCBannerScale = 1.5f;
-	GCForceInterlace = OFF;
+	GameCubeMode = GC_MODE_MIOS;
+	DMLProgPatch = OFF;
 	DMLNMM = OFF;
 	DMLActivityLED = OFF;
 	DMLPADHOOK = OFF;
 	DMLNoDisc = OFF;
 	DMLDebug = OFF;
+	DEVOMCEmulation = OFF;
 	GCInstallCompressed = OFF;
 	GCInstallAligned = OFF;
 }
@@ -385,12 +388,15 @@ bool CSettings::Save()
 	fprintf(file, "GCBannerScale = %g\n", GCBannerScale);
 	fprintf(file, "GameCubePath = %s\n", GameCubePath);
 	fprintf(file, "GameCubeSDPath = %s\n", GameCubeSDPath);
-	fprintf(file, "GCForceInterlace = %d\n", GCForceInterlace);
+	fprintf(file, "GameCubeMode = %d\n", GameCubeMode);
+	fprintf(file, "DMLProgPatch = %d\n", DMLProgPatch);
 	fprintf(file, "DMLNMM = %d\n", DMLNMM);
 	fprintf(file, "DMLActivityLED = %d\n", DMLActivityLED);
 	fprintf(file, "DMLPADHOOK = %d\n", DMLPADHOOK);
 	fprintf(file, "DMLNoDisc = %d\n", DMLNoDisc);
 	fprintf(file, "DMLDebug = %d\n", DMLDebug);
+	fprintf(file, "DEVOMCEmulation = %d\n", DEVOMCEmulation);
+	fprintf(file, "DEVOLoaderPath = %s\n", DEVOLoaderPath);
 	fprintf(file, "GCInstallCompressed = %d\n", GCInstallCompressed);
 	fprintf(file, "GCInstallAligned = %d\n", GCInstallAligned);
 	fclose(file);
@@ -774,9 +780,14 @@ bool CSettings::SetSetting(char *name, char *value)
 		ParentalBlocks = strtoul(value, 0, 16);
 		return true;
 	}
-	else if (strcmp(name, "GCForceInterlace") == 0)
+	else if (strcmp(name, "GameCubeMode") == 0)
 	{
-		GCForceInterlace = atoi(value);
+		GameCubeMode = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "DMLProgPatch") == 0)
+	{
+		DMLProgPatch = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "DMLNMM") == 0)
@@ -802,6 +813,16 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "DMLDebug") == 0)
 	{
 		DMLDebug = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "DEVOMCEmulation") == 0)
+	{
+		DEVOMCEmulation = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "DEVOLoaderPath") == 0)
+	{
+		strlcpy(DEVOLoaderPath, value, sizeof(DEVOLoaderPath));
 		return true;
 	}
 	else if (strcmp(name, "GCInstallCompressed") == 0)

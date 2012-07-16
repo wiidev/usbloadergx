@@ -1,11 +1,11 @@
 # USB Loader GX
-# german.lang - r1190
+# german.lang - r1192
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-27 20:29+0200\n"
+"POT-Creation-Date: 2012-07-15 22:44+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -137,7 +137,7 @@ msgid "Are you sure you want to import game categories from GameTDB?"
 msgstr "Sollen die Spiele-Kategorien aus der WiiTDB importiert werden?"
 
 msgid "Are you sure you want to install on SD?"
-msgstr ""
+msgstr "Soll auf die SD-Karte installiert werden?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "Bist du sicher, dass du USB Loader GX sperren willst?"
@@ -488,6 +488,9 @@ msgstr "Pfade anpassen"
 msgid "Customs/Original"
 msgstr "Community/Original"
 
+msgid "DEVO MemCard Emulation"
+msgstr ""
+
 msgid "DML Debug"
 msgstr "DML Debug"
 
@@ -502,6 +505,9 @@ msgstr "DML Keine Disk"
 
 msgid "DML PAD Hook"
 msgstr "DML PAD Hook"
+
+msgid "DML Progressive Patch"
+msgstr ""
 
 msgid "DOL Path"
 msgstr "Alternative DOL"
@@ -562,6 +568,12 @@ msgstr "Entwickelt von"
 
 msgid "Developer:"
 msgstr "Entwickler:"
+
+msgid "Devolution"
+msgstr ""
+
+msgid "Devolution Loader Path"
+msgstr ""
 
 msgid "Directory does not exist!"
 msgstr "Verzeichnis existiert nicht!"
@@ -962,9 +974,6 @@ msgstr "SPIELID_Spielname"
 msgid "GC Banner Scale"
 msgstr "GC Banner Skalierung"
 
-msgid "GC Force Interlace"
-msgstr "GC Interlace erzw."
-
 msgid "GC Games"
 msgstr "GC Spiele"
 
@@ -1040,6 +1049,9 @@ msgstr "Spiel/Instal. Partition"
 msgid "GameCube"
 msgstr "GameCube"
 
+msgid "GameCube Mode"
+msgstr ""
+
 msgid "GameTDB Path"
 msgstr "GameTDB"
 
@@ -1113,6 +1125,9 @@ msgstr "Eingehende Datei %0.2fKB"
 #, c-format
 msgid "Incoming file %0.2fMB"
 msgstr "Eingehende Datei %0.2fMB"
+
+msgid "Individual"
+msgstr ""
 
 msgid "Initializing Network"
 msgstr "Initialisiere Netzwerk"
@@ -1258,6 +1273,9 @@ msgstr "Wiederholung"
 
 msgid "Loop Sound"
 msgstr "Wiederholung"
+
+msgid "MIOS (Default & Customs)"
+msgstr ""
 
 msgid "Main DOL"
 msgstr "Haupt-DOL"
@@ -1796,8 +1814,17 @@ msgstr "TXT Cheatdateien"
 msgid "The .them file was not found in the zip."
 msgstr "Die .them Datei wurde in der zip nicht gefunden."
 
+msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
+msgstr ""
+
+msgid "The GCT Cheatcodes Path must be on SD card. Run the game without Ocarina?"
+msgstr ""
+
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "Die Miis werden in den EmuNand Pfad und EmuNand Kanal-Pfad kopiert. Achtung: Alle vorhandenen Dateien werden überschrieben."
+
+msgid "The No Disc setting is not used anymore by DIOS MIOS v2. Now you need to place a disc in your drive."
+msgstr ""
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "Die SYSCONF wird in den EmuNand Pfad und EmuNand Kanal-Pfad kopiert. Achtung: Alle vorhandenen Dateien werden überschrieben."
@@ -1812,7 +1839,7 @@ msgid "The files will be extracted to your emu nand save and channel path. Atten
 msgstr "Datein werden in den EmuNand Speicher- und Kanal-Pfad kopiert. Achtung: Alle vorhandenen Dateien werden überschrieben."
 
 msgid "The game is on SD Card."
-msgstr ""
+msgstr "Das Spiel ist auf der SD-Karte."
 
 msgid "The game is on USB."
 msgstr "Das Spiel befindet sich auf USB."
@@ -1863,10 +1890,16 @@ msgstr "Channel Launcher"
 msgid "Titles from GameTDB"
 msgstr "Namen aus der WiiTDB"
 
-msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
+msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
 msgstr ""
 
+msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
+msgstr "Um GameCube-Spiele mit DIOS MIOS zu spielen, müssen sie sich auf einer USB FAT32 Partition befinden."
+
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
+msgstr "Um GameCube-Spiele mit DIOS MIOS zu spielen, muss der 'GemeCube Hauptpfad' auf eine USB FAT32 Partition zeigen."
+
+msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
 msgstr ""
 
 msgid "Tooltip Delay"
@@ -2064,7 +2097,7 @@ msgid "You cannot delete this category."
 msgstr "Kategorie kann nicht gelöscht werden."
 
 msgid "You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"
-msgstr ""
+msgstr "Um GameCube Spiele von USB abzuspielen, wird DIOS MIOS wird benötigt. Um sie von der SD-Karte abzuspielen, wird DIOS MIOS Lite benötigt."
 
 msgid "Zoom Duration (Speed)"
 msgstr "Zoom Dauer"
@@ -2126,6 +2159,9 @@ msgstr "von"
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
 
+#~ msgid "GC Force Interlace"
+#~ msgstr "GC Interlace erzw."
+
 #~ msgid "Rename Game on WBFS"
 #~ msgstr "Spiel umbenennen"
 
@@ -2175,7 +2211,7 @@ msgstr "Sekunden verbleiben"
 #~ msgstr "Keine Wii Disk."
 
 #~ msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
-#~ msgstr "DAtein werden in den EmuNand Pfad kopiert. Achtung: Alle vorhandenen Dateien werden überschrieben."
+#~ msgstr "Datein werden in den EmuNand Pfad kopiert. Achtung: Alle vorhandenen Dateien werden überschrieben."
 
 #~ msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
 #~ msgstr "Die Spielstände werden zum EmuNand-Pfad entpackt. Achtung: Alle vorhandenen Spielstände werden überschrieben."

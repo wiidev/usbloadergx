@@ -29,12 +29,14 @@ typedef struct _GameCFG
 	std::string NandEmuPath;
 	short Hooktype;
 	short WiirdDebugger;
-	short GCForceInterlace;
+	short GameCubeMode;
+	short DMLProgPatch;
 	short DMLNMM;
 	short DMLActivityLED;
 	short DMLPADHOOK;
 	short DMLNoDisc;
 	short DMLDebug;
+	short DEVOMCEmulation;
 	short Locked;
 
 	void operator=(const struct _GameCFG &game)
@@ -59,12 +61,14 @@ typedef struct _GameCFG
 		this->NandEmuPath = game.NandEmuPath;
 		this->Hooktype = game.Hooktype;
 		this->WiirdDebugger = game.WiirdDebugger;
-		this->GCForceInterlace = game.GCForceInterlace;
+		this->GameCubeMode = game.GameCubeMode;
+		this->DMLProgPatch = game.DMLProgPatch;
 		this->DMLNMM = game.DMLNMM;
 		this->DMLActivityLED = game.DMLActivityLED;
 		this->DMLPADHOOK = game.DMLPADHOOK;
 		this->DMLNoDisc = game.DMLNoDisc;
 		this->DMLDebug = game.DMLDebug;
+		this->DEVOMCEmulation = game.DEVOMCEmulation;
 		this->Locked = game.Locked;
 	}
 } GameCFG;

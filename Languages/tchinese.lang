@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# tchinese.lang - r1178
+# tchinese.lang - r1193
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-27 20:35+0200\n"
+"POT-Creation-Date: 2012-07-15 22:44+0200\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -137,7 +137,7 @@ msgid "Are you sure you want to import game categories from GameTDB?"
 msgstr "確定要從GameTDB匯入遊戲類別嗎？"
 
 msgid "Are you sure you want to install on SD?"
-msgstr ""
+msgstr "確定要安裝在SD卡嗎？"
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "確定要鎖上 USB Loader GX嗎？"
@@ -361,7 +361,7 @@ msgid "Clock"
 msgstr "時鐘"
 
 msgid "Clock Scale Factor"
-msgstr ""
+msgstr "時鐘比例倍數"
 
 msgid "Close"
 msgstr "關閉"
@@ -488,6 +488,9 @@ msgstr "自訂路徑"
 msgid "Customs/Original"
 msgstr "自製/原始"
 
+msgid "DEVO MemCard Emulation"
+msgstr ""
+
 msgid "DML Debug"
 msgstr "DML除錯"
 
@@ -502,6 +505,9 @@ msgstr "DML 無需光碟模式"
 
 msgid "DML PAD Hook"
 msgstr "DML PAD 掛載"
+
+msgid "DML Progressive Patch"
+msgstr ""
 
 msgid "DOL Path"
 msgstr "DOL 路徑"
@@ -562,6 +568,12 @@ msgstr "開發商"
 
 msgid "Developer:"
 msgstr "開發者:"
+
+msgid "Devolution"
+msgstr ""
+
+msgid "Devolution Loader Path"
+msgstr ""
 
 msgid "Directory does not exist!"
 msgstr "目錄不存在"
@@ -962,9 +974,6 @@ msgstr "GAMEID_遊戲名稱"
 msgid "GC Banner Scale"
 msgstr "GC 頻道大小"
 
-msgid "GC Force Interlace"
-msgstr "GC 強制交錯"
-
 msgid "GC Games"
 msgstr "GC 遊戲"
 
@@ -1040,6 +1049,9 @@ msgstr "遊戲/安裝磁區"
 msgid "GameCube"
 msgstr "GameCube"
 
+msgid "GameCube Mode"
+msgstr ""
+
 msgid "GameTDB Path"
 msgstr "GameTDB 路徑"
 
@@ -1113,6 +1125,9 @@ msgstr "正在接收檔案 %0.2fKB"
 #, c-format
 msgid "Incoming file %0.2fMB"
 msgstr "正在接收檔案 %0.2fMB"
+
+msgid "Individual"
+msgstr ""
 
 msgid "Initializing Network"
 msgstr "正在啟動網路"
@@ -1258,6 +1273,9 @@ msgstr "重複音樂"
 
 msgid "Loop Sound"
 msgstr "重複音樂"
+
+msgid "MIOS (Default & Customs)"
+msgstr ""
 
 msgid "Main DOL"
 msgstr "主要的 DOL"
@@ -1572,7 +1590,7 @@ msgid "Remove update"
 msgstr "移除更新"
 
 msgid "Rename Game Title"
-msgstr ""
+msgstr "重新命名遊戲標題"
 
 msgid "Rename category"
 msgstr "類別重新命名"
@@ -1796,8 +1814,17 @@ msgstr "TXT 金手指檔案路徑"
 msgid "The .them file was not found in the zip."
 msgstr "在zip檔中找不到主題檔.them"
 
+msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
+msgstr ""
+
+msgid "The GCT Cheatcodes Path must be on SD card. Run the game without Ocarina?"
+msgstr ""
+
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "Miis將被提取到模擬nand及頻道的路徑. 注意: 所有存在的檔案將被覆寫"
+
+msgid "The No Disc setting is not used anymore by DIOS MIOS v2. Now you need to place a disc in your drive."
+msgstr ""
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "SYSCONF檔將被提取到模擬nand及頻道的路徑. 注意: 所有存在的檔案將被覆寫"
@@ -1812,10 +1839,10 @@ msgid "The files will be extracted to your emu nand save and channel path. Atten
 msgstr "遊戲存檔將被提取到模擬nand的存檔及頻道路徑. 注意: 所有存在的檔案將被覆寫"
 
 msgid "The game is on SD Card."
-msgstr ""
+msgstr "此遊戲在SD卡上。"
 
 msgid "The game is on USB."
-msgstr "此遊戲在USB上"
+msgstr "此遊戲在USB上。"
 
 msgid "The save game will be extracted to your emu nand path."
 msgstr "遊戲存檔將被提取到模擬 nand 路徑內。"
@@ -1863,10 +1890,16 @@ msgstr "系統頻道"
 msgid "Titles from GameTDB"
 msgstr "從GameTDB顯示遊戲名稱"
 
-msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
+msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
 msgstr ""
 
+msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
+msgstr "用DIOS MIOS執行GameCube遊戲，你需放置遊戲在一個USB FAT32格式分割磁區中。"
+
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
+msgstr "用DIOS MIOS執行GameCube遊戲，你需設置 '主要GameCube路徑' 至一個USB FAT32格式分割磁區。"
+
+msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
 msgstr ""
 
 msgid "Tooltip Delay"
@@ -2064,7 +2097,7 @@ msgid "You cannot delete this category."
 msgstr "無法刪除此類別。"
 
 msgid "You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"
-msgstr ""
+msgstr "你需安裝DIOS MIOS從USB裝置執行GameCube遊戲或安裝DIOS MIOS Lite從SD卡執行GameCube遊戲"
 
 msgid "Zoom Duration (Speed)"
 msgstr "縮放間隔 (速度) "
@@ -2125,6 +2158,9 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "GC Force Interlace"
+#~ msgstr "GC 強制交錯"
 
 #~ msgid "Rename Game on WBFS"
 #~ msgstr "WBFS上的遊戲重新命名"

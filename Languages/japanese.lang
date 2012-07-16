@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-17 19:45+0200\n"
+"POT-Creation-Date: 2012-07-15 22:44+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -137,7 +137,7 @@ msgid "Are you sure you want to import game categories from GameTDB?"
 msgstr "GameTDBからカテゴリをインポートしますか?"
 
 msgid "Are you sure you want to install on SD?"
-msgstr ""
+msgstr "SDにインストールしますか?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "USB Loader GXをロックしますか?"
@@ -361,7 +361,7 @@ msgid "Clock"
 msgstr "時計の表示"
 
 msgid "Clock Scale Factor"
-msgstr ""
+msgstr "時計のサイズ"
 
 msgid "Close"
 msgstr "とじる"
@@ -488,6 +488,9 @@ msgstr "パスを変更"
 msgid "Customs/Original"
 msgstr "カスタムを優先"
 
+msgid "DEVO MemCard Emulation"
+msgstr ""
+
 msgid "DML Debug"
 msgstr "DML デバッグ"
 
@@ -502,6 +505,9 @@ msgstr "DML ディスクなし"
 
 msgid "DML PAD Hook"
 msgstr "DML PADフック"
+
+msgid "DML Progressive Patch"
+msgstr ""
 
 msgid "DOL Path"
 msgstr "代替DOL"
@@ -562,6 +568,12 @@ msgstr "開発者："
 
 msgid "Developer:"
 msgstr "開発者:"
+
+msgid "Devolution"
+msgstr ""
+
+msgid "Devolution Loader Path"
+msgstr ""
 
 msgid "Directory does not exist!"
 msgstr "フォルダがありません"
@@ -962,9 +974,6 @@ msgstr "ゲームID_ゲーム名"
 msgid "GC Banner Scale"
 msgstr "GCバナーの大きさ"
 
-msgid "GC Force Interlace"
-msgstr "GC ｲﾝﾀｰﾚｰｽ強制"
-
 msgid "GC Games"
 msgstr "GCゲーム"
 
@@ -1040,6 +1049,9 @@ msgstr "ｹﾞｰﾑのｲﾝｽﾄｰﾙ領域"
 msgid "GameCube"
 msgstr "ゲームキューブ"
 
+msgid "GameCube Mode"
+msgstr ""
+
 msgid "GameTDB Path"
 msgstr "ゲーム名リスト"
 
@@ -1113,6 +1125,9 @@ msgstr "ﾌｧｲﾙを受信中 %0.2fKB"
 #, c-format
 msgid "Incoming file %0.2fMB"
 msgstr "ﾌｧｲﾙを受信中 %0.2fMB"
+
+msgid "Individual"
+msgstr ""
 
 msgid "Initializing Network"
 msgstr "接続中･･･"
@@ -1258,6 +1273,9 @@ msgstr "ループさせる"
 
 msgid "Loop Sound"
 msgstr "ループさせる"
+
+msgid "MIOS (Default & Customs)"
+msgstr ""
 
 msgid "Main DOL"
 msgstr "main.dol"
@@ -1572,7 +1590,7 @@ msgid "Remove update"
 msgstr "更新を取り除く"
 
 msgid "Rename Game Title"
-msgstr ""
+msgstr "ゲーム名を変更"
 
 msgid "Rename category"
 msgstr "カテゴリの名前を変更"
@@ -1796,8 +1814,17 @@ msgstr "テキストチート"
 msgid "The .them file was not found in the zip."
 msgstr ".themファイルがzip内にありません"
 
+msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
+msgstr ""
+
+msgid "The GCT Cheatcodes Path must be on SD card. Run the game without Ocarina?"
+msgstr ""
+
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "MiiはエミュNAND(チャンネル)パスに書き出されます。すでに存在するファイルは上書きされます"
+
+msgid "The No Disc setting is not used anymore by DIOS MIOS v2. Now you need to place a disc in your drive."
+msgstr ""
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "SYSCONFはエミュNAND(チャンネル)パスに書き出されます。すでに存在するファイルは上書きされます"
@@ -1812,7 +1839,7 @@ msgid "The files will be extracted to your emu nand save and channel path. Atten
 msgstr "ファイルはエミュNANDセーブ&チャンネルパスに書き出されます。すでに存在するファイルは上書きされます"
 
 msgid "The game is on SD Card."
-msgstr ""
+msgstr "ゲームはSDにあります"
 
 msgid "The game is on USB."
 msgstr "ゲームはUSBにあります"
@@ -1863,10 +1890,16 @@ msgstr "ランチャー"
 msgid "Titles from GameTDB"
 msgstr "ｹﾞｰﾑ名の日本語化"
 
-msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
+msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
 msgstr ""
 
+msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
+msgstr "GCゲームをDIOS MIOSで起動するにはUSBをFAt32にしてゲームをおいてください"
+
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
+msgstr "GCゲームをDIOS MIOSで起動するにはパスの設定でゲームキューブをusb:/にする必要があります"
+
+msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
 msgstr ""
 
 msgid "Tooltip Delay"
@@ -2064,7 +2097,7 @@ msgid "You cannot delete this category."
 msgstr "このカテゴリは削除できません"
 
 msgid "You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"
-msgstr ""
+msgstr "GCゲームをUSBから起動するにはDIOS MIOSが、SDから起動するにはDMLが必要です"
 
 msgid "Zoom Duration (Speed)"
 msgstr "ズームの継続(速度)"
@@ -2125,6 +2158,9 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "GC Force Interlace"
+#~ msgstr "GC ｲﾝﾀｰﾚｰｽ強制"
 
 #~ msgid "Rename Game on WBFS"
 #~ msgstr "WBFS内のゲーム名を変更"
