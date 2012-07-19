@@ -167,11 +167,13 @@ void CSettings::SetDefault()
 	BannerProjectionHeight = (Settings.PAL50 ? 448.0f : (NTSC ? 470.0f : 464.0f));
 	GCBannerScale = 1.5f;
 	GameCubeMode = GC_MODE_MIOS;
+	DMLConfigVersion = DML_VERSION;
 	DMLProgPatch = OFF;
 	DMLNMM = OFF;
 	DMLActivityLED = OFF;
 	DMLPADHOOK = OFF;
 	DMLNoDisc = OFF;
+	DMLWidescreen = OFF;
 	DMLDebug = OFF;
 	DEVOMCEmulation = OFF;
 	GCInstallCompressed = OFF;
@@ -389,11 +391,13 @@ bool CSettings::Save()
 	fprintf(file, "GameCubePath = %s\n", GameCubePath);
 	fprintf(file, "GameCubeSDPath = %s\n", GameCubeSDPath);
 	fprintf(file, "GameCubeMode = %d\n", GameCubeMode);
+	fprintf(file, "DMLConfigVersion = %d\n", DMLConfigVersion);
 	fprintf(file, "DMLProgPatch = %d\n", DMLProgPatch);
 	fprintf(file, "DMLNMM = %d\n", DMLNMM);
 	fprintf(file, "DMLActivityLED = %d\n", DMLActivityLED);
 	fprintf(file, "DMLPADHOOK = %d\n", DMLPADHOOK);
 	fprintf(file, "DMLNoDisc = %d\n", DMLNoDisc);
+	fprintf(file, "DMLWidescreen = %d\n", DMLWidescreen);
 	fprintf(file, "DMLDebug = %d\n", DMLDebug);
 	fprintf(file, "DEVOMCEmulation = %d\n", DEVOMCEmulation);
 	fprintf(file, "DEVOLoaderPath = %s\n", DEVOLoaderPath);
@@ -785,6 +789,11 @@ bool CSettings::SetSetting(char *name, char *value)
 		GameCubeMode = atoi(value);
 		return true;
 	}
+	else if (strcmp(name, "DMLConfigVersion") == 0)
+	{
+		DMLConfigVersion = atoi(value);
+		return true;
+	}
 	else if (strcmp(name, "DMLProgPatch") == 0)
 	{
 		DMLProgPatch = atoi(value);
@@ -808,6 +817,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "DMLNoDisc") == 0)
 	{
 		DMLNoDisc = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "DMLWidescreen") == 0)
+	{
+		DMLWidescreen = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "DMLDebug") == 0)

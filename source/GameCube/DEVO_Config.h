@@ -21,6 +21,7 @@
 
 #define DEVO_SIG				 0x3EF9DB23
 #define DEVO_VERSION			 0x00000100
+#define DEVO_WIFILOG			 0x00000001
 
 // Devolution
 typedef struct _DEVO_CFG
@@ -31,6 +32,7 @@ typedef struct _DEVO_CFG
         u32 memcard_cluster;
         u32 disc1_cluster;
         u32 disc2_cluster;
+		u32 options;
 } DEVO_CGF;
 
 #endif

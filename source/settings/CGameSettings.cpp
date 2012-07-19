@@ -211,6 +211,7 @@ bool CGameSettings::Save()
 		fprintf(f, "DMLActivityLED:%d; ", GameList[i].DMLActivityLED);
 		fprintf(f, "DMLPADHOOK:%d; ", GameList[i].DMLPADHOOK);
 		fprintf(f, "DMLNoDisc:%d; ", GameList[i].DMLNoDisc);
+		fprintf(f, "DMLWidescreen:%d; ", GameList[i].DMLWidescreen);
 		fprintf(f, "DMLDebug:%d; ", GameList[i].DMLDebug);
 		fprintf(f, "DEVOMCEmulation:%d; ", GameList[i].DEVOMCEmulation);
 		fprintf(f, "Locked:%d;\n", GameList[i].Locked);
@@ -353,6 +354,11 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		game.DMLNoDisc = atoi(value);
 		return true;
 	}
+	else if(strcmp(name, "DMLWidescreen") == 0)
+	{
+		game.DMLWidescreen = atoi(value);
+		return true;
+	}
 	else if(strcmp(name, "DMLDebug") == 0)
 	{
 		game.DMLDebug = atoi(value);
@@ -489,6 +495,7 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.DMLActivityLED = INHERIT;
 	game.DMLPADHOOK = INHERIT;
 	game.DMLNoDisc = INHERIT;
+	game.DMLWidescreen = INHERIT;
 	game.DMLDebug = INHERIT;
 	game.DEVOMCEmulation = INHERIT;
 	game.Locked = OFF;

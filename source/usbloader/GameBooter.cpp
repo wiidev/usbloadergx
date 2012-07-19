@@ -76,11 +76,13 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 	u8 languageChoice = game_cfg->language == INHERIT ? 6 : game_cfg->language;
 	u8 ocarinaChoice = game_cfg->ocarina == INHERIT ? Settings.ocarina : game_cfg->ocarina;
 	u8 GCMode = game_cfg->GameCubeMode == INHERIT ? Settings.GameCubeMode : game_cfg->GameCubeMode;
+	u32 dmlConfigVersionChoice = Settings.DMLConfigVersion;
 	u8 dmlProgressivePatch = game_cfg->DMLProgPatch == INHERIT ? Settings.DMLProgPatch : game_cfg->DMLProgPatch;
 	u8 dmlNMMChoice = game_cfg->DMLNMM == INHERIT ? Settings.DMLNMM : game_cfg->DMLNMM;
 	u8 dmlActivityLEDChoice = game_cfg->DMLActivityLED == INHERIT ? Settings.DMLActivityLED : game_cfg->DMLActivityLED;
 	u8 dmlPADHookChoice = game_cfg->DMLPADHOOK == INHERIT ? Settings.DMLPADHOOK : game_cfg->DMLPADHOOK;
 	u8 dmlNoDiscChoice = game_cfg->DMLNoDisc == INHERIT ? Settings.DMLNoDisc : game_cfg->DMLNoDisc;
+	u8 dmlWidescreenChoice = game_cfg->DMLWidescreen == INHERIT ? Settings.DMLWidescreen : game_cfg->DMLWidescreen;
 	u8 dmlDebugChoice = game_cfg->DMLDebug == INHERIT ? Settings.DMLDebug : game_cfg->DMLDebug;
 	u8 devoMCEmulation = game_cfg->DEVOMCEmulation == INHERIT ? Settings.DEVOMCEmulation : game_cfg->DEVOMCEmulation;
 	
@@ -147,7 +149,9 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 		DEVO_CONFIG->disc1_cluster = st1.st_ino;			// set starting cluster for first disc ISO file
 		//DEVO_CONFIG->disc2_cluster = st2.st_ino;			// set starting cluster for second disc ISO file
 		
-
+		// use wifi logging if USB gecko is not found in slot B
+		DEVO_CONFIG->options |= DEVO_WIFILOG;
+		
 		// check memory card
 		if(devoMCEmulation == DEVO_MC_OFF)
 		{
@@ -235,13 +239,7 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 			// Todo: Add here copySD2USB.
 			return 0;
 		}
-		
-		// Check DML NoDisc setting
-		if(dmlNoDiscChoice)
-		{
-			WindowPrompt(tr("Warning:"), tr("The No Disc setting is not used anymore by DIOS MIOS v2. Now you need to place a disc in your drive."), tr("OK"));
-		}
-		
+
 		// Check current GCT location
 		if((ocarinaChoice) && strncmp(Settings.GameCubePath, Settings.Cheatcodespath, 4) != 0) // Checking "USBx"
 		{
@@ -285,6 +283,19 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 		return 0;
 	}
 
+	// Check DIOS MIOS config for specific versions
+	if(dmlWidescreenChoice && dmlConfigVersionChoice < 2) // DML Force Widescreen setting : added in DM v2.1+, config v1 but meant to be v2.
+	{
+		WindowPrompt(tr("Warning:"), tr("The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."), tr("OK"));
+		dmlWidescreenChoice = OFF;
+	}
+	if(dmlNoDiscChoice) // DML NoDisc setting : removed in DM 1.0, config v1. Keeping it as it can be used as ForceWidescreen in DM v2.1 with cfg v1
+	{
+		WindowPrompt(tr("Warning:"), tr("The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."), tr("OK"));
+		
+		if(dmlConfigVersionChoice > 1) // in config v1 it acts as ForceWidescreen, in config v2 it's disabled.
+			dmlNoDiscChoice = OFF;
+	}
 
 	const char *gcPath = strchr(RealPath, '/');
 	if(!gcPath) gcPath = "";
@@ -309,7 +320,7 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 
 	// Magic and version for DML
 	dml_config->Magicbytes = DML_MAGIC;
-	dml_config->Version = DML_VERSION;
+	dml_config->Version = dmlConfigVersionChoice; // Use the version set by the user.
 
 	// Select disc source
 	if((gameHdr->type == TYPE_GAME_GC_IMG) || (gameHdr->type == TYPE_GAME_GC_EXTRACTED))
@@ -347,6 +358,8 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 		dml_config->Config |= dmlNMMChoice == ON ? DML_CFG_NMM : DML_CFG_NMM_DEBUG;
 	if(dmlDebugChoice)
 		dml_config->Config |= dmlDebugChoice == ON ? DML_CFG_DEBUGGER : DML_CFG_DEBUGWAIT;
+	if(dmlWidescreenChoice)
+		dml_config->Config |= DML_CFG_FORCE_WIDE;
 
 	// internal DML video mode methods
 	bool PAL60 = CONF_GetEuRGB60() > 0;

@@ -115,6 +115,13 @@ static const char * GCMode[] =
 	trNOOP( "Devolution" ),
 };
 
+static const char * DMLVerText[] =
+{
+	trNOOP( "OFF" ),
+	trNOOP( "v1.2 -> v2.1" ),
+	trNOOP( "v2.2+" ),
+};
+
 static const char * DMLNMMMode[] =
 {
 	trNOOP( "OFF" ),
@@ -160,11 +167,13 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Debugger Paused Start" ));
 	Options->SetName(Idx++, "%s", tr( "Channel Launcher" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
+	Options->SetName(Idx++, "%s", tr( "DML Installed Version" ));
 	Options->SetName(Idx++, "%s", tr( "DML Progressive Patch" ));
 	Options->SetName(Idx++, "%s", tr( "DML NMM Mode" ));
 	Options->SetName(Idx++, "%s", tr( "DML LED Activity" ));
 	Options->SetName(Idx++, "%s", tr( "DML PAD Hook" ));
 	Options->SetName(Idx++, "%s", tr( "DML No Disc" ));
+	Options->SetName(Idx++, "%s", tr( "DML Force Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "DML Debug" ));
 	Options->SetName(Idx++, "%s", tr( "DEVO MemCard Emulation" ));
 
@@ -257,6 +266,9 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: GameCube Mode
 	Options->SetValue(Idx++, "%s", tr(GCMode[Settings.GameCubeMode]));
 
+	//! Settings: DML Config Version
+	Options->SetValue(Idx++, "%s", tr(DMLVerText[Settings.DMLConfigVersion]));
+
 	//! Settings: DML Progressive Patch
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLProgPatch]));
 
@@ -271,6 +283,9 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: DML No Disc
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLNoDisc]));
+
+	//! Settings: DML Force Widescreen
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLWidescreen]));
 
 	//! Settings: DML Debug
 	Options->SetValue(Idx++, "%s", tr(DMLDebug[Settings.DMLDebug]));
@@ -426,6 +441,12 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.GameCubeMode >= CG_MODE_MAX_CHOICE) Settings.GameCubeMode = 0;
 	}
 
+	//! Settings: DML Config Version
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DMLConfigVersion > DML_VERSION) Settings.DMLConfigVersion = 1;
+	}
+
 	//! Settings: DML Progressive Patch
 	else if (ret == ++Idx)
 	{
@@ -454,6 +475,12 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.DMLNoDisc >= MAX_ON_OFF) Settings.DMLNoDisc = 0;
+	}
+
+	//! Settings: DML Force Widescreen
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DMLWidescreen >= MAX_ON_OFF) Settings.DMLWidescreen = 0;
 	}
 
 	//! Settings: DML Debug

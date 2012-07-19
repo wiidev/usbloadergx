@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-15 22:44+0200\n"
+"POT-Creation-Date: 2012-07-19 21:49+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -493,6 +493,12 @@ msgstr ""
 
 msgid "DML Debug"
 msgstr "DML Debug"
+
+msgid "DML Force Widescreen"
+msgstr ""
+
+msgid "DML Installed Version"
+msgstr ""
 
 msgid "DML LED Activity"
 msgstr "DML LED Aktivität"
@@ -1814,6 +1820,9 @@ msgstr "TXT Cheatdateien"
 msgid "The .them file was not found in the zip."
 msgstr "Die .them Datei wurde in der zip nicht gefunden."
 
+msgid "The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."
+msgstr ""
+
 msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
 msgstr ""
 
@@ -1823,7 +1832,7 @@ msgstr ""
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "Die Miis werden in den EmuNand Pfad und EmuNand Kanal-Pfad kopiert. Achtung: Alle vorhandenen Dateien werden überschrieben."
 
-msgid "The No Disc setting is not used anymore by DIOS MIOS v2. Now you need to place a disc in your drive."
+msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
 msgstr ""
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
@@ -2158,6 +2167,12 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+msgid "v1.2 -> v2.1"
+msgstr ""
+
+msgid "v2.2+"
+msgstr ""
 
 #~ msgid "GC Force Interlace"
 #~ msgstr "GC Interlace erzw."

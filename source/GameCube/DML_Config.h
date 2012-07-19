@@ -19,25 +19,27 @@
 
 #include <gctypes.h>
 
-#define DML_CONFIG_ADDRESS	  0x80001700
-#define DML_CONFIG_ADDRESS_V1_2	0x81200000
-#define DML_MAGIC			   0xD1050CF6
-#define DML_VERSION			 0x00000001
+#define DML_CONFIG_ADDRESS			0x80001700
+#define DML_CONFIG_ADDRESS_V1_2		0x81200000
+#define DML_MAGIC					0xD1050CF6
+#define DML_VERSION					0x00000002
 
 enum DMLConfig
 {
-	DML_CFG_CHEATS		  = (1<<0),
+	DML_CFG_CHEATS			= (1<<0),
 	DML_CFG_DEBUGGER		= (1<<1),
-	DML_CFG_DEBUGWAIT	   = (1<<2),
-	DML_CFG_NMM			 = (1<<3),
-	DML_CFG_NMM_DEBUG	   = (1<<4),
-	DML_CFG_GAME_PATH	   = (1<<5),
-	DML_CFG_CHEAT_PATH	  = (1<<6),
+	DML_CFG_DEBUGWAIT		= (1<<2),
+	DML_CFG_NMM				= (1<<3),
+	DML_CFG_NMM_DEBUG		= (1<<4),
+	DML_CFG_GAME_PATH		= (1<<5),
+	DML_CFG_CHEAT_PATH		= (1<<6),
 	DML_CFG_ACTIVITY_LED	= (1<<7),
-	DML_CFG_PADHOOK		 = (1<<8),
-	DML_CFG_NODISC		  = (1<<9),
-	DML_CFG_BOOT_DISC	   = (1<<10),
-	DML_CFG_BOOT_DOL		= (1<<11)
+	DML_CFG_PADHOOK			= (1<<8),
+	DML_CFG_NODISC			= (1<<9),  // unused since DML v1.0, removed in v2.1
+	DML_CFG_FORCE_WIDE		= (1<<9),  // DM v2.1+, Config v02
+	DML_CFG_BOOT_DISC		= (1<<10),
+	// DML_CFG_BOOT_DOL		= (1<<11), // unused since DML v1.0, removed in v2.1
+	DML_CFG_BOOT_DISC2		= (1<<11)  // DM v2.1+, Config v02
 };
 
 enum DMLVideoModes
@@ -56,8 +58,8 @@ enum DMLVideoModes
 
 typedef struct _DML_CFG
 {
-	u32		Magicbytes;			 // 0xD1050CF6
-	u32		Version;				// 0x00000001
+	u32		Magicbytes;			// 0xD1050CF6
+	u32		Version;			// 0x00000002
 	u32		VideoMode;
 	u32		Config;
 	char	GamePath[255];

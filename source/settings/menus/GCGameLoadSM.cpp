@@ -157,6 +157,7 @@ void GCGameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "DML LED Activity" ));
 	Options->SetName(Idx++, "%s", tr( "DML PAD Hook" ));
 	Options->SetName(Idx++, "%s", tr( "DML No Disc" ));
+	Options->SetName(Idx++, "%s", tr( "DML Force Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "DML Debug" ));
 	Options->SetName(Idx++, "%s", tr( "DEVO MemCard Emulation" ));
 }
@@ -226,6 +227,12 @@ void GCGameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLNoDisc]));
+
+	//! Settings: DML Force Widescreen
+	if(GameConfig.DMLWidescreen == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLWidescreen]));
 
 	//! Settings: DML Debug
 	if(GameConfig.DMLDebug == INHERIT)
@@ -335,6 +342,12 @@ int GCGameLoadSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.DMLNoDisc >= MAX_ON_OFF) GameConfig.DMLNoDisc = INHERIT;
+	}
+
+	//! Settings: DML Force Widescreen
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.DMLWidescreen >= MAX_ON_OFF) GameConfig.DMLWidescreen = INHERIT;
 	}
 
 	//! Settings: DML Debug

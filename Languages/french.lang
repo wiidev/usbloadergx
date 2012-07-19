@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1195
+# French.lang - r1197
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-15 22:44+0200\n"
+"POT-Creation-Date: 2012-07-19 21:49+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -493,6 +493,12 @@ msgstr "DEVO MemCard Émulation"
 
 msgid "DML Debug"
 msgstr "DML Débug"
+
+msgid "DML Force Widescreen"
+msgstr "DML Forcer 16:9"
+
+msgid "DML Installed Version"
+msgstr "DML Version installée"
 
 msgid "DML LED Activity"
 msgstr "DML LED detect. activité"
@@ -1814,6 +1820,9 @@ msgstr "Dossier TXT de triches"
 msgid "The .them file was not found in the zip."
 msgstr "Fichier .them non trouvé dans le zip."
 
+msgid "The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."
+msgstr "Le paramètre DML Forcer 16:9 nécessite DIOS MIOS v2.2 ou supérieure. Ce paramètre sera ignoré."
+
 msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
 msgstr "The dossier GCT de triche et ce jeu ne sont pas sur la même partition. Lancer le jeu sans Ocarina ?"
 
@@ -1823,8 +1832,8 @@ msgstr "The dossier GCT de triche doit se trouver sur la carte SD. Lancer le jeu
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "Les Miis seront extraits vers vos dossiers d'Émulation Nand et d'Émulation Nand Chaînes. Attention: Tous les fichiers existants seront remplacés."
 
-msgid "The No Disc setting is not used anymore by DIOS MIOS v2. Now you need to place a disc in your drive."
-msgstr "L'option No Disc n'est plus utilisée par DIOS MIOS v2. Vous devez désormais placer un disque dans votre lecteur."
+msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
+msgstr "L'option No Disc n'est plus utilisée par DIOS MIOS (Lite). Vous devez désormais placer un disque dans votre lecteur."
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "Le fichier SYSCONF sera extrait vers vos dossiers d'Émulation Nand et d'Émulation Nand Chaînes. Attention: Le fichier existant sera remplacé."
@@ -2158,6 +2167,12 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+msgid "v1.2 -> v2.1"
+msgstr ""
+
+msgid "v2.2+"
+msgstr ""
 
 #~ msgid "GC Force Interlace"
 #~ msgstr "Entrelacement GameCube"
