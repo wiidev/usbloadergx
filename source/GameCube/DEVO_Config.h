@@ -20,8 +20,8 @@
 #define LAUNCH_DEVO() ((void(*)(void))loader_bin)()
 
 #define DEVO_SIG				 0x3EF9DB23
-#define DEVO_VERSION			 0x00000100
-#define DEVO_WIFILOG			 0x00000001
+#define DEVO_CONFIG_VERSION		 0x0110
+#define DEVO_WIFILOG			 0x00000001		// added in Devo config version 0x0110
 
 // Devolution
 typedef struct _DEVO_CFG
@@ -32,7 +32,7 @@ typedef struct _DEVO_CFG
         u32 memcard_cluster;
         u32 disc1_cluster;
         u32 disc2_cluster;
-		u32 options;
+		u32 options;					// added in Devo config version 0x0110
 } DEVO_CGF;
 
 #endif

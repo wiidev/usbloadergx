@@ -144,13 +144,13 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 		// setup Devolution
 		memset(DEVO_CONFIG, 0, sizeof(*DEVO_CONFIG));
 		DEVO_CONFIG->signature = DEVO_SIG;
-		DEVO_CONFIG->version = DEVO_VERSION;
+		DEVO_CONFIG->version = DEVO_CONFIG_VERSION;
 		DEVO_CONFIG->device_signature = st1.st_dev;
 		DEVO_CONFIG->disc1_cluster = st1.st_ino;			// set starting cluster for first disc ISO file
 		//DEVO_CONFIG->disc2_cluster = st2.st_ino;			// set starting cluster for second disc ISO file
 		
 		// use wifi logging if USB gecko is not found in slot B
-		DEVO_CONFIG->options |= DEVO_WIFILOG;
+		// DEVO_CONFIG->options |= DEVO_WIFILOG;			// removed on Tueidj request
 		
 		// check memory card
 		if(devoMCEmulation == DEVO_MC_OFF)
@@ -289,12 +289,9 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 		WindowPrompt(tr("Warning:"), tr("The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."), tr("OK"));
 		dmlWidescreenChoice = OFF;
 	}
-	if(dmlNoDiscChoice) // DML NoDisc setting : removed in DM 1.0, config v1. Keeping it as it can be used as ForceWidescreen in DM v2.1 with cfg v1
+	if(dmlNoDiscChoice && dmlConfigVersionChoice < 2) // DML NoDisc setting : removed in DM 1.0, config v1. Used as ForceWidescreen in DM v2.1 with cfg v1. Added back in DM 2.2 update2 Config v2
 	{
 		WindowPrompt(tr("Warning:"), tr("The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."), tr("OK"));
-		
-		if(dmlConfigVersionChoice > 1) // in config v1 it acts as ForceWidescreen, in config v2 it's disabled.
-			dmlNoDiscChoice = OFF;
 	}
 
 	const char *gcPath = strchr(RealPath, '/');
@@ -329,7 +326,12 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 		strncpy(dml_config->GamePath, gamePath, sizeof(dml_config->GamePath));
 		// use no disc patch
 		if(dmlNoDiscChoice)
-			dml_config->Config |= DML_CFG_NODISC;
+		{
+			if(dmlConfigVersionChoice < 2)
+				dml_config->Config |= DML_CFG_NODISC;	// used by v2.1 as ForceWidescreen setting
+			else
+				dml_config->Config |= DML_CFG_NODISC2;	// used by v2.2 update2+ as NoDisc setting
+		}		
 
 		gprintf("DML: Loading game %s\n", dml_config->GamePath);
 	}
