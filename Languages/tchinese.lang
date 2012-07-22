@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-19 21:51+0200\n"
+"POT-Creation-Date: 2012-07-22 22:08+0200\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -491,6 +491,9 @@ msgstr "自製/原始"
 msgid "DEVO MemCard Emulation"
 msgstr ""
 
+msgid "DML Auto"
+msgstr ""
+
 msgid "DML Debug"
 msgstr "DML除錯"
 
@@ -509,10 +512,19 @@ msgstr "DML 無需記憶卡模式"
 msgid "DML No Disc"
 msgstr "DML 無需光碟模式"
 
+msgid "DML No Disc+"
+msgstr ""
+
+msgid "DML None"
+msgstr ""
+
 msgid "DML PAD Hook"
 msgstr "DML PAD 掛載"
 
 msgid "DML Progressive Patch"
+msgstr ""
+
+msgid "DML Video Mode"
 msgstr ""
 
 msgid "DOL Path"
@@ -1985,6 +1997,9 @@ msgstr "正在更新語言檔案："
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "已更新安裝在Homebrew目錄的ZIP檔案"
+
+msgid "Use Game Settings"
+msgstr ""
 
 msgid "Use System Font"
 msgstr "使用系統字型"

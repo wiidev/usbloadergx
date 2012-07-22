@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-19 21:49+0200\n"
+"POT-Creation-Date: 2012-07-22 22:08+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -491,6 +491,9 @@ msgstr "Persos/Originaux"
 msgid "DEVO MemCard Emulation"
 msgstr "DEVO MemCard Émulation"
 
+msgid "DML Auto"
+msgstr "Auto"
+
 msgid "DML Debug"
 msgstr "DML Débug"
 
@@ -507,13 +510,22 @@ msgid "DML NMM Mode"
 msgstr "DML Mode NMM"
 
 msgid "DML No Disc"
-msgstr "DML Sans disque"
+msgstr "DML NoDisc"
+
+msgid "DML No Disc+"
+msgstr "DML NoDisc+"
+
+msgid "DML None"
+msgstr "Aucun"
 
 msgid "DML PAD Hook"
 msgstr ""
 
 msgid "DML Progressive Patch"
 msgstr "DML Patch Progressif"
+
+msgid "DML Video Mode"
+msgstr "DML Mode vidéo"
 
 msgid "DOL Path"
 msgstr "Dossier DOL alternatif"
@@ -1986,6 +1998,9 @@ msgstr "Mise à jour du fichier de langue:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Fichier ZIP envoyé et installé dans le répertoire homebrew."
 
+msgid "Use Game Settings"
+msgstr "Utiliser paramètres du jeu"
+
 msgid "Use System Font"
 msgstr "Police d'écriture système"
 
@@ -2185,15 +2200,6 @@ msgstr ""
 
 #~ msgid "Content"
 #~ msgstr "Contenu"
-
-#~ msgid "DML Auto"
-#~ msgstr "Auto"
-
-#~ msgid "DML None"
-#~ msgstr "Aucun"
-
-#~ msgid "DML Video Mode"
-#~ msgstr "DML Mode vidéo"
 
 #~ msgid "Loader Mode"
 #~ msgstr "Mode du Loader"

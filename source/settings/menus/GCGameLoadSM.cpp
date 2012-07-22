@@ -73,6 +73,13 @@ static const char * GCMode[] =
 	trNOOP( "Devolution" ),
 };
 
+static const char * DMLVideoText[] =
+{
+	trNOOP( "DML Auto" ),
+	trNOOP( "Use Game Settings" ),
+	trNOOP( "DML None" ),
+};
+
 static const char * DMLNMMMode[] =
 {
 	trNOOP( "OFF" ),
@@ -152,6 +159,7 @@ void GCGameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Ocarina" ));
 	Options->SetName(Idx++, "%s", tr( "Parental Control" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
+	Options->SetName(Idx++, "%s", tr( "DML Video Mode" ));
 	Options->SetName(Idx++, "%s", tr( "DML Progressive Patch" ));
 	Options->SetName(Idx++, "%s", tr( "DML NMM Mode" ));
 	Options->SetName(Idx++, "%s", tr( "DML LED Activity" ));
@@ -200,6 +208,12 @@ void GCGameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(GCMode[GameConfig.GameCubeMode]));
+
+	//! Settings: DML Video Mode
+	if(GameConfig.DMLVideo == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(DMLVideoText[GameConfig.DMLVideo]));
 
 	//! Settings: DML Progressive Patch
 	if(GameConfig.DMLProgPatch == INHERIT)
@@ -327,6 +341,12 @@ int GCGameLoadSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.GameCubeMode >= CG_MODE_MAX_CHOICE) GameConfig.GameCubeMode = INHERIT;
+	}
+
+	//! Settings: DML Video Mode
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.DMLVideo >= DML_VIDEO_MAX_CHOICE) GameConfig.DMLVideo = INHERIT;
 	}
 
 	//! Settings: DML Progressive Patch

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-19 21:49+0200\n"
+"POT-Creation-Date: 2012-07-22 22:08+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -491,6 +491,9 @@ msgstr "커스텀/오리지널"
 msgid "DEVO MemCard Emulation"
 msgstr ""
 
+msgid "DML Auto"
+msgstr ""
+
 msgid "DML Debug"
 msgstr ""
 
@@ -509,10 +512,19 @@ msgstr ""
 msgid "DML No Disc"
 msgstr ""
 
+msgid "DML No Disc+"
+msgstr ""
+
+msgid "DML None"
+msgstr ""
+
 msgid "DML PAD Hook"
 msgstr ""
 
 msgid "DML Progressive Patch"
+msgstr ""
+
+msgid "DML Video Mode"
 msgstr ""
 
 msgid "DOL Path"
@@ -1984,6 +1996,9 @@ msgid "Updating Language Files:"
 msgstr "언어화일 업데이트중:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
+msgstr ""
+
+msgid "Use Game Settings"
 msgstr ""
 
 msgid "Use System Font"

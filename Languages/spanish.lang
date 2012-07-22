@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-19 21:51+0200\n"
+"POT-Creation-Date: 2012-07-22 22:08+0200\n"
 "PO-Revision-Date: 2011-07-25 16:40+0200\n"
 "Last-Translator: Galen/xFede\n"
 "Language-Team: Penn, SirPalax, hvy109\n"
@@ -491,6 +491,9 @@ msgstr "Artísticas/Originales"
 msgid "DEVO MemCard Emulation"
 msgstr ""
 
+msgid "DML Auto"
+msgstr ""
+
 msgid "DML Debug"
 msgstr "Depurador DML"
 
@@ -509,10 +512,19 @@ msgstr "Modo NMM DML"
 msgid "DML No Disc"
 msgstr "Sin disco DML"
 
+msgid "DML No Disc+"
+msgstr ""
+
+msgid "DML None"
+msgstr ""
+
 msgid "DML PAD Hook"
 msgstr "PAD Hook DML"
 
 msgid "DML Progressive Patch"
+msgstr ""
+
+msgid "DML Video Mode"
 msgstr ""
 
 msgid "DOL Path"
@@ -1985,6 +1997,9 @@ msgstr "Actualizando archivos de Idiomas:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Enviado archivo ZIP instalado en la carpeta homebrew."
+
+msgid "Use Game Settings"
+msgstr ""
 
 msgid "Use System Font"
 msgstr "Fuente del Sistema"

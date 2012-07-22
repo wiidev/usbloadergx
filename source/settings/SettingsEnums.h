@@ -277,4 +277,12 @@ enum
 	
 };
 
+enum
+{
+	DML_VIDEO_AUTO,
+	DML_VIDEO_FORCE,
+	DML_VIDEO_NONE,
+	DML_VIDEO_MAX_CHOICE
+};
+
 #endif

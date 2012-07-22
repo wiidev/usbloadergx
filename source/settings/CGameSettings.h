@@ -30,6 +30,7 @@ typedef struct _GameCFG
 	short Hooktype;
 	short WiirdDebugger;
 	short GameCubeMode;
+	short DMLVideo;
 	short DMLProgPatch;
 	short DMLNMM;
 	short DMLActivityLED;
@@ -64,6 +65,7 @@ typedef struct _GameCFG
 		this->Hooktype = game.Hooktype;
 		this->WiirdDebugger = game.WiirdDebugger;
 		this->GameCubeMode = game.GameCubeMode;
+		this->DMLVideo = game.DMLVideo;
 		this->DMLProgPatch = game.DMLProgPatch;
 		this->DMLNMM = game.DMLNMM;
 		this->DMLActivityLED = game.DMLActivityLED;

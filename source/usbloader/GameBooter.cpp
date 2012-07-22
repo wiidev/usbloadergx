@@ -59,6 +59,9 @@ u32 AppEntrypoint = 0;
 u8 *loader_bin = NULL;
 static DEVO_CGF *DEVO_CONFIG = (DEVO_CGF*)0x80000020;
 
+// DIOS MIOS Config
+#define HW_PPCSPEED				((vu32*)0xCD800018)
+
 extern "C"
 {
 	syssram* __SYS_LockSram();
@@ -77,6 +80,7 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 	u8 ocarinaChoice = game_cfg->ocarina == INHERIT ? Settings.ocarina : game_cfg->ocarina;
 	u8 GCMode = game_cfg->GameCubeMode == INHERIT ? Settings.GameCubeMode : game_cfg->GameCubeMode;
 	u32 dmlConfigVersionChoice = Settings.DMLConfigVersion;
+	u8 dmlVideoChoice = game_cfg->DMLVideo == INHERIT ? Settings.DMLVideo : game_cfg->DMLVideo;
 	u8 dmlProgressivePatch = game_cfg->DMLProgPatch == INHERIT ? Settings.DMLProgPatch : game_cfg->DMLProgPatch;
 	u8 dmlNMMChoice = game_cfg->DMLNMM == INHERIT ? Settings.DMLNMM : game_cfg->DMLNMM;
 	u8 dmlActivityLEDChoice = game_cfg->DMLActivityLED == INHERIT ? Settings.DMLActivityLED : game_cfg->DMLActivityLED;
@@ -201,7 +205,7 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 		}
 
 		// setup video mode
-		Disc_SelectVMode(VIDEO_MODE_DISCDEFAULT, false);
+		Disc_SelectVMode(videoChoice, false);
 		Disc_SetVMode();
 
 		
@@ -308,7 +312,7 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 	memcpy((u8 *)Disc_ID, gameHdr->id, 6);
 	DCFlushRange((u8 *)Disc_ID, 6);
 
-	*(vu32*)0xCC003024 |= 7;
+	*(vu32*)0xCC003024 |= 7; // DML 1.1- only?
 
 	Disc_SelectVMode(videoChoice, dmlProgressivePatch);
 	Disc_SetVMode();
@@ -366,75 +370,85 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 	bool PAL60 = CONF_GetEuRGB60() > 0;
 	u32 tvmode = CONF_GetVideo();
 	u8 *diskid = (u8 *) Disc_ID;
-
-	switch(videoChoice)
-	{
-		case VIDEO_MODE_SYSDEFAULT:
-			if(tvmode == CONF_VIDEO_NTSC)
-				dml_config->VideoMode = DML_VID_FORCE_NTSC;
-			else if(PAL60)
-			{
-				if(CONF_GetProgressiveScan() > 0)
-				{
-					dml_config->VideoMode = DML_VID_FORCE_PROG;
-				}
-				else
-					dml_config->VideoMode = DML_VID_FORCE_PAL60;
-			}
-			else
-				dml_config->VideoMode = DML_VID_FORCE_PAL50;
-			break;
-		case VIDEO_MODE_DISCDEFAULT: // DEFAULT (DISC/GAME)
-			switch (diskid[3])
-			{
-				// PAL
-				case 'D':
-				case 'F':
-				case 'P':
-				case 'X':
-				case 'Y':
-					if(tvmode == CONF_VIDEO_NTSC) // Force PAL output (576i) for NTSC consoles.
-						dml_config->VideoMode = DML_VID_FORCE_PAL50;
-					else if(PAL60)
-					{
-						if(CONF_GetProgressiveScan() > 0)
-						{
-							dml_config->VideoMode = DML_VID_FORCE_PROG;
-						}
-						else
-							dml_config->VideoMode = DML_VID_FORCE_PAL60;
-					}
-					else
-						dml_config->VideoMode = DML_VID_FORCE_PAL50;
-					break;
-				// NTSC
-				case 'E':
-				case 'J':
-					dml_config->VideoMode = DML_VID_FORCE_NTSC;
-					break;
-				default:
-					dml_config->VideoMode = DML_VID_DML_AUTO;
-					break;
-			}
-			break;
-		case VIDEO_MODE_PAL50:
-			dml_config->VideoMode = DML_VID_FORCE_PAL50 | DML_VID_FORCE;
-			break;
-		case VIDEO_MODE_PAL60:
-			dml_config->VideoMode = DML_VID_FORCE_PAL60 | DML_VID_FORCE;
-			break;
-		case VIDEO_MODE_NTSC:
-			dml_config->VideoMode = DML_VID_FORCE_NTSC | DML_VID_FORCE;
-			break;
-		case VIDEO_MODE_PAL480P:
-		case VIDEO_MODE_NTSC480P:
-			dml_config->VideoMode = DML_VID_FORCE_PROG | DML_VID_FORCE;
-			break;
-		default:
-			dml_config->VideoMode = DML_VID_DML_AUTO;
-			break;
-	}
 	
+	if(dmlVideoChoice == DML_VIDEO_AUTO)			// Auto select video mode
+		dml_config->VideoMode = DML_VID_DML_AUTO;
+	else if(dmlVideoChoice == DML_VIDEO_FORCE)		// Force user choice
+		dml_config->VideoMode = DML_VID_FORCE;
+	else if(dmlVideoChoice == DML_VIDEO_NONE)		// No video mode change
+		dml_config->VideoMode = DML_VID_NONE;
+	
+	if(dmlVideoChoice == DML_VIDEO_FORCE)
+	{
+		switch(videoChoice)
+		{
+			case VIDEO_MODE_SYSDEFAULT:
+				if(tvmode == CONF_VIDEO_NTSC)
+					dml_config->VideoMode |= DML_VID_FORCE_NTSC;
+				else
+				{
+					if(CONF_GetProgressiveScan() > 0)
+					{
+						dml_config->VideoMode |= DML_VID_FORCE_PROG;
+					}
+					else if(PAL60)
+						dml_config->VideoMode |= DML_VID_FORCE_PAL60;
+					else
+						dml_config->VideoMode |= DML_VID_FORCE_PAL50;
+				}
+				break;
+			case VIDEO_MODE_DISCDEFAULT: // DEFAULT (DISC/GAME)
+				switch (diskid[3])
+				{
+					// PAL
+					case 'D':
+					case 'F':
+					case 'P':
+					case 'X':
+					case 'Y':
+						if(tvmode != CONF_VIDEO_PAL) // Force PAL output (576i) for NTSC consoles.
+							dml_config->VideoMode |= DML_VID_FORCE_PAL50;
+						else
+						{
+							if(CONF_GetProgressiveScan() > 0)
+							{
+								dml_config->VideoMode |= DML_VID_FORCE_PROG;
+							}
+							else if(PAL60)
+								dml_config->VideoMode |= DML_VID_FORCE_PAL60;
+							else
+								dml_config->VideoMode |= DML_VID_FORCE_PAL50;
+						}
+						break;
+					// NTSC
+					case 'E':
+					case 'J':
+						dml_config->VideoMode |= DML_VID_FORCE_NTSC;
+						break;
+					default:
+						dml_config->VideoMode = DML_VID_DML_AUTO;
+						break;
+				}
+				break;
+			case VIDEO_MODE_PAL50:
+				dml_config->VideoMode |= DML_VID_FORCE_PAL50;
+				break;
+			case VIDEO_MODE_PAL60:
+				dml_config->VideoMode |= DML_VID_FORCE_PAL60;
+				break;
+			case VIDEO_MODE_NTSC:
+				dml_config->VideoMode |= DML_VID_FORCE_NTSC;
+				break;
+			case VIDEO_MODE_PAL480P:
+				dml_config->VideoMode |= DML_VID_FORCE_PAL60;
+			case VIDEO_MODE_NTSC480P:
+				dml_config->VideoMode |= DML_VID_FORCE_PROG;
+				break;
+			default:
+				dml_config->VideoMode = DML_VID_DML_AUTO;
+				break;
+		}
+	}	
 	if(dmlProgressivePatch)
 		dml_config->VideoMode |= DML_VID_PROG_PATCH;
 
@@ -483,6 +497,10 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 
 	while(!__SYS_SyncSram())
 		usleep(100);
+	
+	/* NTSC-J Patch */
+	if(diskid[3] == 'J')
+		*HW_PPCSPEED = 0x0002A9E0;
 
 	WII_Initialize();
 	return WII_LaunchTitle(0x0000000100000100ULL);

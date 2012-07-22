@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-19 21:51+0200\n"
+"POT-Creation-Date: 2012-07-22 22:08+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -491,6 +491,9 @@ msgstr "自制/官方"
 msgid "DEVO MemCard Emulation"
 msgstr ""
 
+msgid "DML Auto"
+msgstr ""
+
 msgid "DML Debug"
 msgstr ""
 
@@ -509,10 +512,19 @@ msgstr ""
 msgid "DML No Disc"
 msgstr ""
 
+msgid "DML No Disc+"
+msgstr ""
+
+msgid "DML None"
+msgstr ""
+
 msgid "DML PAD Hook"
 msgstr ""
 
 msgid "DML Progressive Patch"
+msgstr ""
+
+msgid "DML Video Mode"
 msgstr ""
 
 msgid "DOL Path"
@@ -1985,6 +1997,9 @@ msgstr "正在升级语言文件:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "上传已安装Zip文件到自制程序目录"
+
+msgid "Use Game Settings"
+msgstr ""
 
 msgid "Use System Font"
 msgstr ""

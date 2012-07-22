@@ -170,6 +170,7 @@ class CSettings
 		float GCBannerScale;
 		short GameCubeMode;
 		short DMLConfigVersion;
+		short DMLVideo;
 		short DMLProgPatch;
 		short DMLNMM;
 		short DMLActivityLED;

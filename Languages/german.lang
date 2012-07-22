@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-19 21:49+0200\n"
+"POT-Creation-Date: 2012-07-22 22:08+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -491,6 +491,9 @@ msgstr "Community/Original"
 msgid "DEVO MemCard Emulation"
 msgstr ""
 
+msgid "DML Auto"
+msgstr "DML Auto"
+
 msgid "DML Debug"
 msgstr "DML Debug"
 
@@ -509,11 +512,20 @@ msgstr "DML NMM Modus"
 msgid "DML No Disc"
 msgstr "DML Keine Disk"
 
+msgid "DML No Disc+"
+msgstr ""
+
+msgid "DML None"
+msgstr "DML Nichts"
+
 msgid "DML PAD Hook"
 msgstr "DML PAD Hook"
 
 msgid "DML Progressive Patch"
 msgstr ""
+
+msgid "DML Video Mode"
+msgstr "DML Video Modus"
 
 msgid "DOL Path"
 msgstr "Alternative DOL"
@@ -1986,6 +1998,9 @@ msgstr "Aktualisiere Sprachdateien:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Die hochgeladene ZIP Datei wurde ins Homebrew Verzeichnis installiert."
 
+msgid "Use Game Settings"
+msgstr ""
+
 msgid "Use System Font"
 msgstr "Wii-Systemschriftart"
 
@@ -2188,15 +2203,6 @@ msgstr ""
 
 #~ msgid "Content"
 #~ msgstr "Inhalt"
-
-#~ msgid "DML Auto"
-#~ msgstr "DML Auto"
-
-#~ msgid "DML None"
-#~ msgstr "DML Nichts"
-
-#~ msgid "DML Video Mode"
-#~ msgstr "DML Video Modus"
 
 #~ msgid "Loader Mode"
 #~ msgstr "Loader Modus"

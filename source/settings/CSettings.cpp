@@ -168,6 +168,7 @@ void CSettings::SetDefault()
 	GCBannerScale = 1.5f;
 	GameCubeMode = GC_MODE_MIOS;
 	DMLConfigVersion = DML_VERSION;
+	DMLVideo = DML_VIDEO_AUTO;
 	DMLProgPatch = OFF;
 	DMLNMM = OFF;
 	DMLActivityLED = OFF;
@@ -393,6 +394,7 @@ bool CSettings::Save()
 	fprintf(file, "GameCubeSDPath = %s\n", GameCubeSDPath);
 	fprintf(file, "GameCubeMode = %d\n", GameCubeMode);
 	fprintf(file, "DMLConfigVersion = %d\n", DMLConfigVersion);
+	fprintf(file, "DMLVideo = %d\n", DMLVideo);
 	fprintf(file, "DMLProgPatch = %d\n", DMLProgPatch);
 	fprintf(file, "DMLNMM = %d\n", DMLNMM);
 	fprintf(file, "DMLActivityLED = %d\n", DMLActivityLED);
@@ -794,6 +796,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "DMLConfigVersion") == 0)
 	{
 		DMLConfigVersion = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "DMLVideo") == 0)
+	{
+		DMLVideo = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "DMLProgPatch") == 0)

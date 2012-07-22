@@ -122,6 +122,13 @@ static const char * DMLVerText[] =
 	trNOOP( "v2.2+" ),
 };
 
+static const char * DMLVideoText[] =
+{
+	trNOOP( "DML Auto" ),
+	trNOOP( "Use Game Settings" ),
+	trNOOP( "DML None" ),
+};
+
 static const char * DMLNMMMode[] =
 {
 	trNOOP( "OFF" ),
@@ -168,6 +175,7 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Channel Launcher" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
 	Options->SetName(Idx++, "%s", tr( "DML Installed Version" ));
+	Options->SetName(Idx++, "%s", tr( "DML Video Mode" ));
 	Options->SetName(Idx++, "%s", tr( "DML Progressive Patch" ));
 	Options->SetName(Idx++, "%s", tr( "DML NMM Mode" ));
 	Options->SetName(Idx++, "%s", tr( "DML LED Activity" ));
@@ -269,6 +277,9 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: DML Config Version
 	Options->SetValue(Idx++, "%s", tr(DMLVerText[Settings.DMLConfigVersion]));
+
+	//! Settings: DML Video Mode
+	Options->SetValue(Idx++, "%s", tr(DMLVideoText[Settings.DMLVideo]));
 
 	//! Settings: DML Progressive Patch
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLProgPatch]));
@@ -449,6 +460,12 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.DMLConfigVersion > DML_VERSION) Settings.DMLConfigVersion = 1;
+	}
+
+	//! Settings: DML Video Mode
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DMLVideo >= DML_VIDEO_MAX_CHOICE) Settings.DMLVideo = 0;
 	}
 
 	//! Settings: DML Progressive Patch

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-19 21:51+0200\n"
+"POT-Creation-Date: 2012-07-22 22:08+0200\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -491,6 +491,9 @@ msgstr "Anpassade/Original"
 msgid "DEVO MemCard Emulation"
 msgstr ""
 
+msgid "DML Auto"
+msgstr ""
+
 msgid "DML Debug"
 msgstr ""
 
@@ -509,10 +512,19 @@ msgstr ""
 msgid "DML No Disc"
 msgstr ""
 
+msgid "DML No Disc+"
+msgstr ""
+
+msgid "DML None"
+msgstr ""
+
 msgid "DML PAD Hook"
 msgstr ""
 
 msgid "DML Progressive Patch"
+msgstr ""
+
+msgid "DML Video Mode"
 msgstr ""
 
 msgid "DOL Path"
@@ -1985,6 +1997,9 @@ msgstr "Uppdatera språk-filer:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Uppladdad ZIP fil installerad till homebrew-mappen"
+
+msgid "Use Game Settings"
+msgstr ""
 
 msgid "Use System Font"
 msgstr ""

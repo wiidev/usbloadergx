@@ -206,6 +206,7 @@ bool CGameSettings::Save()
 		fprintf(f, "Hooktype:%d; ", GameList[i].Hooktype);
 		fprintf(f, "WiirdDebugger:%d; ", GameList[i].WiirdDebugger);
 		fprintf(f, "GameCubeMode:%d; ", GameList[i].GameCubeMode);
+		fprintf(f, "DMLVideo:%d; ", GameList[i].DMLVideo);
 		fprintf(f, "DMLProgPatch:%d; ", GameList[i].DMLProgPatch);
 		fprintf(f, "DMLNMM:%d; ", GameList[i].DMLNMM);
 		fprintf(f, "DMLActivityLED:%d; ", GameList[i].DMLActivityLED);
@@ -328,6 +329,11 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 	else if(strcmp(name, "GameCubeMode") == 0)
 	{
 		game.GameCubeMode = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "DMLVideo") == 0)
+	{
+		game.DMLVideo = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "DMLProgPatch") == 0)
@@ -496,6 +502,7 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.Hooktype = INHERIT;
 	game.WiirdDebugger = INHERIT;
 	game.GameCubeMode = INHERIT;
+	game.DMLVideo = INHERIT;
 	game.DMLProgPatch = INHERIT;
 	game.DMLNMM = INHERIT;
 	game.DMLActivityLED = INHERIT;

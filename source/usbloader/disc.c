@@ -95,20 +95,14 @@ void Disc_SelectVMode(u8 videoselected, u8 force_progressive)
 				case 'P':
 				case 'X':
 				case 'Y':
-					if (tvmode != CONF_VIDEO_PAL)
-					{
 						rmode_reg = PAL60 ? VI_EURGB60 : VI_PAL;
-						rmode = progressive ? &TVNtsc480Prog : (PAL60 ? &TVEurgb60Hz480IntDf : &TVPal528IntDf);
-					}
+						rmode = progressive ? &TVEurgb60Hz480Prog : (PAL60 ? &TVEurgb60Hz480IntDf : &TVPal528IntDf);
 					break;
 				// NTSC
 				case 'E':
 				case 'J':
-					if (tvmode != CONF_VIDEO_NTSC)
-					{
 						rmode_reg = VI_NTSC;
 						rmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
-					}
 					break;
 				default:
 					break;
@@ -119,7 +113,7 @@ void Disc_SelectVMode(u8 videoselected, u8 force_progressive)
 			rmode_reg = VI_PAL;
 			break;
 		case VIDEO_MODE_PAL60: // PAL60
-			rmode = progressive ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
+			rmode = progressive ? &TVEurgb60Hz480Prog : &TVEurgb60Hz480IntDf;
 			rmode_reg = VI_EURGB60;
 			break;
 		case VIDEO_MODE_NTSC: // NTSC
@@ -127,7 +121,7 @@ void Disc_SelectVMode(u8 videoselected, u8 force_progressive)
 			rmode_reg = VI_NTSC;
 			break;
 		case VIDEO_MODE_PAL480P:
-			rmode = &TVNtsc480Prog;
+			rmode = &TVEurgb60Hz480Prog;
 			rmode_reg = VI_EURGB60;
 			break;
 		case VIDEO_MODE_NTSC480P:

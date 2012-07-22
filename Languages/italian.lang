@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-17 19:45+0200\n"
+"POT-Creation-Date: 2012-07-22 22:08+0200\n"
 "PO-Revision-Date: 2011-09-11 12:19+0100\n"
 "Last-Translator: xFede\n"
 "Language-Team: xFede (fedeanto11@gmail.com)\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 msgid " could not be downloaded."
 msgstr " non può essere scaricato."
@@ -491,6 +491,9 @@ msgstr "Modific./origin."
 msgid "DEVO MemCard Emulation"
 msgstr "Emulazione memory card devolution"
 
+msgid "DML Auto"
+msgstr ""
+
 msgid "DML Debug"
 msgstr "Debug DML"
 
@@ -509,11 +512,20 @@ msgstr "Modalità NMM in DML"
 msgid "DML No Disc"
 msgstr "No-disco DML"
 
+msgid "DML No Disc+"
+msgstr ""
+
+msgid "DML None"
+msgstr ""
+
 msgid "DML PAD Hook"
 msgstr "PAD hook DML"
 
 msgid "DML Progressive Patch"
 msgstr "Patch video-progressivo DML"
+
+msgid "DML Video Mode"
+msgstr ""
 
 msgid "DOL Path"
 msgstr "Percorso DOL"
@@ -1900,7 +1912,7 @@ msgid "Titles from GameTDB"
 msgstr "Titoli da GameTDB"
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
-msgstr "Per avviare i giochi GameCube da disco devi settare la modalità Gamecube a MIOS nell impostazioni del gioco."	
+msgstr "Per avviare i giochi GameCube da disco devi settare la modalità Gamecube a MIOS nell impostazioni del gioco."
 
 msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
 msgstr "Per avviare i giochi GameCube con DIOS MIOS li devi collocare in una partizione USB FAT32."
@@ -1985,6 +1997,9 @@ msgstr "Aggiornando traduzioni:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "File ZIP installato nella cartella degli Homebrew."
+
+msgid "Use Game Settings"
+msgstr ""
 
 msgid "Use System Font"
 msgstr "Usa il font di sistema"
