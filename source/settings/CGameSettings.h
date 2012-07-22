@@ -35,6 +35,7 @@ typedef struct _GameCFG
 	short DMLActivityLED;
 	short DMLPADHOOK;
 	short DMLNoDisc;
+	short DMLNoDisc2;
 	short DMLWidescreen;
 	short DMLDebug;
 	short DEVOMCEmulation;
@@ -68,6 +69,7 @@ typedef struct _GameCFG
 		this->DMLActivityLED = game.DMLActivityLED;
 		this->DMLPADHOOK = game.DMLPADHOOK;
 		this->DMLNoDisc = game.DMLNoDisc;
+		this->DMLNoDisc2 = game.DMLNoDisc2;
 		this->DMLWidescreen = game.DMLWidescreen;
 		this->DMLDebug = game.DMLDebug;
 		this->DEVOMCEmulation = game.DEVOMCEmulation;

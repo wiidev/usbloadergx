@@ -175,6 +175,7 @@ class CSettings
 		short DMLActivityLED;
 		short DMLPADHOOK;
 		short DMLNoDisc;
+		short DMLNoDisc2;
 		short DMLWidescreen;
 		short DMLDebug;
 		short DEVOMCEmulation;

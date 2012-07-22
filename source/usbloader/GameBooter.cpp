@@ -82,6 +82,7 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 	u8 dmlActivityLEDChoice = game_cfg->DMLActivityLED == INHERIT ? Settings.DMLActivityLED : game_cfg->DMLActivityLED;
 	u8 dmlPADHookChoice = game_cfg->DMLPADHOOK == INHERIT ? Settings.DMLPADHOOK : game_cfg->DMLPADHOOK;
 	u8 dmlNoDiscChoice = game_cfg->DMLNoDisc == INHERIT ? Settings.DMLNoDisc : game_cfg->DMLNoDisc;
+	u8 dmlNoDisc2Choice = game_cfg->DMLNoDisc2 == INHERIT ? Settings.DMLNoDisc2 : game_cfg->DMLNoDisc2;
 	u8 dmlWidescreenChoice = game_cfg->DMLWidescreen == INHERIT ? Settings.DMLWidescreen : game_cfg->DMLWidescreen;
 	u8 dmlDebugChoice = game_cfg->DMLDebug == INHERIT ? Settings.DMLDebug : game_cfg->DMLDebug;
 	u8 devoMCEmulation = game_cfg->DEVOMCEmulation == INHERIT ? Settings.DEVOMCEmulation : game_cfg->DEVOMCEmulation;
@@ -289,7 +290,7 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 		WindowPrompt(tr("Warning:"), tr("The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."), tr("OK"));
 		dmlWidescreenChoice = OFF;
 	}
-	if(dmlNoDiscChoice && dmlConfigVersionChoice < 2) // DML NoDisc setting : removed in DM 1.0, config v1. Used as ForceWidescreen in DM v2.1 with cfg v1. Added back in DM 2.2 update2 Config v2
+	if(dmlNoDiscChoice) // DML NoDisc setting : removed in DM 1.0, config v1. Used as ForceWidescreen in DM v2.1 with cfg v1. Added back in DM 2.2 update2 Config v2
 	{
 		WindowPrompt(tr("Warning:"), tr("The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."), tr("OK"));
 	}
@@ -324,14 +325,12 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 	{
 		dml_config->Config |= DML_CFG_GAME_PATH;
 		strncpy(dml_config->GamePath, gamePath, sizeof(dml_config->GamePath));
-		// use no disc patch
-		if(dmlNoDiscChoice)
-		{
-			if(dmlConfigVersionChoice < 2)
-				dml_config->Config |= DML_CFG_NODISC;	// used by v2.1 as ForceWidescreen setting
-			else
-				dml_config->Config |= DML_CFG_NODISC2;	// used by v2.2 update2+ as NoDisc setting
-		}		
+		// NoDisc patch
+		if(dmlNoDiscChoice && dmlConfigVersionChoice < 2)
+			dml_config->Config |= DML_CFG_NODISC;	// used by v2.1 as ForceWidescreen setting
+		// Extended NoDisc patch
+		if(dmlNoDisc2Choice && dmlConfigVersionChoice > 1)
+			dml_config->Config |= DML_CFG_NODISC2;	// used by v2.2 update2+ as an Extended NoDisc patching
 
 		gprintf("DML: Loading game %s\n", dml_config->GamePath);
 	}

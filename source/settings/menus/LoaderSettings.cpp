@@ -173,6 +173,7 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "DML LED Activity" ));
 	Options->SetName(Idx++, "%s", tr( "DML PAD Hook" ));
 	Options->SetName(Idx++, "%s", tr( "DML No Disc" ));
+	Options->SetName(Idx++, "%s", tr( "DML No Disc+" ));
 	Options->SetName(Idx++, "%s", tr( "DML Force Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "DML Debug" ));
 	Options->SetName(Idx++, "%s", tr( "DEVO MemCard Emulation" ));
@@ -283,6 +284,9 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: DML No Disc
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLNoDisc]));
+
+	//! Settings: DML Extended No Disc
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLNoDisc2]));
 
 	//! Settings: DML Force Widescreen
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLWidescreen]));
@@ -475,6 +479,12 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.DMLNoDisc >= MAX_ON_OFF) Settings.DMLNoDisc = 0;
+	}
+
+	//! Settings: DML Extended No Disc
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DMLNoDisc2 >= MAX_ON_OFF) Settings.DMLNoDisc2 = 0;
 	}
 
 	//! Settings: DML Force Widescreen

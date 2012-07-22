@@ -35,25 +35,25 @@ enum DMLConfig
 	DML_CFG_CHEAT_PATH		= (1<<6),
 	DML_CFG_ACTIVITY_LED	= (1<<7),
 	DML_CFG_PADHOOK			= (1<<8),
-	DML_CFG_NODISC			= (1<<9),  // unused since DML v1.0, removed in v2.1
-	DML_CFG_FORCE_WIDE		= (1<<9),  // DM v2.1+, Config v02
+	DML_CFG_NODISC			= (1<<9),	// unused since DML v1.0, removed in v2.1
+	DML_CFG_FORCE_WIDE		= (1<<9),	// DM v2.1+, Config v02
 	DML_CFG_BOOT_DISC		= (1<<10),
-	// DML_CFG_BOOT_DOL		= (1<<11),  // unused since DML v1.0, removed in v2.1
-	DML_CFG_BOOT_DISC2		= (1<<11),  // DM v2.1+, Config v02
+	// DML_CFG_BOOT_DOL		= (1<<11),	// unused since DML v1.0, removed in v2.1
+	DML_CFG_BOOT_DISC2		= (1<<11),	// DM v2.1+, Config v02
 	DML_CFG_NODISC2			= (1<<12)	// added back in DM v2.2 update2 (r20)
 };
 
 enum DMLVideoModes
 {
 	DML_VID_DML_AUTO		= (0<<16),
-	DML_VID_FORCE		   = (1<<16),
+	DML_VID_FORCE			= (1<<16),
 	DML_VID_NONE			= (2<<16),
 
-	DML_VID_FORCE_PAL50	 = (1<<0),
-	DML_VID_FORCE_PAL60	 = (1<<1),
-	DML_VID_FORCE_NTSC	  = (1<<2),
-	DML_VID_FORCE_PROG	  = (1<<3),
-	DML_VID_PROG_PATCH	  = (1<<4)
+	DML_VID_FORCE_PAL50		= (1<<0),
+	DML_VID_FORCE_PAL60		= (1<<1),
+	DML_VID_FORCE_NTSC		= (1<<2),
+	DML_VID_FORCE_PROG		= (1<<3),
+	DML_VID_PROG_PATCH		= (1<<4)
 
 };
 

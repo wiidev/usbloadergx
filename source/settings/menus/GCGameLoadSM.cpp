@@ -157,7 +157,10 @@ void GCGameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "DML LED Activity" ));
 	Options->SetName(Idx++, "%s", tr( "DML PAD Hook" ));
 	Options->SetName(Idx++, "%s", tr( "DML No Disc" ));
-	Options->SetName(Idx++, "%s", tr( "DML Force Widescreen" ));
+	if(Settings.DMLConfigVersion > 1)
+		Options->SetName(Idx++, "%s", tr( "DML No Disc+" ));
+	if(Settings.DMLConfigVersion > 1)
+		Options->SetName(Idx++, "%s", tr( "DML Force Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "DML Debug" ));
 	Options->SetName(Idx++, "%s", tr( "DEVO MemCard Emulation" ));
 }
@@ -228,11 +231,23 @@ void GCGameLoadSM::SetOptionValues()
 	else
 		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLNoDisc]));
 
+	//! Settings: DML Extended No Disc
+	if(Settings.DMLConfigVersion > 1)
+	{
+		if(GameConfig.DMLNoDisc2 == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLNoDisc2]));
+	}
+
 	//! Settings: DML Force Widescreen
-	if(GameConfig.DMLWidescreen == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLWidescreen]));
+	if(Settings.DMLConfigVersion > 1)
+	{
+		if(GameConfig.DMLWidescreen == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLWidescreen]));
+	}
 
 	//! Settings: DML Debug
 	if(GameConfig.DMLDebug == INHERIT)
@@ -344,8 +359,14 @@ int GCGameLoadSM::GetMenuInternal()
 		if (++GameConfig.DMLNoDisc >= MAX_ON_OFF) GameConfig.DMLNoDisc = INHERIT;
 	}
 
+	//! Settings: DML Extended No Disc
+	else if (Settings.DMLConfigVersion > 1 && ret == ++Idx)
+	{
+		if (++GameConfig.DMLNoDisc2 >= MAX_ON_OFF) GameConfig.DMLNoDisc2 = INHERIT;
+	}
+
 	//! Settings: DML Force Widescreen
-	else if (ret == ++Idx)
+	else if (Settings.DMLConfigVersion > 1 && ret == ++Idx)
 	{
 		if (++GameConfig.DMLWidescreen >= MAX_ON_OFF) GameConfig.DMLWidescreen = INHERIT;
 	}
