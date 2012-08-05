@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-22 22:08+0200\n"
+"POT-Creation-Date: 2012-08-05 14:46+0200\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -186,6 +186,9 @@ msgstr "頻道動畫"
 
 msgid "Banner Animation Settings"
 msgstr "頻道動畫設定"
+
+msgid "Banner On Channels"
+msgstr ""
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
 msgstr "頻道格狀牆版面只能在AHBPROT模式下顯示! 請考慮安裝最新版的HBC"
@@ -479,11 +482,14 @@ msgstr "產生"
 msgid "Credits"
 msgstr "作者信息"
 
-msgid "Custom Discarts"
-msgstr "自製光碟圖片"
+msgid "Custom Banners"
+msgstr ""
 
 msgid "Custom Paths"
 msgstr "自訂路徑"
+
+msgid "Customs"
+msgstr ""
 
 msgid "Customs/Original"
 msgstr "自製/原始"
@@ -554,6 +560,9 @@ msgstr "初始化設定"
 msgid "Delete"
 msgstr "刪除"
 
+msgid "Delete Cached Banner"
+msgstr ""
+
 msgid "Delete Cheat GCT"
 msgstr "刪除GCT金手指檔"
 
@@ -610,6 +619,9 @@ msgstr "光碟插入檢查"
 
 msgid "Disc read error."
 msgstr "光碟讀取錯誤"
+
+msgid "Discarts"
+msgstr ""
 
 msgid "DiskFlip"
 msgstr "光碟滑動"
@@ -697,6 +709,9 @@ msgstr "下載完成"
 
 msgid "Downloading 3D Covers"
 msgstr "下載 3D封面"
+
+msgid "Downloading Custom Banners"
+msgstr ""
 
 msgid "Downloading Flat Covers"
 msgstr "下載平面封面"
@@ -974,14 +989,14 @@ msgstr "全部"
 msgid "Full Cover Path"
 msgstr "完整封面路徑"
 
-msgid "Full HQ Covers"
-msgstr "完整高畫質封面"
-
-msgid "Full LQ Covers"
-msgstr "完整低畫質封面"
+msgid "Full Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr "完整選單"
+
+msgid "Full covers Download"
+msgstr ""
 
 msgid "Full shutdown"
 msgstr "關機"
@@ -1105,6 +1120,12 @@ msgstr "主選單"
 
 msgid "Hard Drive Settings"
 msgstr "硬碟設定"
+
+msgid "High Quality"
+msgstr ""
+
+msgid "High/Low"
+msgstr ""
 
 msgid "Homebrew Apps Path"
 msgstr "HBC 應用程式路徑"
@@ -1291,6 +1312,12 @@ msgstr "重複音樂"
 
 msgid "Loop Sound"
 msgstr "重複音樂"
+
+msgid "Low Quality"
+msgstr ""
+
+msgid "Low/High"
+msgstr ""
 
 msgid "MIOS (Default & Customs)"
 msgstr ""
@@ -1502,8 +1529,8 @@ msgstr "僅遊戲分區"
 msgid "Only for Install"
 msgstr "安裝遊戲時"
 
-msgid "Original Discarts"
-msgstr "原始光碟圖片"
+msgid "Original"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "原始/自製"
@@ -2188,6 +2215,18 @@ msgstr ""
 
 msgid "v2.2+"
 msgstr ""
+
+#~ msgid "Custom Discarts"
+#~ msgstr "自製光碟圖片"
+
+#~ msgid "Full HQ Covers"
+#~ msgstr "完整高畫質封面"
+
+#~ msgid "Full LQ Covers"
+#~ msgstr "完整低畫質封面"
+
+#~ msgid "Original Discarts"
+#~ msgstr "原始光碟圖片"
 
 #~ msgid "GC Force Interlace"
 #~ msgstr "GC 強制交錯"

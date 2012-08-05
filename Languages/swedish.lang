@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-22 22:08+0200\n"
+"POT-Creation-Date: 2012-08-05 14:46+0200\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -185,6 +185,9 @@ msgid "Banner Animation"
 msgstr ""
 
 msgid "Banner Animation Settings"
+msgstr ""
+
+msgid "Banner On Channels"
 msgstr ""
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
@@ -479,11 +482,14 @@ msgstr "Skapa"
 msgid "Credits"
 msgstr "Medverkande"
 
-msgid "Custom Discarts"
+msgid "Custom Banners"
 msgstr ""
 
 msgid "Custom Paths"
 msgstr "Anpassade sökvägar"
+
+msgid "Customs"
+msgstr ""
 
 msgid "Customs/Original"
 msgstr "Anpassade/Original"
@@ -554,6 +560,9 @@ msgstr "Standardinställningar"
 msgid "Delete"
 msgstr "Radera"
 
+msgid "Delete Cached Banner"
+msgstr ""
+
 msgid "Delete Cheat GCT"
 msgstr "Radera fusk GCT"
 
@@ -609,6 +618,9 @@ msgid "Disc Insert Detected"
 msgstr ""
 
 msgid "Disc read error."
+msgstr ""
+
+msgid "Discarts"
 msgstr ""
 
 msgid "DiskFlip"
@@ -696,6 +708,9 @@ msgid "Download finished"
 msgstr "Nedladdning klar"
 
 msgid "Downloading 3D Covers"
+msgstr ""
+
+msgid "Downloading Custom Banners"
 msgstr ""
 
 msgid "Downloading Flat Covers"
@@ -974,13 +989,13 @@ msgstr ""
 msgid "Full Cover Path"
 msgstr ""
 
-msgid "Full HQ Covers"
-msgstr ""
-
-msgid "Full LQ Covers"
+msgid "Full Covers"
 msgstr ""
 
 msgid "Full Menu"
+msgstr ""
+
+msgid "Full covers Download"
 msgstr ""
 
 msgid "Full shutdown"
@@ -1104,6 +1119,12 @@ msgid "HOME Menu"
 msgstr "Hemmeny"
 
 msgid "Hard Drive Settings"
+msgstr ""
+
+msgid "High Quality"
+msgstr ""
+
+msgid "High/Low"
 msgstr ""
 
 msgid "Homebrew Apps Path"
@@ -1291,6 +1312,12 @@ msgstr ""
 
 msgid "Loop Sound"
 msgstr "Loopa ljudet"
+
+msgid "Low Quality"
+msgstr ""
+
+msgid "Low/High"
+msgstr ""
 
 msgid "MIOS (Default & Customs)"
 msgstr ""
@@ -1502,7 +1529,7 @@ msgstr ""
 msgid "Only for Install"
 msgstr "Endast för installering"
 
-msgid "Original Discarts"
+msgid "Original"
 msgstr ""
 
 msgid "Original/Customs"

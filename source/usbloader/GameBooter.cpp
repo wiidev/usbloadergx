@@ -174,9 +174,9 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 				snprintf(DEVO_memCard, sizeof(DEVO_memCard), "%s:/apps/gc_devo/memcard.bin", game_partition);
 			}
 			
-			// check if file doesn't exist or is less than 16MB
+			// check if file doesn't exist or is less than 512KB (59 Blocks)
 			struct stat st;
-			if (stat(DEVO_memCard, &st) == -1 || st.st_size < 16<<20)
+			if (stat(DEVO_memCard, &st) == -1 || st.st_size < 1<<19)
 			{
 				// need to enlarge or create it
 				FILE *f = fopen(DEVO_memCard, "wb");
@@ -188,7 +188,7 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 					fseek(f, (16 << 20) - 1, SEEK_SET);
 					fputc(0, f);
 					fclose(f);
-					if (stat(DEVO_memCard, &st)==-1 || st.st_size < 16<<20)
+					if (stat(DEVO_memCard, &st)==-1 || st.st_size < 1<<19)
 					{
 						// it still isn't big enough. Give up.
 						st.st_ino = 0;

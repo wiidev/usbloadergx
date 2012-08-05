@@ -65,10 +65,11 @@ static const char * PromptButtonsText[MAX_ON_OFF] =
 	trNOOP( "Widescreen Fix" ),
 };
 
-static const char * GameWindowText[2] =
+static const char * GameWindowText[3] =
 {
 	trNOOP( "Banner Animation" ),
 	trNOOP( "Rotating Disc" ),
+	trNOOP( "Banner On Channels" ),
 };
 
 static const char * KeyboardText[KEYBOARD_MAX] =
@@ -83,7 +84,17 @@ static const char * KeyboardText[KEYBOARD_MAX] =
 static const char * DiscArtDownloadText[DISCARTS_MAX_CHOICE] =
 {
 	trNOOP( "Original/Customs" ),
-	trNOOP( "Customs/Original" )
+	trNOOP( "Customs/Original" ),
+	trNOOP( "Original" ),
+	trNOOP( "Customs" )
+};
+
+static const char * CoversFullDownloadText[COVERSFULL_MAX_CHOICE] =
+{
+	trNOOP( "High Quality" ),
+	trNOOP( "Low Quality" ),
+	trNOOP( "High/Low" ),
+	trNOOP( "Low/High" )
 };
 
 static const char *ScreensaverText[SCREENSAVER_MAX] =
@@ -121,6 +132,7 @@ GuiSettingsMenu::GuiSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Font Scale Factor" ));
 	Options->SetName(Idx++, "%s", tr( "Keyboard" ));
 	Options->SetName(Idx++, "%s", tr( "Disc Artwork Download" ));
+	Options->SetName(Idx++, "%s", tr( "Full covers Download" ));
 	Options->SetName(Idx++, "%s", tr( "Screensaver" ));
 	Options->SetName(Idx++, "%s", tr( "Mark new games" ));
 	Options->SetName(Idx++, "%s", tr( "Show Play Count" ));
@@ -188,6 +200,9 @@ void GuiSettingsMenu::SetOptionValues()
 
 	//! Settings: Disc Artwork Download
 	Options->SetValue(Idx++, "%s", tr( DiscArtDownloadText[Settings.discart] ));
+
+	//! Settings: Covers Full Artwork Download
+	Options->SetValue(Idx++, "%s", tr( CoversFullDownloadText[Settings.coversfull] ));
 
 	//! Settings: Screensaver
 	Options->SetValue(Idx++, "%s", tr( ScreensaverText[Settings.screensaver] ));
@@ -314,9 +329,9 @@ int GuiSettingsMenu::GetMenuInternal()
 	//! Settings: Game Window Mode
 	else if (ret == ++Idx)
 	{
-		if (++Settings.GameWindowMode >= 2) Settings.GameWindowMode = 0;
+		if (++Settings.GameWindowMode >= 3) Settings.GameWindowMode = 0;
 
-		if(Settings.GameWindowMode == GAMEWINDOW_BANNER && !SystemMenuResources::Instance()->IsLoaded()) {
+		if(Settings.GameWindowMode != GAMEWINDOW_DISC && !SystemMenuResources::Instance()->IsLoaded()) {
 			WindowPrompt(tr( "Error:" ), tr( "Banner window is only available with AHBPROT! Please consider installing new HBC version." ), tr( "OK" ));
 			Settings.GameWindowMode = GAMEWINDOW_DISC;
 		}
@@ -358,6 +373,12 @@ int GuiSettingsMenu::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.discart >= DISCARTS_MAX_CHOICE) Settings.discart = 0;
+	}
+
+	//! Settings: Covers Full Artwork Download
+	else if (ret == ++Idx)
+	{
+		if (++Settings.coversfull >= COVERSFULL_MAX_CHOICE) Settings.coversfull = 0;
 	}
 
 	//! Settings: Screensaver

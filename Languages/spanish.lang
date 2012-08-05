@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-22 22:08+0200\n"
+"POT-Creation-Date: 2012-08-05 14:46+0200\n"
 "PO-Revision-Date: 2011-07-25 16:40+0200\n"
 "Last-Translator: Galen/xFede\n"
 "Language-Team: Penn, SirPalax, hvy109\n"
@@ -186,6 +186,9 @@ msgstr "Animación Banner"
 
 msgid "Banner Animation Settings"
 msgstr "Opciones de Animación Banner"
+
+msgid "Banner On Channels"
+msgstr ""
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
 msgstr "El modo de vista Banner solo esta disponible con AHBPROT! instala una versión actual de HBC."
@@ -479,11 +482,14 @@ msgstr "Crear"
 msgid "Credits"
 msgstr "Créditos"
 
-msgid "Custom Discarts"
-msgstr "Img. Discos Artísticas"
+msgid "Custom Banners"
+msgstr ""
 
 msgid "Custom Paths"
 msgstr "Personalizar Rutas"
+
+msgid "Customs"
+msgstr ""
 
 msgid "Customs/Original"
 msgstr "Artísticas/Originales"
@@ -554,6 +560,9 @@ msgstr "Configuración Predeterminada"
 msgid "Delete"
 msgstr "Borrar"
 
+msgid "Delete Cached Banner"
+msgstr ""
+
 msgid "Delete Cheat GCT"
 msgstr "Borrar Trucos GCT"
 
@@ -610,6 +619,9 @@ msgstr "Detectado Disco Insertado"
 
 msgid "Disc read error."
 msgstr "Error de lectura del disco."
+
+msgid "Discarts"
+msgstr ""
 
 msgid "DiskFlip"
 msgstr "GiraDiscos"
@@ -697,6 +709,9 @@ msgstr "Descarga completada"
 
 msgid "Downloading 3D Covers"
 msgstr "Descargando Carátulas 3D"
+
+msgid "Downloading Custom Banners"
+msgstr ""
 
 msgid "Downloading Flat Covers"
 msgstr "Descargando Carátulas 2D"
@@ -974,14 +989,14 @@ msgstr "Completa"
 msgid "Full Cover Path"
 msgstr "Ruta Carátulas Comp."
 
-msgid "Full HQ Covers"
-msgstr "Carátulas HQ Comp."
-
-msgid "Full LQ Covers"
-msgstr "Carátulas LQ Comp."
+msgid "Full Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr "Completo"
+
+msgid "Full covers Download"
+msgstr ""
 
 msgid "Full shutdown"
 msgstr "Apagado completo"
@@ -1105,6 +1120,12 @@ msgstr "Menú HOME"
 
 msgid "Hard Drive Settings"
 msgstr "Configuración del Disco Duro"
+
+msgid "High Quality"
+msgstr ""
+
+msgid "High/Low"
+msgstr ""
 
 msgid "Homebrew Apps Path"
 msgstr "Ruta Apps Homebrew"
@@ -1291,6 +1312,12 @@ msgstr "Bucle musical"
 
 msgid "Loop Sound"
 msgstr "Bucle de sonido"
+
+msgid "Low Quality"
+msgstr ""
+
+msgid "Low/High"
+msgstr ""
 
 msgid "MIOS (Default & Customs)"
 msgstr ""
@@ -1502,8 +1529,8 @@ msgstr "Solo Partición de Juegos"
 msgid "Only for Install"
 msgstr "Sólo al instalar"
 
-msgid "Original Discarts"
-msgstr "Img. Discos Originales"
+msgid "Original"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Originales/Artísticas"
@@ -2188,6 +2215,18 @@ msgstr ""
 
 msgid "v2.2+"
 msgstr ""
+
+#~ msgid "Custom Discarts"
+#~ msgstr "Img. Discos Artísticas"
+
+#~ msgid "Full HQ Covers"
+#~ msgstr "Carátulas HQ Comp."
+
+#~ msgid "Full LQ Covers"
+#~ msgstr "Carátulas LQ Comp."
+
+#~ msgid "Original Discarts"
+#~ msgstr "Img. Discos Originales"
 
 #~ msgid "GC Force Interlace"
 #~ msgstr "Forzar entrelazado GC"

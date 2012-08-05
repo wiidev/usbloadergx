@@ -13,10 +13,11 @@ class ImageDownloader
 		void Start();
 		void SetChoices(int c) { choices = c; }
 		void FindMissingImages();
-		void FindMissing(const char *writepath, const char *downloadURL, const char *backupURL, const char *progressTitle);
+		void FindMissing(const char *writepath, const char *downloadURL, const char *backupURL, const char *progressTitle, const char *backupProgressTitle, const char *fileExt);
 		int DownloadProcess(int TotalDownloadCount);
-		struct block DownloadImage(const char * url, const char * gameID);
+		struct block DownloadImage(const char * url, const char * gameID, const char *fileExt);
 		void CreateCSVLog();
+		bool IsValidBanner(unsigned char *banner);
 
 		struct ImageLink
 		{
@@ -25,6 +26,8 @@ class ImageDownloader
 			const char *backupURL;
 			const char *writepath;
 			const char *progressTitle;
+			const char *backupProgressTitle;
+			const char *fileExt;
 		};
 		int choices;
 		u32 MissingImagesCount;

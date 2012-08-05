@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-22 22:08+0200\n"
+"POT-Creation-Date: 2012-08-05 14:46+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -185,6 +185,9 @@ msgid "Banner Animation"
 msgstr ""
 
 msgid "Banner Animation Settings"
+msgstr ""
+
+msgid "Banner On Channels"
 msgstr ""
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
@@ -479,11 +482,14 @@ msgstr "Vytvorit"
 msgid "Credits"
 msgstr "Zásluhy"
 
-msgid "Custom Discarts"
+msgid "Custom Banners"
 msgstr ""
 
 msgid "Custom Paths"
 msgstr "Vlastní cesty"
+
+msgid "Customs"
+msgstr ""
 
 msgid "Customs/Original"
 msgstr "Upravené/Originál"
@@ -554,6 +560,9 @@ msgstr "Puvodní nastavení"
 msgid "Delete"
 msgstr "Smazat"
 
+msgid "Delete Cached Banner"
+msgstr ""
+
 msgid "Delete Cheat GCT"
 msgstr "Smazat Cheat GCT"
 
@@ -609,6 +618,9 @@ msgid "Disc Insert Detected"
 msgstr ""
 
 msgid "Disc read error."
+msgstr ""
+
+msgid "Discarts"
 msgstr ""
 
 msgid "DiskFlip"
@@ -697,6 +709,9 @@ msgstr "Stažení dokonceno"
 
 msgid "Downloading 3D Covers"
 msgstr "Stahování 3D obalu"
+
+msgid "Downloading Custom Banners"
+msgstr ""
 
 msgid "Downloading Flat Covers"
 msgstr "Stahování plochých obalu"
@@ -974,14 +989,14 @@ msgstr ""
 msgid "Full Cover Path"
 msgstr ""
 
-msgid "Full HQ Covers"
-msgstr ""
-
-msgid "Full LQ Covers"
+msgid "Full Covers"
 msgstr ""
 
 msgid "Full Menu"
 msgstr "Plná nabídka"
+
+msgid "Full covers Download"
+msgstr ""
 
 msgid "Full shutdown"
 msgstr "Uplné ukoncení"
@@ -1104,6 +1119,12 @@ msgid "HOME Menu"
 msgstr "Hlavní menu"
 
 msgid "Hard Drive Settings"
+msgstr ""
+
+msgid "High Quality"
+msgstr ""
+
+msgid "High/Low"
 msgstr ""
 
 msgid "Homebrew Apps Path"
@@ -1291,6 +1312,12 @@ msgstr "Hudební smycka"
 
 msgid "Loop Sound"
 msgstr "Zvuková smycka"
+
+msgid "Low Quality"
+msgstr ""
+
+msgid "Low/High"
+msgstr ""
 
 msgid "MIOS (Default & Customs)"
 msgstr ""
@@ -1502,7 +1529,7 @@ msgstr "Pouze oddíl s hrami"
 msgid "Only for Install"
 msgstr "Pouze pro instalaci"
 
-msgid "Original Discarts"
+msgid "Original"
 msgstr ""
 
 msgid "Original/Customs"

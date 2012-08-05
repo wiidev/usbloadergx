@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - r1195
+# italian.lang - r1200
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-22 22:08+0200\n"
+"POT-Creation-Date: 2012-08-05 14:46+0200\n"
 "PO-Revision-Date: 2011-09-11 12:19+0100\n"
 "Last-Translator: xFede\n"
 "Language-Team: xFede (fedeanto11@gmail.com)\n"
@@ -186,6 +186,9 @@ msgstr "Animazione banner"
 
 msgid "Banner Animation Settings"
 msgstr "Impostazioni animazione banner"
+
+msgid "Banner On Channels"
+msgstr ""
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
 msgstr "La visualizzazione con i banner è disponibile soltanto con l'AHBPROT! Installa l'ultimo HBC."
@@ -479,11 +482,14 @@ msgstr "Crea"
 msgid "Credits"
 msgstr "Ringraziamenti"
 
-msgid "Custom Discarts"
-msgstr "Imm. disco person."
+msgid "Custom Banners"
+msgstr ""
 
 msgid "Custom Paths"
 msgstr "Percorsi personalizzati"
+
+msgid "Customs"
+msgstr ""
 
 msgid "Customs/Original"
 msgstr "Modific./origin."
@@ -492,16 +498,16 @@ msgid "DEVO MemCard Emulation"
 msgstr "Emulazione memory card devolution"
 
 msgid "DML Auto"
-msgstr ""
+msgstr "Patch auto DML"
 
 msgid "DML Debug"
 msgstr "Debug DML"
 
 msgid "DML Force Widescreen"
-msgstr ""
+msgstr "Forza widescreen DML"
 
 msgid "DML Installed Version"
-msgstr ""
+msgstr "Versione installata DML"
 
 msgid "DML LED Activity"
 msgstr "Led attività DML"
@@ -513,10 +519,10 @@ msgid "DML No Disc"
 msgstr "No-disco DML"
 
 msgid "DML No Disc+"
-msgstr ""
+msgstr "No-disco+ DML"
 
 msgid "DML None"
-msgstr ""
+msgstr "Nessuna patch DML"
 
 msgid "DML PAD Hook"
 msgstr "PAD hook DML"
@@ -525,7 +531,7 @@ msgid "DML Progressive Patch"
 msgstr "Patch video-progressivo DML"
 
 msgid "DML Video Mode"
-msgstr ""
+msgstr "Modalità video DML"
 
 msgid "DOL Path"
 msgstr "Percorso DOL"
@@ -553,6 +559,9 @@ msgstr "Impostazioni predefinite"
 
 msgid "Delete"
 msgstr "Elimina"
+
+msgid "Delete Cached Banner"
+msgstr ""
 
 msgid "Delete Cheat GCT"
 msgstr "Elimina trucchi GCT"
@@ -610,6 +619,9 @@ msgstr "Rilevato il disco"
 
 msgid "Disc read error."
 msgstr "Errore durante la lettura del disco."
+
+msgid "Discarts"
+msgstr ""
 
 msgid "DiskFlip"
 msgstr "Gira i dischi"
@@ -697,6 +709,9 @@ msgstr "Scaricamento completato"
 
 msgid "Downloading 3D Covers"
 msgstr "Scaricando copertine 3D..."
+
+msgid "Downloading Custom Banners"
+msgstr ""
 
 msgid "Downloading Flat Covers"
 msgstr "Scaricando copertine 2D..."
@@ -945,7 +960,7 @@ msgid "Found missing images."
 msgstr "Trovate le immagini mancanti."
 
 msgid "Frame"
-msgstr ""
+msgstr "Frame"
 
 msgid "Frame Projection Height"
 msgstr "Proiezione altezza frame"
@@ -974,14 +989,14 @@ msgstr "Completa"
 msgid "Full Cover Path"
 msgstr "Percorso cop. complete"
 
-msgid "Full HQ Covers"
-msgstr "Cop. complete HQ"
-
-msgid "Full LQ Covers"
-msgstr "Cop. complete LQ"
+msgid "Full Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr "Menu completo"
+
+msgid "Full covers Download"
+msgstr ""
 
 msgid "Full shutdown"
 msgstr "Spegnimento completo"
@@ -1105,6 +1120,12 @@ msgstr "Menu HOME"
 
 msgid "Hard Drive Settings"
 msgstr "Impostazioni disco rigido"
+
+msgid "High Quality"
+msgstr ""
+
+msgid "High/Low"
+msgstr ""
 
 msgid "Homebrew Apps Path"
 msgstr "Percorso homebrew"
@@ -1291,6 +1312,12 @@ msgstr "Ripeti brano"
 
 msgid "Loop Sound"
 msgstr "Suono ripetuto"
+
+msgid "Low Quality"
+msgstr ""
+
+msgid "Low/High"
+msgstr ""
 
 msgid "MIOS (Default & Customs)"
 msgstr "MIOS (Predefinito e personalizzati)"
@@ -1502,8 +1529,8 @@ msgstr "Solo Partizione Gioco"
 msgid "Only for Install"
 msgstr "Solo per Installare"
 
-msgid "Original Discarts"
-msgstr "Imm. Disco originali"
+msgid "Original"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Origin./Modific."
@@ -1833,7 +1860,7 @@ msgid "The .them file was not found in the zip."
 msgstr "Il file .them non è stato trovato nel zip."
 
 msgid "The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."
-msgstr ""
+msgstr "L'impostazione forza widescreen richiedere DIOS MIOS v2.2 o superiore. L'impostazione verrà ignorata."
 
 msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
 msgstr "Il percorso dei trucchi GCT e qyesto gioco non sono sulla stessa partizione. Avviare il gioco senza i trucchi?"
@@ -1999,7 +2026,7 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "File ZIP installato nella cartella degli Homebrew."
 
 msgid "Use Game Settings"
-msgstr ""
+msgstr "Usa impostazioni gioco"
 
 msgid "Use System Font"
 msgstr "Usa il font di sistema"
@@ -2188,3 +2215,15 @@ msgstr "v1.2 -> v2.1"
 
 msgid "v2.2+"
 msgstr "v2.2+"
+
+#~ msgid "Custom Discarts"
+#~ msgstr "Imm. disco person."
+
+#~ msgid "Full HQ Covers"
+#~ msgstr "Cop. complete HQ"
+
+#~ msgid "Full LQ Covers"
+#~ msgstr "Cop. complete LQ"
+
+#~ msgid "Original Discarts"
+#~ msgstr "Imm. Disco originali"

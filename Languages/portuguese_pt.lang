@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-22 22:08+0200\n"
+"POT-Creation-Date: 2012-08-05 14:46+0200\n"
 "PO-Revision-Date: 2011-11-03 11:00+0000\n"
 "Last-Translator: pplucky <pplucky@gmail.com>\n"
 "Language-Team: Sky8000, pplucky\n"
@@ -185,6 +185,9 @@ msgid "Banner Animation"
 msgstr ""
 
 msgid "Banner Animation Settings"
+msgstr ""
+
+msgid "Banner On Channels"
 msgstr ""
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
@@ -479,11 +482,14 @@ msgstr "Criar"
 msgid "Credits"
 msgstr "Créditos"
 
-msgid "Custom Discarts"
-msgstr "Imagens Disco Personalizadas"
+msgid "Custom Banners"
+msgstr ""
 
 msgid "Custom Paths"
 msgstr "Caminhos Personalizados"
+
+msgid "Customs"
+msgstr ""
 
 msgid "Customs/Original"
 msgstr "Personalizadas/Originais"
@@ -554,6 +560,9 @@ msgstr "Definições Predefinidas"
 msgid "Delete"
 msgstr "Eliminar"
 
+msgid "Delete Cached Banner"
+msgstr ""
+
 msgid "Delete Cheat GCT"
 msgstr "Eliminar Batota GCT"
 
@@ -609,6 +618,9 @@ msgid "Disc Insert Detected"
 msgstr ""
 
 msgid "Disc read error."
+msgstr ""
+
+msgid "Discarts"
 msgstr ""
 
 msgid "DiskFlip"
@@ -697,6 +709,9 @@ msgstr "Descarga Terminada"
 
 msgid "Downloading 3D Covers"
 msgstr "A Descarregar Capas 3D"
+
+msgid "Downloading Custom Banners"
+msgstr ""
 
 msgid "Downloading Flat Covers"
 msgstr "A Descarregar Capas Planas"
@@ -974,14 +989,14 @@ msgstr "Completo"
 msgid "Full Cover Path"
 msgstr "Cam. Capas Completas"
 
-msgid "Full HQ Covers"
-msgstr "Capas Completas HQ"
-
-msgid "Full LQ Covers"
-msgstr "Capas Completas LQ"
+msgid "Full Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr "Menu Completo"
+
+msgid "Full covers Download"
+msgstr ""
 
 msgid "Full shutdown"
 msgstr "Shutdown"
@@ -1105,6 +1120,12 @@ msgstr "Menu HOME"
 
 msgid "Hard Drive Settings"
 msgstr "Definições de Disco Rígido"
+
+msgid "High Quality"
+msgstr ""
+
+msgid "High/Low"
+msgstr ""
 
 msgid "Homebrew Apps Path"
 msgstr "Cam. Apps Homebrew"
@@ -1291,6 +1312,12 @@ msgstr "Repetir Música"
 
 msgid "Loop Sound"
 msgstr "Repetir Sons"
+
+msgid "Low Quality"
+msgstr ""
+
+msgid "Low/High"
+msgstr ""
 
 msgid "MIOS (Default & Customs)"
 msgstr ""
@@ -1502,8 +1529,8 @@ msgstr "Apenas Partição Jogos"
 msgid "Only for Install"
 msgstr "Apenas para instalação"
 
-msgid "Original Discarts"
-msgstr "Imagens Disco Originais"
+msgid "Original"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Originais/Personalizadas"
@@ -2188,6 +2215,18 @@ msgstr ""
 
 msgid "v2.2+"
 msgstr ""
+
+#~ msgid "Custom Discarts"
+#~ msgstr "Imagens Disco Personalizadas"
+
+#~ msgid "Full HQ Covers"
+#~ msgstr "Capas Completas HQ"
+
+#~ msgid "Full LQ Covers"
+#~ msgstr "Capas Completas LQ"
+
+#~ msgid "Original Discarts"
+#~ msgstr "Imagens Disco Originais"
 
 #~ msgid "Rename Game on WBFS"
 #~ msgstr "Renomear jogo (WBFS)"

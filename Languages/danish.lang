@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-22 22:08+0200\n"
+"POT-Creation-Date: 2012-08-05 14:46+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -185,6 +185,9 @@ msgid "Banner Animation"
 msgstr ""
 
 msgid "Banner Animation Settings"
+msgstr ""
+
+msgid "Banner On Channels"
 msgstr ""
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
@@ -479,11 +482,14 @@ msgstr "Opret"
 msgid "Credits"
 msgstr "Lavet af:"
 
-msgid "Custom Discarts"
-msgstr "Tilpasset DVD billeder"
+msgid "Custom Banners"
+msgstr ""
 
 msgid "Custom Paths"
 msgstr "Sti-indstillinger"
+
+msgid "Customs"
+msgstr ""
 
 msgid "Customs/Original"
 msgstr "Tilpassede/Originale"
@@ -554,6 +560,9 @@ msgstr "Standardindstillinger"
 msgid "Delete"
 msgstr "Slet"
 
+msgid "Delete Cached Banner"
+msgstr ""
+
 msgid "Delete Cheat GCT"
 msgstr "Slet cheat GCT"
 
@@ -609,6 +618,9 @@ msgid "Disc Insert Detected"
 msgstr "Ny Disc opdaget"
 
 msgid "Disc read error."
+msgstr ""
+
+msgid "Discarts"
 msgstr ""
 
 msgid "DiskFlip"
@@ -697,6 +709,9 @@ msgstr "Download færdig"
 
 msgid "Downloading 3D Covers"
 msgstr "Downloader 3D Covers"
+
+msgid "Downloading Custom Banners"
+msgstr ""
 
 msgid "Downloading Flat Covers"
 msgstr "Downloader Flade Covers"
@@ -974,14 +989,14 @@ msgstr "Fuld"
 msgid "Full Cover Path"
 msgstr "Sti til Fuld Cover"
 
-msgid "Full HQ Covers"
-msgstr "Fuld HQ Covers"
-
-msgid "Full LQ Covers"
-msgstr "Fuld LQ Covers"
+msgid "Full Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr "Fuld Menu"
+
+msgid "Full covers Download"
+msgstr ""
 
 msgid "Full shutdown"
 msgstr "Luk helt ned"
@@ -1105,6 +1120,12 @@ msgstr ""
 
 msgid "Hard Drive Settings"
 msgstr "Hard Disk instillinger"
+
+msgid "High Quality"
+msgstr ""
+
+msgid "High/Low"
+msgstr ""
 
 msgid "Homebrew Apps Path"
 msgstr "Sti til homebrew-programmer"
@@ -1291,6 +1312,12 @@ msgstr "Afspil musik i løkke"
 
 msgid "Loop Sound"
 msgstr "Afspil lyd i løkke"
+
+msgid "Low Quality"
+msgstr ""
+
+msgid "Low/High"
+msgstr ""
 
 msgid "MIOS (Default & Customs)"
 msgstr ""
@@ -1502,8 +1529,8 @@ msgstr "Kun spil Partition"
 msgid "Only for Install"
 msgstr "Kun til installering"
 
-msgid "Original Discarts"
-msgstr "Originale DVD Billeder"
+msgid "Original"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Originale/Tilpassede"
@@ -2188,6 +2215,18 @@ msgstr ""
 
 msgid "v2.2+"
 msgstr ""
+
+#~ msgid "Custom Discarts"
+#~ msgstr "Tilpasset DVD billeder"
+
+#~ msgid "Full HQ Covers"
+#~ msgstr "Fuld HQ Covers"
+
+#~ msgid "Full LQ Covers"
+#~ msgstr "Fuld LQ Covers"
+
+#~ msgid "Original Discarts"
+#~ msgstr "Originale DVD Billeder"
 
 #~ msgid "Rename Game on WBFS"
 #~ msgstr "Omdøb spil på WBFS"

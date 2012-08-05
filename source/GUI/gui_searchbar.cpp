@@ -177,6 +177,8 @@ wchar_t GuiSearchBar::GetClicked()
 
 void GuiSearchBar::FilterList(std::vector<struct discHdr *> &List, wString &GameFilter)
 {
+	bool endOfGameName = false;  // endOfGameName is disabled by default
+
 	SearchChars.clear();
 
 	for (u32 i = 0; i < List.size(); ++i)
@@ -207,6 +209,8 @@ void GuiSearchBar::FilterList(std::vector<struct discHdr *> &List, wString &Game
 			{
 				SearchChars.insert(gameName[GameFilter.size()]);
 			}
+			else if (wcslen(gameName) == GameFilter.size())  // The end of the game name was reached
+				endOfGameName = true;
 		}
 		else if(Settings.SearchMode == SEARCH_CONTENT)
 		{
@@ -227,6 +231,8 @@ void GuiSearchBar::FilterList(std::vector<struct discHdr *> &List, wString &Game
 					wchar_t ch = towupper(*found);
 					if(ch)
 						SearchChars.insert(ch);
+					else      // The end of the game name was reached
+						endOfGameName = true;
 				}
 			}
 			else
@@ -247,7 +253,7 @@ void GuiSearchBar::FilterList(std::vector<struct discHdr *> &List, wString &Game
 		SearchChars.clear();
 
 	// If the last character was not backslash try autocomplete
-	if(SearchChars.size() == 1 && GameFilter.size() > 0 && lastSearchChar != 8)
+	if(SearchChars.size() == 1 && GameFilter.size() > 0 && lastSearchChar != 8 && !endOfGameName)
 	{
 		GameFilter += *SearchChars.begin();
 		FilterList(List, GameFilter);

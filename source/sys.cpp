@@ -180,7 +180,9 @@ void Sys_LoadMenu(void)
 	if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_PRIILOADER_OVERRIDE))
 	{
 		*(u32 *)0x8132fffb = 0x50756e65;
+		*(u32 *)0x817feff0 = 0x50756e65;	// priiloader 0.8 beta 4+
 		DCFlushRange((u32 *)0x8132fffb, 4);
+		DCFlushRange((u32 *)0x817feff0, 4);
 	}
 
 	/* Return to the Wii system menu */

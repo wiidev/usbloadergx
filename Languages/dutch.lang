@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-22 22:08+0200\n"
+"POT-Creation-Date: 2012-08-05 14:46+0200\n"
 "PO-Revision-Date: 2011-12-17 14:22+0100\n"
 "Last-Translator: Arthur117\n"
 "Language-Team: tj_cool, glowy, Arthur117\n"
@@ -185,6 +185,9 @@ msgid "Banner Animation"
 msgstr ""
 
 msgid "Banner Animation Settings"
+msgstr ""
+
+msgid "Banner On Channels"
 msgstr ""
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
@@ -479,11 +482,14 @@ msgstr "Maak"
 msgid "Credits"
 msgstr ""
 
-msgid "Custom Discarts"
-msgstr "Aangepaste Disk Labels"
+msgid "Custom Banners"
+msgstr ""
 
 msgid "Custom Paths"
 msgstr "Bestandslocaties"
+
+msgid "Customs"
+msgstr ""
 
 msgid "Customs/Original"
 msgstr "Aangepast/Origineel"
@@ -554,6 +560,9 @@ msgstr "Standaardinstellingen"
 msgid "Delete"
 msgstr "Verwijderen"
 
+msgid "Delete Cached Banner"
+msgstr ""
+
 msgid "Delete Cheat GCT"
 msgstr "Cheat GCT verwijderen"
 
@@ -609,6 +618,9 @@ msgid "Disc Insert Detected"
 msgstr ""
 
 msgid "Disc read error."
+msgstr ""
+
+msgid "Discarts"
 msgstr ""
 
 msgid "DiskFlip"
@@ -697,6 +709,9 @@ msgstr "Download voltooid"
 
 msgid "Downloading 3D Covers"
 msgstr "3D hoesjes aan het downloaden"
+
+msgid "Downloading Custom Banners"
+msgstr ""
 
 msgid "Downloading Flat Covers"
 msgstr "Platte hoesjes aan het downloaden"
@@ -974,14 +989,14 @@ msgstr "Volledig"
 msgid "Full Cover Path"
 msgstr "Volledige hoesjes pad"
 
-msgid "Full HQ Covers"
-msgstr "HQ volledige hoesjes"
-
-msgid "Full LQ Covers"
-msgstr "LQ volledige hoesjes"
+msgid "Full Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr "Volledig Menu"
+
+msgid "Full covers Download"
+msgstr ""
 
 msgid "Full shutdown"
 msgstr "Volledig uitzetten"
@@ -1105,6 +1120,12 @@ msgstr ""
 
 msgid "Hard Drive Settings"
 msgstr "Harddisk Instellingen"
+
+msgid "High Quality"
+msgstr ""
+
+msgid "High/Low"
+msgstr ""
 
 msgid "Homebrew Apps Path"
 msgstr "Locatie homebrew apps"
@@ -1291,6 +1312,12 @@ msgstr "Herhaal Muziek"
 
 msgid "Loop Sound"
 msgstr "Geluid herhalen"
+
+msgid "Low Quality"
+msgstr ""
+
+msgid "Low/High"
+msgstr ""
 
 msgid "MIOS (Default & Customs)"
 msgstr ""
@@ -1502,8 +1529,8 @@ msgstr "Alleen Spel Partitie"
 msgid "Only for Install"
 msgstr "Alleen bij installeren"
 
-msgid "Original Discarts"
-msgstr "Originele Disk Labels"
+msgid "Original"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Origineel/Aangepast"
@@ -2188,6 +2215,18 @@ msgstr ""
 
 msgid "v2.2+"
 msgstr ""
+
+#~ msgid "Custom Discarts"
+#~ msgstr "Aangepaste Disk Labels"
+
+#~ msgid "Full HQ Covers"
+#~ msgstr "HQ volledige hoesjes"
+
+#~ msgid "Full LQ Covers"
+#~ msgstr "LQ volledige hoesjes"
+
+#~ msgid "Original Discarts"
+#~ msgstr "Originele Disk Labels"
 
 #~ msgid "Rename Game on WBFS"
 #~ msgstr "Spel hernoemen op WBFS"

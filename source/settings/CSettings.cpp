@@ -77,6 +77,7 @@ void CSettings::SetDefault()
 	strlcpy(GameCubePath, "sd:/games/", sizeof(GameCubePath));
 	strlcpy(GameCubeSDPath, "sd:/games/", sizeof(GameCubeSDPath));
 	strlcpy(DEVOLoaderPath, "sd:/apps/gc_devo/", sizeof(DEVOLoaderPath));
+	strlcpy(CustomBannersURL, "http://fileden.com/files/2012/5/12/3303540/", sizeof(CustomBannersURL));
 	theme[0] = 0;
 	language_path[0] = 0;
 	ogg_path[0] = 0;
@@ -108,6 +109,7 @@ void CSettings::SetDefault()
 	error002 = 2;
 	partition = 0;
 	discart = DISCARTS_ORIGINALS_CUSTOMS;
+	coversfull = COVERSFULL_HQ;
 	xflip = XFLIP_NO;
 	quickboot = OFF;
 	wiilight = WIILIGHT_ON;
@@ -317,6 +319,7 @@ bool CSettings::Save()
 	fprintf(file, "error002 = %d\n", error002);
 	fprintf(file, "autonetwork = %d\n", autonetwork);
 	fprintf(file, "discart = %d\n", discart);
+	fprintf(file, "coversfull = %d\n", coversfull);
 	fprintf(file, "partition = %d\n", partition);
 	fprintf(file, "marknewtitles = %d\n", marknewtitles);
 	fprintf(file, "ShowFreeSpace = %d\n", ShowFreeSpace);
@@ -407,6 +410,7 @@ bool CSettings::Save()
 	fprintf(file, "DEVOLoaderPath = %s\n", DEVOLoaderPath);
 	fprintf(file, "GCInstallCompressed = %d\n", GCInstallCompressed);
 	fprintf(file, "GCInstallAligned = %d\n", GCInstallAligned);
+	fprintf(file, "CustomBannersURL = %s\n", CustomBannersURL);
 	fclose(file);
 
 	return true;
@@ -617,6 +621,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "discart") == 0)
 	{
 		discart = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "coversfull") == 0)
+	{
+		coversfull = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "error002") == 0)
@@ -986,6 +995,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "GameCubeSDPath") == 0)
 	{
 		strlcpy(GameCubeSDPath, value, sizeof(GameCubeSDPath));
+		return true;
+	}
+	else if (strcmp(name, "CustomBannersURL") == 0)
+	{
+		strlcpy(CustomBannersURL, value, sizeof(CustomBannersURL));
 		return true;
 	}
 	else if (strcmp(name, "EnabledCategories") == 0)

@@ -1529,14 +1529,16 @@ int GameBrowseMenu::OpenClickedGame(struct discHdr *header)
 	if (Settings.quickboot) { //quickboot game
 		GameWindow::BootGame(header);
 	}
-	else if(Settings.GameWindowMode == GAMEWINDOW_BANNER)
+	else if((Settings.GameWindowMode == GAMEWINDOW_BANNER) ||
+			(Settings.GameWindowMode == GAMEWINDOW_BOTH && Settings.gameDisplay == BANNERGRID_MODE))
 	{
 		BannerWindow GamePrompt(this, header);
 		mainWindow->Append(&GamePrompt);
 
 		choice = GamePrompt.Run();
 	}
-	else if(Settings.GameWindowMode == GAMEWINDOW_DISC)
+	else if((Settings.GameWindowMode == GAMEWINDOW_DISC) ||
+			(Settings.GameWindowMode == GAMEWINDOW_BOTH && Settings.gameDisplay != BANNERGRID_MODE))
 	{
 		SetAllowDim(true);
 		GameWindow GamePrompt(this, header);

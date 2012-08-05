@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1197
+# French.lang - r1201
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-22 22:08+0200\n"
+"POT-Creation-Date: 2012-08-05 14:46+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -187,6 +187,9 @@ msgstr "Bannière animée"
 msgid "Banner Animation Settings"
 msgstr "Paramètres des Bannières"
 
+msgid "Banner On Channels"
+msgstr "Bannière sur Chaînes"
+
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
 msgstr "Le mode Chaînes nécessite AHBPROT! Pensez à mettre à jour votre Homebrew Channel."
 
@@ -257,7 +260,7 @@ msgid "Block Sound Settings"
 msgstr "Bloquer Sons"
 
 msgid "Block Theme Downloader"
-msgstr "Bloquer Télech. thèmes"
+msgstr "Bloquer Téléch. thèmes"
 
 msgid "Block Theme Menu"
 msgstr "Bloquer Thèmes"
@@ -479,11 +482,14 @@ msgstr "Créer"
 msgid "Credits"
 msgstr "Crédits"
 
-msgid "Custom Discarts"
-msgstr "Labels DVD persos"
+msgid "Custom Banners"
+msgstr "Bannières persos"
 
 msgid "Custom Paths"
 msgstr "Personnalisation des dossiers"
+
+msgid "Customs"
+msgstr "Persos"
 
 msgid "Customs/Original"
 msgstr "Persos/Originaux"
@@ -554,6 +560,9 @@ msgstr "Réinitialiser les paramètres"
 msgid "Delete"
 msgstr "Supprimer"
 
+msgid "Delete Cached Banner"
+msgstr "Supprimer bannière en cache"
+
 msgid "Delete Cheat GCT"
 msgstr "Supprimer GCT de triche"
 
@@ -610,6 +619,9 @@ msgstr "Insertion de disque détectée"
 
 msgid "Disc read error."
 msgstr "Erreur de lecture du disque."
+
+msgid "Discarts"
+msgstr "Labels DVD"
 
 msgid "DiskFlip"
 msgstr "Disque uniquement"
@@ -697,6 +709,9 @@ msgstr "Téléchargement terminé"
 
 msgid "Downloading 3D Covers"
 msgstr "Téléchargement des jaquettes 3D"
+
+msgid "Downloading Custom Banners"
+msgstr "Téléch. des bannières persos"
 
 msgid "Downloading Flat Covers"
 msgstr "Téléchargement des jaquettes 2D"
@@ -974,14 +989,14 @@ msgstr "Complète"
 msgid "Full Cover Path"
 msgstr "Dossier jaqu. complètes"
 
-msgid "Full HQ Covers"
-msgstr "Jaqu. complètes HD"
-
-msgid "Full LQ Covers"
-msgstr "Jaqu. complètes SD"
+msgid "Full Covers"
+msgstr "Jaquettes complètes"
 
 msgid "Full Menu"
 msgstr "Menu complet"
+
+msgid "Full covers Download"
+msgstr "Téléch. Jaqu. complètes"
 
 msgid "Full shutdown"
 msgstr "Éteindre"
@@ -1105,6 +1120,12 @@ msgstr "Menu HOME"
 
 msgid "Hard Drive Settings"
 msgstr "Paramètres des Disques durs"
+
+msgid "High Quality"
+msgstr "Hautes qualités"
+
+msgid "High/Low"
+msgstr "Hautes/Basses"
 
 msgid "Homebrew Apps Path"
 msgstr "Dossier Apps Homebrew"
@@ -1291,6 +1312,12 @@ msgstr "Répéter musique"
 
 msgid "Loop Sound"
 msgstr "Intro en boucle"
+
+msgid "Low Quality"
+msgstr "Basses qualités"
+
+msgid "Low/High"
+msgstr "Basses/Hautes"
 
 msgid "MIOS (Default & Customs)"
 msgstr "MIOS (Défaut & Customs)"
@@ -1502,8 +1529,8 @@ msgstr "Uniquement la partition de jeu"
 msgid "Only for Install"
 msgstr "Uniquement à l'installation"
 
-msgid "Original Discarts"
-msgstr "Labels DVD originaux"
+msgid "Original"
+msgstr "Originaux"
 
 msgid "Original/Customs"
 msgstr "Originaux/Persos"
@@ -2188,6 +2215,18 @@ msgstr ""
 
 msgid "v2.2+"
 msgstr ""
+
+#~ msgid "Custom Discarts"
+#~ msgstr "Labels DVD persos"
+
+#~ msgid "Full HQ Covers"
+#~ msgstr "Jaqu. complètes HD"
+
+#~ msgid "Full LQ Covers"
+#~ msgstr "Jaqu. complètes SD"
+
+#~ msgid "Original Discarts"
+#~ msgstr "Labels DVD originaux"
 
 #~ msgid "GC Force Interlace"
 #~ msgstr "Entrelacement GameCube"

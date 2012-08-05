@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-22 22:08+0200\n"
+"POT-Creation-Date: 2012-08-05 14:46+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -185,6 +185,9 @@ msgid "Banner Animation"
 msgstr ""
 
 msgid "Banner Animation Settings"
+msgstr ""
+
+msgid "Banner On Channels"
 msgstr ""
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
@@ -479,11 +482,14 @@ msgstr "Opprett"
 msgid "Credits"
 msgstr "Medvirkende"
 
-msgid "Custom Discarts"
-msgstr "Cust. platebilde"
+msgid "Custom Banners"
+msgstr ""
 
 msgid "Custom Paths"
 msgstr "Egendefinerte stier"
+
+msgid "Customs"
+msgstr ""
 
 msgid "Customs/Original"
 msgstr "Custom/Original"
@@ -554,6 +560,9 @@ msgstr "Standard innstillinger"
 msgid "Delete"
 msgstr "Slett"
 
+msgid "Delete Cached Banner"
+msgstr ""
+
 msgid "Delete Cheat GCT"
 msgstr "Slett juksefil GCT"
 
@@ -609,6 +618,9 @@ msgid "Disc Insert Detected"
 msgstr ""
 
 msgid "Disc read error."
+msgstr ""
+
+msgid "Discarts"
 msgstr ""
 
 msgid "DiskFlip"
@@ -697,6 +709,9 @@ msgstr "Nedlasting ferdig"
 
 msgid "Downloading 3D Covers"
 msgstr "Laster ned 3D cover"
+
+msgid "Downloading Custom Banners"
+msgstr ""
 
 msgid "Downloading Flat Covers"
 msgstr "Laster ned 2D cover"
@@ -974,13 +989,13 @@ msgstr ""
 msgid "Full Cover Path"
 msgstr "Fullcover sti"
 
-msgid "Full HQ Covers"
-msgstr "HQ fullcover"
-
-msgid "Full LQ Covers"
-msgstr "LQ fullcover"
+msgid "Full Covers"
+msgstr ""
 
 msgid "Full Menu"
+msgstr ""
+
+msgid "Full covers Download"
 msgstr ""
 
 msgid "Full shutdown"
@@ -1105,6 +1120,12 @@ msgstr "HOME Meny"
 
 msgid "Hard Drive Settings"
 msgstr "Harddisk innstillinger"
+
+msgid "High Quality"
+msgstr ""
+
+msgid "High/Low"
+msgstr ""
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Apps sti"
@@ -1291,6 +1312,12 @@ msgstr "Loop musikk"
 
 msgid "Loop Sound"
 msgstr "Loop lyd"
+
+msgid "Low Quality"
+msgstr ""
+
+msgid "Low/High"
+msgstr ""
 
 msgid "MIOS (Default & Customs)"
 msgstr ""
@@ -1502,8 +1529,8 @@ msgstr "Kun spill partisjon"
 msgid "Only for Install"
 msgstr "Kun for installering"
 
-msgid "Original Discarts"
-msgstr "Orig. platebilde"
+msgid "Original"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Original/Custom"
@@ -2188,6 +2215,18 @@ msgstr ""
 
 msgid "v2.2+"
 msgstr ""
+
+#~ msgid "Custom Discarts"
+#~ msgstr "Cust. platebilde"
+
+#~ msgid "Full HQ Covers"
+#~ msgstr "HQ fullcover"
+
+#~ msgid "Full LQ Covers"
+#~ msgstr "LQ fullcover"
+
+#~ msgid "Original Discarts"
+#~ msgstr "Orig. platebilde"
 
 #~ msgid "Rename Game on WBFS"
 #~ msgstr "Gi nytt navn til spill på WBFS"

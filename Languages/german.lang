@@ -1,11 +1,11 @@
 # USB Loader GX
-# german.lang - r1192
+# german.lang - r1200
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-22 22:08+0200\n"
+"POT-Creation-Date: 2012-08-05 14:46+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -186,6 +186,9 @@ msgstr "Banner Animation"
 
 msgid "Banner Animation Settings"
 msgstr "Banner Animationen"
+
+msgid "Banner On Channels"
+msgstr ""
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
 msgstr "Banner Raster-Layout ist nur verfügbar mit AHBPROT! Bitte installiere die aktuelle HBC-Version."
@@ -479,17 +482,20 @@ msgstr "Erstelle GCT"
 msgid "Credits"
 msgstr "Danksagungen"
 
-msgid "Custom Discarts"
-msgstr "Eig. Diskbilder"
+msgid "Custom Banners"
+msgstr ""
 
 msgid "Custom Paths"
 msgstr "Pfade anpassen"
+
+msgid "Customs"
+msgstr ""
 
 msgid "Customs/Original"
 msgstr "Community/Original"
 
 msgid "DEVO MemCard Emulation"
-msgstr ""
+msgstr "DEVO MemCard Emulation"
 
 msgid "DML Auto"
 msgstr "DML Auto"
@@ -498,10 +504,10 @@ msgid "DML Debug"
 msgstr "DML Debug"
 
 msgid "DML Force Widescreen"
-msgstr ""
+msgstr "DML Breitbild erzw."
 
 msgid "DML Installed Version"
-msgstr ""
+msgstr "Installierte DML Version"
 
 msgid "DML LED Activity"
 msgstr "DML LED Aktivität"
@@ -513,7 +519,7 @@ msgid "DML No Disc"
 msgstr "DML Keine Disk"
 
 msgid "DML No Disc+"
-msgstr ""
+msgstr "DML Keine Disk+"
 
 msgid "DML None"
 msgstr "DML Nichts"
@@ -522,7 +528,7 @@ msgid "DML PAD Hook"
 msgstr "DML PAD Hook"
 
 msgid "DML Progressive Patch"
-msgstr ""
+msgstr "DML Progressive Patch"
 
 msgid "DML Video Mode"
 msgstr "DML Video Modus"
@@ -553,6 +559,9 @@ msgstr "Einstellungen zurücksetzen"
 
 msgid "Delete"
 msgstr "Löschen"
+
+msgid "Delete Cached Banner"
+msgstr ""
 
 msgid "Delete Cheat GCT"
 msgstr "Lösche GCT Cheatdatei"
@@ -588,10 +597,10 @@ msgid "Developer:"
 msgstr "Entwickler:"
 
 msgid "Devolution"
-msgstr ""
+msgstr "Devolution"
 
 msgid "Devolution Loader Path"
-msgstr ""
+msgstr "Devolution Loader"
 
 msgid "Directory does not exist!"
 msgstr "Verzeichnis existiert nicht!"
@@ -610,6 +619,9 @@ msgstr "Disk erkannt"
 
 msgid "Disc read error."
 msgstr "Disk Lese-Fehler"
+
+msgid "Discarts"
+msgstr ""
 
 msgid "DiskFlip"
 msgstr "DiskFlip"
@@ -697,6 +709,9 @@ msgstr "Download abgeschlossen"
 
 msgid "Downloading 3D Covers"
 msgstr "Lade 3D Cover herunter"
+
+msgid "Downloading Custom Banners"
+msgstr ""
 
 msgid "Downloading Flat Covers"
 msgstr "Lade 2D Cover herunter"
@@ -974,14 +989,14 @@ msgstr "Vollständig"
 msgid "Full Cover Path"
 msgstr "Box Cover"
 
-msgid "Full HQ Covers"
-msgstr "Box HQ Cover"
-
-msgid "Full LQ Covers"
-msgstr "Box LQ Cover"
+msgid "Full Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr "Ganzes Menü"
+
+msgid "Full covers Download"
+msgstr ""
 
 msgid "Full shutdown"
 msgstr "Ausschalten"
@@ -1068,7 +1083,7 @@ msgid "GameCube"
 msgstr "GameCube"
 
 msgid "GameCube Mode"
-msgstr ""
+msgstr "GameCube Modus"
 
 msgid "GameTDB Path"
 msgstr "GameTDB"
@@ -1105,6 +1120,12 @@ msgstr "HOME Menü"
 
 msgid "Hard Drive Settings"
 msgstr "Festplatten Optionen"
+
+msgid "High Quality"
+msgstr ""
+
+msgid "High/Low"
+msgstr ""
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Apps"
@@ -1145,7 +1166,7 @@ msgid "Incoming file %0.2fMB"
 msgstr "Eingehende Datei %0.2fMB"
 
 msgid "Individual"
-msgstr ""
+msgstr "Individuell"
 
 msgid "Initializing Network"
 msgstr "Initialisiere Netzwerk"
@@ -1292,8 +1313,14 @@ msgstr "Wiederholung"
 msgid "Loop Sound"
 msgstr "Wiederholung"
 
-msgid "MIOS (Default & Customs)"
+msgid "Low Quality"
 msgstr ""
+
+msgid "Low/High"
+msgstr ""
+
+msgid "MIOS (Default & Customs)"
+msgstr "MIOS (Standard & Angepasste)"
 
 msgid "Main DOL"
 msgstr "Haupt-DOL"
@@ -1502,8 +1529,8 @@ msgstr "Nur Spiele Partition"
 msgid "Only for Install"
 msgstr "Nur beim Installieren"
 
-msgid "Original Discarts"
-msgstr "Org. Diskbilder"
+msgid "Original"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "Original/Community"
@@ -1833,19 +1860,19 @@ msgid "The .them file was not found in the zip."
 msgstr "Die .them Datei wurde in der zip nicht gefunden."
 
 msgid "The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."
-msgstr ""
+msgstr "Die Einstellung -Breitbild erzw.- erforder DIOS MIOS v2.2 und neuer. Diese Einstellungen wird ignoriert."
 
 msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
-msgstr ""
+msgstr "Der GCT Cheatcodes Pfad und dieses Spiel sind nicht auf der selben Partition. Spiel ohne Ocarina starten?"
 
 msgid "The GCT Cheatcodes Path must be on SD card. Run the game without Ocarina?"
-msgstr ""
+msgstr "Der GCT Cheatcodes Pfad muss auf der SD-Karte sein. Spiel ohne Ocarina starten?"
 
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "Die Miis werden in den EmuNand Pfad und EmuNand Kanal-Pfad kopiert. Achtung: Alle vorhandenen Dateien werden überschrieben."
 
 msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
-msgstr ""
+msgstr "Die -keine Disk Einstellung- wird nicht mehr unterstützt von DIOS MIOS (Lite). Jetzt muss eine Disk im Laufwerk sein."
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "Die SYSCONF wird in den EmuNand Pfad und EmuNand Kanal-Pfad kopiert. Achtung: Alle vorhandenen Dateien werden überschrieben."
@@ -1912,16 +1939,16 @@ msgid "Titles from GameTDB"
 msgstr "Namen aus der WiiTDB"
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
-msgstr ""
+msgstr "Um GameCube Spiele von DVD zu starten, muss der GameCube Modus in den Spieleinstellungen auf MIOS gesetzt werden."
 
 msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
-msgstr "Um GameCube-Spiele mit DIOS MIOS zu spielen, müssen sie sich auf einer USB FAT32 Partition befinden."
+msgstr "Um GameCube Spiele mit DIOS MIOS zu spielen, müssen sie sich auf einer USB FAT32 Partition befinden."
 
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
 msgstr "Um GameCube-Spiele mit DIOS MIOS zu spielen, muss der 'GemeCube Hauptpfad' auf eine USB FAT32 Partition zeigen."
 
 msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
-msgstr ""
+msgstr "Um GameCube Spiele mit Devolution zu starten, muss sich die loader.bin Datei in Devolution Pfad befinden."
 
 msgid "Tooltip Delay"
 msgstr "Tooltip Verzögerung"
@@ -1999,7 +2026,7 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Die hochgeladene ZIP Datei wurde ins Homebrew Verzeichnis installiert."
 
 msgid "Use Game Settings"
-msgstr ""
+msgstr "Spiele Einst. ben."
 
 msgid "Use System Font"
 msgstr "Wii-Systemschriftart"
@@ -2184,10 +2211,22 @@ msgid "seconds left"
 msgstr "Sekunden verbleiben"
 
 msgid "v1.2 -> v2.1"
-msgstr ""
+msgstr "v1.2 -> v2.1"
 
 msgid "v2.2+"
-msgstr ""
+msgstr "v2.2+"
+
+#~ msgid "Custom Discarts"
+#~ msgstr "Eig. Diskbilder"
+
+#~ msgid "Full HQ Covers"
+#~ msgstr "Box HQ Cover"
+
+#~ msgid "Full LQ Covers"
+#~ msgstr "Box LQ Cover"
+
+#~ msgid "Original Discarts"
+#~ msgstr "Org. Diskbilder"
 
 #~ msgid "GC Force Interlace"
 #~ msgstr "GC Interlace erzw."

@@ -87,6 +87,7 @@ class CSettings
 		char GameCubePath[100];
 		char GameCubeSDPath[100];
 		char DEVOLoaderPath[100];
+		char CustomBannersURL[100];
 		short videomode;
 		short language;
 		short ocarina;
@@ -117,6 +118,7 @@ class CSettings
 		short gridRows;
 		short autonetwork;
 		short discart;
+		short coversfull;
 		short gamesound;
 		short marknewtitles;
 		short InstallToDir;

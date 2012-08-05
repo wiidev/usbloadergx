@@ -52,6 +52,7 @@ UninstallSM::UninstallSM(struct discHdr * header)
 	Options->SetName(Idx++, "%s", tr( "Reset Playcounter" ));
 	Options->SetName(Idx++, "%s", tr( "Delete Cover Artwork" ));
 	Options->SetName(Idx++, "%s", tr( "Delete Disc Artwork" ));
+	Options->SetName(Idx++, "%s", tr( "Delete Cached Banner" ));
 	Options->SetName(Idx++, "%s", tr( "Delete Cheat TXT" ));
 	Options->SetName(Idx++, "%s", tr( "Delete Cheat GCT" ));
 
@@ -77,6 +78,9 @@ void UninstallSM::SetOptionValues()
 	Options->SetValue(Idx++, " ");
 
 	//! Settings: Delete Disc Artwork
+	Options->SetValue(Idx++, " ");
+
+	//! Settings: Delete Cached Banner
 	Options->SetValue(Idx++, " ");
 
 	//! Settings: Delete Cheat TXT
@@ -156,6 +160,12 @@ int UninstallSM::GetMenuInternal()
 			if (CheckFile(filepath)) remove(filepath);
 			snprintf(filepath, sizeof(filepath), "%s%s.png", Settings.disc_path, GameID);
 			if (CheckFile(filepath)) remove(filepath);
+			snprintf(filepath, sizeof(filepath), "%s%s.bnr", Settings.BNRCachePath, GameID);
+			if (CheckFile(filepath)) remove(filepath);
+			snprintf(filepath, sizeof(filepath), "%s%.4s.bnr", Settings.BNRCachePath, GameID);
+			if (CheckFile(filepath)) remove(filepath);
+			snprintf(filepath, sizeof(filepath), "%s%.3s.bnr", Settings.BNRCachePath, GameID);
+			if (CheckFile(filepath)) remove(filepath);
 			snprintf(filepath, sizeof(filepath), "%s%s.txt", Settings.TxtCheatcodespath, GameID);
 			if (CheckFile(filepath)) remove(filepath);
 			snprintf(filepath, sizeof(filepath), "%s%s.gct", Settings.Cheatcodespath, GameID);
@@ -210,6 +220,24 @@ int UninstallSM::GetMenuInternal()
 		int choice = WindowPrompt(tr( "Delete" ), filepath, tr( "Yes" ), tr( "No" ));
 		if (choice == 1)
 			if (CheckFile(filepath)) remove(filepath);
+	}
+
+	//! Settings: Delete Cached Banner
+	else if (ret == ++Idx)
+	{
+		int choice = WindowPrompt(tr( "Delete" ), tr("Are you sure?"), tr( "Yes" ), tr( "No" ));
+		if (choice != 1)
+			return MENU_NONE;
+
+		char GameID[7];
+		snprintf(GameID, sizeof(GameID), "%s", (char *) DiscHeader->id);
+		char filepath[200];
+		snprintf(filepath, sizeof(filepath), "%s%s.bnr", Settings.BNRCachePath, GameID);
+		if (CheckFile(filepath)) remove(filepath);
+		snprintf(filepath, sizeof(filepath), "%s%.4s.bnr", Settings.BNRCachePath, GameID);
+		if (CheckFile(filepath)) remove(filepath);
+		snprintf(filepath, sizeof(filepath), "%s%.3s.bnr", Settings.BNRCachePath, GameID);
+		if (CheckFile(filepath)) remove(filepath);
 	}
 
 	//! Settings: Delete Cheat TXT

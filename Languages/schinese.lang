@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-22 22:08+0200\n"
+"POT-Creation-Date: 2012-08-05 14:46+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -185,6 +185,9 @@ msgid "Banner Animation"
 msgstr ""
 
 msgid "Banner Animation Settings"
+msgstr ""
+
+msgid "Banner On Channels"
 msgstr ""
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
@@ -479,11 +482,14 @@ msgstr "创建"
 msgid "Credits"
 msgstr "作者信息"
 
-msgid "Custom Discarts"
-msgstr "自定义光盘图片"
+msgid "Custom Banners"
+msgstr ""
 
 msgid "Custom Paths"
 msgstr "自定义路径"
+
+msgid "Customs"
+msgstr ""
 
 msgid "Customs/Original"
 msgstr "自制/官方"
@@ -554,6 +560,9 @@ msgstr "缺省设置"
 msgid "Delete"
 msgstr "删除"
 
+msgid "Delete Cached Banner"
+msgstr ""
+
 msgid "Delete Cheat GCT"
 msgstr "删除GCT金手指文件"
 
@@ -609,6 +618,9 @@ msgid "Disc Insert Detected"
 msgstr ""
 
 msgid "Disc read error."
+msgstr ""
+
+msgid "Discarts"
 msgstr ""
 
 msgid "DiskFlip"
@@ -697,6 +709,9 @@ msgstr "下载完成"
 
 msgid "Downloading 3D Covers"
 msgstr "正在下载3D封面"
+
+msgid "Downloading Custom Banners"
+msgstr ""
 
 msgid "Downloading Flat Covers"
 msgstr "正在下载2D封面"
@@ -974,14 +989,14 @@ msgstr ""
 msgid "Full Cover Path"
 msgstr "完整封面路径"
 
-msgid "Full HQ Covers"
-msgstr "完整高清晰封面"
-
-msgid "Full LQ Covers"
-msgstr "完整低清晰封面"
+msgid "Full Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr "完整菜单"
+
+msgid "Full covers Download"
+msgstr ""
 
 msgid "Full shutdown"
 msgstr "完全关机"
@@ -1104,6 +1119,12 @@ msgid "HOME Menu"
 msgstr "主菜单"
 
 msgid "Hard Drive Settings"
+msgstr ""
+
+msgid "High Quality"
+msgstr ""
+
+msgid "High/Low"
 msgstr ""
 
 msgid "Homebrew Apps Path"
@@ -1291,6 +1312,12 @@ msgstr "循环音乐"
 
 msgid "Loop Sound"
 msgstr "循环声音"
+
+msgid "Low Quality"
+msgstr ""
+
+msgid "Low/High"
+msgstr ""
 
 msgid "MIOS (Default & Customs)"
 msgstr ""
@@ -1502,8 +1529,8 @@ msgstr "仅游戏分区"
 msgid "Only for Install"
 msgstr "仅安装"
 
-msgid "Original Discarts"
-msgstr "官方光盘图片"
+msgid "Original"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "官方/自制"
@@ -2188,6 +2215,18 @@ msgstr ""
 
 msgid "v2.2+"
 msgstr ""
+
+#~ msgid "Custom Discarts"
+#~ msgstr "自定义光盘图片"
+
+#~ msgid "Full HQ Covers"
+#~ msgstr "完整高清晰封面"
+
+#~ msgid "Full LQ Covers"
+#~ msgstr "完整低清晰封面"
+
+#~ msgid "Original Discarts"
+#~ msgstr "官方光盘图片"
 
 #~ msgid "Rename Game on WBFS"
 #~ msgstr "改变 WBFS (硬盘)上的游戏名称"

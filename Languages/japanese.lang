@@ -5,9 +5,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-22 22:08+0200\n"
+"POT-Creation-Date: 2012-08-05 14:46+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
-"Last-Translator: hosigumayuugi\n"
+"Last-Translator: Trickart\n"
 "Language-Team: hosigumayuugi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -137,7 +137,7 @@ msgid "Are you sure you want to import game categories from GameTDB?"
 msgstr "GameTDBからカテゴリをインポートしますか?"
 
 msgid "Are you sure you want to install on SD?"
-msgstr "SDにインストールしますか?"
+msgstr "SDカードにインストールしますか?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "USB Loader GXをロックしますか?"
@@ -186,6 +186,9 @@ msgstr "バナーアニメ"
 
 msgid "Banner Animation Settings"
 msgstr "バナーアニメ設定"
+
+msgid "Banner On Channels"
+msgstr ""
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
 msgstr "バナーグリッドレイアウトはAHBPROTが有効でないといけません!新しいHBCに更新してください"
@@ -361,7 +364,7 @@ msgid "Clock"
 msgstr "時計の表示"
 
 msgid "Clock Scale Factor"
-msgstr "時計のサイズ"
+msgstr "クロックスケーリング"
 
 msgid "Close"
 msgstr "とじる"
@@ -479,29 +482,32 @@ msgstr "作成"
 msgid "Credits"
 msgstr "提供･協力"
 
-msgid "Custom Discarts"
-msgstr "カスタムレーベル"
+msgid "Custom Banners"
+msgstr ""
 
 msgid "Custom Paths"
 msgstr "パスを変更"
+
+msgid "Customs"
+msgstr ""
 
 msgid "Customs/Original"
 msgstr "カスタムを優先"
 
 msgid "DEVO MemCard Emulation"
-msgstr ""
+msgstr "Devoﾒﾓﾘｰｶｰﾄﾞｴﾐｭﾚｰｼｮﾝ"
 
 msgid "DML Auto"
-msgstr ""
+msgstr "DML オート"
 
 msgid "DML Debug"
 msgstr "DML デバッグ"
 
 msgid "DML Force Widescreen"
-msgstr ""
+msgstr "DML 強制ワイドスクリーン"
 
 msgid "DML Installed Version"
-msgstr ""
+msgstr "DMLのバージョン"
 
 msgid "DML LED Activity"
 msgstr "DML LED点灯"
@@ -513,19 +519,19 @@ msgid "DML No Disc"
 msgstr "DML ディスクなし"
 
 msgid "DML No Disc+"
-msgstr ""
+msgstr "DML ディスクなし+"
 
 msgid "DML None"
-msgstr ""
+msgstr "DML なし"
 
 msgid "DML PAD Hook"
 msgstr "DML PADフック"
 
 msgid "DML Progressive Patch"
-msgstr ""
+msgstr "DML プログレッシブパッチ"
 
 msgid "DML Video Mode"
-msgstr ""
+msgstr "DML ビデオモード"
 
 msgid "DOL Path"
 msgstr "代替DOL"
@@ -553,6 +559,9 @@ msgstr "設定を初期化"
 
 msgid "Delete"
 msgstr "削除しますか"
+
+msgid "Delete Cached Banner"
+msgstr ""
 
 msgid "Delete Cheat GCT"
 msgstr "GCTファイルを削除"
@@ -588,10 +597,10 @@ msgid "Developer:"
 msgstr "開発者:"
 
 msgid "Devolution"
-msgstr ""
+msgstr "Devolution"
 
 msgid "Devolution Loader Path"
-msgstr ""
+msgstr "Devolution ローダー"
 
 msgid "Directory does not exist!"
 msgstr "フォルダがありません"
@@ -610,6 +619,9 @@ msgstr "ディスクの挿入を検知しました"
 
 msgid "Disc read error."
 msgstr "読み込みエラー"
+
+msgid "Discarts"
+msgstr ""
 
 msgid "DiskFlip"
 msgstr "ディスクの回転風"
@@ -697,6 +709,9 @@ msgstr "ダウンロードが終了しました"
 
 msgid "Downloading 3D Covers"
 msgstr "両面ｶﾊﾞｰをﾀﾞｳﾝﾛｰﾄﾞ中"
+
+msgid "Downloading Custom Banners"
+msgstr ""
 
 msgid "Downloading Flat Covers"
 msgstr "正面ｶﾊﾞｰをﾀﾞｳﾝﾛｰﾄﾞ中"
@@ -974,14 +989,14 @@ msgstr "フル"
 msgid "Full Cover Path"
 msgstr "フルカバー"
 
-msgid "Full HQ Covers"
-msgstr "フルカバー(精細)"
-
-msgid "Full LQ Covers"
-msgstr "フルカバー(普通)"
+msgid "Full Covers"
+msgstr ""
 
 msgid "Full Menu"
 msgstr "完全なメニュー"
+
+msgid "Full covers Download"
+msgstr ""
 
 msgid "Full shutdown"
 msgstr "シャットダウン"
@@ -1068,7 +1083,7 @@ msgid "GameCube"
 msgstr "ゲームキューブ"
 
 msgid "GameCube Mode"
-msgstr ""
+msgstr "ゲームキューブのモード"
 
 msgid "GameTDB Path"
 msgstr "ゲーム名リスト"
@@ -1105,6 +1120,12 @@ msgstr "HOMEﾎﾞﾀﾝﾒﾆｭｰ"
 
 msgid "Hard Drive Settings"
 msgstr "HDD設定"
+
+msgid "High Quality"
+msgstr ""
+
+msgid "High/Low"
+msgstr ""
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrewアプリ"
@@ -1145,7 +1166,7 @@ msgid "Incoming file %0.2fMB"
 msgstr "ﾌｧｲﾙを受信中 %0.2fMB"
 
 msgid "Individual"
-msgstr ""
+msgstr "それぞれ"
 
 msgid "Initializing Network"
 msgstr "接続中･･･"
@@ -1292,8 +1313,14 @@ msgstr "ループさせる"
 msgid "Loop Sound"
 msgstr "ループさせる"
 
-msgid "MIOS (Default & Customs)"
+msgid "Low Quality"
 msgstr ""
+
+msgid "Low/High"
+msgstr ""
+
+msgid "MIOS (Default & Customs)"
+msgstr "MIOS (デフォルト & カスタム)"
 
 msgid "Main DOL"
 msgstr "main.dol"
@@ -1502,8 +1529,8 @@ msgstr "ゲーム領域のみ"
 msgid "Only for Install"
 msgstr "インストール中のみ"
 
-msgid "Original Discarts"
-msgstr "公式レーベル"
+msgid "Original"
+msgstr ""
 
 msgid "Original/Customs"
 msgstr "公式を優先"
@@ -1833,19 +1860,19 @@ msgid "The .them file was not found in the zip."
 msgstr ".themファイルがzip内にありません"
 
 msgid "The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."
-msgstr ""
+msgstr "強制ワイドスクリーン設定にするにはDIOS MIOS v2.2以上が必要です。 それ以下のバージョンでは無視されます。"
 
 msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
-msgstr ""
+msgstr "このゲームのチートコードはゲームのあるHDDにありません。Ocarinaを使用せずゲームを起動しますか?"
 
 msgid "The GCT Cheatcodes Path must be on SD card. Run the game without Ocarina?"
-msgstr ""
+msgstr "このゲームのチートコードはゲームのあるSDにありません。Ocarinaを使用せずゲームを起動しますか?"
 
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "MiiはエミュNAND(チャンネル)パスに書き出されます。すでに存在するファイルは上書きされます"
 
 msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
-msgstr ""
+msgstr "DIOS MIOS(Lite)はディスクなしの設定になっていません。ディスクを入れてください。"
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "SYSCONFはエミュNAND(チャンネル)パスに書き出されます。すでに存在するファイルは上書きされます"
@@ -1860,7 +1887,7 @@ msgid "The files will be extracted to your emu nand save and channel path. Atten
 msgstr "ファイルはエミュNANDセーブ&チャンネルパスに書き出されます。すでに存在するファイルは上書きされます"
 
 msgid "The game is on SD Card."
-msgstr "ゲームはSDにあります"
+msgstr "ゲームはSDカードにあります。"
 
 msgid "The game is on USB."
 msgstr "ゲームはUSBにあります"
@@ -1912,16 +1939,16 @@ msgid "Titles from GameTDB"
 msgstr "ｹﾞｰﾑ名の日本語化"
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
-msgstr ""
+msgstr "ディスクからゲームキューブのゲームを実行するには、ゲームの設定のMIOSにゲームキューブモードを設定する必要があります。"
 
 msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
-msgstr "GCゲームをDIOS MIOSで起動するにはUSBをFAt32にしてゲームをおいてください"
+msgstr "DIOS MIOSでゲームキューブを実行するにはゲームをUSBのFAT32パーティションにゲームを配置する必要があります。"
 
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
-msgstr "GCゲームをDIOS MIOSで起動するにはパスの設定でゲームキューブをusb:/にする必要があります"
+msgstr "DIOS MIOSでゲームキューブを実行するにはメインゲームキューブパスをUSBのFAT32パーティションに設定する必要があります。"
 
 msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
-msgstr ""
+msgstr "Devotionでゲームキューブを起動するにはloader.binのパスを設定する必要があります。"
 
 msgid "Tooltip Delay"
 msgstr "ﾋﾝﾄﾊﾞﾙｰﾝの遅延"
@@ -1999,7 +2026,7 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "ｲﾝｽﾄｰﾙ済みﾃﾞｨﾚｸﾄﾘにZIPを転送しました"
 
 msgid "Use Game Settings"
-msgstr ""
+msgstr "ゲーム設定を使う"
 
 msgid "Use System Font"
 msgstr "システムフォントを使う"
@@ -2121,13 +2148,13 @@ msgid "You cannot delete this category."
 msgstr "このカテゴリは削除できません"
 
 msgid "You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"
-msgstr "GCゲームをUSBから起動するにはDIOS MIOSが、SDから起動するにはDMLが必要です"
+msgstr "USBからゲームキューブを起動したい場合はDIOSMIOSを、SDから起動したい場合はDMLをインストールしてください。"
 
 msgid "Zoom Duration (Speed)"
 msgstr "ズームの継続(速度)"
 
 msgid "and translators for language files updates"
-msgstr "/ K-M …日本語化"
+msgstr "/ K-M and Trickart …日本語化"
 
 msgid "available"
 msgstr "があります"
@@ -2184,19 +2211,22 @@ msgid "seconds left"
 msgstr "秒で完了"
 
 msgid "v1.2 -> v2.1"
-msgstr ""
+msgstr "v1.2からv2.1"
 
 msgid "v2.2+"
-msgstr ""
+msgstr "v2.2以上"
 
-#~ msgid "GC Force Interlace"
-#~ msgstr "GC ｲﾝﾀｰﾚｰｽ強制"
+#~ msgid "Custom Discarts"
+#~ msgstr "カスタムレーベル"
 
-#~ msgid "Rename Game on WBFS"
-#~ msgstr "WBFS内のゲーム名を変更"
+#~ msgid "Full HQ Covers"
+#~ msgstr "フルカバー(精細)"
 
-#~ msgid "Do you want to discart changes?"
-#~ msgstr "変更を破棄しますか?"
+#~ msgid "Full LQ Covers"
+#~ msgstr "フルカバー(普通)"
+
+#~ msgid "Original Discarts"
+#~ msgstr "公式レーベル"
 
 #~ msgid "Successfully Updated thanks to www.techjawa.com"
 #~ msgstr "更新しました www.techjawa.comに感謝!"
@@ -2291,6 +2321,8 @@ msgstr ""
 #~ msgid "Finishing installation... Ok!"
 #~ msgstr "ｲﾝｽﾄｰﾙの完了...完了しました"
 
+# msgid "GC Force Interlace"
+# msgstr "GC ｲﾝﾀｰﾚｰｽ強制"
 #~ msgid "Installing content... Ok!"
 #~ msgstr "ｺﾝﾃﾝﾂをｲﾝｽﾄｰﾙ...成功！"
 
@@ -2353,3 +2385,8 @@ msgstr ""
 
 #~ msgid "for WiiTDB and hosting covers / disc images"
 #~ msgstr "WiiTDB…様々な画像を配布"
+
+# msgid "Rename Game on WBFS"
+# msgstr "WBFS内のゲーム名を変更"
+#~ msgid "Do you want to discart changes?"
+#~ msgstr "変更を破棄しますか?"
