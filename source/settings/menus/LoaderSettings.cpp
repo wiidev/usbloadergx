@@ -115,13 +115,6 @@ static const char * GCMode[] =
 	trNOOP( "Devolution" ),
 };
 
-static const char * DMLVerText[] =
-{
-	trNOOP( "OFF" ),
-	trNOOP( "v1.2 -> v2.1" ),
-	trNOOP( "v2.2+" ),
-};
-
 static const char * DMLVideoText[] =
 {
 	trNOOP( "DML Auto" ),
@@ -174,7 +167,6 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Debugger Paused Start" ));
 	Options->SetName(Idx++, "%s", tr( "Channel Launcher" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
-	Options->SetName(Idx++, "%s", tr( "DML Installed Version" ));
 	Options->SetName(Idx++, "%s", tr( "DML Video Mode" ));
 	Options->SetName(Idx++, "%s", tr( "DML Progressive Patch" ));
 	Options->SetName(Idx++, "%s", tr( "DML NMM Mode" ));
@@ -183,6 +175,7 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "DML No Disc" ));
 	Options->SetName(Idx++, "%s", tr( "DML No Disc+" ));
 	Options->SetName(Idx++, "%s", tr( "DML Force Widescreen" ));
+	Options->SetName(Idx++, "%s", tr( "DML Japanese Patch" ));
 	Options->SetName(Idx++, "%s", tr( "DML Debug" ));
 	Options->SetName(Idx++, "%s", tr( "DEVO MemCard Emulation" ));
 
@@ -275,9 +268,6 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: GameCube Mode
 	Options->SetValue(Idx++, "%s", tr(GCMode[Settings.GameCubeMode]));
 
-	//! Settings: DML Config Version
-	Options->SetValue(Idx++, "%s", tr(DMLVerText[Settings.DMLConfigVersion]));
-
 	//! Settings: DML Video Mode
 	Options->SetValue(Idx++, "%s", tr(DMLVideoText[Settings.DMLVideo]));
 
@@ -301,6 +291,9 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: DML Force Widescreen
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLWidescreen]));
+
+	//! Settings: DML Japanese Patch
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLJPNPatch]));
 
 	//! Settings: DML Debug
 	Options->SetValue(Idx++, "%s", tr(DMLDebug[Settings.DMLDebug]));
@@ -456,12 +449,6 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.GameCubeMode >= CG_MODE_MAX_CHOICE) Settings.GameCubeMode = 0;
 	}
 
-	//! Settings: DML Config Version
-	else if (ret == ++Idx)
-	{
-		if (++Settings.DMLConfigVersion > DML_VERSION) Settings.DMLConfigVersion = 1;
-	}
-
 	//! Settings: DML Video Mode
 	else if (ret == ++Idx)
 	{
@@ -508,6 +495,12 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.DMLWidescreen >= MAX_ON_OFF) Settings.DMLWidescreen = 0;
+	}
+
+	//! Settings: DML Japanese Patch
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DMLJPNPatch >= MAX_ON_OFF) Settings.DMLJPNPatch = 0;
 	}
 
 	//! Settings: DML Debug

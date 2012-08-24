@@ -42,6 +42,26 @@
 #include "gecko.h"
 #include "lstub.h"
 
+static const char * DMLVersions[] =
+{
+	//! sorted by internal release date. see IosLoader.h
+	"",			// Original MIOS
+	"r51-",		// old DML r51-
+	"r52",		// old DML r52
+	"",			// QuadForce 01
+	"v1.2",		// DML 1.2
+	"v1.4",		// DML 1.4
+	"v1.4b",	// DML 1.4b
+	"v1.5",		// DML 1.5
+	"v2.0.x",	// DM  2.0
+	"v2.1",		// DML 2.1
+	"v2.2.x",	// DM  2.2
+	"v2.2.2+",	// DM  2.2 update 2
+	"v2.2",		// DML 2.2
+	"v2.2.1+",	// DML 2.2.1
+};
+
+
 /****************************************************************************
  * OnScreenNumpad
  *
@@ -239,7 +259,7 @@ void WindowCredits()
 
 	txt[i] = new GuiText(tr( "Credits" ), 28, ( GXColor ) {255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
-	txt[i]->SetPosition(0, 12);
+	txt[i]->SetPosition(0, 8);
 	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 
@@ -257,15 +277,15 @@ void WindowCredits()
 
 	int currentMIOS = IosLoader::GetMIOSInfo();
 	if(currentMIOS == DIOS_MIOS)
-		snprintf(IosInfo, sizeof(IosInfo), "%s + DIOS-MIOS", IosInfo);
+		snprintf(IosInfo, sizeof(IosInfo), "%s %s DIOS-MIOS %s", IosInfo, info ? "+" : "", DMLVersions[IosLoader::GetDMLVersion()]);
 	else if (currentMIOS == DIOS_MIOS_LITE)
-		snprintf(IosInfo, sizeof(IosInfo), "%s + DIOS-MIOS Lite", IosInfo);
+		snprintf(IosInfo, sizeof(IosInfo), "%s %s DIOS-MIOS Lite %s", IosInfo, info ? "+" : "", DMLVersions[IosLoader::GetDMLVersion()]);
 	else if (currentMIOS == QUADFORCE)
-		snprintf(IosInfo, sizeof(IosInfo), "%s + QuadForce", IosInfo);
+		snprintf(IosInfo, sizeof(IosInfo), "%s %s QuadForce", IosInfo, info ? "+" : "");
 
 	txt[i] = new GuiText(SvnRev, 16, ( GXColor ) {255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
-	txt[i]->SetPosition(0, info ? y-10 : y);
+	txt[i]->SetPosition(0, (info || currentMIOS > DEFAULT_MIOS) ? y-10 : y);
 	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 

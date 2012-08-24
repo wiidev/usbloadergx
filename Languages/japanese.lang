@@ -5,9 +5,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-05 14:46+0200\n"
+"POT-Creation-Date: 2012-08-24 18:22+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
-"Last-Translator: Trickart\n"
+"Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -364,7 +364,7 @@ msgid "Clock"
 msgstr "時計の表示"
 
 msgid "Clock Scale Factor"
-msgstr "クロックスケーリング"
+msgstr "時計のサイズ"
 
 msgid "Close"
 msgstr "とじる"
@@ -495,19 +495,19 @@ msgid "Customs/Original"
 msgstr "カスタムを優先"
 
 msgid "DEVO MemCard Emulation"
-msgstr "Devoﾒﾓﾘｰｶｰﾄﾞｴﾐｭﾚｰｼｮﾝ"
+msgstr "DEVOメモカエミュ"
 
 msgid "DML Auto"
-msgstr "DML オート"
+msgstr "DML 自動"
 
 msgid "DML Debug"
 msgstr "DML デバッグ"
 
 msgid "DML Force Widescreen"
-msgstr "DML 強制ワイドスクリーン"
+msgstr "DML 強制ワイド化"
 
-msgid "DML Installed Version"
-msgstr "DMLのバージョン"
+msgid "DML Japanese Patch"
+msgstr ""
 
 msgid "DML LED Activity"
 msgstr "DML LED点灯"
@@ -528,10 +528,10 @@ msgid "DML PAD Hook"
 msgstr "DML PADフック"
 
 msgid "DML Progressive Patch"
-msgstr "DML プログレッシブパッチ"
+msgstr "DML ﾌﾟﾛｸﾞﾚｯｼﾌﾞﾊﾟｯﾁ"
 
 msgid "DML Video Mode"
-msgstr "DML ビデオモード"
+msgstr "DML 映像モード"
 
 msgid "DOL Path"
 msgstr "代替DOL"
@@ -600,7 +600,10 @@ msgid "Devolution"
 msgstr "Devolution"
 
 msgid "Devolution Loader Path"
-msgstr "Devolution ローダー"
+msgstr "Devolutionローダー"
+
+msgid "Devolution's loader.bin file can't be loaded."
+msgstr ""
 
 msgid "Directory does not exist!"
 msgstr "フォルダがありません"
@@ -1083,7 +1086,7 @@ msgid "GameCube"
 msgstr "ゲームキューブ"
 
 msgid "GameCube Mode"
-msgstr "ゲームキューブのモード"
+msgstr "GCモード"
 
 msgid "GameTDB Path"
 msgstr "ゲーム名リスト"
@@ -1166,7 +1169,7 @@ msgid "Incoming file %0.2fMB"
 msgstr "ﾌｧｲﾙを受信中 %0.2fMB"
 
 msgid "Individual"
-msgstr "それぞれ"
+msgstr "個別"
 
 msgid "Initializing Network"
 msgstr "接続中･･･"
@@ -1320,7 +1323,7 @@ msgid "Low/High"
 msgstr ""
 
 msgid "MIOS (Default & Customs)"
-msgstr "MIOS (デフォルト & カスタム)"
+msgstr "MIOS(公式&カスタム)"
 
 msgid "Main DOL"
 msgstr "main.dol"
@@ -1860,19 +1863,22 @@ msgid "The .them file was not found in the zip."
 msgstr ".themファイルがzip内にありません"
 
 msgid "The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."
-msgstr "強制ワイドスクリーン設定にするにはDIOS MIOS v2.2以上が必要です。 それ以下のバージョンでは無視されます。"
+msgstr "強制ワイドスクリーン設定にするにはDIOS MIOS v2.1以上が必要です。 それ以下のバージョンでは無視されます。"
 
 msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
-msgstr "このゲームのチートコードはゲームのあるHDDにありません。Ocarinaを使用せずゲームを起動しますか?"
+msgstr "GCTコードとこのゲームは同じ領域にありません。チートなしで起動しますか?"
 
 msgid "The GCT Cheatcodes Path must be on SD card. Run the game without Ocarina?"
-msgstr "このゲームのチートコードはゲームのあるSDにありません。Ocarinaを使用せずゲームを起動しますか?"
+msgstr "GCTコードのパスはSDカードにないといけません。チートなしで起動しますか?"
 
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "MiiはエミュNAND(チャンネル)パスに書き出されます。すでに存在するファイルは上書きされます"
 
 msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
-msgstr "DIOS MIOS(Lite)はディスクなしの設定になっていません。ディスクを入れてください。"
+msgstr "ディスクなし設定はDIOS MIOS(Lite)では使われていません。ドライブにディスクを入れてください"
+
+msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2 or a newer version. This setting will be ignored."
+msgstr ""
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "SYSCONFはエミュNAND(チャンネル)パスに書き出されます。すでに存在するファイルは上書きされます"
@@ -1887,7 +1893,7 @@ msgid "The files will be extracted to your emu nand save and channel path. Atten
 msgstr "ファイルはエミュNANDセーブ&チャンネルパスに書き出されます。すでに存在するファイルは上書きされます"
 
 msgid "The game is on SD Card."
-msgstr "ゲームはSDカードにあります。"
+msgstr "ゲームはSDカードにあります"
 
 msgid "The game is on USB."
 msgstr "ゲームはUSBにあります"
@@ -1939,16 +1945,16 @@ msgid "Titles from GameTDB"
 msgstr "ｹﾞｰﾑ名の日本語化"
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
-msgstr "ディスクからゲームキューブのゲームを実行するには、ゲームの設定のMIOSにゲームキューブモードを設定する必要があります。"
+msgstr "GCゲームをディスク起動するには設定でGCモードをMIOSにしてください"
 
 msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
-msgstr "DIOS MIOSでゲームキューブを実行するにはゲームをUSBのFAT32パーティションにゲームを配置する必要があります。"
+msgstr "GCゲームをDIOS MIOSで起動するにはUSBをFAt32にしてゲームをおいてください"
 
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
-msgstr "DIOS MIOSでゲームキューブを実行するにはメインゲームキューブパスをUSBのFAT32パーティションに設定する必要があります。"
+msgstr "GCゲームをDIOS MIOSで起動するにはパスの設定でゲームキューブをusb:/にする必要があります"
 
 msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
-msgstr "Devotionでゲームキューブを起動するにはloader.binのパスを設定する必要があります。"
+msgstr "GCゲームをDevolutionで起動するにはloader.binがDevolutionのパスにある必要があります"
 
 msgid "Tooltip Delay"
 msgstr "ﾋﾝﾄﾊﾞﾙｰﾝの遅延"
@@ -2147,14 +2153,17 @@ msgstr "領域を選択･初期化したりチャンネルリストモードを
 msgid "You cannot delete this category."
 msgstr "このカテゴリは削除できません"
 
-msgid "You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"
-msgstr "USBからゲームキューブを起動したい場合はDIOSMIOSを、SDから起動したい場合はDMLをインストールしてください。"
+msgid "You need to install DIOS MIOS Lite v1.2 or a newer version."
+msgstr ""
+
+msgid "You need to install Devolution or DIOS MIOS (Lite) to launch GameCube games from USB or SD card"
+msgstr ""
 
 msgid "Zoom Duration (Speed)"
 msgstr "ズームの継続(速度)"
 
 msgid "and translators for language files updates"
-msgstr "/ K-M and Trickart …日本語化"
+msgstr "/ K-M & Trickart…日本語化"
 
 msgid "available"
 msgstr "があります"
@@ -2210,14 +2219,11 @@ msgstr "中"
 msgid "seconds left"
 msgstr "秒で完了"
 
-msgid "v1.2 -> v2.1"
-msgstr "v1.2からv2.1"
-
-msgid "v2.2+"
-msgstr "v2.2以上"
-
 #~ msgid "Custom Discarts"
 #~ msgstr "カスタムレーベル"
+
+#~ msgid "DML Installed Version"
+#~ msgstr "DMLのバージョン"
 
 #~ msgid "Full HQ Covers"
 #~ msgstr "フルカバー(精細)"
@@ -2227,6 +2233,27 @@ msgstr "v2.2以上"
 
 #~ msgid "Original Discarts"
 #~ msgstr "公式レーベル"
+
+#~ msgid "The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."
+#~ msgstr "強制ワイド化設定はDIOS MIOS v2.2以降が必要です。この設定は無視されます"
+
+#~ msgid "You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"
+#~ msgstr "GCゲームをUSBから起動するにはDIOS MIOSが、SDから起動するにはDMLが必要です"
+
+#~ msgid "v1.2 -> v2.1"
+#~ msgstr "v1.2 ～ v2.1"
+
+#~ msgid "v2.2+"
+#~ msgstr "v2.2以降"
+
+#~ msgid "GC Force Interlace"
+#~ msgstr "GC ｲﾝﾀｰﾚｰｽ強制"
+
+#~ msgid "Rename Game on WBFS"
+#~ msgstr "WBFS内のゲーム名を変更"
+
+#~ msgid "Do you want to discart changes?"
+#~ msgstr "変更を破棄しますか?"
 
 #~ msgid "Successfully Updated thanks to www.techjawa.com"
 #~ msgstr "更新しました www.techjawa.comに感謝!"
@@ -2321,8 +2348,6 @@ msgstr "v2.2以上"
 #~ msgid "Finishing installation... Ok!"
 #~ msgstr "ｲﾝｽﾄｰﾙの完了...完了しました"
 
-# msgid "GC Force Interlace"
-# msgstr "GC ｲﾝﾀｰﾚｰｽ強制"
 #~ msgid "Installing content... Ok!"
 #~ msgstr "ｺﾝﾃﾝﾂをｲﾝｽﾄｰﾙ...成功！"
 
@@ -2385,8 +2410,3 @@ msgstr "v2.2以上"
 
 #~ msgid "for WiiTDB and hosting covers / disc images"
 #~ msgstr "WiiTDB…様々な画像を配布"
-
-# msgid "Rename Game on WBFS"
-# msgstr "WBFS内のゲーム名を変更"
-#~ msgid "Do you want to discart changes?"
-#~ msgstr "変更を破棄しますか?"

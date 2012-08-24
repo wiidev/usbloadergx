@@ -31,6 +31,8 @@ class GameBooter
 		static int SetupDisc(struct discHdr &gameHeader);
 		static u32 BootPartition(char * dolpath, u8 videoselected, u8 alternatedol, u32 alternatedoloffset);
 		static void ShutDownDevices(int gameUSBPort);
+		static int BootDIOSMIOS(struct discHdr *gameHdr);
+		static int BootDevolution(struct discHdr *gameHdr);
 };
 
 #endif

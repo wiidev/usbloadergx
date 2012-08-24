@@ -171,7 +171,6 @@ class CSettings
 		float BannerProjectionHeight;
 		float GCBannerScale;
 		short GameCubeMode;
-		short DMLConfigVersion;
 		short DMLVideo;
 		short DMLProgPatch;
 		short DMLNMM;
@@ -180,6 +179,7 @@ class CSettings
 		short DMLNoDisc;
 		short DMLNoDisc2;
 		short DMLWidescreen;
+		short DMLJPNPatch;
 		short DMLDebug;
 		short DEVOMCEmulation;
 		short GCInstallCompressed;

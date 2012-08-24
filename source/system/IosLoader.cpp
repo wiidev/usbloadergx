@@ -29,6 +29,7 @@
 static int currentIOS = -1;
 static iosinfo_t *currentIOSInfo = NULL;
 static int currentMIOS = -1;
+static int currentDMLVersion = -1;
 
 /******************************************************************************
  * Public Methods:
@@ -214,6 +215,8 @@ u8 IosLoader::GetMIOSInfo()
 	u8 *appfile = NULL;
 	u32 filesize = 0;
 
+	// "title/00000001/00000101/content/0000000b.app" contains DM/DML version and built date, but is not always accurate.
+	// so we are looking inside 0000000c.app to find the correct version.
 	NandTitle::LoadFileFromNand("/title/00000001/00000101/content/0000000c.app", &appfile, &filesize);
 
 	if(appfile)
@@ -225,16 +228,22 @@ u8 IosLoader::GetMIOSInfo()
 				if((*(u32*)(appfile+i+10)) == 'Lite')
 				{
 					currentMIOS = DIOS_MIOS_LITE;
+					gprintf("DIOS MIOS Lite ");
+					currentDMLVersion = GetDMLVersion((char*)(appfile+i+31));
 				}
 				else
 				{
 					currentMIOS = DIOS_MIOS;
+					gprintf("DIOS MIOS ");
+					currentDMLVersion = GetDMLVersion((char*)(appfile+i+27));
 				}
 				break;
 			}
 			else if((*(u32*)(appfile+i)) == 'Quad' && (*(u32*)(appfile+i+4)) == 'Forc')
 			{
 				currentMIOS = QUADFORCE;
+				gprintf("QuadForce v0.1");
+				currentDMLVersion = DML_VERSION_QUAD_0_1;
 				break;
 			}
 		}
@@ -242,6 +251,76 @@ u8 IosLoader::GetMIOSInfo()
 	}
 
 	return currentMIOS;
+}
+
+
+u8 IosLoader::GetDMLVersion(char* releaseDate)
+{
+	if(currentDMLVersion > -1)
+		return currentDMLVersion;
+
+	currentDMLVersion = DML_VERSION_MIOS;
+
+	// Older versions - not working with USBloaderGX
+	if(strncmp(releaseDate, "t: ", 3) == 0)
+	{
+		currentMIOS = DEFAULT_MIOS;
+		return currentDMLVersion;
+	}
+
+	struct tm time;
+
+	// Timestamp of DML r52 (Mar 7 2012 19:36:06)
+	const time_t dml_r52_time = 1331148966;
+
+	// Timestamp of DML 1.2 (Apr 24 2012 19:44:08)
+	const time_t dml_1_2_time = 1335289448;
+
+	// Timestamp of DML 1.4b (May  7 2012 21:12:47)
+	const time_t dml_1_4b_time = 1336417967;
+
+	// Timestamp of DML 1.5 (Jun 14 2012 00:05:09)
+	const time_t dml_1_5_time = 1339625109;
+
+	// Timestamp of DM 2.0 (Jun 23 2012 19:43:21)
+	const time_t dm_2_0_time = 1340473401;
+
+	// Timestamp of DM 2.1 (Jul 17 2012 11:25:35)
+	const time_t dm_2_1_time = 1342517135;
+
+	// Timestamp of DM 2.2 initial release (Jul 18 2012 16:57:47)
+	const time_t dm_2_2_time = 1342623467;
+
+	// Timestamp of DM 2.2 update2 (Jul 20 2012 14:49:47)
+	const time_t dm_2_2_2_time = 1342788587;
+
+	// Timestamp of DML 2.2 initial release (Aug  6 2012 15:19:17)
+	const time_t dml_2_2_time = 1344259157;
+
+	// Timestamp of DML 2.2 update1 (Aug 13 2012 00:12:46)
+	const time_t dml_2_2_1_time = 1344809566;
+
+	// releaseDate format: Apr 24 2012 19:44:08
+	gprintf("built on %s\n", releaseDate);
+
+	strptime(releaseDate, "%b %d %Y %H:%M:%S", &time);
+	time_t unixTime = mktime(&time);
+
+	if(difftime(unixTime, dml_2_2_1_time) >= 0) 	currentDMLVersion = DML_VERSION_DML_2_2_1;
+	else if(difftime(unixTime, dml_2_2_time) >= 0) 	currentDMLVersion = DML_VERSION_DML_2_2;
+	else if(difftime(unixTime, dm_2_2_2_time) >= 0) currentDMLVersion = DML_VERSION_DM_2_2_2;
+	else if(difftime(unixTime, dm_2_2_time) >= 0) 	currentDMLVersion = DML_VERSION_DM_2_2;
+	else if(difftime(unixTime, dm_2_1_time) >= 0) 	currentDMLVersion = DML_VERSION_DM_2_1;
+	else if(difftime(unixTime, dm_2_0_time) >= 0) 	currentDMLVersion = DML_VERSION_DM_2_0;
+	else if(difftime(unixTime, dml_1_5_time) >= 0)	currentDMLVersion = DML_VERSION_DML_1_5;
+	else if(difftime(unixTime, dml_1_4b_time) >= 0)	currentDMLVersion = DML_VERSION_DML_1_4b;
+	else if(difftime(unixTime, dml_1_2_time) > 0)	currentDMLVersion = DML_VERSION_DML_1_4;
+	else if(difftime(unixTime, dml_1_2_time) == 0)	currentDMLVersion = DML_VERSION_DML_1_2;
+	else if (difftime(unixTime, dml_r52_time) >= 0) currentDMLVersion = DML_VERSION_R52;
+	else											currentDMLVersion = DML_VERSION_R51;
+
+	return currentDMLVersion;
+
 }
 
 /******************************************************************************

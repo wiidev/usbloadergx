@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-05 14:46+0200\n"
+"POT-Creation-Date: 2012-08-24 18:22+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -506,8 +506,8 @@ msgstr "DML Debug"
 msgid "DML Force Widescreen"
 msgstr "DML Breitbild erzw."
 
-msgid "DML Installed Version"
-msgstr "Installierte DML Version"
+msgid "DML Japanese Patch"
+msgstr ""
 
 msgid "DML LED Activity"
 msgstr "DML LED Aktivität"
@@ -601,6 +601,9 @@ msgstr "Devolution"
 
 msgid "Devolution Loader Path"
 msgstr "Devolution Loader"
+
+msgid "Devolution's loader.bin file can't be loaded."
+msgstr ""
 
 msgid "Directory does not exist!"
 msgstr "Verzeichnis existiert nicht!"
@@ -1859,8 +1862,8 @@ msgstr "TXT Cheatdateien"
 msgid "The .them file was not found in the zip."
 msgstr "Die .them Datei wurde in der zip nicht gefunden."
 
-msgid "The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."
-msgstr "Die Einstellung -Breitbild erzw.- erforder DIOS MIOS v2.2 und neuer. Diese Einstellungen wird ignoriert."
+msgid "The Force Widescreen setting requires DIOS MIOS v2.1 or more. This setting will be ignored."
+msgstr ""
 
 msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
 msgstr "Der GCT Cheatcodes Pfad und dieses Spiel sind nicht auf der selben Partition. Spiel ohne Ocarina starten?"
@@ -1873,6 +1876,9 @@ msgstr "Die Miis werden in den EmuNand Pfad und EmuNand Kanal-Pfad kopiert. Acht
 
 msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
 msgstr "Die -keine Disk Einstellung- wird nicht mehr unterstützt von DIOS MIOS (Lite). Jetzt muss eine Disk im Laufwerk sein."
+
+msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2 or a newer version. This setting will be ignored."
+msgstr ""
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "Die SYSCONF wird in den EmuNand Pfad und EmuNand Kanal-Pfad kopiert. Achtung: Alle vorhandenen Dateien werden überschrieben."
@@ -2147,8 +2153,11 @@ msgstr "Du kannst eine Partition auswählen oder formatieren oder den Kanal-Load
 msgid "You cannot delete this category."
 msgstr "Kategorie kann nicht gelöscht werden."
 
-msgid "You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"
-msgstr "Um GameCube Spiele von USB abzuspielen, wird DIOS MIOS wird benötigt. Um sie von der SD-Karte abzuspielen, wird DIOS MIOS Lite benötigt."
+msgid "You need to install DIOS MIOS Lite v1.2 or a newer version."
+msgstr ""
+
+msgid "You need to install Devolution or DIOS MIOS (Lite) to launch GameCube games from USB or SD card"
+msgstr ""
 
 msgid "Zoom Duration (Speed)"
 msgstr "Zoom Dauer"
@@ -2210,11 +2219,20 @@ msgstr "von"
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
 
-msgid "v1.2 -> v2.1"
-msgstr "v1.2 -> v2.1"
+#~ msgid "DML Installed Version"
+#~ msgstr "Installierte DML Version"
 
-msgid "v2.2+"
-msgstr "v2.2+"
+#~ msgid "The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."
+#~ msgstr "Die Einstellung -Breitbild erzw.- erforder DIOS MIOS v2.2 und neuer. Diese Einstellungen wird ignoriert."
+
+#~ msgid "You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"
+#~ msgstr "Um GameCube Spiele von USB abzuspielen, wird DIOS MIOS wird benötigt. Um sie von der SD-Karte abzuspielen, wird DIOS MIOS Lite benötigt."
+
+#~ msgid "v1.2 -> v2.1"
+#~ msgstr "v1.2 -> v2.1"
+
+#~ msgid "v2.2+"
+#~ msgstr "v2.2+"
 
 #~ msgid "Custom Discarts"
 #~ msgstr "Eig. Diskbilder"

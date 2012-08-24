@@ -38,6 +38,7 @@ typedef struct _GameCFG
 	short DMLNoDisc;
 	short DMLNoDisc2;
 	short DMLWidescreen;
+	short DMLJPNPatch;
 	short DMLDebug;
 	short DEVOMCEmulation;
 	short Locked;
@@ -73,6 +74,7 @@ typedef struct _GameCFG
 		this->DMLNoDisc = game.DMLNoDisc;
 		this->DMLNoDisc2 = game.DMLNoDisc2;
 		this->DMLWidescreen = game.DMLWidescreen;
+		this->DMLJPNPatch = game.DMLJPNPatch;
 		this->DMLDebug = game.DMLDebug;
 		this->DEVOMCEmulation = game.DEVOMCEmulation;
 		this->Locked = game.Locked;

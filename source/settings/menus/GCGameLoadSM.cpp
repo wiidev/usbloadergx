@@ -159,17 +159,21 @@ void GCGameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Ocarina" ));
 	Options->SetName(Idx++, "%s", tr( "Parental Control" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
-	Options->SetName(Idx++, "%s", tr( "DML Video Mode" ));
-	Options->SetName(Idx++, "%s", tr( "DML Progressive Patch" ));
-	Options->SetName(Idx++, "%s", tr( "DML NMM Mode" ));
-	Options->SetName(Idx++, "%s", tr( "DML LED Activity" ));
-	Options->SetName(Idx++, "%s", tr( "DML PAD Hook" ));
-	Options->SetName(Idx++, "%s", tr( "DML No Disc" ));
-	if(Settings.DMLConfigVersion > 1)
-		Options->SetName(Idx++, "%s", tr( "DML No Disc+" ));
-	if(Settings.DMLConfigVersion > 1)
-		Options->SetName(Idx++, "%s", tr( "DML Force Widescreen" ));
-	Options->SetName(Idx++, "%s", tr( "DML Debug" ));
+	if(IosLoader::GetMIOSInfo() >DEFAULT_MIOS)
+	{
+		Options->SetName(Idx++, "%s", tr( "DML Video Mode" ));
+		Options->SetName(Idx++, "%s", tr( "DML Progressive Patch" ));
+		Options->SetName(Idx++, "%s", tr( "DML NMM Mode" ));
+		Options->SetName(Idx++, "%s", tr( "DML LED Activity" ));
+		Options->SetName(Idx++, "%s", tr( "DML PAD Hook" ));
+		Options->SetName(Idx++, "%s", tr( "DML No Disc" ));
+		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_2_2)
+			Options->SetName(Idx++, "%s", tr( "DML No Disc+" ));
+		if(IosLoader::GetDMLVersion() > DML_VERSION_DM_2_1)
+			Options->SetName(Idx++, "%s", tr( "DML Force Widescreen" ));
+		Options->SetName(Idx++, "%s", tr( "DML Japanese Patch" ));
+		Options->SetName(Idx++, "%s", tr( "DML Debug" ));
+	}
 	Options->SetName(Idx++, "%s", tr( "DEVO MemCard Emulation" ));
 }
 
@@ -208,67 +212,76 @@ void GCGameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(GCMode[GameConfig.GameCubeMode]));
-
-	//! Settings: DML Video Mode
-	if(GameConfig.DMLVideo == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(DMLVideoText[GameConfig.DMLVideo]));
-
-	//! Settings: DML Progressive Patch
-	if(GameConfig.DMLProgPatch == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLProgPatch]));
-
-	//! Settings: DML NMM Mode
-	if(GameConfig.DMLNMM == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(DMLNMMMode[GameConfig.DMLNMM]));
-
-	//! Settings: DML LED Activity
-	if(GameConfig.DMLActivityLED == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLActivityLED]));
-
-	//! Settings: DML PAD Hook
-	if(GameConfig.DMLPADHOOK == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLPADHOOK]));
-
-	//! Settings: DML No Disc
-	if(GameConfig.DMLNoDisc == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLNoDisc]));
-
-	//! Settings: DML Extended No Disc
-	if(Settings.DMLConfigVersion > 1)
+	
+	if(IosLoader::GetMIOSInfo() >DEFAULT_MIOS)
 	{
-		if(GameConfig.DMLNoDisc2 == INHERIT)
+		//! Settings: DML Video Mode
+		if(GameConfig.DMLVideo == INHERIT)
 			Options->SetValue(Idx++, tr("Use global"));
 		else
-			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLNoDisc2]));
-	}
+			Options->SetValue(Idx++, "%s", tr(DMLVideoText[GameConfig.DMLVideo]));
 
-	//! Settings: DML Force Widescreen
-	if(Settings.DMLConfigVersion > 1)
-	{
-		if(GameConfig.DMLWidescreen == INHERIT)
+		//! Settings: DML Progressive Patch
+		if(GameConfig.DMLProgPatch == INHERIT)
 			Options->SetValue(Idx++, tr("Use global"));
 		else
-			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLWidescreen]));
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLProgPatch]));
+
+		//! Settings: DML NMM Mode
+		if(GameConfig.DMLNMM == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(DMLNMMMode[GameConfig.DMLNMM]));
+
+		//! Settings: DML LED Activity
+		if(GameConfig.DMLActivityLED == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLActivityLED]));
+
+		//! Settings: DML PAD Hook
+		if(GameConfig.DMLPADHOOK == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLPADHOOK]));
+
+		//! Settings: DML No Disc
+		if(GameConfig.DMLNoDisc == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLNoDisc]));
+
+		//! Settings: DML Extended No Disc
+		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_2_2)
+		{
+			if(GameConfig.DMLNoDisc2 == INHERIT)
+				Options->SetValue(Idx++, tr("Use global"));
+			else
+				Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLNoDisc2]));
+		}
+
+		//! Settings: DML Force Widescreen
+		if(IosLoader::GetDMLVersion() > DML_VERSION_DM_2_1)
+		{
+			if(GameConfig.DMLWidescreen == INHERIT)
+				Options->SetValue(Idx++, tr("Use global"));
+			else
+				Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLWidescreen]));
+		}
+
+		//! Settings: DML Japanese Patch
+		if(GameConfig.DMLJPNPatch == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLJPNPatch]));
+
+		//! Settings: DML Debug
+		if(GameConfig.DMLDebug == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(DMLDebug[GameConfig.DMLDebug]));
 	}
-
-	//! Settings: DML Debug
-	if(GameConfig.DMLDebug == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(DMLDebug[GameConfig.DMLDebug]));
-
+	
 	//! Settings: DEVO Memory Card Emulation
 	if(GameConfig.DEVOMCEmulation == INHERIT)
 		Options->SetValue(Idx++, tr("Use global"));
@@ -344,59 +357,65 @@ int GCGameLoadSM::GetMenuInternal()
 	}
 
 	//! Settings: DML Video Mode
-	else if (ret == ++Idx)
+	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
 	{
 		if (++GameConfig.DMLVideo >= DML_VIDEO_MAX_CHOICE) GameConfig.DMLVideo = INHERIT;
 	}
 
 	//! Settings: DML Progressive Patch
-	else if (ret == ++Idx)
+	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
 	{
 		if (++GameConfig.DMLProgPatch >= MAX_ON_OFF) GameConfig.DMLProgPatch = INHERIT;
 	}
 
 	//! Settings: DML NMM Mode
-	else if (ret == ++Idx)
+	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
 	{
 		if (++GameConfig.DMLNMM >= 3) GameConfig.DMLNMM = INHERIT;
 	}
 
 	//! Settings: DML LED Activity
-	else if (ret == ++Idx)
+	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
 	{
 		if (++GameConfig.DMLActivityLED >= MAX_ON_OFF) GameConfig.DMLActivityLED = INHERIT;
 	}
 
 	//! Settings: DML PAD Hook
-	else if (ret == ++Idx)
+	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
 	{
 		if (++GameConfig.DMLPADHOOK >= MAX_ON_OFF) GameConfig.DMLPADHOOK = INHERIT;
 	}
 
 	//! Settings: DML No Disc
-	else if (ret == ++Idx)
+	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
 	{
 		if (++GameConfig.DMLNoDisc >= MAX_ON_OFF) GameConfig.DMLNoDisc = INHERIT;
 	}
 
 	//! Settings: DML Extended No Disc
-	else if (Settings.DMLConfigVersion > 1 && ret == ++Idx)
+	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_2_2 && ret == ++Idx)
 	{
 		if (++GameConfig.DMLNoDisc2 >= MAX_ON_OFF) GameConfig.DMLNoDisc2 = INHERIT;
 	}
 
 	//! Settings: DML Force Widescreen
-	else if (Settings.DMLConfigVersion > 1 && ret == ++Idx)
+	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_1 && ret == ++Idx)
 	{
 		if (++GameConfig.DMLWidescreen >= MAX_ON_OFF) GameConfig.DMLWidescreen = INHERIT;
 	}
 
+	//! Settings: DML Japanese Patch
+	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
+	{
+		if (++GameConfig.DMLJPNPatch >= 3) GameConfig.DMLJPNPatch = INHERIT;
+	}
+	
 	//! Settings: DML Debug
-	else if (ret == ++Idx)
+	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
 	{
 		if (++GameConfig.DMLDebug >= 3) GameConfig.DMLDebug = INHERIT;
 	}
-
+	
 	//! Settings: DEVO Memory Card Emulation
 	else if (ret == ++Idx)
 	{

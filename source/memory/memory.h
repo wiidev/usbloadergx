@@ -26,6 +26,7 @@ extern "C"
 #define	 CPU_Speed		((vu32*) 0x800000FC)
 #define	 Online_Check	((vu32*) 0x80003180)
 #define	 GameID_Address	((vu32*) 0x80003184)
+#define	 HW_PPCSPEED	((vu32*) 0xCD800018)
 
 #define allocate_memory(size) memalign(32, (size+31)&(~31))
 

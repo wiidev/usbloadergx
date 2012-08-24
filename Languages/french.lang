@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1201
+# French.lang - r1202
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-05 14:46+0200\n"
+"POT-Creation-Date: 2012-08-24 18:22+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -506,8 +506,8 @@ msgstr "DML Débug"
 msgid "DML Force Widescreen"
 msgstr "DML Forcer 16:9"
 
-msgid "DML Installed Version"
-msgstr "DML Version installée"
+msgid "DML Japanese Patch"
+msgstr "DML Patch japonais"
 
 msgid "DML LED Activity"
 msgstr "DML LED detect. activité"
@@ -601,6 +601,9 @@ msgstr ""
 
 msgid "Devolution Loader Path"
 msgstr "Dossier Loader Devolution"
+
+msgid "Devolution's loader.bin file can't be loaded."
+msgstr "Le fichier loader.bin de Devolution n'a pu être chargé."
 
 msgid "Directory does not exist!"
 msgstr "Répertoire inexistant!"
@@ -1859,8 +1862,8 @@ msgstr "Dossier TXT de triches"
 msgid "The .them file was not found in the zip."
 msgstr "Fichier .them non trouvé dans le zip."
 
-msgid "The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."
-msgstr "Le paramètre DML Forcer 16:9 nécessite DIOS MIOS v2.2 ou supérieure. Ce paramètre sera ignoré."
+msgid "The Force Widescreen setting requires DIOS MIOS v2.1 or more. This setting will be ignored."
+msgstr "Le paramètre DML Forcer 16:9 nécessite DIOS MIOS v2.1 ou supérieure. Ce paramètre sera ignoré."
 
 msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
 msgstr "The dossier GCT de triche et ce jeu ne sont pas sur la même partition. Lancer le jeu sans Ocarina ?"
@@ -1873,6 +1876,9 @@ msgstr "Les Miis seront extraits vers vos dossiers d'Émulation Nand et d'Émula
 
 msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
 msgstr "L'option No Disc n'est plus utilisée par DIOS MIOS (Lite). Vous devez désormais placer un disque dans votre lecteur."
+
+msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2 or a newer version. This setting will be ignored."
+msgstr ""
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "Le fichier SYSCONF sera extrait vers vos dossiers d'Émulation Nand et d'Émulation Nand Chaînes. Attention: Le fichier existant sera remplacé."
@@ -2147,8 +2153,11 @@ msgstr "Vous pouvez choisir ou formater une partition, ou passer le loader en mo
 msgid "You cannot delete this category."
 msgstr "Vous ne pouvez pas supprimer cette catégorie."
 
-msgid "You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"
-msgstr "Vous devez installer DIOS MIOS pour lancer les jeux GameCube sur USB ou DIOS MIOS Lite pour ceux sur carte SD."
+msgid "You need to install DIOS MIOS Lite v1.2 or a newer version."
+msgstr "Vous devez installer DIOS MIOS Lite v1.2 ou une version plus récente."
+
+msgid "You need to install Devolution or DIOS MIOS (Lite) to launch GameCube games from USB or SD card"
+msgstr "Vous devez installer Devolution ou DIOS MIOS (Lite) pour lancer les jeux GameCube sur USB ou carte SD."
 
 msgid "Zoom Duration (Speed)"
 msgstr "Durée du zoom (Vitesse)"
@@ -2210,11 +2219,14 @@ msgstr "sur"
 msgid "seconds left"
 msgstr "secondes restantes"
 
-msgid "v1.2 -> v2.1"
-msgstr ""
+#~ msgid "DML Installed Version"
+#~ msgstr "DML Version installée"
 
-msgid "v2.2+"
-msgstr ""
+#~ msgid "The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."
+#~ msgstr "Le paramètre DML Forcer 16:9 nécessite DIOS MIOS v2.2 ou supérieure. Ce paramètre sera ignoré."
+
+#~ msgid "You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"
+#~ msgstr "Vous devez installer DIOS MIOS pour lancer les jeux GameCube sur USB ou DIOS MIOS Lite pour ceux sur carte SD."
 
 #~ msgid "Custom Discarts"
 #~ msgstr "Labels DVD persos"

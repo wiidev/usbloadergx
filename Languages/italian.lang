@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-05 14:46+0200\n"
+"POT-Creation-Date: 2012-08-24 18:22+0200\n"
 "PO-Revision-Date: 2011-09-11 12:19+0100\n"
 "Last-Translator: xFede\n"
 "Language-Team: xFede (fedeanto11@gmail.com)\n"
@@ -188,7 +188,7 @@ msgid "Banner Animation Settings"
 msgstr "Impostazioni animazione banner"
 
 msgid "Banner On Channels"
-msgstr ""
+msgstr "Banner nei canali"
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
 msgstr "La visualizzazione con i banner è disponibile soltanto con l'AHBPROT! Installa l'ultimo HBC."
@@ -483,13 +483,13 @@ msgid "Credits"
 msgstr "Ringraziamenti"
 
 msgid "Custom Banners"
-msgstr ""
+msgstr "Banner personalizzati"
 
 msgid "Custom Paths"
 msgstr "Percorsi personalizzati"
 
 msgid "Customs"
-msgstr ""
+msgstr "Personalizzati"
 
 msgid "Customs/Original"
 msgstr "Modific./origin."
@@ -506,8 +506,8 @@ msgstr "Debug DML"
 msgid "DML Force Widescreen"
 msgstr "Forza widescreen DML"
 
-msgid "DML Installed Version"
-msgstr "Versione installata DML"
+msgid "DML Japanese Patch"
+msgstr ""
 
 msgid "DML LED Activity"
 msgstr "Led attività DML"
@@ -561,7 +561,7 @@ msgid "Delete"
 msgstr "Elimina"
 
 msgid "Delete Cached Banner"
-msgstr ""
+msgstr "Elimina banner cachato"
 
 msgid "Delete Cheat GCT"
 msgstr "Elimina trucchi GCT"
@@ -602,14 +602,17 @@ msgstr "Devolution"
 msgid "Devolution Loader Path"
 msgstr "Percorso loader devolution"
 
+msgid "Devolution's loader.bin file can't be loaded."
+msgstr ""
+
 msgid "Directory does not exist!"
 msgstr "Il percorso non esiste!"
 
 msgid "Disc Artwork Download"
-msgstr "Scarica imm. disco"
+msgstr "Scarica disco"
 
 msgid "Disc Artwork Path"
-msgstr "Percorso imm. disco"
+msgstr "Percorso dischi"
 
 msgid "Disc Default"
 msgstr "Da disco"
@@ -621,7 +624,7 @@ msgid "Disc read error."
 msgstr "Errore durante la lettura del disco."
 
 msgid "Discarts"
-msgstr ""
+msgstr "Dischi"
 
 msgid "DiskFlip"
 msgstr "Gira i dischi"
@@ -711,7 +714,7 @@ msgid "Downloading 3D Covers"
 msgstr "Scaricando copertine 3D..."
 
 msgid "Downloading Custom Banners"
-msgstr ""
+msgstr "Scaricando banner personalizzati..."
 
 msgid "Downloading Flat Covers"
 msgstr "Scaricando copertine 2D..."
@@ -990,13 +993,13 @@ msgid "Full Cover Path"
 msgstr "Percorso cop. complete"
 
 msgid "Full Covers"
-msgstr ""
+msgstr "Copertine complete"
 
 msgid "Full Menu"
 msgstr "Menu completo"
 
 msgid "Full covers Download"
-msgstr ""
+msgstr "Scarica cop. complete"
 
 msgid "Full shutdown"
 msgstr "Spegnimento completo"
@@ -1122,10 +1125,10 @@ msgid "Hard Drive Settings"
 msgstr "Impostazioni disco rigido"
 
 msgid "High Quality"
-msgstr ""
+msgstr "Alta qualità"
 
 msgid "High/Low"
-msgstr ""
+msgstr "Alta/Bassa"
 
 msgid "Homebrew Apps Path"
 msgstr "Percorso homebrew"
@@ -1314,10 +1317,10 @@ msgid "Loop Sound"
 msgstr "Suono ripetuto"
 
 msgid "Low Quality"
-msgstr ""
+msgstr "Bassa qualità"
 
 msgid "Low/High"
-msgstr ""
+msgstr "Bassa/Alta"
 
 msgid "MIOS (Default & Customs)"
 msgstr "MIOS (Predefinito e personalizzati)"
@@ -1458,7 +1461,7 @@ msgid "Not Initialized"
 msgstr "Non Inizializzato"
 
 msgid "Not a Wii or a Game Cube Disc"
-msgstr "Il disco non è per Wii/GameCube "
+msgstr "Il disco non è per Wii/GameCube"
 
 msgid "Not a valid URL"
 msgstr "Non è una URL valida"
@@ -1530,7 +1533,7 @@ msgid "Only for Install"
 msgstr "Solo per Installare"
 
 msgid "Original"
-msgstr ""
+msgstr "Originale"
 
 msgid "Original/Customs"
 msgstr "Origin./Modific."
@@ -1859,8 +1862,8 @@ msgstr "Percorso trucchi TXT"
 msgid "The .them file was not found in the zip."
 msgstr "Il file .them non è stato trovato nel zip."
 
-msgid "The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."
-msgstr "L'impostazione forza widescreen richiedere DIOS MIOS v2.2 o superiore. L'impostazione verrà ignorata."
+msgid "The Force Widescreen setting requires DIOS MIOS v2.1 or more. This setting will be ignored."
+msgstr "L'impostazione forza widescreen richiedere DIOS MIOS v2.1 o superiore. L'impostazione verrà ignorata."
 
 msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
 msgstr "Il percorso dei trucchi GCT e qyesto gioco non sono sulla stessa partizione. Avviare il gioco senza i trucchi?"
@@ -1873,6 +1876,9 @@ msgstr "I Mii verranno estratti nei percorsi della NAND emulata e dei canali NAN
 
 msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
 msgstr "L'impostazione no-disco non è più utilizzata da DIOS MIOS (Lite). Adesso devi avere un disco nel lettore."
+
+msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2 or a newer version. This setting will be ignored."
+msgstr ""
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "Il file SYSCONF verranno estratti nei percorsi della NAND emulata e dei canali NAND emulati. Attenzione: Tutti i file esistenti saranno sovrascritti."
@@ -2147,8 +2153,11 @@ msgstr "Puoi selezionare,formattare una partizione o usare la Modalità Canali."
 msgid "You cannot delete this category."
 msgstr "Non puoi eliminare questa categoria."
 
-msgid "You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"
-msgstr "Devi aver installato DIOS MIOS per avviare i giochi da USB o DIOS MIOS LITE per avviarli  da SD"
+msgid "You need to install DIOS MIOS Lite v1.2 or a newer version."
+msgstr ""
+
+msgid "You need to install Devolution or DIOS MIOS (Lite) to launch GameCube games from USB or SD card"
+msgstr ""
 
 msgid "Zoom Duration (Speed)"
 msgstr "Durata dello zoom (Velocità)"
@@ -2210,20 +2219,17 @@ msgstr "di"
 msgid "seconds left"
 msgstr "secondi rimasti"
 
-msgid "v1.2 -> v2.1"
-msgstr "v1.2 -> v2.1"
+#~ msgid "DML Installed Version"
+#~ msgstr "Versione installata DML"
 
-msgid "v2.2+"
-msgstr "v2.2+"
+#~ msgid "The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."
+#~ msgstr "L'impostazione forza widescreen richiedere DIOS MIOS v2.2 o superiore. L'impostazione verrà ignorata."
 
-#~ msgid "Custom Discarts"
-#~ msgstr "Imm. disco person."
+#~ msgid "You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"
+#~ msgstr "Devi aver installato DIOS MIOS per avviare i giochi da USB o DIOS MIOS LITE per avviarli  da SD"
 
-#~ msgid "Full HQ Covers"
-#~ msgstr "Cop. complete HQ"
+#~ msgid "v1.2 -> v2.1"
+#~ msgstr "v1.2 -> v2.1"
 
-#~ msgid "Full LQ Covers"
-#~ msgstr "Cop. complete LQ"
-
-#~ msgid "Original Discarts"
-#~ msgstr "Imm. Disco originali"
+#~ msgid "v2.2+"
+#~ msgstr "v2.2+"

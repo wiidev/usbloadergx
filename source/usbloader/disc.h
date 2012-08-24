@@ -61,7 +61,7 @@ extern "C"
 	s32 Disc_FindPartition(u64 *outbuf);
 	s32 Disc_Mount(struct discHdr *header);
 	void PatchCountryStrings(void *Address, int Size);
-	void Disc_SelectVMode(u8 videoselected, u8 force_progressive);
+	void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode);
 	void Disc_SetVMode(void);
 	s32 Disc_JumpToEntrypoint(s32 hooktype, u32 dolparameter);
 

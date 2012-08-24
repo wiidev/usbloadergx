@@ -14,6 +14,38 @@ enum MiosInfo
 	QUADFORCE,
 };
 
+enum DMLVersions
+{
+	DML_VERSION_MIOS = 0,
+	DML_VERSION_R51,
+	DML_VERSION_R52,
+//	DML_VERSION_DML_1_0,
+//	DML_VERSION_DML_1_1,
+	DML_VERSION_QUAD_0_1, 	// Feb 15 2012 13:19:36 wrong built date.
+	DML_VERSION_DML_1_2,	// Apr 24 2012 19:44:08
+//	DML_VERSION_DML_1_3,	// Apr 26 2012 
+	DML_VERSION_DML_1_4,
+	DML_VERSION_DML_1_4b,	// May  7 2012 21:12:47
+//	DML_VERSION_QUAD_0_1	// Jun  9 2012 23:13:16	correct built date.
+	DML_VERSION_DML_1_5,	// Jun 14 2012 00:05:09
+	DML_VERSION_DM_2_0,		// Jun 23 2012 19:43:21
+//	DML_VERSION_DM_2_0_1,
+//	DML_VERSION_DM_2_0_2,
+//	DML_VERSION_DM_2_0_3,
+//	DML_VERSION_DM_2_0_3b,
+//	DML_VERSION_DM_2_0_3c,
+//	DML_VERSION_DM_2_0_3d,
+//	DML_VERSION_DM_2_0_4,
+//	DML_VERSION_DM_2_0_5,
+	DML_VERSION_DM_2_1,		// Jul 17 2012 11:25:35
+	DML_VERSION_DM_2_2,		// Jul 18 2012 16:57:47
+//	DML_VERSION_DM_2_2_1,
+	DML_VERSION_DM_2_2_2,	// Jul 20 2012 14:49:47
+	DML_VERSION_DML_2_2,	// Aug  6 2012 15:19:17
+	DML_VERSION_DML_2_2_1,	// Aug 13 2012 00:12:46
+	DML_VERSION_MAX_VERSION,
+};
+
 typedef struct _iosinfo_t
 {
 	u32 magicword;			  //0x1ee7c105
@@ -36,6 +68,7 @@ class IosLoader
 		static bool IsD2X(s32 ios = IOS_GetVersion());
 		static iosinfo_t *GetIOSInfo(s32 ios);
 		static u8 GetMIOSInfo();
+		static u8 GetDMLVersion(char* releaseDate = NULL);
 	private:
 		static void LoadIOSModules(s32 ios, s32 ios_rev);
 };

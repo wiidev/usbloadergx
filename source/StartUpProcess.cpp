@@ -194,6 +194,10 @@ int StartUpProcess::Execute()
 	SetTextf("Loading system menu resources\n");
 	SystemMenuResources::Instance()->Init();
 
+	// Check MIOS version
+	SetTextf("Checking installed MIOS... ");
+	IosLoader::GetMIOSInfo();
+
 	// Deinitialize ISFS
 	ISFS_Deinitialize();
 

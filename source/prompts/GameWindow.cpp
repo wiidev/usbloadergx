@@ -768,4 +768,8 @@ void GameWindow::BootGame(struct discHdr *header)
 
 	//Just calling that shuts down everything and starts game
 	GameBooter::BootGame(header);
+	
+	//If the launch is canceled, reduce playCount
+	GameStatistics.SetPlayCount(header->id, GameStatistics.GetPlayCount(header->id)-1);
+	GameStatistics.Save();
 }
