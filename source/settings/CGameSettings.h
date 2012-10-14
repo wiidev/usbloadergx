@@ -41,6 +41,8 @@ typedef struct _GameCFG
 	short DMLJPNPatch;
 	short DMLDebug;
 	short DEVOMCEmulation;
+	short DEVOWidescreen;
+	short DEVOActivityLED;
 	short Locked;
 
 	void operator=(const struct _GameCFG &game)
@@ -77,6 +79,8 @@ typedef struct _GameCFG
 		this->DMLJPNPatch = game.DMLJPNPatch;
 		this->DMLDebug = game.DMLDebug;
 		this->DEVOMCEmulation = game.DEVOMCEmulation;
+		this->DEVOWidescreen = game.DEVOWidescreen;
+		this->DEVOActivityLED = game.DEVOActivityLED;
 		this->Locked = game.Locked;
 	}
 } GameCFG;

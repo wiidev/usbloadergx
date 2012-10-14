@@ -196,7 +196,7 @@ int StartUpProcess::Execute()
 
 	// Check MIOS version
 	SetTextf("Checking installed MIOS... ");
-	IosLoader::GetMIOSInfo();
+	IosLoader::GetMIOSInfo(true);
 
 	// Deinitialize ISFS
 	ISFS_Deinitialize();

@@ -205,12 +205,13 @@ s32 IosLoader::ReloadIosKeepingRights(s32 ios)
 /*
  * Check if MIOS is DIOS MIOS, DIOS MIOS Lite or official MIOS.
  */
-u8 IosLoader::GetMIOSInfo()
+u8 IosLoader::GetMIOSInfo(bool checkedOnBoot)
 {
 	if(currentMIOS > -1)
 		return currentMIOS;
 
-	currentMIOS = DEFAULT_MIOS;
+	if(!checkedOnBoot) // Prevent setting default MIOS when checking on boot for users without AHBPROT.
+		currentMIOS = DEFAULT_MIOS;
 
 	u8 *appfile = NULL;
 	u32 filesize = 0;
@@ -300,24 +301,42 @@ u8 IosLoader::GetDMLVersion(char* releaseDate)
 	// Timestamp of DML 2.2 update1 (Aug 13 2012 00:12:46)
 	const time_t dml_2_2_1_time = 1344809566;
 
+	// Timestamp of DML 2.3 (Sep 24 2012 13:13:42 mirror link)
+	const time_t dml_2_3m_time = 1348485222;
+
+	// Timestamp of DM 2.3 (Sep 24 2012 15:51:54)
+	const time_t dm_2_3_time = 1348494714;
+
+	// Timestamp of DML 2.3 (Sep 25 2012 03:03:41 main link)
+	const time_t dml_2_3_time = 1348535021;
+
 	// releaseDate format: Apr 24 2012 19:44:08
 	gprintf("built on %s\n", releaseDate);
 
 	strptime(releaseDate, "%b %d %Y %H:%M:%S", &time);
 	time_t unixTime = mktime(&time);
 
-	if(difftime(unixTime, dml_2_2_1_time) >= 0) 	currentDMLVersion = DML_VERSION_DML_2_2_1;
-	else if(difftime(unixTime, dml_2_2_time) >= 0) 	currentDMLVersion = DML_VERSION_DML_2_2;
-	else if(difftime(unixTime, dm_2_2_2_time) >= 0) currentDMLVersion = DML_VERSION_DM_2_2_2;
-	else if(difftime(unixTime, dm_2_2_time) >= 0) 	currentDMLVersion = DML_VERSION_DM_2_2;
-	else if(difftime(unixTime, dm_2_1_time) >= 0) 	currentDMLVersion = DML_VERSION_DM_2_1;
-	else if(difftime(unixTime, dm_2_0_time) >= 0) 	currentDMLVersion = DML_VERSION_DM_2_0;
-	else if(difftime(unixTime, dml_1_5_time) >= 0)	currentDMLVersion = DML_VERSION_DML_1_5;
-	else if(difftime(unixTime, dml_1_4b_time) >= 0)	currentDMLVersion = DML_VERSION_DML_1_4b;
-	else if(difftime(unixTime, dml_1_2_time) > 0)	currentDMLVersion = DML_VERSION_DML_1_4;
-	else if(difftime(unixTime, dml_1_2_time) == 0)	currentDMLVersion = DML_VERSION_DML_1_2;
-	else if (difftime(unixTime, dml_r52_time) >= 0) currentDMLVersion = DML_VERSION_R52;
-	else											currentDMLVersion = DML_VERSION_R51;
+	if(currentMIOS == DIOS_MIOS)
+	{
+		if(difftime(unixTime, dm_2_3_time) >= 0) 			currentDMLVersion = DML_VERSION_DM_2_3;
+		else if(difftime(unixTime, dm_2_2_2_time) >= 0) 	currentDMLVersion = DML_VERSION_DM_2_2_2;
+		else if(difftime(unixTime, dm_2_2_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_2;
+		else if(difftime(unixTime, dm_2_1_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_1;
+		else if(difftime(unixTime, dm_2_0_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_0;	
+	}
+	else if(currentMIOS == DIOS_MIOS_LITE)
+	{
+		if(difftime(unixTime, dml_2_3_time) >= 0) 			currentDMLVersion = DML_VERSION_DML_2_3;
+		else if(difftime(unixTime, dml_2_3m_time) >= 0) 	currentDMLVersion = DML_VERSION_DML_2_3m;
+		else if(difftime(unixTime, dml_2_2_1_time) >= 0) 	currentDMLVersion = DML_VERSION_DML_2_2_1;
+		else if(difftime(unixTime, dml_2_2_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_2;
+		else if(difftime(unixTime, dml_1_5_time) >= 0)		currentDMLVersion = DML_VERSION_DML_1_5;
+		else if(difftime(unixTime, dml_1_4b_time) >= 0)		currentDMLVersion = DML_VERSION_DML_1_4b;
+		else if(difftime(unixTime, dml_1_2_time) > 0)		currentDMLVersion = DML_VERSION_DML_1_4;
+		else if(difftime(unixTime, dml_1_2_time) == 0)		currentDMLVersion = DML_VERSION_DML_1_2;
+		else if (difftime(unixTime, dml_r52_time) >= 0) 	currentDMLVersion = DML_VERSION_R52;
+		else												currentDMLVersion = DML_VERSION_R51;	
+	}
 
 	return currentDMLVersion;
 

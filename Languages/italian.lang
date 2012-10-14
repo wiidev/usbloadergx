@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - r1200
+# italian.lang - r1202
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-24 18:22+0200\n"
+"POT-Creation-Date: 2012-10-14 17:00+0200\n"
 "PO-Revision-Date: 2011-09-11 12:19+0100\n"
 "Last-Translator: xFede\n"
 "Language-Team: xFede (fedeanto11@gmail.com)\n"
@@ -494,6 +494,9 @@ msgstr "Personalizzati"
 msgid "Customs/Original"
 msgstr "Modific./origin."
 
+msgid "DEVO LED Activity"
+msgstr ""
+
 msgid "DEVO MemCard Emulation"
 msgstr "Emulazione memory card devolution"
 
@@ -507,7 +510,7 @@ msgid "DML Force Widescreen"
 msgstr "Forza widescreen DML"
 
 msgid "DML Japanese Patch"
-msgstr ""
+msgstr "Patch giapponese DML"
 
 msgid "DML LED Activity"
 msgstr "Led attività DML"
@@ -603,7 +606,7 @@ msgid "Devolution Loader Path"
 msgstr "Percorso loader devolution"
 
 msgid "Devolution's loader.bin file can't be loaded."
-msgstr ""
+msgstr "Impossibile caricare il file loader.bin per devolution."
 
 msgid "Directory does not exist!"
 msgstr "Il percorso non esiste!"
@@ -1865,19 +1868,13 @@ msgstr "Il file .them non è stato trovato nel zip."
 msgid "The Force Widescreen setting requires DIOS MIOS v2.1 or more. This setting will be ignored."
 msgstr "L'impostazione forza widescreen richiedere DIOS MIOS v2.1 o superiore. L'impostazione verrà ignorata."
 
-msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
-msgstr "Il percorso dei trucchi GCT e qyesto gioco non sono sulla stessa partizione. Avviare il gioco senza i trucchi?"
-
-msgid "The GCT Cheatcodes Path must be on SD card. Run the game without Ocarina?"
-msgstr "Il percorso dei trucchi GCT deve essere sulla SD. Avviare il gioco senza trucchi?"
-
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "I Mii verranno estratti nei percorsi della NAND emulata e dei canali NAND emulati. Attenzione: Tutti i file esistenti saranno sovrascritti."
 
 msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
 msgstr "L'impostazione no-disco non è più utilizzata da DIOS MIOS (Lite). Adesso devi avere un disco nel lettore."
 
-msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2 or a newer version. This setting will be ignored."
+msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
 msgstr ""
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
@@ -2154,10 +2151,10 @@ msgid "You cannot delete this category."
 msgstr "Non puoi eliminare questa categoria."
 
 msgid "You need to install DIOS MIOS Lite v1.2 or a newer version."
-msgstr ""
+msgstr "Devi installare DIOS MIOS Lite v1.2 o una versione successiva."
 
 msgid "You need to install Devolution or DIOS MIOS (Lite) to launch GameCube games from USB or SD card"
-msgstr ""
+msgstr "Devi installare Devolution o DIOS MIOS (Lite) per avviare i giochi GameCube da USB o SD"
 
 msgid "Zoom Duration (Speed)"
 msgstr "Durata dello zoom (Velocità)"
@@ -2219,17 +2216,11 @@ msgstr "di"
 msgid "seconds left"
 msgstr "secondi rimasti"
 
-#~ msgid "DML Installed Version"
-#~ msgstr "Versione installata DML"
+#~ msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
+#~ msgstr "Il percorso dei trucchi GCT e qyesto gioco non sono sulla stessa partizione. Avviare il gioco senza i trucchi?"
 
-#~ msgid "The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."
-#~ msgstr "L'impostazione forza widescreen richiedere DIOS MIOS v2.2 o superiore. L'impostazione verrà ignorata."
+#~ msgid "The GCT Cheatcodes Path must be on SD card. Run the game without Ocarina?"
+#~ msgstr "Il percorso dei trucchi GCT deve essere sulla SD. Avviare il gioco senza trucchi?"
 
-#~ msgid "You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"
-#~ msgstr "Devi aver installato DIOS MIOS per avviare i giochi da USB o DIOS MIOS LITE per avviarli  da SD"
-
-#~ msgid "v1.2 -> v2.1"
-#~ msgstr "v1.2 -> v2.1"
-
-#~ msgid "v2.2+"
-#~ msgstr "v2.2+"
+#~ msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2 or a newer version. This setting will be ignored."
+#~ msgstr "L'impostazione no-disco+ richiede DIOS MIOS 2.2.2 o una versione successiva. L'impostazione verra ignorata."

@@ -56,9 +56,12 @@ static const char * DMLVersions[] =
 	"v2.0.x",	// DM  2.0
 	"v2.1",		// DML 2.1
 	"v2.2.x",	// DM  2.2
-	"v2.2.2+",	// DM  2.2 update 2
+	"v2.2.2",	// DM  2.2 update 2
 	"v2.2",		// DML 2.2
-	"v2.2.1+",	// DML 2.2.1
+	"v2.2.1",	// DML 2.2.1
+	"v2.3",		// DML 2.3 (mirror link)
+	"v2.3+",	// DM  2.3
+	"v2.3+",	// DML 2.3 (main link)
 };
 
 
@@ -251,7 +254,7 @@ void WindowCredits()
 	starImg.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	starImg.SetPosition(505, 350);
 
-	const int numEntries = 24;
+	const int numEntries = 25;
 	std::vector<GuiText *> txt(numEntries);
 
 	const u8 *creditsFont = Resources::GetFile("font.ttf");
@@ -275,17 +278,41 @@ void WindowCredits()
 	if(info)
 		snprintf(IosInfo, sizeof(IosInfo), "(%s v%i%s base%i)", info->name, info->version, info->versionstring, info->baseios);
 
+	// Check if DIOS MIOS (Lite) is available 
+	char GCInfo[80] = "";
 	int currentMIOS = IosLoader::GetMIOSInfo();
 	if(currentMIOS == DIOS_MIOS)
-		snprintf(IosInfo, sizeof(IosInfo), "%s %s DIOS-MIOS %s", IosInfo, info ? "+" : "", DMLVersions[IosLoader::GetDMLVersion()]);
+		snprintf(GCInfo, sizeof(GCInfo), "DIOS-MIOS %s", DMLVersions[IosLoader::GetDMLVersion()]);
 	else if (currentMIOS == DIOS_MIOS_LITE)
-		snprintf(IosInfo, sizeof(IosInfo), "%s %s DIOS-MIOS Lite %s", IosInfo, info ? "+" : "", DMLVersions[IosLoader::GetDMLVersion()]);
+		snprintf(GCInfo, sizeof(GCInfo), "DIOS-MIOS Lite %s", DMLVersions[IosLoader::GetDMLVersion()]);
 	else if (currentMIOS == QUADFORCE)
-		snprintf(IosInfo, sizeof(IosInfo), "%s %s QuadForce", IosInfo, info ? "+" : "");
+		snprintf(GCInfo, sizeof(GCInfo), "QuadForce");
+		
+	// Check if Devolution is available
+	char DEVO_version[5];
+	char DEVO_loader_path[100];
+	snprintf(DEVO_loader_path, sizeof(DEVO_loader_path), "%sloader.bin", Settings.DEVOLoaderPath);
+	FILE *f = fopen(DEVO_loader_path, "rb");
+	if(f)
+	{
+		fseek(f, 23, SEEK_SET);
+		fread(DEVO_version, 1, 4, f);
+		fclose(f);
+		char *ptr = strrchr(DEVO_version, ' ');
+		if(ptr) *ptr = 0;
+		else DEVO_version[4] = 0;
+		snprintf(GCInfo, sizeof(GCInfo), "%s%s Devolution v%.4s", GCInfo, strlen(GCInfo) > 1 ? "  /  " : "", DEVO_version);
+	}
 
 	txt[i] = new GuiText(SvnRev, 16, ( GXColor ) {255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
 	txt[i]->SetPosition(0, (info || currentMIOS > DEFAULT_MIOS) ? y-10 : y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
+	i++;
+
+	txt[i] = new GuiText(GCInfo, 16, ( GXColor ) {255, 255, 255, 255});
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	txt[i]->SetPosition(0, y+6);
 	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 

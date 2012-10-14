@@ -217,6 +217,8 @@ bool CGameSettings::Save()
 		fprintf(f, "DMLJPNPatch:%d; ", GameList[i].DMLJPNPatch);
 		fprintf(f, "DMLDebug:%d; ", GameList[i].DMLDebug);
 		fprintf(f, "DEVOMCEmulation:%d; ", GameList[i].DEVOMCEmulation);
+		fprintf(f, "DEVOWidescreen:%d; ", GameList[i].DEVOWidescreen);
+		fprintf(f, "DEVOActivityLED:%d; ", GameList[i].DEVOActivityLED);
 		fprintf(f, "Locked:%d;\n", GameList[i].Locked);
 	}
 	fprintf(f, "# END\n");
@@ -387,6 +389,16 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		game.DEVOMCEmulation = atoi(value);
 		return true;
 	}
+	else if(strcmp(name, "DEVOWidescreen") == 0)
+	{
+		game.DEVOWidescreen = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "DEVOActivityLED") == 0)
+	{
+		game.DEVOActivityLED = atoi(value);
+		return true;
+	}
 
 	return false;
 }
@@ -519,5 +531,7 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.DMLJPNPatch = INHERIT;
 	game.DMLDebug = INHERIT;
 	game.DEVOMCEmulation = INHERIT;
+	game.DEVOWidescreen = INHERIT;
+	game.DEVOActivityLED = INHERIT;
 	game.Locked = OFF;
 }

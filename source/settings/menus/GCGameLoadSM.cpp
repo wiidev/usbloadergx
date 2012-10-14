@@ -167,7 +167,7 @@ void GCGameLoadSM::SetOptionNames()
 		Options->SetName(Idx++, "%s", tr( "DML LED Activity" ));
 		Options->SetName(Idx++, "%s", tr( "DML PAD Hook" ));
 		Options->SetName(Idx++, "%s", tr( "DML No Disc" ));
-		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_2_2)
+		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_2_2 && IosLoader::GetDMLVersion() <= DML_VERSION_DML_2_2_1)
 			Options->SetName(Idx++, "%s", tr( "DML No Disc+" ));
 		if(IosLoader::GetDMLVersion() > DML_VERSION_DM_2_1)
 			Options->SetName(Idx++, "%s", tr( "DML Force Widescreen" ));
@@ -175,6 +175,8 @@ void GCGameLoadSM::SetOptionNames()
 		Options->SetName(Idx++, "%s", tr( "DML Debug" ));
 	}
 	Options->SetName(Idx++, "%s", tr( "DEVO MemCard Emulation" ));
+	//Options->SetName(Idx++, "%s", tr( "DEVO Force Widescreen" ));
+	Options->SetName(Idx++, "%s", tr( "DEVO LED Activity" ));
 }
 
 void GCGameLoadSM::SetOptionValues()
@@ -252,7 +254,7 @@ void GCGameLoadSM::SetOptionValues()
 			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLNoDisc]));
 
 		//! Settings: DML Extended No Disc
-		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_2_2)
+		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_2_2 && IosLoader::GetDMLVersion() <= DML_VERSION_DML_2_2_1)
 		{
 			if(GameConfig.DMLNoDisc2 == INHERIT)
 				Options->SetValue(Idx++, tr("Use global"));
@@ -287,6 +289,19 @@ void GCGameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(DEVOMCText[GameConfig.DEVOMCEmulation]));
+	
+	//! Settings: DEVO Widescreen Patch
+	//if(GameConfig.DEVOWidescreen == INHERIT)
+	//	Options->SetValue(Idx++, tr("Use global"));
+	//else
+	//	Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVOWidescreen]));
+	
+	//! Settings: DEVO Activity LED
+	if(GameConfig.DEVOActivityLED == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVOActivityLED]));
+	
 }
 
 int GCGameLoadSM::GetMenuInternal()
@@ -393,7 +408,7 @@ int GCGameLoadSM::GetMenuInternal()
 	}
 
 	//! Settings: DML Extended No Disc
-	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_2_2 && ret == ++Idx)
+	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_2_2 && IosLoader::GetDMLVersion() <= DML_VERSION_DML_2_2_1 && ret == ++Idx)
 	{
 		if (++GameConfig.DMLNoDisc2 >= MAX_ON_OFF) GameConfig.DMLNoDisc2 = INHERIT;
 	}
@@ -420,6 +435,18 @@ int GCGameLoadSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.DEVOMCEmulation >= DEVO_MC_MAX_CHOICE) GameConfig.DEVOMCEmulation = INHERIT;
+	}
+
+	//! Settings: DEVO Widescreen Patch
+	//else if (ret == ++Idx)
+	//{
+	//	if (++GameConfig.DEVOWidescreen >= MAX_ON_OFF) GameConfig.DEVOWidescreen = INHERIT;
+	//}
+
+	//! Settings: DEVO Activity LED
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.DEVOActivityLED >= MAX_ON_OFF) GameConfig.DEVOActivityLED = INHERIT;
 	}
 
 	SetOptionValues();

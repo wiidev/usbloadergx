@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-24 18:22+0200\n"
+"POT-Creation-Date: 2012-10-14 16:58+0200\n"
 "PO-Revision-Date: 2011-12-17 14:22+0100\n"
 "Last-Translator: Arthur117\n"
 "Language-Team: tj_cool, glowy, Arthur117\n"
@@ -493,6 +493,9 @@ msgstr ""
 
 msgid "Customs/Original"
 msgstr "Aangepast/Origineel"
+
+msgid "DEVO LED Activity"
+msgstr ""
 
 msgid "DEVO MemCard Emulation"
 msgstr ""
@@ -1865,19 +1868,13 @@ msgstr "Het .them bestand is niet gevonden in het zip bestand."
 msgid "The Force Widescreen setting requires DIOS MIOS v2.1 or more. This setting will be ignored."
 msgstr ""
 
-msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
-msgstr ""
-
-msgid "The GCT Cheatcodes Path must be on SD card. Run the game without Ocarina?"
-msgstr ""
-
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr ""
 
 msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
 msgstr ""
 
-msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2 or a newer version. This setting will be ignored."
+msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
 msgstr ""
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."

@@ -436,15 +436,6 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 			// Todo: Add here copySD2USB.
 			return 0;
 		}
-
-		// Check current GCT location
-		if((ocarinaChoice) && strncmp(Settings.GameCubePath, Settings.Cheatcodespath, 4) != 0) // Checking "USBx"
-		{
-			int choice = WindowPrompt(tr("Warning:"), tr("The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"), tr("OK"), tr("Cancel"));
-			if(choice == 0)
-				return 0;
-			ocarinaChoice = false;
-		}
 	}
 
 	// DIOS MIOS Lite
@@ -456,15 +447,6 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 				return 0;
 
 			RealPath = GCGames::Instance()->GetPath((const char *) gameHdr->id);
-		}
-		
-		// Check current GCT location
-		if((ocarinaChoice) && strncmp(Settings.Cheatcodespath, "SD", 2) != 0)
-		{
-			int choice = WindowPrompt(tr("Warning:"), tr("The GCT Cheatcodes Path must be on SD card. Run the game without Ocarina?"), tr("OK"), tr("Cancel"));
-			if(choice == 0)
-				return 0;
-			ocarinaChoice = false;
 		}
 	}
 
@@ -479,19 +461,41 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		}
 		if(dmlWidescreenChoice && IosLoader::GetDMLVersion() < DML_VERSION_DM_2_1) // DML Force Widescreen setting : added in DM v2.1+, config v1.
 		{
-			WindowPrompt(tr("Warning:"), tr("The Force Widescreen setting requires DIOS MIOS v2.1 or more. This setting will be ignored."), tr("OK"));
+			if(Settings.DMLWidescreen) // Display the warning only if set as Global setting. Individual game setting is not displayed.
+				WindowPrompt(tr("Warning:"), tr("The Force Widescreen setting requires DIOS MIOS v2.1 or more. This setting will be ignored."), tr("OK"));
 			dmlWidescreenChoice = OFF;
 		}
 		if(dmlNoDiscChoice) // DML NoDisc setting : removed in DM 1.0, config v1. Used as ForceWidescreen in DM v2.1 with cfg v1. Added back in DM 2.2 update2 Config v2
 		{
 			WindowPrompt(tr("Warning:"), tr("The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."), tr("OK"));
 		}
-		if(dmlNoDisc2Choice && IosLoader::GetDMLVersion() < DML_VERSION_DM_2_2_2) // DML NoDisc+ setting : Added in DM 2.2 upate 2, config v2.
+		if(dmlNoDisc2Choice && (IosLoader::GetDMLVersion() < DML_VERSION_DM_2_2_2 || IosLoader::GetDMLVersion() > DML_VERSION_DML_2_2_1)) // DML NoDisc+ setting : Added in DM 2.2 upate 2, config v2, removed in DM(L) v2.3
 		{
-			WindowPrompt(tr("Warning:"), tr("The No Disc+ setting requires DIOS MIOS 2.2 update2 or a newer version. This setting will be ignored."), tr("OK"));
+			if(Settings.DMLNoDisc2) // Display the warning only if set as Global setting. Individual game setting is not displayed.
+				WindowPrompt(tr("Warning:"), tr("The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."), tr("OK"));
+			dmlNoDisc2Choice = false;
 		}
 	}
 	
+	// Check Ocarina and cheat file location. the .gct file need to be located on the same partition than the game.
+	if(ocarinaChoice && strcmp(DeviceHandler::GetDevicePrefix(RealPath), DeviceHandler::GetDevicePrefix(Settings.Cheatcodespath)) != 0)
+	{
+		char path[255], destPath[255];
+		int res = -1;
+		snprintf(path, sizeof(path), "%s%.6s.gct", Settings.Cheatcodespath, (char *)gameHdr->id);
+		snprintf(destPath, sizeof(destPath), "%s:/DMLTemp.gct", DeviceHandler::GetDevicePrefix(RealPath));
+		
+		gprintf("DML: Copying %s to %s \n", path, destPath);
+		res = CopyFile(path, destPath);
+		if(res < 0)
+		{
+			gprintf("DML: Couldn't copy the file. ret %d. Ocarina Disabled\n", res);
+			RemoveFile(destPath);
+			ocarinaChoice = false;
+		}
+	}
+
+
 	const char *gcPath = strchr(RealPath, '/');
 	if(!gcPath) gcPath = "";
 
@@ -499,13 +503,12 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 	snprintf(gamePath, sizeof(gamePath), "%s", gcPath);
 
 	ExitApp();
-	gprintf("\nLoading BC for GameCube\n");
 
 	// Game ID
 	memcpy((u8 *)Disc_ID, gameHdr->id, 6);
 	DCFlushRange((u8 *)Disc_ID, 6);
 
-	*(vu32*)0xCC003024 |= 7; // DML 1.1- only?
+	// *(vu32*)0xCC003024 |= 7; // DML 1.1- only?
 
 	DML_CFG *dml_config = (DML_CFG *) DML_CONFIG_ADDRESS;
 	memset(dml_config, 0, sizeof(DML_CFG));
@@ -533,11 +536,19 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 	// setup cheat and path
 	if(ocarinaChoice)
 	{
-		dml_config->Config |= DML_CFG_CHEATS | DML_CFG_CHEAT_PATH;
-		const char *CheatPath = strchr(Settings.Cheatcodespath, '/');
-		if(!CheatPath) CheatPath = "";
-		snprintf(dml_config->CheatPath, sizeof(dml_config->CheatPath), "%s%.6s.gct", CheatPath, (char *)gameHdr->id);
+		// Check is the .gct folder is on the same partition than the game, if not load the temporary .gct file.
+		if(strcmp(DeviceHandler::GetDevicePrefix(RealPath), DeviceHandler::GetDevicePrefix(Settings.Cheatcodespath)) == 0)
+		{
+			const char *CheatPath = strchr(Settings.Cheatcodespath, '/');
+			if(!CheatPath) CheatPath = "";
+			snprintf(dml_config->CheatPath, sizeof(dml_config->CheatPath), "%s%.6s.gct", CheatPath, (char *)gameHdr->id);
+		}
+		else
+		{
+			snprintf(dml_config->CheatPath, sizeof(dml_config->CheatPath), "DMLTemp.gct");
+		}
 
+		dml_config->Config |= DML_CFG_CHEATS | DML_CFG_CHEAT_PATH;
 		gprintf("DML: Loading cheat %s\n", dml_config->CheatPath);
 	}
 
@@ -628,6 +639,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 	if(dmlJPNPatchChoice && diskid[3] == 'J')
 		*HW_PPCSPEED = 0x0002A9E0;
 
+	gprintf("\nLoading BC for GameCube\n");
 	WII_Initialize();
 	return WII_LaunchTitle(0x0000000100000100ULL);
 }
@@ -639,6 +651,8 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	GameCFG * game_cfg = GameSettings.GetGameCFG(gameHdr->id);
 	u8 videoChoice = game_cfg->video == INHERIT ? Settings.videomode : game_cfg->video;
 	u8 devoMCEmulation = game_cfg->DEVOMCEmulation == INHERIT ? Settings.DEVOMCEmulation : game_cfg->DEVOMCEmulation;
+	u8 devoActivityLEDChoice = game_cfg->DEVOActivityLED == INHERIT ? Settings.DEVOActivityLED : game_cfg->DEVOActivityLED;
+	u8 devoWidescreenChoice = game_cfg->DEVOWidescreen == INHERIT ? Settings.DEVOWidescreen : game_cfg->DEVOWidescreen;
 	
 
 	if(gameHdr->type == TYPE_GAME_GC_DISC)
@@ -675,7 +689,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 
 
 	// Devolution config
-	DEVO_CGF *DEVO_CONFIG = (DEVO_CGF*)0x80000020;
+	DEVO_CGF *devo_config = (DEVO_CGF*)0x80000020;
 
 
 	// Get the Game's data
@@ -703,22 +717,27 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	//stat(disc2, &st2);
 	
 	// setup Devolution
-	memset(DEVO_CONFIG, 0, sizeof(*DEVO_CONFIG));
-	DEVO_CONFIG->signature = DEVO_SIG;
-	DEVO_CONFIG->version = DEVO_CONFIG_VERSION;
+	memset(devo_config, 0, sizeof(*devo_config));
+	devo_config->signature = DEVO_SIG;
+	devo_config->version = DEVO_CONFIG_VERSION;
 	// st1.st_dev doesn't work with our current device type. It returns Wii_UMS 'WUMS' instead of Wii_USB 'WUSB'.
 	// Only last two letters are returned by DevkitPro, so we set them manually to Devolution config.
-	DEVO_CONFIG->device_signature = st1.st_dev == 'SD' ? 'SD' : 'SB'; // Set device type.
-	DEVO_CONFIG->disc1_cluster = st1.st_ino;			// set starting cluster for first disc ISO file
-	//DEVO_CONFIG->disc2_cluster = st2.st_ino;			// set starting cluster for second disc ISO file
+	devo_config->device_signature = st1.st_dev == 'SD' ? 'SD' : 'SB'; // Set device type.
+	devo_config->disc1_cluster = st1.st_ino;			// set starting cluster for first disc ISO file
+	//devo_config->disc2_cluster = st2.st_ino;			// set starting cluster for second disc ISO file
 	
+	// Devolution configs
 	// use wifi logging if USB gecko is not found in slot B
-	// DEVO_CONFIG->options |= DEVO_WIFILOG;			// removed on Tueidj request
+	// devo_config->options |= DEVO_CFG_WIFILOG;			// removed on Tueidj request
+	if(devoWidescreenChoice)
+		devo_config->options |= DEVO_CFG_WIDE;
+	if(!devoActivityLEDChoice)
+		devo_config->options |= DEVO_CFG_NOLED;				// ON by default
 	
 	// check memory card
 	if(devoMCEmulation == DEVO_MC_OFF)
 	{
-		DEVO_CONFIG->memcard_cluster = 0;
+		devo_config->memcard_cluster = 0;
 		snprintf(DEVO_memCard, sizeof(DEVO_memCard), "Original");
 	}
 	else 
@@ -759,7 +778,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 				st.st_ino = 0;
 			}
 		}
-		DEVO_CONFIG->memcard_cluster = st.st_ino;
+		devo_config->memcard_cluster = st.st_ino;
 	}
 
 

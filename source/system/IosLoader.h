@@ -43,6 +43,9 @@ enum DMLVersions
 	DML_VERSION_DM_2_2_2,	// Jul 20 2012 14:49:47
 	DML_VERSION_DML_2_2,	// Aug  6 2012 15:19:17
 	DML_VERSION_DML_2_2_1,	// Aug 13 2012 00:12:46
+	DML_VERSION_DML_2_3m,	// Sep 24 2012 13:13:42 (mirror link)
+	DML_VERSION_DM_2_3,		// Sep 24 2012 15:51:54 (Main link and Mirror link)
+	DML_VERSION_DML_2_3,	// Sep 25 2012 03:03:41 (main link)
 	DML_VERSION_MAX_VERSION,
 };
 
@@ -67,7 +70,7 @@ class IosLoader
 		static bool IsWaninkokoIOS(s32 ios = IOS_GetVersion());
 		static bool IsD2X(s32 ios = IOS_GetVersion());
 		static iosinfo_t *GetIOSInfo(s32 ios);
-		static u8 GetMIOSInfo();
+		static u8 GetMIOSInfo(bool checkedOnBoot = false);
 		static u8 GetDMLVersion(char* releaseDate = NULL);
 	private:
 		static void LoadIOSModules(s32 ios, s32 ios_rev);

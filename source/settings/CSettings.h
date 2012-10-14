@@ -182,6 +182,8 @@ class CSettings
 		short DMLJPNPatch;
 		short DMLDebug;
 		short DEVOMCEmulation;
+		short DEVOWidescreen;
+		short DEVOActivityLED;
 		short GCInstallCompressed;
 		short GCInstallAligned;
 

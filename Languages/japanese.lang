@@ -188,7 +188,7 @@ msgid "Banner Animation Settings"
 msgstr "バナーアニメ設定"
 
 msgid "Banner On Channels"
-msgstr ""
+msgstr "チャンネル上のバナー"
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
 msgstr "バナーグリッドレイアウトはAHBPROTが有効でないといけません!新しいHBCに更新してください"
@@ -483,13 +483,13 @@ msgid "Credits"
 msgstr "提供･協力"
 
 msgid "Custom Banners"
-msgstr ""
+msgstr "カスタムバナー"
 
 msgid "Custom Paths"
 msgstr "パスを変更"
 
 msgid "Customs"
-msgstr ""
+msgstr "カスタム"
 
 msgid "Customs/Original"
 msgstr "カスタムを優先"
@@ -507,7 +507,7 @@ msgid "DML Force Widescreen"
 msgstr "DML 強制ワイド化"
 
 msgid "DML Japanese Patch"
-msgstr ""
+msgstr "DML 日本向けパッチ"
 
 msgid "DML LED Activity"
 msgstr "DML LED点灯"
@@ -561,7 +561,7 @@ msgid "Delete"
 msgstr "削除しますか"
 
 msgid "Delete Cached Banner"
-msgstr ""
+msgstr "ｷｬｯｼｭ済みﾊﾞﾅｰを削除"
 
 msgid "Delete Cheat GCT"
 msgstr "GCTファイルを削除"
@@ -603,7 +603,7 @@ msgid "Devolution Loader Path"
 msgstr "Devolutionローダー"
 
 msgid "Devolution's loader.bin file can't be loaded."
-msgstr ""
+msgstr "Devolutionのloader.binが読み込めません"
 
 msgid "Directory does not exist!"
 msgstr "フォルダがありません"
@@ -624,7 +624,7 @@ msgid "Disc read error."
 msgstr "読み込みエラー"
 
 msgid "Discarts"
-msgstr ""
+msgstr "破棄"
 
 msgid "DiskFlip"
 msgstr "ディスクの回転風"
@@ -714,7 +714,7 @@ msgid "Downloading 3D Covers"
 msgstr "両面ｶﾊﾞｰをﾀﾞｳﾝﾛｰﾄﾞ中"
 
 msgid "Downloading Custom Banners"
-msgstr ""
+msgstr "ｶｽﾀﾑﾊﾞﾅｰをﾀﾞｳﾝﾛｰﾄﾞ中"
 
 msgid "Downloading Flat Covers"
 msgstr "正面ｶﾊﾞｰをﾀﾞｳﾝﾛｰﾄﾞ中"
@@ -993,13 +993,13 @@ msgid "Full Cover Path"
 msgstr "フルカバー"
 
 msgid "Full Covers"
-msgstr ""
+msgstr "フルカバー"
 
 msgid "Full Menu"
 msgstr "完全なメニュー"
 
 msgid "Full covers Download"
-msgstr ""
+msgstr "ﾌﾙｶﾊﾞｰのﾀﾞｳﾝﾛｰﾄﾞ"
 
 msgid "Full shutdown"
 msgstr "シャットダウン"
@@ -1125,10 +1125,10 @@ msgid "Hard Drive Settings"
 msgstr "HDD設定"
 
 msgid "High Quality"
-msgstr ""
+msgstr "高品質"
 
 msgid "High/Low"
-msgstr ""
+msgstr "高/低"
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrewアプリ"
@@ -1317,10 +1317,10 @@ msgid "Loop Sound"
 msgstr "ループさせる"
 
 msgid "Low Quality"
-msgstr ""
+msgstr "低品質"
 
 msgid "Low/High"
-msgstr ""
+msgstr "低/高"
 
 msgid "MIOS (Default & Customs)"
 msgstr "MIOS(公式&カスタム)"
@@ -1533,7 +1533,7 @@ msgid "Only for Install"
 msgstr "インストール中のみ"
 
 msgid "Original"
-msgstr ""
+msgstr "公式"
 
 msgid "Original/Customs"
 msgstr "公式を優先"
@@ -1863,7 +1863,7 @@ msgid "The .them file was not found in the zip."
 msgstr ".themファイルがzip内にありません"
 
 msgid "The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."
-msgstr "強制ワイドスクリーン設定にするにはDIOS MIOS v2.1以上が必要です。 それ以下のバージョンでは無視されます。"
+msgstr "強制ワイド化設定はDIOS MIOS v2.2以降が必要です。この設定は無視されます"
 
 msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
 msgstr "GCTコードとこのゲームは同じ領域にありません。チートなしで起動しますか?"
@@ -1877,7 +1877,7 @@ msgstr "MiiはエミュNAND(チャンネル)パスに書き出されます。す
 msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
 msgstr "ディスクなし設定はDIOS MIOS(Lite)では使われていません。ドライブにディスクを入れてください"
 
-msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2 or a newer version. This setting will be ignored."
+msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
 msgstr ""
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
@@ -2154,16 +2154,16 @@ msgid "You cannot delete this category."
 msgstr "このカテゴリは削除できません"
 
 msgid "You need to install DIOS MIOS Lite v1.2 or a newer version."
-msgstr ""
+msgstr "DIOS MIOS Lite v1.2以降をインストールする必要があります"
 
 msgid "You need to install Devolution or DIOS MIOS (Lite) to launch GameCube games from USB or SD card"
-msgstr ""
+msgstr "GCゲームをSDやUSB機器から起動するにはDevolutionかDIOS MIOS (Lite)をインストールしてください"
 
 msgid "Zoom Duration (Speed)"
 msgstr "ズームの継続(速度)"
 
 msgid "and translators for language files updates"
-msgstr "/ K-M & Trickart…日本語化"
+msgstr "/ K-M & Trickart …日本語化"
 
 msgid "available"
 msgstr "があります"
@@ -2234,8 +2234,8 @@ msgstr "秒で完了"
 #~ msgid "Original Discarts"
 #~ msgstr "公式レーベル"
 
-#~ msgid "The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."
-#~ msgstr "強制ワイド化設定はDIOS MIOS v2.2以降が必要です。この設定は無視されます"
+#~ msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2 or a newer version. This setting will be ignored."
+#~ msgstr "ディスクなし+機能はDIOS MIOS 2.2 update2以降が必要です。この設定は無視されます"
 
 #~ msgid "You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"
 #~ msgstr "GCゲームをUSBから起動するにはDIOS MIOSが、SDから起動するにはDMLが必要です"

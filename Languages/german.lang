@@ -1,11 +1,11 @@
 # USB Loader GX
-# german.lang - r1200
+# german.lang - r1202
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-24 18:22+0200\n"
+"POT-Creation-Date: 2012-10-14 16:58+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -188,7 +188,7 @@ msgid "Banner Animation Settings"
 msgstr "Banner Animationen"
 
 msgid "Banner On Channels"
-msgstr ""
+msgstr "Banner auf Kanälen"
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
 msgstr "Banner Raster-Layout ist nur verfügbar mit AHBPROT! Bitte installiere die aktuelle HBC-Version."
@@ -483,16 +483,19 @@ msgid "Credits"
 msgstr "Danksagungen"
 
 msgid "Custom Banners"
-msgstr ""
+msgstr "Community Banner"
 
 msgid "Custom Paths"
-msgstr "Pfade anpassen"
+msgstr "Community Pfade"
 
 msgid "Customs"
-msgstr ""
+msgstr "Community"
 
 msgid "Customs/Original"
 msgstr "Community/Original"
+
+msgid "DEVO LED Activity"
+msgstr ""
 
 msgid "DEVO MemCard Emulation"
 msgstr "DEVO MemCard Emulation"
@@ -507,7 +510,7 @@ msgid "DML Force Widescreen"
 msgstr "DML Breitbild erzw."
 
 msgid "DML Japanese Patch"
-msgstr ""
+msgstr "DML JAP Patch"
 
 msgid "DML LED Activity"
 msgstr "DML LED Aktivität"
@@ -561,7 +564,7 @@ msgid "Delete"
 msgstr "Löschen"
 
 msgid "Delete Cached Banner"
-msgstr ""
+msgstr "Lösche gecachte Banner"
 
 msgid "Delete Cheat GCT"
 msgstr "Lösche GCT Cheatdatei"
@@ -603,7 +606,7 @@ msgid "Devolution Loader Path"
 msgstr "Devolution Loader"
 
 msgid "Devolution's loader.bin file can't be loaded."
-msgstr ""
+msgstr "Devolution's loader.bin Datei kann nicht geladen werden."
 
 msgid "Directory does not exist!"
 msgstr "Verzeichnis existiert nicht!"
@@ -624,7 +627,7 @@ msgid "Disc read error."
 msgstr "Disk Lese-Fehler"
 
 msgid "Discarts"
-msgstr ""
+msgstr "Diskbilder"
 
 msgid "DiskFlip"
 msgstr "DiskFlip"
@@ -714,7 +717,7 @@ msgid "Downloading 3D Covers"
 msgstr "Lade 3D Cover herunter"
 
 msgid "Downloading Custom Banners"
-msgstr ""
+msgstr "Lade Community Banner herunter"
 
 msgid "Downloading Flat Covers"
 msgstr "Lade 2D Cover herunter"
@@ -993,13 +996,13 @@ msgid "Full Cover Path"
 msgstr "Box Cover"
 
 msgid "Full Covers"
-msgstr ""
+msgstr "Box Cover"
 
 msgid "Full Menu"
 msgstr "Ganzes Menü"
 
 msgid "Full covers Download"
-msgstr ""
+msgstr "Box Cover Download"
 
 msgid "Full shutdown"
 msgstr "Ausschalten"
@@ -1125,10 +1128,10 @@ msgid "Hard Drive Settings"
 msgstr "Festplatten Optionen"
 
 msgid "High Quality"
-msgstr ""
+msgstr "Hohe Qualität"
 
 msgid "High/Low"
-msgstr ""
+msgstr "Hoch/Niedrig"
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Apps"
@@ -1317,10 +1320,10 @@ msgid "Loop Sound"
 msgstr "Wiederholung"
 
 msgid "Low Quality"
-msgstr ""
+msgstr "Niedrige Qualität"
 
 msgid "Low/High"
-msgstr ""
+msgstr "Niedrig/Hoch"
 
 msgid "MIOS (Default & Customs)"
 msgstr "MIOS (Standard & Angepasste)"
@@ -1533,7 +1536,7 @@ msgid "Only for Install"
 msgstr "Nur beim Installieren"
 
 msgid "Original"
-msgstr ""
+msgstr "Original"
 
 msgid "Original/Customs"
 msgstr "Original/Community"
@@ -1863,13 +1866,7 @@ msgid "The .them file was not found in the zip."
 msgstr "Die .them Datei wurde in der zip nicht gefunden."
 
 msgid "The Force Widescreen setting requires DIOS MIOS v2.1 or more. This setting will be ignored."
-msgstr ""
-
-msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
-msgstr "Der GCT Cheatcodes Pfad und dieses Spiel sind nicht auf der selben Partition. Spiel ohne Ocarina starten?"
-
-msgid "The GCT Cheatcodes Path must be on SD card. Run the game without Ocarina?"
-msgstr "Der GCT Cheatcodes Pfad muss auf der SD-Karte sein. Spiel ohne Ocarina starten?"
+msgstr "Die Einstellung -Breitbild erzw.- erforder DIOS MIOS v2.1 und neuer. Diese Einstellungen wird ignoriert."
 
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "Die Miis werden in den EmuNand Pfad und EmuNand Kanal-Pfad kopiert. Achtung: Alle vorhandenen Dateien werden überschrieben."
@@ -1877,7 +1874,7 @@ msgstr "Die Miis werden in den EmuNand Pfad und EmuNand Kanal-Pfad kopiert. Acht
 msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
 msgstr "Die -keine Disk Einstellung- wird nicht mehr unterstützt von DIOS MIOS (Lite). Jetzt muss eine Disk im Laufwerk sein."
 
-msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2 or a newer version. This setting will be ignored."
+msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
 msgstr ""
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
@@ -2154,10 +2151,10 @@ msgid "You cannot delete this category."
 msgstr "Kategorie kann nicht gelöscht werden."
 
 msgid "You need to install DIOS MIOS Lite v1.2 or a newer version."
-msgstr ""
+msgstr "Es wird DIOS MIOS Lite v1.2 oder neuer benötigt."
 
 msgid "You need to install Devolution or DIOS MIOS (Lite) to launch GameCube games from USB or SD card"
-msgstr ""
+msgstr "Um GameCube Spiele von USB oder SD abzuspielen, wird Devolution oder DIOS MIOS (Lite)"
 
 msgid "Zoom Duration (Speed)"
 msgstr "Zoom Dauer"
@@ -2218,6 +2215,15 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
+#~ msgstr "Der GCT Cheatcodes Pfad und dieses Spiel sind nicht auf der selben Partition. Spiel ohne Ocarina starten?"
+
+#~ msgid "The GCT Cheatcodes Path must be on SD card. Run the game without Ocarina?"
+#~ msgstr "Der GCT Cheatcodes Pfad muss auf der SD-Karte sein. Spiel ohne Ocarina starten?"
+
+#~ msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2 or a newer version. This setting will be ignored."
+#~ msgstr "Die Keine Disk+ Einstellung benötigt DIOS MIOS 2.2 update2 oder neuer. Diese Einstellung wird ignoriert."
 
 #~ msgid "DML Installed Version"
 #~ msgstr "Installierte DML Version"

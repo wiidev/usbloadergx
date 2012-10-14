@@ -178,6 +178,8 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "DML Japanese Patch" ));
 	Options->SetName(Idx++, "%s", tr( "DML Debug" ));
 	Options->SetName(Idx++, "%s", tr( "DEVO MemCard Emulation" ));
+	//Options->SetName(Idx++, "%s", tr( "DEVO Force Widescreen" ));
+	Options->SetName(Idx++, "%s", tr( "DEVO LED Activity" ));
 
 	SetOptionValues();
 
@@ -300,6 +302,13 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: DEVO Memory Card Emulation
 	Options->SetValue(Idx++, "%s", tr(DEVOMCText[Settings.DEVOMCEmulation]));
+	
+	//! Settings: DEVO Widescreen Patch
+	//Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DEVOWidescreen]));
+	
+	//! Settings: DEVO Activity LED
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DEVOActivityLED]));
+	
 }
 
 int LoaderSettings::GetMenuInternal()
@@ -513,6 +522,18 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.DEVOMCEmulation >= DEVO_MC_MAX_CHOICE) Settings.DEVOMCEmulation = 0;
+	}
+
+	//! Settings: DEVO Widescreen Patch
+	//else if (ret == ++Idx)
+	//{
+	//	if (++Settings.DEVOWidescreen >= MAX_ON_OFF) Settings.DEVOWidescreen = 0;
+	//}
+
+	//! Settings: DEVO Activity LED
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DEVOActivityLED >= MAX_ON_OFF) Settings.DEVOActivityLED = 0;
 	}
 
 	SetOptionValues();

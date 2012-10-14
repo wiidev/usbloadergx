@@ -38,7 +38,7 @@ fi
 
 
 rev_new=`expr $rev_new + 1`
-rev_date=`date -u +%Y%m%d%H%M`
+rev_date=`date -u +%Y%m%d%H%M%S`
 
 cat <<EOF > ./HBC/META.XML
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
