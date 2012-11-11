@@ -1,11 +1,11 @@
 # USB Loader GX
-# german.lang - r1202
+# german.lang - r1203
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-14 16:58+0200\n"
+"POT-Creation-Date: 2012-11-11 13:49+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -495,7 +495,7 @@ msgid "Customs/Original"
 msgstr "Community/Original"
 
 msgid "DEVO LED Activity"
-msgstr ""
+msgstr "DEVO LED Aktivität"
 
 msgid "DEVO MemCard Emulation"
 msgstr "DEVO MemCard Emulation"
@@ -532,6 +532,9 @@ msgstr "DML PAD Hook"
 
 msgid "DML Progressive Patch"
 msgstr "DML Progressive Patch"
+
+msgid "DML Screenshot"
+msgstr ""
 
 msgid "DML Video Mode"
 msgstr "DML Video Modus"
@@ -1875,7 +1878,7 @@ msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need
 msgstr "Die -keine Disk Einstellung- wird nicht mehr unterstützt von DIOS MIOS (Lite). Jetzt muss eine Disk im Laufwerk sein."
 
 msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
-msgstr ""
+msgstr "Die -keine Disk+ Einstellung- benötigt DIOS MIOS 2.2 update2. Diese Einstellung wird ignoriert."
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "Die SYSCONF wird in den EmuNand Pfad und EmuNand Kanal-Pfad kopiert. Achtung: Alle vorhandenen Dateien werden überschrieben."

@@ -1,1030 +1,1037 @@
 # USB Loader GX language source file.
 # greek.lang - r1202
-# don't delete/change this line (ι).
+# don't delete/change this line (Γ©).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-11-11 13:49+0100\n"
 "Last-Translator: nakata6790\n"
 "Language-Team: nakata6790 (aka0107@gmail.com)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Γλώσσα: Ελληνικά \n"
+"ΓƒΓ«ΓΎΓ³Γ³Γ΅: Γ…Γ«Γ«Γ§Γ­Γ©ΓªΓ \n"
 
 msgid " could not be downloaded."
-msgstr " Η λήψη δεν είναι δυνατή ."
+msgstr " Γ‡ Γ«ΓΓΈΓ§ Γ¤Γ¥Γ­ Γ¥ΓΓ­Γ΅Γ© Γ¤ΓµΓ­Γ΅Γ΄Γ ."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr " Αποθηκεύτηκε. Δεν εχει πιστοποιηθεί. Κάποιοι κωδικοί ίσως να μην δουλεύουν ταυτόχρονα με άλλους. Αν συναντήσετε πρόβλημα, ανοίξτε το αρχείο .txt για περισσότερες πληροφορίες."
+msgstr " ΓΓ°Γ―Γ¨Γ§ΓªΓ¥Γ½Γ΄Γ§ΓªΓ¥. Γ„Γ¥Γ­ Γ¥Γ·Γ¥Γ© Γ°Γ©Γ³Γ΄Γ―Γ°Γ―Γ©Γ§Γ¨Γ¥Γ. ΓΓΓ°Γ―Γ©Γ―Γ© ΓªΓΉΓ¤Γ©ΓªΓ―Γ ΓΓ³ΓΉΓ² Γ­Γ΅ Γ¬Γ§Γ­ Γ¤Γ―ΓµΓ«Γ¥Γ½Γ―ΓµΓ­ Γ΄Γ΅ΓµΓ΄ΓΌΓ·Γ±Γ―Γ­Γ΅ Γ¬Γ¥ ΓΓ«Γ«Γ―ΓµΓ². ΓΓ­ Γ³ΓµΓ­Γ΅Γ­Γ΄ΓΓ³Γ¥Γ΄Γ¥ Γ°Γ±ΓΌΓΆΓ«Γ§Γ¬Γ΅, Γ΅Γ­Γ―ΓΓ®Γ΄Γ¥ Γ΄Γ― Γ΅Γ±Γ·Γ¥ΓΓ― .txt Γ£Γ©Γ΅ Γ°Γ¥Γ±Γ©Γ³Γ³ΓΌΓ΄Γ¥Γ±Γ¥Γ² Γ°Γ«Γ§Γ±Γ―Γ¶Γ―Γ±ΓΓ¥Γ²."
 
 msgid " is not on the server."
-msgstr " δεν υπάρχει στον server."
+msgstr " Γ¤Γ¥Γ­ ΓµΓ°ΓΓ±Γ·Γ¥Γ© Γ³Γ΄Γ―Γ­ server."
 
 #, c-format
 msgid "%i files not found on the server!"
-msgstr "%τα αρχεία δεν βρέθηκαν στον server!"
+msgstr "%Γ΄Γ΅ Γ΅Γ±Γ·Γ¥ΓΓ΅ Γ¤Γ¥Γ­ ΓΆΓ±ΓΓ¨Γ§ΓªΓ΅Γ­ Γ³Γ΄Γ―Γ­ server!"
 
 #, c-format
 msgid "%i missing files"
-msgstr "%τα χαμένα αρχεία"
+msgstr "%Γ΄Γ΅ Γ·Γ΅Γ¬ΓΓ­Γ΅ Γ΅Γ±Γ·Γ¥ΓΓ΅"
 
 msgid "0 (Everyone)"
-msgstr "0 (Όλοι)"
+msgstr "0 (ΒΌΓ«Γ―Γ©)"
 
 msgid "1 (Child 7+)"
-msgstr "1 (Παιδιά 7+)"
+msgstr "1 (ΓΓ΅Γ©Γ¤Γ©Γ 7+)"
 
 msgid "1 hour"
-msgstr "1 ώρα"
+msgstr "1 ΓΎΓ±Γ΅"
 
 msgid "10 min"
-msgstr "10 λεπτά"
+msgstr "10 Γ«Γ¥Γ°Γ΄Γ"
 
 msgid "2 (Teen 12+)"
-msgstr "2 (Παιδιά 12+)"
+msgstr "2 (ΓΓ΅Γ©Γ¤Γ©Γ 12+)"
 
 msgid "20 min"
-msgstr "20 λεπτά"
+msgstr "20 Γ«Γ¥Γ°Γ΄Γ"
 
 msgid "2D Cover Path"
-msgstr "Μονοπάτι εξωφύλλων 2D"
+msgstr "ΓΓ―Γ­Γ―Γ°ΓΓ΄Γ© Γ¥Γ®ΓΉΓ¶Γ½Γ«Γ«ΓΉΓ­ 2D"
 
 msgid "3 (Mature 16+)"
-msgstr "3 (Έφηβοι 16+)"
+msgstr "3 (ΒΈΓ¶Γ§ΓΆΓ―Γ© 16+)"
 
 msgid "3 min"
-msgstr "3 λεπτά"
+msgstr "3 Γ«Γ¥Γ°Γ΄Γ"
 
 msgid "30 min"
-msgstr "30 λεπτά"
+msgstr "30 Γ«Γ¥Γ°Γ΄Γ"
 
 msgid "3D Cover Path"
-msgstr "Τοποθεσία εξωφύλλων 3D"
+msgstr "Γ”Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅ Γ¥Γ®ΓΉΓ¶Γ½Γ«Γ«ΓΉΓ­ 3D"
 
 msgid "3D Covers"
-msgstr "Εξώφυλλα 3D"
+msgstr "Γ…Γ®ΓΎΓ¶ΓµΓ«Γ«Γ΅ 3D"
 
 msgid "4 (Adults Only 18+)"
-msgstr "4 (Μονο για ενήλικες 18+)"
+msgstr "4 (ΓΓ―Γ­Γ― Γ£Γ©Γ΅ Γ¥Γ­ΓΓ«Γ©ΓªΓ¥Γ² 18+)"
 
 msgid "5 min"
-msgstr "5 λεπτά"
+msgstr "5 Γ«Γ¥Γ°Γ΄Γ"
 
 msgid "AUTO"
-msgstr "AΥΤΟΜΑΤΑ"
+msgstr "AΓ•Γ”ΓΓΓΓ”Γ"
 
 msgid "AXNextFrame"
-msgstr "AXΕπόμενοΚαρέ"
+msgstr "AXΓ…Γ°ΓΌΓ¬Γ¥Γ­Γ―ΓΓ΅Γ±Γ"
 
 msgid "Add category"
-msgstr "Πρόσθεσε κατηγορία"
+msgstr "ΓΓ±ΓΌΓ³Γ¨Γ¥Γ³Γ¥ ΓªΓ΅Γ΄Γ§Γ£Γ―Γ±ΓΓ΅"
 
 msgid "Adjust Overscan X"
-msgstr "Ρύθμισε τον άξονα X"
+msgstr "Γ‘Γ½Γ¨Γ¬Γ©Γ³Γ¥ Γ΄Γ―Γ­ ΓΓ®Γ―Γ­Γ΅ X"
 
 msgid "Adjust Overscan Y"
-msgstr "Ρύθμισε τον άξονα Y"
+msgstr "Γ‘Γ½Γ¨Γ¬Γ©Γ³Γ¥ Γ΄Γ―Γ­ ΓΓ®Γ―Γ­Γ΅ Y"
 
 msgid "After zoom"
-msgstr "Μετά το zoom"
+msgstr "ΓΓ¥Γ΄Γ Γ΄Γ― zoom"
 
 msgid "All"
-msgstr "όλα"
+msgstr "ΓΌΓ«Γ΅"
 
 msgid "All Partitions"
-msgstr "Όλα τα partitions"
+msgstr "ΒΌΓ«Γ΅ Γ΄Γ΅ partitions"
 
 msgid "All files extracted."
-msgstr "όλα τα αρχεία αποσυμπιέστηκαν."
+msgstr "ΓΌΓ«Γ΅ Γ΄Γ΅ Γ΅Γ±Γ·Γ¥ΓΓ΅ Γ΅Γ°Γ―Γ³ΓµΓ¬Γ°Γ©ΓΓ³Γ΄Γ§ΓªΓ΅Γ­."
 
 msgid "All images downloaded successfully."
-msgstr "Όλες οι εικόνες λήφθησαν επιτυχώς."
+msgstr "ΒΌΓ«Γ¥Γ² Γ―Γ© Γ¥Γ©ΓªΓΌΓ­Γ¥Γ² Γ«ΓΓ¶Γ¨Γ§Γ³Γ΅Γ­ Γ¥Γ°Γ©Γ΄ΓµΓ·ΓΎΓ²."
 
 msgid "All the features of USB Loader GX are unlocked."
-msgstr "όλες οι ρυθμίσεις του USB Loader GX είναι ξεκλειδωμένες."
+msgstr "ΓΌΓ«Γ¥Γ² Γ―Γ© Γ±ΓµΓ¨Γ¬ΓΓ³Γ¥Γ©Γ² Γ΄Γ―Γµ USB Loader GX Γ¥ΓΓ­Γ΅Γ© Γ®Γ¥ΓªΓ«Γ¥Γ©Γ¤ΓΉΓ¬ΓΓ­Γ¥Γ²."
 
 msgid "Alternate DOL"
-msgstr "Εναλλακτικό DOL"
+msgstr "Γ…Γ­Γ΅Γ«Γ«Γ΅ΓªΓ΄Γ©ΓªΓΌ DOL"
 
 msgid "An example file was created here:"
-msgstr "Ένα αρχείο-παράδειγμα δημιουργήθηκε εδώ"
+msgstr "ΒΈΓ­Γ΅ Γ΅Γ±Γ·Γ¥ΓΓ―-Γ°Γ΅Γ±ΓΓ¤Γ¥Γ©Γ£Γ¬Γ΅ Γ¤Γ§Γ¬Γ©Γ―ΓµΓ±Γ£ΓΓ¨Γ§ΓªΓ¥ Γ¥Γ¤ΓΎ"
 
 msgid "Animation Start"
-msgstr "Αρχή animation"
+msgstr "ΓΓ±Γ·Γ animation"
 
 msgid "Anti"
-msgstr "Κατά"
+msgstr "ΓΓ΅Γ΄Γ"
 
 msgid "App Language"
-msgstr "Γλώσσα εφαρμογής"
+msgstr "ΓƒΓ«ΓΎΓ³Γ³Γ΅ Γ¥Γ¶Γ΅Γ±Γ¬Γ―Γ£ΓΓ²"
 
 msgid "Apply"
-msgstr "Εφαρμογή"
+msgstr "Γ…Γ¶Γ΅Γ±Γ¬Γ―Γ£Γ"
 
 msgid "Apr"
-msgstr "Απρίλιος"
+msgstr "ΓΓ°Γ±ΓΓ«Γ©Γ―Γ²"
 
 msgid "Are you really sure you want to delete all selected games from the SD card?"
-msgstr "Είστε πραγματικά σίγουροι ότι θέλετε να σβήσετε όλα τα επιλεγμένα παιχνίδια από την κάρτα SD;"
+msgstr "Γ…ΓΓ³Γ΄Γ¥ Γ°Γ±Γ΅Γ£Γ¬Γ΅Γ΄Γ©ΓªΓ Γ³ΓΓ£Γ―ΓµΓ±Γ―Γ© ΓΌΓ΄Γ© Γ¨ΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ³ΓΆΓΓ³Γ¥Γ΄Γ¥ ΓΌΓ«Γ΅ Γ΄Γ΅ Γ¥Γ°Γ©Γ«Γ¥Γ£Γ¬ΓΓ­Γ΅ Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ©Γ΅ Γ΅Γ°ΓΌ Γ΄Γ§Γ­ ΓªΓΓ±Γ΄Γ΅ SD;"
 
 msgid "Are you sure you want to delete this category?"
-msgstr "Είστε σίγουροι ότι θέλετε να σβήσετε αυτήν την κατηγορία;"
+msgstr "Γ…ΓΓ³Γ΄Γ¥ Γ³ΓΓ£Γ―ΓµΓ±Γ―Γ© ΓΌΓ΄Γ© Γ¨ΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ³ΓΆΓΓ³Γ¥Γ΄Γ¥ Γ΅ΓµΓ΄ΓΓ­ Γ΄Γ§Γ­ ΓªΓ΅Γ΄Γ§Γ£Γ―Γ±ΓΓ΅;"
 
 msgid "Are you sure you want to import game categories from GameTDB?"
-msgstr "Είστε σίγουροι ότι θέλετε να εισάγετε κατηγορίες τίτλων από το WiiTDB;"
+msgstr "Γ…ΓΓ³Γ΄Γ¥ Γ³ΓΓ£Γ―ΓµΓ±Γ―Γ© ΓΌΓ΄Γ© Γ¨ΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ¥Γ©Γ³ΓΓ£Γ¥Γ΄Γ¥ ΓªΓ΅Γ΄Γ§Γ£Γ―Γ±ΓΓ¥Γ² Γ΄ΓΓ΄Γ«ΓΉΓ­ Γ΅Γ°ΓΌ Γ΄Γ― WiiTDB;"
 
 msgid "Are you sure you want to install on SD?"
-msgstr "Είστε σίγουροι ότι θέλετε να εγκαταστήσετε στην κάρτα SD?"
+msgstr "Γ…ΓΓ³Γ΄Γ¥ Γ³ΓΓ£Γ―ΓµΓ±Γ―Γ© ΓΌΓ΄Γ© Γ¨ΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ¥Γ£ΓªΓ΅Γ΄Γ΅Γ³Γ΄ΓΓ³Γ¥Γ΄Γ¥ Γ³Γ΄Γ§Γ­ ΓªΓΓ±Γ΄Γ΅ SD?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
-msgstr "Είστε σίγουροι ότι θέλετε να κλειδώσετε το USB Loader GX?"
+msgstr "Γ…ΓΓ³Γ΄Γ¥ Γ³ΓΓ£Γ―ΓµΓ±Γ―Γ© ΓΌΓ΄Γ© Γ¨ΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ ΓªΓ«Γ¥Γ©Γ¤ΓΎΓ³Γ¥Γ΄Γ¥ Γ΄Γ― USB Loader GX?"
 
 msgid "Are you sure you want to remount SD?"
-msgstr "Είστε σίγουροι ότι θέλετε να επαναγνώσετε την κάρτα SD?"
+msgstr "Γ…ΓΓ³Γ΄Γ¥ Γ³ΓΓ£Γ―ΓµΓ±Γ―Γ© ΓΌΓ΄Γ© Γ¨ΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ¥Γ°Γ΅Γ­Γ΅Γ£Γ­ΓΎΓ³Γ¥Γ΄Γ¥ Γ΄Γ§Γ­ ΓªΓΓ±Γ΄Γ΅ SD?"
 
 msgid "Are you sure you want to reset?"
-msgstr "Είστε σίγουροι ότι θέλετε να επανεκκινήσετε;"
+msgstr "Γ…ΓΓ³Γ΄Γ¥ Γ³ΓΓ£Γ―ΓµΓ±Γ―Γ© ΓΌΓ΄Γ© Γ¨ΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ¥Γ°Γ΅Γ­Γ¥ΓªΓªΓ©Γ­ΓΓ³Γ¥Γ΄Γ¥;"
 
 msgid "Are you sure?"
-msgstr "Είστε βέβαιοι;"
+msgstr "Γ…ΓΓ³Γ΄Γ¥ ΓΆΓΓΆΓ΅Γ©Γ―Γ©;"
 
 msgid "Aspect Ratio"
-msgstr "Αναλογία οθόνης"
+msgstr "ΓΓ­Γ΅Γ«Γ―Γ£ΓΓ΅ Γ―Γ¨ΓΌΓ­Γ§Γ²"
 
 msgid "Attention!"
-msgstr "ΠΡΟΣΟΧΗ!"
+msgstr "ΓΓ‘ΓΓ“ΓΓ—Γ‡!"
 
 msgid "Aug"
-msgstr "Αύγουστος"
+msgstr "ΓΓ½Γ£Γ―ΓµΓ³Γ΄Γ―Γ²"
 
 msgid "Author(s):"
-msgstr "Εκδότης-ες:"
+msgstr "Γ…ΓªΓ¤ΓΌΓ΄Γ§Γ²-Γ¥Γ²:"
 
 msgid "Auto"
-msgstr "Aυτόματα"
+msgstr "AΓµΓ΄ΓΌΓ¬Γ΅Γ΄Γ΅"
 
 msgid "AutoInit Network"
-msgstr "Αυτόματη σύνδεση δικτύου"
+msgstr "ΓΓµΓ΄ΓΌΓ¬Γ΅Γ΄Γ§ Γ³Γ½Γ­Γ¤Γ¥Γ³Γ§ Γ¤Γ©ΓªΓ΄Γ½Γ―Γµ"
 
 msgid "BCA Codes Path"
-msgstr "Μονοπάτι κωδικών BCA"
+msgstr "ΓΓ―Γ­Γ―Γ°ΓΓ΄Γ© ΓªΓΉΓ¤Γ©ΓªΓΎΓ­ BCA"
 
 msgid "Back"
 msgstr "Back"
 
 msgid "Back to HBC or Wii Menu"
-msgstr "Μετάβαση στο κανάλι Homebrew ή στο μενού του Wii"
+msgstr "ΓΓ¥Γ΄ΓΓΆΓ΅Γ³Γ§ Γ³Γ΄Γ― ΓªΓ΅Γ­ΓΓ«Γ© Homebrew Γ Γ³Γ΄Γ― Γ¬Γ¥Γ­Γ―Γ½ Γ΄Γ―Γµ Wii"
 
 msgid "Backgroundmusic"
-msgstr "Μουσική υπόκρουση"
+msgstr "ΓΓ―ΓµΓ³Γ©ΓªΓ ΓµΓ°ΓΌΓªΓ±Γ―ΓµΓ³Γ§"
 
 msgid "Banner Animation"
-msgstr "Αnimation τίτλου"
+msgstr "Γnimation Γ΄ΓΓ΄Γ«Γ―Γµ"
 
 msgid "Banner Animation Settings"
-msgstr "Ρυθμίσεις animation τίτλου"
+msgstr "Γ‘ΓµΓ¨Γ¬ΓΓ³Γ¥Γ©Γ² animation Γ΄ΓΓ΄Γ«Γ―Γµ"
 
 msgid "Banner On Channels"
-msgstr "Τίτλοι-ταμπέλες στα κανάλια"
+msgstr "Γ”ΓΓ΄Γ«Γ―Γ©-Γ΄Γ΅Γ¬Γ°ΓΓ«Γ¥Γ² Γ³Γ΄Γ΅ ΓªΓ΅Γ­ΓΓ«Γ©Γ΅"
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
-msgstr "Η διάταξη με τίτλους-ταμπέλες είναι διαθέsιμη μόνο με τo AHBROT! Παρακαλούμε εγκαταστήστε μια νεότερη έκδοση του καναλιού Homebrew."
+msgstr "Γ‡ Γ¤Γ©ΓΓ΄Γ΅Γ®Γ§ Γ¬Γ¥ Γ΄ΓΓ΄Γ«Γ―ΓµΓ²-Γ΄Γ΅Γ¬Γ°ΓΓ«Γ¥Γ² Γ¥ΓΓ­Γ΅Γ© Γ¤Γ©Γ΅Γ¨ΓsΓ©Γ¬Γ§ Γ¬ΓΌΓ­Γ― Γ¬Γ¥ Γ΄o AHBROT! ΓΓ΅Γ±Γ΅ΓªΓ΅Γ«Γ―Γ½Γ¬Γ¥ Γ¥Γ£ΓªΓ΅Γ΄Γ΅Γ³Γ΄ΓΓ³Γ΄Γ¥ Γ¬Γ©Γ΅ Γ­Γ¥ΓΌΓ΄Γ¥Γ±Γ§ ΓΓªΓ¤Γ―Γ³Γ§ Γ΄Γ―Γµ ΓªΓ΅Γ­Γ΅Γ«Γ©Γ―Γ½ Homebrew."
 
 msgid "Banner window is only available with AHBPROT! Please consider installing new HBC version."
-msgstr "Tίτλοι-ταμπέλες είναι διαθέσιμοι μόνο με τo AHBROT! Παρακαλούμε εγκαταστήστε μια νεότερη έκδοση του καναλιού Homebrew."
+msgstr "TΓΓ΄Γ«Γ―Γ©-Γ΄Γ΅Γ¬Γ°ΓΓ«Γ¥Γ² Γ¥ΓΓ­Γ΅Γ© Γ¤Γ©Γ΅Γ¨ΓΓ³Γ©Γ¬Γ―Γ© Γ¬ΓΌΓ­Γ― Γ¬Γ¥ Γ΄o AHBROT! ΓΓ΅Γ±Γ΅ΓªΓ΅Γ«Γ―Γ½Γ¬Γ¥ Γ¥Γ£ΓªΓ΅Γ΄Γ΅Γ³Γ΄ΓΓ³Γ΄Γ¥ Γ¬Γ©Γ΅ Γ­Γ¥ΓΌΓ΄Γ¥Γ±Γ§ ΓΓªΓ¤Γ―Γ³Γ§ Γ΄Γ―Γµ ΓªΓ΅Γ­Γ΅Γ«Γ©Γ―Γ½ Homebrew."
 
 msgid "Big thanks to:"
-msgstr "Θερμές ευχαριστιες στους:"
+msgstr "ΓΓ¥Γ±Γ¬ΓΓ² Γ¥ΓµΓ·Γ΅Γ±Γ©Γ³Γ΄Γ©Γ¥Γ² Γ³Γ΄Γ―ΓµΓ²:"
 
 msgid "Block Categories Menu"
-msgstr "Φραγή μενού Κατηγοριών"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ¬Γ¥Γ­Γ―Γ½ ΓΓ΅Γ΄Γ§Γ£Γ―Γ±Γ©ΓΎΓ­"
 
 msgid "Block Categories Modify"
-msgstr "Φραγή τροποποίησης Κατηγοριών"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ΄Γ±Γ―Γ°Γ―Γ°Γ―ΓΓ§Γ³Γ§Γ² ΓΓ΅Γ΄Γ§Γ£Γ―Γ±Γ©ΓΎΓ­"
 
 msgid "Block Cover Downloads"
-msgstr "Φραγή κατεβάσματος εξωφύλλων"
+msgstr "Γ–Γ±Γ΅Γ£Γ ΓªΓ΅Γ΄Γ¥ΓΆΓΓ³Γ¬Γ΅Γ΄Γ―Γ² Γ¥Γ®ΓΉΓ¶Γ½Γ«Γ«ΓΉΓ­"
 
 msgid "Block Custom Paths"
-msgstr "Φραγή ορισμένων από τον χρήστη μονοπατιών"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ―Γ±Γ©Γ³Γ¬ΓΓ­ΓΉΓ­ Γ΅Γ°ΓΌ Γ΄Γ―Γ­ Γ·Γ±ΓΓ³Γ΄Γ§ Γ¬Γ―Γ­Γ―Γ°Γ΅Γ΄Γ©ΓΎΓ­"
 
 msgid "Block Feature Settings"
-msgstr "Φραγή ρυθμίσεων στοιχείων προγράμματος"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ±ΓµΓ¨Γ¬ΓΓ³Γ¥ΓΉΓ­ Γ³Γ΄Γ―Γ©Γ·Γ¥ΓΓΉΓ­ Γ°Γ±Γ―Γ£Γ±ΓΓ¬Γ¬Γ΅Γ΄Γ―Γ²"
 
 msgid "Block Game Install"
-msgstr "Φραγή εγκατάστασης νεων παιχνιδιών"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ¥Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§Γ² Γ­Γ¥ΓΉΓ­ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©ΓΎΓ­"
 
 msgid "Block Game Settings"
-msgstr "Φραγή σε τροποποίηση ρυθμίσεων παιχνιδιών"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ³Γ¥ Γ΄Γ±Γ―Γ°Γ―Γ°Γ―ΓΓ§Γ³Γ§ Γ±ΓµΓ¨Γ¬ΓΓ³Γ¥ΓΉΓ­ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©ΓΎΓ­"
 
 msgid "Block GameID Change"
-msgstr "Φραγή αλλαγής κωδικού ID κάθε παιχνιδιού"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ΅Γ«Γ«Γ΅Γ£ΓΓ² ΓªΓΉΓ¤Γ©ΓªΓ―Γ½ ID ΓªΓΓ¨Γ¥ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½"
 
 msgid "Block Global Settings"
-msgstr "Φραγή γενικών ρυθμίσεων"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ£Γ¥Γ­Γ©ΓªΓΎΓ­ Γ±ΓµΓ¨Γ¬ΓΓ³Γ¥ΓΉΓ­"
 
 msgid "Block Gui Settings"
-msgstr "Φραγή ρυθμίσεων προβολής εικονιδίων"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ±ΓµΓ¨Γ¬ΓΓ³Γ¥ΓΉΓ­ Γ°Γ±Γ―ΓΆΓ―Γ«ΓΓ² Γ¥Γ©ΓªΓ―Γ­Γ©Γ¤ΓΓΉΓ­"
 
 msgid "Block HBC Menu"
-msgstr "Φραγή προβολής εικονιδίου HBC"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ°Γ±Γ―ΓΆΓ―Γ«ΓΓ² Γ¥Γ©ΓªΓ―Γ­Γ©Γ¤ΓΓ―Γµ HBC"
 
 msgid "Block Hard Drive Settings"
-msgstr "Φραγή ρυθμίσεων σκληρού δίσκου"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ±ΓµΓ¨Γ¬ΓΓ³Γ¥ΓΉΓ­ Γ³ΓªΓ«Γ§Γ±Γ―Γ½ Γ¤ΓΓ³ΓªΓ―Γµ"
 
 msgid "Block IOS Reload"
-msgstr "Φραγή επαναφόρτωσης IOS"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ¥Γ°Γ΅Γ­Γ΅Γ¶ΓΌΓ±Γ΄ΓΉΓ³Γ§Γ² IOS"
 
 msgid "Block Loader Mode Button"
-msgstr "Φραγή εικονιδίου επιλογής παιχνιδιών"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ¥Γ©ΓªΓ―Γ­Γ©Γ¤ΓΓ―Γµ Γ¥Γ°Γ©Γ«Γ―Γ£ΓΓ² Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©ΓΎΓ­"
 
 msgid "Block Loader Settings"
-msgstr "Φραγή ρυθμίσεων Loader"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ±ΓµΓ¨Γ¬ΓΓ³Γ¥ΓΉΓ­ Loader"
 
 msgid "Block Parental Settings"
-msgstr "Φραγή ρυθμίσεων κλειδώματος"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ±ΓµΓ¨Γ¬ΓΓ³Γ¥ΓΉΓ­ ΓªΓ«Γ¥Γ©Γ¤ΓΎΓ¬Γ΅Γ΄Γ―Γ²"
 
 msgid "Block Priiloader Override"
-msgstr "Φραγή εμφάνισης Priiloader"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ¥Γ¬Γ¶ΓΓ­Γ©Γ³Γ§Γ² Priiloader"
 
 msgid "Block Reset Settings"
-msgstr "Φραγή επαναφοράς ρυθμίσεων"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ¥Γ°Γ΅Γ­Γ΅Γ¶Γ―Γ±ΓΓ² Γ±ΓµΓ¨Γ¬ΓΓ³Γ¥ΓΉΓ­"
 
 msgid "Block SD Reload Button"
-msgstr "Φραγή εικονιδίου επαναφόρτωσης SD"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ¥Γ©ΓªΓ―Γ­Γ©Γ¤ΓΓ―Γµ Γ¥Γ°Γ΅Γ­Γ΅Γ¶ΓΌΓ±Γ΄ΓΉΓ³Γ§Γ² SD"
 
 msgid "Block Sound Settings"
-msgstr "Φραγή ρυθμίσεων ήχου"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ±ΓµΓ¨Γ¬ΓΓ³Γ¥ΓΉΓ­ ΓΓ·Γ―Γµ"
 
 msgid "Block Theme Downloader"
-msgstr "Φραγή λήψης νέων θεμάτων"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ«ΓΓΈΓ§Γ² Γ­ΓΓΉΓ­ Γ¨Γ¥Γ¬ΓΓ΄ΓΉΓ­"
 
 msgid "Block Theme Menu"
-msgstr "Φραγή αλλαγής θεμάτων"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ΅Γ«Γ«Γ΅Γ£ΓΓ² Γ¨Γ¥Γ¬ΓΓ΄ΓΉΓ­"
 
 msgid "Block Title Launcher"
-msgstr "Φραγή αλλαγής τίτλων"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ΅Γ«Γ«Γ΅Γ£ΓΓ² Γ΄ΓΓ΄Γ«ΓΉΓ­"
 
 msgid "Block Updates"
-msgstr "Φραγή αναβαθμίσεων"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ΅Γ­Γ΅ΓΆΓ΅Γ¨Γ¬ΓΓ³Γ¥ΓΉΓ­"
 
 msgid "Boot Content"
-msgstr "Περιεχόμενο που εκκινεί"
+msgstr "ΓΓ¥Γ±Γ©Γ¥Γ·ΓΌΓ¬Γ¥Γ­Γ― Γ°Γ―Γµ Γ¥ΓªΓªΓ©Γ­Γ¥Γ"
 
 msgid "Boot/Standard"
-msgstr "Εκκινηση/Βασικό"
+msgstr "Γ…ΓªΓªΓ©Γ­Γ§Γ³Γ§/Γ‚Γ΅Γ³Γ©ΓªΓΌ"
 
 msgid "Boot?"
-msgstr "εκκίνηση;"
+msgstr "Γ¥ΓªΓªΓΓ­Γ§Γ³Γ§;"
 
 msgid "Both"
-msgstr "και τα δυο"
+msgstr "ΓªΓ΅Γ© Γ΄Γ΅ Γ¤ΓµΓ―"
 
 msgid "Both Ports"
-msgstr "και οι 2 θύρες"
+msgstr "ΓªΓ΅Γ© Γ―Γ© 2 Γ¨Γ½Γ±Γ¥Γ²"
 
 msgid "Cache BNR Files"
-msgstr "αποθήκευση αρχείων BNR"
+msgstr "Γ΅Γ°Γ―Γ¨ΓΓªΓ¥ΓµΓ³Γ§ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­ BNR"
 
 msgid "Cache BNR Files Path"
-msgstr "αποθήκευση τοποθεσίας αρχείων BNR"
+msgstr "Γ΅Γ°Γ―Γ¨ΓΓªΓ¥ΓµΓ³Γ§ Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅Γ² Γ΅Γ±Γ·Γ¥ΓΓΉΓ­ BNR"
 
 msgid "Cache Titles"
-msgstr "Αποθήκευση τίτλων"
+msgstr "ΓΓ°Γ―Γ¨ΓΓªΓ¥ΓµΓ³Γ§ Γ΄ΓΓ΄Γ«ΓΉΓ­"
 
 msgid "Can't be formatted"
-msgstr "Αδύνατη η ανασυγκρότηση (format)"
+msgstr "ΓΓ¤Γ½Γ­Γ΅Γ΄Γ§ Γ§ Γ΅Γ­Γ΅Γ³ΓµΓ£ΓªΓ±ΓΌΓ΄Γ§Γ³Γ§ (format)"
 
 msgid "Can't create directory"
-msgstr "Αδύνατη η δημιουργία φακέλου"
+msgstr "ΓΓ¤Γ½Γ­Γ΅Γ΄Γ§ Γ§ Γ¤Γ§Γ¬Γ©Γ―ΓµΓ±Γ£ΓΓ΅ Γ¶Γ΅ΓªΓΓ«Γ―Γµ"
 
 #, c-format
 msgid "Can't create file: %s"
-msgstr "Αδύνατη η δημιουργία αρχείου: %s"
+msgstr "ΓΓ¤Γ½Γ­Γ΅Γ΄Γ§ Γ§ Γ¤Γ§Γ¬Γ©Γ―ΓµΓ±Γ£ΓΓ΅ Γ΅Γ±Γ·Γ¥ΓΓ―Γµ: %s"
 
 #, c-format
 msgid "Can't create path: %s"
-msgstr "Αδύνατος ο ορισμός διεύθυνσης: %s"
+msgstr "ΓΓ¤Γ½Γ­Γ΅Γ΄Γ―Γ² Γ― Γ―Γ±Γ©Γ³Γ¬ΓΌΓ² Γ¤Γ©Γ¥Γ½Γ¨ΓµΓ­Γ³Γ§Γ²: %s"
 
 msgid "Can't delete:"
-msgstr "Αδύνατη η διαγραφή:"
+msgstr "ΓΓ¤Γ½Γ­Γ΅Γ΄Γ§ Γ§ Γ¤Γ©Γ΅Γ£Γ±Γ΅Γ¶Γ:"
 
 msgid "Can't mount or unknown disc format."
-msgstr "Αδυναμία εύρεσης αποθηκευτικού μέσου ή άγνωστο μέσο"
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ¥Γ½Γ±Γ¥Γ³Γ§Γ² Γ΅Γ°Γ―Γ¨Γ§ΓªΓ¥ΓµΓ΄Γ©ΓªΓ―Γ½ Γ¬ΓΓ³Γ―Γµ Γ ΓΓ£Γ­ΓΉΓ³Γ΄Γ― Γ¬ΓΓ³Γ―"
 
 #, c-format
 msgid "Can't open file for write: %s"
-msgstr "Αδυναμία εγγραφής στο αρχείο: %s"
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ¥Γ£Γ£Γ±Γ΅Γ¶ΓΓ² Γ³Γ΄Γ― Γ΅Γ±Γ·Γ¥ΓΓ―: %s"
 
 #, c-format
 msgid "Can't open file: %s"
-msgstr "Αδυναμία ανοίγματος αρχείου: %s"
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ΅Γ­Γ―ΓΓ£Γ¬Γ΅Γ΄Γ―Γ² Γ΅Γ±Γ·Γ¥ΓΓ―Γµ: %s"
 
 #, c-format
 msgid "Can't read file: %s"
-msgstr "Αδυναμία ανάγνωσης αρχείου: %s"
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ΅Γ­ΓΓ£Γ­ΓΉΓ³Γ§Γ² Γ΅Γ±Γ·Γ¥ΓΓ―Γµ: %s"
 
 msgid "Cancel"
-msgstr "Άκυρο"
+msgstr "ΒΆΓªΓµΓ±Γ―"
 
 msgid "Cannot write to destination."
-msgstr "Αδυναμία εγγραφής στον προορισμό."
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ¥Γ£Γ£Γ±Γ΅Γ¶ΓΓ² Γ³Γ΄Γ―Γ­ Γ°Γ±Γ―Γ―Γ±Γ©Γ³Γ¬ΓΌ."
 
 msgid "Categories"
-msgstr "Κατηγορίες"
+msgstr "ΓΓ΅Γ΄Γ§Γ£Γ―Γ±ΓΓ¥Γ²"
 
 msgid "Categories:"
-msgstr "Κατηγορίες:"
+msgstr "ΓΓ΅Γ΄Γ§Γ£Γ―Γ±ΓΓ¥Γ²:"
 
 msgid "Change Play Path"
-msgstr "Αλλαγή τοποθεσίας παιχνιδιών "
+msgstr "ΓΓ«Γ«Γ΅Γ£Γ Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅Γ² Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©ΓΎΓ­ "
 
 msgid "Channel Launcher"
-msgstr "Εκκίνηση καναλιών"
+msgstr "Γ…ΓªΓªΓΓ­Γ§Γ³Γ§ ΓªΓ΅Γ­Γ΅Γ«Γ©ΓΎΓ­"
 
 msgid "Channels"
-msgstr "Κανάλια"
+msgstr "ΓΓ΅Γ­ΓΓ«Γ©Γ΅"
 
 msgid "Cheatfile is blank"
-msgstr "το αρχείο cheat είναι κενό"
+msgstr "Γ΄Γ― Γ΅Γ±Γ·Γ¥ΓΓ― cheat Γ¥ΓΓ­Γ΅Γ© ΓªΓ¥Γ­ΓΌ"
 
 msgid "Clear"
-msgstr "Σβήσιμο"
+msgstr "Γ“ΓΆΓΓ³Γ©Γ¬Γ―"
 
 msgid "Click to Download Covers"
-msgstr "Κλικ για λήψη εξωφύλλων"
+msgstr "ΓΓ«Γ©Γª Γ£Γ©Γ΅ Γ«ΓΓΈΓ§ Γ¥Γ®ΓΉΓ¶Γ½Γ«Γ«ΓΉΓ­"
 
 msgid "Click to change game ID"
-msgstr "Κλικ για αλλαγή ονόματος παιχνιδιού"
+msgstr "ΓΓ«Γ©Γª Γ£Γ©Γ΅ Γ΅Γ«Γ«Γ΅Γ£Γ Γ―Γ­ΓΌΓ¬Γ΅Γ΄Γ―Γ² Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½"
 
 msgid "Clock"
-msgstr "Ρολοϊ"
+msgstr "Γ‘Γ―Γ«Γ―ΓΊ"
 
 msgid "Clock Scale Factor"
-msgstr "Mέγεθος αριθμών ρολογιού"
+msgstr "MΓΓ£Γ¥Γ¨Γ―Γ² Γ΅Γ±Γ©Γ¨Γ¬ΓΎΓ­ Γ±Γ―Γ«Γ―Γ£Γ©Γ―Γ½"
 
 msgid "Close"
-msgstr "Κλείσιμο"
+msgstr "ΓΓ«Γ¥ΓΓ³Γ©Γ¬Γ―"
 
 msgid "Code Download"
-msgstr "Λήψη κωδικού"
+msgstr "Γ‹ΓΓΈΓ§ ΓªΓΉΓ¤Γ©ΓªΓ―Γ½"
 
 #, c-format
 msgid "Coded by: %s"
-msgstr "Προγραμματισμός: %s"
+msgstr "ΓΓ±Γ―Γ£Γ±Γ΅Γ¬Γ¬Γ΅Γ΄Γ©Γ³Γ¬ΓΌΓ²: %s"
 
 msgid "Coding:"
-msgstr "Προγραμματισμός:"
+msgstr "ΓΓ±Γ―Γ£Γ±Γ΅Γ¬Γ¬Γ΅Γ΄Γ©Γ³Γ¬ΓΌΓ²:"
 
 msgid "Connection to server timed out."
-msgstr "Η σύνδεση στον server χάθηκε."
+msgstr "Γ‡ Γ³Γ½Γ­Γ¤Γ¥Γ³Γ§ Γ³Γ΄Γ―Γ­ server Γ·ΓΓ¨Γ§ΓªΓ¥."
 
 msgid "Console"
-msgstr "Κονσόλα"
+msgstr "ΓΓ―Γ­Γ³ΓΌΓ«Γ΅"
 
 msgid "Console Default"
-msgstr "Βασικές ρυθμίσεις κονσόλας"
+msgstr "Γ‚Γ΅Γ³Γ©ΓªΓΓ² Γ±ΓµΓ¨Γ¬ΓΓ³Γ¥Γ©Γ² ΓªΓ―Γ­Γ³ΓΌΓ«Γ΅Γ²"
 
 msgid "Console Locked"
-msgstr "Κλειδώθηκε"
+msgstr "ΓΓ«Γ¥Γ©Γ¤ΓΎΓ¨Γ§ΓªΓ¥"
 
 msgid "Console must be unlocked for this option."
-msgstr "Το μενού πρέπει να είναι ξεκλείδωτο για την επιλογή αυτή."
+msgstr "Γ”Γ― Γ¬Γ¥Γ­Γ―Γ½ Γ°Γ±ΓΓ°Γ¥Γ© Γ­Γ΅ Γ¥ΓΓ­Γ΅Γ© Γ®Γ¥ΓªΓ«Γ¥ΓΓ¤ΓΉΓ΄Γ― Γ£Γ©Γ΅ Γ΄Γ§Γ­ Γ¥Γ°Γ©Γ«Γ―Γ£Γ Γ΅ΓµΓ΄Γ."
 
 msgid "Console must be unlocked to be able to use this."
-msgstr "Το μενού πρέπει να είναι ξεκλείδωτο για να μπορείτε να το χρησιμοποιήσετε."
+msgstr "Γ”Γ― Γ¬Γ¥Γ­Γ―Γ½ Γ°Γ±ΓΓ°Γ¥Γ© Γ­Γ΅ Γ¥ΓΓ­Γ΅Γ© Γ®Γ¥ΓªΓ«Γ¥ΓΓ¤ΓΉΓ΄Γ― Γ£Γ©Γ΅ Γ­Γ΅ Γ¬Γ°Γ―Γ±Γ¥ΓΓ΄Γ¥ Γ­Γ΅ Γ΄Γ― Γ·Γ±Γ§Γ³Γ©Γ¬Γ―Γ°Γ―Γ©ΓΓ³Γ¥Γ΄Γ¥."
 
 msgid "Console should be unlocked to modify it."
-msgstr "Το μενού πρέπει να είναι ξεκλείδωτο για να μπορείτε να το τροποποιήσετε."
+msgstr "Γ”Γ― Γ¬Γ¥Γ­Γ―Γ½ Γ°Γ±ΓΓ°Γ¥Γ© Γ­Γ΅ Γ¥ΓΓ­Γ΅Γ© Γ®Γ¥ΓªΓ«Γ¥ΓΓ¤ΓΉΓ΄Γ― Γ£Γ©Γ΅ Γ­Γ΅ Γ¬Γ°Γ―Γ±Γ¥ΓΓ΄Γ¥ Γ­Γ΅ Γ΄Γ― Γ΄Γ±Γ―Γ°Γ―Γ°Γ―Γ©ΓΓ³Γ¥Γ΄Γ¥."
 
 msgid "Continue"
-msgstr "Συνέχεια"
+msgstr "Γ“ΓµΓ­ΓΓ·Γ¥Γ©Γ΅"
 
 msgid "Continue to install game?"
-msgstr "Συνέχιση εγκατάστασης παιχνιδιού;"
+msgstr "Γ“ΓµΓ­ΓΓ·Γ©Γ³Γ§ Γ¥Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§Γ² Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½;"
 
 msgid "Continue?"
-msgstr "Συνέχεια;"
+msgstr "Γ“ΓµΓ­ΓΓ·Γ¥Γ©Γ΅;"
 
-msgid "Control level"
-msgstr "Επίπεδο ελέγχου"
+msgid "Controllevel"
+msgstr ""
 
 msgid "Copy"
-msgstr "Αντιγραφή"
+msgstr "ΓΓ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ"
 
 msgid "Copying Canceled"
-msgstr "Αντιγραφή ακυρώθηκε"
+msgstr "ΓΓ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ Γ΅ΓªΓµΓ±ΓΎΓ¨Γ§ΓªΓ¥"
 
 msgid "Copying GC game..."
-msgstr "Αντιγραφή παιχνιδιού GameCube..."
+msgstr "ΓΓ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½ GameCube..."
 
 msgid "Copying files..."
-msgstr "Αντιγραφή αρχείων..."
+msgstr "ΓΓ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­..."
 
 msgid "Correct Password"
-msgstr "Σωστό Password"
+msgstr "Γ“ΓΉΓ³Γ΄ΓΌ Password"
 
 msgid "Could not connect to the server."
-msgstr "Αδυναμία σύνδεσης στο server."
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ³Γ½Γ­Γ¤Γ¥Γ³Γ§Γ² Γ³Γ΄Γ― server."
 
 msgid "Could not create GCT file"
-msgstr "Αδυναμία δημιουργίας αρχείου GCT"
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ¤Γ§Γ¬Γ©Γ―ΓµΓ±Γ£ΓΓ΅Γ² Γ΅Γ±Γ·Γ¥ΓΓ―Γµ GCT"
 
 #, c-format
 msgid "Could not create path: %s"
-msgstr "Αδυναμία δημιουργίας μονοπατιού: %s"
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ¤Γ§Γ¬Γ©Γ―ΓµΓ±Γ£ΓΓ΅Γ² Γ¬Γ―Γ­Γ―Γ°Γ΅Γ΄Γ©Γ―Γ½: %s"
 
 msgid "Could not extract files for:"
-msgstr "Αδυναμία αποσυμπίεσης αρχείων για:"
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ΅Γ°Γ―Γ³ΓµΓ¬Γ°ΓΓ¥Γ³Γ§Γ² Γ΅Γ±Γ·Γ¥ΓΓΉΓ­ Γ£Γ©Γ΅:"
 
 msgid "Could not find info for this game in the wiitdb.xml."
-msgstr "Δεν βρέθηκαν πληροφορίες για το παιχνίδι αυτό στο αρχείο wiitdb.xml."
+msgstr "Γ„Γ¥Γ­ ΓΆΓ±ΓΓ¨Γ§ΓªΓ΅Γ­ Γ°Γ«Γ§Γ±Γ―Γ¶Γ―Γ±ΓΓ¥Γ² Γ£Γ©Γ΅ Γ΄Γ― Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ© Γ΅ΓµΓ΄ΓΌ Γ³Γ΄Γ― Γ΅Γ±Γ·Γ¥ΓΓ― wiitdb.xml."
 
 msgid "Could not get free device space for game."
-msgstr "Δεν βρέθηκε επαρκής ελεύθερος χώρος για το παιχνίδι."
+msgstr "Γ„Γ¥Γ­ ΓΆΓ±ΓΓ¨Γ§ΓªΓ¥ Γ¥Γ°Γ΅Γ±ΓªΓΓ² Γ¥Γ«Γ¥Γ½Γ¨Γ¥Γ±Γ―Γ² Γ·ΓΎΓ±Γ―Γ² Γ£Γ©Γ΅ Γ΄Γ― Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ©."
 
 msgid "Could not initialize DIP module!"
-msgstr "Αδυναμία εκκίνησης στοιχείου DIP!"
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ¥ΓªΓªΓΓ­Γ§Γ³Γ§Γ² Γ³Γ΄Γ―Γ©Γ·Γ¥ΓΓ―Γµ DIP!"
 
 msgid "Could not initialize network!"
-msgstr "Αδυναμία σύνδεσης προγράμματος στο διαδίκτυο!"
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ³Γ½Γ­Γ¤Γ¥Γ³Γ§Γ² Γ°Γ±Γ―Γ£Γ±ΓΓ¬Γ¬Γ΅Γ΄Γ―Γ² Γ³Γ΄Γ― Γ¤Γ©Γ΅Γ¤ΓΓªΓ΄ΓµΓ―!"
 
 msgid "Could not initialize network, time out!"
-msgstr "Αδυναμία σύνδεσης προγράμματος στο διαδίκτυο, τέλος χρόνου!"
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ³Γ½Γ­Γ¤Γ¥Γ³Γ§Γ² Γ°Γ±Γ―Γ£Γ±ΓΓ¬Γ¬Γ΅Γ΄Γ―Γ² Γ³Γ΄Γ― Γ¤Γ©Γ΅Γ¤ΓΓªΓ΄ΓµΓ―, Γ΄ΓΓ«Γ―Γ² Γ·Γ±ΓΌΓ­Γ―Γµ!"
 
 msgid "Could not open Disc"
-msgstr "Αδυναμία ανάγνωσης δίσκου"
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ΅Γ­ΓΓ£Γ­ΓΉΓ³Γ§Γ² Γ¤ΓΓ³ΓªΓ―Γµ"
 
 msgid "Could not open the WiiTDB.xml file."
-msgstr "Αδυναμία ανοίγματος αρχείου wiitdb.xml"
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ΅Γ­Γ―ΓΓ£Γ¬Γ΅Γ΄Γ―Γ² Γ΅Γ±Γ·Γ¥ΓΓ―Γµ wiitdb.xml"
 
 msgid "Could not open wiitdb.xml."
-msgstr "Αδυναμία ανοίγματο wiitdb.xml."
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ΅Γ­Γ―ΓΓ£Γ¬Γ΅Γ΄Γ― wiitdb.xml."
 
 msgid "Could not save."
-msgstr "Αδυναμία αποθήκευσης."
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ΅Γ°Γ―Γ¨ΓΓªΓ¥ΓµΓ³Γ§Γ²."
 
 msgid "Could not write file."
-msgstr "Δεν είναι δυνατή η εγγραφή του αρχείου."
+msgstr "Γ„Γ¥Γ­ Γ¥ΓΓ­Γ΅Γ© Γ¤ΓµΓ­Γ΅Γ΄Γ Γ§ Γ¥Γ£Γ£Γ±Γ΅Γ¶Γ Γ΄Γ―Γµ Γ΅Γ±Γ·Γ¥ΓΓ―Γµ."
 
 msgid "Could not write to:"
-msgstr "Αδυναμία εγγραφής σε:"
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ¥Γ£Γ£Γ±Γ΅Γ¶ΓΓ² Γ³Γ¥:"
 
 msgid "Cover Download"
-msgstr "Λήψη εξωφύλλων"
+msgstr "Γ‹ΓΓΈΓ§ Γ¥Γ®ΓΉΓ¶Γ½Γ«Γ«ΓΉΓ­"
 
 msgid "Create"
-msgstr "Δημιουργία"
+msgstr "Γ„Γ§Γ¬Γ©Γ―ΓµΓ±Γ£ΓΓ΅"
 
 msgid "Credits"
-msgstr "Συντελεστές"
+msgstr "Γ“ΓµΓ­Γ΄Γ¥Γ«Γ¥Γ³Γ΄ΓΓ²"
 
 msgid "Custom Banners"
-msgstr "Τροποποιημένες ταμπέλες-εικονίδια"
+msgstr "Γ”Γ±Γ―Γ°Γ―Γ°Γ―Γ©Γ§Γ¬ΓΓ­Γ¥Γ² Γ΄Γ΅Γ¬Γ°ΓΓ«Γ¥Γ²-Γ¥Γ©ΓªΓ―Γ­ΓΓ¤Γ©Γ΅"
 
 msgid "Custom Paths"
-msgstr "Τροποποιημένες διευθύνσεις/μονοπάτια αρχείων"
+msgstr "Γ”Γ±Γ―Γ°Γ―Γ°Γ―Γ©Γ§Γ¬ΓΓ­Γ¥Γ² Γ¤Γ©Γ¥ΓµΓ¨Γ½Γ­Γ³Γ¥Γ©Γ²/Γ¬Γ―Γ­Γ―Γ°ΓΓ΄Γ©Γ΅ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­"
 
 msgid "Customs"
-msgstr "Τροποποιημένα"
+msgstr "Γ”Γ±Γ―Γ°Γ―Γ°Γ―Γ©Γ§Γ¬ΓΓ­Γ΅"
 
 msgid "Customs/Original"
-msgstr "Τροποποιημένα/Αυθεντικά"
+msgstr "Γ”Γ±Γ―Γ°Γ―Γ°Γ―Γ©Γ§Γ¬ΓΓ­Γ΅/ΓΓµΓ¨Γ¥Γ­Γ΄Γ©ΓªΓ"
+
+msgid "DEVO LED Activity"
+msgstr ""
 
 msgid "DEVO MemCard Emulation"
-msgstr "εξομοίωση της memory card από το devolution"
+msgstr "Γ¥Γ®Γ―Γ¬Γ―ΓΓΉΓ³Γ§ Γ΄Γ§Γ² memory card Γ΅Γ°ΓΌ Γ΄Γ― devolution"
 
 msgid "DML Auto"
-msgstr "αυτόματα από το DML"
+msgstr "Γ΅ΓµΓ΄ΓΌΓ¬Γ΅Γ΄Γ΅ Γ΅Γ°ΓΌ Γ΄Γ― DML"
 
 msgid "DML Debug"
 msgstr "Debug DML"
 
 msgid "DML Force Widescreen"
-msgstr "Επιβολή ευρείας απεικόνισης από το DML"
+msgstr "Γ…Γ°Γ©ΓΆΓ―Γ«Γ Γ¥ΓµΓ±Γ¥ΓΓ΅Γ² Γ΅Γ°Γ¥Γ©ΓªΓΌΓ­Γ©Γ³Γ§Γ² Γ΅Γ°ΓΌ Γ΄Γ― DML"
 
 msgid "DML Japanese Patch"
-msgstr "Patch για ιαπωνικα games από το DML"
+msgstr "Patch Γ£Γ©Γ΅ Γ©Γ΅Γ°ΓΉΓ­Γ©ΓªΓ΅ games Γ΅Γ°ΓΌ Γ΄Γ― DML"
 
 msgid "DML LED Activity"
-msgstr "Λειτουργία λυχνίας του Wii από το DML"
+msgstr "Γ‹Γ¥Γ©Γ΄Γ―ΓµΓ±Γ£ΓΓ΅ Γ«ΓµΓ·Γ­ΓΓ΅Γ² Γ΄Γ―Γµ Wii Γ΅Γ°ΓΌ Γ΄Γ― DML"
 
 msgid "DML NMM Mode"
-msgstr "χρήση NMM από DML"
+msgstr "Γ·Γ±ΓΓ³Γ§ NMM Γ΅Γ°ΓΌ DML"
 
 msgid "DML No Disc"
-msgstr "επιλογή No-disc από το DML"
+msgstr "Γ¥Γ°Γ©Γ«Γ―Γ£Γ No-disc Γ΅Γ°ΓΌ Γ΄Γ― DML"
 
 msgid "DML No Disc+"
-msgstr "επιλογή No Disc+ από το DML"
+msgstr "Γ¥Γ°Γ©Γ«Γ―Γ£Γ No Disc+ Γ΅Γ°ΓΌ Γ΄Γ― DML"
 
 msgid "DML None"
-msgstr "καμία παρεμβολή από το DML"
+msgstr "ΓªΓ΅Γ¬ΓΓ΅ Γ°Γ΅Γ±Γ¥Γ¬ΓΆΓ―Γ«Γ Γ΅Γ°ΓΌ Γ΄Γ― DML"
 
 msgid "DML PAD Hook"
 msgstr "PAD hook DML"
 
 msgid "DML Progressive Patch"
-msgstr "Patch στην εικόνα από το DML"
+msgstr "Patch Γ³Γ΄Γ§Γ­ Γ¥Γ©ΓªΓΌΓ­Γ΅ Γ΅Γ°ΓΌ Γ΄Γ― DML"
+
+msgid "DML Screenshot"
+msgstr ""
 
 msgid "DML Video Mode"
-msgstr "επιλογή video ρυθμίσεων από το DML"
+msgstr "Γ¥Γ°Γ©Γ«Γ―Γ£Γ video Γ±ΓµΓ¨Γ¬ΓΓ³Γ¥ΓΉΓ­ Γ΅Γ°ΓΌ Γ΄Γ― DML"
 
 msgid "DOL Path"
-msgstr "Διεύθυνση DOL"
+msgstr "Γ„Γ©Γ¥Γ½Γ¨ΓµΓ­Γ³Γ§ DOL"
 
 msgid "Debug"
 msgstr "Debug"
 
 msgid "Debug Wait"
-msgstr "Αναμονή debugger"
+msgstr "ΓΓ­Γ΅Γ¬Γ―Γ­Γ debugger"
 
 msgid "Debugger Paused Start"
-msgstr "Μεταγενέστερη εκκίνηση debugger"
+msgstr "ΓΓ¥Γ΄Γ΅Γ£Γ¥Γ­ΓΓ³Γ΄Γ¥Γ±Γ§ Γ¥ΓªΓªΓΓ­Γ§Γ³Γ§ debugger"
 
 msgid "Dec"
-msgstr "Δεκέμβριος"
+msgstr "Γ„Γ¥ΓªΓΓ¬ΓΆΓ±Γ©Γ―Γ²"
 
 msgid "Default"
-msgstr "Βασική"
+msgstr "Γ‚Γ΅Γ³Γ©ΓªΓ"
 
 msgid "Default Gamesettings"
-msgstr "Βασικές ρυθμίσεις παιχνιδιών"
+msgstr "Γ‚Γ΅Γ³Γ©ΓªΓΓ² Γ±ΓµΓ¨Γ¬ΓΓ³Γ¥Γ©Γ² Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©ΓΎΓ­"
 
 msgid "Default Settings"
-msgstr "Βασικές ρυθμίσεις"
+msgstr "Γ‚Γ΅Γ³Γ©ΓªΓΓ² Γ±ΓµΓ¨Γ¬ΓΓ³Γ¥Γ©Γ²"
 
 msgid "Delete"
-msgstr "Διαγραφή"
+msgstr "Γ„Γ©Γ΅Γ£Γ±Γ΅Γ¶Γ"
 
 msgid "Delete Cached Banner"
-msgstr "Διαγραφή αποθηκευμένων ετικετών"
+msgstr "Γ„Γ©Γ΅Γ£Γ±Γ΅Γ¶Γ Γ΅Γ°Γ―Γ¨Γ§ΓªΓ¥ΓµΓ¬ΓΓ­ΓΉΓ­ Γ¥Γ΄Γ©ΓªΓ¥Γ΄ΓΎΓ­"
 
 msgid "Delete Cheat GCT"
-msgstr "Διαγραφή αρχείων cheat GCT"
+msgstr "Γ„Γ©Γ΅Γ£Γ±Γ΅Γ¶Γ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­ cheat GCT"
 
 msgid "Delete Cheat TXT"
-msgstr "Διαγραφή αρχείων cheat TXT"
+msgstr "Γ„Γ©Γ΅Γ£Γ±Γ΅Γ¶Γ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­ cheat TXT"
 
 msgid "Delete Cover Artwork"
-msgstr "Διαγραφή εξωφύλλων"
+msgstr "Γ„Γ©Γ΅Γ£Γ±Γ΅Γ¶Γ Γ¥Γ®ΓΉΓ¶Γ½Γ«Γ«ΓΉΓ­"
 
 msgid "Delete Disc Artwork"
-msgstr "Διαγραφή ετικετών δίσκων"
+msgstr "Γ„Γ©Γ΅Γ£Γ±Γ΅Γ¶Γ Γ¥Γ΄Γ©ΓªΓ¥Γ΄ΓΎΓ­ Γ¤ΓΓ³ΓªΓΉΓ­"
 
 msgid "Delete category"
-msgstr "Διαγραφή κατηγορίας"
+msgstr "Γ„Γ©Γ΅Γ£Γ±Γ΅Γ¶Γ ΓªΓ΅Γ΄Γ§Γ£Γ―Γ±ΓΓ΅Γ²"
 
 msgid "Deleting directories..."
-msgstr "Διαγραφή φακέλων..."
+msgstr "Γ„Γ©Γ΅Γ£Γ±Γ΅Γ¶Γ Γ¶Γ΅ΓªΓΓ«ΓΉΓ­..."
 
 msgid "Deleting files..."
-msgstr "Διαγραφή αρχείων..."
+msgstr "Γ„Γ©Γ΅Γ£Γ±Γ΅Γ¶Γ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­..."
 
 msgid "Design:"
-msgstr "Σχεδιασμός:"
+msgstr "Γ“Γ·Γ¥Γ¤Γ©Γ΅Γ³Γ¬ΓΌΓ²:"
 
 msgid "Details"
-msgstr "Λεπτομέρειες"
+msgstr "Γ‹Γ¥Γ°Γ΄Γ―Γ¬ΓΓ±Γ¥Γ©Γ¥Γ²"
 
 msgid "Developed by"
-msgstr "Ανάπτυξη από"
+msgstr "ΓΓ­ΓΓ°Γ΄ΓµΓ®Γ§ Γ΅Γ°ΓΌ"
 
 msgid "Developer:"
-msgstr "Προγραμματιστής:"
+msgstr "ΓΓ±Γ―Γ£Γ±Γ΅Γ¬Γ¬Γ΅Γ΄Γ©Γ³Γ΄ΓΓ²:"
 
 msgid "Devolution"
 msgstr "Devolution"
 
 msgid "Devolution Loader Path"
-msgstr "Τοποθεσία devolution"
+msgstr "Γ”Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅ devolution"
 
 msgid "Devolution's loader.bin file can't be loaded."
-msgstr "Το αρχείο loader.bin του devolution δεν φορτώθηκε."
+msgstr "Γ”Γ― Γ΅Γ±Γ·Γ¥ΓΓ― loader.bin Γ΄Γ―Γµ devolution Γ¤Γ¥Γ­ Γ¶Γ―Γ±Γ΄ΓΎΓ¨Γ§ΓªΓ¥."
 
 msgid "Directory does not exist!"
-msgstr "Ο φάκελος δεν υπάρχει!"
+msgstr "Γ Γ¶ΓΓªΓ¥Γ«Γ―Γ² Γ¤Γ¥Γ­ ΓµΓ°ΓΓ±Γ·Γ¥Γ©!"
 
 msgid "Disc Artwork Download"
-msgstr "Λήψη ετικετών δίσκων"
+msgstr "Γ‹ΓΓΈΓ§ Γ¥Γ΄Γ©ΓªΓ¥Γ΄ΓΎΓ­ Γ¤ΓΓ³ΓªΓΉΓ­"
 
 msgid "Disc Artwork Path"
-msgstr "Διεύθυνση ετικετών δίσκων"
+msgstr "Γ„Γ©Γ¥Γ½Γ¨ΓµΓ­Γ³Γ§ Γ¥Γ΄Γ©ΓªΓ¥Γ΄ΓΎΓ­ Γ¤ΓΓ³ΓªΓΉΓ­"
 
 msgid "Disc Default"
-msgstr "Προεπιλεγμένες παιχνιδιού"
+msgstr "ΓΓ±Γ―Γ¥Γ°Γ©Γ«Γ¥Γ£Γ¬ΓΓ­Γ¥Γ² Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½"
 
 msgid "Disc Insert Detected"
-msgstr "Ανιχνεύτηκε οπτικός δίσκος"
+msgstr "ΓΓ­Γ©Γ·Γ­Γ¥Γ½Γ΄Γ§ΓªΓ¥ Γ―Γ°Γ΄Γ©ΓªΓΌΓ² Γ¤ΓΓ³ΓªΓ―Γ²"
 
 msgid "Disc read error."
-msgstr "Σφάλμα κατα την ανάγνωση δίσκου."
+msgstr "Γ“Γ¶ΓΓ«Γ¬Γ΅ ΓªΓ΅Γ΄Γ΅ Γ΄Γ§Γ­ Γ΅Γ­ΓΓ£Γ­ΓΉΓ³Γ§ Γ¤ΓΓ³ΓªΓ―Γµ."
 
 msgid "Discarts"
-msgstr "Ετικέτες δίσκου"
+msgstr "Γ…Γ΄Γ©ΓªΓΓ΄Γ¥Γ² Γ¤ΓΓ³ΓªΓ―Γµ"
 
 msgid "DiskFlip"
-msgstr "Περιστροφή"
+msgstr "ΓΓ¥Γ±Γ©Γ³Γ΄Γ±Γ―Γ¶Γ"
 
 msgid "Display"
-msgstr "Απεικόνιση"
+msgstr "ΓΓ°Γ¥Γ©ΓªΓΌΓ­Γ©Γ³Γ§"
 
 msgid "Display as a carousel"
-msgstr "Προβολή σε καμπύλη"
+msgstr "ΓΓ±Γ―ΓΆΓ―Γ«Γ Γ³Γ¥ ΓªΓ΅Γ¬Γ°Γ½Γ«Γ§"
 
 msgid "Display as a channel grid"
-msgstr "Προβολή σε κανάλια"
+msgstr "ΓΓ±Γ―ΓΆΓ―Γ«Γ Γ³Γ¥ ΓªΓ΅Γ­ΓΓ«Γ©Γ΅"
 
 msgid "Display as a grid"
-msgstr "Προβολή σε πλέγμα"
+msgstr "ΓΓ±Γ―ΓΆΓ―Γ«Γ Γ³Γ¥ Γ°Γ«ΓΓ£Γ¬Γ΅"
 
 msgid "Display as a list"
-msgstr "Προβολή σε λίστα"
+msgstr "ΓΓ±Γ―ΓΆΓ―Γ«Γ Γ³Γ¥ Γ«ΓΓ³Γ΄Γ΅"
 
 msgid "Display favorites only"
-msgstr "Προβολή μόνο των αγαπημένων"
+msgstr "ΓΓ±Γ―ΓΆΓ―Γ«Γ Γ¬ΓΌΓ­Γ― Γ΄ΓΉΓ­ Γ΅Γ£Γ΅Γ°Γ§Γ¬ΓΓ­ΓΉΓ­"
 
 msgid "Do you want to apply it now?"
-msgstr "Θέλετε να το εφαρμόσετε τώρα;"
+msgstr "ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ΄Γ― Γ¥Γ¶Γ΅Γ±Γ¬ΓΌΓ³Γ¥Γ΄Γ¥ Γ΄ΓΎΓ±Γ΅;"
 
 msgid "Do you want to apply this theme?"
-msgstr "Θέλετε να ενεργοποιήσετε αυτό το θέμα;"
+msgstr "ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ¥Γ­Γ¥Γ±Γ£Γ―Γ°Γ―Γ©ΓΓ³Γ¥Γ΄Γ¥ Γ΅ΓµΓ΄ΓΌ Γ΄Γ― Γ¨ΓΓ¬Γ΅;"
 
 msgid "Do you want to change language?"
-msgstr "Θέλετε να αλλάξετε γλώσσα;"
+msgstr "ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ΅Γ«Γ«ΓΓ®Γ¥Γ΄Γ¥ Γ£Γ«ΓΎΓ³Γ³Γ΅;"
 
 msgid "Do you want to continue with next game?"
-msgstr "Θα θέλατε να προχωρήσετε με τον επόμενο τίτλο;"
+msgstr "ΓΓ΅ Γ¨ΓΓ«Γ΅Γ΄Γ¥ Γ­Γ΅ Γ°Γ±Γ―Γ·ΓΉΓ±ΓΓ³Γ¥Γ΄Γ¥ Γ¬Γ¥ Γ΄Γ―Γ­ Γ¥Γ°ΓΌΓ¬Γ¥Γ­Γ― Γ΄ΓΓ΄Γ«Γ―;"
 
 msgid "Do you want to copy now?"
-msgstr "Θέλετε να αντιγράψετε τώρα;"
+msgstr "ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ΅Γ­Γ΄Γ©Γ£Γ±ΓΓΈΓ¥Γ΄Γ¥ Γ΄ΓΎΓ±Γ΅;"
 
 msgid "Do you want to copy the game to SD or delete a game on SD?"
-msgstr "Θέλετε να αντιγράψετε το παιχνίδι στην κάρτα SD ή να το διαγράψετε από εκεί;"
+msgstr "ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ΅Γ­Γ΄Γ©Γ£Γ±ΓΓΈΓ¥Γ΄Γ¥ Γ΄Γ― Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ© Γ³Γ΄Γ§Γ­ ΓªΓΓ±Γ΄Γ΅ SD Γ Γ­Γ΅ Γ΄Γ― Γ¤Γ©Γ΅Γ£Γ±ΓΓΈΓ¥Γ΄Γ¥ Γ΅Γ°ΓΌ Γ¥ΓªΓ¥Γ;"
 
 msgid "Do you want to delete a game on SD?"
-msgstr "Θα θέλατε να διαγράψετε ενα παιχνίδι από την κάρτα SD;"
+msgstr "ΓΓ΅ Γ¨ΓΓ«Γ΅Γ΄Γ¥ Γ­Γ΅ Γ¤Γ©Γ΅Γ£Γ±ΓΓΈΓ¥Γ΄Γ¥ Γ¥Γ­Γ΅ Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ© Γ΅Γ°ΓΌ Γ΄Γ§Γ­ ΓªΓΓ±Γ΄Γ΅ SD;"
 
 msgid "Do you want to discard changes?"
-msgstr "Θέλετε να αγνοηθούν οι αλλαγές;"
+msgstr "ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ΅Γ£Γ­Γ―Γ§Γ¨Γ―Γ½Γ­ Γ―Γ© Γ΅Γ«Γ«Γ΅Γ£ΓΓ²;"
 
 msgid "Do you want to download this theme?"
-msgstr "Θα θέλατε να κατεβάσετε το συγκεκριμένο θέμα;"
+msgstr "ΓΓ΅ Γ¨ΓΓ«Γ΅Γ΄Γ¥ Γ­Γ΅ ΓªΓ΅Γ΄Γ¥ΓΆΓΓ³Γ¥Γ΄Γ¥ Γ΄Γ― Γ³ΓµΓ£ΓªΓ¥ΓªΓ±Γ©Γ¬ΓΓ­Γ― Γ¨ΓΓ¬Γ΅;"
 
 msgid "Do you want to extract all the save games?"
-msgstr "Θα θέλατε να αντιγράψετε όλα τα saves;"
+msgstr "ΓΓ΅ Γ¨ΓΓ«Γ΅Γ΄Γ¥ Γ­Γ΅ Γ΅Γ­Γ΄Γ©Γ£Γ±ΓΓΈΓ¥Γ΄Γ¥ ΓΌΓ«Γ΅ Γ΄Γ΅ saves;"
 
 msgid "Do you want to extract the save game?"
-msgstr "Θα θέλατε να αντιγράψετε το save;"
+msgstr "ΓΓ΅ Γ¨ΓΓ«Γ΅Γ΄Γ¥ Γ­Γ΅ Γ΅Γ­Γ΄Γ©Γ£Γ±ΓΓΈΓ¥Γ΄Γ¥ Γ΄Γ― save;"
 
 msgid "Do you want to format:"
-msgstr "Θέλετε να κάνετε format (ανασυγκρότηση);"
+msgstr "ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ ΓªΓΓ­Γ¥Γ΄Γ¥ format (Γ΅Γ­Γ΅Γ³ΓµΓ£ΓªΓ±ΓΌΓ΄Γ§Γ³Γ§);"
 
 msgid "Do you want to install selected games?"
-msgstr "Θέλετε να εγκαταστήσετε τα επιλεγμένα παιχνίδια;"
+msgstr "ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ¥Γ£ΓªΓ΅Γ΄Γ΅Γ³Γ΄ΓΓ³Γ¥Γ΄Γ¥ Γ΄Γ΅ Γ¥Γ°Γ©Γ«Γ¥Γ£Γ¬ΓΓ­Γ΅ Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ©Γ΅;"
 
 msgid "Do you want to load the default theme?"
-msgstr "Θέλετε να χρησιμποποιήστε το βασικό θέμα;"
+msgstr "ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ·Γ±Γ§Γ³Γ©Γ¬Γ°Γ―Γ°Γ―Γ©ΓΓ³Γ΄Γ¥ Γ΄Γ― ΓΆΓ΅Γ³Γ©ΓªΓΌ Γ¨ΓΓ¬Γ΅;"
 
 msgid "Do you want to re-init network?"
-msgstr "Θέλετε να επανασυνδεθεί το πρόγραμμα με το διαδίκτυο;"
+msgstr "ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ¥Γ°Γ΅Γ­Γ΅Γ³ΓµΓ­Γ¤Γ¥Γ¨Γ¥Γ Γ΄Γ― Γ°Γ±ΓΌΓ£Γ±Γ΅Γ¬Γ¬Γ΅ Γ¬Γ¥ Γ΄Γ― Γ¤Γ©Γ΅Γ¤ΓΓªΓ΄ΓµΓ―;"
 
 msgid "Do you want to start the game now?"
-msgstr "Θέλετε να εκκινήσετε το πρόγραμμα τώρα;"
+msgstr "ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ¥ΓªΓªΓ©Γ­ΓΓ³Γ¥Γ΄Γ¥ Γ΄Γ― Γ°Γ±ΓΌΓ£Γ±Γ΅Γ¬Γ¬Γ΅ Γ΄ΓΎΓ±Γ΅;"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
-msgstr "Θέλετε να συγχρονίσετε τον κενό χώρο από όλα τα FAT32 partitions;"
+msgstr "ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ³ΓµΓ£Γ·Γ±Γ―Γ­ΓΓ³Γ¥Γ΄Γ¥ Γ΄Γ―Γ­ ΓªΓ¥Γ­ΓΌ Γ·ΓΎΓ±Γ― Γ΅Γ°ΓΌ ΓΌΓ«Γ΅ Γ΄Γ΅ FAT32 partitions;"
 
 msgid "Do you wish to update/download all language files?"
-msgstr "Θέλετε να αναβαθμίσετε/κατεβάσετε όλα τα αρχεία μεταφράσεων;"
+msgstr "ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ΅Γ­Γ΅ΓΆΓ΅Γ¨Γ¬ΓΓ³Γ¥Γ΄Γ¥/ΓªΓ΅Γ΄Γ¥ΓΆΓΓ³Γ¥Γ΄Γ¥ ΓΌΓ«Γ΅ Γ΄Γ΅ Γ΅Γ±Γ·Γ¥ΓΓ΅ Γ¬Γ¥Γ΄Γ΅Γ¶Γ±ΓΓ³Γ¥ΓΉΓ­;"
 
 msgid "Download"
-msgstr "Λήψη"
+msgstr "Γ‹ΓΓΈΓ§"
 
 msgid "Download Now"
-msgstr "Κατέβασμα τώρα"
+msgstr "ΓΓ΅Γ΄ΓΓΆΓ΅Γ³Γ¬Γ΅ Γ΄ΓΎΓ±Γ΅"
 
 msgid "Download finished"
-msgstr "Ολοκλήρωση λήψης"
+msgstr "ΓΓ«Γ―ΓªΓ«ΓΓ±ΓΉΓ³Γ§ Γ«ΓΓΈΓ§Γ²"
 
 msgid "Downloading 3D Covers"
-msgstr "Λήψη 3D εξωφύλλων..."
+msgstr "Γ‹ΓΓΈΓ§ 3D Γ¥Γ®ΓΉΓ¶Γ½Γ«Γ«ΓΉΓ­..."
 
 msgid "Downloading Custom Banners"
-msgstr "Λήψη τροποποιημένων ταμπελών..."
+msgstr "Γ‹ΓΓΈΓ§ Γ΄Γ±Γ―Γ°Γ―Γ°Γ―Γ©Γ§Γ¬ΓΓ­ΓΉΓ­ Γ΄Γ΅Γ¬Γ°Γ¥Γ«ΓΎΓ­..."
 
 msgid "Downloading Flat Covers"
-msgstr "Λήψη 2D εξωφύλλων..."
+msgstr "Γ‹ΓΓΈΓ§ 2D Γ¥Γ®ΓΉΓ¶Γ½Γ«Γ«ΓΉΓ­..."
 
 msgid "Downloading Full HQ Covers"
-msgstr "Λήψη ολοκληρων εξωφύλλων σε υψηλή ποιότητα..."
+msgstr "Γ‹ΓΓΈΓ§ Γ―Γ«Γ―ΓªΓ«Γ§Γ±ΓΉΓ­ Γ¥Γ®ΓΉΓ¶Γ½Γ«Γ«ΓΉΓ­ Γ³Γ¥ ΓµΓΈΓ§Γ«Γ Γ°Γ―Γ©ΓΌΓ΄Γ§Γ΄Γ΅..."
 
 msgid "Downloading Full LQ Covers"
-msgstr "Λήψη ολοκληρων εξωφύλλων σε χαμηλή ποιότητα..."
+msgstr "Γ‹ΓΓΈΓ§ Γ―Γ«Γ―ΓªΓ«Γ§Γ±ΓΉΓ­ Γ¥Γ®ΓΉΓ¶Γ½Γ«Γ«ΓΉΓ­ Γ³Γ¥ Γ·Γ΅Γ¬Γ§Γ«Γ Γ°Γ―Γ©ΓΌΓ΄Γ§Γ΄Γ΅..."
 
 msgid "Downloading custom Discarts"
-msgstr "Λήψη τροποποιημένων ετικετών δίσκων"
+msgstr "Γ‹ΓΓΈΓ§ Γ΄Γ±Γ―Γ°Γ―Γ°Γ―Γ©Γ§Γ¬ΓΓ­ΓΉΓ­ Γ¥Γ΄Γ©ΓªΓ¥Γ΄ΓΎΓ­ Γ¤ΓΓ³ΓªΓΉΓ­"
 
 msgid "Downloading file..."
-msgstr "Λήψη αρχείου..."
+msgstr "Γ‹ΓΓΈΓ§ Γ΅Γ±Γ·Γ¥ΓΓ―Γµ..."
 
 msgid "Downloading image:"
-msgstr "Λήψη εικόνας:"
+msgstr "Γ‹ΓΓΈΓ§ Γ¥Γ©ΓªΓΌΓ­Γ΅Γ²:"
 
 msgid "Downloading original Discarts"
-msgstr "Λήψη αυθεντικών ετικετών δίσκων"
+msgstr "Γ‹ΓΓΈΓ§ Γ΅ΓµΓ¨Γ¥Γ­Γ΄Γ©ΓªΓΎΓ­ Γ¥Γ΄Γ©ΓªΓ¥Γ΄ΓΎΓ­ Γ¤ΓΓ³ΓªΓΉΓ­"
 
 msgid "Downloading pagelist:"
-msgstr "Λήψη διάταξης σελιδών:"
+msgstr "Γ‹ΓΓΈΓ§ Γ¤Γ©ΓΓ΄Γ΅Γ®Γ§Γ² Γ³Γ¥Γ«Γ©Γ¤ΓΎΓ­:"
 
 msgid "Dump NAND to EmuNand"
-msgstr "Αντιγραφή NAND στην τοποθεσία  emunand"
+msgstr "ΓΓ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ NAND Γ³Γ΄Γ§Γ­ Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅  emunand"
 
 msgid "During zoom"
-msgstr "Κατα την εστίαση"
+msgstr "ΓΓ΅Γ΄Γ΅ Γ΄Γ§Γ­ Γ¥Γ³Γ΄ΓΓ΅Γ³Γ§"
 
 msgid "Dutch"
-msgstr "Oλλανδικά"
+msgstr "OΓ«Γ«Γ΅Γ­Γ¤Γ©ΓªΓ"
 
 msgid "ERROR"
-msgstr "ΣΦΑΛΜΑ"
+msgstr "Γ“Γ–ΓΓ‹ΓΓ"
 
 msgid "ERROR:"
-msgstr "ΣΦΑΛΜΑ:"
+msgstr "Γ“Γ–ΓΓ‹ΓΓ:"
 
 msgid "ERROR: Can't set up theme."
-msgstr "ΣΦΑΛΜΑ: Δεν είναι δυνατή η εγκατάσταση θέματος."
+msgstr "Γ“Γ–ΓΓ‹ΓΓ: Γ„Γ¥Γ­ Γ¥ΓΓ­Γ΅Γ© Γ¤ΓµΓ­Γ΅Γ΄Γ Γ§ Γ¥Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§ Γ¨ΓΓ¬Γ΅Γ΄Γ―Γ²."
 
 msgid "EmuNand Channels"
-msgstr "Κανάλια από την εικονική nand "
+msgstr "ΓΓ΅Γ­ΓΓ«Γ©Γ΅ Γ΅Γ°ΓΌ Γ΄Γ§Γ­ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓ nand "
 
 msgid "Emulated Nand"
-msgstr "εικονικη NAND"
+msgstr "Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓ§ NAND"
 
 msgid "English"
-msgstr "Αγγλικά"
+msgstr "ΓΓ£Γ£Γ«Γ©ΓªΓ"
 
 msgid "Enter Path"
-msgstr "Ορίστε την τοποθεσία"
+msgstr "ΓΓ±ΓΓ³Γ΄Γ¥ Γ΄Γ§Γ­ Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅"
 
 msgid "Error"
-msgstr "Σφάλμα"
+msgstr "Γ“Γ¶ΓΓ«Γ¬Γ΅"
 
 msgid "Error !"
-msgstr "Σφαλμα !"
+msgstr "Γ“Γ¶Γ΅Γ«Γ¬Γ΅ !"
 
 msgid "Error 002 fix"
-msgstr "Διόρθωση σφάλματος 002"
+msgstr "Γ„Γ©ΓΌΓ±Γ¨ΓΉΓ³Γ§ Γ³Γ¶ΓΓ«Γ¬Γ΅Γ΄Γ―Γ² 002"
 
 #, c-format
 msgid "Error creating path: %s"
-msgstr "Σφάλμα δημιουργίας μονοπατιού: %s"
+msgstr "Γ“Γ¶ΓΓ«Γ¬Γ΅ Γ¤Γ§Γ¬Γ©Γ―ΓµΓ±Γ£ΓΓ΅Γ² Γ¬Γ―Γ­Γ―Γ°Γ΅Γ΄Γ©Γ―Γ½: %s"
 
 msgid "Error opening downloaded file"
-msgstr "Σφάλμα ανοίγματος ληφθέντος αρχείου"
+msgstr "Γ“Γ¶ΓΓ«Γ¬Γ΅ Γ΅Γ­Γ―ΓΓ£Γ¬Γ΅Γ΄Γ―Γ² Γ«Γ§Γ¶Γ¨ΓΓ­Γ΄Γ―Γ² Γ΅Γ±Γ·Γ¥ΓΓ―Γµ"
 
 msgid "Error reading Disc"
-msgstr "Σφάλμα ανάγνωσης Δίσκου"
+msgstr "Γ“Γ¶ΓΓ«Γ¬Γ΅ Γ΅Γ­ΓΓ£Γ­ΓΉΓ³Γ§Γ² Γ„ΓΓ³ΓªΓ―Γµ"
 
 msgid "Error reading disc"
-msgstr "Σφάλμα ανάγνωσης δίσκου"
+msgstr "Γ“Γ¶ΓΓ«Γ¬Γ΅ Γ΅Γ­ΓΓ£Γ­ΓΉΓ³Γ§Γ² Γ¤ΓΓ³ΓªΓ―Γµ"
 
 #, c-format
 msgid "Error when downloading file: %i"
-msgstr "Σφάλμα κατα την λήψη αρχείου: %i"
+msgstr "Γ“Γ¶ΓΓ«Γ¬Γ΅ ΓªΓ΅Γ΄Γ΅ Γ΄Γ§Γ­ Γ«ΓΓΈΓ§ Γ΅Γ±Γ·Γ¥ΓΓ―Γµ: %i"
 
 msgid "Error while downloding file"
-msgstr "Σφάλμα κατα την λήψη αρχείου"
+msgstr "Γ“Γ¶ΓΓ«Γ¬Γ΅ ΓªΓ΅Γ΄Γ΅ Γ΄Γ§Γ­ Γ«ΓΓΈΓ§ Γ΅Γ±Γ·Γ¥ΓΓ―Γµ"
 
 msgid "Error while opening the zip."
-msgstr "Σφάλμα κατα το άνοιγμα αρχείου zip."
+msgstr "Γ“Γ¶ΓΓ«Γ¬Γ΅ ΓªΓ΅Γ΄Γ΅ Γ΄Γ― ΓΓ­Γ―Γ©Γ£Γ¬Γ΅ Γ΅Γ±Γ·Γ¥ΓΓ―Γµ zip."
 
 msgid "Error while transfering data."
-msgstr "Σφάλμα κατα τη μεταφορά αρχείων."
+msgstr "Γ“Γ¶ΓΓ«Γ¬Γ΅ ΓªΓ΅Γ΄Γ΅ Γ΄Γ§ Γ¬Γ¥Γ΄Γ΅Γ¶Γ―Γ±Γ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­."
 
 msgid "Error while updating USB Loader GX."
-msgstr "Σφάλμα κατα την αναβάθμιση του USB Loader GX."
+msgstr "Γ“Γ¶ΓΓ«Γ¬Γ΅ ΓªΓ΅Γ΄Γ΅ Γ΄Γ§Γ­ Γ΅Γ­Γ΅ΓΆΓΓ¨Γ¬Γ©Γ³Γ§ Γ΄Γ―Γµ USB Loader GX."
 
 msgid "Error writing the data."
-msgstr "Σφάλμα κατα την εγγραφή δεδομένων."
+msgstr "Γ“Γ¶ΓΓ«Γ¬Γ΅ ΓªΓ΅Γ΄Γ΅ Γ΄Γ§Γ­ Γ¥Γ£Γ£Γ±Γ΅Γ¶Γ Γ¤Γ¥Γ¤Γ―Γ¬ΓΓ­ΓΉΓ­."
 
 msgid "Error:"
-msgstr "Σφάλμα:"
+msgstr "Γ“Γ¶ΓΓ«Γ¬Γ΅:"
 
 msgid "Error: Not enough space on SD."
-msgstr "Σφάλμα: δεν υπάρχει αρκετός διαθέσιμος χώρος στην κάρτα SD"
+msgstr "Γ“Γ¶ΓΓ«Γ¬Γ΅: Γ¤Γ¥Γ­ ΓµΓ°ΓΓ±Γ·Γ¥Γ© Γ΅Γ±ΓªΓ¥Γ΄ΓΌΓ² Γ¤Γ©Γ΅Γ¨ΓΓ³Γ©Γ¬Γ―Γ² Γ·ΓΎΓ±Γ―Γ² Γ³Γ΄Γ§Γ­ ΓªΓΓ±Γ΄Γ΅ SD"
 
 msgid "Errors occured."
-msgstr "Σημειώθηκαν λάθη."
+msgstr "Γ“Γ§Γ¬Γ¥Γ©ΓΎΓ¨Γ§ΓªΓ΅Γ­ Γ«ΓΓ¨Γ§."
 
 msgid "Everything"
-msgstr "Όλα"
+msgstr "ΒΌΓ«Γ΅"
 
 msgid "Exit"
-msgstr "Έξοδος"
+msgstr "ΒΈΓ®Γ―Γ¤Γ―Γ²"
 
 msgid "Exit to where?"
-msgstr "Έξοδος προς που;"
+msgstr "ΒΈΓ®Γ―Γ¤Γ―Γ² Γ°Γ±Γ―Γ² Γ°Γ―Γµ;"
 
 msgid "Export All Saves to EmuNand"
-msgstr "Αντιγραφή όλων των saves στην εικονική NAND"
+msgstr "ΓΓ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ ΓΌΓ«ΓΉΓ­ Γ΄ΓΉΓ­ saves Γ³Γ΄Γ§Γ­ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓ NAND"
 
 msgid "Export Miis to EmuNand"
-msgstr "Αντιγραφή των Mii στην εικονική NAND"
+msgstr "ΓΓ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ Γ΄ΓΉΓ­ Mii Γ³Γ΄Γ§Γ­ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓ NAND"
 
 msgid "Export SYSCONF to EmuNand"
-msgstr "Αντιγραφή SYSCONF στην εικονική NAND"
+msgstr "ΓΓ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ SYSCONF Γ³Γ΄Γ§Γ­ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓ NAND"
 
 msgid "Extract Miis to the Emu NAND?"
-msgstr "Αντιγραφή των Mii στην εικονική NAND;"
+msgstr "ΓΓ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ Γ΄ΓΉΓ­ Mii Γ³Γ΄Γ§Γ­ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓ NAND;"
 
 msgid "Extract SYSCONF to the Emu NAND?"
-msgstr "Αντιγραφή SYSCONF στην εικονική NAND;"
+msgstr "ΓΓ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ SYSCONF Γ³Γ΄Γ§Γ­ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓ NAND;"
 
 msgid "Extract Save to EmuNand"
-msgstr "Αντιγραφή του save στην εικονική NAND"
+msgstr "ΓΓ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ Γ΄Γ―Γµ save Γ³Γ΄Γ§Γ­ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓ NAND"
 
 msgid "Extracting file:"
-msgstr "Αποσυμπίεση αρχείου:"
+msgstr "ΓΓ°Γ―Γ³ΓµΓ¬Γ°ΓΓ¥Γ³Γ§ Γ΅Γ±Γ·Γ¥ΓΓ―Γµ:"
 
 msgid "Extracting files..."
-msgstr "Αποσυμπίεση αρχείων..."
+msgstr "ΓΓ°Γ―Γ³ΓµΓ¬Γ°ΓΓ¥Γ³Γ§ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­..."
 
 msgid "Extracting files:"
-msgstr "Αποσυμπίεση αρχείων:"
+msgstr "ΓΓ°Γ―Γ³ΓµΓ¬Γ°ΓΓ¥Γ³Γ§ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­:"
 
 msgid "Extracting nand files:"
-msgstr "Αντιγραφή αρχείων από τη μνημη NAND:"
+msgstr "ΓΓ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­ Γ΅Γ°ΓΌ Γ΄Γ§ Γ¬Γ­Γ§Γ¬Γ§ NAND:"
 
 msgid "Failed"
-msgstr "Απέτυχε"
+msgstr "ΓΓ°ΓΓ΄ΓµΓ·Γ¥"
 
 msgid "Failed copying file"
-msgstr "Μη επιτυχής αντιγραφή αρχείου"
+msgstr "ΓΓ§ Γ¥Γ°Γ©Γ΄ΓµΓ·ΓΓ² Γ΅Γ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ Γ΅Γ±Γ·Γ¥ΓΓ―Γµ"
 
 msgid "Failed formating"
-msgstr "Μη επιτυχής ανασυγκρότηση (format) "
+msgstr "ΓΓ§ Γ¥Γ°Γ©Γ΄ΓµΓ·ΓΓ² Γ΅Γ­Γ΅Γ³ΓµΓ£ΓªΓ±ΓΌΓ΄Γ§Γ³Γ§ (format) "
 
 msgid "Failed to extract all files. Savegame might not exist."
-msgstr "Ανεπιτυχής αντιγραφή όλων των αρχείων. Το save πιθανόν δεν αντεγράφη."
+msgstr "ΓΓ­Γ¥Γ°Γ©Γ΄ΓµΓ·ΓΓ² Γ΅Γ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ ΓΌΓ«ΓΉΓ­ Γ΄ΓΉΓ­ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­. Γ”Γ― save Γ°Γ©Γ¨Γ΅Γ­ΓΌΓ­ Γ¤Γ¥Γ­ Γ΅Γ­Γ΄Γ¥Γ£Γ±ΓΓ¶Γ§."
 
 msgid "Failed to extract."
-msgstr "Αποτυχία αποσυμπίεσης."
+msgstr "ΓΓ°Γ―Γ΄ΓµΓ·ΓΓ΅ Γ΅Γ°Γ―Γ³ΓµΓ¬Γ°ΓΓ¥Γ³Γ§Γ²."
 
 msgid "Failed to initialize the USB storage device."
-msgstr "Αποτυχία έναρξης αποθηκευτικής συσκευής USB."
+msgstr "ΓΓ°Γ―Γ΄ΓµΓ·ΓΓ΅ ΓΓ­Γ΅Γ±Γ®Γ§Γ² Γ΅Γ°Γ―Γ¨Γ§ΓªΓ¥ΓµΓ΄Γ©ΓªΓΓ² Γ³ΓµΓ³ΓªΓ¥ΓµΓΓ² USB."
 
 msgid "Failed to open partition"
-msgstr "Αδυναμία ανοίγματος partition"
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ΅Γ­Γ―ΓΓ£Γ¬Γ΅Γ΄Γ―Γ² partition"
 
 msgid "Failed to read ticket."
-msgstr "Aδυναμία εύρεσης αρχείου ticket."
+msgstr "AΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ¥Γ½Γ±Γ¥Γ³Γ§Γ² Γ΅Γ±Γ·Γ¥ΓΓ―Γµ ticket."
 
 msgid "Failed to read tmd file."
-msgstr "Aδυναμία ανοίγματος αρχείου tmd."
+msgstr "AΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ΅Γ­Γ―ΓΓ£Γ¬Γ΅Γ΄Γ―Γ² Γ΅Γ±Γ·Γ¥ΓΓ―Γµ tmd."
 
 msgid "Failed to read wad header."
-msgstr "Αδυναμία ανάγνωσης τίτλου του αρχείου wad."
+msgstr "ΓΓ¤ΓµΓ­Γ΅Γ¬ΓΓ΅ Γ΅Γ­ΓΓ£Γ­ΓΉΓ³Γ§Γ² Γ΄ΓΓ΄Γ«Γ―Γµ Γ΄Γ―Γµ Γ΅Γ±Γ·Γ¥ΓΓ―Γµ wad."
 
 msgid "Failed updating"
-msgstr "Ανεπιτυχής αναβάθμιση"
+msgstr "ΓΓ­Γ¥Γ°Γ©Γ΄ΓµΓ·ΓΓ² Γ΅Γ­Γ΅ΓΆΓΓ¨Γ¬Γ©Γ³Γ§"
 
 msgid "Favorite Level"
-msgstr "Βαθμολογία"
+msgstr "Γ‚Γ΅Γ¨Γ¬Γ―Γ«Γ―Γ£ΓΓ΅"
 
 msgid "Features"
-msgstr "Επιμέρους στοιχεία"
+msgstr "Γ…Γ°Γ©Γ¬ΓΓ±Γ―ΓµΓ² Γ³Γ΄Γ―Γ©Γ·Γ¥ΓΓ΅"
 
 msgid "Features Settings"
-msgstr "Ρυθμίσεις επιμέρους στοιχείων"
+msgstr "Γ‘ΓµΓ¨Γ¬ΓΓ³Γ¥Γ©Γ² Γ¥Γ°Γ©Γ¬ΓΓ±Γ―ΓµΓ² Γ³Γ΄Γ―Γ©Γ·Γ¥ΓΓΉΓ­"
 
 msgid "Feb"
-msgstr "Φεβρουάριος"
+msgstr "Γ–Γ¥ΓΆΓ±Γ―ΓµΓΓ±Γ©Γ―Γ²"
 
 msgid "File not found."
-msgstr "Το αρχείο δεν βρέθηκε."
+msgstr "Γ”Γ― Γ΅Γ±Γ·Γ¥ΓΓ― Γ¤Γ¥Γ­ ΓΆΓ±ΓΓ¨Γ§ΓªΓ¥."
 
 msgid "File read/write error."
-msgstr "Σφάλμα ανάγνωσης/εγγραφής αρχείου"
+msgstr "Γ“Γ¶ΓΓ«Γ¬Γ΅ Γ΅Γ­ΓΓ£Γ­ΓΉΓ³Γ§Γ²/Γ¥Γ£Γ£Γ±Γ΅Γ¶ΓΓ² Γ΅Γ±Γ·Γ¥ΓΓ―Γµ"
 
 msgid "Files extracted successfully."
-msgstr "Το αρχείο αποσυμπιέστηκε επιτυχώς."
+msgstr "Γ”Γ― Γ΅Γ±Γ·Γ¥ΓΓ― Γ΅Γ°Γ―Γ³ΓµΓ¬Γ°Γ©ΓΓ³Γ΄Γ§ΓªΓ¥ Γ¥Γ°Γ©Γ΄ΓµΓ·ΓΎΓ²."
 
 #, c-format
 msgid "Filesize is %i Byte."
-msgstr "Το μέγεθος του αρχείου είναι %i byte."
+msgstr "Γ”Γ― Γ¬ΓΓ£Γ¥Γ¨Γ―Γ² Γ΄Γ―Γµ Γ΅Γ±Γ·Γ¥ΓΓ―Γµ Γ¥ΓΓ­Γ΅Γ© %i byte."
 
 msgid "Filesize is 0 Byte."
-msgstr "Το μέγεθος του αρχείου είναι 0 byte."
+msgstr "Γ”Γ― Γ¬ΓΓ£Γ¥Γ¨Γ―Γ² Γ΄Γ―Γµ Γ΅Γ±Γ·Γ¥ΓΓ―Γµ Γ¥ΓΓ­Γ΅Γ© 0 byte."
 
 msgid "Flat Covers"
-msgstr "2D εξώφυλλα"
+msgstr "2D Γ¥Γ®ΓΎΓ¶ΓµΓ«Γ«Γ΅"
 
 msgid "Flip-X"
-msgstr "οριζόντια αναστροφή"
+msgstr "Γ―Γ±Γ©Γ¦ΓΌΓ­Γ΄Γ©Γ΅ Γ΅Γ­Γ΅Γ³Γ΄Γ±Γ―Γ¶Γ"
 
 msgid "Font Scale Factor"
-msgstr "Μέγεθος γραμματοσειράς"
+msgstr "ΓΓΓ£Γ¥Γ¨Γ―Γ² Γ£Γ±Γ΅Γ¬Γ¬Γ΅Γ΄Γ―Γ³Γ¥Γ©Γ±ΓΓ²"
 
 msgid "Force 16:9"
-msgstr "Επιβολή αναλογίας 16:9"
+msgstr "Γ…Γ°Γ©ΓΆΓ―Γ«Γ Γ΅Γ­Γ΅Γ«Γ―Γ£ΓΓ΅Γ² 16:9"
 
 msgid "Force 4:3"
-msgstr "Επιβολή αναλογίας  4:3"
+msgstr "Γ…Γ°Γ©ΓΆΓ―Γ«Γ Γ΅Γ­Γ΅Γ«Γ―Γ£ΓΓ΅Γ²  4:3"
 
 msgid "Force NTSC"
-msgstr "Επιβολή NTSC"
+msgstr "Γ…Γ°Γ©ΓΆΓ―Γ«Γ NTSC"
 
 msgid "Force NTSC480p"
-msgstr "Επιβολή NTSC480p"
+msgstr "Γ…Γ°Γ©ΓΆΓ―Γ«Γ NTSC480p"
 
 msgid "Force PAL480p"
-msgstr "Επιβολή PAL480p"
+msgstr "Γ…Γ°Γ©ΓΆΓ―Γ«Γ PAL480p"
 
 msgid "Force PAL50"
-msgstr "Επιβολή PAL50"
+msgstr "Γ…Γ°Γ©ΓΆΓ―Γ«Γ PAL50"
 
 msgid "Force PAL60"
-msgstr "Επιβολή PAL60"
+msgstr "Γ…Γ°Γ©ΓΆΓ―Γ«Γ PAL60"
 
 msgid "Force Titles from Disc"
-msgstr "Επιβολή ονόματος από το ίδιο το παιχνίδι"
+msgstr "Γ…Γ°Γ©ΓΆΓ―Γ«Γ Γ―Γ­ΓΌΓ¬Γ΅Γ΄Γ―Γ² Γ΅Γ°ΓΌ Γ΄Γ― ΓΓ¤Γ©Γ― Γ΄Γ― Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ©"
 
 msgid "Format"
-msgstr "Ανασυγκρότηση (format)"
+msgstr "ΓΓ­Γ΅Γ³ΓµΓ£ΓªΓ±ΓΌΓ΄Γ§Γ³Γ§ (format)"
 
 msgid "Formatting, please wait..."
-msgstr "Ανασυγκρότηση (format), παρακαλώ περιμένετε..."
+msgstr "ΓΓ­Γ΅Γ³ΓµΓ£ΓªΓ±ΓΌΓ΄Γ§Γ³Γ§ (format), Γ°Γ΅Γ±Γ΅ΓªΓ΅Γ«ΓΎ Γ°Γ¥Γ±Γ©Γ¬ΓΓ­Γ¥Γ΄Γ¥..."
 
 msgid "Found missing images."
-msgstr "Βρέθηκαν οι εικόνες που λείπουν."
+msgstr "Γ‚Γ±ΓΓ¨Γ§ΓªΓ΅Γ­ Γ―Γ© Γ¥Γ©ΓªΓΌΓ­Γ¥Γ² Γ°Γ―Γµ Γ«Γ¥ΓΓ°Γ―ΓµΓ­."
 
 msgid "Frame"
-msgstr "Καρέ"
+msgstr "ΓΓ΅Γ±Γ"
 
 msgid "Frame Projection Height"
-msgstr "Ύψος προβολής καρέ"
+msgstr "ΒΎΓΈΓ―Γ² Γ°Γ±Γ―ΓΆΓ―Γ«ΓΓ² ΓªΓ΅Γ±Γ"
 
 msgid "Frame Projection Width"
-msgstr "Πλάτος προβολής καρέ"
+msgstr "ΓΓ«ΓΓ΄Γ―Γ² Γ°Γ±Γ―ΓΆΓ―Γ«ΓΓ² ΓªΓ΅Γ±Γ"
 
 msgid "Frame Projection X-Offset"
-msgstr "Οριζόντιο πλάτος προβολής καρέ"
+msgstr "ΓΓ±Γ©Γ¦ΓΌΓ­Γ΄Γ©Γ― Γ°Γ«ΓΓ΄Γ―Γ² Γ°Γ±Γ―ΓΆΓ―Γ«ΓΓ² ΓªΓ΅Γ±Γ"
 
 msgid "Frame Projection Y-Offset"
-msgstr "Κάθετο ύψος προβολής καρέ"
+msgstr "ΓΓΓ¨Γ¥Γ΄Γ― Γ½ΓΈΓ―Γ² Γ°Γ±Γ―ΓΆΓ―Γ«ΓΓ² ΓªΓ΅Γ±Γ"
 
 msgid "Frames"
-msgstr "Καρέ"
+msgstr "ΓΓ΅Γ±Γ"
 
 msgid "Free Space"
-msgstr "Ελεύθερος χώρος"
+msgstr "Γ…Γ«Γ¥Γ½Γ¨Γ¥Γ±Γ―Γ² Γ·ΓΎΓ±Γ―Γ²"
 
 msgid "French"
-msgstr "Γαλλικά"
+msgstr "ΓƒΓ΅Γ«Γ«Γ©ΓªΓ"
 
 msgid "Full"
-msgstr "Πλήρης/ες"
+msgstr "ΓΓ«ΓΓ±Γ§Γ²/Γ¥Γ²"
 
 msgid "Full Cover Path"
-msgstr "Πλήρης διεύθυνση εξωφύλλων"
+msgstr "ΓΓ«ΓΓ±Γ§Γ² Γ¤Γ©Γ¥Γ½Γ¨ΓµΓ­Γ³Γ§ Γ¥Γ®ΓΉΓ¶Γ½Γ«Γ«ΓΉΓ­"
 
 msgid "Full Covers"
-msgstr "Ολόκληρα εξώφυλλα"
+msgstr "ΓΓ«ΓΌΓªΓ«Γ§Γ±Γ΅ Γ¥Γ®ΓΎΓ¶ΓµΓ«Γ«Γ΅"
 
 msgid "Full Menu"
-msgstr "Πλήρες μενού"
+msgstr "ΓΓ«ΓΓ±Γ¥Γ² Γ¬Γ¥Γ­Γ―Γ½"
 
 msgid "Full covers Download"
-msgstr "Λήψη ολόκληρων εξωφύλλων"
+msgstr "Γ‹ΓΓΈΓ§ Γ―Γ«ΓΌΓªΓ«Γ§Γ±ΓΉΓ­ Γ¥Γ®ΓΉΓ¶Γ½Γ«Γ«ΓΉΓ­"
 
 msgid "Full shutdown"
-msgstr "Πλήρως"
+msgstr "ΓΓ«ΓΓ±ΓΉΓ²"
 
 msgid "GAMEID_Gamename"
-msgstr "IDπαιχνιδιού_Όνομα παιχνιδιού"
+msgstr "IDΓ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½_ΒΌΓ­Γ―Γ¬Γ΅ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½"
 
 msgid "GC Banner Scale"
-msgstr "Μέγεθος ταμπελών τίτλων GC"
+msgstr "ΓΓΓ£Γ¥Γ¨Γ―Γ² Γ΄Γ΅Γ¬Γ°Γ¥Γ«ΓΎΓ­ Γ΄ΓΓ΄Γ«ΓΉΓ­ GC"
 
 msgid "GC Games"
-msgstr "Παιχνίδια GC"
+msgstr "ΓΓ΅Γ©Γ·Γ­ΓΓ¤Γ©Γ΅ GC"
 
 msgid "GC Install 32K Aligned"
-msgstr "Εγκατάσταση τίτλων GC σε σύστημα αρχείων 32Κ"
+msgstr "Γ…Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§ Γ΄ΓΓ΄Γ«ΓΉΓ­ GC Γ³Γ¥ Γ³Γ½Γ³Γ΄Γ§Γ¬Γ΅ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­ 32Γ"
 
 msgid "GC Install Compressed"
-msgstr "Εγκατάσταση τίτλων GC σε συμπιεσμένη μορφή"
+msgstr "Γ…Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§ Γ΄ΓΓ΄Γ«ΓΉΓ­ GC Γ³Γ¥ Γ³ΓµΓ¬Γ°Γ©Γ¥Γ³Γ¬ΓΓ­Γ§ Γ¬Γ―Γ±Γ¶Γ"
 
 msgid "GCT Cheatcodes Path"
-msgstr "Διεύθυνση αχείων cheat GCT"
+msgstr "Γ„Γ©Γ¥Γ½Γ¨ΓµΓ­Γ³Γ§ Γ΅Γ·Γ¥ΓΓΉΓ­ cheat GCT"
 
 msgid "GCT File created"
-msgstr "Δημιουργήθηκε αρχείο cheat GCT"
+msgstr "Γ„Γ§Γ¬Γ©Γ―ΓµΓ±Γ£ΓΓ¨Γ§ΓªΓ¥ Γ΅Γ±Γ·Γ¥ΓΓ― cheat GCT"
 
 msgid "GUI Settings"
-msgstr "Ρυθμίσεις γραφικής απεικόνισης μένου"
+msgstr "Γ‘ΓµΓ¨Γ¬ΓΓ³Γ¥Γ©Γ² Γ£Γ±Γ΅Γ¶Γ©ΓªΓΓ² Γ΅Γ°Γ¥Γ©ΓªΓΌΓ­Γ©Γ³Γ§Γ² Γ¬ΓΓ­Γ―Γµ"
 
 msgid "GXDraw"
 msgstr "GXDraw"
@@ -1033,472 +1040,472 @@ msgid "GXFlush"
 msgstr "GXFlush"
 
 msgid "Game Cube Games Delete"
-msgstr "Διαγραφή παιχνιδιών Gamecube"
+msgstr "Γ„Γ©Γ΅Γ£Γ±Γ΅Γ¶Γ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©ΓΎΓ­ Gamecube"
 
 msgid "Game Cube Install Menu"
-msgstr "menu εγκατάστασης παιχνιδιών Gamecube"
+msgstr "menu Γ¥Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§Γ² Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©ΓΎΓ­ Gamecube"
 
 msgid "Game ID"
-msgstr "ID παιχνιδιού"
+msgstr "ID Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½"
 
 msgid "Game IOS"
-msgstr "IOS παιχνιδιού"
+msgstr "IOS Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½"
 
 msgid "Game Language"
-msgstr "γλώσσα παιχνιδιού"
+msgstr "Γ£Γ«ΓΎΓ³Γ³Γ΅ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½"
 
 msgid "Game Load"
-msgstr "φόρτωση παιχνιδιού"
+msgstr "Γ¶ΓΌΓ±Γ΄ΓΉΓ³Γ§ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½"
 
 msgid "Game Lock"
-msgstr "κλέιδωμα παιχνιδιού"
+msgstr "ΓªΓ«ΓΓ©Γ¤ΓΉΓ¬Γ΅ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½"
 
 msgid "Game Only"
-msgstr "Μόνο το παιχνίδι"
+msgstr "ΓΓΌΓ­Γ― Γ΄Γ― Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ©"
 
 msgid "Game Region"
-msgstr "προέλευση παιχνιδιού"
+msgstr "Γ°Γ±Γ―ΓΓ«Γ¥ΓµΓ³Γ§ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½"
 
 msgid "Game Size"
-msgstr "μέγεθος παιχνιδιού"
+msgstr "Γ¬ΓΓ£Γ¥Γ¨Γ―Γ² Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½"
 
 msgid "Game Sound Mode"
-msgstr "επιλογή ήχου παιχνιδιού-ων"
+msgstr "Γ¥Γ°Γ©Γ«Γ―Γ£Γ ΓΓ·Γ―Γµ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½-ΓΉΓ­"
 
 msgid "Game Sound Volume"
-msgstr "ένταση ήχου παιχνιδιού-ων"
+msgstr "ΓΓ­Γ΄Γ΅Γ³Γ§ ΓΓ·Γ―Γµ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½-ΓΉΓ­"
 
 msgid "Game Split Size"
-msgstr "μέγεθος κομματιών παιχνιδιού-ων"
+msgstr "Γ¬ΓΓ£Γ¥Γ¨Γ―Γ² ΓªΓ―Γ¬Γ¬Γ΅Γ΄Γ©ΓΎΓ­ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½-ΓΉΓ­"
 
 msgid "Game Window Mode"
-msgstr "επιλογή απεικόνισης παραθύρων"
+msgstr "Γ¥Γ°Γ©Γ«Γ―Γ£Γ Γ΅Γ°Γ¥Γ©ΓªΓΌΓ­Γ©Γ³Γ§Γ² Γ°Γ΅Γ±Γ΅Γ¨Γ½Γ±ΓΉΓ­"
 
 msgid "Game is already installed:"
-msgstr "Το παιχνίδι είναι ήδη εγκατεστημένο:"
+msgstr "Γ”Γ― Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ© Γ¥ΓΓ­Γ΅Γ© ΓΓ¤Γ§ Γ¥Γ£ΓªΓ΅Γ΄Γ¥Γ³Γ΄Γ§Γ¬ΓΓ­Γ―:"
 
 msgid "Game/Install Partition"
-msgstr "partition που θα εγκαταστηαθεί το παιχνίδι."
+msgstr "partition Γ°Γ―Γµ Γ¨Γ΅ Γ¥Γ£ΓªΓ΅Γ΄Γ΅Γ³Γ΄Γ§Γ΅Γ¨Γ¥Γ Γ΄Γ― Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ©."
 
 msgid "GameCube"
 msgstr "GameCube"
 
 msgid "GameCube Mode"
-msgstr "Μέθοδος φόρτωσης παιχνιδιών GameCube"
+msgstr "ΓΓΓ¨Γ―Γ¤Γ―Γ² Γ¶ΓΌΓ±Γ΄ΓΉΓ³Γ§Γ² Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©ΓΎΓ­ GameCube"
 
 msgid "GameTDB Path"
-msgstr "Διεύθυνση/μονοπάτι αρχείου GameTDB"
+msgstr "Γ„Γ©Γ¥Γ½Γ¨ΓµΓ­Γ³Γ§/Γ¬Γ―Γ­Γ―Γ°ΓΓ΄Γ© Γ΅Γ±Γ·Γ¥ΓΓ―Γµ GameTDB"
 
 msgid "Gamename [GAMEID]"
-msgstr "όνομα παιχνιδιού [κωδικόςπαιχνιδιού]"
+msgstr "ΓΌΓ­Γ―Γ¬Γ΅ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½ [ΓªΓΉΓ¤Γ©ΓªΓΌΓ²Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½]"
 
 msgid "Games"
-msgstr "Παιχνίδια"
+msgstr "ΓΓ΅Γ©Γ·Γ­ΓΓ¤Γ©Γ΅"
 
 msgid "Generating GXGameCategories.xml"
-msgstr "Δημιουργία αρχείου GXGameCategories.xml"
+msgstr "Γ„Γ§Γ¬Γ©Γ―ΓµΓ±Γ£ΓΓ΅ Γ΅Γ±Γ·Γ¥ΓΓ―Γµ GXGameCategories.xml"
 
 msgid "Genre:"
-msgstr "Είδος:"
+msgstr "Γ…ΓΓ¤Γ―Γ²:"
 
 msgid "German"
-msgstr "Γερμανικά"
+msgstr "ΓƒΓ¥Γ±Γ¬Γ΅Γ­Γ©ΓªΓ"
 
 msgid "Getting file list..."
-msgstr "Άνοιγμα λίστας αρχείων..."
+msgstr "ΒΆΓ­Γ―Γ©Γ£Γ¬Γ΅ Γ«ΓΓ³Γ΄Γ΅Γ² Γ΅Γ±Γ·Γ¥ΓΓΉΓ­..."
 
 msgid "Getting game folder size..."
-msgstr "Άνίχνευση μεγέθους φακέλων..."
+msgstr "ΒΆΓ­ΓΓ·Γ­Γ¥ΓµΓ³Γ§ Γ¬Γ¥Γ£ΓΓ¨Γ―ΓµΓ² Γ¶Γ΅ΓªΓΓ«ΓΉΓ­..."
 
 msgid "Global Settings"
-msgstr "Γενικές ρυθμίσεις"
+msgstr "ΓƒΓ¥Γ­Γ©ΓªΓΓ² Γ±ΓµΓ¨Γ¬ΓΓ³Γ¥Γ©Γ²"
 
 msgid "Grid Scroll Speed"
-msgstr "Ταχύτητα εναλλαγής εικόνων"
+msgstr "Γ”Γ΅Γ·Γ½Γ΄Γ§Γ΄Γ΅ Γ¥Γ­Γ΅Γ«Γ«Γ΅Γ£ΓΓ² Γ¥Γ©ΓªΓΌΓ­ΓΉΓ­"
 
 msgid "HOME Menu"
-msgstr "Mενού HOME"
+msgstr "MΓ¥Γ­Γ―Γ½ HOME"
 
 msgid "Hard Drive Settings"
-msgstr "Ρυθμίσεις σκληρού δίσκου"
+msgstr "Γ‘ΓµΓ¨Γ¬ΓΓ³Γ¥Γ©Γ² Γ³ΓªΓ«Γ§Γ±Γ―Γ½ Γ¤ΓΓ³ΓªΓ―Γµ"
 
 msgid "High Quality"
-msgstr "Υψηλή ποιότητα"
+msgstr "Γ•ΓΈΓ§Γ«Γ Γ°Γ―Γ©ΓΌΓ΄Γ§Γ΄Γ΅"
 
 msgid "High/Low"
-msgstr "Υψηλή/Χαμηλή"
+msgstr "Γ•ΓΈΓ§Γ«Γ/Γ—Γ΅Γ¬Γ§Γ«Γ"
 
 msgid "Homebrew Apps Path"
-msgstr "Τοποθεσία εφαρμογών homebrew"
+msgstr "Γ”Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅ Γ¥Γ¶Γ΅Γ±Γ¬Γ―Γ£ΓΎΓ­ homebrew"
 
 msgid "Homebrew Channel"
-msgstr "Κανάλι homebrew"
+msgstr "ΓΓ΅Γ­ΓΓ«Γ© homebrew"
 
 msgid "Homebrew Launcher"
-msgstr "εκκίνηση homebrew"
+msgstr "Γ¥ΓªΓªΓΓ­Γ§Γ³Γ§ homebrew"
 
 msgid "Hooktype"
-msgstr "τύπος hook"
+msgstr "Γ΄Γ½Γ°Γ―Γ² hook"
 
 msgid "Hour"
-msgstr "Ώρα"
+msgstr "ΒΏΓ±Γ΅"
 
 msgid "How do you want to update?"
-msgstr "Πώς θα θέλατε να αναβαθμίσετε;"
+msgstr "ΓΓΎΓ² Γ¨Γ΅ Γ¨ΓΓ«Γ΅Γ΄Γ¥ Γ­Γ΅ Γ΅Γ­Γ΅ΓΆΓ΅Γ¨Γ¬ΓΓ³Γ¥Γ΄Γ¥;"
 
 msgid "How to Shutdown?"
-msgstr "Πως να τερματιστει η εφαρμογή;"
+msgstr "ΓΓΉΓ² Γ­Γ΅ Γ΄Γ¥Γ±Γ¬Γ΅Γ΄Γ©Γ³Γ΄Γ¥Γ© Γ§ Γ¥Γ¶Γ΅Γ±Γ¬Γ―Γ£Γ;"
 
 msgid "Import Categories"
-msgstr "Εισαγωγή κατηγοριών"
+msgstr "Γ…Γ©Γ³Γ΅Γ£ΓΉΓ£Γ ΓªΓ΅Γ΄Γ§Γ£Γ―Γ±Γ©ΓΎΓ­"
 
 msgid "Import operation successfully completed."
-msgstr "Η εισαγωγή ολοκληρώθηκε επιτυχώς."
+msgstr "Γ‡ Γ¥Γ©Γ³Γ΅Γ£ΓΉΓ£Γ Γ―Γ«Γ―ΓªΓ«Γ§Γ±ΓΎΓ¨Γ§ΓªΓ¥ Γ¥Γ°Γ©Γ΄ΓµΓ·ΓΎΓ²."
 
 msgid "Importing categories"
-msgstr "Εισαγωγή κατηγοριών..."
+msgstr "Γ…Γ©Γ³Γ΅Γ£ΓΉΓ£Γ ΓªΓ΅Γ΄Γ§Γ£Γ―Γ±Γ©ΓΎΓ­..."
 
 #, c-format
 msgid "Incoming file %0.2fKB"
-msgstr "Εισερχόμενο αρχείο %0.2fKB"
+msgstr "Γ…Γ©Γ³Γ¥Γ±Γ·ΓΌΓ¬Γ¥Γ­Γ― Γ΅Γ±Γ·Γ¥ΓΓ― %0.2fKB"
 
 #, c-format
 msgid "Incoming file %0.2fMB"
-msgstr "Εισερχόμενο αρχείο %0.2fMB"
+msgstr "Γ…Γ©Γ³Γ¥Γ±Γ·ΓΌΓ¬Γ¥Γ­Γ― Γ΅Γ±Γ·Γ¥ΓΓ― %0.2fMB"
 
 msgid "Individual"
-msgstr "Ξεχωριστά"
+msgstr "ΓΓ¥Γ·ΓΉΓ±Γ©Γ³Γ΄Γ"
 
 msgid "Initializing Network"
-msgstr "Σύνδεση στο διαδίκτυο"
+msgstr "Γ“Γ½Γ­Γ¤Γ¥Γ³Γ§ Γ³Γ΄Γ― Γ¤Γ©Γ΅Γ¤ΓΓªΓ΄ΓµΓ―"
 
 msgid "Insert Disk"
-msgstr "Εισάγετε δίσκο"
+msgstr "Γ…Γ©Γ³ΓΓ£Γ¥Γ΄Γ¥ Γ¤ΓΓ³ΓªΓ―"
 
 msgid "Insert a Wii or a Game Cube Disc!"
-msgstr "Εισάγετε έναν οπτικό δίσκο Wii ή GameCube!"
+msgstr "Γ…Γ©Γ³ΓΓ£Γ¥Γ΄Γ¥ ΓΓ­Γ΅Γ­ Γ―Γ°Γ΄Γ©ΓªΓΌ Γ¤ΓΓ³ΓªΓ― Wii Γ GameCube!"
 
 msgid "Install"
-msgstr "Εγκατάσταση"
+msgstr "Γ…Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§"
 
 msgid "Install Canceled"
-msgstr "Η εγκατάσταση ακυρώθηκε"
+msgstr "Γ‡ Γ¥Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§ Γ΅ΓªΓµΓ±ΓΎΓ¨Γ§ΓªΓ¥"
 
 msgid "Install Directories"
-msgstr "Τοποθεσίες/Φάκελοι εγκατάστασης"
+msgstr "Γ”Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ¥Γ²/Γ–ΓΓªΓ¥Γ«Γ―Γ© Γ¥Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§Γ²"
 
 msgid "Install Error!"
-msgstr "Σφάλμα εγκατάστασης!"
+msgstr "Γ“Γ¶ΓΓ«Γ¬Γ΅ Γ¥Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§Γ²!"
 
 msgid "Install Partitions"
-msgstr "Partitions εγκατάστασης"
+msgstr "Partitions Γ¥Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§Γ²"
 
 msgid "Install WAD to EmuNand"
-msgstr "Εγκατάσταση WAD στην εικονική NAND"
+msgstr "Γ…Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§ WAD Γ³Γ΄Γ§Γ­ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓ NAND"
 
 msgid "Install a game"
-msgstr "Εγκαταστήστε ενα παιχνίδι"
+msgstr "Γ…Γ£ΓªΓ΅Γ΄Γ΅Γ³Γ΄ΓΓ³Γ΄Γ¥ Γ¥Γ­Γ΅ Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ©"
 
 msgid "Install finished"
-msgstr "Η εγκατάσταση ολοκληρώθηκε"
+msgstr "Γ‡ Γ¥Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§ Γ―Γ«Γ―ΓªΓ«Γ§Γ±ΓΎΓ¨Γ§ΓªΓ¥"
 
 msgid "Installing Game Cube Game..."
-msgstr "Εγκαθίσταται παιχνίδι GameCube..."
+msgstr "Γ…Γ£ΓªΓ΅Γ¨ΓΓ³Γ΄Γ΅Γ΄Γ΅Γ© Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ© GameCube..."
 
 msgid "Installing content"
-msgstr "Εγκαθίσταται περιεχόμενο"
+msgstr "Γ…Γ£ΓªΓ΅Γ¨ΓΓ³Γ΄Γ΅Γ΄Γ΅Γ© Γ°Γ¥Γ±Γ©Γ¥Γ·ΓΌΓ¬Γ¥Γ­Γ―"
 
 msgid "Installing game:"
-msgstr "Εγκαθίσταται παιχνίδι:"
+msgstr "Γ…Γ£ΓªΓ΅Γ¨ΓΓ³Γ΄Γ΅Γ΄Γ΅Γ© Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ©:"
 
 msgid "Installing title..."
-msgstr "Εγκαθίσταται τίτλος..."
+msgstr "Γ…Γ£ΓªΓ΅Γ¨ΓΓ³Γ΄Γ΅Γ΄Γ΅Γ© Γ΄ΓΓ΄Γ«Γ―Γ²..."
 
 msgid "Invalid IOS number entered. Number must be -1 for inherit or 200 - 255."
-msgstr "Λανθασμένος αριθμός IOS. Πρέπει να είναι μεταξύ 200 και 255 ή -1 για τον βασικό"
+msgstr "Γ‹Γ΅Γ­Γ¨Γ΅Γ³Γ¬ΓΓ­Γ―Γ² Γ΅Γ±Γ©Γ¨Γ¬ΓΌΓ² IOS. ΓΓ±ΓΓ°Γ¥Γ© Γ­Γ΅ Γ¥ΓΓ­Γ΅Γ© Γ¬Γ¥Γ΄Γ΅Γ®Γ½ 200 ΓªΓ΅Γ© 255 Γ -1 Γ£Γ©Γ΅ Γ΄Γ―Γ­ ΓΆΓ΅Γ³Γ©ΓªΓΌ"
 
 msgid "Invalid wad file."
-msgstr "Μη συμβατό αρχείο WAD."
+msgstr "ΓΓ§ Γ³ΓµΓ¬ΓΆΓ΅Γ΄ΓΌ Γ΅Γ±Γ·Γ¥ΓΓ― WAD."
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
-msgstr "Φαίνεται ότι έχετε πληροφορίες που θα μπορούσαν να αποβούν χρήσιμες για την εφαρμογή. Παρακαλώ μεταβιβάστε τες στους συντελεστές."
+msgstr "Γ–Γ΅ΓΓ­Γ¥Γ΄Γ΅Γ© ΓΌΓ΄Γ© ΓΓ·Γ¥Γ΄Γ¥ Γ°Γ«Γ§Γ±Γ―Γ¶Γ―Γ±ΓΓ¥Γ² Γ°Γ―Γµ Γ¨Γ΅ Γ¬Γ°Γ―Γ±Γ―Γ½Γ³Γ΅Γ­ Γ­Γ΅ Γ΅Γ°Γ―ΓΆΓ―Γ½Γ­ Γ·Γ±ΓΓ³Γ©Γ¬Γ¥Γ² Γ£Γ©Γ΅ Γ΄Γ§Γ­ Γ¥Γ¶Γ΅Γ±Γ¬Γ―Γ£Γ. ΓΓ΅Γ±Γ΅ΓªΓ΅Γ«ΓΎ Γ¬Γ¥Γ΄Γ΅ΓΆΓ©ΓΆΓΓ³Γ΄Γ¥ Γ΄Γ¥Γ² Γ³Γ΄Γ―ΓµΓ² Γ³ΓµΓ­Γ΄Γ¥Γ«Γ¥Γ³Γ΄ΓΓ²."
 
 msgid "Italian"
-msgstr "Ιταλικά"
+msgstr "Γ‰Γ΄Γ΅Γ«Γ©ΓªΓ"
 
 msgid "Jan"
-msgstr "Ιανουάριος"
+msgstr "Γ‰Γ΅Γ­Γ―ΓµΓΓ±Γ©Γ―Γ²"
 
 msgid "Japanese"
-msgstr "Ιαπωνικά"
+msgstr "Γ‰Γ΅Γ°ΓΉΓ­Γ©ΓªΓ"
 
 msgid "Joypad"
 msgstr "Joypad"
 
 msgid "July"
-msgstr "Ιούλιος"
+msgstr "Γ‰Γ―Γ½Γ«Γ©Γ―Γ²"
 
 msgid "June"
-msgstr "Ιούνιος"
+msgstr "Γ‰Γ―Γ½Γ­Γ©Γ―Γ²"
 
 msgid "KPAD Read"
 msgstr "KPAD Read"
 
 msgid "Keyboard"
-msgstr "Πληκτρολόγιο"
+msgstr "ΓΓ«Γ§ΓªΓ΄Γ±Γ―Γ«ΓΌΓ£Γ©Γ―"
 
 msgid "Korean"
-msgstr "Κορεάτικα"
+msgstr "ΓΓ―Γ±Γ¥ΓΓ΄Γ©ΓªΓ΅"
 
 msgid "Language Files"
-msgstr "αρχεία μεταφράσεων"
+msgstr "Γ΅Γ±Γ·Γ¥ΓΓ΅ Γ¬Γ¥Γ΄Γ΅Γ¶Γ±ΓΓ³Γ¥ΓΉΓ­"
 
 msgid "Language change:"
-msgstr "Επιλογή γλώσσας:"
+msgstr "Γ…Γ°Γ©Γ«Γ―Γ£Γ Γ£Γ«ΓΎΓ³Γ³Γ΅Γ²:"
 
 msgid "Languagefiles Path"
-msgstr "τοποθεσία αρχείων μεταφράσεων"
+msgstr "Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­ Γ¬Γ¥Γ΄Γ΅Γ¶Γ±ΓΓ³Γ¥ΓΉΓ­"
 
 msgid "Languagepath changed."
-msgstr "Η τοποθεσία αρχείων μεταφράσεων άλλαξε."
+msgstr "Γ‡ Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­ Γ¬Γ¥Γ΄Γ΅Γ¶Γ±ΓΓ³Γ¥ΓΉΓ­ ΓΓ«Γ«Γ΅Γ®Γ¥."
 
 msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
-msgstr "Η εκκίνηση καναλιών από την εικονική NAND υποστηρίζεται μόνο από το cIOS d2x! Επιλέξτε ένα ΙΟS με d2x για να συνεχίσετε."
+msgstr "Γ‡ Γ¥ΓªΓªΓΓ­Γ§Γ³Γ§ ΓªΓ΅Γ­Γ΅Γ«Γ©ΓΎΓ­ Γ΅Γ°ΓΌ Γ΄Γ§Γ­ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓ NAND ΓµΓ°Γ―Γ³Γ΄Γ§Γ±ΓΓ¦Γ¥Γ΄Γ΅Γ© Γ¬ΓΌΓ­Γ― Γ΅Γ°ΓΌ Γ΄Γ― cIOS d2x! Γ…Γ°Γ©Γ«ΓΓ®Γ΄Γ¥ ΓΓ­Γ΅ Γ‰ΓS Γ¬Γ¥ d2x Γ£Γ©Γ΅ Γ­Γ΅ Γ³ΓµΓ­Γ¥Γ·ΓΓ³Γ¥Γ΄Γ¥."
 
 msgid "Left"
-msgstr "Αριστερά"
+msgstr "ΓΓ±Γ©Γ³Γ΄Γ¥Γ±Γ"
 
 msgid "Like SysMenu"
-msgstr "όπως στο κεντρικό μενού"
+msgstr "ΓΌΓ°ΓΉΓ² Γ³Γ΄Γ― ΓªΓ¥Γ­Γ΄Γ±Γ©ΓªΓΌ Γ¬Γ¥Γ­Γ―Γ½"
 
 msgid "List on Gamelaunch"
-msgstr "Προβολή κατα την εκκίνηση παιχνιδιού"
+msgstr "ΓΓ±Γ―ΓΆΓ―Γ«Γ ΓªΓ΅Γ΄Γ΅ Γ΄Γ§Γ­ Γ¥ΓªΓªΓΓ­Γ§Γ³Γ§ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½"
 
 msgid "Load"
-msgstr "Φόρτωση"
+msgstr "Γ–ΓΌΓ±Γ΄ΓΉΓ³Γ§"
 
 msgid "Load From SD/USB"
-msgstr "Άνοιγμα από SD/USB"
+msgstr "ΒΆΓ­Γ―Γ©Γ£Γ¬Γ΅ Γ΅Γ°ΓΌ SD/USB"
 
 #, c-format
 msgid "Load file from: %s ?"
-msgstr "Άνοιγμα αρχείου από: %s ?"
+msgstr "ΒΆΓ­Γ―Γ©Γ£Γ¬Γ΅ Γ΅Γ±Γ·Γ¥ΓΓ―Γµ Γ΅Γ°ΓΌ: %s ?"
 
 msgid "Load this DOL as alternate DOL?"
-msgstr "ΦΓόρτωση αυτού του αρχείου DOL ως εναλλακτικό;"
+msgstr "Γ–ΓƒΓΌΓ±Γ΄ΓΉΓ³Γ§ Γ΅ΓµΓ΄Γ―Γ½ Γ΄Γ―Γµ Γ΅Γ±Γ·Γ¥ΓΓ―Γµ DOL ΓΉΓ² Γ¥Γ­Γ΅Γ«Γ«Γ΅ΓªΓ΄Γ©ΓªΓΌ;"
 
 msgid "Loader Settings"
-msgstr "Ρυθμίσεις προγράμματος"
+msgstr "Γ‘ΓµΓ¨Γ¬ΓΓ³Γ¥Γ©Γ² Γ°Γ±Γ―Γ£Γ±ΓΓ¬Γ¬Γ΅Γ΄Γ―Γ²"
 
 msgid "Loading standard language."
-msgstr "Φόρτωση βασικής γλώσσας."
+msgstr "Γ–ΓΌΓ±Γ΄ΓΉΓ³Γ§ ΓΆΓ΅Γ³Γ©ΓªΓΓ² Γ£Γ«ΓΎΓ³Γ³Γ΅Γ²."
 
 msgid "Loading standard music."
-msgstr "Φόρτωση βασικής μουσικής."
+msgstr "Γ–ΓΌΓ±Γ΄ΓΉΓ³Γ§ ΓΆΓ΅Γ³Γ©ΓªΓΓ² Γ¬Γ―ΓµΓ³Γ©ΓªΓΓ²."
 
 msgid "Lock Console"
-msgstr "Φραγή μενού"
+msgstr "Γ–Γ±Γ΅Γ£Γ Γ¬Γ¥Γ­Γ―Γ½"
 
 msgid "Lock USB Loader GX"
-msgstr "Κλείδωμα USB Loader GX"
+msgstr "ΓΓ«Γ¥ΓΓ¤ΓΉΓ¬Γ΅ USB Loader GX"
 
 msgid "Locked"
-msgstr "Κλειδώθηκε"
+msgstr "ΓΓ«Γ¥Γ©Γ¤ΓΎΓ¨Γ§ΓªΓ¥"
 
 msgid "Loop Directory"
-msgstr "Λούπα των αρχείων στο φάκελο"
+msgstr "Γ‹Γ―Γ½Γ°Γ΅ Γ΄ΓΉΓ­ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­ Γ³Γ΄Γ― Γ¶ΓΓªΓ¥Γ«Γ―"
 
 msgid "Loop Music"
-msgstr "Λούπα της μουσικής"
+msgstr "Γ‹Γ―Γ½Γ°Γ΅ Γ΄Γ§Γ² Γ¬Γ―ΓµΓ³Γ©ΓªΓΓ²"
 
 msgid "Loop Sound"
-msgstr "Λούπα του ήχου"
+msgstr "Γ‹Γ―Γ½Γ°Γ΅ Γ΄Γ―Γµ ΓΓ·Γ―Γµ"
 
 msgid "Low Quality"
-msgstr "Χαμηλή ποιότητα"
+msgstr "Γ—Γ΅Γ¬Γ§Γ«Γ Γ°Γ―Γ©ΓΌΓ΄Γ§Γ΄Γ΅"
 
 msgid "Low/High"
-msgstr "Χαμηλή/Υψηλή"
+msgstr "Γ—Γ΅Γ¬Γ§Γ«Γ/Γ•ΓΈΓ§Γ«Γ"
 
 msgid "MIOS (Default & Customs)"
-msgstr "MIOS (Βασικό & τροποποιημένα)"
+msgstr "MIOS (Γ‚Γ΅Γ³Γ©ΓªΓΌ & Γ΄Γ±Γ―Γ°Γ―Γ°Γ―Γ©Γ§Γ¬ΓΓ­Γ΅)"
 
 msgid "Main DOL"
-msgstr "κύριο αρχείο .dol"
+msgstr "ΓªΓ½Γ±Γ©Γ― Γ΅Γ±Γ·Γ¥ΓΓ― .dol"
 
 msgid "Main GameCube Games Path"
-msgstr "Βασική τοποθεσία παιχνιδιών GameCube"
+msgstr "Γ‚Γ΅Γ³Γ©ΓªΓ Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©ΓΎΓ­ GameCube"
 
 msgid "Main GameCube Path"
-msgstr "Βασική τοποθεσία GameCube"
+msgstr "Γ‚Γ΅Γ³Γ©ΓªΓ Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅ GameCube"
 
 msgid "Main Path"
-msgstr "Βασική τοποθεσία"
+msgstr "Γ‚Γ΅Γ³Γ©ΓªΓ Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅"
 
 msgid "Main tester:"
-msgstr "Kύριος δοκιμαστής:"
+msgstr "KΓ½Γ±Γ©Γ―Γ² Γ¤Γ―ΓªΓ©Γ¬Γ΅Γ³Γ΄ΓΓ²:"
 
 msgid "Mar"
-msgstr "Mάρτιος"
+msgstr "MΓΓ±Γ΄Γ©Γ―Γ²"
 
 msgid "Mark new games"
-msgstr "Μαρκάρισμα νέων παιχνιδιών"
+msgstr "ΓΓ΅Γ±ΓªΓΓ±Γ©Γ³Γ¬Γ΅ Γ­ΓΓΉΓ­ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©ΓΎΓ­"
 
 msgid "May"
-msgstr "Mαϊος"
+msgstr "MΓ΅ΓΊΓ―Γ²"
 
 msgid "Messageboard Update"
-msgstr "Ενημέρωση messageboard του Wii"
+msgstr "Γ…Γ­Γ§Γ¬ΓΓ±ΓΉΓ³Γ§ messageboard Γ΄Γ―Γµ Wii"
 
 msgid "Motion+ Video"
-msgstr "βιντεο motion+"
+msgstr "ΓΆΓ©Γ­Γ΄Γ¥Γ― motion+"
 
 msgid "Mount DVD drive"
-msgstr "Φόρτωση DVD"
+msgstr "Γ–ΓΌΓ±Γ΄ΓΉΓ³Γ§ DVD"
 
 msgid "Multiple Partitions"
-msgstr "πολλαπλά partitions"
+msgstr "Γ°Γ―Γ«Γ«Γ΅Γ°Γ«Γ partitions"
 
 msgid "Music Loop Mode"
-msgstr "Να λουπάρει η μουσική;"
+msgstr "ΓΓ΅ Γ«Γ―ΓµΓ°ΓΓ±Γ¥Γ© Γ§ Γ¬Γ―ΓµΓ³Γ©ΓªΓ;"
 
 msgid "Music Volume"
-msgstr "Ένταση μουσικής"
+msgstr "ΒΈΓ­Γ΄Γ΅Γ³Γ§ Γ¬Γ―ΓµΓ³Γ©ΓªΓΓ²"
 
 msgid "Nand Chan. Emulation"
-msgstr "εξομοίωση καναλιών εικονικής NAND"
+msgstr "Γ¥Γ®Γ―Γ¬Γ―ΓΓΉΓ³Γ§ ΓªΓ΅Γ­Γ΅Γ«Γ©ΓΎΓ­ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓΓ² NAND"
 
 msgid "Nand Channels"
-msgstr "κανάλια NAND"
+msgstr "ΓªΓ΅Γ­ΓΓ«Γ©Γ΅ NAND"
 
 msgid "Nand Emu Channel Path"
-msgstr "τοποθεσία καναλιών εικονικής NAND"
+msgstr "Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅ ΓªΓ΅Γ­Γ΅Γ«Γ©ΓΎΓ­ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓΓ² NAND"
 
 msgid "Nand Emu Path"
-msgstr "τοποθεσία εικονικής NAND"
+msgstr "Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓΓ² NAND"
 
 msgid "Nand Emulation"
-msgstr "εξομοίωση εικονικής NAND"
+msgstr "Γ¥Γ®Γ―Γ¬Γ―ΓΓΉΓ³Γ§ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓΓ² NAND"
 
 msgid "Nand Emulation is only available on D2X cIOS!"
-msgstr "η εξομοίωση εικονικής NAND είναι εφικτή μόνο με cIOS d2x!"
+msgstr "Γ§ Γ¥Γ®Γ―Γ¬Γ―ΓΓΉΓ³Γ§ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓΓ² NAND Γ¥ΓΓ­Γ΅Γ© Γ¥Γ¶Γ©ΓªΓ΄Γ Γ¬ΓΌΓ­Γ― Γ¬Γ¥ cIOS d2x!"
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
-msgstr "η εξομοίωση εικονικής NAND είναι εφικτή μόνο σε partitions FAT/FAT32!"
+msgstr "Γ§ Γ¥Γ®Γ―Γ¬Γ―ΓΓΉΓ³Γ§ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓΓ² NAND Γ¥ΓΓ­Γ΅Γ© Γ¥Γ¶Γ©ΓªΓ΄Γ Γ¬ΓΌΓ­Γ― Γ³Γ¥ partitions FAT/FAT32!"
 
 msgid "Nand Saves Emulation"
-msgstr "saves στην εικονική NAND"
+msgstr "saves Γ³Γ΄Γ§Γ­ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓ NAND"
 
 msgid "Neither"
-msgstr "Κανένα από τα δυο"
+msgstr "ΓΓ΅Γ­ΓΓ­Γ΅ Γ΅Γ°ΓΌ Γ΄Γ΅ Γ¤ΓµΓ―"
 
 msgid "Network is not initiated."
-msgstr "η σύνδεση στο διαδίκτυο δεν είναι εφικτή."
+msgstr "Γ§ Γ³Γ½Γ­Γ¤Γ¥Γ³Γ§ Γ³Γ΄Γ― Γ¤Γ©Γ΅Γ¤ΓΓªΓ΄ΓµΓ― Γ¤Γ¥Γ­ Γ¥ΓΓ­Γ΅Γ© Γ¥Γ¶Γ©ΓªΓ΄Γ."
 
 msgid "Next"
-msgstr "Επόμενο"
+msgstr "Γ…Γ°ΓΌΓ¬Γ¥Γ­Γ―"
 
 msgid "No"
-msgstr "Οχι"
+msgstr "ΓΓ·Γ©"
 
 msgid "No Cheatfile found"
-msgstr "Δεν βρέθηκε αρχείο cheat"
+msgstr "Γ„Γ¥Γ­ ΓΆΓ±ΓΓ¨Γ§ΓªΓ¥ Γ΅Γ±Γ·Γ¥ΓΓ― cheat"
 
 msgid "No DOL file found on disc."
-msgstr "Δεν βρέθηκε αρχείο DOL στον δίσκο."
+msgstr "Γ„Γ¥Γ­ ΓΆΓ±ΓΓ¨Γ§ΓªΓ¥ Γ΅Γ±Γ·Γ¥ΓΓ― DOL Γ³Γ΄Γ―Γ­ Γ¤ΓΓ³ΓªΓ―."
 
 msgid "No Splitting"
-msgstr "Χωρίς διαχωρισμό"
+msgstr "Γ—ΓΉΓ±ΓΓ² Γ¤Γ©Γ΅Γ·ΓΉΓ±Γ©Γ³Γ¬ΓΌ"
 
 msgid "No URL or Path specified."
-msgstr "Δεν ορίστηκε URL ή τοποθεσία."
+msgstr "Γ„Γ¥Γ­ Γ―Γ±ΓΓ³Γ΄Γ§ΓªΓ¥ URL Γ Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅."
 
 msgid "No WBFS or FAT/NTFS/EXT partition found"
-msgstr "Δεν βρέθηκε WBFS ή FAT/NTFS/EXT partition"
+msgstr "Γ„Γ¥Γ­ ΓΆΓ±ΓΓ¨Γ§ΓªΓ¥ WBFS Γ FAT/NTFS/EXT partition"
 
 msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
-msgstr "Δεν βρέθηκε αρχείο Winnertag.xml. Θέλετε να δημιουργηθεί ένα αρχείο-παράδειγμα;"
+msgstr "Γ„Γ¥Γ­ ΓΆΓ±ΓΓ¨Γ§ΓªΓ¥ Γ΅Γ±Γ·Γ¥ΓΓ― Winnertag.xml. ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ¤Γ§Γ¬Γ©Γ―ΓµΓ±Γ£Γ§Γ¨Γ¥Γ ΓΓ­Γ΅ Γ΅Γ±Γ·Γ¥ΓΓ―-Γ°Γ΅Γ±ΓΓ¤Γ¥Γ©Γ£Γ¬Γ΅;"
 
 msgid "No cheats were selected! Should the GCT file be deleted?"
-msgstr "Δεν επιλέχθηκαν cheats! Θέλετε να διαγραφεί το αρχείο cheat GCT;"
+msgstr "Γ„Γ¥Γ­ Γ¥Γ°Γ©Γ«ΓΓ·Γ¨Γ§ΓªΓ΅Γ­ cheats! ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ¤Γ©Γ΅Γ£Γ±Γ΅Γ¶Γ¥Γ Γ΄Γ― Γ΅Γ±Γ·Γ¥ΓΓ― cheat GCT;"
 
 msgid "No data could be read."
-msgstr "Αδύνατη η ανάγνωση δεδομένων."
+msgstr "ΓΓ¤Γ½Γ­Γ΅Γ΄Γ§ Γ§ Γ΅Γ­ΓΓ£Γ­ΓΉΓ³Γ§ Γ¤Γ¥Γ¤Γ―Γ¬ΓΓ­ΓΉΓ­."
 
 msgid "No disc inserted."
-msgstr "Δεν εισήχθη δίσκος."
+msgstr "Γ„Γ¥Γ­ Γ¥Γ©Γ³ΓΓ·Γ¨Γ§ Γ¤ΓΓ³ΓªΓ―Γ²."
 
 msgid "No favorites selected."
-msgstr "Δεν επιλέχθηκαν αγαπημένα."
+msgstr "Γ„Γ¥Γ­ Γ¥Γ°Γ©Γ«ΓΓ·Γ¨Γ§ΓªΓ΅Γ­ Γ΅Γ£Γ΅Γ°Γ§Γ¬ΓΓ­Γ΅."
 
 msgid "No file missing!"
-msgstr "Δεν λείπει κανένα αρχείο!"
+msgstr "Γ„Γ¥Γ­ Γ«Γ¥ΓΓ°Γ¥Γ© ΓªΓ΅Γ­ΓΓ­Γ΅ Γ΅Γ±Γ·Γ¥ΓΓ―!"
 
 msgid "No games found on the disc"
-msgstr "Δεν βρέθηκαν παιχνίδια στον δίσκο"
+msgstr "Γ„Γ¥Γ­ ΓΆΓ±ΓΓ¨Γ§ΓªΓ΅Γ­ Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ©Γ΅ Γ³Γ΄Γ―Γ­ Γ¤ΓΓ³ΓªΓ―"
 
 msgid "No language files to update on your devices! Do you want to download new language files?"
-msgstr "Δεν βρέθηκαν αρχεία μεταφράσεως! Θέλετε να κατεβάσετε νέα; "
+msgstr "Γ„Γ¥Γ­ ΓΆΓ±ΓΓ¨Γ§ΓªΓ΅Γ­ Γ΅Γ±Γ·Γ¥ΓΓ΅ Γ¬Γ¥Γ΄Γ΅Γ¶Γ±ΓΓ³Γ¥ΓΉΓ²! ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ ΓªΓ΅Γ΄Γ¥ΓΆΓΓ³Γ¥Γ΄Γ¥ Γ­ΓΓ΅; "
 
 msgid "No new updates."
-msgstr "Δεν υπάρχουν διαθέσιμες αναβαθμίσεις."
+msgstr "Γ„Γ¥Γ­ ΓµΓ°ΓΓ±Γ·Γ―ΓµΓ­ Γ¤Γ©Γ΅Γ¨ΓΓ³Γ©Γ¬Γ¥Γ² Γ΅Γ­Γ΅ΓΆΓ΅Γ¨Γ¬ΓΓ³Γ¥Γ©Γ²."
 
 msgid "No themes found on the site."
-msgstr "Δεν βρέθηκαν θέματα στο site."
+msgstr "Γ„Γ¥Γ­ ΓΆΓ±ΓΓ¨Γ§ΓªΓ΅Γ­ Γ¨ΓΓ¬Γ΅Γ΄Γ΅ Γ³Γ΄Γ― site."
 
 msgid "No themes found."
-msgstr "Δεν βρέθηκαν θέματα."
+msgstr "Γ„Γ¥Γ­ ΓΆΓ±ΓΓ¨Γ§ΓªΓ΅Γ­ Γ¨ΓΓ¬Γ΅Γ΄Γ΅."
 
 msgid "None"
-msgstr "Κανένα"
+msgstr "ΓΓ΅Γ­ΓΓ­Γ΅"
 
 msgid "Normal"
-msgstr "Κανονικά"
+msgstr "ΓΓ΅Γ­Γ―Γ­Γ©ΓªΓ"
 
 msgid "Not Initialized"
-msgstr "Δεν ξεκίνησε"
+msgstr "Γ„Γ¥Γ­ Γ®Γ¥ΓªΓΓ­Γ§Γ³Γ¥"
 
 msgid "Not a Wii or a Game Cube Disc"
-msgstr "Δεν είναι δίσκος Wii/GameCube"
+msgstr "Γ„Γ¥Γ­ Γ¥ΓΓ­Γ΅Γ© Γ¤ΓΓ³ΓªΓ―Γ² Wii/GameCube"
 
 msgid "Not a valid URL"
-msgstr "Μη έγκυρο URL"
+msgstr "ΓΓ§ ΓΓ£ΓªΓµΓ±Γ― URL"
 
 msgid "Not a valid URL path"
-msgstr "Μη έγκυρο μονοπάτι URL"
+msgstr "ΓΓ§ ΓΓ£ΓªΓµΓ±Γ― Γ¬Γ―Γ­Γ―Γ°ΓΓ΄Γ© URL"
 
 msgid "Not a valid domain"
-msgstr "Μη έγκυρη τοποθεσία"
+msgstr "ΓΓ§ ΓΓ£ΓªΓµΓ±Γ§ Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅"
 
 msgid "Not enough free memory."
-msgstr "Δεν υπάρχει αρκετή μνήμη διαθέσιμη."
+msgstr "Γ„Γ¥Γ­ ΓµΓ°ΓΓ±Γ·Γ¥Γ© Γ΅Γ±ΓªΓ¥Γ΄Γ Γ¬Γ­ΓΓ¬Γ§ Γ¤Γ©Γ΅Γ¨ΓΓ³Γ©Γ¬Γ§."
 
 msgid "Not enough free space on device."
-msgstr "Δεν υπάρχει αρκετός διαθέσιμος ελεύθερος χώρος στην συσκευή."
+msgstr "Γ„Γ¥Γ­ ΓµΓ°ΓΓ±Γ·Γ¥Γ© Γ΅Γ±ΓªΓ¥Γ΄ΓΌΓ² Γ¤Γ©Γ΅Γ¨ΓΓ³Γ©Γ¬Γ―Γ² Γ¥Γ«Γ¥Γ½Γ¨Γ¥Γ±Γ―Γ² Γ·ΓΎΓ±Γ―Γ² Γ³Γ΄Γ§Γ­ Γ³ΓµΓ³ΓªΓ¥ΓµΓ."
 
 msgid "Not enough free space!"
-msgstr "Δεν υπάρχει αρκετός διαθέσιμος ελεύθερος χώρος!"
+msgstr "Γ„Γ¥Γ­ ΓµΓ°ΓΓ±Γ·Γ¥Γ© Γ΅Γ±ΓªΓ¥Γ΄ΓΌΓ² Γ¤Γ©Γ΅Γ¨ΓΓ³Γ©Γ¬Γ―Γ² Γ¥Γ«Γ¥Γ½Γ¨Γ¥Γ±Γ―Γ² Γ·ΓΎΓ±Γ―Γ²!"
 
 msgid "Not enough memory for FST."
-msgstr "Δεν υπάρχει αρκετή μνήμη διαθέσιμη για FST."
+msgstr "Γ„Γ¥Γ­ ΓµΓ°ΓΓ±Γ·Γ¥Γ© Γ΅Γ±ΓªΓ¥Γ΄Γ Γ¬Γ­ΓΓ¬Γ§ Γ¤Γ©Γ΅Γ¨ΓΓ³Γ©Γ¬Γ§ Γ£Γ©Γ΅ FST."
 
 msgid "Not enough memory."
-msgstr "Δεν υπάρχει αρκετή μνήμη διαθέσιμη."
+msgstr "Γ„Γ¥Γ­ ΓµΓ°ΓΓ±Γ·Γ¥Γ© Γ΅Γ±ΓªΓ¥Γ΄Γ Γ¬Γ­ΓΓ¬Γ§ Γ¤Γ©Γ΅Γ¨ΓΓ³Γ©Γ¬Γ§."
 
 msgid "Not required"
-msgstr "Δεν απαιτείται"
+msgstr "Γ„Γ¥Γ­ Γ΅Γ°Γ΅Γ©Γ΄Γ¥ΓΓ΄Γ΅Γ©"
 
 msgid "Not supported format!"
-msgstr "Ο τύπος αρχείου δεν υποστηρίζεται!"
+msgstr "Γ Γ΄Γ½Γ°Γ―Γ² Γ΅Γ±Γ·Γ¥ΓΓ―Γµ Γ¤Γ¥Γ­ ΓµΓ°Γ―Γ³Γ΄Γ§Γ±ΓΓ¦Γ¥Γ΄Γ΅Γ©!"
 
 msgid "Nothing selected to delete."
-msgstr "Τίποτε άλλο δεν επιλέχθηκε προς διαγραφή."
+msgstr "Γ”ΓΓ°Γ―Γ΄Γ¥ ΓΓ«Γ«Γ― Γ¤Γ¥Γ­ Γ¥Γ°Γ©Γ«ΓΓ·Γ¨Γ§ΓªΓ¥ Γ°Γ±Γ―Γ² Γ¤Γ©Γ΅Γ£Γ±Γ΅Γ¶Γ."
 
 msgid "Nothing selected to install."
-msgstr "Τίποτε άλλο δεν επιλέχθηκε προς εγκατάσταση."
+msgstr "Γ”ΓΓ°Γ―Γ΄Γ¥ ΓΓ«Γ«Γ― Γ¤Γ¥Γ­ Γ¥Γ°Γ©Γ«ΓΓ·Γ¨Γ§ΓªΓ¥ Γ°Γ±Γ―Γ² Γ¥Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§."
 
 msgid "Nov"
-msgstr "Noέμβριος"
+msgstr "NoΓΓ¬ΓΆΓ±Γ©Γ―Γ²"
 
 msgid "OFF"
 msgstr "OXI"
@@ -1516,703 +1523,709 @@ msgid "Ocarina"
 msgstr "Ocarina"
 
 msgid "Oct"
-msgstr "Oκτώβριος"
+msgstr "OΓªΓ΄ΓΎΓΆΓ±Γ©Γ―Γ²"
 
 msgid "Official Site:"
-msgstr "Επίσημο Site:"
+msgstr "Γ…Γ°ΓΓ³Γ§Γ¬Γ― Site:"
 
 msgid "Offset"
 msgstr "Offset"
 
 msgid "Only Game Partition"
-msgstr "Mόνο το partition των παιχνιδιών"
+msgstr "MΓΌΓ­Γ― Γ΄Γ― partition Γ΄ΓΉΓ­ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©ΓΎΓ­"
 
 msgid "Only for Install"
-msgstr "μόνο για εγκατάσταση"
+msgstr "Γ¬ΓΌΓ­Γ― Γ£Γ©Γ΅ Γ¥Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§"
 
 msgid "Original"
-msgstr "Αυθεντικά"
+msgstr "ΓΓµΓ¨Γ¥Γ­Γ΄Γ©ΓªΓ"
 
 msgid "Original/Customs"
-msgstr "Αυθεντικά/Τροποποιημένα"
+msgstr "ΓΓµΓ¨Γ¥Γ­Γ΄Γ©ΓªΓ/Γ”Γ±Γ―Γ°Γ―Γ°Γ―Γ©Γ§Γ¬ΓΓ­Γ΅"
 
 msgid "Parental Control"
-msgstr "Γονικός έλεγχος"
+msgstr "ΓƒΓ―Γ­Γ©ΓªΓΌΓ² ΓΓ«Γ¥Γ£Γ·Γ―Γ²"
 
 msgid "Partial"
-msgstr "Τμηματική"
+msgstr "Γ”Γ¬Γ§Γ¬Γ΅Γ΄Γ©ΓªΓ"
 
 msgid "Partition"
-msgstr "Τμήμα"
+msgstr "Γ”Γ¬ΓΓ¬Γ΅"
 
 msgid "Password"
-msgstr "Password - Kωδικός"
+msgstr "Password - KΓΉΓ¤Γ©ΓªΓΌΓ²"
 
 msgid "Password Changed"
-msgstr "Ο κωδικός άλλαξε"
+msgstr "Γ ΓªΓΉΓ¤Γ©ΓªΓΌΓ² ΓΓ«Γ«Γ΅Γ®Γ¥"
 
 msgid "Password has been changed"
-msgstr "Ο κωδικός έχει αλλάξει"
+msgstr "Γ ΓªΓΉΓ¤Γ©ΓªΓΌΓ² ΓΓ·Γ¥Γ© Γ΅Γ«Γ«ΓΓ®Γ¥Γ©"
 
 msgid "Patch Country Strings"
-msgstr "Patch προέλευσης παιχνιδιού"
+msgstr "Patch Γ°Γ±Γ―ΓΓ«Γ¥ΓµΓ³Γ§Γ² Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½"
 
 msgid "Path Changed"
-msgstr "η τοποθεσία άλλαξε"
+msgstr "Γ§ Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅ ΓΓ«Γ«Γ΅Γ®Γ¥"
 
 msgid "Permission denied."
-msgstr "Άκυρο."
+msgstr "ΒΆΓªΓµΓ±Γ―."
 
 msgid "Pick from a list"
-msgstr "Επιλογή από λίστα"
+msgstr "Γ…Γ°Γ©Γ«Γ―Γ£Γ Γ΅Γ°ΓΌ Γ«ΓΓ³Γ΄Γ΅"
 
 msgid "Pixels"
 msgstr "Pixel"
 
 msgid "Play Count"
-msgstr "Μετρητής χρήσης"
+msgstr "ΓΓ¥Γ΄Γ±Γ§Γ΄ΓΓ² Γ·Γ±ΓΓ³Γ§Γ²"
 
 msgid "Play Next"
-msgstr "Αναπαραγωγή επόμενου"
+msgstr "ΓΓ­Γ΅Γ°Γ΅Γ±Γ΅Γ£ΓΉΓ£Γ Γ¥Γ°ΓΌΓ¬Γ¥Γ­Γ―Γµ"
 
 msgid "Play Once"
-msgstr "Αναπαραγωγή μια φορά"
+msgstr "ΓΓ­Γ΅Γ°Γ΅Γ±Γ΅Γ£ΓΉΓ£Γ Γ¬Γ©Γ΅ Γ¶Γ―Γ±Γ"
 
 msgid "Play Previous"
-msgstr "Αναπαραγωγή προηγούμενου"
+msgstr "ΓΓ­Γ΅Γ°Γ΅Γ±Γ΅Γ£ΓΉΓ£Γ Γ°Γ±Γ―Γ§Γ£Γ―Γ½Γ¬Γ¥Γ­Γ―Γµ"
 
 msgid "Playing Music:"
-msgstr "Αναπαραγωγή μουσικής:"
+msgstr "ΓΓ­Γ΅Γ°Γ΅Γ±Γ΅Γ£ΓΉΓ£Γ Γ¬Γ―ΓµΓ³Γ©ΓªΓΓ²:"
 
 msgid "Please wait"
-msgstr "Παρακαλώ περιμένετε"
+msgstr "ΓΓ΅Γ±Γ΅ΓªΓ΅Γ«ΓΎ Γ°Γ¥Γ±Γ©Γ¬ΓΓ­Γ¥Γ΄Γ¥"
 
 msgid "Please wait..."
-msgstr "Παρακαλώ περιμένετε..."
+msgstr "ΓΓ΅Γ±Γ΅ΓªΓ΅Γ«ΓΎ Γ°Γ¥Γ±Γ©Γ¬ΓΓ­Γ¥Γ΄Γ¥..."
 
 msgid "Power off the Wii"
-msgstr "Κλείστε το Wii"
+msgstr "ΓΓ«Γ¥ΓΓ³Γ΄Γ¥ Γ΄Γ― Wii"
 
 msgid "Prev"
-msgstr "Προηγούμενο."
+msgstr "ΓΓ±Γ―Γ§Γ£Γ―Γ½Γ¬Γ¥Γ­Γ―."
 
 msgid "Process finished."
-msgstr "Ολοκλήρωση διαδικασίας."
+msgstr "ΓΓ«Γ―ΓªΓ«ΓΓ±ΓΉΓ³Γ§ Γ¤Γ©Γ΅Γ¤Γ©ΓªΓ΅Γ³ΓΓ΅Γ²."
 
 msgid "Prompts Buttons"
-msgstr "Ειδοποιήσεις"
+msgstr "Γ…Γ©Γ¤Γ―Γ°Γ―Γ©ΓΓ³Γ¥Γ©Γ²"
 
 msgid "Published by"
-msgstr "Έκδοση από"
+msgstr "ΒΈΓªΓ¤Γ―Γ³Γ§ Γ΅Γ°ΓΌ"
 
 msgid "Quick Boot"
-msgstr "Άμεση εκκίνηση"
+msgstr "ΒΆΓ¬Γ¥Γ³Γ§ Γ¥ΓªΓªΓΓ­Γ§Γ³Γ§"
 
 msgid "Random Directory Music"
-msgstr "Τυχαίο μουσικό αρχείο από το φάκελο"
+msgstr "Γ”ΓµΓ·Γ΅ΓΓ― Γ¬Γ―ΓµΓ³Γ©ΓªΓΌ Γ΅Γ±Γ·Γ¥ΓΓ― Γ΅Γ°ΓΌ Γ΄Γ― Γ¶ΓΓªΓ¥Γ«Γ―"
 
 msgid "Real Nand"
-msgstr "πραγματική μνήμη NAND"
+msgstr "Γ°Γ±Γ΅Γ£Γ¬Γ΅Γ΄Γ©ΓªΓ Γ¬Γ­ΓΓ¬Γ§ NAND"
 
 msgid "Receiving file from:"
-msgstr "Λήψη αρχείου από:"
+msgstr "Γ‹ΓΓΈΓ§ Γ΅Γ±Γ·Γ¥ΓΓ―Γµ Γ΅Γ°ΓΌ:"
 
 msgid "Region Patch"
-msgstr "Patch περιοχής προέλευσης"
+msgstr "Patch Γ°Γ¥Γ±Γ©Γ―Γ·ΓΓ² Γ°Γ±Γ―ΓΓ«Γ¥ΓµΓ³Γ§Γ²"
 
 msgid "Released"
-msgstr "Κυκλοφόρησε"
+msgstr "ΓΓµΓªΓ«Γ―Γ¶ΓΌΓ±Γ§Γ³Γ¥"
 
 msgid "Reload SD"
-msgstr "Επαναφόρτωση κάρτας SD"
+msgstr "Γ…Γ°Γ΅Γ­Γ΅Γ¶ΓΌΓ±Γ΄ΓΉΓ³Γ§ ΓªΓΓ±Γ΄Γ΅Γ² SD"
 
 msgid "Reloading game list now, please wait..."
-msgstr "Επαναφόρτωση λίστας παιχνιδιών, παρακαλώ περιμένετε..."
+msgstr "Γ…Γ°Γ΅Γ­Γ΅Γ¶ΓΌΓ±Γ΄ΓΉΓ³Γ§ Γ«ΓΓ³Γ΄Γ΅Γ² Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©ΓΎΓ­, Γ°Γ΅Γ±Γ΅ΓªΓ΅Γ«ΓΎ Γ°Γ¥Γ±Γ©Γ¬ΓΓ­Γ¥Γ΄Γ¥..."
 
 msgid "Remember Unlock"
-msgstr "Μόνιμο ξεκλείδωμα"
+msgstr "ΓΓΌΓ­Γ©Γ¬Γ― Γ®Γ¥ΓªΓ«Γ¥ΓΓ¤ΓΉΓ¬Γ΅"
 
 msgid "Remove update"
-msgstr "Απομάκρυνση αρχείων αναβάθμισης."
+msgstr "ΓΓ°Γ―Γ¬ΓΓªΓ±ΓµΓ­Γ³Γ§ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­ Γ΅Γ­Γ΅ΓΆΓΓ¨Γ¬Γ©Γ³Γ§Γ²."
 
 msgid "Rename Game Title"
-msgstr "Μετονομασία παιχνιδιού"
+msgstr "ΓΓ¥Γ΄Γ―Γ­Γ―Γ¬Γ΅Γ³ΓΓ΅ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½"
 
 msgid "Rename category"
-msgstr "Μετονομασία κατηγορίας"
+msgstr "ΓΓ¥Γ΄Γ―Γ­Γ―Γ¬Γ΅Γ³ΓΓ΅ ΓªΓ΅Γ΄Γ§Γ£Γ―Γ±ΓΓ΅Γ²"
 
 msgid "Reset"
-msgstr "Επανεκκίνηση"
+msgstr "Γ…Γ°Γ΅Γ­Γ¥ΓªΓªΓΓ­Γ§Γ³Γ§"
 
 msgid "Reset BG Music"
-msgstr "Επαναφορά μουσικής υπόκρουσης."
+msgstr "Γ…Γ°Γ΅Γ­Γ΅Γ¶Γ―Γ±Γ Γ¬Γ―ΓµΓ³Γ©ΓªΓΓ² ΓµΓ°ΓΌΓªΓ±Γ―ΓµΓ³Γ§Γ²."
 
 msgid "Reset Playcounter"
-msgstr "Μηδενισμός μετρητή χρήσης;"
+msgstr "ΓΓ§Γ¤Γ¥Γ­Γ©Γ³Γ¬ΓΌΓ² Γ¬Γ¥Γ΄Γ±Γ§Γ΄Γ Γ·Γ±ΓΓ³Γ§Γ²;"
 
 msgid "Reset to default BGM?"
-msgstr "Επαναφορά στην βασική μουσική υπόκρουση;"
+msgstr "Γ…Γ°Γ΅Γ­Γ΅Γ¶Γ―Γ±Γ Γ³Γ΄Γ§Γ­ ΓΆΓ΅Γ³Γ©ΓªΓ Γ¬Γ―ΓµΓ³Γ©ΓªΓ ΓµΓ°ΓΌΓªΓ±Γ―ΓµΓ³Γ§;"
 
 msgid "Restarting..."
-msgstr "Επανεκκίνηση..."
+msgstr "Γ…Γ°Γ΅Γ­Γ¥ΓªΓªΓΓ­Γ§Γ³Γ§..."
 
 msgid "Return"
-msgstr "Επιστροφή"
+msgstr "Γ…Γ°Γ©Γ³Γ΄Γ±Γ―Γ¶Γ"
 
 msgid "Return To"
-msgstr "Επιστροφή σε"
+msgstr "Γ…Γ°Γ©Γ³Γ΄Γ±Γ―Γ¶Γ Γ³Γ¥"
 
-msgid "Return to Wii "
-msgstr "Επιστροφή στο κεντρικό μενού του Wii"
+msgid "Return to Wii Menu"
+msgstr ""
 
 msgid "Right"
-msgstr "Δεξιά"
+msgstr "Γ„Γ¥Γ®Γ©Γ"
 
 msgid "Rotating Disc"
-msgstr "Περιστρεφόμενος οπτικός δίσκος"
+msgstr "ΓΓ¥Γ±Γ©Γ³Γ΄Γ±Γ¥Γ¶ΓΌΓ¬Γ¥Γ­Γ―Γ² Γ―Γ°Γ΄Γ©ΓªΓΌΓ² Γ¤ΓΓ³ΓªΓ―Γ²"
 
 msgid "Rumble"
-msgstr "Δόνηση"
+msgstr "Γ„ΓΌΓ­Γ§Γ³Γ§"
 
 msgid "SChinese"
-msgstr "Απλοποιημένα κινεζικα"
+msgstr "ΓΓ°Γ«Γ―Γ°Γ―Γ©Γ§Γ¬ΓΓ­Γ΅ ΓªΓ©Γ­Γ¥Γ¦Γ©ΓªΓ΅"
 
 msgid "SD Card could not be accessed."
-msgstr "Μη προσπελάσιμη SD."
+msgstr "ΓΓ§ Γ°Γ±Γ―Γ³Γ°Γ¥Γ«ΓΓ³Γ©Γ¬Γ§ SD."
 
 msgid "SD GameCube Games Path"
-msgstr "Τοποθεσία/μονοπάτι τίτλων GameCube στην κάρτα SD"
+msgstr "Γ”Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅/Γ¬Γ―Γ­Γ―Γ°ΓΓ΄Γ© Γ΄ΓΓ΄Γ«ΓΉΓ­ GameCube Γ³Γ΄Γ§Γ­ ΓªΓΓ±Γ΄Γ΅ SD"
 
 msgid "SD GameCube Path"
-msgstr "Τοποθεσία/μονοπάτι GameCube στην κάρτα SD"
+msgstr "Γ”Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅/Γ¬Γ―Γ­Γ―Γ°ΓΓ΄Γ© GameCube Γ³Γ΄Γ§Γ­ ΓªΓΓ±Γ΄Γ΅ SD"
 
 msgid "SD Path"
-msgstr "Τοποθεσία/μονοπάτι SD"
+msgstr "Γ”Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅/Γ¬Γ―Γ­Γ―Γ°ΓΓ΄Γ© SD"
 
 msgid "SFX Volume"
-msgstr "Ένταση ηχητικών εφέ"
+msgstr "ΒΈΓ­Γ΄Γ΅Γ³Γ§ Γ§Γ·Γ§Γ΄Γ©ΓªΓΎΓ­ Γ¥Γ¶Γ"
 
 msgid "Save"
-msgstr "Αποθήκευση"
+msgstr "ΓΓ°Γ―Γ¨ΓΓªΓ¥ΓµΓ³Γ§"
 
 msgid "Save Failed. No device inserted?"
-msgstr "Η αποθήκευση απέτυχε. Μήπως δεν είναι συνδεδεμένο το αποθηκευτικό μέσο;"
+msgstr "Γ‡ Γ΅Γ°Γ―Γ¨ΓΓªΓ¥ΓµΓ³Γ§ Γ΅Γ°ΓΓ΄ΓµΓ·Γ¥. ΓΓΓ°ΓΉΓ² Γ¤Γ¥Γ­ Γ¥ΓΓ­Γ΅Γ© Γ³ΓµΓ­Γ¤Γ¥Γ¤Γ¥Γ¬ΓΓ­Γ― Γ΄Γ― Γ΅Γ°Γ―Γ¨Γ§ΓªΓ¥ΓµΓ΄Γ©ΓªΓΌ Γ¬ΓΓ³Γ―;"
 
 msgid "Save Game List to"
-msgstr "Αποθήκευση λίστας σε"
+msgstr "ΓΓ°Γ―Γ¨ΓΓªΓ¥ΓµΓ³Γ§ Γ«ΓΓ³Γ΄Γ΅Γ² Γ³Γ¥"
 
 msgid "Save List"
-msgstr "Αποθήκευση λίστας"
+msgstr "ΓΓ°Γ―Γ¨ΓΓªΓ¥ΓµΓ³Γ§ Γ«ΓΓ³Γ΄Γ΅Γ²"
 
 msgid "Saved"
-msgstr "Αποθηκεύτηκε"
+msgstr "ΓΓ°Γ―Γ¨Γ§ΓªΓ¥Γ½Γ΄Γ§ΓªΓ¥"
 
 msgid "Savegame might not exist for this game."
-msgstr "ίσως να μην υπάρχει save για το παιχνίδι αυτό."
+msgstr "ΓΓ³ΓΉΓ² Γ­Γ΅ Γ¬Γ§Γ­ ΓµΓ°ΓΓ±Γ·Γ¥Γ© save Γ£Γ©Γ΅ Γ΄Γ― Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ© Γ΅ΓµΓ΄ΓΌ."
 
 msgid "Screensaver"
 msgstr "screen saver"
 
 msgid "Select"
-msgstr "Επιλογή"
+msgstr "Γ…Γ°Γ©Γ«Γ―Γ£Γ"
 
 msgid "Select DOL Offset"
-msgstr "Επιλογή δευτερεύοντος DOL"
+msgstr "Γ…Γ°Γ©Γ«Γ―Γ£Γ Γ¤Γ¥ΓµΓ΄Γ¥Γ±Γ¥Γ½Γ―Γ­Γ΄Γ―Γ² DOL"
 
 msgid "Select a DOL"
-msgstr "Επιλογή DOL"
+msgstr "Γ…Γ°Γ©Γ«Γ―Γ£Γ DOL"
 
 msgid "Select a DOL from Game"
-msgstr "Επιλογή αρχείου DOL από το παιχνίδι"
+msgstr "Γ…Γ°Γ©Γ«Γ―Γ£Γ Γ΅Γ±Γ·Γ¥ΓΓ―Γµ DOL Γ΅Γ°ΓΌ Γ΄Γ― Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ©"
 
 msgid "Select game categories"
-msgstr "Κατηγορίες παιχνιδιών"
+msgstr "ΓΓ΅Γ΄Γ§Γ£Γ―Γ±ΓΓ¥Γ² Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©ΓΎΓ­"
 
 msgid "Select loader mode"
-msgstr "Επιλογή παιχνιδιών"
+msgstr "Γ…Γ°Γ©Γ«Γ―Γ£Γ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©ΓΎΓ­"
 
 msgid "Select titles sources."
-msgstr "Πηγές παιχνιδιών."
+msgstr "ΓΓ§Γ£ΓΓ² Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©ΓΎΓ­."
 
 msgid "Sept"
-msgstr "Σεπτέμβριος"
+msgstr "Γ“Γ¥Γ°Γ΄ΓΓ¬ΓΆΓ±Γ©Γ―Γ²"
 
 msgid "Set Search-Filter"
-msgstr "Ρύθμιση αναζήτησης"
+msgstr "Γ‘Γ½Γ¨Γ¬Γ©Γ³Γ§ Γ΅Γ­Γ΅Γ¦ΓΓ΄Γ§Γ³Γ§Γ²"
 
 msgid "Settings"
 msgstr "Settings"
 
 msgid "Show Categories"
-msgstr "Προβολή κατηγοριών"
+msgstr "ΓΓ±Γ―ΓΆΓ―Γ«Γ ΓªΓ΅Γ΄Γ§Γ£Γ―Γ±Γ©ΓΎΓ­"
 
 msgid "Show Free Space"
-msgstr "Προβολή ελεύθερου εναπομείναντος χώρου"
+msgstr "ΓΓ±Γ―ΓΆΓ―Γ«Γ Γ¥Γ«Γ¥Γ½Γ¨Γ¥Γ±Γ―Γµ Γ¥Γ­Γ΅Γ°Γ―Γ¬Γ¥ΓΓ­Γ΅Γ­Γ΄Γ―Γ² Γ·ΓΎΓ±Γ―Γµ"
 
 msgid "Show Play Count"
-msgstr "Προβολή συχνότητας χρήσης"
+msgstr "ΓΓ±Γ―ΓΆΓ―Γ«Γ Γ³ΓµΓ·Γ­ΓΌΓ΄Γ§Γ΄Γ΅Γ² Γ·Γ±ΓΓ³Γ§Γ²"
 
 msgid "Show SD"
-msgstr "Προβολή κάρτας SD"
+msgstr "ΓΓ±Γ―ΓΆΓ―Γ«Γ ΓªΓΓ±Γ΄Γ΅Γ² SD"
 
 msgid "Shutdown System"
-msgstr "Kλείσιμο συστήματος"
+msgstr "KΓ«Γ¥ΓΓ³Γ©Γ¬Γ― Γ³ΓµΓ³Γ΄ΓΓ¬Γ΅Γ΄Γ―Γ²"
 
 msgid "Shutdown Wii"
-msgstr "Κλείσιμο Wii"
+msgstr "ΓΓ«Γ¥ΓΓ³Γ©Γ¬Γ― Wii"
 
 msgid "Skip Errors"
-msgstr "Αγνόηση σφαλμάτων"
+msgstr "ΓΓ£Γ­ΓΌΓ§Γ³Γ§ Γ³Γ¶Γ΅Γ«Γ¬ΓΓ΄ΓΉΓ­"
 
 msgid "Sneek Video Patch"
-msgstr "Patch εικόνας για sneek"
+msgstr "Patch Γ¥Γ©ΓªΓΌΓ­Γ΅Γ² Γ£Γ©Γ΅ sneek"
 
 msgid "Sort alphabetically"
-msgstr "Διάταξη αλφαβητικά"
+msgstr "Γ„Γ©ΓΓ΄Γ΅Γ®Γ§ Γ΅Γ«Γ¶Γ΅ΓΆΓ§Γ΄Γ©ΓªΓ"
 
 msgid "Sort by number of players"
-msgstr "Διάταξη με κριτήριο τον αριθμό παικτών"
+msgstr "Γ„Γ©ΓΓ΄Γ΅Γ®Γ§ Γ¬Γ¥ ΓªΓ±Γ©Γ΄ΓΓ±Γ©Γ― Γ΄Γ―Γ­ Γ΅Γ±Γ©Γ¨Γ¬ΓΌ Γ°Γ΅Γ©ΓªΓ΄ΓΎΓ­"
 
 msgid "Sort by rank"
-msgstr "Διάταξη με κριτήριο το βαθμό"
+msgstr "Γ„Γ©ΓΓ΄Γ΅Γ®Γ§ Γ¬Γ¥ ΓªΓ±Γ©Γ΄ΓΓ±Γ©Γ― Γ΄Γ― ΓΆΓ΅Γ¨Γ¬ΓΌ"
 
 msgid "Sort order by most played"
-msgstr "Διάταξη με κριτήριο την συχνότητα χρήσης"
+msgstr "Γ„Γ©ΓΓ΄Γ΅Γ®Γ§ Γ¬Γ¥ ΓªΓ±Γ©Γ΄ΓΓ±Γ©Γ― Γ΄Γ§Γ­ Γ³ΓµΓ·Γ­ΓΌΓ΄Γ§Γ΄Γ΅ Γ·Γ±ΓΓ³Γ§Γ²"
 
 msgid "Sound"
-msgstr "Ήχος"
+msgstr "ΒΉΓ·Γ―Γ²"
 
 msgid "Sound Settings"
-msgstr "Ρυθμίσεις ήχου"
+msgstr "Γ‘ΓµΓ¨Γ¬ΓΓ³Γ¥Γ©Γ² ΓΓ·Γ―Γµ"
 
 msgid "Sound+BGM"
-msgstr "Ήχος+μουσική υπόκρουση."
+msgstr "ΒΉΓ·Γ―Γ²+Γ¬Γ―ΓµΓ³Γ©ΓªΓ ΓµΓ°ΓΌΓªΓ±Γ―ΓµΓ³Γ§."
 
 msgid "Sound+Quiet"
-msgstr "Ήχος+παύση"
+msgstr "ΒΉΓ·Γ―Γ²+Γ°Γ΅Γ½Γ³Γ§"
 
 msgid "Spanish"
-msgstr "Ισπανικά"
+msgstr "Γ‰Γ³Γ°Γ΅Γ­Γ©ΓªΓ"
 
 msgid "Special thanks to:"
-msgstr "Θερμές ευχαριστίες:"
+msgstr "ΓΓ¥Γ±Γ¬ΓΓ² Γ¥ΓµΓ·Γ΅Γ±Γ©Γ³Γ΄ΓΓ¥Γ²:"
 
 msgid "Split each 2GB"
-msgstr "Διαχωρισμός σε τμήματα 2GB"
+msgstr "Γ„Γ©Γ΅Γ·ΓΉΓ±Γ©Γ³Γ¬ΓΌΓ² Γ³Γ¥ Γ΄Γ¬ΓΓ¬Γ΅Γ΄Γ΅ 2GB"
 
 msgid "Split each 4GB"
-msgstr "Διαχωρισμός σε τμήματα 4GB"
+msgstr "Γ„Γ©Γ΅Γ·ΓΉΓ±Γ©Γ³Γ¬ΓΌΓ² Γ³Γ¥ Γ΄Γ¬ΓΓ¬Γ΅Γ΄Γ΅ 4GB"
 
 msgid "Standby"
-msgstr "Αναμονή"
+msgstr "ΓΓ­Γ΅Γ¬Γ―Γ­Γ"
 
 msgid "Start"
 msgstr "Start"
 
 msgid "Success"
-msgstr "Επιτυχής"
+msgstr "Γ…Γ°Γ©Γ΄ΓµΓ·ΓΓ²"
 
 msgid "Success."
-msgstr "Επιτυχής."
+msgstr "Γ…Γ°Γ©Γ΄ΓµΓ·ΓΓ²."
 
 msgid "Success:"
-msgstr "Επιτυχής:"
+msgstr "Γ…Γ°Γ©Γ΄ΓµΓ·ΓΓ²:"
 
 msgid "Successfully Saved"
-msgstr "Αποθηκεύτηκε"
+msgstr "ΓΓ°Γ―Γ¨Γ§ΓªΓ¥Γ½Γ΄Γ§ΓªΓ¥"
 
 msgid "Successfully Updated"
-msgstr "Επιτυχής αναβάθμιση"
+msgstr "Γ…Γ°Γ©Γ΄ΓµΓ·ΓΓ² Γ΅Γ­Γ΅ΓΆΓΓ¨Γ¬Γ©Γ³Γ§"
 
 msgid "Successfully copied"
-msgstr "Επιτυχής αντιγραφή"
+msgstr "Γ…Γ°Γ©Γ΄ΓµΓ·ΓΓ² Γ΅Γ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ"
 
 msgid "Successfully deleted:"
-msgstr "Επιτυχής διαγραφή:"
+msgstr "Γ…Γ°Γ©Γ΄ΓµΓ·ΓΓ² Γ¤Γ©Γ΅Γ£Γ±Γ΅Γ¶Γ:"
 
 msgid "Successfully extracted theme."
-msgstr "Επιτυχής μεταφορά θέματος."
+msgstr "Γ…Γ°Γ©Γ΄ΓµΓ·ΓΓ² Γ¬Γ¥Γ΄Γ΅Γ¶Γ―Γ±Γ Γ¨ΓΓ¬Γ΅Γ΄Γ―Γ²."
 
 msgid "Successfully installed:"
-msgstr "Επιτυχής εγκατάσταση:"
+msgstr "Γ…Γ°Γ©Γ΄ΓµΓ·ΓΓ² Γ¥Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§:"
 
 msgid "Successfully updated."
-msgstr "Επιτυχής αναβάθμιση."
+msgstr "Γ…Γ°Γ©Γ΄ΓµΓ·ΓΓ² Γ΅Γ­Γ΅ΓΆΓΓ¨Γ¬Γ©Γ³Γ§."
 
 msgid "Switching to channel list mode."
-msgstr "Αλλαγή εμφάνισης σε λίστα."
+msgstr "ΓΓ«Γ«Γ΅Γ£Γ Γ¥Γ¬Γ¶ΓΓ­Γ©Γ³Γ§Γ² Γ³Γ¥ Γ«ΓΓ³Γ΄Γ΅."
 
 msgid "Sync FAT32 FS Info"
-msgstr "Συγχρονισμός FAT32"
+msgstr "Γ“ΓµΓ£Γ·Γ±Γ―Γ­Γ©Γ³Γ¬ΓΌΓ² FAT32"
 
 msgid "Synchronizing..."
-msgstr "Συγχρονισμός..."
+msgstr "Γ“ΓµΓ£Γ·Γ±Γ―Γ­Γ©Γ³Γ¬ΓΌΓ²..."
 
 msgid "System Default"
-msgstr "Βασικό-η συστήματος"
+msgstr "Γ‚Γ΅Γ³Γ©ΓªΓΌ-Γ§ Γ³ΓµΓ³Γ΄ΓΓ¬Γ΅Γ΄Γ―Γ²"
 
 msgid "TChinese"
-msgstr "Παραδοσιακά κινέζικα"
+msgstr "ΓΓ΅Γ±Γ΅Γ¤Γ―Γ³Γ©Γ΅ΓªΓ ΓªΓ©Γ­ΓΓ¦Γ©ΓªΓ΅"
 
 msgid "TXT Cheatcodes Path"
-msgstr "τοποθεσία αρχείων cheats TXT"
+msgstr "Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­ cheats TXT"
 
 msgid "The .them file was not found in the zip."
-msgstr "To αρχείο .them δεν βρέθηκε στον φάκελο zip."
+msgstr "To Γ΅Γ±Γ·Γ¥ΓΓ― .them Γ¤Γ¥Γ­ ΓΆΓ±ΓΓ¨Γ§ΓªΓ¥ Γ³Γ΄Γ―Γ­ Γ¶ΓΓªΓ¥Γ«Γ― zip."
 
 msgid "The Force Widescreen setting requires DIOS MIOS v2.1 or more. This setting will be ignored."
-msgstr "Η ρύθμιση για επιβολή αναλογίας οθόνης 16:9 απαιτεί DIOS MIOS 2.1 ή νεότερο. Η παρούσα ρύθμιση θα αγνοηθεί."
-
-msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
-msgstr "Η τοποθεσία αρχείων cheats GCT και το παιχνίδι αυτό δεν βρίσκονται σο ίδιο partition. Θέλετε να εκκινήσετε τον τίτλο χωρίς cheats; "
-
-msgid "The GCT Cheatcodes Path must be on SD card. Run the game without Ocarina?"
-msgstr "Τα αρχεία cheats GCT πρέπει να βρίσκονται στην κάρτα SD. Θέλετε να εκκινήσετε τον τίτλο χωρίς cheats;"
+msgstr "Γ‡ Γ±Γ½Γ¨Γ¬Γ©Γ³Γ§ Γ£Γ©Γ΅ Γ¥Γ°Γ©ΓΆΓ―Γ«Γ Γ΅Γ­Γ΅Γ«Γ―Γ£ΓΓ΅Γ² Γ―Γ¨ΓΌΓ­Γ§Γ² 16:9 Γ΅Γ°Γ΅Γ©Γ΄Γ¥Γ DIOS MIOS 2.1 Γ Γ­Γ¥ΓΌΓ΄Γ¥Γ±Γ―. Γ‡ Γ°Γ΅Γ±Γ―Γ½Γ³Γ΅ Γ±Γ½Γ¨Γ¬Γ©Γ³Γ§ Γ¨Γ΅ Γ΅Γ£Γ­Γ―Γ§Γ¨Γ¥Γ."
 
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
-msgstr "Τα Mii θα αντιγραφούν στην τοποθεσία εικονικής NAND. Προσοχή, όλα τα κοινά υπάρχοντα αρχεία θα αντικατασταθούν."
+msgstr "Γ”Γ΅ Mii Γ¨Γ΅ Γ΅Γ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ―Γ½Γ­ Γ³Γ΄Γ§Γ­ Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓΓ² NAND. ΓΓ±Γ―Γ³Γ―Γ·Γ, ΓΌΓ«Γ΅ Γ΄Γ΅ ΓªΓ―Γ©Γ­Γ ΓµΓ°ΓΓ±Γ·Γ―Γ­Γ΄Γ΅ Γ΅Γ±Γ·Γ¥ΓΓ΅ Γ¨Γ΅ Γ΅Γ­Γ΄Γ©ΓªΓ΅Γ΄Γ΅Γ³Γ΄Γ΅Γ¨Γ―Γ½Γ­."
 
 msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
-msgstr "Η ρύθμιση No Disc δεν υποστηρίζεται πλέον από το DIOS MIOS (Lite). Πλέον πρέπει να τοποθετήσετε ενα game disc στο Wii."
+msgstr "Γ‡ Γ±Γ½Γ¨Γ¬Γ©Γ³Γ§ No Disc Γ¤Γ¥Γ­ ΓµΓ°Γ―Γ³Γ΄Γ§Γ±ΓΓ¦Γ¥Γ΄Γ΅Γ© Γ°Γ«ΓΓ―Γ­ Γ΅Γ°ΓΌ Γ΄Γ― DIOS MIOS (Lite). ΓΓ«ΓΓ―Γ­ Γ°Γ±ΓΓ°Γ¥Γ© Γ­Γ΅ Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ΄ΓΓ³Γ¥Γ΄Γ¥ Γ¥Γ­Γ΅ game disc Γ³Γ΄Γ― Wii."
 
 msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
-msgstr "Η ρύθμιση No Disc+ απαιτεί το DIOS MIOS 2.2 update 2. Η παρούσα ρύθμιση θα αγνοηθεί."
+msgstr "Γ‡ Γ±Γ½Γ¨Γ¬Γ©Γ³Γ§ No Disc+ Γ΅Γ°Γ΅Γ©Γ΄Γ¥Γ Γ΄Γ― DIOS MIOS 2.2 update 2. Γ‡ Γ°Γ΅Γ±Γ―Γ½Γ³Γ΅ Γ±Γ½Γ¨Γ¬Γ©Γ³Γ§ Γ¨Γ΅ Γ΅Γ£Γ­Γ―Γ§Γ¨Γ¥Γ."
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
-msgstr "Το αρχείο SYSCONF θα αντιγραφεί στην εικονική NAND. Προσοχή: όλα τα κοινά υπάρχοντα αρχεία θα αντικατασταθούν."
+msgstr "Γ”Γ― Γ΅Γ±Γ·Γ¥ΓΓ― SYSCONF Γ¨Γ΅ Γ΅Γ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ¥Γ Γ³Γ΄Γ§Γ­ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓ NAND. ΓΓ±Γ―Γ³Γ―Γ·Γ: ΓΌΓ«Γ΅ Γ΄Γ΅ ΓªΓ―Γ©Γ­Γ ΓµΓ°ΓΓ±Γ·Γ―Γ­Γ΄Γ΅ Γ΅Γ±Γ·Γ¥ΓΓ΅ Γ¨Γ΅ Γ΅Γ­Γ΄Γ©ΓªΓ΅Γ΄Γ΅Γ³Γ΄Γ΅Γ¨Γ―Γ½Γ­."
 
 msgid "The application might crash if there is currently a read/write access to the SD card!"
-msgstr "Το πρόγραμμα μπορεί να μπλοκάρει αν υπάρξει ταυτόχρονη ανάγνωση/εγγραφή στην κάρτα SD!"
+msgstr "Γ”Γ― Γ°Γ±ΓΌΓ£Γ±Γ΅Γ¬Γ¬Γ΅ Γ¬Γ°Γ―Γ±Γ¥Γ Γ­Γ΅ Γ¬Γ°Γ«Γ―ΓªΓΓ±Γ¥Γ© Γ΅Γ­ ΓµΓ°ΓΓ±Γ®Γ¥Γ© Γ΄Γ΅ΓµΓ΄ΓΌΓ·Γ±Γ―Γ­Γ§ Γ΅Γ­ΓΓ£Γ­ΓΉΓ³Γ§/Γ¥Γ£Γ£Γ±Γ΅Γ¶Γ Γ³Γ΄Γ§Γ­ ΓªΓΓ±Γ΄Γ΅ SD!"
 
 msgid "The entered directory does not exist. Would you like to create it?"
-msgstr "Η ορισμένη τοποθεσία δεν υπάρχει. Θα θέλατε να δημιουργήσετε τον φάκελο;"
+msgstr "Γ‡ Γ―Γ±Γ©Γ³Γ¬ΓΓ­Γ§ Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅ Γ¤Γ¥Γ­ ΓµΓ°ΓΓ±Γ·Γ¥Γ©. ΓΓ΅ Γ¨ΓΓ«Γ΅Γ΄Γ¥ Γ­Γ΅ Γ¤Γ§Γ¬Γ©Γ―ΓµΓ±Γ£ΓΓ³Γ¥Γ΄Γ¥ Γ΄Γ―Γ­ Γ¶ΓΓªΓ¥Γ«Γ―;"
 
 msgid "The files will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
-msgstr "Τα αρχεία θα αποσυμπιεστούν στη emunand.Προσοχή:όλα τα προύπάρχοντα αρχεία θα αντικατασταθούν"
+msgstr "Γ”Γ΅ Γ΅Γ±Γ·Γ¥ΓΓ΅ Γ¨Γ΅ Γ΅Γ°Γ―Γ³ΓµΓ¬Γ°Γ©Γ¥Γ³Γ΄Γ―Γ½Γ­ Γ³Γ΄Γ§ emunand.ΓΓ±Γ―Γ³Γ―Γ·Γ:ΓΌΓ«Γ΅ Γ΄Γ΅ Γ°Γ±Γ―Γ½Γ°ΓΓ±Γ·Γ―Γ­Γ΄Γ΅ Γ΅Γ±Γ·Γ¥ΓΓ΅ Γ¨Γ΅ Γ΅Γ­Γ΄Γ©ΓªΓ΅Γ΄Γ΅Γ³Γ΄Γ΅Γ¨Γ―Γ½Γ­"
 
 msgid "The game is on SD Card."
-msgstr "Το παιχνίδι αυτό βρίσκεται στη κάρτα SD."
+msgstr "Γ”Γ― Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ© Γ΅ΓµΓ΄ΓΌ ΓΆΓ±ΓΓ³ΓªΓ¥Γ΄Γ΅Γ© Γ³Γ΄Γ§ ΓªΓΓ±Γ΄Γ΅ SD."
 
 msgid "The game is on USB."
-msgstr "Το παιχνίδι αυτό βρίσκεται στον δίσκο USB."
+msgstr "Γ”Γ― Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ© Γ΅ΓµΓ΄ΓΌ ΓΆΓ±ΓΓ³ΓªΓ¥Γ΄Γ΅Γ© Γ³Γ΄Γ―Γ­ Γ¤ΓΓ³ΓªΓ― USB."
 
 msgid "The save game will be extracted to your emu nand path."
-msgstr "Το save σας θα αντιγραφεί στην emunand."
+msgstr "Γ”Γ― save Γ³Γ΅Γ² Γ¨Γ΅ Γ΅Γ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ¥Γ Γ³Γ΄Γ§Γ­ emunand."
 
 msgid "The save games will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
-msgstr "Τα save σας θα αντιγραφούν στην emunand. Προσοχή: όλα τα προϋπάρχοντα αρχεία θα αντικατασταθούν"
+msgstr "Γ”Γ΅ save Γ³Γ΅Γ² Γ¨Γ΅ Γ΅Γ­Γ΄Γ©Γ£Γ±Γ΅Γ¶Γ―Γ½Γ­ Γ³Γ΄Γ§Γ­ emunand. ΓΓ±Γ―Γ³Γ―Γ·Γ: ΓΌΓ«Γ΅ Γ΄Γ΅ Γ°Γ±Γ―Γ»Γ°ΓΓ±Γ·Γ―Γ­Γ΄Γ΅ Γ΅Γ±Γ·Γ¥ΓΓ΅ Γ¨Γ΅ Γ΅Γ­Γ΄Γ©ΓªΓ΅Γ΄Γ΅Γ³Γ΄Γ΅Γ¨Γ―Γ½Γ­"
 
 msgid "The wad file was installed"
-msgstr "Το αρχείο WAD εγκαταστάθηκε"
+msgstr "Γ”Γ― Γ΅Γ±Γ·Γ¥ΓΓ― WAD Γ¥Γ£ΓªΓ΅Γ΄Γ΅Γ³Γ΄ΓΓ¨Γ§ΓªΓ¥"
 
 #, c-format
 msgid "The wad installation failed with error %i"
-msgstr "Η εγκατάσταση του αρχείου WAD απέτυχε, με το λάθος %i"
+msgstr "Γ‡ Γ¥Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§ Γ΄Γ―Γµ Γ΅Γ±Γ·Γ¥ΓΓ―Γµ WAD Γ΅Γ°ΓΓ΄ΓµΓ·Γ¥, Γ¬Γ¥ Γ΄Γ― Γ«ΓΓ¨Γ―Γ² %i"
 
 msgid "Theme Downloader"
-msgstr "Κατεβάστε νέα θέματα"
+msgstr "ΓΓ΅Γ΄Γ¥ΓΆΓΓ³Γ΄Γ¥ Γ­ΓΓ΅ Γ¨ΓΓ¬Γ΅Γ΄Γ΅"
 
 msgid "Theme Menu"
-msgstr "Ρυθμίσεις θεμάτων"
+msgstr "Γ‘ΓµΓ¨Γ¬ΓΓ³Γ¥Γ©Γ² Γ¨Γ¥Γ¬ΓΓ΄ΓΉΓ­"
 
 msgid "Theme Path"
-msgstr "Τοποθεσία θεμάτων"
+msgstr "Γ”Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅ Γ¨Γ¥Γ¬ΓΓ΄ΓΉΓ­"
 
 msgid "Theme Title:"
-msgstr "όνομα θέματος:"
+msgstr "ΓΌΓ­Γ―Γ¬Γ΅ Γ¨ΓΓ¬Γ΅Γ΄Γ―Γ²:"
 
 msgid "Themes by www.spiffy360.com"
-msgstr "Θέματα από την ιστοσελίδα www.spiffy360.com"
+msgstr "ΓΓΓ¬Γ΅Γ΄Γ΅ Γ΅Γ°ΓΌ Γ΄Γ§Γ­ Γ©Γ³Γ΄Γ―Γ³Γ¥Γ«ΓΓ¤Γ΅ www.spiffy360.com"
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
-msgstr "Το ΙΟS αυτό είναι του λειτουργικού BootMii. Αν όμως είστε βέβαιος-η ότι δεν είναι, παρακαλώ αγνοήστε αυτή την προειδοποίηση ."
+msgstr "Γ”Γ― Γ‰ΓS Γ΅ΓµΓ΄ΓΌ Γ¥ΓΓ­Γ΅Γ© Γ΄Γ―Γµ Γ«Γ¥Γ©Γ΄Γ―ΓµΓ±Γ£Γ©ΓªΓ―Γ½ BootMii. ΓΓ­ ΓΌΓ¬ΓΉΓ² Γ¥ΓΓ³Γ΄Γ¥ ΓΆΓΓΆΓ΅Γ©Γ―Γ²-Γ§ ΓΌΓ΄Γ© Γ¤Γ¥Γ­ Γ¥ΓΓ­Γ΅Γ©, Γ°Γ΅Γ±Γ΅ΓªΓ΅Γ«ΓΎ Γ΅Γ£Γ­Γ―ΓΓ³Γ΄Γ¥ Γ΅ΓµΓ΄Γ Γ΄Γ§Γ­ Γ°Γ±Γ―Γ¥Γ©Γ¤Γ―Γ°Γ―ΓΓ§Γ³Γ§ ."
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
-msgstr "Το ΙΟS αυτό δεν βρέθηκε στην λίστα. Αν είστε βέβαιος-η ότι το έχετε εγκατεστημένο, παρακαλώ αγνοήστε αυτή την προειδοποίηση."
+msgstr "Γ”Γ― Γ‰ΓS Γ΅ΓµΓ΄ΓΌ Γ¤Γ¥Γ­ ΓΆΓ±ΓΓ¨Γ§ΓªΓ¥ Γ³Γ΄Γ§Γ­ Γ«ΓΓ³Γ΄Γ΅. ΓΓ­ Γ¥ΓΓ³Γ΄Γ¥ ΓΆΓΓΆΓ΅Γ©Γ―Γ²-Γ§ ΓΌΓ΄Γ© Γ΄Γ― ΓΓ·Γ¥Γ΄Γ¥ Γ¥Γ£ΓªΓ΅Γ΄Γ¥Γ³Γ΄Γ§Γ¬ΓΓ­Γ―, Γ°Γ΅Γ±Γ΅ΓªΓ΅Γ«ΓΎ Γ΅Γ£Γ­Γ―ΓΓ³Γ΄Γ¥ Γ΅ΓµΓ΄Γ Γ΄Γ§Γ­ Γ°Γ±Γ―Γ¥Γ©Γ¤Γ―Γ°Γ―ΓΓ§Γ³Γ§."
 
 msgid "This path must be on SD!"
-msgstr "Το μονοπάτι αυτό πρέπει να κατευθύνει σε αρχείο στην κάρτα SD!"
+msgstr "Γ”Γ― Γ¬Γ―Γ­Γ―Γ°ΓΓ΄Γ© Γ΅ΓµΓ΄ΓΌ Γ°Γ±ΓΓ°Γ¥Γ© Γ­Γ΅ ΓªΓ΅Γ΄Γ¥ΓµΓ¨Γ½Γ­Γ¥Γ© Γ³Γ¥ Γ΅Γ±Γ·Γ¥ΓΓ― Γ³Γ΄Γ§Γ­ ΓªΓΓ±Γ΄Γ΅ SD!"
 
 msgid "Time left:"
-msgstr "Χρόνος που απομένει:"
+msgstr "Γ—Γ±ΓΌΓ­Γ―Γ² Γ°Γ―Γµ Γ΅Γ°Γ―Γ¬ΓΓ­Γ¥Γ©:"
 
 msgid "Title Launcher"
-msgstr "Εκκινητής τίτλων"
+msgstr "Γ…ΓªΓªΓ©Γ­Γ§Γ΄ΓΓ² Γ΄ΓΓ΄Γ«ΓΉΓ­"
 
 msgid "Titles from GameTDB"
-msgstr "Τίτλοι από το GameTDB"
+msgstr "Γ”ΓΓ΄Γ«Γ―Γ© Γ΅Γ°ΓΌ Γ΄Γ― GameTDB"
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
-msgstr "Για αναπαραγωγή τίτλων Gamecube από τους αυθεντικούς δίσκους τους, πρέπει να ορίσετε την επιλογή Gamecube σε ΜΙΟS, στις ρυθμίσεις κάθε τίτλου."
+msgstr "ΓƒΓ©Γ΅ Γ΅Γ­Γ΅Γ°Γ΅Γ±Γ΅Γ£ΓΉΓ£Γ Γ΄ΓΓ΄Γ«ΓΉΓ­ Gamecube Γ΅Γ°ΓΌ Γ΄Γ―ΓµΓ² Γ΅ΓµΓ¨Γ¥Γ­Γ΄Γ©ΓªΓ―Γ½Γ² Γ¤ΓΓ³ΓªΓ―ΓµΓ² Γ΄Γ―ΓµΓ², Γ°Γ±ΓΓ°Γ¥Γ© Γ­Γ΅ Γ―Γ±ΓΓ³Γ¥Γ΄Γ¥ Γ΄Γ§Γ­ Γ¥Γ°Γ©Γ«Γ―Γ£Γ Gamecube Γ³Γ¥ ΓΓ‰ΓS, Γ³Γ΄Γ©Γ² Γ±ΓµΓ¨Γ¬ΓΓ³Γ¥Γ©Γ² ΓªΓΓ¨Γ¥ Γ΄ΓΓ΄Γ«Γ―Γµ."
 
 msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
-msgstr "Για αναπαραγωγή τίτλων Gamecube με το πρόγραμμα  DIOS MIOS πρέπει να τους τοποθετήσετε σε ενα USB FAT32 partition."
+msgstr "ΓƒΓ©Γ΅ Γ΅Γ­Γ΅Γ°Γ΅Γ±Γ΅Γ£ΓΉΓ£Γ Γ΄ΓΓ΄Γ«ΓΉΓ­ Gamecube Γ¬Γ¥ Γ΄Γ― Γ°Γ±ΓΌΓ£Γ±Γ΅Γ¬Γ¬Γ΅  DIOS MIOS Γ°Γ±ΓΓ°Γ¥Γ© Γ­Γ΅ Γ΄Γ―ΓµΓ² Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ΄ΓΓ³Γ¥Γ΄Γ¥ Γ³Γ¥ Γ¥Γ­Γ΅ USB FAT32 partition."
 
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
-msgstr "Για αναπαραγωγή τίτλων Gamecube με το πρόγραμμα  DIOS MIOS πρέπει να ορίσετε το 'κύριο ονοπάτι Gamecube' σε ενα USB FAT32 partition."
+msgstr "ΓƒΓ©Γ΅ Γ΅Γ­Γ΅Γ°Γ΅Γ±Γ΅Γ£ΓΉΓ£Γ Γ΄ΓΓ΄Γ«ΓΉΓ­ Gamecube Γ¬Γ¥ Γ΄Γ― Γ°Γ±ΓΌΓ£Γ±Γ΅Γ¬Γ¬Γ΅  DIOS MIOS Γ°Γ±ΓΓ°Γ¥Γ© Γ­Γ΅ Γ―Γ±ΓΓ³Γ¥Γ΄Γ¥ Γ΄Γ― 'ΓªΓ½Γ±Γ©Γ― Γ―Γ­Γ―Γ°ΓΓ΄Γ© Gamecube' Γ³Γ¥ Γ¥Γ­Γ΅ USB FAT32 partition."
 
 msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
-msgstr "Για αναπαραγωγή τίτλων Gamecube με το πρόγραμμα devolution χρειάζεστε το αρχείο loader.bin στο καθοριμένο μονοπάτι του devolution."
+msgstr "ΓƒΓ©Γ΅ Γ΅Γ­Γ΅Γ°Γ΅Γ±Γ΅Γ£ΓΉΓ£Γ Γ΄ΓΓ΄Γ«ΓΉΓ­ Gamecube Γ¬Γ¥ Γ΄Γ― Γ°Γ±ΓΌΓ£Γ±Γ΅Γ¬Γ¬Γ΅ devolution Γ·Γ±Γ¥Γ©ΓΓ¦Γ¥Γ³Γ΄Γ¥ Γ΄Γ― Γ΅Γ±Γ·Γ¥ΓΓ― loader.bin Γ³Γ΄Γ― ΓªΓ΅Γ¨Γ―Γ±Γ©Γ¬ΓΓ­Γ― Γ¬Γ―Γ­Γ―Γ°ΓΓ΄Γ© Γ΄Γ―Γµ devolution."
 
 msgid "Tooltip Delay"
-msgstr "Καθυστέρηση εμφάνισης ετικετών"
+msgstr "ΓΓ΅Γ¨ΓµΓ³Γ΄ΓΓ±Γ§Γ³Γ§ Γ¥Γ¬Γ¶ΓΓ­Γ©Γ³Γ§Γ² Γ¥Γ΄Γ©ΓªΓ¥Γ΄ΓΎΓ­"
 
 msgid "Tooltips"
-msgstr "Ετικέτες"
+msgstr "Γ…Γ΄Γ©ΓªΓΓ΄Γ¥Γ²"
 
 msgid "Transfer failed"
-msgstr "Ανεπιτυχής μεταφορά αρχείων"
+msgstr "ΓΓ­Γ¥Γ°Γ©Γ΄ΓµΓ·ΓΓ² Γ¬Γ¥Γ΄Γ΅Γ¶Γ―Γ±Γ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­"
 
 msgid "USB Device not found."
-msgstr "Δεν βρέθηκε η συσκευή USB."
+msgstr "Γ„Γ¥Γ­ ΓΆΓ±ΓΓ¨Γ§ΓªΓ¥ Γ§ Γ³ΓµΓ³ΓªΓ¥ΓµΓ USB."
 
 msgid "USB Loader GX is protected"
-msgstr "Το USB Loader GX είναι προστατευμένο"
+msgstr "Γ”Γ― USB Loader GX Γ¥ΓΓ­Γ΅Γ© Γ°Γ±Γ―Γ³Γ΄Γ΅Γ΄Γ¥ΓµΓ¬ΓΓ­Γ―"
 
 msgid "USB Port"
-msgstr "Θύρα USB"
+msgstr "ΓΓ½Γ±Γ΅ USB"
 
 msgid "USB Port changing is only supported on Hermes cIOS."
-msgstr "Η αλλαγή θύρας USB υποστηρίζεται μόνο από το cIOS Hermes."
+msgstr "Γ‡ Γ΅Γ«Γ«Γ΅Γ£Γ Γ¨Γ½Γ±Γ΅Γ² USB ΓµΓ°Γ―Γ³Γ΄Γ§Γ±ΓΓ¦Γ¥Γ΄Γ΅Γ© Γ¬ΓΌΓ­Γ― Γ΅Γ°ΓΌ Γ΄Γ― cIOS Hermes."
 
 msgid "Uninstall"
-msgstr "Απεγκατάσταση"
+msgstr "ΓΓ°Γ¥Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§"
 
 msgid "Uninstall Game"
-msgstr "Απεγκατάσταση παιχνιδιού"
+msgstr "ΓΓ°Γ¥Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½"
 
 msgid "Uninstall Menu"
-msgstr "Απεγκατάσταση μενού"
+msgstr "ΓΓ°Γ¥Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§ Γ¬Γ¥Γ­Γ―Γ½"
 
 msgid "Uninstall all"
-msgstr "Απεγκατάσταση όλων"
+msgstr "ΓΓ°Γ¥Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§ ΓΌΓ«ΓΉΓ­"
 
 msgid "Unknown"
-msgstr "Άγνωστο"
+msgstr "ΒΆΓ£Γ­ΓΉΓ³Γ΄Γ―"
 
 msgid "Unlock USB Loader GX"
-msgstr "Ξεκλείδωμα USB Loader GX"
+msgstr "ΓΓ¥ΓªΓ«Γ¥ΓΓ¤ΓΉΓ¬Γ΅ USB Loader GX"
 
 msgid "Unlocked"
-msgstr "Ξεκλειδώθηκε"
+msgstr "ΓΓ¥ΓªΓ«Γ¥Γ©Γ¤ΓΎΓ¨Γ§ΓªΓ¥"
 
 msgid "Unsupported format, try to extract manually TempTheme.zip."
-msgstr "Μη συμβατός τύπος αρχείου, δοκιμάστε να αποσυμπιέσετε τον φάκελο TempTheme.zip."
+msgstr "ΓΓ§ Γ³ΓµΓ¬ΓΆΓ΅Γ΄ΓΌΓ² Γ΄Γ½Γ°Γ―Γ² Γ΅Γ±Γ·Γ¥ΓΓ―Γµ, Γ¤Γ―ΓªΓ©Γ¬ΓΓ³Γ΄Γ¥ Γ­Γ΅ Γ΅Γ°Γ―Γ³ΓµΓ¬Γ°Γ©ΓΓ³Γ¥Γ΄Γ¥ Γ΄Γ―Γ­ Γ¶ΓΓªΓ¥Γ«Γ― TempTheme.zip."
 
 msgid "Update"
-msgstr "Aναβάθμιση"
+msgstr "AΓ­Γ΅ΓΆΓΓ¨Γ¬Γ©Γ³Γ§"
 
 msgid "Update All"
-msgstr "Αναβάθμιση όλων"
+msgstr "ΓΓ­Γ΅ΓΆΓΓ¨Γ¬Γ©Γ³Γ§ ΓΌΓ«ΓΉΓ­"
 
 msgid "Update DOL"
-msgstr "Αναβάθμιση DOL"
+msgstr "ΓΓ­Γ΅ΓΆΓΓ¨Γ¬Γ©Γ³Γ§ DOL"
 
 msgid "Update Files"
-msgstr "Αναβάθμιση αρχείων"
+msgstr "ΓΓ­Γ΅ΓΆΓΓ¨Γ¬Γ©Γ³Γ§ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­"
 
 msgid "Update Path"
-msgstr "Μονοπάτι αρχείων αναβάθμισης."
+msgstr "ΓΓ―Γ­Γ―Γ°ΓΓ΄Γ© Γ΅Γ±Γ·Γ¥ΓΓΉΓ­ Γ΅Γ­Γ΅ΓΆΓΓ¨Γ¬Γ©Γ³Γ§Γ²."
 
 msgid "Update all Language Files"
-msgstr "Αναβάθμιση όλων των μεταφράσεων"
+msgstr "ΓΓ­Γ΅ΓΆΓΓ¨Γ¬Γ©Γ³Γ§ ΓΌΓ«ΓΉΓ­ Γ΄ΓΉΓ­ Γ¬Γ¥Γ΄Γ΅Γ¶Γ±ΓΓ³Γ¥ΓΉΓ­"
 
 msgid "Update failed"
-msgstr "Αποτυχία αναβάθμισης"
+msgstr "ΓΓ°Γ―Γ΄ΓµΓ·ΓΓ΅ Γ΅Γ­Γ΅ΓΆΓΓ¨Γ¬Γ©Γ³Γ§Γ²"
 
 msgid "Update successfull"
-msgstr "Επιτυχής αναβάθμιση"
+msgstr "Γ…Γ°Γ©Γ΄ΓµΓ·ΓΓ² Γ΅Γ­Γ΅ΓΆΓΓ¨Γ¬Γ©Γ³Γ§"
 
 msgid "Updating Language Files:"
-msgstr "Αναβάθμιση αρχείων μεταφράσεων:"
+msgstr "ΓΓ­Γ΅ΓΆΓΓ¨Γ¬Γ©Γ³Γ§ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­ Γ¬Γ¥Γ΄Γ΅Γ¶Γ±ΓΓ³Γ¥ΓΉΓ­:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr "Αναβαθμίσμένο αρχείο ZIP εγκαταστάθηκε στην κατηγορία Homebrew."
+msgstr "ΓΓ­Γ΅ΓΆΓ΅Γ¨Γ¬ΓΓ³Γ¬ΓΓ­Γ― Γ΅Γ±Γ·Γ¥ΓΓ― ZIP Γ¥Γ£ΓªΓ΅Γ΄Γ΅Γ³Γ΄ΓΓ¨Γ§ΓªΓ¥ Γ³Γ΄Γ§Γ­ ΓªΓ΅Γ΄Γ§Γ£Γ―Γ±ΓΓ΅ Homebrew."
 
 msgid "Use Game Settings"
-msgstr "Χρήση ρυθμίσεων συστήματος"
+msgstr "Γ—Γ±ΓΓ³Γ§ Γ±ΓµΓ¨Γ¬ΓΓ³Γ¥ΓΉΓ­ Γ³ΓµΓ³Γ΄ΓΓ¬Γ΅Γ΄Γ―Γ²"
 
 msgid "Use System Font"
-msgstr "Χρήση γραμματοσειράς συστήματος"
+msgstr "Γ—Γ±ΓΓ³Γ§ Γ£Γ±Γ΅Γ¬Γ¬Γ΅Γ΄Γ―Γ³Γ¥Γ©Γ±ΓΓ² Γ³ΓµΓ³Γ΄ΓΓ¬Γ΅Γ΄Γ―Γ²"
 
 msgid "Use global"
-msgstr "Χρήση βασικού"
+msgstr "Γ—Γ±ΓΓ³Γ§ ΓΆΓ΅Γ³Γ©ΓªΓ―Γ½"
 
 msgid "VBI (Default)"
-msgstr "VBI (Προκαθοριμένο)"
+msgstr "VBI (ΓΓ±Γ―ΓªΓ΅Γ¨Γ―Γ±Γ©Γ¬ΓΓ­Γ―)"
 
 msgid "VIDTV Patch"
 msgstr "Patch VIDTV"
 
 msgid "Version:"
-msgstr "Έκδοση:"
+msgstr "ΒΈΓªΓ¤Γ―Γ³Γ§:"
 
 #, c-format
 msgid "Version: %s"
-msgstr "Έκδοση: %s"
+msgstr "ΒΈΓªΓ¤Γ―Γ³Γ§: %s"
 
 msgid "Video Mode"
-msgstr "Ρύθμιση βίντεο"
+msgstr "Γ‘Γ½Γ¨Γ¬Γ©Γ³Γ§ ΓΆΓΓ­Γ΄Γ¥Γ―"
 
 msgid "Virtual Pointer Speed"
-msgstr "Ταχύτητα εικονικού δείκτη"
+msgstr "Γ”Γ΅Γ·Γ½Γ΄Γ§Γ΄Γ΅ Γ¥Γ©ΓªΓ―Γ­Γ©ΓªΓ―Γ½ Γ¤Γ¥ΓΓªΓ΄Γ§"
 
 msgid "WAD Installation"
-msgstr "Εγκατάσταση WAD"
+msgstr "Γ…Γ£ΓªΓ΅Γ΄ΓΓ³Γ΄Γ΅Γ³Γ§ WAD"
 
 msgid "WDM Files Path"
-msgstr "Μονοπάτι αρχείων WDM"
+msgstr "ΓΓ―Γ­Γ―Γ°ΓΓ΄Γ© Γ΅Γ±Γ·Γ¥ΓΓΉΓ­ WDM"
 
 msgid "WIP Patches Path"
-msgstr "Μονοπάτι αρχείων WIP patches"
+msgstr "ΓΓ―Γ­Γ―Γ°ΓΓ΄Γ© Γ΅Γ±Γ·Γ¥ΓΓΉΓ­ WIP patches"
 
 msgid "Waiting..."
-msgstr "Aναμονή..."
+msgstr "AΓ­Γ΅Γ¬Γ―Γ­Γ..."
 
 msgid "Warning"
-msgstr "Προσοχή"
+msgstr "ΓΓ±Γ―Γ³Γ―Γ·Γ"
 
 msgid "Warning:"
-msgstr "Προσοχή:"
+msgstr "ΓΓ±Γ―Γ³Γ―Γ·Γ:"
 
 msgid "What do you want to do?"
-msgstr "Τι θα θέλατε να κάνετε?"
+msgstr "Γ”Γ© Γ¨Γ΅ Γ¨ΓΓ«Γ΅Γ΄Γ¥ Γ­Γ΅ ΓªΓΓ­Γ¥Γ΄Γ¥?"
 
 msgid "What do you want to update?"
-msgstr "Τι θα θέλατε να αναβαθμίσετε?"
+msgstr "Γ”Γ© Γ¨Γ΅ Γ¨ΓΓ«Γ΅Γ΄Γ¥ Γ­Γ΅ Γ΅Γ­Γ΅ΓΆΓ΅Γ¨Γ¬ΓΓ³Γ¥Γ΄Γ¥?"
 
 msgid "What should be deleted for this game title:"
-msgstr "Τι θα θέλατε να διαγράψετε από αυτό τον τίτλο:"
+msgstr "Γ”Γ© Γ¨Γ΅ Γ¨ΓΓ«Γ΅Γ΄Γ¥ Γ­Γ΅ Γ¤Γ©Γ΅Γ£Γ±ΓΓΈΓ¥Γ΄Γ¥ Γ΅Γ°ΓΌ Γ΅ΓµΓ΄ΓΌ Γ΄Γ―Γ­ Γ΄ΓΓ΄Γ«Γ―:"
 
 msgid "What to extract from NAND?"
-msgstr "Τι να μεταφερθεί από τη μνήμη NAND?"
+msgstr "Γ”Γ© Γ­Γ΅ Γ¬Γ¥Γ΄Γ΅Γ¶Γ¥Γ±Γ¨Γ¥Γ Γ΅Γ°ΓΌ Γ΄Γ§ Γ¬Γ­ΓΓ¬Γ§ NAND?"
 
 msgid "Where should the game be installed to?"
-msgstr "Που να εγκατασταθεί το παιχνίδι;"
+msgstr "ΓΓ―Γµ Γ­Γ΅ Γ¥Γ£ΓªΓ΅Γ΄Γ΅Γ³Γ΄Γ΅Γ¨Γ¥Γ Γ΄Γ― Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ©;"
 
 msgid "WiFi Features"
-msgstr "Λειτουργίες wi-fi"
+msgstr "Γ‹Γ¥Γ©Γ΄Γ―ΓµΓ±Γ£ΓΓ¥Γ² wi-fi"
 
 msgid "Widescreen Factor"
-msgstr "Συντελεστής για widescreen"
+msgstr "Γ“ΓµΓ­Γ΄Γ¥Γ«Γ¥Γ³Γ΄ΓΓ² Γ£Γ©Γ΅ widescreen"
 
 msgid "Widescreen Fix"
-msgstr "Διόρθωση για ευρείες οθόνες"
+msgstr "Γ„Γ©ΓΌΓ±Γ¨ΓΉΓ³Γ§ Γ£Γ©Γ΅ Γ¥ΓµΓ±Γ¥ΓΓ¥Γ² Γ―Γ¨ΓΌΓ­Γ¥Γ²"
 
 msgid "Wii Games"
-msgstr "Παιχνίδια Wii"
+msgstr "ΓΓ΅Γ©Γ·Γ­ΓΓ¤Γ©Γ΅ Wii"
 
 msgid "Wii Menu"
-msgstr "Μενού του Wii"
+msgstr "ΓΓ¥Γ­Γ―Γ½ Γ΄Γ―Γµ Wii"
 
 msgid "Wii Settings"
-msgstr "Ρυθμίσεις του Wii"
+msgstr "Γ‘ΓµΓ¨Γ¬ΓΓ³Γ¥Γ©Γ² Γ΄Γ―Γµ Wii"
 
 msgid "WiiTDB.xml"
 msgstr "WiiTDB.xml"
 
 msgid "WiiTDB.xml is up to date."
-msgstr "Το αρχείο WiiTDB.xml είναι ενημερωμένο"
+msgstr "Γ”Γ― Γ΅Γ±Γ·Γ¥ΓΓ― WiiTDB.xml Γ¥ΓΓ­Γ΅Γ© Γ¥Γ­Γ§Γ¬Γ¥Γ±ΓΉΓ¬ΓΓ­Γ―"
 
 msgid "Wiilight"
-msgstr "Λάμπακι DVD drive του Wii"
+msgstr "Γ‹ΓΓ¬Γ°Γ΅ΓªΓ© DVD drive Γ΄Γ―Γµ Wii"
 
 msgid "Wiinnertag"
 msgstr "Wiinnertag"
 
 msgid "Wiinnertag Path"
-msgstr "Μονοπάτι αρχείων wiinnertag"
+msgstr "ΓΓ―Γ­Γ―Γ°ΓΓ΄Γ© Γ΅Γ±Γ·Γ¥ΓΓΉΓ­ wiinnertag"
 
 msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
-msgstr "Το Wiinnertag απαιτεί να έχετε ενεργοποιήσει την αυτόματη σύνδεση της εφαρμογής στο διαδίκτυο κατα την εκκίνηση του. Θέλετε να την ενεργοποιήσετε τώρα;"
+msgstr "Γ”Γ― Wiinnertag Γ΅Γ°Γ΅Γ©Γ΄Γ¥Γ Γ­Γ΅ ΓΓ·Γ¥Γ΄Γ¥ Γ¥Γ­Γ¥Γ±Γ£Γ―Γ°Γ―Γ©ΓΓ³Γ¥Γ© Γ΄Γ§Γ­ Γ΅ΓµΓ΄ΓΌΓ¬Γ΅Γ΄Γ§ Γ³Γ½Γ­Γ¤Γ¥Γ³Γ§ Γ΄Γ§Γ² Γ¥Γ¶Γ΅Γ±Γ¬Γ―Γ£ΓΓ² Γ³Γ΄Γ― Γ¤Γ©Γ΅Γ¤ΓΓªΓ΄ΓµΓ― ΓªΓ΅Γ΄Γ΅ Γ΄Γ§Γ­ Γ¥ΓªΓªΓΓ­Γ§Γ³Γ§ Γ΄Γ―Γµ. ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ΄Γ§Γ­ Γ¥Γ­Γ¥Γ±Γ£Γ―Γ°Γ―Γ©ΓΓ³Γ¥Γ΄Γ¥ Γ΄ΓΎΓ±Γ΅;"
 
 msgid "Wiird Debugger"
-msgstr "Χρήση Wiird Debugger"
+msgstr "Γ—Γ±ΓΓ³Γ§ Wiird Debugger"
 
 #, c-format
 msgid "Write error on file: %s"
-msgstr "Γράψιμο του λάθους στο αρχείο: %s"
+msgstr "ΓƒΓ±ΓΓΈΓ©Γ¬Γ― Γ΄Γ―Γµ Γ«ΓΓ¨Γ―ΓµΓ² Γ³Γ΄Γ― Γ΅Γ±Γ·Γ¥ΓΓ―: %s"
 
 msgid "Writing GXGameCategories.xml"
-msgstr "Γράφεται το αρχείο Categories.xml"
+msgstr "ΓƒΓ±ΓΓ¶Γ¥Γ΄Γ΅Γ© Γ΄Γ― Γ΅Γ±Γ·Γ¥ΓΓ― Categories.xml"
 
 msgid "Wrong Password"
-msgstr "Λανθασμένος κωδικός"
+msgstr "Γ‹Γ΅Γ­Γ¨Γ΅Γ³Γ¬ΓΓ­Γ―Γ² ΓªΓΉΓ¤Γ©ΓªΓΌΓ²"
 
 msgid "Yes"
-msgstr "Ναι"
+msgstr "ΓΓ΅Γ©"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
-msgstr "Προσπαθείτε να επιλέξετε ενα partition FAT32/NTFS/EXT με cIOS 249 έκδοσης < 18. Αυτό δεν υποστηρίζεται. Προχωρήστε με δική σας ευθύνη."
+msgstr "ΓΓ±Γ―Γ³Γ°Γ΅Γ¨Γ¥ΓΓ΄Γ¥ Γ­Γ΅ Γ¥Γ°Γ©Γ«ΓΓ®Γ¥Γ΄Γ¥ Γ¥Γ­Γ΅ partition FAT32/NTFS/EXT Γ¬Γ¥ cIOS 249 ΓΓªΓ¤Γ―Γ³Γ§Γ² < 18. ΓΓµΓ΄ΓΌ Γ¤Γ¥Γ­ ΓµΓ°Γ―Γ³Γ΄Γ§Γ±ΓΓ¦Γ¥Γ΄Γ΅Γ©. ΓΓ±Γ―Γ·ΓΉΓ±ΓΓ³Γ΄Γ¥ Γ¬Γ¥ Γ¤Γ©ΓªΓ Γ³Γ΅Γ² Γ¥ΓµΓ¨Γ½Γ­Γ§."
 
 msgid "You can select or format a partition or use the channel loader mode."
-msgstr "Μπορείτε να επιλέξετε ή να επανασυγκροτήσετε ενα partition ή να χρησιμοποιήσετε την επιλογή channel loader."
+msgstr "ΓΓ°Γ―Γ±Γ¥ΓΓ΄Γ¥ Γ­Γ΅ Γ¥Γ°Γ©Γ«ΓΓ®Γ¥Γ΄Γ¥ Γ Γ­Γ΅ Γ¥Γ°Γ΅Γ­Γ΅Γ³ΓµΓ£ΓªΓ±Γ―Γ΄ΓΓ³Γ¥Γ΄Γ¥ Γ¥Γ­Γ΅ partition Γ Γ­Γ΅ Γ·Γ±Γ§Γ³Γ©Γ¬Γ―Γ°Γ―Γ©ΓΓ³Γ¥Γ΄Γ¥ Γ΄Γ§Γ­ Γ¥Γ°Γ©Γ«Γ―Γ£Γ channel loader."
 
 msgid "You cannot delete this category."
-msgstr "Δεν μπορείτε να διαγράψετε αυτήν την κατηγορία."
+msgstr "Γ„Γ¥Γ­ Γ¬Γ°Γ―Γ±Γ¥ΓΓ΄Γ¥ Γ­Γ΅ Γ¤Γ©Γ΅Γ£Γ±ΓΓΈΓ¥Γ΄Γ¥ Γ΅ΓµΓ΄ΓΓ­ Γ΄Γ§Γ­ ΓªΓ΅Γ΄Γ§Γ£Γ―Γ±ΓΓ΅."
 
 msgid "You need to install DIOS MIOS Lite v1.2 or a newer version."
-msgstr "Πρέπει να εγκαταστήσεις το DIOS MIOS Lite v1.2 ή μια νεότερη έκδοση."
+msgstr "ΓΓ±ΓΓ°Γ¥Γ© Γ­Γ΅ Γ¥Γ£ΓªΓ΅Γ΄Γ΅Γ³Γ΄ΓΓ³Γ¥Γ©Γ² Γ΄Γ― DIOS MIOS Lite v1.2 Γ Γ¬Γ©Γ΅ Γ­Γ¥ΓΌΓ΄Γ¥Γ±Γ§ ΓΓªΓ¤Γ―Γ³Γ§."
 
 msgid "You need to install Devolution or DIOS MIOS (Lite) to launch GameCube games from USB or SD card"
-msgstr "Πρέπει να εγκαταστήσετε το Devolution ή το DIOS MIOS (Lite) για να παίξετε τίτλους GameCube από USB ή SD"
+msgstr "ΓΓ±ΓΓ°Γ¥Γ© Γ­Γ΅ Γ¥Γ£ΓªΓ΅Γ΄Γ΅Γ³Γ΄ΓΓ³Γ¥Γ΄Γ¥ Γ΄Γ― Devolution Γ Γ΄Γ― DIOS MIOS (Lite) Γ£Γ©Γ΅ Γ­Γ΅ Γ°Γ΅ΓΓ®Γ¥Γ΄Γ¥ Γ΄ΓΓ΄Γ«Γ―ΓµΓ² GameCube Γ΅Γ°ΓΌ USB Γ SD"
 
 msgid "Zoom Duration (Speed)"
-msgstr "διάρκεια εστίασης (Ταχύτητα)"
+msgstr "Γ¤Γ©ΓΓ±ΓªΓ¥Γ©Γ΅ Γ¥Γ³Γ΄ΓΓ΅Γ³Γ§Γ² (Γ”Γ΅Γ·Γ½Γ΄Γ§Γ΄Γ΅)"
 
 msgid "and translators for language files updates"
-msgstr "και τους μεταφραστές για τις αναβαθμίσεις στις διαθέσιμες γλώσσες του προγράμματος"
+msgstr "ΓªΓ΅Γ© Γ΄Γ―ΓµΓ² Γ¬Γ¥Γ΄Γ΅Γ¶Γ±Γ΅Γ³Γ΄ΓΓ² Γ£Γ©Γ΅ Γ΄Γ©Γ² Γ΅Γ­Γ΅ΓΆΓ΅Γ¨Γ¬ΓΓ³Γ¥Γ©Γ² Γ³Γ΄Γ©Γ² Γ¤Γ©Γ΅Γ¨ΓΓ³Γ©Γ¬Γ¥Γ² Γ£Γ«ΓΎΓ³Γ³Γ¥Γ² Γ΄Γ―Γµ Γ°Γ±Γ―Γ£Γ±ΓΓ¬Γ¬Γ΅Γ΄Γ―Γ²"
 
 msgid "available"
-msgstr "διαθέσιμο"
+msgstr "Γ¤Γ©Γ΅Γ¨ΓΓ³Γ©Γ¬Γ―"
 
 msgid "does not exist!"
-msgstr "δεν υπάρχει!"
+msgstr "Γ¤Γ¥Γ­ ΓµΓ°ΓΓ±Γ·Γ¥Γ©!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr "δεν βρέθηκε. Φόρτωση παιχνιδιού χωρίς cheats."
+msgstr "Γ¤Γ¥Γ­ ΓΆΓ±ΓΓ¨Γ§ΓªΓ¥. Γ–ΓΌΓ±Γ΄ΓΉΓ³Γ§ Γ°Γ΅Γ©Γ·Γ­Γ©Γ¤Γ©Γ―Γ½ Γ·ΓΉΓ±ΓΓ² cheats."
 
 msgid "files left"
-msgstr "εναπομείναντα αρχεία"
+msgstr "Γ¥Γ­Γ΅Γ°Γ―Γ¬Γ¥ΓΓ­Γ΅Γ­Γ΄Γ΅ Γ΅Γ±Γ·Γ¥ΓΓ΅"
 
 msgid "for FAT/NTFS support"
-msgstr "για υποστήριξη FAT/NTFS"
+msgstr "Γ£Γ©Γ΅ ΓµΓ°Γ―Γ³Γ΄ΓΓ±Γ©Γ®Γ§ FAT/NTFS"
 
 msgid "for GameTDB and hosting covers / disc images"
-msgstr "για το GameTDB και την αποθήκευση εξωφύλλων / εικόνων δίσκων"
+msgstr "Γ£Γ©Γ΅ Γ΄Γ― GameTDB ΓªΓ΅Γ© Γ΄Γ§Γ­ Γ΅Γ°Γ―Γ¨ΓΓªΓ¥ΓµΓ³Γ§ Γ¥Γ®ΓΉΓ¶Γ½Γ«Γ«ΓΉΓ­ / Γ¥Γ©ΓªΓΌΓ­ΓΉΓ­ Γ¤ΓΓ³ΓªΓΉΓ­"
 
 msgid "for Ocarina"
-msgstr "για το Ocarina"
+msgstr "Γ£Γ©Γ΅ Γ΄Γ― Ocarina"
 
 msgid "for diverse patches"
-msgstr "για διάφορα patches"
+msgstr "Γ£Γ©Γ΅ Γ¤Γ©ΓΓ¶Γ―Γ±Γ΅ patches"
 
 msgid "for his awesome tool LibWiiGui"
-msgstr "για το απίθανο εργαλείο του LibWiiGui"
+msgstr "Γ£Γ©Γ΅ Γ΄Γ― Γ΅Γ°ΓΓ¨Γ΅Γ­Γ― Γ¥Γ±Γ£Γ΅Γ«Γ¥ΓΓ― Γ΄Γ―Γµ LibWiiGui"
 
 msgid "for hosting the themes"
-msgstr "για την αποθήκευση των θεμάτων"
+msgstr "Γ£Γ©Γ΅ Γ΄Γ§Γ­ Γ΅Γ°Γ―Γ¨ΓΓªΓ¥ΓµΓ³Γ§ Γ΄ΓΉΓ­ Γ¨Γ¥Γ¬ΓΓ΄ΓΉΓ­"
 
 msgid "for the USB Loader source"
-msgstr "για τον κώδικα του 'USB Loader"
+msgstr "Γ£Γ©Γ΅ Γ΄Γ―Γ­ ΓªΓΎΓ¤Γ©ΓªΓ΅ Γ΄Γ―Γµ 'USB Loader"
 
 msgid "for their work on the wiki page"
-msgstr "για την δουλειά τους στην σελίδα μας στο wiki"
+msgstr "Γ£Γ©Γ΅ Γ΄Γ§Γ­ Γ¤Γ―ΓµΓ«Γ¥Γ©Γ Γ΄Γ―ΓµΓ² Γ³Γ΄Γ§Γ­ Γ³Γ¥Γ«ΓΓ¤Γ΅ Γ¬Γ΅Γ² Γ³Γ΄Γ― wiki"
 
 msgid "formatted!"
-msgstr "ανασυγκροτήθηκε!"
+msgstr "Γ΅Γ­Γ΅Γ³ΓµΓ£ΓªΓ±Γ―Γ΄ΓΓ¨Γ§ΓªΓ¥!"
 
 msgid "free"
-msgstr "ελευθερα"
+msgstr "Γ¥Γ«Γ¥ΓµΓ¨Γ¥Γ±Γ΅"
 
 msgid "ms"
 msgstr "ms"
 
 msgid "not set"
-msgstr "δεν ορίστηκε"
+msgstr "Γ¤Γ¥Γ­ Γ―Γ±ΓΓ³Γ΄Γ§ΓªΓ¥"
 
 msgid "of"
-msgstr "από"
+msgstr "Γ΅Γ°ΓΌ"
 
 msgid "seconds left"
-msgstr "δευτερόλεπτα απομένουν"
+msgstr "Γ¤Γ¥ΓµΓ΄Γ¥Γ±ΓΌΓ«Γ¥Γ°Γ΄Γ΅ Γ΅Γ°Γ―Γ¬ΓΓ­Γ―ΓµΓ­"
+
+#~ msgid "Control level"
+#~ msgstr "Γ…Γ°ΓΓ°Γ¥Γ¤Γ― Γ¥Γ«ΓΓ£Γ·Γ―Γµ"
+
+#~ msgid "Return to Wii "
+#~ msgstr "Γ…Γ°Γ©Γ³Γ΄Γ±Γ―Γ¶Γ Γ³Γ΄Γ― ΓªΓ¥Γ­Γ΄Γ±Γ©ΓªΓΌ Γ¬Γ¥Γ­Γ―Γ½ Γ΄Γ―Γµ Wii"
+
+#~ msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
+#~ msgstr "Γ‡ Γ΄Γ―Γ°Γ―Γ¨Γ¥Γ³ΓΓ΅ Γ΅Γ±Γ·Γ¥ΓΓΉΓ­ cheats GCT ΓªΓ΅Γ© Γ΄Γ― Γ°Γ΅Γ©Γ·Γ­ΓΓ¤Γ© Γ΅ΓµΓ΄ΓΌ Γ¤Γ¥Γ­ ΓΆΓ±ΓΓ³ΓªΓ―Γ­Γ΄Γ΅Γ© Γ³Γ― ΓΓ¤Γ©Γ― partition. ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ¥ΓªΓªΓ©Γ­ΓΓ³Γ¥Γ΄Γ¥ Γ΄Γ―Γ­ Γ΄ΓΓ΄Γ«Γ― Γ·ΓΉΓ±ΓΓ² cheats; "
+
+#~ msgid "The GCT Cheatcodes Path must be on SD card. Run the game without Ocarina?"
+#~ msgstr "Γ”Γ΅ Γ΅Γ±Γ·Γ¥ΓΓ΅ cheats GCT Γ°Γ±ΓΓ°Γ¥Γ© Γ­Γ΅ ΓΆΓ±ΓΓ³ΓªΓ―Γ­Γ΄Γ΅Γ© Γ³Γ΄Γ§Γ­ ΓªΓΓ±Γ΄Γ΅ SD. ΓΓΓ«Γ¥Γ΄Γ¥ Γ­Γ΅ Γ¥ΓªΓªΓ©Γ­ΓΓ³Γ¥Γ΄Γ¥ Γ΄Γ―Γ­ Γ΄ΓΓ΄Γ«Γ― Γ·ΓΉΓ±ΓΓ² cheats;"

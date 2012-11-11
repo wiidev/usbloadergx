@@ -271,46 +271,76 @@ u8 IosLoader::GetDMLVersion(char* releaseDate)
 
 	struct tm time;
 
-	// Timestamp of DML r52 (Mar 7 2012 19:36:06)
-	const time_t dml_r52_time = 1331148966;
+	// Timestamp of DML r52
+	strptime("Mar 7 2012 19:36:06", "%b %d %Y %H:%M:%S", &time);
+	const time_t dml_r52_time = mktime(&time);
 
-	// Timestamp of DML 1.2 (Apr 24 2012 19:44:08)
-	const time_t dml_1_2_time = 1335289448;
+	// Timestamp of DML 1.2
+	strptime("Apr 24 2012 19:44:08", "%b %d %Y %H:%M:%S", &time);
+	const time_t dml_1_2_time = mktime(&time);
 
-	// Timestamp of DML 1.4b (May  7 2012 21:12:47)
-	const time_t dml_1_4b_time = 1336417967;
+	// Timestamp of DML 1.4b
+	strptime("May  7 2012 21:12:47", "%b %d %Y %H:%M:%S", &time);
+	const time_t dml_1_4b_time = mktime(&time);
 
-	// Timestamp of DML 1.5 (Jun 14 2012 00:05:09)
-	const time_t dml_1_5_time = 1339625109;
+	// Timestamp of DML 1.5
+	strptime("Jun 14 2012 00:05:09", "%b %d %Y %H:%M:%S", &time);
+	const time_t dml_1_5_time = mktime(&time);
 
-	// Timestamp of DM 2.0 (Jun 23 2012 19:43:21)
-	const time_t dm_2_0_time = 1340473401;
+	// Timestamp of DM 2.0
+	strptime("Jun 23 2012 19:43:21", "%b %d %Y %H:%M:%S", &time);
+	const time_t dm_2_0_time = mktime(&time);
 
-	// Timestamp of DM 2.1 (Jul 17 2012 11:25:35)
-	const time_t dm_2_1_time = 1342517135;
+	// Timestamp of DM 2.1
+	strptime("Jul 17 2012 11:25:35", "%b %d %Y %H:%M:%S", &time);
+	const time_t dm_2_1_time = mktime(&time);
 
-	// Timestamp of DM 2.2 initial release (Jul 18 2012 16:57:47)
-	const time_t dm_2_2_time = 1342623467;
+	// Timestamp of DM 2.2 initial release
+	strptime("Jul 18 2012 16:57:47", "%b %d %Y %H:%M:%S", &time);
+	const time_t dm_2_2_time = mktime(&time);
 
-	// Timestamp of DM 2.2 update2 (Jul 20 2012 14:49:47)
-	const time_t dm_2_2_2_time = 1342788587;
+	// Timestamp of DM 2.2 update2
+	strptime("Jul 20 2012 14:49:47", "%b %d %Y %H:%M:%S", &time);
+	const time_t dm_2_2_2_time = mktime(&time);
 
-	// Timestamp of DML 2.2 initial release (Aug  6 2012 15:19:17)
-	const time_t dml_2_2_time = 1344259157;
+	// Timestamp of DML 2.2 initial release
+	strptime("Aug  6 2012 15:19:17", "%b %d %Y %H:%M:%S", &time);
+	const time_t dml_2_2_time = mktime(&time);
 
-	// Timestamp of DML 2.2 update1 (Aug 13 2012 00:12:46)
-	const time_t dml_2_2_1_time = 1344809566;
+	// Timestamp of DML 2.2 update1
+	strptime("Aug 13 2012 00:12:46", "%b %d %Y %H:%M:%S", &time);
+	const time_t dml_2_2_1_time = mktime(&time);
 
-	// Timestamp of DML 2.3 (Sep 24 2012 13:13:42 mirror link)
-	const time_t dml_2_3m_time = 1348485222;
+	// Timestamp of DML 2.3 mirror link
+	strptime("Sep 24 2012 13:13:42", "%b %d %Y %H:%M:%S", &time);
+	const time_t dml_2_3m_time = mktime(&time);
 
-	// Timestamp of DM 2.3 (Sep 24 2012 15:51:54)
-	const time_t dm_2_3_time = 1348494714;
+	// Timestamp of DM 2.3
+	strptime("Sep 24 2012 15:51:54", "%b %d %Y %H:%M:%S", &time);
+	const time_t dm_2_3_time = mktime(&time);
 
-	// Timestamp of DML 2.3 (Sep 25 2012 03:03:41 main link)
-	const time_t dml_2_3_time = 1348535021;
+	// Timestamp of DML 2.3 main link
+	strptime("Sep 25 2012 03:03:41", "%b %d %Y %H:%M:%S", &time);
+	const time_t dml_2_3_time = mktime(&time);
 
-	// releaseDate format: Apr 24 2012 19:44:08
+	// Timestamp of DM 2.4
+	strptime("Oct 21 2012 22:57:12", "%b %d %Y %H:%M:%S", &time);
+	const time_t dm_2_4_time = mktime(&time);
+
+	// Timestamp of DML 2.4
+	strptime("Oct 21 2012 22:57:17", "%b %d %Y %H:%M:%S", &time);
+	const time_t dml_2_4_time = mktime(&time);
+
+	// Timestamp of DM 2.5
+	strptime("Nov  9 2012 21:18:52", "%b %d %Y %H:%M:%S", &time);
+	const time_t dm_2_5_time = mktime(&time);
+
+	// Timestamp of DML 2.5
+	strptime("Nov  9 2012 21:18:56", "%b %d %Y %H:%M:%S", &time);
+	const time_t dml_2_5_time = mktime(&time);
+	
+	
+	// Current installed version
 	gprintf("built on %s\n", releaseDate);
 
 	strptime(releaseDate, "%b %d %Y %H:%M:%S", &time);
@@ -318,7 +348,9 @@ u8 IosLoader::GetDMLVersion(char* releaseDate)
 
 	if(currentMIOS == DIOS_MIOS)
 	{
-		if(difftime(unixTime, dm_2_3_time) >= 0) 			currentDMLVersion = DML_VERSION_DM_2_3;
+		if(difftime(unixTime, dm_2_5_time) >= 0) 			currentDMLVersion = DML_VERSION_DM_2_5;
+		else if(difftime(unixTime, dm_2_4_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_4;
+		else if(difftime(unixTime, dm_2_3_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_3;
 		else if(difftime(unixTime, dm_2_2_2_time) >= 0) 	currentDMLVersion = DML_VERSION_DM_2_2_2;
 		else if(difftime(unixTime, dm_2_2_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_2;
 		else if(difftime(unixTime, dm_2_1_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_1;
@@ -326,7 +358,9 @@ u8 IosLoader::GetDMLVersion(char* releaseDate)
 	}
 	else if(currentMIOS == DIOS_MIOS_LITE)
 	{
-		if(difftime(unixTime, dml_2_3_time) >= 0) 			currentDMLVersion = DML_VERSION_DML_2_3;
+		if(difftime(unixTime, dml_2_5_time) >= 0) 			currentDMLVersion = DML_VERSION_DML_2_5;
+		else if(difftime(unixTime, dml_2_4_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_4;
+		else if(difftime(unixTime, dml_2_3_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_3;
 		else if(difftime(unixTime, dml_2_3m_time) >= 0) 	currentDMLVersion = DML_VERSION_DML_2_3m;
 		else if(difftime(unixTime, dml_2_2_1_time) >= 0) 	currentDMLVersion = DML_VERSION_DML_2_2_1;
 		else if(difftime(unixTime, dml_2_2_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_2;

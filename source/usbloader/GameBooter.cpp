@@ -415,6 +415,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 	u8 dmlNoDiscChoice = game_cfg->DMLNoDisc == INHERIT ? Settings.DMLNoDisc : game_cfg->DMLNoDisc;
 	u8 dmlNoDisc2Choice = game_cfg->DMLNoDisc2 == INHERIT ? Settings.DMLNoDisc2 : game_cfg->DMLNoDisc2;
 	u8 dmlWidescreenChoice = game_cfg->DMLWidescreen == INHERIT ? Settings.DMLWidescreen : game_cfg->DMLWidescreen;
+	u8 dmlScreenshotChoice = game_cfg->DMLScreenshot == INHERIT ? Settings.DMLScreenshot : game_cfg->DMLScreenshot;
 	u8 dmlJPNPatchChoice = game_cfg->DMLJPNPatch == INHERIT ? Settings.DMLJPNPatch : game_cfg->DMLJPNPatch;
 	u8 dmlDebugChoice = game_cfg->DMLDebug == INHERIT ? Settings.DMLDebug : game_cfg->DMLDebug;
 	
@@ -552,7 +553,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		gprintf("DML: Loading cheat %s\n", dml_config->CheatPath);
 	}
 
-	// other DMl configs
+	// other DML configs
 	if(dmlPADHookChoice)
 		dml_config->Config |= DML_CFG_PADHOOK;
 	if(dmlActivityLEDChoice)
@@ -563,6 +564,8 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		dml_config->Config |= dmlDebugChoice == ON ? DML_CFG_DEBUGGER : DML_CFG_DEBUGWAIT;
 	if(dmlWidescreenChoice)
 		dml_config->Config |= DML_CFG_FORCE_WIDE;
+	if(dmlScreenshotChoice)
+		dml_config->Config |= DML_CFG_SCREENSHOT;
 
 
 	// Setup Video Mode

@@ -177,6 +177,7 @@ void CSettings::SetDefault()
 	DMLNoDisc = OFF;
 	DMLNoDisc2 = OFF;
 	DMLWidescreen = OFF;
+	DMLScreenshot = OFF;
 	DMLJPNPatch = OFF;
 	DMLDebug = OFF;
 	DEVOMCEmulation = OFF;
@@ -406,6 +407,7 @@ bool CSettings::Save()
 	fprintf(file, "DMLNoDisc = %d\n", DMLNoDisc);
 	fprintf(file, "DMLNoDisc2 = %d\n", DMLNoDisc2);
 	fprintf(file, "DMLWidescreen = %d\n", DMLWidescreen);
+	fprintf(file, "DMLScreenshot = %d\n", DMLScreenshot);
 	fprintf(file, "DMLJPNPatch = %d\n", DMLJPNPatch);
 	fprintf(file, "DMLDebug = %d\n", DMLDebug);
 	fprintf(file, "DEVOMCEmulation = %d\n", DEVOMCEmulation);
@@ -844,6 +846,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "DMLWidescreen") == 0)
 	{
 		DMLWidescreen = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "DMLScreenshot") == 0)
+	{
+		DMLScreenshot = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "DMLJPNPatch") == 0)

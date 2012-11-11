@@ -38,6 +38,7 @@ typedef struct _GameCFG
 	short DMLNoDisc;
 	short DMLNoDisc2;
 	short DMLWidescreen;
+	short DMLScreenshot;
 	short DMLJPNPatch;
 	short DMLDebug;
 	short DEVOMCEmulation;
@@ -76,6 +77,7 @@ typedef struct _GameCFG
 		this->DMLNoDisc = game.DMLNoDisc;
 		this->DMLNoDisc2 = game.DMLNoDisc2;
 		this->DMLWidescreen = game.DMLWidescreen;
+		this->DMLScreenshot = game.DMLScreenshot;
 		this->DMLJPNPatch = game.DMLJPNPatch;
 		this->DMLDebug = game.DMLDebug;
 		this->DEVOMCEmulation = game.DEVOMCEmulation;

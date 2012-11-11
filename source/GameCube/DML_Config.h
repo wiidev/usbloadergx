@@ -40,7 +40,8 @@ enum DMLConfig
 	DML_CFG_BOOT_DISC		= (1<<10),
 	// DML_CFG_BOOT_DOL		= (1<<11),	// unused since DML v1.0, removed in v2.1
 	DML_CFG_BOOT_DISC2		= (1<<11),	// DM v2.1+, Config v02
-	DML_CFG_NODISC2			= (1<<12)	// added back in DM v2.2 update2 (r20) and removed in v2.3
+	DML_CFG_NODISC2			= (1<<12),	// added back in DM v2.2 update2 (r20) and removed in v2.3
+	DML_CFG_SCREENSHOT		= (1<<13),	// added in v2.5
 };
 
 enum DMLVideoModes

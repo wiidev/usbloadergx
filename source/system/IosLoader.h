@@ -46,6 +46,10 @@ enum DMLVersions
 	DML_VERSION_DML_2_3m,	// Sep 24 2012 13:13:42 (mirror link)
 	DML_VERSION_DM_2_3,		// Sep 24 2012 15:51:54 (Main link and Mirror link)
 	DML_VERSION_DML_2_3,	// Sep 25 2012 03:03:41 (main link)
+	DML_VERSION_DM_2_4,		// Oct 21 2012 22:57:12
+	DML_VERSION_DML_2_4,	// Oct 21 2012 22:57:17
+	DML_VERSION_DM_2_5,		// Nov  9 2012 21:18:52
+	DML_VERSION_DML_2_5,	// Nov  9 2012 21:18:56
 	DML_VERSION_MAX_VERSION,
 };
 

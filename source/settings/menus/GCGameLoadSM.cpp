@@ -169,8 +169,10 @@ void GCGameLoadSM::SetOptionNames()
 		Options->SetName(Idx++, "%s", tr( "DML No Disc" ));
 		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_2_2 && IosLoader::GetDMLVersion() <= DML_VERSION_DML_2_2_1)
 			Options->SetName(Idx++, "%s", tr( "DML No Disc+" ));
-		if(IosLoader::GetDMLVersion() > DML_VERSION_DM_2_1)
+		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_1)
 			Options->SetName(Idx++, "%s", tr( "DML Force Widescreen" ));
+		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_5)
+			Options->SetName(Idx++, "%s", tr( "DML Screenshot" ));
 		Options->SetName(Idx++, "%s", tr( "DML Japanese Patch" ));
 		Options->SetName(Idx++, "%s", tr( "DML Debug" ));
 	}
@@ -263,12 +265,21 @@ void GCGameLoadSM::SetOptionValues()
 		}
 
 		//! Settings: DML Force Widescreen
-		if(IosLoader::GetDMLVersion() > DML_VERSION_DM_2_1)
+		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_1)
 		{
 			if(GameConfig.DMLWidescreen == INHERIT)
 				Options->SetValue(Idx++, tr("Use global"));
 			else
 				Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLWidescreen]));
+		}
+
+		//! Settings: DML Screenshot
+		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_5)
+		{
+			if(GameConfig.DMLScreenshot == INHERIT)
+				Options->SetValue(Idx++, tr("Use global"));
+			else
+				Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLScreenshot]));
 		}
 
 		//! Settings: DML Japanese Patch
@@ -419,10 +430,16 @@ int GCGameLoadSM::GetMenuInternal()
 		if (++GameConfig.DMLWidescreen >= MAX_ON_OFF) GameConfig.DMLWidescreen = INHERIT;
 	}
 
+	//! Settings: DML Screenshot
+	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_5 && ret == ++Idx)
+	{
+		if (++GameConfig.DMLScreenshot >= MAX_ON_OFF) GameConfig.DMLScreenshot = INHERIT;
+	}
+
 	//! Settings: DML Japanese Patch
 	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
 	{
-		if (++GameConfig.DMLJPNPatch >= 3) GameConfig.DMLJPNPatch = INHERIT;
+		if (++GameConfig.DMLJPNPatch >= MAX_ON_OFF) GameConfig.DMLJPNPatch = INHERIT;
 	}
 	
 	//! Settings: DML Debug

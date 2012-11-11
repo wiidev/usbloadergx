@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-14 17:02+0200\n"
+"POT-Creation-Date: 2012-11-11 13:49+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -531,6 +531,9 @@ msgid "DML PAD Hook"
 msgstr ""
 
 msgid "DML Progressive Patch"
+msgstr ""
+
+msgid "DML Screenshot"
 msgstr ""
 
 msgid "DML Video Mode"

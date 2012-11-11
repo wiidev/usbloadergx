@@ -175,6 +175,7 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "DML No Disc" ));
 	Options->SetName(Idx++, "%s", tr( "DML No Disc+" ));
 	Options->SetName(Idx++, "%s", tr( "DML Force Widescreen" ));
+	Options->SetName(Idx++, "%s", tr( "DML Screenshot" ));
 	Options->SetName(Idx++, "%s", tr( "DML Japanese Patch" ));
 	Options->SetName(Idx++, "%s", tr( "DML Debug" ));
 	Options->SetName(Idx++, "%s", tr( "DEVO MemCard Emulation" ));
@@ -293,6 +294,9 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: DML Force Widescreen
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLWidescreen]));
+
+	//! Settings: DML Screenshot
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLScreenshot]));
 
 	//! Settings: DML Japanese Patch
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLJPNPatch]));
@@ -504,6 +508,12 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.DMLWidescreen >= MAX_ON_OFF) Settings.DMLWidescreen = 0;
+	}
+
+	//! Settings: DML Screenshot
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DMLScreenshot >= MAX_ON_OFF) Settings.DMLScreenshot = 0;
 	}
 
 	//! Settings: DML Japanese Patch

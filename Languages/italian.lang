@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-14 17:00+0200\n"
+"POT-Creation-Date: 2012-11-11 13:49+0100\n"
 "PO-Revision-Date: 2011-09-11 12:19+0100\n"
 "Last-Translator: xFede\n"
 "Language-Team: xFede (fedeanto11@gmail.com)\n"
@@ -532,6 +532,9 @@ msgstr "PAD hook DML"
 
 msgid "DML Progressive Patch"
 msgstr "Patch video-progressivo DML"
+
+msgid "DML Screenshot"
+msgstr ""
 
 msgid "DML Video Mode"
 msgstr "Modalità video DML"

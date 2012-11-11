@@ -60,8 +60,12 @@ static const char * DMLVersions[] =
 	"v2.2",		// DML 2.2
 	"v2.2.1",	// DML 2.2.1
 	"v2.3",		// DML 2.3 (mirror link)
-	"v2.3+",	// DM  2.3
-	"v2.3+",	// DML 2.3 (main link)
+	"v2.3",		// DM  2.3
+	"v2.3",		// DML 2.3 (main link)
+	"v2.4",		// DM  2.4
+	"v2.4",		// DML 2.4
+	"v2.5+",	// DM  2.5
+	"v2.5+",	// DML 2.5
 };
 
 
@@ -298,7 +302,7 @@ void WindowCredits()
 		fseek(f, 23, SEEK_SET);
 		fread(DEVO_version, 1, 4, f);
 		fclose(f);
-		char *ptr = strrchr(DEVO_version, ' ');
+		char *ptr = strchr(DEVO_version, ' ');
 		if(ptr) *ptr = 0;
 		else DEVO_version[4] = 0;
 		snprintf(GCInfo, sizeof(GCInfo), "%s%s Devolution v%.4s", GCInfo, strlen(GCInfo) > 1 ? "  /  " : "", DEVO_version);

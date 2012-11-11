@@ -179,6 +179,7 @@ class CSettings
 		short DMLNoDisc;
 		short DMLNoDisc2;
 		short DMLWidescreen;
+		short DMLScreenshot;
 		short DMLJPNPatch;
 		short DMLDebug;
 		short DEVOMCEmulation;

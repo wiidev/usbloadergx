@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1203
+# French.lang - r1204
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-14 16:58+0200\n"
+"POT-Creation-Date: 2012-11-11 13:49+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -532,6 +532,9 @@ msgstr ""
 
 msgid "DML Progressive Patch"
 msgstr "DML Patch Progressif"
+
+msgid "DML Screenshot"
+msgstr "DML Capture d'écran"
 
 msgid "DML Video Mode"
 msgstr "DML Mode vidéo"
