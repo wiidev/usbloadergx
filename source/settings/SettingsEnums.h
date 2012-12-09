@@ -282,6 +282,16 @@ enum
 
 enum
 {
+	GC_SOURCE_MAIN,
+	GC_SOURCE_SD,
+	GC_SOURCE_AUTO,
+	// GC_SOURCE_BOTH,	// GCGames::getPath(GameID) always returns the first encountered path in the gameList
+	CG_SOURCE_MAX_CHOICE
+	
+};
+
+enum
+{
 	DEVO_MC_OFF,
 	DEVO_MC_ON,
 	DEVO_MC_INDIVIDUAL,

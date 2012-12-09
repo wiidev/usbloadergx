@@ -36,6 +36,7 @@ class LoaderSettings : public SettingsMenu
 		int GetMenuInternal();
 
 		short oldLoaderMode;
+		short oldGameCubeSource;
 		OptionList GuiOptions;
 };
 

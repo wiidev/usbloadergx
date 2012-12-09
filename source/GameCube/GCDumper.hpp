@@ -37,7 +37,7 @@ class GCDumper
 public:
 	GCDumper();
 	~GCDumper();
-	s32 InstallGame(const char *installpath, u32 game);
+	s32 InstallGame(const char *installpath, u32 game, const char *installedGamePath);
 	s32 ReadDiscHeader(void);
 	int ReadDiscInfo(const u64 &game_offset);
 	void SetForceAlign(bool b) { force_align32 = b; }

@@ -169,6 +169,7 @@ void CSettings::SetDefault()
 	BannerProjectionHeight = (Settings.PAL50 ? 448.0f : (NTSC ? 470.0f : 464.0f));
 	GCBannerScale = 1.5f;
 	GameCubeMode = GC_MODE_MIOS;
+	GameCubeSource = AUTO;
 	DMLVideo = DML_VIDEO_AUTO;
 	DMLProgPatch = OFF;
 	DMLNMM = OFF;
@@ -398,6 +399,7 @@ bool CSettings::Save()
 	fprintf(file, "GameCubePath = %s\n", GameCubePath);
 	fprintf(file, "GameCubeSDPath = %s\n", GameCubeSDPath);
 	fprintf(file, "GameCubeMode = %d\n", GameCubeMode);
+	fprintf(file, "GameCubeSource = %d\n", GameCubeSource);
 	fprintf(file, "DMLVideo = %d\n", DMLVideo);
 	fprintf(file, "DMLProgPatch = %d\n", DMLProgPatch);
 	fprintf(file, "DMLNMM = %d\n", DMLNMM);
@@ -804,6 +806,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "GameCubeMode") == 0)
 	{
 		GameCubeMode = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "GameCubeSource") == 0)
+	{
+		GameCubeSource = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "DMLVideo") == 0)

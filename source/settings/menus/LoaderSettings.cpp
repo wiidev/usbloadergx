@@ -35,6 +35,7 @@
 #include "usbloader/GameList.h"
 #include "utils/tools.h"
 #include "menu.h"
+#include "gamecube/GCGames.h"
 
 static const char * OnOffText[] =
 {
@@ -115,6 +116,14 @@ static const char * GCMode[] =
 	trNOOP( "Devolution" ),
 };
 
+static const char * GCSourceText[] =
+{
+	trNOOP( "Main Path" ),
+	trNOOP( "SD Path" ),
+	trNOOP( "Auto" ),
+	trNOOP( "Both" ),
+};
+
 static const char * DMLVideoText[] =
 {
 	trNOOP( "DML Auto" ),
@@ -167,6 +176,7 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Debugger Paused Start" ));
 	Options->SetName(Idx++, "%s", tr( "Channel Launcher" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
+	Options->SetName(Idx++, "%s", tr( "GameCube Source" ));
 	Options->SetName(Idx++, "%s", tr( "DML Video Mode" ));
 	Options->SetName(Idx++, "%s", tr( "DML Progressive Patch" ));
 	Options->SetName(Idx++, "%s", tr( "DML NMM Mode" ));
@@ -184,6 +194,7 @@ LoaderSettings::LoaderSettings()
 	SetOptionValues();
 
 	oldLoaderMode = Settings.LoaderMode;
+	oldGameCubeSource = Settings.GameCubeSource;
 }
 
 LoaderSettings::~LoaderSettings()
@@ -198,6 +209,11 @@ LoaderSettings::~LoaderSettings()
 
 		gameList.LoadUnfiltered();
 		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false);
+	}
+	
+	if(oldGameCubeSource != Settings.GameCubeSource)
+	{
+		GCGames::Instance()->LoadAllGames();
 	}
 }
 
@@ -269,6 +285,9 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: GameCube Mode
 	Options->SetValue(Idx++, "%s", tr(GCMode[Settings.GameCubeMode]));
+
+	//! Settings: GameCube Source
+	Options->SetValue(Idx++, "%s", tr(GCSourceText[Settings.GameCubeSource]));
 
 	//! Settings: DML Video Mode
 	Options->SetValue(Idx++, "%s", tr(DMLVideoText[Settings.DMLVideo]));
@@ -456,6 +475,12 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.GameCubeMode >= CG_MODE_MAX_CHOICE) Settings.GameCubeMode = 0;
+	}
+
+	//! Settings: GameCube Source
+	else if (ret == ++Idx)
+	{
+		if (++Settings.GameCubeSource >= CG_SOURCE_MAX_CHOICE) Settings.GameCubeSource = 0;
 	}
 
 	//! Settings: DML Video Mode

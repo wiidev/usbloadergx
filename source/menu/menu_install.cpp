@@ -84,6 +84,11 @@ int MenuGCInstall()
 			return MENU_DISCLIST;
 	}
 
+	// Load only available games from the selected device
+	int oldGameCubeSource = Settings.GameCubeSource;
+	Settings.GameCubeSource = destination-1;
+	GCGames::Instance()->LoadAllGames();
+
 	const char *InstallPath = destination == 1 ? Settings.GameCubePath : Settings.GameCubeSDPath;
 
 	//! Start of install process, enable wii slot light
@@ -125,8 +130,20 @@ int MenuGCInstall()
 			}
 		}
 
+		// Check if another Disc number from the same game is already installed on this device
+		GCGames::Instance()->LoadAllGames(); // refresh installed game list
+		char installedGamePath[512];
+		if(GCGames::Instance()->IsInstalled((char *)gcDumper.GetDiscHeaders().at(installGames[i]).id, gcDumper.GetDiscHeaders().at(installGames[i]).disc_no == 0 ? 1 : 0))
+		{
+			snprintf(installedGamePath, sizeof(installedGamePath), GCGames::Instance()->GetPath((char *)gcDumper.GetDiscHeaders().at(installGames[i]).id));
+			char *pathPtr = strrchr(installedGamePath, '/');
+			if(pathPtr) *pathPtr = 0;
+		}
+		else
+			installedGamePath[0] = 0;
+
 		// game is not yet installed so let's install it
-		int ret = gcDumper.InstallGame(InstallPath, installGames[i]);
+		int ret = gcDumper.InstallGame(InstallPath, installGames[i], installedGamePath);
 		if(ret >= 0) {
 			//! success
 			installed_games++;
@@ -157,6 +174,7 @@ int MenuGCInstall()
 	}
 
 	wiilight(0);
+	Settings.GameCubeSource = oldGameCubeSource;
 	GCGames::Instance()->LoadAllGames();
 
 	//! no game was installed so don't show successfully installed prompt

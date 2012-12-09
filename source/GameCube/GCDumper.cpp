@@ -201,7 +201,7 @@ int GCDumper::ReadDiscInfo(const u64 &game_offset)
 	return 0;
 }
 
-s32 GCDumper::InstallGame(const char *installpath, u32 game)
+s32 GCDumper::InstallGame(const char *installpath, u32 game, const char *installedGamePath)
 {
 	if(!ReadBuffer || game >= discHeaders.size() || game >= gameOffsets.size() || game >= gameSizes.size())
 		return -1;
@@ -265,6 +265,10 @@ s32 GCDumper::InstallGame(const char *installpath, u32 game)
 	char gamepath[512];
 	// snprintf(gamepath, sizeof(gamepath), "%s%s [%.6s]%s/", installpath, gametitle, gcheader.id, Disc ? "2" : ""); // Disc2 currently needs to be on the same folder.
 	snprintf(gamepath, sizeof(gamepath), "%s%s [%.6s]/", installpath, gametitle, gcheader.id);
+
+	// If another Disc from the same gameID already exists, let's use that path
+	if(strlen((char *)installedGamePath) != 0)
+		snprintf(gamepath, sizeof(gamepath), "%s/", installedGamePath);
 
 	CreateSubfolder(gamepath);
 
@@ -384,9 +388,12 @@ s32 GCDumper::InstallGame(const char *installpath, u32 game)
 	if(result < 0)
 	{
 		RemoveFile(gamepath);
-		char *pathPtr = strrchr(gamepath, '/');
-		if(pathPtr) *pathPtr = 0;
-		RemoveFile(gamepath);
+		if(strlen((char *)installedGamePath) == 0) // If no other disc is installed in that folder, delete it.
+		{
+			char *pathPtr = strrchr(gamepath, '/');
+			if(pathPtr) *pathPtr = 0;
+			RemoveFile(gamepath);
+		}
 
 		if(result != PROGRESS_CANCELED)
 			ShowError(tr("Disc read error."));

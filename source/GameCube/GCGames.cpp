@@ -222,38 +222,47 @@ u32 GCGames::LoadAllGames(void)
 	sdGCList.clear();
 	sdGCPathList.clear();
 
-	LoadGameList(Settings.GameCubePath, HeaderList, PathList);
+	if(strcmp(Settings.GameCubePath, Settings.GameCubeSDPath) == 0 || Settings.GameCubeSource != GC_SOURCE_SD)
+		LoadGameList(Settings.GameCubePath, HeaderList, PathList);
 
-	if(strcmp(Settings.GameCubePath, Settings.GameCubeSDPath) != 0)
+	if(strcmp(Settings.GameCubePath, Settings.GameCubeSDPath) != 0 && (Settings.GameCubeSource != GC_SOURCE_MAIN))
 	{
 		LoadGameList(Settings.GameCubeSDPath, sdGCList, sdGCPathList);
 
 		for(u32 i = 0; i < sdGCList.size(); ++i)
 		{
-			u32 n;
-			for(n = 0; n < HeaderList.size(); ++n)
+			if(Settings.GameCubeSource == GC_SOURCE_AUTO)
 			{
-				//! Display only one game if it is present on both SD and USB.
-				if(memcmp(HeaderList[n].id, sdGCList[i].id, 6) == 0)
+				u32 n;
+				for(n = 0; n < HeaderList.size(); ++n)
 				{
-					if(IosLoader::GetMIOSInfo() == DIOS_MIOS) // DIOS MIOS - Show only the game on USB
+					//! Display only one game if it is present on both SD and USB.
+					if(memcmp(HeaderList[n].id, sdGCList[i].id, 6) == 0)
 					{
-						break;
-					}
-					else // replace the one loaded from USB with the same games on SD since we can load them directly
-					{
-						memcpy(&HeaderList[n], &sdGCList[i], sizeof(struct discHdr));
-						PathList[n] = sdGCPathList[i];
-						break;
+						if(IosLoader::GetMIOSInfo() == DIOS_MIOS) // DIOS MIOS - Show only the game on USB
+						{
+							break;
+						}
+						else // replace the one loaded from USB with the same games on SD since we can load them directly
+						{
+							memcpy(&HeaderList[n], &sdGCList[i], sizeof(struct discHdr));
+							PathList[n] = sdGCPathList[i];
+							break;
+						}
 					}
 				}
-			}
 
-			// Not available in the main GC path
-			if(n == HeaderList.size()) {
-				HeaderList.push_back(sdGCList[i]);
-				PathList.push_back(sdGCPathList[i]);
+				// Not available in the main GC path
+				if(n == HeaderList.size()) {
+					HeaderList.push_back(sdGCList[i]);
+					PathList.push_back(sdGCPathList[i]);
+				}
 			}
+			else // GC_SOURCE_SD, or GC_SOURCE_BOTH (show duplicates)
+			{
+ 				HeaderList.push_back(sdGCList[i]);
+ 				PathList.push_back(sdGCPathList[i]);
+ 			}
 		}
 	}
 
@@ -386,7 +395,7 @@ bool GCGames::IsInstalled(const char *gameID, u8 disc_number) const
 	{
 		if(memcmp(HeaderList[n].id, gameID, 6) == 0)
 		{
-			if(HeaderList[n].type == TYPE_GAME_GC_EXTRACTED)
+			if(HeaderList[n].type == TYPE_GAME_GC_EXTRACTED || Settings.GCInstallCompressed)
 				return true; // Multi-disc games in extracted form are currently unsupported by DML, no need to check further.
 			
 			if(HeaderList[n].disc_no == disc_number) // Disc number already in headerList. If Disc2 is loaded in headerList, then Disc1 is not installed yet
