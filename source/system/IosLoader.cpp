@@ -339,6 +339,18 @@ u8 IosLoader::GetDMLVersion(char* releaseDate)
 	strptime("Nov  9 2012 21:18:56", "%b %d %Y %H:%M:%S", &time);
 	const time_t dml_2_5_time = mktime(&time);
 	
+	// Timestamp of DM 2.6.0
+	strptime("Dec  1 2012 01:52:53", "%b %d %Y %H:%M:%S", &time);
+	const time_t dm_2_6_0_time = mktime(&time);
+	
+	// Timestamp of DML 2.6
+	strptime("Dec  1 2012 16:22:29", "%b %d %Y %H:%M:%S", &time);
+	const time_t dml_2_6_time = mktime(&time);
+	
+	// Timestamp of DM 2.6.1
+	strptime("Dec  1 2012 16:42:34", "%b %d %Y %H:%M:%S", &time);
+	const time_t dm_2_6_1_time = mktime(&time);
+	
 	
 	// Current installed version
 	gprintf("built on %s\n", releaseDate);
@@ -348,7 +360,9 @@ u8 IosLoader::GetDMLVersion(char* releaseDate)
 
 	if(currentMIOS == DIOS_MIOS)
 	{
-		if(difftime(unixTime, dm_2_5_time) >= 0) 			currentDMLVersion = DML_VERSION_DM_2_5;
+		if(difftime(unixTime, dm_2_6_1_time) >= 0) 			currentDMLVersion = DML_VERSION_DM_2_6_1;
+		else if(difftime(unixTime, dm_2_6_0_time) >= 0) 	currentDMLVersion = DML_VERSION_DM_2_6_0;
+		else if(difftime(unixTime, dm_2_5_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_5;
 		else if(difftime(unixTime, dm_2_4_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_4;
 		else if(difftime(unixTime, dm_2_3_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_3;
 		else if(difftime(unixTime, dm_2_2_2_time) >= 0) 	currentDMLVersion = DML_VERSION_DM_2_2_2;
@@ -358,7 +372,8 @@ u8 IosLoader::GetDMLVersion(char* releaseDate)
 	}
 	else if(currentMIOS == DIOS_MIOS_LITE)
 	{
-		if(difftime(unixTime, dml_2_5_time) >= 0) 			currentDMLVersion = DML_VERSION_DML_2_5;
+		if(difftime(unixTime, dml_2_6_time) >= 0) 			currentDMLVersion = DML_VERSION_DML_2_6;
+		else if(difftime(unixTime, dml_2_5_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_5;
 		else if(difftime(unixTime, dml_2_4_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_4;
 		else if(difftime(unixTime, dml_2_3_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_3;
 		else if(difftime(unixTime, dml_2_3m_time) >= 0) 	currentDMLVersion = DML_VERSION_DML_2_3m;

@@ -174,7 +174,6 @@ void CSettings::SetDefault()
 	DMLNMM = OFF;
 	DMLActivityLED = OFF;
 	DMLPADHOOK = OFF;
-	DMLNoDisc = OFF;
 	DMLNoDisc2 = OFF;
 	DMLWidescreen = OFF;
 	DMLScreenshot = OFF;
@@ -404,7 +403,6 @@ bool CSettings::Save()
 	fprintf(file, "DMLNMM = %d\n", DMLNMM);
 	fprintf(file, "DMLActivityLED = %d\n", DMLActivityLED);
 	fprintf(file, "DMLPADHOOK = %d\n", DMLPADHOOK);
-	fprintf(file, "DMLNoDisc = %d\n", DMLNoDisc);
 	fprintf(file, "DMLNoDisc2 = %d\n", DMLNoDisc2);
 	fprintf(file, "DMLWidescreen = %d\n", DMLWidescreen);
 	fprintf(file, "DMLScreenshot = %d\n", DMLScreenshot);
@@ -831,11 +829,6 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "DMLPADHOOK") == 0)
 	{
 		DMLPADHOOK = atoi(value);
-		return true;
-	}
-	else if (strcmp(name, "DMLNoDisc") == 0)
-	{
-		DMLNoDisc = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "DMLNoDisc2") == 0)

@@ -100,7 +100,7 @@ void Channels::InternalGetNandChannelList(u32 type)
 		NandTitles.AsciiTID(tid, id);
 
 		// Force old and new format to be "JODI" which is known by GameTDB
-		if(tid == 0x00010001AF1BF516LL || tid == 0x0001000148415858LL)
+		if(tid == 0x000100014c554c5aLL || tid == 0x00010001AF1BF516LL || tid == 0x0001000148415858LL)
 			strcpy(id, "JODI");
 
 		const char *name = GameTitles.GetTitle(id);
@@ -493,7 +493,7 @@ bool Channels::ParseTitleDir(char *path, int language)
 		u64 tid = ((u64)tidHigh << 32) | ((u64) tidLow);
 
 		// Force old and new format to be "JODI" which is known by GameTDB
-		if(tid == 0x00010001AF1BF516LL || tid == 0x0001000148415858LL)
+		if(tid == 0x000100014c554c5aLL || tid == 0x00010001AF1BF516LL || tid == 0x0001000148415858LL)
 			strcpy(id, "JODI");
 
 		std::string TitleName;

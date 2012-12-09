@@ -64,8 +64,11 @@ static const char * DMLVersions[] =
 	"v2.3",		// DML 2.3 (main link)
 	"v2.4",		// DM  2.4
 	"v2.4",		// DML 2.4
-	"v2.5+",	// DM  2.5
-	"v2.5+",	// DML 2.5
+	"v2.5",		// DM  2.5
+	"v2.5",		// DML 2.5
+	"v2.6.0",	// DM 2.6
+	"v2.6+",	// DML 2.6
+	"v2.6.1+",	// DM 2.6 update 1
 };
 
 

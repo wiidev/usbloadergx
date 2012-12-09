@@ -176,7 +176,6 @@ class CSettings
 		short DMLNMM;
 		short DMLActivityLED;
 		short DMLPADHOOK;
-		short DMLNoDisc;
 		short DMLNoDisc2;
 		short DMLWidescreen;
 		short DMLScreenshot;

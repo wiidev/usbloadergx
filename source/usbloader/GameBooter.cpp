@@ -412,7 +412,6 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 	u8 dmlNMMChoice = game_cfg->DMLNMM == INHERIT ? Settings.DMLNMM : game_cfg->DMLNMM;
 	u8 dmlActivityLEDChoice = game_cfg->DMLActivityLED == INHERIT ? Settings.DMLActivityLED : game_cfg->DMLActivityLED;
 	u8 dmlPADHookChoice = game_cfg->DMLPADHOOK == INHERIT ? Settings.DMLPADHOOK : game_cfg->DMLPADHOOK;
-	u8 dmlNoDiscChoice = game_cfg->DMLNoDisc == INHERIT ? Settings.DMLNoDisc : game_cfg->DMLNoDisc;
 	u8 dmlNoDisc2Choice = game_cfg->DMLNoDisc2 == INHERIT ? Settings.DMLNoDisc2 : game_cfg->DMLNoDisc2;
 	u8 dmlWidescreenChoice = game_cfg->DMLWidescreen == INHERIT ? Settings.DMLWidescreen : game_cfg->DMLWidescreen;
 	u8 dmlScreenshotChoice = game_cfg->DMLScreenshot == INHERIT ? Settings.DMLScreenshot : game_cfg->DMLScreenshot;
@@ -465,10 +464,6 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 			if(Settings.DMLWidescreen) // Display the warning only if set as Global setting. Individual game setting is not displayed.
 				WindowPrompt(tr("Warning:"), tr("The Force Widescreen setting requires DIOS MIOS v2.1 or more. This setting will be ignored."), tr("OK"));
 			dmlWidescreenChoice = OFF;
-		}
-		if(dmlNoDiscChoice) // DML NoDisc setting : removed in DM 1.0, config v1. Used as ForceWidescreen in DM v2.1 with cfg v1. Added back in DM 2.2 update2 Config v2
-		{
-			WindowPrompt(tr("Warning:"), tr("The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."), tr("OK"));
 		}
 		if(dmlNoDisc2Choice && (IosLoader::GetDMLVersion() < DML_VERSION_DM_2_2_2 || IosLoader::GetDMLVersion() > DML_VERSION_DML_2_2_1)) // DML NoDisc+ setting : Added in DM 2.2 upate 2, config v2, removed in DM(L) v2.3
 		{

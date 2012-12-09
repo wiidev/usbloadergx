@@ -172,7 +172,6 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "DML NMM Mode" ));
 	Options->SetName(Idx++, "%s", tr( "DML LED Activity" ));
 	Options->SetName(Idx++, "%s", tr( "DML PAD Hook" ));
-	Options->SetName(Idx++, "%s", tr( "DML No Disc" ));
 	Options->SetName(Idx++, "%s", tr( "DML No Disc+" ));
 	Options->SetName(Idx++, "%s", tr( "DML Force Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "DML Screenshot" ));
@@ -285,9 +284,6 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: DML PAD Hook
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLPADHOOK]));
-
-	//! Settings: DML No Disc
-	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLNoDisc]));
 
 	//! Settings: DML Extended No Disc
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLNoDisc2]));
@@ -490,12 +486,6 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.DMLPADHOOK >= MAX_ON_OFF) Settings.DMLPADHOOK = 0;
-	}
-
-	//! Settings: DML No Disc
-	else if (ret == ++Idx)
-	{
-		if (++Settings.DMLNoDisc >= MAX_ON_OFF) Settings.DMLNoDisc = 0;
 	}
 
 	//! Settings: DML Extended No Disc

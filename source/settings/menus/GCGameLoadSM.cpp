@@ -166,7 +166,6 @@ void GCGameLoadSM::SetOptionNames()
 		Options->SetName(Idx++, "%s", tr( "DML NMM Mode" ));
 		Options->SetName(Idx++, "%s", tr( "DML LED Activity" ));
 		Options->SetName(Idx++, "%s", tr( "DML PAD Hook" ));
-		Options->SetName(Idx++, "%s", tr( "DML No Disc" ));
 		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_2_2 && IosLoader::GetDMLVersion() <= DML_VERSION_DML_2_2_1)
 			Options->SetName(Idx++, "%s", tr( "DML No Disc+" ));
 		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_1)
@@ -248,12 +247,6 @@ void GCGameLoadSM::SetOptionValues()
 			Options->SetValue(Idx++, tr("Use global"));
 		else
 			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLPADHOOK]));
-
-		//! Settings: DML No Disc
-		if(GameConfig.DMLNoDisc == INHERIT)
-			Options->SetValue(Idx++, tr("Use global"));
-		else
-			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLNoDisc]));
 
 		//! Settings: DML Extended No Disc
 		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_2_2 && IosLoader::GetDMLVersion() <= DML_VERSION_DML_2_2_1)
@@ -410,12 +403,6 @@ int GCGameLoadSM::GetMenuInternal()
 	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
 	{
 		if (++GameConfig.DMLPADHOOK >= MAX_ON_OFF) GameConfig.DMLPADHOOK = INHERIT;
-	}
-
-	//! Settings: DML No Disc
-	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
-	{
-		if (++GameConfig.DMLNoDisc >= MAX_ON_OFF) GameConfig.DMLNoDisc = INHERIT;
 	}
 
 	//! Settings: DML Extended No Disc

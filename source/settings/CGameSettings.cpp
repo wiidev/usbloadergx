@@ -211,7 +211,6 @@ bool CGameSettings::Save()
 		fprintf(f, "DMLNMM:%d; ", GameList[i].DMLNMM);
 		fprintf(f, "DMLActivityLED:%d; ", GameList[i].DMLActivityLED);
 		fprintf(f, "DMLPADHOOK:%d; ", GameList[i].DMLPADHOOK);
-		fprintf(f, "DMLNoDisc:%d; ", GameList[i].DMLNoDisc);
 		fprintf(f, "DMLNoDisc2:%d; ", GameList[i].DMLNoDisc2);
 		fprintf(f, "DMLWidescreen:%d; ", GameList[i].DMLWidescreen);
 		fprintf(f, "DMLScreenshot:%d; ", GameList[i].DMLScreenshot);
@@ -358,11 +357,6 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 	else if(strcmp(name, "DMLPADHOOK") == 0)
 	{
 		game.DMLPADHOOK = atoi(value);
-		return true;
-	}
-	else if(strcmp(name, "DMLNoDisc") == 0)
-	{
-		game.DMLNoDisc = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "DMLNoDisc2") == 0)
@@ -531,7 +525,6 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.DMLNMM = INHERIT;
 	game.DMLActivityLED = INHERIT;
 	game.DMLPADHOOK = INHERIT;
-	game.DMLNoDisc = INHERIT;
 	game.DMLNoDisc2 = INHERIT;
 	game.DMLWidescreen = INHERIT;
 	game.DMLScreenshot = INHERIT;
