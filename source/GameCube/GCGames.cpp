@@ -61,6 +61,7 @@ void GCGames::LoadGameList(const string &path, vector<struct discHdr> &headerLis
 	struct discHdr tmpHdr;
 	struct stat st;
 	u8 id[8];
+	u8 disc_number = 0;
 	char fpath[1024];
 	char fname_title[64];
 	DIR *dir_iter;
@@ -123,6 +124,22 @@ void GCGames::LoadGameList(const string &path, vector<struct discHdr> &headerLis
 			 break;
 		}
 
+		// Check if only disc2.iso is present
+		if(!found)
+		{
+			for(int i = 0; i < 2; i++)
+			{
+				char name[50];
+				snprintf(name, sizeof(name), "disc2.%s", (i % 2) == 0 ? "gcm" : "iso"); // allow gcm, though DM(L) require "disc2.iso" filename
+				snprintf(fpath, sizeof(fpath), "%s%s/%s", path.c_str(), dirname, name);
+				if((found = (stat(fpath, &st) == 0)) == true)
+				{
+					disc_number = 1;
+					break;
+				}
+			}
+		}
+
 		if(!found)
 		{
 			snprintf(fpath, sizeof(fpath), "%s%s/sys/boot.bin", path.c_str(), dirname);
@@ -166,6 +183,7 @@ void GCGames::LoadGameList(const string &path, vector<struct discHdr> &headerLis
 			strncpy(tmpHdr.title, title, sizeof(tmpHdr.title)-1);
 			tmpHdr.magic = GCGames::MAGIC;
 			tmpHdr.type = extracted ? TYPE_GAME_GC_EXTRACTED : TYPE_GAME_GC_IMG;
+			tmpHdr.disc_no = disc_number;
 			headerList.push_back(tmpHdr);
 			pathList.push_back(gamePath);
 			continue;
@@ -362,12 +380,31 @@ float GCGames::GetGameSize(const char *gameID)
 	return ((float) st.st_size / GB_SIZE);
 }
 
-bool GCGames::IsInstalled(const char *gameID) const
+bool GCGames::IsInstalled(const char *gameID, u8 disc_number) const
 {
 	for(u32 n = 0; n < HeaderList.size(); n++)
 	{
 		if(memcmp(HeaderList[n].id, gameID, 6) == 0)
-			return true;
+		{
+			if(HeaderList[n].type == TYPE_GAME_GC_EXTRACTED)
+				return true; // Multi-disc games in extracted form are currently unsupported by DML, no need to check further.
+			
+			if(HeaderList[n].disc_no == disc_number) // Disc number already in headerList. If Disc2 is loaded in headerList, then Disc1 is not installed yet
+			{
+				return true;
+			}
+			else if(disc_number == 1) // Check if the second Game Disc exists in the same folder than Disc1.
+			{
+				char filepath[512];
+				snprintf(filepath, sizeof(filepath), "%s", GetPath(gameID));
+				char *pathPtr = strrchr(filepath, '/');
+				if(pathPtr) *pathPtr = 0;
+				snprintf(filepath, sizeof(filepath), "%s/disc2.iso", filepath);
+				
+				if(CheckFile(filepath))
+					return true;
+			}
+		}
 	}
 	return false;
 }

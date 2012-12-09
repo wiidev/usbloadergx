@@ -58,7 +58,7 @@ public:
 	}
 
 	bool CopyUSB2SD(const struct discHdr *header);
-	bool IsInstalled(const char *gameID) const;
+	bool IsInstalled(const char *gameID, u8 disc_number) const;
 private:
 
 	static GCGames *instance;

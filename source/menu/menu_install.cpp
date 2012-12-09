@@ -70,7 +70,7 @@ int MenuGCInstall()
 	gcDumper.SetCompressed(Settings.GCInstallCompressed);
 	gcDumper.SetCompressed(Settings.GCInstallAligned);
 
-	//! If a different main path then the SD path is selected ask where to install
+	//! If a different main path than the SD path is selected ask where to install
 	int destination = 1;
 	if(strcmp(Settings.GameCubePath, Settings.GameCubeSDPath) != 0)
 		destination = WindowPrompt(tr("Where should the game be installed to?"), 0, tr("Main Path"), tr("SD Path"), tr("Cancel"));
@@ -95,7 +95,7 @@ int MenuGCInstall()
 	for(u32 i = 0; i < installGames.size(); ++i)
 	{
 		//! check if the game is already installed on SD/USB
-		if(GCGames::Instance()->IsInstalled((char *)gcDumper.GetDiscHeaders().at(installGames[i]).id))
+		if(GCGames::Instance()->IsInstalled((char *)gcDumper.GetDiscHeaders().at(installGames[i]).id, gcDumper.GetDiscHeaders().at(installGames[i]).disc_no))
 		{
 			WindowPrompt(tr("Game is already installed:"), gcDumper.GetDiscHeaders().at(installGames[i]).title, tr("OK"));
 			if(i+1 < installGames.size()) {
@@ -105,6 +105,23 @@ int MenuGCInstall()
 			{
 				result = MENU_DISCLIST;
 				break;
+			}
+		}
+
+		// Check Disc2 installation format (DML 2.6+ auto-swap feature doesn't work with extracted game format)
+		if(Settings.GCInstallCompressed && gcDumper.GetDiscHeaders().at(installGames[i]).disc_no == 1)
+		{
+			int choice = WindowPrompt(tr(gcDumper.GetDiscHeaders().at(installGames[i]).title), tr("Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"), tr("Yes"), tr("Cancel"));
+			if(choice == 0)
+			{
+				if(i+1 < installGames.size()) {
+					continue;
+				}
+				else if(i == 0)
+				{
+					result = MENU_DISCLIST;
+					break;
+				}
 			}
 		}
 

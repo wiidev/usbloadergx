@@ -474,7 +474,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 	}
 	
 	// Check Ocarina and cheat file location. the .gct file need to be located on the same partition than the game.
-	if(ocarinaChoice && strcmp(DeviceHandler::GetDevicePrefix(RealPath), DeviceHandler::GetDevicePrefix(Settings.Cheatcodespath)) != 0)
+	if(gameHdr->type != TYPE_GAME_GC_DISC && ocarinaChoice && strcmp(DeviceHandler::GetDevicePrefix(RealPath), DeviceHandler::GetDevicePrefix(Settings.Cheatcodespath)) != 0)
 	{
 		char path[255], destPath[255];
 		int res = -1;
@@ -491,12 +491,41 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		}
 	}
 
+	// Check if game has multi Discs
+	bool bootDisc2 = false;
+	if(gameHdr->type != TYPE_GAME_GC_DISC && gameHdr->disc_no == 0 && currentMIOS != QUADFORCE)
+	{
+		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_6_0)
+		{
+			char disc2Path[255];
+			snprintf(disc2Path, sizeof(disc2Path), "%s", RealPath);
+			char *pathPtr = strrchr(disc2Path, '/');
+			if(pathPtr) *pathPtr = 0;
+			snprintf(disc2Path, sizeof(disc2Path), "%s/disc2.iso", disc2Path);
+			if(CheckFile(disc2Path))
+			{
+				int choice = WindowPrompt(gameHdr->title, tr("This game has multiple discs. Please select the disc to launch."), tr("Disc 1"), tr("Disc 2"), tr("Cancel"));
+				if(choice == 0)
+					return 0;
+				
+				if(choice == 2)
+					bootDisc2 = true;
+			}	
+		}
+	}
 
 	const char *gcPath = strchr(RealPath, '/');
 	if(!gcPath) gcPath = "";
 
 	char gamePath[255];
 	snprintf(gamePath, sizeof(gamePath), "%s", gcPath);
+
+	if(bootDisc2)
+	{
+		char *pathPtr = strrchr(gamePath, '/');
+		if(pathPtr) *pathPtr = 0;
+		snprintf(gamePath, sizeof(gamePath), "%s/disc2.iso", gamePath);
+	}
 
 	ExitApp();
 
@@ -532,14 +561,14 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 	// setup cheat and path
 	if(ocarinaChoice)
 	{
-		// Check is the .gct folder is on the same partition than the game, if not load the temporary .gct file.
+		// Check if the .gct folder is on the same partition than the game, if not load the temporary .gct file.
 		if(strcmp(DeviceHandler::GetDevicePrefix(RealPath), DeviceHandler::GetDevicePrefix(Settings.Cheatcodespath)) == 0)
 		{
 			const char *CheatPath = strchr(Settings.Cheatcodespath, '/');
 			if(!CheatPath) CheatPath = "";
 			snprintf(dml_config->CheatPath, sizeof(dml_config->CheatPath), "%s%.6s.gct", CheatPath, (char *)gameHdr->id);
 		}
-		else
+		else if(gameHdr->type != TYPE_GAME_GC_DISC)
 		{
 			snprintf(dml_config->CheatPath, sizeof(dml_config->CheatPath), "DMLTemp.gct");
 		}
@@ -561,6 +590,8 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		dml_config->Config |= DML_CFG_FORCE_WIDE;
 	if(dmlScreenshotChoice)
 		dml_config->Config |= DML_CFG_SCREENSHOT;
+	if(bootDisc2)
+		dml_config->Config |= DML_CFG_BOOT_DISC2;
 
 
 	// Setup Video Mode
@@ -694,9 +725,18 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	const char *RealPath = GCGames::Instance()->GetPath((const char *) gameHdr->id);
 	
 	char disc1[100];
-	//char disc2[100];
+	char disc2[100];
+	bool multiDisc = false;
 	char DEVO_memCard[100];
 	snprintf(disc1, sizeof(disc1), "%s", RealPath);
+	
+	snprintf(disc2, sizeof(disc2), "%s", RealPath);
+	char *pathPtr = strrchr(disc2, '/');
+	if(pathPtr) *pathPtr = 0;
+	snprintf(disc2, sizeof(disc2), "%s/disc2.iso", disc2);
+	if(CheckFile(disc2))
+		multiDisc = true;
+
 	snprintf(DEVO_memCard, sizeof(DEVO_memCard), "%s", RealPath); // Set memory card folder to Disc1 folder
 	char *ptr = strrchr(DEVO_memCard, '/');
 	if(ptr) *ptr = 0; 
@@ -711,8 +751,9 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	stat(disc1, &st1);
 	
 	// Get the starting cluster for the ISO file 2
-	//struct stat st2;
-	//stat(disc2, &st2);
+	struct stat st2;
+	if(multiDisc)
+		stat(disc2, &st2);
 	
 	// setup Devolution
 	memset(devo_config, 0, sizeof(*devo_config));
@@ -722,7 +763,8 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	// Only last two letters are returned by DevkitPro, so we set them manually to Devolution config.
 	devo_config->device_signature = st1.st_dev == 'SD' ? 'SD' : 'SB'; // Set device type.
 	devo_config->disc1_cluster = st1.st_ino;			// set starting cluster for first disc ISO file
-	//devo_config->disc2_cluster = st2.st_ino;			// set starting cluster for second disc ISO file
+	if(multiDisc)
+		devo_config->disc2_cluster = st2.st_ino;		// set starting cluster for second disc ISO file
 	
 	// Devolution configs
 	// use wifi logging if USB gecko is not found in slot B

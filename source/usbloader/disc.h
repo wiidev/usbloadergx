@@ -14,8 +14,11 @@ extern "C"
 			/* Game ID */
 			u8 id[6];
 
+			/* Game Disc number */
+			u8 disc_no;
+
 			/* Game version */
-			u16 version;
+			u8 disc_ver;
 
 			/* Audio streaming */
 			u8 streaming;
