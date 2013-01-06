@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-11 13:49+0100\n"
+"POT-Creation-Date: 2013-01-05 21:42+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -518,9 +518,6 @@ msgstr ""
 msgid "DML NMM Mode"
 msgstr ""
 
-msgid "DML No Disc"
-msgstr ""
-
 msgid "DML No Disc+"
 msgstr ""
 
@@ -614,6 +611,12 @@ msgstr ""
 msgid "Directory does not exist!"
 msgstr "Adresár neexistuje!"
 
+msgid "Disc 1"
+msgstr ""
+
+msgid "Disc 2"
+msgstr ""
+
 msgid "Disc Artwork Download"
 msgstr "Stažení potisku DVD"
 
@@ -627,6 +630,9 @@ msgid "Disc Insert Detected"
 msgstr ""
 
 msgid "Disc read error."
+msgstr ""
+
+msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
 msgstr ""
 
 msgid "Discarts"
@@ -1094,6 +1100,9 @@ msgstr ""
 msgid "GameCube Mode"
 msgstr ""
 
+msgid "GameCube Source"
+msgstr ""
+
 msgid "GameTDB Path"
 msgstr ""
 
@@ -1269,6 +1278,9 @@ msgstr "Cesta k jazykovym souborum"
 
 msgid "Languagepath changed."
 msgstr "Cesta k jazykum zmenena"
+
+msgid "Launching Wii games with emulated nand only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgstr ""
 
 msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
 msgstr ""
@@ -1874,9 +1886,6 @@ msgstr ""
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr ""
 
-msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
-msgstr ""
-
 msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
 msgstr ""
 
@@ -1932,6 +1941,9 @@ msgstr "Tento IOS je BootMii IOS. Pokud si jste jisti ze toto není BootMii a m�
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
 msgstr "Tento IOS nebyl nalezen na seznamu. Pokud si jste jisti ze jej máte nainstalován, pak ignorujte toto varování."
 
+msgid "This game has multiple discs. Please select the disc to launch."
+msgstr ""
+
 msgid "This path must be on SD!"
 msgstr ""
 
@@ -1950,7 +1962,16 @@ msgstr ""
 msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
 msgstr ""
 
+msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on a primary partition."
+msgstr ""
+
+msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
+msgstr ""
+
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
+msgstr ""
+
+msgid "To run GameCube games with DIOS MIOS you need to use a 512 bytes/sector Hard Drive."
 msgstr ""
 
 msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-11 13:49+0100\n"
+"POT-Creation-Date: 2013-01-05 21:42+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -518,9 +518,6 @@ msgstr "DML LED点灯"
 msgid "DML NMM Mode"
 msgstr "DML NMM"
 
-msgid "DML No Disc"
-msgstr "DML ディスクなし"
-
 msgid "DML No Disc+"
 msgstr "DML ディスクなし+"
 
@@ -614,6 +611,12 @@ msgstr "Devolutionのloader.binが読み込めません"
 msgid "Directory does not exist!"
 msgstr "フォルダがありません"
 
+msgid "Disc 1"
+msgstr ""
+
+msgid "Disc 2"
+msgstr ""
+
 msgid "Disc Artwork Download"
 msgstr "使用するディスク画像"
 
@@ -628,6 +631,9 @@ msgstr "ディスクの挿入を検知しました"
 
 msgid "Disc read error."
 msgstr "読み込みエラー"
+
+msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
+msgstr ""
 
 msgid "Discarts"
 msgstr "破棄"
@@ -1094,6 +1100,9 @@ msgstr "ゲームキューブ"
 msgid "GameCube Mode"
 msgstr "GCモード"
 
+msgid "GameCube Source"
+msgstr ""
+
 msgid "GameTDB Path"
 msgstr "ゲーム名リスト"
 
@@ -1269,6 +1278,9 @@ msgstr "言語ファイル"
 
 msgid "Languagepath changed."
 msgstr "言語のパスを変更しました"
+
+msgid "Launching Wii games with emulated nand only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgstr ""
 
 msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
 msgstr "エミュNANDチャンネルはd2x cIOSでないと動作しません!IOSをd2x cIOSに変更してください"
@@ -1874,9 +1886,6 @@ msgstr ""
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "MiiはエミュNAND(チャンネル)パスに書き出されます。すでに存在するファイルは上書きされます"
 
-msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
-msgstr "ディスクなし設定はDIOS MIOS(Lite)では使われていません。ドライブにディスクを入れてください"
-
 msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
 msgstr ""
 
@@ -1932,6 +1941,9 @@ msgstr "このIOSはBootMiiのIOSです"
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
 msgstr "このIOSはタイトルリストにありませんでした"
 
+msgid "This game has multiple discs. Please select the disc to launch."
+msgstr ""
+
 msgid "This path must be on SD!"
 msgstr "このパスはSDにないといけません!"
 
@@ -1950,8 +1962,17 @@ msgstr "GCゲームをディスク起動するには設定でGCモードをMIOS�
 msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
 msgstr "GCゲームをDIOS MIOSで起動するにはUSBをFAt32にしてゲームをおいてください"
 
+msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on a primary partition."
+msgstr ""
+
+msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
+msgstr ""
+
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
 msgstr "GCゲームをDIOS MIOSで起動するにはパスの設定でゲームキューブをusb:/にする必要があります"
+
+msgid "To run GameCube games with DIOS MIOS you need to use a 512 bytes/sector Hard Drive."
+msgstr ""
 
 msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
 msgstr "GCゲームをDevolutionで起動するにはloader.binがDevolutionのパスにある必要があります"
@@ -2218,6 +2239,12 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "DML No Disc"
+#~ msgstr "DML ディスクなし"
+
+#~ msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
+#~ msgstr "ディスクなし設定はDIOS MIOS(Lite)では使われていません。ドライブにディスクを入れてください"
 
 #~ msgid "The Force Widescreen setting requires DIOS MIOS v2.2 or more. This setting will be ignored."
 #~ msgstr "強制ワイド化設定はDIOS MIOS v2.2以降が必要です。この設定は無視されます"

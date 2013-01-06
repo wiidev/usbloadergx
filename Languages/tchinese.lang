@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-11 13:49+0100\n"
+"POT-Creation-Date: 2013-01-05 21:42+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -518,9 +518,6 @@ msgstr "DML LED燈 開啟"
 msgid "DML NMM Mode"
 msgstr "DML 無需記憶卡模式"
 
-msgid "DML No Disc"
-msgstr "DML 無需光碟模式"
-
 msgid "DML No Disc+"
 msgstr "DML 無需光碟加強模式"
 
@@ -614,6 +611,12 @@ msgstr "Devolution的loader.bin檔無法載入。"
 msgid "Directory does not exist!"
 msgstr "目錄不存在"
 
+msgid "Disc 1"
+msgstr ""
+
+msgid "Disc 2"
+msgstr ""
+
 msgid "Disc Artwork Download"
 msgstr "下載光碟圖片"
 
@@ -628,6 +631,9 @@ msgstr "光碟插入檢查"
 
 msgid "Disc read error."
 msgstr "光碟讀取錯誤"
+
+msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
+msgstr ""
 
 msgid "Discarts"
 msgstr "光碟封面"
@@ -1094,6 +1100,9 @@ msgstr "GameCube"
 msgid "GameCube Mode"
 msgstr "GameCube 模式"
 
+msgid "GameCube Source"
+msgstr ""
+
 msgid "GameTDB Path"
 msgstr "GameTDB 路徑"
 
@@ -1269,6 +1278,9 @@ msgstr "語言檔路徑"
 
 msgid "Languagepath changed."
 msgstr "語言路徑已變更"
+
+msgid "Launching Wii games with emulated nand only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgstr ""
 
 msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
 msgstr "啟動模擬 nand 頻道僅能以d2x cIOS執行!首先變更遊戲IOS為d2x cIOS。 "
@@ -1874,9 +1886,6 @@ msgstr "強制寬螢幕設定要求DIOS MIOS v2.1或更高版本。此設定將�
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "Miis將被提取到模擬nand及頻道的路徑. 注意: 所有存在的檔案將被覆寫"
 
-msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
-msgstr "DIOS MIOS (Lite)的無需光碟設定不再被使用。現在需放置一片光碟到主機內。"
-
 msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
 msgstr "無須光碟加強版設定要求DIOS MIOS 2.2 更新版。此設定將被忽略。"
 
@@ -1932,6 +1941,9 @@ msgstr "這IOS是BootMii的ios。若你確定不是BootMii的IOS而你在這安�
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
 msgstr "標題清單找不到這IOS。若你確定已安裝它，請忽略這警告。"
 
+msgid "This game has multiple discs. Please select the disc to launch."
+msgstr ""
+
 msgid "This path must be on SD!"
 msgstr "此路徑必須是在SD卡上"
 
@@ -1950,8 +1962,17 @@ msgstr "用光碟執行GameCube遊戲，你需在遊戲設定中設定GameCube �
 msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
 msgstr "用DIOS MIOS執行GameCube遊戲，你需放置遊戲在USB FAT32格式分割磁區中。"
 
+msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on a primary partition."
+msgstr ""
+
+msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
+msgstr ""
+
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
 msgstr "用DIOS MIOS執行GameCube遊戲，你需設置「主要GameCube路徑」至USB FAT32格式分割磁區。"
+
+msgid "To run GameCube games with DIOS MIOS you need to use a 512 bytes/sector Hard Drive."
+msgstr ""
 
 msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
 msgstr "用Devolution執行GameCube遊戲，你需在Devolution 路徑中放置loader.bin檔。"
@@ -2218,6 +2239,12 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "DML No Disc"
+#~ msgstr "DML 無需光碟模式"
+
+#~ msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
+#~ msgstr "DIOS MIOS (Lite)的無需光碟設定不再被使用。現在需放置一片光碟到主機內。"
 
 #~ msgid "You need to install DIOS MIOS to run GameCube games from USB or DIOS MIOS Lite to run them from SD card"
 #~ msgstr "你需安裝DIOS MIOS從USB裝置執行GameCube遊戲或安裝DIOS MIOS Lite從SD卡執行GameCube遊戲"

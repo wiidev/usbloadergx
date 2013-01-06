@@ -493,7 +493,15 @@ int GameLoadSM::GetMenuInternal()
 		//! Settings: Nand Emulation
 		if (ret == ++Idx)
 		{
-			if(!IosLoader::IsD2X())
+			// If NandEmuPath is on root of the first FAT32 partition, allow rev17-21 cIOS for EmuNAND Channels
+			bool NandEmu_compatible = false;
+			if(Header->type == TYPE_GAME_EMUNANDCHAN)
+			{
+				const char *NandEmuChanPath = GameConfig.NandEmuPath.size() == 0 ? Settings.NandEmuChanPath : GameConfig.NandEmuPath.c_str();
+				NandEmu_compatible = IosLoader::is_NandEmu_compatible(NandEmuChanPath, GameConfig.ios == INHERIT ? Settings.cios : GameConfig.ios);
+			}
+
+			if(!IosLoader::IsD2X(GameConfig.ios == INHERIT ? Settings.cios : GameConfig.ios) && !NandEmu_compatible)
 				WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
 			else if (++GameConfig.NandEmuMode >= 3) GameConfig.NandEmuMode = INHERIT;
 
@@ -505,7 +513,14 @@ int GameLoadSM::GetMenuInternal()
 		//! Settings: Nand Emu Path
 		else if (ret == ++Idx)
 		{
-			if(!IosLoader::IsD2X())
+			// If NandEmuPath is on root of the first FAT32 partition, allow rev17-21 cIOS for EmuNAND Channels
+			bool NandEmu_compatible = false;
+			if(Header->type == TYPE_GAME_EMUNANDCHAN)
+			{
+				NandEmu_compatible = IosLoader::is_NandEmu_compatible(NULL, GameConfig.ios == INHERIT ? Settings.cios : GameConfig.ios);
+			}
+
+			if(!IosLoader::IsD2X(GameConfig.ios == INHERIT ? Settings.cios : GameConfig.ios) && !NandEmu_compatible)
 				WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
 			else
 			{
@@ -591,4 +606,3 @@ int GameLoadSM::GetMenuInternal()
 
 	return MENU_NONE;
 }
-

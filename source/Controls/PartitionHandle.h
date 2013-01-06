@@ -110,8 +110,10 @@ typedef struct _PartitionFS
 	bool Bootable;
 	u8 PartitionType;
 	u8 PartitionNum;
+	u8 PartitionTableType;
 } __attribute__((__packed__)) PartitionFS;
 
+enum { MBR, EBR, GPT, TABLE_TYPE_UNKNOWN };
 
 class PartitionHandle
 {
@@ -144,6 +146,8 @@ class PartitionHandle
 		int GetPartitionType(int pos) { if(valid(pos)) return PartitionList[pos].PartitionType; else return -1; };
 		//! Get the entrie number in MBR of this partition
 		int GetPartitionNum(int pos) { if(valid(pos)) return PartitionList[pos].PartitionNum; else return -1; };
+		//! Get the Partition Table type of this partition
+		int GetPartitionTableType(int pos) { if(valid(pos)) return PartitionList[pos].PartitionTableType; else return -1; };
 		//! Get the count of found partitions
 		int GetPartitionCount() const { return PartitionList.size(); };
 		//! Get the partition size in bytes
@@ -154,7 +158,7 @@ class PartitionHandle
 		const DISC_INTERFACE * GetDiscInterface() { return interface; };
 	protected:
 		bool valid(int pos) { return (pos >= 0 && pos < (int) PartitionList.size()); }
-		void AddPartition(const char * name, u64 lba_start, u64 sec_count, bool bootable, u8 part_type, u8 part_num);
+		void AddPartition(const char * name, u64 lba_start, u64 sec_count, bool bootable, u8 part_type, u8 part_num, u8 part_TableType);
 		bool IsExisting(u64 lba);
 		int FindPartitions();
 		void CheckEBR(u8 PartNum, sec_t ebr_lba);

@@ -273,7 +273,7 @@ s32 GCDumper::InstallGame(const char *installpath, u32 game, const char *install
 	CreateSubfolder(gamepath);
 
 	// snprintf(gamepath, sizeof(gamepath), "%s%s [%.6s]%s/game.iso", installpath, gametitle, gcheader.id, Disc ? "2" : ""); // Disc2 currently needs to be on the same folder.
-	snprintf(gamepath, sizeof(gamepath), "%s%s [%.6s]/%s.iso", installpath, gametitle, gcheader.id, Disc ? "disc2" : "game");
+	snprintf(gamepath, sizeof(gamepath), "%s%s.iso", gamepath, Disc ? "disc2" : "game");
 
 	FILE *f = fopen(gamepath, "wb");
 	if(!f)

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-11 13:49+0100\n"
+"POT-Creation-Date: 2013-01-05 21:42+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -518,9 +518,6 @@ msgstr "DML LED Aktivität"
 msgid "DML NMM Mode"
 msgstr "DML NMM Modus"
 
-msgid "DML No Disc"
-msgstr "DML Keine Disk"
-
 msgid "DML No Disc+"
 msgstr "DML Keine Disk+"
 
@@ -614,6 +611,12 @@ msgstr "Devolution's loader.bin Datei kann nicht geladen werden."
 msgid "Directory does not exist!"
 msgstr "Verzeichnis existiert nicht!"
 
+msgid "Disc 1"
+msgstr ""
+
+msgid "Disc 2"
+msgstr ""
+
 msgid "Disc Artwork Download"
 msgstr "Disk Cover Download"
 
@@ -628,6 +631,9 @@ msgstr "Disk erkannt"
 
 msgid "Disc read error."
 msgstr "Disk Lese-Fehler"
+
+msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
+msgstr ""
 
 msgid "Discarts"
 msgstr "Diskbilder"
@@ -1094,6 +1100,9 @@ msgstr "GameCube"
 msgid "GameCube Mode"
 msgstr "GameCube Modus"
 
+msgid "GameCube Source"
+msgstr ""
+
 msgid "GameTDB Path"
 msgstr "GameTDB"
 
@@ -1269,6 +1278,9 @@ msgstr "Sprachdateien"
 
 msgid "Languagepath changed."
 msgstr "Pfad geändert"
+
+msgid "Launching Wii games with emulated nand only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgstr ""
 
 msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
 msgstr "Das Aufrufen von EmuNand-Kanälen funktioniert nur mit dem d2x cIOS! Wechsele dein Spiele-IOS zu einem d2x cIOS zuerst."
@@ -1874,9 +1886,6 @@ msgstr "Die Einstellung -Breitbild erzw.- erforder DIOS MIOS v2.1 und neuer. Die
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "Die Miis werden in den EmuNand Pfad und EmuNand Kanal-Pfad kopiert. Achtung: Alle vorhandenen Dateien werden überschrieben."
 
-msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
-msgstr "Die -keine Disk Einstellung- wird nicht mehr unterstützt von DIOS MIOS (Lite). Jetzt muss eine Disk im Laufwerk sein."
-
 msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
 msgstr "Die -keine Disk+ Einstellung- benötigt DIOS MIOS 2.2 update2. Diese Einstellung wird ignoriert."
 
@@ -1932,6 +1941,9 @@ msgstr "Dieses IOS ist das BootMii IOS. Solltest du sicher sein, dass es nicht d
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
 msgstr "Dieses IOS wurde nicht in der Titelliste gefunden. Wenn du sicher bist es installiert zu haben, ignoriere die Warnung."
 
+msgid "This game has multiple discs. Please select the disc to launch."
+msgstr ""
+
 msgid "This path must be on SD!"
 msgstr "Dieser Pfad muss auf der SD sein!"
 
@@ -1950,8 +1962,17 @@ msgstr "Um GameCube Spiele von DVD zu starten, muss der GameCube Modus in den Sp
 msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
 msgstr "Um GameCube Spiele mit DIOS MIOS zu spielen, müssen sie sich auf einer USB FAT32 Partition befinden."
 
+msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on a primary partition."
+msgstr ""
+
+msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
+msgstr ""
+
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
 msgstr "Um GameCube-Spiele mit DIOS MIOS zu spielen, muss der 'GemeCube Hauptpfad' auf eine USB FAT32 Partition zeigen."
+
+msgid "To run GameCube games with DIOS MIOS you need to use a 512 bytes/sector Hard Drive."
+msgstr ""
 
 msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
 msgstr "Um GameCube Spiele mit Devolution zu starten, muss sich die loader.bin Datei in Devolution Pfad befinden."
@@ -2218,6 +2239,12 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "DML No Disc"
+#~ msgstr "DML Keine Disk"
+
+#~ msgid "The No Disc setting is not used anymore by DIOS MIOS (Lite). Now you need to place a disc in your drive."
+#~ msgstr "Die -keine Disk Einstellung- wird nicht mehr unterstützt von DIOS MIOS (Lite). Jetzt muss eine Disk im Laufwerk sein."
 
 #~ msgid "The GCT Cheatcodes Path and this game are not on the same partition. Run the game without Ocarina?"
 #~ msgstr "Der GCT Cheatcodes Pfad und dieses Spiel sind nicht auf der selben Partition. Spiel ohne Ocarina starten?"

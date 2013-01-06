@@ -132,7 +132,7 @@ bool PartitionHandle::Mount(int pos, const char * name, bool forceFAT)
 		if (fatMount(MountNameList[pos].c_str(), interface, 0, CACHE, SECTORS))
 		{
 			sec_t FAT_startSector = FindFirstValidPartition(interface);
-			AddPartition("FAT", FAT_startSector, 0xdeadbeaf, true, 0x0c, 0);
+			AddPartition("FAT", FAT_startSector, 0xdeadbeaf, true, 0x0c, 0, TABLE_TYPE_UNKNOWN);
 			return true;
 		}
 	}
@@ -245,7 +245,7 @@ int PartitionHandle::FindPartitions()
 		{
 			AddPartition(PartFromType(partition->type), le32(partition->lba_start),
 									  le32(partition->block_count), (partition->status == PARTITION_BOOTABLE),
-									  partition->type, i);
+									  partition->type, i, MBR);
 		}
 	}
 
@@ -279,7 +279,7 @@ void PartitionHandle::CheckEBR(u8 PartNum, sec_t ebr_lba)
 		{
 			AddPartition(PartFromType(ebr->partition.type), ebr_lba + next_erb_lba + le32(ebr->partition.lba_start),
 									  le32(ebr->partition.block_count), (ebr->partition.status == PARTITION_BOOTABLE),
-									  ebr->partition.type, PartNum);
+									  ebr->partition.type, PartNum, EBR);
 		}
 		// Get the start sector of the current partition
 		// and the next extended boot record in the chain
@@ -338,7 +338,7 @@ int PartitionHandle::CheckGPT(u8 PartNum)
 
 			bool bootable = (memcmp(part_entry->part_type_guid, TYPE_BIOS, 16) == 0);
 
-			AddPartition("GUID-Entry", le64(part_entry->part_first_lba), le64(part_entry->part_last_lba), bootable, PARTITION_TYPE_GPT, PartNum);
+			AddPartition("GUID-Entry", le64(part_entry->part_first_lba), le64(part_entry->part_last_lba), bootable, PARTITION_TYPE_GPT, PartNum, GPT);
 		}
 
 		next_lba++;
@@ -350,7 +350,7 @@ int PartitionHandle::CheckGPT(u8 PartNum)
 	return 0;
 }
 
-void PartitionHandle::AddPartition(const char * name, u64 lba_start, u64 sec_count, bool bootable, u8 part_type, u8 part_num)
+void PartitionHandle::AddPartition(const char * name, u64 lba_start, u64 sec_count, bool bootable, u8 part_type, u8 part_num, u8 part_TableType)
 {
 	char *buffer = (char *) malloc(MAX_BYTES_PER_SECTOR);
 
@@ -372,7 +372,7 @@ void PartitionHandle::AddPartition(const char * name, u64 lba_start, u64 sec_cou
 	}
 	else if(*((u16 *) (buffer + 0x1FE)) == 0x55AA)
 	{
-		//! Partition typ can be missleading the correct partition format. Stupid lazy ass Partition Editors.
+		//! Partition type can be missleading the correct partition format. Stupid lazy ass Partition Editors.
 		if((memcmp(buffer + 0x36, "FAT", 3) == 0 || memcmp(buffer + 0x52, "FAT", 3) == 0) &&
 			strncmp(PartFromType(part_type), "FAT", 3) != 0)
 		{
@@ -393,6 +393,7 @@ void PartitionHandle::AddPartition(const char * name, u64 lba_start, u64 sec_cou
 	PartitionEntrie.Bootable = bootable;
 	PartitionEntrie.PartitionType = part_type;
 	PartitionEntrie.PartitionNum = part_num;
+	PartitionEntrie.PartitionTableType = part_TableType;
 
 	PartitionList.push_back(PartitionEntrie);
 

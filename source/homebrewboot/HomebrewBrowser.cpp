@@ -371,6 +371,7 @@ int HomebrewBrowser::ReceiveFile()
 		{
 			WindowPrompt(tr( "Error while transfering data." ), 0, tr( "OK" ));
 			free(buffer);
+			ProgressStop();
 			return MENU_NONE;
 		}
 		if (!result)

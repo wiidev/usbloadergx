@@ -23,6 +23,8 @@
 #define ES_MODULE_END	(ES_MODULE_START + 0x4000)
 #define ES_HACK_OFFSET	4
 
+extern u32 hdd_sector_size[2];
+
 /*
  * Buffer variables for the IOS info to avoid loading it several times
  */
@@ -389,6 +391,62 @@ u8 IosLoader::GetDMLVersion(char* releaseDate)
 
 	return currentDMLVersion;
 
+}
+
+/*
+ * Check if selected IOS is compatible with Emulated NAND and user's settings
+ */
+bool IosLoader::is_NandEmu_compatible(const char *NandEmuPath, s32 ios)
+{
+	// TODO: Check features against cIOS revision
+	// rev17: 1st FAT32 partition of a 512 bytes/sector HDD, NandEmuPath must be on root, Full EmuNAND only
+	// rev18: adds Partial EmuNAND mode
+	// rev21: adds EmuNAND paths
+	// rev21 d2x beta: adds partition selection. officially supported in d2x v3
+	// d2x v4: adds 4096 bytes/sector support
+
+	// Check IOS
+	if(IsD2X(ios))
+		return true;
+
+	if(!IsWaninkokoIOS(ios) || NandTitles.VersionOf(TITLE_ID(1, ios)) < 17)
+		return false;
+
+	// Check all path restrictions when using rev17+
+	if(NandEmuPath)
+	{
+		// Check if EmuNAND Path location is on root
+		const char *NandEmuFolder = strchr(NandEmuPath, '/');
+		if(!NandEmuFolder || strlen(NandEmuFolder) > 1)
+			return false;
+
+		// Check if EmuNAND partition is on USB devices
+		if(strncmp(NandEmuPath, "usb", 3) == 0)
+		{
+			int part_num = atoi(NandEmuPath+3);
+			int usbport = DeviceHandler::PartitionToUSBPort(part_num-USB1);
+			
+			// Check if this is the first FAT32 partition on the drive
+			for(int dev = USB1; dev <= part_num; dev++)
+			{
+				if(strncmp(DeviceHandler::GetFSName(dev), "FAT", 3) == 0)
+				{
+					if(dev == part_num)
+						break;
+					else
+						return false;
+				}
+			}
+			
+			// Check if the partition is primary
+			// EmuNAND works with Primary and Extended partitions, no need to check the PartitionTableType
+			
+			// Check HDD sector size. Only 512 bytes/sector is supported by d2x < v4
+			if(hdd_sector_size[usbport] != BYTES_PER_SECTOR)
+				return false;
+		}
+	}
+	return true;
 }
 
 /******************************************************************************

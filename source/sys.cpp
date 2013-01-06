@@ -210,13 +210,11 @@ void Sys_LoadHBC(void)
 
 	WII_Initialize();
 
-	int ret = WII_LaunchTitle(HBC_LULZ);
-	if(ret < 0)
-		WII_LaunchTitle(HBC_1_0_7);
-	if(ret < 0)
-		WII_LaunchTitle(HBC_JODI);
-	if(ret < 0)
-		WII_LaunchTitle(HBC_HAXX);
+	// Try launching all known HBC titles in reversed released order
+	WII_LaunchTitle(HBC_LULZ);
+	WII_LaunchTitle(HBC_1_0_7);
+	WII_LaunchTitle(HBC_JODI);
+	WII_LaunchTitle(HBC_HAXX);
 
 	//Back to system menu if all fails
 	SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);

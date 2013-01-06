@@ -756,9 +756,24 @@ void GameWindow::BootGame(struct discHdr *header)
 
 	if(header->type == TYPE_GAME_EMUNANDCHAN)
 	{
-		if(!IosLoader::IsD2X(gameIOS))
+		// If NandEmuPath is on root of the first FAT32 partition, allow Waninkoko's rev17-21 cIOS for EmuNAND Channels
+		bool NandEmu_compatible = false;
+		const char *NandEmuChanPath = game_cfg->NandEmuPath.size() == 0 ? Settings.NandEmuChanPath : game_cfg->NandEmuPath.c_str();
+		NandEmu_compatible = IosLoader::is_NandEmu_compatible(NandEmuChanPath, gameIOS);
+			
+		if(!IosLoader::IsD2X(gameIOS) && !NandEmu_compatible)
 		{
 			ShowError(tr("Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."));
+			return;
+		}
+	}
+
+	// Restrict emuNAND with Wii games only with d2x
+	if(header->type == TYPE_GAME_WII_IMG || header->type == TYPE_GAME_WII_DISC)
+	{
+		if(!IosLoader::IsD2X(gameIOS))
+		{
+			ShowError(tr("Launching Wii games with emulated nand only works on d2x cIOS! Change game IOS to a d2x cIOS first."));
 			return;
 		}
 	}

@@ -36,6 +36,7 @@ static nandDevice ndevList[] =
 /* Buffer */
 static const char fs[] ATTRIBUTE_ALIGN(32) = "/dev/fs";
 static const char fat[] ATTRIBUTE_ALIGN(32) = "fat";
+static u32 inbuf[8] ATTRIBUTE_ALIGN(32);
 static u32 partition ATTRIBUTE_ALIGN(32) = 0;
 static u32 mode ATTRIBUTE_ALIGN(32) = 0;
 static char path[32] ATTRIBUTE_ALIGN(32) = "\0";
@@ -45,33 +46,39 @@ static int mounted = 0;
 static s32 Nand_Mount(nandDevice *dev)
 {
 	s32 fd, ret;
+	u32 inlen = 0;
 	ioctlv *vector = NULL;
+	int rev = IOS_GetRevision();
 
 	/* Open FAT module */
 	fd = IOS_Open(fat, 0);
 	if (fd < 0)
 		return fd;
 
-	// NOTE:
-	// The official cIOSX rev21 by Waninkoko ignores the partition argument
-	// and the nand is always expected to be on the 1st partition.
-	// However this way earlier d2x betas having revision 21 take in
-	// consideration the partition argument.
 
-	/* Allocate memory */
-	vector = (ioctlv *) memalign(32, sizeof(ioctlv));
-	if(vector == NULL)
+	if(rev >= 21 && rev < 30000)
 	{
-		/* Close FAT module */
-		IOS_Close(fd);
-		return -2;
+		// NOTE:
+		// The official cIOSX rev21 by Waninkoko ignores the partition argument
+		// and the nand is always expected to be on the 1st partition.
+		// However this way earlier d2x betas having revision 21 take in
+		// consideration the partition argument.
+		inlen = 1;
+
+		/* Allocate memory */
+		vector = (ioctlv *) memalign(32, sizeof(ioctlv));
+		if(vector == NULL)
+		{
+			/* Close FAT module */
+			IOS_Close(fd);
+			return -2;
+		}
+
+		vector[0].data = &partition;
+		vector[0].len = sizeof(u32);
 	}
-
-	vector[0].data = &partition;
-	vector[0].len = sizeof(u32);
-
 	/* Mount device */
-	ret = IOS_Ioctlv(fd, dev->mountCmd, 1, 0, vector);
+	ret = IOS_Ioctlv(fd, dev->mountCmd, inlen, 0, vector);
 
 	/* Close FAT module */
 	IOS_Close(fd);
@@ -104,39 +111,56 @@ static s32 Nand_Enable(nandDevice *dev)
 {
 	s32 fd, ret;
 	ioctlv *vector = NULL;
+	int rev = IOS_GetRevision();
 
 	// Open /dev/fs
 	fd = IOS_Open(fs, 0);
 	if (fd < 0)
 		return fd;
 
-	//FULL NAND emulation since rev18
-	//needed for reading images on triiforce mrc folder using ISFS commands
-	mode = dev->mode | fullmode;
-
-	// NOTE:
-	// The official cIOSX rev21 by Waninkoko provides an undocumented feature
-	// to set nand path when mounting the device.
-	// This feature has been discovered during d2x development.
-
-	/* Allocate memory */
-	vector = (ioctlv *)memalign(32, sizeof(ioctlv)*2);
-	if(vector == NULL)
+	if (IOS_GetRevision() >= 18)
 	{
-		/* Close FAT module */
-		IOS_Close(fd);
-		return -2;
+		//FULL NAND emulation since rev18
+		//needed for reading images on triiforce mrc folder using ISFS commands
+		mode = dev->mode | fullmode;
+	}
+	else
+	{
+		mode = dev->mode;
 	}
 
-	vector[0].data = &mode;
-	vector[0].len = sizeof(u32);
-	vector[1].data = path;
-	vector[1].len = sizeof(path);
+	if(rev >= 21 && rev < 30000)
+	{
+		// NOTE:
+		// The official cIOSX rev21 by Waninkoko provides an undocumented feature
+		// to set nand path when mounting the device.
+		// This feature has been discovered during d2x development.
 
-	ret = IOS_Ioctlv(fd, 100, 2, 0, vector);
+		/* Allocate memory */
+		vector = (ioctlv *)memalign(32, sizeof(ioctlv)*2);
+		if(vector == NULL)
+		{
+			/* Close FAT module */
+			IOS_Close(fd);
+			return -2;
+		}
 
-	/* Free memory */
-	free(vector);
+		vector[0].data = &mode;
+		vector[0].len = sizeof(u32);
+		vector[1].data = path;
+		vector[1].len = sizeof(path);
+
+		ret = IOS_Ioctlv(fd, 100, 2, 0, vector);
+
+		/* Free memory */
+		free(vector);
+	}
+	else
+	{
+		memset(inbuf, 0, sizeof(inbuf));
+		inbuf[0] = dev->mode;
+		ret = IOS_Ioctl(fd, 100, inbuf, sizeof(inbuf), NULL, 0);
+	}
 
 	// Close /dev/fs
 	IOS_Close(fd);
@@ -167,7 +191,7 @@ static s32 Nand_Disable(void)
 
 s32 Enable_Emu(int selection)
 {
-	if(!IosLoader::IsD2X())
+	if(!IosLoader::IsD2X() && IOS_GetRevision() < 17)
 		return -1;
 
 	if(mounted != 0)
@@ -197,7 +221,7 @@ s32 Enable_Emu(int selection)
 
 s32 Disable_Emu()
 {
-	if(!IosLoader::IsD2X())
+	if(!IosLoader::IsD2X() && IOS_GetRevision() < 17)
 		return -1;
 
 	if(mounted==0)

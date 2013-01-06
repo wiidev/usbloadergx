@@ -442,7 +442,11 @@ int LoaderSettings::GetMenuInternal()
 	//! Settings: Nand Chan. Emulation
 	else if (ret == ++Idx )
 	{
-		if(!IosLoader::IsD2X())
+		// If NandEmuPath is on root of the first FAT32 partition, allow rev17-21 cIOS for EmuNAND Channels
+		bool NandEmu_compatible = false;
+		NandEmu_compatible = IosLoader::is_NandEmu_compatible(Settings.NandEmuChanPath);
+
+		if(!IosLoader::IsD2X() && !NandEmu_compatible)
 			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
 		else if (++Settings.NandEmuChanMode >= 3) Settings.NandEmuChanMode = 1;
 	}

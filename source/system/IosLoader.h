@@ -79,6 +79,7 @@ class IosLoader
 		static iosinfo_t *GetIOSInfo(s32 ios);
 		static u8 GetMIOSInfo(bool checkedOnBoot = false);
 		static u8 GetDMLVersion(char* releaseDate = NULL);
+		static bool is_NandEmu_compatible(const char *NandEmuPath, s32 ios = IOS_GetVersion());
 	private:
 		static void LoadIOSModules(s32 ios, s32 ios_rev);
 };

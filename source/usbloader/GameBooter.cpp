@@ -55,6 +55,7 @@
 //appentrypoint has to be global because of asm
 u32 AppEntrypoint = 0;
 
+extern u32 hdd_sector_size[2];
 extern "C"
 {
 	syssram* __SYS_LockSram();
@@ -436,6 +437,31 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 			// Todo: Add here copySD2USB.
 			return 0;
 		}
+
+		// Check if the partition is the first partition on the drive
+		int part_num = atoi(Settings.GameCubePath+3);
+		int portPart = DeviceHandler::PartitionToPortPartition(part_num-USB1);
+		int usbport = DeviceHandler::PartitionToUSBPort(part_num-USB1);
+		PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandleFromPartition(part_num-USB1);
+		if(usbHandle->GetPartitionNum(portPart))
+		{
+			WindowPrompt(tr("Error:"), tr("To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."), tr("OK"));
+			return 0;
+		}
+
+		// Check if the partition is primary
+		if(usbHandle->GetPartitionTableType(portPart) != MBR)
+		{
+			WindowPrompt(tr("Error:"), tr("To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on a primary partition."), tr("OK"));
+			return 0;
+		}
+		
+		// Check HDD sector size. Only 512 bytes/sector is supported by DIOS MIOS
+		if(hdd_sector_size[usbport] != BYTES_PER_SECTOR)
+		{
+			WindowPrompt(tr("Error:"), tr("To run GameCube games with DIOS MIOS you need to use a 512 bytes/sector Hard Drive."), tr("OK"));
+			return 0;
+		}
 	}
 
 	// DIOS MIOS Lite
@@ -495,23 +521,19 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 	bool bootDisc2 = false;
 	if(gameHdr->type != TYPE_GAME_GC_DISC && gameHdr->disc_no == 0 && currentMIOS != QUADFORCE)
 	{
-		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_6_0)
+		char disc2Path[255];
+		snprintf(disc2Path, sizeof(disc2Path), "%s", RealPath);
+		char *pathPtr = strrchr(disc2Path, '/');
+		if(pathPtr) *pathPtr = 0;
+		snprintf(disc2Path, sizeof(disc2Path), "%s/disc2.iso", disc2Path);
+		if(CheckFile(disc2Path))
 		{
-			char disc2Path[255];
-			snprintf(disc2Path, sizeof(disc2Path), "%s", RealPath);
-			char *pathPtr = strrchr(disc2Path, '/');
-			if(pathPtr) *pathPtr = 0;
-			snprintf(disc2Path, sizeof(disc2Path), "%s/disc2.iso", disc2Path);
-			if(CheckFile(disc2Path))
-			{
-				int choice = WindowPrompt(gameHdr->title, tr("This game has multiple discs. Please select the disc to launch."), tr("Disc 1"), tr("Disc 2"), tr("Cancel"));
-				if(choice == 0)
-					return 0;
-				
-				if(choice == 2)
-					bootDisc2 = true;
-			}	
-		}
+			int choice = WindowPrompt(gameHdr->title, tr("This game has multiple discs. Please select the disc to launch."), tr("Disc 1"), tr("Disc 2"), tr("Cancel"));
+			if(choice == 0)
+				return 0;
+			else if(choice == 2)
+				bootDisc2 = true;
+		}	
 	}
 
 	const char *gcPath = strchr(RealPath, '/');
@@ -590,7 +612,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		dml_config->Config |= DML_CFG_FORCE_WIDE;
 	if(dmlScreenshotChoice)
 		dml_config->Config |= DML_CFG_SCREENSHOT;
-	if(bootDisc2)
+	if(bootDisc2 && IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_6_0)
 		dml_config->Config |= DML_CFG_BOOT_DISC2;
 
 
