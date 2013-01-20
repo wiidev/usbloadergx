@@ -719,6 +719,7 @@ void GameWindow::BootGame(struct discHdr *header)
 	snprintf(IDfull, sizeof(IDfull), "%s", (char *) header->id);
 
 	int gameIOS = game_cfg->ios == INHERIT ? Settings.cios : game_cfg->ios;
+	int gameNandEmuMode = game_cfg->NandEmuMode == INHERIT ? Settings.NandEmuMode : game_cfg->NandEmuMode;
 
 	if (game_cfg->loadalternatedol == 2)
 	{
@@ -771,7 +772,7 @@ void GameWindow::BootGame(struct discHdr *header)
 	// Restrict emuNAND with Wii games only with d2x
 	if(header->type == TYPE_GAME_WII_IMG || header->type == TYPE_GAME_WII_DISC)
 	{
-		if(!IosLoader::IsD2X(gameIOS))
+		if(gameNandEmuMode && !IosLoader::IsD2X(gameIOS))
 		{
 			ShowError(tr("Launching Wii games with emulated nand only works on d2x cIOS! Change game IOS to a d2x cIOS first."));
 			return;
