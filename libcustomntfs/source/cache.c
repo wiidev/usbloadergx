@@ -280,7 +280,7 @@ struct CACHED_GENERIC *ntfs_enter_cache(struct CACHE_HEADER *cache,
 				cache->oldest_entry = current->previous;
 				if (item->varsize) {
 					if (current->varsize)
-						current->variable = MEM2_realloc(
+						current->variable = realloc(
 							current->variable,
 							item->varsize);
 					else

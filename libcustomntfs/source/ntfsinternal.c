@@ -670,7 +670,7 @@ cleanup:
     // Unlock
     ntfsUnlock(vd);
 
-    return 0;
+    return res;
 }
 
 int ntfsSync (ntfs_vd *vd, ntfs_inode *ni)

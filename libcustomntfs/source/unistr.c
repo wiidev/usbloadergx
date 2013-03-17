@@ -710,9 +710,9 @@ static int utf8_to_unicode(u32 *wc, const char *s)
 			    | ((u32)(s[1] & 0x3F) << 12)
 			    | ((u32)(s[2] & 0x3F) << 6)
 			    | ((u32)(s[3] & 0x3F));
-		/* Check valid ranges */
-		if ((*wc <= 0x10ffff) && (*wc >= 0x10000))
-			return 4;
+			/* Check valid ranges */
+			if ((*wc <= 0x10ffff) && (*wc >= 0x10000))
+				return 4;
 		}
 		goto fail;
 	}
@@ -1011,7 +1011,7 @@ int ntfs_mbstoucs(const char *ins, ntfschar **outs)
 		if (o >= ucs_len) {
 			ntfschar *tc;
 			ucs_len = (ucs_len * sizeof(ntfschar) + 64) & ~63;
-			tc = MEM2_realloc(ucs, ucs_len);
+			tc = realloc(ucs, ucs_len);
 			if (!tc)
 				goto err_out;
 			ucs = tc;

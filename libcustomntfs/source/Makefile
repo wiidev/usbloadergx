@@ -28,7 +28,7 @@ LIBDIR		:=	../lib
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
-CFLAGS		=	-O2 -Wall -ffast-math -pipe $(MACHDEP) $(INCLUDE) -DHAVE_CONFIG_H
+CFLAGS		=	-Os -Wall -ffast-math -pipe $(MACHDEP) $(INCLUDE) -DHAVE_CONFIG_H
 CXXFLAGS	=	$(CFLAGS)
 ASFLAGS		:=	-g
 export NTFSBIN	:= $(LIBDIR)/$(PLATFORM)/libntfs.a
@@ -97,14 +97,13 @@ clean:
 
 all: $(NTFSBIN)
 
-install:
+cube-install:
 	cp ../include/ntfs.h $(DEVKITPRO)/libogc/include
-	cp ../lib/wii/libntfs.a $(DEVKITPRO)/libogc/lib/wii
 	cp ../lib/cube/libntfs.a $(DEVKITPRO)/libogc/lib/cube
 
 wii-install:
-	cp ../include/ntfs.h $(DEVKITPRO)/libogc/include
-	cp ../lib/wii/libntfs.a $(DEVKITPRO)/libogc/lib/wii
+	cp ../include/ntfs.h $(PORTLIBS)/include
+	cp ../lib/wii/libntfs.a $(PORTLIBS)/lib
 
 #---------------------------------------------------------------------------------
 else

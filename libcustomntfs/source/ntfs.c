@@ -81,9 +81,6 @@ void ntfsInit (void)
         #else
         ntfs_log_set_handler(ntfs_log_handler_null);
         #endif
-        // Set our current local
-        ntfs_set_locale();
-
     }
 
     return;
@@ -478,20 +475,20 @@ bool ntfsMount (const char *name, const DISC_INTERFACE *interface, sec_t startSe
 
     // Build the mount flags
     if (flags & NTFS_READ_ONLY)
-    	vd->flags |= MS_RDONLY;
+    	vd->flags |= NTFS_MNT_RDONLY;
     else
     {
 	    if (!(interface->features & FEATURE_MEDIUM_CANWRITE))
-	        vd->flags |= MS_RDONLY;
+	        vd->flags |= NTFS_MNT_RDONLY;
 	    if ((interface->features & FEATURE_MEDIUM_CANREAD) && (interface->features & FEATURE_MEDIUM_CANWRITE))
-	        vd->flags |= MS_EXCLUSIVE;
+	        vd->flags |= NTFS_MNT_EXCLUSIVE;
     }
     if (flags & NTFS_RECOVER)
-        vd->flags |= MS_RECOVER;
+        vd->flags |= NTFS_MNT_RECOVER;
     if (flags & NTFS_IGNORE_HIBERFILE)
-        vd->flags |= MS_IGNORE_HIBERFILE;
+        vd->flags |= NTFS_MNT_IGNORE_HIBERFILE;
 
-    if (vd->flags & MS_RDONLY)
+    if (vd->flags & NTFS_MNT_RDONLY)
         ntfs_log_debug("Mounting \"%s\" as read-only\n", name);
 
     // Mount the device

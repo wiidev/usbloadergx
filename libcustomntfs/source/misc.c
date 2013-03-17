@@ -34,21 +34,17 @@
 #include "types.h"
 #include "misc.h"
 #include "logging.h"
-#include "mem2.h"
 
 /**
  * ntfs_calloc
- *
+ * 
  * Return a pointer to the allocated memory or NULL if the request fails.
  */
 void *ntfs_calloc(size_t size)
 {
 	void *p;
-
-	p = MEM2_alloc(size);
-	if(p)
-        memset(p, 0, size);
-
+	
+	p = calloc(1, size);
 	if (!p)
 		ntfs_log_perror("Failed to calloc %lld bytes", (long long)size);
 	return p;
@@ -57,8 +53,8 @@ void *ntfs_calloc(size_t size)
 void *ntfs_malloc(size_t size)
 {
 	void *p;
-
-	p = MEM2_alloc(size);
+	
+	p = malloc(size);
 	if (!p)
 		ntfs_log_perror("Failed to malloc %lld bytes", (long long)size);
 	return p;
