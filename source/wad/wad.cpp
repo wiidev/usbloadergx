@@ -1,4 +1,5 @@
 /****************************************************************************
+ * Copyright (C) 2013 Cyan
  * Copyright (C) 2011 Dimok
  *
  * This program is free software: you can redistribute it and/or modify
@@ -351,10 +352,15 @@ bool Wad::InstallContents(const char *installpath)
 
 			ShowProgress(tr("Installing title..."), progressTxt, 0, totalDone + done, totalSize, true, true);
 
-			// Data length
+			// Encrypted data length
 			u32 size = (len - done);
 			if (size > blocksize)
 				size = blocksize;
+			
+			// Decryted data length
+			u32 dec_size = (content->size - done); // Content size not round up to 64
+			if (dec_size > blocksize)
+				dec_size = blocksize;
 
 			// Read data
 			if(fread(inbuf, 1, size, pFile) != size)
@@ -364,7 +370,7 @@ bool Wad::InstallContents(const char *installpath)
 			aes_decrypt(iv, inbuf, outbuf, size);
 
 			// Write data
-			if(fwrite(outbuf, 1, size, fp) != size)
+			if(fwrite(outbuf, 1, dec_size, fp) != dec_size)
 				break;
 
 			// Set new iv for next read chunk

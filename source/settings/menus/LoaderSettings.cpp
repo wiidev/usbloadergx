@@ -1,6 +1,6 @@
 /****************************************************************************
- * Copyright (C) 2010
- * by Dimok
+ * Copyright (C) 2012-2013 by Cyan
+ * Copyright (C) 2010 by Dimok
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any
@@ -35,7 +35,7 @@
 #include "usbloader/GameList.h"
 #include "utils/tools.h"
 #include "menu.h"
-#include "gamecube/GCGames.h"
+#include "GameCube/GCGames.h"
 
 static const char * OnOffText[] =
 {
@@ -188,7 +188,7 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "DML Japanese Patch" ));
 	Options->SetName(Idx++, "%s", tr( "DML Debug" ));
 	Options->SetName(Idx++, "%s", tr( "DEVO MemCard Emulation" ));
-	//Options->SetName(Idx++, "%s", tr( "DEVO Force Widescreen" ));
+	Options->SetName(Idx++, "%s", tr( "DEVO Force Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "DEVO LED Activity" ));
 
 	SetOptionValues();
@@ -323,7 +323,7 @@ void LoaderSettings::SetOptionValues()
 	Options->SetValue(Idx++, "%s", tr(DEVOMCText[Settings.DEVOMCEmulation]));
 	
 	//! Settings: DEVO Widescreen Patch
-	//Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DEVOWidescreen]));
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DEVOWidescreen]));
 	
 	//! Settings: DEVO Activity LED
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DEVOActivityLED]));
@@ -554,10 +554,10 @@ int LoaderSettings::GetMenuInternal()
 	}
 
 	//! Settings: DEVO Widescreen Patch
-	//else if (ret == ++Idx)
-	//{
-	//	if (++Settings.DEVOWidescreen >= MAX_ON_OFF) Settings.DEVOWidescreen = 0;
-	//}
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DEVOWidescreen >= MAX_ON_OFF) Settings.DEVOWidescreen = 0;
+	}
 
 	//! Settings: DEVO Activity LED
 	else if (ret == ++Idx)

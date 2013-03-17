@@ -1,4 +1,5 @@
 /****************************************************************************
+ * Copyright (C) 2012-2013 by Cyan
  * Copyright (C) 2012 Dimok
  *
  * This program is free software: you can redistribute it and/or modify
@@ -176,7 +177,7 @@ void GCGameLoadSM::SetOptionNames()
 		Options->SetName(Idx++, "%s", tr( "DML Debug" ));
 	}
 	Options->SetName(Idx++, "%s", tr( "DEVO MemCard Emulation" ));
-	//Options->SetName(Idx++, "%s", tr( "DEVO Force Widescreen" ));
+	Options->SetName(Idx++, "%s", tr( "DEVO Force Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "DEVO LED Activity" ));
 }
 
@@ -295,10 +296,10 @@ void GCGameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, "%s", tr(DEVOMCText[GameConfig.DEVOMCEmulation]));
 	
 	//! Settings: DEVO Widescreen Patch
-	//if(GameConfig.DEVOWidescreen == INHERIT)
-	//	Options->SetValue(Idx++, tr("Use global"));
-	//else
-	//	Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVOWidescreen]));
+	if(GameConfig.DEVOWidescreen == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVOWidescreen]));
 	
 	//! Settings: DEVO Activity LED
 	if(GameConfig.DEVOActivityLED == INHERIT)
@@ -442,10 +443,10 @@ int GCGameLoadSM::GetMenuInternal()
 	}
 
 	//! Settings: DEVO Widescreen Patch
-	//else if (ret == ++Idx)
-	//{
-	//	if (++GameConfig.DEVOWidescreen >= MAX_ON_OFF) GameConfig.DEVOWidescreen = INHERIT;
-	//}
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.DEVOWidescreen >= MAX_ON_OFF) GameConfig.DEVOWidescreen = INHERIT;
+	}
 
 	//! Settings: DEVO Activity LED
 	else if (ret == ++Idx)

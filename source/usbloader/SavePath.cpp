@@ -104,6 +104,9 @@ void CreateSavePath(const struct discHdr *hdr)
 		titlePath = "title/00010004";
 	}
 
+	if(hdr->type == TYPE_GAME_NANDCHAN || hdr->type == TYPE_GAME_EMUNANDCHAN)
+		titlePath = "title/00010001";
+
 	snprintf(nandPath, sizeof(nandPath), "%s/%s/%02x%02x%02x%02x/data", Settings.NandEmuPath, titlePath, hdr->id[0], hdr->id[1], hdr->id[2], hdr->id[3]);
 	CreateNandPath(nandPath);
 

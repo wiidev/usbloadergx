@@ -145,8 +145,8 @@ bool DeviceHandler::MountSD()
 
 static inline bool USBSpinUp()
 {
-	bool started0 = true;
-	bool started1 = true;
+	bool started0 = false;
+	bool started1 = false;
 	int retries = 400;
 
 	const DISC_INTERFACE * handle0 = NULL;
@@ -165,12 +165,15 @@ static inline bool USBSpinUp()
 		if(handle1)
 			started1 = (handle1->startup() && handle1->isInserted());
 
-		if(started0 && started1) break;
+		if(   (!handle0 || started0)
+		   && (!handle1 || started1)) {
+			break;
+		}
 		usleep(50000);
 	}
 	while(--retries > 0);
 
-	return (started0 && started1);
+	return (started0 || started1);
 }
 
 bool DeviceHandler::MountUSB(int pos)

@@ -141,15 +141,30 @@ void StartUpProcess::SetTextf(const char * format, ...)
 bool StartUpProcess::USBSpinUp()
 {
 	drawCancel = true;
-	bool started = false;
-	const DISC_INTERFACE * handle = Settings.USBPort == 1 ? DeviceHandler::GetUSB1Interface() : DeviceHandler::GetUSB0Interface();
 	Timer countDown;
+	bool started0 = false;
+	bool started1 = false;
+
+	const DISC_INTERFACE * handle0 = NULL;
+	const DISC_INTERFACE * handle1 = NULL;
+	if(Settings.USBPort == 0 || Settings.USBPort == 2)
+		handle0 = DeviceHandler::GetUSB0Interface();
+	if(Settings.USBPort == 1 || Settings.USBPort == 2)
+		handle1 = DeviceHandler::GetUSB1Interface();
+		
 	// wait 20 sec for the USB to spin up...stupid slow ass HDD
 	do
 	{
-		started = (handle->startup() && handle->isInserted());
-		if(started)
+		if(handle0)
+			started0 = (handle0->startup() && handle0->isInserted());
+
+		if(handle1)
+			started1 = (handle1->startup() && handle1->isInserted());
+
+		if(   (!handle0 || started0)
+		   && (!handle1 || started1)) {
 			break;
+		}
 
 
 		UpdatePads();
@@ -167,7 +182,7 @@ bool StartUpProcess::USBSpinUp()
 
 	drawCancel = false;
 
-	return started;
+	return (started0 || started1);
 }
 
 int StartUpProcess::Run(int argc, char *argv[])

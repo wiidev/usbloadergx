@@ -1,6 +1,6 @@
  /****************************************************************************
- * Copyright (C) 2010
- * by Dimok
+ * Copyright (C) 2013 by Cyan
+ * Copyright (C) 2010 by Dimok
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any
@@ -194,6 +194,34 @@ void PartitionHandle::UnMount(int pos)
 	MountNameList[pos].clear();
 }
 
+u32 PartitionHandle::GetPartitionClusterSize(u32 lba_start)
+{
+	char *buffer = (char *) malloc(MAX_BYTES_PER_SECTOR);
+	if(!buffer) return 0;
+	
+	if (!interface->readSectors(lba_start, 1, buffer))
+	{
+		free(buffer);
+		return 0;
+	}
+
+	u32 cluster_size = 0;
+
+	// Only for FAT partitions
+	if(*((u16 *) (buffer + 0x1FE)) == 0x55AA)
+	{
+		if((memcmp(buffer + 0x36, "FAT", 3) == 0 || memcmp(buffer + 0x52, "FAT", 3) == 0))
+		{
+			u16 sector_sz = *((u8*) (buffer + 0x0C)) << 8 | *((u8*) (buffer + 0x0B));
+			u8	sector_per_cluster = *((u8*) (buffer + 0x0D));
+			cluster_size = sector_sz * sector_per_cluster;
+		}
+	}
+
+	free(buffer);
+	return cluster_size;
+}
+
 bool PartitionHandle::IsExisting(u64 lba)
 {
 	for(u32 i = 0; i < PartitionList.size(); ++i)
@@ -217,9 +245,18 @@ int PartitionHandle::FindPartitions()
 		return -1;
 	}
 
-	// If this is the devices master boot record
+	// If this is not the device's master boot record
 	if (mbr->signature != MBR_SIGNATURE)
 	{
+		// Check if the device has only one WBFS partition without a table.
+		wbfs_head_t *head = (wbfs_head_t *) mbr;
+		if (head->magic == wbfs_htonl(WBFS_MAGIC))
+		{
+			AddPartition("WBFS", 0, 0xdeadbeaf, true, 0xBF, 0, TABLE_TYPE_UNKNOWN);
+			free(mbr);
+			return 0;
+		}
+		
 		free(mbr);
 		return -1;
 	}

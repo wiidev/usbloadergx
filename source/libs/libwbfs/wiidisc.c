@@ -17,11 +17,10 @@ void _decrypt_title_key(u8 *tik, u8 *title_key)
 	wbfs_memset( iv, 0, sizeof iv );
 	wbfs_memcpy( iv, tik + 0x01dc, 8 );
 
-	//check byte 0x1f1 in ticket to determine whether or not to use Korean Common Key. Used like a boolean flag.
+	//check byte 0x1f1 in ticket to determine whether or not to use Korean Common Key.
 	//if value = 0x01, use Korean Common Key, else just use regular one             -dmm
-	bool korean_flag = tik[0x01f1];
-
-	if(korean_flag == true){
+	//Also check the GameID region code as some channels are using wrong ticket with 0x01    -Cyan
+	if(tik[0x01f1] == 0x01 && (tik[0x01e3] == 'K' || tik[0x01e3] == 'Q' || tik[0x01e3] == 'T')){
 			aes_set_key(korean_key);
 	} else {
 			aes_set_key(common_key);

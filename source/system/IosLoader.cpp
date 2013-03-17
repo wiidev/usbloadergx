@@ -353,6 +353,22 @@ u8 IosLoader::GetDMLVersion(char* releaseDate)
 	strptime("Dec  1 2012 16:42:34", "%b %d %Y %H:%M:%S", &time);
 	const time_t dm_2_6_1_time = mktime(&time);
 	
+	// Timestamp of DM 2.7
+	strptime("Feb 20 2013 14:54:33", "%b %d %Y %H:%M:%S", &time);
+	const time_t dm_2_7_time = mktime(&time);
+	
+	// Timestamp of DML 2.7
+	strptime("Feb 21 2013 03:13:49", "%b %d %Y %H:%M:%S", &time);
+	const time_t dml_2_7_time = mktime(&time);
+	
+	// Timestamp of DM 2.8
+	strptime("Feb 24 2013 14:17:03", "%b %d %Y %H:%M:%S", &time);
+	const time_t dm_2_8_time = mktime(&time);
+	
+	// Timestamp of DML 2.8
+	strptime("Feb 24 2013 13:30:29", "%b %d %Y %H:%M:%S", &time);
+	const time_t dml_2_8_time = mktime(&time);
+	
 	
 	// Current installed version
 	gprintf("built on %s\n", releaseDate);
@@ -362,7 +378,9 @@ u8 IosLoader::GetDMLVersion(char* releaseDate)
 
 	if(currentMIOS == DIOS_MIOS)
 	{
-		if(difftime(unixTime, dm_2_6_1_time) >= 0) 			currentDMLVersion = DML_VERSION_DM_2_6_1;
+		if(difftime(unixTime, dm_2_8_time) >= 0) 			currentDMLVersion = DML_VERSION_DM_2_8;
+		else if(difftime(unixTime, dm_2_7_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_7;
+		else if(difftime(unixTime, dm_2_6_1_time) >= 0) 	currentDMLVersion = DML_VERSION_DM_2_6_1;
 		else if(difftime(unixTime, dm_2_6_0_time) >= 0) 	currentDMLVersion = DML_VERSION_DM_2_6_0;
 		else if(difftime(unixTime, dm_2_5_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_5;
 		else if(difftime(unixTime, dm_2_4_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_4;
@@ -374,7 +392,9 @@ u8 IosLoader::GetDMLVersion(char* releaseDate)
 	}
 	else if(currentMIOS == DIOS_MIOS_LITE)
 	{
-		if(difftime(unixTime, dml_2_6_time) >= 0) 			currentDMLVersion = DML_VERSION_DML_2_6;
+		if(difftime(unixTime, dml_2_8_time) >= 0) 			currentDMLVersion = DML_VERSION_DML_2_8;
+		else if(difftime(unixTime, dml_2_7_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_7;
+		else if(difftime(unixTime, dml_2_6_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_6;
 		else if(difftime(unixTime, dml_2_5_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_5;
 		else if(difftime(unixTime, dml_2_4_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_4;
 		else if(difftime(unixTime, dml_2_3_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_3;

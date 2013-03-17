@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# tchinese.lang - r1203
+# tchinese.lang - r1208
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-05 21:42+0100\n"
+"POT-Creation-Date: 2013-03-17 13:57+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -494,6 +494,9 @@ msgstr "自訂"
 msgid "Customs/Original"
 msgstr "自製/原始"
 
+msgid "DEVO Force Widescreen"
+msgstr ""
+
 msgid "DEVO LED Activity"
 msgstr "DEVO LED燈 開啟"
 
@@ -531,7 +534,7 @@ msgid "DML Progressive Patch"
 msgstr "DML 漸進式訊號修正"
 
 msgid "DML Screenshot"
-msgstr ""
+msgstr "DML 螢幕截圖"
 
 msgid "DML Video Mode"
 msgstr "DML 視訊模式"
@@ -605,6 +608,9 @@ msgstr "Devolution"
 msgid "Devolution Loader Path"
 msgstr "Devolution Loader路徑"
 
+msgid "Devolution requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."
+msgstr ""
+
 msgid "Devolution's loader.bin file can't be loaded."
 msgstr "Devolution的loader.bin檔無法載入。"
 
@@ -612,10 +618,10 @@ msgid "Directory does not exist!"
 msgstr "目錄不存在"
 
 msgid "Disc 1"
-msgstr ""
+msgstr "光碟 1"
 
 msgid "Disc 2"
-msgstr ""
+msgstr "光碟 2"
 
 msgid "Disc Artwork Download"
 msgstr "下載光碟圖片"
@@ -633,7 +639,7 @@ msgid "Disc read error."
 msgstr "光碟讀取錯誤"
 
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
-msgstr ""
+msgstr "光碟2 需被安裝為未壓縮格式才可用DM(L) v2.6+執行，確定要安裝為壓縮格式嗎？"
 
 msgid "Discarts"
 msgstr "光碟封面"
@@ -1101,7 +1107,7 @@ msgid "GameCube Mode"
 msgstr "GameCube 模式"
 
 msgid "GameCube Source"
-msgstr ""
+msgstr "GameCube 來源"
 
 msgid "GameTDB Path"
 msgstr "GameTDB 路徑"
@@ -1280,7 +1286,7 @@ msgid "Languagepath changed."
 msgstr "語言路徑已變更"
 
 msgid "Launching Wii games with emulated nand only works on d2x cIOS! Change game IOS to a d2x cIOS first."
-msgstr ""
+msgstr "用模擬nand啟動Wii遊戲僅能以d2x cIOS執行!首先變更遊戲IOS為d2x cIOS。"
 
 msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
 msgstr "啟動模擬 nand 頻道僅能以d2x cIOS執行!首先變更遊戲IOS為d2x cIOS。 "
@@ -1942,10 +1948,10 @@ msgid "This IOS was not found on the titles list. If you are sure you have it in
 msgstr "標題清單找不到這IOS。若你確定已安裝它，請忽略這警告。"
 
 msgid "This game has multiple discs. Please select the disc to launch."
-msgstr ""
+msgstr "此遊戲為多重光碟。請選擇光碟啟動。"
 
 msgid "This path must be on SD!"
-msgstr "此路徑必須是在SD卡上"
+msgstr "此路徑必須是在SD卡上！"
 
 msgid "Time left:"
 msgstr "剩餘時間："
@@ -1960,18 +1966,21 @@ msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS
 msgstr "用光碟執行GameCube遊戲，你需在遊戲設定中設定GameCube 模式為MIOS。"
 
 msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
-msgstr "用DIOS MIOS執行GameCube遊戲，你需放置遊戲在USB FAT32格式分割磁區中。"
+msgstr "用DIOS MIOS執行GameCube遊戲，你需放置遊戲在USB FAT32格式分割磁區。"
 
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on a primary partition."
-msgstr ""
+msgstr "用DIOS MIOS執行GameCube遊戲，你需設定主要GameCube路徑在主要磁區。"
 
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
-msgstr ""
+msgstr "用DIOS MIOS執行GameCube遊戲，你需設定主要GameCube路徑在硬碟的第一磁區。"
 
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
 msgstr "用DIOS MIOS執行GameCube遊戲，你需設置「主要GameCube路徑」至USB FAT32格式分割磁區。"
 
 msgid "To run GameCube games with DIOS MIOS you need to use a 512 bytes/sector Hard Drive."
+msgstr "用DIOS MIOS執行GameCube遊戲，你需使用硬碟的磁區為512位元組。"
+
+msgid "To run GameCube games with DIOS MIOS you need to use a partition with 32k bytes/cluster or less."
 msgstr ""
 
 msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
@@ -2179,6 +2188,9 @@ msgstr "你需安裝 DIOS MIOS Lite v1.2 或更新版本。"
 
 msgid "You need to install Devolution or DIOS MIOS (Lite) to launch GameCube games from USB or SD card"
 msgstr "從USB裝置或SD卡啟動 GameCube 遊戲，需安裝 Devolution 或 DIOS MIOS (Lite)程式"
+
+msgid "You need to set GameCube Mode to Devolution to launch GameCube games from USB or SD card"
+msgstr ""
 
 msgid "Zoom Duration (Speed)"
 msgstr "縮放間隔 (速度) "

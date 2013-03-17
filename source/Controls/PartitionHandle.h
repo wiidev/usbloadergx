@@ -1,6 +1,6 @@
  /****************************************************************************
- * Copyright (C) 2010
- * by Dimok
+ * Copyright (C) 2013 by Cyan
+ * Copyright (C) 2010 by Dimok
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any
@@ -140,6 +140,8 @@ class PartitionHandle
 		u32 GetLBAStart(int pos) { if(valid(pos)) return PartitionList[pos].LBA_Start; else return 0; };
 		//! Get the partition size in sectors of this partition
 		u32 GetSecCount(int pos) { if(valid(pos)) return PartitionList[pos].SecCount; else return 0; };
+		//! Get the cluster size of the FAT partition in bytes
+		u32 GetPartitionClusterSize(u32 lba_start);
 		//! Check if the partition is Active or NonBootable
 		bool IsActive(int pos) { if(valid(pos)) return PartitionList[pos].Bootable; else return false; };
 		//! Get the partition type

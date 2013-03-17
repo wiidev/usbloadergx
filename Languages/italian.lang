@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - r1204
+# italian.lang - r1208
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-05 21:42+0100\n"
+"POT-Creation-Date: 2013-03-17 13:57+0100\n"
 "PO-Revision-Date: 2011-09-11 12:19+0100\n"
 "Last-Translator: xFede\n"
 "Language-Team: xFede (fedeanto11@gmail.com)\n"
@@ -494,6 +494,9 @@ msgstr "Personalizzati"
 msgid "Customs/Original"
 msgstr "Modific./origin."
 
+msgid "DEVO Force Widescreen"
+msgstr ""
+
 msgid "DEVO LED Activity"
 msgstr "Led attività DEVO"
 
@@ -605,6 +608,9 @@ msgstr "Devolution"
 msgid "Devolution Loader Path"
 msgstr "Percorso loader devolution"
 
+msgid "Devolution requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."
+msgstr ""
+
 msgid "Devolution's loader.bin file can't be loaded."
 msgstr "Impossibile caricare il file loader.bin per devolution."
 
@@ -612,10 +618,10 @@ msgid "Directory does not exist!"
 msgstr "Il percorso non esiste!"
 
 msgid "Disc 1"
-msgstr ""
+msgstr "Disco 1"
 
 msgid "Disc 2"
-msgstr ""
+msgstr "Disco 2"
 
 msgid "Disc Artwork Download"
 msgstr "Scarica disco"
@@ -633,7 +639,7 @@ msgid "Disc read error."
 msgstr "Errore durante la lettura del disco."
 
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
-msgstr ""
+msgstr "Il disco 2 deve essere installato in formato non compresso per funzionare con DM(L) v2.6+, sicuro di volerlo installare in formato compresso?"
 
 msgid "Discarts"
 msgstr "Dischi"
@@ -1101,7 +1107,7 @@ msgid "GameCube Mode"
 msgstr "Modalità GameCube"
 
 msgid "GameCube Source"
-msgstr ""
+msgstr "Sorgente GameCube"
 
 msgid "GameTDB Path"
 msgstr "Percorso GameTDB"
@@ -1280,7 +1286,7 @@ msgid "Languagepath changed."
 msgstr "Percorso per le Traduzioni cambiato."
 
 msgid "Launching Wii games with emulated nand only works on d2x cIOS! Change game IOS to a d2x cIOS first."
-msgstr ""
+msgstr "Puoi avviare i giochi Wii dalla nand emulata solo con i cIOS d2x! Modifica il IOS a un cIOS d2x prima."
 
 msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
 msgstr "Puoi avviare i canali nella NAND Emulata soltanto con i cIOS d2x! Seleziona un d2x per continuare."
@@ -1350,7 +1356,7 @@ msgid "Main GameCube Games Path"
 msgstr "Percorso giochi GameCube"
 
 msgid "Main GameCube Path"
-msgstr "Percorso GameCubr"
+msgstr "Percorso GameCube"
 
 msgid "Main Path"
 msgstr "Percorso principale"
@@ -1942,7 +1948,7 @@ msgid "This IOS was not found on the titles list. If you are sure you have it in
 msgstr "Questo IOS non è stato trovato nella lista dei titoli. Se sei sicuro di averlo installato ignora questo avvertimento."
 
 msgid "This game has multiple discs. Please select the disc to launch."
-msgstr ""
+msgstr "Questo gioco contiene più di un disco. Selezione quello da avviare."
 
 msgid "This path must be on SD!"
 msgstr "Questo percorso deve essere sulla SD!"
@@ -1963,15 +1969,18 @@ msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT
 msgstr "Per avviare i giochi GameCube con DIOS MIOS li devi collocare in una partizione USB FAT32."
 
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on a primary partition."
-msgstr ""
+msgstr "Per avviare i giochi GameCube con DIOS MIOS devi aver settato 'Percorso GameCube' in una partizione primaria."
 
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
-msgstr ""
+msgstr "Per avviare i giochi GameCube con DIOS MIOS devi aver settato 'Percorso GameCube' nella prima partizione del tuo HDD."
 
 msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
 msgstr "Per avviare i giochi Gamecube con DIOS MIOS devi settare il 'Percorso principale Gamecube' su una partizione USB FAT32."
 
 msgid "To run GameCube games with DIOS MIOS you need to use a 512 bytes/sector Hard Drive."
+msgstr "Per avviare i giochi GameCube con DIOS MIOS devi usare un HDD che abbia settori da 512 byte."
+
+msgid "To run GameCube games with DIOS MIOS you need to use a partition with 32k bytes/cluster or less."
 msgstr ""
 
 msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
@@ -2179,6 +2188,9 @@ msgstr "Devi installare DIOS MIOS Lite v1.2 o una versione successiva."
 
 msgid "You need to install Devolution or DIOS MIOS (Lite) to launch GameCube games from USB or SD card"
 msgstr "Devi installare Devolution o DIOS MIOS (Lite) per avviare i giochi GameCube da USB o SD"
+
+msgid "You need to set GameCube Mode to Devolution to launch GameCube games from USB or SD card"
+msgstr ""
 
 msgid "Zoom Duration (Speed)"
 msgstr "Durata dello zoom (Velocità)"

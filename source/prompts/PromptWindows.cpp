@@ -67,8 +67,12 @@ static const char * DMLVersions[] =
 	"v2.5",		// DM  2.5
 	"v2.5",		// DML 2.5
 	"v2.6.0",	// DM 2.6
-	"v2.6+",	// DML 2.6
-	"v2.6.1+",	// DM 2.6 update 1
+	"v2.6",		// DML 2.6
+	"v2.6.1",	// DM 2.6 update 1
+	"v2.7",		// DM 2.7
+	"v2.7",		// DML 2.7
+	"v2.8+",	// DM 2.8
+	"v2.8+",	// DML 2.8
 };
 
 
@@ -296,19 +300,19 @@ void WindowCredits()
 		snprintf(GCInfo, sizeof(GCInfo), "QuadForce");
 		
 	// Check if Devolution is available
-	char DEVO_version[5];
 	char DEVO_loader_path[100];
 	snprintf(DEVO_loader_path, sizeof(DEVO_loader_path), "%sloader.bin", Settings.DEVOLoaderPath);
 	FILE *f = fopen(DEVO_loader_path, "rb");
 	if(f)
 	{
+		char version[5];
 		fseek(f, 23, SEEK_SET);
-		fread(DEVO_version, 1, 4, f);
+		fread(version, 1, 4, f);
 		fclose(f);
-		char *ptr = strchr(DEVO_version, ' ');
+		char *ptr = strchr(version, ' ');
 		if(ptr) *ptr = 0;
-		else DEVO_version[4] = 0;
-		snprintf(GCInfo, sizeof(GCInfo), "%s%s Devolution v%.4s", GCInfo, strlen(GCInfo) > 1 ? "  /  " : "", DEVO_version);
+		else version[4] = 0;
+		snprintf(GCInfo, sizeof(GCInfo), "%s%s Devolution r%d", GCInfo, strlen(GCInfo) > 1 ? "  /  " : "", atoi(version));
 	}
 
 	txt[i] = new GuiText(SvnRev, 16, ( GXColor ) {255, 255, 255, 255});

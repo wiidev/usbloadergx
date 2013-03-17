@@ -1,4 +1,5 @@
 /****************************************************************************
+ * Copyright (C) 2012-2013 Cyan
  * Copyright (C) 2011 Dimok
  *
  * This program is free software: you can redistribute it and/or modify
@@ -86,6 +87,15 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 		gprintf("\nLoading BC for GameCube");
 		WII_Initialize();
 		return WII_LaunchTitle(0x0000000100000100ULL);
+	}
+
+	// Check if Devolution is available
+	char DEVO_loader_path[100];
+	snprintf(DEVO_loader_path, sizeof(DEVO_loader_path), "%sloader.bin", Settings.DEVOLoaderPath);
+	if(CheckFile(DEVO_loader_path))
+	{
+		WindowPrompt(tr("Error:"), tr("You need to set GameCube Mode to Devolution to launch GameCube games from USB or SD card"), tr("OK"));
+		return 0;
 	}
 
 	WindowPrompt(tr("Error:"), tr("You need to install Devolution or DIOS MIOS (Lite) to launch GameCube games from USB or SD card"), tr("OK"));
@@ -462,6 +472,12 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 			WindowPrompt(tr("Error:"), tr("To run GameCube games with DIOS MIOS you need to use a 512 bytes/sector Hard Drive."), tr("OK"));
 			return 0;
 		}
+
+		if(usbHandle->GetPartitionClusterSize(usbHandle->GetLBAStart(portPart)) > 32768)
+		{
+			WindowPrompt(tr("Error:"), tr("To run GameCube games with DIOS MIOS you need to use a partition with 32k bytes/cluster or less."), tr("OK"));
+			return 0;
+		}
 	}
 
 	// DIOS MIOS Lite
@@ -570,8 +586,8 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		dml_config->Config |= DML_CFG_GAME_PATH;
 		strncpy(dml_config->GamePath, gamePath, sizeof(dml_config->GamePath));
 		// Extended NoDisc patch
-		if(dmlNoDisc2Choice && IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_2_2)
-			dml_config->Config |= DML_CFG_NODISC2;	// used by v2.2 update2+ as an Extended NoDisc patching
+		if(dmlNoDisc2Choice && IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_2_2 && IosLoader::GetDMLVersion() < DML_VERSION_DML_2_3m)
+			dml_config->Config |= DML_CFG_NODISC2;	// used by v2.2 update2 as an Extended NoDisc patching
 
 		gprintf("DML: Loading game %s\n", dml_config->GamePath);
 	}
@@ -711,9 +727,16 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 		WindowPrompt(tr("Error:"), tr("To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."), tr("OK"));
 		return 0;
 	}
-	
+
+	if(!CheckAHBPROT())
+	{
+		WindowPrompt(tr("Error:"), tr("Devolution requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."), tr("OK"));
+		return 0;
+	}
+
 	// Check if Devolution is available
 	u8 *loader_bin = NULL;
+	int DEVO_version = 0;
 	char DEVO_loader_path[100];
 	snprintf(DEVO_loader_path, sizeof(DEVO_loader_path), "%sloader.bin", Settings.DEVOLoaderPath);
 	FILE *f = fopen(DEVO_loader_path, "rb");
@@ -730,6 +753,16 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 			return 0;
 		}
 		fread(loader_bin, 1, size, f);
+
+		//read Devolution version
+		char version[5];
+		fseek(f, 23, SEEK_SET);
+		fread(version, 1, 4, f);
+		char *ptr = strchr(version, ' ');
+		if(ptr) *ptr = 0;
+		else version[4] = 0;
+		DEVO_version = atoi(version);
+
 		fclose(f);
 	}
 	else
@@ -791,9 +824,9 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	// Devolution configs
 	// use wifi logging if USB gecko is not found in slot B
 	// devo_config->options |= DEVO_CFG_WIFILOG;			// removed on Tueidj request
-	if(devoWidescreenChoice)
+	if(devoWidescreenChoice && DEVO_version >= 188)
 		devo_config->options |= DEVO_CFG_WIDE;
-	if(!devoActivityLEDChoice)
+	if(!devoActivityLEDChoice && DEVO_version >= 142)
 		devo_config->options |= DEVO_CFG_NOLED;				// ON by default
 	
 	// check memory card
