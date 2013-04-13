@@ -28,20 +28,12 @@
 
 static inline void* ntfs_alloc (size_t size)
 {
-    #ifdef __wii__
     return MEM2_alloc(size);
-    #else
-    return malloc(size);
-    #endif
 }
 
 static inline void* ntfs_align (size_t size)
 {
-    #ifdef __wii__
-    return memalign(32, size);
-    #else
-    return malloc(size);
-    #endif
+    return MEM2_alloc(size);
 }
 
 static inline void ntfs_free (void* mem)

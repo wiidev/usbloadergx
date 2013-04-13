@@ -34,6 +34,7 @@
 #include "types.h"
 #include "misc.h"
 #include "logging.h"
+#include "mem2.h"
 
 /**
  * ntfs_calloc
@@ -44,7 +45,10 @@ void *ntfs_calloc(size_t size)
 {
 	void *p;
 	
-	p = calloc(1, size);
+	p = MEM2_alloc(size);
+	if(p)
+	memset(p, 0, size);
+	
 	if (!p)
 		ntfs_log_perror("Failed to calloc %lld bytes", (long long)size);
 	return p;
@@ -54,7 +58,7 @@ void *ntfs_malloc(size_t size)
 {
 	void *p;
 	
-	p = malloc(size);
+	p = MEM2_alloc(size);
 	if (!p)
 		ntfs_log_perror("Failed to malloc %lld bytes", (long long)size);
 	return p;

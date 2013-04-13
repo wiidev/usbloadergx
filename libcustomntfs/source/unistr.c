@@ -1011,7 +1011,7 @@ int ntfs_mbstoucs(const char *ins, ntfschar **outs)
 		if (o >= ucs_len) {
 			ntfschar *tc;
 			ucs_len = (ucs_len * sizeof(ntfschar) + 64) & ~63;
-			tc = realloc(ucs, ucs_len);
+			tc = MEM2_realloc(ucs, ucs_len);
 			if (!tc)
 				goto err_out;
 			ucs = tc;

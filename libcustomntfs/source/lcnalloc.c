@@ -356,7 +356,7 @@ runlist *ntfs_cluster_alloc(ntfs_volume *vol, VCN start_vcn, s64 count,
 			/* Reallocate memory if necessary. */
 			if ((rlpos + 2) * (int)sizeof(runlist) >= rlsize) {
 				rlsize += 4096;
-				trl = realloc(rl, rlsize);
+				trl = MEM2_realloc(rl, rlsize);
 				if (!trl) {
 					err = ENOMEM;
 					ntfs_log_perror("realloc() failed");

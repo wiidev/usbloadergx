@@ -1279,7 +1279,7 @@ static int ntfs_ie_add_vcn(INDEX_ENTRY **ie)
 	INDEX_ENTRY *p, *old = *ie;
 	 
 	old->length = cpu_to_le16(le16_to_cpu(old->length) + sizeof(VCN));
-	p = realloc(old, le16_to_cpu(old->length));
+	p = MEM2_realloc(old, le16_to_cpu(old->length));
 	if (!p)
 		return STATUS_ERROR;
 	
