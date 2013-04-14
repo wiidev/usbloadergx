@@ -219,6 +219,8 @@ bool CGameSettings::Save()
 		fprintf(f, "DEVOMCEmulation:%d; ", GameList[i].DEVOMCEmulation);
 		fprintf(f, "DEVOWidescreen:%d; ", GameList[i].DEVOWidescreen);
 		fprintf(f, "DEVOActivityLED:%d; ", GameList[i].DEVOActivityLED);
+		fprintf(f, "DEVOFZeroAX:%d; ", GameList[i].DEVOFZeroAX);
+		fprintf(f, "DEVOTimerFix:%d; ", GameList[i].DEVOTimerFix);
 		fprintf(f, "Locked:%d;\n", GameList[i].Locked);
 	}
 	fprintf(f, "# END\n");
@@ -399,6 +401,16 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		game.DEVOActivityLED = atoi(value);
 		return true;
 	}
+	else if(strcmp(name, "DEVOFZeroAX") == 0)
+	{
+		game.DEVOFZeroAX = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "DEVOTimerFix") == 0)
+	{
+		game.DEVOTimerFix = atoi(value);
+		return true;
+	}
 
 	return false;
 }
@@ -533,5 +545,7 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.DEVOMCEmulation = INHERIT;
 	game.DEVOWidescreen = INHERIT;
 	game.DEVOActivityLED = INHERIT;
+	game.DEVOFZeroAX = INHERIT;
+	game.DEVOTimerFix = INHERIT;
 	game.Locked = OFF;
 }

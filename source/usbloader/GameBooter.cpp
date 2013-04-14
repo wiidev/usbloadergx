@@ -720,6 +720,8 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	u8 devoMCEmulation = game_cfg->DEVOMCEmulation == INHERIT ? Settings.DEVOMCEmulation : game_cfg->DEVOMCEmulation;
 	u8 devoActivityLEDChoice = game_cfg->DEVOActivityLED == INHERIT ? Settings.DEVOActivityLED : game_cfg->DEVOActivityLED;
 	u8 devoWidescreenChoice = game_cfg->DEVOWidescreen == INHERIT ? Settings.DEVOWidescreen : game_cfg->DEVOWidescreen;
+	u8 devoFZeroAXChoice = game_cfg->DEVOFZeroAX == INHERIT ? Settings.DEVOFZeroAX : game_cfg->DEVOFZeroAX;
+	u8 devoTimerFixChoice = game_cfg->DEVOTimerFix == INHERIT ? Settings.DEVOTimerFix : game_cfg->DEVOTimerFix;
 	
 
 	if(gameHdr->type == TYPE_GAME_GC_DISC)
@@ -828,6 +830,10 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 		devo_config->options |= DEVO_CFG_WIDE;
 	if(!devoActivityLEDChoice && DEVO_version >= 142)
 		devo_config->options |= DEVO_CFG_NOLED;				// ON by default
+	if(devoFZeroAXChoice && DEVO_version >= 196)
+		devo_config->options |= DEVO_CFG_FZERO_AX;
+	if(devoTimerFixChoice && DEVO_version >= 196)
+		devo_config->options |= DEVO_CFG_TIMER_FIX;
 	
 	// check memory card
 	if(devoMCEmulation == DEVO_MC_OFF)

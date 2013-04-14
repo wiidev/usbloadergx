@@ -248,6 +248,19 @@ int ParseDirectory(const char* Path, int Flags, FILTERCASCADE *Filter)
 	}
 
 	struct dirent *dirent = NULL;
+	
+	// Adds parent directory ".." manually if in a subdirectory to fix NTFS folder browsing.
+	if (strcmp(fulldir, browser->rootdir) != 0)
+	{
+		snprintf(filename, sizeof(filename), "..");
+		
+		BROWSERENTRY newEntry;
+		memset(&newEntry, 0, sizeof(BROWSERENTRY)); // clear the new entry
+		strlcpy(newEntry.filename, filename, sizeof(newEntry.filename));
+		strlcpy(newEntry.displayname, filename, sizeof(newEntry.displayname));
+		newEntry.isdir = 1; // flag this as a dir
+		if (ParseFilter(Filter, &newEntry)) browser->browserList.push_back(newEntry);
+	}
 
 	while ((dirent = readdir(dir)) != 0)
 	{
@@ -257,7 +270,7 @@ int ParseDirectory(const char* Path, int Flags, FILTERCASCADE *Filter)
 
 		snprintf(filename, sizeof(filename), dirent->d_name);
 
-		if (strcmp(filename, ".") != 0)
+		if (strcmp(filename, ".") != 0 && strcmp(filename, "..") != 0)
 		{
 			BROWSERENTRY newEntry;
 			memset(&newEntry, 0, sizeof(BROWSERENTRY)); // clear the new entry

@@ -185,6 +185,8 @@ class CSettings
 		short DEVOMCEmulation;
 		short DEVOWidescreen;
 		short DEVOActivityLED;
+		short DEVOFZeroAX;
+		short DEVOTimerFix;
 		short GCInstallCompressed;
 		short GCInstallAligned;
 

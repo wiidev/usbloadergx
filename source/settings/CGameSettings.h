@@ -43,6 +43,8 @@ typedef struct _GameCFG
 	short DEVOMCEmulation;
 	short DEVOWidescreen;
 	short DEVOActivityLED;
+	short DEVOFZeroAX;
+	short DEVOTimerFix;
 	short Locked;
 
 	void operator=(const struct _GameCFG &game)
@@ -81,6 +83,8 @@ typedef struct _GameCFG
 		this->DEVOMCEmulation = game.DEVOMCEmulation;
 		this->DEVOWidescreen = game.DEVOWidescreen;
 		this->DEVOActivityLED = game.DEVOActivityLED;
+		this->DEVOFZeroAX = game.DEVOFZeroAX;
+		this->DEVOTimerFix = game.DEVOTimerFix;
 		this->Locked = game.Locked;
 	}
 } GameCFG;

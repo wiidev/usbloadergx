@@ -190,6 +190,8 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "DEVO MemCard Emulation" ));
 	Options->SetName(Idx++, "%s", tr( "DEVO Force Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "DEVO LED Activity" ));
+	Options->SetName(Idx++, "%s", tr( "DEVO F-Zero AX" ));
+	Options->SetName(Idx++, "%s", tr( "DEVO Timer Fix" ));
 
 	SetOptionValues();
 
@@ -321,13 +323,19 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: DEVO Memory Card Emulation
 	Options->SetValue(Idx++, "%s", tr(DEVOMCText[Settings.DEVOMCEmulation]));
-	
+
 	//! Settings: DEVO Widescreen Patch
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DEVOWidescreen]));
-	
+
 	//! Settings: DEVO Activity LED
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DEVOActivityLED]));
-	
+
+	//! Settings: DEVO F-Zero AX unlock patch
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DEVOFZeroAX]));
+
+	//! Settings: DEVO Timer Fix
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DEVOTimerFix]));
+
 }
 
 int LoaderSettings::GetMenuInternal()
@@ -563,6 +571,18 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.DEVOActivityLED >= MAX_ON_OFF) Settings.DEVOActivityLED = 0;
+	}
+
+	//! Settings: DEVO F-Zero AX unlock patch
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DEVOFZeroAX >= MAX_ON_OFF) Settings.DEVOFZeroAX = 0;
+	}
+
+	//! Settings: DEVO Activity LED
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DEVOTimerFix >= MAX_ON_OFF) Settings.DEVOTimerFix = 0;
 	}
 
 	SetOptionValues();

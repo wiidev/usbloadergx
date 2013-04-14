@@ -20,13 +20,15 @@
 #define LAUNCH_DEVO() ((void(*)(void))loader_bin)()
 
 #define DEVO_SIG				 0x3EF9DB23
-#define DEVO_CONFIG_VERSION		 0x0110
+#define DEVO_CONFIG_VERSION		 0x0111
 
 enum DEVOConfig
 {
-	DEVO_CFG_WIFILOG		= (1<<0), // added in Devo config version 0x0110
+	DEVO_CFG_WIFILOG		= (1<<0), // added in Devo r100, config version 0x0110
 	DEVO_CFG_WIDE			= (1<<1), // added in Devo r142
-	DEVO_CFG_NOLED			= (1<<2)
+	DEVO_CFG_NOLED			= (1<<2),
+	DEVO_CFG_FZERO_AX		= (1<<3), // added in Devo r196, config version x0111
+	DEVO_CFG_TIMER_FIX		= (1<<4)
 };
 
 typedef struct _DEVO_CFG

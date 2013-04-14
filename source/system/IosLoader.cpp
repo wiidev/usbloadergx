@@ -340,36 +340,44 @@ u8 IosLoader::GetDMLVersion(char* releaseDate)
 	// Timestamp of DML 2.5
 	strptime("Nov  9 2012 21:18:56", "%b %d %Y %H:%M:%S", &time);
 	const time_t dml_2_5_time = mktime(&time);
-	
+
 	// Timestamp of DM 2.6.0
 	strptime("Dec  1 2012 01:52:53", "%b %d %Y %H:%M:%S", &time);
 	const time_t dm_2_6_0_time = mktime(&time);
-	
+
 	// Timestamp of DML 2.6
 	strptime("Dec  1 2012 16:22:29", "%b %d %Y %H:%M:%S", &time);
 	const time_t dml_2_6_time = mktime(&time);
-	
+
 	// Timestamp of DM 2.6.1
 	strptime("Dec  1 2012 16:42:34", "%b %d %Y %H:%M:%S", &time);
 	const time_t dm_2_6_1_time = mktime(&time);
-	
+
 	// Timestamp of DM 2.7
 	strptime("Feb 20 2013 14:54:33", "%b %d %Y %H:%M:%S", &time);
 	const time_t dm_2_7_time = mktime(&time);
-	
+
 	// Timestamp of DML 2.7
 	strptime("Feb 21 2013 03:13:49", "%b %d %Y %H:%M:%S", &time);
 	const time_t dml_2_7_time = mktime(&time);
-	
-	// Timestamp of DM 2.8
-	strptime("Feb 24 2013 14:17:03", "%b %d %Y %H:%M:%S", &time);
-	const time_t dm_2_8_time = mktime(&time);
-	
+
 	// Timestamp of DML 2.8
 	strptime("Feb 24 2013 13:30:29", "%b %d %Y %H:%M:%S", &time);
 	const time_t dml_2_8_time = mktime(&time);
-	
-	
+
+	// Timestamp of DM 2.8
+	strptime("Feb 24 2013 14:17:03", "%b %d %Y %H:%M:%S", &time);
+	const time_t dm_2_8_time = mktime(&time);
+
+	// Timestamp of DML 2.9
+	strptime("Apr  5 2013 18:20:33", "%b %d %Y %H:%M:%S", &time);
+	const time_t dml_2_9_time = mktime(&time);
+
+	// Timestamp of DM 2.9
+	strptime("Apr  5 2013 18:29:35", "%b %d %Y %H:%M:%S", &time);
+	const time_t dm_2_9_time = mktime(&time);
+
+
 	// Current installed version
 	gprintf("built on %s\n", releaseDate);
 
@@ -378,7 +386,8 @@ u8 IosLoader::GetDMLVersion(char* releaseDate)
 
 	if(currentMIOS == DIOS_MIOS)
 	{
-		if(difftime(unixTime, dm_2_8_time) >= 0) 			currentDMLVersion = DML_VERSION_DM_2_8;
+		if(difftime(unixTime, dm_2_9_time) >= 0) 			currentDMLVersion = DML_VERSION_DM_2_9;
+		else if(difftime(unixTime, dm_2_8_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_8;
 		else if(difftime(unixTime, dm_2_7_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_7;
 		else if(difftime(unixTime, dm_2_6_1_time) >= 0) 	currentDMLVersion = DML_VERSION_DM_2_6_1;
 		else if(difftime(unixTime, dm_2_6_0_time) >= 0) 	currentDMLVersion = DML_VERSION_DM_2_6_0;
@@ -392,7 +401,8 @@ u8 IosLoader::GetDMLVersion(char* releaseDate)
 	}
 	else if(currentMIOS == DIOS_MIOS_LITE)
 	{
-		if(difftime(unixTime, dml_2_8_time) >= 0) 			currentDMLVersion = DML_VERSION_DML_2_8;
+		if(difftime(unixTime, dml_2_9_time) >= 0) 			currentDMLVersion = DML_VERSION_DML_2_9;
+		else if(difftime(unixTime, dml_2_8_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_8;
 		else if(difftime(unixTime, dml_2_7_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_7;
 		else if(difftime(unixTime, dml_2_6_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_6;
 		else if(difftime(unixTime, dml_2_5_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_5;

@@ -179,6 +179,8 @@ void GCGameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "DEVO MemCard Emulation" ));
 	Options->SetName(Idx++, "%s", tr( "DEVO Force Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "DEVO LED Activity" ));
+	Options->SetName(Idx++, "%s", tr( "DEVO F-Zero AX" ));
+	Options->SetName(Idx++, "%s", tr( "DEVO Timer Fix" ));
 }
 
 void GCGameLoadSM::SetOptionValues()
@@ -288,25 +290,37 @@ void GCGameLoadSM::SetOptionValues()
 		else
 			Options->SetValue(Idx++, "%s", tr(DMLDebug[GameConfig.DMLDebug]));
 	}
-	
+
 	//! Settings: DEVO Memory Card Emulation
 	if(GameConfig.DEVOMCEmulation == INHERIT)
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(DEVOMCText[GameConfig.DEVOMCEmulation]));
-	
+
 	//! Settings: DEVO Widescreen Patch
 	if(GameConfig.DEVOWidescreen == INHERIT)
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVOWidescreen]));
-	
+
 	//! Settings: DEVO Activity LED
 	if(GameConfig.DEVOActivityLED == INHERIT)
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVOActivityLED]));
-	
+
+	//! Settings: DEVO F-Zero AX unlock patch
+	if(GameConfig.DEVOFZeroAX == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVOFZeroAX]));
+
+	//! Settings: DEVO Timer Fix
+	if(GameConfig.DEVOTimerFix == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVOTimerFix]));
+
 }
 
 int GCGameLoadSM::GetMenuInternal()
@@ -452,6 +466,18 @@ int GCGameLoadSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.DEVOActivityLED >= MAX_ON_OFF) GameConfig.DEVOActivityLED = INHERIT;
+	}
+
+	//! Settings: DEVO F-Zero AX unlock patch
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.DEVOFZeroAX >= MAX_ON_OFF) GameConfig.DEVOFZeroAX = INHERIT;
+	}
+
+	//! Settings: DEVO Timer Fix
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.DEVOTimerFix >= MAX_ON_OFF) GameConfig.DEVOTimerFix = INHERIT;
 	}
 
 	SetOptionValues();

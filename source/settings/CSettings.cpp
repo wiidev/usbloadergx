@@ -183,6 +183,8 @@ void CSettings::SetDefault()
 	DEVOMCEmulation = OFF;
 	DEVOWidescreen = OFF;
 	DEVOActivityLED = ON;
+	DEVOFZeroAX = OFF;
+	DEVOTimerFix = OFF;
 	GCInstallCompressed = OFF;
 	GCInstallAligned = OFF;
 }
@@ -413,6 +415,8 @@ bool CSettings::Save()
 	fprintf(file, "DEVOMCEmulation = %d\n", DEVOMCEmulation);
 	fprintf(file, "DEVOWidescreen = %d\n", DEVOWidescreen);
 	fprintf(file, "DEVOActivityLED = %d\n", DEVOActivityLED);
+	fprintf(file, "DEVOFZeroAX = %d\n", DEVOFZeroAX);
+	fprintf(file, "DEVOTimerFix = %d\n", DEVOTimerFix);
 	fprintf(file, "DEVOLoaderPath = %s\n", DEVOLoaderPath);
 	fprintf(file, "GCInstallCompressed = %d\n", GCInstallCompressed);
 	fprintf(file, "GCInstallAligned = %d\n", GCInstallAligned);
@@ -876,6 +880,16 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "DEVOActivityLED") == 0)
 	{
 		DEVOActivityLED = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "DEVOFZeroAX") == 0)
+	{
+		DEVOFZeroAX = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "DEVOTimerFix") == 0)
+	{
+		DEVOTimerFix = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "DEVOLoaderPath") == 0)
