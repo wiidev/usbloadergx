@@ -48,7 +48,7 @@ static const char * DMLVersions[] =
 	"",			// Original MIOS
 	"r51-",		// old DML r51-
 	"r52",		// old DML r52
-	"",			// QuadForce 01
+	"v0.1",		// QuadForce v0.1
 	"v1.2",		// DML 1.2
 	"v1.4",		// DML 1.4
 	"v1.4b",	// DML 1.4b
@@ -75,6 +75,7 @@ static const char * DMLVersions[] =
 	"v2.8",		// DM 2.8
 	"v2.9+",	// DML 2.9
 	"v2.9+",	// DM 2.9
+	"v2.0",		// QuadForce v2.0
 };
 
 
@@ -299,7 +300,7 @@ void WindowCredits()
 	else if (currentMIOS == DIOS_MIOS_LITE)
 		snprintf(GCInfo, sizeof(GCInfo), "DIOS-MIOS Lite %s", DMLVersions[IosLoader::GetDMLVersion()]);
 	else if (currentMIOS == QUADFORCE)
-		snprintf(GCInfo, sizeof(GCInfo), "QuadForce");
+		snprintf(GCInfo, sizeof(GCInfo), "QuadForce %s", DMLVersions[IosLoader::GetDMLVersion()]);
 		
 	// Check if Devolution is available
 	char DEVO_loader_path[100];

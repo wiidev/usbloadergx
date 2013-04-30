@@ -245,8 +245,16 @@ u8 IosLoader::GetMIOSInfo(bool checkedOnBoot)
 			else if((*(u32*)(appfile+i)) == 'Quad' && (*(u32*)(appfile+i+4)) == 'Forc')
 			{
 				currentMIOS = QUADFORCE;
-				gprintf("QuadForce v0.1");
-				currentDMLVersion = DML_VERSION_QUAD_0_1;
+				if((*(u32*)(appfile+i+8)) == 'e 2.') // QuadForce 2.0
+				{
+					gprintf("QuadForce v2.0 \n");
+					currentDMLVersion = DML_VERSION_QUAD_2_0;
+				}
+				else // QuadForce 0.1
+				{
+					gprintf("QuadForce v0.1 \n");
+					currentDMLVersion = DML_VERSION_QUAD_0_1;
+				}
 				break;
 			}
 		}
