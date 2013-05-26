@@ -245,17 +245,25 @@ u8 IosLoader::GetMIOSInfo(bool checkedOnBoot)
 			else if((*(u32*)(appfile+i)) == 'Quad' && (*(u32*)(appfile+i+4)) == 'Forc')
 			{
 				currentMIOS = QUADFORCE;
-				if((*(u32*)(appfile+i+8)) == 'e 2.') // QuadForce 2.0
-				{
-					gprintf("QuadForce v2.0 \n");
-					currentDMLVersion = DML_VERSION_QUAD_2_0;
-				}
-				else // QuadForce 0.1
-				{
-					gprintf("QuadForce v0.1 \n");
-					currentDMLVersion = DML_VERSION_QUAD_0_1;
-				}
+				char* QF_version = (char*)(appfile+i+10);
+				gprintf("QuadForce v%.1f \n", atof(QF_version));
+				if(atof(QF_version) >= 4.0)			currentDMLVersion = DML_VERSION_QUAD_4_0;
+				else if(atof(QF_version) == 3.0)	currentDMLVersion = DML_VERSION_QUAD_3_0;
+				else if(atof(QF_version) == 2.0)	currentDMLVersion = DML_VERSION_QUAD_2_0;
+				else 								currentDMLVersion = DML_VERSION_QUAD_0_1;
+				
 				break;
+			}
+			else if((*(u32*)(appfile+i)) == 'GCLo' && (*(u32*)(appfile+i+4)) == 'ader')
+			{
+				// QuadForce USB v4.1 binary doesn't have QF version, checking:  GCLoader....Built   : %s %s.....May 26 2013.00:15:28
+				if((*(u32*)(appfile+i+32)) == 'May ' && (*(u32*)(appfile+i+44)) == '00:1' && (*(u32*)(appfile+i+48)) == '5:28')
+				{
+					currentMIOS = QUADFORCE_USB;
+					gprintf("QuadForce USB v4.1\n");
+					currentDMLVersion = DML_VERSION_QUAD_4_1;
+					break;
+				}
 			}
 		}
 		free(appfile);
@@ -279,121 +287,63 @@ u8 IosLoader::GetDMLVersion(char* releaseDate)
 		return currentDMLVersion;
 	}
 
-	struct tm time;
-
-	// Timestamp of DML r52
-	strptime("Mar 7 2012 19:36:06", "%b %d %Y %H:%M:%S", &time);
-	const time_t dml_r52_time = mktime(&time);
-
-	// Timestamp of DML 1.2
-	strptime("Apr 24 2012 19:44:08", "%b %d %Y %H:%M:%S", &time);
-	const time_t dml_1_2_time = mktime(&time);
-
-	// Timestamp of DML 1.4b
-	strptime("May  7 2012 21:12:47", "%b %d %Y %H:%M:%S", &time);
-	const time_t dml_1_4b_time = mktime(&time);
-
-	// Timestamp of DML 1.5
-	strptime("Jun 14 2012 00:05:09", "%b %d %Y %H:%M:%S", &time);
-	const time_t dml_1_5_time = mktime(&time);
-
-	// Timestamp of DM 2.0
-	strptime("Jun 23 2012 19:43:21", "%b %d %Y %H:%M:%S", &time);
-	const time_t dm_2_0_time = mktime(&time);
-
-	// Timestamp of DM 2.1
-	strptime("Jul 17 2012 11:25:35", "%b %d %Y %H:%M:%S", &time);
-	const time_t dm_2_1_time = mktime(&time);
-
-	// Timestamp of DM 2.2 initial release
-	strptime("Jul 18 2012 16:57:47", "%b %d %Y %H:%M:%S", &time);
-	const time_t dm_2_2_time = mktime(&time);
-
-	// Timestamp of DM 2.2 update2
-	strptime("Jul 20 2012 14:49:47", "%b %d %Y %H:%M:%S", &time);
-	const time_t dm_2_2_2_time = mktime(&time);
-
-	// Timestamp of DML 2.2 initial release
-	strptime("Aug  6 2012 15:19:17", "%b %d %Y %H:%M:%S", &time);
-	const time_t dml_2_2_time = mktime(&time);
-
-	// Timestamp of DML 2.2 update1
-	strptime("Aug 13 2012 00:12:46", "%b %d %Y %H:%M:%S", &time);
-	const time_t dml_2_2_1_time = mktime(&time);
-
-	// Timestamp of DML 2.3 mirror link
-	strptime("Sep 24 2012 13:13:42", "%b %d %Y %H:%M:%S", &time);
-	const time_t dml_2_3m_time = mktime(&time);
-
-	// Timestamp of DM 2.3
-	strptime("Sep 24 2012 15:51:54", "%b %d %Y %H:%M:%S", &time);
-	const time_t dm_2_3_time = mktime(&time);
-
-	// Timestamp of DML 2.3 main link
-	strptime("Sep 25 2012 03:03:41", "%b %d %Y %H:%M:%S", &time);
-	const time_t dml_2_3_time = mktime(&time);
-
-	// Timestamp of DM 2.4
-	strptime("Oct 21 2012 22:57:12", "%b %d %Y %H:%M:%S", &time);
-	const time_t dm_2_4_time = mktime(&time);
-
-	// Timestamp of DML 2.4
-	strptime("Oct 21 2012 22:57:17", "%b %d %Y %H:%M:%S", &time);
-	const time_t dml_2_4_time = mktime(&time);
-
-	// Timestamp of DM 2.5
-	strptime("Nov  9 2012 21:18:52", "%b %d %Y %H:%M:%S", &time);
-	const time_t dm_2_5_time = mktime(&time);
-
-	// Timestamp of DML 2.5
-	strptime("Nov  9 2012 21:18:56", "%b %d %Y %H:%M:%S", &time);
-	const time_t dml_2_5_time = mktime(&time);
-
-	// Timestamp of DM 2.6.0
-	strptime("Dec  1 2012 01:52:53", "%b %d %Y %H:%M:%S", &time);
-	const time_t dm_2_6_0_time = mktime(&time);
-
-	// Timestamp of DML 2.6
-	strptime("Dec  1 2012 16:22:29", "%b %d %Y %H:%M:%S", &time);
-	const time_t dml_2_6_time = mktime(&time);
-
-	// Timestamp of DM 2.6.1
-	strptime("Dec  1 2012 16:42:34", "%b %d %Y %H:%M:%S", &time);
-	const time_t dm_2_6_1_time = mktime(&time);
-
-	// Timestamp of DM 2.7
-	strptime("Feb 20 2013 14:54:33", "%b %d %Y %H:%M:%S", &time);
-	const time_t dm_2_7_time = mktime(&time);
-
-	// Timestamp of DML 2.7
-	strptime("Feb 21 2013 03:13:49", "%b %d %Y %H:%M:%S", &time);
-	const time_t dml_2_7_time = mktime(&time);
-
-	// Timestamp of DML 2.8
-	strptime("Feb 24 2013 13:30:29", "%b %d %Y %H:%M:%S", &time);
-	const time_t dml_2_8_time = mktime(&time);
-
-	// Timestamp of DM 2.8
-	strptime("Feb 24 2013 14:17:03", "%b %d %Y %H:%M:%S", &time);
-	const time_t dm_2_8_time = mktime(&time);
-
-	// Timestamp of DML 2.9
-	strptime("Apr  5 2013 18:20:33", "%b %d %Y %H:%M:%S", &time);
-	const time_t dml_2_9_time = mktime(&time);
-
-	// Timestamp of DM 2.9
-	strptime("Apr  5 2013 18:29:35", "%b %d %Y %H:%M:%S", &time);
-	const time_t dm_2_9_time = mktime(&time);
-
-
 	// Current installed version
 	gprintf("built on %s\n", releaseDate);
 
+	struct tm time;
 	strptime(releaseDate, "%b %d %Y %H:%M:%S", &time);
 	time_t unixTime = mktime(&time);
 
 	if(currentMIOS == DIOS_MIOS)
 	{
+		// Timestamp of DM 2.0
+		strptime("Jun 23 2012 19:43:21", "%b %d %Y %H:%M:%S", &time);
+		const time_t dm_2_0_time = mktime(&time);
+
+		// Timestamp of DM 2.1
+		strptime("Jul 17 2012 11:25:35", "%b %d %Y %H:%M:%S", &time);
+		const time_t dm_2_1_time = mktime(&time);
+
+		// Timestamp of DM 2.2 initial release
+		strptime("Jul 18 2012 16:57:47", "%b %d %Y %H:%M:%S", &time);
+		const time_t dm_2_2_time = mktime(&time);
+
+		// Timestamp of DM 2.2 update2
+		strptime("Jul 20 2012 14:49:47", "%b %d %Y %H:%M:%S", &time);
+		const time_t dm_2_2_2_time = mktime(&time);
+
+		// Timestamp of DM 2.3
+		strptime("Sep 24 2012 15:51:54", "%b %d %Y %H:%M:%S", &time);
+		const time_t dm_2_3_time = mktime(&time);
+
+		// Timestamp of DM 2.4
+		strptime("Oct 21 2012 22:57:12", "%b %d %Y %H:%M:%S", &time);
+		const time_t dm_2_4_time = mktime(&time);
+
+		// Timestamp of DM 2.5
+		strptime("Nov  9 2012 21:18:52", "%b %d %Y %H:%M:%S", &time);
+		const time_t dm_2_5_time = mktime(&time);
+
+		// Timestamp of DM 2.6.0
+		strptime("Dec  1 2012 01:52:53", "%b %d %Y %H:%M:%S", &time);
+		const time_t dm_2_6_0_time = mktime(&time);
+
+		// Timestamp of DM 2.6.1
+		strptime("Dec  1 2012 16:42:34", "%b %d %Y %H:%M:%S", &time);
+		const time_t dm_2_6_1_time = mktime(&time);
+
+		// Timestamp of DM 2.7
+		strptime("Feb 20 2013 14:54:33", "%b %d %Y %H:%M:%S", &time);
+		const time_t dm_2_7_time = mktime(&time);
+
+		// Timestamp of DM 2.8
+		strptime("Feb 24 2013 14:17:03", "%b %d %Y %H:%M:%S", &time);
+		const time_t dm_2_8_time = mktime(&time);
+
+		// Timestamp of DM 2.9
+		strptime("Apr  5 2013 18:29:35", "%b %d %Y %H:%M:%S", &time);
+		const time_t dm_2_9_time = mktime(&time);
+
 		if(difftime(unixTime, dm_2_9_time) >= 0) 			currentDMLVersion = DML_VERSION_DM_2_9;
 		else if(difftime(unixTime, dm_2_8_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_8;
 		else if(difftime(unixTime, dm_2_7_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_7;
@@ -409,6 +359,61 @@ u8 IosLoader::GetDMLVersion(char* releaseDate)
 	}
 	else if(currentMIOS == DIOS_MIOS_LITE)
 	{
+		// Timestamp of DML r52
+		strptime("Mar 7 2012 19:36:06", "%b %d %Y %H:%M:%S", &time);
+		const time_t dml_r52_time = mktime(&time);
+
+		// Timestamp of DML 1.2
+		strptime("Apr 24 2012 19:44:08", "%b %d %Y %H:%M:%S", &time);
+		const time_t dml_1_2_time = mktime(&time);
+
+		// Timestamp of DML 1.4b
+		strptime("May  7 2012 21:12:47", "%b %d %Y %H:%M:%S", &time);
+		const time_t dml_1_4b_time = mktime(&time);
+
+		// Timestamp of DML 1.5
+		strptime("Jun 14 2012 00:05:09", "%b %d %Y %H:%M:%S", &time);
+		const time_t dml_1_5_time = mktime(&time);
+
+		// Timestamp of DML 2.2 initial release
+		strptime("Aug  6 2012 15:19:17", "%b %d %Y %H:%M:%S", &time);
+		const time_t dml_2_2_time = mktime(&time);
+
+		// Timestamp of DML 2.2 update1
+		strptime("Aug 13 2012 00:12:46", "%b %d %Y %H:%M:%S", &time);
+		const time_t dml_2_2_1_time = mktime(&time);
+
+		// Timestamp of DML 2.3 mirror link
+		strptime("Sep 24 2012 13:13:42", "%b %d %Y %H:%M:%S", &time);
+		const time_t dml_2_3m_time = mktime(&time);
+
+		// Timestamp of DML 2.3 main link
+		strptime("Sep 25 2012 03:03:41", "%b %d %Y %H:%M:%S", &time);
+		const time_t dml_2_3_time = mktime(&time);
+		// Timestamp of DML 2.4
+		strptime("Oct 21 2012 22:57:17", "%b %d %Y %H:%M:%S", &time);
+		const time_t dml_2_4_time = mktime(&time);
+
+		// Timestamp of DML 2.5
+		strptime("Nov  9 2012 21:18:56", "%b %d %Y %H:%M:%S", &time);
+		const time_t dml_2_5_time = mktime(&time);
+
+		// Timestamp of DML 2.6
+		strptime("Dec  1 2012 16:22:29", "%b %d %Y %H:%M:%S", &time);
+		const time_t dml_2_6_time = mktime(&time);
+
+		// Timestamp of DML 2.7
+		strptime("Feb 21 2013 03:13:49", "%b %d %Y %H:%M:%S", &time);
+		const time_t dml_2_7_time = mktime(&time);
+
+		// Timestamp of DML 2.8
+		strptime("Feb 24 2013 13:30:29", "%b %d %Y %H:%M:%S", &time);
+		const time_t dml_2_8_time = mktime(&time);
+
+		// Timestamp of DML 2.9
+		strptime("Apr  5 2013 18:20:33", "%b %d %Y %H:%M:%S", &time);
+		const time_t dml_2_9_time = mktime(&time);
+
 		if(difftime(unixTime, dml_2_9_time) >= 0) 			currentDMLVersion = DML_VERSION_DML_2_9;
 		else if(difftime(unixTime, dml_2_8_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_8;
 		else if(difftime(unixTime, dml_2_7_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_7;

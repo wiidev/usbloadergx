@@ -77,7 +77,7 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 	
 	// DIOS MIOS (Lite) and QuadForce
 	int currentMIOS = IosLoader::GetMIOSInfo();
-	if(currentMIOS == DIOS_MIOS || currentMIOS == DIOS_MIOS_LITE || currentMIOS == QUADFORCE)
+	if(currentMIOS == DIOS_MIOS || currentMIOS == DIOS_MIOS_LITE || currentMIOS == QUADFORCE || currentMIOS == QUADFORCE_USB)
 		return BootDIOSMIOS(gameHdr);
 	
 	// MIOS or Wiigator cMIOS
@@ -431,7 +431,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 	
 	int currentMIOS = IosLoader::GetMIOSInfo();
 	// DIOS MIOS
-	if(currentMIOS == DIOS_MIOS)
+	if(currentMIOS == DIOS_MIOS || currentMIOS == QUADFORCE_USB)
 	{
 		// Check Main GameCube Path location
 		if(strncmp(Settings.GameCubePath, "sd", 2) == 0 || strncmp(DeviceHandler::PathToFSName(Settings.GameCubePath), "FAT", 3) != 0)

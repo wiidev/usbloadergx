@@ -76,6 +76,9 @@ static const char * DMLVersions[] =
 	"v2.9+",	// DML 2.9
 	"v2.9+",	// DM 2.9
 	"v2.0",		// QuadForce v2.0
+	"v3.0",		// QuadForce v3.0
+	"v4.0+",	// QuadForce v4.0 SD
+	"v4.1",		// QuadForce v4.1 USB
 };
 
 
@@ -301,6 +304,8 @@ void WindowCredits()
 		snprintf(GCInfo, sizeof(GCInfo), "DIOS-MIOS Lite %s", DMLVersions[IosLoader::GetDMLVersion()]);
 	else if (currentMIOS == QUADFORCE)
 		snprintf(GCInfo, sizeof(GCInfo), "QuadForce %s", DMLVersions[IosLoader::GetDMLVersion()]);
+	else if (currentMIOS == QUADFORCE_USB)
+		snprintf(GCInfo, sizeof(GCInfo), "QuadForce USB %s", DMLVersions[IosLoader::GetDMLVersion()]);
 		
 	// Check if Devolution is available
 	char DEVO_loader_path[100];

@@ -239,7 +239,7 @@ u32 GCGames::LoadAllGames(void)
 					//! Display only one game if it is present on both SD and USB.
 					if(memcmp(HeaderList[n].id, sdGCList[i].id, 6) == 0)
 					{
-						if(IosLoader::GetMIOSInfo() == DIOS_MIOS) // DIOS MIOS - Show only the game on USB
+						if(IosLoader::GetMIOSInfo() == DIOS_MIOS || IosLoader::GetMIOSInfo() == QUADFORCE_USB) // DIOS MIOS - Show only the game on USB
 						{
 							break;
 						}
