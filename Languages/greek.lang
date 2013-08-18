@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-17 13:57+0100\n"
+"POT-Creation-Date: 2013-08-18 15:50+0200\n"
 "Last-Translator: nakata6790\n"
 "Language-Team: nakata6790 (aka0107@gmail.com)\n"
 "MIME-Version: 1.0\n"
@@ -493,6 +493,12 @@ msgstr "ÔñïðïðïéçìÝíá"
 msgid "Customs/Original"
 msgstr "ÔñïðïðïéçìÝíá/ÁõèåíôéêÜ"
 
+msgid "DEVO D Buttons"
+msgstr ""
+
+msgid "DEVO F-Zero AX"
+msgstr ""
+
 msgid "DEVO Force Widescreen"
 msgstr ""
 
@@ -501,6 +507,9 @@ msgstr ""
 
 msgid "DEVO MemCard Emulation"
 msgstr "åîïìïßùóç ôçò memory card áðü ôï devolution"
+
+msgid "DEVO Timer Fix"
+msgstr ""
 
 msgid "DML Auto"
 msgstr "áõôüìáôá áðü ôï DML"
@@ -717,6 +726,9 @@ msgstr "ÈÝëåôå íá óõã÷ñïíßóåôå ôïí êåíü ÷þñï áð
 
 msgid "Do you wish to update/download all language files?"
 msgstr "ÈÝëåôå íá áíáâáèìßóåôå/êáôåâÜóåôå üëá ôá áñ÷åßá ìåôáöñÜóåùí;"
+
+msgid "Dol Video Patch"
+msgstr ""
 
 msgid "Download"
 msgstr "ËÞøç"
@@ -1984,6 +1996,9 @@ msgstr ""
 
 msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
 msgstr "Ãéá áíáðáñáãùãÞ ôßôëùí Gamecube ìå ôï ðñüãñáììá devolution ÷ñåéÜæåóôå ôï áñ÷åßï loader.bin óôï êáèïñéìÝíï ìïíïðÜôé ôïõ devolution."
+
+msgid "To run GameCube games with Devolution you need to use a FAT32 partition."
+msgstr ""
 
 msgid "Tooltip Delay"
 msgstr "ÊáèõóôÝñçóç åìöÜíéóçò åôéêåôþí"

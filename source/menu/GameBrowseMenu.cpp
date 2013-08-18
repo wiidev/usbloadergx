@@ -109,9 +109,9 @@ GameBrowseMenu::GameBrowseMenu()
 	trigHome = new GuiTrigger;
 	trigHome->SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, PAD_BUTTON_START);
 	trig2 = new GuiTrigger;
-	trig2->SetButtonOnlyTrigger(-1, WPAD_BUTTON_2 | WPAD_CLASSIC_BUTTON_X, 0);
+	trig2->SetButtonOnlyTrigger(-1, WPAD_BUTTON_2 | WPAD_CLASSIC_BUTTON_X, PAD_BUTTON_Y);
 	trig1 = new GuiTrigger;
-	trig1->SetButtonOnlyTrigger(-1, WPAD_BUTTON_1 | WPAD_CLASSIC_BUTTON_Y, 0);
+	trig1->SetButtonOnlyTrigger(-1, WPAD_BUTTON_1 | WPAD_CLASSIC_BUTTON_Y, PAD_BUTTON_X);
 
 	usedSpaceTxt = new GuiText(" ", 18, thColor("r=55 g=190 b=237 a=255 - hdd info color"));
 	usedSpaceTxt->SetAlignment(thAlign("center - hdd info align hor"), thAlign("top - hdd info align ver"));

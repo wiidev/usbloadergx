@@ -267,6 +267,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	//! Setup game configuration from game settings. If no game settings exist use global/default.
 	GameCFG * game_cfg = GameSettings.GetGameCFG(gameHeader.id);
 	u8 videoChoice = game_cfg->video == INHERIT ? Settings.videomode : game_cfg->video;
+	u8 videoPatchDolChoice = game_cfg->videoPatchDol == INHERIT ? Settings.videoPatchDol : game_cfg->videoPatchDol;
 	u8 aspectChoice = game_cfg->aspectratio == INHERIT ? Settings.GameAspectRatio : game_cfg->aspectratio;
 	u8 languageChoice = game_cfg->language == INHERIT ? Settings.language : game_cfg->language;
 	u8 ocarinaChoice = game_cfg->ocarina == INHERIT ? Settings.ocarina : game_cfg->ocarina;
@@ -400,7 +401,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 
 	//! Do all the game patches
 	gprintf("Applying game patches...\n");
-	gamepatches(videoChoice, aspectChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, fix002, returnToChoice);
+	gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, fix002, returnToChoice);
 
 	//! Load Code handler if needed
 	load_handler(Hooktype, WiirdDebugger, Settings.WiirdDebuggerPause);
@@ -416,7 +417,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 
 	GameCFG * game_cfg = GameSettings.GetGameCFG(gameHdr->id);
 	u8 videoChoice = game_cfg->video == INHERIT ? Settings.videomode : game_cfg->video;
-	u8 languageChoice = game_cfg->language == INHERIT ? 6 : game_cfg->language;
+	s8 languageChoice = game_cfg->language == INHERIT ? Settings.language - 1 : game_cfg->language;
 	u8 ocarinaChoice = game_cfg->ocarina == INHERIT ? Settings.ocarina : game_cfg->ocarina;
 	u8 dmlVideoChoice = game_cfg->DMLVideo == INHERIT ? Settings.DMLVideo : game_cfg->DMLVideo;
 	u8 dmlProgressivePatch = game_cfg->DMLProgPatch == INHERIT ? Settings.DMLProgPatch : game_cfg->DMLProgPatch;
@@ -627,7 +628,10 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 	if(dmlWidescreenChoice)
 		dml_config->Config |= DML_CFG_FORCE_WIDE;
 	if(dmlScreenshotChoice)
+	{
 		dml_config->Config |= DML_CFG_SCREENSHOT;
+		dml_config->Config |= DML_CFG_PADHOOK;
+	}
 	if(bootDisc2 && IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_6_0)
 		dml_config->Config |= DML_CFG_BOOT_DISC2;
 
@@ -646,8 +650,9 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		}
 		else											// Force user choice
 		{
-			dml_config->VideoMode = DML_VID_FORCE;
 			Disc_SelectVMode(videoChoice, false, &dml_config->VideoMode);
+			if(!(dml_config->VideoMode & DML_VID_DML_AUTO))
+				dml_config->VideoMode |= DML_VID_FORCE;
 		}	
 		Disc_SetVMode();
 	}
@@ -664,43 +669,10 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 	gprintf("DML: setup configuration 0x%X\n", dml_config->Config);
 	gprintf("DML: setup video mode 0x%X\n", dml_config->VideoMode);
 
-	syssram *sram = __SYS_LockSram();
-	if(dml_config->VideoMode & DML_VID_FORCE_PROG || dml_config->VideoMode & DML_VID_PROG_PATCH) {
-		sram->flags |= 0x80; //set progressive flag
-	}
-	else {
-		sram->flags &= 0x7F; //clear progressive flag
-	}
-	// setup video mode flags
-	if (*Video_Mode == VI_NTSC) {
-		sram->flags &= ~1;	// Clear bit 0 to set the video mode to NTSC
-		sram->ntd &= 0xBF; //clear pal60 flag
-	}
-	else {
-		sram->flags |= 1;	// Set bit 0 to set the video mode to PAL
-		sram->ntd |= 0x40; //set pal60 flag
-	}
-	
-	// Set language flag
-	if(languageChoice <= GC_DUTCH)
-	{
-		sram->lang = languageChoice;
-	}	
-	else // console default
-	{
-		sram->lang = GC_ENGLISH;
-		if(CONF_GetLanguage() >= CONF_LANG_ENGLISH && CONF_GetLanguage() <= CONF_LANG_DUTCH)
-		{
-			sram->lang = CONF_GetLanguage()-1;
-		}
-	}
-	gprintf("DML: setup language 0x%X\n", sram->lang);
+	// Set Sram flags
+	bool progressive = (dml_config->VideoMode & DML_VID_FORCE_PROG) || (dml_config->VideoMode & DML_VID_PROG_PATCH);
+	PatchSram(languageChoice, true, progressive);
 
-	__SYS_UnlockSram(1); // 1 -> write changes
-
-	while(!__SYS_SyncSram())
-		usleep(100);
-	
 	/* NTSC-J Patch */	// Thanks to Fix94
 	u8 *diskid = (u8 *) Disc_ID;
 	if(dmlJPNPatchChoice && diskid[3] == 'J')
@@ -713,16 +685,17 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 
 int GameBooter::BootDevolution(struct discHdr *gameHdr)
 {
+	const char *RealPath = GCGames::Instance()->GetPath((const char *) gameHdr->id);
 
-	// check the settings
 	GameCFG * game_cfg = GameSettings.GetGameCFG(gameHdr->id);
 	u8 videoChoice = game_cfg->video == INHERIT ? Settings.videomode : game_cfg->video;
+	int languageChoice = game_cfg->language == INHERIT ? Settings.language -1 : game_cfg->language;
 	u8 devoMCEmulation = game_cfg->DEVOMCEmulation == INHERIT ? Settings.DEVOMCEmulation : game_cfg->DEVOMCEmulation;
 	u8 devoActivityLEDChoice = game_cfg->DEVOActivityLED == INHERIT ? Settings.DEVOActivityLED : game_cfg->DEVOActivityLED;
 	u8 devoWidescreenChoice = game_cfg->DEVOWidescreen == INHERIT ? Settings.DEVOWidescreen : game_cfg->DEVOWidescreen;
 	u8 devoFZeroAXChoice = game_cfg->DEVOFZeroAX == INHERIT ? Settings.DEVOFZeroAX : game_cfg->DEVOFZeroAX;
 	u8 devoTimerFixChoice = game_cfg->DEVOTimerFix == INHERIT ? Settings.DEVOTimerFix : game_cfg->DEVOTimerFix;
-	
+	u8 devoDButtonsChoice = game_cfg->DEVODButtons == INHERIT ? Settings.DEVODButtons : game_cfg->DEVODButtons;
 
 	if(gameHdr->type == TYPE_GAME_GC_DISC)
 	{
@@ -733,6 +706,12 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	if(!CheckAHBPROT())
 	{
 		WindowPrompt(tr("Error:"), tr("Devolution requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."), tr("OK"));
+		return 0;
+	}
+
+	if(strncmp(DeviceHandler::PathToFSName(RealPath), "FAT", 3) != 0)
+	{
+		WindowPrompt(tr("Error:"), tr("To run GameCube games with Devolution you need to use a FAT32 partition."), tr("OK"));
 		return 0;
 	}
 
@@ -777,10 +756,6 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	// Devolution config
 	DEVO_CGF *devo_config = (DEVO_CGF*)0x80000020;
 
-
-	// Get the Game's data
-	const char *RealPath = GCGames::Instance()->GetPath((const char *) gameHdr->id);
-	
 	char disc1[100];
 	char disc2[100];
 	bool multiDisc = false;
@@ -834,6 +809,8 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 		devo_config->options |= DEVO_CFG_FZERO_AX;
 	if(devoTimerFixChoice && DEVO_version >= 196)
 		devo_config->options |= DEVO_CFG_TIMER_FIX;
+	if(devoDButtonsChoice && DEVO_version >= 200)
+		devo_config->options |= DEVO_CFG_D_BUTTONS;
 	
 	// check memory card
 	if(devoMCEmulation == DEVO_MC_OFF)
@@ -898,6 +875,8 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	Disc_SelectVMode(videoChoice, true, NULL);
 	Disc_SetVMode();
 
+	// Set sram flags
+	PatchSram(languageChoice, false, false);
 
 	// flush disc ID and Devolution config out to memory
 	DCFlushRange(lowmem, 64);
@@ -916,4 +895,70 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	LAUNCH_DEVO();
 	_CPU_ISR_Restore( cpu_isr );
 	return 0;
+}
+
+void GameBooter::PatchSram(int language, bool patchVideoMode, bool progressive)
+{
+	syssram *sram = __SYS_LockSram();
+
+	// Setup language flag
+	if(language >= GC_ENGLISH && language <= GC_DUTCH)
+	{
+		sram->lang = language;
+	}
+	else // console default
+	{
+		sram->lang = GC_ENGLISH;
+		if(CONF_GetLanguage() >= CONF_LANG_ENGLISH && CONF_GetLanguage() <= CONF_LANG_DUTCH)
+		{
+			sram->lang = CONF_GetLanguage()-1;
+		}
+	}
+	gprintf("Sram: Language set to 0x%X\n", sram->lang);
+
+	// Setup Video mode flags
+	if(patchVideoMode)
+	{
+		if(progressive)
+			sram->flags |= 0x80; //set progressive flag
+		else
+			sram->flags &= 0x7F; //clear progressive flag
+
+		if (*Video_Mode == VI_NTSC)
+		{
+			sram->flags &= ~1;	// Clear bit 0 to set the video mode to NTSC
+			sram->ntd &= 0xBF; //clear pal60 flag
+		}
+		else 
+		{
+			sram->flags |= 1;	// Set bit 0 to set the video mode to PAL
+			sram->ntd |= 0x40; //set pal60 flag
+		}
+
+		gprintf("Sram: flags set to 0x%X\n", sram->flags);
+		gprintf("Sram: ntd set to 0x%X\n", sram->ntd);
+	}
+
+	__SYS_UnlockSram(1); // 1 -> write changes
+	while(!__SYS_SyncSram())
+		usleep(100);
+
+
+	// Log Sram's first 20 bytes
+/*	char srambuff[64];
+	sram = __SYS_LockSram();
+	memcpy(srambuff, sram, 20);
+	__SYS_UnlockSram(0);
+
+	int i;
+	gprintf("SRAM Hex View\n\n");
+	gprintf("     \t\t 0   1   2   3   4   5   6   7   8   9   A   B   C   D   E   F\n");
+	for (i=0;i<20;i++)
+	{
+		if( (i%16) == 0 )
+			gprintf("\n0x%d0h\t\t", i/16);
+		
+		gprintf("%02X  ", srambuff[i]);
+	}
+*/
 }

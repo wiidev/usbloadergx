@@ -73,11 +73,13 @@ static const char * DMLVersions[] =
 	"v2.7",		// DML 2.7
 	"v2.8",		// DML 2.8
 	"v2.8",		// DM 2.8
-	"v2.9+",	// DML 2.9
-	"v2.9+",	// DM 2.9
+	"v2.9",		// DML 2.9
+	"v2.9",		// DM 2.9
 	"v2.0",		// QuadForce v2.0
 	"v3.0",		// QuadForce v3.0
 	"v4.0+",	// QuadForce v4.0 SD
+	"v2.10+",	// DML 2.10
+	"v2.10+",	// DM 2.10
 	"v4.1",		// QuadForce v4.1 USB
 };
 

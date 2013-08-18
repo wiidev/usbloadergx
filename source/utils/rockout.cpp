@@ -11,6 +11,7 @@ void rockout(struct discHdr *header)
 	HaltGui();
 
 	if (!rockoutSet && header &&
+		header->id[0] != 'W' && header->id[0] != 'G' && // Exclude Wiiware and GameCube games
 		(   strcasestr(GameTitles.GetTitle(header), "guitar")
 		 || strcasestr(GameTitles.GetTitle(header), "band")
 		 || strcasestr(GameTitles.GetTitle(header), "rock")))

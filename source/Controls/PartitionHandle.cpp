@@ -246,7 +246,7 @@ int PartitionHandle::FindPartitions()
 	}
 
 	// If this is not the device's master boot record
-	if (mbr->signature != MBR_SIGNATURE)
+	if (mbr->signature != MBR_SIGNATURE && mbr->signature != MBR_SIGNATURE_MOD)
 	{
 		// Check if the device has only one WBFS partition without a table.
 		wbfs_head_t *head = (wbfs_head_t *) mbr;

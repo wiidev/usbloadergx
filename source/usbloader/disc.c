@@ -28,29 +28,29 @@ extern u32 AppEntrypoint;
 /* Disc pointers */
 static u32 *buffer = (u32 *) 0x93000000;
 static u8 *diskid = (u8 *) Disc_ID;
-static GXRModeObj *rmode = NULL;
 static u32 rmode_reg = 0;
+GXRModeObj *rmode = NULL;
 
 void Disc_SetLowMem(void)
 {
 	/* Setup low memory */
-	*Sys_Magic = 0x0D15EA5E; // Standard Boot Code
-	*Sys_Version = 0x00000001; // Version
-	*Arena_L = 0x00000000; // Arena Low
-	*BI2 = 0x817E5480; // BI2
-	*Bus_Speed = 0x0E7BE2C0; // Console Bus Speed
-	*CPU_Speed = 0x2B73A840; // Console CPU Speed
+	*Sys_Magic = 0x0D15EA5E;			// Standard Boot Code
+	*Sys_Version = 0x00000001;			// Version
+	*Arena_L = 0x00000000;				// Arena Low
+	*BI2 = 0x817E5480;					// BI2
+	*Bus_Speed = 0x0E7BE2C0;			// Console Bus Speed
+	*CPU_Speed = 0x2B73A840;			// Console CPU Speed
 
 	/* Setup low memory */
-	*Assembler = 0x38A00040; // Assembler
-	*(u32 *) 0x800000E4 = 0x80431A80;
-	*Dev_Debugger = 0x81800000; // Dev Debugger Monitor Address
-	*Simulated_Mem = 0x01800000; // Simulated Memory Size
-	*(vu32 *) 0xCD00643C = 0x00000000; // 32Mhz on Bus
+	*Assembler = 0x38A00040;			// Assembler
+	*(u32 *) 0x800000E4 = 0x80431A80;	// OS_Thread
+	*Dev_Debugger = 0x81800000;			// Dev Debugger Monitor Address
+	*Simulated_Mem = 0x01800000;		// Simulated Memory Size
+	*(vu32 *) 0xCD00643C = 0x00000000;	// 32Mhz on Bus
 
 	int iosVer = IOS_GetVersion();
 	if(iosVer != 222 && iosVer != 223 && iosVer != 224 && iosVer != 225 && IOS_GetRevision() >= 18)
-		*GameID_Address = 0x80000000; // Game ID Address
+		*GameID_Address = 0x80000000;	// Game ID Address
 
 	/* Copy disc ID */
 	memcpy((void *) Online_Check, (void *) Disc_ID, 4);
@@ -92,7 +92,7 @@ void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode)
 			if(dml_VideoMode)
 			{
 				rmode = progressive ? &TVEurgb60Hz480Prog : (PAL60 ? &TVEurgb60Hz480IntDf : &TVPal528IntDf);
-				*dml_VideoMode |= progressive ? DML_VID_FORCE_PROG : (PAL60 ? DML_VID_FORCE_PAL60 : DML_VID_FORCE_PAL50);
+				*dml_VideoMode = progressive ? DML_VID_FORCE_PROG : (PAL60 ? DML_VID_FORCE_PAL60 : DML_VID_FORCE_PAL50);
 			}
 			break;
 
@@ -102,7 +102,7 @@ void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode)
 
 		case CONF_VIDEO_NTSC:
 			rmode_reg = VI_NTSC;
-			if(dml_VideoMode) *dml_VideoMode |= DML_VID_FORCE_NTSC;
+			if(dml_VideoMode) *dml_VideoMode = DML_VID_FORCE_NTSC;
 			break;
 	}
 
@@ -128,7 +128,7 @@ void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode)
 						{
 							rmode_reg = PAL60 ? VI_EURGB60 : VI_PAL;
 							rmode = progressive ? &TVEurgb60Hz480Prog : (PAL60 ? &TVEurgb60Hz480IntDf : &TVPal528IntDf);
-							*dml_VideoMode |= progressive ? DML_VID_FORCE_PROG : (PAL60 ? DML_VID_FORCE_PAL60 : DML_VID_FORCE_PAL50);
+							*dml_VideoMode = progressive ? DML_VID_FORCE_PROG : (PAL60 ? DML_VID_FORCE_PAL60 : DML_VID_FORCE_PAL50);
 						}
 					break;
 				// NTSC
@@ -143,7 +143,7 @@ void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode)
 						{
 							rmode_reg = VI_NTSC;
 							rmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
-							*dml_VideoMode |= DML_VID_FORCE_NTSC;
+							*dml_VideoMode = DML_VID_FORCE_NTSC;
 						}
 					break;
 				default:
@@ -154,7 +154,7 @@ void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode)
 		case VIDEO_MODE_PAL50: // PAL50
 			rmode =  &TVPal528IntDf;
 			rmode_reg = VI_PAL;
-			if(dml_VideoMode) *dml_VideoMode |= DML_VID_FORCE_PAL50;
+			if(dml_VideoMode) *dml_VideoMode = DML_VID_FORCE_PAL50;
 			break;
 		case VIDEO_MODE_PAL60: // PAL60
 			rmode = progressive ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
@@ -162,13 +162,13 @@ void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode)
 			if(dml_VideoMode)
 			{
 				rmode = progressive ? &TVEurgb60Hz480Prog : &TVEurgb60Hz480IntDf;
-				*dml_VideoMode |= progressive ? DML_VID_FORCE_PROG : DML_VID_FORCE_PAL60;
+				*dml_VideoMode = progressive ? DML_VID_FORCE_PROG : DML_VID_FORCE_PAL60;
 			}
 			break;
 		case VIDEO_MODE_NTSC: // NTSC
 			rmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
 			rmode_reg = VI_NTSC;
-			if(dml_VideoMode) *dml_VideoMode |= progressive ? DML_VID_FORCE_PROG : DML_VID_FORCE_NTSC;
+			if(dml_VideoMode) *dml_VideoMode = progressive ? DML_VID_FORCE_PROG : DML_VID_FORCE_NTSC;
 			break;
 		case VIDEO_MODE_PAL480P:
 			rmode = &TVNtsc480Prog;
@@ -176,13 +176,13 @@ void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode)
 			if(dml_VideoMode)
 			{
 				rmode = &TVEurgb60Hz480Prog;
-				*dml_VideoMode |= DML_VID_FORCE_PROG | DML_VID_PROG_PATCH;
+				*dml_VideoMode = DML_VID_FORCE_PROG | DML_VID_PROG_PATCH;
 			}
 			break;
 		case VIDEO_MODE_NTSC480P:
 			rmode = &TVNtsc480Prog;
 			rmode_reg = VI_NTSC;
-			if(dml_VideoMode) *dml_VideoMode |= DML_VID_FORCE_PROG | DML_VID_PROG_PATCH;
+			if(dml_VideoMode) *dml_VideoMode = DML_VID_FORCE_PROG | DML_VID_PROG_PATCH;
 			break;
 		case VIDEO_MODE_SYSDEFAULT: // AUTO PATCH TO SYSTEM
 			break;
@@ -204,6 +204,8 @@ void Disc_SetVMode(void)
 	VIDEO_Flush();
 	VIDEO_WaitVSync();
 	if (rmode->viTVMode & VI_NON_INTERLACE)
+		VIDEO_WaitVSync();
+	else while(VIDEO_GetNextField())
 		VIDEO_WaitVSync();
 }
 

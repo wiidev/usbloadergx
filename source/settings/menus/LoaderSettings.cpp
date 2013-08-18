@@ -63,6 +63,14 @@ static const char * VideoModeText[] =
 	trNOOP( "Force NTSC480p" ),
 };
 
+static const char * VideoPatchDolText[] =
+{
+	trNOOP( "OFF" ),
+	trNOOP( "Region Patch" ),
+	trNOOP( "ON" ),
+	trNOOP( "All" ),
+};
+
 static const char * LanguageText[] =
 {
 	trNOOP( "Japanese" ),
@@ -116,12 +124,13 @@ static const char * GCMode[] =
 	trNOOP( "Devolution" ),
 };
 
-static const char * GCSourceText[] =
+static const char * GCSourceText[][3] =
 {
-	trNOOP( "Main Path" ),
-	trNOOP( "SD Path" ),
-	trNOOP( "Auto" ),
-	trNOOP( "Both" ),
+	{ trNOOP( "Main Path" ), "", "" },
+	{ trNOOP( "SD Path" ), "", "" },
+	{ trNOOP( "Auto" ), "", "" },
+	{ trNOOP( "Main Path" ), "/", trNOOP( "SD Path" ) },
+	{ trNOOP( "SD Path" ), "/", trNOOP( "Main Path" ) },
 };
 
 static const char * DMLVideoText[] =
@@ -158,8 +167,9 @@ LoaderSettings::LoaderSettings()
 	int Idx = 0;
 
 	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
-	Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
+	Options->SetName(Idx++, "%s", tr( "Dol Video Patch" ));
 	Options->SetName(Idx++, "%s", tr( "Sneek Video Patch" ));
+	Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
 	Options->SetName(Idx++, "%s", tr( "Aspect Ratio" ));
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
 	Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
@@ -192,6 +202,7 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "DEVO LED Activity" ));
 	Options->SetName(Idx++, "%s", tr( "DEVO F-Zero AX" ));
 	Options->SetName(Idx++, "%s", tr( "DEVO Timer Fix" ));
+	Options->SetName(Idx++, "%s", tr( "DEVO D Buttons" ));
 
 	SetOptionValues();
 
@@ -226,11 +237,14 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: Video Mode
 	Options->SetValue(Idx++, "%s", tr(VideoModeText[Settings.videomode]));
 
-	//! Settings: VIDTV Patch
-	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.videopatch] ));
+	//! Settings: Dol Video Patch
+	Options->SetValue(Idx++, "%s", tr( VideoPatchDolText[Settings.videoPatchDol] ));
 
 	//! Settings: Sneek Video Patch
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.sneekVideoPatch] ));
+
+	//! Settings: VIDTV Patch
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.videopatch] ));
 
 	//! Settings: Aspect Ratio
 	Options->SetValue(Idx++, "%s", tr( AspectText[Settings.GameAspectRatio] ));
@@ -289,7 +303,8 @@ void LoaderSettings::SetOptionValues()
 	Options->SetValue(Idx++, "%s", tr(GCMode[Settings.GameCubeMode]));
 
 	//! Settings: GameCube Source
-	Options->SetValue(Idx++, "%s", tr(GCSourceText[Settings.GameCubeSource]));
+	Options->SetValue(Idx++, "%s%s%s", tr(GCSourceText[Settings.GameCubeSource][0]),
+	                GCSourceText[Settings.GameCubeSource][1], tr(GCSourceText[Settings.GameCubeSource][2]));
 
 	//! Settings: DML Video Mode
 	Options->SetValue(Idx++, "%s", tr(DMLVideoText[Settings.DMLVideo]));
@@ -336,6 +351,9 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: DEVO Timer Fix
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DEVOTimerFix]));
 
+	//! Settings: DEVO Direct Button Mapping
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DEVODButtons]));
+
 }
 
 int LoaderSettings::GetMenuInternal()
@@ -353,16 +371,22 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.videomode >= VIDEO_MODE_MAX) Settings.videomode = 0;
 	}
 
-	//! Settings: VIDTV Patch
-	else if (ret == ++Idx)
+	//! Settings: Dol Video Patch
+	if (ret == ++Idx)
 	{
-		if (++Settings.videopatch >= MAX_ON_OFF) Settings.videopatch = 0;
+		if (++Settings.videoPatchDol >= VIDEO_PATCH_DOL_MAX) Settings.videoPatchDol = 0;
 	}
 
 	//! Settings: Sneek Video Patch
 	else if (ret == ++Idx )
 	{
 		if (++Settings.sneekVideoPatch >= MAX_ON_OFF) Settings.sneekVideoPatch = 0;
+	}
+
+	//! Settings: VIDTV Patch
+	else if (ret == ++Idx)
+	{
+		if (++Settings.videopatch >= MAX_ON_OFF) Settings.videopatch = 0;
 	}
 
 	//! Settings: Aspect Ratio
@@ -579,10 +603,16 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.DEVOFZeroAX >= MAX_ON_OFF) Settings.DEVOFZeroAX = 0;
 	}
 
-	//! Settings: DEVO Activity LED
+	//! Settings: DEVO Timer Fix
 	else if (ret == ++Idx)
 	{
 		if (++Settings.DEVOTimerFix >= MAX_ON_OFF) Settings.DEVOTimerFix = 0;
+	}
+
+//! Settings: DEVO Direct Button Mapping
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DEVODButtons >= MAX_ON_OFF) Settings.DEVODButtons = 0;
 	}
 
 	SetOptionValues();

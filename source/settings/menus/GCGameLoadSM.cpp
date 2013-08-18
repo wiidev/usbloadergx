@@ -181,6 +181,7 @@ void GCGameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "DEVO LED Activity" ));
 	Options->SetName(Idx++, "%s", tr( "DEVO F-Zero AX" ));
 	Options->SetName(Idx++, "%s", tr( "DEVO Timer Fix" ));
+	Options->SetName(Idx++, "%s", tr( "DEVO D Buttons" ));
 }
 
 void GCGameLoadSM::SetOptionValues()
@@ -201,8 +202,9 @@ void GCGameLoadSM::SetOptionValues()
 
 	//! Settings: Game Language
 	if(GameConfig.language == INHERIT)
-		GameConfig.language = GC_LANG_CONSOLE_DEFAULT;
-	Options->SetValue(Idx++, "%s", tr(LanguageText[GameConfig.language]));
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(LanguageText[GameConfig.language]));
 	
 	//! Settings: Ocarina
 	if(GameConfig.ocarina == INHERIT)
@@ -321,6 +323,11 @@ void GCGameLoadSM::SetOptionValues()
 	else
 		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVOTimerFix]));
 
+	//! Settings: DEVO Direct Button Mapping
+	if(GameConfig.DEVODButtons == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVODButtons]));
 }
 
 int GCGameLoadSM::GetMenuInternal()
@@ -369,7 +376,7 @@ int GCGameLoadSM::GetMenuInternal()
 	//! Settings: Game Language
 	else if (ret == ++Idx)
 	{
-		if (++GameConfig.language >= GC_MAX_LANGUAGE) GameConfig.language = GC_ENGLISH;
+		if (++GameConfig.language >= GC_MAX_LANGUAGE) GameConfig.language = INHERIT;
 	}
 
 	//! Settings: Ocarina
@@ -478,6 +485,12 @@ int GCGameLoadSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.DEVOTimerFix >= MAX_ON_OFF) GameConfig.DEVOTimerFix = INHERIT;
+	}
+
+	//!Settings: DEVO Direct Button Mapping
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.DEVODButtons >= MAX_ON_OFF) GameConfig.DEVODButtons = INHERIT;
 	}
 
 	SetOptionValues();

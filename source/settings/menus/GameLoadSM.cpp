@@ -54,6 +54,14 @@ static const char * VideoModeText[] =
 	trNOOP( "Force NTSC480p" ),
 };
 
+static const char * VideoPatchDolText[] =
+{
+	trNOOP( "OFF" ),
+	trNOOP( "Region Patch" ),
+	trNOOP( "ON" ),
+	trNOOP( "All" ),
+};
+
 static const char * AspectText[] =
 {
 	trNOOP( "Force 4:3" ),
@@ -174,8 +182,9 @@ void GameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Game Lock" ));
 	Options->SetName(Idx++, "%s", tr( "Favorite Level" ));
 	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
-	Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
+	Options->SetName(Idx++, "%s", tr( "Dol Video Patch" ));
 	Options->SetName(Idx++, "%s", tr( "Sneek Video Patch" ));
+	Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
 	Options->SetName(Idx++, "%s", tr( "Aspect Ratio" ));
 	Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
@@ -221,17 +230,23 @@ void GameLoadSM::SetOptionValues()
 	else
 		Options->SetValue(Idx++, "%s", tr(VideoModeText[GameConfig.video]));
 
-	//! Settings: VIDTV Patch
-	if(GameConfig.vipatch == INHERIT)
+	//! Settings: Dol Video Patch
+	if(GameConfig.videoPatchDol == INHERIT)
 		Options->SetValue(Idx++, tr("Use global"));
 	else
-		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.vipatch]));
+		Options->SetValue(Idx++, "%s", tr(VideoPatchDolText[GameConfig.videoPatchDol]));
 
 	//! Settings: Sneek Video Patch
 	if(GameConfig.sneekVideoPatch == INHERIT)
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.sneekVideoPatch]));
+
+	//! Settings: VIDTV Patch
+	if(GameConfig.vipatch == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.vipatch]));
 
 	//! Settings: Aspect Ratio
 	if(GameConfig.aspectratio == INHERIT)
@@ -385,16 +400,22 @@ int GameLoadSM::GetMenuInternal()
 		if (++GameConfig.video >= VIDEO_MODE_MAX) GameConfig.video = INHERIT;
 	}
 
-	//! Settings: VIDTV Patch
-	if (ret == ++Idx)
+	//! Settings: Dol Video Patch
+	else if (ret == ++Idx)
 	{
-		if (++GameConfig.vipatch >= MAX_ON_OFF) GameConfig.vipatch = INHERIT;
+		if (++GameConfig.videoPatchDol >= VIDEO_PATCH_DOL_MAX) GameConfig.videoPatchDol = INHERIT;
 	}
 
 	//! Settings: Sneek Video Patch
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.sneekVideoPatch >= MAX_ON_OFF) GameConfig.sneekVideoPatch = INHERIT;
+	}
+
+	//! Settings: VIDTV Patch
+	if (ret == ++Idx)
+	{
+		if (++GameConfig.vipatch >= MAX_ON_OFF) GameConfig.vipatch = INHERIT;
 	}
 
 	//! Settings: Aspect Ratio

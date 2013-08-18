@@ -92,6 +92,7 @@ void CSettings::SetDefault()
 	godmode = 1;
 	videomode = VIDEO_MODE_DISCDEFAULT;
 	videopatch = OFF;
+	videoPatchDol = OFF;
 	language = CONSOLE_DEFAULT;
 	ocarina = OFF;
 	hddinfo = CLOCK_HR12;
@@ -185,6 +186,7 @@ void CSettings::SetDefault()
 	DEVOActivityLED = ON;
 	DEVOFZeroAX = OFF;
 	DEVOTimerFix = OFF;
+	DEVODButtons = OFF;
 	GCInstallCompressed = OFF;
 	GCInstallAligned = OFF;
 }
@@ -273,6 +275,7 @@ bool CSettings::Save()
 	fprintf(file, "godmode = %d\n", godmode);
 	fprintf(file, "videomode = %d\n", videomode);
 	fprintf(file, "videopatch = %d\n", videopatch);
+	fprintf(file, "videoPatchDol = %d\n", videoPatchDol);
 	fprintf(file, "language = %d\n", language);
 	fprintf(file, "ocarina = %d\n", ocarina);
 	fprintf(file, "hddinfo = %d\n", hddinfo);
@@ -417,6 +420,7 @@ bool CSettings::Save()
 	fprintf(file, "DEVOActivityLED = %d\n", DEVOActivityLED);
 	fprintf(file, "DEVOFZeroAX = %d\n", DEVOFZeroAX);
 	fprintf(file, "DEVOTimerFix = %d\n", DEVOTimerFix);
+	fprintf(file, "DEVODButtons = %d\n", DEVODButtons);
 	fprintf(file, "DEVOLoaderPath = %s\n", DEVOLoaderPath);
 	fprintf(file, "GCInstallCompressed = %d\n", GCInstallCompressed);
 	fprintf(file, "GCInstallAligned = %d\n", GCInstallAligned);
@@ -441,6 +445,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "videopatch") == 0)
 	{
 		videopatch = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "videoPatchDol") == 0)
+	{
+		videoPatchDol = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "language") == 0)
@@ -890,6 +899,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "DEVOTimerFix") == 0)
 	{
 		DEVOTimerFix = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "DEVODButtons") == 0)
+	{
+		DEVODButtons = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "DEVOLoaderPath") == 0)

@@ -73,6 +73,15 @@ enum
 
 enum
 {
+	VIDEO_PATCH_DOL_OFF,
+	VIDEO_PATCH_DOL_REGION,
+	VIDEO_PATCH_DOL_ON,
+	VIDEO_PATCH_DOL_ALL,
+	VIDEO_PATCH_DOL_MAX,
+};
+
+enum
+{
 	ASPECT_FORCE_4_3,
 	ASPECT_FORCE_16_9,
 	ASPECT_SYSTEM_DEFAULT,
@@ -285,7 +294,8 @@ enum
 	GC_SOURCE_MAIN,
 	GC_SOURCE_SD,
 	GC_SOURCE_AUTO,
-	// GC_SOURCE_BOTH,	// GCGames::getPath(GameID) always returns the first encountered path in the gameList
+	GC_SOURCE_MAIN_SD,
+	GC_SOURCE_SD_MAIN,
 	CG_SOURCE_MAX_CHOICE
 	
 };

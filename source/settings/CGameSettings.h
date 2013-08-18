@@ -11,6 +11,7 @@ typedef struct _GameCFG
 {
 	char id[7];
 	short video;
+	short videoPatchDol;
 	short aspectratio;
 	short language;
 	short ocarina;
@@ -45,12 +46,14 @@ typedef struct _GameCFG
 	short DEVOActivityLED;
 	short DEVOFZeroAX;
 	short DEVOTimerFix;
+	short DEVODButtons;
 	short Locked;
 
 	void operator=(const struct _GameCFG &game)
 	{
 		memcpy(this->id, game.id, sizeof(game.id));
 		this->video = game.video;
+		this->videoPatchDol = game.videoPatchDol;
 		this->aspectratio = game.aspectratio;
 		this->language = game.language;
 		this->ocarina = game.ocarina;
@@ -85,6 +88,7 @@ typedef struct _GameCFG
 		this->DEVOActivityLED = game.DEVOActivityLED;
 		this->DEVOFZeroAX = game.DEVOFZeroAX;
 		this->DEVOTimerFix = game.DEVOTimerFix;
+		this->DEVODButtons = game.DEVODButtons;
 		this->Locked = game.Locked;
 	}
 } GameCFG;

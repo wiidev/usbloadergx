@@ -231,7 +231,7 @@ u32 GCGames::LoadAllGames(void)
 
 		for(u32 i = 0; i < sdGCList.size(); ++i)
 		{
-			if(Settings.GameCubeSource == GC_SOURCE_AUTO)
+			if(Settings.GameCubeSource != GC_SOURCE_SD)
 			{
 				u32 n;
 				for(n = 0; n < HeaderList.size(); ++n)
@@ -239,11 +239,12 @@ u32 GCGames::LoadAllGames(void)
 					//! Display only one game if it is present on both SD and USB.
 					if(memcmp(HeaderList[n].id, sdGCList[i].id, 6) == 0)
 					{
-						if(IosLoader::GetMIOSInfo() == DIOS_MIOS || IosLoader::GetMIOSInfo() == QUADFORCE_USB) // DIOS MIOS - Show only the game on USB
+						if((Settings.GameCubeSource == GC_SOURCE_MAIN_SD) ||
+						   (Settings.GameCubeSource == GC_SOURCE_AUTO && (IosLoader::GetMIOSInfo() == DIOS_MIOS || IosLoader::GetMIOSInfo() == QUADFORCE_USB))) // DIOS MIOS - Show the game on USB in priority
 						{
 							break;
 						}
-						else // replace the one loaded from USB with the same games on SD since we can load them directly
+						else // replace the one loaded from USB with the same games on SD
 						{
 							memcpy(&HeaderList[n], &sdGCList[i], sizeof(struct discHdr));
 							PathList[n] = sdGCPathList[i];
@@ -258,7 +259,7 @@ u32 GCGames::LoadAllGames(void)
 					PathList.push_back(sdGCPathList[i]);
 				}
 			}
-			else // GC_SOURCE_SD, or GC_SOURCE_BOTH (show duplicates)
+			else // GC_SOURCE_SD
 			{
  				HeaderList.push_back(sdGCList[i]);
  				PathList.push_back(sdGCPathList[i]);

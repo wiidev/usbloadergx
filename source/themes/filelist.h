@@ -1,7 +1,7 @@
 /****************************************************************************
  * USB Loader GX resource files.
  * This file is generated automatically.
- * Includes 198 files.
+ * Includes 200 files.
  *
  * NOTE:
  * Any manual modification of this file will be overwriten by the generation.
@@ -506,6 +506,9 @@ extern const u32 wheelR_png_size;
 extern const u8 wifi1_png[];
 extern const u32 wifi1_png_size;
 
+extern const u8 wifi10_png[];
+extern const u32 wifi10_png_size;
+
 extern const u8 wifi12_png[];
 extern const u32 wifi12_png_size;
 
@@ -523,6 +526,9 @@ extern const u32 wifi32_png_size;
 
 extern const u8 wifi4_png[];
 extern const u32 wifi4_png_size;
+
+extern const u8 wifi6_png[];
+extern const u32 wifi6_png_size;
 
 extern const u8 wifi8_png[];
 extern const u32 wifi8_png_size;
@@ -772,12 +778,14 @@ RecourceFile Resources::RecourceFiles[] =
 	{"wheel.png", wheel_png, wheel_png_size, NULL, 0},
 	{"wheelR.png", wheelR_png, wheelR_png_size, NULL, 0},
 	{"wifi1.png", wifi1_png, wifi1_png_size, NULL, 0},
+	{"wifi10.png", wifi10_png, wifi10_png_size, NULL, 0},
 	{"wifi12.png", wifi12_png, wifi12_png_size, NULL, 0},
 	{"wifi16.png", wifi16_png, wifi16_png_size, NULL, 0},
 	{"wifi2.png", wifi2_png, wifi2_png_size, NULL, 0},
 	{"wifi3.png", wifi3_png, wifi3_png_size, NULL, 0},
 	{"wifi32.png", wifi32_png, wifi32_png_size, NULL, 0},
 	{"wifi4.png", wifi4_png, wifi4_png_size, NULL, 0},
+	{"wifi6.png", wifi6_png, wifi6_png_size, NULL, 0},
 	{"wifi8.png", wifi8_png, wifi8_png_size, NULL, 0},
 	{"wifi_btn.png", wifi_btn_png, wifi_btn_png_size, NULL, 0},
 	{"wiimote.png", wiimote_png, wiimote_png_size, NULL, 0},

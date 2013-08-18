@@ -92,6 +92,7 @@ class CSettings
 		short language;
 		short ocarina;
 		short videopatch;
+		short videoPatchDol;
 		short sinfo;
 		short hddinfo;
 		short rumble;
@@ -187,6 +188,7 @@ class CSettings
 		short DEVOActivityLED;
 		short DEVOFZeroAX;
 		short DEVOTimerFix;
+		short DEVODButtons;
 		short GCInstallCompressed;
 		short GCInstallAligned;
 

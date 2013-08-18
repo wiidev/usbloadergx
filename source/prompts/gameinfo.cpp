@@ -532,6 +532,12 @@ static int InternalShowGameInfo(struct discHdr *header)
 		else if(GameInfo.WifiPlayers == 4)
 			wifiplayersImgData = Resources::GetImageData("wifi4.png");
 
+		else if(GameInfo.WifiPlayers == 6)
+			wifiplayersImgData = Resources::GetImageData("wifi6.png");
+
+		else if(GameInfo.WifiPlayers == 10)
+			wifiplayersImgData = Resources::GetImageData("wifi10.png");
+
 		else if(GameInfo.WifiPlayers == 8)
 			wifiplayersImgData =Resources::GetImageData("wifi8.png");
 

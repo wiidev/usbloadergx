@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1211
+# French.lang - r1216
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-17 13:57+0100\n"
+"POT-Creation-Date: 2013-08-18 15:50+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -494,6 +494,12 @@ msgstr "Persos"
 msgid "Customs/Original"
 msgstr "Persos/Originaux"
 
+msgid "DEVO D Buttons"
+msgstr "DEVO Boutons directs"
+
+msgid "DEVO F-Zero AX"
+msgstr ""
+
 msgid "DEVO Force Widescreen"
 msgstr "DEVO Forcer 16:9"
 
@@ -502,6 +508,9 @@ msgstr "DEVO LED detect. activité"
 
 msgid "DEVO MemCard Emulation"
 msgstr "DEVO MemCard Émulation"
+
+msgid "DEVO Timer Fix"
+msgstr "DEVO Correction timing"
 
 msgid "DML Auto"
 msgstr "Auto"
@@ -718,6 +727,9 @@ msgstr "Voulez-vous synchroniser l'information d'espace libre disponible sur tou
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Voulez-vous actualiser/télécharger tous les fichiers langue ?"
+
+msgid "Dol Video Patch"
+msgstr "Patch vidéo Dol"
 
 msgid "Download"
 msgstr "Télécharger"
@@ -1985,6 +1997,9 @@ msgstr "Pour lancer les jeux GameCube avec DIOS MIOS vous devez utiliser une par
 
 msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
 msgstr "Pour lancer les jeux GameCube avec Devolution vous devez placer le fichier loader.bin dans le Dossier Loader Devolution."
+
+msgid "To run GameCube games with Devolution you need to use a FAT32 partition."
+msgstr "Pour lancer les jeux GameCube avec Devolution vous devez utiliser une partition FAT32."
 
 msgid "Tooltip Delay"
 msgstr "Délai des Info-bulles"

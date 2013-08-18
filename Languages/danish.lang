@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-17 13:57+0100\n"
+"POT-Creation-Date: 2013-08-18 15:50+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -494,6 +494,12 @@ msgstr ""
 msgid "Customs/Original"
 msgstr "Tilpassede/Originale"
 
+msgid "DEVO D Buttons"
+msgstr ""
+
+msgid "DEVO F-Zero AX"
+msgstr ""
+
 msgid "DEVO Force Widescreen"
 msgstr ""
 
@@ -501,6 +507,9 @@ msgid "DEVO LED Activity"
 msgstr ""
 
 msgid "DEVO MemCard Emulation"
+msgstr ""
+
+msgid "DEVO Timer Fix"
 msgstr ""
 
 msgid "DML Auto"
@@ -718,6 +727,9 @@ msgstr "Vil du synkronisere fri plads info sector på alle FAT32 Partitioner?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Skal alle sprogfiler opdateres/downloades?"
+
+msgid "Dol Video Patch"
+msgstr ""
 
 msgid "Download"
 msgstr ""
@@ -1984,6 +1996,9 @@ msgid "To run GameCube games with DIOS MIOS you need to use a partition with 32k
 msgstr ""
 
 msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
+msgstr ""
+
+msgid "To run GameCube games with Devolution you need to use a FAT32 partition."
 msgstr ""
 
 msgid "Tooltip Delay"

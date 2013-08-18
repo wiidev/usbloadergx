@@ -20,6 +20,7 @@ typedef struct _appDOL
 
 static appDOL *dolList = NULL;
 static int dolCount = 0;
+extern GXRModeObj *rmode;
 
 void RegisterDOL(u8 *dst, int len)
 {
@@ -48,7 +49,7 @@ void ClearDOLList()
 	dolCount = 0;
 }
 
-void gamepatches(u8 videoSelected, u8 aspectForce, u8 languageChoice, u8 patchcountrystring,
+void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 languageChoice, u8 patchcountrystring,
 				 u8 vipatch, u8 sneekVideoPatch, u8 hooktype, u8 fix002, u64 returnTo)
 {
 	int i;
@@ -62,7 +63,7 @@ void gamepatches(u8 videoSelected, u8 aspectForce, u8 languageChoice, u8 patchco
 		u8 *dst = dolList[i].dst;
 		int len = dolList[i].len;
 
-		VideoModePatcher(dst, len, videoSelected);
+		VideoModePatcher(dst, len, videoSelected, videoPatchDol);
 
 		dogamehooks(hooktype, dst, len);
 
@@ -212,26 +213,131 @@ bool PoPPatch()
 /** Insert the individual gamepatches above with the patterns and patch data **/
 /** Following is only the VideoPatcher **/
 
-#if 0 /** Isn't used right now **/
+// Some missing video modes
+static GXRModeObj TVPal528Prog = {
+	6,				// viDisplayMode
+	640,			// fbWidth
+	528,			// efbHeight
+	528,			// xfbHeight
+	40,				// viXOrigin  // (VI_MAX_WIDTH_PAL - 640)/2,
+	23,				// viYOrigin  // game uses 0x17 instead of 0x18 so we don't use (VI_MAX_HEIGHT_PAL - 528)/2
+	640,			// viWidth
+	528,			// viHeight
+	VI_XFBMODE_SF,	// xFBmode
+	GX_FALSE,		// field_rendering
+	GX_FALSE,		// aa
 
-static GXRModeObj* vmodes[] =
-{
+	// sample points arranged in increasing Y order
+	{
+		{6,6},{6,6},{6,6},	// pix 0, 3 sample points, 1/12 units, 4 bits each
+		{6,6},{6,6},{6,6},	// pix 1
+		{6,6},{6,6},{6,6},	// pix 2
+		{6,6},{6,6},{6,6}	// pix 3
+	},
+
+	// vertical filter[7], 1/64 units, 6 bits each
+	{
+		0,			// line n-1
+		0,			// line n-1
+		21,			// line n
+		22,			// line n
+		21,			// line n
+		0,			// line n+1
+		0			// line n+1
+	}
+};
+
+static GXRModeObj TVPal528ProgSoft = {
+	6,				// viDisplayMode
+	640,			// fbWidth
+	528,			// efbHeight
+	528,			// xfbHeight
+	40,				// viXOrigin
+	23,				// viYOrigin
+	640,			// viWidth
+	528,			// viHeight
+	VI_XFBMODE_SF,	// xFBmode
+	GX_FALSE,		// field_rendering
+	GX_FALSE,		// aa
+
+	// sample points arranged in increasing Y order
+	{
+		{6,6},{6,6},{6,6},	// pix 0, 3 sample points, 1/12 units, 4 bits each
+		{6,6},{6,6},{6,6},	// pix 1
+		{6,6},{6,6},{6,6},	// pix 2
+		{6,6},{6,6},{6,6}	// pix 3
+	},
+
+	// vertical filter[7], 1/64 units, 6 bits each
+	{
+		8,			// line n-1
+		8,			// line n-1
+		10,			// line n
+		12,			// line n
+		10,			// line n
+		8,			// line n+1
+		8			// line n+1
+	}
+
+};
+
+static GXRModeObj TVPal524ProgAa = {
+	6,				// viDisplayMode
+	640,			// fbWidth
+	264,			// efbHeight
+	524,			// xfbHeight
+	40,				// viXOrigin
+	23,				// viYOrigin
+	640,			// viWidth
+	524,			// viHeight
+	VI_XFBMODE_SF,	// xFBmode
+	GX_FALSE,		// field_rendering
+	GX_TRUE,		// aa
+
+	// sample points arranged in increasing Y order
+	{
+		{3,2},{9,6},{3,10},	// pix 0, 3 sample points, 1/12 units, 4 bits each
+		{3,2},{9,6},{3,10},	// pix 1
+		{9,2},{3,6},{9,10},	// pix 2
+		{9,2},{3,6},{9,10}	// pix 3
+	},
+
+	// vertical filter[7], 1/64 units, 6 bits each
+	{
+		4,			// line n-1
+		8,			// line n-1
+		12,			// line n
+		16,			// line n
+		12,			// line n
+		8,			// line n+1
+		4			// line n+1
+	}
+
+};
+
+static GXRModeObj* vmodes[] = {
 	&TVNtsc240Ds,
 	&TVNtsc240DsAa,
 	&TVNtsc240Int,
 	&TVNtsc240IntAa,
-	&TVNtsc480IntDf,
+	&TVNtsc480Int,
 	&TVNtsc480IntAa,
+	&TVNtsc480IntDf,
 	&TVNtsc480Prog,
+	&TVNtsc480ProgSoft,
+	&TVNtsc480ProgAa,
 	&TVMpal480IntDf,
 	&TVPal264Ds,
 	&TVPal264DsAa,
 	&TVPal264Int,
 	&TVPal264IntAa,
+	&TVPal524ProgAa,
 	&TVPal524IntAa,
 	&TVPal528Int,
 	&TVPal528IntDf,
-	&TVPal574IntDfScale,
+	&TVPal528Prog,
+	&TVPal528ProgSoft,
+	&TVPal576IntDfScale,
 	&TVEurgb60Hz240Ds,
 	&TVEurgb60Hz240DsAa,
 	&TVEurgb60Hz240Int,
@@ -244,26 +350,88 @@ static GXRModeObj* vmodes[] =
 	&TVEurgb60Hz480ProgAa
 };
 
-#endif
+static const char * vmodes_name[] = {
+	"TVNtsc240Ds",
+	"TVNtsc240DsAa",
+	"TVNtsc240Int",
+	"TVNtsc240IntAa",
+	"TVNtsc480Int",
+	"TVNtsc480IntDf(Aa)",
+	"TVNtsc480IntAa",
+	"TVNtsc480Prog",
+	"TVNtsc480ProgSoft",
+	"TVNtsc480ProgAa",
+	"TVMpal480IntDf",
+	"TVPal264Ds",
+	"TVPal264DsAa",
+	"TVPal264Int",
+	"TVPal264IntAa",
+	"TVPal524ProgAa",
+	"TVPal524IntAa",
+	"TVPal528Int",
+	"TVPal528IntDf",
+	"TVPal528Prog",
+	"TVPal528ProgSoft",
+	"TVPal576IntDfScale",
+	"TVEurgb60Hz240Ds",
+	"TVEurgb60Hz240DsAa",
+	"TVEurgb60Hz240Int",
+	"TVEurgb60Hz240IntAa",
+	"TVEurgb60Hz480Int",
+	"TVEurgb60Hz480IntDf",
+	"TVEurgb60Hz480IntAa",
+	"TVEurgb60Hz480Prog",
+	"TVEurgb60Hz480ProgSoft",
+	"TVEurgb60Hz480ProgAa"
+};
 
-static GXRModeObj* PAL2NTSC[] = { &TVMpal480IntDf, &TVNtsc480IntDf, &TVPal264Ds, &TVNtsc240Ds, &TVPal264DsAa,
-								  &TVNtsc240DsAa, &TVPal264Int, &TVNtsc240Int, &TVPal264IntAa, &TVNtsc240IntAa, &TVPal524IntAa, &TVNtsc480IntAa,
-								  &TVPal528Int, &TVNtsc480IntAa, &TVPal528IntDf, &TVNtsc480IntDf, &TVPal576IntDfScale, &TVNtsc480IntDf,
-								  &TVEurgb60Hz240Ds, &TVNtsc240Ds, &TVEurgb60Hz240DsAa, &TVNtsc240DsAa, &TVEurgb60Hz240Int, &TVNtsc240Int,
-								  &TVEurgb60Hz240IntAa, &TVNtsc240IntAa, &TVEurgb60Hz480Int, &TVNtsc480IntAa, &TVEurgb60Hz480IntDf,
-								  &TVNtsc480IntDf, &TVEurgb60Hz480IntAa, &TVNtsc480IntAa, &TVEurgb60Hz480Prog, &TVNtsc480Prog,
-								  &TVEurgb60Hz480ProgSoft, &TVNtsc480Prog, &TVEurgb60Hz480ProgAa, &TVNtsc480Prog, 0, 0
-								};
+static GXRModeObj* PAL2NTSC[] = { 
+	&TVMpal480IntDf, &TVNtsc480IntDf,
+	&TVPal264Ds, &TVNtsc240Ds,
+	&TVPal264DsAa, &TVNtsc240DsAa,
+	&TVPal264Int, &TVNtsc240Int,
+	&TVPal264IntAa, &TVNtsc240IntAa,
+	&TVPal524IntAa, &TVNtsc480IntAa,
+	&TVPal528Int, &TVNtsc480Int,
+	&TVPal528IntDf, &TVNtsc480IntDf,
+	&TVPal528Prog, &TVNtsc480Prog, 
+	&TVPal576IntDfScale, &TVNtsc480IntDf,
+	&TVEurgb60Hz240Ds, &TVNtsc240Ds,
+	&TVEurgb60Hz240DsAa, &TVNtsc240DsAa,
+	&TVEurgb60Hz240Int, &TVNtsc240Int,
+	&TVEurgb60Hz240IntAa, &TVNtsc240IntAa,
+	&TVEurgb60Hz480Int, &TVNtsc480Int,
+	&TVEurgb60Hz480IntDf,  &TVNtsc480IntDf,
+	&TVEurgb60Hz480IntAa, &TVNtsc480IntAa,
+	&TVEurgb60Hz480Prog, &TVNtsc480Prog,
+	&TVEurgb60Hz480ProgSoft, &TVNtsc480Prog,
+	&TVEurgb60Hz480ProgAa, &TVNtsc480Prog,
+	0, 0
+};
 
-static GXRModeObj* NTSC2PAL[] = { &TVNtsc240Ds, &TVPal264Ds, &TVNtsc240DsAa, &TVPal264DsAa, &TVNtsc240Int,
-								  &TVPal264Int, &TVNtsc240IntAa, &TVPal264IntAa, &TVNtsc480IntDf, &TVPal528IntDf, &TVNtsc480IntAa,
-								  &TVPal524IntAa, &TVNtsc480Prog, &TVPal528IntDf, 0, 0
-								};
+static GXRModeObj* NTSC2PAL[] = { 
+	&TVNtsc240Ds, &TVPal264Ds,
+	&TVNtsc240DsAa, &TVPal264DsAa,
+	&TVNtsc240Int, &TVPal264Int,
+	&TVNtsc240IntAa, &TVPal264IntAa,
+	&TVNtsc480Int, &TVPal528Int,
+	&TVNtsc480IntDf, &TVPal528IntDf,
+	&TVNtsc480IntAa, &TVPal524IntAa,
+	&TVNtsc480Prog, &TVPal528Prog,
+	0, 0
+};
 
-static GXRModeObj* NTSC2PAL60[] = { &TVNtsc240Ds, &TVEurgb60Hz240Ds, &TVNtsc240DsAa, &TVEurgb60Hz240DsAa,
-									&TVNtsc240Int, &TVEurgb60Hz240Int, &TVNtsc240IntAa, &TVEurgb60Hz240IntAa, &TVNtsc480IntDf,
-									&TVEurgb60Hz480IntDf, &TVNtsc480IntAa, &TVEurgb60Hz480IntAa, &TVNtsc480Prog, &TVEurgb60Hz480Prog, 0, 0
-								  };
+static GXRModeObj* NTSC2PAL60[] = { 
+	&TVNtsc240Ds, &TVEurgb60Hz240Ds,
+	&TVNtsc240DsAa, &TVEurgb60Hz240DsAa,
+	&TVNtsc240Int, &TVEurgb60Hz240Int,
+	&TVNtsc240IntAa, &TVEurgb60Hz240IntAa,
+	&TVNtsc480Int, &TVEurgb60Hz480Int,
+	&TVNtsc480IntDf, &TVEurgb60Hz480IntDf,
+	&TVNtsc480IntAa, &TVEurgb60Hz480IntAa,
+	&TVNtsc480Prog, &TVEurgb60Hz480Prog,
+	0, 0
+};
 
 static bool compare_videomodes(GXRModeObj* mode1, GXRModeObj* mode2)
 {
@@ -349,7 +517,7 @@ static bool Search_and_patch_Video_Modes(u8 * Address, u32 Size, GXRModeObj* Tab
 {
 	u8 *Addr = (u8 *) Address;
 	bool found = 0;
-	u32 i;
+	u32 i, j;
 
 	while (Size >= sizeof(GXRModeObj))
 	{
@@ -357,6 +525,26 @@ static bool Search_and_patch_Video_Modes(u8 * Address, u32 Size, GXRModeObj* Tab
 		{
 			if (compare_videomodes(Table[i], (GXRModeObj*) Addr))
 			{
+				u8 current_vmode = 0;
+				u8 target_vmode = 0;
+				for(j = 0; j < sizeof(vmodes)/sizeof(vmodes[0]); j++)
+				{
+					if(compare_videomodes(Table[i], vmodes[j]))
+					{
+						current_vmode = j;
+						break;
+					}
+				}
+				for(j = 0; j < sizeof(vmodes)/sizeof(vmodes[0]); j++)
+				{
+					if(compare_videomodes(Table[i+1], vmodes[j]))
+					{
+						target_vmode = j;
+						break;
+					}
+				}
+
+				gprintf("Video mode found in dol: %s, replaced by: %s \n", vmodes_name[current_vmode], vmodes_name[target_vmode]);
 				found = 1;
 				patch_videomode((GXRModeObj*) Addr, Table[i + 1]);
 				Addr += (sizeof(GXRModeObj) - 4);
@@ -372,35 +560,113 @@ static bool Search_and_patch_Video_Modes(u8 * Address, u32 Size, GXRModeObj* Tab
 	return found;
 }
 
-void VideoModePatcher(u8 * dst, int len, u8 videoSelected)
+static bool Search_and_patch_Video_To(void *Address, u32 Size, GXRModeObj* Table[], GXRModeObj* rmode, bool patchAll)
+{
+	u8 *Addr = (u8 *)Address;
+	bool found = 0;
+	u32 i;
+	
+	u8 target_vmode = 0;
+	for(i = 0; i < sizeof(vmodes)/sizeof(vmodes[0]); i++)
+	{
+		if(compare_videomodes(Table[i], rmode))
+		{
+			target_vmode = i;
+			break;
+		}
+	}
+
+	while(Size >= sizeof(GXRModeObj))
+	{
+		// Video mode pattern found
+		if( (((GXRModeObj*)Addr)->fbWidth == 0x0280 && ((GXRModeObj*)Addr)->viWidth == 0x02c4) || // TVEurgb60Hz480Prog
+		    (((GXRModeObj*)Addr)->fbWidth == 0x0280 && ((GXRModeObj*)Addr)->viWidth == 0x0280) )  // All other video modes
+		{
+			// display found video mode patterns
+			GXRModeObj* vidmode = (GXRModeObj*)Addr;
+			gprintf("Video pattern found \t%08x %04x %04x %04x %04x %04x %04x %04x %08x %04x %04x ",
+			vidmode->viTVMode, vidmode->fbWidth, vidmode->efbHeight, vidmode->xfbHeight, vidmode->viXOrigin, vidmode->viYOrigin, 
+			vidmode->viWidth, vidmode->viHeight, vidmode->xfbMode, vidmode->field_rendering, vidmode->aa);
+			gprintf("%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x ",
+			vidmode->sample_pattern[0][0],  vidmode->sample_pattern[1][0],  vidmode->sample_pattern[2][0],  vidmode->sample_pattern[3][0], vidmode->sample_pattern[4][0],
+			vidmode->sample_pattern[5][0],  vidmode->sample_pattern[6][0],  vidmode->sample_pattern[7][0],  vidmode->sample_pattern[8][0], vidmode->sample_pattern[9][0],
+			vidmode->sample_pattern[10][0], vidmode->sample_pattern[11][0], vidmode->sample_pattern[0][1],  vidmode->sample_pattern[1][1], vidmode->sample_pattern[2][1],
+			vidmode->sample_pattern[3][1],  vidmode->sample_pattern[4][1],  vidmode->sample_pattern[5][1],  vidmode->sample_pattern[6][1], vidmode->sample_pattern[7][1],
+			vidmode->sample_pattern[8][1],  vidmode->sample_pattern[9][1],  vidmode->sample_pattern[10][1], vidmode->sample_pattern[11][1]);
+			gprintf("%02x%02x%02x%02x%02x%02x%02x \n",
+			vidmode->vfilter[0], vidmode->vfilter[1] , vidmode->vfilter[2], vidmode->vfilter[3] , vidmode->vfilter[4],vidmode->vfilter[5], vidmode->vfilter[6]);
+
+			found = 0;
+			for(i = 0; i < sizeof(vmodes)/sizeof(vmodes[0]); i++)
+			{
+				if(compare_videomodes(Table[i], (GXRModeObj*)Addr))
+				{
+					found = 1;
+					gprintf("Video mode found in dol: %s, replaced by: %s \n", vmodes_name[i], vmodes_name[target_vmode]);
+					patch_videomode((GXRModeObj*)Addr, rmode);
+					Addr += (sizeof(GXRModeObj)-4);
+					Size -= (sizeof(GXRModeObj)-4);
+					break;
+				}
+				
+			}
+			if(patchAll && !found)
+			{
+				gprintf("Video mode found in dol: Unknown, replaced by: %s \n", vmodes_name[target_vmode]);
+				patch_videomode((GXRModeObj*)Addr, rmode);
+				Addr += (sizeof(GXRModeObj)-4);
+				Size -= (sizeof(GXRModeObj)-4);
+			}
+		}
+		Addr += 4;
+		Size -= 4;
+	}
+
+	return found;
+}
+
+void VideoModePatcher(u8 * dst, int len, u8 videoSelected, u8 VideoPatchDol)
 {
 	GXRModeObj** table = NULL;
 	if (videoSelected == VIDEO_MODE_PATCH) // patch enum'd in cfg.h
-
 	{
 		switch (CONF_GetVideo())
 		{
-		case CONF_VIDEO_PAL:
-			if (CONF_GetEuRGB60() > 0)
-			{
-				table = NTSC2PAL60;
-			}
-			else
-			{
+			case CONF_VIDEO_PAL:
+				table = CONF_GetEuRGB60() > 0 ? NTSC2PAL60 : NTSC2PAL;
+				break;
+			case CONF_VIDEO_MPAL:
 				table = NTSC2PAL;
-			}
-			break;
-
-		case CONF_VIDEO_MPAL:
-
-			table = NTSC2PAL;
-			break;
-
-		default:
-			table = PAL2NTSC;
-			break;
+				break;
+			default:
+				table = PAL2NTSC;
+				break;
 		}
 		Search_and_patch_Video_Modes(dst, len, table);
+	}
+	else if(VideoPatchDol == VIDEO_PATCH_DOL_REGION ) //&& rmode != NULL)
+	{
+		switch(rmode->viTVMode >> 2)
+		{
+			case VI_PAL:
+			case VI_MPAL:
+				table = NTSC2PAL;
+				break;
+			case VI_EURGB60:
+				table = NTSC2PAL60;
+				break;
+			default:
+				table = PAL2NTSC;
+		}
+		Search_and_patch_Video_Modes(dst, len, table);
+	}
+	else if (VideoPatchDol == VIDEO_PATCH_DOL_ON && rmode != NULL)
+	{
+		Search_and_patch_Video_To(dst, len, vmodes, rmode, false);
+	}
+	else if (VideoPatchDol == VIDEO_PATCH_DOL_ALL && rmode != NULL)
+	{
+		Search_and_patch_Video_To(dst, len, vmodes, rmode, true);
 	}
 }
 

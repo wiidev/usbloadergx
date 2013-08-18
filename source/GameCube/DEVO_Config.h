@@ -20,7 +20,7 @@
 #define LAUNCH_DEVO() ((void(*)(void))loader_bin)()
 
 #define DEVO_SIG				 0x3EF9DB23
-#define DEVO_CONFIG_VERSION		 0x0111
+#define DEVO_CONFIG_VERSION		 0x0112
 
 enum DEVOConfig
 {
@@ -28,13 +28,14 @@ enum DEVOConfig
 	DEVO_CFG_WIDE			= (1<<1), // added in Devo r142
 	DEVO_CFG_NOLED			= (1<<2),
 	DEVO_CFG_FZERO_AX		= (1<<3), // added in Devo r196, config version x0111
-	DEVO_CFG_TIMER_FIX		= (1<<4)
+	DEVO_CFG_TIMER_FIX		= (1<<4),
+	DEVO_CFG_D_BUTTONS		= (1<<5) // added in Devo r200, config version 0x0112
 };
 
 typedef struct _DEVO_CFG
 {
 		u32 signature;					//0x3EF9DB23
-		u16 version;					//0x00000110
+		u16 version;					//0x00000112
 		u16 device_signature;
 		u32 memcard_cluster;
 		u32 disc1_cluster;

@@ -187,6 +187,7 @@ bool CGameSettings::Save()
 	{
 		fprintf(f, "game:%s = ", GameList[i].id);
 		fprintf(f, "video:%d; ", GameList[i].video);
+		fprintf(f, "videoPatchDol:%d; ", GameList[i].videoPatchDol);
 		fprintf(f, "aspectratio:%d; ", GameList[i].aspectratio);
 		fprintf(f, "language:%d; ", GameList[i].language);
 		fprintf(f, "ocarina:%d; ", GameList[i].ocarina);
@@ -221,6 +222,7 @@ bool CGameSettings::Save()
 		fprintf(f, "DEVOActivityLED:%d; ", GameList[i].DEVOActivityLED);
 		fprintf(f, "DEVOFZeroAX:%d; ", GameList[i].DEVOFZeroAX);
 		fprintf(f, "DEVOTimerFix:%d; ", GameList[i].DEVOTimerFix);
+		fprintf(f, "DEVODButtons:%d; ", GameList[i].DEVODButtons);
 		fprintf(f, "Locked:%d;\n", GameList[i].Locked);
 	}
 	fprintf(f, "# END\n");
@@ -234,6 +236,11 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 	if (strcmp(name, "video") == 0)
 	{
 		game.video = atoi(value);
+		return true;
+	}
+	if (strcmp(name, "videoPatchDol") == 0)
+	{
+		game.videoPatchDol = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "aspectratio") == 0)
@@ -411,6 +418,11 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		game.DEVOTimerFix = atoi(value);
 		return true;
 	}
+	else if(strcmp(name, "DEVODButtons") == 0)
+	{
+		game.DEVODButtons = atoi(value);
+		return true;
+	}
 
 	return false;
 }
@@ -513,6 +525,7 @@ void CGameSettings::SetDefault(GameCFG &game)
 {
 	memset(game.id, 0, sizeof(game.id));
 	game.video = INHERIT;
+	game.videoPatchDol = INHERIT;
 	game.aspectratio = INHERIT;
 	game.language = INHERIT;
 	game.ocarina = INHERIT;
@@ -547,5 +560,6 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.DEVOActivityLED = INHERIT;
 	game.DEVOFZeroAX = INHERIT;
 	game.DEVOTimerFix = INHERIT;
+	game.DEVODButtons = INHERIT;
 	game.Locked = OFF;
 }

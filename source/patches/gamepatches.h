@@ -9,12 +9,12 @@ extern "C" {
 
 void RegisterDOL(u8 *dst, int len);
 void ClearDOLList();
-void gamepatches(u8 videoSelected, u8 aspectForce, u8 languageChoice, u8 patchcountrystring,
+void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 languageChoice, u8 patchcountrystring,
 				 u8 vipatch, u8 sneekVideoPatch, u8 hooktype, u8 fix002, u64 returnTo);
 bool Anti_002_fix(u8 * Address, int Size);
 bool NSMBPatch();
 bool PoPPatch();
-void VideoModePatcher(u8 * dst, int len, u8 videoSelected);
+void VideoModePatcher(u8 * dst, int len, u8 videoSelected, u8 VideoPatchDol);
 void sneek_video_patch(void *addr, u32 len);
 bool PatchReturnTo(void *Address, int Size, u32 id);
 int PatchNewReturnTo(int es_fd, u64 title);
