@@ -87,13 +87,8 @@ void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode)
 	{
 		case CONF_VIDEO_PAL:
 			rmode_reg = PAL60 ? VI_EURGB60 : VI_PAL;
-			if(PAL60)
-				rmode = progressive ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
-			if(dml_VideoMode)
-			{
-				rmode = progressive ? &TVEurgb60Hz480Prog : (PAL60 ? &TVEurgb60Hz480IntDf : &TVPal528IntDf);
-				*dml_VideoMode = progressive ? DML_VID_FORCE_PROG : (PAL60 ? DML_VID_FORCE_PAL60 : DML_VID_FORCE_PAL50);
-			}
+			rmode = progressive ? &TVEurgb60Hz480Prog : (PAL60 ? &TVEurgb60Hz480IntDf : &TVPal528IntDf);
+			if(dml_VideoMode) *dml_VideoMode = progressive ? DML_VID_FORCE_PROG : (PAL60 ? DML_VID_FORCE_PAL60 : DML_VID_FORCE_PAL50);
 			break;
 
 		case CONF_VIDEO_MPAL:
@@ -102,7 +97,8 @@ void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode)
 
 		case CONF_VIDEO_NTSC:
 			rmode_reg = VI_NTSC;
-			if(dml_VideoMode) *dml_VideoMode = DML_VID_FORCE_NTSC;
+			rmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
+			if(dml_VideoMode) *dml_VideoMode = progressive ? DML_VID_FORCE_PROG : DML_VID_FORCE_NTSC;
 			break;
 	}
 
@@ -119,35 +115,19 @@ void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode)
 				case 'P':
 				case 'X':
 				case 'Y':
-						if (tvmode != CONF_VIDEO_PAL)
-						{
-							rmode_reg = PAL60 ? VI_EURGB60 : VI_PAL;
-							rmode = progressive ? &TVNtsc480Prog : (PAL60 ? &TVEurgb60Hz480IntDf : &TVPal528IntDf);
-						}						
-						if(dml_VideoMode)
-						{
-							rmode_reg = PAL60 ? VI_EURGB60 : VI_PAL;
-							rmode = progressive ? &TVEurgb60Hz480Prog : (PAL60 ? &TVEurgb60Hz480IntDf : &TVPal528IntDf);
-							*dml_VideoMode = progressive ? DML_VID_FORCE_PROG : (PAL60 ? DML_VID_FORCE_PAL60 : DML_VID_FORCE_PAL50);
-						}
+					rmode_reg = PAL60 ? VI_EURGB60 : VI_PAL;
+					rmode = progressive ? &TVEurgb60Hz480Prog : (PAL60 ? &TVEurgb60Hz480IntDf : &TVPal528IntDf);
+					if(dml_VideoMode) *dml_VideoMode = progressive ? DML_VID_FORCE_PROG : (PAL60 ? DML_VID_FORCE_PAL60 : DML_VID_FORCE_PAL50);
 					break;
 				// NTSC
 				case 'E':
 				case 'J':
-						if (tvmode != CONF_VIDEO_NTSC)
-						{
-							rmode_reg = VI_NTSC;
-							rmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
-						}
-						if(dml_VideoMode)
-						{
-							rmode_reg = VI_NTSC;
-							rmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
-							*dml_VideoMode = DML_VID_FORCE_NTSC;
-						}
+					rmode_reg = VI_NTSC;
+					rmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
+					if(dml_VideoMode) *dml_VideoMode = progressive ? DML_VID_FORCE_PROG : DML_VID_FORCE_NTSC;
 					break;
 				default:
-						if(dml_VideoMode) *dml_VideoMode = DML_VID_DML_AUTO;
+					if(dml_VideoMode) *dml_VideoMode = DML_VID_DML_AUTO;
 					break;
 			}
 			break;
@@ -157,27 +137,19 @@ void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode)
 			if(dml_VideoMode) *dml_VideoMode = DML_VID_FORCE_PAL50;
 			break;
 		case VIDEO_MODE_PAL60: // PAL60
-			rmode = progressive ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
+			rmode = &TVEurgb60Hz480IntDf;
 			rmode_reg = VI_EURGB60;
-			if(dml_VideoMode)
-			{
-				rmode = progressive ? &TVEurgb60Hz480Prog : &TVEurgb60Hz480IntDf;
-				*dml_VideoMode = progressive ? DML_VID_FORCE_PROG : DML_VID_FORCE_PAL60;
-			}
+			if(dml_VideoMode) *dml_VideoMode = DML_VID_FORCE_PAL60;
 			break;
 		case VIDEO_MODE_NTSC: // NTSC
-			rmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
+			rmode = &TVNtsc480IntDf;
 			rmode_reg = VI_NTSC;
-			if(dml_VideoMode) *dml_VideoMode = progressive ? DML_VID_FORCE_PROG : DML_VID_FORCE_NTSC;
+			if(dml_VideoMode) *dml_VideoMode = DML_VID_FORCE_NTSC;
 			break;
 		case VIDEO_MODE_PAL480P:
-			rmode = &TVNtsc480Prog;
+			rmode = &TVEurgb60Hz480Prog;
 			rmode_reg = VI_EURGB60;
-			if(dml_VideoMode)
-			{
-				rmode = &TVEurgb60Hz480Prog;
-				*dml_VideoMode = DML_VID_FORCE_PROG | DML_VID_PROG_PATCH;
-			}
+			if(dml_VideoMode) *dml_VideoMode = DML_VID_FORCE_PROG | DML_VID_PROG_PATCH;
 			break;
 		case VIDEO_MODE_NTSC480P:
 			rmode = &TVNtsc480Prog;
