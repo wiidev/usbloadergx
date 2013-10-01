@@ -102,7 +102,9 @@ static int RunAppbooter()
 
 	ExitApp();
 
-	if(Settings.EntryIOS != IOS_GetVersion())
+	// Reload IOS 58 if available, else reload Entry IOS
+	s32 ret = IosLoader::ReloadIosSafe(58);
+	if(ret < 0 && Settings.EntryIOS != IOS_GetVersion())
 		IosLoader::ReloadIosKeepingRights(Settings.EntryIOS);
 
 	struct __argv args;

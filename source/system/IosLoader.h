@@ -90,9 +90,10 @@ class IosLoader
 		static bool IsWaninkokoIOS(s32 ios = IOS_GetVersion());
 		static bool IsD2X(s32 ios = IOS_GetVersion());
 		static iosinfo_t *GetIOSInfo(s32 ios);
-		static u8 GetMIOSInfo(bool checkedOnBoot = false);
+		static u8 GetMIOSInfo();
 		static u8 GetDMLVersion(char* releaseDate = NULL);
 		static bool is_NandEmu_compatible(const char *NandEmuPath, s32 ios = IOS_GetVersion());
+		static bool isWiiU();
 	private:
 		static void LoadIOSModules(s32 ios, s32 ios_rev);
 };

@@ -67,9 +67,9 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, int offset
 	trigR = new GuiTrigger;
 	trigR->SetButtonOnlyTrigger(-1, WPAD_BUTTON_RIGHT | WPAD_CLASSIC_BUTTON_RIGHT, PAD_BUTTON_RIGHT);
 	trigPlus = new GuiTrigger;
-	trigPlus->SetButtonOnlyTrigger(-1, WPAD_BUTTON_PLUS | WPAD_CLASSIC_BUTTON_PLUS, 0);
+	trigPlus->SetButtonOnlyTrigger(-1, WPAD_BUTTON_PLUS | WPAD_CLASSIC_BUTTON_PLUS, PAD_TRIGGER_R);
 	trigMinus = new GuiTrigger;
-	trigMinus->SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, 0);
+	trigMinus->SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, PAD_TRIGGER_L);
 
 	imgLeft = Resources::GetImageData("startgame_arrow_left.png");
 	imgRight = Resources::GetImageData("startgame_arrow_right.png");
@@ -337,11 +337,11 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 		// Left/Right Navigation
 		if (btnLeft->GetState() == STATE_CLICKED)
 		{
-			WPAD_ScanPads();
-			u16 buttons = 0;
-			for (int i = 0; i < 4; i++)
-				buttons |= WPAD_ButtonsHeld(i);
-			if (!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_MINUS) || t->Left()))
+			u32 buttons = t->wpad.btns_h;
+			u32 buttonsPAD = t->pad.btns_h;
+			if (!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_MINUS) ||
+				  (buttons & WPAD_CLASSIC_BUTTON_A) || (buttons & WPAD_CLASSIC_BUTTON_MINUS) ||
+				  (buttonsPAD & PAD_BUTTON_A) || (buttonsPAD & PAD_TRIGGER_L)  || t->Left()))
 			{
 				btnLeft->ResetState();
 				return;
@@ -353,11 +353,11 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 		}
 		else if (btnRight->GetState() == STATE_CLICKED)
 		{
-			WPAD_ScanPads();
-			u16 buttons = 0;
-			for (int i = 0; i < 4; i++)
-				buttons |= WPAD_ButtonsHeld(i);
-			if (!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_PLUS) || t->Right()))
+			u32 buttons = t->wpad.btns_h;
+			u32 buttonsPAD = t->pad.btns_h;
+			if (!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_PLUS) ||
+				  (buttons & WPAD_CLASSIC_BUTTON_A) || (buttons & WPAD_CLASSIC_BUTTON_PLUS) ||
+				  (buttonsPAD & PAD_BUTTON_A) || (buttonsPAD & PAD_TRIGGER_R)  || t->Right()))
 			{
 				btnRight->ResetState();
 				return;

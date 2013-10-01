@@ -201,7 +201,7 @@ bool DeviceHandler::MountAllUSB(bool spinup)
 
 	if(!usb0 && (Settings.USBPort == 0 || Settings.USBPort == 2))
 		usb0 = new PartitionHandle(GetUSB0Interface());
-	if(!usb1 && (Settings.USBPort == 1 || Settings.USBPort == 2))
+	if(!usb1 && (Settings.USBPort == 1 || Settings.USBPort == 2) && IOS_GetVersion() >= 200)
 		usb1 = new PartitionHandle(GetUSB1Interface());
 
 	if(usb0 && usb0->GetPartitionCount() < 1)
@@ -232,7 +232,7 @@ bool DeviceHandler::MountUSBPort1(bool spinup)
 	if(spinup && !USBSpinUp())
 		return false;
 
-	if(!usb1 && (Settings.USBPort == 1 || Settings.USBPort == 2))
+	if(!usb1 && (Settings.USBPort == 1 || Settings.USBPort == 2) && IOS_GetVersion() >= 200)
 		usb1 = new PartitionHandle(GetUSB1Interface());
 
 	if(usb1 && usb1->GetPartitionCount() < 1)

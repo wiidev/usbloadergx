@@ -41,6 +41,8 @@ typedef struct _GameCFG
 	short DMLScreenshot;
 	short DMLJPNPatch;
 	short DMLDebug;
+	short NINMCEmulation;
+	short NINUSBHID;
 	short DEVOMCEmulation;
 	short DEVOWidescreen;
 	short DEVOActivityLED;
@@ -83,6 +85,8 @@ typedef struct _GameCFG
 		this->DMLScreenshot = game.DMLScreenshot;
 		this->DMLJPNPatch = game.DMLJPNPatch;
 		this->DMLDebug = game.DMLDebug;
+		this->NINMCEmulation = game.NINMCEmulation;
+		this->NINUSBHID = game.NINUSBHID;
 		this->DEVOMCEmulation = game.DEVOMCEmulation;
 		this->DEVOWidescreen = game.DEVOWidescreen;
 		this->DEVOActivityLED = game.DEVOActivityLED;

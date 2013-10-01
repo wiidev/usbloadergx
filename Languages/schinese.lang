@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-18 15:50+0200\n"
+"POT-Creation-Date: 2013-10-01 22:10+0200\n"
 "PO-Revision-Date: 2013-08-13 07:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: oCameLo\n"
@@ -30,6 +30,26 @@ msgstr "在服务器上未找到 %i 个文件！"
 #, c-format
 msgid "%i missing files"
 msgstr "缺少 %i 个文件"
+
+#, c-format
+msgid "%s only accepts GameCube backups in ISO format."
+msgstr ""
+
+#, c-format
+msgid "%s requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."
+msgstr ""
+
+msgid "--==       Devolution"
+msgstr ""
+
+msgid "--==       Nintendont"
+msgstr ""
+
+msgid "--==   DIOS MIOS (Lite) "
+msgstr ""
+
+msgid "--==  DM(L) + Nintendont"
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (全年龄)"
@@ -72,6 +92,9 @@ msgstr "4 (18 岁以上成人)"
 
 msgid "5 min"
 msgstr "5 分钟"
+
+msgid "=== GameCube Settings"
+msgstr ""
 
 msgid "AUTO"
 msgstr "自动"
@@ -165,6 +188,9 @@ msgstr "作者："
 
 msgid "Auto"
 msgstr "自动"
+
+msgid "Auto Boot"
+msgstr ""
 
 msgid "AutoInit Network"
 msgstr "自动检测网络"
@@ -273,9 +299,6 @@ msgstr "禁止更新"
 
 msgid "Boot Content"
 msgstr "启动内容"
-
-msgid "Boot/Standard"
-msgstr "启动/标准"
 
 msgid "Boot?"
 msgstr "启动？"
@@ -494,59 +517,8 @@ msgstr "自定义"
 msgid "Customs/Original"
 msgstr "自制/官方"
 
-msgid "DEVO D Buttons"
+msgid "D Buttons"
 msgstr ""
-
-msgid "DEVO F-Zero AX"
-msgstr ""
-
-msgid "DEVO Force Widescreen"
-msgstr "DEVO 强制宽屏"
-
-msgid "DEVO LED Activity"
-msgstr "DEVO 开启 LED"
-
-msgid "DEVO MemCard Emulation"
-msgstr "DEVO 模拟记忆卡"
-
-msgid "DEVO Timer Fix"
-msgstr ""
-
-msgid "DML Auto"
-msgstr "DML 自动"
-
-msgid "DML Debug"
-msgstr "DML 除错"
-
-msgid "DML Force Widescreen"
-msgstr "DML 强制宽屏"
-
-msgid "DML Japanese Patch"
-msgstr "DML 日语补丁"
-
-msgid "DML LED Activity"
-msgstr "DML 开启 LED"
-
-msgid "DML NMM Mode"
-msgstr "DML 免记忆卡模式"
-
-msgid "DML No Disc+"
-msgstr "DML 免光盘模式"
-
-msgid "DML None"
-msgstr "DML 无"
-
-msgid "DML PAD Hook"
-msgstr "DML PAD 挂载"
-
-msgid "DML Progressive Patch"
-msgstr "DML 级进补丁"
-
-msgid "DML Screenshot"
-msgstr "DML 屏幕截图"
-
-msgid "DML Video Mode"
-msgstr "DML 视频模式"
 
 msgid "DOL Path"
 msgstr "DOL 路径"
@@ -616,9 +588,6 @@ msgstr ""
 
 msgid "Devolution Loader Path"
 msgstr "Devolution 加载器路径"
-
-msgid "Devolution requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."
-msgstr "Devolution 需要 AHBPROT 模式！请从 HBC，或一个已升级的频道或 forwarder 加载 USBLoaderGX。"
 
 msgid "Devolution's loader.bin file can't be loaded."
 msgstr "无法加载 Devolution 的 loader.bin。"
@@ -889,6 +858,9 @@ msgstr "正在提取文件："
 msgid "Extracting nand files:"
 msgstr "正在提取 Nand 文件："
 
+msgid "F-Zero AX"
+msgstr ""
+
 msgid "Failed"
 msgstr "已失败"
 
@@ -982,6 +954,9 @@ msgstr "强制 PAL60"
 
 msgid "Force Titles from Disc"
 msgstr "强制从光盘读取标题"
+
+msgid "Force Widescreen"
+msgstr ""
 
 msgid "Format"
 msgstr "格式化"
@@ -1108,6 +1083,9 @@ msgstr "游戏窗口模式"
 
 msgid "Game is already installed:"
 msgstr "游戏已安装："
+
+msgid "Game's IOS"
+msgstr ""
 
 msgid "Game/Install Partition"
 msgstr "游戏/安装分区"
@@ -1267,6 +1245,9 @@ msgstr "一月"
 msgid "Japanese"
 msgstr "日文"
 
+msgid "Japanese Patch"
+msgstr ""
+
 msgid "Joypad"
 msgstr ""
 
@@ -1284,6 +1265,9 @@ msgstr "键盘"
 
 msgid "Korean"
 msgstr "韩文"
+
+msgid "LED Activity"
+msgstr ""
 
 msgid "Language Files"
 msgstr "语言文件"
@@ -1327,6 +1311,9 @@ msgstr "加载这个 DOL 作为 ALT DOL ？"
 
 msgid "Loader Settings"
 msgstr "加载器设置"
+
+msgid "Loader's IOS"
+msgstr ""
 
 msgid "Loading standard language."
 msgstr "加载标准语言。"
@@ -1385,6 +1372,9 @@ msgstr "标记新游戏"
 msgid "May"
 msgstr "五月"
 
+msgid "Memory Card Emulation"
+msgstr ""
+
 msgid "Messageboard Update"
 msgstr "留言板更新"
 
@@ -1402,6 +1392,9 @@ msgstr "音乐循环模式"
 
 msgid "Music Volume"
 msgstr "音量"
+
+msgid "NMM Mode"
+msgstr ""
 
 msgid "Nand Chan. Emulation"
 msgstr "Nand 频道模拟"
@@ -1436,6 +1429,15 @@ msgstr "网络尚未初始化。"
 msgid "Next"
 msgstr "往后"
 
+msgid "Nintendont"
+msgstr ""
+
+msgid "Nintendont Loader Path"
+msgstr ""
+
+msgid "Nintendont currently only supports GameCube games on SD card."
+msgstr ""
+
 msgid "No"
 msgstr "否"
 
@@ -1444,6 +1446,9 @@ msgstr "作弊码文件没找到"
 
 msgid "No DOL file found on disc."
 msgstr "光盘中未找到 DOL 文件。"
+
+msgid "No Disc+"
+msgstr ""
 
 msgid "No Splitting"
 msgstr "不分割"
@@ -1574,6 +1579,9 @@ msgstr "官方"
 msgid "Original/Customs"
 msgstr "官方/自制"
 
+msgid "PAD Hook"
+msgstr ""
+
 msgid "Parental Control"
 msgstr "家长控制"
 
@@ -1636,6 +1644,9 @@ msgstr "往前"
 
 msgid "Process finished."
 msgstr "操作已完成。"
+
+msgid "Progressive Patch"
+msgstr ""
 
 msgid "Prompts Buttons"
 msgstr "显示校正"
@@ -1750,6 +1761,9 @@ msgstr "该游戏的存档可能不存在。"
 
 msgid "Screensaver"
 msgstr "屏幕保护"
+
+msgid "Screenshot"
+msgstr ""
 
 msgid "Select"
 msgstr "选择"
@@ -1968,6 +1982,9 @@ msgstr "该路径必须位于 SD 卡！"
 msgid "Time left:"
 msgstr "剩余时间："
 
+msgid "Timer Fix"
+msgstr ""
+
 msgid "Title Launcher"
 msgstr "系统频道"
 
@@ -1977,28 +1994,34 @@ msgstr "从 GameTDB 读取标题"
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
 msgstr "想要加载光盘上的 GameCube 游戏，请将游戏设置中的 GameCube 模式设置为 MIOS。"
 
-msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
-msgstr "想要使用 DIOS-MIOS 加载 GameCube 游戏，请将其放置在一个 USB 设备的 FAT32 分区中。"
+#, c-format
+msgid "To run GameCube games with %s you need to place them on an USB FAT32 partition."
+msgstr ""
 
-msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on a primary partition."
-msgstr "想要使用 DIOS-MIOS 加载 GameCube 游戏， ‘首选 GameCube 路径’必须设置在一个主要分区上。"
+#, c-format
+msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."
+msgstr ""
 
-msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
-msgstr "想要使用 DIOS-MIOS 加载 GameCube 游戏， ‘首选 GameCube 路径’必须设置在硬盘的第一个分区上。"
+#, c-format
+msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
+msgstr ""
 
-msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
-msgstr "想要使用 DIOS-MIOS 加载 GameCube 游戏， ‘首选 GameCube 路径’必须设置在一个位于 USB 设备的 FAT32 分区上。"
+#, c-format
+msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."
+msgstr ""
 
-msgid "To run GameCube games with DIOS MIOS you need to use a 512 bytes/sector Hard Drive."
-msgstr "想要使用 DIOS-MIOS 加载 GameCube 游戏，你需要使用一个每扇区 512 字节的硬盘。"
+#, c-format
+msgid "To run GameCube games with %s you need to use a 512 bytes/sector Hard Drive."
+msgstr ""
 
-msgid "To run GameCube games with DIOS MIOS you need to use a partition with 32k bytes/cluster or less."
-msgstr "想要使用 DIOS-MIOS 加载 GameCube 游戏，你需要使用一个每簇 32K 字节的硬盘。"
+#, c-format
+msgid "To run GameCube games with %s you need to use a partition with 32k bytes/cluster or less."
+msgstr ""
 
-msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
-msgstr "想要使用 Devolution 加载 GameCube 游戏，你在 Devolution 路径中放置 loader.bin。"
+msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Loader Path."
+msgstr ""
 
-msgid "To run GameCube games with Devolution you need to use a FAT32 partition."
+msgid "To run GameCube games with Nintendont you need the boot.dol file in your Nintendont Loader Path."
 msgstr ""
 
 msgid "Tooltip Delay"
@@ -2021,6 +2044,15 @@ msgstr "USB 接口"
 
 msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr "仅 Hermes cIOS 支持改变 USB 接口。"
+
+msgid "USB-HID Controller"
+msgstr ""
+
+msgid "USBloaderGX couldn't verify Nintendont boot.dol file. Launch this boot.dol anyway?"
+msgstr ""
+
+msgid "USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyway?"
+msgstr ""
 
 msgid "Uninstall"
 msgstr "删除"
@@ -2201,11 +2233,8 @@ msgstr "无法删除该分类。"
 msgid "You need to install DIOS MIOS Lite v1.2 or a newer version."
 msgstr "你需要安装 DIOS-MIOS Lite v1.2 或更新版本。"
 
-msgid "You need to install Devolution or DIOS MIOS (Lite) to launch GameCube games from USB or SD card"
-msgstr "你需要安装 Devolution 或 DIOS-MIOS (Lite) 以加载位于 USB 设备或 SD 卡上的 GameCube 游戏。"
-
-msgid "You need to set GameCube Mode to Devolution to launch GameCube games from USB or SD card"
-msgstr "你需要将 GameCube 模式设置为 Devolution 以加载 USB 设备或 SD 卡上的 GameCube 游戏。"
+msgid "You need to install an additional GameCube loader or select a different GameCube Mode to launch GameCube games from USB or SD card."
+msgstr ""
 
 msgid "Zoom Duration (Speed)"
 msgstr "缩放间隔 (速度)"
@@ -2266,6 +2295,84 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "Boot/Standard"
+#~ msgstr "启动/标准"
+
+#~ msgid "DEVO Force Widescreen"
+#~ msgstr "DEVO 强制宽屏"
+
+#~ msgid "DEVO LED Activity"
+#~ msgstr "DEVO 开启 LED"
+
+#~ msgid "DEVO MemCard Emulation"
+#~ msgstr "DEVO 模拟记忆卡"
+
+#~ msgid "DML Auto"
+#~ msgstr "DML 自动"
+
+#~ msgid "DML Debug"
+#~ msgstr "DML 除错"
+
+#~ msgid "DML Force Widescreen"
+#~ msgstr "DML 强制宽屏"
+
+#~ msgid "DML Japanese Patch"
+#~ msgstr "DML 日语补丁"
+
+#~ msgid "DML LED Activity"
+#~ msgstr "DML 开启 LED"
+
+#~ msgid "DML NMM Mode"
+#~ msgstr "DML 免记忆卡模式"
+
+#~ msgid "DML No Disc+"
+#~ msgstr "DML 免光盘模式"
+
+#~ msgid "DML None"
+#~ msgstr "DML 无"
+
+#~ msgid "DML PAD Hook"
+#~ msgstr "DML PAD 挂载"
+
+#~ msgid "DML Progressive Patch"
+#~ msgstr "DML 级进补丁"
+
+#~ msgid "DML Screenshot"
+#~ msgstr "DML 屏幕截图"
+
+#~ msgid "DML Video Mode"
+#~ msgstr "DML 视频模式"
+
+#~ msgid "Devolution requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."
+#~ msgstr "Devolution 需要 AHBPROT 模式！请从 HBC，或一个已升级的频道或 forwarder 加载 USBLoaderGX。"
+
+#~ msgid "To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."
+#~ msgstr "想要使用 DIOS-MIOS 加载 GameCube 游戏，请将其放置在一个 USB 设备的 FAT32 分区中。"
+
+#~ msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on a primary partition."
+#~ msgstr "想要使用 DIOS-MIOS 加载 GameCube 游戏， ‘首选 GameCube 路径’必须设置在一个主要分区上。"
+
+#~ msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
+#~ msgstr "想要使用 DIOS-MIOS 加载 GameCube 游戏， ‘首选 GameCube 路径’必须设置在硬盘的第一个分区上。"
+
+#~ msgid "To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."
+#~ msgstr "想要使用 DIOS-MIOS 加载 GameCube 游戏， ‘首选 GameCube 路径’必须设置在一个位于 USB 设备的 FAT32 分区上。"
+
+#~ msgid "To run GameCube games with DIOS MIOS you need to use a 512 bytes/sector Hard Drive."
+#~ msgstr "想要使用 DIOS-MIOS 加载 GameCube 游戏，你需要使用一个每扇区 512 字节的硬盘。"
+
+#~ msgid "To run GameCube games with DIOS MIOS you need to use a partition with 32k bytes/cluster or less."
+#~ msgstr "想要使用 DIOS-MIOS 加载 GameCube 游戏，你需要使用一个每簇 32K 字节的硬盘。"
+
+#~ msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."
+#~ msgstr "想要使用 Devolution 加载 GameCube 游戏，你在 Devolution 路径中放置 loader.bin。"
+
+#~ msgid "You need to install Devolution or DIOS MIOS (Lite) to launch GameCube games from USB or SD card"
+#~ msgstr "你需要安装 Devolution 或 DIOS-MIOS (Lite) 以加载位于 USB 设备或 SD 卡上的 GameCube 游戏。"
+
+#~ msgid "You need to set GameCube Mode to Devolution to launch GameCube games from USB or SD card"
+#~ msgstr "你需要将 GameCube 模式设置为 Devolution 以加载 USB 设备或 SD 卡上的 GameCube 游戏。"
 
 #~ msgid "Custom Discarts"
 #~ msgstr "自定义光盘图片"

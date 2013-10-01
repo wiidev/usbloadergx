@@ -88,8 +88,8 @@ class DeviceHandler
 		PartitionHandle * GetUSB0Handle() const { return usb0; }
 		PartitionHandle * GetUSB1Handle() const { return usb1; }
 		PartitionHandle * GetUSBHandleFromPartition(int part) const;
-		static const DISC_INTERFACE *GetUSB0Interface() { return &__io_usbstorage2_port0; }
-		static const DISC_INTERFACE *GetUSB1Interface() { return &__io_usbstorage2_port1; }
+		static const DISC_INTERFACE *GetUSB0Interface() { return (IOS_GetVersion() >= 200) ? &__io_usbstorage2_port0 : &__io_usbstorage; }
+		static const DISC_INTERFACE *GetUSB1Interface() { return (IOS_GetVersion() >= 200) ? &__io_usbstorage2_port1 : NULL; }
 		static int GetFilesystemType(int dev);
 		static const char * GetFSName(int dev);
 		static int PathToDriveType(const char * path);

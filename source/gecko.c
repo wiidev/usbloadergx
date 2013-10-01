@@ -5,14 +5,23 @@
 #include <malloc.h>
 #include <sys/iosupport.h>
 
+// #define DEBUG_TO_FILE
+// #define WIFI_GECKO // don't keep this for released build
+
+#ifdef WIFI_GECKO
+#include <utils/wifi_gecko.h>
+#endif
+
 /* init-globals */
 static bool geckoinit = false;
 
 void gprintf(const char *format, ...)
 {
 	#ifndef DEBUG_TO_FILE
-	if (!geckoinit)
-		return;
+		#ifndef WIFI_GECKO
+		if (!geckoinit)
+			return;
+		#endif
 	#endif
 
 	static char stringBuf[4096];
@@ -32,6 +41,10 @@ void gprintf(const char *format, ...)
 		}
 		#else
 		usb_sendbuffer(1, stringBuf, len);
+		#endif
+		
+		#ifdef WIFI_GECKO
+		wifi_printf(stringBuf);
 		#endif
 	}
 	va_end(va);

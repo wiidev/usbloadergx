@@ -72,13 +72,14 @@ static const char * GCMode[] =
 {
 	trNOOP( "MIOS (Default & Customs)" ),
 	trNOOP( "Devolution" ),
+	trNOOP( "Nintendont" ),
 };
 
 static const char * DMLVideoText[] =
 {
-	trNOOP( "DML Auto" ),
+	trNOOP( "Auto" ),
 	trNOOP( "Use Game Settings" ),
-	trNOOP( "DML None" ),
+	trNOOP( "None" ),
 };
 
 static const char * DMLNMMMode[] =
@@ -101,6 +102,8 @@ static const char * DEVOMCText[] =
 	trNOOP( "ON" ),
 	trNOOP( "Individual" ),
 };
+
+static int currentGCmode = 0;
 
 GCGameLoadSM::GCGameLoadSM(struct discHdr *hdr)
 	: SettingsMenu(tr("Game Load"), &GuiOptions, MENU_NONE),
@@ -126,6 +129,8 @@ GCGameLoadSM::GCGameLoadSM(struct discHdr *hdr)
 	saveBtn->SetLabel(saveBtnTxt);
 	Append(saveBtn);
 
+	currentGCmode = GameConfig.GameCubeMode == INHERIT ? Settings.GameCubeMode : GameConfig.GameCubeMode;
+	
 	SetOptionNames();
 	SetOptionValues();
 }
@@ -157,31 +162,47 @@ void GCGameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Favorite Level" ));
 	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
-	Options->SetName(Idx++, "%s", tr( "Ocarina" ));
 	Options->SetName(Idx++, "%s", tr( "Parental Control" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
-	if(IosLoader::GetMIOSInfo() >DEFAULT_MIOS)
+	if(currentGCmode == GC_MODE_MIOS &&IosLoader::GetMIOSInfo() > DEFAULT_MIOS)
 	{
-		Options->SetName(Idx++, "%s", tr( "DML Video Mode" ));
-		Options->SetName(Idx++, "%s", tr( "DML Progressive Patch" ));
-		Options->SetName(Idx++, "%s", tr( "DML NMM Mode" ));
-		Options->SetName(Idx++, "%s", tr( "DML LED Activity" ));
-		Options->SetName(Idx++, "%s", tr( "DML PAD Hook" ));
-		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_2_2 && IosLoader::GetDMLVersion() <= DML_VERSION_DML_2_2_1)
-			Options->SetName(Idx++, "%s", tr( "DML No Disc+" ));
+		Options->SetName(Idx++, "%s", tr( "--==  DM(L) + Nintendont" ));
+		Options->SetName(Idx++, "%s", tr( "Video Mode" ));
+		Options->SetName(Idx++, "%s", tr( "Progressive Patch" ));
 		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_1)
-			Options->SetName(Idx++, "%s", tr( "DML Force Widescreen" ));
+			Options->SetName(Idx++, "%s", tr( "Force Widescreen" ));
+		Options->SetName(Idx++, "%s", tr( "Ocarina" ));
+		Options->SetName(Idx++, "%s", tr( "NMM Mode" ));
+		Options->SetName(Idx++, "%s", tr( "Debug" ));
+		Options->SetName(Idx++, "%s", tr( "LED Activity" ));
+		Options->SetName(Idx++, "%s", tr( "PAD Hook" ));
+		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_2_2 && IosLoader::GetDMLVersion() <= DML_VERSION_DML_2_2_1)
+			Options->SetName(Idx++, "%s", tr( "No Disc+" ));
 		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_5)
-			Options->SetName(Idx++, "%s", tr( "DML Screenshot" ));
-		Options->SetName(Idx++, "%s", tr( "DML Japanese Patch" ));
-		Options->SetName(Idx++, "%s", tr( "DML Debug" ));
+			Options->SetName(Idx++, "%s", tr( "Screenshot" ));
+		Options->SetName(Idx++, "%s", tr( "Japanese Patch" ));
 	}
-	Options->SetName(Idx++, "%s", tr( "DEVO MemCard Emulation" ));
-	Options->SetName(Idx++, "%s", tr( "DEVO Force Widescreen" ));
-	Options->SetName(Idx++, "%s", tr( "DEVO LED Activity" ));
-	Options->SetName(Idx++, "%s", tr( "DEVO F-Zero AX" ));
-	Options->SetName(Idx++, "%s", tr( "DEVO Timer Fix" ));
-	Options->SetName(Idx++, "%s", tr( "DEVO D Buttons" ));
+	if(currentGCmode == GC_MODE_NINTENDONT)
+	{
+		Options->SetName(Idx++, "%s", tr( "--==  DM(L) + Nintendont" ));
+		Options->SetName(Idx++, "%s", tr( "Video Mode" ));
+		Options->SetName(Idx++, "%s", tr( "Progressive Patch" ));
+		Options->SetName(Idx++, "%s", tr( "Force Widescreen" ));
+		Options->SetName(Idx++, "%s", tr( "Ocarina" ));
+		Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
+		Options->SetName(Idx++, "%s", tr( "Debug" ));
+		Options->SetName(Idx++, "%s", tr( "USB-HID Controller" ));
+	}
+	if(currentGCmode == GC_MODE_DEVOLUTION)
+	{
+		Options->SetName(Idx++, "%s", tr( "--==       Devolution" ));
+		Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
+		Options->SetName(Idx++, "%s", tr( "Force Widescreen" ));
+		Options->SetName(Idx++, "%s", tr( "LED Activity" ));
+		Options->SetName(Idx++, "%s", tr( "F-Zero AX" ));
+		Options->SetName(Idx++, "%s", tr( "Timer Fix" ));
+		Options->SetName(Idx++, "%s", tr( "D Buttons" ));
+	}
 }
 
 void GCGameLoadSM::SetOptionValues()
@@ -205,12 +226,6 @@ void GCGameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(LanguageText[GameConfig.language]));
-	
-	//! Settings: Ocarina
-	if(GameConfig.ocarina == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.ocarina]));
 
 	//! Settings: Parental Control
 	Options->SetValue(Idx++, "%s", tr(ParentalText[GameConfig.parentalcontrol]));
@@ -221,26 +236,51 @@ void GCGameLoadSM::SetOptionValues()
 	else
 		Options->SetValue(Idx++, "%s", tr(GCMode[GameConfig.GameCubeMode]));
 	
-	if(IosLoader::GetMIOSInfo() >DEFAULT_MIOS)
+	if(currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS)
 	{
-		//! Settings: DML Video Mode
+
+		//! Settings: GameCube TITLE : DIOS MIOS (Lite) + Nintendont
+		Options->SetValue(Idx++, "==--   ");
+	
+		//! Settings: DML + NIN Video Mode
 		if(GameConfig.DMLVideo == INHERIT)
 			Options->SetValue(Idx++, tr("Use global"));
 		else
 			Options->SetValue(Idx++, "%s", tr(DMLVideoText[GameConfig.DMLVideo]));
 
-		//! Settings: DML Progressive Patch
+		//! Settings: DML + NIN Progressive Patch
 		if(GameConfig.DMLProgPatch == INHERIT)
 			Options->SetValue(Idx++, tr("Use global"));
 		else
 			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLProgPatch]));
 
-		//! Settings: DML NMM Mode
+		//! Settings: DML + NIN Force Widescreen
+		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_1)
+		{
+			if(GameConfig.DMLWidescreen == INHERIT)
+				Options->SetValue(Idx++, tr("Use global"));
+			else
+				Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLWidescreen]));
+		}
+
+		//! Settings: Ocarina
+		if(GameConfig.ocarina == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.ocarina]));
+
+		//! Settings: DML + NIN NMM Mode
 		if(GameConfig.DMLNMM == INHERIT)
 			Options->SetValue(Idx++, tr("Use global"));
 		else
 			Options->SetValue(Idx++, "%s", tr(DMLNMMMode[GameConfig.DMLNMM]));
 
+		//! Settings: DML + NIN Debug
+		if(GameConfig.DMLDebug == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(DMLDebug[GameConfig.DMLDebug]));
+		
 		//! Settings: DML LED Activity
 		if(GameConfig.DMLActivityLED == INHERIT)
 			Options->SetValue(Idx++, tr("Use global"));
@@ -262,15 +302,6 @@ void GCGameLoadSM::SetOptionValues()
 				Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLNoDisc2]));
 		}
 
-		//! Settings: DML Force Widescreen
-		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_1)
-		{
-			if(GameConfig.DMLWidescreen == INHERIT)
-				Options->SetValue(Idx++, tr("Use global"));
-			else
-				Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLWidescreen]));
-		}
-
 		//! Settings: DML Screenshot
 		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_5)
 		{
@@ -285,49 +316,100 @@ void GCGameLoadSM::SetOptionValues()
 			Options->SetValue(Idx++, tr("Use global"));
 		else
 			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLJPNPatch]));
+	}
+	
+	if(currentGCmode == GC_MODE_NINTENDONT)
+	{
 
-		//! Settings: DML Debug
+		//! Settings: GameCube TITLE : DIOS MIOS (Lite) + Nintendont
+		Options->SetValue(Idx++, "==--   ");
+	
+		//! Settings: DML + NIN Video Mode
+		if(GameConfig.DMLVideo == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(DMLVideoText[GameConfig.DMLVideo]));
+
+		//! Settings: DML + NIN Progressive Patch
+		if(GameConfig.DMLProgPatch == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLProgPatch]));
+
+		//! Settings: DML + NIN Force Widescreen
+		if(GameConfig.DMLWidescreen == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLWidescreen]));
+
+		//! Settings: Ocarina
+		if(GameConfig.ocarina == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.ocarina]));
+
+		//! Settings: NIN Memory Card Emulation
+		if(GameConfig.NINMCEmulation == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINMCEmulation]));
+
+		//! Settings: DML + NIN Debug
 		if(GameConfig.DMLDebug == INHERIT)
 			Options->SetValue(Idx++, tr("Use global"));
 		else
 			Options->SetValue(Idx++, "%s", tr(DMLDebug[GameConfig.DMLDebug]));
+		
+		//! Settings: NIN USB-HID Controller
+		if(GameConfig.NINUSBHID == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINUSBHID]));
+		
 	}
+	
+	if(currentGCmode == GC_MODE_DEVOLUTION)
+	{
+		
+		//! Settings: GameCube TITLE : Devolution
+		Options->SetValue(Idx++, "==--   ");
+		
+		//! Settings: DEVO Memory Card Emulation
+		if(GameConfig.DEVOMCEmulation == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(DEVOMCText[GameConfig.DEVOMCEmulation]));
 
-	//! Settings: DEVO Memory Card Emulation
-	if(GameConfig.DEVOMCEmulation == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(DEVOMCText[GameConfig.DEVOMCEmulation]));
+		//! Settings: DEVO Widescreen Patch
+		if(GameConfig.DEVOWidescreen == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVOWidescreen]));
 
-	//! Settings: DEVO Widescreen Patch
-	if(GameConfig.DEVOWidescreen == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVOWidescreen]));
+		//! Settings: DEVO Activity LED
+		if(GameConfig.DEVOActivityLED == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVOActivityLED]));
 
-	//! Settings: DEVO Activity LED
-	if(GameConfig.DEVOActivityLED == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVOActivityLED]));
+		//! Settings: DEVO F-Zero AX unlock patch
+		if(GameConfig.DEVOFZeroAX == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVOFZeroAX]));
 
-	//! Settings: DEVO F-Zero AX unlock patch
-	if(GameConfig.DEVOFZeroAX == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVOFZeroAX]));
+		//! Settings: DEVO Timer Fix
+		if(GameConfig.DEVOTimerFix == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVOTimerFix]));
 
-	//! Settings: DEVO Timer Fix
-	if(GameConfig.DEVOTimerFix == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVOTimerFix]));
-
-	//! Settings: DEVO Direct Button Mapping
-	if(GameConfig.DEVODButtons == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVODButtons]));
+		//! Settings: DEVO Direct Button Mapping
+		if(GameConfig.DEVODButtons == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVODButtons]));
+	}
 }
 
 int GCGameLoadSM::GetMenuInternal()
@@ -379,12 +461,6 @@ int GCGameLoadSM::GetMenuInternal()
 		if (++GameConfig.language >= GC_MAX_LANGUAGE) GameConfig.language = INHERIT;
 	}
 
-	//! Settings: Ocarina
-	else if (ret == ++Idx)
-	{
-		if (++GameConfig.ocarina >= MAX_ON_OFF) GameConfig.ocarina = INHERIT;
-	}
-
 	//! Settings: Parental Control
 	else if (ret == ++Idx)
 	{
@@ -395,100 +471,170 @@ int GCGameLoadSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.GameCubeMode >= CG_MODE_MAX_CHOICE) GameConfig.GameCubeMode = INHERIT;
+		currentGCmode = GameConfig.GameCubeMode == INHERIT ? Settings.GameCubeMode : GameConfig.GameCubeMode;
+			Options->ClearList();
+			SetOptionNames();
+			SetOptionValues();
+	}
+
+	//! Settings: GameCube TITLE : DIOS MIOS (Lite) + Nintendont
+	else if (currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
+	{
+		// This one is a category title
 	}
 
 	//! Settings: DML Video Mode
-	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
+	else if (currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
 	{
 		if (++GameConfig.DMLVideo >= DML_VIDEO_MAX_CHOICE) GameConfig.DMLVideo = INHERIT;
 	}
 
 	//! Settings: DML Progressive Patch
-	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
+	else if (currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
 	{
 		if (++GameConfig.DMLProgPatch >= MAX_ON_OFF) GameConfig.DMLProgPatch = INHERIT;
 	}
 
+	//! Settings: DML Force Widescreen
+	else if (currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS && IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_1 && ret == ++Idx)
+	{
+		if (++GameConfig.DMLWidescreen >= MAX_ON_OFF) GameConfig.DMLWidescreen = INHERIT;
+	}
+
+	//! Settings: Ocarina
+	else if (currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
+	{
+		if (++GameConfig.ocarina >= MAX_ON_OFF) GameConfig.ocarina = INHERIT;
+	}
+
 	//! Settings: DML NMM Mode
-	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
+	else if (currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
 	{
 		if (++GameConfig.DMLNMM >= 3) GameConfig.DMLNMM = INHERIT;
 	}
 
+	//! Settings: DML Debug
+	else if (currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
+	{
+		if (++GameConfig.DMLDebug >= 3) GameConfig.DMLDebug = INHERIT;
+	}
+
 	//! Settings: DML LED Activity
-	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
+	else if (currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
 	{
 		if (++GameConfig.DMLActivityLED >= MAX_ON_OFF) GameConfig.DMLActivityLED = INHERIT;
 	}
 
 	//! Settings: DML PAD Hook
-	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
+	else if (currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
 	{
 		if (++GameConfig.DMLPADHOOK >= MAX_ON_OFF) GameConfig.DMLPADHOOK = INHERIT;
 	}
 
 	//! Settings: DML Extended No Disc
-	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_2_2 && IosLoader::GetDMLVersion() <= DML_VERSION_DML_2_2_1 && ret == ++Idx)
+	else if (currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS && IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_2_2 && IosLoader::GetDMLVersion() <= DML_VERSION_DML_2_2_1 && ret == ++Idx)
 	{
 		if (++GameConfig.DMLNoDisc2 >= MAX_ON_OFF) GameConfig.DMLNoDisc2 = INHERIT;
 	}
 
-	//! Settings: DML Force Widescreen
-	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_1 && ret == ++Idx)
-	{
-		if (++GameConfig.DMLWidescreen >= MAX_ON_OFF) GameConfig.DMLWidescreen = INHERIT;
-	}
-
 	//! Settings: DML Screenshot
-	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_5 && ret == ++Idx)
+	else if (currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS && IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_5 && ret == ++Idx)
 	{
 		if (++GameConfig.DMLScreenshot >= MAX_ON_OFF) GameConfig.DMLScreenshot = INHERIT;
 	}
 
 	//! Settings: DML Japanese Patch
-	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
+	else if (currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
 	{
 		if (++GameConfig.DMLJPNPatch >= MAX_ON_OFF) GameConfig.DMLJPNPatch = INHERIT;
 	}
-	
-	//! Settings: DML Debug
-	else if (IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
+
+	//! Settings: GameCube TITLE : DIOS MIOS (Lite) + Nintendont
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		// This one is a category title
+	}
+
+	//! Settings: NIN Video Mode
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.DMLVideo >= DML_VIDEO_MAX_CHOICE) GameConfig.DMLVideo = INHERIT;
+	}
+
+	//! Settings: NIN Progressive Patch
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.DMLProgPatch >= MAX_ON_OFF) GameConfig.DMLProgPatch = INHERIT;
+	}
+
+	//! Settings: NIN Force Widescreen
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.DMLWidescreen >= MAX_ON_OFF) GameConfig.DMLWidescreen = INHERIT;
+	}
+
+	//! Settings: Ocarina
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.ocarina >= MAX_ON_OFF) GameConfig.ocarina = INHERIT;
+	}
+
+	//! Settings: NIN Memory Card Emulation
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.NINMCEmulation >= MAX_ON_OFF) GameConfig.NINMCEmulation = INHERIT;
+	}
+
+	//! Settings: NIN Debug
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
 	{
 		if (++GameConfig.DMLDebug >= 3) GameConfig.DMLDebug = INHERIT;
 	}
-	
-	//! Settings: DEVO Memory Card Emulation
-	else if (ret == ++Idx)
+
+	//! Settings: NIN USB-HID Controller
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.NINUSBHID >= MAX_ON_OFF) GameConfig.NINUSBHID = INHERIT;
+	}
+
+	//! Settings: GameCube TITLE : Devolution
+	else if (currentGCmode == GC_MODE_DEVOLUTION && ret == ++Idx)
+	{
+		// This one is a category title
+	}
+
+	//! Settings: DEVO MemCard emulation
+	else if (currentGCmode == GC_MODE_DEVOLUTION && ret == ++Idx)
 	{
 		if (++GameConfig.DEVOMCEmulation >= DEVO_MC_MAX_CHOICE) GameConfig.DEVOMCEmulation = INHERIT;
 	}
 
 	//! Settings: DEVO Widescreen Patch
-	else if (ret == ++Idx)
+	else if (currentGCmode == GC_MODE_DEVOLUTION && ret == ++Idx)
 	{
 		if (++GameConfig.DEVOWidescreen >= MAX_ON_OFF) GameConfig.DEVOWidescreen = INHERIT;
 	}
 
 	//! Settings: DEVO Activity LED
-	else if (ret == ++Idx)
+	else if (currentGCmode == GC_MODE_DEVOLUTION && ret == ++Idx)
 	{
 		if (++GameConfig.DEVOActivityLED >= MAX_ON_OFF) GameConfig.DEVOActivityLED = INHERIT;
 	}
 
 	//! Settings: DEVO F-Zero AX unlock patch
-	else if (ret == ++Idx)
+	else if (currentGCmode == GC_MODE_DEVOLUTION && ret == ++Idx)
 	{
 		if (++GameConfig.DEVOFZeroAX >= MAX_ON_OFF) GameConfig.DEVOFZeroAX = INHERIT;
 	}
 
 	//! Settings: DEVO Timer Fix
-	else if (ret == ++Idx)
+	else if (currentGCmode == GC_MODE_DEVOLUTION && ret == ++Idx)
 	{
 		if (++GameConfig.DEVOTimerFix >= MAX_ON_OFF) GameConfig.DEVOTimerFix = INHERIT;
 	}
 
 	//!Settings: DEVO Direct Button Mapping
-	else if (ret == ++Idx)
+	else if (currentGCmode == GC_MODE_DEVOLUTION && ret == ++Idx)
 	{
 		if (++GameConfig.DEVODButtons >= MAX_ON_OFF) GameConfig.DEVODButtons = INHERIT;
 	}

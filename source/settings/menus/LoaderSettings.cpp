@@ -122,6 +122,7 @@ static const char * GCMode[] =
 {
 	trNOOP( "MIOS (Default & Customs)" ),
 	trNOOP( "Devolution" ),
+	trNOOP( "Nintendont" ),
 };
 
 static const char * GCSourceText[][3] =
@@ -135,9 +136,9 @@ static const char * GCSourceText[][3] =
 
 static const char * DMLVideoText[] =
 {
-	trNOOP( "DML Auto" ),
+	trNOOP( "Auto" ),
 	trNOOP( "Use Game Settings" ),
-	trNOOP( "DML None" ),
+	trNOOP( "None" ),
 };
 
 static const char * DMLNMMMode[] =
@@ -174,7 +175,8 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
 	Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
 	Options->SetName(Idx++, "%s", tr( "Ocarina" ));
-	Options->SetName(Idx++, "%s", tr( "Boot/Standard" ));
+	Options->SetName(Idx++, "%s", tr( "Loader's IOS" ));
+	Options->SetName(Idx++, "%s", tr( "Game's IOS" ));
 	Options->SetName(Idx++, "%s", tr( "Quick Boot" ));
 	Options->SetName(Idx++, "%s", tr( "Error 002 fix" ));
 	Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
@@ -185,24 +187,32 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
 	Options->SetName(Idx++, "%s", tr( "Debugger Paused Start" ));
 	Options->SetName(Idx++, "%s", tr( "Channel Launcher" ));
-	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
+	Options->SetName(Idx++, "%s", tr( "=== GameCube Settings" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Source" ));
-	Options->SetName(Idx++, "%s", tr( "DML Video Mode" ));
-	Options->SetName(Idx++, "%s", tr( "DML Progressive Patch" ));
-	Options->SetName(Idx++, "%s", tr( "DML NMM Mode" ));
-	Options->SetName(Idx++, "%s", tr( "DML LED Activity" ));
-	Options->SetName(Idx++, "%s", tr( "DML PAD Hook" ));
-	Options->SetName(Idx++, "%s", tr( "DML No Disc+" ));
-	Options->SetName(Idx++, "%s", tr( "DML Force Widescreen" ));
-	Options->SetName(Idx++, "%s", tr( "DML Screenshot" ));
-	Options->SetName(Idx++, "%s", tr( "DML Japanese Patch" ));
-	Options->SetName(Idx++, "%s", tr( "DML Debug" ));
-	Options->SetName(Idx++, "%s", tr( "DEVO MemCard Emulation" ));
-	Options->SetName(Idx++, "%s", tr( "DEVO Force Widescreen" ));
-	Options->SetName(Idx++, "%s", tr( "DEVO LED Activity" ));
-	Options->SetName(Idx++, "%s", tr( "DEVO F-Zero AX" ));
-	Options->SetName(Idx++, "%s", tr( "DEVO Timer Fix" ));
-	Options->SetName(Idx++, "%s", tr( "DEVO D Buttons" ));
+	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
+	Options->SetName(Idx++, "%s", tr( "--==  DM(L) + Nintendont" ));
+	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
+	Options->SetName(Idx++, "%s", tr( "Progressive Patch" ));
+	Options->SetName(Idx++, "%s", tr( "Force Widescreen" ));
+	Options->SetName(Idx++, "%s", tr( "Debug" ));
+	Options->SetName(Idx++, "%s", tr( "--==   DIOS MIOS (Lite) " ));
+	Options->SetName(Idx++, "%s", tr( "NMM Mode" ));
+	Options->SetName(Idx++, "%s", tr( "PAD Hook" ));
+	Options->SetName(Idx++, "%s", tr( "No Disc+" ));
+	Options->SetName(Idx++, "%s", tr( "Screenshot" ));
+	Options->SetName(Idx++, "%s", tr( "LED Activity" ));
+	Options->SetName(Idx++, "%s", tr( "Japanese Patch" ));
+	Options->SetName(Idx++, "%s", tr( "--==       Nintendont" ));
+	Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
+	Options->SetName(Idx++, "%s", tr( "Auto Boot" ));
+	Options->SetName(Idx++, "%s", tr( "USB-HID Controller" ));
+	Options->SetName(Idx++, "%s", tr( "--==       Devolution" ));
+	Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
+	Options->SetName(Idx++, "%s", tr( "Force Widescreen" ));
+	Options->SetName(Idx++, "%s", tr( "LED Activity" ));
+	Options->SetName(Idx++, "%s", tr( "F-Zero AX" ));
+	Options->SetName(Idx++, "%s", tr( "Timer Fix" ));
+	Options->SetName(Idx++, "%s", tr( "D Buttons" ));
 
 	SetOptionValues();
 
@@ -258,7 +268,13 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: Ocarina
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.ocarina] ));
 
-	//! Settings: Boot/Standard
+	//! Settings: Loader's IOS
+	if (Settings.godmode)
+		Options->SetValue(Idx++, "IOS %i", Settings.LoaderIOS);
+	else
+		Options->SetValue(Idx++, "********");
+
+	//! Settings: Game's IOS
 	if (Settings.godmode)
 		Options->SetValue(Idx++, "IOS %i", Settings.cios);
 	else
@@ -299,24 +315,36 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: Channel Launcher
 	Options->SetValue(Idx++, "%s", tr( ChannelLaunchText[Settings.UseChanLauncher] ));
 
-	//! Settings: GameCube Mode
-	Options->SetValue(Idx++, "%s", tr(GCMode[Settings.GameCubeMode]));
+	//! Settings: TITLE - GameCube Settings
+	Options->SetValue(Idx++, "=======");
 
 	//! Settings: GameCube Source
 	Options->SetValue(Idx++, "%s%s%s", tr(GCSourceText[Settings.GameCubeSource][0]),
 	                GCSourceText[Settings.GameCubeSource][1], tr(GCSourceText[Settings.GameCubeSource][2]));
 
-	//! Settings: DML Video Mode
+	//! Settings: GameCube Mode
+	Options->SetValue(Idx++, "%s", tr(GCMode[Settings.GameCubeMode]));
+
+	//! Settings: TITLE - GameCube DIOS MIOS (Lite) + Nintendont
+	Options->SetValue(Idx++, "==--   ");
+
+	//! Settings: DML + NIN Video Mode
 	Options->SetValue(Idx++, "%s", tr(DMLVideoText[Settings.DMLVideo]));
 
-	//! Settings: DML Progressive Patch
+	//! Settings: DML + NIN Progressive Patch
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLProgPatch]));
+
+	//! Settings: DML + NIN Force Widescreen
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLWidescreen]));
+
+	//! Settings: DML Debug
+	Options->SetValue(Idx++, "%s", tr(DMLDebug[Settings.DMLDebug]));
+
+	//! Settings: TITLE - GameCube DIOS MIOS (Lite)
+	Options->SetValue(Idx++, "==--   ");
 
 	//! Settings: DML NMM Mode
 	Options->SetValue(Idx++, "%s", tr(DMLNMMMode[Settings.DMLNMM]));
-
-	//! Settings: DML LED Activity
-	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLActivityLED]));
 
 	//! Settings: DML PAD Hook
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLPADHOOK]));
@@ -324,17 +352,29 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: DML Extended No Disc
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLNoDisc2]));
 
-	//! Settings: DML Force Widescreen
-	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLWidescreen]));
-
 	//! Settings: DML Screenshot
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLScreenshot]));
+
+	//! Settings: DML LED Activity
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLActivityLED]));
 
 	//! Settings: DML Japanese Patch
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLJPNPatch]));
 
-	//! Settings: DML Debug
-	Options->SetValue(Idx++, "%s", tr(DMLDebug[Settings.DMLDebug]));
+	//! Settings: TITLE - Nintendont
+	Options->SetValue(Idx++, "==--   ");
+
+	//! Settings: TITLE - NIN Memory Card Emulation
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINMCEmulation]));
+
+	//! Settings: TITLE - NIN Auto Boot
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINAutoboot]));
+
+	//! Settings: TITLE - NIN USB-HID controller
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINUSBHID]));
+
+	//! Settings: TITLE - Devolution
+	Options->SetValue(Idx++, "==--   ");
 
 	//! Settings: DEVO Memory Card Emulation
 	Options->SetValue(Idx++, "%s", tr(DEVOMCText[Settings.DEVOMCEmulation]));
@@ -413,7 +453,33 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.ocarina >= MAX_ON_OFF) Settings.ocarina = 0;
 	}
 
-	//! Settings: Boot/Standard
+	//! Settings: Loader's IOS
+	else if (ret == ++Idx)
+	{
+		if(!Settings.godmode)
+			return MENU_NONE;
+
+		char entered[4];
+		snprintf(entered, sizeof(entered), "%i", Settings.LoaderIOS);
+		if(OnScreenNumpad(entered, sizeof(entered)))
+		{
+			if(atoi(entered) == 58) // allow only IOS58 for IOS <200
+				Settings.LoaderIOS = 58;
+			else
+				Settings.LoaderIOS = LIMIT(atoi(entered), 200, 255);
+
+			if(NandTitles.IndexOf(TITLE_ID(1, Settings.LoaderIOS)) < 0)
+			{
+				WindowPrompt(tr("Warning:"), tr("This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."), tr("OK"));
+			}
+			else if(Settings.LoaderIOS == 254)
+			{
+				WindowPrompt(tr("Warning:"), tr("This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."), tr("OK"));
+			}
+		}
+	}
+
+	//! Settings: Game's IOS
 	else if (ret == ++Idx)
 	{
 		if(!Settings.godmode)
@@ -466,7 +532,7 @@ int LoaderSettings::GetMenuInternal()
 	//! Settings: Nand Emulation
 	else if (ret == ++Idx )
 	{
-		if(!IosLoader::IsD2X())
+		if(!IosLoader::IsD2X(Settings.cios))
 			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
 		else if (++Settings.NandEmuMode >= 3) Settings.NandEmuMode = 0;
 	}
@@ -478,7 +544,7 @@ int LoaderSettings::GetMenuInternal()
 		bool NandEmu_compatible = false;
 		NandEmu_compatible = IosLoader::is_NandEmu_compatible(Settings.NandEmuChanPath);
 
-		if(!IosLoader::IsD2X() && !NandEmu_compatible)
+		if(!IosLoader::IsD2X(Settings.cios) && !NandEmu_compatible)
 			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
 		else if (++Settings.NandEmuChanMode >= 3) Settings.NandEmuChanMode = 1;
 	}
@@ -507,10 +573,10 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.UseChanLauncher >= MAX_ON_OFF) Settings.UseChanLauncher = 0;
 	}
 
-	//! Settings: GameCube Mode
+	//! Settings: TITLE - GameCube Settings
 	else if (ret == ++Idx)
 	{
-		if (++Settings.GameCubeMode >= CG_MODE_MAX_CHOICE) Settings.GameCubeMode = 0;
+		// This one is a category title
 	}
 
 	//! Settings: GameCube Source
@@ -519,28 +585,52 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.GameCubeSource >= CG_SOURCE_MAX_CHOICE) Settings.GameCubeSource = 0;
 	}
 
-	//! Settings: DML Video Mode
+	//! Settings: GameCube Mode
+	else if (ret == ++Idx)
+	{
+		if (++Settings.GameCubeMode >= CG_MODE_MAX_CHOICE) Settings.GameCubeMode = 0;
+	}
+
+	//! Settings: TITLE - GameCube DM(L) + Nintendont
+	else if (ret == ++Idx)
+	{
+		// This one is a category title
+	}
+
+	//! Settings: DML + NIN Video Mode
 	else if (ret == ++Idx)
 	{
 		if (++Settings.DMLVideo >= DML_VIDEO_MAX_CHOICE) Settings.DMLVideo = 0;
 	}
 
-	//! Settings: DML Progressive Patch
+	//! Settings: DML + NIN Progressive Patch
 	else if (ret == ++Idx)
 	{
 		if (++Settings.DMLProgPatch >= MAX_ON_OFF) Settings.DMLProgPatch = 0;
 	}
 
-	//! Settings: DML NMM Mode
+	//! Settings: DML + NIN Force Widescreen
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DMLWidescreen >= MAX_ON_OFF) Settings.DMLWidescreen = 0;
+	}
+
+	//! Settings: DML Debug
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DMLDebug >= 3) Settings.DMLDebug = 0;
+	}
+
+	//! Settings: TITLE - GameCube DIOS MIOS (Lite)
+	else if (ret == ++Idx)
+	{
+		// This one is a category title
+	}
+
+	//! Settings: DML + NIN NMM Mode
 	else if (ret == ++Idx)
 	{
 		if (++Settings.DMLNMM >= 3) Settings.DMLNMM = 0;
-	}
-
-	//! Settings: DML LED Activity
-	else if (ret == ++Idx)
-	{
-		if (++Settings.DMLActivityLED >= MAX_ON_OFF) Settings.DMLActivityLED = 0;
 	}
 
 	//! Settings: DML PAD Hook
@@ -555,16 +645,16 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.DMLNoDisc2 >= MAX_ON_OFF) Settings.DMLNoDisc2 = 0;
 	}
 
-	//! Settings: DML Force Widescreen
-	else if (ret == ++Idx)
-	{
-		if (++Settings.DMLWidescreen >= MAX_ON_OFF) Settings.DMLWidescreen = 0;
-	}
-
 	//! Settings: DML Screenshot
 	else if (ret == ++Idx)
 	{
 		if (++Settings.DMLScreenshot >= MAX_ON_OFF) Settings.DMLScreenshot = 0;
+	}
+
+	//! Settings: DML LED Activity
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DMLActivityLED >= MAX_ON_OFF) Settings.DMLActivityLED = 0;
 	}
 
 	//! Settings: DML Japanese Patch
@@ -573,10 +663,34 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.DMLJPNPatch >= MAX_ON_OFF) Settings.DMLJPNPatch = 0;
 	}
 
-	//! Settings: DML Debug
+	//! Settings: TITLE - Nintendont
 	else if (ret == ++Idx)
 	{
-		if (++Settings.DMLDebug >= 3) Settings.DMLDebug = 0;
+		// This one is a category title
+	}
+
+	//! Settings: NIN Memory Card Emulation
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINMCEmulation >= MAX_ON_OFF) Settings.NINMCEmulation = 0;
+	}
+
+	//! Settings: NIN Auto Boot
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINAutoboot >= MAX_ON_OFF) Settings.NINAutoboot = 0;
+	}
+
+	//! Settings: NIN USB-HID controller
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINUSBHID >= MAX_ON_OFF) Settings.NINUSBHID = 0;
+	}
+
+	//! Settings: TITLE - Devolution
+	else if (ret == ++Idx)
+	{
+		// This one is a category title
 	}
 
 	//! Settings: DEVO Memory Card Emulation

@@ -217,6 +217,8 @@ bool CGameSettings::Save()
 		fprintf(f, "DMLScreenshot:%d; ", GameList[i].DMLScreenshot);
 		fprintf(f, "DMLJPNPatch:%d; ", GameList[i].DMLJPNPatch);
 		fprintf(f, "DMLDebug:%d; ", GameList[i].DMLDebug);
+		fprintf(f, "NINMCEmulation:%d; ", GameList[i].NINMCEmulation);
+		fprintf(f, "NINUSBHID:%d; ", GameList[i].NINUSBHID);
 		fprintf(f, "DEVOMCEmulation:%d; ", GameList[i].DEVOMCEmulation);
 		fprintf(f, "DEVOWidescreen:%d; ", GameList[i].DEVOWidescreen);
 		fprintf(f, "DEVOActivityLED:%d; ", GameList[i].DEVOActivityLED);
@@ -393,6 +395,16 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		game.DMLDebug = atoi(value);
 		return true;
 	}
+	else if(strcmp(name, "NINMCEmulation") == 0)
+	{
+		game.NINMCEmulation = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "NINUSBHID") == 0)
+	{
+		game.NINUSBHID = atoi(value);
+		return true;
+	}
 	else if(strcmp(name, "DEVOMCEmulation") == 0)
 	{
 		game.DEVOMCEmulation = atoi(value);
@@ -555,6 +567,8 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.DMLScreenshot = INHERIT;
 	game.DMLJPNPatch = INHERIT;
 	game.DMLDebug = INHERIT;
+	game.NINMCEmulation = INHERIT;
+	game.NINUSBHID = INHERIT;
 	game.DEVOMCEmulation = INHERIT;
 	game.DEVOWidescreen = INHERIT;
 	game.DEVOActivityLED = INHERIT;

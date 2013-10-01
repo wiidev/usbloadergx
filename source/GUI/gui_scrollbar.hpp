@@ -68,6 +68,7 @@ class GuiScrollbar : public GuiElement, public sigslot::has_slots<>
 		u16 ButtonScrollSpeed;
 		u32 ButtonScroll;
 		bool AllowDPad;
+		bool MovePointer;
 
 		int MinHeight;
 		int MaxHeight;

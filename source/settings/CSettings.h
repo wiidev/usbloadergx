@@ -31,6 +31,7 @@
 #include "SettingsEnums.h"
 #include "GameCube/DML_Config.h"
 #include "GameCube/DEVO_Config.h"
+#include "GameCube/NIN_Config.h"
 
 class CSettings
 {
@@ -87,6 +88,7 @@ class CSettings
 		char GameCubePath[100];
 		char GameCubeSDPath[100];
 		char DEVOLoaderPath[100];
+		char NINLoaderPath[100];
 		char CustomBannersURL[100];
 		short videomode;
 		short language;
@@ -102,6 +104,7 @@ class CSettings
 		short gamesoundvolume;
 		short tooltips;
 		short parentalcontrol;
+		short LoaderIOS;
 		short cios;
 		short quickboot;
 		short wsprompt;
@@ -145,6 +148,7 @@ class CSettings
 		std::vector<u32> RequiredCategories;
 		std::vector<u32> ForbiddenCategories;
 		u8 EntryIOS;
+		short UseArgumentIOS;
 		short NandEmuMode;
 		short NandEmuChanMode;
 		short UseSystemFont;
@@ -183,6 +187,9 @@ class CSettings
 		short DMLScreenshot;
 		short DMLJPNPatch;
 		short DMLDebug;
+		short NINMCEmulation;
+		short NINAutoboot;
+		short NINUSBHID;
 		short DEVOMCEmulation;
 		short DEVOWidescreen;
 		short DEVOActivityLED;

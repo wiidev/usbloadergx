@@ -39,6 +39,7 @@ GuiScrollbar::GuiScrollbar(int h, u8 m)
 	ScrollState = 0;
 	pressedChan = -1;
 	AllowDPad = true;
+	MovePointer = false;
 	Mode = m;
 	listChanged.connect(this, &GuiScrollbar::setScrollboxPosition);
 
@@ -390,13 +391,14 @@ void GuiScrollbar::CheckDPadControls(GuiTrigger *t)
 	{
 		ScrollOneUp();
 		listChanged(SelItem, SelInd);
+		MovePointer = true;
 	}
 	else if(t->Down())
 	{
 		ScrollOneDown();
 		listChanged(SelItem, SelInd);
+		MovePointer = true;
 	}
-
 	else if(t->Left() && Mode == LISTMODE)
 	{
 		SelInd -= PageSize;
@@ -406,6 +408,7 @@ void GuiScrollbar::CheckDPadControls(GuiTrigger *t)
 			SelItem = 0;
 		}
 		listChanged(SelItem, SelInd);
+		MovePointer = true;
 	}
 	else if(t->Right() && Mode == LISTMODE)
 	{
@@ -416,6 +419,16 @@ void GuiScrollbar::CheckDPadControls(GuiTrigger *t)
 			SelItem = LIMIT(PageSize-1, 0, EntrieCount-1);
 		}
 		listChanged(SelItem, SelInd);
+		MovePointer = true;
+	}
+	
+	if(MovePointer)
+	{
+		int selHeight = (arrowDownBtn->GetTop()+arrowDownBtn->GetHeight()-arrowUpBtn->GetTop())/PageSize;
+		int position = arrowUpBtn->GetTop()+(selHeight*SelItem)+(selHeight/2);
+		for (int i = 3; i >= 0; i--)
+			pointer[i]->SetPosition(scrollbarBoxBtn->GetLeft()-22, position, 0);
+		MovePointer = false;
 	}
 }
 

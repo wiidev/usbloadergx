@@ -74,6 +74,7 @@ void CSettings::SetDefault()
 	snprintf(dolpath, sizeof(dolpath), "%s/", BootDevice);
 	snprintf(NandEmuPath, sizeof(NandEmuPath), "%s/nand/", BootDevice);
 	snprintf(DEVOLoaderPath, sizeof(DEVOLoaderPath), "%s/apps/gc_devo/", BootDevice);
+	snprintf(NINLoaderPath, sizeof(NINLoaderPath), "%s/apps/nintendont/", BootDevice);
 	strlcpy(NandEmuChanPath, NandEmuPath, sizeof(NandEmuChanPath));
 	strlcpy(GameCubePath, "usb1:/games/", sizeof(GameCubePath));
 	strlcpy(GameCubeSDPath, "sd:/games/", sizeof(GameCubeSDPath));
@@ -105,6 +106,7 @@ void CSettings::SetDefault()
 	tooltips = ON;
 	gamesound = ON;
 	parentalcontrol = PARENTAL_LVL_ADULT;
+	LoaderIOS = BUILD_IOS;
 	cios = BUILD_IOS;
 	gridRows = 3;
 	error002 = 2;
@@ -181,6 +183,9 @@ void CSettings::SetDefault()
 	DMLScreenshot = OFF;
 	DMLJPNPatch = OFF;
 	DMLDebug = OFF;
+	NINMCEmulation = OFF;
+	NINAutoboot = ON;
+	NINUSBHID = OFF;
 	DEVOMCEmulation = OFF;
 	DEVOWidescreen = OFF;
 	DEVOActivityLED = ON;
@@ -290,6 +295,7 @@ bool CSettings::Save()
 	EncryptString(unlockCode, EncryptedTxt);
 	fprintf(file, "password = %s\n", EncryptedTxt);
 	fprintf(file, "GameSort = %d\n", GameSort);
+	fprintf(file, "LoaderIOS = %d\n", LoaderIOS);
 	fprintf(file, "cios = %d\n", cios);
 	fprintf(file, "keyset = %d\n", keyset);
 	fprintf(file, "xflip = %d\n", xflip);
@@ -415,6 +421,9 @@ bool CSettings::Save()
 	fprintf(file, "DMLScreenshot = %d\n", DMLScreenshot);
 	fprintf(file, "DMLJPNPatch = %d\n", DMLJPNPatch);
 	fprintf(file, "DMLDebug = %d\n", DMLDebug);
+	fprintf(file, "NINMCEmulation = %d\n", NINMCEmulation);
+	fprintf(file, "NINAutoboot = %d\n", NINAutoboot);
+	fprintf(file, "NINUSBHID = %d\n", NINUSBHID);
 	fprintf(file, "DEVOMCEmulation = %d\n", DEVOMCEmulation);
 	fprintf(file, "DEVOWidescreen = %d\n", DEVOWidescreen);
 	fprintf(file, "DEVOActivityLED = %d\n", DEVOActivityLED);
@@ -422,6 +431,7 @@ bool CSettings::Save()
 	fprintf(file, "DEVOTimerFix = %d\n", DEVOTimerFix);
 	fprintf(file, "DEVODButtons = %d\n", DEVODButtons);
 	fprintf(file, "DEVOLoaderPath = %s\n", DEVOLoaderPath);
+	fprintf(file, "NINLoaderPath = %s\n", NINLoaderPath);
 	fprintf(file, "GCInstallCompressed = %d\n", GCInstallCompressed);
 	fprintf(file, "GCInstallAligned = %d\n", GCInstallAligned);
 	fprintf(file, "CustomBannersURL = %s\n", CustomBannersURL);
@@ -515,6 +525,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "GameSort") == 0)
 	{
 		GameSort = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "LoaderIOS") == 0)
+	{
+		LoaderIOS = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "cios") == 0)
@@ -876,6 +891,21 @@ bool CSettings::SetSetting(char *name, char *value)
 		DMLDebug = atoi(value);
 		return true;
 	}
+	else if (strcmp(name, "NINMCEmulation") == 0)
+	{
+		NINMCEmulation = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINAutoboot") == 0)
+	{
+		NINAutoboot = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINUSBHID") == 0)
+	{
+		NINUSBHID = atoi(value);
+		return true;
+	}
 	else if (strcmp(name, "DEVOMCEmulation") == 0)
 	{
 		DEVOMCEmulation = atoi(value);
@@ -909,6 +939,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "DEVOLoaderPath") == 0)
 	{
 		strlcpy(DEVOLoaderPath, value, sizeof(DEVOLoaderPath));
+		return true;
+	}
+	else if (strcmp(name, "NINLoaderPath") == 0)
+	{
+		strlcpy(NINLoaderPath, value, sizeof(NINLoaderPath));
 		return true;
 	}
 	else if (strcmp(name, "GCInstallCompressed") == 0)

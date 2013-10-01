@@ -79,10 +79,10 @@ s32 IosLoader::LoadAppCios()
 	s32 ret = -1;
 
 	// We have what we need
-	if((int) activeCios == Settings.cios)
+	if((int) activeCios == Settings.LoaderIOS)
 		return 0;
 
-	u32 ciosLoadPriority[] = { Settings.cios, 222, 249, 250, 245, 246, 247, 248 }; // Ascending.
+	u32 ciosLoadPriority[] = { Settings.LoaderIOS, 249, 250, 222, 223, 245, 246, 247, 248 }; // Ascending.
 
 
 	for (u32 i = 0; i < (sizeof(ciosLoadPriority)/sizeof(ciosLoadPriority[0])); ++i)
@@ -98,7 +98,7 @@ s32 IosLoader::LoadAppCios()
 		if ((ret = ReloadIosSafe(cios)) > -1)
 		{
 			// Remember working cios.
-			Settings.cios = cios;
+			Settings.LoaderIOS = cios;
 			break;
 		}
 	}
@@ -152,9 +152,15 @@ s32 IosLoader::ReloadIosSafe(s32 ios)
 		if((iosRev < 9 || iosRev > 30000) && iosRev != 65535)  //let's see if Waninkoko actually gets to 30
 			return -22;
 	}
+	else if(ios < 200) // use AHB Access
+	{
+		s32 iosRev = NandTitles.VersionOf(TITLE_ID(1, ios));
+		if(!iosRev)
+			return -33;
+	} 
 	else
 	{
-		return -33;
+		return -44;
 	}
 
 	s32 r = ReloadIosKeepingRights(ios);
@@ -207,13 +213,15 @@ s32 IosLoader::ReloadIosKeepingRights(s32 ios)
 /*
  * Check if MIOS is DIOS MIOS, DIOS MIOS Lite or official MIOS.
  */
-u8 IosLoader::GetMIOSInfo(bool checkedOnBoot)
+u8 IosLoader::GetMIOSInfo()
 {
 	if(currentMIOS > -1)
 		return currentMIOS;
 
-	if(!checkedOnBoot) // Prevent setting default MIOS when checking on boot for users without AHBPROT.
-		currentMIOS = DEFAULT_MIOS;
+	currentMIOS = DEFAULT_MIOS;
+
+	if(isWiiU()) // vWii users
+		return currentMIOS;
 
 	u8 *appfile = NULL;
 	u32 filesize = 0;
@@ -268,7 +276,10 @@ u8 IosLoader::GetMIOSInfo(bool checkedOnBoot)
 		}
 		free(appfile);
 	}
-
+	
+	if(currentMIOS == DEFAULT_MIOS)
+		gprintf("MIOS / cMIOS \n");
+	
 	return currentMIOS;
 }
 
@@ -500,6 +511,15 @@ bool IosLoader::is_NandEmu_compatible(const char *NandEmuPath, s32 ios)
 		}
 	}
 	return true;
+}
+
+/*
+ * Check if the current console is a Wii or WiiU
+ * Thanks to Crediar
+ */
+bool IosLoader::isWiiU()
+{
+	return ((*(vu32*)(0xCD8005A0) >> 16 ) == 0xCAFE);
 }
 
 /******************************************************************************

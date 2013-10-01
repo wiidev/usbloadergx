@@ -26,6 +26,7 @@ public:
 	WiiPointer(const char *pntrImg);
 	virtual ~WiiPointer();
 	void SetImage(const char *pntrImg);
+	void SetPosition(float x, float y, float a) {posX = x; posY = y; angle = a;}
 	void Draw(GuiTrigger *t);
 	u32 getLastActivCounter(void) { return lastActivity; }
 private:

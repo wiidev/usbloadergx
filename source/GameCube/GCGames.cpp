@@ -422,6 +422,7 @@ bool GCGames::IsInstalled(const char *gameID, u8 disc_number) const
 bool GCGames::CopyUSB2SD(const struct discHdr *header)
 {
 	const char *path = GetPath((char*)header->id);
+	int oldGameCubeSource = Settings.GameCubeSource;
 	if(*path == 0)
 		return false;
 
@@ -433,6 +434,10 @@ bool GCGames::CopyUSB2SD(const struct discHdr *header)
 	
 	if(choice == 2)
 	{
+		// Load Games from SD card only
+		Settings.GameCubeSource = GC_SOURCE_SD;
+		GCGames::Instance()->LoadAllGames();
+
 		GCDeleteMenu gcDeleteMenu;
 		gcDeleteMenu.SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 		gcDeleteMenu.SetEffect(EFFECT_FADE, 20);
@@ -446,6 +451,10 @@ bool GCGames::CopyUSB2SD(const struct discHdr *header)
 
 		mainWindow->Remove(&gcDeleteMenu);
 		mainWindow->SetState(STATE_DEFAULT);
+
+		// Reload user's gameCubeSource setting
+		Settings.GameCubeSource = oldGameCubeSource;
+		GCGames::Instance()->LoadAllGames();
 
 		if(!WindowPrompt(tr("Do you want to copy now?"), cpTitle, tr("Yes"), tr("Cancel")))
 			return false;

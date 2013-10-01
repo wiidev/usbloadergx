@@ -218,13 +218,13 @@ GuiGameGrid::GuiGameGrid(int w, int h, const char *themePath, int offset) :
 	trigR = new GuiTrigger;
 	trigR->SetButtonOnlyTrigger(-1, WPAD_BUTTON_RIGHT | WPAD_CLASSIC_BUTTON_RIGHT, PAD_BUTTON_RIGHT);
 	trig1 = new GuiTrigger;
-	trig1->SetButtonOnlyTrigger(-1, WPAD_BUTTON_UP | WPAD_CLASSIC_BUTTON_X, PAD_BUTTON_X);
+	trig1->SetButtonOnlyTrigger(-1, WPAD_BUTTON_UP | WPAD_CLASSIC_BUTTON_UP, PAD_BUTTON_UP);
 	trig2 = new GuiTrigger;
-	trig2->SetButtonOnlyTrigger(-1, WPAD_BUTTON_DOWN | WPAD_CLASSIC_BUTTON_Y, PAD_BUTTON_Y);
+	trig2->SetButtonOnlyTrigger(-1, WPAD_BUTTON_DOWN | WPAD_CLASSIC_BUTTON_DOWN, PAD_BUTTON_DOWN);
 	trigPlus = new GuiTrigger;
-	trigPlus->SetButtonOnlyTrigger(-1, WPAD_BUTTON_PLUS | WPAD_CLASSIC_BUTTON_PLUS, 0);
+	trigPlus->SetButtonOnlyTrigger(-1, WPAD_BUTTON_PLUS | WPAD_CLASSIC_BUTTON_PLUS, PAD_TRIGGER_R);
 	trigMinus = new GuiTrigger;
-	trigMinus->SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, 0);
+	trigMinus->SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, PAD_TRIGGER_L);
 
 	int btnHeight = (int) lround(sqrt(RADIUS * RADIUS - 90000) - RADIUS - 50);
 
@@ -473,7 +473,10 @@ void GuiGameGrid::Update(GuiTrigger * t)
 		if (btnLeft->GetState() == STATE_CLICKED)
 		{
 			u32 buttons = t->wpad.btns_h;
-			if (!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_MINUS) || t->Left()))
+			u32 buttonsPAD = t->pad.btns_h;
+			if (!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_MINUS) ||
+				  (buttons & WPAD_CLASSIC_BUTTON_A) || (buttons & WPAD_CLASSIC_BUTTON_MINUS) ||
+				  (buttonsPAD & PAD_BUTTON_A) || (buttonsPAD & PAD_TRIGGER_L) || t->Left()))
 			{
 				btnLeft->ResetState();
 				return;
@@ -486,7 +489,10 @@ void GuiGameGrid::Update(GuiTrigger * t)
 		else if (btnRight->GetState() == STATE_CLICKED)
 		{
 			u32 buttons = t->wpad.btns_h;
-			if (!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_PLUS) || t->Right()))
+			u32 buttonsPAD = t->pad.btns_h;
+			if (!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_PLUS) ||
+				  (buttons & WPAD_CLASSIC_BUTTON_A) || (buttons & WPAD_CLASSIC_BUTTON_PLUS) ||
+				  (buttonsPAD & PAD_BUTTON_A) || (buttonsPAD & PAD_TRIGGER_R)  || t->Right()))
 			{
 				btnRight->ResetState();
 				return;

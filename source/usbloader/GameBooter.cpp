@@ -20,6 +20,7 @@
 #include "mload/mload.h"
 #include "mload/mload_modules.h"
 #include "system/IosLoader.h"
+#include "system/runtimeiospatch.h"
 #include "Controls/DeviceHandler.hpp"
 #include "Channels/channels.h"
 #include "usbloader/disc.h"
@@ -41,11 +42,12 @@
 #include "patches/gamepatches.h"
 #include "patches/wip.h"
 #include "patches/bca.h"
-#include "system/IosLoader.h"
 #include "banner/OpeningBNR.hpp"
 #include "wad/nandtitle.h"
 #include "menu/menus.h"
 #include "memory/memory.h"
+#include "utils/StringTools.h"
+#include "homebrewboot/BootHomebrew.h"
 #include "GameBooter.hpp"
 #include "NandEmu.h"
 #include "SavePath.h"
@@ -74,12 +76,16 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 	// Devolution
 	if(GCMode == GC_MODE_DEVOLUTION)
 		return BootDevolution(gameHdr);
-	
+
+	// Nintendont
+	if(GCMode == GC_MODE_NINTENDONT)
+		return BootNintendont(gameHdr);
+
 	// DIOS MIOS (Lite) and QuadForce
 	int currentMIOS = IosLoader::GetMIOSInfo();
 	if(currentMIOS == DIOS_MIOS || currentMIOS == DIOS_MIOS_LITE || currentMIOS == QUADFORCE || currentMIOS == QUADFORCE_USB)
 		return BootDIOSMIOS(gameHdr);
-	
+
 	// MIOS or Wiigator cMIOS
 	if(gameHdr->type == TYPE_GAME_GC_DISC)
 	{
@@ -89,20 +95,10 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 		return WII_LaunchTitle(0x0000000100000100ULL);
 	}
 
-	// Check if Devolution is available
-	char DEVO_loader_path[100];
-	snprintf(DEVO_loader_path, sizeof(DEVO_loader_path), "%sloader.bin", Settings.DEVOLoaderPath);
-	if(CheckFile(DEVO_loader_path))
-	{
-		WindowPrompt(tr("Error:"), tr("You need to set GameCube Mode to Devolution to launch GameCube games from USB or SD card"), tr("OK"));
-		return 0;
-	}
-
-	WindowPrompt(tr("Error:"), tr("You need to install Devolution or DIOS MIOS (Lite) to launch GameCube games from USB or SD card"), tr("OK"));
+	WindowPrompt(tr("Error:"), tr("You need to install an additional GameCube loader or select a different GameCube Mode to launch GameCube games from USB or SD card."), tr("OK"));
 
 	return 0;
 }
-
 
 u32 GameBooter::BootPartition(char * dolpath, u8 videoselected, u8 alternatedol, u32 alternatedoloffset)
 {
@@ -125,7 +121,7 @@ u32 GameBooter::BootPartition(char * dolpath, u8 videoselected, u8 alternatedol,
 	Disc_SetLowMem();
 
 	/* Setup video mode */
-	Disc_SelectVMode(videoselected, false, NULL);
+	Disc_SelectVMode(videoselected, false, NULL, NULL);
 
 	/* Run apploader */
 	ret = Apploader_Run(&p_entry, dolpath, alternatedol, alternatedoloffset);
@@ -162,7 +158,7 @@ void GameBooter::SetupNandEmu(u8 NandEmuMode, const char *NandEmuPath, struct di
 		//! Create save game path and title.tmd for not existing saves
 		CreateSavePath(&gameHeader);
 
-		gprintf("Enabling Nand Emulation on: %s\n", NandEmuPath);
+		gprintf("Enabling %s Nand Emulation on: %s\n", NandEmuMode == 2 ? "Full" : "Partial" , NandEmuPath);
 		Set_FullMode(NandEmuMode == 2);
 		Set_Path(strchr(NandEmuPath, '/'));
 
@@ -310,6 +306,14 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	//! Modify Wii Message Board to display the game starting here (before Nand Emu)
 	if(Settings.PlaylogUpdate)
 	{
+		// enable isfs permission if using IOS+AHB or Hermes v4
+		if(IOS_GetVersion() < 200 || (IosLoader::IsHermesIOS() && IOS_GetRevision() == 4))
+		{
+			gprintf("Patching IOS%d...\n", IOS_GetVersion());
+			if (IosPatch_RUNTIME(true, false, false, false) == ERROR_PATCH)
+				gprintf("Patching %sIOS%d failed!\n", IOS_GetVersion() >= 200 ? "c" : "", IOS_GetVersion());
+		}
+
 		BNRInstance::Instance()->Load(&gameHeader);
 		Playlog_Update((char *) gameHeader.id, BNRInstance::Instance()->GetIMETTitle(CONF_GetLanguage()));
 	}
@@ -386,7 +390,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 		ShutDownDevices(DeviceHandler::PartitionToUSBPort(std::max(atoi(NandEmuPath+3)-1, 0)));
 		gprintf("\tChannel Boot\n");
 		/* Setup video mode */
-		Disc_SelectVMode(videoChoice, false, NULL);
+		Disc_SelectVMode(videoChoice, false, NULL, NULL);
 		// Load dol
 		AppEntrypoint = Channels::LoadChannel(gameHeader.tid);
 	}
@@ -431,20 +435,30 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 	u8 dmlDebugChoice = game_cfg->DMLDebug == INHERIT ? Settings.DMLDebug : game_cfg->DMLDebug;
 	
 	int currentMIOS = IosLoader::GetMIOSInfo();
+	char LoaderName[15];
+	if(currentMIOS == DIOS_MIOS) 
+		snprintf(LoaderName, sizeof(LoaderName), "DIOS MIOS");
+	else if(currentMIOS == DIOS_MIOS_LITE)
+		snprintf(LoaderName, sizeof(LoaderName), "DIOS MIOS Lite");
+	else if(currentMIOS == QUADFORCE)
+		snprintf(LoaderName, sizeof(LoaderName), "QuadForce");
+	else if(currentMIOS == QUADFORCE_USB)
+		snprintf(LoaderName, sizeof(LoaderName), "QuadForce_USB");
+	
 	// DIOS MIOS
 	if(currentMIOS == DIOS_MIOS || currentMIOS == QUADFORCE_USB)
 	{
 		// Check Main GameCube Path location
 		if(strncmp(Settings.GameCubePath, "sd", 2) == 0 || strncmp(DeviceHandler::PathToFSName(Settings.GameCubePath), "FAT", 3) != 0)
 		{
-			WindowPrompt(tr("Error:"), tr("To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' to an USB FAT32 partition."), tr("OK"));
+			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."),LoaderName), tr("OK"));
 			return 0;
 		}
 
 		// Check current game location
 		if(strncmp(RealPath, "sd", 2) == 0)
 		{
-			WindowPrompt(tr("The game is on SD Card."), tr("To run GameCube games with DIOS MIOS you need to place them on an USB FAT32 partition."), tr("OK"));
+			WindowPrompt(tr("The game is on SD Card."), fmt(tr("To run GameCube games with %s you need to place them on an USB FAT32 partition."),LoaderName), tr("OK"));
 			// Todo: Add here copySD2USB.
 			return 0;
 		}
@@ -456,27 +470,27 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandleFromPartition(part_num-USB1);
 		if(usbHandle->GetPartitionNum(portPart))
 		{
-			WindowPrompt(tr("Error:"), tr("To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."), tr("OK"));
+			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."),LoaderName), tr("OK"));
 			return 0;
 		}
 
 		// Check if the partition is primary
 		if(usbHandle->GetPartitionTableType(portPart) != MBR)
 		{
-			WindowPrompt(tr("Error:"), tr("To run GameCube games with DIOS MIOS you need to set your 'Main GameCube Path' on a primary partition."), tr("OK"));
+			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."),LoaderName), tr("OK"));
 			return 0;
 		}
 		
 		// Check HDD sector size. Only 512 bytes/sector is supported by DIOS MIOS
 		if(hdd_sector_size[usbport] != BYTES_PER_SECTOR)
 		{
-			WindowPrompt(tr("Error:"), tr("To run GameCube games with DIOS MIOS you need to use a 512 bytes/sector Hard Drive."), tr("OK"));
+			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to use a 512 bytes/sector Hard Drive."),LoaderName), tr("OK"));
 			return 0;
 		}
 
 		if(usbHandle->GetPartitionClusterSize(usbHandle->GetLBAStart(portPart)) > 32768)
 		{
-			WindowPrompt(tr("Error:"), tr("To run GameCube games with DIOS MIOS you need to use a partition with 32k bytes/cluster or less."), tr("OK"));
+			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to use a partition with 32k bytes/cluster or less."),LoaderName), tr("OK"));
 			return 0;
 		}
 	}
@@ -495,7 +509,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 
 
 	// Check DIOS MIOS config for specific versions
-	if(currentMIOS != QUADFORCE)
+	if(currentMIOS != QUADFORCE && currentMIOS != QUADFORCE_USB)
 	{
 		if(IosLoader::GetDMLVersion() < DML_VERSION_DML_1_2)
 		{
@@ -624,7 +638,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 	if(dmlNMMChoice)
 		dml_config->Config |= dmlNMMChoice == ON ? DML_CFG_NMM : DML_CFG_NMM_DEBUG;
 	if(dmlDebugChoice)
-		dml_config->Config |= dmlDebugChoice == ON ? DML_CFG_DEBUGGER : DML_CFG_DEBUGWAIT;
+		dml_config->Config |= dmlDebugChoice == ON ? DML_CFG_DEBUGGER : DML_CFG_DEBUGGER | DML_CFG_DEBUGWAIT;
 	if(dmlWidescreenChoice)
 		dml_config->Config |= DML_CFG_FORCE_WIDE;
 	if(dmlScreenshotChoice)
@@ -646,11 +660,11 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		if(dmlVideoChoice == DML_VIDEO_AUTO)			// Auto select video mode
 		{
 			dml_config->VideoMode = DML_VID_DML_AUTO;
-			Disc_SelectVMode(VIDEO_MODE_DISCDEFAULT, false, NULL);
+			Disc_SelectVMode(VIDEO_MODE_DISCDEFAULT, false, NULL, NULL);
 		}
 		else											// Force user choice
 		{
-			Disc_SelectVMode(videoChoice, false, &dml_config->VideoMode);
+			Disc_SelectVMode(videoChoice, false, &dml_config->VideoMode, NULL);
 			if(!(dml_config->VideoMode & DML_VID_DML_AUTO))
 				dml_config->VideoMode |= DML_VID_FORCE;
 		}	
@@ -686,10 +700,11 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 int GameBooter::BootDevolution(struct discHdr *gameHdr)
 {
 	const char *RealPath = GCGames::Instance()->GetPath((const char *) gameHdr->id);
+	const char *LoaderName = "Devolution";
 
 	GameCFG * game_cfg = GameSettings.GetGameCFG(gameHdr->id);
 	u8 videoChoice = game_cfg->video == INHERIT ? Settings.videomode : game_cfg->video;
-	int languageChoice = game_cfg->language == INHERIT ? Settings.language -1 : game_cfg->language;
+	s8 languageChoice = game_cfg->language == INHERIT ? Settings.language -1 : game_cfg->language;
 	u8 devoMCEmulation = game_cfg->DEVOMCEmulation == INHERIT ? Settings.DEVOMCEmulation : game_cfg->DEVOMCEmulation;
 	u8 devoActivityLEDChoice = game_cfg->DEVOActivityLED == INHERIT ? Settings.DEVOActivityLED : game_cfg->DEVOActivityLED;
 	u8 devoWidescreenChoice = game_cfg->DEVOWidescreen == INHERIT ? Settings.DEVOWidescreen : game_cfg->DEVOWidescreen;
@@ -702,16 +717,22 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 		WindowPrompt(tr("Error:"), tr("To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."), tr("OK"));
 		return 0;
 	}
+	
+	if(gameHdr->type == TYPE_GAME_GC_EXTRACTED)
+	{
+		WindowPrompt(tr("Error:"), fmt(tr("%s only accepts GameCube backups in ISO format."),LoaderName), tr("OK"));
+		return 0;
+	}
 
 	if(!CheckAHBPROT())
 	{
-		WindowPrompt(tr("Error:"), tr("Devolution requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."), tr("OK"));
+		WindowPrompt(tr("Error:"), fmt(tr("%s requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."),LoaderName), tr("OK"));
 		return 0;
 	}
 
 	if(strncmp(DeviceHandler::PathToFSName(RealPath), "FAT", 3) != 0)
 	{
-		WindowPrompt(tr("Error:"), tr("To run GameCube games with Devolution you need to use a FAT32 partition."), tr("OK"));
+		WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."),LoaderName), tr("OK"));
 		return 0;
 	}
 
@@ -748,7 +769,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	}
 	else
 	{
-		WindowPrompt(tr("Error:"), tr("To run GameCube games with Devolution you need the loader.bin file in your Devolution Path."), tr("OK"));
+		WindowPrompt(tr("Error:"), tr("To run GameCube games with Devolution you need the loader.bin file in your Devolution Loader Path."), tr("OK"));
 		return 0;
 	}
 
@@ -872,7 +893,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	fclose(iso_file);
 	
 	// setup video mode
-	Disc_SelectVMode(videoChoice, true, NULL);
+	Disc_SelectVMode(videoChoice, true, NULL, NULL);
 	Disc_SetVMode();
 
 	// Set sram flags
@@ -897,6 +918,275 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	return 0;
 }
 
+int GameBooter::BootNintendont(struct discHdr *gameHdr)
+{
+	const char *RealPath = GCGames::Instance()->GetPath((const char *) gameHdr->id);
+	const char *LoaderName = "Nintendont";
+
+	GameCFG * game_cfg = GameSettings.GetGameCFG(gameHdr->id);
+	u8 videoChoice = game_cfg->video == INHERIT ? Settings.videomode : game_cfg->video;
+	s8 languageChoice = game_cfg->language == INHERIT ? Settings.language -1 : game_cfg->language;
+	u8 ocarinaChoice = game_cfg->ocarina == INHERIT ? Settings.ocarina : game_cfg->ocarina;
+	u8 ninVideoChoice = game_cfg->DMLVideo == INHERIT ? Settings.DMLVideo : game_cfg->DMLVideo;
+	u8 ninProgressivePatch = game_cfg->DMLProgPatch == INHERIT ? Settings.DMLProgPatch : game_cfg->DMLProgPatch;
+	u8 ninWidescreenChoice = game_cfg->DMLWidescreen == INHERIT ? Settings.DMLWidescreen : game_cfg->DMLWidescreen;
+	u8 ninMCEmulationChoice = game_cfg->NINMCEmulation == INHERIT ? Settings.NINMCEmulation : game_cfg->NINMCEmulation;
+	u8 ninDebugChoice = game_cfg->DMLDebug == INHERIT ? Settings.DMLDebug : game_cfg->DMLDebug;
+	u8 ninAutobootChoice = Settings.NINAutoboot;
+	u8 ninUSBHIDChoice = game_cfg->NINUSBHID == INHERIT ? Settings.NINUSBHID : game_cfg->NINUSBHID;
+
+	if(gameHdr->type == TYPE_GAME_GC_DISC)
+	{
+		WindowPrompt(tr("Error:"), tr("To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."), tr("OK"));
+		return 0;
+	}
+
+	if(gameHdr->type == TYPE_GAME_GC_EXTRACTED)
+	{
+		if(WindowPrompt(tr("Warning:"), fmt(tr("%s only accepts GameCube backups in ISO format."),LoaderName), tr("Continue"), tr("Cancel")) == 0)
+			return 0;
+	}
+
+	if(!CheckAHBPROT())
+	{
+		WindowPrompt(tr("Error:"), fmt(tr("%s requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."),LoaderName), tr("OK"));
+		return 0;
+	}
+
+	// Check if Nintendont boot.dol is available
+	char NIN_loader_path[255];
+	snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sboot.dol", Settings.NINLoaderPath);
+	if(!CheckFile(NIN_loader_path))
+	{
+		// Nintendont boot.dol not found
+		WindowPrompt(tr("Error:"), tr("To run GameCube games with Nintendont you need the boot.dol file in your Nintendont Loader Path."), tr("OK"));
+		return 0;
+	}
+	
+	// Check Nintendont version
+	u8 *buffer = NULL;
+	u32 filesize = 0;
+	if(LoadFileToMem(NIN_loader_path, &buffer, &filesize))
+	{
+		bool found = false;
+
+		for(u32 i = 0; i < filesize-60; ++i)
+		{
+			if((*(u32*)(buffer+i+2)) == 'nten' && (*(u32*)(buffer+i+6)) == 'dont' && (*(u32*)(buffer+i+11)) == 'Load')
+			{
+				found=true;
+				break;
+			}
+		}
+		free(buffer);
+		
+		if(!found)
+		{
+			// Current file is not Nintendont?
+			int choice = WindowPrompt(tr("Warning:"), tr("USBloaderGX couldn't verify Nintendont boot.dol file. Launch this boot.dol anyway?"), tr("Yes"), tr("Cancel"));
+			if(choice == 0)
+				return 0;
+		}
+	}
+	else
+	{
+		int choice = WindowPrompt(tr("Warning:"), tr("USBloaderGX couldn't verify Nintendont boot.dol file. Launch this boot.dol anyway?"), tr("Yes"), tr("Cancel"));
+		if(choice == 0)
+			return 0;
+	}
+
+
+	// Check USB device
+	if(strncmp(RealPath, "usb", 3) == 0)
+	{
+		
+		WindowPrompt(tr("Warning:"), tr("Nintendont currently only supports GameCube games on SD card."), tr("OK"));
+		
+		if(!GCGames::Instance()->CopyUSB2SD(gameHdr))
+			return 0;
+		RealPath = GCGames::Instance()->GetPath((const char *) gameHdr->id);
+	}
+
+
+	// Check Ocarina and cheat file location. the .gct file need to be located on the same partition than the game.
+	if(ocarinaChoice && strcmp(DeviceHandler::GetDevicePrefix(RealPath), DeviceHandler::GetDevicePrefix(Settings.Cheatcodespath)) != 0)
+	{
+		char path[255], destPath[255];
+		int res = -1;
+		snprintf(path, sizeof(path), "%s%.6s.gct", Settings.Cheatcodespath, (char *)gameHdr->id);
+		snprintf(destPath, sizeof(destPath), "%s:/NINTemp.gct", DeviceHandler::GetDevicePrefix(RealPath));
+		
+		gprintf("NIN: Copying %s to %s \n", path, destPath);
+		res = CopyFile(path, destPath);
+		if(res < 0)
+		{
+			gprintf("NIN: Couldn't copy the file. ret %d. Ocarina Disabled\n", res);
+			RemoveFile(destPath);
+			ocarinaChoice = false;
+		}
+	}
+
+	// Check if game has multi Discs
+	bool bootDisc2 = false;
+	if(gameHdr->disc_no == 0)
+	{
+		char disc2Path[255];
+		snprintf(disc2Path, sizeof(disc2Path), "%s", RealPath);
+		char *pathPtr = strrchr(disc2Path, '/');
+		if(pathPtr) *pathPtr = 0;
+		snprintf(disc2Path, sizeof(disc2Path), "%s/disc2.iso", disc2Path);
+		if(CheckFile(disc2Path))
+		{
+			int choice = WindowPrompt(gameHdr->title, tr("This game has multiple discs. Please select the disc to launch."), tr("Disc 1"), tr("Disc 2"), tr("Cancel"));
+			if(choice == 0)
+				return 0;
+			else if(choice == 2)
+				bootDisc2 = true;
+		}	
+	}
+	const char *gcPath = strchr(RealPath, '/');
+	if(!gcPath) gcPath = "";
+
+	char gamePath[255];
+	snprintf(gamePath, sizeof(gamePath), "%s", gcPath);
+
+	if(bootDisc2)
+	{
+		char *pathPtr = strrchr(gamePath, '/');
+		if(pathPtr) *pathPtr = 0;
+		snprintf(gamePath, sizeof(gamePath), "%s/disc2.iso", gamePath);
+	}
+
+	// Nintendont Config file path
+	char NINCfgPath[17];
+	snprintf(NINCfgPath, sizeof(NINCfgPath), "%s:/nincfg.bin", DeviceHandler::GetDevicePrefix(RealPath));
+	gprintf("NIN: Cfg path : %s \n", NINCfgPath);
+
+	// Nintendont Config file settings
+	NIN_CFG *nin_config = NULL;
+	nin_config = (NIN_CFG *)MEM2_alloc(sizeof(NIN_CFG));
+	if(!nin_config) 
+	{
+		gprintf("Not enough memory to create nincfg.bin file.\n");
+		WindowPrompt(tr("Error:"), tr("Could not write file."), tr("OK"));
+		return 0;
+	}
+	
+	memset(nin_config, 0, sizeof(NIN_CFG));
+
+	// Magic and CFG_Version for Nintendont
+	nin_config->Magicbytes = NIN_MAGIC;
+	nin_config->Version = NIN_CFG_VERSION;
+
+
+	// Game path
+	nin_config->Config |= NIN_CFG_GAME_PATH;
+	strncpy(nin_config->GamePath, gamePath, sizeof(nin_config->GamePath));
+
+	// setup cheat and path
+	if(ocarinaChoice)
+	{
+		// Check if the .gct folder is on the same partition than the game, if not load the temporary .gct file.
+		if(strcmp(DeviceHandler::GetDevicePrefix(RealPath), DeviceHandler::GetDevicePrefix(Settings.Cheatcodespath)) == 0)
+		{
+			const char *CheatPath = strchr(Settings.Cheatcodespath, '/');
+			if(!CheatPath) CheatPath = "";
+			snprintf(nin_config->CheatPath, sizeof(nin_config->CheatPath), "%s%.6s.gct", CheatPath, (char *)gameHdr->id);
+		}
+		else
+		{
+			snprintf(nin_config->CheatPath, sizeof(nin_config->CheatPath), "NINTemp.gct");
+		}
+
+		nin_config->Config |= NIN_CFG_CHEATS | NIN_CFG_CHEAT_PATH;
+		gprintf("NIN: Loading cheat %s\n", nin_config->CheatPath);
+	}
+
+	
+	// Set other settings
+	if(ninDebugChoice && !IosLoader::isWiiU()) // only on Wii
+		nin_config->Config |= ninDebugChoice == ON ? NIN_CFG_DEBUGGER : NIN_CFG_DEBUGGER | NIN_CFG_DEBUGWAIT;
+	if(ninMCEmulationChoice)
+		nin_config->Config |= NIN_CFG_MEMCARDEMU;
+	if(ninWidescreenChoice)
+		nin_config->Config |= NIN_CFG_FORCE_WIDE;
+	if(ninProgressivePatch)
+		nin_config->Config |= NIN_CFG_FORCE_PROG;
+	if(ninAutobootChoice)
+		nin_config->Config |= NIN_CFG_AUTO_BOOT;
+	if(ninUSBHIDChoice)
+		nin_config->Config |= NIN_CFG_HID; // auto enabled by nintendont on vWii
+	if(!IosLoader::isWiiU())
+		nin_config->Config |= NIN_CFG_OSREPORT; // log OS reports only on Wii. todo: add a user setting?
+	
+
+	gprintf("NIN: config 0x%08x\n", nin_config->Config);
+
+
+	// Setup Video Mode
+	if(ninVideoChoice == DML_VIDEO_NONE)				// No video mode
+	{
+		nin_config->VideoMode = NIN_VID_NONE;
+	}
+	else
+	{
+		if(ninVideoChoice == DML_VIDEO_AUTO)			// Auto select video mode
+		{
+			nin_config->VideoMode = NIN_VID_AUTO;
+			Disc_SelectVMode(VIDEO_MODE_DISCDEFAULT, false, NULL, NULL);
+		}
+		else											// Force user choice
+		{
+			Disc_SelectVMode(videoChoice, false, NULL, &nin_config->VideoMode);
+			if(!(nin_config->VideoMode & NIN_VID_AUTO))
+				nin_config->VideoMode |= NIN_VID_FORCE;
+
+			if(nin_config->VideoMode & NIN_CFG_FORCE_PROG)
+			{
+				nin_config->VideoMode &= ~NIN_CFG_FORCE_PROG;	// clear Force_PROG bit in VideoMode
+				nin_config->Config |= NIN_CFG_FORCE_PROG; 		// Set Force_PROG bit in Config
+			}
+		}	
+		Disc_SetVMode();
+	}
+
+	// Set game language setting
+	if(languageChoice >= GC_ENGLISH && languageChoice <= GC_DUTCH)
+	{
+		nin_config->Language = languageChoice;
+	}
+	else // console default or other languages
+	{
+		nin_config->Language = NIN_LAN_AUTO;
+		if(CONF_GetLanguage() >= CONF_LANG_ENGLISH && CONF_GetLanguage() <= CONF_LANG_DUTCH)
+		{
+			nin_config->Language = CONF_GetLanguage()-1;
+		}
+	}
+	gprintf("NIN: Language 0x%08x \n", nin_config->Language);
+	
+	// Set Sram flags
+	PatchSram(languageChoice, true, nin_config->Config & NIN_CFG_FORCE_PROG);
+
+	//write config file to game's partition root.
+	FILE *fp = fopen(NINCfgPath, "wb");
+	if (fp)
+	{
+		fwrite (nin_config , sizeof(char), sizeof(NIN_CFG), fp);
+		fclose(fp);
+	}
+	else
+	{
+		gprintf("Could not open NINCfgPath in write mode");
+		int choice = WindowPrompt(tr("Warning:"), tr("USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyway?"), tr("Yes"), tr("Cancel"));
+		if(choice == 0)
+			return 0;
+	}
+
+	// Launch Nintendont
+	return !(BootHomebrew(NIN_loader_path) < 0);
+}
+
 void GameBooter::PatchSram(int language, bool patchVideoMode, bool progressive)
 {
 	syssram *sram = __SYS_LockSram();
@@ -914,7 +1204,7 @@ void GameBooter::PatchSram(int language, bool patchVideoMode, bool progressive)
 			sram->lang = CONF_GetLanguage()-1;
 		}
 	}
-	gprintf("Sram: Language set to 0x%X\n", sram->lang);
+	gprintf("Sram: Language set to 0x%02x\n", sram->lang);
 
 	// Setup Video mode flags
 	if(patchVideoMode)
@@ -935,8 +1225,8 @@ void GameBooter::PatchSram(int language, bool patchVideoMode, bool progressive)
 			sram->ntd |= 0x40; //set pal60 flag
 		}
 
-		gprintf("Sram: flags set to 0x%X\n", sram->flags);
-		gprintf("Sram: ntd set to 0x%X\n", sram->ntd);
+		gprintf("Sram: flags set to 0x%02x\n", sram->flags);
+		gprintf("Sram: ntd set to 0x%02x\n", sram->ntd);
 	}
 
 	__SYS_UnlockSram(1); // 1 -> write changes

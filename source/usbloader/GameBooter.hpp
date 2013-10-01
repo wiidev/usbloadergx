@@ -33,6 +33,7 @@ class GameBooter
 		static void ShutDownDevices(int gameUSBPort);
 		static int BootDIOSMIOS(struct discHdr *gameHdr);
 		static int BootDevolution(struct discHdr *gameHdr);
+		static int BootNintendont(struct discHdr *gameHdr);
 		static void PatchSram(int language, bool patchVideoMode, bool progressive);
 };
 

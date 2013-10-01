@@ -273,7 +273,7 @@ void WindowCredits()
 	starImg.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	starImg.SetPosition(505, 350);
 
-	const int numEntries = 25;
+	const int numEntries = 26;
 	std::vector<GuiText *> txt(numEntries);
 
 	const u8 *creditsFont = Resources::GetFile("font.ttf");
@@ -322,21 +322,60 @@ void WindowCredits()
 		char *ptr = strchr(version, ' ');
 		if(ptr) *ptr = 0;
 		else version[4] = 0;
-		snprintf(GCInfo, sizeof(GCInfo), "%s%s Devolution r%d", GCInfo, strlen(GCInfo) > 1 ? "  /  " : "", atoi(version));
+		snprintf(GCInfo, sizeof(GCInfo), "%s%sDevolution r%d", GCInfo, strlen(GCInfo) > 1 ? "  /  " : "", atoi(version));
 	}
 
-	txt[i] = new GuiText(SvnRev, 16, ( GXColor ) {255, 255, 255, 255});
-	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
-	txt[i]->SetPosition(0, (info || currentMIOS > DEFAULT_MIOS) ? y-10 : y);
+	// Check if Nintendont is available
+	char GCInfo2[80] = "";
+	char NIN_loader_path[100];
+	snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sboot.dol", Settings.NINLoaderPath);
+	if(CheckFile(NIN_loader_path))
+	{
+		u8 *buffer = NULL;
+		u32 filesize = 0;
+		if(LoadFileToMem(NIN_loader_path, &buffer, &filesize))
+		{
+			char NINversion[21];
+
+			for(u32 i = 0; i < filesize-60; ++i)
+			{
+				// Nintendont Loader..Built   : %s %s..Sep 20 2013.15:27:01 // alpha0.1
+				if((*(u32*)(buffer+i+2)) == 'nten' && (*(u32*)(buffer+i+6)) == 'dont' && (*(u32*)(buffer+i+11)) == 'Load')
+				{
+					for(int j = 0 ; j < 20 ; j++)
+						NINversion[j] = *(u8*)(buffer+i+36+j);
+					NINversion[11] = ' '; // replace \0 between year and time with a space.
+					NINversion[20] = 0;
+					snprintf(GCInfo2, sizeof(GCInfo2), "Nintendont Built %.20s",  NINversion );
+					break;
+				}
+			}
+			free(buffer);
+		}
+	}
+
+	// Header - Top left
+	txt[i] = new GuiText(GCInfo2, 16, ( GXColor ) {255, 255, 255, 255});
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	txt[i]->SetPosition(0, strlen(GCInfo) > 0 ? y-10 : y);
 	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 
+	// Header - Bottom left
 	txt[i] = new GuiText(GCInfo, 16, ( GXColor ) {255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	txt[i]->SetPosition(0, y+6);
 	txt[i]->SetFont(creditsFont, creditsFontSize);
 	i++;
 
+	// Header - Top right
+	txt[i] = new GuiText(SvnRev, 16, ( GXColor ) {255, 255, 255, 255});
+	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
+	txt[i]->SetPosition(0, (info || currentMIOS > DEFAULT_MIOS) ? y-10 : y);
+	txt[i]->SetFont(creditsFont, creditsFontSize);
+	i++;
+
+	// Header - Bottom right
 	txt[i] = new GuiText(IosInfo, 16, ( GXColor ) {255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
 	txt[i]->SetPosition(0, y+6);

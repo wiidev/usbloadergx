@@ -16,6 +16,7 @@
 #include "wbfs.h"
 #include "settings/SettingsEnums.h"
 #include "GameCube/DML_Config.h"
+#include "GameCube/NIN_Config.h"
 #include "gecko.h"
 
 // Global app entry point
@@ -56,7 +57,7 @@ void Disc_SetLowMem(void)
 	memcpy((void *) Online_Check, (void *) Disc_ID, 4);
 }
 
-void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode)
+void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode, u32 *nin_VideoMode)
 {
 	rmode = VIDEO_GetPreferredMode(0);
 
@@ -89,6 +90,7 @@ void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode)
 			rmode_reg = PAL60 ? VI_EURGB60 : VI_PAL;
 			rmode = progressive ? &TVEurgb60Hz480Prog : (PAL60 ? &TVEurgb60Hz480IntDf : &TVPal528IntDf);
 			if(dml_VideoMode) *dml_VideoMode = progressive ? DML_VID_FORCE_PROG : (PAL60 ? DML_VID_FORCE_PAL60 : DML_VID_FORCE_PAL50);
+			if(nin_VideoMode) *nin_VideoMode = progressive ? NIN_CFG_FORCE_PROG : (PAL60 ? NIN_VID_FORCE_PAL60 : NIN_VID_FORCE_PAL50);
 			break;
 
 		case CONF_VIDEO_MPAL:
@@ -99,6 +101,7 @@ void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode)
 			rmode_reg = VI_NTSC;
 			rmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
 			if(dml_VideoMode) *dml_VideoMode = progressive ? DML_VID_FORCE_PROG : DML_VID_FORCE_NTSC;
+			if(nin_VideoMode) *nin_VideoMode = progressive ? NIN_CFG_FORCE_PROG : NIN_VID_FORCE_NTSC;
 			break;
 	}
 
@@ -118,6 +121,7 @@ void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode)
 					rmode_reg = PAL60 ? VI_EURGB60 : VI_PAL;
 					rmode = progressive ? &TVEurgb60Hz480Prog : (PAL60 ? &TVEurgb60Hz480IntDf : &TVPal528IntDf);
 					if(dml_VideoMode) *dml_VideoMode = progressive ? DML_VID_FORCE_PROG : (PAL60 ? DML_VID_FORCE_PAL60 : DML_VID_FORCE_PAL50);
+					if(nin_VideoMode) *nin_VideoMode = progressive ? NIN_CFG_FORCE_PROG : (PAL60 ? NIN_VID_FORCE_PAL60 : NIN_VID_FORCE_PAL50);
 					break;
 				// NTSC
 				case 'E':
@@ -125,9 +129,11 @@ void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode)
 					rmode_reg = VI_NTSC;
 					rmode = progressive ? &TVNtsc480Prog : &TVNtsc480IntDf;
 					if(dml_VideoMode) *dml_VideoMode = progressive ? DML_VID_FORCE_PROG : DML_VID_FORCE_NTSC;
+					if(nin_VideoMode) *nin_VideoMode = progressive ? NIN_CFG_FORCE_PROG : NIN_VID_FORCE_NTSC;
 					break;
 				default:
 					if(dml_VideoMode) *dml_VideoMode = DML_VID_DML_AUTO;
+					if(nin_VideoMode) *nin_VideoMode = NIN_VID_AUTO;
 					break;
 			}
 			break;
@@ -135,26 +141,31 @@ void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode)
 			rmode =  &TVPal528IntDf;
 			rmode_reg = VI_PAL;
 			if(dml_VideoMode) *dml_VideoMode = DML_VID_FORCE_PAL50;
+			if(nin_VideoMode) *nin_VideoMode = NIN_VID_FORCE_PAL50;
 			break;
 		case VIDEO_MODE_PAL60: // PAL60
 			rmode = &TVEurgb60Hz480IntDf;
 			rmode_reg = VI_EURGB60;
 			if(dml_VideoMode) *dml_VideoMode = DML_VID_FORCE_PAL60;
+			if(nin_VideoMode) *nin_VideoMode = NIN_VID_FORCE_PAL60;
 			break;
 		case VIDEO_MODE_NTSC: // NTSC
 			rmode = &TVNtsc480IntDf;
 			rmode_reg = VI_NTSC;
 			if(dml_VideoMode) *dml_VideoMode = DML_VID_FORCE_NTSC;
+			if(nin_VideoMode) *nin_VideoMode = NIN_VID_FORCE_NTSC;
 			break;
 		case VIDEO_MODE_PAL480P:
 			rmode = &TVEurgb60Hz480Prog;
 			rmode_reg = VI_EURGB60;
 			if(dml_VideoMode) *dml_VideoMode = DML_VID_FORCE_PROG | DML_VID_PROG_PATCH;
+			if(nin_VideoMode) *nin_VideoMode = NIN_CFG_FORCE_PROG | NIN_VID_FORCE_PAL60;
 			break;
 		case VIDEO_MODE_NTSC480P:
 			rmode = &TVNtsc480Prog;
 			rmode_reg = VI_NTSC;
 			if(dml_VideoMode) *dml_VideoMode = DML_VID_FORCE_PROG | DML_VID_PROG_PATCH;
+			if(nin_VideoMode) *nin_VideoMode = NIN_CFG_FORCE_PROG | NIN_VID_FORCE_NTSC;
 			break;
 		case VIDEO_MODE_SYSDEFAULT: // AUTO PATCH TO SYSTEM
 			break;

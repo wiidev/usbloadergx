@@ -60,6 +60,7 @@ CustomPathsSM::CustomPathsSM()
 	Options->SetName(Idx++, tr("Main GameCube Path"));
 	Options->SetName(Idx++, tr("SD GameCube Path"));
 	Options->SetName(Idx++, tr("Devolution Loader Path"));
+	Options->SetName(Idx++, tr("Nintendont Loader Path"));
 	Options->SetName(Idx++, tr("Cache BNR Files Path"));
 
 	SetOptionValues();
@@ -131,6 +132,9 @@ void CustomPathsSM::SetOptionValues()
 
 	//! Settings: GameCube Devolution loader.bin Path
 	Options->SetValue(Idx++, Settings.DEVOLoaderPath);
+
+	//! Settings: GameCube Nintendont boot.dol Path
+	Options->SetValue(Idx++, Settings.NINLoaderPath);
 
 	//! Settings: Cache BNR Files Path
 	Options->SetValue(Idx++, Settings.BNRCachePath);
@@ -327,6 +331,13 @@ int CustomPathsSM::GetMenuInternal()
 	{
 		titleTxt->SetText(tr( "Devolution Loader Path" ));
 		ChangePath(Settings.DEVOLoaderPath, sizeof(Settings.DEVOLoaderPath));
+	}
+
+	//! Settings: GameCube Nintendont boot.dol path
+	else if (ret == ++Idx)
+	{
+		titleTxt->SetText(tr( "Nintendont Loader Path" ));
+		ChangePath(Settings.NINLoaderPath, sizeof(Settings.NINLoaderPath));
 	}
 
 	//! Settings: Cache BNR Files Path

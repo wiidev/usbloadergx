@@ -127,7 +127,7 @@ bool GuiTrigger::Left()
 {
 	u32 wiibtn = WPAD_BUTTON_LEFT;
 	if(wpad.exp.type == WPAD_EXP_CLASSIC)
-		wiibtn = WPAD_CLASSIC_BUTTON_LEFT;
+		wiibtn |= WPAD_CLASSIC_BUTTON_LEFT;
 
 	if (   ((wpad.btns_d | wpad.btns_h) & wiibtn)
 		|| ((pad.btns_d | pad.btns_h) & PAD_BUTTON_LEFT))
@@ -150,7 +150,7 @@ bool GuiTrigger::Right()
 {
 	u32 wiibtn = WPAD_BUTTON_RIGHT;
 	if(wpad.exp.type == WPAD_EXP_CLASSIC)
-		wiibtn = WPAD_CLASSIC_BUTTON_RIGHT;
+		wiibtn |= WPAD_CLASSIC_BUTTON_RIGHT;
 
 	if (   ((wpad.btns_d | wpad.btns_h) & wiibtn)
 		|| ((pad.btns_d | pad.btns_h) & PAD_BUTTON_RIGHT))
@@ -173,7 +173,7 @@ bool GuiTrigger::Up()
 {
 	u32 wiibtn = WPAD_BUTTON_UP;
 	if(wpad.exp.type == WPAD_EXP_CLASSIC)
-		wiibtn = WPAD_CLASSIC_BUTTON_UP;
+		wiibtn |= WPAD_CLASSIC_BUTTON_UP;
 
 	if (   ((wpad.btns_d | wpad.btns_h) & wiibtn)
 		|| ((pad.btns_d | pad.btns_h) & PAD_BUTTON_UP))
@@ -196,7 +196,7 @@ bool GuiTrigger::Down()
 {
 	u32 wiibtn = WPAD_BUTTON_DOWN;
 	if(wpad.exp.type == WPAD_EXP_CLASSIC)
-		wiibtn = WPAD_CLASSIC_BUTTON_DOWN;
+		wiibtn |= WPAD_CLASSIC_BUTTON_DOWN;
 
 	if (   ((wpad.btns_d | wpad.btns_h) & wiibtn)
 		|| ((pad.btns_d | pad.btns_h) & PAD_BUTTON_DOWN))

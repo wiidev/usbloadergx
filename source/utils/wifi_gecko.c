@@ -30,7 +30,7 @@
 #include <unistd.h>
 #include <network.h>
 
-#define DESTINATION_IP	  "192.168.178.3"
+#define DESTINATION_IP	  "192.168.0.255"
 #define DESTINATION_PORT	4405
 
 static int connection = -1;

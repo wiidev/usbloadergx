@@ -56,7 +56,7 @@ static s32 Nand_Mount(nandDevice *dev)
 		return fd;
 
 
-	if(rev >= 21 && rev < 30000)
+	if(rev >= 21 && rev != 65280) // stub version from nintendo
 	{
 		// NOTE:
 		// The official cIOSX rev21 by Waninkoko ignores the partition argument
@@ -129,7 +129,7 @@ static s32 Nand_Enable(nandDevice *dev)
 		mode = dev->mode;
 	}
 
-	if(rev >= 21 && rev < 30000)
+	if(rev >= 21 && rev != 65280) // stub version from nintendo
 	{
 		// NOTE:
 		// The official cIOSX rev21 by Waninkoko provides an undocumented feature

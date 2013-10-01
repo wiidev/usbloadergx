@@ -55,11 +55,18 @@ int CheatMenu(const char * gameID)
 	int check = gctCheats.openTxtfile(txtfilename);
 
 	int download = 0;
+	int blankchoice = 0;
 
 	switch (check)
 	{
 		case -1:
-			WindowPrompt(tr( "Error" ), tr( "Cheatfile is blank" ), tr( "OK" ));
+			blankchoice = WindowPrompt(tr( "Error" ), tr( "Cheatfile is blank" ), tr( "Delete" ), tr( "OK" ));
+			if(blankchoice)
+			{
+				char gctPath[200];
+				snprintf(gctPath, sizeof(gctPath), "%s%.6s.TXT", Settings.TxtCheatcodespath, gameID);
+				RemoveFile(gctPath);
+			}
 			break;
 		case 0:
 			download = WindowPrompt(tr( "Error" ), tr( "No Cheatfile found" ), tr( "Download Now" ), tr( "Cancel" ));
