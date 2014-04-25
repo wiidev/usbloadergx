@@ -20,17 +20,19 @@
 #include <gctypes.h>
 
 #define NIN_MAGIC					0x01070CF6
-#define NIN_CFG_VERSION				0x00000001
+#define NIN_CFG_VERSION				0x00000002
 
 typedef struct NIN_CFG 
 {
 	u32		Magicbytes;		// 0x01070CF6
-	u32		Version;		// 0x00000001
+	u32		Version;		// 0x00000002 since r42
 	u32		Config;
 	u32		VideoMode;
 	u32		Language;
 	char	GamePath[255];
 	char	CheatPath[255];
+	u32		MaxPads;
+	u32		GameID;
 } NIN_CFG;
 
 enum ninconfig
@@ -39,13 +41,13 @@ enum ninconfig
 	NIN_CFG_DEBUGGER	= (1<<1),	// Only for Wii Version
 	NIN_CFG_DEBUGWAIT	= (1<<2),	// Only for Wii Version
 	NIN_CFG_MEMCARDEMU	= (1<<3),
-	NIN_CFG_GAME_PATH	= (1<<4),
-	NIN_CFG_CHEAT_PATH	= (1<<5),
-	NIN_CFG_FORCE_WIDE	= (1<<6),
-	NIN_CFG_FORCE_PROG	= (1<<7),
-	NIN_CFG_AUTO_BOOT	= (1<<8),
-	NIN_CFG_HID			= (1<<9),
-	NIN_CFG_OSREPORT	= (1<<10),	// Only for Wii Version
+	NIN_CFG_CHEAT_PATH	= (1<<4),
+	NIN_CFG_FORCE_WIDE	= (1<<5),
+	NIN_CFG_FORCE_PROG	= (1<<6),
+	NIN_CFG_AUTO_BOOT	= (1<<7),
+	NIN_CFG_HID			= (1<<8),
+	NIN_CFG_OSREPORT	= (1<<9),
+	NIN_CFG_USB			= (1<<10),
 };
 
 enum ninvideomode
@@ -59,8 +61,10 @@ enum ninvideomode
 	NIN_VID_FORCE_PAL50	= (1<<0),
 	NIN_VID_FORCE_PAL60	= (1<<1),
 	NIN_VID_FORCE_NTSC	= (1<<2),
+	NIN_VID_FORCE_MPAL	= (1<<3),
+	NIN_VID_PROG		= (1<<4),
 
-	NIN_VID_FORCE_MASK	= NIN_VID_FORCE_PAL50|NIN_VID_FORCE_PAL60|NIN_VID_FORCE_NTSC,
+	NIN_VID_FORCE_MASK	= NIN_VID_FORCE_PAL50|NIN_VID_FORCE_PAL60|NIN_VID_FORCE_NTSC|NIN_VID_FORCE_MPAL,
 };
 
 enum ninlanguage

@@ -47,8 +47,7 @@ public:
 
 	vector<struct discHdr> & GetHeaders(void)
 	{
-		if(HeaderList.empty())
-			LoadAllGames();
+		LoadAllGames();
 
 		return HeaderList;
 	}

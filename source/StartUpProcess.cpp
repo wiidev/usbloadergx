@@ -211,17 +211,32 @@ int StartUpProcess::Execute()
 	Settings.EntryIOS = IOS_GetVersion();
 
 	// Reload app cios if needed
-	if(!AHBPROT_DISABLED || Settings.UseArgumentIOS)
+	SetTextf("Loading application cIOS %s\n", Settings.UseArgumentIOS ? "requested in meta.xml" : "");
+	if(IosLoader::LoadAppCios() < 0)
 	{
-		SetTextf("Loading application cIOS %s\n", Settings.UseArgumentIOS ? "requested in meta.xml" : "");
-		if(IosLoader::LoadAppCios() < 0)
+		SetTextf("Failed loading any cIOS. Trying with IOS58 + AHB access...");
+		
+		// We can allow now operation without cIOS in channel mode with AHB access
+		if(!AHBPROT_DISABLED || (AHBPROT_DISABLED && IOS_GetVersion() != 58))
 		{
-			SetTextf("Failed loading any cIOS. USB Loader GX requires a cIOS or AHB access to work properly.\n");
+			SetTextf("Failed loading IOS 58. USB Loader GX requires a cIOS or IOS 58 with AHB access. Exiting...\n");
 			sleep(5);
-			// We can allow now operation without cIOS in channel mode with AHPPROT
-			// Sys_BackToLoader();
+			Sys_BackToLoader();
+		}
+		else
+		{
+			SetTextf("Running on IOS 58. Wii disc based games and some channels will not work.");
+			sleep(5);
 		}
 	}
+	
+	if(!AHBPROT_DISABLED && IOS_GetVersion() < 200)
+	{
+		SetTextf("Failed loading IOS %i. USB Loader GX requires a cIOS or IOS58 with AHB access. Exiting...\n", IOS_GetVersion());
+		sleep(5);
+		Sys_BackToLoader();
+	}
+
 	SetTextf("Using %sIOS %i\n", IOS_GetVersion() >= 200 ? "c" : "", IOS_GetVersion());
 	
 	SetupPads();
@@ -229,12 +244,21 @@ int StartUpProcess::Execute()
 	SetTextf("Initialize sd card\n");
 	DeviceHandler::Instance()->MountSD();
 
-	SetTextf("Initialize usb device\n");
-	USBSpinUp();
-	DeviceHandler::Instance()->MountAllUSB(false);
-
 	SetTextf("Loading config files\n");
-	gprintf("\tLoading config...%s\n", Settings.Load() ? "done" : "failed");
+
+	// Ugly, but let's load SD card first to allow users to disable USB Auto mounting.
+	gprintf("\tLoading config from SD...");
+	bool settingsLoaded = Settings.Load();
+	gprintf("%s\n", settingsLoaded ? "done" : "failed");
+
+	if(Settings.USBAutoMount == ON)
+	{
+		SetTextf("Initialize usb device\n");
+		USBSpinUp();
+		DeviceHandler::Instance()->MountAllUSB(false);
+	}
+
+	if(!settingsLoaded) gprintf("\tLoading config from USB...%s\n", Settings.Load() ? "done" : "failed");
 	gprintf("\tLoading language...%s\n", Settings.LoadLanguage(Settings.language_path, CONSOLE_DEFAULT) ? "done" : "failed");
 	gprintf("\tLoading game settings...%s\n", GameSettings.Load(Settings.ConfigPath) ? "done" : "failed");
 	gprintf("\tLoading game statistics...%s\n", GameStatistics.Load(Settings.ConfigPath) ? "done" : "failed");
@@ -247,7 +271,8 @@ int StartUpProcess::Execute()
 		
 		// Unmount devices
 		DeviceHandler::DestroyInstance();
-		USBStorage2_Deinit();
+		if(Settings.USBAutoMount == ON)
+			USBStorage2_Deinit();
 
 		// Shut down pads
 		WPAD_Shutdown();
@@ -260,8 +285,11 @@ int StartUpProcess::Execute()
 		// Re-Mount devices
 		SetTextf("Reinitializing devices...\n");
 		DeviceHandler::Instance()->MountSD();
-		USBSpinUp();
-		DeviceHandler::Instance()->MountAllUSB(false);
+		if(Settings.USBAutoMount == ON)
+		{
+			USBSpinUp();
+			DeviceHandler::Instance()->MountAllUSB(false);
+		}
 
 		// Start pads again
 		SetupPads();
@@ -273,14 +301,20 @@ int StartUpProcess::Execute()
 	}
 	else if(Settings.USBPort == 1 && USBStorage2_GetPort() != Settings.USBPort)
 	{
-		SetTextf("Changing USB Port to %i\n", Settings.USBPort);
-		DeviceHandler::Instance()->UnMountAllUSB();
-		DeviceHandler::Instance()->MountAllUSB();
+		if(Settings.USBAutoMount == ON)
+		{
+			SetTextf("Changing USB Port to %i\n", Settings.USBPort);
+			DeviceHandler::Instance()->UnMountAllUSB();
+			DeviceHandler::Instance()->MountAllUSB();
+		}
 	}
 	else if(Settings.USBPort == 2)
 	{
-		SetTextf("Mounting USB Port to 1\n");
-		DeviceHandler::Instance()->MountUSBPort1();
+		if(Settings.USBAutoMount == ON)
+		{
+			SetTextf("Mounting USB Port to 1\n");
+			DeviceHandler::Instance()->MountUSBPort1();
+		}
 	}
 	
 	// enable isfs permission if using IOS+AHB or Hermes v4

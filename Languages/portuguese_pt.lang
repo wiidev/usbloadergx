@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 22:10+0200\n"
+"POT-Creation-Date: 2014-04-25 15:06+0200\n"
 "PO-Revision-Date: 2011-11-03 11:00+0000\n"
 "Last-Translator: pplucky <pplucky@gmail.com>\n"
 "Language-Team: Sky8000, pplucky\n"
@@ -1360,9 +1360,6 @@ msgstr ""
 msgid "Main Path"
 msgstr ""
 
-msgid "Main tester:"
-msgstr "Tester principal:"
-
 msgid "Mar"
 msgstr "Mar"
 
@@ -1383,6 +1380,9 @@ msgstr "Vídeo Motion+"
 
 msgid "Mount DVD drive"
 msgstr "Montar Unidade de DVD"
+
+msgid "Mount USB at launch"
+msgstr ""
 
 msgid "Multiple Partitions"
 msgstr "Partições múltiplas"
@@ -1433,9 +1433,6 @@ msgid "Nintendont"
 msgstr ""
 
 msgid "Nintendont Loader Path"
-msgstr ""
-
-msgid "Nintendont currently only supports GameCube games on SD card."
 msgstr ""
 
 msgid "No"
@@ -1566,6 +1563,9 @@ msgstr "Site Oficial:"
 
 msgid "Offset"
 msgstr "Offset"
+
+msgid "Ok"
+msgstr ""
 
 msgid "Only Game Partition"
 msgstr "Apenas Partição Jogos"
@@ -1973,6 +1973,9 @@ msgstr "Este IOS é o ios BootMii. Se tem a certeza que não é o BootMii e tem 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
 msgstr "Este IOS não foi encontrado na lista de títulos. Se tem a certeza que o tem instalado então ignore este aviso."
 
+msgid "This Nintendont version does not support games on USB."
+msgstr ""
+
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr ""
 
@@ -2024,6 +2027,14 @@ msgstr ""
 msgid "To run GameCube games with Nintendont you need the boot.dol file in your Nintendont Loader Path."
 msgstr ""
 
+#, c-format
+msgid "To use HID with %s you need the %s file."
+msgstr ""
+
+#, c-format
+msgid "To use ocarina with %s you need the %s file."
+msgstr ""
+
 msgid "Tooltip Delay"
 msgstr ""
 
@@ -2033,7 +2044,7 @@ msgstr "Dicas"
 msgid "Transfer failed"
 msgstr "Transferência falhada"
 
-msgid "USB Device not found."
+msgid "USB Device not initialized."
 msgstr ""
 
 msgid "USB Loader GX is protected"
@@ -2052,6 +2063,9 @@ msgid "USBloaderGX couldn't verify Nintendont boot.dol file. Launch this boot.do
 msgstr ""
 
 msgid "USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyway?"
+msgstr ""
+
+msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
 msgstr ""
 
 msgid "Uninstall"
@@ -2295,6 +2309,9 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Main tester:"
+#~ msgstr "Tester principal:"
 
 #~ msgid "Boot/Standard"
 #~ msgstr "Arranque/Std"

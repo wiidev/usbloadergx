@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 22:10+0200\n"
+"POT-Creation-Date: 2014-04-25 15:06+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -1360,9 +1360,6 @@ msgstr ""
 msgid "Main Path"
 msgstr ""
 
-msgid "Main tester:"
-msgstr "Muj tester:"
-
 msgid "Mar"
 msgstr "Brez"
 
@@ -1383,6 +1380,9 @@ msgstr "WiiMotion+ Video"
 
 msgid "Mount DVD drive"
 msgstr "Spustit z DVD"
+
+msgid "Mount USB at launch"
+msgstr ""
 
 msgid "Multiple Partitions"
 msgstr ""
@@ -1433,9 +1433,6 @@ msgid "Nintendont"
 msgstr ""
 
 msgid "Nintendont Loader Path"
-msgstr ""
-
-msgid "Nintendont currently only supports GameCube games on SD card."
 msgstr ""
 
 msgid "No"
@@ -1566,6 +1563,9 @@ msgstr "Oficiální místo:"
 
 msgid "Offset"
 msgstr "Ofset"
+
+msgid "Ok"
+msgstr ""
 
 msgid "Only Game Partition"
 msgstr "Pouze oddíl s hrami"
@@ -1973,6 +1973,9 @@ msgstr "Tento IOS je BootMii IOS. Pokud si jste jisti ze toto není BootMii a m�
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
 msgstr "Tento IOS nebyl nalezen na seznamu. Pokud si jste jisti ze jej máte nainstalován, pak ignorujte toto varování."
 
+msgid "This Nintendont version does not support games on USB."
+msgstr ""
+
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr ""
 
@@ -2024,6 +2027,14 @@ msgstr ""
 msgid "To run GameCube games with Nintendont you need the boot.dol file in your Nintendont Loader Path."
 msgstr ""
 
+#, c-format
+msgid "To use HID with %s you need the %s file."
+msgstr ""
+
+#, c-format
+msgid "To use ocarina with %s you need the %s file."
+msgstr ""
+
 msgid "Tooltip Delay"
 msgstr ""
 
@@ -2033,7 +2044,7 @@ msgstr "Popisky"
 msgid "Transfer failed"
 msgstr "Prenos selhal"
 
-msgid "USB Device not found."
+msgid "USB Device not initialized."
 msgstr ""
 
 msgid "USB Loader GX is protected"
@@ -2052,6 +2063,9 @@ msgid "USBloaderGX couldn't verify Nintendont boot.dol file. Launch this boot.do
 msgstr ""
 
 msgid "USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyway?"
+msgstr ""
+
+msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
 msgstr ""
 
 msgid "Uninstall"
@@ -2295,6 +2309,9 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid "Main tester:"
+#~ msgstr "Muj tester:"
 
 #~ msgid "Rename Game on WBFS"
 #~ msgstr "Prejmenovat hru na WBFS"

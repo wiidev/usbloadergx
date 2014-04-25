@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1218
+# French.lang - r1219
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 22:10+0200\n"
+"POT-Creation-Date: 2014-04-25 15:06+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -518,7 +518,7 @@ msgid "Customs/Original"
 msgstr "Persos/Originaux"
 
 msgid "D Buttons"
-msgstr ""
+msgstr "Boutons directs"
 
 msgid "DOL Path"
 msgstr "Dossier DOL alternatif"
@@ -1360,9 +1360,6 @@ msgstr "Dossier GameCube principal"
 msgid "Main Path"
 msgstr "Dossier principal"
 
-msgid "Main tester:"
-msgstr "Testeur:"
-
 msgid "Mar"
 msgstr "Mars"
 
@@ -1383,6 +1380,9 @@ msgstr "Vidéo Motion+"
 
 msgid "Mount DVD drive"
 msgstr "Charger le DVD"
+
+msgid "Mount USB at launch"
+msgstr "Charger USB au démarrage"
 
 msgid "Multiple Partitions"
 msgstr "Partitions multiples"
@@ -1434,9 +1434,6 @@ msgstr ""
 
 msgid "Nintendont Loader Path"
 msgstr "Dossier Loader Nintendont"
-
-msgid "Nintendont currently only supports GameCube games on SD card."
-msgstr "Nintendont n'est actuellement compatible qu'avec les cartes SD."
 
 msgid "No"
 msgstr "Non"
@@ -1565,6 +1562,9 @@ msgid "Official Site:"
 msgstr "Site officiel:"
 
 msgid "Offset"
+msgstr ""
+
+msgid "Ok"
 msgstr ""
 
 msgid "Only Game Partition"
@@ -1973,6 +1973,9 @@ msgstr "Cet IOS est l'IOS de BootMii. Si vous étes certain que ce n'est pas Boo
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
 msgstr "Cet IOS n'a pas été trouvé dans la liste des titres. Si vous êtes certain de l'avoir installé, ignorez cet avertissement."
 
+msgid "This Nintendont version does not support games on USB."
+msgstr "Cette version de Nintendont n'est pas compatible avec les jeux sur USB."
+
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "Ce jeu a plusieurs disques, choisissez celui que vous souhaitez lancer."
 
@@ -2022,7 +2025,15 @@ msgid "To run GameCube games with Devolution you need the loader.bin file in you
 msgstr "Pour lancer les jeux GameCube avec Devolution vous devez placer le fichier loader.bin dans le Dossier Loader Devolution."
 
 msgid "To run GameCube games with Nintendont you need the boot.dol file in your Nintendont Loader Path."
-msgstr "Pour lancer les jeux GameCube avec Nintendont vous devez placer le fichier loader.bin dans le Dossier Loader Nintendont."
+msgstr "Pour lancer les jeux GameCube avec Nintendont vous devez placer le fichier boot.dol dans le Dossier Loader Nintendont."
+
+#, c-format
+msgid "To use HID with %s you need the %s file."
+msgstr "Pour utiliser HID avec %s vous avez besoin du fichier %s."
+
+#, c-format
+msgid "To use ocarina with %s you need the %s file."
+msgstr "Pour utiliser Ocarina avec %s vous avez besoin du fichier %s."
 
 msgid "Tooltip Delay"
 msgstr "Délai des Info-bulles"
@@ -2033,8 +2044,8 @@ msgstr "Info-bulles"
 msgid "Transfer failed"
 msgstr "Échec du transfert"
 
-msgid "USB Device not found."
-msgstr "Périphérique USB introuvable."
+msgid "USB Device not initialized."
+msgstr "Périphérique USB non initialisé."
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX est verrouillé"
@@ -2053,6 +2064,9 @@ msgstr "USBLoaderGX n'a pas pu vérifier le fichier boot.dol de nintendont. Voul
 
 msgid "USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyway?"
 msgstr "USBLoaderGX n'a pas pu créer le fichier de configuration de Nintendont. Voulez-vous quand même lancer Nintendont ?"
+
+msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
+msgstr "Nintendont Alpha v0.1 ne fonctionne qu'avec USBLoaderGX r1218. Veuillez mettre à jour votre version de Nintendont."
 
 msgid "Uninstall"
 msgstr "Désinstaller"
@@ -2295,6 +2309,15 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "Main tester:"
+#~ msgstr "Testeur:"
+
+#~ msgid "Nintendont currently only supports GameCube games on SD card."
+#~ msgstr "Nintendont n'est actuellement compatible qu'avec les cartes SD."
+
+#~ msgid "USB Device not found."
+#~ msgstr "Périphérique USB introuvable."
 
 #~ msgid "Boot/Standard"
 #~ msgstr "IOS par défaut"

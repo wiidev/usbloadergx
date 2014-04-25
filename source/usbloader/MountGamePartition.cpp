@@ -80,7 +80,7 @@ static int PartitionChoice()
 	int choice = WindowPrompt(tr( "No WBFS or FAT/NTFS/EXT partition found" ), tr( "You can select or format a partition or use the channel loader mode." ), tr( "Select" ), tr( "Format" ), tr( "Channels" ));
 	if (choice == 0)
 	{
-		Settings.LoaderMode = MODE_ALL;
+		Settings.LoaderMode = MODE_NANDCHANNELS;
 		return 0;
 	}
 	else if(choice == 1)
@@ -130,9 +130,10 @@ int MountGamePartition(bool ShowGUI)
 		if (wbfsinit < 0)
 		{
 			if(ShowGUI)
-				ShowError("%s %s", tr( "USB Device not found." ), tr("Switching to channel list mode."));
+				ShowError("%s %s", tr( "USB Device not initialized." ), tr("Switching to channel list mode."));
 
-			Settings.LoaderMode = MODE_ALL;
+			Settings.LoaderMode &= ~MODE_WIIGAMES;
+			Settings.LoaderMode |= MODE_NANDCHANNELS;
 		}
 		else
 		{
@@ -149,7 +150,7 @@ int MountGamePartition(bool ShowGUI)
 				if(ShowGUI)
 					PartitionChoice();
 				else
-					Settings.LoaderMode = MODE_ALL;
+					Settings.LoaderMode = MODE_NANDCHANNELS;
 			}
 		}
 	}

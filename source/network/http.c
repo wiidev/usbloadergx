@@ -1,7 +1,9 @@
 #include "http.h"
 #include "../svnrev.h"
+#include "gecko.h"
 
 extern char incommingIP[50];
+static u8 retryloop = 0;
 
 /**
  * Emptyblock is a statically defined variable for functions to return if they are unable
@@ -197,29 +199,117 @@ struct block downloadfile(const char *url)
 		return emptyblock;
 	}
 
+	
+	//check if a cookie is set for this host and load it.
+	//strcpy(cookie, "Cookie: __cfduid=d8e517c1a10af75d01699adaa9c3d9ffd1398187687536\r\n");
+
 	//Form a nice request header to send to the webserver
-	char* headerformat = "GET %s HTTP/1.0\r\nHost: %s\r\nReferer: %s\r\nUser-Agent: USBLoaderGX r%s\r\n\r\n";
+	char* headerformat = "GET %s HTTP/1.0\r\nHost: %s\r\nReferer: %s\r\n%sUser-Agent: USBLoaderGX r%s\r\n\r\n";
 	char header[strlen(headerformat) + strlen(path) + strlen(domain)*2 + 100];
 	sprintf(header, headerformat, path, domain, domain, GetRev());
+	//gprintf("\nHTTP Request:\n");
+	//gprintf("%s\n",header);
 
 	//Do the request and get the response
 	send_message(connection, header);
 	struct block response = read_message(connection);
 	net_close(connection);
-
+	
+	// dump response
+	// hexdump(response.data, response.size);
+	
 	//Search for the 4-character sequence \r\n\r\n in the response which signals the start of the http payload (file)
 	unsigned char *filestart = NULL;
 	u32 filesize = 0;
 	u32 i;
+	char newURL[512];
+	bool redirect = false;
+
 	for (i = 3; i < response.size; i++)
 	{
 		if (response.data[i] == '\n' && response.data[i - 1] == '\r' && response.data[i - 2] == '\n' && response.data[i - 3] == '\r')
 		{
 			filestart = response.data + i + 1;
 			filesize = response.size - i - 1;
+			
+			// Check the HTTP response code
+			if (response.size > 10 && strncmp((char*)response.data, "HTTP/", 5)==0) 
+			{
+				char htstat[i];
+				strncpy(htstat, (char*)response.data, i);
+				htstat[i] = 0;
+				char *codep;
+				codep = strchr(htstat, ' ');
+				if (codep) 
+				{
+					int code;
+					if (sscanf(codep+1, "%d", &code) == 1) 
+					{
+						//gprintf("HTTP response code: %d\n", code);
+						if (code == 302) // 302 FOUND (redirected link)
+						{
+							char *ptr = strstr((char*)response.data, "ocation: "); // location or Location
+							if(ptr)
+							{
+								ptr += strlen("ocation: ");
+								strncpy(newURL, ptr, sizeof(newURL));
+								*(strchr(newURL, '\r'))=0;
+								
+								redirect = true;
+								//gprintf("New URL to download = %s \n", newURL);
+							}
+							else
+							{
+								//gprintf("HTTP ERROR: %s\n", htstat);
+								free(response.data);
+								return emptyblock;
+							}
+						}
+						if (code >=400) // Not found
+						{
+							//gprintf("HTTP ERROR: %s\n", htstat);
+							//free(response.data);
+							//return emptyblock;
+						}
+					}
+				}
+			}
 			break;
 		}
 	}
+
+	if(redirect)
+	{
+		// Prevent endless loop
+		retryloop++;
+		if(retryloop > 3)
+		{
+			retryloop = 0;
+			free(response.data);
+			return emptyblock;
+		}
+		
+		struct block redirected = downloadfile(newURL);
+
+		// copy the newURL data into the original data
+		u8 * tmp = realloc(response.data, redirected.size);
+		if (tmp == NULL)
+		{
+			//gprintf("Could not allocate enough memory for new URL. Download canceled.\n");
+			free(response.data);
+			free(redirected.data);
+			return emptyblock;
+		}
+		response.data = tmp;
+		memcpy(response.data, redirected.data, redirected.size);
+
+		// Set filestart's new size based on redirected file
+		filestart = response.data;
+		filesize = redirected.size;
+		free(redirected.data);
+		
+	}
+	retryloop = 0;
 
 	if (filestart == NULL)
 	{

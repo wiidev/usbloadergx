@@ -253,7 +253,7 @@ void WindowCredits()
 	creditsMusic->Play();
 
 	bool exit = false;
-	int i = 0;
+	u32 i = 0;
 	int y = 20;
 	float oldFontScale = Settings.FontScaleFactor;
 	Settings.FontScaleFactor = 1.0f;
@@ -273,23 +273,22 @@ void WindowCredits()
 	starImg.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	starImg.SetPosition(505, 350);
 
-	const int numEntries = 26;
-	std::vector<GuiText *> txt(numEntries);
+	std::vector<GuiText *> txt;
 
 	const u8 *creditsFont = Resources::GetFile("font.ttf");
 	u32 creditsFontSize = Resources::GetFileSize("font.ttf");
 
-	txt[i] = new GuiText(tr( "Credits" ), 28, ( GXColor ) {255, 255, 255, 255});
-	txt[i]->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
-	txt[i]->SetPosition(0, 8);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	GuiText * currentTxt = new GuiText(tr( "Credits" ), 28, ( GXColor ) {255, 255, 255, 255});
+	currentTxt->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
+	currentTxt->SetPosition(0, 8);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 
 	char SvnRev[80];
 #ifdef FULLCHANNEL
-	snprintf(SvnRev, sizeof(SvnRev), "Rev%sc   IOS%u (Rev %u)", GetRev(), IOS_GetVersion(), IOS_GetRevision());
+	snprintf(SvnRev, sizeof(SvnRev), "Rev%sc   IOS%u (Rev %u)%s", GetRev(), IOS_GetVersion(), IOS_GetRevision(), (*(vu32*)0xcd800064 == 0xFFFFFFFF)? " + AHB" : "" );
 #else
-	snprintf(SvnRev, sizeof(SvnRev), "Rev%s   IOS%u (Rev %u)", GetRev(), IOS_GetVersion(), IOS_GetRevision());
+	snprintf(SvnRev, sizeof(SvnRev), "Rev%s   IOS%u (Rev %u)%s", GetRev(), IOS_GetVersion(), IOS_GetRevision(), (*(vu32*)0xcd800064 == 0xFFFFFFFF)? " + AHB" : "" );
 #endif
 
 	char IosInfo[80] = "";
@@ -329,6 +328,8 @@ void WindowCredits()
 	char GCInfo2[80] = "";
 	char NIN_loader_path[100];
 	snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sboot.dol", Settings.NINLoaderPath);
+	if(!CheckFile(NIN_loader_path))
+		snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sloader.dol", Settings.NINLoaderPath);
 	if(CheckFile(NIN_loader_path))
 	{
 		u8 *buffer = NULL;
@@ -355,190 +356,190 @@ void WindowCredits()
 	}
 
 	// Header - Top left
-	txt[i] = new GuiText(GCInfo2, 16, ( GXColor ) {255, 255, 255, 255});
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(0, strlen(GCInfo) > 0 ? y-10 : y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText(GCInfo2, 16, ( GXColor ) {255, 255, 255, 255});
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(0, strlen(GCInfo) > 0 ? y-10 : y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 
 	// Header - Bottom left
-	txt[i] = new GuiText(GCInfo, 16, ( GXColor ) {255, 255, 255, 255});
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(0, y+6);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText(GCInfo, 16, ( GXColor ) {255, 255, 255, 255});
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(0, y+6);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 
 	// Header - Top right
-	txt[i] = new GuiText(SvnRev, 16, ( GXColor ) {255, 255, 255, 255});
-	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
-	txt[i]->SetPosition(0, (info || currentMIOS > DEFAULT_MIOS) ? y-10 : y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText(SvnRev, 16, ( GXColor ) {255, 255, 255, 255});
+	currentTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
+	currentTxt->SetPosition(0, (info || currentMIOS > DEFAULT_MIOS) ? y-10 : y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 
 	// Header - Bottom right
-	txt[i] = new GuiText(IosInfo, 16, ( GXColor ) {255, 255, 255, 255});
-	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
-	txt[i]->SetPosition(0, y+6);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText(IosInfo, 16, ( GXColor ) {255, 255, 255, 255});
+	currentTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
+	currentTxt->SetPosition(0, y+6);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 	y += 34;
 
-	txt[i] = new GuiText("USB Loader GX", 24, ( GXColor ) {255, 255, 255, 255});
-	txt[i]->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
-	txt[i]->SetPosition(0, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText("USB Loader GX", 24, ( GXColor ) {255, 255, 255, 255});
+	currentTxt->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
+	currentTxt->SetPosition(0, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 	y += 24;
 
-	txt[i] = new GuiText(tr( "Official Site:" ), 20, ( GXColor ) {255, 255, 255, 255});
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(10, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText(tr( "Official Site:" ), 20, ( GXColor ) {255, 255, 255, 255});
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(10, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 
-	txt[i] = new GuiText("http://code.google.com/p/usbloader-gui/", 20, ( GXColor ) {255, 255, 255, 255});
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(160, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText("http://code.google.com/p/usbloader-gui/", 20, ( GXColor ) {255, 255, 255, 255});
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(160, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 	y += 22;
 
 	GuiText::SetPresets(20, ( GXColor ) {255, 255, 255, 255}, 3000, FTGX_JUSTIFY_LEFT | FTGX_ALIGN_TOP, ALIGN_LEFT, ALIGN_TOP);
 
-	txt[i] = new GuiText(tr( "Coding:" ));
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(10, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText(tr( "Coding:" ));
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(10, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 
-	txt[i] = new GuiText("Dimok / nIxx / giantpune / ardi");
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(160, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText("Cyan / Dimok / nIxx / giantpune / ardi");
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(160, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 	y += 20;
 
-	txt[i] = new GuiText("hungyip84 / DrayX7 / lustar / r-win");
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(160, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText("hungyip84 / DrayX7 / lustar / r-win");
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(160, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 	y += 22;
 
 	char text[100];
 
-	txt[i] = new GuiText(tr( "Design:" ));
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(10, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText(tr( "Design:" ));
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(10, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 
-	txt[i] = new GuiText("cyrex / NeoRame");
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(160, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText("cyrex / NeoRame");
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(160, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 	y += 22;
 
-	txt[i] = new GuiText(tr( "Main tester:" ));
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(10, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText("");
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(10, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 
-	txt[i] = new GuiText("Cyan");
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(160, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText("");
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(160, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 	y += 22;
 
-	txt[i] = new GuiText(tr( "Big thanks to:" ));
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(10, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText(tr( "Big thanks to:" ));
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(10, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 
 	sprintf(text, "lustar %s", tr( "for GameTDB and hosting covers / disc images" ));
-	txt[i] = new GuiText(text);
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(160, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText(text);
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(160, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 	y += 20;
 
 	sprintf(text, "Cyan and Shano56 %s", tr( "for their work on the wiki page" ));
-	txt[i] = new GuiText(text);
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(160, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText(text);
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(160, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 	y += 20;
 
 	sprintf(text, "Kinyo %s", tr( "and translators for language files updates" ));
-	txt[i] = new GuiText(text);
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(160, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText(text);
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(160, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 	y += 20;
 
 	sprintf(text, "Deak Phreak %s", tr( "for hosting the themes" ));
-	txt[i] = new GuiText(text);
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(160, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText(text);
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(160, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 	y += 24;
 
-	txt[i] = new GuiText(tr( "Special thanks to:" ));
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(10, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText(tr( "Special thanks to:" ));
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(10, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 	y += 20;
 
 	sprintf(text, "Waninkoko, Kwiirk & Hermes %s", tr( "for the USB Loader source" ));
-	txt[i] = new GuiText(text);
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(10, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText(text);
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(10, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 	y += 20;
 
 	sprintf(text, "Tantric %s", tr( "for his awesome tool LibWiiGui" ));
-	txt[i] = new GuiText(text);
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(10, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText(text);
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(10, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 	y += 20;
 
 	sprintf(text, "Fishears/Nuke %s", tr( "for Ocarina" ));
-	txt[i] = new GuiText(text);
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(10, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText(text);
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(10, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 	y += 20;
 
 	sprintf(text, "WiiPower %s", tr( "for diverse patches" ));
-	txt[i] = new GuiText(text);
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(10, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText(text);
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(10, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 	y += 20;
 
 	sprintf(text, "Oggzee %s", tr( "for FAT/NTFS support" ));
-	txt[i] = new GuiText(text);
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	txt[i]->SetPosition(10, y);
-	txt[i]->SetFont(creditsFont, creditsFontSize);
-	i++;
+	currentTxt = new GuiText(text);
+	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	currentTxt->SetPosition(10, y);
+	currentTxt->SetFont(creditsFont, creditsFontSize);
+	txt.push_back(currentTxt);
 	y += 20;
 
-	for (i = 0; i < numEntries; i++)
+	for (i = 0; i < txt.size(); i++)
 		creditsWindowBox.Append(txt[i]);
 
 	creditsWindow.Append(&creditsWindowBox);
@@ -578,7 +579,7 @@ void WindowCredits()
 	HaltGui();
 	mainWindow->Remove(&creditsWindow);
 	mainWindow->SetState(STATE_DEFAULT);
-	for (i = 0; i < numEntries; i++)
+	for (i = 0; i < txt.size(); i++)
 	{
 		delete txt[i];
 		txt[i] = NULL;
@@ -1368,7 +1369,13 @@ bool NetworkInitPrompt()
 
 	return success;
 }
-
+/*
+static size_t writedata(void *ptr, size_t size, size_t nmemb, void *stream)
+{
+	int written = fwrite(ptr, size, nmemb, (FILE *)stream);
+	return written;
+}
+*/
 int CodeDownload(const char *id)
 {
 	if (!CreateSubfolder(Settings.TxtCheatcodespath))
@@ -1462,7 +1469,63 @@ int CodeDownload(const char *id)
 
 		char codeurl[250];
 		snprintf(codeurl, sizeof(codeurl), "http://geckocodes.org/txt.php?txt=%s", id);
+		//snprintf(codeurl, sizeof(codeurl), "http://geckocodes.org/codes/G/%s.txt", id);
 
+	/* //// preparation for lib cURL - Thanks airline38
+		
+		CURL *curl_handle;
+		
+		// Forge cURL header - needed for cloudflare proxy
+		char useragent[20];
+		snprintf(useragent, sizeof(useragent), "USBLoaderGX r%s", GetRev());
+		curl_handle = curl_easy_init();
+		curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, useragent);
+		curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYPEER, 0L);
+		curl_easy_setopt(curl_handle, CURLOPT_URL, codeurl);
+		curl_easy_setopt(curl_handle, CURLOPT_HTTPGET, 1); // needed?
+		
+		FILE * pfile = fopen(txtpath, "wb");
+		if(pfile)
+		{
+			curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, writedata);
+			curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, (void *)pfile);
+			curl_easy_perform(curl_handle);
+			fclose(pfile);
+			
+			// verify downloaded content
+			pfile = fopen(txtpath, "rb");
+			char target[4];
+			fseek(pfile,0,SEEK_SET);
+			fread(target, sizeof(char), 4, pfile);
+			fclose(pfile);
+			//printf("target=%s  game id=%s\n",target,id);
+			if (strncmp(target,id,4)== 0 )
+			{
+				snprintf(txtpath, sizeof(txtpath), "%s%s", txtpath, tr(" has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information." ));
+				WindowPrompt(0, txtpath, tr( "OK" ));
+				curl_easy_cleanup(curl_handle);
+				curl_global_cleanup();
+				ret = 0;
+			}
+			else
+			{
+				RemoveFile(txtpath);	
+				snprintf(codeurl, sizeof(codeurl), "%s%s", codeurl, tr( " is not on the server." ));
+				WindowPrompt(tr( "Error" ), codeurl, tr( "OK" ));
+		    }
+		}
+		else
+		{
+			snprintf(codeurl, sizeof(codeurl), "%s%s", codeurl, tr(" could not be downloaded."));
+			WindowPrompt(tr( "Error" ), codeurl, tr( "OK" ));
+		}
+
+		curl_easy_cleanup(curl_handle);
+		curl_global_cleanup();
+
+	/////
+	*/
+	
 		struct block file = downloadfile(codeurl);
 
 		if (file.data != NULL)

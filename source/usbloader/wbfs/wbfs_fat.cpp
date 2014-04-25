@@ -744,7 +744,7 @@ wbfs_t* Wbfs_Fat::CreatePart(u8 *id, char *path)
 	// 1 cluster less than 4gb
 	u64 OPT_split_size = 4LL * 1024 * 1024 * 1024 - 32 * 1024;
 
-	if(Settings.GameSplit == GAMESPLIT_NONE && gameList.GetGameFS(id) != PART_FS_FAT)
+	if(Settings.GameSplit == GAMESPLIT_NONE && DeviceHandler::GetFilesystemType(USB1+Settings.partition) != PART_FS_FAT)
 		OPT_split_size = (u64) 100LL * 1024 * 1024 * 1024 - 32 * 1024;
 
 	else if(Settings.GameSplit == GAMESPLIT_2GB)

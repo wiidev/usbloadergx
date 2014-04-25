@@ -1280,7 +1280,17 @@ int GameBrowseMenu::MainLoop()
 
 			if((Settings.LoaderMode & MODE_WIIGAMES) && (gameList.GameCount() == 0))
 			{
-				WBFS_ReInit(WBFS_DEVICE_USB);
+				s32 wbfsinit = WBFS_Init(WBFS_DEVICE_USB);
+				if (wbfsinit < 0)
+				{
+					ShowError("%s %s", tr( "USB Device not initialized." ), tr("Switching to channel list mode."));
+					Settings.LoaderMode &= ~MODE_WIIGAMES;
+					Settings.LoaderMode |= MODE_NANDCHANNELS;
+				}
+				else
+				{
+					WBFS_ReInit(WBFS_DEVICE_USB);
+				}
 				gameList.ReadGameList();
 
 				if(Settings.ShowFreeSpace)

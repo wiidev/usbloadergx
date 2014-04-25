@@ -530,6 +530,34 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		}
 	}
 	
+	// Check kenobigc.bin
+	if(ocarinaChoice)
+	{
+		char kenobigc_path[30]; 
+		snprintf(kenobigc_path, sizeof(kenobigc_path), "%s:/sneek/kenobigc.bin", DeviceHandler::GetDevicePrefix(RealPath));
+		if(!CheckFile(kenobigc_path))
+		{
+			// try to copy kenobigc from the other device
+			char kenobigc_srcpath[30]; 
+			snprintf(kenobigc_srcpath, sizeof(kenobigc_srcpath), "%s:/sneek/kenobigc.bin", strncmp(RealPath, "usb", 3) == 0 ? "sd" : "usb1");
+			if(CheckFile(kenobigc_srcpath))
+			{
+				if(CopyFile(kenobigc_srcpath, kenobigc_path) < 0)
+				{
+					gprintf("NIN: Couldn't copy %s to %s.\n", kenobigc_srcpath, kenobigc_path);
+					RemoveFile(kenobigc_path);
+					if(WindowPrompt(tr("Warning:"), fmt(tr("To use ocarina with %s you need the %s file."), LoaderName, kenobigc_path), tr("Continue"), tr("Cancel")) == 0)
+						return 0;
+				}
+			}
+			else
+			{
+				if(WindowPrompt(tr("Warning:"), fmt(tr("To use ocarina with %s you need the %s file."), LoaderName, kenobigc_path), tr("Continue"), tr("Cancel")) == 0)
+				return 0;
+			}
+		}
+	}
+
 	// Check Ocarina and cheat file location. the .gct file need to be located on the same partition than the game.
 	if(gameHdr->type != TYPE_GAME_GC_DISC && ocarinaChoice && strcmp(DeviceHandler::GetDevicePrefix(RealPath), DeviceHandler::GetDevicePrefix(Settings.Cheatcodespath)) != 0)
 	{
@@ -953,17 +981,67 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		return 0;
 	}
 
+
+	// Check USB device
+	if(strncmp(RealPath, "usb", 3) == 0)
+	{
+		// Check Main GameCube Path location
+		if(strncmp(DeviceHandler::PathToFSName(Settings.GameCubePath), "FAT", 3) != 0)
+		{
+			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."),LoaderName), tr("OK"));
+			return 0;
+		}
+
+		// Check if the partition is the first partition on the drive
+		int part_num = atoi(Settings.GameCubePath+3);
+		int portPart = DeviceHandler::PartitionToPortPartition(part_num-USB1);
+		PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandleFromPartition(part_num-USB1);
+		if(usbHandle->GetPartitionNum(portPart))
+		{
+			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."),LoaderName), tr("OK"));
+			return 0;
+		}
+
+		// Check if the partition is primary
+		if(usbHandle->GetPartitionTableType(portPart) != MBR)
+		{
+			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."),LoaderName), tr("OK"));
+			return 0;
+		}
+
+		// Check cluster size
+		if(usbHandle->GetPartitionClusterSize(usbHandle->GetLBAStart(portPart)) > 32768)
+		{
+			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to use a partition with 32k bytes/cluster or less."),LoaderName), tr("OK"));
+			return 0;
+		}
+	}
+
+
 	// Check if Nintendont boot.dol is available
 	char NIN_loader_path[255];
-	snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sboot.dol", Settings.NINLoaderPath);
+	if(strncmp(RealPath, "usb", 3) == 0) // Nintendont r39 only
+ 	{
+		snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sloaderusb.dol", Settings.NINLoaderPath);
+		if(!CheckFile(NIN_loader_path))
+			snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sbootusb.dol", Settings.NINLoaderPath);
+	}
+	if(strncmp(RealPath, "sd", 2) == 0 || !CheckFile(NIN_loader_path))
+	{	
+		snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sloader.dol", Settings.NINLoaderPath);
+		if(!CheckFile(NIN_loader_path))
+			snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sboot.dol", Settings.NINLoaderPath);
+	}
 	if(!CheckFile(NIN_loader_path))
 	{
 		// Nintendont boot.dol not found
 		WindowPrompt(tr("Error:"), tr("To run GameCube games with Nintendont you need the boot.dol file in your Nintendont Loader Path."), tr("OK"));
 		return 0;
 	}
-	
+	gprintf("NIN: Loader path = %s \n",NIN_loader_path);
+
 	// Check Nintendont version
+	u32 NIN_cfg_version = NIN_CFG_VERSION;
 	u8 *buffer = NULL;
 	u32 filesize = 0;
 	if(LoadFileToMem(NIN_loader_path, &buffer, &filesize))
@@ -974,7 +1052,43 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		{
 			if((*(u32*)(buffer+i+2)) == 'nten' && (*(u32*)(buffer+i+6)) == 'dont' && (*(u32*)(buffer+i+11)) == 'Load')
 			{
-				found=true;
+				// Get Nintendont version
+				char NINversion[21];
+				u8 offset = *(u32*)(buffer+i+17) == ' USB' ? 40 : 36;
+				for(int j = 0 ; j < 20 ; j++)
+					NINversion[j] = *(u8*)(buffer+i+offset+j);
+				NINversion[11] = ' '; // replace \0 between year and time with a space.
+				NINversion[20] = 0;
+				
+				struct tm time;
+				strptime(NINversion, "%b %d %Y %H:%M:%S", &time);
+				const time_t NINLoaderTime = mktime(&time);
+
+				// Alpha0.1
+				strptime("Sep 20 2013 15:27:01", "%b %d %Y %H:%M:%S", &time);
+				if(NINLoaderTime == mktime(&time))
+				{
+					WindowPrompt(tr("Error:"), tr("USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."), tr("Ok"));
+					free(buffer);
+					return 0;
+				}
+
+				// r01 - r40
+				strptime("Mar 30 2014 12:33:44", "%b %d %Y %H:%M:%S", &time); // r42 - NIN_CFG_VERSION = 2
+				if(NINLoaderTime < mktime(&time))
+				{
+					gprintf("Nintendont r01 - r40 detected. Using CFG version 0x00000001\n");
+					NIN_cfg_version = 1;
+					
+					strptime("Mar 29 2014 10:49:31", "%b %d %Y %H:%M:%S", &time); // r39
+					if(NINLoaderTime < mktime(&time) && strncmp(RealPath, "usb", 3) == 0)
+					{
+						WindowPrompt(tr("Error:"), tr("This Nintendont version does not support games on USB."), tr("Ok"));
+						free(buffer);
+						return 0;
+					}
+				}
+				found = true;
 				break;
 			}
 		}
@@ -995,19 +1109,6 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 			return 0;
 	}
 
-
-	// Check USB device
-	if(strncmp(RealPath, "usb", 3) == 0)
-	{
-		
-		WindowPrompt(tr("Warning:"), tr("Nintendont currently only supports GameCube games on SD card."), tr("OK"));
-		
-		if(!GCGames::Instance()->CopyUSB2SD(gameHdr))
-			return 0;
-		RealPath = GCGames::Instance()->GetPath((const char *) gameHdr->id);
-	}
-
-
 	// Check Ocarina and cheat file location. the .gct file need to be located on the same partition than the game.
 	if(ocarinaChoice && strcmp(DeviceHandler::GetDevicePrefix(RealPath), DeviceHandler::GetDevicePrefix(Settings.Cheatcodespath)) != 0)
 	{
@@ -1026,6 +1127,64 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		}
 	}
 
+	// Check kenobiwii.bin
+	if(ocarinaChoice)
+	{
+		char kenobiwii_path[30]; 
+		snprintf(kenobiwii_path, sizeof(kenobiwii_path), "%s:/sneek/kenobiwii.bin", DeviceHandler::GetDevicePrefix(RealPath));
+		if(!CheckFile(kenobiwii_path))
+		{
+			// try to copy kenobiwii from the other device
+			char kenobiwii_srcpath[30]; 
+			snprintf(kenobiwii_srcpath, sizeof(kenobiwii_srcpath), "%s:/sneek/kenobiwii.bin", strncmp(RealPath, "usb", 3) == 0 ? "sd" : "usb1");
+			gprintf("kenobiwii source path = %s \n", kenobiwii_srcpath);
+			if(CheckFile(kenobiwii_srcpath))
+			{
+				if(CopyFile(kenobiwii_srcpath, kenobiwii_path) < 0)
+				{
+					gprintf("NIN: Couldn't copy %s to %s.\n", kenobiwii_srcpath, kenobiwii_path);
+					RemoveFile(kenobiwii_path);
+					if(WindowPrompt(tr("Warning:"), fmt(tr("To use ocarina with %s you need the %s file."), LoaderName, kenobiwii_path), tr("Continue"), tr("Cancel")) == 0)
+						return 0;
+				}
+			}
+			else
+			{
+				if(WindowPrompt(tr("Warning:"), fmt(tr("To use ocarina with %s you need the %s file."), LoaderName, kenobiwii_path), tr("Continue"), tr("Cancel")) == 0)
+				return 0;
+			}
+		}
+	}
+
+	// Check controller.ini
+	if(ninUSBHIDChoice || IosLoader::isWiiU())
+	{
+		char controllerini_path[30]; 
+		snprintf(controllerini_path, sizeof(controllerini_path), "%s:/controller.ini", DeviceHandler::GetDevicePrefix(RealPath));
+		if(!CheckFile(controllerini_path))
+		{
+			// try to copy controller.ini from the other device
+			char controllerini_srcpath[30]; 
+			snprintf(controllerini_srcpath, sizeof(controllerini_srcpath), "%s:/controller.ini", strncmp(RealPath, "usb", 3) == 0 ? "sd" : "usb1");
+			gprintf("Controller.ini source path = %s \n", controllerini_srcpath);
+			if(CheckFile(controllerini_srcpath))
+			{
+				if(CopyFile(controllerini_srcpath, controllerini_path) < 0)
+				{
+					gprintf("NIN: Couldn't copy %s to %s.\n", controllerini_srcpath, controllerini_path);
+					RemoveFile(controllerini_path);
+					if(WindowPrompt(tr("Warning:"), fmt(tr("To use HID with %s you need the %s file."), LoaderName, controllerini_path), tr("Continue"), tr("Cancel")) == 0)
+						return 0;
+				}
+			}
+			else
+			{
+				if(WindowPrompt(tr("Warning:"), fmt(tr("To use HID with %s you need the %s file."), LoaderName, controllerini_path), tr("Continue"), tr("Cancel")) == 0)
+				return 0;
+			}
+		}
+	}
+	
 	// Check if game has multi Discs
 	bool bootDisc2 = false;
 	if(gameHdr->disc_no == 0)
@@ -1059,7 +1218,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 
 	// Nintendont Config file path
 	char NINCfgPath[17];
-	snprintf(NINCfgPath, sizeof(NINCfgPath), "%s:/nincfg.bin", DeviceHandler::GetDevicePrefix(RealPath));
+	snprintf(NINCfgPath, sizeof(NINCfgPath), "%s:/nincfg.bin", DeviceHandler::GetDevicePrefix(NIN_loader_path));
 	gprintf("NIN: Cfg path : %s \n", NINCfgPath);
 
 	// Nintendont Config file settings
@@ -1076,11 +1235,10 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 
 	// Magic and CFG_Version for Nintendont
 	nin_config->Magicbytes = NIN_MAGIC;
-	nin_config->Version = NIN_CFG_VERSION;
+	nin_config->Version = NIN_cfg_version;
 
 
 	// Game path
-	nin_config->Config |= NIN_CFG_GAME_PATH;
 	strncpy(nin_config->GamePath, gamePath, sizeof(nin_config->GamePath));
 
 	// setup cheat and path
@@ -1118,11 +1276,19 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		nin_config->Config |= NIN_CFG_HID; // auto enabled by nintendont on vWii
 	if(!IosLoader::isWiiU())
 		nin_config->Config |= NIN_CFG_OSREPORT; // log OS reports only on Wii. todo: add a user setting?
+	if(strncmp(RealPath, "usb", 3) == 0)
+		nin_config->Config |= NIN_CFG_USB; // r40+
 	
 
 	gprintf("NIN: config 0x%08x\n", nin_config->Config);
 
 
+	// Max Pads - Make a proper setting later
+	nin_config->MaxPads = 4; // NIN_CFG_VERSION 2 r42
+	
+	// GameID for MCEmu
+	memcpy(&nin_config->GameID, gameHdr->id, 4); // NIN_CFG_VERSION 2 r83
+	
 	// Setup Video Mode
 	if(ninVideoChoice == DML_VIDEO_NONE)				// No video mode
 	{
@@ -1164,11 +1330,8 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		}
 	}
 	gprintf("NIN: Language 0x%08x \n", nin_config->Language);
-	
-	// Set Sram flags
-	PatchSram(languageChoice, true, nin_config->Config & NIN_CFG_FORCE_PROG);
 
-	//write config file to game's partition root.
+	//write config file to nintendont's partition root.
 	FILE *fp = fopen(NINCfgPath, "wb");
 	if (fp)
 	{
@@ -1182,6 +1345,23 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		if(choice == 0)
 			return 0;
 	}
+
+	// Copy Nintendont Config file to game path
+	if(strncmp(NINCfgPath, RealPath, 2) != 0)
+	{
+		char NINDestPath[17];
+		snprintf(NINDestPath, sizeof(NINDestPath), "%s:/nincfg.bin", DeviceHandler::GetDevicePrefix(RealPath));
+		gprintf("NIN: Copying %s to %s...", NINCfgPath, NINDestPath);
+		if(CopyFile(NINCfgPath, NINDestPath) < 0)
+		{
+			gprintf("\nError: Couldn't copy %s to %s.\n", NINCfgPath, NINDestPath);
+			RemoveFile(NINDestPath);
+			if(WindowPrompt(tr("Warning:"), tr("USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyway?"), tr("Yes"), tr("Cancel")) == 0)
+				return 0;
+		}
+		gprintf("done\n");
+	}
+
 
 	// Launch Nintendont
 	return !(BootHomebrew(NIN_loader_path) < 0);

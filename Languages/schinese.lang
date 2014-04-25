@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 22:10+0200\n"
+"POT-Creation-Date: 2014-04-25 15:06+0200\n"
 "PO-Revision-Date: 2013-08-13 07:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: oCameLo\n"
@@ -1360,9 +1360,6 @@ msgstr "首选 GameCube 路径"
 msgid "Main Path"
 msgstr "首选路径"
 
-msgid "Main tester:"
-msgstr "主要测试员："
-
 msgid "Mar"
 msgstr "三月"
 
@@ -1383,6 +1380,9 @@ msgstr "移动+视频"
 
 msgid "Mount DVD drive"
 msgstr "挂载 DVD 光驱"
+
+msgid "Mount USB at launch"
+msgstr ""
 
 msgid "Multiple Partitions"
 msgstr "多分区"
@@ -1433,9 +1433,6 @@ msgid "Nintendont"
 msgstr ""
 
 msgid "Nintendont Loader Path"
-msgstr ""
-
-msgid "Nintendont currently only supports GameCube games on SD card."
 msgstr ""
 
 msgid "No"
@@ -1566,6 +1563,9 @@ msgstr "官方网址："
 
 msgid "Offset"
 msgstr "偏移位"
+
+msgid "Ok"
+msgstr ""
 
 msgid "Only Game Partition"
 msgstr "仅游戏分区"
@@ -1973,6 +1973,9 @@ msgstr "该 IOS 是BootMii IOS 。如果你确定它不是 BootMii 并且安装�
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
 msgstr "在 titles 列表中未找到该 IOS 。如果你确定已安装则可忽略该警告。"
 
+msgid "This Nintendont version does not support games on USB."
+msgstr ""
+
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "该游戏有多张光盘。请选择想要加载的光盘。"
 
@@ -2024,6 +2027,14 @@ msgstr ""
 msgid "To run GameCube games with Nintendont you need the boot.dol file in your Nintendont Loader Path."
 msgstr ""
 
+#, c-format
+msgid "To use HID with %s you need the %s file."
+msgstr ""
+
+#, c-format
+msgid "To use ocarina with %s you need the %s file."
+msgstr ""
+
 msgid "Tooltip Delay"
 msgstr "提示信息延迟时间"
 
@@ -2033,8 +2044,8 @@ msgstr "提示信息"
 msgid "Transfer failed"
 msgstr "传输失败"
 
-msgid "USB Device not found."
-msgstr "未找到 USB 设备。"
+msgid "USB Device not initialized."
+msgstr ""
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX 被锁定"
@@ -2052,6 +2063,9 @@ msgid "USBloaderGX couldn't verify Nintendont boot.dol file. Launch this boot.do
 msgstr ""
 
 msgid "USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyway?"
+msgstr ""
+
+msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
 msgstr ""
 
 msgid "Uninstall"
@@ -2295,6 +2309,12 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "Main tester:"
+#~ msgstr "主要测试员："
+
+#~ msgid "USB Device not found."
+#~ msgstr "未找到 USB 设备。"
 
 #~ msgid "Boot/Standard"
 #~ msgstr "启动/标准"

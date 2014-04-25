@@ -75,6 +75,7 @@ HardDriveSM::HardDriveSM()
 	Options->SetName(Idx++, "%s", tr( "Game/Install Partition" ));
 	Options->SetName(Idx++, "%s", tr( "Multiple Partitions" ));
 	Options->SetName(Idx++, "%s", tr( "USB Port" ));
+	Options->SetName(Idx++, "%s", tr( "Mount USB at launch" ));
 	Options->SetName(Idx++, "%s", tr( "Install Directories" ));
 	Options->SetName(Idx++, "%s", tr( "Game Split Size" ));
 	Options->SetName(Idx++, "%s", tr( "Install Partitions" ));
@@ -108,6 +109,7 @@ HardDriveSM::~HardDriveSM()
 				Settings.partition = 0;
 		}
 
+		WBFS_Init(WBFS_DEVICE_USB);
 		if(Settings.MultiplePartitions)
 			WBFS_OpenAll();
 		else
@@ -142,6 +144,9 @@ void HardDriveSM::SetOptionValues()
 		Options->SetValue(Idx++, tr("Both Ports"));
 	else
 		Options->SetValue(Idx++, "%i", NewSettingsUSBPort);
+
+	//! Settings: Auto Mount USB at launch
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.USBAutoMount] ));
 
 	//! Settings: Install directories
 	Options->SetValue(Idx++, "%s", tr( InstallToText[Settings.InstallToDir] ));
@@ -179,6 +184,11 @@ int HardDriveSM::GetMenuInternal()
 	//! Settings: Game/Install Partition
 	if (ret == ++Idx)
 	{
+		// Init the USB device if mounted after launch.
+		PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandleFromPartition(Settings.partition);
+		if(usbHandle == NULL)
+			DeviceHandler::Instance()->MountAllUSB(true);
+
 		// Select the next valid partition, even if that's the same one
 		int fs_type = 0;
 		int ios = IOS_GetVersion();
@@ -212,6 +222,12 @@ int HardDriveSM::GetMenuInternal()
 
 		else if (++NewSettingsUSBPort >= 3) // 2 = both ports
 			NewSettingsUSBPort = 0;
+	}
+
+	//! Settings: Auto mount USB at launch
+	else if (ret == ++Idx)
+	{
+		if (++Settings.USBAutoMount >= MAX_ON_OFF) Settings.USBAutoMount = 0;
 	}
 
 	//! Settings: Install directories

@@ -78,7 +78,7 @@ void CSettings::SetDefault()
 	strlcpy(NandEmuChanPath, NandEmuPath, sizeof(NandEmuChanPath));
 	strlcpy(GameCubePath, "usb1:/games/", sizeof(GameCubePath));
 	strlcpy(GameCubeSDPath, "sd:/games/", sizeof(GameCubeSDPath));
-	strlcpy(CustomBannersURL, "http://dl.dropbox.com/u/101209384/", sizeof(CustomBannersURL));
+	strlcpy(CustomBannersURL, "http://dl.dropboxusercontent.com/u/101209384/", sizeof(CustomBannersURL));
 	theme[0] = 0;
 	language_path[0] = 0;
 	ogg_path[0] = 0;
@@ -133,6 +133,7 @@ void CSettings::SetDefault()
 	MultiplePartitions = OFF;
 	BlockIOSReload = AUTO;
 	USBPort = 0;
+	USBAutoMount = ON;
 	CacheTitles = ON;
 	WSFactor = 0.8f; //actually should be 0.75 for real widescreen
 	FontScaleFactor = 0.8f; //it's a work around to not have to change ALL fonts now
@@ -346,6 +347,7 @@ bool CSettings::Save()
 	fprintf(file, "HomeMenu = %d\n", HomeMenu);
 	fprintf(file, "MultiplePartitions = %d\n", MultiplePartitions);
 	fprintf(file, "USBPort = %d\n", USBPort);
+	fprintf(file, "USBAutoMount = %d\n", USBAutoMount);
 	fprintf(file, "CacheTitles = %d\n", CacheTitles);
 	fprintf(file, "BlockIOSReload = %d\n", BlockIOSReload);
 	fprintf(file, "WSFactor = %0.3f\n", WSFactor);
@@ -640,6 +642,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "USBPort") == 0)
 	{
 		USBPort = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "USBAutoMount") == 0)
+	{
+		USBAutoMount = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "CacheTitles") == 0)

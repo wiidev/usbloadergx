@@ -132,6 +132,7 @@ class CSettings
 		short HomeMenu;
 		short MultiplePartitions;
 		short USBPort;
+		short USBAutoMount;
 		short CacheTitles;
 		short BlockIOSReload;
 		u32 InstallPartitions;
