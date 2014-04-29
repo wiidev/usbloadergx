@@ -1,3 +1,3 @@
-1219
-http://usbloader-gui.googlecode.com/svn-history/r1220/branches/updates/boot.dol
+1221
+http://usbloader-gui.googlecode.com/svn-history/r1222/branches/updates/boot.dol
 http://usbloader-gui.googlecode.com/svn-history/r1219/trunk/Languages/
