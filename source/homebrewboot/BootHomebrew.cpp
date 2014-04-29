@@ -106,6 +106,7 @@ static int RunAppbooter()
 	s32 ret = IosLoader::ReloadIosSafe(58);
 	if(ret < 0 && Settings.EntryIOS != IOS_GetVersion())
 		IosLoader::ReloadIosKeepingRights(Settings.EntryIOS);
+	gprintf("Reloaded to IOS%d\n", IOS_GetVersion());
 
 	struct __argv args;
 	SetupARGV(&args);
@@ -139,6 +140,8 @@ static int RunAppbooter()
 			Set_Stub(currentStub);
 		}
 	}
+
+	gprintf("Exiting USBLoaderGX...\n\n");
 
 	SYS_ResetSystem(SYS_SHUTDOWN, 0, 0);
 	_CPU_ISR_Disable( cpu_isr );

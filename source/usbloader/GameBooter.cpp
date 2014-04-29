@@ -1008,13 +1008,6 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."),LoaderName), tr("OK"));
 			return 0;
 		}
-
-		// Check cluster size
-		if(usbHandle->GetPartitionClusterSize(usbHandle->GetLBAStart(portPart)) > 32768)
-		{
-			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to use a partition with 32k bytes/cluster or less."),LoaderName), tr("OK"));
-			return 0;
-		}
 	}
 
 
@@ -1253,7 +1246,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		}
 		else
 		{
-			snprintf(nin_config->CheatPath, sizeof(nin_config->CheatPath), "NINTemp.gct");
+			snprintf(nin_config->CheatPath, sizeof(nin_config->CheatPath), "/NINTemp.gct");
 		}
 
 		nin_config->Config |= NIN_CFG_CHEATS | NIN_CFG_CHEAT_PATH;
@@ -1269,7 +1262,10 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	if(ninWidescreenChoice)
 		nin_config->Config |= NIN_CFG_FORCE_WIDE;
 	if(ninProgressivePatch)
+	{
 		nin_config->Config |= NIN_CFG_FORCE_PROG;
+		nin_config->VideoMode |= NIN_VID_PROG;
+	}
 	if(ninAutobootChoice)
 		nin_config->Config |= NIN_CFG_AUTO_BOOT;
 	if(ninUSBHIDChoice)
@@ -1280,14 +1276,15 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		nin_config->Config |= NIN_CFG_USB; // r40+
 	
 
-	gprintf("NIN: config 0x%08x\n", nin_config->Config);
-
-
 	// Max Pads - Make a proper setting later
 	nin_config->MaxPads = 4; // NIN_CFG_VERSION 2 r42
 	
 	// GameID for MCEmu
 	memcpy(&nin_config->GameID, gameHdr->id, 4); // NIN_CFG_VERSION 2 r83
+	
+	// GameID for Video mode DiscDefault
+	memcpy((u8 *)Disc_ID, gameHdr->id, 6);
+	DCFlushRange((u8 *)Disc_ID, 6);
 	
 	// Setup Video Mode
 	if(ninVideoChoice == DML_VIDEO_NONE)				// No video mode
@@ -1298,8 +1295,8 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	{
 		if(ninVideoChoice == DML_VIDEO_AUTO)			// Auto select video mode
 		{
-			nin_config->VideoMode = NIN_VID_AUTO;
-			Disc_SelectVMode(VIDEO_MODE_DISCDEFAULT, false, NULL, NULL);
+			Disc_SelectVMode(VIDEO_MODE_DISCDEFAULT, false, NULL, &nin_config->VideoMode);
+			nin_config->VideoMode |= NIN_VID_AUTO;
 		}
 		else											// Force user choice
 		{
@@ -1307,15 +1304,16 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 			if(!(nin_config->VideoMode & NIN_VID_AUTO))
 				nin_config->VideoMode |= NIN_VID_FORCE;
 
-			if(nin_config->VideoMode & NIN_CFG_FORCE_PROG)
-			{
-				nin_config->VideoMode &= ~NIN_CFG_FORCE_PROG;	// clear Force_PROG bit in VideoMode
+			if(nin_config->VideoMode & NIN_VID_PROG)
 				nin_config->Config |= NIN_CFG_FORCE_PROG; 		// Set Force_PROG bit in Config
-			}
-		}	
+		}
 		Disc_SetVMode();
 	}
 
+	gprintf("NIN: config 0x%08x\n", nin_config->Config);
+
+	gprintf("NIN: Video mode 0x%08x\n", nin_config->VideoMode);
+	
 	// Set game language setting
 	if(languageChoice >= GC_ENGLISH && languageChoice <= GC_DUTCH)
 	{

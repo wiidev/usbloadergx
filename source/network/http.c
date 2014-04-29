@@ -200,9 +200,6 @@ struct block downloadfile(const char *url)
 	}
 
 	
-	//check if a cookie is set for this host and load it.
-	//strcpy(cookie, "Cookie: __cfduid=d8e517c1a10af75d01699adaa9c3d9ffd1398187687536\r\n");
-
 	//Form a nice request header to send to the webserver
 	char* headerformat = "GET %s HTTP/1.0\r\nHost: %s\r\nReferer: %s\r\n%sUser-Agent: USBLoaderGX r%s\r\n\r\n";
 	char header[strlen(headerformat) + strlen(path) + strlen(domain)*2 + 100];
@@ -268,8 +265,8 @@ struct block downloadfile(const char *url)
 						if (code >=400) // Not found
 						{
 							//gprintf("HTTP ERROR: %s\n", htstat);
-							//free(response.data);
-							//return emptyblock;
+							free(response.data);
+							return emptyblock;
 						}
 					}
 				}
