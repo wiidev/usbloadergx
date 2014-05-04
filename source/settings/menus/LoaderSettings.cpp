@@ -138,7 +138,14 @@ static const char * GCSourceText[][3] =
 static const char * DMLVideoText[] =
 {
 	trNOOP( "Auto" ),
-	trNOOP( "Use Game Settings" ),
+	trNOOP( "System Default" ),
+	trNOOP( "Disc Default" ),
+	trNOOP( "Force PAL50" ),
+	trNOOP( "Force PAL60" ),
+	trNOOP( "Force NTSC" ),
+	"", // unused
+	trNOOP( "Force PAL480p" ),
+	trNOOP( "Force NTSC480p" ),
 	trNOOP( "None" ),
 };
 
@@ -608,7 +615,10 @@ int LoaderSettings::GetMenuInternal()
 	//! Settings: DML + NIN Video Mode
 	else if (ret == ++Idx)
 	{
-		if (++Settings.DMLVideo >= DML_VIDEO_MAX_CHOICE) Settings.DMLVideo = 0;
+		Settings.DMLVideo++;
+		if(Settings.DMLVideo == DML_VIDEO_FORCE_PATCH) // Skip Force Patch
+			Settings.DMLVideo++;
+		if(Settings.DMLVideo >= DML_VIDEO_MAX_CHOICE) Settings.DMLVideo = 0;
 	}
 
 	//! Settings: DML + NIN Progressive Patch

@@ -420,7 +420,6 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 	const char *RealPath = GCGames::Instance()->GetPath((const char *) gameHdr->id);
 
 	GameCFG * game_cfg = GameSettings.GetGameCFG(gameHdr->id);
-	u8 videoChoice = game_cfg->video == INHERIT ? Settings.videomode : game_cfg->video;
 	s8 languageChoice = game_cfg->language == INHERIT ? Settings.language - 1 : game_cfg->language;
 	u8 ocarinaChoice = game_cfg->ocarina == INHERIT ? Settings.ocarina : game_cfg->ocarina;
 	u8 dmlVideoChoice = game_cfg->DMLVideo == INHERIT ? Settings.DMLVideo : game_cfg->DMLVideo;
@@ -692,7 +691,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		}
 		else											// Force user choice
 		{
-			Disc_SelectVMode(videoChoice, false, &dml_config->VideoMode, NULL);
+			Disc_SelectVMode(dmlVideoChoice-1, false, &dml_config->VideoMode, NULL);
 			if(!(dml_config->VideoMode & DML_VID_DML_AUTO))
 				dml_config->VideoMode |= DML_VID_FORCE;
 		}	
@@ -731,7 +730,6 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	const char *LoaderName = "Devolution";
 
 	GameCFG * game_cfg = GameSettings.GetGameCFG(gameHdr->id);
-	u8 videoChoice = game_cfg->video == INHERIT ? Settings.videomode : game_cfg->video;
 	s8 languageChoice = game_cfg->language == INHERIT ? Settings.language -1 : game_cfg->language;
 	u8 devoMCEmulation = game_cfg->DEVOMCEmulation == INHERIT ? Settings.DEVOMCEmulation : game_cfg->DEVOMCEmulation;
 	u8 devoActivityLEDChoice = game_cfg->DEVOActivityLED == INHERIT ? Settings.DEVOActivityLED : game_cfg->DEVOActivityLED;
@@ -921,7 +919,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	fclose(iso_file);
 	
 	// setup video mode
-	Disc_SelectVMode(videoChoice, true, NULL, NULL);
+	Disc_SelectVMode(0, true, NULL, NULL);
 	Disc_SetVMode();
 
 	// Set sram flags
@@ -952,7 +950,6 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	const char *LoaderName = "Nintendont";
 
 	GameCFG * game_cfg = GameSettings.GetGameCFG(gameHdr->id);
-	u8 videoChoice = game_cfg->video == INHERIT ? Settings.videomode : game_cfg->video;
 	s8 languageChoice = game_cfg->language == INHERIT ? Settings.language -1 : game_cfg->language;
 	u8 ocarinaChoice = game_cfg->ocarina == INHERIT ? Settings.ocarina : game_cfg->ocarina;
 	u8 ninVideoChoice = game_cfg->DMLVideo == INHERIT ? Settings.DMLVideo : game_cfg->DMLVideo;
@@ -1295,7 +1292,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		}
 		else											// Force user choice
 		{
-			Disc_SelectVMode(videoChoice, false, NULL, &nin_config->VideoMode);
+			Disc_SelectVMode(ninVideoChoice-1, false, NULL, &nin_config->VideoMode);
 			if(!(nin_config->VideoMode & NIN_VID_AUTO))
 				nin_config->VideoMode |= NIN_VID_FORCE;
 

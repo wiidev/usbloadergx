@@ -7,6 +7,7 @@
 #include "Controls/DeviceHandler.hpp"
 #include "FileOperations/fileops.h"
 #include "homebrewboot/BootHomebrew.h"
+#include "homebrewboot/HomebrewXML.h"
 #include "settings/CSettings.h"
 #include "settings/GameTitles.h"
 #include "settings/newtitles.h"

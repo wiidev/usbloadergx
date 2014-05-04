@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright (C) 2012-2013 by Cyan
+ * Copyright (C) 2012-2014 by Cyan
  * Copyright (C) 2012 Dimok
  *
  * This program is free software: you can redistribute it and/or modify
@@ -36,18 +36,6 @@ static const char * OnOffText[] =
 	trNOOP( "Auto" )
 };
 
-static const char * VideoModeText[] =
-{
-	trNOOP( "System Default" ),
-	trNOOP( "Disc Default" ),
-	trNOOP( "Force PAL50" ),
-	trNOOP( "Force PAL60" ),
-	trNOOP( "Force NTSC" ),
-	trNOOP( "Region Patch" ),
-	trNOOP( "Force PAL480p" ),
-	trNOOP( "Force NTSC480p" ),
-};
-
 static const char * LanguageText[] =
 {
 	trNOOP( "English" ),
@@ -78,7 +66,14 @@ static const char * GCMode[] =
 static const char * DMLVideoText[] =
 {
 	trNOOP( "Auto" ),
-	trNOOP( "Use Game Settings" ),
+	trNOOP( "System Default" ),
+	trNOOP( "Disc Default" ),
+	trNOOP( "Force PAL50" ),
+	trNOOP( "Force PAL60" ),
+	trNOOP( "Force NTSC" ),
+	"", // unused
+	trNOOP( "Force PAL480p" ),
+	trNOOP( "Force NTSC480p" ),
 	trNOOP( "None" ),
 };
 
@@ -160,13 +155,12 @@ void GCGameLoadSM::SetOptionNames()
 
 	Options->SetName(Idx++, "%s", tr( "Game Lock" ));
 	Options->SetName(Idx++, "%s", tr( "Favorite Level" ));
-	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
 	Options->SetName(Idx++, "%s", tr( "Parental Control" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
 	if(currentGCmode == GC_MODE_MIOS &&IosLoader::GetMIOSInfo() > DEFAULT_MIOS)
 	{
-		Options->SetName(Idx++, "%s", tr( "--==  DM(L) + Nintendont" ));
+		Options->SetName(Idx++, "%s", tr( "--==   DIOS MIOS (Lite) " ));
 		Options->SetName(Idx++, "%s", tr( "Video Mode" ));
 		Options->SetName(Idx++, "%s", tr( "Progressive Patch" ));
 		if(IosLoader::GetDMLVersion() >= DML_VERSION_DM_2_1)
@@ -184,7 +178,7 @@ void GCGameLoadSM::SetOptionNames()
 	}
 	if(currentGCmode == GC_MODE_NINTENDONT)
 	{
-		Options->SetName(Idx++, "%s", tr( "--==  DM(L) + Nintendont" ));
+		Options->SetName(Idx++, "%s", tr( "--==       Nintendont" ));
 		Options->SetName(Idx++, "%s", tr( "Video Mode" ));
 		Options->SetName(Idx++, "%s", tr( "Progressive Patch" ));
 		Options->SetName(Idx++, "%s", tr( "Force Widescreen" ));
@@ -214,12 +208,6 @@ void GCGameLoadSM::SetOptionValues()
 
 	//! Settings: Favorite Level
 	Options->SetValue(Idx++, "%i", GameStatistics.GetFavoriteRank(Header->id));
-
-	//! Settings: Video Mode
-	if(GameConfig.video == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(VideoModeText[GameConfig.video]));
 
 	//! Settings: Game Language
 	if(GameConfig.language == INHERIT)
@@ -449,12 +437,6 @@ int GCGameLoadSM::GetMenuInternal()
 		GameStatistics.Save();
 	}
 
-	//! Settings: Video Mode
-	else if (ret == ++Idx)
-	{
-		if (++GameConfig.video >= VIDEO_MODE_MAX) GameConfig.video = INHERIT;
-	}
-
 	//! Settings: Game Language
 	else if (ret == ++Idx)
 	{
@@ -486,7 +468,10 @@ int GCGameLoadSM::GetMenuInternal()
 	//! Settings: DML Video Mode
 	else if (currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
 	{
-		if (++GameConfig.DMLVideo >= DML_VIDEO_MAX_CHOICE) GameConfig.DMLVideo = INHERIT;
+		GameConfig.DMLVideo++;
+		if(GameConfig.DMLVideo == DML_VIDEO_FORCE_PATCH) // Skip Force Patch
+			GameConfig.DMLVideo++;
+		if(GameConfig.DMLVideo >= DML_VIDEO_MAX_CHOICE) GameConfig.DMLVideo = INHERIT;
 	}
 
 	//! Settings: DML Progressive Patch
@@ -558,7 +543,10 @@ int GCGameLoadSM::GetMenuInternal()
 	//! Settings: NIN Video Mode
 	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
 	{
-		if (++GameConfig.DMLVideo >= DML_VIDEO_MAX_CHOICE) GameConfig.DMLVideo = INHERIT;
+		GameConfig.DMLVideo++;
+		if(GameConfig.DMLVideo == DML_VIDEO_FORCE_PATCH) // Skip Force Patch
+			GameConfig.DMLVideo++;
+		if(GameConfig.DMLVideo >= DML_VIDEO_MAX_CHOICE) GameConfig.DMLVideo = INHERIT;
 	}
 
 	//! Settings: NIN Progressive Patch
