@@ -343,8 +343,10 @@ void WindowCredits()
 				// Nintendont Loader..Built   : %s %s..Sep 20 2013.15:27:01 // alpha0.1
 				if((*(u32*)(buffer+i+2)) == 'nten' && (*(u32*)(buffer+i+6)) == 'dont' && (*(u32*)(buffer+i+11)) == 'Load')
 				{
+					u8 offset = *(u32*)(buffer+i+17) == ' USB' ? 40 : 36; // r39 only
+					if(buffer[i+17] == '\r') offset += 2; //v1.20+
 					for(int j = 0 ; j < 20 ; j++)
-						NINversion[j] = *(u8*)(buffer+i+36+j);
+						NINversion[j] = *(u8*)(buffer+i+offset+j);
 					NINversion[11] = ' '; // replace \0 between year and time with a space.
 					NINversion[20] = 0;
 					snprintf(GCInfo2, sizeof(GCInfo2), "Nintendont Built %.20s",  NINversion );

@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright (C) 2012-2013 Cyan
+ * Copyright (C) 2012-2014 Cyan
  * Copyright (C) 2011 Dimok
  *
  * This program is free software: you can redistribute it and/or modify
@@ -969,12 +969,6 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		return 0;
 	}
 
-	if(gameHdr->type == TYPE_GAME_GC_EXTRACTED)
-	{
-		if(WindowPrompt(tr("Warning:"), fmt(tr("%s only accepts GameCube backups in ISO format."),LoaderName), tr("Continue"), tr("Cancel")) == 0)
-			return 0;
-	}
-
 	if(!CheckAHBPROT())
 	{
 		WindowPrompt(tr("Error:"), fmt(tr("%s requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."),LoaderName), tr("OK"));
@@ -1047,7 +1041,8 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 			{
 				// Get Nintendont version
 				char NINversion[21];
-				u8 offset = *(u32*)(buffer+i+17) == ' USB' ? 40 : 36;
+				u8 offset = *(u32*)(buffer+i+17) == ' USB' ? 40 : 36; // r39 only
+				if(buffer[i+17] == '\r') offset += 2; //v1.20+
 				for(int j = 0 ; j < 20 ; j++)
 					NINversion[j] = *(u8*)(buffer+i+offset+j);
 				NINversion[11] = ' '; // replace \0 between year and time with a space.

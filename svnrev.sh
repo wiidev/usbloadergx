@@ -51,6 +51,7 @@ cat <<EOF > ./HBC/META.XML
 		<arguments>
 				<arg>--ios=250</arg>
 				<arg>--usbport=0</arg>
+				<arg>--mountusb=1</arg>
 		</arguments>
 		// remove this line to enable arguments -->
 		<ahb_access/>

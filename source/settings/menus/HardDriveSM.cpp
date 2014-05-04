@@ -1,6 +1,6 @@
 /****************************************************************************
- * Copyright (C) 2011
- * by Dimok
+ * Copyright (C) 2014 Cyan
+ * Copyright (C) 2011 Dimok
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any
@@ -26,6 +26,7 @@
 #include "HardDriveSM.hpp"
 #include "Controls/DeviceHandler.hpp"
 #include "settings/CSettings.h"
+#include "settings/meta.h"
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
 #include "usbloader/GameList.h"
@@ -86,6 +87,7 @@ HardDriveSM::HardDriveSM()
 	OldSettingsPartition = Settings.partition;
 	OldSettingsMultiplePartitions = Settings.MultiplePartitions;
 	NewSettingsUSBPort = Settings.USBPort;
+	oldSettingsUSBAutoMount = Settings.USBAutoMount;
 
 	SetOptionValues();
 }
@@ -95,7 +97,8 @@ HardDriveSM::~HardDriveSM()
 	//! if partition has changed, Reinitialize it
 	if (Settings.partition != OldSettingsPartition ||
 		Settings.MultiplePartitions != OldSettingsMultiplePartitions ||
-		Settings.USBPort != NewSettingsUSBPort)
+		Settings.USBPort != NewSettingsUSBPort || 
+		Settings.USBAutoMount != oldSettingsUSBAutoMount)
 	{
 		WBFS_CloseAll();
 
@@ -107,6 +110,9 @@ HardDriveSM::~HardDriveSM()
 
 			if(Settings.partition >= DeviceHandler::GetUSBPartitionCount())
 				Settings.partition = 0;
+
+			// set -1 to edit meta.xml arguments
+			NewSettingsUSBPort = -1;
 		}
 
 		WBFS_Init(WBFS_DEVICE_USB);
@@ -119,6 +125,12 @@ HardDriveSM::~HardDriveSM()
 		gameList.ReadGameList();
 		gameList.LoadUnfiltered();
 		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false);
+		
+		if(oldSettingsUSBAutoMount != Settings.USBAutoMount || NewSettingsUSBPort == -1)
+		{
+			// edit meta.xml arguments
+			editMetaArguments();
+		}
 	}
 }
 

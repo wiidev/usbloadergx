@@ -1,6 +1,6 @@
 /****************************************************************************
- * Copyright (C) 2011
- * by Dimok
+ * Copyright (C) 2014 Cyan
+ * Copyright (C) 2011 Dimok
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any
@@ -37,6 +37,7 @@ class HardDriveSM : public SettingsMenu
 
 		int OldSettingsPartition;
 		int OldSettingsMultiplePartitions;
+		int oldSettingsUSBAutoMount;
 		int NewSettingsUSBPort;
 
 		OptionList GuiOptions;

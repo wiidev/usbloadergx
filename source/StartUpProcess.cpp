@@ -96,6 +96,12 @@ int StartUpProcess::ParseArguments(int argc, char *argv[])
 			Settings.USBPort = LIMIT(atoi(ptr+strlen("-usbport=")), 0, 2);
 		}
 
+		ptr = strcasestr(argv[i], "-mountusb=");
+		if(ptr)
+		{
+			Settings.USBAutoMount = LIMIT(atoi(ptr+strlen("-mountusb=")), 0, 1);
+		}
+
 		if(strlen(argv[i]) == 6 && strchr(argv[i], '=') == 0 && strchr(argv[i], '-') == 0)
 			quickBoot = i;
 	}
@@ -244,21 +250,16 @@ int StartUpProcess::Execute()
 	SetTextf("Initialize sd card\n");
 	DeviceHandler::Instance()->MountSD();
 
-	SetTextf("Loading config files\n");
-
-	// Ugly, but let's load SD card first to allow users to disable USB Auto mounting.
-	gprintf("\tLoading config from SD...");
-	bool settingsLoaded = Settings.Load();
-	gprintf("%s\n", settingsLoaded ? "done" : "failed");
-
 	if(Settings.USBAutoMount == ON)
 	{
 		SetTextf("Initialize usb device\n");
 		USBSpinUp();
 		DeviceHandler::Instance()->MountAllUSB(false);
 	}
-
-	if(!settingsLoaded) gprintf("\tLoading config from USB...%s\n", Settings.Load() ? "done" : "failed");
+	
+	SetTextf("Loading config files\n");
+	
+	gprintf("\tLoading config...%s\n", Settings.Load() ? "done" : "failed");
 	gprintf("\tLoading language...%s\n", Settings.LoadLanguage(Settings.language_path, CONSOLE_DEFAULT) ? "done" : "failed");
 	gprintf("\tLoading game settings...%s\n", GameSettings.Load(Settings.ConfigPath) ? "done" : "failed");
 	gprintf("\tLoading game statistics...%s\n", GameStatistics.Load(Settings.ConfigPath) ? "done" : "failed");

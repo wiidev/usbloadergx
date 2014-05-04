@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright (C) 2012-2013 by Cyan
+ * Copyright (C) 2012-2014 Cyan
  * Copyright (C) 2010 by Dimok
  *
  * This software is provided 'as-is', without any express or implied
@@ -26,6 +26,7 @@
 #include "usbloader/usbstorage2.h"
 #include "settings/CSettings.h"
 #include "settings/GameTitles.h"
+#include "settings/meta.h"
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
 #include "wad/nandtitle.h"
@@ -218,6 +219,7 @@ LoaderSettings::LoaderSettings()
 
 	oldLoaderMode = Settings.LoaderMode;
 	oldGameCubeSource = Settings.GameCubeSource;
+	oldLoaderIOS = Settings.LoaderIOS;
 }
 
 LoaderSettings::~LoaderSettings()
@@ -237,6 +239,12 @@ LoaderSettings::~LoaderSettings()
 	if(oldGameCubeSource != Settings.GameCubeSource)
 	{
 		GCGames::Instance()->LoadAllGames();
+	}
+	
+	if(oldLoaderIOS != Settings.LoaderIOS)
+	{
+		// edit meta.xml arguments
+		editMetaArguments();
 	}
 }
 

@@ -88,6 +88,70 @@ int HomebrewXML::LoadHomebrewXMLData(const char* filename)
 	return 1;
 }
 
+int HomebrewXML::SaveHomebrewXMLData(const char* filename)
+{
+	const int max_line_size = 4096;
+	char *line = new char[max_line_size];
+
+	FILE *fp = fopen(filename, "wb");
+	if(!fp)
+	{
+		delete [] line;
+		return 0;
+	}
+
+	snprintf(line, max_line_size,"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"); fputs(line, fp);
+	snprintf(line, max_line_size,"<app version=\"1\">\n"); fputs(line, fp);
+	snprintf(line, max_line_size,"	<name>%s</name>\n", GetName()); fputs(line, fp);
+	snprintf(line, max_line_size,"	<coder>%s</coder>\n", GetCoder()); fputs(line, fp);
+	snprintf(line, max_line_size,"	<version>%s</version>\n", GetVersion()); fputs(line, fp);
+	snprintf(line, max_line_size,"	<release_date>%s</release_date>\n", GetReleasedate()); fputs(line, fp);
+	if (Arguments.size() > 0)
+	{
+		snprintf(line, max_line_size,"	<arguments>\n"); fputs(line, fp);
+		for(u8 i = 0; i < Arguments.size(); i++)
+		{
+			snprintf(line, max_line_size,"		<arg>%s</arg>\n", Arguments[i].c_str()); fputs(line, fp);
+		}
+		snprintf(line, max_line_size,"	</arguments>\n"); fputs(line, fp);
+	}
+	snprintf(line, max_line_size,"	<ahb_access/>\n"); fputs(line, fp);
+	snprintf(line, max_line_size,"	<short_description>%s</short_description>\n", GetShortDescription()); fputs(line, fp);
+	snprintf(line, max_line_size,"	<long_description>%s</long_description>\n", GetLongDescription()); fputs(line, fp);
+	snprintf(line, max_line_size,"</app>\n"); fputs(line, fp);
+		
+	fclose(fp);
+	delete [] line;
+	return 1;
+}
+
+/* Set argument */
+void HomebrewXML::SetArgument(const char* argument)
+{
+	// Crop value from argument, if present
+	char argName[strlen(argument)+1];
+	strcpy(argName, argument);
+	char *ptr = strrchr(argName, '=');
+	if(ptr) *(ptr+1) = 0;
+
+	// Check if argument already exists and edit it
+	bool found = false;
+	for(u8 i=0; i < Arguments.size(); i++)
+	{
+		size_t pos = Arguments[i].find(argName);
+		if(pos != std::string::npos)
+		{
+			Arguments[i] = argument;
+			found = true;
+			break;
+		}
+	}
+
+	// if it doesn't exist, add the new argument.
+	if(!found)
+		Arguments.push_back(argument);
+}
+
 /* Get name */
 const char * HomebrewXML::GetName() const
 {
@@ -110,6 +174,12 @@ const char * HomebrewXML::GetCoder() const
 const char * HomebrewXML::GetVersion() const
 {
 	return Version.c_str();
+}
+
+/* Set version */
+void HomebrewXML::SetVersion(const char * newVer)
+{
+	Version = newVer;
 }
 
 /* Get releasedate */

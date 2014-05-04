@@ -10,6 +10,7 @@
 #include "settings/CSettings.h"
 #include "settings/GameTitles.h"
 #include "settings/newtitles.h"
+#include "settings/meta.h"
 #include "language/gettext.h"
 #include "network/networkops.h"
 #include "utils/ResourceManager.h"
@@ -222,14 +223,40 @@ void Sys_LoadHBC(void)
 
 bool RebootApp(void)
 {
+	// be sure to use current settings as arguments
+	editMetaArguments();
+	
 #ifdef FULLCHANNEL
 	ExitApp();
 	WII_Initialize();
 	return !(WII_LaunchTitle(TITLE_ID(0x00010001, 0x554c4e52)) < 0);
 #else
+
+	// Load meta.xml arguments
 	char filepath[255];
+	HomebrewXML MetaXML;
+	snprintf(filepath, sizeof(filepath), "%s/meta.xml", Settings.update_path);
+	MetaXML.LoadHomebrewXMLData(filepath);
+
+	u8 *buffer = NULL;
+	u32 filesize = 0;
 	snprintf(filepath, sizeof(filepath), "%s/boot.dol", Settings.update_path);
-	return !(BootHomebrew(filepath) < 0);
+	LoadFileToMem(filepath, &buffer, &filesize);
+	if(!buffer)
+	{
+		return false;
+	}
+	FreeHomebrewBuffer();
+	CopyHomebrewMemory(buffer, 0, filesize);
+
+	AddBootArgument(filepath);
+
+	for(u32 i = 0; i < MetaXML.GetArguments().size(); ++i)
+	{
+		AddBootArgument(MetaXML.GetArguments().at(i).c_str());
+	}
+
+	return !(BootHomebrewFromMem() <0);
 #endif
 }
 
