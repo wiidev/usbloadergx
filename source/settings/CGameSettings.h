@@ -18,7 +18,6 @@ typedef struct _GameCFG
 	short vipatch;
 	short ios;
 	short parentalcontrol;
-	short errorfix002;
 	short iosreloadblock;
 	short loadalternatedol;
 	u32 alternatedolstart;
@@ -62,7 +61,6 @@ typedef struct _GameCFG
 		this->vipatch = game.vipatch;
 		this->ios = game.ios;
 		this->parentalcontrol = game.parentalcontrol;
-		this->errorfix002 = game.errorfix002;
 		this->iosreloadblock = game.iosreloadblock;
 		this->loadalternatedol = game.loadalternatedol;
 		this->alternatedolstart = game.alternatedolstart;

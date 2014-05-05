@@ -1371,13 +1371,6 @@ bool NetworkInitPrompt()
 
 	return success;
 }
-/*
-static size_t writedata(void *ptr, size_t size, size_t nmemb, void *stream)
-{
-	int written = fwrite(ptr, size, nmemb, (FILE *)stream);
-	return written;
-}
-*/
 int CodeDownload(const char *id)
 {
 	if (!CreateSubfolder(Settings.TxtCheatcodespath))
@@ -1472,62 +1465,7 @@ int CodeDownload(const char *id)
 		char codeurl[250];
 		snprintf(codeurl, sizeof(codeurl), "http://geckocodes.org/txt.php?txt=%s", id);
 		//snprintf(codeurl, sizeof(codeurl), "http://geckocodes.org/codes/G/%s.txt", id);
-
-	/* //// preparation for lib cURL - Thanks airline38
 		
-		CURL *curl_handle;
-		
-		// Forge cURL header - needed for cloudflare proxy
-		char useragent[20];
-		snprintf(useragent, sizeof(useragent), "USBLoaderGX r%s", GetRev());
-		curl_handle = curl_easy_init();
-		curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, useragent);
-		curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYPEER, 0L);
-		curl_easy_setopt(curl_handle, CURLOPT_URL, codeurl);
-		curl_easy_setopt(curl_handle, CURLOPT_HTTPGET, 1); // needed?
-		
-		FILE * pfile = fopen(txtpath, "wb");
-		if(pfile)
-		{
-			curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, writedata);
-			curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, (void *)pfile);
-			curl_easy_perform(curl_handle);
-			fclose(pfile);
-			
-			// verify downloaded content
-			pfile = fopen(txtpath, "rb");
-			char target[4];
-			fseek(pfile,0,SEEK_SET);
-			fread(target, sizeof(char), 4, pfile);
-			fclose(pfile);
-			//printf("target=%s  game id=%s\n",target,id);
-			if (strncmp(target,id,4)== 0 )
-			{
-				snprintf(txtpath, sizeof(txtpath), "%s%s", txtpath, tr(" has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information." ));
-				WindowPrompt(0, txtpath, tr( "OK" ));
-				curl_easy_cleanup(curl_handle);
-				curl_global_cleanup();
-				ret = 0;
-			}
-			else
-			{
-				RemoveFile(txtpath);	
-				snprintf(codeurl, sizeof(codeurl), "%s%s", codeurl, tr( " is not on the server." ));
-				WindowPrompt(tr( "Error" ), codeurl, tr( "OK" ));
-		    }
-		}
-		else
-		{
-			snprintf(codeurl, sizeof(codeurl), "%s%s", codeurl, tr(" could not be downloaded."));
-			WindowPrompt(tr( "Error" ), codeurl, tr( "OK" ));
-		}
-
-		curl_easy_cleanup(curl_handle);
-		curl_global_cleanup();
-
-	/////
-	*/
-	
 		struct block file = downloadfile(codeurl);
 
 		if (file.data != NULL)
@@ -1557,9 +1495,29 @@ int CodeDownload(const char *id)
 				{
 					fwrite(file.data, 1, file.size, pfile);
 					fclose(pfile);
-					snprintf(txtpath, sizeof(txtpath), "%s%s", txtpath, tr(" has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information." ));
-					WindowPrompt(0, txtpath, tr( "OK" ));
-					ret = 0;
+					
+					// verify downloaded content - thanks airline38
+					pfile = fopen(txtpath, "rb");
+					if(pfile)
+					{
+						char target[4];
+						fseek(pfile,0,SEEK_SET);
+						fread(target, sizeof(char), 4, pfile);
+						fclose(pfile);
+						//printf("target=%s  game id=%s\n",target,id);
+						if (strncmp(target,id,4)== 0 )
+						{
+							snprintf(txtpath, sizeof(txtpath), "%s%s", txtpath, tr(" has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information." ));
+							WindowPrompt(0, txtpath, tr( "OK" ));
+							ret = 0;
+						}
+						else
+						{
+							RemoveFile(txtpath);
+							snprintf(codeurl, sizeof(codeurl), "%s%s", codeurl, tr( " is not on the server." ));
+							WindowPrompt(tr( "Error" ), codeurl, tr( "OK" ));
+						}
+					}
 				}
 				else
 					WindowPrompt(tr("Error"), tr("Could not write file."), tr( "OK" ));

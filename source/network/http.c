@@ -25,6 +25,7 @@ static s32 send_message(s32 server, char *msg)
 		if ((bytes_transferred = net_write(server, msg, remaining > NET_BUFFER_SIZE ? NET_BUFFER_SIZE : remaining)) > 0)
 		{
 			remaining -= bytes_transferred;
+			msg += bytes_transferred;
 			usleep(20 * 1000);
 		}
 		else if (bytes_transferred < 0)
@@ -46,7 +47,7 @@ static s32 send_message(s32 server, char *msg)
  * @param u32 the port to connect to on the server
  * @return s32 The connection to the server (negative number if connection could not be established)
  */
-static s32 server_connect(u32 ipaddress, u32 socket_port)
+static s32 server_connect(u32 ipaddress, u16 socket_port)
 {
 	//Initialize socket
 	s32 connection = net_socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
@@ -55,7 +56,7 @@ static s32 server_connect(u32 ipaddress, u32 socket_port)
 	struct sockaddr_in connect_addr;
 	memset(&connect_addr, 0, sizeof(connect_addr));
 	connect_addr.sin_family = AF_INET;
-	connect_addr.sin_port = socket_port;
+	connect_addr.sin_port = htons(socket_port);
 	connect_addr.sin_addr.s_addr = ipaddress;
 
 	sprintf(incommingIP, "%s", inet_ntoa(connect_addr.sin_addr));
@@ -199,11 +200,18 @@ struct block downloadfile(const char *url)
 		return emptyblock;
 	}
 
-	
+	// Remove Referer from the request header for incompatible websites (ex. Cloudflare proxy)
+	char referer[domainlength + 12];
+	snprintf(referer, sizeof(referer), "Referer: %s\r\n", domain);
+	if(strstr(url, "geckocodes"))
+	{
+		strcpy(referer, "");
+	}
+
 	//Form a nice request header to send to the webserver
-	char* headerformat = "GET %s HTTP/1.0\r\nHost: %s\r\nReferer: %s\r\n%sUser-Agent: USBLoaderGX r%s\r\n\r\n";
-	char header[strlen(headerformat) + strlen(path) + strlen(domain)*2 + 100];
-	sprintf(header, headerformat, path, domain, domain, GetRev());
+	char* headerformat = "GET %s HTTP/1.0\r\nHost: %s\r\n%sUser-Agent: USBLoaderGX r%s\r\n\r\n";
+	char header[strlen(headerformat) + strlen(path) + strlen(domain) + strlen(referer) + 100];
+	sprintf(header, headerformat, path, domain, referer, GetRev());
 	//gprintf("\nHTTP Request:\n");
 	//gprintf("%s\n",header);
 
@@ -245,10 +253,10 @@ struct block downloadfile(const char *url)
 						//gprintf("HTTP response code: %d\n", code);
 						if (code == 302) // 302 FOUND (redirected link)
 						{
-							char *ptr = strstr((char*)response.data, "ocation: "); // location or Location
+							char *ptr = strcasestr((char*)response.data, "Location: ");
 							if(ptr)
 							{
-								ptr += strlen("ocation: ");
+								ptr += strlen("Location: ");
 								strncpy(newURL, ptr, sizeof(newURL));
 								*(strchr(newURL, '\r'))=0;
 								

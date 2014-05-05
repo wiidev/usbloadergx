@@ -84,13 +84,6 @@ static const char * LanguageText[] =
 	trNOOP( "Console Default" ),
 };
 
-static const char * Error002Text[] =
-{
-	trNOOP( "No" ),
-	trNOOP( "Yes" ),
-	trNOOP( "Anti" )
-};
-
 static const char * ParentalText[] =
 {
 	trNOOP( "0 (Everyone)" ),
@@ -293,12 +286,6 @@ void GameLoadSM::SetOptionValues()
 	else
 		Options->SetValue(Idx++, "%i", GameConfig.ios);
 
-	//! Settings: Error 002 fix
-	if(GameConfig.errorfix002 == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(Error002Text[GameConfig.errorfix002]));
-
 	//! Settings: Return To
 	if(GameConfig.returnTo)
 	{
@@ -486,12 +473,6 @@ int GameLoadSM::GetMenuInternal()
 				}
 			}
 		}
-	}
-
-	//! Settings: Error 002 fix
-	else if (ret == ++Idx)
-	{
-		if (++GameConfig.errorfix002 >= 3) GameConfig.errorfix002 = INHERIT;
 	}
 
 	//! Settings: Return To

@@ -194,7 +194,6 @@ bool CGameSettings::Save()
 		fprintf(f, "vipatch:%d; ", GameList[i].vipatch);
 		fprintf(f, "ios:%d; ", GameList[i].ios);
 		fprintf(f, "parentalcontrol:%d; ", GameList[i].parentalcontrol);
-		fprintf(f, "errorfix002:%d; ", GameList[i].errorfix002);
 		fprintf(f, "iosreloadblock:%d; ", GameList[i].iosreloadblock);
 		fprintf(f, "patchcountrystrings:%d; ", GameList[i].patchcountrystrings);
 		fprintf(f, "loadalternatedol:%d; ", GameList[i].loadalternatedol);
@@ -273,11 +272,6 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 	else if(strcmp(name, "parentalcontrol") == 0)
 	{
 		game.parentalcontrol = atoi(value);
-		return true;
-	}
-	else if(strcmp(name, "errorfix002") == 0)
-	{
-		game.errorfix002 = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "iosreloadblock") == 0)
@@ -544,7 +538,6 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.vipatch = INHERIT;
 	game.ios = INHERIT;
 	game.parentalcontrol = PARENTAL_LVL_EVERYONE;
-	game.errorfix002 = INHERIT;
 	game.patchcountrystrings = INHERIT;
 	game.loadalternatedol = ALT_DOL_DEFAULT;
 	game.alternatedolstart = 0;

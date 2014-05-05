@@ -109,7 +109,6 @@ void CSettings::SetDefault()
 	LoaderIOS = BUILD_IOS;
 	cios = BUILD_IOS;
 	gridRows = 3;
-	error002 = 2;
 	partition = 0;
 	discart = DISCARTS_ORIGINALS_CUSTOMS;
 	coversfull = COVERSFULL_HQ;
@@ -331,7 +330,6 @@ bool CSettings::Save()
 	fprintf(file, "patchcountrystrings = %d\n", patchcountrystrings);
 	fprintf(file, "screensaver = %d\n", screensaver);
 	fprintf(file, "musicloopmode = %d\n", musicloopmode);
-	fprintf(file, "error002 = %d\n", error002);
 	fprintf(file, "autonetwork = %d\n", autonetwork);
 	fprintf(file, "discart = %d\n", discart);
 	fprintf(file, "coversfull = %d\n", coversfull);
@@ -667,11 +665,6 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "coversfull") == 0)
 	{
 		coversfull = atoi(value);
-		return true;
-	}
-	else if (strcmp(name, "error002") == 0)
-	{
-		error002 = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "autonetwork") == 0)

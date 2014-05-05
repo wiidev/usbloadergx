@@ -50,7 +50,7 @@ void ClearDOLList()
 }
 
 void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 languageChoice, u8 patchcountrystring,
-				 u8 vipatch, u8 sneekVideoPatch, u8 hooktype, u8 fix002, u64 returnTo)
+				 u8 vipatch, u8 sneekVideoPatch, u8 hooktype, u64 returnTo)
 {
 	int i;
 
@@ -82,8 +82,7 @@ void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 language
 
 		do_wip_code(dst, len);
 
-		if (fix002 == 2)
-			Anti_002_fix(dst, len);
+		Anti_002_fix(dst, len);
 
 		if(returnTo)
 			PatchReturnTo(dst, len, (u32) returnTo);
@@ -96,8 +95,7 @@ void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 language
 	}
 
 	/* ERROR 002 fix (thanks to WiiPower for sharing this)*/
-	if (fix002 != 0)
-		*(u32 *)0x80003140 = *(u32 *)0x80003188;
+	*(u32 *)0x80003140 = *(u32 *)0x80003188;
 
 	DCFlushRange((void*) 0x80000000, 0x3f00);
 

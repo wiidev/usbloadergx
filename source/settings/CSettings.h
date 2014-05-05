@@ -117,7 +117,6 @@ class CSettings
 		short partition;
 		short musicloopmode;
 		short godmode;
-		short error002;
 		short titlesOverride; // db_titles
 		short gridRows;
 		short autonetwork;

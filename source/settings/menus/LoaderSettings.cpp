@@ -87,13 +87,6 @@ static const char * LanguageText[] =
 	trNOOP( "Console Default" )
 };
 
-static const char * Error002Text[] =
-{
-	trNOOP( "No" ),
-	trNOOP( "Yes" ),
-	trNOOP( "Anti" )
-};
-
 static const char * NandEmuText[] =
 {
 	trNOOP( "OFF" ),
@@ -297,9 +290,6 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: Quick Boot
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.quickboot] ));
-
-	//! Settings: Error 002 fix
-	Options->SetValue(Idx++, "%s", tr( Error002Text[Settings.error002] ));
 
 	//! Settings: Block IOS Reload
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.BlockIOSReload] ));
@@ -521,12 +511,6 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.quickboot >= MAX_ON_OFF) Settings.quickboot = 0;
-	}
-
-	//! Settings: Error 002 fix
-	else if (ret == ++Idx )
-	{
-		if (++Settings.error002 >= 3) Settings.error002 = 0;
 	}
 
 	//! Settings: Block IOS Reload
