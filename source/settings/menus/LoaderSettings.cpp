@@ -179,7 +179,6 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Loader's IOS" ));
 	Options->SetName(Idx++, "%s", tr( "Game's IOS" ));
 	Options->SetName(Idx++, "%s", tr( "Quick Boot" ));
-	Options->SetName(Idx++, "%s", tr( "Error 002 fix" ));
 	Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
 	Options->SetName(Idx++, "%s", tr( "Return To" ));
 	Options->SetName(Idx++, "%s", tr( "Nand Saves Emulation" ));
