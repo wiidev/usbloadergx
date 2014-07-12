@@ -198,6 +198,7 @@ class CSettings
 		short DEVODButtons;
 		short GCInstallCompressed;
 		short GCInstallAligned;
+		short PrivateServer;
 
 		// This variable is not saved to the settings file
 		bool FirstTimeRun;

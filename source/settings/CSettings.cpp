@@ -194,6 +194,7 @@ void CSettings::SetDefault()
 	DEVODButtons = OFF;
 	GCInstallCompressed = OFF;
 	GCInstallAligned = OFF;
+	PrivateServer = OFF;
 }
 
 bool CSettings::Load()
@@ -434,6 +435,7 @@ bool CSettings::Save()
 	fprintf(file, "NINLoaderPath = %s\n", NINLoaderPath);
 	fprintf(file, "GCInstallCompressed = %d\n", GCInstallCompressed);
 	fprintf(file, "GCInstallAligned = %d\n", GCInstallAligned);
+	fprintf(file, "PrivateServer = %d\n", PrivateServer);
 	fprintf(file, "CustomBannersURL = %s\n", CustomBannersURL);
 	fclose(file);
 
@@ -1085,6 +1087,10 @@ bool CSettings::SetSetting(char *name, char *value)
 	{
 		strlcpy(CustomBannersURL, value, sizeof(CustomBannersURL));
 		return true;
+	}
+	else if(strcmp(name, "PrivateServer") == 0)
+	{
+		PrivateServer = atoi(value);
 	}
 	else if (strcmp(name, "EnabledCategories") == 0)
 	{

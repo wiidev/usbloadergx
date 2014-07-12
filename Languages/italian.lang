@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-25 15:06+0200\n"
+"POT-Creation-Date: 2014-07-12 14:51+0200\n"
 "PO-Revision-Date: 2011-09-11 12:19+0100\n"
 "Last-Translator: xFede\n"
 "Language-Team: xFede (fedeanto11@gmail.com)\n"
@@ -137,9 +137,6 @@ msgstr "Un file di esempio è stato creato qui:"
 
 msgid "Animation Start"
 msgstr "Avvio dell'animazione"
-
-msgid "Anti"
-msgstr "Anti"
 
 msgid "App Language"
 msgstr "Lingua applicazione"
@@ -774,9 +771,6 @@ msgstr "Errore"
 
 msgid "Error !"
 msgstr "Errore!"
-
-msgid "Error 002 fix"
-msgstr "Correzione errore 002"
 
 #, c-format
 msgid "Error creating path: %s"
@@ -1489,6 +1483,9 @@ msgstr "Nessun tema trovato sul sito."
 msgid "No themes found."
 msgstr "Nessun tema trovato."
 
+msgid "NoSSL only"
+msgstr ""
+
 msgid "None"
 msgstr "Nessuno"
 
@@ -1641,6 +1638,9 @@ msgstr "Spegni la Wii"
 
 msgid "Prev"
 msgstr "Prec."
+
+msgid "Private Server"
+msgstr ""
 
 msgid "Process finished."
 msgstr "Processo completato."
@@ -2122,9 +2122,6 @@ msgstr "Aggiornando traduzioni:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "File ZIP installato nella cartella degli Homebrew."
 
-msgid "Use Game Settings"
-msgstr "Usa impostazioni gioco"
-
 msgid "Use System Font"
 msgstr "Usa il font di sistema"
 
@@ -2209,6 +2206,9 @@ msgstr "WiiTDB.xml è già aggiornato"
 
 msgid "Wiilight"
 msgstr "Illuminazione Wii"
+
+msgid "Wiimmfi.de"
+msgstr ""
 
 msgid "Wiinnertag"
 msgstr "Wiinnertag"
@@ -2309,6 +2309,15 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi rimasti"
+
+#~ msgid "Anti"
+#~ msgstr "Anti"
+
+#~ msgid "Error 002 fix"
+#~ msgstr "Correzione errore 002"
+
+#~ msgid "Use Game Settings"
+#~ msgstr "Usa impostazioni gioco"
 
 #~ msgid "Main tester:"
 #~ msgstr "Tester principale:"

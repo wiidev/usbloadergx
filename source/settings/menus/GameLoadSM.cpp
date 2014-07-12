@@ -121,6 +121,13 @@ static const char * HooktypeText[] =
 	trNOOP( "AXNextFrame" ),
 };
 
+static const char * PrivServText[] =
+{
+	trNOOP( "OFF" ),
+	trNOOP( "NoSSL only" ),
+	trNOOP( "Wiimmfi.de" ),
+};
+
 GameLoadSM::GameLoadSM(struct discHdr *hdr)
 	: SettingsMenu(tr("Game Load"), &GuiOptions, MENU_NONE),
 	  Header(hdr)
@@ -182,6 +189,7 @@ void GameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
 	Options->SetName(Idx++, "%s", tr( "Ocarina" ));
+	Options->SetName(Idx++, "%s", tr( "Private Server" ));
 	Options->SetName(Idx++, "%s", tr( "Parental Control" ));
 	Options->SetName(Idx++, "%s", tr( "Hooktype" ));
 	Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
@@ -263,6 +271,12 @@ void GameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.ocarina]));
+
+	//! Settings: Private Server
+	if(GameConfig.PrivateServer == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(PrivServText[GameConfig.PrivateServer]));
 
 	//! Settings: Parental Control
 	Options->SetValue(Idx++, "%s", tr(ParentalText[GameConfig.parentalcontrol]));
@@ -426,6 +440,12 @@ int GameLoadSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.ocarina >= MAX_ON_OFF) GameConfig.ocarina = INHERIT;
+	}
+
+	//! Settings: Private Server
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.PrivateServer >= PRIVSERV_MAX_CHOICE) GameConfig.PrivateServer = INHERIT;
 	}
 
 	//! Settings: Parental Control

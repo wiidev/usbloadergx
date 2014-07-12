@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1219
+# French.lang - r1228
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-25 15:06+0200\n"
+"POT-Creation-Date: 2014-07-12 14:51+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -137,9 +137,6 @@ msgstr "Un fichier d'exemple a été créé ici :"
 
 msgid "Animation Start"
 msgstr "Démarrer l'animation"
-
-msgid "Anti"
-msgstr ""
 
 msgid "App Language"
 msgstr "Langue d'interface"
@@ -774,9 +771,6 @@ msgstr "Erreur"
 
 msgid "Error !"
 msgstr "Erreur !"
-
-msgid "Error 002 fix"
-msgstr "Correctif Erreur 002"
 
 #, c-format
 msgid "Error creating path: %s"
@@ -1489,6 +1483,9 @@ msgstr "Aucun thème trouvé sur le site."
 msgid "No themes found."
 msgstr "Aucun thème trouvé."
 
+msgid "NoSSL only"
+msgstr "NoSSL seulement"
+
 msgid "None"
 msgstr "Aucun"
 
@@ -1641,6 +1638,9 @@ msgstr "Éteindre la Wii"
 
 msgid "Prev"
 msgstr "Précédent"
+
+msgid "Private Server"
+msgstr "Serveur privé"
 
 msgid "Process finished."
 msgstr "Opération terminée."
@@ -2122,9 +2122,6 @@ msgstr "Mise à jour du fichier de langue:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Fichier ZIP envoyé et installé dans le répertoire homebrew."
 
-msgid "Use Game Settings"
-msgstr "Utiliser paramètres du jeu"
-
 msgid "Use System Font"
 msgstr "Police d'écriture système"
 
@@ -2209,6 +2206,9 @@ msgstr "WiiTDB.xml est à jour."
 
 msgid "Wiilight"
 msgstr "Illumination Wii"
+
+msgid "Wiimmfi.de"
+msgstr ""
 
 msgid "Wiinnertag"
 msgstr ""
@@ -2309,6 +2309,12 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "Error 002 fix"
+#~ msgstr "Correctif Erreur 002"
+
+#~ msgid "Use Game Settings"
+#~ msgstr "Utiliser paramètres du jeu"
 
 #~ msgid "Main tester:"
 #~ msgstr "Testeur:"

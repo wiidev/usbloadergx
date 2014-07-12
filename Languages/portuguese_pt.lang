@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-25 15:06+0200\n"
+"POT-Creation-Date: 2014-07-12 14:51+0200\n"
 "PO-Revision-Date: 2011-11-03 11:00+0000\n"
 "Last-Translator: pplucky <pplucky@gmail.com>\n"
 "Language-Team: Sky8000, pplucky\n"
@@ -137,9 +137,6 @@ msgstr "Ficheiro de exemplo criado aqui:"
 
 msgid "Animation Start"
 msgstr ""
-
-msgid "Anti"
-msgstr "Anti"
 
 msgid "App Language"
 msgstr "Idioma"
@@ -774,9 +771,6 @@ msgstr "Erro"
 
 msgid "Error !"
 msgstr "Erro !"
-
-msgid "Error 002 fix"
-msgstr "Correcção Erro 002"
 
 #, c-format
 msgid "Error creating path: %s"
@@ -1489,6 +1483,9 @@ msgstr "Nenhum tema encontrado no site."
 msgid "No themes found."
 msgstr "Nenhum tema encontrado."
 
+msgid "NoSSL only"
+msgstr ""
+
 msgid "None"
 msgstr "Nenhum"
 
@@ -1641,6 +1638,9 @@ msgstr "Desligar Wii"
 
 msgid "Prev"
 msgstr "Anterior"
+
+msgid "Private Server"
+msgstr ""
 
 msgid "Process finished."
 msgstr "Processo finalizado."
@@ -2122,9 +2122,6 @@ msgstr "A actualizar ficheiros de Idioma:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Ficheiro ZIP instalado na pasta de Homebrew."
 
-msgid "Use Game Settings"
-msgstr ""
-
 msgid "Use System Font"
 msgstr "Usar Fonte Sistema"
 
@@ -2209,6 +2206,9 @@ msgstr "WiiTDB.xml está actualizado."
 
 msgid "Wiilight"
 msgstr "Iluminação Leitor"
+
+msgid "Wiimmfi.de"
+msgstr ""
 
 msgid "Wiinnertag"
 msgstr "Wiinnertag"
@@ -2309,6 +2309,12 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Anti"
+#~ msgstr "Anti"
+
+#~ msgid "Error 002 fix"
+#~ msgstr "Correcção Erro 002"
 
 #~ msgid "Main tester:"
 #~ msgstr "Tester principal:"

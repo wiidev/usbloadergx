@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-25 15:06+0200\n"
+"POT-Creation-Date: 2014-07-12 14:51+0200\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -136,9 +136,6 @@ msgid "An example file was created here:"
 msgstr ""
 
 msgid "Animation Start"
-msgstr ""
-
-msgid "Anti"
 msgstr ""
 
 msgid "App Language"
@@ -774,9 +771,6 @@ msgstr "Hiba"
 
 msgid "Error !"
 msgstr "Hiba !"
-
-msgid "Error 002 fix"
-msgstr "Error 02 javítás"
 
 #, c-format
 msgid "Error creating path: %s"
@@ -1489,6 +1483,9 @@ msgstr "Nem találhatóak témák az oldalon."
 msgid "No themes found."
 msgstr ""
 
+msgid "NoSSL only"
+msgstr ""
+
 msgid "None"
 msgstr ""
 
@@ -1641,6 +1638,9 @@ msgstr "Wii kikapcsolása"
 
 msgid "Prev"
 msgstr "Elõzõ"
+
+msgid "Private Server"
+msgstr ""
 
 msgid "Process finished."
 msgstr ""
@@ -2122,9 +2122,6 @@ msgstr "Nyelvi fájlok frissítése:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Feltöltött ZIP fájl telepítve a Homebrew mappába."
 
-msgid "Use Game Settings"
-msgstr ""
-
 msgid "Use System Font"
 msgstr ""
 
@@ -2209,6 +2206,9 @@ msgstr ""
 
 msgid "Wiilight"
 msgstr "WiiFény"
+
+msgid "Wiimmfi.de"
+msgstr ""
 
 msgid "Wiinnertag"
 msgstr ""
@@ -2309,6 +2309,9 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
+
+#~ msgid "Error 002 fix"
+#~ msgstr "Error 02 javítás"
 
 #~ msgid "Boot/Standard"
 #~ msgstr "Boot/Alapértelmezett"

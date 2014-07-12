@@ -267,6 +267,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	u8 aspectChoice = game_cfg->aspectratio == INHERIT ? Settings.GameAspectRatio : game_cfg->aspectratio;
 	u8 languageChoice = game_cfg->language == INHERIT ? Settings.language : game_cfg->language;
 	u8 ocarinaChoice = game_cfg->ocarina == INHERIT ? Settings.ocarina : game_cfg->ocarina;
+	u8 PrivServChoice = game_cfg->PrivateServer == INHERIT ? Settings.PrivateServer : game_cfg->PrivateServer;
 	u8 viChoice = game_cfg->vipatch == INHERIT ? Settings.videopatch : game_cfg->vipatch;
 	u8 sneekChoice = game_cfg->sneekVideoPatch == INHERIT ? Settings.sneekVideoPatch : game_cfg->sneekVideoPatch;
 	u8 iosChoice = game_cfg->ios == INHERIT ? Settings.cios : game_cfg->ios;
@@ -404,7 +405,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 
 	//! Do all the game patches
 	gprintf("Applying game patches...\n");
-	gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, returnToChoice);
+	gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, returnToChoice, PrivServChoice);
 
 	//! Load Code handler if needed
 	load_handler(Hooktype, WiirdDebugger, Settings.WiirdDebuggerPause);
@@ -528,34 +529,6 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		}
 	}
 	
-	// Check kenobigc.bin
-	if(ocarinaChoice)
-	{
-		char kenobigc_path[30]; 
-		snprintf(kenobigc_path, sizeof(kenobigc_path), "%s:/sneek/kenobigc.bin", DeviceHandler::GetDevicePrefix(RealPath));
-		if(!CheckFile(kenobigc_path))
-		{
-			// try to copy kenobigc from the other device
-			char kenobigc_srcpath[30]; 
-			snprintf(kenobigc_srcpath, sizeof(kenobigc_srcpath), "%s:/sneek/kenobigc.bin", strncmp(RealPath, "usb", 3) == 0 ? "sd" : "usb1");
-			if(CheckFile(kenobigc_srcpath))
-			{
-				if(CopyFile(kenobigc_srcpath, kenobigc_path) < 0)
-				{
-					gprintf("NIN: Couldn't copy %s to %s.\n", kenobigc_srcpath, kenobigc_path);
-					RemoveFile(kenobigc_path);
-					if(WindowPrompt(tr("Warning:"), fmt(tr("To use ocarina with %s you need the %s file."), LoaderName, kenobigc_path), tr("Continue"), tr("Cancel")) == 0)
-						return 0;
-				}
-			}
-			else
-			{
-				if(WindowPrompt(tr("Warning:"), fmt(tr("To use ocarina with %s you need the %s file."), LoaderName, kenobigc_path), tr("Continue"), tr("Cancel")) == 0)
-				return 0;
-			}
-		}
-	}
-
 	// Check Ocarina and cheat file location. the .gct file need to be located on the same partition than the game.
 	if(gameHdr->type != TYPE_GAME_GC_DISC && ocarinaChoice && strcmp(DeviceHandler::GetDevicePrefix(RealPath), DeviceHandler::GetDevicePrefix(Settings.Cheatcodespath)) != 0)
 	{

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-25 15:06+0200\n"
+"POT-Creation-Date: 2014-07-12 14:51+0200\n"
 "Last-Translator: nakata6790\n"
 "Language-Team: nakata6790 (aka0107@gmail.com)\n"
 "MIME-Version: 1.0\n"
@@ -136,9 +136,6 @@ msgstr "¸íá áñ÷åßï-ðáñÜäåéãìá äçìéïõñãÞèçêå åä
 
 msgid "Animation Start"
 msgstr "Áñ÷Þ animation"
-
-msgid "Anti"
-msgstr "ÊáôÜ"
 
 msgid "App Language"
 msgstr "Ãëþóóá åöáñìïãÞò"
@@ -773,9 +770,6 @@ msgstr "ÓöÜëìá"
 
 msgid "Error !"
 msgstr "Óöáëìá !"
-
-msgid "Error 002 fix"
-msgstr "Äéüñèùóç óöÜëìáôïò 002"
 
 #, c-format
 msgid "Error creating path: %s"
@@ -1488,6 +1482,9 @@ msgstr "Äåí âñÝèçêáí èÝìáôá óôï site."
 msgid "No themes found."
 msgstr "Äåí âñÝèçêáí èÝìáôá."
 
+msgid "NoSSL only"
+msgstr ""
+
 msgid "None"
 msgstr "ÊáíÝíá"
 
@@ -1640,6 +1637,9 @@ msgstr "Êëåßóôå ôï Wii"
 
 msgid "Prev"
 msgstr "Ðñïçãïýìåíï."
+
+msgid "Private Server"
+msgstr ""
 
 msgid "Process finished."
 msgstr "ÏëïêëÞñùóç äéáäéêáóßáò."
@@ -2121,9 +2121,6 @@ msgstr "ÁíáâÜèìéóç áñ÷åßùí ìåôáöñÜóåùí:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "ÁíáâáèìßóìÝíï áñ÷åßï ZIP åãêáôáóôÜèçêå óôçí êáôçãïñßá Homebrew."
 
-msgid "Use Game Settings"
-msgstr "×ñÞóç ñõèìßóåùí óõóôÞìáôïò"
-
 msgid "Use System Font"
 msgstr "×ñÞóç ãñáììáôïóåéñÜò óõóôÞìáôïò"
 
@@ -2208,6 +2205,9 @@ msgstr "Ôï áñ÷åßï WiiTDB.xml åßíáé åíçìåñùìÝíï"
 
 msgid "Wiilight"
 msgstr "ËÜìðáêé DVD drive ôïõ Wii"
+
+msgid "Wiimmfi.de"
+msgstr ""
 
 msgid "Wiinnertag"
 msgstr "Wiinnertag"
@@ -2308,6 +2308,15 @@ msgstr "áðü"
 
 msgid "seconds left"
 msgstr "äåõôåñüëåðôá áðïìÝíïõí"
+
+#~ msgid "Anti"
+#~ msgstr "ÊáôÜ"
+
+#~ msgid "Error 002 fix"
+#~ msgstr "Äéüñèùóç óöÜëìáôïò 002"
+
+#~ msgid "Use Game Settings"
+#~ msgstr "×ñÞóç ñõèìßóåùí óõóôÞìáôïò"
 
 #~ msgid "Main tester:"
 #~ msgstr "Kýñéïò äïêéìáóôÞò:"

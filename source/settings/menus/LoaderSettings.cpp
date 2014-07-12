@@ -163,6 +163,13 @@ static const char * DEVOMCText[] =
 	trNOOP( "Individual" ),
 };
 
+static const char * PrivServText[] =
+{
+	trNOOP( "OFF" ),
+	trNOOP( "NoSSL only" ),
+	trNOOP( "Wiimmfi.de" ),
+};
+
 LoaderSettings::LoaderSettings()
 	: SettingsMenu(tr("Loader Settings"), &GuiOptions, MENU_NONE)
 {
@@ -176,6 +183,7 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
 	Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
 	Options->SetName(Idx++, "%s", tr( "Ocarina" ));
+	Options->SetName(Idx++, "%s", tr( "Private Server" ));
 	Options->SetName(Idx++, "%s", tr( "Loader's IOS" ));
 	Options->SetName(Idx++, "%s", tr( "Game's IOS" ));
 	Options->SetName(Idx++, "%s", tr( "Quick Boot" ));
@@ -274,6 +282,9 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: Ocarina
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.ocarina] ));
+
+	//! Settings: Private Server
+	Options->SetValue(Idx++, "%s", tr( PrivServText[Settings.PrivateServer] ));
 
 	//! Settings: Loader's IOS
 	if (Settings.godmode)
@@ -455,6 +466,12 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.ocarina >= MAX_ON_OFF) Settings.ocarina = 0;
+	}
+
+	//! Settings: Private Server
+	else if (ret == ++Idx)
+	{
+		if (++Settings.PrivateServer >= PRIVSERV_MAX_CHOICE) Settings.PrivateServer = 0;
 	}
 
 	//! Settings: Loader's IOS

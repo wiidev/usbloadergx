@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-25 15:06+0200\n"
+"POT-Creation-Date: 2014-07-12 14:51+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -137,9 +137,6 @@ msgstr "Er is hier een voorbeeldbestand gemaakt:"
 
 msgid "Animation Start"
 msgstr "Animatie Start"
-
-msgid "Anti"
-msgstr ""
 
 msgid "App Language"
 msgstr "Applicatie Taal"
@@ -774,9 +771,6 @@ msgstr "Fout"
 
 msgid "Error !"
 msgstr "Fout !"
-
-msgid "Error 002 fix"
-msgstr "Herstel fout 002"
 
 #, c-format
 msgid "Error creating path: %s"
@@ -1489,6 +1483,9 @@ msgstr "Geen thema's gevonden op de site."
 msgid "No themes found."
 msgstr "Geen thema's gevonden."
 
+msgid "NoSSL only"
+msgstr ""
+
 msgid "None"
 msgstr "Geen"
 
@@ -1641,6 +1638,9 @@ msgstr "Wii uitschakelen"
 
 msgid "Prev"
 msgstr "Vorige"
+
+msgid "Private Server"
+msgstr ""
 
 msgid "Process finished."
 msgstr "Proces afgerond."
@@ -2122,9 +2122,6 @@ msgstr "Taalbestanden updaten:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Geuploade ZIP is geïnstalleerd in je homebrew locatie."
 
-msgid "Use Game Settings"
-msgstr "Gebruik spel instellingen"
-
 msgid "Use System Font"
 msgstr "Gebruik Systeem lettertype"
 
@@ -2209,6 +2206,9 @@ msgstr "WiiTDB.xml is up to date."
 
 msgid "Wiilight"
 msgstr "WiiLight"
+
+msgid "Wiimmfi.de"
+msgstr ""
 
 msgid "Wiinnertag"
 msgstr ""
@@ -2309,6 +2309,12 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconde resterend"
+
+#~ msgid "Error 002 fix"
+#~ msgstr "Herstel fout 002"
+
+#~ msgid "Use Game Settings"
+#~ msgstr "Gebruik spel instellingen"
 
 #~ msgid "Main tester:"
 #~ msgstr "Hoofd tester:"

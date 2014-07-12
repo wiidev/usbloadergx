@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-25 15:06+0200\n"
+"POT-Creation-Date: 2014-07-12 14:51+0200\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -137,9 +137,6 @@ msgstr "在這裡建立範本檔："
 
 msgid "Animation Start"
 msgstr "動畫縮圖啟動"
-
-msgid "Anti"
-msgstr "防止"
 
 msgid "App Language"
 msgstr "語言設定"
@@ -774,9 +771,6 @@ msgstr "錯誤"
 
 msgid "Error !"
 msgstr "錯誤 ！"
-
-msgid "Error 002 fix"
-msgstr "修正002錯誤"
 
 #, c-format
 msgid "Error creating path: %s"
@@ -1489,6 +1483,9 @@ msgstr "在網站上找不到主題。"
 msgid "No themes found."
 msgstr "找不到佈景主題。"
 
+msgid "NoSSL only"
+msgstr ""
+
 msgid "None"
 msgstr "沒有"
 
@@ -1641,6 +1638,9 @@ msgstr "關閉 Wii 主機電源"
 
 msgid "Prev"
 msgstr "往前"
+
+msgid "Private Server"
+msgstr ""
 
 msgid "Process finished."
 msgstr "程序已完成。"
@@ -2122,9 +2122,6 @@ msgstr "正在更新語言檔案："
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "已更新安裝在Homebrew目錄的ZIP檔案"
 
-msgid "Use Game Settings"
-msgstr "使用遊戲設定"
-
 msgid "Use System Font"
 msgstr "使用系統字型"
 
@@ -2209,6 +2206,9 @@ msgstr "WiiTDB.xml保持最新。"
 
 msgid "Wiilight"
 msgstr "Wii LED燈"
+
+msgid "Wiimmfi.de"
+msgstr ""
 
 msgid "Wiinnertag"
 msgstr "Wiinnertag"
@@ -2309,6 +2309,15 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "Anti"
+#~ msgstr "防止"
+
+#~ msgid "Error 002 fix"
+#~ msgstr "修正002錯誤"
+
+#~ msgid "Use Game Settings"
+#~ msgstr "使用遊戲設定"
 
 #~ msgid "Main tester:"
 #~ msgstr "主要測試者："

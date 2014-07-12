@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-25 15:06+0200\n"
+"POT-Creation-Date: 2014-07-12 14:51+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -137,9 +137,6 @@ msgstr ""
 
 msgid "Animation Start"
 msgstr ""
-
-msgid "Anti"
-msgstr "ต้าน"
 
 msgid "App Language"
 msgstr "ภาษาของโปรแกรม"
@@ -774,9 +771,6 @@ msgstr "ผิดพลาด"
 
 msgid "Error !"
 msgstr "ผิดพลาด !"
-
-msgid "Error 002 fix"
-msgstr "แก้ไข Error002"
 
 #, c-format
 msgid "Error creating path: %s"
@@ -1489,6 +1483,9 @@ msgstr "ไม่พบธีมบนเวบไซต์"
 msgid "No themes found."
 msgstr ""
 
+msgid "NoSSL only"
+msgstr ""
+
 msgid "None"
 msgstr ""
 
@@ -1641,6 +1638,9 @@ msgstr "ปิดเครื่อง Wii"
 
 msgid "Prev"
 msgstr "ที่ผ่านมา"
+
+msgid "Private Server"
+msgstr ""
 
 msgid "Process finished."
 msgstr ""
@@ -2122,9 +2122,6 @@ msgstr "กำลังอัพเดทไฟล์ภาษา:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "อัพโหลดไฟล์ zip ไปที่ไดเรคทอรี่ homebrew"
 
-msgid "Use Game Settings"
-msgstr ""
-
 msgid "Use System Font"
 msgstr ""
 
@@ -2209,6 +2206,9 @@ msgstr ""
 
 msgid "Wiilight"
 msgstr "ความสว่างของ Wii"
+
+msgid "Wiimmfi.de"
+msgstr ""
 
 msgid "Wiinnertag"
 msgstr ""
@@ -2309,6 +2309,12 @@ msgstr "จาก"
 
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
+
+#~ msgid "Anti"
+#~ msgstr "ต้าน"
+
+#~ msgid "Error 002 fix"
+#~ msgstr "แก้ไข Error002"
 
 #~ msgid "Boot/Standard"
 #~ msgstr "บูต/มาตราฐาน"

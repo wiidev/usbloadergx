@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-25 15:06+0200\n"
+"POT-Creation-Date: 2014-07-12 14:51+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -137,9 +137,6 @@ msgstr "Eine Beispieldatei wurde hier erstellt:"
 
 msgid "Animation Start"
 msgstr "Animationsstart"
-
-msgid "Anti"
-msgstr "Anti"
 
 msgid "App Language"
 msgstr "Sprache"
@@ -774,9 +771,6 @@ msgstr "Fehler"
 
 msgid "Error !"
 msgstr "Fehler !"
-
-msgid "Error 002 fix"
-msgstr "Fehler 002 fix"
 
 #, c-format
 msgid "Error creating path: %s"
@@ -1489,6 +1483,9 @@ msgstr "Keine Themes auf der Seite gefunden."
 msgid "No themes found."
 msgstr "Keine Themes gefunden."
 
+msgid "NoSSL only"
+msgstr ""
+
 msgid "None"
 msgstr "Keine"
 
@@ -1641,6 +1638,9 @@ msgstr "Wii ausschalten"
 
 msgid "Prev"
 msgstr "Zurück"
+
+msgid "Private Server"
+msgstr ""
 
 msgid "Process finished."
 msgstr "Vorgang abgeschlossen."
@@ -2122,9 +2122,6 @@ msgstr "Aktualisiere Sprachdateien:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Die hochgeladene ZIP Datei wurde ins Homebrew Verzeichnis installiert."
 
-msgid "Use Game Settings"
-msgstr "Spiele Einst. ben."
-
 msgid "Use System Font"
 msgstr "Wii-Systemschriftart"
 
@@ -2209,6 +2206,9 @@ msgstr "WiiTDB.xml ist aktuell."
 
 msgid "Wiilight"
 msgstr "Wii-Laufwerkslicht"
+
+msgid "Wiimmfi.de"
+msgstr ""
 
 msgid "Wiinnertag"
 msgstr "Wiinnertag"
@@ -2309,6 +2309,15 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "Anti"
+#~ msgstr "Anti"
+
+#~ msgid "Error 002 fix"
+#~ msgstr "Fehler 002 fix"
+
+#~ msgid "Use Game Settings"
+#~ msgstr "Spiele Einst. ben."
 
 #~ msgid "Main tester:"
 #~ msgstr "Haupttester:"

@@ -50,7 +50,7 @@ void ClearDOLList()
 }
 
 void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 languageChoice, u8 patchcountrystring,
-				 u8 vipatch, u8 sneekVideoPatch, u8 hooktype, u64 returnTo)
+				 u8 vipatch, u8 sneekVideoPatch, u8 hooktype, u64 returnTo, u8 privateServer)
 {
 	int i;
 
@@ -90,6 +90,9 @@ void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 language
 		if(aspectForce < 2)
 			PatchAspectRatio(dst, len, aspectForce);
 
+		if(privateServer)
+			PrivateServerPatcher(dst, len, privateServer);
+			
 		DCFlushRange(dst, len);
 		ICInvalidateRange(dst, len);
 	}
@@ -109,6 +112,56 @@ bool Anti_002_fix(u8 * Address, int Size)
 	u8 SearchPattern[12] = { 0x2C, 0x00, 0x00, 0x00, 0x48, 0x00, 0x02, 0x14, 0x3C, 0x60, 0x80, 0x00 };
 	u8 PatchData[12] = { 0x2C, 0x00, 0x00, 0x00, 0x40, 0x82, 0x02, 0x14, 0x3C, 0x60, 0x80, 0x00 };
 	return PatchDOL(Address, Size, (const u8 *) SearchPattern, sizeof(SearchPattern), (const u8 *) PatchData, sizeof(PatchData));
+}
+
+/** Patch URLs for private Servers - Thanks to ToadKing/wiilauncher-nossl **/
+void PrivateServerPatcher(void *addr, u32 len, u8 privateServer)
+{
+
+	// Patch protocol https -> http
+	char *cur = (char *)addr;
+	const char *end = cur + len - 8;
+	do
+	{
+		if (memcmp(cur, "https://", 8) == 0 && cur[8] != 0)
+		{
+			int len = strlen(cur);
+			memmove(cur + 4, cur + 5, len - 5);
+			cur[len - 1] = 0;
+			cur += len;
+		}
+	} while (++cur < end);
+	
+	// Patch nintendowifi.net -> private server domain
+	if(privateServer == PRIVSERV_WIIMMFI )
+		domainpatcher(addr, len, "wiimmfi.de");
+	
+	//else if(privateServer == PRIVSERV_CUSTOM)
+		//domainpatcher(dst, len, Settings.CustomPrivateServer);
+	
+}
+
+void domainpatcher(void *addr, u32 len, const char* domain)
+{
+	if(strlen("nintendowifi.net") < strlen(domain))
+		return;
+
+	char *cur = (char *)addr;
+	const char *end = cur + len - 16;
+	
+	do
+	{
+		if (memcmp(cur, "nintendowifi.net", 16) == 0)
+		{
+			int len = strlen(cur);
+			u8 i;
+			memcpy(cur, domain, strlen(domain));
+			memmove(cur + strlen(domain), cur + 16, len - 16);
+			for(i = 16 - strlen(domain); i > 0 ; i--)
+				cur[len - i ] = 0;
+			cur += len;
+		}
+	} while (++cur < end);
 }
 
 bool NSMBPatch()

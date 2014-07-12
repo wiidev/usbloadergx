@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# schinese.lang - r1215
+# schinese.lang - r1227
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-25 15:06+0200\n"
+"POT-Creation-Date: 2014-07-12 14:51+0200\n"
 "PO-Revision-Date: 2013-08-13 07:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: oCameLo\n"
@@ -33,23 +33,23 @@ msgstr "缺少 %i 个文件"
 
 #, c-format
 msgid "%s only accepts GameCube backups in ISO format."
-msgstr ""
+msgstr "%s只能识别Gamecube备份格式的ISO镜像文件。"
 
 #, c-format
 msgid "%s requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."
-msgstr ""
+msgstr "%s需要AHB漏洞开启！请从HBC或者更新频道或者Forwarder运行USB loader GX程序。"
 
 msgid "--==       Devolution"
-msgstr ""
+msgstr "--==       Devolution"
 
 msgid "--==       Nintendont"
-msgstr ""
+msgstr "--==       Nintendont"
 
 msgid "--==   DIOS MIOS (Lite) "
-msgstr ""
+msgstr "--==   DIOS MIOS (Lite) "
 
 msgid "--==  DM(L) + Nintendont"
-msgstr ""
+msgstr "--==  DM(L) + Nintendont"
 
 msgid "0 (Everyone)"
 msgstr "0 (全年龄)"
@@ -94,13 +94,13 @@ msgid "5 min"
 msgstr "5 分钟"
 
 msgid "=== GameCube Settings"
-msgstr ""
+msgstr "=== GameCube 设置"
 
 msgid "AUTO"
 msgstr "自动"
 
 msgid "AXNextFrame"
-msgstr ""
+msgstr "AXNextFrame"
 
 msgid "Add category"
 msgstr "添加分类"
@@ -137,9 +137,6 @@ msgstr "一个实例文件已创建于："
 
 msgid "Animation Start"
 msgstr "动画缩图启动"
-
-msgid "Anti"
-msgstr "防止"
 
 msgid "App Language"
 msgstr "语言设定"
@@ -190,7 +187,7 @@ msgid "Auto"
 msgstr "自动"
 
 msgid "Auto Boot"
-msgstr ""
+msgstr "自动运行"
 
 msgid "AutoInit Network"
 msgstr "自动检测网络"
@@ -518,7 +515,7 @@ msgid "Customs/Original"
 msgstr "自制/官方"
 
 msgid "D Buttons"
-msgstr ""
+msgstr "D键"
 
 msgid "DOL Path"
 msgstr "DOL 路径"
@@ -584,7 +581,7 @@ msgid "Developer:"
 msgstr "开发者："
 
 msgid "Devolution"
-msgstr ""
+msgstr "Devolution"
 
 msgid "Devolution Loader Path"
 msgstr "Devolution 加载器路径"
@@ -596,10 +593,10 @@ msgid "Directory does not exist!"
 msgstr "目录不存在！"
 
 msgid "Disc 1"
-msgstr ""
+msgstr "光盘 1"
 
 msgid "Disc 2"
-msgstr ""
+msgstr "光盘 2"
 
 msgid "Disc Artwork Download"
 msgstr "光盘图片下载"
@@ -698,7 +695,7 @@ msgid "Do you wish to update/download all language files?"
 msgstr "升级/下载语言文件？"
 
 msgid "Dol Video Patch"
-msgstr ""
+msgstr "DOL视频补丁"
 
 msgid "Download"
 msgstr "下载"
@@ -774,9 +771,6 @@ msgstr "错误"
 
 msgid "Error !"
 msgstr "错误！"
-
-msgid "Error 002 fix"
-msgstr "002 错误修正"
 
 #, c-format
 msgid "Error creating path: %s"
@@ -859,7 +853,7 @@ msgid "Extracting nand files:"
 msgstr "正在提取 Nand 文件："
 
 msgid "F-Zero AX"
-msgstr ""
+msgstr "F-Zero AX"
 
 msgid "Failed"
 msgstr "已失败"
@@ -956,7 +950,7 @@ msgid "Force Titles from Disc"
 msgstr "强制从光盘读取标题"
 
 msgid "Force Widescreen"
-msgstr ""
+msgstr "强制宽屏"
 
 msgid "Format"
 msgstr "格式化"
@@ -1034,10 +1028,10 @@ msgid "GUI Settings"
 msgstr "界面设置"
 
 msgid "GXDraw"
-msgstr ""
+msgstr "GXDraw"
 
 msgid "GXFlush"
-msgstr ""
+msgstr "GXFlush"
 
 msgid "Game Cube Games Delete"
 msgstr "GameCube 游戏删除"
@@ -1085,13 +1079,13 @@ msgid "Game is already installed:"
 msgstr "游戏已安装："
 
 msgid "Game's IOS"
-msgstr ""
+msgstr "游戏的IOS"
 
 msgid "Game/Install Partition"
 msgstr "游戏/安装分区"
 
 msgid "GameCube"
-msgstr ""
+msgstr "GameCube"
 
 msgid "GameCube Mode"
 msgstr "GameCube 模式"
@@ -1180,7 +1174,7 @@ msgid "Incoming file %0.2fMB"
 msgstr "正在接收文件 %0.2fMB"
 
 msgid "Individual"
-msgstr ""
+msgstr "个人"
 
 msgid "Initializing Network"
 msgstr "正在启动网络"
@@ -1246,10 +1240,10 @@ msgid "Japanese"
 msgstr "日文"
 
 msgid "Japanese Patch"
-msgstr ""
+msgstr "日语补丁"
 
 msgid "Joypad"
-msgstr ""
+msgstr "摇杆"
 
 msgid "July"
 msgstr "七月"
@@ -1258,7 +1252,7 @@ msgid "June"
 msgstr "六月"
 
 msgid "KPAD Read"
-msgstr ""
+msgstr "KPAD Read"
 
 msgid "Keyboard"
 msgstr "键盘"
@@ -1267,7 +1261,7 @@ msgid "Korean"
 msgstr "韩文"
 
 msgid "LED Activity"
-msgstr ""
+msgstr "LED灯显示开启"
 
 msgid "Language Files"
 msgstr "语言文件"
@@ -1313,7 +1307,7 @@ msgid "Loader Settings"
 msgstr "加载器设置"
 
 msgid "Loader's IOS"
-msgstr ""
+msgstr "加载器的IOS"
 
 msgid "Loading standard language."
 msgstr "加载标准语言。"
@@ -1370,7 +1364,7 @@ msgid "May"
 msgstr "五月"
 
 msgid "Memory Card Emulation"
-msgstr ""
+msgstr "记忆卡模拟"
 
 msgid "Messageboard Update"
 msgstr "留言板更新"
@@ -1382,7 +1376,7 @@ msgid "Mount DVD drive"
 msgstr "挂载 DVD 光驱"
 
 msgid "Mount USB at launch"
-msgstr ""
+msgstr "开启时加载USB设备"
 
 msgid "Multiple Partitions"
 msgstr "多分区"
@@ -1394,7 +1388,7 @@ msgid "Music Volume"
 msgstr "音量"
 
 msgid "NMM Mode"
-msgstr ""
+msgstr "免记忆卡模式"
 
 msgid "Nand Chan. Emulation"
 msgstr "Nand 频道模拟"
@@ -1430,10 +1424,10 @@ msgid "Next"
 msgstr "往后"
 
 msgid "Nintendont"
-msgstr ""
+msgstr "Nintendont"
 
 msgid "Nintendont Loader Path"
-msgstr ""
+msgstr "Nintendont加载器补丁"
 
 msgid "No"
 msgstr "否"
@@ -1445,7 +1439,7 @@ msgid "No DOL file found on disc."
 msgstr "光盘中未找到 DOL 文件。"
 
 msgid "No Disc+"
-msgstr ""
+msgstr "无光盘"
 
 msgid "No Splitting"
 msgstr "不分割"
@@ -1488,6 +1482,9 @@ msgstr "网站上没找到主题。"
 
 msgid "No themes found."
 msgstr "没有找到主题。"
+
+msgid "NoSSL only"
+msgstr ""
 
 msgid "None"
 msgstr "无"
@@ -1550,7 +1547,7 @@ msgid "ON"
 msgstr "开启"
 
 msgid "OSSleepThread"
-msgstr ""
+msgstr "OSSleepThread"
 
 msgid "Ocarina"
 msgstr "Ocarina 金手指"
@@ -1565,7 +1562,7 @@ msgid "Offset"
 msgstr "偏移位"
 
 msgid "Ok"
-msgstr ""
+msgstr "确定"
 
 msgid "Only Game Partition"
 msgstr "仅游戏分区"
@@ -1580,7 +1577,7 @@ msgid "Original/Customs"
 msgstr "官方/自制"
 
 msgid "PAD Hook"
-msgstr ""
+msgstr "PAD Hook"
 
 msgid "Parental Control"
 msgstr "家长控制"
@@ -1642,11 +1639,14 @@ msgstr "关闭 Wii 主机"
 msgid "Prev"
 msgstr "往前"
 
+msgid "Private Server"
+msgstr ""
+
 msgid "Process finished."
 msgstr "操作已完成。"
 
 msgid "Progressive Patch"
-msgstr ""
+msgstr "步进补丁"
 
 msgid "Prompts Buttons"
 msgstr "显示校正"
@@ -1763,7 +1763,7 @@ msgid "Screensaver"
 msgstr "屏幕保护"
 
 msgid "Screenshot"
-msgstr ""
+msgstr "截图"
 
 msgid "Select"
 msgstr "选择"
@@ -1974,7 +1974,7 @@ msgid "This IOS was not found on the titles list. If you are sure you have it in
 msgstr "在 titles 列表中未找到该 IOS 。如果你确定已安装则可忽略该警告。"
 
 msgid "This Nintendont version does not support games on USB."
-msgstr ""
+msgstr "Nintendont版本不支持在USB上运行游戏。"
 
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "该游戏有多张光盘。请选择想要加载的光盘。"
@@ -1986,7 +1986,7 @@ msgid "Time left:"
 msgstr "剩余时间："
 
 msgid "Timer Fix"
-msgstr ""
+msgstr "定时器修复"
 
 msgid "Title Launcher"
 msgstr "系统频道"
@@ -1999,41 +1999,41 @@ msgstr "想要加载光盘上的 GameCube 游戏，请将游戏设置中的 Game
 
 #, c-format
 msgid "To run GameCube games with %s you need to place them on an USB FAT32 partition."
-msgstr ""
+msgstr "为了运行Gamecube游戏需要用%s替换在fat32分区usb上面的内容。"
 
 #, c-format
 msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."
-msgstr ""
+msgstr "为了运行Gamecube游戏需要用%s设置你的'主Gamecube路径'在主分区上."
 
 #, c-format
 msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
-msgstr ""
+msgstr "为了运行Gamecube游戏需要用%s设置你的'主Gamecube路径'在第一个主分区上."
 
 #, c-format
 msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."
-msgstr ""
+msgstr "为了运行Gamecube游戏需要用%s设置你的'主Gamecube路径'在FAT32放到usb分区上."
 
 #, c-format
 msgid "To run GameCube games with %s you need to use a 512 bytes/sector Hard Drive."
-msgstr ""
+msgstr "为了运行Gamecube游戏需要用%s使用512字节/扇区的硬盘。"
 
 #, c-format
 msgid "To run GameCube games with %s you need to use a partition with 32k bytes/cluster or less."
-msgstr ""
+msgstr "为了运行Gamecube游戏需要用%s使用32k字节/簇或者小于的硬盘。"
 
 msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Loader Path."
-msgstr ""
+msgstr "为了使用Devolution运行Gamecube游戏，你需要放置loader.bin文件在Devolution加载器的目录中。"
 
 msgid "To run GameCube games with Nintendont you need the boot.dol file in your Nintendont Loader Path."
-msgstr ""
+msgstr "为了使用Nintendont运行Gamecube游戏，你需要放置boot.dol文件在Nintendont加载器的目录中。"
 
 #, c-format
 msgid "To use HID with %s you need the %s file."
-msgstr ""
+msgstr "为了使用HID %s 你需要%s文件。"
 
 #, c-format
 msgid "To use ocarina with %s you need the %s file."
-msgstr ""
+msgstr "为了是哦那个金手指%s你需要 %s 文件。 "
 
 msgid "Tooltip Delay"
 msgstr "提示信息延迟时间"
@@ -2045,7 +2045,7 @@ msgid "Transfer failed"
 msgstr "传输失败"
 
 msgid "USB Device not initialized."
-msgstr ""
+msgstr "USB设备无法初始化。"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX 被锁定"
@@ -2057,16 +2057,16 @@ msgid "USB Port changing is only supported on Hermes cIOS."
 msgstr "仅 Hermes cIOS 支持改变 USB 接口。"
 
 msgid "USB-HID Controller"
-msgstr ""
+msgstr "USB—HID手柄"
 
 msgid "USBloaderGX couldn't verify Nintendont boot.dol file. Launch this boot.dol anyway?"
-msgstr ""
+msgstr "USBloaderGX不能验证Nintendont boot.dol文件。无论如何都运行此boot。dol程序？"
 
 msgid "USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyway?"
-msgstr ""
+msgstr "USBloaderGX不能写Nintendont设置文件，是否运行Nintendont？"
 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
-msgstr ""
+msgstr "USBloaderGX r1218之针对nintendont Alpha v0.1，请更新你的Nintendont boot。dol版本。"
 
 msgid "Uninstall"
 msgstr "删除"
@@ -2121,9 +2121,6 @@ msgstr "正在升级语言文件："
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "上传已安装 Zip 文件到自制程序目录"
-
-msgid "Use Game Settings"
-msgstr "使用游戏设置"
 
 msgid "Use System Font"
 msgstr "使用系统字体"
@@ -2202,7 +2199,7 @@ msgid "Wii Settings"
 msgstr "Wii 设置"
 
 msgid "WiiTDB.xml"
-msgstr ""
+msgstr "WiiTDB.xml"
 
 msgid "WiiTDB.xml is up to date."
 msgstr "WiiTDB.xml 已是最新版。"
@@ -2210,8 +2207,11 @@ msgstr "WiiTDB.xml 已是最新版。"
 msgid "Wiilight"
 msgstr "光驱灯"
 
-msgid "Wiinnertag"
+msgid "Wiimmfi.de"
 msgstr ""
+
+msgid "Wiinnertag"
+msgstr "Wiinnertag"
 
 msgid "Wiinnertag Path"
 msgstr "Wiinnertag 路径"
@@ -2248,7 +2248,7 @@ msgid "You need to install DIOS MIOS Lite v1.2 or a newer version."
 msgstr "你需要安装 DIOS-MIOS Lite v1.2 或更新版本。"
 
 msgid "You need to install an additional GameCube loader or select a different GameCube Mode to launch GameCube games from USB or SD card."
-msgstr ""
+msgstr "你需要安装另外的Gamecube加载器或者选择不同的Gamecub模式来从usb或者sd卡运行Gamecube游戏。"
 
 msgid "Zoom Duration (Speed)"
 msgstr "缩放间隔 (速度)"
@@ -2309,6 +2309,15 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "Error 002 fix"
+#~ msgstr "002 错误修正"
+
+#~ msgid "Use Game Settings"
+#~ msgstr "使用游戏设置"
+
+#~ msgid "Anti"
+#~ msgstr "防止"
 
 #~ msgid "Main tester:"
 #~ msgstr "主要测试员："

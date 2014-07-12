@@ -224,6 +224,7 @@ bool CGameSettings::Save()
 		fprintf(f, "DEVOFZeroAX:%d; ", GameList[i].DEVOFZeroAX);
 		fprintf(f, "DEVOTimerFix:%d; ", GameList[i].DEVOTimerFix);
 		fprintf(f, "DEVODButtons:%d; ", GameList[i].DEVODButtons);
+		fprintf(f, "PrivateServer:%d; ", GameList[i].PrivateServer);
 		fprintf(f, "Locked:%d;\n", GameList[i].Locked);
 	}
 	fprintf(f, "# END\n");
@@ -429,6 +430,11 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		game.DEVODButtons = atoi(value);
 		return true;
 	}
+	else if(strcmp(name, "PrivateServer") == 0)
+	{
+		game.PrivateServer = atoi(value);
+		return true;
+	}
 
 	return false;
 }
@@ -568,5 +574,6 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.DEVOFZeroAX = INHERIT;
 	game.DEVOTimerFix = INHERIT;
 	game.DEVODButtons = INHERIT;
+	game.PrivateServer = INHERIT;
 	game.Locked = OFF;
 }

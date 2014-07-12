@@ -48,6 +48,7 @@ typedef struct _GameCFG
 	short DEVOFZeroAX;
 	short DEVOTimerFix;
 	short DEVODButtons;
+	short PrivateServer;
 	short Locked;
 
 	void operator=(const struct _GameCFG &game)
@@ -91,6 +92,7 @@ typedef struct _GameCFG
 		this->DEVOFZeroAX = game.DEVOFZeroAX;
 		this->DEVOTimerFix = game.DEVOTimerFix;
 		this->DEVODButtons = game.DEVODButtons;
+		this->PrivateServer = game.PrivateServer;
 		this->Locked = game.Locked;
 	}
 } GameCFG;
