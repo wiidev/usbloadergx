@@ -359,7 +359,12 @@ u8 IosLoader::GetDMLVersion(char* releaseDate)
 		strptime("May 24 2013 21:22:22", "%b %d %Y %H:%M:%S", &time);
 		const time_t dm_2_10_time = mktime(&time);
 
-		if(difftime(unixTime, dm_2_10_time) >= 0) 			currentDMLVersion = DML_VERSION_DM_2_10;
+		// Timestamp of DM 2.11
+		strptime("Jul  2 2014 10:31:15", "%b %d %Y %H:%M:%S", &time);
+		const time_t dm_2_11_time = mktime(&time);
+
+		if(difftime(unixTime, dm_2_11_time) >= 0) 			currentDMLVersion = DML_VERSION_DM_2_11;
+		else if(difftime(unixTime, dm_2_10_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_10;
 		else if(difftime(unixTime, dm_2_9_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_9;
 		else if(difftime(unixTime, dm_2_8_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_8;
 		else if(difftime(unixTime, dm_2_7_time) >= 0) 		currentDMLVersion = DML_VERSION_DM_2_7;
@@ -434,7 +439,12 @@ u8 IosLoader::GetDMLVersion(char* releaseDate)
 		strptime("May 24 2013 18:51:58", "%b %d %Y %H:%M:%S", &time);
 		const time_t dml_2_10_time = mktime(&time);
 
-		if(difftime(unixTime, dml_2_10_time) >= 0) 			currentDMLVersion = DML_VERSION_DML_2_10;
+		// Timestamp of DML 2.11
+		strptime("Jul  2 2014 10:31:06", "%b %d %Y %H:%M:%S", &time);
+		const time_t dml_2_11_time = mktime(&time);
+
+		if(difftime(unixTime, dml_2_11_time) >= 0) 			currentDMLVersion = DML_VERSION_DML_2_11;
+		else if(difftime(unixTime, dml_2_10_time) >= 0) 	currentDMLVersion = DML_VERSION_DML_2_10;
 		else if(difftime(unixTime, dml_2_9_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_9;
 		else if(difftime(unixTime, dml_2_8_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_8;
 		else if(difftime(unixTime, dml_2_7_time) >= 0) 		currentDMLVersion = DML_VERSION_DML_2_7;

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-12 14:51+0200\n"
+"POT-Creation-Date: 2014-07-14 18:18+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -690,6 +690,9 @@ msgstr ""
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Vil du synkronisere ledig plass info sektor på alle FAT32 partisjoner?"
+
+msgid "Do you want to update this file?"
+msgstr ""
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Vil du oppdatere/laste ned alle språkfiler?"
@@ -2103,6 +2106,9 @@ msgstr "Oppdater DOL"
 
 msgid "Update Files"
 msgstr "Oppdater filer"
+
+msgid "Update Nintendont"
+msgstr ""
 
 msgid "Update Path"
 msgstr "Oppdatering sti"

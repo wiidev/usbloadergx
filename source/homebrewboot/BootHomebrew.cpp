@@ -29,9 +29,15 @@ static u8 *homebrewbuffer = EXECUTE_ADDR;
 static u32 homebrewsize = 0;
 static std::vector<std::string> Arguments;
 
-void AddBootArgument(const char * argv)
+void AddBootArgument(const char *argv)
 {
 	std::string arg(argv);
+	Arguments.push_back(arg);
+}
+
+void AddBootArgument(const char *argv, unsigned int size)
+{
+	std::string arg(argv, size);
 	Arguments.push_back(arg);
 }
 
@@ -80,7 +86,7 @@ static int SetupARGV(struct __argv * args)
 	/** Append Arguments **/
 	for (u32 i = 0; i < Arguments.size(); i++)
 	{
-		strcpy(&args->commandLine[position], Arguments[i].c_str());
+		memcpy(&args->commandLine[position], Arguments[i].c_str(), Arguments[i].size() +1);
 		position += Arguments[i].size() + 1;
 		argc++;
 	}

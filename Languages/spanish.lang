@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-12 14:51+0200\n"
+"POT-Creation-Date: 2014-07-14 18:18+0200\n"
 "PO-Revision-Date: 2011-07-25 16:40+0200\n"
 "Last-Translator: Galen/xFede\n"
 "Language-Team: Penn, SirPalax, hvy109\n"
@@ -690,6 +690,9 @@ msgstr "¿Quieres comenzar el juego ahora?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "¿Quieres sincronizar el sector de información de espacio libre en todas las particiones FAT32?"
+
+msgid "Do you want to update this file?"
+msgstr ""
 
 msgid "Do you wish to update/download all language files?"
 msgstr "¿Quieres actualizar/descargar todos los archivos de idiomas?"
@@ -2103,6 +2106,9 @@ msgstr "Actualizar DOL"
 
 msgid "Update Files"
 msgstr "Actual. archivos"
+
+msgid "Update Nintendont"
+msgstr ""
 
 msgid "Update Path"
 msgstr "Ruta Actualización"

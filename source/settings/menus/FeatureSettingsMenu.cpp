@@ -30,6 +30,7 @@
 #include "settings/SettingsPrompts.h"
 #include "network/Wiinnertag.h"
 #include "network/networkops.h"
+#include "network/FileDownloader.h"
 #include "FileOperations/fileops.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/ProgressWindow.h"
@@ -70,6 +71,7 @@ FeatureSettingsMenu::FeatureSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Export SYSCONF to EmuNand" ));
 	Options->SetName(Idx++, "%s", tr( "Dump NAND to EmuNand" ));
 	Options->SetName(Idx++, "%s", tr( "Install WAD to EmuNand" ));
+	Options->SetName(Idx++, "%s", tr( "Update Nintendont" ));
 
 	OldTitlesOverride = Settings.titlesOverride;
 	OldCacheTitles = Settings.CacheTitles;
@@ -145,6 +147,9 @@ void FeatureSettingsMenu::SetOptionValues()
 	Options->SetValue(Idx++, " ");
 
 	//! Settings: Install WAD to EmuNand
+	Options->SetValue(Idx++, " ");
+
+	//! Settings: Update Nintendont
 	Options->SetValue(Idx++, " ");
 }
 
@@ -492,6 +497,31 @@ int FeatureSettingsMenu::GetMenuInternal()
 
 		if(parent) parent->SetState(STATE_DEFAULT);
 		this->Append(optionBrowser);
+	}
+
+	//! Settings: Update Nintendont
+	else if (ret == ++Idx)
+	{
+		char NINUpdatePath[100];
+		snprintf(NINUpdatePath, sizeof(NINUpdatePath), "%sboot.dol", Settings.NINLoaderPath);
+		
+		int choice = WindowPrompt(tr( "Do you want to update this file?" ), NINUpdatePath, tr( "Yes" ), tr( "Cancel" ));
+		if (choice == 1)
+		{
+			// Download latest loader.dol as boot.dol
+			int filesize = DownloadFileToPath("http://nintendon-t.googlecode.com/svn/trunk/loader/loader.dol", NINUpdatePath, false);
+
+			if(filesize <= 0)
+				WindowPrompt(tr( "Update failed" ), 0, tr( "OK" ));
+			else
+			{
+				//remove existing loader.dol file if found as it has priority over boot.dol
+				snprintf(NINUpdatePath, sizeof(NINUpdatePath), "%s/loader.dol", Settings.NINLoaderPath);
+				RemoveFile(NINUpdatePath);
+				
+				WindowPrompt(tr( "Successfully Updated" ), 0, tr( "OK" ));
+			}
+		}
 	}
 
 	SetOptionValues();

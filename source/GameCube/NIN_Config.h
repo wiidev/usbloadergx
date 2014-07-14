@@ -47,7 +47,9 @@ enum ninconfig
 	NIN_CFG_AUTO_BOOT	= (1<<7),
 	NIN_CFG_HID			= (1<<8),
 	NIN_CFG_OSREPORT	= (1<<9),
-	NIN_CFG_USB			= (1<<10),
+	NIN_CFG_USB			= (1<<10),	// r40
+	NIN_CFG_LED			= (1<<11),	// v1.45
+	NIN_CFG_LOG			= (1<<12),	// v1.109
 };
 
 enum ninvideomode

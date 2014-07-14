@@ -995,9 +995,11 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		return 0;
 	}
 	gprintf("NIN: Loader path = %s \n",NIN_loader_path);
+	gprintf("NIN: Game path   = %s \n",RealPath);
 
 	// Check Nintendont version
 	u32 NIN_cfg_version = NIN_CFG_VERSION;
+	bool NINArgsboot = false;
 	u8 *buffer = NULL;
 	u32 filesize = 0;
 	if(LoadFileToMem(NIN_loader_path, &buffer, &filesize))
@@ -1047,6 +1049,18 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 				}
 				found = true;
 				break;
+			}
+		}
+		if(found)
+		{
+			for(u32 i = 0; i < filesize; i += 0x10)
+			{
+				if((*(u32*)(buffer+i)) == 'args' && (*(u32*)(buffer+i+4)) == 'boot')
+				{
+					gprintf("NIN: argsboot found at %08x, using arguments instead of Nincfg.bin\n", i);
+					NINArgsboot = true;
+					break;
+				}
 			}
 		}
 		free(buffer);
@@ -1173,10 +1187,6 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		snprintf(gamePath, sizeof(gamePath), "%s/disc2.iso", gamePath);
 	}
 
-	// Nintendont Config file path
-	char NINCfgPath[17];
-	snprintf(NINCfgPath, sizeof(NINCfgPath), "%s:/nincfg.bin", DeviceHandler::GetDevicePrefix(NIN_loader_path));
-	gprintf("NIN: Cfg path : %s \n", NINCfgPath);
 
 	// Nintendont Config file settings
 	NIN_CFG *nin_config = NULL;
@@ -1293,40 +1303,69 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	}
 	gprintf("NIN: Language 0x%08x \n", nin_config->Language);
 
-	//write config file to nintendont's partition root.
-	FILE *fp = fopen(NINCfgPath, "wb");
-	if (fp)
+	// Delete existing nincfg.bin files
+	RemoveFile("sd:/nincfg.bin");
+	RemoveFile("usb1:/nincfg.bin");
+	
+	if(NINArgsboot)
 	{
-		fwrite (nin_config , sizeof(char), sizeof(NIN_CFG), fp);
-		fclose(fp);
+		// initialize homebrew and arguments
+		buffer = NULL;
+		filesize = 0;
+		LoadFileToMem(NIN_loader_path, &buffer, &filesize);
+		if(!buffer)
+		{
+			return 0;
+		}
+		FreeHomebrewBuffer();
+		CopyHomebrewMemory(buffer, 0, filesize);
+		
+		AddBootArgument(NIN_loader_path);
+		AddBootArgument((char*)nin_config, sizeof(NIN_CFG));
+		
+		// Launch Nintendont
+		return !(BootHomebrewFromMem() < 0);
 	}
 	else
 	{
-		gprintf("Could not open NINCfgPath in write mode");
-		int choice = WindowPrompt(tr("Warning:"), tr("USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyway?"), tr("Yes"), tr("Cancel"));
-		if(choice == 0)
-			return 0;
-	}
+		// Nintendont Config file path
+		char NINCfgPath[17];
+		snprintf(NINCfgPath, sizeof(NINCfgPath), "%s:/nincfg.bin", DeviceHandler::GetDevicePrefix(NIN_loader_path));
+		gprintf("NIN: Cfg path : %s \n", NINCfgPath);
 
-	// Copy Nintendont Config file to game path
-	if(strncmp(NINCfgPath, RealPath, 2) != 0)
-	{
-		char NINDestPath[17];
-		snprintf(NINDestPath, sizeof(NINDestPath), "%s:/nincfg.bin", DeviceHandler::GetDevicePrefix(RealPath));
-		gprintf("NIN: Copying %s to %s...", NINCfgPath, NINDestPath);
-		if(CopyFile(NINCfgPath, NINDestPath) < 0)
+		//write config file to nintendont's partition root.
+		FILE *fp = fopen(NINCfgPath, "wb");
+		if (fp)
 		{
-			gprintf("\nError: Couldn't copy %s to %s.\n", NINCfgPath, NINDestPath);
-			RemoveFile(NINDestPath);
-			if(WindowPrompt(tr("Warning:"), tr("USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyway?"), tr("Yes"), tr("Cancel")) == 0)
+			fwrite (nin_config , sizeof(char), sizeof(NIN_CFG), fp);
+			fclose(fp);
+		}
+		else
+		{
+			gprintf("Could not open NINCfgPath in write mode");
+			int choice = WindowPrompt(tr("Warning:"), tr("USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyway?"), tr("Yes"), tr("Cancel"));
+			if(choice == 0)
 				return 0;
 		}
-		gprintf("done\n");
+
+		// Copy Nintendont Config file to game path
+		if(strncmp(NINCfgPath, RealPath, 2) != 0)
+		{
+			char NINDestPath[17];
+			snprintf(NINDestPath, sizeof(NINDestPath), "%s:/nincfg.bin", DeviceHandler::GetDevicePrefix(RealPath));
+			gprintf("NIN: Copying %s to %s...", NINCfgPath, NINDestPath);
+			if(CopyFile(NINCfgPath, NINDestPath) < 0)
+			{
+				gprintf("\nError: Couldn't copy %s to %s.\n", NINCfgPath, NINDestPath);
+				RemoveFile(NINDestPath);
+				if(WindowPrompt(tr("Warning:"), tr("USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyway?"), tr("Yes"), tr("Cancel")) == 0)
+					return 0;
+			}
+			gprintf("done\n");
+		}
+		// Launch Nintendont
+		return !(BootHomebrew(NIN_loader_path) < 0);
 	}
-
-
-	// Launch Nintendont
-	return !(BootHomebrew(NIN_loader_path) < 0);
 }
 
 void GameBooter::PatchSram(int language, bool patchVideoMode, bool progressive)

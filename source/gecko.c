@@ -76,7 +76,7 @@ void hexdump(void *d, int len)
 	int i, off;
 	data = (u8*) d;
 
-	gprintf("\n	   0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F  0123456789ABCDEF");
+	gprintf("\n       0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F  0123456789ABCDEF");
 	gprintf("\n====  ===============================================  ================\n");
 
 	for (off = 0; off < len; off += 16)

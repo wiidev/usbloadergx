@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-12 14:51+0200\n"
+"POT-Creation-Date: 2014-07-14 18:18+0200\n"
 "PO-Revision-Date: 2013-08-13 07:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: oCameLo\n"
@@ -690,6 +690,9 @@ msgstr "是否立刻开始游戏？"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "是否同步剩余空间信息扇区到所有 FAT32 分区？"
+
+msgid "Do you want to update this file?"
+msgstr ""
 
 msgid "Do you wish to update/download all language files?"
 msgstr "升级/下载语言文件？"
@@ -2103,6 +2106,9 @@ msgstr "仅升级主程序"
 
 msgid "Update Files"
 msgstr "升级文件"
+
+msgid "Update Nintendont"
+msgstr ""
 
 msgid "Update Path"
 msgstr "升级文件存放路径"
