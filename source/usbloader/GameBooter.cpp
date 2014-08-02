@@ -931,6 +931,11 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	u8 ninDebugChoice = game_cfg->DMLDebug == INHERIT ? Settings.DMLDebug : game_cfg->DMLDebug;
 	u8 ninAutobootChoice = Settings.NINAutoboot;
 	u8 ninUSBHIDChoice = game_cfg->NINUSBHID == INHERIT ? Settings.NINUSBHID : game_cfg->NINUSBHID;
+	u8 ninMaxPadsChoice = game_cfg->NINMaxPads == INHERIT ? Settings.NINMaxPads : game_cfg->NINMaxPads;
+	u8 ninLEDChoice = game_cfg->NINLED == INHERIT ? Settings.NINLED : game_cfg->NINLED;
+	u8 ninOSReportChoice = game_cfg->NINOSReport == INHERIT ? Settings.NINOSReport : game_cfg->NINOSReport;
+	u8 ninLogChoice = game_cfg->NINLog == INHERIT ? Settings.NINLog : game_cfg->NINLog;
+	const char *ninLoaderPath = game_cfg->NINLoaderPath.size() == 0 ? Settings.NINLoaderPath : game_cfg->NINLoaderPath.c_str();
 
 	if(gameHdr->type == TYPE_GAME_GC_DISC)
 	{
@@ -978,15 +983,15 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	char NIN_loader_path[255];
 	if(strncmp(RealPath, "usb", 3) == 0) // Nintendont r39 only
  	{
-		snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sloaderusb.dol", Settings.NINLoaderPath);
+		snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sloaderusb.dol", ninLoaderPath);
 		if(!CheckFile(NIN_loader_path))
-			snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sbootusb.dol", Settings.NINLoaderPath);
+			snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sbootusb.dol", ninLoaderPath);
 	}
 	if(strncmp(RealPath, "sd", 2) == 0 || !CheckFile(NIN_loader_path))
 	{	
-		snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sloader.dol", Settings.NINLoaderPath);
+		snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sloader.dol", ninLoaderPath);
 		if(!CheckFile(NIN_loader_path))
-			snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sboot.dol", Settings.NINLoaderPath);
+			snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sboot.dol", ninLoaderPath);
 	}
 	if(!CheckFile(NIN_loader_path))
 	{
@@ -1244,14 +1249,17 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		nin_config->Config |= NIN_CFG_AUTO_BOOT;
 	if(ninUSBHIDChoice)
 		nin_config->Config |= NIN_CFG_HID; // auto enabled by nintendont on vWii
-	if(!IosLoader::isWiiU())
-		nin_config->Config |= NIN_CFG_OSREPORT; // log OS reports only on Wii. todo: add a user setting?
+	if(ninOSReportChoice)
+		nin_config->Config |= NIN_CFG_OSREPORT;
 	if(strncmp(RealPath, "usb", 3) == 0)
 		nin_config->Config |= NIN_CFG_USB; // r40+
+	if(ninLEDChoice)
+		nin_config->Config |= NIN_CFG_LED; // r45+
+	if(ninLogChoice)
+		nin_config->Config |= NIN_CFG_LOG; // v1.109+
 	
-
-	// Max Pads - Make a proper setting later
-	nin_config->MaxPads = 4; // NIN_CFG_VERSION 2 r42
+	// Max Pads - Auto disabled by nintendont on vWii
+	nin_config->MaxPads = (!IosLoader::isWiiU() && !ninUSBHIDChoice && ninMaxPadsChoice == 0) ? 4 : ninMaxPadsChoice; // NIN_CFG_VERSION 2 r42
 	
 	// GameID for MCEmu
 	memcpy(&nin_config->GameID, gameHdr->id, 4); // NIN_CFG_VERSION 2 r83

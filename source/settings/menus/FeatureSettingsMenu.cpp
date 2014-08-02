@@ -504,22 +504,41 @@ int FeatureSettingsMenu::GetMenuInternal()
 	{
 		char NINUpdatePath[100];
 		snprintf(NINUpdatePath, sizeof(NINUpdatePath), "%sboot.dol", Settings.NINLoaderPath);
+		char NINUpdatePathBak[100];
+		snprintf(NINUpdatePathBak, sizeof(NINUpdatePathBak), "%sboot.bak", Settings.NINLoaderPath);
 		
 		int choice = WindowPrompt(tr( "Do you want to update this file?" ), NINUpdatePath, tr( "Yes" ), tr( "Cancel" ));
 		if (choice == 1)
 		{
-			// Download latest loader.dol as boot.dol
-			int filesize = DownloadFileToPath("http://nintendon-t.googlecode.com/svn/trunk/loader/loader.dol", NINUpdatePath, false);
-
-			if(filesize <= 0)
-				WindowPrompt(tr( "Update failed" ), 0, tr( "OK" ));
+			if (!IsNetworkInit() && !NetworkInitPrompt())
+			{
+				WindowPrompt(tr("Error !"), tr("Could not initialize network!"), tr("OK"));
+			}
 			else
 			{
-				//remove existing loader.dol file if found as it has priority over boot.dol
-				snprintf(NINUpdatePath, sizeof(NINUpdatePath), "%s/loader.dol", Settings.NINLoaderPath);
-				RemoveFile(NINUpdatePath);
+				// Rename existing boot.dol file to boot.bak
+				if(CheckFile(NINUpdatePath))
+					RenameFile(NINUpdatePath, NINUpdatePathBak);
 				
-				WindowPrompt(tr( "Successfully Updated" ), 0, tr( "OK" ));
+				// Download latest loader.dol as boot.dol
+				int filesize = DownloadFileToPath("http://nintendon-t.googlecode.com/svn/trunk/loader/loader.dol", NINUpdatePath, false);
+
+				if(filesize <= 0)
+				{
+					RemoveFile(NINUpdatePath);
+					if(CheckFile(NINUpdatePathBak))
+						RenameFile(NINUpdatePathBak, NINUpdatePath);
+					WindowPrompt(tr( "Update failed" ), 0, tr( "OK" ));
+				}
+				else
+				{
+					//remove existing loader.dol file if found as it has priority over boot.dol, and boot.bak
+					snprintf(NINUpdatePath, sizeof(NINUpdatePath), "%s/loader.dol", Settings.NINLoaderPath);
+					RemoveFile(NINUpdatePath);
+					RemoveFile(NINUpdatePathBak);
+					
+					WindowPrompt(tr( "Successfully Updated" ), 0, tr( "OK" ));
+				}
 			}
 		}
 	}

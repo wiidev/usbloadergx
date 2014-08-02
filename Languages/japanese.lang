@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-14 18:18+0200\n"
+"POT-Creation-Date: 2014-08-02 18:34+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -1090,6 +1090,9 @@ msgstr "ｹﾞｰﾑのｲﾝｽﾄｰﾙ領域"
 msgid "GameCube"
 msgstr "ゲームキューブ"
 
+msgid "GameCube Controller"
+msgstr ""
+
 msgid "GameCube Mode"
 msgstr "GCモード"
 
@@ -1327,6 +1330,9 @@ msgstr "ロックする"
 msgid "Locked"
 msgstr "ロック中"
 
+msgid "Log to file"
+msgstr ""
+
 msgid "Loop Directory"
 msgstr "フォルダ内でループ"
 
@@ -1548,6 +1554,9 @@ msgstr ""
 
 msgid "ON"
 msgstr "使う"
+
+msgid "OSReport"
+msgstr ""
 
 msgid "OSSleepThread"
 msgstr ""

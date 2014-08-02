@@ -218,6 +218,11 @@ bool CGameSettings::Save()
 		fprintf(f, "DMLDebug:%d; ", GameList[i].DMLDebug);
 		fprintf(f, "NINMCEmulation:%d; ", GameList[i].NINMCEmulation);
 		fprintf(f, "NINUSBHID:%d; ", GameList[i].NINUSBHID);
+		fprintf(f, "NINMaxPads:%d; ", GameList[i].NINMaxPads);
+		fprintf(f, "NINOSReport:%d; ", GameList[i].NINOSReport);
+		fprintf(f, "NINLED:%d; ", GameList[i].NINLED);
+		fprintf(f, "NINLog:%d; ", GameList[i].NINLog);
+		fprintf(f, "NINLoaderPath:%s; ", GameList[i].NINLoaderPath.c_str());
 		fprintf(f, "DEVOMCEmulation:%d; ", GameList[i].DEVOMCEmulation);
 		fprintf(f, "DEVOWidescreen:%d; ", GameList[i].DEVOWidescreen);
 		fprintf(f, "DEVOActivityLED:%d; ", GameList[i].DEVOActivityLED);
@@ -400,6 +405,31 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		game.NINUSBHID = atoi(value);
 		return true;
 	}
+	else if(strcmp(name, "NINMaxPads") == 0)
+	{
+		game.NINMaxPads = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "NINOSReport") == 0)
+	{
+		game.NINOSReport = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "NINLED") == 0)
+	{
+		game.NINLED = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "NINLog") == 0)
+	{
+		game.NINLog = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "NINLoaderPath") == 0)
+	{
+		game.NINLoaderPath = value;
+		return true;
+	}
 	else if(strcmp(name, "DEVOMCEmulation") == 0)
 	{
 		game.DEVOMCEmulation = atoi(value);
@@ -568,6 +598,11 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.DMLDebug = INHERIT;
 	game.NINMCEmulation = INHERIT;
 	game.NINUSBHID = INHERIT;
+	game.NINMaxPads = INHERIT;
+	game.NINOSReport = INHERIT;
+	game.NINLED = INHERIT;
+	game.NINLog = INHERIT;
+	game.NINLoaderPath.clear();
 	game.DEVOMCEmulation = INHERIT;
 	game.DEVOWidescreen = INHERIT;
 	game.DEVOActivityLED = INHERIT;

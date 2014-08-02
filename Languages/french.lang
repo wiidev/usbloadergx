@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1228
+# French.lang - r1230
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-14 18:18+0200\n"
+"POT-Creation-Date: 2014-08-02 18:34+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -1090,6 +1090,9 @@ msgstr "Partition jeu/install."
 msgid "GameCube"
 msgstr ""
 
+msgid "GameCube Controller"
+msgstr "Manette GameCube"
+
 msgid "GameCube Mode"
 msgstr "Mode GameCube"
 
@@ -1327,6 +1330,9 @@ msgstr "Verrouiller USB Loader GX"
 msgid "Locked"
 msgstr "Clic pour déverrouiller"
 
+msgid "Log to file"
+msgstr "Fichier de logs"
+
 msgid "Loop Directory"
 msgstr "Répéter dossier"
 
@@ -1548,6 +1554,9 @@ msgstr ""
 
 msgid "ON"
 msgstr "Actif"
+
+msgid "OSReport"
+msgstr ""
 
 msgid "OSSleepThread"
 msgstr ""
@@ -2108,7 +2117,7 @@ msgid "Update Files"
 msgstr "MàJ Fichiers"
 
 msgid "Update Nintendont"
-msgstr ""
+msgstr "Mettre Nintendont à jour"
 
 msgid "Update Path"
 msgstr "Dossier de mise à jour"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-14 18:18+0200\n"
+"POT-Creation-Date: 2014-08-02 18:34+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -1090,6 +1090,9 @@ msgstr ""
 msgid "GameCube"
 msgstr ""
 
+msgid "GameCube Controller"
+msgstr ""
+
 msgid "GameCube Mode"
 msgstr ""
 
@@ -1327,6 +1330,9 @@ msgstr "Zamcení USB Loader GX"
 msgid "Locked"
 msgstr "Zamceno"
 
+msgid "Log to file"
+msgstr ""
+
 msgid "Loop Directory"
 msgstr "Adresárová smycka"
 
@@ -1548,6 +1554,9 @@ msgstr ""
 
 msgid "ON"
 msgstr "Zapnuto"
+
+msgid "OSReport"
+msgstr ""
 
 msgid "OSSleepThread"
 msgstr ""

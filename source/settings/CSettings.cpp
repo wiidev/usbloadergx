@@ -183,9 +183,13 @@ void CSettings::SetDefault()
 	DMLScreenshot = OFF;
 	DMLJPNPatch = OFF;
 	DMLDebug = OFF;
-	NINMCEmulation = OFF;
+	NINMCEmulation = ON;
 	NINAutoboot = ON;
 	NINUSBHID = OFF;
+	NINMaxPads = 1;
+	NINOSReport = OFF;
+	NINLED = OFF;
+	NINLog = OFF;
 	DEVOMCEmulation = OFF;
 	DEVOWidescreen = OFF;
 	DEVOActivityLED = ON;
@@ -425,6 +429,10 @@ bool CSettings::Save()
 	fprintf(file, "NINMCEmulation = %d\n", NINMCEmulation);
 	fprintf(file, "NINAutoboot = %d\n", NINAutoboot);
 	fprintf(file, "NINUSBHID = %d\n", NINUSBHID);
+	fprintf(file, "NINMaxPads = %d\n", NINMaxPads);
+	fprintf(file, "NINOSReport = %d\n", NINOSReport);
+	fprintf(file, "NINLED = %d\n", NINLED);
+	fprintf(file, "NINLog = %d\n", NINLog);
 	fprintf(file, "DEVOMCEmulation = %d\n", DEVOMCEmulation);
 	fprintf(file, "DEVOWidescreen = %d\n", DEVOWidescreen);
 	fprintf(file, "DEVOActivityLED = %d\n", DEVOActivityLED);
@@ -906,6 +914,26 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "NINUSBHID") == 0)
 	{
 		NINUSBHID = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINMaxPads") == 0)
+	{
+		NINMaxPads = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINOSReport") == 0)
+	{
+		NINOSReport = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINLED") == 0)
+	{
+		NINLED = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINLog") == 0)
+	{
+		NINLog = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "DEVOMCEmulation") == 0)

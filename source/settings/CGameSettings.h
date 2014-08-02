@@ -42,6 +42,11 @@ typedef struct _GameCFG
 	short DMLDebug;
 	short NINMCEmulation;
 	short NINUSBHID;
+	short NINMaxPads;
+	short NINOSReport;
+	short NINLED;
+	short NINLog;
+	std::string NINLoaderPath;
 	short DEVOMCEmulation;
 	short DEVOWidescreen;
 	short DEVOActivityLED;
@@ -86,6 +91,11 @@ typedef struct _GameCFG
 		this->DMLDebug = game.DMLDebug;
 		this->NINMCEmulation = game.NINMCEmulation;
 		this->NINUSBHID = game.NINUSBHID;
+		this->NINMaxPads = game.NINMaxPads;
+		this->NINOSReport = game.NINOSReport;
+		this->NINLED = game.NINLED;
+		this->NINLog = game.NINLog;
+		this->NINLoaderPath = game.NINLoaderPath;
 		this->DEVOMCEmulation = game.DEVOMCEmulation;
 		this->DEVOWidescreen = game.DEVOWidescreen;
 		this->DEVOActivityLED = game.DEVOActivityLED;

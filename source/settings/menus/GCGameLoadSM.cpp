@@ -186,6 +186,11 @@ void GCGameLoadSM::SetOptionNames()
 		Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
 		Options->SetName(Idx++, "%s", tr( "Debug" ));
 		Options->SetName(Idx++, "%s", tr( "USB-HID Controller" ));
+		Options->SetName(Idx++, "%s", tr( "GameCube Controller" ));
+		Options->SetName(Idx++, "%s", tr( "LED Activity" ));
+		Options->SetName(Idx++, "%s", tr( "OSReport" ));
+		Options->SetName(Idx++, "%s", tr( "Log to file" ));
+		Options->SetName(Idx++, "%s", tr( "Nintendont Loader Path" ));
 	}
 	if(currentGCmode == GC_MODE_DEVOLUTION)
 	{
@@ -353,6 +358,36 @@ void GCGameLoadSM::SetOptionValues()
 			Options->SetValue(Idx++, tr("Use global"));
 		else
 			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINUSBHID]));
+		
+		//! Settings: NIN MaxPads - Number of GameCube Controllers
+		if(GameConfig.NINMaxPads == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%i", GameConfig.NINMaxPads);
+		
+		//! Settings: NIN LED Activity
+		if(GameConfig.NINLED == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINLED]));
+		
+		//! Settings: NIN OS Report
+		if(GameConfig.NINOSReport == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINOSReport]));
+		
+		//! Settings: NIN Log to file
+		if(GameConfig.NINLog == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINLog]));
+		
+		//! Settings: NIN Individual Loader path setting
+		if(GameConfig.NINLoaderPath.size() == 0)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", GameConfig.NINLoaderPath.c_str());
 		
 	}
 	
@@ -583,6 +618,58 @@ int GCGameLoadSM::GetMenuInternal()
 	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
 	{
 		if (++GameConfig.NINUSBHID >= MAX_ON_OFF) GameConfig.NINUSBHID = INHERIT;
+	}
+
+	//! Settings: NIN MaxPads - Number of GameCube Controllers
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.NINMaxPads >= 5) GameConfig.NINMaxPads = INHERIT;
+	}
+
+	//! Settings: NIN LED Activity
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.NINLED >= MAX_ON_OFF) GameConfig.NINLED = INHERIT;
+	}
+
+	//! Settings: NIN OS Report
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.NINOSReport >= MAX_ON_OFF) GameConfig.NINOSReport = INHERIT;
+	}
+
+	//! Settings: NIN Log to file
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.NINLog >= MAX_ON_OFF) GameConfig.NINLog = INHERIT;
+	}
+
+	//! Settings: NIN Individual Loader path setting
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		char entered[100];
+		snprintf(entered, sizeof(entered), GameConfig.NINLoaderPath.c_str());
+
+		HaltGui();
+		GuiWindow * parent = (GuiWindow *) parentElement;
+		if(parent) parent->SetState(STATE_DISABLED);
+		this->SetState(STATE_DEFAULT);
+		this->Remove(optionBrowser);
+		ResumeGui();
+
+		int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
+
+		if(parent) parent->SetState(STATE_DEFAULT);
+		this->Append(optionBrowser);
+
+		if (result == 1)
+		{
+			if (entered[strlen(entered)-1] != '/')
+				strcat(entered, "/");
+
+			GameConfig.NINLoaderPath = entered;
+			WindowPrompt(tr( "Path Changed" ), 0, tr( "OK" ));
+		}
 	}
 
 	//! Settings: GameCube TITLE : Devolution

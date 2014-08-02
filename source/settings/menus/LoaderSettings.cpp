@@ -214,6 +214,10 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
 	Options->SetName(Idx++, "%s", tr( "Auto Boot" ));
 	Options->SetName(Idx++, "%s", tr( "USB-HID Controller" ));
+	Options->SetName(Idx++, "%s", tr( "GameCube Controller" ));
+	Options->SetName(Idx++, "%s", tr( "LED Activity" ));
+	Options->SetName(Idx++, "%s", tr( "OSReport" ));
+	Options->SetName(Idx++, "%s", tr( "Log to file" ));
 	Options->SetName(Idx++, "%s", tr( "--==       Devolution" ));
 	Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
 	Options->SetName(Idx++, "%s", tr( "Force Widescreen" ));
@@ -387,6 +391,18 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: TITLE - NIN USB-HID controller
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINUSBHID]));
+
+	//! Settings: TITLE - NIN MaxPads - Number of GameCube controllers
+	Options->SetValue(Idx++, "%i", Settings.NINMaxPads);
+
+	//! Settings: TITLE - NIN LED Activity
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINLED]));
+
+	//! Settings: TITLE - NIN OS Report
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINOSReport]));
+
+	//! Settings: TITLE - NIN Log to file
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINLog]));
 
 	//! Settings: TITLE - Devolution
 	Options->SetValue(Idx++, "==--   ");
@@ -703,6 +719,30 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.NINUSBHID >= MAX_ON_OFF) Settings.NINUSBHID = 0;
+	}
+
+	//! Settings: NIN MaxPads - Number of Gamecube controllers
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINMaxPads >= 5) Settings.NINMaxPads = 0;
+	}
+
+	//! Settings: NIN LED Activity
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINLED >= MAX_ON_OFF) Settings.NINLED = 0;
+	}
+
+	//! Settings: NIN OS Report
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINOSReport >= MAX_ON_OFF) Settings.NINOSReport = 0;
+	}
+
+	//! Settings: NIN Log to file
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINLog >= MAX_ON_OFF) Settings.NINLog = 0;
 	}
 
 	//! Settings: TITLE - Devolution

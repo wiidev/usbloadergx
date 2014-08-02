@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-14 18:18+0200\n"
+"POT-Creation-Date: 2014-08-02 18:34+0200\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -1090,6 +1090,9 @@ msgstr "遊戲/安裝磁區"
 msgid "GameCube"
 msgstr "GameCube"
 
+msgid "GameCube Controller"
+msgstr ""
+
 msgid "GameCube Mode"
 msgstr "GameCube 模式"
 
@@ -1327,6 +1330,9 @@ msgstr "鎖上USB Loader GX"
 msgid "Locked"
 msgstr "已鎖定"
 
+msgid "Log to file"
+msgstr ""
+
 msgid "Loop Directory"
 msgstr "重複路徑"
 
@@ -1548,6 +1554,9 @@ msgstr "確定"
 
 msgid "ON"
 msgstr "開啟"
+
+msgid "OSReport"
+msgstr ""
 
 msgid "OSSleepThread"
 msgstr "系統睡眠主題"

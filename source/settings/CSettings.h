@@ -190,6 +190,10 @@ class CSettings
 		short NINMCEmulation;
 		short NINAutoboot;
 		short NINUSBHID;
+		short NINMaxPads;
+		short NINOSReport;
+		short NINLED;
+		short NINLog;
 		short DEVOMCEmulation;
 		short DEVOWidescreen;
 		short DEVOActivityLED;

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-14 18:18+0200\n"
+"POT-Creation-Date: 2014-08-02 18:34+0200\n"
 "Last-Translator: nakata6790\n"
 "Language-Team: nakata6790 (aka0107@gmail.com)\n"
 "MIME-Version: 1.0\n"
@@ -1089,6 +1089,9 @@ msgstr "partition ðïõ èá åãêáôáóôçáèåß ôï ðáé÷íßäé."
 msgid "GameCube"
 msgstr "GameCube"
 
+msgid "GameCube Controller"
+msgstr ""
+
 msgid "GameCube Mode"
 msgstr "ÌÝèïäïò öüñôùóçò ðáé÷íéäéþí GameCube"
 
@@ -1326,6 +1329,9 @@ msgstr "Êëåßäùìá USB Loader GX"
 msgid "Locked"
 msgstr "Êëåéäþèçêå"
 
+msgid "Log to file"
+msgstr ""
+
 msgid "Loop Directory"
 msgstr "Ëïýðá ôùí áñ÷åßùí óôï öÜêåëï"
 
@@ -1547,6 +1553,9 @@ msgstr "OK"
 
 msgid "ON"
 msgstr "NAI"
+
+msgid "OSReport"
+msgstr ""
 
 msgid "OSSleepThread"
 msgstr "OSSleepThread"
