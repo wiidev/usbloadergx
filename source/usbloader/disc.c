@@ -72,8 +72,16 @@ void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode, u32
 	{
 		if (diskid[3] =='E' || diskid[3] =='J')
 		{
-			rmode_reg = VI_NTSC;
-			rmode = &TVNtsc480IntDf;
+			if (CONF_GetVideo() == CONF_VIDEO_PAL)
+			{
+				rmode_reg = VI_EURGB60;
+				rmode = &TVEurgb60Hz480IntDf;
+			}
+			else
+			{
+				rmode_reg = VI_NTSC;
+				rmode = &TVNtsc480IntDf;
+			}
 		}
 		else
 		{

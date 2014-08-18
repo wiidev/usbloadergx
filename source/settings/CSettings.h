@@ -188,6 +188,7 @@ class CSettings
 		short DMLJPNPatch;
 		short DMLDebug;
 		short NINMCEmulation;
+		short NINMCSize;
 		short NINAutoboot;
 		short NINUSBHID;
 		short NINMaxPads;
@@ -200,6 +201,8 @@ class CSettings
 		short DEVOFZeroAX;
 		short DEVOTimerFix;
 		short DEVODButtons;
+		short DEVOCropOverscan;
+		short DEVODiscDelay;
 		short GCInstallCompressed;
 		short GCInstallAligned;
 		short PrivateServer;

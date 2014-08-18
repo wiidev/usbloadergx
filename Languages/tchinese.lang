@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-02 18:34+0200\n"
+"POT-Creation-Date: 2014-08-18 20:27+0200\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -502,6 +502,9 @@ msgstr "產生"
 msgid "Credits"
 msgstr "作者信息"
 
+msgid "Crop Overscan"
+msgstr ""
+
 msgid "Custom Banners"
 msgstr "自製頻道動畫"
 
@@ -609,6 +612,9 @@ msgstr "光碟預設"
 
 msgid "Disc Insert Detected"
 msgstr "光碟插入檢查"
+
+msgid "Disc Read Delay"
+msgstr ""
 
 msgid "Disc read error."
 msgstr "光碟讀取錯誤"
@@ -1371,6 +1377,9 @@ msgstr "標示新遊戲"
 
 msgid "May"
 msgstr "五月"
+
+msgid "Memory Card Blocks Size"
+msgstr ""
 
 msgid "Memory Card Emulation"
 msgstr ""

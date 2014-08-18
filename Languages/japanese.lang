@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-02 18:34+0200\n"
+"POT-Creation-Date: 2014-08-18 20:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -502,6 +502,9 @@ msgstr "作成"
 msgid "Credits"
 msgstr "提供･協力"
 
+msgid "Crop Overscan"
+msgstr ""
+
 msgid "Custom Banners"
 msgstr "カスタムバナー"
 
@@ -609,6 +612,9 @@ msgstr "ディスクの初期値"
 
 msgid "Disc Insert Detected"
 msgstr "ディスクの挿入を検知しました"
+
+msgid "Disc Read Delay"
+msgstr ""
 
 msgid "Disc read error."
 msgstr "読み込みエラー"
@@ -1371,6 +1377,9 @@ msgstr "Newマークの表示機能"
 
 msgid "May"
 msgstr "5月"
+
+msgid "Memory Card Blocks Size"
+msgstr ""
 
 msgid "Memory Card Emulation"
 msgstr ""

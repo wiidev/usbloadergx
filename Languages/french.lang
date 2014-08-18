@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1230
+# French.lang - r1231
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-02 18:34+0200\n"
+"POT-Creation-Date: 2014-08-18 20:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -502,6 +502,9 @@ msgstr "Créer"
 msgid "Credits"
 msgstr "Crédits"
 
+msgid "Crop Overscan"
+msgstr "Réduire l'overscan"
+
 msgid "Custom Banners"
 msgstr "Bannières persos"
 
@@ -609,6 +612,9 @@ msgstr "Disque par défaut"
 
 msgid "Disc Insert Detected"
 msgstr "Insertion de disque détectée"
+
+msgid "Disc Read Delay"
+msgstr "Temporiser l'accès disque"
 
 msgid "Disc read error."
 msgstr "Erreur de lecture du disque."
@@ -1371,6 +1377,9 @@ msgstr "Marquer les nouveaux jeux"
 
 msgid "May"
 msgstr "Mai"
+
+msgid "Memory Card Blocks Size"
+msgstr "Taille carte mémoire (Blocs)"
 
 msgid "Memory Card Emulation"
 msgstr "Emulation carte mémoire"

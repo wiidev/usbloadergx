@@ -78,7 +78,7 @@ void CSettings::SetDefault()
 	strlcpy(NandEmuChanPath, NandEmuPath, sizeof(NandEmuChanPath));
 	strlcpy(GameCubePath, "usb1:/games/", sizeof(GameCubePath));
 	strlcpy(GameCubeSDPath, "sd:/games/", sizeof(GameCubeSDPath));
-	strlcpy(CustomBannersURL, "http://dl.dropboxusercontent.com/u/101209384/", sizeof(CustomBannersURL));
+	strlcpy(CustomBannersURL, "http://copy.com/vRN3HgFVyk9u7YuB/Public/", sizeof(CustomBannersURL));
 	theme[0] = 0;
 	language_path[0] = 0;
 	ogg_path[0] = 0;
@@ -184,6 +184,7 @@ void CSettings::SetDefault()
 	DMLJPNPatch = OFF;
 	DMLDebug = OFF;
 	NINMCEmulation = ON;
+	NINMCSize = 2;
 	NINAutoboot = ON;
 	NINUSBHID = OFF;
 	NINMaxPads = 1;
@@ -196,6 +197,8 @@ void CSettings::SetDefault()
 	DEVOFZeroAX = OFF;
 	DEVOTimerFix = OFF;
 	DEVODButtons = OFF;
+	DEVOCropOverscan = OFF;
+	DEVODiscDelay = OFF;
 	GCInstallCompressed = OFF;
 	GCInstallAligned = OFF;
 	PrivateServer = OFF;
@@ -427,6 +430,7 @@ bool CSettings::Save()
 	fprintf(file, "DMLJPNPatch = %d\n", DMLJPNPatch);
 	fprintf(file, "DMLDebug = %d\n", DMLDebug);
 	fprintf(file, "NINMCEmulation = %d\n", NINMCEmulation);
+	fprintf(file, "NINMCSize = %d\n", NINMCSize);
 	fprintf(file, "NINAutoboot = %d\n", NINAutoboot);
 	fprintf(file, "NINUSBHID = %d\n", NINUSBHID);
 	fprintf(file, "NINMaxPads = %d\n", NINMaxPads);
@@ -439,6 +443,8 @@ bool CSettings::Save()
 	fprintf(file, "DEVOFZeroAX = %d\n", DEVOFZeroAX);
 	fprintf(file, "DEVOTimerFix = %d\n", DEVOTimerFix);
 	fprintf(file, "DEVODButtons = %d\n", DEVODButtons);
+	fprintf(file, "DEVOCropOverscan = %d\n", DEVOCropOverscan);
+	fprintf(file, "DEVODiscDelay = %d\n", DEVODiscDelay);
 	fprintf(file, "DEVOLoaderPath = %s\n", DEVOLoaderPath);
 	fprintf(file, "NINLoaderPath = %s\n", NINLoaderPath);
 	fprintf(file, "GCInstallCompressed = %d\n", GCInstallCompressed);
@@ -906,6 +912,11 @@ bool CSettings::SetSetting(char *name, char *value)
 		NINMCEmulation = atoi(value);
 		return true;
 	}
+	else if (strcmp(name, "NINMCSize") == 0)
+	{
+		NINMCSize = atoi(value);
+		return true;
+	}
 	else if (strcmp(name, "NINAutoboot") == 0)
 	{
 		NINAutoboot = atoi(value);
@@ -964,6 +975,16 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "DEVODButtons") == 0)
 	{
 		DEVODButtons = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "DEVOCropOverscan") == 0)
+	{
+		DEVOCropOverscan = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "DEVODiscDelay") == 0)
+	{
+		DEVODiscDelay = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "DEVOLoaderPath") == 0)
@@ -1113,7 +1134,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	}
 	else if (strcmp(name, "CustomBannersURL") == 0)
 	{
-		strlcpy(CustomBannersURL, value, sizeof(CustomBannersURL));
+		if( strcmp(value, "http://dl.dropbox.com/u/101209384/") == 0 ||
+			strcmp(value, "http://dl.dropboxusercontent.com/u/101209384/") == 0)
+			strlcpy(CustomBannersURL, "http://copy.com/vRN3HgFVyk9u7YuB/Public/", sizeof(CustomBannersURL)); // update banner URL
+		else
+			strlcpy(CustomBannersURL, value, sizeof(CustomBannersURL));
 		return true;
 	}
 	else if(strcmp(name, "PrivateServer") == 0)

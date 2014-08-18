@@ -217,6 +217,7 @@ bool CGameSettings::Save()
 		fprintf(f, "DMLJPNPatch:%d; ", GameList[i].DMLJPNPatch);
 		fprintf(f, "DMLDebug:%d; ", GameList[i].DMLDebug);
 		fprintf(f, "NINMCEmulation:%d; ", GameList[i].NINMCEmulation);
+		fprintf(f, "NINMCSize:%d; ", GameList[i].NINMCSize);
 		fprintf(f, "NINUSBHID:%d; ", GameList[i].NINUSBHID);
 		fprintf(f, "NINMaxPads:%d; ", GameList[i].NINMaxPads);
 		fprintf(f, "NINOSReport:%d; ", GameList[i].NINOSReport);
@@ -229,6 +230,8 @@ bool CGameSettings::Save()
 		fprintf(f, "DEVOFZeroAX:%d; ", GameList[i].DEVOFZeroAX);
 		fprintf(f, "DEVOTimerFix:%d; ", GameList[i].DEVOTimerFix);
 		fprintf(f, "DEVODButtons:%d; ", GameList[i].DEVODButtons);
+		fprintf(f, "DEVOCropOverscan:%d; ", GameList[i].DEVOCropOverscan);
+		fprintf(f, "DEVODiscDelay:%d; ", GameList[i].DEVODiscDelay);
 		fprintf(f, "PrivateServer:%d; ", GameList[i].PrivateServer);
 		fprintf(f, "Locked:%d;\n", GameList[i].Locked);
 	}
@@ -400,6 +403,11 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		game.NINMCEmulation = atoi(value);
 		return true;
 	}
+	else if(strcmp(name, "NINMCSize") == 0)
+	{
+		game.NINMCSize = atoi(value);
+		return true;
+	}
 	else if(strcmp(name, "NINUSBHID") == 0)
 	{
 		game.NINUSBHID = atoi(value);
@@ -458,6 +466,16 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 	else if(strcmp(name, "DEVODButtons") == 0)
 	{
 		game.DEVODButtons = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "DEVOCropOverscan") == 0)
+	{
+		game.DEVOCropOverscan = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "DEVODiscDelay") == 0)
+	{
+		game.DEVODiscDelay = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "PrivateServer") == 0)
@@ -597,6 +615,7 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.DMLJPNPatch = INHERIT;
 	game.DMLDebug = INHERIT;
 	game.NINMCEmulation = INHERIT;
+	game.NINMCSize = INHERIT;
 	game.NINUSBHID = INHERIT;
 	game.NINMaxPads = INHERIT;
 	game.NINOSReport = INHERIT;
@@ -609,6 +628,8 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.DEVOFZeroAX = INHERIT;
 	game.DEVOTimerFix = INHERIT;
 	game.DEVODButtons = INHERIT;
+	game.DEVOCropOverscan = INHERIT;
+	game.DEVODiscDelay = INHERIT;
 	game.PrivateServer = INHERIT;
 	game.Locked = OFF;
 }

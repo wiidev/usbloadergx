@@ -20,19 +20,20 @@
 #include <gctypes.h>
 
 #define NIN_MAGIC					0x01070CF6
-#define NIN_CFG_VERSION				0x00000002
+#define NIN_CFG_VERSION				0x00000003
 
 typedef struct NIN_CFG 
 {
 	u32		Magicbytes;		// 0x01070CF6
-	u32		Version;		// 0x00000002 since r42
+	u32		Version;		// 0x00000003 since r42
 	u32		Config;
 	u32		VideoMode;
 	u32		Language;
 	char	GamePath[255];
 	char	CheatPath[255];
-	u32		MaxPads;
-	u32		GameID;
+	u32		MaxPads;		// added in r42 - cfg version 2
+	u32		GameID;			// added in r83 - cfg version 2
+	u32		MemCardBlocks; // added in v1.135 - cfg version 3
 } NIN_CFG;
 
 enum ninconfig
@@ -50,6 +51,7 @@ enum ninconfig
 	NIN_CFG_USB			= (1<<10),	// r40
 	NIN_CFG_LED			= (1<<11),	// v1.45
 	NIN_CFG_LOG			= (1<<12),	// v1.109
+	NIN_CFG_MC_MULTI	= (1<<13),	// v1.135
 };
 
 enum ninvideomode
@@ -84,6 +86,18 @@ enum ninlanguage
 
 	NIN_LAN_AUTO		= -1, 
 };
+
+// blocks  = value , internal code , file size/bytes
+//Mem0059 = 0, 0x04, 0x0080000
+//Mem0123 = 1, 0x08, 0x0100000
+//Mem0251 = 2, 0x10, 0x0200000
+//Mem0507 = 3, 0x20, 0x0400000
+//Mem1019 = 4, 0x40, 0x0800000
+//Mem2043 = 5, 0x80, 0x1000000
+#define MEM_CARD_MAX (5)
+#define MEM_CARD_CODE(x) (1<<(x+2))
+#define MEM_CARD_SIZE(x) (1<<(x+19))
+#define MEM_CARD_BLOCKS(x) ((1<<(x+6))-5)
 
 
 #endif

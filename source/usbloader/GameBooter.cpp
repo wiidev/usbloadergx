@@ -709,6 +709,8 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	u8 devoFZeroAXChoice = game_cfg->DEVOFZeroAX == INHERIT ? Settings.DEVOFZeroAX : game_cfg->DEVOFZeroAX;
 	u8 devoTimerFixChoice = game_cfg->DEVOTimerFix == INHERIT ? Settings.DEVOTimerFix : game_cfg->DEVOTimerFix;
 	u8 devoDButtonsChoice = game_cfg->DEVODButtons == INHERIT ? Settings.DEVODButtons : game_cfg->DEVODButtons;
+	u8 devoCropOverscanChoice = game_cfg->DEVOCropOverscan == INHERIT ? Settings.DEVOCropOverscan : game_cfg->DEVOCropOverscan;
+	u8 devoDiscDelayChoice = game_cfg->DEVODiscDelay == INHERIT ? Settings.DEVODiscDelay : game_cfg->DEVODiscDelay;
 
 	if(gameHdr->type == TYPE_GAME_GC_DISC)
 	{
@@ -830,6 +832,11 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 		devo_config->options |= DEVO_CFG_TIMER_FIX;
 	if(devoDButtonsChoice && DEVO_version >= 200)
 		devo_config->options |= DEVO_CFG_D_BUTTONS;
+	if (devoCropOverscanChoice && DEVO_version >= 234)
+		devo_config->options |= DEVO_CFG_CROP_OVERSCAN;
+	if (devoDiscDelayChoice && DEVO_version >= 234)
+		devo_config->options |= DEVO_CFG_DISC_DELAY;
+	//	devo_config->options |= DEVO_CFG_PLAYLOG; 			// Playlog setting managed by USBLoaderGX features menu
 	
 	// check memory card
 	if(devoMCEmulation == DEVO_MC_OFF)
@@ -928,6 +935,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	u8 ninProgressivePatch = game_cfg->DMLProgPatch == INHERIT ? Settings.DMLProgPatch : game_cfg->DMLProgPatch;
 	u8 ninWidescreenChoice = game_cfg->DMLWidescreen == INHERIT ? Settings.DMLWidescreen : game_cfg->DMLWidescreen;
 	u8 ninMCEmulationChoice = game_cfg->NINMCEmulation == INHERIT ? Settings.NINMCEmulation : game_cfg->NINMCEmulation;
+	u8 ninMCSizeChoice = game_cfg->NINMCSize == INHERIT ? Settings.NINMCSize : game_cfg->NINMCSize;
 	u8 ninDebugChoice = game_cfg->DMLDebug == INHERIT ? Settings.DMLDebug : game_cfg->DMLDebug;
 	u8 ninAutobootChoice = Settings.NINAutoboot;
 	u8 ninUSBHIDChoice = game_cfg->NINUSBHID == INHERIT ? Settings.NINUSBHID : game_cfg->NINUSBHID;
@@ -1052,11 +1060,21 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 						return 0;
 					}
 				}
+				
+				// v1.01 - v1.134
+				strptime("Aug  5 2014 22:38:21", "%b %d %Y %H:%M:%S", &time); // v1.135 - NIN_CFG_VERSION = 3
+				if(NINLoaderTime < mktime(&time) && NIN_cfg_version != 1)
+				{
+					gprintf("Nintendont v1.01 - v1.134 detected. Using CFG version 0x00000002\n");
+					NIN_cfg_version = 2;
+					// no need to fake NIN_CFG struct size, the size is checked in nintendont only since v1.143
+				}
+				
 				found = true;
 				break;
 			}
 		}
-		if(found)
+		if(found && ninAutobootChoice)
 		{
 			for(u32 i = 0; i < filesize; i += 0x10)
 			{
@@ -1257,6 +1275,8 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		nin_config->Config |= NIN_CFG_LED; // r45+
 	if(ninLogChoice)
 		nin_config->Config |= NIN_CFG_LOG; // v1.109+
+	if(ninMCEmulationChoice == NIN_MC_MULTI)
+		nin_config->Config |= NIN_CFG_MC_MULTI; // v1.135+
 	
 	// Max Pads - Auto disabled by nintendont on vWii
 	nin_config->MaxPads = (!IosLoader::isWiiU() && !ninUSBHIDChoice && ninMaxPadsChoice == 0) ? 4 : ninMaxPadsChoice; // NIN_CFG_VERSION 2 r42
@@ -1267,6 +1287,10 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	// GameID for Video mode DiscDefault
 	memcpy((u8 *)Disc_ID, gameHdr->id, 6);
 	DCFlushRange((u8 *)Disc_ID, 6);
+	
+	// Memory Card Emulation Blocks size
+	nin_config->MemCardBlocks = (ninMCEmulationChoice == NIN_MC_MULTI ? 5 : ninMCSizeChoice); // NIN_CFG_VERSION 3 v1.135 - Set maximum size if using single card for all games
+	
 	
 	// Setup Video Mode
 	if(ninVideoChoice == DML_VIDEO_NONE)				// No video mode
@@ -1310,6 +1334,13 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		}
 	}
 	gprintf("NIN: Language 0x%08x \n", nin_config->Language);
+
+	// Game specific settings
+	
+	// Metal Gear Solid: The Twin Snakes
+	if(memcmp("GGS", gameHdr->id, 3) == 0 && nin_config->MaxPads < 2 && !IosLoader::isWiiU())
+		nin_config->MaxPads = 2; // 2 controller ports required
+
 
 	// Delete existing nincfg.bin files
 	RemoveFile("sd:/nincfg.bin");

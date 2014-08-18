@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-02 18:34+0200\n"
+"POT-Creation-Date: 2014-08-18 20:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -502,6 +502,9 @@ msgstr "Opret"
 msgid "Credits"
 msgstr "Lavet af:"
 
+msgid "Crop Overscan"
+msgstr ""
+
 msgid "Custom Banners"
 msgstr ""
 
@@ -609,6 +612,9 @@ msgstr "Spillets standard"
 
 msgid "Disc Insert Detected"
 msgstr "Ny Disc opdaget"
+
+msgid "Disc Read Delay"
+msgstr ""
 
 msgid "Disc read error."
 msgstr ""
@@ -1371,6 +1377,9 @@ msgstr "Maker nye spil"
 
 msgid "May"
 msgstr "Maj"
+
+msgid "Memory Card Blocks Size"
+msgstr ""
 
 msgid "Memory Card Emulation"
 msgstr ""

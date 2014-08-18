@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-02 18:34+0200\n"
+"POT-Creation-Date: 2014-08-18 20:27+0200\n"
 "PO-Revision-Date: 2011-11-03 11:00+0000\n"
 "Last-Translator: pplucky <pplucky@gmail.com>\n"
 "Language-Team: Sky8000, pplucky\n"
@@ -502,6 +502,9 @@ msgstr "Criar"
 msgid "Credits"
 msgstr "Créditos"
 
+msgid "Crop Overscan"
+msgstr ""
+
 msgid "Custom Banners"
 msgstr ""
 
@@ -608,6 +611,9 @@ msgid "Disc Default"
 msgstr "Predefinição Disco"
 
 msgid "Disc Insert Detected"
+msgstr ""
+
+msgid "Disc Read Delay"
 msgstr ""
 
 msgid "Disc read error."
@@ -1371,6 +1377,9 @@ msgstr "Marcar jogos novos"
 
 msgid "May"
 msgstr "Mai"
+
+msgid "Memory Card Blocks Size"
+msgstr ""
 
 msgid "Memory Card Emulation"
 msgstr ""

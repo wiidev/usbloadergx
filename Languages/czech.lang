@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-02 18:34+0200\n"
+"POT-Creation-Date: 2014-08-18 20:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1056 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -502,6 +502,9 @@ msgstr "Vytvorit"
 msgid "Credits"
 msgstr "Zásluhy"
 
+msgid "Crop Overscan"
+msgstr ""
+
 msgid "Custom Banners"
 msgstr ""
 
@@ -608,6 +611,9 @@ msgid "Disc Default"
 msgstr "Puvodní nastavení disku"
 
 msgid "Disc Insert Detected"
+msgstr ""
+
+msgid "Disc Read Delay"
 msgstr ""
 
 msgid "Disc read error."
@@ -1371,6 +1377,9 @@ msgstr "Oznacir nové hry"
 
 msgid "May"
 msgstr "Kvet"
+
+msgid "Memory Card Blocks Size"
+msgstr ""
 
 msgid "Memory Card Emulation"
 msgstr ""

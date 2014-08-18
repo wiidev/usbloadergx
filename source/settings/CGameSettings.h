@@ -41,6 +41,7 @@ typedef struct _GameCFG
 	short DMLJPNPatch;
 	short DMLDebug;
 	short NINMCEmulation;
+	short NINMCSize;
 	short NINUSBHID;
 	short NINMaxPads;
 	short NINOSReport;
@@ -53,6 +54,8 @@ typedef struct _GameCFG
 	short DEVOFZeroAX;
 	short DEVOTimerFix;
 	short DEVODButtons;
+	short DEVOCropOverscan;
+	short DEVODiscDelay;
 	short PrivateServer;
 	short Locked;
 
@@ -90,6 +93,7 @@ typedef struct _GameCFG
 		this->DMLJPNPatch = game.DMLJPNPatch;
 		this->DMLDebug = game.DMLDebug;
 		this->NINMCEmulation = game.NINMCEmulation;
+		this->NINMCSize = game.NINMCSize;
 		this->NINUSBHID = game.NINUSBHID;
 		this->NINMaxPads = game.NINMaxPads;
 		this->NINOSReport = game.NINOSReport;
@@ -102,6 +106,8 @@ typedef struct _GameCFG
 		this->DEVOFZeroAX = game.DEVOFZeroAX;
 		this->DEVOTimerFix = game.DEVOTimerFix;
 		this->DEVODButtons = game.DEVODButtons;
+		this->DEVOCropOverscan = game.DEVOCropOverscan;
+		this->DEVODiscDelay = game.DEVODiscDelay;
 		this->PrivateServer = game.PrivateServer;
 		this->Locked = game.Locked;
 	}

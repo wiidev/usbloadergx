@@ -98,6 +98,13 @@ static const char * DEVOMCText[] =
 	trNOOP( "Individual" ),
 };
 
+static const char * NINMCText[] =
+{
+	trNOOP( "OFF" ),
+	trNOOP( "Individual" ),
+	trNOOP( "ON" ),
+};
+
 static int currentGCmode = 0;
 
 GCGameLoadSM::GCGameLoadSM(struct discHdr *hdr)
@@ -184,6 +191,7 @@ void GCGameLoadSM::SetOptionNames()
 		Options->SetName(Idx++, "%s", tr( "Force Widescreen" ));
 		Options->SetName(Idx++, "%s", tr( "Ocarina" ));
 		Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
+		Options->SetName(Idx++, "%s", tr( "Memory Card Blocks Size" ));
 		Options->SetName(Idx++, "%s", tr( "Debug" ));
 		Options->SetName(Idx++, "%s", tr( "USB-HID Controller" ));
 		Options->SetName(Idx++, "%s", tr( "GameCube Controller" ));
@@ -201,6 +209,8 @@ void GCGameLoadSM::SetOptionNames()
 		Options->SetName(Idx++, "%s", tr( "F-Zero AX" ));
 		Options->SetName(Idx++, "%s", tr( "Timer Fix" ));
 		Options->SetName(Idx++, "%s", tr( "D Buttons" ));
+		Options->SetName(Idx++, "%s", tr( "Crop Overscan" ));
+		Options->SetName(Idx++, "%s", tr( "Disc Read Delay" ));
 	}
 }
 
@@ -345,7 +355,13 @@ void GCGameLoadSM::SetOptionValues()
 		if(GameConfig.NINMCEmulation == INHERIT)
 			Options->SetValue(Idx++, tr("Use global"));
 		else
-			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINMCEmulation]));
+			Options->SetValue(Idx++, "%s", tr(NINMCText[GameConfig.NINMCEmulation]));
+
+		//! Settings: NIN Memory Card Blocks Size
+		if(GameConfig.NINMCSize == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%d", MEM_CARD_BLOCKS(GameConfig.NINMCSize));
 
 		//! Settings: DML + NIN Debug
 		if(GameConfig.DMLDebug == INHERIT)
@@ -432,6 +448,19 @@ void GCGameLoadSM::SetOptionValues()
 			Options->SetValue(Idx++, tr("Use global"));
 		else
 			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVODButtons]));
+
+		//! Settings: DEVO Crop Overscan
+		if(GameConfig.DEVOCropOverscan == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVOCropOverscan]));
+
+		//! Settings: DEVO Disc Read Delay
+		if(GameConfig.DEVODiscDelay == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVODiscDelay]));
+		
 	}
 }
 
@@ -605,7 +634,13 @@ int GCGameLoadSM::GetMenuInternal()
 	//! Settings: NIN Memory Card Emulation
 	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
 	{
-		if (++GameConfig.NINMCEmulation >= MAX_ON_OFF) GameConfig.NINMCEmulation = INHERIT;
+		if (++GameConfig.NINMCEmulation >= NIN_MC_MAX_CHOICE) GameConfig.NINMCEmulation = INHERIT;
+	}
+
+	//! Settings: NIN Memory Card Blocks Size
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.NINMCSize >= 6) GameConfig.NINMCSize = INHERIT;
 	}
 
 	//! Settings: NIN Debug
@@ -712,6 +747,18 @@ int GCGameLoadSM::GetMenuInternal()
 	else if (currentGCmode == GC_MODE_DEVOLUTION && ret == ++Idx)
 	{
 		if (++GameConfig.DEVODButtons >= MAX_ON_OFF) GameConfig.DEVODButtons = INHERIT;
+	}
+
+	//!Settings: DEVO Crop Overscan
+	else if (currentGCmode == GC_MODE_DEVOLUTION && ret == ++Idx)
+	{
+		if (++GameConfig.DEVOCropOverscan >= MAX_ON_OFF) GameConfig.DEVOCropOverscan = INHERIT;
+	}
+
+	//!Settings: DEVO Disc Read Delay
+	else if (currentGCmode == GC_MODE_DEVOLUTION && ret == ++Idx)
+	{
+		if (++GameConfig.DEVODiscDelay >= MAX_ON_OFF) GameConfig.DEVODiscDelay = INHERIT;
 	}
 
 	SetOptionValues();

@@ -163,6 +163,13 @@ static const char * DEVOMCText[] =
 	trNOOP( "Individual" ),
 };
 
+static const char * NINMCText[] =
+{
+	trNOOP( "OFF" ),
+	trNOOP( "Individual" ),
+	trNOOP( "ON" ),
+};
+
 static const char * PrivServText[] =
 {
 	trNOOP( "OFF" ),
@@ -212,6 +219,7 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Japanese Patch" ));
 	Options->SetName(Idx++, "%s", tr( "--==       Nintendont" ));
 	Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
+	Options->SetName(Idx++, "%s", tr( "Memory Card Blocks Size" ));
 	Options->SetName(Idx++, "%s", tr( "Auto Boot" ));
 	Options->SetName(Idx++, "%s", tr( "USB-HID Controller" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Controller" ));
@@ -225,6 +233,8 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "F-Zero AX" ));
 	Options->SetName(Idx++, "%s", tr( "Timer Fix" ));
 	Options->SetName(Idx++, "%s", tr( "D Buttons" ));
+	Options->SetName(Idx++, "%s", tr( "Crop Overscan" ));
+	Options->SetName(Idx++, "%s", tr( "Disc Read Delay" ));
 
 	SetOptionValues();
 
@@ -384,7 +394,10 @@ void LoaderSettings::SetOptionValues()
 	Options->SetValue(Idx++, "==--   ");
 
 	//! Settings: TITLE - NIN Memory Card Emulation
-	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINMCEmulation]));
+	Options->SetValue(Idx++, "%s", tr(NINMCText[Settings.NINMCEmulation]));
+
+	//! Settings: TITLE - NIN Memory Card Blocks Size
+	Options->SetValue(Idx++, "%d", MEM_CARD_BLOCKS(Settings.NINMCSize));
 
 	//! Settings: TITLE - NIN Auto Boot
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINAutoboot]));
@@ -424,6 +437,12 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: DEVO Direct Button Mapping
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DEVODButtons]));
+
+	//! Settings: DEVO Crop Overscan
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DEVOCropOverscan]));
+
+	//! Settings: DEVO Disc Read Delay
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DEVODiscDelay]));
 
 }
 
@@ -706,7 +725,13 @@ int LoaderSettings::GetMenuInternal()
 	//! Settings: NIN Memory Card Emulation
 	else if (ret == ++Idx)
 	{
-		if (++Settings.NINMCEmulation >= MAX_ON_OFF) Settings.NINMCEmulation = 0;
+		if (++Settings.NINMCEmulation >= NIN_MC_MAX_CHOICE) Settings.NINMCEmulation = 0;
+	}
+
+	//! Settings: NIN Memory Card Blocks Size
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINMCSize >= 6) Settings.NINMCSize = 0;
 	}
 
 	//! Settings: NIN Auto Boot
@@ -781,10 +806,22 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.DEVOTimerFix >= MAX_ON_OFF) Settings.DEVOTimerFix = 0;
 	}
 
-//! Settings: DEVO Direct Button Mapping
+	//! Settings: DEVO Direct Button Mapping
 	else if (ret == ++Idx)
 	{
 		if (++Settings.DEVODButtons >= MAX_ON_OFF) Settings.DEVODButtons = 0;
+	}
+
+	//! Settings: DEVO Crop Overscan
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DEVOCropOverscan >= MAX_ON_OFF) Settings.DEVOCropOverscan = 0;
+	}
+
+	//! Settings: DEVO Disc Read Delay
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DEVODiscDelay >= MAX_ON_OFF) Settings.DEVODiscDelay = 0;
 	}
 
 	SetOptionValues();
