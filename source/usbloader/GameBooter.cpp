@@ -933,14 +933,16 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	u8 ocarinaChoice = game_cfg->ocarina == INHERIT ? Settings.ocarina : game_cfg->ocarina;
 	u8 ninVideoChoice = game_cfg->DMLVideo == INHERIT ? Settings.DMLVideo : game_cfg->DMLVideo;
 	u8 ninProgressivePatch = game_cfg->DMLProgPatch == INHERIT ? Settings.DMLProgPatch : game_cfg->DMLProgPatch;
+	u8 ninDeflickerChoice = game_cfg->NINDeflicker == INHERIT ? Settings.NINDeflicker : game_cfg->NINDeflicker;
 	u8 ninWidescreenChoice = game_cfg->DMLWidescreen == INHERIT ? Settings.DMLWidescreen : game_cfg->DMLWidescreen;
 	u8 ninMCEmulationChoice = game_cfg->NINMCEmulation == INHERIT ? Settings.NINMCEmulation : game_cfg->NINMCEmulation;
 	u8 ninMCSizeChoice = game_cfg->NINMCSize == INHERIT ? Settings.NINMCSize : game_cfg->NINMCSize;
-	u8 ninDebugChoice = game_cfg->DMLDebug == INHERIT ? Settings.DMLDebug : game_cfg->DMLDebug;
 	u8 ninAutobootChoice = Settings.NINAutoboot;
 	u8 ninUSBHIDChoice = game_cfg->NINUSBHID == INHERIT ? Settings.NINUSBHID : game_cfg->NINUSBHID;
 	u8 ninMaxPadsChoice = game_cfg->NINMaxPads == INHERIT ? Settings.NINMaxPads : game_cfg->NINMaxPads;
+	u8 ninNativeSIChoice = game_cfg->NINNativeSI == INHERIT ? Settings.NINNativeSI : game_cfg->NINNativeSI;
 	u8 ninLEDChoice = game_cfg->NINLED == INHERIT ? Settings.NINLED : game_cfg->NINLED;
+	u8 ninDebugChoice = game_cfg->DMLDebug == INHERIT ? Settings.DMLDebug : game_cfg->DMLDebug;
 	u8 ninOSReportChoice = game_cfg->NINOSReport == INHERIT ? Settings.NINOSReport : game_cfg->NINOSReport;
 	u8 ninLogChoice = game_cfg->NINLog == INHERIT ? Settings.NINLog : game_cfg->NINLog;
 	const char *ninLoaderPath = game_cfg->NINLoaderPath.size() == 0 ? Settings.NINLoaderPath : game_cfg->NINLoaderPath.c_str();
@@ -1013,87 +1015,77 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	// Check Nintendont version
 	u32 NIN_cfg_version = NIN_CFG_VERSION;
 	bool NINArgsboot = false;
-	u8 *buffer = NULL;
-	u32 filesize = 0;
-	if(LoadFileToMem(NIN_loader_path, &buffer, &filesize))
+	const char* NINBuildDate = nintendontBuildDate(ninLoaderPath);
+	if(strlen(NINBuildDate) > 1)
 	{
-		bool found = false;
-
-		for(u32 i = 0; i < filesize-60; ++i)
+		//Current build date
+		struct tm time;
+		strptime(NINBuildDate, "%b %d %Y %H:%M:%S", &time);
+		const time_t NINLoaderTime = mktime(&time);
+		
+	
+		// Alpha0.1
+		strptime("Sep 20 2013 15:27:01", "%b %d %Y %H:%M:%S", &time);
+		if(NINLoaderTime == mktime(&time))
 		{
-			if((*(u32*)(buffer+i+2)) == 'nten' && (*(u32*)(buffer+i+6)) == 'dont' && (*(u32*)(buffer+i+11)) == 'Load')
+			WindowPrompt(tr("Error:"), tr("USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."), tr("Ok"));
+			return 0;
+		}
+
+		// r01 - r40
+		strptime("Mar 30 2014 12:33:44", "%b %d %Y %H:%M:%S", &time); // r42 - NIN_CFG_VERSION = 2
+		if(NINLoaderTime < mktime(&time))
+		{
+			gprintf("Nintendont r01 - r40 detected. Using CFG version 0x00000001\n");
+			NIN_cfg_version = 1;
+			
+			strptime("Mar 29 2014 10:49:31", "%b %d %Y %H:%M:%S", &time); // r39
+			if(NINLoaderTime < mktime(&time) && strncmp(RealPath, "usb", 3) == 0)
 			{
-				// Get Nintendont version
-				char NINversion[21];
-				u8 offset = *(u32*)(buffer+i+17) == ' USB' ? 40 : 36; // r39 only
-				if(buffer[i+17] == '\r') offset += 2; //v1.20+
-				for(int j = 0 ; j < 20 ; j++)
-					NINversion[j] = *(u8*)(buffer+i+offset+j);
-				NINversion[11] = ' '; // replace \0 between year and time with a space.
-				NINversion[20] = 0;
-				
-				struct tm time;
-				strptime(NINversion, "%b %d %Y %H:%M:%S", &time);
-				const time_t NINLoaderTime = mktime(&time);
-
-				// Alpha0.1
-				strptime("Sep 20 2013 15:27:01", "%b %d %Y %H:%M:%S", &time);
-				if(NINLoaderTime == mktime(&time))
+				WindowPrompt(tr("Error:"), tr("This Nintendont version does not support games on USB."), tr("Ok"));
+				return 0;
+			}
+		}
+		
+		// v1.01 - v1.134
+		strptime("Aug  5 2014 22:38:21", "%b %d %Y %H:%M:%S", &time); // v1.135 - NIN_CFG_VERSION = 3
+		if(NINLoaderTime < mktime(&time) && NIN_cfg_version != 1)
+		{
+			gprintf("Nintendont v1.01 - v1.134 detected. Using CFG version 0x00000002\n");
+			NIN_cfg_version = 2;
+			// no need to fake NIN_CFG struct size, the size is checked in nintendont only since v1.143
+		}
+		
+		// v2.200 to 2.207
+		strptime("Nov  6 2014.17:33:30", "%b %d %Y %H:%M:%S", &time); // v1.208
+		if(ninAutobootChoice && NINLoaderTime < mktime(&time))
+		{
+			strptime("Oct 31 2014 21:14:47", "%b %d %Y %H:%M:%S", &time); // v1.200
+			if(NINLoaderTime >= mktime(&time))
+			{
+				WindowPrompt(tr("Warning:"), tr("This Nintendont version is not correctly supported. Auto boot disabled."), tr("Ok"));
+				ninAutobootChoice = OFF;
+			}
+		}
+	
+		// checks argsboot
+		if(ninAutobootChoice)
+		{
+			u8 *buffer = NULL;
+			u32 filesize = 0;
+			if(LoadFileToMem(NIN_loader_path, &buffer, &filesize))
+			{
+				for(u32 i = 0; i < filesize; i += 0x10)
 				{
-					WindowPrompt(tr("Error:"), tr("USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."), tr("Ok"));
-					free(buffer);
-					return 0;
-				}
-
-				// r01 - r40
-				strptime("Mar 30 2014 12:33:44", "%b %d %Y %H:%M:%S", &time); // r42 - NIN_CFG_VERSION = 2
-				if(NINLoaderTime < mktime(&time))
-				{
-					gprintf("Nintendont r01 - r40 detected. Using CFG version 0x00000001\n");
-					NIN_cfg_version = 1;
-					
-					strptime("Mar 29 2014 10:49:31", "%b %d %Y %H:%M:%S", &time); // r39
-					if(NINLoaderTime < mktime(&time) && strncmp(RealPath, "usb", 3) == 0)
+					if((*(u32*)(buffer+i)) == 'args' && (*(u32*)(buffer+i+4)) == 'boot')
 					{
-						WindowPrompt(tr("Error:"), tr("This Nintendont version does not support games on USB."), tr("Ok"));
-						free(buffer);
-						return 0;
+						gprintf("NIN: argsboot found at %08x, using arguments instead of Nincfg.bin\n", i);
+						NINArgsboot = true;
+						break;
 					}
 				}
-				
-				// v1.01 - v1.134
-				strptime("Aug  5 2014 22:38:21", "%b %d %Y %H:%M:%S", &time); // v1.135 - NIN_CFG_VERSION = 3
-				if(NINLoaderTime < mktime(&time) && NIN_cfg_version != 1)
-				{
-					gprintf("Nintendont v1.01 - v1.134 detected. Using CFG version 0x00000002\n");
-					NIN_cfg_version = 2;
-					// no need to fake NIN_CFG struct size, the size is checked in nintendont only since v1.143
-				}
-				
-				found = true;
-				break;
+				free(buffer);
 			}
-		}
-		if(found && ninAutobootChoice)
-		{
-			for(u32 i = 0; i < filesize; i += 0x10)
-			{
-				if((*(u32*)(buffer+i)) == 'args' && (*(u32*)(buffer+i+4)) == 'boot')
-				{
-					gprintf("NIN: argsboot found at %08x, using arguments instead of Nincfg.bin\n", i);
-					NINArgsboot = true;
-					break;
-				}
-			}
-		}
-		free(buffer);
-		
-		if(!found)
-		{
-			// Current file is not Nintendont?
-			int choice = WindowPrompt(tr("Warning:"), tr("USBloaderGX couldn't verify Nintendont boot.dol file. Launch this boot.dol anyway?"), tr("Yes"), tr("Cancel"));
-			if(choice == 0)
-				return 0;
 		}
 	}
 	else
@@ -1151,8 +1143,9 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	}
 
 	// Check controller.ini
-	if(ninUSBHIDChoice || IosLoader::isWiiU())
+	if(ninUSBHIDChoice)
 	{
+		// Check controller.ini file in priority, then controllers folder, for compatibility with older nintendont versions.
 		char controllerini_path[30]; 
 		snprintf(controllerini_path, sizeof(controllerini_path), "%s:/controller.ini", DeviceHandler::GetDevicePrefix(RealPath));
 		if(!CheckFile(controllerini_path))
@@ -1171,10 +1164,33 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 						return 0;
 				}
 			}
-			else
+			else // check controllers folder if no controller.ini found on root.
 			{
-				if(WindowPrompt(tr("Warning:"), fmt(tr("To use HID with %s you need the %s file."), LoaderName, controllerini_path), tr("Continue"), tr("Cancel")) == 0)
-				return 0;
+			
+				// Check gamepath:/controllers/ folder
+				snprintf(controllerini_path, sizeof(controllerini_path), "%s:/controllers/", DeviceHandler::GetDevicePrefix(RealPath));
+				if(!CheckFile(controllerini_path))
+				{
+					// try to copy controllers folder from the other device
+					char controllerini_srcpath[30]; 
+					snprintf(controllerini_srcpath, sizeof(controllerini_srcpath), "%s:/controllers/", strncmp(RealPath, "usb", 3) == 0 ? "sd" : "usb1");
+					gprintf("Controllers folder source path = %s \n", controllerini_srcpath);
+					if(CheckFile(controllerini_srcpath))
+					{
+						if(CopyDirectory(controllerini_srcpath, controllerini_path) < 0)
+						{
+							gprintf("NIN: Couldn't copy %s to %s.\n", controllerini_srcpath, controllerini_path);
+							RemoveDirectory(controllerini_path);
+						}
+					}
+					else
+					{
+						snprintf(controllerini_path, sizeof(controllerini_path), "%s:/controller.ini", DeviceHandler::GetDevicePrefix(RealPath));
+						if(WindowPrompt(tr("Warning:"), fmt(tr("To use HID with %s you need the %s file."), LoaderName, controllerini_path), tr("Continue"), tr("Cancel")) == 0)
+						return 0;
+					}
+				}
+
 			}
 		}
 	}
@@ -1266,7 +1282,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	if(ninAutobootChoice)
 		nin_config->Config |= NIN_CFG_AUTO_BOOT;
 	if(ninUSBHIDChoice)
-		nin_config->Config |= NIN_CFG_HID; // auto enabled by nintendont on vWii
+		nin_config->Config |= NIN_CFG_HID; // auto enabled by nintendont v2.152 and less on vWii
 	if(ninOSReportChoice)
 		nin_config->Config |= NIN_CFG_OSREPORT;
 	if(strncmp(RealPath, "usb", 3) == 0)
@@ -1277,9 +1293,11 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		nin_config->Config |= NIN_CFG_LOG; // v1.109+
 	if(ninMCEmulationChoice == NIN_MC_MULTI)
 		nin_config->Config |= NIN_CFG_MC_MULTI; // v1.135+
+	if(ninNativeSIChoice)
+		nin_config->Config |= NIN_CFG_NATIVE_SI; // v2.189+
 	
-	// Max Pads - Auto disabled by nintendont on vWii
-	nin_config->MaxPads = (!IosLoader::isWiiU() && !ninUSBHIDChoice && ninMaxPadsChoice == 0) ? 4 : ninMaxPadsChoice; // NIN_CFG_VERSION 2 r42
+	// Max Pads
+	nin_config->MaxPads = ninMaxPadsChoice; // NIN_CFG_VERSION 2 r42
 	
 	// GameID for MCEmu
 	memcpy(&nin_config->GameID, gameHdr->id, 4); // NIN_CFG_VERSION 2 r83
@@ -1289,11 +1307,11 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	DCFlushRange((u8 *)Disc_ID, 6);
 	
 	// Memory Card Emulation Blocks size
-	nin_config->MemCardBlocks = (ninMCEmulationChoice == NIN_MC_MULTI ? 5 : ninMCSizeChoice); // NIN_CFG_VERSION 3 v1.135 - Set maximum size if using single card for all games
+	nin_config->MemCardBlocks = ninMCSizeChoice; // NIN_CFG_VERSION 3 v1.135
 	
 	
 	// Setup Video Mode
-	if(ninVideoChoice == DML_VIDEO_NONE)				// No video mode
+	if(ninVideoChoice == DML_VIDEO_NONE)				// No video mode changes
 	{
 		nin_config->VideoMode = NIN_VID_NONE;
 	}
@@ -1302,13 +1320,16 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		if(ninVideoChoice == DML_VIDEO_AUTO)			// Auto select video mode
 		{
 			Disc_SelectVMode(VIDEO_MODE_DISCDEFAULT, false, NULL, &nin_config->VideoMode);
-			nin_config->VideoMode |= NIN_VID_AUTO;
+			nin_config->VideoMode = NIN_VID_AUTO;
 		}
 		else											// Force user choice
 		{
 			Disc_SelectVMode(ninVideoChoice-1, false, NULL, &nin_config->VideoMode);
-			if(!(nin_config->VideoMode & NIN_VID_AUTO))
+			if(nin_config->VideoMode & NIN_VID_FORCE_MASK)
 				nin_config->VideoMode |= NIN_VID_FORCE;
+				
+			if (ninDeflickerChoice)
+				nin_config->VideoMode |= NIN_VID_FORCE_DF; 		// v2.208+
 
 			if(nin_config->VideoMode & NIN_VID_PROG)
 				nin_config->Config |= NIN_CFG_FORCE_PROG; 		// Set Force_PROG bit in Config
@@ -1349,8 +1370,8 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	if(NINArgsboot)
 	{
 		// initialize homebrew and arguments
-		buffer = NULL;
-		filesize = 0;
+		u8 *buffer = NULL;
+		u32 filesize = 0;
 		LoadFileToMem(NIN_loader_path, &buffer, &filesize);
 		if(!buffer)
 		{

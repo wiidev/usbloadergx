@@ -40,10 +40,12 @@ typedef struct _GameCFG
 	short DMLScreenshot;
 	short DMLJPNPatch;
 	short DMLDebug;
+	short NINDeflicker;
 	short NINMCEmulation;
 	short NINMCSize;
 	short NINUSBHID;
 	short NINMaxPads;
+	short NINNativeSI;
 	short NINOSReport;
 	short NINLED;
 	short NINLog;
@@ -92,10 +94,12 @@ typedef struct _GameCFG
 		this->DMLScreenshot = game.DMLScreenshot;
 		this->DMLJPNPatch = game.DMLJPNPatch;
 		this->DMLDebug = game.DMLDebug;
+		this->NINDeflicker = game.NINDeflicker;
 		this->NINMCEmulation = game.NINMCEmulation;
 		this->NINMCSize = game.NINMCSize;
 		this->NINUSBHID = game.NINUSBHID;
 		this->NINMaxPads = game.NINMaxPads;
+		this->NINNativeSI = game.NINNativeSI;
 		this->NINOSReport = game.NINOSReport;
 		this->NINLED = game.NINLED;
 		this->NINLog = game.NINLog;

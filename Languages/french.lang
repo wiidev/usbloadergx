@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1231
+# French.lang - r1233
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-18 20:27+0200\n"
+"POT-Creation-Date: 2014-11-10 19:26+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -1384,6 +1384,9 @@ msgstr "Taille carte mémoire (Blocs)"
 msgid "Memory Card Emulation"
 msgstr "Emulation carte mémoire"
 
+msgid "Memory Card with 2043 blocs has issues with Nintendont. Use at your own risk."
+msgstr "Les cartes mémoires de 2043 blocs peuvent poser des problèmes avec Nintendont. Utilisez cette taille à vos propres risques."
+
 msgid "Messageboard Update"
 msgstr "Mise à jour carnet Wii"
 
@@ -1431,6 +1434,9 @@ msgstr "L'Émulation Nand ne fonctionne qu'avec une partition FAT/FAT32!"
 
 msgid "Nand Saves Emulation"
 msgstr "Émul. Nand Sauvegardes"
+
+msgid "Native Controller"
+msgstr "Port manettes natif"
 
 msgid "Neither"
 msgstr "Aucun"
@@ -1997,6 +2003,9 @@ msgstr "Cet IOS n'a pas été trouvé dans la liste des titres. Si vous êtes ce
 msgid "This Nintendont version does not support games on USB."
 msgstr "Cette version de Nintendont n'est pas compatible avec les jeux sur USB."
 
+msgid "This Nintendont version is not correctly supported. Auto boot disabled."
+msgstr "Cette version de Nintendont n'est pas correctement supportée. Démarrage automatique désactivé."
+
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "Ce jeu a plusieurs disques, choisissez celui que vous souhaitez lancer."
 
@@ -2164,6 +2173,9 @@ msgstr ""
 #, c-format
 msgid "Version: %s"
 msgstr ""
+
+msgid "Video Deflicker"
+msgstr "Vidéo Deflicker"
 
 msgid "Video Mode"
 msgstr "Mode vidéo"

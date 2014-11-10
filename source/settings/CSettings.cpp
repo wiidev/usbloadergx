@@ -153,7 +153,7 @@ void CSettings::SetDefault()
 	WiirdDebuggerPause = OFF;
 	ShowPlayCount = ON;
 	RememberUnlock = ON;
-	LoaderMode = MODE_WIIGAMES;
+	LoaderMode = MODE_WIIGAMES | MODE_GCGAMES;
 	SearchMode = SEARCH_BEGINNING;
 	GameAspectRatio = ASPECT_SYSTEM_DEFAULT;
 	PointerSpeed = 0.18f;
@@ -183,11 +183,13 @@ void CSettings::SetDefault()
 	DMLScreenshot = OFF;
 	DMLJPNPatch = OFF;
 	DMLDebug = OFF;
+	NINDeflicker = OFF;
 	NINMCEmulation = ON;
 	NINMCSize = 2;
 	NINAutoboot = ON;
 	NINUSBHID = OFF;
 	NINMaxPads = 1;
+	NINNativeSI = OFF;
 	NINOSReport = OFF;
 	NINLED = OFF;
 	NINLog = OFF;
@@ -429,11 +431,13 @@ bool CSettings::Save()
 	fprintf(file, "DMLScreenshot = %d\n", DMLScreenshot);
 	fprintf(file, "DMLJPNPatch = %d\n", DMLJPNPatch);
 	fprintf(file, "DMLDebug = %d\n", DMLDebug);
+	fprintf(file, "NINDeflicker = %d\n", NINDeflicker);
 	fprintf(file, "NINMCEmulation = %d\n", NINMCEmulation);
 	fprintf(file, "NINMCSize = %d\n", NINMCSize);
 	fprintf(file, "NINAutoboot = %d\n", NINAutoboot);
 	fprintf(file, "NINUSBHID = %d\n", NINUSBHID);
 	fprintf(file, "NINMaxPads = %d\n", NINMaxPads);
+	fprintf(file, "NINNativeSI = %d\n", NINNativeSI);
 	fprintf(file, "NINOSReport = %d\n", NINOSReport);
 	fprintf(file, "NINLED = %d\n", NINLED);
 	fprintf(file, "NINLog = %d\n", NINLog);
@@ -907,6 +911,11 @@ bool CSettings::SetSetting(char *name, char *value)
 		DMLDebug = atoi(value);
 		return true;
 	}
+	else if (strcmp(name, "NINDeflicker") == 0)
+	{
+		NINDeflicker = atoi(value);
+		return true;
+	}
 	else if (strcmp(name, "NINMCEmulation") == 0)
 	{
 		NINMCEmulation = atoi(value);
@@ -930,6 +939,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "NINMaxPads") == 0)
 	{
 		NINMaxPads = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINNativeSI") == 0)
+	{
+		NINNativeSI = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "NINOSReport") == 0)

@@ -188,14 +188,16 @@ void GCGameLoadSM::SetOptionNames()
 		Options->SetName(Idx++, "%s", tr( "--==       Nintendont" ));
 		Options->SetName(Idx++, "%s", tr( "Video Mode" ));
 		Options->SetName(Idx++, "%s", tr( "Progressive Patch" ));
+		Options->SetName(Idx++, "%s", tr( "Video Deflicker" ));
 		Options->SetName(Idx++, "%s", tr( "Force Widescreen" ));
 		Options->SetName(Idx++, "%s", tr( "Ocarina" ));
 		Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
 		Options->SetName(Idx++, "%s", tr( "Memory Card Blocks Size" ));
-		Options->SetName(Idx++, "%s", tr( "Debug" ));
 		Options->SetName(Idx++, "%s", tr( "USB-HID Controller" ));
 		Options->SetName(Idx++, "%s", tr( "GameCube Controller" ));
+		Options->SetName(Idx++, "%s", tr( "Native Controller" ));
 		Options->SetName(Idx++, "%s", tr( "LED Activity" ));
+		Options->SetName(Idx++, "%s", tr( "Debug" ));
 		Options->SetName(Idx++, "%s", tr( "OSReport" ));
 		Options->SetName(Idx++, "%s", tr( "Log to file" ));
 		Options->SetName(Idx++, "%s", tr( "Nintendont Loader Path" ));
@@ -339,6 +341,12 @@ void GCGameLoadSM::SetOptionValues()
 		else
 			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLProgPatch]));
 
+		//! Settings: NIN Video Deflicker
+		if(GameConfig.NINDeflicker == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINDeflicker]));
+
 		//! Settings: DML + NIN Force Widescreen
 		if(GameConfig.DMLWidescreen == INHERIT)
 			Options->SetValue(Idx++, tr("Use global"));
@@ -362,12 +370,6 @@ void GCGameLoadSM::SetOptionValues()
 			Options->SetValue(Idx++, tr("Use global"));
 		else
 			Options->SetValue(Idx++, "%d", MEM_CARD_BLOCKS(GameConfig.NINMCSize));
-
-		//! Settings: DML + NIN Debug
-		if(GameConfig.DMLDebug == INHERIT)
-			Options->SetValue(Idx++, tr("Use global"));
-		else
-			Options->SetValue(Idx++, "%s", tr(DMLDebug[GameConfig.DMLDebug]));
 		
 		//! Settings: NIN USB-HID Controller
 		if(GameConfig.NINUSBHID == INHERIT)
@@ -381,11 +383,23 @@ void GCGameLoadSM::SetOptionValues()
 		else
 			Options->SetValue(Idx++, "%i", GameConfig.NINMaxPads);
 		
+		//! Settings: NIN Native Controller
+		if(GameConfig.NINNativeSI == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINNativeSI]));
+		
 		//! Settings: NIN LED Activity
 		if(GameConfig.NINLED == INHERIT)
 			Options->SetValue(Idx++, tr("Use global"));
 		else
 			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINLED]));
+		
+		//! Settings: DML + NIN Debug
+		if(GameConfig.DMLDebug == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(DMLDebug[GameConfig.DMLDebug]));
 		
 		//! Settings: NIN OS Report
 		if(GameConfig.NINOSReport == INHERIT)
@@ -619,6 +633,12 @@ int GCGameLoadSM::GetMenuInternal()
 		if (++GameConfig.DMLProgPatch >= MAX_ON_OFF) GameConfig.DMLProgPatch = INHERIT;
 	}
 
+	//! Settings: NIN Video Deflicker
+	if(currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.NINDeflicker >= MAX_ON_OFF) GameConfig.NINDeflicker = INHERIT;
+	}
+
 	//! Settings: NIN Force Widescreen
 	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
 	{
@@ -641,12 +661,8 @@ int GCGameLoadSM::GetMenuInternal()
 	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
 	{
 		if (++GameConfig.NINMCSize >= 6) GameConfig.NINMCSize = INHERIT;
-	}
-
-	//! Settings: NIN Debug
-	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
-	{
-		if (++GameConfig.DMLDebug >= 3) GameConfig.DMLDebug = INHERIT;
+		if (GameConfig.NINMCSize == 5)
+			WindowPrompt(tr("Warning:"), tr("Memory Card with 2043 blocs has issues with Nintendont. Use at your own risk."), tr("Ok"));
 	}
 
 	//! Settings: NIN USB-HID Controller
@@ -661,10 +677,22 @@ int GCGameLoadSM::GetMenuInternal()
 		if (++GameConfig.NINMaxPads >= 5) GameConfig.NINMaxPads = INHERIT;
 	}
 
+	//! Settings: NIN Native Controller
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.NINNativeSI >= MAX_ON_OFF) GameConfig.NINNativeSI = INHERIT;
+	}
+
 	//! Settings: NIN LED Activity
 	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
 	{
 		if (++GameConfig.NINLED >= MAX_ON_OFF) GameConfig.NINLED = INHERIT;
+	}
+
+	//! Settings: NIN Debug
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.DMLDebug >= 3) GameConfig.DMLDebug = INHERIT;
 	}
 
 	//! Settings: NIN OS Report

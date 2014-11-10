@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-18 20:27+0200\n"
+"POT-Creation-Date: 2014-11-10 19:28+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -1384,6 +1384,9 @@ msgstr ""
 msgid "Memory Card Emulation"
 msgstr ""
 
+msgid "Memory Card with 2043 blocs has issues with Nintendont. Use at your own risk."
+msgstr ""
+
 msgid "Messageboard Update"
 msgstr ""
 
@@ -1430,6 +1433,9 @@ msgid "Nand Emulation only works on FAT/FAT32 partitions!"
 msgstr ""
 
 msgid "Nand Saves Emulation"
+msgstr ""
+
+msgid "Native Controller"
 msgstr ""
 
 msgid "Neither"
@@ -1997,6 +2003,9 @@ msgstr ""
 msgid "This Nintendont version does not support games on USB."
 msgstr ""
 
+msgid "This Nintendont version is not correctly supported. Auto boot disabled."
+msgstr ""
+
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr ""
 
@@ -2164,6 +2173,9 @@ msgstr ""
 #, c-format
 msgid "Version: %s"
 msgstr "Vesiyon: %s"
+
+msgid "Video Deflicker"
+msgstr ""
 
 msgid "Video Mode"
 msgstr "Video Modu"

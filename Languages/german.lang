@@ -1,13 +1,13 @@
 # USB Loader GX
-# german.lang - r1203
+# german.lang - r1231
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-18 20:27+0200\n"
+"POT-Creation-Date: 2014-11-10 19:26+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
-"Last-Translator: TheRealVisitor\n"
+"Last-Translator: Sabykos\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -33,11 +33,11 @@ msgstr "%i fehlende Dateien"
 
 #, c-format
 msgid "%s only accepts GameCube backups in ISO format."
-msgstr ""
+msgstr "%s benötigt GameCube Backups im ISO Format."
 
 #, c-format
 msgid "%s requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."
-msgstr ""
+msgstr "%s benötigt AHB Zugriff! Bitte starte USBLoaderGX vom HBC, einem geupdateten Channel oder Forwarder aus."
 
 msgid "--==       Devolution"
 msgstr ""
@@ -94,7 +94,7 @@ msgid "5 min"
 msgstr "5 Minuten"
 
 msgid "=== GameCube Settings"
-msgstr ""
+msgstr "=== GameCube Einstellungen"
 
 msgid "AUTO"
 msgstr "AUTO"
@@ -142,7 +142,7 @@ msgid "App Language"
 msgstr "Sprache"
 
 msgid "Apply"
-msgstr "Anwenden"
+msgstr "Übernehmen"
 
 msgid "Apr"
 msgstr "April"
@@ -503,7 +503,7 @@ msgid "Credits"
 msgstr "Danksagungen"
 
 msgid "Crop Overscan"
-msgstr ""
+msgstr "Overscan abschneiden"
 
 msgid "Custom Banners"
 msgstr "Community Banner"
@@ -596,10 +596,10 @@ msgid "Directory does not exist!"
 msgstr "Verzeichnis existiert nicht!"
 
 msgid "Disc 1"
-msgstr ""
+msgstr "Disk 1"
 
 msgid "Disc 2"
-msgstr ""
+msgstr "Disk 2"
 
 msgid "Disc Artwork Download"
 msgstr "Disk Cover Download"
@@ -614,13 +614,13 @@ msgid "Disc Insert Detected"
 msgstr "Disk erkannt"
 
 msgid "Disc Read Delay"
-msgstr ""
+msgstr "Disc Leseverzögerung"
 
 msgid "Disc read error."
-msgstr "Disk Lese-Fehler"
+msgstr "Disk Lesefehler"
 
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
-msgstr ""
+msgstr "Disk 2 muss unkomprimiert sein, um mit DM(L) 2.6+ zu funktionieren. Sicher, dass du die Disk komprimiert installieren möchtest?"
 
 msgid "Discarts"
 msgstr "Diskbilder"
@@ -698,7 +698,7 @@ msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Soll die freier Speicher Info auf allen Partitionen synchronisiert werden?"
 
 msgid "Do you want to update this file?"
-msgstr ""
+msgstr "Diese Datei updaten?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Alle Sprachdateien aktualisieren?"
@@ -959,7 +959,7 @@ msgid "Force Titles from Disc"
 msgstr "Erzwinge DVD-Titel"
 
 msgid "Force Widescreen"
-msgstr ""
+msgstr "Erzwinge Widescreen"
 
 msgid "Format"
 msgstr "Formatieren"
@@ -1088,7 +1088,7 @@ msgid "Game is already installed:"
 msgstr "Spiel ist bereits installiert:"
 
 msgid "Game's IOS"
-msgstr ""
+msgstr "Spiel IOS"
 
 msgid "Game/Install Partition"
 msgstr "Spiel/Instal. Partition"
@@ -1103,7 +1103,7 @@ msgid "GameCube Mode"
 msgstr "GameCube Modus"
 
 msgid "GameCube Source"
-msgstr ""
+msgstr "GameCube Quelle"
 
 msgid "GameTDB Path"
 msgstr "GameTDB"
@@ -1252,7 +1252,7 @@ msgid "Japanese"
 msgstr "Japanisch"
 
 msgid "Japanese Patch"
-msgstr ""
+msgstr "Japanisch Patch"
 
 msgid "Joypad"
 msgstr "Gamepad"
@@ -1273,7 +1273,7 @@ msgid "Korean"
 msgstr "Koreanisch"
 
 msgid "LED Activity"
-msgstr ""
+msgstr "Laufwerk LED"
 
 msgid "Language Files"
 msgstr "Sprachdateien"
@@ -1288,7 +1288,7 @@ msgid "Languagepath changed."
 msgstr "Pfad geändert"
 
 msgid "Launching Wii games with emulated nand only works on d2x cIOS! Change game IOS to a d2x cIOS first."
-msgstr ""
+msgstr "Wii Spiele im emulierten NAND funktionieren nur mit d2x cIOS! Ändere das Spiel IOS zu einem d2x cIOS."
 
 msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
 msgstr "Das Aufrufen von EmuNand-Kanälen funktioniert nur mit dem d2x cIOS! Wechsele dein Spiele-IOS zu einem d2x cIOS zuerst."
@@ -1319,7 +1319,7 @@ msgid "Loader Settings"
 msgstr "Loader Einstellungen"
 
 msgid "Loader's IOS"
-msgstr ""
+msgstr "Loader IOS"
 
 msgid "Loading standard language."
 msgstr "Lade Standardsprache."
@@ -1337,7 +1337,7 @@ msgid "Locked"
 msgstr "Gesperrt"
 
 msgid "Log to file"
-msgstr ""
+msgstr "Debug Log"
 
 msgid "Loop Directory"
 msgstr "Verzeichnis wiederholen"
@@ -1379,9 +1379,12 @@ msgid "May"
 msgstr "Mai"
 
 msgid "Memory Card Blocks Size"
-msgstr ""
+msgstr "Memory Card Blockgröße"
 
 msgid "Memory Card Emulation"
+msgstr ""
+
+msgid "Memory Card with 2043 blocs has issues with Nintendont. Use at your own risk."
 msgstr ""
 
 msgid "Messageboard Update"
@@ -1394,7 +1397,7 @@ msgid "Mount DVD drive"
 msgstr "Spiel starten"
 
 msgid "Mount USB at launch"
-msgstr ""
+msgstr "USB beim Start mounten"
 
 msgid "Multiple Partitions"
 msgstr "Mehrere Partitionen"
@@ -1406,7 +1409,7 @@ msgid "Music Volume"
 msgstr "Musik Lautstärke"
 
 msgid "NMM Mode"
-msgstr ""
+msgstr "NMM Modus"
 
 msgid "Nand Chan. Emulation"
 msgstr "Nand Kan. Emulation"
@@ -1432,6 +1435,9 @@ msgstr "Nand Emulation funktionier nut mit FAT/FAT32 Partitionen!"
 msgid "Nand Saves Emulation"
 msgstr "Nand Save-Emulation"
 
+msgid "Native Controller"
+msgstr ""
+
 msgid "Neither"
 msgstr "Keine"
 
@@ -1445,7 +1451,7 @@ msgid "Nintendont"
 msgstr ""
 
 msgid "Nintendont Loader Path"
-msgstr ""
+msgstr "Nintendont Loader Pfad"
 
 msgid "No"
 msgstr "Nein"
@@ -1502,7 +1508,7 @@ msgid "No themes found."
 msgstr "Keine Themes gefunden."
 
 msgid "NoSSL only"
-msgstr ""
+msgstr "Nur NoSSL"
 
 msgid "None"
 msgstr "Keine"
@@ -1583,7 +1589,7 @@ msgid "Offset"
 msgstr "Offset"
 
 msgid "Ok"
-msgstr ""
+msgstr "OK"
 
 msgid "Only Game Partition"
 msgstr "Nur Spiele Partition"
@@ -1661,7 +1667,7 @@ msgid "Prev"
 msgstr "Zurück"
 
 msgid "Private Server"
-msgstr ""
+msgstr "Privater Server"
 
 msgid "Process finished."
 msgstr "Vorgang abgeschlossen."
@@ -1995,10 +2001,13 @@ msgid "This IOS was not found on the titles list. If you are sure you have it in
 msgstr "Dieses IOS wurde nicht in der Titelliste gefunden. Wenn du sicher bist es installiert zu haben, ignoriere die Warnung."
 
 msgid "This Nintendont version does not support games on USB."
+msgstr "Diese Nintendont Version unterstützt USB nicht."
+
+msgid "This Nintendont version is not correctly supported. Auto boot disabled."
 msgstr ""
 
 msgid "This game has multiple discs. Please select the disc to launch."
-msgstr ""
+msgstr "Dieses Spiel hat mehrere Disks. Bitte wähle, welche Disk gestartet werden soll."
 
 msgid "This path must be on SD!"
 msgstr "Dieser Pfad muss auf der SD sein!"
@@ -2020,41 +2029,41 @@ msgstr "Um GameCube Spiele von DVD zu starten, muss der GameCube Modus in den Sp
 
 #, c-format
 msgid "To run GameCube games with %s you need to place them on an USB FAT32 partition."
-msgstr ""
+msgstr "Deine Festplatte muss auf FAT32 formatiert sein, um GameCube Spiele mit %s% starten zu können."
 
 #, c-format
 msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."
-msgstr ""
+msgstr "Dein GameCube Hauptpfad muss auf eine primäre Partition verweisen, um GameCube Spiele mit %s% starten zu können."
 
 #, c-format
 msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
-msgstr ""
+msgstr "Dein GameCube Hauptpfad muss auf die erste Partition deiner Festplatte verweisen, um GameCube Spiele mit %s% starten zu können."
 
 #, c-format
 msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."
-msgstr ""
+msgstr "Dein GameCube Hauptpfad muss auf eine FAT32 formatierte Festplatte verweisen, um GameCube Spiele mit %s% starten zu können."
 
 #, c-format
 msgid "To run GameCube games with %s you need to use a 512 bytes/sector Hard Drive."
-msgstr ""
+msgstr "Dein Festplatte muss 512 Bytes Sektorgröße haben, um GameCube Spiele mit %s% starten zu können."
 
 #, c-format
 msgid "To run GameCube games with %s you need to use a partition with 32k bytes/cluster or less."
-msgstr ""
+msgstr "Dein Festplatte muss 32 Kilobytes Clustergröße oder weniger haben, um GameCube Spiele mit %s% starten zu können."
 
 msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Loader Path."
-msgstr ""
+msgstr "Deine loader.bin Datei muss im Devolution Loader Pfad liegen, um GameCube Spiele mit Devolution starten zu können."
 
 msgid "To run GameCube games with Nintendont you need the boot.dol file in your Nintendont Loader Path."
-msgstr ""
+msgstr "Deine boot.dol Datei muss im Nintendont Loader Pfad liegen, um GameCube Spiele mit Nintendont starten zu können."
 
 #, c-format
 msgid "To use HID with %s you need the %s file."
-msgstr ""
+msgstr "Um %s mit HID zu verwenden, wird %s benötig."
 
 #, c-format
 msgid "To use ocarina with %s you need the %s file."
-msgstr ""
+msgstr "Um Ocarina Cheats mit %s zu verwenden, wird %s benötigt."
 
 msgid "Tooltip Delay"
 msgstr "Tooltip Verzögerung"
@@ -2066,7 +2075,7 @@ msgid "Transfer failed"
 msgstr "Transfer fehlgeschlagen"
 
 msgid "USB Device not initialized."
-msgstr ""
+msgstr "USB Gerät nicht initialisiert."
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX ist jetzt geschützt."
@@ -2081,13 +2090,13 @@ msgid "USB-HID Controller"
 msgstr ""
 
 msgid "USBloaderGX couldn't verify Nintendont boot.dol file. Launch this boot.dol anyway?"
-msgstr ""
+msgstr "USBLoaderGX konnte die Nintendont boot.dol nicht verifizieren. Trotzdem starten?"
 
 msgid "USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyway?"
-msgstr ""
+msgstr "USBLoaderGX konnte die Nintendont config Dateien nicht ändern. Nintendont trotzdem starten?"
 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
-msgstr ""
+msgstr "USBLoaderGX r1218 wird benötigt um Nintendont Alpha v0.1 starten zu können. Bitte aktualisiere deine Nintendont Version."
 
 msgid "Uninstall"
 msgstr "Deinstallieren"
@@ -2126,7 +2135,7 @@ msgid "Update Files"
 msgstr "Aktualisieren"
 
 msgid "Update Nintendont"
-msgstr ""
+msgstr "Aktualisiere Nintendont"
 
 msgid "Update Path"
 msgstr "Updates"
@@ -2164,6 +2173,9 @@ msgstr "Version:"
 #, c-format
 msgid "Version: %s"
 msgstr "Version: %s"
+
+msgid "Video Deflicker"
+msgstr ""
 
 msgid "Video Mode"
 msgstr "Videomodus"
@@ -2272,7 +2284,7 @@ msgid "You need to install DIOS MIOS Lite v1.2 or a newer version."
 msgstr "Es wird DIOS MIOS Lite v1.2 oder neuer benötigt."
 
 msgid "You need to install an additional GameCube loader or select a different GameCube Mode to launch GameCube games from USB or SD card."
-msgstr ""
+msgstr "Du musst einen GameCube Loader installieren oder einen anderen GameCube Modus auswählen um GameCube Spiele von USB oder SD starten zu können."
 
 msgid "Zoom Duration (Speed)"
 msgstr "Zoom Dauer"

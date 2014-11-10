@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-18 20:27+0200\n"
+"POT-Creation-Date: 2014-11-10 19:26+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -1384,6 +1384,9 @@ msgstr ""
 msgid "Memory Card Emulation"
 msgstr ""
 
+msgid "Memory Card with 2043 blocs has issues with Nintendont. Use at your own risk."
+msgstr ""
+
 msgid "Messageboard Update"
 msgstr "Wii伝言板の更新"
 
@@ -1431,6 +1434,9 @@ msgstr "NANDエミュはFAT/FAT32領域のみで動作します!"
 
 msgid "Nand Saves Emulation"
 msgstr "NANDセーブエミュ"
+
+msgid "Native Controller"
+msgstr ""
 
 msgid "Neither"
 msgstr "非表示"
@@ -1997,6 +2003,9 @@ msgstr "このIOSはタイトルリストにありませんでした"
 msgid "This Nintendont version does not support games on USB."
 msgstr ""
 
+msgid "This Nintendont version is not correctly supported. Auto boot disabled."
+msgstr ""
+
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr ""
 
@@ -2164,6 +2173,9 @@ msgstr "バージョン:"
 #, c-format
 msgid "Version: %s"
 msgstr "バージョン: %s"
+
+msgid "Video Deflicker"
+msgstr ""
 
 msgid "Video Mode"
 msgstr "映像の出力方法"

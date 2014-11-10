@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-18 20:27+0200\n"
+"POT-Creation-Date: 2014-11-10 19:26+0100\n"
 "Last-Translator: nakata6790\n"
 "Language-Team: nakata6790 (aka0107@gmail.com)\n"
 "MIME-Version: 1.0\n"
@@ -1383,6 +1383,9 @@ msgstr ""
 msgid "Memory Card Emulation"
 msgstr ""
 
+msgid "Memory Card with 2043 blocs has issues with Nintendont. Use at your own risk."
+msgstr ""
+
 msgid "Messageboard Update"
 msgstr "ÅíçìÝñùóç messageboard ôïõ Wii"
 
@@ -1430,6 +1433,9 @@ msgstr "ç åîïìïßùóç åéêïíéêÞò NAND åßíáé åöéêôÞ ì
 
 msgid "Nand Saves Emulation"
 msgstr "saves óôçí åéêïíéêÞ NAND"
+
+msgid "Native Controller"
+msgstr ""
 
 msgid "Neither"
 msgstr "ÊáíÝíá áðü ôá äõï"
@@ -1996,6 +2002,9 @@ msgstr "Ôï ÉÏS áõôü äåí âñÝèçêå óôçí ëßóôá. Áí åß
 msgid "This Nintendont version does not support games on USB."
 msgstr ""
 
+msgid "This Nintendont version is not correctly supported. Auto boot disabled."
+msgstr ""
+
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr ""
 
@@ -2163,6 +2172,9 @@ msgstr "¸êäïóç:"
 #, c-format
 msgid "Version: %s"
 msgstr "¸êäïóç: %s"
+
+msgid "Video Deflicker"
+msgstr ""
 
 msgid "Video Mode"
 msgstr "Ñýèìéóç âßíôåï"

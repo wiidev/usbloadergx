@@ -12,6 +12,7 @@
 #include "usbloader/wdvd.h"
 #include "usbloader/usbstorage2.h"
 #include "usbloader/GameList.h"
+#include "GameCube/GCGames.h"
 #include "language/gettext.h"
 #include "GUI/gui.h"
 #include "GUI/gui_numpad.h"
@@ -328,36 +329,9 @@ void WindowCredits()
 
 	// Check if Nintendont is available
 	char GCInfo2[80] = "";
-	char NIN_loader_path[100];
-	snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sboot.dol", Settings.NINLoaderPath);
-	if(!CheckFile(NIN_loader_path))
-		snprintf(NIN_loader_path, sizeof(NIN_loader_path), "%sloader.dol", Settings.NINLoaderPath);
-	if(CheckFile(NIN_loader_path))
-	{
-		u8 *buffer = NULL;
-		u32 filesize = 0;
-		if(LoadFileToMem(NIN_loader_path, &buffer, &filesize))
-		{
-			char NINversion[21];
-
-			for(u32 i = 0; i < filesize-60; ++i)
-			{
-				// Nintendont Loader..Built   : %s %s..Sep 20 2013.15:27:01 // alpha0.1
-				if((*(u32*)(buffer+i+2)) == 'nten' && (*(u32*)(buffer+i+6)) == 'dont' && (*(u32*)(buffer+i+11)) == 'Load')
-				{
-					u8 offset = *(u32*)(buffer+i+17) == ' USB' ? 40 : 36; // r39 only
-					if(buffer[i+17] == '\r') offset += 2; //v1.20+
-					for(int j = 0 ; j < 20 ; j++)
-						NINversion[j] = *(u8*)(buffer+i+offset+j);
-					NINversion[11] = ' '; // replace \0 between year and time with a space.
-					NINversion[20] = 0;
-					snprintf(GCInfo2, sizeof(GCInfo2), "Nintendont Built %.20s",  NINversion );
-					break;
-				}
-			}
-			free(buffer);
-		}
-	}
+	const char* NINBuildDate = nintendontBuildDate(Settings.NINLoaderPath);
+	if(strlen(NINBuildDate) > 0)
+		snprintf(GCInfo2, sizeof(GCInfo2), "Nintendont Built %.20s",  NINBuildDate );
 
 	// Header - Top left
 	currentTxt = new GuiText(GCInfo2, 16, ( GXColor ) {255, 255, 255, 255});

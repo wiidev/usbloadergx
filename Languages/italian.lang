@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-18 20:27+0200\n"
+"POT-Creation-Date: 2014-11-10 19:26+0100\n"
 "PO-Revision-Date: 2011-09-11 12:19+0100\n"
 "Last-Translator: xFede\n"
 "Language-Team: xFede (fedeanto11@gmail.com)\n"
@@ -1384,6 +1384,9 @@ msgstr ""
 msgid "Memory Card Emulation"
 msgstr ""
 
+msgid "Memory Card with 2043 blocs has issues with Nintendont. Use at your own risk."
+msgstr ""
+
 msgid "Messageboard Update"
 msgstr "Aggiorna messaggi"
 
@@ -1431,6 +1434,9 @@ msgstr "L'emulazione della NAND funziona solo con partizioni FAT/FAT32!"
 
 msgid "Nand Saves Emulation"
 msgstr "Emulazione salvataggi"
+
+msgid "Native Controller"
+msgstr ""
 
 msgid "Neither"
 msgstr "Neanche"
@@ -1997,6 +2003,9 @@ msgstr "Questo IOS non è stato trovato nella lista dei titoli. Se sei sicuro di
 msgid "This Nintendont version does not support games on USB."
 msgstr ""
 
+msgid "This Nintendont version is not correctly supported. Auto boot disabled."
+msgstr ""
+
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "Questo gioco contiene più di un disco. Selezione quello da avviare."
 
@@ -2164,6 +2173,9 @@ msgstr "Versione:"
 #, c-format
 msgid "Version: %s"
 msgstr "Versione: %s"
+
+msgid "Video Deflicker"
+msgstr ""
 
 msgid "Video Mode"
 msgstr "Modalità video"

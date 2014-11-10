@@ -218,11 +218,13 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "LED Activity" ));
 	Options->SetName(Idx++, "%s", tr( "Japanese Patch" ));
 	Options->SetName(Idx++, "%s", tr( "--==       Nintendont" ));
+	Options->SetName(Idx++, "%s", tr( "Auto Boot" ));
+	Options->SetName(Idx++, "%s", tr( "Video Deflicker" ));
 	Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
 	Options->SetName(Idx++, "%s", tr( "Memory Card Blocks Size" ));
-	Options->SetName(Idx++, "%s", tr( "Auto Boot" ));
 	Options->SetName(Idx++, "%s", tr( "USB-HID Controller" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Controller" ));
+	Options->SetName(Idx++, "%s", tr( "Native Controller" ));
 	Options->SetName(Idx++, "%s", tr( "LED Activity" ));
 	Options->SetName(Idx++, "%s", tr( "OSReport" ));
 	Options->SetName(Idx++, "%s", tr( "Log to file" ));
@@ -393,20 +395,26 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: TITLE - Nintendont
 	Options->SetValue(Idx++, "==--   ");
 
+	//! Settings: TITLE - NIN Auto Boot
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINAutoboot]));
+
+	//! Settings: TITLE - NIN Video Deflicker
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINDeflicker]));
+
 	//! Settings: TITLE - NIN Memory Card Emulation
 	Options->SetValue(Idx++, "%s", tr(NINMCText[Settings.NINMCEmulation]));
 
 	//! Settings: TITLE - NIN Memory Card Blocks Size
 	Options->SetValue(Idx++, "%d", MEM_CARD_BLOCKS(Settings.NINMCSize));
 
-	//! Settings: TITLE - NIN Auto Boot
-	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINAutoboot]));
-
 	//! Settings: TITLE - NIN USB-HID controller
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINUSBHID]));
 
 	//! Settings: TITLE - NIN MaxPads - Number of GameCube controllers
 	Options->SetValue(Idx++, "%i", Settings.NINMaxPads);
+
+	//! Settings: TITLE - NIN Native Controller
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINNativeSI]));
 
 	//! Settings: TITLE - NIN LED Activity
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINLED]));
@@ -722,6 +730,18 @@ int LoaderSettings::GetMenuInternal()
 		// This one is a category title
 	}
 
+	//! Settings: NIN Auto Boot
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINAutoboot >= MAX_ON_OFF) Settings.NINAutoboot = 0;
+	}
+
+	//! Settings: NIN Video Deflicker
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINDeflicker >= MAX_ON_OFF) Settings.NINDeflicker = 0;
+	}
+
 	//! Settings: NIN Memory Card Emulation
 	else if (ret == ++Idx)
 	{
@@ -732,12 +752,8 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.NINMCSize >= 6) Settings.NINMCSize = 0;
-	}
-
-	//! Settings: NIN Auto Boot
-	else if (ret == ++Idx)
-	{
-		if (++Settings.NINAutoboot >= MAX_ON_OFF) Settings.NINAutoboot = 0;
+		if (Settings.NINMCSize == 5)
+			WindowPrompt(tr("Warning:"), tr("Memory Card with 2043 blocs has issues with Nintendont. Use at your own risk."), tr("Ok"));
 	}
 
 	//! Settings: NIN USB-HID controller
@@ -750,6 +766,12 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.NINMaxPads >= 5) Settings.NINMaxPads = 0;
+	}
+
+	//! Settings: NIN Native Controller
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINNativeSI >= MAX_ON_OFF) Settings.NINNativeSI = 0;
 	}
 
 	//! Settings: NIN LED Activity

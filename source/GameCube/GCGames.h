@@ -25,6 +25,8 @@
 
 using namespace std;
 
+const char *nintendontBuildDate(const char *NIN_loader_path);
+
 class GCGames
 {
 public:

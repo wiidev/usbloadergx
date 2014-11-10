@@ -216,10 +216,12 @@ bool CGameSettings::Save()
 		fprintf(f, "DMLScreenshot:%d; ", GameList[i].DMLScreenshot);
 		fprintf(f, "DMLJPNPatch:%d; ", GameList[i].DMLJPNPatch);
 		fprintf(f, "DMLDebug:%d; ", GameList[i].DMLDebug);
+		fprintf(f, "NINDeflicker:%d; ", GameList[i].NINDeflicker);
 		fprintf(f, "NINMCEmulation:%d; ", GameList[i].NINMCEmulation);
 		fprintf(f, "NINMCSize:%d; ", GameList[i].NINMCSize);
 		fprintf(f, "NINUSBHID:%d; ", GameList[i].NINUSBHID);
 		fprintf(f, "NINMaxPads:%d; ", GameList[i].NINMaxPads);
+		fprintf(f, "NINNativeSI:%d; ", GameList[i].NINNativeSI);
 		fprintf(f, "NINOSReport:%d; ", GameList[i].NINOSReport);
 		fprintf(f, "NINLED:%d; ", GameList[i].NINLED);
 		fprintf(f, "NINLog:%d; ", GameList[i].NINLog);
@@ -398,6 +400,11 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		game.DMLDebug = atoi(value);
 		return true;
 	}
+	else if(strcmp(name, "NINDeflicker") == 0)
+	{
+		game.NINDeflicker = atoi(value);
+		return true;
+	}
 	else if(strcmp(name, "NINMCEmulation") == 0)
 	{
 		game.NINMCEmulation = atoi(value);
@@ -416,6 +423,11 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 	else if(strcmp(name, "NINMaxPads") == 0)
 	{
 		game.NINMaxPads = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "NINNativeSI") == 0)
+	{
+		game.NINNativeSI = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "NINOSReport") == 0)
@@ -614,10 +626,12 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.DMLScreenshot = INHERIT;
 	game.DMLJPNPatch = INHERIT;
 	game.DMLDebug = INHERIT;
+	game.NINDeflicker = INHERIT;
 	game.NINMCEmulation = INHERIT;
 	game.NINMCSize = INHERIT;
 	game.NINUSBHID = INHERIT;
 	game.NINMaxPads = INHERIT;
+	game.NINNativeSI = INHERIT;
 	game.NINOSReport = INHERIT;
 	game.NINLED = INHERIT;
 	game.NINLog = INHERIT;

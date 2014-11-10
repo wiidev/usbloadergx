@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-18 20:27+0200\n"
+"POT-Creation-Date: 2014-11-10 19:28+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -1384,6 +1384,9 @@ msgstr ""
 msgid "Memory Card Emulation"
 msgstr ""
 
+msgid "Memory Card with 2043 blocs has issues with Nintendont. Use at your own risk."
+msgstr ""
+
 msgid "Messageboard Update"
 msgstr "留言板更新"
 
@@ -1431,6 +1434,9 @@ msgstr "Nand 模擬器僅能在 FAT/FAT32 格式磁區執行!"
 
 msgid "Nand Saves Emulation"
 msgstr "Nand 儲存模擬器"
+
+msgid "Native Controller"
+msgstr ""
 
 msgid "Neither"
 msgstr "皆不顯示"
@@ -1997,6 +2003,9 @@ msgstr "標題清單找不到這IOS。若你確定已安裝它，請忽略這警
 msgid "This Nintendont version does not support games on USB."
 msgstr ""
 
+msgid "This Nintendont version is not correctly supported. Auto boot disabled."
+msgstr ""
+
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "此遊戲為多重光碟。請選擇光碟啟動。"
 
@@ -2164,6 +2173,9 @@ msgstr "版本："
 #, c-format
 msgid "Version: %s"
 msgstr "版本: %s"
+
+msgid "Video Deflicker"
+msgstr ""
 
 msgid "Video Mode"
 msgstr "視訊格式"
