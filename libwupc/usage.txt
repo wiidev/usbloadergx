@@ -1,0 +1,23 @@
+libwupc - A WiiU Pro Controller Library for Wii Homebrew Applications by FIX94
+WiiU Pro Controller Documentation from TeHaxor69
+
+1. Copy the "lib" and "include" folder into your "portlibs" folder
+
+2. Make these modifications to your Makefile:
+-add "-lwupc" right after "-lwiiuse" to your LIBS
+-add ",-wrap,wiiuse_register" to your LDFLAGS
+
+3. Modify your code like this:
+-make sure to include <wupc/wupc.h> in all files you use WUPC calls
+-call "WUPC_Init" before "WPAD_Init"
+-call "WUPC_Shutdown" before "WPAD_Shutdown"
+-either use the separate calls or use WUPC_Data at the same place you would normally use the WPAD calls for your data handling
+-if you use ButtonsUp, ButtonsUp and/or ButtonsHeld, make sure to call "WUPC_UpdateButtonStats" before "WPAD_ScanPads", 
+if you dont use any of these you can ignore "WUPC_UpdateButtonStats"
+
+Notes:
+-The X and Y-Axis are going from about -1024 to +1024, make sure you adjust your calculations to that
+-The Buttons are using the same layout as the classic controller buttons, use the "WPAD_CLASSIC_BUTTON_" definitions in <wiiuse/wpad.h>
+-The Battery Status goes from 0 (critical) to 4 (full)
+
+Have Fun!

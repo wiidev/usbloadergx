@@ -1,0 +1,41 @@
+1.5.1:
+* code clean-up (JoostinOnline)
+* add typedef for s32 (JoostinOnline)
+* misc minor changes (JoostinOnline)
+
+1.5:
+* add ISFS_SetAttr() patches. (megazig)
+  Forces the ISFS_SetAttr() function to continue instead of
+  returning -102 when you're trying to change the UID/GID of a file.
+
+1.4:
+* fix value for hash_old (spotted by DarkMatterCore)
+
+1.3: thanks to JoostinOnline/damysteryman
+* replaced HAVE_ABHPROT by AHBPROT_DISABLED (now public)
+* removed (now) redundant have_ahbprot()
+* store version in #LIB_RUNTIMEIOSPATCH_VERSION
+* removed (now) redundant get_libruntimeiospatch_version()
+* minor code clean-ups
+* changed some unsigned ints to signed
+* added license header to runtimeiospatch.[ch]
+* new vWii patches by damysteryman (fixes installation of hidden channels)
+* updated API
+
+1.2:
+[NEW]	get_libruntimeiospatch_version()
+[MOD]	IosPatch_AHBPROT() - return code re-work
+[MOD]	IosPatch_RUNTIME() - return code re-work
+[MOD]	IosPatch_FULL() - retun code re-work
+[MOD]	API doc file updated
+[NEW]	CHANGES doc file
+
+1.1:
+[NEW]	IosPatch_FULL()
+[MOD]	IosPatch_AHBPROT() - proper return work
+[NEW]	API doc file
+
+1.0: initial release
+[NEW]	have_ahbprot()
+[NEW]	IosPatch_AHBPROT()
+[NEW]	IosPatch_RUNTIME()

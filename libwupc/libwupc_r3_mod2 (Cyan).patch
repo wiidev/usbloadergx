@@ -1,0 +1,76 @@
+Index: include/wupc/wupc.h
+===================================================================
+--- include/wupc/wupc.h	(revision 3)
++++ include/wupc/wupc.h	(working copy)
+@@ -50,6 +50,7 @@
+ s16 WUPC_lStickY(u8 chan);
+ s16 WUPC_rStickX(u8 chan);
+ s16 WUPC_rStickY(u8 chan);
++u8 WUPC_extra(u8 chan);
+ 
+ #ifdef __cplusplus
+ }
+Index: Makefile
+===================================================================
+--- Makefile	(revision 3)
++++ Makefile	(working copy)
+@@ -20,7 +20,9 @@
+ SOURCES		:=	source
+ DATA		:=	data
+ INCLUDES	:=	include
+-
++INCDIR		:=  $(LIBOGC_INC)/wupc/
++INCFILE		:=  include/wupc/wupc
++LIBFILE		:=  lib/$(TARGET)
+ #---------------------------------------------------------------------------------
+ # options for code generation
+ #---------------------------------------------------------------------------------
+@@ -72,7 +74,13 @@
+ 	@echo clean ...
+ 	@rm -fr $(BUILD) $(OUTPUT).a
+ 
++#---------------------------------------------------------------------------------
+ 
++install:
++	@echo Installing ...
++	@mkdir -p $(INCDIR)
++	@install -v -m 644 $(LIBFILE).a $(LIBOGC_LIB)
++	@install -v -m 644 $(INCFILE).h $(INCDIR)
+ #---------------------------------------------------------------------------------
+ else
+ 
+Index: source/wupc.c
+===================================================================
+--- source/wupc.c	(revision 3)
++++ source/wupc.c	(working copy)
+@@ -230,7 +230,7 @@
+ 	{
+ 		if(__WUPC_Connected[i] == NULL)
+ 			return ret;
+-		newstate = __WUPC_PadData[i].button;
++		newstate = __WUPC_PadData[i].button | (__WUPC_PadData[i].extra & WUPC_EXTRA_BUTTON_RSTICK) | (__WUPC_PadData[i].extra & WUPC_EXTRA_BUTTON_LSTICK);
+ 		oldstate = __WUPC_PadButtons[i].state;
+ 		__WUPC_PadButtons[i].state = newstate;
+ 		__WUPC_PadButtons[i].up = oldstate & ~newstate;
+@@ -275,3 +275,8 @@
+ 	if(chan >= CHAN_MAX || __WUPC_Connected[chan] == NULL) return 0;
+ 	return __WUPC_PadData[chan].yAxisR;
+ }
++u8 WUPC_extra(u8 chan)
++{
++	if(chan >= CHAN_MAX || __WUPC_Connected[chan] == NULL) return 0;
++	return __WUPC_PadData[chan].extra;
++}
+Index: usage.txt
+===================================================================
+--- usage.txt	(revision 3)
++++ usage.txt	(working copy)
+@@ -4,7 +4,7 @@
+ 1. Copy the "lib" and "include" folder into your "portlibs" folder
+ 
+ 2. Make these modifications to your Makefile:
+--add "-lwupc" right behind "-lwiiuse" to your LIBS
++-add "-lwupc" right after "-lwiiuse" to your LIBS
+ -add ",-wrap,wiiuse_register" to your LDFLAGS
+ 
+ 3. Modify your code like this:
