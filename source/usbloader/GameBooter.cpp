@@ -925,7 +925,13 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 
 int GameBooter::BootNintendont(struct discHdr *gameHdr)
 {
-	const char *RealPath = GCGames::Instance()->GetPath((const char *) gameHdr->id);
+	
+	char RealPath[100];
+	if(gameHdr->type == TYPE_GAME_GC_DISC)	
+		snprintf(RealPath, sizeof(RealPath), "di");
+	else
+		snprintf(RealPath, sizeof(RealPath), "%s", GCGames::Instance()->GetPath((const char *) gameHdr->id));
+	
 	const char *LoaderName = "Nintendont";
 
 	GameCFG * game_cfg = GameSettings.GetGameCFG(gameHdr->id);
@@ -938,20 +944,17 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	u8 ninMCEmulationChoice = game_cfg->NINMCEmulation == INHERIT ? Settings.NINMCEmulation : game_cfg->NINMCEmulation;
 	u8 ninMCSizeChoice = game_cfg->NINMCSize == INHERIT ? Settings.NINMCSize : game_cfg->NINMCSize;
 	u8 ninAutobootChoice = Settings.NINAutoboot;
+	u8 ninSettingsChoice = Settings.NINSettings;
 	u8 ninUSBHIDChoice = game_cfg->NINUSBHID == INHERIT ? Settings.NINUSBHID : game_cfg->NINUSBHID;
 	u8 ninMaxPadsChoice = game_cfg->NINMaxPads == INHERIT ? Settings.NINMaxPads : game_cfg->NINMaxPads;
 	u8 ninNativeSIChoice = game_cfg->NINNativeSI == INHERIT ? Settings.NINNativeSI : game_cfg->NINNativeSI;
+	u8 ninWiiUWideChoice = game_cfg->NINWiiUWide == INHERIT ? Settings.NINWiiUWide : game_cfg->NINWiiUWide;
 	u8 ninLEDChoice = game_cfg->NINLED == INHERIT ? Settings.NINLED : game_cfg->NINLED;
 	u8 ninDebugChoice = game_cfg->DMLDebug == INHERIT ? Settings.DMLDebug : game_cfg->DMLDebug;
 	u8 ninOSReportChoice = game_cfg->NINOSReport == INHERIT ? Settings.NINOSReport : game_cfg->NINOSReport;
 	u8 ninLogChoice = game_cfg->NINLog == INHERIT ? Settings.NINLog : game_cfg->NINLog;
 	const char *ninLoaderPath = game_cfg->NINLoaderPath.size() == 0 ? Settings.NINLoaderPath : game_cfg->NINLoaderPath.c_str();
 
-	if(gameHdr->type == TYPE_GAME_GC_DISC)
-	{
-		WindowPrompt(tr("Error:"), tr("To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."), tr("OK"));
-		return 0;
-	}
 
 	if(!CheckAHBPROT())
 	{
@@ -961,7 +964,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 
 
 	// Check USB device
-	if(strncmp(RealPath, "usb", 3) == 0)
+	if(gameHdr->type != TYPE_GAME_GC_DISC && strncmp(RealPath, "usb", 3) == 0)
 	{
 		// Check Main GameCube Path location
 		if(strncmp(DeviceHandler::PathToFSName(Settings.GameCubePath), "FAT", 3) != 0)
@@ -1042,7 +1045,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 			strptime("Mar 29 2014 10:49:31", "%b %d %Y %H:%M:%S", &time); // r39
 			if(NINLoaderTime < mktime(&time) && strncmp(RealPath, "usb", 3) == 0)
 			{
-				WindowPrompt(tr("Error:"), tr("This Nintendont version does not support games on USB."), tr("Ok"));
+				if(WindowPrompt(tr("Warning:"), tr("This Nintendont version does not support games on USB."), tr("Continue"), tr("Cancel")) == 0)
 				return 0;
 			}
 		}
@@ -1068,6 +1071,15 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 			}
 		}
 	
+		// v2.259 - disc support
+		strptime("Dec 23 2014 17:28:56", "%b %d %Y %H:%M:%S", &time); // v1.259
+		if(gameHdr->type == TYPE_GAME_GC_DISC && NINLoaderTime < mktime(&time))
+		{
+			WindowPrompt(tr("Error:"), tr("To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."), tr("OK"));
+			return 0;
+		}
+		
+		
 		// checks argsboot
 		if(ninAutobootChoice)
 		{
@@ -1095,6 +1107,25 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 			return 0;
 	}
 
+	// Set used device when launching game from disc
+	if(gameHdr->type == TYPE_GAME_GC_DISC && ninMCEmulationChoice)
+	{
+		if(Settings.GameCubeSource >= GC_SOURCE_AUTO && strncmp(Settings.GameCubePath, "usb", 3) == 0)
+		{
+			if(WindowPrompt("", tr("Where do you want MCEmu to be located?"), tr("SD"), tr("USB")) == 1)
+				snprintf(RealPath, sizeof(RealPath), "%s:/", DeviceHandler::GetDevicePrefix(Settings.GameCubeSDPath));
+			else
+				snprintf(RealPath, sizeof(RealPath), "%s:/", DeviceHandler::GetDevicePrefix(Settings.GameCubePath));
+		}
+		else if(Settings.GameCubeSource == GC_SOURCE_MAIN)
+		{
+			snprintf(RealPath, sizeof(RealPath), "%s:/", DeviceHandler::GetDevicePrefix(Settings.GameCubePath));
+		}
+		else
+			snprintf(RealPath, sizeof(RealPath), "%s:/", DeviceHandler::GetDevicePrefix(Settings.GameCubeSDPath));
+	}
+	
+	
 	// Check Ocarina and cheat file location. the .gct file need to be located on the same partition than the game.
 	if(ocarinaChoice && strcmp(DeviceHandler::GetDevicePrefix(RealPath), DeviceHandler::GetDevicePrefix(Settings.Cheatcodespath)) != 0)
 	{
@@ -1197,7 +1228,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	
 	// Check if game has multi Discs
 	bool bootDisc2 = false;
-	if(gameHdr->disc_no == 0)
+	if(gameHdr->type != TYPE_GAME_GC_DISC && gameHdr->disc_no == 0)
 	{
 		char disc2Path[255];
 		snprintf(disc2Path, sizeof(disc2Path), "%s", RealPath);
@@ -1226,6 +1257,11 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		snprintf(gamePath, sizeof(gamePath), "%s/disc2.iso", gamePath);
 	}
 
+	if(gameHdr->type == TYPE_GAME_GC_DISC)
+	{
+		snprintf(gamePath, sizeof(gamePath), "di");
+	}
+	
 
 	// Nintendont Config file settings
 	NIN_CFG *nin_config = NULL;
@@ -1295,6 +1331,8 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		nin_config->Config |= NIN_CFG_MC_MULTI; // v1.135+
 	if(ninNativeSIChoice)
 		nin_config->Config |= NIN_CFG_NATIVE_SI; // v2.189+
+	if(ninWiiUWideChoice)
+		nin_config->Config |= NIN_CFG_WIIU_WIDE; // v2.258+
 	
 	// Max Pads
 	nin_config->MaxPads = ninMaxPadsChoice; // NIN_CFG_VERSION 2 r42
@@ -1337,8 +1375,8 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		Disc_SetVMode();
 	}
 
+	gprintf("NIN: Active device %s\n", nin_config->Config & NIN_CFG_USB ? "USB" : "SD");
 	gprintf("NIN: config 0x%08x\n", nin_config->Config);
-
 	gprintf("NIN: Video mode 0x%08x\n", nin_config->VideoMode);
 	
 	// Set game language setting
@@ -1356,37 +1394,13 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	}
 	gprintf("NIN: Language 0x%08x \n", nin_config->Language);
 
-	// Game specific settings
-	
-	// Metal Gear Solid: The Twin Snakes
-	if(memcmp("GGS", gameHdr->id, 3) == 0 && nin_config->MaxPads < 2 && !IosLoader::isWiiU())
-		nin_config->MaxPads = 2; // 2 controller ports required
-
-
 	// Delete existing nincfg.bin files
-	RemoveFile("sd:/nincfg.bin");
-	RemoveFile("usb1:/nincfg.bin");
-	
-	if(NINArgsboot)
+	if(ninSettingsChoice == OFF)
 	{
-		// initialize homebrew and arguments
-		u8 *buffer = NULL;
-		u32 filesize = 0;
-		LoadFileToMem(NIN_loader_path, &buffer, &filesize);
-		if(!buffer)
-		{
-			return 0;
-		}
-		FreeHomebrewBuffer();
-		CopyHomebrewMemory(buffer, 0, filesize);
-		
-		AddBootArgument(NIN_loader_path);
-		AddBootArgument((char*)nin_config, sizeof(NIN_CFG));
-		
-		// Launch Nintendont
-		return !(BootHomebrewFromMem() < 0);
+		RemoveFile("sd:/nincfg.bin");
+		RemoveFile("usb1:/nincfg.bin");
 	}
-	else
+	else if(ninSettingsChoice == ON || !NINArgsboot)
 	{
 		// Nintendont Config file path
 		char NINCfgPath[17];
@@ -1423,6 +1437,29 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 			}
 			gprintf("done\n");
 		}
+	}
+
+	if(NINArgsboot)
+	{
+		// initialize homebrew and arguments
+		u8 *buffer = NULL;
+		u32 filesize = 0;
+		LoadFileToMem(NIN_loader_path, &buffer, &filesize);
+		if(!buffer)
+		{
+			return 0;
+		}
+		FreeHomebrewBuffer();
+		CopyHomebrewMemory(buffer, 0, filesize);
+		
+		AddBootArgument(NIN_loader_path);
+		AddBootArgument((char*)nin_config, sizeof(NIN_CFG));
+		
+		// Launch Nintendont
+		return !(BootHomebrewFromMem() < 0);
+	}
+	else
+	{
 		// Launch Nintendont
 		return !(BootHomebrew(NIN_loader_path) < 0);
 	}

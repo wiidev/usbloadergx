@@ -187,9 +187,11 @@ void CSettings::SetDefault()
 	NINMCEmulation = ON;
 	NINMCSize = 2;
 	NINAutoboot = ON;
+	NINSettings = AUTO;
 	NINUSBHID = OFF;
 	NINMaxPads = 1;
 	NINNativeSI = OFF;
+	NINWiiUWide = widescreen;
 	NINOSReport = OFF;
 	NINLED = OFF;
 	NINLog = OFF;
@@ -435,9 +437,11 @@ bool CSettings::Save()
 	fprintf(file, "NINMCEmulation = %d\n", NINMCEmulation);
 	fprintf(file, "NINMCSize = %d\n", NINMCSize);
 	fprintf(file, "NINAutoboot = %d\n", NINAutoboot);
+	fprintf(file, "NINSettings = %d\n", NINSettings);
 	fprintf(file, "NINUSBHID = %d\n", NINUSBHID);
 	fprintf(file, "NINMaxPads = %d\n", NINMaxPads);
 	fprintf(file, "NINNativeSI = %d\n", NINNativeSI);
+	fprintf(file, "NINWiiUWide = %d\n", NINWiiUWide);
 	fprintf(file, "NINOSReport = %d\n", NINOSReport);
 	fprintf(file, "NINLED = %d\n", NINLED);
 	fprintf(file, "NINLog = %d\n", NINLog);
@@ -931,6 +935,11 @@ bool CSettings::SetSetting(char *name, char *value)
 		NINAutoboot = atoi(value);
 		return true;
 	}
+	else if (strcmp(name, "NINSettings") == 0)
+	{
+		NINSettings = atoi(value);
+		return true;
+	}
 	else if (strcmp(name, "NINUSBHID") == 0)
 	{
 		NINUSBHID = atoi(value);
@@ -944,6 +953,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "NINNativeSI") == 0)
 	{
 		NINNativeSI = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINWiiUWide") == 0)
+	{
+		NINWiiUWide = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "NINOSReport") == 0)

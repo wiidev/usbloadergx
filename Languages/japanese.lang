@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-10 19:26+0100\n"
+"POT-Creation-Date: 2015-01-04 21:00+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -1477,6 +1477,9 @@ msgstr "使用できる領域が見つかりません"
 msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
 msgstr "Wiinnertag.xmlが設定パスにみつかりません。テンプレファイルを作成しますか?"
 
+msgid "No change"
+msgstr ""
+
 msgid "No cheats were selected! Should the GCT file be deleted?"
 msgstr "何も選ばれていません!(GCTファイルが削除された?)"
 
@@ -1569,6 +1572,9 @@ msgstr ""
 
 msgid "ON"
 msgstr "使う"
+
+msgid "ON (Multi)"
+msgstr ""
 
 msgid "OSReport"
 msgstr ""
@@ -1753,6 +1759,9 @@ msgstr "振動機能"
 msgid "SChinese"
 msgstr "簡体中国語"
 
+msgid "SD"
+msgstr ""
+
 msgid "SD Card could not be accessed."
 msgstr "SDカードにアクセス出来ません"
 
@@ -1821,6 +1830,9 @@ msgstr "検索"
 
 msgid "Settings"
 msgstr "設定"
+
+msgid "Settings File"
+msgstr ""
 
 msgid "Show Categories"
 msgstr "カテゴリを表示"
@@ -2074,6 +2086,9 @@ msgstr "ヒントバルーン"
 msgid "Transfer failed"
 msgstr "転送に失敗しました"
 
+msgid "USB"
+msgstr ""
+
 msgid "USB Device not initialized."
 msgstr ""
 
@@ -2213,6 +2228,9 @@ msgstr "このゲームの何を削除しますか:"
 msgid "What to extract from NAND?"
 msgstr "何をNANDから書き出しますか?"
 
+msgid "Where do you want MCEmu to be located?"
+msgstr ""
+
 msgid "Where should the game be installed to?"
 msgstr "どこにインストールしますか?"
 
@@ -2239,6 +2257,9 @@ msgstr "ゲーム名リスト"
 
 msgid "WiiTDB.xml is up to date."
 msgstr "ゲーム名リストが更新されました"
+
+msgid "WiiU Widescreen"
+msgstr ""
 
 msgid "Wiilight"
 msgstr "スロット点灯機能"

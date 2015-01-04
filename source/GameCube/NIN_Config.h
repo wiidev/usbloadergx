@@ -53,6 +53,7 @@ enum ninconfig
 	NIN_CFG_LOG			= (1<<12),	// v1.109
 	NIN_CFG_MC_MULTI	= (1<<13),	// v1.135
 	NIN_CFG_NATIVE_SI	= (1<<14),	// v2.189
+	NIN_CFG_WIIU_WIDE	= (1<<15),	//v2.258
 };
 
 enum ninvideomode

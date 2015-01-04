@@ -90,6 +90,29 @@ void WiiPointer::Draw(GuiTrigger *t)
 				lastActivity = 0;
 			}
 
+			//Wii u pro x-axis
+			if(t->wupcdata.stickX < -WUPCCAL)
+			{
+				posX += (t->wupcdata.stickX + WUPCCAL) * Settings.PointerSpeed/8;
+				lastActivity = 0;
+			}
+			else if(t->wupcdata.stickX > WUPCCAL)
+			{
+				posX += (t->wupcdata.stickX - WUPCCAL) * Settings.PointerSpeed/8;
+				lastActivity = 0;
+			}
+			//Wii u pro y-axis
+			if(t->wupcdata.stickY < -WUPCCAL)
+			{
+				posY -= (t->wupcdata.stickY + WUPCCAL) * Settings.PointerSpeed/8;
+				lastActivity = 0;
+			}
+			else if(t->wupcdata.stickY > WUPCCAL)
+			{
+				posY -= (t->wupcdata.stickY - WUPCCAL) * Settings.PointerSpeed/8;
+				lastActivity = 0;
+			}
+
 			int wpadX = t->WPAD_Stick(0, 0);
 			int wpadY = t->WPAD_Stick(0, 1);
 
@@ -117,7 +140,7 @@ void WiiPointer::Draw(GuiTrigger *t)
 				lastActivity = 0;
 			}
 
-			if(t->pad.btns_h || t->wpad.btns_h)
+			if(t->pad.btns_h || t->wpad.btns_h || t->wupcdata.btns_h)
 				lastActivity = 0;
 
 			posX = LIMIT(posX, -50.0f, screenwidth+50.0f);

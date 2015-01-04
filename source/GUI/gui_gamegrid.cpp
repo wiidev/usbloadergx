@@ -472,7 +472,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 
 		if (btnLeft->GetState() == STATE_CLICKED)
 		{
-			u32 buttons = t->wpad.btns_h;
+			u32 buttons = t->wpad.btns_h | t->wupcdata.btns_h;
 			u32 buttonsPAD = t->pad.btns_h;
 			if (!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_MINUS) ||
 				  (buttons & WPAD_CLASSIC_BUTTON_A) || (buttons & WPAD_CLASSIC_BUTTON_MINUS) ||
@@ -488,7 +488,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 		}
 		else if (btnRight->GetState() == STATE_CLICKED)
 		{
-			u32 buttons = t->wpad.btns_h;
+			u32 buttons = t->wpad.btns_h | t->wupcdata.btns_h;
 			u32 buttonsPAD = t->pad.btns_h;
 			if (!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_PLUS) ||
 				  (buttons & WPAD_CLASSIC_BUTTON_A) || (buttons & WPAD_CLASSIC_BUTTON_PLUS) ||

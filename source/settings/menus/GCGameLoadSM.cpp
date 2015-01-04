@@ -102,7 +102,7 @@ static const char * NINMCText[] =
 {
 	trNOOP( "OFF" ),
 	trNOOP( "Individual" ),
-	trNOOP( "ON" ),
+	trNOOP( "ON (Multi)" ),
 };
 
 static int currentGCmode = 0;
@@ -196,6 +196,7 @@ void GCGameLoadSM::SetOptionNames()
 		Options->SetName(Idx++, "%s", tr( "USB-HID Controller" ));
 		Options->SetName(Idx++, "%s", tr( "GameCube Controller" ));
 		Options->SetName(Idx++, "%s", tr( "Native Controller" ));
+		Options->SetName(Idx++, "%s", tr( "WiiU Widescreen" ));
 		Options->SetName(Idx++, "%s", tr( "LED Activity" ));
 		Options->SetName(Idx++, "%s", tr( "Debug" ));
 		Options->SetName(Idx++, "%s", tr( "OSReport" ));
@@ -388,6 +389,12 @@ void GCGameLoadSM::SetOptionValues()
 			Options->SetValue(Idx++, tr("Use global"));
 		else
 			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINNativeSI]));
+			
+		//! Settings: WiiU Widescreen
+		if(GameConfig.NINWiiUWide == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINWiiUWide]));	
 		
 		//! Settings: NIN LED Activity
 		if(GameConfig.NINLED == INHERIT)
@@ -681,6 +688,12 @@ int GCGameLoadSM::GetMenuInternal()
 	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
 	{
 		if (++GameConfig.NINNativeSI >= MAX_ON_OFF) GameConfig.NINNativeSI = INHERIT;
+	}
+	
+	//! Settings: WiiU Widescreen
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.NINWiiUWide >= MAX_ON_OFF) GameConfig.NINWiiUWide = INHERIT;
 	}
 
 	//! Settings: NIN LED Activity

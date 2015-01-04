@@ -7,6 +7,7 @@
  ***************************************************************************/
 
 #include <gccore.h>
+#include <ogc/machine/processor.h>
 #include <ogcsys.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -112,6 +113,13 @@ static void ResetVideo_Menu()
 void InitVideo()
 {
 	VIDEO_Init();
+	
+	// If WiiU - Force 16:9 aspect ratio based on WiiU settings
+	if((*(vu32*)(0xCD8005A0) >> 16 ) == 0xCAFE && Settings.widescreen)
+	{
+		write32(0xd8006a0, 0x30000004), mask32(0xd8006a8, 0, 2);		
+	}
+	
 	vmode = VIDEO_GetPreferredMode(NULL); // get default video mode
 
 	vmode->viWidth = Settings.widescreen ? 708 : 694;

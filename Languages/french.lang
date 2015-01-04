@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1233
+# French.lang - r1235
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-10 19:26+0100\n"
+"POT-Creation-Date: 2015-01-04 21:00+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -1477,6 +1477,9 @@ msgstr "Partition WBFS ou FAT/NTFS/EXT non trouvée"
 msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
 msgstr "Fichier Wiinnertag.xml non trouvé. Voulez-vous créer un fichier d'exemple ?"
 
+msgid "No change"
+msgstr "Aucune modification"
+
 msgid "No cheats were selected! Should the GCT file be deleted?"
 msgstr "Auncun code-triche sélectionné ! Voulez-vous supprimer le fichier GCT ?"
 
@@ -1569,6 +1572,9 @@ msgstr ""
 
 msgid "ON"
 msgstr "Actif"
+
+msgid "ON (Multi)"
+msgstr "Actif (Multi)"
 
 msgid "OSReport"
 msgstr ""
@@ -1753,6 +1759,9 @@ msgstr "Vibrations"
 msgid "SChinese"
 msgstr "Chinois simplifié"
 
+msgid "SD"
+msgstr ""
+
 msgid "SD Card could not be accessed."
 msgstr "Impossible d'accéder à la carte SD."
 
@@ -1821,6 +1830,9 @@ msgstr "Filtre de Recherche"
 
 msgid "Settings"
 msgstr "Paramètres"
+
+msgid "Settings File"
+msgstr "Fichier de configs"
 
 msgid "Show Categories"
 msgstr "Afficher les catégories"
@@ -2074,6 +2086,9 @@ msgstr "Info-bulles"
 msgid "Transfer failed"
 msgstr "Échec du transfert"
 
+msgid "USB"
+msgstr ""
+
 msgid "USB Device not initialized."
 msgstr "Périphérique USB non initialisé."
 
@@ -2213,6 +2228,9 @@ msgstr "Que voulez-vous supprimer pour ce titre?"
 msgid "What to extract from NAND?"
 msgstr "Que voulez-vous extraire de la NAND ?"
 
+msgid "Where do you want MCEmu to be located?"
+msgstr ""
+
 msgid "Where should the game be installed to?"
 msgstr "Où installer ce jeu ?"
 
@@ -2239,6 +2257,9 @@ msgstr ""
 
 msgid "WiiTDB.xml is up to date."
 msgstr "WiiTDB.xml est à jour."
+
+msgid "WiiU Widescreen"
+msgstr ""
 
 msgid "Wiilight"
 msgstr "Illumination Wii"

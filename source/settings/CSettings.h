@@ -191,9 +191,11 @@ class CSettings
 		short NINMCEmulation;
 		short NINMCSize;
 		short NINAutoboot;
+		short NINSettings;
 		short NINUSBHID;
 		short NINMaxPads;
 		short NINNativeSI;
+		short NINWiiUWide;
 		short NINOSReport;
 		short NINLED;
 		short NINLog;

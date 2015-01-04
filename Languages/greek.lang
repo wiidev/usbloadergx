@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-10 19:26+0100\n"
+"POT-Creation-Date: 2015-01-04 21:00+0100\n"
 "Last-Translator: nakata6790\n"
 "Language-Team: nakata6790 (aka0107@gmail.com)\n"
 "MIME-Version: 1.0\n"
@@ -1476,6 +1476,9 @@ msgstr "Äåí âñÝèçêå WBFS Þ FAT/NTFS/EXT partition"
 msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
 msgstr "Äåí âñÝèçêå áñ÷åßï Winnertag.xml. ÈÝëåôå íá äçìéïõñãçèåß Ýíá áñ÷åßï-ðáñÜäåéãìá;"
 
+msgid "No change"
+msgstr ""
+
 msgid "No cheats were selected! Should the GCT file be deleted?"
 msgstr "Äåí åðéëÝ÷èçêáí cheats! ÈÝëåôå íá äéáãñáöåß ôï áñ÷åßï cheat GCT;"
 
@@ -1568,6 +1571,9 @@ msgstr "OK"
 
 msgid "ON"
 msgstr "NAI"
+
+msgid "ON (Multi)"
+msgstr ""
 
 msgid "OSReport"
 msgstr ""
@@ -1752,6 +1758,9 @@ msgstr "Äüíçóç"
 msgid "SChinese"
 msgstr "ÁðëïðïéçìÝíá êéíåæéêá"
 
+msgid "SD"
+msgstr ""
+
 msgid "SD Card could not be accessed."
 msgstr "Ìç ðñïóðåëÜóéìç SD."
 
@@ -1820,6 +1829,9 @@ msgstr "Ñýèìéóç áíáæÞôçóçò"
 
 msgid "Settings"
 msgstr "Settings"
+
+msgid "Settings File"
+msgstr ""
 
 msgid "Show Categories"
 msgstr "ÐñïâïëÞ êáôçãïñéþí"
@@ -2073,6 +2085,9 @@ msgstr "ÅôéêÝôåò"
 msgid "Transfer failed"
 msgstr "Áíåðéôõ÷Þò ìåôáöïñÜ áñ÷åßùí"
 
+msgid "USB"
+msgstr ""
+
 msgid "USB Device not initialized."
 msgstr ""
 
@@ -2212,6 +2227,9 @@ msgstr "Ôé èá èÝëáôå íá äéáãñÜøåôå áðü áõôü ôïí 
 msgid "What to extract from NAND?"
 msgstr "Ôé íá ìåôáöåñèåß áðü ôç ìíÞìç NAND?"
 
+msgid "Where do you want MCEmu to be located?"
+msgstr ""
+
 msgid "Where should the game be installed to?"
 msgstr "Ðïõ íá åãêáôáóôáèåß ôï ðáé÷íßäé;"
 
@@ -2238,6 +2256,9 @@ msgstr "WiiTDB.xml"
 
 msgid "WiiTDB.xml is up to date."
 msgstr "Ôï áñ÷åßï WiiTDB.xml åßíáé åíçìåñùìÝíï"
+
+msgid "WiiU Widescreen"
+msgstr ""
 
 msgid "Wiilight"
 msgstr "ËÜìðáêé DVD drive ôïõ Wii"

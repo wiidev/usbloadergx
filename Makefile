@@ -67,7 +67,7 @@ endif
 #---------------------------------------------------------------------------------
 CFLAGS		=	-g -ggdb -O3 -Wall -Wno-multichar -Wno-unused-parameter -Wextra $(MACHDEP) $(INCLUDE) -DBUILD_IOS=$(IOS)
 CXXFLAGS	=	$(CFLAGS)
-LDFLAGS		=	-g -ggdb $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80B00000,-wrap,malloc,-wrap,free,-wrap,memalign,-wrap,calloc,-wrap,realloc,-wrap,malloc_usable_size
+LDFLAGS		=	-g -ggdb $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80B00000,-wrap,malloc,-wrap,free,-wrap,memalign,-wrap,calloc,-wrap,realloc,-wrap,malloc_usable_size,-wrap,wiiuse_register
 
 ifeq ($(BUILDMODE),channel)
 CFLAGS += -DFULLCHANNEL
@@ -78,7 +78,8 @@ endif
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
 LIBS := -lcustomfat -lcustomntfs -lcustomext2fs -lvorbisidec -lmad -lfreetype \
-		-lgd -ljpeg -lpng -lzip -lm -lz -lwiiuse -lbte -lasnd -logc
+		-lgd -ljpeg -lpng -lzip -lm -lz -lwiiuse -lwupc -lbte -lasnd -logc \
+		-lsicksaxis
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib

@@ -21,6 +21,8 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  ***************************************************************************/
+#include <gccore.h>
+#include <ogc/machine/processor.h>
 #include <unistd.h>
 #include "FeatureSettingsMenu.hpp"
 #include "Channels/channels.h"
@@ -72,6 +74,7 @@ FeatureSettingsMenu::FeatureSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Dump NAND to EmuNand" ));
 	Options->SetName(Idx++, "%s", tr( "Install WAD to EmuNand" ));
 	Options->SetName(Idx++, "%s", tr( "Update Nintendont" ));
+	Options->SetName(Idx++, "%s", tr( "WiiU Widescreen" ));
 
 	OldTitlesOverride = Settings.titlesOverride;
 	OldCacheTitles = Settings.CacheTitles;
@@ -151,6 +154,10 @@ void FeatureSettingsMenu::SetOptionValues()
 
 	//! Settings: Update Nintendont
 	Options->SetValue(Idx++, " ");
+	
+	//! Settings: WiiU Widescreen
+	Options->SetValue(Idx++, " ");
+	
 }
 
 int FeatureSettingsMenu::GetMenuInternal()
@@ -543,6 +550,21 @@ int FeatureSettingsMenu::GetMenuInternal()
 		}
 	}
 
+	// WiiU Aspect switcher (Thanks Tueidj)
+	else if (ret == ++Idx)
+	{
+		if( read32(0xd8006a0) == 0x30000004)
+		{
+			write32(0xd8006a0, 0x30000002), mask32(0xd8006a8, 0, 2); // Set 4:3
+			Settings.widescreen = OFF;
+		}
+		else
+		{
+			write32(0xd8006a0, 0x30000004), mask32(0xd8006a8, 0, 2); // Set 16:9
+			Settings.widescreen = ON;
+		}
+	}
+	
 	SetOptionValues();
 
 	return MENU_NONE;

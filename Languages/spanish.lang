@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-10 19:28+0100\n"
+"POT-Creation-Date: 2015-01-04 21:00+0100\n"
 "PO-Revision-Date: 2011-07-25 16:40+0200\n"
 "Last-Translator: Galen/xFede\n"
 "Language-Team: Penn, SirPalax, hvy109\n"
@@ -1477,6 +1477,9 @@ msgstr "Partición WBFS o FAT/NTFS/EXT no encontrada"
 msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
 msgstr "No se encontró el archivo Wiinnertag.xml. ¿Quieres crear un archivo de ejemplo?"
 
+msgid "No change"
+msgstr ""
+
 msgid "No cheats were selected! Should the GCT file be deleted?"
 msgstr "No hay trucos seleccionados, ¿debe ser borrado el archivo GCT?"
 
@@ -1569,6 +1572,9 @@ msgstr "Aceptar"
 
 msgid "ON"
 msgstr "Activado"
+
+msgid "ON (Multi)"
+msgstr ""
 
 msgid "OSReport"
 msgstr ""
@@ -1753,6 +1759,9 @@ msgstr "Vibración"
 msgid "SChinese"
 msgstr "Chino S."
 
+msgid "SD"
+msgstr ""
+
 msgid "SD Card could not be accessed."
 msgstr "No se puede acceder a la tarjeta SD"
 
@@ -1821,6 +1830,9 @@ msgstr "Usar filtro de búsqueda"
 
 msgid "Settings"
 msgstr "Configuración"
+
+msgid "Settings File"
+msgstr ""
 
 msgid "Show Categories"
 msgstr "Mostrar Categorías"
@@ -2074,6 +2086,9 @@ msgstr "Descripción"
 msgid "Transfer failed"
 msgstr "Transferencia fallida"
 
+msgid "USB"
+msgstr ""
+
 msgid "USB Device not initialized."
 msgstr ""
 
@@ -2213,6 +2228,9 @@ msgstr "Qué se debería borrar para este juego:"
 msgid "What to extract from NAND?"
 msgstr "¿Que Extraer de la Nand?"
 
+msgid "Where do you want MCEmu to be located?"
+msgstr ""
+
 msgid "Where should the game be installed to?"
 msgstr "¿Donde debe ser instalado el juego?"
 
@@ -2239,6 +2257,9 @@ msgstr "WiiTDB"
 
 msgid "WiiTDB.xml is up to date."
 msgstr "WiiTDB.xml está actualizado."
+
+msgid "WiiU Widescreen"
+msgstr ""
 
 msgid "Wiilight"
 msgstr "Iluminar lector"

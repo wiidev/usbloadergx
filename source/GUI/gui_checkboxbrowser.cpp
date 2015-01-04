@@ -187,12 +187,13 @@ void GuiCheckboxBrowser::Update(GuiTrigger *t)
 
 	if((t->wpad.btns_d & (WPAD_BUTTON_B | WPAD_BUTTON_DOWN | WPAD_BUTTON_UP | WPAD_BUTTON_LEFT | WPAD_BUTTON_RIGHT |
 						  WPAD_CLASSIC_BUTTON_B | WPAD_CLASSIC_BUTTON_UP | WPAD_CLASSIC_BUTTON_DOWN | WPAD_CLASSIC_BUTTON_LEFT | WPAD_CLASSIC_BUTTON_RIGHT)) ||
-	   (t->pad.btns_d & (PAD_BUTTON_UP | PAD_BUTTON_DOWN)))
+		(t->pad.btns_d & (PAD_BUTTON_UP | PAD_BUTTON_DOWN)) ||
+		(t->wupcdata.btns_d & (WPAD_CLASSIC_BUTTON_B | WPAD_CLASSIC_BUTTON_UP | WPAD_CLASSIC_BUTTON_DOWN | WPAD_CLASSIC_BUTTON_LEFT | WPAD_CLASSIC_BUTTON_RIGHT)))
 		pressedChan = t->chan;
 
 	for(u32 i = 0; i < checkBoxDrawn.size(); i++)
 	{
-		if(pressedChan == -1 || (!t->wpad.btns_h && !t->pad.btns_h))
+		if(pressedChan == -1 || (!t->wpad.btns_h && !t->pad.btns_h && !t->wupcdata.btns_h))
 		{
 			if(i != (u32) selectedItem && checkBoxDrawn[i]->GetState() == STATE_SELECTED) {
 				textLineList[i]->SetMaxWidth(maxTextWidth, DOTTED);
@@ -213,7 +214,7 @@ void GuiCheckboxBrowser::Update(GuiTrigger *t)
 			markImg->SetPosition(5, 15+i*(checkBoxDrawn[i]->GetHeight()+6)+(checkBoxDrawn[i]->GetHeight()-markImg->GetHeight())/2);
 	}
 
-	if(pressedChan == t->chan && !t->wpad.btns_d && !t->wpad.btns_h)
+	if(pressedChan == t->chan && !t->wpad.btns_d && !t->wpad.btns_h && !t->wupcdata.btns_d && !t->wupcdata.btns_h)
 		pressedChan = -1;
 
 	scrollBar.SetPageSize(checkBoxDrawn.size());

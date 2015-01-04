@@ -167,7 +167,14 @@ static const char * NINMCText[] =
 {
 	trNOOP( "OFF" ),
 	trNOOP( "Individual" ),
-	trNOOP( "ON" ),
+	trNOOP( "ON (Multi)" ),
+};
+
+static const char * NINCfgText[] =
+{
+	trNOOP( "Delete" ),
+	trNOOP( "Create" ),
+	trNOOP( "No change" ),
 };
 
 static const char * PrivServText[] =
@@ -219,12 +226,14 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Japanese Patch" ));
 	Options->SetName(Idx++, "%s", tr( "--==       Nintendont" ));
 	Options->SetName(Idx++, "%s", tr( "Auto Boot" ));
+	Options->SetName(Idx++, "%s", tr( "Settings File" ));
 	Options->SetName(Idx++, "%s", tr( "Video Deflicker" ));
 	Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
 	Options->SetName(Idx++, "%s", tr( "Memory Card Blocks Size" ));
 	Options->SetName(Idx++, "%s", tr( "USB-HID Controller" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Controller" ));
 	Options->SetName(Idx++, "%s", tr( "Native Controller" ));
+	Options->SetName(Idx++, "%s", tr( "WiiU Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "LED Activity" ));
 	Options->SetName(Idx++, "%s", tr( "OSReport" ));
 	Options->SetName(Idx++, "%s", tr( "Log to file" ));
@@ -398,6 +407,9 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: TITLE - NIN Auto Boot
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINAutoboot]));
 
+	//! Settings: TITLE - NIN Nincfg.bin file
+	Options->SetValue(Idx++, "%s", tr(NINCfgText[Settings.NINSettings]));
+
 	//! Settings: TITLE - NIN Video Deflicker
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINDeflicker]));
 
@@ -415,6 +427,9 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: TITLE - NIN Native Controller
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINNativeSI]));
+
+	//! Settings: TITLE - WiiU Widescreen
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINWiiUWide]));
 
 	//! Settings: TITLE - NIN LED Activity
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINLED]));
@@ -736,6 +751,12 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.NINAutoboot >= MAX_ON_OFF) Settings.NINAutoboot = 0;
 	}
 
+	//! Settings: NIN Nincfg.bin file
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINSettings > AUTO) Settings.NINSettings = 0;
+	}
+
 	//! Settings: NIN Video Deflicker
 	else if (ret == ++Idx)
 	{
@@ -772,6 +793,12 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.NINNativeSI >= MAX_ON_OFF) Settings.NINNativeSI = 0;
+	}
+
+	//! Settings: WiiU Widescreen
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINWiiUWide >= MAX_ON_OFF) Settings.NINWiiUWide = 0;
 	}
 
 	//! Settings: NIN LED Activity

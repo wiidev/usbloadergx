@@ -38,6 +38,7 @@
 #include <math.h>
 #include <asndlib.h>
 #include <wiiuse/wpad.h>
+#include <wupc/wupc.h>
 #include "gui_imagedata.h"
 #include "FreeTypeGX.h"
 #include "video.h"
@@ -47,6 +48,8 @@
 #include "SoundOperations/gui_bgm.h"
 #include "utils/timer.h"
 #include "sigslot.h"
+#include <sicksaxis.h>
+#include "sicksaxis-wrapper.h"
 
 //! Frequently used variables
 extern FreeTypeGX *fontSystem;
@@ -107,6 +110,16 @@ typedef struct _paddata
 		u8 triggerR;
 } PADData;
 
+typedef struct _wupcfulldata {
+	u32 btns_d;
+	u32 btns_u;
+	u32 btns_h;
+	s16 stickX;
+	s16 stickY;
+	s16 substickX;
+	s16 substickY;
+} WUPCFULLData;
+
 #define EFFECT_SLIDE_TOP			1
 #define EFFECT_SLIDE_BOTTOM		 2
 #define EFFECT_SLIDE_RIGHT		  4
@@ -164,6 +177,7 @@ class GuiTrigger
 		u8 type; //!< trigger type (TRIGGER_SIMPLE, TRIGGER_HELD, TRIGGER_BUTTON_ONLY)
 		s32 chan; //!< Trigger controller channel (0-3, -1 for all)
 		WPADData wpad; //!< Wii controller trigger data
+		WUPCFULLData wupcdata;//!< Wii U pro controller trigger data
 		PADData pad; //!< GameCube controller trigger data
 };
 

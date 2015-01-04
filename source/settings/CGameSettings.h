@@ -46,6 +46,7 @@ typedef struct _GameCFG
 	short NINUSBHID;
 	short NINMaxPads;
 	short NINNativeSI;
+	short NINWiiUWide;
 	short NINOSReport;
 	short NINLED;
 	short NINLog;
@@ -100,6 +101,7 @@ typedef struct _GameCFG
 		this->NINUSBHID = game.NINUSBHID;
 		this->NINMaxPads = game.NINMaxPads;
 		this->NINNativeSI = game.NINNativeSI;
+		this->NINWiiUWide = game.NINWiiUWide;
 		this->NINOSReport = game.NINOSReport;
 		this->NINLED = game.NINLED;
 		this->NINLog = game.NINLog;

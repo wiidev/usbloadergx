@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-10 19:26+0100\n"
+"POT-Creation-Date: 2015-01-04 21:00+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -1477,6 +1477,9 @@ msgstr "Ingen WBFS eller FAT/NTFS/EXT partition er fundet"
 msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
 msgstr "Ingen Wiinnertag.xml fundet i config stien. Vil du oprette en prøve fil?"
 
+msgid "No change"
+msgstr ""
+
 msgid "No cheats were selected! Should the GCT file be deleted?"
 msgstr ""
 
@@ -1569,6 +1572,9 @@ msgstr ""
 
 msgid "ON"
 msgstr "Til"
+
+msgid "ON (Multi)"
+msgstr ""
 
 msgid "OSReport"
 msgstr ""
@@ -1753,6 +1759,9 @@ msgstr "Vibration"
 msgid "SChinese"
 msgstr "Kinesisk (std.)"
 
+msgid "SD"
+msgstr ""
+
 msgid "SD Card could not be accessed."
 msgstr ""
 
@@ -1821,6 +1830,9 @@ msgstr "Søgefilter"
 
 msgid "Settings"
 msgstr "Indstillinger"
+
+msgid "Settings File"
+msgstr ""
 
 msgid "Show Categories"
 msgstr "Vis kategorier"
@@ -2074,6 +2086,9 @@ msgstr "Værktøjstips"
 msgid "Transfer failed"
 msgstr "Overførelse fejlede"
 
+msgid "USB"
+msgstr ""
+
 msgid "USB Device not initialized."
 msgstr ""
 
@@ -2213,6 +2228,9 @@ msgstr "Hvad skal der slettes for dette spil:"
 msgid "What to extract from NAND?"
 msgstr "Hvad skal der udpakkes fra NAND?"
 
+msgid "Where do you want MCEmu to be located?"
+msgstr ""
+
 msgid "Where should the game be installed to?"
 msgstr ""
 
@@ -2239,6 +2257,9 @@ msgstr ""
 
 msgid "WiiTDB.xml is up to date."
 msgstr "WiiTDB.xml er opdateret."
+
+msgid "WiiU Widescreen"
+msgstr ""
 
 msgid "Wiilight"
 msgstr ""

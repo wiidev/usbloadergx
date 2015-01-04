@@ -222,6 +222,7 @@ bool CGameSettings::Save()
 		fprintf(f, "NINUSBHID:%d; ", GameList[i].NINUSBHID);
 		fprintf(f, "NINMaxPads:%d; ", GameList[i].NINMaxPads);
 		fprintf(f, "NINNativeSI:%d; ", GameList[i].NINNativeSI);
+		fprintf(f, "NINWiiUWide:%d; ", GameList[i].NINWiiUWide);
 		fprintf(f, "NINOSReport:%d; ", GameList[i].NINOSReport);
 		fprintf(f, "NINLED:%d; ", GameList[i].NINLED);
 		fprintf(f, "NINLog:%d; ", GameList[i].NINLog);
@@ -430,6 +431,11 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		game.NINNativeSI = atoi(value);
 		return true;
 	}
+	else if(strcmp(name, "NINWiiUWide") == 0)
+	{
+		game.NINWiiUWide = atoi(value);
+		return true;
+	}
 	else if(strcmp(name, "NINOSReport") == 0)
 	{
 		game.NINOSReport = atoi(value);
@@ -632,6 +638,7 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.NINUSBHID = INHERIT;
 	game.NINMaxPads = INHERIT;
 	game.NINNativeSI = INHERIT;
+	game.NINWiiUWide = INHERIT;
 	game.NINOSReport = INHERIT;
 	game.NINLED = INHERIT;
 	game.NINLog = INHERIT;

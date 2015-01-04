@@ -588,10 +588,10 @@ const char *nintendontBuildDate(const char *NIN_loader_path)
 				if((*(u32*)(buffer+i+2)) == 'nten' && (*(u32*)(buffer+i+6)) == 'dont' && (*(u32*)(buffer+i+11)) == 'Load')
 				{
 					// Write buffer in NINheader
-					char NINHeader[61];
-					for(int j = 0 ; j < 60 ; j++)
+					char NINHeader[100];
+					for(int j = 0 ; j < 99 ; j++)
 						NINHeader[j] = *(u8*)(buffer+i+j) == 0 ? ' ' : *(u8*)(buffer+i+j); // replace \0 with a space.
-					NINHeader[60] = '\0';
+					NINHeader[99] = '\0';
 
 					// Search month string start position in header
 					char *dateStart = NULL;
@@ -608,7 +608,7 @@ const char *nintendontBuildDate(const char *NIN_loader_path)
 					dateStart[20] = '\0';
 					
 					snprintf(NINBuildDate, sizeof(NINBuildDate), "%.20s", dateStart);
-					gprintf("Nintendont Build date : %s \n", dateStart);
+					gprintf("Nintendont Build date : %.20s \n", dateStart);
 					
 					found = true;
 					break;

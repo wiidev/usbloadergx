@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-10 19:26+0100\n"
+"POT-Creation-Date: 2015-01-04 21:00+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -1477,6 +1477,9 @@ msgstr ""
 msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
 msgstr ""
 
+msgid "No change"
+msgstr ""
+
 msgid "No cheats were selected! Should the GCT file be deleted?"
 msgstr ""
 
@@ -1569,6 +1572,9 @@ msgstr ""
 
 msgid "ON"
 msgstr "BE"
+
+msgid "ON (Multi)"
+msgstr ""
 
 msgid "OSReport"
 msgstr ""
@@ -1753,6 +1759,9 @@ msgstr "Rezgés"
 msgid "SChinese"
 msgstr "SKínai"
 
+msgid "SD"
+msgstr ""
+
 msgid "SD Card could not be accessed."
 msgstr ""
 
@@ -1821,6 +1830,9 @@ msgstr "Keresés"
 
 msgid "Settings"
 msgstr "Beállítások"
+
+msgid "Settings File"
+msgstr ""
 
 msgid "Show Categories"
 msgstr ""
@@ -2074,6 +2086,9 @@ msgstr "Súgók"
 msgid "Transfer failed"
 msgstr ""
 
+msgid "USB"
+msgstr ""
+
 msgid "USB Device not initialized."
 msgstr ""
 
@@ -2213,6 +2228,9 @@ msgstr ""
 msgid "What to extract from NAND?"
 msgstr ""
 
+msgid "Where do you want MCEmu to be located?"
+msgstr ""
+
 msgid "Where should the game be installed to?"
 msgstr ""
 
@@ -2238,6 +2256,9 @@ msgid "WiiTDB.xml"
 msgstr ""
 
 msgid "WiiTDB.xml is up to date."
+msgstr ""
+
+msgid "WiiU Widescreen"
 msgstr ""
 
 msgid "Wiilight"
