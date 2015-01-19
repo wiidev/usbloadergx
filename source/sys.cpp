@@ -27,7 +27,6 @@
 #include "video.h"
 #include "gecko.h"
 #include "wad/nandtitle.h"
-#include "sicksaxis-wrapper.h"
 
 extern "C"
 {
