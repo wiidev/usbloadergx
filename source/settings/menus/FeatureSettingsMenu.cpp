@@ -553,15 +553,18 @@ int FeatureSettingsMenu::GetMenuInternal()
 	// WiiU Aspect switcher (Thanks Tueidj)
 	else if (ret == ++Idx)
 	{
-		if( read32(0xd8006a0) == 0x30000004)
+		if((*(vu32*)(0xCD8005A0) >> 16 ) == 0xCAFE) // vWii only
 		{
-			write32(0xd8006a0, 0x30000002), mask32(0xd8006a8, 0, 2); // Set 4:3
-			Settings.widescreen = OFF;
-		}
-		else
-		{
-			write32(0xd8006a0, 0x30000004), mask32(0xd8006a8, 0, 2); // Set 16:9
-			Settings.widescreen = ON;
+			if( read32(0xd8006a0) == 0x30000004)
+			{
+				write32(0xd8006a0, 0x30000002), mask32(0xd8006a8, 0, 2); // Set 4:3
+				Settings.widescreen = OFF;
+			}
+			else
+			{
+				write32(0xd8006a0, 0x30000004), mask32(0xd8006a8, 0, 2); // Set 16:9
+				Settings.widescreen = ON;
+			}
 		}
 	}
 	

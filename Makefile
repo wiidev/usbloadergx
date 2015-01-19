@@ -78,8 +78,7 @@ endif
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
 LIBS := -lcustomfat -lcustomntfs -lcustomext2fs -lvorbisidec -lmad -lfreetype \
-		-lgd -ljpeg -lpng -lzip -lm -lz -lwiiuse -lwupc -lbte -lasnd -logc \
-		-lsicksaxis
+		-lgd -ljpeg -lpng -lzip -lm -lz -lwiiuse -lwupc -lbte -lasnd -logc
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib

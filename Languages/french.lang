@@ -2229,7 +2229,7 @@ msgid "What to extract from NAND?"
 msgstr "Que voulez-vous extraire de la NAND ?"
 
 msgid "Where do you want MCEmu to be located?"
-msgstr ""
+msgstr "Quel emplacement utiliser pour la sauvegarde ?"
 
 msgid "Where should the game be installed to?"
 msgstr "Où installer ce jeu ?"

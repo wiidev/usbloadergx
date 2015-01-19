@@ -111,7 +111,6 @@ void AppCleanUp(void)
 	ResourceManager::DestroyInstance();
 
 	WPAD_Shutdown();
-	DS3_Cleanup();
 	ISFS_Deinitialize();
 }
 
@@ -120,7 +119,6 @@ void ExitApp(void)
 	AppCleanUp();
 	WBFS_CloseAll();
 	DeviceHandler::DestroyInstance();
-	DS3_Cleanup();
 	USB_Deinitialize();
 	if(Settings.PlaylogUpdate)
 		Playlog_Delete(); // Don't show USB Loader GX in the Wii message board

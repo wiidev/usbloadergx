@@ -4,7 +4,6 @@
 #include "video.h"
 #include "audio.h"
 #include "input.h"
-#include "sicksaxis-wrapper.h"
 #include "themes/CTheme.h"
 #include "gecko.h"
 #include "Controls/DeviceHandler.hpp"
@@ -279,7 +278,6 @@ int StartUpProcess::Execute()
 		// Shut down pads
 		WPAD_Shutdown();
 		WUPC_Shutdown();
-		DS3_Cleanup();
 
 		// Loading now the cios setup in the settings
 		IosLoader::LoadAppCios();

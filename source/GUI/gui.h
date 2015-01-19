@@ -48,8 +48,6 @@
 #include "SoundOperations/gui_bgm.h"
 #include "utils/timer.h"
 #include "sigslot.h"
-#include <sicksaxis.h>
-#include "sicksaxis-wrapper.h"
 
 //! Frequently used variables
 extern FreeTypeGX *fontSystem;
