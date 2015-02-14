@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-04 21:00+0100\n"
+"POT-Creation-Date: 2015-02-14 16:29+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2044,12 +2044,12 @@ msgid "To run GameCube games with %s you need to place them on an USB FAT32 part
 msgstr "Om GameCube games met %s te spelen moet je ze op een USB FAT32 partitie plaatsen."
 
 #, c-format
-msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."
-msgstr "Om GameCube spellen met %s te spelen moet je je 'Hoofd GameCube Pad' op een primary partitie zetten."
+msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary FAT32 partition."
+msgstr ""
 
 #, c-format
-msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
-msgstr "Om GameCube spellen met %s te spelen moet je je 'Hoofd GameCube Pad' op de eerste partitie van de hardeschijf zetten."
+msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary partition of the Hard Drive."
+msgstr ""
 
 #, c-format
 msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."
@@ -2366,6 +2366,12 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconde resterend"
+
+#~ msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."
+#~ msgstr "Om GameCube spellen met %s te spelen moet je je 'Hoofd GameCube Pad' op een primary partitie zetten."
+
+#~ msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
+#~ msgstr "Om GameCube spellen met %s te spelen moet je je 'Hoofd GameCube Pad' op de eerste partitie van de hardeschijf zetten."
 
 #~ msgid "Error 002 fix"
 #~ msgstr "Herstel fout 002"

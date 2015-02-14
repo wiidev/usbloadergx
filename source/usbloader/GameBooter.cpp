@@ -462,21 +462,26 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 			return 0;
 		}
 
-		// Check if the partition is the first partition on the drive
-		int part_num = atoi(Settings.GameCubePath+3);
-		int portPart = DeviceHandler::PartitionToPortPartition(part_num-USB1);
-		int usbport = DeviceHandler::PartitionToUSBPort(part_num-USB1);
-		PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandleFromPartition(part_num-USB1);
-		if(usbHandle->GetPartitionNum(portPart))
+		// Check if the partition is the first primary partition on the drive
+		bool found = false;
+		int USB_partNum = DeviceHandler::PathToDriveType(Settings.GameCubePath)-USB1;
+		int USBport_partNum = DeviceHandler::PartitionToPortPartition(USB_partNum);
+		int usbport = DeviceHandler::PartitionToUSBPort(USB_partNum);
+		PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandleFromPartition(USB_partNum);
+		for(int partition = 0 ; partition <= USBport_partNum; partition++)
 		{
-			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."),LoaderName), tr("OK"));
-			return 0;
+			if(usbHandle->GetPartitionTableType(partition) != MBR)
+				continue;
+			
+			if(partition == USBport_partNum)
+			{
+				found = true;
+				break;
+			}
 		}
-
-		// Check if the partition is primary
-		if(usbHandle->GetPartitionTableType(portPart) != MBR)
+		if(!found)
 		{
-			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."),LoaderName), tr("OK"));
+			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary partition of the Hard Drive."),LoaderName), tr("OK"));
 			return 0;
 		}
 		
@@ -487,7 +492,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 			return 0;
 		}
 
-		if(usbHandle->GetPartitionClusterSize(usbHandle->GetLBAStart(portPart)) > 32768)
+		if(usbHandle->GetPartitionClusterSize(usbHandle->GetLBAStart(USBport_partNum)) > 32768)
 		{
 			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to use a partition with 32k bytes/cluster or less."),LoaderName), tr("OK"));
 			return 0;
@@ -973,20 +978,32 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 			return 0;
 		}
 
-		// Check if the partition is the first partition on the drive
-		int part_num = atoi(Settings.GameCubePath+3);
-		int portPart = DeviceHandler::PartitionToPortPartition(part_num-USB1);
-		PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandleFromPartition(part_num-USB1);
-		if(usbHandle->GetPartitionNum(portPart))
+		// Check if the partition is a primary
+		int USB_partNum = DeviceHandler::PathToDriveType(Settings.GameCubePath)-USB1;
+		int USBport_partNum = DeviceHandler::PartitionToPortPartition(USB_partNum);
+		PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandleFromPartition(USB_partNum);
+		if(usbHandle->GetPartitionTableType(USBport_partNum) != MBR)
 		{
-			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."),LoaderName), tr("OK"));
+			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary FAT32 partition."),LoaderName), tr("OK"));
 			return 0;
 		}
-
-		// Check if the partition is primary
-		if(usbHandle->GetPartitionTableType(portPart) != MBR)
+		
+		// check if the partition is the first FAT32 of the drive
+		bool found = false;
+		for(int partition = 0 ; partition <= USBport_partNum; partition++)
 		{
-			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."),LoaderName), tr("OK"));
+			if(strncmp(usbHandle->GetFSName(partition), "FAT", 3) != 0)
+				continue;
+			
+			if(partition == USBport_partNum)
+			{
+				found = true;
+				break;
+			}
+		}
+		if(!found)
+		{
+			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary FAT32 partition."),LoaderName), tr("OK"));
 			return 0;
 		}
 	}
@@ -1304,7 +1321,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 
 	
 	// Set other settings
-	if(ninDebugChoice && !IosLoader::isWiiU()) // only on Wii
+	if(ninDebugChoice && !isWiiU()) // only on Wii
 		nin_config->Config |= ninDebugChoice == ON ? NIN_CFG_DEBUGGER : NIN_CFG_DEBUGGER | NIN_CFG_DEBUGWAIT;
 	if(ninMCEmulationChoice)
 		nin_config->Config |= NIN_CFG_MEMCARDEMU;

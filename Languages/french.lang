@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1235
+# French.lang - r1241
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-04 21:00+0100\n"
+"POT-Creation-Date: 2015-02-14 16:29+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -2044,20 +2044,20 @@ msgid "To run GameCube games with %s you need to place them on an USB FAT32 part
 msgstr "Pour lancer les jeux GameCube avec %s vous devez les copier sur une partition USB FAT32."
 
 #, c-format
-msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."
-msgstr "Pour lancer les jeux GameCube avec %s vouz devez placer votre 'Dossier GameCube principal' sur une partition principale."
+msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary FAT32 partition."
+msgstr "Pour lancer les jeux GameCube avec %s vouz devez placer votre 'Dossier GameCube principal' sur la premiere partition principale FAT32."
 
 #, c-format
-msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
-msgstr "Pour lancer les jeux GameCube avec %s vouz devez placer votre 'Dossier GameCube principal' sur la 1ère partition du disque dur."
+msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary partition of the Hard Drive."
+msgstr "Pour lancer les jeux GameCube avec %s vous devez placer votre 'Dossier GameCube principal' sur la 1ère partition principale du disque dur."
 
 #, c-format
 msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."
-msgstr "Pour lancer les jeux GameCube avec %s vouz devez placer votre 'Dossier GameCube principal' sur une partition USB FAT32."
+msgstr "Pour lancer les jeux GameCube avec %s vous devez placer votre 'Dossier GameCube principal' sur une partition USB FAT32."
 
 #, c-format
 msgid "To run GameCube games with %s you need to use a 512 bytes/sector Hard Drive."
-msgstr "Pour lancer les jeux GameCube avec %s vouz devez utiliser un disque dur avec 512 octets par secteur."
+msgstr "Pour lancer les jeux GameCube avec %s vous devez utiliser un disque dur avec 512 octets par secteur."
 
 #, c-format
 msgid "To run GameCube games with %s you need to use a partition with 32k bytes/cluster or less."
@@ -2366,6 +2366,12 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."
+#~ msgstr "Pour lancer les jeux GameCube avec %s vouz devez placer votre 'Dossier GameCube principal' sur une partition principale."
+
+#~ msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
+#~ msgstr "Pour lancer les jeux GameCube avec %s vouz devez placer votre 'Dossier GameCube principal' sur la 1ère partition du disque dur."
 
 #~ msgid "Error 002 fix"
 #~ msgstr "Correctif Erreur 002"

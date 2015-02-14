@@ -20,6 +20,7 @@
 #include "ImageOperations/ImageWrite.h"
 #include "settings/CSettings.h"
 #include "input.h"
+#include "sys.h"
 #include "gecko.h"
 
 #define GP_FIFO_SIZE (256 * 1024 * 3)
@@ -115,7 +116,7 @@ void InitVideo()
 	VIDEO_Init();
 	
 	// If WiiU - Force 16:9 aspect ratio based on WiiU settings
-	if((*(vu32*)(0xCD8005A0) >> 16 ) == 0xCAFE && Settings.widescreen)
+	if(isWiiU() && Settings.widescreen)
 	{
 		write32(0xd8006a0, 0x30000004), mask32(0xd8006a8, 0, 2);		
 	}

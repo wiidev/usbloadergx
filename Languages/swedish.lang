@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-04 21:00+0100\n"
+"POT-Creation-Date: 2015-02-14 16:29+0100\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -2044,11 +2044,11 @@ msgid "To run GameCube games with %s you need to place them on an USB FAT32 part
 msgstr ""
 
 #, c-format
-msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."
+msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary FAT32 partition."
 msgstr ""
 
 #, c-format
-msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
+msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary partition of the Hard Drive."
 msgstr ""
 
 #, c-format

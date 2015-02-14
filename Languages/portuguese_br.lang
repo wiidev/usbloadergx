@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-04 21:00+0100\n"
+"POT-Creation-Date: 2015-02-14 16:29+0100\n"
 "PO-Revision-Date: 2011-11-03 11:00+0000\n"
 "Last-Translator: Codemaster <javafangamers@hotmail.com>\n"
 "Language-Team: Sky8000, pplucky\n"
@@ -2044,12 +2044,12 @@ msgid "To run GameCube games with %s you need to place them on an USB FAT32 part
 msgstr "Para rodar jogos de GameCube com %s, você precisa de um drive USB formatado em FAT32."
 
 #, c-format
-msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."
-msgstr "Para rodar jogos de GameCube com %s, você precisa escolher uma pasta que esteja numa partição primária."
+msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary FAT32 partition."
+msgstr ""
 
 #, c-format
-msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
-msgstr "Para rodar jogos de GameCube com %s, você precisa escolher uma pasta que esteja na primeira partição do disco rígido."
+msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary partition of the Hard Drive."
+msgstr ""
 
 #, c-format
 msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."
@@ -2366,3 +2366,9 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."
+#~ msgstr "Para rodar jogos de GameCube com %s, você precisa escolher uma pasta que esteja numa partição primária."
+
+#~ msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
+#~ msgstr "Para rodar jogos de GameCube com %s, você precisa escolher uma pasta que esteja na primeira partição do disco rígido."

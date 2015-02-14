@@ -292,3 +292,12 @@ void ScreenShot()
 
 	TakeScreenshot(fullPath);
 }
+
+/*
+ * Check if the current console is a Wii or WiiU
+ * Thanks to Crediar
+ */
+bool isWiiU()
+{
+	return ((*(vu32*)(0xCD8005A0) >> 16 ) == 0xCAFE);
+}

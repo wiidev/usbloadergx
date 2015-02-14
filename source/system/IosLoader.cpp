@@ -2,6 +2,7 @@
 #include <ogc/machine/processor.h>
 
 #include "IosLoader.h"
+#include "sys.h"
 #include "Controls/DeviceHandler.hpp"
 #include "usbloader/usbstorage2.h"
 #include "usbloader/disc.h"
@@ -521,15 +522,6 @@ bool IosLoader::is_NandEmu_compatible(const char *NandEmuPath, s32 ios)
 		}
 	}
 	return true;
-}
-
-/*
- * Check if the current console is a Wii or WiiU
- * Thanks to Crediar
- */
-bool IosLoader::isWiiU()
-{
-	return ((*(vu32*)(0xCD8005A0) >> 16 ) == 0xCAFE);
 }
 
 /******************************************************************************

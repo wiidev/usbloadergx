@@ -95,7 +95,6 @@ class IosLoader
 		static u8 GetMIOSInfo();
 		static u8 GetDMLVersion(char* releaseDate = NULL);
 		static bool is_NandEmu_compatible(const char *NandEmuPath, s32 ios = IOS_GetVersion());
-		static bool isWiiU();
 	private:
 		static void LoadIOSModules(s32 ios, s32 ios_rev);
 };

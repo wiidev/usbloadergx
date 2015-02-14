@@ -15,6 +15,7 @@ void Sys_LoadMenu(void);
 void Sys_BackToLoader(void);
 void Sys_LoadHBC(void);
 bool RebootApp(void);
-void ScreenShot();
+void ScreenShot(void);
+bool isWiiU(void);
 
 #endif

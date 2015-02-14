@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-04 21:00+0100\n"
+"POT-Creation-Date: 2015-02-14 16:29+0100\n"
 "PO-Revision-Date: 2011-07-25 16:40+0200\n"
 "Last-Translator: Galen/xFede\n"
 "Language-Team: Penn, SirPalax, hvy109\n"
@@ -2044,12 +2044,12 @@ msgid "To run GameCube games with %s you need to place them on an USB FAT32 part
 msgstr "Para cargar juegos de GameCube con %s debes ponerlos en un USB con formato FAT32."
 
 #, c-format
-msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."
-msgstr "Para cargar juegos de GameCube con %s debes configurar tu Ruta GameCube principal en una partición primaria."
+msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary FAT32 partition."
+msgstr ""
 
 #, c-format
-msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
-msgstr "Para cargar juegos de GameCube con %s debes configurar tu Ruta GameCube principal en la primer partición del USB."
+msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary partition of the Hard Drive."
+msgstr ""
 
 #, c-format
 msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."
@@ -2367,6 +2367,12 @@ msgstr "de"
 msgid "seconds left"
 msgstr "segundos restantes"
 
+#~ msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."
+#~ msgstr "Para cargar juegos de GameCube con %s debes configurar tu Ruta GameCube principal en una partición primaria."
+
+#~ msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
+#~ msgstr "Para cargar juegos de GameCube con %s debes configurar tu Ruta GameCube principal en la primer partición del USB."
+
 #~ msgid "Anti"
 #~ msgstr "Anti"
 
@@ -2561,4 +2567,3 @@ msgstr "segundos restantes"
 
 #~ msgid "for WiiTDB and hosting covers / disc images"
 #~ msgstr "por WiiTDB y alojar carátulas e imágenes"
-

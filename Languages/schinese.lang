@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-04 21:00+0100\n"
+"POT-Creation-Date: 2015-02-14 16:29+0100\n"
 "PO-Revision-Date: 2013-08-13 07:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: oCameLo\n"
@@ -2044,12 +2044,12 @@ msgid "To run GameCube games with %s you need to place them on an USB FAT32 part
 msgstr "为了运行Gamecube游戏需要用%s替换在fat32分区usb上面的内容。"
 
 #, c-format
-msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."
-msgstr "为了运行Gamecube游戏需要用%s设置你的'主Gamecube路径'在主分区上."
+msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary FAT32 partition."
+msgstr ""
 
 #, c-format
-msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
-msgstr "为了运行Gamecube游戏需要用%s设置你的'主Gamecube路径'在第一个主分区上."
+msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary partition of the Hard Drive."
+msgstr ""
 
 #, c-format
 msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."
@@ -2366,6 +2366,12 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."
+#~ msgstr "为了运行Gamecube游戏需要用%s设置你的'主Gamecube路径'在主分区上."
+
+#~ msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
+#~ msgstr "为了运行Gamecube游戏需要用%s设置你的'主Gamecube路径'在第一个主分区上."
 
 #~ msgid "Error 002 fix"
 #~ msgstr "002 错误修正"

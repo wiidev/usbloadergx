@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-04 21:00+0100\n"
+"POT-Creation-Date: 2015-02-14 16:29+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: Sabykos\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -2044,12 +2044,12 @@ msgid "To run GameCube games with %s you need to place them on an USB FAT32 part
 msgstr "Deine Festplatte muss auf FAT32 formatiert sein, um GameCube Spiele mit %s% starten zu können."
 
 #, c-format
-msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."
-msgstr "Dein GameCube Hauptpfad muss auf eine primäre Partition verweisen, um GameCube Spiele mit %s% starten zu können."
+msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary FAT32 partition."
+msgstr ""
 
 #, c-format
-msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
-msgstr "Dein GameCube Hauptpfad muss auf die erste Partition deiner Festplatte verweisen, um GameCube Spiele mit %s% starten zu können."
+msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary partition of the Hard Drive."
+msgstr ""
 
 #, c-format
 msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."
@@ -2366,6 +2366,12 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."
+#~ msgstr "Dein GameCube Hauptpfad muss auf eine primäre Partition verweisen, um GameCube Spiele mit %s% starten zu können."
+
+#~ msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first partition of the Hard Drive."
+#~ msgstr "Dein GameCube Hauptpfad muss auf die erste Partition deiner Festplatte verweisen, um GameCube Spiele mit %s% starten zu können."
 
 #~ msgid "Anti"
 #~ msgstr "Anti"

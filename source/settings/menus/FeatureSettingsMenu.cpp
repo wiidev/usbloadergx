@@ -41,6 +41,7 @@
 #include "language/gettext.h"
 #include "wad/nandtitle.h"
 #include "wad/wad.h"
+#include "sys.h"
 
 static const char * OnOffText[] =
 {
@@ -553,7 +554,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 	// WiiU Aspect switcher (Thanks Tueidj)
 	else if (ret == ++Idx)
 	{
-		if((*(vu32*)(0xCD8005A0) >> 16 ) == 0xCAFE) // vWii only
+		if(isWiiU()) // vWii only
 		{
 			if( read32(0xd8006a0) == 0x30000004)
 			{
