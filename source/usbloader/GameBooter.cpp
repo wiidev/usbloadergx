@@ -780,7 +780,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 
 
 	// Devolution config
-	DEVO_CGF *devo_config = (DEVO_CGF*)0x80000020;
+	DEVO_CFG *devo_config = (DEVO_CFG*)0x80000020;
 
 	char disc1[100];
 	char disc2[100];

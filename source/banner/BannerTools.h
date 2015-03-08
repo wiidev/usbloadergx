@@ -55,7 +55,7 @@ typedef struct
 		( ( ( _x ) < ( _min ) ) ? ( _min ) : ( ( _x ) > ( _max ) ) ? ( _max) : ( _x ) );	\
 	})
 
-#define MultiplyAlpha(a1, a2) ((u16) (a1) * (u16) (a2) / 0xFF)
+#define MultiplyAlpha(a1, a2) (u8)((u16) (a1) * (u16) (a2) / 0xFF)
 #define FLOAT_2_U8(x) ((u8)((x) > 255.0f ? 255.0f : ((x) < 0.0f ? 0.0f : (x) + 0.5f)))
 #define FLOAT_2_S16(x) ((s16)((x) > 32767.0f ? 32767.0f : ((x) < -32768.0f ? 32768.0f : (x) + 0.5f)))
 

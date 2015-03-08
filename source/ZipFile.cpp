@@ -113,8 +113,7 @@ bool ZipFile::ExtractAll(const char *dest)
 	bool Stop = false;
 
 	u32 blocksize = 1024 * 50;
-	u8 *buffer = new u8[blocksize];
-
+	u8 *buffer = new (std::nothrow) u8[blocksize];
 	if (!buffer) return false;
 
 	char writepath[MAXPATHLEN];

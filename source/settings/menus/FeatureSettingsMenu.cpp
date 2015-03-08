@@ -433,7 +433,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 				return MENU_NONE;
 			}
 
-			snprintf(nandPath, sizeof(nandPath), "/");
+			strcpy(nandPath, "/");
 
 			if(choice == 2)
 			{

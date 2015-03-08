@@ -92,7 +92,7 @@ void HaltGui()
  ***************************************************************************/
 static void * UpdateGUI(void *arg)
 {
-	int i;
+	u8 i;
 
 	while (!ExitRequested)
 	{
@@ -110,7 +110,8 @@ static void * UpdateGUI(void *arg)
 
 		// Pointer modifies wpad data struct for easy implementation of "virtual pointer" with PAD-Sticks
 		// That is why it has to be called right before updating other gui elements with the triggers
-		for (i = 3; i >= 0; i--)
+		i = 4;
+		while(i--)
 			pointer[i]->Draw(&userInput[i]);
 
 		for (i = 0; i < 4; i++)

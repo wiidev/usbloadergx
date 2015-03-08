@@ -104,8 +104,8 @@ class CSettings
 		short gamesoundvolume;
 		short tooltips;
 		short parentalcontrol;
-		short LoaderIOS;
-		short cios;
+		u8 LoaderIOS;
+		u8 cios;
 		short quickboot;
 		short wsprompt;
 		short keyset;

@@ -132,10 +132,17 @@ void Textbox::SetupGX(const BannerResources& resources) const
 
 		for( int i = 0; i < 2; i++ )
 		{
-			GX_SetTevColor(i + 1, (GXColor){ LIMIT(matHead->color_regs[i].r, 0, 0xFF),
-											 LIMIT(matHead->color_regs[i].g, 0, 0xFF),
-											 LIMIT(matHead->color_regs[i].b, 0, 0xFF),
-											 LIMIT(matHead->color_regs[i].a, 0, 0xFF) });
+			// Devkitppc_r27 internal compiler error
+			//GX_SetTevColor(i + 1, (GXColor){ LIMIT(matHead->color_regs[i].r, 0, 0xFF),
+			//								 LIMIT(matHead->color_regs[i].g, 0, 0xFF),
+			//								 LIMIT(matHead->color_regs[i].b, 0, 0xFF),
+			//								 LIMIT(matHead->color_regs[i].a, 0, 0xFF) });
+											 
+			u8 r = (u8) LIMIT(matHead->color_regs[i].r, 0, 0xFF);
+			u8 g = (u8) LIMIT(matHead->color_regs[i].g, 0, 0xFF);
+			u8 b = (u8) LIMIT(matHead->color_regs[i].b, 0, 0xFF);
+			u8 a = (u8) LIMIT(matHead->color_regs[i].a, 0, 0xFF);
+			GX_SetTevColor((u8) (i + 1), (GXColor){r,g,b,a});
 		}
 
 		GX_SetTevColorIn(0, 2, 4, 8, 0xf);

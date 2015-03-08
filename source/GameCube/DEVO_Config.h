@@ -44,6 +44,6 @@ typedef struct _DEVO_CFG
 		u32 disc1_cluster;
 		u32 disc2_cluster;
 		u32 options;					// added in Devo config version 0x0110
-} DEVO_CGF;
+} DEVO_CFG;
 
 #endif

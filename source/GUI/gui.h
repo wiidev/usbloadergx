@@ -602,7 +602,7 @@ class GuiImage: public GuiElement
 		f32 imageangle; //!< Angle to draw the image
 		int tileHorizontal; //!< Number of times to draw (tile) the image horizontally
 		int tileVertical; //!< Number of times to draw (tile) the image vertically
-		int stripe; //!< Alpha value (0-255) to apply a stripe effect to the texture
+		u8 stripe; //!< Alpha value (0-255) to apply a stripe effect to the texture
 		short widescreen; //added
 		bool parentangle;
 };

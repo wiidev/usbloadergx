@@ -144,7 +144,8 @@ int GCTCheats::openTxtfile(const char * filename)
 	}
 
 	const int max_line_size = 4096;
-	char *line = new char[max_line_size];
+	char *line = new (std::nothrow) char[max_line_size];
+	if(!line) return -1;
 
 	fgets(line, max_line_size, pFile);
 	RemoveLineEnds(line);

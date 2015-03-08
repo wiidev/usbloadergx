@@ -91,7 +91,8 @@ int HomebrewXML::LoadHomebrewXMLData(const char* filename)
 int HomebrewXML::SaveHomebrewXMLData(const char* filename)
 {
 	const int max_line_size = 4096;
-	char *line = new char[max_line_size];
+	char *line = new (std::nothrow) char[max_line_size];
+	if(!line) return 0;
 
 	FILE *fp = fopen(filename, "wb");
 	if(!fp)
