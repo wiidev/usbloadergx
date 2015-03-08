@@ -30,7 +30,7 @@ LIBDIR		:=	$(TOPDIR)/libogc/lib
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
-CFLAGS	= -g -O2 -Wall $(MACHDEP) $(INCLUDE)
+CFLAGS	= -g -Os -Wall $(MACHDEP) $(INCLUDE)
 CXXFLAGS	=	$(CFLAGS)
 
 ASFLAGS	:=	-g
@@ -96,17 +96,19 @@ $(BUILD):
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr wii_debug wii_release cube_debug cube_release $(LIBDIR)
+	@rm -fr wii_debug wii_release cube_debug cube_release $(LIBDIR) include
 
 all: $(CUBEBIN)
 
 dist-bin:
+	@mkdir -p include
+	@cp $(TOPDIR)/include/fat.h $(TOPDIR)/include/libfatversion.h include
 	@tar --exclude=.svn --exclude=*CVS* -cvjf $(TOPDIR)/distribute/$(VERSTRING)/libfat-ogc-$(VERSTRING).tar.bz2 include lib
 
 install:
-	cp lib/wii/libfat.a $(DEVKITPRO)/libogc/lib/wii
-	cp lib/cube/libfat.a $(DEVKITPRO)/libogc/lib/cube
-	cp include/fat.h $(DEVKITPRO)/libogc/include
+	@cp lib/wii/libfat.a $(DEVKITPRO)/libogc/lib/wii
+	@cp lib/cube/libfat.a $(DEVKITPRO)/libogc/lib/cube
+	@cp $(TOPDIR)/include/fat.h $(TOPDIR)/include/libfatversion.h $(DEVKITPRO)/libogc/include
 
 #---------------------------------------------------------------------------------
 else

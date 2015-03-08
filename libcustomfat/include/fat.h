@@ -2,7 +2,7 @@
 	fat.h
 	Simple functionality for startup, mounting and unmounting of FAT-based devices.
 	
- Copyright (c) 2006 - 2009
+ Copyright (c) 2006 - 2012
 	Michael "Chishm" Chisholm
 	Dave "WinterMute" Murphy
 
@@ -36,6 +36,8 @@
 extern "C" {
 #endif
 
+#include "libfatversion.h"
+
 // When compiling for NDS, make sure NDS is defined
 #ifndef NDS
  #if defined ARM9 || defined ARM7
@@ -49,9 +51,9 @@ extern "C" {
 #  include <ogc/disc_io.h>
 #else
 #  ifdef NDS
-#    include "nds/disc_io.h"
+#    include <nds/disc_io.h>
 #  else
-#    include "disc_io.h"
+#    include <disc_io.h>
 #  endif
 #endif
 
@@ -96,6 +98,22 @@ extern void fatUnmount (const char* name);
 Get Volume Label
 */
 extern void fatGetVolumeLabel (const char* name, char *label);
+
+// File attributes
+#define ATTR_ARCHIVE	0x20			// Archive
+#define ATTR_DIRECTORY	0x10			// Directory
+#define ATTR_VOLUME		0x08			// Volume
+#define ATTR_SYSTEM		0x04			// System
+#define ATTR_HIDDEN		0x02			// Hidden
+#define ATTR_READONLY	0x01			// Read only
+
+/*
+Methods to modify DOS File Attributes
+*/
+int	FAT_getAttr(const char *file);
+int	FAT_setAttr(const char *file, int attr );
+
+#define LIBFAT_FEOS_MULTICWD
 
 #ifdef __cplusplus
 }
