@@ -23,6 +23,7 @@
 #include "usbloader/GameList.h"
 #include "utils/tools.h"
 #include "sys.h"
+#include "svnrev.h"
 
 StartUpProcess::StartUpProcess()
 {
@@ -44,6 +45,20 @@ StartUpProcess::StartUpProcess()
 	messageTxt->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	messageTxt->SetPosition(screenwidth/2, screenheight/2+60);
 
+	versionTxt = new GuiText(" ", 15, (GXColor) {255, 255, 255, 255});
+	versionTxt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+	versionTxt->SetPosition(20, screenheight-20);
+
+#ifdef FULLCHANNEL
+	versionTxt->SetTextf("v3.0c Rev%s", GetRev());
+#else
+	versionTxt->SetTextf("v3.0  Rev%s", GetRev());
+#endif
+
+#if 0 // enable if you release a modded version
+	versionTxt->SetTextf("v3.0  Rev%s mod", GetRev());
+#endif
+
 	cancelTxt = new GuiText("Press B to cancel", 18, (GXColor) {255, 255, 255, 255});
 	cancelTxt->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	cancelTxt->SetPosition(screenwidth/2, screenheight/2+90);
@@ -64,6 +79,7 @@ StartUpProcess::~StartUpProcess()
 	delete GXImage;
 	delete titleTxt;
 	delete messageTxt;
+	delete versionTxt;
 	delete cancelTxt;
 	delete cancelBtn;
 	delete trigB;
@@ -231,6 +247,7 @@ int StartUpProcess::Execute()
 		}
 		else
 		{
+			Settings.LoaderIOS = 58;
 			SetTextf("Running on IOS 58. Wii disc based games and some channels will not work.");
 			sleep(5);
 		}
@@ -365,6 +382,7 @@ void StartUpProcess::Draw()
 	GXImage->Draw();
 	titleTxt->Draw();
 	messageTxt->Draw();
+	versionTxt->Draw();
 	if(drawCancel)
 		cancelTxt->Draw();
 	Menu_Render();

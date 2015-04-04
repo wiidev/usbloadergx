@@ -30,9 +30,11 @@
 #include "settings/CSettings.h"
 #include "settings/SettingsEnums.h"
 #include "prompts/PromptWindows.h"
+#include "prompts/ProgressWindow.h"
 #include "language/gettext.h"
 #include "prompts/filebrowser.h"
 #include "themes/CTheme.h"
+#include "FileOperations/fileops.h"
 #include "gecko.h"
 
 CustomPathsSM::CustomPathsSM()
@@ -44,7 +46,7 @@ CustomPathsSM::CustomPathsSM()
 	Options->SetName(Idx++, tr("Full Cover Path"));
 	Options->SetName(Idx++, tr("Disc Artwork Path"));
 	Options->SetName(Idx++, tr("Theme Path"));
-	Options->SetName(Idx++, tr("GameTDB Path"));
+	Options->SetName(Idx++, tr("Titles Path"));
 	Options->SetName(Idx++, tr("Update Path"));
 	Options->SetName(Idx++, tr("GCT Cheatcodes Path"));
 	Options->SetName(Idx++, tr("TXT Cheatcodes Path"));
@@ -85,7 +87,7 @@ void CustomPathsSM::SetOptionValues()
 	//! Settings: Theme Path
 	Options->SetValue(Idx++, Settings.theme_path);
 
-	//! Settings: GameTDB Path
+	//! Settings: Titles Path
 	Options->SetValue(Idx++, Settings.titlestxt_path);
 
 	//! Settings: Update Path
@@ -184,11 +186,28 @@ int CustomPathsSM::GetMenuInternal()
 		ChangePath(Settings.theme_path, sizeof(Settings.theme_path));
 	}
 
-	//! Settings: GameTDB Path
+	//! Settings: Titles Path
 	else if (ret == ++Idx)
 	{
-		titleTxt->SetText(tr( "GameTDB Path" ));
-		ChangePath(Settings.titlestxt_path, sizeof(Settings.titlestxt_path));
+		char oldPath[100];
+		strncpy(oldPath, Settings.titlestxt_path, sizeof(Settings.titlestxt_path));
+
+		titleTxt->SetText(tr("Titles Path"));
+		if (ChangePath(Settings.titlestxt_path, sizeof(Settings.titlestxt_path)))
+		{
+			if(strlen(oldPath) != strlen(Settings.titlestxt_path) || strcmp(oldPath, Settings.titlestxt_path) != 0)
+			{
+				if (WindowPrompt(tr("Move File"), tr("Do you want to move the file(s)? Any existing ones will be deleted!"), tr("Yes"), tr("Cancel")) == 1)
+				{
+					MoveDbFile(oldPath, Settings.titlestxt_path, "wiitdb.xml");
+					MoveDbFile(oldPath, Settings.titlestxt_path, "TitlesCache.bin");
+					MoveDbFile(oldPath, Settings.titlestxt_path, "wiitdb_offsets.bin");
+					MoveDbFile(oldPath, Settings.titlestxt_path, "GameTimestamps.txt");
+				
+					WindowPrompt(tr("Process finished."), 0, tr("OK"));
+				}
+			}
+		}
 	}
 
 	//! Settings: Update Path
@@ -381,4 +400,22 @@ int CustomPathsSM::ChangePath(char * SettingsPath, int SizeOfPath)
 	}
 
 	return result;
+}
+
+void CustomPathsSM::MoveDbFile(const char* oldPath, const char* newPath, const char* fileName)
+{
+	char srcPath[300], destPath[300];
+	memset(srcPath, 0, 300);
+	memset(destPath, 0, 300);
+
+	snprintf(srcPath, sizeof(srcPath), "%s/%s", oldPath, fileName);
+	snprintf(destPath, sizeof(destPath), "%s/%s", newPath, fileName);
+
+	if (CheckFile(srcPath))
+	{
+		if (CheckFile(destPath))
+			RemoveFile(destPath);
+
+		MoveFile(srcPath, destPath);
+	}
 }

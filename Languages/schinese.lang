@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-14 16:29+0100\n"
+"POT-Creation-Date: 2015-04-04 16:59+0200\n"
 "PO-Revision-Date: 2013-08-13 07:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: oCameLo\n"
@@ -619,6 +619,9 @@ msgstr ""
 msgid "Disc read error."
 msgstr "光盘读取错误。"
 
+msgid "Disc-Select Prompt"
+msgstr ""
+
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
 msgstr "DM(L) v2.6 或以上版本需要将光盘 2 安装为非压缩格式，是否仍然以压缩格式安装？"
 
@@ -687,6 +690,9 @@ msgstr "是否安装选定的游戏？"
 
 msgid "Do you want to load the default theme?"
 msgstr "要加载默认主题吗？"
+
+msgid "Do you want to move the file(s)? Any existing ones will be deleted!"
+msgstr ""
 
 msgid "Do you want to re-init network?"
 msgstr "是否重新初始化网络？"
@@ -1105,9 +1111,6 @@ msgstr "GameCube 模式"
 msgid "GameCube Source"
 msgstr "GameCube 来源"
 
-msgid "GameTDB Path"
-msgstr "GameTDB 路径"
-
 msgid "Gamename [GAMEID]"
 msgstr "游戏名 [GAMEID]"
 
@@ -1398,6 +1401,9 @@ msgstr "挂载 DVD 光驱"
 
 msgid "Mount USB at launch"
 msgstr "开启时加载USB设备"
+
+msgid "Move File"
+msgstr ""
 
 msgid "Multiple Partitions"
 msgstr "多分区"
@@ -2033,6 +2039,9 @@ msgstr "定时器修复"
 msgid "Title Launcher"
 msgstr "系统频道"
 
+msgid "Titles Path"
+msgstr ""
+
 msgid "Titles from GameTDB"
 msgstr "从 GameTDB 读取标题"
 
@@ -2228,11 +2237,11 @@ msgstr "要删除这个游戏的什么："
 msgid "What to extract from NAND?"
 msgstr "从 NAND 中提取什么？"
 
-msgid "Where do you want MCEmu to be located?"
-msgstr ""
-
 msgid "Where should the game be installed to?"
 msgstr "游戏安装到什么地方？"
+
+msgid "Which device do you want to use for Nintendont files?"
+msgstr ""
 
 msgid "WiFi Features"
 msgstr "WiFi 功能"
@@ -2366,6 +2375,9 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "GameTDB Path"
+#~ msgstr "GameTDB 路径"
 
 #~ msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."
 #~ msgstr "为了运行Gamecube游戏需要用%s设置你的'主Gamecube路径'在主分区上."

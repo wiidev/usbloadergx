@@ -144,6 +144,8 @@ class Layout;
 class Animator
 {
 public:
+	virtual ~Animator() {}
+
 	static const u32 MAGIC_ANIMATION = MAKE_FOURCC('R', 'L', 'A', 'N');
 	static const u32 MAGIC_PANE_ANIMATION_INFO = MAKE_FOURCC('p', 'a', 'i', '1');
 

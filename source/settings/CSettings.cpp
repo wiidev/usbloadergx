@@ -59,7 +59,7 @@ void CSettings::SetDefault()
 	snprintf(covers2d_path, sizeof(covers2d_path), "%simages/2D/", ConfigPath);
 	snprintf(coversFull_path, sizeof(coversFull_path), "%simages/full/", ConfigPath);
 	snprintf(disc_path, sizeof(disc_path), "%simages/disc/", ConfigPath);
-	snprintf(titlestxt_path, sizeof(titlestxt_path), "%s", ConfigPath);
+	snprintf(titlestxt_path, sizeof(titlestxt_path), "%stitles", ConfigPath);
 	snprintf(languagefiles_path, sizeof(languagefiles_path), "%slanguage/", ConfigPath);
 	snprintf(update_path, sizeof(update_path), "%s/apps/usbloader_gx/", BootDevice);
 	snprintf(BNRCachePath, sizeof(BNRCachePath), "%s/apps/usbloader_gx/cache_bnr/", BootDevice);
@@ -173,6 +173,7 @@ void CSettings::SetDefault()
 	GCBannerScale = 1.5f;
 	GameCubeMode = GC_MODE_MIOS;
 	GameCubeSource = AUTO;
+	MultiDiscPrompt = OFF;
 	DMLVideo = DML_VIDEO_AUTO;
 	DMLProgPatch = OFF;
 	DMLNMM = OFF;
@@ -423,6 +424,7 @@ bool CSettings::Save()
 	fprintf(file, "GameCubeSDPath = %s\n", GameCubeSDPath);
 	fprintf(file, "GameCubeMode = %d\n", GameCubeMode);
 	fprintf(file, "GameCubeSource = %d\n", GameCubeSource);
+	fprintf(file, "MultiDiscPrompt = %d\n", MultiDiscPrompt);
 	fprintf(file, "DMLVideo = %d\n", DMLVideo);
 	fprintf(file, "DMLProgPatch = %d\n", DMLProgPatch);
 	fprintf(file, "DMLNMM = %d\n", DMLNMM);
@@ -863,6 +865,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "GameCubeSource") == 0)
 	{
 		GameCubeSource = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "MultiDiscPrompt") == 0)
+	{
+		MultiDiscPrompt = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "DMLVideo") == 0)

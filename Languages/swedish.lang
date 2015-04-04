@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-14 16:29+0100\n"
+"POT-Creation-Date: 2015-04-04 16:59+0200\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -619,6 +619,9 @@ msgstr ""
 msgid "Disc read error."
 msgstr ""
 
+msgid "Disc-Select Prompt"
+msgstr ""
+
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
 msgstr ""
 
@@ -686,6 +689,9 @@ msgid "Do you want to install selected games?"
 msgstr ""
 
 msgid "Do you want to load the default theme?"
+msgstr ""
+
+msgid "Do you want to move the file(s)? Any existing ones will be deleted!"
 msgstr ""
 
 msgid "Do you want to re-init network?"
@@ -1105,9 +1111,6 @@ msgstr ""
 msgid "GameCube Source"
 msgstr ""
 
-msgid "GameTDB Path"
-msgstr ""
-
 msgid "Gamename [GAMEID]"
 msgstr ""
 
@@ -1397,6 +1400,9 @@ msgid "Mount DVD drive"
 msgstr "Montera DVD läsare"
 
 msgid "Mount USB at launch"
+msgstr ""
+
+msgid "Move File"
 msgstr ""
 
 msgid "Multiple Partitions"
@@ -2033,6 +2039,9 @@ msgstr ""
 msgid "Title Launcher"
 msgstr "Titel startare"
 
+msgid "Titles Path"
+msgstr ""
+
 msgid "Titles from GameTDB"
 msgstr ""
 
@@ -2228,10 +2237,10 @@ msgstr ""
 msgid "What to extract from NAND?"
 msgstr ""
 
-msgid "Where do you want MCEmu to be located?"
+msgid "Where should the game be installed to?"
 msgstr ""
 
-msgid "Where should the game be installed to?"
+msgid "Which device do you want to use for Nintendont files?"
 msgstr ""
 
 msgid "WiFi Features"

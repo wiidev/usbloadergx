@@ -255,7 +255,12 @@ void WindowCredits()
 	creditsMusic->SetLoop(1);
 	creditsMusic->Play();
 
-	bool exit = false;
+	GuiTrigger trigB;
+	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
+	GuiButton backBtn(0, 0);
+	backBtn.SetPosition(-20, -20);
+	backBtn.SetTrigger(&trigB);
+	
 	u32 i = 0;
 	int y = 20;
 	float oldFontScale = Settings.FontScaleFactor;
@@ -329,9 +334,18 @@ void WindowCredits()
 
 	// Check if Nintendont is available
 	char GCInfo2[80] = "";
-	const char* NINBuildDate = nintendontBuildDate(Settings.NINLoaderPath);
-	if(strlen(NINBuildDate) > 0)
-		snprintf(GCInfo2, sizeof(GCInfo2), "Nintendont Built %.20s",  NINBuildDate );
+	char NINVersion[7]= "";
+	nintendontVersion(Settings.NINLoaderPath, NINVersion, sizeof(NINVersion));
+	if(strlen(NINVersion) > 0)
+	{
+		snprintf(GCInfo2, sizeof(GCInfo2), "Nintendont v%.6s",  NINVersion );
+	}
+	else
+	{
+		char NINBuildDate[21] = "";
+		if(nintendontBuildDate(Settings.NINLoaderPath, NINBuildDate))
+			snprintf(GCInfo2, sizeof(GCInfo2), "Nintendont Built %.20s",  NINBuildDate );
+	}
 
 	// Header - Top left
 	currentTxt = new GuiText(GCInfo2, 16, ( GXColor ) {255, 255, 255, 255});
@@ -522,6 +536,7 @@ void WindowCredits()
 
 	creditsWindow.Append(&creditsWindowBox);
 	creditsWindow.Append(&starImg);
+	creditsWindow.Append(&backBtn);
 
 	creditsWindow.SetEffect(EFFECT_FADE, 30);
 
@@ -530,7 +545,7 @@ void WindowCredits()
 	mainWindow->Append(&creditsWindow);
 	ResumeGui();
 
-	while (!exit)
+	while(backBtn.GetState() != STATE_CLICKED)
 	{
 		usleep(12000);
 
@@ -542,11 +557,9 @@ void WindowCredits()
 		angle++;
 		if (angle > 360) angle = 0;
 		starImg.SetAngle(angle);
-
-		if (ButtonsPressed() != 0)
-			exit = true;
 	}
-
+	backBtn.ResetState();
+	
 	creditsMusic->Stop();
 
 	delete creditsMusic;

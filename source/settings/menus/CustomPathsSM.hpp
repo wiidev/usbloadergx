@@ -36,6 +36,9 @@ class CustomPathsSM : public SettingsMenu
 		int ChangePath(char * SettingsPath, int SizeOfPath);
 
 		OptionList GuiOptions;
+
+	private:
+		void MoveDbFile(const char* oldPath, const char* newPath, const char* fileName);
 };
 
 

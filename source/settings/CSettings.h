@@ -177,6 +177,7 @@ class CSettings
 		float GCBannerScale;
 		short GameCubeMode;
 		short GameCubeSource;
+		short MultiDiscPrompt;
 		short DMLVideo;
 		short DMLProgPatch;
 		short DMLNMM;

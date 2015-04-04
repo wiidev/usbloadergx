@@ -217,6 +217,7 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Progressive Patch" ));
 	Options->SetName(Idx++, "%s", tr( "Force Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "Debug" ));
+	Options->SetName(Idx++, "%s", tr( "Disc-Select Prompt" ));
 	Options->SetName(Idx++, "%s", tr( "--==   DIOS MIOS (Lite) " ));
 	Options->SetName(Idx++, "%s", tr( "NMM Mode" ));
 	Options->SetName(Idx++, "%s", tr( "PAD Hook" ));
@@ -377,8 +378,11 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: DML + NIN Force Widescreen
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLWidescreen]));
 
-	//! Settings: DML Debug
+	//! Settings: DML + NIN Debug
 	Options->SetValue(Idx++, "%s", tr(DMLDebug[Settings.DMLDebug]));
+
+	//! Settings: DML + NIN MultiDiscPrompt
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.MultiDiscPrompt]));
 
 	//! Settings: TITLE - GameCube DIOS MIOS (Lite)
 	Options->SetValue(Idx++, "==--   ");
@@ -404,40 +408,40 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: TITLE - Nintendont
 	Options->SetValue(Idx++, "==--   ");
 
-	//! Settings: TITLE - NIN Auto Boot
+	//! Settings: NIN Auto Boot
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINAutoboot]));
 
-	//! Settings: TITLE - NIN Nincfg.bin file
+	//! Settings: NIN Nincfg.bin file
 	Options->SetValue(Idx++, "%s", tr(NINCfgText[Settings.NINSettings]));
 
-	//! Settings: TITLE - NIN Video Deflicker
+	//! Settings: NIN Video Deflicker
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINDeflicker]));
 
-	//! Settings: TITLE - NIN Memory Card Emulation
+	//! Settings: NIN Memory Card Emulation
 	Options->SetValue(Idx++, "%s", tr(NINMCText[Settings.NINMCEmulation]));
 
-	//! Settings: TITLE - NIN Memory Card Blocks Size
+	//! Settings: NIN Memory Card Blocks Size
 	Options->SetValue(Idx++, "%d", MEM_CARD_BLOCKS(Settings.NINMCSize));
 
-	//! Settings: TITLE - NIN USB-HID controller
+	//! Settings: NIN USB-HID controller
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINUSBHID]));
 
-	//! Settings: TITLE - NIN MaxPads - Number of GameCube controllers
+	//! Settings: NIN MaxPads - Number of GameCube controllers
 	Options->SetValue(Idx++, "%i", Settings.NINMaxPads);
 
-	//! Settings: TITLE - NIN Native Controller
+	//! Settings: NIN Native Controller
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINNativeSI]));
 
-	//! Settings: TITLE - WiiU Widescreen
+	//! Settings: WiiU Widescreen
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINWiiUWide]));
 
-	//! Settings: TITLE - NIN LED Activity
+	//! Settings: NIN LED Activity
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINLED]));
 
-	//! Settings: TITLE - NIN OS Report
+	//! Settings: NIN OS Report
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINOSReport]));
 
-	//! Settings: TITLE - NIN Log to file
+	//! Settings: NIN Log to file
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINLog]));
 
 	//! Settings: TITLE - Devolution
@@ -691,10 +695,16 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.DMLWidescreen >= MAX_ON_OFF) Settings.DMLWidescreen = 0;
 	}
 
-	//! Settings: DML Debug
+	//! Settings: DML + NIN Debug
 	else if (ret == ++Idx)
 	{
 		if (++Settings.DMLDebug >= 3) Settings.DMLDebug = 0;
+	}
+
+	//! Settings: DML + NIN MultiDiscPrompt
+	else if (ret == ++Idx)
+	{
+		if (++Settings.MultiDiscPrompt >= MAX_ON_OFF) Settings.MultiDiscPrompt = 0;
 	}
 
 	//! Settings: TITLE - GameCube DIOS MIOS (Lite)

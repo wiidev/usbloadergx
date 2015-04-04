@@ -25,6 +25,7 @@ class StartUpProcess
 		GuiImage * GXImage;
 		GuiText * titleTxt;
 		GuiText * messageTxt;
+		GuiText * versionTxt;
 		GuiText * cancelTxt;
 		GuiButton * cancelBtn;
 		GuiTrigger * trigB;

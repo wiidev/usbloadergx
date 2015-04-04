@@ -44,6 +44,7 @@ public:
 	} __attribute__((packed));
 
 	Material();
+	virtual ~Material() {}
 
 	void Load(Material::Header *mat);
 	void Apply(const BannerResources& resources, u8 render_alpha, bool modulate) const;

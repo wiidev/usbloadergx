@@ -31,8 +31,6 @@
 #include "menu.h"
 #include "gecko.h"
 
-static char NINBuildDate[21];
-
 GCGames *GCGames::instance = NULL;
 
 inline bool isGameID(const u8 *id)
@@ -569,7 +567,7 @@ bool GCGames::CopyUSB2SD(const struct discHdr *header)
 	}
 }
 
-const char *nintendontBuildDate(const char *NIN_loader_path)
+int nintendontBuildDate(const char *NIN_loader_path, char *NINBuildDate)
 {
 
 	char NIN_loader[100];
@@ -580,23 +578,24 @@ const char *nintendontBuildDate(const char *NIN_loader_path)
 	{
 		u8 *buffer = NULL;
 		u32 filesize = 0;
+		const char* str = "Nintendont Loader";
 		bool found = false;
 		if(LoadFileToMem(NIN_loader, &buffer, &filesize))
 		{
-			for(u32 i = 0; i < filesize-60; ++i)
+			for(u32 i = 0; i < filesize-100; ++i)
 			{
-				if((*(u32*)(buffer+i+2)) == 'nten' && (*(u32*)(buffer+i+6)) == 'dont' && (*(u32*)(buffer+i+11)) == 'Load')
+				if( memcmp(buffer+i, str, strlen(str)) == 0)
 				{
 					// Write buffer in NINheader
 					char NINHeader[100];
-					for(int j = 0 ; j < 99 ; j++)
+					for(u8 j = 0 ; j < 99 ; j++)
 						NINHeader[j] = *(u8*)(buffer+i+j) == 0 ? ' ' : *(u8*)(buffer+i+j); // replace \0 with a space.
 					NINHeader[99] = '\0';
 
 					// Search month string start position in header
 					char *dateStart = NULL;
-					const char * month[] = {"Jan ", "Feb ", "Mar ", "Apr ", "May ", "Jun ", "Jui ", "Aug ", "Sep ", "Oct ", "Nov ", "Dec "};
-					for(int m = 0 ; m < 12 ; m++) 
+					const char *month[] = {"Jan ", "Feb ", "Mar ", "Apr ", "May ", "Jun ", "Jui ", "Aug ", "Sep ", "Oct ", "Nov ", "Dec "};
+					for(u8 m = 0 ; m < 12 ; m++) 
 					{
 						dateStart = strstr(NINHeader, month[m]);
 						if(dateStart != NULL)
@@ -607,7 +606,7 @@ const char *nintendontBuildDate(const char *NIN_loader_path)
 					
 					dateStart[20] = '\0';
 					
-					snprintf(NINBuildDate, sizeof(NINBuildDate), "%.20s", dateStart);
+					sprintf(NINBuildDate, "%.20s", dateStart);
 					gprintf("Nintendont Build date : %.20s \n", dateStart);
 					
 					found = true;
@@ -616,19 +615,40 @@ const char *nintendontBuildDate(const char *NIN_loader_path)
 			}
 			free(buffer);
 		}
-		
 		if(found)
-			return NINBuildDate;
+			return 1;
 	}
 	
-	return "";
-
+	return 0;
 }
 
-
-
-
-
-
-
-
+int nintendontVersion(const char *NIN_loader_path, char *NINVersion, int len)
+{
+	char NIN_loader[100];
+	u32 NINRev = 0;
+	snprintf(NIN_loader, sizeof(NIN_loader), "%sboot.dol", NIN_loader_path);
+	if(!CheckFile(NIN_loader))
+		snprintf(NIN_loader, sizeof(NIN_loader), "%sloader.dol", NIN_loader_path);
+	if(CheckFile(NIN_loader))
+	{
+		u8 *buffer = NULL;
+		u32 filesize = 0;
+		const char* str = "$$Version:";
+		if(LoadFileToMem(NIN_loader, &buffer, &filesize))
+		{
+			for(u32 i = 0; i < filesize; i += 32)
+			{
+				if(memcmp( buffer+i, str, strlen(str)) == 0)
+				{
+					// Write buffer in NINVersion
+					snprintf(NINVersion, len, "%s", buffer+i+strlen(str));
+					NINRev = atoi(strchr(NINVersion, '.')+1);
+					break;
+				}
+			}
+			free(buffer);
+		}
+	}
+	
+	return NINRev;
+}

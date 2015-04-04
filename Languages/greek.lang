@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-14 16:29+0100\n"
+"POT-Creation-Date: 2015-04-04 16:59+0200\n"
 "Last-Translator: nakata6790\n"
 "Language-Team: nakata6790 (aka0107@gmail.com)\n"
 "MIME-Version: 1.0\n"
@@ -618,6 +618,9 @@ msgstr ""
 msgid "Disc read error."
 msgstr "ÓöÜëìá êáôá ôçí áíÜãíùóç äßóêïõ."
 
+msgid "Disc-Select Prompt"
+msgstr ""
+
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
 msgstr ""
 
@@ -686,6 +689,9 @@ msgstr "ÈÝëåôå íá åãêáôáóôÞóåôå ôá åðéëåãìÝíá �
 
 msgid "Do you want to load the default theme?"
 msgstr "ÈÝëåôå íá ÷ñçóéìðïðïéÞóôå ôï âáóéêü èÝìá;"
+
+msgid "Do you want to move the file(s)? Any existing ones will be deleted!"
+msgstr ""
 
 msgid "Do you want to re-init network?"
 msgstr "ÈÝëåôå íá åðáíáóõíäåèåß ôï ðñüãñáììá ìå ôï äéáäßêôõï;"
@@ -1104,9 +1110,6 @@ msgstr "ÌÝèïäïò öüñôùóçò ðáé÷íéäéþí GameCube"
 msgid "GameCube Source"
 msgstr ""
 
-msgid "GameTDB Path"
-msgstr "Äéåýèõíóç/ìïíïðÜôé áñ÷åßïõ GameTDB"
-
 msgid "Gamename [GAMEID]"
 msgstr "üíïìá ðáé÷íéäéïý [êùäéêüòðáé÷íéäéïý]"
 
@@ -1396,6 +1399,9 @@ msgid "Mount DVD drive"
 msgstr "Öüñôùóç DVD"
 
 msgid "Mount USB at launch"
+msgstr ""
+
+msgid "Move File"
 msgstr ""
 
 msgid "Multiple Partitions"
@@ -2032,6 +2038,9 @@ msgstr ""
 msgid "Title Launcher"
 msgstr "ÅêêéíçôÞò ôßôëùí"
 
+msgid "Titles Path"
+msgstr ""
+
 msgid "Titles from GameTDB"
 msgstr "Ôßôëïé áðü ôï GameTDB"
 
@@ -2227,11 +2236,11 @@ msgstr "Ôé èá èÝëáôå íá äéáãñÜøåôå áðü áõôü ôïí 
 msgid "What to extract from NAND?"
 msgstr "Ôé íá ìåôáöåñèåß áðü ôç ìíÞìç NAND?"
 
-msgid "Where do you want MCEmu to be located?"
-msgstr ""
-
 msgid "Where should the game be installed to?"
 msgstr "Ðïõ íá åãêáôáóôáèåß ôï ðáé÷íßäé;"
+
+msgid "Which device do you want to use for Nintendont files?"
+msgstr ""
 
 msgid "WiFi Features"
 msgstr "Ëåéôïõñãßåò wi-fi"
@@ -2365,6 +2374,9 @@ msgstr "áðü"
 
 msgid "seconds left"
 msgstr "äåõôåñüëåðôá áðïìÝíïõí"
+
+#~ msgid "GameTDB Path"
+#~ msgstr "Äéåýèõíóç/ìïíïðÜôé áñ÷åßïõ GameTDB"
 
 #~ msgid "Anti"
 #~ msgstr "ÊáôÜ"

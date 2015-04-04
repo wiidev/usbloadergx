@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-14 16:29+0100\n"
+"POT-Creation-Date: 2015-04-04 16:59+0200\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: Sabykos\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -619,6 +619,9 @@ msgstr "Disc Leseverzögerung"
 msgid "Disc read error."
 msgstr "Disk Lesefehler"
 
+msgid "Disc-Select Prompt"
+msgstr ""
+
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
 msgstr "Disk 2 muss unkomprimiert sein, um mit DM(L) 2.6+ zu funktionieren. Sicher, dass du die Disk komprimiert installieren möchtest?"
 
@@ -687,6 +690,9 @@ msgstr "Sollen gewählte Spiele instelliert werden?"
 
 msgid "Do you want to load the default theme?"
 msgstr "Soll das DEFAULT Theme geladen werden?"
+
+msgid "Do you want to move the file(s)? Any existing ones will be deleted!"
+msgstr ""
 
 msgid "Do you want to re-init network?"
 msgstr "Netzwerk re-initialisieren?"
@@ -1105,9 +1111,6 @@ msgstr "GameCube Modus"
 msgid "GameCube Source"
 msgstr "GameCube Quelle"
 
-msgid "GameTDB Path"
-msgstr "GameTDB"
-
 msgid "Gamename [GAMEID]"
 msgstr "Spielname [SPIELID]"
 
@@ -1398,6 +1401,9 @@ msgstr "Spiel starten"
 
 msgid "Mount USB at launch"
 msgstr "USB beim Start mounten"
+
+msgid "Move File"
+msgstr ""
 
 msgid "Multiple Partitions"
 msgstr "Mehrere Partitionen"
@@ -2033,6 +2039,9 @@ msgstr ""
 msgid "Title Launcher"
 msgstr "Channel Launcher"
 
+msgid "Titles Path"
+msgstr ""
+
 msgid "Titles from GameTDB"
 msgstr "Namen aus der WiiTDB"
 
@@ -2228,11 +2237,11 @@ msgstr "Was sollte bei diesem Spiel gelöscht werden:"
 msgid "What to extract from NAND?"
 msgstr "Was soll aus dem NAND kopiert werden?"
 
-msgid "Where do you want MCEmu to be located?"
-msgstr ""
-
 msgid "Where should the game be installed to?"
 msgstr "Wohin soll das Spiel installiert werden?"
+
+msgid "Which device do you want to use for Nintendont files?"
+msgstr ""
 
 msgid "WiFi Features"
 msgstr "WiFi Fähigkeiten"
@@ -2366,6 +2375,9 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "GameTDB Path"
+#~ msgstr "GameTDB"
 
 #~ msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on a primary partition."
 #~ msgstr "Dein GameCube Hauptpfad muss auf eine primäre Partition verweisen, um GameCube Spiele mit %s% starten zu können."

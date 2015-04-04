@@ -23,9 +23,10 @@
 #include "usbloader/disc.h"
 #include "settings/CSettings.h"
 
-using namespace std;
+int nintendontBuildDate(const char *NIN_loader_path, char* NINBuildDate);
+int nintendontVersion(const char *NIN_loader_path, char* NINVersion, int len);
 
-const char *nintendontBuildDate(const char *NIN_loader_path);
+using namespace std;
 
 class GCGames
 {

@@ -137,12 +137,12 @@ s32 IosPatch_RUNTIME(bool wii, bool sciifii, bool vwii, bool verbose) {
 			if(verbose) printf(">> Applying standard Wii patches:\n");
 			count += apply_patch("di_readlimit", di_readlimit_old, sizeof(di_readlimit_old), di_readlimit_patch, sizeof(di_readlimit_patch), 12, verbose);
 			count += apply_patch("isfs_permissions", isfs_permissions_old, sizeof(isfs_permissions_old), isfs_permissions_patch, sizeof(isfs_permissions_patch), 0, verbose);
-			count += apply_patch("es_setuid", setuid_old, sizeof(setuid_old), setuid_patch, sizeof(setuid_patch), 0, verbose);
+			//count += apply_patch("es_setuid", setuid_old, sizeof(setuid_old), setuid_patch, sizeof(setuid_patch), 0, verbose);
 			count += apply_patch("es_identify", es_identify_old, sizeof(es_identify_old), es_identify_patch, sizeof(es_identify_patch), 2, verbose);
 			count += apply_patch("hash_check", hash_old, sizeof(hash_old), hash_patch, sizeof(hash_patch), 1, verbose);
 			count += apply_patch("new_hash_check", new_hash_old, sizeof(new_hash_old), hash_patch, sizeof(hash_patch), 1, verbose);
-			count += apply_patch("isfs_setattr_pt1", isfs_setattr_pt1_old, sizeof(isfs_setattr_pt1_old), isfs_setattr_pt1_patch, sizeof(isfs_setattr_pt1_patch), 0, verbose);
-			count += apply_patch("isfs_setattr_pt2", isfs_setattr_pt2_old, sizeof(isfs_setattr_pt2_old), isfs_setattr_pt2_patch, sizeof(isfs_setattr_pt2_patch), 0, verbose);
+			//count += apply_patch("isfs_setattr_pt1", isfs_setattr_pt1_old, sizeof(isfs_setattr_pt1_old), isfs_setattr_pt1_patch, sizeof(isfs_setattr_pt1_patch), 0, verbose);
+			//count += apply_patch("isfs_setattr_pt2", isfs_setattr_pt2_old, sizeof(isfs_setattr_pt2_old), isfs_setattr_pt2_patch, sizeof(isfs_setattr_pt2_patch), 0, verbose);
 		}
 		if(sciifii)
 		{
