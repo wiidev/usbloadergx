@@ -23,10 +23,10 @@
 !define NAME "USBLoaderGX"
 !define NAME2 "USB Loader GX"
 !define SHORTNAME "usbloader_gx"
-!define VERSION "1.80.0.0"
-!define SHORTVERSION "1.8"
+!define VERSION "1.90.0.0"
+!define SHORTVERSION "1.9"
 !define FILENAME "${NAME}_${SHORTVERSION}_Installer"
-!define URL "http://code.google.com/p/usbloader-gui/"
+!define URL "http://sourceforge.net/projects/usbloadergx/"
 !define TEAM "Team USB Loader GX"
 !define INSTALLERLANGUAGE "ENGLISH" ;one of the NSIS pre-defined languages supported: English, French, Italian, German, Japanese, SimpChinese
 

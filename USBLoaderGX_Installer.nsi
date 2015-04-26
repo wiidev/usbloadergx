@@ -1,6 +1,6 @@
 ;Copyright 2012 NeoRame
 
-;Website: http://code.google.com/p/usbloader-gui/
+;Website: http://sourceforge.net/projects/usbloadergx/
 ;This software is OSI Certified Open Source Software.
 ;OSI Certified is a certification mark of the Open Source Initiative.
 
@@ -27,7 +27,7 @@ InstallDir "\${SHORTNAME}"
 Caption "${NAME2} Installer"
 VIProductVersion "${VERSION}"
 VIAddVersionKey ProductName "${NAME2}"
-VIAddVersionKey Comments "For more informations please visit http://code.google.com/p/usbloader-gui/"
+VIAddVersionKey Comments "For more informations please visit http://sourceforge.net/projects/usbloadergx/"
 VIAddVersionKey CompanyName "${TEAM}"
 VIAddVersionKey LegalCopyright "${TEAM}"
 VIAddVersionKey FileDescription "${NAME2}"
@@ -127,7 +127,7 @@ Section "USB Loader GX" SecMain
   AddSize "4832"
   SetOutPath "$INSTDIR"
 
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/branches/updates/update_dol.txt rev.txt
+  NSISdl::download http://svn.code.sf.net/p/usbloadergx/code/branches/updates/update_dol.txt rev.txt
   ;get revision number
   Push 1 ;line number to read from
   Push "$INSTDIR\rev.txt" ;text file to read
@@ -155,8 +155,8 @@ Section "USB Loader GX" SecMain
   ; remove file again
   Delete "$INSTDIR\rev.txt"
   
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/branches/updates/icon.png icon.png
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/branches/updates/meta.xml meta.xml
+  NSISdl::download http://svn.code.sf.net/p/usbloadergx/code/branches/updates/icon.png icon.png
+  NSISdl::download http://svn.code.sf.net/p/usbloadergx/code/branches/updates/meta.xml meta.xml
   NSISdl::download $R0 boot.dol
   Pop $0
   StrCmp $0 success success
@@ -556,7 +556,7 @@ Section /o  "$(DESC_Op_Chan)" SecOptional3
   CreateDirectory "$INSTDIR\..\..\wad"
   AddSize "6773"
   
-  NSISdl::download http://usbloader-gui.googlecode.com/svn/branches/updates/update_wad.txt rev.txt
+  NSISdl::download http://svn.code.sf.net/p/usbloadergx/code/branches/updates/update_wad.txt rev.txt
   ;get revision number
   Push 1 ;line number to read from
   Push "$INSTDIR\..\..\wad\rev.txt" ;text file to read
