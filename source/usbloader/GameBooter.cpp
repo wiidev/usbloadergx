@@ -1205,9 +1205,16 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 							return 0;
 					}
 				}
+				else
+				{
+					gprintf("kenobiwii source path = %s Not found.\n", kenobiwii_srcpath);
+					if(WindowPrompt(tr("Warning:"), fmt(tr("To use ocarina with %s you need the %s file."), LoaderName, kenobiwii_path), tr("Continue"), tr("Cancel")) == 0)
+						return 0;
+				}
 			}
 			else
 			{
+				gprintf("kenobiwii path = %s Not found.\n", kenobiwii_path);
 				if(WindowPrompt(tr("Warning:"), fmt(tr("To use ocarina with %s you need the %s file."), LoaderName, kenobiwii_path), tr("Continue"), tr("Cancel")) == 0)
 				return 0;
 			}

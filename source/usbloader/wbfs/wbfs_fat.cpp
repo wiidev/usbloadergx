@@ -451,29 +451,43 @@ s32 Wbfs_Fat::GetHeadersCount()
 			snprintf(fname, sizeof(fname), "%s", dirent->d_name);
 
 			len = strlen(fname);
-			if (len < 8) continue; // "GAMEID_x"
+			if (len < 6) continue; // less than "GAMEID"
 
-			int lay_a = 0;
-			int lay_b = 0;
-			if (CheckLayoutB(fname, len, id, fname_title))
+			if(len == 6)
 			{
-				// usb:/wbfs/TITLE[GAMEID]/GAMEID.wbfs
-				lay_b = 1;
-			}
-			else if (fname[6] == '_')
-			{
-				// usb:/wbfs/GAMEID_TITLE/GAMEID.wbfs
+				// usb:/wbfs/GAMEID/GAMEID.wbfs
+				if(!isGameID(fname))
+					continue;
+				
 				memcpy(id, fname, 6);
-
-				if(isGameID((char*) id))
-				{
-					lay_a = 1;
-					snprintf(fname_title, sizeof(fname_title), &fname[7]);
-				}
 			}
+			else if(len >= 8 ) // GAMEID_Title or Title_[GameID]
+			{
+				int lay_a = 0;
+				int lay_b = 0;
+				if (CheckLayoutB(fname, len, id, fname_title))
+				{
+					// usb:/wbfs/TITLE[GAMEID]/GAMEID.wbfs
+					lay_b = 1;
+				}
+				else if (fname[6] == '_')
+				{
+					// usb:/wbfs/GAMEID_TITLE/GAMEID.wbfs
+					memcpy(id, fname, 6);
 
-			if (!lay_a && !lay_b) continue;
+					if(isGameID((char*) id))
+					{
+						lay_a = 1;
+						snprintf(fname_title, sizeof(fname_title), &fname[7]);
+					}
+				}
 
+				if (!lay_a && !lay_b) continue;
+			}
+			else // Todo : Add usb:/wbfs/Title/GAMEID.wbfs
+				continue;
+
+			
 			// check ahead, make sure it succeeds
 			snprintf(fpath, sizeof(fpath), "%s/%s/%.6s.wbfs", path, dirent->d_name, (char *) id);
 		}
@@ -624,7 +638,7 @@ int Wbfs_Fat::FindFilename(u8 *id, char *fname, int len)
 
 		if (dirent->d_name[0] == '.') continue;
 		int n = strlen(dirent->d_name);
-		if (n < 8) continue;
+		if (n < 6) continue;
 
 		const char *fileext = strrchr(dirent->d_name, '.');
 		if(fileext && (strcasecmp(fileext, ".wbfs") == 0 ||

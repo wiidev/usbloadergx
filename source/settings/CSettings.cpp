@@ -78,7 +78,7 @@ void CSettings::SetDefault()
 	strlcpy(NandEmuChanPath, NandEmuPath, sizeof(NandEmuChanPath));
 	strlcpy(GameCubePath, "usb1:/games/", sizeof(GameCubePath));
 	strlcpy(GameCubeSDPath, "sd:/games/", sizeof(GameCubeSDPath));
-	strlcpy(CustomBannersURL, "http://copy.com/vRN3HgFVyk9u7YuB/Public/", sizeof(CustomBannersURL));
+	strlcpy(CustomBannersURL, "http://nintendont.gxarena.com/banners/", sizeof(CustomBannersURL));
 	theme[0] = 0;
 	language_path[0] = 0;
 	ogg_path[0] = 0;
@@ -127,7 +127,7 @@ void CSettings::SetDefault()
 	ParentalBlocks = BLOCK_ALL;
 	InstallToDir = INSTALL_TO_NAME_GAMEID;
 	GameSplit = GAMESPLIT_4GB;
-	InstallPartitions = ONLY_GAME_PARTITION;
+	InstallPartitions = REMOVE_UPDATE_PARTITION;
 	HomeMenu = HOME_MENU_DEFAULT;
 	MultiplePartitions = OFF;
 	BlockIOSReload = AUTO;
@@ -190,7 +190,7 @@ void CSettings::SetDefault()
 	NINAutoboot = ON;
 	NINSettings = AUTO;
 	NINUSBHID = OFF;
-	NINMaxPads = 1;
+	NINMaxPads = 4;
 	NINNativeSI = OFF;
 	NINWiiUWide = widescreen;
 	NINOSReport = OFF;
@@ -1170,8 +1170,9 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "CustomBannersURL") == 0)
 	{
 		if( strcmp(value, "http://dl.dropbox.com/u/101209384/") == 0 ||
-			strcmp(value, "http://dl.dropboxusercontent.com/u/101209384/") == 0)
-			strlcpy(CustomBannersURL, "http://copy.com/vRN3HgFVyk9u7YuB/Public/", sizeof(CustomBannersURL)); // update banner URL
+			strcmp(value, "http://dl.dropboxusercontent.com/u/101209384/") == 0 ||
+			strcmp(value, "http://copy.com/vRN3HgFVyk9u7YuB/Public/") == 0)
+			strlcpy(CustomBannersURL, "http://nintendont.gxarena.com/banners/", sizeof(CustomBannersURL)); // update banner URL
 		else
 			strlcpy(CustomBannersURL, value, sizeof(CustomBannersURL));
 		return true;

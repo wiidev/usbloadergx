@@ -978,7 +978,11 @@ int WindowExitPrompt()
 				Sys_LoadMenu();
 			else if (Settings.HomeMenu == HOME_MENU_FULL)
 			{
-				ret = WindowPrompt(tr( "How to Shutdown?" ), 0, tr( "Full shutdown" ), tr( "Standby" ), tr("Cancel"));
+				if(isWiiU())
+					ret = WindowPrompt(tr( "How to Shutdown?" ), 0, tr( "Full shutdown" ), tr("Cancel"));
+				else
+					ret = WindowPrompt(tr( "How to Shutdown?" ), 0, tr( "Full shutdown" ), tr( "Standby" ), tr("Cancel"));
+
 				if (ret == 1)
 					Sys_ShutdownToStandby();
 				else if(ret == 2)

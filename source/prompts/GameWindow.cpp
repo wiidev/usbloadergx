@@ -482,9 +482,23 @@ void GameWindow::ChangeGame(int EffectDirection)
 	{
 		float size = GCGames::Instance()->GetGameSize((const char *) header->id);
 		sizeTxt->SetTextf("%.2fGB", size); //set size text;
-		// TODO: Add GC disc size check
+		// TODO: Add GC multi disc size check
 	}
-
+	
+	// Rescale the disc if the picture is bigger (HighRes Disc art from gametdb)
+	/*
+	if(diskImgData->GetWidth() > 160)
+	{
+		diskImg->SetScale(160.0f / diskImgData->GetWidth());
+		diskImg->SetPosition( -(diskImgData->GetWidth() - 160)/2 , -(diskImgData->GetHeight() - 160)/2 );  
+	}
+	else
+	{
+		diskImg->SetScale(1.0f);
+		diskImg->SetPosition( 0, 0);
+	}
+	*/
+	
 	diskImg->SetImage(diskImgData);
 	nameTxt->SetText(GameTitles.GetTitle(header));
 	playcntTxt->SetTextf("%s: %i", tr( "Play Count" ), GameStatistics.GetPlayCount(header));
