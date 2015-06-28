@@ -59,7 +59,7 @@ void CSettings::SetDefault()
 	snprintf(covers2d_path, sizeof(covers2d_path), "%simages/2D/", ConfigPath);
 	snprintf(coversFull_path, sizeof(coversFull_path), "%simages/full/", ConfigPath);
 	snprintf(disc_path, sizeof(disc_path), "%simages/disc/", ConfigPath);
-	snprintf(titlestxt_path, sizeof(titlestxt_path), "%stitles", ConfigPath);
+	snprintf(titlestxt_path, sizeof(titlestxt_path), "%stitles/", ConfigPath);
 	snprintf(languagefiles_path, sizeof(languagefiles_path), "%slanguage/", ConfigPath);
 	snprintf(update_path, sizeof(update_path), "%s/apps/usbloader_gx/", BootDevice);
 	snprintf(BNRCachePath, sizeof(BNRCachePath), "%s/apps/usbloader_gx/cache_bnr/", BootDevice);

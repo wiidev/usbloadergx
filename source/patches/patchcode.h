@@ -35,6 +35,7 @@ void load_handler(u32 hooktype, u32 debugger, u32 pauseAtStart);
 void langpatcher(void *addr, u32 len, u8 languageChoice);
 void vidolpatcher(void *addr, u32 len);
 void patchdebug(void *addr, u32 len);
+int LoadGameConfig(const char *CheatFilepath);
 int ocarina_load_code(const char *CheatFilepath, u8 *gameid);
 
 #ifdef __cplusplus

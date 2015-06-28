@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright (C) 2012-2014 Cyan
+ * Copyright (C) 2012-2015 Cyan
  * Copyright (C) 2011 Dimok
  *
  * This program is free software: you can redistribute it and/or modify
@@ -156,7 +156,7 @@ void GameBooter::SetupNandEmu(u8 NandEmuMode, const char *NandEmuPath, struct di
 		int partition = -1;
 
 		//! Create save game path and title.tmd for not existing saves
-		CreateSavePath(&gameHeader);
+		CreateSavePath(&gameHeader, NandEmuPath);
 
 		gprintf("Enabling %s Nand Emulation on: %s\n", NandEmuMode == 2 ? "Full" : "Partial" , NandEmuPath);
 		Set_FullMode(NandEmuMode == 2);
@@ -287,10 +287,6 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 					  : 0;																						//! Real nand title
 		NandEmuPath = game_cfg->NandEmuPath.size() == 0 ? Settings.NandEmuChanPath : game_cfg->NandEmuPath.c_str();
 	}
-
-	if(ocarinaChoice && Hooktype == OFF)
-		Hooktype = 1;
-
 	//! Prepare alternate dol settings
 	SetupAltDOL(gameHeader.id, alternatedol, alternatedoloffset);
 
@@ -321,9 +317,17 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	//! Load wip codes
 	load_wip_code(gameHeader.id);
 
+	// force hooktype if not selected but Ocarina is enabled
+	if(ocarinaChoice && Hooktype == OFF)
+		Hooktype = 1;
+
 	//! Load Ocarina codes
 	if (ocarinaChoice)
 		ocarina_load_code(Settings.Cheatcodespath, gameHeader.id);
+	
+	//! Load gameconfig.txt even if ocarina disabled
+	if(Hooktype)
+		LoadGameConfig(Settings.Cheatcodespath);
 
 	//! Setup NAND emulation
 	SetupNandEmu(NandEmuMode, NandEmuPath, gameHeader);
@@ -452,7 +456,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		if(strncmp(Settings.GameCubePath, "sd", 2) == 0 || strncmp(DeviceHandler::PathToFSName(Settings.GameCubePath), "FAT", 3) != 0)
 		{
 			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."),LoaderName), tr("OK"));
-			return 0;
+			return -1;
 		}
 
 		// Check current game location
@@ -460,7 +464,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		{
 			WindowPrompt(tr("The game is on SD Card."), fmt(tr("To run GameCube games with %s you need to place them on an USB FAT32 partition."),LoaderName), tr("OK"));
 			// Todo: Add here copySD2USB.
-			return 0;
+			return -1;
 		}
 
 		// Check if the partition is the first primary partition on the drive
@@ -483,20 +487,20 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		if(!found)
 		{
 			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary partition of the Hard Drive."),LoaderName), tr("OK"));
-			return 0;
+			return -1;
 		}
 		
 		// Check HDD sector size. Only 512 bytes/sector is supported by DIOS MIOS
 		if(hdd_sector_size[usbport] != BYTES_PER_SECTOR)
 		{
 			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to use a 512 bytes/sector Hard Drive."),LoaderName), tr("OK"));
-			return 0;
+			return -1;
 		}
 
 		if(usbHandle->GetPartitionClusterSize(usbHandle->GetLBAStart(USBport_partNum)) > 32768)
 		{
 			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to use a partition with 32k bytes/cluster or less."),LoaderName), tr("OK"));
-			return 0;
+			return -1;
 		}
 	}
 
@@ -506,7 +510,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		if(((gameHdr->type == TYPE_GAME_GC_IMG) || (gameHdr->type == TYPE_GAME_GC_EXTRACTED)) && strncmp(RealPath, "usb", 3) == 0)
 		{
 			if(!GCGames::Instance()->CopyUSB2SD(gameHdr))
-				return 0;
+				return -1;
 
 			RealPath = GCGames::Instance()->GetPath((const char *) gameHdr->id);
 		}
@@ -519,7 +523,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		if(IosLoader::GetDMLVersion() < DML_VERSION_DML_1_2)
 		{
 			WindowPrompt(tr("Error:"), tr("You need to install DIOS MIOS Lite v1.2 or a newer version."), tr("OK"));
-			return 0;
+			return -1;
 		}
 		if(dmlWidescreenChoice && IosLoader::GetDMLVersion() < DML_VERSION_DM_2_1) // DML Force Widescreen setting : added in DM v2.1+, config v1.
 		{
@@ -566,7 +570,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		{
 			int choice = WindowPrompt(gameHdr->title, tr("This game has multiple discs. Please select the disc to launch."), tr("Disc 1"), tr("Disc 2"), tr("Cancel"));
 			if(choice == 0)
-				return 0;
+				return -1;
 			else if(choice == 2)
 				bootDisc2 = true;
 		}	
@@ -721,25 +725,25 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	if(gameHdr->type == TYPE_GAME_GC_DISC)
 	{
 		WindowPrompt(tr("Error:"), tr("To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."), tr("OK"));
-		return 0;
+		return -1;
 	}
 	
 	if(gameHdr->type == TYPE_GAME_GC_EXTRACTED)
 	{
 		WindowPrompt(tr("Error:"), fmt(tr("%s only accepts GameCube backups in ISO format."),LoaderName), tr("OK"));
-		return 0;
+		return -1;
 	}
 
 	if(!CheckAHBPROT())
 	{
 		WindowPrompt(tr("Error:"), fmt(tr("%s requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."),LoaderName), tr("OK"));
-		return 0;
+		return -1;
 	}
 
 	if(strncmp(DeviceHandler::PathToFSName(RealPath), "FAT", 3) != 0)
 	{
 		WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."),LoaderName), tr("OK"));
-		return 0;
+		return -1;
 	}
 
 	// Check if Devolution is available
@@ -758,7 +762,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 		{
 			fclose(f);
 			WindowPrompt(tr("Error:"), tr("Devolution's loader.bin file can't be loaded."), tr("OK"));
-			return 0;
+			return -1;
 		}
 		fread(loader_bin, 1, size, f);
 
@@ -776,7 +780,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	else
 	{
 		WindowPrompt(tr("Error:"), tr("To run GameCube games with Devolution you need the loader.bin file in your Devolution Loader Path."), tr("OK"));
-		return 0;
+		return -1;
 	}
 
 
@@ -897,7 +901,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	if(!iso_file) 
 	{
 		WindowPrompt(tr("Error:"), tr("File not found."), tr("OK"));
-		return 0;
+		return -1;
 	}
 	u8 *lowmem = (u8*)0x80000000;
 	fread(lowmem, 1, 32, iso_file);
@@ -966,7 +970,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	if(!CheckAHBPROT())
 	{
 		WindowPrompt(tr("Error:"), fmt(tr("%s requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."),LoaderName), tr("OK"));
-		return 0;
+		return -1;
 	}
 
 
@@ -977,7 +981,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		if(strncmp(DeviceHandler::PathToFSName(Settings.GameCubePath), "FAT", 3) != 0)
 		{
 			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."),LoaderName), tr("OK"));
-			return 0;
+			return -1;
 		}
 
 		// Check if the partition is a primary
@@ -987,7 +991,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		if(usbHandle->GetPartitionTableType(USBport_partNum) != MBR)
 		{
 			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary FAT32 partition."),LoaderName), tr("OK"));
-			return 0;
+			return -1;
 		}
 		
 		// check if the partition is the first FAT32 of the drive
@@ -1006,7 +1010,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		if(!found)
 		{
 			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary FAT32 partition."),LoaderName), tr("OK"));
-			return 0;
+			return -1;
 		}
 	}
 
@@ -1029,7 +1033,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	{
 		// Nintendont boot.dol not found
 		WindowPrompt(tr("Error:"), tr("To run GameCube games with Nintendont you need the boot.dol file in your Nintendont Loader Path."), tr("OK"));
-		return 0;
+		return -1;
 	}
 	gprintf("NIN: Loader path = %s \n",NIN_loader_path);
 	gprintf("NIN: Game path   = %s \n",RealPath);
@@ -1061,7 +1065,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 			if(NINLoaderTime == mktime(&time))
 			{
 				WindowPrompt(tr("Error:"), tr("USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."), tr("Ok"));
-				return 0;
+				return -1;
 			}
 			
 			// r01 - r40
@@ -1075,7 +1079,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 				if(NINLoaderTime < mktime(&time) && strncmp(RealPath, "usb", 3) == 0)
 				{
 					if(WindowPrompt(tr("Warning:"), tr("This Nintendont version does not support games on USB."), tr("Continue"), tr("Cancel")) == 0)
-					return 0;
+					return -1;
 				}
 			}
 			
@@ -1105,7 +1109,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 			if(gameHdr->type == TYPE_GAME_GC_DISC && NINLoaderTime < mktime(&time))
 			{
 				WindowPrompt(tr("Error:"), tr("To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."), tr("OK"));
-				return 0;
+				return -1;
 			}
 			
 			// v3.304 - Controller.ini is now optional
@@ -1140,7 +1144,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		{
 			int choice = WindowPrompt(tr("Warning:"), tr("USBloaderGX couldn't verify Nintendont boot.dol file. Launch this boot.dol anyway?"), tr("Yes"), tr("Cancel"));
 			if(choice == 0)
-				return 0;
+				return -1;
 		}
 	}
 
@@ -1182,7 +1186,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	}
 
 	// Check kenobiwii.bin
-	if(ocarinaChoice || (ninDebugChoice && !isWiiU()))
+	if(NINRev < 336 && (ocarinaChoice || (ninDebugChoice && !isWiiU())))
 	{
 		char kenobiwii_path[30]; 
 		snprintf(kenobiwii_path, sizeof(kenobiwii_path), "%s:/sneek/kenobiwii.bin", DeviceHandler::GetDevicePrefix(RealPath));
@@ -1202,21 +1206,21 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 						gprintf("NIN: Couldn't copy %s to %s.\n", kenobiwii_srcpath, kenobiwii_path);
 						RemoveFile(kenobiwii_path);
 						if(WindowPrompt(tr("Warning:"), fmt(tr("To use ocarina with %s you need the %s file."), LoaderName, kenobiwii_path), tr("Continue"), tr("Cancel")) == 0)
-							return 0;
+							return -1;
 					}
 				}
 				else
 				{
 					gprintf("kenobiwii source path = %s Not found.\n", kenobiwii_srcpath);
 					if(WindowPrompt(tr("Warning:"), fmt(tr("To use ocarina with %s you need the %s file."), LoaderName, kenobiwii_path), tr("Continue"), tr("Cancel")) == 0)
-						return 0;
+						return -1;
 				}
 			}
 			else
 			{
 				gprintf("kenobiwii path = %s Not found.\n", kenobiwii_path);
 				if(WindowPrompt(tr("Warning:"), fmt(tr("To use ocarina with %s you need the %s file."), LoaderName, kenobiwii_path), tr("Continue"), tr("Cancel")) == 0)
-				return 0;
+				return -1;
 			}
 		}
 	}
@@ -1242,7 +1246,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 					if(NINRev < 304) // HID is always enabled and controller.ini optional since r304
 					{
 						if(WindowPrompt(tr("Warning:"), fmt(tr("To use HID with %s you need the %s file."), LoaderName, controllerini_path), tr("Continue"), tr("Cancel")) == 0)
-							return 0;
+							return -1;
 					}
 				}
 			}
@@ -1269,7 +1273,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 					{
 						snprintf(controllerini_path, sizeof(controllerini_path), "%s:/controller.ini", DeviceHandler::GetDevicePrefix(RealPath));
 						if(WindowPrompt(tr("Warning:"), fmt(tr("To use HID with %s you need the %s file."), LoaderName, controllerini_path), tr("Continue"), tr("Cancel")) == 0)
-						return 0;
+						return -1;
 					}
 				}
 
@@ -1290,7 +1294,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		{
 			int choice = WindowPrompt(gameHdr->title, tr("This game has multiple discs. Please select the disc to launch."), tr("Disc 1"), tr("Disc 2"), tr("Cancel"));
 			if(choice == 0)
-				return 0;
+				return -1;
 			else if(choice == 2)
 				bootDisc2 = true;
 		}	
@@ -1321,7 +1325,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	{
 		gprintf("Not enough memory to create nincfg.bin file.\n");
 		WindowPrompt(tr("Error:"), tr("Could not write file."), tr("OK"));
-		return 0;
+		return -1;
 	}
 	
 	memset(nin_config, 0, sizeof(NIN_CFG));
@@ -1481,7 +1485,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 			gprintf("Could not open NINCfgPath in write mode");
 			int choice = WindowPrompt(tr("Warning:"), tr("USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyway?"), tr("Yes"), tr("Cancel"));
 			if(choice == 0)
-				return 0;
+				return -1;
 		}
 
 		// Copy Nintendont Config file to game path
@@ -1495,7 +1499,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 				gprintf("\nError: Couldn't copy %s to %s.\n", NINCfgPath, NINDestPath);
 				RemoveFile(NINDestPath);
 				if(WindowPrompt(tr("Warning:"), tr("USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyway?"), tr("Yes"), tr("Cancel")) == 0)
-					return 0;
+					return -1;
 			}
 			gprintf("done\n");
 		}
@@ -1509,7 +1513,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		LoadFileToMem(NIN_loader_path, &buffer, &filesize);
 		if(!buffer)
 		{
-			return 0;
+			return -1;
 		}
 		FreeHomebrewBuffer();
 		CopyHomebrewMemory(buffer, 0, filesize);

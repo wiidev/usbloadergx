@@ -45,7 +45,7 @@ StartUpProcess::StartUpProcess()
 	messageTxt->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	messageTxt->SetPosition(screenwidth/2, screenheight/2+60);
 
-	versionTxt = new GuiText(" ", 15, (GXColor) {255, 255, 255, 255});
+	versionTxt = new GuiText(" ", 18, (GXColor) {255, 255, 255, 255});
 	versionTxt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
 	versionTxt->SetPosition(20, screenheight-20);
 

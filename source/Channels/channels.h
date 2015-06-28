@@ -52,6 +52,7 @@ private:
 	static Channels *instance;
 
 	static bool Identify(const u64 &titleid, u8 *tmdBuffer, u32 tmdSize);
+	bool emuExists(char *tmdpath);
 
 	void InternalGetNandChannelList(u32 type);
 	bool ParseTitleDir(char *path, int language);

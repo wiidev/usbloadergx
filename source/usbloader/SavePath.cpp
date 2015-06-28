@@ -71,29 +71,29 @@ static void CreateNandPath(const char *path)
 	CreateSubfolder(path);
 }
 
-void CreateSavePath(const struct discHdr *hdr)
+void CreateSavePath(const struct discHdr *hdr, const char *NandEmuPath)
 {
 	char nandPath[512];
 
-	snprintf(nandPath, sizeof(nandPath), "%s/import", Settings.NandEmuPath);
+	snprintf(nandPath, sizeof(nandPath), "%s/import", NandEmuPath);
 	CreateNandPath(nandPath);
 
-	snprintf(nandPath, sizeof(nandPath), "%s/meta", Settings.NandEmuPath);
+	snprintf(nandPath, sizeof(nandPath), "%s/meta", NandEmuPath);
 	CreateNandPath(nandPath);
 
-	snprintf(nandPath, sizeof(nandPath), "%s/shared1", Settings.NandEmuPath);
+	snprintf(nandPath, sizeof(nandPath), "%s/shared1", NandEmuPath);
 	CreateNandPath(nandPath);
 
-	snprintf(nandPath, sizeof(nandPath), "%s/shared2", Settings.NandEmuPath);
+	snprintf(nandPath, sizeof(nandPath), "%s/shared2", NandEmuPath);
 	CreateNandPath(nandPath);
 
-	snprintf(nandPath, sizeof(nandPath), "%s/sys", Settings.NandEmuPath);
+	snprintf(nandPath, sizeof(nandPath), "%s/sys", NandEmuPath);
 	CreateNandPath(nandPath);
 
-	snprintf(nandPath, sizeof(nandPath), "%s/ticket", Settings.NandEmuPath);
+	snprintf(nandPath, sizeof(nandPath), "%s/ticket", NandEmuPath);
 	CreateNandPath(nandPath);
 
-	snprintf(nandPath, sizeof(nandPath), "%s/tmp", Settings.NandEmuPath);
+	snprintf(nandPath, sizeof(nandPath), "%s/tmp", NandEmuPath);
 	CreateNandPath(nandPath);
 
 	const char *titlePath = "title/00010000";
@@ -107,10 +107,10 @@ void CreateSavePath(const struct discHdr *hdr)
 	if(hdr->type == TYPE_GAME_NANDCHAN || hdr->type == TYPE_GAME_EMUNANDCHAN)
 		titlePath = "title/00010001";
 
-	snprintf(nandPath, sizeof(nandPath), "%s/%s/%02x%02x%02x%02x/data", Settings.NandEmuPath, titlePath, hdr->id[0], hdr->id[1], hdr->id[2], hdr->id[3]);
+	snprintf(nandPath, sizeof(nandPath), "%s/%s/%02x%02x%02x%02x/data", NandEmuPath, titlePath, hdr->id[0], hdr->id[1], hdr->id[2], hdr->id[3]);
 	CreateNandPath(nandPath);
 
-	snprintf(nandPath, sizeof(nandPath), "%s/%s/%02x%02x%02x%02x/content", Settings.NandEmuPath, titlePath, hdr->id[0], hdr->id[1], hdr->id[2], hdr->id[3]);
+	snprintf(nandPath, sizeof(nandPath), "%s/%s/%02x%02x%02x%02x/content", NandEmuPath, titlePath, hdr->id[0], hdr->id[1], hdr->id[2], hdr->id[3]);
 	CreateNandPath(nandPath);
 
 	strcat(nandPath, "/title.tmd");

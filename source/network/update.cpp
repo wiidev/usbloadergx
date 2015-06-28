@@ -343,13 +343,13 @@ int UpdateApp()
 {
 	if (!IsNetworkInit() && !NetworkInitPrompt())
 	{
-		WindowPrompt(tr("Error !"), tr("Could not initialize network!"), tr("OK"));
+		WindowPrompt(tr("Error:"), tr("Could not initialize network!"), tr("OK"));
 		return -1;
 	}
 
 	if (!CreateSubfolder(Settings.update_path))
 	{
-		WindowPrompt(tr("Error !"), tr("Can't create directory"), tr("OK"));
+		WindowPrompt(tr("Error:"), tr("Can't create directory"), tr("OK"));
 		return -1;
 	}
 

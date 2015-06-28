@@ -448,6 +448,49 @@ bool Channels::Identify(const u64 &titleid, u8 *tmdBuffer, u32 tmdSize)
 	return ret < 0 ? false : true;
 }
 
+bool Channels::emuExists(char *tmdpath)
+{
+	u8 *buffer = NULL;
+	u32 size = 0;
+
+	if(LoadFileToMem(tmdpath, &buffer, &size) < 0)
+		return false;
+
+	signed_blob *s_tmd = (signed_blob *) buffer;
+
+	u32 i;
+	tmd *titleTmd = (tmd *) SIGNATURE_PAYLOAD(s_tmd);
+
+	for (i = 0; i < titleTmd->num_contents; i++)
+		if (!titleTmd->contents[i].index)
+			break;
+
+	if(i == titleTmd->num_contents)
+	{
+		free(buffer);
+		return false;
+	}
+
+	u32 cid  = titleTmd->contents[i].cid;
+	
+	free(buffer);
+
+	char *ptr = strrchr(tmdpath, '/');
+	if(!ptr)
+		return false;
+
+	//! tmdpath has length of 1024
+	snprintf(ptr+1, 1024-(ptr+1-tmdpath), "%08x.app", cid);
+
+	FILE *f = fopen(tmdpath, "rb");
+	if(!f)
+		return false;
+
+	fclose(f);
+	
+	return true;
+}
+
 bool Channels::ParseTitleDir(char *path, int language)
 {
 	if(!path)
@@ -485,6 +528,10 @@ bool Channels::ParseTitleDir(char *path, int language)
 		if(stat(path, &st) != 0)
 			continue;
 
+		// check if content in tmd exists
+		if(!emuExists(path))
+			continue;
+			
 		u32 tidLow = strtoul(dirent->d_name, NULL, 16);
 		char id[5];
 		memset(id, 0, sizeof(id));

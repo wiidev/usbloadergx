@@ -4,6 +4,6 @@
 #include "usbloader/disc.h"
 
 void CreateTitleTMD(const char *path, const struct discHdr *hdr);
-void CreateSavePath(const struct discHdr *hdr);
+void CreateSavePath(const struct discHdr *hdr, const char *NandEmuPath);
 
 #endif
