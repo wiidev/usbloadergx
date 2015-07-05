@@ -106,7 +106,8 @@ static const char * NandEmuText[] =
 {
 	trNOOP( "OFF" ),
 	trNOOP( "Partial" ),
-	trNOOP( "Full" )
+	trNOOP( "Full" ),
+	trNOOP( "Neek" )
 };
 
 static const char * HooktypeText[] =
@@ -300,7 +301,11 @@ void GameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, "%i", GameConfig.ios);
 
 	//! Settings: Return To
-	if(GameConfig.returnTo)
+	if(Header->type == TYPE_GAME_EMUNANDCHAN && EMUNAND_NEEK == (GameConfig.NandEmuMode == INHERIT ? Settings.NandEmuChanMode : GameConfig.NandEmuMode))
+	{
+		Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.returnTo] ));
+	}
+	else if(GameConfig.returnTo)
 	{
 		const char* TitleName = NULL;
 		u64 tid = NandTitles.FindU32(Settings.returnTo);
@@ -514,17 +519,11 @@ int GameLoadSM::GetMenuInternal()
 		//! Settings: Nand Emulation
 		if (ret == ++Idx)
 		{
-			// If NandEmuPath is on root of the first FAT32 partition, allow rev17-21 cIOS for EmuNAND Channels
-			bool NandEmu_compatible = false;
-			if(Header->type == TYPE_GAME_EMUNANDCHAN)
-			{
-				const char *NandEmuChanPath = GameConfig.NandEmuPath.size() == 0 ? Settings.NandEmuChanPath : GameConfig.NandEmuPath.c_str();
-				NandEmu_compatible = IosLoader::is_NandEmu_compatible(NandEmuChanPath, GameConfig.ios == INHERIT ? Settings.cios : GameConfig.ios);
-			}
+			if (++GameConfig.NandEmuMode >= EMUNAND_MAX) GameConfig.NandEmuMode = INHERIT;
 
-			if(!IosLoader::IsD2X(GameConfig.ios == INHERIT ? Settings.cios : GameConfig.ios) && !NandEmu_compatible)
-				WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
-			else if (++GameConfig.NandEmuMode >= 3) GameConfig.NandEmuMode = INHERIT;
+			// neek available only for EmuNAND Channels
+			if(Header->type != TYPE_GAME_EMUNANDCHAN && GameConfig.NandEmuMode >= EMUNAND_NEEK)
+				GameConfig.NandEmuMode = INHERIT;
 
 			//! On titles from emulated nand path disabling the nand emu mode is not allowed
 			if(Header->type == TYPE_GAME_EMUNANDCHAN && GameConfig.NandEmuMode == OFF)

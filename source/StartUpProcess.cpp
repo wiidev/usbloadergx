@@ -50,13 +50,13 @@ StartUpProcess::StartUpProcess()
 	versionTxt->SetPosition(20, screenheight-20);
 
 #ifdef FULLCHANNEL
-	versionTxt->SetTextf("v3.0c Rev%s", GetRev());
+	versionTxt->SetTextf("v3.0c Rev. %s", GetRev());
 #else
-	versionTxt->SetTextf("v3.0  Rev%s", GetRev());
+	versionTxt->SetTextf("v3.0  Rev. %s", GetRev());
 #endif
 
 #if 0 // enable if you release a modded version
-	versionTxt->SetTextf("v3.0  Rev%s mod", GetRev());
+	versionTxt->SetTextf("v3.0  Rev. %s mod", GetRev());
 #endif
 
 	cancelTxt = new GuiText("Press B to cancel", 18, (GXColor) {255, 255, 255, 255});

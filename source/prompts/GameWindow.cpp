@@ -734,6 +734,8 @@ void GameWindow::BootGame(struct discHdr *header)
 
 	int gameIOS = game_cfg->ios == INHERIT ? Settings.cios : game_cfg->ios;
 	int gameNandEmuMode = game_cfg->NandEmuMode == INHERIT ? Settings.NandEmuMode : game_cfg->NandEmuMode;
+	if(header->type == TYPE_GAME_EMUNANDCHAN)
+		gameNandEmuMode = game_cfg->NandEmuMode == INHERIT ? Settings.NandEmuChanMode : game_cfg->NandEmuMode;
 
 	if (game_cfg->loadalternatedol == 2)
 	{
@@ -771,15 +773,18 @@ void GameWindow::BootGame(struct discHdr *header)
 
 	if(header->type == TYPE_GAME_EMUNANDCHAN)
 	{
-		// If NandEmuPath is on root of the first FAT32 partition, allow Waninkoko's rev17-21 cIOS for EmuNAND Channels
-		bool NandEmu_compatible = false;
-		const char *NandEmuChanPath = game_cfg->NandEmuPath.size() == 0 ? Settings.NandEmuChanPath : game_cfg->NandEmuPath.c_str();
-		NandEmu_compatible = IosLoader::is_NandEmu_compatible(NandEmuChanPath, gameIOS);
-			
-		if(!IosLoader::IsD2X(gameIOS) && !NandEmu_compatible)
+		if(gameNandEmuMode != EMUNAND_NEEK)
 		{
-			ShowError(tr("Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."));
-			return;
+			// If NandEmuPath is on root of the first FAT32 partition, allow Waninkoko's rev17-21 cIOS for EmuNAND Channels
+			bool NandEmu_compatible = false;
+			const char *NandEmuChanPath = game_cfg->NandEmuPath.size() == 0 ? Settings.NandEmuChanPath : game_cfg->NandEmuPath.c_str();
+			NandEmu_compatible = IosLoader::is_NandEmu_compatible(NandEmuChanPath, gameIOS);
+				
+			if(!IosLoader::IsD2X(gameIOS) && !NandEmu_compatible)
+			{
+				ShowError(tr("Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."));
+				return;
+			}
 		}
 	}
 

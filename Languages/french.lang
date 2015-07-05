@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-04 16:59+0200\n"
+"POT-Creation-Date: 2015-07-05 15:42+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -297,6 +297,9 @@ msgstr "Bloquer Mise à jour"
 msgid "Boot Content"
 msgstr "Lancement normal"
 
+msgid "Boot Neek System Menu"
+msgstr "Démarrer le Menu système Neek"
+
 msgid "Boot?"
 msgstr "Lancer ?"
 
@@ -504,6 +507,9 @@ msgstr "Crédits"
 
 msgid "Crop Overscan"
 msgstr "Réduire l'overscan"
+
+msgid "Current neek files are not neek2o. Game autoboot disabled."
+msgstr "Le fichier neek actuel n'est pas neek2o. Démarrage automatique désactivé."
 
 msgid "Custom Banners"
 msgstr "Bannières persos"
@@ -1444,6 +1450,21 @@ msgstr "Émul. Nand Sauvegardes"
 msgid "Native Controller"
 msgstr "Port manettes natif"
 
+msgid "Neek"
+msgstr ""
+
+msgid "Neek NAND path selection failed."
+msgstr "La sélection du dossier NAND pour Neek a échoué."
+
+msgid "Neek kernel file not found."
+msgstr "Fichier kernel de Neek non trouvé."
+
+msgid "Neek kernel loading failed."
+msgstr "Echec de chargement du kernel de Neek."
+
+msgid "Neek2o does not support 'Emulated NAND Channel Path' on SD! Please setup Uneek2o instead."
+msgstr "Neek2o n'est pas compatible avec le dossier emuNAND sur carte SD. Veuillez plutôt utiliser Uneek2o."
+
 msgid "Neither"
 msgstr "Aucun"
 
@@ -1590,6 +1611,9 @@ msgstr ""
 
 msgid "Ocarina"
 msgstr ""
+
+msgid "Ocarina is not supported with neek2o yet. Launch game anyway?"
+msgstr "Ocarina ne fonctionne pas encore avec Neek2o. Voulez-vous quand même le lancer le jeu ?"
 
 msgid "Oct"
 msgstr ""
@@ -1824,6 +1848,9 @@ msgstr "Filtrer par catégories de jeux"
 
 msgid "Select loader mode"
 msgstr "Mode du Loader"
+
+msgid "Select the NAND Emu Path to use."
+msgstr "Sélectionnez le dossier EmuNAND à utiliser."
 
 msgid "Select titles sources."
 msgstr "Choisissez les titres à afficher :"
@@ -2082,6 +2109,15 @@ msgstr "Pour lancer les jeux GameCube avec Nintendont vous devez placer le fichi
 msgid "To use HID with %s you need the %s file."
 msgstr "Pour utiliser HID avec %s vous avez besoin du fichier %s."
 
+msgid "To use neek you need to set your 'Emulated NAND Channel Path' on the first primary partition of the Hard Drive."
+msgstr "Pour utiliser Neek vous devez placer votre 'Dossier ÉmuNand Chaînes' sur la premiere partition principale FAT32."
+
+msgid "To use neek you need to set your 'Emulated NAND Channel Path' to a FAT32 partition."
+msgstr "Pour utiliser Neek vous devez placer votre 'Dossier ÉmuNand Chaînes' sur une partition FAT32."
+
+msgid "To use neek you need to use a 512 bytes/sector Hard Drive."
+msgstr "Pour utiliser Neek vous devez utiliser un disque dur avec 512 octets par secteur."
+
 #, c-format
 msgid "To use ocarina with %s you need the %s file."
 msgstr "Pour utiliser Ocarina avec %s vous avez besoin du fichier %s."
@@ -2240,6 +2276,9 @@ msgstr "Que voulez-vous extraire de la NAND ?"
 msgid "Where should the game be installed to?"
 msgstr "Où installer ce jeu ?"
 
+msgid "Where to dump NAND?"
+msgstr "Où voulez-vous extraire votre NAND ?"
+
 msgid "Which device do you want to use for Nintendont files?"
 msgstr "Quel périphérique voulez-vous utiliser pour les fichiers de Nintendont ?"
 
@@ -2309,6 +2348,9 @@ msgstr "Vous pouvez choisir ou formater une partition, ou passer le loader en mo
 
 msgid "You cannot delete this category."
 msgstr "Vous ne pouvez pas supprimer cette catégorie."
+
+msgid "You need neek2o to load EmuNAND from sub-folders."
+msgstr "Neek2o est nécessaire si le dossier EmuNAND est dans un sous-dossier."
 
 msgid "You need to install DIOS MIOS Lite v1.2 or a newer version."
 msgstr "Vous devez installer DIOS MIOS Lite v1.2 ou une version plus récente."

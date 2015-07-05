@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-04 16:59+0200\n"
+"POT-Creation-Date: 2015-07-05 15:42+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -297,6 +297,9 @@ msgstr "Blokkeer Updates"
 msgid "Boot Content"
 msgstr "Start Content"
 
+msgid "Boot Neek System Menu"
+msgstr ""
+
 msgid "Boot?"
 msgstr "Start?"
 
@@ -503,6 +506,9 @@ msgid "Credits"
 msgstr "Credits"
 
 msgid "Crop Overscan"
+msgstr ""
+
+msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr ""
 
 msgid "Custom Banners"
@@ -1444,6 +1450,21 @@ msgstr "Nand Opslag Emulatie"
 msgid "Native Controller"
 msgstr ""
 
+msgid "Neek"
+msgstr ""
+
+msgid "Neek NAND path selection failed."
+msgstr ""
+
+msgid "Neek kernel file not found."
+msgstr ""
+
+msgid "Neek kernel loading failed."
+msgstr ""
+
+msgid "Neek2o does not support 'Emulated NAND Channel Path' on SD! Please setup Uneek2o instead."
+msgstr ""
+
 msgid "Neither"
 msgstr "Geen"
 
@@ -1589,6 +1610,9 @@ msgid "OSSleepThread"
 msgstr ""
 
 msgid "Ocarina"
+msgstr ""
+
+msgid "Ocarina is not supported with neek2o yet. Launch game anyway?"
 msgstr ""
 
 msgid "Oct"
@@ -1824,6 +1848,9 @@ msgstr "Selecteer spel categorieën"
 
 msgid "Select loader mode"
 msgstr "Selecteer loader modus"
+
+msgid "Select the NAND Emu Path to use."
+msgstr ""
 
 msgid "Select titles sources."
 msgstr "Selecteer titels bron."
@@ -2082,6 +2109,15 @@ msgstr "Om GameCube spellen met Nintendont te spelen heb je boot.dol nodig in je
 msgid "To use HID with %s you need the %s file."
 msgstr ""
 
+msgid "To use neek you need to set your 'Emulated NAND Channel Path' on the first primary partition of the Hard Drive."
+msgstr ""
+
+msgid "To use neek you need to set your 'Emulated NAND Channel Path' to a FAT32 partition."
+msgstr ""
+
+msgid "To use neek you need to use a 512 bytes/sector Hard Drive."
+msgstr ""
+
 #, c-format
 msgid "To use ocarina with %s you need the %s file."
 msgstr ""
@@ -2240,6 +2276,9 @@ msgstr "Wat uitpakken van NAND?"
 msgid "Where should the game be installed to?"
 msgstr "Waar moet het spel naar geïnstelleerd worden?"
 
+msgid "Where to dump NAND?"
+msgstr ""
+
 msgid "Which device do you want to use for Nintendont files?"
 msgstr ""
 
@@ -2309,6 +2348,9 @@ msgstr "Je kunt een een partitie selecteren of formateren of gebruik maken van d
 
 msgid "You cannot delete this category."
 msgstr "Je kunt deze categorie niet verwijderen."
+
+msgid "You need neek2o to load EmuNAND from sub-folders."
+msgstr ""
 
 msgid "You need to install DIOS MIOS Lite v1.2 or a newer version."
 msgstr "Je moet DIOS MIOS Lite v1.2 of hoger installeren."

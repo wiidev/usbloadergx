@@ -91,7 +91,8 @@ static const char * NandEmuText[] =
 {
 	trNOOP( "OFF" ),
 	trNOOP( "Partial" ),
-	trNOOP( "Full" )
+	trNOOP( "Full" ),
+	trNOOP( "Neek" )
 };
 
 static const char * HooktypeText[] =
@@ -606,24 +607,18 @@ int LoaderSettings::GetMenuInternal()
 			snprintf(Settings.returnTo, sizeof(Settings.returnTo), "%s", tidChar);
 	}
 
-	//! Settings: Nand Emulation
+	//! Settings: Nand Emulation (Saves)
 	else if (ret == ++Idx )
 	{
 		if(!IosLoader::IsD2X(Settings.cios))
 			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
-		else if (++Settings.NandEmuMode >= 3) Settings.NandEmuMode = 0;
+		else if (++Settings.NandEmuMode >= EMUNAND_NEEK) Settings.NandEmuMode = EMUNAND_OFF;
 	}
 
-	//! Settings: Nand Chan. Emulation
+	//! Settings: Nand Emulation (channel / neek)
 	else if (ret == ++Idx )
 	{
-		// If NandEmuPath is on root of the first FAT32 partition, allow rev17-21 cIOS for EmuNAND Channels
-		bool NandEmu_compatible = false;
-		NandEmu_compatible = IosLoader::is_NandEmu_compatible(Settings.NandEmuChanPath);
-
-		if(!IosLoader::IsD2X(Settings.cios) && !NandEmu_compatible)
-			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
-		else if (++Settings.NandEmuChanMode >= 3) Settings.NandEmuChanMode = 1;
+		if(++Settings.NandEmuChanMode >= EMUNAND_MAX) Settings.NandEmuChanMode = EMUNAND_PARTIAL;
 	}
 
 	//! Settings: Hooktype

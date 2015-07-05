@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-04 16:59+0200\n"
+"POT-Creation-Date: 2015-07-05 15:42+0200\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -297,6 +297,9 @@ msgstr "封鎖更新"
 msgid "Boot Content"
 msgstr "啟動內容"
 
+msgid "Boot Neek System Menu"
+msgstr ""
+
 msgid "Boot?"
 msgstr "啟動？"
 
@@ -503,6 +506,9 @@ msgid "Credits"
 msgstr "作者信息"
 
 msgid "Crop Overscan"
+msgstr ""
+
+msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr ""
 
 msgid "Custom Banners"
@@ -1444,6 +1450,21 @@ msgstr "Nand 儲存模擬器"
 msgid "Native Controller"
 msgstr ""
 
+msgid "Neek"
+msgstr ""
+
+msgid "Neek NAND path selection failed."
+msgstr ""
+
+msgid "Neek kernel file not found."
+msgstr ""
+
+msgid "Neek kernel loading failed."
+msgstr ""
+
+msgid "Neek2o does not support 'Emulated NAND Channel Path' on SD! Please setup Uneek2o instead."
+msgstr ""
+
 msgid "Neither"
 msgstr "皆不顯示"
 
@@ -1590,6 +1611,9 @@ msgstr "系統睡眠主題"
 
 msgid "Ocarina"
 msgstr "金手指"
+
+msgid "Ocarina is not supported with neek2o yet. Launch game anyway?"
+msgstr ""
 
 msgid "Oct"
 msgstr "十月"
@@ -1824,6 +1848,9 @@ msgstr "選擇遊戲類別"
 
 msgid "Select loader mode"
 msgstr "選擇 loader 模式"
+
+msgid "Select the NAND Emu Path to use."
+msgstr ""
 
 msgid "Select titles sources."
 msgstr "選擇 titles 的來源。"
@@ -2082,6 +2109,15 @@ msgstr ""
 msgid "To use HID with %s you need the %s file."
 msgstr ""
 
+msgid "To use neek you need to set your 'Emulated NAND Channel Path' on the first primary partition of the Hard Drive."
+msgstr ""
+
+msgid "To use neek you need to set your 'Emulated NAND Channel Path' to a FAT32 partition."
+msgstr ""
+
+msgid "To use neek you need to use a 512 bytes/sector Hard Drive."
+msgstr ""
+
 #, c-format
 msgid "To use ocarina with %s you need the %s file."
 msgstr ""
@@ -2240,6 +2276,9 @@ msgstr "從 NAND 提取什麼？"
 msgid "Where should the game be installed to?"
 msgstr "遊戲應安裝到何處"
 
+msgid "Where to dump NAND?"
+msgstr ""
+
 msgid "Which device do you want to use for Nintendont files?"
 msgstr ""
 
@@ -2309,6 +2348,9 @@ msgstr "你可選擇或格式化磁區或使用頻道 loader 模式。"
 
 msgid "You cannot delete this category."
 msgstr "無法刪除此類別。"
+
+msgid "You need neek2o to load EmuNAND from sub-folders."
+msgstr ""
 
 msgid "You need to install DIOS MIOS Lite v1.2 or a newer version."
 msgstr "你需安裝 DIOS MIOS Lite v1.2 或更新版本。"

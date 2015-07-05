@@ -38,6 +38,7 @@
 #include "prompts/ProgressWindow.h"
 #include "prompts/filebrowser.h"
 #include "usbloader/GameList.h"
+#include "usbloader/neek.hpp"
 #include "language/gettext.h"
 #include "wad/nandtitle.h"
 #include "wad/wad.h"
@@ -76,6 +77,7 @@ FeatureSettingsMenu::FeatureSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Install WAD to EmuNand" ));
 	Options->SetName(Idx++, "%s", tr( "Update Nintendont" ));
 	Options->SetName(Idx++, "%s", tr( "WiiU Widescreen" ));
+	Options->SetName(Idx++, "%s", tr( "Boot Neek System Menu" ));
 
 	OldTitlesOverride = Settings.titlesOverride;
 	OldCacheTitles = Settings.CacheTitles;
@@ -155,10 +157,13 @@ void FeatureSettingsMenu::SetOptionValues()
 
 	//! Settings: Update Nintendont
 	Options->SetValue(Idx++, " ");
-	
+
 	//! Settings: WiiU Widescreen
 	Options->SetValue(Idx++, " ");
-	
+
+	//! Settings: Neek boot
+	Options->SetValue(Idx++, " ");
+
 }
 
 int FeatureSettingsMenu::GetMenuInternal()
@@ -443,7 +448,14 @@ int FeatureSettingsMenu::GetMenuInternal()
 					nandPath[strlen(nandPath)-1] = 0;
 			}
 
-			snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuPath, nandPath);
+			char extractPath[255];
+			snprintf(extractPath, sizeof(extractPath), "%s", Settings.NandEmuPath);
+			if( strlen(Settings.NandEmuPath) != strlen(Settings.NandEmuChanPath) || strcmp(Settings.NandEmuPath, Settings.NandEmuChanPath) != 0 )
+			{
+				if(WindowPrompt(tr( "Where to dump NAND?" ), tr("Select the NAND Emu Path to use."), tr( "Nand Emu Path" ), tr("Nand Emu Channel Path")) == 0)
+					snprintf(extractPath, sizeof(extractPath), "%s", Settings.NandEmuChanPath);
+			}
+			snprintf(filePath, sizeof(filePath), "%s%s", extractPath, nandPath);
 
 			if(choice)
 			{
@@ -520,7 +532,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 		{
 			if (!IsNetworkInit() && !NetworkInitPrompt())
 			{
-				WindowPrompt(tr("Error !"), tr("Could not initialize network!"), tr("OK"));
+				WindowPrompt(tr("Error:"), tr("Could not initialize network!"), tr("OK"));
 			}
 			else
 			{
@@ -568,7 +580,32 @@ int FeatureSettingsMenu::GetMenuInternal()
 			}
 		}
 	}
-	
+
+	// Neek: Boot neek system menu with current EmuNAND channel path
+	else if (ret == ++Idx)
+	{
+		if(neek2oSetNAND(Settings.NandEmuChanPath) < 0) // set current path as default
+		{
+			WindowPrompt(tr("Error:"), tr("Neek NAND path selection failed."), tr("OK"));
+		}
+		else
+		{
+			if(neekLoadKernel(Settings.NandEmuChanPath) == false)
+			{
+				WindowPrompt(tr("Error:"), tr("Neek kernel loading failed."), tr("OK"));
+			}
+			else
+			{
+				ExitApp();
+				NEEK_CFG *neek_config = (NEEK_CFG *) NEEK_CONFIG_ADDRESS;
+				neek2oSetBootSettings(neek_config, 0 /* TitleID */ , 0 /* Magic */, 0 /* Returnto TitleID */, Settings.NandEmuChanPath /* Full EmuNAND path */);
+				
+				if(neekBoot() == -1)
+					Sys_BackToLoader();
+				return MENU_NONE;
+			}
+		}
+	}
 	SetOptionValues();
 
 	return MENU_NONE;
