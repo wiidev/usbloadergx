@@ -1547,6 +1547,7 @@ int GameBooter::BootNeek(struct discHdr *gameHdr)
 	u64 returnToChoice = game_cfg->returnTo;
 	const char *NandEmuPath = game_cfg->NandEmuPath.size() == 0 ? Settings.NandEmuChanPath : game_cfg->NandEmuPath.c_str();
 	bool autoboot = true;
+	bool NK2O_isInstalled = false;
 	char tempPath[100] = "";
 	int ret = -1;
 	
@@ -1655,6 +1656,12 @@ int GameBooter::BootNeek(struct discHdr *gameHdr)
 		if(CheckFile(tempPath))
 			RemoveFile(tempPath);
 	}
+	else
+	{
+		snprintf(tempPath, sizeof(tempPath), "%s/title/00010001/4e4b324f/content/title.tmd", NandEmuPath);
+		if(CheckFile(tempPath))
+			NK2O_isInstalled = true;
+	}
 	
 	// Every checks passed successfully. Continue execution.
 	
@@ -1684,19 +1691,16 @@ int GameBooter::BootNeek(struct discHdr *gameHdr)
 	if(autoboot && returnToChoice)
 	{
 		// Todo : allow user to select the channel to return to.
-		
-		// check if NK2O is installed
-		snprintf(tempPath, sizeof(tempPath), "%s/title/00010001/4e4b324f/content/title.tmd", NandEmuPath);
-		if(CheckFile(tempPath))
+		if(NK2O_isInstalled)
 		{
 			neek_config->returnto = TITLE_ID(0x00010001, 'NK2O');	// Currently forced to NK2O user channel
-			neek_config->config |= NCON_EXT_RETURN_TO;	//  enable "return to" patch
+			neek_config->config |= NCON_EXT_RETURN_TO;				//  enable "return to" patch
 		}
 		
 		if(isWiiU())
 		{
-			neek_config->returnto = TITLE_ID(0x00010002, 'HCVA');// Currently forced to "Return to WiiU" system channel
-			neek_config->config |= NCON_EXT_RETURN_TO;	//  enable "return to" patch
+			neek_config->returnto = TITLE_ID(0x00010002, 'HCVA');	// Currently forced to "Return to WiiU" system channel
+			neek_config->config |= NCON_EXT_RETURN_TO;				//  enable "return to" patch
 		}
 	}
 	
