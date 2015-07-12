@@ -230,12 +230,14 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Auto Boot" ));
 	Options->SetName(Idx++, "%s", tr( "Settings File" ));
 	Options->SetName(Idx++, "%s", tr( "Video Deflicker" ));
+	Options->SetName(Idx++, "%s", tr( "WiiU Widescreen" ));
+	Options->SetName(Idx++, "%s", tr( "Video scale" ));
+	Options->SetName(Idx++, "%s", tr( "Video offset" ));
 	Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
 	Options->SetName(Idx++, "%s", tr( "Memory Card Blocks Size" ));
 	Options->SetName(Idx++, "%s", tr( "USB-HID Controller" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Controller" ));
 	Options->SetName(Idx++, "%s", tr( "Native Controller" ));
-	Options->SetName(Idx++, "%s", tr( "WiiU Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "LED Activity" ));
 	Options->SetName(Idx++, "%s", tr( "OSReport" ));
 	Options->SetName(Idx++, "%s", tr( "Log to file" ));
@@ -418,6 +420,15 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: NIN Video Deflicker
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINDeflicker]));
 
+	//! Settings: WiiU Widescreen
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINWiiUWide]));
+
+	//! Settings: NIN VideoScale
+	Options->SetValue(Idx++, "%d (40~120)", Settings.NINVideoScale);
+
+	//! Settings: NIN VideoOffset
+	Options->SetValue(Idx++, "%d (-20~20)", Settings.NINVideoOffset);
+
 	//! Settings: NIN Memory Card Emulation
 	Options->SetValue(Idx++, "%s", tr(NINMCText[Settings.NINMCEmulation]));
 
@@ -432,9 +443,6 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: NIN Native Controller
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINNativeSI]));
-
-	//! Settings: WiiU Widescreen
-	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINWiiUWide]));
 
 	//! Settings: NIN LED Activity
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINLED]));
@@ -768,6 +776,32 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.NINDeflicker >= MAX_ON_OFF) Settings.NINDeflicker = 0;
 	}
 
+	//! Settings: WiiU Widescreen
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINWiiUWide >= MAX_ON_OFF) Settings.NINWiiUWide = 0;
+	}
+
+	//! Settings: NIN VideoScale
+	else if (ret == ++Idx)
+	{
+		char entrie[20];
+		snprintf(entrie, sizeof(entrie), "%i", Settings.NINVideoScale);
+		int ret = OnScreenNumpad(entrie, sizeof(entrie));
+		if(ret)
+			Settings.NINVideoScale = LIMIT(atoi(entrie), 40, 120);
+	}
+
+	//! Settings: NIN VideoOffset
+	else if (ret == ++Idx)
+	{
+		char entrie[20];
+		snprintf(entrie, sizeof(entrie), "%i", Settings.NINVideoOffset);
+		int ret = OnScreenNumpad(entrie, sizeof(entrie));
+		if(ret)
+			Settings.NINVideoOffset = LIMIT(atoi(entrie), -20, 20);
+	}
+
 	//! Settings: NIN Memory Card Emulation
 	else if (ret == ++Idx)
 	{
@@ -798,12 +832,6 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.NINNativeSI >= MAX_ON_OFF) Settings.NINNativeSI = 0;
-	}
-
-	//! Settings: WiiU Widescreen
-	else if (ret == ++Idx)
-	{
-		if (++Settings.NINWiiUWide >= MAX_ON_OFF) Settings.NINWiiUWide = 0;
 	}
 
 	//! Settings: NIN LED Activity

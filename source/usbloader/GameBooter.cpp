@@ -970,6 +970,8 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	u8 ninDebugChoice = game_cfg->DMLDebug == INHERIT ? Settings.DMLDebug : game_cfg->DMLDebug;
 	u8 ninOSReportChoice = game_cfg->NINOSReport == INHERIT ? Settings.NINOSReport : game_cfg->NINOSReport;
 	u8 ninLogChoice = game_cfg->NINLog == INHERIT ? Settings.NINLog : game_cfg->NINLog;
+	s8 ninVideoScale = Settings.NINVideoScale;
+	s8 ninVideoOffset = Settings.NINVideoOffset;
 	const char *ninLoaderPath = game_cfg->NINLoaderPath.size() == 0 ? Settings.NINLoaderPath : game_cfg->NINLoaderPath.c_str();
 
 
@@ -1097,6 +1099,8 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 				NIN_cfg_version = 2;
 				// no need to fake NIN_CFG struct size, the size is checked in nintendont only since v1.143
 			}
+			else if(NINLoaderTime >= mktime(&time))
+				NINRev = 135;
 			
 			// v2.200 to 2.207
 			strptime("Nov  6 2014.17:33:30", "%b %d %Y %H:%M:%S", &time); // v1.208
@@ -1152,6 +1156,12 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 			if(choice == 0)
 				return -1;
 		}
+	}
+	
+	// needed since v3.354 CFG v4 to still work with old CFG version 3
+	if(NINRev >= 135 && NINRev < 354) // v3
+	{
+		NIN_cfg_version = 3;
 	}
 
 	// Set used device when launching game from disc
@@ -1405,8 +1415,16 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	memcpy((u8 *)Disc_ID, gameHdr->id, 6);
 	DCFlushRange((u8 *)Disc_ID, 6);
 	
-	// Memory Card Emulation Blocks size
-	nin_config->MemCardBlocks = ninMCSizeChoice; // NIN_CFG_VERSION 3 v1.135
+	// Memory Card Emulation Blocs size with NIN_CFG v3
+	if(NIN_cfg_version == 3)
+		nin_config->MemCardBlocks	= ninMCSizeChoice; 	// NIN_CFG_VERSION 3 v1.135
+	// Memory Card Emulation Blocs size + Aspect ratio with NIN_CFG v4
+	else if(NIN_cfg_version == 4)
+	{
+		nin_config->MemCardBlocksV4 = ninMCSizeChoice; 	// NIN_CFG_VERSION 4 v3.354
+		nin_config->VideoScale		= ninVideoScale; 	// v3.354+
+		nin_config->VideoOffset		= ninVideoOffset; 	// v3.354+
+	}
 	
 	
 	// Setup Video Mode

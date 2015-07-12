@@ -185,6 +185,9 @@ void CSettings::SetDefault()
 	DMLJPNPatch = OFF;
 	DMLDebug = OFF;
 	NINDeflicker = OFF;
+	NINWiiUWide = widescreen;
+	NINVideoScale = 40;
+	NINVideoOffset = 0;
 	NINMCEmulation = ON;
 	NINMCSize = 2;
 	NINAutoboot = ON;
@@ -192,7 +195,6 @@ void CSettings::SetDefault()
 	NINUSBHID = OFF;
 	NINMaxPads = 4;
 	NINNativeSI = OFF;
-	NINWiiUWide = widescreen;
 	NINOSReport = OFF;
 	NINLED = OFF;
 	NINLog = OFF;
@@ -436,6 +438,9 @@ bool CSettings::Save()
 	fprintf(file, "DMLJPNPatch = %d\n", DMLJPNPatch);
 	fprintf(file, "DMLDebug = %d\n", DMLDebug);
 	fprintf(file, "NINDeflicker = %d\n", NINDeflicker);
+	fprintf(file, "NINWiiUWide = %d\n", NINWiiUWide);
+	fprintf(file, "NINVideoScale = %d\n", NINVideoScale);
+	fprintf(file, "NINVideoOffset = %d\n", NINVideoOffset);
 	fprintf(file, "NINMCEmulation = %d\n", NINMCEmulation);
 	fprintf(file, "NINMCSize = %d\n", NINMCSize);
 	fprintf(file, "NINAutoboot = %d\n", NINAutoboot);
@@ -443,7 +448,6 @@ bool CSettings::Save()
 	fprintf(file, "NINUSBHID = %d\n", NINUSBHID);
 	fprintf(file, "NINMaxPads = %d\n", NINMaxPads);
 	fprintf(file, "NINNativeSI = %d\n", NINNativeSI);
-	fprintf(file, "NINWiiUWide = %d\n", NINWiiUWide);
 	fprintf(file, "NINOSReport = %d\n", NINOSReport);
 	fprintf(file, "NINLED = %d\n", NINLED);
 	fprintf(file, "NINLog = %d\n", NINLog);
@@ -927,6 +931,21 @@ bool CSettings::SetSetting(char *name, char *value)
 		NINDeflicker = atoi(value);
 		return true;
 	}
+	else if (strcmp(name, "NINWiiUWide") == 0)
+	{
+		NINWiiUWide = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINVideoScale") == 0)
+	{
+		NINVideoScale = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINVideoOffset") == 0)
+	{
+		NINVideoOffset = atoi(value);
+		return true;
+	}
 	else if (strcmp(name, "NINMCEmulation") == 0)
 	{
 		NINMCEmulation = atoi(value);
@@ -960,11 +979,6 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "NINNativeSI") == 0)
 	{
 		NINNativeSI = atoi(value);
-		return true;
-	}
-	else if (strcmp(name, "NINWiiUWide") == 0)
-	{
-		NINWiiUWide = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "NINOSReport") == 0)

@@ -20,12 +20,12 @@
 #include <gctypes.h>
 
 #define NIN_MAGIC					0x01070CF6
-#define NIN_CFG_VERSION				0x00000003
+#define NIN_CFG_VERSION				0x00000004
 
 typedef struct NIN_CFG 
 {
 	u32		Magicbytes;		// 0x01070CF6
-	u32		Version;		// 0x00000003 since r42
+	u32		Version;		// 0x00000004 since v3.354
 	u32		Config;
 	u32		VideoMode;
 	u32		Language;
@@ -33,7 +33,17 @@ typedef struct NIN_CFG
 	char	CheatPath[255];
 	u32		MaxPads;		// added in r42 - cfg version 2
 	u32		GameID;			// added in r83 - cfg version 2
-	u32		MemCardBlocks; // added in v1.135 - cfg version 3
+	union
+	{
+		u32 MemCardBlocks;	// added in v1.135 - cfg version 3 - u32 in v3, Char in v4
+		struct
+		{
+			char		MemCardBlocksV4;// replaced in v3.354 - cfg version 4 - from u32 in v3 to Char in v4
+			char		VideoScale;		// added in v3.354 - cfg version 4
+			char		VideoOffset;	// added in v3.354 - cfg version 4
+			char		Unused; 		// added in v3.354 - cfg version 4
+		};
+	};
 } NIN_CFG;
 
 enum ninconfig
