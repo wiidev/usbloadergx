@@ -215,9 +215,9 @@ int MainMenu(int menu)
 			case MENU_THEMEMENU:
 				currentMenu = ThemeMenu::Execute();
 				break;
-			case MENU_THEMEDOWNLOADER:
-				currentMenu = ThemeDownloader::Execute();
-				break;
+		//	case MENU_THEMEDOWNLOADER:
+		//		currentMenu = ThemeDownloader::Execute();
+		//		break;
 			case MENU_HOMEBREWBROWSE:
 				currentMenu = HomebrewBrowser::Execute();
 				break;

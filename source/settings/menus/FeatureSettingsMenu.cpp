@@ -32,7 +32,7 @@
 #include "settings/SettingsPrompts.h"
 #include "network/Wiinnertag.h"
 #include "network/networkops.h"
-#include "network/FileDownloader.h"
+#include "network/http.h"
 #include "FileOperations/fileops.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/ProgressWindow.h"
@@ -541,23 +541,39 @@ int FeatureSettingsMenu::GetMenuInternal()
 					RenameFile(NINUpdatePath, NINUpdatePathBak);
 				
 				// Download latest loader.dol as boot.dol
-				int filesize = DownloadFileToPath("http://nintendon-t.googlecode.com/svn/trunk/loader/loader.dol", NINUpdatePath, false);
-
-				if(filesize <= 0)
+				bool success = false;
+				displayDownloadProgress(true); // enable progress window for next download
+				struct block file = downloadfile("https://raw.githubusercontent.com/FIX94/Nintendont/master/loader/loader.dol");
+				if (file.data != NULL)
 				{
-					RemoveFile(NINUpdatePath);
-					if(CheckFile(NINUpdatePathBak))
-						RenameFile(NINUpdatePathBak, NINUpdatePath);
-					WindowPrompt(tr( "Update failed" ), 0, tr( "OK" ));
+					FILE * pfile = fopen(NINUpdatePath, "wb");
+					if(pfile)
+					{
+						fwrite(file.data, 1, file.size, pfile);
+						fclose(pfile);
+						WindowPrompt(tr( "Successfully Updated" ), 0, tr( "OK" ));
+						success = true;
+					}
+					else
+						WindowPrompt(tr( "Update failed" ), 0, tr( "OK" ));
+					
+					free(file.data);
 				}
-				else
+					
+				if(success)
 				{
 					//remove existing loader.dol file if found as it has priority over boot.dol, and boot.bak
 					snprintf(NINUpdatePath, sizeof(NINUpdatePath), "%s/loader.dol", Settings.NINLoaderPath);
 					RemoveFile(NINUpdatePath);
 					RemoveFile(NINUpdatePathBak);
-					
-					WindowPrompt(tr( "Successfully Updated" ), 0, tr( "OK" ));
+				}
+				else
+				{
+					// Restore backup file if found
+					RemoveFile(NINUpdatePath);
+					if(CheckFile(NINUpdatePathBak))
+						RenameFile(NINUpdatePathBak, NINUpdatePath);
+					WindowPrompt(tr( "Update failed" ), 0, tr( "OK" ));
 				}
 			}
 		}

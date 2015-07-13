@@ -223,8 +223,11 @@ void GlobalSettings::CreateSettingsMenu(int menuNr)
 			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
 			return;
 		}
-
-		returnMenu = MENU_THEMEDOWNLOADER;
+		
+		WindowPrompt(tr( "Warning:" ), tr( "Sorry, the theme downloader menu is not working anymore because http://wii.spiffy360.com now requires user registration." ), tr( "OK" ));
+			return;
+		
+		// returnMenu = MENU_THEMEDOWNLOADER;
 	}
 	//! Update
 	else if(menuNr == Idx++)
