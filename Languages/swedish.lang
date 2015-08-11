@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-05 15:42+0200\n"
+"POT-Creation-Date: 2015-08-11 18:36+0200\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -1642,6 +1642,9 @@ msgstr "Original/Anpassade"
 msgid "PAD Hook"
 msgstr ""
 
+msgid "PAL50 Patch"
+msgstr ""
+
 msgid "Parental Control"
 msgstr "Föräldrakontroll"
 
@@ -1742,6 +1745,9 @@ msgid "Reloading game list now, please wait..."
 msgstr ""
 
 msgid "Remember Unlock"
+msgstr ""
+
+msgid "Remove Read Speed Limit"
 msgstr ""
 
 msgid "Remove update"
@@ -1889,6 +1895,9 @@ msgid "Skip Errors"
 msgstr ""
 
 msgid "Sneek Video Patch"
+msgstr ""
+
+msgid "Sorry, the theme downloader menu is not working anymore because http://wii.spiffy360.com now requires user registration."
 msgstr ""
 
 msgid "Sort alphabetically"
@@ -2239,6 +2248,12 @@ msgstr ""
 
 msgid "Video Mode"
 msgstr "Video-läge"
+
+msgid "Video offset"
+msgstr ""
+
+msgid "Video scale"
+msgstr ""
 
 msgid "Virtual Pointer Speed"
 msgstr ""

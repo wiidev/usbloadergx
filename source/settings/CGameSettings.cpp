@@ -217,12 +217,16 @@ bool CGameSettings::Save()
 		fprintf(f, "DMLJPNPatch:%d; ", GameList[i].DMLJPNPatch);
 		fprintf(f, "DMLDebug:%d; ", GameList[i].DMLDebug);
 		fprintf(f, "NINDeflicker:%d; ", GameList[i].NINDeflicker);
+		fprintf(f, "NINPal50Patch:%d; ", GameList[i].NINPal50Patch);
+		fprintf(f, "NINWiiUWide:%d; ", GameList[i].NINWiiUWide);
+		fprintf(f, "NINVideoScale:%d; ", GameList[i].NINVideoScale);
+		fprintf(f, "NINVideoOffset:%d; ", GameList[i].NINVideoOffset);
+		fprintf(f, "NINRemlimit:%d; ", GameList[i].NINRemlimit);
 		fprintf(f, "NINMCEmulation:%d; ", GameList[i].NINMCEmulation);
 		fprintf(f, "NINMCSize:%d; ", GameList[i].NINMCSize);
 		fprintf(f, "NINUSBHID:%d; ", GameList[i].NINUSBHID);
 		fprintf(f, "NINMaxPads:%d; ", GameList[i].NINMaxPads);
 		fprintf(f, "NINNativeSI:%d; ", GameList[i].NINNativeSI);
-		fprintf(f, "NINWiiUWide:%d; ", GameList[i].NINWiiUWide);
 		fprintf(f, "NINOSReport:%d; ", GameList[i].NINOSReport);
 		fprintf(f, "NINLED:%d; ", GameList[i].NINLED);
 		fprintf(f, "NINLog:%d; ", GameList[i].NINLog);
@@ -406,6 +410,31 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		game.NINDeflicker = atoi(value);
 		return true;
 	}
+	else if(strcmp(name, "NINPal50Patch") == 0)
+	{
+		game.NINPal50Patch = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "NINWiiUWide") == 0)
+	{
+		game.NINWiiUWide = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINVideoScale") == 0)
+	{
+		game.NINVideoScale = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINVideoOffset") == 0)
+	{
+		game.NINVideoOffset = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINRemlimit") == 0)
+	{
+		game.NINRemlimit = atoi(value);
+		return true;
+	}
 	else if(strcmp(name, "NINMCEmulation") == 0)
 	{
 		game.NINMCEmulation = atoi(value);
@@ -429,11 +458,6 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 	else if(strcmp(name, "NINNativeSI") == 0)
 	{
 		game.NINNativeSI = atoi(value);
-		return true;
-	}
-	else if(strcmp(name, "NINWiiUWide") == 0)
-	{
-		game.NINWiiUWide = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "NINOSReport") == 0)
@@ -633,12 +657,16 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.DMLJPNPatch = INHERIT;
 	game.DMLDebug = INHERIT;
 	game.NINDeflicker = INHERIT;
+	game.NINPal50Patch = INHERIT;
+	game.NINWiiUWide = INHERIT;
+	game.NINVideoScale = INHERIT;
+	game.NINVideoOffset = INHERIT - 20;
+	game.NINRemlimit = INHERIT;
 	game.NINMCEmulation = INHERIT;
 	game.NINMCSize = INHERIT;
 	game.NINUSBHID = INHERIT;
 	game.NINMaxPads = INHERIT;
 	game.NINNativeSI = INHERIT;
-	game.NINWiiUWide = INHERIT;
 	game.NINOSReport = INHERIT;
 	game.NINLED = INHERIT;
 	game.NINLog = INHERIT;

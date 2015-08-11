@@ -185,9 +185,11 @@ void CSettings::SetDefault()
 	DMLJPNPatch = OFF;
 	DMLDebug = OFF;
 	NINDeflicker = OFF;
+	NINPal50Patch = OFF;
 	NINWiiUWide = widescreen;
 	NINVideoScale = 40;
 	NINVideoOffset = 0;
+	NINRemlimit = OFF;
 	NINMCEmulation = ON;
 	NINMCSize = 2;
 	NINAutoboot = ON;
@@ -438,9 +440,11 @@ bool CSettings::Save()
 	fprintf(file, "DMLJPNPatch = %d\n", DMLJPNPatch);
 	fprintf(file, "DMLDebug = %d\n", DMLDebug);
 	fprintf(file, "NINDeflicker = %d\n", NINDeflicker);
+	fprintf(file, "NINPal50Patch = %d\n", NINPal50Patch);
 	fprintf(file, "NINWiiUWide = %d\n", NINWiiUWide);
 	fprintf(file, "NINVideoScale = %d\n", NINVideoScale);
 	fprintf(file, "NINVideoOffset = %d\n", NINVideoOffset);
+	fprintf(file, "NINRemlimit = %d\n", NINRemlimit);
 	fprintf(file, "NINMCEmulation = %d\n", NINMCEmulation);
 	fprintf(file, "NINMCSize = %d\n", NINMCSize);
 	fprintf(file, "NINAutoboot = %d\n", NINAutoboot);
@@ -931,6 +935,11 @@ bool CSettings::SetSetting(char *name, char *value)
 		NINDeflicker = atoi(value);
 		return true;
 	}
+	else if (strcmp(name, "NINPal50Patch") == 0)
+	{
+		NINPal50Patch = atoi(value);
+		return true;
+	}
 	else if (strcmp(name, "NINWiiUWide") == 0)
 	{
 		NINWiiUWide = atoi(value);
@@ -944,6 +953,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "NINVideoOffset") == 0)
 	{
 		NINVideoOffset = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINRemlimit") == 0)
+	{
+		NINRemlimit = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "NINMCEmulation") == 0)

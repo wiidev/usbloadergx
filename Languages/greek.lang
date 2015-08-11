@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-05 15:42+0200\n"
+"POT-Creation-Date: 2015-08-11 18:36+0200\n"
 "Last-Translator: nakata6790\n"
 "Language-Team: nakata6790 (aka0107@gmail.com)\n"
 "MIME-Version: 1.0\n"
@@ -1641,6 +1641,9 @@ msgstr "ÁõèåíôéêÜ/ÔñïðïðïéçìÝíá"
 msgid "PAD Hook"
 msgstr ""
 
+msgid "PAL50 Patch"
+msgstr ""
+
 msgid "Parental Control"
 msgstr "Ãïíéêüò Ýëåã÷ïò"
 
@@ -1742,6 +1745,9 @@ msgstr "Åðáíáöüñôùóç ëßóôáò ðáé÷íéäéþí, ðáñáêá
 
 msgid "Remember Unlock"
 msgstr "Ìüíéìï îåêëåßäùìá"
+
+msgid "Remove Read Speed Limit"
+msgstr ""
 
 msgid "Remove update"
 msgstr "ÁðïìÜêñõíóç áñ÷åßùí áíáâÜèìéóçò."
@@ -1889,6 +1895,9 @@ msgstr "Áãíüçóç óöáëìÜôùí"
 
 msgid "Sneek Video Patch"
 msgstr "Patch åéêüíáò ãéá sneek"
+
+msgid "Sorry, the theme downloader menu is not working anymore because http://wii.spiffy360.com now requires user registration."
+msgstr ""
 
 msgid "Sort alphabetically"
 msgstr "ÄéÜôáîç áëöáâçôéêÜ"
@@ -2238,6 +2247,12 @@ msgstr ""
 
 msgid "Video Mode"
 msgstr "Ñýèìéóç âßíôåï"
+
+msgid "Video offset"
+msgstr ""
+
+msgid "Video scale"
+msgstr ""
 
 msgid "Virtual Pointer Speed"
 msgstr "Ôá÷ýôçôá åéêïíéêïý äåßêôç"

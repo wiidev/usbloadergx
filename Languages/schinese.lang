@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-05 15:42+0200\n"
+"POT-Creation-Date: 2015-08-11 18:36+0200\n"
 "PO-Revision-Date: 2013-08-13 07:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: oCameLo\n"
@@ -1642,6 +1642,9 @@ msgstr "官方/自制"
 msgid "PAD Hook"
 msgstr "PAD Hook"
 
+msgid "PAL50 Patch"
+msgstr ""
+
 msgid "Parental Control"
 msgstr "家长控制"
 
@@ -1743,6 +1746,9 @@ msgstr "正在重新加载游戏列表，请稍候..."
 
 msgid "Remember Unlock"
 msgstr "存储解锁"
+
+msgid "Remove Read Speed Limit"
+msgstr ""
 
 msgid "Remove update"
 msgstr "删除更新"
@@ -1890,6 +1896,9 @@ msgstr "跳过错误"
 
 msgid "Sneek Video Patch"
 msgstr "Sneek 视频补丁"
+
+msgid "Sorry, the theme downloader menu is not working anymore because http://wii.spiffy360.com now requires user registration."
+msgstr ""
 
 msgid "Sort alphabetically"
 msgstr "按字母排序"
@@ -2239,6 +2248,12 @@ msgstr ""
 
 msgid "Video Mode"
 msgstr "视频制式"
+
+msgid "Video offset"
+msgstr ""
+
+msgid "Video scale"
+msgstr ""
 
 msgid "Virtual Pointer Speed"
 msgstr "虚拟指针速度"

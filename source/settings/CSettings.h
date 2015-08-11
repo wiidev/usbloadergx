@@ -189,9 +189,11 @@ class CSettings
 		short DMLJPNPatch;
 		short DMLDebug;
 		short NINDeflicker;
+		short NINPal50Patch;
 		short NINWiiUWide;
 		short NINVideoScale;
-		s8 NINVideoOffset;
+		short NINVideoOffset;
+		short NINRemlimit;
 		s8 NINMCEmulation;
 		short NINMCSize;
 		short NINAutoboot;

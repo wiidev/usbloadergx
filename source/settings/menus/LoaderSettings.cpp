@@ -230,9 +230,11 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Auto Boot" ));
 	Options->SetName(Idx++, "%s", tr( "Settings File" ));
 	Options->SetName(Idx++, "%s", tr( "Video Deflicker" ));
+	Options->SetName(Idx++, "%s", tr( "PAL50 Patch" ));
 	Options->SetName(Idx++, "%s", tr( "WiiU Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "Video scale" ));
 	Options->SetName(Idx++, "%s", tr( "Video offset" ));
+	Options->SetName(Idx++, "%s", tr( "Remove Read Speed Limit" ));
 	Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
 	Options->SetName(Idx++, "%s", tr( "Memory Card Blocks Size" ));
 	Options->SetName(Idx++, "%s", tr( "USB-HID Controller" ));
@@ -420,6 +422,9 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: NIN Video Deflicker
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINDeflicker]));
 
+	//! Settings: NIN PAL50 Patch
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINPal50Patch]));
+
 	//! Settings: WiiU Widescreen
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINWiiUWide]));
 
@@ -428,6 +433,9 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: NIN VideoOffset
 	Options->SetValue(Idx++, "%d (-20~20)", Settings.NINVideoOffset);
+
+	//! Settings: NIN Remove Read Speed Limiter
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINRemlimit]));
 
 	//! Settings: NIN Memory Card Emulation
 	Options->SetValue(Idx++, "%s", tr(NINMCText[Settings.NINMCEmulation]));
@@ -776,6 +784,12 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.NINDeflicker >= MAX_ON_OFF) Settings.NINDeflicker = 0;
 	}
 
+	//! Settings: NIN PAL50 Patch
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINPal50Patch >= MAX_ON_OFF) Settings.NINPal50Patch = 0;
+	}
+
 	//! Settings: WiiU Widescreen
 	else if (ret == ++Idx)
 	{
@@ -800,6 +814,12 @@ int LoaderSettings::GetMenuInternal()
 		int ret = OnScreenNumpad(entrie, sizeof(entrie));
 		if(ret)
 			Settings.NINVideoOffset = LIMIT(atoi(entrie), -20, 20);
+	}
+
+	//! Settings: NIN Remove Read Speed Limiter
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINRemlimit >= MAX_ON_OFF) Settings.NINRemlimit = 0;
 	}
 
 	//! Settings: NIN Memory Card Emulation

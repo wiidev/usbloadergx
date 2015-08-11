@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1248
+# French.lang - r1254
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-05 15:42+0200\n"
+"POT-Creation-Date: 2015-08-11 18:36+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -1642,6 +1642,9 @@ msgstr "Originaux/Persos"
 msgid "PAD Hook"
 msgstr ""
 
+msgid "PAL50 Patch"
+msgstr "Patch PAL50"
+
 msgid "Parental Control"
 msgstr "Contrôle parental"
 
@@ -1743,6 +1746,9 @@ msgstr "Rechargement de la liste des jeux, veuillez patienter..."
 
 msgid "Remember Unlock"
 msgstr "Mémoriser le verrouillage"
+
+msgid "Remove Read Speed Limit"
+msgstr "Débrider la vitesse de lecture"
 
 msgid "Remove update"
 msgstr "Supprimer MàJ"
@@ -1890,6 +1896,9 @@ msgstr "Omettre les erreurs"
 
 msgid "Sneek Video Patch"
 msgstr "Patch vidéo Sneek"
+
+msgid "Sorry, the theme downloader menu is not working anymore because http://wii.spiffy360.com now requires user registration."
+msgstr "Désolé, le menu de téléchargement des thèmes ne fonctionne plus, le site http://wii.spiffy360.com nécessite désormais un compte utilisateur. "
 
 msgid "Sort alphabetically"
 msgstr "Ordre alphabétique"
@@ -2239,6 +2248,12 @@ msgstr "Vidéo Deflicker"
 
 msgid "Video Mode"
 msgstr "Mode vidéo"
+
+msgid "Video offset"
+msgstr "Position de l'image"
+
+msgid "Video scale"
+msgstr "Échelle de l'image"
 
 msgid "Virtual Pointer Speed"
 msgstr "Vitesse du pointeur virtuel"

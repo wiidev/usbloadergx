@@ -970,8 +970,11 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	u8 ninDebugChoice = game_cfg->DMLDebug == INHERIT ? Settings.DMLDebug : game_cfg->DMLDebug;
 	u8 ninOSReportChoice = game_cfg->NINOSReport == INHERIT ? Settings.NINOSReport : game_cfg->NINOSReport;
 	u8 ninLogChoice = game_cfg->NINLog == INHERIT ? Settings.NINLog : game_cfg->NINLog;
-	s8 ninVideoScale = Settings.NINVideoScale;
-	s8 ninVideoOffset = Settings.NINVideoOffset;
+	u8 ninVideoScale = game_cfg->NINVideoScale == INHERIT ? Settings.NINVideoScale : game_cfg->NINVideoScale;
+	u8 ninVideoOffset = game_cfg->NINVideoOffset == INHERIT - 20 ? Settings.NINVideoOffset : game_cfg->NINVideoOffset;
+	u8 ninPal50PatchChoice = game_cfg->NINPal50Patch == INHERIT ? Settings.NINPal50Patch : game_cfg->NINPal50Patch;
+	u8 ninRemlimitChoice = game_cfg->NINRemlimit == INHERIT ? Settings.NINRemlimit : game_cfg->NINRemlimit;
+	
 	const char *ninLoaderPath = game_cfg->NINLoaderPath.size() == 0 ? Settings.NINLoaderPath : game_cfg->NINLoaderPath.c_str();
 
 
@@ -1158,11 +1161,13 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		}
 	}
 	
-	// needed since v3.354 CFG v4 to still work with old CFG version 3
-	if(NINRev >= 135 && NINRev < 354) // v3
-	{
+	// needed since v3.354 CFG v4 to still work with old CFG version
+	if(NINRev >= 135 && NINRev < 354)
 		NIN_cfg_version = 3;
-	}
+	else if(NINRev >= 354 && NINRev < 358)
+		NIN_cfg_version = 4;
+	else if(NINRev >= 358 && NINRev < 368)
+		NIN_cfg_version = 5;
 
 	// Set used device when launching game from disc
 	if(gameHdr->type == TYPE_GAME_GC_DISC)
@@ -1419,13 +1424,16 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	if(NIN_cfg_version == 3)
 		nin_config->MemCardBlocks	= ninMCSizeChoice; 	// NIN_CFG_VERSION 3 v1.135
 	// Memory Card Emulation Blocs size + Aspect ratio with NIN_CFG v4
-	else if(NIN_cfg_version == 4)
+	else if(NIN_cfg_version >= 4)
 	{
 		nin_config->MemCardBlocksV4 = ninMCSizeChoice; 	// NIN_CFG_VERSION 4 v3.354
 		nin_config->VideoScale		= ninVideoScale; 	// v3.354+
 		nin_config->VideoOffset		= ninVideoOffset; 	// v3.354+
 	}
 	
+	// Remove data read speed limiter
+	if(NIN_cfg_version >= 5 && ninRemlimitChoice)
+		nin_config->Config |= NIN_CFG_REMLIMIT;
 	
 	// Setup Video Mode
 	if(ninVideoChoice == DML_VIDEO_NONE)				// No video mode changes
@@ -1447,6 +1455,9 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 				
 			if (ninDeflickerChoice)
 				nin_config->VideoMode |= NIN_VID_FORCE_DF; 		// v2.208+
+			
+			if (ninPal50PatchChoice && (nin_config->VideoMode & NIN_VID_FORCE_PAL50))
+				nin_config->VideoMode |= NIN_VID_PATCH_PAL50; 		// v3.368+
 
 			if(nin_config->VideoMode & NIN_VID_PROG)
 				nin_config->Config |= NIN_CFG_FORCE_PROG; 		// Set Force_PROG bit in Config
