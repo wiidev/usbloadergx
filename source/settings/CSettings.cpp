@@ -59,7 +59,7 @@ void CSettings::SetDefault()
 	snprintf(covers2d_path, sizeof(covers2d_path), "%simages/2D/", ConfigPath);
 	snprintf(coversFull_path, sizeof(coversFull_path), "%simages/full/", ConfigPath);
 	snprintf(disc_path, sizeof(disc_path), "%simages/disc/", ConfigPath);
-	snprintf(titlestxt_path, sizeof(titlestxt_path), "%stitles/", ConfigPath);
+	snprintf(titlestxt_path, sizeof(titlestxt_path), "%s", ConfigPath);
 	snprintf(languagefiles_path, sizeof(languagefiles_path), "%slanguage/", ConfigPath);
 	snprintf(update_path, sizeof(update_path), "%s/apps/usbloader_gx/", BootDevice);
 	snprintf(BNRCachePath, sizeof(BNRCachePath), "%s/apps/usbloader_gx/cache_bnr/", BootDevice);
@@ -152,6 +152,7 @@ void CSettings::SetDefault()
 	WiirdDebugger = OFF;
 	WiirdDebuggerPause = OFF;
 	ShowPlayCount = ON;
+	bannerFavIcon = BANNER_FAVICON_SINGLE_LINEA;
 	RememberUnlock = ON;
 	LoaderMode = MODE_WIIGAMES | MODE_GCGAMES;
 	SearchMode = SEARCH_BEGINNING;
@@ -406,6 +407,7 @@ bool CSettings::Save()
 	fprintf(file, "WiirdDebugger = %d\n", WiirdDebugger);
 	fprintf(file, "WiirdDebuggerPause = %d\n", WiirdDebuggerPause);
 	fprintf(file, "ShowPlayCount = %d\n", ShowPlayCount);
+	fprintf(file, "bannerFavIcon = %d\n", bannerFavIcon);
 	fprintf(file, "LoaderMode = %d\n", LoaderMode);
 	fprintf(file, "SearchMode = %d\n", SearchMode);
 	fprintf(file, "GameAspectRatio = %d\n", GameAspectRatio);
@@ -649,6 +651,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "ShowPlayCount") == 0)
 	{
 		ShowPlayCount = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "bannerFavIcon") == 0)
+	{
+		bannerFavIcon = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "ShowFreeSpace") == 0)

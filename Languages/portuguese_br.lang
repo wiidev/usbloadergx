@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 18:36+0200\n"
+"POT-Creation-Date: 2015-08-14 16:24+0200\n"
 "PO-Revision-Date: 2011-11-03 11:00+0000\n"
 "Last-Translator: Codemaster <javafangamers@hotmail.com>\n"
 "Language-Team: Sky8000, pplucky\n"
@@ -49,6 +49,9 @@ msgid "--==   DIOS MIOS (Lite) "
 msgstr ""
 
 msgid "--==  DM(L) + Nintendont"
+msgstr ""
+
+msgid "/\\/\\"
 msgstr ""
 
 msgid "0 (Everyone)"
@@ -1627,6 +1630,12 @@ msgstr "Offset"
 msgid "Ok"
 msgstr ""
 
+msgid "One Line A"
+msgstr ""
+
+msgid "One Line B"
+msgstr ""
+
 msgid "Only Game Partition"
 msgstr "Apenas Partição Jogos"
 
@@ -1789,6 +1798,9 @@ msgstr "Direita"
 msgid "Rotating Disc"
 msgstr "Disco Girando"
 
+msgid "Round"
+msgstr ""
+
 msgid "Rumble"
 msgstr "Vibração"
 
@@ -1875,6 +1887,9 @@ msgstr ""
 
 msgid "Show Categories"
 msgstr "Mostrar Categorias"
+
+msgid "Show Favorite on banner"
+msgstr ""
 
 msgid "Show Free Space"
 msgstr "Mostrar Espaço Livre"
@@ -2139,6 +2154,9 @@ msgstr "Balões de dica"
 
 msgid "Transfer failed"
 msgstr "Transferência falhou"
+
+msgid "Two Lines"
+msgstr ""
 
 msgid "USB"
 msgstr ""

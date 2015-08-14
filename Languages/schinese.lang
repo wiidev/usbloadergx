@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 18:36+0200\n"
+"POT-Creation-Date: 2015-08-14 16:24+0200\n"
 "PO-Revision-Date: 2013-08-13 07:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: oCameLo\n"
@@ -50,6 +50,9 @@ msgstr "--==   DIOS MIOS (Lite) "
 
 msgid "--==  DM(L) + Nintendont"
 msgstr "--==  DM(L) + Nintendont"
+
+msgid "/\\/\\"
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (全年龄)"
@@ -1627,6 +1630,12 @@ msgstr "偏移位"
 msgid "Ok"
 msgstr "确定"
 
+msgid "One Line A"
+msgstr ""
+
+msgid "One Line B"
+msgstr ""
+
 msgid "Only Game Partition"
 msgstr "仅游戏分区"
 
@@ -1789,6 +1798,9 @@ msgstr "右"
 msgid "Rotating Disc"
 msgstr "选择光盘"
 
+msgid "Round"
+msgstr ""
+
 msgid "Rumble"
 msgstr "震动"
 
@@ -1875,6 +1887,9 @@ msgstr ""
 
 msgid "Show Categories"
 msgstr "显示分类"
+
+msgid "Show Favorite on banner"
+msgstr ""
 
 msgid "Show Free Space"
 msgstr "显示剩余空间"
@@ -2139,6 +2154,9 @@ msgstr "提示信息"
 
 msgid "Transfer failed"
 msgstr "传输失败"
+
+msgid "Two Lines"
+msgstr ""
 
 msgid "USB"
 msgstr ""

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 18:36+0200\n"
+"POT-Creation-Date: 2015-08-14 16:24+0200\n"
 "PO-Revision-Date: 2011-09-11 12:19+0100\n"
 "Last-Translator: xFede\n"
 "Language-Team: xFede (fedeanto11@gmail.com)\n"
@@ -49,6 +49,9 @@ msgid "--==   DIOS MIOS (Lite) "
 msgstr ""
 
 msgid "--==  DM(L) + Nintendont"
+msgstr ""
+
+msgid "/\\/\\"
 msgstr ""
 
 msgid "0 (Everyone)"
@@ -1627,6 +1630,12 @@ msgstr "Offset"
 msgid "Ok"
 msgstr ""
 
+msgid "One Line A"
+msgstr ""
+
+msgid "One Line B"
+msgstr ""
+
 msgid "Only Game Partition"
 msgstr "Solo Partizione Gioco"
 
@@ -1789,6 +1798,9 @@ msgstr "Destra"
 msgid "Rotating Disc"
 msgstr "Ruotando il disco"
 
+msgid "Round"
+msgstr ""
+
 msgid "Rumble"
 msgstr "Vibrazione"
 
@@ -1875,6 +1887,9 @@ msgstr ""
 
 msgid "Show Categories"
 msgstr "Visualizza categorie"
+
+msgid "Show Favorite on banner"
+msgstr ""
 
 msgid "Show Free Space"
 msgstr "Visualizza spazio libero"
@@ -2139,6 +2154,9 @@ msgstr "Suggerimenti"
 
 msgid "Transfer failed"
 msgstr "Trasferimento fallito"
+
+msgid "Two Lines"
+msgstr ""
 
 msgid "USB"
 msgstr ""

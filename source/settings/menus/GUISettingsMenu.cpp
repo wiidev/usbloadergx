@@ -108,6 +108,16 @@ static const char *ScreensaverText[SCREENSAVER_MAX] =
 	trNOOP( "1 hour" )
 };
 
+static const char * BannerFavIconText[BANNER_FAVICON_MAX_CHOICE] =
+{
+	trNOOP( "OFF" ),
+	trNOOP( "Round" ),
+	trNOOP( "/\\/\\" ),
+	trNOOP( "Two Lines" ),
+	trNOOP( "One Line A" ),
+	trNOOP( "One Line B" )
+};
+
 static const char * HomeMenuText[HOME_MENU_MAX_CHOICE] =
 {
 	trNOOP( "System Default" ),
@@ -136,6 +146,7 @@ GuiSettingsMenu::GuiSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Screensaver" ));
 	Options->SetName(Idx++, "%s", tr( "Mark new games" ));
 	Options->SetName(Idx++, "%s", tr( "Show Play Count" ));
+	Options->SetName(Idx++, "%s", tr( "Show Favorite on banner" ));
 	Options->SetName(Idx++, "%s", tr( "Show Free Space" ));
 	Options->SetName(Idx++, "%s", tr( "HOME Menu" ));
 	Options->SetName(Idx++, "%s", tr( "Use System Font" ));
@@ -212,6 +223,9 @@ void GuiSettingsMenu::SetOptionValues()
 
 	//! Settings: Show Play Count
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.ShowPlayCount] ));
+
+	//! Settings: Show Favorite on banner window
+	Options->SetValue(Idx++, "%s", tr( BannerFavIconText[Settings.bannerFavIcon] ));
 
 	//! Settings: Show Free Space
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.ShowFreeSpace] ));
@@ -399,6 +413,12 @@ int GuiSettingsMenu::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.ShowPlayCount >= MAX_ON_OFF) Settings.ShowPlayCount = 0;
+	}
+
+	//! Settings: Show favorite on banner window
+	else if (ret == ++Idx)
+	{
+		if (++Settings.bannerFavIcon >= BANNER_FAVICON_MAX_CHOICE) Settings.bannerFavIcon = 0;
 	}
 
 	//! Settings: Show Free Space

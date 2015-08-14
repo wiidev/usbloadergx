@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 18:36+0200\n"
+"POT-Creation-Date: 2015-08-14 16:24+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -49,6 +49,9 @@ msgid "--==   DIOS MIOS (Lite) "
 msgstr ""
 
 msgid "--==  DM(L) + Nintendont"
+msgstr ""
+
+msgid "/\\/\\"
 msgstr ""
 
 msgid "0 (Everyone)"
@@ -1627,6 +1630,12 @@ msgstr "代替"
 msgid "Ok"
 msgstr ""
 
+msgid "One Line A"
+msgstr ""
+
+msgid "One Line B"
+msgstr ""
+
 msgid "Only Game Partition"
 msgstr "ゲーム領域のみ"
 
@@ -1789,6 +1798,9 @@ msgstr "右ボタンで"
 msgid "Rotating Disc"
 msgstr "ディスク回転"
 
+msgid "Round"
+msgstr ""
+
 msgid "Rumble"
 msgstr "振動機能"
 
@@ -1875,6 +1887,9 @@ msgstr ""
 
 msgid "Show Categories"
 msgstr "カテゴリを表示"
+
+msgid "Show Favorite on banner"
+msgstr ""
 
 msgid "Show Free Space"
 msgstr "空き容量の表示"
@@ -2139,6 +2154,9 @@ msgstr "ヒントバルーン"
 
 msgid "Transfer failed"
 msgstr "転送に失敗しました"
+
+msgid "Two Lines"
+msgstr ""
 
 msgid "USB"
 msgstr ""

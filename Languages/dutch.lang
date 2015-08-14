@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 18:36+0200\n"
+"POT-Creation-Date: 2015-08-14 16:24+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -49,6 +49,9 @@ msgid "--==   DIOS MIOS (Lite) "
 msgstr ""
 
 msgid "--==  DM(L) + Nintendont"
+msgstr ""
+
+msgid "/\\/\\"
 msgstr ""
 
 msgid "0 (Everyone)"
@@ -1627,6 +1630,12 @@ msgstr "Compensatie"
 msgid "Ok"
 msgstr ""
 
+msgid "One Line A"
+msgstr ""
+
+msgid "One Line B"
+msgstr ""
+
 msgid "Only Game Partition"
 msgstr "Alleen Spel Partitie"
 
@@ -1789,6 +1798,9 @@ msgstr "Rechts"
 msgid "Rotating Disc"
 msgstr "Draaiende Disk"
 
+msgid "Round"
+msgstr ""
+
 msgid "Rumble"
 msgstr "Trilfunctie"
 
@@ -1875,6 +1887,9 @@ msgstr ""
 
 msgid "Show Categories"
 msgstr "Toon categorieën"
+
+msgid "Show Favorite on banner"
+msgstr ""
 
 msgid "Show Free Space"
 msgstr "Vrije ruimte weergeven"
@@ -2139,6 +2154,9 @@ msgstr "Hulpballonnen"
 
 msgid "Transfer failed"
 msgstr "Overdracht mislukt."
+
+msgid "Two Lines"
+msgstr ""
 
 msgid "USB"
 msgstr ""

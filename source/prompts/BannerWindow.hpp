@@ -79,11 +79,14 @@ class BannerWindow : public GuiWindow
 		GuiTrigger * trigPlus;
 		GuiTrigger * trigMinus;
 
+		GuiImageData * imgFavorite;
+		GuiImageData * imgNotFavorite;
 		GuiImageData * imgLeft;
 		GuiImageData * imgRight;
 
 		GuiImage * btnLeftImg;
 		GuiImage * btnRightImg;
+		GuiImage * FavoriteBtnImg[FAVORITE_STARS];
 
 		GuiText * playcntTxt;
 
@@ -92,6 +95,7 @@ class BannerWindow : public GuiWindow
 		GuiButton * settingsBtn;
 		GuiButton * btnLeft;
 		GuiButton * btnRight;
+		GuiButton * FavoriteBtn[FAVORITE_STARS];
 
 		GuiSound * gameSound;
 };

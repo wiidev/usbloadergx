@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1254
+# French.lang - r1255
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 18:36+0200\n"
+"POT-Creation-Date: 2015-08-14 16:24+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -49,6 +49,9 @@ msgid "--==   DIOS MIOS (Lite) "
 msgstr ""
 
 msgid "--==  DM(L) + Nintendont"
+msgstr ""
+
+msgid "/\\/\\"
 msgstr ""
 
 msgid "0 (Everyone)"
@@ -1627,6 +1630,12 @@ msgstr ""
 msgid "Ok"
 msgstr ""
 
+msgid "One Line A"
+msgstr "Une ligne A"
+
+msgid "One Line B"
+msgstr "Une ligne B"
+
 msgid "Only Game Partition"
 msgstr "Uniquement la partition de jeu"
 
@@ -1789,6 +1798,9 @@ msgstr "Droite"
 msgid "Rotating Disc"
 msgstr "Disque rotatif"
 
+msgid "Round"
+msgstr "Arrondi"
+
 msgid "Rumble"
 msgstr "Vibrations"
 
@@ -1875,6 +1887,9 @@ msgstr "Fichier de configs"
 
 msgid "Show Categories"
 msgstr "Afficher les catégories"
+
+msgid "Show Favorite on banner"
+msgstr "Afficher les fav. sur bannières"
 
 msgid "Show Free Space"
 msgstr "Afficher l'espace libre"
@@ -2139,6 +2154,9 @@ msgstr "Info-bulles"
 
 msgid "Transfer failed"
 msgstr "Échec du transfert"
+
+msgid "Two Lines"
+msgstr "Deux lignes"
 
 msgid "USB"
 msgstr ""

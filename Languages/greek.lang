@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 18:36+0200\n"
+"POT-Creation-Date: 2015-08-14 16:24+0200\n"
 "Last-Translator: nakata6790\n"
 "Language-Team: nakata6790 (aka0107@gmail.com)\n"
 "MIME-Version: 1.0\n"
@@ -48,6 +48,9 @@ msgid "--==   DIOS MIOS (Lite) "
 msgstr ""
 
 msgid "--==  DM(L) + Nintendont"
+msgstr ""
+
+msgid "/\\/\\"
 msgstr ""
 
 msgid "0 (Everyone)"
@@ -1626,6 +1629,12 @@ msgstr "Offset"
 msgid "Ok"
 msgstr ""
 
+msgid "One Line A"
+msgstr ""
+
+msgid "One Line B"
+msgstr ""
+
 msgid "Only Game Partition"
 msgstr "Müíï ôï partition ôùí ðáé÷íéäéþí"
 
@@ -1788,6 +1797,9 @@ msgstr "ÄåîéÜ"
 msgid "Rotating Disc"
 msgstr "Ðåñéóôñåöüìåíïò ïðôéêüò äßóêïò"
 
+msgid "Round"
+msgstr ""
+
 msgid "Rumble"
 msgstr "Äüíçóç"
 
@@ -1874,6 +1886,9 @@ msgstr ""
 
 msgid "Show Categories"
 msgstr "ÐñïâïëÞ êáôçãïñéþí"
+
+msgid "Show Favorite on banner"
+msgstr ""
 
 msgid "Show Free Space"
 msgstr "ÐñïâïëÞ åëåýèåñïõ åíáðïìåßíáíôïò ÷þñïõ"
@@ -2138,6 +2153,9 @@ msgstr "ÅôéêÝôåò"
 
 msgid "Transfer failed"
 msgstr "Áíåðéôõ÷Þò ìåôáöïñÜ áñ÷åßùí"
+
+msgid "Two Lines"
+msgstr ""
 
 msgid "USB"
 msgstr ""

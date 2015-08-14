@@ -87,6 +87,8 @@ BannerWindow::BannerWindow(GameBrowseMenu *m, struct discHdr *header)
 
 	gameBanner = new Banner;
 
+	imgFavorite = Resources::GetImageData("favorite.png");
+	imgNotFavorite = Resources::GetImageData("not_favorite.png");
 	imgLeft = Resources::GetImageData("startgame_arrow_left.png");
 	imgRight = Resources::GetImageData("startgame_arrow_right.png");
 
@@ -130,6 +132,106 @@ BannerWindow::BannerWindow(GameBrowseMenu *m, struct discHdr *header)
 	backBtn->SetTrigger(0, trigA);
 	backBtn->SetTrigger(1, trigB);
 
+	// Set favorite button position
+	int xPos = -198-(3*27)-14;
+	if(Settings.bannerFavIcon == BANNER_FAVICON_SINGLE_LINEA) // push more to the screen border
+		xPos += -14;
+	int yPos = 175-27;
+	float angle = 3*M_PI/2;	
+	for(int i = 0; i < FAVORITE_STARS; ++i)
+	{
+		
+		if(Settings.bannerFavIcon == BANNER_FAVICON_CIRC)
+		{
+			/*
+			Arrangement:
+			   0
+			  1
+			 2
+			  3
+			   4
+			*/
+			
+			if (i==0 || i == 4){
+				xPos = (-180-70 - 40*cos(angle)); //litte adjustment, image looks too far
+			}
+			else{
+				xPos = (-180-65 - 40*cos(angle));
+			}
+			yPos = (169 + 40*sin(angle));
+			angle += M_PI/4;
+			
+			/*
+			if (i == 0){
+				xPos += 27+14;
+			}else if (i < 3){
+				xPos += -14;
+				yPos += 27;
+			} else if (i >= 3){
+				xPos += 14;
+				yPos += 27;
+			}
+			*/
+		}
+		else if(Settings.bannerFavIcon == BANNER_FAVICON_SIN)
+		{
+			/*
+			Arrangement:
+			0 2 4
+			 1 3
+			*/
+			
+			xPos += 27;
+			xPos += -14;
+			if ((i&1)==0)
+			{
+				yPos += 27;
+			}
+			else
+			{
+				yPos -= 27;
+			}
+		}
+		else if(Settings.bannerFavIcon == BANNER_FAVICON_MULTI_LINE)
+		{
+			/*
+			Sequential arrangement, 3 on top, 2 at bottom:
+			1 2 3
+			 4 5
+			*/
+			
+			xPos += 27;
+			if (i==2){
+				xPos += -27-27-14;
+				yPos += 27;
+			}
+		
+		}
+		else if(Settings.bannerFavIcon == BANNER_FAVICON_SINGLE_LINEA)
+		{
+			/* Arrangement : inline above the settings */
+			xPos += 27;
+			yPos = 95;
+		}
+		else if(Settings.bannerFavIcon == BANNER_FAVICON_SINGLE_LINEB)
+		{
+			/* Arrangement : inline below the settings */
+			xPos += 27;
+			yPos = 210;
+		}
+		
+		FavoriteBtnImg[i] = new GuiImage;
+		FavoriteBtnImg[i]->SetWidescreen(Settings.widescreen);
+		FavoriteBtn[i] = new GuiButton(imgFavorite->GetWidth(), imgFavorite->GetHeight());
+		FavoriteBtn[i]->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
+		FavoriteBtn[i]->SetPosition(xPos, yPos);
+		FavoriteBtn[i]->SetImage(FavoriteBtnImg[i]);
+		FavoriteBtn[i]->SetSoundOver(btnSoundOver);
+		FavoriteBtn[i]->SetSoundClick(btnSoundClick2);
+		FavoriteBtn[i]->SetTrigger(trigA);
+		FavoriteBtn[i]->SetEffectGrow();
+	}
+
 	btnLeftImg = new GuiImage(imgLeft);
 	if (Settings.wsprompt) btnLeftImg->SetWidescreen(Settings.widescreen);
 	btnLeft = new GuiButton(btnLeftImg, btnLeftImg, ALIGN_LEFT, ALIGN_MIDDLE, 20, -50, trigA, btnSoundOver, btnSoundClick2, 1);
@@ -159,6 +261,9 @@ BannerWindow::BannerWindow(GameBrowseMenu *m, struct discHdr *header)
 	{
 		bannerFrame.SetButtonAText(tr("Settings"));
 		Append(settingsBtn);
+		if(Settings.bannerFavIcon != BANNER_FAVICON_OFF)
+			for(int i = 0; i < FAVORITE_STARS; ++i)
+				Append(FavoriteBtn[i]);
 	}
 	else
 	{
@@ -185,6 +290,8 @@ BannerWindow::~BannerWindow()
 	delete trigPlus;
 	delete trigMinus;
 
+	delete imgFavorite;
+	delete imgNotFavorite;
 	delete imgLeft;
 	delete imgRight;
 
@@ -198,6 +305,12 @@ BannerWindow::~BannerWindow()
 	delete settingsBtn;
 	delete btnLeft;
 	delete btnRight;
+
+	for(int i = 0; i < FAVORITE_STARS; ++i)
+	{
+		delete FavoriteBtnImg[i];
+		delete FavoriteBtn[i];
+	}
 
 	if(gameSound) gameSound->Stop();
 	delete gameSound;
@@ -275,6 +388,10 @@ void BannerWindow::ChangeGame(bool playsound)
 				gameSound->Play();
 		}
 	}
+
+	int favoritevar = GameStatistics.GetFavoriteRank(header->id);
+	for(int i = 0; i < FAVORITE_STARS; ++i)
+		FavoriteBtnImg[i]->SetImage(favoritevar >= i+1 ? imgFavorite : imgNotFavorite);
 
 	//! Resume all threads
 	BannerAsync::ResumeThread();
@@ -419,6 +536,23 @@ int BannerWindow::MainLoop()
 		{
 			bgMusic->SetVolume(Settings.volume);
 			reducedVol = false;
+		}
+	}
+
+	for(int i = 0; i < FAVORITE_STARS; ++i)
+	{
+		if(FavoriteBtn[i]->GetState() == STATE_CLICKED)
+		{
+			// This button can only be clicked when this is not a dvd header
+			struct discHdr * header = gameList[gameSelected];
+			int FavoriteRank = (i+1 == GameStatistics.GetFavoriteRank(header->id)) ? 0 : i+1; // Press the current rank to reset the rank
+
+			GameStatistics.SetFavoriteRank(header->id, FavoriteRank);
+			GameStatistics.Save();
+			for(int j = 0; j < FAVORITE_STARS; ++j)
+				FavoriteBtnImg[j]->SetImage(FavoriteRank >= j+1 ? imgFavorite : imgNotFavorite);
+
+			FavoriteBtn[i]->ResetState();
 		}
 	}
 

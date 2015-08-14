@@ -469,6 +469,11 @@ struct block downloadfile(const char *url)
 		displayProgressWindow = false;
 	}
 
+	result = HTTPR_OK;
+	if(http_port == 443)
+		ssl_shutdown(sslcontext);
+	net_close (connection);
+	
 	return response;
 }
 

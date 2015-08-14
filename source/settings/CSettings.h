@@ -156,6 +156,7 @@ class CSettings
 		short WiirdDebugger;
 		short WiirdDebuggerPause;
 		short ShowPlayCount;
+		short bannerFavIcon;
 		short RememberUnlock;
 		short LoaderMode;
 		short SearchMode;
