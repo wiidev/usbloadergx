@@ -76,8 +76,10 @@ Libogc/Devkit: Shagkur and Wintermute
 FreeTypeGX: Armin Tamzarian.
 
 Links:
-USB Loader GX Project Page and Support Site:
-http://code.google.com/p/usbloader-gui/
+USB Loader GX Project Page 
+https://sourceforge.net/projects/usbloadergx/
+Support Site:
+http://gbatemp.net/index.php?showtopic=149922
 Help Website:
 http://usbloadergx.koureio.net/
 WiiTDB Site:

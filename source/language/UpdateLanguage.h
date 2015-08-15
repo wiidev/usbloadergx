@@ -14,6 +14,6 @@
 //! returns -2 if it can't find any .lang files in the path
 //! return -1 if there is no network connection
 int UpdateLanguageFiles();
-int DownloadAllLanguageFiles();
+int DownloadAllLanguageFiles(int target = 0);
 
 #endif

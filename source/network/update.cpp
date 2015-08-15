@@ -170,7 +170,7 @@ int UpdateGameTDB()
 static void UpdateIconPng()
 {
 	char iconpath[200];
-	struct block file = downloadfile("http://usbloader-gui.googlecode.com/svn/branches/updates/icon.png");
+	struct block file = downloadfile("http://svn.code.sf.net/p/usbloadergx/code/branches/updates/icon.png");
 	if (file.data != NULL)
 	{
 		snprintf(iconpath, sizeof(iconpath), "%sicon.png", Settings.update_path);
@@ -187,7 +187,8 @@ static void UpdateIconPng()
 static void UpdateMetaXml()
 {
 	char xmlpath[200];
-	struct block file = downloadfile("http://usbloader-gui.googlecode.com/svn/branches/updates/meta.xml");
+	struct block file = downloadfile("http://svn.code.sf.net/p/usbloadergx/code/branches/updates/meta.xml");
+	// if not working, use this url form: http://sourceforge.net/p/usbloadergx/code/1254/tree//branches/updates/meta.xml?format=raw
 	if (file.data != NULL)
 	{
 		snprintf(xmlpath, sizeof(xmlpath), "%smeta.xml", Settings.update_path);
@@ -210,9 +211,9 @@ int CheckUpdate()
 	int currentrev = atoi(GetRev());
 
 #ifdef FULLCHANNEL
-	struct block file = downloadfile( "http://usbloader-gui.googlecode.com/svn/branches/updates/update_wad.txt" );
+	struct block file = downloadfile( "http://svn.code.sf.net/p/usbloadergx/code/branches/updates/update_wad.txt" );
 #else
-	struct block file = downloadfile("http://usbloader-gui.googlecode.com/svn/branches/updates/update_dol.txt");
+	struct block file = downloadfile("http://svn.code.sf.net/p/usbloadergx/code/branches/updates/update_dol.txt");
 #endif
 
 	if (file.data != NULL)
@@ -234,9 +235,9 @@ static int ApplicationDownload(void)
 	int currentrev = atoi(GetRev());
 
 #ifdef FULLCHANNEL
-	struct block file = downloadfile( "http://usbloader-gui.googlecode.com/svn/branches/updates/update_wad.txt" );
+	struct block file = downloadfile( "http://svn.code.sf.net/p/usbloadergx/code/branches/updates/update_wad.txt" );
 #else
-	struct block file = downloadfile("http://usbloader-gui.googlecode.com/svn/branches/updates/update_dol.txt");
+	struct block file = downloadfile("http://svn.code.sf.net/p/usbloadergx/code/branches/updates/update_dol.txt");
 #endif
 
 	if (file.data != NULL)
@@ -321,7 +322,7 @@ static int ApplicationDownload(void)
 		UpdateIconPng();
 		UpdateMetaXml();
 		UpdateGameTDB();
-		DownloadAllLanguageFiles();
+		DownloadAllLanguageFiles(newrev);
 	}
 
 	if(update_error)

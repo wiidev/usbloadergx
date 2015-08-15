@@ -389,7 +389,7 @@ void WindowCredits()
 	currentTxt->SetFont(creditsFont, creditsFontSize);
 	txt.push_back(currentTxt);
 
-	currentTxt = new GuiText("http://code.google.com/p/usbloader-gui/", 20, ( GXColor ) {255, 255, 255, 255});
+	currentTxt = new GuiText("http://sourceforge.net/p/usbloadergx/", 20, ( GXColor ) {255, 255, 255, 255});
 	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	currentTxt->SetPosition(160, y);
 	currentTxt->SetFont(creditsFont, creditsFontSize);

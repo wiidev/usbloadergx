@@ -2,8 +2,8 @@
 	<app version="1">
 		<name> USB Loader GX</name>
 		<coder>USB Loader GX Team</coder>
-		<version>3.0 r1255</version>
-		<release_date>20150814142358</release_date>
+		<version>3.0 r1256</version>
+		<release_date>20150815150707</release_date>
 		<!--   // remove this line to enable arguments
 		<arguments>
 				<arg>--ios=250</arg>
@@ -33,8 +33,10 @@ Libogc/Devkit: Shagkur and Wintermute
 FreeTypeGX: Armin Tamzarian.
 
 Links:
-USB Loader GX Project Page and Support Site:
-http://code.google.com/p/usbloader-gui/
+USB Loader GX Project Page 
+https://sourceforge.net/projects/usbloadergx/
+Support Site:
+http://gbatemp.net/index.php?showtopic=149922
 Help Website:
 http://usbloadergx.koureio.net/
 WiiTDB Site:

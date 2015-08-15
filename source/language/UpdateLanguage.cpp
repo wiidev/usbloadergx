@@ -1,6 +1,7 @@
 /****************************************************************************
  * languagefile updater
  * for USB Loader GX	*giantpune*
+ *                      2015 Cyan
  ***************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,10 +20,11 @@
 #include "prompts/ProgressWindow.h"
 #include "utils/ShowError.h"
 #include "gecko.h"
+#include "svnrev.h"
 
-static const char * LanguageFilesURL = "http://usbloader-gui.googlecode.com/svn/trunk/Languages/";
+static const char * LanguageFilesURL = "http://svn.code.sf.net/p/usbloadergx/code/trunk/Languages/";
 
-int DownloadAllLanguageFiles()
+int DownloadAllLanguageFiles(int revision)
 {
 	if(!CreateSubfolder(Settings.languagefiles_path))
 	{
@@ -40,6 +42,11 @@ int DownloadAllLanguageFiles()
 	URL_List LinkList(LanguageFilesURL);
 	int listsize = LinkList.GetURLCount();
 	int files_downloaded = 0;
+	char target[6];
+	if(revision > 0)
+		snprintf(target, sizeof(target), "%d", revision);
+	else
+		snprintf(target, sizeof(target), "%s", GetRev());
 
 	ShowProgress(tr("Updating Language Files:"), 0, 0, 0, listsize, false, true);
 
@@ -60,7 +67,7 @@ int DownloadAllLanguageFiles()
 
 		ShowProgress(tr("Updating Language Files:"), 0, filename, i, listsize, false, true);
 
-		snprintf(fullURL, sizeof(fullURL), "%s%s", LanguageFilesURL, filename);
+		snprintf(fullURL, sizeof(fullURL), "%s%s?p=%s", LanguageFilesURL, filename, target);
 
 		struct block file = downloadfile(fullURL);
 		if (file.data)
@@ -79,6 +86,12 @@ int DownloadAllLanguageFiles()
 	}
 
 	ProgressStop();
+
+	// reload current language file
+	if(Settings.language_path[0] != 0)
+		Settings.LoadLanguage(Settings.language_path, CONSOLE_DEFAULT);
+	else
+		Settings.LoadLanguage(NULL, CONSOLE_DEFAULT);
 
 	return files_downloaded;
 }
@@ -118,7 +131,7 @@ int UpdateLanguageFiles()
 	//build the URL, save path, and download each file and save it
 	for(int i = 0; i < Dir.GetFilecount(); ++i)
 	{
-		snprintf(codeurl, sizeof(codeurl), "%s%s", LanguageFilesURL, Dir.GetFilename(i));
+		snprintf(codeurl, sizeof(codeurl), "%s%s?p=%s", LanguageFilesURL, Dir.GetFilename(i), GetRev());
 		snprintf(savepath, sizeof(savepath), "%s/%s", Settings.languagefiles_path, Dir.GetFilename(i));
 
 		struct block file = downloadfile(codeurl);
@@ -140,6 +153,12 @@ int UpdateLanguageFiles()
 	}
 
 	ProgressStop();
+
+	// reload current language file
+	if(Settings.language_path[0] != 0)
+		Settings.LoadLanguage(Settings.language_path, CONSOLE_DEFAULT);
+	else
+		Settings.LoadLanguage(NULL, CONSOLE_DEFAULT);
 
 	// return the number of files we updated
 	return done;
