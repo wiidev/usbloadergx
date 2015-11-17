@@ -40,7 +40,7 @@ fi
 rev_new=`expr $rev_new + 1`
 rev_date=`date -u +%Y%m%d%H%M%S`
 
-cat <<EOF > ./HBC/META.XML
+cat <<EOF > ./HBC/meta.xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 	<app version="1">
 		<name> USB Loader GX</name>

@@ -1468,31 +1468,29 @@ void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
 
 	switch (IDfull[3])
 	{
+		case 'A':
+		case 'B':
+		case 'U':
+		case 'X':
+			strcpy(gameregion, tr("Region Free"));
+			break;
 		case 'E':
+		case 'N':
 			strcpy(gameregion, "NTSC U");
 			break;
 		case 'J':
 			strcpy(gameregion, "NTSC J");
 			break;
+		case 'K':
+		case 'Q':
+		case 'T':
+			strcpy(gameregion, "NTSC K");
+			break; 
 		case 'W':
 			strcpy(gameregion, "NTSC T");
 			break;
 		default:
-		case 'K':
-			strcpy(gameregion, "NTSC K");
-			break;
-		case 'P':
-		case 'D':
-		case 'F':
-		case 'I':
-		case 'S':
-		case 'H':
-		case 'U':
-		case 'X':
-		case 'Y':
-		case 'Z':
 			strcpy(gameregion, "  PAL ");
-			break;
 	}
 
 	HaltGui();

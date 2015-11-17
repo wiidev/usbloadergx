@@ -112,7 +112,7 @@ void CSettings::SetDefault()
 	partition = 0;
 	discart = DISCARTS_ORIGINALS_CUSTOMS;
 	coversfull = COVERSFULL_HQ;
-	xflip = XFLIP_NO;
+	xflip = XFLIP_SYSMENU;
 	quickboot = OFF;
 	wiilight = WIILIGHT_ON;
 	autonetwork = OFF;

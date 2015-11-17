@@ -239,13 +239,12 @@ struct block ImageDownloader::DownloadImage(const char * url, const char * gameI
 	char downloadURL[512];
 	bool PAL = false;
 
-	//Download Custom banners for GameCube games first because fileden.com is sending a 404 picture instead of real 404 code.
 	if(strcmp(fileExt, ".bnr") == 0)
 	{
 		snprintf(downloadURL, sizeof(downloadURL), "%s%s.bnr", url, gameID);
 		gprintf("%s", downloadURL);
 		struct block file = downloadfile(downloadURL);
-		if(file.size > 14517 && IsValidBanner(file.data)) //14517 = 404.gif file size from fileden.com
+		if(IsValidBanner(file.data))
 			return file;
 
 		free(file.data);
@@ -253,7 +252,7 @@ struct block ImageDownloader::DownloadImage(const char * url, const char * gameI
 		snprintf(downloadURL, sizeof(downloadURL), "%s%.3s.bnr", url, gameID);
 		gprintf(" - Not found. trying ID3:\n%s", downloadURL);
 		file = downloadfile(downloadURL);
-		if(file.size > 14517 && IsValidBanner(file.data))
+		if(IsValidBanner(file.data))
 			return file;
 
 		gprintf(" - Not found.\n");
@@ -337,6 +336,39 @@ struct block ImageDownloader::DownloadImage(const char * url, const char * gameI
 		file = downloadfile(downloadURL);
 		if(VALID_IMAGE(file))
 			return file;
+		
+		if(gameID[3] == 'R') // no english cover found, try russian
+		{
+			lang = "RU";
+			free(file.data);
+			
+			snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
+			gprintf(" - Not found.\n%s", downloadURL);
+			file = downloadfile(downloadURL);
+			if(VALID_IMAGE(file))
+				return file;
+		}
+		
+		if(gameID[3] == 'V') // no English cover found, try Finnish and Swedish
+		{
+			lang = "FI";
+			free(file.data);
+			
+			snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
+			gprintf(" - Not found.\n%s", downloadURL);
+			file = downloadfile(downloadURL);
+			if(VALID_IMAGE(file))
+				return file;
+			
+			lang = "SE";
+			free(file.data);
+			
+			snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
+			gprintf(" - Not found.\n%s", downloadURL);
+			file = downloadfile(downloadURL);
+			if(VALID_IMAGE(file))
+				return file;
+		}
 	}
 
 	gprintf(" - Not found.\n");
