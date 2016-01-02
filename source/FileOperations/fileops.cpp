@@ -464,7 +464,7 @@ extern "C" bool RemoveDirectory(const char *path)
 	ProgressStop();
 	ProgressCancelEnable(false);
 
-	return (RemoveFile(folderpath.c_str()) == 0);
+	return (remove(folderpath.c_str()) == 0);
 }
 
 /****************************************************************************

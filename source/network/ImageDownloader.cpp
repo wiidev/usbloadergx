@@ -144,7 +144,7 @@ void ImageDownloader::FindMissing(const char *writepath, const char *downloadURL
 
 	std::vector<std::string> MissingFilesList;
 
-	if((Settings.LoaderMode & MODE_GCGAMES) && strcmp(fileExt, ".nbr") == 0)
+	if((Settings.LoaderMode & MODE_GCGAMES) && strcmp(fileExt, ".bnr") == 0)
 	{
 		short LoaderModeBackup = Settings.LoaderMode;
 		Settings.LoaderMode = MODE_GCGAMES;		// Limit banner download for GameCube Only.
@@ -244,7 +244,7 @@ struct block ImageDownloader::DownloadImage(const char * url, const char * gameI
 		snprintf(downloadURL, sizeof(downloadURL), "%s%s.bnr", url, gameID);
 		gprintf("%s", downloadURL);
 		struct block file = downloadfile(downloadURL);
-		if(IsValidBanner(file.data))
+		if(file.size > 132 && IsValidBanner(file.data)) // 132 = IMET magic location in the banner with u8 header
 			return file;
 
 		free(file.data);
@@ -252,7 +252,7 @@ struct block ImageDownloader::DownloadImage(const char * url, const char * gameI
 		snprintf(downloadURL, sizeof(downloadURL), "%s%.3s.bnr", url, gameID);
 		gprintf(" - Not found. trying ID3:\n%s", downloadURL);
 		file = downloadfile(downloadURL);
-		if(IsValidBanner(file.data))
+		if(file.size > 132 && IsValidBanner(file.data))
 			return file;
 
 		gprintf(" - Not found.\n");

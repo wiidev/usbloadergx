@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-14 16:24+0200\n"
+"POT-Creation-Date: 2016-01-02 16:53+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
@@ -30,6 +30,14 @@ msgstr "%i filer ikke fundet på server!"
 #, c-format
 msgid "%i missing files"
 msgstr "%i filer mangler"
+
+#, c-format
+msgid "%i wad file(s) not processed!"
+msgstr ""
+
+#, c-format
+msgid "%i wad found."
+msgstr ""
 
 #, c-format
 msgid "%s only accepts GameCube backups in ISO format."
@@ -132,6 +140,9 @@ msgstr "Lykkedes at downloade alle billeder."
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle USB Loader GX's funktioner er låst op."
 
+msgid "All wad files processed successfully."
+msgstr ""
+
 msgid "Alternate DOL"
 msgstr "Alternativ DOL"
 
@@ -178,6 +189,9 @@ msgid "Aspect Ratio"
 msgstr "Formatforhold"
 
 msgid "Attention!"
+msgstr ""
+
+msgid "Attention: All savegames will be deleted."
 msgstr ""
 
 msgid "Aug"
@@ -712,9 +726,6 @@ msgstr ""
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Vil du synkronisere fri plads info sector på alle FAT32 Partitioner?"
 
-msgid "Do you want to update this file?"
-msgstr ""
-
 msgid "Do you wish to update/download all language files?"
 msgstr "Skal alle sprogfiler opdateres/downloades?"
 
@@ -777,6 +788,9 @@ msgstr "FEJL:"
 
 msgid "ERROR: Can't set up theme."
 msgstr "FEJL: Temaet kan ikke bruges."
+
+msgid "EmuNAND Wad Manager"
+msgstr ""
 
 msgid "EmuNand Channels"
 msgstr "EmuNand kanaler"
@@ -924,6 +938,9 @@ msgstr "Særlige indstillinger"
 msgid "Feb"
 msgstr ""
 
+msgid "File"
+msgstr ""
+
 msgid "File not found."
 msgstr "Fil ikke fundet."
 
@@ -944,6 +961,9 @@ msgid "Flat Covers"
 msgstr "Flad Cover"
 
 msgid "Flip-X"
+msgstr ""
+
+msgid "Folder"
 msgstr ""
 
 msgid "Font Scale Factor"
@@ -1224,11 +1244,11 @@ msgstr "Installationsfejl!"
 msgid "Install Partitions"
 msgstr "Installer partitioner"
 
-msgid "Install WAD to EmuNand"
-msgstr "Installer WAD til EmuNand"
-
 msgid "Install a game"
 msgstr "Installér nyt spil"
+
+msgid "Install error - Cleaning incomplete data."
+msgstr ""
 
 msgid "Install finished"
 msgstr "Installering færdig"
@@ -1540,6 +1560,9 @@ msgstr "Der blev ikke fundet nogle temaer på denne side."
 msgid "No themes found."
 msgstr "Ingen temaer fundet."
 
+msgid "No wad file found in this folder."
+msgstr ""
+
 msgid "NoSSL only"
 msgstr ""
 
@@ -1740,6 +1763,9 @@ msgstr "Ægte Nand"
 
 msgid "Receiving file from:"
 msgstr "Henter fil fra:"
+
+msgid "Region Free"
+msgstr ""
 
 msgid "Region Patch"
 msgstr ""
@@ -2221,9 +2247,6 @@ msgstr "Opdatér DOL"
 msgid "Update Files"
 msgstr "Opdatér filer"
 
-msgid "Update Nintendont"
-msgstr ""
-
 msgid "Update Path"
 msgstr "Sti til opdateringer"
 
@@ -2276,9 +2299,6 @@ msgstr ""
 msgid "Virtual Pointer Speed"
 msgstr "Virtual pointer hastighed"
 
-msgid "WAD Installation"
-msgstr " WAD installation"
-
 msgid "WDM Files Path"
 msgstr "Sti til WDM filer"
 
@@ -2313,6 +2333,9 @@ msgid "Where to dump NAND?"
 msgstr ""
 
 msgid "Which device do you want to use for Nintendont files?"
+msgstr ""
+
+msgid "Which mode do you want to use?"
 msgstr ""
 
 msgid "WiFi Features"
@@ -2450,6 +2473,12 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "Install WAD to EmuNand"
+#~ msgstr "Installer WAD til EmuNand"
+
+#~ msgid "WAD Installation"
+#~ msgstr " WAD installation"
 
 #~ msgid "GameTDB Path"
 #~ msgstr "Sti til GameTDB"

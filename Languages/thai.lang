@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-14 16:24+0200\n"
+"POT-Creation-Date: 2016-01-02 16:53+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -29,6 +29,14 @@ msgstr ""
 
 #, c-format
 msgid "%i missing files"
+msgstr ""
+
+#, c-format
+msgid "%i wad file(s) not processed!"
+msgstr ""
+
+#, c-format
+msgid "%i wad found."
 msgstr ""
 
 #, c-format
@@ -132,6 +140,9 @@ msgstr ""
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "ความสามารถทั้งหมดของ USB Loader GX ถูกเปิดให้ใช้."
 
+msgid "All wad files processed successfully."
+msgstr ""
+
 msgid "Alternate DOL"
 msgstr "เปลี่ยน DOL "
 
@@ -178,6 +189,9 @@ msgid "Aspect Ratio"
 msgstr ""
 
 msgid "Attention!"
+msgstr ""
+
+msgid "Attention: All savegames will be deleted."
 msgstr ""
 
 msgid "Aug"
@@ -712,9 +726,6 @@ msgstr ""
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr ""
 
-msgid "Do you want to update this file?"
-msgstr ""
-
 msgid "Do you wish to update/download all language files?"
 msgstr "ต้องการอัพเดทหรือดาวน์โหลด ไฟล์ภาษา ทั้งหมด?"
 
@@ -776,6 +787,9 @@ msgid "ERROR:"
 msgstr "ผิดพลาด:"
 
 msgid "ERROR: Can't set up theme."
+msgstr ""
+
+msgid "EmuNAND Wad Manager"
 msgstr ""
 
 msgid "EmuNand Channels"
@@ -924,6 +938,9 @@ msgstr ""
 msgid "Feb"
 msgstr "กพ."
 
+msgid "File"
+msgstr ""
+
 msgid "File not found."
 msgstr "ไม่พบไฟล์"
 
@@ -945,6 +962,9 @@ msgstr ""
 
 msgid "Flip-X"
 msgstr "กลับ-X"
+
+msgid "Folder"
+msgstr ""
 
 msgid "Font Scale Factor"
 msgstr ""
@@ -1224,11 +1244,11 @@ msgstr "ผิดพลาดขณะติดตั้ง!"
 msgid "Install Partitions"
 msgstr ""
 
-msgid "Install WAD to EmuNand"
-msgstr ""
-
 msgid "Install a game"
 msgstr "ติดตั้งเกมส์"
+
+msgid "Install error - Cleaning incomplete data."
+msgstr ""
 
 msgid "Install finished"
 msgstr ""
@@ -1540,6 +1560,9 @@ msgstr "ไม่พบธีมบนเวบไซต์"
 msgid "No themes found."
 msgstr ""
 
+msgid "No wad file found in this folder."
+msgstr ""
+
 msgid "NoSSL only"
 msgstr ""
 
@@ -1740,6 +1763,9 @@ msgstr ""
 
 msgid "Receiving file from:"
 msgstr "ได้รับไฟล์จาก:"
+
+msgid "Region Free"
+msgstr ""
 
 msgid "Region Patch"
 msgstr ""
@@ -2221,9 +2247,6 @@ msgstr "อัพเดท DOL"
 msgid "Update Files"
 msgstr "อัพเดทไฟล์"
 
-msgid "Update Nintendont"
-msgstr ""
-
 msgid "Update Path"
 msgstr "ที่อยู่ Update"
 
@@ -2276,9 +2299,6 @@ msgstr ""
 msgid "Virtual Pointer Speed"
 msgstr ""
 
-msgid "WAD Installation"
-msgstr ""
-
 msgid "WDM Files Path"
 msgstr ""
 
@@ -2313,6 +2333,9 @@ msgid "Where to dump NAND?"
 msgstr ""
 
 msgid "Which device do you want to use for Nintendont files?"
+msgstr ""
+
+msgid "Which mode do you want to use?"
 msgstr ""
 
 msgid "WiFi Features"

@@ -32,8 +32,9 @@
 #include "settings/SettingsPrompts.h"
 #include "network/Wiinnertag.h"
 #include "network/networkops.h"
-#include "network/http.h"
 #include "FileOperations/fileops.h"
+#include "FileOperations/DirList.h"
+#include "utils/StringTools.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/ProgressWindow.h"
 #include "prompts/filebrowser.h"
@@ -74,8 +75,8 @@ FeatureSettingsMenu::FeatureSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Export Miis to EmuNand" ));
 	Options->SetName(Idx++, "%s", tr( "Export SYSCONF to EmuNand" ));
 	Options->SetName(Idx++, "%s", tr( "Dump NAND to EmuNand" ));
-	Options->SetName(Idx++, "%s", tr( "Install WAD to EmuNand" ));
-	Options->SetName(Idx++, "%s", tr( "Update Nintendont" ));
+	Options->SetName(Idx++, "%s", tr( "EmuNAND Wad Manager" ));
+//	Options->SetName(Idx++, "%s", tr( "Update Nintendont" ));
 	Options->SetName(Idx++, "%s", tr( "WiiU Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "Boot Neek System Menu" ));
 
@@ -152,11 +153,11 @@ void FeatureSettingsMenu::SetOptionValues()
 	//! Settings: Dump NAND to EmuNand
 	Options->SetValue(Idx++, " ");
 
-	//! Settings: Install WAD to EmuNand
+	//! Settings: EmuNand Wad Manager
 	Options->SetValue(Idx++, " ");
 
 	//! Settings: Update Nintendont
-	Options->SetValue(Idx++, " ");
+	//Options->SetValue(Idx++, " ");
 
 	//! Settings: WiiU Widescreen
 	Options->SetValue(Idx++, " ");
@@ -485,7 +486,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 		}
 	}
 
-	//! Settings: Install WAD to EmuNand
+	//! Settings: EmuNand Wad Manager
 	else if (ret == ++Idx)
 	{
 		GuiWindow * parent = (GuiWindow *) parentElement;
@@ -495,23 +496,131 @@ int FeatureSettingsMenu::GetMenuInternal()
 
 		char wadpath[150];
 		snprintf(wadpath, sizeof(wadpath), "%s/wad/", Settings.BootDevice);
-
-		int result = BrowseDevice(wadpath, sizeof(wadpath), FB_DEFAULT);
-		if(result)
+		
+		int choice = WindowPrompt(tr("EmuNAND Wad Manager"), tr("Which mode do you want to use?"), tr("File"), tr("Folder"), tr("Cancel"));
+		if(choice == 1) 			// File mode
 		{
-			int choice = WindowPrompt(tr("WAD Installation"), tr("What do you want to do?"), tr("Install"), tr("Uninstall"), tr("Cancel"));
-			if(choice == 1)
+			int result = BrowseDevice(wadpath, sizeof(wadpath), FB_DEFAULT );
+			if(result)
 			{
-				Wad wadFile(wadpath);
-				wadFile.Install(Settings.NandEmuChanPath);
+				choice = WindowPrompt(tr("EmuNAND Wad Manager"), tr("What do you want to do?"), tr("Install"), tr("Uninstall"), tr("Cancel"));
+				if(choice == 1) 	// File install
+				{
+					Wad wadFile(wadpath);
+					if(!wadFile.Install(Settings.NandEmuChanPath))
+					{
+						// install error - Try to cleanup any partially installed wad data
+						WindowPrompt(tr("EmuNAND Wad Manager"), tr("Install error - Cleaning incomplete data."), tr( "OK" ));
+						//gprintf("Error   : %s\n", wadpath);
+						wadFile.UnInstall(Settings.NandEmuChanPath);
+					}
+				}
+				else if(choice == 2) // File uninstall
+				{
+					Wad wadFile(wadpath);
+					wadFile.UnInstall(Settings.NandEmuChanPath);
+				}
+				
+				// Refresh new EmuNAND content
 				Channels::Instance()->GetEmuChannelList();
 				GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
 			}
-			else if(choice == 2)
+		}
+		else if(choice == 2)		// Folder mode
+		{
+			int result = BrowseDevice(wadpath, sizeof(wadpath), FB_DEFAULT, noFILES );
+			if(result)
 			{
-				Wad wadFile(wadpath);
-				wadFile.UnInstall(Settings.NandEmuChanPath);
-				Channels::Instance()->GetEmuChannelList();
+				DirList* wadList = new DirList(wadpath, ".wad", DirList::Files);
+				if(wadList->GetFilecount())
+				{
+					char found[20];
+					snprintf(found, sizeof(found), fmt(tr("%i wad found."), wadList->GetFilecount()));
+					choice = WindowPrompt(tr("EmuNAND Wad Manager"), fmt("%s %s", found, tr("What do you want to do?")), tr("Install"), tr("Uninstall"), tr("Cancel"));
+					if(choice == 1) // Folder install
+					{
+						for(int i = 0; i < wadList->GetFilecount(); i++)
+						{
+							Wad wadFile(wadList->GetFilepath(i), false);
+							if(wadFile.Install(Settings.NandEmuChanPath))
+							{
+								//gprintf("Success : %s\n", wadList->GetFilepath(i));
+								wadList->RemoveEntrie(i);
+								--i;
+							}
+							else 	// install error - Try to cleanup any partially installed wad data
+							{
+								//gprintf("Error   : %s\n", wadList->GetFilepath(i));
+								wadFile.UnInstall(Settings.NandEmuChanPath);
+							}
+						}
+					}
+					if(choice == 2) // Folder uninstall
+					{
+						if(WindowPrompt(tr("EmuNAND Wad Manager"), tr("Attention: All savegames will be deleted."), tr("Uninstall"), tr("Cancel")))
+						{
+							for(int i = 0; i < wadList->GetFilecount(); i++)
+							{
+								Wad wadFile(wadList->GetFilepath(i), false);
+								if(wadFile.UnInstall(Settings.NandEmuChanPath))
+								{
+									//gprintf("uninst. : %s\n", wadList->GetFilepath(i));
+									wadList->RemoveEntrie(i);
+									--i;
+								}
+							}
+						}
+						else
+							choice = 0;
+					}
+
+					// check if there is any remaining unprocessed wad
+					if(choice != 0)
+					{
+						if(wadList->GetFilecount() == 0)
+							WindowPrompt(tr("EmuNAND Wad Manager"), tr("All wad files processed successfully."), tr( "OK" ));
+						else
+						{
+							if(WindowPrompt(tr( "EmuNAND Wad Manager" ), fmt(tr("%i wad file(s) not processed!"), wadList->GetFilecount()), tr("Save List"), tr( "OK" )))
+							{
+								char path[200];
+								snprintf(path, sizeof(path), "%s/WadManager_errors.txt", Settings.update_path);
+
+								FILE *f = fopen(path, "a");
+								if(f)
+								{
+									time_t rawtime = time(NULL);
+									char theTime[11];
+									theTime[0] = 0;
+									strftime(theTime, sizeof(theTime), "%Y-%m-%d", localtime(&rawtime));
+									fprintf(f, "\r\n\r\nEmuNAND Wad Manager - %10s\r\n--------------------------------\r\n", theTime);
+									fprintf(f, "%s %s\r\n", choice == 1 ? "Error installing to" : "Error uninstalling from", Settings.NandEmuChanPath);
+									fprintf(f, "%s\r\n", choice == 1 ? "List of user canceled installation or bad wad files." : "Titles not on EmuNAND or weren't correctly installed.");
+									
+									for(int i = 0; i < wadList->GetFilecount(); i++)
+									{
+										fprintf(f, "%s\r\n", wadList->GetFilepath(i));
+										//gprintf("%s\n", wadList->GetFilepath(i));
+									}
+
+									fclose(f);
+								}
+								else
+									WindowPrompt(tr( "EmuNAND Wad Manager" ), tr("Error writing the data."), tr( "OK" ));
+							}
+						}		
+					}
+						
+					// Refresh new EmuNAND content
+					Channels::Instance()->GetEmuChannelList();
+					GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
+				}
+				else
+				{
+					WindowPrompt(tr( "EmuNAND Wad Manager" ), tr("No wad file found in this folder."), tr( "OK" ));
+				}
+				
+				delete wadList;
 			}
 		}
 
@@ -519,6 +628,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 		this->Append(optionBrowser);
 	}
 
+/*
 	//! Settings: Update Nintendont
 	else if (ret == ++Idx)
 	{
@@ -578,6 +688,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 			}
 		}
 	}
+*/
 
 	// WiiU Aspect switcher (Thanks Tueidj)
 	else if (ret == ++Idx)

@@ -25,6 +25,46 @@
 #include "utils/ShowError.h"
 #include "BoxCover/BoxCover.hpp"
 
+static inline const char * ConsoleFromTitleID(const char* TitleID)
+{
+	switch (TitleID[0])
+	{
+		case 'W': return "WiiWare";
+		case 'D': return "VC_Arcade";
+		case 'H': return "Wii_System_Channel";
+		case 'F': return "VC_NES";
+		case 'G': return "GameCube";
+		case 'J': return "VC_SNES";
+		case 'N': return "VC_N64";
+		case 'L': return "VC_Master_System";
+		case 'M': return "VC_Genesis_Megadrive";
+		case 'E': return "VC_NeoGeo";
+		case 'C': return "VC_Commodore";
+		case 'X': return "VC_MSX";
+		case 'P': return "VC_TurboGraphX";
+		case 'Q': return "VC_TurboGraphX-CD";
+		case 'R': return "Wii_Game_Disc";
+		case 'S': return "Wii_Game_Disc";
+		default: return "Unknown";
+	}
+}
+
+static inline const char * HdrTypeText(u8 type)
+{
+	switch (type)
+	{
+	
+		case TYPE_GAME_WII_IMG		: return "Wii_Image";
+		case TYPE_GAME_WII_DISC		: return "Wii_Disc";
+		case TYPE_GAME_GC_IMG		: return "Gamecube_Image";
+		case TYPE_GAME_GC_DISC		: return "Gamecube_Disc";
+		case TYPE_GAME_GC_EXTRACTED	: return "Gamecube_Extracted";
+		case TYPE_GAME_NANDCHAN		: return "Channel_NAND";
+		case TYPE_GAME_EMUNANDCHAN	: return "Channel_EmuNAND";
+		default						: return "Unknown";
+	}
+}
+
 /****************************************************************************
  * gameinfo
  ***************************************************************************/
@@ -1107,13 +1147,13 @@ bool save_gamelist(bool bCSV) // save gamelist
 
 	if (bCSV)
 	{
-		fprintf(f, "\"ID\",\"Size(GB)\",\"Name\"\n");
+		fprintf(f, "\"ID\",\"Size(GB)\",\"Name\",\"Type\",\"Console\"\n");
 
 		for (i = 0; i < gameList.size(); i++)
 		{
 			struct discHdr* header = gameList[i];
 			WBFS_GameSize(header->id, &size);
-			fprintf(f, "\"%.6s\",\"%.2f\",\"%s\"\n", (char*)header->id, size, GameTitles.GetTitle(header));
+			fprintf(f, "\"%.6s\",\"%.2f\",\"%s\",\"%s\",\"%s\"\n", (char*)header->id, size, GameTitles.GetTitle(header), HdrTypeText(header->type), ConsoleFromTitleID((char*)header->id));
 		}
 	}
 	else
@@ -1122,7 +1162,7 @@ bool save_gamelist(bool bCSV) // save gamelist
 		fprintf(f, "# This file was created based on your list of games and language settings.\n\n");
 
 		fprintf(f, "%.2fGB %s %.2fGB %s\n\n", freespace, tr( "of" ), (freespace + used), tr( "free" ));
-		fprintf(f, "ID	 Size(GB)  Name\n");
+		fprintf(f, "ID	 Size(GB)  Name        ;   Game type    ;   Console (based on TitleID) \n");
 
 		for (i = 0; i < gameList.size(); i++)
 		{
@@ -1130,7 +1170,9 @@ bool save_gamelist(bool bCSV) // save gamelist
 			WBFS_GameSize(header->id, &size);
 			fprintf(f, "%.6s", (char*)header->id);
 			fprintf(f, " [%.2f]   ", size);
-			fprintf(f, " %s", GameTitles.GetTitle(header));
+			fprintf(f, " %s ; ", GameTitles.GetTitle(header));
+			fprintf(f, " %s ; ", HdrTypeText(header->type));
+			fprintf(f, " %s  ", ConsoleFromTitleID((char*)header->id));
 			fprintf(f, "\n");
 		}
 	}

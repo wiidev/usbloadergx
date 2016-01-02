@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1255
+# French.lang - r1260
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-14 16:24+0200\n"
+"POT-Creation-Date: 2016-01-02 16:53+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -30,6 +30,14 @@ msgstr "%i fichier(s) introuvable(s) sur le serveur !"
 #, c-format
 msgid "%i missing files"
 msgstr "%i fichier(s) manquant(s)"
+
+#, c-format
+msgid "%i wad file(s) not processed!"
+msgstr "%i fichier(s) wad non traité(s)!"
+
+#, c-format
+msgid "%i wad found."
+msgstr "%i wad trouvé(s)."
 
 #, c-format
 msgid "%s only accepts GameCube backups in ISO format."
@@ -132,6 +140,9 @@ msgstr "Images correctement téléchargées"
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Toutes les fonctionnalités sont déverrouillées."
 
+msgid "All wad files processed successfully."
+msgstr "Tous les fichiers wad ont été traités avec succès."
+
 msgid "Alternate DOL"
 msgstr "DOL alternatif"
 
@@ -179,6 +190,9 @@ msgstr "Format d'image"
 
 msgid "Attention!"
 msgstr "Attention !"
+
+msgid "Attention: All savegames will be deleted."
+msgstr "Attention : Toutes les sauvegardes seront supprimées."
 
 msgid "Aug"
 msgstr "Août"
@@ -689,7 +703,7 @@ msgid "Do you want to extract all the save games?"
 msgstr "Extraire toutes les sauvegardes ?"
 
 msgid "Do you want to extract the save game?"
-msgstr "Voulez-vous extraire la sauvegarde ?"
+msgstr "Voulez-vous extraire la sauvegarde ?"
 
 msgid "Do you want to format:"
 msgstr "Voulez-vous formater:"
@@ -711,9 +725,6 @@ msgstr "Voulez-vous démarrer le jeu maintenant ?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Voulez-vous synchroniser l'information d'espace libre disponible sur toutes les partitions FAT32 ?"
-
-msgid "Do you want to update this file?"
-msgstr "Voulez-vous mettre à jour ce fichier ?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Voulez-vous actualiser/télécharger tous les fichiers langue ?"
@@ -777,6 +788,9 @@ msgstr "ERREUR:"
 
 msgid "ERROR: Can't set up theme."
 msgstr "ERREUR: Configuration thème impossible."
+
+msgid "EmuNAND Wad Manager"
+msgstr "ÉmuNand Wad Manager"
 
 msgid "EmuNand Channels"
 msgstr "Chaînes sur ÉmuNand"
@@ -924,6 +938,9 @@ msgstr "Fonctionnalités"
 msgid "Feb"
 msgstr "Fév"
 
+msgid "File"
+msgstr "Fichier"
+
 msgid "File not found."
 msgstr "Fichier introuvable."
 
@@ -945,6 +962,9 @@ msgstr "Jaquettes 2D"
 
 msgid "Flip-X"
 msgstr "Anim. jeu suivant"
+
+msgid "Folder"
+msgstr "Dossier"
 
 msgid "Font Scale Factor"
 msgstr "Échelle de la police"
@@ -1224,11 +1244,11 @@ msgstr "Erreur à l'installation !"
 msgid "Install Partitions"
 msgstr "Partitions jeu Wii à installer"
 
-msgid "Install WAD to EmuNand"
-msgstr "Installer WAD sur ÉmuNand"
-
 msgid "Install a game"
 msgstr "Installer un jeu"
+
+msgid "Install error - Cleaning incomplete data."
+msgstr "Erreur lors de l'installation ! Suppression des données incomplètes."
 
 msgid "Install finished"
 msgstr "Installation terminée"
@@ -1540,6 +1560,9 @@ msgstr "Aucun thème trouvé sur le site."
 msgid "No themes found."
 msgstr "Aucun thème trouvé."
 
+msgid "No wad file found in this folder."
+msgstr "Aucun fichier Wad trouvé dans ce dossier."
+
 msgid "NoSSL only"
 msgstr "NoSSL seulement"
 
@@ -1741,6 +1764,9 @@ msgstr "Nand réelle"
 msgid "Receiving file from:"
 msgstr "Réception du fichier de:"
 
+msgid "Region Free"
+msgstr ""
+
 msgid "Region Patch"
 msgstr "Patch Région"
 
@@ -1841,7 +1867,7 @@ msgid "Saved"
 msgstr "Sauvegardé"
 
 msgid "Savegame might not exist for this game."
-msgstr "La sauvegarde de ce jeu est peut-être existante."
+msgstr "La sauvegarde de ce jeu est peut-être inexistante."
 
 msgid "Screensaver"
 msgstr "Économiseur d'écran"
@@ -2221,9 +2247,6 @@ msgstr "DOL seul"
 msgid "Update Files"
 msgstr "MàJ Fichiers"
 
-msgid "Update Nintendont"
-msgstr "Mettre Nintendont à jour"
-
 msgid "Update Path"
 msgstr "Dossier de mise à jour"
 
@@ -2276,9 +2299,6 @@ msgstr "Échelle de l'image"
 msgid "Virtual Pointer Speed"
 msgstr "Vitesse du pointeur virtuel"
 
-msgid "WAD Installation"
-msgstr "Installation WAD"
-
 msgid "WDM Files Path"
 msgstr "Dossier fichiers WDM"
 
@@ -2314,6 +2334,9 @@ msgstr "Où voulez-vous extraire votre NAND ?"
 
 msgid "Which device do you want to use for Nintendont files?"
 msgstr "Quel périphérique voulez-vous utiliser pour les fichiers de Nintendont ?"
+
+msgid "Which mode do you want to use?"
+msgstr "Quel mode voulez-vous utiliser ?"
 
 msgid "WiFi Features"
 msgstr "Connexion WiFi"
@@ -2450,6 +2473,18 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "Do you want to update this file?"
+#~ msgstr "Voulez-vous mettre à jour ce fichier ?"
+
+#~ msgid "Install WAD to EmuNand"
+#~ msgstr "Installer WAD sur ÉmuNand"
+
+#~ msgid "Update Nintendont"
+#~ msgstr "Mettre Nintendont à jour"
+
+#~ msgid "WAD Installation"
+#~ msgstr "Installation WAD"
 
 #~ msgid "GameTDB Path"
 #~ msgstr "Dossier GameTDB"

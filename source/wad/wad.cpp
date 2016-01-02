@@ -43,12 +43,13 @@ typedef struct uid_entry {
 	u32 uid;
 } __attribute__((packed)) uid_entry_t;
 
-Wad::Wad(const char *wadpath)
+Wad::Wad(const char *wadpath, bool prompt)
 	: pFile(0), header(0),
 	  p_tik(0), p_tmd(0),
 	  content_map(0), content_map_size(0),
 	  content_start(0)
 {
+	showPrompt = prompt;
 	Open(wadpath);
 }
 
@@ -90,7 +91,8 @@ bool Wad::Open(const char *wadpath)
 	pFile = fopen(wadpath, "rb");
 	if(!pFile)
 	{
-		ShowError(tr("Can't open file: %s"), wadpath);
+		if(showPrompt)
+			ShowError(tr("Can't open file: %s"), wadpath);
 		return false;
 	}
 
@@ -98,20 +100,23 @@ bool Wad::Open(const char *wadpath)
 	header = (wadHeader *) malloc(sizeof(wadHeader));
 	if(!header)
 	{
-		ShowError(tr("Not enough memory."));
+		if(showPrompt)
+			ShowError(tr("Not enough memory."));
 		return false;
 	}
 
 	if(fread(header, 1, sizeof(wadHeader), pFile) != sizeof(wadHeader))
 	{
-		ShowError(tr("Failed to read wad header."));
+		if(showPrompt)
+			ShowError(tr("Failed to read wad header."));
 		return false;
 	}
 
 	// Check for sanity
 	if(header->header_len != sizeof(wadHeader))
 	{
-		ShowError(tr("Invalid wad file."));
+		if(showPrompt)
+			ShowError(tr("Invalid wad file."));
 		return false;
 	}
 
@@ -124,7 +129,8 @@ bool Wad::Open(const char *wadpath)
 	p_tik = (u8 *) malloc(header->tik_len);
 	if(!p_tik)
 	{
-		ShowError(tr("Not enough memory."));
+		if(showPrompt)
+			ShowError(tr("Not enough memory."));
 		return false;
 	}
 
@@ -132,7 +138,8 @@ bool Wad::Open(const char *wadpath)
 
 	if(fread(p_tik, 1, header->tik_len, pFile) != header->tik_len)
 	{
-		ShowError(tr("Failed to read ticket."));
+		if(showPrompt)
+			ShowError(tr("Failed to read ticket."));
 		return false;
 	}
 
@@ -142,7 +149,8 @@ bool Wad::Open(const char *wadpath)
 	p_tmd = (u8 *) malloc(header->tmd_len);
 	if(!p_tik)
 	{
-		ShowError(tr("Not enough memory."));
+		if(showPrompt)
+			ShowError(tr("Not enough memory."));
 		return false;
 	}
 
@@ -150,7 +158,8 @@ bool Wad::Open(const char *wadpath)
 
 	if(fread(p_tmd, 1, header->tmd_len, pFile) != header->tmd_len)
 	{
-		ShowError(tr("Failed to read tmd file."));
+		if(showPrompt)
+			ShowError(tr("Failed to read tmd file."));
 		return false;
 	}
 
@@ -170,6 +179,13 @@ bool Wad::UnInstall(const char *installpath)
 	char filepath[1024];
 	tmd *tmd_data = (tmd *) SIGNATURE_PAYLOAD((signed_blob *) p_tmd);
 
+	// trim ending slash
+	while(installpath[strlen(installpath)-1] == '/')
+	{
+		char *pathPtr = strrchr(installpath, '/');
+		if(pathPtr) *pathPtr = 0;
+	}
+	
 	int result = true;
 
 	// Remove ticket
@@ -222,7 +238,7 @@ bool Wad::Install(const char *installpath)
 	ProgressCancelEnable(true);
 	StartProgress(0, 0, 0, true, true);
 
-	// Install contens
+	// Install contents
 	bool result = InstallContents(installpath);
 
 	// Stop progress
@@ -244,14 +260,15 @@ bool Wad::WriteFile(const char *filepath, u8 *buffer, u32 len)
 	FILE *f = fopen(filepath, "wb");
 	if(!f)
 	{
-		ShowError(tr("Can't create file: %s"), filepath);
+		if(showPrompt)
+			ShowError(tr("Can't create file: %s"), filepath);
 		return false;
 	}
 
 	u32 write = fwrite(buffer, 1, len, f);
 	fclose(f);
 
-	if(write != len)
+	if(write != len && showPrompt)
 		ShowError(tr("Write error on file: %s"), filepath);
 
 	return (write == len);
@@ -267,6 +284,7 @@ bool Wad::InstallContents(const char *installpath)
 	char filepath[1024];
 	char progressTxt[80];
 	u8 iv[16];
+	bool userCanceled = false;
 
 	// tmd
 	tmd *tmd_data = (tmd *) SIGNATURE_PAYLOAD((signed_blob *) p_tmd);
@@ -321,7 +339,8 @@ bool Wad::InstallContents(const char *installpath)
 		FILE *fp = fopen(filepath, "wb");
 		if(!fp)
 		{
-			ShowError(tr("Can't create file: %s"), filepath);
+			if(showPrompt)
+				ShowError(tr("Can't create file: %s"), filepath);
 			return false;
 		}
 
@@ -329,7 +348,8 @@ bool Wad::InstallContents(const char *installpath)
 		u8 * outbuf = (u8 *) malloc(blocksize);
 		if(!inbuf || !outbuf)
 		{
-			ShowError(tr("Not enough memory."));
+			if(showPrompt)
+				ShowError(tr("Not enough memory."));
 			if(inbuf) free(inbuf);
 			if(outbuf) free(outbuf);
 			fclose(fp);
@@ -346,7 +366,7 @@ bool Wad::InstallContents(const char *installpath)
 		{
 			if(ProgressCanceled())
 			{
-				done = len;
+				userCanceled = true;
 				break;
 			}
 
@@ -388,10 +408,15 @@ bool Wad::InstallContents(const char *installpath)
 		// update progress variable
 		totalDone += len;
 
+		// Check if the user canceled the install manually
+		if(userCanceled)
+			return false;
+		
 		// Check if the read/write process stopped before finishing
 		if(done < len)
 		{
-			ShowError(tr("File read/write error."));
+			if(showPrompt)
+				ShowError(tr("File read/write error."));
 			return false;
 		}
 	}
@@ -407,7 +432,8 @@ int Wad::CheckContentMap(const char *installpath, tmd_content *content, char *fi
 		snprintf(filepath, 1024, "%s/shared1/content.map", installpath);
 		if(LoadFileToMem(filepath, &content_map, &content_map_size) < 0 || content_map_size < sizeof(map_entry_t))
 		{
-			ShowError(tr("Can't read file: %s"), filepath);
+			if(showPrompt)
+				ShowError(tr("Can't read file: %s"), filepath);
 			return -1;
 		}
 
@@ -427,7 +453,8 @@ int Wad::CheckContentMap(const char *installpath, tmd_content *content, char *fi
 	u8 *tmp = (u8 *) realloc(content_map, (next_entry + 1) * sizeof(map_entry_t));
 	if(!tmp)
 	{
-		ShowError(tr("Not enough memory."));
+		if(showPrompt)
+			ShowError(tr("Not enough memory."));
 		return -1;
 	}
 
@@ -459,7 +486,8 @@ bool Wad::SetTitleUID(const char *installpath, const u64 &tid)
 
 	if(LoadFileToMem(filepath, &uid_sys, &uid_sys_size) < 0 || uid_sys_size < sizeof(uid_entry_t))
 	{
-		ShowError(tr("Can't read file: %s"), filepath);
+		if(showPrompt)
+			ShowError(tr("Can't read file: %s"), filepath);
 		if(uid_sys) free(uid_sys);
 		return false;
 	}
@@ -482,7 +510,8 @@ bool Wad::SetTitleUID(const char *installpath, const u64 &tid)
 	u8 *tmp = (u8 *) realloc(uid_sys, (next_entry + 1) * sizeof(uid_entry_t));
 	if(!tmp)
 	{
-		ShowError(tr("Not enough memory."));
+		if(showPrompt)
+			ShowError(tr("Not enough memory."));
 		free(uid_sys);
 		return -1;
 	}

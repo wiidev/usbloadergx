@@ -39,12 +39,13 @@ typedef struct
 class Wad
 {
 public:
-	Wad(const char *wadpath = 0);
+	Wad(const char *wadpath = 0, bool prompt = true);
 	virtual ~Wad();
 	bool Open(const char *wadpath);
 	void Close(void);
 	bool Install(const char *installpath);
 	bool UnInstall(const char *installpath);
+	void SetPrompt(bool choice) { showPrompt = choice; };
 private:
 	bool InstallContents(const char *installpath);
 	int CheckContentMap(const char *installpath, tmd_content *content, char *filepath);
@@ -57,6 +58,7 @@ private:
 	u8 *content_map;
 	u32 content_map_size;
 	u32 content_start;
+	bool showPrompt;
 };
 
 #endif

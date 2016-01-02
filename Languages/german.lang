@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-14 16:24+0200\n"
+"POT-Creation-Date: 2016-01-02 16:53+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: Sabykos\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -30,6 +30,14 @@ msgstr "%i Dateien auf dem Server nicht gefunden!"
 #, c-format
 msgid "%i missing files"
 msgstr "%i fehlende Dateien"
+
+#, c-format
+msgid "%i wad file(s) not processed!"
+msgstr ""
+
+#, c-format
+msgid "%i wad found."
+msgstr ""
 
 #, c-format
 msgid "%s only accepts GameCube backups in ISO format."
@@ -132,6 +140,9 @@ msgstr "Alle Bilder erfolgreich heruntergeladen"
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle Funktionen des USB Loader GX sind jetzt freigeschaltet."
 
+msgid "All wad files processed successfully."
+msgstr ""
+
 msgid "Alternate DOL"
 msgstr "Alternative DOL"
 
@@ -179,6 +190,9 @@ msgstr "Seitenverhältnis"
 
 msgid "Attention!"
 msgstr "Achtung!"
+
+msgid "Attention: All savegames will be deleted."
+msgstr ""
 
 msgid "Aug"
 msgstr "August"
@@ -712,9 +726,6 @@ msgstr "Soll ein neues Spiel gestartet werden?"
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Soll die freier Speicher Info auf allen Partitionen synchronisiert werden?"
 
-msgid "Do you want to update this file?"
-msgstr "Diese Datei updaten?"
-
 msgid "Do you wish to update/download all language files?"
 msgstr "Alle Sprachdateien aktualisieren?"
 
@@ -777,6 +788,9 @@ msgstr "FEHLER:"
 
 msgid "ERROR: Can't set up theme."
 msgstr "FEHLER: Theme kann nicht eingerichtet werden."
+
+msgid "EmuNAND Wad Manager"
+msgstr ""
 
 msgid "EmuNand Channels"
 msgstr "EmuNand Kanäle"
@@ -924,6 +938,9 @@ msgstr "Features Optionen"
 msgid "Feb"
 msgstr "Februar"
 
+msgid "File"
+msgstr ""
+
 msgid "File not found."
 msgstr "Datei nicht gefunden."
 
@@ -945,6 +962,9 @@ msgstr "2D Cover"
 
 msgid "Flip-X"
 msgstr "Flip-X"
+
+msgid "Folder"
+msgstr ""
 
 msgid "Font Scale Factor"
 msgstr "Schrift-Skalierwert"
@@ -1224,11 +1244,11 @@ msgstr "Installationsfehler!"
 msgid "Install Partitions"
 msgstr "Inst. Partitionen"
 
-msgid "Install WAD to EmuNand"
-msgstr "Install. WAD in EmuNand"
-
 msgid "Install a game"
 msgstr "Spiel installieren"
+
+msgid "Install error - Cleaning incomplete data."
+msgstr ""
 
 msgid "Install finished"
 msgstr "Installation beendet"
@@ -1540,6 +1560,9 @@ msgstr "Keine Themes auf der Seite gefunden."
 msgid "No themes found."
 msgstr "Keine Themes gefunden."
 
+msgid "No wad file found in this folder."
+msgstr ""
+
 msgid "NoSSL only"
 msgstr "Nur NoSSL"
 
@@ -1740,6 +1763,9 @@ msgstr "Echtes Nand"
 
 msgid "Receiving file from:"
 msgstr "Empfange Datei von:"
+
+msgid "Region Free"
+msgstr ""
 
 msgid "Region Patch"
 msgstr "Region Patch"
@@ -2221,9 +2247,6 @@ msgstr "Nur DOL"
 msgid "Update Files"
 msgstr "Aktualisieren"
 
-msgid "Update Nintendont"
-msgstr "Aktualisiere Nintendont"
-
 msgid "Update Path"
 msgstr "Updates"
 
@@ -2276,9 +2299,6 @@ msgstr ""
 msgid "Virtual Pointer Speed"
 msgstr "Pointergeschwindigkeit"
 
-msgid "WAD Installation"
-msgstr "WAD-Installation"
-
 msgid "WDM Files Path"
 msgstr "WDM Dateien"
 
@@ -2313,6 +2333,9 @@ msgid "Where to dump NAND?"
 msgstr ""
 
 msgid "Which device do you want to use for Nintendont files?"
+msgstr ""
+
+msgid "Which mode do you want to use?"
 msgstr ""
 
 msgid "WiFi Features"
@@ -2450,6 +2473,18 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "Do you want to update this file?"
+#~ msgstr "Diese Datei updaten?"
+
+#~ msgid "Install WAD to EmuNand"
+#~ msgstr "Install. WAD in EmuNand"
+
+#~ msgid "Update Nintendont"
+#~ msgstr "Aktualisiere Nintendont"
+
+#~ msgid "WAD Installation"
+#~ msgstr "WAD-Installation"
 
 #~ msgid "GameTDB Path"
 #~ msgstr "GameTDB"

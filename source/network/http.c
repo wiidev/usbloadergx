@@ -1,8 +1,7 @@
 /*  http -- http convenience functions
 
     Copyright (C) 2008 bushing
-				  2008-2014 Dimok
-				  2015 Fix94 ; Cyan
+				  2008-2014 Dimok, Cyan
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,24 +17,12 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#include <ogc/lwp_watchdog.h>
-
 #include "http.h"
-#include "ssl.h"
 #include "../svnrev.h"
-#include "prompts/ProgressWindow.h"
-#include "language/gettext.h"
 #include "gecko.h"
 
 extern char incommingIP[50];
 static u8 retryloop = 0;
-static bool displayProgressWindow = false;
-
-http_res result;
-u16 http_port;
-u32 http_status;
-u32 content_length;
-char content_location[255] = "";
 
 /**
  * Emptyblock is a statically defined variable for functions to return if they are unable
@@ -43,19 +30,18 @@ char content_location[255] = "";
  */
 const struct block emptyblock = { 0, NULL };
 
+//The maximum amount of bytes to send per net_write() call
+//#define NET_BUFFER_SIZE 1024
+#define NET_BUFFER_SIZE 3600
+
 // Write our message to the server
-static s32 tcp_write(s32 server, char *msg)
+static s32 send_message(s32 server, char *msg)
 {
 	s32 bytes_transferred = 0;
 	s32 remaining = strlen(msg);
-	s32 res = 0;
 	while (remaining)
 	{
-		if(http_port == 443)
-			res = (bytes_transferred = ssl_write(server, msg, remaining > NET_BUFFER_SIZE ? NET_BUFFER_SIZE : remaining));
-		else
-			res = (bytes_transferred = net_write(server, msg, remaining > NET_BUFFER_SIZE ? NET_BUFFER_SIZE : remaining));
-		if (res > 0)
+		if ((bytes_transferred = net_write(server, msg, remaining > NET_BUFFER_SIZE ? NET_BUFFER_SIZE : remaining)) > 0)
 		{
 			remaining -= bytes_transferred;
 			msg += bytes_transferred;
@@ -80,7 +66,7 @@ static s32 tcp_write(s32 server, char *msg)
  * @param u32 the port to connect to on the server
  * @return s32 The connection to the server (negative number if connection could not be established)
  */
-static s32 tcp_connect(u32 ipaddress, u16 socket_port)
+static s32 server_connect(u32 ipaddress, u16 socket_port)
 {
 	//Initialize socket
 	s32 connection = net_socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
@@ -94,7 +80,7 @@ static s32 tcp_connect(u32 ipaddress, u16 socket_port)
 
 	sprintf(incommingIP, "%s", inet_ntoa(connect_addr.sin_addr));
 
-	//Attempt to open the socket
+	//Attemt to open the socket
 	if (net_connect(connection, (struct sockaddr*) &connect_addr, sizeof(connect_addr)) == -1)
 	{
 		net_close(connection);
@@ -103,168 +89,82 @@ static s32 tcp_connect(u32 ipaddress, u16 socket_port)
 	return connection;
 }
 
-/**
- * Reads the current connection data line by line
- *
- * @return string up to "\r\n" or until max_length is reached.
- */
-char * tcp_readLine (const s32 s, const u16 max_length, const u64 start_time, const u16 timeout) {
-	char *buf;
-	u16 c;
-	s32 res;
-	char *ret;
+//The amount of memory in bytes reserved initially to store the HTTP response in
+//Be careful in increasing this number, reading from a socket on the Wii
+//will fail if you request more than 20k or so
+#define HTTP_BUFFER_SIZE 1024 * 5
 
-	buf = malloc(max_length);
-
-	c = 0;
-	ret = NULL;
-	while (true) {
-		if (ticks_to_millisecs (diff_ticks (start_time, gettime ())) > timeout)
-			break;
-
-		if(http_port == 443)
-			res = ssl_read (s, &buf[c], 1);
-		else
-			res = net_read (s, &buf[c], 1);
-
-		if ((res == 0) || (res == -EAGAIN)) {
-			usleep (20 * 1000);
-
-			continue;
-		}
-
-		if (res < 0) break;
-
-		if ((c > 0) && (buf[c - 1] == '\r') && (buf[c] == '\n')) {
-			if (c == 1) {
-				ret = strdup ("");
-
-				break;
-			}
-
-			ret = strndup (buf, c - 1);
-
-			break;
-		}
-
-		c++;
-
-		if (c == max_length)
-			break;
-	}
-
-	free (buf);
-	return ret;
-}
+//The amount of memory the buffer should expanded with if the buffer is full
+#define HTTP_BUFFER_GROWTH 1024 * 5
 
 /**
- * This function reads all the data from a connection into a buffer.
+ * This function reads all the data from a connection into a buffer which it returns.
+ * It will return an empty buffer if something doesn't go as planned
  *
  * @param s32 connection The connection identifier to suck the response out of
- * @return bool True if data downloaded succesfully.
+ * @return block A 'block' struct (see http.h) in which the buffer is located
  */
-bool tcp_readData(const s32 connection, u8 **buffer, const u32 length)
+struct block read_message(s32 connection)
 {
-	u8 *p;
-	u32 left, block, received;
-	s64 t;
-	s32 res;
+	//Create a block of memory to put in the response
+	struct block buffer;
+	buffer.data = malloc(HTTP_BUFFER_SIZE);
+	buffer.size = HTTP_BUFFER_SIZE;
 
-	p = *buffer;
-	left = length;
-	received = 0;
-
-	t = gettime ();
-	while (left)
+	if (buffer.data == NULL)
 	{
-		if (ticks_to_millisecs (diff_ticks (t, gettime ())) > TCP_BLOCK_RECV_TIMEOUT)
-			break;
+		return emptyblock;
+	}
 
-		// Update the progress bar
-		if(displayProgressWindow)
+	//The offset variable always points to the first byte of memory that is free in the buffer
+	u32 offset = 0;
+
+	while (1)
+	{
+		//Fill the buffer with a new batch of bytes from the connection,
+		//starting from where we left of in the buffer till the end of the buffer
+		s32 bytes_read = net_read(connection, buffer.data + offset, buffer.size - offset);
+
+		//Anything below 0 is an error in the connection
+		if (bytes_read < 0)
 		{
-			ShowProgress(received, length);
-			if(ProgressCanceled())
+			//printf("Connection error from net_read()  Errorcode: %i\n", bytes_read);
+			return emptyblock;
+		}
+
+		//No more bytes were read into the buffer,
+		//we assume this means the HTTP response is done
+		if (bytes_read == 0)
+		{
+			break;
+		}
+
+		offset += bytes_read;
+
+		//Check if we have enough buffer left over,
+		//if not expand it with an additional HTTP_BUFFER_GROWTH worth of bytes
+		if (offset >= buffer.size)
+		{
+			buffer.size += HTTP_BUFFER_GROWTH;
+			u8 * tmp = realloc(buffer.data, buffer.size);
+
+			if (tmp == NULL)
 			{
-				ProgressStop();
-				break;
+				free(buffer.data);
+				return emptyblock;
 			}
+			else
+				buffer.data = tmp;
 		}
-
-		// Get next block size
-		block = left;
-		if (block > TCP_BLOCK_SIZE)
-			block = TCP_BLOCK_SIZE;
-
-		if(http_port == 443)
-			res = ssl_read (connection, p, block);
-		else
-			res = net_read (connection, p, block);
-
-		if ((res == 0) || (res == -EAGAIN))
-		{
-			usleep (20 * 1000);
-			continue;
-		}
-
-		if (res < 0) break;
-
-		received += res;
-		left -= res;
-		p += res;
-
-		// update timing after each downloaded block
-		t = gettime ();
 	}
 
-	return left == 0;
-}
+	//At the end of above loop offset should be precisely the amount of bytes that were read from the connection
+	buffer.size = offset;
 
-/**
- * Parse the HTTP replied header
- *
- * @param s32 connection identification
- * @return bool true if max header lines not reached. Stores HTTP answers into global variables.
- */
-u8 read_header(s32 connection)
-{
-	int linecount = 0;
-	result = HTTPR_OK;
+	//Shrink the size of the buffer so the data fits exactly in it
+	buffer.data = realloc(buffer.data, buffer.size);
 
-	for (linecount = 0; linecount < 32; linecount++)
-	{
-		char *line = tcp_readLine (connection, 0xff, gettime(), (u16)HTTP_TIMEOUT);
-
-		if (!line)
-		{
-			http_status = 404;
-			result = HTTPR_ERR_REQUEST;
-			break;
-		}
-
-		if (strlen (line) < 1)
-		{
-			free (line);
-			line = NULL;
-			break;
-		}
-
-		sscanf (line, "HTTP/1.%*u %u", &http_status);
-		sscanf (line, "Content-Length: %u", &content_length);
-		sscanf (line, "Location: %s", content_location);
-		//gprintf(line);
-		//gprintf("\n");
-		free (line);
-		line = NULL;
-	}
-
-	if (linecount == 32)
-	{
-		http_status = 404;
-		result = HTTPR_ERR_REQUEST;
-	}
-
-	return result;
+	return buffer;
 }
 
 /**
@@ -273,27 +173,15 @@ u8 read_header(s32 connection)
  */
 struct block downloadfile(const char *url)
 {
-	int sslcontext = -1;
-
 	//Check if the url starts with "http://", if not it is not considered a valid url
-	if (strncmp(url, "http://", strlen("http://")) == 0)
-		http_port = 80;
-	else if(strncmp(url, "https://", strlen("https://")) == 0)
+	if (strncmp(url, "http://", strlen("http://")) != 0)
 	{
-		http_port = 443;
-		gprintf("Initializing ssl...\n");
-		if(ssl_init() < 0)
-			return emptyblock;
-	}
-	else
+		//printf("URL '%s' doesn't start with 'http://'\n", url);
 		return emptyblock;
+	}
 
 	//Locate the path part of the url by searching for '/' past "http://"
-	char *path = 0;
-	if(http_port == 443)
-		path = strchr(url + strlen("https://"), '/');
-	else
-		path = strchr(url + strlen("http://"), '/');
+	char *path = strchr(url + strlen("http://"), '/');
 
 	//At the very least the url has to end with '/', ending with just a domain is invalid
 	if (path == NULL)
@@ -303,7 +191,7 @@ struct block downloadfile(const char *url)
 	}
 
 	//Extract the domain part out of the url
-	int domainlength = path - url - strlen("http://") - (http_port == 443 ? 1 : 0);
+	int domainlength = path - url - strlen("http://");
 
 	if (domainlength == 0)
 	{
@@ -312,7 +200,7 @@ struct block downloadfile(const char *url)
 	}
 
 	char domain[domainlength + 1];
-	strlcpy(domain, url + strlen("http://") + (http_port == 443 ? 1 : 0), domainlength + 1);
+	strlcpy(domain, url + strlen("http://"), domainlength + 1);
 
 	//Parsing of the URL is done, start making an actual connection
 	u32 ipaddress = getipbynamecached(domain);
@@ -323,45 +211,12 @@ struct block downloadfile(const char *url)
 		return emptyblock;
 	}
 
-	s32 connection = tcp_connect(ipaddress, http_port);
+	s32 connection = server_connect(ipaddress, 80);
 
 	if (connection < 0)
 	{
 		//printf("Error establishing connection");
 		return emptyblock;
-	}
-
-	if(http_port == 443)
-	{
-		//patched out anyways so just to set something
-		sslcontext = ssl_new((u8*)domain,0);
-
-		if(sslcontext < 0)
-		{
-			//gprintf("ssl_new\n");
-			result = HTTPR_ERR_CONNECT;
-			net_close (connection);
-			return emptyblock;
-		}
-		//patched out anyways so just to set something
-		ssl_setbuiltinclientcert(sslcontext,0);
-		if(ssl_connect(sslcontext,connection) < 0)
-		{
-			//gprintf("ssl_connect\n");
-			result = HTTPR_ERR_CONNECT;
-			ssl_shutdown(sslcontext);
-			net_close (connection);
-			return emptyblock;
-		}
-		int ret = ssl_handshake(sslcontext);
-		if(ret < 0)
-		{
-			//gprintf("ssl_handshake %i\n", ret);
-			result = HTTPR_ERR_STATUS;
-			ssl_shutdown(sslcontext);
-			net_close (connection);
-			return emptyblock;
-		}
 	}
 
 	// Remove Referer from the request header for incompatible websites (ex. Cloudflare proxy)
@@ -380,101 +235,131 @@ struct block downloadfile(const char *url)
 	//gprintf("%s\n",header);
 
 	//Do the request and get the response
-	tcp_write(http_port == 443 ? sslcontext : connection, header);
-	read_header( http_port == 443 ? sslcontext : connection);
+	send_message(connection, header);
+	struct block response = read_message(connection);
+	net_close(connection);
+	
+	// dump response
+	// hexdump(response.data, response.size);
+	
+	//Search for the 4-character sequence \r\n\r\n in the response which signals the start of the http payload (file)
+	unsigned char *filestart = NULL;
+	u32 filesize = 0;
+	u32 i;
+	char newURL[512];
+	bool redirect = false;
 
-	if (http_status >= 400) // Not found
+	for (i = 3; i < response.size; i++)
 	{
-		//gprintf("HTTP ERROR: %d\n", http_status);
-		return emptyblock;
-	}
-
-	if(!content_length)
-		content_length = 0;
-
-	// create data buffer to return
-	struct block response;
-	response.data = malloc(content_length);
-	response.size = content_length;
-	if (response.data == NULL)
-	{
-		return emptyblock;
-	}
-
-	if (http_status == 200)
-	{
-		if(displayProgressWindow)
+		if (response.data[i] == '\n' && response.data[i - 1] == '\r' && response.data[i - 2] == '\n' && response.data[i - 3] == '\r')
 		{
-			ProgressCancelEnable(true);
-			StartProgress(tr("Downloading file..."), tr("Please wait"), 0, false, false);
-		}
-
-		int ret = tcp_readData(http_port == 443 ? sslcontext : connection, &response.data, content_length);
-		if(!ret)
-		{
-			free(response.data);
-			result = HTTPR_ERR_RECEIVE;
-			if(http_port == 443)
-				ssl_shutdown(sslcontext);
-			net_close (connection);
-			return emptyblock;
+			filestart = response.data + i + 1;
+			filesize = response.size - i - 1;
+			
+			// Check the HTTP response code
+			if (response.size > 10 && strncmp((char*)response.data, "HTTP/", 5)==0) 
+			{
+				char htstat[i];
+				strncpy(htstat, (char*)response.data, i);
+				htstat[i] = 0;
+				char *codep;
+				codep = strchr(htstat, ' ');
+				if (codep) 
+				{
+					int code;
+					if (sscanf(codep+1, "%d", &code) == 1) 
+					{
+						//gprintf("HTTP response code: %d\n", code);
+						if (code == 302) // 302 FOUND (redirected link)
+						{
+							char *ptr = strcasestr((char*)response.data, "Location: ");
+							if(ptr)
+							{
+								ptr += strlen("Location: ");
+								strncpy(newURL, ptr, sizeof(newURL));
+								*(strchr(newURL, '\r'))=0;
+								
+								redirect = true;
+								//gprintf("New URL to download = %s \n", newURL);
+							}
+							else
+							{
+								//gprintf("HTTP ERROR: %s\n", htstat);
+								free(response.data);
+								return emptyblock;
+							}
+						}
+						if (code >=400) // Not found
+						{
+							//gprintf("HTTP ERROR: %s\n", htstat);
+							free(response.data);
+							return emptyblock;
+						}
+					}
+				}
+			}
+			break;
 		}
 	}
-	else if (http_status == 302) // 302 FOUND (redirected link)
-	{
-		// close current connection
-		if(http_port == 443)
-			ssl_shutdown(sslcontext);
-		net_close (connection);
 
-		// prevent infinite loops
+	if(redirect)
+	{
+		// Prevent endless loop
 		retryloop++;
 		if(retryloop > 3)
 		{
 			retryloop = 0;
+			free(response.data);
 			return emptyblock;
 		}
-
-		struct block redirected = downloadfile(content_location);
-		if(redirected.size == 0)
-			return emptyblock;
+		
+		struct block redirected = downloadfile(newURL);
 
 		// copy the newURL data into the original data
 		u8 * tmp = realloc(response.data, redirected.size);
 		if (tmp == NULL)
 		{
-			gprintf("Could not allocate enough memory for new URL. Download canceled.\n");
+			//gprintf("Could not allocate enough memory for new URL. Download canceled.\n");
 			free(response.data);
-			response.size = 0;
 			free(redirected.data);
-			result = HTTPR_ERR_RECEIVE;
-			if(http_port == 443)
-				ssl_shutdown(sslcontext);
-			net_close (connection);
 			return emptyblock;
 		}
 		response.data = tmp;
 		memcpy(response.data, redirected.data, redirected.size);
-		free(redirected.data);
-		response.size = redirected.size;
 
+		// Set filestart's new size based on redirected file
+		filestart = response.data;
+		filesize = redirected.size;
+		free(redirected.data);
+		
 	}
 	retryloop = 0;
-	
-	// reset progress window if used
-	if(displayProgressWindow)
+
+	if (filestart == NULL)
 	{
-		ProgressStop();
-		ProgressCancelEnable(false);
-		displayProgressWindow = false;
+		//printf("HTTP Response was without a file\n");
+		free(response.data);
+		return emptyblock;
 	}
 
-	result = HTTPR_OK;
-	if(http_port == 443)
-		ssl_shutdown(sslcontext);
-	net_close (connection);
-	
-	return response;
+	//Copy the file part of the response into a new memoryblock to return
+	struct block file;
+	file.data = malloc(filesize);
+	file.size = filesize;
+
+	if (file.data == NULL)
+	{
+		//printf("No more memory to copy file from HTTP response\n");
+		free(response.data);
+		return emptyblock;
+	}
+
+	memcpy(file.data, filestart, filesize);
+
+	//Dispose of the original response
+	free(response.data);
+
+	return file;
 }
 
 s32 GetConnection(char * domain)
@@ -485,12 +370,7 @@ s32 GetConnection(char * domain)
 	{
 		return -1;
 	}
-	s32 connection = tcp_connect(ipaddress, 80);
+	s32 connection = server_connect(ipaddress, 80);
 	return connection;
 
-}
-
-void displayDownloadProgress(bool display)
-{
-	displayProgressWindow = display;
 }

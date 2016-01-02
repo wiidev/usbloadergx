@@ -295,7 +295,6 @@ bool GCGames::RemoveGame(const char *gameID)
 
 	char filepath[512];
 	int result = 0;
-	int ret;
 
 	// the main path is the SD path as it is prefered, now delete USB
 	char cIsoPath[256];
@@ -305,23 +304,20 @@ bool GCGames::RemoveGame(const char *gameID)
 	{
 		// Remove game iso
 		snprintf(filepath, sizeof(filepath), "%s%s", Settings.GameCubePath, cIsoPath);
-		ret = RemoveFile(filepath);
-		if(ret != 0)
+		if(!RemoveFile(filepath))
 			result = -1;
 
 		// Remove path
 		char *pathPtr = strrchr(filepath, '/');
 		if(pathPtr) *pathPtr = 0;
-		ret = RemoveFile(filepath);
-		if(ret != 0)
+		if(!RemoveFile(filepath))
 			result = -1;
 	}
 	else if(header->type == TYPE_GAME_GC_EXTRACTED)
 	{
 		//! remove extracted gamecube game
 		snprintf(filepath, sizeof(filepath), "%s%s", Settings.GameCubePath, cIsoPath);
-		ret = RemoveDirectory(path);
-		if(ret < 0)
+		if(!RemoveDirectory(path))
 			result = -1;
 	}
 

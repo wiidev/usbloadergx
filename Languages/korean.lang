@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-14 16:24+0200\n"
+"POT-Creation-Date: 2016-01-02 16:53+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -29,6 +29,14 @@ msgstr ""
 
 #, c-format
 msgid "%i missing files"
+msgstr ""
+
+#, c-format
+msgid "%i wad file(s) not processed!"
+msgstr ""
+
+#, c-format
+msgid "%i wad found."
 msgstr ""
 
 #, c-format
@@ -132,6 +140,9 @@ msgstr ""
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "모든 USB로더 GX 기능 잠금 해제."
 
+msgid "All wad files processed successfully."
+msgstr ""
+
 msgid "Alternate DOL"
 msgstr "Alternate DOL"
 
@@ -178,6 +189,9 @@ msgid "Aspect Ratio"
 msgstr ""
 
 msgid "Attention!"
+msgstr ""
+
+msgid "Attention: All savegames will be deleted."
 msgstr ""
 
 msgid "Aug"
@@ -712,9 +726,6 @@ msgstr ""
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr ""
 
-msgid "Do you want to update this file?"
-msgstr ""
-
 msgid "Do you wish to update/download all language files?"
 msgstr "정말로 모든 언어화일을 업데이트하고 다운로드 할까요?"
 
@@ -776,6 +787,9 @@ msgid "ERROR:"
 msgstr "에러:"
 
 msgid "ERROR: Can't set up theme."
+msgstr ""
+
+msgid "EmuNAND Wad Manager"
 msgstr ""
 
 msgid "EmuNand Channels"
@@ -924,6 +938,9 @@ msgstr ""
 msgid "Feb"
 msgstr "2월"
 
+msgid "File"
+msgstr ""
+
 msgid "File not found."
 msgstr "파일을 찾을수가 없네요."
 
@@ -945,6 +962,9 @@ msgstr ""
 
 msgid "Flip-X"
 msgstr "좌/우 설정"
+
+msgid "Folder"
+msgstr ""
 
 msgid "Font Scale Factor"
 msgstr ""
@@ -1224,11 +1244,11 @@ msgstr "설치 에러!"
 msgid "Install Partitions"
 msgstr ""
 
-msgid "Install WAD to EmuNand"
-msgstr ""
-
 msgid "Install a game"
 msgstr "게임을 설치할까요"
+
+msgid "Install error - Cleaning incomplete data."
+msgstr ""
 
 msgid "Install finished"
 msgstr ""
@@ -1540,6 +1560,9 @@ msgstr ""
 msgid "No themes found."
 msgstr ""
 
+msgid "No wad file found in this folder."
+msgstr ""
+
 msgid "NoSSL only"
 msgstr ""
 
@@ -1740,6 +1763,9 @@ msgstr ""
 
 msgid "Receiving file from:"
 msgstr "파일 추출 :"
+
+msgid "Region Free"
+msgstr ""
 
 msgid "Region Patch"
 msgstr ""
@@ -2221,9 +2247,6 @@ msgstr "DOL 업데이트"
 msgid "Update Files"
 msgstr "화일 업데이트"
 
-msgid "Update Nintendont"
-msgstr ""
-
 msgid "Update Path"
 msgstr "업데이트 경로"
 
@@ -2276,9 +2299,6 @@ msgstr ""
 msgid "Virtual Pointer Speed"
 msgstr ""
 
-msgid "WAD Installation"
-msgstr ""
-
 msgid "WDM Files Path"
 msgstr ""
 
@@ -2313,6 +2333,9 @@ msgid "Where to dump NAND?"
 msgstr ""
 
 msgid "Which device do you want to use for Nintendont files?"
+msgstr ""
+
+msgid "Which mode do you want to use?"
 msgstr ""
 
 msgid "WiFi Features"

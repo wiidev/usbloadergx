@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-14 16:24+0200\n"
+"POT-Creation-Date: 2016-01-02 16:53+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -30,6 +30,14 @@ msgstr "%i 個のﾌｧｲﾙがｻｰﾊﾞｰにありません"
 #, c-format
 msgid "%i missing files"
 msgstr "%i 個のﾌｧｲﾙが不足しています"
+
+#, c-format
+msgid "%i wad file(s) not processed!"
+msgstr ""
+
+#, c-format
+msgid "%i wad found."
+msgstr ""
 
 #, c-format
 msgid "%s only accepts GameCube backups in ISO format."
@@ -132,6 +140,9 @@ msgstr "全ての画像をダウンロードしました"
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "使用制限が解除されました"
 
+msgid "All wad files processed successfully."
+msgstr ""
+
 msgid "Alternate DOL"
 msgstr "代替DOL起動"
 
@@ -179,6 +190,9 @@ msgstr "アスペクト比"
 
 msgid "Attention!"
 msgstr "注意!"
+
+msgid "Attention: All savegames will be deleted."
+msgstr ""
 
 msgid "Aug"
 msgstr "8月"
@@ -712,9 +726,6 @@ msgstr "ゲームを起動しますか?"
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "全てのFAT32領域のセクタで空き容量情報を同期しますか？"
 
-msgid "Do you want to update this file?"
-msgstr ""
-
 msgid "Do you wish to update/download all language files?"
 msgstr "すべての言語をダウンロードしますか？"
 
@@ -777,6 +788,9 @@ msgstr "エラー："
 
 msgid "ERROR: Can't set up theme."
 msgstr "テーマを適用できませんでした"
+
+msgid "EmuNAND Wad Manager"
+msgstr ""
 
 msgid "EmuNand Channels"
 msgstr "エミュNANDチャンネル"
@@ -924,6 +938,9 @@ msgstr "機能設定"
 msgid "Feb"
 msgstr "2月"
 
+msgid "File"
+msgstr ""
+
 msgid "File not found."
 msgstr "ファイルが見つかりません"
 
@@ -945,6 +962,9 @@ msgstr "正面カバー"
 
 msgid "Flip-X"
 msgstr "ゲームリストの回転"
+
+msgid "Folder"
+msgstr ""
 
 msgid "Font Scale Factor"
 msgstr "文字サイズの補正率"
@@ -1224,11 +1244,11 @@ msgstr "インストールエラー!"
 msgid "Install Partitions"
 msgstr "インストール領域"
 
-msgid "Install WAD to EmuNand"
-msgstr "WADをｴﾐｭNANDへｲﾝｽﾄｰﾙ"
-
 msgid "Install a game"
 msgstr "ゲームをインストール"
+
+msgid "Install error - Cleaning incomplete data."
+msgstr ""
 
 msgid "Install finished"
 msgstr "インストールが終了しました"
@@ -1540,6 +1560,9 @@ msgstr "テーマが見つかりません"
 msgid "No themes found."
 msgstr "ﾃｰﾏが見つかりません"
 
+msgid "No wad file found in this folder."
+msgstr ""
+
 msgid "NoSSL only"
 msgstr ""
 
@@ -1740,6 +1763,9 @@ msgstr "Wii本体NAND"
 
 msgid "Receiving file from:"
 msgstr "ファイルを受信中:"
+
+msgid "Region Free"
+msgstr ""
 
 msgid "Region Patch"
 msgstr "リージョンパッチ"
@@ -2221,9 +2247,6 @@ msgstr "DOLのみ"
 msgid "Update Files"
 msgstr "すべて更新"
 
-msgid "Update Nintendont"
-msgstr ""
-
 msgid "Update Path"
 msgstr "GXのdol"
 
@@ -2276,9 +2299,6 @@ msgstr ""
 msgid "Virtual Pointer Speed"
 msgstr "ポインタの速度"
 
-msgid "WAD Installation"
-msgstr "WADインストール"
-
 msgid "WDM Files Path"
 msgstr "WDMファイル"
 
@@ -2313,6 +2333,9 @@ msgid "Where to dump NAND?"
 msgstr ""
 
 msgid "Which device do you want to use for Nintendont files?"
+msgstr ""
+
+msgid "Which mode do you want to use?"
 msgstr ""
 
 msgid "WiFi Features"
@@ -2450,6 +2473,12 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "Install WAD to EmuNand"
+#~ msgstr "WADをｴﾐｭNANDへｲﾝｽﾄｰﾙ"
+
+#~ msgid "WAD Installation"
+#~ msgstr "WADインストール"
 
 #~ msgid "GameTDB Path"
 #~ msgstr "ゲーム名リスト"

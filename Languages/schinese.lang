@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-14 16:24+0200\n"
+"POT-Creation-Date: 2016-01-02 16:53+0100\n"
 "PO-Revision-Date: 2013-08-13 07:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: oCameLo\n"
@@ -30,6 +30,14 @@ msgstr "在服务器上未找到 %i 个文件！"
 #, c-format
 msgid "%i missing files"
 msgstr "缺少 %i 个文件"
+
+#, c-format
+msgid "%i wad file(s) not processed!"
+msgstr ""
+
+#, c-format
+msgid "%i wad found."
+msgstr ""
 
 #, c-format
 msgid "%s only accepts GameCube backups in ISO format."
@@ -132,6 +140,9 @@ msgstr "所有图片已成功下载。"
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "所有 USB Loader GX 功能已解锁."
 
+msgid "All wad files processed successfully."
+msgstr ""
+
 msgid "Alternate DOL"
 msgstr "可选择 DOL 文件"
 
@@ -179,6 +190,9 @@ msgstr "长宽比例"
 
 msgid "Attention!"
 msgstr "注意！"
+
+msgid "Attention: All savegames will be deleted."
+msgstr ""
 
 msgid "Aug"
 msgstr "八月"
@@ -712,9 +726,6 @@ msgstr "是否立刻开始游戏？"
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "是否同步剩余空间信息扇区到所有 FAT32 分区？"
 
-msgid "Do you want to update this file?"
-msgstr ""
-
 msgid "Do you wish to update/download all language files?"
 msgstr "升级/下载语言文件？"
 
@@ -777,6 +788,9 @@ msgstr "错误："
 
 msgid "ERROR: Can't set up theme."
 msgstr "错误：无法设置主题。"
+
+msgid "EmuNAND Wad Manager"
+msgstr ""
 
 msgid "EmuNand Channels"
 msgstr "EmuNand 频道"
@@ -924,6 +938,9 @@ msgstr "功能设置"
 msgid "Feb"
 msgstr "二月"
 
+msgid "File"
+msgstr ""
+
 msgid "File not found."
 msgstr "找不到文件。"
 
@@ -945,6 +962,9 @@ msgstr "普通封面"
 
 msgid "Flip-X"
 msgstr "按键规则"
+
+msgid "Folder"
+msgstr ""
 
 msgid "Font Scale Factor"
 msgstr "字体比例因数"
@@ -1224,11 +1244,11 @@ msgstr "安装错误！"
 msgid "Install Partitions"
 msgstr "安装分区"
 
-msgid "Install WAD to EmuNand"
-msgstr "安装 WAD 至 EmuNand"
-
 msgid "Install a game"
 msgstr "安装游戏"
+
+msgid "Install error - Cleaning incomplete data."
+msgstr ""
 
 msgid "Install finished"
 msgstr "安装已完成"
@@ -1540,6 +1560,9 @@ msgstr "网站上没找到主题。"
 msgid "No themes found."
 msgstr "没有找到主题。"
 
+msgid "No wad file found in this folder."
+msgstr ""
+
 msgid "NoSSL only"
 msgstr ""
 
@@ -1740,6 +1763,9 @@ msgstr "真实 Nand"
 
 msgid "Receiving file from:"
 msgstr "接收文件："
+
+msgid "Region Free"
+msgstr ""
 
 msgid "Region Patch"
 msgstr "区域补丁"
@@ -2221,9 +2247,6 @@ msgstr "仅升级主程序"
 msgid "Update Files"
 msgstr "升级文件"
 
-msgid "Update Nintendont"
-msgstr ""
-
 msgid "Update Path"
 msgstr "升级文件存放路径"
 
@@ -2276,9 +2299,6 @@ msgstr ""
 msgid "Virtual Pointer Speed"
 msgstr "虚拟指针速度"
 
-msgid "WAD Installation"
-msgstr "WAD 安装"
-
 msgid "WDM Files Path"
 msgstr "WDM 文件路径"
 
@@ -2313,6 +2333,9 @@ msgid "Where to dump NAND?"
 msgstr ""
 
 msgid "Which device do you want to use for Nintendont files?"
+msgstr ""
+
+msgid "Which mode do you want to use?"
 msgstr ""
 
 msgid "WiFi Features"
@@ -2450,6 +2473,12 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "Install WAD to EmuNand"
+#~ msgstr "安装 WAD 至 EmuNand"
+
+#~ msgid "WAD Installation"
+#~ msgstr "WAD 安装"
 
 #~ msgid "GameTDB Path"
 #~ msgstr "GameTDB 路径"

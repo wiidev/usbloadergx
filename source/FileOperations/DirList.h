@@ -65,6 +65,9 @@ class DirList
 		//! Is index a dir or a file
 		//!\param list index
 		bool IsDir(int index) { if(!valid(index)) return 0; return FileInfo[index].isDir; }
+		//! Erase an entry of the list
+		//!\param list index
+		void RemoveEntrie(int index) { if(!valid(index)) return; FileInfo.erase(FileInfo.begin()+index); }
 		//! Get the filecount of the whole list
 		int GetFilecount() { return FileInfo.size(); }
 		//! Sort list by filepath
