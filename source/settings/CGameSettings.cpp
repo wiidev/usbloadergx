@@ -222,6 +222,7 @@ bool CGameSettings::Save()
 		fprintf(f, "NINVideoScale:%d; ", GameList[i].NINVideoScale);
 		fprintf(f, "NINVideoOffset:%d; ", GameList[i].NINVideoOffset);
 		fprintf(f, "NINRemlimit:%d; ", GameList[i].NINRemlimit);
+		fprintf(f, "NINArcadeMode:%d; ", GameList[i].NINArcadeMode);
 		fprintf(f, "NINMCEmulation:%d; ", GameList[i].NINMCEmulation);
 		fprintf(f, "NINMCSize:%d; ", GameList[i].NINMCSize);
 		fprintf(f, "NINUSBHID:%d; ", GameList[i].NINUSBHID);
@@ -433,6 +434,11 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 	else if (strcmp(name, "NINRemlimit") == 0)
 	{
 		game.NINRemlimit = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "NINArcadeMode") == 0)
+	{
+		game.NINArcadeMode = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "NINMCEmulation") == 0)
@@ -662,6 +668,7 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.NINVideoScale = INHERIT;
 	game.NINVideoOffset = INHERIT - 20;
 	game.NINRemlimit = INHERIT;
+	game.NINArcadeMode = INHERIT;
 	game.NINMCEmulation = INHERIT;
 	game.NINMCSize = INHERIT;
 	game.NINUSBHID = INHERIT;

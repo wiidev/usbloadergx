@@ -235,6 +235,7 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Video scale" ));
 	Options->SetName(Idx++, "%s", tr( "Video offset" ));
 	Options->SetName(Idx++, "%s", tr( "Remove Read Speed Limit" ));
+	Options->SetName(Idx++, "%s", tr( "Triforce Arcade Mode" ));
 	Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
 	Options->SetName(Idx++, "%s", tr( "Memory Card Blocks Size" ));
 	Options->SetName(Idx++, "%s", tr( "USB-HID Controller" ));
@@ -436,6 +437,9 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: NIN Remove Read Speed Limiter
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINRemlimit]));
+
+	//! Settings: NIN Arcade Mode
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINArcadeMode]));
 
 	//! Settings: NIN Memory Card Emulation
 	Options->SetValue(Idx++, "%s", tr(NINMCText[Settings.NINMCEmulation]));
@@ -820,6 +824,12 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.NINRemlimit >= MAX_ON_OFF) Settings.NINRemlimit = 0;
+	}
+
+	//! Settings: NIN Arcade Mode
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINArcadeMode >= MAX_ON_OFF) Settings.NINArcadeMode = 0;
 	}
 
 	//! Settings: NIN Memory Card Emulation

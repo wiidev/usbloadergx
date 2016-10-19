@@ -20,12 +20,12 @@
 #include <gctypes.h>
 
 #define NIN_MAGIC					0x01070CF6
-#define NIN_CFG_VERSION				0x00000006
+#define NIN_CFG_VERSION				0x00000007
 
 typedef struct NIN_CFG 
 {
 	u32		Magicbytes;		// 0x01070CF6
-	u32		Version;		// v4 since v3.354, v5 since v3.358, v6 since v3.368
+	u32		Version;		// v4 since v3.354, v5 since v3.358, v6 since v3.368, v7 since 4.424
 	u32		Config;
 	u32		VideoMode;
 	u32		Language;
@@ -65,6 +65,7 @@ enum ninconfig
 	NIN_CFG_MC_MULTI	= (1<<13),	// v1.135
 	NIN_CFG_NATIVE_SI	= (1<<14),	// v2.189
 	NIN_CFG_WIIU_WIDE	= (1<<15),	// v2.258
+	NIN_CFG_ARCADE_MODE = (1<<16),	// v4.424
 };
 
 enum ninvideomode

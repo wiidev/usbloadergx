@@ -974,6 +974,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	u8 ninVideoOffset = game_cfg->NINVideoOffset == INHERIT - 20 ? Settings.NINVideoOffset : game_cfg->NINVideoOffset;
 	u8 ninPal50PatchChoice = game_cfg->NINPal50Patch == INHERIT ? Settings.NINPal50Patch : game_cfg->NINPal50Patch;
 	u8 ninRemlimitChoice = game_cfg->NINRemlimit == INHERIT ? Settings.NINRemlimit : game_cfg->NINRemlimit;
+	u8 ninArcadeModeChoice = game_cfg->NINArcadeMode == INHERIT ? Settings.NINArcadeMode : game_cfg->NINArcadeMode;
 	
 	const char *ninLoaderPath = game_cfg->NINLoaderPath.size() == 0 ? Settings.NINLoaderPath : game_cfg->NINLoaderPath.c_str();
 
@@ -982,47 +983,6 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	{
 		WindowPrompt(tr("Error:"), fmt(tr("%s requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."),LoaderName), tr("OK"));
 		return -1;
-	}
-
-
-	// Check USB device
-	if(gameHdr->type != TYPE_GAME_GC_DISC && strncmp(RealPath, "usb", 3) == 0)
-	{
-		// Check Main GameCube Path location
-		if(strncmp(DeviceHandler::PathToFSName(Settings.GameCubePath), "FAT", 3) != 0)
-		{
-			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."),LoaderName), tr("OK"));
-			return -1;
-		}
-
-		// Check if the partition is a primary
-		int USB_partNum = DeviceHandler::PathToDriveType(Settings.GameCubePath)-USB1;
-		int USBport_partNum = DeviceHandler::PartitionToPortPartition(USB_partNum);
-		PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandleFromPartition(USB_partNum);
-		if(usbHandle->GetPartitionTableType(USBport_partNum) != MBR)
-		{
-			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary FAT32 partition."),LoaderName), tr("OK"));
-			return -1;
-		}
-		
-		// check if the partition is the first FAT32 of the drive
-		bool found = false;
-		for(int partition = 0 ; partition <= USBport_partNum; partition++)
-		{
-			if(strncmp(usbHandle->GetFSName(partition), "FAT", 3) != 0)
-				continue;
-			
-			if(partition == USBport_partNum)
-			{
-				found = true;
-				break;
-			}
-		}
-		if(!found)
-		{
-			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary FAT32 partition."),LoaderName), tr("OK"));
-			return -1;
-		}
 	}
 
 
@@ -1169,6 +1129,56 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	else if(NINRev >= 358 && NINRev < 368)
 		NIN_cfg_version = 5;
 
+
+	// Check USB device
+	if(gameHdr->type != TYPE_GAME_GC_DISC && strncmp(RealPath, "usb", 3) == 0)
+	{
+		// Check Main GameCube Path location
+		if(strncmp(DeviceHandler::PathToFSName(Settings.GameCubePath), "FAT", 3) != 0)
+		{
+			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."),LoaderName), tr("OK"));
+			return -1;
+		}
+
+		// Check the partition type
+		int USB_partNum = DeviceHandler::PathToDriveType(Settings.GameCubePath)-USB1; 	// Get partition number across all mounted device
+		int USBport_partNum = DeviceHandler::PartitionToPortPartition(USB_partNum);		// Get partition position from corresponding USB port
+		PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandleFromPartition(USB_partNum);	// Open a handle on used USB port
+		
+		// GPT and EBR 0x0F support added on v3.400, primary type was required on old version.
+		if(NINRev < 400 && usbHandle->GetPartitionTableType(USBport_partNum) != MBR) 
+		{
+			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary FAT32 partition."),LoaderName), tr("OK"));
+			return -1;
+		}
+		
+		// Extended type EBR 0x05 was added in 4.406, only type 0x0F was working from 400 to 405
+		if(NINRev > 400  && NINRev < 406  && usbHandle->GetPartitionTableType(USBport_partNum) == EBR && usbHandle->GetPartitionType(USBport_partNum) != 0x0F)
+		{
+			WindowPrompt(tr("Error:"), tr("Your current GameCube partition is not compatible. Please update Nintendont."), tr("OK"));
+			return -1;
+		}
+		
+		// check if the partition is the first FAT32 of the drive. ExFAT was added to nintendont 4.x but USBLoaderGX can't list games so no need to check that format.
+		bool found = false;
+		for(int partition = 0 ; partition <= USBport_partNum; partition++)
+		{
+			if(strncmp(usbHandle->GetFSName(partition), "FAT", 3) != 0)
+				continue;
+			
+			if(partition == USBport_partNum)
+			{
+				found = true;
+				break;
+			}
+		}
+		if(!found)
+		{
+			WindowPrompt(tr("Error:"), fmt(tr("To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary FAT32 partition."),LoaderName), tr("OK"));
+			return -1;
+		}
+	}
+	
 	// Set used device when launching game from disc
 	if(gameHdr->type == TYPE_GAME_GC_DISC)
 	{
@@ -1409,6 +1419,8 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		nin_config->Config |= NIN_CFG_NATIVE_SI; // v2.189+
 	if(ninWiiUWideChoice)
 		nin_config->Config |= NIN_CFG_WIIU_WIDE; // v2.258+
+	if(ninArcadeModeChoice)
+		nin_config->Config |= NIN_CFG_ARCADE_MODE; // v4.424+ Triforce Arcade Mode
 	
 	// Max Pads
 	nin_config->MaxPads = ninMaxPadsChoice; // NIN_CFG_VERSION 2 r42
@@ -1620,7 +1632,7 @@ int GameBooter::BootNeek(struct discHdr *gameHdr)
 	}
 	
 	// Check if emuNAND path is on SD
-	if(neekMode == 1 && strncmp(NandEmuPath, "sd", 2) == 0) // neek2o on SD is not supported
+	if(neekMode == 1 && isWiiU() && strncmp(NandEmuPath, "sd", 2) == 0) // neek2o on SD is not supported with the vWii leaked version of neek2o. Users could use it on Wii too, but they should be using r96.
 	{
 		if(WindowPrompt(tr("Warning:"), tr("Neek2o does not support 'Emulated NAND Channel Path' on SD! Please setup Uneek2o instead."), tr("Continue"), tr("Cancel")) == 0)
 			return -1;

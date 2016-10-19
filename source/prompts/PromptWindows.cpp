@@ -255,10 +255,13 @@ void WindowCredits()
 	creditsMusic->SetLoop(1);
 	creditsMusic->Play();
 
+	GuiTrigger trigA;
+	trigA.SetButtonOnlyTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 	GuiTrigger trigB;
 	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 	GuiButton backBtn(0, 0);
 	backBtn.SetPosition(-20, -20);
+	backBtn.SetTrigger(&trigA);
 	backBtn.SetTrigger(&trigB);
 	
 	u32 i = 0;

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-02 16:53+0100\n"
+"POT-Creation-Date: 2016-10-19 14:43+0200\n"
 "PO-Revision-Date: 2013-08-13 07:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: oCameLo\n"
@@ -2181,6 +2181,9 @@ msgstr "提示信息"
 msgid "Transfer failed"
 msgstr "传输失败"
 
+msgid "Triforce Arcade Mode"
+msgstr ""
+
 msgid "Two Lines"
 msgstr ""
 
@@ -2413,6 +2416,9 @@ msgstr "你需要安装 DIOS-MIOS Lite v1.2 或更新版本。"
 
 msgid "You need to install an additional GameCube loader or select a different GameCube Mode to launch GameCube games from USB or SD card."
 msgstr "你需要安装另外的Gamecube加载器或者选择不同的Gamecub模式来从usb或者sd卡运行Gamecube游戏。"
+
+msgid "Your current GameCube partition is not compatible. Please update Nintendont."
+msgstr ""
 
 msgid "Zoom Duration (Speed)"
 msgstr "缩放间隔 (速度)"

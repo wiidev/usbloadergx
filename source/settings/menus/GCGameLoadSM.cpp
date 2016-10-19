@@ -197,6 +197,7 @@ void GCGameLoadSM::SetOptionNames()
 		Options->SetName(Idx++, "%s", tr( "Video offset" ));
 		Options->SetName(Idx++, "%s", tr( "Ocarina" ));
 		Options->SetName(Idx++, "%s", tr( "Remove Read Speed Limit" ));
+		Options->SetName(Idx++, "%s", tr( "Triforce Arcade Mode" ));
 		Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
 		Options->SetName(Idx++, "%s", tr( "Memory Card Blocks Size" ));
 		Options->SetName(Idx++, "%s", tr( "USB-HID Controller" ));
@@ -394,6 +395,12 @@ void GCGameLoadSM::SetOptionValues()
 			Options->SetValue(Idx++, tr("Use global"));
 		else
 			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINRemlimit]));
+
+		//! Settings: NIN Arcade Mode
+		if(GameConfig.NINArcadeMode == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINArcadeMode]));
 
 		//! Settings: NIN Memory Card Emulation
 		if(GameConfig.NINMCEmulation == INHERIT)
@@ -728,6 +735,12 @@ int GCGameLoadSM::GetMenuInternal()
 	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
 	{
 		if (++GameConfig.NINRemlimit >= MAX_ON_OFF) GameConfig.NINRemlimit = INHERIT;
+	}
+
+	//! Settings: NIN Arcade Mode
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.NINArcadeMode >= MAX_ON_OFF) GameConfig.NINArcadeMode = INHERIT;
 	}
 
 	//! Settings: NIN Memory Card Emulation

@@ -191,6 +191,7 @@ void CSettings::SetDefault()
 	NINVideoScale = 40;
 	NINVideoOffset = 0;
 	NINRemlimit = OFF;
+	NINArcadeMode = OFF;
 	NINMCEmulation = ON;
 	NINMCSize = 2;
 	NINAutoboot = ON;
@@ -447,6 +448,7 @@ bool CSettings::Save()
 	fprintf(file, "NINVideoScale = %d\n", NINVideoScale);
 	fprintf(file, "NINVideoOffset = %d\n", NINVideoOffset);
 	fprintf(file, "NINRemlimit = %d\n", NINRemlimit);
+	fprintf(file, "NINArcadeMode = %d\n", NINArcadeMode);
 	fprintf(file, "NINMCEmulation = %d\n", NINMCEmulation);
 	fprintf(file, "NINMCSize = %d\n", NINMCSize);
 	fprintf(file, "NINAutoboot = %d\n", NINAutoboot);
@@ -965,6 +967,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "NINRemlimit") == 0)
 	{
 		NINRemlimit = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINArcadeMode") == 0)
+	{
+		NINArcadeMode = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "NINMCEmulation") == 0)

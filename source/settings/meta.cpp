@@ -20,9 +20,9 @@ misrepresented as being the original software.
 3. This notice may not be removed or altered from any source
 distribution.
 */
-#include "homebrewboot\HomebrewXML.h"
-#include "FileOperations\fileops.h"
-#include "settings\CSettings.h"
+#include "homebrewboot/HomebrewXML.h"
+#include "FileOperations/fileops.h"
+#include "settings/CSettings.h"
 #include "svnrev.h"
 
 int updateMetaXML (void)

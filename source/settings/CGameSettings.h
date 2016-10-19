@@ -46,6 +46,7 @@ typedef struct _GameCFG
 	short NINVideoScale;
 	short NINVideoOffset;
 	short NINRemlimit;
+	short NINArcadeMode;
 	short NINMCEmulation;
 	short NINMCSize;
 	short NINUSBHID;
@@ -105,6 +106,7 @@ typedef struct _GameCFG
 		this->NINVideoScale = game.NINVideoScale;
 		this->NINVideoOffset = game.NINVideoOffset;
 		this->NINRemlimit = game.NINRemlimit;
+		this->NINArcadeMode = game.NINArcadeMode;
 		this->NINMCEmulation = game.NINMCEmulation;
 		this->NINMCSize = game.NINMCSize;
 		this->NINUSBHID = game.NINUSBHID;
