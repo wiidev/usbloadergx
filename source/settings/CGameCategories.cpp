@@ -35,6 +35,8 @@
 #include "utils/StringTools.h"
 #include "svnrev.h"
 
+using namespace tinyxml2;
+
 #define VALID_CONFIG_REV	1084
 
 CGameCategories GameCategories;
@@ -70,14 +72,14 @@ bool CGameCategories::Load(string filepath)
 
 	clear();
 
-	TiXmlDocument xmlDoc(filepath.c_str());
-	if(!xmlDoc.LoadFile())
+	XMLDocument xmlDoc;
+	if(xmlDoc.LoadFile(filepath.c_str()) != 0)
 		return false;
 
 	if(!ValidVersion(xmlDoc.FirstChildElement("Revision")))
 		return false;
 
-	TiXmlElement * node =  xmlDoc.FirstChildElement("Categories");
+	XMLElement * node =  xmlDoc.FirstChildElement("Categories");
 	if(!node)
 		return false;
 
@@ -104,7 +106,7 @@ bool CGameCategories::Load(string filepath)
 	{
 		const char * gameID = node->Attribute("ID");
 
-		TiXmlElement * category = node->FirstChildElement("Category");
+		XMLElement * category = node->FirstChildElement("Category");
 
 		while(category != NULL)
 		{
@@ -135,13 +137,13 @@ bool CGameCategories::Save()
 	CreateSubfolder(filepath);
 
 	StartProgress(tr("Generating GXGameCategories.xml"), tr("Please wait..."), 0, false, true);
-	TiXmlDocument xmlDoc;
+	XMLDocument xmlDoc;
 
-	TiXmlDeclaration declaration("1.0", "UTF-8", "");
+	XMLDeclaration *declaration = xmlDoc.NewDeclaration();
 	xmlDoc.InsertEndChild(declaration);
-	TiXmlElement Revision("Revision");
-	TiXmlText revText(GetRev());
-	Revision.InsertEndChild(revText);
+	XMLElement *Revision = xmlDoc.NewElement("Revision");
+	XMLText *revText = xmlDoc.NewText(GetRev());
+	Revision->InsertEndChild(revText);
 	xmlDoc.InsertEndChild(Revision);
 
 	int progressSize = CategoryList.size() + List.size();
@@ -151,14 +153,14 @@ bool CGameCategories::Save()
 	{
 		//! On LinkEndChild TinyXML owns and deletes the elements allocated here.
 		//! This is more memory efficient than making another copy of the elements.
-		TiXmlElement *Categories = new TiXmlElement("Categories");
+		XMLElement *Categories = xmlDoc.NewElement("Categories");
 
 		CategoryList.goToFirst();
 		do
 		{
 			ShowProgress(progress, progressSize);
 
-			TiXmlElement *Category = new TiXmlElement("Category");
+			XMLElement *Category = xmlDoc.NewElement("Category");
 			Category->SetAttribute("ID", fmt("%02i", CategoryList.getCurrentID()));
 			Category->SetAttribute("Name", CategoryList.getCurrentName().c_str());
 
@@ -175,13 +177,13 @@ bool CGameCategories::Save()
 	{
 		//! On LinkEndChild TinyXML owns and deletes the elements allocated here.
 		//! This is more memory efficient than making another copy of the elements.
-		TiXmlElement *GameCategories = new TiXmlElement("GameCategories");
+		XMLElement *GameCategories = xmlDoc.NewElement("GameCategories");
 
 		for(map<string, vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
 		{
 			ShowProgress(progress, progressSize);
 
-			TiXmlElement *Game = new TiXmlElement("Game");
+			XMLElement *Game = xmlDoc.NewElement("Game");
 			Game->SetAttribute("ID", itr->first.c_str());
 			Game->SetAttribute("Title", GameTitles.GetTitle(itr->first.c_str()));
 
@@ -191,7 +193,7 @@ bool CGameCategories::Save()
 				if(!CatName)
 					CatName = "";
 
-				TiXmlElement *Category = new TiXmlElement("Category");
+				XMLElement *Category = xmlDoc.NewElement("Category");
 				Category->SetAttribute("ID", fmt("%02i", itr->second[i]));
 				Category->SetAttribute("Name", CatName);
 
@@ -207,13 +209,13 @@ bool CGameCategories::Save()
 
 	ShowProgress(tr("Writing GXGameCategories.xml"), tr("Please wait..."), 0, progressSize, progressSize, false, true);
 
-	xmlDoc.SaveFile(configPath);
+	xmlDoc.SaveFile(configPath.c_str());
 	ProgressStop();
 
 	return true;
 }
 
-bool CGameCategories::ValidVersion(TiXmlElement *revisionNode)
+bool CGameCategories::ValidVersion(XMLElement *revisionNode)
 {
 	if(!revisionNode) return false;
 

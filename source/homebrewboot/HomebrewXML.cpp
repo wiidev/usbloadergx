@@ -7,10 +7,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include "FileOperations/fileops.h"
-#include "xml/tinyxml.h"
+#include "xml/tinyxml2.h"
 #include "gecko.h"
 
 #include "HomebrewXML.h"
+
+using namespace tinyxml2;
 
 #define ENTRIE_SIZE	 8192
 
@@ -24,15 +26,15 @@ int HomebrewXML::LoadHomebrewXMLData(const char* filename)
 	LongDescription.clear();
 	Releasedate.clear();
 
-	TiXmlDocument xmlDoc(filename);
-	if(!xmlDoc.LoadFile())
+	XMLDocument xmlDoc;
+	if(xmlDoc.LoadFile(filename) != 0)
 		return false;
 
-	TiXmlElement *appNode =  xmlDoc.FirstChildElement("app");
+	XMLElement *appNode =  xmlDoc.FirstChildElement("app");
 	if(!appNode)
 		return false;
 
-	TiXmlElement *node = NULL;
+	XMLElement *node = NULL;
 
 	node = appNode->FirstChildElement("name");
 	if(node && node->FirstChild() && node->FirstChild()->Value())
@@ -75,7 +77,7 @@ int HomebrewXML::LoadHomebrewXMLData(const char* filename)
 	if(!node)
 		return 1;
 
-	TiXmlElement *argNode = node->FirstChildElement("arg");
+	XMLElement *argNode = node->FirstChildElement("arg");
 
 	while(argNode)
 	{

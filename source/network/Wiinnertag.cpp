@@ -26,8 +26,10 @@
 #include "settings/CSettings.h"
 #include "network/networkops.h"
 #include "utils/StringTools.h"
-#include "xml/tinyxml.h"
+#include "xml/tinyxml2.h"
 #include "gecko.h"
+
+using namespace tinyxml2;
 
 Wiinnertag::Wiinnertag(const string &filepath)
 {
@@ -36,11 +38,11 @@ Wiinnertag::Wiinnertag(const string &filepath)
 
 bool Wiinnertag::ReadXML(const string &filepath)
 {
-	TiXmlDocument xmlDoc(filepath.c_str());
-	if(!xmlDoc.LoadFile())
+	XMLDocument xmlDoc; 
+	if(xmlDoc.LoadFile(filepath.c_str()) != 0)
 		return false;
 
-	TiXmlElement * node =  xmlDoc.FirstChildElement("Tag");
+	XMLElement * node =  xmlDoc.FirstChildElement("Tag");
 
 	while(node != NULL)
 	{
@@ -108,17 +110,17 @@ bool Wiinnertag::CreateExample(const string &filepath)
 		fullpath += '/';
 	fullpath += "Wiinnertag.xml";
 
-	TiXmlDocument xmlDoc;
+	XMLDocument xmlDoc;
 
-	TiXmlDeclaration declaration("1.0", "UTF-8", "");
+	XMLDeclaration * declaration = xmlDoc.NewDeclaration();
 	xmlDoc.InsertEndChild(declaration);
 
-	TiXmlElement Tag("Tag");
-	Tag.SetAttribute("URL", "http://www.wiinnertag.com/wiinnertag_scripts/update_sign.php?key={KEY}&game_id={ID6}");
-	Tag.SetAttribute("Key", "1234567890");
+	XMLElement *Tag = xmlDoc.NewElement("Tag");
+	Tag->SetAttribute("URL", "http://www.wiinnertag.com/wiinnertag_scripts/update_sign.php?key={KEY}&game_id={ID6}");
+	Tag->SetAttribute("Key", "1234567890");
 	xmlDoc.InsertEndChild(Tag);
 
-	xmlDoc.SaveFile(fullpath);
+	xmlDoc.SaveFile(fullpath.c_str());
 
 	return true;
 }

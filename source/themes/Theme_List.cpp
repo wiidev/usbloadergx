@@ -31,7 +31,9 @@
 
 #include "network/networkops.h"
 #include "Theme_List.h"
-#include "xml/tinyxml.h"
+#include "xml/tinyxml2.h"
+
+using namespace tinyxml2;
 
 Theme_List::Theme_List(const char * url)
 {
@@ -64,23 +66,23 @@ Theme_List::~Theme_List()
 
 bool Theme_List::ParseXML(const char * xmlfile)
 {
-	TiXmlDocument xmlDoc;
+	XMLDocument xmlDoc;
 
 	if(!xmlDoc.Parse(xmlfile))
 		return false;
 
-	TiXmlElement *themesNode =  xmlDoc.FirstChildElement("themes");
+	XMLElement *themesNode =  xmlDoc.FirstChildElement("themes");
 	if (!themesNode)
 		return false;
 
-	TiXmlElement *theme = themesNode->FirstChildElement("theme");
+	XMLElement *theme = themesNode->FirstChildElement("theme");
 
 	while(theme)
 	{
 		int i = ThemesList.size();
 		ThemesList.resize(i+1);
 
-		TiXmlElement *node = NULL;
+		XMLElement *node = NULL;
 
 		node = theme->FirstChildElement("name");
 		if(node && node->FirstChild() && node->FirstChild()->Value())
