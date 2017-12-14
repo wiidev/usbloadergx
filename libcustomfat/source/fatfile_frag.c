@@ -58,6 +58,6 @@ int _FAT_get_fragments (const char *path, _fat_frag_append_t append_fragment, vo
 
 	out:
 	_FAT_unlock(&partition->lock);
-	_FAT_close_r(&r, fd);
+	_FAT_close_r(&r, (void *)fd);
 	return ret;
 }

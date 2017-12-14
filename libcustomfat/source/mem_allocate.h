@@ -5,7 +5,7 @@
  malloc is unavailable
 
  Copyright (c) 2006 Michael "Chishm" Chisholm
-
+	
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
 
@@ -35,16 +35,19 @@
 #include "mem2.h"
 
 static inline void* _FAT_mem_allocate (size_t size) {
-	return MEM2_alloc(size);
+	return MEM2_alloc (size);
 }
 
 static inline void* _FAT_mem_align (size_t size) {
-	return MEM2_alloc(size);
+#ifdef __wii__
+	return memalign (32, size);
+#else
+	return MEM2_alloc (size);
+#endif
 }
 
 static inline void _FAT_mem_free (void* mem) {
-    //using normal free, it will decide which free to use (just to be on the safe side)
-    free(mem);
+	free (mem);
 }
 
 #endif // _MEM_ALLOCATE_H

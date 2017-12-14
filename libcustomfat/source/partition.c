@@ -180,7 +180,7 @@ PARTITION* _FAT_partition_constructor_buf (const DISC_INTERFACE* disc, uint32_t 
 	}
 
 	// Make sure it is a valid MBR or boot sector
-	if ( (sectorBuffer[BPB_bootSig_55] != 0x55) || (sectorBuffer[BPB_bootSig_AA] != 0xAA)) {
+	if ( (sectorBuffer[BPB_bootSig_55] != 0x55) || (sectorBuffer[BPB_bootSig_AA] != 0xAA && sectorBuffer[BPB_bootSig_AA] != 0xAB)) {
 		return NULL;
 	}
 
@@ -348,6 +348,13 @@ PARTITION* _FAT_partition_getPartitionFromPath (const char* path) {
 	return (PARTITION*)devops->deviceData;
 }
 
+static void _FAT_updateFS_INFO(PARTITION * partition, uint8_t *sectorBuffer) {
+	partition->fat.numberFreeCluster = _FAT_fat_freeClusterCount(partition);
+	u32_to_u8array(sectorBuffer, FSIB_numberOfFreeCluster, partition->fat.numberFreeCluster);
+	u32_to_u8array(sectorBuffer, FSIB_numberLastAllocCluster, partition->fat.numberLastAllocCluster);
+	_FAT_disc_writeSectors (partition->disc, partition->fsInfoSector, 1, sectorBuffer);
+}
+
 void _FAT_partition_createFSinfo(PARTITION * partition)
 {
 	if(partition->readOnly || partition->filesysType != FS_FAT32)
@@ -364,14 +371,10 @@ void _FAT_partition_createFSinfo(PARTITION * partition)
 		sectorBuffer[FSIB_SIG2+i] = FS_INFO_SIG2[i];
 	}
 
-	partition->fat.numberFreeCluster = _FAT_fat_freeClusterCount(partition);
-	u32_to_u8array(sectorBuffer, FSIB_numberOfFreeCluster, partition->fat.numberFreeCluster);
-	u32_to_u8array(sectorBuffer, FSIB_numberLastAllocCluster, partition->fat.numberLastAllocCluster);
-
 	sectorBuffer[FSIB_bootSig_55] = 0x55;
 	sectorBuffer[FSIB_bootSig_AA] = 0xAA;
 
-	_FAT_disc_writeSectors (partition->disc, partition->fsInfoSector, 1, sectorBuffer);
+	_FAT_updateFS_INFO(partition,sectorBuffer);
 
 	_FAT_mem_free(sectorBuffer);
 }
@@ -398,6 +401,10 @@ void _FAT_partition_readFSinfo(PARTITION * partition)
 		_FAT_partition_createFSinfo(partition);
 	} else {
 		partition->fat.numberFreeCluster = u8array_to_u32(sectorBuffer, FSIB_numberOfFreeCluster);
+		if(partition->fat.numberFreeCluster == 0xffffffff) {
+			_FAT_updateFS_INFO(partition,sectorBuffer);
+			partition->fat.numberFreeCluster = u8array_to_u32(sectorBuffer, FSIB_numberOfFreeCluster);
+		}
 		partition->fat.numberLastAllocCluster = u8array_to_u32(sectorBuffer, FSIB_numberLastAllocCluster);
 	}
 	_FAT_mem_free(sectorBuffer);

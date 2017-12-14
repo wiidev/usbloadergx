@@ -45,9 +45,6 @@
 #define DIR_ENTRY_LAST 0x00
 #define DIR_ENTRY_FREE 0xE5
 
-#define LAST_LFN_POS (19*13)
-#define LAST_LFN_POS_CORRECTION (MAX_LFN_LENGTH-15)
-
 typedef unsigned short ucs2_t;
 
 // Long file name directory entry
@@ -90,9 +87,9 @@ static int _FAT_directory_lfnLength (const char* name) {
 	int ucsLength;
 	const char* tempName = name;
 
-	nameLength = strnlen(name, MAX_FILENAME_LENGTH);
+	nameLength = strnlen(name, NAME_MAX);
 	// Make sure the name is short enough to be valid
-	if ( nameLength >= MAX_FILENAME_LENGTH) {
+	if ( nameLength >= NAME_MAX) {
 		return -1;
 	}
 	// Make sure it doesn't contain any invalid characters
@@ -101,7 +98,8 @@ static int _FAT_directory_lfnLength (const char* name) {
 	}
 	// Make sure the name doesn't contain any control codes or codes not representable in UCS-2
 	for (i = 0; i < nameLength; i++) {
-		if (name[i] < 0x20 || name[i] >= ABOVE_UCS_RANGE) {
+		unsigned char ch = (unsigned char) name[i];
+		if (ch < 0x20 || ch >= ABOVE_UCS_RANGE) {
 			return -1;
 		}
 	}
@@ -315,6 +313,7 @@ bool _FAT_directory_getNextEntry (PARTITION* partition, DIR_ENTRY* entry) {
 	while (!found && !notFound) {
 		if (_FAT_directory_incrementDirEntryPosition (partition, &entryEnd, false) == false) {
 			notFound = true;
+			break;
 		}
 
 		_FAT_cache_readPartialSector (partition->cache, entryData,
@@ -341,12 +340,10 @@ bool _FAT_directory_getNextEntry (PARTITION* partition, DIR_ENTRY* entry) {
 			}
 			if (lfnExists) {
 				lfnPos = ((entryData[LFN_offset_ordinal] & ~LFN_END) - 1) * 13;
-				if (lfnPos > LAST_LFN_POS) {
-					// Force it within the buffer. Will corrupt the filename but prevent buffer overflows
-					lfnPos = LAST_LFN_POS;
-				}
 				for (i = 0; i < 13; i++) {
-					lfn[lfnPos + i] = entryData[LFN_offset_table[i]] | (entryData[LFN_offset_table[i]+1] << 8);
+					if (lfnPos + i < MAX_LFN_LENGTH - 1) {
+						lfn[lfnPos + i] = entryData[LFN_offset_table[i]] | (entryData[LFN_offset_table[i]+1] << 8);
+					}
 				}
 			}
 		} else if (entryData[DIR_ENTRY_attributes] & ATTRIB_VOL) {
@@ -368,7 +365,7 @@ bool _FAT_directory_getNextEntry (PARTITION* partition, DIR_ENTRY* entry) {
 			}
 
 			if (lfnExists) {
-				if (_FAT_directory_ucs2tombs (entry->filename, lfn, MAX_FILENAME_LENGTH) == (size_t)-1) {
+				if (_FAT_directory_ucs2tombs (entry->filename, lfn, NAME_MAX) == (size_t)-1) {
 					// Failed to convert the file name to UTF-8. Maybe the wrong locale is set?
 					return false;
 				}
@@ -409,7 +406,7 @@ bool _FAT_directory_getRootEntry (PARTITION* partition, DIR_ENTRY* entry) {
 
 	entry->dataEnd = entry->dataStart;
 
-	memset (entry->filename, '\0', MAX_FILENAME_LENGTH);
+	memset (entry->filename, '\0', NAME_MAX);
 	entry->filename[0] = '.';
 
 	memset (entry->entryData, 0, DIR_ENTRY_DATA_SIZE);
@@ -478,7 +475,7 @@ bool _FAT_directory_entryFromPosition (PARTITION* partition, DIR_ENTRY* entry) {
 	int lfnPos;
 	uint8_t entryData[DIR_ENTRY_DATA_SIZE];
 
-	memset (entry->filename, '\0', MAX_FILENAME_LENGTH);
+	memset (entry->filename, '\0', NAME_MAX);
 
 	// Create an empty directory entry to overwrite the old ones with
 	for ( entryStillValid = true, finished = false;
@@ -498,11 +495,10 @@ bool _FAT_directory_entryFromPosition (PARTITION* partition, DIR_ENTRY* entry) {
 		} else {
 			// Copy the long file name data
 			lfnPos = ((entryData[LFN_offset_ordinal] & ~LFN_END) - 1) * 13;
-			if (lfnPos > LAST_LFN_POS) {
-				lfnPos = LAST_LFN_POS_CORRECTION;
-			}
 			for (i = 0; i < 13; i++) {
-				lfn[lfnPos + i] = entryData[LFN_offset_table[i]] | (entryData[LFN_offset_table[i]+1] << 8);
+				if (lfnPos + i < MAX_LFN_LENGTH - 1) {
+					lfn[lfnPos + i] = entryData[LFN_offset_table[i]] | (entryData[LFN_offset_table[i]+1] << 8);
+				}
 			}
 		}
 	}
@@ -511,6 +507,7 @@ bool _FAT_directory_entryFromPosition (PARTITION* partition, DIR_ENTRY* entry) {
 		return false;
 	}
 
+	entryStart = entry->dataStart;
 	if ((entryStart.cluster == entryEnd.cluster)
 		&& (entryStart.sector == entryEnd.sector)
 		&& (entryStart.offset == entryEnd.offset)) {
@@ -520,7 +517,7 @@ bool _FAT_directory_entryFromPosition (PARTITION* partition, DIR_ENTRY* entry) {
 		}
 	} else {
 		// Encode the long file name into a multibyte string
-		if (_FAT_directory_ucs2tombs (entry->filename, lfn, MAX_FILENAME_LENGTH) == (size_t)-1) {
+		if (_FAT_directory_ucs2tombs (entry->filename, lfn, NAME_MAX) == (size_t)-1) {
 			return false;
 		}
 	}
@@ -575,7 +572,7 @@ bool _FAT_directory_entryFromPath (PARTITION* partition, DIR_ENTRY* entry, const
 			dirnameLength = strlen(pathPosition);
 		}
 
-		if (dirnameLength > MAX_FILENAME_LENGTH) {
+		if (dirnameLength > NAME_MAX) {
 			// The path is too long to bother with
 			return false;
 		}
@@ -593,7 +590,7 @@ bool _FAT_directory_entryFromPath (PARTITION* partition, DIR_ENTRY* entry, const
 
 			while (foundFile && !found && !notFound) {			// It hasn't already found the file
 				// Check if the filename matches
-				if ((dirnameLength == strnlen(entry->filename, MAX_FILENAME_LENGTH))
+				if ((dirnameLength == strnlen(entry->filename, NAME_MAX))
 					&& (_FAT_directory_mbsncasecmp(pathPosition, entry->filename, dirnameLength) == 0)) {
 						found = true;
 				}
@@ -705,7 +702,9 @@ static bool _FAT_directory_findEntryGap (PARTITION* partition, DIR_ENTRY* entry,
 			_FAT_fat_clusterToSector(partition, gapEnd.cluster) + gapEnd.sector,
 			gapEnd.offset * DIR_ENTRY_DATA_SIZE, DIR_ENTRY_DATA_SIZE);
 		if (entryData[0] == DIR_ENTRY_LAST) {
-			gapStart = gapEnd;
+			if (dirEntryRemain == size) {
+				gapStart = gapEnd;
+			}
 			-- dirEntryRemain;
 			endOfDirectory = true;
 		} else if (entryData[0] == DIR_ENTRY_FREE) {
@@ -760,9 +759,9 @@ static bool _FAT_directory_entryExists (PARTITION* partition, const char* name, 
 	char alias[MAX_ALIAS_LENGTH];
 	size_t dirnameLength;
 
-	dirnameLength = strnlen(name, MAX_FILENAME_LENGTH);
+	dirnameLength = strnlen(name, NAME_MAX);
 
-	if (dirnameLength >= MAX_FILENAME_LENGTH) {
+	if (dirnameLength >= NAME_MAX) {
 		return false;
 	}
 
@@ -771,7 +770,7 @@ static bool _FAT_directory_entryExists (PARTITION* partition, const char* name, 
 
 	while (foundFile) {			// It hasn't already found the file
 		// Check if the filename matches
-		if ((dirnameLength == strnlen(tempEntry.filename, MAX_FILENAME_LENGTH))
+		if ((dirnameLength == strnlen(tempEntry.filename, NAME_MAX))
 			&& (_FAT_directory_mbsncasecmp(name, tempEntry.filename, dirnameLength) == 0)) {
 				return true;
 		}
@@ -810,7 +809,7 @@ static int _FAT_directory_createAlias (char* alias, const char* lfn) {
 
 	// Primary portion of alias
 	while (aliasPos < 8 && lfn[lfnPos] != '.' && lfn[lfnPos] != '\0') {
-		bytesUsed = mbrtowc(&lfnChar, lfn + lfnPos, MAX_FILENAME_LENGTH - lfnPos, &ps);
+		bytesUsed = mbrtowc(&lfnChar, lfn + lfnPos, NAME_MAX - lfnPos, &ps);
 		if (bytesUsed < 0) {
 			return -1;
 		}
@@ -857,7 +856,7 @@ static int _FAT_directory_createAlias (char* alias, const char* lfn) {
 		aliasPos++;
 		memset (&ps, 0, sizeof(ps));
 		for (aliasExtLen = 0; aliasExtLen < MAX_ALIAS_EXT_LENGTH && *lfnExt != '\0'; aliasExtLen++) {
-			bytesUsed = mbrtowc(&lfnChar, lfnExt, MAX_FILENAME_LENGTH - lfnPos, &ps);
+			bytesUsed = mbrtowc(&lfnChar, lfnExt, NAME_MAX - lfnPos, &ps);
 			if (bytesUsed < 0) {
 				return -1;
 			}
@@ -912,8 +911,20 @@ bool _FAT_directory_addEntry (PARTITION* partition, DIR_ENTRY* entry, uint32_t d
 	int aliasLen;
 	int lfnLen;
 
+	// Remove trailing spaces
+	for (i = strlen (entry->filename) - 1; (i >= 0) && (entry->filename[i] == ' '); --i) {
+		entry->filename[i] = '\0';
+	}
+#if 0
+	// Remove leading spaces
+	for (i = 0; entry->filename[i] == ' '; ++i) ;
+	if (i > 0) {
+		memmove (entry->filename, entry->filename + i, strlen (entry->filename + i));
+	}
+#endif
+
 	// Make sure the filename is not 0 length
-	if (strnlen (entry->filename, MAX_FILENAME_LENGTH) < 1) {
+	if (strnlen (entry->filename, NAME_MAX) < 1) {
 		return false;
 	}
 
@@ -923,19 +934,9 @@ bool _FAT_directory_addEntry (PARTITION* partition, DIR_ENTRY* entry, uint32_t d
 		return false;
 	}
 
-	// Remove trailing spaces
-	for (i = strlen (entry->filename) - 1; (i > 0) && (entry->filename[i] == ' '); --i) {
-		entry->filename[i] = '\0';
-	}
-	// Remove leading spaces
-	for (i = 0; (i < (int)strlen (entry->filename)) && (entry->filename[i] == ' '); ++i) ;
-	if (i > 0) {
-		memmove (entry->filename, entry->filename + i, strlen (entry->filename + i));
-	}
-
 	// Remove junk in filename
 	i = strlen (entry->filename);
-	memset (entry->filename + i, '\0', MAX_FILENAME_LENGTH - i);
+	memset (entry->filename + i, '\0', NAME_MAX - i);
 
 	// Make sure the entry doesn't already exist
 	if (_FAT_directory_entryExists (partition, entry->filename, dirCluster)) {
@@ -945,11 +946,11 @@ bool _FAT_directory_addEntry (PARTITION* partition, DIR_ENTRY* entry, uint32_t d
 	// Clear out alias, so we can generate a new one
 	memset (entry->entryData, ' ', 11);
 
-	if ( strncmp(entry->filename, ".", MAX_FILENAME_LENGTH) == 0) {
+	if ( strncmp(entry->filename, ".", NAME_MAX) == 0) {
 		// "." entry
 		entry->entryData[0] = '.';
 		entrySize = 1;
-	} else if ( strncmp(entry->filename, "..", MAX_FILENAME_LENGTH) == 0) {
+	} else if ( strncmp(entry->filename, "..", NAME_MAX) == 0) {
 		// ".." entry
 		entry->entryData[0] = '.';
 		entry->entryData[1] = '.';
@@ -972,17 +973,15 @@ bool _FAT_directory_addEntry (PARTITION* partition, DIR_ENTRY* entry, uint32_t d
 				_FAT_directory_entryExists (partition, alias, dirCluster))
 			{
 				// expand primary part to 8 characters long by padding the end with underscores
-				i = MAX_ALIAS_PRI_LENGTH - 1;
+				i = 0;
+				j = MAX_ALIAS_PRI_LENGTH;
 				// Move extension to last 3 characters
-				while (alias[i] != '.' && i > 0) i--;
-				if (i > 0) {
-					j = MAX_ALIAS_LENGTH - MAX_ALIAS_EXT_LENGTH - 2; // 1 char for '.', one for NUL, 3 for extension
-					memmove (alias + j, alias + i, strlen(alias) - i);
+				while (alias[i] != '.' && alias[i] != '\0') i++;
+				if (i < j) {
+					memmove (alias + j, alias + i, aliasLen - i + 1);
 					// Pad primary component
 					memset (alias + i, '_', j - i);
-					alias[MAX_ALIAS_LENGTH-1]=0;
 				}
-
 				// Generate numeric tail
 				for (i = 1; i <= MAX_NUMERIC_TAIL; i++) {
 					j = i;
