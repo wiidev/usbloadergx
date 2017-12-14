@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang - r1260
+# French.lang - r1267
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-19 14:43+0200\n"
+"POT-Creation-Date: 2017-12-14 15:50+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya, Cyan & Kin8\n"
@@ -278,6 +278,9 @@ msgstr "Bloquer Param. Disques durs"
 msgid "Block IOS Reload"
 msgstr "Bloquer IOS reload"
 
+msgid "Block Loader Layout Button"
+msgstr "Bloquer Chang. d'interface"
+
 msgid "Block Loader Mode Button"
 msgstr "Bloquer Mode du Loader"
 
@@ -325,6 +328,9 @@ msgstr "Les deux"
 
 msgid "Both Ports"
 msgstr "Les deux ports"
+
+msgid "CC Rumble"
+msgstr "Vibration manette cl."
 
 msgid "Cache BNR Files"
 msgstr "Fichiers BNR en cache"
@@ -1401,6 +1407,9 @@ msgstr "Dossier GameCube principal"
 msgid "Main Path"
 msgstr "Dossier principal"
 
+msgid "Manual (40~120)"
+msgstr "Manuelle (40~120)"
+
 msgid "Mar"
 msgstr "Mars"
 
@@ -1935,6 +1944,9 @@ msgstr "Éteindre la Wii"
 msgid "Skip Errors"
 msgstr "Omettre les erreurs"
 
+msgid "Skip IPL"
+msgstr "Omettre le BIOS"
+
 msgid "Sneek Video Patch"
 msgstr "Patch vidéo Sneek"
 
@@ -2292,6 +2304,9 @@ msgstr "Vidéo Deflicker"
 
 msgid "Video Mode"
 msgstr "Mode vidéo"
+
+msgid "Video Scale Value"
+msgstr "Valeur d'échelle"
 
 msgid "Video offset"
 msgstr "Position de l'image"

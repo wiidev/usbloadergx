@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-19 14:43+0200\n"
+"POT-Creation-Date: 2017-12-14 15:50+0100\n"
 "PO-Revision-Date: 2011-07-25 16:40+0200\n"
 "Last-Translator: Galen/xFede\n"
 "Language-Team: Penn, SirPalax, hvy109\n"
@@ -278,6 +278,9 @@ msgstr "Bloq. Config. Disco Duro"
 msgid "Block IOS Reload"
 msgstr "Impedir recarga IOS"
 
+msgid "Block Loader Layout Button"
+msgstr ""
+
 msgid "Block Loader Mode Button"
 msgstr "Bloq. Carga por Boton"
 
@@ -325,6 +328,9 @@ msgstr "Ambos"
 
 msgid "Both Ports"
 msgstr "Ambos Puertos"
+
+msgid "CC Rumble"
+msgstr ""
 
 msgid "Cache BNR Files"
 msgstr "Cache de archivos BNR"
@@ -1401,6 +1407,9 @@ msgstr "Ruta principal GameCube"
 msgid "Main Path"
 msgstr "Ruta principal"
 
+msgid "Manual (40~120)"
+msgstr ""
+
 msgid "Mar"
 msgstr ""
 
@@ -1935,6 +1944,9 @@ msgstr "Apagar la Wii"
 msgid "Skip Errors"
 msgstr "Saltar errores"
 
+msgid "Skip IPL"
+msgstr ""
+
 msgid "Sneek Video Patch"
 msgstr "Parche vídeo Sneek"
 
@@ -2292,6 +2304,9 @@ msgstr "Deflicker"
 
 msgid "Video Mode"
 msgstr "Modo vídeo              "
+
+msgid "Video Scale Value"
+msgstr ""
 
 msgid "Video offset"
 msgstr ""

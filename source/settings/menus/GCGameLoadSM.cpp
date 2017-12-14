@@ -194,6 +194,8 @@ void GCGameLoadSM::SetOptionNames()
 		Options->SetName(Idx++, "%s", tr( "Force Widescreen" ));
 		Options->SetName(Idx++, "%s", tr( "WiiU Widescreen" ));
 		Options->SetName(Idx++, "%s", tr( "Video scale" ));
+		if(GameConfig.NINVideoScale > 0)
+			Options->SetName(Idx++, "%s", tr( "Video Scale Value" ));
 		Options->SetName(Idx++, "%s", tr( "Video offset" ));
 		Options->SetName(Idx++, "%s", tr( "Ocarina" ));
 		Options->SetName(Idx++, "%s", tr( "Remove Read Speed Limit" ));
@@ -377,9 +379,14 @@ void GCGameLoadSM::SetOptionValues()
 		//! Settings: NIN VideoScale
 		if(GameConfig.NINVideoScale == INHERIT)
 			Options->SetValue(Idx++, tr("Use global"));
+		else if(GameConfig.NINVideoScale == 0)
+			Options->SetValue(Idx++, tr("Auto"));
 		else
-			Options->SetValue(Idx++, "%d (40~120)", GameConfig.NINVideoScale);
+			Options->SetValue(Idx++, "Manual (40~120)");
 
+		if(GameConfig.NINVideoScale > 0)
+			Options->SetValue(Idx++, "%d", GameConfig.NINVideoScale);
+		
 		//! Settings: NIN VideoOffset
 		if(GameConfig.NINVideoOffset == INHERIT-20)
 			Options->SetValue(Idx++, tr("Use global"));
@@ -717,15 +724,22 @@ int GCGameLoadSM::GetMenuInternal()
 	//! Settings: NIN VideoScale
 	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
 	{
+		if (GameConfig.NINVideoScale == INHERIT) GameConfig.NINVideoScale = 0;
+		else if (GameConfig.NINVideoScale == 0) GameConfig.NINVideoScale = 40;
+		else if (GameConfig.NINVideoScale >= 0) GameConfig.NINVideoScale = INHERIT;
+		Options->ClearList();
+		SetOptionNames();
+		SetOptionValues();
+	}
+
+	else if (currentGCmode == GC_MODE_NINTENDONT && GameConfig.NINVideoScale > 0 && ret == ++Idx)
+	{
 		char entrie[20];
 		snprintf(entrie, sizeof(entrie), "%i", GameConfig.NINVideoScale);
 		int ret = OnScreenNumpad(entrie, sizeof(entrie));
 		if(ret)
 		{
-			if(atoi(entrie) == -1)
-				GameConfig.NINVideoScale = -1;
-			else
-				GameConfig.NINVideoScale = LIMIT(atoi(entrie), 40, 120);
+			GameConfig.NINVideoScale = LIMIT(atoi(entrie), 40, 120);
 		}
 	}
 

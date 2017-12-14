@@ -188,6 +188,43 @@ static const char * PrivServText[] =
 LoaderSettings::LoaderSettings()
 	: SettingsMenu(tr("Loader Settings"), &GuiOptions, MENU_NONE)
 {
+
+	SetOptionNames();
+	SetOptionValues();
+
+	oldLoaderMode = Settings.LoaderMode;
+	oldGameCubeSource = Settings.GameCubeSource;
+	oldLoaderIOS = Settings.LoaderIOS;
+}
+
+LoaderSettings::~LoaderSettings()
+{
+	if(oldLoaderMode != Settings.LoaderMode)
+	{
+		if(Settings.LoaderMode & MODE_WIIGAMES && (gameList.GameCount() == 0))
+		{
+			WBFS_ReInit(WBFS_DEVICE_USB);
+			gameList.ReadGameList();
+		}
+
+		gameList.LoadUnfiltered();
+		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false);
+	}
+	
+	if(oldGameCubeSource != Settings.GameCubeSource)
+	{
+		GCGames::Instance()->LoadAllGames();
+	}
+	
+	if(oldLoaderIOS != Settings.LoaderIOS)
+	{
+		// edit meta.xml arguments
+		editMetaArguments();
+	}
+}
+
+void LoaderSettings::SetOptionNames()
+{
 	int Idx = 0;
 
 	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
@@ -233,6 +270,10 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "PAL50 Patch" ));
 	Options->SetName(Idx++, "%s", tr( "WiiU Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "Video scale" ));
+	if(Settings.NINVideoScale != 0)
+	{
+		Options->SetName(Idx++, "%s", tr( "Video Scale Value" ));
+	}
 	Options->SetName(Idx++, "%s", tr( "Video offset" ));
 	Options->SetName(Idx++, "%s", tr( "Remove Read Speed Limit" ));
 	Options->SetName(Idx++, "%s", tr( "Triforce Arcade Mode" ));
@@ -256,37 +297,6 @@ LoaderSettings::LoaderSettings()
 	Options->SetName(Idx++, "%s", tr( "Crop Overscan" ));
 	Options->SetName(Idx++, "%s", tr( "Disc Read Delay" ));
 
-	SetOptionValues();
-
-	oldLoaderMode = Settings.LoaderMode;
-	oldGameCubeSource = Settings.GameCubeSource;
-	oldLoaderIOS = Settings.LoaderIOS;
-}
-
-LoaderSettings::~LoaderSettings()
-{
-	if(oldLoaderMode != Settings.LoaderMode)
-	{
-		if(Settings.LoaderMode & MODE_WIIGAMES && (gameList.GameCount() == 0))
-		{
-			WBFS_ReInit(WBFS_DEVICE_USB);
-			gameList.ReadGameList();
-		}
-
-		gameList.LoadUnfiltered();
-		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false);
-	}
-	
-	if(oldGameCubeSource != Settings.GameCubeSource)
-	{
-		GCGames::Instance()->LoadAllGames();
-	}
-	
-	if(oldLoaderIOS != Settings.LoaderIOS)
-	{
-		// edit meta.xml arguments
-		editMetaArguments();
-	}
 }
 
 void LoaderSettings::SetOptionValues()
@@ -432,7 +442,14 @@ void LoaderSettings::SetOptionValues()
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINWiiUWide]));
 
 	//! Settings: NIN VideoScale
-	Options->SetValue(Idx++, "%d (0, 40~120)", Settings.NINVideoScale);
+	if(Settings.NINVideoScale == 0)
+		Options->SetValue(Idx++, "%s", tr("Auto"));
+	else
+	{
+		Options->SetValue(Idx++, "%s", tr("Manual (40~120)"));
+		Options->SetValue(Idx++, "%d", Settings.NINVideoScale);
+		
+	}
 
 	//! Settings: NIN VideoOffset
 	Options->SetValue(Idx++, "%d (-20~20)", Settings.NINVideoOffset);
@@ -811,11 +828,19 @@ int LoaderSettings::GetMenuInternal()
 	//! Settings: NIN VideoScale
 	else if (ret == ++Idx)
 	{
+		Settings.NINVideoScale == 0 ? Settings.NINVideoScale = 40 : Settings.NINVideoScale = 0;
+		Options->ClearList();
+		SetOptionNames();
+		SetOptionValues();
+	}
+	
+	else if (Settings.NINVideoScale != 0 && ret == ++Idx)
+	{
 		char entrie[20];
 		snprintf(entrie, sizeof(entrie), "%i", Settings.NINVideoScale);
 		int ret = OnScreenNumpad(entrie, sizeof(entrie));
 		if(ret)
-			Settings.NINVideoScale = (atoi(entrie) == 0) ? 0 : LIMIT(atoi(entrie), 40, 120);
+			Settings.NINVideoScale = LIMIT(atoi(entrie), 40, 120);
 	}
 
 	//! Settings: NIN VideoOffset

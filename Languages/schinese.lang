@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-19 14:43+0200\n"
+"POT-Creation-Date: 2017-12-14 15:50+0100\n"
 "PO-Revision-Date: 2013-08-13 07:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: oCameLo\n"
@@ -278,6 +278,9 @@ msgstr "禁止硬盘设置"
 msgid "Block IOS Reload"
 msgstr "禁止 IOS 重新载入"
 
+msgid "Block Loader Layout Button"
+msgstr ""
+
 msgid "Block Loader Mode Button"
 msgstr "禁止加载器模式按钮"
 
@@ -325,6 +328,9 @@ msgstr "全部"
 
 msgid "Both Ports"
 msgstr "两个接口"
+
+msgid "CC Rumble"
+msgstr ""
 
 msgid "Cache BNR Files"
 msgstr "缓存 BNR 文件"
@@ -1401,6 +1407,9 @@ msgstr "首选 GameCube 路径"
 msgid "Main Path"
 msgstr "首选路径"
 
+msgid "Manual (40~120)"
+msgstr ""
+
 msgid "Mar"
 msgstr "三月"
 
@@ -1935,6 +1944,9 @@ msgstr "关闭 Wii"
 msgid "Skip Errors"
 msgstr "跳过错误"
 
+msgid "Skip IPL"
+msgstr ""
+
 msgid "Sneek Video Patch"
 msgstr "Sneek 视频补丁"
 
@@ -2292,6 +2304,9 @@ msgstr ""
 
 msgid "Video Mode"
 msgstr "视频制式"
+
+msgid "Video Scale Value"
+msgstr ""
 
 msgid "Video offset"
 msgstr ""

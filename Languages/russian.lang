@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-19 14:43+0200\n"
+"POT-Creation-Date: 2017-12-14 15:50+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nikolai_ca\n"
 "Language-Team: Kir, alendit, nikolai_ca\n"
@@ -278,6 +278,9 @@ msgstr ""
 msgid "Block IOS Reload"
 msgstr "Блокировать перезагрузку IOS"
 
+msgid "Block Loader Layout Button"
+msgstr ""
+
 msgid "Block Loader Mode Button"
 msgstr ""
 
@@ -324,6 +327,9 @@ msgid "Both"
 msgstr "Оба"
 
 msgid "Both Ports"
+msgstr ""
+
+msgid "CC Rumble"
 msgstr ""
 
 msgid "Cache BNR Files"
@@ -1401,6 +1407,9 @@ msgstr ""
 msgid "Main Path"
 msgstr ""
 
+msgid "Manual (40~120)"
+msgstr ""
+
 msgid "Mar"
 msgstr "Мар"
 
@@ -1935,6 +1944,9 @@ msgstr ""
 msgid "Skip Errors"
 msgstr ""
 
+msgid "Skip IPL"
+msgstr ""
+
 msgid "Sneek Video Patch"
 msgstr ""
 
@@ -2292,6 +2304,9 @@ msgstr ""
 
 msgid "Video Mode"
 msgstr "Видео режим"
+
+msgid "Video Scale Value"
+msgstr ""
 
 msgid "Video offset"
 msgstr ""

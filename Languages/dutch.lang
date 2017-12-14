@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-19 14:43+0200\n"
+"POT-Creation-Date: 2017-12-14 15:50+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -278,6 +278,9 @@ msgstr "Blokkeer Harddisk Instellingen"
 msgid "Block IOS Reload"
 msgstr "Blokkeer IOS Herladen"
 
+msgid "Block Loader Layout Button"
+msgstr ""
+
 msgid "Block Loader Mode Button"
 msgstr ""
 
@@ -325,6 +328,9 @@ msgstr "Beide"
 
 msgid "Both Ports"
 msgstr "Beide poorten"
+
+msgid "CC Rumble"
+msgstr ""
 
 msgid "Cache BNR Files"
 msgstr "Cache BNR Bestanden"
@@ -1401,6 +1407,9 @@ msgstr "Hoofd GameCube Locatie"
 msgid "Main Path"
 msgstr "Hoofd Locatie"
 
+msgid "Manual (40~120)"
+msgstr ""
+
 msgid "Mar"
 msgstr "Mrt"
 
@@ -1935,6 +1944,9 @@ msgstr "Wii uitzetten"
 msgid "Skip Errors"
 msgstr "Fouten overslaan"
 
+msgid "Skip IPL"
+msgstr ""
+
 msgid "Sneek Video Patch"
 msgstr ""
 
@@ -2292,6 +2304,9 @@ msgstr ""
 
 msgid "Video Mode"
 msgstr "Video Modus"
+
+msgid "Video Scale Value"
+msgstr ""
 
 msgid "Video offset"
 msgstr ""

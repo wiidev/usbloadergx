@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-19 14:43+0200\n"
+"POT-Creation-Date: 2017-12-14 15:50+0100\n"
 "Last-Translator: nakata6790\n"
 "Language-Team: nakata6790 (aka0107@gmail.com)\n"
 "MIME-Version: 1.0\n"
@@ -277,6 +277,9 @@ msgstr "ÖñáãÞ ñõèìßóåùí óêëçñïý äßóêïõ"
 msgid "Block IOS Reload"
 msgstr "ÖñáãÞ åðáíáöüñôùóçò IOS"
 
+msgid "Block Loader Layout Button"
+msgstr ""
+
 msgid "Block Loader Mode Button"
 msgstr "ÖñáãÞ åéêïíéäßïõ åðéëïãÞò ðáé÷íéäéþí"
 
@@ -324,6 +327,9 @@ msgstr "êáé ôá äõï"
 
 msgid "Both Ports"
 msgstr "êáé ïé 2 èýñåò"
+
+msgid "CC Rumble"
+msgstr ""
 
 msgid "Cache BNR Files"
 msgstr "áðïèÞêåõóç áñ÷åßùí BNR"
@@ -1400,6 +1406,9 @@ msgstr "ÂáóéêÞ ôïðïèåóßá GameCube"
 msgid "Main Path"
 msgstr "ÂáóéêÞ ôïðïèåóßá"
 
+msgid "Manual (40~120)"
+msgstr ""
+
 msgid "Mar"
 msgstr "MÜñôéïò"
 
@@ -1934,6 +1943,9 @@ msgstr "Êëåßóéìï Wii"
 msgid "Skip Errors"
 msgstr "Áãíüçóç óöáëìÜôùí"
 
+msgid "Skip IPL"
+msgstr ""
+
 msgid "Sneek Video Patch"
 msgstr "Patch åéêüíáò ãéá sneek"
 
@@ -2291,6 +2303,9 @@ msgstr ""
 
 msgid "Video Mode"
 msgstr "Ñýèìéóç âßíôåï"
+
+msgid "Video Scale Value"
+msgstr ""
 
 msgid "Video offset"
 msgstr ""

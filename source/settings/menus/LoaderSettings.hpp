@@ -32,6 +32,7 @@ class LoaderSettings : public SettingsMenu
 		LoaderSettings();
 		~LoaderSettings();
 	protected:
+		void SetOptionNames();
 		void SetOptionValues();
 		int GetMenuInternal();
 

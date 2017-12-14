@@ -172,7 +172,7 @@ void CSettings::SetDefault()
 	BannerProjectionWidth = (Settings.widescreen ? (Settings.PAL50 ? 616 : 620.0f) : 608.0f);
 	BannerProjectionHeight = (Settings.PAL50 ? 448.0f : (NTSC ? 470.0f : 464.0f));
 	GCBannerScale = 1.5f;
-	GameCubeMode = GC_MODE_MIOS;
+	GameCubeMode = GC_MODE_NINTENDONT;
 	GameCubeSource = AUTO;
 	MultiDiscPrompt = OFF;
 	DMLVideo = DML_VIDEO_AUTO;

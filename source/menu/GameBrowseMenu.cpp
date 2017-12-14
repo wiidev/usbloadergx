@@ -1138,6 +1138,12 @@ int GameBrowseMenu::MainLoop()
 
 	else if (listBtn->GetState() == STATE_CLICKED)
 	{
+		if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_LOADER_LAYOUT_BUTTON))
+		{
+			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			listBtn->ResetState();
+			return returnMenu;
+		}
 		gprintf("\tlistBtn Clicked\n");
 		if (Settings.gameDisplay != LIST_MODE)
 		{
@@ -1149,6 +1155,12 @@ int GameBrowseMenu::MainLoop()
 
 	else if (gridBtn->GetState() == STATE_CLICKED)
 	{
+		if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_LOADER_LAYOUT_BUTTON))
+		{
+			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			gridBtn->ResetState();
+			return returnMenu;
+		}
 		gprintf("\tgridBtn Clicked\n");
 		if (Settings.gameDisplay != GRID_MODE)
 		{
@@ -1160,6 +1172,12 @@ int GameBrowseMenu::MainLoop()
 
 	else if (carouselBtn->GetState() == STATE_CLICKED)
 	{
+		if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_LOADER_LAYOUT_BUTTON))
+		{
+			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			carouselBtn->ResetState();
+			return returnMenu;
+		}
 		gprintf("\tcarouselBtn Clicked\n");
 		if (Settings.gameDisplay != CAROUSEL_MODE)
 		{
@@ -1171,6 +1189,12 @@ int GameBrowseMenu::MainLoop()
 
 	else if (bannerGridBtn->GetState() == STATE_CLICKED)
 	{
+		if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_LOADER_LAYOUT_BUTTON))
+		{
+			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			bannerGridBtn->ResetState();
+			return returnMenu;
+		}
 		gprintf("\tbannerGridBtn Clicked\n");
 		if(!SystemMenuResources::Instance()->IsLoaded()) {
 			WindowPrompt(tr( "Error:" ), tr( "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version." ), tr( "OK" ));

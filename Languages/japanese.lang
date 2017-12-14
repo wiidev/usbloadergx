@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-19 14:43+0200\n"
+"POT-Creation-Date: 2017-12-14 15:50+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -278,6 +278,9 @@ msgstr "HDD設定を制限"
 msgid "Block IOS Reload"
 msgstr "IOS再読み込み防止"
 
+msgid "Block Loader Layout Button"
+msgstr ""
+
 msgid "Block Loader Mode Button"
 msgstr "ローダーモードボタンを制限"
 
@@ -325,6 +328,9 @@ msgstr "IDとﾘｰｼﾞｮﾝを表示"
 
 msgid "Both Ports"
 msgstr "両方のﾎﾟｰﾄ"
+
+msgid "CC Rumble"
+msgstr ""
 
 msgid "Cache BNR Files"
 msgstr "BNRﾌｧｲﾙをｷｬｯｼｭ"
@@ -1401,6 +1407,9 @@ msgstr "ゲームキューブ"
 msgid "Main Path"
 msgstr "メインパス"
 
+msgid "Manual (40~120)"
+msgstr ""
+
 msgid "Mar"
 msgstr "3月"
 
@@ -1935,6 +1944,9 @@ msgstr "シャットダウン"
 msgid "Skip Errors"
 msgstr "エラーをスキップ"
 
+msgid "Skip IPL"
+msgstr ""
+
 msgid "Sneek Video Patch"
 msgstr "SNEEK映像パッチ"
 
@@ -2292,6 +2304,9 @@ msgstr ""
 
 msgid "Video Mode"
 msgstr "映像の出力方法"
+
+msgid "Video Scale Value"
+msgstr ""
 
 msgid "Video offset"
 msgstr ""
