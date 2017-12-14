@@ -154,7 +154,7 @@ bool operator<(const BROWSERENTRY &f1, const BROWSERENTRY &f2)
 	if (f1.isdir && !(f2.isdir)) return true;
 	if (!(f1.isdir) && f2.isdir) return false;
 
-	return stricmp(f1.filename, f2.filename) < 0;
+	return strcasecmp(f1.filename, f2.filename) < 0;
 }
 
 int ParseFilter(FILTERCASCADE *Filter, BROWSERENTRY* Entry)
@@ -208,7 +208,7 @@ int ParseDirectory(const char* Path, int Flags, FILTERCASCADE *Filter)
 		}
 		for (i = 0; i < browsers.size(); i++) // searchs the browser who match the path
 		{
-			if (strnicmp(fulldir, browsers[i].rootdir, strlen(browsers[i].rootdir) - 1 /*means without trailing '/'*/)
+			if (strncasecmp(fulldir, browsers[i].rootdir, strlen(browsers[i].rootdir) - 1 /*means without trailing '/'*/)
 					== 0)
 			{
 				browser = &browsers[curDevice];

@@ -66,6 +66,8 @@ enum ninconfig
 	NIN_CFG_NATIVE_SI	= (1<<14),	// v2.189
 	NIN_CFG_WIIU_WIDE	= (1<<15),	// v2.258
 	NIN_CFG_ARCADE_MODE = (1<<16),	// v4.424
+	NIN_CFG_CC_RUMBLE	= (1 << 17),// v4.43x
+	NIN_CFG_SKIP_IPL	= (1 << 18),// v4.43x
 };
 
 enum ninvideomode

@@ -17,7 +17,7 @@ class Wbfs
 		s32 CheckGame(u8 *);
 		s32 GameSize(u8 *, f32 *);
 		bool IsMounted() { return hdd == 0; };
-		virtual int GetFragList(u8 *id) { return 0; };
+		virtual s32 GetFragList(u8 *id) { return 0; };
 
 		virtual s32 Open() = 0;
 		virtual void Close() {};

@@ -189,12 +189,12 @@ bool Wad::UnInstall(const char *installpath)
 	int result = true;
 
 	// Remove ticket
-	snprintf(filepath, sizeof(filepath), "%s/ticket/%08x/%08x.tik", installpath, (u32) (tmd_data->title_id >> 32), (u32) tmd_data->title_id);
+	snprintf(filepath, sizeof(filepath), "%s/ticket/%08x/%08x.tik", installpath, (unsigned int)(tmd_data->title_id >> 32), (unsigned int) tmd_data->title_id);
 	if(!RemoveFile(filepath))
 		result = false;
 
 	// Remove contents / data
-	snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/", installpath, (u32) (tmd_data->title_id >> 32), (u32) tmd_data->title_id);
+	snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/", installpath, (unsigned int) (tmd_data->title_id >> 32), (unsigned int) tmd_data->title_id);
 	if(!RemoveDirectory(filepath))
 		result = false;
 
@@ -211,22 +211,22 @@ bool Wad::Install(const char *installpath)
 	tmd *tmd_data = (tmd *) SIGNATURE_PAYLOAD((signed_blob *) p_tmd);
 
 	// Create necessary folders if not existing
-	snprintf(filepath, sizeof(filepath), "%s/ticket/%08x/", installpath, (u32) (tmd_data->title_id >> 32));
+	snprintf(filepath, sizeof(filepath), "%s/ticket/%08x/", installpath, (unsigned int) (tmd_data->title_id >> 32));
 	CreateSubfolder(filepath);
 
-	snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/content/", installpath, (u32) (tmd_data->title_id >> 32), (u32) tmd_data->title_id);
+	snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/content/", installpath, (unsigned int) (tmd_data->title_id >> 32), (unsigned int) tmd_data->title_id);
 	CreateSubfolder(filepath);
 
-	snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/data/", installpath, (u32) (tmd_data->title_id >> 32), (u32) tmd_data->title_id);
+	snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/data/", installpath, (unsigned int) (tmd_data->title_id >> 32), (unsigned int) tmd_data->title_id);
 	CreateSubfolder(filepath);
 
 	// Write ticket file
-	snprintf(filepath, sizeof(filepath), "%s/ticket/%08x/%08x.tik", installpath, (u32) (tmd_data->title_id >> 32), (u32) tmd_data->title_id);
+	snprintf(filepath, sizeof(filepath), "%s/ticket/%08x/%08x.tik", installpath, (unsigned int) (tmd_data->title_id >> 32), (unsigned int) tmd_data->title_id);
 	if(!WriteFile(filepath, p_tik, header->tik_len))
 		return false;
 
 	// Write tmd file
-	snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/content/title.tmd", installpath, (u32) (tmd_data->title_id >> 32), (u32) tmd_data->title_id);
+	snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/content/title.tmd", installpath, (unsigned int) (tmd_data->title_id >> 32), (unsigned int) tmd_data->title_id);
 	if(!WriteFile(filepath, p_tmd, header->tmd_len))
 		return false;
 
@@ -332,7 +332,7 @@ bool Wad::InstallContents(const char *installpath)
 		}
 		else {
 			// private content
-			snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/content/%08x.app", installpath, (u32) (tmd_data->title_id >> 32), (u32) tmd_data->title_id, content->cid);
+			snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/content/%08x.app", installpath, (unsigned int) (tmd_data->title_id >> 32), (unsigned int) tmd_data->title_id, (unsigned int) content->cid);
 		}
 
 		// Create file
@@ -356,7 +356,7 @@ bool Wad::InstallContents(const char *installpath)
 			return false;
 		}
 
-		snprintf(progressTxt, sizeof(progressTxt), "%s %08x.app", tr("Installing content"), content->cid);
+		snprintf(progressTxt, sizeof(progressTxt), "%s %08x.app", tr("Installing content"), (unsigned int) content->cid);
 
 		// Go to position
 		fseek(pFile, offset, SEEK_SET);
@@ -462,7 +462,7 @@ int Wad::CheckContentMap(const char *installpath, tmd_content *content, char *fi
 	content_map_size++;
 
 	map = (map_entry_t *) content_map;
-	sprintf(map[next_entry].name, "%08x", next_entry);
+	sprintf(map[next_entry].name, "%08x", (unsigned int)next_entry);
 	memcpy(map[next_entry].hash, content->hash, 20);
 
 	// write new content.map
@@ -470,7 +470,7 @@ int Wad::CheckContentMap(const char *installpath, tmd_content *content, char *fi
 	if(!WriteFile(filepath, content_map, content_map_size * sizeof(map_entry_t)))
 		return -1;
 
-	snprintf(filepath, 1024, "%s/shared1/%08x.app", installpath, next_entry);
+	snprintf(filepath, 1024, "%s/shared1/%08x.app", installpath, (unsigned int)next_entry);
 
 	return 0;
 }

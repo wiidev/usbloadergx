@@ -196,6 +196,8 @@ class CSettings
 		short NINVideoOffset;
 		short NINRemlimit;
 		short NINArcadeMode;
+		short NINCCRumble;
+		short NINSkipIPL;
 		s8 NINMCEmulation;
 		short NINMCSize;
 		short NINAutoboot;

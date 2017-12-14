@@ -44,7 +44,7 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
 		return ret;
 	}
 	gprintf("wd_open_disc\n");
-	wiidisc_t *wdisc = wd_open_disc((int(*)(void *, u32, u32, void *)) wbfs_disc_read, disc);
+	wiidisc_t *wdisc = wd_open_disc((s32(*)(void *, u32, u32, void *)) wbfs_disc_read, disc);
 	if (!wdisc)
 	{
 		ResumeGui();
@@ -80,7 +80,7 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
 
 		if (fileext && strcasecmp(fileext, ".dol") == 0)
 		{
-			options.SetName(position, "%s %03i", tr("Offset"), i);
+			options.SetName(position, "%s %03i", tr("Offset"), (int)i);
 			options.SetValue(position, filename);
 			position++;
 		}

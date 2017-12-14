@@ -97,7 +97,7 @@ int split_get_file(split_info_t *s, u32 lba, u32 *sec_count, int fill)
 	int fd;
 	if (lba >= s->total_sec)
 	{
-		fprintf(stderr, "SPLIT: invalid sector %u / %u\n", lba, (u32) s->total_sec);
+		fprintf(stderr, "SPLIT: invalid sector %u / %u\n", (unsigned int)lba, (unsigned int)s->total_sec);
 		return -1;
 	}
 	int idx;
@@ -150,7 +150,7 @@ int split_get_file(split_info_t *s, u32 lba, u32 *sec_count, int fill)
 	return fd;
 }
 
-int split_read_sector(void *_fp, u32 lba, u32 count, void*buf)
+s32 split_read_sector(void *_fp, u32 lba, u32 count, void*buf)
 {
 	split_info_t *s = _fp;
 	int fd;
@@ -166,7 +166,7 @@ int split_read_sector(void *_fp, u32 lba, u32 count, void*buf)
 		fd = split_get_file(s, lba + i, &chunk, 1);
 		if (fd < 0)
 		{
-			fprintf(stderr, "\n\n"FMT_lld" %d %p\n", off, count, _fp);
+			fprintf(stderr, "\n\n"FMT_lld" %d %p\n", off, (int)count, _fp);
 			split_error( "error seeking in disc partition" );
 			return 1;
 		}
@@ -174,7 +174,7 @@ int split_read_sector(void *_fp, u32 lba, u32 count, void*buf)
 		ret = read(fd, ptr, chunk * 512);
 		if (ret != chunk * 512)
 		{
-			fprintf(stderr, "error reading %u %u [%u] %u = %u\n", lba, count, i, chunk, ret);
+			fprintf(stderr, "error reading %u %u [%u] %u = %u\n", (unsigned int)lba, (unsigned int)count, i, (unsigned int)chunk, ret);
 			split_error( "error reading disc" );
 			return 1;
 		}
@@ -182,7 +182,7 @@ int split_read_sector(void *_fp, u32 lba, u32 count, void*buf)
 	return 0;
 }
 
-int split_write_sector(void *_fp, u32 lba, u32 count, void*buf)
+s32 split_write_sector(void *_fp, u32 lba, u32 count, void*buf)
 {
 	split_info_t *s = _fp;
 	int fd;
@@ -200,7 +200,7 @@ int split_write_sector(void *_fp, u32 lba, u32 count, void*buf)
 		//  fprintf(stderr, "WRITE CHUNK %d %d/%d\n", lba+i, chunk, count);
 		if (fd < 0 || !chunk)
 		{
-			fprintf(stderr, "\n\n"FMT_lld" %d %p\n", off, count, _fp);
+			fprintf(stderr, "\n\n"FMT_lld" %d %p\n", off, (int)count, _fp);
 			split_error( "error seeking in disc partition" );
 			return 1;
 		}

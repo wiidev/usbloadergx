@@ -32,7 +32,7 @@ class Wbfs_Fat: public Wbfs
 
 		void AddHeader(struct discHdr *discHeader);
 
-		virtual int GetFragList(u8 *);
+		virtual s32 GetFragList(u8 *);
 		virtual u8 GetFSType(void) { return PART_FS_FAT; }
 
 		static bool CheckLayoutB(char *fname, int len, u8* id, char *fname_title);
@@ -55,7 +55,7 @@ class Wbfs_Fat: public Wbfs
 
 		void mk_gameid_title(struct discHdr *header, char *name, int re_space, int layout);
 
-		static int nop_rw_sector(void *_fp, u32 lba, u32 count, void* buf) { return 0; }
+		static s32 nop_rw_sector(void *_fp, u32 lba, u32 count, void* buf) { return 0; }
 };
 
 #endif //_WBFS_FAT_H

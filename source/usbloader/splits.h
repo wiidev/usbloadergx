@@ -28,8 +28,8 @@ extern "C"
 	int split_open_file(split_info_t *s, int idx);
 	int split_get_file(split_info_t *s, u32 lba, u32 *sec_count, int fill);
 	int split_fill(split_info_t *s, int idx, u64 size);
-	int split_read_sector(void *_fp, u32 lba, u32 count, void*buf);
-	int split_write_sector(void *_fp, u32 lba, u32 count, void*buf);
+	s32 split_read_sector(void *_fp, u32 lba, u32 count, void*buf);
+	s32 split_write_sector(void *_fp, u32 lba, u32 count, void*buf);
 	void split_init(split_info_t *s, char *fname);
 	void split_set_size(split_info_t *s, u64 split_size, u64 total_size);
 	void split_close(split_info_t *s);

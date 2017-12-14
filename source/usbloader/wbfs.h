@@ -33,7 +33,7 @@ extern "C"
 	s32 WBFS_ReIDGame(u8 *discid, const void *newID);
 	u64 WBFS_EstimeGameSize(void);
 
-	int WBFS_GetFragList(u8 *id);
+	s32 WBFS_GetFragList(u8 *id);
 
 	s32 WBFS_OpenAll();
 	s32 WBFS_OpenPart(int part_num);

@@ -497,7 +497,7 @@ s32 wbfs_add_disc(wbfs_t*p, read_wiidisc_callback_t read_src_wii_disc, void *cal
 						break;
 					}
 					//ERROR("read error");
-					printf("\rWARNING: read (%u) error (%d)\n", offset, ret);
+					printf("\rWARNING: read (%u) error (%d)\n", (unsigned int)offset, ret);
 				}
 
 				//fix the partition table
@@ -727,7 +727,7 @@ u32 wbfs_size_disc(wbfs_t*p, read_wiidisc_callback_t read_src_wii_disc, void *ca
 //int (*read_wiidisc_callback_t)(void*fp,u32 offset,u32 count,void*iobuf);
 
 // connect wiidisc to wbfs_disc
-int read_wiidisc_wbfsdisc(void*fp, u32 offset, u32 count, void*iobuf)
+s32 read_wiidisc_wbfsdisc(void*fp, u32 offset, u32 count, void*iobuf)
 {
 	return wbfs_disc_read((wbfs_disc_t*) fp, offset, count, iobuf);
 }

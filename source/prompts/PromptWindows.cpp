@@ -299,13 +299,13 @@ void WindowCredits()
 #ifdef FULLCHANNEL
 	snprintf(SvnRev, sizeof(SvnRev), "Rev%sc   IOS%u (Rev %u)%s", GetRev(), IOS_GetVersion(), IOS_GetRevision(), (*(vu32*)0xcd800064 == 0xFFFFFFFF)? " + AHB" : "" );
 #else
-	snprintf(SvnRev, sizeof(SvnRev), "Rev%s   IOS%u (Rev %u)%s", GetRev(), IOS_GetVersion(), IOS_GetRevision(), (*(vu32*)0xcd800064 == 0xFFFFFFFF)? " + AHB" : "" );
+	snprintf(SvnRev, sizeof(SvnRev), "Rev%s   IOS%u (Rev %u)%s", GetRev(), (unsigned int)IOS_GetVersion(), (int)IOS_GetRevision(), (*(vu32*)0xcd800064 == 0xFFFFFFFF)? " + AHB" : "" );
 #endif
 
 	char IosInfo[80] = "";
 	iosinfo_t * info = IosLoader::GetIOSInfo(IOS_GetVersion());
 	if(info)
-		snprintf(IosInfo, sizeof(IosInfo), "(%s v%i%s base%i)", info->name, info->version, info->versionstring, info->baseios);
+		snprintf(IosInfo, sizeof(IosInfo), "(%s v%i%s base%i)", info->name, (int)info->version, info->versionstring, (int)info->baseios);
 
 	// Check if DIOS MIOS (Lite) is available 
 	char GCInfo[80] = "";

@@ -240,7 +240,7 @@ u64 WBFS_EstimeGameSize(void)
 	return WbfsList[Settings.partition]->EstimateGameSize();
 }
 
-int WBFS_GetFragList(u8 *id)
+s32 WBFS_GetFragList(u8 *id)
 {
 	int part_num = gameList.GetPartitionNumber(id);
 	if(!VALID(part_num))

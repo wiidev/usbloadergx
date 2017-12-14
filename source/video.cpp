@@ -24,7 +24,7 @@
 #include "gecko.h"
 
 #define GP_FIFO_SIZE (256 * 1024 * 3)
-static unsigned int *xfb[2] = { NULL, NULL }; // Double buffered
+static u32 *xfb[2] = { NULL, NULL }; // Double buffered
 static int whichfb = 0; // Switch
 static unsigned char *gp_fifo = NULL;
 Mtx44 FSProjection2D;

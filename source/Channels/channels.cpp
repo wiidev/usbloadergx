@@ -163,7 +163,7 @@ u8 * Channels::GetDol(const u64 &title, u8 *tmdBuffer)
 			if(tmd_file->contents[i].index == tmd_file->boot_index)
 				continue; // Skip loader
 
-			snprintf(filepath, ISFS_MAXPATH, "/title/%08x/%08x/content/%08x.app", high, low, tmd_file->contents[i].cid);
+			snprintf(filepath, ISFS_MAXPATH, "/title/%08x/%08x/content/%08x.app", (unsigned int)high, (unsigned int)low, (unsigned int)tmd_file->contents[i].cid);
 
 			s32 fd = ISFS_Open(filepath, ISFS_OPEN_READ);
 			if(fd < 0)
@@ -191,7 +191,7 @@ u8 * Channels::GetDol(const u64 &title, u8 *tmdBuffer)
 		gprintf("Loading boot content index\n");
 	}
 
-	snprintf(filepath, ISFS_MAXPATH, "/title/%08x/%08x/content/%08x.app", high, low, bootcontent);
+	snprintf(filepath, ISFS_MAXPATH, "/title/%08x/%08x/content/%08x.app", (unsigned int)high, (unsigned int)low, (unsigned int)bootcontent);
 	gprintf("Loading Channel DOL: %s\n", filepath);
 
 	if (NandTitle::LoadFileFromNand(filepath, &buffer, &filesize) < 0)
@@ -255,7 +255,7 @@ u8 *Channels::GetTMD(const u64 &tid, u32 *size, const char *prefix)
 	if(!prefix)
 		prefix = "";
 
-	snprintf(filepath, ISFS_MAXPATH, "%s/title/%08x/%08x/content/title.tmd", prefix, TITLE_UPPER(tid), TITLE_LOWER(tid));
+	snprintf(filepath, ISFS_MAXPATH, "%s/title/%08x/%08x/content/title.tmd", prefix, (unsigned int)TITLE_UPPER(tid), (unsigned int)TITLE_LOWER(tid));
 
 	u8 *tmdBuffer = NULL;
 	u32 tmdSize = 0;
@@ -480,7 +480,7 @@ bool Channels::emuExists(char *tmdpath)
 		return false;
 
 	//! tmdpath has length of 1024
-	snprintf(ptr+1, 1024-(ptr+1-tmdpath), "%08x.app", cid);
+	snprintf(ptr+1, 1024-(ptr+1-tmdpath), "%08x.app", (unsigned int)cid);
 
 	FILE *f = fopen(tmdpath, "rb");
 	if(!f)
@@ -605,7 +605,7 @@ bool Channels::GetEmuChanTitle(char *tmdpath, int language, std::string &Title)
 		return false;
 
 	//! tmdpath has length of 1024
-	snprintf(ptr+1, 1024-(ptr+1-tmdpath), "%08x.app", cid);
+	snprintf(ptr+1, 1024-(ptr+1-tmdpath), "%08x.app", (unsigned int)cid);
 
 	FILE *f = fopen(tmdpath, "rb");
 	if(!f)
@@ -671,13 +671,13 @@ u8 *Channels::GetOpeningBnr(const u64 &title, u32 * outsize, const char *pathPre
 	u32 high = TITLE_UPPER(title);
 	u32 low  = TITLE_LOWER(title);
 
-	char *filepath = (char *) memalign(32, ISFS_MAXPATH);
+	char *filepath = (char *) memalign(32, ISFS_MAXPATH + strlen(pathPrefix));
 	if(!filepath)
 		return NULL;
 
 	do
 	{
-		snprintf(filepath, ISFS_MAXPATH, "%s/title/%08x/%08x/content/title.tmd", pathPrefix, high, low);
+		snprintf(filepath, ISFS_MAXPATH, "%s/title/%08x/%08x/content/title.tmd", pathPrefix, (unsigned int)high, (unsigned int)low);
 
 		u8 *buffer = NULL;
 		u32 filesize = 0;
@@ -712,7 +712,7 @@ u8 *Channels::GetOpeningBnr(const u64 &title, u32 * outsize, const char *pathPre
 		if(!found)
 			break;
 
-		snprintf(filepath, ISFS_MAXPATH, "%s/title/%08x/%08x/content/%08x.app", pathPrefix, high, low, bootcontent);
+		snprintf(filepath, ISFS_MAXPATH, "%s/title/%08x/%08x/content/%08x.app", pathPrefix, (unsigned int)high, (unsigned int)low, (unsigned int)bootcontent);
 
 		if(pathPrefix && *pathPrefix != 0)
 			ret = LoadFileToMem(filepath, &buffer, &filesize);

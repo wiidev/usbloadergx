@@ -71,7 +71,7 @@ bool SystemMenuResources::Init()
 	}
 	// build file path
 	char path[ ISFS_MAXPATH ]__attribute__((aligned( 32 )));
-	sprintf( path, "/title/00000001/00000002/content/%08x.app", contents[ idx ].cid );
+	sprintf( path, "/title/00000001/00000002/content/%08x.app", (unsigned int)contents[ idx ].cid );
 
 	// get resource archive
 	u8* resourceArc = NULL;

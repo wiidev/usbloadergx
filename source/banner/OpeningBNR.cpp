@@ -173,7 +173,7 @@ bool OpeningBNR::LoadWiiBanner(const discHdr * header)
 		if (!disc)
 			return false;
 
-		wiidisc_t *wdisc = wd_open_disc((int(*)(void *, u32, u32, void *)) wbfs_disc_read, disc);
+		wiidisc_t *wdisc = wd_open_disc((s32(*)(void *, u32, u32, void *)) wbfs_disc_read, disc);
 		if (!wdisc)
 		{
 			WBFS_CloseDisc(disc);
@@ -247,7 +247,7 @@ const u16 * OpeningBNR::GetIMETTitle(int lang)
 	return imetHdr->names[lang];
 }
 
-static int GC_Disc_Read(void *fp, u32 offset, u32 count, void*iobuf)
+static s32 GC_Disc_Read(void *fp, u32 offset, u32 count, void*iobuf)
 {
 	if(fp)
 	{

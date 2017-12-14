@@ -203,8 +203,9 @@ void Sys_BackToLoader(void)
 
 #define HBC_HAXX	0x0001000148415858LL
 #define HBC_JODI	0x000100014A4F4449LL
-#define HBC_1_0_7   0x00010001AF1BF516LL
+#define HBC_1_0_7	0x00010001AF1BF516LL
 #define HBC_LULZ	0x000100014c554c5aLL
+#define HBC_OHBC	0x000100014F484243LL
 
 void Sys_LoadHBC(void)
 {
@@ -213,11 +214,13 @@ void Sys_LoadHBC(void)
 	WII_Initialize();
 
 	// Try launching all known HBC titles in reversed released order
+	WII_LaunchTitle(HBC_OHBC);
 	WII_LaunchTitle(HBC_LULZ);
 	WII_LaunchTitle(HBC_1_0_7);
 	WII_LaunchTitle(HBC_JODI);
 	WII_LaunchTitle(HBC_HAXX);
-
+	//Todo : jump to 0x80001800, which is what libogc does when you return from main(), not hardcode any ID, so it works with everything
+	
 	//Back to system menu if all fails
 	SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 }

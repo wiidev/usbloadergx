@@ -43,11 +43,11 @@ private:
 	void RenderHighliter(Mtx &modelview);
 	void UpdateTooltips(void);
 
-	static const float gridwidth = 2048.f;
-	static const float gridheight = 288.f;
+	static constexpr float gridwidth = 2048.f;
+	static constexpr float gridheight = 288.f;
 
-	static const float chanWidth = 128.f;
-	static const float chanHeight = 96.f;
+	static constexpr float chanWidth = 128.f;
+	static constexpr float chanHeight = 96.f;
 
 	const int XOffset;
 	const int YOffset;

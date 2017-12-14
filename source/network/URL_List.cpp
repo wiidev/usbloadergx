@@ -139,7 +139,7 @@ static int ListCompare(const void *a, const void *b)
 	Link_Info *ab = (Link_Info*) a;
 	Link_Info *bb = (Link_Info*) b;
 
-	return stricmp((char *) ab->URL, (char *) bb->URL);
+	return strcasecmp((char *) ab->URL, (char *) bb->URL);
 }
 void URL_List::SortList()
 {

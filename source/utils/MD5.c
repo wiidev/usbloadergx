@@ -364,7 +364,7 @@ auth_md5Ctx *auth_md5SumCtx(auth_md5Ctx *ctx, const unsigned char *src, const in
 		(ctx->b_used)++;
 		if (64 == ctx->b_used)
 		{
-			Permute(ctx->ABCD, ctx->block);
+			Permute((uint32_t *)ctx->ABCD, ctx->block);
 			ctx->b_used = 0;
 		}
 	}
@@ -415,7 +415,7 @@ auth_md5Ctx *auth_md5CloseCtx(auth_md5Ctx *ctx, unsigned char *dst)
 	 */
 	if (56 < ctx->b_used)
 	{
-		Permute(ctx->ABCD, ctx->block);
+		Permute((uint32_t *)ctx->ABCD, ctx->block);
 		for (i = 0; i < 64; i++)
 			ctx->block[i] = 0;
 	}
@@ -429,7 +429,7 @@ auth_md5Ctx *auth_md5CloseCtx(auth_md5Ctx *ctx, unsigned char *dst)
 	for (i = 0; i < 4; i++)
 		ctx->block[56 + i] |= GetLongByte( l, i );
 	ctx->block[60] = ((GetLongByte( ctx->len, 3 ) & 0xE0) >> 5); /* See Above! */
-	Permute(ctx->ABCD, ctx->block);
+	Permute((uint32_t *)ctx->ABCD, ctx->block);
 
 	/* Now copy the result into the output buffer and we're done.
 	 */

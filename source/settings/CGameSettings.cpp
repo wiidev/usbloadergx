@@ -197,7 +197,7 @@ bool CGameSettings::Save()
 		fprintf(f, "iosreloadblock:%d; ", GameList[i].iosreloadblock);
 		fprintf(f, "patchcountrystrings:%d; ", GameList[i].patchcountrystrings);
 		fprintf(f, "loadalternatedol:%d; ", GameList[i].loadalternatedol);
-		fprintf(f, "alternatedolstart:%d; ", GameList[i].alternatedolstart);
+		fprintf(f, "alternatedolstart:%d; ", (int)GameList[i].alternatedolstart);
 		fprintf(f, "alternatedolname:%s; ", GameList[i].alternatedolname.c_str());
 		fprintf(f, "returnTo:%d; ", GameList[i].returnTo);
 		fprintf(f, "sneekVideoPatch:%d; ", GameList[i].sneekVideoPatch);
@@ -223,6 +223,8 @@ bool CGameSettings::Save()
 		fprintf(f, "NINVideoOffset:%d; ", GameList[i].NINVideoOffset);
 		fprintf(f, "NINRemlimit:%d; ", GameList[i].NINRemlimit);
 		fprintf(f, "NINArcadeMode:%d; ", GameList[i].NINArcadeMode);
+		fprintf(f, "NINCCRumble:%d; ", GameList[i].NINCCRumble);
+		fprintf(f, "NINSkipIPL:%d; ", GameList[i].NINSkipIPL);
 		fprintf(f, "NINMCEmulation:%d; ", GameList[i].NINMCEmulation);
 		fprintf(f, "NINMCSize:%d; ", GameList[i].NINMCSize);
 		fprintf(f, "NINUSBHID:%d; ", GameList[i].NINUSBHID);
@@ -439,6 +441,16 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 	else if(strcmp(name, "NINArcadeMode") == 0)
 	{
 		game.NINArcadeMode = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINCCRumble") == 0)
+	{
+		game.NINCCRumble = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINSkipIPL") == 0)
+	{
+		game.NINSkipIPL = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "NINMCEmulation") == 0)
@@ -669,6 +681,8 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.NINVideoOffset = INHERIT - 20;
 	game.NINRemlimit = INHERIT;
 	game.NINArcadeMode = INHERIT;
+	game.NINCCRumble = INHERIT;
+	game.NINSkipIPL = INHERIT;
 	game.NINMCEmulation = INHERIT;
 	game.NINMCSize = INHERIT;
 	game.NINUSBHID = INHERIT;

@@ -849,7 +849,7 @@ void Wbfs_Fat::CleanTitleCharacters(char *title)
 	}
 }
 
-int Wbfs_Fat::GetFragList(u8 *id)
+s32 Wbfs_Fat::GetFragList(u8 *id)
 {
 	char fname[1024];
 

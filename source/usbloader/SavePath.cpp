@@ -35,7 +35,7 @@ void CreateTitleTMD(const char *path, const struct discHdr *hdr)
 	if (!disc)
 		return;
 
-	wiidisc_t *wdisc = wd_open_disc((int(*)(void *, u32, u32, void *)) wbfs_disc_read, disc);
+	wiidisc_t *wdisc = wd_open_disc((s32(*)(void *, u32, u32, void *)) wbfs_disc_read, disc);
 	if (!wdisc)
 	{
 		WBFS_CloseDisc(disc);

@@ -975,7 +975,9 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	u8 ninPal50PatchChoice = game_cfg->NINPal50Patch == INHERIT ? Settings.NINPal50Patch : game_cfg->NINPal50Patch;
 	u8 ninRemlimitChoice = game_cfg->NINRemlimit == INHERIT ? Settings.NINRemlimit : game_cfg->NINRemlimit;
 	u8 ninArcadeModeChoice = game_cfg->NINArcadeMode == INHERIT ? Settings.NINArcadeMode : game_cfg->NINArcadeMode;
-	
+	u8 ninCCRumbleChoice = game_cfg->NINCCRumble == INHERIT ? Settings.NINCCRumble : game_cfg->NINCCRumble;
+	u8 ninSkipIPLChoice = game_cfg->NINSkipIPL == INHERIT ? Settings.NINSkipIPL : game_cfg->NINSkipIPL;
+
 	const char *ninLoaderPath = game_cfg->NINLoaderPath.size() == 0 ? Settings.NINLoaderPath : game_cfg->NINLoaderPath.c_str();
 
 
@@ -1421,7 +1423,11 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		nin_config->Config |= NIN_CFG_WIIU_WIDE; // v2.258+
 	if(ninArcadeModeChoice)
 		nin_config->Config |= NIN_CFG_ARCADE_MODE; // v4.424+ Triforce Arcade Mode
-	
+	if (ninCCRumbleChoice)
+		nin_config->Config |= NIN_CFG_CC_RUMBLE; // v4.424+ Classic Controller Rumble
+	if (ninSkipIPLChoice)
+		nin_config->Config |= NIN_CFG_SKIP_IPL; // v4.424+ Skip Gamecube BIOS
+
 	// Max Pads
 	nin_config->MaxPads = ninMaxPadsChoice; // NIN_CFG_VERSION 2 r42
 	

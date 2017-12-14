@@ -46,14 +46,14 @@ static bool networkHalt = true;
 /****************************************************************************
  * Initialize_Network
  ***************************************************************************/
-void Initialize_Network(void)
+void Initialize_Network(int retries)
 {
 
 	if (networkinitialized) return;
 
 	s32 result;
 
-	result = if_config(IP, NULL, NULL, true);
+	result = if_config(IP, NULL, NULL, true, retries);
 
 	if (result < 0)
 	{
@@ -147,7 +147,7 @@ s32 network_request(s32 connect, const char * request, char * filename)
 	ptr = strstr(buf, "Content-Length:");
 	if (!ptr) return NET_SIZE_UNKNOWN;
 
-	sscanf(ptr, "Content-Length: %u", &size);
+	sscanf(ptr, "Content-Length: %lu", &size);
 	return size;
 }
 

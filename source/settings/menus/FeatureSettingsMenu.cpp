@@ -312,7 +312,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 
 				if(gameList[i]->tid != 0) //! Channels
 				{
-					snprintf(nandPath, sizeof(nandPath), "/title/%08x/%08x/data", (u32) (gameList[i]->tid  >> 32), (u32) gameList[i]->tid );
+					snprintf(nandPath, sizeof(nandPath), "/title/%08x/%08x/data", (unsigned int) (gameList[i]->tid  >> 32), (unsigned int) gameList[i]->tid );
 					snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuChanPath, nandPath);
 				}
 				else //! Wii games

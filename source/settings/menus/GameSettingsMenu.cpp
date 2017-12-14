@@ -161,7 +161,7 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 			char nandPath[512];
 			if(DiscHeader->tid != 0) //! Channels
 			{
-				snprintf(nandPath, sizeof(nandPath), "/title/%08x/%08x/data", (u32) (DiscHeader->tid >> 32), (u32) DiscHeader->tid);
+				snprintf(nandPath, sizeof(nandPath), "/title/%08x/%08x/data", (unsigned int) (DiscHeader->tid >> 32), (unsigned int) DiscHeader->tid);
 				snprintf(filePath, sizeof(filePath), "%s%s", Settings.NandEmuChanPath, nandPath);
 			}
 			else //! Wii games

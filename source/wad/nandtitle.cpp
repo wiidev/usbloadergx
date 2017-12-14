@@ -127,8 +127,8 @@ bool NandTitle::GetName(u64 tid, int language, wchar_t* name)
 		return false;
 	}
 
-	snprintf(app, sizeof(app), "/title/%08x/%08x/content/%08x.app", TITLE_UPPER( tid ), TITLE_LOWER( tid ),
-			titleTmd->contents[i].cid);
+	snprintf(app, sizeof(app), "/title/%08x/%08x/content/%08x.app", (unsigned int)TITLE_UPPER( tid ), (unsigned int)TITLE_LOWER( tid ),
+		(unsigned int)titleTmd->contents[i].cid);
 	//gprintf("%s\n", app );
 
 	if (language > CONF_LANG_KOREAN) language = CONF_LANG_ENGLISH;
@@ -212,8 +212,8 @@ bool NandTitle::Exists(u64 tid)
 	}
 	if (!ok) return false;
 
-	snprintf(app, sizeof(app), "/title/%08x/%08x/content/%08x.app", TITLE_UPPER( tid ), TITLE_LOWER( tid ),
-			titleTmd->contents[i].cid);
+	snprintf(app, sizeof(app), "/title/%08x/%08x/content/%08x.app", (unsigned int)TITLE_UPPER( tid ), (unsigned int)TITLE_LOWER( tid ),
+		(unsigned int)titleTmd->contents[i].cid);
 	s32 fd = ISFS_Open(app, ISFS_OPEN_READ);
 	if (fd >= 0) ISFS_Close(fd);
 

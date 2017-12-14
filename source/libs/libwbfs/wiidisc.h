@@ -11,7 +11,7 @@ extern "C"
 #endif
 	// callback definition. Return 1 on fatal error (callback is supposed to make retries until no hopes..)
 	// offset points 32bit words, count counts bytes
-	typedef int (*read_wiidisc_callback_t)(void*fp, u32 offset, u32 count, void*iobuf);
+	typedef s32 (*read_wiidisc_callback_t)(void*fp, u32 offset, u32 count, void*iobuf);
 
 	typedef enum
 	{

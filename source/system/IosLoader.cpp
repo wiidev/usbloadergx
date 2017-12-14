@@ -600,7 +600,7 @@ iosinfo_t *IosLoader::GetIOSInfo(s32 ios)
 		return NULL;
 	}
 
-	snprintf(filepath, sizeof(filepath), "/title/%08x/%08x/content/%08x.app", 0x00000001, ios, *(u8 *)((u32)TMD+0x1E7));
+	snprintf(filepath, sizeof(filepath), "/title/%08x/%08x/content/%08x.app", 0x00000001, (unsigned int)ios, (unsigned int)(*(u8 *)((u32)TMD+0x1E7)));
 
 	free(TMD);
 

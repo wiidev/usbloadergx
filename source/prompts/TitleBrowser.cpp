@@ -170,7 +170,7 @@ bool TitleSelector(char output[])
 			if (r < num_titles)
 			{
 				u64 tid = titleList[r];
-				sprintf(output, "%08x", TITLE_LOWER( tid ));
+				sprintf(output, "%08x", (unsigned int)TITLE_LOWER( tid ));
 			}
 			else output[0] = 0;
 			ret = true;

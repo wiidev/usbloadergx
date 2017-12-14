@@ -47,6 +47,8 @@ typedef struct _GameCFG
 	short NINVideoOffset;
 	short NINRemlimit;
 	short NINArcadeMode;
+	short NINCCRumble;
+	short NINSkipIPL;
 	short NINMCEmulation;
 	short NINMCSize;
 	short NINUSBHID;

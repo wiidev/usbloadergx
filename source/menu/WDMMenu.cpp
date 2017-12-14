@@ -187,7 +187,7 @@ void WDMMenu::CheckGameFiles(const struct discHdr * header)
 		return;
 	}
 
-	wiidisc_t *wdisc = wd_open_disc((int(*)(void *, u32, u32, void *)) wbfs_disc_read, disc);
+	wiidisc_t *wdisc = wd_open_disc((s32(*)(void *, u32, u32, void *)) wbfs_disc_read, disc);
 	if (!wdisc)
 	{
 		WindowPrompt(tr( "ERROR:" ), tr( "Could not open Disc" ), tr( "OK" ));

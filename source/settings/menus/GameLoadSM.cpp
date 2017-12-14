@@ -355,9 +355,9 @@ void GameLoadSM::SetOptionValues()
 		else
 		{
 			if(GameConfig.alternatedolname.size() != 0)
-				Options->SetValue(Idx++, "%i <%s>", GameConfig.alternatedolstart, GameConfig.alternatedolname.c_str());
+				Options->SetValue(Idx++, "%i <%s>", (int)GameConfig.alternatedolstart, GameConfig.alternatedolname.c_str());
 			else
-				Options->SetValue(Idx++, "%i", GameConfig.alternatedolstart);
+				Options->SetValue(Idx++, "%i", (int)GameConfig.alternatedolstart);
 		}
 	}
 }
@@ -612,7 +612,7 @@ int GameLoadSM::GetMenuInternal()
 			{
 				GameConfig.alternatedolname = tmp;
 				GameConfig.alternatedolstart = res;
-				snprintf(tmp, sizeof(tmp), "%s %.6s - %i", tr( "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team." ), (char *) GameConfig.id, GameConfig.alternatedolstart);
+				snprintf(tmp, sizeof(tmp), "%s %.6s - %i", tr( "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team." ), (char *) GameConfig.id, (int)GameConfig.alternatedolstart);
 				WindowPrompt(0, tmp, tr( "OK" ));
 			}
 

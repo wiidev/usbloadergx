@@ -188,10 +188,12 @@ void CSettings::SetDefault()
 	NINDeflicker = OFF;
 	NINPal50Patch = OFF;
 	NINWiiUWide = widescreen;
-	NINVideoScale = 40;
+	NINVideoScale = 0;
 	NINVideoOffset = 0;
 	NINRemlimit = OFF;
 	NINArcadeMode = OFF;
+	NINCCRumble = OFF;
+	NINSkipIPL = OFF;
 	NINMCEmulation = ON;
 	NINMCSize = 2;
 	NINAutoboot = ON;
@@ -357,9 +359,9 @@ bool CSettings::Save()
 	fprintf(file, "ShowFreeSpace = %d\n", ShowFreeSpace);
 	fprintf(file, "InstallToDir = %d\n", InstallToDir);
 	fprintf(file, "GameSplit = %d\n", GameSplit);
-	fprintf(file, "InstallPartitions = %08X\n", InstallPartitions);
+	fprintf(file, "InstallPartitions = %08X\n", (unsigned int)InstallPartitions);
 	fprintf(file, "PlaylogUpdate = %d\n", PlaylogUpdate);
-	fprintf(file, "ParentalBlocks = %08X\n", ParentalBlocks);
+	fprintf(file, "ParentalBlocks = %08X\n", (unsigned int)ParentalBlocks);
 	fprintf(file, "returnTo = %s\n", returnTo);
 	fprintf(file, "HomeMenu = %d\n", HomeMenu);
 	fprintf(file, "MultiplePartitions = %d\n", MultiplePartitions);
@@ -373,7 +375,7 @@ bool CSettings::Save()
 	fprintf(file, "EnabledCategories = ");
 	for(u32 i = 0; i < EnabledCategories.size(); ++i)
 	{
-		fprintf(file, "%i", EnabledCategories[i]);
+		fprintf(file, "%i", (int)EnabledCategories[i]);
 		if(i+1 < EnabledCategories.size())
 			fprintf(file, ",");
 	}
@@ -381,7 +383,7 @@ bool CSettings::Save()
 	fprintf(file, "RequiredCategories = ");
 	for(u32 i = 0; i < RequiredCategories.size(); ++i)
 	{
-		fprintf(file, "%i", RequiredCategories[i]);
+		fprintf(file, "%i", (int)RequiredCategories[i]);
 		if(i+1 < RequiredCategories.size())
 			fprintf(file, ",");
 	}
@@ -389,7 +391,7 @@ bool CSettings::Save()
 	fprintf(file, "ForbiddenCategories = ");
 	for(u32 i = 0; i < ForbiddenCategories.size(); ++i)
 	{
-		fprintf(file, "%i", ForbiddenCategories[i]);
+		fprintf(file, "%i", (int)ForbiddenCategories[i]);
 		if(i+1 < ForbiddenCategories.size())
 			fprintf(file, ",");
 	}
@@ -449,6 +451,8 @@ bool CSettings::Save()
 	fprintf(file, "NINVideoOffset = %d\n", NINVideoOffset);
 	fprintf(file, "NINRemlimit = %d\n", NINRemlimit);
 	fprintf(file, "NINArcadeMode = %d\n", NINArcadeMode);
+	fprintf(file, "NINCCRumble = %d\n", NINCCRumble);
+	fprintf(file, "NINSkipIPL = %d\n", NINSkipIPL);
 	fprintf(file, "NINMCEmulation = %d\n", NINMCEmulation);
 	fprintf(file, "NINMCSize = %d\n", NINMCSize);
 	fprintf(file, "NINAutoboot = %d\n", NINAutoboot);
@@ -972,6 +976,16 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "NINArcadeMode") == 0)
 	{
 		NINArcadeMode = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINCCRumble") == 0)
+	{
+		NINCCRumble = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINSkipIPL") == 0)
+	{
+		NINSkipIPL = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "NINMCEmulation") == 0)

@@ -12,7 +12,7 @@
 #define NET_SIZE_UNKNOWN	   -0xFFFFFFF
 #define NET_DEFAULT_SOCK	   -0xFFFFFFE
 
-void Initialize_Network(void);
+void Initialize_Network(int retries = 0);
 void DeinitNetwork(void);
 bool IsNetworkInit(void);
 char * GetNetworkIP(void);

@@ -140,11 +140,11 @@ int UninstallSM::GetMenuInternal()
 		else if(DiscHeader->type == TYPE_GAME_EMUNANDCHAN && DiscHeader->tid != 0)
 		{
 			// Remove ticket
-			snprintf(filepath, sizeof(filepath), "%s/ticket/%08x/%08x.tik", Settings.NandEmuChanPath, (u32) (DiscHeader->tid >> 32), (u32) DiscHeader->tid);
+			snprintf(filepath, sizeof(filepath), "%s/ticket/%08x/%08x.tik", Settings.NandEmuChanPath, (unsigned int) (DiscHeader->tid >> 32), (unsigned int) DiscHeader->tid);
 			RemoveFile(filepath);
 
 			// Remove contents / data
-			snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/", Settings.NandEmuChanPath, (u32) (DiscHeader->tid >> 32), (u32) DiscHeader->tid);
+			snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/", Settings.NandEmuChanPath, (unsigned int) (DiscHeader->tid >> 32), (unsigned int) DiscHeader->tid);
 			RemoveDirectory(filepath);
 
 			Channels::Instance()->GetEmuChannelList();

@@ -198,6 +198,8 @@ void GCGameLoadSM::SetOptionNames()
 		Options->SetName(Idx++, "%s", tr( "Ocarina" ));
 		Options->SetName(Idx++, "%s", tr( "Remove Read Speed Limit" ));
 		Options->SetName(Idx++, "%s", tr( "Triforce Arcade Mode" ));
+		Options->SetName(Idx++, "%s", tr("CC Rumble"));
+		Options->SetName(Idx++, "%s", tr("Skip IPL"));
 		Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
 		Options->SetName(Idx++, "%s", tr( "Memory Card Blocks Size" ));
 		Options->SetName(Idx++, "%s", tr( "USB-HID Controller" ));
@@ -401,6 +403,18 @@ void GCGameLoadSM::SetOptionValues()
 			Options->SetValue(Idx++, tr("Use global"));
 		else
 			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINArcadeMode]));
+
+		//! Settings: NIN CC Rumble
+		if (GameConfig.NINCCRumble == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINCCRumble]));
+
+		//! Settings: NIN Skip IPL
+		if (GameConfig.NINSkipIPL == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINSkipIPL]));
 
 		//! Settings: NIN Memory Card Emulation
 		if(GameConfig.NINMCEmulation == INHERIT)
@@ -741,6 +755,18 @@ int GCGameLoadSM::GetMenuInternal()
 	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
 	{
 		if (++GameConfig.NINArcadeMode >= MAX_ON_OFF) GameConfig.NINArcadeMode = INHERIT;
+	}
+
+	//! Settings: NIN CC Rumble
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.NINCCRumble >= MAX_ON_OFF) GameConfig.NINCCRumble = INHERIT;
+	}
+
+	//! Settings: NIN Skip IPL
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.NINSkipIPL >= MAX_ON_OFF) GameConfig.NINSkipIPL = INHERIT;
 	}
 
 	//! Settings: NIN Memory Card Emulation
