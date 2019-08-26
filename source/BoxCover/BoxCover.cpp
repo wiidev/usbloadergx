@@ -87,7 +87,7 @@ BoxCover::~BoxCover()
 //! Remove me later
 void BoxCover::WiiPADControl(GuiTrigger *t)
 {
-	if((t->wpad.btns_d & WPAD_BUTTON_A) || (t->wpad.btns_h & WPAD_CLASSIC_BUTTON_A) || (t->wupcdata.btns_h & WPAD_CLASSIC_BUTTON_A) || (t->pad.btns_h & PAD_BUTTON_A))
+	if((t->wpad.btns_d & WPAD_BUTTON_A) || (t->wpad.btns_h & WPAD_CLASSIC_BUTTON_A) || (t->pad.btns_h & PAD_BUTTON_A))
 	{
 		if(t->wpad.ir.valid)
 		{
@@ -128,13 +128,13 @@ void BoxCover::WiiPADControl(GuiTrigger *t)
 		else
 			moveChan = -1;
 	}
-	else if(((t->wpad.btns_h & WPAD_BUTTON_A) || (t->wpad.btns_h & WPAD_CLASSIC_BUTTON_A) || (t->wupcdata.btns_h & WPAD_CLASSIC_BUTTON_A) || (t->pad.btns_h & PAD_BUTTON_A)) && moveChan == t->chan && t->wpad.ir.valid && !effects)
+	else if(((t->wpad.btns_h & WPAD_BUTTON_A) || (t->wpad.btns_h & WPAD_CLASSIC_BUTTON_A) || (t->pad.btns_h & PAD_BUTTON_A)) && moveChan == t->chan && t->wpad.ir.valid && !effects)
 	{
 		movePosX = (t->wpad.ir.x-moveStartPosX) * fabs(PosZ)/3400.f;
 		movePosY = (moveStartPosY-t->wpad.ir.y) * fabs(PosZ)/3400.f;
 		last_manual_move_frame = frameCount;
 	}
-	else if(!(t->wpad.btns_h & WPAD_BUTTON_A) && !(t->wpad.btns_h & WPAD_CLASSIC_BUTTON_A) && !(t->wupcdata.btns_h & WPAD_CLASSIC_BUTTON_A) && !(t->pad.btns_h & PAD_BUTTON_A) && moveChan == t->chan)
+	else if(!(t->wpad.btns_h & WPAD_BUTTON_A) && !(t->wpad.btns_h & WPAD_CLASSIC_BUTTON_A) && !(t->pad.btns_h & PAD_BUTTON_A) && moveChan == t->chan)
 	{
 		if(moveChan >= 0 && moveChan < 4)
 		{
@@ -144,27 +144,27 @@ void BoxCover::WiiPADControl(GuiTrigger *t)
 		}
 	}
 
-	if((t->wpad.btns_h & WPAD_BUTTON_UP) || (t->pad.substickY > PADCAL) || (t->wupcdata.substickY > WUPCCAL))
+	if((t->wpad.btns_h & WPAD_BUTTON_UP) || (t->pad.substickY > PADCAL) )
 	{
 		RotX -= 2.0f;
 		last_manual_move_frame = frameCount;
 	}
-	if((t->wpad.btns_h & WPAD_BUTTON_DOWN) || (t->pad.substickY < -PADCAL) || (t->wupcdata.substickY < -WUPCCAL))
+	if((t->wpad.btns_h & WPAD_BUTTON_DOWN) || (t->pad.substickY < -PADCAL) )
 	{
 		RotX += 2.0f;
 		last_manual_move_frame = frameCount;
 	}
-	if((t->wpad.btns_h & WPAD_BUTTON_LEFT) || (t->pad.substickX < -PADCAL) || (t->wupcdata.substickX < -WUPCCAL))
+	if((t->wpad.btns_h & WPAD_BUTTON_LEFT) || (t->pad.substickX < -PADCAL) )
 	{
 		RotY -= 2.0f;
 		last_manual_move_frame = frameCount;
 	}
-	if((t->wpad.btns_h & WPAD_BUTTON_RIGHT) || (t->pad.substickX > PADCAL) || (t->wupcdata.substickX > WUPCCAL))
+	if((t->wpad.btns_h & WPAD_BUTTON_RIGHT) || (t->pad.substickX > PADCAL) )
 	{
 		RotY += 2.0f;
 		last_manual_move_frame = frameCount;
 	}
-	if((t->wpad.btns_d & WPAD_BUTTON_2) || (t->pad.btns_d & PAD_BUTTON_X) || (t->wpad.btns_d & WPAD_CLASSIC_BUTTON_X) || (t->wupcdata.btns_d & WPAD_CLASSIC_BUTTON_X))
+	if((t->wpad.btns_d & WPAD_BUTTON_2) || (t->pad.btns_d & PAD_BUTTON_X) || (t->wpad.btns_d & WPAD_CLASSIC_BUTTON_X) )
 	{
 		if(RotY < 180.0f)
 			SetEffect(EFFECT_BOX_ROTATE_X, 10, 180);
@@ -172,12 +172,12 @@ void BoxCover::WiiPADControl(GuiTrigger *t)
 			SetEffect(EFFECT_BOX_ROTATE_X, -10, -180);
 		last_manual_move_frame = frameCount;
 	}
-	if((t->wpad.btns_h & WPAD_BUTTON_PLUS) || (t->pad.btns_h & PAD_TRIGGER_R) || (t->wpad.btns_h & WPAD_CLASSIC_BUTTON_FULL_R) || (t->wupcdata.btns_h & WPAD_CLASSIC_BUTTON_FULL_R))
+	if((t->wpad.btns_h & WPAD_BUTTON_PLUS) || (t->pad.btns_h & PAD_TRIGGER_R) || (t->wpad.btns_h & WPAD_CLASSIC_BUTTON_FULL_R) )
 	{
 		if(PosZ < -2.8f)
 			PosZ += 0.4f*fabs(PosZ)/19.f;
 	}
-	if((t->wpad.btns_h & WPAD_BUTTON_MINUS) || (t->pad.btns_h & PAD_TRIGGER_L) || (t->wpad.btns_h & WPAD_CLASSIC_BUTTON_FULL_L) || (t->wupcdata.btns_h & WPAD_CLASSIC_BUTTON_FULL_L))
+	if((t->wpad.btns_h & WPAD_BUTTON_MINUS) || (t->pad.btns_h & PAD_TRIGGER_L) || (t->wpad.btns_h & WPAD_CLASSIC_BUTTON_FULL_L) )
 	{
 		if(PosZ > -43.0f)
 			PosZ -= 0.4f*fabs(PosZ)/19.f;

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-19 14:43+0200\n"
+"POT-Creation-Date: 2019-06-15 16:02+0200\n"
 "PO-Revision-Date: 2011-09-11 12:19+0100\n"
 "Last-Translator: Zonta85\n"
 "Language-Team: Zonta85 (zonta_85@hotmail.it)\n"
@@ -100,6 +100,9 @@ msgstr "Copertine 3D"
 
 msgid "4 (Adults Only 18+)"
 msgstr "4 (Maggiorenni 18+)"
+
+msgid "480p Pixel Fix Patch"
+msgstr ""
 
 msgid "5 min"
 msgstr "5 minuti"
@@ -1301,7 +1304,7 @@ msgstr "Luglio"
 msgid "June"
 msgstr "Giugno"
 
-msgid"KPAD Read"
+msgid "KPAD Read"
 msgstr "KPAD Read"
 
 msgid "Keyboard"
@@ -2116,6 +2119,9 @@ msgstr "Questa versione di Nintendont non è correttamente supportata. Autoboot 
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "Questo gioco contiene più di un disco. Selezione quello da avviare."
 
+msgid "This patch might not work with all games. If a game doesn't boot, disable it in individual game settings menu."
+msgstr ""
+
 msgid "This path must be on SD!"
 msgstr "Questo percorso deve essere sulla SD!"
 
@@ -2495,11 +2501,11 @@ msgstr "di"
 msgid "seconds left"
 msgstr "secondi rimasti"
 
-msgid "Plugins Default Partition"
-msgstr "Partizione predefinita Plugins"
+#~ msgid "Plugins Default Partition"
+#~ msgstr "Partizione predefinita Plugins"
 
-msgid "Plugin Files Path"
-msgstr "Percorso files Plugin"
+#~ msgid "Plugin Files Path"
+#~ msgstr "Percorso files Plugin"
 
 #~ msgid "Install WAD to EmuNand"
 #~ msgstr "Installa WAD nella NAND emulata"

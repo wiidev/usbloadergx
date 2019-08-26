@@ -444,7 +444,7 @@ void GuiButton::Update(GuiTrigger * t)
 	// button triggers
 	if (this->IsClickable() && scrollison == 0)
 	{
-		s32 wm_btns, wm_btns_trig, cc_btns, cc_btns_trig, wupc_btns, wupc_btns_trig;
+		s32 wm_btns, wm_btns_trig, cc_btns, cc_btns_trig;
 		for (int i = 0; i < 6; i++)
 		{
 			if (trigger[i] && (trigger[i]->chan == -1 || trigger[i]->chan == t->chan))
@@ -457,15 +457,9 @@ void GuiButton::Update(GuiTrigger * t)
 				cc_btns = t->wpad.btns_d >> 16;
 				cc_btns_trig = trigger[i]->wpad.btns_d >> 16;
 				
-				// lower 16 bits only (WiiU Pro controller)
-				wupc_btns = t->wupcdata.btns_d >> 16;
-				wupc_btns_trig = trigger[i]->wupcdata.btns_d >> 16;
-
-
 				if( ((t->wpad.btns_d > 0 && wm_btns == wm_btns_trig) 
 					|| (t->wpad.exp.type == WPAD_EXP_CLASSIC && cc_btns == cc_btns_trig))
-					|| (t->pad.btns_d > 0 && t->pad.btns_d == trigger[i]->pad.btns_d)
-					|| (t->wupcdata.btns_d > 0 && wupc_btns == wupc_btns_trig))
+					|| (t->pad.btns_d > 0 && t->pad.btns_d == trigger[i]->pad.btns_d))
 				{
 					if (t->chan == stateChan || stateChan == -1)
 					{
@@ -489,7 +483,7 @@ void GuiButton::Update(GuiTrigger * t)
 	if (this->IsHoldable())
 	{
 		bool held = false;
-		s32 wm_btns, wm_btns_h, wm_btns_trig, cc_btns, cc_btns_h, cc_btns_trig, wupc_btns, wupc_btns_h, wupc_btns_trig;
+		s32 wm_btns, wm_btns_h, wm_btns_trig, cc_btns, cc_btns_h, cc_btns_trig;
 
 		for (int i = 0; i < 6; i++)
 		{
@@ -505,15 +499,9 @@ void GuiButton::Update(GuiTrigger * t)
 				cc_btns_h = t->wpad.btns_h >> 16;
 				cc_btns_trig = trigger[i]->wpad.btns_h >> 16;
 				
-				// lower 16 bits only (WiiU Pro controller)
-				wupc_btns = t->wupcdata.btns_d >> 16;
-				wupc_btns_h = t->wupcdata.btns_h >> 16;
-				wupc_btns_trig = trigger[i]->wupcdata.btns_h >> 16;
-
 				if( (t->wpad.btns_d > 0 && wm_btns == wm_btns_trig) 
 					|| (t->wpad.exp.type == WPAD_EXP_CLASSIC && cc_btns == cc_btns_trig)
-					|| (t->pad.btns_d > 0 && t->pad.btns_d == trigger[i]->pad.btns_d)
-					|| (t->wupcdata.btns_d > 0 && wupc_btns == wupc_btns_trig))
+					|| (t->pad.btns_d > 0 && t->pad.btns_d == trigger[i]->pad.btns_d))
 				{
 					if (trigger[i]->type == TRIGGER_HELD && state == STATE_SELECTED && (t->chan == stateChan || stateChan == -1))
 						this->SetState(STATE_CLICKED, t->chan);
@@ -522,7 +510,6 @@ void GuiButton::Update(GuiTrigger * t)
 				if( (t->wpad.btns_h > 0 && wm_btns_h == wm_btns_trig) 
 					|| (t->wpad.exp.type == WPAD_EXP_CLASSIC && cc_btns_h == cc_btns_trig)
 					|| (t->pad.btns_h > 0 && t->pad.btns_h == trigger[i]->pad.btns_h)
-					|| (t->wupcdata.btns_h > 0 && wupc_btns_h == wupc_btns_trig)
 				)
 				{
 					if (trigger[i]->type == TRIGGER_HELD)

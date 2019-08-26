@@ -10,7 +10,7 @@
 #include "wad/nandtitle.h"
 #include "SystemMenu/SystemMenuResources.h"
 #include "system/IosLoader.h"
-#include "system/runtimeiospatch.h"
+#include "libs/libruntimeiospatch/runtimeiospatch.h"
 #include "utils/timer.h"
 #include "settings/CSettings.h"
 #include "settings/CGameSettings.h"
@@ -24,6 +24,8 @@
 #include "utils/tools.h"
 #include "sys.h"
 #include "svnrev.h"
+
+extern bool isWiiVC; // in sys.cpp
 
 StartUpProcess::StartUpProcess()
 {
@@ -55,7 +57,7 @@ StartUpProcess::StartUpProcess()
 	versionTxt->SetTextf("v3.0  Rev. %s", GetRev());
 #endif
 
-#if 0 // enable if you release a modded version
+#if 1 // enable if you release a modded version - enabled by default to differentiate official releases
 	versionTxt->SetTextf("v3.0  Rev. %s mod", GetRev());
 #endif
 
@@ -267,7 +269,8 @@ int StartUpProcess::Execute()
 	SetTextf("Initialize sd card\n");
 	DeviceHandler::Instance()->MountSD();
 
-	if(Settings.USBAutoMount == ON)
+	// Do not mount USB if not needed. USB is not available with WiiU WiiVC injected channel.
+	if(Settings.USBAutoMount == ON && !isWiiVC)
 	{
 		SetTextf("Initialize usb device\n");
 		USBSpinUp();
@@ -283,7 +286,9 @@ int StartUpProcess::Execute()
 	gprintf("\tLoading game categories...%s\n", GameCategories.Load(Settings.ConfigPath) ? "done" : "failed");
 	if(Settings.CacheTitles)
 		gprintf("\tLoading cached titles...%s\n", GameTitles.ReadCachedTitles(Settings.titlestxt_path) ? "done" : "failed (using default)");
-	if(Settings.LoaderIOS != IOS_GetVersion())
+	
+	// Reload to user's settings if different than current IOS, and if not using an injected WiiU WiiVC IOS255 (fw.img)
+	if(Settings.LoaderIOS != IOS_GetVersion() && !isWiiVC)
 	{
 		SetTextf("Reloading to config file's cIOS...\n");
 		
@@ -294,7 +299,6 @@ int StartUpProcess::Execute()
 
 		// Shut down pads
 		WPAD_Shutdown();
-		WUPC_Shutdown();
 
 		// Loading now the cios setup in the settings
 		IosLoader::LoadAppCios();
@@ -320,7 +324,7 @@ int StartUpProcess::Execute()
 	}
 	else if(Settings.USBPort == 1 && USBStorage2_GetPort() != Settings.USBPort)
 	{
-		if(Settings.USBAutoMount == ON)
+		if(Settings.USBAutoMount == ON && !isWiiVC)
 		{
 			SetTextf("Changing USB Port to %i\n", Settings.USBPort);
 			DeviceHandler::Instance()->UnMountAllUSB();
@@ -329,18 +333,18 @@ int StartUpProcess::Execute()
 	}
 	else if(Settings.USBPort == 2)
 	{
-		if(Settings.USBAutoMount == ON)
+		if(Settings.USBAutoMount == ON && !isWiiVC)
 		{
 			SetTextf("Mounting USB Port to 1\n");
 			DeviceHandler::Instance()->MountUSBPort1();
 		}
 	}
 	
-	// enable isfs permission if using IOS+AHB or Hermes v4
-	if(IOS_GetVersion() < 200 || (IosLoader::IsHermesIOS() && IOS_GetRevision() == 4))
+	// enable isfs permission if using Hermes v4 without AHB, or WiiU WiiVC (IOS255 fw.img)
+	if(IOS_GetVersion() < 200 || (IosLoader::IsHermesIOS() && IOS_GetRevision() == 4) || isWiiVC)
 	{
 		SetTextf("Patching %sIOS%d...\n", IOS_GetVersion() >= 200 ? "c" : "", IOS_GetVersion());
-		if (IosPatch_RUNTIME(true, false, false, false) == ERROR_PATCH)
+		if (IosPatch_RUNTIME(!isWiiVC, false, false, isWiiVC, false) == ERROR_PATCH)
 			gprintf("Patching %sIOS%d failed!\n", IOS_GetVersion() >= 200 ? "c" : "", IOS_GetVersion());
 		else
 			NandTitles.Get(); // get NAND channel's titles

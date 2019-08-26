@@ -439,7 +439,7 @@ void GuiScrollbar::ScrollByButton(GuiTrigger *t)
 	if(!t->wpad.ir.valid || ScrollState < ButtonScrollSpeed-ButtonScrollSpeed*fabs(pressedPosition-t->wpad.ir.y)/250.f)
 		return;
 
-	if(pressedChan == -1 && ((t->wpad.btns_d & ButtonScroll) || (t->wupcdata.btns_d & ButtonScroll) ) &&
+	if(pressedChan == -1 && (t->wpad.btns_d & ButtonScroll) &&
 	   parentElement && parentElement->IsInside(t->wpad.ir.x, t->wpad.ir.y))
 	{
 		pressedPosition = t->wpad.ir.y;
@@ -447,7 +447,7 @@ void GuiScrollbar::ScrollByButton(GuiTrigger *t)
 		oneButtonScrollImg->SetPosition(t->wpad.ir.x-oneButtonScrollImg->GetWidth()/2, t->wpad.ir.y-oneButtonScrollImg->GetHeight()/2);
 	}
 
-	if(pressedChan == t->chan && ((t->wpad.btns_h & ButtonScroll) || (t->wupcdata.btns_h & ButtonScroll) ))
+	if(pressedChan == t->chan && (t->wpad.btns_h & ButtonScroll) )
 	{
 		if(pressedPosition-oneButtonScrollImg->GetHeight()/2 > t->wpad.ir.y)
 			ScrollOneUp();
@@ -458,7 +458,7 @@ void GuiScrollbar::ScrollByButton(GuiTrigger *t)
 		listChanged(SelItem, SelInd);
 	}
 
-	if(pressedChan == t->chan && !t->wpad.btns_d && !t->wpad.btns_h && !t->wupcdata.btns_d && !t->wupcdata.btns_h)
+	if(pressedChan == t->chan && !t->wpad.btns_d && !t->wpad.btns_h)
 	{
 		pressedChan = -1;
 		pressedPosition = -1;

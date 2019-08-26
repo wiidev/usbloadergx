@@ -95,6 +95,7 @@ class CSettings
 		short ocarina;
 		short videopatch;
 		short videoPatchDol;
+		short patchFix480p;
 		short sinfo;
 		short hddinfo;
 		short rumble;

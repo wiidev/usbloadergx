@@ -46,6 +46,13 @@ void wiilight(int enable) // Toggle wiilight (thanks Bool for wiilight source)
 u8 shutdown = 0;
 u8 reset = 0;
 
+/* 
+ * True if running from a WiiU Wii Virtual console channel. 
+ * Checked when initializing gamepad in input.c
+ * Thanks to Fix94
+ */
+bool isWiiVC = false;
+
 void __Sys_ResetCallback(void)
 {
 	/* Reboot console */
@@ -302,5 +309,5 @@ void ScreenShot()
  */
 bool isWiiU()
 {
-	return ((*(vu32*)(0xCD8005A0) >> 16 ) == 0xCAFE);
+	return (((*(vu32*)(0xCD8005A0) >> 16 ) == 0xCAFE) || isWiiVC);
 }

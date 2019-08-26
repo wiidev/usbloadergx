@@ -184,14 +184,13 @@ void GuiFileBrowser::Update(GuiTrigger * t)
 
 	if((t->wpad.btns_d & (WPAD_BUTTON_B | WPAD_BUTTON_DOWN | WPAD_BUTTON_UP | WPAD_BUTTON_LEFT | WPAD_BUTTON_RIGHT |
 						  WPAD_CLASSIC_BUTTON_B | WPAD_CLASSIC_BUTTON_UP | WPAD_CLASSIC_BUTTON_DOWN | WPAD_CLASSIC_BUTTON_LEFT | WPAD_CLASSIC_BUTTON_RIGHT)) ||
-		(t->pad.btns_d & (PAD_BUTTON_UP | PAD_BUTTON_DOWN)) ||
-		(t->wupcdata.btns_d & (WPAD_CLASSIC_BUTTON_B | WPAD_CLASSIC_BUTTON_UP | WPAD_CLASSIC_BUTTON_DOWN | WPAD_CLASSIC_BUTTON_LEFT | WPAD_CLASSIC_BUTTON_RIGHT)))
+		(t->pad.btns_d & (PAD_BUTTON_UP | PAD_BUTTON_DOWN)))
 		pressedChan = t->chan;
 
 	if(browser->browserList.size() > FILEBROWSERSIZE)
 		scrollBar.Update(t);
 
-	if(pressedChan == -1 || (!t->wpad.btns_h && !t->pad.btns_h && !t->wupcdata.btns_h))
+	if(pressedChan == -1 || (!t->wpad.btns_h && !t->pad.btns_h))
 	{
 		for (int i = 0; i < FILEBROWSERSIZE; i++)
 		{
@@ -208,7 +207,7 @@ void GuiFileBrowser::Update(GuiTrigger * t)
 	}
 
 
-	if(pressedChan == t->chan && !t->wpad.btns_d && !t->wpad.btns_h && !t->wupcdata.btns_d && !t->wupcdata.btns_h)
+	if(pressedChan == t->chan && !t->wpad.btns_d && !t->wpad.btns_h)
 		pressedChan = -1;
 
 	scrollBar.SetPageSize(FILEBROWSERSIZE);

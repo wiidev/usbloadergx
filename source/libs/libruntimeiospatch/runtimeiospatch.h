@@ -105,26 +105,28 @@ s32 IosPatch_AHBPROT(bool verbose);
 /**
  * This function applies patches on current IOS
  * @see Patchsets
- * @param wii Flag determing whether or not to apply Wii patches.
- * @param sciifii Flag determing whether or not to apply extra Sciifii patches.
- * @param vwii Flag determing whether or not to apply extra vWii patches.
- * @param verbose Flag determing whether or not to print messages on-screen.
+ * @param wii Flag determining whether or not to apply Wii patches.
+ * @param sciifii Flag determining whether or not to apply extra Sciifii patches.
+ * @param vwii Flag determining whether or not to apply extra vWii patches.
+ * @param wiivc Flag determining whether or not to apply WiiVC patches.
+ * @param verbose Flag determining whether or not to print messages on-screen.
  * @example if(AHBPROT_DISABLED) IosPatch_FULL(true, false, false, false);
  * @return Signed 32bit integer representing code
  *      > 0             : Success   - return equals to number of applied patches
  *      ERROR_AHBPROT   : Error     - No HW_AHBPROT access
  *      ERROR_PATCH     : Error     - Patching HW_AHBPROT access failed
  */
-s32 IosPatch_RUNTIME(bool wii, bool sciifii, bool vwii, bool verbose);
+s32 IosPatch_RUNTIME(bool wii, bool sciifii, bool vwii, bool wiivc, bool verbose);
 
 
 /**
  * This function combines IosPatch_AHBPROT + IOS_ReloadIOS + IosPatch_RUNTIME
  * @see Patchsets
- * @param wii Flag determing whether or not to apply Wii patches.
- * @param sciifii Flag determing whether or not to apply extra Sciifii patches.
- * @param vwii Flag determing whether or not to apply extra vWii patches.
- * @param verbose Flag determing whether or not to print messages on-screen.
+ * @param wii Flag determining whether or not to apply Wii patches.
+ * @param sciifii Flag determining whether or not to apply extra Sciifii patches.
+ * @param vwii Flag determining whether or not to apply extra vWii patches.
+ * @param wiivc Flag determining whether or not to apply WiiVC patches.
+ * @param verbose Flag determining whether or not to print messages on-screen.
  * @param IOS Which IOS to reload into.
  * @example if(AHBPROT_DISABLED) IosPatch_FULL(true, false, false, false, 58);
  * @return Signed 32bit integer representing code
@@ -132,7 +134,7 @@ s32 IosPatch_RUNTIME(bool wii, bool sciifii, bool vwii, bool verbose);
  *      ERROR_AHBPROT   : Error     - No HW_AHBPROT access
  *      ERROR_PATCH     : Error     - Patching HW_AHBPROT access failed
  */
-s32 IosPatch_FULL(bool wii, bool sciifii, bool vwii, bool verbose, int IOS);
+s32 IosPatch_FULL(bool wii, bool sciifii, bool vwii, bool wiivc, bool verbose, int IOS);
 
 /**
  * This function patches only SSL certificate check

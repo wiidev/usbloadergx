@@ -21,6 +21,7 @@
 #include "video.h"
 #include "input.h"
 
+extern bool isWiiVC; // in sys.cpp
 
 Mtx44 WiiPointer::projection;
 
@@ -66,50 +67,32 @@ void WiiPointer::Draw(GuiTrigger *t)
 		else
 		{
 			angle = 0.0f;
+			
+			// dynamic deadzone value required for WiiU gamepad when using Virtual Console Wii channels. Fixes diagonal sticks.
+			// dirty fix. could be in input.h ?
+			u8 deadzone = isWiiVC ? 20 : PADCAL; 
+			
 			// GC PAD
 			// x-axis
-			if(t->pad.stickX < -PADCAL)
+			if(t->pad.stickX < -deadzone)
 			{
-				posX += (t->pad.stickX + PADCAL) * Settings.PointerSpeed;
+				posX += (t->pad.stickX + deadzone) * Settings.PointerSpeed;
 				lastActivity = 0;
 			}
-			else if(t->pad.stickX > PADCAL)
+			else if(t->pad.stickX > deadzone)
 			{
-				posX += (t->pad.stickX - PADCAL) * Settings.PointerSpeed;
+				posX += (t->pad.stickX - deadzone) * Settings.PointerSpeed;
 				lastActivity = 0;
 			}
 			// y-axis
-			if(t->pad.stickY < -PADCAL)
+			if(t->pad.stickY < -deadzone)
 			{
-				posY -= (t->pad.stickY + PADCAL) * Settings.PointerSpeed;
+				posY -= (t->pad.stickY + deadzone) * Settings.PointerSpeed;
 				lastActivity = 0;
 			}
-			else if(t->pad.stickY > PADCAL)
+			else if(t->pad.stickY > deadzone)
 			{
-				posY -= (t->pad.stickY - PADCAL) * Settings.PointerSpeed;
-				lastActivity = 0;
-			}
-
-			//Wii u pro x-axis
-			if(t->wupcdata.stickX < -WUPCCAL)
-			{
-				posX += (t->wupcdata.stickX + WUPCCAL) * Settings.PointerSpeed/8;
-				lastActivity = 0;
-			}
-			else if(t->wupcdata.stickX > WUPCCAL)
-			{
-				posX += (t->wupcdata.stickX - WUPCCAL) * Settings.PointerSpeed/8;
-				lastActivity = 0;
-			}
-			//Wii u pro y-axis
-			if(t->wupcdata.stickY < -WUPCCAL)
-			{
-				posY -= (t->wupcdata.stickY + WUPCCAL) * Settings.PointerSpeed/8;
-				lastActivity = 0;
-			}
-			else if(t->wupcdata.stickY > WUPCCAL)
-			{
-				posY -= (t->wupcdata.stickY - WUPCCAL) * Settings.PointerSpeed/8;
+				posY -= (t->pad.stickY - deadzone) * Settings.PointerSpeed;
 				lastActivity = 0;
 			}
 
@@ -140,7 +123,7 @@ void WiiPointer::Draw(GuiTrigger *t)
 				lastActivity = 0;
 			}
 
-			if(t->pad.btns_h || t->wpad.btns_h || t->wupcdata.btns_h)
+			if(t->pad.btns_h || t->wpad.btns_h)
 				lastActivity = 0;
 
 			posX = LIMIT(posX, -50.0f, screenwidth+50.0f);

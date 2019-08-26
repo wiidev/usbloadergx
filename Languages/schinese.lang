@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-14 15:50+0100\n"
+"POT-Creation-Date: 2019-06-15 16:05+0200\n"
 "PO-Revision-Date: 2013-08-13 07:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: oCameLo\n"
@@ -100,6 +100,9 @@ msgstr "3D 封面"
 
 msgid "4 (Adults Only 18+)"
 msgstr "4 (18 岁以上成人)"
+
+msgid "480p Pixel Fix Patch"
+msgstr ""
 
 msgid "5 min"
 msgstr "5 分钟"
@@ -2115,6 +2118,9 @@ msgstr ""
 
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "该游戏有多张光盘。请选择想要加载的光盘。"
+
+msgid "This patch might not work with all games. If a game doesn't boot, disable it in individual game settings menu."
+msgstr ""
 
 msgid "This path must be on SD!"
 msgstr "该路径必须位于 SD 卡！"

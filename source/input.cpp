@@ -15,7 +15,7 @@
 #include <ogcsys.h>
 #include <unistd.h>
 #include <wiiuse/wpad.h>
-#include <wupc/wupc.h>
+#include "libs/libdrc/wiidrc.h"
 
 #include "menu.h"
 #include "video.h"
@@ -27,6 +27,7 @@
 int rumbleRequest[4] = { 0, 0, 0, 0 };
 GuiTrigger userInput[4];
 static int rumbleCount[4] = { 0, 0, 0, 0 };
+extern bool isWiiVC; // in sys.cpp
 
 /****************************************************************************
  * UpdatePads
@@ -35,7 +36,6 @@ static int rumbleCount[4] = { 0, 0, 0, 0 };
  ***************************************************************************/
 void UpdatePads()
 {
-	WUPC_UpdateButtonStats();
 	WPAD_ScanPads();
 	PAD_ScanPads();
 	
@@ -52,22 +52,7 @@ void UpdatePads()
 		userInput[i].pad.substickY = PAD_SubStickY(i);
 		userInput[i].pad.triggerL = PAD_TriggerL(i);
 		userInput[i].pad.triggerR = PAD_TriggerR(i);
-		
-		
-		// WiiU Pro Controller
-		userInput[i].wupcdata.btns_d = WUPC_ButtonsDown(i);
-		userInput[i].wupcdata.btns_u = WUPC_ButtonsUp(i);
-		userInput[i].wupcdata.btns_h = WUPC_ButtonsHeld(i);
-		userInput[i].wupcdata.stickX = WUPC_lStickX(i);
-		userInput[i].wupcdata.stickY = WUPC_lStickY(i);
-		userInput[i].wupcdata.substickX = WUPC_rStickX(i);
-		userInput[i].wupcdata.substickY = WUPC_rStickY(i);
-		// Don't use only held to disconnect, on reconnect the pad sends last held state for a short time.
-		if((WUPC_ButtonsHeld(i) & WUPC_EXTRA_BUTTON_RSTICK && WUPC_ButtonsDown(i) & WUPC_EXTRA_BUTTON_LSTICK) // R3+L3
-		 ||(WUPC_ButtonsHeld(i) & WUPC_EXTRA_BUTTON_LSTICK && WUPC_ButtonsDown(i) & WUPC_EXTRA_BUTTON_RSTICK))
-			WUPC_Disconnect(i);
-		
-		
+
 		if (Settings.rumble == ON) DoRumble(i);
 
 		if(userInput[i].wpad.exp.type == WPAD_EXP_NUNCHUK)
@@ -77,6 +62,23 @@ void UpdatePads()
 		}
 		if((userInput[i].pad.btns_h & PAD_TRIGGER_R) && (userInput[i].pad.btns_d & PAD_TRIGGER_Z))
  			ScreenShot();
+	}
+
+	// WiiU gamepad (DRC) when using WiiVC injected WiiU channels
+	// Copy the drc state to Gamecube pad state
+	if(WiiDRC_Inited() && WiiDRC_Connected())
+	{
+		WiiDRC_ScanPads();
+		
+		// DRC buttons state written to gamecube pad data
+		userInput[0].pad.btns_d |= wiidrc_to_pad(WiiDRC_ButtonsDown());
+		userInput[0].pad.btns_u |= wiidrc_to_pad(WiiDRC_ButtonsUp());
+		userInput[0].pad.btns_h |= wiidrc_to_pad(WiiDRC_ButtonsHeld());
+		// DRC stick state written to gamecube pad data
+		userInput[0].pad.stickX    = WiiDRC_lStickX();
+		userInput[0].pad.stickY    = WiiDRC_lStickY();
+		userInput[0].pad.substickX = WiiDRC_rStickX();
+		userInput[0].pad.substickY = WiiDRC_rStickY();
 	}
 }
 
@@ -136,9 +138,13 @@ bool ControlActivityTimeout(void)
  ***************************************************************************/
 void SetupPads()
 {
-	WUPC_Init();
 	PAD_Init();
 	WPAD_Init();
+	
+	// check WiiVC to init WiiU gamepad 
+	WiiDRC_Init();
+	isWiiVC = WiiDRC_Inited();
+	
 
 	// read wiimote accelerometer and IR data
 	WPAD_SetDataFormat(WPAD_CHAN_ALL, WPAD_FMT_BTNS_ACC_IR);
@@ -159,7 +165,6 @@ void ShutoffRumble()
 {
 	for (int i = 0; i < 4; i++)
 	{
-		WUPC_Rumble(i, 0);
 		WPAD_Rumble(i, 0);
 		rumbleCount[i] = 0;
 	}
@@ -172,7 +177,6 @@ void DoRumble(int i)
 {
 	if (rumbleRequest[i] && rumbleCount[i] < 3)
 	{
-		WUPC_Rumble(i, 1);
 		WPAD_Rumble(i, 1); // rumble on
 		rumbleCount[i]++;
 	}
@@ -185,7 +189,73 @@ void DoRumble(int i)
 	{
 		if (rumbleCount[i]) rumbleCount[i]--;
 		WPAD_Rumble(i, 0); // rumble off
-		WUPC_Rumble(i, 0);
 	}
 }
 
+/****************************************************************************
+ * WiiDRC to WPAD
+ * 
+ * Sets WPAD button state based on WiiDRC (WiiU gamepad in WiiVC) pressed buttons.
+ ***************************************************************************/
+u32 wiidrc_to_wpad(u32 btns) {
+	u32 ret = 0;
+
+	if(btns & WIIDRC_BUTTON_LEFT)
+		ret |= WPAD_BUTTON_LEFT;
+	if(btns & WIIDRC_BUTTON_RIGHT)
+		ret |= WPAD_BUTTON_RIGHT;
+	if(btns & WIIDRC_BUTTON_UP)
+		ret |= WPAD_BUTTON_UP;
+	if(btns & WIIDRC_BUTTON_DOWN)
+		ret |= WPAD_BUTTON_DOWN;
+	if(btns & WIIDRC_BUTTON_A)
+		ret |= WPAD_BUTTON_A;
+	if(btns & WIIDRC_BUTTON_B)
+		ret |= WPAD_BUTTON_B;
+	if(btns & WIIDRC_BUTTON_X)
+		ret |= WPAD_BUTTON_1;
+	if(btns & WIIDRC_BUTTON_Y)
+		ret |= WPAD_BUTTON_2;
+	if((btns & WIIDRC_BUTTON_L) || (btns & WIIDRC_BUTTON_ZL) || (btns & WIIDRC_BUTTON_MINUS))
+		ret |= WPAD_BUTTON_MINUS;
+	if((btns & WIIDRC_BUTTON_R) || (btns & WIIDRC_BUTTON_ZR) || (btns & WIIDRC_BUTTON_PLUS))
+		ret |= WPAD_BUTTON_PLUS;
+	if(btns & WIIDRC_BUTTON_HOME)
+		ret |= WPAD_BUTTON_HOME;
+
+	return (ret&0xffff) ;
+}
+
+/****************************************************************************
+ * WiiDRC to PAD
+ * 
+ * Sets PAD button state based on WiiDRC (WiiU gamepad in WiiVC) pressed buttons.
+ ***************************************************************************/
+u32 wiidrc_to_pad(u32 btns) {
+	u32 ret = 0;
+
+	if(btns & WIIDRC_BUTTON_LEFT)
+		ret |= PAD_BUTTON_LEFT;
+	if(btns & WIIDRC_BUTTON_RIGHT)
+		ret |= PAD_BUTTON_RIGHT;
+	if(btns & WIIDRC_BUTTON_UP)
+		ret |= PAD_BUTTON_UP;
+	if(btns & WIIDRC_BUTTON_DOWN)
+		ret |= PAD_BUTTON_DOWN;
+	if(btns & WIIDRC_BUTTON_A)
+		ret |= PAD_BUTTON_A;
+	if(btns & WIIDRC_BUTTON_B)
+		ret |= PAD_BUTTON_B;
+	if(btns & WIIDRC_BUTTON_X)
+		ret |= PAD_BUTTON_X;
+	if(btns & WIIDRC_BUTTON_Y)
+		ret |= PAD_BUTTON_Y;
+	if((btns & WIIDRC_BUTTON_L) || (btns & WIIDRC_BUTTON_ZL) || (btns & WIIDRC_BUTTON_MINUS))
+		ret |= PAD_TRIGGER_L;
+	if((btns & WIIDRC_BUTTON_R) || (btns & WIIDRC_BUTTON_ZR) || (btns & WIIDRC_BUTTON_PLUS))
+		ret |= PAD_TRIGGER_R;
+	if(btns & WIIDRC_BUTTON_HOME)
+		ret |= PAD_BUTTON_START;
+
+	return (ret&0xffff) ;
+}

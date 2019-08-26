@@ -59,7 +59,7 @@ INCLUDES	:=	source
 # Default cIOS to load into to load the settings
 #---------------------------------------------------------------------------------
 ifndef $(IOS)
-IOS = 249
+IOS = 58
 endif
 
 #---------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ endif
 #---------------------------------------------------------------------------------
 CFLAGS		=	-g -ggdb -O3 -Wall -Wno-multichar -Wno-unused-parameter -Wextra $(MACHDEP) $(INCLUDE) -D_GNU_SOURCE -DBUILD_IOS=$(IOS)
 CXXFLAGS	=	$(CFLAGS)
-LDFLAGS		=	-g -ggdb $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80B00000,-wrap,malloc,-wrap,free,-wrap,memalign,-wrap,calloc,-wrap,realloc,-wrap,malloc_usable_size,-wrap,wiiuse_register
+LDFLAGS		=	-g -ggdb $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80B00000,-wrap,malloc,-wrap,free,-wrap,memalign,-wrap,calloc,-wrap,realloc,-wrap,malloc_usable_size
 
 ifeq ($(BUILDMODE),channel)
 CFLAGS += -DFULLCHANNEL
@@ -78,7 +78,7 @@ endif
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
 LIBS := -lcustomfat -lcustomntfs -lcustomext2fs -lvorbisidec -lmad -lfreetype \
-		-lgd -ljpeg -lpng -lzip -lm -lz -lwiiuse -lwupc -lbte -lasnd -logc
+		-lgd -ljpeg -lpng -lzip -lm -lz -lwiiuse -lwiidrc -lbte -lasnd -logc -lruntimeiospatch
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
@@ -145,6 +145,7 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 #---------------------------------------------------------------------------------
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib) -L$(CURDIR)/source/libs/libfat/ \
 					-L$(CURDIR)/source/libs/libntfs/ -L$(CURDIR)/source/libs/libext2fs/ \
+					-L$(CURDIR)/source/libs/libruntimeiospatch/ -L$(CURDIR)/source/libs/libdrc/ \
 					-L$(LIBOGC_LIB) -L$(PORTLIBS)/lib
 
 export OUTPUT	:=	$(CURDIR)/$(TARGET)

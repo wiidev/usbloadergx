@@ -184,6 +184,7 @@ void GameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Favorite Level" ));
 	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
 	Options->SetName(Idx++, "%s", tr( "Dol Video Patch" ));
+	Options->SetName(Idx++, "%s", tr( "480p Pixel Fix Patch" ));
 	Options->SetName(Idx++, "%s", tr( "Sneek Video Patch" ));
 	Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
 	Options->SetName(Idx++, "%s", tr( "Aspect Ratio" ));
@@ -236,6 +237,12 @@ void GameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(VideoPatchDolText[GameConfig.videoPatchDol]));
+
+	//! Settings: 480p Pixel Fix Patch
+	if(GameConfig.patchFix480p == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.patchFix480p]));
 
 	//! Settings: Sneek Video Patch
 	if(GameConfig.sneekVideoPatch == INHERIT)
@@ -409,6 +416,12 @@ int GameLoadSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.videoPatchDol >= VIDEO_PATCH_DOL_MAX) GameConfig.videoPatchDol = INHERIT;
+	}
+
+	//! Settings: 480p Pixel Fix Patch
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.patchFix480p >= MAX_ON_OFF) GameConfig.patchFix480p = INHERIT;
 	}
 
 	//! Settings: Sneek Video Patch

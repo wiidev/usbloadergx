@@ -14,7 +14,6 @@
 
 #define PI			  3.14159265f
 #define PADCAL		  50
-#define WUPCCAL		  400
 
 extern int rumbleRequest[4];
 
@@ -24,5 +23,7 @@ void ShutoffRumble();
 void DoRumble(int i);
 void SetWPADTimeout();
 bool ControlActivityTimeout(void);
+u32 wiidrc_to_wpad(u32 btns);
+u32 wiidrc_to_pad(u32 btns);
 
 #endif

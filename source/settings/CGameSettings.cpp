@@ -188,6 +188,7 @@ bool CGameSettings::Save()
 		fprintf(f, "game:%s = ", GameList[i].id);
 		fprintf(f, "video:%d; ", GameList[i].video);
 		fprintf(f, "videoPatchDol:%d; ", GameList[i].videoPatchDol);
+		fprintf(f, "patchFix480p:%d; ", GameList[i].patchFix480p);
 		fprintf(f, "aspectratio:%d; ", GameList[i].aspectratio);
 		fprintf(f, "language:%d; ", GameList[i].language);
 		fprintf(f, "ocarina:%d; ", GameList[i].ocarina);
@@ -258,9 +259,14 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		game.video = atoi(value);
 		return true;
 	}
-	if (strcmp(name, "videoPatchDol") == 0)
+	else if (strcmp(name, "videoPatchDol") == 0)
 	{
 		game.videoPatchDol = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "patchFix480p") == 0)
+	{
+		game.patchFix480p = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "aspectratio") == 0)
@@ -646,6 +652,7 @@ void CGameSettings::SetDefault(GameCFG &game)
 	memset(game.id, 0, sizeof(game.id));
 	game.video = INHERIT;
 	game.videoPatchDol = INHERIT;
+	game.patchFix480p = INHERIT;
 	game.aspectratio = INHERIT;
 	game.language = INHERIT;
 	game.ocarina = INHERIT;

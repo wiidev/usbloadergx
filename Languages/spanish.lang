@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-14 15:50+0100\n"
+"POT-Creation-Date: 2019-06-15 16:05+0200\n"
 "PO-Revision-Date: 2011-07-25 16:40+0200\n"
 "Last-Translator: Galen/xFede\n"
 "Language-Team: Penn, SirPalax, hvy109\n"
@@ -100,6 +100,9 @@ msgstr "Carátulas 3D"
 
 msgid "4 (Adults Only 18+)"
 msgstr "4 (Sólo Adultos 18+)"
+
+msgid "480p Pixel Fix Patch"
+msgstr ""
 
 msgid "5 min"
 msgstr "5 min."
@@ -2115,6 +2118,9 @@ msgstr "Esta versión de Nintendont no es soportada. El autoarranque será desac
 
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "Este juego posee varios discos. Por favor, elige el que deseas cargar."
+
+msgid "This patch might not work with all games. If a game doesn't boot, disable it in individual game settings menu."
+msgstr ""
 
 msgid "This path must be on SD!"
 msgstr "¡Esta ruta debe ser en la SD!"

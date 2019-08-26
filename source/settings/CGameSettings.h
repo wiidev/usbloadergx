@@ -12,6 +12,7 @@ typedef struct _GameCFG
 	char id[7];
 	short video;
 	short videoPatchDol;
+	short patchFix480p;
 	short aspectratio;
 	short language;
 	short ocarina;
@@ -74,6 +75,7 @@ typedef struct _GameCFG
 		memcpy(this->id, game.id, sizeof(game.id));
 		this->video = game.video;
 		this->videoPatchDol = game.videoPatchDol;
+		this->patchFix480p = game.patchFix480p;
 		this->aspectratio = game.aspectratio;
 		this->language = game.language;
 		this->ocarina = game.ocarina;
@@ -109,6 +111,8 @@ typedef struct _GameCFG
 		this->NINVideoOffset = game.NINVideoOffset;
 		this->NINRemlimit = game.NINRemlimit;
 		this->NINArcadeMode = game.NINArcadeMode;
+		this->NINCCRumble = game.NINCCRumble;
+		this->NINSkipIPL = game.NINSkipIPL;
 		this->NINMCEmulation = game.NINMCEmulation;
 		this->NINMCSize = game.NINMCSize;
 		this->NINUSBHID = game.NINUSBHID;

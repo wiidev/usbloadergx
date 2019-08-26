@@ -18,7 +18,6 @@ void __Wpad_PowerCallback(s32 chan)
 
 s32 Wpad_Init(void)
 {
-	WUPC_Init();
 	s32 ret;
 
 	/* Initialize Wiimote subsystem */
@@ -40,7 +39,6 @@ void Wpad_Disconnect(void)
 		WPAD_Disconnect(cnt);
 
 	/* Shutdown Wiimote subsystem */
-	WUPC_Shutdown();
 	WPAD_Shutdown();
 }
 
@@ -66,13 +64,11 @@ u32 ButtonsHold(void)
 
 	int i;
 	u32 buttons = 0;
-	WUPC_UpdateButtonStats();
 	WPAD_ScanPads();
 	PAD_ScanPads();
 
 	for (i = 3; i >= 0; i--)
 	{
-		buttons |= WUPC_ButtonsHeld(i);
 		buttons |= PAD_ButtonsHeld(i);
 		buttons |= WPAD_ButtonsHeld(i);
 	}
@@ -83,13 +79,11 @@ u32 ButtonsPressed(void)
 {
 	int i;
 	u32 buttons = 0;
-	WUPC_UpdateButtonStats();
 	WPAD_ScanPads();
 	PAD_ScanPads();
 
 	for (i = 3; i >= 0; i--)
 	{
-		buttons |= WUPC_ButtonsDown(i);
 		buttons |= PAD_ButtonsDown(i);
 		buttons |= WPAD_ButtonsDown(i);
 	}

@@ -20,7 +20,7 @@
 #include "mload/mload.h"
 #include "mload/mload_modules.h"
 #include "system/IosLoader.h"
-#include "system/runtimeiospatch.h"
+#include "libs/libruntimeiospatch/runtimeiospatch.h"
 #include "Controls/DeviceHandler.hpp"
 #include "Channels/channels.h"
 #include "usbloader/disc.h"
@@ -59,6 +59,7 @@
 //appentrypoint has to be global because of asm
 u32 AppEntrypoint = 0;
 
+extern bool isWiiVC; // in sys.cpp
 extern u32 hdd_sector_size[2];
 extern "C"
 {
@@ -255,6 +256,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	GameCFG * game_cfg = GameSettings.GetGameCFG(gameHeader.id);
 	u8 videoChoice = game_cfg->video == INHERIT ? Settings.videomode : game_cfg->video;
 	u8 videoPatchDolChoice = game_cfg->videoPatchDol == INHERIT ? Settings.videoPatchDol : game_cfg->videoPatchDol;
+	u8 patchFix480pChoice = game_cfg->patchFix480p ==  INHERIT ? Settings.patchFix480p : game_cfg->patchFix480p;
 	u8 aspectChoice = game_cfg->aspectratio == INHERIT ? Settings.GameAspectRatio : game_cfg->aspectratio;
 	u8 languageChoice = game_cfg->language == INHERIT ? Settings.language : game_cfg->language;
 	u8 ocarinaChoice = game_cfg->ocarina == INHERIT ? Settings.ocarina : game_cfg->ocarina;
@@ -312,7 +314,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 		if(IOS_GetVersion() < 200 || (IosLoader::IsHermesIOS() && IOS_GetRevision() == 4))
 		{
 			gprintf("Patching IOS%d...\n", IOS_GetVersion());
-			if (IosPatch_RUNTIME(true, false, false, false) == ERROR_PATCH)
+			if (IosPatch_RUNTIME(true, false, false, false, false) == ERROR_PATCH)
 				gprintf("Patching %sIOS%d failed!\n", IOS_GetVersion() >= 200 ? "c" : "", IOS_GetVersion());
 		}
 
@@ -415,10 +417,54 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 
 	//! Do all the game patches
 	gprintf("Applying game patches...\n");
-	gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, returnToChoice, PrivServChoice);
+	
+	
+	//! Now this code block is responsible for the private server patch
+	//! and the gecko code handler loading
+	
+	//! If a server other than Wiimmfi is selected, do the normal patching
+	//! If Wiimmfi is selected for other games than MKWii, do normal patching as well
+	//! If Wiimmfi is selected for MKWii, skip normal patching (PRIVSERV_OFF)
+	//! and let the new code in do_new_wiimmfi() handle the complete server patch
+	
+	//! Also, the new Wiimmfi server patch should be loaded into memory after
+	//! the code handler and the cheat codes. 
+	
+	if (PrivServChoice != PRIVSERV_WIIMMFI || memcmp(((void *)(0x80000000)), (char*)"RMC", 3) != 0) {
+		//! Either the server is not Wiimmfi, or, if it is Wiimmfi, the game isn't MKWii - patch the old way
+		gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, returnToChoice, PrivServChoice);
+	}
+	else {
+		//! Wiimmfi patch for Mario Kart Wii - patch with PRIVSERV_OFF and handle all the patching within do_new_wiimmfi()
+		gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, returnToChoice, PRIVSERV_OFF);
+	}
+	
 
 	//! Load Code handler if needed
 	load_handler(Hooktype, WiirdDebugger, Settings.WiirdDebuggerPause);
+
+
+    //! Perform 480p fix if needed.
+    //! Needs to be done after the call to gamepatches(), after loading any code handler.
+    //! Can (and should) be done before Wiimmfi patching, can't be done in gamepatches() itself.
+    if(patchFix480pChoice)
+		PatchFix480p();
+
+	//! New Wiimmfi patch should be loaded last, after the codehandler, just before the call to the entry point
+	if (PrivServChoice == PRIVSERV_WIIMMFI && memcmp(((void *)(0x80000000)), (char*)"RMC", 3) == 0 ) {
+		// all the cool new Wiimmfi stuff: 
+		switch(do_new_wiimmfi()) {
+			case 0: 
+				gprintf("Wiimmfi patch for Mario Kart Wii successful.\n"); 
+				break; 
+			case -1: 
+				gprintf("Could not determine game region for Wiimmfi patch - make sure the fourth char of the ID is one of [PEJK].\n"); 
+				break; 
+			case -2: 
+				gprintf("This image is already patched for Wiimmfi, no need to do so again.\n"); 
+				break;
+		}
+	}
 
 	//! Jump to the entrypoint of the game - the last function of the USB Loader
 	gprintf("Jumping to game entrypoint: 0x%08X.\n", AppEntrypoint);
@@ -1424,9 +1470,9 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	if(ninArcadeModeChoice)
 		nin_config->Config |= NIN_CFG_ARCADE_MODE; // v4.424+ Triforce Arcade Mode
 	if (ninCCRumbleChoice)
-		nin_config->Config |= NIN_CFG_CC_RUMBLE; // v4.424+ Classic Controller Rumble
+		nin_config->Config |= NIN_CFG_CC_RUMBLE; // v4.431+ Classic Controller Rumble
 	if (ninSkipIPLChoice)
-		nin_config->Config |= NIN_CFG_SKIP_IPL; // v4.424+ Skip Gamecube BIOS
+		nin_config->Config |= NIN_CFG_SKIP_IPL; // v4.435+ Skip Gamecube BIOS
 
 	// Max Pads
 	nin_config->MaxPads = ninMaxPadsChoice; // NIN_CFG_VERSION 2 r42
@@ -1502,6 +1548,14 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	}
 	gprintf("NIN: Language 0x%08x \n", nin_config->Language);
 
+	
+	// if WiiVC, force creation and use of nincfg.bin file to fix a nintendont bug if HID is connected before launching it.
+	if(isWiiVC)
+	{
+		ninSettingsChoice = ON;
+		NINArgsboot = OFF;
+	}
+	
 	// Delete existing nincfg.bin files
 	if(ninSettingsChoice == OFF)
 	{

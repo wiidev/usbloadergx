@@ -229,6 +229,7 @@ void LoaderSettings::SetOptionNames()
 
 	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
 	Options->SetName(Idx++, "%s", tr( "Dol Video Patch" ));
+	Options->SetName(Idx++, "%s", tr( "480p Pixel Fix Patch" ));
 	Options->SetName(Idx++, "%s", tr( "Sneek Video Patch" ));
 	Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
 	Options->SetName(Idx++, "%s", tr( "Aspect Ratio" ));
@@ -308,6 +309,9 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: Dol Video Patch
 	Options->SetValue(Idx++, "%s", tr( VideoPatchDolText[Settings.videoPatchDol] ));
+
+	//! Settings: 480p Pixel Fix Patch
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.patchFix480p] ));
 
 	//! Settings: Sneek Video Patch
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.sneekVideoPatch] ));
@@ -538,6 +542,14 @@ int LoaderSettings::GetMenuInternal()
 	if (ret == ++Idx)
 	{
 		if (++Settings.videoPatchDol >= VIDEO_PATCH_DOL_MAX) Settings.videoPatchDol = 0;
+	}
+
+	//! Settings: 480p Pixel Fix Patch
+	if (ret == ++Idx)
+	{
+		if (++Settings.patchFix480p >= MAX_ON_OFF) Settings.patchFix480p = 0;
+		if(Settings.patchFix480p)
+			WindowPrompt(tr("Warning:"), tr("This patch might not work with all games. If a game doesn't boot, disable it in individual game settings menu."), tr("OK"));
 	}
 
 	//! Settings: Sneek Video Patch

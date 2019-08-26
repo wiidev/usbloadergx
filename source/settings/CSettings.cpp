@@ -72,13 +72,13 @@ void CSettings::SetDefault()
 	snprintf(WiinnertagPath, sizeof(WiinnertagPath), "%s", ConfigPath);
 	snprintf(theme_path, sizeof(theme_path), "%stheme/", ConfigPath);
 	snprintf(dolpath, sizeof(dolpath), "%s/", BootDevice);
-	snprintf(NandEmuPath, sizeof(NandEmuPath), "%s/nand/", BootDevice);
+	snprintf(NandEmuPath, sizeof(NandEmuPath), "%s/nands/01/", BootDevice);
 	snprintf(DEVOLoaderPath, sizeof(DEVOLoaderPath), "%s/apps/gc_devo/", BootDevice);
 	snprintf(NINLoaderPath, sizeof(NINLoaderPath), "%s/apps/nintendont/", BootDevice);
 	strlcpy(NandEmuChanPath, NandEmuPath, sizeof(NandEmuChanPath));
 	strlcpy(GameCubePath, "usb1:/games/", sizeof(GameCubePath));
 	strlcpy(GameCubeSDPath, "sd:/games/", sizeof(GameCubeSDPath));
-	strlcpy(CustomBannersURL, "http://nintendont.gxarena.com/banners/", sizeof(CustomBannersURL));
+	strlcpy(CustomBannersURL, "http://banner.rc24.xyz/", sizeof(CustomBannersURL));
 	theme[0] = 0;
 	language_path[0] = 0;
 	ogg_path[0] = 0;
@@ -94,6 +94,7 @@ void CSettings::SetDefault()
 	videomode = VIDEO_MODE_DISCDEFAULT;
 	videopatch = OFF;
 	videoPatchDol = OFF;
+	patchFix480p = OFF;
 	language = CONSOLE_DEFAULT;
 	ocarina = OFF;
 	hddinfo = CLOCK_HR12;
@@ -107,7 +108,7 @@ void CSettings::SetDefault()
 	gamesound = ON;
 	parentalcontrol = PARENTAL_LVL_ADULT;
 	LoaderIOS = BUILD_IOS;
-	cios = BUILD_IOS;
+	cios = 249;
 	gridRows = 3;
 	partition = 0;
 	discart = DISCARTS_ORIGINALS_CUSTOMS;
@@ -302,6 +303,7 @@ bool CSettings::Save()
 	fprintf(file, "videomode = %d\n", videomode);
 	fprintf(file, "videopatch = %d\n", videopatch);
 	fprintf(file, "videoPatchDol = %d\n", videoPatchDol);
+	fprintf(file, "patchFix480p = %d\n", patchFix480p);
 	fprintf(file, "language = %d\n", language);
 	fprintf(file, "ocarina = %d\n", ocarina);
 	fprintf(file, "hddinfo = %d\n", hddinfo);
@@ -502,6 +504,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "videoPatchDol") == 0)
 	{
 		videoPatchDol = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "patchFix480p") == 0)
+	{
+		patchFix480p = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "language") == 0)
@@ -1225,10 +1232,12 @@ bool CSettings::SetSetting(char *name, char *value)
 	}
 	else if (strcmp(name, "CustomBannersURL") == 0)
 	{
+		// update banner URL
 		if( strcmp(value, "http://dl.dropbox.com/u/101209384/") == 0 ||
 			strcmp(value, "http://dl.dropboxusercontent.com/u/101209384/") == 0 ||
-			strcmp(value, "http://copy.com/vRN3HgFVyk9u7YuB/Public/") == 0)
-			strlcpy(CustomBannersURL, "http://nintendont.gxarena.com/banners/", sizeof(CustomBannersURL)); // update banner URL
+			strcmp(value, "http://copy.com/vRN3HgFVyk9u7YuB/Public/") == 0 ||
+			strcmp(value, "http://nintendont.gxarena.com/banners/") == 0) // Thanks to AbdallahTerro for this one and previous URLs
+			strlcpy(CustomBannersURL, "http://banner.rc24.xyz/", sizeof(CustomBannersURL)); // Thanks to Larsenv
 		else
 			strlcpy(CustomBannersURL, value, sizeof(CustomBannersURL));
 		return true;

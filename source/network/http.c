@@ -33,6 +33,7 @@ const struct block emptyblock = { 0, NULL };
 //The maximum amount of bytes to send per net_write() call
 //#define NET_BUFFER_SIZE 1024
 #define NET_BUFFER_SIZE 3600
+//#define VERBOSE
 
 // Write our message to the server
 static s32 send_message(s32 server, char *msg)
@@ -231,17 +232,22 @@ struct block downloadfile(const char *url)
 	char* headerformat = "GET %s HTTP/1.0\r\nHost: %s\r\n%sUser-Agent: USBLoaderGX r%s\r\n\r\n";
 	char header[strlen(headerformat) + strlen(path) + strlen(domain) + strlen(referer) + 100];
 	sprintf(header, headerformat, path, domain, referer, GetRev());
-	//gprintf("\nHTTP Request:\n");
-	//gprintf("%s\n",header);
+
+#ifdef VERBOSE
+	gprintf("\nHTTP Request:\n");
+	gprintf("%s\n",header);
+#endif
 
 	//Do the request and get the response
 	send_message(connection, header);
 	struct block response = read_message(connection);
 	net_close(connection);
-	
+
+#ifdef VERBOSE
 	// dump response
-	// hexdump(response.data, response.size);
-	
+	hexdump(response.data, response.size);
+#endif
+
 	//Search for the 4-character sequence \r\n\r\n in the response which signals the start of the http payload (file)
 	unsigned char *filestart = NULL;
 	u32 filesize = 0;
@@ -269,7 +275,9 @@ struct block downloadfile(const char *url)
 					int code;
 					if (sscanf(codep+1, "%d", &code) == 1) 
 					{
-						//gprintf("HTTP response code: %d\n", code);
+#ifdef VERBOSE
+						gprintf("HTTP response code: %d\n", code);
+#endif
 						if (code == 302) // 302 FOUND (redirected link)
 						{
 							char *ptr = strcasestr((char*)response.data, "Location: ");
@@ -280,18 +288,24 @@ struct block downloadfile(const char *url)
 								*(strchr(newURL, '\r'))=0;
 								
 								redirect = true;
-								//gprintf("New URL to download = %s \n", newURL);
+#ifdef VERBOSE
+								gprintf("New URL to download = %s \n", newURL);
+#endif
 							}
 							else
 							{
-								//gprintf("HTTP ERROR: %s\n", htstat);
+#ifdef VERBOSE
+								gprintf("HTTP ERROR: %s\n", htstat);
+#endif
 								free(response.data);
 								return emptyblock;
 							}
 						}
 						if (code >=400) // Not found
 						{
-							//gprintf("HTTP ERROR: %s\n", htstat);
+#ifdef VERBOSE
+							gprintf("HTTP ERROR: %s\n", htstat);
+#endif
 							free(response.data);
 							return emptyblock;
 						}
@@ -319,7 +333,9 @@ struct block downloadfile(const char *url)
 		u8 * tmp = realloc(response.data, redirected.size);
 		if (tmp == NULL)
 		{
-			//gprintf("Could not allocate enough memory for new URL. Download canceled.\n");
+#ifdef VERBOSE
+			gprintf("Could not allocate enough memory for new URL. Download canceled.\n");
+#endif
 			free(response.data);
 			free(redirected.data);
 			return emptyblock;
