@@ -14,7 +14,6 @@
 #include "prompts/PromptWindows.h"
 #include "prompts/ProgressWindow.h"
 #include "network/networkops.h"
-#include "network/http.h"
 #include "FileOperations/fileops.h"
 #include "themes/CTheme.h"
 #include "sys.h"

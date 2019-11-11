@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include "network/http.h"
+#include "network/https.h"
 
 class ImageDownloader
 {
@@ -15,9 +15,9 @@ class ImageDownloader
 		void FindMissingImages();
 		void FindMissing(const char *writepath, const char *downloadURL, const char *backupURL, const char *progressTitle, const char *backupProgressTitle, const char *fileExt);
 		int DownloadProcess(int TotalDownloadCount);
-		struct block DownloadImage(const char * url, const char * gameID, const char *fileExt);
+		void DownloadImage(const char * url, const char * gameID, const char *fileExt, struct download *file);
 		void CreateCSVLog();
-		bool IsValidBanner(unsigned char *banner);
+		bool IsValidBanner(char *banner);
 
 		struct ImageLink
 		{

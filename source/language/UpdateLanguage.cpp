@@ -14,7 +14,7 @@
 #include "FileOperations/DirList.h"
 #include "menu.h"
 #include "network/networkops.h"
-#include "network/http.h"
+#include "network/https.h"
 #include "network/URL_List.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/ProgressWindow.h"
@@ -22,7 +22,7 @@
 #include "gecko.h"
 #include "svnrev.h"
 
-static const char * LanguageFilesURL = "http://svn.code.sf.net/p/usbloadergx/code/trunk/Languages/";
+static const char * LanguageFilesURL = "https://svn.code.sf.net/p/usbloadergx/code/trunk/Languages/";
 
 int DownloadAllLanguageFiles(int revision)
 {
@@ -69,8 +69,9 @@ int DownloadAllLanguageFiles(int revision)
 
 		snprintf(fullURL, sizeof(fullURL), "%s%s?p=%s", LanguageFilesURL, filename, target);
 
-		struct block file = downloadfile(fullURL);
-		if (file.data)
+		struct download file = {};
+		downloadfile(fullURL, &file);
+		if (file.size > 0)
 		{
 			char filepath[300];
 			snprintf(filepath, sizeof(filepath), "%s/%s", Settings.languagefiles_path, filename);
@@ -134,11 +135,12 @@ int UpdateLanguageFiles()
 		snprintf(codeurl, sizeof(codeurl), "%s%s?p=%s", LanguageFilesURL, Dir.GetFilename(i), GetRev());
 		snprintf(savepath, sizeof(savepath), "%s/%s", Settings.languagefiles_path, Dir.GetFilename(i));
 
-		struct block file = downloadfile(codeurl);
+		struct download file = {};
+		downloadfile(codeurl, &file);
 
 		ShowProgress(tr("Updating Language Files:"), 0, Dir.GetFilename(i), i, Dir.GetFilecount(), false, true);
 
-		if (file.data != NULL)
+		if (file.size > 0)
 		{
 			FILE * pfile;
 			pfile = fopen(savepath, "wb");

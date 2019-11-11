@@ -30,7 +30,6 @@
 #define _UPDATEOPS_H_
 
 int CheckUpdate();
-int CheckForBetaUpdate();
 int UpdateGameTDB();
 int UpdateApp();
 

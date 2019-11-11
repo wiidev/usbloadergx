@@ -79,7 +79,6 @@ void GlobalSettings::SetupMainButtons()
 	SetMainButton(pos++, tr( "Parental Control" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Custom Paths" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Theme Menu" ), MainButtonImgData, MainButtonImgOverData);
-	SetMainButton(pos++, tr( "Theme Downloader" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Update" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Default Settings" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Credits" ), creditsImgData, creditsImgOverData);
@@ -214,20 +213,6 @@ void GlobalSettings::CreateSettingsMenu(int menuNr)
 		}
 
 		returnMenu = MENU_THEMEMENU;
-	}
-	//! Theme Downloader
-	else if(menuNr == Idx++)
-	{
-		if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_THEME_DOWNLOADER))
-		{
-			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
-			return;
-		}
-		
-		WindowPrompt(tr( "Warning:" ), tr( "Sorry, the theme downloader menu is not working anymore because http://wii.spiffy360.com now requires user registration." ), tr( "OK" ));
-			return;
-		
-		// returnMenu = MENU_THEMEDOWNLOADER;
 	}
 	//! Update
 	else if(menuNr == Idx++)

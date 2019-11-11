@@ -30,22 +30,22 @@
 #include "utils/StringTools.h"
 #include "gecko.h"
 
-#define VALID_IMAGE(x) (!(x.size == 36864 || x.size <= 1024 || x.size == 7386 || x.size <= 1174 || x.size == 4446 || x.data == NULL))
+#define VALID_IMAGE(x) (!(x->size == 36864 || x->size <= 1024 || x->size == 7386 || x->size <= 1174 || x->size == 4446 || x->data == NULL))
 
-static const char *serverURL3D = "http://art.gametdb.com/wii/cover3D/";
-static const char *serverURL2D = "http://art.gametdb.com/wii/cover/";
-static const char *serverURLFullHQ = "http://art.gametdb.com/wii/coverfullHQ/";
-static const char *serverURLFull = "http://art.gametdb.com/wii/coverfull/";
-static const char *serverURLOrigDiscs = "http://art.gametdb.com/wii/disc/";
-static const char *serverURLCustomDiscs = "http://art.gametdb.com/wii/disccustom/";
-static const char *serverURLCustomBannersGC = Settings.CustomBannersURL;
+static const char *serverURL3D = "https://art.gametdb.com/wii/cover3D/";
+static const char *serverURL2D = "https://art.gametdb.com/wii/cover/";
+static const char *serverURLFullHQ = "https://art.gametdb.com/wii/coverfullHQ/";
+static const char *serverURLFull = "https://art.gametdb.com/wii/coverfull/";
+static const char *serverURLOrigDiscs = "https://art.gametdb.com/wii/disc/";
+static const char *serverURLCustomDiscs = "https://art.gametdb.com/wii/disccustom/";
+static const char *serverURLCustomBannersGC = "https://banner.rc24.xyz/";
 
 void ImageDownloader::DownloadImages()
 {
 	bool ValidBannerURL = false;
-	if(strncasecmp(serverURLCustomBannersGC, "http://", strlen("http://")) == 0)
+	if(strncasecmp(serverURLCustomBannersGC, "https://", strlen("https://")) == 0)
 	{
-		char *path = strchr(serverURLCustomBannersGC + strlen("http://"), '/');
+		char *path = strchr(serverURLCustomBannersGC + strlen("https://"), '/');
 		if(path)
 			ValidBannerURL = true;
 	}
@@ -175,8 +175,7 @@ void ImageDownloader::FindMissing(const char *writepath, const char *downloadURL
 int ImageDownloader::DownloadProcess(int TotalDownloadCount)
 {
 	char progressMsg[255];
-
-	char *path = strchr(serverURLCustomBannersGC + strlen("http://"), '/');
+	char *path = strchr(serverURLCustomBannersGC + strlen("https://"), '/');
 	int domainlength = path - serverURLCustomBannersGC;
 	char domain[domainlength + 1];
 	strncpy(domain, serverURLCustomBannersGC, domainlength);
@@ -190,15 +189,16 @@ int ImageDownloader::DownloadProcess(int TotalDownloadCount)
 		if(strcmp(MissingImages[i].fileExt, ".bnr") == 0)
 			snprintf(progressMsg, sizeof(progressMsg), "%s : %s.bnr", domain, MissingImages[i].gameID.c_str());
 		else
-			snprintf(progressMsg, sizeof(progressMsg), "http://gametdb.com : %s.png", MissingImages[i].gameID.c_str());
+			snprintf(progressMsg, sizeof(progressMsg), "https://gametdb.com : %s.png", MissingImages[i].gameID.c_str());
 
 		ShowProgress(MissingImages[i].progressTitle, fmt("%i %s", TotalDownloadCount - pos, tr( "files left" )), progressMsg, pos, TotalDownloadCount);
 
 		if(MissingImages[i].gameID.size() < 3)
 			continue;
 
-		struct block file = DownloadImage(MissingImages[i].downloadURL, MissingImages[i].gameID.c_str(), MissingImages[i].fileExt);
-		if(!file.data)
+		struct download file = {};
+		DownloadImage(MissingImages[i].downloadURL, MissingImages[i].gameID.c_str(), MissingImages[i].fileExt, &file);
+		if(file.size <= 0)
 		{
 			if(MissingImages[i].backupURL)
 			{
@@ -233,7 +233,7 @@ int ImageDownloader::DownloadProcess(int TotalDownloadCount)
 	return MissingImages.size();
 }
 
-struct block ImageDownloader::DownloadImage(const char * url, const char * gameID, const char * fileExt)
+void ImageDownloader::DownloadImage(const char *url, const char *gameID, const char *fileExt, struct download *file)
 {
 	char CheckedRegion[10];
 	char downloadURL[512];
@@ -242,23 +242,20 @@ struct block ImageDownloader::DownloadImage(const char * url, const char * gameI
 	if(strcmp(fileExt, ".bnr") == 0)
 	{
 		snprintf(downloadURL, sizeof(downloadURL), "%s%s.bnr", url, gameID);
-		gprintf("%s", downloadURL);
-		struct block file = downloadfile(downloadURL);
-		if(file.size > 132 && IsValidBanner(file.data)) // 132 = IMET magic location in the banner with u8 header
-			return file;
-
-		free(file.data);
+		gprintf("%s\n", downloadURL);
+		downloadfile(downloadURL, file);
+		if(file->size > 132 && IsValidBanner(file->data)) // 132 = IMET magic location in the banner with u8 header
+			return;
 
 		snprintf(downloadURL, sizeof(downloadURL), "%s%.3s.bnr", url, gameID);
-		gprintf(" - Not found. trying ID3:\n%s", downloadURL);
-		file = downloadfile(downloadURL);
-		if(file.size > 132 && IsValidBanner(file.data))
-			return file;
+		gprintf(" - Not found. trying ID3: %s\n", downloadURL);
+		
+		downloadfile(downloadURL, file);
+		if(file->size > 132 && IsValidBanner(file->data))
+			return;
 
 		gprintf(" - Not found.\n");
-		free(file.data);
-		memset(&file, 0, sizeof(struct block));
-		return file;
+		return;
 	}
 
 	//Creates URL depending from which Country the game is
@@ -300,21 +297,18 @@ struct block ImageDownloader::DownloadImage(const char * url, const char * gameI
 			break;
 	}
 
-	gprintf("%s", downloadURL);
-	struct block file = downloadfile(downloadURL);
+	gprintf("%s\n", downloadURL);
+	downloadfile(downloadURL, file);
 	if(VALID_IMAGE(file))
-		return file;
-
-	free(file.data);
-	file.data = NULL;
+		return;
 
 	if(PAL && strcmp(CheckedRegion, "EN") != 0)
 	{
 		snprintf(downloadURL, sizeof(downloadURL), "%sEN/%s.png", url, gameID);
 		gprintf(" - Not found.\n%s", downloadURL);
-		file = downloadfile(downloadURL);
+		downloadfile(downloadURL, file);
 		if(VALID_IMAGE(file))
-			return file;
+			return;
 	}
 	else if(strcmp(CheckedRegion, "") == 0)
 	{
@@ -325,58 +319,45 @@ struct block ImageDownloader::DownloadImage(const char * url, const char * gameI
 
 		snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
 		gprintf(" - Not found.\n%s", downloadURL);
-		file = downloadfile(downloadURL);
+		downloadfile(downloadURL, file);
 		if(VALID_IMAGE(file))
-			return file;
-
-		free(file.data);
+			return;
 
 		snprintf(downloadURL, sizeof(downloadURL), "%sOTHER/%s.png", url, gameID);
 		gprintf(" - Not found.\n%s", downloadURL);
-		file = downloadfile(downloadURL);
+		downloadfile(downloadURL, file);
 		if(VALID_IMAGE(file))
-			return file;
+			return;
 		
 		if(gameID[3] == 'R') // no english cover found, try russian
 		{
 			lang = "RU";
-			free(file.data);
-			
 			snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
 			gprintf(" - Not found.\n%s", downloadURL);
-			file = downloadfile(downloadURL);
+			downloadfile(downloadURL, file);
 			if(VALID_IMAGE(file))
-				return file;
+				return;
 		}
 		
 		if(gameID[3] == 'V') // no English cover found, try Finnish and Swedish
 		{
 			lang = "FI";
-			free(file.data);
-			
 			snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
 			gprintf(" - Not found.\n%s", downloadURL);
-			file = downloadfile(downloadURL);
+			downloadfile(downloadURL, file);
 			if(VALID_IMAGE(file))
-				return file;
+				return;
 			
 			lang = "SE";
-			free(file.data);
-			
 			snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
 			gprintf(" - Not found.\n%s", downloadURL);
-			file = downloadfile(downloadURL);
+			downloadfile(downloadURL, file);
 			if(VALID_IMAGE(file))
-				return file;
+				return;
 		}
 	}
 
 	gprintf(" - Not found.\n");
-	free(file.data);
-
-	memset(&file, 0, sizeof(struct block));
-
-	return file;
 }
 
 void ImageDownloader::CreateCSVLog()
@@ -429,7 +410,7 @@ void ImageDownloader::CreateCSVLog()
 	fclose(f);
 }
 
-bool ImageDownloader::IsValidBanner(unsigned char *banner)
+bool ImageDownloader::IsValidBanner(char *banner)
 {
 	if(!((*(u32*)(banner+64)) == 'IMET'))
 	{
