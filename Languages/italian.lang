@@ -1086,10 +1086,10 @@ msgstr "GXDraw"
 msgid "GXFlush"
 msgstr "GXFlush"
 
-msgid "Game Cube Games Delete"
+msgid "GameCube Games Delete"
 msgstr "Menu disinstallazioni GC"
 
-msgid "Game Cube Install Menu"
+msgid "GameCube Install Menu"
 msgstr "Menu installazioni GC"
 
 msgid "Game ID"
@@ -1235,7 +1235,7 @@ msgstr "Inizializzando la rete"
 msgid "Insert Disk"
 msgstr "Inserisci un disco"
 
-msgid "Insert a Wii or a Game Cube Disc!"
+msgid "Insert a Wii or a GameCube Disc!"
 msgstr "Inserisci un disco Wii o GameCube!"
 
 msgid "Install"
@@ -1262,7 +1262,7 @@ msgstr "Error di installazione. Pulizia dei dati incompleti"
 msgid "Install finished"
 msgstr "Installazione completata"
 
-msgid "Installing Game Cube Game..."
+msgid "Installing GameCube Game..."
 msgstr "Installando il gioco GameCube..."
 
 msgid "Installing content"
@@ -1587,7 +1587,7 @@ msgstr "Normale"
 msgid "Not Initialized"
 msgstr "Non Inizializzato"
 
-msgid "Not a Wii or a Game Cube Disc"
+msgid "Not a Wii or a GameCube Disc"
 msgstr "Il disco non è per Wii/GameCube"
 
 msgid "Not a valid URL"

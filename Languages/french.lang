@@ -1086,10 +1086,10 @@ msgstr ""
 msgid "GXFlush"
 msgstr ""
 
-msgid "Game Cube Games Delete"
+msgid "GameCube Games Delete"
 msgstr "Menu de suppression GameCube"
 
-msgid "Game Cube Install Menu"
+msgid "GameCube Install Menu"
 msgstr "Menu d'installation GameCube"
 
 msgid "Game ID"
@@ -1235,7 +1235,7 @@ msgstr "Initialisation du réseau"
 msgid "Insert Disk"
 msgstr "Insérez un disque"
 
-msgid "Insert a Wii or a Game Cube Disc!"
+msgid "Insert a Wii or a GameCube Disc!"
 msgstr "Insérez un disque Wii ou GameCube !"
 
 msgid "Install"
@@ -1262,7 +1262,7 @@ msgstr "Erreur lors de l'installation ! Suppression des données incomplètes."
 msgid "Install finished"
 msgstr "Installation terminée"
 
-msgid "Installing Game Cube Game..."
+msgid "Installing GameCube Game..."
 msgstr "Installation du jeu GameCube..."
 
 msgid "Installing content"
@@ -1587,7 +1587,7 @@ msgstr "Normale"
 msgid "Not Initialized"
 msgstr "Disque non initialisé"
 
-msgid "Not a Wii or a Game Cube Disc"
+msgid "Not a Wii or a GameCube Disc"
 msgstr "Ce disque n'est ni un jeu Wii ni un jeu GameCube"
 
 msgid "Not a valid URL"

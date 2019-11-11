@@ -228,7 +228,7 @@ int MenuInstall()
 
 	if ((headerdisc.magic != WII_MAGIC) && (headerdisc.gc_magic != GCGames::MAGIC))
 	{
-		choice = WindowPrompt(tr( "Not a Wii or a Game Cube Disc" ), tr( "Insert a Wii or a Game Cube Disc!" ), tr( "OK" ), tr( "Back" ));
+		choice = WindowPrompt(tr( "Not a Wii or a GameCube Disc" ), tr( "Insert a Wii or a GameCube Disc!" ), tr( "OK" ), tr( "Back" ));
 		if (choice == 1)
 			return MenuInstall();
 		else

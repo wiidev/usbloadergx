@@ -1086,10 +1086,10 @@ msgstr "GXDraw"
 msgid "GXFlush"
 msgstr "GXFlush"
 
-msgid "Game Cube Games Delete"
+msgid "GameCube Games Delete"
 msgstr "GameCube 游戏删除"
 
-msgid "Game Cube Install Menu"
+msgid "GameCube Install Menu"
 msgstr "GameCube 安装菜单"
 
 msgid "Game ID"
@@ -1235,7 +1235,7 @@ msgstr "正在启动网络"
 msgid "Insert Disk"
 msgstr "插入光盘"
 
-msgid "Insert a Wii or a Game Cube Disc!"
+msgid "Insert a Wii or a GameCube Disc!"
 msgstr "插入一张 Wii 或 GC 光盘！"
 
 msgid "Install"
@@ -1262,7 +1262,7 @@ msgstr ""
 msgid "Install finished"
 msgstr "安装已完成"
 
-msgid "Installing Game Cube Game..."
+msgid "Installing GameCube Game..."
 msgstr "正在安装 GameCube 游戏..."
 
 msgid "Installing content"
@@ -1587,7 +1587,7 @@ msgstr "一般"
 msgid "Not Initialized"
 msgstr "未初始化"
 
-msgid "Not a Wii or a Game Cube Disc"
+msgid "Not a Wii or a GameCube Disc"
 msgstr "不是 Wii 或 GameCube 光盘"
 
 msgid "Not a valid URL"

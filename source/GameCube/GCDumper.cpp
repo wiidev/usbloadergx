@@ -307,7 +307,7 @@ s32 GCDumper::InstallGame(const char *installpath, u32 game, const char *install
 	s32 result = 0;
 
 	ProgressCancelEnable(true);
-	StartProgress(tr("Installing Game Cube Game..."), gcheader.title, 0, true, true);
+	StartProgress(tr("Installing GameCube Game..."), gcheader.title, 0, true, true);
 
 	if(compressed)
 	{

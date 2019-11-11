@@ -26,7 +26,7 @@
 
 GCDeleteMenu::GCDeleteMenu(void)
 {
-	titleTxt->SetText(tr("Game Cube Games Delete"));
+	titleTxt->SetText(tr("GameCube Games Delete"));
 	button1Txt->SetText(tr("Delete"));
 	browserRefresh();
 }

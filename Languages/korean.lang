@@ -1083,10 +1083,10 @@ msgstr ""
 msgid "GXFlush"
 msgstr ""
 
-msgid "Game Cube Games Delete"
+msgid "GameCube Games Delete"
 msgstr "게임큐브 게임 삭제"
 
-msgid "Game Cube Install Menu"
+msgid "GameCube Install Menu"
 msgstr "게임큐브 설치 메뉴"
 
 msgid "Game ID"
@@ -1232,7 +1232,7 @@ msgstr "네트워크 초기화"
 msgid "Insert Disk"
 msgstr "디스크 넣기"
 
-msgid "Insert a Wii or a Game Cube Disc!"
+msgid "Insert a Wii or a GameCube Disc!"
 msgstr "Wii 또는 Gamecube 디스크를 넣으세요!"
 
 msgid "Install"
@@ -1259,7 +1259,7 @@ msgstr "설치 오류 - 불완전한 데이터 정리"
 msgid "Install finished"
 msgstr "설치 완료"
 
-msgid "Installing Game Cube Game..."
+msgid "Installing GameCube Game..."
 msgstr "게임큐브 게임 설치 중 입니다..."
 
 msgid "Installing content"
@@ -1584,7 +1584,7 @@ msgstr "보통"
 msgid "Not Initialized"
 msgstr "초기화되지 않음"
 
-msgid "Not a Wii or a Game Cube Disc"
+msgid "Not a Wii or a GameCube Disc"
 msgstr "Wii 또는 게임큐브 디스크가 아님"
 
 msgid "Not a valid URL"

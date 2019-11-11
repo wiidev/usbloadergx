@@ -317,7 +317,7 @@ void GameWindow::LoadGameSound(const struct discHdr * header)
 	}
 	else if((header->type == TYPE_GAME_GC_IMG) || (header->type == TYPE_GAME_GC_DISC) || (header->type == TYPE_GAME_GC_EXTRACTED))
 	{
-		//! on game cube load the default sound
+		//! on gamecube load the default sound
 		gameSound = new GuiSound(Resources::GetFile("gc_banner.ogg"), Resources::GetFileSize("gc_banner.ogg"), Settings.gamesoundvolume);
 	}
 	if(gameSound)

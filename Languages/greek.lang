@@ -1085,10 +1085,10 @@ msgstr "GXDraw"
 msgid "GXFlush"
 msgstr "GXFlush"
 
-msgid "Game Cube Games Delete"
+msgid "GameCube Games Delete"
 msgstr "ÄéáãñáöÞ ðáé÷íéäéþí Gamecube"
 
-msgid "Game Cube Install Menu"
+msgid "GameCube Install Menu"
 msgstr "menu åãêáôÜóôáóçò ðáé÷íéäéþí Gamecube"
 
 msgid "Game ID"
@@ -1234,7 +1234,7 @@ msgstr "Óýíäåóç óôï äéáäßêôõï"
 msgid "Insert Disk"
 msgstr "ÅéóÜãåôå äßóêï"
 
-msgid "Insert a Wii or a Game Cube Disc!"
+msgid "Insert a Wii or a GameCube Disc!"
 msgstr "ÅéóÜãåôå Ýíáí ïðôéêü äßóêï Wii Þ GameCube!"
 
 msgid "Install"
@@ -1261,7 +1261,7 @@ msgstr ""
 msgid "Install finished"
 msgstr "Ç åãêáôÜóôáóç ïëïêëçñþèçêå"
 
-msgid "Installing Game Cube Game..."
+msgid "Installing GameCube Game..."
 msgstr "Åãêáèßóôáôáé ðáé÷íßäé GameCube..."
 
 msgid "Installing content"
@@ -1586,7 +1586,7 @@ msgstr "ÊáíïíéêÜ"
 msgid "Not Initialized"
 msgstr "Äåí îåêßíçóå"
 
-msgid "Not a Wii or a Game Cube Disc"
+msgid "Not a Wii or a GameCube Disc"
 msgstr "Äåí åßíáé äßóêïò Wii/GameCube"
 
 msgid "Not a valid URL"
