@@ -235,7 +235,10 @@ int StartUpProcess::Execute()
 {
 	Settings.EntryIOS = IOS_GetVersion();
 
-	// Reload app cios if needed
+	// Reloading to IOS 249 fixes compatibility issues with old forwarders
+	IosLoader::ReloadIosSafe(249);
+
+	// Reload to the default IOS or the IOS set in meta.xml
 	SetTextf("Loading application cIOS %s\n", Settings.UseArgumentIOS ? "requested in meta.xml" : "");
 	if(IosLoader::LoadAppCios() < 0)
 	{
@@ -255,7 +258,7 @@ int StartUpProcess::Execute()
 			sleep(5);
 		}
 	}
-	
+
 	if(!AHBPROT_DISABLED && IOS_GetVersion() < 200)
 	{
 		SetTextf("Failed loading IOS %i. USB Loader GX requires a cIOS or IOS58 with AHB access. Exiting...\n", IOS_GetVersion());
@@ -291,7 +294,7 @@ int StartUpProcess::Execute()
 	// Reload to user's settings if different than current IOS, and if not using an injected WiiU WiiVC IOS255 (fw.img)
 	if(Settings.LoaderIOS != IOS_GetVersion() && !isWiiVC)
 	{
-		SetTextf("Reloading to config file's cIOS...\n");
+		SetTextf("Reloading to config files cIOS...\n");
 		
 		// Unmount devices
 		DeviceHandler::DestroyInstance();
