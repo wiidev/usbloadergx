@@ -280,6 +280,8 @@ void LoaderSettings::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Triforce Arcade Mode" ));
 	Options->SetName(Idx++, "%s", tr("CC Rumble"));
 	Options->SetName(Idx++, "%s", tr("Skip IPL"));
+	Options->SetName(Idx++, "%s", tr( "BBA Emulation" ));
+	Options->SetName(Idx++, "%s", tr( "BBA Net Profile" ));
 	Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
 	Options->SetName(Idx++, "%s", tr( "Memory Card Blocks Size" ));
 	Options->SetName(Idx++, "%s", tr( "USB-HID Controller" ));
@@ -452,7 +454,6 @@ void LoaderSettings::SetOptionValues()
 	{
 		Options->SetValue(Idx++, "%s", tr("Manual (40~120)"));
 		Options->SetValue(Idx++, "%d", Settings.NINVideoScale);
-		
 	}
 
 	//! Settings: NIN VideoOffset
@@ -469,6 +470,15 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: NIN Skip IPL
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINSkipIPL]));
+
+	//! Settings: NIN BBA Emulation
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINBBA]));
+
+	//! Settings: NIN BBA Net Profile
+	if(Settings.NINBBAProfile == 0)
+		Options->SetValue(Idx++, "%s", tr("Auto"));
+	else
+		Options->SetValue(Idx++, "%i", Settings.NINBBAProfile);
 
 	//! Settings: NIN Memory Card Emulation
 	Options->SetValue(Idx++, "%s", tr(NINMCText[Settings.NINMCEmulation]));
@@ -887,6 +897,18 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.NINSkipIPL >= MAX_ON_OFF) Settings.NINSkipIPL = 0;
+	}
+
+	//! Settings: NIN BBA Emulation
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINBBA >= MAX_ON_OFF) Settings.NINBBA = 0;
+	}
+
+	//! Settings: NIN BBA Net Profile
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINBBAProfile >= NIN_BBA_MAX_CHOICE) Settings.NINBBAProfile = 0;
 	}
 
 	//! Settings: NIN Memory Card Emulation

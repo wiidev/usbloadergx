@@ -202,6 +202,8 @@ void GCGameLoadSM::SetOptionNames()
 		Options->SetName(Idx++, "%s", tr( "Triforce Arcade Mode" ));
 		Options->SetName(Idx++, "%s", tr("CC Rumble"));
 		Options->SetName(Idx++, "%s", tr("Skip IPL"));
+		Options->SetName(Idx++, "%s", tr( "BBA Emulation" ));
+		Options->SetName(Idx++, "%s", tr( "BBA Net Profile" ));
 		Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
 		Options->SetName(Idx++, "%s", tr( "Memory Card Blocks Size" ));
 		Options->SetName(Idx++, "%s", tr( "USB-HID Controller" ));
@@ -422,6 +424,20 @@ void GCGameLoadSM::SetOptionValues()
 			Options->SetValue(Idx++, tr("Use global"));
 		else
 			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINSkipIPL]));
+
+		//! Settings: NIN BBA Emulation
+		if (GameConfig.NINBBA == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.NINBBA]));
+
+		//! Settings: NIN BBA Net Profile
+		if(GameConfig.NINBBAProfile == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else if(GameConfig.NINBBAProfile == 0)
+			Options->SetValue(Idx++, tr("Auto"));
+		else
+			Options->SetValue(Idx++, "%i", GameConfig.NINBBAProfile);
 
 		//! Settings: NIN Memory Card Emulation
 		if(GameConfig.NINMCEmulation == INHERIT)
@@ -781,6 +797,18 @@ int GCGameLoadSM::GetMenuInternal()
 	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
 	{
 		if (++GameConfig.NINSkipIPL >= MAX_ON_OFF) GameConfig.NINSkipIPL = INHERIT;
+	}
+
+	//! Settings: NIN BBA Emulation
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.NINBBA >= MAX_ON_OFF) GameConfig.NINBBA = INHERIT;
+	}
+
+	//! Settings: NIN BBA Net Profile
+	else if (currentGCmode == GC_MODE_NINTENDONT && ret == ++Idx)
+	{
+		if (++GameConfig.NINBBAProfile >= NIN_BBA_MAX_CHOICE) GameConfig.NINBBAProfile = INHERIT;
 	}
 
 	//! Settings: NIN Memory Card Emulation

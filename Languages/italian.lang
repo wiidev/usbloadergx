@@ -1950,6 +1950,12 @@ msgstr "Salta errori"
 msgid "Skip IPL"
 msgstr "Salta IPL"
 
+msgid "BBA Emulation"
+msgstr ""
+
+msgid "BBA Net Profile"
+msgstr ""
+
 msgid "Sneek Video Patch"
 msgstr "Patch video sneek"
 

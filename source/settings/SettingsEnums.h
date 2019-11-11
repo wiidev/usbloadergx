@@ -342,6 +342,16 @@ enum
 
 enum
 {
+	NIN_BBA_AUTO,
+	NIN_BBA_1,
+	NIN_BBA_2,
+	NIN_BBA_3,
+	NIN_BBA_MAX_CHOICE
+	
+};
+
+enum
+{
 	DML_VIDEO_AUTO,
 	DML_VIDEO_FORCE_SYSDEFAULT, // same modes as Wii, +1
 	DML_VIDEO_FORCE_DISCDEFAULT,

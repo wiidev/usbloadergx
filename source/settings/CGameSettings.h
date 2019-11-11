@@ -50,6 +50,8 @@ typedef struct _GameCFG
 	short NINArcadeMode;
 	short NINCCRumble;
 	short NINSkipIPL;
+	short NINBBA;
+	short NINBBAProfile;
 	short NINMCEmulation;
 	short NINMCSize;
 	short NINUSBHID;
@@ -113,6 +115,8 @@ typedef struct _GameCFG
 		this->NINArcadeMode = game.NINArcadeMode;
 		this->NINCCRumble = game.NINCCRumble;
 		this->NINSkipIPL = game.NINSkipIPL;
+		this->NINBBA = game.NINBBA;
+		this->NINBBAProfile = game.NINBBAProfile;
 		this->NINMCEmulation = game.NINMCEmulation;
 		this->NINMCSize = game.NINMCSize;
 		this->NINUSBHID = game.NINUSBHID;

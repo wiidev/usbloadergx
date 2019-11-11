@@ -194,6 +194,8 @@ void CSettings::SetDefault()
 	NINArcadeMode = OFF;
 	NINCCRumble = OFF;
 	NINSkipIPL = OFF;
+	NINBBA = OFF;
+	NINBBAProfile = 0;
 	NINMCEmulation = ON;
 	NINMCSize = 2;
 	NINAutoboot = ON;
@@ -454,6 +456,8 @@ bool CSettings::Save()
 	fprintf(file, "NINArcadeMode = %d\n", NINArcadeMode);
 	fprintf(file, "NINCCRumble = %d\n", NINCCRumble);
 	fprintf(file, "NINSkipIPL = %d\n", NINSkipIPL);
+	fprintf(file, "NINBBA = %d\n", NINBBA);
+	fprintf(file, "NINBBAProfile = %d\n", NINBBAProfile);
 	fprintf(file, "NINMCEmulation = %d\n", NINMCEmulation);
 	fprintf(file, "NINMCSize = %d\n", NINMCSize);
 	fprintf(file, "NINAutoboot = %d\n", NINAutoboot);
@@ -991,6 +995,16 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "NINSkipIPL") == 0)
 	{
 		NINSkipIPL = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINBBA") == 0)
+	{
+		NINBBA = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINBBAProfile") == 0)
+	{
+		NINBBAProfile = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "NINMCEmulation") == 0)

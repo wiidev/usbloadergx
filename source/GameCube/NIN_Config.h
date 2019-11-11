@@ -20,12 +20,12 @@
 #include <gctypes.h>
 
 #define NIN_MAGIC					0x01070CF6
-#define NIN_CFG_VERSION				0x00000008
+#define NIN_CFG_VERSION				0x00000009
 
 typedef struct NIN_CFG 
 {
 	u32		Magicbytes;		// 0x01070CF6
-	u32		Version;		// v4 since v3.354, v5 since v3.358, v6 since v3.368, v7 since 4.424, v8 since 4.431
+	u32		Version;		// v4 since v3.354, v5 since v3.358, v6 since v3.368, v7 since v4.424, v8 since v4.431, v9 since v6.487
 	u32		Config;
 	u32		VideoMode;
 	u32		Language;
@@ -41,7 +41,7 @@ typedef struct NIN_CFG
 			char		MemCardBlocksV4;// replaced in v3.354 - cfg version 4 - from u32 in v3 to Char in v4
 			char		VideoScale;		// added in v3.354 - cfg version 4
 			char		VideoOffset;	// added in v3.354 - cfg version 4
-			char		Unused; 		// added in v3.354 - cfg version 4
+			char		NetworkProfile; // added in v6.487 - cfg version 9
 		};
 	};
 } NIN_CFG;
@@ -68,6 +68,7 @@ enum ninconfig
 	NIN_CFG_ARCADE_MODE = (1<<16),	// v4.424
 	NIN_CFG_CC_RUMBLE	= (1 << 17),// v4.431 cfg version 8
 	NIN_CFG_SKIP_IPL	= (1 << 18),// v4.435
+	NIN_CFG_BBA_EMU		= (1 << 19),// v6.487 cfg version 9
 };
 
 enum ninvideomode

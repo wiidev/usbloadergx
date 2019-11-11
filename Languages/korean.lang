@@ -1947,6 +1947,12 @@ msgstr "오류 건너뛰기"
 msgid "Skip IPL"
 msgstr "IPL 건너뛰기"
 
+msgid "BBA Emulation"
+msgstr "BBA 에뮬레이션"
+
+msgid "BBA Net Profile"
+msgstr "BBA 넷 프로파일"
+
 msgid "Sneek Video Patch"
 msgstr "Sneek 비디오 경로"
 

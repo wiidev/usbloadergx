@@ -198,6 +198,8 @@ class CSettings
 		short NINArcadeMode;
 		short NINCCRumble;
 		short NINSkipIPL;
+		short NINBBA;
+		short NINBBAProfile;
 		s8 NINMCEmulation;
 		short NINMCSize;
 		short NINAutoboot;

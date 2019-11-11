@@ -226,6 +226,8 @@ bool CGameSettings::Save()
 		fprintf(f, "NINArcadeMode:%d; ", GameList[i].NINArcadeMode);
 		fprintf(f, "NINCCRumble:%d; ", GameList[i].NINCCRumble);
 		fprintf(f, "NINSkipIPL:%d; ", GameList[i].NINSkipIPL);
+		fprintf(f, "NINBBA:%d; ", GameList[i].NINBBA);
+		fprintf(f, "NINBBAProfile:%d; ", GameList[i].NINBBAProfile);
 		fprintf(f, "NINMCEmulation:%d; ", GameList[i].NINMCEmulation);
 		fprintf(f, "NINMCSize:%d; ", GameList[i].NINMCSize);
 		fprintf(f, "NINUSBHID:%d; ", GameList[i].NINUSBHID);
@@ -459,6 +461,16 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		game.NINSkipIPL = atoi(value);
 		return true;
 	}
+	else if (strcmp(name, "NINBBA") == 0)
+	{
+		game.NINBBA = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINBBAProfile") == 0)
+	{
+		game.NINBBAProfile = atoi(value);
+		return true;
+	}
 	else if(strcmp(name, "NINMCEmulation") == 0)
 	{
 		game.NINMCEmulation = atoi(value);
@@ -690,6 +702,8 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.NINArcadeMode = INHERIT;
 	game.NINCCRumble = INHERIT;
 	game.NINSkipIPL = INHERIT;
+	game.NINBBA = INHERIT;
+	game.NINBBAProfile = INHERIT;
 	game.NINMCEmulation = INHERIT;
 	game.NINMCSize = INHERIT;
 	game.NINUSBHID = INHERIT;

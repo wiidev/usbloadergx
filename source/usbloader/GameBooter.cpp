@@ -1023,6 +1023,8 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	u8 ninArcadeModeChoice = game_cfg->NINArcadeMode == INHERIT ? Settings.NINArcadeMode : game_cfg->NINArcadeMode;
 	u8 ninCCRumbleChoice = game_cfg->NINCCRumble == INHERIT ? Settings.NINCCRumble : game_cfg->NINCCRumble;
 	u8 ninSkipIPLChoice = game_cfg->NINSkipIPL == INHERIT ? Settings.NINSkipIPL : game_cfg->NINSkipIPL;
+	u8 ninBBAChoice = game_cfg->NINBBA == INHERIT ? Settings.NINBBA : game_cfg->NINBBA;
+	u8 ninBBAProfileChoice = game_cfg->NINBBAProfile == INHERIT ? Settings.NINBBAProfile : game_cfg->NINBBAProfile;
 
 	const char *ninLoaderPath = game_cfg->NINLoaderPath.size() == 0 ? Settings.NINLoaderPath : game_cfg->NINLoaderPath.c_str();
 
@@ -1498,6 +1500,14 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	// Remove data read speed limiter
 	if(NIN_cfg_version >= 5 && ninRemlimitChoice)
 		nin_config->Config |= NIN_CFG_REMLIMIT;
+	
+	// BBA emulation
+	if (NIN_cfg_version >= 9 && ninBBAChoice)
+		nin_config->Config |= NIN_CFG_BBA_EMU; // v6.487+
+	
+	// BBA network profile
+	if(NIN_cfg_version >= 9 && ninBBAChoice && !isWiiU())
+		nin_config->NetworkProfile = ninBBAProfileChoice; // v6.487+
 	
 	// Setup Video Mode
 	if(ninVideoChoice == DML_VIDEO_NONE)				// No video mode changes
