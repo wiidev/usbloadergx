@@ -93,7 +93,7 @@ void CSettings::SetDefault()
 	videomode = VIDEO_MODE_DISCDEFAULT;
 	videopatch = OFF;
 	videoPatchDol = OFF;
-	patchFix480p = OFF;
+	patchFix480p = ON;
 	language = CONSOLE_DEFAULT;
 	ocarina = OFF;
 	hddinfo = CLOCK_HR12;
