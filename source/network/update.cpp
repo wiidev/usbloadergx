@@ -149,7 +149,7 @@ static void UpdateIconPng()
 {
 	char iconpath[200];
 	struct download file = {};
-	downloadfile("https://svn.code.sf.net/p/usbloadergx/code/branches/updates/icon.png", &file);
+	downloadfile("https://raw.githubusercontent.com/wiidev/usbloadergx/updates/icon.png", &file);
 	if (file.size > 0)
 	{
 		snprintf(iconpath, sizeof(iconpath), "%sicon.png", Settings.update_path);
@@ -167,8 +167,7 @@ static void UpdateMetaXml()
 {
 	char xmlpath[200];
 	struct download file = {};
-	downloadfile("https://svn.code.sf.net/p/usbloadergx/code/branches/updates/meta.xml", &file);
-	// if not working, use this url form: http://sourceforge.net/p/usbloadergx/code/1254/tree//branches/updates/meta.xml?format=raw
+	downloadfile("https://raw.githubusercontent.com/wiidev/usbloadergx/updates/meta.xml", &file);
 	if (file.size > 0)
 	{
 		snprintf(xmlpath, sizeof(xmlpath), "%smeta.xml", Settings.update_path);
@@ -192,9 +191,9 @@ int CheckUpdate()
 
 	struct download file = {};
 #ifdef FULLCHANNEL
-	downloadfile("https://svn.code.sf.net/p/usbloadergx/code/branches/updates/update_wad.txt", &file);
+	downloadfile("https://raw.githubusercontent.com/wiidev/usbloadergx/updates/update_wad.txt", &file);
 #else
-	downloadfile("https://svn.code.sf.net/p/usbloadergx/code/branches/updates/update_dol.txt", &file);
+	downloadfile("https://raw.githubusercontent.com/wiidev/usbloadergx/updates/update_dol.txt", &file);
 #endif
 
 	if (file.size > 0)
@@ -217,9 +216,9 @@ static int ApplicationDownload(void)
 
 	struct download file = {};
 #ifdef FULLCHANNEL
-	downloadfile("https://svn.code.sf.net/p/usbloadergx/code/branches/updates/update_wad.txt", &file);
+	downloadfile("https://raw.githubusercontent.com/wiidev/usbloadergx/updates/update_wad.txt", &file);
 #else
-	downloadfile("https://svn.code.sf.net/p/usbloadergx/code/branches/updates/update_dol.txt", &file);
+	downloadfile("https://raw.githubusercontent.com/wiidev/usbloadergx/updates/update_dol.txt", &file);
 #endif
 
 	if (file.size > 0)
