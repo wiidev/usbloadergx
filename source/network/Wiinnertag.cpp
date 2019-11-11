@@ -25,6 +25,7 @@
 #include "FileOperations/fileops.h"
 #include "settings/CSettings.h"
 #include "network/networkops.h"
+#include "network/https.h"
 #include "utils/StringTools.h"
 #include "xml/tinyxml2.h"
 #include "gecko.h"
@@ -77,8 +78,9 @@ bool Wiinnertag::Send(const char *gameID)
 		replaceString(sendURL, "{ID6}", gameID);
 		replaceString(sendURL, "{KEY}", tagList[i].second.c_str());
 
-		download_request(sendURL);
-		CloseConnection();
+		struct download file = {};
+		file.skip_response = 1;
+		downloadfile(sendURL, &file);
 	}
 
 	return true;
@@ -116,7 +118,7 @@ bool Wiinnertag::CreateExample(const string &filepath)
 	xmlDoc.InsertEndChild(declaration);
 
 	XMLElement *Tag = xmlDoc.NewElement("Tag");
-	Tag->SetAttribute("URL", "http://www.wiinnertag.com/wiinnertag_scripts/update_sign.php?key={KEY}&game_id={ID6}");
+	Tag->SetAttribute("URL", "https://www.wiinnertag.com/wiinnertag_scripts/update_sign.php?key={KEY}&game_id={ID6}");
 	Tag->SetAttribute("Key", "1234567890");
 	xmlDoc.InsertEndChild(Tag);
 

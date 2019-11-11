@@ -21,9 +21,10 @@ URL_List::URL_List(const char * url)
 		return;
 	}
 
-	struct block file = downloadfile(url);
+	struct download file = {};
+	downloadfile(url, &file);
 
-	if (!file.data || !file.size)
+	if (file.size <= 0)
 	{
 		urlcount = -2;
 		return;
@@ -95,7 +96,7 @@ URL_List::URL_List(const char * url)
 
 			snprintf(Links[urlcount].URL, cnt2 + 1, "%s", temp);
 
-			if (strncmp(Links[urlcount].URL, "http://", strlen("http://")) != 0)
+			if (strncmp(Links[urlcount].URL, "https://", strlen("https://")) != 0)
 				Links[urlcount].direct = false;
 			else Links[urlcount].direct = true;
 

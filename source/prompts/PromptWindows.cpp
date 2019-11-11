@@ -22,7 +22,7 @@
 #include "settings/GameTitles.h"
 #include "network/networkops.h"
 #include "network/update.h"
-#include "network/http.h"
+#include "network/https.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/PromptWindow.hpp"
 #include "prompts/gameinfo.h"
@@ -1271,7 +1271,7 @@ int FormatingPartition(const char *title, int part_num)
  ***************************************************************************/
 bool NetworkInitPrompt()
 {
-	gprintf("\nNetworkinitPrompt()");
+	gprintf("NetworkinitPrompt()\n");
 	if (IsNetworkInit()) return true;
 
 	bool success = true;
@@ -1459,12 +1459,18 @@ int CodeDownload(const char *id)
 		snprintf(txtpath, sizeof(txtpath), "%s%s.txt", Settings.TxtCheatcodespath, id);
 
 		char codeurl[250];
-		snprintf(codeurl, sizeof(codeurl), "http://geckocodes.org/txt.php?txt=%s", id);
-		//snprintf(codeurl, sizeof(codeurl), "http://geckocodes.org/codes/G/%s.txt", id);
-		
-		struct block file = downloadfile(codeurl);
+		snprintf(codeurl, sizeof(codeurl), "https://www.geckocodes.org/txt.php?txt=%s", id);
 
-		if (file.data != NULL)
+		struct download file = {};
+		downloadfile(codeurl, &file);
+		if (file.size <= 0) {
+			gprintf("Trying backup...\n");
+			char codeurl_backup[250];
+			snprintf(codeurl_backup, sizeof(codeurl_backup), "https://web.archive.org/web/3000if_/geckocodes.org/txt.php?txt=%s", id);
+			downloadfile(codeurl_backup, &file);
+		}
+
+		if (file.size > 0)
 		{
 			bool validUrl = false;
 			if(file.size > 0)

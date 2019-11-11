@@ -7,7 +7,7 @@
 #define ___URLLIST_H_
 
 #include "network/networkops.h"
-#include "network/http.h"
+#include "network/https.h"
 
 typedef struct
 {

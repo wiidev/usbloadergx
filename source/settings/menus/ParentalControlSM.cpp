@@ -64,7 +64,6 @@ ParentalControlSM::ParentalControlSM()
 	Options->SetName(Idx++, "%s", tr( "Block Feature Settings" ));
 	Options->SetName(Idx++, "%s", tr( "Block Parental Settings" ));
 	Options->SetName(Idx++, "%s", tr( "Block Sound Settings" ));
-	Options->SetName(Idx++, "%s", tr( "Block Theme Downloader" ));
 	Options->SetName(Idx++, "%s", tr( "Block Theme Menu" ));
 	Options->SetName(Idx++, "%s", tr( "Block Custom Paths" ));
 	Options->SetName(Idx++, "%s", tr( "Block Updates" ));
@@ -132,9 +131,6 @@ void ParentalControlSM::SetOptionValues()
 
 	//! Settings: Block Sound Settings
 	Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_SOUND_SETTINGS) != 0)]));
-
-	//! Settings: Block Theme Downloader
-	Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_THEME_DOWNLOADER) != 0)]));
 
 	//! Settings: Block Theme Menu
 	Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_THEME_MENU) != 0)]));
@@ -296,12 +292,6 @@ int ParentalControlSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		Settings.ParentalBlocks ^= BLOCK_SOUND_SETTINGS;
-	}
-
-	//! Settings: Block Theme Downloader
-	else if (ret == ++Idx)
-	{
-		Settings.ParentalBlocks ^= BLOCK_THEME_DOWNLOADER;
 	}
 
 	//! Settings: Block Theme Menu

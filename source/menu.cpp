@@ -23,7 +23,6 @@
 #include "settings/CGameSettings.h"
 #include "themes/CTheme.h"
 #include "themes/ThemeMenu.h"
-#include "themes/ThemeDownloader.h"
 #include "usbloader/disc.h"
 #include "usbloader/GameList.h"
 #include "usbloader/MountGamePartition.h"
@@ -215,9 +214,6 @@ int MainMenu(int menu)
 			case MENU_THEMEMENU:
 				currentMenu = ThemeMenu::Execute();
 				break;
-		//	case MENU_THEMEDOWNLOADER:
-		//		currentMenu = ThemeDownloader::Execute();
-		//		break;
 			case MENU_HOMEBREWBROWSE:
 				currentMenu = HomebrewBrowser::Execute();
 				break;

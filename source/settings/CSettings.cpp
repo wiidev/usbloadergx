@@ -78,7 +78,6 @@ void CSettings::SetDefault()
 	strlcpy(NandEmuChanPath, NandEmuPath, sizeof(NandEmuChanPath));
 	strlcpy(GameCubePath, "usb1:/games/", sizeof(GameCubePath));
 	strlcpy(GameCubeSDPath, "sd:/games/", sizeof(GameCubeSDPath));
-	strlcpy(CustomBannersURL, "http://banner.rc24.xyz/", sizeof(CustomBannersURL));
 	theme[0] = 0;
 	language_path[0] = 0;
 	ogg_path[0] = 0;
@@ -478,7 +477,6 @@ bool CSettings::Save()
 	fprintf(file, "GCInstallCompressed = %d\n", GCInstallCompressed);
 	fprintf(file, "GCInstallAligned = %d\n", GCInstallAligned);
 	fprintf(file, "PrivateServer = %d\n", PrivateServer);
-	fprintf(file, "CustomBannersURL = %s\n", CustomBannersURL);
 	fclose(file);
 
 	return true;
@@ -1228,18 +1226,6 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "GameCubeSDPath") == 0)
 	{
 		strlcpy(GameCubeSDPath, value, sizeof(GameCubeSDPath));
-		return true;
-	}
-	else if (strcmp(name, "CustomBannersURL") == 0)
-	{
-		// update banner URL
-		if( strcmp(value, "http://dl.dropbox.com/u/101209384/") == 0 ||
-			strcmp(value, "http://dl.dropboxusercontent.com/u/101209384/") == 0 ||
-			strcmp(value, "http://copy.com/vRN3HgFVyk9u7YuB/Public/") == 0 ||
-			strcmp(value, "http://nintendont.gxarena.com/banners/") == 0) // Thanks to AbdallahTerro for this one and previous URLs
-			strlcpy(CustomBannersURL, "http://banner.rc24.xyz/", sizeof(CustomBannersURL)); // Thanks to Larsenv
-		else
-			strlcpy(CustomBannersURL, value, sizeof(CustomBannersURL));
 		return true;
 	}
 	else if(strcmp(name, "PrivateServer") == 0)

@@ -77,7 +77,7 @@ endif
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS := -lcustomfat -lcustomntfs -lcustomext2fs -lvorbisidec -lmad -lfreetype \
+LIBS := -lwolfssl -lcustomfat -lcustomntfs -lcustomext2fs -lvorbisidec -lmad -lfreetype \
 		-lgd -ljpeg -lpng -lzip -lm -lz -lwiiuse -lwiidrc -lbte -lasnd -logc -lruntimeiospatch
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
@@ -146,6 +146,7 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib) -L$(CURDIR)/source/libs/libfat/ \
 					-L$(CURDIR)/source/libs/libntfs/ -L$(CURDIR)/source/libs/libext2fs/ \
 					-L$(CURDIR)/source/libs/libruntimeiospatch/ -L$(CURDIR)/source/libs/libdrc/ \
+					-L$(CURDIR)/source/libs/libwolfssl/ \
 					-L$(LIBOGC_LIB) -L$(PORTLIBS)/lib
 
 export OUTPUT	:=	$(CURDIR)/$(TARGET)

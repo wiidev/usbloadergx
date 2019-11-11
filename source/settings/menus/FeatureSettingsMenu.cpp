@@ -653,8 +653,9 @@ int FeatureSettingsMenu::GetMenuInternal()
 				// Download latest loader.dol as boot.dol
 				bool success = false;
 				displayDownloadProgress(true); // enable progress window for next download
-				struct block file = downloadfile("https://raw.githubusercontent.com/FIX94/Nintendont/master/loader/loader.dol");
-				if (file.data != NULL)
+				struct download file = {};
+				downloadfile("https://raw.githubusercontent.com/FIX94/Nintendont/master/loader/loader.dol", &file);
+				if (file.size > 0)
 				{
 					FILE * pfile = fopen(NINUpdatePath, "wb");
 					if(pfile)
