@@ -6,6 +6,7 @@
 #include "input.h"
 #include "themes/CTheme.h"
 #include "gecko.h"
+#include "wpad.h"
 #include "Controls/DeviceHandler.hpp"
 #include "wad/nandtitle.h"
 #include "SystemMenu/SystemMenuResources.h"
@@ -298,7 +299,7 @@ int StartUpProcess::Execute()
 			USBStorage2_Deinit();
 
 		// Shut down pads
-		WPAD_Shutdown();
+		Wpad_Disconnect();
 
 		// Loading now the cios setup in the settings
 		IosLoader::LoadAppCios();

@@ -1,6 +1,5 @@
 #include <gctypes.h>
 #include <ogc/system.h>
-#include <wiiuse/wpad.h>
 
 #include "mload/mload.h"
 #include "banner/BannerAsync.h"
@@ -26,6 +25,7 @@
 #include "menu.h"
 #include "video.h"
 #include "gecko.h"
+#include "wpad.h"
 #include "wad/nandtitle.h"
 
 extern "C"
@@ -116,7 +116,7 @@ void AppCleanUp(void)
 
 	ResourceManager::DestroyInstance();
 
-	WPAD_Shutdown();
+	Wpad_Disconnect();
 	ISFS_Deinitialize();
 }
 
