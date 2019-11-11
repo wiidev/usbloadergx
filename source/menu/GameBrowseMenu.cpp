@@ -1017,6 +1017,7 @@ int GameBrowseMenu::MainLoop()
 	{
 		gprintf("\tDownloadBtn Clicked\n");
 		ImageDownloader::DownloadImages();
+		gameList.FilterList();
 		ReloadBrowser();
 		DownloadBtn->ResetState();
 	}
