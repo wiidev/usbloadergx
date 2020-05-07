@@ -1,13 +1,13 @@
 # USB Loader GX language source file.
-# korean.lang - r1268
+# korean.lang - r1272
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-14 15:50+0100\n"
+"POT-Creation-Date: 2020-05-07 15:41+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
-"Last-Translator: \n"
+"Last-Translator: DDinghoya@gmail.com\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -29,7 +29,7 @@ msgstr "%i 파일이 서버에 없습니다!"
 
 #, c-format
 msgid "%i missing files"
-msgstr "%i 파일 누락"
+msgstr "%i 파일이 누락되었습니다."
 
 #, c-format
 msgid "%i wad file(s) not processed!"
@@ -186,7 +186,7 @@ msgid "Are you sure?"
 msgstr "확실합니까?"
 
 msgid "Aspect Ratio"
-msgstr "화면 비율"
+msgstr "화면비"
 
 msgid "Attention!"
 msgstr "주의!"
@@ -219,7 +219,7 @@ msgid "Back to HBC or Wii Menu"
 msgstr "홈브류 채널 또는 Wii 메뉴로 돌아가기"
 
 msgid "Backgroundmusic"
-msgstr ""
+msgstr "배경음악"
 
 msgid "Banner Animation"
 msgstr "배너 애니메이션"
@@ -249,7 +249,7 @@ msgid "Block Cover Downloads"
 msgstr "커버 다운로드 차단"
 
 msgid "Block Custom Paths"
-msgstr "사용자 정의 경로 차단"
+msgstr "커스텀 경로 차단"
 
 msgid "Block Feature Settings"
 msgstr "기능 설정 차단"
@@ -276,7 +276,7 @@ msgid "Block Hard Drive Settings"
 msgstr "하드 드라이브 설정 차단"
 
 msgid "Block IOS Reload"
-msgstr "IOS Reload 차딘"
+msgstr "IOS 재로딩 차딘"
 
 msgid "Block Loader Layout Button"
 msgstr "로더 레이아웃 버튼 차단"
@@ -297,7 +297,7 @@ msgid "Block Reset Settings"
 msgstr "리셋 설정 차단"
 
 msgid "Block SD Reload Button"
-msgstr "SD Reload 버튼 차단"
+msgstr "SD 재로딩 버튼 차단"
 
 msgid "Block Sound Settings"
 msgstr "사운드 설정 차단"
@@ -342,10 +342,10 @@ msgid "Cache Titles"
 msgstr "타이틀 캐쉬"
 
 msgid "Can't be formatted"
-msgstr "포맷을 지정할 수 없음"
+msgstr "포맷을 할 수 없습니다."
 
 msgid "Can't create directory"
-msgstr "디렉토리를 생성할 수 없음"
+msgstr "디렉토리를 생성할 수 없습니다."
 
 #, c-format
 msgid "Can't create file: %s"
@@ -502,7 +502,7 @@ msgid "Could not initialize network, time out!"
 msgstr "네트워크를 초기화 할 수 없습니다. 시간 초과되었습니다."
 
 msgid "Could not open Disc"
-msgstr "디스크를 열 수 없음"
+msgstr "디스크를 열 수 없습니다."
 
 msgid "Could not open the WiiTDB.xml file."
 msgstr "WiiTDB.xml 파일을 열 수 없습니다."
@@ -535,16 +535,16 @@ msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr "현재의 neek 파일은 neek2o가 아닙니다. 게임 자동 부팅이 비활성화 되었습니다."
 
 msgid "Custom Banners"
-msgstr "사용자 정의 배너"
+msgstr "커스텀 배너"
 
 msgid "Custom Paths"
-msgstr "사용자 정의 경로"
+msgstr "커스텀 경로"
 
 msgid "Customs"
-msgstr "사용자 정의"
+msgstr "커스텀"
 
 msgid "Customs/Original"
-msgstr "사용자 정의/오리지날"
+msgstr "커스텀/오리지날"
 
 msgid "D Buttons"
 msgstr "D 버튼"
@@ -658,7 +658,7 @@ msgid "Discarts"
 msgstr ""
 
 msgid "DiskFlip"
-msgstr ""
+msgstr "디스크플립"
 
 msgid "Display"
 msgstr "디스플레이"
@@ -751,7 +751,7 @@ msgid "Downloading 3D Covers"
 msgstr "3D 커버 다운로드"
 
 msgid "Downloading Custom Banners"
-msgstr "사용자 정의 배너 다운로드"
+msgstr "커스텀 배너 다운로드"
 
 msgid "Downloading Flat Covers"
 msgstr "평면 커버 다운로드"
@@ -763,7 +763,7 @@ msgid "Downloading Full LQ Covers"
 msgstr "전체 LQ 커버 다운로드"
 
 msgid "Downloading custom Discarts"
-msgstr "사용자 정의를 다운로드"
+msgstr "커스텀 Discarts를 다운로드"
 
 msgid "Downloading file..."
 msgstr "파일 다운로드 중 입니다..."
@@ -772,7 +772,7 @@ msgid "Downloading image:"
 msgstr "이미지 다운로드"
 
 msgid "Downloading original Discarts"
-msgstr "원본 디스크를 다운로드"
+msgstr "원본 Discarts를 다운로드"
 
 msgid "Downloading pagelist:"
 msgstr "페이지목록 다운:"
@@ -1224,7 +1224,7 @@ msgid "Incoming file %0.2fMB"
 msgstr "수신 파일 %0.2fMB"
 
 msgid "Individual"
-msgstr "개인"
+msgstr "개별"
 
 msgid "Initializing Network"
 msgstr "네트워크 초기화"
@@ -1393,7 +1393,7 @@ msgid "Low/High"
 msgstr "낮음/높음"
 
 msgid "MIOS (Default & Customs)"
-msgstr "MIOS (기본 & 사용자 정의)"
+msgstr "MIOS (기본 & 커스텀)"
 
 msgid "Main DOL"
 msgstr "메인 DOL"
@@ -1516,7 +1516,7 @@ msgid "No"
 msgstr "아니오"
 
 msgid "No Cheatfile found"
-msgstr "Cheatfile을 찾을 수 없음"
+msgstr "Cheatfile을 찾을 수 없습니다."
 
 msgid "No DOL file found on disc."
 msgstr "디스크에 DOL 파일이 없습니다."
@@ -1627,16 +1627,16 @@ msgid "Nov"
 msgstr "11월"
 
 msgid "OFF"
-msgstr "끔"
+msgstr "꺼짐"
 
 msgid "OK"
 msgstr "확인"
 
 msgid "ON"
-msgstr "켬"
+msgstr "켜짐"
 
 msgid "ON (Multi)"
-msgstr "켬 (멀티)"
+msgstr "켜짐 (멀티)"
 
 msgid "OSReport"
 msgstr ""
@@ -1678,7 +1678,7 @@ msgid "Original"
 msgstr "오리지날"
 
 msgid "Original/Customs"
-msgstr "오리지날/사용자 정의"
+msgstr "오리지날/커스텀"
 
 msgid "PAD Hook"
 msgstr "패드 후크"
@@ -2493,4 +2493,4 @@ msgid "of"
 msgstr "의"
 
 msgid "seconds left"
-msgstr "초 남음"
+msgstr "초 남았습니다."
