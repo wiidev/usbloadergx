@@ -279,7 +279,7 @@ msgid "Block Hard Drive Settings"
 msgstr "하드 드라이브 설정 차단"
 
 msgid "Block IOS Reload"
-msgstr "IOS 재로딩 차딘"
+msgstr "IOS 리로딩 차단"
 
 msgid "Block Loader Layout Button"
 msgstr "로더 레이아웃 버튼 차단"
@@ -760,10 +760,10 @@ msgid "Downloading Flat Covers"
 msgstr "평면 커버 다운로드"
 
 msgid "Downloading Full HQ Covers"
-msgstr "전체 HQ 커버 다운로드"
+msgstr "전체 고품질 커버 다운로드"
 
 msgid "Downloading Full LQ Covers"
-msgstr "전체 LQ 커버 다운로드"
+msgstr "전체 저품질 커버 다운로드"
 
 msgid "Downloading custom Discarts"
 msgstr "커스텀 Discarts를 다운로드"
@@ -778,7 +778,7 @@ msgid "Downloading original Discarts"
 msgstr "원본 Discarts를 다운로드"
 
 msgid "Downloading pagelist:"
-msgstr "페이지목록 다운:"
+msgstr "페이지목록 다운로드:"
 
 msgid "Dump NAND to EmuNand"
 msgstr "NAND를 EmuNand에 덤프"
