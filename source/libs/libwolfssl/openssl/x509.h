@@ -1,7 +1,10 @@
 /* x509.h for openssl */
 
 #include <libs/libwolfssl/openssl/ssl.h>
+#include <libs/libwolfssl/openssl/crypto.h>
 #include <libs/libwolfssl/openssl/dh.h>
+#include <libs/libwolfssl/openssl/ec.h>
+#include <libs/libwolfssl/openssl/ecdsa.h>
 
 /* wolfSSL_X509_print_ex flags */
 #define X509_FLAG_COMPAT        (0UL)
@@ -18,3 +21,6 @@
 #define X509_FLAG_NO_AUX        (1UL << 10)
 #define X509_FLAG_NO_ATTRIBUTES (1UL << 11)
 #define X509_FLAG_NO_IDS        (1UL << 12)
+
+#define XN_FLAG_FN_SN           0
+#define XN_FLAG_SEP_CPLUS_SPC   2

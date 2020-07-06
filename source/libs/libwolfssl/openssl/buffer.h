@@ -1,6 +1,6 @@
 /* buffer.h
  *
- * Copyright (C) 2006-2019 wolfSSL Inc.
+ * Copyright (C) 2006-2020 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -39,10 +39,6 @@ WOLFSSL_API void wolfSSL_BUF_MEM_free(WOLFSSL_BUF_MEM* buf);
 #define BUF_MEM_new  wolfSSL_BUF_MEM_new
 #define BUF_MEM_grow wolfSSL_BUF_MEM_grow
 #define BUF_MEM_free wolfSSL_BUF_MEM_free
-
-/* error codes */
-#define ERR_R_MALLOC_FAILURE  MEMORY_E
-
 
 #ifdef __cplusplus
     }  /* extern "C" */

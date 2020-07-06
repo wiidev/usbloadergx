@@ -1,6 +1,6 @@
 /* integer.h
  *
- * Copyright (C) 2006-2019 wolfSSL Inc.
+ * Copyright (C) 2006-2020 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -229,6 +229,9 @@ typedef int ltm_prime_callback(unsigned char *dst, int len, void *dat);
 #define mp_isodd(a) \
     (((a)->used > 0 && (((a)->dp[0] & 1u) == 1u)) ? MP_YES : MP_NO)
 #define mp_isneg(a)  (((a)->sign != MP_ZPOS) ? MP_YES : MP_NO)
+#define mp_isword(a, w) \
+    ((((a)->used == 1) && ((a)->dp[0] == w)) || ((w == 0) && ((a)->used == 0)) \
+                                                               ? MP_YES : MP_NO)
 
 /* number of primes */
 #ifdef MP_8BIT
@@ -325,6 +328,7 @@ MP_API int  mp_dr_is_modulus(mp_int *a);
 MP_API int  mp_exptmod_fast (mp_int * G, mp_int * X, mp_int * P, mp_int * Y,
                              int);
 MP_API int  mp_exptmod_base_2 (mp_int * X, mp_int * P, mp_int * Y);
+#define mp_exptmod_nct(G,X,P,Y)    mp_exptmod_fast(G,X,P,Y,0)
 MP_API int  mp_montgomery_setup (mp_int * n, mp_digit * rho);
 int  fast_mp_montgomery_reduce (mp_int * x, mp_int * n, mp_digit rho);
 MP_API int  mp_montgomery_reduce (mp_int * x, mp_int * n, mp_digit rho);

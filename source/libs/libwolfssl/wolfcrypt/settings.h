@@ -1,6 +1,6 @@
 /* settings.h
  *
- * Copyright (C) 2006-2019 wolfSSL Inc.
+ * Copyright (C) 2006-2020 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -29,6 +29,13 @@
 
 #ifdef __cplusplus
     extern "C" {
+#endif
+
+/* This flag allows wolfSSL to include options.h instead of having client
+ * projects do it themselves. This should *NEVER* be defined when building
+ * wolfSSL as it can cause hard to debug problems. */
+#ifdef EXTERNAL_OPTS_OPENVPN
+#include <libs/libwolfssl/options.h>
 #endif
 
 /* Uncomment next line if using IPHONE */
@@ -78,6 +85,9 @@
 
 /* Uncomment next line if building wolfSSL for LSR */
 /* #define WOLFSSL_LSR */
+
+/* Uncomment next line if building for Freescale Classic MQX version 5.0 */
+/* #define FREESCALE_MQX_5_0 */
 
 /* Uncomment next line if building for Freescale Classic MQX version 4.0 */
 /* #define FREESCALE_MQX_4_0 */
@@ -140,7 +150,7 @@
 /* Uncomment next line if building for VxWorks */
 /* #define WOLFSSL_VXWORKS */
 
-/* Uncomment next line if building for Nordic nRF5x platofrm */
+/* Uncomment next line if building for Nordic nRF5x platform */
 /* #define WOLFSSL_NRF5x */
 
 /* Uncomment next line to enable deprecated less secure static DH suites */
@@ -280,6 +290,10 @@
         #define WOLFSSL_RENESAS_TSIP_TLS
         #define WOLFSSL_RENESAS_TSIP_TLS_AES_CRYPT
     #endif
+#endif
+
+#if defined(WOLFSSL_RENESAS_RA6M3G)
+    /* settings in user_settings.h */
 #endif
 
 #if defined(HAVE_LWIP_NATIVE) /* using LwIP native TCP socket */
@@ -451,6 +465,7 @@
     #define NO_MAIN_DRIVER
     #define NO_DEV_RANDOM
     #define NO_WRITEV
+    #define HAVE_STRINGS_H
 #endif
 
 
@@ -528,7 +543,8 @@
     #define XSTRNCMP(s1,s2,n)      strncmp((s1),(s2),(n))
     #define XSTRNCAT(s1,s2,n)      strncat((s1),(s2),(n))
     #define XSTRNCASECMP(s1,s2,n)  _strnicmp((s1),(s2),(n))
-    #if defined(WOLFSSL_CERT_EXT) || defined(HAVE_ALPN)
+    #if defined(WOLFSSL_CERT_EXT) || defined(OPENSSL_EXTRA) \
+            || defined(HAVE_ALPN)
         #define XSTRTOK            strtok_r
     #endif
 #endif
@@ -678,14 +694,21 @@ extern void uITRON4_free(void *p) ;
 #ifdef FREERTOS
     #include "FreeRTOS.h"
 
-    /* FreeRTOS pvPortRealloc() only in AVR32_UC3 port */
     #if !defined(XMALLOC_USER) && !defined(NO_WOLFSSL_MEMORY) && \
         !defined(WOLFSSL_STATIC_MEMORY)
         #define XMALLOC(s, h, type)  pvPortMalloc((s))
         #define XFREE(p, h, type)    vPortFree((p))
     #endif
-    #if defined(HAVE_ED25519) || defined(WOLFSSL_ESPIDF)
-        #define XREALLOC(p, n, h, t) wolfSSL_Realloc((p), (n))
+    /* FreeRTOS pvPortRealloc() implementation can be found here:
+        https://github.com/wolfSSL/wolfssl-freertos/pull/3/files */
+    #if !defined(USE_FAST_MATH) || defined(HAVE_ED25519) || defined(HAVE_ED448)
+        #if defined(WOLFSSL_ESPIDF)
+            /*In IDF, realloc(p, n) is equivalent to 
+            heap_caps_realloc(p, s, MALLOC_CAP_8BIT) */
+            #define XREALLOC(p, n, h, t) realloc((p), (n))
+        #else
+            #define XREALLOC(p, n, h, t) pvPortRealloc((p), (n))
+        #endif
     #endif
     #ifndef NO_WRITEV
         #define NO_WRITEV
@@ -794,7 +817,23 @@ extern void uITRON4_free(void *p) ;
 
     #define XMALLOC(s, h, type) ((void *)rtp_malloc((s), SSL_PRO_MALLOC))
     #define XFREE(p, h, type) (rtp_free(p))
-    #define XREALLOC(p, n, h, t) realloc((p), (n))
+    #define XREALLOC(p, n, h, t) (rtp_realloc((p), (n)))
+
+    #if (WINMSP3)
+        #define XSTRNCASECMP(s1,s2,n)  _strnicmp((s1),(s2),(n))
+    #else
+        #sslpro: settings.h - please implement XSTRNCASECMP - needed for HAVE_ECC
+    #endif
+
+    #define WOLFSSL_HAVE_MAX
+    #define WOLFSSL_HAVE_MIN
+
+    #define USE_FAST_MATH
+    #define TFM_TIMING_RESISTANT
+    #define WC_RSA_BLINDING
+    #define ECC_TIMING_RESISTANT
+
+    #define HAVE_ECC
 
 #endif /* EBSNET */
 
@@ -845,7 +884,9 @@ extern void uITRON4_free(void *p) ;
         #define XMALLOC(s, h, type)  pvPortMalloc((s))
         #define XFREE(p, h, type)    vPortFree((p))
     #endif
-    #if !defined(USE_FAST_MATH) || defined(HAVE_ED25519)
+    /* FreeRTOS pvPortRealloc() implementation can be found here:
+        https://github.com/wolfSSL/wolfssl-freertos/pull/3/files */
+    #if !defined(USE_FAST_MATH) || defined(HAVE_ED25519) || defined(HAVE_ED448)
         #define XREALLOC(p, n, h, t) pvPortRealloc((p), (n))
     #endif
 #endif
@@ -859,6 +900,11 @@ extern void uITRON4_free(void *p) ;
     #define TFM_TIMING_RESISTANT
 #endif
 
+#ifdef FREESCALE_MQX_5_0
+    /* use normal Freescale MQX port, but with minor changes for 5.0 */
+    #define FREESCALE_MQX
+#endif
+
 #ifdef FREESCALE_MQX_4_0
     /* use normal Freescale MQX port, but with minor changes for 4.0 */
     #define FREESCALE_MQX
@@ -869,7 +915,8 @@ extern void uITRON4_free(void *p) ;
     #include "mqx.h"
     #ifndef NO_FILESYSTEM
         #include "mfs.h"
-        #if MQX_USE_IO_OLD
+        #if (defined(MQX_USE_IO_OLD) && MQX_USE_IO_OLD) || \
+            defined(FREESCALE_MQX_5_0)
             #include "fio.h"
             #define NO_STDIO_FILESYSTEM
         #else
@@ -886,13 +933,23 @@ extern void uITRON4_free(void *p) ;
         #define XFREE(p, h, t)      {void* xp = (p); if ((xp)) _mem_free((xp));}
         /* Note: MQX has no realloc, using fastmath above */
     #endif
+    #ifdef USE_FAST_MATH
+        /* Undef first to avoid re-definition if user_settings.h defines */
+        #undef TFM_TIMING_RESISTANT
+        #define TFM_TIMING_RESISTANT
+        #undef ECC_TIMING_RESISTANT
+        #define ECC_TIMING_RESISTANT
+        #undef WC_RSA_BLINDING
+        #define WC_RSA_BLINDING
+    #endif
 #endif
 
 #ifdef FREESCALE_KSDK_MQX
     #define FREESCALE_COMMON
     #include <mqx.h>
     #ifndef NO_FILESYSTEM
-        #if MQX_USE_IO_OLD
+        #if (defined(MQX_USE_IO_OLD) && MQX_USE_IO_OLD) || \
+            defined(FREESCALE_MQX_5_0)
             #include <fio.h>
         #else
             #include <stdio.h>
@@ -1230,7 +1287,7 @@ extern void uITRON4_free(void *p) ;
     /* disable fall-back case, malloc, realloc and free are unavailable */
     #define WOLFSSL_NO_MALLOC
 
-    /* file sytem has not been ported since it is a seperate product. */
+    /* file system has not been ported since it is a separate product. */
 
     #define NO_FILESYSTEM
 
@@ -1591,12 +1648,6 @@ extern void uITRON4_free(void *p) ;
     #define XGEN_ALIGN
 #endif
 
-#ifdef HAVE_CRL
-    /* not widely supported yet */
-    #undef NO_SKID
-    #define NO_SKID
-#endif
-
 
 #ifdef __INTEL_COMPILER
     #pragma warning(disable:2259) /* explicit casts to smaller sizes, disable */
@@ -1639,7 +1690,7 @@ extern void uITRON4_free(void *p) ;
     #endif
 #endif /* HAVE_ECC */
 
-/* Curve255519 Configs */
+/* Curve25519 Configs */
 #ifdef HAVE_CURVE25519
     /* By default enable shared secret, key export and import */
     #ifndef NO_CURVE25519_SHARED_SECRET
@@ -1656,7 +1707,7 @@ extern void uITRON4_free(void *p) ;
     #endif
 #endif /* HAVE_CURVE25519 */
 
-/* Ed255519 Configs */
+/* Ed25519 Configs */
 #ifdef HAVE_ED25519
     /* By default enable sign, verify, key export and import */
     #ifndef NO_ED25519_SIGN
@@ -1676,6 +1727,44 @@ extern void uITRON4_free(void *p) ;
         #define HAVE_ED25519_KEY_IMPORT
     #endif
 #endif /* HAVE_ED25519 */
+
+/* Curve448 Configs */
+#ifdef HAVE_CURVE448
+    /* By default enable shared secret, key export and import */
+    #ifndef NO_CURVE448_SHARED_SECRET
+        #undef HAVE_CURVE448_SHARED_SECRET
+        #define HAVE_CURVE448_SHARED_SECRET
+    #endif
+    #ifndef NO_CURVE448_KEY_EXPORT
+        #undef HAVE_CURVE448_KEY_EXPORT
+        #define HAVE_CURVE448_KEY_EXPORT
+    #endif
+    #ifndef NO_CURVE448_KEY_IMPORT
+        #undef HAVE_CURVE448_KEY_IMPORT
+        #define HAVE_CURVE448_KEY_IMPORT
+    #endif
+#endif /* HAVE_CURVE448 */
+
+/* Ed448 Configs */
+#ifdef HAVE_ED448
+    /* By default enable sign, verify, key export and import */
+    #ifndef NO_ED448_SIGN
+        #undef HAVE_ED448_SIGN
+        #define HAVE_ED448_SIGN
+    #endif
+    #ifndef NO_ED448_VERIFY
+        #undef HAVE_ED448_VERIFY
+        #define HAVE_ED448_VERIFY
+    #endif
+    #ifndef NO_ED448_KEY_EXPORT
+        #undef HAVE_ED448_KEY_EXPORT
+        #define HAVE_ED448_KEY_EXPORT
+    #endif
+    #ifndef NO_ED448_KEY_IMPORT
+        #undef HAVE_ED448_KEY_IMPORT
+        #define HAVE_ED448_KEY_IMPORT
+    #endif
+#endif /* HAVE_ED448 */
 
 /* AES Config */
 #ifndef NO_AES
@@ -1947,8 +2036,8 @@ extern void uITRON4_free(void *p) ;
     #endif
 #endif
 
-#if defined(WOLFSSL_NGINX)
-    #define SSL_CTRL_SET_TLSEXT_HOSTNAME
+#if defined(WOLFSSL_NGINX) || defined(WOLFSSL_QT) || defined(OPENSSL_ALL)
+    #define SSL_CTRL_SET_TLSEXT_HOSTNAME 55
 #endif
 
 
@@ -1956,6 +2045,12 @@ extern void uITRON4_free(void *p) ;
 #ifdef CURVED25519_SMALL
         #define CURVE25519_SMALL
         #define ED25519_SMALL
+#endif
+
+/* both CURVE and ED small math should be enabled */
+#ifdef CURVED448_SMALL
+        #define CURVE448_SMALL
+        #define ED448_SMALL
 #endif
 
 
@@ -1993,8 +2088,8 @@ extern void uITRON4_free(void *p) ;
 #endif /* OPENSSL_EXTRA */
 
 /* support for converting DER to PEM */
-#if defined(WOLFSSL_KEY_GEN) || defined(WOLFSSL_CERT_GEN) || \
-        defined(OPENSSL_EXTRA)
+#if (defined(WOLFSSL_KEY_GEN) && !defined(WOLFSSL_NO_DER_TO_PEM)) || \
+    defined(WOLFSSL_CERT_GEN) || defined(OPENSSL_EXTRA)
     #undef  WOLFSSL_DER_TO_PEM
     #define WOLFSSL_DER_TO_PEM
 #endif
@@ -2056,7 +2151,7 @@ extern void uITRON4_free(void *p) ;
 #endif
 
 #if defined(WOLFCRYPT_ONLY) && defined(NO_AES) && !defined(HAVE_CURVE25519) && \
-                                   defined(WC_NO_RNG) && defined(WC_NO_RSA_OAEP)
+        !defined(HAVE_CURVE448) && defined(WC_NO_RNG) && defined(WC_NO_RSA_OAEP)
     #undef  WOLFSSL_NO_CONST_CMP
     #define WOLFSSL_NO_CONST_CMP
 #endif
@@ -2076,6 +2171,31 @@ extern void uITRON4_free(void *p) ;
 #if defined(WOLFSSL_TLS13) && defined(WOLFSSL_NO_SIGALG)
     #error TLS 1.3 requires the Signature Algorithms extension to be enabled
 #endif
+
+#ifndef NO_WOLFSSL_BASE64_DECODE
+    #define WOLFSSL_BASE64_DECODE
+#endif
+
+#if defined(HAVE_EX_DATA) || defined(FORTRESS)
+    #define MAX_EX_DATA 5  /* allow for five items of ex_data */
+#endif
+
+#ifdef NO_WOLFSSL_SMALL_STACK
+    #undef WOLFSSL_SMALL_STACK
+#endif
+
+/* The client session cache requires time for timeout */
+#if defined(NO_ASN_TIME) && !defined(NO_SESSION_CACHE)
+    #define NO_SESSION_CACHE
+#endif
+
+/* Use static ECC structs for Position Independant Code (PIC) */
+#if defined(__IAR_SYSTEMS_ICC__) && defined(__ROPI__)
+    #define WOLFSSL_ECC_CURVE_STATIC
+    #define WOLFSSL_NAMES_STATIC
+    #define WOLFSSL_NO_CONSTCHARCONST
+#endif
+
 
 #ifdef __cplusplus
     }   /* extern "C" */

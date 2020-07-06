@@ -1,6 +1,6 @@
 /* renesas-tsip-crypt.h
  *
- * Copyright (C) 2006-2019 wolfSSL Inc.
+ * Copyright (C) 2006-2020 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -42,7 +42,7 @@ typedef enum {
     tsip_Key_RSA1024 = 4,
     tsip_Key_RSA2048 = 5,
     tsip_Key_tls_Rsa2048 = 6,
-    UNKNOW = -1,
+    tsip_Key_unknown = -1,
 } wolfssl_TSIP_KEY_IV;
 
 enum {

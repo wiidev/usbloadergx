@@ -1,6 +1,6 @@
 /* chacha.h
  *
- * Copyright (C) 2006-2019 wolfSSL Inc.
+ * Copyright (C) 2006-2020 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -57,6 +57,7 @@ enum {
 
 typedef struct ChaCha {
     word32 X[CHACHA_CHUNK_WORDS];           /* state of cipher */
+    word32 left;                            /* number of bytes leftover */
 #ifdef HAVE_INTEL_AVX1
     /* vpshufd reads 16 bytes but we only use bottom 4. */
     byte extra[12];

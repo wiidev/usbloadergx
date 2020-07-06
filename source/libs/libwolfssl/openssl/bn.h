@@ -1,6 +1,6 @@
 /* bn.h
  *
- * Copyright (C) 2006-2019 wolfSSL Inc.
+ * Copyright (C) 2006-2020 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -48,6 +48,7 @@ typedef struct WOLFSSL_BIGNUM {
 } WOLFSSL_BIGNUM;
 
 
+#define BN_ULONG WOLFSSL_BN_ULONG
 #define WOLFSSL_BN_ULONG mp_digit
 
 typedef struct WOLFSSL_BN_CTX WOLFSSL_BN_CTX;
@@ -63,6 +64,7 @@ WOLFSSL_API void           wolfSSL_BN_init(WOLFSSL_BIGNUM *);
 #endif
 WOLFSSL_API void           wolfSSL_BN_free(WOLFSSL_BIGNUM*);
 WOLFSSL_API void           wolfSSL_BN_clear_free(WOLFSSL_BIGNUM*);
+WOLFSSL_API void           wolfSSL_BN_clear(WOLFSSL_BIGNUM*);
 
 
 WOLFSSL_API int wolfSSL_BN_sub(WOLFSSL_BIGNUM*, const WOLFSSL_BIGNUM*,
@@ -83,6 +85,7 @@ WOLFSSL_API int wolfSSL_BN_is_zero(const WOLFSSL_BIGNUM*);
 WOLFSSL_API int wolfSSL_BN_is_one(const WOLFSSL_BIGNUM*);
 WOLFSSL_API int wolfSSL_BN_is_odd(const WOLFSSL_BIGNUM*);
 WOLFSSL_API int wolfSSL_BN_is_negative(const WOLFSSL_BIGNUM*);
+WOLFSSL_API int wolfSSL_BN_is_word(const WOLFSSL_BIGNUM*, WOLFSSL_BN_ULONG);
 
 WOLFSSL_API int wolfSSL_BN_cmp(const WOLFSSL_BIGNUM*, const WOLFSSL_BIGNUM*);
 
@@ -108,11 +111,15 @@ WOLFSSL_API char* wolfSSL_BN_bn2dec(const WOLFSSL_BIGNUM*);
 WOLFSSL_API int wolfSSL_BN_lshift(WOLFSSL_BIGNUM*, const WOLFSSL_BIGNUM*, int);
 WOLFSSL_API int wolfSSL_BN_add_word(WOLFSSL_BIGNUM*, WOLFSSL_BN_ULONG);
 WOLFSSL_API int wolfSSL_BN_set_bit(WOLFSSL_BIGNUM*, int);
+WOLFSSL_API int wolfSSL_BN_clear_bit(WOLFSSL_BIGNUM*, int);
 WOLFSSL_API int wolfSSL_BN_set_word(WOLFSSL_BIGNUM*, WOLFSSL_BN_ULONG);
 WOLFSSL_API unsigned long wolfSSL_BN_get_word(const WOLFSSL_BIGNUM*);
 
 WOLFSSL_API int wolfSSL_BN_add(WOLFSSL_BIGNUM*, WOLFSSL_BIGNUM*,
                                WOLFSSL_BIGNUM*);
+WOLFSSL_API int wolfSSL_BN_mod_add(WOLFSSL_BIGNUM *r, const WOLFSSL_BIGNUM *a,
+                                   const WOLFSSL_BIGNUM *b, const WOLFSSL_BIGNUM *m,
+                                   WOLFSSL_BN_CTX *ctx);
 WOLFSSL_API char *wolfSSL_BN_bn2hex(const WOLFSSL_BIGNUM*);
 WOLFSSL_API int wolfSSL_BN_is_prime_ex(const WOLFSSL_BIGNUM*, int,
                                        WOLFSSL_BN_CTX*, WOLFSSL_BN_GENCB*);
@@ -139,6 +146,7 @@ typedef WOLFSSL_BN_GENCB BN_GENCB;
 #define BN_init       wolfSSL_BN_init
 #define BN_free       wolfSSL_BN_free
 #define BN_clear_free wolfSSL_BN_clear_free
+#define BN_clear      wolfSSL_BN_clear
 
 #define BN_num_bytes wolfSSL_BN_num_bytes
 #define BN_num_bits  wolfSSL_BN_num_bits
@@ -147,6 +155,7 @@ typedef WOLFSSL_BN_GENCB BN_GENCB;
 #define BN_is_one   wolfSSL_BN_is_one
 #define BN_is_odd   wolfSSL_BN_is_odd
 #define BN_is_negative wolfSSL_BN_is_negative
+#define BN_is_word  wolfSSL_BN_is_word
 
 #define BN_cmp    wolfSSL_BN_cmp
 
@@ -179,8 +188,10 @@ typedef WOLFSSL_BN_GENCB BN_GENCB;
 #define BN_lshift wolfSSL_BN_lshift
 #define BN_add_word wolfSSL_BN_add_word
 #define BN_add wolfSSL_BN_add
+#define BN_mod_add wolfSSL_BN_mod_add
 #define BN_set_word wolfSSL_BN_set_word
 #define BN_set_bit wolfSSL_BN_set_bit
+#define BN_clear_bit wolfSSL_BN_clear_bit
 
 
 #define BN_is_prime_ex wolfSSL_BN_is_prime_ex
@@ -192,6 +203,8 @@ typedef WOLFSSL_BN_GENCB BN_GENCB;
 #define BN_CTX_start wolfSSL_BN_CTX_start
 
 #define BN_mod_inverse wolfSSL_BN_mod_inverse
+
+#define BN_set_flags(x1, x2)
 
 #if defined(OPENSSL_VERSION_NUMBER) && OPENSSL_VERSION_NUMBER >= 0x10100000L
 #define BN_get_rfc2409_prime_768   wolfSSL_DH_768_prime

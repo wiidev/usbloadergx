@@ -16,7 +16,7 @@ extern "C"
 // #define DEBUG_NETWORK
 #define REDIRECT_LIMIT 3
 #define TCP_CONNECT_TIMEOUT 5000
-#define READ_WRITE_TIMEOUT 10
+#define READ_WRITE_TIMEOUT 5000
 
     struct download
     {

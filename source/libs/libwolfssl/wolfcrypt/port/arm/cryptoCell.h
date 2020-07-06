@@ -1,6 +1,6 @@
 /* cryptoCell.h
  *
- * Copyright (C) 2019 wolfSSL Inc.
+ * Copyright (C) 2020 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -78,7 +78,7 @@ extern "C" {
         CRYS_RSAUserPrivKey_t privKey;
         CRYS_RSAUserPubKey_t  pubKey;
     } rsa_context_t;
-CRYS_RSA_HASH_OpMode_t cc310_hashModeRSA(enum wc_HashType hash_type);
+CRYS_RSA_HASH_OpMode_t cc310_hashModeRSA(enum wc_HashType hash_type, int isHashed);
 #endif
 
 #ifdef HAVE_ECC

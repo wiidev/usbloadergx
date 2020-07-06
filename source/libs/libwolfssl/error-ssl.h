@@ -1,6 +1,6 @@
 /* error-ssl.h
  *
- * Copyright (C) 2006-2019 wolfSSL Inc.
+ * Copyright (C) 2006-2020 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -57,7 +57,7 @@ enum wolfSSL_ErrorCodes {
     DOMAIN_NAME_MISMATCH         = -322,   /* peer subject name mismatch */
     WANT_READ                    = -323,   /* want read, call again    */
     NOT_READY_ERROR              = -324,   /* handshake layer not ready */
-
+    IPADDR_MISMATCH              = -325,   /* peer ip address mismatch */
     VERSION_ERROR                = -326,   /* record layer version error */
     WANT_WRITE                   = -327,   /* want write, call again   */
     BUFFER_ERROR                 = -328,   /* malformed buffer input   */
@@ -105,11 +105,11 @@ enum wolfSSL_ErrorCodes {
     OUT_OF_ORDER_E               = -373,   /* out of order message */
     BAD_KEA_TYPE_E               = -374,   /* bad KEA type found */
     SANITY_CIPHER_E              = -375,   /* sanity check on cipher error */
-    RECV_OVERFLOW_E              = -376,   /* RXCB returned more than rqed */
+    RECV_OVERFLOW_E              = -376,   /* RXCB returned more than read */
     GEN_COOKIE_E                 = -377,   /* Generate Cookie Error */
     NO_PEER_VERIFY               = -378,   /* Need peer cert verify Error */
     FWRITE_ERROR                 = -379,   /* fwrite problem */
-    CACHE_MATCH_ERROR            = -380,   /* chache hdr match error */
+    CACHE_MATCH_ERROR            = -380,   /* Cache hdr match error */
     UNKNOWN_SNI_HOST_NAME_E      = -381,   /* Unrecognized host name Error */
     UNKNOWN_MAX_FRAG_LEN_E       = -382,   /* Unrecognized max frag len Error */
     KEYUSE_SIGNATURE_E           = -383,   /* KeyUse digSignature error */
@@ -165,6 +165,9 @@ enum wolfSSL_ErrorCodes {
     TCA_ABSENT_ERROR             = -434,   /* TLSX TCA ID no response */
     TSIP_MAC_DIGSZ_E             = -435,   /* Invalid MAC size for TSIP */
     CLIENT_CERT_CB_ERROR         = -436,   /* Client cert callback error */
+    SSL_SHUTDOWN_ALREADY_DONE_E  = -437,   /* Shutdown called redundantly */
+    TLS13_SECRET_CB_E            = -438,   /* TLS1.3 secret Cb fcn failure */
+
     /* add strings to wolfSSL_ERR_reason_error_string in internal.c !!!!! */
 
     /* begin negotiation parameter errors */

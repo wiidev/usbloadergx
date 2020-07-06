@@ -1,6 +1,6 @@
 /* random.h
  *
- * Copyright (C) 2006-2019 wolfSSL Inc.
+ * Copyright (C) 2006-2020 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -199,13 +199,18 @@ int wc_GenerateSeed(OS_Seed* os, byte* seed, word32 sz);
     WOLFSSL_API int  wc_FreeNetRandom(void);
 #endif /* HAVE_WNR */
 
+
+WOLFSSL_ABI WOLFSSL_API WC_RNG* wc_rng_new(byte*, word32, void*);
+WOLFSSL_ABI WOLFSSL_API void wc_rng_free(WC_RNG*);
+
+
 #ifndef WC_NO_RNG
 WOLFSSL_API int  wc_InitRng(WC_RNG*);
 WOLFSSL_API int  wc_InitRng_ex(WC_RNG* rng, void* heap, int devId);
 WOLFSSL_API int  wc_InitRngNonce(WC_RNG* rng, byte* nonce, word32 nonceSz);
 WOLFSSL_API int  wc_InitRngNonce_ex(WC_RNG* rng, byte* nonce, word32 nonceSz,
                                     void* heap, int devId);
-WOLFSSL_API int  wc_RNG_GenerateBlock(WC_RNG*, byte*, word32 sz);
+WOLFSSL_ABI WOLFSSL_API int wc_RNG_GenerateBlock(WC_RNG*, byte*, word32 sz);
 WOLFSSL_API int  wc_RNG_GenerateByte(WC_RNG*, byte*);
 WOLFSSL_API int  wc_FreeRng(WC_RNG*);
 #else

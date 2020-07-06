@@ -1,6 +1,6 @@
 /* bio.h
  *
- * Copyright (C) 2006-2019 wolfSSL Inc.
+ * Copyright (C) 2006-2020 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -52,8 +52,8 @@
 #define BIO_s_bio                       wolfSSL_BIO_s_bio
 #define BIO_s_socket                    wolfSSL_BIO_s_socket
 #define BIO_set_fd                      wolfSSL_BIO_set_fd
+#define BIO_set_close                   wolfSSL_BIO_set_close
 #define BIO_ctrl_reset_read_request     wolfSSL_BIO_ctrl_reset_read_request
-
 #define BIO_set_write_buf_size          wolfSSL_BIO_set_write_buf_size
 #define BIO_make_bio_pair               wolfSSL_BIO_make_bio_pair
 
@@ -68,13 +68,16 @@
 #define BIO_gets      wolfSSL_BIO_gets
 #define BIO_puts      wolfSSL_BIO_puts
 
+#define BIO_should_retry                wolfSSL_BIO_should_retry
+
 #define BIO_TYPE_FILE WOLFSSL_BIO_FILE
 #define BIO_TYPE_BIO  WOLFSSL_BIO_BIO
 #define BIO_TYPE_MEM  WOLFSSL_BIO_MEMORY
 #define BIO_TYPE_BASE64 WOLFSSL_BIO_BASE64
 
-#define BIO_printf wolfSSL_BIO_printf
-#define BIO_dump   wolfSSL_BIO_dump
+#define BIO_vprintf wolfSSL_BIO_vprintf
+#define BIO_printf  wolfSSL_BIO_printf
+#define BIO_dump    wolfSSL_BIO_dump
 
 /* BIO info callback */
 #define BIO_CB_FREE   WOLFSSL_BIO_CB_FREE
@@ -96,6 +99,10 @@
 #define BIO_set_data               wolfSSL_BIO_set_data
 #define BIO_get_shutdown           wolfSSL_BIO_get_shutdown
 #define BIO_set_shutdown           wolfSSL_BIO_set_shutdown
+
+#define BIO_clear_flags            wolfSSL_BIO_clear_flags
+#define BIO_set_ex_data            wolfSSL_BIO_set_ex_data
+#define BIO_get_ex_data            wolfSSL_BIO_get_ex_data
 
 /* helper to set specific retry/read flags */
 #define BIO_set_retry_read(bio)\

@@ -1,6 +1,6 @@
 /* sha256.h
  *
- * Copyright (C) 2006-2019 wolfSSL Inc.
+ * Copyright (C) 2006-2020 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -132,7 +132,7 @@ enum {
 struct wc_Sha256 {
 #ifdef FREESCALE_LTC_SHA
     ltc_hash_ctx_t ctx;
-#elif defined(STM32_HASH)
+#elif defined(STM32_HASH_SHA2)
     STM32_HASH_Context stmCtx;
 #else
     /* alignment on digest and buffer speeds up ARMv8 crypto operations */

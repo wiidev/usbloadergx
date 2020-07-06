@@ -1,6 +1,6 @@
 /* objects.h
  *
- * Copyright (C) 2006-2019 wolfSSL Inc.
+ * Copyright (C) 2006-2020 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -38,6 +38,7 @@
 #define OBJ_obj2nid wolfSSL_OBJ_obj2nid
 #define OBJ_sn2nid  wolfSSL_OBJ_sn2nid
 #define OBJ_nid2ln  wolfSSL_OBJ_nid2ln
+#define OBJ_ln2nid  wolfSSL_OBJ_ln2nid
 #define OBJ_txt2nid wolfSSL_OBJ_txt2nid
 #define OBJ_txt2obj wolfSSL_OBJ_txt2obj
 #define OBJ_nid2obj wolfSSL_OBJ_nid2obj

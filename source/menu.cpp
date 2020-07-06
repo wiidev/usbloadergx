@@ -169,10 +169,6 @@ int MainMenu(int menu)
 	InitGUIThreads();
 
 	InitProgressThread();
-	InitNetworkThread();
-
-	if (Settings.autonetwork)
-		ResumeNetworkThread();
 
 	btnSoundClick = new GuiSound(NULL, 0, Settings.sfxvolume);
 	btnSoundClick->LoadSoundEffect(Resources::GetFile("button_click.wav"), Resources::GetFileSize("button_click.wav"));
@@ -201,6 +197,11 @@ int MainMenu(int menu)
 	bgMusic->Play();
 
 	MountGamePartition();
+
+	InitNetworkThread(); // Starting this a little later fixes a random crash
+
+	if (Settings.autonetwork)
+		ResumeNetworkThread();
 
 	while (currentMenu != MENU_EXIT)
 	{

@@ -1,6 +1,6 @@
 /* curve25519.h
  *
- * Copyright (C) 2006-2019 wolfSSL Inc.
+ * Copyright (C) 2006-2020 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -44,15 +44,21 @@
 
 #define CURVE25519_KEYSIZE 32
 
+#ifdef WOLFSSL_NAMES_STATIC
+typedef char curve25519_str[12];
+#else
+typedef const char* curve25519_str;
+#endif
+
 /* curve25519 set type */
 typedef struct {
-    int size;       /* The size of the curve in octets */
-    const char* name;     /* name of this curve */
+    int size;             /* The size of the curve in octets */
+    curve25519_str name; /* name of this curve */
 } curve25519_set_type;
 
 
 /* ECC point, the internal structure is Little endian
- * the mathematical functions used the endianess */
+ * the mathematical functions used the endianness */
 typedef struct {
     byte point[CURVE25519_KEYSIZE];
     #ifdef FREESCALE_LTC_ECC

@@ -1,6 +1,6 @@
 /* logging.h
  *
- * Copyright (C) 2006-2019 wolfSSL Inc.
+ * Copyright (C) 2006-2020 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -93,6 +93,7 @@ typedef void (*wolfSSL_Logging_cb)(const int logLevel,
                                    const char *const logMessage);
 
 WOLFSSL_API int wolfSSL_SetLoggingCb(wolfSSL_Logging_cb log_function);
+WOLFSSL_API wolfSSL_Logging_cb wolfSSL_GetLoggingCb(void);
 
 /* turn logging on, only if compiled in */
 WOLFSSL_API int  wolfSSL_Debugging_ON(void);
@@ -114,7 +115,9 @@ WOLFSSL_API void wolfSSL_Debugging_OFF(void);
     WOLFSSL_API   int wc_SetLoggingHeap(void* h);
     WOLFSSL_API   int wc_ERR_remove_state(void);
     #if !defined(NO_FILESYSTEM) && !defined(NO_STDIO_FILESYSTEM)
-        WOLFSSL_API   void wc_ERR_print_errors_fp(XFILE fp);
+        WOLFSSL_API void wc_ERR_print_errors_fp(XFILE fp);
+        WOLFSSL_API void wc_ERR_print_errors_cb(int (*cb)(const char *str,
+                                                size_t len, void *u), void *u);
     #endif
 #endif /* OPENSSL_EXTRA || DEBUG_WOLFSSL_VERBOSE */
 
@@ -148,6 +151,7 @@ WOLFSSL_API void wolfSSL_Debugging_OFF(void);
     WOLFSSL_API void WOLFSSL_LEAVE(const char* msg, int ret);
     #define WOLFSSL_STUB(m) \
         WOLFSSL_MSG(WOLFSSL_LOG_CAT(wolfSSL Stub, m, not implemented))
+    WOLFSSL_API int WOLFSSL_IS_DEBUG_ON(void);
 
     WOLFSSL_API void WOLFSSL_MSG(const char* msg);
     WOLFSSL_API void WOLFSSL_BUFFER(const byte* buffer, word32 length);
@@ -157,6 +161,7 @@ WOLFSSL_API void wolfSSL_Debugging_OFF(void);
     #define WOLFSSL_ENTER(m)
     #define WOLFSSL_LEAVE(m, r)
     #define WOLFSSL_STUB(m)
+    #define WOLFSSL_IS_DEBUG_ON() 0
 
     #define WOLFSSL_MSG(m)
     #define WOLFSSL_BUFFER(b, l)
@@ -166,7 +171,8 @@ WOLFSSL_API void wolfSSL_Debugging_OFF(void);
 #if defined(DEBUG_WOLFSSL) || defined(OPENSSL_ALL) || defined(WOLFSSL_NGINX) ||\
     defined(WOLFSSL_HAPROXY) || defined(OPENSSL_EXTRA)
 
-    #if (defined(OPENSSL_EXTRA) && !defined(_WIN32)) || defined(DEBUG_WOLFSSL_VERBOSE)
+    #if (!defined(NO_ERROR_QUEUE) && defined(OPENSSL_EXTRA) && !defined(_WIN32))\
+        || defined(DEBUG_WOLFSSL_VERBOSE)
         WOLFSSL_API void WOLFSSL_ERROR_LINE(int err, const char* func, unsigned int line,
             const char* file, void* ctx);
         #define WOLFSSL_ERROR(x) \

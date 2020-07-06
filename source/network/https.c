@@ -16,6 +16,7 @@
 #include "prompts/ProgressWindow.h"
 
 u8 loop;
+WOLFSSL_SESSION *session;
 
 int https_write(HTTP_INFO *httpinfo, char *buffer, int len)
 {
@@ -41,11 +42,31 @@ int https_write(HTTP_INFO *httpinfo, char *buffer, int len)
 
 int https_read(HTTP_INFO *httpinfo, char *buffer, int len)
 {
-    if (len > 8192)
-        len = 8192; // 16KB is the max on a Wii, but 8KB is safe
-    if (httpinfo->use_https)
-        return wolfSSL_read(httpinfo->ssl, buffer, len);
-    return net_read(httpinfo->sock, buffer, len);
+    struct pollsd fds[1];
+    fds[0].socket = httpinfo->sock;
+    fds[0].events = POLLIN;
+
+    net_fcntl(httpinfo->sock, F_SETFL, 4);
+    switch (net_poll(fds, 1, READ_WRITE_TIMEOUT))
+    {
+    case -1:
+#ifdef DEBUG_NETWORK
+        gprintf("net_poll error\n");
+#endif
+        return -1;
+    case 0:
+#ifdef DEBUG_NETWORK
+        gprintf("The connection timed out\n");
+#endif
+        return -ETIMEDOUT;
+    default:
+        net_fcntl(httpinfo->sock, F_SETFL, 0);
+        if (len > 8192)
+            len = 8192; // 16KB is the max on a Wii, but 8KB is safe
+        if (httpinfo->use_https)
+            return wolfSSL_read(httpinfo->ssl, buffer, len);
+        return net_read(httpinfo->sock, buffer, len);
+    }
 }
 
 void https_close(HTTP_INFO *httpinfo)
@@ -92,7 +113,7 @@ u8 is_chunked(struct phr_header *headers, size_t num_headers)
     return (strcasecmp(encoding, "chunked") == 0) ? 1 : 0;
 }
 
-void read_chunked(HTTP_INFO *httpinfo, struct download *buffer, size_t start_pos)
+u8 read_chunked(HTTP_INFO *httpinfo, struct download *buffer, size_t start_pos)
 {
     struct phr_chunked_decoder decoder = {};
     size_t capacity = 4096, rsize;
@@ -106,7 +127,7 @@ void read_chunked(HTTP_INFO *httpinfo, struct download *buffer, size_t start_pos
         if (buffer->show_progress)
         {
             if (ProgressCanceled())
-                break;
+                return 0;
             ShowProgress(start_pos, capacity); // Unknown size for chunked transfers
         }
         if (start_pos == capacity)
@@ -124,7 +145,7 @@ void read_chunked(HTTP_INFO *httpinfo, struct download *buffer, size_t start_pos
 #ifdef DEBUG_NETWORK
             gprintf("IO error\n");
 #endif
-            return;
+            return 0;
         }
         rsize = rret;
         pret = phr_decode_chunked(&decoder, &buffer->data[start_pos], &rsize);
@@ -133,15 +154,16 @@ void read_chunked(HTTP_INFO *httpinfo, struct download *buffer, size_t start_pos
 #ifdef DEBUG_NETWORK
             gprintf("Parse error\n");
 #endif
-            return;
+            return 0;
         }
         start_pos += rsize;
     } while (pret == -2);
     buffer->size = start_pos;
     buffer->data = realloc(buffer->data, buffer->size);
+    return 1;
 }
 
-void read_all(HTTP_INFO *httpinfo, struct download *buffer, size_t start_pos)
+u8 read_all(HTTP_INFO *httpinfo, struct download *buffer, size_t start_pos)
 {
     size_t capacity = 4096;
     ssize_t ret;
@@ -153,7 +175,7 @@ void read_all(HTTP_INFO *httpinfo, struct download *buffer, size_t start_pos)
         if (buffer->show_progress)
         {
             if (ProgressCanceled())
-                break;
+                return 0;
             ShowProgress(start_pos, buffer->content_length);
         }
         if (start_pos == capacity)
@@ -166,13 +188,16 @@ void read_all(HTTP_INFO *httpinfo, struct download *buffer, size_t start_pos)
         }
         while ((ret = https_read(httpinfo, &buffer->data[start_pos], capacity - start_pos)) == -1 && errno == EINTR)
             ;
-        if (ret <= 0)
+        if (ret == 0)
             break;
+        if (ret < 0)
+            return 0;
 
         start_pos += ret;
     };
     buffer->size = start_pos;
     buffer->data = realloc(buffer->data, buffer->size);
+    return 1;
 }
 
 int connect(char *host, u16 port)
@@ -203,7 +228,7 @@ int connect(char *host, u16 port)
         if (ticks_to_millisecs(diff_ticks(t, gettime())) > TCP_CONNECT_TIMEOUT)
         {
 #ifdef DEBUG_NETWORK
-            gprintf("The connection has timed out\n");
+            gprintf("The connection timed out\n");
 #endif
             net_close(sock);
             return -ETIMEDOUT;
@@ -224,11 +249,6 @@ int connect(char *host, u16 port)
         break;
     }
     net_fcntl(sock, F_SETFL, 0);
-    // Set a read and write timeout
-    struct timeval timeout;
-    timeout.tv_sec = READ_WRITE_TIMEOUT;
-    net_setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout));
-    net_setsockopt(sock, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout));
     return sock;
 }
 
@@ -277,8 +297,9 @@ void downloadfile(const char *url, struct download *buffer)
 
     if (httpinfo.use_https)
     {
-        // Create a new SSL context and use the highest possible protocol version
-        if ((httpinfo.ctx = wolfSSL_CTX_new(wolfSSLv23_client_method())) == NULL)
+        // Create a new SSL context
+        // wolfSSLv23_client_method() works, but resume would require further changes
+        if ((httpinfo.ctx = wolfSSL_CTX_new(wolfTLSv1_2_client_method())) == NULL)
         {
 #ifdef DEBUG_NETWORK
             gprintf("Failed to create WOLFSSL_CTX\n");
@@ -315,6 +336,14 @@ void downloadfile(const char *url, struct download *buffer)
             https_close(&httpinfo);
             return;
         }
+        // Attempt to resume the session
+        if (session != NULL && wolfSSL_set_session(httpinfo.ssl, session) != SSL_SUCCESS)
+        {
+#ifdef DEBUG_NETWORK
+            gprintf("Failed to set session (session timed out?)\n");
+#endif
+            session = NULL;
+        }
         // Initiate a handshake
         if (wolfSSL_connect(httpinfo.ssl) != SSL_SUCCESS)
         {
@@ -323,6 +352,14 @@ void downloadfile(const char *url, struct download *buffer)
 #endif
             https_close(&httpinfo);
             return;
+        }
+        // Check if we resumed successfully
+        if (session != NULL && !wolfSSL_session_reused(httpinfo.ssl))
+        {
+#ifdef DEBUG_NETWORK
+            gprintf("Failed to resume session\n");
+#endif
+            session = NULL;
         }
         // Cipher info
 #ifdef DEBUG_NETWORK
@@ -335,7 +372,7 @@ void downloadfile(const char *url, struct download *buffer)
     }
 
     // Send our request
-    char request[2048];
+    char request[2300];
     char isgecko[36] = "Cookie: challenge=BitMitigate.com\r\n";
     char method[5] = "HEAD"; // The only way to get the GameTDB timestamp
     int ret, len;
@@ -345,7 +382,7 @@ void downloadfile(const char *url, struct download *buffer)
     if (!buffer->gametdbcheck)
         strcpy(method, "GET");
 
-    len = snprintf(request, 2048,
+    len = snprintf(request, 2300,
                    "%s %s HTTP/1.1\r\n"
                    "Host: %s\r\n"
                    "User-Agent: USBLoaderGX/%s\r\n"
@@ -376,7 +413,7 @@ void downloadfile(const char *url, struct download *buffer)
     // Get the response
     char response[4096];
     struct phr_header headers[100];
-    int pret, minor_version, status;
+    int pret, minor_version, status, dl_valid;
     size_t buflen = 0, prevbuflen = 0, num_headers, msg_len;
     ssize_t rret;
     const char *msg;
@@ -454,15 +491,28 @@ void downloadfile(const char *url, struct download *buffer)
     if (status == 200)
     {
         buffer->data = malloc(4096);
-        buffer->size = 4096;
         memcpy(buffer->data, &response[pret], buflen - pret);
         if (buffer->show_progress)
             buffer->content_length = get_header_value_int(headers, num_headers, "content-length");
         // Determine how to read the data
         if (is_chunked(headers, num_headers))
-            read_chunked(&httpinfo, buffer, buflen - pret);
+            dl_valid = read_chunked(&httpinfo, buffer, buflen - pret);
         else
-            read_all(&httpinfo, buffer, buflen - pret);
+            dl_valid = read_all(&httpinfo, buffer, buflen - pret);
+        // Check if the download is incomplete
+        if (!dl_valid || buffer->size <= 0)
+        {
+            buffer->size = 0;
+            free(buffer->data);
+#ifdef DEBUG_NETWORK
+            gprintf("Removed incomplete download\n");
+#endif
+            https_close(&httpinfo);
+            return;
+        }
+        // Save the session
+        if (httpinfo.use_https)
+            session = wolfSSL_get_session(httpinfo.ssl);
         // Finished
         https_close(&httpinfo);
 #ifdef DEBUG_NETWORK
@@ -474,5 +524,8 @@ void downloadfile(const char *url, struct download *buffer)
         return;
     }
     // Close on all other status codes
+#ifdef DEBUG_NETWORK
+    gprintf("Status code: %i - %s\n", status, url);
+#endif
     https_close(&httpinfo);
 }
