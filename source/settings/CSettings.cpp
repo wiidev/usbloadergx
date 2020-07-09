@@ -1469,43 +1469,43 @@ bool CSettings::LoadLanguage(const char *path, int lang)
 		}
 		else if (lang == JAPANESE)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/japanese.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%sjapanese.lang", langpath);
 		}
 		else if (lang == ENGLISH)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/english.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%senglish.lang", langpath);
 		}
 		else if (lang == GERMAN)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/german.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%sgerman.lang", langpath);
 		}
 		else if (lang == FRENCH)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/french.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%sfrench.lang", langpath);
 		}
 		else if (lang == SPANISH)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/spanish.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%sspanish.lang", langpath);
 		}
 		else if (lang == ITALIAN)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/italian.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%sitalian.lang", langpath);
 		}
 		else if (lang == DUTCH)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/dutch.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%sdutch.lang", langpath);
 		}
 		else if (lang == S_CHINESE)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/schinese.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%sschinese.lang", langpath);
 		}
 		else if (lang == T_CHINESE)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/tchinese.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%stchinese.lang", langpath);
 		}
 		else if (lang == KOREAN)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/korean.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%skorean.lang", langpath);
 		}
 
 		strlcpy(db_language, GetLangCode(filepath), sizeof(db_language));
