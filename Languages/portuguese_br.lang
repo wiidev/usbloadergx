@@ -108,7 +108,7 @@ msgid "5 min"
 msgstr ""
 
 msgid "=== GameCube Settings"
-msgstr "=== Opções do GameCube"
+msgstr "== Opções do GameCube"
 
 msgid "AUTO"
 msgstr ""
@@ -1171,7 +1171,7 @@ msgid "Getting game folder size..."
 msgstr "Gerando tamanho da pasta de jogos..."
 
 msgid "Global Settings"
-msgstr "Definições Globais"
+msgstr "Ajustes Globais"
 
 msgid "Grid Scroll Speed"
 msgstr "Veloc. Transição Grade"
@@ -1213,7 +1213,7 @@ msgid "Import Categories"
 msgstr "Importar Categorias"
 
 msgid "Import operation successfully completed."
-msgstr "Operação de importação completada com sucesso"
+msgstr "Importação concluída com sucesso"
 
 msgid "Importing categories"
 msgstr "Importando categorias"
@@ -1429,7 +1429,7 @@ msgid "Memory Card Emulation"
 msgstr "Emulação Memory Card"
 
 msgid "Memory Card with 2043 blocs has issues with Nintendont. Use at your own risk."
-msgstr "Memory Card com 2043 blocos tem problemas com o Nintendont. Use por sua conta e risco"
+msgstr "O Nintendont tem problemas com Memory Card de 2043 blocos. Use por sua conta e risco"
 
 msgid "Messageboard Update"
 msgstr "Atualizar Messageboard"
@@ -1918,7 +1918,7 @@ msgid "Set Search-Filter"
 msgstr "Pesquisar"
 
 msgid "Settings"
-msgstr "Definições"
+msgstr "Ajustes"
 
 msgid "Settings File"
 msgstr "Arquivo de Opções"
@@ -1960,7 +1960,7 @@ msgid "Sneek Video Patch"
 msgstr "Patch Vídeo Sneek"
 
 msgid "Sorry, the theme downloader menu is not working anymore because http://wii.spiffy360.com now requires user registration."
-msgstr "Desculpe, mas não é possível baixar temas por aqui pois http://wii.spiffy360.com requer cadastro de usuário"
+msgstr "Desculpe, mas não é possível baixar temas por aqui pois wii.spiffy360.com requer cadastro de usuário"
 
 msgid "Sort alphabetically"
 msgstr "Ordenar por ordem alfabética"
@@ -2126,7 +2126,7 @@ msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "Esse jogo utiliza vários discos. Escolha o disco a iniciar"
 
 msgid "This patch might not work with all games. If a game doesn't boot, disable it in individual game settings menu."
-msgstr ""
+msgstr "Essa opção pode não funcionar com todos os jogos. Se algum não iniciar, desative-a nos ajustes individuais do jogo."
 
 msgid "This path must be on SD!"
 msgstr "Essa pasta precisa estar no Cartão SD!"
@@ -2318,7 +2318,7 @@ msgid "Video Mode"
 msgstr "Modo de Vídeo"
 
 msgid "Video Scale Value"
-msgstr ""
+msgstr "Valor Escala Video"
 
 msgid "Video offset"
 msgstr ""
@@ -2363,7 +2363,7 @@ msgid "Where to dump NAND?"
 msgstr "Onde extrair a NAND?"
 
 msgid "Which device do you want to use for Nintendont files?"
-msgstr "Qual dispositivo quer usar para os arquivos do Nintendont?"
+msgstr "Qual dispositivo usar para os arquivos do Nintendont?"
 
 msgid "Which mode do you want to use?"
 msgstr "Que modo deseja usar?"
@@ -2384,7 +2384,7 @@ msgid "Wii Menu"
 msgstr ""
 
 msgid "Wii Settings"
-msgstr "Definições Wii"
+msgstr "Ajustes Wii"
 
 msgid "WiiTDB.xml"
 msgstr ""
