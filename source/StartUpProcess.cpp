@@ -25,6 +25,7 @@
 #include "utils/tools.h"
 #include "sys.h"
 #include "svnrev.h"
+#include "gitver.h"
 
 extern bool isWiiVC; // in sys.cpp
 
@@ -53,13 +54,13 @@ StartUpProcess::StartUpProcess()
 	versionTxt->SetPosition(20, screenheight-20);
 
 #ifdef FULLCHANNEL
-	versionTxt->SetTextf("v3.0c Rev. %s", GetRev());
+	versionTxt->SetTextf("v3.0c Rev. %s (%s)", GetRev(), commitID());
 #else
-	versionTxt->SetTextf("v3.0  Rev. %s", GetRev());
+	versionTxt->SetTextf("v3.0 Rev. %s (%s)", GetRev(), commitID());
 #endif
 
 #if 1 // enable if you release a modded version - enabled by default to differentiate official releases
-	versionTxt->SetTextf("v3.0  Rev. %s mod", GetRev());
+	versionTxt->SetTextf("v3.0 Rev. %s mod (%s)", GetRev(), commitID());
 #endif
 
 	cancelTxt = new GuiText("Press B to cancel", 18, (GXColor) {255, 255, 255, 255});
