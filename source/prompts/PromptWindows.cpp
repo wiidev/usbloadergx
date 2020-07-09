@@ -407,14 +407,14 @@ void WindowCredits()
 	currentTxt->SetFont(creditsFont, creditsFontSize);
 	txt.push_back(currentTxt);
 
-	currentTxt = new GuiText("Cyan / Dimok / nIxx / giantpune / ardi");
+	currentTxt = new GuiText("Cyan / Dimok / nIxx / giantpune / ardi / hungyip84");
 	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	currentTxt->SetPosition(160, y);
 	currentTxt->SetFont(creditsFont, creditsFontSize);
 	txt.push_back(currentTxt);
 	y += 20;
 
-	currentTxt = new GuiText("hungyip84 / DrayX7 / lustar / r-win");
+	currentTxt = new GuiText("DrayX7 / lustar / r-win / WiiShizzza / blackb0x");
 	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	currentTxt->SetPosition(160, y);
 	currentTxt->SetFont(creditsFont, creditsFontSize);
@@ -479,7 +479,7 @@ void WindowCredits()
 	txt.push_back(currentTxt);
 	y += 20;
 
-	sprintf(text, "Deak Phreak %s", tr( "for hosting the themes" ));
+	sprintf(text, "Larsenv & Wingysam %s", tr( "for hosting the themes" ));
 	currentTxt = new GuiText(text);
 	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	currentTxt->SetPosition(160, y);
