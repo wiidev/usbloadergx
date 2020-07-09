@@ -51,8 +51,6 @@
 #include "sys.h"
 #include "svnrev.h"
 
-static const char *GameTDB_URL = "https://www.gametdb.com/wiitdb.zip";
-
 /****************************************************************************
  * Checking if an Update is available
  ***************************************************************************/
@@ -112,7 +110,7 @@ static bool CheckNewGameTDBVersion(const char *url)
 
 int UpdateGameTDB()
 {
-	if (CheckNewGameTDBVersion(GameTDB_URL) == false)
+	if (CheckNewGameTDBVersion(Settings.URL_GameTDB) == false)
 	{
 		gprintf("Not updating GameTDB: Version is the same\n");
 		return -1;
@@ -126,7 +124,7 @@ int UpdateGameTDB()
 
 	ZipPath += "wiitdb.zip";
 
-	int filesize = DownloadFileToPath(GameTDB_URL, ZipPath.c_str());
+	int filesize = DownloadFileToPath(Settings.URL_GameTDB, ZipPath.c_str());
 
 	if (filesize <= 0)
 		return -1;

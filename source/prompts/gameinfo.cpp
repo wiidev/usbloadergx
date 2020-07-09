@@ -869,7 +869,7 @@ static int InternalShowGameInfo(struct discHdr *header)
 		txtWindow.Append(&dnBtn);
 	}
 
-	gametdb1Txt = new GuiText("http://gametdb.com", 16, ( GXColor ) {0, 0, 0, 255});
+	gametdb1Txt = new GuiText("gametdb.com", 16, ( GXColor ) {0, 0, 0, 255});
 	gametdb1Txt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
 	gametdb1Txt->SetPosition(40, -15);
 	gameinfoWindow.Append(gametdb1Txt);

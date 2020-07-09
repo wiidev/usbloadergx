@@ -67,7 +67,7 @@ int GetMissingGameFiles(const char * path, const char * fileext, std::vector<std
 	//! Bring game list to the old state
 	gameList.FilterList(oldFilter.c_str());
 
-	gprintf(" = %i", MissingFilesList.size());
+	gprintf(" = %i\n", MissingFilesList.size());
 
 	return MissingFilesList.size();
 }

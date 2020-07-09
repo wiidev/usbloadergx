@@ -89,6 +89,14 @@ class CSettings
 		char GameCubeSDPath[100];
 		char DEVOLoaderPath[100];
 		char NINLoaderPath[100];
+		char URL_Banners[300];
+		char URL_Covers2D[300];
+		char URL_Covers3D[300];
+		char URL_CoversFull[300];
+		char URL_CoversFullHQ[300];
+		char URL_Discs[300];
+		char URL_DiscsCustom[300];
+		char URL_GameTDB[300];
 		short videomode;
 		short language;
 		short ocarina;
@@ -226,6 +234,7 @@ class CSettings
 		bool FirstTimeRun;
 	protected:
 		bool ValidVersion(FILE * file);
+		bool ValidateURL(char *value, bool zip = false);
 		bool SetSetting(char *name, char *value);
 		//!Find the config file in the default paths
 		bool FindConfig();

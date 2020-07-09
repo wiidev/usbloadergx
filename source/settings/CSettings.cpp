@@ -78,6 +78,14 @@ void CSettings::SetDefault()
 	strlcpy(NandEmuChanPath, NandEmuPath, sizeof(NandEmuChanPath));
 	strlcpy(GameCubePath, "usb1:/games/", sizeof(GameCubePath));
 	strlcpy(GameCubeSDPath, "sd:/games/", sizeof(GameCubeSDPath));
+	strlcpy(URL_Banners, "https://banner.rc24.xyz/", sizeof(URL_Banners));
+	strlcpy(URL_Covers2D, "https://art.gametdb.com/wii/cover/", sizeof(URL_Covers2D));
+	strlcpy(URL_Covers3D, "https://art.gametdb.com/wii/cover3D/", sizeof(URL_Covers3D));
+	strlcpy(URL_CoversFull, "https://art.gametdb.com/wii/coverfull/", sizeof(URL_CoversFull));
+	strlcpy(URL_CoversFullHQ, "https://art.gametdb.com/wii/coverfullHQ/", sizeof(URL_CoversFullHQ));
+	strlcpy(URL_Discs, "https://art.gametdb.com/wii/disc/", sizeof(URL_Discs));
+	strlcpy(URL_DiscsCustom, "https://art.gametdb.com/wii/disccustom/", sizeof(URL_DiscsCustom));
+	strlcpy(URL_GameTDB, "https://www.gametdb.com/wiitdb.zip", sizeof(URL_GameTDB));
 	theme[0] = 0;
 	language_path[0] = 0;
 	ogg_path[0] = 0;
@@ -481,9 +489,35 @@ bool CSettings::Save()
 	fprintf(file, "GCInstallCompressed = %d\n", GCInstallCompressed);
 	fprintf(file, "GCInstallAligned = %d\n", GCInstallAligned);
 	fprintf(file, "PrivateServer = %d\n", PrivateServer);
+	fprintf(file, "URL_Banners = %s\n", URL_Banners);
+	fprintf(file, "URL_Covers2D = %s\n", URL_Covers2D);
+	fprintf(file, "URL_Covers3D = %s\n", URL_Covers3D);
+	fprintf(file, "URL_CoversFull = %s\n", URL_CoversFull);
+	fprintf(file, "URL_CoversFullHQ = %s\n", URL_CoversFullHQ);
+	fprintf(file, "URL_Discs = %s\n", URL_Discs);
+	fprintf(file, "URL_DiscsCustom = %s\n", URL_DiscsCustom);
+	fprintf(file, "URL_GameTDB = %s\n", URL_GameTDB);
 	fclose(file);
 
 	return true;
+}
+
+bool CSettings::ValidateURL(char *value, bool zip)
+{
+	if (strlen(value) >= 12 && (strncmp(value, "https://", 8) == 0 || strncmp(value, "http://", 7) == 0))
+	{
+		if (zip)
+		{
+			if (strncmp(value + strlen(value) -4, ".zip", 4) == 0) // The URL must end with .zip to be valid
+				return true;
+		}
+		else
+		{
+			if (strncmp(value + strlen(value) -1, "/", 1) == 0) // The URL must end with / to be valid
+				return true;
+		}
+	}
+	return false;
 }
 
 bool CSettings::SetSetting(char *name, char *value)
@@ -1240,6 +1274,54 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "GameCubeSDPath") == 0)
 	{
 		strlcpy(GameCubeSDPath, value, sizeof(GameCubeSDPath));
+		return true;
+	}
+	else if (strcmp(name, "URL_Banners") == 0)
+	{
+		if (ValidateURL(value))
+			strlcpy(URL_Banners, value, sizeof(URL_Banners));
+		return true;
+	}
+	else if (strcmp(name, "URL_Covers2D") == 0)
+	{
+		if (ValidateURL(value))
+			strlcpy(URL_Covers2D, value, sizeof(URL_Covers2D));
+		return true;
+	}
+	else if (strcmp(name, "URL_Covers3D") == 0)
+	{
+		if (ValidateURL(value))
+			strlcpy(URL_Covers3D, value, sizeof(URL_Covers3D));
+		return true;
+	}
+	else if (strcmp(name, "URL_CoversFull") == 0)
+	{
+		if (ValidateURL(value))
+			strlcpy(URL_CoversFull, value, sizeof(URL_CoversFull));
+		return true;
+	}
+	else if (strcmp(name, "URL_CoversFullHQ") == 0)
+	{
+		if (ValidateURL(value))
+			strlcpy(URL_CoversFullHQ, value, sizeof(URL_CoversFullHQ));
+		return true;
+	}
+	else if (strcmp(name, "URL_Discs") == 0)
+	{
+		if (ValidateURL(value))
+			strlcpy(URL_Discs, value, sizeof(URL_Discs));
+		return true;
+	}
+	else if (strcmp(name, "URL_DiscsCustom") == 0)
+	{
+		if (ValidateURL(value))
+			strlcpy(URL_DiscsCustom, value, sizeof(URL_DiscsCustom));
+		return true;
+	}
+	else if (strcmp(name, "URL_GameTDB") == 0)
+	{
+		if (ValidateURL(value, true))
+			strlcpy(URL_GameTDB, value, sizeof(URL_GameTDB));
 		return true;
 	}
 	else if(strcmp(name, "PrivateServer") == 0)
