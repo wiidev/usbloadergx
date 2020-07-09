@@ -118,7 +118,7 @@ bool Wiinnertag::CreateExample(const string &filepath)
 	xmlDoc.InsertEndChild(declaration);
 
 	XMLElement *Tag = xmlDoc.NewElement("Tag");
-	Tag->SetAttribute("URL", "https://www.wiinnertag.com/wiinnertag_scripts/update_sign.php?key={KEY}&game_id={ID6}");
+	Tag->SetAttribute("URL", "https://tag.rc24.xyz/wii?game={ID6}&key={KEY}");
 	Tag->SetAttribute("Key", "1234567890");
 	xmlDoc.InsertEndChild(Tag);
 
