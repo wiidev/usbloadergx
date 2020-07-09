@@ -149,6 +149,9 @@ msgstr "Todos os arquivos foram processados"
 msgid "Alternate DOL"
 msgstr "DOL alternativo"
 
+msgid "AltWFC (Risky)"
+msgstr "AltWFC (Arriscado)"
+
 msgid "An example file was created here:"
 msgstr "Arquivo de exemplo criado aqui:"
 
@@ -211,6 +214,9 @@ msgstr ""
 
 msgid "AutoInit Network"
 msgstr "Auto-iniciar Rede"
+
+msgid "BenFi (Risky)"
+msgstr "BenFi (Arriscado)"
 
 msgid "BCA Codes Path"
 msgstr "Códigos BCA"
@@ -2398,7 +2404,7 @@ msgstr ""
 msgid "Wiilight"
 msgstr "Iluminação Leitor"
 
-msgid "Wiimmfi.de"
+msgid "Wiimmfi"
 msgstr ""
 
 msgid "Wiinnertag"

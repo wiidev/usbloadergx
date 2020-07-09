@@ -182,7 +182,9 @@ static const char * PrivServText[] =
 {
 	trNOOP( "OFF" ),
 	trNOOP( "NoSSL only" ),
-	trNOOP( "Wiimmfi.de" ),
+	trNOOP( "Wiimmfi" ),
+	trNOOP( "AltWFC (Risky)" ),
+	trNOOP( "BenFi (Risky)" ),
 };
 
 LoaderSettings::LoaderSettings()

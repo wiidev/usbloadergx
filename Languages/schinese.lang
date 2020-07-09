@@ -149,6 +149,9 @@ msgstr ""
 msgid "Alternate DOL"
 msgstr "可选择 DOL 文件"
 
+msgid "AltWFC (Risky)"
+msgstr "AltWFC (有风险)"
+
 msgid "An example file was created here:"
 msgstr "一个实例文件已创建于："
 
@@ -211,6 +214,9 @@ msgstr "自动运行"
 
 msgid "AutoInit Network"
 msgstr "自动检测网络"
+
+msgid "BenFi (Risky)"
+msgstr "BenFi (有风险)"
 
 msgid "BCA Codes Path"
 msgstr "BCA 代码路径"
@@ -2398,7 +2404,7 @@ msgstr ""
 msgid "Wiilight"
 msgstr "光驱灯"
 
-msgid "Wiimmfi.de"
+msgid "Wiimmfi"
 msgstr ""
 
 msgid "Wiinnertag"

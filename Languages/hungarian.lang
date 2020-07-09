@@ -149,6 +149,9 @@ msgstr ""
 msgid "Alternate DOL"
 msgstr "Alternatív DOL"
 
+msgid "AltWFC (Risky)"
+msgstr "AltWFC (Kockázatos)"
+
 msgid "An example file was created here:"
 msgstr ""
 
@@ -211,6 +214,9 @@ msgstr ""
 
 msgid "AutoInit Network"
 msgstr "Hálózat AutoInit"
+
+msgid "BenFi (Risky)"
+msgstr "BenFi (Kockázatos)"
 
 msgid "BCA Codes Path"
 msgstr "BCA kód útvonal"
@@ -2398,7 +2404,7 @@ msgstr ""
 msgid "Wiilight"
 msgstr "WiiFény"
 
-msgid "Wiimmfi.de"
+msgid "Wiimmfi"
 msgstr ""
 
 msgid "Wiinnertag"

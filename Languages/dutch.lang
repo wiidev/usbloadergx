@@ -149,6 +149,9 @@ msgstr ""
 msgid "Alternate DOL"
 msgstr "Alternatieve DOL"
 
+msgid "AltWFC (Risky)"
+msgstr "AltWFC (Riskant)"
+
 msgid "An example file was created here:"
 msgstr "Er is hier een voorbeeldbestand gemaakt:"
 
@@ -211,6 +214,9 @@ msgstr "Auto Opstart"
 
 msgid "AutoInit Network"
 msgstr "Netwerk AutoStart"
+
+msgid "BenFi (Risky)"
+msgstr "BenFi (Riskant)"
 
 msgid "BCA Codes Path"
 msgstr "Locatie BCA codes"
@@ -2398,7 +2404,7 @@ msgstr ""
 msgid "Wiilight"
 msgstr "WiiLight"
 
-msgid "Wiimmfi.de"
+msgid "Wiimmfi"
 msgstr ""
 
 msgid "Wiinnertag"

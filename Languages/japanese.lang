@@ -149,6 +149,9 @@ msgstr ""
 msgid "Alternate DOL"
 msgstr "代替DOL起動"
 
+msgid "AltWFC (Risky)"
+msgstr "AltWFC (リスキーな)"
+
 msgid "An example file was created here:"
 msgstr "テンプレファイルが作成されました:"
 
@@ -211,6 +214,9 @@ msgstr ""
 
 msgid "AutoInit Network"
 msgstr "自動ネット接続"
+
+msgid "BenFi (Risky)"
+msgstr "BenFi (リスキーな)"
 
 msgid "BCA Codes Path"
 msgstr "BCAコード"
@@ -2398,7 +2404,7 @@ msgstr ""
 msgid "Wiilight"
 msgstr "スロット点灯機能"
 
-msgid "Wiimmfi.de"
+msgid "Wiimmfi"
 msgstr ""
 
 msgid "Wiinnertag"

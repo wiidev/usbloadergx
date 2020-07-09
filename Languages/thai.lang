@@ -149,6 +149,9 @@ msgstr ""
 msgid "Alternate DOL"
 msgstr "เปลี่ยน DOL "
 
+msgid "AltWFC (Risky)"
+msgstr "AltWFC (เสี่ยง)"
+
 msgid "An example file was created here:"
 msgstr ""
 
@@ -211,6 +214,9 @@ msgstr ""
 
 msgid "AutoInit Network"
 msgstr "ทำการเชื่อมต่อเครือข่าย"
+
+msgid "BenFi (Risky)"
+msgstr "BenFi (เสี่ยง)"
 
 msgid "BCA Codes Path"
 msgstr ""
@@ -2398,7 +2404,7 @@ msgstr ""
 msgid "Wiilight"
 msgstr "ความสว่างของ Wii"
 
-msgid "Wiimmfi.de"
+msgid "Wiimmfi"
 msgstr ""
 
 msgid "Wiinnertag"

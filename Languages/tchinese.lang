@@ -149,6 +149,9 @@ msgstr ""
 msgid "Alternate DOL"
 msgstr "可選擇Alt DOL檔"
 
+msgid "AltWFC (Risky)"
+msgstr "AltWFC (有風險)"
+
 msgid "An example file was created here:"
 msgstr "在這裡建立範本檔："
 
@@ -211,6 +214,9 @@ msgstr ""
 
 msgid "AutoInit Network"
 msgstr "自動初始化網路"
+
+msgid "BenFi (Risky)"
+msgstr "BenFi (有風險)"
 
 msgid "BCA Codes Path"
 msgstr "BAC代碼路徑"
@@ -2398,7 +2404,7 @@ msgstr ""
 msgid "Wiilight"
 msgstr "Wii LED燈"
 
-msgid "Wiimmfi.de"
+msgid "Wiimmfi"
 msgstr ""
 
 msgid "Wiinnertag"

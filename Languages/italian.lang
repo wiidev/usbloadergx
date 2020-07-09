@@ -149,6 +149,9 @@ msgstr "Tutti i files wad processati correttamente"
 msgid "Alternate DOL"
 msgstr "DOL alternativo"
 
+msgid "AltWFC (Risky)"
+msgstr "AltWFC (Rischioso)"
+
 msgid "An example file was created here:"
 msgstr "Un file di esempio è stato creato qui:"
 
@@ -211,6 +214,9 @@ msgstr "Avvio automatico"
 
 msgid "AutoInit Network"
 msgstr "Inizializzazione automatica rete"
+
+msgid "BenFi (Risky)"
+msgstr "BenFi (Rischioso)"
 
 msgid "BCA Codes Path"
 msgstr "Percorso codici BCA"
@@ -2398,7 +2404,7 @@ msgstr ""
 msgid "Wiilight"
 msgstr "Illuminazione Wii"
 
-msgid "Wiimmfi.de"
+msgid "Wiimmfi"
 msgstr ""
 
 msgid "Wiinnertag"

@@ -149,6 +149,9 @@ msgstr ""
 msgid "Alternate DOL"
 msgstr "Alternatif DOL"
 
+msgid "AltWFC (Risky)"
+msgstr "AltWFC (Riskli)"
+
 msgid "An example file was created here:"
 msgstr ""
 
@@ -211,6 +214,9 @@ msgstr ""
 
 msgid "AutoInit Network"
 msgstr "Ağı ototanımla"
+
+msgid "BenFi (Risky)"
+msgstr "BenFi (Riskli)"
 
 msgid "BCA Codes Path"
 msgstr "BCA Kod Yolu"
@@ -2398,7 +2404,7 @@ msgstr ""
 msgid "Wiilight"
 msgstr ""
 
-msgid "Wiimmfi.de"
+msgid "Wiimmfi"
 msgstr ""
 
 msgid "Wiinnertag"

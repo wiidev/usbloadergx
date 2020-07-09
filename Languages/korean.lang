@@ -149,6 +149,9 @@ msgstr "모든 wad 파일이 성공적으로 처리되었습니다"
 msgid "Alternate DOL"
 msgstr "대체 DOL"
 
+msgid "AltWFC (Risky)"
+msgstr "AltWFC (위험한)"
+
 msgid "An example file was created here:"
 msgstr "여기에 예제 파일이 생성되었습니다:"
 
@@ -211,6 +214,9 @@ msgstr "자동 부팅"
 
 msgid "AutoInit Network"
 msgstr "자동초기화 네트워크"
+
+msgid "BenFi (Risky)"
+msgstr "BenFi (위험한)"
 
 msgid "BCA Codes Path"
 msgstr "BCA 코드 경로"
@@ -2392,7 +2398,7 @@ msgstr "WiiU 와이드스크린"
 msgid "Wiilight"
 msgstr ""
 
-msgid "Wiimmfi.de"
+msgid "Wiimmfi"
 msgstr ""
 
 msgid "Wiinnertag"
