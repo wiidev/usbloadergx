@@ -1,0 +1,6 @@
+*.dol
+*.elf
+/build
+/HBC/meta.xml
+/source/gitver.c
+/source/svnrev.c
