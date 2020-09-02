@@ -50,21 +50,76 @@ typedef struct _dolheader{
 
 Channels *Channels::instance = NULL;
 
-void Channels::GetEmuChannelList()
+void Channels::GetEmuChannelList(bool useCache)
 {
 	EmuChannels.clear();
+	FILE * f = NULL;
+	std::string Cachepath = "sd:/EmuChannelsListCache.bin";
+	//check and see if the EmuChannelsCache exists
+	if (useCache)
+	{
+    	f = fopen(Cachepath.c_str(), "rb");
+	}
+	else
+	{
+		remove(Cachepath.c_str());
+	}
+	
+	if(f) {
+		// this means the cache is in existance, load it and return
+		int s = 0;
+		fread(&s, sizeof(int), 1, f);
+		EmuChannels.resize(s);
+		for (int i = 0; i < s; i++)
+		{
+			char id[5];
+			u64 tid;
+			memset(&EmuChannels[i], 0, sizeof(struct discHdr));
+			fread(id,sizeof(char),4,f);
+			memcpy(EmuChannels[i].id, id, 4);
+			fread(&tid,sizeof(u64),1,f);
+			EmuChannels[i].tid = tid;
+			EmuChannels[i].type = TYPE_GAME_EMUNANDCHAN;
+			fread(EmuChannels[i].title,1,sizeof(EmuChannels[i].title)-1,f);
+		}
+		fclose(f);
+	}
+	else
+	{
+		char filepath[1024];
+		int language = CONF_GetLanguage();
 
-	char filepath[1024];
-	int language = CONF_GetLanguage();
+		snprintf(filepath, sizeof(filepath), "%s/title/00010001", Settings.NandEmuChanPath);
+		ParseTitleDir(filepath, language);
 
-	snprintf(filepath, sizeof(filepath), "%s/title/00010001", Settings.NandEmuChanPath);
-	ParseTitleDir(filepath, language);
+		snprintf(filepath, sizeof(filepath), "%s/title/00010004", Settings.NandEmuChanPath);
+		ParseTitleDir(filepath, language);
 
-	snprintf(filepath, sizeof(filepath), "%s/title/00010004", Settings.NandEmuChanPath);
-	ParseTitleDir(filepath, language);
+		snprintf(filepath, sizeof(filepath), "%s/title/00010002", Settings.NandEmuChanPath);
+		ParseTitleDir(filepath, language);
 
-	snprintf(filepath, sizeof(filepath), "%s/title/00010002", Settings.NandEmuChanPath);
-	ParseTitleDir(filepath, language);
+        int s = EmuChannels.size();
+		if(s > 0) 
+		{
+			f = fopen(Cachepath.c_str(), "wb");
+			if (f)
+			{
+				//int s = EmuChannels.size();
+				fwrite(&s, sizeof(int), 1, f);
+				for (int i = 0; i < s; i++)
+				{
+					char id[5];
+					u64 tid;
+					memcpy(id, EmuChannels[i].id, 4);
+					fwrite(&id,sizeof(char),4,f);
+					tid = EmuChannels[i].tid;
+					fwrite(&tid,sizeof(u64),1,f);
+					fwrite(EmuChannels[s].title,1,sizeof(EmuChannels[i].title)-1,f);
+				}
+				fclose(f);
+			}
+		}
+	}
 }
 
 void Channels::GetChannelList()
@@ -135,7 +190,7 @@ vector<struct discHdr> & Channels::GetNandHeaders(void)
 vector<struct discHdr> & Channels::GetEmuHeaders(void)
 {
 	if(EmuChannels.empty())
-		this->GetEmuChannelList();
+		this->GetEmuChannelList(true);
 
 	return EmuChannels;
 }

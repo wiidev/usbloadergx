@@ -45,7 +45,7 @@ public:
 	static u8 *GetOpeningBnr(const u64 &title, u32 *outsize, const char *pathPrefix);
 
 	void GetChannelList();
-	void GetEmuChannelList();
+	void GetEmuChannelList(bool useCache = false);
 	vector<struct discHdr> & GetNandHeaders(void);
 	vector<struct discHdr> & GetEmuHeaders(void);
 private:
