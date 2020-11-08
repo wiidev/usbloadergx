@@ -409,6 +409,11 @@ static int InternalShowGameInfo(struct discHdr *header)
 		{
 			boxCov->SetBoxColor((GXColor) { 198, 34, 4, 255 });
 		}
+		else if(GameInfo.CaseColor == 0x000000)
+		{
+			// None of the cases are totally black
+			boxCov->SetBoxColor((GXColor) { 30, 30, 30, 255 });
+		}
 		else if(GameInfo.CaseColor >= 0)
 		{
 			u8 * Color = (u8 *) &GameInfo.CaseColor;
