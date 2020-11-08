@@ -330,14 +330,30 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	//! Load wip codes
 	load_wip_code(gameHeader.id);
 
-	// force hooktype if not selected but Ocarina is enabled
-	if(ocarinaChoice && Hooktype == OFF)
-		Hooktype = 1;
-
 	//! Load Ocarina codes
 	if (ocarinaChoice)
 		ocarina_load_code(Settings.Cheatcodespath, gameHeader.id);
-	
+
+	//! Patch MKW RCE vulnerability
+	if (PrivServChoice != PRIVSERV_WIIMMFI && memcmp(gameHeader.id, "RMC", 3) == 0)
+	{
+		ocarinaChoice = 1;
+		ocarina_patch_mkw(gameHeader.id);
+	}
+
+	//! Patch error 23400 for a few games with dedicated servers
+	if (memcmp(gameHeader.id, "SC7", 3) == 0 || memcmp(gameHeader.id, "RJA", 3) == 0 ||
+		memcmp(gameHeader.id, "SM8", 3) == 0 || memcmp(gameHeader.id, "SZB", 3) == 0 || memcmp(gameHeader.id, "R9J", 3) == 0)
+	{
+		ocarinaChoice = 1;
+		PrivServChoice = PRIVSERV_OFF; // Private server patching causes error 20100
+		ocarina_patch_games(gameHeader.id);
+	}
+
+	//! Force hooktype if not selected but Ocarina is enabled
+	if(ocarinaChoice && Hooktype == OFF)
+		Hooktype = 1;
+
 	//! Load gameconfig.txt even if ocarina disabled
 	if(Hooktype)
 		LoadGameConfig(Settings.Cheatcodespath);
