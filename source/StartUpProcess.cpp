@@ -237,7 +237,8 @@ int StartUpProcess::Execute()
 	Settings.EntryIOS = IOS_GetVersion();
 
 	// Reloading to IOS 249 fixes compatibility issues with old forwarders
-	IosLoader::ReloadIosSafe(249);
+	if (Settings.LoaderIOS != 249)
+		IosLoader::ReloadIosSafe(249);
 
 	// Reload to the default IOS or the IOS set in meta.xml
 	SetTextf("Loading application cIOS %s\n", Settings.UseArgumentIOS ? "requested in meta.xml" : "");
