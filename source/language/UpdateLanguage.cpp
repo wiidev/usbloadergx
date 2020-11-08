@@ -83,7 +83,7 @@ int DownloadAllLanguageFiles(int revision)
 				fclose(pfile);
 				files_downloaded++;
 			}
-			free(file.data);
+			MEM2_free(file.data);
 		}
 	}
 
@@ -151,7 +151,7 @@ int UpdateLanguageFiles()
 				fclose(pfile);
 				done++;
 			}
-			free(file.data);
+			MEM2_free(file.data);
 		}
 	}
 

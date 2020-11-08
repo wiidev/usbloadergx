@@ -79,7 +79,7 @@ bool Wiinnertag::Send(const char *gameID)
 		replaceString(sendURL, "{KEY}", tagList[i].second.c_str());
 
 		struct download file = {};
-		file.skip_response = 1;
+		file.skip_response = true;
 		downloadfile(sendURL, &file);
 	}
 

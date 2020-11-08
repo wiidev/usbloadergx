@@ -27,7 +27,9 @@
 
 #if defined(HAVE_CURVE448) || defined(HAVE_ED448)
 
+#ifndef WOLFSSL_LINUXKM
 #include <stdint.h>
+#endif
 
 #include <libs/libwolfssl/wolfcrypt/types.h>
 
@@ -40,7 +42,7 @@
 #endif
 
 /* default to be faster but take more memory */
-#if !defined(CURVE448_SMALL) || !defined(ED448_SMALL)
+#if !defined(CURVE448_SMALL) && !defined(ED448_SMALL)
 
 #if defined(CURVED448_128BIT)
     typedef int64_t fe448;

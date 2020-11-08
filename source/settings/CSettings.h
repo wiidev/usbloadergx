@@ -98,6 +98,11 @@ class CSettings
 		char URL_Discs[300];
 		char URL_DiscsCustom[300];
 		char URL_GameTDB[300];
+		char ProxyUsername[33];
+		char ProxyPassword[33];
+		char ProxyAddress[256];
+		u16 ProxyPort;
+		short ProxyUseSystem;
 		short videomode;
 		short language;
 		short ocarina;

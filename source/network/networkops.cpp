@@ -11,6 +11,7 @@
 #include "networkops.h"
 #include "https.h"
 #include "update.h"
+#include "settings/ProxySettings.h"
 
 #define PORT 4299
 
@@ -52,6 +53,7 @@ void Initialize_Network(int retries)
 	}
 	else
 	{
+		getProxyInfo();
 		wolfSSL_Init();
 		networkinitialized = true;
 		return;

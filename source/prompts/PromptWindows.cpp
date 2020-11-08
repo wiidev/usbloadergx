@@ -1522,12 +1522,12 @@ int CodeDownload(const char *id)
 				else
 					WindowPrompt(tr("Error"), tr("Could not write file."), tr( "OK" ));
 			}
-			free(file.data);
+			MEM2_free(file.data);
 		}
 		else
 		{
 			if (file.size > 0)
-				free(file.data);
+				MEM2_free(file.data);
 			snprintf(codeurl, sizeof(codeurl), "%s.txt%s", id, tr(" could not be downloaded."));
 			WindowPrompt(tr( "Error" ), codeurl, tr( "OK" ));
 		}

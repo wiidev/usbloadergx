@@ -94,6 +94,8 @@
     #elif defined(WOLFSSL_NUCLEUS_1_2)
         #include <externs.h>
         #include <errno.h>
+    #elif defined(WOLFSSL_LINUXKM)
+        /* the requisite linux/net.h is included in wc_port.h, with incompatible warnings masked out. */
     #elif defined(WOLFSSL_ATMEL)
         #include "socket/include/socket.h"
     #elif defined(INTIME_RTOS)
@@ -126,6 +128,8 @@
         #include <errno.h>
     #elif defined(WOLFSSL_ZEPHYR)
         #include <net/socket.h>
+    #elif defined(MICROCHIP_PIC32)
+        #include <sys/errno.h>
     #elif defined(HAVE_NETX)
         #include "nx_api.h"
         #include "errno.h"
@@ -147,7 +151,6 @@
                 && !defined(WOLFSSL_CONTIKI) && !defined(WOLFSSL_WICED) \
                 && !defined(WOLFSSL_GNRC) && !defined(WOLFSSL_RIOT_OS)
             #include <network.h>
-            //#include <sys/socket.h>
             //#include <arpa/inet.h>
             //#include <netinet/in.h>
             //#include <netdb.h>
@@ -159,7 +162,7 @@
         #endif
     #endif
 
-    #if defined(WOLFSSL_RENESAS_RA6M3G) /* Uses FREERTOS_TCP */
+    #if defined(WOLFSSL_RENESAS_RA6M3G) || defined(WOLFSSL_RENESAS_RA6M3) /* Uses FREERTOS_TCP */
         #include <errno.h>
     #endif
 
@@ -294,6 +297,9 @@
 
     #define SEND_FUNCTION send
     #define RECV_FUNCTION recv
+#elif defined(WOLFSSL_LINUXKM)
+    #define SEND_FUNCTION linuxkm_send
+    #define RECV_FUNCTION linuxkm_recv
 #else
     #define SEND_FUNCTION send
     #define RECV_FUNCTION recv

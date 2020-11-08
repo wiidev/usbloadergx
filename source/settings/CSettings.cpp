@@ -87,6 +87,9 @@ void CSettings::SetDefault()
 	strlcpy(URL_Discs, "https://art.gametdb.com/wii/disc/", sizeof(URL_Discs));
 	strlcpy(URL_DiscsCustom, "https://art.gametdb.com/wii/disccustom/", sizeof(URL_DiscsCustom));
 	strlcpy(URL_GameTDB, "https://www.gametdb.com/wiitdb.zip", sizeof(URL_GameTDB));
+	ProxyUsername[0] = 0;
+	ProxyPassword[0] = 0;
+	ProxyAddress[0] = 0;
 	theme[0] = 0;
 	language_path[0] = 0;
 	ogg_path[0] = 0;
@@ -226,6 +229,8 @@ void CSettings::SetDefault()
 	GCInstallCompressed = OFF;
 	GCInstallAligned = OFF;
 	PrivateServer = OFF;
+	ProxyUseSystem = ON;
+	ProxyPort = 0;
 }
 
 bool CSettings::Load()
@@ -499,6 +504,11 @@ bool CSettings::Save()
 	fprintf(file, "URL_Discs = %s\n", URL_Discs);
 	fprintf(file, "URL_DiscsCustom = %s\n", URL_DiscsCustom);
 	fprintf(file, "URL_GameTDB = %s\n", URL_GameTDB);
+	fprintf(file, "ProxyUseSystem = %d\n", ProxyUseSystem);
+	fprintf(file, "ProxyUsername = %s\n", ProxyUsername);
+	fprintf(file, "ProxyPassword = %s\n", ProxyPassword);
+	fprintf(file, "ProxyAddress = %s\n", ProxyAddress);
+	fprintf(file, "ProxyPort = %d\n", ProxyPort);
 	fclose(file);
 
 	return true;
@@ -1324,6 +1334,34 @@ bool CSettings::SetSetting(char *name, char *value)
 	{
 		if (ValidateURL(value, true))
 			strlcpy(URL_GameTDB, value, sizeof(URL_GameTDB));
+		return true;
+	}
+	else if (strcmp(name, "ProxyUseSystem") == 0)
+	{
+		ProxyUseSystem = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "ProxyUsername") == 0)
+	{
+		if(strlen(value) > 0)
+			strlcpy(ProxyUsername, value, sizeof(ProxyUsername));
+		return true;
+	}
+	else if (strcmp(name, "ProxyPassword") == 0)
+	{
+		if(strlen(value) > 0)
+			strlcpy(ProxyPassword, value, sizeof(ProxyPassword));
+		return true;
+	}
+	else if (strcmp(name, "ProxyAddress") == 0)
+	{
+		if(strlen(value) > 6)
+			strlcpy(ProxyAddress, value, sizeof(ProxyAddress));
+		return true;
+	}
+	else if(strcmp(name, "ProxyPort") == 0)
+	{
+		ProxyPort = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "CustomAddress") == 0)

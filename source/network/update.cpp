@@ -61,7 +61,7 @@ int DownloadFileToPath(const char *url, const char *dest)
 	StartProgress(tr("Downloading file..."), 0, filename, true, true);
 
 	struct download file = {};
-	file.show_progress = 1;
+	file.show_progress = true;
 	downloadfile(url, &file);
 	if (file.size > 0)
 	{
@@ -73,7 +73,7 @@ int DownloadFileToPath(const char *url, const char *dest)
 		}
 		fwrite(file.data, 1, file.size, savefile);
 		fclose(savefile);
-		free(file.data);
+		MEM2_free(file.data);
 	}
 	ProgressStop();
 	ProgressCancelEnable(false);
@@ -84,7 +84,7 @@ static bool CheckNewGameTDBVersion(const char *url)
 {
 	gprintf("Checking GameTDB version...\n");
 	struct download file = {};
-	file.gametdbcheck = 1;
+	file.gametdbcheck = true;
 	downloadfile(url, &file);
 
 	if (file.gametdbcheck <= 0)
@@ -157,7 +157,7 @@ static void UpdateIconPng()
 			fwrite(file.data, 1, file.size, pfile);
 			fclose(pfile);
 		}
-		free(file.data);
+		MEM2_free(file.data);
 	}
 }
 
@@ -175,7 +175,7 @@ static void UpdateMetaXml()
 			fwrite(file.data, 1, file.size, pfile);
 			fclose(pfile);
 		}
-		free(file.data);
+		MEM2_free(file.data);
 	}
 }
 
@@ -197,7 +197,7 @@ int CheckUpdate()
 	if (file.size > 0)
 	{
 		revnumber = atoi((char *)file.data);
-		free(file.data);
+		MEM2_free(file.data);
 	}
 
 	if (revnumber > currentrev)
@@ -233,7 +233,7 @@ static int ApplicationDownload(void)
 			ptr++;
 		}
 
-		free(file.data);
+		MEM2_free(file.data);
 	}
 
 	if (newrev <= currentrev)

@@ -22,7 +22,12 @@
 /*!
     \file wolfssl/wolfcrypt/types.h
 */
+/*
+DESCRIPTION
+This library defines the primitive data types and abstraction macros to
+decouple library dependencies with standard string, memory and so on.
 
+*/
 #ifndef WOLF_CRYPT_TYPES_H
 #define WOLF_CRYPT_TYPES_H
 
@@ -197,7 +202,11 @@
             #define WC_INLINE
         #endif
     #else
-        #define WC_INLINE
+        #ifdef __GNUC__
+            #define WC_INLINE __attribute__((unused))
+        #else
+            #define WC_INLINE
+        #endif
     #endif
     #endif
 
@@ -244,7 +253,11 @@
     #if defined(__GNUC__)
         #if ((__GNUC__ > 7) || ((__GNUC__ == 7) && (__GNUC_MINOR__ >= 1)))
             #undef  FALL_THROUGH
-            #define FALL_THROUGH __attribute__ ((fallthrough));
+            #if defined(WOLFSSL_LINUXKM) && defined(fallthrough)
+                #define FALL_THROUGH fallthrough
+            #else
+                #define FALL_THROUGH __attribute__ ((fallthrough));
+            #endif
         #endif
     #endif
     #endif /* FALL_THROUGH */
@@ -342,10 +355,17 @@
         #else
         /* just use plain C stdlib stuff if desired */
         #include <stdlib.h>
-        #define XMALLOC(s, h, t)     malloc((s))
+        #define XMALLOC(s, h, t)     malloc((size_t)(s))
         #define XFREE(p, h, t)       {void* xp = (p); if((xp)) free((xp));}
-        #define XREALLOC(p, n, h, t) realloc((p), (n))
+        #define XREALLOC(p, n, h, t) realloc((p), (size_t)(n))
         #endif
+
+    #elif defined(WOLFSSL_LINUXKM)
+	/* the requisite linux/slab.h is included in wc_port.h, with incompatible warnings masked out. */
+        #define XMALLOC(s, h, t)     ({(void)(h); (void)(t); kmalloc(s, GFP_KERNEL);})
+        #define XFREE(p, h, t)       ({void* _xp; (void)(h); _xp = (p); if(_xp) kfree(_xp);})
+        #define XREALLOC(p, n, h, t) ({(void)(h); (void)(t); krealloc((p), (n), GFP_KERNEL);})
+
     #elif !defined(MICRIUM_MALLOC) && !defined(EBSNET) \
             && !defined(WOLFSSL_SAFERTOS) && !defined(FREESCALE_MQX) \
             && !defined(FREESCALE_KSDK_MQX) && !defined(FREESCALE_FREE_RTOS) \
@@ -375,8 +395,9 @@
         #endif /* WOLFSSL_STATIC_MEMORY */
     #endif
 
-    /* declare/free variable handling for async */
-    #ifdef WOLFSSL_ASYNC_CRYPT
+    /* declare/free variable handling for async and smallstack */
+    #if defined(WOLFSSL_ASYNC_CRYPT) || defined(WOLFSSL_SMALL_STACK)
+        #define DECLARE_VAR_IS_HEAP_ALLOC
         #define DECLARE_VAR(VAR_NAME, VAR_TYPE, VAR_SIZE, HEAP) \
             VAR_TYPE* VAR_NAME = (VAR_TYPE*)XMALLOC(sizeof(VAR_TYPE) * VAR_SIZE, (HEAP), DYNAMIC_TYPE_WOLF_BIGINT);
         #define DECLARE_VAR_INIT(VAR_NAME, VAR_TYPE, VAR_SIZE, INIT_VALUE, HEAP) \
@@ -389,9 +410,19 @@
             })
         #define DECLARE_ARRAY(VAR_NAME, VAR_TYPE, VAR_ITEMS, VAR_SIZE, HEAP) \
             VAR_TYPE* VAR_NAME[VAR_ITEMS]; \
-            int idx##VAR_NAME; \
+            int idx##VAR_NAME, inner_idx_##VAR_NAME; \
             for (idx##VAR_NAME=0; idx##VAR_NAME<VAR_ITEMS; idx##VAR_NAME++) { \
                 VAR_NAME[idx##VAR_NAME] = (VAR_TYPE*)XMALLOC(VAR_SIZE, (HEAP), DYNAMIC_TYPE_WOLF_BIGINT); \
+                if (VAR_NAME[idx##VAR_NAME] == NULL) { \
+                    for (inner_idx_##VAR_NAME = 0; inner_idx_##VAR_NAME < idx##VAR_NAME; inner_idx_##VAR_NAME++) { \
+                        XFREE(VAR_NAME[inner_idx_##VAR_NAME], HEAP, DYNAMIC_TYPE_WOLF_BIGINT); \
+                        VAR_NAME[inner_idx_##VAR_NAME] = NULL; \
+                    } \
+                    for (inner_idx_##VAR_NAME = idx##VAR_NAME + 1; inner_idx_##VAR_NAME < VAR_ITEMS; inner_idx_##VAR_NAME++) { \
+                        VAR_NAME[inner_idx_##VAR_NAME] = NULL; \
+                    } \
+                    break; \
+                } \
             }
         #define FREE_VAR(VAR_NAME, HEAP) \
             XFREE(VAR_NAME, (HEAP), DYNAMIC_TYPE_WOLF_BIGINT);
@@ -406,6 +437,7 @@
         #define FREE_ARRAY_DYNAMIC(VAR_NAME, VAR_ITEMS, HEAP) \
             FREE_ARRAY(VAR_NAME, VAR_ITEMS, HEAP)
     #else
+        #undef DECLARE_VAR_IS_HEAP_ALLOC
         #define DECLARE_VAR(VAR_NAME, VAR_TYPE, VAR_SIZE, HEAP) \
             VAR_TYPE VAR_NAME[VAR_SIZE]
         #define DECLARE_VAR_INIT(VAR_NAME, VAR_TYPE, VAR_SIZE, INIT_VALUE, HEAP) \
@@ -417,10 +449,20 @@
 
         #define DECLARE_ARRAY_DYNAMIC_DEC(VAR_NAME, VAR_TYPE, VAR_ITEMS, VAR_SIZE, HEAP) \
             VAR_TYPE* VAR_NAME[VAR_ITEMS]; \
-            int idx##VAR_NAME;
+            int idx##VAR_NAME, inner_idx_##VAR_NAME;
         #define DECLARE_ARRAY_DYNAMIC_EXE(VAR_NAME, VAR_TYPE, VAR_ITEMS, VAR_SIZE, HEAP) \
             for (idx##VAR_NAME=0; idx##VAR_NAME<VAR_ITEMS; idx##VAR_NAME++) { \
                 VAR_NAME[idx##VAR_NAME] = (VAR_TYPE*)XMALLOC(VAR_SIZE, (HEAP), DYNAMIC_TYPE_TMP_BUFFER); \
+                if (VAR_NAME[idx##VAR_NAME] == NULL) { \
+                    for (inner_idx_##VAR_NAME = 0; inner_idx_##VAR_NAME < idx##VAR_NAME; inner_idx_##VAR_NAME++) { \
+                        XFREE(VAR_NAME[inner_idx_##VAR_NAME], HEAP, DYNAMIC_TYPE_TMP_BUFFER); \
+                        VAR_NAME[inner_idx_##VAR_NAME] = NULL; \
+                    } \
+                    for (inner_idx_##VAR_NAME = idx##VAR_NAME + 1; inner_idx_##VAR_NAME < VAR_ITEMS; inner_idx_##VAR_NAME++) { \
+                        VAR_NAME[inner_idx_##VAR_NAME] = NULL; \
+                    } \
+                    break; \
+                } \
             }
         #define FREE_ARRAY_DYNAMIC(VAR_NAME, VAR_ITEMS, HEAP) \
             for (idx##VAR_NAME=0; idx##VAR_NAME<VAR_ITEMS; idx##VAR_NAME++) { \
@@ -437,12 +479,17 @@
         #define USE_WOLF_STRSEP
     #endif
 
-    #ifndef STRING_USER
-        #include <string.h>
-        #define XMEMCPY(d,s,l)    memcpy((d),(s),(l))
-        #define XMEMSET(b,c,l)    memset((b),(c),(l))
-        #define XMEMCMP(s1,s2,n)  memcmp((s1),(s2),(n))
-        #define XMEMMOVE(d,s,l)   memmove((d),(s),(l))
+	#ifndef STRING_USER
+        #if defined(WOLFSSL_LINUXKM)
+            #include <linux/string.h>
+        #else
+            #include <string.h>
+        #endif
+
+	    #define XMEMCPY(d,s,l)    memcpy((d),(s),(l))
+	    #define XMEMSET(b,c,l)    memset((b),(c),(l))
+	    #define XMEMCMP(s1,s2,n)  memcmp((s1),(s2),(n))
+	    #define XMEMMOVE(d,s,l)   memmove((d),(s),(l))
 
         #define XSTRLEN(s1)       strlen((s1))
         #define XSTRNCPY(s1,s2,n) strncpy((s1),(s2),(n))
@@ -489,7 +536,37 @@
                    for snprintf */
                 #include <stdio.h>
             #endif
-            #define XSNPRINTF snprintf
+            #if defined(WOLFSSL_ESPIDF) && \
+                (!defined(NO_ASN_TIME) && defined(HAVE_PKCS7))
+                    #include<stdarg.h>
+                    /* later gcc than 7.1 introduces -Wformat-truncation    */
+                    /* In cases when truncation is expected the caller needs*/
+                    /* to check the return value from the function so that  */
+                    /* compiler doesn't complain.                           */
+                    /* xtensa-esp32-elf v8.2.0 warns trancation at          */
+                    /* GetAsnTimeString()                                   */
+                    static WC_INLINE
+                    int _xsnprintf_(char *s, size_t n, const char *format, ...)
+                    {
+                        va_list ap;
+                        int ret;
+                        
+                        if ((int)n <= 0) return -1;
+                        
+                        va_start(ap, format);
+                        
+                        ret = vsnprintf(s, n, format, ap);
+                        if (ret < 0)
+                            ret = -1;
+                            
+                        va_end(ap);
+                        
+                        return ret;
+                    }
+                #define XSNPRINTF _xsnprintf_
+            #else
+                #define XSNPRINTF snprintf
+            #endif
             #endif
         #else
             #if defined(_MSC_VER) || defined(__CYGWIN__) || defined(__MINGW32__)
@@ -565,9 +642,11 @@
         #endif
     #endif /* OPENSSL_EXTRA */
 
-    #ifndef CTYPE_USER
-        #include <ctype.h>
-        #if defined(HAVE_ECC) || defined(HAVE_OCSP) || \
+	#ifndef CTYPE_USER
+            #ifndef WOLFSSL_LINUXKM
+                #include <ctype.h>
+            #endif
+	    #if defined(HAVE_ECC) || defined(HAVE_OCSP) || \
             defined(WOLFSSL_KEY_GEN) || !defined(NO_DSA)
             #define XTOUPPER(c)     toupper((c))
             #define XISALPHA(c)     isalpha((c))

@@ -36,7 +36,7 @@ URL_List::URL_List(const char * url)
 	Links = (Link_Info *) malloc(sizeof(Link_Info));
 	if (!Links)
 	{
-		free(file.data);
+		MEM2_free(file.data);
 		urlcount = -3;
 		return;
 	}
@@ -71,7 +71,7 @@ URL_List::URL_List(const char * url)
 				}
 				free(Links);
 				Links = NULL;
-				free(file.data);
+				MEM2_free(file.data);
 				urlcount = -4;
 				break;
 			}
@@ -89,7 +89,7 @@ URL_List::URL_List(const char * url)
 				}
 				free(Links);
 				Links = NULL;
-				free(file.data);
+				MEM2_free(file.data);
 				urlcount = -5;
 				break;
 			}
@@ -105,7 +105,7 @@ URL_List::URL_List(const char * url)
 		cnt++;
 	}
 
-	free(file.data);
+	MEM2_free(file.data);
 }
 
 URL_List::~URL_List()
