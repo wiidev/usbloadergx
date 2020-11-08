@@ -447,15 +447,11 @@ extern "C" bool RemoveDirectory(const char *path)
 			RemoveFile(dir.GetFilepath(i));
 			done++;
 		}
-	}
-
-	//! now remove all folders
-	for(int i = 0; i < fileCount; i++)
-	{
-		if(dir.IsDir(i))
+		else
 		{
+			//! remove all folders
 			ShowProgress(tr("Deleting directories..."), dir.GetFilename(i), 0, done, fileCount, false, false);
-			RemoveFile(dir.GetFilepath(i));
+			rmdir(dir.GetFilepath(i));
 			done++;
 			gprintf("%s\n", dir.GetFilepath(i));
 		}
@@ -464,11 +460,11 @@ extern "C" bool RemoveDirectory(const char *path)
 	ProgressStop();
 	ProgressCancelEnable(false);
 
-	return (remove(folderpath.c_str()) == 0);
+	return (rmdir(folderpath.c_str()) == 0);
 }
 
 /****************************************************************************
- * RemoveDirectory
+ * CopyDirectory
  ***************************************************************************/
 extern "C" int CopyDirectory(const char *path, const char *dst)
 {

@@ -677,51 +677,51 @@ static int InternalShowGameInfo(struct discHdr *header)
 	}
 
 	//date
-	snprintf(linebuf2, sizeof(linebuf2), " ");
+	int n = snprintf(linebuf2, sizeof(linebuf2), " ");
 	if (GameInfo.PublishDate != 0)
 	{
 		int year = GameInfo.PublishDate >> 16;
 		int day = GameInfo.PublishDate & 0xFF;
 		int month = (GameInfo.PublishDate >> 8) & 0xFF;
-		snprintf(linebuf2, sizeof(linebuf2), "%02i ", day);
+		n += snprintf(linebuf2 + n, sizeof(linebuf2) - n, "%02i ", day);
 
 		switch (month)
 		{
 			case 1:
-				snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr( "Jan" ));
+				snprintf(linebuf2 + n, sizeof(linebuf2) - n, "%s ", tr( "Jan" ));
 				break;
 			case 2:
-				snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr( "Feb" ));
+				snprintf(linebuf2 + n, sizeof(linebuf2) - n, "%s ", tr( "Feb" ));
 				break;
 			case 3:
-				snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr( "Mar" ));
+				snprintf(linebuf2 + n, sizeof(linebuf2) - n, "%s ", tr( "Mar" ));
 				break;
 			case 4:
-				snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr( "Apr" ));
+				snprintf(linebuf2 + n, sizeof(linebuf2) - n, "%s ", tr( "Apr" ));
 				break;
 			case 5:
-				snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr( "May" ));
+				snprintf(linebuf2 + n, sizeof(linebuf2) - n, "%s ", tr( "May" ));
 				break;
 			case 6:
-				snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr( "June" ));
+				snprintf(linebuf2 + n, sizeof(linebuf2) - n, "%s ", tr( "June" ));
 				break;
 			case 7:
-				snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr( "July" ));
+				snprintf(linebuf2 + n, sizeof(linebuf2) - n, "%s ", tr( "July" ));
 				break;
 			case 8:
-				snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr( "Aug" ));
+				snprintf(linebuf2 + n, sizeof(linebuf2) - n, "%s ", tr( "Aug" ));
 				break;
 			case 9:
-				snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr( "Sept" ));
+				snprintf(linebuf2 + n, sizeof(linebuf2) - n, "%s ", tr( "Sept" ));
 				break;
 			case 10:
-				snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr( "Oct" ));
+				snprintf(linebuf2 + n, sizeof(linebuf2) - n, "%s ", tr( "Oct" ));
 				break;
 			case 11:
-				snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr( "Nov" ));
+				snprintf(linebuf2 + n, sizeof(linebuf2) - n, "%s ", tr( "Nov" ));
 				break;
 			case 12:
-				snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr( "Dec" ));
+				snprintf(linebuf2 + n, sizeof(linebuf2) - n, "%s ", tr( "Dec" ));
 				break;
 		}
 

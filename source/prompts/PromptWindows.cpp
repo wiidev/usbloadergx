@@ -298,9 +298,9 @@ void WindowCredits()
 
 	char SvnRev[80];
 #ifdef FULLCHANNEL
-	snprintf(SvnRev, sizeof(SvnRev), "Rev%sc   IOS%u (Rev %u)%s", GetRev(), IOS_GetVersion(), IOS_GetRevision(), (*(vu32*)0xcd800064 == 0xFFFFFFFF)? " + AHB" : "" );
+	snprintf(SvnRev, sizeof(SvnRev), "Rev%sc   IOS%d (Rev %d)%s", GetRev(), (int)IOS_GetVersion(), (int)IOS_GetRevision(), (*(vu32*)0xcd800064 == 0xFFFFFFFF)? " + AHB" : "" );
 #else
-	snprintf(SvnRev, sizeof(SvnRev), "Rev%s   IOS%u (Rev %u)%s", GetRev(), (unsigned int)IOS_GetVersion(), (int)IOS_GetRevision(), (*(vu32*)0xcd800064 == 0xFFFFFFFF)? " + AHB" : "" );
+	snprintf(SvnRev, sizeof(SvnRev), "Rev%s   IOS%d (Rev %d)%s", GetRev(), (int)IOS_GetVersion(), (int)IOS_GetRevision(), (*(vu32*)0xcd800064 == 0xFFFFFFFF)? " + AHB" : "" );
 #endif
 
 	char IosInfo[80] = "";
@@ -333,7 +333,7 @@ void WindowCredits()
 		char *ptr = strchr(version, ' ');
 		if(ptr) *ptr = 0;
 		else version[4] = 0;
-		snprintf(GCInfo, sizeof(GCInfo), "%s%sDevolution r%d", GCInfo, strlen(GCInfo) > 1 ? "  /  " : "", atoi(version));
+		snprintf(GCInfo + strlen(GCInfo), sizeof(GCInfo) - strlen(GCInfo), "%sDevolution r%d", strlen(GCInfo) > 1 ? "  /  " : "", atoi(version));
 	}
 
 	// Check if Nintendont is available
@@ -393,7 +393,7 @@ void WindowCredits()
 	currentTxt->SetFont(creditsFont, creditsFontSize);
 	txt.push_back(currentTxt);
 
-	currentTxt = new GuiText("http://sourceforge.net/p/usbloadergx/", 20, ( GXColor ) {255, 255, 255, 255});
+	currentTxt = new GuiText("https://sourceforge.net/p/usbloadergx/", 20, ( GXColor ) {255, 255, 255, 255});
 	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	currentTxt->SetPosition(160, y);
 	currentTxt->SetFont(creditsFont, creditsFontSize);
@@ -1199,7 +1199,7 @@ int FormatingPartition(const char *title, int part_num)
 	int portPart = DeviceHandler::PartitionToPortPartition(part_num);
 
 	char text[255];
-	sprintf(text, "%s: %.2fGB", tr( "Partition" ), usbHandle->GetSize(portPart) / GB_SIZE);
+	int n = sprintf(text, "%s: %.2fGB", tr( "Partition" ), usbHandle->GetSize(portPart) / GB_SIZE);
 	int choice = WindowPrompt(tr( "Do you want to format:" ), text, tr( "Yes" ), tr( "No" ));
 	if (choice == 0)
 		return -666;
@@ -1248,7 +1248,7 @@ int FormatingPartition(const char *title, int part_num)
 		partition->FSName = "WBFS";
 		sleep(1);
 		ret = WBFS_OpenPart(part_num);
-		sprintf(text, "%s %s", text, tr( "formatted!" ));
+		snprintf(text + n, sizeof(text) - n, " %s", tr( "formatted!" ));
 		WindowPrompt(tr( "Success:" ), text, tr( "OK" ));
 		if (ret < 0)
 		{
@@ -1457,67 +1457,63 @@ int CodeDownload(const char *id)
 	if (IsNetworkInit())
 	{
 		char txtpath[250];
-		snprintf(txtpath, sizeof(txtpath), "%s%s.txt", Settings.TxtCheatcodespath, id);
+		int txtLen = snprintf(txtpath, sizeof(txtpath), "%s%s.txt", Settings.TxtCheatcodespath, id);
 
-		char codeurl[250];
+		char codeurl[80];
 		snprintf(codeurl, sizeof(codeurl), "https://www.geckocodes.org/txt.php?txt=%s", id);
 
 		struct download file = {};
 		downloadfile(codeurl, &file);
 		if (file.size <= 0) {
 			gprintf("Trying backup...\n");
-			char codeurl_backup[250];
-			snprintf(codeurl_backup, sizeof(codeurl_backup), "https://web.archive.org/web/3000if_/geckocodes.org/txt.php?txt=%s", id);
-			downloadfile(codeurl_backup, &file);
+			snprintf(codeurl, sizeof(codeurl), "https://web.archive.org/web/3000if_/geckocodes.org/txt.php?txt=%s", id);
+			downloadfile(codeurl, &file);
 		}
 
 		if (file.size > 0)
 		{
 			bool validUrl = false;
-			if(file.size > 0)
+			char *textCpy = new (std::nothrow) char[file.size+1];
+			if (textCpy)
 			{
-				char *textCpy = new (std::nothrow) char[file.size+1];
-				if(textCpy)
-				{
-					memcpy(textCpy, file.data, file.size);
-					textCpy[file.size] = '\0';
-					validUrl = (strcasestr(textCpy, "404 Not Found") == 0);
-					delete [] textCpy;
-				}
+				memcpy(textCpy, file.data, file.size);
+				textCpy[file.size] = '\0';
+				validUrl = (strcasestr(textCpy, "404 Not Found") == 0);
+				delete [] textCpy;
 			}
 
-			if(!validUrl)
+			if (!validUrl)
 			{
-				snprintf(codeurl, sizeof(codeurl), "%s%s", codeurl, tr( " is not on the server." ));
+				snprintf(codeurl, sizeof(codeurl), "%s.txt%s", id, tr( " is not on the server." ));
 				WindowPrompt(tr( "Error" ), codeurl, tr( "OK" ));
 			}
 			else
 			{
 				FILE * pfile = fopen(txtpath, "wb");
-				if(pfile)
+				if (pfile)
 				{
 					fwrite(file.data, 1, file.size, pfile);
 					fclose(pfile);
 					
 					// verify downloaded content - thanks airline38
 					pfile = fopen(txtpath, "rb");
-					if(pfile)
+					if (pfile)
 					{
 						char target[4];
-						fseek(pfile,0,SEEK_SET);
+						fseek(pfile, 0, SEEK_SET);
 						fread(target, sizeof(char), 4, pfile);
 						fclose(pfile);
 						//printf("target=%s  game id=%s\n",target,id);
-						if (strncmp(target,id,4)== 0 )
+						if (strncmp(target, id, 4)== 0 )
 						{
-							snprintf(txtpath, sizeof(txtpath), "%s%s", txtpath, tr(" has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information." ));
+							snprintf(txtpath + txtLen, sizeof(txtpath) - txtLen, "%s", tr(" has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information." ));
 							WindowPrompt(0, txtpath, tr( "OK" ));
 							ret = 0;
 						}
 						else
 						{
 							RemoveFile(txtpath);
-							snprintf(codeurl, sizeof(codeurl), "%s%s", codeurl, tr( " is not on the server." ));
+							snprintf(codeurl, sizeof(codeurl), "%s.txt%s", id, tr( " is not on the server." ));
 							WindowPrompt(tr( "Error" ), codeurl, tr( "OK" ));
 						}
 					}
@@ -1529,7 +1525,9 @@ int CodeDownload(const char *id)
 		}
 		else
 		{
-			snprintf(codeurl, sizeof(codeurl), "%s%s", codeurl, tr(" could not be downloaded."));
+			if (file.size > 0)
+				free(file.data);
+			snprintf(codeurl, sizeof(codeurl), "%s.txt%s", id, tr(" could not be downloaded."));
 			WindowPrompt(tr( "Error" ), codeurl, tr( "OK" ));
 		}
 	}

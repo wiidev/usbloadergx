@@ -84,7 +84,6 @@ u8*	DecompressAsh( const u8 *stuff, u32 &len )
 	memset( (void*)workingBuffer, 0, 0x100000 );
 	//printf("r[8] :%08X\n", r[8]);
 
-	r[8]  = r[8];
 	r[9]  = r[8]  + 0x07FE;
 	r[10] = r[9]  + 0x07FE;
 	r[11] = r[10] + 0x1FFE;

@@ -264,16 +264,16 @@ s32 GCDumper::InstallGame(const char *installpath, u32 game, const char *install
 
 	char gamepath[512];
 	// snprintf(gamepath, sizeof(gamepath), "%s%s [%.6s]%s/", installpath, gametitle, gcheader.id, Disc ? "2" : ""); // Disc2 currently needs to be on the same folder.
-	snprintf(gamepath, sizeof(gamepath), "%s%s [%.6s]/", installpath, gametitle, gcheader.id);
+	int n = snprintf(gamepath, sizeof(gamepath), "%s%s [%.6s]/", installpath, gametitle, gcheader.id);
 
 	// If another Disc from the same gameID already exists, let's use that path
 	if(strlen((char *)installedGamePath) != 0)
-		snprintf(gamepath, sizeof(gamepath), "%s/", installedGamePath);
+		n = snprintf(gamepath, sizeof(gamepath), "%s/", installedGamePath);
 
 	CreateSubfolder(gamepath);
 
 	// snprintf(gamepath, sizeof(gamepath), "%s%s [%.6s]%s/game.iso", installpath, gametitle, gcheader.id, Disc ? "2" : ""); // Disc2 currently needs to be on the same folder.
-	snprintf(gamepath, sizeof(gamepath), "%s%s.iso", gamepath, Disc ? "disc2" : "game");
+	snprintf(gamepath + n, sizeof(gamepath) - n, "%s.iso", Disc ? "disc2" : "game");
 
 	FILE *f = fopen(gamepath, "wb");
 	if(!f)

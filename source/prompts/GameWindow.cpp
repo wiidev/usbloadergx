@@ -740,11 +740,11 @@ void GameWindow::BootGame(struct discHdr *header)
 	if (game_cfg->loadalternatedol == 2)
 	{
 		char filepath[200];
-		snprintf(filepath, sizeof(filepath), "%s%s.dol", Settings.dolpath, IDfull);
+		int n = snprintf(filepath, sizeof(filepath), "%s%s.dol", Settings.dolpath, IDfull);
 		if (CheckFile(filepath) == false)
 		{
-			sprintf(filepath, "%s %s", filepath, tr( "does not exist!" ));
-			if(!WindowPrompt(tr( "Error" ), filepath, tr( "Continue" ), tr( "Cancel")))
+			snprintf(filepath + n, sizeof(filepath) - n, " %s", tr( "does not exist!" ));
+			if (!WindowPrompt(tr( "Error" ), filepath, tr( "Continue" ), tr( "Cancel")))
 				return;
 		}
 	}
@@ -762,10 +762,10 @@ void GameWindow::BootGame(struct discHdr *header)
 	if (game_cfg->ocarina == ON || (game_cfg->ocarina == INHERIT && Settings.ocarina == ON))
 	{
 		char filepath[200];
-		snprintf(filepath, sizeof(filepath), "%s%s.gct", Settings.Cheatcodespath, IDfull);
+		int n = snprintf(filepath, sizeof(filepath), "%s%s.gct", Settings.Cheatcodespath, IDfull);
 		if (CheckFile(filepath) == false)
 		{
-			sprintf(filepath, "%s %s", filepath, tr( "does not exist!  Loading game without cheats." ));
+			snprintf(filepath + n, sizeof(filepath) - n, " %s", tr( "does not exist!  Loading game without cheats." ));
 			if(!WindowPrompt(tr( "Error" ), filepath, tr( "Continue" ), tr( "Cancel")))
 				return;
 		}

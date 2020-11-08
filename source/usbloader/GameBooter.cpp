@@ -642,7 +642,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		snprintf(disc2Path, sizeof(disc2Path), "%s", RealPath);
 		char *pathPtr = strrchr(disc2Path, '/');
 		if(pathPtr) *pathPtr = 0;
-		snprintf(disc2Path, sizeof(disc2Path), "%s/disc2.iso", disc2Path);
+		snprintf(disc2Path + strlen(disc2Path), sizeof(disc2Path) - strlen(disc2Path), "/disc2.iso");
 		if(CheckFile(disc2Path))
 		{
 			int choice = WindowPrompt(gameHdr->title, tr("This game has multiple discs. Please select the disc to launch."), tr("Disc 1"), tr("Disc 2"), tr("Cancel"));
@@ -663,7 +663,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 	{
 		char *pathPtr = strrchr(gamePath, '/');
 		if(pathPtr) *pathPtr = 0;
-		snprintf(gamePath, sizeof(gamePath), "%s/disc2.iso", gamePath);
+		snprintf(gamePath + strlen(gamePath), sizeof(gamePath) - strlen(gamePath), "/disc2.iso");
 	}
 
 	ExitApp();
@@ -873,7 +873,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	snprintf(disc2, sizeof(disc2), "%s", RealPath);
 	char *pathPtr = strrchr(disc2, '/');
 	if(pathPtr) *pathPtr = 0;
-	snprintf(disc2, sizeof(disc2), "%s/disc2.iso", disc2);
+	snprintf(disc2 + strlen(disc2), sizeof(disc2) - strlen(disc2), "/disc2.iso");
 	if(CheckFile(disc2))
 		multiDisc = true;
 
@@ -935,7 +935,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	{
 		if(devoMCEmulation == DEVO_MC_INDIVIDUAL)
 		{
-			snprintf(DEVO_memCard, sizeof(DEVO_memCard), "%s/memcard_%.6s.bin", DEVO_memCard, (const char *) gameHdr->id);
+			snprintf(DEVO_memCard + strlen(DEVO_memCard), sizeof(DEVO_memCard) - strlen(DEVO_memCard), "/memcard_%.6s.bin", (const char *) gameHdr->id);
 		}
 		else // same for all games
 		{
@@ -1395,7 +1395,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		snprintf(disc2Path, sizeof(disc2Path), "%s", RealPath);
 		char *pathPtr = strrchr(disc2Path, '/');
 		if(pathPtr) *pathPtr = 0;
-		snprintf(disc2Path, sizeof(disc2Path), "%s/disc2.iso", disc2Path);
+		snprintf(disc2Path + strlen(disc2Path), sizeof(disc2Path) - strlen(disc2Path), "/disc2.iso");
 		if(CheckFile(disc2Path))
 		{
 			int choice = WindowPrompt(gameHdr->title, tr("This game has multiple discs. Please select the disc to launch."), tr("Disc 1"), tr("Disc 2"), tr("Cancel"));
@@ -1415,7 +1415,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	{
 		char *pathPtr = strrchr(gamePath, '/');
 		if(pathPtr) *pathPtr = 0;
-		snprintf(gamePath, sizeof(gamePath), "%s/disc2.iso", gamePath);
+		snprintf(gamePath + strlen(gamePath), sizeof(gamePath) - strlen(gamePath), "/disc2.iso");
 	}
 
 	if(gameHdr->type == TYPE_GAME_GC_DISC)

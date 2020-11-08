@@ -360,7 +360,7 @@ u32 do_new_wiimmfi()
 	// Binary blobs with Wiimmfi patches. Do not modify.
 	// Provided by Leseratte on 2018-12-14.
 	
-	int binary[] = { 0x37C849A2, 0x8BC32FA4, 0xC9A34B71, 0x1BCB49A2, 
+	u32 binary[] = { 0x37C849A2, 0x8BC32FA4, 0xC9A34B71, 0x1BCB49A2, 
 					 0x2F119304, 0x5F402684, 0x3E4FDA29, 0x50849A21, 
 					 0xB88B3452, 0x627FC9C1, 0xDC24D119, 0x5844350F, 
 					 0xD893444F, 0x19A588DC, 0x16C91184, 0x0C3E237C, 

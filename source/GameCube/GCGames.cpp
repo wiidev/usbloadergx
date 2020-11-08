@@ -121,7 +121,7 @@ void GCGames::LoadGameList(const string &path, vector<struct discHdr> &headerLis
 			snprintf(name, sizeof(name), "%.6s.%s", (i % 2) == 0 ? "game" : (char *) id, i >= 2 ? "gcm" : "iso");
 			snprintf(fpath, sizeof(fpath), "%s%s/%s", path.c_str(), dirname, name);
 			if((found = (stat(fpath, &st) == 0)) == true)
-			 break;
+				break;
 		}
 
 		// Check if only disc2.iso is present
@@ -402,10 +402,10 @@ bool GCGames::IsInstalled(const char *gameID, u8 disc_number) const
 			else if(disc_number == 1) // Check if the second Game Disc exists in the same folder than Disc1.
 			{
 				char filepath[512];
-				snprintf(filepath, sizeof(filepath), "%s", GetPath(gameID));
+				int n = snprintf(filepath, sizeof(filepath), "%s", GetPath(gameID));
 				char *pathPtr = strrchr(filepath, '/');
 				if(pathPtr) *pathPtr = 0;
-				snprintf(filepath, sizeof(filepath), "%s/disc2.iso", filepath);
+				snprintf(filepath + n, sizeof(filepath) - n, "/disc2.iso");
 				
 				if(CheckFile(filepath))
 					return true;

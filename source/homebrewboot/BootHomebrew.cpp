@@ -172,6 +172,7 @@ int BootHomebrew(const char * filepath)
 		fclose(file);
 		DeviceHandler::DestroyInstance();
 		Sys_BackToLoader();
+		return -1;
 	}
 
 	homebrewsize = filesize;

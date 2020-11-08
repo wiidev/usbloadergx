@@ -238,18 +238,18 @@ void GuiText::SetFontSize(int s)
 	size = s;
 }
 
-void GuiText::SetMaxWidth(int width, int w)
+void GuiText::SetMaxWidth(int w, int m)
 {
 	//! no need to reset timer on false set
-	if(wrapMode == w && maxWidth == width)
+	if(wrapMode == m && maxWidth == w)
 		return;
 
 	LOCK( this );
 
-	maxWidth = width;
-	wrapMode = w;
+	maxWidth = w;
+	wrapMode = m;
 
-	if (w == SCROLL_HORIZONTAL)
+	if (m == SCROLL_HORIZONTAL)
 	{
 		textScrollPos = 0;
 		textScrollInitialDelay = TEXT_SCROLL_INITIAL_DELAY;

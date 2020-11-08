@@ -234,7 +234,7 @@ s32 Wbfs_Fat::RemoveGame(u8 *discid)
 	closedir(dir);
 	// remove game subdir
 	remove(path);
-
+	rmdir(path);
 	return 0;
 }
 

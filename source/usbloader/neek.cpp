@@ -75,6 +75,7 @@ bool neekLoadKernel (const char* nandpath)
 	kernel = (u32 *) MEM2_alloc(fsize);
 	if(!kernel)
 	{
+		fclose(f);
 		return false;
 	}
 	

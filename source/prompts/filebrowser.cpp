@@ -83,8 +83,7 @@ int InitBrowsers()
 			if ( DIR *dir = opendir( rootdir ) )
 			{
 				closedir(dir);
-				BROWSERINFO browser;
-				memset(&browser, 0, sizeof(BROWSERINFO));
+				BROWSERINFO browser = {};
 				strcpy(browser.rootdir, rootdir);
 				ResetBrowser(&browser);
 				browsers.push_back(browser);
@@ -445,7 +444,8 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 								< MAXPATHLEN)
 						{
 							/* update current directory name */
-							sprintf(browser->dir, "%s%s/", browser->dir, browser->browserList[clickedIndex].filename);
+							strcat(browser->dir, browser->browserList[clickedIndex].filename);
+							sprintf(browser->dir + strlen(browser->dir), "/");
 							pathCanged = true;
 						}
 					}

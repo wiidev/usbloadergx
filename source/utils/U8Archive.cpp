@@ -376,9 +376,16 @@ U8NandArchive::~U8NandArchive()
 bool U8NandArchive::SetFile( const char* nandPath )
 {
 	if(fst)
+	{
 		free(fst);
+		fst = NULL;
+	}
+
 	if(name_table)
+	{
 		free(name_table);
+		name_table = NULL;
+	}
 	CloseFile();
 
 	// open file
@@ -438,9 +445,13 @@ bool U8NandArchive::SetFile( const char* nandPath )
 		dataOffset = 0;
 		free( buffer );
 		if( fst )
+		{
 			free( fst );
+			fst = NULL;
+		}
 		CloseFile();
 		gprintf( "U8NandArchive: error reading fst\n" );
+		return false;
 	}
 
 	// set name table pointer
