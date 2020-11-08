@@ -1460,17 +1460,18 @@ int CodeDownload(const char *id)
 		int txtLen = snprintf(txtpath, sizeof(txtpath), "%s%s.txt", Settings.TxtCheatcodespath, id);
 
 		char codeurl[80];
-		snprintf(codeurl, sizeof(codeurl), "https://www.geckocodes.org/txt.php?txt=%s", id);
+		snprintf(codeurl, sizeof(codeurl), "https://codes.rc24.xyz/txt.php?txt=%s", id);
 
 		struct download file = {};
 		downloadfile(codeurl, &file);
 		if (file.size <= 0) {
 			gprintf("Trying backup...\n");
-			snprintf(codeurl, sizeof(codeurl), "https://web.archive.org/web/3000if_/geckocodes.org/txt.php?txt=%s", id);
+			snprintf(codeurl, sizeof(codeurl), "https://web.archive.org/web/202009if_/geckocodes.org/txt.php?txt=%s", id);
 			downloadfile(codeurl, &file);
 		}
 
-		if (file.size > 0)
+		// UTF-8 BOM + partial ID = 7
+		if (file.size > 7)
 		{
 			bool validUrl = false;
 			char *textCpy = new (std::nothrow) char[file.size+1];
@@ -1499,12 +1500,12 @@ int CodeDownload(const char *id)
 					pfile = fopen(txtpath, "rb");
 					if (pfile)
 					{
-						char target[4];
+						char target[7];
 						fseek(pfile, 0, SEEK_SET);
-						fread(target, sizeof(char), 4, pfile);
+						fread(target, sizeof(char), 7, pfile);
 						fclose(pfile);
 						//printf("target=%s  game id=%s\n",target,id);
-						if (strncmp(target, id, 4)== 0 )
+						if (strncmp(target, id, 4) == 0 || strncmp(target + 3, id, 4) == 0)
 						{
 							snprintf(txtpath + txtLen, sizeof(txtpath) - txtLen, "%s", tr(" has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information." ));
 							WindowPrompt(0, txtpath, tr( "OK" ));
