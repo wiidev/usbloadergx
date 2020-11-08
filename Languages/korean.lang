@@ -149,8 +149,8 @@ msgstr "모든 wad 파일이 성공적으로 처리되었습니다"
 msgid "Alternate DOL"
 msgstr "대체 DOL"
 
-msgid "AltWFC (Risky)"
-msgstr "AltWFC (위험한)"
+msgid "AltWFC"
+msgstr ""
 
 msgid "An example file was created here:"
 msgstr "여기에 예제 파일이 생성되었습니다:"
@@ -540,11 +540,17 @@ msgstr "자르기 오버스캔"
 msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr "현재의 neek 파일은 neek2o가 아닙니다. 게임 자동 부팅이 비활성화 되었습니다."
 
+msgid "Custom Address"
+msgstr "커스텀 주소"
+
 msgid "Custom Banners"
 msgstr "커스텀 배너"
 
 msgid "Custom Paths"
 msgstr "커스텀 경로"
+
+msgid "Custom"
+msgstr "커스텀"
 
 msgid "Customs"
 msgstr "커스텀"
@@ -1739,6 +1745,9 @@ msgstr "이전 플레이"
 
 msgid "Playing Music:"
 msgstr "재생 음악:"
+
+msgid "Please enter a valid address e.g. wiimmfi.de"
+msgstr ""
 
 msgid "Please wait"
 msgstr "기다려주십시오."

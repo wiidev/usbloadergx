@@ -149,8 +149,8 @@ msgstr ""
 msgid "Alternate DOL"
 msgstr "代替DOL起動"
 
-msgid "AltWFC (Risky)"
-msgstr "AltWFC (リスキーな)"
+msgid "AltWFC"
+msgstr ""
 
 msgid "An example file was created here:"
 msgstr "テンプレファイルが作成されました:"
@@ -540,11 +540,17 @@ msgstr ""
 msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr ""
 
+msgid "Custom Address"
+msgstr "カスタム アドレス"
+
 msgid "Custom Banners"
 msgstr "カスタムバナー"
 
 msgid "Custom Paths"
 msgstr "パスを変更"
+
+msgid "Custom"
+msgstr "カスタム"
 
 msgid "Customs"
 msgstr "カスタム"
@@ -1739,6 +1745,9 @@ msgstr "前へ"
 
 msgid "Playing Music:"
 msgstr "再生中"
+
+msgid "Please enter a valid address e.g. wiimmfi.de"
+msgstr ""
 
 msgid "Please wait"
 msgstr "お待ちください"

@@ -70,6 +70,7 @@ typedef struct _GameCFG
 	short DEVOCropOverscan;
 	short DEVODiscDelay;
 	short PrivateServer;
+	std::string CustomAddress;
 	short Locked;
 
 	void operator=(const struct _GameCFG &game)
@@ -135,6 +136,7 @@ typedef struct _GameCFG
 		this->DEVOCropOverscan = game.DEVOCropOverscan;
 		this->DEVODiscDelay = game.DEVODiscDelay;
 		this->PrivateServer = game.PrivateServer;
+		this->CustomAddress = game.CustomAddress;
 		this->Locked = game.Locked;
 	}
 } GameCFG;

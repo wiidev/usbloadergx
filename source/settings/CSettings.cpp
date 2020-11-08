@@ -78,6 +78,7 @@ void CSettings::SetDefault()
 	strlcpy(NandEmuChanPath, NandEmuPath, sizeof(NandEmuChanPath));
 	strlcpy(GameCubePath, "usb1:/games/", sizeof(GameCubePath));
 	strlcpy(GameCubeSDPath, "sd:/games/", sizeof(GameCubeSDPath));
+	strlcpy(CustomAddress, "wiimmfi.de", sizeof(CustomAddress));
 	strlcpy(URL_Banners, "https://banner.rc24.xyz/", sizeof(URL_Banners));
 	strlcpy(URL_Covers2D, "https://art.gametdb.com/wii/cover/", sizeof(URL_Covers2D));
 	strlcpy(URL_Covers3D, "https://art.gametdb.com/wii/cover3D/", sizeof(URL_Covers3D));
@@ -489,6 +490,7 @@ bool CSettings::Save()
 	fprintf(file, "GCInstallCompressed = %d\n", GCInstallCompressed);
 	fprintf(file, "GCInstallAligned = %d\n", GCInstallAligned);
 	fprintf(file, "PrivateServer = %d\n", PrivateServer);
+	fprintf(file, "CustomAddress = %s\n", CustomAddress);
 	fprintf(file, "URL_Banners = %s\n", URL_Banners);
 	fprintf(file, "URL_Covers2D = %s\n", URL_Covers2D);
 	fprintf(file, "URL_Covers3D = %s\n", URL_Covers3D);
@@ -1324,9 +1326,16 @@ bool CSettings::SetSetting(char *name, char *value)
 			strlcpy(URL_GameTDB, value, sizeof(URL_GameTDB));
 		return true;
 	}
+	else if (strcmp(name, "CustomAddress") == 0)
+	{
+		if(strlen(value) > 3)
+			strlcpy(CustomAddress, value, sizeof(CustomAddress));
+		return true;
+	}
 	else if(strcmp(name, "PrivateServer") == 0)
 	{
 		PrivateServer = atoi(value);
+		return true;
 	}
 	else if (strcmp(name, "EnabledCategories") == 0)
 	{

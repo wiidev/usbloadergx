@@ -149,8 +149,8 @@ msgstr "Tous les fichiers wad ont été traités avec succès."
 msgid "Alternate DOL"
 msgstr "DOL alternatif"
 
-msgid "AltWFC (Risky)"
-msgstr "AltWFC (Risqué)"
+msgid "AltWFC"
+msgstr ""
 
 msgid "An example file was created here:"
 msgstr "Un fichier d'exemple a été créé ici :"
@@ -540,11 +540,17 @@ msgstr "Réduire l'overscan"
 msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr "Le fichier neek actuel n'est pas neek2o. Démarrage automatique désactivé."
 
+msgid "Custom Address"
+msgstr ""
+
 msgid "Custom Banners"
 msgstr "Bannières persos"
 
 msgid "Custom Paths"
 msgstr "Personnalisation des dossiers"
+
+msgid "Custom"
+msgstr ""
 
 msgid "Customs"
 msgstr "Persos"
@@ -1739,6 +1745,9 @@ msgstr "Jouer précéd."
 
 msgid "Playing Music:"
 msgstr "Musique actuelle:"
+
+msgid "Please enter a valid address e.g. wiimmfi.de"
+msgstr ""
 
 msgid "Please wait"
 msgstr "Veuillez patienter"

@@ -261,6 +261,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	u8 languageChoice = game_cfg->language == INHERIT ? Settings.language : game_cfg->language;
 	u8 ocarinaChoice = game_cfg->ocarina == INHERIT ? Settings.ocarina : game_cfg->ocarina;
 	u8 PrivServChoice = game_cfg->PrivateServer == INHERIT ? Settings.PrivateServer : game_cfg->PrivateServer;
+	const char *customAddress = game_cfg->CustomAddress.size() == 0 ? Settings.CustomAddress : game_cfg->CustomAddress.c_str();
 	u8 viChoice = game_cfg->vipatch == INHERIT ? Settings.videopatch : game_cfg->vipatch;
 	u8 sneekChoice = game_cfg->sneekVideoPatch == INHERIT ? Settings.sneekVideoPatch : game_cfg->sneekVideoPatch;
 	u8 iosChoice = game_cfg->ios == INHERIT ? Settings.cios : game_cfg->ios;
@@ -321,6 +322,10 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 		BNRInstance::Instance()->Load(&gameHeader);
 		Playlog_Update((char *) gameHeader.id, BNRInstance::Instance()->GetIMETTitle(CONF_GetLanguage()));
 	}
+
+	gprintf("Game title: %s\n", gameHeader.title);
+	if (PrivServChoice == PRIVSERV_CUSTOM)
+		gprintf("Custom address: %s\n", customAddress);
 
 	//! Load wip codes
 	load_wip_code(gameHeader.id);
@@ -430,13 +435,15 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	//! Also, the new Wiimmfi server patch should be loaded into memory after
 	//! the code handler and the cheat codes. 
 	
-	if (PrivServChoice != PRIVSERV_WIIMMFI || memcmp(((void *)(0x80000000)), (char*)"RMC", 3) != 0) {
+	if (PrivServChoice != PRIVSERV_WIIMMFI || memcmp(gameHeader.id, "RMC", 3) != 0)
+	{
 		//! Either the server is not Wiimmfi, or, if it is Wiimmfi, the game isn't MKWii - patch the old way
-		gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, returnToChoice, PrivServChoice);
+		gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, returnToChoice, PrivServChoice, customAddress);
 	}
-	else {
+	else
+	{
 		//! Wiimmfi patch for Mario Kart Wii - patch with PRIVSERV_OFF and handle all the patching within do_new_wiimmfi()
-		gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, returnToChoice, PRIVSERV_OFF);
+		gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, returnToChoice, PRIVSERV_OFF, customAddress);
 	}
 	
 
@@ -451,9 +458,11 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 		PatchFix480p();
 
 	//! New Wiimmfi patch should be loaded last, after the codehandler, just before the call to the entry point
-	if (PrivServChoice == PRIVSERV_WIIMMFI && memcmp(((void *)(0x80000000)), (char*)"RMC", 3) == 0 ) {
+	if (PrivServChoice == PRIVSERV_WIIMMFI && memcmp(gameHeader.id, "RMC", 3) == 0 )
+	{
 		// all the cool new Wiimmfi stuff: 
-		switch(do_new_wiimmfi()) {
+		switch(do_new_wiimmfi())
+		{
 			case 0: 
 				gprintf("Wiimmfi patch for Mario Kart Wii successful.\n"); 
 				break; 

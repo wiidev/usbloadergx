@@ -170,13 +170,14 @@ int OnScreenNumpad(char * var, u32 maxlen)
  * Opens an on-screen keyboard window, with the data entered being stored
  * into the specified variable.
  ***************************************************************************/
-int OnScreenKeyboard(char * var, u32 maxlen, int min, bool hide)
+int OnScreenKeyboard(char * var, u32 maxlen, int min, bool hide, bool restrict)
 {
 	int save = -1;
+	int keyset = (restrict) ? 0 : Settings.keyset;
 
-	gprintf("\nOnScreenKeyboard(%s, %i, %i) \n\tkeyset = %i", var, maxlen, min, Settings.keyset);
+	gprintf("\nOnScreenKeyboard(%s, %i, %i) \n\tkeyset = %i", var, maxlen, min, keyset);
 
-	GuiKeyboard keyboard(var, maxlen, min, Settings.keyset);
+	GuiKeyboard keyboard(var, maxlen, min, keyset);
 	keyboard.SetVisibleText(!hide);
 
 	GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));

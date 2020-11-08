@@ -246,6 +246,7 @@ bool CGameSettings::Save()
 		fprintf(f, "DEVOCropOverscan:%d; ", GameList[i].DEVOCropOverscan);
 		fprintf(f, "DEVODiscDelay:%d; ", GameList[i].DEVODiscDelay);
 		fprintf(f, "PrivateServer:%d; ", GameList[i].PrivateServer);
+		fprintf(f, "CustomAddress:%s; ", GameList[i].CustomAddress.c_str());
 		fprintf(f, "Locked:%d;\n", GameList[i].Locked);
 	}
 	fprintf(f, "# END\n");
@@ -561,6 +562,12 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		game.PrivateServer = atoi(value);
 		return true;
 	}
+	else if(strcmp(name, "CustomAddress") == 0)
+	{
+		if(strlen(value) > 3)
+			game.CustomAddress = value;
+		return true;
+	}
 
 	return false;
 }
@@ -722,5 +729,6 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.DEVOCropOverscan = INHERIT;
 	game.DEVODiscDelay = INHERIT;
 	game.PrivateServer = INHERIT;
+	game.CustomAddress.clear();
 	game.Locked = OFF;
 }

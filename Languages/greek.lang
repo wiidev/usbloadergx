@@ -149,8 +149,8 @@ msgstr "Όλα τα αρχεία wad υποβλήθηκαν σε επεξεργ�
 msgid "Alternate DOL"
 msgstr "Εναλλακτικό DOL"
 
-msgid "AltWFC (Risky)"
-msgstr "AltWFC (Επικίνδυνος)"
+msgid "AltWFC"
+msgstr ""
 
 msgid "An example file was created here:"
 msgstr "Ένα αρχείο-παράδειγμα δημιουργήθηκε εδώ"
@@ -540,11 +540,17 @@ msgstr ""
 msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr ""
 
+msgid "Custom Address"
+msgstr ""
+
 msgid "Custom Banners"
 msgstr "Τροποποιημένες ταμπέλες-εικονίδια"
 
 msgid "Custom Paths"
 msgstr "Τροποποιημένες διευθύνσεις/μονοπάτια αρχείων"
+
+msgid "Custom"
+msgstr ""
 
 msgid "Customs"
 msgstr "Τροποποιημένα"
@@ -1739,6 +1745,9 @@ msgstr "Αναπαραγωγή προηγούμενου"
 
 msgid "Playing Music:"
 msgstr "Αναπαραγωγή μουσικής:"
+
+msgid "Please enter a valid address e.g. wiimmfi.de"
+msgstr ""
 
 msgid "Please wait"
 msgstr "Παρακαλώ περιμένετε"

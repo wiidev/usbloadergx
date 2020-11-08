@@ -149,8 +149,8 @@ msgstr ""
 msgid "Alternate DOL"
 msgstr "可選擇Alt DOL檔"
 
-msgid "AltWFC (Risky)"
-msgstr "AltWFC (有風險)"
+msgid "AltWFC"
+msgstr ""
 
 msgid "An example file was created here:"
 msgstr "在這裡建立範本檔："
@@ -540,11 +540,17 @@ msgstr ""
 msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr ""
 
+msgid "Custom Address"
+msgstr "自訂地址"
+
 msgid "Custom Banners"
 msgstr "自製頻道動畫"
 
 msgid "Custom Paths"
 msgstr "自訂路徑"
+
+msgid "Custom"
+msgstr "自訂"
 
 msgid "Customs"
 msgstr "自訂"
@@ -1739,6 +1745,9 @@ msgstr "執行上一個"
 
 msgid "Playing Music:"
 msgstr "播放音樂："
+
+msgid "Please enter a valid address e.g. wiimmfi.de"
+msgstr ""
 
 msgid "Please wait"
 msgstr "請稍候"

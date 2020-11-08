@@ -149,8 +149,8 @@ msgstr ""
 msgid "Alternate DOL"
 msgstr "Alternativ DOL"
 
-msgid "AltWFC (Risky)"
-msgstr "AltWFC (Riskabel)"
+msgid "AltWFC"
+msgstr ""
 
 msgid "An example file was created here:"
 msgstr ""
@@ -540,11 +540,17 @@ msgstr ""
 msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr ""
 
+msgid "Custom Address"
+msgstr "Anpassad adress"
+
 msgid "Custom Banners"
 msgstr ""
 
 msgid "Custom Paths"
 msgstr "Anpassade sökvägar"
+
+msgid "Custom"
+msgstr "Anpassade"
 
 msgid "Customs"
 msgstr ""
@@ -1739,6 +1745,9 @@ msgstr "Spela förgående"
 
 msgid "Playing Music:"
 msgstr "Spela musik:"
+
+msgid "Please enter a valid address e.g. wiimmfi.de"
+msgstr ""
 
 msgid "Please wait"
 msgstr ""

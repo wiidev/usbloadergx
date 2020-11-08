@@ -51,7 +51,7 @@ void ClearDOLList()
 }
 
 void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 languageChoice, u8 patchcountrystring,
-				 u8 vipatch, u8 sneekVideoPatch, u8 hooktype, u64 returnTo, u8 privateServer)
+				 u8 vipatch, u8 sneekVideoPatch, u8 hooktype, u64 returnTo, u8 privateServer, const char *serverAddr)
 {
 	int i;
 
@@ -92,8 +92,8 @@ void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 language
 			PatchAspectRatio(dst, len, aspectForce);
 
 		if(privateServer)
-			PrivateServerPatcher(dst, len, privateServer);
-			
+			PrivateServerPatcher(dst, len, privateServer, serverAddr);
+
 		DCFlushRange(dst, len);
 		ICInvalidateRange(dst, len);
 	}
@@ -218,7 +218,7 @@ void PatchFix480p()
 }
 
 /** Patch URLs for private Servers - Thanks to ToadKing/wiilauncher-nossl **/
-void PrivateServerPatcher(void *addr, u32 len, u8 privateServer)
+void PrivateServerPatcher(void *addr, u32 len, u8 privateServer, const char *serverAddr)
 {
 
 	// Patch protocol https -> http
@@ -234,19 +234,13 @@ void PrivateServerPatcher(void *addr, u32 len, u8 privateServer)
 			cur += len;
 		}
 	} while (++cur < end);
-	
 	// Patch nintendowifi.net -> private server domain
 	if (privateServer == PRIVSERV_WIIMMFI)
-	{
 		domainpatcher(addr, len, "wiimmfi.de");
-	}
 	else if (privateServer == PRIVSERV_ALTWFC)
-	{
 		domainpatcher(addr, len, "zwei.moe");
-	}
-	//else if(privateServer == PRIVSERV_CUSTOM)
-		//domainpatcher(dst, len, Settings.CustomPrivateServer);
-	
+	else if (privateServer == PRIVSERV_CUSTOM && strlen(serverAddr) > 3)
+		domainpatcher(addr, len, serverAddr);
 }
 
 u32 do_new_wiimmfi() 
@@ -314,7 +308,7 @@ u32 do_new_wiimmfi()
 	strncpy(patched, (char *)&patcher, 42);
 	
 	// Do the plain old patching with the string search
-	PrivateServerPatcher((void*)0x80004000, 0x385200, PRIVSERV_WIIMMFI);
+	PrivateServerPatcher((void*)0x80004000, 0x385200, PRIVSERV_WIIMMFI, NULL);
 	
 	// Replace some URLs for Wiimmfi's new update system
 	char newURL1[] = "http://ca.nas.wiimmfi.de/ca";

@@ -127,7 +127,14 @@ static const char * PrivServText[] =
 	trNOOP( "OFF" ),
 	trNOOP( "NoSSL only" ),
 	trNOOP( "Wiimmfi" ),
-	trNOOP( "AltWFC (Risky)" ),
+	trNOOP( "AltWFC" ),
+	trNOOP( "Custom" ),
+};
+
+static const char blocked[22] =
+{
+	0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x28, 0x27, 0x29, 0x2A,
+	0x2C, 0x2F, 0x3A, 0x3B, 0x3C, 0x3E, 0x3F, 0x40, 0x5E, 0x5F, 0x00
 };
 
 GameLoadSM::GameLoadSM(struct discHdr *hdr)
@@ -193,6 +200,7 @@ void GameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
 	Options->SetName(Idx++, "%s", tr( "Ocarina" ));
 	Options->SetName(Idx++, "%s", tr( "Private Server" ));
+	Options->SetName(Idx++, "%s", tr( "Custom Address" ));
 	Options->SetName(Idx++, "%s", tr( "Parental Control" ));
 	Options->SetName(Idx++, "%s", tr( "Hooktype" ));
 	Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
@@ -286,6 +294,12 @@ void GameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(PrivServText[GameConfig.PrivateServer]));
+
+	//! Settings: Custom Address
+	if(GameConfig.CustomAddress.size() == 0)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", GameConfig.CustomAddress.c_str());
 
 	//! Settings: Parental Control
 	Options->SetValue(Idx++, "%s", tr(ParentalText[GameConfig.parentalcontrol]));
@@ -465,6 +479,21 @@ int GameLoadSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.PrivateServer >= PRIVSERV_MAX_CHOICE) GameConfig.PrivateServer = INHERIT;
+	}
+
+	//! Settings: Custom Address
+	else if (ret == ++Idx)
+	{
+		char entered[300];
+		snprintf(entered, sizeof(entered), GameConfig.CustomAddress.c_str());
+		if (OnScreenKeyboard(entered, sizeof(entered), 0, false, true))
+		{
+			// Only allow letters, numbers, periods and hyphens
+			if ((strlen(entered) > 0 && strlen(entered) <= 3) || strpbrk(entered, blocked))
+				WindowPrompt(tr("Error"), tr("Please enter a valid address e.g. wiimmfi.de"), tr("OK"));
+			else
+				GameConfig.CustomAddress = entered;
+		}
 	}
 
 	//! Settings: Parental Control
