@@ -244,10 +244,6 @@ void PrivateServerPatcher(void *addr, u32 len, u8 privateServer)
 	{
 		domainpatcher(addr, len, "zwei.moe");
 	}
-	else if (privateServer == PRIVSERV_BENFI)
-	{
-		domainpatcher(addr, len, "benfi.ml");
-	}
 	//else if(privateServer == PRIVSERV_CUSTOM)
 		//domainpatcher(dst, len, Settings.CustomPrivateServer);
 	

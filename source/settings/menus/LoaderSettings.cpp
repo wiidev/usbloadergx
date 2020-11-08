@@ -184,7 +184,6 @@ static const char * PrivServText[] =
 	trNOOP( "NoSSL only" ),
 	trNOOP( "Wiimmfi" ),
 	trNOOP( "AltWFC (Risky)" ),
-	trNOOP( "BenFi (Risky)" ),
 };
 
 LoaderSettings::LoaderSettings()
