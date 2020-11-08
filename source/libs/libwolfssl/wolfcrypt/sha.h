@@ -72,6 +72,9 @@
 #ifdef WOLFSSL_ESP32WROOM32_CRYPT
     #include <libs/libwolfssl/wolfcrypt/port/Espressif/esp32-crypt.h>
 #endif
+#ifdef WOLFSSL_IMXRT_DCP
+    #include <libs/libwolfssl/wolfcrypt/port/nxp/dcp_port.h>
+#endif
 
 #if !defined(NO_OLD_SHA_NAMES)
     #define SHA             WC_SHA
@@ -101,6 +104,8 @@ enum {
 #elif defined(WOLFSSL_RENESAS_TSIP_CRYPT) && \
    !defined(NO_WOLFSSL_RENESAS_TSIP_CRYPT_HASH)
     #include "wolfssl/wolfcrypt/port/Renesas/renesas-tsip-crypt.h"
+#elif defined(WOLFSSL_PSOC6_CRYPTO)
+    #include "wolfssl/wolfcrypt/port/cypress/psoc6_crypto.h"
 #else
 
 /* Sha digest */

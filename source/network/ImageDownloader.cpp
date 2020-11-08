@@ -215,7 +215,7 @@ int ImageDownloader::DownloadProcess(int TotalDownloadCount)
 			fclose(pfile);
 			MissingImagesCount--;
 		}
-		free(file.data);
+		MEM2_free(file.data);
 		gprintf("File saved successfully (%s%s)\n", MissingImages[i].gameID.c_str(), MissingImages[i].fileExt);
 
 		//! Remove the image from the vector since it's done
@@ -298,7 +298,7 @@ void ImageDownloader::DownloadImage(const char *url, const char *gameID, const c
 	if(PAL && strcmp(CheckedRegion, "EN") != 0)
 	{
 		snprintf(downloadURL, sizeof(downloadURL), "%sEN/%s.png", url, gameID);
-		gprintf(" - Not found.\n%s", downloadURL);
+		gprintf(" - Not found.\n%s\n", downloadURL);
 		downloadfile(downloadURL, file);
 		if(VALID_IMAGE(file))
 			return;
@@ -311,13 +311,13 @@ void ImageDownloader::DownloadImage(const char *url, const char *gameID, const c
 			lang = "US";
 
 		snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
-		gprintf(" - Not found.\n%s", downloadURL);
+		gprintf(" - Not found.\n%s\n", downloadURL);
 		downloadfile(downloadURL, file);
 		if(VALID_IMAGE(file))
 			return;
 
 		snprintf(downloadURL, sizeof(downloadURL), "%sOTHER/%s.png", url, gameID);
-		gprintf(" - Not found.\n%s", downloadURL);
+		gprintf(" - Not found.\n%s\n", downloadURL);
 		downloadfile(downloadURL, file);
 		if(VALID_IMAGE(file))
 			return;
@@ -326,7 +326,7 @@ void ImageDownloader::DownloadImage(const char *url, const char *gameID, const c
 		{
 			lang = "RU";
 			snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
-			gprintf(" - Not found.\n%s", downloadURL);
+			gprintf(" - Not found.\n%s\n", downloadURL);
 			downloadfile(downloadURL, file);
 			if(VALID_IMAGE(file))
 				return;
@@ -336,14 +336,14 @@ void ImageDownloader::DownloadImage(const char *url, const char *gameID, const c
 		{
 			lang = "FI";
 			snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
-			gprintf(" - Not found.\n%s", downloadURL);
+			gprintf(" - Not found.\n%s\n", downloadURL);
 			downloadfile(downloadURL, file);
 			if(VALID_IMAGE(file))
 				return;
 			
 			lang = "SE";
 			snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
-			gprintf(" - Not found.\n%s", downloadURL);
+			gprintf(" - Not found.\n%s\n", downloadURL);
 			downloadfile(downloadURL, file);
 			if(VALID_IMAGE(file))
 				return;

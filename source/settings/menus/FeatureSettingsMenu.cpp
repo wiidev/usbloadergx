@@ -68,6 +68,7 @@ FeatureSettingsMenu::FeatureSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Wiilight" ));
 	Options->SetName(Idx++, "%s", tr( "Rumble" ));
 	Options->SetName(Idx++, "%s", tr( "AutoInit Network" ));
+	Options->SetName(Idx++, "%s", tr( "System Proxy Settings" ));
 	Options->SetName(Idx++, "%s", tr( "Messageboard Update" ));
 	Options->SetName(Idx++, "%s", tr( "Wiinnertag" ));
 	Options->SetName(Idx++, "%s", tr( "Import Categories" ));
@@ -131,6 +132,9 @@ void FeatureSettingsMenu::SetOptionValues()
 
 	//! Settings: AutoInit Network
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.autonetwork] ));
+
+	//! Settings: System Proxy Settings
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.ProxyUseSystem] ));
 
 	//! Settings: Messageboard Update
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.PlaylogUpdate] ));
@@ -211,6 +215,12 @@ int FeatureSettingsMenu::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.autonetwork >= MAX_ON_OFF) Settings.autonetwork = 0;
+	}
+
+	//! Settings: System Proxy Settings
+	else if (ret == ++Idx)
+	{
+		if (++Settings.ProxyUseSystem >= MAX_ON_OFF) Settings.ProxyUseSystem = 0;
 	}
 
 	//! Settings: Messageboard Update
@@ -652,8 +662,8 @@ int FeatureSettingsMenu::GetMenuInternal()
 				
 				// Download latest loader.dol as boot.dol
 				bool success = false;
-				displayDownloadProgress(true); // enable progress window for next download
 				struct download file = {};
+				file.show_progress = true;
 				downloadfile("https://raw.githubusercontent.com/FIX94/Nintendont/master/loader/loader.dol", &file);
 				if (file.size > 0)
 				{
@@ -668,7 +678,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 					else
 						WindowPrompt(tr( "Update failed" ), 0, tr( "OK" ));
 					
-					free(file.data);
+					MEM2_free(file.data);
 				}
 					
 				if(success)
