@@ -63,6 +63,7 @@ void CSettings::SetDefault()
 	snprintf(languagefiles_path, sizeof(languagefiles_path), "%slanguage/", ConfigPath);
 	snprintf(update_path, sizeof(update_path), "%s/apps/usbloader_gx/", BootDevice);
 	snprintf(BNRCachePath, sizeof(BNRCachePath), "%s/apps/usbloader_gx/cache_bnr/", BootDevice);
+	snprintf(GameHeaderCachePath, sizeof(GameHeaderCachePath), "%s/apps/usbloader_gx/cache/", BootDevice);
 	snprintf(homebrewapps_path, sizeof(homebrewapps_path), "%s/apps/", BootDevice);
 	snprintf(Cheatcodespath, sizeof(Cheatcodespath), "%s/codes/", BootDevice);
 	snprintf(TxtCheatcodespath, sizeof(TxtCheatcodespath), "%s/txtcodes/", BootDevice);
@@ -135,6 +136,7 @@ void CSettings::SetDefault()
 	musicloopmode = ON;
 	marknewtitles = ON;
 	ShowFreeSpace = ON;
+	UseGameHeaderCache = OFF;
 	PlaylogUpdate = OFF;
 	ParentalBlocks = BLOCK_ALL;
 	InstallToDir = INSTALL_TO_NAME_GAMEID;
@@ -359,6 +361,7 @@ bool CSettings::Save()
 	fprintf(file, "update_path = %s\n", update_path);
 	fprintf(file, "homebrewapps_path = %s\n", homebrewapps_path);
 	fprintf(file, "BNRCachePath = %s\n", BNRCachePath);
+	fprintf(file, "GameHeaderCachePath = %s\n", GameHeaderCachePath);
 	fprintf(file, "Cheatcodespath = %s\n", Cheatcodespath);
 	fprintf(file, "BcaCodepath = %s\n", BcaCodepath);
 	fprintf(file, "WipCodepath = %s\n", WipCodepath);
@@ -374,6 +377,7 @@ bool CSettings::Save()
 	fprintf(file, "partition = %d\n", partition);
 	fprintf(file, "marknewtitles = %d\n", marknewtitles);
 	fprintf(file, "ShowFreeSpace = %d\n", ShowFreeSpace);
+	fprintf(file, "UseGameHeaderCache = %d\n", UseGameHeaderCache);
 	fprintf(file, "InstallToDir = %d\n", InstallToDir);
 	fprintf(file, "GameSplit = %d\n", GameSplit);
 	fprintf(file, "InstallPartitions = %08X\n", (unsigned int)InstallPartitions);
@@ -722,6 +726,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "ShowFreeSpace") == 0)
 	{
 		ShowFreeSpace = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "UseGameHeaderCache") == 0)
+	{
+		UseGameHeaderCache = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "HomeMenu") == 0)
@@ -1236,6 +1245,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "BNRCachePath") == 0)
 	{
 		strlcpy(BNRCachePath, value, sizeof(BNRCachePath));
+		return true;
+	}
+	else if (strcmp(name, "GameHeaderCachePath") == 0)
+	{
+		strlcpy(GameHeaderCachePath, value, sizeof(GameHeaderCachePath));
 		return true;
 	}
 	else if (strcmp(name, "Cheatcodespath") == 0)

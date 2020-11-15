@@ -22,6 +22,7 @@
  * distribution.
  ***************************************************************************/
 #include <unistd.h>
+
 #include "UninstallSM.hpp"
 #include "FileOperations/fileops.h"
 #include "GameCube/GCGames.h"
@@ -35,6 +36,7 @@
 #include "usbloader/wbfs.h"
 #include "usbloader/GameList.h"
 #include "wstring.hpp"
+#include "cache/cache.hpp"
 
 UninstallSM::UninstallSM(struct discHdr * header)
 	: SettingsMenu(tr("Uninstall Menu"), &GuiOptions, MENU_NONE)
@@ -127,6 +129,7 @@ int UninstallSM::GetMenuInternal()
 			if(ret >= 0)
 			{
 				wString oldFilter(gameList.GetCurrentFilter());
+				ResetGameHeaderCache();
 				gameList.ReadGameList();
 				gameList.FilterList(oldFilter.c_str());
 			}
@@ -134,6 +137,7 @@ int UninstallSM::GetMenuInternal()
 		else if(DiscHeader->type == TYPE_GAME_GC_IMG)
 		{
 			GCGames::Instance()->RemoveGame(GameID);
+			ResetGameHeaderCache();
 			// Reload list
 			GCGames::Instance()->LoadAllGames();
 		}
@@ -147,6 +151,7 @@ int UninstallSM::GetMenuInternal()
 			snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/", Settings.NandEmuChanPath, (unsigned int) (DiscHeader->tid >> 32), (unsigned int) DiscHeader->tid);
 			RemoveDirectory(filepath);
 
+			ResetGameHeaderCache();
 			Channels::Instance()->GetEmuChannelList();
 		}
 

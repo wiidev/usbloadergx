@@ -1101,6 +1101,9 @@ msgstr "Διαγραφή παιχνιδιών GameCube"
 msgid "GameCube Install Menu"
 msgstr "menu εγκατάστασης παιχνιδιών GameCube"
 
+msgid "Game Header Cache Files Path"
+msgstr ""
+
 msgid "Game ID"
 msgstr "ID παιχνιδιού"
 
@@ -1824,6 +1827,9 @@ msgstr "Επανεκκίνηση"
 msgid "Reset BG Music"
 msgstr "Επαναφορά μουσικής υπόκρουσης."
 
+msgid "Reset Game Header Cache"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Επαναφορά του Playcounter"
 
@@ -2251,6 +2257,9 @@ msgid "USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyw
 msgstr ""
 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
+msgstr ""
+
+msgid "Use Game Header Cache"
 msgstr ""
 
 msgid "Uninstall"
