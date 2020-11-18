@@ -67,7 +67,6 @@ static const u32 wpadbuttonsdown2hooks[4] = {0x7D6B4A14, 0x800B0010, 0x7C030378,
 static const u32 multidolhooks[4] = {0x7C0004AC, 0x4C00012C, 0x7FE903A6, 0x4E800420};
 static const u32 multidolchanhooks[4] = {0x4200FFF4, 0x48000004, 0x38800000, 0x4E800020};
 static const u32 langpatch[3] = {0x7C600775, 0x40820010, 0x38000000};
-static const u8 GCT_Header[8] = {0x00, 0xD0, 0xC0, 0xDE, 0x00, 0xD0, 0xC0, 0xDE};
 
 //---------------------------------------------------------------------------------
 void dogamehooks(u32 hooktype, void *addr, u32 len)
@@ -579,124 +578,91 @@ int LoadGameConfig(const char *CheatFilepath)
 	return 0;
 }
 
-int ocarina_patch_mkw(u8 *gameid)
+int ocarina_patch(u8 *gameid)
 {
-	// Thanks to Seeky for the gecko codes
-	u8 GCT_RCE_Patch[24] =
-	{
-		0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF,
-		0x20, 0x07, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00,
-		0xF0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-	};
+	// Thanks to Seeky for the MKWii gecko codes
+	// Thanks to InvoxiPlayGames for the gecko codes for the 23400 fix.
+	// Reimplemented by Leseratte without the need for a code handler.
 
-	switch (gameid[3])
+	u32 * patch_addr = 0;
+	char * patched = 0; 
+
+	// Patch error 23400 for CoD (Black Ops, Reflex, MW3) and Rock Band 3 / The Beatles
+
+	if (memcmp(gameid, "SC7", 3) == 0) 
 	{
-	case 'P':
-		GCT_RCE_Patch[1] = 0x89;
-		GCT_RCE_Patch[2] = 0xA1;
-		GCT_RCE_Patch[3] = 0x94;
-		break;
-	case 'E':
-		GCT_RCE_Patch[1] = 0x89;
-		GCT_RCE_Patch[2] = 0x5A;
-		GCT_RCE_Patch[3] = 0xC4;
-		break;
-	case 'J':
-		GCT_RCE_Patch[1] = 0x89;
-		GCT_RCE_Patch[2] = 0x92;
-		GCT_RCE_Patch[3] = 0xF4;
-		break;
-	case 'K':
-		GCT_RCE_Patch[1] = 0x88;
-		GCT_RCE_Patch[2] = 0x85;
-		GCT_RCE_Patch[3] = 0xCC;
-		break;
-	default:
-		return 0;
+		gprintf("Patching error 23400 for game %s\n", gameid);
+		*(u32 *)0x8023c954 = 0x41414141;
 	}
 
-	if (code_buf != NULL)
+	else if (memcmp(gameid, "RJA", 3) == 0) 
 	{
-		gprintf("Loading %s with RCE patch & other cheats.\n", gameid);
-		code_buf = (u8 *)MEM2_realloc(code_buf, code_size + 16);
-		memcpy(code_buf + code_size - 8, GCT_RCE_Patch, sizeof(GCT_RCE_Patch));
-		code_size = code_size + 16;
+		gprintf("Patching error 23400 for game %s\n", gameid);
+		*(u32 *)0x801b838c = 0x41414141;
 	}
-	else
+
+	else if (memcmp(gameid, "SM8", 3) == 0) 
 	{
-		// No cheats were loaded
-		gprintf("Loading %s with RCE patch.\n", gameid);
-		code_buf = (u8 *)MEM2_alloc(32);
-		if (code_buf)
-		{
-			memcpy(code_buf, GCT_Header, sizeof(GCT_Header));
-			memcpy(code_buf + 8, GCT_RCE_Patch, sizeof(GCT_RCE_Patch));
-			code_size = 32;
+		gprintf("Patching error 23400 for game %s\n", gameid);
+		*(u32 *)0x80238c74 = 0x41414141;
+	}
+
+	else if (memcmp(gameid, "SZB", 3) == 0) 
+	{
+		gprintf("Patching error 23400 for game %s\n", gameid);
+		*(u32 *)0x808e3b20 = 0x41414141;
+	}
+
+	else if (memcmp(gameid, "R9J", 3) == 0) 
+	{
+		gprintf("Patching error 23400 for game %s\n", gameid);
+		*(u32 *)0x808d6934 = 0x41414141;
+	}
+
+	// Patch RCE vulnerability in MKWii.
+	else if (memcmp(gameid, "RMC", 3) == 0) 
+	{
+		switch (gameid[3]) {
+
+			case 'P':
+				patched = (char *)0x80276054;
+				patch_addr = (u32 *)0x8089a194;
+				break; 
+			
+			case 'E': 
+				patched = (char *)0x80271d14;
+				patch_addr = (u32 *)0x80895ac4;
+				break; 
+
+			case 'J': 
+				patched = (char *)0x802759f4;
+				patch_addr = (u32 *)0x808992f4;
+				break;
+			
+			case 'K': 
+				patched = (char *)0x80263E34; 
+				patch_addr = (u32 *)0x808885cc; 
+				break; 
+
+			default:
+				gprintf("NOT patching RCE vulnerability due to invalid game ID: %s\n", gameid);
+				return 0;
 		}
-	}
-	return code_size;
-}
 
-int ocarina_patch_games(u8 *gameid)
-{
-	// Thanks to InvoxiPlayGames for the gecko codes
-	u8 GCT_Con_Patch[16] =
-	{
-		0x04, 0x00, 0x00, 0x00, 0x41, 0x41, 0x41, 0x41,
-		0xF0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-	};
-
-	if (memcmp(gameid, "SC7", 3) == 0)
-	{
-		GCT_Con_Patch[1] = 0x23;
-		GCT_Con_Patch[2] = 0xC9;
-		GCT_Con_Patch[3] = 0x54;
-	}
-	else if (memcmp(gameid, "RJA", 3) == 0)
-	{
-		GCT_Con_Patch[1] = 0x1B;
-		GCT_Con_Patch[2] = 0x83;
-		GCT_Con_Patch[3] = 0x8C;
-	}
-	else if (memcmp(gameid, "SM8", 3) == 0)
-	{
-		GCT_Con_Patch[1] = 0x23;
-		GCT_Con_Patch[2] = 0x8C;
-		GCT_Con_Patch[3] = 0x74;
-	}
-	else if (memcmp(gameid, "SZB", 3) == 0)
-	{
-		GCT_Con_Patch[1] = 0x8E;
-		GCT_Con_Patch[2] = 0x3B;
-		GCT_Con_Patch[3] = 0x20;
-	}
-	else if (memcmp(gameid, "R9J", 3) == 0)
-	{
-		GCT_Con_Patch[1] = 0x8D;
-		GCT_Con_Patch[2] = 0x69;
-		GCT_Con_Patch[3] = 0x34;
-	}
-
-	if (code_buf != NULL)
-	{
-		gprintf("Loading %s with error 23400 patch & other cheats.\n", gameid);
-		code_buf = (u8 *)MEM2_realloc(code_buf, code_size + 8);
-		memcpy(code_buf + code_size - 8, GCT_Con_Patch, sizeof(GCT_Con_Patch));
-		code_size = code_size + 8;
-	}
-	else
-	{
-		// No cheats were loaded
-		gprintf("Loading %s with error 23400 patch.\n", gameid);
-		code_buf = (u8 *)MEM2_alloc(24);
-		if (code_buf)
-		{
-			memcpy(code_buf, GCT_Header, sizeof(GCT_Header));
-			memcpy(code_buf + 8, GCT_Con_Patch, sizeof(GCT_Con_Patch));
-			code_size = 24;
+		if (*patched != '*') {
+			gprintf("Game is already Wiimmfi-patched, don't apply the RCE fix\n");
 		}
+		else {
+			gprintf("Patching RCE vulnerability for game ID %s\n", gameid);
+
+			for (int i = 0; i < 7; i++) {
+				*patch_addr++ = 0xff; 
+			}
+		}
+
 	}
-	return code_size;
+
+	return 0;
 }
 
 int ocarina_load_code(const char *CheatFilepath, u8 *gameid)
