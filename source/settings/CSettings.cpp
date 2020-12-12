@@ -118,7 +118,7 @@ void CSettings::SetDefault()
 	tooltips = ON;
 	gamesound = ON;
 	parentalcontrol = PARENTAL_LVL_ADULT;
-	LoaderIOS = BUILD_IOS;
+	LoaderIOS = 249;
 	cios = 249;
 	gridRows = 3;
 	partition = 0;

@@ -56,7 +56,7 @@ DATA		:=	data \
 INCLUDES	:=	source
 
 #---------------------------------------------------------------------------------
-# Default cIOS to load into to load the settings
+# default IOS used when booting
 #---------------------------------------------------------------------------------
 ifndef $(IOS)
 IOS = 58
