@@ -334,20 +334,11 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	if (ocarinaChoice)
 		ocarina_load_code(Settings.Cheatcodespath, gameHeader.id);
 
-	//! Patch MKW RCE vulnerability
-	if (PrivServChoice != PRIVSERV_WIIMMFI && memcmp(gameHeader.id, "RMC", 3) == 0)
-	{
-		ocarinaChoice = 1;
-		ocarina_patch_mkw(gameHeader.id);
-	}
-
-	//! Patch error 23400 for a few games with dedicated servers
+	//! Disable private server for games that still have official servers.
 	if (memcmp(gameHeader.id, "SC7", 3) == 0 || memcmp(gameHeader.id, "RJA", 3) == 0 ||
 		memcmp(gameHeader.id, "SM8", 3) == 0 || memcmp(gameHeader.id, "SZB", 3) == 0 || memcmp(gameHeader.id, "R9J", 3) == 0)
 	{
-		ocarinaChoice = 1;
 		PrivServChoice = PRIVSERV_OFF; // Private server patching causes error 20100
-		ocarina_patch_games(gameHeader.id);
 	}
 
 	//! Force hooktype if not selected but Ocarina is enabled
@@ -472,6 +463,14 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
     //! Can (and should) be done before Wiimmfi patching, can't be done in gamepatches() itself.
     if(patchFix480pChoice)
 		PatchFix480p();
+
+	//! If we're NOT on Wiimmfi, patch the known RCE vulnerability in MKWii. 
+	//! Wiimmfi will handle that on its own through the update payload.
+	//! This will also patch error 23400 for a couple games that still have official servers.
+	if (PrivServChoice != PRIVSERV_WIIMMFI)
+	{
+		ocarina_patch(gameHeader.id);
+	}
 
 	//! New Wiimmfi patch should be loaded last, after the codehandler, just before the call to the entry point
 	if (PrivServChoice == PRIVSERV_WIIMMFI && memcmp(gameHeader.id, "RMC", 3) == 0 )
