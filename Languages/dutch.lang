@@ -1101,6 +1101,9 @@ msgstr "GameCube Spel Verwijderen"
 msgid "GameCube Install Menu"
 msgstr "GameCube Installatie Menu"
 
+msgid "Game Header Cache Files Path"
+msgstr ""
+
 msgid "Game ID"
 msgstr "Spel ID"
 
@@ -1824,6 +1827,9 @@ msgstr "Resetten"
 msgid "Reset BG Music"
 msgstr "Reset achtergrond muziek"
 
+msgid "Reset Game Header Cache"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Speeltellers resetten"
 
@@ -2251,6 +2257,9 @@ msgid "USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyw
 msgstr "USBLoaderGX kon Nintendont config bestand niet schrijven. Nintendont toch starten?"
 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
+msgstr ""
+
+msgid "Use Game Header Cache"
 msgstr ""
 
 msgid "Uninstall"

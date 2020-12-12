@@ -1101,6 +1101,9 @@ msgstr "Menu de suppression GameCube"
 msgid "GameCube Install Menu"
 msgstr "Menu d'installation GameCube"
 
+msgid "Game Header Cache Files Path"
+msgstr ""
+
 msgid "Game ID"
 msgstr "ID du jeu"
 
@@ -1824,6 +1827,9 @@ msgstr "Réinitialisation"
 msgid "Reset BG Music"
 msgstr "Fond sonore par defaut"
 
+msgid "Reset Game Header Cache"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Remise à zéro du compteur d'utilisations"
 
@@ -2252,6 +2258,9 @@ msgstr "USBLoaderGX n'a pas pu créer le fichier de configuration de Nintendont.
 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
 msgstr "Nintendont Alpha v0.1 ne fonctionne qu'avec USBLoaderGX r1218. Veuillez mettre à jour votre version de Nintendont."
+
+msgid "Use Game Header Cache"
+msgstr ""
 
 msgid "Uninstall"
 msgstr "Désinstaller"

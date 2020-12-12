@@ -85,6 +85,7 @@ class CSettings
 		char NandEmuPath[50];
 		char NandEmuChanPath[50];
 		char BNRCachePath[50];
+		char GameHeaderCachePath[50];
 		char GameCubePath[100];
 		char GameCubeSDPath[100];
 		char DEVOLoaderPath[100];
@@ -142,6 +143,7 @@ class CSettings
 		short GameSplit;
 		short PlaylogUpdate;
 		short ShowFreeSpace;
+		short UseGameHeaderCache;
 		short HomeMenu;
 		short MultiplePartitions;
 		short USBPort;
