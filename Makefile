@@ -47,7 +47,8 @@ SOURCES		:=	source \
 				source/SystemMenu \
 				source/utils \
 				source/utils/minizip \
-				source/usbloader/wbfs
+				source/usbloader/wbfs \
+				source/cache
 DATA		:=	data \
 				data/images \
 				data/fonts \

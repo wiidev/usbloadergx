@@ -1095,11 +1095,14 @@ msgstr ""
 msgid "GXFlush"
 msgstr ""
 
-msgid "Game Cube Games Delete"
+msgid "GameCube Games Delete"
 msgstr "게임큐브 게임 삭제"
 
-msgid "Game Cube Install Menu"
+msgid "GameCube Install Menu"
 msgstr "게임큐브 설치 메뉴"
+
+msgid "Game Header Cache Files Path"
+msgstr ""
 
 msgid "Game ID"
 msgstr "게임 ID"
@@ -1824,6 +1827,9 @@ msgstr "리셋"
 msgid "Reset BG Music"
 msgstr "배경 음악 리셋"
 
+msgid "Reset Game Header Cache"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Playcounter 리셋"
 
@@ -2246,6 +2252,9 @@ msgstr "USBloaderGX는 닌텐돈트 구성 파일을 기록할 수 없습니다.
 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
 msgstr "USBloaderGX r1218은 닌텐돈트 알파 v0.1에 필요합니다. 닌텐돈트 boot.dol 버전을 업데이트하십시오."
+
+msgid "Use Game Header Cache"
+msgstr ""
 
 msgid "Uninstall"
 msgstr "제거"
