@@ -85,7 +85,7 @@ bool ZipFile::FindFilePart(const char *partfilename, std::string &realname)
 {
 	if (!File) return false;
 
-	char filename[MAXPATHLEN];
+	char filename[256];
 
 	int ret = unzGoToFirstFile(File);
 	if (ret != UNZ_OK) return false;
@@ -117,7 +117,7 @@ bool ZipFile::ExtractAll(const char *dest)
 	if (!buffer) return false;
 
 	char writepath[MAXPATHLEN];
-	char filename[MAXPATHLEN];
+	char filename[256];
 	memset(filename, 0, sizeof(filename));
 
 	int ret = unzGoToFirstFile(File);

@@ -142,7 +142,7 @@ bool Theme::Load(const char * theme_file_path)
 	}
 
 	//! Override font.ttf with the theme font.ttf if it exists in the image folder
-	char FontPath[300];
+	char FontPath[310];
 	snprintf(FontPath, sizeof(FontPath), "%s/font.ttf", theme_path);
 
 	if(CheckFile(FontPath))

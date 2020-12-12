@@ -20,6 +20,10 @@ misrepresented as being the original software.
 3. This notice may not be removed or altered from any source
 distribution.
 */
+#if __GNUC__ > 8
+#pragma GCC diagnostic ignored "-Waddress-of-packed-member"
+#endif
+
 #include <malloc.h>
 #include <stdio.h>
 #include "Channels/channels.h"
@@ -245,7 +249,7 @@ const u16 * OpeningBNR::GetIMETTitle(int lang)
 	if(imetHdr->names[lang][0] == 0)
 		lang = CONF_LANG_ENGLISH;
 
-	return imetHdr->names[lang];
+	return imetHdr->names[lang]; // possible unaligned pointer value
 }
 
 static s32 GC_Disc_Read(void *fp, u32 offset, u32 count, void*iobuf)

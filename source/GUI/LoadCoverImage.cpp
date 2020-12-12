@@ -9,15 +9,16 @@
  ***************************************************************************/
 GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D, bool noCover)
 {
-	if (!header) return NULL;
+	if (!header)
+		return NULL;
 	GuiImageData *Cover = NULL;
-	char ID3[4];
+	char ID3[4] = {};
 	char IDfull[7];
 	char Path[255];
 	bool flag = Prefere3D;
 
-	snprintf(ID3, sizeof(ID3), "%s", (char *) header->id);
-	snprintf(IDfull, sizeof(IDfull), "%s", (char *) header->id);
+	memcpy(ID3, (char *)header->id, sizeof(ID3) - 1);
+	snprintf(IDfull, sizeof(IDfull), "%s", (char *)header->id);
 
 	for (int i = 0; i < 2; ++i)
 	{
@@ -26,10 +27,10 @@ GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D, bool noCove
 		//Load full id image
 		snprintf(Path, sizeof(Path), "%s%s.png", coverPath, IDfull);
 
-		if(!CheckFile(Path))
+		if (!CheckFile(Path))
 		{
 			snprintf(Path, sizeof(Path), "%s%s.png", coverPath, ID3);
-			if(!CheckFile(Path))
+			if (!CheckFile(Path))
 				continue;
 		}
 
@@ -42,7 +43,8 @@ GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D, bool noCove
 			delete Cover;
 			Cover = new (std::nothrow) GuiImageData(Path);
 		}
-		if (Cover && Cover->GetImage()) break;
+		if (Cover && Cover->GetImage())
+			break;
 	}
 	//Load no image
 	if (noCover && (!Cover || !Cover->GetImage()))
@@ -52,7 +54,8 @@ GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D, bool noCove
 		{
 			delete Cover;
 			Cover = Resources::GetImageData(flag ? "nocover.png" : "nocoverFlat.png");
-			if (Cover && Cover->GetImage()) break;
+			if (Cover && Cover->GetImage())
+				break;
 			flag = !flag;
 		}
 	}

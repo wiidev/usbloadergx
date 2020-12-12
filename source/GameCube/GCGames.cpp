@@ -185,8 +185,8 @@ void GCGames::LoadGameList(const string &path, vector<struct discHdr> &headerLis
 		{
 			string gamePath = string(path) + dirname + (extracted ? "/" : strrchr(fpath, '/'));
 			memset(&tmpHdr, 0, sizeof(tmpHdr));
-			memcpy(tmpHdr.id, id, 6);
-			strncpy(tmpHdr.title, title, sizeof(tmpHdr.title) - 1);
+			memcpy(tmpHdr.id, id, sizeof(tmpHdr.id));
+			snprintf(tmpHdr.title, sizeof(tmpHdr.title), "%s", title);
 			tmpHdr.magic = GCGames::MAGIC;
 			tmpHdr.type = extracted ? TYPE_GAME_GC_EXTRACTED : TYPE_GAME_GC_IMG;
 			tmpHdr.disc_no = disc_number;

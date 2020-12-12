@@ -321,7 +321,7 @@ void WindowCredits()
 		snprintf(GCInfo, sizeof(GCInfo), "QuadForce USB %s", DMLVersions[IosLoader::GetDMLVersion()]);
 		
 	// Check if Devolution is available
-	char DEVO_loader_path[100];
+	char DEVO_loader_path[110];
 	snprintf(DEVO_loader_path, sizeof(DEVO_loader_path), "%sloader.bin", Settings.DEVOLoaderPath);
 	FILE *f = fopen(DEVO_loader_path, "rb");
 	if(f)

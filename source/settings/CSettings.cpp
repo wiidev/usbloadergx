@@ -1453,7 +1453,7 @@ bool CSettings::SetSetting(char *name, char *value)
 bool CSettings::FindConfig()
 {
 	bool found = false;
-	char CheckDevice[12];
+	char CheckDevice[73];
 	char CheckPath[300];
 
 	// Enumerate the devices supported by libogc.
@@ -1515,7 +1515,7 @@ void CSettings::ParseLine(char *line)
 {
 	char temp[1024], name[1024], value[1024];
 
-	strncpy(temp, line, sizeof(temp));
+	snprintf(temp, sizeof(temp), "%s", line);
 
 	char * eq = strchr(temp, '=');
 
@@ -1593,7 +1593,7 @@ bool CSettings::LoadLanguage(const char *path, int lang)
 	}
 	else if (lang >= 0)
 	{
-		char filepath[150];
+		char filepath[170];
 		char langpath[150];
 		strlcpy(langpath, languagefiles_path, sizeof(langpath));
 		if (langpath[strlen(langpath) - 1] != '/')

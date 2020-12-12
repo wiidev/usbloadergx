@@ -134,7 +134,7 @@ static int do_extract_currentfile(unzFile uf, const int* popt_extract_without_pa
 		{
 
 			// Fix the path, this will fail if the directoryname is the same as the first filename in the zip
-			char *path = (char *) malloc(strlen(filename_withpath));
+			char *path = (char *)malloc(strlen(filename_withpath));
 			strcpy(path, filename_withpath);
 			char *ptr = strstr(path, filename_withoutpath);
 			*ptr = '\0';
@@ -201,7 +201,7 @@ static int do_extract_currentfile(unzFile uf, const int* popt_extract_without_pa
 				*(filename_withoutpath - 1) = '\0';
 
 				// Fix the path, this will fail if the directoryname is the same as the first filename in the zip
-				char *path = (char *) malloc(strlen(write_filename));
+				char *path = (char *)malloc(strlen(write_filename) + 1);
 				strcpy(path, write_filename);
 				char *ptr = strstr(path, filename_withoutpath);
 				*ptr = '\0';

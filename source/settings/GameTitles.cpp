@@ -191,9 +191,8 @@ void CGameTitles::WriteCachedTitles(const char * path)
 	for(u32 i = 0; i < count; ++i)
 	{
 		memset(&Cache, 0, sizeof(CacheTitle));
-
-		strncpy(Cache.GameID, TitleList[i].GameID, sizeof(Cache.GameID)-1);
-		strncpy(Cache.Title, TitleList[i].Title.c_str(), sizeof(Cache.Title)-1);
+		snprintf(Cache.GameID, sizeof(Cache.GameID), "%s", TitleList[i].GameID);
+		snprintf(Cache.Title, sizeof(Cache.Title), "%s", TitleList[i].Title.c_str());
 		Cache.ParentalRating = TitleList[i].ParentalRating;
 		Cache.PlayersCount = TitleList[i].PlayersCount;
 		Cache.FromWiiTDB = TitleList[i].FromWiiTDB;

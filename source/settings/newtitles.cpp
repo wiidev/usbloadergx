@@ -70,7 +70,7 @@ void NewTitles::Reload(void)
 
 		*delimeter = '\0';
 
-		snprintf(title->titleId, sizeof(title->titleId), "%s", line);
+		memcpy(title->titleId, line, sizeof(title->titleId) - 1);
 		title->timestamp = strtoul(delimeter+1, 0, 10);
 		title->isNew = ((currenttime - title->timestamp) < NEW_SECONDS);
 		title->next = NULL;
@@ -192,7 +192,7 @@ void NewTitles::Save(void)
 	Title *t = firstTitle;
 	while (t != NULL && strlen(t->titleId) > 0)
 	{
-		fprintf(fp, "%.6s:%lu\n", t->titleId, t->timestamp);
+		fprintf(fp, "%.6s:%lld\n", t->titleId, (int64_t)t->timestamp);
 		t = t->next;
 	}
 	fclose(fp);

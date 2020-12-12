@@ -242,23 +242,24 @@ void FreeTypeGX::loadGlyphData(FT_Bitmap *bmp, ftgxCharData *charData)
 
 	uint8_t *src = (uint8_t *)bmp->buffer;
 	uint8_t *dst = glyphData;
-	int32_t pos, x1, y1, x, y;
+	// Old FreeType uses int32_t and new versions use uint32_t
+	int64_t pos, x1, y1, x, y;
 
-	for(y1 = 0; y1 < bmp->rows; y1 += 8)
+	for(y1 = 0; y1 < (int64_t)bmp->rows; y1 += 8)
 	{
-		for(x1 = 0; x1 < bmp->width; x1 += 8)
+		for(x1 = 0; x1 < (int64_t)bmp->width; x1 += 8)
 		{
 			for(y = y1; y < (y1 + 8); y++)
 			{
 				for(x = x1; x < (x1 + 8); x += 2, dst++)
 				{
-					if(x >= bmp->width || y >= bmp->rows)
+					if(x >= (int64_t)bmp->width || y >= (int64_t)bmp->rows)
 						continue;
 
 					pos = y * bmp->width + x;
 					*dst = (src[pos] & 0xF0);
 
-					if(x+1 < bmp->width)
+					if(x+1 < (int64_t)bmp->width)
 						*dst |= (src[pos + 1] >> 4);
 				}
 			}
