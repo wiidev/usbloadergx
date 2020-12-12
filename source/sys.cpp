@@ -53,7 +53,13 @@ u8 reset = 0;
  */
 bool isWiiVC = false;
 
+#if __GNUC__ <= 6
+/* devkitPPC r29-1 or older */
 void __Sys_ResetCallback(void)
+#else
+/* devkitPPC r30 or newer */
+void __Sys_ResetCallback(__attribute__((unused)) u32 irq, __attribute__((unused)) void *ctx)
+#endif
 {
 	/* Reboot console */
 	reset = 1;
@@ -282,13 +288,13 @@ void ScreenShot()
 	timeinfo = localtime(&rawtime);
 
 	// Create the filename with the current date/time.
-	// Format: USBLoader_GX_ScreenShot-Month_Day_Hour_Minute_Second_Year.png
-	int ret = strftime(filename, sizeof(filename), "USBLoader_GX_ScreenShot-%b%d%H%M%S%y.png", timeinfo);
+	// Format: Screenshot_year_month_day-hour_minute_second.png
+	int ret = strftime(filename, sizeof(filename), "Screenshot_%Y%m%d-%H%M%S.png", timeinfo);
 	if (ret == 0)
 	{
 		// Error formatting the time.
 		// Use the raw time in seconds as a fallback.
-		snprintf(filename, sizeof(filename), "USBLoader_GX_ScreenShot-%ld.png", rawtime);
+		snprintf(filename, sizeof(filename), "Screenshot_%lld.png", (int64_t)rawtime);
 	}
 
 	// Create the full pathname.

@@ -78,13 +78,14 @@ endif
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS := -lwolfssl -lcustomfat -lcustomntfs -lcustomext2fs -lvorbisidec -lmad -lfreetype \
-		-lgd -ljpeg -lpng -lzip -lm -lz -lwiiuse -lwiidrc -lbte -lasnd -logc -lruntimeiospatch
+LIBS := -lwolfssl -lcustomfat -lcustomntfs -lcustomext2fs -lvorbisidec -logg \
+		-lmad -lfreetype -lgd -ljpeg -lpng -lzip -lm -lz -lwiiuse -lwiidrc \
+		-lbte -lasnd -logc -lruntimeiospatch
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
 #---------------------------------------------------------------------------------
-LIBDIRS	:= $(DEVKITPPC)/lib $(CURDIR)
+LIBDIRS	:= $(CURDIR)/portlibs
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
 # rules for different file extensions
@@ -139,17 +140,15 @@ export OFILES	:=	$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) \
 #---------------------------------------------------------------------------------
 export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 					$(foreach dir,$(LIBDIRS),-I$(dir)/include) \
-					-I$(CURDIR)/$(BUILD) -I$(LIBOGC_INC) \
-					-I$(PORTLIBS)/include -I$(PORTLIBS)/include/freetype2
+					-I$(CURDIR)/$(BUILD) -I$(LIBOGC_INC)
 
 #---------------------------------------------------------------------------------
 # build a list of library paths
 #---------------------------------------------------------------------------------
-export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib) -L$(CURDIR)/source/libs/libfat/ \
-					-L$(CURDIR)/source/libs/libntfs/ -L$(CURDIR)/source/libs/libext2fs/ \
-					-L$(CURDIR)/source/libs/libruntimeiospatch/ -L$(CURDIR)/source/libs/libdrc/ \
-					-L$(CURDIR)/source/libs/libwolfssl/ \
-					-L$(LIBOGC_LIB) -L$(PORTLIBS)/lib
+export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib) -L$(CURDIR)/source/libs/libdrc/ \
+					-L$(CURDIR)/source/libs/libext2fs -L$(CURDIR)/source/libs/libfat \
+					-L$(CURDIR)/source/libs/libntfs -L$(CURDIR)/source/libs/libruntimeiospatch \
+					-L$(CURDIR)/source/libs/libwolfssl -L$(LIBOGC_LIB)
 
 export OUTPUT	:=	$(CURDIR)/$(TARGET)
 .PHONY: $(BUILD) lang all clean

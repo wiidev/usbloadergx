@@ -192,7 +192,7 @@ void CGameTitles::WriteCachedTitles(const char * path)
 	{
 		memset(&Cache, 0, sizeof(CacheTitle));
 
-		strncpy(Cache.GameID, TitleList[i].GameID, sizeof(Cache.GameID)-1);
+		memcpy(Cache.GameID, TitleList[i].GameID, sizeof(Cache.GameID) - 1);
 		strncpy(Cache.Title, TitleList[i].Title.c_str(), sizeof(Cache.Title)-1);
 		Cache.ParentalRating = TitleList[i].ParentalRating;
 		Cache.PlayersCount = TitleList[i].PlayersCount;

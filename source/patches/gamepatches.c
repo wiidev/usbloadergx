@@ -243,7 +243,7 @@ void PrivateServerPatcher(void *addr, u32 len, u8 privateServer, const char *ser
 		domainpatcher(addr, len, serverAddr);
 }
 
-u32 do_new_wiimmfi() 
+s8 do_new_wiimmfi() 
 {
 
 	// As of November 2018, Wiimmfi requires a special Wiimmfi patcher
@@ -302,9 +302,9 @@ u32 do_new_wiimmfi()
 	// For statistics and easier debugging in case of problems, Wiimmfi
 	// wants to know what patcher a game has been patched with, thus,
 	// let the game know the exact USB-Loader version.
-	char * fmt = "USB-Loader GX v3.0 R%-30s";
-	char patcher[50] = {0};
-	snprintf((char *)&patcher, 49, fmt, GetRev());
+	char * fmt = "USB-Loader GX v3.0 R%-21s";
+	char patcher[42] = {0};
+	snprintf((char *)&patcher, 42, fmt, GetRev());
 	strncpy(patched, (char *)&patcher, 42);
 	
 	// Do the plain old patching with the string search
@@ -410,7 +410,8 @@ u32 do_new_wiimmfi()
 					 0xB00D47AF, 0x7B722975, 0x48BE349A, 0x29CC393C, 
 					 0xEA797228, 0x98986471, 0x3778E1A3, 0xD7626D06, 
 					 0x1567268D, 0x668ECD00, 0xD614F5C8, 0x133037CF, 
-					 0x92F26CF2, 0x00000000, 0x00000000, 0x00000000};
+					 0x92F26CF2, 0x00000000, 0x00000000, 0x00000000, 
+					 0x00000000, 0x00000000, 0x00000000, 0x00000000};
 	
 	// Prepare patching process ....
 	int i = 3;
@@ -604,6 +605,7 @@ bool PoPPatch()
 /** Following is only the VideoPatcher **/
 
 // Some missing video modes
+#if __GNUC__ <= 8
 static GXRModeObj TVPal528Prog = {
 	6,				// viDisplayMode
 	640,			// fbWidth
@@ -704,6 +706,7 @@ static GXRModeObj TVPal524ProgAa = {
 	}
 
 };
+#endif
 
 static GXRModeObj* vmodes[] = {
 	&TVNtsc240Ds,

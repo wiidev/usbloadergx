@@ -14,7 +14,7 @@ void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 language
 bool Anti_002_fix(u8 * Address, int Size);
 void PrivateServerPatcher(void *addr, u32 len, u8 privateServer, const char *serverAddr);
 void PatchFix480p();
-u32 do_new_wiimmfi();
+s8 do_new_wiimmfi();
 void domainpatcher(void *addr, u32 len, const char* domain);
 bool NSMBPatch();
 bool PoPPatch();

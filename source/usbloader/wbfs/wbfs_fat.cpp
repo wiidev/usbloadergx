@@ -10,7 +10,6 @@
 #include <fcntl.h>
 #include <sys/statvfs.h>
 #include <ctype.h>
-#include <fat.h>
 
 #include "Controls/DeviceHandler.hpp"
 #include "FileOperations/fileops.h"
@@ -19,6 +18,7 @@
 #include "usbloader/disc.h"
 #include "usbloader/usbstorage2.h"
 #include "language/gettext.h"
+#include "libs/libfat/fat.h"
 #include "libs/libfat/fatfile_frag.h"
 #include "utils/ShowError.h"
 #include "wbfs_fat.h"
@@ -198,12 +198,12 @@ s32 Wbfs_Fat::AddGame(void)
 
 s32 Wbfs_Fat::RemoveGame(u8 *discid)
 {
-	char fname[MAX_FAT_PATH];
+	char path[MAX_FAT_PATH];
 	int loc;
 	// wbfs 'partition' file
-	loc = FindFilename(discid, fname, sizeof(fname));
+	loc = FindFilename(discid, path, sizeof(path));
 	if (!loc) return -1;
-	split_create(&split, fname, 0, 0, true);
+	split_create(&split, path, 0, 0, true);
 	split_close(&split);
 	if (loc == 1) return 0;
 
@@ -211,9 +211,7 @@ s32 Wbfs_Fat::RemoveGame(u8 *discid)
 	// remove optional .txt file
 	DIR *dir = NULL;
 	struct dirent *dirent = NULL;
-	char path[MAX_FAT_PATH];
 	char name[MAX_FAT_PATH];
-	strncpy(path, fname, sizeof(path));
 	char *p = strrchr(path, '/');
 	if (p) *p = 0;
 	dir = opendir(path);
@@ -227,8 +225,9 @@ s32 Wbfs_Fat::RemoveGame(u8 *discid)
 		p = strrchr(name, '.');
 		if (!p) continue;
 		if (strcasecmp(p, ".txt") != 0) continue;
-		snprintf(fname, sizeof(fname), "%s/%s", path, name);
-		remove(fname);
+		char xpath[MAX_FAT_PATH * 2];
+		snprintf(xpath, sizeof(xpath), "%s/%s", path, name);
+		remove(xpath);
 		break;
 	}
 	closedir(dir);
@@ -387,8 +386,8 @@ void Wbfs_Fat::AddHeader(struct discHdr *discHeader)
 s32 Wbfs_Fat::GetHeadersCount()
 {
 	char path[MAX_FAT_PATH];
-	char fname[MAX_FAT_PATH];
-	char fpath[MAX_FAT_PATH];
+	char fname[MAX_FAT_PATH * 2];
+	char fpath[MAX_FAT_PATH * 3];
 	char fname_title[TITLE_LEN];
 	struct discHdr tmpHdr;
 	struct stat st;
@@ -502,7 +501,7 @@ s32 Wbfs_Fat::GetHeadersCount()
 		{
 			memset(&tmpHdr, 0, sizeof(tmpHdr));
 			memcpy(tmpHdr.id, id, 6);
-			strncpy(tmpHdr.title, title, sizeof(tmpHdr.title)-1);
+			memcpy(tmpHdr.title, title, sizeof(tmpHdr.title) - 1);
 			tmpHdr.magic = 0x5D1C9EA3;
 			AddHeader(&tmpHdr);
 			continue;

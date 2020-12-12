@@ -22,6 +22,10 @@ misrepresented as being the original software.
 distribution.
 */
 
+#if __GNUC__ > 8
+#pragma GCC diagnostic ignored "-Waddress-of-packed-member"
+#endif
+
 #include <malloc.h>
 #include "WiiFont.h"
 
@@ -139,7 +143,7 @@ bool WiiFont::ParseCmap(CmapEntry *cmapEntry)
 			case 1:
 			{
 				u16 idx = 0;
-				u16 *idxPointer = &cmapEntry->charCode;
+				u16 *idxPointer = &cmapEntry->charCode; // possible unaligned pointer value
 				for(u32 i = cmapEntry->start; i < cmapEntry->end; i++)
 				{
 					u16 m_idx = idxPointer[idx++];

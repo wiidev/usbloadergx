@@ -43,7 +43,7 @@ int DownloadAllLanguageFiles(int revision)
 	URL_List LinkList(LanguagesURL);
 	int listsize = LinkList.GetURLCount();
 	int files_downloaded = 0;
-	char target[6];
+	char target[11];
 	if(revision > 0)
 		snprintf(target, sizeof(target), "%d", revision);
 	else

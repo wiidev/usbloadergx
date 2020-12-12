@@ -825,7 +825,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	// Check if Devolution is available
 	u8 *loader_bin = NULL;
 	int DEVO_version = 0;
-	char DEVO_loader_path[100];
+	char DEVO_loader_path[110];
 	snprintf(DEVO_loader_path, sizeof(DEVO_loader_path), "%sloader.bin", Settings.DEVOLoaderPath);
 	FILE *f = fopen(DEVO_loader_path, "rb");
 	if(f)

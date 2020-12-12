@@ -11,12 +11,11 @@ GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D, bool noCove
 {
 	if (!header) return NULL;
 	GuiImageData *Cover = NULL;
-	char ID3[4];
+	char ID3[4] = {};
 	char IDfull[7];
 	char Path[255];
 	bool flag = Prefere3D;
-
-	snprintf(ID3, sizeof(ID3), "%s", (char *) header->id);
+	memcpy(ID3, (char *)header->id, sizeof(ID3) - 1);
 	snprintf(IDfull, sizeof(IDfull), "%s", (char *) header->id);
 
 	for (int i = 0; i < 2; ++i)

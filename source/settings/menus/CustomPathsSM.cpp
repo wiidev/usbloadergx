@@ -195,7 +195,7 @@ int CustomPathsSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		char oldPath[100];
-		strncpy(oldPath, Settings.titlestxt_path, sizeof(Settings.titlestxt_path));
+		strncpy(oldPath, Settings.titlestxt_path, sizeof(oldPath));
 
 		titleTxt->SetText(tr("Titles Path"));
 		if (ChangePath(Settings.titlestxt_path, sizeof(Settings.titlestxt_path)))

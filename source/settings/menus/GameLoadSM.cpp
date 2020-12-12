@@ -517,9 +517,9 @@ int GameLoadSM::GetMenuInternal()
 	//! Settings: Game IOS
 	else if (ret == ++Idx)
 	{
-		char entered[4];
+		char entered[8];
 		snprintf(entered, sizeof(entered), "%i", GameConfig.ios);
-		if(OnScreenNumpad(entered, sizeof(entered)))
+		if(OnScreenNumpad(entered, sizeof(entered) / 2))
 		{
 			int newIOS = atoi(entered);
 

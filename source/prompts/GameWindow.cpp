@@ -338,11 +338,11 @@ void GameWindow::LoadDiscImage(const u8 * id)
 
 	char imgPath[150];
 	char IDFull[7];
-	char ID3[4];
-	char ID4[5];
+	char ID3[4] = {};
+	char ID4[5] = {};
 	snprintf(IDFull, sizeof(IDFull), "%s", (char*) id);
-	snprintf(ID3, sizeof(ID3), "%s", IDFull);
-	snprintf(ID4, sizeof(ID4), "%s", IDFull);
+	memcpy(ID3, IDFull, sizeof(ID3) - 1);
+	memcpy(ID4, IDFull, sizeof(ID4) - 1);
 
 	snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.disc_path, IDFull); //changed to current full id
 	diskImgData = new GuiImageData(imgPath);

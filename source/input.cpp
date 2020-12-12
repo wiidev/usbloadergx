@@ -15,8 +15,8 @@
 #include <ogcsys.h>
 #include <unistd.h>
 #include <wiiuse/wpad.h>
-#include "libs/libdrc/wiidrc.h"
 
+#include "libs/libdrc/wiidrc.h"
 #include "menu.h"
 #include "video.h"
 #include "input.h"

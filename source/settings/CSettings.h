@@ -60,7 +60,7 @@ class CSettings
 		/** Variables **/
 		char BootDevice[10];
 		char unlockCode[20];
-		char db_language[20];
+		char db_language[10];
 		char returnTo[20];
 		char ConfigPath[80];
 		char covers_path[100];

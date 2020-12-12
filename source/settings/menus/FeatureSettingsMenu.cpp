@@ -268,13 +268,13 @@ int FeatureSettingsMenu::GetMenuInternal()
 			{
 				if(Wiinnertag::CreateExample(Settings.WiinnertagPath))
 				{
-					char text[200];
+					char text[300];
 					snprintf(text, sizeof(text), "%s %s", tr("An example file was created here:"), filepath);
 					WindowPrompt(tr("Success"), text, tr("OK"));
 				}
 				else
 				{
-					char text[200];
+					char text[300];
 					snprintf(text, sizeof(text), "%s %s", tr("Could not write to:"), filepath);
 					WindowPrompt(tr("Failed"), text, tr("OK"));
 				}

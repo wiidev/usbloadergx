@@ -24,12 +24,13 @@
  * for WiiXplorer 2010
  ***************************************************************************/
 #include <gccore.h>
-#include <fat.h>
-#include <ntfs.h>
-#include <ext2.h>
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
+
+#include "libs/libfat/fat.h"
+#include "libs/libntfs/ntfs.h"
+#include "libs/libext2fs/ext2.h"
 #include "libs/libwbfs/libwbfs.h"
 #include "utils/uncompress.h"
 #include "PartitionHandle.h"
