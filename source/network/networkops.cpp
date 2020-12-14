@@ -11,7 +11,7 @@
 #include "networkops.h"
 #include "https.h"
 #include "update.h"
-#include "settings/ProxySettings.h"
+#include "settings/proxysettings.h"
 
 #define PORT 4299
 
