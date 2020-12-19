@@ -190,8 +190,7 @@ s32 IosLoader::ReloadIosKeepingRights(s32 ios)
 
 		/* Disable MEM 2 protection */
 		write16(MEM2_PROT, 2);
-
-		for (u16 *patchme = ES_MODULE_START; patchme < ES_MODULE_END; patchme++)
+		for (u16 *patchme = (u16*)*((u32*)0x80003134); patchme < (u16*)0x94000000; patchme++)
 		{
 			if (!memcmp(patchme, ticket_check, sizeof(ticket_check)))
 			{
