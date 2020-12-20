@@ -16,6 +16,7 @@
 #include "mload/modules/ehcmodule_5.h"
 #include "mload/modules/dip_plugin_249.h"
 #include "mload/modules/odip_frag.h"
+#include "libs/libruntimeiospatch/runtimeiospatch.h"
 #include "utils/tools.h"
 #include "gecko.h"
 
@@ -74,16 +75,16 @@ bool IosLoader::IsD2X(s32 ios)
  * Loads CIOS (If possible the one from the settings file).
  * @return 0 if a cios has been successfully loaded. Else a value below 0 is returned.
  */
-s32 IosLoader::LoadAppCios()
+s32 IosLoader::LoadAppCios(u8 ios)
 {
 	u32 activeCios = IOS_GetVersion();
 	s32 ret = -1;
 
 	// We have what we need
-	if((int) activeCios == Settings.LoaderIOS)
+	if((int) activeCios == ios)
 		return 0;
 
-	u8 ciosLoadPriority[] = { Settings.LoaderIOS, 249, 250, 222, 223, 245, 246, 247, 248 }; // Ascending.
+	u8 ciosLoadPriority[] = { ios, 249, 250, 222, 223, 245, 246, 247, 248 }; // Ascending
 
 
 	for (u32 i = 0; i < (sizeof(ciosLoadPriority)/sizeof(ciosLoadPriority[0])); ++i)
@@ -98,7 +99,7 @@ s32 IosLoader::LoadAppCios()
 
 		if ((ret = ReloadIosSafe(cios)) > -1)
 		{
-			// Remember working cios.
+			// Remember working cios
 			Settings.LoaderIOS = cios;
 			break;
 		}
@@ -165,7 +166,7 @@ s32 IosLoader::ReloadIosSafe(s32 ios)
 	}
 
 	s32 r = ReloadIosKeepingRights(ios);
-	if (r >= 0) WII_Initialize();
+	if(r >= 0) WII_Initialize();
 
 	IosLoader::LoadIOSModules(IOS_GetVersion(), IOS_GetRevision());
 
@@ -177,37 +178,8 @@ s32 IosLoader::ReloadIosSafe(s32 ios)
  */
 s32 IosLoader::ReloadIosKeepingRights(s32 ios)
 {
-	if (CheckAHBPROT())
-	{
-		static const u16 ticket_check[] = {
-			0x685B,		  // ldr  r3, [r3, #4] ; Get TMD pointer
-			0x22EC, 0x0052,  // movs r2, 0x1D8	; Set offset of access rights field in TMD
-			0x189B,		  // adds r3, r3, r2   ; Add offset to TMD pointer
-			0x681B,		  // ldr  r3, [r3]	 ; Load access rights. We'll hack it with full access rights!!!
-			0x4698,		  // mov  r8, r3	   ; Store it for the DVD video bitcheck later
-			0x07DB		   // lsls r3, r3, 0x1F ; check AHBPROT bit
-		};
-
-		/* Disable MEM 2 protection */
-		write16(MEM2_PROT, 2);
-
-		for (u16 *patchme = ES_MODULE_START; patchme < ES_MODULE_END; patchme++)
-		{
-			if (!memcmp(patchme, ticket_check, sizeof(ticket_check)))
-			{
-				gprintf("ReloadIos: Found TMD access rights check at %p\n", patchme);
-
-				/* Apply patch */
-				patchme[ES_HACK_OFFSET] = 0x23FF; // li r3, 0xFF ; Set full access rights
-
-				/* Flush cache */
-				DCFlushRange(patchme+ES_HACK_OFFSET, 2);
-				break;
-			}
-		}
-	}
-
-	/* Reload IOS. MEM2 protection is implicitly re-enabled */
+	IosPatch_AHBPROT(false);
+	// Reload IOS. MEM2 protection is implicitly re-enabled
 	return IOS_ReloadIOS(ios);
 }
 

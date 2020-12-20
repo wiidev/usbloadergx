@@ -810,7 +810,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 		return -1;
 	}
 
-	if(!CheckAHBPROT())
+	if(!AHBPROT_DISABLED)
 	{
 		WindowPrompt(tr("Error:"), fmt(tr("%s requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."),LoaderName), tr("OK"));
 		return -1;
@@ -1053,7 +1053,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	const char *ninLoaderPath = game_cfg->NINLoaderPath.size() == 0 ? Settings.NINLoaderPath : game_cfg->NINLoaderPath.c_str();
 
 
-	if(!CheckAHBPROT())
+	if(!AHBPROT_DISABLED)
 	{
 		WindowPrompt(tr("Error:"), fmt(tr("%s requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."),LoaderName), tr("OK"));
 		return -1;

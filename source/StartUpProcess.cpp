@@ -237,7 +237,7 @@ int StartUpProcess::Execute()
 	Settings.EntryIOS = IOS_GetVersion();
 
 	// Reloading to cIOS 249 fixes compatibility issues with old forwarders
-	IosLoader::ReloadIosSafe(249);
+	s32 ret = IosLoader::ReloadIosSafe(249);
 
 	// Reload to the IOS set in meta.xml
 	if(Settings.UseArgumentIOS)
@@ -250,15 +250,13 @@ int StartUpProcess::Execute()
 			Sys_BackToLoader();
 		}
 	}
-	else if(BUILD_IOS != 249)
+	// This prevents an unnecessary IOS reload
+	else if(BUILD_IOS != 249 || ret < 0)
 	{
-		// Reload to the default IOS (58) if nothing is set in meta.xml
-		IosLoader::ReloadIosSafe(BUILD_IOS);
-
-		if(!AHBPROT_DISABLED || (AHBPROT_DISABLED && IOS_GetVersion() != BUILD_IOS))
+		// Reload to the default IOS (58) or a cIOS if nothing is set in meta.xml
+		if(IosLoader::LoadAppCios(BUILD_IOS) < 0)
 		{
-			
-			SetTextf("Failed loading %sIOS %i. USB Loader GX requires a cIOS or IOS58 with AHB access. Exiting...\n", BUILD_IOS >= 200 ? "c" : "", BUILD_IOS);
+			SetTextf("Failed to load a cIOS or IOS58 with AHB access. Exiting...\n");
 			sleep(5);
 			Sys_BackToLoader();
 		}
@@ -305,12 +303,12 @@ int StartUpProcess::Execute()
 		Wpad_Disconnect();
 
 		// Loading now the cIOS setup in the settings
-		IosLoader::LoadAppCios();
-
-		SetTextf("Reloaded into cIOS %i R%i\n", IOS_GetVersion(), IOS_GetRevision());
-
-		// Re-Mount devices
-		SetTextf("Reinitializing devices\n");
+		if(IosLoader::LoadAppCios(Settings.LoaderIOS) > -1)
+		{
+			SetTextf("Reloaded into cIOS %i R%i\n", IOS_GetVersion(), IOS_GetRevision());
+			// Re-Mount devices
+			SetTextf("Reinitializing devices\n");
+		}
 		DeviceHandler::Instance()->MountSD();
 		if(Settings.USBAutoMount == ON)
 		{

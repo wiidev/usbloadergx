@@ -4,8 +4,6 @@
 #include <gccore.h>
 #include <ogc/machine/processor.h>
 
-#define CheckAHBPROT()	(read32(0x0D800064) == 0xFFFFFFFF)
-
 enum MiosInfo
 {
 	DEFAULT_MIOS,
@@ -84,7 +82,7 @@ typedef struct _iosinfo_t
 class IosLoader
 {
 	public:
-		static s32 LoadAppCios();
+		static s32 LoadAppCios(u8 ios);
 		static s32 LoadGameCios(s32 ios);
 		static s32 ReloadIosSafe(s32 ios);
 		static s32 ReloadIosKeepingRights(s32 ios);
