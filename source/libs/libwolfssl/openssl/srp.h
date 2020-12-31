@@ -1,4 +1,4 @@
-/* wolfssl_version.h.in
+/* srp.h
  *
  * Copyright (C) 2006-2020 wolfSSL Inc.
  *
@@ -19,22 +19,11 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
  */
 
+#ifndef WOLFSSL_SRP_H_
+#define WOLFSSL_SRP_H_
 
-#ifndef WOLFSSL_VERSION_H
-#define WOLFSSL_VERSION_H
+#include <libs/libwolfssl/wolfcrypt/srp.h>
 
+#define SRP_MINIMAL_N SRP_MODULUS_MIN_BITS
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#define LIBWOLFSSL_VERSION_STRING "4.6.0"
-#define LIBWOLFSSL_VERSION_HEX 0x04006000
-
-#ifdef __cplusplus
-}
-#endif
-
-
-#endif /* WOLFSSL_VERSION_H */
-
+#endif /* WOLFSSL_SRP_H_ */

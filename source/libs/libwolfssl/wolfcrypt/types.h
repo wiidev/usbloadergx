@@ -154,6 +154,7 @@ decouple library dependencies with standard string, memory and so on.
         #ifdef WORD64_AVAILABLE
             #define WOLFCRYPT_SLOW_WORD64
         #endif
+        #define WC_32BIT_CPU
     #endif
 
 #elif defined(WC_16BIT_CPU)
@@ -167,6 +168,7 @@ decouple library dependencies with standard string, memory and so on.
         typedef word32 wolfssl_word;
         #define MP_16BIT  /* for mp_int, mp_word needs to be twice as big as
                              mp_digit, no 64 bit type so make mp_digit 16 bit */
+        #define WC_32BIT_CPU
 #endif
 
     enum {
@@ -493,11 +495,12 @@ decouple library dependencies with standard string, memory and so on.
 
         #define XSTRLEN(s1)       strlen((s1))
         #define XSTRNCPY(s1,s2,n) strncpy((s1),(s2),(n))
-        /* strstr, strncmp, and strncat only used by wolfSSL proper,
+        /* strstr, strncmp, strcmp, and strncat only used by wolfSSL proper,
          * not required for wolfCrypt only */
         #define XSTRSTR(s1,s2)    strstr((s1),(s2))
         #define XSTRNSTR(s1,s2,n) mystrnstr((s1),(s2),(n))
         #define XSTRNCMP(s1,s2,n) strncmp((s1),(s2),(n))
+        #define XSTRCMP(s1,s2)    strcmp((s1),(s2))
         #define XSTRNCAT(s1,s2,n) strncat((s1),(s2),(n))
 
         #ifdef USE_WOLF_STRSEP
@@ -647,9 +650,12 @@ decouple library dependencies with standard string, memory and so on.
                 #include <ctype.h>
             #endif
 	    #if defined(HAVE_ECC) || defined(HAVE_OCSP) || \
-            defined(WOLFSSL_KEY_GEN) || !defined(NO_DSA)
+            defined(WOLFSSL_KEY_GEN) || !defined(NO_DSA) || \
+            defined(OPENSSL_EXTRA)
             #define XTOUPPER(c)     toupper((c))
-            #define XISALPHA(c)     isalpha((c))
+        #endif
+        #ifdef OPENSSL_ALL
+        #define XISALNUM(c)     isalnum((c))
         #endif
         /* needed by wolfSSL_check_domain_name() */
         #define XTOLOWER(c)      tolower((c))
@@ -784,7 +790,8 @@ decouple library dependencies with standard string, memory and so on.
 
     /* hash types */
     enum wc_HashType {
-    #if defined(HAVE_SELFTEST) || defined(HAVE_FIPS)
+    #if defined(HAVE_SELFTEST) || defined(HAVE_FIPS) && \
+        (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION <= 2))
         /* In selftest build, WC_* types are not mapped to WC_HASH_TYPE types.
          * Values here are based on old selftest hmac.h enum, with additions.
          * These values are fixed for backwards FIPS compatibility */
@@ -858,8 +865,10 @@ decouple library dependencies with standard string, memory and so on.
         WC_PK_TYPE_CURVE25519 = 7,
         WC_PK_TYPE_RSA_KEYGEN = 8,
         WC_PK_TYPE_EC_KEYGEN = 9,
+        WC_PK_TYPE_RSA_CHECK_PRIV_KEY = 10,
+        WC_PK_TYPE_EC_CHECK_PRIV_KEY = 11,
 
-        WC_PK_TYPE_MAX = WC_PK_TYPE_EC_KEYGEN
+        WC_PK_TYPE_MAX = WC_PK_TYPE_EC_CHECK_PRIV_KEY
     };
 
 

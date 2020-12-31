@@ -33,7 +33,7 @@
    may not be faster on all
 */
 #include <libs/libwolfssl/wolfcrypt/types.h>       /* will set MP_xxBIT if not default */
-#ifdef WOLFSSL_SP_MATH
+#if defined(WOLFSSL_SP_MATH) || defined(WOLFSSL_SP_MATH_ALL)
     #include <libs/libwolfssl/wolfcrypt/sp_int.h>
 #elif defined(USE_FAST_MATH)
     #include <libs/libwolfssl/wolfcrypt/tfm.h>
@@ -161,7 +161,7 @@ extern "C" {
 #define MP_OKAY       0   /* ok result */
 #define MP_MEM        -2  /* out of mem */
 #define MP_VAL        -3  /* invalid input */
-#define MP_NOT_INF	  -4  /* point not at infinity */
+#define MP_NOT_INF    -4  /* point not at infinity */
 #define MP_RANGE      MP_NOT_INF
 
 #define MP_YES        1   /* yes response */

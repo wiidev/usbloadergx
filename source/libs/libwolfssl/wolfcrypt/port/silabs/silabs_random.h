@@ -1,4 +1,4 @@
-/* wolfssl_version.h.in
+/* silabs_random.h
  *
  * Copyright (C) 2006-2020 wolfSSL Inc.
  *
@@ -20,21 +20,16 @@
  */
 
 
-#ifndef WOLFSSL_VERSION_H
-#define WOLFSSL_VERSION_H
+#ifndef _SILABS_RANDOM_H_
+#define _SILABS_RANDOM_H_
 
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#if defined(WOLFSSL_SILABS_SE_ACCEL)
 
-#define LIBWOLFSSL_VERSION_STRING "4.6.0"
-#define LIBWOLFSSL_VERSION_HEX 0x04006000
+#include <libs/libwolfssl/wolfcrypt/types.h>
 
-#ifdef __cplusplus
-}
-#endif
+int silabs_GenerateRand(byte* output, word32 sz);
 
+#endif /* WOLFSSL_SILABS_SE_ACCEL */
 
-#endif /* WOLFSSL_VERSION_H */
-
+#endif /* _SILABS_RANDOM_H_ */

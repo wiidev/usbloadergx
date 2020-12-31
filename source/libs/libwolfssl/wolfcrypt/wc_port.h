@@ -81,6 +81,7 @@
     _Pragma("GCC diagnostic ignored \"-Wsign-compare\"");
     _Pragma("GCC diagnostic ignored \"-Wpointer-sign\"");
     _Pragma("GCC diagnostic ignored \"-Wbad-function-cast\"");
+    _Pragma("GCC diagnostic ignored \"-Wdiscarded-qualifiers\"");
 
     #include <linux/kconfig.h>
     #include <linux/kernel.h>
@@ -88,6 +89,7 @@
     #include <linux/ctype.h>
     #include <linux/init.h>
     #include <linux/module.h>
+    #include <linux/mm.h>
     #ifndef SINGLE_THREADED
         #include <linux/kthread.h>
     #endif
@@ -99,18 +101,51 @@
         #else
             #include <asm/simd.h>
         #endif
-        #define SAVE_VECTOR_REGISTERS() kernel_fpu_begin()
-        #define RESTORE_VECTOR_REGISTERS() kernel_fpu_end()
+        #ifndef SAVE_VECTOR_REGISTERS
+            #define SAVE_VECTOR_REGISTERS() kernel_fpu_begin()
+        #endif
+        #ifndef RESTORE_VECTOR_REGISTERS
+            #define RESTORE_VECTOR_REGISTERS() kernel_fpu_end()
+        #endif
     #elif defined(WOLFSSL_ARMASM)
         #include <asm/fpsimd.h>
-        #define SAVE_VECTOR_REGISTERS() ({ preempt_disable(); fpsimd_preserve_current_state(); })
-        #define RESTORE_VECTOR_REGISTERS() ({ fpsimd_restore_current_state(); preempt_enable(); })
+        #ifndef SAVE_VECTOR_REGISTERS
+            #define SAVE_VECTOR_REGISTERS() ({ preempt_disable(); fpsimd_preserve_current_state(); })
+        #endif
+        #ifndef RESTORE_VECTOR_REGISTERS
+            #define RESTORE_VECTOR_REGISTERS() ({ fpsimd_restore_current_state(); preempt_enable(); })
+        #endif
     #else
-        #define SAVE_VECTOR_REGISTERS() ({})
-        #define RESTORE_VECTOR_REGISTERS() ({})
+        #ifndef SAVE_VECTOR_REGISTERS
+            #define SAVE_VECTOR_REGISTERS() ({})
+        #endif
+        #ifndef RESTORE_VECTOR_REGISTERS
+            #define RESTORE_VECTOR_REGISTERS() ({})
+        #endif
     #endif
 
     _Pragma("GCC diagnostic pop");
+
+    /* Linux headers define these using C expressions, but we need
+     * them to be evaluable by the preprocessor, for use in sp_int.h.
+     */
+    _Static_assert(sizeof(ULONG_MAX) == 8, "WOLFSSL_LINUXKM supported only on targets with 64 bit long words.");
+    #undef UCHAR_MAX
+    #define UCHAR_MAX 255
+    #undef USHRT_MAX
+    #define USHRT_MAX 65535
+    #undef UINT_MAX
+    #define UINT_MAX 4294967295U
+    #undef ULONG_MAX
+    #define ULONG_MAX 18446744073709551615UL
+    #undef ULLONG_MAX
+    #define ULLONG_MAX ULONG_MAX
+    #undef INT_MAX
+    #define INT_MAX 2147483647
+    #undef LONG_MAX
+    #define LONG_MAX 9223372036854775807L
+    #undef LLONG_MAX
+    #define LLONG_MAX LONG_MAX
 
     /* remove this multifariously conflicting macro, picked up from
      * Linux arch/<arch>/include/asm/current.h.
@@ -122,9 +157,17 @@
      */
     #define _MM_MALLOC_H_INCLUDED
 
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
+    /* kvmalloc()/kvfree() and friends added in linux commit a7c3e901 */
+    #define malloc(x) kvmalloc(x, GFP_KERNEL)
+    #define free(x) kvfree(x)
+    void *lkm_realloc(void *ptr, size_t newsize);
+    #define realloc(x, y) lkm_realloc(x, y)
+#else
     #define malloc(x) kmalloc(x, GFP_KERNEL)
     #define free(x) kfree(x)
     #define realloc(x,y) krealloc(x, y, GFP_KERNEL)
+#endif
 
     /* min() and max() in linux/kernel.h over-aggressively type-check, producing
      * myriad spurious -Werrors throughout the codebase.
@@ -157,8 +200,10 @@
 
 #else /* ! WOLFSSL_LINUXKM */
 
-    #ifdef BUILDING_WOLFSSL
+    #ifndef SAVE_VECTOR_REGISTERS
         #define SAVE_VECTOR_REGISTERS() do{}while(0)
+    #endif
+    #ifndef RESTORE_VECTOR_REGISTERS
         #define RESTORE_VECTOR_REGISTERS() do{}while(0)
     #endif
 
@@ -192,6 +237,8 @@
 #elif defined(MICRIUM)
     /* do nothing, just don't pick Unix */
 #elif defined(FREERTOS) || defined(FREERTOS_TCP) || defined(WOLFSSL_SAFERTOS)
+    /* do nothing */
+#elif defined(RTTHREAD)
     /* do nothing */
 #elif defined(EBSNET)
     /* do nothing */
@@ -298,6 +345,9 @@
         #include "FreeRTOS.h"
         #include "semphr.h"
 		typedef SemaphoreHandle_t  wolfSSL_Mutex;
+    #elif defined (RTTHREAD)
+        #include "rtthread.h"
+        typedef rt_mutex_t wolfSSL_Mutex;
     #elif defined(WOLFSSL_SAFERTOS)
         typedef struct wolfSSL_Mutex {
             signed char mutexBuffer[portQUEUE_OVERHEAD_BYTES];
@@ -408,6 +458,11 @@ WOLFSSL_API int wc_SetMutexCb(mutex_cb* cb);
 /* main crypto initialization function */
 WOLFSSL_API int wolfCrypt_Init(void);
 WOLFSSL_API int wolfCrypt_Cleanup(void);
+
+#ifdef WOLFSSL_TRACK_MEMORY_VERBOSE
+    WOLFSSL_API long wolfCrypt_heap_peakAllocs_checkpoint(void);
+    WOLFSSL_API long wolfCrypt_heap_peakBytes_checkpoint(void);
+#endif
 
 
 /* FILESYSTEM SECTION */
@@ -564,6 +619,7 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #else
         #define XFOPEN     fopen
     #endif
+    #define XFDOPEN    fdopen
     #define XFSEEK     fseek
     #define XFTELL     ftell
     #define XREWIND    rewind
@@ -579,6 +635,9 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
         #include <dirent.h>
         #include <unistd.h>
         #include <sys/stat.h>
+        #define XWRITE      write
+        #define XREAD       read
+        #define XCLOSE      close
     #endif
 #endif
 
@@ -786,7 +845,7 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #ifdef BUILDING_WOLFSSL
 
     /* includes are all above, with incompatible warnings masked out. */
-    #if LINUX_VERSION_CODE < KERNEL_VERSION(5, 0, 0)
+    #if LINUX_VERSION_CODE < KERNEL_VERSION(5, 5, 0)
     typedef __kernel_time_t time_t;
     #else
     typedef __kernel_time64_t time_t;
