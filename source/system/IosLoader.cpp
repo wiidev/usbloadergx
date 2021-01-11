@@ -177,7 +177,6 @@ s32 IosLoader::ReloadIosSafe(s32 ios)
  */
 s32 IosLoader::ReloadIosKeepingRights(s32 ios)
 {
-	bool patched;
 	if (CheckAHBPROT())
 	{
 		static const u16 ticket_check[] = {
@@ -200,7 +199,6 @@ s32 IosLoader::ReloadIosKeepingRights(s32 ios)
 
 				/* Apply patch */
 				patchme[ES_HACK_OFFSET] = 0x23FF; // li r3, 0xFF ; Set full access rights
-				patched = true;
 
 				/* Flush cache */
 				DCFlushRange(patchme+ES_HACK_OFFSET, 2);
@@ -208,8 +206,6 @@ s32 IosLoader::ReloadIosKeepingRights(s32 ios)
 			}
 		}
 	}
-	if (!patched)
-		IosPatch_AHBPROT(false);
 	// Reload IOS. MEM2 protection is implicitly re-enabled
 	return IOS_ReloadIOS(ios);
 }

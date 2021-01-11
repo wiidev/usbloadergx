@@ -236,37 +236,46 @@ int StartUpProcess::Execute()
 {
 	Settings.EntryIOS = IOS_GetVersion();
 
-	// Reloading to cIOS 249 fixes compatibility issues with old forwarders
-	IosLoader::ReloadIosSafe(249);
+	gprintf("Current IOS: %d - have AHB access: %s\n", IOS_GetVersion(), AHBPROT_DISABLED ? "yes" : "no");
 
-	// Reload to the default IOS or the IOS set in meta.xml
-	if(Settings.UseArgumentIOS)	
+	// Reloading to cIOS 249 fixes compatibility issues with old forwarders
+	// Only do that if we don't already have full HW access.
+	if (!AHBPROT_DISABLED) {
+		gprintf("No AHBPROT access - probably an old forwarder. Reload to IOS249\n");
+		IosLoader::ReloadIosSafe(249);
+		gprintf("Current IOS: %d - have AHB access: %s\n", IOS_GetVersion(), AHBPROT_DISABLED ? "yes" : "no");
+	}
+
+	if(Settings.UseArgumentIOS || IOS_GetVersion() != 58)	{
+		// Reload to the default IOS or the IOS set in meta.xml
 		SetTextf("Loading %sIOS %i requested in meta.xml\n", Settings.LoaderIOS >= 200 ? "c" : "", Settings.LoaderIOS);
-	if(IosLoader::LoadAppCios(Settings.UseArgumentIOS ? Settings.LoaderIOS : BUILD_IOS) < 0)
-	{
-		// We can allow now operation without cIOS in channel mode with AHB access
-		if(!AHBPROT_DISABLED || (AHBPROT_DISABLED && IOS_GetVersion() != 58))
+		if(IosLoader::LoadAppCios(Settings.LoaderIOS) < 0)
 		{
-			SetTextf("Failed to load IOS. USB Loader GX requires a cIOS or IOS58 with AHB access. Exiting...\n");
+			// We can allow now operation without cIOS in channel mode with AHB access
+			if(!AHBPROT_DISABLED || (AHBPROT_DISABLED && IOS_GetVersion() != 58))
+			{
+				SetTextf("Failed to load IOS. USB Loader GX requires a cIOS or IOS58 with AHB access. Exiting...\n");
+				sleep(5);
+				Sys_BackToLoader();
+			}
+			else
+			{
+				Settings.LoaderIOS = 58;
+				SetTextf("Running on IOS58. Wii disc based games and some channels will not work.");
+				sleep(5);
+			}
+		}
+
+		if(!AHBPROT_DISABLED && IOS_GetVersion() < 200)
+		{
+			SetTextf("Failed loading IOS %i. USB Loader GX requires a cIOS or IOS58 with AHB access. Exiting...\n", IOS_GetVersion());
 			sleep(5);
 			Sys_BackToLoader();
 		}
-		else
-		{
-			Settings.LoaderIOS = 58;
-			SetTextf("Running on IOS58. Wii disc based games and some channels will not work.");
-			sleep(5);
-		}
-	}
-
-	if(!AHBPROT_DISABLED && IOS_GetVersion() < 200)
-	{
-		SetTextf("Failed loading IOS %i. USB Loader GX requires a cIOS or IOS58 with AHB access. Exiting...\n", IOS_GetVersion());
-		sleep(5);
-		Sys_BackToLoader();
 	}
 
 	SetupPads();
+	gprintf("Current IOS: %d - have AHB access: %s\n", IOS_GetVersion(), AHBPROT_DISABLED ? "yes" : "no");
 
 	SetTextf("Initializing sd card\n");
 	DeviceHandler::Instance()->MountSD();
@@ -306,6 +315,7 @@ int StartUpProcess::Execute()
 			// Re-Mount devices
 			SetTextf("Reinitializing devices\n");
 		}
+		gprintf("Current IOS: %d - have AHB access: %s\n", IOS_GetVersion(), AHBPROT_DISABLED ? "yes" : "no");
 		DeviceHandler::Instance()->MountSD();
 		if(Settings.USBAutoMount == ON)
 		{
@@ -348,6 +358,8 @@ int StartUpProcess::Execute()
 		else
 			NandTitles.Get(); // get NAND channel's titles
 	}
+
+	gprintf("Current IOS: %d - have AHB access: %s\n", IOS_GetVersion(), AHBPROT_DISABLED ? "yes" : "no");
 
 	// We only initialize once for the whole session
 	ISFS_Initialize();
