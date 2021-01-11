@@ -237,28 +237,25 @@ int StartUpProcess::Execute()
 	Settings.EntryIOS = IOS_GetVersion();
 
 	// Reloading to cIOS 249 fixes compatibility issues with old forwarders
-	s32 ret = IosLoader::ReloadIosSafe(249);
+	IosLoader::ReloadIosSafe(249);
 
-	// Reload to the IOS set in meta.xml
-	if(Settings.UseArgumentIOS)
-	{
+	// Reload to the default IOS or the IOS set in meta.xml
+	if(Settings.UseArgumentIOS)	
 		SetTextf("Loading %sIOS %i requested in meta.xml\n", Settings.LoaderIOS >= 200 ? "c" : "", Settings.LoaderIOS);
-		if(IosLoader::ReloadIosSafe(Settings.LoaderIOS) < 0)
+	if(IosLoader::LoadAppCios(Settings.UseArgumentIOS ? Settings.LoaderIOS : BUILD_IOS) < 0)
+	{
+		// We can allow now operation without cIOS in channel mode with AHB access
+		if(!AHBPROT_DISABLED || (AHBPROT_DISABLED && IOS_GetVersion() != 58))
 		{
-			SetTextf("Failed to load %sIOS %i requested in meta.xml. Exiting...\n", Settings.LoaderIOS >= 200 ? "c" : "", Settings.LoaderIOS);
+			SetTextf("Failed to load IOS. USB Loader GX requires a cIOS or IOS58 with AHB access. Exiting...\n");
 			sleep(5);
 			Sys_BackToLoader();
 		}
-	}
-	// This prevents an unnecessary IOS reload
-	else if(BUILD_IOS != 249 || ret < 0)
-	{
-		// Reload to the default IOS (58) or a cIOS if nothing is set in meta.xml
-		if(IosLoader::LoadAppCios(BUILD_IOS) < 0)
+		else
 		{
-			SetTextf("Failed to load a cIOS or IOS58 with AHB access. Exiting...\n");
+			Settings.LoaderIOS = 58;
+			SetTextf("Running on IOS58. Wii disc based games and some channels will not work.");
 			sleep(5);
-			Sys_BackToLoader();
 		}
 	}
 
@@ -299,10 +296,10 @@ int StartUpProcess::Execute()
 		if(Settings.USBAutoMount == ON)
 			USBStorage2_Deinit();
 
-		// Shut down pads
+		// Shutdown pads
 		Wpad_Disconnect();
 
-		// Loading now the cIOS setup in the settings
+		// Now load the cIOS that was set in the settings menu
 		if(IosLoader::LoadAppCios(Settings.LoaderIOS) > -1)
 		{
 			SetTextf("Reloaded into cIOS %i R%i\n", IOS_GetVersion(), IOS_GetRevision());
