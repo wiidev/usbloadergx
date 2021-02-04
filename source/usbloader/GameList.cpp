@@ -334,7 +334,18 @@ int GameList::FilterList(const wchar_t *gameFilter)
 
 	FilteredList.clear();
 
-	if (Settings.UseGameHeaderCache && isCacheFile(FilteredListCacheFileName(gameFilter)))
+	int allType = DISABLED;
+	// Verify the display mode for category "All"
+	for (u32 n = 0; n < Settings.EnabledCategories.size(); ++n)
+	{
+		if (Settings.EnabledCategories[n] == 0)
+		{
+			allType = ENABLED;
+			break;
+		}
+	}
+
+	if (Settings.UseGameHeaderCache && allType == ENABLED && isCacheFile(FilteredListCacheFileName(gameFilter)))
 	{
 		LoadFilteredListCache(FilteredList, GameFilter.c_str());
 		GuiSearchBar::FilterList(FilteredList, GameFilter);
@@ -363,7 +374,7 @@ int GameList::FilterList(const wchar_t *gameFilter)
 
 	SortList();
 
-	if (Settings.UseGameHeaderCache && !FilteredList.empty() && (Settings.GameSort & SORT_RANKING) == 0 && (Settings.GameSort & SORT_PLAYCOUNT) == 0 && (Settings.GameSort & SORT_FAVORITE) == 0)
+	if (Settings.UseGameHeaderCache && allType == ENABLED && !FilteredList.empty() && (Settings.GameSort & SORT_RANKING) == 0 && (Settings.GameSort & SORT_PLAYCOUNT) == 0 && (Settings.GameSort & SORT_FAVORITE) == 0)
 		SaveFilteredListCache(FilteredList, GameFilter.c_str());
 
 	return FilteredList.size();
