@@ -148,6 +148,7 @@ int MenuGCInstall()
 		if(ret >= 0) {
 			//! success
 			installed_games++;
+			ResetGameHeaderCache();
 		}
 		else if(ret == PROGRESS_CANCELED)
 		{
