@@ -38,8 +38,6 @@
 #include "wpad.h"
 #include "sys.h"
 
-extern bool updateavailable;
-
 struct discHdr *dvdheader = NULL;
 static bool Exiting = false;
 
@@ -905,16 +903,7 @@ int GameBrowseMenu::MainLoop()
 	UpdateClock();
 	CheckDiscSlotUpdate();
 
-	if (updateavailable == true)
-	{
-		gprintf("\tUpdate Available\n");
-		SetState(STATE_DISABLED);
-		UpdateApp();
-		updateavailable = false;
-		SetState(STATE_DEFAULT);
-	}
-
-	else if (poweroffBtn->GetState() == STATE_CLICKED)
+	if (poweroffBtn->GetState() == STATE_CLICKED)
 	{
 		gprintf("\tpoweroffBtn clicked\n");
 		int choice = 0;

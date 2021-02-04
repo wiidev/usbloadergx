@@ -11,6 +11,7 @@
 #include "networkops.h"
 #include "https.h"
 #include "update.h"
+#include "gecko.h"
 #include "settings/ProxySettings.h"
 
 #define PORT 4299
@@ -19,10 +20,8 @@
 u32 infilesize = 0;
 u32 uncfilesize = 0;
 
-bool updateavailable = false;
 s32 connection;
 static s32 socket;
-static bool updatechecked = false;
 static bool networkinitialized = false;
 static bool checkincomming = false;
 static bool waitforanswer = false;
@@ -56,6 +55,7 @@ void Initialize_Network(int retries)
 		getProxyInfo();
 		wolfSSL_Init();
 		networkinitialized = true;
+		gprintf("Initialized network\n");
 		return;
 	}
 }
@@ -248,7 +248,7 @@ void ResumeNetworkWait()
 }
 
 /*********************************************************************************
- * Networkthread for background network initialize and update check with idle prio
+ * Networkthread for background network initialize
  *********************************************************************************/
 static void *networkinitcallback(void *arg)
 {
@@ -259,16 +259,8 @@ static void *networkinitcallback(void *arg)
 
 		Initialize_Network();
 
-		if (networkinitialized == true && updatechecked == false)
-		{
-
-			if (CheckUpdate() > 0)
-				updateavailable = true;
-
-			//suspend thread
-			updatechecked = true;
+		if (networkinitialized)
 			networkHalt = true;
-		}
 
 		if (checkincomming)
 			NetworkWait();
