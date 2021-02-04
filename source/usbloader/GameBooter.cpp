@@ -1202,6 +1202,14 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		NIN_cfg_version = 4;
 	else if(NINRev >= 358 && NINRev < 368)
 		NIN_cfg_version = 5;
+	else if(NINRev >= 368 && NINRev < 424)
+		NIN_cfg_version = 6;
+	else if(NINRev >= 424 && NINRev < 431)
+		NIN_cfg_version = 7;
+	else if(NINRev >= 431 && NINRev < 487)
+		NIN_cfg_version = 8;
+	else if(NINRev >= 487)
+		NIN_cfg_version = 9;
 
 
 	// Check USB device
