@@ -235,41 +235,33 @@ int StartUpProcess::Run(int argc, char *argv[])
 int StartUpProcess::Execute()
 {
 	Settings.EntryIOS = IOS_GetVersion();
+	gprintf("Current IOS: %i - have AHB access: %s\n", Settings.EntryIOS, AHBPROT_DISABLED ? "yes" : "no");
 
-	// Reloading to cIOS 249 fixes compatibility issues with old forwarders
-	s32 ret = IosLoader::ReloadIosSafe(249);
-
-	// Reload to the IOS set in meta.xml
-	if(Settings.UseArgumentIOS)
+	// Only reload the IOS if the XML requests it, we don't have full HW access or the entry IOS isn't 58
+	if(Settings.UseArgumentIOS || !AHBPROT_DISABLED || IOS_GetVersion() != 58)
 	{
-		SetTextf("Loading %sIOS %i requested in meta.xml\n", Settings.LoaderIOS >= 200 ? "c" : "", Settings.LoaderIOS);
-		if(IosLoader::ReloadIosSafe(Settings.LoaderIOS) < 0)
+		if (Settings.UseArgumentIOS)
+			SetTextf("Reloading to %sIOS %i requested in meta.xml\n", Settings.LoaderIOS >= 200 ? "c" : "", Settings.LoaderIOS);
+		else
+			SetTextf("Reloading to %sIOS %i\n", Settings.LoaderIOS >= 200 ? "c" : "", Settings.LoaderIOS);
+		// Reload to the default loader IOS or the IOS set in meta.xml
+		// And on failure try cIOS 249, 250, 222, 223, 245, 246, 247 and 248
+		if(IosLoader::LoadAppCios(Settings.LoaderIOS) < 0)
 		{
-			SetTextf("Failed to load %sIOS %i requested in meta.xml. Exiting...\n", Settings.LoaderIOS >= 200 ? "c" : "", Settings.LoaderIOS);
+			SetTextf("Failed to load an IOS. USB Loader GX requires a cIOS or IOS58 with AHB access. Exiting...\n");
 			sleep(5);
 			Sys_BackToLoader();
 		}
-	}
-	// This prevents an unnecessary IOS reload
-	else if(BUILD_IOS != 249 || ret < 0)
-	{
-		// Reload to the default IOS (58) or a cIOS if nothing is set in meta.xml
-		if(IosLoader::LoadAppCios(BUILD_IOS) < 0)
+		if(!AHBPROT_DISABLED && IOS_GetVersion() < 200)
 		{
-			SetTextf("Failed to load a cIOS or IOS58 with AHB access. Exiting...\n");
+			SetTextf("Failed to load into IOS %i. USB Loader GX requires a cIOS or IOS58 with AHB access. Exiting...\n", IOS_GetVersion());
 			sleep(5);
 			Sys_BackToLoader();
 		}
-	}
-
-	if(!AHBPROT_DISABLED && IOS_GetVersion() < 200)
-	{
-		SetTextf("Failed loading IOS %i. USB Loader GX requires a cIOS or IOS58 with AHB access. Exiting...\n", IOS_GetVersion());
-		sleep(5);
-		Sys_BackToLoader();
 	}
 
 	SetupPads();
+	gprintf("Current IOS: %i - have AHB access: %s\n", IOS_GetVersion(), AHBPROT_DISABLED ? "yes" : "no");
 
 	SetTextf("Initializing sd card\n");
 	DeviceHandler::Instance()->MountSD();
@@ -299,16 +291,17 @@ int StartUpProcess::Execute()
 		if(Settings.USBAutoMount == ON)
 			USBStorage2_Deinit();
 
-		// Shut down pads
+		// Shutdown pads
 		Wpad_Disconnect();
 
-		// Loading now the cIOS setup in the settings
+		// Now load the cIOS that was set in the settings menu
 		if(IosLoader::LoadAppCios(Settings.LoaderIOS) > -1)
 		{
 			SetTextf("Reloaded into cIOS %i R%i\n", IOS_GetVersion(), IOS_GetRevision());
 			// Re-Mount devices
 			SetTextf("Reinitializing devices\n");
 		}
+		gprintf("Current IOS: %i - have AHB access: %s\n", IOS_GetVersion(), AHBPROT_DISABLED ? "yes" : "no");
 		DeviceHandler::Instance()->MountSD();
 		if(Settings.USBAutoMount == ON)
 		{
@@ -351,6 +344,8 @@ int StartUpProcess::Execute()
 		else
 			NandTitles.Get(); // get NAND channel's titles
 	}
+
+	gprintf("Current IOS: %i - have AHB access: %s\n", IOS_GetVersion(), AHBPROT_DISABLED ? "yes" : "no");
 
 	// We only initialize once for the whole session
 	ISFS_Initialize();

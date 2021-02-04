@@ -4,6 +4,8 @@
 #include <gccore.h>
 #include <ogc/machine/processor.h>
 
+#define CheckAHBPROT()	(read32(0x0D800064) == 0xFFFFFFFF)
+
 enum MiosInfo
 {
 	DEFAULT_MIOS,
