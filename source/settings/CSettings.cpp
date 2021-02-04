@@ -110,7 +110,7 @@ void CSettings::SetDefault()
 	language = CONSOLE_DEFAULT;
 	ocarina = OFF;
 	hddinfo = CLOCK_HR12;
-	sinfo = ON;
+	sinfo = GAMEINFO_REGION;
 	rumble = ON;
 	GameSort = SORT_ABC;
 	volume = 80;

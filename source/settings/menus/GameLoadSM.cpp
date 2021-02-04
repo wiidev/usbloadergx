@@ -485,7 +485,7 @@ int GameLoadSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		char entered[300];
-		snprintf(entered, sizeof(entered), GameConfig.CustomAddress.c_str());
+		snprintf(entered, sizeof(entered), "%s", GameConfig.CustomAddress.c_str());
 		if (OnScreenKeyboard(entered, sizeof(entered), 0, false, true))
 		{
 			// Only allow letters, numbers, periods and hyphens
