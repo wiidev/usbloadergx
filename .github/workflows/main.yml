@@ -1,6 +1,14 @@
 name: Build binaries
 
-on: [push, pull_request]
+on:
+  push:
+    paths-ignore:
+      - 'HBC/**'
+      - 'Languages/**'
+  pull_request:
+    paths-ignore:
+      - 'HBC/**'
+      - 'Languages/**'
 
 jobs:
   build:
