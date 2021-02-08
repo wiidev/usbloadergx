@@ -236,6 +236,12 @@ msgstr "배너 그리드 레이아웃은 AHBPROT에서만 가능합니다! 새�
 msgid "Banner window is only available with AHBPROT! Please consider installing new HBC version."
 msgstr "배너 창은 AHBPROT에서만 사용할 수 있습니다! 새로운 홈브류 채널 버전을 설치하세요."
 
+msgid "BBA Emulation"
+msgstr "BBA 에뮬레이션"
+
+msgid "BBA Net Profile"
+msgstr "BBA 넷 프로파일"
+
 msgid "Big thanks to:"
 msgstr "큰 감사:"
 
@@ -533,6 +539,9 @@ msgstr "자르기 오버스캔"
 
 msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr "현재의 neek 파일은 neek2o가 아닙니다. 게임 자동 부팅이 비활성화 되었습니다."
+
+msgid "Custom Address"
+msgstr "커스텀 주소"
 
 msgid "Custom Banners"
 msgstr "사용자 정의 배너"
@@ -1053,6 +1062,9 @@ msgstr "전체 커버 다운로드"
 msgid "Full shutdown"
 msgstr "완전한 종료"
 
+msgid "F-Zero AX"
+msgstr "F-제로 AX"
+
 msgid "GAMEID_Gamename"
 msgstr ""
 
@@ -1088,6 +1100,9 @@ msgstr "게임큐브 게임 삭제"
 
 msgid "Game Cube Install Menu"
 msgstr "게임큐브 설치 메뉴"
+
+msgid "Game Header Cache Files Path"
+msgstr "게임 헤더 캐시 파읾 경로"
 
 msgid "Game ID"
 msgstr "게임 ID"
@@ -1680,6 +1695,9 @@ msgstr "오리지날"
 msgid "Original/Customs"
 msgstr "오리지날/사용자 정의"
 
+msgid "OSReport"
+msgstr "OS보고서"
+
 msgid "PAD Hook"
 msgstr "패드 후크"
 
@@ -1808,6 +1826,9 @@ msgstr "리셋"
 
 msgid "Reset BG Music"
 msgstr "배경 음악 리셋"
+
+msgid "Reset Game Header Cache"
+msgstr "게임 헤더 캐시 리셋"
 
 msgid "Reset Playcounter"
 msgstr "Playcounter 리셋"
@@ -2036,6 +2057,9 @@ msgstr "동기화 중..."
 
 msgid "System Default"
 msgstr "기본 시스템"
+
+msgid "System Proxy Settings"
+msgstr "시스템 프록시 설정"
 
 msgid "TChinese"
 msgstr "번체 중국어"
@@ -2280,6 +2304,9 @@ msgstr "언어 파일 업데이트:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "홈브류 디렉토리에 업로드 된 ZIP 파일을 업로드했습니다."
 
+msgid "Use Game Header Cache"
+msgstr "게임 헤더 캐시 사용"
+
 msgid "Use System Font"
 msgstr "시스템 폰트 사용"
 
@@ -2384,7 +2411,7 @@ msgid "WiiU Widescreen"
 msgstr "WiiU 와이드스크린"
 
 msgid "Wiilight"
-msgstr ""
+msgstr "Wii라이트"
 
 msgid "Wiimmfi.de"
 msgstr ""
