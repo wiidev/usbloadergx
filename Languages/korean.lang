@@ -1,18 +1,18 @@
 # USB Loader GX language source file.
-# korean.lang - r1268
+# korean.lang - r1272
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-14 15:50+0100\n"
+"POT-Creation-Date: 2021-02-09 16:02+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
-"Last-Translator: \n"
+"Last-Translator: ddinghoya@gmail.com\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
+"Language: Korean\n"
 
 msgid " could not be downloaded."
 msgstr " 는(은) 다운로드 할 수 없습니다."
@@ -29,7 +29,7 @@ msgstr "%i 파일이 서버에 없습니다!"
 
 #, c-format
 msgid "%i missing files"
-msgstr "%i 파일 누락"
+msgstr "%i 파일이 누락되었습니다."
 
 #, c-format
 msgid "%i wad file(s) not processed!"
@@ -37,15 +37,15 @@ msgstr "%i wad 파일을 처리하지 못했습니다!"
 
 #, c-format
 msgid "%i wad found."
-msgstr "%i wad 찾았습니다."
+msgstr "%i wad를 찾았습니다."
 
 #, c-format
 msgid "%s only accepts GameCube backups in ISO format."
 msgstr "%s 는(은) ISO 포맷의 게임큐브 백업만 허용합니다."
 
 #, c-format
-msgid "%s 는(은) AHB 액세스가 필요합니다! 홈브류 채널 또는 업데이트 된 채널 또는 포워더에서 USBLoaderGX를 시작하십시오."
-msgstr ""
+msgid "%s requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."
+msgstr "%s 는(은) AHB 접속이 필요합니다! 홈브류 채널 또는 업데이트 된 채널 또는 포워더에서 USBLoaderGX를 시작하십시오."
 
 msgid "--==       Devolution"
 msgstr "--==       데볼류션"
@@ -101,6 +101,9 @@ msgstr "3D 커버"
 msgid "4 (Adults Only 18+)"
 msgstr "4 (18세 이상)"
 
+msgid "480p Pixel Fix Patch"
+msgstr "480p 픽셀 수정 패치"
+
 msgid "5 min"
 msgstr "5 분"
 
@@ -132,22 +135,25 @@ msgid "All Partitions"
 msgstr "모든 파티션"
 
 msgid "All files extracted."
-msgstr "모든 파일이 추출되었습니다."
+msgstr "모든 파일이 추출 되었습니다."
 
 msgid "All images downloaded successfully."
-msgstr "모든 이미지가 성공적으로 다운로드되었습니다."
+msgstr "모든 이미지가 성공적으로 다운로드 되었습니다."
 
 msgid "All the features of USB Loader GX are unlocked."
-msgstr "USB Loader GX의 모든 기능이 잠금 해제됩니다."
+msgstr "USB Loader GX의 모든 기능이 잠금해제 되었습니다."
 
 msgid "All wad files processed successfully."
-msgstr "모든 wad 파일이 성공적으로 처리되었습니다"
+msgstr "모든 wad 파일이 성공적으로 처리 되었습니다"
 
 msgid "Alternate DOL"
 msgstr "대체 DOL"
 
+msgid "AltWFC"
+msgstr ""
+
 msgid "An example file was created here:"
-msgstr "여기에 예제 파일이 생성되었습니다:"
+msgstr "여기에 예제 파일이 생성 되었습니다:"
 
 msgid "Animation Start"
 msgstr "애니메이션 시작"
@@ -159,34 +165,34 @@ msgid "Apply"
 msgstr "적용"
 
 msgid "Apr"
-msgstr "4월"
+msgstr "4 월"
 
 msgid "Are you really sure you want to delete all selected games from the SD card?"
-msgstr "SD 카드에서 선택한 게임을 모두 삭제 하시겠습니까?"
+msgstr "SD 카드에서 선택한 게임을 모두 삭제 하겠습니까?"
 
 msgid "Are you sure you want to delete this category?"
-msgstr "이 카테고리를 삭제 하시겠습니까?"
+msgstr "이 카테고리를 삭제하겠습니까?"
 
 msgid "Are you sure you want to import game categories from GameTDB?"
-msgstr "GameTDB에서 게임 카테고리를 가져 오시겠습니까?"
+msgstr "GameTDB에서 게임 카테고리를 가져 오겠습니까?"
 
 msgid "Are you sure you want to install on SD?"
-msgstr "SD에 설치 하시겠습니까?"
+msgstr "SD에 설치 하겠습니까?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
-msgstr "USB Loader GX를 잠그시겠습니까?"
+msgstr "USB Loader GX를 잠그겠습니까?"
 
 msgid "Are you sure you want to remount SD?"
-msgstr "SD를 다시 마운트 하시겠습니까?"
+msgstr "SD를 다시 마운트 하겠습니까?"
 
 msgid "Are you sure you want to reset?"
-msgstr "리셋 하시겠습니까?"
+msgstr "리셋 하겠습니까?"
 
 msgid "Are you sure?"
 msgstr "확실합니까?"
 
 msgid "Aspect Ratio"
-msgstr "화면 비율"
+msgstr "화면비"
 
 msgid "Attention!"
 msgstr "주의!"
@@ -195,7 +201,7 @@ msgid "Attention: All savegames will be deleted."
 msgstr "주의: 모든 저장게임이 삭제됩니다."
 
 msgid "Aug"
-msgstr "8월"
+msgstr "8 월"
 
 msgid "Author(s):"
 msgstr "제작자"
@@ -219,7 +225,7 @@ msgid "Back to HBC or Wii Menu"
 msgstr "홈브류 채널 또는 Wii 메뉴로 돌아가기"
 
 msgid "Backgroundmusic"
-msgstr ""
+msgstr "배경음악"
 
 msgid "Banner Animation"
 msgstr "배너 애니메이션"
@@ -249,7 +255,7 @@ msgid "Block Cover Downloads"
 msgstr "커버 다운로드 차단"
 
 msgid "Block Custom Paths"
-msgstr "사용자 정의 경로 차단"
+msgstr "커스텀 경로 차단"
 
 msgid "Block Feature Settings"
 msgstr "기능 설정 차단"
@@ -261,7 +267,7 @@ msgid "Block Game Settings"
 msgstr "게임 설정 차단"
 
 msgid "Block GameID Change"
-msgstr "GameID 변경 차단"
+msgstr "게임ID 변경 차단"
 
 msgid "Block Global Settings"
 msgstr "글로벌 설정 차단"
@@ -276,7 +282,7 @@ msgid "Block Hard Drive Settings"
 msgstr "하드 드라이브 설정 차단"
 
 msgid "Block IOS Reload"
-msgstr "IOS Reload 차딘"
+msgstr "IOS 리로드 차단"
 
 msgid "Block Loader Layout Button"
 msgstr "로더 레이아웃 버튼 차단"
@@ -297,7 +303,7 @@ msgid "Block Reset Settings"
 msgstr "리셋 설정 차단"
 
 msgid "Block SD Reload Button"
-msgstr "SD Reload 버튼 차단"
+msgstr "SD 리로드 버튼 차단"
 
 msgid "Block Sound Settings"
 msgstr "사운드 설정 차단"
@@ -342,21 +348,21 @@ msgid "Cache Titles"
 msgstr "타이틀 캐쉬"
 
 msgid "Can't be formatted"
-msgstr "포맷을 지정할 수 없음"
+msgstr "포맷을 할 수 없습니다."
 
 msgid "Can't create directory"
-msgstr "디렉토리를 생성할 수 없음"
+msgstr "디렉토리를 생성 할 수 없습니다."
 
 #, c-format
 msgid "Can't create file: %s"
-msgstr "파일을 생성할 수 없음: %s"
+msgstr "파일을 생성 할 수 없음: %s"
 
 #, c-format
 msgid "Can't create path: %s"
-msgstr "경로를 생성할 수 없음: %s"
+msgstr "경로를 생성 할 수 없음: %s"
 
 msgid "Can't delete:"
-msgstr "삭제할 수 없음:"
+msgstr "삭제 할 수 없음:"
 
 msgid "Can't mount or unknown disc format."
 msgstr "마운트 할 수 없거나 알 수 없는 디스크 포맷입니다."
@@ -386,7 +392,7 @@ msgid "Categories:"
 msgstr "카테고리:"
 
 msgid "Change Play Path"
-msgstr "플레이 경로 변경"
+msgstr "재생 경로 변경"
 
 msgid "Channel Launcher"
 msgstr "채널 실행기"
@@ -456,7 +462,7 @@ msgid "Continue?"
 msgstr "계속하겠습니까?"
 
 msgid "Controllevel"
-msgstr ""
+msgstr "컨트롤레벨"
 
 msgid "Copy"
 msgstr "복사"
@@ -502,7 +508,7 @@ msgid "Could not initialize network, time out!"
 msgstr "네트워크를 초기화 할 수 없습니다. 시간 초과되었습니다."
 
 msgid "Could not open Disc"
-msgstr "디스크를 열 수 없음"
+msgstr "디스크를 열 수 없습니다."
 
 msgid "Could not open the WiiTDB.xml file."
 msgstr "WiiTDB.xml 파일을 열 수 없습니다."
@@ -534,17 +540,23 @@ msgstr "자르기 오버스캔"
 msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr "현재의 neek 파일은 neek2o가 아닙니다. 게임 자동 부팅이 비활성화 되었습니다."
 
+msgid "Custom Address"
+msgstr "커스텀 주소"
+
 msgid "Custom Banners"
-msgstr "사용자 정의 배너"
+msgstr "커스텀 배너"
 
 msgid "Custom Paths"
-msgstr "사용자 정의 경로"
+msgstr "커스텀 경로"
+
+msgid "Custom"
+msgstr "커스텀"
 
 msgid "Customs"
-msgstr "사용자 정의"
+msgstr "커스텀"
 
 msgid "Customs/Original"
-msgstr "사용자 정의/오리지날"
+msgstr "커스텀/오리지날"
 
 msgid "D Buttons"
 msgstr "D 버튼"
@@ -562,7 +574,7 @@ msgid "Debugger Paused Start"
 msgstr "디버거 일시 중지된 시작"
 
 msgid "Dec"
-msgstr "12월"
+msgstr "12 월"
 
 msgid "Default"
 msgstr "기본"
@@ -619,7 +631,7 @@ msgid "Devolution Loader Path"
 msgstr "데볼루션 로더 경로"
 
 msgid "Devolution's loader.bin file can't be loaded."
-msgstr "데볼루션의 loader.bin 파일을 로드할 수 없습니다."
+msgstr "데볼루션의 loader.bin 파일을 로드 할 수 없습니다."
 
 msgid "Directory does not exist!"
 msgstr "디렉토리가 존재하지 않습니다!"
@@ -655,31 +667,31 @@ msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.
 msgstr "DM(L) v2.6 이상에서 작동하려면 디스크2를 압축되지 않은 포맷으로 설치해야 합니다. 압축된 형식으로 설치 하겠습니까?"
 
 msgid "Discarts"
-msgstr ""
+msgstr "디스크삽화"
 
 msgid "DiskFlip"
-msgstr ""
+msgstr "디스크플립"
 
 msgid "Display"
 msgstr "디스플레이"
 
 msgid "Display as a carousel"
-msgstr "회전으로 표시"
+msgstr "회전 표시"
 
 msgid "Display as a channel grid"
-msgstr "채널 그리드로 표시"
+msgstr "채널 그리드 표시"
 
 msgid "Display as a grid"
-msgstr "그리드로 표시"
+msgstr "그리드 표시"
 
 msgid "Display as a list"
-msgstr "목록으로 표시"
+msgstr "목록 표시"
 
 msgid "Display favorites only"
-msgstr "즐겨찾기만 표시"
+msgstr "즐겨찾기 표시"
 
 msgid "Do you want to apply it now?"
-msgstr "지금 적용 하시겠습니까?"
+msgstr "지금 적용 하겠습니까?"
 
 msgid "Do you want to apply this theme?"
 msgstr "이 테마를 적용 하겠습니까?"
@@ -697,7 +709,7 @@ msgid "Do you want to copy the game to SD or delete a game on SD?"
 msgstr "게임을 SD로 복사하거나 SD에서 게임을 삭제 하겠습니까?"
 
 msgid "Do you want to delete a game on SD?"
-msgstr "SD 게임을 삭제 하시겠습니까?"
+msgstr "SD 게임을 삭제 하겠습니까?"
 
 msgid "Do you want to discard changes?"
 msgstr "변경 사항을 취소 하겠습니까?"
@@ -751,19 +763,19 @@ msgid "Downloading 3D Covers"
 msgstr "3D 커버 다운로드"
 
 msgid "Downloading Custom Banners"
-msgstr "사용자 정의 배너 다운로드"
+msgstr "커스텀 배너 다운로드"
 
 msgid "Downloading Flat Covers"
 msgstr "평면 커버 다운로드"
 
 msgid "Downloading Full HQ Covers"
-msgstr "전체 HQ 커버 다운로드"
+msgstr "전체 고품질 커버 다운로드"
 
 msgid "Downloading Full LQ Covers"
-msgstr "전체 LQ 커버 다운로드"
+msgstr "전체 저품질 커버 다운로드"
 
 msgid "Downloading custom Discarts"
-msgstr "사용자 정의를 다운로드"
+msgstr "커스텀 디스크삽화 다운로드"
 
 msgid "Downloading file..."
 msgstr "파일 다운로드 중 입니다..."
@@ -772,13 +784,13 @@ msgid "Downloading image:"
 msgstr "이미지 다운로드"
 
 msgid "Downloading original Discarts"
-msgstr "원본 디스크를 다운로드"
+msgstr "원본 디스크삽화 다운로드"
 
 msgid "Downloading pagelist:"
-msgstr "페이지목록 다운:"
+msgstr "페이지목록 다운로드:"
 
 msgid "Dump NAND to EmuNand"
-msgstr "NAND를 EmuNand에 덤프"
+msgstr "낸드를 에뮤낸드에 덤프"
 
 msgid "During zoom"
 msgstr "확대/축소 중"
@@ -793,13 +805,13 @@ msgid "ERROR:"
 msgstr "오류"
 
 msgid "ERROR: Can't set up theme."
-msgstr "오류: 테마를 설정할 수 없습니다"
+msgstr "오류: 테마를 설정 할 수 없습니다"
 
 msgid "EmuNAND Wad Manager"
-msgstr "EmuNAND Wad 매니저"
+msgstr "에뮤낸드 Wad 매니저"
 
 msgid "EmuNand Channels"
-msgstr "EmuNand 채널"
+msgstr "에뮤내느 채널"
 
 msgid "Emulated Nand"
 msgstr "에뮬레이트 된 낸드"
@@ -867,22 +879,22 @@ msgid "Exit to where?"
 msgstr "어디서 종료하겠습니까?"
 
 msgid "Export All Saves to EmuNand"
-msgstr "모든 저장 내용을 EmuNand로 내보내기"
+msgstr "모든 저장 내용을 에뮤낸드로 내보내기"
 
 msgid "Export Miis to EmuNand"
-msgstr "Mii를 EmuNand로 내보내기"
+msgstr "Mii를 에뮤낸드로 내보내기"
 
 msgid "Export SYSCONF to EmuNand"
-msgstr "SYSCONF를 EmuNand로 내보내기"
+msgstr "SYSCONF를 에뮤낸드로 내보내기"
 
 msgid "Extract Miis to the Emu NAND?"
-msgstr "Emu NAND에 Mii를 추출하겠습니까?"
+msgstr "에뮤 낸드에 Mii를 추출하겠습니까?"
 
 msgid "Extract SYSCONF to the Emu NAND?"
-msgstr "Emu NAND에 SYSCONF를 추출하겠습니까?"
+msgstr "에뮤 낸드에 SYSCONF를 추출하겠습니까?"
 
 msgid "Extract Save to EmuNand"
-msgstr "EmuNand 저장 추출"
+msgstr "에뮤낸드 저장 추출"
 
 msgid "Extracting file:"
 msgstr "파일 추출:"
@@ -894,10 +906,10 @@ msgid "Extracting files:"
 msgstr "파일 추출:"
 
 msgid "Extracting nand files:"
-msgstr "nand 파일 추출:"
+msgstr "낸드 파일 추출:"
 
 msgid "F-Zero AX"
-msgstr ""
+msgstr "F-제로 AX"
 
 msgid "Failed"
 msgstr "실패"
@@ -909,7 +921,7 @@ msgid "Failed formating"
 msgstr "포멧 실패"
 
 msgid "Failed to extract all files. Savegame might not exist."
-msgstr "모든 파일 추출에 실패했습니다. Savegame이 없을 수 있습니다."
+msgstr "모든 파일 추출에 실패했습니다. 저장게임이 없을 수 있습니다."
 
 msgid "Failed to extract."
 msgstr "추출에 실패했습니다."
@@ -942,7 +954,7 @@ msgid "Features Settings"
 msgstr "기능 설정"
 
 msgid "Feb"
-msgstr "2월"
+msgstr "2 월"
 
 msgid "File"
 msgstr "파일"
@@ -967,7 +979,7 @@ msgid "Flat Covers"
 msgstr "평면 커버"
 
 msgid "Flip-X"
-msgstr ""
+msgstr 플립-X"
 
 msgid "Folder"
 msgstr "폴더"
@@ -1054,7 +1066,7 @@ msgid "Full shutdown"
 msgstr "완전한 종료"
 
 msgid "GAMEID_Gamename"
-msgstr ""
+msgstr "게임ID_게임이름"
 
 msgid "GC Banner Scale"
 msgstr "게임큐브 배너 스케일"
@@ -1078,16 +1090,19 @@ msgid "GUI Settings"
 msgstr "GUI 설정"
 
 msgid "GXDraw"
-msgstr ""
+msgstr "GX드로우"
 
 msgid "GXFlush"
-msgstr ""
+msgstr "GX플러시"
 
-msgid "Game Cube Games Delete"
+msgid "GameCube Games Delete"
 msgstr "게임큐브 게임 삭제"
 
-msgid "Game Cube Install Menu"
+msgid "GameCube Install Menu"
 msgstr "게임큐브 설치 메뉴"
+
+msgid "Game Header Cache Files Path"
+msgstr "게임 헤더 캐시 파일 경로"
 
 msgid "Game ID"
 msgstr "게임 ID"
@@ -1129,7 +1144,7 @@ msgid "Game is already installed:"
 msgstr "게임이 이미 설치:"
 
 msgid "Game's IOS"
-msgstr "게임의 IOS"
+msgstr "게임 IOS"
 
 msgid "Game/Install Partition"
 msgstr "게임/파티션 설치"
@@ -1147,7 +1162,7 @@ msgid "GameCube Source"
 msgstr "게임큐브 소스"
 
 msgid "Gamename [GAMEID]"
-msgstr "게임이름 [GAMEID]"
+msgstr "게임이름 [게임ID]"
 
 msgid "Games"
 msgstr "게임"
@@ -1180,7 +1195,7 @@ msgid "Hard Drive Settings"
 msgstr "하드 드라이브 설정"
 
 msgid "High Quality"
-msgstr "높은 품질"
+msgstr "고품질"
 
 msgid "High/Low"
 msgstr "높음/낮음"
@@ -1204,7 +1219,7 @@ msgid "How do you want to update?"
 msgstr "어떻게 업데이트 하겠습니까?"
 
 msgid "How to Shutdown?"
-msgstr "어떻게 종료하겠습니까?"
+msgstr "어떻게 종료 하겠습니까?"
 
 msgid "Import Categories"
 msgstr "카테고리 가져오기"
@@ -1224,7 +1239,7 @@ msgid "Incoming file %0.2fMB"
 msgstr "수신 파일 %0.2fMB"
 
 msgid "Individual"
-msgstr "개인"
+msgstr "개별"
 
 msgid "Initializing Network"
 msgstr "네트워크 초기화"
@@ -1284,7 +1299,7 @@ msgid "Italian"
 msgstr "이탈리아어"
 
 msgid "Jan"
-msgstr "1월"
+msgstr "1 월"
 
 msgid "Japanese"
 msgstr "일본어"
@@ -1296,10 +1311,10 @@ msgid "Joypad"
 msgstr "조이패드"
 
 msgid "July"
-msgstr "7월"
+msgstr "7 월"
 
 msgid "June"
-msgstr "6월"
+msgstr "6 월"
 
 msgid "KPAD Read"
 msgstr "KPAD 읽기"
@@ -1320,16 +1335,16 @@ msgid "Language change:"
 msgstr "언어 변경:"
 
 msgid "Languagefiles Path"
-msgstr "Languagefiles 경로"
+msgstr "언어파일 경로"
 
 msgid "Languagepath changed."
-msgstr "Languagepath 변경되었습니다."
+msgstr "언어경로가 변경되었습니다."
 
 msgid "Launching Wii games with emulated nand only works on d2x cIOS! Change game IOS to a d2x cIOS first."
-msgstr "에뮬레이트 된 nand를 사용하여 Wii 게임을 시작하면 d2x cIOS에서만 작동합니다! 게임 IOS를 d2x cIOS로 먼저 변경하십시오."
+msgstr "에뮬레이트 된 낸드를 사용하여 Wii 게임을 시작하면 d2x cIOS에서만 작동합니다! 게임 IOS를 d2x cIOS로 먼저 변경하십시오."
 
 msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
-msgstr "에뮬레이트 된 nand 채널 시작은 d2x cIOS에서만 작동합니다! 게임 IOS를 d2x cIOS로 먼저 변경하십시오."
+msgstr "에뮬레이트 된 낸드 채널 시작은 d2x cIOS에서만 작동합니다! 게임 IOS를 d2x cIOS로 먼저 변경하십시오."
 
 msgid "Left"
 msgstr "왼쪽"
@@ -1338,7 +1353,7 @@ msgid "Like SysMenu"
 msgstr "SysMenu 처럼"
 
 msgid "List on Gamelaunch"
-msgstr "Gamelaunch 목록"
+msgstr "게임실행 목록"
 
 msgid "Load"
 msgstr "로드"
@@ -1357,7 +1372,7 @@ msgid "Loader Settings"
 msgstr "로더 설정"
 
 msgid "Loader's IOS"
-msgstr "로더의 IOS"
+msgstr "로더 IOS"
 
 msgid "Loading standard language."
 msgstr "표준 언어가 로딩됩니다."
@@ -1387,13 +1402,13 @@ msgid "Loop Sound"
 msgstr "사운드 반복"
 
 msgid "Low Quality"
-msgstr "낮은 품질"
+msgstr "저품질"
 
 msgid "Low/High"
 msgstr "낮음/높음"
 
 msgid "MIOS (Default & Customs)"
-msgstr "MIOS (기본 & 사용자 정의)"
+msgstr "MIOS (기본 & 커스텀)"
 
 msgid "Main DOL"
 msgstr "메인 DOL"
@@ -1411,13 +1426,13 @@ msgid "Manual (40~120)"
 msgstr "매뉴얼 (40~120)"
 
 msgid "Mar"
-msgstr "3월"
+msgstr "3 월"
 
 msgid "Mark new games"
 msgstr "새 게임 표시"
 
 msgid "May"
-msgstr "5월"
+msgstr "5 월"
 
 msgid "Memory Card Blocks Size"
 msgstr "메모리 카드 블록 크기"
@@ -1456,7 +1471,7 @@ msgid "NMM Mode"
 msgstr "MMM 모드"
 
 msgid "Nand Chan. Emulation"
-msgstr "Nand Chan. 에뮬레이션"
+msgstr "낸드 채널 에뮬레이션"
 
 msgid "Nand Channels"
 msgstr "낸드 채널"
@@ -1471,13 +1486,13 @@ msgid "Nand Emulation"
 msgstr "낸드 에뮬레이션"
 
 msgid "Nand Emulation is only available on D2X cIOS!"
-msgstr "Nand 에뮬레이션은 D2X cIOS에서만 사용할 수 있습니다!"
+msgstr "낸드 에뮬레이션은 D2X cIOS에서만 사용할 수 있습니다!"
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
-msgstr "Nand 에뮬레이션은 FAT/FAT32 파티션에서만 작동합니다!"
+msgstr "낸드 에뮬레이션은 FAT/FAT32 파티션에서만 작동합니다!"
 
 msgid "Nand Saves Emulation"
-msgstr "Nand는 에뮬레이션을 저장"
+msgstr "낸드는 에뮬레이션을 저장"
 
 msgid "Native Controller"
 msgstr "실제 컨트롤러"
@@ -1495,7 +1510,7 @@ msgid "Neek kernel loading failed."
 msgstr "Neek 커널 로드에 실패했습니다."
 
 msgid "Neek2o does not support 'Emulated NAND Channel Path' on SD! Please setup Uneek2o instead."
-msgstr "Neek2o는 SD에서 '에뮬레이트 된 NAND 채널 경로'를 지원하지 않습니다! 대신 Uneek2o를 설치하십시오."
+msgstr "Neek2o는 SD에서 '에뮬레이트 된 낸드 채널 경로'를 지원하지 않습니다! 대신 Uneek2o를 설치하십시오."
 
 msgid "Neither"
 msgstr "어느 쪽이든"
@@ -1516,7 +1531,7 @@ msgid "No"
 msgstr "아니오"
 
 msgid "No Cheatfile found"
-msgstr "Cheatfile을 찾을 수 없음"
+msgstr "치트파일을 찾을 수 없습니다."
 
 msgid "No DOL file found on disc."
 msgstr "디스크에 DOL 파일이 없습니다."
@@ -1624,25 +1639,25 @@ msgid "Nothing selected to install."
 msgstr "선택되어 설치된 것이 없습니다."
 
 msgid "Nov"
-msgstr "11월"
+msgstr "11 월"
 
 msgid "OFF"
-msgstr "끔"
+msgstr "꺼짐"
 
 msgid "OK"
 msgstr "확인"
 
 msgid "ON"
-msgstr "켬"
+msgstr "켜짐"
 
 msgid "ON (Multi)"
-msgstr "켬 (멀티)"
+msgstr "켜짐 (멀티)"
 
 msgid "OSReport"
-msgstr ""
+msgstr "OS보고서"
 
 msgid "OSSleepThread"
-msgstr ""
+msgstr "OS슬립스레드"
 
 msgid "Ocarina"
 msgstr "오카리나"
@@ -1651,7 +1666,7 @@ msgid "Ocarina is not supported with neek2o yet. Launch game anyway?"
 msgstr "오카리나는 아직 neek2o에서 지원되지 않습니다. 어쨓든 게임을 시작합니까?"
 
 msgid "Oct"
-msgstr "10월"
+msgstr "10 월"
 
 msgid "Official Site:"
 msgstr "공식 사이트:"
@@ -1678,7 +1693,7 @@ msgid "Original"
 msgstr "오리지날"
 
 msgid "Original/Customs"
-msgstr "오리지날/사용자 정의"
+msgstr "오리지날/커스텀"
 
 msgid "PAD Hook"
 msgstr "패드 후크"
@@ -1720,19 +1735,22 @@ msgid "Pixels"
 msgstr "픽셀"
 
 msgid "Play Count"
-msgstr "플레이 횟수"
+msgstr "재생 횟수"
 
 msgid "Play Next"
-msgstr "다음 플레이"
+msgstr "다음 재생"
 
 msgid "Play Once"
-msgstr "한 번 플레이"
+msgstr "한 번 재생"
 
 msgid "Play Previous"
-msgstr "이전 플레이"
+msgstr "이전 재생"
 
 msgid "Playing Music:"
 msgstr "재생 음악:"
+
+msgid "Please enter a valid address e.g. wiimmfi.de"
+msgstr "유효한 주소를 입력하세요. 예) wiimmfi.de"
 
 msgid "Please wait"
 msgstr "기다려주십시오."
@@ -1783,7 +1801,7 @@ msgid "Released"
 msgstr "릴리즈"
 
 msgid "Reload SD"
-msgstr "SD 재로드"
+msgstr "SD 리로드"
 
 msgid "Reloading game list now, please wait..."
 msgstr "게임 목록을 다시 불러오고 있습니다. 잠시만 기다려주십시오..."
@@ -1809,11 +1827,14 @@ msgstr "리셋"
 msgid "Reset BG Music"
 msgstr "배경 음악 리셋"
 
+msgid "Reset Game Header Cache"
+msgstr "게임 헤더 캐시 리셋"
+
 msgid "Reset Playcounter"
-msgstr "Playcounter 리셋"
+msgstr "실행 횟수 리셋"
 
 msgid "Reset to default BGM?"
-msgstr "기본 BGM으로 리셋 하겠습니까?"
+msgstr "기본 배경음악으로 리셋 하겠습니까?"
 
 msgid "Restarting..."
 msgstr "다시 시작하는 중..."
@@ -1846,7 +1867,7 @@ msgid "SD"
 msgstr ""
 
 msgid "SD Card could not be accessed."
-msgstr "SD 카드에 액세스 할 수 없습니다."
+msgstr "SD 카드에 접속 할 수 없습니다."
 
 msgid "SD GameCube Games Path"
 msgstr "SD 게임큐브 게임 경로"
@@ -1876,7 +1897,7 @@ msgid "Saved"
 msgstr "저장"
 
 msgid "Savegame might not exist for this game."
-msgstr "이 게임에는 Savegame이 없을 수도 있습니다."
+msgstr "이 게임에는 저장게임이 없을 수도 있습니다."
 
 msgid "Screensaver"
 msgstr "화면보호기"
@@ -1909,13 +1930,13 @@ msgid "Select titles sources."
 msgstr "타이틀 소스 선택"
 
 msgid "Sept"
-msgstr "9월"
+msgstr "9 월"
 
 msgid "Set Search-Filter"
 msgstr "검색-필터 설정"
 
 msgid "Settings"
-msgstr "설정"
+msgstr ""
 
 msgid "Settings File"
 msgstr "파일 설정"
@@ -1930,7 +1951,7 @@ msgid "Show Free Space"
 msgstr "여유 공간 보기"
 
 msgid "Show Play Count"
-msgstr "플레이 횟수 보기"
+msgstr "재생 횟수 보기"
 
 msgid "Show SD"
 msgstr "SD 보기"
@@ -1946,6 +1967,12 @@ msgstr "오류 건너뛰기"
 
 msgid "Skip IPL"
 msgstr "IPL 건너뛰기"
+
+msgid "BBA Emulation"
+msgstr "BBA 에뮬레이션"
+
+msgid "BBA Net Profile"
+msgstr "BBA 넷 프로파일"
 
 msgid "Sneek Video Patch"
 msgstr "Sneek 비디오 경로"
@@ -1963,7 +1990,7 @@ msgid "Sort by rank"
 msgstr "순위별로 정렬"
 
 msgid "Sort order by most played"
-msgstr "가장 많이 플레이 한 순서대로 정렬"
+msgstr "가장 많이 재생 한 순서대로 정렬"
 
 msgid "Sound"
 msgstr "사운드"
@@ -1972,7 +1999,7 @@ msgid "Sound Settings"
 msgstr "사운드 설정"
 
 msgid "Sound+BGM"
-msgstr "사운드+BGM"
+msgstr "사운드+배경 음악"
 
 msgid "Sound+Quiet"
 msgstr "사운드+무음"
@@ -1993,7 +2020,7 @@ msgid "Standby"
 msgstr "대기"
 
 msgid "Start"
-msgstr "시작"
+msgstr ""
 
 msgid "Success"
 msgstr "성공"
@@ -2037,6 +2064,9 @@ msgstr "동기화 중..."
 msgid "System Default"
 msgstr "기본 시스템"
 
+msgid "System Proxy Settings"
+msgstr "시스템 프록시 설정"
+
 msgid "TChinese"
 msgstr "번체 중국어"
 
@@ -2050,22 +2080,22 @@ msgid "The Force Widescreen setting requires DIOS MIOS v2.1 or more. This settin
 msgstr "강제 와이드 스크린 설정에는 DIOS MIOS v2.1 이상이 필요합니다. 이 설정은 무시됩니다."
 
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
-msgstr "Mii는 사용자의 Emu nand 경로와 Emu nand 채널 경로로 추출됩니다. 주의: 기존 파일은 모두 덮어쓰여집니다."
+msgstr "Mii는 사용자의 에뮤 낸드 경로와 에뮤 낸드 채널 경로로 추출됩니다. 주의: 기존 파일은 모두 덮어쓰여집니다."
 
 msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
 msgstr "디스크+ 없음 설정에는 DIOS MIOS 2.2 업데이트2가 필요합니다. 이 설정은 무시됩니다."
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
-msgstr "SYSCONF 파일은 에뮬레이션 경로와 에뮬 및 채널 경로로 추출됩니다. 주의: 기존 파일은 모두 덮어쓰여집니다."
+msgstr "SYSCONF 파일은 에뮤 낸드 경로와 에뮤 낸드 및 채널 경로로 추출됩니다. 주의: 기존 파일은 모두 덮어쓰여집니다."
 
 msgid "The application might crash if there is currently a read/write access to the SD card!"
-msgstr "현재 SD 카드에 대한 읽기/쓰기 액세스가 있는 경우 응용 프로그램이 중단될 수 있습니다!"
+msgstr "현재 SD 카드에 대한 읽기/쓰기 접속이 있는 경우 응용 프로그램이 중단될 수 있습니다!"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "입력된 디렉토리가 존재하지 않습니다. 그것을 만들고 싶습니까?"
 
 msgid "The files will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
-msgstr "파일이 에뮬레이션 및 채널 경로로 추출됩니다. 주의: 기존 파일은 모두 덮어여집니다."
+msgstr "파일이 에뮬 낸드 및 채널 경로로 추출됩니다. 주의: 기존 파일은 모두 덮어여집니다."
 
 msgid "The game is on SD Card."
 msgstr "게임은 SD 카드에 있습니다."
@@ -2074,10 +2104,10 @@ msgid "The game is on USB."
 msgstr "게임은 USB에 있습니다."
 
 msgid "The save game will be extracted to your emu nand path."
-msgstr "저장 게임이 emu nand 경로로 추출됩니다."
+msgstr "저장 게임이 에뮤 낸드 경로로 추출됩니다."
 
 msgid "The save games will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
-msgstr "게임 저장이 에뮬레이션 및 채널 경로로 추출됩니다. 주의: 기존 파일은 모두 덮어쓰여집니다."
+msgstr "게임 저장이 에뮤 낸드 및 채널 경로로 추출됩니다. 주의: 기존 파일은 모두 덮어쓰여집니다."
 
 msgid "The wad file was installed"
 msgstr "wad 파일 설치"
@@ -2115,6 +2145,9 @@ msgstr "이 닌텐돈트 버전은 올바르게 지원되지 않습니다. 자�
 
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "이 게임에는 여러 개의 디스크가 있습니다. 실행할 디스크를 선택하십시오."
+
+msgid "This patch might not work with all games. If a game doesn't boot, disable it in individual game settings menu."
+msgstr "이 패치는 모든 게임에서 작동하지 않을 수 있습니다. 게임이 부팅되지 않으면 개별 게임 설정 메뉴에서 비활성화하십시오."
 
 msgid "This path must be on SD!"
 msgstr "이 경로는 SD에 있어야 합니다!"
@@ -2172,10 +2205,10 @@ msgid "To use HID with %s you need the %s file."
 msgstr "%s와(과) 함께 HID를 사용하려면 %s 파일이 필요합니다."
 
 msgid "To use neek you need to set your 'Emulated NAND Channel Path' on the first primary partition of the Hard Drive."
-msgstr "neek를 사용하려면 하드 드라이브의 첫 번째 주 파티션에 '에뮬레이트 된 NAND 채널 경로'를 설정해야 합니다."
+msgstr "neek를 사용하려면 하드 드라이브의 첫 번째 주 파티션에 '에뮬레이트 된 낸드 채널 경로'를 설정해야 합니다."
 
 msgid "To use neek you need to set your 'Emulated NAND Channel Path' to a FAT32 partition."
-msgstr "neek를 사용하려면 '에뮬레이트 된 NAND 채널 경로'를 FAT32 파티션으로 설정해야 합니다."
+msgstr "neek를 사용하려면 '에뮬레이트 된 낸드 채널 경로'를 FAT32 파티션으로 설정해야 합니다."
 
 msgid "To use neek you need to use a 512 bytes/sector Hard Drive."
 msgstr "neek를 사용하려면 512 바이트/섹터 하드 드라이브를 사용해야 합니다."
@@ -2225,6 +2258,9 @@ msgstr "USBloaderGX는 닌텐돈트 구성 파일을 기록할 수 없습니다.
 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
 msgstr "USBloaderGX r1218은 닌텐돈트 알파 v0.1에 필요합니다. 닌텐돈트 boot.dol 버전을 업데이트하십시오."
+
+msgid "Use Game Header Cache"
+msgstr "게임 헤더 캐시 사용"
 
 msgid "Uninstall"
 msgstr "제거"
@@ -2384,9 +2420,9 @@ msgid "WiiU Widescreen"
 msgstr "WiiU 와이드스크린"
 
 msgid "Wiilight"
-msgstr ""
+msgstr "Wii라이트"
 
-msgid "Wiimmfi.de"
+msgid "Wiimmfi"
 msgstr ""
 
 msgid "Wiinnertag"
@@ -2424,7 +2460,7 @@ msgid "You cannot delete this category."
 msgstr "이 카테고리는 삭제할 수 없습니다."
 
 msgid "You need neek2o to load EmuNAND from sub-folders."
-msgstr "EmuNAND를 하위 폴더에서 로드하려면 neek2o가 필요합니다."
+msgstr "에뮤낸드를 하위 폴더에서 로드하려면 neek2o가 필요합니다."
 
 msgid "You need to install DIOS MIOS Lite v1.2 or a newer version."
 msgstr "DIOS MIOS 라이트 v1.2 또는 최신 버전을 설치해야 합니다."
@@ -2448,7 +2484,7 @@ msgid "does not exist!"
 msgstr "존재하지 않습니다!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr "존재하지 않습니다! 치트없이 게임 로드"
+msgstr "존재하지 않습니다! 치트 없이 게임 로드"
 
 msgid "files left"
 msgstr "파일 남음"
@@ -2493,4 +2529,4 @@ msgid "of"
 msgstr "의"
 
 msgid "seconds left"
-msgstr "초 남음"
+msgstr "초 남았습니다."
