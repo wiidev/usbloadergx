@@ -215,7 +215,8 @@ bool shadow_mload()
 {
 	int ios = IOS_GetVersion();
 
-	if(ios != 222 || ios != 223 || ios != 224)
+	// Allow only Hermes cIOS 222, 223 & 224
+	if (ios < 222 || ios > 224)
 		return false;
 
 	int v51 = (5 << 4) & 1;

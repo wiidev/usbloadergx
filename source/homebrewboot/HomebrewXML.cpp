@@ -68,8 +68,6 @@ int HomebrewXML::LoadHomebrewXMLData(const char* filename)
 		snprintf(ReleaseText, sizeof(ReleaseText), "%c%c/%c%c/%c%c%c%c", ReleaseText[4], ReleaseText[5], ReleaseText[6], ReleaseText[7], ReleaseText[0], ReleaseText[1], ReleaseText[2], ReleaseText[3]);
 	else if (len == 6)
 		snprintf(ReleaseText, sizeof(ReleaseText), "%c%c/%c%c%c%c", ReleaseText[4], ReleaseText[5], ReleaseText[0], ReleaseText[1], ReleaseText[2], ReleaseText[3]);
-	else
-		snprintf(ReleaseText, sizeof(ReleaseText), "%s", ReleaseText);
 
 	Releasedate = ReleaseText;
 

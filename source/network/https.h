@@ -6,7 +6,10 @@
 #define _HTTPS_H_
 
 #include <libs/libwolfssl/ssl.h>
+
 #include "dns.h"
+#include "memory/mem2.h"
+#include "picohttpparser.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -15,18 +18,29 @@ extern "C"
 
 // #define DEBUG_NETWORK
 #define REDIRECT_LIMIT 3
-#define TCP_CONNECT_TIMEOUT 5000
-#define READ_WRITE_TIMEOUT 5000
+#define CONNECT_TIMEOUT 10000
+#define READ_WRITE_TIMEOUT 20000
+#define BLOCK_SIZE 8192
 
     struct download
     {
-        u8 skip_response;   // Used by WiinnerTag
-        u8 show_progress;   // Used when downloading wiitdb.zip
+        bool skip_response; // Used by WiinnerTag
+        bool show_progress; // Used when downloading wiitdb.zip
         u64 gametdbcheck;   // Used when checking the GameTDB version
         u64 content_length;
         u64 size;
         char *data;
     };
+
+    typedef struct
+    {
+        int status;
+        int pret;
+        size_t num_headers;
+        size_t buflen;
+        struct phr_header headers[100];
+        char data[4096];
+    } HTTP_RESPONSE;
 
     typedef struct
     {

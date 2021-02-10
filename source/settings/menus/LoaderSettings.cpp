@@ -182,7 +182,15 @@ static const char * PrivServText[] =
 {
 	trNOOP( "OFF" ),
 	trNOOP( "NoSSL only" ),
-	trNOOP( "Wiimmfi.de" ),
+	trNOOP( "Wiimmfi" ),
+	trNOOP( "AltWFC" ),
+	trNOOP( "Custom" ),
+};
+
+static const char blocked[22] =
+{
+	0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x28, 0x27, 0x29, 0x2A,
+	0x2C, 0x2F, 0x3A, 0x3B, 0x3C, 0x3E, 0x3F, 0x40, 0x5E, 0x5F, 0x00
 };
 
 LoaderSettings::LoaderSettings()
@@ -237,6 +245,7 @@ void LoaderSettings::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
 	Options->SetName(Idx++, "%s", tr( "Ocarina" ));
 	Options->SetName(Idx++, "%s", tr( "Private Server" ));
+	Options->SetName(Idx++, "%s", tr( "Custom Address" ));
 	Options->SetName(Idx++, "%s", tr( "Loader's IOS" ));
 	Options->SetName(Idx++, "%s", tr( "Game's IOS" ));
 	Options->SetName(Idx++, "%s", tr( "Quick Boot" ));
@@ -280,6 +289,8 @@ void LoaderSettings::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Triforce Arcade Mode" ));
 	Options->SetName(Idx++, "%s", tr("CC Rumble"));
 	Options->SetName(Idx++, "%s", tr("Skip IPL"));
+	Options->SetName(Idx++, "%s", tr( "BBA Emulation" ));
+	Options->SetName(Idx++, "%s", tr( "BBA Net Profile" ));
 	Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
 	Options->SetName(Idx++, "%s", tr( "Memory Card Blocks Size" ));
 	Options->SetName(Idx++, "%s", tr( "USB-HID Controller" ));
@@ -333,6 +344,9 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: Private Server
 	Options->SetValue(Idx++, "%s", tr( PrivServText[Settings.PrivateServer] ));
+
+	//! Settings: Custom Address
+	Options->SetValue(Idx++, "%s", Settings.CustomAddress);
 
 	//! Settings: Loader's IOS
 	if (Settings.godmode)
@@ -452,7 +466,6 @@ void LoaderSettings::SetOptionValues()
 	{
 		Options->SetValue(Idx++, "%s", tr("Manual (40~120)"));
 		Options->SetValue(Idx++, "%d", Settings.NINVideoScale);
-		
 	}
 
 	//! Settings: NIN VideoOffset
@@ -469,6 +482,15 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: NIN Skip IPL
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINSkipIPL]));
+
+	//! Settings: NIN BBA Emulation
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.NINBBA]));
+
+	//! Settings: NIN BBA Net Profile
+	if(Settings.NINBBAProfile == 0)
+		Options->SetValue(Idx++, "%s", tr("Auto"));
+	else
+		Options->SetValue(Idx++, "%i", Settings.NINBBAProfile);
 
 	//! Settings: NIN Memory Card Emulation
 	Options->SetValue(Idx++, "%s", tr(NINMCText[Settings.NINMCEmulation]));
@@ -592,6 +614,21 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.PrivateServer >= PRIVSERV_MAX_CHOICE) Settings.PrivateServer = 0;
+	}
+
+	//! Settings: Custom Address
+	else if (ret == ++Idx)
+	{
+		char entered[300];
+		snprintf(entered, sizeof(entered), "%s", Settings.CustomAddress);
+		if (OnScreenKeyboard(entered, sizeof(entered), 0, false, true))
+		{
+			// Only allow letters, numbers, periods and hyphens
+			if (strlen(entered) <= 3 || strpbrk(entered, blocked))
+				WindowPrompt(tr("Error"), tr("Please enter a valid address e.g. wiimmfi.de"), tr("OK"));
+			else
+				snprintf(Settings.CustomAddress, sizeof(Settings.CustomAddress), entered);
+		}
 	}
 
 	//! Settings: Loader's IOS
@@ -887,6 +924,18 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.NINSkipIPL >= MAX_ON_OFF) Settings.NINSkipIPL = 0;
+	}
+
+	//! Settings: NIN BBA Emulation
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINBBA >= MAX_ON_OFF) Settings.NINBBA = 0;
+	}
+
+	//! Settings: NIN BBA Net Profile
+	else if (ret == ++Idx)
+	{
+		if (++Settings.NINBBAProfile >= NIN_BBA_MAX_CHOICE) Settings.NINBBAProfile = 0;
 	}
 
 	//! Settings: NIN Memory Card Emulation

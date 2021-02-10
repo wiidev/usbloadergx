@@ -63,6 +63,7 @@ void CSettings::SetDefault()
 	snprintf(languagefiles_path, sizeof(languagefiles_path), "%slanguage/", ConfigPath);
 	snprintf(update_path, sizeof(update_path), "%s/apps/usbloader_gx/", BootDevice);
 	snprintf(BNRCachePath, sizeof(BNRCachePath), "%s/apps/usbloader_gx/cache_bnr/", BootDevice);
+	snprintf(GameHeaderCachePath, sizeof(GameHeaderCachePath), "%s/apps/usbloader_gx/cache/", BootDevice);
 	snprintf(homebrewapps_path, sizeof(homebrewapps_path), "%s/apps/", BootDevice);
 	snprintf(Cheatcodespath, sizeof(Cheatcodespath), "%s/codes/", BootDevice);
 	snprintf(TxtCheatcodespath, sizeof(TxtCheatcodespath), "%s/txtcodes/", BootDevice);
@@ -78,6 +79,18 @@ void CSettings::SetDefault()
 	strlcpy(NandEmuChanPath, NandEmuPath, sizeof(NandEmuChanPath));
 	strlcpy(GameCubePath, "usb1:/games/", sizeof(GameCubePath));
 	strlcpy(GameCubeSDPath, "sd:/games/", sizeof(GameCubeSDPath));
+	strlcpy(CustomAddress, "wiimmfi.de", sizeof(CustomAddress));
+	strlcpy(URL_Banners, "https://banner.rc24.xyz/", sizeof(URL_Banners));
+	strlcpy(URL_Covers2D, "https://art.gametdb.com/wii/cover/", sizeof(URL_Covers2D));
+	strlcpy(URL_Covers3D, "https://art.gametdb.com/wii/cover3D/", sizeof(URL_Covers3D));
+	strlcpy(URL_CoversFull, "https://art.gametdb.com/wii/coverfull/", sizeof(URL_CoversFull));
+	strlcpy(URL_CoversFullHQ, "https://art.gametdb.com/wii/coverfullHQ/", sizeof(URL_CoversFullHQ));
+	strlcpy(URL_Discs, "https://art.gametdb.com/wii/disc/", sizeof(URL_Discs));
+	strlcpy(URL_DiscsCustom, "https://art.gametdb.com/wii/disccustom/", sizeof(URL_DiscsCustom));
+	strlcpy(URL_GameTDB, "https://www.gametdb.com/wiitdb.zip", sizeof(URL_GameTDB));
+	ProxyUsername[0] = 0;
+	ProxyPassword[0] = 0;
+	ProxyAddress[0] = 0;
 	theme[0] = 0;
 	language_path[0] = 0;
 	ogg_path[0] = 0;
@@ -93,11 +106,11 @@ void CSettings::SetDefault()
 	videomode = VIDEO_MODE_DISCDEFAULT;
 	videopatch = OFF;
 	videoPatchDol = OFF;
-	patchFix480p = OFF;
+	patchFix480p = ON;
 	language = CONSOLE_DEFAULT;
 	ocarina = OFF;
 	hddinfo = CLOCK_HR12;
-	sinfo = ON;
+	sinfo = GAMEINFO_REGION;
 	rumble = ON;
 	GameSort = SORT_ABC;
 	volume = 80;
@@ -106,7 +119,7 @@ void CSettings::SetDefault()
 	tooltips = ON;
 	gamesound = ON;
 	parentalcontrol = PARENTAL_LVL_ADULT;
-	LoaderIOS = BUILD_IOS;
+	LoaderIOS = 249;
 	cios = 249;
 	gridRows = 3;
 	partition = 0;
@@ -123,6 +136,7 @@ void CSettings::SetDefault()
 	musicloopmode = ON;
 	marknewtitles = ON;
 	ShowFreeSpace = ON;
+	UseGameHeaderCache = OFF;
 	PlaylogUpdate = OFF;
 	ParentalBlocks = BLOCK_ALL;
 	InstallToDir = INSTALL_TO_NAME_GAMEID;
@@ -194,6 +208,8 @@ void CSettings::SetDefault()
 	NINArcadeMode = OFF;
 	NINCCRumble = OFF;
 	NINSkipIPL = OFF;
+	NINBBA = OFF;
+	NINBBAProfile = 0;
 	NINMCEmulation = ON;
 	NINMCSize = 2;
 	NINAutoboot = ON;
@@ -215,6 +231,8 @@ void CSettings::SetDefault()
 	GCInstallCompressed = OFF;
 	GCInstallAligned = OFF;
 	PrivateServer = OFF;
+	ProxyUseSystem = ON;
+	ProxyPort = 0;
 }
 
 bool CSettings::Load()
@@ -343,6 +361,7 @@ bool CSettings::Save()
 	fprintf(file, "update_path = %s\n", update_path);
 	fprintf(file, "homebrewapps_path = %s\n", homebrewapps_path);
 	fprintf(file, "BNRCachePath = %s\n", BNRCachePath);
+	fprintf(file, "GameHeaderCachePath = %s\n", GameHeaderCachePath);
 	fprintf(file, "Cheatcodespath = %s\n", Cheatcodespath);
 	fprintf(file, "BcaCodepath = %s\n", BcaCodepath);
 	fprintf(file, "WipCodepath = %s\n", WipCodepath);
@@ -358,6 +377,7 @@ bool CSettings::Save()
 	fprintf(file, "partition = %d\n", partition);
 	fprintf(file, "marknewtitles = %d\n", marknewtitles);
 	fprintf(file, "ShowFreeSpace = %d\n", ShowFreeSpace);
+	fprintf(file, "UseGameHeaderCache = %d\n", UseGameHeaderCache);
 	fprintf(file, "InstallToDir = %d\n", InstallToDir);
 	fprintf(file, "GameSplit = %d\n", GameSplit);
 	fprintf(file, "InstallPartitions = %08X\n", (unsigned int)InstallPartitions);
@@ -454,6 +474,8 @@ bool CSettings::Save()
 	fprintf(file, "NINArcadeMode = %d\n", NINArcadeMode);
 	fprintf(file, "NINCCRumble = %d\n", NINCCRumble);
 	fprintf(file, "NINSkipIPL = %d\n", NINSkipIPL);
+	fprintf(file, "NINBBA = %d\n", NINBBA);
+	fprintf(file, "NINBBAProfile = %d\n", NINBBAProfile);
 	fprintf(file, "NINMCEmulation = %d\n", NINMCEmulation);
 	fprintf(file, "NINMCSize = %d\n", NINMCSize);
 	fprintf(file, "NINAutoboot = %d\n", NINAutoboot);
@@ -477,9 +499,41 @@ bool CSettings::Save()
 	fprintf(file, "GCInstallCompressed = %d\n", GCInstallCompressed);
 	fprintf(file, "GCInstallAligned = %d\n", GCInstallAligned);
 	fprintf(file, "PrivateServer = %d\n", PrivateServer);
+	fprintf(file, "CustomAddress = %s\n", CustomAddress);
+	fprintf(file, "URL_Banners = %s\n", URL_Banners);
+	fprintf(file, "URL_Covers2D = %s\n", URL_Covers2D);
+	fprintf(file, "URL_Covers3D = %s\n", URL_Covers3D);
+	fprintf(file, "URL_CoversFull = %s\n", URL_CoversFull);
+	fprintf(file, "URL_CoversFullHQ = %s\n", URL_CoversFullHQ);
+	fprintf(file, "URL_Discs = %s\n", URL_Discs);
+	fprintf(file, "URL_DiscsCustom = %s\n", URL_DiscsCustom);
+	fprintf(file, "URL_GameTDB = %s\n", URL_GameTDB);
+	fprintf(file, "ProxyUseSystem = %d\n", ProxyUseSystem);
+	fprintf(file, "ProxyUsername = %s\n", ProxyUsername);
+	fprintf(file, "ProxyPassword = %s\n", ProxyPassword);
+	fprintf(file, "ProxyAddress = %s\n", ProxyAddress);
+	fprintf(file, "ProxyPort = %d\n", ProxyPort);
 	fclose(file);
 
 	return true;
+}
+
+bool CSettings::ValidateURL(char *value, bool zip)
+{
+	if (strlen(value) >= 12 && (strncmp(value, "https://", 8) == 0 || strncmp(value, "http://", 7) == 0))
+	{
+		if (zip)
+		{
+			if (strncmp(value + strlen(value) -4, ".zip", 4) == 0) // The URL must end with .zip to be valid
+				return true;
+		}
+		else
+		{
+			if (strncmp(value + strlen(value) -1, "/", 1) == 0) // The URL must end with / to be valid
+				return true;
+		}
+	}
+	return false;
 }
 
 bool CSettings::SetSetting(char *name, char *value)
@@ -672,6 +726,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "ShowFreeSpace") == 0)
 	{
 		ShowFreeSpace = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "UseGameHeaderCache") == 0)
+	{
+		UseGameHeaderCache = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "HomeMenu") == 0)
@@ -993,6 +1052,16 @@ bool CSettings::SetSetting(char *name, char *value)
 		NINSkipIPL = atoi(value);
 		return true;
 	}
+	else if (strcmp(name, "NINBBA") == 0)
+	{
+		NINBBA = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "NINBBAProfile") == 0)
+	{
+		NINBBAProfile = atoi(value);
+		return true;
+	}
 	else if (strcmp(name, "NINMCEmulation") == 0)
 	{
 		NINMCEmulation = atoi(value);
@@ -1178,6 +1247,11 @@ bool CSettings::SetSetting(char *name, char *value)
 		strlcpy(BNRCachePath, value, sizeof(BNRCachePath));
 		return true;
 	}
+	else if (strcmp(name, "GameHeaderCachePath") == 0)
+	{
+		strlcpy(GameHeaderCachePath, value, sizeof(GameHeaderCachePath));
+		return true;
+	}
 	else if (strcmp(name, "Cheatcodespath") == 0)
 	{
 		strlcpy(Cheatcodespath, value, sizeof(Cheatcodespath));
@@ -1228,9 +1302,92 @@ bool CSettings::SetSetting(char *name, char *value)
 		strlcpy(GameCubeSDPath, value, sizeof(GameCubeSDPath));
 		return true;
 	}
+	else if (strcmp(name, "URL_Banners") == 0)
+	{
+		if (ValidateURL(value))
+			strlcpy(URL_Banners, value, sizeof(URL_Banners));
+		return true;
+	}
+	else if (strcmp(name, "URL_Covers2D") == 0)
+	{
+		if (ValidateURL(value))
+			strlcpy(URL_Covers2D, value, sizeof(URL_Covers2D));
+		return true;
+	}
+	else if (strcmp(name, "URL_Covers3D") == 0)
+	{
+		if (ValidateURL(value))
+			strlcpy(URL_Covers3D, value, sizeof(URL_Covers3D));
+		return true;
+	}
+	else if (strcmp(name, "URL_CoversFull") == 0)
+	{
+		if (ValidateURL(value))
+			strlcpy(URL_CoversFull, value, sizeof(URL_CoversFull));
+		return true;
+	}
+	else if (strcmp(name, "URL_CoversFullHQ") == 0)
+	{
+		if (ValidateURL(value))
+			strlcpy(URL_CoversFullHQ, value, sizeof(URL_CoversFullHQ));
+		return true;
+	}
+	else if (strcmp(name, "URL_Discs") == 0)
+	{
+		if (ValidateURL(value))
+			strlcpy(URL_Discs, value, sizeof(URL_Discs));
+		return true;
+	}
+	else if (strcmp(name, "URL_DiscsCustom") == 0)
+	{
+		if (ValidateURL(value))
+			strlcpy(URL_DiscsCustom, value, sizeof(URL_DiscsCustom));
+		return true;
+	}
+	else if (strcmp(name, "URL_GameTDB") == 0)
+	{
+		if (ValidateURL(value, true))
+			strlcpy(URL_GameTDB, value, sizeof(URL_GameTDB));
+		return true;
+	}
+	else if (strcmp(name, "ProxyUseSystem") == 0)
+	{
+		ProxyUseSystem = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "ProxyUsername") == 0)
+	{
+		if(strlen(value) > 0)
+			strlcpy(ProxyUsername, value, sizeof(ProxyUsername));
+		return true;
+	}
+	else if (strcmp(name, "ProxyPassword") == 0)
+	{
+		if(strlen(value) > 0)
+			strlcpy(ProxyPassword, value, sizeof(ProxyPassword));
+		return true;
+	}
+	else if (strcmp(name, "ProxyAddress") == 0)
+	{
+		if(strlen(value) > 6)
+			strlcpy(ProxyAddress, value, sizeof(ProxyAddress));
+		return true;
+	}
+	else if(strcmp(name, "ProxyPort") == 0)
+	{
+		ProxyPort = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "CustomAddress") == 0)
+	{
+		if(strlen(value) > 3)
+			strlcpy(CustomAddress, value, sizeof(CustomAddress));
+		return true;
+	}
 	else if(strcmp(name, "PrivateServer") == 0)
 	{
 		PrivateServer = atoi(value);
+		return true;
 	}
 	else if (strcmp(name, "EnabledCategories") == 0)
 	{
@@ -1296,7 +1453,7 @@ bool CSettings::SetSetting(char *name, char *value)
 bool CSettings::FindConfig()
 {
 	bool found = false;
-	char CheckDevice[12];
+	char CheckDevice[73];
 	char CheckPath[300];
 
 	// Enumerate the devices supported by libogc.
@@ -1358,7 +1515,7 @@ void CSettings::ParseLine(char *line)
 {
 	char temp[1024], name[1024], value[1024];
 
-	strncpy(temp, line, sizeof(temp));
+	snprintf(temp, sizeof(temp), "%s", line);
 
 	char * eq = strchr(temp, '=');
 
@@ -1436,7 +1593,7 @@ bool CSettings::LoadLanguage(const char *path, int lang)
 	}
 	else if (lang >= 0)
 	{
-		char filepath[150];
+		char filepath[170];
 		char langpath[150];
 		strlcpy(langpath, languagefiles_path, sizeof(langpath));
 		if (langpath[strlen(langpath) - 1] != '/')
@@ -1455,43 +1612,43 @@ bool CSettings::LoadLanguage(const char *path, int lang)
 		}
 		else if (lang == JAPANESE)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/japanese.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%sjapanese.lang", langpath);
 		}
 		else if (lang == ENGLISH)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/english.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%senglish.lang", langpath);
 		}
 		else if (lang == GERMAN)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/german.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%sgerman.lang", langpath);
 		}
 		else if (lang == FRENCH)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/french.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%sfrench.lang", langpath);
 		}
 		else if (lang == SPANISH)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/spanish.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%sspanish.lang", langpath);
 		}
 		else if (lang == ITALIAN)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/italian.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%sitalian.lang", langpath);
 		}
 		else if (lang == DUTCH)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/dutch.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%sdutch.lang", langpath);
 		}
 		else if (lang == S_CHINESE)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/schinese.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%sschinese.lang", langpath);
 		}
 		else if (lang == T_CHINESE)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/tchinese.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%stchinese.lang", langpath);
 		}
 		else if (lang == KOREAN)
 		{
-			snprintf(filepath, sizeof(filepath), "%s/korean.lang", langpath);
+			snprintf(filepath, sizeof(filepath), "%skorean.lang", langpath);
 		}
 
 		strlcpy(db_language, GetLangCode(filepath), sizeof(db_language));

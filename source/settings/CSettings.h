@@ -60,7 +60,7 @@ class CSettings
 		/** Variables **/
 		char BootDevice[10];
 		char unlockCode[20];
-		char db_language[20];
+		char db_language[10];
 		char returnTo[20];
 		char ConfigPath[80];
 		char covers_path[100];
@@ -85,10 +85,25 @@ class CSettings
 		char NandEmuPath[50];
 		char NandEmuChanPath[50];
 		char BNRCachePath[50];
+		char GameHeaderCachePath[50];
 		char GameCubePath[100];
 		char GameCubeSDPath[100];
 		char DEVOLoaderPath[100];
 		char NINLoaderPath[100];
+		char CustomAddress[300];
+		char URL_Banners[300];
+		char URL_Covers2D[300];
+		char URL_Covers3D[300];
+		char URL_CoversFull[300];
+		char URL_CoversFullHQ[300];
+		char URL_Discs[300];
+		char URL_DiscsCustom[300];
+		char URL_GameTDB[300];
+		char ProxyUsername[33];
+		char ProxyPassword[33];
+		char ProxyAddress[256];
+		u16 ProxyPort;
+		short ProxyUseSystem;
 		short videomode;
 		short language;
 		short ocarina;
@@ -128,6 +143,7 @@ class CSettings
 		short GameSplit;
 		short PlaylogUpdate;
 		short ShowFreeSpace;
+		short UseGameHeaderCache;
 		short HomeMenu;
 		short MultiplePartitions;
 		short USBPort;
@@ -198,6 +214,8 @@ class CSettings
 		short NINArcadeMode;
 		short NINCCRumble;
 		short NINSkipIPL;
+		short NINBBA;
+		short NINBBAProfile;
 		s8 NINMCEmulation;
 		short NINMCSize;
 		short NINAutoboot;
@@ -224,6 +242,7 @@ class CSettings
 		bool FirstTimeRun;
 	protected:
 		bool ValidVersion(FILE * file);
+		bool ValidateURL(char *value, bool zip = false);
 		bool SetSetting(char *name, char *value);
 		//!Find the config file in the default paths
 		bool FindConfig();

@@ -261,6 +261,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	u8 languageChoice = game_cfg->language == INHERIT ? Settings.language : game_cfg->language;
 	u8 ocarinaChoice = game_cfg->ocarina == INHERIT ? Settings.ocarina : game_cfg->ocarina;
 	u8 PrivServChoice = game_cfg->PrivateServer == INHERIT ? Settings.PrivateServer : game_cfg->PrivateServer;
+	const char *customAddress = game_cfg->CustomAddress.size() == 0 ? Settings.CustomAddress : game_cfg->CustomAddress.c_str();
 	u8 viChoice = game_cfg->vipatch == INHERIT ? Settings.videopatch : game_cfg->vipatch;
 	u8 sneekChoice = game_cfg->sneekVideoPatch == INHERIT ? Settings.sneekVideoPatch : game_cfg->sneekVideoPatch;
 	u8 iosChoice = game_cfg->ios == INHERIT ? Settings.cios : game_cfg->ios;
@@ -322,17 +323,28 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 		Playlog_Update((char *) gameHeader.id, BNRInstance::Instance()->GetIMETTitle(CONF_GetLanguage()));
 	}
 
+	gprintf("Game title: %s\n", gameHeader.title);
+	if (PrivServChoice == PRIVSERV_CUSTOM)
+		gprintf("Custom address: %s\n", customAddress);
+
 	//! Load wip codes
 	load_wip_code(gameHeader.id);
-
-	// force hooktype if not selected but Ocarina is enabled
-	if(ocarinaChoice && Hooktype == OFF)
-		Hooktype = 1;
 
 	//! Load Ocarina codes
 	if (ocarinaChoice)
 		ocarina_load_code(Settings.Cheatcodespath, gameHeader.id);
-	
+
+	//! Disable private server for games that still have official servers.
+	if (memcmp(gameHeader.id, "SC7", 3) == 0 || memcmp(gameHeader.id, "RJA", 3) == 0 ||
+		memcmp(gameHeader.id, "SM8", 3) == 0 || memcmp(gameHeader.id, "SZB", 3) == 0 || memcmp(gameHeader.id, "R9J", 3) == 0)
+	{
+		PrivServChoice = PRIVSERV_OFF; // Private server patching causes error 20100
+	}
+
+	//! Force hooktype if not selected but Ocarina is enabled
+	if(ocarinaChoice && Hooktype == OFF)
+		Hooktype = 1;
+
 	//! Load gameconfig.txt even if ocarina disabled
 	if(Hooktype)
 		LoadGameConfig(Settings.Cheatcodespath);
@@ -430,13 +442,15 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	//! Also, the new Wiimmfi server patch should be loaded into memory after
 	//! the code handler and the cheat codes. 
 	
-	if (PrivServChoice != PRIVSERV_WIIMMFI || memcmp(((void *)(0x80000000)), (char*)"RMC", 3) != 0) {
+	if (PrivServChoice != PRIVSERV_WIIMMFI || memcmp(gameHeader.id, "RMC", 3) != 0)
+	{
 		//! Either the server is not Wiimmfi, or, if it is Wiimmfi, the game isn't MKWii - patch the old way
-		gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, returnToChoice, PrivServChoice);
+		gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, returnToChoice, PrivServChoice, customAddress);
 	}
-	else {
+	else
+	{
 		//! Wiimmfi patch for Mario Kart Wii - patch with PRIVSERV_OFF and handle all the patching within do_new_wiimmfi()
-		gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, returnToChoice, PRIVSERV_OFF);
+		gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, returnToChoice, PRIVSERV_OFF, customAddress);
 	}
 	
 
@@ -450,10 +464,20 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
     if(patchFix480pChoice)
 		PatchFix480p();
 
+	//! If we're NOT on Wiimmfi, patch the known RCE vulnerability in MKWii. 
+	//! Wiimmfi will handle that on its own through the update payload.
+	//! This will also patch error 23400 for a couple games that still have official servers.
+	if (PrivServChoice != PRIVSERV_WIIMMFI)
+	{
+		ocarina_patch(gameHeader.id);
+	}
+
 	//! New Wiimmfi patch should be loaded last, after the codehandler, just before the call to the entry point
-	if (PrivServChoice == PRIVSERV_WIIMMFI && memcmp(((void *)(0x80000000)), (char*)"RMC", 3) == 0 ) {
+	if (PrivServChoice == PRIVSERV_WIIMMFI && memcmp(gameHeader.id, "RMC", 3) == 0 )
+	{
 		// all the cool new Wiimmfi stuff: 
-		switch(do_new_wiimmfi()) {
+		switch(do_new_wiimmfi())
+		{
 			case 0: 
 				gprintf("Wiimmfi patch for Mario Kart Wii successful.\n"); 
 				break; 
@@ -617,7 +641,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		snprintf(disc2Path, sizeof(disc2Path), "%s", RealPath);
 		char *pathPtr = strrchr(disc2Path, '/');
 		if(pathPtr) *pathPtr = 0;
-		snprintf(disc2Path, sizeof(disc2Path), "%s/disc2.iso", disc2Path);
+		snprintf(disc2Path + strlen(disc2Path), sizeof(disc2Path) - strlen(disc2Path), "/disc2.iso");
 		if(CheckFile(disc2Path))
 		{
 			int choice = WindowPrompt(gameHdr->title, tr("This game has multiple discs. Please select the disc to launch."), tr("Disc 1"), tr("Disc 2"), tr("Cancel"));
@@ -638,7 +662,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 	{
 		char *pathPtr = strrchr(gamePath, '/');
 		if(pathPtr) *pathPtr = 0;
-		snprintf(gamePath, sizeof(gamePath), "%s/disc2.iso", gamePath);
+		snprintf(gamePath + strlen(gamePath), sizeof(gamePath) - strlen(gamePath), "/disc2.iso");
 	}
 
 	ExitApp();
@@ -801,7 +825,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	// Check if Devolution is available
 	u8 *loader_bin = NULL;
 	int DEVO_version = 0;
-	char DEVO_loader_path[100];
+	char DEVO_loader_path[110];
 	snprintf(DEVO_loader_path, sizeof(DEVO_loader_path), "%sloader.bin", Settings.DEVOLoaderPath);
 	FILE *f = fopen(DEVO_loader_path, "rb");
 	if(f)
@@ -848,7 +872,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	snprintf(disc2, sizeof(disc2), "%s", RealPath);
 	char *pathPtr = strrchr(disc2, '/');
 	if(pathPtr) *pathPtr = 0;
-	snprintf(disc2, sizeof(disc2), "%s/disc2.iso", disc2);
+	snprintf(disc2 + strlen(disc2), sizeof(disc2) - strlen(disc2), "/disc2.iso");
 	if(CheckFile(disc2))
 		multiDisc = true;
 
@@ -910,7 +934,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	{
 		if(devoMCEmulation == DEVO_MC_INDIVIDUAL)
 		{
-			snprintf(DEVO_memCard, sizeof(DEVO_memCard), "%s/memcard_%.6s.bin", DEVO_memCard, (const char *) gameHdr->id);
+			snprintf(DEVO_memCard + strlen(DEVO_memCard), sizeof(DEVO_memCard) - strlen(DEVO_memCard), "/memcard_%.6s.bin", (const char *) gameHdr->id);
 		}
 		else // same for all games
 		{
@@ -1023,6 +1047,8 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	u8 ninArcadeModeChoice = game_cfg->NINArcadeMode == INHERIT ? Settings.NINArcadeMode : game_cfg->NINArcadeMode;
 	u8 ninCCRumbleChoice = game_cfg->NINCCRumble == INHERIT ? Settings.NINCCRumble : game_cfg->NINCCRumble;
 	u8 ninSkipIPLChoice = game_cfg->NINSkipIPL == INHERIT ? Settings.NINSkipIPL : game_cfg->NINSkipIPL;
+	u8 ninBBAChoice = game_cfg->NINBBA == INHERIT ? Settings.NINBBA : game_cfg->NINBBA;
+	u8 ninBBAProfileChoice = game_cfg->NINBBAProfile == INHERIT ? Settings.NINBBAProfile : game_cfg->NINBBAProfile;
 
 	const char *ninLoaderPath = game_cfg->NINLoaderPath.size() == 0 ? Settings.NINLoaderPath : game_cfg->NINLoaderPath.c_str();
 
@@ -1176,6 +1202,14 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		NIN_cfg_version = 4;
 	else if(NINRev >= 358 && NINRev < 368)
 		NIN_cfg_version = 5;
+	else if(NINRev >= 368 && NINRev < 424)
+		NIN_cfg_version = 6;
+	else if(NINRev >= 424 && NINRev < 431)
+		NIN_cfg_version = 7;
+	else if(NINRev >= 431 && NINRev < 487)
+		NIN_cfg_version = 8;
+	else if(NINRev >= 487)
+		NIN_cfg_version = 9;
 
 
 	// Check USB device
@@ -1368,7 +1402,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		snprintf(disc2Path, sizeof(disc2Path), "%s", RealPath);
 		char *pathPtr = strrchr(disc2Path, '/');
 		if(pathPtr) *pathPtr = 0;
-		snprintf(disc2Path, sizeof(disc2Path), "%s/disc2.iso", disc2Path);
+		snprintf(disc2Path + strlen(disc2Path), sizeof(disc2Path) - strlen(disc2Path), "/disc2.iso");
 		if(CheckFile(disc2Path))
 		{
 			int choice = WindowPrompt(gameHdr->title, tr("This game has multiple discs. Please select the disc to launch."), tr("Disc 1"), tr("Disc 2"), tr("Cancel"));
@@ -1388,7 +1422,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	{
 		char *pathPtr = strrchr(gamePath, '/');
 		if(pathPtr) *pathPtr = 0;
-		snprintf(gamePath, sizeof(gamePath), "%s/disc2.iso", gamePath);
+		snprintf(gamePath + strlen(gamePath), sizeof(gamePath) - strlen(gamePath), "/disc2.iso");
 	}
 
 	if(gameHdr->type == TYPE_GAME_GC_DISC)
@@ -1498,6 +1532,14 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	// Remove data read speed limiter
 	if(NIN_cfg_version >= 5 && ninRemlimitChoice)
 		nin_config->Config |= NIN_CFG_REMLIMIT;
+	
+	// BBA emulation
+	if (NIN_cfg_version >= 9 && ninBBAChoice)
+		nin_config->Config |= NIN_CFG_BBA_EMU; // v6.487+
+	
+	// BBA network profile
+	if(NIN_cfg_version >= 9 && ninBBAChoice && !isWiiU())
+		nin_config->NetworkProfile = ninBBAProfileChoice; // v6.487+
 	
 	// Setup Video Mode
 	if(ninVideoChoice == DML_VIDEO_NONE)				// No video mode changes

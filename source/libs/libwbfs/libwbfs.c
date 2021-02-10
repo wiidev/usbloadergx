@@ -342,7 +342,7 @@ u32 wbfs_count_usedblocks(wbfs_t*p)
 		if (v == ~0U)
 			count += 32;
 		else if (v != 0) for (j = 0; j < 32; j++)
-			if (v & (1 << j)) count++;
+			if (v & (1U << j)) count++;
 	}
 	return count;
 }
@@ -369,7 +369,7 @@ static u32 alloc_block(wbfs_t*p)
 		if (v != 0)
 		{
 			for (j = 0; j < 32; j++)
-				if (v & (1 << j))
+				if (v & (1U << j))
 				{
 					p->freeblks[i] = wbfs_htonl( v & ~( 1 << j ) );
 					return (i * 32) + j + 1;

@@ -24,12 +24,13 @@
  * for WiiXplorer 2010
  ***************************************************************************/
 #include <gccore.h>
-#include <fat.h>
-#include <ntfs.h>
-#include <ext2.h>
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
+
+#include "libs/libfat/fat.h"
+#include "libs/libntfs/ntfs.h"
+#include "libs/libext2fs/ext2.h"
 #include "libs/libwbfs/libwbfs.h"
 #include "utils/uncompress.h"
 #include "PartitionHandle.h"
@@ -375,7 +376,7 @@ int PartitionHandle::CheckGPT(u8 PartNum)
 
 			bool bootable = (memcmp(part_entry->part_type_guid, TYPE_BIOS, 16) == 0);
 
-			AddPartition("GUID-Entry", le64(part_entry->part_first_lba), le64(part_entry->part_last_lba), bootable, PARTITION_TYPE_GPT, i, GPT);
+			AddPartition("GUID-Entry", le64(part_entry->part_first_lba), le64(part_entry->part_last_lba)-le64(part_entry->part_first_lba), bootable, PARTITION_TYPE_GPT, i, GPT);
 		}
 
 		next_lba++;

@@ -27,7 +27,7 @@
 GCMultiDiscMenu::GCMultiDiscMenu(const std::vector<struct discHdr> &List)
 	: gcGameList(List)
 {
-	titleTxt->SetText(tr("Game Cube Install Menu"));
+	titleTxt->SetText(tr("GameCube Install Menu"));
 	button1Txt->SetText(tr("Install"));
 	browserRefresh();
 }

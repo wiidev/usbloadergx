@@ -125,9 +125,9 @@ int MountGamePartition(bool ShowGUI)
 
 	s32 wbfsinit = WBFS_Init(WBFS_DEVICE_USB);
 
-	if(Settings.LoaderMode & MODE_WIIGAMES)
+	if (wbfsinit < 0)
 	{
-		if (wbfsinit < 0)
+		if(Settings.LoaderMode & MODE_WIIGAMES)
 		{
 			if(ShowGUI)
 				ShowError("%s %s", tr( "USB Device not initialized." ), tr("Switching to channel list mode."));
@@ -135,13 +135,16 @@ int MountGamePartition(bool ShowGUI)
 			Settings.LoaderMode &= ~MODE_WIIGAMES;
 			Settings.LoaderMode |= MODE_NANDCHANNELS;
 		}
-		else
-		{
-			if(Settings.MultiplePartitions)
-				ret = WBFS_OpenAll();
-			else if(!Settings.FirstTimeRun)
-				ret = WBFS_OpenPart(Settings.partition);
+	}
+	else
+	{
+		if(Settings.MultiplePartitions)
+			ret = WBFS_OpenAll();
+		else if(!Settings.FirstTimeRun)
+			ret = WBFS_OpenPart(Settings.partition);
 
+		if(Settings.LoaderMode & MODE_WIIGAMES)
+		{
 			if(ret < 0)
 				ret = FindGamePartition();
 

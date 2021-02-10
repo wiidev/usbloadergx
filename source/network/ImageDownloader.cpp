@@ -32,24 +32,9 @@
 
 #define VALID_IMAGE(x) (!(x->size == 36864 || x->size <= 1024 || x->size == 7386 || x->size <= 1174 || x->size == 4446 || x->data == NULL))
 
-static const char *serverURL3D = "https://art.gametdb.com/wii/cover3D/";
-static const char *serverURL2D = "https://art.gametdb.com/wii/cover/";
-static const char *serverURLFullHQ = "https://art.gametdb.com/wii/coverfullHQ/";
-static const char *serverURLFull = "https://art.gametdb.com/wii/coverfull/";
-static const char *serverURLOrigDiscs = "https://art.gametdb.com/wii/disc/";
-static const char *serverURLCustomDiscs = "https://art.gametdb.com/wii/disccustom/";
-static const char *serverURLCustomBannersGC = "https://banner.rc24.xyz/";
-
 void ImageDownloader::DownloadImages()
 {
-	bool ValidBannerURL = false;
-	if(strncasecmp(serverURLCustomBannersGC, "https://", strlen("https://")) == 0)
-	{
-		char *path = strchr(serverURLCustomBannersGC + strlen("https://"), '/');
-		if(path)
-			ValidBannerURL = true;
-	}
-	bool showBanner = (ValidBannerURL && Settings.LoaderMode & MODE_GCGAMES);
+	bool showBanner = (Settings.LoaderMode & MODE_GCGAMES);
 
 	int choice = CheckboxWindow(tr( "Cover Download" ), 0, tr( "3D Covers" ), tr( "Flat Covers" ), tr("Full Covers"), tr( "Discarts" ), showBanner ? tr( "Custom Banners" ) : 0, 0, showBanner ? 0x1F : 0xF); // ask for download choice
 	if (choice == 0 || choice == CheckedNone)
@@ -105,32 +90,32 @@ void ImageDownloader::Start()
 void ImageDownloader::FindMissingImages()
 {
 	if(choices & CheckedBox1)
-		FindMissing(Settings.covers_path, serverURL3D, NULL, tr("Downloading 3D Covers"), NULL, ".png");
+		FindMissing(Settings.covers_path, Settings.URL_Covers3D, NULL, tr("Downloading 3D Covers"), NULL, ".png");
 
 	if(choices & CheckedBox2)
-		FindMissing(Settings.covers2d_path, serverURL2D, NULL, tr("Downloading Flat Covers"), NULL, ".png");
+		FindMissing(Settings.covers2d_path, Settings.URL_Covers2D, NULL, tr("Downloading Flat Covers"), NULL, ".png");
 
 	if(choices & CheckedBox3)
 	{
-		const char * downloadURL = (Settings.coversfull == COVERSFULL_HQ || Settings.coversfull == COVERSFULL_HQ_LQ ) ? serverURLFullHQ : serverURLFull;
+		const char * downloadURL = (Settings.coversfull == COVERSFULL_HQ || Settings.coversfull == COVERSFULL_HQ_LQ ) ? Settings.URL_CoversFullHQ : Settings.URL_CoversFull;
 		const char * progressTitle = (Settings.coversfull == COVERSFULL_HQ || Settings.coversfull == COVERSFULL_HQ_LQ ) ? tr("Downloading Full HQ Covers") : tr("Downloading Full LQ Covers");
-		const char * backupURL = (Settings.coversfull == COVERSFULL_HQ_LQ || Settings.coversfull == COVERSFULL_LQ_HQ) ? ((Settings.coversfull == COVERSFULL_HQ_LQ) ? serverURLFull : serverURLFullHQ) : NULL;
+		const char * backupURL = (Settings.coversfull == COVERSFULL_HQ_LQ || Settings.coversfull == COVERSFULL_LQ_HQ) ? ((Settings.coversfull == COVERSFULL_HQ_LQ) ? Settings.URL_CoversFull : Settings.URL_CoversFullHQ) : NULL;
 		const char * backupProgressTitle = (Settings.coversfull == COVERSFULL_HQ_LQ || Settings.coversfull == COVERSFULL_LQ_HQ) ? ((Settings.coversfull == COVERSFULL_HQ_LQ) ? tr("Downloading Full LQ Covers") : tr("Downloading Full HQ Covers")) : NULL;
 		FindMissing(Settings.coversFull_path, downloadURL, backupURL, progressTitle, backupProgressTitle, ".png");
 	}
 
 	if(choices & CheckedBox4)
 	{
-		const char * downloadURL = (Settings.discart == DISCARTS_ORIGINALS || Settings.discart == DISCARTS_ORIGINALS_CUSTOMS ) ? serverURLOrigDiscs : serverURLCustomDiscs;
+		const char * downloadURL = (Settings.discart == DISCARTS_ORIGINALS || Settings.discart == DISCARTS_ORIGINALS_CUSTOMS ) ? Settings.URL_Discs : Settings.URL_DiscsCustom;
 		const char * progressTitle = (Settings.discart == DISCARTS_ORIGINALS || Settings.discart == DISCARTS_ORIGINALS_CUSTOMS ) ? tr("Downloading original Discarts") : tr("Downloading custom Discarts");
-		const char * backupURL = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS || Settings.discart == DISCARTS_CUSTOMS_ORIGINALS) ? ((Settings.discart == DISCARTS_ORIGINALS_CUSTOMS) ? serverURLCustomDiscs : serverURLOrigDiscs) : NULL;
+		const char * backupURL = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS || Settings.discart == DISCARTS_CUSTOMS_ORIGINALS) ? ((Settings.discart == DISCARTS_ORIGINALS_CUSTOMS) ? Settings.URL_DiscsCustom : Settings.URL_Discs) : NULL;
 		const char * backupProgressTitle = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS || Settings.discart == DISCARTS_CUSTOMS_ORIGINALS) ? ((Settings.discart == DISCARTS_ORIGINALS_CUSTOMS) ? tr("Downloading custom Discarts") : tr("Downloading original Discarts")) : NULL;
 		FindMissing(Settings.disc_path, downloadURL, backupURL, progressTitle, backupProgressTitle, ".png");
 	}
 
 	if(choices & CheckedBox5)
 	{
-		FindMissing(Settings.BNRCachePath, serverURLCustomBannersGC, NULL, tr("Downloading Custom Banners"), NULL, ".bnr");
+		FindMissing(Settings.BNRCachePath, Settings.URL_Banners, NULL, tr("Downloading Custom Banners"), NULL, ".bnr");
 	}
 }
 
@@ -174,12 +159,7 @@ void ImageDownloader::FindMissing(const char *writepath, const char *downloadURL
 
 int ImageDownloader::DownloadProcess(int TotalDownloadCount)
 {
-	char progressMsg[255];
-	char *path = strchr(serverURLCustomBannersGC + strlen("https://"), '/');
-	int domainlength = path - serverURLCustomBannersGC;
-	char domain[domainlength + 1];
-	strncpy(domain, serverURLCustomBannersGC, domainlength);
-	domain[domainlength] = '\0';
+	char progressMsg[270];
 
 	for(u32 i = 0, pos = 0; i < MissingImages.size(); ++i, ++pos)
 	{
@@ -187,9 +167,21 @@ int ImageDownloader::DownloadProcess(int TotalDownloadCount)
 			break;
 
 		if(strcmp(MissingImages[i].fileExt, ".bnr") == 0)
+		{
+			char *path = strchr(MissingImages[i].downloadURL + ((strncmp(Settings.URL_Banners, "https://", 8) == 0) ? 8 : 7), '/');
+			int domainlength = path - Settings.URL_Banners;
+			char domain[domainlength + 1];
+			strlcpy(domain, Settings.URL_Banners, domainlength + 1);
 			snprintf(progressMsg, sizeof(progressMsg), "%s : %s.bnr", domain, MissingImages[i].gameID.c_str());
+		}
 		else
-			snprintf(progressMsg, sizeof(progressMsg), "https://gametdb.com : %s.png", MissingImages[i].gameID.c_str());
+		{
+			char *path = strchr(MissingImages[i].downloadURL + ((strncmp(MissingImages[i].downloadURL, "https://", 8) == 0) ? 8 : 7), '/');
+			int domainlength = path - MissingImages[i].downloadURL;
+			char domain[domainlength + 1];
+			strlcpy(domain, MissingImages[i].downloadURL, domainlength + 1);
+			snprintf(progressMsg, sizeof(progressMsg), "%s : %s.png", domain, MissingImages[i].gameID.c_str());
+		}
 
 		ShowProgress(MissingImages[i].progressTitle, fmt("%i %s", TotalDownloadCount - pos, tr( "files left" )), progressMsg, pos, TotalDownloadCount);
 
@@ -223,7 +215,8 @@ int ImageDownloader::DownloadProcess(int TotalDownloadCount)
 			fclose(pfile);
 			MissingImagesCount--;
 		}
-		free(file.data);
+		MEM2_free(file.data);
+		gprintf("File saved successfully (%s%s)\n", MissingImages[i].gameID.c_str(), MissingImages[i].fileExt);
 
 		//! Remove the image from the vector since it's done
 		MissingImages.erase(MissingImages.begin()+i);
@@ -305,7 +298,7 @@ void ImageDownloader::DownloadImage(const char *url, const char *gameID, const c
 	if(PAL && strcmp(CheckedRegion, "EN") != 0)
 	{
 		snprintf(downloadURL, sizeof(downloadURL), "%sEN/%s.png", url, gameID);
-		gprintf(" - Not found.\n%s", downloadURL);
+		gprintf(" - Not found.\n%s\n", downloadURL);
 		downloadfile(downloadURL, file);
 		if(VALID_IMAGE(file))
 			return;
@@ -318,13 +311,13 @@ void ImageDownloader::DownloadImage(const char *url, const char *gameID, const c
 			lang = "US";
 
 		snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
-		gprintf(" - Not found.\n%s", downloadURL);
+		gprintf(" - Not found.\n%s\n", downloadURL);
 		downloadfile(downloadURL, file);
 		if(VALID_IMAGE(file))
 			return;
 
 		snprintf(downloadURL, sizeof(downloadURL), "%sOTHER/%s.png", url, gameID);
-		gprintf(" - Not found.\n%s", downloadURL);
+		gprintf(" - Not found.\n%s\n", downloadURL);
 		downloadfile(downloadURL, file);
 		if(VALID_IMAGE(file))
 			return;
@@ -333,7 +326,7 @@ void ImageDownloader::DownloadImage(const char *url, const char *gameID, const c
 		{
 			lang = "RU";
 			snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
-			gprintf(" - Not found.\n%s", downloadURL);
+			gprintf(" - Not found.\n%s\n", downloadURL);
 			downloadfile(downloadURL, file);
 			if(VALID_IMAGE(file))
 				return;
@@ -343,14 +336,14 @@ void ImageDownloader::DownloadImage(const char *url, const char *gameID, const c
 		{
 			lang = "FI";
 			snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
-			gprintf(" - Not found.\n%s", downloadURL);
+			gprintf(" - Not found.\n%s\n", downloadURL);
 			downloadfile(downloadURL, file);
 			if(VALID_IMAGE(file))
 				return;
 			
 			lang = "SE";
 			snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
-			gprintf(" - Not found.\n%s", downloadURL);
+			gprintf(" - Not found.\n%s\n", downloadURL);
 			downloadfile(downloadURL, file);
 			if(VALID_IMAGE(file))
 				return;
@@ -374,31 +367,31 @@ void ImageDownloader::CreateCSVLog()
 
 	for (u32 i = 0; i < MissingImages.size(); ++i)
 	{
-		if(MissingImages[i].downloadURL == serverURL3D)
+		if(MissingImages[i].downloadURL == Settings.URL_Covers3D)
 		{
 			ImageType = "3D Cover";
 		}
-		else if(MissingImages[i].downloadURL == serverURL2D)
+		else if(MissingImages[i].downloadURL == Settings.URL_Covers2D)
 		{
 			ImageType = "2D Cover";
 		}
-		else if(MissingImages[i].downloadURL == serverURLFullHQ)
+		else if(MissingImages[i].downloadURL == Settings.URL_CoversFullHQ)
 		{
 			ImageType = "Full HQ Cover";
 		}
-		else if(MissingImages[i].downloadURL == serverURLFull)
+		else if(MissingImages[i].downloadURL == Settings.URL_CoversFull)
 		{
 			ImageType = "Full LQ Cover";
 		}
-		else if(MissingImages[i].downloadURL == serverURLOrigDiscs)
+		else if(MissingImages[i].downloadURL == Settings.URL_Discs)
 		{
 			ImageType = "Original Discart";
 		}
-		else if(MissingImages[i].downloadURL == serverURLCustomDiscs)
+		else if(MissingImages[i].downloadURL == Settings.URL_DiscsCustom)
 		{
 			ImageType = "Custom Discart";
 		}
-		else if(MissingImages[i].downloadURL == serverURLCustomBannersGC)
+		else if(MissingImages[i].downloadURL == Settings.URL_Banners)
 		{
 			ImageType = "Custom Banner";
 		}

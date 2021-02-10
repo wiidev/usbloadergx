@@ -149,6 +149,9 @@ msgstr ""
 msgid "Alternate DOL"
 msgstr "Alternatieve DOL"
 
+msgid "AltWFC"
+msgstr ""
+
 msgid "An example file was created here:"
 msgstr "Er is hier een voorbeeldbestand gemaakt:"
 
@@ -537,11 +540,17 @@ msgstr ""
 msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr ""
 
+msgid "Custom Address"
+msgstr "Aangepaste Adres"
+
 msgid "Custom Banners"
 msgstr "Aangepaste Banners"
 
 msgid "Custom Paths"
 msgstr "Aangepaste Locaties"
+
+msgid "Custom"
+msgstr "Aangepaste"
 
 msgid "Customs"
 msgstr "Aangepaste"
@@ -1086,11 +1095,14 @@ msgstr ""
 msgid "GXFlush"
 msgstr ""
 
-msgid "Game Cube Games Delete"
+msgid "GameCube Games Delete"
 msgstr "GameCube Spel Verwijderen"
 
-msgid "Game Cube Install Menu"
+msgid "GameCube Install Menu"
 msgstr "GameCube Installatie Menu"
+
+msgid "Game Header Cache Files Path"
+msgstr ""
 
 msgid "Game ID"
 msgstr "Spel ID"
@@ -1235,7 +1247,7 @@ msgstr "Netwerk initialiseren"
 msgid "Insert Disk"
 msgstr "Voer een disk in"
 
-msgid "Insert a Wii or a Game Cube Disc!"
+msgid "Insert a Wii or a GameCube Disc!"
 msgstr "Voer een Wii of GameCube Disk in!"
 
 msgid "Install"
@@ -1262,7 +1274,7 @@ msgstr ""
 msgid "Install finished"
 msgstr "Installatie voltooid"
 
-msgid "Installing Game Cube Game..."
+msgid "Installing GameCube Game..."
 msgstr "GameCube Spel Installeren..."
 
 msgid "Installing content"
@@ -1587,7 +1599,7 @@ msgstr "Normaal"
 msgid "Not Initialized"
 msgstr "Niet Geïnitialiseerd"
 
-msgid "Not a Wii or a Game Cube Disc"
+msgid "Not a Wii or a GameCube Disc"
 msgstr "Geen Wii of GameCube Disk"
 
 msgid "Not a valid URL"
@@ -1737,6 +1749,9 @@ msgstr "Speel Vorige"
 msgid "Playing Music:"
 msgstr "Speelt nu:"
 
+msgid "Please enter a valid address e.g. wiimmfi.de"
+msgstr ""
+
 msgid "Please wait"
 msgstr "Even geduld"
 
@@ -1811,6 +1826,9 @@ msgstr "Resetten"
 
 msgid "Reset BG Music"
 msgstr "Reset achtergrond muziek"
+
+msgid "Reset Game Header Cache"
+msgstr ""
 
 msgid "Reset Playcounter"
 msgstr "Speeltellers resetten"
@@ -1950,6 +1968,12 @@ msgstr "Fouten overslaan"
 msgid "Skip IPL"
 msgstr ""
 
+msgid "BBA Emulation"
+msgstr ""
+
+msgid "BBA Net Profile"
+msgstr ""
+
 msgid "Sneek Video Patch"
 msgstr ""
 
@@ -2039,6 +2063,9 @@ msgstr "Synchroniseren..."
 
 msgid "System Default"
 msgstr "Systeem standaard"
+
+msgid "System Proxy Settings"
+msgstr ""
 
 msgid "TChinese"
 msgstr "Chinees Trad."
@@ -2232,6 +2259,9 @@ msgstr "USBLoaderGX kon Nintendont config bestand niet schrijven. Nintendont toc
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
 msgstr ""
 
+msgid "Use Game Header Cache"
+msgstr ""
+
 msgid "Uninstall"
 msgstr "Verwijderen"
 
@@ -2392,7 +2422,7 @@ msgstr ""
 msgid "Wiilight"
 msgstr "WiiLight"
 
-msgid "Wiimmfi.de"
+msgid "Wiimmfi"
 msgstr ""
 
 msgid "Wiinnertag"

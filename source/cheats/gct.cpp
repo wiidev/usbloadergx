@@ -145,7 +145,11 @@ int GCTCheats::openTxtfile(const char * filename)
 
 	const int max_line_size = 4096;
 	char *line = new (std::nothrow) char[max_line_size];
-	if(!line) return -1;
+	if (!line)
+	{
+		fclose(pFile);
+		return -1;
+	}
 
 	fgets(line, max_line_size, pFile);
 	RemoveLineEnds(line);
@@ -158,7 +162,7 @@ int GCTCheats::openTxtfile(const char * filename)
 	{
 		RemoveLineEnds(line);
 
-		if(*line == 0)
+		if (*line == 0)
 			continue;
 
 		// first line is the cheat name
@@ -169,7 +173,7 @@ int GCTCheats::openTxtfile(const char * filename)
 		{
 			RemoveLineEnds(line);
 
-			if(*line == 0)  // empty line means start of new cheat
+			if (*line == 0)  // empty line means start of new cheat
 				break;
 
 			if (IsCode(line))
@@ -187,7 +191,7 @@ int GCTCheats::openTxtfile(const char * filename)
 			}
 		}
 
-		if(!cheatEntry.sCheats.empty())
+		if (!cheatEntry.sCheats.empty())
 			cheatList.push_back(cheatEntry);
 	}
 	fclose(pFile);

@@ -157,7 +157,7 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 		int choice = WindowPrompt(tr( "Do you want to extract the save game?" ), tr("The save game will be extracted to your emu nand path."), tr( "Yes" ), tr( "Cancel" ));
 		if (choice == 1)
 		{
-			char filePath[512];
+			char filePath[1024];
 			char nandPath[512];
 			if(DiscHeader->tid != 0) //! Channels
 			{

@@ -22,7 +22,8 @@
 #include "gecko.h"
 #include "svnrev.h"
 
-static const char * LanguageFilesURL = "https://svn.code.sf.net/p/usbloadergx/code/trunk/Languages/";
+static const char * LanguageFilesURL = "https://raw.githubusercontent.com/wiidev/usbloadergx/enhanced/Languages/";
+static const char * LanguagesURL = "https://raw.githubusercontent.com/wiidev/usbloadergx/enhanced/Languages/index.html";
 
 int DownloadAllLanguageFiles(int revision)
 {
@@ -39,10 +40,10 @@ int DownloadAllLanguageFiles(int revision)
 	}
 	char fullURL[300];
 
-	URL_List LinkList(LanguageFilesURL);
+	URL_List LinkList(LanguagesURL);
 	int listsize = LinkList.GetURLCount();
 	int files_downloaded = 0;
-	char target[6];
+	char target[11];
 	if(revision > 0)
 		snprintf(target, sizeof(target), "%d", revision);
 	else
@@ -82,7 +83,7 @@ int DownloadAllLanguageFiles(int revision)
 				fclose(pfile);
 				files_downloaded++;
 			}
-			free(file.data);
+			MEM2_free(file.data);
 		}
 	}
 
@@ -150,7 +151,7 @@ int UpdateLanguageFiles()
 				fclose(pfile);
 				done++;
 			}
-			free(file.data);
+			MEM2_free(file.data);
 		}
 	}
 

@@ -149,6 +149,9 @@ msgstr ""
 msgid "Alternate DOL"
 msgstr "代替DOL起動"
 
+msgid "AltWFC"
+msgstr ""
+
 msgid "An example file was created here:"
 msgstr "テンプレファイルが作成されました:"
 
@@ -537,11 +540,17 @@ msgstr ""
 msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr ""
 
+msgid "Custom Address"
+msgstr "カスタム アドレス"
+
 msgid "Custom Banners"
 msgstr "カスタムバナー"
 
 msgid "Custom Paths"
 msgstr "パスを変更"
+
+msgid "Custom"
+msgstr "カスタム"
 
 msgid "Customs"
 msgstr "カスタム"
@@ -1086,11 +1095,14 @@ msgstr ""
 msgid "GXFlush"
 msgstr ""
 
-msgid "Game Cube Games Delete"
+msgid "GameCube Games Delete"
 msgstr "GCゲームの削除"
 
-msgid "Game Cube Install Menu"
+msgid "GameCube Install Menu"
 msgstr "GCインストールメニュー"
+
+msgid "Game Header Cache Files Path"
+msgstr ""
 
 msgid "Game ID"
 msgstr "IDのみ"
@@ -1235,7 +1247,7 @@ msgstr "接続中･･･"
 msgid "Insert Disk"
 msgstr "ﾃﾞｨｽｸを入れてください"
 
-msgid "Insert a Wii or a Game Cube Disc!"
+msgid "Insert a Wii or a GameCube Disc!"
 msgstr "ｹﾞｰﾑﾃﾞｨｽｸを入れてください!"
 
 msgid "Install"
@@ -1262,7 +1274,7 @@ msgstr ""
 msgid "Install finished"
 msgstr "インストールが終了しました"
 
-msgid "Installing Game Cube Game..."
+msgid "Installing GameCube Game..."
 msgstr "GCゲームをインストール中..."
 
 msgid "Installing content"
@@ -1587,7 +1599,7 @@ msgstr "ワイド"
 msgid "Not Initialized"
 msgstr "初期化されていません"
 
-msgid "Not a Wii or a Game Cube Disc"
+msgid "Not a Wii or a GameCube Disc"
 msgstr "ｹﾞｰﾑﾃﾞｨｽｸではありません"
 
 msgid "Not a valid URL"
@@ -1737,6 +1749,9 @@ msgstr "前へ"
 msgid "Playing Music:"
 msgstr "再生中"
 
+msgid "Please enter a valid address e.g. wiimmfi.de"
+msgstr ""
+
 msgid "Please wait"
 msgstr "お待ちください"
 
@@ -1811,6 +1826,9 @@ msgstr "リセット"
 
 msgid "Reset BG Music"
 msgstr "BGMをリセット"
+
+msgid "Reset Game Header Cache"
+msgstr ""
 
 msgid "Reset Playcounter"
 msgstr "プレイ回数をリセット"
@@ -1950,6 +1968,12 @@ msgstr "エラーをスキップ"
 msgid "Skip IPL"
 msgstr ""
 
+msgid "BBA Emulation"
+msgstr ""
+
+msgid "BBA Net Profile"
+msgstr ""
+
 msgid "Sneek Video Patch"
 msgstr "SNEEK映像パッチ"
 
@@ -2039,6 +2063,9 @@ msgstr "同期中です..."
 
 msgid "System Default"
 msgstr "Wiiの初期値"
+
+msgid "System Proxy Settings"
+msgstr ""
 
 msgid "TChinese"
 msgstr "繁体中国語"
@@ -2232,6 +2259,9 @@ msgstr ""
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
 msgstr ""
 
+msgid "Use Game Header Cache"
+msgstr ""
+
 msgid "Uninstall"
 msgstr "アンインストール"
 
@@ -2392,7 +2422,7 @@ msgstr ""
 msgid "Wiilight"
 msgstr "スロット点灯機能"
 
-msgid "Wiimmfi.de"
+msgid "Wiimmfi"
 msgstr ""
 
 msgid "Wiinnertag"

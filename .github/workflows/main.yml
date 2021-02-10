@@ -1,0 +1,84 @@
+name: Build binaries
+
+on:
+  push:
+    paths-ignore:
+      - 'HBC/**'
+      - 'Languages/**'
+  pull_request:
+    paths-ignore:
+      - 'HBC/**'
+      - 'Languages/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache
+        id: cache-1
+        uses: actions/cache@v2
+        with:
+          path: cache
+          key: ${{ runner.os }}-cache-1
+
+      - name: Download devkitPPC r38, libogc 2.1.0, bin2s and elf2dol
+        if: steps.cache-1.outputs.cache-hit != 'true'
+        # general-tools is needed for bin2s and gamecube-tools is needed for elf2dol
+        run: | 
+          mkdir cache && cd cache
+          wget "https://wii.leseratte10.de/devkitPro/file.php/devkitPPC-r38-1-linux_x86_64.pkg.tar.xz"
+          wget "https://wii.leseratte10.de/devkitPro/file.php/devkitppc-rules-1.1.0-1-any.pkg.tar.xz"
+          wget "https://wii.leseratte10.de/devkitPro/file.php/libogc-2.1.0-1-any.pkg.tar.xz"
+          wget "https://wii.leseratte10.de/devkitPro/file.php/general-tools-1.2.0-1-linux.pkg.tar.xz"
+          wget "https://wii.leseratte10.de/devkitPro/file.php/gamecube-tools-1.0.2-1-linux.pkg.tar.xz"
+          cd ..
+
+      - name: Verify checksums for the downloaded files
+        run: |
+          sha256sum -c <<EOF
+          b8775c66e7500182a5f93335140d575a65ca2beb7110dfba16bf1eaf1d6fe13a  cache/devkitPPC-r38-1-linux_x86_64.pkg.tar.xz
+          5cbb617bee3d53a6857427af9168694e21095ae3223819df62aaeaf52750d772  cache/devkitppc-rules-1.1.0-1-any.pkg.tar.xz
+          6ac68676e33fd53d8b716ea6c7247b0e465eff7f7a3cbb0e3093310615a48863  cache/gamecube-tools-1.0.2-1-linux.pkg.tar.xz
+          69edef800f01ff66dc5ed4d173cb3ac07e5336fbb926369eaa3c38163775c350  cache/general-tools-1.2.0-1-linux.pkg.tar.xz
+          220871bfc45abcab612e020a00e6c8f19f51eb1be2d3c7d23f42cb10497ba786  cache/libogc-2.1.0-1-any.pkg.tar.xz
+          EOF
+
+
+      - name: Extract everything
+        # general-tools is needed for bin2s and gamecube-tools is needed for elf2dol
+        run: | 
+          tar -xf cache/devkitPPC-r38-1-linux_x86_64.pkg.tar.xz opt/devkitpro/devkitPPC --strip-components=1
+          tar -xf cache/devkitppc-rules-1.1.0-1-any.pkg.tar.xz opt/devkitpro/devkitPPC --strip-components=1
+          tar -xf cache/libogc-2.1.0-1-any.pkg.tar.xz opt/devkitpro/libogc --strip-components=1
+          tar -xf cache/general-tools-1.2.0-1-linux.pkg.tar.xz opt/devkitpro/tools/bin/bin2s --strip-components=4
+          sudo cp bin2s /usr/local/bin/bin2s
+          tar -xf cache/gamecube-tools-1.0.2-1-linux.pkg.tar.xz opt/devkitpro/tools/bin/elf2dol --strip-components=4
+          sudo cp elf2dol /usr/local/bin/elf2dol
+          
+      - name: Compile
+        # version would be 0 unless subversion is removed
+        run: sudo apt-get -qq remove subversion > /dev/null; PATH=$(pwd)/devkitpro/devkitPPC/bin:$PATH DEVKITPPC=$(pwd)/devkitpro/devkitPPC DEVKITPRO=$(pwd)/devkitpro make
+
+      - name: Package
+        id: pack
+        run: |
+          mkdir -p upload/apps/usbloader_gx/
+          cp boot.dol upload/apps/usbloader_gx/
+          cp HBC/icon.png upload/apps/usbloader_gx/
+          cp HBC/meta.xml upload/apps/usbloader_gx/
+          echo "::set-output name=sha::$(echo ${GITHUB_SHA} | head -c 7)"
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v2
+        with: 
+          name: usbloadergx_${{ steps.pack.outputs.sha }}
+          path: upload
+
+      - name: Upload debug binary
+        uses: actions/upload-artifact@v2
+        with: 
+          name: usbloadergx_${{ steps.pack.outputs.sha }}_debug
+          path: boot.elf

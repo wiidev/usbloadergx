@@ -24,6 +24,7 @@
 #include <gccore.h>
 #include <ogc/machine/processor.h>
 #include <unistd.h>
+
 #include "FeatureSettingsMenu.hpp"
 #include "Channels/channels.h"
 #include "settings/CGameCategories.hpp"
@@ -44,6 +45,7 @@
 #include "wad/nandtitle.h"
 #include "wad/wad.h"
 #include "sys.h"
+#include "cache/cache.hpp"
 
 static const char * OnOffText[] =
 {
@@ -64,10 +66,12 @@ FeatureSettingsMenu::FeatureSettingsMenu()
 	int Idx = 0;
 	Options->SetName(Idx++, "%s", tr( "Titles from GameTDB" ));
 	Options->SetName(Idx++, "%s", tr( "Cache Titles" ));
+	Options->SetName(Idx++, "%s", tr( "Use Game Header Cache" ));
 	Options->SetName(Idx++, "%s", tr( "Force Titles from Disc" ));
 	Options->SetName(Idx++, "%s", tr( "Wiilight" ));
 	Options->SetName(Idx++, "%s", tr( "Rumble" ));
 	Options->SetName(Idx++, "%s", tr( "AutoInit Network" ));
+	Options->SetName(Idx++, "%s", tr( "System Proxy Settings" ));
 	Options->SetName(Idx++, "%s", tr( "Messageboard Update" ));
 	Options->SetName(Idx++, "%s", tr( "Wiinnertag" ));
 	Options->SetName(Idx++, "%s", tr( "Import Categories" ));
@@ -79,6 +83,7 @@ FeatureSettingsMenu::FeatureSettingsMenu()
 //	Options->SetName(Idx++, "%s", tr( "Update Nintendont" ));
 	Options->SetName(Idx++, "%s", tr( "WiiU Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "Boot Neek System Menu" ));
+	Options->SetName(Idx++, "%s", tr( "Reset Game Header Cache" ));
 
 	OldTitlesOverride = Settings.titlesOverride;
 	OldCacheTitles = Settings.CacheTitles;
@@ -120,6 +125,9 @@ void FeatureSettingsMenu::SetOptionValues()
 	//! Settings: Cache Titles
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.CacheTitles] ));
 
+	//! Settings: Use Game Header Cache
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.UseGameHeaderCache] ));
+
 	//! Settings: Force Titles from Disc
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.ForceDiscTitles] ));
 
@@ -131,6 +139,9 @@ void FeatureSettingsMenu::SetOptionValues()
 
 	//! Settings: AutoInit Network
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.autonetwork] ));
+
+	//! Settings: System Proxy Settings
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.ProxyUseSystem] ));
 
 	//! Settings: Messageboard Update
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.PlaylogUpdate] ));
@@ -189,6 +200,12 @@ int FeatureSettingsMenu::GetMenuInternal()
 		if (++Settings.CacheTitles >= MAX_ON_OFF) Settings.CacheTitles = 0;
 	}
 
+	//! Settings: Use Game Header Cache
+	else if (ret == ++Idx)
+	{
+		if (++Settings.UseGameHeaderCache >= MAX_ON_OFF) Settings.UseGameHeaderCache = 0;
+	}
+
 	//! Settings: Force Titles from Disc
 	else if (ret == ++Idx)
 	{
@@ -211,6 +228,12 @@ int FeatureSettingsMenu::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.autonetwork >= MAX_ON_OFF) Settings.autonetwork = 0;
+	}
+
+	//! Settings: System Proxy Settings
+	else if (ret == ++Idx)
+	{
+		if (++Settings.ProxyUseSystem >= MAX_ON_OFF) Settings.ProxyUseSystem = 0;
 	}
 
 	//! Settings: Messageboard Update
@@ -245,13 +268,13 @@ int FeatureSettingsMenu::GetMenuInternal()
 			{
 				if(Wiinnertag::CreateExample(Settings.WiinnertagPath))
 				{
-					char text[200];
+					char text[300];
 					snprintf(text, sizeof(text), "%s %s", tr("An example file was created here:"), filepath);
 					WindowPrompt(tr("Success"), text, tr("OK"));
 				}
 				else
 				{
-					char text[200];
+					char text[300];
 					snprintf(text, sizeof(text), "%s %s", tr("Could not write to:"), filepath);
 					WindowPrompt(tr("Failed"), text, tr("OK"));
 				}
@@ -496,7 +519,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 
 		char wadpath[150];
 		snprintf(wadpath, sizeof(wadpath), "%s/wad/", Settings.BootDevice);
-		
+
 		int choice = WindowPrompt(tr("EmuNAND Wad Manager"), tr("Which mode do you want to use?"), tr("File"), tr("Folder"), tr("Cancel"));
 		if(choice == 1) 			// File mode
 		{
@@ -520,8 +543,9 @@ int FeatureSettingsMenu::GetMenuInternal()
 					Wad wadFile(wadpath);
 					wadFile.UnInstall(Settings.NandEmuChanPath);
 				}
-				
+
 				// Refresh new EmuNAND content
+				ResetGameHeaderCache();
 				Channels::Instance()->GetEmuChannelList();
 				GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
 			}
@@ -608,10 +632,11 @@ int FeatureSettingsMenu::GetMenuInternal()
 								else
 									WindowPrompt(tr( "EmuNAND Wad Manager" ), tr("Error writing the data."), tr( "OK" ));
 							}
-						}		
+						}
 					}
-						
+
 					// Refresh new EmuNAND content
+					ResetGameHeaderCache();
 					Channels::Instance()->GetEmuChannelList();
 					GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
 				}
@@ -619,7 +644,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 				{
 					WindowPrompt(tr( "EmuNAND Wad Manager" ), tr("No wad file found in this folder."), tr( "OK" ));
 				}
-				
+
 				delete wadList;
 			}
 		}
@@ -636,7 +661,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 		snprintf(NINUpdatePath, sizeof(NINUpdatePath), "%sboot.dol", Settings.NINLoaderPath);
 		char NINUpdatePathBak[100];
 		snprintf(NINUpdatePathBak, sizeof(NINUpdatePathBak), "%sboot.bak", Settings.NINLoaderPath);
-		
+
 		int choice = WindowPrompt(tr( "Do you want to update this file?" ), NINUpdatePath, tr( "Yes" ), tr( "Cancel" ));
 		if (choice == 1)
 		{
@@ -649,11 +674,11 @@ int FeatureSettingsMenu::GetMenuInternal()
 				// Rename existing boot.dol file to boot.bak
 				if(CheckFile(NINUpdatePath))
 					RenameFile(NINUpdatePath, NINUpdatePathBak);
-				
+
 				// Download latest loader.dol as boot.dol
 				bool success = false;
-				displayDownloadProgress(true); // enable progress window for next download
 				struct download file = {};
+				file.show_progress = true;
 				downloadfile("https://raw.githubusercontent.com/FIX94/Nintendont/master/loader/loader.dol", &file);
 				if (file.size > 0)
 				{
@@ -667,10 +692,10 @@ int FeatureSettingsMenu::GetMenuInternal()
 					}
 					else
 						WindowPrompt(tr( "Update failed" ), 0, tr( "OK" ));
-					
-					free(file.data);
+
+					MEM2_free(file.data);
 				}
-					
+
 				if(success)
 				{
 					//remove existing loader.dol file if found as it has priority over boot.dol, and boot.bak
@@ -727,11 +752,22 @@ int FeatureSettingsMenu::GetMenuInternal()
 				ExitApp();
 				NEEK_CFG *neek_config = (NEEK_CFG *) NEEK_CONFIG_ADDRESS;
 				neek2oSetBootSettings(neek_config, 0 /* TitleID */ , 0 /* Magic */, 0 /* Returnto TitleID */, Settings.NandEmuChanPath /* Full EmuNAND path */);
-				
+
 				if(neekBoot() == -1)
 					Sys_BackToLoader();
 				return MENU_NONE;
 			}
+		}
+	}
+
+	//! Reset Game Header Cache
+	else if(ret == ++Idx)
+	{
+		int choice = WindowPrompt(tr( "Are you sure you want to reset?" ), 0, tr( "Yes" ), tr( "Cancel" ));
+		if (choice == 1)
+		{
+			ResetGameHeaderCache();
+			gameList.ReadGameList();
 		}
 	}
 	SetOptionValues();

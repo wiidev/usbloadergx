@@ -11,6 +11,7 @@
 #include "themes/CTheme.h"
 #include "utils/tools.h"
 #include "system/IosLoader.h"
+#include "cache/cache.hpp"
 
 #define WII_MAGIC   0x5D1C9EA3
 
@@ -147,6 +148,7 @@ int MenuGCInstall()
 		if(ret >= 0) {
 			//! success
 			installed_games++;
+			ResetGameHeaderCache();
 		}
 		else if(ret == PROGRESS_CANCELED)
 		{
@@ -228,7 +230,7 @@ int MenuInstall()
 
 	if ((headerdisc.magic != WII_MAGIC) && (headerdisc.gc_magic != GCGames::MAGIC))
 	{
-		choice = WindowPrompt(tr( "Not a Wii or a Game Cube Disc" ), tr( "Insert a Wii or a Game Cube Disc!" ), tr( "OK" ), tr( "Back" ));
+		choice = WindowPrompt(tr( "Not a Wii or a GameCube Disc" ), tr( "Insert a Wii or a GameCube Disc!" ), tr( "OK" ), tr( "Back" ));
 		if (choice == 1)
 			return MenuInstall();
 		else
@@ -287,6 +289,7 @@ int MenuInstall()
 			else
 			{
 				ShowProgress(tr("Install finished"), headerdisc.title, tr("Reloading game list now, please wait..."), gamesize, gamesize, true, true);
+				ResetGameHeaderCache();
 				gameList.ReadGameList(); //get the entries again
 				gameList.FilterList();
 				bgMusic->Pause();

@@ -12,8 +12,8 @@ extern "C"
 	 * input msg = a text in ASCII
 	 * output = the translated msg in utf-8
 	 */
-	const char *gettext(const char *msg);
-#define tr(s) gettext(s)
+	const char *get_text(const char *msg);
+#define tr(s) get_text(s)
 #define trNOOP(s) (s)
 
 #ifdef __cplusplus

@@ -6,6 +6,7 @@
 #include "input.h"
 #include "themes/CTheme.h"
 #include "gecko.h"
+#include "wpad.h"
 #include "Controls/DeviceHandler.hpp"
 #include "wad/nandtitle.h"
 #include "SystemMenu/SystemMenuResources.h"
@@ -24,6 +25,7 @@
 #include "utils/tools.h"
 #include "sys.h"
 #include "svnrev.h"
+#include "gitver.h"
 
 extern bool isWiiVC; // in sys.cpp
 
@@ -52,13 +54,13 @@ StartUpProcess::StartUpProcess()
 	versionTxt->SetPosition(20, screenheight-20);
 
 #ifdef FULLCHANNEL
-	versionTxt->SetTextf("v3.0c Rev. %s", GetRev());
+	versionTxt->SetTextf("v3.0c Rev. %s (%s)", GetRev(), commitID());
 #else
-	versionTxt->SetTextf("v3.0  Rev. %s", GetRev());
+	versionTxt->SetTextf("v3.0 Rev. %s (%s)", GetRev(), commitID());
 #endif
 
 #if 1 // enable if you release a modded version - enabled by default to differentiate official releases
-	versionTxt->SetTextf("v3.0  Rev. %s mod", GetRev());
+	versionTxt->SetTextf("v3.0 Rev. %s mod (%s)", GetRev(), commitID());
 #endif
 
 	cancelTxt = new GuiText("Press B to cancel", 18, (GXColor) {255, 255, 255, 255});
@@ -233,52 +235,46 @@ int StartUpProcess::Run(int argc, char *argv[])
 int StartUpProcess::Execute()
 {
 	Settings.EntryIOS = IOS_GetVersion();
+	gprintf("Current IOS: %i - have AHB access: %s\n", Settings.EntryIOS, AHBPROT_DISABLED ? "yes" : "no");
 
-	// Reload app cios if needed
-	SetTextf("Loading application cIOS %s\n", Settings.UseArgumentIOS ? "requested in meta.xml" : "");
-	if(IosLoader::LoadAppCios() < 0)
+	// Only reload the IOS if the XML requests it, we don't have full HW access or the entry IOS isn't 58
+	if(Settings.UseArgumentIOS || !AHBPROT_DISABLED || IOS_GetVersion() != 58)
 	{
-		SetTextf("Failed loading any cIOS. Trying with IOS58 + AHB access...");
-		
-		// We can allow now operation without cIOS in channel mode with AHB access
-		if(!AHBPROT_DISABLED || (AHBPROT_DISABLED && IOS_GetVersion() != 58))
+		if (Settings.UseArgumentIOS)
+			SetTextf("Reloading to %sIOS %i requested in meta.xml\n", Settings.LoaderIOS >= 200 ? "c" : "", Settings.LoaderIOS);
+		else
+			SetTextf("Reloading to %sIOS %i\n", Settings.LoaderIOS >= 200 ? "c" : "", Settings.LoaderIOS);
+		// Reload to the default loader IOS or the IOS set in meta.xml
+		// And on failure try cIOS 249, 250, 222, 223, 245, 246, 247 and 248
+		if(IosLoader::LoadAppCios(Settings.LoaderIOS) < 0)
 		{
-			SetTextf("Failed loading IOS 58. USB Loader GX requires a cIOS or IOS 58 with AHB access. Exiting...\n");
+			SetTextf("Failed to load an IOS. USB Loader GX requires a cIOS or IOS58 with AHB access. Exiting...\n");
 			sleep(5);
 			Sys_BackToLoader();
 		}
-		else
+		if(!AHBPROT_DISABLED && IOS_GetVersion() < 200)
 		{
-			Settings.LoaderIOS = 58;
-			SetTextf("Running on IOS 58. Wii disc based games and some channels will not work.");
+			SetTextf("Failed to load into IOS %i. USB Loader GX requires a cIOS or IOS58 with AHB access. Exiting...\n", IOS_GetVersion());
 			sleep(5);
+			Sys_BackToLoader();
 		}
 	}
-	
-	if(!AHBPROT_DISABLED && IOS_GetVersion() < 200)
-	{
-		SetTextf("Failed loading IOS %i. USB Loader GX requires a cIOS or IOS58 with AHB access. Exiting...\n", IOS_GetVersion());
-		sleep(5);
-		Sys_BackToLoader();
-	}
 
-	SetTextf("Using %sIOS %i\n", IOS_GetVersion() >= 200 ? "c" : "", IOS_GetVersion());
-	
 	SetupPads();
+	gprintf("Current IOS: %i - have AHB access: %s\n", IOS_GetVersion(), AHBPROT_DISABLED ? "yes" : "no");
 
-	SetTextf("Initialize sd card\n");
+	SetTextf("Initializing sd card\n");
 	DeviceHandler::Instance()->MountSD();
 
 	// Do not mount USB if not needed. USB is not available with WiiU WiiVC injected channel.
 	if(Settings.USBAutoMount == ON && !isWiiVC)
 	{
-		SetTextf("Initialize usb device\n");
+		SetTextf("Initializing usb devices\n");
 		USBSpinUp();
 		DeviceHandler::Instance()->MountAllUSB(false);
 	}
-	
+
 	SetTextf("Loading config files\n");
-	
 	gprintf("\tLoading config...%s\n", Settings.Load() ? "done" : "failed");
 	gprintf("\tLoading language...%s\n", Settings.LoadLanguage(Settings.language_path, CONSOLE_DEFAULT) ? "done" : "failed");
 	gprintf("\tLoading game settings...%s\n", GameSettings.Load(Settings.ConfigPath) ? "done" : "failed");
@@ -286,27 +282,26 @@ int StartUpProcess::Execute()
 	gprintf("\tLoading game categories...%s\n", GameCategories.Load(Settings.ConfigPath) ? "done" : "failed");
 	if(Settings.CacheTitles)
 		gprintf("\tLoading cached titles...%s\n", GameTitles.ReadCachedTitles(Settings.titlestxt_path) ? "done" : "failed (using default)");
-	
-	// Reload to user's settings if different than current IOS, and if not using an injected WiiU WiiVC IOS255 (fw.img)
-	if(Settings.LoaderIOS != IOS_GetVersion() && !isWiiVC)
+
+	// Reload to users settings if different than current IOS, and if not using an injected WiiU WiiVC IOS255 (fw.img)
+	if(Settings.LoaderIOS != IOS_GetVersion() && !isWiiVC && !Settings.UseArgumentIOS)
 	{
-		SetTextf("Reloading to config file's cIOS...\n");
-		
 		// Unmount devices
 		DeviceHandler::DestroyInstance();
 		if(Settings.USBAutoMount == ON)
 			USBStorage2_Deinit();
 
-		// Shut down pads
-		WPAD_Shutdown();
+		// Shutdown pads
+		Wpad_Disconnect();
 
-		// Loading now the cios setup in the settings
-		IosLoader::LoadAppCios();
-
-		SetTextf("Reloaded into cIOS %i R%i\n", IOS_GetVersion(), IOS_GetRevision());
-
-		// Re-Mount devices
-		SetTextf("Reinitializing devices...\n");
+		// Now load the cIOS that was set in the settings menu
+		if(IosLoader::LoadAppCios(Settings.LoaderIOS) > -1)
+		{
+			SetTextf("Reloaded into cIOS %i R%i\n", IOS_GetVersion(), IOS_GetRevision());
+			// Re-Mount devices
+			SetTextf("Reinitializing devices\n");
+		}
+		gprintf("Current IOS: %i - have AHB access: %s\n", IOS_GetVersion(), AHBPROT_DISABLED ? "yes" : "no");
 		DeviceHandler::Instance()->MountSD();
 		if(Settings.USBAutoMount == ON)
 		{
@@ -339,28 +334,30 @@ int StartUpProcess::Execute()
 			DeviceHandler::Instance()->MountUSBPort1();
 		}
 	}
-	
-	// enable isfs permission if using Hermes v4 without AHB, or WiiU WiiVC (IOS255 fw.img)
+
+	// Enable isfs permission if using Hermes v4 without AHB, or WiiU WiiVC (IOS255 fw.img)
 	if(IOS_GetVersion() < 200 || (IosLoader::IsHermesIOS() && IOS_GetRevision() == 4) || isWiiVC)
 	{
-		SetTextf("Patching %sIOS%d...\n", IOS_GetVersion() >= 200 ? "c" : "", IOS_GetVersion());
+		SetTextf("Patching %sIOS%i\n", IOS_GetVersion() >= 200 ? "c" : "", IOS_GetVersion());
 		if (IosPatch_RUNTIME(!isWiiVC, false, false, isWiiVC, false) == ERROR_PATCH)
-			gprintf("Patching %sIOS%d failed!\n", IOS_GetVersion() >= 200 ? "c" : "", IOS_GetVersion());
+			gprintf("Patching %sIOS%i failed!\n", IOS_GetVersion() >= 200 ? "c" : "", IOS_GetVersion());
 		else
 			NandTitles.Get(); // get NAND channel's titles
 	}
+
+	gprintf("Current IOS: %i - have AHB access: %s\n", IOS_GetVersion(), AHBPROT_DISABLED ? "yes" : "no");
 
 	// We only initialize once for the whole session
 	ISFS_Initialize();
 
 	// Check MIOS version
-	SetTextf("Checking installed MIOS... ");
+	SetTextf("Checking installed MIOS\n");
 	IosLoader::GetMIOSInfo();
 
 	SetTextf("Loading resources\n");
 	// Do not allow banner grid mode without AHBPROT
 	// this function does nothing if it was already initiated before
-	if(   !SystemMenuResources::Instance()->IsLoaded() && !SystemMenuResources::Instance()->Init()
+	if(!SystemMenuResources::Instance()->IsLoaded() && !SystemMenuResources::Instance()->Init()
 		&& Settings.gameDisplay == BANNERGRID_MODE)
 	{
 		Settings.gameDisplay = LIST_MODE;

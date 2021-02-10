@@ -149,6 +149,9 @@ msgstr ""
 msgid "Alternate DOL"
 msgstr "DOL Alternativo"
 
+msgid "AltWFC"
+msgstr ""
+
 msgid "An example file was created here:"
 msgstr "Un archivo de ejemplo fue creado aquí:"
 
@@ -537,11 +540,17 @@ msgstr "Recortar overscan"
 msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr ""
 
+msgid "Custom Address"
+msgstr ""
+
 msgid "Custom Banners"
 msgstr "Banners personalizados"
 
 msgid "Custom Paths"
 msgstr "Rutas personalizadas"
+
+msgid "Custom"
+msgstr ""
 
 msgid "Customs"
 msgstr "Personalizadas"
@@ -1086,11 +1095,14 @@ msgstr ""
 msgid "GXFlush"
 msgstr ""
 
-msgid "Game Cube Games Delete"
+msgid "GameCube Games Delete"
 msgstr "Borrar Juego de GameCube"
 
-msgid "Game Cube Install Menu"
+msgid "GameCube Install Menu"
 msgstr "Menu de instalación GameCube"
+
+msgid "Game Header Cache Files Path"
+msgstr ""
 
 msgid "Game ID"
 msgstr "ID del Juego"
@@ -1235,8 +1247,8 @@ msgstr "Iniciando la Red"
 msgid "Insert Disk"
 msgstr "Inserta el Disco"
 
-msgid "Insert a Wii or a Game Cube Disc!"
-msgstr "Inserta un disco de Wii o Game Cube"
+msgid "Insert a Wii or a GameCube Disc!"
+msgstr "Inserta un disco de Wii o GameCube"
 
 msgid "Install"
 msgstr "Instalar"
@@ -1262,7 +1274,7 @@ msgstr ""
 msgid "Install finished"
 msgstr "Instalación terminada"
 
-msgid "Installing Game Cube Game..."
+msgid "Installing GameCube Game..."
 msgstr "Instalando un juego de GameCube"
 
 msgid "Installing content"
@@ -1587,7 +1599,7 @@ msgstr ""
 msgid "Not Initialized"
 msgstr "No Iniciado"
 
-msgid "Not a Wii or a Game Cube Disc"
+msgid "Not a Wii or a GameCube Disc"
 msgstr "No es un disco Wii o GameCube"
 
 msgid "Not a valid URL"
@@ -1737,6 +1749,9 @@ msgstr "Oír Anterior"
 msgid "Playing Music:"
 msgstr "Reproducción Musical:"
 
+msgid "Please enter a valid address e.g. wiimmfi.de"
+msgstr ""
+
 msgid "Please wait"
 msgstr "Por favor, espera"
 
@@ -1811,6 +1826,9 @@ msgstr "Reiniciar"
 
 msgid "Reset BG Music"
 msgstr "Reiniciar Música de Fondo"
+
+msgid "Reset Game Header Cache"
+msgstr ""
 
 msgid "Reset Playcounter"
 msgstr "Reiniciar Partidas"
@@ -1950,6 +1968,12 @@ msgstr "Saltar errores"
 msgid "Skip IPL"
 msgstr ""
 
+msgid "BBA Emulation"
+msgstr ""
+
+msgid "BBA Net Profile"
+msgstr ""
+
 msgid "Sneek Video Patch"
 msgstr "Parche vídeo Sneek"
 
@@ -2039,6 +2063,9 @@ msgstr "Sincronizando..."
 
 msgid "System Default"
 msgstr "Consola"
+
+msgid "System Proxy Settings"
+msgstr ""
 
 msgid "TChinese"
 msgstr "Chino Tradicional"
@@ -2232,6 +2259,9 @@ msgstr "No se puede escribir la configuración de Nintendont, ¿desea continuar 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
 msgstr "Se necesita la versión r1218 para Nintendont Alpha 0.1. Por favor, actualiza el boot.dol de Nintendont."
 
+msgid "Use Game Header Cache"
+msgstr ""
+
 msgid "Uninstall"
 msgstr "Desinstalar"
 
@@ -2392,7 +2422,7 @@ msgstr "16:9 en Wii U"
 msgid "Wiilight"
 msgstr "Iluminar lector"
 
-msgid "Wiimmfi.de"
+msgid "Wiimmfi"
 msgstr ""
 
 msgid "Wiinnertag"

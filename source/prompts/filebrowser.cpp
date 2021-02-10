@@ -83,8 +83,7 @@ int InitBrowsers()
 			if ( DIR *dir = opendir( rootdir ) )
 			{
 				closedir(dir);
-				BROWSERINFO browser;
-				memset(&browser, 0, sizeof(BROWSERINFO));
+				BROWSERINFO browser = {};
 				strcpy(browser.rootdir, rootdir);
 				ResetBrowser(&browser);
 				browsers.push_back(browser);
@@ -172,8 +171,8 @@ int ParseFilter(FILTERCASCADE *Filter, BROWSERENTRY* Entry)
 int ParseDirectory(const char* Path, int Flags, FILTERCASCADE *Filter)
 {
 	DIR *dir = NULL;
-	char fulldir[MAXPATHLEN];
-	char filename[MAXPATHLEN];
+	char fulldir[1024 * 5];
+	char filename[1024 * 10];
 	struct stat filestat;
 	unsigned int i;
 
@@ -445,7 +444,8 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 								< MAXPATHLEN)
 						{
 							/* update current directory name */
-							sprintf(browser->dir, "%s%s/", browser->dir, browser->browserList[clickedIndex].filename);
+							strcat(browser->dir, browser->browserList[clickedIndex].filename);
+							sprintf(browser->dir + strlen(browser->dir), "/");
 							pathCanged = true;
 						}
 					}
@@ -504,10 +504,8 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 			HaltGui();
 			mainWindow->Remove(&w);
 			ResumeGui();
-			char newfolder[100];
-			char oldfolder[100];
+			char newfolder[1024 * 5];
 			snprintf(newfolder, sizeof(newfolder), "%s%s", browser->rootdir, browser->dir);
-			strcpy(oldfolder, newfolder);
 
 			int result = OnScreenKeyboard(newfolder, sizeof(newfolder), strlen(browser->rootdir));
 			if (result == 1)

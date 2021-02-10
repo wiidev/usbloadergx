@@ -20,6 +20,10 @@ misrepresented as being the original software.
 3. This notice may not be removed or altered from any source
 distribution.
 */
+#if __GNUC__ > 8
+#pragma GCC diagnostic ignored "-Waddress-of-packed-member"
+#endif
+
 #include <malloc.h>
 #include <stdio.h>
 #include "Channels/channels.h"
@@ -31,6 +35,7 @@ distribution.
 #include "usbloader/wbfs.h"
 #include "usbloader/wdvd.h"
 #include "usbloader/wbfs/wbfs_rw.h"
+#include "utils/sjis.h"
 #include "utils/uncompress.h"
 #include "themes/CTheme.h"
 #include "settings/GameTitles.h"
@@ -244,7 +249,7 @@ const u16 * OpeningBNR::GetIMETTitle(int lang)
 	if(imetHdr->names[lang][0] == 0)
 		lang = CONF_LANG_ENGLISH;
 
-	return imetHdr->names[lang];
+	return imetHdr->names[lang]; // possible unaligned pointer value
 }
 
 static s32 GC_Disc_Read(void *fp, u32 offset, u32 count, void*iobuf)
@@ -429,6 +434,7 @@ CustomBanner *OpeningBNR::CreateGCBanner(const discHdr * header)
 			}
 		}
 
+		// sets the developer
 		wString str;
 		str.resize(strlen((char *) openingBnr->description[language].developer));
 		for(u32 i = 0; i < str.size(); i++)
@@ -437,11 +443,20 @@ CustomBanner *OpeningBNR::CreateGCBanner(const discHdr * header)
 		banner->SetBannerText("T_Coded_by", tr("Developer:"));
 		banner->SetBannerText("T_coder", str.toUTF8().c_str());
 
-		str.resize(strlen((char *) openingBnr->description[language].long_description));
-		for(u32 i = 0; i < str.size(); i++)
-			str[i] = *(openingBnr->description[language].long_description + i);
+		// sets the description and converts encodings (Japan and Taiwan)
+		if(header->id[3] == 'J' || header->id[3] == 'W')
+		{
+			string description((char *) openingBnr->description[language].long_description);
+			banner->SetBannerText("T_short_descript", sj2utf8(description).c_str());
+		}
+		else
+		{
+			str.resize(strlen((char *) openingBnr->description[language].long_description));
+			for(u32 i = 0; i < str.size(); i++)
+				str[i] = *(openingBnr->description[language].long_description + i);
 
-		banner->SetBannerText("T_short_descript", str.toUTF8().c_str());
+			banner->SetBannerText("T_short_descript", str.toUTF8().c_str());
+		}
 
 		// free buffer
 		free(openingBnr);

@@ -149,6 +149,9 @@ msgstr ""
 msgid "Alternate DOL"
 msgstr "Alternativ DOL"
 
+msgid "AltWFC"
+msgstr ""
+
 msgid "An example file was created here:"
 msgstr "En f.eks. fil er lavet her:"
 
@@ -537,11 +540,17 @@ msgstr ""
 msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr ""
 
+msgid "Custom Address"
+msgstr ""
+
 msgid "Custom Banners"
 msgstr ""
 
 msgid "Custom Paths"
 msgstr "Sti-indstillinger"
+
+msgid "Custom"
+msgstr ""
 
 msgid "Customs"
 msgstr ""
@@ -1086,10 +1095,13 @@ msgstr ""
 msgid "GXFlush"
 msgstr ""
 
-msgid "Game Cube Games Delete"
+msgid "GameCube Games Delete"
 msgstr ""
 
-msgid "Game Cube Install Menu"
+msgid "GameCube Install Menu"
+msgstr ""
+
+msgid "Game Header Cache Files Path"
 msgstr ""
 
 msgid "Game ID"
@@ -1235,7 +1247,7 @@ msgstr "Initialiserer netforbindelse"
 msgid "Insert Disk"
 msgstr "Indsæt en DVD"
 
-msgid "Insert a Wii or a Game Cube Disc!"
+msgid "Insert a Wii or a GameCube Disc!"
 msgstr ""
 
 msgid "Install"
@@ -1262,7 +1274,7 @@ msgstr ""
 msgid "Install finished"
 msgstr "Installering færdig"
 
-msgid "Installing Game Cube Game..."
+msgid "Installing GameCube Game..."
 msgstr ""
 
 msgid "Installing content"
@@ -1587,7 +1599,7 @@ msgstr "Normal"
 msgid "Not Initialized"
 msgstr "Ikke initialiseret"
 
-msgid "Not a Wii or a Game Cube Disc"
+msgid "Not a Wii or a GameCube Disc"
 msgstr ""
 
 msgid "Not a valid URL"
@@ -1737,6 +1749,9 @@ msgstr "Afspil forrige"
 msgid "Playing Music:"
 msgstr "Afspiller musik:"
 
+msgid "Please enter a valid address e.g. wiimmfi.de"
+msgstr ""
+
 msgid "Please wait"
 msgstr ""
 
@@ -1811,6 +1826,9 @@ msgstr "Nulstil"
 
 msgid "Reset BG Music"
 msgstr "Nulstil BG-musik"
+
+msgid "Reset Game Header Cache"
+msgstr ""
 
 msgid "Reset Playcounter"
 msgstr "Nulstil spiltæller"
@@ -1950,6 +1968,12 @@ msgstr ""
 msgid "Skip IPL"
 msgstr ""
 
+msgid "BBA Emulation"
+msgstr ""
+
+msgid "BBA Net Profile"
+msgstr ""
+
 msgid "Sneek Video Patch"
 msgstr ""
 
@@ -2039,6 +2063,9 @@ msgstr "Synkronisere..."
 
 msgid "System Default"
 msgstr "System-standard"
+
+msgid "System Proxy Settings"
+msgstr ""
 
 msgid "TChinese"
 msgstr "Kinesisk (trad.)"
@@ -2232,6 +2259,9 @@ msgstr ""
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
 msgstr ""
 
+msgid "Use Game Header Cache"
+msgstr ""
+
 msgid "Uninstall"
 msgstr "Afinstaller"
 
@@ -2392,7 +2422,7 @@ msgstr ""
 msgid "Wiilight"
 msgstr ""
 
-msgid "Wiimmfi.de"
+msgid "Wiimmfi"
 msgstr ""
 
 msgid "Wiinnertag"

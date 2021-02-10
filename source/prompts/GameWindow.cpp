@@ -317,7 +317,7 @@ void GameWindow::LoadGameSound(const struct discHdr * header)
 	}
 	else if((header->type == TYPE_GAME_GC_IMG) || (header->type == TYPE_GAME_GC_DISC) || (header->type == TYPE_GAME_GC_EXTRACTED))
 	{
-		//! on game cube load the default sound
+		//! on gamecube load the default sound
 		gameSound = new GuiSound(Resources::GetFile("gc_banner.ogg"), Resources::GetFileSize("gc_banner.ogg"), Settings.gamesoundvolume);
 	}
 	if(gameSound)
@@ -338,11 +338,11 @@ void GameWindow::LoadDiscImage(const u8 * id)
 
 	char imgPath[150];
 	char IDFull[7];
-	char ID3[4];
-	char ID4[5];
+	char ID3[4] = {};
+	char ID4[5] = {};
 	snprintf(IDFull, sizeof(IDFull), "%s", (char*) id);
-	snprintf(ID3, sizeof(ID3), "%s", IDFull);
-	snprintf(ID4, sizeof(ID4), "%s", IDFull);
+	memcpy(ID3, IDFull, sizeof(ID3) - 1);
+	memcpy(ID4, IDFull, sizeof(ID4) - 1);
 
 	snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.disc_path, IDFull); //changed to current full id
 	diskImgData = new GuiImageData(imgPath);
@@ -740,11 +740,11 @@ void GameWindow::BootGame(struct discHdr *header)
 	if (game_cfg->loadalternatedol == 2)
 	{
 		char filepath[200];
-		snprintf(filepath, sizeof(filepath), "%s%s.dol", Settings.dolpath, IDfull);
+		int n = snprintf(filepath, sizeof(filepath), "%s%s.dol", Settings.dolpath, IDfull);
 		if (CheckFile(filepath) == false)
 		{
-			sprintf(filepath, "%s %s", filepath, tr( "does not exist!" ));
-			if(!WindowPrompt(tr( "Error" ), filepath, tr( "Continue" ), tr( "Cancel")))
+			snprintf(filepath + n, sizeof(filepath) - n, " %s", tr( "does not exist!" ));
+			if (!WindowPrompt(tr( "Error" ), filepath, tr( "Continue" ), tr( "Cancel")))
 				return;
 		}
 	}
@@ -762,10 +762,10 @@ void GameWindow::BootGame(struct discHdr *header)
 	if (game_cfg->ocarina == ON || (game_cfg->ocarina == INHERIT && Settings.ocarina == ON))
 	{
 		char filepath[200];
-		snprintf(filepath, sizeof(filepath), "%s%s.gct", Settings.Cheatcodespath, IDfull);
+		int n = snprintf(filepath, sizeof(filepath), "%s%s.gct", Settings.Cheatcodespath, IDfull);
 		if (CheckFile(filepath) == false)
 		{
-			sprintf(filepath, "%s %s", filepath, tr( "does not exist!  Loading game without cheats." ));
+			snprintf(filepath + n, sizeof(filepath) - n, " %s", tr( "does not exist!  Loading game without cheats." ));
 			if(!WindowPrompt(tr( "Error" ), filepath, tr( "Continue" ), tr( "Cancel")))
 				return;
 		}

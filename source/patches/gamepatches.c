@@ -51,7 +51,7 @@ void ClearDOLList()
 }
 
 void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 languageChoice, u8 patchcountrystring,
-				 u8 vipatch, u8 sneekVideoPatch, u8 hooktype, u64 returnTo, u8 privateServer)
+				 u8 vipatch, u8 sneekVideoPatch, u8 hooktype, u64 returnTo, u8 privateServer, const char *serverAddr)
 {
 	int i;
 
@@ -92,8 +92,8 @@ void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 language
 			PatchAspectRatio(dst, len, aspectForce);
 
 		if(privateServer)
-			PrivateServerPatcher(dst, len, privateServer);
-			
+			PrivateServerPatcher(dst, len, privateServer, serverAddr);
+
 		DCFlushRange(dst, len);
 		ICInvalidateRange(dst, len);
 	}
@@ -218,7 +218,7 @@ void PatchFix480p()
 }
 
 /** Patch URLs for private Servers - Thanks to ToadKing/wiilauncher-nossl **/
-void PrivateServerPatcher(void *addr, u32 len, u8 privateServer)
+void PrivateServerPatcher(void *addr, u32 len, u8 privateServer, const char *serverAddr)
 {
 
 	// Patch protocol https -> http
@@ -234,19 +234,16 @@ void PrivateServerPatcher(void *addr, u32 len, u8 privateServer)
 			cur += len;
 		}
 	} while (++cur < end);
-	
 	// Patch nintendowifi.net -> private server domain
-	if(privateServer == PRIVSERV_WIIMMFI )
-	{
+	if (privateServer == PRIVSERV_WIIMMFI)
 		domainpatcher(addr, len, "wiimmfi.de");
-	}
-	
-	//else if(privateServer == PRIVSERV_CUSTOM)
-		//domainpatcher(dst, len, Settings.CustomPrivateServer);
-	
+	else if (privateServer == PRIVSERV_ALTWFC)
+		domainpatcher(addr, len, "zwei.moe");
+	else if (privateServer == PRIVSERV_CUSTOM && strlen(serverAddr) > 3)
+		domainpatcher(addr, len, serverAddr);
 }
 
-u32 do_new_wiimmfi() 
+s8 do_new_wiimmfi() 
 {
 
 	// As of November 2018, Wiimmfi requires a special Wiimmfi patcher
@@ -305,13 +302,13 @@ u32 do_new_wiimmfi()
 	// For statistics and easier debugging in case of problems, Wiimmfi
 	// wants to know what patcher a game has been patched with, thus,
 	// let the game know the exact USB-Loader version.
-	char * fmt = "USB-Loader GX v3.0 R%-30s";
-	char patcher[50] = {0};
-	snprintf((char *)&patcher, 49, fmt, GetRev());
+	char * fmt = "USB-Loader GX v3.0 R%-21s";
+	char patcher[42] = {0};
+	snprintf((char *)&patcher, 42, fmt, GetRev());
 	strncpy(patched, (char *)&patcher, 42);
 	
 	// Do the plain old patching with the string search
-	PrivateServerPatcher((void*)0x80004000, 0x385200, PRIVSERV_WIIMMFI);
+	PrivateServerPatcher((void*)0x80004000, 0x385200, PRIVSERV_WIIMMFI, NULL);
 	
 	// Replace some URLs for Wiimmfi's new update system
 	char newURL1[] = "http://ca.nas.wiimmfi.de/ca";
@@ -363,7 +360,7 @@ u32 do_new_wiimmfi()
 	// Binary blobs with Wiimmfi patches. Do not modify.
 	// Provided by Leseratte on 2018-12-14.
 	
-	int binary[] = { 0x37C849A2, 0x8BC32FA4, 0xC9A34B71, 0x1BCB49A2, 
+	u32 binary[] = { 0x37C849A2, 0x8BC32FA4, 0xC9A34B71, 0x1BCB49A2, 
 					 0x2F119304, 0x5F402684, 0x3E4FDA29, 0x50849A21, 
 					 0xB88B3452, 0x627FC9C1, 0xDC24D119, 0x5844350F, 
 					 0xD893444F, 0x19A588DC, 0x16C91184, 0x0C3E237C, 
@@ -413,7 +410,8 @@ u32 do_new_wiimmfi()
 					 0xB00D47AF, 0x7B722975, 0x48BE349A, 0x29CC393C, 
 					 0xEA797228, 0x98986471, 0x3778E1A3, 0xD7626D06, 
 					 0x1567268D, 0x668ECD00, 0xD614F5C8, 0x133037CF, 
-					 0x92F26CF2, 0x00000000, 0x00000000, 0x00000000};
+					 0x92F26CF2, 0x00000000, 0x00000000, 0x00000000, 
+					 0x00000000, 0x00000000, 0x00000000, 0x00000000};
 	
 	// Prepare patching process ....
 	int i = 3;
@@ -607,6 +605,7 @@ bool PoPPatch()
 /** Following is only the VideoPatcher **/
 
 // Some missing video modes
+#if __GNUC__ <= 8
 static GXRModeObj TVPal528Prog = {
 	6,				// viDisplayMode
 	640,			// fbWidth
@@ -707,6 +706,7 @@ static GXRModeObj TVPal524ProgAa = {
 	}
 
 };
+#endif
 
 static GXRModeObj* vmodes[] = {
 	&TVNtsc240Ds,

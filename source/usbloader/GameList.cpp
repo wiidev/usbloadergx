@@ -24,6 +24,7 @@
 #include <algorithm>
 #include <string>
 #include <malloc.h>
+
 #include "GUI/gui_searchbar.h"
 #include "usbloader/wbfs.h"
 #include "GameCube/GCGames.h"
@@ -37,8 +38,14 @@
 #include "GameList.h"
 #include "memory/memory.h"
 #include "Channels/channels.h"
+#include "cache/cache.hpp"
 
-enum { DISABLED, ENABLED, HIDEFORBIDDEN };
+enum
+{
+	DISABLED,
+	ENABLED,
+	HIDEFORBIDDEN
+};
 
 GameList gameList;
 
@@ -54,13 +61,14 @@ void GameList::clear()
 	std::vector<int>().swap(GamePartitionList);
 }
 
-struct discHdr * GameList::GetDiscHeader(const char * gameID) const
+struct discHdr *GameList::GetDiscHeader(const char *gameID) const
 {
-	if(!gameID) return NULL;
+	if (!gameID)
+		return NULL;
 
 	for (u32 i = 0; i < FilteredList.size(); ++i)
 	{
-		if(strncasecmp(gameID, (const char *) FilteredList[i]->id, 6) == 0)
+		if (strncasecmp(gameID, (const char *)FilteredList[i]->id, 6) == 0)
 			return FilteredList[i];
 	}
 
@@ -69,11 +77,12 @@ struct discHdr * GameList::GetDiscHeader(const char * gameID) const
 
 int GameList::GetPartitionNumber(const u8 *gameID) const
 {
-	if(!gameID) return -1;
+	if (!gameID)
+		return -1;
 
 	for (u32 i = 0; i < FullGameList.size(); ++i)
 	{
-		if(strncasecmp((const char *) gameID, (const char *) FullGameList[i].id, 6) == 0)
+		if (strncasecmp((const char *)gameID, (const char *)FullGameList[i].id, 6) == 0)
 			return GamePartitionList[i];
 	}
 
@@ -82,17 +91,17 @@ int GameList::GetPartitionNumber(const u8 *gameID) const
 
 void GameList::RemovePartition(int part)
 {
-	for(u32 i = 0; i < GamePartitionList.size(); ++i)
+	for (u32 i = 0; i < GamePartitionList.size(); ++i)
 	{
-		if(GamePartitionList[i] == part)
+		if (GamePartitionList[i] == part)
 		{
-			FullGameList.erase(FullGameList.begin()+i);
-			GamePartitionList.erase(GamePartitionList.begin()+i);
+			FullGameList.erase(FullGameList.begin() + i);
+			GamePartitionList.erase(GamePartitionList.begin() + i);
 			--i;
 		}
 	}
 
-	if(FullGameList.size() > 0)
+	if (FullGameList.size() > 0)
 		FilterList();
 }
 
@@ -102,18 +111,20 @@ int GameList::InternalReadList(int part)
 	u32 cnt = 0;
 
 	int ret = WBFS_GetCount(part, &cnt);
-	if (ret < 0) return -1;
+	if (ret < 0)
+		return -1;
 
 	// We are done here if no games are there
-	if(cnt == 0)
+	if (cnt == 0)
 		return 0;
 
 	/* Buffer length */
 	u32 len = sizeof(struct discHdr) * cnt;
 
 	/* Allocate memory */
-	struct discHdr *buffer = (struct discHdr *) allocate_memory( len );
-	if (!buffer) return -1;
+	struct discHdr *buffer = (struct discHdr *)allocate_memory(len);
+	if (!buffer)
+		return -1;
 
 	/* Clear buffer */
 	memset(buffer, 0, len);
@@ -133,22 +144,22 @@ int GameList::InternalReadList(int part)
 
 	for (u32 i = 0; i < PartGameList.size(); i++)
 	{
-		for(u32 j = 0; j < FullGameList.size(); j++)
+		for (u32 j = 0; j < FullGameList.size(); j++)
 		{
-			if(strncasecmp((const char *) PartGameList[i].id, (const char *) FullGameList[j].id, 6) == 0)
+			if (strncasecmp((const char *)PartGameList[i].id, (const char *)FullGameList[j].id, 6) == 0)
 			{
-				PartGameList.erase(PartGameList.begin()+i);
+				PartGameList.erase(PartGameList.begin() + i);
 				--i;
 				break;
 			}
 		}
 	}
-	FullGameList.resize(oldSize+PartGameList.size());
-	memcpy(&FullGameList[oldSize], &PartGameList[0], PartGameList.size()*sizeof(struct discHdr));
+	FullGameList.resize(oldSize + PartGameList.size());
+	memcpy(&FullGameList[oldSize], &PartGameList[0], PartGameList.size() * sizeof(struct discHdr));
 
-	GamePartitionList.resize(oldSize+PartGameList.size());
+	GamePartitionList.resize(oldSize + PartGameList.size());
 
-	for(u32 i = oldSize; i < GamePartitionList.size(); ++i)
+	for (u32 i = oldSize; i < GamePartitionList.size(); ++i)
 		GamePartitionList[i] = part;
 
 	return PartGameList.size();
@@ -156,6 +167,13 @@ int GameList::InternalReadList(int part)
 
 int GameList::ReadGameList()
 {
+	if (Settings.UseGameHeaderCache && isCacheFile(WII_HEADER_CACHE_FILE))
+	{
+		if (FullGameList.empty() && GamePartitionList.empty())
+			LoadGameHeaderCache(FullGameList, GamePartitionList);
+		if (!FullGameList.empty())
+			return (int)FullGameList.size();
+	}
 	// Clear list
 	FullGameList.clear();
 	GamePartitionList.clear();
@@ -165,7 +183,7 @@ int GameList::ReadGameList()
 
 	int cnt = 0;
 
-	if(!Settings.MultiplePartitions)
+	if (!Settings.MultiplePartitions)
 	{
 		cnt = InternalReadList(Settings.partition);
 	}
@@ -173,12 +191,16 @@ int GameList::ReadGameList()
 	{
 		int partitions = DeviceHandler::GetUSBPartitionCount();
 
-		for(int part = 0; part < partitions; ++part)
+		for (int part = 0; part < partitions; ++part)
 		{
 			int ret = InternalReadList(part);
-			if(ret > 0) cnt += ret;
+			if (ret > 0)
+				cnt += ret;
 		}
 	}
+
+	if (Settings.UseGameHeaderCache && !FullGameList.empty() && !GamePartitionList.empty())
+		SaveGameHeaderCache(FullGameList, GamePartitionList);
 
 	return cnt;
 }
@@ -195,23 +217,25 @@ void GameList::InternalFilterList(std::vector<struct discHdr> &FullList)
 		/* Filters */
 		if (Settings.GameSort & SORT_FAVORITE)
 		{
-			GameStatus * GameStats = GameStatistics.GetGameStatus(header->id);
+			GameStatus *GameStats = GameStatistics.GetGameStatus(header->id);
 			if (Settings.marknewtitles)
 			{
 				bool isNew = NewTitles::Instance()->IsNew(header->id);
-				if (!isNew && (!GameStats || GameStats->FavoriteRank == 0)) continue;
+				if (!isNew && (!GameStats || GameStats->FavoriteRank == 0))
+					continue;
 			}
 			else
 			{
-				if (!GameStats || GameStats->FavoriteRank == 0) continue;
+				if (!GameStats || GameStats->FavoriteRank == 0)
+					continue;
 			}
 		}
 
 		//ignore uLoader cfg "iso".  i was told it is "__CFG_"  but not confirmed
-		if (strncasecmp((char*) header->id, "__CFG_", 6) == 0)
+		if (strncasecmp((char *)header->id, "__CFG_", 6) == 0)
 			continue;
 
-		GameCFG * GameConfig = GameSettings.GetGameCFG(header);
+		GameCFG *GameConfig = GameSettings.GetGameCFG(header);
 
 		/* Rating based parental control method */
 		if (Settings.parentalcontrol != PARENTAL_LVL_ADULT && !Settings.godmode)
@@ -220,89 +244,89 @@ void GameList::InternalFilterList(std::vector<struct discHdr> &FullList)
 				continue;
 
 			// Check game rating in GameTDB, since the default Wii parental control setting is enabled
-			int rating = GameTitles.GetParentalRating((char *) header->id);
+			int rating = GameTitles.GetParentalRating((char *)header->id);
 			if (rating > Settings.parentalcontrol)
 				continue;
 		}
 
 		//! Per game lock method
-		if(!Settings.godmode && GameConfig && GameConfig->Locked)
+		if (!Settings.godmode && GameConfig && GameConfig->Locked)
 			continue;
 
 		//! Category filter
 		u32 n;
 		int allType = DISABLED;
 		// verify the display mode for category "All"
-		for(n = 0; n < Settings.EnabledCategories.size(); ++n)
+		for (n = 0; n < Settings.EnabledCategories.size(); ++n)
 		{
-			if(Settings.EnabledCategories[n] == 0)
+			if (Settings.EnabledCategories[n] == 0)
 			{
 				allType = ENABLED; // All = Enabled
 				break;
 			}
 		}
-		for(n = 0; n < Settings.ForbiddenCategories.size(); ++n)
+		for (n = 0; n < Settings.ForbiddenCategories.size(); ++n)
 		{
-			if(Settings.ForbiddenCategories[n] == 0)
+			if (Settings.ForbiddenCategories[n] == 0)
 			{
 				allType = HIDEFORBIDDEN; // All = Enabled but hide Forbidden categories
 				break;
 			}
 		}
-		
-		if(allType == DISABLED)
+
+		if (allType == DISABLED)
 		{
 			// Remove TitleID if it contains a forbidden categories
-			for(n = 0; n < Settings.ForbiddenCategories.size(); ++n)
+			for (n = 0; n < Settings.ForbiddenCategories.size(); ++n)
 			{
-				if(GameCategories.isInCategory((char *) header->id, Settings.ForbiddenCategories[n]))
+				if (GameCategories.isInCategory((char *)header->id, Settings.ForbiddenCategories[n]))
 					break;
 			}
-			if(n < Settings.ForbiddenCategories.size())
+			if (n < Settings.ForbiddenCategories.size())
 				continue;
-			
+
 			// Remove TitleID is it doesn't contain a required categories
-			for(n = 0; n < Settings.RequiredCategories.size(); ++n)
+			for (n = 0; n < Settings.RequiredCategories.size(); ++n)
 			{
-				if(!GameCategories.isInCategory((char *) header->id, Settings.RequiredCategories[n]))
+				if (!GameCategories.isInCategory((char *)header->id, Settings.RequiredCategories[n]))
 					break;
 			}
-			if(n < Settings.RequiredCategories.size())
+			if (n < Settings.RequiredCategories.size())
 				continue;
-			
+
 			// If there's no required categories, verify if the TitleID should be kept or removed
-			if(Settings.RequiredCategories.size() == 0)
+			if (Settings.RequiredCategories.size() == 0)
 			{
-				for(n = 0; n < Settings.EnabledCategories.size(); ++n)
+				for (n = 0; n < Settings.EnabledCategories.size(); ++n)
 				{
-					if(GameCategories.isInCategory((char *) header->id, Settings.EnabledCategories[n]))
+					if (GameCategories.isInCategory((char *)header->id, Settings.EnabledCategories[n]))
 						break;
 				}
-				if(n == Settings.EnabledCategories.size())
+				if (n == Settings.EnabledCategories.size())
 					continue;
 			}
 		}
-		
-		if(allType == HIDEFORBIDDEN)
+
+		if (allType == HIDEFORBIDDEN)
 		{
 			// Remove TitleID if it contains a forbidden categories
-			for(n = 0; n < Settings.ForbiddenCategories.size(); ++n)
+			for (n = 0; n < Settings.ForbiddenCategories.size(); ++n)
 			{
-				if(GameCategories.isInCategory((char *) header->id, Settings.ForbiddenCategories[n]))
-					if(Settings.ForbiddenCategories[n] >0)
+				if (GameCategories.isInCategory((char *)header->id, Settings.ForbiddenCategories[n]))
+					if (Settings.ForbiddenCategories[n] > 0)
 						break;
 			}
-			if(n < Settings.ForbiddenCategories.size())
+			if (n < Settings.ForbiddenCategories.size())
 				continue;
-		}	
-		
+		}
+
 		FilteredList.push_back(header);
 	}
 }
 
-int GameList::FilterList(const wchar_t * gameFilter)
+int GameList::FilterList(const wchar_t *gameFilter)
 {
-	if((Settings.LoaderMode & MODE_WIIGAMES) && (FullGameList.size() == 0))
+	if ((Settings.LoaderMode & MODE_WIIGAMES) && (FullGameList.size() == 0))
 		ReadGameList();
 
 	if (gameFilter)
@@ -310,26 +334,48 @@ int GameList::FilterList(const wchar_t * gameFilter)
 
 	FilteredList.clear();
 
+	int allType = DISABLED;
+	// Verify the display mode for category "All"
+	for (u32 n = 0; n < Settings.EnabledCategories.size(); ++n)
+	{
+		if (Settings.EnabledCategories[n] == 0)
+		{
+			allType = ENABLED;
+			break;
+		}
+	}
+
+	if (Settings.UseGameHeaderCache && allType == ENABLED && isCacheFile(FilteredListCacheFileName(gameFilter)))
+	{
+		LoadFilteredListCache(FilteredList, GameFilter.c_str());
+		GuiSearchBar::FilterList(FilteredList, GameFilter);
+		if (!FilteredList.empty())
+			return FilteredList.size();
+	}
+
 	// Filter current game list if selected
-	if(Settings.LoaderMode & MODE_WIIGAMES)
+	if (Settings.LoaderMode & MODE_WIIGAMES)
 		InternalFilterList(FullGameList);
 
 	// Filter gc game list if selected
-	if(Settings.LoaderMode & MODE_GCGAMES)
+	if (Settings.LoaderMode & MODE_GCGAMES)
 		InternalFilterList(GCGames::Instance()->GetHeaders());
 
 	// Filter nand channel list if selected
-	if(Settings.LoaderMode & MODE_NANDCHANNELS)
+	if (Settings.LoaderMode & MODE_NANDCHANNELS)
 		InternalFilterList(Channels::Instance()->GetNandHeaders());
 
 	// Filter emu nand channel list if selected
-	if(Settings.LoaderMode & MODE_EMUCHANNELS)
+	if (Settings.LoaderMode & MODE_EMUCHANNELS)
 		InternalFilterList(Channels::Instance()->GetEmuHeaders());
 
 	NewTitles::Instance()->Save();
 	GuiSearchBar::FilterList(FilteredList, GameFilter);
 
 	SortList();
+
+	if (Settings.UseGameHeaderCache && allType == ENABLED && !FilteredList.empty() && (Settings.GameSort & SORT_RANKING) == 0 && (Settings.GameSort & SORT_PLAYCOUNT) == 0 && (Settings.GameSort & SORT_FAVORITE) == 0)
+		SaveFilteredListCache(FilteredList, GameFilter.c_str());
 
 	return FilteredList.size();
 }
@@ -349,26 +395,34 @@ void GameList::InternalLoadUnfiltered(std::vector<struct discHdr> &FullList)
 
 int GameList::LoadUnfiltered()
 {
-	if((Settings.LoaderMode & MODE_WIIGAMES) && (FullGameList.size() == 0))
+	if ((Settings.LoaderMode & MODE_WIIGAMES) && (FullGameList.size() == 0))
 		ReadGameList();
 
 	GameFilter.clear();
 	FilteredList.clear();
 
+	if (Settings.UseGameHeaderCache && isCacheFile(FilteredListCacheFileName()))
+	{
+		LoadFilteredListCache(FilteredList, GameFilter.c_str());
+		GuiSearchBar::FilterList(FilteredList, GameFilter);
+		if (!FilteredList.empty())
+			return FilteredList.size();
+	}
+
 	// Filter current game list if selected
-	if(Settings.LoaderMode & MODE_WIIGAMES)
+	if (Settings.LoaderMode & MODE_WIIGAMES)
 		InternalLoadUnfiltered(FullGameList);
 
 	// Filter gc game list if selected
-	if(Settings.LoaderMode & MODE_GCGAMES)
+	if (Settings.LoaderMode & MODE_GCGAMES)
 		InternalLoadUnfiltered(GCGames::Instance()->GetHeaders());
 
 	// Filter nand channel list if selected
-	if(Settings.LoaderMode & MODE_NANDCHANNELS)
+	if (Settings.LoaderMode & MODE_NANDCHANNELS)
 		InternalLoadUnfiltered(Channels::Instance()->GetNandHeaders());
 
 	// Filter emu nand channel list if selected
-	if(Settings.LoaderMode & MODE_EMUCHANNELS)
+	if (Settings.LoaderMode & MODE_EMUCHANNELS)
 		InternalLoadUnfiltered(Channels::Instance()->GetEmuHeaders());
 
 	NewTitles::Instance()->Save();
@@ -376,22 +430,26 @@ int GameList::LoadUnfiltered()
 
 	SortList();
 
+	if (Settings.UseGameHeaderCache && !FilteredList.empty() && (Settings.GameSort & SORT_RANKING) == 0 && (Settings.GameSort & SORT_PLAYCOUNT) == 0 && (Settings.GameSort & SORT_FAVORITE) == 0)
+		SaveFilteredListCache(FilteredList, GameFilter.c_str());
+
 	return FilteredList.size();
 }
 
 void GameList::SortList()
 {
-	if (FilteredList.size() < 2) return;
+	if (FilteredList.size() < 2)
+		return;
 
 	if (Settings.GameSort & SORT_PLAYCOUNT)
 	{
 		std::sort(FilteredList.begin(), FilteredList.end(), PlaycountSortCallback);
 	}
-	else if(Settings.GameSort & SORT_RANKING)
+	else if (Settings.GameSort & SORT_RANKING)
 	{
 		std::sort(FilteredList.begin(), FilteredList.end(), RankingSortCallback);
 	}
-	else if(Settings.GameSort & SORT_PLAYERS)
+	else if (Settings.GameSort & SORT_PLAYERS)
 	{
 		std::sort(FilteredList.begin(), FilteredList.end(), PlayersSortCallback);
 	}
@@ -403,7 +461,7 @@ void GameList::SortList()
 
 bool GameList::NameSortCallback(const struct discHdr *a, const struct discHdr *b)
 {
-	return (strcasecmp(GameTitles.GetTitle((struct discHdr *) a), GameTitles.GetTitle((struct discHdr *) b)) < 0);
+	return (strcasecmp(GameTitles.GetTitle((struct discHdr *)a), GameTitles.GetTitle((struct discHdr *)b)) < 0);
 }
 
 bool GameList::PlaycountSortCallback(const struct discHdr *a, const struct discHdr *b)
@@ -411,7 +469,8 @@ bool GameList::PlaycountSortCallback(const struct discHdr *a, const struct discH
 	int count1 = GameStatistics.GetPlayCount(a->id);
 	int count2 = GameStatistics.GetPlayCount(b->id);
 
-	if (count1 == count2) return NameSortCallback(a, b);
+	if (count1 == count2)
+		return NameSortCallback(a, b);
 
 	return (count1 > count2);
 }
@@ -421,17 +480,19 @@ bool GameList::RankingSortCallback(const struct discHdr *a, const struct discHdr
 	int fav1 = GameStatistics.GetFavoriteRank(a->id);
 	int fav2 = GameStatistics.GetFavoriteRank(b->id);
 
-	if (fav1 == fav2) return NameSortCallback(a, b);
+	if (fav1 == fav2)
+		return NameSortCallback(a, b);
 
 	return (fav1 > fav2);
 }
 
 bool GameList::PlayersSortCallback(const struct discHdr *a, const struct discHdr *b)
 {
-	int count1 = GameTitles.GetPlayersCount((const char *) a->id);
-	int count2 = GameTitles.GetPlayersCount((const char *) b->id);
+	int count1 = GameTitles.GetPlayersCount((const char *)a->id);
+	int count2 = GameTitles.GetPlayersCount((const char *)b->id);
 
-	if (count1 == count2) return NameSortCallback(a, b);
+	if (count1 == count2)
+		return NameSortCallback(a, b);
 
 	return (count1 > count2);
 }

@@ -25,7 +25,6 @@ typedef struct _dolheader
 static bool Remove_001_Protection(void *Address, int Size)
 {
 	u8 SearchPattern[16] = { 0x40, 0x82, 0x00, 0x0C, 0x38, 0x60, 0x00, 0x01, 0x48, 0x00, 0x02, 0x44, 0x38, 0x61, 0x00, 0x18 };
-	u8 PatchData[16] = { 0x40, 0x82, 0x00, 0x04, 0x38, 0x60, 0x00, 0x01, 0x48, 0x00, 0x02, 0x44, 0x38, 0x61, 0x00, 0x18 };
 
 	void *Addr = Address;
 	void *Addr_end = Address + Size;
@@ -34,7 +33,8 @@ static bool Remove_001_Protection(void *Address, int Size)
 	{
 		if (memcmp(Addr, SearchPattern, sizeof(SearchPattern)) == 0)
 		{
-			memcpy(Addr, PatchData, sizeof(PatchData));
+			SearchPattern[3] = 0x04;
+			memcpy(Addr, SearchPattern, sizeof(SearchPattern));
 			return true;
 		}
 		Addr += 4;
@@ -56,10 +56,7 @@ bool Load_Dol(void **buffer, int* dollen, const char * filepath)
 
 	file = fopen(fullpath, "rb");
 	if (file == NULL)
-	{
-		fclose(file);
 		return false;
-	}
 
 	int filesize;
 	fseek(file, 0, SEEK_END);

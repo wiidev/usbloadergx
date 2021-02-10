@@ -88,6 +88,9 @@
 #if defined(WOLFSSL_CRYPTOCELL)
     #include <libs/libwolfssl/wolfcrypt/port/arm/cryptoCell.h>
 #endif
+#if defined(WOLFSSL_SILABS_SE_ACCEL)
+    #include <libs/libwolfssl/wolfcrypt/port/silabs/silabs_hash.h>
+#endif
 
 #if defined(_MSC_VER)
     #define SHA256_NOINLINE __declspec(noinline)
@@ -126,6 +129,10 @@ enum {
 #elif defined(WOLFSSL_RENESAS_TSIP_CRYPT) && \
    !defined(NO_WOLFSSL_RENESAS_TSIP_CRYPT_HASH)
     #include "wolfssl/wolfcrypt/port/Renesas/renesas-tsip-crypt.h"
+#elif defined(WOLFSSL_PSOC6_CRYPTO)
+    #include "wolfssl/wolfcrypt/port/cypress/psoc6_crypto.h"
+#elif defined(WOLFSSL_IMXRT_DCP)
+    #include <libs/libwolfssl/wolfcrypt/port/nxp/dcp_port.h>
 #else
 
 /* wc_Sha256 digest */
@@ -134,6 +141,8 @@ struct wc_Sha256 {
     ltc_hash_ctx_t ctx;
 #elif defined(STM32_HASH_SHA2)
     STM32_HASH_Context stmCtx;
+#elif defined(WOLFSSL_SILABS_SE_ACCEL)
+  wc_silabs_sha_t silabsCtx;
 #else
     /* alignment on digest and buffer speeds up ARMv8 crypto operations */
     ALIGN16 word32  digest[WC_SHA256_DIGEST_SIZE / sizeof(word32)];
@@ -142,6 +151,7 @@ struct wc_Sha256 {
     word32  loLen;     /* length in bytes   */
     word32  hiLen;     /* length in bytes   */
     void*   heap;
+#endif
 #ifdef WOLFSSL_PIC32MZ_HASH
     hashUpdCache cache; /* cache for updates */
 #endif
@@ -150,7 +160,7 @@ struct wc_Sha256 {
 #endif /* WOLFSSL_ASYNC_CRYPT */
 #ifdef WOLFSSL_SMALL_STACK_CACHE
     word32* W;
-#endif
+#endif /* !FREESCALE_LTC_SHA && !STM32_HASH_SHA2 */
 #ifdef WOLFSSL_DEVCRYPTO_HASH
     WC_CRYPTODEV ctx;
     byte*  msg;
@@ -167,7 +177,6 @@ struct wc_Sha256 {
 #ifdef WOLF_CRYPTO_CB
     int    devId;
     void*  devCtx; /* generic crypto callback context */
-#endif
 #endif
 #if defined(WOLFSSL_HASH_FLAGS) || defined(WOLF_CRYPTO_CB)
     word32 flags; /* enum wc_HashFlags in hash.h */

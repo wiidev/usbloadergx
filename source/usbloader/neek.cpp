@@ -75,6 +75,7 @@ bool neekLoadKernel (const char* nandpath)
 	kernel = (u32 *) MEM2_alloc(fsize);
 	if(!kernel)
 	{
+		fclose(f);
 		return false;
 	}
 	
@@ -333,8 +334,7 @@ int neek2oSetNAND(const char* nandpath)
 	// create the file if it doesn't exist
 	if(!CheckFile(nandconfigPath) || FileSize(nandconfigPath) < NANDCONFIG_HEADER_SIZE+1)
 	{
-		u8* nandConfigHeader[NANDCONFIG_HEADER_SIZE];
-		memset(nandConfigHeader, 0, NANDCONFIG_HEADER_SIZE);
+		u8* nandConfigHeader[NANDCONFIG_HEADER_SIZE] = {};
 		
 		f = fopen(nandconfigPath, "wb");
 		if(!f)

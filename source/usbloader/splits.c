@@ -174,7 +174,7 @@ s32 split_read_sector(void *_fp, u32 lba, u32 count, void*buf)
 		ret = read(fd, ptr, chunk * 512);
 		if (ret != chunk * 512)
 		{
-			fprintf(stderr, "error reading %u %u [%u] %u = %u\n", (unsigned int)lba, (unsigned int)count, i, (unsigned int)chunk, ret);
+			fprintf(stderr, "error reading %u %u [%i] %u = %lu\n", (unsigned int)lba, (unsigned int)count, i, (unsigned int)chunk, (unsigned long)ret);
 			split_error( "error reading disc" );
 			return 1;
 		}

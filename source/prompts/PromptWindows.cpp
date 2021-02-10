@@ -170,13 +170,14 @@ int OnScreenNumpad(char * var, u32 maxlen)
  * Opens an on-screen keyboard window, with the data entered being stored
  * into the specified variable.
  ***************************************************************************/
-int OnScreenKeyboard(char * var, u32 maxlen, int min, bool hide)
+int OnScreenKeyboard(char * var, u32 maxlen, int min, bool hide, bool restrict)
 {
 	int save = -1;
+	int keyset = (restrict) ? 0 : Settings.keyset;
 
-	gprintf("\nOnScreenKeyboard(%s, %i, %i) \n\tkeyset = %i", var, maxlen, min, Settings.keyset);
+	gprintf("\nOnScreenKeyboard(%s, %i, %i) \n\tkeyset = %i", var, maxlen, min, keyset);
 
-	GuiKeyboard keyboard(var, maxlen, min, Settings.keyset);
+	GuiKeyboard keyboard(var, maxlen, min, keyset);
 	keyboard.SetVisibleText(!hide);
 
 	GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
@@ -297,9 +298,9 @@ void WindowCredits()
 
 	char SvnRev[80];
 #ifdef FULLCHANNEL
-	snprintf(SvnRev, sizeof(SvnRev), "Rev%sc   IOS%u (Rev %u)%s", GetRev(), IOS_GetVersion(), IOS_GetRevision(), (*(vu32*)0xcd800064 == 0xFFFFFFFF)? " + AHB" : "" );
+	snprintf(SvnRev, sizeof(SvnRev), "Rev%sc   IOS%d (Rev %d)%s", GetRev(), (int)IOS_GetVersion(), (int)IOS_GetRevision(), (*(vu32*)0xcd800064 == 0xFFFFFFFF)? " + AHB" : "" );
 #else
-	snprintf(SvnRev, sizeof(SvnRev), "Rev%s   IOS%u (Rev %u)%s", GetRev(), (unsigned int)IOS_GetVersion(), (int)IOS_GetRevision(), (*(vu32*)0xcd800064 == 0xFFFFFFFF)? " + AHB" : "" );
+	snprintf(SvnRev, sizeof(SvnRev), "Rev%s   IOS%d (Rev %d)%s", GetRev(), (int)IOS_GetVersion(), (int)IOS_GetRevision(), (*(vu32*)0xcd800064 == 0xFFFFFFFF)? " + AHB" : "" );
 #endif
 
 	char IosInfo[80] = "";
@@ -320,7 +321,7 @@ void WindowCredits()
 		snprintf(GCInfo, sizeof(GCInfo), "QuadForce USB %s", DMLVersions[IosLoader::GetDMLVersion()]);
 		
 	// Check if Devolution is available
-	char DEVO_loader_path[100];
+	char DEVO_loader_path[110];
 	snprintf(DEVO_loader_path, sizeof(DEVO_loader_path), "%sloader.bin", Settings.DEVOLoaderPath);
 	FILE *f = fopen(DEVO_loader_path, "rb");
 	if(f)
@@ -332,7 +333,7 @@ void WindowCredits()
 		char *ptr = strchr(version, ' ');
 		if(ptr) *ptr = 0;
 		else version[4] = 0;
-		snprintf(GCInfo, sizeof(GCInfo), "%s%sDevolution r%d", GCInfo, strlen(GCInfo) > 1 ? "  /  " : "", atoi(version));
+		snprintf(GCInfo + strlen(GCInfo), sizeof(GCInfo) - strlen(GCInfo), "%sDevolution r%d", strlen(GCInfo) > 1 ? "  /  " : "", atoi(version));
 	}
 
 	// Check if Nintendont is available
@@ -392,7 +393,7 @@ void WindowCredits()
 	currentTxt->SetFont(creditsFont, creditsFontSize);
 	txt.push_back(currentTxt);
 
-	currentTxt = new GuiText("http://sourceforge.net/p/usbloadergx/", 20, ( GXColor ) {255, 255, 255, 255});
+	currentTxt = new GuiText("https://sourceforge.net/p/usbloadergx/", 20, ( GXColor ) {255, 255, 255, 255});
 	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	currentTxt->SetPosition(160, y);
 	currentTxt->SetFont(creditsFont, creditsFontSize);
@@ -407,14 +408,14 @@ void WindowCredits()
 	currentTxt->SetFont(creditsFont, creditsFontSize);
 	txt.push_back(currentTxt);
 
-	currentTxt = new GuiText("Cyan / Dimok / nIxx / giantpune / ardi");
+	currentTxt = new GuiText("Cyan / Dimok / nIxx / giantpune / ardi / hungyip84");
 	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	currentTxt->SetPosition(160, y);
 	currentTxt->SetFont(creditsFont, creditsFontSize);
 	txt.push_back(currentTxt);
 	y += 20;
 
-	currentTxt = new GuiText("hungyip84 / DrayX7 / lustar / r-win");
+	currentTxt = new GuiText("DrayX7 / lustar / r-win / WiiShizzza / blackb0x");
 	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	currentTxt->SetPosition(160, y);
 	currentTxt->SetFont(creditsFont, creditsFontSize);
@@ -479,7 +480,7 @@ void WindowCredits()
 	txt.push_back(currentTxt);
 	y += 20;
 
-	sprintf(text, "Deak Phreak %s", tr( "for hosting the themes" ));
+	sprintf(text, "Larsenv & Wingysam %s", tr( "for hosting the themes" ));
 	currentTxt = new GuiText(text);
 	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	currentTxt->SetPosition(160, y);
@@ -1198,7 +1199,7 @@ int FormatingPartition(const char *title, int part_num)
 	int portPart = DeviceHandler::PartitionToPortPartition(part_num);
 
 	char text[255];
-	sprintf(text, "%s: %.2fGB", tr( "Partition" ), usbHandle->GetSize(portPart) / GB_SIZE);
+	int n = sprintf(text, "%s: %.2fGB", tr( "Partition" ), usbHandle->GetSize(portPart) / GB_SIZE);
 	int choice = WindowPrompt(tr( "Do you want to format:" ), text, tr( "Yes" ), tr( "No" ));
 	if (choice == 0)
 		return -666;
@@ -1247,7 +1248,7 @@ int FormatingPartition(const char *title, int part_num)
 		partition->FSName = "WBFS";
 		sleep(1);
 		ret = WBFS_OpenPart(part_num);
-		sprintf(text, "%s %s", text, tr( "formatted!" ));
+		snprintf(text + n, sizeof(text) - n, " %s", tr( "formatted!" ));
 		WindowPrompt(tr( "Success:" ), text, tr( "OK" ));
 		if (ret < 0)
 		{
@@ -1456,67 +1457,64 @@ int CodeDownload(const char *id)
 	if (IsNetworkInit())
 	{
 		char txtpath[250];
-		snprintf(txtpath, sizeof(txtpath), "%s%s.txt", Settings.TxtCheatcodespath, id);
+		int txtLen = snprintf(txtpath, sizeof(txtpath), "%s%s.txt", Settings.TxtCheatcodespath, id);
 
-		char codeurl[250];
-		snprintf(codeurl, sizeof(codeurl), "https://www.geckocodes.org/txt.php?txt=%s", id);
+		char codeurl[80];
+		snprintf(codeurl, sizeof(codeurl), "https://codes.rc24.xyz/txt.php?txt=%s", id);
 
 		struct download file = {};
 		downloadfile(codeurl, &file);
 		if (file.size <= 0) {
 			gprintf("Trying backup...\n");
-			char codeurl_backup[250];
-			snprintf(codeurl_backup, sizeof(codeurl_backup), "https://web.archive.org/web/3000if_/geckocodes.org/txt.php?txt=%s", id);
-			downloadfile(codeurl_backup, &file);
+			snprintf(codeurl, sizeof(codeurl), "https://web.archive.org/web/202009if_/geckocodes.org/txt.php?txt=%s", id);
+			downloadfile(codeurl, &file);
 		}
 
-		if (file.size > 0)
+		// UTF-8 BOM + partial ID = 7
+		if (file.size > 7)
 		{
 			bool validUrl = false;
-			if(file.size > 0)
+			char *textCpy = new (std::nothrow) char[file.size+1];
+			if (textCpy)
 			{
-				char *textCpy = new (std::nothrow) char[file.size+1];
-				if(textCpy)
-				{
-					memcpy(textCpy, file.data, file.size);
-					textCpy[file.size] = '\0';
-					validUrl = (strcasestr(textCpy, "404 Not Found") == 0);
-					delete [] textCpy;
-				}
+				memcpy(textCpy, file.data, file.size);
+				textCpy[file.size] = '\0';
+				validUrl = (strcasestr(textCpy, "404 Not Found") == 0);
+				delete [] textCpy;
 			}
 
-			if(!validUrl)
+			if (!validUrl)
 			{
-				snprintf(codeurl, sizeof(codeurl), "%s%s", codeurl, tr( " is not on the server." ));
+				snprintf(codeurl, sizeof(codeurl), "%s.txt%s", id, tr( " is not on the server." ));
 				WindowPrompt(tr( "Error" ), codeurl, tr( "OK" ));
 			}
 			else
 			{
 				FILE * pfile = fopen(txtpath, "wb");
-				if(pfile)
+				if (pfile)
 				{
 					fwrite(file.data, 1, file.size, pfile);
 					fclose(pfile);
 					
 					// verify downloaded content - thanks airline38
 					pfile = fopen(txtpath, "rb");
-					if(pfile)
+					if (pfile)
 					{
-						char target[4];
-						fseek(pfile,0,SEEK_SET);
-						fread(target, sizeof(char), 4, pfile);
+						char target[7];
+						fseek(pfile, 0, SEEK_SET);
+						fread(target, sizeof(char), 7, pfile);
 						fclose(pfile);
 						//printf("target=%s  game id=%s\n",target,id);
-						if (strncmp(target,id,4)== 0 )
+						if (strncmp(target, id, 4) == 0 || strncmp(target + 3, id, 4) == 0)
 						{
-							snprintf(txtpath, sizeof(txtpath), "%s%s", txtpath, tr(" has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information." ));
+							snprintf(txtpath + txtLen, sizeof(txtpath) - txtLen, "%s", tr(" has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information." ));
 							WindowPrompt(0, txtpath, tr( "OK" ));
 							ret = 0;
 						}
 						else
 						{
 							RemoveFile(txtpath);
-							snprintf(codeurl, sizeof(codeurl), "%s%s", codeurl, tr( " is not on the server." ));
+							snprintf(codeurl, sizeof(codeurl), "%s.txt%s", id, tr( " is not on the server." ));
 							WindowPrompt(tr( "Error" ), codeurl, tr( "OK" ));
 						}
 					}
@@ -1524,11 +1522,13 @@ int CodeDownload(const char *id)
 				else
 					WindowPrompt(tr("Error"), tr("Could not write file."), tr( "OK" ));
 			}
-			free(file.data);
+			MEM2_free(file.data);
 		}
 		else
 		{
-			snprintf(codeurl, sizeof(codeurl), "%s%s", codeurl, tr(" could not be downloaded."));
+			if (file.size > 0)
+				MEM2_free(file.data);
+			snprintf(codeurl, sizeof(codeurl), "%s.txt%s", id, tr(" could not be downloaded."));
 			WindowPrompt(tr( "Error" ), codeurl, tr( "OK" ));
 		}
 	}

@@ -462,7 +462,9 @@ int Wad::CheckContentMap(const char *installpath, tmd_content *content, char *fi
 	content_map_size++;
 
 	map = (map_entry_t *) content_map;
-	sprintf(map[next_entry].name, "%08x", (unsigned int)next_entry);
+	char name[9];
+	sprintf(name, "%08x", (unsigned int)next_entry);
+	memcpy(map[next_entry].name, name, 8);
 	memcpy(map[next_entry].hash, content->hash, 20);
 
 	// write new content.map

@@ -23,21 +23,27 @@
  *
  * for WiiXplorer 2010
  ***************************************************************************/
+#include <errno.h>
+#include <network.h>
 #include <stdarg.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <network.h>
 
-#define DESTINATION_IP	  "192.168.1.255"
-#define DESTINATION_PORT	4405
+#define DESTINATION_IP "192.168.1.255"
+#define DESTINATION_PORT 4405
+
+#define GPRINTF_SIZE 256
+#define WIFIGECKO_SIZE 1024
+
+char wifigeckobuffer[WIFIGECKO_SIZE];
 
 static int connection = -1;
 
 void WifiGecko_Close()
 {
-	if(connection >= 0)
+	if (connection >= 0)
 		net_close(connection);
 
 	connection = -1;
@@ -45,7 +51,7 @@ void WifiGecko_Close()
 
 int WifiGecko_Connect()
 {
-	if(connection >= 0)
+	if (connection >= 0)
 		return connection;
 
 	connection = net_socket(AF_INET, SOCK_DGRAM, IPPROTO_IP);
@@ -58,7 +64,7 @@ int WifiGecko_Connect()
 	connect_addr.sin_port = htons(DESTINATION_PORT);
 	inet_aton(DESTINATION_IP, &connect_addr.sin_addr);
 
-	if(net_connect(connection, (struct sockaddr*)&connect_addr, sizeof(connect_addr)) < 0)
+	if (net_connect(connection, (struct sockaddr *)&connect_addr, sizeof(connect_addr)) < 0)
 	{
 		WifiGecko_Close();
 		return -1;
@@ -67,47 +73,33 @@ int WifiGecko_Connect()
 	return connection;
 }
 
-int WifiGecko_Send(const char * data, int datasize)
+int WifiGecko_Send(const char *data, int datasize)
 {
-	if(WifiGecko_Connect() < 0)
+	if ((strlen(wifigeckobuffer) + datasize) < WIFIGECKO_SIZE)
+		strcat(wifigeckobuffer, data);
+
+	if (WifiGecko_Connect() < 0)
 		return connection;
 
-	int ret = 0, done = 0, blocksize = 1024;
+	u32 sendsize = strlen(wifigeckobuffer);
 
-	while (done < datasize)
-	{
-		if(blocksize > datasize-done)
-			blocksize = datasize-done;
+	while (net_get_status() == -EBUSY)
+		usleep(10000);
+	int ret = net_send(connection, wifigeckobuffer, sendsize, 0);
+	if (ret < 0)
+		WifiGecko_Close();
 
-		ret = net_send(connection, data+done, blocksize, 0);
-		if (ret < 0)
-		{
-			WifiGecko_Close();
-			return ret;
-		}
-		else if(ret == 0)
-		{
-			break;
-		}
-
-		done += ret;
-		usleep (1000);
-	}
-
+	memset(wifigeckobuffer, 0, WIFIGECKO_SIZE);
 	return ret;
 }
 
-void wifi_printf(const char * format, ...)
+void wifi_printf(const char *format, ...)
 {
-	char * tmp = NULL;
+	char gprintfBuffer[GPRINTF_SIZE];
 	va_list va;
 	va_start(va, format);
-	if((vasprintf(&tmp, format, va) >= 0) && tmp)
-	{
-		WifiGecko_Send(tmp, strlen(tmp));
-	}
+	size_t len = vsnprintf(gprintfBuffer, GPRINTF_SIZE - 1, format, va);
 	va_end(va);
-
-	if(tmp)
-		free(tmp);
+	if (len)
+		WifiGecko_Send(gprintfBuffer, len);
 }

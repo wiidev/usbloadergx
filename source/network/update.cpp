@@ -51,8 +51,6 @@
 #include "sys.h"
 #include "svnrev.h"
 
-static const char *GameTDB_URL = "https://www.gametdb.com/wiitdb.zip";
-
 /****************************************************************************
  * Checking if an Update is available
  ***************************************************************************/
@@ -63,7 +61,7 @@ int DownloadFileToPath(const char *url, const char *dest)
 	StartProgress(tr("Downloading file..."), 0, filename, true, true);
 
 	struct download file = {};
-	file.show_progress = 1;
+	file.show_progress = true;
 	downloadfile(url, &file);
 	if (file.size > 0)
 	{
@@ -75,7 +73,7 @@ int DownloadFileToPath(const char *url, const char *dest)
 		}
 		fwrite(file.data, 1, file.size, savefile);
 		fclose(savefile);
-		free(file.data);
+		MEM2_free(file.data);
 	}
 	ProgressStop();
 	ProgressCancelEnable(false);
@@ -86,7 +84,7 @@ static bool CheckNewGameTDBVersion(const char *url)
 {
 	gprintf("Checking GameTDB version...\n");
 	struct download file = {};
-	file.gametdbcheck = 1;
+	file.gametdbcheck = true;
 	downloadfile(url, &file);
 
 	if (file.gametdbcheck <= 0)
@@ -112,7 +110,7 @@ static bool CheckNewGameTDBVersion(const char *url)
 
 int UpdateGameTDB()
 {
-	if (CheckNewGameTDBVersion(GameTDB_URL) == false)
+	if (CheckNewGameTDBVersion(Settings.URL_GameTDB) == false)
 	{
 		gprintf("Not updating GameTDB: Version is the same\n");
 		return -1;
@@ -126,7 +124,7 @@ int UpdateGameTDB()
 
 	ZipPath += "wiitdb.zip";
 
-	int filesize = DownloadFileToPath(GameTDB_URL, ZipPath.c_str());
+	int filesize = DownloadFileToPath(Settings.URL_GameTDB, ZipPath.c_str());
 
 	if (filesize <= 0)
 		return -1;
@@ -149,7 +147,7 @@ static void UpdateIconPng()
 {
 	char iconpath[200];
 	struct download file = {};
-	downloadfile("https://svn.code.sf.net/p/usbloadergx/code/branches/updates/icon.png", &file);
+	downloadfile("https://raw.githubusercontent.com/wiidev/usbloadergx/updates/icon.png", &file);
 	if (file.size > 0)
 	{
 		snprintf(iconpath, sizeof(iconpath), "%sicon.png", Settings.update_path);
@@ -159,7 +157,7 @@ static void UpdateIconPng()
 			fwrite(file.data, 1, file.size, pfile);
 			fclose(pfile);
 		}
-		free(file.data);
+		MEM2_free(file.data);
 	}
 }
 
@@ -167,8 +165,7 @@ static void UpdateMetaXml()
 {
 	char xmlpath[200];
 	struct download file = {};
-	downloadfile("https://svn.code.sf.net/p/usbloadergx/code/branches/updates/meta.xml", &file);
-	// if not working, use this url form: http://sourceforge.net/p/usbloadergx/code/1254/tree//branches/updates/meta.xml?format=raw
+	downloadfile("https://raw.githubusercontent.com/wiidev/usbloadergx/updates/meta.xml", &file);
 	if (file.size > 0)
 	{
 		snprintf(xmlpath, sizeof(xmlpath), "%smeta.xml", Settings.update_path);
@@ -178,7 +175,7 @@ static void UpdateMetaXml()
 			fwrite(file.data, 1, file.size, pfile);
 			fclose(pfile);
 		}
-		free(file.data);
+		MEM2_free(file.data);
 	}
 }
 
@@ -192,15 +189,15 @@ int CheckUpdate()
 
 	struct download file = {};
 #ifdef FULLCHANNEL
-	downloadfile("https://svn.code.sf.net/p/usbloadergx/code/branches/updates/update_wad.txt", &file);
+	downloadfile("https://raw.githubusercontent.com/wiidev/usbloadergx/updates/update_wad.txt", &file);
 #else
-	downloadfile("https://svn.code.sf.net/p/usbloadergx/code/branches/updates/update_dol.txt", &file);
+	downloadfile("https://raw.githubusercontent.com/wiidev/usbloadergx/updates/update_dol.txt", &file);
 #endif
 
 	if (file.size > 0)
 	{
 		revnumber = atoi((char *)file.data);
-		free(file.data);
+		MEM2_free(file.data);
 	}
 
 	if (revnumber > currentrev)
@@ -217,9 +214,9 @@ static int ApplicationDownload(void)
 
 	struct download file = {};
 #ifdef FULLCHANNEL
-	downloadfile("https://svn.code.sf.net/p/usbloadergx/code/branches/updates/update_wad.txt", &file);
+	downloadfile("https://raw.githubusercontent.com/wiidev/usbloadergx/updates/update_wad.txt", &file);
 #else
-	downloadfile("https://svn.code.sf.net/p/usbloadergx/code/branches/updates/update_dol.txt", &file);
+	downloadfile("https://raw.githubusercontent.com/wiidev/usbloadergx/updates/update_dol.txt", &file);
 #endif
 
 	if (file.size > 0)
@@ -236,7 +233,7 @@ static int ApplicationDownload(void)
 			ptr++;
 		}
 
-		free(file.data);
+		MEM2_free(file.data);
 	}
 
 	if (newrev <= currentrev)

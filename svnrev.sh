@@ -3,7 +3,7 @@
 rev_new_raw=$(svnversion -n . 2>/dev/null | tr '\n' ' ' | tr -d '\r')
 [ -n "$rev_new_raw" ] || rev_new_raw=$(SubWCRev . 2>/dev/null | tr '\n' ' ' | tr -d '\r')
 
-[ -z "$rev_new_raw" ] && rev_new_raw=$(cat version.txt)
+[ -z "$rev_new_raw" ] && rev_new_raw=$(cat version.txt) && skip_ver_bump="true"
 
 rev_new_raw=$(echo $rev_new_raw | sed 's/[^0-9]*\([0-9]*\)\(.*\)/\1 \2/')
 rev_new=0
@@ -29,73 +29,68 @@ const char *GetRev()
 }
 EOF
 
-	if [ -n "$rev_new" ]; then
-		echo "Changed Rev $rev_old to $rev_new" >&2
+	if [ -z "$rev_old" ]; then
+		echo "Created svnrev.c and set the revision to $rev_new" >&2
 	else
-		echo "svnrev.c created" >&2
+		echo "Changed the revision from $rev_old to $rev_new" >&2
 	fi
-	echo >&2
 fi
 
 
-rev_new=`expr $rev_new + 1`
+[ "$skip_ver_bump" != "true" ] && rev_new=`expr $rev_new + 1`
 rev_date=`date -u +%Y%m%d%H%M%S`
 
 cat <<EOF > ./HBC/meta.xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-	<app version="1">
-		<name> USB Loader GX</name>
-		<coder>USB Loader GX Team</coder>
-		<version>3.0 r$rev_new</version>
-		<release_date>$rev_date</release_date>
-		<!--   // remove this line to enable arguments
-		<arguments>
-				<arg>--ios=250</arg>
-				<arg>--usbport=0</arg>
-				<arg>--mountusb=1</arg>
-		</arguments>
-		// remove this line to enable arguments -->
-		<ahb_access/>
-		<short_description>Loads games from USB-devices</short_description>
-		<long_description>USB Loader GX is a libwiigui based USB iso loader with a wii-like GUI. You can install games to your HDDs and boot them with shorter loading times.
+<app version="1">
+	<name> USB Loader GX</name>
+	<coder>USB Loader GX Team</coder>
+	<version>3.0 r$rev_new</version>
+	<release_date>$rev_date</release_date>
+	<!-- remove this line to enable arguments
+	<arguments>
+		<arg>--ios=250</arg>
+		<arg>--usbport=0</arg>
+		<arg>--mountusb=1</arg>
+	</arguments>
+	remove this line to enable arguments -->
+	<ahb_access/>
+	<short_description>Loads games from USB-devices</short_description>
+	<long_description>USB Loader GX is a libwiigui based USB iso loader with a wii-like GUI. You can install games to your HDDs and boot them with shorter loading times.
 The interactive GUI is completely controllable with WiiMote, Classic Controller or GC Controller.
 Features are automatic widescreen detection, coverdownload, parental control, theme support and many more.
 
 Credits:
-Coding: Cyan, Dimok, nIxx, giantpune, ardi, Hungyip84, DrayX7, Lustar, r-win, WiiShizzza
+Coding: Cyan, Dimok, blackb0x, nIxx, giantpune, ardi, Hungyip84, DrayX7, Lustar, r-win, WiiShizzza
 Artworks: cyrex, NeoRame
 Validation: Cyan and many others
 Issue management: Cyan
-WiiTDB / Hosting covers: Lustar
+GameTDB / Hosting covers: Lustar
 USBLoader sources: Waninkoko, Kwiirk, Hermes
 cIOS maintenance: davebaol, xabby666, XFlak and Rodries
 Languages files updates: Kinyo and translaters
-Hosting themes: Deak Phreak
+Themes website: Larsenv, Wingysam
 
 Libwiigui: Tantric
 Libogc/Devkit: Shagkur and Wintermute
 FreeTypeGX: Armin Tamzarian.
 
-Links:
-USB Loader GX Project Page 
-https://sourceforge.net/projects/usbloadergx/
-Support Site:
-http://gbatemp.net/index.php?showtopic=149922
-Help Website:
-http://usbloadergx.koureio.net/
-WiiTDB Site:
-http://wiitdb.com
-Themes Site:
-http://wii.spiffy360.com
-Languages Translaters Page:
-http://gbatemp.net/index.php?showtopic=155252
+USB Loader GX (enhanced):
+https://github.com/wiidev/usbloadergx
+USB Loader GX (official):
+https://sourceforge.net/projects/usbloadergx
+Support (official):
+https://gbatemp.net/threads/149922
+GameTDB:
+https://www.gametdb.com
+Themes:
+https://theme.rc24.xyz
 
-Libwiigui Website:
-http://wiibrew.org/wiki/Libwiigui/
-FreeTypeGX Project Page:
-http://code.google.com/p/freetypegx/
-Gettext Official Page:
-http://www.gnu.org/software/gettext/gettext.html
-		</long_description>
-	</app>
+Libwiigui:
+https://wiibrew.org/wiki/Libwiigui
+FreeTypeGX:
+https://github.com/ArminTamzarian/freetypegx
+Gettext:
+https://www.gnu.org/software/gettext</long_description>
+</app>
 EOF

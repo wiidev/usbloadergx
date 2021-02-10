@@ -48,7 +48,7 @@ int CheatMenu(const char * gameID)
 	GuiButton createBtn(&createBtnImg, &createBtnImg, 2, 3, 195, 400, &trigA, NULL, btnSoundClick2, 1);
 	createBtn.SetLabel(&createBtnTxt);
 
-	char txtfilename[55];
+	char txtfilename[120];
 	snprintf(txtfilename, sizeof(txtfilename), "%s%s.txt", Settings.TxtCheatcodespath, gameID);
 
 	GCTCheats gctCheats;

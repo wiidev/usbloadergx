@@ -108,7 +108,7 @@ msgid "5 min"
 msgstr ""
 
 msgid "=== GameCube Settings"
-msgstr "=== Opções do GameCube"
+msgstr "== Opções do GameCube"
 
 msgid "AUTO"
 msgstr ""
@@ -148,6 +148,9 @@ msgstr "Todos os arquivos foram processados"
 
 msgid "Alternate DOL"
 msgstr "DOL alternativo"
+
+msgid "AltWFC"
+msgstr ""
 
 msgid "An example file was created here:"
 msgstr "Arquivo de exemplo criado aqui:"
@@ -537,11 +540,17 @@ msgstr "Cortar Overscan"
 msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr "Os arquivos do neek não são do neek2o. Auto Boot desabilitado"
 
+msgid "Custom Address"
+msgstr ""
+
 msgid "Custom Banners"
 msgstr "Banners Modificados"
 
 msgid "Custom Paths"
 msgstr "Caminhos"
+
+msgid "Custom"
+msgstr ""
 
 msgid "Customs"
 msgstr ""
@@ -1086,11 +1095,14 @@ msgstr ""
 msgid "GXFlush"
 msgstr ""
 
-msgid "Game Cube Games Delete"
+msgid "GameCube Games Delete"
 msgstr "Desinstalar Jogos GameCube"
 
-msgid "Game Cube Install Menu"
+msgid "GameCube Install Menu"
 msgstr "Instalar Jogos GameCube"
+
+msgid "Game Header Cache Files Path"
+msgstr ""
 
 msgid "Game ID"
 msgstr "ID do Jogo"
@@ -1171,7 +1183,7 @@ msgid "Getting game folder size..."
 msgstr "Gerando tamanho da pasta de jogos..."
 
 msgid "Global Settings"
-msgstr "Definições Globais"
+msgstr "Ajustes Globais"
 
 msgid "Grid Scroll Speed"
 msgstr "Veloc. Transição Grade"
@@ -1213,7 +1225,7 @@ msgid "Import Categories"
 msgstr "Importar Categorias"
 
 msgid "Import operation successfully completed."
-msgstr "Operação de importação completada com sucesso"
+msgstr "Importação concluída com sucesso"
 
 msgid "Importing categories"
 msgstr "Importando categorias"
@@ -1235,7 +1247,7 @@ msgstr "Iniciando Conexão de Rede"
 msgid "Insert Disk"
 msgstr "Insira o Disco"
 
-msgid "Insert a Wii or a Game Cube Disc!"
+msgid "Insert a Wii or a GameCube Disc!"
 msgstr "Insira um disco de Wii ou GameCube!"
 
 msgid "Install"
@@ -1262,7 +1274,7 @@ msgstr "Erro ao instalar. Apagando dados incompletos"
 msgid "Install finished"
 msgstr "Instalação finalizada"
 
-msgid "Installing Game Cube Game..."
+msgid "Installing GameCube Game..."
 msgstr "Instalando jogo de GameCube..."
 
 msgid "Installing content"
@@ -1429,7 +1441,7 @@ msgid "Memory Card Emulation"
 msgstr "Emulação Memory Card"
 
 msgid "Memory Card with 2043 blocs has issues with Nintendont. Use at your own risk."
-msgstr "Memory Card com 2043 blocos tem problemas com o Nintendont. Use por sua conta e risco"
+msgstr "O Nintendont tem problemas com Memory Card de 2043 blocos. Use por sua conta e risco"
 
 msgid "Messageboard Update"
 msgstr "Atualizar Messageboard"
@@ -1587,7 +1599,7 @@ msgstr "Normal"
 msgid "Not Initialized"
 msgstr "Não iniciado"
 
-msgid "Not a Wii or a Game Cube Disc"
+msgid "Not a Wii or a GameCube Disc"
 msgstr "Não é um disco de Wii ou GameCube"
 
 msgid "Not a valid URL"
@@ -1737,6 +1749,9 @@ msgstr "Anterior"
 msgid "Playing Music:"
 msgstr "Reproduzindo Música:"
 
+msgid "Please enter a valid address e.g. wiimmfi.de"
+msgstr ""
+
 msgid "Please wait"
 msgstr "Aguarde"
 
@@ -1811,6 +1826,9 @@ msgstr "Reiniciar"
 
 msgid "Reset BG Music"
 msgstr "Música padrão"
+
+msgid "Reset Game Header Cache"
+msgstr ""
 
 msgid "Reset Playcounter"
 msgstr "Limpar Contagem"
@@ -1918,7 +1936,7 @@ msgid "Set Search-Filter"
 msgstr "Pesquisar"
 
 msgid "Settings"
-msgstr "Definições"
+msgstr "Ajustes"
 
 msgid "Settings File"
 msgstr "Arquivo de Opções"
@@ -1950,11 +1968,17 @@ msgstr "Pular Erros"
 msgid "Skip IPL"
 msgstr ""
 
+msgid "BBA Emulation"
+msgstr ""
+
+msgid "BBA Net Profile"
+msgstr ""
+
 msgid "Sneek Video Patch"
 msgstr "Patch Vídeo Sneek"
 
 msgid "Sorry, the theme downloader menu is not working anymore because http://wii.spiffy360.com now requires user registration."
-msgstr "Desculpe, mas não é possível baixar temas por aqui pois http://wii.spiffy360.com requer cadastro de usuário"
+msgstr "Desculpe, mas não é possível baixar temas por aqui pois wii.spiffy360.com requer cadastro de usuário"
 
 msgid "Sort alphabetically"
 msgstr "Ordenar por ordem alfabética"
@@ -2040,6 +2064,9 @@ msgstr "Sincronizando..."
 msgid "System Default"
 msgstr "Padrão"
 
+msgid "System Proxy Settings"
+msgstr ""
+
 msgid "TChinese"
 msgstr "Chinês"
 
@@ -2120,7 +2147,7 @@ msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "Esse jogo utiliza vários discos. Escolha o disco a iniciar"
 
 msgid "This patch might not work with all games. If a game doesn't boot, disable it in individual game settings menu."
-msgstr ""
+msgstr "Essa opção pode não funcionar com todos os jogos. Se algum não iniciar, desative-a nos ajustes individuais do jogo."
 
 msgid "This path must be on SD!"
 msgstr "Essa pasta precisa estar no Cartão SD!"
@@ -2232,6 +2259,9 @@ msgstr "USB Loader GX não conseguiu gravar configurações do Nintendont. Rodar
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
 msgstr "USB Loader GX r1218 é exigido para usar o Nintendont Alpha v0.1. Atualize sua versão do Nintendont"
 
+msgid "Use Game Header Cache"
+msgstr ""
+
 msgid "Uninstall"
 msgstr "Desinstalar"
 
@@ -2312,7 +2342,7 @@ msgid "Video Mode"
 msgstr "Modo de Vídeo"
 
 msgid "Video Scale Value"
-msgstr ""
+msgstr "Valor Escala Video"
 
 msgid "Video offset"
 msgstr ""
@@ -2357,7 +2387,7 @@ msgid "Where to dump NAND?"
 msgstr "Onde extrair a NAND?"
 
 msgid "Which device do you want to use for Nintendont files?"
-msgstr "Qual dispositivo quer usar para os arquivos do Nintendont?"
+msgstr "Qual dispositivo usar para os arquivos do Nintendont?"
 
 msgid "Which mode do you want to use?"
 msgstr "Que modo deseja usar?"
@@ -2378,7 +2408,7 @@ msgid "Wii Menu"
 msgstr ""
 
 msgid "Wii Settings"
-msgstr "Definições Wii"
+msgstr "Ajustes Wii"
 
 msgid "WiiTDB.xml"
 msgstr ""
@@ -2392,7 +2422,7 @@ msgstr ""
 msgid "Wiilight"
 msgstr "Iluminação Leitor"
 
-msgid "Wiimmfi.de"
+msgid "Wiimmfi"
 msgstr ""
 
 msgid "Wiinnertag"
