@@ -2,5 +2,6 @@
 *.elf
 /build
 /HBC/meta.xml
+/source/themes/filelist.h
 /source/gitver.c
 /source/svnrev.c
