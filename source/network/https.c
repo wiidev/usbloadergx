@@ -505,10 +505,7 @@ void downloadfile(const char *url, struct download *buffer)
     }
     // Send our request
     char request[2300];
-    char method[5] = "HEAD"; // Get the GameTDB timestamp
     int ret, len;
-    if (!buffer->gametdbcheck)
-        strcpy(method, "GET");
     len = snprintf(request, sizeof(request),
                    "%s %s HTTP/1.1\r\n"
                    "Host: %s\r\n"
@@ -516,7 +513,7 @@ void downloadfile(const char *url, struct download *buffer)
                    "Connection: close\r\n"
                    "Pragma: no-cache\r\n"
                    "Cache-Control: no-cache\r\n\r\n",
-                   method, path, host, GetRev());
+                   buffer->gametdbcheck ? "HEAD" : "GET", path, host, GetRev());
     if ((ret = https_write(&httpinfo, request, len, false)) != len)
     {
 #ifdef DEBUG_NETWORK
