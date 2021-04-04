@@ -23,6 +23,8 @@
 #include "gecko.h"
 #include "xml/GameTDB.hpp"
 #include "utils/ShowError.h"
+#include "utils/tools.h"
+#include "GameCube/GCGames.h"
 #include "BoxCover/BoxCover.hpp"
 
 static inline const char * ConsoleFromTitleID(const char* TitleID)
@@ -1119,6 +1121,19 @@ int showGameInfo(int gameSelected, struct discHdr *dvdheader)
 	return choice;
 }
 
+char *readable_size(float size, char *buf)
+{
+	int i = 0;
+	const char *suffix[] = {"B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"};
+	while (size > 1024 && i < 9)
+	{
+		size /= 1024;
+		i++;
+	}
+	sprintf(buf, "%.2f %s", size, suffix[i]);
+	return buf;
+}
+
 /**
  * Save the game list.
  * @param csv If true, saves in CSV format; otherwise, saves in TXT format.
@@ -1128,7 +1143,7 @@ bool save_gamelist(bool bCSV) // save gamelist
 	mainWindow->SetState(STATE_DISABLED);
 	CreateSubfolder(Settings.update_path);
 
-	// Save the game list.
+	// Save the game list
 	char tmp[256];
 	if(bCSV)
 		snprintf(tmp, sizeof(tmp), "%sGameList.csv", Settings.update_path);
@@ -1144,7 +1159,7 @@ bool save_gamelist(bool bCSV) // save gamelist
 	//make sure that all games are added to the gamelist
 	gameList.LoadUnfiltered();
 
-	f32 size = 0.0;
+	f32 size = 0.0f;
 	f32 freespace, used;
 	int i;
 
@@ -1152,33 +1167,93 @@ bool save_gamelist(bool bCSV) // save gamelist
 
 	if (bCSV)
 	{
-		fprintf(f, "\"ID\",\"Size(GB)\",\"Name\",\"Type\",\"Console\"\n");
+		fprintf(f, "\"ID\",\"Size\",\"Name\",\"Type\",\"Console\"\n");
 
 		for (i = 0; i < gameList.size(); i++)
 		{
 			struct discHdr* header = gameList[i];
-			WBFS_GameSize(header->id, &size);
-			fprintf(f, "\"%.6s\",\"%.2f\",\"%s\",\"%s\",\"%s\"\n", (char*)header->id, size, GameTitles.GetTitle(header), HdrTypeText(header->type), ConsoleFromTitleID((char*)header->id));
+			if (header->tid != 0)
+			{
+				if(header->type == TYPE_GAME_EMUNANDCHAN)
+				{
+					char nandPath[1024];
+					snprintf(nandPath, sizeof(nandPath), "%s/title/00010001/%02x%02x%02x%02x", Settings.NandEmuPath, header->id[0], header->id[1], header->id[2], header->id[3]);
+					size = GetDirectorySize(nandPath);
+				}
+				else
+					size = 0.0f; // NAND games?
+			}
+			else if (header->type == TYPE_GAME_WII_IMG)
+			{
+				WBFS_GameSize(header->id, &size);
+				// convert back to bytes
+				size = size * GB_SIZE;
+			}
+			else if(header->type == TYPE_GAME_GC_IMG)
+			{
+				// convert back to bytes
+				size = GCGames::Instance()->GetGameSize((const char *) header->id) * GB_SIZE;
+			}
+			char rsize[11];
+			readable_size(size, rsize);
+			fprintf(f, "\"%.6s\",\"%s\",\"%s\",\"%s\",\"%s\"\n", (char*)header->id, rsize, GameTitles.GetTitle(header), HdrTypeText(header->type), ConsoleFromTitleID((char*)header->id));
 		}
 	}
 	else
 	{
-		fprintf(f, "# USB Loader Has Saved this file\n");
-		fprintf(f, "# This file was created based on your list of games and language settings.\n\n");
+		fprintf(f, "# USB Loader GX has saved this file\n");
+		fprintf(f, "# This file was created based on your list of games and language settings.\n");
+		fprintf(f, "# Only the size of the first disc is shown here.\n\n");
 
 		fprintf(f, "%.2fGB %s %.2fGB %s\n\n", freespace, tr( "of" ), (freespace + used), tr( "free" ));
-		fprintf(f, "ID	 Size(GB)  Name        ;   Game type    ;   Console (based on TitleID) \n");
+		fprintf(f, "ID       Size           Name; Game type; Console (based on TitleID)\n");
 
 		for (i = 0; i < gameList.size(); i++)
 		{
 			struct discHdr* header = gameList[i];
-			WBFS_GameSize(header->id, &size);
-			fprintf(f, "%.6s", (char*)header->id);
-			fprintf(f, " [%.2f]   ", size);
-			fprintf(f, " %s ; ", GameTitles.GetTitle(header));
-			fprintf(f, " %s ; ", HdrTypeText(header->type));
-			fprintf(f, " %s  ", ConsoleFromTitleID((char*)header->id));
-			fprintf(f, "\n");
+			if (header->tid != 0)
+			{
+				if(header->type == TYPE_GAME_EMUNANDCHAN)
+				{
+					char nandPath[1024];
+					snprintf(nandPath, sizeof(nandPath), "%s/title/00010001/%02x%02x%02x%02x", Settings.NandEmuPath, header->id[0], header->id[1], header->id[2], header->id[3]);
+					size = GetDirectorySize(nandPath);
+				}
+				else
+					size = 0.0f; // NAND games?
+			}
+			else if (header->type == TYPE_GAME_WII_IMG)
+			{
+				WBFS_GameSize(header->id, &size);
+				// convert back to bytes
+				size = size * GB_SIZE;
+			}
+			else if(header->type == TYPE_GAME_GC_IMG)
+			{
+				// convert back to bytes
+				size = GCGames::Instance()->GetGameSize((const char *) header->id) * GB_SIZE;
+			}
+
+			char rsize[11];
+			readable_size(size, rsize);
+			// Use spaces because editors can't agree on tab sizes
+			if (header->id[4])
+				fprintf(f, "%.6s   ", (char*)header->id);
+			else
+				fprintf(f, "%.6s     ", (char*)header->id);
+			if (strlen(rsize) == 10)
+				fprintf(f, "[%s]   ", rsize);
+			else if (strlen(rsize) == 9)
+				fprintf(f, "[%s]    ", rsize);
+			else if (strlen(rsize) == 8)
+				fprintf(f, "[%s]     ", rsize);
+			else if (strlen(rsize) == 6)
+				fprintf(f, "[%s]       ", rsize);
+			else
+				fprintf(f, "[%s]      ", rsize);
+			fprintf(f, "%s; ", GameTitles.GetTitle(header));
+			fprintf(f, "%s; ", HdrTypeText(header->type));
+			fprintf(f, "%s\n", ConsoleFromTitleID((char*)header->id));
 		}
 	}
 	fclose(f);
