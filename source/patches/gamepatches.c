@@ -893,15 +893,16 @@ bool PoPPatch()
 /** Insert the individual gamepatches above with the patterns and patch data **/
 /** Following is only the VideoPatcher **/
 
-// Some missing video modes
-#if __GNUC__ <= 8
-static GXRModeObj TVPal528Prog = {
+// viYOrigin is calculated as (576 - 528)/2 in libogc 2.0.0 for the following render modes.
+// But we need to use (574 - 528)/2 so that the render modes match the Revolution SDK.
+
+static GXRModeObj TVPal528Prog_RVL = {
     6,             // viDisplayMode
     640,           // fbWidth
     528,           // efbHeight
     528,           // xfbHeight
-    40,            // viXOrigin  // (VI_MAX_WIDTH_PAL - 640)/2,
-    23,            // viYOrigin  // game uses 0x17 instead of 0x18 so we don't use (VI_MAX_HEIGHT_PAL - 528)/2
+    40,            // viXOrigin (720 - 640)/2
+    23,            // viYOrigin (574 - 528)/2
     640,           // viWidth
     528,           // viHeight
     VI_XFBMODE_SF, // xFBmode
@@ -928,13 +929,13 @@ static GXRModeObj TVPal528Prog = {
     }
 };
 
-static GXRModeObj TVPal528ProgSoft = {
+static GXRModeObj TVPal528ProgSoft_RVL = {
     6,             // viDisplayMode
     640,           // fbWidth
     528,           // efbHeight
     528,           // xfbHeight
-    40,            // viXOrigin
-    23,            // viYOrigin
+    40,            // viXOrigin (720 - 640)/2
+    23,            // viYOrigin (574 - 528)/2
     640,           // viWidth
     528,           // viHeight
     VI_XFBMODE_SF, // xFBmode
@@ -961,13 +962,13 @@ static GXRModeObj TVPal528ProgSoft = {
     }
 };
 
-static GXRModeObj TVPal524ProgAa = {
+static GXRModeObj TVPal524ProgAa_RVL = {
     6,             // viDisplayMode
     640,           // fbWidth
     264,           // efbHeight
     524,           // xfbHeight
-    40,            // viXOrigin
-    23,            // viYOrigin
+    40,            // viXOrigin (720 - 640)/2
+    23,            // viYOrigin (574 - 528)/2
     640,           // viWidth
     524,           // viHeight
     VI_XFBMODE_SF, // xFBmode
@@ -993,7 +994,6 @@ static GXRModeObj TVPal524ProgAa = {
         4   // line n+1
     }
 };
-#endif
 
 static GXRModeObj *vmodes[] = {
     &TVNtsc240Ds,
@@ -1011,12 +1011,12 @@ static GXRModeObj *vmodes[] = {
     &TVPal264DsAa,
     &TVPal264Int,
     &TVPal264IntAa,
-    &TVPal524ProgAa,
+    &TVPal524ProgAa_RVL,
     &TVPal524IntAa,
     &TVPal528Int,
     &TVPal528IntDf,
-    &TVPal528Prog,
-    &TVPal528ProgSoft,
+    &TVPal528Prog_RVL,
+    &TVPal528ProgSoft_RVL,
     &TVPal576IntDfScale,
     &TVEurgb60Hz240Ds,
     &TVEurgb60Hz240DsAa,
@@ -1045,12 +1045,12 @@ static const char *vmodes_name[] = {
     "TVPal264DsAa",
     "TVPal264Int",
     "TVPal264IntAa",
-    "TVPal524ProgAa",
+    "TVPal524ProgAa_RVL",
     "TVPal524IntAa",
     "TVPal528Int",
     "TVPal528IntDf",
-    "TVPal528Prog",
-    "TVPal528ProgSoft",
+    "TVPal528Prog_RVL",
+    "TVPal528ProgSoft_RVL",
     "TVPal576IntDfScale",
     "TVEurgb60Hz240Ds",
     "TVEurgb60Hz240DsAa",
@@ -1072,7 +1072,7 @@ static GXRModeObj *PAL2NTSC[] = {
     &TVPal524IntAa, &TVNtsc480IntAa,
     &TVPal528Int, &TVNtsc480Int,
     &TVPal528IntDf, &TVNtsc480IntDf,
-    &TVPal528Prog, &TVNtsc480Prog,
+    &TVPal528Prog_RVL, &TVNtsc480Prog,
     &TVPal576IntDfScale, &TVNtsc480IntDf,
     &TVEurgb60Hz240Ds, &TVNtsc240Ds,
     &TVEurgb60Hz240DsAa, &TVNtsc240DsAa,
@@ -1082,8 +1082,8 @@ static GXRModeObj *PAL2NTSC[] = {
     &TVEurgb60Hz480IntDf, &TVNtsc480IntDf,
     &TVEurgb60Hz480IntAa, &TVNtsc480IntAa,
     &TVEurgb60Hz480Prog, &TVNtsc480Prog,
-    &TVEurgb60Hz480ProgSoft, &TVNtsc480Prog,
-    &TVEurgb60Hz480ProgAa, &TVNtsc480Prog,
+    &TVEurgb60Hz480ProgSoft, &TVNtsc480ProgSoft,
+    &TVEurgb60Hz480ProgAa, &TVNtsc480ProgAa,
     0, 0};
 
 static GXRModeObj *NTSC2PAL[] = {
@@ -1094,7 +1094,7 @@ static GXRModeObj *NTSC2PAL[] = {
     &TVNtsc480Int, &TVPal528Int,
     &TVNtsc480IntDf, &TVPal528IntDf,
     &TVNtsc480IntAa, &TVPal524IntAa,
-    &TVNtsc480Prog, &TVPal528Prog,
+    &TVNtsc480Prog, &TVPal528Prog_RVL,
     0, 0};
 
 static GXRModeObj *NTSC2PAL60[] = {
