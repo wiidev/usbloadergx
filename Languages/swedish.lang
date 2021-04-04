@@ -224,7 +224,7 @@ msgstr "Tillbaka"
 msgid "Back to HBC or Wii Menu"
 msgstr "Tillbaka till HBC eller Wii-Menyn"
 
-msgid "Backgroundmusic"
+msgid "Background Music"
 msgstr "Bakgrundsmusik"
 
 msgid "Banner Animation"
@@ -1629,7 +1629,7 @@ msgstr ""
 msgid "Not required"
 msgstr ""
 
-msgid "Not supported format!"
+msgid "Unsupported format!"
 msgstr "Formatet stöds inte!"
 
 msgid "Nothing selected to delete."

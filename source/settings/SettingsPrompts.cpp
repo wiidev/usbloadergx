@@ -30,54 +30,38 @@ extern u8 reset;
 bool MenuBackgroundMusic()
 {
 	bool ret = false;
-	int result = -1;
 	char entered[1024];
-	strlcpy(entered, Settings.ogg_path, sizeof(entered));
-
-	// Check the OGG path.
-	if (entered[0] == 0 )
-	{
-		// OGG path is empty.
-		strlcpy(entered, Settings.BootDevice, sizeof(entered));
-	}
+	if (!Settings.ogg_path[0])
+		snprintf(entered, sizeof(entered), "%s/", Settings.BootDevice);
 	else
 	{
-		char * pathptr = strrchr( entered, '/' );
-		if ( pathptr )
+		snprintf(entered, sizeof(entered), "%s", Settings.ogg_path);
+		char *pathptr = strrchr(entered, '/');
+		if (!pathptr)
+			snprintf(entered, sizeof(entered), "%s/", Settings.BootDevice);
+		else
 		{
 			pathptr++;
-			int choice = WindowPrompt( tr( "Playing Music:" ), pathptr, tr( "Play Previous" ), tr( "Play Next" ), tr( "Change Play Path" ), tr( "Cancel" ) );
-			if ( choice == 1 )
-			{
+			int choice = WindowPrompt(tr("Playing Music:" ), pathptr, tr("Play Previous"), tr("Play Next"), tr("Change Play Path"), tr("Cancel"));
+			if (choice == 1)
 				return bgMusic->PlayPrevious();
-			}
-			else if ( choice == 2 )
-			{
+			else if (choice == 2)
 				return bgMusic->PlayNext();
-			}
-			else if ( choice == 3 )
-			{
+			else if (choice == 3)
 				pathptr[0] = 0;
-			}
 			else
 				return true;
 		}
-		else
-			strlcpy(entered, Settings.BootDevice, sizeof(entered));
 	}
 
-	result = BrowseDevice( entered, sizeof( entered ), FB_DEFAULT );
-
-	if ( result )
+	if (BrowseDevice(entered, sizeof(entered), FB_DEFAULT))
 	{
-		if ( !bgMusic->Load( entered ) )
-		{
-			WindowPrompt( tr( "Not supported format!" ), tr( "Loading standard music." ), tr( "OK" ) );
-		}
+		if (!bgMusic->Load(entered))
+			WindowPrompt(tr("Unsupported format!"), tr("Loading standard music."), tr("OK"));
 		else
 			ret = true;
 		bgMusic->Play();
-		bgMusic->SetVolume( Settings.volume );
+		bgMusic->SetVolume(Settings.volume);
 	}
 
 	return ret;

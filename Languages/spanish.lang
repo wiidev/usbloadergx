@@ -224,7 +224,7 @@ msgstr "Atrás"
 msgid "Back to HBC or Wii Menu"
 msgstr "Volver a HBC o Menú Wii"
 
-msgid "Backgroundmusic"
+msgid "Background Music"
 msgstr "Música de fondo"
 
 msgid "Banner Animation"
@@ -1629,7 +1629,7 @@ msgstr "No hay suficiente memoria."
 msgid "Not required"
 msgstr "No requerido"
 
-msgid "Not supported format!"
+msgid "Unsupported format!"
 msgstr "Formato no soportado."
 
 msgid "Nothing selected to delete."

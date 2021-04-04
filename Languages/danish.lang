@@ -224,7 +224,7 @@ msgstr "Tilbage"
 msgid "Back to HBC or Wii Menu"
 msgstr "Tilbage til HBC eller Wii-menuen"
 
-msgid "Backgroundmusic"
+msgid "Background Music"
 msgstr "Baggrundsmusik"
 
 msgid "Banner Animation"
@@ -1629,7 +1629,7 @@ msgstr "Ikke nok hukommelse."
 msgid "Not required"
 msgstr "Ikke påkrævet"
 
-msgid "Not supported format!"
+msgid "Unsupported format!"
 msgstr "Ikke et understøttet format"
 
 msgid "Nothing selected to delete."

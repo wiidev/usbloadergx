@@ -224,7 +224,7 @@ msgstr "返回"
 msgid "Back to HBC or Wii Menu"
 msgstr "返回 HBC 或 Wii 系统菜单"
 
-msgid "Backgroundmusic"
+msgid "Background Music"
 msgstr "背景音乐"
 
 msgid "Banner Animation"
@@ -1629,7 +1629,7 @@ msgstr "内存不足。"
 msgid "Not required"
 msgstr "不需要"
 
-msgid "Not supported format!"
+msgid "Unsupported format!"
 msgstr "不支持的格式！"
 
 msgid "Nothing selected to delete."

@@ -47,7 +47,7 @@ SoundSettingsMenu::SoundSettingsMenu()
 	: SettingsMenu(tr("Sound Settings"), &GuiOptions, MENU_NONE)
 {
 	int Idx = 0;
-	Options->SetName(Idx++, "%s", tr( "Backgroundmusic" ));
+	Options->SetName(Idx++, "%s", tr( "Background Music" ));
 	Options->SetName(Idx++, "%s", tr( "Music Volume" ));
 	Options->SetName(Idx++, "%s", tr( "SFX Volume" ));
 	Options->SetName(Idx++, "%s", tr( "Game Sound Mode" ));
@@ -62,7 +62,7 @@ void SoundSettingsMenu::SetOptionValues()
 {
 	int Idx = 0;
 
-	//! Settings: Backgroundmusic
+	//! Settings: Background Music
 	const char * filename = strrchr(Settings.ogg_path, '/');
 	if (filename)
 		Options->SetValue(Idx++, filename+1);
@@ -106,7 +106,7 @@ int SoundSettingsMenu::GetMenuInternal()
 
 	int Idx = -1;
 
-	//! Settings: Backgroundmusic
+	//! Settings: Background Music
 	if (ret == ++Idx)
 	{
 		GuiWindow * parent = (GuiWindow *) parentElement;
