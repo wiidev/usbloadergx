@@ -28,8 +28,9 @@
 #ifndef _ZIPFILE_H_
 #define _ZIPFILE_H_
 
-#include <zip/unzip.h>
 #include <string>
+
+#include "utils/unzip.h"
 
 typedef struct
 {

@@ -420,7 +420,7 @@ int HomebrewBrowser::ReceiveFile()
 			}
 
 			extractZip(uf, 0, 1, 0, Settings.homebrewapps_path);
-			unzCloseCurrentFile(uf);
+			unzClose(uf);
 
 			remove(zippath);
 
