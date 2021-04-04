@@ -301,16 +301,17 @@ int StartUpProcess::Execute()
 			// Re-Mount devices
 			SetTextf("Reinitializing devices\n");
 		}
+
+		// Start pads again
+		SetupPads();
 		gprintf("Current IOS: %i - have AHB access: %s\n", IOS_GetVersion(), AHBPROT_DISABLED ? "yes" : "no");
+
 		DeviceHandler::Instance()->MountSD();
 		if(Settings.USBAutoMount == ON)
 		{
 			USBSpinUp();
 			DeviceHandler::Instance()->MountAllUSB(false);
 		}
-
-		// Start pads again
-		SetupPads();
 	}
 
 	if(!IosLoader::IsHermesIOS() && !IosLoader::IsD2X())
