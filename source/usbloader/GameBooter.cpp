@@ -238,7 +238,7 @@ void GameBooter::ShutDownDevices(int gameUSBPort)
 
 int GameBooter::BootGame(struct discHdr *gameHdr)
 {
-	if(!gameHdr)
+	if (!gameHdr)
 		return -1;
 
 	struct discHdr gameHeader;
@@ -246,10 +246,10 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 
 	gprintf("\tBootGame: %.6s\n", gameHeader.id);
 
-	if(Settings.Wiinnertag)
+	if (Settings.Wiinnertag)
 		Wiinnertag::TagGame((const char *) gameHeader.id);
 
-	if(gameHeader.type == TYPE_GAME_GC_IMG || gameHeader.type == TYPE_GAME_GC_DISC  || gameHdr->type == TYPE_GAME_GC_EXTRACTED)
+	if (gameHeader.type == TYPE_GAME_GC_IMG || gameHeader.type == TYPE_GAME_GC_DISC  || gameHdr->type == TYPE_GAME_GC_EXTRACTED)
 		return BootGCMode(&gameHeader);
 
 	//! Setup game configuration from game settings. If no game settings exist use global/default.
@@ -274,16 +274,16 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	u64 returnToChoice = strlen(Settings.returnTo) > 0 ? (game_cfg->returnTo ? NandTitles.FindU32(Settings.returnTo) : 0) : 0;
 	u8 NandEmuMode = OFF;
 	const char *NandEmuPath = game_cfg->NandEmuPath.size() == 0 ? Settings.NandEmuPath : game_cfg->NandEmuPath.c_str();
-	if(gameHeader.type == TYPE_GAME_WII_IMG)
+	if (gameHeader.type == TYPE_GAME_WII_IMG)
 		NandEmuMode = game_cfg->NandEmuMode == INHERIT ? Settings.NandEmuMode : game_cfg->NandEmuMode;
-	if(gameHeader.type == TYPE_GAME_EMUNANDCHAN)
+	if (gameHeader.type == TYPE_GAME_EMUNANDCHAN)
 	{
 		NandEmuMode = game_cfg->NandEmuMode == INHERIT ? Settings.NandEmuChanMode : game_cfg->NandEmuMode;
 		NandEmuPath = game_cfg->NandEmuPath.size() == 0 ? Settings.NandEmuChanPath : game_cfg->NandEmuPath.c_str();
 	}
 	
 	// boot neek for Wii games and EmuNAND channels only
-	if(NandEmuMode == EMUNAND_NEEK && (gameHeader.type == TYPE_GAME_WII_IMG || gameHeader.type == TYPE_GAME_EMUNANDCHAN))
+	if (NandEmuMode == EMUNAND_NEEK && (gameHeader.type == TYPE_GAME_WII_IMG || gameHeader.type == TYPE_GAME_EMUNANDCHAN))
 		return BootNeek(&gameHeader);
 
 	AppCleanUp();
@@ -300,19 +300,19 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	SetupAltDOL(gameHeader.id, alternatedol, alternatedoloffset);
 
 	//! Reload game settings cIOS for this game
-	if(iosChoice != IOS_GetVersion())
+	if (iosChoice != IOS_GetVersion())
 	{
 		gprintf("Reloading into game cIOS: %i...\n", iosChoice);
 		IosLoader::LoadGameCios(iosChoice);
-		if(MountGamePartition(false) < 0)
+		if (MountGamePartition(false) < 0)
 			return -1;
 	}
 
 	//! Modify Wii Message Board to display the game starting here (before Nand Emu)
-	if(Settings.PlaylogUpdate)
+	if (Settings.PlaylogUpdate)
 	{
 		// enable isfs permission if using IOS+AHB or Hermes v4
-		if(IOS_GetVersion() < 200 || (IosLoader::IsHermesIOS() && IOS_GetRevision() == 4))
+		if (IOS_GetVersion() < 200 || (IosLoader::IsHermesIOS() && IOS_GetRevision() == 4))
 		{
 			gprintf("Patching IOS%d...\n", IOS_GetVersion());
 			if (IosPatch_RUNTIME(true, false, false, false, false) == ERROR_PATCH)
@@ -342,18 +342,18 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	}
 
 	//! Force hooktype if not selected but Ocarina is enabled
-	if(ocarinaChoice && Hooktype == OFF)
+	if (ocarinaChoice && Hooktype == OFF)
 		Hooktype = 1;
 
 	//! Load gameconfig.txt even if ocarina disabled
-	if(Hooktype)
+	if (Hooktype)
 		LoadGameConfig(Settings.Cheatcodespath);
 
 	//! Setup NAND emulation
 	SetupNandEmu(NandEmuMode, NandEmuPath, gameHeader);
 
 	//! Setup disc stuff if we load a game
-	if(gameHeader.tid == 0)
+	if (gameHeader.tid == 0)
 	{
 		//! Setup disc in cIOS and open it
 		ret = SetupDisc(gameHeader);
@@ -366,9 +366,9 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 		gprintf("%d\n", ret);
 	}
 
-	if(IosLoader::IsHermesIOS(iosChoice))
+	if (IosLoader::IsHermesIOS(iosChoice))
 	{
-		if(reloadblock == ON)
+		if (reloadblock == ON)
 		{
 			//! Setup IOS reload block
 			enable_ES_ioctlv_vector();
@@ -376,19 +376,19 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 				mload_close();
 		}
 	}
-	else if(IosLoader::IsD2X(iosChoice))
+	else if (IosLoader::IsD2X(iosChoice))
 	{
 		// Open ES file descriptor for the d2x patches
 		static char es_fs[] ATTRIBUTE_ALIGN(32) = "/dev/es";
 		int es_fd = IOS_Open(es_fs, 0);
-		if(es_fd >= 0)
+		if (es_fd >= 0)
 		{
 			// IOS Reload Block
-			if(reloadblock != OFF) {
+			if (reloadblock != OFF) {
 				BlockIOSReload(es_fd, iosChoice);
 			}
 			// Check if new patch method for return to works otherwise old method will be used
-			if(PatchNewReturnTo(es_fd, returnToChoice) >= 0)
+			if (PatchNewReturnTo(es_fd, returnToChoice) >= 0)
 				returnToChoice = 0; // Patch successful, no need for old method
 
 			// Close ES file descriptor
@@ -401,7 +401,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	Channels::DestroyInstance();
 
 	//! Load main.dol or alternative dol into memory, start the game apploader and get game entrypoint
-	if(gameHeader.tid == 0)
+	if (gameHeader.tid == 0)
 	{
 		gprintf("\tGame Boot\n");
 		AppEntrypoint = BootPartition(Settings.dolpath, videoChoice, alternatedol, alternatedoloffset);
@@ -420,7 +420,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	}
 
 	//! No entrypoint found...back to HBC/SystemMenu
-	if(AppEntrypoint == 0)
+	if (AppEntrypoint == 0)
 	{
 		gprintf("AppEntryPoint is 0, something went wrong\n");
 		WDVD_ClosePartition();
@@ -457,12 +457,24 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	//! Load Code handler if needed
 	load_handler(Hooktype, WiirdDebugger, Settings.WiirdDebuggerPause);
 
+	//! Apply the 480p fix (enabled by default).
+	//! This needs to be done after the call to gamepatches(), after loading any code handler.
+	//! Can (and should) be done before Wiimmfi patching, can't be done in gamepatches() itself.
+	//! Exclude Prince of Persia: The Forgotten Sands and a few games that use MetaFortress
+	bool excludeGame = false;
+	if (memcmp(gameHeader.id, "RPW", 3) == 0 || memcmp(gameHeader.id, "SPX", 3) == 0 ||
+		memcmp(gameHeader.id, "R3D", 3) == 0 || memcmp(gameHeader.id, "SDV", 3) == 0 ||
+		memcmp(gameHeader.id, "SUK", 3) == 0 || memcmp(gameHeader.id, "STN", 3) == 0 ||
+		memcmp(gameHeader.id, "S7S", 3) == 0 || memcmp(gameHeader.id, "SDUP41", 6) == 0 ||
+		memcmp(gameHeader.id, "SDUE41", 6) == 0 || memcmp(gameHeader.id, "SDUX41", 6) == 0)
+	{
+		excludeGame = true;
+	}
 
-    //! Perform 480p fix if needed.
-    //! Needs to be done after the call to gamepatches(), after loading any code handler.
-    //! Can (and should) be done before Wiimmfi patching, can't be done in gamepatches() itself.
-    if(patchFix480pChoice)
+	if (patchFix480pChoice && !excludeGame)
+	{
 		PatchFix480p();
+	}
 
 	//! If we're NOT on Wiimmfi, patch the known RCE vulnerability in MKWii. 
 	//! Wiimmfi will handle that on its own through the update payload.
