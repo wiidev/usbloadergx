@@ -1,4 +1,4 @@
-/* md4.h
+/* wolfcaam_ecdsa.h
  *
  * Copyright (C) 2006-2021 wolfSSL Inc.
  *
@@ -19,44 +19,24 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
  */
 
-
-#ifndef WOLFSSL_MD4_H_
-#define WOLFSSL_MD4_H_
-
 #include <libs/libwolfssl/wolfcrypt/settings.h>
 
-#ifndef NO_MD4
+#ifndef WOLFCAAM_ECDSA_H
+#define WOLFCAAM_ECDSA_H
 
-#ifdef WOLFSSL_PREFIX
-#include "prefix_md4.h"
-#endif
+#if defined(HAVE_ECC) && defined(WOLFSSL_QNX_CAAM)
 
-#ifdef __cplusplus
-    extern "C" {
-#endif
+#include <libs/libwolfssl/wolfcrypt/ecc.h>
 
-
-typedef struct WOLFSSL_MD4_CTX {
-    int buffer[32];      /* big enough to hold, check size in Init */
-} WOLFSSL_MD4_CTX;
-
-
-WOLFSSL_API void wolfSSL_MD4_Init(WOLFSSL_MD4_CTX*);
-WOLFSSL_API void wolfSSL_MD4_Update(WOLFSSL_MD4_CTX*, const void*, unsigned long);
-WOLFSSL_API void wolfSSL_MD4_Final(unsigned char*, WOLFSSL_MD4_CTX*);
-
-
-typedef WOLFSSL_MD4_CTX MD4_CTX;
-
-#define MD4_Init   wolfSSL_MD4_Init
-#define MD4_Update wolfSSL_MD4_Update
-#define MD4_Final  wolfSSL_MD4_Final
-
-#ifdef __cplusplus
-    }  /* extern "C" */
-#endif
-
-#endif /* NO_MD4 */
-
-#endif /* WOLFSSL_MD4_H_ */
-
+WOLFSSL_LOCAL int wc_CAAM_EccSign(const byte* in, int inlen, byte* out,
+        word32* outlen, WC_RNG *rng, ecc_key *key);
+WOLFSSL_LOCAL int wc_CAAM_EccVerify(const byte* sig, word32 siglen,
+        const byte* hash, word32 hashlen, int* res, ecc_key* key);
+WOLFSSL_LOCAL int wc_CAAM_Ecdh(ecc_key* private_key, ecc_key* public_key,
+        byte* out, word32* outlen);
+WOLFSSL_LOCAL int wc_CAAM_MakeEccKey(WC_RNG* rng, int keySize, ecc_key* key,
+        int curveId);
+WOLFSSL_LOCAL int wc_CAAM_EccCheckPrivKey(ecc_key* key, const byte* pubKey,
+        word32 pubKeySz);
+#endif /* HAVE_ECC && WOLFSSL_QNX_CAAM */
+#endif /* WOLFCAAM_ECDSA_H */

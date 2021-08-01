@@ -1,6 +1,6 @@
 /* rand.h
  *
- * Copyright (C) 2006-2020 wolfSSL Inc.
+ * Copyright (C) 2006-2021 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -23,5 +23,7 @@
 
 #include <libs/libwolfssl/openssl/ssl.h>
 #include <libs/libwolfssl/wolfcrypt/random.h>
+
+typedef WOLFSSL_RAND_METHOD RAND_METHOD;
 
 #define RAND_set_rand_method     wolfSSL_RAND_set_rand_method

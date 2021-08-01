@@ -1,6 +1,6 @@
 /* dh.h
  *
- * Copyright (C) 2006-2020 wolfSSL Inc.
+ * Copyright (C) 2006-2021 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -64,12 +64,12 @@ WOLFSSL_API WOLFSSL_DH* wolfSSL_DH_dup(WOLFSSL_DH* dh);
 WOLFSSL_API int wolfSSL_DH_check(const WOLFSSL_DH *dh, int *codes);
 WOLFSSL_API int wolfSSL_DH_size(WOLFSSL_DH*);
 WOLFSSL_API int wolfSSL_DH_generate_key(WOLFSSL_DH*);
-WOLFSSL_API int wolfSSL_DH_compute_key(unsigned char* key, WOLFSSL_BIGNUM* pub,
+WOLFSSL_API int wolfSSL_DH_compute_key(unsigned char* key, const WOLFSSL_BIGNUM* pub,
                                      WOLFSSL_DH*);
 WOLFSSL_API int wolfSSL_DH_LoadDer(WOLFSSL_DH*, const unsigned char*, int sz);
 WOLFSSL_API int wolfSSL_DH_set0_pqg(WOLFSSL_DH*, WOLFSSL_BIGNUM*,
     WOLFSSL_BIGNUM*, WOLFSSL_BIGNUM*);
-
+                  
 #define DH_new  wolfSSL_DH_new
 #define DH_free wolfSSL_DH_free
 
@@ -80,9 +80,10 @@ WOLFSSL_API int wolfSSL_DH_set0_pqg(WOLFSSL_DH*, WOLFSSL_BIGNUM*,
 #define DH_size         wolfSSL_DH_size
 #define DH_generate_key wolfSSL_DH_generate_key
 #define DH_compute_key  wolfSSL_DH_compute_key
-#if defined(OPENSSL_VERSION_NUMBER) && OPENSSL_VERSION_NUMBER >= 0x10100000L
 #define DH_set0_pqg     wolfSSL_DH_set0_pqg
-#endif
+#define DH_get0_pqg     wolfSSL_DH_get0_pqg
+#define DH_get0_key     wolfSSL_DH_get0_key
+#define DH_set0_key     wolfSSL_DH_set0_key
 #define DH_bits(x)      (BN_num_bits(x->p))
 
 #define DH_GENERATOR_2                  2

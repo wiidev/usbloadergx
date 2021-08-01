@@ -1,6 +1,6 @@
 /* wc_port.h
  *
- * Copyright (C) 2006-2020 wolfSSL Inc.
+ * Copyright (C) 2006-2021 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -82,6 +82,10 @@
     _Pragma("GCC diagnostic ignored \"-Wpointer-sign\"");
     _Pragma("GCC diagnostic ignored \"-Wbad-function-cast\"");
     _Pragma("GCC diagnostic ignored \"-Wdiscarded-qualifiers\"");
+    _Pragma("GCC diagnostic ignored \"-Wtype-limits\"");
+
+    /* suppress inclusion of stdint-gcc.h to avoid conflicts with Linux native include/linux/types.h: */
+    #define _GCC_STDINT_H
 
     #include <linux/kconfig.h>
     #include <linux/kernel.h>
@@ -323,7 +327,11 @@
     #endif
     #if (defined(OPENSSL_EXTRA) || defined(GOAHEAD_WS)) && \
         !defined(NO_FILESYSTEM)
-        #include <unistd.h>      /* for close of BIO */
+        #ifdef FUSION_RTOS
+            #include <fclunistd.h>
+        #else
+            #include <unistd.h>      /* for close of BIO */
+        #endif
     #endif
 #endif
 
@@ -487,6 +495,7 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define XSEEK_END                VSEEK_END
     #define XBADFILE                 -1
     #define XFGETS(b,s,f)            -2 /* Not ported yet */
+
 #elif defined(LSR_FS)
     #include <fs.h>
     #define XFILE                   struct fs_file*
@@ -499,7 +508,8 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define XFCLOSE                 fs_close
     #define XSEEK_END               0
     #define XBADFILE                NULL
-    #define XFGETS(b,s,f)            -2 /* Not ported yet */
+    #define XFGETS(b,s,f)           -2 /* Not ported yet */
+
 #elif defined(FREESCALE_MQX) || defined(FREESCALE_KSDK_MQX)
     #define XFILE                   MQX_FILE_PTR
     #define XFOPEN                  fopen
@@ -512,11 +522,10 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define XSEEK_END               IO_SEEK_END
     #define XBADFILE                NULL
     #define XFGETS                  fgets
+
 #elif defined(WOLFSSL_DEOS)
     #define NO_FILESYSTEM
     #warning "TODO - DDC-I Certifiable Fast File System for Deos is not integrated"
-    //#define XFILE      bfd *
-
 #elif defined(MICRIUM)
     #include <fs_api.h>
     #define XFILE      FS_FILE*
@@ -530,6 +539,7 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define XSEEK_END  FS_SEEK_END
     #define XBADFILE   NULL
     #define XFGETS(b,s,f) -2 /* Not ported yet */
+
 #elif defined(WOLFSSL_NUCLEUS_1_2)
     #include "fal/inc/fal.h"
     #define XFILE      FILE*
@@ -542,6 +552,7 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define XFCLOSE    fclose
     #define XSEEK_END  PSEEK_END
     #define XBADFILE   NULL
+
 #elif defined(WOLFSSL_APACHE_MYNEWT)
     #include <fs/fs.h>
     #define XFILE  struct fs_file*
@@ -556,6 +567,7 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define XSEEK_END  2
     #define XBADFILE   NULL
     #define XFGETS(b,s,f) -2 /* Not ported yet */
+
 #elif defined(WOLFSSL_ZEPHYR)
     #include <fs.h>
 
@@ -606,6 +618,57 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define XSEEK_END                0
     #define XBADFILE                 NULL
     #define XFGETS(b,s,f)            f_gets((b), (s), (f))
+#elif defined (_WIN32_WCE)
+    /* stdio, WINCE case */
+    #include <stdio.h>
+    #define XFILE      FILE*
+    #define XFOPEN     fopen
+    #define XFDOPEN    fdopen
+    #define XFSEEK     fseek
+    #define XFTELL     ftell
+    #define XREWIND(F) XFSEEK(F, 0, SEEK_SET)
+    #define XFREAD     fread
+    #define XFWRITE    fwrite
+    #define XFCLOSE    fclose
+    #define XSEEK_END  SEEK_END
+    #define XBADFILE   NULL
+    #define XFGETS     fgets
+    #define XVSNPRINTF _vsnprintf
+
+#elif defined(FUSION_RTOS)
+    #include <fclstdio.h>
+    #include <fclunistd.h>
+    #include <fcldirent.h>
+    #include <sys/fclstat.h>
+    #include <fclstring.h>
+    #include <fcl_os.h>
+    #define XFILE     FCL_FILE*
+    #define XFOPEN    FCL_FOPEN
+    #define XFSEEK    FCL_FSEEK
+    #define XFTELL    FCL_FTELL
+    #define XREWIND   FCL_REWIND
+    #define XFREAD    FCL_FREAD
+    #define XFWRITE   FCL_FWRITE
+    #define XFCLOSE   FCL_FCLOSE
+    #define XSEEK_END SEEK_END
+    #define XBADFILE  NULL
+    #define XFGETS    FCL_FGETS
+    #define XFPUTS    FCL_FPUTS
+    #define XFPRINTF  FCL_FPRINTF
+    #define XVFPRINTF FCL_VFPRINTF
+    #define XVSNPRINTF  FCL_VSNPRINTF
+    #define XSNPRINTF  FCL_SNPRINTF
+    #define XSPRINTF  FCL_SPRINTF
+    #define DIR       FCL_DIR
+    #define stat      FCL_STAT
+    #define opendir   FCL_OPENDIR
+    #define closedir  FCL_CLOSEDIR
+    #define readdir   FCL_READDIR
+    #define dirent    fclDirent 
+    #define strncasecmp FCL_STRNCASECMP
+
+    /* FUSION SPECIFIC ERROR CODE */
+    #define FUSION_IO_SEND_E FCL_EWOULDBLOCK
 
 #elif defined(WOLFSSL_USER_FILESYSTEM)
     /* To be defined in user_settings.h */
@@ -629,16 +692,61 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define XSEEK_END  SEEK_END
     #define XBADFILE   NULL
     #define XFGETS     fgets
+    #define XFPRINTF   fprintf
 
-    #if !defined(USE_WINDOWS_API) && !defined(NO_WOLFSSL_DIR)\
+    #if !defined(NO_WOLFSSL_DIR)\
         && !defined(WOLFSSL_NUCLEUS) && !defined(WOLFSSL_NUCLEUS_1_2)
+    #if defined(USE_WINDOWS_API)
+        #include <sys/stat.h>
+        #define XSTAT       _stat
+        #define XS_ISREG(s) (s & _S_IFREG)
+        #define SEPARATOR_CHAR ';'
+
+    #elif defined(INTIME_RTOS)
+        #include <sys/stat.h>
+        #define XSTAT _stat64
+        #define XS_ISREG(s) S_ISREG(s)
+        #define SEPARATOR_CHAR ';'
+        #define XWRITE      write
+        #define XREAD       read
+        #define XCLOSE      close
+
+    #elif defined(WOLFSSL_ZEPHYR)
+        #define XSTAT       fs_stat
+        #define XS_ISREG(s) (s == FS_DIR_ENTRY_FILE)
+        #define SEPARATOR_CHAR ':'
+    #elif defined(WOLFSSL_TELIT_M2MB)
+        #define XSTAT       m2mb_fs_stat
+        #define XS_ISREG(s) (s & M2MB_S_IFREG)
+        #define SEPARATOR_CHAR ':'
+    #else
         #include <dirent.h>
         #include <unistd.h>
         #include <sys/stat.h>
         #define XWRITE      write
         #define XREAD       read
         #define XCLOSE      close
+        #define XSTAT       stat
+        #define XS_ISREG(s) S_ISREG(s)
+        #define SEPARATOR_CHAR ':'
     #endif
+    #endif
+#endif
+
+/* Defaults, user may over-ride with user_settings.h or in a porting section
+ * above
+ */
+#ifndef XVFPRINTF
+    #define XVFPRINTF  vfprintf
+#endif
+#ifndef XVSNPRINTF
+    #define XVSNPRINTF vsnprintf
+#endif
+#ifndef XFPUTS
+    #define XFPUTS     fputs
+#endif
+#ifndef XSPRINTF
+    #define XSPRINTF   sprintf
 #endif
 
     #ifndef MAX_FILENAME_SZ
@@ -657,6 +765,7 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #ifdef USE_WINDOWS_API
         WIN32_FIND_DATAA FindFileData;
         HANDLE hFind;
+        struct XSTAT s;
     #elif defined(WOLFSSL_ZEPHYR)
         struct fs_dirent entry;
         struct fs_dir_t  dir;
@@ -667,10 +776,17 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
         M2MB_DIR_T* dir;
         struct M2MB_DIRENT* entry;
         struct M2MB_STAT s;
+    #elif defined(INTIME_RTOS)
+        struct stat64 s;
+        struct _find64 FindFileData;
+        #define IntimeFindFirst(name, data) (0 == _findfirst64(name, data))
+        #define IntimeFindNext(data)  (0 == _findnext64(data))
+        #define IntimeFindClose(data) (0 == _findclose64(data))
+        #define IntimeFilename(ctx)   ctx->FindFileData.f_filename
     #else
         struct dirent* entry;
         DIR*   dir;
-        struct stat s;
+        struct XSTAT s;
     #endif
         char name[MAX_FILENAME_SZ];
     } ReadDirCtx;
@@ -681,6 +797,9 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     WOLFSSL_API int wc_ReadDirNext(ReadDirCtx* ctx, const char* path, char** name);
     WOLFSSL_API void wc_ReadDirClose(ReadDirCtx* ctx);
 #endif /* !NO_WOLFSSL_DIR */
+    #define WC_ISFILEEXIST_NOFILE -1
+
+    WOLFSSL_API int wc_FileExists(const char* fname);
 
 #endif /* !NO_FILESYSTEM */
 
@@ -696,6 +815,10 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #endif /* max */
 #endif /* USE_WINDOWS_API */
 
+#ifdef __QNXNTO__
+    #define WOLFSSL_HAVE_MIN
+    #define WOLFSSL_HAVE_MAX
+#endif
 
 /* TIME SECTION */
 /* Time functions */
@@ -742,10 +865,7 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define XGMTIME(c, t)   rtpsys_gmtime((c))
 
 #elif defined(WOLFSSL_DEOS)
-    #define XTIME(t1)       deos_time((t1))
-    #define WOLFSSL_GMTIME
-    #define USE_WOLF_TM
-    #define USE_WOLF_TIME_T
+    #include <time.h>
 
 #elif defined(MICRIUM)
     #include <clk.h>
@@ -797,8 +917,31 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
 
 #elif defined(_WIN32_WCE)
     #include <windows.h>
+    #include <stdlib.h> /* For file system */
+
+    time_t windows_time(time_t* timer);
+
+    #define FindNextFileA(h, d) FindNextFile(h, (LPWIN32_FIND_DATAW) d)
+    #define FindFirstFileA(fn, d) FindFirstFile((LPCWSTR) fn, \
+                                                (LPWIN32_FIND_DATAW) d)
     #define XTIME(t1)       windows_time((t1))
     #define WOLFSSL_GMTIME
+
+    /* if struct tm is not defined in WINCE SDK */
+    #ifndef _TM_DEFINED
+        struct tm {
+            int tm_sec;     /* seconds */
+            int tm_min;     /* minutes */
+            int tm_hour;    /* hours */
+            int tm_mday;    /* day of month (month specific) */
+            int tm_mon;     /* month */
+            int tm_year;    /* year */
+            int tm_wday;    /* day of week (out of 1-7)*/
+            int tm_yday;    /* day of year (out of 365) */
+            int tm_isdst;   /* is it daylight savings */
+            };
+            #define _TM_DEFINED
+    #endif
 
 #elif defined(WOLFSSL_APACHE_MYNEWT)
     #include "os/os_time.h"

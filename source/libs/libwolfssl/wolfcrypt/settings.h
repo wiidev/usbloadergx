@@ -1,6 +1,6 @@
 /* settings.h
  *
- * Copyright (C) 2006-2020 wolfSSL Inc.
+ * Copyright (C) 2006-2021 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -218,6 +218,11 @@
 /* Uncomment next line if building for Linux Kernel Module */
 /* #define WOLFSSL_LINUXKM */
 
+/* Uncomment next line if building for devkitPro */
+/* #define DEVKITPRO */
+
+/* Uncomment next line if building for Dolphin Emulator */
+/* #define DOLPHIN_EMULATOR */
 
 #include <libs/libwolfssl/wolfcrypt/visibility.h>
 
@@ -721,18 +726,20 @@ extern void uITRON4_free(void *p) ;
         !defined(WOLFSSL_STATIC_MEMORY)
         #define XMALLOC(s, h, type)  pvPortMalloc((s))
         #define XFREE(p, h, type)    vPortFree((p))
-    #endif
-    /* FreeRTOS pvPortRealloc() implementation can be found here:
-        https://github.com/wolfSSL/wolfssl-freertos/pull/3/files */
-    #if !defined(USE_FAST_MATH) || defined(HAVE_ED25519) || defined(HAVE_ED448)
-        #if defined(WOLFSSL_ESPIDF)
-            /*In IDF, realloc(p, n) is equivalent to
-            heap_caps_realloc(p, s, MALLOC_CAP_8BIT) */
-            #define XREALLOC(p, n, h, t) realloc((p), (n))
-        #else
-            #define XREALLOC(p, n, h, t) pvPortRealloc((p), (n))
+        /* FreeRTOS pvPortRealloc() implementation can be found here:
+            https://github.com/wolfSSL/wolfssl-freertos/pull/3/files */
+        #if !defined(USE_FAST_MATH) || defined(HAVE_ED25519) || \
+            defined(HAVE_ED448)
+            #if defined(WOLFSSL_ESPIDF)
+                /*In IDF, realloc(p, n) is equivalent to
+                heap_caps_realloc(p, s, MALLOC_CAP_8BIT) */
+                #define XREALLOC(p, n, h, t) realloc((p), (n))
+            #else
+                #define XREALLOC(p, n, h, t) pvPortRealloc((p), (n))
+            #endif
         #endif
     #endif
+
     #ifndef NO_WRITEV
         #define NO_WRITEV
     #endif
@@ -910,11 +917,13 @@ extern void uITRON4_free(void *p) ;
         !defined(WOLFSSL_STATIC_MEMORY)
         #define XMALLOC(s, h, type)  pvPortMalloc((s))
         #define XFREE(p, h, type)    vPortFree((p))
-    #endif
-    /* FreeRTOS pvPortRealloc() implementation can be found here:
-        https://github.com/wolfSSL/wolfssl-freertos/pull/3/files */
-    #if !defined(USE_FAST_MATH) || defined(HAVE_ED25519) || defined(HAVE_ED448)
-        #define XREALLOC(p, n, h, t) pvPortRealloc((p), (n))
+
+        /* FreeRTOS pvPortRealloc() implementation can be found here:
+            https://github.com/wolfSSL/wolfssl-freertos/pull/3/files */
+        #if !defined(USE_FAST_MATH) || defined(HAVE_ED25519) || \
+            defined(HAVE_ED448)
+            #define XREALLOC(p, n, h, t) pvPortRealloc((p), (n))
+        #endif
     #endif
 #endif
 
@@ -1174,8 +1183,11 @@ extern void uITRON4_free(void *p) ;
 
             /* the LTC PKHA hardware limit is 2048 bits (256 bytes) for integer arithmetic.
                the LTC_MAX_INT_BYTES defines the size of local variables that hold big integers. */
-            #ifndef LTC_MAX_INT_BYTES
-                #define LTC_MAX_INT_BYTES (256)
+            /* size is multiplication of 2 big ints */
+            #if !defined(NO_RSA) || !defined(NO_DH)
+                #define LTC_MAX_INT_BYTES   (256*2)
+            #else
+                #define LTC_MAX_INT_BYTES   (48*2)
             #endif
 
             /* This FREESCALE_LTC_TFM_RSA_4096_ENABLE macro can be defined.
@@ -1236,7 +1248,8 @@ extern void uITRON4_free(void *p) ;
 #if defined(WOLFSSL_STM32F2) || defined(WOLFSSL_STM32F4) || \
     defined(WOLFSSL_STM32F7) || defined(WOLFSSL_STM32F1) || \
     defined(WOLFSSL_STM32L4) || defined(WOLFSSL_STM32L5) || \
-    defined(WOLFSSL_STM32WB) || defined(WOLFSSL_STM32H7)
+    defined(WOLFSSL_STM32WB) || defined(WOLFSSL_STM32H7) || \
+    defined(WOLFSSL_STM32G0)
 
     #define SIZEOF_LONG_LONG 8
     #ifndef CHAR_BIT
@@ -1289,6 +1302,8 @@ extern void uITRON4_free(void *p) ;
             #include "stm32h7xx_hal.h"
         #elif defined(WOLFSSL_STM32WB)
             #include "stm32wbxx_hal.h"
+        #elif defined(WOLFSSL_STM32G0)
+            #include "stm32g0xx_hal.h"
         #endif
         #if defined(WOLFSSL_CUBEMX_USE_LL) && defined(WOLFSSL_STM32L4)
             #include "stm32l4xx_ll_rng.h"
@@ -1339,7 +1354,8 @@ extern void uITRON4_free(void *p) ;
         #endif
     #endif /* WOLFSSL_STM32_CUBEMX */
 #endif /* WOLFSSL_STM32F2 || WOLFSSL_STM32F4 || WOLFSSL_STM32L4 || 
-          WOLFSSL_STM32L5 || WOLFSSL_STM32F7 || WOLFSSL_STMWB || WOLFSSL_STM32H7 */
+          WOLFSSL_STM32L5 || WOLFSSL_STM32F7 || WOLFSSL_STMWB || 
+          WOLFSSL_STM32H7 || WOLFSSL_STM32G0 */
 #ifdef WOLFSSL_DEOS
     #include <deos.h>
     #include <timeout.h>
@@ -1371,7 +1387,6 @@ extern void uITRON4_free(void *p) ;
     #define WC_RSA_BLINDING
 
     #define HAVE_ECC
-    #define ALT_ECC_SIZE
     #define TFM_ECC192
     #define TFM_ECC224
     #define TFM_ECC256
@@ -1610,12 +1625,11 @@ extern void uITRON4_free(void *p) ;
 
 #ifdef WOLFSSL_ZEPHYR
     #include <zephyr.h>
-    #include <misc/printk.h>
-    #include <misc/util.h>
+    #include <sys/printk.h>
+    #include <sys/util.h>
     #include <stdlib.h>
 
     #define WOLFSSL_DH_CONST
-    #define WOLFSSL_HAVE_MIN
     #define WOLFSSL_HAVE_MAX
     #define NO_WRITEV
 
@@ -1627,7 +1641,9 @@ extern void uITRON4_free(void *p) ;
     void *z_realloc(void *ptr, size_t size);
     #define realloc   z_realloc
 
+    #ifndef CONFIG_NET_SOCKETS_POSIX_NAMES
     #define CONFIG_NET_SOCKETS_POSIX_NAMES
+    #endif
 #endif
 
 #ifdef WOLFSSL_IMX6
@@ -1648,6 +1664,10 @@ extern void uITRON4_free(void *p) ;
     /* large performance gain with HAVE_AES_ECB defined */
     #undef HAVE_AES_ECB
     #define HAVE_AES_ECB
+
+    //@TODO used for now until plugging in caam aes use with qnx
+    #undef WOLFSSL_AES_DIRECT
+    #define WOLFSSL_AES_DIRECT
 #endif
 #endif
 
@@ -1792,7 +1812,9 @@ extern void uITRON4_free(void *p) ;
 /* ECC Configs */
 #ifdef HAVE_ECC
     /* By default enable Sign, Verify, DHE, Key Import and Key Export unless explicitly disabled */
-    #ifndef NO_ECC_SIGN
+    #if !defined(NO_ECC_SIGN) && \
+            (!defined(ECC_TIMING_RESISTANT) || \
+            (defined(ECC_TIMING_RESISTANT) && !defined(WC_NO_RNG)))
         #undef HAVE_ECC_SIGN
         #define HAVE_ECC_SIGN
     #endif
@@ -1804,7 +1826,7 @@ extern void uITRON4_free(void *p) ;
         #undef HAVE_ECC_CHECK_KEY
         #define HAVE_ECC_CHECK_KEY
     #endif
-    #ifndef NO_ECC_DHE
+    #if !defined(NO_ECC_DHE) && !defined(WC_NO_RNG)
         #undef HAVE_ECC_DHE
         #define HAVE_ECC_DHE
     #endif
@@ -1845,6 +1867,10 @@ extern void uITRON4_free(void *p) ;
     #ifndef NO_ED25519_VERIFY
         #undef HAVE_ED25519_VERIFY
         #define HAVE_ED25519_VERIFY
+        #ifdef WOLFSSL_ED25519_STREAMING_VERIFY
+            #undef WOLFSSL_ED25519_PERSISTENT_SHA
+            #define WOLFSSL_ED25519_PERSISTENT_SHA
+        #endif
     #endif
     #ifndef NO_ED25519_KEY_EXPORT
         #undef HAVE_ED25519_KEY_EXPORT
@@ -1883,6 +1909,10 @@ extern void uITRON4_free(void *p) ;
     #ifndef NO_ED448_VERIFY
         #undef HAVE_ED448_VERIFY
         #define HAVE_ED448_VERIFY
+        #ifdef WOLFSSL_ED448_STREAMING_VERIFY
+            #undef WOLFSSL_ED448_PERSISTENT_SHA
+            #define WOLFSSL_ED448_PERSISTENT_SHA
+        #endif
     #endif
     #ifndef NO_ED448_KEY_EXPORT
         #undef HAVE_ED448_KEY_EXPORT
@@ -1979,7 +2009,7 @@ extern void uITRON4_free(void *p) ;
 #endif
 
 /* if desktop type system and fastmath increase default max bits */
-#ifdef WOLFSSL_X86_64_BUILD
+#if defined(WOLFSSL_X86_64_BUILD) || defined(WOLFSSL_AARCH64_BUILD)
     #if defined(USE_FAST_MATH) && !defined(FP_MAX_BITS)
         #if MIN_FFDHE_FP_MAX_BITS <= 8192
             #define FP_MAX_BITS 8192
@@ -2090,8 +2120,9 @@ extern void uITRON4_free(void *p) ;
     #if defined(HAVE_IO_POOL) || defined(XMALLOC_USER) || defined(NO_WOLFSSL_MEMORY)
          #error static memory cannot be used with HAVE_IO_POOL, XMALLOC_USER or NO_WOLFSSL_MEMORY
     #endif
-    #if !defined(USE_FAST_MATH) && !defined(NO_BIG_INT)
-        #error static memory requires fast math please define USE_FAST_MATH
+    #if !defined(WOLFSSL_SP_NO_MALLOC) && \
+        !defined(USE_FAST_MATH) && !defined(NO_BIG_INT)
+         #error The static memory option is only supported for fast math or SP with no malloc
     #endif
     #ifdef WOLFSSL_SMALL_STACK
         #error static memory does not support small stack please undefine
@@ -2179,6 +2210,9 @@ extern void uITRON4_free(void *p) ;
     #ifndef WOLFSSL_OLD_PRIME_CHECK
         #define WOLFSSL_OLD_PRIME_CHECK
     #endif
+    #ifndef WOLFSSL_TEST_SUBROUTINE
+        #define WOLFSSL_TEST_SUBROUTINE static
+    #endif
     #undef HAVE_STRINGS_H
     #undef HAVE_ERRNO_H
     #undef HAVE_THREAD_LS
@@ -2211,11 +2245,15 @@ extern void uITRON4_free(void *p) ;
     #ifndef OPENSSL_EXTRA
         #define OPENSSL_EXTRA
     #endif
-    #ifndef HAVE_SESSION_TICKET
+    /* Session Tickets will be enabled when --enable-opensslall is used.
+     * Time is required for ticket expiration checking */
+    #if !defined(HAVE_SESSION_TICKET) && !defined(NO_ASN_TIME)
         #define HAVE_SESSION_TICKET
     #endif
+    /* OCSP will be enabled in configure.ac when --enable-opensslall is used,
+     * but do not force all users to have it enabled. */
     #ifndef HAVE_OCSP
-        #define HAVE_OCSP
+        /*#define HAVE_OCSP*/
     #endif
     #ifndef KEEP_OUR_CERT
         #define KEEP_OUR_CERT
@@ -2232,14 +2270,14 @@ extern void uITRON4_free(void *p) ;
 
 /* both CURVE and ED small math should be enabled */
 #ifdef CURVED25519_SMALL
-        #define CURVE25519_SMALL
-        #define ED25519_SMALL
+    #define CURVE25519_SMALL
+    #define ED25519_SMALL
 #endif
 
 /* both CURVE and ED small math should be enabled */
 #ifdef CURVED448_SMALL
-        #define CURVE448_SMALL
-        #define ED448_SMALL
+    #define CURVE448_SMALL
+    #define ED448_SMALL
 #endif
 
 
@@ -2264,8 +2302,13 @@ extern void uITRON4_free(void *p) ;
 
 #if defined(NO_OLD_WC_NAMES) || defined(OPENSSL_EXTRA)
     /* added to have compatibility with SHA256() */
-    #if !defined(NO_OLD_SHA_NAMES) && !defined(HAVE_FIPS)
+    #if !defined(NO_OLD_SHA_NAMES) && (!defined(HAVE_FIPS) || \
+            (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION > 2)))
         #define NO_OLD_SHA_NAMES
+    #endif
+    #if !defined(NO_OLD_MD5_NAME) && (!defined(HAVE_FIPS) || \
+            (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION > 2)))
+        #define NO_OLD_MD5_NAME
     #endif
 #endif
 
@@ -2292,7 +2335,7 @@ extern void uITRON4_free(void *p) ;
 #endif
 
 /* support for disabling PEM to DER */
-#if !defined(WOLFSSL_NO_PEM)
+#if !defined(WOLFSSL_NO_PEM) && !defined(NO_CODING)
     #undef  WOLFSSL_PEM_TO_DER
     #define WOLFSSL_PEM_TO_DER
 #endif
@@ -2373,7 +2416,9 @@ extern void uITRON4_free(void *p) ;
 #endif
 
 #if defined(HAVE_EX_DATA) || defined(FORTRESS)
+    #ifndef MAX_EX_DATA
     #define MAX_EX_DATA 5  /* allow for five items of ex_data */
+    #endif
 #endif
 
 #ifdef NO_WOLFSSL_SMALL_STACK
@@ -2412,6 +2457,60 @@ extern void uITRON4_free(void *p) ;
     /* ECDSA length checks off by default for CAVP testing
      * consider enabling strict checks in production */
     #define NO_STRICT_ECDSA_LEN
+#endif
+
+/* Do not allow using small stack with no malloc */
+#if defined(WOLFSSL_NO_MALLOC) && \
+    (defined(WOLFSSL_SMALL_STACK) || defined(WOLFSSL_SMALL_STACK_CACHE))
+    #error Small stack cannot be used with no malloc (WOLFSSL_NO_MALLOC)
+#endif
+
+/* Enable DH Extra for QT, openssl all, openssh and static ephemeral */
+/* Allows export/import of DH key and params as DER */
+#if !defined(NO_DH) && !defined(WOLFSSL_DH_EXTRA) && \
+    (defined(WOLFSSL_QT) || defined(OPENSSL_ALL) || defined(WOLFSSL_OPENSSH) || \
+     defined(WOLFSSL_STATIC_EPHEMERAL))
+    #define WOLFSSL_DH_EXTRA
+#endif
+
+/* DH Extra is not supported on FIPS v1 or v2 (is missing DhKey .pub/.priv) */
+#if defined(WOLFSSL_DH_EXTRA) && defined(HAVE_FIPS) && \
+        (!defined(HAVE_FIPS_VERSION) || HAVE_FIPS_VERSION <= 2)
+    #undef WOLFSSL_DH_EXTRA
+#endif
+
+/* Check for insecure build combination:
+ * secure renegotiation   [enabled]
+ * extended master secret [disabled]
+ * session resumption     [enabled]
+ */
+#if defined(HAVE_SECURE_RENEGOTIATION) && !defined(HAVE_EXTENDED_MASTER) && \
+    (defined(HAVE_SESSION_TICKET) || !defined(NO_SESSION_CACHE))
+    /* secure renegotiation requires extended master secret with resumption */
+    #ifndef _MSC_VER
+        #warning Extended master secret must be enabled with secure renegotiation and session resumption
+    #else
+        #pragma message("Warning: Extended master secret must be enabled with secure renegotiation and session resumption")
+    #endif
+
+    /* Note: "--enable-renegotiation-indication" ("HAVE_RENEGOTIATION_INDICATION")
+     * only sends the secure renegotiation extension, but is not actually supported. 
+     * This was added because some TLS peers required it even if not used, so we call 
+     * this "(FAKE Secure Renegotiation)"
+     */
+#endif
+
+
+/* ---------------------------------------------------------------------------
+ * Depricated Algorithm Handling
+ *   Unless allowed via a build macro, disable support
+ * ---------------------------------------------------------------------------*/
+
+/* RC4: Per RFC7465 Feb 2015, the cipher suite has been deprecated due to a
+ * number of exploits capable of decrypting portions of encrypted messages. */
+#ifndef WOLFSSL_ALLOW_RC4
+    #undef  NO_RC4
+    #define NO_RC4
 #endif
 
 

@@ -1,6 +1,6 @@
 /* fe_operations.h
  *
- * Copyright (C) 2006-2020 wolfSSL Inc.
+ * Copyright (C) 2006-2021 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -26,12 +26,6 @@
 #include <libs/libwolfssl/wolfcrypt/settings.h>
 
 #if defined(HAVE_CURVE25519) || defined(HAVE_ED25519)
-
-#if !defined(CURVE25519_SMALL) || !defined(ED25519_SMALL)
-#ifndef WOLFSSL_LINUXKM
-    #include <stdint.h>
-#endif
-#endif
 
 #include <libs/libwolfssl/wolfcrypt/types.h>
 
@@ -88,13 +82,13 @@ WOLFSSL_LOCAL int  curve25519(byte * q, const byte * n, const byte * p);
 #if !defined(CURVE25519_SMALL) || !defined(ED25519_SMALL)
 
 #ifdef CURVED25519_ASM_64BIT
-    typedef int64_t  fe[4];
+    typedef sword64  fe[4];
 #elif defined(CURVED25519_ASM_32BIT)
-    typedef int32_t  fe[8];
+    typedef sword32  fe[8];
 #elif defined(CURVED25519_128BIT)
-    typedef int64_t  fe[5];
+    typedef sword64  fe[5];
 #else
-    typedef int32_t  fe[10];
+    typedef sword32  fe[10];
 #endif
 
 WOLFSSL_LOCAL void fe_copy(fe, const fe);
@@ -122,8 +116,8 @@ WOLFSSL_LOCAL void fe_cmov(fe,const fe, int);
 WOLFSSL_LOCAL void fe_pow22523(fe,const fe);
 
 /* 64 type needed for SHA512 */
-WOLFSSL_LOCAL uint64_t load_3(const unsigned char *in);
-WOLFSSL_LOCAL uint64_t load_4(const unsigned char *in);
+WOLFSSL_LOCAL word64 load_3(const unsigned char *in);
+WOLFSSL_LOCAL word64 load_4(const unsigned char *in);
 
 #ifdef CURVED25519_ASM
 WOLFSSL_LOCAL void fe_ge_to_p2(fe rx, fe ry, fe rz, const fe px, const fe py,

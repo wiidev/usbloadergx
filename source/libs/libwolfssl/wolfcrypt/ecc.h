@@ -1,6 +1,6 @@
 /* ecc.h
  *
- * Copyright (C) 2006-2020 wolfSSL Inc.
+ * Copyright (C) 2006-2021 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -85,29 +85,40 @@
 
 
 /* Determine max ECC bits based on enabled curves */
-#if defined(HAVE_ECC521) || defined(HAVE_ALL_CURVES)
-    #define MAX_ECC_BITS    521
+#if defined(WOLFCRYPT_HAVE_SAKKE)
+    #define MAX_ECC_BITS_NEEDED    1024
+#elif defined(HAVE_ECC521) || defined(HAVE_ALL_CURVES)
+    #define MAX_ECC_BITS_NEEDED    521
 #elif defined(HAVE_ECC512)
-    #define MAX_ECC_BITS    512
+    #define MAX_ECC_BITS_NEEDED    512
 #elif defined(HAVE_ECC384)
-    #define MAX_ECC_BITS    384
+    #define MAX_ECC_BITS_NEEDED    384
 #elif defined(HAVE_ECC320)
-    #define MAX_ECC_BITS    320
+    #define MAX_ECC_BITS_NEEDED    320
 #elif !defined(NO_ECC256)
-    #define MAX_ECC_BITS    256
+    #define MAX_ECC_BITS_NEEDED    256
 #elif defined(HAVE_ECC239)
-    #define MAX_ECC_BITS    239
+    #define MAX_ECC_BITS_NEEDED    239
 #elif defined(HAVE_ECC224)
-    #define MAX_ECC_BITS    224
+    #define MAX_ECC_BITS_NEEDED    224
 #elif defined(HAVE_ECC192)
-    #define MAX_ECC_BITS    192
+    #define MAX_ECC_BITS_NEEDED    192
 #elif defined(HAVE_ECC160)
-    #define MAX_ECC_BITS    160
+    #define MAX_ECC_BITS_NEEDED    160
 #elif defined(HAVE_ECC128)
-    #define MAX_ECC_BITS    128
+    #define MAX_ECC_BITS_NEEDED    128
 #elif defined(HAVE_ECC112)
-    #define MAX_ECC_BITS    112
+    #define MAX_ECC_BITS_NEEDED    112
 #endif
+
+#ifndef MAX_ECC_BITS
+    #define MAX_ECC_BITS MAX_ECC_BITS_NEEDED
+#else
+    #if MAX_ECC_BITS_NEEDED > MAX_ECC_BITS
+        #error configured MAX_ECC_BITS is less than required by enabled curves.
+    #endif
+#endif
+
 
 /* calculate max ECC bytes */
 #if ((MAX_ECC_BITS * 2) % 8) == 0
@@ -128,10 +139,15 @@ enum {
     ECC_PRIVATEKEY_ONLY = 3,
     ECC_MAXNAME     = 16,   /* MAX CURVE NAME LENGTH */
     SIG_HEADER_SZ   =  7,   /* ECC signature header size (30 81 87 02 42 [R] 02 42 [S]) */
-    ECC_BUFSIZE     = 256,  /* for exported keys temp buffer */
+    ECC_BUFSIZE     = 257,  /* for exported keys temp buffer */
     ECC_MINSIZE     = ECC_MIN_KEY_SZ/8,   /* MIN Private Key size */
+#ifdef WOLFCRYPT_HAVE_SAKKE
+    ECC_MAXSIZE     = 128,  /* MAX Private Key size */
+    ECC_MAXSIZE_GEN = 128,  /* MAX Buffer size required when generating ECC keys*/
+#else
     ECC_MAXSIZE     = 66,   /* MAX Private Key size */
     ECC_MAXSIZE_GEN = 74,   /* MAX Buffer size required when generating ECC keys*/
+#endif
     ECC_MAX_OID_LEN = 16,
     ECC_MAX_SIG_SIZE= ((MAX_ECC_BYTES * 2) + ECC_MAX_PAD_SZ + SIG_HEADER_SZ),
 
@@ -212,9 +228,14 @@ typedef enum ecc_curve_id {
     ECC_X448,
 #endif
 
+#ifdef WOLFCRYPT_HAVE_SAKKE
+    ECC_SAKKE_1,
+#endif
+
 #ifdef WOLFSSL_CUSTOM_CURVES
     ECC_CURVE_CUSTOM,
 #endif
+    ECC_CURVE_MAX
 } ecc_curve_id;
 
 #ifdef HAVE_OID_ENCODING
@@ -303,6 +324,9 @@ typedef struct ecc_set_type {
 
 #ifndef USE_FAST_MATH
     #error USE_FAST_MATH must be defined to use ALT_ECC_SIZE
+#endif
+#ifdef WOLFSSL_NO_MALLOC
+    #error ALT_ECC_SIZE cannot be used with no malloc (WOLFSSL_NO_MALLOC)
 #endif
 
 /* determine max bits required for ECC math */
@@ -396,6 +420,12 @@ struct ecc_key {
     void* heap;         /* heap hint */
     ecc_point pubkey;   /* public key */
     mp_int    k;        /* private key */
+
+#ifdef WOLFSSL_QNX_CAAM
+    word32 blackKey;     /* address of key encrypted and in secure memory */
+    word32 securePubKey; /* address of public key in secure memory */
+    int    partNum; /* partition number*/
+#endif
 #if defined(WOLFSSL_ATECC508A) || defined(WOLFSSL_ATECC608A)
     int  slot;        /* Key Slot Number (-1 unknown) */
     byte pubkey_raw[ECC_MAX_CRYPTO_HW_PUBKEY_SIZE];
@@ -435,8 +465,12 @@ struct ecc_key {
     ecc_context_t ctx;
 #endif
 
-#ifdef WOLFSSL_ECDSA_SET_K
+#if defined(WOLFSSL_ECDSA_SET_K) || defined(WOLFSSL_ECDSA_SET_K_ONE_LOOP) || \
+    defined(WOLFSSL_ECDSA_DETERMINISTIC_K)
     mp_int *sign_k;
+#endif
+#if defined(WOLFSSL_ECDSA_DETERMINISTIC_K)
+    byte deterministic:1;
 #endif
 
 #ifdef WOLFSSL_SMALL_STACK_CACHE
@@ -472,8 +506,6 @@ extern const size_t ecc_sets_count;
 WOLFSSL_API
 const char* wc_ecc_get_name(int curve_id);
 
-#if !defined(WOLFSSL_ATECC508A) && !defined(WOLFSSL_ATECC608A)
-
 #ifdef WOLFSSL_PUBLIC_ECC_ADD_DBL
     #define ECC_API    WOLFSSL_API
 #else
@@ -497,8 +529,6 @@ int ecc_projective_add_point_safe(ecc_point* A, ecc_point* B, ecc_point* R,
 WOLFSSL_LOCAL
 int ecc_projective_dbl_point_safe(ecc_point* P, ecc_point* R, mp_int* a,
                                   mp_int* modulus, mp_digit mp);
-
-#endif
 
 WOLFSSL_API
 int wc_ecc_make_key(WC_RNG* rng, int keysize, ecc_key* key);
@@ -545,7 +575,15 @@ int wc_ecc_sign_hash(const byte* in, word32 inlen, byte* out, word32 *outlen,
 WOLFSSL_API
 int wc_ecc_sign_hash_ex(const byte* in, word32 inlen, WC_RNG* rng,
                         ecc_key* key, mp_int *r, mp_int *s);
-#ifdef WOLFSSL_ECDSA_SET_K
+#ifdef WOLFSSL_ECDSA_DETERMINISTIC_K
+WOLFSSL_API
+int wc_ecc_set_deterministic(ecc_key* key, byte flag);
+WOLFSSL_API
+int wc_ecc_gen_deterministic_k(const byte* hash, word32 hashSz,
+        enum wc_HashType hashType, mp_int* priv, mp_int* k, mp_int* order,
+        void* heap);
+#endif
+#if defined(WOLFSSL_ECDSA_SET_K) || defined(WOLFSSL_ECDSA_SET_K_ONE_LOOP)
 WOLFSSL_API
 int wc_ecc_sign_set_k(const byte* k, word32 klen, ecc_key* key);
 #endif
@@ -629,7 +667,9 @@ void wc_ecc_del_point(ecc_point* p);
 WOLFSSL_API
 void wc_ecc_del_point_h(ecc_point* p, void* h);
 WOLFSSL_API
-int wc_ecc_copy_point(ecc_point* p, ecc_point *r);
+void wc_ecc_forcezero_point(ecc_point* p);
+WOLFSSL_API
+int wc_ecc_copy_point(const ecc_point* p, ecc_point *r);
 WOLFSSL_API
 int wc_ecc_cmp_point(ecc_point* a, ecc_point *b);
 WOLFSSL_API
@@ -639,13 +679,13 @@ int wc_ecc_point_is_on_curve(ecc_point *p, int curve_idx);
 
 #if !defined(WOLFSSL_ATECC508A) && !defined(WOLFSSL_ATECC608A)
 WOLFSSL_API
-int wc_ecc_mulmod(mp_int* k, ecc_point *G, ecc_point *R,
+int wc_ecc_mulmod(const mp_int* k, ecc_point *G, ecc_point *R,
                   mp_int* a, mp_int* modulus, int map);
 WOLFSSL_LOCAL
-int wc_ecc_mulmod_ex(mp_int* k, ecc_point *G, ecc_point *R,
+int wc_ecc_mulmod_ex(const mp_int* k, ecc_point *G, ecc_point *R,
                   mp_int* a, mp_int* modulus, int map, void* heap);
 WOLFSSL_LOCAL
-int wc_ecc_mulmod_ex2(mp_int* k, ecc_point *G, ecc_point *R, mp_int* a,
+int wc_ecc_mulmod_ex2(const mp_int* k, ecc_point *G, ecc_point *R, mp_int* a,
                       mp_int* modulus, mp_int* order, WC_RNG* rng, int map,
                       void* heap);
 #endif /* !WOLFSSL_ATECC508A */
@@ -687,8 +727,8 @@ WOLFSSL_API
 int wc_ecc_import_raw_ex(ecc_key* key, const char* qx, const char* qy,
                    const char* d, int curve_id);
 WOLFSSL_API
-int wc_ecc_import_unsigned(ecc_key* key, byte* qx, byte* qy,
-                   byte* d, int curve_id);
+int wc_ecc_import_unsigned(ecc_key* key, const byte* qx, const byte* qy,
+                   const byte* d, int curve_id);
 #endif /* HAVE_ECC_KEY_IMPORT */
 
 #ifdef HAVE_ECC_KEY_EXPORT
@@ -721,10 +761,11 @@ int wc_ecc_export_point_der_compressed(const int curve_idx, ecc_point* point,
 
 #ifdef HAVE_ECC_KEY_IMPORT
 WOLFSSL_API
-int wc_ecc_import_point_der_ex(byte* in, word32 inLen, const int curve_idx,
-                               ecc_point* point, int shortKeySize);
+int wc_ecc_import_point_der_ex(const byte* in, word32 inLen,
+                               const int curve_idx, ecc_point* point,
+                               int shortKeySize);
 WOLFSSL_API
-int wc_ecc_import_point_der(byte* in, word32 inLen, const int curve_idx,
+int wc_ecc_import_point_der(const byte* in, word32 inLen, const int curve_idx,
                             ecc_point* point);
 #endif /* HAVE_ECC_KEY_IMPORT */
 
@@ -734,7 +775,7 @@ int wc_ecc_size(ecc_key* key);
 WOLFSSL_API
 int wc_ecc_sig_size_calc(int sz);
 WOLFSSL_API
-int wc_ecc_sig_size(ecc_key* key);
+int wc_ecc_sig_size(const ecc_key* key);
 
 WOLFSSL_API
 int wc_ecc_get_oid(word32 oidSum, const byte** oid, word32* oidSz);
@@ -767,6 +808,7 @@ enum {
     KEY_SIZE_256     = 32,
     IV_SIZE_64       =  8,
     IV_SIZE_128      = 16,
+    ECC_MAX_IV_SIZE  = 16,
     EXCHANGE_SALT_SZ = 16,
     EXCHANGE_INFO_SZ = 23
 };

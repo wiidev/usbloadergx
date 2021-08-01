@@ -1,6 +1,6 @@
 /* rsa.h
  *
- * Copyright (C) 2006-2020 wolfSSL Inc.
+ * Copyright (C) 2006-2021 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -94,10 +94,13 @@ RSA keys can be used to encrypt, decrypt, sign and verify data.
     extern "C" {
 #endif
 
-enum {
-    RSA_MIN_SIZE = 512,
-    RSA_MAX_SIZE = 4096,
-};
+#ifndef RSA_MIN_SIZE
+#define RSA_MIN_SIZE 512
+#endif
+
+#ifndef RSA_MAX_SIZE
+#define RSA_MAX_SIZE 4096
+#endif
 
 /* avoid redefinition of structs */
 #if !defined(HAVE_FIPS) || \
@@ -283,7 +286,7 @@ WOLFSSL_API int  wc_RsaPSS_VerifyCheck(byte* in, word32 inLen,
                                enum wc_HashType hash, int mgf,
                                RsaKey* key);
 
-WOLFSSL_API int  wc_RsaEncryptSize(RsaKey* key);
+WOLFSSL_API int  wc_RsaEncryptSize(const RsaKey* key);
 
 #if !defined(HAVE_FIPS) || \
 	(defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2))
@@ -294,7 +297,7 @@ WOLFSSL_API int  wc_RsaPublicKeyDecode(const byte* input, word32* inOutIdx,
                                                                RsaKey*, word32);
 WOLFSSL_API int  wc_RsaPublicKeyDecodeRaw(const byte* n, word32 nSz,
                                         const byte* e, word32 eSz, RsaKey* key);
-#ifdef WOLFSSL_KEY_GEN
+#if defined(WOLFSSL_KEY_GEN) || defined(OPENSSL_EXTRA)
     WOLFSSL_API int wc_RsaKeyToDer(RsaKey*, byte* output, word32 inLen);
 #endif
 
