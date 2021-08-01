@@ -585,6 +585,9 @@ msgstr "기본 게임설정"
 msgid "Default Settings"
 msgstr "기본 설정"
 
+msgid "Deflicker Filter"
+msgstr ""
+
 msgid "Delete"
 msgstr "삭제"
 
@@ -1644,14 +1647,29 @@ msgstr "11 월"
 msgid "OFF"
 msgstr "꺼짐"
 
+msgid "OFF (Extended)"
+msgstr ""
+
+msgid "OFF (Safe)"
+msgstr ""
+
 msgid "OK"
 msgstr "확인"
 
 msgid "ON"
 msgstr "켜짐"
 
+msgid "ON (Low)"
+msgstr ""
+
+msgid "ON (Medium)"
+msgstr ""
+
 msgid "ON (Multi)"
 msgstr "켜짐 (멀티)"
+
+msgid "ON (High)"
+msgstr ""
 
 msgid "OSReport"
 msgstr "OS보고서"

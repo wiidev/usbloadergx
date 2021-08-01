@@ -161,8 +161,6 @@ std::vector<struct discHdr> &Channels::GetEmuHeaders(void)
 
 u8 *Channels::GetDol(const u64 &title, u8 *tmdBuffer)
 {
-    static const u8 dolsign[6] = {0x00, 0x00, 0x01, 0x00, 0x00, 0x00};
-    static u8 dolhead[32] ATTRIBUTE_ALIGN(32);
     u8 *buffer = NULL;
     u32 filesize = 0;
     u32 bootcontent = 0xDEADBEAF;
@@ -179,22 +177,8 @@ u8 *Channels::GetDol(const u64 &title, u8 *tmdBuffer)
     {
         for (u32 i = 0; i < tmd_file->num_contents; ++i)
         {
-            if (tmd_file->contents[i].index == tmd_file->boot_index)
-                continue; // Skip loader
-
-            snprintf(filepath, ISFS_MAXPATH, "/title/%08x/%08x/content/%08x.app", (unsigned int)high, (unsigned int)low, (unsigned int)tmd_file->contents[i].cid);
-
-            s32 fd = ISFS_Open(filepath, ISFS_OPEN_READ);
-            if (fd < 0)
-                continue;
-
-            s32 ret = ISFS_Read(fd, dolhead, 32);
-            ISFS_Close(fd);
-
-            if (ret != 32)
-                continue;
-
-            if (memcmp(dolhead, dolsign, sizeof(dolsign)) == 0)
+            // It won't match a dol signature
+            if (tmd_file->contents[i].index == 1)
             {
                 bootcontent = tmd_file->contents[i].cid;
                 break;

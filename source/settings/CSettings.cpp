@@ -108,6 +108,7 @@ void CSettings::SetDefault()
 	videopatch = OFF;
 	videoPatchDol = OFF;
 	patchFix480p = ON;
+	deflicker = DEFLICKER_AUTO;
 	language = CONSOLE_DEFAULT;
 	ocarina = OFF;
 	hddinfo = CLOCK_HR12;
@@ -322,6 +323,7 @@ bool CSettings::Save()
 	fprintf(file, "videopatch = %d\n", videopatch);
 	fprintf(file, "videoPatchDol = %d\n", videoPatchDol);
 	fprintf(file, "patchFix480p = %d\n", patchFix480p);
+	fprintf(file, "deflicker = %d\n", deflicker);
 	fprintf(file, "language = %d\n", language);
 	fprintf(file, "ocarina = %d\n", ocarina);
 	fprintf(file, "hddinfo = %d\n", hddinfo);
@@ -570,6 +572,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "patchFix480p") == 0)
 	{
 		patchFix480p = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "deflicker") == 0)
+	{
+		deflicker = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "language") == 0)

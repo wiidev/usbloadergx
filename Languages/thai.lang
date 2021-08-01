@@ -585,6 +585,9 @@ msgstr "ค่าแรกกำหนด"
 msgid "Default Settings"
 msgstr "ค่าแรกกำหนด"
 
+msgid "Deflicker Filter"
+msgstr ""
+
 msgid "Delete"
 msgstr "ลบ"
 
@@ -1644,13 +1647,28 @@ msgstr "พย."
 msgid "OFF"
 msgstr "ปิด"
 
+msgid "OFF (Extended)"
+msgstr ""
+
+msgid "OFF (Safe)"
+msgstr ""
+
 msgid "OK"
 msgstr "ตกลง"
 
 msgid "ON"
 msgstr "เปิด"
 
+msgid "ON (Low)"
+msgstr ""
+
+msgid "ON (Medium)"
+msgstr ""
+
 msgid "ON (Multi)"
+msgstr ""
+
+msgid "ON (High)"
 msgstr ""
 
 msgid "OSReport"

@@ -585,6 +585,9 @@ msgstr "Βασικές ρυθμίσεις παιχνιδιών"
 msgid "Default Settings"
 msgstr "Βασικές ρυθμίσεις"
 
+msgid "Deflicker Filter"
+msgstr ""
+
 msgid "Delete"
 msgstr "Διαγραφή"
 
@@ -1644,13 +1647,28 @@ msgstr "Noέμβριος"
 msgid "OFF"
 msgstr "OXI"
 
+msgid "OFF (Extended)"
+msgstr ""
+
+msgid "OFF (Safe)"
+msgstr ""
+
 msgid "OK"
 msgstr ""
 
 msgid "ON"
 msgstr "NAI"
 
+msgid "ON (Low)"
+msgstr ""
+
+msgid "ON (Medium)"
+msgstr ""
+
 msgid "ON (Multi)"
+msgstr ""
+
+msgid "ON (High)"
 msgstr ""
 
 msgid "OSReport"

@@ -585,6 +585,9 @@ msgstr "Oletus peliasetukset"
 msgid "Default Settings"
 msgstr "Oletusasetukset"
 
+msgid "Deflicker Filter"
+msgstr ""
+
 msgid "Delete"
 msgstr "Tuhoa"
 
@@ -1644,13 +1647,28 @@ msgstr "marras"
 msgid "OFF"
 msgstr "Pois"
 
+msgid "OFF (Extended)"
+msgstr ""
+
+msgid "OFF (Safe)"
+msgstr ""
+
 msgid "OK"
 msgstr ""
 
 msgid "ON"
 msgstr "Päälle"
 
+msgid "ON (Low)"
+msgstr ""
+
+msgid "ON (Medium)"
+msgstr ""
+
 msgid "ON (Multi)"
+msgstr ""
+
+msgid "ON (High)"
 msgstr ""
 
 msgid "OSReport"

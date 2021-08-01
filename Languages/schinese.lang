@@ -585,6 +585,9 @@ msgstr "缺省游戏设定"
 msgid "Default Settings"
 msgstr "缺省设置"
 
+msgid "Deflicker Filter"
+msgstr ""
+
 msgid "Delete"
 msgstr "删除"
 
@@ -1644,13 +1647,28 @@ msgstr "十一月"
 msgid "OFF"
 msgstr "关闭"
 
+msgid "OFF (Extended)"
+msgstr ""
+
+msgid "OFF (Safe)"
+msgstr ""
+
 msgid "OK"
 msgstr "确定"
 
 msgid "ON"
 msgstr "开启"
 
+msgid "ON (Low)"
+msgstr ""
+
+msgid "ON (Medium)"
+msgstr ""
+
 msgid "ON (Multi)"
+msgstr ""
+
+msgid "ON (High)"
 msgstr ""
 
 msgid "OSReport"

@@ -585,6 +585,9 @@ msgstr "Alapértelmezett beállítások"
 msgid "Default Settings"
 msgstr "Alapértelmezett beállítások"
 
+msgid "Deflicker Filter"
+msgstr ""
+
 msgid "Delete"
 msgstr "Törlés"
 
@@ -1644,13 +1647,28 @@ msgstr ""
 msgid "OFF"
 msgstr "KI"
 
+msgid "OFF (Extended)"
+msgstr ""
+
+msgid "OFF (Safe)"
+msgstr ""
+
 msgid "OK"
 msgstr ""
 
 msgid "ON"
 msgstr "BE"
 
+msgid "ON (Low)"
+msgstr ""
+
+msgid "ON (Medium)"
+msgstr ""
+
 msgid "ON (Multi)"
+msgstr ""
+
+msgid "ON (High)"
 msgstr ""
 
 msgid "OSReport"

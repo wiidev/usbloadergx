@@ -51,7 +51,7 @@ static const char * VideoModeText[] =
 	trNOOP( "Force NTSC" ),
 	trNOOP( "Region Patch" ),
 	trNOOP( "Force PAL480p" ),
-	trNOOP( "Force NTSC480p" ),
+	trNOOP( "Force NTSC480p" )
 };
 
 static const char * VideoPatchDolText[] =
@@ -59,7 +59,17 @@ static const char * VideoPatchDolText[] =
 	trNOOP( "OFF" ),
 	trNOOP( "Region Patch" ),
 	trNOOP( "ON" ),
-	trNOOP( "All" ),
+	trNOOP( "All" )
+};
+
+static const char * DeflickerText[] =
+{
+	trNOOP( "Auto" ),
+	trNOOP( "OFF (Safe)" ),
+	trNOOP( "OFF (Extended)" ),
+	trNOOP( "ON (Low)" ),
+	trNOOP( "ON (Medium)" ),
+	trNOOP( "ON (High)" )
 };
 
 static const char * AspectText[] =
@@ -81,7 +91,7 @@ static const char * LanguageText[] =
 	trNOOP( "SChinese" ),
 	trNOOP( "TChinese" ),
 	trNOOP( "Korean" ),
-	trNOOP( "Console Default" ),
+	trNOOP( "Console Default" )
 };
 
 static const char * ParentalText[] =
@@ -99,7 +109,7 @@ static const char * AlternateDOLText[] =
 	trNOOP( "Select a DOL from Game" ),
 	trNOOP( "Load From SD/USB" ),
 	trNOOP( "List on Gamelaunch" ),
-	trNOOP( "Default" ),
+	trNOOP( "Default" )
 };
 
 static const char * NandEmuText[] =
@@ -119,7 +129,7 @@ static const char * HooktypeText[] =
 	trNOOP( "GXDraw" ),
 	trNOOP( "GXFlush" ),
 	trNOOP( "OSSleepThread" ),
-	trNOOP( "AXNextFrame" ),
+	trNOOP( "AXNextFrame" )
 };
 
 static const char * PrivServText[] =
@@ -128,7 +138,7 @@ static const char * PrivServText[] =
 	trNOOP( "NoSSL only" ),
 	trNOOP( "Wiimmfi" ),
 	trNOOP( "AltWFC" ),
-	trNOOP( "Custom" ),
+	trNOOP( "Custom" )
 };
 
 static const char blocked[22] =
@@ -195,6 +205,7 @@ void GameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "480p Pixel Fix Patch" ));
 	Options->SetName(Idx++, "%s", tr( "Sneek Video Patch" ));
 	Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
+	Options->SetName(Idx++, "%s", tr( "Deflicker Filter" ));
 	Options->SetName(Idx++, "%s", tr( "Aspect Ratio" ));
 	Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
@@ -267,6 +278,12 @@ void GameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.vipatch]));
+
+	//! Settings: Deflicker Filter
+	if(GameConfig.deflicker == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(DeflickerText[GameConfig.deflicker]));
 
 	//! Settings: Aspect Ratio
 	if(GameConfig.aspectratio == INHERIT)
@@ -455,6 +472,12 @@ int GameLoadSM::GetMenuInternal()
 	if (ret == ++Idx)
 	{
 		if (++GameConfig.vipatch >= MAX_ON_OFF) GameConfig.vipatch = INHERIT;
+	}
+
+	//! Settings: Deflicker Filter
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.deflicker >= DEFLICKER_MAX) GameConfig.deflicker = INHERIT;
 	}
 
 	//! Settings: Aspect Ratio

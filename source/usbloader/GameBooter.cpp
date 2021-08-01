@@ -269,6 +269,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	u8 PrivServChoice = game_cfg->PrivateServer == INHERIT ? Settings.PrivateServer : game_cfg->PrivateServer;
 	const char *customAddress = game_cfg->CustomAddress.size() == 0 ? Settings.CustomAddress : game_cfg->CustomAddress.c_str();
 	u8 viChoice = game_cfg->vipatch == INHERIT ? Settings.videopatch : game_cfg->vipatch;
+	u8 deflicker = game_cfg->deflicker == INHERIT ? Settings.deflicker : game_cfg->deflicker;
 	u8 sneekChoice = game_cfg->sneekVideoPatch == INHERIT ? Settings.sneekVideoPatch : game_cfg->sneekVideoPatch;
 	u8 iosChoice = game_cfg->ios == INHERIT ? Settings.cios : game_cfg->ios;
 	u8 countrystrings = game_cfg->patchcountrystrings == INHERIT ? Settings.patchcountrystrings : game_cfg->patchcountrystrings;
@@ -451,12 +452,14 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	if (PrivServChoice != PRIVSERV_WIIMMFI || memcmp(gameHeader.id, "RMC", 3) != 0)
 	{
 		//! Either the server is not Wiimmfi, or, if it is Wiimmfi, the game isn't MKWii - patch the old way
-		gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, returnToChoice, PrivServChoice, customAddress);
+		gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice,
+					deflicker, sneekChoice, Hooktype, returnToChoice, PrivServChoice, customAddress);
 	}
 	else
 	{
 		//! Wiimmfi patch for Mario Kart Wii - patch with PRIVSERV_OFF and handle all the patching within do_new_wiimmfi()
-		gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice, sneekChoice, Hooktype, returnToChoice, PRIVSERV_OFF, customAddress);
+		gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice,
+					deflicker, sneekChoice, Hooktype, returnToChoice, PRIVSERV_OFF, customAddress);
 	}
 	
 

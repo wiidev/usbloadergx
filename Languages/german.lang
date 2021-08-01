@@ -585,6 +585,9 @@ msgstr "Spieleinstellungen zurücksetzen"
 msgid "Default Settings"
 msgstr "Einstellungen zurücksetzen"
 
+msgid "Deflicker Filter"
+msgstr ""
+
 msgid "Delete"
 msgstr "Löschen"
 
@@ -1644,13 +1647,28 @@ msgstr "November"
 msgid "OFF"
 msgstr "AUS"
 
+msgid "OFF (Extended)"
+msgstr ""
+
+msgid "OFF (Safe)"
+msgstr ""
+
 msgid "OK"
 msgstr "OK"
 
 msgid "ON"
 msgstr "AN"
 
+msgid "ON (Low)"
+msgstr ""
+
+msgid "ON (Medium)"
+msgstr ""
+
 msgid "ON (Multi)"
+msgstr ""
+
+msgid "ON (High)"
 msgstr ""
 
 msgid "OSReport"

@@ -585,6 +585,9 @@ msgstr "Restaurar configuración"
 msgid "Default Settings"
 msgstr "Restaurar configuración"
 
+msgid "Deflicker Filter"
+msgstr ""
+
 msgid "Delete"
 msgstr "Borrar"
 
@@ -1644,14 +1647,29 @@ msgstr ""
 msgid "OFF"
 msgstr "Desactivado"
 
+msgid "OFF (Extended)"
+msgstr ""
+
+msgid "OFF (Safe)"
+msgstr ""
+
 msgid "OK"
 msgstr "Aceptar"
 
 msgid "ON"
 msgstr "Activado"
 
+msgid "ON (Low)"
+msgstr ""
+
+msgid "ON (Medium)"
+msgstr ""
+
 msgid "ON (Multi)"
 msgstr "1 global"
+
+msgid "ON (High)"
+msgstr ""
 
 msgid "OSReport"
 msgstr ""

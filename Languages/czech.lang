@@ -585,6 +585,9 @@ msgstr "Puvodní nastavení her"
 msgid "Default Settings"
 msgstr "Puvodní nastavení"
 
+msgid "Deflicker Filter"
+msgstr ""
+
 msgid "Delete"
 msgstr "Smazat"
 
@@ -1644,13 +1647,28 @@ msgstr "List"
 msgid "OFF"
 msgstr "Vypnuto"
 
+msgid "OFF (Extended)"
+msgstr ""
+
+msgid "OFF (Safe)"
+msgstr ""
+
 msgid "OK"
 msgstr ""
 
 msgid "ON"
 msgstr "Zapnuto"
 
+msgid "ON (Low)"
+msgstr ""
+
+msgid "ON (Medium)"
+msgstr ""
+
 msgid "ON (Multi)"
+msgstr ""
+
+msgid "ON (High)"
 msgstr ""
 
 msgid "OSReport"

@@ -13,6 +13,7 @@ typedef struct _GameCFG
 	short video;
 	short videoPatchDol;
 	short patchFix480p;
+	short deflicker;
 	short aspectratio;
 	short language;
 	short ocarina;
@@ -78,6 +79,7 @@ typedef struct _GameCFG
 		memcpy(this->id, game.id, sizeof(game.id));
 		this->video = game.video;
 		this->videoPatchDol = game.videoPatchDol;
+		this->deflicker = game.deflicker;
 		this->patchFix480p = game.patchFix480p;
 		this->aspectratio = game.aspectratio;
 		this->language = game.language;

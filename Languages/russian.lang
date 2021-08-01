@@ -585,6 +585,9 @@ msgstr "Установки игры по умолчанию"
 msgid "Default Settings"
 msgstr "Установки по умолчанию"
 
+msgid "Deflicker Filter"
+msgstr ""
+
 msgid "Delete"
 msgstr "Удалить"
 
@@ -1644,13 +1647,28 @@ msgstr "Ноя"
 msgid "OFF"
 msgstr "ВЫКЛ"
 
+msgid "OFF (Extended)"
+msgstr ""
+
+msgid "OFF (Safe)"
+msgstr ""
+
 msgid "OK"
 msgstr "OK"
 
 msgid "ON"
 msgstr "ВКЛ"
 
+msgid "ON (Low)"
+msgstr ""
+
+msgid "ON (Medium)"
+msgstr ""
+
 msgid "ON (Multi)"
+msgstr ""
+
+msgid "ON (High)"
 msgstr ""
 
 msgid "OSReport"

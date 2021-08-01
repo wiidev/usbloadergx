@@ -585,6 +585,9 @@ msgstr "設定を初期化"
 msgid "Default Settings"
 msgstr "設定を初期化"
 
+msgid "Deflicker Filter"
+msgstr ""
+
 msgid "Delete"
 msgstr "削除しますか"
 
@@ -1644,13 +1647,28 @@ msgstr "11月"
 msgid "OFF"
 msgstr "使わない"
 
+msgid "OFF (Extended)"
+msgstr ""
+
+msgid "OFF (Safe)"
+msgstr ""
+
 msgid "OK"
 msgstr ""
 
 msgid "ON"
 msgstr "使う"
 
+msgid "ON (Low)"
+msgstr ""
+
+msgid "ON (Medium)"
+msgstr ""
+
 msgid "ON (Multi)"
+msgstr ""
+
+msgid "ON (High)"
 msgstr ""
 
 msgid "OSReport"

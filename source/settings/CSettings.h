@@ -111,6 +111,7 @@ class CSettings
 		short videopatch;
 		short videoPatchDol;
 		short patchFix480p;
+		short deflicker;
 		short sinfo;
 		short hddinfo;
 		short rumble;

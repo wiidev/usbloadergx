@@ -585,6 +585,9 @@ msgstr "初始化遊戲設定"
 msgid "Default Settings"
 msgstr "初始化設定"
 
+msgid "Deflicker Filter"
+msgstr ""
+
 msgid "Delete"
 msgstr "刪除"
 
@@ -1644,13 +1647,28 @@ msgstr "十一月"
 msgid "OFF"
 msgstr "關閉"
 
+msgid "OFF (Extended)"
+msgstr ""
+
+msgid "OFF (Safe)"
+msgstr ""
+
 msgid "OK"
 msgstr "確定"
 
 msgid "ON"
 msgstr "開啟"
 
+msgid "ON (Low)"
+msgstr ""
+
+msgid "ON (Medium)"
+msgstr ""
+
 msgid "ON (Multi)"
+msgstr ""
+
+msgid "ON (High)"
 msgstr ""
 
 msgid "OSReport"

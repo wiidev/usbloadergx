@@ -585,6 +585,9 @@ msgstr "Domyslne ustawienia gier"
 msgid "Default Settings"
 msgstr "Domyslne ustawienia"
 
+msgid "Deflicker Filter"
+msgstr ""
+
 msgid "Delete"
 msgstr "Usun"
 
@@ -1644,13 +1647,28 @@ msgstr "Listopad"
 msgid "OFF"
 msgstr "Wylacz"
 
+msgid "OFF (Extended)"
+msgstr ""
+
+msgid "OFF (Safe)"
+msgstr ""
+
 msgid "OK"
 msgstr ""
 
 msgid "ON"
 msgstr "Wlacz"
 
+msgid "ON (Low)"
+msgstr ""
+
+msgid "ON (Medium)"
+msgstr ""
+
 msgid "ON (Multi)"
+msgstr ""
+
+msgid "ON (High)"
 msgstr ""
 
 msgid "OSReport"

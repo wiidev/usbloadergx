@@ -585,6 +585,9 @@ msgstr "Ställ till spelstandard"
 msgid "Default Settings"
 msgstr "Standardinställningar"
 
+msgid "Deflicker Filter"
+msgstr ""
+
 msgid "Delete"
 msgstr "Radera"
 
@@ -1644,13 +1647,28 @@ msgstr ""
 msgid "OFF"
 msgstr "AV"
 
+msgid "OFF (Extended)"
+msgstr ""
+
+msgid "OFF (Safe)"
+msgstr ""
+
 msgid "OK"
 msgstr ""
 
 msgid "ON"
 msgstr "PÅ"
 
+msgid "ON (Low)"
+msgstr ""
+
+msgid "ON (Medium)"
+msgstr ""
+
 msgid "ON (Multi)"
+msgstr ""
+
+msgid "ON (High)"
 msgstr ""
 
 msgid "OSReport"

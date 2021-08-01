@@ -585,6 +585,9 @@ msgstr ""
 msgid "Default Settings"
 msgstr ""
 
+msgid "Deflicker Filter"
+msgstr ""
+
 msgid "Delete"
 msgstr ""
 
@@ -1644,13 +1647,28 @@ msgstr ""
 msgid "OFF"
 msgstr ""
 
+msgid "OFF (Extended)"
+msgstr ""
+
+msgid "OFF (Safe)"
+msgstr ""
+
 msgid "OK"
 msgstr ""
 
 msgid "ON"
 msgstr ""
 
+msgid "ON (Low)"
+msgstr ""
+
+msgid "ON (Medium)"
+msgstr ""
+
 msgid "ON (Multi)"
+msgstr ""
+
+msgid "ON (High)"
 msgstr ""
 
 msgid "OSReport"

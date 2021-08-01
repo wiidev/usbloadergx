@@ -585,6 +585,9 @@ msgstr "Definições Jogo Predefinidas"
 msgid "Default Settings"
 msgstr "Definições Predefinidas"
 
+msgid "Deflicker Filter"
+msgstr ""
+
 msgid "Delete"
 msgstr "Eliminar"
 
@@ -1644,13 +1647,28 @@ msgstr "Nov"
 msgid "OFF"
 msgstr "OFF"
 
+msgid "OFF (Extended)"
+msgstr ""
+
+msgid "OFF (Safe)"
+msgstr ""
+
 msgid "OK"
 msgstr "OK"
 
 msgid "ON"
 msgstr "ON"
 
+msgid "ON (Low)"
+msgstr ""
+
+msgid "ON (Medium)"
+msgstr ""
+
 msgid "ON (Multi)"
+msgstr ""
+
+msgid "ON (High)"
 msgstr ""
 
 msgid "OSReport"

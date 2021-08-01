@@ -72,6 +72,16 @@ static const char * VideoPatchDolText[] =
 	trNOOP( "All" ),
 };
 
+static const char * DeflickerText[] =
+{
+	trNOOP( "Auto" ),
+	trNOOP( "OFF (Safe)" ),
+	trNOOP( "OFF (Extended)" ),
+	trNOOP( "ON (Low)" ),
+	trNOOP( "ON (Medium)" ),
+	trNOOP( "ON (High)" )
+};
+
 static const char * LanguageText[] =
 {
 	trNOOP( "Japanese" ),
@@ -240,6 +250,7 @@ void LoaderSettings::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "480p Pixel Fix Patch" ));
 	Options->SetName(Idx++, "%s", tr( "Sneek Video Patch" ));
 	Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
+	Options->SetName(Idx++, "%s", tr( "Deflicker Filter" ));
 	Options->SetName(Idx++, "%s", tr( "Aspect Ratio" ));
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
 	Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
@@ -332,6 +343,9 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: VIDTV Patch
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.videopatch] ));
+
+	//! Settings: Deflicker Filter
+	Options->SetValue(Idx++, "%s", tr( DeflickerText[Settings.deflicker] ));
 
 	//! Settings: Aspect Ratio
 	Options->SetValue(Idx++, "%s", tr( AspectText[Settings.GameAspectRatio] ));
@@ -588,6 +602,12 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.videopatch >= MAX_ON_OFF) Settings.videopatch = 0;
+	}
+
+	//! Settings: Deflicker Filter
+	else if (ret == ++Idx)
+	{
+		if (++Settings.deflicker >= DEFLICKER_MAX) Settings.deflicker = 0;
 	}
 
 	//! Settings: Aspect Ratio

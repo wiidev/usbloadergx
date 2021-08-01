@@ -58,9 +58,13 @@ void ClearDOLList()
 }
 
 void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 languageChoice, u8 patchcountrystring,
-                 u8 vipatch, u8 sneekVideoPatch, u8 hooktype, u64 returnTo, u8 privateServer, const char *serverAddr)
+                 u8 vipatch, u8 deflicker, u8 sneekVideoPatch, u8 hooktype, u64 returnTo, u8 privateServer, const char *serverAddr)
 {
     int i;
+    u8 vfilter_off[7] = {0, 0, 21, 22, 21, 0, 0};
+    u8 vfilter_low[7] = {4, 4, 16, 16, 16, 4, 4};
+    u8 vfilter_medium[7] = {4, 8, 12, 16, 12, 8, 4};
+    u8 vfilter_high[7] = {8, 8, 10, 12, 10, 8, 8};
 
     // If a wip file is loaded for this game this does nothing - Dimok
     PoPPatch();
@@ -90,7 +94,31 @@ void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 language
 
         do_wip_code(dst, len);
 
-        Anti_002_fix(dst, len);
+        anti_002_fix(dst, len);
+
+        if (deflicker == DEFLICKER_ON_LOW)
+        {
+            patch_vfilters(dst, len, vfilter_low);
+            patch_vfilters_rouge(dst, len, vfilter_low);
+        }
+        else if (deflicker == DEFLICKER_ON_MEDIUM)
+        {
+            patch_vfilters(dst, len, vfilter_medium);
+            patch_vfilters_rouge(dst, len, vfilter_medium);
+        }
+        else if (deflicker == DEFLICKER_ON_HIGH)
+        {
+            patch_vfilters(dst, len, vfilter_high);
+            patch_vfilters_rouge(dst, len, vfilter_high);
+        }
+        else if (deflicker != DEFLICKER_AUTO)
+        {
+            patch_vfilters(dst, len, vfilter_off);
+            patch_vfilters_rouge(dst, len, vfilter_off);
+            // This might break fade and brightness effects
+            if (deflicker == DEFLICKER_OFF_EXTENDED)
+                deflicker_patch(dst, len);
+        }
 
         if (returnTo)
             PatchReturnTo(dst, len, (u32)returnTo);
@@ -122,11 +150,44 @@ void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 language
 }
 
 /** Anti 002 fix for IOS 249 rev > 12 thanks to WiiPower **/
-bool Anti_002_fix(u8 *Address, int Size)
+void anti_002_fix(u8 *addr, u32 len)
 {
-    u8 SearchPattern[12] = {0x2C, 0x00, 0x00, 0x00, 0x48, 0x00, 0x02, 0x14, 0x3C, 0x60, 0x80, 0x00};
-    u8 PatchData[12] = {0x2C, 0x00, 0x00, 0x00, 0x40, 0x82, 0x02, 0x14, 0x3C, 0x60, 0x80, 0x00};
-    return PatchDOL(Address, Size, (const u8 *)SearchPattern, sizeof(SearchPattern), (const u8 *)PatchData, sizeof(PatchData));
+    u32 SearchPattern[3] = {0x2C000000, 0x48000214, 0x3C608000};
+    u8 *addr_start = addr;
+    u8 *addr_end = addr + len;
+    while (addr_start <= addr_end - sizeof(SearchPattern))
+    {
+        if (memcmp(addr_start, SearchPattern, sizeof(SearchPattern)) == 0)
+        {
+            *((u32 *)addr_start + 1) = 0x40820214;
+            return;
+        }
+        addr_start += 4;
+    }
+}
+
+/** Patch GXSetCopyFilter to disable the deflicker filter **/
+void deflicker_patch(u8 *addr, u32 len)
+{
+    u32 SearchPattern[18] = {
+        0x3D20CC01, 0x39400061, 0x99498000,
+        0x2C050000, 0x38800053, 0x39600000,
+        0x90098000, 0x38000054, 0x39800000,
+        0x508BC00E, 0x99498000, 0x500CC00E,
+        0x90698000, 0x99498000, 0x90E98000,
+        0x99498000, 0x91098000, 0x41820040};
+    u8 *addr_start = addr;
+    u8 *addr_end = addr + len;
+    while (addr_start <= addr_end - sizeof(SearchPattern))
+    {
+        if (memcmp(addr_start, SearchPattern, sizeof(SearchPattern)) == 0)
+        {
+            *((u32 *)addr_start + 17) = 0x48000040; // Change beq to b
+            gprintf("Patched GXSetCopyFilter @ %p\n", addr_start);
+            return;
+        }
+        addr_start += 4;
+    }
 }
 
 /**
@@ -918,10 +979,10 @@ static GXRModeObj TVPal528Prog_RVL = {
 
     // sample points arranged in increasing Y order
     {
-        {6,6},{6,6},{6,6}, // pix 0, 3 sample points, 1/12 units, 4 bits each
-        {6,6},{6,6},{6,6}, // pix 1
-        {6,6},{6,6},{6,6}, // pix 2
-        {6,6},{6,6},{6,6}  // pix 3
+        {6, 6}, {6, 6}, {6, 6}, // pix 0, 3 sample points, 1/12 units, 4 bits each
+        {6, 6}, {6, 6}, {6, 6}, // pix 1
+        {6, 6}, {6, 6}, {6, 6}, // pix 2
+        {6, 6}, {6, 6}, {6, 6}  // pix 3
     },
 
     // vertical filter[7], 1/64 units, 6 bits each
@@ -951,10 +1012,10 @@ static GXRModeObj TVPal528ProgSoft_RVL = {
 
     // sample points arranged in increasing Y order
     {
-        {6,6},{6,6},{6,6}, // pix 0, 3 sample points, 1/12 units, 4 bits each
-        {6,6},{6,6},{6,6}, // pix 1
-        {6,6},{6,6},{6,6}, // pix 2
-        {6,6},{6,6},{6,6}  // pix 3
+        {6, 6}, {6, 6}, {6, 6}, // pix 0, 3 sample points, 1/12 units, 4 bits each
+        {6, 6}, {6, 6}, {6, 6}, // pix 1
+        {6, 6}, {6, 6}, {6, 6}, // pix 2
+        {6, 6}, {6, 6}, {6, 6}  // pix 3
     },
 
     // vertical filter[7], 1/64 units, 6 bits each
@@ -984,10 +1045,10 @@ static GXRModeObj TVPal524ProgAa_RVL = {
 
     // sample points arranged in increasing Y order
     {
-        {3,2},{9,6},{3,10}, // pix 0, 3 sample points, 1/12 units, 4 bits each
-        {3,2},{9,6},{3,10}, // pix 1
-        {9,2},{3,6},{9,10}, // pix 2
-        {9,2},{3,6},{9,10}  // pix 3
+        {3, 2}, {9, 6}, {3, 10}, // pix 0, 3 sample points, 1/12 units, 4 bits each
+        {3, 2}, {9, 6}, {3, 10}, // pix 1
+        {9, 2}, {3, 6}, {9, 10}, // pix 2
+        {9, 2}, {3, 6}, {9, 10}  // pix 3
     },
 
     // vertical filter[7], 1/64 units, 6 bits each
@@ -1000,6 +1061,39 @@ static GXRModeObj TVPal524ProgAa_RVL = {
         8,  // line n+1
         4   // line n+1
     }
+};
+
+static GXRModeObj TVPal528IntDf_RVL = {
+    4,             // viDisplayMode
+    640,           // fbWidth
+    528,           // efbHeight
+    528,           // xfbHeight
+    40,            // viXOrigin (720 - 640)/2
+    23,            // viYOrigin (574 - 528)/2
+    640,           // viWidth
+    528,           // viHeight
+    VI_XFBMODE_DF, // xFBmode
+    GX_FALSE,      // field_rendering
+    GX_FALSE,      // aa
+
+    // sample points arranged in increasing Y order
+	{
+        {6, 6}, {6, 6}, {6, 6}, // pix 0, 3 sample points, 1/12 units, 4 bits each
+        {6, 6}, {6, 6}, {6, 6}, // pix 1
+        {6, 6}, {6, 6}, {6, 6}, // pix 2
+        {6, 6}, {6, 6}, {6, 6}  // pix 3
+	},
+
+    // vertical filter[7], 1/64 units, 6 bits each
+	{
+		 8, // line n-1
+		 8, // line n-1
+		10, // line n
+		12, // line n
+		10, // line n
+		 8, // line n+1
+		 8  // line n+1
+	}
 };
 
 static GXRModeObj *vmodes[] = {
@@ -1021,7 +1115,7 @@ static GXRModeObj *vmodes[] = {
     &TVPal524ProgAa_RVL,
     &TVPal524IntAa,
     &TVPal528Int,
-    &TVPal528IntDf,
+    &TVPal528IntDf_RVL,
     &TVPal528Prog_RVL,
     &TVPal528ProgSoft_RVL,
     &TVPal576IntDfScale,
@@ -1055,7 +1149,7 @@ static const char *vmodes_name[] = {
     "TVPal524ProgAa_RVL",
     "TVPal524IntAa",
     "TVPal528Int",
-    "TVPal528IntDf",
+    "TVPal528IntDf_RVL",
     "TVPal528Prog_RVL",
     "TVPal528ProgSoft_RVL",
     "TVPal576IntDfScale",
@@ -1078,7 +1172,7 @@ static GXRModeObj *PAL2NTSC[] = {
     &TVPal264IntAa, &TVNtsc240IntAa,
     &TVPal524IntAa, &TVNtsc480IntAa,
     &TVPal528Int, &TVNtsc480Int,
-    &TVPal528IntDf, &TVNtsc480IntDf,
+    &TVPal528IntDf_RVL, &TVNtsc480IntDf,
     &TVPal528Prog_RVL, &TVNtsc480Prog,
     &TVPal576IntDfScale, &TVNtsc480IntDf,
     &TVEurgb60Hz240Ds, &TVNtsc240Ds,
@@ -1099,7 +1193,7 @@ static GXRModeObj *NTSC2PAL[] = {
     &TVNtsc240Int, &TVPal264Int,
     &TVNtsc240IntAa, &TVPal264IntAa,
     &TVNtsc480Int, &TVPal528Int,
-    &TVNtsc480IntDf, &TVPal528IntDf,
+    &TVNtsc480IntDf, &TVPal528IntDf_RVL,
     &TVNtsc480IntAa, &TVPal524IntAa,
     &TVNtsc480Prog, &TVPal528Prog_RVL,
     0, 0};
@@ -1114,6 +1208,20 @@ static GXRModeObj *NTSC2PAL60[] = {
     &TVNtsc480IntAa, &TVEurgb60Hz480IntAa,
     &TVNtsc480Prog, &TVEurgb60Hz480Prog,
     0, 0};
+
+static u8 PATTERN[12][2] = {
+    {6, 6}, {6, 6}, {6, 6},
+    {6, 6}, {6, 6}, {6, 6},
+    {6, 6}, {6, 6}, {6, 6},
+    {6, 6}, {6, 6}, {6, 6}
+};
+
+static u8 PATTERN_AA[12][2] = {
+    {3, 2}, {9, 6}, {3, 10},
+    {3, 2}, {9, 6}, {3, 10},
+    {9, 2}, {3, 6}, {9, 10},
+    {9, 2}, {3, 6}, {9, 10}
+};
 
 static bool compare_videomodes(GXRModeObj *mode1, GXRModeObj *mode2)
 {
@@ -1152,13 +1260,18 @@ static bool compare_videomodes(GXRModeObj *mode1, GXRModeObj *mode2)
 static void patch_videomode(GXRModeObj *mode1, GXRModeObj *mode2)
 {
     mode1->viTVMode = mode2->viTVMode;
-    mode1->fbWidth = mode2->fbWidth;
-    mode1->efbHeight = mode2->efbHeight;
-    mode1->xfbHeight = mode2->xfbHeight;
-    mode1->viXOrigin = mode2->viXOrigin;
-    mode1->viYOrigin = mode2->viYOrigin;
-    mode1->viWidth = mode2->viWidth;
-    mode1->viHeight = mode2->viHeight;
+    if (mode1->viWidth == 640 || mode1->viWidth == 708)
+    {
+        mode1->fbWidth = mode2->fbWidth;
+        mode1->efbHeight = mode2->efbHeight;
+        mode1->xfbHeight = mode2->xfbHeight;
+        mode1->viXOrigin = mode2->viXOrigin;
+        mode1->viYOrigin = mode2->viYOrigin;
+        mode1->viWidth = mode2->viWidth;
+        mode1->viHeight = mode2->viHeight;
+    } else {
+        gprintf("Skipped patching dimensions %d x %d\n", mode1->viWidth, mode1->viHeight);
+    }
     mode1->xfbMode = mode2->xfbMode;
     mode1->field_rendering = mode2->field_rendering;
     mode1->aa = mode2->aa;
@@ -1242,6 +1355,61 @@ static bool Search_and_patch_Video_Modes(u8 *Address, u32 Size, GXRModeObj *Tabl
     return found;
 }
 
+// Patch known and unknown vfilters within GXRModeObj structures
+void patch_vfilters(u8 *addr, u32 len, u8 *vfilter)
+{
+    while (len >= sizeof(GXRModeObj))
+    {
+        GXRModeObj *vidmode = (GXRModeObj *)addr;
+        if ((memcmp(vidmode->sample_pattern, PATTERN, 24) == 0 || memcmp(vidmode->sample_pattern, PATTERN_AA, 24) == 0) &&
+            (vidmode->fbWidth == 640 || vidmode->fbWidth == 608 || vidmode->fbWidth == 512) &&
+            (vidmode->field_rendering == 0 || vidmode->field_rendering == 1) &&
+            (vidmode->aa == 0 || vidmode->aa == 1))
+        {
+            gprintf("Replaced vfilter %02x%02x%02x%02x%02x%02x%02x @ %p (GXRModeObj)\n",
+                    vidmode->vfilter[0], vidmode->vfilter[1], vidmode->vfilter[2], vidmode->vfilter[3],
+                    vidmode->vfilter[4], vidmode->vfilter[5], vidmode->vfilter[6], addr);
+            memcpy(vidmode->vfilter, vfilter, 7);
+            addr += (sizeof(GXRModeObj) - 4);
+            len -= (sizeof(GXRModeObj) - 4);
+        }
+        addr += 4;
+        len -= 4;
+    }
+}
+
+void patch_vfilters_rouge(u8 *addr, u32 len, u8 *vfilter)
+{
+    u8 known_vfilters[7][7] = {
+        {8, 8, 10, 12, 10, 8, 8},
+        {4, 8, 12, 16, 12, 8, 4},
+        {7, 7, 12, 12, 12, 7, 7},
+        {5, 5, 15, 14, 15, 5, 5},
+        {4, 4, 15, 18, 15, 4, 4},
+        {4, 4, 16, 16, 16, 4, 4},
+        {2, 2, 17, 22, 17, 2, 2}
+    };
+    u8 *addr_end = addr + len - 8;
+    while (addr <= addr_end)
+    {
+        u8 known_vfilter[7];
+        for (int i = 0; i < 7; i++)
+        {
+            for (int x = 0; x < 7; x++)
+                known_vfilter[x] = known_vfilters[i][x];
+            if (!addr[7] && memcmp(addr, known_vfilter, 7) == 0)
+            {
+                gprintf("Replaced vfilter %02x%02x%02x%02x%02x%02x%02x @ %p\n", addr[0], addr[1], addr[2],
+                        addr[3], addr[4], addr[5], addr[6], addr);
+                memcpy(addr, vfilter, 7);
+                addr += 7;
+                break;
+            }
+        }
+        addr += 1;
+    }
+}
+
 static bool Search_and_patch_Video_To(void *Address, u32 Size, GXRModeObj *Table[], GXRModeObj *rmode, bool patchAll)
 {
     u8 *Addr = (u8 *)Address;
@@ -1259,22 +1427,24 @@ static bool Search_and_patch_Video_To(void *Address, u32 Size, GXRModeObj *Table
 
     while (Size >= sizeof(GXRModeObj))
     {
-        // Video mode pattern found
-        if ((((GXRModeObj *)Addr)->fbWidth == 0x0280 && ((GXRModeObj *)Addr)->viWidth == 0x02c4) || // TVEurgb60Hz480Prog
-            (((GXRModeObj *)Addr)->fbWidth == 0x0280 && ((GXRModeObj *)Addr)->viWidth == 0x0280))   // All other video modes
+        if ((memcmp(((GXRModeObj *)Addr)->sample_pattern, PATTERN, 24) == 0 || memcmp(((GXRModeObj *)Addr)->sample_pattern, PATTERN_AA, 24) == 0) &&
+            (((GXRModeObj *)Addr)->fbWidth == 640 || ((GXRModeObj *)Addr)->fbWidth == 608 || ((GXRModeObj *)Addr)->fbWidth == 512) &&
+            (((GXRModeObj *)Addr)->field_rendering == 0 || ((GXRModeObj *)Addr)->field_rendering == 1) &&
+            (((GXRModeObj *)Addr)->aa == 0 || ((GXRModeObj *)Addr)->aa == 1)
+        )
         {
             // display found video mode patterns
             GXRModeObj *vidmode = (GXRModeObj *)Addr;
-            gprintf("Video pattern found \t%08x %04x %04x %04x %04x %04x %04x %04x %08x %04x %04x ",
+            gprintf("GXRModeObj \t%08x %04x %04x %04x %04x %04x %04x %04x %08x %04x %04x "
+                    "%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x "
+                    "%02x%02x%02x%02x%02x%02x%02x \n",
                     vidmode->viTVMode, vidmode->fbWidth, vidmode->efbHeight, vidmode->xfbHeight, vidmode->viXOrigin, vidmode->viYOrigin,
-                    vidmode->viWidth, vidmode->viHeight, vidmode->xfbMode, vidmode->field_rendering, vidmode->aa);
-            gprintf("%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x ",
+                    vidmode->viWidth, vidmode->viHeight, vidmode->xfbMode, vidmode->field_rendering, vidmode->aa,
                     vidmode->sample_pattern[0][0], vidmode->sample_pattern[1][0], vidmode->sample_pattern[2][0], vidmode->sample_pattern[3][0], vidmode->sample_pattern[4][0],
                     vidmode->sample_pattern[5][0], vidmode->sample_pattern[6][0], vidmode->sample_pattern[7][0], vidmode->sample_pattern[8][0], vidmode->sample_pattern[9][0],
                     vidmode->sample_pattern[10][0], vidmode->sample_pattern[11][0], vidmode->sample_pattern[0][1], vidmode->sample_pattern[1][1], vidmode->sample_pattern[2][1],
                     vidmode->sample_pattern[3][1], vidmode->sample_pattern[4][1], vidmode->sample_pattern[5][1], vidmode->sample_pattern[6][1], vidmode->sample_pattern[7][1],
-                    vidmode->sample_pattern[8][1], vidmode->sample_pattern[9][1], vidmode->sample_pattern[10][1], vidmode->sample_pattern[11][1]);
-            gprintf("%02x%02x%02x%02x%02x%02x%02x \n",
+                    vidmode->sample_pattern[8][1], vidmode->sample_pattern[9][1], vidmode->sample_pattern[10][1], vidmode->sample_pattern[11][1],
                     vidmode->vfilter[0], vidmode->vfilter[1], vidmode->vfilter[2], vidmode->vfilter[3], vidmode->vfilter[4], vidmode->vfilter[5], vidmode->vfilter[6]);
 
             found = 0;
@@ -1399,7 +1569,7 @@ bool PatchReturnTo(void *Address, int Size, u32 id)
 
     while (Addr <= Addr_end - 12)
     {
-        // find a safe place or the patch to hang out
+        // find a safe place for the patch to hang out
         if (!ad[3] && memcmp(Addr, SearchPattern2, 12) == 0)
         {
             ad[3] = (u32)Addr + 0x30;
