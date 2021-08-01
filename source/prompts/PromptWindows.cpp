@@ -1459,11 +1459,14 @@ int CodeDownload(const char *id)
 		char txtpath[250];
 		int txtLen = snprintf(txtpath, sizeof(txtpath), "%s%s.txt", Settings.TxtCheatcodespath, id);
 
-		char codeurl[80];
-		snprintf(codeurl, sizeof(codeurl), "https://codes.rc24.xyz/txt.php?txt=%s", id);
-
+		char codeurl[300];
 		struct download file = {};
-		downloadfile(codeurl, &file);
+		std::string url(Settings.URL_Cheats);
+		if(url.find("{gameid}") != url.npos)
+		{
+			url.replace(url.find("{gameid}"), 8, id);
+			downloadfile(url.c_str(), &file);
+		}
 		if (file.size <= 0) {
 			gprintf("Trying backup...\n");
 			snprintf(codeurl, sizeof(codeurl), "https://web.archive.org/web/202009if_/geckocodes.org/txt.php?txt=%s", id);

@@ -99,6 +99,7 @@ class CSettings
 		char URL_Discs[300];
 		char URL_DiscsCustom[300];
 		char URL_GameTDB[300];
+		char URL_Cheats[300];
 		char ProxyUsername[33];
 		char ProxyPassword[33];
 		char ProxyAddress[256];
@@ -242,7 +243,7 @@ class CSettings
 		bool FirstTimeRun;
 	protected:
 		bool ValidVersion(FILE * file);
-		bool ValidateURL(char *value, bool zip = false);
+		bool ValidateURL(char *value, int type = 0);
 		bool SetSetting(char *name, char *value);
 		//!Find the config file in the default paths
 		bool FindConfig();

@@ -88,6 +88,7 @@ void CSettings::SetDefault()
 	strlcpy(URL_Discs, "https://art.gametdb.com/wii/disc/", sizeof(URL_Discs));
 	strlcpy(URL_DiscsCustom, "https://art.gametdb.com/wii/disccustom/", sizeof(URL_DiscsCustom));
 	strlcpy(URL_GameTDB, "https://www.gametdb.com/wiitdb.zip", sizeof(URL_GameTDB));
+	strlcpy(URL_Cheats, "https://codes.rc24.xyz/txt.php?txt={gameid}", sizeof(URL_Cheats));
 	ProxyUsername[0] = 0;
 	ProxyPassword[0] = 0;
 	ProxyAddress[0] = 0;
@@ -508,6 +509,7 @@ bool CSettings::Save()
 	fprintf(file, "URL_Discs = %s\n", URL_Discs);
 	fprintf(file, "URL_DiscsCustom = %s\n", URL_DiscsCustom);
 	fprintf(file, "URL_GameTDB = %s\n", URL_GameTDB);
+	fprintf(file, "URL_Cheats = %s\n", URL_Cheats);
 	fprintf(file, "ProxyUseSystem = %d\n", ProxyUseSystem);
 	fprintf(file, "ProxyUsername = %s\n", ProxyUsername);
 	fprintf(file, "ProxyPassword = %s\n", ProxyPassword);
@@ -518,13 +520,20 @@ bool CSettings::Save()
 	return true;
 }
 
-bool CSettings::ValidateURL(char *value, bool zip)
+bool CSettings::ValidateURL(char *value, int type)
 {
 	if (strlen(value) >= 12 && (strncmp(value, "https://", 8) == 0 || strncmp(value, "http://", 7) == 0))
 	{
-		if (zip)
+		// GameTDB
+		if (type == 1)
 		{
 			if (strncmp(value + strlen(value) -4, ".zip", 4) == 0) // The URL must end with .zip to be valid
+				return true;
+		}
+		// Cheats
+		else if (type == 2)
+		{
+			if (strstr(value, "{gameid}") != NULL)
 				return true;
 		}
 		else
@@ -1346,8 +1355,14 @@ bool CSettings::SetSetting(char *name, char *value)
 	}
 	else if (strcmp(name, "URL_GameTDB") == 0)
 	{
-		if (ValidateURL(value, true))
+		if (ValidateURL(value, 1))
 			strlcpy(URL_GameTDB, value, sizeof(URL_GameTDB));
+		return true;
+	}
+	else if (strcmp(name, "URL_Cheats") == 0)
+	{
+		if (ValidateURL(value, 2))
+			strlcpy(URL_Cheats, value, sizeof(URL_Cheats));
 		return true;
 	}
 	else if (strcmp(name, "ProxyUseSystem") == 0)
