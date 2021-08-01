@@ -22,26 +22,26 @@ jobs:
           path: cache
           key: ${{ runner.os }}-cache-1
 
-      - name: Download devkitPPC r38, libogc 2.1.0 and required tools
+      - name: Download devkitPPC r39, libogc 2.3.1 and required tools
         if: steps.cache-1.outputs.cache-hit != 'true'
         # general-tools is needed for bin2s and gamecube-tools is needed for elf2dol & gcdsptool
         run: | 
           mkdir cache && cd cache
-          wget "https://wii.leseratte10.de/devkitPro/file.php/devkitPPC-r38-1-linux_x86_64.pkg.tar.xz"
-          wget "https://wii.leseratte10.de/devkitPro/file.php/devkitppc-rules-1.1.0-1-any.pkg.tar.xz"
-          wget "https://wii.leseratte10.de/devkitPro/file.php/libogc-2.1.0-1-any.pkg.tar.xz"
-          wget "https://wii.leseratte10.de/devkitPro/file.php/general-tools-1.2.0-1-linux.pkg.tar.xz"
-          wget "https://wii.leseratte10.de/devkitPro/file.php/gamecube-tools-1.0.2-1-linux.pkg.tar.xz"
+          wget "https://wii.leseratte10.de/devkitPro/file.php/devkitPPC-r39-2-linux_x86_64.pkg.tar.xz"
+          wget "https://wii.leseratte10.de/devkitPro/file.php/devkitppc-rules-1.1.1-1-any.pkg.tar.xz"
+          wget "https://wii.leseratte10.de/devkitPro/file.php/libogc-2.3.1-1-any.pkg.tar.xz"
+          wget "https://wii.leseratte10.de/devkitPro/file.php/general-tools-1.2.0-2-linux_x86_64.pkg.tar.xz"
+          wget "https://wii.leseratte10.de/devkitPro/file.php/gamecube-tools-1.0.3-1-linux_x86_64.pkg.tar.xz"
           cd ..
 
       - name: Verify checksums
         run: |
           sha256sum -c <<EOF
-          b8775c66e7500182a5f93335140d575a65ca2beb7110dfba16bf1eaf1d6fe13a  cache/devkitPPC-r38-1-linux_x86_64.pkg.tar.xz
-          5cbb617bee3d53a6857427af9168694e21095ae3223819df62aaeaf52750d772  cache/devkitppc-rules-1.1.0-1-any.pkg.tar.xz
-          220871bfc45abcab612e020a00e6c8f19f51eb1be2d3c7d23f42cb10497ba786  cache/libogc-2.1.0-1-any.pkg.tar.xz
-          6ac68676e33fd53d8b716ea6c7247b0e465eff7f7a3cbb0e3093310615a48863  cache/gamecube-tools-1.0.2-1-linux.pkg.tar.xz
-          69edef800f01ff66dc5ed4d173cb3ac07e5336fbb926369eaa3c38163775c350  cache/general-tools-1.2.0-1-linux.pkg.tar.xz
+          76465565a4c5f9bce2849f12876b470f5044b02ce242fd22f57b6b7a2b113ead  cache/devkitPPC-r39-2-linux_x86_64.pkg.tar.xz
+          0118f06fff938c3d4913fdc004d5edd2f72e3a16c544fb5699b0e97552529d29  cache/devkitppc-rules-1.1.1-1-any.pkg.tar.xz
+          b10553cced35ab8d3d0c48ee44cdb345f46be5e8f82496dd308f699db4f8d490  cache/libogc-2.3.1-1-any.pkg.tar.xz
+          3348e521e48f27912d0bca05eac73b4365c8c7006b637c95850f4feabe5dd2e9  cache/general-tools-1.2.0-2-linux_x86_64.pkg.tar.xz
+          e7ea6a13ca5a5e9d6a5b8e1616afcc92a81255aa6fee436ed81c812b62e112af  cache/gamecube-tools-1.0.3-1-linux_x86_64.pkg.tar.xz
           EOF
   
   build:
@@ -63,16 +63,14 @@ jobs:
 
       - name: Extract downloaded files
         run: |
-          tar -xf cache/devkitPPC-r38-1-linux_x86_64.pkg.tar.xz --strip-components=1
-          tar -xf cache/devkitppc-rules-1.1.0-1-any.pkg.tar.xz --strip-components=1
-          tar -xf cache/libogc-2.1.0-1-any.pkg.tar.xz --strip-components=1
-          tar -xf cache/general-tools-1.2.0-1-linux.pkg.tar.xz --strip-components=1
-          tar -xf cache/gamecube-tools-1.0.2-1-linux.pkg.tar.xz --strip-components=1
+          tar -xf cache/devkitPPC-r39-2-linux_x86_64.pkg.tar.xz --strip-components=1
+          tar -xf cache/devkitppc-rules-1.1.1-1-any.pkg.tar.xz --strip-components=1
+          tar -xf cache/libogc-2.3.1-1-any.pkg.tar.xz --strip-components=1
+          tar -xf cache/general-tools-1.2.0-2-linux_x86_64.pkg.tar.xz --strip-components=1
+          tar -xf cache/gamecube-tools-1.0.3-1-linux_x86_64.pkg.tar.xz --strip-components=1
 
       - name: Compile USB Loader GX
-        # version would be 0 unless subversion is removed
         run: |
-          sudo apt-get -qq remove subversion > /dev/null
           PATH=$(pwd)/devkitpro/devkitPPC/bin:$PATH DEVKITPPC=$(pwd)/devkitpro/devkitPPC DEVKITPRO=$(pwd)/devkitpro make
 
       - name: Package
@@ -115,10 +113,10 @@ jobs:
 
       - name: Extract downloaded files
         run: |
-          tar -xf cache/devkitPPC-r38-1-linux_x86_64.pkg.tar.xz --strip-components=1
-          tar -xf cache/devkitppc-rules-1.1.0-1-any.pkg.tar.xz --strip-components=1
-          tar -xf cache/general-tools-1.2.0-1-linux.pkg.tar.xz --strip-components=1
-          tar -xf cache/gamecube-tools-1.0.2-1-linux.pkg.tar.xz --strip-components=1
+          tar -xf cache/devkitPPC-r39-2-linux_x86_64.pkg.tar.xz --strip-components=1
+          tar -xf cache/devkitppc-rules-1.1.1-1-any.pkg.tar.xz --strip-components=1
+          tar -xf cache/general-tools-1.2.0-2-linux_x86_64.pkg.tar.xz --strip-components=1
+          tar -xf cache/gamecube-tools-1.0.3-1-linux_x86_64.pkg.tar.xz --strip-components=1
 
       - name: Checkout libogc
         uses: actions/checkout@v2
@@ -130,10 +128,8 @@ jobs:
         run: PATH=$(pwd)/devkitpro/devkitPPC/bin:$PATH DEVKITPPC=$(pwd)/devkitpro/devkitPPC DEVKITPRO=$(pwd)/devkitpro make install -C libogc
 
       - name: Compile USB Loader GX
-        # version would be 0 unless subversion is removed
         run: |
           rm -r libogc
-          sudo apt-get -qq remove subversion > /dev/null
           PATH=$(pwd)/devkitpro/devkitPPC/bin:$PATH DEVKITPPC=$(pwd)/devkitpro/devkitPPC DEVKITPRO=$(pwd)/devkitpro make
 
       - name: Package

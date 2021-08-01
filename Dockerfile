@@ -8,21 +8,20 @@
 FROM debian:buster as usbloader
 ENV DEBIAN_FRONTEND="noninteractive" TZ="Europe/London"
 RUN apt-get update -y && apt-get install -y \ 
-    xz-utils make git && \
-    apt-get -qq remove subversion
+    xz-utils make git
 
-ADD https://wii.leseratte10.de/devkitPro/file.php/devkitPPC-r38-1-linux_x86_64.pkg.tar.xz /
-ADD https://wii.leseratte10.de/devkitPro/file.php/libogc-2.1.0-1-any.pkg.tar.xz /
-ADD https://wii.leseratte10.de/devkitPro/file.php/devkitppc-rules-1.1.0-1-any.pkg.tar.xz /
-ADD https://wii.leseratte10.de/devkitPro/file.php/general-tools-1.2.0-1-linux.pkg.tar.xz /
-ADD https://wii.leseratte10.de/devkitPro/file.php/gamecube-tools-1.0.2-1-linux.pkg.tar.xz /
+ADD https://wii.leseratte10.de/devkitPro/file.php/devkitPPC-r39-2-linux_x86_64.pkg.tar.xz /
+ADD https://wii.leseratte10.de/devkitPro/file.php/libogc-2.3.1-1-any.pkg.tar.xz /
+ADD https://wii.leseratte10.de/devkitPro/file.php/devkitppc-rules-1.1.1-1-any.pkg.tar.xz /
+ADD https://wii.leseratte10.de/devkitPro/file.php/general-tools-1.2.0-2-linux_x86_64.pkg.tar.xz /
+ADD https://wii.leseratte10.de/devkitPro/file.php/gamecube-tools-1.0.3-1-linux_x86_64.pkg.tar.xz /
 
 
-RUN tar -xf /devkitPPC-r38-1-linux_x86_64.pkg.tar.xz opt/devkitpro/devkitPPC --strip-components=1 && \
-    tar -xf /libogc-2.1.0-1-any.pkg.tar.xz opt/devkitpro/libogc --strip-components=1 && \
-    tar -xf /devkitppc-rules-1.1.0-1-any.pkg.tar.xz opt/devkitpro/devkitPPC --strip-components=1 && \
-    tar -C /usr/local/bin -xf /general-tools-1.2.0-1-linux.pkg.tar.xz opt/devkitpro/tools/bin/bin2s --strip-components=4 && \
-    tar -C /usr/local/bin -xf /gamecube-tools-1.0.2-1-linux.pkg.tar.xz opt/devkitpro/tools/bin/elf2dol --strip-components=4 && \
+RUN tar -xf /devkitPPC-r39-2-linux_x86_64.pkg.tar.xz opt/devkitpro/devkitPPC --strip-components=1 && \
+    tar -xf /libogc-2.3.1-1-any.pkg.tar.xz opt/devkitpro/libogc --strip-components=1 && \
+    tar -xf /devkitppc-rules-1.1.1-1-any.pkg.tar.xz opt/devkitpro/devkitPPC --strip-components=1 && \
+    tar -C /usr/local/bin -xf /general-tools-1.2.0-2-linux_x86_64.pkg.tar.xz opt/devkitpro/tools/bin/bin2s --strip-components=4 && \
+    tar -C /usr/local/bin -xf /gamecube-tools-1.0.3-1-linux_x86_64.pkg.tar.xz opt/devkitpro/tools/bin/elf2dol --strip-components=4 && \
     mkdir /projectroot 
 
 ENV DEVKITPRO=/devkitpro
