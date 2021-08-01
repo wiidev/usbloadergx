@@ -1573,6 +1573,12 @@ static inline const char * GetLangCode(const char * langpath)
 	else if(strcasestr(langpath, "korean"))
 		return "KO";
 
+	else if(strcasestr(langpath, "portuguese_pt"))
+		return "PT";
+
+	else if(strcasestr(langpath, "russian"))
+		return "RU";
+
 	return "EN";
 }
 
