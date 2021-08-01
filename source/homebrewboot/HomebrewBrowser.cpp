@@ -44,7 +44,7 @@ extern int connection;
 HomebrewBrowser::HomebrewBrowser()
 	: FlyingButtonsMenu(tr( "Homebrew Launcher" ))
 {
-	HomebrewList = new DirList(Settings.homebrewapps_path, ".dol,.elf", DirList::Files | DirList::Dirs | DirList::CheckSubfolders);
+	HomebrewList = new DirList(Settings.homebrewapps_path, ".dol,.elf", DirList::Files | DirList::Dirs | DirList::CheckSubfolders | DirList::MainDOL);
 
 	if (IsNetworkInit())
 		ResumeNetworkWait();

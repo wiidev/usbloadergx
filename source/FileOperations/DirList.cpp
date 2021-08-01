@@ -121,6 +121,12 @@ bool DirList::LoadPath(std::string &folderpath, const char *filter, u32 flags)
 				continue;
 		}
 
+		if(flags & MainDOL)
+		{
+			if(!(memcmp(filename, "boot.dol", 8) == 0 || memcmp(filename, "boot.elf", 8) == 0))
+				continue;
+		}
+
 		if(filter)
 		{
 			char * fileext = strrchr(filename, '.');

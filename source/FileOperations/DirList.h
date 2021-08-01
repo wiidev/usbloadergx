@@ -81,7 +81,8 @@ class DirList
 		{
 			Files = 0x01,
 			Dirs = 0x02,
-			CheckSubfolders = 0x08
+			CheckSubfolders = 0x04,
+			MainDOL = 0x08
 		};
 	protected:
 		//!Add a list entrie
