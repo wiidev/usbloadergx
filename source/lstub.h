@@ -11,9 +11,6 @@
 //!1 if successful
 s32 Set_Stub(u64 reqID);
 
-//!same as the above function, but expects a type and 4 char channel ID
-s32 Set_Stub_Split(u32 type, const char* reqID);
-
 //load the default HBC stub into memory.  as long as nothing writes to the 0x80001800
 // +0xDC7 memory block it will stay there.  by default it has 0x00010001/JODI.
 void loadStub();
@@ -25,5 +22,8 @@ u64 getStubDest();
 
 //returns 0 or 1 depending on wether the stub is available
 u8 hbcStubAvailable();
+
+//returns a valid title to return to
+u64 returnTo(u64 currentStub);
 
 #endif

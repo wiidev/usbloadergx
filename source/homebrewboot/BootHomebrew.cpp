@@ -142,16 +142,7 @@ static int RunAppbooter()
 
 	u64 currentStub = getStubDest();
 	loadStub();
-
-	if (Set_Stub_Split(0x00010001, "UNEO") < 0)
-	{
-		if (Set_Stub_Split(0x00010001, "ULNR") < 0)
-		{
-			if (!currentStub) currentStub = 0x100000002ULL;
-
-			Set_Stub(currentStub);
-		}
-	}
+	Set_Stub(returnTo(currentStub));
 
 	gprintf("Exiting USBLoaderGX...\n\n");
 
