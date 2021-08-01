@@ -46,11 +46,11 @@ CGameCategories::CGameCategories()
 {
 }
 
-const vector<unsigned int> &CGameCategories::operator[](const char *id) const
+const std::vector<unsigned int> &CGameCategories::operator[](const char *id) const
 {
 	if(!id) return defaultCategory;
 
-	for(map<string, vector<unsigned int> >::const_iterator itr = List.begin(); itr != List.end(); itr++)
+	for(std::map<std::string, std::vector<unsigned int> >::const_iterator itr = List.begin(); itr != List.end(); itr++)
 	{
 		if(strncasecmp(itr->first.c_str(), id, 6) == 0)
 			return itr->second;
@@ -59,7 +59,7 @@ const vector<unsigned int> &CGameCategories::operator[](const char *id) const
 	return defaultCategory;
 }
 
-bool CGameCategories::Load(string filepath)
+bool CGameCategories::Load(std::string filepath)
 {
 	if(filepath.size() == 0)
 		return false;
@@ -179,7 +179,7 @@ bool CGameCategories::Save()
 		//! This is more memory efficient than making another copy of the elements.
 		XMLElement *GameCategories = xmlDoc.NewElement("GameCategories");
 
-		for(map<string, vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
+		for(std::map<std::string, std::vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
 		{
 			ShowProgress(progress, progressSize);
 
@@ -232,17 +232,17 @@ bool CGameCategories::SetCategory(const char *gameID, unsigned int id)
 	char gameID6[7];
 	snprintf(gameID6, sizeof(gameID6), gameID);
 
-	string stringGameID(gameID6);
+	std::string stringGameID(gameID6);
 
 	return SetCategory(stringGameID, id);
 }
 
-bool CGameCategories::SetCategory(const string &gameID, unsigned int id)
+bool CGameCategories::SetCategory(const std::string &gameID, unsigned int id)
 {
 	if(List[gameID].empty())
 		List[gameID] = defaultCategory;
 
-	vector<unsigned int> tmpVect(List[gameID]);
+	std::vector<unsigned int> tmpVect(List[gameID]);
 
 	for(u32 i = 0; i < tmpVect.size(); ++i)
 	{
@@ -261,13 +261,13 @@ bool CGameCategories::ReplaceCategory(const char *gameID, unsigned int id)
 	char gameID6[7];
 	snprintf(gameID6, sizeof(gameID6), gameID);
 
-	List[string(gameID6)] = defaultCategory;
-	List[string(gameID6)].push_back(id);
+	List[std::string(gameID6)] = defaultCategory;
+	List[std::string(gameID6)].push_back(id);
 	return true;
 }
 
 
-bool CGameCategories::ReplaceCategory(const string &gameID, unsigned int id)
+bool CGameCategories::ReplaceCategory(const std::string &gameID, unsigned int id)
 {
 	List[gameID] = defaultCategory;
 	List[gameID].push_back(id);
@@ -276,7 +276,7 @@ bool CGameCategories::ReplaceCategory(const string &gameID, unsigned int id)
 
 void CGameCategories::RemoveCategory(unsigned int id)
 {
-	for(map<string, vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
+	for(std::map<std::string, std::vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
 	{
 		for(u32 i = 0; i < itr->second.size(); ++i)
 		{
@@ -289,9 +289,9 @@ void CGameCategories::RemoveCategory(unsigned int id)
 	}
 }
 
-void CGameCategories::RemoveGameCategories(const string &gameID)
+void CGameCategories::RemoveGameCategories(const std::string &gameID)
 {
-	for (map<string, vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
+	for (std::map<std::string, std::vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
 	{
 		if(gameID == itr->first)
 		{
@@ -304,16 +304,16 @@ void CGameCategories::RemoveCategory(const char *gameID, unsigned int id)
 {
 	if(!gameID) return;
 
-	string gameID6;
+	std::string gameID6;
 	for(int i = 0; i < 6 && gameID[i] != 0; ++i)
 		gameID6.push_back(gameID[i]);
 
 	RemoveCategory(gameID6, id);
 }
 
-void CGameCategories::RemoveCategory(const string &gameID, unsigned int id)
+void CGameCategories::RemoveCategory(const std::string &gameID, unsigned int id)
 {
-	for (map<string, vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
+	for (std::map<std::string, std::vector<unsigned int> >::iterator itr = List.begin(); itr != List.end(); itr++)
 	{
 		if(gameID == itr->first)
 		{
@@ -337,11 +337,11 @@ bool CGameCategories::isInCategory(const char *gameID, unsigned int id)
 
 	if(!gameID) return false;
 
-	string gameID6;
+	std::string gameID6;
 	for(int i = 0; i < 6 && gameID[i] != 0; ++i)
 		gameID6.push_back(gameID[i]);
 
-	for (map<string, vector<unsigned int> >::iterator itr = GameCategories.List.begin(); itr != GameCategories.List.end(); itr++)
+	for (std::map<std::string, std::vector<unsigned int> >::iterator itr = GameCategories.List.begin(); itr != GameCategories.List.end(); itr++)
 	{
 		if(itr->first == gameID6)
 		{
@@ -357,7 +357,7 @@ bool CGameCategories::isInCategory(const char *gameID, unsigned int id)
 	return false;
 }
 
-bool CGameCategories::ImportFromGameTDB(const string &xmlpath)
+bool CGameCategories::ImportFromGameTDB(const std::string &xmlpath)
 {
 	GameTDB XML_DB;
 
@@ -374,8 +374,8 @@ bool CGameCategories::ImportFromGameTDB(const string &xmlpath)
 	{
 		ShowProgress(i, gameList.size());
 
-		vector<string> genreList;
-		string GameType;
+		std::vector<std::string> genreList;
+		std::string GameType;
 
 		if(XML_DB.GetGameType((const char *) gameList[i]->id, GameType))
 		{

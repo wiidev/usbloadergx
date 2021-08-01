@@ -28,18 +28,16 @@
 #include <string>
 #include <gctypes.h>
 
-using namespace std;
-
 class Wiinnertag
 {
 	public:
-		static bool CreateExample(const string &filepath);
+		static bool CreateExample(const std::string &filepath);
 		static bool TagGame(const char *gameID);
 	private:
-		Wiinnertag(const string &filepath);
+		Wiinnertag(const std::string &filepath);
 		bool Send(const char *gameID);
-		bool ReadXML(const string &filepath);
-		vector<pair<string, string> > tagList;
+		bool ReadXML(const std::string &filepath);
+		std::vector<std::pair<std::string, std::string> > tagList;
 };
 
 #endif

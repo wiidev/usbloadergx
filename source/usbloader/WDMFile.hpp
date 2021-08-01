@@ -6,8 +6,6 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
 class WDMFile
 {
 	public:
@@ -19,12 +17,12 @@ class WDMFile
 	private:
 		struct WDMEntry
 		{
-			string DolName;
-			string ReplaceName;
+			std::string DolName;
+			std::string ReplaceName;
 			int Parameter;
 		};
 
-		vector<WDMEntry> WDMEntries;
+		std::vector<WDMEntry> WDMEntries;
 };
 
 #endif

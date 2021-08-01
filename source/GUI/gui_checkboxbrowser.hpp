@@ -29,14 +29,12 @@
 #include "gui_checkbox.hpp"
 #include "gui_scrollbar.hpp"
 
-using namespace std;
-
 class GuiCheckboxBrowser : public GuiElement, public sigslot::has_slots<>
 {
 	public:
 		GuiCheckboxBrowser(int w, int h, int maxSize = 7);
 		virtual ~GuiCheckboxBrowser();
-		bool AddEntrie(const string &text, bool checked = false, int style = GuiCheckbox::CHECKSIGN, bool multistates = false);
+		bool AddEntrie(const std::string &text, bool checked = false, int style = GuiCheckbox::CHECKSIGN, bool multistates = false);
 		int GetSelected() const { return pageIndex+selectedItem; }
 		bool IsChecked(u32 i) { if(i >= checkBoxList.size()) return false; else return checkBoxList[i]->IsChecked(); }
 		GuiCheckbox *GetCheckbox(u32 i) { if(i >= checkBoxList.size()) return NULL; else return checkBoxList[i]; }
@@ -62,10 +60,10 @@ class GuiCheckboxBrowser : public GuiElement, public sigslot::has_slots<>
 		GuiImage *backgroundImg;
 		GuiImageData *markImgData;
 		GuiImage *markImg;
-		vector<GuiText *> textLineDrawn;
-		vector<GuiCheckbox *> checkBoxDrawn;
-		vector<GuiText *> textLineList;
-		vector<GuiCheckbox *> checkBoxList;
+		std::vector<GuiText *> textLineDrawn;
+		std::vector<GuiCheckbox *> checkBoxDrawn;
+		std::vector<GuiText *> textLineList;
+		std::vector<GuiCheckbox *> checkBoxList;
 };
 
 #endif

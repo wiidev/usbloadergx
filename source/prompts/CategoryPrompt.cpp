@@ -30,7 +30,7 @@
 #include "themes/Resources.h"
 #include "menu/menus.h"
 
-CategoryPrompt::CategoryPrompt(const string &title)
+CategoryPrompt::CategoryPrompt(const std::string &title)
 	: GuiWindow(0, 0)
 {
 	changed = false;

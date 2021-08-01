@@ -21,21 +21,19 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
 //!Handles Ocarina TXT Cheatfiles
 class GCTCheats
 {
 	private:
-		string sGameID;
-		string sGameTitle;
+		std::string sGameID;
+		std::string sGameTitle;
 		struct CheatEntry
 		{
-			string sCheatName;
-			string sCheatComment;
-			vector<unsigned int> sCheats;
+			std::string sCheatName;
+			std::string sCheatComment;
+			std::vector<unsigned int> sCheats;
 		};
-		vector<CheatEntry> cheatList;
+		std::vector<CheatEntry> cheatList;
 	public:
 		//!Constructor
 		GCTCheats(void);
@@ -50,25 +48,25 @@ class GCTCheats
 		//!\param cnt size of array
 		//!\param filename name of GCT file
 		//!\return error code
-		int createGCT(const vector<int> &vCheats, const char * filename);
+		int createGCT(const std::vector<int> &vCheats, const char * filename);
 		//!Gets Count cheats
 		//!\return Count cheats
 		int getCnt() const { return cheatList.size(); }
 		//!Gets Game Name
 		//!\return Game Name
-		string getGameName(void);
+		std::string getGameName(void);
 		//!Gets GameID
 		//!\return GameID
-		string getGameID(void);
+		std::string getGameID(void);
 		//!Gets cheat data
 		//!\return cheat data
-		vector<unsigned int> getCheat(int nr);
+		std::vector<unsigned int> getCheat(int nr);
 		//!Gets Cheat Name
 		//!\return Cheat Name
-		string getCheatName(int nr);
+		std::string getCheatName(int nr);
 		//!Gets Cheat Comment
 		//!\return Cheat Comment
-		string getCheatComment(int nr);
+		std::string getCheatComment(int nr);
 		//!Clear all loaded cheats
 		void Clear(void);
 		//!Check if string is a code

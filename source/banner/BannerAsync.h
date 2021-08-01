@@ -29,8 +29,6 @@ distribution.
 #include "usbloader/GameList.h"
 #include "Banner.h"
 
-using namespace std;
-
 class BannerAsync : public Banner
 {
 public:
@@ -52,8 +50,8 @@ private:
 	static void ThreadAdd(BannerAsync* banner);
 	static void ThreadRemove(BannerAsync* banner);
 
-	static vector<BannerAsync *> List;
-	static queue<BannerAsync *> DeleteList;
+	static std::vector<BannerAsync *> List;
+	static std::queue<BannerAsync *> DeleteList;
 	static lwp_t Thread;
 	static mutex_t ListLock;
 	static BannerAsync * InUse;

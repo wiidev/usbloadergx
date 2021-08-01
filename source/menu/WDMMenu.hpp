@@ -22,7 +22,7 @@ class WDMMenu : public GuiWindow
 		static u32 AlternateDolParameter;
 
 		WDMFile * wdmFile;
-		vector<pair<int, int> > DOLOffsetList;
+		std::vector<std::pair<int, int> > DOLOffsetList;
 		GuiImageData * btnOutline;
 
 		GuiTrigger * trigA;

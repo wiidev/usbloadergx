@@ -11,7 +11,6 @@
 #include <map>
 
 #include "wstring.hpp"
-using namespace std;
 
 #define TITLE_ID(x,y)	   (((u64)(x) << 32) | (y))
 #define TITLE_UPPER(x)	  ((u32)((x) >> 32))
@@ -106,7 +105,7 @@ class NandTitle
 		static int InternalExtractDir(char *nandPath, std::string &filepath);
 
 		std::vector<u64> titleIds;
-		std::map<u64, string> NameList;
+		std::map<u64, std::string> NameList;
 
 		u32 currentIndex;
 		u32 currentType;

@@ -118,7 +118,7 @@ int UpdateGameTDB()
 
 	gprintf("Updating GameTDB...\n");
 
-	string ZipPath = Settings.titlestxt_path;
+	std::string ZipPath = Settings.titlestxt_path;
 	if (Settings.titlestxt_path[ZipPath.size() - 1] != '/')
 		ZipPath += '/';
 

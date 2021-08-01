@@ -205,13 +205,13 @@ void WDMMenu::CheckGameFiles(const struct discHdr * header)
 	WBFS_CloseDisc(disc);
 
 	int position = 0;
-	vector<pair<int, string> > FilesNotInWDM;
+	std::vector<std::pair<int, std::string> > FilesNotInWDM;
 
 	for(int i = 0; i < wdmFile->size(); ++i)
 	{
 		if(stringcompare(wdmFile->GetDolName(i), "main") == true)
 		{
-			DOLOffsetList.push_back(pair<int, int>(0, wdmFile->GetParameter(i)));
+			DOLOffsetList.push_back(std::pair<int, int>(0, wdmFile->GetParameter(i)));
 			Options->SetName(position, "%i.", position+1);
 			Options->SetValue(position, wdmFile->GetReplaceName(i));
 			position++;
@@ -239,7 +239,7 @@ void WDMMenu::CheckGameFiles(const struct discHdr * header)
 			{
 				if(stringcompare(wdmFile->GetDolName(j), NameCpy) == true)
 				{
-					DOLOffsetList.push_back(pair<int, int>(i, wdmFile->GetParameter(j)));
+					DOLOffsetList.push_back(std::pair<int, int>(i, wdmFile->GetParameter(j)));
 					Options->SetName(position, "%i.", position+1);
 					Options->SetValue(position, wdmFile->GetReplaceName(j));
 					position++;
@@ -248,13 +248,13 @@ void WDMMenu::CheckGameFiles(const struct discHdr * header)
 			}
 
 			if(j == wdmFile->size())
-				FilesNotInWDM.push_back(pair<int, string>(i, filename));
+				FilesNotInWDM.push_back(std::pair<int, std::string>(i, filename));
 		}
 	}
 
 	for(u32 i = 0; i < FilesNotInWDM.size(); ++i)
 	{
-		DOLOffsetList.push_back(pair<int, int>(FilesNotInWDM[i].first, 1));
+		DOLOffsetList.push_back(std::pair<int, int>(FilesNotInWDM[i].first, 1));
 		Options->SetName(position, "%i.", position+1);
 		Options->SetValue(position, FilesNotInWDM[i].second.c_str());
 		position++;

@@ -248,7 +248,7 @@ int NandTitle::IndexOf(u64 tid)
 
 const char* NandTitle::NameOf(u64 tid)
 {
-	map<u64, string>::iterator itr = NameList.find(tid);
+	std::map<u64, std::string>::iterator itr = NameList.find(tid);
 	if (itr != NameList.end()) return itr->second.c_str();
 
 	return NULL;
@@ -258,7 +258,7 @@ const char* NandTitle::NameFromIndex(u32 i)
 {
 	if (i >= titleIds.size()) return NULL;
 
-	map<u64, string>::iterator itr = NameList.find(titleIds.at(i));
+	std::map<u64, std::string>::iterator itr = NameList.find(titleIds.at(i));
 	if (itr != NameList.end()) return itr->second.c_str();
 
 	return NULL;

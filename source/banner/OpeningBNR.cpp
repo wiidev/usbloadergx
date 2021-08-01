@@ -330,7 +330,7 @@ u8 *OpeningBNR::LoadGCBNR(const discHdr * header, u32 *len)
 	}
 	else if(header->type == TYPE_GAME_GC_EXTRACTED)
 	{
-		string gamePath = path;
+		std::string gamePath = path;
 		gamePath += "root/";
 		//! open default file first
 		file = fopen((gamePath + "opening.bnr").c_str(), "rb");
@@ -446,7 +446,7 @@ CustomBanner *OpeningBNR::CreateGCBanner(const discHdr * header)
 		// sets the description and converts encodings (Japan and Taiwan)
 		if(header->id[3] == 'J' || header->id[3] == 'W')
 		{
-			string description((char *) openingBnr->description[language].long_description);
+			std::string description((char *) openingBnr->description[language].long_description);
 			banner->SetBannerText("T_short_descript", sj2utf8(description).c_str());
 		}
 		else

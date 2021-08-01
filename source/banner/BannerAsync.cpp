@@ -28,8 +28,8 @@ distribution.
 #include "OpeningBNR.hpp"
 #include "BannerAsync.h"
 
-vector<BannerAsync *> BannerAsync::List;
-queue<BannerAsync *> BannerAsync::DeleteList;
+std::vector<BannerAsync *> BannerAsync::List;
+std::queue<BannerAsync *> BannerAsync::DeleteList;
 lwp_t BannerAsync::Thread = LWP_THREAD_NULL;
 mutex_t BannerAsync::ListLock = LWP_THREAD_NULL;
 BannerAsync * BannerAsync::InUse = NULL;

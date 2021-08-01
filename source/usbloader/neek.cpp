@@ -28,6 +28,11 @@
 #include "sys.h"
 #include "gecko.h"
 
+/* GCC 11 false positives */
+#if __GNUC__ > 10
+#pragma GCC diagnostic ignored "-Wstringop-overread"
+#endif
+
 typedef struct {
 	u32 hdrsize;
 	u32 loadersize;

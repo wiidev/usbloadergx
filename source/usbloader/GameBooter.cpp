@@ -56,6 +56,12 @@
 #include "prompts/ProgressWindow.h"
 #include "neek.hpp"
 
+/* GCC 11 false positives */
+#if __GNUC__ > 10
+#pragma GCC diagnostic ignored "-Warray-bounds"
+#pragma GCC diagnostic ignored "-Wstringop-overflow"
+#endif
+
 //appentrypoint has to be global because of asm
 u32 AppEntrypoint = 0;
 

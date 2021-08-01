@@ -1,19 +1,17 @@
 #include <wctype.h>
 #include "wstring.hpp"
 
-using namespace std;
-
 wString::wString(const wchar_t *s) :
 	std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> >(s)
 {
 }
 
-wString::wString(const basic_string<wchar_t, char_traits<wchar_t> , allocator<wchar_t> > &ws) :
-	basic_string<wchar_t, char_traits<wchar_t> , allocator<wchar_t> > (ws)
+wString::wString(const basic_string<wchar_t, std::char_traits<wchar_t> , std::allocator<wchar_t> > &ws) :
+	std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> > (ws)
 {
 }
 
-wString::wString(const string &s)
+wString::wString(const std::string &s)
 {
 	std::string::size_type size;
 
@@ -23,7 +21,7 @@ wString::wString(const string &s)
 		(*this)[i] = (unsigned char) s[i];
 }
 
-wString &wString::operator=(const string & s)
+wString &wString::operator=(const std::string & s)
 {
 	std::string::size_type size;
 
@@ -68,9 +66,9 @@ void wString::fromUTF8(const char *s)
 	}
 }
 
-string wString::toUTF8(void) const
+std::string wString::toUTF8(void) const
 {
-	string s;
+	std::string s;
 	size_t len = 0;
 	wchar_t wc;
 

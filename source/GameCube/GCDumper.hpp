@@ -30,8 +30,6 @@
 #include <gctypes.h>
 #include <vector>
 
-using namespace std;
-
 class GCDumper
 {
 public:
@@ -42,14 +40,14 @@ public:
 	int ReadDiscInfo(const u64 &game_offset);
 	void SetForceAlign(bool b) { force_align32 = b; }
 	void SetCompressed(bool b) { compressed = b; }
-	vector<struct discHdr> & GetDiscHeaders() { return discHeaders; }
-	vector<u32> & GetDiscSizes() { return gameSizes; }
+	std::vector<struct discHdr> & GetDiscHeaders() { return discHeaders; }
+	std::vector<u32> & GetDiscSizes() { return gameSizes; }
 private:
 	s32 CopyDiscData(FILE *f, u64 offset, u32 length, u8 *buffer);
 
-	vector<struct discHdr> discHeaders;
-	vector<u32> gameSizes;
-	vector<u64> gameOffsets;
+	std::vector<struct discHdr> discHeaders;
+	std::vector<u32> gameSizes;
+	std::vector<u64> gameOffsets;
 	bool force_align32;
 	bool compressed;
 	u32 discWrote;

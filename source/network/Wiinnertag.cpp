@@ -32,12 +32,12 @@
 
 using namespace tinyxml2;
 
-Wiinnertag::Wiinnertag(const string &filepath)
+Wiinnertag::Wiinnertag(const std::string &filepath)
 {
 	ReadXML(filepath);
 }
 
-bool Wiinnertag::ReadXML(const string &filepath)
+bool Wiinnertag::ReadXML(const std::string &filepath)
 {
 	XMLDocument xmlDoc; 
 	if(xmlDoc.LoadFile(filepath.c_str()) != 0)
@@ -88,7 +88,7 @@ bool Wiinnertag::Send(const char *gameID)
 
 bool Wiinnertag::TagGame(const char *gameID)
 {
-	string fullpath = Settings.WiinnertagPath;
+	std::string fullpath = Settings.WiinnertagPath;
 	if(fullpath.size() == 0)
 		return false;
 
@@ -100,14 +100,14 @@ bool Wiinnertag::TagGame(const char *gameID)
 	return Tag.Send(gameID);
 }
 
-bool Wiinnertag::CreateExample(const string &filepath)
+bool Wiinnertag::CreateExample(const std::string &filepath)
 {
 	if(filepath.size() == 0)
 		return false;
 
 	CreateSubfolder(filepath.c_str());
 
-	string fullpath = filepath;
+	std::string fullpath = filepath;
 	if(fullpath[fullpath.size()-1] != '/')
 		fullpath += '/';
 	fullpath += "Wiinnertag.xml";

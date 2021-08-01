@@ -9,6 +9,12 @@
 #include "wdvd.h"
 #include "fstfile.h"
 
+/* GCC 11 false positives */
+#if __GNUC__ > 10
+#pragma GCC diagnostic ignored "-Warray-bounds"
+#pragma GCC diagnostic ignored "-Wstringop-overread"
+#endif
+
 typedef struct _dolheader
 {
 	u32 text_pos[7];

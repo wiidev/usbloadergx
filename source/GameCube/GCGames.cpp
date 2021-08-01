@@ -58,7 +58,7 @@ const char *GCGames::GetPath(const char *gameID) const
 	return "";
 }
 
-void GCGames::LoadGameList(const string &path, vector<struct discHdr> &headerList, vector<string> &pathList)
+void GCGames::LoadGameList(const std::string &path, std::vector<struct discHdr> &headerList, std::vector<std::string> &pathList)
 {
 	struct discHdr tmpHdr;
 	struct stat st;
@@ -183,7 +183,7 @@ void GCGames::LoadGameList(const string &path, vector<struct discHdr> &headerLis
 
 		if (*id != 0 && strlen(title) > 0)
 		{
-			string gamePath = string(path) + dirname + (extracted ? "/" : strrchr(fpath, '/'));
+			std::string gamePath = std::string(path) + dirname + (extracted ? "/" : strrchr(fpath, '/'));
 			memset(&tmpHdr, 0, sizeof(tmpHdr));
 			memcpy(tmpHdr.id, id, sizeof(tmpHdr.id));
 			snprintf(tmpHdr.title, sizeof(tmpHdr.title), "%s", title);
@@ -206,7 +206,7 @@ void GCGames::LoadGameList(const string &path, vector<struct discHdr> &headerLis
 
 			if (tmpHdr.gc_magic == GCGames::MAGIC)
 			{
-				string gamePath = string(path) + dirname + (extracted ? "/" : strrchr(fpath, '/'));
+				std::string gamePath = std::string(path) + dirname + (extracted ? "/" : strrchr(fpath, '/'));
 				tmpHdr.magic = tmpHdr.gc_magic;
 				tmpHdr.type = extracted ? TYPE_GAME_GC_EXTRACTED : TYPE_GAME_GC_IMG;
 				headerList.push_back(tmpHdr);

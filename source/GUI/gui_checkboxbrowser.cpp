@@ -81,7 +81,7 @@ void GuiCheckboxBrowser::Clear()
 	checkBoxList.clear();
 }
 
-bool GuiCheckboxBrowser::AddEntrie(const string &text, bool checked, int style, bool multistates)
+bool GuiCheckboxBrowser::AddEntrie(const std::string &text, bool checked, int style, bool multistates)
 {
 	LOCK(this);
 	int currentSize = checkBoxList.size();

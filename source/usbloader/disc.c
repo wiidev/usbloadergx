@@ -19,6 +19,13 @@
 #include "GameCube/NIN_Config.h"
 #include "gecko.h"
 
+/* GCC 11 false positives */
+#if __GNUC__ > 10
+#pragma GCC diagnostic ignored "-Warray-bounds"
+#pragma GCC diagnostic ignored "-Wstringop-overflow"
+#pragma GCC diagnostic ignored "-Wstringop-overread"
+#endif
+
 // Global app entry point
 extern u32 AppEntrypoint;
 

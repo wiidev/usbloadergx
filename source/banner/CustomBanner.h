@@ -20,8 +20,6 @@
 #include <vector>
 #include "Banner.h"
 
-using namespace std;
-
 class CustomBanner : public Banner
 {
 public:
@@ -37,7 +35,7 @@ public:
 	void SetBannerPaneVisible(const char *pane, bool visible);
 private:
 	u8 *LoadTextureFromPng(const u8 * img, u32 imgSize, int *width, int *height);
-	vector<u16 *> text_list;
+	std::vector<u16 *> text_list;
 };
 
 #endif /*CUSTOM_BANNER_H_*/

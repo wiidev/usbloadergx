@@ -15,6 +15,12 @@
 #include "sys.h"
 #include "gecko.h"
 
+/* GCC 11 false positives */
+#if __GNUC__ > 10
+#pragma GCC diagnostic ignored "-Warray-bounds"
+#pragma GCC diagnostic ignored "-Wstringop-overflow"
+#endif
+
 #define EXECUTE_ADDR	((u8 *) 0x92000000)
 #define BOOTER_ADDR		((u8 *) 0x93000000)
 #define ARGS_ADDR		((u8 *) 0x93200000)

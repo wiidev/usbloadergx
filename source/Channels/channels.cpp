@@ -39,6 +39,12 @@
 #include "cache/cache.hpp"
 #include "channels.h"
 
+/* GCC 11 false positives */
+#if __GNUC__ > 10
+#pragma GCC diagnostic ignored "-Warray-bounds"
+#pragma GCC diagnostic ignored "-Wstringop-overflow"
+#endif
+
 typedef struct _dolheader
 {
     u32 section_pos[18];
@@ -126,7 +132,7 @@ void Channels::InternalGetNandChannelList(u32 type)
     }
 }
 
-vector<struct discHdr> &Channels::GetNandHeaders(void)
+std::vector<struct discHdr> &Channels::GetNandHeaders(void)
 {
     if (NandChannels.empty())
         this->GetChannelList();
@@ -134,7 +140,7 @@ vector<struct discHdr> &Channels::GetNandHeaders(void)
     return NandChannels;
 }
 
-vector<struct discHdr> &Channels::GetEmuHeaders(void)
+std::vector<struct discHdr> &Channels::GetEmuHeaders(void)
 {
     if (Settings.UseGameHeaderCache && isCacheFile(EMUNAND_HEADER_CACHE_FILE))
     {

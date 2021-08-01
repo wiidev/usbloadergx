@@ -141,7 +141,7 @@ int CheatMenu(const char * gameID)
 				{
 					if (cntcheats > 0)
 					{
-						vector<int> vActiveCheats;
+						std::vector<int> vActiveCheats;
 						for (int i = 0; i < cntcheats; i++)
 						{
 							const char *strCheck = cheatslst.GetName(i);

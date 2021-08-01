@@ -37,6 +37,12 @@
 #include "memory/memory.h"
 #include "gecko.h"
 
+/* GCC 11 false positives */
+#if __GNUC__ > 10
+#pragma GCC diagnostic ignored "-Warray-bounds"
+#pragma GCC diagnostic ignored "-Wstringop-overflow"
+#endif
+
 static u8 *codelistend = (u8 *)0x80003000;
 static u8 *codelist = (u8 *)0x800022A8;
 

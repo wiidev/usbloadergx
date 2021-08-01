@@ -51,7 +51,7 @@ void CategorySelectPrompt::onBrowserRefresh()
 	do
 	{
 		bool checked = false;
-		const vector<unsigned int> gameCat = GameCategories[gameHeader->id];
+		const std::vector<unsigned int> gameCat = GameCategories[gameHeader->id];
 
 		for(u32 i = 0; i < gameCat.size(); ++i)
 		{
@@ -82,7 +82,7 @@ void CategorySelectPrompt::OnCheckboxClick(GuiCheckbox *checkBox, int index)
 		return;
 	}
 
-	const vector<unsigned int> gameCat = GameCategories[gameHeader->id];
+	const std::vector<unsigned int> gameCat = GameCategories[gameHeader->id];
 
 	u32 i;
 	for(i = 0; i < gameCat.size(); ++i)

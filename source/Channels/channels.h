@@ -30,8 +30,6 @@
 #include <gccore.h>
 #include "usbloader/disc.h"
 
-using namespace std;
-
 class Channels
 {
 public:
@@ -46,8 +44,8 @@ public:
 
 	void GetChannelList();
 	void GetEmuChannelList();
-	vector<struct discHdr> & GetNandHeaders(void);
-	vector<struct discHdr> & GetEmuHeaders(void);
+	std::vector<struct discHdr> & GetNandHeaders(void);
+	std::vector<struct discHdr> & GetEmuHeaders(void);
 private:
 	static Channels *instance;
 
@@ -58,8 +56,8 @@ private:
 	bool ParseTitleDir(char *path, int language);
 	bool GetEmuChanTitle(char *tmdpath, int language, std::string &Title);
 
-	vector<struct discHdr> NandChannels;
-	vector<struct discHdr> EmuChannels;
+	std::vector<struct discHdr> NandChannels;
+	std::vector<struct discHdr> EmuChannels;
 };
 
 #endif

@@ -27,35 +27,33 @@
 #include <map>
 #include <string>
 
-using namespace std;
-
 class CCategoryList
 {
 	public:
 		CCategoryList();
-		bool Load(string filepath);
+		bool Load(std::string filepath);
 		bool Save();
-		bool AddCategory(const string &name);
-		bool SetCategory(unsigned int id, const string &name);
+		bool AddCategory(const std::string &name);
+		bool SetCategory(unsigned int id, const std::string &name);
 		void RemoveCategory(unsigned int id);
-		void RemoveCategory(const string &name);
+		void RemoveCategory(const std::string &name);
 		bool goToFirst() { listIter = nameList.begin(); return true; }
 		bool goToNext() { listIter++; return listIter != nameList.end(); }
 		unsigned int getCurrentID() const { return listIter->first; }
-		const string &getCurrentName() const { return listIter->second; }
+		const std::string &getCurrentName() const { return listIter->second; }
 		const char * operator[](unsigned int id);
 		const char *at(unsigned int id) { return operator[](id); }
 		void goToNextCicle()  { listIter++; if(listIter == nameList.end()) listIter = nameList.begin(); }
 		void goToPreviousCicle()  { if(listIter == nameList.begin())  listIter = nameList.end(); listIter--; }
-		bool findCategory(const string &name);
+		bool findCategory(const std::string &name);
 		bool findCategory(unsigned int id) { listIter = nameList.find(id); return listIter != nameList.end(); };
 		int pos() const { return distance(nameList.begin(), listIter); }
 		int size() const { return nameList.size(); }
 		void clear();
 	private:
-		string configPath;
-		map<unsigned int, string>::const_iterator listIter;
-		map<unsigned int, string> nameList;
+		std::string configPath;
+		std::map<unsigned int, std::string>::const_iterator listIter;
+		std::map<unsigned int, std::string> nameList;
 };
 
 #endif

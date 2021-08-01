@@ -26,8 +26,6 @@
 int nintendontBuildDate(const char *NIN_loader_path, char* NINBuildDate);
 int nintendontVersion(const char *NIN_loader_path, char* NINVersion, int len);
 
-using namespace std;
-
 class GCGames
 {
 public:
@@ -40,7 +38,7 @@ public:
 
 	u32 LoadAllGames(void);
 
-	void LoadGameList(const string &path, vector<struct discHdr> &headerList, vector<string> &pathList);
+	void LoadGameList(const std::string &path, std::vector<struct discHdr> &headerList, std::vector<std::string> &pathList);
 
 	bool RemoveGame(const char *gameID);
 	bool RemoveSDGame(const char *gameID);
@@ -48,14 +46,14 @@ public:
 
 	const char *GetPath(const char *gameID) const;
 
-	vector<struct discHdr> & GetHeaders(void)
+	std::vector<struct discHdr> & GetHeaders(void)
 	{
 		LoadAllGames();
 
 		return HeaderList;
 	}
 
-	vector<struct discHdr> & GetSDHeaders(void) {
+	std::vector<struct discHdr> & GetSDHeaders(void) {
 		return sdGCList;
 	}
 
@@ -65,10 +63,10 @@ private:
 
 	static GCGames *instance;
 
-	vector<string> PathList;
-	vector<struct discHdr> HeaderList;
-	vector<struct discHdr> sdGCList;
-	vector<string> sdGCPathList;
+	std::vector<std::string> PathList;
+	std::vector<struct discHdr> HeaderList;
+	std::vector<struct discHdr> sdGCList;
+	std::vector<std::string> sdGCPathList;
 };
 
 #endif

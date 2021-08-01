@@ -9,8 +9,6 @@
 #define GAMECUBE_HEADER_CACHE_FILE "GAMECUBE.cache"
 #define EMUNAND_HEADER_CACHE_FILE "EMUNAND.cache"
 
-using namespace std;
-
 struct gameHdr
 {
     /* Game ID */
@@ -33,22 +31,22 @@ struct gcCache
 };
 
 // emuNAND
-void SaveGameHeaderCache(vector<struct discHdr> &list);
-void LoadGameHeaderCache(vector<struct discHdr> &list);
+void SaveGameHeaderCache(std::vector<struct discHdr> &list);
+void LoadGameHeaderCache(std::vector<struct discHdr> &list);
 
 // Wii
-void SaveGameHeaderCache(vector<struct discHdr> &list, vector<int> &plist);
-void LoadGameHeaderCache(vector<struct discHdr> &list, vector<int> &plist);
+void SaveGameHeaderCache(std::vector<struct discHdr> &list, std::vector<int> &plist);
+void LoadGameHeaderCache(std::vector<struct discHdr> &list, std::vector<int> &plist);
 
 // GameCube
-void SaveGameHeaderCache(vector<struct discHdr> &list, vector<string> &plist);
-void LoadGameHeaderCache(vector<struct discHdr> &list, vector<string> &plist);
+void SaveGameHeaderCache(std::vector<struct discHdr> &list, std::vector<std::string> &plist);
+void LoadGameHeaderCache(std::vector<struct discHdr> &list, std::vector<std::string> &plist);
 
 void ResetGameHeaderCache();
 
-void SaveFilteredListCache(vector<struct discHdr *> &list, const wchar_t *gameFilter);
-void LoadFilteredListCache(vector<struct discHdr *> &list, const wchar_t *gameFilter);
+void SaveFilteredListCache(std::vector<struct discHdr *> &list, const wchar_t *gameFilter);
+void LoadFilteredListCache(std::vector<struct discHdr *> &list, const wchar_t *gameFilter);
 
-string FilteredListCacheFileName(const wchar_t *gameFilter);
-string FilteredListCacheFileName();
-bool isCacheFile(string filename);
+std::string FilteredListCacheFileName(const wchar_t *gameFilter);
+std::string FilteredListCacheFileName();
+bool isCacheFile(std::string filename);

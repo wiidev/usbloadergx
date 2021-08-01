@@ -13,6 +13,13 @@
 #include "settings/SettingsEnums.h"
 #include "svnrev.h"
 
+/* GCC 11 false positives */
+#if __GNUC__ > 10
+#pragma GCC diagnostic ignored "-Warray-bounds"
+#pragma GCC diagnostic ignored "-Wstringop-overflow"
+#pragma GCC diagnostic ignored "-Wstringop-overread"
+#endif
+
 typedef struct _appDOL
 {
     u8 *dst;

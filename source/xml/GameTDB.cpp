@@ -73,8 +73,8 @@ bool GameTDB::OpenFile(const char * filepath)
 	if(file)
 	{
 		int pos;
-		string OffsetsPath = filepath;
-		if((pos = OffsetsPath.find_last_of('/')) != (int) string::npos)
+		std::string OffsetsPath = filepath;
+		if((pos = OffsetsPath.find_last_of('/')) != (int) std::string::npos)
 			OffsetsPath[pos] = '\0';
 		else
 			OffsetsPath.clear(); //! Relative path
@@ -88,7 +88,7 @@ bool GameTDB::OpenFile(const char * filepath)
 void GameTDB::CloseFile()
 {
 	OffsetMap.clear();
-	vector<GameOffsets>().swap(OffsetMap);
+	std::vector<GameOffsets>().swap(OffsetMap);
 
 	if(GameNodeCache)
 		delete [] GameNodeCache;
@@ -104,7 +104,7 @@ bool GameTDB::LoadGameOffsets(const char * path)
 	if(!path)
 		return false;
 
-	string OffsetDBPath = path;
+	std::string OffsetDBPath = path;
 	if(strlen(path) > 0 && path[strlen(path)-1] != '/')
 		OffsetDBPath += '/';
 	OffsetDBPath += NAME_OFFSET_DB;
@@ -467,7 +467,7 @@ bool GameTDB::ParseFile()
 	return true;
 }
 
-bool GameTDB::GetTitle(const char * id, string & title)
+bool GameTDB::GetTitle(const char * id, std::string & title)
 {
 	if(!id)
 		return false;
@@ -501,7 +501,7 @@ bool GameTDB::GetTitle(const char * id, string & title)
 	return true;
 }
 
-bool GameTDB::GetSynopsis(const char * id, string & synopsis)
+bool GameTDB::GetSynopsis(const char * id, std::string & synopsis)
 {
 	if(!id)
 		return false;
@@ -535,7 +535,7 @@ bool GameTDB::GetSynopsis(const char * id, string & synopsis)
 	return true;
 }
 
-bool GameTDB::GetRegion(const char * id, string & region)
+bool GameTDB::GetRegion(const char * id, std::string & region)
 {
 	if(!id)
 		return false;
@@ -558,7 +558,7 @@ bool GameTDB::GetRegion(const char * id, string & region)
 	return true;
 }
 
-bool GameTDB::GetDeveloper(const char * id, string & dev)
+bool GameTDB::GetDeveloper(const char * id, std::string & dev)
 {
 	if(!id)
 		return false;
@@ -581,7 +581,7 @@ bool GameTDB::GetDeveloper(const char * id, string & dev)
 	return true;
 }
 
-bool GameTDB::GetPublisher(const char * id, string & pub)
+bool GameTDB::GetPublisher(const char * id, std::string & pub)
 {
 	if(!id)
 		return false;
@@ -651,7 +651,7 @@ unsigned int GameTDB::GetPublishDate(const char * id)
 	return ((year & 0xFFFF) << 16 | (month & 0xFF) << 8 | (day & 0xFF));
 }
 
-bool GameTDB::GetGenreList(const char * id, vector<string> & genre)
+bool GameTDB::GetGenreList(const char * id, std::vector<std::string> & genre)
 {
 	if(!id)
 		return false;
@@ -706,7 +706,7 @@ bool GameTDB::GetGenreList(const char * id, vector<string> & genre)
 	return true;
 }
 
-void GameTDB::TranslateGenres(vector<string> &GenreList)
+void GameTDB::TranslateGenres(std::vector<std::string> &GenreList)
 {
 	char * data = GetGameNode("gnrmap");
 	if(!data)
@@ -716,7 +716,7 @@ void GameTDB::TranslateGenres(vector<string> &GenreList)
 	{
 		for(unsigned int n = 0; n < 2; n++)
 		{
-			string nodeStart;
+			std::string nodeStart;
 
 			if(n == 0)
 				nodeStart = "<genre name=\"";
@@ -738,7 +738,7 @@ void GameTDB::TranslateGenres(vector<string> &GenreList)
 			if(!genreNodeEnd)
 				continue;
 
-			string localStr = "<locale lang=\"";
+			std::string localStr = "<locale lang=\"";
 			localStr += LangCode;
 			localStr += "\">";
 
@@ -904,7 +904,7 @@ int GameTDB::GetRating(const char * id)
 	return rating;
 }
 
-bool GameTDB::GetRatingValue(const char * id, string & rating_value)
+bool GameTDB::GetRatingValue(const char * id, std::string & rating_value)
 {
 	if(!id)
 		return false;
@@ -934,7 +934,7 @@ bool GameTDB::GetRatingValue(const char * id, string & rating_value)
 	return true;
 }
 
-int GameTDB::GetRatingDescriptorList(const char * id, vector<string> & desc_list)
+int GameTDB::GetRatingDescriptorList(const char * id, std::vector<std::string> & desc_list)
 {
 	if(!id)
 		return -1;
@@ -980,7 +980,7 @@ int GameTDB::GetRatingDescriptorList(const char * id, vector<string> & desc_list
 	return desc_list.size();
 }
 
-void GameTDB::TranslateDescriptors(vector<string> &DescList)
+void GameTDB::TranslateDescriptors(std::vector<std::string> &DescList)
 {
 	char * data = GetGameNode("dscmap");
 	if(!data)
@@ -988,7 +988,7 @@ void GameTDB::TranslateDescriptors(vector<string> &DescList)
 
 	for(unsigned int i = 0; i < DescList.size(); ++i)
 	{
-		string nodeStart = "<descriptor name=\"";
+		std::string nodeStart = "<descriptor name=\"";
 		nodeStart += DescList[i];
 
 		const char *genreNode = strcasestr(data, nodeStart.c_str());
@@ -1001,7 +1001,7 @@ void GameTDB::TranslateDescriptors(vector<string> &DescList)
 		if(!genreNodeEnd)
 			continue;
 
-		string localStr = "<locale lang=\"";
+		std::string localStr = "<locale lang=\"";
 		localStr += LangCode;
 		localStr += "\">";
 
@@ -1060,7 +1060,7 @@ int GameTDB::GetWifiPlayers(const char * id)
 	return players;
 }
 
-int GameTDB::GetWifiFeatureList(const char * id, vector<string> & feat_list)
+int GameTDB::GetWifiFeatureList(const char * id, std::vector<std::string> & feat_list)
 {
 	if(!id)
 		return -1;
@@ -1133,7 +1133,7 @@ int GameTDB::GetPlayers(const char * id)
 	return players;
 }
 
-int GameTDB::GetAccessoirList(const char * id, vector<Accessoir> & acc_list)
+int GameTDB::GetAccessoirList(const char * id, std::vector<Accessoir> & acc_list)
 {
 	if(!id)
 		return -1;
@@ -1205,7 +1205,7 @@ int GameTDB::GetCaseColor(const char * id)
 	return color;
 }
 
-bool GameTDB::GetGameType(const char * id, string &GameType)
+bool GameTDB::GetGameType(const char * id, std::string &GameType)
 {
 	if(!id)
 		return false;

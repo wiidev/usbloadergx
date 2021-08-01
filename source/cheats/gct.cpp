@@ -42,25 +42,25 @@ void GCTCheats::Clear(void)
 
 }
 
-string GCTCheats::getGameName(void)
+std::string GCTCheats::getGameName(void)
 {
 	return sGameTitle;
 }
 
-string GCTCheats::getGameID(void)
+std::string GCTCheats::getGameID(void)
 {
 	return sGameID;
 }
 
-vector<unsigned int> GCTCheats::getCheat(int nr)
+std::vector<unsigned int> GCTCheats::getCheat(int nr)
 {
 	if((unsigned int)nr >= cheatList.size())
-		return vector<unsigned int>();
+		return std::vector<unsigned int>();
 
 	return cheatList[nr].sCheats;
 }
 
-string GCTCheats::getCheatName(int nr)
+std::string GCTCheats::getCheatName(int nr)
 {
 	if((unsigned int)nr >= cheatList.size())
 		return ERRORRANGE;
@@ -68,7 +68,7 @@ string GCTCheats::getCheatName(int nr)
 	return cheatList[nr].sCheatName;
 }
 
-string GCTCheats::getCheatComment(int nr)
+std::string GCTCheats::getCheatComment(int nr)
 {
 	if((unsigned int)nr >= cheatList.size())
 		return ERRORRANGE;
@@ -76,7 +76,7 @@ string GCTCheats::getCheatComment(int nr)
 	return cheatList[nr].sCheatComment;
 }
 
-int GCTCheats::createGCT(const vector<int> &vCheats, const char * filename)
+int GCTCheats::createGCT(const std::vector<int> &vCheats, const char * filename)
 {
 	if (vCheats.size() == 0 || !filename)
 		return 0;
@@ -95,7 +95,7 @@ int GCTCheats::createGCT(const vector<int> &vCheats, const char * filename)
 		if((unsigned int)vCheats[c] >= cheatList.size())
 			continue;
 
-		vector<unsigned int> &cheatBuf = cheatList[vCheats[c]].sCheats;
+		std::vector<unsigned int> &cheatBuf = cheatList[vCheats[c]].sCheats;
 		if(cheatBuf.size() > 0)
 			fwrite((char*)&cheatBuf[0], cheatBuf.size() * sizeof(unsigned int), 1, pFile);
 
@@ -223,7 +223,7 @@ bool GCTCheats::IsCheatIncluded(int iCheat, const unsigned char *gctBuf, unsigne
 	if(!gctBuf || (unsigned int)iCheat >= cheatList.size())
 		return false;
 
-	vector<unsigned int> &Cheat = cheatList[iCheat].sCheats;
+	std::vector<unsigned int> &Cheat = cheatList[iCheat].sCheats;
 	int len = Cheat.size() * sizeof(unsigned int);
 
 	for(unsigned int i = sizeof(GCT_Header); i + len <= gctSize - sizeof(GCT_Footer); i += 4)

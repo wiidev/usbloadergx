@@ -21,9 +21,9 @@ void ResetGameHeaderCache()
 }
 
 // emuNAND
-void SaveGameHeaderCache(vector<struct discHdr> &list)
+void SaveGameHeaderCache(std::vector<struct discHdr> &list)
 {
-    string path = string(Settings.GameHeaderCachePath) + EMUNAND_HEADER_CACHE_FILE;
+    std::string path = std::string(Settings.GameHeaderCachePath) + EMUNAND_HEADER_CACHE_FILE;
 
     if (!CheckFile(Settings.GameHeaderCachePath))
         CreateSubfolder(Settings.GameHeaderCachePath);
@@ -38,9 +38,9 @@ void SaveGameHeaderCache(vector<struct discHdr> &list)
     fclose(cache);
 }
 
-void LoadGameHeaderCache(vector<struct discHdr> &list)
+void LoadGameHeaderCache(std::vector<struct discHdr> &list)
 {
-    string path = string(Settings.GameHeaderCachePath) + EMUNAND_HEADER_CACHE_FILE;
+    std::string path = std::string(Settings.GameHeaderCachePath) + EMUNAND_HEADER_CACHE_FILE;
 
     FILE *cache = fopen(path.c_str(), "rb");
 
@@ -66,9 +66,9 @@ void LoadGameHeaderCache(vector<struct discHdr> &list)
 }
 
 // Wii
-void SaveGameHeaderCache(vector<struct discHdr> &list, vector<int> &plist)
+void SaveGameHeaderCache(std::vector<struct discHdr> &list, std::vector<int> &plist)
 {
-    vector<struct wiiCache> wiictmp;
+    std::vector<struct wiiCache> wiictmp;
     struct wiiCache gtmp;
 
     for (u32 i = 0; i < list.size(); ++i)
@@ -79,7 +79,7 @@ void SaveGameHeaderCache(vector<struct discHdr> &list, vector<int> &plist)
         wiictmp.push_back(gtmp);
     }
 
-    string path = string(Settings.GameHeaderCachePath) + WII_HEADER_CACHE_FILE;
+    std::string path = std::string(Settings.GameHeaderCachePath) + WII_HEADER_CACHE_FILE;
 
     if (!CheckFile(Settings.GameHeaderCachePath))
         CreateSubfolder(Settings.GameHeaderCachePath);
@@ -94,9 +94,9 @@ void SaveGameHeaderCache(vector<struct discHdr> &list, vector<int> &plist)
     fclose(cache);
 }
 
-void LoadGameHeaderCache(vector<struct discHdr> &list, vector<int> &plist)
+void LoadGameHeaderCache(std::vector<struct discHdr> &list, std::vector<int> &plist)
 {
-    string path = string(Settings.GameHeaderCachePath) + WII_HEADER_CACHE_FILE;
+    std::string path = std::string(Settings.GameHeaderCachePath) + WII_HEADER_CACHE_FILE;
 
     FILE *cache = fopen(path.c_str(), "rb");
 
@@ -124,9 +124,9 @@ void LoadGameHeaderCache(vector<struct discHdr> &list, vector<int> &plist)
 }
 
 // GameCube
-void SaveGameHeaderCache(vector<struct discHdr> &list, vector<string> &plist)
+void SaveGameHeaderCache(std::vector<struct discHdr> &list, std::vector<std::string> &plist)
 {
-    vector<struct gcCache> gcctmp;
+    std::vector<struct gcCache> gcctmp;
     struct gcCache gtmp;
 
     for (u32 i = 0; i < list.size(); ++i)
@@ -139,7 +139,7 @@ void SaveGameHeaderCache(vector<struct discHdr> &list, vector<string> &plist)
         gcctmp.push_back(gtmp);
     }
 
-    string path = string(Settings.GameHeaderCachePath) + GAMECUBE_HEADER_CACHE_FILE;
+    std::string path = std::string(Settings.GameHeaderCachePath) + GAMECUBE_HEADER_CACHE_FILE;
 
     if (!CheckFile(Settings.GameHeaderCachePath))
         CreateSubfolder(Settings.GameHeaderCachePath);
@@ -154,9 +154,9 @@ void SaveGameHeaderCache(vector<struct discHdr> &list, vector<string> &plist)
     fclose(cache);
 }
 
-void LoadGameHeaderCache(vector<struct discHdr> &list, vector<string> &plist)
+void LoadGameHeaderCache(std::vector<struct discHdr> &list, std::vector<std::string> &plist)
 {
-    string path = string(Settings.GameHeaderCachePath) + GAMECUBE_HEADER_CACHE_FILE;
+    std::string path = std::string(Settings.GameHeaderCachePath) + GAMECUBE_HEADER_CACHE_FILE;
 
     FILE *cache = fopen(path.c_str(), "rb");
 
@@ -178,15 +178,15 @@ void LoadGameHeaderCache(vector<struct discHdr> &list, vector<string> &plist)
         fread((void *)&gcctmp, 1, sizeof(struct gcCache), cache);
         list.push_back(gcctmp.header);
 
-        string tmp((char *)gcctmp.path);
+        std::string tmp((char *)gcctmp.path);
         plist.push_back(tmp);
     }
     fclose(cache);
 }
 
-void SaveFilteredListCache(vector<struct discHdr *> &list, const wchar_t *gameFilter)
+void SaveFilteredListCache(std::vector<struct discHdr *> &list, const wchar_t *gameFilter)
 {
-    string path = string(Settings.GameHeaderCachePath) + FilteredListCacheFileName(gameFilter);
+    std::string path = std::string(Settings.GameHeaderCachePath) + FilteredListCacheFileName(gameFilter);
 
     if (!CheckFile(Settings.GameHeaderCachePath))
         CreateSubfolder(Settings.GameHeaderCachePath);
@@ -196,7 +196,7 @@ void SaveFilteredListCache(vector<struct discHdr *> &list, const wchar_t *gameFi
     if (!cache)
         return;
 
-    vector<struct gameHdr> tmplist;
+    std::vector<struct gameHdr> tmplist;
     struct gameHdr tmp;
 
     for (u32 i = 0; i < list.size(); ++i)
@@ -209,9 +209,9 @@ void SaveFilteredListCache(vector<struct discHdr *> &list, const wchar_t *gameFi
     fclose(cache);
 }
 
-void LoadFilteredListCache(vector<struct discHdr *> &list, const wchar_t *gameFilter)
+void LoadFilteredListCache(std::vector<struct discHdr *> &list, const wchar_t *gameFilter)
 {
-    string path = string(Settings.GameHeaderCachePath) + FilteredListCacheFileName(gameFilter);
+    std::string path = std::string(Settings.GameHeaderCachePath) + FilteredListCacheFileName(gameFilter);
 
     if (!CheckFile(Settings.GameHeaderCachePath))
         CreateSubfolder(Settings.GameHeaderCachePath);
@@ -238,7 +238,7 @@ void LoadFilteredListCache(vector<struct discHdr *> &list, const wchar_t *gameFi
 
         if (!found)
         {
-            vector<struct discHdr> &tmplist = gameList.GetFullGameList();
+            std::vector<struct discHdr> &tmplist = gameList.GetFullGameList();
             for (u32 c = 0; c < tmplist.size(); ++c)
             {
                 struct discHdr *header = &tmplist[c];
@@ -253,7 +253,7 @@ void LoadFilteredListCache(vector<struct discHdr *> &list, const wchar_t *gameFi
 
         if (!found)
         {
-            vector<struct discHdr> &tmplist = GCGames::Instance()->GetHeaders();
+            std::vector<struct discHdr> &tmplist = GCGames::Instance()->GetHeaders();
             for (u32 c = 0; c < tmplist.size(); ++c)
             {
                 struct discHdr *header = &tmplist[c];
@@ -268,7 +268,7 @@ void LoadFilteredListCache(vector<struct discHdr *> &list, const wchar_t *gameFi
 
         if (!found)
         {
-            vector<struct discHdr> &tmplist = Channels::Instance()->GetNandHeaders();
+            std::vector<struct discHdr> &tmplist = Channels::Instance()->GetNandHeaders();
             for (u32 c = 0; c < tmplist.size(); ++c)
             {
                 struct discHdr *header = &tmplist[c];
@@ -283,7 +283,7 @@ void LoadFilteredListCache(vector<struct discHdr *> &list, const wchar_t *gameFi
 
         if (!found)
         {
-            vector<struct discHdr> &tmplist = Channels::Instance()->GetEmuHeaders();
+            std::vector<struct discHdr> &tmplist = Channels::Instance()->GetEmuHeaders();
             for (u32 c = 0; c < tmplist.size(); ++c)
             {
                 struct discHdr *header = &tmplist[c];
@@ -300,16 +300,16 @@ void LoadFilteredListCache(vector<struct discHdr *> &list, const wchar_t *gameFi
     fclose(cache);
 }
 
-string FilteredListCacheFileName(const wchar_t *gameFilter)
+std::string FilteredListCacheFileName(const wchar_t *gameFilter)
 {
-    string tmp;
+    std::string tmp;
     tmp = "FL";
-    tmp += "_" + to_string(Settings.LoaderMode);
-    tmp += "_" + to_string(Settings.GameSort);
+    tmp += "_" + std::to_string(Settings.LoaderMode);
+    tmp += "_" + std::to_string(Settings.GameSort);
     if (gameFilter)
     {
-        wstring ws(gameFilter);
-        string gf(ws.begin(), ws.end());
+        std::wstring ws(gameFilter);
+        std::string gf(ws.begin(), ws.end());
         if ((gf.length()) > 0)
             tmp += "_" + gf;
     }
@@ -317,19 +317,19 @@ string FilteredListCacheFileName(const wchar_t *gameFilter)
     return tmp;
 }
 
-string FilteredListCacheFileName()
+std::string FilteredListCacheFileName()
 {
-    string tmp;
+    std::string tmp;
     tmp = "FL";
-    tmp += "_" + to_string(Settings.LoaderMode);
-    tmp += "_" + to_string(Settings.GameSort);
+    tmp += "_" + std::to_string(Settings.LoaderMode);
+    tmp += "_" + std::to_string(Settings.GameSort);
     tmp += ".cache";
     return tmp;
 }
 
-bool isCacheFile(string filename)
+bool isCacheFile(std::string filename)
 {
-    string path = string(Settings.GameHeaderCachePath) + filename;
+    std::string path = std::string(Settings.GameHeaderCachePath) + filename;
 
     if (CheckFile(path.c_str()))
         return true;
