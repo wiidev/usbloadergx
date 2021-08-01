@@ -49,7 +49,7 @@ cat <<EOF > ./HBC/meta.xml
 	<release_date>$rev_date</release_date>
 	<!-- remove this line to enable arguments
 	<arguments>
-		<arg>--ios=250</arg>
+		<arg>--bootios=58</arg>
 		<arg>--usbport=0</arg>
 		<arg>--mountusb=1</arg>
 	</arguments>

@@ -5,30 +5,31 @@
 
 class StartUpProcess
 {
-	public:
-		static int Run(int argc, char *argv[]);
-	private:
-		StartUpProcess();
-		~StartUpProcess();
-		int Execute();
-		bool USBSpinUp();
-		void TextFade(int direction);
-		void SetTextf(const char * format, ...);
-		void Draw();
-		static int ParseArguments(int argc, char *argv[]);
-		static int QuickGameBoot(const char * gameID);
+public:
+	static int Run(int argc, char *argv[]);
 
-		bool drawCancel;
+private:
+	StartUpProcess();
+	~StartUpProcess();
+	int Execute(bool quickGameBoot);
+	bool USBSpinUp();
+	void TextFade(int direction);
+	void SetTextf(const char *format, ...);
+	void Draw();
+	static int ParseArguments(int argc, char *argv[]);
+	static int QuickGameBoot(const char *gameID);
 
-		GuiImageData * GXImageData;
-		GuiImage * background;
-		GuiImage * GXImage;
-		GuiText * titleTxt;
-		GuiText * messageTxt;
-		GuiText * versionTxt;
-		GuiText * cancelTxt;
-		GuiButton * cancelBtn;
-		GuiTrigger * trigB;
+	bool drawCancel;
+
+	GuiImageData *GXImageData;
+	GuiImage *background;
+	GuiImage *GXImage;
+	GuiText *titleTxt;
+	GuiText *messageTxt;
+	GuiText *versionTxt;
+	GuiText *cancelTxt;
+	GuiButton *cancelBtn;
+	GuiTrigger *trigB;
 };
 
 #endif

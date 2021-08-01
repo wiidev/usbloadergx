@@ -176,6 +176,13 @@ s32 IosLoader::ReloadIosSafe(s32 ios)
  */
 s32 IosLoader::ReloadIosKeepingRights(s32 ios)
 {
+	PatchAHB();
+	// Reload IOS. MEM2 protection is implicitly re-enabled
+	return IOS_ReloadIOS(ios);
+}
+
+void IosLoader::PatchAHB()
+{
 	if (CheckAHBPROT())
 	{
 		static const u16 ticket_check[] = {
@@ -186,15 +193,14 @@ s32 IosLoader::ReloadIosKeepingRights(s32 ios)
 			0x4698,		  // mov  r8, r3	   ; Store it for the DVD video bitcheck later
 			0x07DB		   // lsls r3, r3, 0x1F ; check AHBPROT bit
 		};
-
-		/* Disable MEM 2 protection */
-		write16(MEM2_PROT, 2);
+		// Disable memory protection
+		write16(MEM2_PROT, 0);
 
 		for (u16 *patchme = ES_MODULE_START; patchme < ES_MODULE_END; patchme++)
 		{
 			if (!memcmp(patchme, ticket_check, sizeof(ticket_check)))
 			{
-				gprintf("ReloadIos: Found TMD access rights check at %p\n", patchme);
+				gprintf("PatchAHB: Found TMD access rights check at %p\n", patchme);
 
 				/* Apply patch */
 				patchme[ES_HACK_OFFSET] = 0x23FF; // li r3, 0xFF ; Set full access rights
@@ -204,9 +210,9 @@ s32 IosLoader::ReloadIosKeepingRights(s32 ios)
 				break;
 			}
 		}
+		// Enable memory protection
+		write16(MEM2_PROT, 1);
 	}
-	// Reload IOS. MEM2 protection is implicitly re-enabled
-	return IOS_ReloadIOS(ios);
 }
 
 /*

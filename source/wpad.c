@@ -5,9 +5,6 @@
 #include "sys.h"
 #include "wpad.h"
 
-/* Constants */
-#define MAX_WIIMOTES	4
-
 extern u8 shutdown;
 
 void __Wpad_PowerCallback(s32 chan)
@@ -35,8 +32,12 @@ void Wpad_Disconnect(void)
 	u32 cnt;
 
 	/* Disconnect Wiimotes */
-	for (cnt = 0; cnt < MAX_WIIMOTES; cnt++)
+	for (cnt = 0; cnt < WPAD_MAX_WIIMOTES; cnt++)
+	{
+		if (WPAD_Probe(cnt, 0) < 0)
+			continue;
 		WPAD_Disconnect(cnt);
+	}
 
 	/* Shutdown Wiimote subsystem */
 	WPAD_Shutdown();

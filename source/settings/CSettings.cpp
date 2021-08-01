@@ -121,6 +121,7 @@ void CSettings::SetDefault()
 	tooltips = ON;
 	gamesound = ON;
 	parentalcontrol = PARENTAL_LVL_ADULT;
+	BootIOS = 58;
 	LoaderIOS = 249;
 	cios = 249;
 	gridRows = 3;
@@ -306,6 +307,8 @@ bool CSettings::Reset()
 
 bool CSettings::Save()
 {
+	// Quick game booting doesn't need to save
+	if (skipSaving) return false;
 	if (!FindConfig()) return false;
 
 	char filedest[300];

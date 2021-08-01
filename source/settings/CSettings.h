@@ -121,6 +121,7 @@ class CSettings
 		short gamesoundvolume;
 		short tooltips;
 		short parentalcontrol;
+		u8 BootIOS;
 		u8 LoaderIOS;
 		u8 cios;
 		short quickboot;
@@ -240,8 +241,9 @@ class CSettings
 		short GCInstallAligned;
 		short PrivateServer;
 
-		// This variable is not saved to the settings file
+		// These variables are not saved to the settings file
 		bool FirstTimeRun;
+		bool skipSaving;
 	protected:
 		bool ValidVersion(FILE * file);
 		bool ValidateURL(char *value, int type = 0);

@@ -212,7 +212,6 @@ LoaderSettings::LoaderSettings()
 
 	oldLoaderMode = Settings.LoaderMode;
 	oldGameCubeSource = Settings.GameCubeSource;
-	oldLoaderIOS = Settings.LoaderIOS;
 }
 
 LoaderSettings::~LoaderSettings()
@@ -232,12 +231,6 @@ LoaderSettings::~LoaderSettings()
 	if(oldGameCubeSource != Settings.GameCubeSource)
 	{
 		GCGames::Instance()->LoadAllGames();
-	}
-	
-	if(oldLoaderIOS != Settings.LoaderIOS)
-	{
-		// edit meta.xml arguments
-		editMetaArguments();
 	}
 }
 

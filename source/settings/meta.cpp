@@ -34,7 +34,7 @@ int updateMetaXML (void)
 		return 0;
 
 	char line[50];
-	snprintf(line, sizeof(line), "--ios=%d", Settings.LoaderIOS);
+	snprintf(line, sizeof(line), "--bootios=%d", Settings.BootIOS);
 	MetaXML.SetArgument(line);
 	snprintf(line, sizeof(line), "--usbport=%d", Settings.USBPort);
 	MetaXML.SetArgument(line);
@@ -73,21 +73,27 @@ int editMetaArguments (void)
 	while (fgets(line, max_line_size, source) != NULL) 
 	{
 		// delete commented lines
+		if( strstr(line, "	<!-- remove this line to enable arguments") != NULL ||
+			strstr(line, "	remove this line to enable arguments -->")   != NULL)
+		{
+			strcpy(line, "");
+		}
+		// delete commented lines (old version)
 		if( strstr(line, "<!--   // remove this line to enable arguments") != NULL ||
 			strstr(line, "// remove this line to enable arguments -->")   != NULL)
 		{
-			strcpy(line, "		\n");
+			strcpy(line, "");
 		}
 
 		// generate argurments
 		if(strstr(line, "<arguments>") != NULL)
 		{
 			fputs(line, destination);
-			snprintf(line, max_line_size, "				<arg>--ios=%d</arg>\n", Settings.LoaderIOS);
+			snprintf(line, max_line_size, "		<arg>--bootios=%d</arg>\n", Settings.BootIOS);
 			fputs(line, destination);
-			snprintf(line, max_line_size, "				<arg>--usbport=%d</arg>\n", Settings.USBPort);
+			snprintf(line, max_line_size, "		<arg>--usbport=%d</arg>\n", Settings.USBPort);
 			fputs(line, destination);
-			snprintf(line, max_line_size, "				<arg>--mountusb=%d</arg>\n", Settings.USBAutoMount);
+			snprintf(line, max_line_size, "		<arg>--mountusb=%d</arg>\n", Settings.USBAutoMount);
 			fputs(line, destination);
 			
 			while(strstr(line, "</arguments>") == NULL)

@@ -38,7 +38,6 @@ class LoaderSettings : public SettingsMenu
 
 		short oldLoaderMode;
 		short oldGameCubeSource;
-		short oldLoaderIOS;
 		OptionList GuiOptions;
 };
 
