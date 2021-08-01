@@ -149,9 +149,6 @@ export OUTPUT	:=	$(CURDIR)/$(TARGET)
 #---------------------------------------------------------------------------------
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
-ifneq ($(IOS),249)
-	@rm -f $(BUILD)/CSettings.o
-endif
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
 channel:
