@@ -130,6 +130,25 @@ Pane* Pane::FindPane(const std::string& find_name)
 	return NULL;
 }
 
+Pane* Pane::FindPanePartial(const std::string& find_name, int len)
+{
+	if(!header)
+		return NULL;
+
+	std::string str(getName());
+	if (str.compare(0, len, find_name) == 0)
+		return this;
+
+	for(u32 i = 0; i < panes.size(); ++i)
+	{
+		Pane *found = panes[i]->FindPanePartial(find_name, len);
+		if (found)
+			return found;
+	}
+
+	return NULL;
+}
+
 void Pane::ProcessHermiteKey(const KeyType& type, float value)
 {
 	if (type.type == ANIMATION_TYPE_VERTEX_COLOR)	// vertex color

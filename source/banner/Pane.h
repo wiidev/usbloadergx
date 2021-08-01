@@ -108,7 +108,8 @@ public:
 
 	bool GetWidescren() const { return ((header->flags & (1 << FLAG_WIDESCREEN)) != 0); }
 
-	Pane* FindPane(const std::string& name);	// recursive
+	Pane* FindPane(const std::string& name);                 // recursive
+	Pane* FindPanePartial(const std::string& name, int len); // recursive
 
 	PaneList panes;
 

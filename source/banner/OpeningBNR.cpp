@@ -42,7 +42,7 @@ distribution.
 #include "wstring.hpp"
 #include "OpeningBNR.hpp"
 
-BNRInstance * BNRInstance::instance = NULL;
+BNRInstance *BNRInstance::instance = NULL;
 
 OpeningBNR::OpeningBNR()
 	: imetHdr(0), filesize(0)
@@ -52,7 +52,7 @@ OpeningBNR::OpeningBNR()
 
 OpeningBNR::~OpeningBNR()
 {
-	if(imetHdr)
+	if (imetHdr)
 		free(imetHdr);
 }
 
@@ -60,19 +60,19 @@ bool OpeningBNR::LoadCachedBNR(const char *id)
 {
 	char path[255];
 	snprintf(path, sizeof(path), "%s%.6s.bnr", Settings.BNRCachePath, id);
-	if((filesize = FileSize(path)) == 0)
+	if ((filesize = FileSize(path)) == 0)
 	{
 		snprintf(path, sizeof(path), "%s%.3s.bnr", Settings.BNRCachePath, id);
-		if((filesize = FileSize(path)) == 0)
+		if ((filesize = FileSize(path)) == 0)
 			return false;
 	}
 
 	FILE *f = fopen(path, "rb");
-	if(!f)
+	if (!f)
 		return false;
 
-	imetHdr = (IMETHeader *) malloc(filesize);
-	if(!imetHdr)
+	imetHdr = (IMETHeader *)malloc(filesize);
+	if (!imetHdr)
 	{
 		fclose(f);
 		return false;
@@ -85,7 +85,7 @@ bool OpeningBNR::LoadCachedBNR(const char *id)
 	{
 		//! check if it's a channel .app file
 		IMETHeader *channelImet = (IMETHeader *)(((u8 *)imetHdr) + 0x40);
-		if(channelImet->fcc != 'IMET')
+		if (channelImet->fcc != 'IMET')
 		{
 			free(imetHdr);
 			imetHdr = NULL;
@@ -108,28 +108,28 @@ void OpeningBNR::WriteCachedBNR(const char *id, const u8 *buffer, u32 size)
 	CreateSubfolder(Settings.BNRCachePath);
 
 	FILE *f = fopen(path, "wb");
-	if(!f)
+	if (!f)
 		return;
 
 	fwrite(buffer, 1, size, f);
 	fclose(f);
 }
 
-bool OpeningBNR::Load(const discHdr * header)
+bool OpeningBNR::Load(const discHdr *header)
 {
-	if(!header)
+	if (!header)
 		return false;
 
-	if(memcmp(gameID, header->id, 6) == 0)
+	if (memcmp(gameID, header->id, 6) == 0)
 		return true;
 
 	memcpy(gameID, header->id, 6);
 
-	if(imetHdr)
+	if (imetHdr)
 		free(imetHdr);
 	imetHdr = NULL;
 
-	switch(header->type)
+	switch (header->type)
 	{
 	case TYPE_GAME_WII_IMG:
 	case TYPE_GAME_WII_DISC:
@@ -140,7 +140,7 @@ bool OpeningBNR::Load(const discHdr * header)
 	case TYPE_GAME_GC_IMG:
 	case TYPE_GAME_GC_DISC:
 	case TYPE_GAME_GC_EXTRACTED:
-		if(!Settings.CacheBNRFiles)
+		if (!Settings.CacheBNRFiles)
 			return false;
 		return LoadCachedBNR((char *)header->id);
 	default:
@@ -150,23 +150,21 @@ bool OpeningBNR::Load(const discHdr * header)
 	return false;
 }
 
-bool OpeningBNR::LoadWiiBanner(const discHdr * header)
+bool OpeningBNR::LoadWiiBanner(const discHdr *header)
 {
-	if(!header || (   (header->type != TYPE_GAME_WII_IMG)
-				   && (header->type != TYPE_GAME_WII_DISC)))
+	if (!header || ((header->type != TYPE_GAME_WII_IMG) && (header->type != TYPE_GAME_WII_DISC)))
 		return false;
 
-
-	if(Settings.CacheBNRFiles && LoadCachedBNR((const char *)header->id))
+	if (Settings.CacheBNRFiles && LoadCachedBNR((const char *)header->id))
 		return true;
 
-	if(header->type == TYPE_GAME_WII_DISC)
+	if (header->type == TYPE_GAME_WII_DISC)
 	{
 		wiidisc_t *wdisc = wd_open_disc(__ReadDVD, 0);
 		if (!wdisc)
 			return false;
 
-		imetHdr = (IMETHeader*) wd_extract_file(wdisc, ALL_PARTITIONS, (char *) "opening.bnr");
+		imetHdr = (IMETHeader *)wd_extract_file(wdisc, ALL_PARTITIONS, (char *)"opening.bnr");
 
 		filesize = wdisc->extracted_size;
 
@@ -174,18 +172,18 @@ bool OpeningBNR::LoadWiiBanner(const discHdr * header)
 	}
 	else
 	{
-		wbfs_disc_t *disc = WBFS_OpenDisc((u8 *) gameID);
+		wbfs_disc_t *disc = WBFS_OpenDisc((u8 *)gameID);
 		if (!disc)
 			return false;
 
-		wiidisc_t *wdisc = wd_open_disc((s32(*)(void *, u32, u32, void *)) wbfs_disc_read, disc);
+		wiidisc_t *wdisc = wd_open_disc((s32(*)(void *, u32, u32, void *))wbfs_disc_read, disc);
 		if (!wdisc)
 		{
 			WBFS_CloseDisc(disc);
 			return false;
 		}
 
-		imetHdr = (IMETHeader*) wd_extract_file(wdisc, ALL_PARTITIONS, (char *) "opening.bnr");
+		imetHdr = (IMETHeader *)wd_extract_file(wdisc, ALL_PARTITIONS, (char *)"opening.bnr");
 
 		filesize = wdisc->extracted_size;
 
@@ -193,7 +191,7 @@ bool OpeningBNR::LoadWiiBanner(const discHdr * header)
 		WBFS_CloseDisc(disc);
 	}
 
-	if(!imetHdr)
+	if (!imetHdr)
 		return false;
 
 	if (imetHdr->fcc != 'IMET')
@@ -203,26 +201,25 @@ bool OpeningBNR::LoadWiiBanner(const discHdr * header)
 		return false;
 	}
 
-	if(Settings.CacheBNRFiles)
-		WriteCachedBNR((const char *) header->id, (u8 *) imetHdr, filesize);
+	if (Settings.CacheBNRFiles)
+		WriteCachedBNR((const char *)header->id, (u8 *)imetHdr, filesize);
 
 	return true;
 }
 
 bool OpeningBNR::LoadChannelBanner(const discHdr *header)
 {
-	if(!header || (header->tid == 0) || (   (header->type != TYPE_GAME_NANDCHAN)
-										 && (header->type != TYPE_GAME_EMUNANDCHAN)))
+	if (!header || (header->tid == 0) || ((header->type != TYPE_GAME_NANDCHAN) && (header->type != TYPE_GAME_EMUNANDCHAN)))
 		return false;
 
-	if(Settings.CacheBNRFiles && LoadCachedBNR((char *) header->id))
+	if (Settings.CacheBNRFiles && LoadCachedBNR((char *)header->id))
 		return true;
 
 	const u64 &tid = header->tid;
 	const char *pathPrefix = (header->type == TYPE_GAME_EMUNANDCHAN) ? Settings.NandEmuChanPath : "";
 
-	imetHdr = (IMETHeader*) Channels::GetOpeningBnr(tid, &filesize, pathPrefix);
-	if(!imetHdr)
+	imetHdr = (IMETHeader *)Channels::GetOpeningBnr(tid, &filesize, pathPrefix);
+	if (!imetHdr)
 		return false;
 
 	if (imetHdr->fcc != 'IMET')
@@ -232,29 +229,29 @@ bool OpeningBNR::LoadChannelBanner(const discHdr *header)
 		return false;
 	}
 
-	if(Settings.CacheBNRFiles)
-		WriteCachedBNR((char *) header->id, (u8 *) imetHdr, filesize);
+	if (Settings.CacheBNRFiles)
+		WriteCachedBNR((char *)header->id, (u8 *)imetHdr, filesize);
 
 	return true;
 }
 
-const u16 * OpeningBNR::GetIMETTitle(int lang)
+const u16 *OpeningBNR::GetIMETTitle(int lang)
 {
-	if(!imetHdr || lang < 0 || lang >= 10)
+	if (!imetHdr || lang < 0 || lang >= 10)
 		return NULL;
 
 	if (imetHdr->fcc != 'IMET')
 		return NULL;
 
-	if(imetHdr->names[lang][0] == 0)
+	if (imetHdr->names[lang][0] == 0)
 		lang = CONF_LANG_ENGLISH;
 
 	return imetHdr->names[lang]; // possible unaligned pointer value
 }
 
-static s32 GC_Disc_Read(void *fp, u32 offset, u32 count, void*iobuf)
+static s32 GC_Disc_Read(void *fp, u32 offset, u32 count, void *iobuf)
 {
-	if(fp)
+	if (fp)
 	{
 		fseek((FILE *)fp, offset, SEEK_SET);
 		return fread(iobuf, 1, count, (FILE *)fp);
@@ -263,72 +260,74 @@ static s32 GC_Disc_Read(void *fp, u32 offset, u32 count, void*iobuf)
 	return __ReadDVDPlain(iobuf, count, offset);
 }
 
-u8 *OpeningBNR::LoadGCBNR(const discHdr * header, u32 *len)
+u8 *OpeningBNR::LoadGCBNR(const discHdr *header, u32 *len)
 {
-	if(!header || (   (header->type != TYPE_GAME_GC_IMG)
-				   && (header->type != TYPE_GAME_GC_DISC)
-				   && (header->type != TYPE_GAME_GC_EXTRACTED)))
+	if (!header || ((header->type != TYPE_GAME_GC_IMG) && (header->type != TYPE_GAME_GC_DISC) && (header->type != TYPE_GAME_GC_EXTRACTED)))
 		return NULL;
 
-	const char *path = GCGames::Instance()->GetPath((char *) header->id);
-	if(!path)
+	const char *path = GCGames::Instance()->GetPath((char *)header->id);
+	if (!path)
 		return NULL;
 
 	FILE *file = NULL;
 	GC_OpeningBnr *openingBnr = NULL;
 
 	// read from file
-	if((header->type == TYPE_GAME_GC_IMG) || (header->type == TYPE_GAME_GC_DISC))
+	if ((header->type == TYPE_GAME_GC_IMG) || (header->type == TYPE_GAME_GC_DISC))
 	{
 		//! open iso file if it's iso
-		if(header->type == TYPE_GAME_GC_IMG)
+		if (header->type == TYPE_GAME_GC_IMG)
 		{
 			file = fopen(path, "rb");
-			if(!file)
+			if (!file)
 				return NULL;
 		}
 
 		gcdisc_t *disc = gc_open_disc(GC_Disc_Read, file);
-		if(!disc) {
+		if (!disc)
+		{
 			fclose(file);
 			return NULL;
 		}
 
-		if(!strcmp(Settings.db_language, "JA")) {
+		if (!strcmp(Settings.db_language, "JA"))
+		{
 			bool loaded = gc_extract_file(disc, "openingJA.bnr");
-			if(!loaded)
+			if (!loaded)
 				loaded = gc_extract_file(disc, "opening.bnr");
-			if(!loaded)
+			if (!loaded)
 				loaded = gc_extract_file(disc, "openingUS.bnr");
-			if(!loaded)
+			if (!loaded)
 				loaded = gc_extract_file(disc, "openingEU.bnr");
 		}
-		else if(!strcmp(Settings.db_language, "EN")) {
+		else if (!strcmp(Settings.db_language, "EN"))
+		{
 			bool loaded = gc_extract_file(disc, "openingUS.bnr");
-			if(!loaded)
+			if (!loaded)
 				loaded = gc_extract_file(disc, "opening.bnr");
-			if(!loaded)
+			if (!loaded)
 				loaded = gc_extract_file(disc, "openingEU.bnr");
-			if(!loaded)
+			if (!loaded)
 				loaded = gc_extract_file(disc, "openingJA.bnr");
 		}
-		else {
+		else
+		{
 			bool loaded = gc_extract_file(disc, "openingEU.bnr");
-			if(!loaded)
+			if (!loaded)
 				loaded = gc_extract_file(disc, "opening.bnr");
-			if(!loaded)
+			if (!loaded)
 				loaded = gc_extract_file(disc, "openingUS.bnr");
-			if(!loaded)
+			if (!loaded)
 				loaded = gc_extract_file(disc, "openingJA.bnr");
 		}
 
-		openingBnr = (GC_OpeningBnr *) disc->extracted_buffer;
-		if(len)
+		openingBnr = (GC_OpeningBnr *)disc->extracted_buffer;
+		if (len)
 			*len = disc->extracted_size;
 
 		gc_close_disc(disc);
 	}
-	else if(header->type == TYPE_GAME_GC_EXTRACTED)
+	else if (header->type == TYPE_GAME_GC_EXTRACTED)
 	{
 		std::string gamePath = path;
 		gamePath += "root/";
@@ -336,69 +335,73 @@ u8 *OpeningBNR::LoadGCBNR(const discHdr * header, u32 *len)
 		file = fopen((gamePath + "opening.bnr").c_str(), "rb");
 
 		// if not found try the region specific ones
-		if(!strcmp(Settings.db_language, "JA")) {
-			if(!file)
+		if (!strcmp(Settings.db_language, "JA"))
+		{
+			if (!file)
 				file = fopen((gamePath + "openingJA.bnr").c_str(), "rb");
-			if(!file)
+			if (!file)
 				file = fopen((gamePath + "openingUS.bnr").c_str(), "rb");
-			if(!file)
+			if (!file)
 				file = fopen((gamePath + "openingEU.bnr").c_str(), "rb");
 		}
-		else if(!strcmp(Settings.db_language, "EN")) {
-			if(!file)
+		else if (!strcmp(Settings.db_language, "EN"))
+		{
+			if (!file)
 				file = fopen((gamePath + "openingUS.bnr").c_str(), "rb");
-			if(!file)
+			if (!file)
 				file = fopen((gamePath + "openingEU.bnr").c_str(), "rb");
-			if(!file)
+			if (!file)
 				file = fopen((gamePath + "openingJA.bnr").c_str(), "rb");
 		}
-		else {
-			if(!file)
+		else
+		{
+			if (!file)
 				file = fopen((gamePath + "openingEU.bnr").c_str(), "rb");
-			if(!file)
+			if (!file)
 				file = fopen((gamePath + "openingUS.bnr").c_str(), "rb");
-			if(!file)
+			if (!file)
 				file = fopen((gamePath + "openingJA.bnr").c_str(), "rb");
 		}
 
 		// file not found
-		if(!file)
+		if (!file)
 			return NULL;
 
 		fseek(file, 0, SEEK_END);
 		int size = ftell(file);
 		rewind(file);
 
-		openingBnr = (GC_OpeningBnr *) malloc(size);
-		if(openingBnr)
+		openingBnr = (GC_OpeningBnr *)malloc(size);
+		if (openingBnr)
 		{
-			if(len)
+			if (len)
 				*len = size;
 			fread(openingBnr, 1, size, file);
 		}
-
 	}
 
-	if(file)
+	if (file)
 		fclose(file);
 
-	if(!openingBnr)
+	if (!openingBnr)
 		return NULL;
 
 	// check magic of the opening bnr
-	if(openingBnr->magic != 'BNR1' && openingBnr->magic != 'BNR2') {
+	if (openingBnr->magic != 'BNR1' && openingBnr->magic != 'BNR2')
+	{
 		free(openingBnr);
 		return NULL;
 	}
 
-	return (u8 *) openingBnr;
+	return (u8 *)openingBnr;
 }
 
-CustomBanner *OpeningBNR::CreateGCBanner(const discHdr * header)
+CustomBanner *OpeningBNR::CreateGCBanner(const discHdr *header)
 {
 	int language = 0;
 	u32 openingBnrSize;
-	GC_OpeningBnr *openingBnr = (GC_OpeningBnr *) LoadGCBNR(header, &openingBnrSize);
+	wString developer;
+	GC_OpeningBnr *openingBnr = (GC_OpeningBnr *)LoadGCBNR(header, &openingBnrSize);
 
 	CustomBanner *banner = new CustomBanner;
 	banner->LoadBanner(Resources::GetFile("custom_banner.bnr"), Resources::GetFileSize("custom_banner.bnr"));
@@ -406,56 +409,52 @@ CustomBanner *OpeningBNR::CreateGCBanner(const discHdr * header)
 
 	banner->SetBannerText("T_PF", tr("GameCube"));
 
-	if(openingBnr)
+	if (openingBnr)
 	{
 		banner->SetBannerTexture("HBPic.tpl", openingBnr->tpl_data, 96, 32, GX_TF_RGB5A3);
 
 		// European opening bnr file
-		if(openingBnr->magic == 'BNR2')
+		if (openingBnr->magic == 'BNR2')
 		{
-			if(!strcmp(Settings.db_language, "DE")) {
+			if (!strcmp(Settings.db_language, "DE"))
 				language = 1;
-			}
-			else if(!strcmp(Settings.db_language, "FR")) {
+			else if (!strcmp(Settings.db_language, "FR"))
 				language = 2;
-			}
-			else if(!strcmp(Settings.db_language, "ES")) {
+			else if (!strcmp(Settings.db_language, "ES"))
 				language = 3;
-			}
-			else if(!strcmp(Settings.db_language, "IT")) {
+			else if (!strcmp(Settings.db_language, "IT"))
 				language = 4;
-			}
-			else if(!strcmp(Settings.db_language, "NL")) {
+			else if (!strcmp(Settings.db_language, "NL"))
 				language = 5;
-			}
 
-			if((0x1820 + sizeof(openingBnr->description[0]) * language) > openingBnrSize) {
+			if ((0x1820 + sizeof(openingBnr->description[0]) * language) > openingBnrSize)
+			{
 				language = 0;
 			}
 		}
 
 		// sets the developer
-		wString str;
-		str.resize(strlen((char *) openingBnr->description[language].developer));
-		for(u32 i = 0; i < str.size(); i++)
-			str[i] = *(openingBnr->description[language].developer + i);
+		developer.resize(strlen((char *)openingBnr->description[language].developer));
+		for (u32 i = 0; i < developer.size(); i++)
+			developer[i] = *(openingBnr->description[language].developer + i);
 
 		banner->SetBannerText("T_Coded_by", tr("Developer:"));
-		banner->SetBannerText("T_coder", str.toUTF8().c_str());
+		banner->SetBannerText("T_coder", developer.toUTF8().c_str());
 
 		// sets the description and converts encodings (Japan and Taiwan)
-		if(header->id[3] == 'J' || header->id[3] == 'W')
+		if (header->id[3] == 'J' || header->id[3] == 'W')
 		{
-			std::string description((char *) openingBnr->description[language].long_description);
+			std::string description((char *)openingBnr->description[language].long_description);
 			banner->SetBannerText("T_short_descript", sj2utf8(description).c_str());
 		}
 		else
 		{
-			str.resize(strlen((char *) openingBnr->description[language].long_description));
-			for(u32 i = 0; i < str.size(); i++)
-				str[i] = *(openingBnr->description[language].long_description + i);
+			wString description;
+			description.resize(strlen((char *)openingBnr->description[language].long_description));
+			for (u32 i = 0; i < description.size(); i++)
+				description[i] = *(openingBnr->description[language].long_description + i);
 
-			banner->SetBannerText("T_short_descript", str.toUTF8().c_str());
+			banner->SetBannerText("T_short_descript", description.toUTF8().c_str());
 		}
 
 		// free buffer
@@ -469,7 +468,13 @@ CustomBanner *OpeningBNR::CreateGCBanner(const discHdr * header)
 		banner->SetBannerText("T_short_descript", " ");
 	}
 
-	banner->SetBannerText("T_name", GameTitles.GetTitle(header));
+	if (strcmp(Settings.db_language, "KO") == 0)
+	{
+		banner->SetBannerText("T_Coded_by", developer.toUTF8().c_str());
+		banner->SetBannerPaneVisible("T_coder", false);
+	}
+	else
+		banner->SetBannerText("T_name", GameTitles.GetTitle(header));
 	banner->SetBannerPaneVisible("Line1", false);
 	banner->SetBannerPaneVisible("Line2", false);
 	banner->SetBannerPaneVisible("T_Released", false);
@@ -481,14 +486,14 @@ CustomBanner *OpeningBNR::CreateGCBanner(const discHdr * header)
 	return banner;
 }
 
-CustomBanner *OpeningBNR::CreateGCIcon(const discHdr * header)
+CustomBanner *OpeningBNR::CreateGCIcon(const discHdr *header)
 {
-	GC_OpeningBnr *openingBnr = (GC_OpeningBnr *) LoadGCBNR(header);
+	GC_OpeningBnr *openingBnr = (GC_OpeningBnr *)LoadGCBNR(header);
 
 	CustomBanner *newBanner = new CustomBanner;
 	newBanner->LoadIcon(Resources::GetFile("custom_banner.bnr"), Resources::GetFileSize("custom_banner.bnr"));
 
-	if(openingBnr)
+	if (openingBnr)
 		newBanner->SetIconTexture("Iconpng.tpl", openingBnr->tpl_data, 96, 32, GX_TF_RGB5A3);
 	else
 		newBanner->SetIconPngImage("Iconpng.tpl", Resources::GetFile("gc_icon_bg.png"), Resources::GetFileSize("gc_icon_bg.png"));
@@ -496,7 +501,7 @@ CustomBanner *OpeningBNR::CreateGCIcon(const discHdr * header)
 	newBanner->SetIconPngImage("HBLogo.tpl", Resources::GetFile("gc_icon_bg.png"), Resources::GetFileSize("gc_icon_bg.png"));
 
 	// free buffer
-	if(openingBnr)
+	if (openingBnr)
 		free(openingBnr);
 
 	return newBanner;

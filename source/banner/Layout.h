@@ -88,6 +88,7 @@ public:
 	void SetLanguage(const std::string& language);
 
 	Pane* FindPane(const std::string& name);
+	Pane* FindPanePartial(const std::string& name);
 	Material* FindMaterial(const std::string& name);
 	Texture *FindTexture(const std::string &name);
 

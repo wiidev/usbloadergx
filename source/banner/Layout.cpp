@@ -368,6 +368,18 @@ Pane* Layout::FindPane(const std::string& find_name)
 	return NULL;
 }
 
+Pane* Layout::FindPanePartial(const std::string& find_name)
+{
+	for(u32 i = 0; i < panes.size(); ++i)
+	{
+		Pane* found = panes[i]->FindPanePartial(find_name, find_name.length());
+		if(found)
+			return found;
+	}
+
+	return NULL;
+}
+
 Material* Layout::FindMaterial(const std::string& find_name)
 {
 	for(u32 i = 0; i < resources.materials.size(); ++i)

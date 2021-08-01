@@ -22,6 +22,7 @@
 #include "banner/OpeningBNR.hpp"
 #include "settings/CSettings.h"
 #include "settings/CGameStatistics.h"
+#include "settings/GameTitles.h"
 #include "settings/menus/GameSettingsMenu.hpp"
 #include "SystemMenu/SystemMenuResources.h"
 #include "prompts/GameWindow.hpp"
@@ -116,6 +117,12 @@ BannerWindow::BannerWindow(GameBrowseMenu *m, struct discHdr *header)
 	settingsBtn->SetSoundClick(btnSoundClick2);
 	settingsBtn->SetPosition(-120, 175);
 	settingsBtn->SetTrigger(trigA);
+	if (strcmp(Settings.db_language, "KO") == 0)
+	{
+		settingsBtnTxt = new GuiText(tr("Settings"), 35, thColor("r=0 g=0 b=0 a=255 - game window size text color"));
+		settingsBtn->SetPosition(Settings.widescreen ? -113 : -131, 161);
+		settingsBtn->SetLabel(settingsBtnTxt);
+	}
 
 	startBtn = new GuiButton(215, 75);
 	startBtn->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
@@ -123,6 +130,12 @@ BannerWindow::BannerWindow(GameBrowseMenu *m, struct discHdr *header)
 	startBtn->SetSoundClick(btnSoundClick2);
 	startBtn->SetPosition(110, 175);
 	startBtn->SetTrigger(trigA);
+	if (strcmp(Settings.db_language, "KO") == 0)
+	{	
+		startBtnTxt = new GuiText(tr("Start"), 35, thColor("r=0 g=0 b=0 a=255 - game window size text color"));
+		startBtn->SetPosition(Settings.widescreen ? 114 : 132, 161);
+		startBtn->SetLabel(startBtnTxt);
+	}
 
 	backBtn = new GuiButton(215, 75);
 	backBtn->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
@@ -131,6 +144,11 @@ BannerWindow::BannerWindow(GameBrowseMenu *m, struct discHdr *header)
 	backBtn->SetPosition(-screenwidth, -screenheight); // set out of screen
 	backBtn->SetTrigger(0, trigA);
 	backBtn->SetTrigger(1, trigB);
+	if (strcmp(Settings.db_language, "KO") == 0)
+	{
+		backBtnTxt = new GuiText(tr("Back"), 35, thColor("r=0 g=0 b=0 a=255 - game window size text color"));
+		backBtn->SetLabel(backBtnTxt);
+	}
 
 	// Set favorite button position
 	int xPos = -198-(3*27)-14;
@@ -254,12 +272,19 @@ BannerWindow::BannerWindow(GameBrowseMenu *m, struct discHdr *header)
 		Append(btnRight);
 	}
 
-	bannerFrame.SetButtonBText(tr("Start"));
+	if (strcmp(Settings.db_language, "KO") == 0)
+	{
+		bannerFrame.SetButtonAText(" ");
+		bannerFrame.SetButtonBText(" ");
+	}
+	else
+		bannerFrame.SetButtonBText(tr("Start"));
 
 	//check if unlocked
 	if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_GAME_SETTINGS))
 	{
-		bannerFrame.SetButtonAText(tr("Settings"));
+		if (strcmp(Settings.db_language, "KO") != 0)
+			bannerFrame.SetButtonAText(tr("Settings"));
 		Append(settingsBtn);
 		if(Settings.bannerFavIcon != BANNER_FAVICON_OFF)
 			for(int i = 0; i < FAVORITE_STARS; ++i)
@@ -267,11 +292,25 @@ BannerWindow::BannerWindow(GameBrowseMenu *m, struct discHdr *header)
 	}
 	else
 	{
-		bannerFrame.SetButtonAText(tr("Back"));
-		backBtn->SetPosition(-120, 175);
+		if (strcmp(Settings.db_language, "KO") == 0)
+		{
+			backBtn->SetPosition(Settings.widescreen ? -113 : -131, 161);
+		}
+		else
+		{
+			bannerFrame.SetButtonAText(tr("Back"));
+			backBtn->SetPosition(-120, 175);
+		}
 	}
 
 	Append(startBtn); //! Appending the disc on top of all
+
+	if (strcmp(Settings.db_language, "KO") == 0)
+	{
+		titleName = new GuiText((char *) NULL, 29, (GXColor) {255, 255, 255, 255});
+		titleName->SetFontSize(29);
+		titleName->SetScale(0.8f);
+	}
 
 	ChangeGame(false);
 }
@@ -299,6 +338,14 @@ BannerWindow::~BannerWindow()
 	delete btnRightImg;
 
 	delete playcntTxt;
+
+	if (strcmp(Settings.db_language, "KO") == 0)
+	{
+		delete startBtnTxt;
+		delete backBtnTxt;
+		delete settingsBtnTxt;
+		delete titleName;
+	}
 
 	delete startBtn;
 	delete backBtn;
@@ -331,6 +378,11 @@ void BannerWindow::ChangeGame(bool playsound)
 	BannerAsync::HaltThread();
 
 	Banner *newBanner = NULL;
+	if (strcmp(Settings.db_language, "KO") == 0)
+	{
+		Remove(titleName);
+		titleName->SetText(GameTitles.GetTitle(header));
+	}
 	// continue playing sound during loading process
 	if((header->type == TYPE_GAME_GC_IMG) || (header->type == TYPE_GAME_GC_DISC) || (header->type == TYPE_GAME_GC_EXTRACTED))
 	{
@@ -338,9 +390,18 @@ void BannerWindow::ChangeGame(bool playsound)
 		if(BNRInstance::Instance()->Load(header) && BNRInstance::Instance()->Get() != NULL)
 			newBanner = new Banner;
 		else
+		{
 			newBanner = BNRInstance::Instance()->CreateGCBanner(header);
+			if (strcmp(Settings.db_language, "KO") == 0)
+			{
+				titleName->SetAlignment(ALIGN_CENTER, ALIGN_BOTTOM);
+				titleName->SetPosition(0, -170);
+				Append(titleName);
+			}
+		}
 	}
-	else {
+	else
+	{
 		BNRInstance::Instance()->Load(header);
 		newBanner = new Banner;
 	}
@@ -392,6 +453,24 @@ void BannerWindow::ChangeGame(bool playsound)
 	int favoritevar = GameStatistics.GetFavoriteRank(header->id);
 	for(int i = 0; i < FAVORITE_STARS; ++i)
 		FavoriteBtnImg[i]->SetImage(favoritevar >= i+1 ? imgFavorite : imgNotFavorite);
+
+	if (strcmp(Settings.db_language, "KO") == 0)
+	{
+		Pane *yearPane = gameBanner->getBanner()->FindPanePartial("YearLine");
+		if (yearPane)
+			yearPane->SetVisible(false);
+		Pane *playersPane = gameBanner->getBanner()->FindPanePartial("PlayLine");
+		if (playersPane)
+			playersPane->SetVisible(false);
+		Pane *titlePane = gameBanner->getBanner()->FindPanePartial("T_VCTitle");
+		if (titlePane)
+		{
+			titlePane->SetVisible(false);
+			titleName->SetAlignment(ALIGN_CENTER, ALIGN_BOTTOM);
+			titleName->SetPosition(0, -170);
+			Append(titleName);
+		}
+	}
 
 	//! Resume all threads
 	BannerAsync::ResumeThread();

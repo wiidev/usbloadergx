@@ -90,6 +90,11 @@ class BannerWindow : public GuiWindow
 
 		GuiText * playcntTxt;
 
+		GuiText * startBtnTxt;
+		GuiText * backBtnTxt;
+		GuiText * settingsBtnTxt;
+		GuiText * titleName;
+
 		GuiButton * startBtn;
 		GuiButton * backBtn;
 		GuiButton * settingsBtn;
