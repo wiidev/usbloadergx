@@ -1824,6 +1824,9 @@ msgstr "카테고리 이름 바꾸기"
 msgid "Reset"
 msgstr "리셋"
 
+msgid "Reset All Game Settings"
+msgstr "모든 게임 설정 재설정"
+
 msgid "Reset BG Music"
 msgstr "배경 음악 리셋"
 

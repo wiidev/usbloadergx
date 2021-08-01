@@ -28,6 +28,7 @@
 #include "FeatureSettingsMenu.hpp"
 #include "Channels/channels.h"
 #include "settings/CGameCategories.hpp"
+#include "settings/CGameSettings.h"
 #include "settings/GameTitles.h"
 #include "settings/CSettings.h"
 #include "settings/SettingsPrompts.h"
@@ -84,6 +85,7 @@ FeatureSettingsMenu::FeatureSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Update Nintendont" ));
 	Options->SetName(Idx++, "%s", tr( "WiiU Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "Boot Neek System Menu" ));
+	Options->SetName(Idx++, "%s", tr( "Reset All Game Settings" ));
 	Options->SetName(Idx++, "%s", tr( "Reset Game Header Cache" ));
 
 	OldTitlesOverride = Settings.titlesOverride;
@@ -737,6 +739,14 @@ int FeatureSettingsMenu::GetMenuInternal()
 				return MENU_NONE;
 			}
 		}
+	}
+
+	//! Reset All Game Settings
+	else if(ret == ++Idx)
+	{
+		int choice = WindowPrompt(tr( "Are you sure you want to reset?" ), 0, tr( "Yes" ), tr( "Cancel" ));
+		if (choice == 1)
+			GameSettings.RemoveAll();
 	}
 
 	//! Reset Game Header Cache
