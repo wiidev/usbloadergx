@@ -1143,7 +1143,7 @@ msgstr "游戏窗口模式"
 msgid "Game is already installed:"
 msgstr "游戏已安装："
 
-msgid "Game's IOS"
+msgid "Games IOS"
 msgstr "游戏的IOS"
 
 msgid "Game/Install Partition"
@@ -1371,7 +1371,7 @@ msgstr "加载这个 DOL 作为 ALT DOL ？"
 msgid "Loader Settings"
 msgstr "加载器设置"
 
-msgid "Loader's IOS"
+msgid "Loaders IOS"
 msgstr "加载器的IOS"
 
 msgid "Loading standard language."
@@ -2131,7 +2131,7 @@ msgstr "主题名称："
 msgid "Themes by www.spiffy360.com"
 msgstr "www.spiffy360.com 的主题"
 
-msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
+msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "该 IOS 是BootMii IOS 。如果你确定它不是 BootMii 并且安装了其他 IOS 则可忽略该警告。"
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
@@ -2304,10 +2304,10 @@ msgstr "升级文件存放路径"
 msgid "Update all Language Files"
 msgstr "升级全部语言文件"
 
-msgid "Update failed"
+msgid "Update Failed"
 msgstr "升级失败"
 
-msgid "Update successfull"
+msgid "Update Successful"
 msgstr "升级成功"
 
 msgid "Updating Language Files:"

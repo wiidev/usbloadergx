@@ -235,7 +235,7 @@ int MenuLanguageSelect()
 				if (IsNetworkInit() || NetworkInitPrompt())
 				{
 					if(DownloadAllLanguageFiles() > 0)
-						WindowPrompt(tr("Update successfull"), 0, tr("OK"));
+						WindowPrompt(tr("Update successful"), 0, tr("OK"));
 					returnhere = 1;
 					break;
 				}

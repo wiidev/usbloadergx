@@ -1143,7 +1143,7 @@ msgstr ""
 msgid "Game is already installed:"
 msgstr "Dette spil er allerede installeret:"
 
-msgid "Game's IOS"
+msgid "Games IOS"
 msgstr ""
 
 msgid "Game/Install Partition"
@@ -1371,7 +1371,7 @@ msgstr "Indlæs denne DOL som alternativ DOL?"
 msgid "Loader Settings"
 msgstr "Loader Indstillinger"
 
-msgid "Loader's IOS"
+msgid "Loaders IOS"
 msgstr ""
 
 msgid "Loading standard language."
@@ -2131,8 +2131,8 @@ msgstr "Tema titel:"
 msgid "Themes by www.spiffy360.com"
 msgstr "Temaer af www.spiffy360.com"
 
-msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
-msgstr "Denne IOS er BootMii ios. Hvis du er sikker på at det ikke er BootMii og du har noget andet installeret der, ignorer denne advarsel."
+msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
+msgstr "Denne IOS er BootMii IOS. Hvis du er sikker på at det ikke er BootMii og du har noget andet installeret der, ignorer denne advarsel."
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
 msgstr "Denne IOS var ikke fundet i titel listen. Hvis du er sikker på at den er installeret ignorer denne advarsel."
@@ -2304,10 +2304,10 @@ msgstr "Sti til opdateringer"
 msgid "Update all Language Files"
 msgstr "Opdatér alle sprogfiler"
 
-msgid "Update failed"
+msgid "Update Failed"
 msgstr "Opdateringen mislykkedes"
 
-msgid "Update successfull"
+msgid "Update Successful"
 msgstr "Opdatering Lykkedes"
 
 msgid "Updating Language Files:"

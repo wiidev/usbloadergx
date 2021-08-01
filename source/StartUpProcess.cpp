@@ -371,8 +371,8 @@ int StartUpProcess::Execute()
 	//! Init the rest of the System
 	Sys_Init();
 	InitAudio();
-	setlocale(LC_CTYPE, "C-UTF-8");
-	setlocale(LC_MESSAGES, "C-UTF-8");
+	setlocale(LC_CTYPE, "en_US.UTF-8");
+	setlocale(LC_MESSAGES, "en_US.UTF-8");
 	AdjustOverscan(Settings.AdjustOverscanX, Settings.AdjustOverscanY);
 
 	return 0;

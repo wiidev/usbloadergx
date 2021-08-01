@@ -1143,7 +1143,7 @@ msgstr ""
 msgid "Game is already installed:"
 msgstr "Hra je již nainstalována:"
 
-msgid "Game's IOS"
+msgid "Games IOS"
 msgstr ""
 
 msgid "Game/Install Partition"
@@ -1371,7 +1371,7 @@ msgstr "Spustit tento DOL jako náhradní DOL?"
 msgid "Loader Settings"
 msgstr "Nstavení spoustení"
 
-msgid "Loader's IOS"
+msgid "Loaders IOS"
 msgstr ""
 
 msgid "Loading standard language."
@@ -2131,7 +2131,7 @@ msgstr "Název tématu"
 msgid "Themes by www.spiffy360.com"
 msgstr "Téma od www.spiffy360.com"
 
-msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
+msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "Tento IOS je BootMii IOS. Pokud si jste jisti ze toto není BootMii a máte zde nainstalováno neco jiného, pak ignorujte toto varování."
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
@@ -2304,10 +2304,10 @@ msgstr "Cesta pro aktualizaci"
 msgid "Update all Language Files"
 msgstr "Zaktualizuj vsechny jazykové soubory"
 
-msgid "Update failed"
+msgid "Update Failed"
 msgstr "Aktualizace selhala"
 
-msgid "Update successfull"
+msgid "Update Successful"
 msgstr "Aktualizace probehla uspesne"
 
 msgid "Updating Language Files:"

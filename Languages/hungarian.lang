@@ -1143,7 +1143,7 @@ msgstr ""
 msgid "Game is already installed:"
 msgstr "A játék már fel van telepítve:"
 
-msgid "Game's IOS"
+msgid "Games IOS"
 msgstr ""
 
 msgid "Game/Install Partition"
@@ -1371,7 +1371,7 @@ msgstr "DOL betöltése alternatív DOL-ként?"
 msgid "Loader Settings"
 msgstr ""
 
-msgid "Loader's IOS"
+msgid "Loaders IOS"
 msgstr ""
 
 msgid "Loading standard language."
@@ -2131,7 +2131,7 @@ msgstr "Téma címe:"
 msgid "Themes by www.spiffy360.com"
 msgstr ""
 
-msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
+msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr ""
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
@@ -2304,10 +2304,10 @@ msgstr "Frissítés Útvonala"
 msgid "Update all Language Files"
 msgstr "Minden nyelvi fájl frissítése"
 
-msgid "Update failed"
+msgid "Update Failed"
 msgstr "Frissítési hiba"
 
-msgid "Update successfull"
+msgid "Update Successful"
 msgstr ""
 
 msgid "Updating Language Files:"

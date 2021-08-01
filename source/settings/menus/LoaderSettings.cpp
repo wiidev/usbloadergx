@@ -249,8 +249,8 @@ void LoaderSettings::SetOptionNames()
 	{
 		Options->SetName(Idx++, "%s", tr( "Custom Address" ));
 	}
-	Options->SetName(Idx++, "%s", tr( "Loader's IOS" ));
-	Options->SetName(Idx++, "%s", tr( "Game's IOS" ));
+	Options->SetName(Idx++, "%s", tr( "Loaders IOS" ));
+	Options->SetName(Idx++, "%s", tr( "Games IOS" ));
 	Options->SetName(Idx++, "%s", tr( "Quick Boot" ));
 	Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
 	Options->SetName(Idx++, "%s", tr( "Return To" ));
@@ -290,8 +290,8 @@ void LoaderSettings::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Video offset" ));
 	Options->SetName(Idx++, "%s", tr( "Remove Read Speed Limit" ));
 	Options->SetName(Idx++, "%s", tr( "Triforce Arcade Mode" ));
-	Options->SetName(Idx++, "%s", tr("CC Rumble"));
-	Options->SetName(Idx++, "%s", tr("Skip IPL"));
+	Options->SetName(Idx++, "%s", tr( "CC Rumble" ));
+	Options->SetName(Idx++, "%s", tr( "Skip IPL" ));
 	Options->SetName(Idx++, "%s", tr( "BBA Emulation" ));
 	Options->SetName(Idx++, "%s", tr( "BBA Net Profile" ));
 	Options->SetName(Idx++, "%s", tr( "Memory Card Emulation" ));
@@ -352,13 +352,13 @@ void LoaderSettings::SetOptionValues()
 	if(Settings.PrivateServer == PRIVSERV_CUSTOM)
 		Options->SetValue(Idx++, "%s", Settings.CustomAddress);
 
-	//! Settings: Loader's IOS
+	//! Settings: Loaders IOS
 	if (Settings.godmode)
 		Options->SetValue(Idx++, "IOS %i", Settings.LoaderIOS);
 	else
 		Options->SetValue(Idx++, "********");
 
-	//! Settings: Game's IOS
+	//! Settings: Games IOS
 	if (Settings.godmode)
 		Options->SetValue(Idx++, "IOS %i", Settings.cios);
 	else
@@ -638,7 +638,7 @@ int LoaderSettings::GetMenuInternal()
 		}
 	}
 
-	//! Settings: Loader's IOS
+	//! Settings: Loaders IOS
 	else if (ret == ++Idx)
 	{
 		if(!Settings.godmode)
@@ -659,12 +659,12 @@ int LoaderSettings::GetMenuInternal()
 			}
 			else if(Settings.LoaderIOS == 254)
 			{
-				WindowPrompt(tr("Warning:"), tr("This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."), tr("OK"));
+				WindowPrompt(tr("Warning:"), tr("This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."), tr("OK"));
 			}
 		}
 	}
 
-	//! Settings: Game's IOS
+	//! Settings: Games IOS
 	else if (ret == ++Idx)
 	{
 		if(!Settings.godmode)
@@ -682,7 +682,7 @@ int LoaderSettings::GetMenuInternal()
 			}
 			else if(Settings.cios == 254)
 			{
-				WindowPrompt(tr("Warning:"), tr("This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."), tr("OK"));
+				WindowPrompt(tr("Warning:"), tr("This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."), tr("OK"));
 			}
 		}
 	}

@@ -1143,7 +1143,7 @@ msgstr "Type de fenêtre de jeu"
 msgid "Game is already installed:"
 msgstr "Le jeu est déjà installé:"
 
-msgid "Game's IOS"
+msgid "Games IOS"
 msgstr "IOS des jeux"
 
 msgid "Game/Install Partition"
@@ -1371,7 +1371,7 @@ msgstr "Charger comme DOL alternatif ?"
 msgid "Loader Settings"
 msgstr "Paramètres du Loader"
 
-msgid "Loader's IOS"
+msgid "Loaders IOS"
 msgstr "IOS du Loader"
 
 msgid "Loading standard language."
@@ -2131,7 +2131,7 @@ msgstr "Titre du thème:"
 msgid "Themes by www.spiffy360.com"
 msgstr "Thèmes par www.spiffy360.com"
 
-msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
+msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "Cet IOS est l'IOS de BootMii. Si vous étes certain que ce n'est pas BootMii, ignorez cet avertissement."
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
@@ -2304,10 +2304,10 @@ msgstr "Dossier de mise à jour"
 msgid "Update all Language Files"
 msgstr "Mise à jour des fichiers de langue"
 
-msgid "Update failed"
+msgid "Update Failed"
 msgstr "Échec de la mise à jour"
 
-msgid "Update successfull"
+msgid "Update Successful"
 msgstr "Mise à jour réussie"
 
 msgid "Updating Language Files:"

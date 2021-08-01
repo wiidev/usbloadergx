@@ -228,7 +228,7 @@ void GlobalSettings::CreateSettingsMenu(int menuNr)
 		ResumeGui();
 		int ret = UpdateApp();
 		if (ret < 0)
-			WindowPrompt(tr( "Update failed" ), 0, tr( "OK" ));
+			WindowPrompt(tr( "Update Failed" ), 0, tr( "OK" ));
 		Append(backBtn);
 		ShowMenu();
 	}

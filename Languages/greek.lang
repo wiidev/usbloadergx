@@ -1143,7 +1143,7 @@ msgstr "επιλογή απεικόνισης παραθύρων"
 msgid "Game is already installed:"
 msgstr "Το παιχνίδι είναι ήδη εγκατεστημένο:"
 
-msgid "Game's IOS"
+msgid "Games IOS"
 msgstr ""
 
 msgid "Game/Install Partition"
@@ -1371,7 +1371,7 @@ msgstr "ΦΓόρτωση αυτού του αρχείου DOL ως εναλλα�
 msgid "Loader Settings"
 msgstr "Ρυθμίσεις προγράμματος"
 
-msgid "Loader's IOS"
+msgid "Loaders IOS"
 msgstr ""
 
 msgid "Loading standard language."
@@ -2131,7 +2131,7 @@ msgstr "όνομα θέματος:"
 msgid "Themes by www.spiffy360.com"
 msgstr "Θέματα από την ιστοσελίδα www.spiffy360.com"
 
-msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
+msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "Το ΙΟS αυτό είναι του λειτουργικού BootMii. Αν όμως είστε βέβαιος-η ότι δεν είναι, παρακαλώ αγνοήστε αυτή την προειδοποίηση."
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
@@ -2304,10 +2304,10 @@ msgstr "Μονοπάτι αρχείων αναβάθμισης."
 msgid "Update all Language Files"
 msgstr "Αναβάθμιση όλων των μεταφράσεων"
 
-msgid "Update failed"
+msgid "Update Failed"
 msgstr "Αποτυχία αναβάθμισης"
 
-msgid "Update successfull"
+msgid "Update Successful"
 msgstr "Επιτυχής αναβάθμιση"
 
 msgid "Updating Language Files:"

@@ -1143,7 +1143,7 @@ msgstr "게임 윈도우 모드"
 msgid "Game is already installed:"
 msgstr "게임이 이미 설치:"
 
-msgid "Game's IOS"
+msgid "Games IOS"
 msgstr "게임 IOS"
 
 msgid "Game/Install Partition"
@@ -1247,7 +1247,7 @@ msgstr "네트워크 초기화"
 msgid "Insert Disk"
 msgstr "디스크 넣기"
 
-msgid "Insert a Wii or a Game Cube Disc!"
+msgid "Insert a Wii or a GameCube Disc!"
 msgstr "Wii 또는 Gamecube 디스크를 넣으세요!"
 
 msgid "Install"
@@ -1274,7 +1274,7 @@ msgstr "설치 오류 - 불완전한 데이터 정리"
 msgid "Install finished"
 msgstr "설치 완료"
 
-msgid "Installing Game Cube Game..."
+msgid "Installing GameCube Game..."
 msgstr "게임큐브 게임 설치 중 입니다..."
 
 msgid "Installing content"
@@ -1371,7 +1371,7 @@ msgstr "이 DOL을 대체 DOL로 로드 하겠습니까?"
 msgid "Loader Settings"
 msgstr "로더 설정"
 
-msgid "Loader's IOS"
+msgid "Loaders IOS"
 msgstr "로더 IOS"
 
 msgid "Loading standard language."
@@ -1599,7 +1599,7 @@ msgstr "보통"
 msgid "Not Initialized"
 msgstr "초기화되지 않음"
 
-msgid "Not a Wii or a Game Cube Disc"
+msgid "Not a Wii or a GameCube Disc"
 msgstr "Wii 또는 게임큐브 디스크가 아님"
 
 msgid "Not a valid URL"
@@ -1936,7 +1936,7 @@ msgid "Set Search-Filter"
 msgstr "검색-필터 설정"
 
 msgid "Settings"
-msgstr ""
+msgstr "설정"
 
 msgid "Settings File"
 msgstr "파일 설정"
@@ -2020,7 +2020,7 @@ msgid "Standby"
 msgstr "대기"
 
 msgid "Start"
-msgstr ""
+msgstr "시작"
 
 msgid "Success"
 msgstr "성공"
@@ -2131,7 +2131,7 @@ msgstr "테마 타이틀:"
 msgid "Themes by www.spiffy360.com"
 msgstr "www.spiffy360.com의 테마"
 
-msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
+msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "이 IOS는 BootMii IOS입니다. 확실한 경우 BootMii가 아니며 이 경고를 무시하는 것 외에 다른 것을 설치하십시오."
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
@@ -2304,10 +2304,10 @@ msgstr "경로 업데이트"
 msgid "Update all Language Files"
 msgstr "모든 언어 파일 업데이트"
 
-msgid "Update failed"
+msgid "Update Failed"
 msgstr "업데이트 실패"
 
-msgid "Update successfull"
+msgid "Update Successful"
 msgstr "업데이트 성공"
 
 msgid "Updating Language Files:"

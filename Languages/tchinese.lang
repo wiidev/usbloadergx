@@ -1107,7 +1107,7 @@ msgstr ""
 msgid "Game ID"
 msgstr "遊戲 ID"
 
-msgid "Game IOS"
+msgid "Games IOS"
 msgstr "遊戲 IOS"
 
 msgid "Game Language"
@@ -1143,7 +1143,7 @@ msgstr "遊戲視窗模式"
 msgid "Game is already installed:"
 msgstr "已安裝過遊戲:"
 
-msgid "Game's IOS"
+msgid "Game IOS"
 msgstr ""
 
 msgid "Game/Install Partition"
@@ -1371,7 +1371,7 @@ msgstr "載入這個 DOL 作為替代 DOL？"
 msgid "Loader Settings"
 msgstr "Loader設定"
 
-msgid "Loader's IOS"
+msgid "Loaders IOS"
 msgstr ""
 
 msgid "Loading standard language."
@@ -2131,8 +2131,8 @@ msgstr "佈景主題標題"
 msgid "Themes by www.spiffy360.com"
 msgstr "佈景主題由www.spiffy360.com提供"
 
-msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
-msgstr "這IOS是BootMii的ios。若你確定不是BootMii的IOS而你在這安裝其他的程式，請忽略這警告。"
+msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
+msgstr "這IOS是BootMii的IOS。若你確定不是BootMii的IOS而你在這安裝其他的程式，請忽略這警告。"
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
 msgstr "標題清單找不到這IOS。若你確定已安裝它，請忽略這警告。"
@@ -2304,10 +2304,10 @@ msgstr "更新路徑"
 msgid "Update all Language Files"
 msgstr "更新所有語言檔案"
 
-msgid "Update failed"
+msgid "Update Failed"
 msgstr "更新失敗"
 
-msgid "Update successfull"
+msgid "Update Successful"
 msgstr "更新成功"
 
 msgid "Updating Language Files:"

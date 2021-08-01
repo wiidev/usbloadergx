@@ -1143,7 +1143,7 @@ msgstr ""
 msgid "Game is already installed:"
 msgstr "เกมส์นี้ถูกติดตั้งอยู่แล้ว:"
 
-msgid "Game's IOS"
+msgid "Games IOS"
 msgstr ""
 
 msgid "Game/Install Partition"
@@ -1371,7 +1371,7 @@ msgstr "โหลด DOL นี้เป็น alternate DOL?"
 msgid "Loader Settings"
 msgstr ""
 
-msgid "Loader's IOS"
+msgid "Loaders IOS"
 msgstr ""
 
 msgid "Loading standard language."
@@ -2131,7 +2131,7 @@ msgstr "ชื่อธีม:"
 msgid "Themes by www.spiffy360.com"
 msgstr ""
 
-msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
+msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr ""
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
@@ -2304,10 +2304,10 @@ msgstr "ที่อยู่ Update"
 msgid "Update all Language Files"
 msgstr "อัพเดทภาษาทั้งหมด"
 
-msgid "Update failed"
+msgid "Update Failed"
 msgstr "อัพเดทล้มเหลว"
 
-msgid "Update successfull"
+msgid "Update Successful"
 msgstr ""
 
 msgid "Updating Language Files:"

@@ -1143,7 +1143,7 @@ msgstr "ｹﾞｰﾑｳｲﾝﾄﾞｳ表示"
 msgid "Game is already installed:"
 msgstr "このｹﾞｰﾑは既にｲﾝｽﾄｰﾙされています:"
 
-msgid "Game's IOS"
+msgid "Games IOS"
 msgstr ""
 
 msgid "Game/Install Partition"
@@ -1371,7 +1371,7 @@ msgstr "このDOLを代替DOLとしてﾛｰﾄﾞしますか？"
 msgid "Loader Settings"
 msgstr "ローダーの設定"
 
-msgid "Loader's IOS"
+msgid "Loaders IOS"
 msgstr ""
 
 msgid "Loading standard language."
@@ -2131,7 +2131,7 @@ msgstr "テーマ名:"
 msgid "Themes by www.spiffy360.com"
 msgstr "テーマ…www.spiffy360.com"
 
-msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
+msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "このIOSはBootMiiのIOSです"
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
@@ -2304,10 +2304,10 @@ msgstr "GXのdol"
 msgid "Update all Language Files"
 msgstr "全言語ファイルを更新"
 
-msgid "Update failed"
+msgid "Update Failed"
 msgstr "更新に失敗しました"
 
-msgid "Update successfull"
+msgid "Update Successful"
 msgstr "更新しました"
 
 msgid "Updating Language Files:"

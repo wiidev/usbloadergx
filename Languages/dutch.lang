@@ -1143,8 +1143,8 @@ msgstr "Spel Scherm Modus"
 msgid "Game is already installed:"
 msgstr "Spel is al geïnstalleerd:"
 
-msgid "Game's IOS"
-msgstr "Spel's IOS"
+msgid "Games IOS"
+msgstr "Spellen IOS"
 
 msgid "Game/Install Partition"
 msgstr "Spel/Installatie partitie"
@@ -1371,8 +1371,8 @@ msgstr "Deze DOL als alternatieve DOL gebruiken?"
 msgid "Loader Settings"
 msgstr "Loader Instellingen"
 
-msgid "Loader's IOS"
-msgstr "Loader's IOS"
+msgid "Loaders IOS"
+msgstr "Loaders IOS"
 
 msgid "Loading standard language."
 msgstr "Standaardtaal laden."
@@ -2131,7 +2131,7 @@ msgstr "Thema Titel:"
 msgid "Themes by www.spiffy360.com"
 msgstr "Thema's door www.spiffy360.com"
 
-msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
+msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "Deze IOS is de BootMii IOS. Als je zeker weet dat dit niet BootMii is en daar iets anders is geïnstalleerd kun je deze waarschuwing negeren."
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
@@ -2304,10 +2304,10 @@ msgstr "Updatelocatie"
 msgid "Update all Language Files"
 msgstr "Alle taalbestanden updaten"
 
-msgid "Update failed"
+msgid "Update Failed"
 msgstr "Update mislukt"
 
-msgid "Update successfull"
+msgid "Update Successful"
 msgstr "Update succesvol"
 
 msgid "Updating Language Files:"
