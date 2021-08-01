@@ -75,8 +75,21 @@ void UpdatePads()
 		userInput[0].pad.btns_u |= wiidrc_to_pad(WiiDRC_ButtonsUp());
 		userInput[0].pad.btns_h |= wiidrc_to_pad(WiiDRC_ButtonsHeld());
 		// DRC stick state written to gamecube pad data
-		userInput[0].pad.stickX    = WiiDRC_lStickX();
-		userInput[0].pad.stickY    = WiiDRC_lStickY();
+
+		int x = 0, y = 0;
+		x = (WiiDRC_lStickX() * 128) / 75;
+		y = (WiiDRC_lStickY() * 128) / 75;
+		if (x > 127)
+			x = 127;
+		else if (x < -128)
+			x = -128;
+		if (y > 127)
+			y = 127;
+		else if (y < -128)
+			y = -128;
+
+		userInput[0].pad.stickX    = x;
+		userInput[0].pad.stickY    = y;
 		userInput[0].pad.substickX = WiiDRC_rStickX();
 		userInput[0].pad.substickY = WiiDRC_rStickY();
 	}

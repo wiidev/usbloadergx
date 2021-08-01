@@ -72,68 +72,77 @@ void GuiTrigger::SetButtonOnlyTrigger(s32 ch, u32 wiibtns, u16 gcbtns)
  *
  * Get X/Y value from Wii Joystick (classic, nunchuk) input
  ***************************************************************************/
-
 s8 GuiTrigger::WPAD_Stick(u8 right, int axis)
 {
-	float mag = 0.0;
-	float ang = 0.0;
+	struct joystick_t *js = NULL;
 
-	switch ( wpad.exp.type )
+	switch (wpad.exp.type)
 	{
-		default:
-		case WPAD_EXP_NUNCHUK:
-		case WPAD_EXP_GUITARHERO3:
+	case WPAD_EXP_NUNCHUK:
+		js = right ? NULL : &wpad.exp.nunchuk.js;
+		break;
+	case WPAD_EXP_GUITARHERO3:
+		js = right ? NULL : &wpad.exp.nunchuk.js;
+		break;
+	case WPAD_EXP_CLASSIC:
+		js = right ? &wpad.exp.classic.rjs : &wpad.exp.classic.ljs;
+		break;
+	default:
+		break;
+	}
+
+	if (js)
+	{
+		int pos = axis ? js->pos.y : js->pos.x;
+		int min = axis ? js->min.y : js->min.x;
+		int max = axis ? js->max.y : js->max.x;
+		int center = axis ? js->center.y : js->center.x;
+
+		// Fix bad calibration values (libogc 2.2.0 also fixes this)
+		if ((min >= center) || (max <= center))
 		{
-			if ( right == 0 )
+			if (axis)
 			{
-				mag = wpad.exp.nunchuk.js.mag;
-				ang = wpad.exp.nunchuk.js.ang;
-			}
-			break;
-		}
-		case WPAD_EXP_CLASSIC:
-		{
-			if ( right == 0 )
-			{
-				mag = wpad.exp.classic.ljs.mag;
-				ang = wpad.exp.classic.ljs.ang;
+				min = js->min.y = 0;
+				max = js->max.y = right ? 32 : 64;
+				center = js->center.y = right ? 16 : 32;
 			}
 			else
 			{
-				mag = wpad.exp.classic.rjs.mag;
-				ang = wpad.exp.classic.rjs.ang;
+				min = js->min.x = 0;
+				max = js->max.x = right ? 32 : 64;
+				center = js->center.x = right ? 16 : 32;
 			}
-			break;
 		}
+
+		// Limit values
+		if (pos > max)
+			return 127;
+		if (pos < min)
+			return -128;
+
+		// Adjust against center position
+		pos -= center;
+
+		// Return interpolated range
+		if (pos > 0)
+			return (s8)(127.0 * ((float)pos / (float)(max - center)));
+		else
+			return (s8)(128.0 * ((float)pos / (float)(center - min)));
 	}
 
-	/* calculate x/y value (angle need to be converted into radian) */
-	if ( mag > 1.0 )
-		mag = 1.0;
-	else if ( mag < -1.0 )
-		mag = -1.0;
-
-	float val;
-
-	if ( axis == 0 ) // x-axis
-		val = (float) (mag * sin( (PI * ang) / 180.0f ));
-	else // y-axis
-		val = (float) (mag * cos( (PI * ang) / 180.0f ));
-
-	return ( s8 )( val * 128.0f );
+	return 0;
 }
 
 bool GuiTrigger::Left()
 {
 	u32 wiibtn = WPAD_BUTTON_LEFT;
-	if(wpad.exp.type == WPAD_EXP_CLASSIC)
+	if (wpad.exp.type == WPAD_EXP_CLASSIC)
 		wiibtn |= WPAD_CLASSIC_BUTTON_LEFT;
 
-	if(    ((wpad.btns_d | wpad.btns_h) & wiibtn)
-		|| ((pad.btns_d | pad.btns_h) & PAD_BUTTON_LEFT))
+	if (((wpad.btns_d | wpad.btns_h) & wiibtn) || ((pad.btns_d | pad.btns_h) & PAD_BUTTON_LEFT))
 	{
-		if(    (wpad.btns_d & wiibtn)
-			|| (pad.btns_d & PAD_BUTTON_LEFT))
+		if ((wpad.btns_d & wiibtn) || (pad.btns_d & PAD_BUTTON_LEFT))
 		{
 			scrollDelay = SCROLL_INITIAL_DELAY; // reset scroll delay.
 			return true;
@@ -150,14 +159,12 @@ bool GuiTrigger::Left()
 bool GuiTrigger::Right()
 {
 	u32 wiibtn = WPAD_BUTTON_RIGHT;
-	if(wpad.exp.type == WPAD_EXP_CLASSIC)
+	if (wpad.exp.type == WPAD_EXP_CLASSIC)
 		wiibtn |= WPAD_CLASSIC_BUTTON_RIGHT;
 
-	if(    ((wpad.btns_d | wpad.btns_h) & wiibtn)
-		|| ((pad.btns_d | pad.btns_h) & PAD_BUTTON_RIGHT))
+	if (((wpad.btns_d | wpad.btns_h) & wiibtn) || ((pad.btns_d | pad.btns_h) & PAD_BUTTON_RIGHT))
 	{
-		if(    (wpad.btns_d & wiibtn) 
-			|| (pad.btns_d & PAD_BUTTON_RIGHT))
+		if ((wpad.btns_d & wiibtn) || (pad.btns_d & PAD_BUTTON_RIGHT))
 		{
 			scrollDelay = SCROLL_INITIAL_DELAY; // reset scroll delay.
 			return true;
@@ -174,14 +181,12 @@ bool GuiTrigger::Right()
 bool GuiTrigger::Up()
 {
 	u32 wiibtn = WPAD_BUTTON_UP;
-	if(wpad.exp.type == WPAD_EXP_CLASSIC)
+	if (wpad.exp.type == WPAD_EXP_CLASSIC)
 		wiibtn |= WPAD_CLASSIC_BUTTON_UP;
 
-	if(    ((wpad.btns_d | wpad.btns_h) & wiibtn)
-		|| ((pad.btns_d | pad.btns_h) & PAD_BUTTON_UP))
+	if (((wpad.btns_d | wpad.btns_h) & wiibtn) || ((pad.btns_d | pad.btns_h) & PAD_BUTTON_UP))
 	{
-		if(    (wpad.btns_d & wiibtn) 
-			|| (pad.btns_d & PAD_BUTTON_UP))
+		if ((wpad.btns_d & wiibtn) || (pad.btns_d & PAD_BUTTON_UP))
 		{
 			scrollDelay = SCROLL_INITIAL_DELAY; // reset scroll delay.
 			return true;
@@ -198,14 +203,12 @@ bool GuiTrigger::Up()
 bool GuiTrigger::Down()
 {
 	u32 wiibtn = WPAD_BUTTON_DOWN;
-	if(wpad.exp.type == WPAD_EXP_CLASSIC)
+	if (wpad.exp.type == WPAD_EXP_CLASSIC)
 		wiibtn |= WPAD_CLASSIC_BUTTON_DOWN;
 
-	if(    ((wpad.btns_d | wpad.btns_h) & wiibtn)
-		|| ((pad.btns_d | pad.btns_h) & PAD_BUTTON_DOWN))
+	if (((wpad.btns_d | wpad.btns_h) & wiibtn) || ((pad.btns_d | pad.btns_h) & PAD_BUTTON_DOWN))
 	{
-		if(    (wpad.btns_d & wiibtn) 
-			|| (pad.btns_d & PAD_BUTTON_DOWN))
+		if ((wpad.btns_d & wiibtn) || (pad.btns_d & PAD_BUTTON_DOWN))
 		{
 			scrollDelay = SCROLL_INITIAL_DELAY; // reset scroll delay.
 			return true;

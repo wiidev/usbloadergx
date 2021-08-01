@@ -67,37 +67,33 @@ void WiiPointer::Draw(GuiTrigger *t)
 		else
 		{
 			angle = 0.0f;
-			
-			// dynamic deadzone value required for WiiU gamepad when using Virtual Console Wii channels. Fixes diagonal sticks.
-			// dirty fix. could be in input.h ?
-			u8 deadzone = isWiiVC ? 20 : PADCAL; 
-			
+
 			// GC PAD
 			// x-axis
-			if(t->pad.stickX < -deadzone)
+			if(t->pad.stickX < -PADCAL)
 			{
-				posX += (t->pad.stickX + deadzone) * Settings.PointerSpeed;
+				posX += (t->pad.stickX + PADCAL) * Settings.PointerSpeed;
 				lastActivity = 0;
 			}
-			else if(t->pad.stickX > deadzone)
+			else if(t->pad.stickX > PADCAL)
 			{
-				posX += (t->pad.stickX - deadzone) * Settings.PointerSpeed;
+				posX += (t->pad.stickX - PADCAL) * Settings.PointerSpeed;
 				lastActivity = 0;
 			}
 			// y-axis
-			if(t->pad.stickY < -deadzone)
+			if(t->pad.stickY < -PADCAL)
 			{
-				posY -= (t->pad.stickY + deadzone) * Settings.PointerSpeed;
+				posY -= (t->pad.stickY + PADCAL) * Settings.PointerSpeed;
 				lastActivity = 0;
 			}
-			else if(t->pad.stickY > deadzone)
+			else if(t->pad.stickY > PADCAL)
 			{
-				posY -= (t->pad.stickY - deadzone) * Settings.PointerSpeed;
+				posY -= (t->pad.stickY - PADCAL) * Settings.PointerSpeed;
 				lastActivity = 0;
 			}
 
-			int wpadX = t->WPAD_Stick(0, 0);
-			int wpadY = t->WPAD_Stick(0, 1);
+			s8 wpadX = t->WPAD_Stick(0, 0);
+			s8 wpadY = t->WPAD_Stick(0, 1);
 
 			// Wii Extensions
 			// x-axis
