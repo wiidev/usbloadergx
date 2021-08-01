@@ -31,6 +31,7 @@
 #include "settings/GameTitles.h"
 #include "settings/CSettings.h"
 #include "settings/SettingsPrompts.h"
+#include "network/update.h"
 #include "network/Wiinnertag.h"
 #include "network/networkops.h"
 #include "FileOperations/fileops.h"
@@ -80,7 +81,7 @@ FeatureSettingsMenu::FeatureSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Export SYSCONF to EmuNand" ));
 	Options->SetName(Idx++, "%s", tr( "Dump NAND to EmuNand" ));
 	Options->SetName(Idx++, "%s", tr( "EmuNAND Wad Manager" ));
-//	Options->SetName(Idx++, "%s", tr( "Update Nintendont" ));
+	Options->SetName(Idx++, "%s", tr( "Update Nintendont" ));
 	Options->SetName(Idx++, "%s", tr( "WiiU Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "Boot Neek System Menu" ));
 	Options->SetName(Idx++, "%s", tr( "Reset Game Header Cache" ));
@@ -168,7 +169,7 @@ void FeatureSettingsMenu::SetOptionValues()
 	Options->SetValue(Idx++, " ");
 
 	//! Settings: Update Nintendont
-	//Options->SetValue(Idx++, " ");
+	Options->SetValue(Idx++, " ");
 
 	//! Settings: WiiU Widescreen
 	Options->SetValue(Idx++, " ");
@@ -653,13 +654,12 @@ int FeatureSettingsMenu::GetMenuInternal()
 		this->Append(optionBrowser);
 	}
 
-/*
 	//! Settings: Update Nintendont
 	else if (ret == ++Idx)
 	{
-		char NINUpdatePath[100];
+		char NINUpdatePath[120];
 		snprintf(NINUpdatePath, sizeof(NINUpdatePath), "%sboot.dol", Settings.NINLoaderPath);
-		char NINUpdatePathBak[100];
+		char NINUpdatePathBak[120];
 		snprintf(NINUpdatePathBak, sizeof(NINUpdatePathBak), "%sboot.bak", Settings.NINLoaderPath);
 
 		int choice = WindowPrompt(tr( "Do you want to update this file?" ), NINUpdatePath, tr( "Yes" ), tr( "Cancel" ));
@@ -674,34 +674,14 @@ int FeatureSettingsMenu::GetMenuInternal()
 				// Rename existing boot.dol file to boot.bak
 				if(CheckFile(NINUpdatePath))
 					RenameFile(NINUpdatePath, NINUpdatePathBak);
-
-				// Download latest loader.dol as boot.dol
-				bool success = false;
-				struct download file = {};
-				file.show_progress = true;
-				downloadfile("https://raw.githubusercontent.com/FIX94/Nintendont/master/loader/loader.dol", &file);
-				if (file.size > 0)
+				
+				if (DownloadFileToPath("https://raw.githubusercontent.com/FIX94/Nintendont/master/loader/loader.dol", NINUpdatePath) > 0)
 				{
-					FILE * pfile = fopen(NINUpdatePath, "wb");
-					if(pfile)
-					{
-						fwrite(file.data, 1, file.size, pfile);
-						fclose(pfile);
-						WindowPrompt(tr( "Successfully Updated" ), 0, tr( "OK" ));
-						success = true;
-					}
-					else
-						WindowPrompt(tr( "Update failed" ), 0, tr( "OK" ));
-
-					MEM2_free(file.data);
-				}
-
-				if(success)
-				{
-					//remove existing loader.dol file if found as it has priority over boot.dol, and boot.bak
+					// Remove existing loader.dol file if found as it has priority over boot.dol, and boot.bak
 					snprintf(NINUpdatePath, sizeof(NINUpdatePath), "%s/loader.dol", Settings.NINLoaderPath);
 					RemoveFile(NINUpdatePath);
 					RemoveFile(NINUpdatePathBak);
+					WindowPrompt(tr("Successfully Updated"), 0, tr("OK"));
 				}
 				else
 				{
@@ -709,12 +689,11 @@ int FeatureSettingsMenu::GetMenuInternal()
 					RemoveFile(NINUpdatePath);
 					if(CheckFile(NINUpdatePathBak))
 						RenameFile(NINUpdatePathBak, NINUpdatePath);
-					WindowPrompt(tr( "Update failed" ), 0, tr( "OK" ));
+					WindowPrompt(tr("Update Failed"), 0, tr("OK"));
 				}
 			}
 		}
 	}
-*/
 
 	// WiiU Aspect switcher (Thanks Tueidj)
 	else if (ret == ++Idx)

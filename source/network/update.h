@@ -32,5 +32,6 @@
 int CheckUpdate();
 int UpdateGameTDB();
 int UpdateApp();
+int DownloadFileToPath(const char *url, const char *dest);
 
 #endif
