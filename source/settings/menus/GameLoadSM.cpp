@@ -200,7 +200,10 @@ void GameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
 	Options->SetName(Idx++, "%s", tr( "Ocarina" ));
 	Options->SetName(Idx++, "%s", tr( "Private Server" ));
-	Options->SetName(Idx++, "%s", tr( "Custom Address" ));
+	if(GameConfig.PrivateServer == PRIVSERV_CUSTOM)
+	{
+		Options->SetName(Idx++, "%s", tr( "Custom Address" ));
+	}
 	Options->SetName(Idx++, "%s", tr( "Parental Control" ));
 	Options->SetName(Idx++, "%s", tr( "Hooktype" ));
 	Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
@@ -296,10 +299,13 @@ void GameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, "%s", tr(PrivServText[GameConfig.PrivateServer]));
 
 	//! Settings: Custom Address
-	if(GameConfig.CustomAddress.size() == 0)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", GameConfig.CustomAddress.c_str());
+	if(GameConfig.PrivateServer == PRIVSERV_CUSTOM)
+	{
+		if(GameConfig.CustomAddress.size() == 0)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", GameConfig.CustomAddress.c_str());
+	}
 
 	//! Settings: Parental Control
 	Options->SetValue(Idx++, "%s", tr(ParentalText[GameConfig.parentalcontrol]));
@@ -479,10 +485,13 @@ int GameLoadSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.PrivateServer >= PRIVSERV_MAX_CHOICE) GameConfig.PrivateServer = INHERIT;
+		Options->ClearList();
+		SetOptionNames();
+		SetOptionValues();
 	}
 
 	//! Settings: Custom Address
-	else if (ret == ++Idx)
+	else if (GameConfig.PrivateServer == PRIVSERV_CUSTOM && ret == ++Idx)
 	{
 		char entered[300];
 		snprintf(entered, sizeof(entered), "%s", GameConfig.CustomAddress.c_str());

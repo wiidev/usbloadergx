@@ -245,7 +245,10 @@ void LoaderSettings::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
 	Options->SetName(Idx++, "%s", tr( "Ocarina" ));
 	Options->SetName(Idx++, "%s", tr( "Private Server" ));
-	Options->SetName(Idx++, "%s", tr( "Custom Address" ));
+	if(Settings.PrivateServer == PRIVSERV_CUSTOM)
+	{
+		Options->SetName(Idx++, "%s", tr( "Custom Address" ));
+	}
 	Options->SetName(Idx++, "%s", tr( "Loader's IOS" ));
 	Options->SetName(Idx++, "%s", tr( "Game's IOS" ));
 	Options->SetName(Idx++, "%s", tr( "Quick Boot" ));
@@ -346,7 +349,8 @@ void LoaderSettings::SetOptionValues()
 	Options->SetValue(Idx++, "%s", tr( PrivServText[Settings.PrivateServer] ));
 
 	//! Settings: Custom Address
-	Options->SetValue(Idx++, "%s", Settings.CustomAddress);
+	if(Settings.PrivateServer == PRIVSERV_CUSTOM)
+		Options->SetValue(Idx++, "%s", Settings.CustomAddress);
 
 	//! Settings: Loader's IOS
 	if (Settings.godmode)
@@ -614,10 +618,13 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.PrivateServer >= PRIVSERV_MAX_CHOICE) Settings.PrivateServer = 0;
+		Options->ClearList();
+		SetOptionNames();
+		SetOptionValues();
 	}
 
 	//! Settings: Custom Address
-	else if (ret == ++Idx)
+	else if (Settings.PrivateServer == PRIVSERV_CUSTOM && ret == ++Idx)
 	{
 		char entered[300];
 		snprintf(entered, sizeof(entered), "%s", Settings.CustomAddress);
