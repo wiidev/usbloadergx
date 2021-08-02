@@ -586,7 +586,7 @@ msgid "Default Settings"
 msgstr "기본 설정"
 
 msgid "Deflicker Filter"
-msgstr ""
+msgstr "디플리커 필터"
 
 msgid "Delete"
 msgstr "삭제"
@@ -1648,10 +1648,10 @@ msgid "OFF"
 msgstr "꺼짐"
 
 msgid "OFF (Extended)"
-msgstr ""
+msgstr "꺼짐 (확장)"
 
 msgid "OFF (Safe)"
-msgstr ""
+msgstr "꺼짐 (안전)"
 
 msgid "OK"
 msgstr "확인"
@@ -1660,16 +1660,16 @@ msgid "ON"
 msgstr "켜짐"
 
 msgid "ON (Low)"
-msgstr ""
+msgstr "켜짐 (낮음)"
 
 msgid "ON (Medium)"
-msgstr ""
+msgstr "켜짐 (중간)"
 
 msgid "ON (Multi)"
 msgstr "켜짐 (멀티)"
 
 msgid "ON (High)"
-msgstr ""
+msgstr "켜짐 (높음)"
 
 msgid "OSReport"
 msgstr "OS보고서"
