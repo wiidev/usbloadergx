@@ -1,21 +1,21 @@
 # USB Loader GX language source file.
-# spanish.lang - r1235
+# spanish.lang - r1272
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-15 16:05+0200\n"
-"PO-Revision-Date: 2011-07-25 16:40+0200\n"
-"Last-Translator: Galen/xFede\n"
-"Language-Team: Penn, SirPalax, hvy109\n"
+"POT-Creation-Date: 2021-08-03 13:00+0000\n"
+"PO-Revision-Date: 2021-08-03 13:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: Español\n"
 
 msgid " could not be downloaded."
-msgstr " no se han podido descargar."
+msgstr " no se pudo descargar."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
 msgstr " ha sido Guardado. Algún código puede no funcionar correctamente. Si experimentas problemas, revisa el texto en un editor de texto para obtener más información."
@@ -33,11 +33,11 @@ msgstr "Faltan %i archivos"
 
 #, c-format
 msgid "%i wad file(s) not processed!"
-msgstr ""
+msgstr "¡No se procesó %i archivo(s) WAD!"
 
 #, c-format
 msgid "%i wad found."
-msgstr ""
+msgstr "WAD %i encontrado."
 
 #, c-format
 msgid "%s only accepts GameCube backups in ISO format."
@@ -45,7 +45,7 @@ msgstr "%s sólo acepta juegos de GameCube en formato ISO."
 
 #, c-format
 msgid "%s requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."
-msgstr "¡%s requiere acceso AHB! Actualiza tu canal/forwarder o inicia el programa desde el Canal Homebrew."
+msgstr "¡%s requiere acceso AHB! Inicia el programa desde el Canal Homebrew o con un forwarder actualizado."
 
 msgid "--==       Devolution"
 msgstr "-- Devolution"
@@ -61,48 +61,48 @@ msgstr "-- DM(L)/Nintendont "
 
 msgid "/\\/\\"
 msgstr ""
-
+	   
 msgid "0 (Everyone)"
-msgstr "0 (Todos)"
+msgstr "Todos"
 
 msgid "1 (Child 7+)"
-msgstr "1 (Niños 7+)"
+msgstr "Niños 7+"
 
 msgid "1 hour"
 msgstr "1 hora"
 
 msgid "10 min"
-msgstr "10 min."
+msgstr "10 Min."
 
 msgid "2 (Teen 12+)"
-msgstr "2 (Adolescentes 12+)"
+msgstr "Adolescentes 12+"
 
 msgid "20 min"
-msgstr "20 min."
+msgstr "20 Min."
 
 msgid "2D Cover Path"
-msgstr "Ruta Carátulas 2D"
+msgstr "Ruta Covers 2D"
 
 msgid "3 (Mature 16+)"
-msgstr "3 (Jóvenes 16+)"
+msgstr "Jóvenes 16+"
 
 msgid "3 min"
-msgstr "3 min."
+msgstr "3 Min."
 
 msgid "30 min"
-msgstr "30 min."
+msgstr "30 Min."
 
 msgid "3D Cover Path"
-msgstr "Ruta Carátulas 3D"
+msgstr "Ruta Covers 3D"
 
 msgid "3D Covers"
-msgstr "Carátulas 3D"
+msgstr "Covers 3D"
 
 msgid "4 (Adults Only 18+)"
-msgstr "4 (Sólo Adultos 18+)"
+msgstr "Adultos 18+"
 
 msgid "480p Pixel Fix Patch"
-msgstr ""
+msgstr "Patch Fix para 480p"
 
 msgid "5 min"
 msgstr "5 min."
@@ -111,7 +111,7 @@ msgid "=== GameCube Settings"
 msgstr "== GameCube"
 
 msgid "AUTO"
-msgstr "Automático"
+msgstr ""
 
 msgid "AXNextFrame"
 msgstr ""
@@ -120,25 +120,25 @@ msgid "Add category"
 msgstr "Añadir categoría"
 
 msgid "Adjust Overscan X"
-msgstr "Ajuste Overscan X"
+msgstr "Ajustar Ancho"
 
 msgid "Adjust Overscan Y"
-msgstr "Ajuste Overscan Y"
+msgstr "Ajustar Altura"
 
 msgid "After zoom"
 msgstr "Zoom Posterior"
 
 msgid "All"
-msgstr "Todos"
+msgstr "Todas"
 
 msgid "All Partitions"
 msgstr "Todas las particiones"
 
 msgid "All files extracted."
-msgstr "Todos los archivos extraidos."
+msgstr "Todos los archivos extraídos."
 
 msgid "All images downloaded successfully."
-msgstr "Todas las imagenes descargadas con éxito."
+msgstr "Todas las imágenes descargadas satisfactoriamente."
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Todas las características del USB Loader GX desbloqueadas."
@@ -153,13 +153,13 @@ msgid "AltWFC"
 msgstr ""
 
 msgid "An example file was created here:"
-msgstr "Un archivo de ejemplo fue creado aquí:"
+msgstr "Un ejemplo fue creado en:"
 
 msgid "Animation Start"
 msgstr "Inicio de Animación"
 
 msgid "App Language"
-msgstr "Idioma Aplicación"
+msgstr "Idioma"
 
 msgid "Apply"
 msgstr "Aplicar"
@@ -168,37 +168,37 @@ msgid "Apr"
 msgstr "Abr"
 
 msgid "Are you really sure you want to delete all selected games from the SD card?"
-msgstr "¿Seguro que quieres eliminar todos los juegos seleccionados de la tarjeta SD?"
+msgstr "¿Estás seguro de borrar todos los juegos seleccionados de la tarjeta SD?"
 
 msgid "Are you sure you want to delete this category?"
-msgstr "¿Quieres eliminar esta categoría?"
+msgstr "¿Quieres borrar esta categoría?"
 
 msgid "Are you sure you want to import game categories from GameTDB?"
-msgstr "¿Quieres importar las categorías de juegos de GameTDB?"
+msgstr "¿Quieres importar categorías de GameTDB?"
 
 msgid "Are you sure you want to install on SD?"
-msgstr "¿Quieres instalar en la SD?"
+msgstr "¿Estás seguro de instalar en la SD?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "¿Quieres bloquear USB Loader GX?"
 
 msgid "Are you sure you want to remount SD?"
-msgstr "¿Quieres volver a montar la SD?"
+msgstr "¿Quieres remontar la SD?"
 
 msgid "Are you sure you want to reset?"
-msgstr "¿Quieres resetear?"
+msgstr "¿Restablecer configuración?"
 
 msgid "Are you sure?"
 msgstr "¿Estás seguro?"
 
 msgid "Aspect Ratio"
-msgstr "Relación de Aspecto"
+msgstr "Formato de TV"
 
 msgid "Attention!"
 msgstr "¡Atención!"
 
 msgid "Attention: All savegames will be deleted."
-msgstr ""
+msgstr "Atención: Todos los Saves serán borrados."
 
 msgid "Aug"
 msgstr "Ago"
@@ -207,22 +207,22 @@ msgid "Author(s):"
 msgstr "Autor(es):"
 
 msgid "Auto"
-msgstr "Automático"
+msgstr ""
 
 msgid "Auto Boot"
 msgstr "Autoarranque"
 
 msgid "AutoInit Network"
-msgstr "Auto Iniciar la Red"
+msgstr "Autoiniciar Red"
 
 msgid "BCA Codes Path"
-msgstr "Ruta Códigos BCA"
+msgstr "Códigos BCA"
 
 msgid "Back"
 msgstr "Atrás"
 
 msgid "Back to HBC or Wii Menu"
-msgstr "Volver a HBC o Menú Wii"
+msgstr "Volver al HBC o Menú de Wii"
 
 msgid "Background Music"
 msgstr "Música de fondo"
@@ -234,100 +234,100 @@ msgid "Banner Animation Settings"
 msgstr "Opciones de Animación Banner"
 
 msgid "Banner On Channels"
-msgstr "Banner en canales"
+msgstr "Banner en Canales"
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
-msgstr "El modo de vista Banner solo esta disponible con AHBPROT! instala una versión actual de HBC."
+msgstr "¡La vista de banners en cuadrícula sólo está disponibles con AHBPROT! Instala una versión reciente de HBC."
 
 msgid "Banner window is only available with AHBPROT! Please consider installing new HBC version."
-msgstr "Las ventanas Banner solo estan disponible con AHBPROT! Por favor instala una nueva versión de HBC."
+msgstr "Las ventanas con banner sólo están disponibles con AHBPROT! Instala una versión reciente de HBC."
 
 msgid "Big thanks to:"
 msgstr "Gracias a:"
 
 msgid "Block Categories Menu"
-msgstr "Bloq. Menú Categorías"
+msgstr "Menú de Categorías"
 
 msgid "Block Categories Modify"
-msgstr "Bloq. Modif. Categorías"
+msgstr "Modificar Categorías"
 
 msgid "Block Cover Downloads"
-msgstr "Bloq. Descarga Carátulas"
+msgstr "Descarga de Covers"
 
 msgid "Block Custom Paths"
-msgstr "Bloquear Rutas Personal."
+msgstr "Rutas Personalizadas"
 
 msgid "Block Feature Settings"
-msgstr "Bloq. Conf. Característ."
+msgstr "Características"
 
 msgid "Block Game Install"
-msgstr "Bloquear Instal. Juegos"
+msgstr "Instalación de Juegos"
 
 msgid "Block Game Settings"
-msgstr "Bloquear Config. Juegos"
+msgstr "Configuración de Juegos"
 
 msgid "Block GameID Change"
-msgstr "Bloquear Cambio IDjuego"
+msgstr "Cambiar ID de Juegos"
 
 msgid "Block Global Settings"
-msgstr "Bloquear Config. Global"
+msgstr "Configuración Global"
 
 msgid "Block Gui Settings"
-msgstr "Bloquear Config. Gui"
+msgstr "Interfaz Gráfica"
 
 msgid "Block HBC Menu"
-msgstr "Bloquear Menú HBC"
+msgstr "Menú HBC"
 
 msgid "Block Hard Drive Settings"
-msgstr "Bloq. Config. Disco Duro"
+msgstr "Configurar Disco Duro"
 
 msgid "Block IOS Reload"
-msgstr "Impedir recarga IOS"
+msgstr "Recarga de IOS"
 
 msgid "Block Loader Layout Button"
-msgstr ""
+msgstr "Modo de Vista"
 
 msgid "Block Loader Mode Button"
-msgstr "Bloq. Carga por Boton"
+msgstr "Modo del Cargador"
 
 msgid "Block Loader Settings"
-msgstr "Bloq. Config. Cargador"
+msgstr "Cargador"
 
 msgid "Block Parental Settings"
-msgstr "Bloq. Config. Parental"
+msgstr "Control Parental"
 
 msgid "Block Priiloader Override"
-msgstr "Bloq. Parche Priiloader"
+msgstr "Override de Priiloader"
 
 msgid "Block Reset Settings"
-msgstr "Bloq. Resetear Config."
+msgstr "Reinicio"
 
 msgid "Block SD Reload Button"
-msgstr "Bloq. Botón Recarga SD"
+msgstr "Recargar SD"
 
 msgid "Block Sound Settings"
-msgstr "Bloquear Config. Sonido"
+msgstr "Sonidos"
 
 msgid "Block Theme Downloader"
-msgstr "Bloq. Descarga Temas"
+msgstr "Descarga de Temas"
 
 msgid "Block Theme Menu"
-msgstr "Bloquear Menú Temas"
+msgstr "Menú de Temas"
 
 msgid "Block Title Launcher"
-msgstr "Bloq. Lanzador Canales"
+msgstr "Arranque de Títulos"
 
 msgid "Block Updates"
-msgstr "Bloq. Actualizaciones"
+msgstr "Actualizaciones"
 
 msgid "Boot Content"
-msgstr "Iniciar contenido"
+msgstr "Iniciar Contenido"
 
 msgid "Boot Neek System Menu"
-msgstr ""
+msgstr "Iniciar NEEK"
 
 msgid "Boot?"
-msgstr "¿Ejecutar?"
+msgstr "¿Arrancar?"
 
 msgid "Both"
 msgstr "Ambos"
@@ -339,10 +339,10 @@ msgid "CC Rumble"
 msgstr ""
 
 msgid "Cache BNR Files"
-msgstr "Cache de archivos BNR"
+msgstr "Caché de archivos BNR"
 
 msgid "Cache BNR Files Path"
-msgstr "Ruta Cache archivos BNR "
+msgstr "Caché de archivos BNR"
 
 msgid "Cache Titles"
 msgstr "Caché de Títulos"
@@ -355,7 +355,7 @@ msgstr "No se creó la carpeta"
 
 #, c-format
 msgid "Can't create file: %s"
-msgstr "No se creó el archivo"
+msgstr "No se creó el archivo: %s"
 
 #, c-format
 msgid "Can't create path: %s"
@@ -369,7 +369,7 @@ msgstr "No se puede montar o disco en formato desconocido."
 
 #, c-format
 msgid "Can't open file for write: %s"
-msgstr "No se ha podido abrir el archivo para escribir: %S"
+msgstr "No se puede abrir el archivo para escribir: %s"
 
 #, c-format
 msgid "Can't open file: %s"
@@ -377,13 +377,13 @@ msgstr "No se abrió el archivo: %s"
 
 #, c-format
 msgid "Can't read file: %s"
-msgstr "No se pudo leer el archivo: %s"
+msgstr "No se leyó el archivo: %s"
 
 msgid "Cancel"
 msgstr "Cancelar"
 
 msgid "Cannot write to destination."
-msgstr "No se escribió en el destino."
+msgstr "No se pudo escribir en el destino."
 
 msgid "Categories"
 msgstr "Categorías"
@@ -395,13 +395,13 @@ msgid "Change Play Path"
 msgstr "Cambiar Ruta"
 
 msgid "Channel Launcher"
-msgstr "Cargar Canales"
+msgstr "Cargador de Canales"
 
 msgid "Channels"
 msgstr "Canales"
 
 msgid "Cheatfile is blank"
-msgstr "El archivo de Trucos está vacio"
+msgstr "El archivo de cheats está vacío"
 
 msgid "Clear"
 msgstr "Borrar"
@@ -416,7 +416,7 @@ msgid "Clock"
 msgstr "Reloj"
 
 msgid "Clock Scale Factor"
-msgstr "Escala reloj"
+msgstr "Escala del reloj"
 
 msgid "Close"
 msgstr "Salir"
@@ -432,7 +432,7 @@ msgid "Coding:"
 msgstr "Programación:"
 
 msgid "Connection to server timed out."
-msgstr "Tiempo de conexión con el servidor agotado."
+msgstr "Tiempo de conexión a servidor agotado."
 
 msgid "Console"
 msgstr "Consola"
@@ -447,10 +447,10 @@ msgid "Console must be unlocked for this option."
 msgstr "Debes desbloquear la consola para esta opción."
 
 msgid "Console must be unlocked to be able to use this."
-msgstr "Debes desbloquear la consola para poder usar esto."
+msgstr "Debes desbloquear la consola para usar esto."
 
 msgid "Console should be unlocked to modify it."
-msgstr "Debes desbloquear la consola para modificarlo."
+msgstr "Desbloquea la consola para modificarlo."
 
 msgid "Continue"
 msgstr "Continuar"
@@ -459,7 +459,7 @@ msgid "Continue to install game?"
 msgstr "¿Continuar instalando juego?"
 
 msgid "Continue?"
-msgstr "Continuar?"
+msgstr "¿Continuar?"
 
 msgid "Controllevel"
 msgstr "Control de Nivel"
@@ -483,17 +483,17 @@ msgid "Could not connect to the server."
 msgstr "No se pudo conectar al servidor."
 
 msgid "Could not create GCT file"
-msgstr "¡No se pudo crear el archivo GCT!"
+msgstr "No se pudo crear el archivo GCT"
 
 #, c-format
 msgid "Could not create path: %s"
 msgstr "No se pudo crear la ruta: %s"
 
 msgid "Could not extract files for:"
-msgstr "No se pudo extraer archivos para:"
+msgstr "No se pudo extraer para:"
 
 msgid "Could not find info for this game in the wiitdb.xml."
-msgstr "No se pudo encontrar información del juego en wiitdb.xml."
+msgstr "No se encontró información sobre este juego en WiiTBD.xml."
 
 msgid "Could not get free device space for game."
 msgstr "No hay espacio disponible para el juego."
@@ -505,44 +505,44 @@ msgid "Could not initialize network!"
 msgstr "¡No se pudo iniciar la Red!"
 
 msgid "Could not initialize network, time out!"
-msgstr "No se pudo iniciar la Red, ¡tiempo de espera agotado!"
+msgstr "¡Fallo al inicializar red, tiempo de espera agotado!"
 
 msgid "Could not open Disc"
 msgstr "¡No se pudo abrir el Disco!"
 
 msgid "Could not open the WiiTDB.xml file."
-msgstr "No se pudo abrir el archivo WiiTDB.xml."
+msgstr "No se pudo abrir WiiTDB.xml."
 
 msgid "Could not open wiitdb.xml."
-msgstr "No se pudo abrir wiitdb.xml."
+msgstr "No se pudo abrir WiiTDB.xml."
 
 msgid "Could not save."
-msgstr "¡No se pudo guardar!"
+msgstr "No se pudo guardar."
 
 msgid "Could not write file."
-msgstr "No se ha podido escribir el archivo"
+msgstr "No se pudo escribir archivo."
 
 msgid "Could not write to:"
 msgstr "No se pudo escribir en:"
 
 msgid "Cover Download"
-msgstr "Descarga de Carátulas"
+msgstr "Descarga de Covers"
 
 msgid "Create"
-msgstr "Crear/reemplazar"
+msgstr "Crear"
 
 msgid "Credits"
 msgstr "Créditos"
 
 msgid "Crop Overscan"
-msgstr "Recortar overscan"
+msgstr "Recortar Overscan"
 
 msgid "Current neek files are not neek2o. Game autoboot disabled."
-msgstr ""
+msgstr "Archivos actuales de NEEK no son NEEK2o. Autoarranque de juego deshabilitado."
 
 msgid "Custom Address"
-msgstr ""
-
+msgstr "Dirección custom"
+  
 msgid "Custom Banners"
 msgstr "Banners personalizados"
 
@@ -556,10 +556,10 @@ msgid "Customs"
 msgstr "Personalizadas"
 
 msgid "Customs/Original"
-msgstr "Personalizadas/originales"
+msgstr ""
 
 msgid "D Buttons"
-msgstr "Botones del pad"
+msgstr "Botones D-Pad"
 
 msgid "DOL Path"
 msgstr "Ruta del DOL"
@@ -571,13 +571,13 @@ msgid "Debug Wait"
 msgstr "Depurador en espera"
 
 msgid "Debugger Paused Start"
-msgstr "Iniciar Wiird pausado"
+msgstr "Iniciar depurador pausado"
 
 msgid "Dec"
 msgstr "Dic"
 
 msgid "Default"
-msgstr "Predeterminado"
+msgstr "Por Defecto"
 
 msgid "Default Gamesettings"
 msgstr "Restaurar configuración"
@@ -586,7 +586,7 @@ msgid "Default Settings"
 msgstr "Restaurar configuración"
 
 msgid "Deflicker Filter"
-msgstr ""
+msgstr "Filtro Deflicker"
 
 msgid "Delete"
 msgstr "Borrar"
@@ -595,16 +595,16 @@ msgid "Delete Cached Banner"
 msgstr "Borrar banner en caché"
 
 msgid "Delete Cheat GCT"
-msgstr "Borrar Trucos GCT"
+msgstr "Borrar Cheats GCT"
 
 msgid "Delete Cheat TXT"
-msgstr "Borrar Trucos TXT"
+msgstr "Borrar Cheats TXT"
 
 msgid "Delete Cover Artwork"
-msgstr "Borrar Carátulas"
+msgstr "Borrar Covers"
 
 msgid "Delete Disc Artwork"
-msgstr "Borrar Imagen de Disco"
+msgstr "Borrar Imagen Disco"
 
 msgid "Delete category"
 msgstr "Borrar categoría"
@@ -613,7 +613,7 @@ msgid "Deleting directories..."
 msgstr "Borrando directorios..."
 
 msgid "Deleting files..."
-msgstr "Borrando archivos"
+msgstr "Borrando archivos..."
 
 msgid "Design:"
 msgstr "Diseño:"
@@ -625,7 +625,7 @@ msgid "Developed by"
 msgstr "Desarrollado por"
 
 msgid "Developer:"
-msgstr "Desarrollado:"
+msgstr "Desarrollador:"
 
 msgid "Devolution"
 msgstr ""
@@ -634,7 +634,7 @@ msgid "Devolution Loader Path"
 msgstr "Ubicación de Devolution"
 
 msgid "Devolution's loader.bin file can't be loaded."
-msgstr "No se puede cargar el loader.bin de Devolution."
+msgstr "No se pudo cargar el loader.bin de Devolution."
 
 msgid "Directory does not exist!"
 msgstr "¡La carpeta no existe!"
@@ -646,28 +646,28 @@ msgid "Disc 2"
 msgstr "Disco 2"
 
 msgid "Disc Artwork Download"
-msgstr "Imagenes de Discos"
+msgstr "Descarga Imagen Discos"
 
 msgid "Disc Artwork Path"
-msgstr "Ruta Imagenes Discos"
+msgstr "Ruta Imagen Discos"
 
 msgid "Disc Default"
 msgstr "Disco"
 
 msgid "Disc Insert Detected"
-msgstr "Detectado Disco Insertado"
+msgstr "Disco Detectado"
 
 msgid "Disc Read Delay"
-msgstr "Delay lectura disco"
+msgstr "Retraso leyendo disco"
 
 msgid "Disc read error."
-msgstr "Error de lectura del disco."
+msgstr "Error leyendo disco."
 
 msgid "Disc-Select Prompt"
-msgstr ""
+msgstr "Aviso selección de disco"
 
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
-msgstr "DM(L) v2.6+ necesita el disco 2 en formato original (sin compresión), ¿estás seguro que deseas instalarlo en formato comprimido?"
+msgstr "DM(L) v2.6+ necesita el Disco 2 sin compresión, ¿estás seguro de instalarlo comprimido?"
 
 msgid "Discarts"
 msgstr "Discos"
@@ -679,19 +679,19 @@ msgid "Display"
 msgstr "Mostrar"
 
 msgid "Display as a carousel"
-msgstr "Mostrar en carrusel"
+msgstr "Mostrar como carrusel"
 
 msgid "Display as a channel grid"
-msgstr "Mostrar en canales"
+msgstr "Mostrar como canales"
 
 msgid "Display as a grid"
-msgstr "Mostrar en rejilla"
+msgstr "Mostrar como cuadrícula"
 
 msgid "Display as a list"
-msgstr "Mostrar en lista"
+msgstr "Mostrar como lista"
 
 msgid "Display favorites only"
-msgstr "Mostrar solo favoritos"
+msgstr "Sólo mostrar favoritos"
 
 msgid "Do you want to apply it now?"
 msgstr "¿Quieres aplicarlo ahora?"
@@ -703,46 +703,46 @@ msgid "Do you want to change language?"
 msgstr "¿Quieres cambiar el idioma?"
 
 msgid "Do you want to continue with next game?"
-msgstr "¿Quieres continuar con el juego siguiente?"
+msgstr "¿Continuar con el siguiente juego?"
 
 msgid "Do you want to copy now?"
 msgstr "¿Quieres copiar ahora?"
 
 msgid "Do you want to copy the game to SD or delete a game on SD?"
-msgstr "¿Quieres copiar el juego a la tarjeta SD o borrar un juego en la tarjeta SD?"
+msgstr "¿Quieres copiar o borrar un juego en la tarjeta SD?"
 
 msgid "Do you want to delete a game on SD?"
-msgstr "¿Quieres borrar un juego en la tarjeta SD?"
+msgstr "¿Borrar un juego en la tarjeta SD?"
 
 msgid "Do you want to discard changes?"
-msgstr "¿quieres descartar los cambios?"
+msgstr "¿Descartar los cambios?"
 
 msgid "Do you want to download this theme?"
-msgstr "¿Quieres descargar este Tema?"
+msgstr "¿Quieres descargar este tema?"
 
 msgid "Do you want to extract all the save games?"
-msgstr "¿Quieres extraer las partidas?"
+msgstr "¿Quieres extraer todas las partidas guardadas?"
 
 msgid "Do you want to extract the save game?"
-msgstr "¿Quieres extraer la partida?"
+msgstr "¿Quieres extraer el progreso del juego?"
 
 msgid "Do you want to format:"
 msgstr "Quieres formatear:"
 
 msgid "Do you want to install selected games?"
-msgstr "¿Quieres instalar los juegos seleccionados?"
+msgstr "¿Instalar los juegos seleccionados?"
 
 msgid "Do you want to load the default theme?"
 msgstr "¿Quieres cargar el tema por defecto?"
 
 msgid "Do you want to move the file(s)? Any existing ones will be deleted!"
-msgstr ""
+msgstr "¿Mover archivo(s)? ¡Todos los existentes serán borrados!"
 
 msgid "Do you want to re-init network?"
 msgstr "¿Quieres reiniciar la red?"
 
 msgid "Do you want to start the game now?"
-msgstr "¿Quieres comenzar el juego ahora?"
+msgstr "¿Comenzar el juego ahora?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "¿Quieres sincronizar el sector de información de espacio libre en todas las particiones FAT32?"
@@ -763,22 +763,22 @@ msgid "Download finished"
 msgstr "Descarga completada"
 
 msgid "Downloading 3D Covers"
-msgstr "Descargando Carátulas 3D"
+msgstr "Descargando covers 3D"
 
 msgid "Downloading Custom Banners"
 msgstr "Descargando banners personalizados"
 
 msgid "Downloading Flat Covers"
-msgstr "Descargando Carátulas 2D"
+msgstr "Descargando covers 2D"
 
 msgid "Downloading Full HQ Covers"
-msgstr "Descargando Carátulas HQ Completas"
+msgstr "Descargando covers HQ completos"
 
 msgid "Downloading Full LQ Covers"
-msgstr "Descargando Carátulas LQ Completas"
+msgstr "Descargando covers LQ completos"
 
 msgid "Downloading custom Discarts"
-msgstr "Descargando Img. Discos Artísticas"
+msgstr "Descargando Discarts personalizados"
 
 msgid "Downloading file..."
 msgstr "Descargando archivo..."
@@ -787,16 +787,16 @@ msgid "Downloading image:"
 msgstr "Descargando imagen:"
 
 msgid "Downloading original Discarts"
-msgstr "Descargando Img. Discos Originales"
+msgstr "Descargando discarts originales"
 
 msgid "Downloading pagelist:"
 msgstr "Descargando lista de páginas:"
 
 msgid "Dump NAND to EmuNand"
-msgstr "Volcar Nand a Nand emu."
+msgstr "Volcar NAND en NAND emulada"
 
 msgid "During zoom"
-msgstr "Durante el Zoom"
+msgstr "Durante zoom"
 
 msgid "Dutch"
 msgstr "Holandés"
@@ -811,19 +811,19 @@ msgid "ERROR: Can't set up theme."
 msgstr "ERROR: No se puede configurar el tema."
 
 msgid "EmuNAND Wad Manager"
-msgstr ""
+msgstr "WAD Manager de NAND Emulada"
 
 msgid "EmuNand Channels"
-msgstr "Canales en Nand Emulada"
+msgstr "Canales Emulados"
 
 msgid "Emulated Nand"
-msgstr "Nand Emulada"
+msgstr "NAND Emulada"
 
 msgid "English"
 msgstr "Inglés"
 
 msgid "Enter Path"
-msgstr "Introduce ruta"
+msgstr "Escribe ruta"
 
 msgid "Error"
 msgstr ""
@@ -842,23 +842,23 @@ msgid "Error reading Disc"
 msgstr "Error leyendo Disco"
 
 msgid "Error reading disc"
-msgstr "Error leyendo disco"
+msgstr "Error leyendo Disco"
 
 #, c-format
 msgid "Error when downloading file: %i"
-msgstr "Error descargando archivo: %i"
+msgstr "Error al descargar el archivo: %i"
 
 msgid "Error while downloding file"
-msgstr "Error descargando archivo"
+msgstr "Error al descargar archivo"
 
 msgid "Error while opening the zip."
-msgstr "Error abriendo archivo zip."
+msgstr "Error abriendo archivo ZIP."
 
 msgid "Error while transfering data."
 msgstr "Error transfiriendo los datos."
 
 msgid "Error while updating USB Loader GX."
-msgstr "Error actualizando USB Loader GX."
+msgstr "Error al actualizar USB Loader GX."
 
 msgid "Error writing the data."
 msgstr "Error escribiendo los datos."
@@ -870,7 +870,7 @@ msgid "Error: Not enough space on SD."
 msgstr "Error: No hay espacio suficiente en la tarjeta SD"
 
 msgid "Errors occured."
-msgstr "A ocurrido un error."
+msgstr "Hubo errores."
 
 msgid "Everything"
 msgstr "Todo"
@@ -882,22 +882,22 @@ msgid "Exit to where?"
 msgstr "¿Salir a dónde?"
 
 msgid "Export All Saves to EmuNand"
-msgstr "Extraer partidas a Nand emu."
+msgstr "Exportar Saves a la NAND"
 
 msgid "Export Miis to EmuNand"
-msgstr "Copiar Miis a Nand emu."
+msgstr "Exportar Miis a la NAND"
 
 msgid "Export SYSCONF to EmuNand"
-msgstr "Copiar SysConf a Nand emu."
+msgstr "Exportar SYSCONF a la NAND"
 
 msgid "Extract Miis to the Emu NAND?"
-msgstr "¿Extraer los Miis a la EmuNand?"
+msgstr "¿Extraer Miis a la NAND?"
 
 msgid "Extract SYSCONF to the Emu NAND?"
-msgstr "¿Extraer SYSCONF a la EmuNand?"
+msgstr "¿Extraer SYSCONF a la NAND?"
 
 msgid "Extract Save to EmuNand"
-msgstr "Extraer partida a Nand emulada"
+msgstr "Extraer Save a NAND"
 
 msgid "Extracting file:"
 msgstr "Extrayendo archivo:"
@@ -909,43 +909,43 @@ msgid "Extracting files:"
 msgstr "Extrayendo archivos:"
 
 msgid "Extracting nand files:"
-msgstr "Extrayendo archivos Nand"
+msgstr "Extrayendo NAND:"
 
 msgid "F-Zero AX"
 msgstr ""
 
 msgid "Failed"
-msgstr "Fallo"
+msgstr "Falló"
 
 msgid "Failed copying file"
 msgstr "Fallo copiando archivo"
 
 msgid "Failed formating"
-msgstr "No se ha podido formatear"
+msgstr "No se pudo formatear"
 
 msgid "Failed to extract all files. Savegame might not exist."
-msgstr "Fallo al extraer los archivos, Pueden no existir partidas guardadas"
+msgstr "No se pudo extraer los archivos. Puede que el Save no exista."
 
 msgid "Failed to extract."
-msgstr "No se ha podido extraer."
+msgstr "No se pudo extraer."
 
 msgid "Failed to initialize the USB storage device."
-msgstr "Fallo al iniciar el dispositivo USB"
+msgstr "Fallo al inicializar dispositivo de almacenamiento USB."
 
 msgid "Failed to open partition"
-msgstr "No se ha podido abrir la partición"
+msgstr "No se pudo abrir partición"
 
 msgid "Failed to read ticket."
-msgstr "Fallo al leer ticket"
+msgstr "No se pudo leer ticket."
 
 msgid "Failed to read tmd file."
-msgstr "Fallo al leer archivo tmd"
+msgstr "No se pudo leer TMD."
 
 msgid "Failed to read wad header."
-msgstr "Fallo al leer cabecera wad "
+msgstr "No se pudo leer header del WAD."
 
 msgid "Failed updating"
-msgstr "No se ha podido actualizar"
+msgstr "No se pudo actualizar"
 
 msgid "Favorite Level"
 msgstr "Nivel Favorito"
@@ -954,41 +954,41 @@ msgid "Features"
 msgstr "Características"
 
 msgid "Features Settings"
-msgstr "Configuración de las características"
+msgstr "Configurar Características"
 
 msgid "Feb"
 msgstr ""
 
 msgid "File"
-msgstr ""
+msgstr "Archivo"
 
 msgid "File not found."
 msgstr "Archivo no encontrado."
 
 msgid "File read/write error."
-msgstr "Error de lectura/escritura en archivo"
+msgstr "Error de lectura/escritura."
 
 msgid "Files extracted successfully."
-msgstr "Archivos extraidos correctamente"
+msgstr "Archivos extraídos satisfactoriamente."
 
 #, c-format
 msgid "Filesize is %i Byte."
-msgstr "El tamaño de archivo es %i Byte."
+msgstr "El tamaño del archivo es %i byte(s)."
 
 msgid "Filesize is 0 Byte."
-msgstr "El tamaño de archivo es 0 Byte."
+msgstr "El tamaño del archivo es 0 bytes."
 
 msgid "Flat Covers"
-msgstr "Carátulas 2D"
+msgstr "Covers 2D"
 
 msgid "Flip-X"
-msgstr "Animación Menú Disco"
+msgstr "Desplazamiento X"
 
 msgid "Folder"
-msgstr ""
+msgstr "Directorio"
 
 msgid "Font Scale Factor"
-msgstr "Escala textos"
+msgstr "Escalado de Fuente"
 
 msgid "Force 16:9"
 msgstr "Forzar 16:9"
@@ -1012,7 +1012,7 @@ msgid "Force PAL60"
 msgstr "Forzar PAL60"
 
 msgid "Force Titles from Disc"
-msgstr "Forzar titulos del disco"
+msgstr "Forzar títulos del disco"
 
 msgid "Force Widescreen"
 msgstr "Forzar 16:9"
@@ -1024,7 +1024,7 @@ msgid "Formatting, please wait..."
 msgstr "Formateando, por favor espera..."
 
 msgid "Found missing images."
-msgstr "Se encontraron imágenes que faltan."
+msgstr "Se encontraron las imágenes faltantes."
 
 msgid "Frame"
 msgstr "Marco"
@@ -1051,22 +1051,22 @@ msgid "French"
 msgstr "Francés"
 
 msgid "Full"
-msgstr "Completa"
+msgstr "Completo"
 
 msgid "Full Cover Path"
-msgstr "Ruta Carátulas Comp."
+msgstr "Covers Completos"
 
 msgid "Full Covers"
-msgstr "Carátulas comp."
+msgstr "Covers Completos"
 
 msgid "Full Menu"
 msgstr "Completo"
 
 msgid "Full covers Download"
-msgstr "Descargar carátulas comp."
+msgstr "Descargar covers completos"
 
 msgid "Full shutdown"
-msgstr "Apagado completo"
+msgstr "Apagar"
 
 msgid "GAMEID_Gamename"
 msgstr "IDdelJuego_NombreDelJuego"
@@ -1078,19 +1078,19 @@ msgid "GC Games"
 msgstr "Juegos GC"
 
 msgid "GC Install 32K Aligned"
-msgstr "Instalar GC alineado 32k"
+msgstr "Instalar GC alineado 32K"
 
 msgid "GC Install Compressed"
 msgstr "Instalar GC comprimido"
 
 msgid "GCT Cheatcodes Path"
-msgstr "Ruta de Trucos GCT"
+msgstr "Ruta de Cheats GCT"
 
 msgid "GCT File created"
 msgstr "Archivo GCT creado"
 
 msgid "GUI Settings"
-msgstr "Configuración de GUI"
+msgstr "Interfaz Gráfica"
 
 msgid "GXDraw"
 msgstr ""
@@ -1098,32 +1098,32 @@ msgstr ""
 msgid "GXFlush"
 msgstr ""
 
-msgid "GameCube Games Delete"
-msgstr "Borrar Juego de GameCube"
+msgid "Game Cube Games Delete"
+msgstr "Borrar juego de GameCube"
 
-msgid "GameCube Install Menu"
-msgstr "Menu de instalación GameCube"
+msgid "Game Cube Install Menu"
+msgstr "Menú de instalación GameCube"
 
 msgid "Game Header Cache Files Path"
-msgstr ""
-
+msgstr "Ruta del caché de Headers"
+				
 msgid "Game ID"
-msgstr "ID del Juego"
+msgstr "ID de Juego"
 
 msgid "Game IOS"
-msgstr "IOS del Juego"
+msgstr "IOS de Juego"
 
 msgid "Game Language"
 msgstr "Idioma"
 
 msgid "Game Load"
-msgstr "Configuración del Juego"
+msgstr "Carga de Juegos"
 
 msgid "Game Lock"
-msgstr "Bloqueo del Juego"
+msgstr "Bloquear Juego"
 
 msgid "Game Only"
-msgstr "Solo el Juego"
+msgstr "Sólo Juego"
 
 msgid "Game Region"
 msgstr "Región"
@@ -1138,15 +1138,15 @@ msgid "Game Sound Volume"
 msgstr "Volumen del Juego"
 
 msgid "Game Split Size"
-msgstr "Separación WBFS"
+msgstr "Tamaño de División"
 
 msgid "Game Window Mode"
-msgstr "Juego en modo ventana"
+msgstr "Juego en Modo ventana"
 
 msgid "Game is already installed:"
-msgstr "El juego ya estaba instalado:"
+msgstr "El juego ya está instalado:"
 
-msgid "Games IOS"
+msgid "Game's IOS"
 msgstr "IOS del juego"
 
 msgid "Game/Install Partition"
@@ -1165,7 +1165,7 @@ msgid "GameCube Source"
 msgstr "Origen GameCube"
 
 msgid "Gamename [GAMEID]"
-msgstr "Nombrejuego [IDJUEGO]"
+msgstr "NombreJuego [IDJUEGO]"
 
 msgid "Games"
 msgstr "Juegos"
@@ -1183,10 +1183,10 @@ msgid "Getting file list..."
 msgstr "Obteniendo lista de archivos..."
 
 msgid "Getting game folder size..."
-msgstr "Obteniendo tamaño de la carpeta"
+msgstr "Obteniendo tamaño de carpeta..."
 
 msgid "Global Settings"
-msgstr "Configuración Global"
+msgstr "Configuración General"
 
 msgid "Grid Scroll Speed"
 msgstr "Velocidad Scroll"
@@ -1195,13 +1195,13 @@ msgid "HOME Menu"
 msgstr "Menú HOME"
 
 msgid "Hard Drive Settings"
-msgstr "Configuración del Disco Duro"
+msgstr "Disco Duro"
 
 msgid "High Quality"
-msgstr "Alta calidad"
+msgstr "Calidad Alta"
 
 msgid "High/Low"
-msgstr "Alta/baja"
+msgstr "Alta/Baja"
 
 msgid "Homebrew Apps Path"
 msgstr "Ruta Apps Homebrew"
@@ -1213,7 +1213,7 @@ msgid "Homebrew Launcher"
 msgstr "Ejecutar Homebrew"
 
 msgid "Hooktype"
-msgstr ""
+msgstr "HookType"
 
 msgid "Hour"
 msgstr "Horas"
@@ -1222,13 +1222,13 @@ msgid "How do you want to update?"
 msgstr "¿Cómo quieres actualizar?"
 
 msgid "How to Shutdown?"
-msgstr "¿Cómo quieres apagar?"
+msgstr "¿Apagar Wii?"
 
 msgid "Import Categories"
-msgstr "Importar Categorías"
+msgstr "Importar categorías"
 
 msgid "Import operation successfully completed."
-msgstr "Importación completada con éxito."
+msgstr "Importación completada satisfactoriamente."
 
 msgid "Importing categories"
 msgstr "Importando categorías"
@@ -1242,7 +1242,7 @@ msgid "Incoming file %0.2fMB"
 msgstr "Archivo recibido %0.2fMB"
 
 msgid "Individual"
-msgstr "1 por juego"
+msgstr ""
 
 msgid "Initializing Network"
 msgstr "Iniciando la Red"
@@ -1250,8 +1250,8 @@ msgstr "Iniciando la Red"
 msgid "Insert Disk"
 msgstr "Inserta el Disco"
 
-msgid "Insert a Wii or a GameCube Disc!"
-msgstr "Inserta un disco de Wii o GameCube"
+msgid "Insert a Wii or a Game Cube Disc!"
+msgstr "¡Inserta un Disco de Wii o GameCube!"
 
 msgid "Install"
 msgstr "Instalar"
@@ -1260,40 +1260,40 @@ msgid "Install Canceled"
 msgstr "Instalación cancelada"
 
 msgid "Install Directories"
-msgstr "Instalar en carpeta"
+msgstr "Instalar carpetas"
 
 msgid "Install Error!"
 msgstr "¡Error de Instalación!"
 
 msgid "Install Partitions"
-msgstr "Instalar Particiones"
+msgstr "Instalar particiones"
 
 msgid "Install a game"
-msgstr "Instalar un juego"
+msgstr "Instalar juego"
 
 msgid "Install error - Cleaning incomplete data."
-msgstr ""
+msgstr "Error al instalar - Limpiando datos incompletos."
 
 msgid "Install finished"
-msgstr "Instalación terminada"
+msgstr "Instalación terminó"
 
-msgid "Installing GameCube Game..."
-msgstr "Instalando un juego de GameCube"
+msgid "Installing Game Cube Game..."
+msgstr "Instalando juego de GameCube..."
 
 msgid "Installing content"
-msgstr "Instalando Contenido"
+msgstr "Instalando contenido"
 
 msgid "Installing game:"
 msgstr "Instalando juego:"
 
 msgid "Installing title..."
-msgstr "Instalando Título"
+msgstr "Instalando título..."
 
 msgid "Invalid IOS number entered. Number must be -1 for inherit or 200 - 255."
-msgstr "Número de IOS no valido. Debe ser -1 por defecto o 200 a 255"
+msgstr "Número de IOS inválido. Debe ser -1 por defecto o de 200 a 255."
 
 msgid "Invalid wad file."
-msgstr "Archivo WAD no valido"
+msgstr "WAD Inválido."
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Parece que tienes alguna información que puede ser útil para nosotros. Por favor envía esta información al equipo desarrollador."
@@ -1329,25 +1329,25 @@ msgid "Korean"
 msgstr "Coreano"
 
 msgid "LED Activity"
-msgstr "Iluminar lector"
+msgstr "Actividad de LEDs"
 
 msgid "Language Files"
-msgstr "Archivos de idioma"
+msgstr "Idiomas"
 
 msgid "Language change:"
-msgstr "Cambio de Idioma:"
+msgstr "Cambiar Idioma:"
 
 msgid "Languagefiles Path"
-msgstr "Ruta Archivos Idioma"
+msgstr "Ruta de Idioma"
 
 msgid "Languagepath changed."
-msgstr "Ruta de idioma cambiada."
+msgstr "Ruta de Idioma cambiada."
 
 msgid "Launching Wii games with emulated nand only works on d2x cIOS! Change game IOS to a d2x cIOS first."
-msgstr "¡Cargar juegos de Wii de una nand emulada sólo funciona con un cIOS d2x!"
+msgstr "¡Los juegos de Wii emulados sólo funcionan con un cIOS d2x! Cambia el IOS del juego a uno d2x primero."
 
 msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
-msgstr "La carga de canales de Nand emuada solo funciona con cIOS d2x, cambia el IOS del juego a d2x primero"
+msgstr "¡Los canales emulados sólo funcionan con un cIOS d2x! Cambia el IOS del juego a uno d2x primero."
 
 msgid "Left"
 msgstr "Izquierda"
@@ -1356,7 +1356,7 @@ msgid "Like SysMenu"
 msgstr "Como Menú Sist."
 
 msgid "List on Gamelaunch"
-msgstr "Lista en la carga del juego"
+msgstr "Lista al lanzar juego"
 
 msgid "Load"
 msgstr "Cargar"
@@ -1372,9 +1372,9 @@ msgid "Load this DOL as alternate DOL?"
 msgstr "¿Cargar este DOL como DOL Alternativo?"
 
 msgid "Loader Settings"
-msgstr "Configuración del Cargador"
+msgstr "Configurar Cargador"
 
-msgid "Loaders IOS"
+msgid "Loader's IOS"
 msgstr "IOS del cargador"
 
 msgid "Loading standard language."
@@ -1396,25 +1396,25 @@ msgid "Log to file"
 msgstr "Guardar registro"
 
 msgid "Loop Directory"
-msgstr "Carpeta de bucle"
+msgstr "Repetir carpeta"
 
 msgid "Loop Music"
-msgstr "Bucle musical"
+msgstr "Aleatorio"
 
 msgid "Loop Sound"
-msgstr "Bucle de sonido"
+msgstr "Repetir"
 
 msgid "Low Quality"
-msgstr "Baja calidad"
+msgstr "Calidad Baja"
 
 msgid "Low/High"
-msgstr "Baja/alta"
+msgstr "Baja/Alta"
 
 msgid "MIOS (Default & Customs)"
 msgstr "MIOS (Original y modificados)"
 
 msgid "Main DOL"
-msgstr "DOL Principal"
+msgstr "Main.dol"
 
 msgid "Main GameCube Games Path"
 msgstr "Ruta Principal de juegos GameCube"
@@ -1438,16 +1438,16 @@ msgid "May"
 msgstr ""
 
 msgid "Memory Card Blocks Size"
-msgstr "Bloques Memory Card"
+msgstr "Tamaño de Bloques"
 
 msgid "Memory Card Emulation"
 msgstr "Emular Memory Card"
 
 msgid "Memory Card with 2043 blocs has issues with Nintendont. Use at your own risk."
-msgstr "Las Memory Card de 2043 bloques traen problemas al usarlas con Nintendont."
+msgstr "Las Memory Card de 2043 bloques tienen problemas al usarlas con Nintendont."
 
 msgid "Messageboard Update"
-msgstr "Actualizar Tablón Wii"
+msgstr "Actualizar Tablón de Mensajes"
 
 msgid "Motion+ Video"
 msgstr "Vídeo Motion+"
@@ -1459,67 +1459,67 @@ msgid "Mount USB at launch"
 msgstr "Montar USB al inicio"
 
 msgid "Move File"
-msgstr ""
+msgstr "Mover archivo"
 
 msgid "Multiple Partitions"
-msgstr "Múltiples Particiones"
+msgstr "Particiones Múltiples"
 
 msgid "Music Loop Mode"
 msgstr "Modo Bucle Musical"
 
 msgid "Music Volume"
-msgstr "Volumen de la Música"
+msgstr "Volumen"
 
 msgid "NMM Mode"
 msgstr "Modo NMM"
 
 msgid "Nand Chan. Emulation"
-msgstr "Emular canales Nand"
+msgstr "Emulación de Canales"
 
 msgid "Nand Channels"
-msgstr "Canales en Nand"
+msgstr "Canales de Wii"
 
 msgid "Nand Emu Channel Path"
-msgstr "Ruta canales Nand emulada"
+msgstr "Ruta de Canales Emulados"
 
 msgid "Nand Emu Path"
-msgstr "Ruta Nand emulada"
+msgstr "Ruta de Emulación"
 
 msgid "Nand Emulation"
-msgstr "Emulación Nand"
+msgstr "Emulación NAND"
 
 msgid "Nand Emulation is only available on D2X cIOS!"
-msgstr "¡La emulación Nand solo está disponible en cIOS D2X!"
+msgstr "¡Emulación de NAND sólo disponible en cIOS d2x!"
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
-msgstr "¡La emulación Nand solo funciona en particiones FAT/FAT32!"
+msgstr "¡Emulación de NAND sólo funciona con particiones FAT/FAT32!"
 
 msgid "Nand Saves Emulation"
-msgstr "Emular partidas Nand"
+msgstr "Emulación de Saves en NAND"
 
 msgid "Native Controller"
-msgstr "Sólo mandos nativos"
+msgstr "Mandos nativos"
 
 msgid "Neek"
-msgstr ""
+msgstr "NEEK"
 
 msgid "Neek NAND path selection failed."
-msgstr ""
+msgstr "Falló la selección de ruta para NAND de NEEK."
 
 msgid "Neek kernel file not found."
-msgstr ""
+msgstr "No se encontró kernel de NEEK."
 
 msgid "Neek kernel loading failed."
-msgstr ""
+msgstr "Falló la carga del kernel NEEK."
 
 msgid "Neek2o does not support 'Emulated NAND Channel Path' on SD! Please setup Uneek2o instead."
-msgstr ""
+msgstr "¡NEEK2o no soporta 'Ruta de NAND Emulada' en SD! En cambio, configura ruta para UNEEK2o"
 
 msgid "Neither"
 msgstr "Ninguno"
 
 msgid "Network is not initiated."
-msgstr "No se inició la red."
+msgstr "La red no está iniciada."
 
 msgid "Next"
 msgstr "Siguiente"
@@ -1534,7 +1534,7 @@ msgid "No"
 msgstr ""
 
 msgid "No Cheatfile found"
-msgstr "No se encontró el archivo de Trucos"
+msgstr "No se encontró el archivo de Cheats"
 
 msgid "No DOL file found on disc."
 msgstr "No se encontró el archivo DOL en el Disco"
@@ -1543,28 +1543,28 @@ msgid "No Disc+"
 msgstr ""
 
 msgid "No Splitting"
-msgstr "Sin Separación"
+msgstr "Sin dividir"
 
 msgid "No URL or Path specified."
-msgstr "URL o ruta no especificada."
+msgstr "No se especificó URL o Ruta."
 
 msgid "No WBFS or FAT/NTFS/EXT partition found"
-msgstr "Partición WBFS o FAT/NTFS/EXT no encontrada"
+msgstr "No se encontró partición WBFS o FAT/NTFS/EXT"
 
 msgid "No Wiinnertag.xml found in the config path. Do you want an example file created?"
-msgstr "No se encontró el archivo Wiinnertag.xml. ¿Quieres crear un archivo de ejemplo?"
+msgstr "No se encontró WiinnerTag.xml. ¿Quieres crear un ejemplo del archivo?"
 
 msgid "No change"
 msgstr "Sin cambios"
 
 msgid "No cheats were selected! Should the GCT file be deleted?"
-msgstr "No hay trucos seleccionados, ¿debe ser borrado el archivo GCT?"
+msgstr "¡No se seleccionaron cheats! ¿Borrar archivo GCT?"
 
 msgid "No data could be read."
 msgstr "No se dispone de datos para leer."
 
 msgid "No disc inserted."
-msgstr "No hay disco insertado."
+msgstr "No hay un disco insertado"
 
 msgid "No favorites selected."
 msgstr "Ningún favorito seleccionado."
@@ -1573,22 +1573,22 @@ msgid "No file missing!"
 msgstr "¡No faltan archivos!"
 
 msgid "No games found on the disc"
-msgstr "No se han encontrado juegos en el disco"
+msgstr "No se encontraron juegos en el disco"
 
 msgid "No language files to update on your devices! Do you want to download new language files?"
-msgstr "No hay archivos de idioma en tus dispositivos, ¿quieres descargar nuevos archivos de idioma?"
+msgstr "No se encontraron archivos de idioma para actualizar. ¿Quieres descargarlo"
 
 msgid "No new updates."
-msgstr "No hay nuevas actualizaciones."
+msgstr "No hay actualizaciones."
 
 msgid "No themes found on the site."
-msgstr "No hay Temas en este sitio."
+msgstr "No hay temas en el sitio."
 
 msgid "No themes found."
-msgstr "Ningún tema encontrado."
+msgstr "No se encontraron temas."
 
 msgid "No wad file found in this folder."
-msgstr ""
+msgstr "No hay archivos WAD en esta carpeta."
 
 msgid "NoSSL only"
 msgstr "Sólo NoSSL"
@@ -1600,31 +1600,31 @@ msgid "Normal"
 msgstr ""
 
 msgid "Not Initialized"
-msgstr "No Iniciado"
+msgstr "No Inicializado"
 
-msgid "Not a Wii or a GameCube Disc"
-msgstr "No es un disco Wii o GameCube"
+msgid "Not a Wii Disc"
+msgstr "No es un Disco Wii"
 
 msgid "Not a valid URL"
-msgstr "URL no válida"
+msgstr "URL inválida"
 
 msgid "Not a valid URL path"
-msgstr "Ruta URL no válida"
+msgstr "Ruta URL inválida"
 
 msgid "Not a valid domain"
-msgstr "Dominio no válido"
+msgstr "Dominio inválido"
 
 msgid "Not enough free memory."
 msgstr "¡No hay suficiente memoria libre!"
 
 msgid "Not enough free space on device."
-msgstr "No hay suficiente espacio en el dispositivo"
+msgstr "No hay suficiente espacio en dispositivo."
 
 msgid "Not enough free space!"
 msgstr "¡No hay suficiente espacio libre!"
 
 msgid "Not enough memory for FST."
-msgstr "No hay memoria suficiente la FST"
+msgstr "Sin memoria suficiente para FST."
 
 msgid "Not enough memory."
 msgstr "No hay suficiente memoria."
@@ -1632,47 +1632,44 @@ msgstr "No hay suficiente memoria."
 msgid "Not required"
 msgstr "No requerido"
 
-msgid "Unsupported format!"
-msgstr "Formato no soportado."
+msgid "Not supported format!"
+msgstr "¡Formato no soportado!"
 
 msgid "Nothing selected to delete."
-msgstr "Nada seleccionado para borrar"
+msgstr "Nada seleccionado para borrar."
 
 msgid "Nothing selected to install."
-msgstr "Nada seleccionado para instalar"
+msgstr "Nada seleccionado para instalar."
 
 msgid "Nov"
 msgstr ""
 
 msgid "OFF"
-msgstr "Desactivado"
+msgstr "No"
 
 msgid "OFF (Extended)"
-msgstr ""
+msgstr "No (Extendido)"
 
 msgid "OFF (Safe)"
-msgstr ""
+msgstr "No (Seguro)"
 
 msgid "OK"
 msgstr "Aceptar"
 
 msgid "ON"
-msgstr "Activado"
+msgstr "Sí"
 
 msgid "ON (Low)"
-msgstr ""
+msgstr "Sí (Bajo)"
 
 msgid "ON (Medium)"
-msgstr ""
+msgstr "Sí (Medio)"
 
 msgid "ON (Multi)"
-msgstr "1 global"
+msgstr "Sí (Multi)"
 
 msgid "ON (High)"
-msgstr ""
-
-msgid "OSReport"
-msgstr ""
+msgstr "Sí (Alto)"
 
 msgid "OSSleepThread"
 msgstr ""
@@ -1681,7 +1678,7 @@ msgid "Ocarina"
 msgstr ""
 
 msgid "Ocarina is not supported with neek2o yet. Launch game anyway?"
-msgstr ""
+msgstr "Ocarina aún no es soportado con NEEK2o. ¿Iniciar de todas formas?"
 
 msgid "Oct"
 msgstr ""
@@ -1690,34 +1687,34 @@ msgid "Official Site:"
 msgstr "Página Oficial:"
 
 msgid "Offset"
-msgstr "Desfasaje"
+msgstr ""
 
 msgid "Ok"
-msgstr ""
+msgstr "Aceptar"
 
 msgid "One Line A"
-msgstr ""
+msgstr "Una Línea A"
 
 msgid "One Line B"
-msgstr ""
+msgstr "Una Línea B"
 
 msgid "Only Game Partition"
-msgstr "Solo Partición de Juegos"
+msgstr "Sólo partición del Juego"
 
 msgid "Only for Install"
 msgstr "Sólo al instalar"
 
 msgid "Original"
-msgstr ""
+msgstr "Originales"
 
 msgid "Original/Customs"
-msgstr "Originales/Artísticas"
+msgstr "Originales/Customs"
 
 msgid "PAD Hook"
 msgstr ""
 
 msgid "PAL50 Patch"
-msgstr ""
+msgstr "Parche PAL50"
 
 msgid "Parental Control"
 msgstr "Control Parental"
@@ -1741,7 +1738,7 @@ msgid "Patch Country Strings"
 msgstr "Parchear País"
 
 msgid "Path Changed"
-msgstr "Ruta cambiada"
+msgstr "Ruta Cambiada"
 
 msgid "Permission denied."
 msgstr "Permiso denegado."
@@ -1765,10 +1762,10 @@ msgid "Play Previous"
 msgstr "Oír Anterior"
 
 msgid "Playing Music:"
-msgstr "Reproducción Musical:"
+msgstr "Reproduciendo música:"
 
 msgid "Please enter a valid address e.g. wiimmfi.de"
-msgstr ""
+msgstr "Escribe una ruta válida (p. ej. wiimmfi.de)"
 
 msgid "Please wait"
 msgstr "Por favor, espera"
@@ -1777,7 +1774,7 @@ msgid "Please wait..."
 msgstr "Por favor, espera..."
 
 msgid "Power off the Wii"
-msgstr "Apagar la Wii"
+msgstr "Apagar Wii"
 
 msgid "Prev"
 msgstr "Ant."
@@ -1786,7 +1783,7 @@ msgid "Private Server"
 msgstr "Servidor privado"
 
 msgid "Process finished."
-msgstr "Proceso terminado"
+msgstr "Proceso terminado."
 
 msgid "Progressive Patch"
 msgstr "Forzar progresivo"
@@ -1804,31 +1801,31 @@ msgid "Random Directory Music"
 msgstr "Aleatorio de la carpeta musical"
 
 msgid "Real Nand"
-msgstr "Nand Real"
+msgstr "NAND Real"
 
 msgid "Receiving file from:"
 msgstr "Recibir archivo desde:"
 
 msgid "Region Free"
-msgstr ""
+msgstr "Región Libre"
 
 msgid "Region Patch"
-msgstr "Parche región"
+msgstr "Parche de Región"
 
 msgid "Released"
-msgstr "Comercializado el"
+msgstr "Lanzado el"
 
 msgid "Reload SD"
 msgstr "Recargar SD"
 
 msgid "Reloading game list now, please wait..."
-msgstr "Recargando lista de juegos, espere por favor..."
+msgstr "Recargando lista de juegos, espera..."
 
 msgid "Remember Unlock"
-msgstr "Recordar bloqueo"
+msgstr "Recordar Bloqueo"
 
 msgid "Remove Read Speed Limit"
-msgstr ""
+msgstr "Quitar límite de lectura"
 
 msgid "Remove update"
 msgstr "Quitar actualización"
@@ -1843,19 +1840,19 @@ msgid "Reset"
 msgstr "Reiniciar"
 
 msgid "Reset All Game Settings"
-msgstr ""
-
+msgstr "Reiniciar configuración de juegos"
+					   
 msgid "Reset BG Music"
 msgstr "Reiniciar Música de Fondo"
 
 msgid "Reset Game Header Cache"
-msgstr ""
-
+msgstr "Reiniciar caché de Headers"
+						   
 msgid "Reset Playcounter"
 msgstr "Reiniciar Partidas"
 
 msgid "Reset to default BGM?"
-msgstr "¿Resetear a música de fondo por defecto?"
+msgstr "¿Restablecer música de fondo por defecto?"
 
 msgid "Restarting..."
 msgstr "Reiniciando..."
@@ -1867,7 +1864,7 @@ msgid "Return To"
 msgstr "Volver a"
 
 msgid "Return to Wii Menu"
-msgstr "Volver a Menú Wii"
+msgstr "Volver a Menú de Wii"
 
 msgid "Right"
 msgstr "Derecha"
@@ -1876,7 +1873,7 @@ msgid "Rotating Disc"
 msgstr "Disco girando"
 
 msgid "Round"
-msgstr ""
+msgstr "Ronda"
 
 msgid "Rumble"
 msgstr "Vibración"
@@ -1888,10 +1885,10 @@ msgid "SD"
 msgstr ""
 
 msgid "SD Card could not be accessed."
-msgstr "No se puede acceder a la tarjeta SD"
+msgstr "No se puede acceder a tarjeta SD."
 
 msgid "SD GameCube Games Path"
-msgstr "Ruta de juegos GameCUbe en SD"
+msgstr "Ruta de juegos GameCube en SD"
 
 msgid "SD GameCube Path"
 msgstr "Ruta de GameCube en SD"
@@ -1900,13 +1897,13 @@ msgid "SD Path"
 msgstr "Ruta en SD"
 
 msgid "SFX Volume"
-msgstr "Volumen de los Efectos"
+msgstr "Efectos (SFX)"
 
 msgid "Save"
 msgstr "Guardar"
 
 msgid "Save Failed. No device inserted?"
-msgstr "Fallo en el guardado. ¿No hay introducido ningún dispositivo?"
+msgstr "No se pudo guardar. ¿Hay un dispositivo insertado?"
 
 msgid "Save Game List to"
 msgstr "Guardar Lista de Juegos en"
@@ -1918,7 +1915,7 @@ msgid "Saved"
 msgstr "Guardado"
 
 msgid "Savegame might not exist for this game."
-msgstr "Puede no existir partida guardada para este juego"
+msgstr "Puede que no exista el Save de este juego."
 
 msgid "Screensaver"
 msgstr "Salvapantallas"
@@ -1930,25 +1927,25 @@ msgid "Select"
 msgstr "Seleccionar"
 
 msgid "Select DOL Offset"
-msgstr "Seleccionar DOL"
+msgstr "Seleccionar offset del DOL"
 
 msgid "Select a DOL"
 msgstr "Seleccionar DOL"
 
 msgid "Select a DOL from Game"
-msgstr "Seleccionar DOL del Juego"
+msgstr "Seleccionar DOL desde Juego"
 
 msgid "Select game categories"
-msgstr "Seleccionar categorías de juegos"
+msgstr "Seleccionar categorías"
 
 msgid "Select loader mode"
-msgstr "Seleccionar cargador"
+msgstr "Seleccionar Modo del Cargador"
 
 msgid "Select the NAND Emu Path to use."
-msgstr ""
+msgstr "Seleccionar la ruta de la NAND emulada a usar"
 
 msgid "Select titles sources."
-msgstr "Selecciona fuente de títulos"
+msgstr "Selecciona origen de títulos."
 
 msgid "Sept"
 msgstr ""
@@ -1963,43 +1960,43 @@ msgid "Settings File"
 msgstr "Configuración"
 
 msgid "Show Categories"
-msgstr "Mostrar Categorías"
+msgstr "Mostrar categorías"
 
 msgid "Show Favorite on banner"
-msgstr ""
+msgstr "Mostrar Favoritos en banner"
 
 msgid "Show Free Space"
 msgstr "Mostrar Espacio Libre"
 
 msgid "Show Play Count"
-msgstr "Mostrar núm. jugados"
+msgstr "Mostrar Partidas"
 
 msgid "Show SD"
 msgstr "Mostrar SD"
 
 msgid "Shutdown System"
-msgstr "Apagar consola"
+msgstr "Apagar Sistema"
 
 msgid "Shutdown Wii"
-msgstr "Apagar la Wii"
+msgstr "Apagar Wii"
 
 msgid "Skip Errors"
-msgstr "Saltar errores"
+msgstr "Saltar Errores"
 
 msgid "Skip IPL"
-msgstr ""
+msgstr "Saltar IPL"
 
 msgid "BBA Emulation"
-msgstr ""
+msgstr "Emulación BBA"
 
 msgid "BBA Net Profile"
-msgstr ""
+msgstr "Perfil del BBA"					 
 
 msgid "Sneek Video Patch"
-msgstr "Parche vídeo Sneek"
+msgstr "Parche vídeo SNEEK"
 
 msgid "Sorry, the theme downloader menu is not working anymore because http://wii.spiffy360.com now requires user registration."
-msgstr ""
+msgstr "Disculpa, ya no se pueden descargar temas porque http://wii.spiffy360.com requiere registrarse ahora."
 
 msgid "Sort alphabetically"
 msgstr "Ordenar alfabéticamente"
@@ -2020,7 +2017,7 @@ msgid "Sound Settings"
 msgstr "Configuración de Sonido"
 
 msgid "Sound+BGM"
-msgstr "Sonido+Música Fondo"
+msgstr "Sonido+BGM"
 
 msgid "Sound+Quiet"
 msgstr "Sonido+Silencio"
@@ -2032,25 +2029,25 @@ msgid "Special thanks to:"
 msgstr "Agradecimientos especiales a:"
 
 msgid "Split each 2GB"
-msgstr "Separar cada 2GB"
+msgstr "Dividir cada 2GB"
 
 msgid "Split each 4GB"
-msgstr "Separar cada 4GB"
+msgstr "Dividir cada 4GB"
 
 msgid "Standby"
-msgstr "En espera"
+msgstr "WiiConnect24"
 
 msgid "Start"
 msgstr "Comenzar"
 
 msgid "Success"
-msgstr "Conseguido"
+msgstr "Éxito"
 
 msgid "Success."
-msgstr "Conseguido"
+msgstr "Éxito"
 
 msgid "Success:"
-msgstr "Conseguido:"
+msgstr "Éxito:"
 
 msgid "Successfully Saved"
 msgstr "Guardado correctamente"
@@ -2071,37 +2068,37 @@ msgid "Successfully installed:"
 msgstr "Instalado correctamente:"
 
 msgid "Successfully updated."
-msgstr "actualización correcta"
+msgstr "Actualización correcta."
 
 msgid "Switching to channel list mode."
-msgstr "Cambiando a modo de lista de canales"
+msgstr "Cambiando canales a modo lista."
 
 msgid "Sync FAT32 FS Info"
-msgstr "Sinc. Esp. Libre FAT32"
+msgstr "Sinc. espacio libre (FAT32)"
 
 msgid "Synchronizing..."
 msgstr "Sincronizando..."
 
 msgid "System Default"
-msgstr "Consola"
+msgstr "Sistema"
 
 msgid "System Proxy Settings"
-msgstr ""
+msgstr "Configurar Proxy"							 
 
 msgid "TChinese"
-msgstr "Chino Tradicional"
+msgstr "Chino T."
 
 msgid "TXT Cheatcodes Path"
-msgstr "Ruta de Trucos TXT"
+msgstr "Ruta de Cheats TXT"
 
 msgid "The .them file was not found in the zip."
-msgstr "El archivo .them no se encontró en el zip."
+msgstr "No se encontró el archivo .them en el ZIP."
 
 msgid "The Force Widescreen setting requires DIOS MIOS v2.1 or more. This setting will be ignored."
-msgstr "El forzado 16:9 requiere DIOS MIOS 2.1 o superior."
+msgstr "Forzar 16:9 requiere DIOS MIOS 2.1 o superior."
 
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
-msgstr "Los miis serán extraidos a la ruta de tu EmuNand y Canales de EmuNand. Atención: todos los archivos existentes serán sobreescritos."
+msgstr "Los Miis se extraerán en la ruta de NAND emulada. Atención: todos los archivos existentes serán sobreescritos."
 
 msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
 msgstr "El ajuste No Disc+ requiere DIOS MIOS 2.2 update2."
@@ -2116,26 +2113,26 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "La carpeta especificada no existe. ¿Quieres crearla?"
 
 msgid "The files will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
-msgstr "Los archivos sera extraidos a tu ruta de EmuNand y partidas de EmuNand. Atención: todos los archivos existentes serán seleccionados."
+msgstr "Los archivos se extraerán en la ruta de NAND emulada. Atención: todos los archivos existentes serán sobreescritos."
 
 msgid "The game is on SD Card."
 msgstr "El juego está en la SD."
 
 msgid "The game is on USB."
-msgstr "El juego esta en el USB."
+msgstr "El juego está en USB."
 
 msgid "The save game will be extracted to your emu nand path."
-msgstr "La partida guardada se extraerá en la ruta de tu Nand emuada."
+msgstr "La partida guardada se extraerá en la NAND para emular."
 
-msgid "The save games will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
-msgstr "Las partidas guardadas serán extraidas en la ruta de tus partidas de EmuNand y Canales de EmuNand. Atención: todos los archivos sera sobreescritos."
+msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
+msgstr "Las partidas guardadas se extraerán en la NAND para emular. Atención: Partidas existentes serán sobreescritas."
 
 msgid "The wad file was installed"
-msgstr "Se instaló el archivo wad"
+msgstr "El WAD ha sido instalado"
 
 #, c-format
 msgid "The wad installation failed with error %i"
-msgstr "La instalación del wad falló con error %i"
+msgstr "La instalación del WAD falló. Error %i."
 
 msgid "Theme Downloader"
 msgstr "Descarga de Temas"
@@ -2152,11 +2149,11 @@ msgstr "Título del Tema:"
 msgid "Themes by www.spiffy360.com"
 msgstr "Temas por www.spiffy360.com"
 
-msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
-msgstr "Este IOS es el ios de BootMii. Si estás seguro de que no está BootMii y que tienes otra cosa instalada ahí, ignora esta advertencia."
+msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
+msgstr "Este es el IOS de BootMii. Si estás seguro de que no es BootMii y tienes instalado otra cosa en este slot ignora esta advertencia."
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
-msgstr "No se encontró este IOS en la lista de títulos. Si estás seguro de que lo tienes instalado, ignora esta advertencia."
+msgstr "Este IOS no se encontró en la lista de títulos. Si estás seguro de que está instalado ignora esta advertencia."
 
 msgid "This Nintendont version does not support games on USB."
 msgstr "Esta versión de Nintendont no soporta juegos en USB."
@@ -2168,40 +2165,40 @@ msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "Este juego posee varios discos. Por favor, elige el que deseas cargar."
 
 msgid "This patch might not work with all games. If a game doesn't boot, disable it in individual game settings menu."
-msgstr ""
+msgstr "Esta ruta puede no funcionar con todos los juegos. Si un juego no arranca, deshabilítalo individualmente en la configuración."
 
 msgid "This path must be on SD!"
-msgstr "¡Esta ruta debe ser en la SD!"
+msgstr "¡Esta ruta debe estar en la SD!"
 
 msgid "Time left:"
 msgstr "Quedan:"
 
 msgid "Timer Fix"
-msgstr "Corrección del timer"
+msgstr "Corrección de timer"
 
 msgid "Title Launcher"
 msgstr "Lanzador de Canales"
 
 msgid "Titles Path"
-msgstr ""
+msgstr "Ruta de títulos"
 
 msgid "Titles from GameTDB"
-msgstr "Titulos de GameTDB"
+msgstr "Títulos GameTDB"
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
-msgstr "Para cargar juegos de GameCube desde la lectora debes configurar el modo GameCube a MIOS."
+msgstr "Para cargar juegos de GameCube desde Disco debes configurar el modo GameCube a MIOS."
 
 #, c-format
 msgid "To run GameCube games with %s you need to place them on an USB FAT32 partition."
-msgstr "Para cargar juegos de GameCube con %s debes ponerlos en un USB con formato FAT32."
+msgstr "Para cargar juegos de GameCube con %s, debes ponerlos en un USB con formato FAT32."
 
 #, c-format
 msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary FAT32 partition."
-msgstr ""
+msgstr "Para cargar juegos de GameCube con %s, debes configurar tu 'Ruta principal GameCube' en la primera partición FAT32 primaria."
 
 #, c-format
 msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary partition of the Hard Drive."
-msgstr ""
+msgstr "Para cargar juegos de GameCube con %s, debes configurar tu 'Ruta principal GameCube' en la primera partición primaria del disco duro."
 
 #, c-format
 msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."
@@ -2226,13 +2223,13 @@ msgid "To use HID with %s you need the %s file."
 msgstr "Para usar HID con %s necesitas el archivo %s."
 
 msgid "To use neek you need to set your 'Emulated NAND Channel Path' on the first primary partition of the Hard Drive."
-msgstr ""
+msgstr "Para usar NEEK debes configurar tu 'Ruta de NAND emulada' en la primera partición primaria del disco duro."
 
 msgid "To use neek you need to set your 'Emulated NAND Channel Path' to a FAT32 partition."
-msgstr ""
+msgstr "Para usar NEEK debes configurar tu 'Ruta de NAND emulada' en una partición FAT32."
 
 msgid "To use neek you need to use a 512 bytes/sector Hard Drive."
-msgstr ""
+msgstr "Para usar NEEK necesitas un disco duro con sectores de 512 bytes."
 
 #, c-format
 msgid "To use ocarina with %s you need the %s file."
@@ -2245,13 +2242,13 @@ msgid "Tooltips"
 msgstr "Descripción"
 
 msgid "Transfer failed"
-msgstr "Transferencia fallida"
+msgstr "Transferencia fallida."
 
 msgid "Triforce Arcade Mode"
-msgstr ""
+msgstr "Triforce Modo Arcade"
 
 msgid "Two Lines"
-msgstr ""
+msgstr "Dos Líneas"
 
 msgid "USB"
 msgstr ""
@@ -2266,28 +2263,25 @@ msgid "USB Port"
 msgstr "Puerto USB"
 
 msgid "USB Port changing is only supported on Hermes cIOS."
-msgstr "El cambio de Puerto USB sólo funciona con el cIOS de Hermes."
+msgstr "Cambios en los Puertos USB sólo son soportados en los cIOS de Hermes."
 
 msgid "USB-HID Controller"
 msgstr "Mando USB-HID"
 
 msgid "USBloaderGX couldn't verify Nintendont boot.dol file. Launch this boot.dol anyway?"
-msgstr "No se puede verificar el archivo boot.dol de Nintendont, ¿desea continuar igual?"
+msgstr "No se pudo verificar el archivo boot.dol de Nintendont, ¿continuar de todas formas?"
 
 msgid "USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyway?"
-msgstr "No se puede escribir la configuración de Nintendont, ¿desea continuar igual?"
+msgstr "No se pudo escribir la configuración de Nintendont, ¿continuar de todas formas?"
 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
 msgstr "Se necesita la versión r1218 para Nintendont Alpha 0.1. Por favor, actualiza el boot.dol de Nintendont."
-
-msgid "Use Game Header Cache"
-msgstr ""
 
 msgid "Uninstall"
 msgstr "Desinstalar"
 
 msgid "Uninstall Game"
-msgstr "Desinstalar Juego"
+msgstr "Borrar Juego"
 
 msgid "Uninstall Menu"
 msgstr "Menú de Desinstalación"
@@ -2311,13 +2305,13 @@ msgid "Update"
 msgstr "Actualizar"
 
 msgid "Update All"
-msgstr "Actualizar Todo"
+msgstr "Todo"
 
 msgid "Update DOL"
-msgstr "Actualizar DOL"
+msgstr ".DOL"
 
 msgid "Update Files"
-msgstr "Actual. archivos"
+msgstr "Archivos"
 
 msgid "Update Path"
 msgstr "Ruta Actualización"
@@ -2325,11 +2319,11 @@ msgstr "Ruta Actualización"
 msgid "Update all Language Files"
 msgstr "Actualizar todos los archivos de Idiomas"
 
-msgid "Update Failed"
+msgid "Update failed"
 msgstr "Error en la Actualización"
 
-msgid "Update Successful"
-msgstr "Actualización con éxito"
+msgid "Update successfull"
+msgstr "Actualización exitosa."
 
 msgid "Updating Language Files:"
 msgstr "Actualizando archivos de Idiomas:"
@@ -2338,13 +2332,13 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Enviado archivo ZIP instalado en la carpeta homebrew."
 
 msgid "Use System Font"
-msgstr "Tipografía Wii"
+msgstr "Fuente del Sistema"
 
 msgid "Use global"
-msgstr "Usar global"
+msgstr "Por Defecto"
 
 msgid "VBI (Default)"
-msgstr "VBI (Predeterminado)"
+msgstr "VBI (Por Defecto)"
 
 msgid "VIDTV Patch"
 msgstr "Parche VIDTV"
@@ -2360,22 +2354,22 @@ msgid "Video Deflicker"
 msgstr "Deflicker"
 
 msgid "Video Mode"
-msgstr "Modo vídeo              "
+msgstr "Modo Vídeo"
 
 msgid "Video Scale Value"
-msgstr ""
+msgstr "Valor Escala de Vídeo"
 
 msgid "Video offset"
-msgstr ""
+msgstr "Offset de vídeo"
 
 msgid "Video scale"
-msgstr ""
+msgstr "Escala de vídeo"
 
 msgid "Virtual Pointer Speed"
 msgstr "Vel. Puntero Virtual"
 
 msgid "WDM Files Path"
-msgstr "Rutas Archivos WDM"
+msgstr "Ruta Archivos WDM"
 
 msgid "WIP Patches Path"
 msgstr "Ruta Parches WIP"
@@ -2390,40 +2384,40 @@ msgid "Warning:"
 msgstr "Advertencia:"
 
 msgid "What do you want to do?"
-msgstr "¿Que quieres hacer?"
+msgstr "¿Qué quieres hacer?"
 
 msgid "What do you want to update?"
 msgstr "¿Qué quieres actualizar?"
 
 msgid "What should be deleted for this game title:"
-msgstr "Qué se debería borrar para este juego:"
+msgstr "Qué debería ser borrado para este título:"
 
 msgid "What to extract from NAND?"
-msgstr "¿Que Extraer de la Nand?"
+msgstr "¿Qué extraer de la NAND?"
 
 msgid "Where should the game be installed to?"
-msgstr "¿Donde debe ser instalado el juego?"
+msgstr "¿Dónde instalar el juego?"
 
 msgid "Where to dump NAND?"
-msgstr ""
+msgstr "¿Dónde volcar la NAND?"
 
 msgid "Which device do you want to use for Nintendont files?"
-msgstr ""
+msgstr "¿Qué dispositivo usar para Nintendont?"
 
 msgid "Which mode do you want to use?"
-msgstr ""
+msgstr "¿Qué modo deseas usar?"
 
 msgid "WiFi Features"
 msgstr "Características WiFi"
 
 msgid "Widescreen Factor"
-msgstr "Escala 16:9"
+msgstr "Factor Panorámico"
 
 msgid "Widescreen Fix"
-msgstr "Ajuste 16:9"
+msgstr "Ajuste Panorámico"
 
 msgid "Wii Games"
-msgstr "Juegos Wii"
+msgstr "Juegos de Wii"
 
 msgid "Wii Menu"
 msgstr "Menú de Wii"
@@ -2432,35 +2426,35 @@ msgid "Wii Settings"
 msgstr "Opciones de Wii"
 
 msgid "WiiTDB.xml"
-msgstr "WiiTDB"
+msgstr ""
 
 msgid "WiiTDB.xml is up to date."
-msgstr "WiiTDB está actualizado."
+msgstr "WiiTDB.xml actualizado."
 
 msgid "WiiU Widescreen"
-msgstr "16:9 en Wii U"
+msgstr "16:9 en WiiU"
 
 msgid "Wiilight"
 msgstr "Iluminar lector"
 
-msgid "Wiimmfi"
+msgid "Wiimmfi.de"
 msgstr ""
 
 msgid "Wiinnertag"
-msgstr ""
+msgstr "WiinnerTag"
 
 msgid "Wiinnertag Path"
-msgstr "Ruta Wiinnertag"
+msgstr "Ruta WiinnerTag"
 
 msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
-msgstr "Wiinnertag requiere habilitar la conexión automática a la red al iniciar la aplicación. ¿Quieres habilitarla ahora?"
+msgstr "WiinnerTag necesita que permitas a la aplicación iniciar la red desde que inicie. ¿Quieres habilitarlo ahora?"
 
 msgid "Wiird Debugger"
 msgstr "Depurador Wiird"
 
 #, c-format
 msgid "Write error on file: %s"
-msgstr "Error de escritura en archivo"
+msgstr "Error de escritura en: %s"
 
 msgid "Writing GXGameCategories.xml"
 msgstr "Escribiendo GXGameCategories.xml"
@@ -2472,16 +2466,16 @@ msgid "Yes"
 msgstr "Sí"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
-msgstr "Estás intentando seleccionar una partición FAT32/NTFS/EXT con cIOS 249 Rev < 18. Esto no es soportado. Continúa bajo tu propio riesgo."
+msgstr "Estás intentando seleccionar una partición FAT32/NTFS/EXT con una revisión menor a la 18 del cIOS249. Esto no está soportado. Continúa a tu propio riesgo."
 
 msgid "You can select or format a partition or use the channel loader mode."
-msgstr "Puedes seleccionar o formatear una particón o usar el modo de carga de canales"
+msgstr "Puedes seleccionar/formatear una partición o usar el modo de carga por Canal."
 
 msgid "You cannot delete this category."
 msgstr "No puedes borrar esta categoría."
 
 msgid "You need neek2o to load EmuNAND from sub-folders."
-msgstr ""
+msgstr "Necesitas NEEK2o para cargar NAND emulada desde sub-directorios."
 
 msgid "You need to install DIOS MIOS Lite v1.2 or a newer version."
 msgstr "Necesitas instalar DIOS MIOS Lite 1.2 o superior."
@@ -2490,13 +2484,13 @@ msgid "You need to install an additional GameCube loader or select a different G
 msgstr "Debes instalar otro cargador GameCube o seleccionar uno distinto en la configuración Modo GameCube para cargar juegos desde USB o SD."
 
 msgid "Your current GameCube partition is not compatible. Please update Nintendont."
-msgstr ""
+msgstr "Tu partición GameCube actual no es compatible. Por favor, actualiza Nintendont."
 
 msgid "Zoom Duration (Speed)"
 msgstr "Duración de Zoom"
 
 msgid "and translators for language files updates"
-msgstr "y traductores por los archivos de idiomas"
+msgstr "y a los traductores por su trabajo."
 
 msgid "available"
 msgstr "disponible"
@@ -2505,34 +2499,34 @@ msgid "does not exist!"
 msgstr "no existe"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr "no existe. Ejecutando el juego sin trucos."
+msgstr "no existe. Ejecutando el juego sin cheats."
 
 msgid "files left"
-msgstr "archivos pendientes"
+msgstr "archivos restantes"
 
 msgid "for FAT/NTFS support"
-msgstr "por el soporte FAT/NTFS"
+msgstr "por el soporte FAT/NTFS."
 
 msgid "for GameTDB and hosting covers / disc images"
-msgstr "Para GameTBD y almacenar caratulas / imagenes de disco"
+msgstr "por GameTDB y alojar covers e imágenes."
 
 msgid "for Ocarina"
-msgstr "por Ocarina"
+msgstr "por Ocarina."
 
 msgid "for diverse patches"
-msgstr "por diversos parches"
+msgstr "por diversos parches."
 
 msgid "for his awesome tool LibWiiGui"
-msgstr "por su increible herramienta LibWiiGui"
+msgstr "por su increíble herramienta, LibWiiGui."
 
 msgid "for hosting the themes"
-msgstr "por alojar los Temas"
+msgstr "por alojar los Temas."
 
 msgid "for the USB Loader source"
-msgstr "por el código de USB Loader"
+msgstr "por el código de USB Loader."
 
 msgid "for their work on the wiki page"
-msgstr "por su trabajo en la web wiki"
+msgstr "por su trabajo en la página wiki."
 
 msgid "formatted!"
 msgstr "¡formateado!"
