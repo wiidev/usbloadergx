@@ -61,7 +61,7 @@ msgstr "-- DM(L)/Nintendont "
 
 msgid "/\\/\\"
 msgstr ""
-	   
+
 msgid "0 (Everyone)"
 msgstr "Todos"
 
@@ -542,7 +542,7 @@ msgstr "Archivos actuales de NEEK no son NEEK2o. Autoarranque de juego deshabili
 
 msgid "Custom Address"
 msgstr "Dirección custom"
-  
+
 msgid "Custom Banners"
 msgstr "Banners personalizados"
 
@@ -1098,15 +1098,15 @@ msgstr ""
 msgid "GXFlush"
 msgstr ""
 
-msgid "Game Cube Games Delete"
+msgid "GameCube Games Delete"
 msgstr "Borrar juego de GameCube"
 
-msgid "Game Cube Install Menu"
+msgid "GameCube Install Menu"
 msgstr "Menú de instalación GameCube"
 
 msgid "Game Header Cache Files Path"
 msgstr "Ruta del caché de Headers"
-				
+
 msgid "Game ID"
 msgstr "ID de Juego"
 
@@ -1250,7 +1250,7 @@ msgstr "Iniciando la Red"
 msgid "Insert Disk"
 msgstr "Inserta el Disco"
 
-msgid "Insert a Wii or a Game Cube Disc!"
+msgid "Insert a Wii or a GameCube Disc!"
 msgstr "¡Inserta un Disco de Wii o GameCube!"
 
 msgid "Install"
@@ -1277,7 +1277,7 @@ msgstr "Error al instalar - Limpiando datos incompletos."
 msgid "Install finished"
 msgstr "Instalación terminó"
 
-msgid "Installing Game Cube Game..."
+msgid "Installing GameCube Game..."
 msgstr "Instalando juego de GameCube..."
 
 msgid "Installing content"
@@ -1671,6 +1671,9 @@ msgstr "Sí (Multi)"
 msgid "ON (High)"
 msgstr "Sí (Alto)"
 
+msgid "OSReport"
+msgstr ""
+
 msgid "OSSleepThread"
 msgstr ""
 
@@ -1841,13 +1844,13 @@ msgstr "Reiniciar"
 
 msgid "Reset All Game Settings"
 msgstr "Reiniciar configuración de juegos"
-					   
+
 msgid "Reset BG Music"
 msgstr "Reiniciar Música de Fondo"
 
 msgid "Reset Game Header Cache"
 msgstr "Reiniciar caché de Headers"
-						   
+
 msgid "Reset Playcounter"
 msgstr "Reiniciar Partidas"
 
@@ -1990,7 +1993,7 @@ msgid "BBA Emulation"
 msgstr "Emulación BBA"
 
 msgid "BBA Net Profile"
-msgstr "Perfil del BBA"					 
+msgstr "Perfil del BBA"
 
 msgid "Sneek Video Patch"
 msgstr "Parche vídeo SNEEK"
@@ -2083,7 +2086,7 @@ msgid "System Default"
 msgstr "Sistema"
 
 msgid "System Proxy Settings"
-msgstr "Configurar Proxy"							 
+msgstr "Configuración de proxy del sistema"
 
 msgid "TChinese"
 msgstr "Chino T."
@@ -2277,6 +2280,9 @@ msgstr "No se pudo escribir la configuración de Nintendont, ¿continuar de toda
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
 msgstr "Se necesita la versión r1218 para Nintendont Alpha 0.1. Por favor, actualiza el boot.dol de Nintendont."
 
+msgid "Use Game Header Cache"
+msgstr "Usar caché de encabezado de juego"
+
 msgid "Uninstall"
 msgstr "Desinstalar"
 
@@ -2319,10 +2325,10 @@ msgstr "Ruta Actualización"
 msgid "Update all Language Files"
 msgstr "Actualizar todos los archivos de Idiomas"
 
-msgid "Update failed"
+msgid "Update Failed"
 msgstr "Error en la Actualización"
 
-msgid "Update successfull"
+msgid "Update Successful"
 msgstr "Actualización exitosa."
 
 msgid "Updating Language Files:"
@@ -2437,7 +2443,7 @@ msgstr "16:9 en WiiU"
 msgid "Wiilight"
 msgstr "Iluminar lector"
 
-msgid "Wiimmfi.de"
+msgid "Wiimmfi"
 msgstr ""
 
 msgid "Wiinnertag"
