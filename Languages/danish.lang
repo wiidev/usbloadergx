@@ -664,10 +664,10 @@ msgid "Disc read error."
 msgstr "Disk læsefejl"
 
 msgid "Disc-Select Prompt"
-msgstr ""
+msgstr "Disk-valg Prompt"
 
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
-msgstr ""
+msgstr "Disk2 skal installeres in ukomprimeret format for at virke med DM(L) v2.6+, er du sikker på du vil installere i komprimeret format?"
 
 msgid "Discarts"
 msgstr ""
@@ -682,10 +682,10 @@ msgid "Display as a carousel"
 msgstr "Vis som karusel"
 
 msgid "Display as a channel grid"
-msgstr ""
+msgstr "Vis som kanalgitter"
 
 msgid "Display as a grid"
-msgstr "Vis som tabel"
+msgstr "Vis som gitter"
 
 msgid "Display as a list"
 msgstr "Vis som liste"
@@ -697,52 +697,52 @@ msgid "Do you want to apply it now?"
 msgstr "Skal det aktiveres nu?"
 
 msgid "Do you want to apply this theme?"
-msgstr "Vil du inlæse dette tema?"
+msgstr "Vil du indlæse dette tema?"
 
 msgid "Do you want to change language?"
 msgstr "Skal sproget ændres?"
 
 msgid "Do you want to continue with next game?"
-msgstr ""
+msgstr "Vil du fortsætte med det næste spil?"
 
 msgid "Do you want to copy now?"
-msgstr ""
+msgstr "Vil du kopiere nu?"
 
 msgid "Do you want to copy the game to SD or delete a game on SD?"
-msgstr ""
+msgstr "Vil du kopiere spillet til SD eller slette et spil på SD?"
 
 msgid "Do you want to delete a game on SD?"
-msgstr ""
+msgstr "Vil du slette et spil på SD?"
 
 msgid "Do you want to discard changes?"
-msgstr ""
+msgstr "Vil du kassere ændringer?"
 
 msgid "Do you want to download this theme?"
 msgstr "Skal dette tema downloades?"
 
 msgid "Do you want to extract all the save games?"
-msgstr "Vil du udpakke alle save games?"
+msgstr "Vil du udpakke alle savegames?"
 
 msgid "Do you want to extract the save game?"
-msgstr "Vil du udpakke dette save game?"
+msgstr "Vil du udpakke dette savegame?"
 
 msgid "Do you want to format:"
 msgstr "Vil du formatere:"
 
 msgid "Do you want to install selected games?"
-msgstr ""
+msgstr "Vil du installere valgte spil?"
 
 msgid "Do you want to load the default theme?"
 msgstr "Vil du indlæse standard tema?"
 
 msgid "Do you want to move the file(s)? Any existing ones will be deleted!"
-msgstr ""
+msgstr "Vil du flytte fil(er)? Alle eksisterende will blive slettet!"
 
 msgid "Do you want to re-init network?"
 msgstr "Vil du genetablere netværket?"
 
 msgid "Do you want to start the game now?"
-msgstr ""
+msgstr "Vil du starte spillet nu?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Vil du synkronisere fri plads info sector på alle FAT32 Partitioner?"
@@ -766,7 +766,7 @@ msgid "Downloading 3D Covers"
 msgstr "Downloader 3D Covers"
 
 msgid "Downloading Custom Banners"
-msgstr ""
+msgstr "Downloader brugerdefinerede Banners"
 
 msgid "Downloading Flat Covers"
 msgstr "Downloader Flade Covers"
@@ -778,7 +778,7 @@ msgid "Downloading Full LQ Covers"
 msgstr "Downloader Fuld LQ Covers"
 
 msgid "Downloading custom Discarts"
-msgstr "Downloader tilpasset DVD billeder"
+msgstr "Downloader brugerdefinerede Diskbilleder"
 
 msgid "Downloading file..."
 msgstr "Downloader fil..."
@@ -787,7 +787,7 @@ msgid "Downloading image:"
 msgstr "Downloader billede:"
 
 msgid "Downloading original Discarts"
-msgstr "Downloader org. DVD billeder"
+msgstr "Downloader org. Diskbilleder"
 
 msgid "Downloading pagelist:"
 msgstr "Downloader pagelist:"
@@ -796,7 +796,7 @@ msgid "Dump NAND to EmuNand"
 msgstr "Kopier Wii NAND til EmuNand"
 
 msgid "During zoom"
-msgstr ""
+msgstr "Under zoom"
 
 msgid "Dutch"
 msgstr "Hollandsk"
@@ -829,7 +829,7 @@ msgid "Error"
 msgstr "Fejl"
 
 msgid "Error !"
-msgstr "Fejl!"
+msgstr "Fejl !"
 
 #, c-format
 msgid "Error creating path: %s"
@@ -839,17 +839,17 @@ msgid "Error opening downloaded file"
 msgstr "Fejl kunne ikke åbne downloadet fil"
 
 msgid "Error reading Disc"
-msgstr "DVDen kunne ikke læses"
+msgstr "Disken kunne ikke læses"
 
 msgid "Error reading disc"
-msgstr ""
+msgstr "Disken kunne ikke læses"
 
 #, c-format
 msgid "Error when downloading file: %i"
-msgstr "Fejl kunne ikke download fil: %i"
+msgstr "Fejl under download af fil: %i"
 
 msgid "Error while downloding file"
-msgstr "Fejl under hentning af fil"
+msgstr "Fejl under download af fil"
 
 msgid "Error while opening the zip."
 msgstr "Fejl under udpakning af zip fil."
@@ -867,7 +867,7 @@ msgid "Error:"
 msgstr "Fejl:"
 
 msgid "Error: Not enough space on SD."
-msgstr ""
+msgstr "Fejl: Ikke nok plads på SD."
 
 msgid "Errors occured."
 msgstr "Fejl opstået"
@@ -882,19 +882,19 @@ msgid "Exit to where?"
 msgstr "Hvorhen?"
 
 msgid "Export All Saves to EmuNand"
-msgstr "Kopier alle saves til EmuNand"
+msgstr "Exporter alle saves til EmuNand"
 
 msgid "Export Miis to EmuNand"
-msgstr ""
+msgstr "Exporter Miis til EmuNand"
 
 msgid "Export SYSCONF to EmuNand"
-msgstr ""
+msgstr "Exporter SYSCONF to EmuNand"
 
 msgid "Extract Miis to the Emu NAND?"
-msgstr ""
+msgstr "Udpak Miis til Emu NANDen?"
 
 msgid "Extract SYSCONF to the Emu NAND?"
-msgstr ""
+msgstr "Udpak SYSCONF til Emu NANDen?"
 
 msgid "Extract Save to EmuNand"
 msgstr "Kopier Save til EmuNand"
@@ -903,7 +903,7 @@ msgid "Extracting file:"
 msgstr "Udpakker Fil:"
 
 msgid "Extracting files..."
-msgstr "Pakker filer ud..."
+msgstr "Udpakker Filer..."
 
 msgid "Extracting files:"
 msgstr "Udpakker Filer:"
@@ -918,19 +918,19 @@ msgid "Failed"
 msgstr "Fejlede"
 
 msgid "Failed copying file"
-msgstr ""
+msgstr "Kopieringen af filen mislykkedes"
 
 msgid "Failed formating"
 msgstr "Formateringen mislykkedes"
 
 msgid "Failed to extract all files. Savegame might not exist."
-msgstr "Fejlede at udpakke alle filer. Savegame eksistere muligvis ikke."
+msgstr "Det mislykkedes at udpakke alle filer. Savegame eksisterer muligvis ikke."
 
 msgid "Failed to extract."
 msgstr "Udpakningen mislykkedes."
 
 msgid "Failed to initialize the USB storage device."
-msgstr "Fejlede at initialisere USB enheden."
+msgstr "Der mislykkedes at initialisere USB-enheden."
 
 msgid "Failed to open partition"
 msgstr "Kunne ikke åbne partition"
@@ -948,19 +948,19 @@ msgid "Failed updating"
 msgstr "Opdatering fejlede"
 
 msgid "Favorite Level"
-msgstr ""
+msgstr "Favorit Niveau"
 
 msgid "Features"
-msgstr "Særlige"
+msgstr "Funktioner"
 
 msgid "Features Settings"
-msgstr "Særlige indstillinger"
+msgstr "Funktions indstillinger"
 
 msgid "Feb"
 msgstr ""
 
 msgid "File"
-msgstr ""
+msgstr "Fil"
 
 msgid "File not found."
 msgstr "Fil ikke fundet."
@@ -985,10 +985,10 @@ msgid "Flip-X"
 msgstr ""
 
 msgid "Folder"
-msgstr ""
+msgstr "Mappe"
 
 msgid "Font Scale Factor"
-msgstr ""
+msgstr "Skrift størrelsesfaktor"
 
 msgid "Force 16:9"
 msgstr "Tving 16:9"
@@ -1012,37 +1012,37 @@ msgid "Force PAL60"
 msgstr "Tving PAL60"
 
 msgid "Force Titles from Disc"
-msgstr ""
+msgstr "Tving Titler fra Disk"
 
 msgid "Force Widescreen"
-msgstr ""
+msgstr "Tving Widescreen"
 
 msgid "Format"
 msgstr "Formater"
 
 msgid "Formatting, please wait..."
-msgstr "Formatere, vent venligst..."
+msgstr "Formaterer, vent venligst..."
 
 msgid "Found missing images."
 msgstr "Fundet manglende billeder"
 
 msgid "Frame"
-msgstr ""
+msgstr "Billede"
 
 msgid "Frame Projection Height"
-msgstr ""
+msgstr "Billede projektionshøjde"
 
 msgid "Frame Projection Width"
-msgstr ""
+msgstr "Billede projektionsbredde"
 
 msgid "Frame Projection X-Offset"
-msgstr ""
+msgstr "Billedeprojektion X-Offset"
 
 msgid "Frame Projection Y-Offset"
-msgstr ""
+msgstr "Billedeprojektion Y-Offset"
 
 msgid "Frames"
-msgstr ""
+msgstr "Billeder"
 
 msgid "Free Space"
 msgstr "Ledig plads"
@@ -1057,34 +1057,34 @@ msgid "Full Cover Path"
 msgstr "Sti til Fuld Cover"
 
 msgid "Full Covers"
-msgstr ""
+msgstr "Fuld Covers"
 
 msgid "Full Menu"
 msgstr "Fuld Menu"
 
 msgid "Full covers Download"
-msgstr ""
+msgstr "Fuld covers Download"
 
 msgid "Full shutdown"
-msgstr "Luk helt ned"
+msgstr "Sluk"
 
 msgid "GAMEID_Gamename"
-msgstr ""
+msgstr "SPILID_Spilnavn"
 
 msgid "GC Banner Scale"
-msgstr ""
+msgstr "GC Banner skala"
 
 msgid "GC Games"
-msgstr ""
+msgstr "GC Spil"
 
 msgid "GC Install 32K Aligned"
-msgstr ""
+msgstr "Gc Installation 32K Justeret"
 
 msgid "GC Install Compressed"
-msgstr ""
+msgstr "GC Installation Komprimeret"
 
 msgid "GCT Cheatcodes Path"
-msgstr "Sti til cheatcodes"
+msgstr "Sti til snydekoder"
 
 msgid "GCT File created"
 msgstr "GCT-fil oprettet"
@@ -1099,13 +1099,13 @@ msgid "GXFlush"
 msgstr ""
 
 msgid "GameCube Games Delete"
-msgstr ""
+msgstr "GameCube Spil Slet"
 
 msgid "GameCube Install Menu"
-msgstr ""
+msgstr "GameCube Installations Menu"
 
 msgid "Game Header Cache Files Path"
-msgstr ""
+msgstr "Sti til Spil Header Cache filer"
 
 msgid "Game ID"
 msgstr "Spil-ID"
@@ -1120,13 +1120,13 @@ msgid "Game Load"
 msgstr "Spilindstillinger"
 
 msgid "Game Lock"
-msgstr "Spil låst"
+msgstr "Spil lås"
 
 msgid "Game Only"
 msgstr "Kun Spil"
 
 msgid "Game Region"
-msgstr "Region"
+msgstr "Spilregion"
 
 msgid "Game Size"
 msgstr "Spilstørrelse"
