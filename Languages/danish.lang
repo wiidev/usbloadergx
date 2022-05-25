@@ -5,9 +5,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-15 16:02+0200\n"
+"POT-Creation-Date: 2022-05-25 10:05+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
-"Last-Translator: Fox888[dk]\n"
+"Last-Translator: Bamsemesteren[dk]\n"
 "Language-Team: [dk]\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -18,7 +18,7 @@ msgid " could not be downloaded."
 msgstr " kunne ikke downloades."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr " er blevet gemt. Koderne er ikke blevet kontrolleret. Nogle af koderne virker måske ikke samtidigt. Hvis der er problemer, åbn da tekstfilen i en editor for at få mere information."
+msgstr " er blevet gemt. Teksten er ikke blevet kontrolleret. Nogle af koderne virker måske ikke samtidigt. Hvis der er problemer, åbn da tekstfilen i en teksteditor for at få mere information."
 
 msgid " is not on the server."
 msgstr " er ikke på serveren."
@@ -33,19 +33,19 @@ msgstr "%i filer mangler"
 
 #, c-format
 msgid "%i wad file(s) not processed!"
-msgstr ""
+msgstr "%i wad file(r) ikke behandlet!"
 
 #, c-format
 msgid "%i wad found."
-msgstr ""
+msgstr "%i wad fundet"
 
 #, c-format
 msgid "%s only accepts GameCube backups in ISO format."
-msgstr ""
+msgstr "%s accepterer kun GameCube backups i ISO format."
 
 #, c-format
 msgid "%s requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."
-msgstr ""
+msgstr "%s kræver AHB adgang! Start venligst USBLoaderGX fra HBC eller fra en opdateret kanal or forwarder."
 
 msgid "--==       Devolution"
 msgstr ""
@@ -72,28 +72,28 @@ msgid "1 hour"
 msgstr "1 time"
 
 msgid "10 min"
-msgstr "10 min."
+msgstr "10 min"
 
 msgid "2 (Teen 12+)"
-msgstr "2 (teenagere 12+)"
+msgstr "2 (Teenagere 12+)"
 
 msgid "20 min"
-msgstr "20 min."
+msgstr "20 min"
 
 msgid "2D Cover Path"
-msgstr "Sti til 2-d covers"
+msgstr "Sti til 2D covers"
 
 msgid "3 (Mature 16+)"
-msgstr "3 (teenagere 16+)"
+msgstr "3 (Teenagere 16+)"
 
 msgid "3 min"
-msgstr "3 min."
+msgstr "3 min"
 
 msgid "30 min"
-msgstr "30 min."
+msgstr "30 min"
 
 msgid "3D Cover Path"
-msgstr "Sti til 3-d covers"
+msgstr "Sti til 3D covers"
 
 msgid "3D Covers"
 msgstr "3D-Covers"
@@ -105,10 +105,10 @@ msgid "480p Pixel Fix Patch"
 msgstr ""
 
 msgid "5 min"
-msgstr "5 min."
+msgstr "5 min"
 
 msgid "=== GameCube Settings"
-msgstr ""
+msgstr "=== GameCube Indstillinger"
 
 msgid "AUTO"
 msgstr ""
@@ -117,16 +117,16 @@ msgid "AXNextFrame"
 msgstr ""
 
 msgid "Add category"
-msgstr "Tilføje kategori"
+msgstr "Tilføj kategori"
 
 msgid "Adjust Overscan X"
-msgstr ""
+msgstr "Juster Overscan X"
 
 msgid "Adjust Overscan Y"
-msgstr ""
+msgstr "Juster Overscan Y"
 
 msgid "After zoom"
-msgstr ""
+msgstr "Efter zoom"
 
 msgid "All"
 msgstr "Alle"
@@ -138,13 +138,13 @@ msgid "All files extracted."
 msgstr "Alle filer er udpakket."
 
 msgid "All images downloaded successfully."
-msgstr "Lykkedes at downloade alle billeder."
+msgstr "Det lykkedes at downloade alle billeder."
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle USB Loader GX's funktioner er låst op."
 
 msgid "All wad files processed successfully."
-msgstr ""
+msgstr "Det lykkedes at behandle alle wad filer"
 
 msgid "Alternate DOL"
 msgstr "Alternativ DOL"
@@ -153,7 +153,7 @@ msgid "AltWFC"
 msgstr ""
 
 msgid "An example file was created here:"
-msgstr "En f.eks. fil er lavet her:"
+msgstr "En eksempel fil er lavet her:"
 
 msgid "Animation Start"
 msgstr ""
@@ -168,7 +168,7 @@ msgid "Apr"
 msgstr ""
 
 msgid "Are you really sure you want to delete all selected games from the SD card?"
-msgstr ""
+msgstr "Er du sikker på du vil slette alle valgte spil fra SD-kortet?"
 
 msgid "Are you sure you want to delete this category?"
 msgstr "Er du sikker på at du ville slette denne kategori?"
@@ -177,13 +177,13 @@ msgid "Are you sure you want to import game categories from GameTDB?"
 msgstr "Er du sikker på at du ville hente Spil kategorier fra GameTDB?"
 
 msgid "Are you sure you want to install on SD?"
-msgstr ""
+msgstr "Er du sikker på du vil installere på SD?"
 
 msgid "Are you sure you want to lock USB Loader GX?"
 msgstr "Er du sikker på at du vil låse USB Loader GX?"
 
 msgid "Are you sure you want to remount SD?"
-msgstr ""
+msgstr "Er du sikker på du vil genmontere SD?"
 
 msgid "Are you sure you want to reset?"
 msgstr "Er du sikker på at du vil nulstille?"
@@ -195,16 +195,16 @@ msgid "Aspect Ratio"
 msgstr "Formatforhold"
 
 msgid "Attention!"
-msgstr ""
+msgstr "Bemærk!"
 
 msgid "Attention: All savegames will be deleted."
-msgstr ""
+msgstr "Bemærk: Alle savegames vil blive slettet."
 
 msgid "Aug"
 msgstr ""
 
 msgid "Author(s):"
-msgstr "Forfatter"
+msgstr "Forfatt(re)"
 
 msgid "Auto"
 msgstr ""
@@ -231,16 +231,16 @@ msgid "Banner Animation"
 msgstr ""
 
 msgid "Banner Animation Settings"
-msgstr ""
+msgstr "Banner Animations-Indstillinger"
 
 msgid "Banner On Channels"
-msgstr ""
+msgstr "Banner på Kanaler"
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
-msgstr ""
+msgstr "Banner gitter layout er kun tilgængeligt med AHBPROT! Overvej venligst at installere en ny HBC version."
 
 msgid "Banner window is only available with AHBPROT! Please consider installing new HBC version."
-msgstr ""
+msgstr "Banner vindue er kun tilgængeligt med AHBPROT! Overvej venligst at installere en ny HBC version."
 
 msgid "Big thanks to:"
 msgstr "En stor tak til:"
@@ -255,40 +255,40 @@ msgid "Block Cover Downloads"
 msgstr "Bloker Cover downloads"
 
 msgid "Block Custom Paths"
-msgstr "Bloker brugdefineret sti"
+msgstr "Bloker brugerdefineret sti"
 
 msgid "Block Feature Settings"
-msgstr "Bloker særlige indstillinger"
+msgstr "Bloker funktions ndstillinger"
 
 msgid "Block Game Install"
 msgstr "Bloker spil installering"
 
 msgid "Block Game Settings"
-msgstr "Bloker Spil indstillinger"
+msgstr "Bloker spil indstillinger"
 
 msgid "Block GameID Change"
-msgstr "Bloker Spil ID ændringer"
+msgstr "Bloker spilID ændringer"
 
 msgid "Block Global Settings"
-msgstr "Bloker hoved indstillinger"
+msgstr "Bloker globale indstillinger"
 
 msgid "Block Gui Settings"
-msgstr "Bloker Gui indstillinger"
+msgstr "Bloker GUI indstillinger"
 
 msgid "Block HBC Menu"
 msgstr "Bloker HBC menu"
 
 msgid "Block Hard Drive Settings"
-msgstr "Bloker Hard disk indstillinger"
+msgstr "Bloker Harddisk indstillinger"
 
 msgid "Block IOS Reload"
-msgstr "Blokér IOS-reload"
+msgstr "Bloker IOS-reload"
 
 msgid "Block Loader Layout Button"
 msgstr ""
 
 msgid "Block Loader Mode Button"
-msgstr "Bloker Loader mode knap"
+msgstr "Bloker Loader indstilling knap"
 
 msgid "Block Loader Settings"
 msgstr "Bloker loader indstillinger"
@@ -300,7 +300,7 @@ msgid "Block Priiloader Override"
 msgstr " Bloker Priiloader override"
 
 msgid "Block Reset Settings"
-msgstr "Bloker nulstils indstillinger"
+msgstr "Bloker nulstil indstillinger"
 
 msgid "Block SD Reload Button"
 msgstr "Blocker SD reload knap"
@@ -321,13 +321,13 @@ msgid "Block Updates"
 msgstr "Bloker opdateringer"
 
 msgid "Boot Content"
-msgstr "indlæs indhold"
+msgstr "Indlæs indhold"
 
 msgid "Boot Neek System Menu"
 msgstr ""
 
 msgid "Boot?"
-msgstr "Genstart?"
+msgstr "Start?"
 
 msgid "Both"
 msgstr "Begge"
@@ -339,10 +339,10 @@ msgid "CC Rumble"
 msgstr ""
 
 msgid "Cache BNR Files"
-msgstr ""
+msgstr "Cache BNR Filer"
 
 msgid "Cache BNR Files Path"
-msgstr ""
+msgstr "Sti til Cache BNR Filer"
 
 msgid "Cache Titles"
 msgstr "Cache titler"
@@ -365,11 +365,11 @@ msgid "Can't delete:"
 msgstr "Kan ikke slettes:"
 
 msgid "Can't mount or unknown disc format."
-msgstr ""
+msgstr "Kan ikke opsætte or ukendt disk format."
 
 #, c-format
 msgid "Can't open file for write: %s"
-msgstr ""
+msgstr "Kan ikke åbne fil til skrivning: %s"
 
 #, c-format
 msgid "Can't open file: %s"
@@ -380,7 +380,7 @@ msgid "Can't read file: %s"
 msgstr "Kan ikke læse fil: %s"
 
 msgid "Cancel"
-msgstr "Annullér"
+msgstr "Annuller"
 
 msgid "Cannot write to destination."
 msgstr "Kan ikke skrive til destinationen."
@@ -401,7 +401,7 @@ msgid "Channels"
 msgstr "Kanaler"
 
 msgid "Cheatfile is blank"
-msgstr "Cheatfilen er tom"
+msgstr "Snydfilen er tom"
 
 msgid "Clear"
 msgstr "Ryd"
@@ -416,7 +416,7 @@ msgid "Clock"
 msgstr "Ur"
 
 msgid "Clock Scale Factor"
-msgstr ""
+msgstr "Ur størrelsesfaktor"
 
 msgid "Close"
 msgstr "Luk"
@@ -465,19 +465,19 @@ msgid "Controllevel"
 msgstr "Kontrolniveau"
 
 msgid "Copy"
-msgstr ""
+msgstr "Kopiér"
 
 msgid "Copying Canceled"
-msgstr ""
+msgstr "Kopiering annulleret"
 
 msgid "Copying GC game..."
-msgstr ""
+msgstr "Kopierer GC spil..."
 
 msgid "Copying files..."
-msgstr ""
+msgstr "Kopierer filer..."
 
 msgid "Correct Password"
-msgstr "Korrekt Password"
+msgstr "Korrekt Kodeord"
 
 msgid "Could not connect to the server."
 msgstr "Kunne ikke forbinde til server."
@@ -490,25 +490,25 @@ msgid "Could not create path: %s"
 msgstr "Kunne ikke lave sti: %s"
 
 msgid "Could not extract files for:"
-msgstr "Kunne ikke udpakker filer for:"
+msgstr "Kunne ikke udpakke filer for:"
 
 msgid "Could not find info for this game in the wiitdb.xml."
 msgstr "Kunne ikke finde information for dette spil i wiitdb.xml"
 
 msgid "Could not get free device space for game."
-msgstr ""
+msgstr "Kunne not få ledig enhedsplads til spillet."
 
 msgid "Could not initialize DIP module!"
 msgstr "Kunne ikke initialisere DIP-modul!"
 
 msgid "Could not initialize network!"
-msgstr "Kunne ikke initialisere netforbindelse!"
+msgstr "Kunne ikke initialisere netværksforbindelse!"
 
 msgid "Could not initialize network, time out!"
-msgstr ""
+msgstr "Kunne ikke initialisere netværksforbindelse, time out!"
 
 msgid "Could not open Disc"
-msgstr "Kunne ikke åbne DVD"
+msgstr "Kunne ikke åbne Disk"
 
 msgid "Could not open the WiiTDB.xml file."
 msgstr "Kunne ikke åbne WiiTDB.xml fil."
@@ -535,31 +535,31 @@ msgid "Credits"
 msgstr "Lavet af:"
 
 msgid "Crop Overscan"
-msgstr ""
+msgstr "Beskær Overscan"
 
 msgid "Current neek files are not neek2o. Game autoboot disabled."
-msgstr ""
+msgstr "Nuværende neek files er ikke neek2o. Spil autostart deaktiveret."
 
 msgid "Custom Address"
-msgstr ""
+msgstr "Brugerdefineret adresse"
 
 msgid "Custom Banners"
-msgstr ""
+msgstr "Brugerdefineret bannere"
 
 msgid "Custom Paths"
 msgstr "Sti-indstillinger"
 
 msgid "Custom"
-msgstr ""
+msgstr "Brugerdefineret"
 
 msgid "Customs"
-msgstr ""
+msgstr "Told"
 
 msgid "Customs/Original"
 msgstr "Tilpassede/Originale"
 
 msgid "D Buttons"
-msgstr ""
+msgstr "D Knapper"
 
 msgid "DOL Path"
 msgstr "Sti til DOL"
@@ -568,7 +568,7 @@ msgid "Debug"
 msgstr ""
 
 msgid "Debug Wait"
-msgstr ""
+msgstr "Debug vent"
 
 msgid "Debugger Paused Start"
 msgstr ""
@@ -592,7 +592,7 @@ msgid "Delete"
 msgstr "Slet"
 
 msgid "Delete Cached Banner"
-msgstr ""
+msgstr "Slet Cached Banner"
 
 msgid "Delete Cheat GCT"
 msgstr "Slet cheat GCT"
@@ -604,16 +604,16 @@ msgid "Delete Cover Artwork"
 msgstr "Slet boxart"
 
 msgid "Delete Disc Artwork"
-msgstr "Slet DVD-billede"
+msgstr "Slet Disk-billede"
 
 msgid "Delete category"
 msgstr "Slet kategori"
 
 msgid "Deleting directories..."
-msgstr ""
+msgstr "Sletter mapper..."
 
 msgid "Deleting files..."
-msgstr ""
+msgstr "Sletter filer..."
 
 msgid "Design:"
 msgstr ""
@@ -625,43 +625,43 @@ msgid "Developed by"
 msgstr "Udviklet af"
 
 msgid "Developer:"
-msgstr ""
+msgstr "Udvikler:"
 
 msgid "Devolution"
 msgstr ""
 
 msgid "Devolution Loader Path"
-msgstr ""
+msgstr "Devolution Loader Sti"
 
 msgid "Devolution's loader.bin file can't be loaded."
-msgstr ""
+msgstr "Devolution's loader.bin fil kunne ikke loades."
 
 msgid "Directory does not exist!"
 msgstr "Mappen eksisterer ikke!"
 
 msgid "Disc 1"
-msgstr ""
+msgstr "Disk 1"
 
 msgid "Disc 2"
-msgstr ""
+msgstr "Disk 2"
 
 msgid "Disc Artwork Download"
-msgstr "Download DVD-billeder"
+msgstr "Download Disk-billeder"
 
 msgid "Disc Artwork Path"
-msgstr "Sti til DVD-billeder"
+msgstr "Sti til Disk-billeder"
 
 msgid "Disc Default"
 msgstr "Spillets standard"
 
 msgid "Disc Insert Detected"
-msgstr "Ny Disc opdaget"
+msgstr "Ny Disk opdaget"
 
 msgid "Disc Read Delay"
-msgstr ""
+msgstr "Disk læseforsinkelse"
 
 msgid "Disc read error."
-msgstr ""
+msgstr "Disk læsefejl"
 
 msgid "Disc-Select Prompt"
 msgstr ""
