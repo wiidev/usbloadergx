@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-25 10:05+0100\n"
+"POT-Creation-Date: 2022-05-25 15:22+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Bamsemesteren[dk]\n"
 "Language-Team: [dk]\n"
@@ -1141,16 +1141,16 @@ msgid "Game Split Size"
 msgstr "Spil Split størrelse"
 
 msgid "Game Window Mode"
-msgstr ""
+msgstr "Spil Vindue Tilstand"
 
 msgid "Game is already installed:"
 msgstr "Dette spil er allerede installeret:"
 
 msgid "Games IOS"
-msgstr ""
+msgstr "Spil IOS"
 
 msgid "Game/Install Partition"
-msgstr "Spil/Installation partition"
+msgstr "Spil/Installations partition"
 
 msgid "GameCube"
 msgstr ""
@@ -1165,7 +1165,7 @@ msgid "GameCube Source"
 msgstr ""
 
 msgid "Gamename [GAMEID]"
-msgstr ""
+msgstr "Spilnavn [SPILID]"
 
 msgid "Games"
 msgstr "Spil"
@@ -1180,43 +1180,43 @@ msgid "German"
 msgstr "Tysk"
 
 msgid "Getting file list..."
-msgstr ""
+msgstr "Henter filliste..."
 
 msgid "Getting game folder size..."
-msgstr ""
+msgstr "Henter spilmappe størrelse..."
 
 msgid "Global Settings"
 msgstr "Almindelig Indstillinger"
 
 msgid "Grid Scroll Speed"
-msgstr ""
+msgstr "Gitte Scrollhastighed"
 
 msgid "HOME Menu"
-msgstr ""
+msgstr "HJEM Menu"
 
 msgid "Hard Drive Settings"
-msgstr "Hard Disk instillinger"
+msgstr "Harddisk instillinger"
 
 msgid "High Quality"
-msgstr ""
+msgstr "Høj Kvalitet"
 
 msgid "High/Low"
-msgstr ""
+msgstr "Høj/Lav"
 
 msgid "Homebrew Apps Path"
-msgstr "Sti til homebrew-programmer"
+msgstr "Sti til Homebrew-apps"
 
 msgid "Homebrew Channel"
-msgstr "Homebrew Kanal"
+msgstr ""
 
 msgid "Homebrew Launcher"
-msgstr "Homebrew-starter"
+msgstr ""
 
 msgid "Hooktype"
 msgstr ""
 
 msgid "Hour"
-msgstr "timer"
+msgstr "Time"
 
 msgid "How do you want to update?"
 msgstr "Hvordan skal der opdateres?"
@@ -1225,13 +1225,13 @@ msgid "How to Shutdown?"
 msgstr "Hvordan skal der slukkes?"
 
 msgid "Import Categories"
-msgstr "Importer kategorier"
+msgstr "Importér kategorier"
 
 msgid "Import operation successfully completed."
-msgstr "Import operation er færdig med succes"
+msgstr "Import operation lykkedes"
 
 msgid "Importing categories"
-msgstr "Importere kategorier"
+msgstr "Importerer kategorier"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -1242,22 +1242,22 @@ msgid "Incoming file %0.2fMB"
 msgstr "Henter fil %0.2fMB"
 
 msgid "Individual"
-msgstr ""
+msgstr "Individuel"
 
 msgid "Initializing Network"
-msgstr "Initialiserer netforbindelse"
+msgstr "Initialiserer netværksforbindelse"
 
 msgid "Insert Disk"
-msgstr "Indsæt en DVD"
+msgstr "Indsæt en Disk"
 
 msgid "Insert a Wii or a GameCube Disc!"
-msgstr ""
+msgstr "Indsæt en Wii eller GameCube Disk!"
 
 msgid "Install"
 msgstr "Installér"
 
 msgid "Install Canceled"
-msgstr "installering annulleret"
+msgstr "Installering annulleret"
 
 msgid "Install Directories"
 msgstr "Installer mappe"
@@ -1272,13 +1272,13 @@ msgid "Install a game"
 msgstr "Installér nyt spil"
 
 msgid "Install error - Cleaning incomplete data."
-msgstr ""
+msgstr "Installationsfejl - Renser ufærdig data."
 
 msgid "Install finished"
-msgstr "Installering færdig"
+msgstr "Installation færdig"
 
 msgid "Installing GameCube Game..."
-msgstr ""
+msgstr "Installerer GameCube Spil..."
 
 msgid "Installing content"
 msgstr "Installerer indhold"
@@ -1287,10 +1287,10 @@ msgid "Installing game:"
 msgstr "Installerer spillet:"
 
 msgid "Installing title..."
-msgstr ""
+msgstr "Installerer titel..."
 
 msgid "Invalid IOS number entered. Number must be -1 for inherit or 200 - 255."
-msgstr ""
+msgstr "Ugyldigt IOS-nummer indtastet. Nummeret skal være -1 for inherit eller 200 - 255."
 
 msgid "Invalid wad file."
 msgstr "Ugyldig wad fil."
@@ -1308,7 +1308,7 @@ msgid "Japanese"
 msgstr "Japansk"
 
 msgid "Japanese Patch"
-msgstr ""
+msgstr "Japansk Patch"
 
 msgid "Joypad"
 msgstr ""
@@ -1329,25 +1329,25 @@ msgid "Korean"
 msgstr "Koreansk"
 
 msgid "LED Activity"
-msgstr ""
+msgstr "LED Aktivitet"
 
 msgid "Language Files"
-msgstr "Sprog filer"
+msgstr "Sprogfiler"
 
 msgid "Language change:"
 msgstr "Skift sprog:"
 
 msgid "Languagefiles Path"
-msgstr "Sti til sprog filer"
+msgstr "Sti til sprogfiler"
 
 msgid "Languagepath changed."
 msgstr "Sti til sprogfiler ændret."
 
 msgid "Launching Wii games with emulated nand only works on d2x cIOS! Change game IOS to a d2x cIOS first."
-msgstr ""
+msgstr "At starte Wii spil med emuleret nand virker kun med d2x cIOS! Ændr spil IOS til en d2x cIOS først."
 
 msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
-msgstr "Indlæsning af Emu nand kanaler virker kun med d2x cIOS! Ændre spil IOS til en d2x cIOS først."
+msgstr "Indlæsning af Emu nand kanaler virker kun med d2x cIOS! Ændr spil IOS til en d2x cIOS først."
 
 msgid "Left"
 msgstr "Venstre"
@@ -1393,61 +1393,61 @@ msgid "Locked"
 msgstr "Låst"
 
 msgid "Log to file"
-msgstr ""
+msgstr "Log til fil"
 
 msgid "Loop Directory"
-msgstr "Afspil mappe i løkke"
+msgstr "Afspil mappe i loop"
 
 msgid "Loop Music"
-msgstr "Afspil musik i løkke"
+msgstr "Afspil musik i loop"
 
 msgid "Loop Sound"
-msgstr "Afspil lyd i løkke"
+msgstr "Afspil lyd i loop"
 
 msgid "Low Quality"
-msgstr ""
+msgstr "Lav Kvalitet"
 
 msgid "Low/High"
-msgstr ""
+msgstr "Lav/Høj"
 
 msgid "MIOS (Default & Customs)"
-msgstr ""
+msgstr "MIOS (Standard & Tilpasset)"
 
 msgid "Main DOL"
-msgstr ""
+msgstr "Primære DOL"
 
 msgid "Main GameCube Games Path"
-msgstr ""
+msgstr "Primær GameCube Spil Sti"
 
 msgid "Main GameCube Path"
-msgstr ""
+msgstr "Primær GameCube Sti"
 
 msgid "Main Path"
-msgstr ""
+msgstr "Primær Sti"
 
 msgid "Manual (40~120)"
-msgstr ""
+msgstr "Manuel (40~120)"
 
 msgid "Mar"
 msgstr ""
 
 msgid "Mark new games"
-msgstr "Maker nye spil"
+msgstr "Marker nye spil"
 
 msgid "May"
 msgstr "Maj"
 
 msgid "Memory Card Blocks Size"
-msgstr ""
+msgstr "Memory Card Blocks Størrelse"
 
 msgid "Memory Card Emulation"
-msgstr ""
+msgstr "Memory Card Emulering"
 
 msgid "Memory Card with 2043 blocs has issues with Nintendont. Use at your own risk."
-msgstr ""
+msgstr "Memory Card med 2043 blocks har problemer med Nintendont. Brug på eget ansvar."
 
 msgid "Messageboard Update"
-msgstr "Messageboard opdatering"
+msgstr "Messageboard Opdatering"
 
 msgid "Motion+ Video"
 msgstr ""
@@ -1456,46 +1456,46 @@ msgid "Mount DVD drive"
 msgstr "Mount DVD-drev"
 
 msgid "Mount USB at launch"
-msgstr ""
+msgstr "Opsæt USB ved start"
 
 msgid "Move File"
-msgstr ""
+msgstr "Flyt Fil"
 
 msgid "Multiple Partitions"
-msgstr "Multiple Partitioner"
+msgstr "Flere Partitioner"
 
 msgid "Music Loop Mode"
-msgstr "Musik i løkke"
+msgstr "Musik i loop"
 
 msgid "Music Volume"
-msgstr "Lydstyrke"
+msgstr "Musik Lydstyrke"
 
 msgid "NMM Mode"
-msgstr ""
+msgstr "NMM Tilstand"
 
 msgid "Nand Chan. Emulation"
-msgstr "Nand Kanal emulation"
+msgstr "Nand Kanal Emulering"
 
 msgid "Nand Channels"
 msgstr "Nand Kanaler"
 
 msgid "Nand Emu Channel Path"
-msgstr "Sti til Nand Emu kanal"
+msgstr "Sti til Nand Emu kanaler"
 
 msgid "Nand Emu Path"
 msgstr "Sti til Emu Nand."
 
 msgid "Nand Emulation"
-msgstr "Nand emulering"
+msgstr "Nand Emulering"
 
 msgid "Nand Emulation is only available on D2X cIOS!"
-msgstr "Nand emulering er kun mulig med d2x cIOS"
+msgstr "Nand Emulering er kun muligt med d2x cIOS"
 
 msgid "Nand Emulation only works on FAT/FAT32 partitions!"
-msgstr "Nand emulering virker kun med FAT/FAT32 partitioner!"
+msgstr "Nand Emulering virker kun med FAT/FAT32 partitioner!"
 
 msgid "Nand Saves Emulation"
-msgstr ""
+msgstr "Nand Saves Emulering"
 
 msgid "Native Controller"
 msgstr ""
@@ -1504,16 +1504,16 @@ msgid "Neek"
 msgstr ""
 
 msgid "Neek NAND path selection failed."
-msgstr ""
+msgstr "Neek NAND sti valg mislykkedes"
 
 msgid "Neek kernel file not found."
-msgstr ""
+msgstr "Neek kernel fil ikke fundet"
 
 msgid "Neek kernel loading failed."
-msgstr ""
+msgstr "Neek kernel indlæsning mislykkedes"
 
 msgid "Neek2o does not support 'Emulated NAND Channel Path' on SD! Please setup Uneek2o instead."
-msgstr ""
+msgstr "Neek2o understøtter ikke 'Emulereret NAND Kanal Sti' på SD! Venligst setup Uneek2o i stedet."
 
 msgid "Neither"
 msgstr "Ingen"
@@ -1528,19 +1528,19 @@ msgid "Nintendont"
 msgstr ""
 
 msgid "Nintendont Loader Path"
-msgstr ""
+msgstr "Nintendont Loader Sti"
 
 msgid "No"
 msgstr "Nej"
 
 msgid "No Cheatfile found"
-msgstr "Cheat-fil ikke fundet"
+msgstr "Snydfil ikke fundet"
 
 msgid "No DOL file found on disc."
-msgstr "Der blev ikke fundet nogle DOL-filer på DVDen."
+msgstr "Der blev ikke fundet nogle DOL-filer på disken."
 
 msgid "No Disc+"
-msgstr ""
+msgstr "Ingen Disk+"
 
 msgid "No Splitting"
 msgstr "Ingen"
@@ -1555,16 +1555,16 @@ msgid "No Wiinnertag.xml found in the config path. Do you want an example file c
 msgstr "Ingen Wiinnertag.xml fundet i config stien. Vil du oprette en prøve fil?"
 
 msgid "No change"
-msgstr ""
+msgstr "Ingen ændring"
 
 msgid "No cheats were selected! Should the GCT file be deleted?"
-msgstr ""
+msgstr "Intet snyd blev valgt! Skal GCT filen slettes?"
 
 msgid "No data could be read."
 msgstr "Data kunne ikke læses."
 
 msgid "No disc inserted."
-msgstr "Ingen Disc indsat"
+msgstr "Ingen Disk indsat."
 
 msgid "No favorites selected."
 msgstr "Ingen favoritter er valgt."
@@ -1573,7 +1573,7 @@ msgid "No file missing!"
 msgstr "Ingen filer mangler!"
 
 msgid "No games found on the disc"
-msgstr ""
+msgstr "Ingen spil fundet på disken"
 
 msgid "No language files to update on your devices! Do you want to download new language files?"
 msgstr "Ingen sprog filer at opdatere på din enhed! Vil du hente nye sprog filer?"
@@ -1588,22 +1588,22 @@ msgid "No themes found."
 msgstr "Ingen temaer fundet."
 
 msgid "No wad file found in this folder."
-msgstr ""
+msgstr "Ingen wad fil fundet i denne mappe."
 
 msgid "NoSSL only"
-msgstr ""
+msgstr "Kun NoSSL"
 
 msgid "None"
 msgstr "Ingen"
 
 msgid "Normal"
-msgstr "Normal"
+msgstr ""
 
 msgid "Not Initialized"
 msgstr "Ikke initialiseret"
 
 msgid "Not a Wii or a GameCube Disc"
-msgstr ""
+msgstr "Ikke en Wii eller GameCube Disk"
 
 msgid "Not a valid URL"
 msgstr "Ikke en gyldig URL"
@@ -1618,13 +1618,13 @@ msgid "Not enough free memory."
 msgstr "Ikke nok fri hukommelse."
 
 msgid "Not enough free space on device."
-msgstr ""
+msgstr "Ikke nok ledig plads på enheden"
 
 msgid "Not enough free space!"
 msgstr "Ikke nok ledig plads!"
 
 msgid "Not enough memory for FST."
-msgstr ""
+msgstr "Ikke nok hukommelse til FST."
 
 msgid "Not enough memory."
 msgstr "Ikke nok hukommelse."
@@ -1633,43 +1633,43 @@ msgid "Not required"
 msgstr "Ikke påkrævet"
 
 msgid "Unsupported format!"
-msgstr "Ikke et understøttet format"
+msgstr "Format er ikke understøttet!"
 
 msgid "Nothing selected to delete."
-msgstr ""
+msgstr "Intet valgt til sletning."
 
 msgid "Nothing selected to install."
-msgstr ""
+msgstr "Intet valgt til installation"
 
 msgid "Nov"
 msgstr ""
 
 msgid "OFF"
-msgstr "Fra"
+msgstr "FRA"
 
 msgid "OFF (Extended)"
-msgstr ""
+msgstr "FRA (Udvidet)"
 
 msgid "OFF (Safe)"
-msgstr ""
+msgstr "FRA (Sikker)"
 
 msgid "OK"
 msgstr ""
 
 msgid "ON"
-msgstr "Til"
+msgstr "TIL"
 
 msgid "ON (Low)"
-msgstr ""
+msgstr "TIL (Lav)"
 
 msgid "ON (Medium)"
-msgstr ""
+msgstr "TIL (Medium)"
 
 msgid "ON (Multi)"
-msgstr ""
+msgstr "TIL (Multi)"
 
 msgid "ON (High)"
-msgstr ""
+msgstr "TIL (Høj)"
 
 msgid "OSReport"
 msgstr ""
@@ -1681,7 +1681,7 @@ msgid "Ocarina"
 msgstr ""
 
 msgid "Ocarina is not supported with neek2o yet. Launch game anyway?"
-msgstr ""
+msgstr "Ocarinaer ikke understøttet med neek2o endnu. Vil du starte spillet alligevel?"
 
 msgid "Oct"
 msgstr "Okt"
@@ -1696,22 +1696,22 @@ msgid "Ok"
 msgstr ""
 
 msgid "One Line A"
-msgstr ""
+msgstr "En linje A"
 
 msgid "One Line B"
-msgstr ""
+msgstr "En linje B"
 
 msgid "Only Game Partition"
-msgstr "Kun spil Partition"
+msgstr "Kun Spil Partition"
 
 msgid "Only for Install"
-msgstr "Kun til installering"
+msgstr "Kun til installation"
 
 msgid "Original"
 msgstr ""
 
 msgid "Original/Customs"
-msgstr "Originale/Tilpassede"
+msgstr "Originale/Tilpasset"
 
 msgid "PAD Hook"
 msgstr ""
@@ -1726,22 +1726,22 @@ msgid "Partial"
 msgstr "Delvis"
 
 msgid "Partition"
-msgstr "Partition"
+msgstr ""
 
 msgid "Password"
-msgstr "Password"
+msgstr ""
 
 msgid "Password Changed"
-msgstr "Password ændret"
+msgstr "Password Ændret"
 
 msgid "Password has been changed"
 msgstr "Passwordet er blevet ændret"
 
 msgid "Patch Country Strings"
-msgstr "Patch landeindstillinger"
+msgstr "Patch Lande Strings"
 
 msgid "Path Changed"
-msgstr "Sti er ændret"
+msgstr "Sti Ændret"
 
 msgid "Permission denied."
 msgstr "Tilladelse nægtet."
@@ -1768,10 +1768,10 @@ msgid "Playing Music:"
 msgstr "Afspiller musik:"
 
 msgid "Please enter a valid address e.g. wiimmfi.de"
-msgstr ""
+msgstr "Indsæt venligst en gyldig adresse f.eks. wiimmfi.de"
 
 msgid "Please wait"
-msgstr ""
+msgstr "Vent venligst"
 
 msgid "Please wait..."
 msgstr "Vent venligst..."
@@ -1783,22 +1783,22 @@ msgid "Prev"
 msgstr "Forrige"
 
 msgid "Private Server"
-msgstr ""
+msgstr "Privat Server"
 
 msgid "Process finished."
 msgstr "Proces færdig."
 
 msgid "Progressive Patch"
-msgstr ""
+msgstr "Progressiv Patch"
 
 msgid "Prompts Buttons"
-msgstr "Knaptekster"
+msgstr "Knapprompter"
 
 msgid "Published by"
 msgstr "Udgivet af"
 
 msgid "Quick Boot"
-msgstr "Hurtig opstart"
+msgstr "Hurtig start"
 
 msgid "Random Directory Music"
 msgstr "Musik fra tilfældig mappe"
@@ -1810,31 +1810,31 @@ msgid "Receiving file from:"
 msgstr "Henter fil fra:"
 
 msgid "Region Free"
-msgstr ""
+msgstr "Regionsfri"
 
 msgid "Region Patch"
-msgstr ""
+msgstr "Regionspatch"
 
 msgid "Released"
-msgstr "Udkommet"
+msgstr "Udgivet"
 
 msgid "Reload SD"
 msgstr "Genindlæs SD"
 
 msgid "Reloading game list now, please wait..."
-msgstr "Genindlæser Spil liste, Vent venligst..."
+msgstr "Genindlæser spil liste, Vent venligst..."
 
 msgid "Remember Unlock"
 msgstr "Husk at låse op"
 
 msgid "Remove Read Speed Limit"
-msgstr ""
+msgstr "Fjern læsehastighedsbegrænsning"
 
 msgid "Remove update"
 msgstr "Fjern opdatering"
 
 msgid "Rename Game Title"
-msgstr ""
+msgstr "Omdøb Spil Titel"
 
 msgid "Rename category"
 msgstr "Omdøb kategori"
@@ -1843,13 +1843,13 @@ msgid "Reset"
 msgstr "Nulstil"
 
 msgid "Reset All Game Settings"
-msgstr ""
+msgstr "Nulstil Alle Spilindstillinger"
 
 msgid "Reset BG Music"
 msgstr "Nulstil BG-musik"
 
 msgid "Reset Game Header Cache"
-msgstr ""
+msgstr "Nulstil Spilheader Cache"
 
 msgid "Reset Playcounter"
 msgstr "Nulstil spiltæller"
@@ -1873,34 +1873,34 @@ msgid "Right"
 msgstr "Højre"
 
 msgid "Rotating Disc"
-msgstr ""
+msgstr "Roterer Disk"
 
 msgid "Round"
-msgstr ""
+msgstr "Rund"
 
 msgid "Rumble"
 msgstr "Vibration"
 
 msgid "SChinese"
-msgstr "Kinesisk (std.)"
+msgstr "Forenklet Kinesisk"
 
 msgid "SD"
 msgstr ""
 
 msgid "SD Card could not be accessed."
-msgstr ""
+msgstr "SD-kortet kunne ikke tilgås"
 
 msgid "SD GameCube Games Path"
-msgstr ""
+msgstr "SD GameCube Spil Sti"
 
 msgid "SD GameCube Path"
-msgstr ""
+msgstr "SD GameCube Sti"
 
 msgid "SD Path"
-msgstr ""
+msgstr "SD Sti"
 
 msgid "SFX Volume"
-msgstr "Lydstyrke for effekter"
+msgstr "Lydstyrke for lydeffekter"
 
 msgid "Save"
 msgstr "Gem"
@@ -1918,13 +1918,13 @@ msgid "Saved"
 msgstr "Gemt"
 
 msgid "Savegame might not exist for this game."
-msgstr "Savegame eksistere muligvis ikke for dette spil."
+msgstr "Savegame eksisterer muligvis ikke for dette spil."
 
 msgid "Screensaver"
 msgstr "Pauseskærm"
 
 msgid "Screenshot"
-msgstr ""
+msgstr "Skærmbillede"
 
 msgid "Select"
 msgstr "Vælg"
@@ -1939,16 +1939,16 @@ msgid "Select a DOL from Game"
 msgstr "Vælg DOL fra spil"
 
 msgid "Select game categories"
-msgstr "Vælg spille Kategorier"
+msgstr "Vælg spil kategorier"
 
 msgid "Select loader mode"
-msgstr "Vælg Loader måde"
+msgstr "Vælg Loader tilstand"
 
 msgid "Select the NAND Emu Path to use."
-msgstr ""
+msgstr "Vælg NAND Emu Stien to vil bruge."
 
 msgid "Select titles sources."
-msgstr "Vælg title kilde."
+msgstr "Vælg titel kilde."
 
 msgid "Sept"
 msgstr ""
@@ -1960,40 +1960,40 @@ msgid "Settings"
 msgstr "Indstillinger"
 
 msgid "Settings File"
-msgstr ""
+msgstr "Indstillinger Fil"
 
 msgid "Show Categories"
 msgstr "Vis kategorier"
 
 msgid "Show Favorite on banner"
-msgstr ""
+msgstr "Vis Favorit på banner"
 
 msgid "Show Free Space"
-msgstr "Vis fri plads"
+msgstr "Vis ledig plads"
 
 msgid "Show Play Count"
-msgstr "Vis spil tæller"
+msgstr "Vis spiltæller"
 
 msgid "Show SD"
-msgstr ""
+msgstr "Vis SD"
 
 msgid "Shutdown System"
-msgstr "Sluk (rødt lys)"
+msgstr "Sluk"
 
 msgid "Shutdown Wii"
 msgstr "Sluk Wii"
 
 msgid "Skip Errors"
-msgstr ""
+msgstr "Skip Fejl"
 
 msgid "Skip IPL"
 msgstr ""
 
 msgid "BBA Emulation"
-msgstr ""
+msgstr "BBA Emulering"
 
 msgid "BBA Net Profile"
-msgstr ""
+msgstr "BBA Netprofile"
 
 msgid "Sneek Video Patch"
 msgstr ""
