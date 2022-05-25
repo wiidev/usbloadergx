@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# danish.lang - r1149
+# danish.lang - r1150
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-25 15:22+0100\n"
+"POT-Creation-Date: 2022-05-25 18:56+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Bamsemesteren[dk]\n"
 "Language-Team: [dk]\n"
@@ -18,7 +18,7 @@ msgid " could not be downloaded."
 msgstr " kunne ikke downloades."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr " er blevet gemt. Teksten er ikke blevet kontrolleret. Nogle af koderne virker måske ikke samtidigt. Hvis der er problemer, åbn da tekstfilen i en teksteditor for at få mere information."
+msgstr " er blevet gemt. Teksten er ikke blevet kontrolleret. Nogle af koderne virker måske ikke samtidigt. Hvis der er problemer, åbn tekstfilen i en teksteditor for at få mere information."
 
 msgid " is not on the server."
 msgstr " er ikke på serveren."
@@ -96,7 +96,7 @@ msgid "3D Cover Path"
 msgstr "Sti til 3D covers"
 
 msgid "3D Covers"
-msgstr "3D-Covers"
+msgstr "3D Covers"
 
 msgid "4 (Adults Only 18+)"
 msgstr "4 (Voksne 18+)"
@@ -174,7 +174,7 @@ msgid "Are you sure you want to delete this category?"
 msgstr "Er du sikker på at du ville slette denne kategori?"
 
 msgid "Are you sure you want to import game categories from GameTDB?"
-msgstr "Er du sikker på at du ville hente Spil kategorier fra GameTDB?"
+msgstr "Er du sikker på at du ville hente spilkategorier fra GameTDB?"
 
 msgid "Are you sure you want to install on SD?"
 msgstr "Er du sikker på du vil installere på SD?"
@@ -210,10 +210,10 @@ msgid "Auto"
 msgstr ""
 
 msgid "Auto Boot"
-msgstr ""
+msgstr "Autostart"
 
 msgid "AutoInit Network"
-msgstr "AutoInit netværk"
+msgstr "AutoInit Netværk"
 
 msgid "BCA Codes Path"
 msgstr "Sti til BCA koder"
@@ -249,22 +249,22 @@ msgid "Block Categories Menu"
 msgstr "Bloker kategori menu"
 
 msgid "Block Categories Modify"
-msgstr "Bloker kategori modificering"
+msgstr "Bloker kategorimodificering"
 
 msgid "Block Cover Downloads"
-msgstr "Bloker Cover downloads"
+msgstr "Bloker Cover Downloads"
 
 msgid "Block Custom Paths"
 msgstr "Bloker brugerdefineret sti"
 
 msgid "Block Feature Settings"
-msgstr "Bloker funktions ndstillinger"
+msgstr "Bloker funktionsindstillinger"
 
 msgid "Block Game Install"
-msgstr "Bloker spil installering"
+msgstr "Bloker spilinstallation"
 
 msgid "Block Game Settings"
-msgstr "Bloker spil indstillinger"
+msgstr "Bloker spilindstillinger"
 
 msgid "Block GameID Change"
 msgstr "Bloker spilID ændringer"
@@ -276,7 +276,7 @@ msgid "Block Gui Settings"
 msgstr "Bloker GUI indstillinger"
 
 msgid "Block HBC Menu"
-msgstr "Bloker HBC menu"
+msgstr "Bloker HBC Menu"
 
 msgid "Block Hard Drive Settings"
 msgstr "Bloker Harddisk indstillinger"
@@ -288,7 +288,7 @@ msgid "Block Loader Layout Button"
 msgstr ""
 
 msgid "Block Loader Mode Button"
-msgstr "Bloker Loader indstilling knap"
+msgstr "Bloker Loader indstillinger knap"
 
 msgid "Block Loader Settings"
 msgstr "Bloker loader indstillinger"
@@ -297,7 +297,7 @@ msgid "Block Parental Settings"
 msgstr "Bloker forældre indstillinger"
 
 msgid "Block Priiloader Override"
-msgstr " Bloker Priiloader override"
+msgstr "Bloker Priiloader override"
 
 msgid "Block Reset Settings"
 msgstr "Bloker nulstil indstillinger"
@@ -306,7 +306,7 @@ msgid "Block SD Reload Button"
 msgstr "Blocker SD reload knap"
 
 msgid "Block Sound Settings"
-msgstr "Bloker lyd indstillinger"
+msgstr "Bloker lydindstillinger"
 
 msgid "Block Theme Downloader"
 msgstr "Bloker tema downloader"
@@ -336,7 +336,7 @@ msgid "Both Ports"
 msgstr "Begge porte"
 
 msgid "CC Rumble"
-msgstr ""
+msgstr "CC Vibration"
 
 msgid "Cache BNR Files"
 msgstr "Cache BNR Filer"
@@ -468,7 +468,7 @@ msgid "Copy"
 msgstr "Kopiér"
 
 msgid "Copying Canceled"
-msgstr "Kopiering annulleret"
+msgstr "Kopiering Annulleret"
 
 msgid "Copying GC game..."
 msgstr "Kopierer GC spil..."
@@ -477,7 +477,7 @@ msgid "Copying files..."
 msgstr "Kopierer filer..."
 
 msgid "Correct Password"
-msgstr "Korrekt Kodeord"
+msgstr "Korrekt Password"
 
 msgid "Could not connect to the server."
 msgstr "Kunne ikke forbinde til server."
@@ -553,10 +553,10 @@ msgid "Custom"
 msgstr "Brugerdefineret"
 
 msgid "Customs"
-msgstr "Told"
+msgstr "Brugerdefinerede"
 
 msgid "Customs/Original"
-msgstr "Tilpassede/Originale"
+msgstr "Brugerdefinerede/Originale"
 
 msgid "D Buttons"
 msgstr "D Knapper"
@@ -568,10 +568,10 @@ msgid "Debug"
 msgstr ""
 
 msgid "Debug Wait"
-msgstr "Debug vent"
+msgstr "Debug Vent"
 
 msgid "Debugger Paused Start"
-msgstr ""
+msgstr "Debugger Pauset Start"
 
 msgid "Dec"
 msgstr ""
@@ -595,10 +595,10 @@ msgid "Delete Cached Banner"
 msgstr "Slet Cached Banner"
 
 msgid "Delete Cheat GCT"
-msgstr "Slet cheat GCT"
+msgstr "Slet Snyd GCT"
 
 msgid "Delete Cheat TXT"
-msgstr "Slet Cheat TXT"
+msgstr "Slet Snyd TXT"
 
 msgid "Delete Cover Artwork"
 msgstr "Slet boxart"
@@ -634,7 +634,7 @@ msgid "Devolution Loader Path"
 msgstr "Devolution Loader Sti"
 
 msgid "Devolution's loader.bin file can't be loaded."
-msgstr "Devolution's loader.bin fil kunne ikke loades."
+msgstr "Devolution's loader.bin filen kunne ikke loades."
 
 msgid "Directory does not exist!"
 msgstr "Mappen eksisterer ikke!"
@@ -646,19 +646,19 @@ msgid "Disc 2"
 msgstr "Disk 2"
 
 msgid "Disc Artwork Download"
-msgstr "Download Disk-billeder"
+msgstr "Download Disk-billede"
 
 msgid "Disc Artwork Path"
 msgstr "Sti til Disk-billeder"
 
 msgid "Disc Default"
-msgstr "Spillets standard"
+msgstr "Spillets Standard"
 
 msgid "Disc Insert Detected"
 msgstr "Ny Disk opdaget"
 
 msgid "Disc Read Delay"
-msgstr "Disk læseforsinkelse"
+msgstr "Disk Læseforsinkelse"
 
 msgid "Disc read error."
 msgstr "Disk læsefejl"
@@ -670,13 +670,13 @@ msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.
 msgstr "Disk2 skal installeres in ukomprimeret format for at virke med DM(L) v2.6+, er du sikker på du vil installere i komprimeret format?"
 
 msgid "Discarts"
-msgstr ""
+msgstr "Disk-billeder"
 
 msgid "DiskFlip"
 msgstr ""
 
 msgid "Display"
-msgstr "Spilinfo."
+msgstr "Skærm"
 
 msgid "Display as a carousel"
 msgstr "Vis som karusel"
@@ -694,7 +694,7 @@ msgid "Display favorites only"
 msgstr "Vis kun favoritter"
 
 msgid "Do you want to apply it now?"
-msgstr "Skal det aktiveres nu?"
+msgstr "Skal det anvendes nu?"
 
 msgid "Do you want to apply this theme?"
 msgstr "Vil du indlæse dette tema?"
@@ -745,7 +745,7 @@ msgid "Do you want to start the game now?"
 msgstr "Vil du starte spillet nu?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
-msgstr "Vil du synkronisere fri plads info sector på alle FAT32 Partitioner?"
+msgstr "Vil du synkronisere fri plads info sektor på alle FAT32 Partitioner?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Skal alle sprogfiler opdateres/downloades?"
@@ -814,7 +814,7 @@ msgid "EmuNAND Wad Manager"
 msgstr ""
 
 msgid "EmuNand Channels"
-msgstr "EmuNand kanaler"
+msgstr "EmuNand Kanaler"
 
 msgid "Emulated Nand"
 msgstr "Emuleret Nand"
@@ -852,7 +852,7 @@ msgid "Error while downloding file"
 msgstr "Fejl under download af fil"
 
 msgid "Error while opening the zip."
-msgstr "Fejl under udpakning af zip fil."
+msgstr "Fejl under åbning af zip fil."
 
 msgid "Error while transfering data."
 msgstr "Fejl under overførsel af data."
@@ -870,7 +870,7 @@ msgid "Error: Not enough space on SD."
 msgstr "Fejl: Ikke nok plads på SD."
 
 msgid "Errors occured."
-msgstr "Fejl opstået"
+msgstr "Fejl opstået."
 
 msgid "Everything"
 msgstr "Alt"
@@ -882,7 +882,7 @@ msgid "Exit to where?"
 msgstr "Hvorhen?"
 
 msgid "Export All Saves to EmuNand"
-msgstr "Exporter alle saves til EmuNand"
+msgstr "Exporter Alle Saves til EmuNand"
 
 msgid "Export Miis to EmuNand"
 msgstr "Exporter Miis til EmuNand"
@@ -891,10 +891,10 @@ msgid "Export SYSCONF to EmuNand"
 msgstr "Exporter SYSCONF to EmuNand"
 
 msgid "Extract Miis to the Emu NAND?"
-msgstr "Udpak Miis til Emu NANDen?"
+msgstr "Udpak Miis til Emu NAND?"
 
 msgid "Extract SYSCONF to the Emu NAND?"
-msgstr "Udpak SYSCONF til Emu NANDen?"
+msgstr "Udpak SYSCONF til Emu NAND?"
 
 msgid "Extract Save to EmuNand"
 msgstr "Kopier Save til EmuNand"
@@ -915,7 +915,7 @@ msgid "F-Zero AX"
 msgstr ""
 
 msgid "Failed"
-msgstr "Fejlede"
+msgstr "Mislykkedes"
 
 msgid "Failed copying file"
 msgstr "Kopieringen af filen mislykkedes"
@@ -979,7 +979,7 @@ msgid "Filesize is 0 Byte."
 msgstr "Fil størrelse er 0 Byte."
 
 msgid "Flat Covers"
-msgstr "Flad Cover"
+msgstr "Flade Covers"
 
 msgid "Flip-X"
 msgstr ""
@@ -1018,7 +1018,7 @@ msgid "Force Widescreen"
 msgstr "Tving Widescreen"
 
 msgid "Format"
-msgstr "Formater"
+msgstr "Formatér"
 
 msgid "Formatting, please wait..."
 msgstr "Formaterer, vent venligst..."
@@ -1054,7 +1054,7 @@ msgid "Full"
 msgstr "Fuld"
 
 msgid "Full Cover Path"
-msgstr "Sti til Fuld Cover"
+msgstr "Fuld Cover Sti"
 
 msgid "Full Covers"
 msgstr "Fuld Covers"
@@ -1111,13 +1111,13 @@ msgid "Game ID"
 msgstr "Spil-ID"
 
 msgid "Game IOS"
-msgstr "Spil-IOS"
+msgstr "Spil IOS"
 
 msgid "Game Language"
 msgstr "Sprog"
 
 msgid "Game Load"
-msgstr "Spilindstillinger"
+msgstr "Spilload"
 
 msgid "Game Lock"
 msgstr "Spil lås"
@@ -1135,7 +1135,7 @@ msgid "Game Sound Mode"
 msgstr "Spillyd"
 
 msgid "Game Sound Volume"
-msgstr "Spillyd lydstyrke"
+msgstr "Spil lydstyrke"
 
 msgid "Game Split Size"
 msgstr "Spil Split størrelse"
@@ -1159,10 +1159,10 @@ msgid "GameCube Controller"
 msgstr ""
 
 msgid "GameCube Mode"
-msgstr ""
+msgstr "GameCube Tilstand"
 
 msgid "GameCube Source"
-msgstr ""
+msgstr "GameCube Kilde"
 
 msgid "Gamename [GAMEID]"
 msgstr "Spilnavn [SPILID]"
@@ -1186,16 +1186,16 @@ msgid "Getting game folder size..."
 msgstr "Henter spilmappe størrelse..."
 
 msgid "Global Settings"
-msgstr "Almindelig Indstillinger"
+msgstr "Globale Indstillinger"
 
 msgid "Grid Scroll Speed"
-msgstr "Gitte Scrollhastighed"
+msgstr "Gitter Scroll hastighed"
 
 msgid "HOME Menu"
 msgstr "HJEM Menu"
 
 msgid "Hard Drive Settings"
-msgstr "Harddisk instillinger"
+msgstr "Harddisk Indstillinger"
 
 msgid "High Quality"
 msgstr "Høj Kvalitet"
@@ -1207,7 +1207,7 @@ msgid "Homebrew Apps Path"
 msgstr "Sti til Homebrew-apps"
 
 msgid "Homebrew Channel"
-msgstr ""
+msgstr "Homebrew Kanal"
 
 msgid "Homebrew Launcher"
 msgstr ""
@@ -1257,22 +1257,22 @@ msgid "Install"
 msgstr "Installér"
 
 msgid "Install Canceled"
-msgstr "Installering annulleret"
+msgstr "Installation annulleret"
 
 msgid "Install Directories"
-msgstr "Installer mappe"
+msgstr "Installationsmappe"
 
 msgid "Install Error!"
 msgstr "Installationsfejl!"
 
 msgid "Install Partitions"
-msgstr "Installer partitioner"
+msgstr "Installationspartitioner"
 
 msgid "Install a game"
 msgstr "Installér nyt spil"
 
 msgid "Install error - Cleaning incomplete data."
-msgstr "Installationsfejl - Renser ufærdig data."
+msgstr "Installationsfejl - Renser ufærdigt data."
 
 msgid "Install finished"
 msgstr "Installation færdig"
@@ -1353,7 +1353,7 @@ msgid "Left"
 msgstr "Venstre"
 
 msgid "Like SysMenu"
-msgstr "Ligesom wii-menuen"
+msgstr "Ligesom Wii-menuen"
 
 msgid "List on Gamelaunch"
 msgstr "Vis ved opstart af spil"
@@ -1453,7 +1453,7 @@ msgid "Motion+ Video"
 msgstr ""
 
 msgid "Mount DVD drive"
-msgstr "Mount DVD-drev"
+msgstr "Opsæt DVD-drev"
 
 msgid "Mount USB at launch"
 msgstr "Opsæt USB ved start"
@@ -1483,7 +1483,7 @@ msgid "Nand Emu Channel Path"
 msgstr "Sti til Nand Emu kanaler"
 
 msgid "Nand Emu Path"
-msgstr "Sti til Emu Nand."
+msgstr "Nand Emu Sti"
 
 msgid "Nand Emulation"
 msgstr "Nand Emulering"
@@ -1507,10 +1507,10 @@ msgid "Neek NAND path selection failed."
 msgstr "Neek NAND sti valg mislykkedes"
 
 msgid "Neek kernel file not found."
-msgstr "Neek kernel fil ikke fundet"
+msgstr "Neek kernel fil ikke fundet."
 
 msgid "Neek kernel loading failed."
-msgstr "Neek kernel indlæsning mislykkedes"
+msgstr "Neek kernel indlæsning mislykkedes."
 
 msgid "Neek2o does not support 'Emulated NAND Channel Path' on SD! Please setup Uneek2o instead."
 msgstr "Neek2o understøtter ikke 'Emulereret NAND Kanal Sti' på SD! Venligst setup Uneek2o i stedet."
@@ -1534,16 +1534,16 @@ msgid "No"
 msgstr "Nej"
 
 msgid "No Cheatfile found"
-msgstr "Snydfil ikke fundet"
+msgstr "Ingen Snydfil fundet"
 
 msgid "No DOL file found on disc."
 msgstr "Der blev ikke fundet nogle DOL-filer på disken."
 
 msgid "No Disc+"
-msgstr "Ingen Disk+"
+msgstr ""
 
 msgid "No Splitting"
-msgstr "Ingen"
+msgstr "Ingen Splitning"
 
 msgid "No URL or Path specified."
 msgstr "Ingen URL eller sti er angivet."
@@ -1681,7 +1681,7 @@ msgid "Ocarina"
 msgstr ""
 
 msgid "Ocarina is not supported with neek2o yet. Launch game anyway?"
-msgstr "Ocarinaer ikke understøttet med neek2o endnu. Vil du starte spillet alligevel?"
+msgstr "Ocarina er ikke understøttet med neek2o endnu. Vil du starte spillet alligevel?"
 
 msgid "Oct"
 msgstr "Okt"
@@ -1888,7 +1888,7 @@ msgid "SD"
 msgstr ""
 
 msgid "SD Card could not be accessed."
-msgstr "SD-kortet kunne ikke tilgås"
+msgstr "SD-kortet kunne ikke tilgås."
 
 msgid "SD GameCube Games Path"
 msgstr "SD GameCube Spil Sti"
@@ -1912,7 +1912,7 @@ msgid "Save Game List to"
 msgstr "Gem spilliste på"
 
 msgid "Save List"
-msgstr "Gem list"
+msgstr "Gem Liste"
 
 msgid "Saved"
 msgstr "Gemt"
@@ -2053,7 +2053,7 @@ msgid "Success:"
 msgstr "Succes:"
 
 msgid "Successfully Saved"
-msgstr "Gem lykkedes"
+msgstr "Det lykkedes at gemme"
 
 msgid "Successfully Updated"
 msgstr "Opdateringen lykkedes"
@@ -2089,7 +2089,7 @@ msgid "System Proxy Settings"
 msgstr "System Proxy Indstillinger"
 
 msgid "TChinese"
-msgstr "Traditionely Kinesisk"
+msgstr "Traditionelt Kinesisk"
 
 msgid "TXT Cheatcodes Path"
 msgstr "Sti til TXT-Snydekoder"
@@ -2104,7 +2104,7 @@ msgid "The Miis will be extracted to your emu nand path and emu nand channel pat
 msgstr "Miis'ne vil blive udpakket til din emu nand sti og emu nand kanal sti. Bemærk: Alle existerende filer vil blive overskrevet."
 
 msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
-msgstr "No Disc+ indstillingen kræver DIOS MIOS 2.2 opdatering2. Denne indstilling vil blive ignoreret"
+msgstr "No Disc+ indstillingen kræver DIOS MIOS 2.2 opdatering2. Denne indstilling vil blive ignoreret."
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
 msgstr "SYSCONF-filen vil blive udpakket til din emu nand sti og emu nand kanal sti. Bemærk: Alle existerende filer vil blive overskrevet."
@@ -2168,10 +2168,10 @@ msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "Dette spil har flere disks. Vælg venligst disken der skal startes."
 
 msgid "This patch might not work with all games. If a game doesn't boot, disable it in individual game settings menu."
-msgstr "Denne patch virker nok ikke med alle spil. Hvis et spil ikke start, deaktiver den i det individuelle spilindstillings menu"
+msgstr "Denne patch virker nok ikke med alle spil. Hvis et spil ikke start, deaktiver den i det individuelle spil indstillinger menu."
 
 msgid "This path must be on SD!"
-msgstr "Denne sti skal være på SD"
+msgstr "Denne sti skal være på SD!"
 
 msgid "Time left:"
 msgstr "Tid tilbage:"
@@ -2453,7 +2453,7 @@ msgid "Wiinnertag Path"
 msgstr "Wiinnertag Sti"
 
 msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
-msgstr "Wiinnertag kræver at du har automatisk netværksforbindelse sat til ved opstart af appen. Vil du sætte det til nu?"
+msgstr "Wiinnertag kræver at du har automatisk netværksforbindelse sat til ved opstart af appen. Vil du aktivere det nu?"
 
 msgid "Wiird Debugger"
 msgstr ""
@@ -2529,7 +2529,7 @@ msgid "for hosting the themes"
 msgstr "for at hoste temaerne"
 
 msgid "for the USB Loader source"
-msgstr "for USB Loader sourcen"
+msgstr "for USB Loader kilden"
 
 msgid "for their work on the wiki page"
 msgstr "for deres arbejde på wiki-siden"
@@ -2562,7 +2562,7 @@ msgstr "sekunder tilbage"
 #~ msgstr "Sti til GameTDB"
 
 #~ msgid "Error 002 fix"
-#~ msgstr ""
+#~ msgstr "Fejl 002 fix"
 
 #~ msgid "Main tester:"
 #~ msgstr "Primær tester:"
