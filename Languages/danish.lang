@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# danish.lang - r1148
+# danish.lang - r1149
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -1999,7 +1999,7 @@ msgid "Sneek Video Patch"
 msgstr ""
 
 msgid "Sorry, the theme downloader menu is not working anymore because http://wii.spiffy360.com now requires user registration."
-msgstr ""
+msgstr "Undskyld, temadownloader menuen virker ikke længere, fordi http://wii.spiffy360.com kræver nu brugerregistration"
 
 msgid "Sort alphabetically"
 msgstr "Sortér alfabetisk"
@@ -2059,7 +2059,7 @@ msgid "Successfully Updated"
 msgstr "Opdateringen lykkedes"
 
 msgid "Successfully copied"
-msgstr ""
+msgstr "Kopieringen lykkedes"
 
 msgid "Successfully deleted:"
 msgstr "Det lykkedes at slette:"
@@ -2071,67 +2071,67 @@ msgid "Successfully installed:"
 msgstr "Installationen lykkedes:"
 
 msgid "Successfully updated."
-msgstr ""
+msgstr "Opdateringen lykkedes"
 
 msgid "Switching to channel list mode."
-msgstr "Skift til Kanal list måde."
+msgstr "Skift til Kanal list tilstand."
 
 msgid "Sync FAT32 FS Info"
-msgstr "Synkronisere FAT32 FS Info"
+msgstr "Synkroniser FAT32 FS Info"
 
 msgid "Synchronizing..."
-msgstr "Synkronisere..."
+msgstr "Synkroniserer..."
 
 msgid "System Default"
 msgstr "System-standard"
 
 msgid "System Proxy Settings"
-msgstr ""
+msgstr "System Proxy Indstillinger"
 
 msgid "TChinese"
-msgstr "Kinesisk (trad.)"
+msgstr "Traditionely Kinesisk"
 
 msgid "TXT Cheatcodes Path"
-msgstr "Sti til TXTCheatcodes"
+msgstr "Sti til TXT-Snydekoder"
 
 msgid "The .them file was not found in the zip."
-msgstr "kunne ikke finde .them fil i zip"
+msgstr Kunne ikke finde .them fil i zip"
 
 msgid "The Force Widescreen setting requires DIOS MIOS v2.1 or more. This setting will be ignored."
-msgstr ""
+msgstr "Tving Widescreen indstillingen kræver DIOS MIOS v2.1 or mere. Denne indstilling vil blive ignoreret."
 
 msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
-msgstr ""
+msgstr "Miis'ne vil blive udpakket til din emu nand sti og emu nand kanal sti. Bemærk: Alle existerende filer vil blive overskrevet."
 
 msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
-msgstr ""
+msgstr "No Disc+ indstillingen kræver DIOS MIOS 2.2 opdatering2. Denne indstilling vil blive ignoreret"
 
 msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
-msgstr ""
+msgstr "SYSCONF-filen vil blive udpakket til din emu nand sti og emu nand kanal sti. Bemærk: Alle existerende filer vil blive overskrevet."
 
 msgid "The application might crash if there is currently a read/write access to the SD card!"
-msgstr ""
+msgstr "Applikationen kan crashe hvis der ikke nuværende er læs/skriv adgang på SD-kortet!"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Den angivne mappe eksisterer ikke. Skal den oprettes?"
 
 msgid "The files will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
-msgstr ""
+msgstr "Filerne vil blive udpakket til din emu nand save og kanal sti. Bemærk: Alle eksisterende filer vil blive overskrevet."
 
 msgid "The game is on SD Card."
-msgstr ""
+msgstr "Spillet er på SD-kort"
 
 msgid "The game is on USB."
-msgstr ""
+msgstr "Spillet er på USB"
 
 msgid "The save game will be extracted to your emu nand path."
-msgstr "Dette save game vil bliver udpakket til din Emu Nand sti."
+msgstr "Dette savegame vil blive udpakket til din emu nand sti."
 
 msgid "The save games will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
-msgstr ""
+msgstr "Savegames'ne vil blive udpakket til din emu nand save og kanal sti. Bemærk: Alle eksisterende filer vil blive overskrevet."
 
 msgid "The wad file was installed"
-msgstr "Wad fil var installeret"
+msgstr "Wad filen var installeret"
 
 #, c-format
 msgid "The wad installation failed with error %i"
@@ -2156,22 +2156,22 @@ msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you ha
 msgstr "Denne IOS er BootMii IOS. Hvis du er sikker på at det ikke er BootMii og du har noget andet installeret der, ignorer denne advarsel."
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
-msgstr "Denne IOS var ikke fundet i titel listen. Hvis du er sikker på at den er installeret ignorer denne advarsel."
+msgstr "Denne IOS var ikke fundet i titellisten. Hvis du er sikker på at den er installeret ignorer denne advarsel."
 
 msgid "This Nintendont version does not support games on USB."
-msgstr ""
+msgstr "Denne Nintendont version understøtter ikke spil på USB."
 
 msgid "This Nintendont version is not correctly supported. Auto boot disabled."
-msgstr ""
+msgstr "Denne Nintendont version er ikke understøttet korrekt. Autostart deaktiveret."
 
 msgid "This game has multiple discs. Please select the disc to launch."
-msgstr ""
+msgstr "Dette spil har flere disks. Vælg venligst disken der skal startes."
 
 msgid "This patch might not work with all games. If a game doesn't boot, disable it in individual game settings menu."
-msgstr ""
+msgstr "Denne patch virker nok ikke med alle spil. Hvis et spil ikke start, deaktiver den i det individuelle spilindstillings menu"
 
 msgid "This path must be on SD!"
-msgstr ""
+msgstr "Denne sti skal være på SD"
 
 msgid "Time left:"
 msgstr "Tid tilbage:"
@@ -2183,81 +2183,81 @@ msgid "Title Launcher"
 msgstr "Titel-starter"
 
 msgid "Titles Path"
-msgstr ""
+msgstr "Titler Sti"
 
 msgid "Titles from GameTDB"
 msgstr "Titler fra GameTDB"
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
-msgstr ""
+msgstr "For at køre GameCube spil fra Disken skal du sætte GameCube-tilstanden til MIOS i spilindstillingerne."
 
 #, c-format
 msgid "To run GameCube games with %s you need to place them on an USB FAT32 partition."
-msgstr ""
+msgstr "For at køre GameCube spil med %s skal du sætte dem på en USB FAT32 partition."
 
 #, c-format
 msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary FAT32 partition."
-msgstr ""
+msgstr "For at køre GameCube spil med %s skal du sætte din 'Primær GameCube Sti' på den første primære FAT32 partition."
 
 #, c-format
 msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' on the first primary partition of the Hard Drive."
-msgstr ""
+msgstr "For at køre GameCube spil med %s skal du sætte din 'Primær GameCube Sti' på den første primære partition på harddisken."
 
 #, c-format
 msgid "To run GameCube games with %s you need to set your 'Main GameCube Path' to an USB FAT32 partition."
-msgstr ""
+msgstr "For at køre GameCube spil med %s skal du sætte din 'Primær GameCube Sti' til en USB FAT32 partition."
 
 #, c-format
 msgid "To run GameCube games with %s you need to use a 512 bytes/sector Hard Drive."
-msgstr ""
+msgstr "For at køre GameCube spil med %s skal du bruge en 512 bytes/sektor Harddisk."
 
 #, c-format
 msgid "To run GameCube games with %s you need to use a partition with 32k bytes/cluster or less."
-msgstr ""
+msgstr "For at køre GameCube spil med %s skal du bruge en partition med 32k bytes/klynge eller mindre."
 
 msgid "To run GameCube games with Devolution you need the loader.bin file in your Devolution Loader Path."
-msgstr ""
+msgstr "For at køre GameCube spil med Devolution skal du have loader.bin filen i din Devolution Loader Sti."
 
 msgid "To run GameCube games with Nintendont you need the boot.dol file in your Nintendont Loader Path."
-msgstr ""
+msgstr "For at køre GameCube spil med Nintendont skal du have boot.dol filen i din Nintendont Loader Sti."
 
 #, c-format
 msgid "To use HID with %s you need the %s file."
-msgstr ""
+msgstr "For at bruge HID med %s skal du bruge %s filen."
 
 msgid "To use neek you need to set your 'Emulated NAND Channel Path' on the first primary partition of the Hard Drive."
-msgstr ""
+msgstr "For at bruge neek skal du sætte din 'Emuleret NAND Kanal Sti' på den første primære partition på Harddisken."
 
 msgid "To use neek you need to set your 'Emulated NAND Channel Path' to a FAT32 partition."
-msgstr ""
+msgstr "For at bruge neek skal du sætte din 'Emuleret NAND Kanal Sti' på en FAT32 partition."
 
 msgid "To use neek you need to use a 512 bytes/sector Hard Drive."
-msgstr ""
+msgstr "For at bruge neek skal du bruge en 512 bytes/sektor Harddisk."
 
 #, c-format
 msgid "To use ocarina with %s you need the %s file."
-msgstr ""
+msgstr "For at bruge ocarina med %s skal du bruge %s filen."
 
 msgid "Tooltip Delay"
-msgstr ""
+msgstr "Værktøjstips Forsinkelse"
 
 msgid "Tooltips"
 msgstr "Værktøjstips"
 
 msgid "Transfer failed"
-msgstr "Overførelse fejlede"
+msgstr "Overførelse mislykkedes"
 
 msgid "Triforce Arcade Mode"
-msgstr ""
+msgstr "Triforce Arcade Tilstand"
 
 msgid "Two Lines"
-msgstr ""
+msgstr "To Linjer"
 
 msgid "USB"
 msgstr ""
 
 msgid "USB Device not initialized."
-msgstr ""
+msgstr "USB-enhed ikke initialiseret"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX er beskyttet"
@@ -2272,19 +2272,19 @@ msgid "USB-HID Controller"
 msgstr ""
 
 msgid "USBloaderGX couldn't verify Nintendont boot.dol file. Launch this boot.dol anyway?"
-msgstr ""
+msgstr "USBloaderGX kunne ikke bekræfte Nintendont boot.dol filen. Vil du starte den boot.dol alligevel?"
 
 msgid "USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyway?"
-msgstr ""
+msgstr "USBloaderGX kunne ikke skrive en Nintendont config fil. Vil du starte Nintendont alligevel?"
 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
-msgstr ""
+msgstr "USBloaderGX r1218 kræves for Nintendont Alpha v0.1. Opdater venligst din Nintendont boot.dol version."
 
 msgid "Use Game Header Cache"
-msgstr ""
+msgstr "Brug Game Header Cache"
 
 msgid "Uninstall"
-msgstr "Afinstaller"
+msgstr "Afinstallér"
 
 msgid "Uninstall Game"
 msgstr "Afinstallér spil"
@@ -2293,7 +2293,7 @@ msgid "Uninstall Menu"
 msgstr "Afinstallationsmenu"
 
 msgid "Uninstall all"
-msgstr "Afinstaller alle"
+msgstr "Afinstallér alle"
 
 msgid "Unknown"
 msgstr "Ukendt"
@@ -2326,7 +2326,7 @@ msgid "Update all Language Files"
 msgstr "Opdatér alle sprogfiler"
 
 msgid "Update Failed"
-msgstr "Opdateringen mislykkedes"
+msgstr "Opdateringen Mislykkedes"
 
 msgid "Update Successful"
 msgstr "Opdatering Lykkedes"
@@ -2338,13 +2338,13 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Den uploadede ZIP-fil er installeret i homebrew-mappen."
 
 msgid "Use System Font"
-msgstr "Brug system font"
+msgstr "Brug system skrifttypen"
 
 msgid "Use global"
 msgstr "Brug global"
 
 msgid "VBI (Default)"
-msgstr "VBI (standard)"
+msgstr "VBI (Standard)"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV-patch"
@@ -2363,16 +2363,16 @@ msgid "Video Mode"
 msgstr "Video-mode"
 
 msgid "Video Scale Value"
-msgstr ""
+msgstr "Video Skala Værdi"
 
 msgid "Video offset"
 msgstr ""
 
 msgid "Video scale"
-msgstr ""
+msgstr "Video Skala"
 
 msgid "Virtual Pointer Speed"
-msgstr "Virtual pointer hastighed"
+msgstr "Virtuel Pointer Hastighed"
 
 msgid "WDM Files Path"
 msgstr "Sti til WDM filer"
@@ -2402,25 +2402,25 @@ msgid "What to extract from NAND?"
 msgstr "Hvad skal der udpakkes fra NAND?"
 
 msgid "Where should the game be installed to?"
-msgstr ""
+msgstr "Hvor skal spillet installeres"
 
 msgid "Where to dump NAND?"
-msgstr ""
+msgstr "Hvor skal NAND dumpes?"
 
 msgid "Which device do you want to use for Nintendont files?"
-msgstr ""
+msgstr "Hvilken enhed vil du bruge for Nintendont filerne?"
 
 msgid "Which mode do you want to use?"
-msgstr ""
+msgstr "Hvilken tilstand vil du bruge?"
 
 msgid "WiFi Features"
 msgstr "WiFi-indstillinger"
 
 msgid "Widescreen Factor"
-msgstr ""
+msgstr "Widescreen Faktor"
 
 msgid "Widescreen Fix"
-msgstr "Bredformat-fix"
+msgstr ""
 
 msgid "Wii Games"
 msgstr "Wii Spil"
@@ -2450,17 +2450,17 @@ msgid "Wiinnertag"
 msgstr ""
 
 msgid "Wiinnertag Path"
-msgstr "Sti til Wiinnertag"
+msgstr "Wiinnertag Sti"
 
 msgid "Wiinnertag requires you to enable automatic network connect on application start. Do you want to enable it now?"
-msgstr "Wiinnertag kræver at du har automatisk netværk forbindelse sat til ved prg. opstart. Vil du sætte det TIL nu?"
+msgstr "Wiinnertag kræver at du har automatisk netværksforbindelse sat til ved opstart af appen. Vil du sætte det til nu?"
 
 msgid "Wiird Debugger"
 msgstr ""
 
 #, c-format
 msgid "Write error on file: %s"
-msgstr "Fejl skrivening til fil: %s"
+msgstr "Fejl skrivning til fil: %s"
 
 msgid "Writing GXGameCategories.xml"
 msgstr "Skriver GXGameCategories.xml"
@@ -2472,19 +2472,19 @@ msgid "Yes"
 msgstr "Ja"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
-msgstr "Du prøver at vælge en FAT32/NTFS/EXT partition med cIOS 249 Rev < 18. Dette er ikke understøttet. Fortsætte er på egen risiko"
+msgstr "Du prøver at vælge en FAT32/NTFS/EXT partition med cIOS 249 Rev < 18. Dette er ikke understøttet. Fortsæt på egen risiko."
 
 msgid "You can select or format a partition or use the channel loader mode."
-msgstr "Du kan vælge eller formatter en partition eller kanal loader måde."
+msgstr "Du kan vælge eller formatter en partition eller kanal loader tilstand."
 
 msgid "You cannot delete this category."
 msgstr "Du kan ikke slette denne kategori."
 
 msgid "You need neek2o to load EmuNAND from sub-folders."
-msgstr ""
+msgstr "Du skal bruge neek2o for at indlæse EmuNAND from undermapper"
 
 msgid "You need to install DIOS MIOS Lite v1.2 or a newer version."
-msgstr ""
+msgstr "Du skal installere DIOS MIOS Lite v1.2 eller en nyere version."
 
 msgid "You need to install an additional GameCube loader or select a different GameCube Mode to launch GameCube games from USB or SD card."
 msgstr ""
@@ -2505,7 +2505,7 @@ msgid "does not exist!"
 msgstr "eksisterer ikke!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr "eksisterer ikke! Indlæser spillet uden cheats."
+msgstr "eksisterer ikke! Indlæser spillet uden snyd."
 
 msgid "files left"
 msgstr "filer tilbage"
@@ -2517,7 +2517,7 @@ msgid "for GameTDB and hosting covers / disc images"
 msgstr "for GameTDB og for at hoste covers/DVD-billeder"
 
 msgid "for Ocarina"
-msgstr ""
+msgstr "til Ocarina"
 
 msgid "for diverse patches"
 msgstr "for diverse patches"
@@ -2532,7 +2532,7 @@ msgid "for the USB Loader source"
 msgstr "for USB Loader sourcen"
 
 msgid "for their work on the wiki page"
-msgstr ""
+msgstr "for deres arbejde på wiki-siden"
 
 msgid "formatted!"
 msgstr "formateret!"
@@ -2556,22 +2556,22 @@ msgstr "sekunder tilbage"
 #~ msgstr "Installer WAD til EmuNand"
 
 #~ msgid "WAD Installation"
-#~ msgstr " WAD installation"
+#~ msgstr "WAD installation"
 
 #~ msgid "GameTDB Path"
 #~ msgstr "Sti til GameTDB"
 
 #~ msgid "Error 002 fix"
-#~ msgstr "Error 002 fix"
+#~ msgstr ""
 
 #~ msgid "Main tester:"
-#~ msgstr "Hoved tester:"
+#~ msgstr "Primær tester:"
 
 #~ msgid "USB Device not found."
-#~ msgstr "USB enhed blev ikke fundet."
+#~ msgstr "USB-enhed blev ikke fundet."
 
 #~ msgid "Custom Discarts"
-#~ msgstr "Tilpasset DVD billeder"
+#~ msgstr "Tilpasset Diskbilleder"
 
 #~ msgid "Full HQ Covers"
 #~ msgstr "Fuld HQ Covers"
@@ -2580,7 +2580,7 @@ msgstr "sekunder tilbage"
 #~ msgstr "Fuld LQ Covers"
 
 #~ msgid "Original Discarts"
-#~ msgstr "Originale DVD Billeder"
+#~ msgstr "Originale DiskBilleder"
 
 #~ msgid "Rename Game on WBFS"
 #~ msgstr "Omdøb spil på WBFS"
@@ -2598,22 +2598,22 @@ msgstr "sekunder tilbage"
 #~ msgstr "for at hoste opdateringer"
 
 #~ msgid "Insert a Wii Disc!"
-#~ msgstr "Indsæt en Wii-DVD!"
+#~ msgstr "Indsæt en Wii-Disk!"
 
 #~ msgid "Issue manager /"
 #~ msgstr "Problem manager /"
 
 #~ msgid "No cheats were selected"
-#~ msgstr "Der blev ikke valgt nogle cheats"
+#~ msgstr "Der blev ikke valgt noget snyd"
 
 #~ msgid "Not a Wii Disc"
-#~ msgstr "Ikke en Wii-DVD"
+#~ msgstr "Ikke en Wii-Disk"
 
 #~ msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
-#~ msgstr "Filerne vil bliver udpakket til din Emu Nand sti. Advarsel : alle eksisterene filer vil bliver overskrevet."
+#~ msgstr "Filerne vil bliver udpakket til din Emu Nand sti. Advarsel : alle eksisterende filer vil blive overskrevet."
 
 #~ msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
-#~ msgstr "Alle Save games vil bliver udpakket til din Emu Nand sti. Advarsel: Alle eksisterene save games vil bliver overskrevet."
+#~ msgstr "Alle savegames vil bliver udpakket til din emu eand sti. Advarsel: Alle eksisterende savegames vil blive overskrevet."
 
 #~ msgid "Installing title"
 #~ msgstr "Installerer titel"
@@ -2625,10 +2625,10 @@ msgstr "sekunder tilbage"
 #~ msgstr "Du skal vælge eller formattere en partition"
 
 #~ msgid "Language File"
-#~ msgstr "Sprog Fil"
+#~ msgstr "Sprogfil"
 
 #~ msgid "Are you sure you want to import game categories from WiiTDB?"
-#~ msgstr "Er du sikker på at du ville importere spille kategorier fra WiiTDB?"
+#~ msgstr "Er du sikker på at du ville importere spil kategorier fra WiiTDB?"
 
 #~ msgid "Titles from WiiTDB"
 #~ msgstr "Titler fra WiiTDB"
@@ -2640,7 +2640,7 @@ msgstr "sekunder tilbage"
 #~ msgstr "Sti til WiiTDB"
 
 #~ msgid "WiiTDB is up to date."
-#~ msgstr "WiiTDB er op til dato."
+#~ msgstr "WiiTDB er opdateret."
 
 #~ msgid "for WiiTDB and hosting covers / disc images"
-#~ msgstr "for WiiTDB og for at hoste covers/DVD-billeder"
+#~ msgstr "for WiiTDB og for at hoste covers/Disk-billeder"
