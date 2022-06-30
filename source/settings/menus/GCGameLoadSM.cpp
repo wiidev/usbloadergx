@@ -97,6 +97,7 @@ static const char * DEVOMCText[] =
 	trNOOP( "OFF" ),
 	trNOOP( "ON" ),
 	trNOOP( "Individual" ),
+	trNOOP( "Regional" ),
 };
 
 static const char * NINMCText[] =
