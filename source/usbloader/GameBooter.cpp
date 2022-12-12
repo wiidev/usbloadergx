@@ -921,7 +921,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	devo_config->version = DEVO_CONFIG_VERSION;
 	// st1.st_dev doesn't work with our current device type. It returns Wii_UMS 'WUMS' instead of Wii_USB 'WUSB'.
 	// Only last two letters are returned by DevkitPro, so we set them manually to Devolution config.
-	devo_config->device_signature = st1.st_dev == 'SD' ? 'SD' : 'SB'; // Set device type.
+	devo_config->device_signature = st1.st_dev == 'WISD' ? 'SD' : 'SB'; // Set device type.
 	devo_config->disc1_cluster = st1.st_ino;			// set starting cluster for first disc ISO file
 	if(multiDisc)
 		devo_config->disc2_cluster = st2.st_ino;		// set starting cluster for second disc ISO file
