@@ -268,9 +268,9 @@ void LoaderSettings::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "=== GameCube Settings" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Source" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
+	Options->SetName(Idx++, "%s", tr( "Progressive Patch" ));
 	Options->SetName(Idx++, "%s", tr( "--==  DM(L) + Nintendont" ));
 	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
-	Options->SetName(Idx++, "%s", tr( "Progressive Patch" ));
 	Options->SetName(Idx++, "%s", tr( "Force Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "Debug" ));
 	Options->SetName(Idx++, "%s", tr( "Disc-Select Prompt" ));
@@ -414,14 +414,14 @@ void LoaderSettings::SetOptionValues()
 	//! Settings: GameCube Mode
 	Options->SetValue(Idx++, "%s", tr(GCMode[Settings.GameCubeMode]));
 
+	//! Settings: DML + NIN + Devo Progressive Patch
+	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLProgPatch]));
+
 	//! Settings: TITLE - GameCube DIOS MIOS (Lite) + Nintendont
 	Options->SetValue(Idx++, "==--   ");
 
 	//! Settings: DML + NIN Video Mode
 	Options->SetValue(Idx++, "%s", tr(DMLVideoText[Settings.DMLVideo]));
-
-	//! Settings: DML + NIN Progressive Patch
-	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLProgPatch]));
 
 	//! Settings: DML + NIN Force Widescreen
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLWidescreen]));
@@ -778,6 +778,12 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.GameCubeMode >= CG_MODE_MAX_CHOICE) Settings.GameCubeMode = 0;
 	}
 
+	//! Settings: DML + NIN + Devo Progressive Patch
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DMLProgPatch >= MAX_ON_OFF) Settings.DMLProgPatch = 0;
+	}
+
 	//! Settings: TITLE - GameCube DM(L) + Nintendont
 	else if (ret == ++Idx)
 	{
@@ -791,12 +797,6 @@ int LoaderSettings::GetMenuInternal()
 		if(Settings.DMLVideo == DML_VIDEO_FORCE_PATCH) // Skip Force Patch
 			Settings.DMLVideo++;
 		if(Settings.DMLVideo >= DML_VIDEO_MAX_CHOICE) Settings.DMLVideo = 0;
-	}
-
-	//! Settings: DML + NIN Progressive Patch
-	else if (ret == ++Idx)
-	{
-		if (++Settings.DMLProgPatch >= MAX_ON_OFF) Settings.DMLProgPatch = 0;
 	}
 
 	//! Settings: DML + NIN Force Widescreen

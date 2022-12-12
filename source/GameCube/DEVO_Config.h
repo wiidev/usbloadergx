@@ -20,7 +20,7 @@
 #define LAUNCH_DEVO() ((void(*)(void))loader_bin)()
 
 #define DEVO_SIG				 0x3EF9DB23
-#define DEVO_CONFIG_VERSION		 0x0200
+#define DEVO_CONFIG_VERSION		 0x0201
 
 enum DEVOConfig
 {
@@ -33,6 +33,8 @@ enum DEVOConfig
 	DEVO_CFG_CROP_OVERSCAN	= (1<<6), // added in Devo r234, config version 0x0200
 	DEVO_CFG_DISC_DELAY		= (1<<7),
 	DEVO_CFG_PLAYLOG		= (1<<8),
+	DEVO_CFG_FORCE_480P             = (1<<9), // probably added in Devo r266, config version 0x0201
+	DEVO_CFG_FORCE_576P             = (1<<10),
 };
 
 typedef struct _DEVO_CFG

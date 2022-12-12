@@ -810,6 +810,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 
 	GameCFG * game_cfg = GameSettings.GetGameCFG(gameHdr->id);
 	s8 languageChoice = game_cfg->language == INHERIT ? Settings.language -1 : game_cfg->language;
+	u8 devoProgressivePatch = game_cfg->DMLProgPatch == INHERIT ? Settings.DMLProgPatch : game_cfg->DMLProgPatch;
 	u8 devoMCEmulation = game_cfg->DEVOMCEmulation == INHERIT ? Settings.DEVOMCEmulation : game_cfg->DEVOMCEmulation;
 	u8 devoActivityLEDChoice = game_cfg->DEVOActivityLED == INHERIT ? Settings.DEVOActivityLED : game_cfg->DEVOActivityLED;
 	u8 devoWidescreenChoice = game_cfg->DEVOWidescreen == INHERIT ? Settings.DEVOWidescreen : game_cfg->DEVOWidescreen;
@@ -944,6 +945,11 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	if (devoDiscDelayChoice && DEVO_version >= 234)
 		devo_config->options |= DEVO_CFG_DISC_DELAY;
 	//	devo_config->options |= DEVO_CFG_PLAYLOG; 			// Playlog setting managed by USBLoaderGX features menu
+	if (devoProgressivePatch && DEVO_version >= 266)
+	{
+		devo_config->options |= DEVO_CFG_FORCE_480P;
+		devo_config->options |= DEVO_CFG_FORCE_576P;
+	}
 	
 	// check memory card
 	if(devoMCEmulation == DEVO_MC_OFF)

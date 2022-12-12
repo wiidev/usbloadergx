@@ -227,6 +227,7 @@ void GCGameLoadSM::SetOptionNames()
 		Options->SetName(Idx++, "%s", tr( "D Buttons" ));
 		Options->SetName(Idx++, "%s", tr( "Crop Overscan" ));
 		Options->SetName(Idx++, "%s", tr( "Disc Read Delay" ));
+		Options->SetName(Idx++, "%s", tr( "Progressive Patch" ));
 	}
 }
 
@@ -555,6 +556,12 @@ void GCGameLoadSM::SetOptionValues()
 			Options->SetValue(Idx++, tr("Use global"));
 		else
 			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVODiscDelay]));
+
+		//! Settings: DML + NIN + Devo Progressive Patch
+		if(GameConfig.DMLProgPatch == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLProgPatch]));
 		
 	}
 }
@@ -948,6 +955,12 @@ int GCGameLoadSM::GetMenuInternal()
 	else if (currentGCmode == GC_MODE_DEVOLUTION && ret == ++Idx)
 	{
 		if (++GameConfig.DEVODiscDelay >= MAX_ON_OFF) GameConfig.DEVODiscDelay = INHERIT;
+	}
+
+	//! Settings: DEVO Progressive Patch
+	else if (currentGCmode == GC_MODE_DEVOLUTION && ret == ++Idx)
+	{
+		if (++GameConfig.DMLProgPatch >= MAX_ON_OFF) GameConfig.DMLProgPatch = INHERIT;
 	}
 
 	SetOptionValues();
