@@ -957,6 +957,10 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 		{
 			snprintf(DEVO_memCard + strlen(DEVO_memCard), sizeof(DEVO_memCard) - strlen(DEVO_memCard), "/memcard_%.6s.bin", (const char *) gameHdr->id);
 		}
+		else if (devoMCEmulation == DEVO_MC_REGIONAL)
+		{
+			snprintf(DEVO_memCard, sizeof(DEVO_memCard), "%s:/apps/gc_devo/memcard_%c.bin", DeviceHandler::GetDevicePrefix(RealPath), gameHdr->id[3]);
+		}
 		else // same for all games
 		{
 			snprintf(DEVO_memCard, sizeof(DEVO_memCard), "%s:/apps/gc_devo/memcard.bin", DeviceHandler::GetDevicePrefix(RealPath));
