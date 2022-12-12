@@ -55,6 +55,7 @@
 #include "FileOperations/fileops.h"
 #include "prompts/ProgressWindow.h"
 #include "neek.hpp"
+#include "lstub.h"
 
 /* GCC 11 false positives */
 #if __GNUC__ > 10
@@ -819,6 +820,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	u8 devoDButtonsChoice = game_cfg->DEVODButtons == INHERIT ? Settings.DEVODButtons : game_cfg->DEVODButtons;
 	u8 devoCropOverscanChoice = game_cfg->DEVOCropOverscan == INHERIT ? Settings.DEVOCropOverscan : game_cfg->DEVOCropOverscan;
 	u8 devoDiscDelayChoice = game_cfg->DEVODiscDelay == INHERIT ? Settings.DEVODiscDelay : game_cfg->DEVODiscDelay;
+	u64 returnToChoice = strlen(Settings.returnTo) > 0 ? NandTitles.FindU32(Settings.returnTo) : 0;
 
 	if(gameHdr->type == TYPE_GAME_GC_DISC)
 	{
@@ -1030,6 +1032,12 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	gprintf("DEVO: Loading game: %s\n", disc1);
 	gprintf("DEVO: Memory Card: %s\n\n", DEVO_memCard);
 	gprintf("%.72s", (const char*)loader_bin + 4);
+
+	if (returnToChoice)
+	{
+		loadStub();
+		Set_Stub(returnToChoice);
+	}
 
 	u32 cpu_isr;
 	SYS_ResetSystem(SYS_SHUTDOWN, 0, 0);
