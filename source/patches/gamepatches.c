@@ -12,6 +12,7 @@
 #include "memory/mem2.h"
 #include "settings/SettingsEnums.h"
 #include "svnrev.h"
+#include "kirbypatch.h"
 
 /* GCC 11 false positives */
 #if __GNUC__ > 10
@@ -69,6 +70,7 @@ void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 language
     // If a wip file is loaded for this game this does nothing - Dimok
     patch_nsmb((u8 *)0x80000000);
     patch_pop((u8 *)0x80000000);
+    patch_kirby((u8 *)0x80000000);
 
     for (i = 0; i < dolCount; ++i)
     {
