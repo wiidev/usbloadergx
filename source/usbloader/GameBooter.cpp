@@ -820,7 +820,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	u8 devoDButtonsChoice = game_cfg->DEVODButtons == INHERIT ? Settings.DEVODButtons : game_cfg->DEVODButtons;
 	u8 devoCropOverscanChoice = game_cfg->DEVOCropOverscan == INHERIT ? Settings.DEVOCropOverscan : game_cfg->DEVOCropOverscan;
 	u8 devoDiscDelayChoice = game_cfg->DEVODiscDelay == INHERIT ? Settings.DEVODiscDelay : game_cfg->DEVODiscDelay;
-	u64 returnToChoice = strlen(Settings.returnTo) > 0 ? NandTitles.FindU32(Settings.returnTo) : 0;
+	u64 returnToChoice = strlen(Settings.returnTo) > 0 ? (game_cfg->returnTo ? NandTitles.FindU32(Settings.returnTo) : 0) : 0;
 
 	if(gameHdr->type == TYPE_GAME_GC_DISC)
 	{

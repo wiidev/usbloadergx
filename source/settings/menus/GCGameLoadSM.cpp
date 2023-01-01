@@ -228,6 +228,7 @@ void GCGameLoadSM::SetOptionNames()
 		Options->SetName(Idx++, "%s", tr( "Crop Overscan" ));
 		Options->SetName(Idx++, "%s", tr( "Disc Read Delay" ));
 		Options->SetName(Idx++, "%s", tr( "Progressive Patch" ));
+		Options->SetName(Idx++, "%s", tr( "Return To" ));
 	}
 }
 
@@ -557,12 +558,26 @@ void GCGameLoadSM::SetOptionValues()
 		else
 			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DEVODiscDelay]));
 
-		//! Settings: DML + NIN + Devo Progressive Patch
+		//! Settings: DML + NIN + DEVO Progressive Patch
 		if(GameConfig.DMLProgPatch == INHERIT)
 			Options->SetValue(Idx++, tr("Use global"));
 		else
 			Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.DMLProgPatch]));
-		
+
+		//! Settings: DEVO Return To
+		if(GameConfig.returnTo)
+		{
+			const char* TitleName = NULL;
+			u64 tid = NandTitles.FindU32(Settings.returnTo);
+			if (tid > 0)
+				TitleName = NandTitles.NameOf(tid);
+			Options->SetValue(Idx++, "%s", TitleName ? TitleName : strlen(Settings.returnTo) > 0 ?
+											Settings.returnTo : tr( OnOffText[0] ));
+		}
+		else
+		{
+			Options->SetValue(Idx++, "%s", tr( OnOffText[0] ));
+		}
 	}
 }
 
@@ -961,6 +976,12 @@ int GCGameLoadSM::GetMenuInternal()
 	else if (currentGCmode == GC_MODE_DEVOLUTION && ret == ++Idx)
 	{
 		if (++GameConfig.DMLProgPatch >= MAX_ON_OFF) GameConfig.DMLProgPatch = INHERIT;
+	}
+
+	//! Settings: DEVO Return To
+	else if (currentGCmode == GC_MODE_DEVOLUTION && ret == ++Idx)
+	{
+		if (++GameConfig.returnTo >= MAX_ON_OFF) GameConfig.returnTo = 0;
 	}
 
 	SetOptionValues();
