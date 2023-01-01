@@ -21,6 +21,7 @@ class GameBrowseMenu : public GuiWindow
 		void LoadCover(struct discHdr *header);
 		void CheckDiscSlotUpdate();
 		void UpdateFreeSpace(void *arg);
+		void SetFreeSpace(float freespace, float used);
 		void UpdateClock();
 		static void UpdateCallback(void * e);
 

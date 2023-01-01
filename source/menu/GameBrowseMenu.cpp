@@ -40,7 +40,6 @@
 #include "sys.h"
 
 struct discHdr *dvdheader = NULL;
-static bool Exiting = false;
 
 GameBrowseMenu::GameBrowseMenu()
 	: GuiWindow(screenwidth, screenheight)
@@ -48,7 +47,6 @@ GameBrowseMenu::GameBrowseMenu()
 	returnMenu = MENU_NONE;
 	gameSelectedOld = -1;
 	lastrawtime = 0;
-	Exiting = false;
 	show_searchwindow = false;
 	gameBrowser = NULL;
 	searchBar = NULL;
@@ -115,6 +113,8 @@ GameBrowseMenu::GameBrowseMenu()
 	usedSpaceTxt = new GuiText(" ", 18, thColor("r=55 g=190 b=237 a=255 - hdd info color"));
 	usedSpaceTxt->SetAlignment(thAlign("center - hdd info align hor"), thAlign("top - hdd info align ver"));
 	usedSpaceTxt->SetPosition(thInt("0 - hdd info pos x"), thInt("400 - hdd info pos y"));
+	usedSpaceTxt->SetVisible(false);
+	SetFreeSpace(0.0f, 0.0f);
 
 	gamecntTxt = new GuiText((char *) NULL, 18, thColor("r=55 g=190 b=237 a=255 - game count color"));
 	gamecntBtn = new GuiButton(100, 18);
@@ -366,7 +366,6 @@ GameBrowseMenu::GameBrowseMenu()
 
 GameBrowseMenu::~GameBrowseMenu()
 {
-	Exiting = true;
 	ResumeGui();
 
 	SetEffect(EFFECT_FADE, -20);
@@ -850,6 +849,8 @@ void GameBrowseMenu::ReloadBrowser()
 		Append(usedSpaceTxt);
 	if (thInt("1 - show game count: 1 for on and 0 for off") == 1) //force show game cnt info
 		Append(gamecntBtn);
+	if (!Settings.ShowGameCount)
+		Remove(gamecntBtn);
 	if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_SD_RELOAD_BUTTON))
 		Append(sdcardBtn);
 	Append(poweroffBtn);
@@ -1685,32 +1686,23 @@ void GameBrowseMenu::UpdateCallback(void * e)
 	}
 }
 
+void GameBrowseMenu::SetFreeSpace(float freespace, float used)
+{
+	if (strcmp(Settings.db_language, "JA") == 0)
+		usedSpaceTxt->SetText(fmt("%.2fGB %s %.2fGB %s", freespace + used, tr( "of" ), freespace, tr( "free" )));
+	else
+		usedSpaceTxt->SetText(fmt("%.2fGB %s %.2fGB %s", freespace, tr( "of" ), freespace + used, tr( "free" )));
+}
+
 void GameBrowseMenu::UpdateFreeSpace(void * arg)
 {
-	char spaceinfo[30];
-	spaceinfo[0] = 0;
-
-	if(Settings.ShowFreeSpace)
+	if (Settings.ShowFreeSpace)
 	{
 		float freespace = 0.0, used = 0.0;
+		usedSpaceTxt->SetVisible(true);
 		int ret = WBFS_DiskSpace(&used, &freespace);
-		if(ret >= 0)
-		{
-			if (strcmp(Settings.db_language, "JA") == 0)
-			{
-				// needs to be "total...used" for Japanese
-				snprintf(spaceinfo, sizeof(spaceinfo), "%.2fGB %s %.2fGB %s", (freespace + used), tr( "of" ), freespace, tr( "free" ));
-			}
-			else
-			{
-				snprintf(spaceinfo, sizeof(spaceinfo), "%.2fGB %s %.2fGB %s", freespace, tr( "of" ), (freespace + used), tr( "free" ));
-			}
-		}
+		if (ret >= 0)
+			SetFreeSpace(freespace, used);
 	}
-
-	if(Exiting)
-		return;
-
-	usedSpaceTxt->SetText(spaceinfo);
 }
 
