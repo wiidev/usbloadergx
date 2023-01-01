@@ -32,11 +32,11 @@ msgid "%i missing files"
 msgstr ""
 
 #, c-format
-msgid "%i wad file(s) not processed!"
+msgid "%i WAD file(s) not processed!"
 msgstr ""
 
 #, c-format
-msgid "%i wad found."
+msgid "%i WAD found."
 msgstr ""
 
 #, c-format
@@ -143,7 +143,7 @@ msgstr ""
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alla funktioner i USB Loader GX är upplåsta."
 
-msgid "All wad files processed successfully."
+msgid "All WAD files processed successfully."
 msgstr ""
 
 msgid "Alternate DOL"
@@ -400,8 +400,11 @@ msgstr "Ändra spel sökväg"
 msgid "Channel Launcher"
 msgstr ""
 
+msgid "Channel Path"
+msgstr ""
+
 msgid "Channels"
-msgstr "Kannaler"
+msgstr "Kanaler"
 
 msgid "Cheatfile is blank"
 msgstr "Fuskfilen är blank"
@@ -798,7 +801,7 @@ msgstr ""
 msgid "Downloading pagelist:"
 msgstr ""
 
-msgid "Dump NAND to EmuNand"
+msgid "Dump NAND to EmuNAND"
 msgstr ""
 
 msgid "During zoom"
@@ -816,13 +819,25 @@ msgstr "FEL:"
 msgid "ERROR: Can't set up theme."
 msgstr "FEL: Kan inte ställa in tema"
 
-msgid "EmuNAND Wad Manager"
+msgid "EmuNAND WAD Manager"
 msgstr ""
 
-msgid "EmuNand Channels"
+msgid "EmuNAND Channel Mode"
 msgstr ""
 
-msgid "Emulated Nand"
+msgid "EmuNAND Channel Path"
+msgstr ""
+
+msgid "EmuNAND Channels"
+msgstr ""
+
+msgid "EmuNAND Save Mode"
+msgstr ""
+
+msgid "EmuNAND Save Path"
+msgstr ""
+
+msgid "Emulated NAND"
 msgstr ""
 
 msgid "English"
@@ -887,22 +902,22 @@ msgstr ""
 msgid "Exit to where?"
 msgstr ""
 
-msgid "Export All Saves to EmuNand"
+msgid "Export All Saves to EmuNAND"
 msgstr ""
 
-msgid "Export Miis to EmuNand"
+msgid "Export Miis to EmuNAND"
 msgstr ""
 
-msgid "Export SYSCONF to EmuNand"
+msgid "Export SYSCONF to EmuNAND"
 msgstr ""
 
-msgid "Extract Miis to the Emu NAND?"
+msgid "Extract Miis to the EmuNAND?"
 msgstr ""
 
-msgid "Extract SYSCONF to the Emu NAND?"
+msgid "Extract SYSCONF to the EmuNAND?"
 msgstr ""
 
-msgid "Extract Save to EmuNand"
+msgid "Extract Save to EmuNAND"
 msgstr ""
 
 msgid "Extracting file:"
@@ -914,7 +929,7 @@ msgstr "Packar upp filer..."
 msgid "Extracting files:"
 msgstr ""
 
-msgid "Extracting nand files:"
+msgid "Extracting NAND files:"
 msgstr ""
 
 msgid "F-Zero AX"
@@ -947,7 +962,7 @@ msgstr ""
 msgid "Failed to read tmd file."
 msgstr ""
 
-msgid "Failed to read wad header."
+msgid "Failed to read WAD header."
 msgstr ""
 
 msgid "Failed updating"
@@ -1295,7 +1310,7 @@ msgstr ""
 msgid "Invalid IOS number entered. Number must be -1 for inherit or 200 - 255."
 msgstr ""
 
-msgid "Invalid wad file."
+msgid "Invalid WAD file."
 msgstr ""
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
@@ -1346,10 +1361,10 @@ msgstr ""
 msgid "Languagepath changed."
 msgstr "Sökväg till språk ändrad"
 
-msgid "Launching Wii games with emulated nand only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgid "Launching Wii games with emulated NAND only works on d2x cIOS! Change game IOS to a d2x cIOS first."
 msgstr ""
 
-msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgid "Launching emulated NAND channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
 msgstr ""
 
 msgid "Left"
@@ -1476,28 +1491,28 @@ msgstr "Volym"
 msgid "NMM Mode"
 msgstr ""
 
-msgid "Nand Chan. Emulation"
+msgid "NAND Chan. Emulation"
 msgstr ""
 
-msgid "Nand Channels"
+msgid "NAND Channels"
 msgstr ""
 
-msgid "Nand Emu Channel Path"
+msgid "NAND Emu Channel Path"
 msgstr ""
 
-msgid "Nand Emu Path"
+msgid "NAND Emu Path"
 msgstr ""
 
-msgid "Nand Emulation"
+msgid "NAND Emulation"
 msgstr ""
 
-msgid "Nand Emulation is only available on D2X cIOS!"
+msgid "NAND emulation is only available on D2X cIOS!"
 msgstr ""
 
-msgid "Nand Emulation only works on FAT/FAT32 partitions!"
+msgid "NAND emulation only works on FAT/FAT32 partitions!"
 msgstr ""
 
-msgid "Nand Saves Emulation"
+msgid "NAND Saves Emulation"
 msgstr ""
 
 msgid "Native Controller"
@@ -1515,7 +1530,7 @@ msgstr ""
 msgid "Neek kernel loading failed."
 msgstr ""
 
-msgid "Neek2o does not support 'Emulated NAND Channel Path' on SD! Please setup Uneek2o instead."
+msgid "Neek2o does not support 'EmuNAND Channel Path' on SD! Please setup Uneek2o instead."
 msgstr ""
 
 msgid "Neither"
@@ -1590,7 +1605,7 @@ msgstr "Inga teman hittades på sidan."
 msgid "No themes found."
 msgstr ""
 
-msgid "No wad file found in this folder."
+msgid "No WAD file found in this folder."
 msgstr ""
 
 msgid "NoSSL only"
@@ -1806,7 +1821,7 @@ msgstr "Snabbstart"
 msgid "Random Directory Music"
 msgstr ""
 
-msgid "Real Nand"
+msgid "Real NAND"
 msgstr ""
 
 msgid "Receiving file from:"
@@ -1917,6 +1932,9 @@ msgstr "Spara spel lista till"
 msgid "Save List"
 msgstr ""
 
+msgid "Save Path"
+msgstr ""
+
 msgid "Saved"
 msgstr "Sparat"
 
@@ -1947,7 +1965,7 @@ msgstr ""
 msgid "Select loader mode"
 msgstr ""
 
-msgid "Select the NAND Emu Path to use."
+msgid "Select the EmuNAND path to use."
 msgstr ""
 
 msgid "Select titles sources."
@@ -2103,13 +2121,13 @@ msgstr ""
 msgid "The Force Widescreen setting requires DIOS MIOS v2.1 or more. This setting will be ignored."
 msgstr ""
 
-msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
+msgid "The Miis will be extracted to your EmuNAND path and EmuNAND channel path. Attention: All existing files will be overwritten."
 msgstr ""
 
 msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
 msgstr ""
 
-msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
+msgid "The SYSCONF file will be extracted to your EmuNAND path and EmuNAND channel path. Attention: All existing files will be overwritten."
 msgstr ""
 
 msgid "The application might crash if there is currently a read/write access to the SD card!"
@@ -2118,7 +2136,7 @@ msgstr ""
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Den angivna katalogen existerar inte. Vill du skapa den?"
 
-msgid "The files will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
+msgid "The files will be extracted to your EmuNAND save and channel path. Attention: All existing files will be overwritten."
 msgstr ""
 
 msgid "The game is on SD Card."
@@ -2127,17 +2145,17 @@ msgstr ""
 msgid "The game is on USB."
 msgstr ""
 
-msgid "The save game will be extracted to your emu nand path."
+msgid "The save game will be extracted to your EmuNAND path."
 msgstr ""
 
-msgid "The save games will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
+msgid "The save games will be extracted to your EmuNAND save and channel path. Attention: All existing files will be overwritten."
 msgstr ""
 
-msgid "The wad file was installed"
+msgid "The WAD file was installed"
 msgstr ""
 
 #, c-format
-msgid "The wad installation failed with error %i"
+msgid "The WAD installation failed with error %i"
 msgstr ""
 
 msgid "Theme Downloader"
@@ -2228,10 +2246,10 @@ msgstr ""
 msgid "To use HID with %s you need the %s file."
 msgstr ""
 
-msgid "To use neek you need to set your 'Emulated NAND Channel Path' on the first primary partition of the Hard Drive."
+msgid "To use neek you need to set your 'EmuNAND Channel Path' on the first primary partition of the Hard Drive."
 msgstr ""
 
-msgid "To use neek you need to set your 'Emulated NAND Channel Path' to a FAT32 partition."
+msgid "To use neek you need to set your 'EmuNAND Channel Path' to a FAT32 partition."
 msgstr ""
 
 msgid "To use neek you need to use a 512 bytes/sector Hard Drive."
@@ -2639,14 +2657,14 @@ msgstr "sekunder kvar"
 #~ msgid "Installing title... Ok!"
 #~ msgstr "Installerar titel... Ok!"
 
-#~ msgid "Installing wad"
-#~ msgstr "Installerar wad"
+#~ msgid "Installing WAD"
+#~ msgstr "Installerar WAD"
 
 #~ msgid "Reading WAD data... Ok!"
 #~ msgstr "Läser WAD data... Ok!"
 
-#~ msgid "Uninstalling wad"
-#~ msgstr "Avinstallerar wad"
+#~ msgid "Uninstalling WAD"
+#~ msgstr "Avinstallerar WAD"
 
 #~ msgid "New Disc Detected"
 #~ msgstr "Ny skiva upptäckt"
@@ -2816,14 +2834,14 @@ msgstr "sekunder kvar"
 #~ msgid "Parental Control disabled"
 #~ msgstr "Föräldrakontroll avaktiverad"
 
-#~ msgid "The wad file was installed.  But It could not be deleted from the SD card."
+#~ msgid "The WAD file was installed.  But It could not be deleted from the SD card."
 #~ msgstr "Wad filen har blivit installerad. Men kunde inte raderas från SD-kortet."
 
-#~ msgid "The wad installation failed with error %ld"
+#~ msgid "The WAD installation failed with error %ld"
 #~ msgstr "Wad installation misslyckades med fel %ld"
 
-#~ msgid "Unable to open the wad that was just downloaded (%s)."
-#~ msgstr "Kunde inte öppna den nedladdade wad filen (%s)."
+#~ msgid "Unable to open the WAD that was just downloaded (%s)."
+#~ msgstr "Kunde inte öppna den nedladdade WAD filen (%s)."
 
 #~ msgid "Unlock Parental Control"
 #~ msgstr "Lås upp föräldrakontroll"

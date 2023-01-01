@@ -88,7 +88,7 @@ protected:
 	static const u8* FindU8Tag( const u8* stuff, u32 len );
 };
 
-// class to access files from an archive that is saved on the nand
+// class to access files from an archive that is saved on the NAND
 // GetFile() will return NULL, use GetfileAllocated()
 class U8NandArchive : public U8Archive
 {

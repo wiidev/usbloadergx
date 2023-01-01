@@ -31,7 +31,7 @@ typedef struct _NEEK_CFG
 	u32		gameid;			// game for DI to autoboot use 4-digit game id
 	u32		gamemagic;		// set to 0x5d1c9ea3 for Wii game, 0xC2339F3D for gamecube games
 	char	dipath[256];	// string specifying path DI should use to find games (/wbfs/ or usb1/wbfs?)
-	char	nandpath[256];	// string specifying where the emuNAND is stored if it's not in the normal place. (/nands/ or usb1/nands/ ?)
+	char	nandpath[256];	// string specifying where the EmuNAND is stored if it's not in the normal place. (/nands/ or usb1/nands/ ?)
 } NEEK_CFG;
 
 enum neekconfig

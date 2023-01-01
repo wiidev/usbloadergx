@@ -32,12 +32,12 @@ msgid "%i missing files"
 msgstr "%i 파일이 누락되었습니다."
 
 #, c-format
-msgid "%i wad file(s) not processed!"
-msgstr "%i wad 파일을 처리하지 못했습니다!"
+msgid "%i WAD file(s) not processed!"
+msgstr "%i WAD 파일을 처리하지 못했습니다!"
 
 #, c-format
-msgid "%i wad found."
-msgstr "%i wad를 찾았습니다."
+msgid "%i WAD found."
+msgstr "%i WAD를 찾았습니다."
 
 #, c-format
 msgid "%s only accepts GameCube backups in ISO format."
@@ -143,8 +143,8 @@ msgstr "모든 이미지가 성공적으로 다운로드 되었습니다."
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "USB Loader GX의 모든 기능이 잠금해제 되었습니다."
 
-msgid "All wad files processed successfully."
-msgstr "모든 wad 파일이 성공적으로 처리 되었습니다"
+msgid "All WAD files processed successfully."
+msgstr "모든 WAD 파일이 성공적으로 처리 되었습니다"
 
 msgid "Alternate DOL"
 msgstr "대체 DOL"
@@ -399,6 +399,9 @@ msgstr "재생 경로 변경"
 
 msgid "Channel Launcher"
 msgstr "채널 실행기"
+
+msgid "Channel Path"
+msgstr "채널 경로"
 
 msgid "Channels"
 msgstr "채널"
@@ -798,7 +801,7 @@ msgstr "원본 디스크 아트워크 다운로드"
 msgid "Downloading pagelist:"
 msgstr "페이지목록 다운로드:"
 
-msgid "Dump NAND to EmuNand"
+msgid "Dump NAND to EmuNAND"
 msgstr "낸드를 에뮤낸드에 덤프"
 
 msgid "During zoom"
@@ -816,13 +819,25 @@ msgstr "오류"
 msgid "ERROR: Can't set up theme."
 msgstr "오류: 테마를 설정 할 수 없습니다"
 
-msgid "EmuNAND Wad Manager"
-msgstr "에뮤낸드 Wad 매니저"
+msgid "EmuNAND WAD Manager"
+msgstr "에뮤낸드 WAD 매니저"
 
-msgid "EmuNand Channels"
+msgid "EmuNAND Channel Mode"
+msgstr "에뮤낸드 채널 모드"
+
+msgid "EmuNAND Channel Path"
+msgstr "에뮤낸드 채널 경로"
+
+msgid "EmuNAND Channels"
 msgstr "에뮤내느 채널"
 
-msgid "Emulated Nand"
+msgid "EmuNAND Save Mode"
+msgstr "에뮤낸드 저장 모드"
+
+msgid "EmuNAND Save Path"
+msgstr "에뮤낸드 저장 경로"
+
+msgid "Emulated NAND"
 msgstr "에뮬레이트 된 낸드"
 
 msgid "English"
@@ -887,22 +902,22 @@ msgstr "종료"
 msgid "Exit to where?"
 msgstr "어디서 종료하겠습니까?"
 
-msgid "Export All Saves to EmuNand"
+msgid "Export All Saves to EmuNAND"
 msgstr "모든 저장 내용을 에뮤낸드로 내보내기"
 
-msgid "Export Miis to EmuNand"
+msgid "Export Miis to EmuNAND"
 msgstr "Mii를 에뮤낸드로 내보내기"
 
-msgid "Export SYSCONF to EmuNand"
+msgid "Export SYSCONF to EmuNAND"
 msgstr "SYSCONF를 에뮤낸드로 내보내기"
 
-msgid "Extract Miis to the Emu NAND?"
+msgid "Extract Miis to the EmuNAND?"
 msgstr "에뮤 낸드에 Mii를 추출하겠습니까?"
 
-msgid "Extract SYSCONF to the Emu NAND?"
+msgid "Extract SYSCONF to the EmuNAND?"
 msgstr "에뮤 낸드에 SYSCONF를 추출하겠습니까?"
 
-msgid "Extract Save to EmuNand"
+msgid "Extract Save to EmuNAND"
 msgstr "에뮤낸드 저장 추출"
 
 msgid "Extracting file:"
@@ -914,7 +929,7 @@ msgstr "파일 추출 중 입니다..."
 msgid "Extracting files:"
 msgstr "파일 추출:"
 
-msgid "Extracting nand files:"
+msgid "Extracting NAND files:"
 msgstr "낸드 파일 추출:"
 
 msgid "F-Zero AX"
@@ -947,8 +962,8 @@ msgstr "티켓 읽기를 실패하였습니다."
 msgid "Failed to read tmd file."
 msgstr "tmd 파일 읽기에 실패했습니다."
 
-msgid "Failed to read wad header."
-msgstr "wad 헤더 읽기에 실패했습니다."
+msgid "Failed to read WAD header."
+msgstr "WAD 헤더 읽기에 실패했습니다."
 
 msgid "Failed updating"
 msgstr "업데이트 실패"
@@ -1295,8 +1310,8 @@ msgstr "타이틀 설치 중 입니다..."
 msgid "Invalid IOS number entered. Number must be -1 for inherit or 200 - 255."
 msgstr "잘못된 IOS 번호가 입력되었습니다. 상속의 경우 -1, 200-255의 숫자여야 합니다"
 
-msgid "Invalid wad file."
-msgstr "잘못된 wad 파일입니다."
+msgid "Invalid WAD file."
+msgstr "잘못된 WAD 파일입니다."
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "우리에게 도움이 될 만한 정보가 있는 것으로 보입니다. 이 정보를 개발팀에 전달하십시오."
@@ -1346,10 +1361,10 @@ msgstr "언어파일 경로"
 msgid "Languagepath changed."
 msgstr "언어경로가 변경되었습니다."
 
-msgid "Launching Wii games with emulated nand only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgid "Launching Wii games with emulated NAND only works on d2x cIOS! Change game IOS to a d2x cIOS first."
 msgstr "에뮬레이트 된 낸드를 사용하여 Wii 게임을 시작하면 d2x cIOS에서만 작동합니다! 게임 IOS를 d2x cIOS로 먼저 변경하십시오."
 
-msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgid "Launching emulated NAND channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
 msgstr "에뮬레이트 된 낸드 채널 시작은 d2x cIOS에서만 작동합니다! 게임 IOS를 d2x cIOS로 먼저 변경하십시오."
 
 msgid "Left"
@@ -1476,28 +1491,28 @@ msgstr "음악 볼륨"
 msgid "NMM Mode"
 msgstr "MMM 모드"
 
-msgid "Nand Chan. Emulation"
+msgid "NAND Chan. Emulation"
 msgstr "낸드 채널 에뮬레이션"
 
-msgid "Nand Channels"
+msgid "NAND Channels"
 msgstr "낸드 채널"
 
-msgid "Nand Emu Channel Path"
+msgid "NAND Emu Channel Path"
 msgstr "낸드 에뮤 채널 경로"
 
-msgid "Nand Emu Path"
+msgid "NAND Emu Path"
 msgstr "낸드 에뮤 경로"
 
-msgid "Nand Emulation"
+msgid "NAND Emulation"
 msgstr "낸드 에뮬레이션"
 
-msgid "Nand Emulation is only available on D2X cIOS!"
+msgid "NAND emulation is only available on D2X cIOS!"
 msgstr "낸드 에뮬레이션은 D2X cIOS에서만 사용할 수 있습니다!"
 
-msgid "Nand Emulation only works on FAT/FAT32 partitions!"
+msgid "NAND emulation only works on FAT/FAT32 partitions!"
 msgstr "낸드 에뮬레이션은 FAT/FAT32 파티션에서만 작동합니다!"
 
-msgid "Nand Saves Emulation"
+msgid "NAND Saves Emulation"
 msgstr "낸드는 에뮬레이션을 저장"
 
 msgid "Native Controller"
@@ -1515,7 +1530,7 @@ msgstr "Neek 커널 파일을 찾을 수 없습니다."
 msgid "Neek kernel loading failed."
 msgstr "Neek 커널 로드에 실패했습니다."
 
-msgid "Neek2o does not support 'Emulated NAND Channel Path' on SD! Please setup Uneek2o instead."
+msgid "Neek2o does not support 'EmuNAND Channel Path' on SD! Please setup Uneek2o instead."
 msgstr "Neek2o는 SD에서 '에뮬레이트 된 낸드 채널 경로'를 지원하지 않습니다! 대신 Uneek2o를 설치하십시오."
 
 msgid "Neither"
@@ -1590,8 +1605,8 @@ msgstr "사이트에서 테마를 찾을 수 없습니다."
 msgid "No themes found."
 msgstr "테마가 없습니다."
 
-msgid "No wad file found in this folder."
-msgstr "이 폴더에는 wad 파일이 없습니다."
+msgid "No WAD file found in this folder."
+msgstr "이 폴더에는 WAD 파일이 없습니다."
 
 msgid "NoSSL only"
 msgstr "NoSSL 전용"
@@ -1806,7 +1821,7 @@ msgstr "빠른 부팅"
 msgid "Random Directory Music"
 msgstr "랜덤 디렉토리 음악"
 
-msgid "Real Nand"
+msgid "Real NAND"
 msgstr "실제 낸드"
 
 msgid "Receiving file from:"
@@ -1917,6 +1932,9 @@ msgstr "저장 대상 게임 목록"
 msgid "Save List"
 msgstr "목록 저장"
 
+msgid "Save Path"
+msgstr "경로 저장"
+
 msgid "Saved"
 msgstr "저장"
 
@@ -1947,7 +1965,7 @@ msgstr "게임 카테고리 선택"
 msgid "Select loader mode"
 msgstr "로더 모드 선택"
 
-msgid "Select the NAND Emu Path to use."
+msgid "Select the EmuNAND path to use."
 msgstr "사용할 낸드 에뮤 경로를 선택하십시오."
 
 msgid "Select titles sources."
@@ -2103,13 +2121,13 @@ msgstr ".them 파일이 zip에서 발견되지 않았습니다."
 msgid "The Force Widescreen setting requires DIOS MIOS v2.1 or more. This setting will be ignored."
 msgstr "강제 와이드 스크린 설정에는 DIOS MIOS v2.1 이상이 필요합니다. 이 설정은 무시됩니다."
 
-msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
+msgid "The Miis will be extracted to your EmuNAND path and EmuNAND channel path. Attention: All existing files will be overwritten."
 msgstr "Mii는 사용자의 에뮤 낸드 경로와 에뮤 낸드 채널 경로로 추출됩니다. 주의: 기존 파일은 모두 덮어쓰여집니다."
 
 msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
 msgstr "디스크+ 없음 설정에는 DIOS MIOS 2.2 업데이트2가 필요합니다. 이 설정은 무시됩니다."
 
-msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
+msgid "The SYSCONF file will be extracted to your EmuNAND path and EmuNAND channel path. Attention: All existing files will be overwritten."
 msgstr "SYSCONF 파일은 에뮤 낸드 경로와 에뮤 낸드 및 채널 경로로 추출됩니다. 주의: 기존 파일은 모두 덮어쓰여집니다."
 
 msgid "The application might crash if there is currently a read/write access to the SD card!"
@@ -2118,7 +2136,7 @@ msgstr "현재 SD 카드에 대한 읽기/쓰기 접속이 있는 경우 응용 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "입력된 디렉토리가 존재하지 않습니다. 그것을 만들고 싶습니까?"
 
-msgid "The files will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
+msgid "The files will be extracted to your EmuNAND save and channel path. Attention: All existing files will be overwritten."
 msgstr "파일이 에뮬 낸드 및 채널 경로로 추출됩니다. 주의: 기존 파일은 모두 덮어여집니다."
 
 msgid "The game is on SD Card."
@@ -2127,17 +2145,17 @@ msgstr "게임은 SD 카드에 있습니다."
 msgid "The game is on USB."
 msgstr "게임은 USB에 있습니다."
 
-msgid "The save game will be extracted to your emu nand path."
+msgid "The save game will be extracted to your EmuNAND path."
 msgstr "저장 게임이 에뮤 낸드 경로로 추출됩니다."
 
-msgid "The save games will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
+msgid "The save games will be extracted to your EmuNAND save and channel path. Attention: All existing files will be overwritten."
 msgstr "게임 저장이 에뮤 낸드 및 채널 경로로 추출됩니다. 주의: 기존 파일은 모두 덮어쓰여집니다."
 
-msgid "The wad file was installed"
-msgstr "wad 파일 설치"
+msgid "The WAD file was installed"
+msgstr "WAD 파일 설치"
 
 #, c-format
-msgid "The wad installation failed with error %i"
+msgid "The WAD installation failed with error %i"
 msgstr "오류 %i이(가) 발생하여 설치에 실패"
 
 msgid "Theme Downloader"
@@ -2228,10 +2246,10 @@ msgstr "닌텐돈트로 게임큐브 게임을 실행하려면 닌텐돈트 로�
 msgid "To use HID with %s you need the %s file."
 msgstr "%s와(과) 함께 HID를 사용하려면 %s 파일이 필요합니다."
 
-msgid "To use neek you need to set your 'Emulated NAND Channel Path' on the first primary partition of the Hard Drive."
+msgid "To use neek you need to set your 'EmuNAND Channel Path' on the first primary partition of the Hard Drive."
 msgstr "neek를 사용하려면 하드 드라이브의 첫 번째 주 파티션에 '에뮬레이트 된 낸드 채널 경로'를 설정해야 합니다."
 
-msgid "To use neek you need to set your 'Emulated NAND Channel Path' to a FAT32 partition."
+msgid "To use neek you need to set your 'EmuNAND Channel Path' to a FAT32 partition."
 msgstr "neek를 사용하려면 '에뮬레이트 된 낸드 채널 경로'를 FAT32 파티션으로 설정해야 합니다."
 
 msgid "To use neek you need to use a 512 bytes/sector Hard Drive."

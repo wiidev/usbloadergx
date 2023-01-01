@@ -461,9 +461,9 @@ void GameWindow::ChangeGame(int EffectDirection)
 	if (header->tid != 0)
 	{
 		if(header->type == TYPE_GAME_NANDCHAN)
-			sizeTxt->SetTextf(tr("Real Nand"));
+			sizeTxt->SetTextf(tr("Real NAND"));
 		else if(header->type == TYPE_GAME_EMUNANDCHAN)
-			sizeTxt->SetTextf(tr("Emulated Nand"));
+			sizeTxt->SetTextf(tr("Emulated NAND"));
 
 	}
 	else if(header->type == TYPE_GAME_WII_IMG)
@@ -794,18 +794,18 @@ void GameWindow::BootGame(struct discHdr *header)
 				
 			if(!IosLoader::IsD2X(gameIOS) && !NandEmu_compatible)
 			{
-				ShowError(tr("Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."));
+				ShowError(tr("Launching emulated NAND channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."));
 				return;
 			}
 		}
 	}
 
-	// Restrict emuNAND with Wii games only with d2x
+	// Restrict EmuNAND with Wii games only with d2x
 	if(header->type == TYPE_GAME_WII_IMG || header->type == TYPE_GAME_WII_DISC)
 	{
 		if(gameNandEmuMode && !IosLoader::IsD2X(gameIOS))
 		{
-			ShowError(tr("Launching Wii games with emulated nand only works on d2x cIOS! Change game IOS to a d2x cIOS first."));
+			ShowError(tr("Launching Wii games with emulated NAND only works on d2x cIOS! Change game IOS to a d2x cIOS first."));
 			return;
 		}
 	}

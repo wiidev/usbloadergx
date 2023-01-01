@@ -52,7 +52,7 @@ bool TitleSelector(char output[])
 			break;
 		}
 
-		//remove ones not actually installed on the nand
+		//remove ones not actually installed on the NAND
 		if (!NandTitles.Exists(tid))
 		{
 			num_titles--;
@@ -210,7 +210,7 @@ int TitleBrowser()
 			break;
 		}
 
-		//remove ones not actually installed on the nand
+		//remove ones not actually installed on the NAND
 		if (!NandTitles.Exists(tid))
 		{
 			num_titles--;
@@ -234,7 +234,7 @@ int TitleBrowser()
 			continue;
 		}
 
-		//these aren't installed on the nand
+		//these aren't installed on the NAND
 		if (!NandTitles.Exists(tid))
 		{
 			num_sys_titles--;

@@ -60,7 +60,7 @@ static s32 Nand_Mount(nandDevice *dev)
 	{
 		// NOTE:
 		// The official cIOSX rev21 by Waninkoko ignores the partition argument
-		// and the nand is always expected to be on the 1st partition.
+		// and the NAND is always expected to be on the 1st partition.
 		// However this way earlier d2x betas having revision 21 take in
 		// consideration the partition argument.
 		inlen = 1;
@@ -133,7 +133,7 @@ static s32 Nand_Enable(nandDevice *dev)
 	{
 		// NOTE:
 		// The official cIOSX rev21 by Waninkoko provides an undocumented feature
-		// to set nand path when mounting the device.
+		// to set NAND path when mounting the device.
 		// This feature has been discovered during d2x development.
 
 		/* Allocate memory */

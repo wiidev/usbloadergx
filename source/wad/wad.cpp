@@ -96,7 +96,7 @@ bool Wad::Open(const char *wadpath)
 		return false;
 	}
 
-	// Read wad header
+	// Read WAD header
 	header = (wadHeader *) malloc(sizeof(wadHeader));
 	if(!header)
 	{
@@ -108,7 +108,7 @@ bool Wad::Open(const char *wadpath)
 	if(fread(header, 1, sizeof(wadHeader), pFile) != sizeof(wadHeader))
 	{
 		if(showPrompt)
-			ShowError(tr("Failed to read wad header."));
+			ShowError(tr("Failed to read WAD header."));
 		return false;
 	}
 
@@ -116,7 +116,7 @@ bool Wad::Open(const char *wadpath)
 	if(header->header_len != sizeof(wadHeader))
 	{
 		if(showPrompt)
-			ShowError(tr("Invalid wad file."));
+			ShowError(tr("Invalid WAD file."));
 		return false;
 	}
 

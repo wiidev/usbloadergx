@@ -60,8 +60,8 @@ CustomPathsSM::CustomPathsSM()
 	Options->SetName(Idx++, tr("Languagefiles Path"));
 	Options->SetName(Idx++, tr("WDM Files Path"));
 	Options->SetName(Idx++, tr("Wiinnertag Path"));
-	Options->SetName(Idx++, tr("Nand Emu Path"));
-	Options->SetName(Idx++, tr("Nand Emu Channel Path"));
+	Options->SetName(Idx++, tr("EmuNAND Save Path"));
+	Options->SetName(Idx++, tr("EmuNAND Channel Path"));
 	Options->SetName(Idx++, tr("Main GameCube Path"));
 	Options->SetName(Idx++, tr("SD GameCube Path"));
 	Options->SetName(Idx++, tr("Devolution Loader Path"));
@@ -124,10 +124,10 @@ void CustomPathsSM::SetOptionValues()
 	//! Settings: Wiinnertag Path
 	Options->SetValue(Idx++, Settings.WiinnertagPath);
 
-	//! Settings: Nand Emu Path
+	//! Settings: EmuNAND Save Path
 	Options->SetValue(Idx++, Settings.NandEmuPath);
 
-	//! Settings: Nand Emu Channel Path
+	//! Settings: EmuNAND Channel Path
 	Options->SetValue(Idx++, Settings.NandEmuChanPath);
 
 	//! Settings: GameCube Games Path
@@ -287,33 +287,33 @@ int CustomPathsSM::GetMenuInternal()
 		ChangePath(Settings.WiinnertagPath, sizeof(Settings.WiinnertagPath));
 	}
 
-	//! Settings: Nand Emu Path
+	//! Settings: EmuNAND Save Path
 	else if (ret == ++Idx)
 	{
 		char oldPath[sizeof(Settings.NandEmuPath)];
 		snprintf(oldPath, sizeof(oldPath), Settings.NandEmuPath);
 
-		titleTxt->SetText(tr( "Nand Emu Path" ));
+		titleTxt->SetText(tr( "EmuNAND Save Path" ));
 		ChangePath(Settings.NandEmuPath, sizeof(Settings.NandEmuPath));
 		if(strncasecmp(DeviceHandler::PathToFSName(Settings.NandEmuPath), "FAT", 3) != 0)
 		{
 			snprintf(Settings.NandEmuPath, sizeof(Settings.NandEmuPath), oldPath);
-			WindowPrompt(tr("Error:"), tr("Nand Emulation only works on FAT/FAT32 partitions!"), tr("OK"));
+			WindowPrompt(tr("Error:"), tr("NAND emulation only works on FAT/FAT32 partitions!"), tr("OK"));
 		}
 	}
 
-	//! Settings: Nand Emu Channel Path
+	//! Settings: EmuNAND Channel Path
 	else if (ret == ++Idx)
 	{
 		char oldPath[sizeof(Settings.NandEmuChanPath)];
 		snprintf(oldPath, sizeof(oldPath), Settings.NandEmuChanPath);
 
-		titleTxt->SetText(tr( "Nand Emu Channel Path" ));
+		titleTxt->SetText(tr( "EmuNAND Channel Path" ));
 		int result = ChangePath(Settings.NandEmuChanPath, sizeof(Settings.NandEmuChanPath));
 		if(strncasecmp(DeviceHandler::PathToFSName(Settings.NandEmuChanPath), "FAT", 3) != 0)
 		{
 			snprintf(Settings.NandEmuChanPath, sizeof(Settings.NandEmuChanPath), oldPath);
-			WindowPrompt(tr("Error:"), tr("Nand Emulation only works on FAT/FAT32 partitions!"), tr("OK"));
+			WindowPrompt(tr("Error:"), tr("NAND emulation only works on FAT/FAT32 partitions!"), tr("OK"));
 		}
 		else if(result == 1)
 		{

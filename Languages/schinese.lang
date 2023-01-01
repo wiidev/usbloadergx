@@ -32,11 +32,11 @@ msgid "%i missing files"
 msgstr "缺少 %i 个文件"
 
 #, c-format
-msgid "%i wad file(s) not processed!"
+msgid "%i WAD file(s) not processed!"
 msgstr ""
 
 #, c-format
-msgid "%i wad found."
+msgid "%i WAD found."
 msgstr ""
 
 #, c-format
@@ -143,7 +143,7 @@ msgstr "所有图片已成功下载。"
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "所有 USB Loader GX 功能已解锁."
 
-msgid "All wad files processed successfully."
+msgid "All WAD files processed successfully."
 msgstr ""
 
 msgid "Alternate DOL"
@@ -399,6 +399,9 @@ msgstr "更改游戏路径"
 
 msgid "Channel Launcher"
 msgstr "频道启动器"
+
+msgid "Channel Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "频道"
@@ -798,8 +801,8 @@ msgstr ""
 msgid "Downloading pagelist:"
 msgstr "正在下载分页列表："
 
-msgid "Dump NAND to EmuNand"
-msgstr "转存 NAND 至 EmuNand"
+msgid "Dump NAND to EmuNAND"
+msgstr "转存 NAND 至 EmuNAND"
 
 msgid "During zoom"
 msgstr "在缩放大小时"
@@ -816,14 +819,26 @@ msgstr "错误："
 msgid "ERROR: Can't set up theme."
 msgstr "错误：无法设置主题。"
 
-msgid "EmuNAND Wad Manager"
+msgid "EmuNAND WAD Manager"
 msgstr ""
 
-msgid "EmuNand Channels"
-msgstr "EmuNand 频道"
+msgid "EmuNAND Channel Mode"
+msgstr ""
 
-msgid "Emulated Nand"
-msgstr "启动 EmuNand"
+msgid "EmuNAND Channel Path"
+msgstr ""
+
+msgid "EmuNAND Channels"
+msgstr "EmuNAND 频道"
+
+msgid "EmuNAND Save Mode"
+msgstr ""
+
+msgid "EmuNAND Save Path"
+msgstr ""
+
+msgid "Emulated NAND"
+msgstr "启动 EmuNAND"
 
 msgid "English"
 msgstr "英文"
@@ -887,23 +902,23 @@ msgstr "退出"
 msgid "Exit to where?"
 msgstr "退出到哪里？"
 
-msgid "Export All Saves to EmuNand"
-msgstr "提取所有游戏存档至 EmuNand"
+msgid "Export All Saves to EmuNAND"
+msgstr "提取所有游戏存档至 EmuNAND"
 
-msgid "Export Miis to EmuNand"
-msgstr "提取 Miis 至 EmuNand"
+msgid "Export Miis to EmuNAND"
+msgstr "提取 Miis 至 EmuNAND"
 
-msgid "Export SYSCONF to EmuNand"
-msgstr "提取 SYSCONF 至 EmuNand"
+msgid "Export SYSCONF to EmuNAND"
+msgstr "提取 SYSCONF 至 EmuNAND"
 
-msgid "Extract Miis to the Emu NAND?"
-msgstr "是否将 Miis 提取至 EmuNand？"
+msgid "Extract Miis to the EmuNAND?"
+msgstr "是否将 Miis 提取至 EmuNAND?"
 
-msgid "Extract SYSCONF to the Emu NAND?"
-msgstr "是否将 SYSCONF 提取至 EmuNand？"
+msgid "Extract SYSCONF to the EmuNAND?"
+msgstr "是否将 SYSCONF 提取至 EmuNAND?"
 
-msgid "Extract Save to EmuNand"
-msgstr "提取游戏存档至 EmuNand"
+msgid "Extract Save to EmuNAND"
+msgstr "提取游戏存档至 EmuNAND"
 
 msgid "Extracting file:"
 msgstr "正在提取文件："
@@ -914,8 +929,8 @@ msgstr "正在提取文件 ..."
 msgid "Extracting files:"
 msgstr "正在提取文件："
 
-msgid "Extracting nand files:"
-msgstr "正在提取 Nand 文件："
+msgid "Extracting NAND files:"
+msgstr "正在提取 NAND 文件："
 
 msgid "F-Zero AX"
 msgstr "F-Zero AX"
@@ -947,8 +962,8 @@ msgstr "读取 ticket 时失败。"
 msgid "Failed to read tmd file."
 msgstr "读取 tmd 文件时失败。"
 
-msgid "Failed to read wad header."
-msgstr "读取 wad 头部信息时失败。"
+msgid "Failed to read WAD header."
+msgstr "读取 WAD 头部信息时失败。"
 
 msgid "Failed updating"
 msgstr "升级失败"
@@ -1295,8 +1310,8 @@ msgstr "正在安装标题..."
 msgid "Invalid IOS number entered. Number must be -1 for inherit or 200 - 255."
 msgstr "输入的 IOS 编号无效。编号必须由原值减 1 或介于 200 至 255 之间。"
 
-msgid "Invalid wad file."
-msgstr "无效的 wad 文件。"
+msgid "Invalid WAD file."
+msgstr "无效的 WAD 文件。"
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "看来你有一些能帮到我们的信息。请将这些信息发送给开发团队。"
@@ -1346,11 +1361,11 @@ msgstr "语言文件路径"
 msgid "Languagepath changed."
 msgstr "语言文件路径已变更"
 
-msgid "Launching Wii games with emulated nand only works on d2x cIOS! Change game IOS to a d2x cIOS first."
-msgstr "需要 d2x cIOS 才能从 EmuNand 加载 Wii 游戏！请先将游戏 IOS 设置为 d2x cIOS。"
+msgid "Launching Wii games with emulated NAND only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgstr "需要 d2x cIOS 才能从 EmuNAND 加载 Wii 游戏！请先将游戏 IOS 设置为 d2x cIOS。"
 
-msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
-msgstr "需要 d2x cIOS 才能加载 EmuNand 频道！请先将游戏 IOS 设置为 d2x cIOS。"
+msgid "Launching emulated NAND channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgstr "需要 d2x cIOS 才能加载 EmuNAND 频道！请先将游戏 IOS 设置为 d2x cIOS。"
 
 msgid "Left"
 msgstr "左"
@@ -1476,29 +1491,29 @@ msgstr "音量"
 msgid "NMM Mode"
 msgstr "免记忆卡模式"
 
-msgid "Nand Chan. Emulation"
-msgstr "Nand 频道模拟"
+msgid "NAND Chan. Emulation"
+msgstr "NAND 频道模拟"
 
-msgid "Nand Channels"
-msgstr "Nand 频道"
+msgid "NAND Channels"
+msgstr "NAND 频道"
 
-msgid "Nand Emu Channel Path"
-msgstr "Nand 模拟频道路径"
+msgid "NAND Emu Channel Path"
+msgstr "NAND 模拟频道路径"
 
-msgid "Nand Emu Path"
-msgstr "Nand 模拟路径"
+msgid "NAND Emu Path"
+msgstr "NAND 模拟路径"
 
-msgid "Nand Emulation"
-msgstr "Nand 模拟器"
+msgid "NAND Emulation"
+msgstr "NAND 模拟器"
 
-msgid "Nand Emulation is only available on D2X cIOS!"
-msgstr "Nand 模拟器必须工作于 D2X cIOS！"
+msgid "NAND emulation is only available on D2X cIOS!"
+msgstr "NAND 模拟器必须工作于 D2X cIOS！"
 
-msgid "Nand Emulation only works on FAT/FAT32 partitions!"
-msgstr "Nand 模拟器只能工作于 FAT/FAT32 分区！"
+msgid "NAND emulation only works on FAT/FAT32 partitions!"
+msgstr "NAND 模拟器只能工作于 FAT/FAT32 分区！"
 
-msgid "Nand Saves Emulation"
-msgstr "Nand 存档模拟器"
+msgid "NAND Saves Emulation"
+msgstr "NAND 存档模拟器"
 
 msgid "Native Controller"
 msgstr ""
@@ -1515,7 +1530,7 @@ msgstr ""
 msgid "Neek kernel loading failed."
 msgstr ""
 
-msgid "Neek2o does not support 'Emulated NAND Channel Path' on SD! Please setup Uneek2o instead."
+msgid "Neek2o does not support 'EmuNAND Channel Path' on SD! Please setup Uneek2o instead."
 msgstr ""
 
 msgid "Neither"
@@ -1590,7 +1605,7 @@ msgstr "网站上没找到主题。"
 msgid "No themes found."
 msgstr "没有找到主题。"
 
-msgid "No wad file found in this folder."
+msgid "No WAD file found in this folder."
 msgstr ""
 
 msgid "NoSSL only"
@@ -1806,8 +1821,8 @@ msgstr "快速启动"
 msgid "Random Directory Music"
 msgstr "随机目录音乐"
 
-msgid "Real Nand"
-msgstr "真实 Nand"
+msgid "Real NAND"
+msgstr "真实 NAND"
 
 msgid "Receiving file from:"
 msgstr "接收文件："
@@ -1917,6 +1932,9 @@ msgstr "保存游戏列表到"
 msgid "Save List"
 msgstr "保存列表"
 
+msgid "Save Path"
+msgstr ""
+
 msgid "Saved"
 msgstr "已保存"
 
@@ -1947,7 +1965,7 @@ msgstr "选择游戏分类"
 msgid "Select loader mode"
 msgstr "选择加载器模式"
 
-msgid "Select the NAND Emu Path to use."
+msgid "Select the EmuNAND path to use."
 msgstr ""
 
 msgid "Select titles sources."
@@ -2103,13 +2121,13 @@ msgstr "zip 文件中没有找到 .them 文件。"
 msgid "The Force Widescreen setting requires DIOS MIOS v2.1 or more. This setting will be ignored."
 msgstr "强制宽屏需要 DIOS-MIOS v2.1 或以上版本。该设置将被忽略。"
 
-msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
+msgid "The Miis will be extracted to your EmuNAND path and EmuNAND channel path. Attention: All existing files will be overwritten."
 msgstr "Miis 将被提取至模拟 NAND 路径和模拟 NAND 频道路径。注意：所有已存在的文件都将被覆盖。"
 
 msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
 msgstr "免光盘模式需要 DIOS-MIOS v2.2 update2。该设置将被忽略。"
 
-msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
+msgid "The SYSCONF file will be extracted to your EmuNAND path and EmuNAND channel path. Attention: All existing files will be overwritten."
 msgstr "SYSCONF 文件将被提取至模拟 NAND 路径和模拟 NAND 频道路径。注意：所有已存在的文件都将被覆盖。"
 
 msgid "The application might crash if there is currently a read/write access to the SD card!"
@@ -2118,7 +2136,7 @@ msgstr "如正在读写 SD 卡，程序有可能会崩溃！"
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "已进入的目录不存在。你想要创建一个目录吗？"
 
-msgid "The files will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
+msgid "The files will be extracted to your EmuNAND save and channel path. Attention: All existing files will be overwritten."
 msgstr "文件将被提取至模拟 NAND 路径和模拟 NAND 频道路径。注意：所有已存在的文件都将被覆盖。"
 
 msgid "The game is on SD Card."
@@ -2127,17 +2145,17 @@ msgstr "该游戏位于 SD 卡。"
 msgid "The game is on USB."
 msgstr "该游戏位于 USB 设备。"
 
-msgid "The save game will be extracted to your emu nand path."
+msgid "The save game will be extracted to your EmuNAND path."
 msgstr "游戏存档将被提取至模拟 NAND 路径和模拟 NAND 频道路径。注意：所有已存在的文件都将被覆盖。"
 
-msgid "The save games will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
+msgid "The save games will be extracted to your EmuNAND save and channel path. Attention: All existing files will be overwritten."
 msgstr "游戏存档将被提取至模拟 NAND 路径和模拟 NAND 频道路径。注意：所有已存在的文件都将被覆盖。"
 
-msgid "The wad file was installed"
+msgid "The WAD file was installed"
 msgstr "WAD 文件已安装"
 
 #, c-format
-msgid "The wad installation failed with error %i"
+msgid "The WAD installation failed with error %i"
 msgstr "WAD 安装失败，错误号 %i"
 
 msgid "Theme Downloader"
@@ -2228,10 +2246,10 @@ msgstr "为了使用Nintendont运行Gamecube游戏，你需要放置boot.dol文�
 msgid "To use HID with %s you need the %s file."
 msgstr "为了使用HID %s 你需要%s文件。"
 
-msgid "To use neek you need to set your 'Emulated NAND Channel Path' on the first primary partition of the Hard Drive."
+msgid "To use neek you need to set your 'EmuNAND Channel Path' on the first primary partition of the Hard Drive."
 msgstr ""
 
-msgid "To use neek you need to set your 'Emulated NAND Channel Path' to a FAT32 partition."
+msgid "To use neek you need to set your 'EmuNAND Channel Path' to a FAT32 partition."
 msgstr ""
 
 msgid "To use neek you need to use a 512 bytes/sector Hard Drive."
@@ -2552,8 +2570,8 @@ msgstr "的"
 msgid "seconds left"
 msgstr "剩余秒数"
 
-#~ msgid "Install WAD to EmuNand"
-#~ msgstr "安装 WAD 至 EmuNand"
+#~ msgid "Install WAD to EmuNAND"
+#~ msgstr "安装 WAD 至 EmuNAND"
 
 #~ msgid "WAD Installation"
 #~ msgstr "WAD 安装"
@@ -2759,13 +2777,13 @@ msgstr "剩余秒数"
 #~ msgid "Installing title... Ok!"
 #~ msgstr "安装 title... 完成！"
 
-#~ msgid "Installing wad"
+#~ msgid "Installing WAD"
 #~ msgstr "安裝 WAD"
 
 #~ msgid "Reading WAD data... Ok!"
 #~ msgstr "读取 WAD 数据... 完成！"
 
-#~ msgid "Uninstalling wad"
+#~ msgid "Uninstalling WAD"
 #~ msgstr "卸载 WAD"
 
 #~ msgid "The game installation is disabled under this IOS because of instability in usb write."
@@ -2942,13 +2960,13 @@ msgstr "剩余秒数"
 #~ msgid "Parental Control disabled"
 #~ msgstr "已禁用家长控制"
 
-#~ msgid "The wad file was installed.  But It could not be deleted from the SD card."
+#~ msgid "The WAD file was installed.  But It could not be deleted from the SD card."
 #~ msgstr "WAD 已安装，但文件无法从 SD 卡中删除。"
 
-#~ msgid "The wad installation failed with error %ld"
+#~ msgid "The WAD installation failed with error %ld"
 #~ msgstr "WAD 安装失败，错误号 %ld"
 
-#~ msgid "Unable to open the wad that was just downloaded (%s)."
+#~ msgid "Unable to open the WAD that was just downloaded (%s)."
 #~ msgstr "不能打开刚下载的 WAD 文件 (%s)。"
 
 #~ msgid "Update to"

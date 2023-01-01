@@ -80,7 +80,7 @@ bool SystemMenuResources::Init()
 
 	if( ( ret = NandTitle::LoadFileFromNand( path, &resourceArc, &resourceLen ) ) < 0 )
 	{
-		gprintf( "Error reading resource from nand: %i\n", ret );
+		gprintf( "Error reading resource from NAND: %i\n", ret );
 		return false;
 	}
 

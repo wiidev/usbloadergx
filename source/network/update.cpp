@@ -280,10 +280,10 @@ static int ApplicationDownload(void)
 		if (error)
 		{
 			update_error = true;
-			ShowError(tr("The wad installation failed with error %i"), error);
+			ShowError(tr("The WAD installation failed with error %i"), error);
 		}
 		else
-			WindowPrompt(tr("Success"), tr("The wad file was installed"), tr("OK"));
+			WindowPrompt(tr("Success"), tr("The WAD file was installed"), tr("OK"));
 
 		RemoveFile(tmppath);
 #else

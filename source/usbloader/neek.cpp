@@ -229,7 +229,7 @@ int neekPathFormat(char* nandpath_out, const char* nandpath_in, u32 len)
  * TitleID    : Full path to Channel (00010001 + ABCD) or ID4 for Wii/GC games (00000000 + ID)
  * Magic      : 0x0 for channel, 0x5d1c9ea3 for Wii game, 0xC2339F3D for gamecube and quadforce games
  * returnTo   : true/false to return to another neek channel instead of system menu
- * nandpath   : Set a different temporary Nand Path to use (full path to nand)
+ * nandpath   : Set a different temporary NAND Path to use (full path to nand)
  *
  ***************************************************************************/
 bool neek2oSetBootSettings(NEEK_CFG* neek_config, u64 TitleID, u32 Magic, u64 returnto, const char* nandpath )
@@ -286,8 +286,8 @@ bool neek2oSetBootSettings(NEEK_CFG* neek_config, u64 TitleID, u32 Magic, u64 re
 		if(neekPathFormat(neekNandPath, nandpath, sizeof(neekNandPath)))
 		{
 			snprintf(neek_config->nandpath, sizeof(neek_config->nandpath), "%s", neekNandPath);
-			neek_config->config |= NCON_EXT_NAND_PATH ; // Use custom nand path
-		//	neek_config->config |= NCON_HIDE_EXT_PATH;  // Set custom nand path as temporary
+			neek_config->config |= NCON_EXT_NAND_PATH ; // Use custom NAND path
+		//	neek_config->config |= NCON_HIDE_EXT_PATH;  // Set custom NAND path as temporary
 		}
 	}
 	
@@ -416,7 +416,7 @@ int neek2oSetNAND(const char* nandpath)
 	
 	if(found) // NAND path already present in nandcfg.bin
 	{
-		// set selected nand in header if different
+		// set selected NAND in header if different
 		if(nandCfg->NandSel != i)
 		{
 			nandCfg->NandSel = i;

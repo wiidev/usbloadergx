@@ -258,8 +258,8 @@ void LoaderSettings::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Quick Boot" ));
 	Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
 	Options->SetName(Idx++, "%s", tr( "Return To" ));
-	Options->SetName(Idx++, "%s", tr( "Nand Saves Emulation" ));
-	Options->SetName(Idx++, "%s", tr( "Nand Chan. Emulation" ));
+	Options->SetName(Idx++, "%s", tr( "EmuNAND Save Mode" ));
+	Options->SetName(Idx++, "%s", tr( "EmuNAND Channel Mode" ));
 	Options->SetName(Idx++, "%s", tr( "Hooktype" ));
 	Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
 	Options->SetName(Idx++, "%s", tr( "Debugger Paused Start" ));
@@ -385,10 +385,10 @@ void LoaderSettings::SetOptionValues()
 	TitleName = TitleName ? TitleName : strlen(Settings.returnTo) > 0 ? Settings.returnTo : tr(OnOffText[0]);
 	Options->SetValue(Idx++, "%s", TitleName);
 
-	//! Settings: Nand Emulation
+	//! Settings: EmuNAND Save Mode
 	Options->SetValue(Idx++, "%s", tr( NandEmuText[Settings.NandEmuMode] ));
 
-	//! Settings: Nand Chan. Emulation
+	//! Settings: EmuNAND Channel Mode
 	Options->SetValue(Idx++, "%s", tr( NandEmuText[Settings.NandEmuChanMode] ));
 
 	//! Settings: Hooktype
@@ -721,15 +721,15 @@ int LoaderSettings::GetMenuInternal()
 			snprintf(Settings.returnTo, sizeof(Settings.returnTo), "%s", tidChar);
 	}
 
-	//! Settings: Nand Emulation (Saves)
+	//! Settings: EmuNAND Save Mode
 	else if (ret == ++Idx )
 	{
 		if(!IosLoader::IsD2X(Settings.cios))
-			WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
+			WindowPrompt(tr("Error:"), tr("NAND Emulation is only available on D2X cIOS!"), tr("OK"));
 		else if (++Settings.NandEmuMode >= EMUNAND_NEEK) Settings.NandEmuMode = EMUNAND_OFF;
 	}
 
-	//! Settings: Nand Emulation (channel / neek)
+	//! Settings: EmuNAND Channel Mode
 	else if (ret == ++Idx )
 	{
 		if(++Settings.NandEmuChanMode >= EMUNAND_MAX) Settings.NandEmuChanMode = EMUNAND_PARTIAL;

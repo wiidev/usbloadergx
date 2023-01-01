@@ -1283,7 +1283,7 @@ int GameBrowseMenu::MainLoop()
 			return returnMenu;
 		}
 
-		int choice = CheckboxWindow(tr( "Select titles sources." ), 0, tr( "Wii Games" ), tr( "Nand Channels" ), tr("EmuNand Channels"), tr("GC Games"), 0, 0, Settings.LoaderMode);
+		int choice = CheckboxWindow(tr( "Select titles sources." ), 0, tr( "Wii Games" ), tr( "NAND Channels" ), tr("EmuNAND Channels"), tr("GC Games"), 0, 0, Settings.LoaderMode);
 		if(choice != CheckedNone && choice != Settings.LoaderMode)
 		{
 			Settings.LoaderMode = choice;

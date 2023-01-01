@@ -76,7 +76,7 @@ void GameSettingsMenu::SetupMainButtons()
 		||	DiscHeader->type == TYPE_GAME_WII_DISC
 		||	DiscHeader->type == TYPE_GAME_NANDCHAN)
 	{
-		SetMainButton(pos++, tr( "Extract Save to EmuNand" ), MainButtonImgData, MainButtonImgOverData);
+		SetMainButton(pos++, tr( "Extract Save to EmuNAND" ), MainButtonImgData, MainButtonImgOverData);
 	}
 	SetMainButton(pos++, tr( "Default Gamesettings" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Uninstall Menu" ), MainButtonImgData, MainButtonImgOverData);
@@ -148,13 +148,13 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 		ShowMenu();
 	}
 
-	//! Extract Save to EmuNand
+	//! Extract Save to EmuNAND
 	else if(	(DiscHeader->type == TYPE_GAME_WII_IMG
 			||	 DiscHeader->type == TYPE_GAME_WII_DISC
 			||	 DiscHeader->type == TYPE_GAME_NANDCHAN)
 			&&	menuNr == Idx++)
 	{
-		int choice = WindowPrompt(tr( "Do you want to extract the save game?" ), tr("The save game will be extracted to your emu nand path."), tr( "Yes" ), tr( "Cancel" ));
+		int choice = WindowPrompt(tr( "Do you want to extract the save game?" ), tr("The save game will be extracted to your EmuNAND path."), tr( "Yes" ), tr( "Cancel" ));
 		if (choice == 1)
 		{
 			char filePath[1024];

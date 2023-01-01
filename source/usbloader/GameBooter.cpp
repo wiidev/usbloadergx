@@ -167,7 +167,7 @@ void GameBooter::SetupNandEmu(u8 NandEmuMode, const char *NandEmuPath, struct di
 		//! Create save game path and title.tmd for not existing saves
 		CreateSavePath(&gameHeader, NandEmuPath);
 
-		gprintf("Enabling %s Nand Emulation on: %s\n", NandEmuMode == 2 ? "Full" : "Partial" , NandEmuPath);
+		gprintf("Enabling %s NAND emulation on: %s\n", NandEmuMode == 2 ? "Full" : "Partial", NandEmuPath);
 		Set_FullMode(NandEmuMode == 2);
 		Set_Path(strchr(NandEmuPath, '/'));
 
@@ -316,7 +316,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 			return -1;
 	}
 
-	//! Modify Wii Message Board to display the game starting here (before Nand Emu)
+	//! Modify Wii Message Board to display the game starting here (before NAND Emu)
 	if (Settings.PlaylogUpdate)
 	{
 		// enable isfs permission if using IOS+AHB or Hermes v4
@@ -418,7 +418,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	}
 	else
 	{
-		//! shutdown now and avoid later crashs with free if memory gets overwritten by channel
+		//! shutdown now and avoid later crashes with free if memory gets overwritten by channel
 		ShutDownDevices(DeviceHandler::PartitionToUSBPort(std::max(atoi(NandEmuPath+3)-1, 0)));
 		gprintf("\tChannel Boot\n");
 		/* Setup video mode */
@@ -1765,17 +1765,17 @@ int GameBooter::BootNeek(struct discHdr *gameHdr)
 	char neekNandPath[256] = "";
 	neekPathFormat(neekNandPath, NandEmuPath, sizeof(neekNandPath));
 	
-	// check if the nand path is compatible with current neek mode.
+	// check if the NAND path is compatible with current neek mode.
 	if(neekMode == 0 && strlen(neekNandPath) > 0)
 	{
 		WindowPrompt(tr("Error:"), tr("You need neek2o to load EmuNAND from sub-folders."), tr("OK"));
 			return -1;
 	}
 	
-	// Check if emuNAND path is on SD
+	// Check if EmuNAND path is on SD
 	if(neekMode == 1 && isWiiU() && strncmp(NandEmuPath, "sd", 2) == 0) // neek2o on SD is not supported with the vWii leaked version of neek2o. Users could use it on Wii too, but they should be using r96.
 	{
-		if(WindowPrompt(tr("Warning:"), tr("Neek2o does not support 'Emulated NAND Channel Path' on SD! Please setup Uneek2o instead."), tr("Continue"), tr("Cancel")) == 0)
+		if(WindowPrompt(tr("Warning:"), tr("Neek2o does not support 'EmuNAND Channel Path' on SD! Please setup Uneek2o instead."), tr("Continue"), tr("Cancel")) == 0)
 			return -1;
 	}
 	
@@ -1789,7 +1789,7 @@ int GameBooter::BootNeek(struct discHdr *gameHdr)
 		// Check partition format // Assume SD is always FAT32
 		if(strncmp(DeviceHandler::PathToFSName(NandEmuPath), "FAT", 3) != 0)
 		{
-			WindowPrompt(tr("Error:"), tr("To use neek you need to set your 'Emulated NAND Channel Path' to a FAT32 partition."), tr("OK"));
+			WindowPrompt(tr("Error:"), tr("To use neek you need to set your 'EmuNAND Channel Path' to a FAT32 partition."), tr("OK"));
 			return -1;
 		}
 
@@ -1812,7 +1812,7 @@ int GameBooter::BootNeek(struct discHdr *gameHdr)
 		}
 		if(!found)
 		{
-			WindowPrompt(tr("Error:"), tr("To use neek you need to set your 'Emulated NAND Channel Path' on the first primary partition of the Hard Drive."), tr("OK"));
+			WindowPrompt(tr("Error:"), tr("To use neek you need to set your 'EmuNAND Channel Path' on the first primary partition of the Hard Drive."), tr("OK"));
 			return -1;
 		}
 		
@@ -1866,8 +1866,8 @@ int GameBooter::BootNeek(struct discHdr *gameHdr)
 	
 	// Set NAND path
 	snprintf(neek_config->nandpath, sizeof(neek_config->nandpath), "%s", neekNandPath);
-	neek_config->config |= NCON_EXT_NAND_PATH ; // specify a nand path in case default NAND set in nandcfg.bin failed
-	// neek_config->config |= NCON_HIDE_EXT_PATH;  // set nand path as temporary (attention: "return to" loads channel from the default NAND path)
+	neek_config->config |= NCON_EXT_NAND_PATH; // specify a NAND path in case default NAND set in nandcfg.bin failed
+	// neek_config->config |= NCON_HIDE_EXT_PATH;  // set NAND path as temporary (attention: "return to" loads channel from the default NAND path)
 
 	// Set TitleID to return to
 	if(autoboot && returnToChoice)

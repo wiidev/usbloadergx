@@ -32,11 +32,11 @@ msgid "%i missing files"
 msgstr "%τα χαμένα αρχεία"
 
 #, c-format
-msgid "%i wad file(s) not processed!"
+msgid "%i WAD file(s) not processed!"
 msgstr ""
 
 #, c-format
-msgid "%i wad found."
+msgid "%i WAD found."
 msgstr ""
 
 #, c-format
@@ -143,8 +143,8 @@ msgstr "Όλες οι εικόνες λήφθησαν επιτυχώς."
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "όλες οι ρυθμίσεις του USB Loader GX είναι ξεκλειδωμένες."
 
-msgid "All wad files processed successfully."
-msgstr "Όλα τα αρχεία wad υποβλήθηκαν σε επεξεργασία με επιτυχία."
+msgid "All WAD files processed successfully."
+msgstr "Όλα τα αρχεία WAD υποβλήθηκαν σε επεξεργασία με επιτυχία."
 
 msgid "Alternate DOL"
 msgstr "Εναλλακτικό DOL"
@@ -399,6 +399,9 @@ msgstr "Αλλαγή τοποθεσίας παιχνιδιών"
 
 msgid "Channel Launcher"
 msgstr "Εκκίνηση καναλιών"
+
+msgid "Channel Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "Κανάλια"
@@ -798,8 +801,8 @@ msgstr ""
 msgid "Downloading pagelist:"
 msgstr "Λήψη διάταξης σελιδών:"
 
-msgid "Dump NAND to EmuNand"
-msgstr "Αντιγραφή NAND στην τοποθεσία  emunand"
+msgid "Dump NAND to EmuNAND"
+msgstr "Αντιγραφή NAND στην τοποθεσία EmuNAND"
 
 msgid "During zoom"
 msgstr "Κατα την εστίαση"
@@ -816,13 +819,25 @@ msgstr "ΣΦΑΛΜΑ:"
 msgid "ERROR: Can't set up theme."
 msgstr "ΣΦΑΛΜΑ: Δεν είναι δυνατή η εγκατάσταση θέματος."
 
-msgid "EmuNAND Wad Manager"
+msgid "EmuNAND WAD Manager"
 msgstr ""
 
-msgid "EmuNand Channels"
-msgstr "Κανάλια από την εικονική nand"
+msgid "EmuNAND Channel Mode"
+msgstr ""
 
-msgid "Emulated Nand"
+msgid "EmuNAND Channel Path"
+msgstr ""
+
+msgid "EmuNAND Channels"
+msgstr "Κανάλια από την εικονική NAND"
+
+msgid "EmuNAND Save Mode"
+msgstr ""
+
+msgid "EmuNAND Save Path"
+msgstr ""
+
+msgid "Emulated NAND"
 msgstr "εικονικη NAND"
 
 msgid "English"
@@ -887,22 +902,22 @@ msgstr "Έξοδος"
 msgid "Exit to where?"
 msgstr "Έξοδος προς που?"
 
-msgid "Export All Saves to EmuNand"
+msgid "Export All Saves to EmuNAND"
 msgstr "Αντιγραφή όλων των saves στην εικονική NAND"
 
-msgid "Export Miis to EmuNand"
+msgid "Export Miis to EmuNAND"
 msgstr "Αντιγραφή των Mii στην εικονική NAND"
 
-msgid "Export SYSCONF to EmuNand"
+msgid "Export SYSCONF to EmuNAND"
 msgstr "Αντιγραφή SYSCONF στην εικονική NAND"
 
-msgid "Extract Miis to the Emu NAND?"
+msgid "Extract Miis to the EmuNAND?"
 msgstr "Αντιγραφή των Mii στην εικονική NAND?"
 
-msgid "Extract SYSCONF to the Emu NAND?"
+msgid "Extract SYSCONF to the EmuNAND?"
 msgstr "Αντιγραφή SYSCONF στην εικονική NAND?"
 
-msgid "Extract Save to EmuNand"
+msgid "Extract Save to EmuNAND"
 msgstr "Αντιγραφή του save στην εικονική NAND"
 
 msgid "Extracting file:"
@@ -914,7 +929,7 @@ msgstr "Αποσυμπίεση αρχείων..."
 msgid "Extracting files:"
 msgstr "Αποσυμπίεση αρχείων:"
 
-msgid "Extracting nand files:"
+msgid "Extracting NAND files:"
 msgstr "Αντιγραφή αρχείων από τη μνημη NAND:"
 
 msgid "F-Zero AX"
@@ -947,8 +962,8 @@ msgstr "Aδυναμία εύρεσης αρχείου ticket."
 msgid "Failed to read tmd file."
 msgstr "Aδυναμία ανοίγματος αρχείου tmd."
 
-msgid "Failed to read wad header."
-msgstr "Αδυναμία ανάγνωσης τίτλου του αρχείου wad."
+msgid "Failed to read WAD header."
+msgstr "Αδυναμία ανάγνωσης τίτλου του αρχείου WAD."
 
 msgid "Failed updating"
 msgstr "Ανεπιτυχής αναβάθμιση"
@@ -1295,7 +1310,7 @@ msgstr "Εγκαθίσταται τίτλος..."
 msgid "Invalid IOS number entered. Number must be -1 for inherit or 200 - 255."
 msgstr "Λανθασμένος αριθμός IOS. Πρέπει να είναι μεταξύ 200 και 255 ή -1 για τον βασικό"
 
-msgid "Invalid wad file."
+msgid "Invalid WAD file."
 msgstr "Μη συμβατό αρχείο WAD."
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
@@ -1346,10 +1361,10 @@ msgstr "τοποθεσία αρχείων μεταφράσεων"
 msgid "Languagepath changed."
 msgstr "Η τοποθεσία αρχείων μεταφράσεων άλλαξε."
 
-msgid "Launching Wii games with emulated nand only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgid "Launching Wii games with emulated NAND only works on d2x cIOS! Change game IOS to a d2x cIOS first."
 msgstr ""
 
-msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgid "Launching emulated NAND channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
 msgstr "Η εκκίνηση καναλιών από την εικονική NAND υποστηρίζεται μόνο από το cIOS d2x! Επιλέξτε ένα ΙΟS με d2x για να συνεχίσετε."
 
 msgid "Left"
@@ -1476,28 +1491,28 @@ msgstr "Ένταση μουσικής"
 msgid "NMM Mode"
 msgstr ""
 
-msgid "Nand Chan. Emulation"
+msgid "NAND Chan. Emulation"
 msgstr "εξομοίωση καναλιών εικονικής NAND"
 
-msgid "Nand Channels"
+msgid "NAND Channels"
 msgstr "κανάλια NAND"
 
-msgid "Nand Emu Channel Path"
+msgid "NAND Emu Channel Path"
 msgstr "τοποθεσία καναλιών εικονικής NAND"
 
-msgid "Nand Emu Path"
+msgid "NAND Emu Path"
 msgstr "τοποθεσία εικονικής NAND"
 
-msgid "Nand Emulation"
+msgid "NAND Emulation"
 msgstr "εξομοίωση εικονικής NAND"
 
-msgid "Nand Emulation is only available on D2X cIOS!"
+msgid "NAND emulation is only available on D2X cIOS!"
 msgstr "η εξομοίωση εικονικής NAND είναι εφικτή μόνο με cIOS d2x!"
 
-msgid "Nand Emulation only works on FAT/FAT32 partitions!"
+msgid "NAND emulation only works on FAT/FAT32 partitions!"
 msgstr "η εξομοίωση εικονικής NAND είναι εφικτή μόνο σε partitions FAT/FAT32!"
 
-msgid "Nand Saves Emulation"
+msgid "NAND Saves Emulation"
 msgstr "saves στην εικονική NAND"
 
 msgid "Native Controller"
@@ -1515,7 +1530,7 @@ msgstr ""
 msgid "Neek kernel loading failed."
 msgstr ""
 
-msgid "Neek2o does not support 'Emulated NAND Channel Path' on SD! Please setup Uneek2o instead."
+msgid "Neek2o does not support 'EmuNAND Channel Path' on SD! Please setup Uneek2o instead."
 msgstr ""
 
 msgid "Neither"
@@ -1590,7 +1605,7 @@ msgstr "Δεν βρέθηκαν θέματα στο site."
 msgid "No themes found."
 msgstr "Δεν βρέθηκαν θέματα."
 
-msgid "No wad file found in this folder."
+msgid "No WAD file found in this folder."
 msgstr ""
 
 msgid "NoSSL only"
@@ -1806,7 +1821,7 @@ msgstr "ʼμεση εκκίνηση"
 msgid "Random Directory Music"
 msgstr "Τυχαίο μουσικό αρχείο από το φάκελο"
 
-msgid "Real Nand"
+msgid "Real NAND"
 msgstr "πραγματική μνήμη NAND"
 
 msgid "Receiving file from:"
@@ -1917,6 +1932,9 @@ msgstr "Αποθήκευση λίστας σε"
 msgid "Save List"
 msgstr "Αποθήκευση λίστας"
 
+msgid "Save Path"
+msgstr ""
+
 msgid "Saved"
 msgstr "Αποθηκεύτηκε"
 
@@ -1947,7 +1965,7 @@ msgstr "Κατηγορίες παιχνιδιών"
 msgid "Select loader mode"
 msgstr "Επιλογή παιχνιδιών"
 
-msgid "Select the NAND Emu Path to use."
+msgid "Select the EmuNAND path to use."
 msgstr ""
 
 msgid "Select titles sources."
@@ -2103,13 +2121,13 @@ msgstr "To αρχείο .them δεν βρέθηκε στον φάκελο zip."
 msgid "The Force Widescreen setting requires DIOS MIOS v2.1 or more. This setting will be ignored."
 msgstr "Η ρύθμιση για επιβολή αναλογίας οθόνης 16:9 απαιτεί DIOS MIOS 2.1 ή νεότερο. Η παρούσα ρύθμιση θα αγνοηθεί."
 
-msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
+msgid "The Miis will be extracted to your EmuNAND path and EmuNAND channel path. Attention: All existing files will be overwritten."
 msgstr "Τα Mii θα αντιγραφούν στην τοποθεσία εικονικής NAND. Προσοχή, όλα τα κοινά υπάρχοντα αρχεία θα αντικατασταθούν."
 
 msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
 msgstr "Η ρύθμιση No Disc+ απαιτεί το DIOS MIOS 2.2 update 2. Η παρούσα ρύθμιση θα αγνοηθεί."
 
-msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
+msgid "The SYSCONF file will be extracted to your EmuNAND path and EmuNAND channel path. Attention: All existing files will be overwritten."
 msgstr "Το αρχείο SYSCONF θα αντιγραφεί στην εικονική NAND. Προσοχή: όλα τα κοινά υπάρχοντα αρχεία θα αντικατασταθούν."
 
 msgid "The application might crash if there is currently a read/write access to the SD card!"
@@ -2118,8 +2136,8 @@ msgstr "Το πρόγραμμα μπορεί να μπλοκάρει αν υπά
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Η ορισμένη τοποθεσία δεν υπάρχει. Θα θέλατε να δημιουργήσετε τον φάκελο?"
 
-msgid "The files will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
-msgstr "Τα αρχεία θα αποσυμπιεστούν στη emunand.Προσοχή:όλα τα προύπάρχοντα αρχεία θα αντικατασταθούν"
+msgid "The files will be extracted to your EmuNAND save and channel path. Attention: All existing files will be overwritten."
+msgstr "Τα αρχεία θα αποσυμπιεστούν στη EmuNAND.Προσοχή:όλα τα προύπάρχοντα αρχεία θα αντικατασταθούν"
 
 msgid "The game is on SD Card."
 msgstr "Το παιχνίδι αυτό βρίσκεται στη κάρτα SD."
@@ -2127,17 +2145,17 @@ msgstr "Το παιχνίδι αυτό βρίσκεται στη κάρτα SD."
 msgid "The game is on USB."
 msgstr "Το παιχνίδι αυτό βρίσκεται στον δίσκο USB."
 
-msgid "The save game will be extracted to your emu nand path."
-msgstr "Το save σας θα αντιγραφεί στην emunand."
+msgid "The save game will be extracted to your EmuNAND path."
+msgstr "Το save σας θα αντιγραφεί στην EmuNAND."
 
-msgid "The save games will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
-msgstr "Τα save σας θα αντιγραφούν στην emunand. Προσοχή: όλα τα προϋπάρχοντα αρχεία θα αντικατασταθούν"
+msgid "The save games will be extracted to your EmuNAND save and channel path. Attention: All existing files will be overwritten."
+msgstr "Τα save σας θα αντιγραφούν στην EmuNAND. Προσοχή: όλα τα προϋπάρχοντα αρχεία θα αντικατασταθούν"
 
-msgid "The wad file was installed"
+msgid "The WAD file was installed"
 msgstr "Το αρχείο WAD εγκαταστάθηκε"
 
 #, c-format
-msgid "The wad installation failed with error %i"
+msgid "The WAD installation failed with error %i"
 msgstr "Η εγκατάσταση του αρχείου WAD απέτυχε, με το λάθος %i"
 
 msgid "Theme Downloader"
@@ -2228,10 +2246,10 @@ msgstr ""
 msgid "To use HID with %s you need the %s file."
 msgstr ""
 
-msgid "To use neek you need to set your 'Emulated NAND Channel Path' on the first primary partition of the Hard Drive."
+msgid "To use neek you need to set your 'EmuNAND Channel Path' on the first primary partition of the Hard Drive."
 msgstr ""
 
-msgid "To use neek you need to set your 'Emulated NAND Channel Path' to a FAT32 partition."
+msgid "To use neek you need to set your 'EmuNAND Channel Path' to a FAT32 partition."
 msgstr ""
 
 msgid "To use neek you need to use a 512 bytes/sector Hard Drive."

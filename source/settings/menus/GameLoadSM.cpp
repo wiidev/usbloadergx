@@ -222,13 +222,16 @@ void GameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Return To" ));
 	Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
 
-	//! Only wii games and emu nand channels
-	if(   Header->type == TYPE_GAME_WII_IMG
-	   || Header->type == TYPE_GAME_WII_DISC
-	   || Header->type == TYPE_GAME_EMUNANDCHAN)
+	//! Only wii games and EmuNAND channels
+	if(Header->type == TYPE_GAME_WII_IMG || Header->type == TYPE_GAME_WII_DISC)
 	{
-		Options->SetName(Idx++, "%s", tr( "Nand Emulation" ));
-		Options->SetName(Idx++, "%s", tr( "Nand Emu Path" ));
+		Options->SetName(Idx++, "%s", tr( "EmuNAND Save Mode" ));
+		Options->SetName(Idx++, "%s", tr( "EmuNAND Save Path" ));
+	}
+	else if(Header->type == TYPE_GAME_EMUNANDCHAN)
+	{
+		Options->SetName(Idx++, "%s", tr( "EmuNAND Channel Mode" ));
+		Options->SetName(Idx++, "%s", tr( "EmuNAND Channel Path" ));
 	}
 
 	//! Only on Wii games
@@ -370,18 +373,18 @@ void GameLoadSM::SetOptionValues()
 	else
 		Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.iosreloadblock]) );
 
-	//! Only wii games and emu nand channels
+	//! Only wii games and EmuNAND channels
 	if(   Header->type == TYPE_GAME_WII_IMG
 	   || Header->type == TYPE_GAME_WII_DISC
 	   || Header->type == TYPE_GAME_EMUNANDCHAN)
 	{
-		//! Settings: Nand Emulation
+		//! Settings: EmuNAND Save/Channel Mode
 		if(GameConfig.NandEmuMode == INHERIT)
 			Options->SetValue(Idx++, tr("Use global"));
 		else
 			Options->SetValue(Idx++, "%s", tr( NandEmuText[GameConfig.NandEmuMode] ));
 
-		//! Settings: Nand Emu Path
+		//! Settings: EmuNAND Save/Channel Path
 		if(GameConfig.NandEmuPath.size() == 0)
 			Options->SetValue(Idx++, tr("Use global"));
 		else
@@ -586,12 +589,12 @@ int GameLoadSM::GetMenuInternal()
 		if(++GameConfig.iosreloadblock >= 3) GameConfig.iosreloadblock = INHERIT;
 	}
 
-	//! Only wii games and emu nand channels
+	//! Only wii games and EmuNAND channels
 	if(	Header->type == TYPE_GAME_WII_IMG
 			||  Header->type == TYPE_GAME_WII_DISC
 			||  Header->type == TYPE_GAME_EMUNANDCHAN)
 	{
-		//! Settings: Nand Emulation
+		//! Settings: EmuNAND Save/Channel Mode
 		if (ret == ++Idx)
 		{
 			if (++GameConfig.NandEmuMode >= EMUNAND_MAX) GameConfig.NandEmuMode = INHERIT;
@@ -600,12 +603,12 @@ int GameLoadSM::GetMenuInternal()
 			if(Header->type != TYPE_GAME_EMUNANDCHAN && GameConfig.NandEmuMode >= EMUNAND_NEEK)
 				GameConfig.NandEmuMode = INHERIT;
 
-			//! On titles from emulated nand path disabling the nand emu mode is not allowed
+			//! On titles from emulated NAND path disabling the NAND emu mode is not allowed
 			if(Header->type == TYPE_GAME_EMUNANDCHAN && GameConfig.NandEmuMode == OFF)
 				GameConfig.NandEmuMode = 1;
 		}
 
-		//! Settings: Nand Emu Path
+		//! Settings: EmuNAND Save/Channel Path
 		else if (ret == ++Idx)
 		{
 			// If NandEmuPath is on root of the first FAT32 partition, allow rev17-21 cIOS for EmuNAND Channels
@@ -616,7 +619,7 @@ int GameLoadSM::GetMenuInternal()
 			}
 
 			if(!IosLoader::IsD2X(GameConfig.ios == INHERIT ? Settings.cios : GameConfig.ios) && !NandEmu_compatible)
-				WindowPrompt(tr("Error:"), tr("Nand Emulation is only available on D2X cIOS!"), tr("OK"));
+				WindowPrompt(tr("Error:"), tr("NAND emulation is only available on D2X cIOS!"), tr("OK"));
 			else
 			{
 				char entered[300];

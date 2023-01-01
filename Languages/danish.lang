@@ -32,12 +32,12 @@ msgid "%i missing files"
 msgstr "%i filer mangler"
 
 #, c-format
-msgid "%i wad file(s) not processed!"
-msgstr "%i wad file(r) ikke behandlet!"
+msgid "%i WAD file(s) not processed!"
+msgstr "%i WAD file(r) ikke behandlet!"
 
 #, c-format
-msgid "%i wad found."
-msgstr "%i wad fundet"
+msgid "%i WAD found."
+msgstr "%i WAD fundet"
 
 #, c-format
 msgid "%s only accepts GameCube backups in ISO format."
@@ -143,8 +143,8 @@ msgstr "Det lykkedes at downloade alle billeder."
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle USB Loader GX's funktioner er låst op."
 
-msgid "All wad files processed successfully."
-msgstr "Det lykkedes at behandle alle wad filer"
+msgid "All WAD files processed successfully."
+msgstr "Det lykkedes at behandle alle WAD filer"
 
 msgid "Alternate DOL"
 msgstr "Alternativ DOL"
@@ -399,6 +399,9 @@ msgstr "Ændre sti til musik"
 
 msgid "Channel Launcher"
 msgstr "Kanal Launcher"
+
+msgid "Channel Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "Kanaler"
@@ -798,8 +801,8 @@ msgstr ""
 msgid "Downloading pagelist:"
 msgstr "Downloader pagelist:"
 
-msgid "Dump NAND to EmuNand"
-msgstr "Kopier Wii NAND til EmuNand"
+msgid "Dump NAND to EmuNAND"
+msgstr "Kopier Wii NAND til EmuNAND"
 
 msgid "During zoom"
 msgstr "Under zoom"
@@ -816,14 +819,26 @@ msgstr "FEJL:"
 msgid "ERROR: Can't set up theme."
 msgstr "FEJL: Temaet kan ikke bruges."
 
-msgid "EmuNAND Wad Manager"
+msgid "EmuNAND WAD Manager"
 msgstr ""
 
-msgid "EmuNand Channels"
-msgstr "EmuNand Kanaler"
+msgid "EmuNAND Channel Mode"
+msgstr ""
 
-msgid "Emulated Nand"
-msgstr "Emuleret Nand"
+msgid "EmuNAND Channel Path"
+msgstr ""
+
+msgid "EmuNAND Channels"
+msgstr ""
+
+msgid "EmuNAND Save Mode"
+msgstr ""
+
+msgid "EmuNAND Save Path"
+msgstr ""
+
+msgid "Emulated NAND"
+msgstr "Emuleret NAND"
 
 msgid "English"
 msgstr "Engelsk"
@@ -887,23 +902,23 @@ msgstr "Forlad"
 msgid "Exit to where?"
 msgstr "Hvorhen?"
 
-msgid "Export All Saves to EmuNand"
-msgstr "Exporter Alle Saves til EmuNand"
+msgid "Export All Saves to EmuNAND"
+msgstr "Exporter Alle Saves til EmuNAND"
 
-msgid "Export Miis to EmuNand"
-msgstr "Exporter Miis til EmuNand"
+msgid "Export Miis to EmuNAND"
+msgstr "Exporter Miis til EmuNAND"
 
-msgid "Export SYSCONF to EmuNand"
-msgstr "Exporter SYSCONF to EmuNand"
+msgid "Export SYSCONF to EmuNAND"
+msgstr "Exporter SYSCONF to EmuNAND"
 
-msgid "Extract Miis to the Emu NAND?"
-msgstr "Udpak Miis til Emu NAND?"
+msgid "Extract Miis to the EmuNAND?"
+msgstr "Udpak Miis til EmuNAND?"
 
-msgid "Extract SYSCONF to the Emu NAND?"
-msgstr "Udpak SYSCONF til Emu NAND?"
+msgid "Extract SYSCONF to the EmuNAND?"
+msgstr "Udpak SYSCONF til EmuNAND?"
 
-msgid "Extract Save to EmuNand"
-msgstr "Kopier Save til EmuNand"
+msgid "Extract Save to EmuNAND"
+msgstr "Kopier Save til EmuNAND"
 
 msgid "Extracting file:"
 msgstr "Udpakker Fil:"
@@ -914,8 +929,8 @@ msgstr "Udpakker Filer..."
 msgid "Extracting files:"
 msgstr "Udpakker Filer:"
 
-msgid "Extracting nand files:"
-msgstr "Udpakker nand filer:"
+msgid "Extracting NAND files:"
+msgstr "Udpakker NAND filer:"
 
 msgid "F-Zero AX"
 msgstr ""
@@ -947,8 +962,8 @@ msgstr "Kunne ikke læse ticket."
 msgid "Failed to read tmd file."
 msgstr "Kunne ikke læse tmd fil."
 
-msgid "Failed to read wad header."
-msgstr "Kunne ikke læse wad header."
+msgid "Failed to read WAD header."
+msgstr "Kunne ikke læse WAD header."
 
 msgid "Failed updating"
 msgstr "Opdatering fejlede"
@@ -1295,8 +1310,8 @@ msgstr "Installerer titel..."
 msgid "Invalid IOS number entered. Number must be -1 for inherit or 200 - 255."
 msgstr "Ugyldigt IOS-nummer indtastet. Nummeret skal være -1 for inherit eller 200 - 255."
 
-msgid "Invalid wad file."
-msgstr "Ugyldig wad fil."
+msgid "Invalid WAD file."
+msgstr "Ugyldig WAD fil."
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Det ser ud til, at du har information, der vil kunne hjælpe os. Vær rar at sende denne information til udviklerne."
@@ -1346,11 +1361,11 @@ msgstr "Sti til sprogfiler"
 msgid "Languagepath changed."
 msgstr "Sti til sprogfiler ændret."
 
-msgid "Launching Wii games with emulated nand only works on d2x cIOS! Change game IOS to a d2x cIOS first."
-msgstr "At starte Wii spil med emuleret nand virker kun med d2x cIOS! Ændr spil IOS til en d2x cIOS først."
+msgid "Launching Wii games with emulated NAND only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgstr "At starte Wii spil med emuleret NAND virker kun med d2x cIOS! Ændr spil IOS til en d2x cIOS først."
 
-msgid "Launching emulated nand channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
-msgstr "Indlæsning af Emu nand kanaler virker kun med d2x cIOS! Ændr spil IOS til en d2x cIOS først."
+msgid "Launching emulated NAND channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."
+msgstr "Indlæsning af EmuNAND kanaler virker kun med d2x cIOS! Ændr spil IOS til en d2x cIOS først."
 
 msgid "Left"
 msgstr "Venstre"
@@ -1476,29 +1491,29 @@ msgstr "Musik Lydstyrke"
 msgid "NMM Mode"
 msgstr "NMM Tilstand"
 
-msgid "Nand Chan. Emulation"
-msgstr "Nand Kanal Emulering"
+msgid "NAND Chan. Emulation"
+msgstr "NAND Kanal Emulering"
 
-msgid "Nand Channels"
-msgstr "Nand Kanaler"
+msgid "NAND Channels"
+msgstr "NAND Kanaler"
 
-msgid "Nand Emu Channel Path"
-msgstr "Sti til Nand Emu kanaler"
+msgid "NAND Emu Channel Path"
+msgstr "Sti til NAND Emu kanaler"
 
-msgid "Nand Emu Path"
-msgstr "Nand Emu Sti"
+msgid "NAND Emu Path"
+msgstr "NAND Emu Sti"
 
-msgid "Nand Emulation"
-msgstr "Nand Emulering"
+msgid "NAND Emulation"
+msgstr "NAND Emulering"
 
-msgid "Nand Emulation is only available on D2X cIOS!"
-msgstr "Nand Emulering er kun muligt med d2x cIOS"
+msgid "NAND Emulation is only available on D2X cIOS!"
+msgstr "NAND Emulering er kun muligt med d2x cIOS"
 
-msgid "Nand Emulation only works on FAT/FAT32 partitions!"
-msgstr "Nand Emulering virker kun med FAT/FAT32 partitioner!"
+msgid "NAND Emulation only works on FAT/FAT32 partitions!"
+msgstr "NAND Emulering virker kun med FAT/FAT32 partitioner!"
 
-msgid "Nand Saves Emulation"
-msgstr "Nand Saves Emulering"
+msgid "NAND Saves Emulation"
+msgstr "NAND Saves Emulering"
 
 msgid "Native Controller"
 msgstr ""
@@ -1515,7 +1530,7 @@ msgstr "Neek kernel fil ikke fundet."
 msgid "Neek kernel loading failed."
 msgstr "Neek kernel indlæsning mislykkedes."
 
-msgid "Neek2o does not support 'Emulated NAND Channel Path' on SD! Please setup Uneek2o instead."
+msgid "Neek2o does not support 'EmuNAND Channel Path' on SD! Please setup Uneek2o instead."
 msgstr "Neek2o understøtter ikke 'Emulereret NAND Kanal Sti' på SD! Venligst setup Uneek2o i stedet."
 
 msgid "Neither"
@@ -1590,8 +1605,8 @@ msgstr "Der blev ikke fundet nogle temaer på denne side."
 msgid "No themes found."
 msgstr "Ingen temaer fundet."
 
-msgid "No wad file found in this folder."
-msgstr "Ingen wad fil fundet i denne mappe."
+msgid "No WAD file found in this folder."
+msgstr "Ingen WAD fil fundet i denne mappe."
 
 msgid "NoSSL only"
 msgstr "Kun NoSSL"
@@ -1806,8 +1821,8 @@ msgstr "Hurtig start"
 msgid "Random Directory Music"
 msgstr "Musik fra tilfældig mappe"
 
-msgid "Real Nand"
-msgstr "Ægte Nand"
+msgid "Real NAND"
+msgstr "Ægte NAND"
 
 msgid "Receiving file from:"
 msgstr "Henter fil fra:"
@@ -1917,6 +1932,9 @@ msgstr "Gem spilliste på"
 msgid "Save List"
 msgstr "Gem Liste"
 
+msgid "Save Path"
+msgstr ""
+
 msgid "Saved"
 msgstr "Gemt"
 
@@ -1947,8 +1965,8 @@ msgstr "Vælg spil kategorier"
 msgid "Select loader mode"
 msgstr "Vælg Loader tilstand"
 
-msgid "Select the NAND Emu Path to use."
-msgstr "Vælg NAND Emu Stien to vil bruge."
+msgid "Select the EmuNAND Path to use."
+msgstr "Vælg EmuNAND Stien to vil bruge."
 
 msgid "Select titles sources."
 msgstr "Vælg titel kilde."
@@ -2103,14 +2121,14 @@ msgstr Kunne ikke finde .them fil i zip"
 msgid "The Force Widescreen setting requires DIOS MIOS v2.1 or more. This setting will be ignored."
 msgstr "Tving Widescreen indstillingen kræver DIOS MIOS v2.1 or mere. Denne indstilling vil blive ignoreret."
 
-msgid "The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
-msgstr "Miis'ne vil blive udpakket til din emu nand sti og emu nand kanal sti. Bemærk: Alle existerende filer vil blive overskrevet."
+msgid "The Miis will be extracted to your EmuNAND path and EmuNAND channel path. Attention: All existing files will be overwritten."
+msgstr "Miis'ne vil blive udpakket til din EmuNAND sti og EmuNAND kanal sti. Bemærk: Alle existerende filer vil blive overskrevet."
 
 msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
 msgstr "No Disc+ indstillingen kræver DIOS MIOS 2.2 opdatering2. Denne indstilling vil blive ignoreret."
 
-msgid "The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."
-msgstr "SYSCONF-filen vil blive udpakket til din emu nand sti og emu nand kanal sti. Bemærk: Alle existerende filer vil blive overskrevet."
+msgid "The SYSCONF file will be extracted to your EmuNAND path and EmuNAND channel path. Attention: All existing files will be overwritten."
+msgstr "SYSCONF-filen vil blive udpakket til din EmuNAND sti og EmuNAND kanal sti. Bemærk: Alle existerende filer vil blive overskrevet."
 
 msgid "The application might crash if there is currently a read/write access to the SD card!"
 msgstr "Applikationen kan crashe hvis der ikke nuværende er læs/skriv adgang på SD-kortet!"
@@ -2118,8 +2136,8 @@ msgstr "Applikationen kan crashe hvis der ikke nuværende er læs/skriv adgang p
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Den angivne mappe eksisterer ikke. Skal den oprettes?"
 
-msgid "The files will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
-msgstr "Filerne vil blive udpakket til din emu nand save og kanal sti. Bemærk: Alle eksisterende filer vil blive overskrevet."
+msgid "The files will be extracted to your EmuNAND save and channel path. Attention: All existing files will be overwritten."
+msgstr "Filerne vil blive udpakket til din EmuNAND save og kanal sti. Bemærk: Alle eksisterende filer vil blive overskrevet."
 
 msgid "The game is on SD Card."
 msgstr "Spillet er på SD-kort"
@@ -2127,18 +2145,18 @@ msgstr "Spillet er på SD-kort"
 msgid "The game is on USB."
 msgstr "Spillet er på USB"
 
-msgid "The save game will be extracted to your emu nand path."
-msgstr "Dette savegame vil blive udpakket til din emu nand sti."
+msgid "The save game will be extracted to your EmuNAND path."
+msgstr "Dette savegame vil blive udpakket til din EmuNAND sti."
 
-msgid "The save games will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."
-msgstr "Savegames'ne vil blive udpakket til din emu nand save og kanal sti. Bemærk: Alle eksisterende filer vil blive overskrevet."
+msgid "The save games will be extracted to your EmuNAND save and channel path. Attention: All existing files will be overwritten."
+msgstr "Savegames'ne vil blive udpakket til din EmuNAND save og kanal sti. Bemærk: Alle eksisterende filer vil blive overskrevet."
 
-msgid "The wad file was installed"
-msgstr "Wad filen var installeret"
+msgid "The WAD file was installed"
+msgstr "WAD filen var installeret"
 
 #, c-format
-msgid "The wad installation failed with error %i"
-msgstr "Installering af wad fil fejlede med fejl %i"
+msgid "The WAD installation failed with error %i"
+msgstr "Installering af WAD fil fejlede med fejl %i"
 
 msgid "Theme Downloader"
 msgstr "Tema-downloader"
@@ -2228,10 +2246,10 @@ msgstr "For at køre GameCube spil med Nintendont skal du have boot.dol filen i 
 msgid "To use HID with %s you need the %s file."
 msgstr "For at bruge HID med %s skal du bruge %s filen."
 
-msgid "To use neek you need to set your 'Emulated NAND Channel Path' on the first primary partition of the Hard Drive."
+msgid "To use neek you need to set your 'EmuNAND Channel Path' on the first primary partition of the Hard Drive."
 msgstr "For at bruge neek skal du sætte din 'Emuleret NAND Kanal Sti' på den første primære partition på Harddisken."
 
-msgid "To use neek you need to set your 'Emulated NAND Channel Path' to a FAT32 partition."
+msgid "To use neek you need to set your 'EmuNAND Channel Path' to a FAT32 partition."
 msgstr "For at bruge neek skal du sætte din 'Emuleret NAND Kanal Sti' på en FAT32 partition."
 
 msgid "To use neek you need to use a 512 bytes/sector Hard Drive."
@@ -2552,8 +2570,8 @@ msgstr "af"
 msgid "seconds left"
 msgstr "sekunder tilbage"
 
-#~ msgid "Install WAD to EmuNand"
-#~ msgstr "Installer WAD til EmuNand"
+#~ msgid "Install WAD to EmuNAND"
+#~ msgstr "Installer WAD til EmuNAND"
 
 #~ msgid "WAD Installation"
 #~ msgstr "WAD installation"
@@ -2609,11 +2627,11 @@ msgstr "sekunder tilbage"
 #~ msgid "Not a Wii Disc"
 #~ msgstr "Ikke en Wii-Disk"
 
-#~ msgid "The files will be extracted to your emu nand path. Attention: All existing files will be overwritten."
-#~ msgstr "Filerne vil bliver udpakket til din Emu Nand sti. Advarsel : alle eksisterende filer vil blive overskrevet."
+#~ msgid "The files will be extracted to your EmuNAND path. Attention: All existing files will be overwritten."
+#~ msgstr "Filerne vil bliver udpakket til din EmuNAND sti. Advarsel : alle eksisterende filer vil blive overskrevet."
 
-#~ msgid "The save games will be extracted to your emu nand path. Attention: All existing saves will be overwritten."
-#~ msgstr "Alle savegames vil bliver udpakket til din emu eand sti. Advarsel: Alle eksisterende savegames vil blive overskrevet."
+#~ msgid "The save games will be extracted to your EmuNAND path. Attention: All existing saves will be overwritten."
+#~ msgstr "Alle savegames vil bliver udpakket til din EmuNAND sti. Advarsel: Alle eksisterende savegames vil blive overskrevet."
 
 #~ msgid "Installing title"
 #~ msgstr "Installerer titel"

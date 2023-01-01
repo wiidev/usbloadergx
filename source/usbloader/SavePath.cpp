@@ -67,7 +67,7 @@ static void CreateNandPath(const char *path)
 	if(CheckFile(path))
 		return;
 
-	gprintf("Creating Nand Path: %s\n", path);
+	gprintf("Creating NAND Path: %s\n", path);
 	CreateSubfolder(path);
 }
 

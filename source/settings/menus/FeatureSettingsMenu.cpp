@@ -111,11 +111,11 @@ void FeatureSettingsMenu::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Messageboard Update" ));
 	Options->SetName(Idx++, "%s", tr( "Wiinnertag" ));
 	Options->SetName(Idx++, "%s", tr( "Import Categories" ));
-	Options->SetName(Idx++, "%s", tr( "Export All Saves to EmuNand" ));
-	Options->SetName(Idx++, "%s", tr( "Export Miis to EmuNand" ));
-	Options->SetName(Idx++, "%s", tr( "Export SYSCONF to EmuNand" ));
-	Options->SetName(Idx++, "%s", tr( "Dump NAND to EmuNand" ));
-	Options->SetName(Idx++, "%s", tr( "EmuNAND Wad Manager" ));
+	Options->SetName(Idx++, "%s", tr( "Export All Saves to EmuNAND" ));
+	Options->SetName(Idx++, "%s", tr( "Export Miis to EmuNAND" ));
+	Options->SetName(Idx++, "%s", tr( "Export SYSCONF to EmuNAND" ));
+	Options->SetName(Idx++, "%s", tr( "Dump NAND to EmuNAND" ));
+	Options->SetName(Idx++, "%s", tr( "EmuNAND WAD Manager" ));
 	Options->SetName(Idx++, "%s", tr( "Update Nintendont" ));
 	Options->SetName(Idx++, "%s", tr( "WiiU Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "Boot Neek System Menu" ));
@@ -155,19 +155,19 @@ void FeatureSettingsMenu::SetOptionValues()
 	//! Settings: Import categories from GameTDB
 	Options->SetValue(Idx++, " ");
 
-	//! Settings: Export Savegames to EmuNand
+	//! Settings: Export Savegames to EmuNAND
 	Options->SetValue(Idx++, " ");
 
-	//! Settings: Export Miis to EmuNand
+	//! Settings: Export Miis to EmuNAND
 	Options->SetValue(Idx++, " ");
 
-	//! Settings: Export SYSCONF to EmuNand
+	//! Settings: Export SYSCONF to EmuNAND
 	Options->SetValue(Idx++, " ");
 
-	//! Settings: Dump NAND to EmuNand
+	//! Settings: Dump NAND to EmuNAND
 	Options->SetValue(Idx++, " ");
 
-	//! Settings: EmuNand Wad Manager
+	//! Settings: EmuNAND WAD Manager
 	Options->SetValue(Idx++, " ");
 
 	//! Settings: Update Nintendont
@@ -297,10 +297,10 @@ int FeatureSettingsMenu::GetMenuInternal()
 		}
 	}
 
-	//! Settings: Export Savegames to EmuNand
+	//! Settings: Export Savegames to EmuNAND
 	else if (ret == ++Idx)
 	{
-		int choice = WindowPrompt(tr( "Do you want to extract all the save games?" ), tr("The save games will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."), tr( "Yes" ), tr( "Cancel" ));
+		int choice = WindowPrompt(tr( "Do you want to extract all the save games?" ), tr("The save games will be extracted to your EmuNAND save and channel path. Attention: All existing files will be overwritten."), tr( "Yes" ), tr( "Cancel" ));
 		if (choice == 1)
 		{
 			ProgressCancelEnable(true);
@@ -379,10 +379,10 @@ int FeatureSettingsMenu::GetMenuInternal()
 		}
 	}
 
-	//! Settings: Export Miis to EmuNand
+	//! Settings: Export Miis to EmuNAND
 	else if (ret == ++Idx)
 	{
-		int choice = WindowPrompt(tr( "Extract Miis to the Emu NAND?" ), tr("The Miis will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."), tr( "Yes" ), tr( "Cancel" ));
+		int choice = WindowPrompt(tr( "Extract Miis to the EmuNAND?" ), tr("The Miis will be extracted to your EmuNAND path and EmuNAND channel path. Attention: All existing files will be overwritten."), tr( "Yes" ), tr( "Cancel" ));
 		if (choice == 1)
 		{
 			char filePath[512];
@@ -410,10 +410,10 @@ int FeatureSettingsMenu::GetMenuInternal()
 		}
 	}
 
-	//! Settings: Export SYSCONF to EmuNand
+	//! Settings: Export SYSCONF to EmuNAND
 	else if (ret == ++Idx)
 	{
-		int choice = WindowPrompt(tr( "Extract SYSCONF to the Emu NAND?" ), tr("The SYSCONF file will be extracted to your emu nand path and emu nand channel path. Attention: All existing files will be overwritten."), tr( "Yes" ), tr( "Cancel" ));
+		int choice = WindowPrompt(tr( "Extract SYSCONF to the EmuNAND?" ), tr("The SYSCONF file will be extracted to your EmuNAND path and EmuNAND channel path. Attention: All existing files will be overwritten."), tr( "Yes" ), tr( "Cancel" ));
 		if (choice == 1)
 		{
 			char filePath[512];
@@ -441,10 +441,10 @@ int FeatureSettingsMenu::GetMenuInternal()
 		}
 	}
 
-	//! Settings: Dump NAND to EmuNand
+	//! Settings: Dump NAND to EmuNAND
 	else if (ret == ++Idx)
 	{
-		int choice = WindowPrompt(tr( "What to extract from NAND?" ), tr("The files will be extracted to your emu nand save and channel path. Attention: All existing files will be overwritten."), tr( "Everything" ), tr("Enter Path"), tr( "Cancel" ));
+		int choice = WindowPrompt(tr( "What to extract from NAND?" ), tr("The files will be extracted to your EmuNAND save and channel path. Attention: All existing files will be overwritten."), tr( "Everything" ), tr("Enter Path"), tr( "Cancel" ));
 		if (choice)
 		{
 			char filePath[255];
@@ -469,7 +469,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 			snprintf(extractPath, sizeof(extractPath), "%s", Settings.NandEmuPath);
 			if( strlen(Settings.NandEmuPath) != strlen(Settings.NandEmuChanPath) || strcmp(Settings.NandEmuPath, Settings.NandEmuChanPath) != 0 )
 			{
-				if(WindowPrompt(tr( "Where to dump NAND?" ), tr("Select the NAND Emu Path to use."), tr( "Nand Emu Path" ), tr("Nand Emu Channel Path")) == 0)
+				if(WindowPrompt(tr( "Where to dump NAND?" ), tr("Select the EmuNAND path to use."), tr( "Channel Path" ), tr("Save Path")) == 1)
 					snprintf(extractPath, sizeof(extractPath), "%s", Settings.NandEmuChanPath);
 			}
 			snprintf(filePath, sizeof(filePath), "%s%s", extractPath, nandPath);
@@ -479,8 +479,8 @@ int FeatureSettingsMenu::GetMenuInternal()
 				u32 dummy;
 				int ret = -1;
 				ProgressCancelEnable(true);
-				StartProgress(tr("Extracting nand files:"), 0, 0, true, false);
-				ShowProgress(tr("Extracting nand files:"), 0, 0, -1, true, false);
+				StartProgress(tr("Extracting NAND files:"), 0, 0, true, false);
+				ShowProgress(tr("Extracting NAND files:"), 0, 0, -1, true, false);
 
 				if(ISFS_ReadDir(nandPath, NULL, &dummy) < 0)
 					ret = NandTitle::ExtractFile(nandPath, filePath);
@@ -502,7 +502,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 		}
 	}
 
-	//! Settings: EmuNand Wad Manager
+	//! Settings: EmuNAND WAD Manager
 	else if (ret == ++Idx)
 	{
 		GuiWindow * parent = (GuiWindow *) parentElement;
@@ -513,20 +513,20 @@ int FeatureSettingsMenu::GetMenuInternal()
 		char wadpath[150];
 		snprintf(wadpath, sizeof(wadpath), "%s/wad/", Settings.BootDevice);
 
-		int choice = WindowPrompt(tr("EmuNAND Wad Manager"), tr("Which mode do you want to use?"), tr("File"), tr("Folder"), tr("Cancel"));
+		int choice = WindowPrompt(tr("EmuNAND WAD Manager"), tr("Which mode do you want to use?"), tr("File"), tr("Folder"), tr("Cancel"));
 		if(choice == 1) 			// File mode
 		{
 			int result = BrowseDevice(wadpath, sizeof(wadpath), FB_DEFAULT );
 			if(result)
 			{
-				choice = WindowPrompt(tr("EmuNAND Wad Manager"), tr("What do you want to do?"), tr("Install"), tr("Uninstall"), tr("Cancel"));
+				choice = WindowPrompt(tr("EmuNAND WAD Manager"), tr("What do you want to do?"), tr("Install"), tr("Uninstall"), tr("Cancel"));
 				if(choice == 1) 	// File install
 				{
 					Wad wadFile(wadpath);
 					if(!wadFile.Install(Settings.NandEmuChanPath))
 					{
-						// install error - Try to cleanup any partially installed wad data
-						WindowPrompt(tr("EmuNAND Wad Manager"), tr("Install error - Cleaning incomplete data."), tr( "OK" ));
+						// install error - Try to cleanup any partially installed WAD data
+						WindowPrompt(tr("EmuNAND WAD Manager"), tr("Install error - Cleaning incomplete data."), tr( "OK" ));
 						//gprintf("Error   : %s\n", wadpath);
 						wadFile.UnInstall(Settings.NandEmuChanPath);
 					}
@@ -551,8 +551,8 @@ int FeatureSettingsMenu::GetMenuInternal()
 				if(wadList->GetFilecount())
 				{
 					char found[20];
-					snprintf(found, sizeof(found), fmt(tr("%i wad found."), wadList->GetFilecount()));
-					choice = WindowPrompt(tr("EmuNAND Wad Manager"), fmt("%s %s", found, tr("What do you want to do?")), tr("Install"), tr("Uninstall"), tr("Cancel"));
+					snprintf(found, sizeof(found), fmt(tr("%i WAD found."), wadList->GetFilecount()));
+					choice = WindowPrompt(tr("EmuNAND WAD Manager"), fmt("%s %s", found, tr("What do you want to do?")), tr("Install"), tr("Uninstall"), tr("Cancel"));
 					if(choice == 1) // Folder install
 					{
 						for(int i = 0; i < wadList->GetFilecount(); i++)
@@ -573,7 +573,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 					}
 					if(choice == 2) // Folder uninstall
 					{
-						if(WindowPrompt(tr("EmuNAND Wad Manager"), tr("Attention: All savegames will be deleted."), tr("Uninstall"), tr("Cancel")))
+						if(WindowPrompt(tr("EmuNAND WAD Manager"), tr("Attention: All savegames will be deleted."), tr("Uninstall"), tr("Cancel")))
 						{
 							for(int i = 0; i < wadList->GetFilecount(); i++)
 							{
@@ -590,17 +590,17 @@ int FeatureSettingsMenu::GetMenuInternal()
 							choice = 0;
 					}
 
-					// check if there is any remaining unprocessed wad
+					// check if there is any remaining unprocessed WAD
 					if(choice != 0)
 					{
 						if(wadList->GetFilecount() == 0)
-							WindowPrompt(tr("EmuNAND Wad Manager"), tr("All wad files processed successfully."), tr( "OK" ));
+							WindowPrompt(tr("EmuNAND WAD Manager"), tr("All WAD files processed successfully."), tr( "OK" ));
 						else
 						{
-							if(WindowPrompt(tr( "EmuNAND Wad Manager" ), fmt(tr("%i wad file(s) not processed!"), wadList->GetFilecount()), tr("Save List"), tr( "OK" )))
+							if(WindowPrompt(tr( "EmuNAND WAD Manager" ), fmt(tr("%i WAD file(s) not processed!"), wadList->GetFilecount()), tr("Save List"), tr( "OK" )))
 							{
 								char path[200];
-								snprintf(path, sizeof(path), "%s/WadManager_errors.txt", Settings.update_path);
+								snprintf(path, sizeof(path), "%s/wad_manager_errors.txt", Settings.update_path);
 
 								FILE *f = fopen(path, "a");
 								if(f)
@@ -609,9 +609,9 @@ int FeatureSettingsMenu::GetMenuInternal()
 									char theTime[11];
 									theTime[0] = 0;
 									strftime(theTime, sizeof(theTime), "%Y-%m-%d", localtime(&rawtime));
-									fprintf(f, "\r\n\r\nEmuNAND Wad Manager - %10s\r\n--------------------------------\r\n", theTime);
+									fprintf(f, "\r\n\r\nEmuNAND WAD Manager - %10s\r\n--------------------------------\r\n", theTime);
 									fprintf(f, "%s %s\r\n", choice == 1 ? "Error installing to" : "Error uninstalling from", Settings.NandEmuChanPath);
-									fprintf(f, "%s\r\n", choice == 1 ? "List of user canceled installation or bad wad files." : "Titles not on EmuNAND or weren't correctly installed.");
+									fprintf(f, "%s\r\n", choice == 1 ? "List of user canceled installation or bad WAD files." : "Titles not on EmuNAND or weren't correctly installed.");
 									
 									for(int i = 0; i < wadList->GetFilecount(); i++)
 									{
@@ -622,7 +622,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 									fclose(f);
 								}
 								else
-									WindowPrompt(tr( "EmuNAND Wad Manager" ), tr("Error writing the data."), tr( "OK" ));
+									WindowPrompt(tr( "EmuNAND WAD Manager" ), tr("Error writing the data."), tr( "OK" ));
 							}
 						}
 					}
@@ -633,7 +633,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 				}
 				else
 				{
-					WindowPrompt(tr( "EmuNAND Wad Manager" ), tr("No wad file found in this folder."), tr( "OK" ));
+					WindowPrompt(tr( "EmuNAND WAD Manager" ), tr("No WAD file found in this folder."), tr( "OK" ));
 				}
 
 				delete wadList;
