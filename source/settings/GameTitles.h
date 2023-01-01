@@ -10,6 +10,7 @@ typedef struct _GameTitle
 {
 	char GameID[7];
 	std::string Title;
+	std::string Region;
 	int ParentalRating;
 	int PlayersCount;
 	char FromWiiTDB;
@@ -20,9 +21,9 @@ class CGameTitles
 {
 	public:
 		//! Set a game title from GameTDB
-		void SetGameTitle(const char * id, const char * title);
+		void SetGameTitle(const char * id, const char * title, const std::string region = "NULL");
 		//! Overload
-		void SetGameTitle(const u8 * id, const char * title) { SetGameTitle((const char *) id, title); };
+		void SetGameTitle(const u8 * id, const char * title) { SetGameTitle((const char *) id, title, "NULL"); };
 
 		//! Get a game title
 		const char * GetTitle(const char * id) const;
@@ -31,6 +32,8 @@ class CGameTitles
 		//! Overload
 		const char * GetTitle(const struct discHdr *header) const;
 
+		//! Get game region
+		const char * GetRegion(const char * id) const;
 		//! Get game parental rating
 		int GetParentalRating(const char * id) const;
 		//! Get possible number of players for this game

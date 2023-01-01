@@ -17,7 +17,7 @@ class GameBrowseMenu : public GuiWindow
 		int MainLoop();
 		int OpenClickedGame(struct discHdr *header);
 		int GetSelectedGame() { return (gameBrowser ? gameBrowser->GetSelectedOption() : -1); }
-		void UpdateGameInfoText(const u8 * gameId);
+		void UpdateGameInfoText(struct discHdr *header);
 		void LoadCover(struct discHdr *header);
 		void CheckDiscSlotUpdate();
 		void UpdateFreeSpace(void *arg);

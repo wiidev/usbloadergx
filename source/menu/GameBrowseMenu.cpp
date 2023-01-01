@@ -33,6 +33,7 @@
 #include "utils/ShowError.h"
 #include "utils/tools.h"
 #include "utils/PasswordCheck.h"
+#include "xml/GameTDB.hpp"
 #include "gecko.h"
 #include "menus.h"
 #include "wpad.h"
@@ -1354,7 +1355,7 @@ int GameBrowseMenu::MainLoop()
 		{
 			struct discHdr *header = gameList[gameSelected];
 			LoadCover(header);
-			UpdateGameInfoText(header->id);
+			UpdateGameInfoText(header);
 		}
 	}
 
@@ -1463,9 +1464,9 @@ void GameBrowseMenu::UpdateClock()
 	}
 }
 
-void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
+void GameBrowseMenu::UpdateGameInfoText(struct discHdr *header)
 {
-	if(!gameId)
+	if (!header)
 	{
 		Remove(GameRegionTxt);
 		delete GameRegionTxt;
@@ -1476,35 +1477,70 @@ void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
 		return;
 	}
 
-	char gameregion[10];
+	std::string gameregion;
 	char IDfull[7];
-	snprintf(IDfull, sizeof(IDfull), (char *) gameId);
+	snprintf(IDfull, sizeof(IDfull), (char *) header->id);
 
-	switch (IDfull[3])
+	const char *region = GameTitles.GetRegion(IDfull);
+	if (strcmp(region, "NULL") != 0)
+		gameregion = region;
+	else
 	{
-		case 'A':
-		case 'B':
-		case 'U':
-		case 'X':
-			strcpy(gameregion, tr("Region Free"));
-			break;
-		case 'E':
-		case 'N':
-			strcpy(gameregion, "NTSC U");
-			break;
-		case 'J':
-			strcpy(gameregion, "NTSC J");
-			break;
-		case 'K':
-		case 'Q':
-		case 'T':
-			strcpy(gameregion, "NTSC K");
-			break; 
-		case 'W':
-			strcpy(gameregion, "NTSC T");
-			break;
-		default:
-			strcpy(gameregion, "  PAL ");
+		char sys[2];
+		char reg[2];
+		snprintf(sys, sizeof(sys), "%c", IDfull[0]);
+		snprintf(reg, sizeof(reg), "%c", IDfull[3]);
+		if (header->type >= TYPE_GAME_NANDCHAN)
+		{
+			// Force some homebrew to display as region free
+			char regions[] = "ABDEFHIJKLMNPQRSTUVW";
+			char systems[] = "CEFHJLMNPQWX";
+			if (!(strstr(systems, sys) && strstr(regions, reg)))
+				reg[0] = 'A';
+			if (memcmp(IDfull, "JODI", 4) == 0)
+				reg[0] = 'A';
+			if (memcmp(IDfull, "IDCL", 4) == 0)
+				reg[0] = 'A';
+		}
+
+		switch (reg[0])
+		{
+			case 'P': // Europe
+			case 'D': // Germany
+			case 'F': // France
+			case 'H': // Netherlands
+			case 'I': // Italy
+			case 'L': // Japanese import to Europe
+			case 'M': // American import to Europe
+			case 'R': // Russia
+			case 'S': // Spain
+			case 'U': // Australia
+			case 'V': // Scandinavia
+				gameregion = "PAL";
+				break;
+			case 'E': // USA
+			case 'N': // Japanese import to USA
+				gameregion = "NTSC-U";
+				break;
+			case 'J': // Japan
+				gameregion = "NTSC-J";
+				break;
+			case 'K': // Korea
+			case 'Q': // Japanese import to Korea 
+			case 'T': // American import to Korea
+				gameregion = "NTSC-K";
+				break;
+			case 'W': // Taiwan / Hong Kong / Macau
+				gameregion = "NTSC-T";
+				break;
+			case 'X': // Europe / USA special releases
+			case 'Y': // Europe / USA special releases
+			case 'Z': // Europe / USA special releases
+				gameregion = "PAL / NTSC-U";
+				break;
+			default:
+				gameregion = tr("Region Free");
+		}
 	}
 
 	HaltGui();
@@ -1523,7 +1559,7 @@ void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
 	{
 		Remove(GameRegionTxt);
 		delete GameRegionTxt;
-		GameRegionTxt = new GuiText(gameregion, 22, thColor("r=55 g=190 b=237 a=255 - region info text color"));
+		GameRegionTxt = new GuiText(gameregion.c_str(), 22, thColor("r=55 g=190 b=237 a=255 - region info text color"));
 		GameRegionTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 		GameRegionTxt->SetPosition(thInt("68 - region info text pos x"), thInt("30 - region info text pos y"));
 		GameRegionTxt->SetEffect(EFFECT_FADE, 20);
