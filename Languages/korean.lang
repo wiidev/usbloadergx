@@ -1920,6 +1920,9 @@ msgstr ""
 msgid "SD Card could not be accessed."
 msgstr "SD 카드에 접속 할 수 없습니다."
 
+msgid "SD Card Mode"
+msgstr "SD 카드 모드"
+
 msgid "SD GameCube Games Path"
 msgstr "SD 게임큐브 게임 경로"
 
@@ -2205,6 +2208,9 @@ msgstr "이 게임에는 여러 개의 디스크가 있습니다. 실행할 디�
 
 msgid "This path must be on SD!"
 msgstr "이 경로는 SD에 있어야 합니다!"
+
+msgid "This setting doesn't work in SD card mode."
+msgstr "이 설정은 SD 카드 모드에서 작동하지 않습니다."
 
 msgid "Time left:"
 msgstr "시간 남음:"

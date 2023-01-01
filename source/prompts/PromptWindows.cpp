@@ -1141,12 +1141,20 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
 		do
 		{
 			gprintf("%i\n", (int) (timenow-starttime));
-			ret = WBFS_Init(WBFS_DEVICE_USB);
+			ret = WBFS_Init(Settings.SDMode ? WBFS_DEVICE_SDHC : WBFS_DEVICE_USB);
 			if (ret >= 0) break;
 
 			timerTxt.SetTextf("%i %s", (int) (30-(timenow-starttime)), tr( "seconds left" ));
-			DeviceHandler::Instance()->UnMountAllUSB();
-			DeviceHandler::Instance()->MountAllUSB();
+			if (Settings.SDMode)
+			{
+				DeviceHandler::Instance()->UnMountSD();
+				DeviceHandler::Instance()->MountSD();
+			}
+			else
+			{
+				DeviceHandler::Instance()->UnMountAllUSB();
+				DeviceHandler::Instance()->MountAllUSB();
+			}
 			timenow = time(0);
 		}
 		while (timenow-starttime < 30);

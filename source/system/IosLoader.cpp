@@ -22,6 +22,7 @@
 #include "libs/libruntimeiospatch/runtimeiospatch.h"
 
 extern u32 hdd_sector_size[2];
+extern u8 sdhc_mode_sd;
 
 /*
  * Buffer variables for the IOS info to avoid loading it several times
@@ -173,14 +174,17 @@ s32 IosLoader::LoadGameCios(s32 ios)
 	// Unmount fat before reloading IOS.
 	WBFS_CloseAll();
 	WDVD_Close();
+	DeviceHandler::Instance()->UnMountSD();
 	DeviceHandler::DestroyInstance();
 	USBStorage2_Deinit();
 
 	ret = ReloadIosSafe(ios);
 
 	// Remount devices after reloading IOS.
+	sdhc_mode_sd = 0;
 	DeviceHandler::Instance()->MountSD();
-	DeviceHandler::Instance()->MountAllUSB(true);
+	if (!Settings.SDMode)
+		DeviceHandler::Instance()->MountAllUSB(true);
 	Disc_Init();
 
 	return ret;

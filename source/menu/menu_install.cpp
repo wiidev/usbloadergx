@@ -73,8 +73,8 @@ int MenuGCInstall()
 	gcDumper.SetCompressed(Settings.GCInstallAligned);
 
 	//! If a different main path than the SD path is selected ask where to install
-	int destination = 1;
-	if(strcmp(Settings.GameCubePath, Settings.GameCubeSDPath) != 0)
+	int destination = Settings.SDMode ? 2 : 1;
+	if(!Settings.SDMode && strcmp(Settings.GameCubePath, Settings.GameCubeSDPath) != 0)
 		destination = WindowPrompt(tr("Where should the game be installed to?"), 0, tr("Main Path"), tr("SD Path"), tr("Cancel"));
 	if(!destination)
 		return MENU_DISCLIST;

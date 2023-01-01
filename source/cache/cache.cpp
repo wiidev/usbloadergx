@@ -57,13 +57,22 @@ bool isCacheCurrent()
 	std::string list;
 
 	// GameCube
-	snprintf(filepath, sizeof(filepath), "%s", Settings.GameCubePath);
-	GetDirectoryList(filepath, list);
+	if (!Settings.SDMode)
+	{
+		snprintf(filepath, sizeof(filepath), "%s", Settings.GameCubePath);
+		GetDirectoryList(filepath, list);
+	}
 	snprintf(filepath, sizeof(filepath), "%s", Settings.GameCubeSDPath);
 	GetDirectoryList(filepath, list);
 
 	// Wii
-	GetListWBFS(list);
+	if (Settings.SDMode)
+	{
+		snprintf(filepath, sizeof(filepath), "sd:/wbfs");
+		GetDirectoryList(filepath, list);
+	}
+	else
+		GetListWBFS(list);
 
 	// EmuNAND
 	snprintf(filepath, sizeof(filepath), "%s/title/00010001", Settings.NandEmuChanPath);

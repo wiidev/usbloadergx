@@ -26,8 +26,11 @@
 #include "sys.h"
 #include "svnrev.h"
 #include "gitver.h"
+#include "usbloader/sdhc.h"
+#include "settings/meta.h"
 
 extern bool isWiiVC; // in sys.cpp
+extern u8 sdhc_mode_sd;
 
 StartUpProcess::StartUpProcess()
 {
@@ -59,11 +62,10 @@ StartUpProcess::StartUpProcess()
 	versionTxt->SetTextf("v3.0 Rev. %s (%s)", GetRev(), commitID());
 #endif
 
-#if 1 // enable if you release a modded version - enabled by default to differentiate official releases
-	versionTxt->SetTextf("v3.0 Rev. %s mod (%s)", GetRev(), commitID());
-#endif
-
-	cancelTxt = new GuiText("Press B to cancel", 18, (GXColor){255, 255, 255, 255});
+	if (strncmp(Settings.ConfigPath, "sd", 2) == 0)
+		cancelTxt = new GuiText("Press B to cancel or A to enable SD card mode", 22, (GXColor){255, 255, 255, 255});
+	else
+		cancelTxt = new GuiText("Press B to cancel", 22, (GXColor){255, 255, 255, 255});
 	cancelTxt->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	cancelTxt->SetPosition(screenwidth / 2, screenheight / 2 + 90);
 
@@ -72,6 +74,13 @@ StartUpProcess::StartUpProcess()
 
 	cancelBtn = new GuiButton(0, 0);
 	cancelBtn->SetTrigger(trigB);
+
+	trigA = new GuiTrigger;
+	trigA->SetButtonOnlyTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+
+	sdmodeBtn = new GuiButton(0, 0);
+	if (strncmp(Settings.ConfigPath, "sd", 2) == 0)
+		sdmodeBtn->SetTrigger(trigA);
 
 	drawCancel = false;
 }
@@ -86,7 +95,9 @@ StartUpProcess::~StartUpProcess()
 	delete versionTxt;
 	delete cancelTxt;
 	delete cancelBtn;
+	delete sdmodeBtn;
 	delete trigB;
+	delete trigA;
 }
 
 int StartUpProcess::ParseArguments(int argc, char *argv[])
@@ -129,6 +140,17 @@ int StartUpProcess::ParseArguments(int argc, char *argv[])
 		if (ptr)
 		{
 			Settings.USBAutoMount = LIMIT(atoi(ptr + strlen("-mountusb=")), 0, 1);
+		}
+
+		if (strncmp(Settings.ConfigPath, "sd", 2) == 0)
+		{
+			ptr = strcasestr(argv[i], "-sdmode=");
+			if (ptr)
+			{
+				Settings.SDMode = LIMIT(atoi(ptr + strlen("-sdmode=")), 0, 1);
+				if (Settings.SDMode)
+					sdhc_mode_sd = 1;
+			}
 		}
 
 		if (strlen(argv[i]) == 6 && strchr(argv[i], '=') == 0 && strchr(argv[i], '-') == 0)
@@ -208,10 +230,20 @@ bool StartUpProcess::USBSpinUp()
 
 		UpdatePads();
 		for (int i = 0; i < 4; ++i)
+		{
 			cancelBtn->Update(&userInput[i]);
+			sdmodeBtn->Update(&userInput[i]);
+		}
 
 		if (cancelBtn->GetState() == STATE_CLICKED)
 			break;
+
+		if (sdmodeBtn->GetState() == STATE_CLICKED)
+		{
+			Settings.SDMode = ON;
+			sdhc_mode_sd = 1;
+			break;
+		}
 
 		messageTxt->SetTextf("Waiting for HDD: %i sec left\n", 20 - (int)countDown.elapsed());
 		Draw();
@@ -275,7 +307,7 @@ int StartUpProcess::Execute(bool quickGameBoot)
 
 	gprintf("Current IOS: %d - have AHB access: %s\n", Settings.EntryIOS, AHBPROT_DISABLED ? "yes" : "no");
 	// Reload to a cIOS if we're using both USB ports
-	if (Settings.USBPort == 2)
+	if (Settings.USBPort == 2 && !Settings.SDMode)
 		LoadIOS(Settings.LoaderIOS, false);
 
 	// Reload to a cIOS if required (old forwarder?) or requested
@@ -291,7 +323,7 @@ int StartUpProcess::Execute(bool quickGameBoot)
 
 	// Do not mount USB if not needed. USB is not available with WiiU WiiVC injected channel
 	bool USBSuccess = false;
-	if (Settings.USBAutoMount == ON && !isWiiVC)
+	if (Settings.USBAutoMount == ON && !isWiiVC && !Settings.SDMode)
 	{
 		SetTextf("Initializing USB devices\n");
 		if (USBSpinUp())
@@ -344,18 +376,21 @@ int StartUpProcess::Execute(bool quickGameBoot)
 		SetupPads();
 
 		DeviceHandler::Instance()->MountSD();
-		if (Settings.USBAutoMount == ON && USBSuccess)
+		if (Settings.USBAutoMount == ON && !Settings.SDMode && USBSuccess)
 		{
 			if (USBSpinUp())
 				DeviceHandler::Instance()->MountAllUSB(false);
 		}
 	}
 
-	if (!IosLoader::IsHermesIOS() && !IosLoader::IsD2X())
+	if (sdhc_mode_sd)
+		editMetaArguments();
+
+	if (!IosLoader::IsHermesIOS() && !IosLoader::IsD2X() && !Settings.SDMode)
 	{
 		Settings.USBPort = 0;
 	}
-	else if (Settings.USBPort == 1 && USBStorage2_GetPort() != Settings.USBPort)
+	else if (Settings.USBPort == 1 && USBStorage2_GetPort() != Settings.USBPort && !Settings.SDMode)
 	{
 		if (Settings.USBAutoMount == ON && !isWiiVC)
 		{
@@ -364,7 +399,7 @@ int StartUpProcess::Execute(bool quickGameBoot)
 			DeviceHandler::Instance()->MountAllUSB();
 		}
 	}
-	else if (Settings.USBPort == 2)
+	else if (Settings.USBPort == 2 && !Settings.SDMode)
 	{
 		if (Settings.USBAutoMount == ON && !isWiiVC)
 		{

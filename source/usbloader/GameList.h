@@ -33,6 +33,7 @@ class GameList
 		struct discHdr * GetCurrentSelected() const { return operator[](selectedGame); }
 		int GetPartitionNumber(const u8 *gameid) const;
 		int GetGameFS(const u8 *gameID) const { return DeviceHandler::Instance()->GetFilesystemType(USB1+GetPartitionNumber(gameID)); }
+		int GetGameFSSD() const { return DeviceHandler::Instance()->GetFilesystemType(SD); }
 		void RemovePartition(int part_num);
 		std::vector<struct discHdr *> &GetFilteredList(void) { return FilteredList; }
 		std::vector<struct discHdr> &GetFullGameList(void) { return FullGameList; }

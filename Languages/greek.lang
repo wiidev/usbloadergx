@@ -1920,6 +1920,9 @@ msgstr ""
 msgid "SD Card could not be accessed."
 msgstr "Μη προσπελάσιμη SD."
 
+msgid "SD Card Mode"
+msgstr ""
+
 msgid "SD GameCube Games Path"
 msgstr "Τοποθεσία/μονοπάτι τίτλων GameCube στην κάρτα SD"
 
@@ -2205,6 +2208,9 @@ msgstr ""
 
 msgid "This path must be on SD!"
 msgstr "Το μονοπάτι αυτό πρέπει να κατευθύνει σε αρχείο στην κάρτα SD!"
+
+msgid "This setting doesn't work in SD card mode."
+msgstr ""
 
 msgid "Time left:"
 msgstr "Χρόνος που απομένει:"

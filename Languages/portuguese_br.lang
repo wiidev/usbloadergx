@@ -1920,6 +1920,9 @@ msgstr ""
 msgid "SD Card could not be accessed."
 msgstr "Este Cartão SD não pode ser acessado"
 
+msgid "SD Card Mode"
+msgstr ""
+
 msgid "SD GameCube Games Path"
 msgstr "Pasta de jogos de GC no Cartão"
 
@@ -2205,6 +2208,9 @@ msgstr "Esse jogo utiliza vários discos. Escolha o disco a iniciar"
 
 msgid "This path must be on SD!"
 msgstr "Essa pasta precisa estar no Cartão SD!"
+
+msgid "This setting doesn't work in SD card mode."
+msgstr ""
 
 msgid "Time left:"
 msgstr "Restam:"

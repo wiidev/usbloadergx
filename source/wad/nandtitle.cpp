@@ -277,7 +277,6 @@ u16 NandTitle::VersionOf(u64 tid)
 		}
 	}
 	return 0;
-
 }
 
 u16 NandTitle::VersionFromIndex(u32 i)

@@ -36,6 +36,9 @@
 #include "system/IosLoader.h"
 #include "wad/nandtitle.h"
 #include "utils/tools.h"
+#include "FileOperations/fileops.h"
+#include "gecko.h"
+#include "sys.h"
 
 static const char * OnOffText[] =
 {
@@ -75,6 +78,8 @@ HardDriveSM::HardDriveSM()
 	int Idx = 0;
 	Options->SetName(Idx++, "%s", tr( "Game/Install Partition" ));
 	Options->SetName(Idx++, "%s", tr( "Multiple Partitions" ));
+	if (strncmp(Settings.ConfigPath, "sd", 2) == 0)
+		Options->SetName(Idx++, "%s", tr( "SD Card Mode" ));
 	Options->SetName(Idx++, "%s", tr( "USB Port" ));
 	Options->SetName(Idx++, "%s", tr( "Mount USB at launch" ));
 	Options->SetName(Idx++, "%s", tr( "Install Directories" ));
@@ -86,6 +91,7 @@ HardDriveSM::HardDriveSM()
 
 	OldSettingsPartition = Settings.partition;
 	OldSettingsMultiplePartitions = Settings.MultiplePartitions;
+	OldSettingsSDMode = Settings.SDMode;
 	NewSettingsUSBPort = Settings.USBPort;
 	oldSettingsUSBAutoMount = Settings.USBAutoMount;
 
@@ -94,41 +100,53 @@ HardDriveSM::HardDriveSM()
 
 HardDriveSM::~HardDriveSM()
 {
+	gprintf("Quit HDD settings: %i\n", Settings.SDMode);
 	//! if partition has changed, Reinitialize it
 	if (Settings.partition != OldSettingsPartition ||
 		Settings.MultiplePartitions != OldSettingsMultiplePartitions ||
-		Settings.USBPort != NewSettingsUSBPort || 
-		Settings.USBAutoMount != oldSettingsUSBAutoMount)
+		Settings.USBPort != NewSettingsUSBPort ||
+		Settings.USBAutoMount != oldSettingsUSBAutoMount ||
+		Settings.SDMode != OldSettingsSDMode)
 	{
-		WBFS_CloseAll();
-
-		if(Settings.USBPort != NewSettingsUSBPort)
+		if(!Settings.SDMode)
 		{
-			DeviceHandler::Instance()->UnMountAllUSB();
-			Settings.USBPort = NewSettingsUSBPort;
-			DeviceHandler::Instance()->MountAllUSB();
+			WBFS_CloseAll();
 
-			if(Settings.partition >= DeviceHandler::GetUSBPartitionCount())
-				Settings.partition = 0;
+			if(Settings.USBPort != NewSettingsUSBPort)
+			{
+				DeviceHandler::Instance()->UnMountAllUSB();
+				Settings.USBPort = NewSettingsUSBPort;
+				DeviceHandler::Instance()->MountAllUSB();
 
-			// set -1 to edit meta.xml arguments
-			NewSettingsUSBPort = -1;
+				if(Settings.partition >= DeviceHandler::GetUSBPartitionCount())
+					Settings.partition = 0;
+
+				// set -1 to edit meta.xml arguments
+				NewSettingsUSBPort = -1;
+			}
+
+			WBFS_Init(Settings.SDMode ? WBFS_DEVICE_SDHC : WBFS_DEVICE_USB);
+			if(Settings.MultiplePartitions)
+				WBFS_OpenAll();
+			else
+				WBFS_OpenPart(Settings.partition);
+
+			//! Reload the new game titles
+			gameList.ReadGameList();
+			gameList.LoadUnfiltered();
 		}
-
-		WBFS_Init(WBFS_DEVICE_USB);
-		if(Settings.MultiplePartitions)
-			WBFS_OpenAll();
-		else
-			WBFS_OpenPart(Settings.partition);
-
-		//! Reload the new game titles
-		gameList.ReadGameList();
-		gameList.LoadUnfiltered();
 		
-		if(oldSettingsUSBAutoMount != Settings.USBAutoMount || NewSettingsUSBPort == -1)
+		if(oldSettingsUSBAutoMount != Settings.USBAutoMount || NewSettingsUSBPort == -1 || OldSettingsSDMode != Settings.SDMode)
 		{
 			// edit meta.xml arguments
 			editMetaArguments();
+			gprintf("Updated meta.xml\n");
+		}
+		if(OldSettingsSDMode != Settings.SDMode)
+		{
+			Settings.NandEmuMode = EMUNAND_OFF;
+			RemoveDirectory(Settings.GameHeaderCachePath);
+			RebootApp();
 		}
 	}
 }
@@ -138,17 +156,28 @@ void HardDriveSM::SetOptionValues()
 	int Idx = 0;
 
 	//! Settings: Game/Install Partition
-	PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandleFromPartition(Settings.partition);
-	int checkPart = DeviceHandler::PartitionToPortPartition(Settings.partition);
+	PartitionHandle *handle;
+	int checkPart = 0;
+	if (!Settings.SDMode)
+	{
+		handle = DeviceHandler::Instance()->GetUSBHandleFromPartition(Settings.partition);
+		checkPart = DeviceHandler::PartitionToPortPartition(Settings.partition);
+	}
+	else
+		handle = DeviceHandler::Instance()->GetSDHandle();
 
 	//! Get the partition name and it's size in GB's
-	if(usbHandle)
-		Options->SetValue(Idx++, "%s (%.2fGB)", usbHandle->GetFSName(checkPart), usbHandle->GetSize(checkPart)/GB_SIZE);
+	if (handle)
+		Options->SetValue(Idx++, "%s (%.2fGB)", handle->GetFSName(checkPart), handle->GetSize(checkPart)/GB_SIZE);
 	else
 		Options->SetValue(Idx++, tr("Not Initialized"));
 
 	//! Settings: Multiple Partitions
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.MultiplePartitions] ));
+
+	//! Settings: SD Card Mode
+	if (strncmp(Settings.ConfigPath, "sd", 2) == 0)
+		Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.SDMode] ));
 
 	//! Settings: USB Port
 	if(NewSettingsUSBPort == 2)
@@ -195,10 +224,18 @@ int HardDriveSM::GetMenuInternal()
 	//! Settings: Game/Install Partition
 	if (ret == ++Idx)
 	{
-		// Init the USB device if mounted after launch.
-		PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandleFromPartition(Settings.partition);
-		if(usbHandle == NULL)
-			DeviceHandler::Instance()->MountAllUSB(true);
+		PartitionHandle *handle; 
+		if (Settings.SDMode)
+		{
+			handle = DeviceHandler::Instance()->GetSDHandle();
+		}
+		else
+		{
+			// Init the USB device if mounted after launch
+			handle = DeviceHandler::Instance()->GetUSBHandleFromPartition(Settings.partition);
+			if (handle == NULL)
+				DeviceHandler::Instance()->MountAllUSB(true);
+		}
 
 		// Select the next valid partition, even if that's the same one
 		int fs_type = 0;
@@ -206,12 +243,20 @@ int HardDriveSM::GetMenuInternal()
 		int retries = 20;
 		do
 		{
-			Settings.partition = (Settings.partition + 1) % DeviceHandler::GetUSBPartitionCount();
-			fs_type = DeviceHandler::GetFilesystemType(USB1+Settings.partition);
+			if (Settings.SDMode)
+			{
+				Settings.partition = 0;
+				fs_type = DeviceHandler::GetFilesystemType(SD);
+			}
+			else
+			{
+				Settings.partition = (Settings.partition + 1) % DeviceHandler::GetUSBPartitionCount();
+				fs_type = DeviceHandler::GetFilesystemType(USB1+Settings.partition);
+			}
 		}
 		while (!IsValidPartition(fs_type, ios) && --retries > 0);
 
-		if(fs_type == PART_FS_FAT && Settings.GameSplit == GAMESPLIT_NONE)
+		if (fs_type == PART_FS_FAT && Settings.GameSplit == GAMESPLIT_NONE)
 			Settings.GameSplit = GAMESPLIT_4GB;
 	}
 
@@ -219,6 +264,12 @@ int HardDriveSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.MultiplePartitions >= MAX_ON_OFF) Settings.MultiplePartitions = 0;
+	}
+
+	//! Settings: SD Card Mode
+	else if (strncmp(Settings.ConfigPath, "sd", 2) == 0 && ret == ++Idx)
+	{
+		if (++Settings.SDMode >= MAX_ON_OFF) Settings.SDMode = 0;
 	}
 
 	//! Settings: USB Port
@@ -252,7 +303,7 @@ int HardDriveSM::GetMenuInternal()
 	{
 		if (++Settings.GameSplit >= GAMESPLIT_MAX)
 		{
-			if(DeviceHandler::GetFilesystemType(USB1+Settings.partition) == PART_FS_FAT)
+			if (DeviceHandler::GetFilesystemType(Settings.SDMode ? SD : USB1+Settings.partition) == PART_FS_FAT)
 				Settings.GameSplit = GAMESPLIT_2GB;
 			else
 				Settings.GameSplit = GAMESPLIT_NONE;
@@ -293,20 +344,25 @@ int HardDriveSM::GetMenuInternal()
 	else if (ret == ++Idx )
 	{
 		int choice = WindowPrompt(0, tr("Do you want to sync free space info sector on all FAT32 partitions?"), tr("Yes"), tr("Cancel"));
-		if(choice)
+		if (choice)
 		{
 			StartProgress(tr("Synchronizing..."), tr("Please wait..."), 0, false, false);
-			int partCount = DeviceHandler::GetUSBPartitionCount();
-			for(int i = 0; i < partCount; ++i)
+			int partCount = Settings.SDMode ? 1 : DeviceHandler::GetUSBPartitionCount();
+			for (int i = 0; i < partCount; ++i)
 			{
 				ShowProgress(i, partCount);
-				if(DeviceHandler::GetFilesystemType(USB1+i) == PART_FS_FAT)
+				if (DeviceHandler::GetFilesystemType(Settings.SDMode ? SD : USB1+i) == PART_FS_FAT)
 				{
-					PartitionHandle *usb = DeviceHandler::Instance()->GetUSBHandleFromPartition(i);
-					if(!usb) continue;
+					PartitionHandle *handle;
+					if (Settings.SDMode)
+						handle = DeviceHandler::Instance()->GetSDHandle();
+					else
+						handle = DeviceHandler::Instance()->GetUSBHandleFromPartition(i);
+					if (!handle)
+						continue;
 					struct statvfs stats;
 					char drive[20];
-					snprintf(drive, sizeof(drive), "%s:/", usb->MountName(i));
+					snprintf(drive, sizeof(drive), "%s:/", handle->MountName(i));
 					memset(&stats, 0, sizeof(stats));
 					memcpy(&stats.f_flag, "SCAN", 4);
 					statvfs(drive, &stats);

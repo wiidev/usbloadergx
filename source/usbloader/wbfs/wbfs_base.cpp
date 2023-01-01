@@ -22,7 +22,7 @@ s32 Wbfs::Init(u32 device)
 {
 	s32 ret;
 
-	switch (WBFS_DEVICE_USB)
+	switch (device)
 	{
 		case WBFS_DEVICE_USB:
 			/* Initialize USB storage */

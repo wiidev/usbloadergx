@@ -234,7 +234,7 @@ LoaderSettings::~LoaderSettings()
 	{
 		if(Settings.LoaderMode & MODE_WIIGAMES && (gameList.GameCount() == 0))
 		{
-			WBFS_ReInit(WBFS_DEVICE_USB);
+			WBFS_ReInit(Settings.SDMode ? WBFS_DEVICE_SDHC : WBFS_DEVICE_USB);
 			gameList.ReadGameList();
 		}
 
@@ -774,7 +774,13 @@ int LoaderSettings::GetMenuInternal()
 	//! Settings: EmuNAND Save Mode
 	else if (ret == ++Idx )
 	{
-		if (Settings.AutoIOS == GAME_IOS_CUSTOM && !IosLoader::IsD2X(Settings.cios))
+		if (Settings.SDMode)
+		{
+			// D2X can't load a game from an SD and save to an SD at the same time
+			WindowPrompt(tr("Warning:"), tr("This setting doesn't work in SD card mode."), tr("OK"));
+			Settings.NandEmuMode = EMUNAND_OFF;
+		}
+		else if (Settings.AutoIOS == GAME_IOS_CUSTOM && !IosLoader::IsD2X(Settings.cios))
 		{
 			WindowPrompt(tr("Error:"), tr("NAND emulation is only available on D2X cIOS!"), tr("OK"));
 			Settings.NandEmuMode = EMUNAND_OFF;

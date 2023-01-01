@@ -188,7 +188,7 @@ int GameList::ReadGameList(bool use_cache)
 
 	int cnt = 0;
 
-	if (!Settings.MultiplePartitions)
+	if (Settings.SDMode || !Settings.MultiplePartitions)
 	{
 		cnt = InternalReadList(Settings.partition);
 	}

@@ -92,7 +92,7 @@ PartitionHandle::PartitionHandle(const DISC_INTERFACE *discio)
 
 PartitionHandle::~PartitionHandle()
 {
-	 UnMountAll();
+	UnMountAll();
 
 	//shutdown device
 	interface->shutdown();

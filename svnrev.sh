@@ -53,6 +53,7 @@ cat <<EOF > ./HBC/meta.xml
 		<arg>--bootios=58</arg>
 		<arg>--usbport=0</arg>
 		<arg>--mountusb=1</arg>
+		<arg>--sdmode=0</arg>
 	</arguments>
 	remove this line to enable arguments -->
 	<ahb_access/>

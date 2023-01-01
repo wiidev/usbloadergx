@@ -77,6 +77,43 @@ static int FindGamePartition()
 	return -1;
 }
 
+static int FindGamePartitionSD()
+{
+	// Check for a WBFS partition first in case IOS249 Rev < 18
+	if (DeviceHandler::GetFilesystemType(0) == PART_FS_WBFS)
+	{
+		if (WBFS_OpenPart(0) == 0)
+		{
+			GameTitles.SortTitleList();
+			Settings.partition = 0;
+			return 0;
+		}
+	}
+
+	if (IosLoader::IsWaninkokoIOS() && NandTitles.VersionOf(TITLE_ID(1, IOS_GetVersion())) < 18)
+		return -1;
+
+	// Check if it's a FAT/NTFS/EXT partition and if it's got games on it
+	if (DeviceHandler::GetFilesystemType(0) == PART_FS_NTFS || DeviceHandler::GetFilesystemType(0) == PART_FS_FAT || DeviceHandler::GetFilesystemType(0) == PART_FS_EXT)
+	{
+		if (WBFS_OpenPart(0) == 0)
+		{
+			u32 count;
+			// Get the game count...
+			WBFS_GetCount(0, &count);
+			if (count > 0)
+			{
+				GameTitles.SortTitleList();
+				Settings.partition = 0;
+				return 0;
+			}
+			WBFS_Close(0);
+		}
+	}
+
+	return -1;
+}
+
 static int PartitionChoice()
 {
 	int ret = -1;
@@ -127,13 +164,13 @@ int MountGamePartition(bool ShowGUI)
 	s32 ret = -1;
 	gprintf("MountGamePartition()\n");
 
-	s32 wbfsinit = WBFS_Init(WBFS_DEVICE_USB);
+	s32 wbfsinit = WBFS_Init(Settings.SDMode ? WBFS_DEVICE_SDHC : WBFS_DEVICE_USB);
 
 	if (wbfsinit < 0)
 	{
-		if(Settings.LoaderMode & MODE_WIIGAMES)
+		if (Settings.LoaderMode & MODE_WIIGAMES)
 		{
-			if(ShowGUI)
+			if (ShowGUI)
 				ShowError("%s %s", tr( "USB Device not initialized." ), tr("Switching to channel list mode."));
 
 			Settings.LoaderMode &= ~MODE_WIIGAMES;
@@ -142,19 +179,21 @@ int MountGamePartition(bool ShowGUI)
 	}
 	else
 	{
-		if(Settings.MultiplePartitions)
+		if (Settings.SDMode)
+			ret = WBFS_OpenPart(Settings.partition);
+		else if (Settings.MultiplePartitions)
 			ret = WBFS_OpenAll();
-		else if(!Settings.FirstTimeRun)
+		else if (!Settings.FirstTimeRun)
 			ret = WBFS_OpenPart(Settings.partition);
 
-		if(Settings.LoaderMode & MODE_WIIGAMES)
+		if (Settings.LoaderMode & MODE_WIIGAMES)
 		{
-			if(ret < 0)
-				ret = FindGamePartition();
+			if (ret < 0)
+				ret = Settings.SDMode ? FindGamePartitionSD() : FindGamePartition();
 
-			if(ret < 0)
+			if (ret < 0)
 			{
-				if(ShowGUI)
+				if (ShowGUI && !Settings.SDMode)
 					PartitionChoice();
 				else
 					Settings.LoaderMode = MODE_NANDCHANNELS;
@@ -166,12 +205,12 @@ int MountGamePartition(bool ShowGUI)
 	ret = Disc_Init();
 	if (ret < 0)
 	{
-		if(ShowGUI)
+		if (ShowGUI)
 			WindowPrompt(tr( "Error !" ), tr( "Could not initialize DIP module!" ), tr( "OK" ));
 		Sys_LoadMenu();
 	}
 
-	if(ShowGUI && Settings.CacheCheck && !isCacheCurrent())
+	if (ShowGUI && Settings.CacheCheck && !isCacheCurrent())
 		ResetGameHeaderCache();
 
 	gameList.LoadUnfiltered();

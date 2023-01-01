@@ -247,6 +247,7 @@ class CSettings
 		// These variables are not saved to the settings file
 		bool FirstTimeRun;
 		bool skipSaving;
+		short SDMode;
 	protected:
 		bool ValidVersion(FILE * file);
 		bool ValidateURL(char *value, int type = 0);

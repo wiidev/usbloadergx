@@ -30,8 +30,6 @@
 #include <ogc/system.h>
 #include <sdcard/wiisd_io.h>
 #include <sdcard/gcsd.h>
-#include "settings/CSettings.h"
-#include "usbloader/usbstorage2.h"
 #include "DeviceHandler.hpp"
 #include "usbloader/wbfs.h"
 #include "system/IosLoader.h"
@@ -120,7 +118,7 @@ bool DeviceHandler::IsInserted(int dev)
 
 void DeviceHandler::UnMount(int dev)
 {
-	if(dev == SD)
+	if(dev == SD && !Settings.SDMode)
 		UnMountSD();
 
 	else if(dev >= USB1 && dev <= USB8)
@@ -130,7 +128,7 @@ void DeviceHandler::UnMount(int dev)
 bool DeviceHandler::MountSD()
 {
 	if(!sd)
-		sd = new PartitionHandle(&__io_wiisd);
+		sd = new PartitionHandle(GetSDInterface());
 
 	if(sd->GetPartitionCount() < 1)
 	{

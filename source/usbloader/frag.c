@@ -159,7 +159,7 @@ int frag_remap(FragList *ff, FragList *log, FragList *phy)
 	return 0;
 }
 
-int get_frag_list_for_file(char *fname, u8 *id, const u8 wbfs_part_fs, const u32 lba_offset, const u32 hdd_sector_size)
+int get_frag_list_for_file(char *fname, u8 *id, const u8 wbfs_part_fs, const u32 lba_offset, const u32 sector_size)
 {
 	struct stat st;
 	FragList *fs = NULL;
@@ -218,7 +218,7 @@ int get_frag_list_for_file(char *fname, u8 *id, const u8 wbfs_part_fs, const u32
 			// if wbfs file format, remap.
 			wbfs_disc_t *d = WBFS_OpenDisc(id);
 			if (!d) { ret_val = -4; WBFS_CloseDisc(d); goto out; }
-			ret = wbfs_get_fragments(d, &frag_append, fs, hdd_sector_size);
+			ret = wbfs_get_fragments(d, &frag_append, fs, sector_size);
 			WBFS_CloseDisc(d);
 			if (ret) { ret_val = -5; goto out; }
 		}
@@ -232,7 +232,7 @@ int get_frag_list_for_file(char *fname, u8 *id, const u8 wbfs_part_fs, const u32
 		wbfs_disc_t *d = WBFS_OpenDisc(id);
 		if (!d) { ret_val = -4; goto out; }
 		frag_init(fw, MAX_FRAG);
-		ret = wbfs_get_fragments(d, &frag_append, fw, hdd_sector_size);
+		ret = wbfs_get_fragments(d, &frag_append, fw, sector_size);
 		if (ret) { ret_val = -5; goto out; }
 		WBFS_CloseDisc(d);
 		// DEBUG: frag_list->num = MAX_FRAG-10; // stress test
@@ -262,17 +262,16 @@ int get_frag_list(u8 *id)
 	return WBFS_GetFragList(id);
 }
 
-int set_frag_list(u8 *id)
+int set_frag_list(u8 *id, bool sd_only)
 {
-	if (frag_list == NULL) {
+	if (frag_list == NULL)
 		return -2;
-	}
 
 	// (+1 for header which is same size as fragment)
 	int size = sizeof(Fragment) * (frag_list->num + 1);
 
 	gprintf("Calling WDVD_SetFragList, frag list size %d\n", size);
-	int ret = WDVD_SetFragList(WBFS_MIN_DEVICE, frag_list, size);
+	int ret = WDVD_SetFragList(sd_only ? 2 : WBFS_DEVICE_USB, frag_list, size);
 
 	free(frag_list);
 	frag_list = NULL;

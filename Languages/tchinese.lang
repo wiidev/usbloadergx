@@ -1920,6 +1920,9 @@ msgstr ""
 msgid "SD Card could not be accessed."
 msgstr "SD卡無法存取"
 
+msgid "SD Card Mode"
+msgstr ""
+
 msgid "SD GameCube Games Path"
 msgstr "SD卡 GameCube遊戲路徑"
 
@@ -2205,6 +2208,9 @@ msgstr "此遊戲為多重光碟。請選擇光碟啟動。"
 
 msgid "This path must be on SD!"
 msgstr "此路徑必須是在SD卡上！"
+
+msgid "This setting doesn't work in SD card mode."
+msgstr ""
 
 msgid "Time left:"
 msgstr "剩餘時間："

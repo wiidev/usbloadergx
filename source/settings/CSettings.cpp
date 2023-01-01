@@ -881,7 +881,7 @@ bool CSettings::SetSetting(char *name, char *value)
 	}
 	else if(strcmp(name, "NandEmuMode") == 0)
 	{
-		NandEmuMode = atoi(value);
+		NandEmuMode = SDMode ? EMUNAND_OFF : atoi(value);
 	}
 	else if(strcmp(name, "NandEmuChanMode") == 0)
 	{

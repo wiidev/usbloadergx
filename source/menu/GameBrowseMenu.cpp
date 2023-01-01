@@ -962,7 +962,7 @@ int GameBrowseMenu::MainLoop()
 			this->SetState(STATE_DISABLED);
 			if (!(Settings.LoaderMode & MODE_WIIGAMES) && (gameList.GameCount() == 0))
 			{
-				if (WBFS_ReInit(WBFS_DEVICE_USB) < 0)
+				if (WBFS_ReInit(Settings.SDMode ? WBFS_DEVICE_SDHC : WBFS_DEVICE_USB) < 0)
 					ShowError(tr("Failed to initialize the USB storage device."));
 				else
 				{
@@ -1339,16 +1339,17 @@ int GameBrowseMenu::MainLoop()
 
 			if((Settings.LoaderMode & MODE_WIIGAMES) && (gameList.GameCount() == 0))
 			{
-				s32 wbfsinit = WBFS_Init(WBFS_DEVICE_USB);
+				s32 wbfsinit = WBFS_Init(Settings.SDMode ? WBFS_DEVICE_SDHC : WBFS_DEVICE_USB);
 				if (wbfsinit < 0)
 				{
+					// This shouldn't ever fail in SD card mode
 					ShowError("%s %s", tr( "USB Device not initialized." ), tr("Switching to channel list mode."));
 					Settings.LoaderMode &= ~MODE_WIIGAMES;
 					Settings.LoaderMode |= MODE_NANDCHANNELS;
 				}
 				else
 				{
-					WBFS_ReInit(WBFS_DEVICE_USB);
+					WBFS_ReInit(Settings.SDMode ? WBFS_DEVICE_SDHC : WBFS_DEVICE_USB);
 				}
 				gameList.ReadGameList(true);
 

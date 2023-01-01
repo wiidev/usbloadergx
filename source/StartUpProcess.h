@@ -30,7 +30,9 @@ private:
 	GuiText *versionTxt;
 	GuiText *cancelTxt;
 	GuiButton *cancelBtn;
+	GuiButton *sdmodeBtn;
 	GuiTrigger *trigB;
+	GuiTrigger *trigA;
 };
 
 #endif

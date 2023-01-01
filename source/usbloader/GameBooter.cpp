@@ -59,6 +59,7 @@
 #include "neek.hpp"
 #include "lstub.h"
 #include "xml/GameTDB.hpp"
+#include "usbloader/sdhc.h"
 #include "wad/nandtitle.h"
 
 /* GCC 11 false positives */
@@ -72,6 +73,7 @@ u32 AppEntrypoint = 0;
 
 extern bool isWiiVC; // in sys.cpp
 extern u32 hdd_sector_size[2];
+extern u8 sdhc_mode_sd;
 extern std::vector<struct d2x> d2x_list;
 extern "C"
 {
@@ -136,7 +138,7 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 
 u32 GameBooter::BootPartition(char *dolpath, u8 videoselected, u8 alternatedol, u32 alternatedoloffset)
 {
-	gprintf("booting partition IOS %u r%u\n", IOS_GetVersion(), IOS_GetRevision());
+	gprintf("Booting partition IOS %u r%u\n", IOS_GetVersion(), IOS_GetRevision());
 	entry_point p_entry;
 	s32 ret;
 	u64 offset;
@@ -207,6 +209,7 @@ void GameBooter::SetupNandEmu(u8 NandEmuMode, const char *NandEmuPath, struct di
 		}
 		else
 		{
+			//! Can't play from an SD card while saving to an SD card with bases other than 56 & 57
 			DeviceHandler::Instance()->UnMountSD();
 		}
 
@@ -222,7 +225,7 @@ int GameBooter::SetupDisc(struct discHdr &gameHeader)
 {
 	if (gameHeader.type == TYPE_GAME_WII_DISC)
 	{
-		gprintf("\tloading DVD\n");
+		gprintf("Loading DVD\n");
 		return Disc_Open();
 	}
 
@@ -243,10 +246,10 @@ int GameBooter::SetupDisc(struct discHdr &gameHeader)
 		gprintf("%d\n", ret);
 		if (ret < 0)
 			return ret;
-		ret = set_frag_list(gameHeader.id);
+		ret = set_frag_list(gameHeader.id, Settings.SDMode);
 		if (ret < 0)
 			return ret;
-		gprintf("\tUSB set to game\n");
+		gprintf("%s set to game\n", Settings.SDMode ? "SD" : "USB");
 	}
 
 	gprintf("Disc_Open()...");
@@ -286,7 +289,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	struct discHdr gameHeader;
 	memcpy(&gameHeader, gameHdr, sizeof(struct discHdr));
 
-	gprintf("\tBoot Game: %s (%.6s)\n", gameHeader.title, gameHeader.id);
+	gprintf("Boot Game: %s (%.6s)\n", gameHeader.title, gameHeader.id);
 
 	// Load the HBC from NAND instead of from the homebrew browser
 	if (memcmp(gameHeader.id, "JODI", 4) == 0)
@@ -323,7 +326,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	u64 returnToChoice = strlen(Settings.returnTo) > 0 ? (game_cfg->returnTo ? NandTitles.FindU32(Settings.returnTo) : 0) : 0;
 	u8 NandEmuMode = OFF;
 	const char *NandEmuPath = game_cfg->NandEmuPath.size() == 0 ? Settings.NandEmuPath : game_cfg->NandEmuPath.c_str();
-	if (gameHeader.type == TYPE_GAME_WII_IMG)
+	if (gameHeader.type == TYPE_GAME_WII_IMG && !Settings.SDMode)
 		NandEmuMode = game_cfg->NandEmuMode == INHERIT ? Settings.NandEmuMode : game_cfg->NandEmuMode;
 	if (gameHeader.type == TYPE_GAME_EMUNANDCHAN)
 	{
@@ -422,6 +425,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 					++cios;
 			}
 
+			bool sdEmuNAND = false;
 			gprintf("Requested IOS: %d\n", requestedIOS);
 			// Workaround for SpongeBobs Boating Bash
 			if (memcmp(gameHeader.id, "SBV", 3) == 0)
@@ -432,8 +436,23 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 					if (isWiiU())
 						requestedIOS = 58;
 					else
+						// Saves will go to NAND in SD card mode if using base 38
 						requestedIOS = IosLoader::GetD2XIOS(58) ? 58 : 38;
 					gprintf("Applied SpongeBob workaround\n");
+				}
+			}
+			// The d2x cIOS can only save to SD cards with bases 56-60
+			else if ((strncmp(NandEmuPath, "sd", 2) == 0 && NandEmuMode > EMUNAND_OFF) || Settings.SDMode)
+			{
+				for (auto cios = d2x_list.begin(); cios != d2x_list.end();)
+				{
+					if (cios->base < 56 || cios->base > 60)
+					{
+						cios = d2x_list.erase(cios);
+						sdEmuNAND = true;
+					}
+					else
+						++cios;
 				}
 			}
 
@@ -461,7 +480,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 						requestedIOS = cios->base;
 						iosChoice = cios->slot;
 					}
-					gprintf("Next best IOS: %d\n", requestedIOS);
+					gprintf("Next best IOS: %d%s\n", requestedIOS, sdEmuNAND ? " (restricted to 56-60)" : "");
 				}
 				gprintf("Boot with IOS: %d base %d\n", iosChoice, requestedIOS);
 			}
@@ -469,7 +488,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	}
 	AppCleanUp();
 
-	gprintf("\tSettings.partition: %d\n", Settings.partition);
+	gprintf("Settings.partition: %d\n", Settings.partition);
 
 	s32 ret = -1;
 
@@ -487,6 +506,13 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 		IosLoader::LoadGameCios(iosChoice);
 		if (MountGamePartition(false) < 0)
 			return -1;
+	}
+	//! Boot with custom SD code, otherwise the game ID won't match
+	else if (sdhc_mode_sd)
+	{
+		DeviceHandler::Instance()->UnMountSD();
+		sdhc_mode_sd = 0;
+		DeviceHandler::Instance()->MountSD();
 	}
 
 	//! Modify Wii Message Board to display the game starting here (before NAND Emu)
@@ -553,8 +579,16 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 		{
 			//! Setup IOS reload block
 			enable_ES_ioctlv_vector();
-			if (gameList.GetGameFS(gameHeader.id) == PART_FS_WBFS)
-				mload_close();
+			if (Settings.SDMode)
+			{
+				if (gameList.GetGameFSSD() == PART_FS_WBFS)
+					mload_close();
+			}
+			else
+			{
+				if (gameList.GetGameFS(gameHeader.id) == PART_FS_WBFS)
+					mload_close();
+			}
 		}
 	}
 	else if (IosLoader::IsD2X(iosChoice))
@@ -583,7 +617,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	//! Load main.dol or alternative dol into memory, start the game apploader and get game entrypoint
 	if (gameHeader.tid == 0)
 	{
-		gprintf("\tGame Boot\n");
+		gprintf("Game Boot\n");
 		AppEntrypoint = BootPartition(Settings.dolpath, videoChoice, alternatedol, alternatedoloffset);
 		// Reading of game is done we can close devices now
 		ShutDownDevices(usbport);
@@ -592,7 +626,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	{
 		//! shutdown now and avoid later crashes with free if memory gets overwritten by channel
 		ShutDownDevices(DeviceHandler::PartitionToUSBPort(std::max(atoi(NandEmuPath + 3) - 1, 0)));
-		gprintf("\tChannel Boot\n");
+		gprintf("Channel Boot\n");
 		/* Setup video mode */
 		Disc_SelectVMode(videoChoice, false, NULL, NULL);
 		// Load dol

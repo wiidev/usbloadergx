@@ -1920,6 +1920,9 @@ msgstr ""
 msgid "SD Card could not be accessed."
 msgstr "SD-kortet kunne ikke tilgås."
 
+msgid "SD Card Mode"
+msgstr ""
+
 msgid "SD GameCube Games Path"
 msgstr "SD GameCube Spil Sti"
 
@@ -2205,6 +2208,9 @@ msgstr "Dette spil har flere disks. Vælg venligst disken der skal startes."
 
 msgid "This path must be on SD!"
 msgstr "Denne sti skal være på SD!"
+
+msgid "This setting doesn't work in SD card mode."
+msgstr ""
 
 msgid "Time left:"
 msgstr "Tid tilbage:"

@@ -14,7 +14,7 @@
 #define SDHC_HEAPSIZE	   0x8000
 #define SDHC_MEM2_SIZE	  0x10000
 
-int sdhc_mode_sd = 0;
+u8 sdhc_mode_sd = 0;
 
 /* Variables */
 static char fs[] ATTRIBUTE_ALIGN( 32 ) = "/dev/sdio/sdhc";

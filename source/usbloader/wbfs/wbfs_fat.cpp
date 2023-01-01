@@ -59,7 +59,18 @@ s32 Wbfs_Fat::Open()
 {
 	Close();
 
-	if(partition < (u32) DeviceHandler::GetUSBPartitionCount())
+	if (Settings.SDMode)
+	{
+		PartitionHandle *sdHandle = DeviceHandler::Instance()->GetSDHandle();
+		if (lba == sdHandle->GetLBAStart(0))
+		{
+			snprintf(wbfs_fs_drive, sizeof(wbfs_fs_drive), "sd:");
+			return 0;
+		}
+		return -1;
+	}
+
+	if (partition < (u32)DeviceHandler::GetUSBPartitionCount())
 	{
 		PartitionHandle *usbHandle = DeviceHandler::Instance()->GetUSBHandleFromPartition(partition);
 		int portPart = DeviceHandler::PartitionToPortPartition(partition);
@@ -762,8 +773,11 @@ wbfs_t* Wbfs_Fat::CreatePart(u8 *id, char *path)
 	// 1 cluster less than 4gb
 	u64 OPT_split_size = 4LL * 1024 * 1024 * 1024 - 32 * 1024;
 
-	if(Settings.GameSplit == GAMESPLIT_NONE && DeviceHandler::GetFilesystemType(USB1+Settings.partition) != PART_FS_FAT)
-		OPT_split_size = (u64) 100LL * 1024 * 1024 * 1024 - 32 * 1024;
+	if(Settings.SDMode && Settings.GameSplit == GAMESPLIT_NONE && DeviceHandler::GetFilesystemType(SD) != PART_FS_FAT)
+			OPT_split_size = (u64) 100LL * 1024 * 1024 * 1024 - 32 * 1024;
+
+	else if(Settings.GameSplit == GAMESPLIT_NONE && DeviceHandler::GetFilesystemType(USB1+Settings.partition) != PART_FS_FAT)
+			OPT_split_size = (u64) 100LL * 1024 * 1024 * 1024 - 32 * 1024;
 
 	else if(Settings.GameSplit == GAMESPLIT_2GB)
 		// 1 cluster less than 2gb

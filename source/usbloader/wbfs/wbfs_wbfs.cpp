@@ -19,7 +19,10 @@ s32 Wbfs_Wbfs::Open()
 	PartInfo.hdd_sector_size = hdd_sector_size[usbport];
 	PartInfo.partition_lba = lba;
 	PartInfo.partition_num_sec = size;
-	PartInfo.handle = (usbport == 0) ? DeviceHandler::GetUSB0Interface() : DeviceHandler::GetUSB1Interface();
+	if (Settings.SDMode)
+		PartInfo.handle = DeviceHandler::GetSDInterface();
+	else
+		PartInfo.handle = (usbport == 0) ? DeviceHandler::GetUSB0Interface() : DeviceHandler::GetUSB1Interface();
 
 	u8 * buffer = (u8 *) malloc(MAX_WBFS_SECTORSIZE);
 	memset(buffer, 0, MAX_WBFS_SECTORSIZE);
