@@ -1,7 +1,7 @@
 /****************************************************************************
  * USB Loader GX resource files.
  * This file is generated automatically.
- * Includes 200 files.
+ * Includes 199 files.
  *
  * NOTE:
  * Any manual modification of this file will be overwriten by the generation.
@@ -572,17 +572,14 @@ extern const u32 zapperR_png_size;
 extern const u8 bg_music_ogg[];
 extern const u32 bg_music_ogg_size;
 
-extern const u8 button_click_wav[];
-extern const u32 button_click_wav_size;
+extern const u8 button_click_ogg[];
+extern const u32 button_click_ogg_size;
 
-extern const u8 button_click2_wav[];
-extern const u32 button_click2_wav_size;
+extern const u8 button_click2_ogg[];
+extern const u32 button_click2_ogg_size;
 
-extern const u8 button_over_wav[];
-extern const u32 button_over_wav_size;
-
-extern const u8 credits_music_ogg[];
-extern const u32 credits_music_ogg_size;
+extern const u8 button_over_ogg[];
+extern const u32 button_over_ogg_size;
 
 extern const u8 gc_banner_ogg[];
 extern const u32 gc_banner_ogg_size;
@@ -800,10 +797,9 @@ RecourceFile Resources::RecourceFiles[] =
 	{"zapper.png", zapper_png, zapper_png_size, NULL, 0},
 	{"zapperR.png", zapperR_png, zapperR_png_size, NULL, 0},
 	{"bg_music.ogg", bg_music_ogg, bg_music_ogg_size, NULL, 0},
-	{"button_click.wav", button_click_wav, button_click_wav_size, NULL, 0},
-	{"button_click2.wav", button_click2_wav, button_click2_wav_size, NULL, 0},
-	{"button_over.wav", button_over_wav, button_over_wav_size, NULL, 0},
-	{"credits_music.ogg", credits_music_ogg, credits_music_ogg_size, NULL, 0},
+	{"button_click.ogg", button_click_ogg, button_click_ogg_size, NULL, 0},
+	{"button_click2.ogg", button_click2_ogg, button_click2_ogg_size, NULL, 0},
+	{"button_over.ogg", button_over_ogg, button_over_ogg_size, NULL, 0},
 	{"gc_banner.ogg", gc_banner_ogg, gc_banner_ogg_size, NULL, 0},
 	{"menuin.ogg", menuin_ogg, menuin_ogg_size, NULL, 0},
 	{"menuout.ogg", menuout_ogg, menuout_ogg_size, NULL, 0},

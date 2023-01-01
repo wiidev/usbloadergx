@@ -160,7 +160,7 @@ int OnScreenNumpad(char * var, u32 maxlen)
 	mainWindow->Remove(&numpad);
 	mainWindow->SetState(STATE_DEFAULT);
 	ResumeGui();
-	gprintf("\t%s", (save == 1 ? "saved" : "discarded"));
+	gprintf("\t%s\n", (save == 1 ? "saved" : "discarded"));
 	return save;
 }
 
@@ -234,7 +234,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min, bool hide, bool restrict)
 	mainWindow->Remove(&keyboard);
 	mainWindow->SetState(STATE_DEFAULT);
 	ResumeGui();
-	gprintf("\t%s", (save ? "saved" : "discarded"));
+	gprintf("\t%s\n", (save ? "saved" : "discarded"));
 	return save;
 }
 
@@ -247,15 +247,6 @@ void WindowCredits()
 	gprintf("WindowCredits()\n");
 
 	int angle = 0;
-	GuiSound * creditsMusic = NULL;
-
-	bgMusic->Pause();
-
-	creditsMusic = new GuiSound(Resources::GetFile("credits_music.ogg"), Resources::GetFileSize("credits_music.ogg"), 55);
-	creditsMusic->SetVolume(60);
-	creditsMusic->SetLoop(1);
-	creditsMusic->Play();
-
 	GuiTrigger trigA;
 	trigA.SetButtonOnlyTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 	GuiTrigger trigB;
@@ -393,7 +384,7 @@ void WindowCredits()
 	currentTxt->SetFont(creditsFont, creditsFontSize);
 	txt.push_back(currentTxt);
 
-	currentTxt = new GuiText("https://sourceforge.net/p/usbloadergx/", 20, ( GXColor ) {255, 255, 255, 255});
+	currentTxt = new GuiText("https://github.com/wiidev/usbloadergx", 20, ( GXColor ) {255, 255, 255, 255});
 	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	currentTxt->SetPosition(160, y);
 	currentTxt->SetFont(creditsFont, creditsFontSize);
@@ -408,14 +399,14 @@ void WindowCredits()
 	currentTxt->SetFont(creditsFont, creditsFontSize);
 	txt.push_back(currentTxt);
 
-	currentTxt = new GuiText("Cyan / Dimok / nIxx / giantpune / ardi / hungyip84");
+	currentTxt = new GuiText("Cyan / Dimok / blackb0x / nIxx / giantpune / ardi");
 	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	currentTxt->SetPosition(160, y);
 	currentTxt->SetFont(creditsFont, creditsFontSize);
 	txt.push_back(currentTxt);
 	y += 20;
 
-	currentTxt = new GuiText("DrayX7 / lustar / r-win / WiiShizzza / blackb0x");
+	currentTxt = new GuiText("hungyip84 / DrayX7 / lustar / r-win / WiiShizzza");
 	currentTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	currentTxt->SetPosition(160, y);
 	currentTxt->SetFont(creditsFont, creditsFontSize);
@@ -563,10 +554,6 @@ void WindowCredits()
 		starImg.SetAngle(angle);
 	}
 	backBtn.ResetState();
-	
-	creditsMusic->Stop();
-
-	delete creditsMusic;
 
 	creditsWindow.SetEffect(EFFECT_FADE, -30);
 	while (creditsWindow.GetEffect() > 0)
@@ -581,8 +568,6 @@ void WindowCredits()
 	}
 	Settings.FontScaleFactor = oldFontScale;
 	ResumeGui();
-
-	bgMusic->Resume();
 }
 
 /****************************************************************************
@@ -704,8 +689,8 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
  * Displays a prompt window to user, with information, an error message, or
  * presenting a user with a choice of up to 4 Buttons.
  *
- * Give him 1 Titel, 1 Subtitel and 4 Buttons
- * If titel/subtitle or one of the buttons is not needed give him a 0 on that
+ * Give him 1 title, 1 subtitle and 4 buttons
+ * If title/subtitle or one of the buttons is not needed give him a 0 on that
  * place.
  ***************************************************************************/
 int WindowExitPrompt()

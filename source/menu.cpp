@@ -170,12 +170,9 @@ int MainMenu(int menu)
 
 	InitProgressThread();
 
-	btnSoundClick = new GuiSound(NULL, 0, Settings.sfxvolume);
-	btnSoundClick->LoadSoundEffect(Resources::GetFile("button_click.wav"), Resources::GetFileSize("button_click.wav"));
-	btnSoundClick2 = new GuiSound(NULL, 0, Settings.sfxvolume);
-	btnSoundClick2->LoadSoundEffect(Resources::GetFile("button_click2.wav"), Resources::GetFileSize("button_click2.wav"));
-	btnSoundOver = new GuiSound(NULL, 0, Settings.sfxvolume);
-	btnSoundOver->LoadSoundEffect(Resources::GetFile("button_over.wav"), Resources::GetFileSize("button_over.wav"));
+	btnSoundClick = new GuiSound(Resources::GetFile("button_click.ogg"), Resources::GetFileSize("button_click.ogg"), Settings.sfxvolume);
+	btnSoundClick2 = new GuiSound(Resources::GetFile("button_click2.ogg"), Resources::GetFileSize("button_click2.ogg"), Settings.sfxvolume);
+	btnSoundOver = new GuiSound(Resources::GetFile("button_over.ogg"), Resources::GetFileSize("button_over.ogg"), Settings.sfxvolume);
 
 	pointer[0] = new WiiPointer("player1_point.png");
 	pointer[1] = new WiiPointer("player2_point.png");

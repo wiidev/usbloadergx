@@ -55,9 +55,9 @@ void Theme::Reload()
 	delete btnSoundClick;
 	delete btnSoundClick2;
 	delete btnSoundOver;
-	btnSoundClick = new GuiSound(Resources::GetFile("button_click.wav"), Resources::GetFileSize("button_click.wav"), Settings.sfxvolume);
-	btnSoundClick2 = new GuiSound(Resources::GetFile("button_click2.wav"), Resources::GetFileSize("button_click2.wav"), Settings.sfxvolume);
-	btnSoundOver = new GuiSound(Resources::GetFile("button_over.wav"), Resources::GetFileSize("button_over.wav"), Settings.sfxvolume);
+	btnSoundClick = new GuiSound(Resources::GetFile("button_click.ogg"), Resources::GetFileSize("button_click.ogg"), Settings.sfxvolume);
+	btnSoundClick2 = new GuiSound(Resources::GetFile("button_click2.ogg"), Resources::GetFileSize("button_click2.ogg"), Settings.sfxvolume);
+	btnSoundOver = new GuiSound(Resources::GetFile("button_over.ogg"), Resources::GetFileSize("button_over.ogg"), Settings.sfxvolume);
 	delete background;
 	background = Resources::GetImageData(Settings.widescreen ? "wbackground.png" : "background.png");
 	delete bgImg;
