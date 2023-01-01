@@ -28,6 +28,7 @@
 #include "language/gettext.h"
 #include "usbloader/GetMissingGameFiles.hpp"
 #include "utils/StringTools.h"
+#include "usbloader/GameList.h"
 #include "gecko.h"
 
 #define VALID_IMAGE(x) (!(x->size == 36864 || x->size <= 1024 || x->size == 7386 || x->size <= 1174 || x->size == 4446 || x->data == NULL))
@@ -89,6 +90,11 @@ void ImageDownloader::Start()
 
 void ImageDownloader::FindMissingImages()
 {
+	wString oldFilter(gameList.GetCurrentFilter());
+
+	// Make sure that all games are added to the gamelist
+	gameList.LoadUnfiltered();
+
 	if(choices & CheckedBox1)
 		FindMissing(Settings.covers_path, Settings.URL_Covers3D, NULL, tr("Downloading 3D Covers"), NULL, ".png");
 
@@ -117,6 +123,9 @@ void ImageDownloader::FindMissingImages()
 	{
 		FindMissing(Settings.BNRCachePath, Settings.URL_Banners, NULL, tr("Downloading Custom Banners"), NULL, ".bnr");
 	}
+
+	// Bring the game list back to it's old state
+	gameList.FilterList(oldFilter.c_str());
 }
 
 void ImageDownloader::FindMissing(const char *writepath, const char *downloadURL, const char *backupURL, const char *progressTitle, const char *backupProgressTitle, const char *fileExt)
@@ -128,18 +137,7 @@ void ImageDownloader::FindMissing(const char *writepath, const char *downloadURL
 	}
 
 	std::vector<std::string> MissingFilesList;
-
-	if((Settings.LoaderMode & MODE_GCGAMES) && strcmp(fileExt, ".bnr") == 0)
-	{
-		short LoaderModeBackup = Settings.LoaderMode;
-		Settings.LoaderMode = MODE_GCGAMES;		// Limit banner download for GameCube Only.
-		GetMissingGameFiles(writepath, fileExt, MissingFilesList);
-		Settings.LoaderMode = LoaderModeBackup;
-	}
-	else
-	{
-		GetMissingGameFiles(writepath, fileExt, MissingFilesList);
-	}
+	GetMissingGameFiles(writepath, fileExt, MissingFilesList);
 	int size = MissingImages.size();
 	MissingImages.resize(size+MissingFilesList.size());
 

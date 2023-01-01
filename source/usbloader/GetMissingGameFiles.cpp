@@ -1,7 +1,9 @@
 #include <stdio.h>
-#include <string>
+#include <string.h>
 #include <vector>
 #include "FileOperations/fileops.h"
+#include "settings/CSettings.h"
+#include "settings/SettingsEnums.h"
 #include "usbloader/GameList.h"
 #include "wstring.hpp"
 #include "gecko.h"
@@ -20,14 +22,19 @@ int GetMissingGameFiles(const char * path, const char * fileext, std::vector<std
 	char gameID[7];
 	char filepath[512];
 	MissingFilesList.clear();
-	wString oldFilter(gameList.GetCurrentFilter());
-
-	//! make sure that all games are added to the gamelist
-	gameList.LoadUnfiltered();
 
 	for (int i = 0; i < gameList.size(); ++i)
 	{
 		struct discHdr* header = gameList[i];
+
+		// Only GameCube games might have missing banners
+		if (strcmp(fileext, ".bnr") == 0 && !(header->type >= TYPE_GAME_GC_IMG && header->type <= TYPE_GAME_GC_EXTRACTED))
+			continue;
+		
+		// NAND and EmuNAND games don't have disc artwork
+		if (strcmp(path, Settings.disc_path) == 0 && (header->type == TYPE_GAME_NANDCHAN || header->type == TYPE_GAME_EMUNANDCHAN))
+			continue;
+
 		snprintf(gameID, sizeof(gameID), "%s", (char *) header->id);
 		snprintf(filepath, sizeof(filepath), "%s/%s%s", path, gameID, fileext);
 
@@ -63,9 +70,6 @@ int GetMissingGameFiles(const char * path, const char * fileext, std::vector<std
 			MissingFilesList.push_back(std::string(gameID));
 		}
 	}
-
-	//! Bring game list to the old state
-	gameList.FilterList(oldFilter.c_str());
 
 	gprintf(" = %i\n", MissingFilesList.size());
 
