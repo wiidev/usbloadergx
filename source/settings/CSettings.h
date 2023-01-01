@@ -150,6 +150,7 @@ class CSettings
 		short GameSplit;
 		short PlaylogUpdate;
 		short ShowFreeSpace;
+		short ShowGameCount;
 		short HomeMenu;
 		short MultiplePartitions;
 		short USBPort;

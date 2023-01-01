@@ -2001,6 +2001,9 @@ msgstr "배너에서 즐겨착기 보기"
 msgid "Show Free Space"
 msgstr "여유 공간 보기"
 
+msgid "Show Game Count"
+msgstr "게임 수 표시"
+
 msgid "Show Play Count"
 msgstr "재생 횟수 보기"
 

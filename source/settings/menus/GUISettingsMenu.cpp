@@ -156,6 +156,7 @@ GuiSettingsMenu::GuiSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Show Play Count" ));
 	Options->SetName(Idx++, "%s", tr( "Show Favorite on banner" ));
 	Options->SetName(Idx++, "%s", tr( "Show Free Space" ));
+	Options->SetName(Idx++, "%s", tr( "Show Game Count" ));
 	Options->SetName(Idx++, "%s", tr( "HOME Menu" ));
 	Options->SetName(Idx++, "%s", tr( "Use System Font" ));
 	Options->SetName(Idx++, "%s", tr( "Virtual Pointer Speed" ));
@@ -243,6 +244,9 @@ void GuiSettingsMenu::SetOptionValues()
 
 	//! Settings: Show Free Space
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.ShowFreeSpace] ));
+
+	//! Settings: Show Game Count
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.ShowGameCount] ));
 
 	//! Settings: Home Menu style
 	Options->SetValue(Idx++, "%s", tr( HomeMenuText[Settings.HomeMenu] ));
@@ -451,6 +455,12 @@ int GuiSettingsMenu::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.ShowFreeSpace >= MAX_ON_OFF) Settings.ShowFreeSpace = 0;
+	}
+
+	//! Settings: Show Game Count
+	else if (ret == ++Idx)
+	{
+		if (++Settings.ShowGameCount >= MAX_ON_OFF) Settings.ShowGameCount = 0;
 	}
 
 	//! Settings: Home Menu Style

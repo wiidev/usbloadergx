@@ -142,6 +142,7 @@ void CSettings::SetDefault()
 	musicloopmode = ON;
 	marknewtitles = ON;
 	ShowFreeSpace = ON;
+	ShowGameCount = ON;
 	PlaylogUpdate = OFF;
 	ParentalBlocks = BLOCK_ALL;
 	InstallToDir = INSTALL_TO_NAME_GAMEID;
@@ -388,6 +389,7 @@ bool CSettings::Save()
 	fprintf(file, "partition = %d\n", partition);
 	fprintf(file, "marknewtitles = %d\n", marknewtitles);
 	fprintf(file, "ShowFreeSpace = %d\n", ShowFreeSpace);
+	fprintf(file, "ShowGameCount = %d\n", ShowGameCount);
 	fprintf(file, "InstallToDir = %d\n", InstallToDir);
 	fprintf(file, "GameSplit = %d\n", GameSplit);
 	fprintf(file, "InstallPartitions = %08X\n", (unsigned int)InstallPartitions);
@@ -759,6 +761,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "ShowFreeSpace") == 0)
 	{
 		ShowFreeSpace = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "ShowGameCount") == 0)
+	{
+		ShowGameCount = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "HomeMenu") == 0)
