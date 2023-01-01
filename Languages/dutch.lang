@@ -651,6 +651,9 @@ msgstr ""
 msgid "Disc 2"
 msgstr ""
 
+msgid "Disc Artwork"
+msgstr ""
+
 msgid "Disc Artwork Download"
 msgstr "Download disk labels"
 
@@ -674,9 +677,6 @@ msgstr ""
 
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
 msgstr "Disc2 moet in een ongecomprimeerd formaat worden opgeslagen om te werken met DM (L) V2.6+, weet je zeker dat je wilt installeren in een gecomprimeerd formaat?"
-
-msgid "Discarts"
-msgstr "Disk afbeeldingen"
 
 msgid "DiskFlip"
 msgstr ""
@@ -783,8 +783,8 @@ msgstr "HQ volledige hoesjes downloaden"
 msgid "Downloading Full LQ Covers"
 msgstr "LQ volledige hoesjes downloaden "
 
-msgid "Downloading custom Discarts"
-msgstr "Aangepaste disc afbeeldingen downloaden"
+msgid "Downloading Custom Disc Artwork"
+msgstr ""
 
 msgid "Downloading file..."
 msgstr "Bestand downloaden..."
@@ -792,8 +792,8 @@ msgstr "Bestand downloaden..."
 msgid "Downloading image:"
 msgstr "Afbeelding downloaden:"
 
-msgid "Downloading original Discarts"
-msgstr "Originele disc afbeeldingen downloaden"
+msgid "Downloading Original Disc Artwork"
+msgstr ""
 
 msgid "Downloading pagelist:"
 msgstr "Paginalijst downloaden:"
@@ -1026,8 +1026,8 @@ msgstr "Formatteer"
 msgid "Formatting, please wait..."
 msgstr "Bezig met formatteren..."
 
-msgid "Found missing images."
-msgstr "Missende plaatje gevonden."
+msgid "Found missing images"
+msgstr "Missende plaatje gevonden"
 
 msgid "Frame"
 msgstr "Rand"
@@ -1572,7 +1572,7 @@ msgstr "Geen schijf ingevoerd."
 msgid "No favorites selected."
 msgstr "Geen favorieten geselecteerd."
 
-msgid "No file missing!"
+msgid "No files missing!"
 msgstr "Geen missende bestanden!"
 
 msgid "No games found on the disc"

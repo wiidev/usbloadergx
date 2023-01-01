@@ -651,6 +651,9 @@ msgstr ""
 msgid "Disc 2"
 msgstr ""
 
+msgid "Disc Artwork"
+msgstr ""
+
 msgid "Disc Artwork Download"
 msgstr "使用するディスク画像"
 
@@ -674,9 +677,6 @@ msgstr ""
 
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
 msgstr ""
-
-msgid "Discarts"
-msgstr "破棄"
 
 msgid "DiskFlip"
 msgstr "ディスクの回転風"
@@ -783,8 +783,8 @@ msgstr "ﾌﾙｶﾊﾞｰ(精細)をﾀﾞｳﾝﾛｰﾄﾞ中"
 msgid "Downloading Full LQ Covers"
 msgstr "ﾌﾙｶﾊﾞｰ(普通)をﾀﾞｳﾝﾛｰﾄﾞ中"
 
-msgid "Downloading custom Discarts"
-msgstr "ｶｽﾀﾑﾚｰﾍﾞﾙをﾀﾞｳﾝﾛｰﾄﾞ中"
+msgid "Downloading Custom Disc Artwork"
+msgstr ""
 
 msgid "Downloading file..."
 msgstr "ダウンロード中です..."
@@ -792,8 +792,8 @@ msgstr "ダウンロード中です..."
 msgid "Downloading image:"
 msgstr "画像をダウンロード中"
 
-msgid "Downloading original Discarts"
-msgstr "公式ﾚｰﾍﾞﾙをダウンロード中"
+msgid "Downloading Original Disc Artwork"
+msgstr ""
 
 msgid "Downloading pagelist:"
 msgstr "リストをダウンロード中:"
@@ -1026,7 +1026,7 @@ msgstr "初期化"
 msgid "Formatting, please wait..."
 msgstr "初期化中です、お待ち下さい..."
 
-msgid "Found missing images."
+msgid "Found missing images"
 msgstr "不足画像が見つかりました"
 
 msgid "Frame"
@@ -1572,7 +1572,7 @@ msgstr "ディスクが挿入されていません"
 msgid "No favorites selected."
 msgstr "お気に入りはありません"
 
-msgid "No file missing!"
+msgid "No files missing!"
 msgstr "必要ありません"
 
 msgid "No games found on the disc"

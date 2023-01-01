@@ -651,6 +651,9 @@ msgstr "Disk 1"
 msgid "Disc 2"
 msgstr "Disk 2"
 
+msgid "Disc Artwork"
+msgstr ""
+
 msgid "Disc Artwork Download"
 msgstr "Disk Cover Download"
 
@@ -674,9 +677,6 @@ msgstr ""
 
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
 msgstr "Disk 2 muss unkomprimiert sein, um mit DM(L) 2.6+ zu funktionieren. Sicher, dass du die Disk komprimiert installieren möchtest?"
-
-msgid "Discarts"
-msgstr "Diskbilder"
 
 msgid "DiskFlip"
 msgstr "DiskFlip"
@@ -783,8 +783,8 @@ msgstr "Lade Box HQ Cover herunter"
 msgid "Downloading Full LQ Covers"
 msgstr "Lade Box LQ Cover herunter"
 
-msgid "Downloading custom Discarts"
-msgstr "Lade Community Diskcover herunter"
+msgid "Downloading Custom Disc Artwork"
+msgstr ""
 
 msgid "Downloading file..."
 msgstr "Lade Datei herunter..."
@@ -792,8 +792,8 @@ msgstr "Lade Datei herunter..."
 msgid "Downloading image:"
 msgstr "Lade Bilder herunter:"
 
-msgid "Downloading original Discarts"
-msgstr "Lade Diskcover herunter"
+msgid "Downloading Original Disc Artwork"
+msgstr ""
 
 msgid "Downloading pagelist:"
 msgstr "Lade Seitenliste herunter:"
@@ -1026,8 +1026,8 @@ msgstr "Formatieren"
 msgid "Formatting, please wait..."
 msgstr "Formatiere, bitte warten..."
 
-msgid "Found missing images."
-msgstr "Fehlende Bilder gefunden."
+msgid "Found missing images"
+msgstr "Fehlende Bilder gefunden"
 
 msgid "Frame"
 msgstr "Frame"
@@ -1572,7 +1572,7 @@ msgstr "Keine DVD eingelegt"
 msgid "No favorites selected."
 msgstr "Keine Favoriten ausgewählt"
 
-msgid "No file missing!"
+msgid "No files missing!"
 msgstr "Keine Datei fehlt!"
 
 msgid "No games found on the disc"

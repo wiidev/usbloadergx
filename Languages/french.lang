@@ -651,6 +651,9 @@ msgstr "Disque 1"
 msgid "Disc 2"
 msgstr "Disque 2"
 
+msgid "Disc Artwork"
+msgstr ""
+
 msgid "Disc Artwork Download"
 msgstr "Téléch. des labels DVD"
 
@@ -674,9 +677,6 @@ msgstr "Demander choix du disque"
 
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
 msgstr "Le disque 2 doit être installé dans un format non compressé pour fonctionner avec DM(L) v2.6+, voulez-vous vraiment l'installer compressé ?"
-
-msgid "Discarts"
-msgstr "Labels DVD"
 
 msgid "DiskFlip"
 msgstr "Disque uniquement"
@@ -783,8 +783,8 @@ msgstr "Téléch. des jaquettes complètes HD"
 msgid "Downloading Full LQ Covers"
 msgstr "Téléch. des jaquettes complètes SD"
 
-msgid "Downloading custom Discarts"
-msgstr "Téléch. des labels DVD persos"
+msgid "Downloading Custom Disc Artwork"
+msgstr ""
 
 msgid "Downloading file..."
 msgstr "Téléchargement du fichier..."
@@ -792,8 +792,8 @@ msgstr "Téléchargement du fichier..."
 msgid "Downloading image:"
 msgstr "Téléchargement de l'image:"
 
-msgid "Downloading original Discarts"
-msgstr "Téléch. des labels DVD originaux"
+msgid "Downloading Original Disc Artwork"
+msgstr ""
 
 msgid "Downloading pagelist:"
 msgstr "Téléch. liste des thèmes :"
@@ -1026,8 +1026,8 @@ msgstr "Formater"
 msgid "Formatting, please wait..."
 msgstr "Formatage en cours, veuillez patienter..."
 
-msgid "Found missing images."
-msgstr "Images manquantes trouvées."
+msgid "Found missing images"
+msgstr "Images manquantes trouvées"
 
 msgid "Frame"
 msgstr "image"
@@ -1572,7 +1572,7 @@ msgstr "Aucun disque inséré."
 msgid "No favorites selected."
 msgstr "Pas de favoris sélectionnés"
 
-msgid "No file missing!"
+msgid "No files missing!"
 msgstr "Aucun fichier manquant !"
 
 msgid "No games found on the disc"

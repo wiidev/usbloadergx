@@ -503,6 +503,9 @@ void downloadfile(const char *url, struct download *buffer)
         gprintf("Using: %s - %s\n", wolfSSL_get_version(httpinfo.ssl), wolfSSL_CIPHER_get_name(cipher));
 #endif
     }
+    // Save the session
+    if (httpinfo.use_https)
+        session = wolfSSL_get_session(httpinfo.ssl);
     // Send our request
     char request[2300];
     int ret, len;
@@ -593,9 +596,6 @@ void downloadfile(const char *url, struct download *buffer)
             https_close(&httpinfo);
             return;
         }
-        // Save the session
-        if (httpinfo.use_https)
-            session = wolfSSL_get_session(httpinfo.ssl);
         // Finished
         https_close(&httpinfo);
 #ifdef DEBUG_NETWORK

@@ -651,6 +651,9 @@ msgstr "Disk 1"
 msgid "Disc 2"
 msgstr "Disk 2"
 
+msgid "Disc Artwork"
+msgstr ""
+
 msgid "Disc Artwork Download"
 msgstr "Download Disk-billede"
 
@@ -674,9 +677,6 @@ msgstr "Disk-valg Prompt"
 
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
 msgstr "Disk2 skal installeres in ukomprimeret format for at virke med DM(L) v2.6+, er du sikker på du vil installere i komprimeret format?"
-
-msgid "Discarts"
-msgstr "Disk-billeder"
 
 msgid "DiskFlip"
 msgstr ""
@@ -783,8 +783,8 @@ msgstr "Downloader Fuld HQ Covers"
 msgid "Downloading Full LQ Covers"
 msgstr "Downloader Fuld LQ Covers"
 
-msgid "Downloading custom Discarts"
-msgstr "Downloader brugerdefinerede Diskbilleder"
+msgid "Downloading Custom Disc Artwork"
+msgstr ""
 
 msgid "Downloading file..."
 msgstr "Downloader fil..."
@@ -792,8 +792,8 @@ msgstr "Downloader fil..."
 msgid "Downloading image:"
 msgstr "Downloader billede:"
 
-msgid "Downloading original Discarts"
-msgstr "Downloader org. Diskbilleder"
+msgid "Downloading Original Disc Artwork"
+msgstr ""
 
 msgid "Downloading pagelist:"
 msgstr "Downloader pagelist:"
@@ -1026,7 +1026,7 @@ msgstr "Formatér"
 msgid "Formatting, please wait..."
 msgstr "Formaterer, vent venligst..."
 
-msgid "Found missing images."
+msgid "Found missing images"
 msgstr "Fundet manglende billeder"
 
 msgid "Frame"
@@ -1572,7 +1572,7 @@ msgstr "Ingen Disk indsat."
 msgid "No favorites selected."
 msgstr "Ingen favoritter er valgt."
 
-msgid "No file missing!"
+msgid "No files missing!"
 msgstr "Ingen filer mangler!"
 
 msgid "No games found on the disc"

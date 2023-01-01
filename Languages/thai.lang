@@ -651,6 +651,9 @@ msgstr ""
 msgid "Disc 2"
 msgstr ""
 
+msgid "Disc Artwork"
+msgstr ""
+
 msgid "Disc Artwork Download"
 msgstr "ดาวน์โหลดภาพแผ่น"
 
@@ -673,9 +676,6 @@ msgid "Disc-Select Prompt"
 msgstr ""
 
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
-msgstr ""
-
-msgid "Discarts"
 msgstr ""
 
 msgid "DiskFlip"
@@ -783,7 +783,7 @@ msgstr ""
 msgid "Downloading Full LQ Covers"
 msgstr ""
 
-msgid "Downloading custom Discarts"
+msgid "Downloading Custom Disc Artwork"
 msgstr ""
 
 msgid "Downloading file..."
@@ -792,7 +792,7 @@ msgstr ""
 msgid "Downloading image:"
 msgstr "ภาพที่กำลังดาวน์โหลด:"
 
-msgid "Downloading original Discarts"
+msgid "Downloading Original Disc Artwork"
 msgstr ""
 
 msgid "Downloading pagelist:"
@@ -1026,7 +1026,7 @@ msgstr "ฟอร์แมต"
 msgid "Formatting, please wait..."
 msgstr "กำลังฟอร์แมต,รอสักครู่..."
 
-msgid "Found missing images."
+msgid "Found missing images"
 msgstr ""
 
 msgid "Frame"
@@ -1572,7 +1572,7 @@ msgstr ""
 msgid "No favorites selected."
 msgstr ""
 
-msgid "No file missing!"
+msgid "No files missing!"
 msgstr "ไม่มีไฟล์ที่หายไป"
 
 msgid "No games found on the disc"

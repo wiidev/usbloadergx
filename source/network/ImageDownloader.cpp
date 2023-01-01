@@ -29,6 +29,7 @@
 #include "usbloader/GetMissingGameFiles.hpp"
 #include "utils/StringTools.h"
 #include "usbloader/GameList.h"
+#include "wstring.hpp"
 #include "gecko.h"
 
 #define VALID_IMAGE(x) (!(x->size == 36864 || x->size <= 1024 || x->size == 7386 || x->size <= 1174 || x->size == 4446 || x->data == NULL))
@@ -37,7 +38,7 @@ void ImageDownloader::DownloadImages()
 {
 	bool showBanner = (Settings.LoaderMode & MODE_GCGAMES);
 
-	int choice = CheckboxWindow(tr( "Cover Download" ), 0, tr( "3D Covers" ), tr( "Flat Covers" ), tr("Full Covers"), tr( "Discarts" ), showBanner ? tr( "Custom Banners" ) : 0, 0, showBanner ? 0x1F : 0xF); // ask for download choice
+	int choice = CheckboxWindow(tr( "Cover Download" ), 0, tr( "3D Covers" ), tr( "Flat Covers" ), tr("Full Covers"), tr( "Disc Artwork" ), showBanner ? tr( "Custom Banners" ) : 0, 0, showBanner ? 0x1F : 0xF); // ask for download choice
 	if (choice == 0 || choice == CheckedNone)
 		return;
 
@@ -55,13 +56,13 @@ void ImageDownloader::Start()
 
 	if(MissingImagesCount == 0)
 	{
-		WindowPrompt(tr( "No file missing!" ), 0, tr("OK"));
+		WindowPrompt(tr( "No files missing!" ), 0, tr("OK"));
 		return;
 	}
 
 	u32 TotalDownloadCount = MissingImagesCount;
 
-	if (WindowPrompt(tr("Found missing images."), fmt(tr("%i missing files"), TotalDownloadCount), tr( "Yes" ), tr( "No" )) == 0)
+	if (WindowPrompt(tr("Found missing images"), fmt(tr("%i missing files"), TotalDownloadCount), tr( "Yes" ), tr( "No" )) == 0)
 		return;
 
 	if (!IsNetworkInit() && !NetworkInitPrompt())
@@ -113,9 +114,9 @@ void ImageDownloader::FindMissingImages()
 	if(choices & CheckedBox4)
 	{
 		const char * downloadURL = (Settings.discart == DISCARTS_ORIGINALS || Settings.discart == DISCARTS_ORIGINALS_CUSTOMS ) ? Settings.URL_Discs : Settings.URL_DiscsCustom;
-		const char * progressTitle = (Settings.discart == DISCARTS_ORIGINALS || Settings.discart == DISCARTS_ORIGINALS_CUSTOMS ) ? tr("Downloading original Discarts") : tr("Downloading custom Discarts");
+		const char * progressTitle = (Settings.discart == DISCARTS_ORIGINALS || Settings.discart == DISCARTS_ORIGINALS_CUSTOMS ) ? tr("Downloading Original Disc Artwork") : tr("Downloading Custom Disc Artwork");
 		const char * backupURL = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS || Settings.discart == DISCARTS_CUSTOMS_ORIGINALS) ? ((Settings.discart == DISCARTS_ORIGINALS_CUSTOMS) ? Settings.URL_DiscsCustom : Settings.URL_Discs) : NULL;
-		const char * backupProgressTitle = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS || Settings.discart == DISCARTS_CUSTOMS_ORIGINALS) ? ((Settings.discart == DISCARTS_ORIGINALS_CUSTOMS) ? tr("Downloading custom Discarts") : tr("Downloading original Discarts")) : NULL;
+		const char * backupProgressTitle = (Settings.discart == DISCARTS_ORIGINALS_CUSTOMS || Settings.discart == DISCARTS_CUSTOMS_ORIGINALS) ? ((Settings.discart == DISCARTS_ORIGINALS_CUSTOMS) ? tr("Downloading Custom Disc Artwork") : tr("Downloading Original Disc Artwork")) : NULL;
 		FindMissing(Settings.disc_path, downloadURL, backupURL, progressTitle, backupProgressTitle, ".png");
 	}
 
@@ -186,13 +187,14 @@ int ImageDownloader::DownloadProcess(int TotalDownloadCount)
 		if(MissingImages[i].gameID.size() < 3)
 			continue;
 
+		gprintf("Searching for %s%s\n", MissingImages[i].gameID.c_str(), MissingImages[i].fileExt);
 		struct download file = {};
 		DownloadImage(MissingImages[i].downloadURL, MissingImages[i].gameID.c_str(), MissingImages[i].fileExt, &file);
 		if(file.size <= 0)
 		{
 			if(MissingImages[i].backupURL)
 			{
-				gprintf("Trying backup URL.\n");
+				gprintf("Trying backup URL\n");
 				MissingImages[i].downloadURL = MissingImages[i].backupURL;
 				MissingImages[i].backupURL = NULL;
 				MissingImages[i].progressTitle = MissingImages[i].backupProgressTitle;
@@ -202,7 +204,6 @@ int ImageDownloader::DownloadProcess(int TotalDownloadCount)
 			continue;
 		}
 
-		gprintf(" - OK\n");
 		char imgPath[200];
 		snprintf(imgPath, sizeof(imgPath), "%s/%s%s", MissingImages[i].writepath, MissingImages[i].gameID.c_str(), MissingImages[i].fileExt);
 
@@ -214,7 +215,7 @@ int ImageDownloader::DownloadProcess(int TotalDownloadCount)
 			MissingImagesCount--;
 		}
 		MEM2_free(file.data);
-		gprintf("File saved successfully (%s%s)\n", MissingImages[i].gameID.c_str(), MissingImages[i].fileExt);
+		gprintf(" - Saved %s%s\n", MissingImages[i].gameID.c_str(), MissingImages[i].fileExt);
 
 		//! Remove the image from the vector since it's done
 		MissingImages.erase(MissingImages.begin()+i);
@@ -226,129 +227,186 @@ int ImageDownloader::DownloadProcess(int TotalDownloadCount)
 
 void ImageDownloader::DownloadImage(const char *url, const char *gameID, const char *fileExt, struct download *file)
 {
-	char CheckedRegion[10];
+	char region[3];
 	char downloadURL[512];
-	bool PAL = false;
 
 	if(strcmp(fileExt, ".bnr") == 0)
 	{
 		snprintf(downloadURL, sizeof(downloadURL), "%s%s.bnr", url, gameID);
-		gprintf("%s\n", downloadURL);
+		gprintf(" - Trying: %s\n", downloadURL);
 		downloadfile(downloadURL, file);
 		if(file->size > 132 && IsValidBanner(file->data)) // 132 = IMET magic location in the banner with u8 header
 			return;
 
 		snprintf(downloadURL, sizeof(downloadURL), "%s%.3s.bnr", url, gameID);
-		gprintf(" - Not found. trying ID3: %s\n", downloadURL);
+		gprintf(" - Trying ID3: %s\n", downloadURL);
 		
 		downloadfile(downloadURL, file);
 		if(file->size > 132 && IsValidBanner(file->data))
 			return;
 
-		gprintf(" - Not found.\n");
+		gprintf(" - Not found\n");
 		return;
 	}
 
-	//Creates URL depending from which Country the game is
+	// Try to find PAL covers matching the loaders language
 	switch (gameID[3])
 	{
-		case 'J':
-			sprintf(downloadURL, "%sJA/%s.png", url, gameID);
-			sprintf(CheckedRegion, "JA");
+		case 'P': // Europe
+		case 'D': // Germany
+		case 'F': // France
+		case 'H': // Netherlands
+		case 'I': // Italy
+		case 'L': // Japanese import to Europe
+		case 'M': // American import to Europe
+		case 'R': // Russia
+		case 'S': // Spain
+		case 'U': // Australia
+		case 'V': // Scandinavia
+		case 'X': // Europe / USA special releases
+		case 'Y': // Europe / USA special releases
+		case 'Z': // Europe / USA special releases
+			sprintf(region, "%.2s", Settings.db_language);
 			break;
-		case 'W':
-			sprintf(downloadURL, "%sZH/%s.png", url, gameID);
-			sprintf(CheckedRegion, "ZH");
+		case 'E': // US
+		case 'N': // Japanese import to US
+			sprintf(region, "US");
 			break;
-		case 'K':
-			sprintf(downloadURL, "%sKO/%s.png", url, gameID);
-			sprintf(CheckedRegion, "KO");
+		case 'J': // Japan
+			sprintf(region, "JA");
 			break;
-		case 'P':
-		case 'D':
-		case 'F':
-		case 'I':
-		case 'S':
-		case 'H':
-		case 'U':
-		case 'X':
-		case 'Y':
-		case 'Z':
-			sprintf(downloadURL, "%s%s/%s.png", url, Settings.db_language, gameID);
-			sprintf(CheckedRegion, "%s", Settings.db_language);
-			PAL = true;
+		case 'K': // Korea
+		case 'Q': // Japanese import to Korea 
+		case 'T': // American import to Korea
+			sprintf(region, "KO");
+			break; 
+		case 'W': // Taiwan / Hong Kong / Macau
+			sprintf(region, "ZH");
 			break;
-		case 'E':
-			sprintf(downloadURL, "%sUS/%s.png", url, gameID);
-			sprintf(CheckedRegion, "US");
-			break;
-		default:
-			strcpy(downloadURL, "");
-			strcpy(CheckedRegion, "");
-			break;
+		default:  // Custom games?
+			sprintf(region, "EN");
 	}
-
-	gprintf("%s\n", downloadURL);
+	sprintf(downloadURL, "%s%s/%s.png", url, region, gameID);
+	gprintf(" - Trying: %s\n", downloadURL);
 	downloadfile(downloadURL, file);
-	if(VALID_IMAGE(file))
+	if (VALID_IMAGE(file))
 		return;
 
-	if(PAL && strcmp(CheckedRegion, "EN") != 0)
+	// Try to find covers matching our systems language
+	std::vector<std::string> v;
+	char syslang[3] = {0};
+	switch (CONF_GetLanguage())
 	{
-		snprintf(downloadURL, sizeof(downloadURL), "%sEN/%s.png", url, gameID);
-		gprintf(" - Not found.\n%s\n", downloadURL);
+		case CONF_LANG_GERMAN:
+			sprintf(syslang, "DE");
+			break;
+		case CONF_LANG_FRENCH:
+			sprintf(syslang, "FR");
+			break;
+		case CONF_LANG_SPANISH:
+			sprintf(syslang, "SE");
+			break;
+		case CONF_LANG_ITALIAN:
+			sprintf(syslang, "IT");
+			break;
+		case CONF_LANG_DUTCH:
+			sprintf(syslang, "NL");
+			break;
+	}
+	if (syslang[0] != '\0' && strncmp(syslang, region, 2) != 0)
+	{
+		sprintf(downloadURL, "%s%s/%s.png", url, syslang, gameID);
+		gprintf(" - Trying: %s\n", downloadURL);
 		downloadfile(downloadURL, file);
-		if(VALID_IMAGE(file))
+		if (VALID_IMAGE(file))
 			return;
 	}
-	else if(strcmp(CheckedRegion, "") == 0)
+
+	// Try to find covers matching the games region e.g. SGWD7K
+	char gameregion[3] = {0};
+	switch (gameID[3])
 	{
-		const char * lang = Settings.db_language;
-
-		if(strcmp(lang, "EN") == 0 && CONF_GetRegion() == CONF_REGION_US)
-			lang = "US";
-
-		snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
-		gprintf(" - Not found.\n%s\n", downloadURL);
+		case 'D': // Germany
+			sprintf(gameregion, "DE");
+			break;
+		case 'F': // France
+			sprintf(gameregion, "FR");
+			break;
+		case 'H': // Netherlands
+			sprintf(gameregion, "NL");
+			break;
+		case 'I': // Italy
+			sprintf(gameregion, "IT");
+			break;
+		case 'R': // Russia
+			sprintf(gameregion, "RU");
+			break;
+		case 'S': // Spain
+			sprintf(gameregion, "ES");
+			break;
+		case 'U': // Australia
+			sprintf(gameregion, "AU");
+			break;
+		case 'V': // Scandinavia
+			sprintf(gameregion, "DK");
+			break;
+	}
+	if (gameregion[0] != '\0' && strncmp(gameregion, region, 2) != 0 && strncmp(gameregion, syslang, 2) != 0)
+	{
+		sprintf(downloadURL, "%s%s/%s.png", url, gameregion, gameID);
+		gprintf(" - Trying: %s\n", downloadURL);
 		downloadfile(downloadURL, file);
-		if(VALID_IMAGE(file))
+		if (VALID_IMAGE(file))
 			return;
+	}
 
-		snprintf(downloadURL, sizeof(downloadURL), "%sOTHER/%s.png", url, gameID);
-		gprintf(" - Not found.\n%s\n", downloadURL);
-		downloadfile(downloadURL, file);
-		if(VALID_IMAGE(file))
-			return;
-		
-		if(gameID[3] == 'R') // no english cover found, try russian
+	// Might be a special US release
+	if (gameID[3] == 'X' || gameID[3] == 'Y' || gameID[3] == 'Z')
+	{
+		if (strncmp(region, "US", 2) != 0)
 		{
-			lang = "RU";
-			snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
-			gprintf(" - Not found.\n%s\n", downloadURL);
+			sprintf(downloadURL, "%sUS/%s.png", url, gameID);
+			gprintf(" - Trying: %s\n", downloadURL);
 			downloadfile(downloadURL, file);
-			if(VALID_IMAGE(file))
-				return;
-		}
-		
-		if(gameID[3] == 'V') // no English cover found, try Finnish and Swedish
-		{
-			lang = "FI";
-			snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
-			gprintf(" - Not found.\n%s\n", downloadURL);
-			downloadfile(downloadURL, file);
-			if(VALID_IMAGE(file))
-				return;
-			
-			lang = "SE";
-			snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
-			gprintf(" - Not found.\n%s\n", downloadURL);
-			downloadfile(downloadURL, file);
-			if(VALID_IMAGE(file))
+			if (VALID_IMAGE(file))
 				return;
 		}
 	}
 
-	gprintf(" - Not found.\n");
+	// The game might only have an English cover available
+	if (strncmp(region, "EN", 2) != 0)
+	{
+		sprintf(downloadURL, "%sEN/%s.png", url, gameID);
+		gprintf(" - Trying: %s\n", downloadURL);
+		downloadfile(downloadURL, file);
+		if (VALID_IMAGE(file))
+			return;
+	}
+
+	// Try Finnish and Swedish
+	if (gameID[3] == 'V')
+	{
+		snprintf(downloadURL, sizeof(downloadURL), "%sFI/%s.png", url, gameID);
+		gprintf(" - Trying: %s\n", downloadURL);
+		downloadfile(downloadURL, file);
+		if (VALID_IMAGE(file))
+			return;
+
+		snprintf(downloadURL, sizeof(downloadURL), "%sSE/%s.png", url, gameID);
+		gprintf(" - Trying: %s\n", downloadURL);
+		downloadfile(downloadURL, file);
+		if (VALID_IMAGE(file))
+			return;
+	}
+
+	// Final attempt
+	snprintf(downloadURL, sizeof(downloadURL), "%sother/%s.png", url, gameID);
+	gprintf(" - Trying: %s\n", downloadURL);
+	downloadfile(downloadURL, file);
+	if (VALID_IMAGE(file))
+		return;
+
+	gprintf(" - Not found\n");
 }
 
 void ImageDownloader::CreateCSVLog()

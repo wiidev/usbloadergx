@@ -651,6 +651,9 @@ msgstr ""
 msgid "Disc 2"
 msgstr ""
 
+msgid "Disc Artwork"
+msgstr ""
+
 msgid "Disc Artwork Download"
 msgstr "Stažení potisku DVD"
 
@@ -673,9 +676,6 @@ msgid "Disc-Select Prompt"
 msgstr ""
 
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
-msgstr ""
-
-msgid "Discarts"
 msgstr ""
 
 msgid "DiskFlip"
@@ -783,8 +783,8 @@ msgstr ""
 msgid "Downloading Full LQ Covers"
 msgstr ""
 
-msgid "Downloading custom Discarts"
-msgstr "Stahuji upravené potisky"
+msgid "Downloading Custom Disc Artwork"
+msgstr ""
 
 msgid "Downloading file..."
 msgstr "Stahuji soubor ..."
@@ -792,8 +792,8 @@ msgstr "Stahuji soubor ..."
 msgid "Downloading image:"
 msgstr "Stahuji obrázek:"
 
-msgid "Downloading original Discarts"
-msgstr "Stahuji originální potisky"
+msgid "Downloading Original Disc Artwork"
+msgstr ""
 
 msgid "Downloading pagelist:"
 msgstr "Stahuji stránku:"
@@ -1026,7 +1026,7 @@ msgstr "Formát"
 msgid "Formatting, please wait..."
 msgstr "Formátuji, cekejte prosím ..."
 
-msgid "Found missing images."
+msgid "Found missing images"
 msgstr ""
 
 msgid "Frame"
@@ -1572,7 +1572,7 @@ msgstr ""
 msgid "No favorites selected."
 msgstr "Oblíbené nejsou oznaceny"
 
-msgid "No file missing!"
+msgid "No files missing!"
 msgstr "Nechybí žádný soubor!"
 
 msgid "No games found on the disc"

@@ -651,6 +651,9 @@ msgstr "光盘 1"
 msgid "Disc 2"
 msgstr "光盘 2"
 
+msgid "Disc Artwork"
+msgstr ""
+
 msgid "Disc Artwork Download"
 msgstr "光盘图片下载"
 
@@ -674,9 +677,6 @@ msgstr ""
 
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
 msgstr "DM(L) v2.6 或以上版本需要将光盘 2 安装为非压缩格式，是否仍然以压缩格式安装？"
-
-msgid "Discarts"
-msgstr "光盘图片"
 
 msgid "DiskFlip"
 msgstr "光盘滑动"
@@ -783,8 +783,8 @@ msgstr "正在下载高清晰完整封面"
 msgid "Downloading Full LQ Covers"
 msgstr "正在下载低清晰完整封面"
 
-msgid "Downloading custom Discarts"
-msgstr "正在下载自制光盘封面"
+msgid "Downloading Custom Disc Artwork"
+msgstr ""
 
 msgid "Downloading file..."
 msgstr "正在下载文件 ..."
@@ -792,8 +792,8 @@ msgstr "正在下载文件 ..."
 msgid "Downloading image:"
 msgstr "正在下载图片："
 
-msgid "Downloading original Discarts"
-msgstr "正在下载原始光盘封面"
+msgid "Downloading Original Disc Artwork"
+msgstr ""
 
 msgid "Downloading pagelist:"
 msgstr "正在下载分页列表："
@@ -1026,7 +1026,7 @@ msgstr "格式化"
 msgid "Formatting, please wait..."
 msgstr "格式化中，请稍候 ..."
 
-msgid "Found missing images."
+msgid "Found missing images"
 msgstr "找到缺少的图片。"
 
 msgid "Frame"
@@ -1572,7 +1572,7 @@ msgstr "未插入光盘。"
 msgid "No favorites selected."
 msgstr "未选择收藏。"
 
-msgid "No file missing!"
+msgid "No files missing!"
 msgstr "没有缺少文件！"
 
 msgid "No games found on the disc"

@@ -651,6 +651,9 @@ msgstr "Disco 1"
 msgid "Disc 2"
 msgstr "Disco 2"
 
+msgid "Disc Artwork"
+msgstr ""
+
 msgid "Disc Artwork Download"
 msgstr "Baixar Imagens Disco"
 
@@ -674,9 +677,6 @@ msgstr "Perguntar o disco a iniciar"
 
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
 msgstr "O Disco 2 precisa ser descomprimido para funcionar nessa versão do DIOS MIOS. Tem certeza de que quer instalar usando compressão?"
-
-msgid "Discarts"
-msgstr "Etiquetas de Disco"
 
 msgid "DiskFlip"
 msgstr "Voltar Disco"
@@ -783,8 +783,8 @@ msgstr "Baixando Capas Completas HQ"
 msgid "Downloading Full LQ Covers"
 msgstr "Baixando Capas Completas LQ"
 
-msgid "Downloading custom Discarts"
-msgstr "Baixando Etiquetas de Disco Personalizadas"
+msgid "Downloading Custom Disc Artwork"
+msgstr ""
 
 msgid "Downloading file..."
 msgstr "Baixando arquivo..."
@@ -792,8 +792,8 @@ msgstr "Baixando arquivo..."
 msgid "Downloading image:"
 msgstr "Baixando imagem:"
 
-msgid "Downloading original Discarts"
-msgstr "Baixando Imagens de Disco Originais"
+msgid "Downloading Original Disc Artwork"
+msgstr ""
 
 msgid "Downloading pagelist:"
 msgstr "Baixando a lista:"
@@ -1026,7 +1026,7 @@ msgstr "Formatar"
 msgid "Formatting, please wait..."
 msgstr "Formatando, por favor aguarde..."
 
-msgid "Found missing images."
+msgid "Found missing images"
 msgstr "Imagens faltando encontradas"
 
 msgid "Frame"
@@ -1572,7 +1572,7 @@ msgstr "Nenhum disco inserido"
 msgid "No favorites selected."
 msgstr "Nenhum favorito selecionado"
 
-msgid "No file missing!"
+msgid "No files missing!"
 msgstr "Nenhum arquivo faltando!"
 
 msgid "No games found on the disc"
