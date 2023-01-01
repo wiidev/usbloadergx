@@ -140,9 +140,8 @@ static int RunAppbooter()
 
 	DCFlushRange(ARGS_ADDR, sizeof(struct __argv) + args.length);
 
-	u64 currentStub = getStubDest();
 	loadStub();
-	Set_Stub(returnTo(currentStub));
+	Set_Stub(returnTo(false));
 
 	gprintf("Exiting USBLoaderGX...\n\n");
 

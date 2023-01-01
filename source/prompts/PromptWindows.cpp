@@ -712,9 +712,8 @@ int WindowExitPrompt()
 
 	int choice = -1;
 
-	u64 oldstub = getStubDest();
 	loadStub();
-	if (oldstub != 0x00010001554c4e52ll && oldstub != 0x00010001554e454fll) Set_Stub(oldstub);
+	Set_Stub(returnTo(true)); // Reset the stub back to the HBC
 
 	GuiWindow promptWindow(640, 480);
 	promptWindow.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
