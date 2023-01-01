@@ -1,6 +1,6 @@
 /* ed448.h
  *
- * Copyright (C) 2006-2021 wolfSSL Inc.
+ * Copyright (C) 2006-2022 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -86,6 +86,7 @@ struct ed448_key {
     byte pointX[ED448_KEY_SIZE]; /* recovered X coordinate */
     byte pointY[ED448_KEY_SIZE]; /* Y coordinate is the public key with The most significant bit of the final octet always zero. */
 #endif
+    word16 privKeySet:1;
     word16 pubKeySet:1;
 #ifdef WOLFSSL_ASYNC_CRYPT
     WC_ASYNC_DEV asyncDev;
@@ -137,19 +138,19 @@ int wc_ed448_verify_msg_update(const byte* msgSegment, word32 msgSegmentLen,
                              ed448_key* key);
 WOLFSSL_API
 int wc_ed448_verify_msg_final(const byte* sig, word32 sigLen,
-                              int* stat, ed448_key* key);
+                              int* res, ed448_key* key);
 #endif /* WOLFSSL_ED448_STREAMING_VERIFY */
 WOLFSSL_API
 int wc_ed448_verify_msg(const byte* sig, word32 sigLen, const byte* msg,
-                        word32 msgLen, int* stat, ed448_key* key,
+                        word32 msgLen, int* res, ed448_key* key,
                         const byte* context, byte contextLen);
 WOLFSSL_API
 int wc_ed448ph_verify_hash(const byte* sig, word32 sigLen, const byte* hash,
-                           word32 hashLen, int* stat, ed448_key* key,
+                           word32 hashLen, int* res, ed448_key* key,
                            const byte* context, byte contextLen);
 WOLFSSL_API
 int wc_ed448ph_verify_msg(const byte* sig, word32 sigLen, const byte* msg,
-                          word32 msgLen, int* stat, ed448_key* key,
+                          word32 msgLen, int* res, ed448_key* key,
                           const byte* context, byte contextLen);
 #endif /* HAVE_ED448_VERIFY */
 WOLFSSL_API
@@ -163,16 +164,22 @@ void wc_ed448_free(ed448_key* key);
 WOLFSSL_API
 int wc_ed448_import_public(const byte* in, word32 inLen, ed448_key* key);
 WOLFSSL_API
+int wc_ed448_import_public_ex(const byte* in, word32 inLen, ed448_key* key,
+                              int trusted);
+WOLFSSL_API
 int wc_ed448_import_private_only(const byte* priv, word32 privSz,
                                  ed448_key* key);
 WOLFSSL_API
 int wc_ed448_import_private_key(const byte* priv, word32 privSz,
                                 const byte* pub, word32 pubSz, ed448_key* key);
+WOLFSSL_API
+int wc_ed448_import_private_key_ex(const byte* priv, word32 privSz,
+    const byte* pub, word32 pubSz, ed448_key* key, int trusted);
 #endif /* HAVE_ED448_KEY_IMPORT */
 
 #ifdef HAVE_ED448_KEY_EXPORT
 WOLFSSL_API
-int wc_ed448_export_public(ed448_key*, byte* out, word32* outLen);
+int wc_ed448_export_public(ed448_key* key, byte* out, word32* outLen);
 WOLFSSL_API
 int wc_ed448_export_private_only(ed448_key* key, byte* out, word32* outLen);
 WOLFSSL_API

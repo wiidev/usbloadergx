@@ -1,6 +1,6 @@
 /* wolfcaam_cmac.h
  *
- * Copyright (C) 2006-2021 wolfSSL Inc.
+ * Copyright (C) 2006-2022 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -25,7 +25,7 @@
 #ifndef WOLFCAAM_CMAC_H
 #define WOLFCAAM_CMAC_H
 
-#if defined(WOLFSSL_CMAC) && defined(WOLFSSL_QNX_CAAM)
+#if defined(WOLFSSL_CMAC) && defined(WOLFSSL_CAAM)
 
 #include <libs/libwolfssl/wolfcrypt/cmac.h>
 

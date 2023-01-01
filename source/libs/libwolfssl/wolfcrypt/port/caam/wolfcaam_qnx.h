@@ -1,6 +1,6 @@
 /* wolfcaam_qnx.h
  *
- * Copyright (C) 2006-2021 wolfSSL Inc.
+ * Copyright (C) 2006-2022 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -41,7 +41,7 @@
 #define NoActivityReady -1
 #define MemoryOperationNotPerformed -1
 
-#define CAAM_ADDRESS unsigned int
+#define CAAM_ADDRESS uintptr_t
 #ifndef WOLFSSL_CAAM_BUFFER
 #define WOLFSSL_CAAM_BUFFER
     typedef struct CAAM_BUFFER {
@@ -65,6 +65,7 @@
 
 #include <libs/libwolfssl/wolfcrypt/port/caam/wolfcaam_ecdsa.h>
 #include <libs/libwolfssl/wolfcrypt/port/caam/wolfcaam_cmac.h>
+#include <libs/libwolfssl/wolfcrypt/port/caam/wolfcaam_aes.h>
 #include <libs/libwolfssl/wolfcrypt/cryptocb.h>
 
 #define ResourceNotAvailable -3

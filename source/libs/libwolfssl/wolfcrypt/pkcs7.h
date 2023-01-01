@@ -1,6 +1,6 @@
 /* pkcs7.h
  *
- * Copyright (C) 2006-2021 wolfSSL Inc.
+ * Copyright (C) 2006-2022 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -156,7 +156,7 @@ enum Pkcs7_Misc {
     MAX_CONTENT_BLOCK_LEN = DES_BLOCK_SIZE,
 #endif
     MAX_RECIP_SZ          = MAX_VERSION_SZ +
-                            MAX_SEQ_SZ + ASN_NAME_MAX + MAX_SN_SZ +
+                            MAX_SEQ_SZ + WC_ASN_NAME_MAX + MAX_SN_SZ +
                             MAX_SEQ_SZ + MAX_ALGO_SZ + 1 + MAX_ENCRYPTED_KEY_SZ,
 };
 
@@ -241,7 +241,9 @@ struct PKCS7 {
     byte*  der;                   /* DER encoded version of message       */
     word32 derSz;
 #endif
-    byte*  cert[MAX_PKCS7_CERTS];
+    byte*  cert[MAX_PKCS7_CERTS]; /* array of certs parsed from bundle */
+    byte*  verifyCert;            /* cert from array used for verify */
+    word32 verifyCertSz;
 
     /* Encrypted-data Content Type */
     byte*        encryptionKey;         /* block cipher encryption key */
@@ -331,6 +333,7 @@ struct PKCS7 {
     /* used by DecodeEnvelopedData with multiple encrypted contents */
     byte*  cachedEncryptedContent;
     word32 cachedEncryptedContentSz;
+    word16 contentCRLF:1; /* have content line endings been converted to CRLF */
     /* !! NEW DATA MEMBERS MUST BE ADDED AT END !! */
 };
 

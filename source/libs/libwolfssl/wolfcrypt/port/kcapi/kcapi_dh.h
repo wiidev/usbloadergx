@@ -1,6 +1,6 @@
-/* nrf51.h
+/* kcapi_dh.h
  *
- * Copyright (C) 2006-2021 wolfSSL Inc.
+ * Copyright (C) 2006-2022 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -20,25 +20,22 @@
  */
 
 
-#ifndef WOLFSSL_NRF51_PORT_H
-#define WOLFSSL_NRF51_PORT_H
-
-#ifdef __cplusplus
-extern "C" {
-#endif
+#ifndef WOLF_CRYPT_KCAPI_DH_H
+#define WOLF_CRYPT_KCAPI_DH_H
 
 #include <libs/libwolfssl/wolfcrypt/types.h>
+#include <libs/libwolfssl/wolfcrypt/dh.h>
+#include <libs/libwolfssl/wolfcrypt/port/kcapi/wc_kcapi.h>
 
-/* Public Functions */
-int nrf51_random_generate(byte* output, word32 sz);
-
-int nrf51_aes_set_key(const byte* key);
-int nrf51_aes_encrypt(const byte* in, const byte* key, word32 rounds, byte* out);
-
-double current_time(int reset);
-
-#ifdef __cplusplus
-}
+#ifndef WC_DH_TYPE_DEFINED
+    typedef struct DhKey DhKey;
+    #define WC_DH_TYPE_DEFINED
 #endif
 
-#endif /* WOLFSSL_NRF51_PORT_H */
+void KcapiDh_Free(DhKey* key);
+int KcapiDh_MakeKey(DhKey* key, byte* pub, word32* pubSz);
+int KcapiDh_SharedSecret(DhKey* private_key, const byte* pub, word32 pubSz,
+                         byte* out, word32* outlen);
+
+#endif /* WOLF_CRYPT_KCAPI_DH_H  */
+

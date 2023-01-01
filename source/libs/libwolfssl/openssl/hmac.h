@@ -1,6 +1,6 @@
 /* hmac.h
  *
- * Copyright (C) 2006-2021 wolfSSL Inc.
+ * Copyright (C) 2006-2022 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -21,7 +21,7 @@
 
 
 
-/*  hmac.h defines mini hamc openssl compatibility layer
+/*  hmac.h defines mini hmac openssl compatibility layer
  *
  */
 
@@ -35,16 +35,7 @@
 #include "prefix_hmac.h"
 #endif
 
-#include <libs/libwolfssl/wolfcrypt/hmac.h>
-
-typedef struct WOLFSSL_HMAC_CTX {
-    Hmac hmac;
-    int  type;
-    word32  save_ipad[WC_HMAC_BLOCK_SIZE  / sizeof(word32)];  /* same block size all*/
-    word32  save_opad[WC_HMAC_BLOCK_SIZE  / sizeof(word32)];
-} WOLFSSL_HMAC_CTX;
-
-#include <libs/libwolfssl/openssl/evp.h>
+#include <libs/libwolfssl/openssl/compat_types.h>
 #include <libs/libwolfssl/openssl/opensslv.h>
 
 #ifdef __cplusplus

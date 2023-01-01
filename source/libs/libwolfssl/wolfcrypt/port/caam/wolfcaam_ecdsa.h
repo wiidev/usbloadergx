@@ -1,6 +1,6 @@
 /* wolfcaam_ecdsa.h
  *
- * Copyright (C) 2006-2021 wolfSSL Inc.
+ * Copyright (C) 2006-2022 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -24,18 +24,18 @@
 #ifndef WOLFCAAM_ECDSA_H
 #define WOLFCAAM_ECDSA_H
 
-#if defined(HAVE_ECC) && defined(WOLFSSL_QNX_CAAM)
+#if defined(HAVE_ECC) && defined(WOLFSSL_CAAM)
 
 #include <libs/libwolfssl/wolfcrypt/ecc.h>
 
 WOLFSSL_LOCAL int wc_CAAM_EccSign(const byte* in, int inlen, byte* out,
-        word32* outlen, WC_RNG *rng, ecc_key *key);
+        word32* outlen, WC_RNG *rng, ecc_key *key, int devId);
 WOLFSSL_LOCAL int wc_CAAM_EccVerify(const byte* sig, word32 siglen,
-        const byte* hash, word32 hashlen, int* res, ecc_key* key);
+        const byte* hash, word32 hashlen, int* res, ecc_key* key, int devId);
 WOLFSSL_LOCAL int wc_CAAM_Ecdh(ecc_key* private_key, ecc_key* public_key,
-        byte* out, word32* outlen);
+        byte* out, word32* outlen, int devId);
 WOLFSSL_LOCAL int wc_CAAM_MakeEccKey(WC_RNG* rng, int keySize, ecc_key* key,
-        int curveId);
+        int curveId, int devId);
 WOLFSSL_LOCAL int wc_CAAM_EccCheckPrivKey(ecc_key* key, const byte* pubKey,
         word32 pubKeySz);
 #endif /* HAVE_ECC && WOLFSSL_QNX_CAAM */

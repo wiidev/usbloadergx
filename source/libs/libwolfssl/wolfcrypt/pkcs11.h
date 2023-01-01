@@ -1,6 +1,6 @@
 /* pkcs11.h
  *
- * Copyright (C) 2006-2021 wolfSSL Inc.
+ * Copyright (C) 2006-2022 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -346,6 +346,10 @@ typedef CK_FUNCTION_LIST_PTR* CK_FUNCTION_LIST_PTR_PTR;
 
 typedef CK_RV (*CK_C_GetFunctionList)(CK_FUNCTION_LIST_PTR_PTR ppFunctionList);
 
+#ifdef HAVE_PKCS11_STATIC
+CK_RV C_GetFunctionList(CK_FUNCTION_LIST_PTR_PTR ppFunctionList);
+#endif
+
 struct CK_FUNCTION_LIST {
     CK_VERSION version;
 
@@ -364,7 +368,7 @@ struct CK_FUNCTION_LIST {
                                 CK_MECHANISM_INFO_PTR pInfo);
     CK_RV (*C_InitToken)(CK_SLOT_ID slotID, CK_UTF8CHAR_PTR pPin,
                          CK_ULONG ulPinLen, CK_UTF8CHAR_PTR pLabel);
-    CK_RV (*C_InitPIN)(CK_SESSION_HANDLE hSession, CK_UTF8CHAR_PTR pPin, 
+    CK_RV (*C_InitPIN)(CK_SESSION_HANDLE hSession, CK_UTF8CHAR_PTR pPin,
                        CK_ULONG ulPinLen);
     CK_RV (*C_SetPIN)(CK_SESSION_HANDLE hSession, CK_UTF8CHAR_PTR pOldPin,
                       CK_ULONG ulOldLen, CK_UTF8CHAR_PTR pNewPin,

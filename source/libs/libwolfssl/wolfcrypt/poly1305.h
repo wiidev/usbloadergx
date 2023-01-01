@@ -1,6 +1,6 @@
 /* poly1305.h
  *
- * Copyright (C) 2006-2021 wolfSSL Inc.
+ * Copyright (C) 2006-2022 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -48,7 +48,7 @@
 #define WC_HAS_GCC_4_4_64BIT
 #endif
 
-#ifdef USE_INTEL_SPEEDUP
+#if defined(WOLFSSL_X86_64_BUILD) && defined(USE_INTEL_SPEEDUP)
 #elif (defined(WC_HAS_SIZEOF_INT128_64BIT) || defined(WC_HAS_MSVC_64BIT) ||  \
        defined(WC_HAS_GCC_4_4_64BIT))
 #define POLY130564
@@ -67,7 +67,7 @@ enum {
 
 /* Poly1305 state */
 typedef struct Poly1305 {
-#ifdef USE_INTEL_SPEEDUP
+#if defined(WOLFSSL_X86_64_BUILD) && defined(USE_INTEL_SPEEDUP)
     word64 r[3];
     word64 h[3];
     word64 pad[2];
@@ -84,8 +84,8 @@ typedef struct Poly1305 {
 #else
 #if defined(WOLFSSL_ARMASM) && defined(__aarch64__)
     ALIGN128 word32 r[5];
-    ALIGN128 word32 r_2[5]; // r^2
-    ALIGN128 word32 r_4[5]; // r^4
+    ALIGN128 word32 r_2[5]; /* r^2 */
+    ALIGN128 word32 r_4[5]; /* r^4 */
     ALIGN128 word32 h[5];
     word32 pad[4];
     word64 leftover;
@@ -110,7 +110,7 @@ typedef struct Poly1305 {
 
 WOLFSSL_API int wc_Poly1305SetKey(Poly1305* poly1305, const byte* key,
     word32 kySz);
-WOLFSSL_API int wc_Poly1305Update(Poly1305* poly1305, const byte*, word32);
+WOLFSSL_API int wc_Poly1305Update(Poly1305* poly1305, const byte* m, word32 bytes);
 WOLFSSL_API int wc_Poly1305Final(Poly1305* poly1305, byte* tag);
 
 /* AEAD Functions */

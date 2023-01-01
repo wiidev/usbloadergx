@@ -1,6 +1,6 @@
 /* aes.h
  *
- * Copyright (C) 2006-2021 wolfSSL Inc.
+ * Copyright (C) 2006-2022 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -67,12 +67,33 @@ block cipher mechanism that uses n-bit binary string parameter key with 128-bits
 #endif
 
 #ifdef WOLFSSL_XILINX_CRYPT
-#include "xsecure_aes.h"
+#ifdef WOLFSSL_XILINX_CRYPT_VERSAL
+#include <libs/libwolfssl/wolfcrypt/port/xilinx/xil-versal-glue.h>
+#include <xsecure_aesclient.h>
+#define WOLFSSL_XILINX_AES_KEY_SRC XSECURE_AES_USER_KEY_0
+#else /* versal */
+#include <xsecure_aes.h>
+#define WOLFSSL_XILINX_AES_KEY_SRC XSECURE_CSU_AES_KEY_SRC_KUP
+#endif /* !versal */
+#endif /* WOLFSSL_XILINX_CRYPT */
+
+#if defined(WOLFSSL_XILINX_CRYPT) || defined(WOLFSSL_AFALG_XILINX_AES)
+#if !defined(WOLFSSL_XILINX_AES_KEY_SRC)
+#define WOLFSSL_XILINX_AES_KEY_SRC 0
+#endif /* !defined(WOLFSSL_XILINX_AES_KEY_SRC) */
+#endif /* all Xilinx crypto */
+
+#ifdef WOLFSSL_SE050
+    #include <libs/libwolfssl/wolfcrypt/port/nxp/se050_port.h>
 #endif
 
 #if defined(WOLFSSL_AFALG) || defined(WOLFSSL_AFALG_XILINX_AES)
 /* included for struct msghdr */
 #include <libs/libwolfssl/wolfcrypt/port/af_alg/wc_afalg.h>
+#endif
+
+#if defined(WOLFSSL_KCAPI_AES)
+#include <libs/libwolfssl/wolfcrypt/port/kcapi/wc_kcapi.h>
 #endif
 
 #if defined(WOLFSSL_DEVCRYPTO_AES) || defined(WOLFSSL_DEVCRYPTO_CBC)
@@ -88,13 +109,21 @@ block cipher mechanism that uses n-bit binary string parameter key with 128-bits
     #include <libs/libwolfssl/wolfcrypt/random.h>
 #endif
 
+#if defined(WOLFSSL_HAVE_PSA) && !defined(WOLFSSL_PSA_NO_AES)
+#include <psa/crypto.h>
+#endif
+
 #if defined(WOLFSSL_CRYPTOCELL)
     #include <libs/libwolfssl/wolfcrypt/port/arm/cryptoCell.h>
 #endif
 
 #if defined(WOLFSSL_RENESAS_TSIP_TLS) && \
     defined(WOLFSSL_RENESAS_TSIP_TLS_AES_CRYPT)
-    #include <libs/libwolfssl/wolfcrypt/port/Renesas/renesas-tsip-crypt.h>
+    #include <libs/libwolfssl/wolfcrypt/port/Renesas/renesas_tsip_types.h>
+#endif
+
+#ifdef WOLFSSL_MAXQ10XX_CRYPTO
+    #include <libs/libwolfssl/wolfcrypt/port/maxim/maxq10xx.h>
 #endif
 
 #ifdef __cplusplus
@@ -131,7 +160,7 @@ enum {
     KEYWRAP_BLOCK_SIZE  = 8,
 
     GCM_NONCE_MAX_SZ = 16, /* wolfCrypt's maximum nonce size allowed. */
-    GCM_NONCE_MID_SZ = 12, /* The usual default nonce size for AES-GCM. */
+    GCM_NONCE_MID_SZ = 12, /* The default nonce size for AES-GCM. */
     GCM_NONCE_MIN_SZ = 8,  /* wolfCrypt's minimum nonce size allowed. */
     CCM_NONCE_MIN_SZ = 7,
     CCM_NONCE_MAX_SZ = 13,
@@ -147,7 +176,7 @@ enum {
     AES_XTS_MODE = 3,
 #endif
 
-#ifdef HAVE_PKCS11
+#ifdef WOLF_PRIVATE_KEY_ID
     AES_MAX_ID_LEN      = 32,
     AES_MAX_LABEL_LEN   = 32,
 #endif
@@ -174,6 +203,13 @@ struct Aes {
     word32 aadLen;  /* additional authenticated data len */
 #endif
 
+#ifdef WOLFSSL_SE050
+    sss_symmetric_t aes_ctx; /* used as the function context */
+    int ctxInitDone;
+    word32 keyId;
+    byte   keyIdSet;
+    byte   useSWCrypt; /* Use SW crypt instead of SE050, before SCP03 auth */
+#endif
 #ifdef GCM_TABLE
     /* key-based fast multiplication table. */
     ALIGN16 byte M0[256][AES_BLOCK_SIZE];
@@ -188,6 +224,9 @@ struct Aes {
     word32 y0;
 #endif
 #endif /* HAVE_AESGCM */
+#ifdef WOLFSSL_CAAM
+    int blackKey; /* black key / hsm key id */
+#endif
 #ifdef WOLFSSL_AESNI
     byte use_aesni;
 #endif /* WOLFSSL_AESNI */
@@ -195,7 +234,7 @@ struct Aes {
     int    devId;
     void*  devCtx;
 #endif
-#ifdef HAVE_PKCS11
+#ifdef WOLF_PRIVATE_KEY_ID
     byte id[AES_MAX_ID_LEN];
     int  idLen;
     char label[AES_MAX_LABEL_LEN];
@@ -209,9 +248,16 @@ struct Aes {
     word32  left;            /* unused bytes left from last call */
 #endif
 #ifdef WOLFSSL_XILINX_CRYPT
+#ifdef WOLFSSL_XILINX_CRYPT_VERSAL
+    wc_Xsecure          xSec;
+    XSecure_AesKeySize  xKeySize;
+    int                 aadStyle;
+    byte                keyInit[WOLFSSL_XSECURE_AES_KEY_SIZE] ALIGN64;
+#else
     XSecure_Aes xilAes;
     XCsuDma     dma;
-    word32      key_init[8];
+    word32      keyInit[8];
+#endif
     word32      kup;
 #endif
 #if defined(WOLFSSL_AFALG) || defined(WOLFSSL_AFALG_XILINX_AES)
@@ -224,9 +270,14 @@ struct Aes {
                   GCM_NONCE_MID_SZ)];
 #endif
 #endif
+#if defined(WOLFSSL_KCAPI_AES)
+    struct kcapi_handle* handle;
+    int                  init;
+#endif
 #if defined(WOLF_CRYPTO_CB) || (defined(WOLFSSL_DEVCRYPTO) && \
     (defined(WOLFSSL_DEVCRYPTO_AES) || defined(WOLFSSL_DEVCRYPTO_CBC))) || \
-    (defined(WOLFSSL_ASYNC_CRYPT) && defined(WC_ASYNC_ENABLE_AES))
+    (defined(WOLFSSL_ASYNC_CRYPT) && defined(WC_ASYNC_ENABLE_AES)) || \
+    defined(WOLFSSL_KCAPI_AES)
     word32 devKey[AES_MAX_KEY_SIZE/WOLFSSL_BIT_SIZE/sizeof(word32)]; /* raw key */
 #ifdef HAVE_CAVIUM_OCTEON_SYNC
     int    keySet;
@@ -243,11 +294,23 @@ struct Aes {
     defined(WOLFSSL_RENESAS_TSIP_TLS_AES_CRYPT)
     TSIP_AES_CTX ctx;
 #endif
+#if defined(WOLFSSL_RENESAS_SCEPROTECT)
+    SCE_AES_CTX ctx;
+#endif
 #if defined(WOLFSSL_IMXRT_DCP)
     dcp_handle_t handle;
 #endif
 #if defined(WOLFSSL_SILABS_SE_ACCEL)
     silabs_aes_t ctx;
+#endif
+#ifdef WOLFSSL_MAXQ10XX_CRYPTO
+    maxq_aes_t maxq_ctx;
+#endif
+#if defined(WOLFSSL_HAVE_PSA) && !defined(WOLFSSL_PSA_NO_AES)
+    psa_key_id_t key_id;
+    psa_cipher_operation_t psa_ctx;
+    int ctx_initialized;
+    int key_need_importing;
 #endif
     void*  heap; /* memory hint to use */
 #ifdef WOLFSSL_AESGCM_STREAM
@@ -351,10 +414,27 @@ WOLFSSL_API int wc_AesEcbDecrypt(Aes* aes, byte* out,
 #endif
 /* AES-DIRECT */
 #if defined(WOLFSSL_AES_DIRECT)
+#if defined(HAVE_FIPS) && \
+    (!defined(HAVE_FIPS_VERSION) || (HAVE_FIPS_VERSION < 2))
  WOLFSSL_API void wc_AesEncryptDirect(Aes* aes, byte* out, const byte* in);
  WOLFSSL_API void wc_AesDecryptDirect(Aes* aes, byte* out, const byte* in);
- WOLFSSL_API int  wc_AesSetKeyDirect(Aes* aes, const byte* key, word32 len,
+ WOLFSSL_API int wc_AesSetKeyDirect(Aes* aes, const byte* key, word32 len,
                                 const byte* iv, int dir);
+#elif defined(BUILDING_WOLFSSL)
+ WOLFSSL_API WARN_UNUSED_RESULT int wc_AesEncryptDirect(Aes* aes, byte* out,
+                                                        const byte* in);
+ WOLFSSL_API WARN_UNUSED_RESULT int wc_AesDecryptDirect(Aes* aes, byte* out,
+                                                        const byte* in);
+ WOLFSSL_API WARN_UNUSED_RESULT int wc_AesSetKeyDirect(Aes* aes,
+                                                       const byte* key,
+                                                       word32 len,
+                                const byte* iv, int dir);
+#else
+ WOLFSSL_API int wc_AesEncryptDirect(Aes* aes, byte* out, const byte* in);
+ WOLFSSL_API int wc_AesDecryptDirect(Aes* aes, byte* out, const byte* in);
+ WOLFSSL_API int wc_AesSetKeyDirect(Aes* aes, const byte* key, word32 len,
+                                const byte* iv, int dir);
+#endif
 #endif
 
 #ifdef HAVE_AESGCM
@@ -488,13 +568,24 @@ WOLFSSL_API int wc_AesXtsFree(XtsAes* aes);
 WOLFSSL_API int wc_AesGetKeySize(Aes* aes, word32* keySize);
 
 WOLFSSL_API int  wc_AesInit(Aes* aes, void* heap, int devId);
-#ifdef HAVE_PKCS11
+#ifdef WOLF_PRIVATE_KEY_ID
 WOLFSSL_API int  wc_AesInit_Id(Aes* aes, unsigned char* id, int len, void* heap,
         int devId);
 WOLFSSL_API int  wc_AesInit_Label(Aes* aes, const char* label, void* heap,
         int devId);
 #endif
 WOLFSSL_API void wc_AesFree(Aes* aes);
+
+#ifdef WOLFSSL_AES_SIV
+WOLFSSL_API
+int wc_AesSivEncrypt(const byte* key, word32 keySz, const byte* assoc,
+                     word32 assocSz, const byte* nonce, word32 nonceSz,
+                     const byte* in, word32 inSz, byte* siv, byte* out);
+WOLFSSL_API
+int wc_AesSivDecrypt(const byte* key, word32 keySz, const byte* assoc,
+                     word32 assocSz, const byte* nonce, word32 nonceSz,
+                     const byte* in, word32 inSz, byte* siv, byte* out);
+#endif
 
 #ifdef __cplusplus
     } /* extern "C" */

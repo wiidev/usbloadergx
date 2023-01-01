@@ -1,6 +1,6 @@
 /* x509v3.h
  *
- * Copyright (C) 2006-2021 wolfSSL Inc.
+ * Copyright (C) 2006-2022 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -31,15 +31,42 @@
     extern "C" {
 #endif
 
+#define EXFLAG_KUSAGE  0x2
+#define EXFLAG_XKUSAGE 0x4
+
+#define KU_DIGITAL_SIGNATURE    KEYUSE_DIGITAL_SIG
+#define KU_NON_REPUDIATION      KEYUSE_CONTENT_COMMIT
+#define KU_KEY_ENCIPHERMENT     KEYUSE_KEY_ENCIPHER
+#define KU_DATA_ENCIPHERMENT    KEYUSE_DATA_ENCIPHER
+#define KU_KEY_AGREEMENT        KEYUSE_KEY_AGREE
+#define KU_KEY_CERT_SIGN        KEYUSE_KEY_CERT_SIGN
+#define KU_CRL_SIGN             KEYUSE_CRL_SIGN
+#define KU_ENCIPHER_ONLY        KEYUSE_ENCIPHER_ONLY
+#define KU_DECIPHER_ONLY        KEYUSE_DECIPHER_ONLY
+
+#define XKU_SSL_SERVER 0x1
+#define XKU_SSL_CLIENT 0x2
+#define XKU_SMIME      0x4
+#define XKU_CODE_SIGN  0x8
+#define XKU_SGC        0x10
+#define XKU_OCSP_SIGN  0x20
+#define XKU_TIMESTAMP  0x40
+#define XKU_DVCS       0x80
+#define XKU_ANYEKU     0x100
+
 #define X509_PURPOSE_SSL_CLIENT       0
 #define X509_PURPOSE_SSL_SERVER       1
 
-#define NS_SSL_CLIENT                 0
-#define NS_SSL_SERVER                 1
+#define NS_SSL_CLIENT                 WC_NS_SSL_CLIENT
+#define NS_SSL_SERVER                 WC_NS_SSL_SERVER
 
 /* Forward reference */
 
+#if defined(OPENSSL_VERSION_NUMBER) && OPENSSL_VERSION_NUMBER >= 0x0090801fL
 typedef void *(*X509V3_EXT_D2I)(void *, const unsigned char **, long);
+#else
+typedef void *(*X509V3_EXT_D2I)(void *, unsigned char **, long);
+#endif
 typedef int (*X509V3_EXT_I2D) (void *, unsigned char **);
 typedef STACK_OF(CONF_VALUE) *(*X509V3_EXT_I2V) (
                                 struct WOLFSSL_v3_ext_method *method,
@@ -94,8 +121,13 @@ WOLFSSL_API WOLFSSL_BASIC_CONSTRAINTS* wolfSSL_BASIC_CONSTRAINTS_new(void);
 WOLFSSL_API void wolfSSL_BASIC_CONSTRAINTS_free(WOLFSSL_BASIC_CONSTRAINTS *bc);
 WOLFSSL_API WOLFSSL_AUTHORITY_KEYID* wolfSSL_AUTHORITY_KEYID_new(void);
 WOLFSSL_API void wolfSSL_AUTHORITY_KEYID_free(WOLFSSL_AUTHORITY_KEYID *id);
+#if defined(OPENSSL_VERSION_NUMBER) && OPENSSL_VERSION_NUMBER >= 0x10100000L
 WOLFSSL_API const WOLFSSL_v3_ext_method* wolfSSL_X509V3_EXT_get(
                                                     WOLFSSL_X509_EXTENSION* ex);
+#else
+WOLFSSL_API WOLFSSL_v3_ext_method* wolfSSL_X509V3_EXT_get(
+                                                    WOLFSSL_X509_EXTENSION* ex);
+#endif
 WOLFSSL_API void* wolfSSL_X509V3_EXT_d2i(WOLFSSL_X509_EXTENSION* ex);
 WOLFSSL_API char* wolfSSL_i2s_ASN1_STRING(WOLFSSL_v3_ext_method *method,
                                           const WOLFSSL_ASN1_STRING *s);
@@ -103,6 +135,7 @@ WOLFSSL_API int wolfSSL_X509V3_EXT_print(WOLFSSL_BIO *out,
         WOLFSSL_X509_EXTENSION *ext, unsigned long flag, int indent);
 WOLFSSL_API int wolfSSL_X509V3_EXT_add_nconf(WOLFSSL_CONF *conf, WOLFSSL_X509V3_CTX *ctx,
         const char *section, WOLFSSL_X509 *cert);
+WOLFSSL_API WOLFSSL_ASN1_STRING* wolfSSL_a2i_IPADDRESS(const char* ipa);
 
 #define BASIC_CONSTRAINTS_free    wolfSSL_BASIC_CONSTRAINTS_free
 #define AUTHORITY_KEYID_free      wolfSSL_AUTHORITY_KEYID_free
@@ -116,11 +149,13 @@ WOLFSSL_API int wolfSSL_X509V3_EXT_add_nconf(WOLFSSL_CONF *conf, WOLFSSL_X509V3_
 #define X509V3_parse_list(...)    NULL
 #endif
 #define i2s_ASN1_OCTET_STRING     wolfSSL_i2s_ASN1_STRING
+#define a2i_IPADDRESS             wolfSSL_a2i_IPADDRESS
 #define X509V3_EXT_print          wolfSSL_X509V3_EXT_print
 #define X509V3_EXT_conf_nid       wolfSSL_X509V3_EXT_conf_nid
 #define X509V3_set_ctx            wolfSSL_X509V3_set_ctx
 #ifndef NO_WOLFSSL_STUB
 #define X509V3_set_nconf(...)
+#define X509V3_EXT_cleanup(...)
 #endif
 #define X509V3_set_ctx_test(ctx)  wolfSSL_X509V3_set_ctx(ctx, NULL, NULL, NULL, NULL, CTX_TEST)
 #define X509V3_set_ctx_nodb       wolfSSL_X509V3_set_ctx_nodb

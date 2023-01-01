@@ -1,6 +1,6 @@
 /* dsa.h
  *
- * Copyright (C) 2006-2021 wolfSSL Inc.
+ * Copyright (C) 2006-2022 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -84,9 +84,9 @@ WOLFSSL_API int wc_DsaSign(const byte* digest, byte* out,
 WOLFSSL_API int wc_DsaVerify(const byte* digest, const byte* sig,
                              DsaKey* key, int* answer);
 WOLFSSL_API int wc_DsaPublicKeyDecode(const byte* input, word32* inOutIdx,
-                                      DsaKey*, word32);
+                                      DsaKey* key, word32 inSz);
 WOLFSSL_API int wc_DsaPrivateKeyDecode(const byte* input, word32* inOutIdx,
-                                       DsaKey*, word32);
+                                       DsaKey* key, word32 inSz);
 WOLFSSL_API int wc_DsaKeyToDer(DsaKey* key, byte* output, word32 inLen);
 WOLFSSL_API int wc_SetDsaPublicKey(byte* output, DsaKey* key,
                                    int outLen, int with_header);

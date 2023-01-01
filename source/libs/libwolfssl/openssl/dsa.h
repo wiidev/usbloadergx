@@ -1,6 +1,6 @@
 /* dsa.h
  *
- * Copyright (C) 2006-2021 wolfSSL Inc.
+ * Copyright (C) 2006-2022 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -41,8 +41,6 @@ typedef struct WOLFSSL_DSA            WOLFSSL_DSA;
 #define WOLFSSL_DSA_TYPE_DEFINED
 #endif
 
-typedef WOLFSSL_DSA                   DSA;
-
 struct WOLFSSL_DSA {
     WOLFSSL_BIGNUM* p;
     WOLFSSL_BIGNUM* q;
@@ -56,15 +54,18 @@ struct WOLFSSL_DSA {
 
 
 WOLFSSL_API WOLFSSL_DSA* wolfSSL_DSA_new(void);
-WOLFSSL_API void wolfSSL_DSA_free(WOLFSSL_DSA*);
+WOLFSSL_API void wolfSSL_DSA_free(WOLFSSL_DSA* dsa);
+#if !defined(NO_FILESYSTEM) && !defined(NO_STDIO_FILESYSTEM)
+WOLFSSL_API int wolfSSL_DSA_print_fp(XFILE fp, WOLFSSL_DSA* dsa, int indent);
+#endif /* !NO_FILESYSTEM && NO_STDIO_FILESYSTEM */
 
-WOLFSSL_API int wolfSSL_DSA_generate_key(WOLFSSL_DSA*);
+WOLFSSL_API int wolfSSL_DSA_generate_key(WOLFSSL_DSA* dsa);
 
 typedef void (*WOLFSSL_BN_CB)(int i, int j, void* exArg);
 WOLFSSL_API WOLFSSL_DSA* wolfSSL_DSA_generate_parameters(int bits,
                    unsigned char* seed, int seedLen, int* counterRet,
                    unsigned long* hRet, WOLFSSL_BN_CB cb, void* CBArg);
-WOLFSSL_API int wolfSSL_DSA_generate_parameters_ex(WOLFSSL_DSA*, int bits,
+WOLFSSL_API int wolfSSL_DSA_generate_parameters_ex(WOLFSSL_DSA* dsa, int bits,
                    unsigned char* seed, int seedLen, int* counterRet,
                    unsigned long* hRet, void* cb);
 
@@ -79,17 +80,17 @@ WOLFSSL_API int wolfSSL_DSA_set0_key(WOLFSSL_DSA *d, WOLFSSL_BIGNUM *pub_key,
         WOLFSSL_BIGNUM *priv_key);
 
 
-WOLFSSL_API int wolfSSL_DSA_LoadDer(WOLFSSL_DSA*, const unsigned char*, int sz);
+WOLFSSL_API int wolfSSL_DSA_LoadDer(
+    WOLFSSL_DSA* dsa, const unsigned char* derBuf, int derSz);
 
-WOLFSSL_API int wolfSSL_DSA_LoadDer_ex(WOLFSSL_DSA*, const unsigned char*,
-                                       int sz, int opt);
+WOLFSSL_API int wolfSSL_DSA_LoadDer_ex(
+    WOLFSSL_DSA* dsa, const unsigned char* derBuf, int derSz, int opt);
 
-WOLFSSL_API int wolfSSL_DSA_do_sign(const unsigned char* d,
-                                    unsigned char* sigRet, WOLFSSL_DSA* dsa);
+WOLFSSL_API int wolfSSL_DSA_do_sign(
+    const unsigned char* d, unsigned char* sigRet, WOLFSSL_DSA* dsa);
 
-WOLFSSL_API int wolfSSL_DSA_do_verify(const unsigned char* d,
-                                      unsigned char* sig,
-                                      WOLFSSL_DSA* dsa, int *dsacheck);
+WOLFSSL_API int wolfSSL_DSA_do_verify(
+    const unsigned char* d, unsigned char* sig, WOLFSSL_DSA* dsa, int *dsacheck);
 
 WOLFSSL_API int wolfSSL_DSA_bits(const WOLFSSL_DSA *d);
 
@@ -109,11 +110,21 @@ WOLFSSL_API WOLFSSL_DSA_SIG* wolfSSL_DSA_do_sign_ex(const unsigned char* digest,
 WOLFSSL_API int wolfSSL_DSA_do_verify_ex(const unsigned char* digest, int digest_len,
                                          WOLFSSL_DSA_SIG* sig, WOLFSSL_DSA* dsa);
 
+WOLFSSL_API int wolfSSL_i2d_DSAparams(
+    const WOLFSSL_DSA* dsa, unsigned char** out);
+WOLFSSL_API WOLFSSL_DSA* wolfSSL_d2i_DSAparams(
+    WOLFSSL_DSA** dsa, const unsigned char** der, long derLen);
+
+#if defined(OPENSSL_EXTRA) || defined(OPENSSL_EXTRA_X509_SMALL)
+
+typedef WOLFSSL_DSA                   DSA;
+
 #define WOLFSSL_DSA_LOAD_PRIVATE 1
 #define WOLFSSL_DSA_LOAD_PUBLIC  2
 
 #define DSA_new wolfSSL_DSA_new
 #define DSA_free wolfSSL_DSA_free
+#define DSA_print_fp wolfSSL_DSA_print_fp
 
 #define DSA_LoadDer                wolfSSL_DSA_LoadDer
 #define DSA_generate_key           wolfSSL_DSA_generate_key
@@ -132,12 +143,15 @@ WOLFSSL_API int wolfSSL_DSA_do_verify_ex(const unsigned char* digest, int digest
 #define d2i_DSA_SIG                wolfSSL_d2i_DSA_SIG
 #define DSA_do_sign                wolfSSL_DSA_do_sign_ex
 #define DSA_do_verify              wolfSSL_DSA_do_verify_ex
-
+#define i2d_DSAparams              wolfSSL_i2d_DSAparams
+#define d2i_DSAparams              wolfSSL_d2i_DSAparams
 
 #define DSA_SIG                    WOLFSSL_DSA_SIG
 
+#endif /* OPENSSL_EXTRA || OPENSSL_EXTRA_X509_SMALL */
+
 #ifdef __cplusplus
-    }  /* extern "C" */ 
+    }  /* extern "C" */
 #endif
 
 #endif /* header */

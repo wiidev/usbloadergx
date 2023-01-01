@@ -421,7 +421,7 @@ void downloadfile(const char *url, struct download *buffer)
     if (httpinfo.use_https)
     {
         // Create a new SSL context
-        // wolfSSLv23_client_method() works but TLS 1.2 is slightly faster on Wii
+        // TLS 1.2 is slightly faster on Wii
         if ((httpinfo.ctx = wolfSSL_CTX_new(wolfTLSv1_2_client_method())) == NULL)
         {
 #ifdef DEBUG_NETWORK

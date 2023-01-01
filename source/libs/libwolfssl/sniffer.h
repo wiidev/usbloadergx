@@ -1,6 +1,6 @@
 /* sniffer.h
  *
- * Copyright (C) 2006-2021 wolfSSL Inc.
+ * Copyright (C) 2006-2022 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -27,6 +27,11 @@
 #include <libs/libwolfssl/wolfcrypt/settings.h>
 #include <libs/libwolfssl/wolfcrypt/asn_public.h>
 
+#ifdef HAVE_WOLF_EVENT
+    #include <libs/libwolfssl/wolfcrypt/wolfevent.h>
+#endif
+
+
 #ifdef _WIN32
     #ifdef SSL_SNIFFER_EXPORTS
         #define SSL_SNIFFER_API __declspec(dllexport)
@@ -42,6 +47,22 @@
     extern "C" {
 #endif
 
+
+typedef struct IpAddrInfo {
+    int version;
+    union {
+        word32 ip4;
+        byte   ip6[16];
+    };
+} IpAddrInfo;
+
+typedef struct SnifferStreamInfo {
+    IpAddrInfo src;          /* server address in network byte order */
+    IpAddrInfo dst;          /* client address in network byte order */
+    word16            dstPort;         /* server port */
+    word16            srcPort;         /* client port */
+} SnifferStreamInfo;
+
 /* @param typeK: (formerly keyType) was shadowing a global declaration in
  *                wolfssl/wolfcrypt/asn.h line 175
  */
@@ -52,8 +73,8 @@ SSL_SNIFFER_API int ssl_SetPrivateKey(const char* address, int port,
 
 WOLFSSL_API
 SSL_SNIFFER_API int ssl_SetPrivateKeyBuffer(const char* address, int port,
-                                            const char* keyBuf, int keySz, 
-                                            int typeK, const char* password, 
+                                            const char* keyBuf, int keySz,
+                                            int typeK, const char* password,
                                             char* error);
 
 
@@ -66,31 +87,31 @@ SSL_SNIFFER_API int ssl_SetNamedPrivateKey(const char* name,
 WOLFSSL_API
 SSL_SNIFFER_API int ssl_SetNamedPrivateKeyBuffer(const char* name,
                                                  const char* address, int port,
-                                                 const char* keyBuf, int keySz, 
-                                                 int typeK, const char* password, 
+                                                 const char* keyBuf, int keySz,
+                                                 int typeK, const char* password,
                                                  char* error);
 
-WOLFSSL_API 
-SSL_SNIFFER_API int ssl_SetEphemeralKey(const char* address, int port, 
-                                        const char* keyFile, int typeKey, 
+WOLFSSL_API
+SSL_SNIFFER_API int ssl_SetEphemeralKey(const char* address, int port,
+                                        const char* keyFile, int typeKey,
                                         const char* password, char* error);
 
-WOLFSSL_API 
-SSL_SNIFFER_API int ssl_SetEphemeralKeyBuffer(const char* address, int port, 
-                                              const char* keyBuf, int keySz, int typeKey, 
+WOLFSSL_API
+SSL_SNIFFER_API int ssl_SetEphemeralKeyBuffer(const char* address, int port,
+                                              const char* keyBuf, int keySz, int typeKey,
                                               const char* password, char* error);
 
 
-WOLFSSL_API 
+WOLFSSL_API
 SSL_SNIFFER_API int ssl_SetNamedEphemeralKey(const char* name,
                                              const char* address, int port,
                                              const char* keyFile, int typeKey,
                                              const char* password, char* error);
 
-WOLFSSL_API 
+WOLFSSL_API
 SSL_SNIFFER_API int ssl_SetNamedEphemeralKeyBuffer(const char* name,
                                                    const char* address, int port,
-                                                   const char* keyBuf, int keySz, int typeKey, 
+                                                   const char* keyBuf, int keySz, int typeKey,
                                                    const char* password, char* error);
 
 WOLFSSL_API
@@ -119,9 +140,15 @@ SSL_SNIFFER_API int ssl_GetSessionStats(unsigned int* active,
                                         unsigned int* reassemblyMemory,
                                         char* error);
 
-WOLFSSL_API void ssl_InitSniffer(void);
+WOLFSSL_API
+SSL_SNIFFER_API void ssl_InitSniffer(void);
+WOLFSSL_API
+SSL_SNIFFER_API void ssl_InitSniffer_ex(int devId);
+WOLFSSL_API
+SSL_SNIFFER_API void ssl_InitSniffer_ex2(int threadNum);
 
-WOLFSSL_API void ssl_FreeSniffer(void);
+WOLFSSL_API
+SSL_SNIFFER_API void ssl_FreeSniffer(void);
 
 
 /* ssl_SetPrivateKey typeKs */
@@ -167,47 +194,46 @@ SSL_SNIFFER_API int ssl_SetConnectionCtx(void* ctx);
 
 typedef struct SSLStats
 {
-    unsigned long int sslStandardConns;
-    unsigned long int sslClientAuthConns;
-    unsigned long int sslResumedConns;
-    unsigned long int sslEphemeralMisses;
-    unsigned long int sslResumeMisses;
-    unsigned long int sslCiphersUnsupported;
-    unsigned long int sslKeysUnmatched;
-    unsigned long int sslKeyFails;
-    unsigned long int sslDecodeFails;
-    unsigned long int sslAlerts;
-    unsigned long int sslDecryptedBytes;
-    unsigned long int sslEncryptedBytes;
-    unsigned long int sslEncryptedPackets;
-    unsigned long int sslDecryptedPackets;
-    unsigned long int sslKeyMatches;
-    unsigned long int sslEncryptedConns;
-    unsigned long int sslResumptionInserts;
+    unsigned long int sslStandardConns;      /* server_hello count not including resumed sessions */
+    unsigned long int sslClientAuthConns;    /* client's who have presented certificates (mutual authentication) */
+    unsigned long int sslResumedConns;       /* resumed connections */
+    unsigned long int sslEphemeralMisses;    /* TLS v1.2 and older PFS / ephemeral connections missed (not able to decrypt) */
+    unsigned long int sslResumeMisses;       /* Resumption sessions not found */
+    unsigned long int sslCiphersUnsupported; /* No cipher suite match found when compared to supported */
+    unsigned long int sslKeysUnmatched;      /* Key callback failures (not found). Applies to WOLFSSL_SNIFFER_WATCH only */
+    unsigned long int sslKeyFails;           /* Failures loading or using keys */
+    unsigned long int sslDecodeFails;        /* Dropped packets (not application_data or match protocol version) */
+    unsigned long int sslAlerts;             /* Number of decoded alert messages */
+    unsigned long int sslDecryptedBytes;     /* Number of decrypted bytes */
+    unsigned long int sslEncryptedBytes;     /* Number of encrypted bytes */
+    unsigned long int sslEncryptedPackets;   /* Number of encrypted packets */
+    unsigned long int sslDecryptedPackets;   /* Number of decrypted packets */
+    unsigned long int sslKeyMatches;         /* Key callback successes (failures tracked in sslKeysUnmatched). Applies to WOLFSSL_SNIFFER_WATCH only. */
+    unsigned long int sslEncryptedConns;     /* Number of created sniffer sessions */
+    unsigned long int sslResumptionInserts;  /* Number of sessions reused with resumption */
 } SSLStats;
-
 
 WOLFSSL_API
 SSL_SNIFFER_API int ssl_ResetStatistics(void);
 
-
 WOLFSSL_API
 SSL_SNIFFER_API int ssl_ReadStatistics(SSLStats* stats);
 
-
 WOLFSSL_API
 SSL_SNIFFER_API int ssl_ReadResetStatistics(SSLStats* stats);
+
+
+#if defined(WOLFSSL_STATIC_EPHEMERAL) && defined(WOLFSSL_TLS13)
+/* macro indicating support for key callback */
+#undef  WOLFSSL_SNIFFER_KEY_CALLBACK
+#define WOLFSSL_SNIFFER_KEY_CALLBACK
 
 typedef int (*SSLKeyCb)(void* vSniffer, int namedGroup,
     const unsigned char* srvPub, unsigned int srvPubSz,
     const unsigned char* cliPub, unsigned int cliPubSz,
     DerBuffer* privKey, void* cbCtx, char* error);
 
-#if defined(WOLFSSL_STATIC_EPHEMERAL) && defined(WOLFSSL_TLS13)
-/* macro indicating support for key callback */
-#undef  WOLFSSL_SNIFFER_KEY_CALLBACK
-#define WOLFSSL_SNIFFER_KEY_CALLBACK
-WOLFSSL_API 
+WOLFSSL_API
 SSL_SNIFFER_API int ssl_SetKeyCallback(SSLKeyCb cb, void* cbCtx);
 #endif
 
@@ -269,6 +295,24 @@ SSL_SNIFFER_API int ssl_DecodePacketWithChainSessionInfoStoreData(
         void* vChain, unsigned int chainSz, void* ctx, SSLInfo* sslInfo,
         char* error);
 #endif
+
+WOLFSSL_API
+SSL_SNIFFER_API int ssl_DecodePacket_GetStream(SnifferStreamInfo* info,
+        const byte* packet, int length, char* error);
+
+#ifdef WOLFSSL_ASYNC_CRYPT
+
+WOLFSSL_API
+SSL_SNIFFER_API int ssl_DecodePacketAsync(void* packet, unsigned int packetSz,
+    int isChain, unsigned char** data, char* error, SSLInfo* sslInfo,
+    void* userCtx);
+
+WOLFSSL_API
+SSL_SNIFFER_API int ssl_PollSniffer(WOLF_EVENT** events, int maxEvents,
+    WOLF_EVENT_FLAG flags, int* eventCount);
+
+#endif /* WOLFSSL_ASYNC_CRYPT */
+
 
 
 #ifdef __cplusplus

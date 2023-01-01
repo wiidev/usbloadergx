@@ -1,6 +1,6 @@
 /* misc.h
  *
- * Copyright (C) 2006-2021 wolfSSL Inc.
+ * Copyright (C) 2006-2022 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -66,7 +66,7 @@ WOLFSSL_LOCAL
 void xorbuf(void*, const void*, word32);
 
 WOLFSSL_LOCAL
-void ForceZero(const void*, word32);
+void ForceZero(void*, word32);
 
 WOLFSSL_LOCAL
 int ConstantCompare(const byte*, const byte*, int);
@@ -107,6 +107,9 @@ void ato24(const byte* c, word32* u24);
 void ato32(const byte* c, word32* u32);
 word32 btoi(byte b);
 
+WOLFSSL_LOCAL signed char HexCharToByte(char ch);
+WOLFSSL_LOCAL char ByteToHex(byte in);
+WOLFSSL_LOCAL int  ByteToHexStr(byte in, char* out);
 
 WOLFSSL_LOCAL byte ctMaskGT(int a, int b);
 WOLFSSL_LOCAL byte ctMaskGTE(int a, int b);
@@ -123,6 +126,27 @@ WOLFSSL_LOCAL byte ctMaskNotEq(int a, int b);
 WOLFSSL_LOCAL byte ctMaskSel(byte m, byte a, byte b);
 WOLFSSL_LOCAL int  ctMaskSelInt(byte m, int a, int b);
 WOLFSSL_LOCAL byte ctSetLTE(int a, int b);
+WOLFSSL_LOCAL void ctMaskCopy(byte mask, byte* dst, byte* src, word16 size);
+WOLFSSL_LOCAL word32 MakeWordFromHash(const byte* hashID);
+WOLFSSL_LOCAL word32 HashObject(const byte* o, word32 len, int* error);
+
+WOLFSSL_LOCAL void w64Increment(w64wrapper *n);
+WOLFSSL_LOCAL void w64Decrement(w64wrapper *n);
+WOLFSSL_LOCAL byte w64Equal(w64wrapper a, w64wrapper b);
+WOLFSSL_LOCAL word32 w64GetLow32(w64wrapper n);
+WOLFSSL_LOCAL word32 w64GetHigh32(w64wrapper n);
+WOLFSSL_LOCAL void w64SetLow32(w64wrapper *n, word32 low);
+WOLFSSL_LOCAL w64wrapper w64Add32(w64wrapper a, word32 b, byte *wrap);
+WOLFSSL_LOCAL w64wrapper w64Sub32(w64wrapper a, word32 b, byte *wrap);
+WOLFSSL_LOCAL byte w64GT(w64wrapper a, w64wrapper b);
+WOLFSSL_LOCAL byte w64IsZero(w64wrapper a);
+WOLFSSL_LOCAL void c64toa(const w64wrapper *a, byte *out);
+WOLFSSL_LOCAL void ato64(const byte *in, w64wrapper *w64);
+WOLFSSL_LOCAL w64wrapper w64From32(word32 hi, word32 lo);
+WOLFSSL_LOCAL byte w64GTE(w64wrapper a, w64wrapper b);
+WOLFSSL_LOCAL byte w64LT(w64wrapper a, w64wrapper b);
+WOLFSSL_LOCAL w64wrapper w64Sub(w64wrapper a, w64wrapper b);
+WOLFSSL_LOCAL void w64Zero(w64wrapper *a);
 
 #endif /* NO_INLINE */
 

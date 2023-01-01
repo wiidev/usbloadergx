@@ -1,6 +1,6 @@
 /* wolfcaam.h
  *
- * Copyright (C) 2006-2021 wolfSSL Inc.
+ * Copyright (C) 2006-2022 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -28,11 +28,27 @@
 /* include for porting layer */
 #ifdef WOLFSSL_QNX_CAAM
     #include <libs/libwolfssl/wolfcrypt/port/caam/wolfcaam_qnx.h>
+#elif defined(WOLFSSL_SECO_CAAM)
+    #include <libs/libwolfssl/wolfcrypt/port/caam/wolfcaam_seco.h>
 #endif
 
 #if defined(WOLFSSL_IMX6_CAAM) || defined(WOLFSSL_IMX6_CAAM_RNG) || \
-    defined(WOLFSSL_QNX_CAAM)
+    defined(WOLFSSL_QNX_CAAM) || defined(WOLFSSL_SECO_CAAM)
 
+
+/* unique devId for CAAM use on crypto callbacks */
+#ifndef WOLFSSL_CAAM_DEVID
+    #define WOLFSSL_CAAM_DEVID 7
+#endif
+
+/* black key stored in secure memory location */
+#define CAAM_BLACK_KEY_SM 1
+
+/* black key encrypted with AES-CCM (has MAC) */
+#define CAAM_BLACK_KEY_CCM 2
+
+/* black key encrypted with AES-ECB (no MAC) */
+#define CAAM_BLACK_KEY_ECB 3
 
 #if defined(__INTEGRITY) || defined(INTEGRITY)
     #include <INTEGRITY.h>
@@ -49,7 +65,7 @@ WOLFSSL_LOCAL void wc_caamWriteRegister(word32 reg, word32 value);
 WOLFSSL_LOCAL int  wc_caamAddAndWait(CAAM_BUFFER* buf, int sz, word32 arg[4],
         word32 type);
 
-WOLFSSL_LOCAL int caamFindUnusuedPartition(void);
+WOLFSSL_LOCAL int caamFindUnusedPartition(void);
 WOLFSSL_LOCAL CAAM_ADDRESS caamGetPartition(int part, int sz);
 WOLFSSL_LOCAL int caamFreePart(int partNum);
 WOLFSSL_LOCAL int caamWriteToPartition(CAAM_ADDRESS addr, const unsigned char* in, int inSz);
@@ -76,7 +92,7 @@ WOLFSSL_API int wc_caamCoverKey(byte* in, word32 inSz, byte* out, word32* outSz,
 #define WC_CAAM_BLACK_KEYMOD_SZ 16
 #define WC_CAAM_MAX_ENTROPY 44
 
-#ifndef WOLFSSL_QNX_CAAM
+#if !defined(WOLFSSL_QNX_CAAM) && !defined(WOLFSSL_SECO_CAAM)
     WOLFSSL_API int wc_caamSetResource(IODevice ioDev);
     #ifndef WC_CAAM_READ
         #define WC_CAAM_READ(reg)      wc_caamReadRegister((reg))
@@ -94,6 +110,7 @@ WOLFSSL_API int wc_caamCoverKey(byte* in, word32 inSz, byte* out, word32* outSz,
 #define CAAM_AESOFB 0x00100400
 #define CAAM_CMAC   0x00100600
 #define CAAM_AESCCM 0x00100800
+#define CAAM_AESGCM 0x00100900
 
 #define CAAM_MD5    0x00400000
 #define CAAM_SHA    0x00410000
