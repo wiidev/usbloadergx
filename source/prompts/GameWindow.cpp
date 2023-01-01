@@ -745,8 +745,9 @@ void GameWindow::BootGame(struct discHdr *header)
 	snprintf(IDfull, sizeof(IDfull), "%s", (char *) header->id);
 
 	int gameIOS = game_cfg->ios == INHERIT ? Settings.cios : game_cfg->ios;
+	int autoIOS = game_cfg->autoios == INHERIT ? Settings.AutoIOS : game_cfg->autoios;
 	int gameNandEmuMode = game_cfg->NandEmuMode == INHERIT ? Settings.NandEmuMode : game_cfg->NandEmuMode;
-	if(header->type == TYPE_GAME_EMUNANDCHAN)
+	if (header->type == TYPE_GAME_EMUNANDCHAN)
 		gameNandEmuMode = game_cfg->NandEmuMode == INHERIT ? Settings.NandEmuChanMode : game_cfg->NandEmuMode;
 
 	if (game_cfg->loadalternatedol == 2)
@@ -760,14 +761,14 @@ void GameWindow::BootGame(struct discHdr *header)
 				return;
 		}
 	}
-	else if(game_cfg->loadalternatedol == 3 && WDMMenu::Show(header) == 0)
+	else if (game_cfg->loadalternatedol == 3 && WDMMenu::Show(header) == 0)
 	{
 		// Canceled
 		return;
 	}
-	else if(game_cfg->loadalternatedol == 4)
+	else if (game_cfg->loadalternatedol == 4)
 	{
-		if(!IosLoader::IsD2X(gameIOS))
+		if(autoIOS == GAME_IOS_CUSTOM && !IosLoader::IsD2X(gameIOS))
 			defaultDolPrompt((char *) header->id);
 	}
 
@@ -778,35 +779,38 @@ void GameWindow::BootGame(struct discHdr *header)
 		if (CheckFile(filepath) == false)
 		{
 			snprintf(filepath + n, sizeof(filepath) - n, " %s", tr( "does not exist!  Loading game without cheats." ));
-			if(!WindowPrompt(tr( "Error" ), filepath, tr( "Continue" ), tr( "Cancel")))
+			if (!WindowPrompt(tr( "Error" ), filepath, tr( "Continue" ), tr( "Cancel")))
 				return;
 		}
 	}
 
-	if(header->type == TYPE_GAME_EMUNANDCHAN)
+	if (autoIOS == GAME_IOS_CUSTOM)
 	{
-		if(gameNandEmuMode != EMUNAND_NEEK)
+		if (header->type == TYPE_GAME_EMUNANDCHAN)
 		{
-			// If NandEmuPath is on root of the first FAT32 partition, allow Waninkoko's rev17-21 cIOS for EmuNAND Channels
-			bool NandEmu_compatible = false;
-			const char *NandEmuChanPath = game_cfg->NandEmuPath.size() == 0 ? Settings.NandEmuChanPath : game_cfg->NandEmuPath.c_str();
-			NandEmu_compatible = IosLoader::is_NandEmu_compatible(NandEmuChanPath, gameIOS);
-				
-			if(!IosLoader::IsD2X(gameIOS) && !NandEmu_compatible)
+			if (gameNandEmuMode != EMUNAND_NEEK)
 			{
-				ShowError(tr("Launching emulated NAND channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."));
-				return;
+				// If NandEmuPath is on root of the first FAT32 partition, allow Waninkoko's rev17-21 cIOS for EmuNAND Channels
+				bool NandEmu_compatible = false;
+				const char *NandEmuChanPath = game_cfg->NandEmuPath.size() == 0 ? Settings.NandEmuChanPath : game_cfg->NandEmuPath.c_str();
+				NandEmu_compatible = IosLoader::is_NandEmu_compatible(NandEmuChanPath, gameIOS);
+
+				if (!IosLoader::IsD2X(gameIOS) && !NandEmu_compatible)
+				{
+					ShowError(tr("Launching emulated NAND channels only works on d2x cIOS! Change game IOS to a d2x cIOS first."));
+					return;
+				}
 			}
 		}
-	}
 
-	// Restrict EmuNAND with Wii games only with d2x
-	if(header->type == TYPE_GAME_WII_IMG || header->type == TYPE_GAME_WII_DISC)
-	{
-		if(gameNandEmuMode && !IosLoader::IsD2X(gameIOS))
+		// Restrict EmuNAND with Wii games only with d2x
+		if (header->type == TYPE_GAME_WII_IMG || header->type == TYPE_GAME_WII_DISC)
 		{
-			ShowError(tr("Launching Wii games with emulated NAND only works on d2x cIOS! Change game IOS to a d2x cIOS first."));
-			return;
+			if (gameNandEmuMode && !IosLoader::IsD2X(gameIOS))
+			{
+				ShowError(tr("Launching Wii games with emulated NAND only works on d2x cIOS! Change game IOS to a d2x cIOS first."));
+				return;
+			}
 		}
 	}
 

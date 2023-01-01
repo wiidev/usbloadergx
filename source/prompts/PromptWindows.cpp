@@ -295,10 +295,12 @@ void WindowCredits()
 #endif
 
 	char IosInfo[80] = "";
-	iosinfo_t * info = IosLoader::GetIOSInfo(IOS_GetVersion());
+	iosinfo_t *info = IosLoader::GetIOSInfo(IOS_GetVersion());
 	if(info)
+	{
 		snprintf(IosInfo, sizeof(IosInfo), "(%s v%i%s base%i)", info->name, (int)info->version, info->versionstring, (int)info->baseios);
-
+		free(info);
+	}
 	// Check if DIOS MIOS (Lite) is available 
 	char GCInfo[80] = "";
 	int currentMIOS = IosLoader::GetMIOSInfo();

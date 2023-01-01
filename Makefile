@@ -21,6 +21,7 @@ SOURCES		:=	source \
 				source/Controls \
 				source/system \
 				source/libs/libwbfs \
+				source/libs/libruntimeiospatch \
 				source/language \
 				source/mload \
 				source/mload/modules \
@@ -73,7 +74,7 @@ endif
 #---------------------------------------------------------------------------------
 LIBS := -lwolfssl -lcustomfat -lcustomntfs -lcustomext2fs -lvorbisidec -logg \
 		-lmad -lfreetype -lgd -ljpeg -lpng -lm -lz -lwiiuse -lwiidrc \
-		-lbte -lasnd -logc -lruntimeiospatch
+		-lbte -lasnd -logc
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
@@ -140,7 +141,7 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 #---------------------------------------------------------------------------------
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib) -L$(CURDIR)/source/libs/libdrc/ \
 					-L$(CURDIR)/source/libs/libext2fs -L$(CURDIR)/source/libs/libfat \
-					-L$(CURDIR)/source/libs/libntfs -L$(CURDIR)/source/libs/libruntimeiospatch \
+					-L$(CURDIR)/source/libs/libntfs \
 					-L$(CURDIR)/source/libs/libwolfssl -L$(LIBOGC_LIB)
 
 export OUTPUT	:=	$(CURDIR)/$(TARGET)

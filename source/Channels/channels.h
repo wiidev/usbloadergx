@@ -37,7 +37,7 @@ public:
 	static void DestroyInstance(void) { if(instance) delete instance; instance = NULL; }
 
 	static u32 LoadChannel(const u64 &chantitle);
-	static u8 GetRequestedIOS(const u64 &title);
+	static u8 GetRequestedIOS(const u64 &title, const char *prefix);
 	static u8 *GetTMD(const u64 &tid, u32 *size, const char *prefix);
 	static u8 *GetDol(const u64 &title, u8 *tmdBuffer, bool &isForwarder);
 	static u8 *GetOpeningBnr(const u64 &title, u32 *outsize, const char *pathPrefix);

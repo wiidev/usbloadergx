@@ -42,6 +42,12 @@ static const char * OnOffText[] =
 	trNOOP( "Auto" )
 };
 
+static const char * GamesIOSText[] =
+{
+	trNOOP( "Auto" ),
+	trNOOP( "Custom" )
+};
+
 static const char * VideoModeText[] =
 {
 	trNOOP( "System Default" ),
@@ -226,6 +232,10 @@ void GameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Hooktype" ));
 	Options->SetName(Idx++, "%s", tr( "Wiird Debugger" ));
 	Options->SetName(Idx++, "%s", tr( "Game IOS" ));
+	if(GameConfig.autoios == GAME_IOS_CUSTOM)
+	{
+		Options->SetName(Idx++, "%s", tr( "Custom Game IOS" ));
+	}
 	Options->SetName(Idx++, "%s", tr( "Return To" ));
 	Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
 
@@ -356,10 +366,19 @@ void GameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.WiirdDebugger] ));
 
 	//! Settings: Game IOS
-	if(GameConfig.ios == INHERIT)
+	if(GameConfig.autoios == INHERIT)
 		Options->SetValue(Idx++, tr("Use global"));
 	else
-		Options->SetValue(Idx++, "%i", GameConfig.ios);
+		Options->SetValue(Idx++, "%s", tr( GamesIOSText[GameConfig.autoios] ));
+
+	//! Settings: Custom Game IOS
+	if(GameConfig.autoios == GAME_IOS_CUSTOM)
+	{
+		if(GameConfig.ios == INHERIT)
+			Options->SetValue(Idx++, tr("Use global"));
+		else
+			Options->SetValue(Idx++, "%i", GameConfig.ios);
+	}
 
 	//! Settings: Return To
 	if(Header->type == TYPE_GAME_EMUNANDCHAN && EMUNAND_NEEK == (GameConfig.NandEmuMode == INHERIT ? Settings.NandEmuChanMode : GameConfig.NandEmuMode))
@@ -571,6 +590,15 @@ int GameLoadSM::GetMenuInternal()
 	//! Settings: Game IOS
 	else if (ret == ++Idx)
 	{
+		if (++GameConfig.autoios >= GAME_IOS_MAX) GameConfig.autoios = INHERIT;
+		Options->ClearList();
+		SetOptionNames();
+		SetOptionValues();
+	}
+
+	//! Settings: Custom Game IOS
+	else if (GameConfig.autoios == GAME_IOS_CUSTOM && ret == ++Idx)
+	{
 		char entered[8];
 		snprintf(entered, sizeof(entered), "%i", GameConfig.ios);
 		if(OnScreenNumpad(entered, sizeof(entered) / 2))
@@ -630,14 +658,15 @@ int GameLoadSM::GetMenuInternal()
 		//! Settings: EmuNAND Save/Channel Path
 		else if (ret == ++Idx)
 		{
+			int autoIOS = GameConfig.autoios == INHERIT ? Settings.AutoIOS : GameConfig.autoios;
 			// If NandEmuPath is on root of the first FAT32 partition, allow rev17-21 cIOS for EmuNAND Channels
 			bool NandEmu_compatible = false;
-			if(Header->type == TYPE_GAME_EMUNANDCHAN)
+			if(!autoIOS && Header->type == TYPE_GAME_EMUNANDCHAN)
 			{
 				NandEmu_compatible = IosLoader::is_NandEmu_compatible(NULL, GameConfig.ios == INHERIT ? Settings.cios : GameConfig.ios);
 			}
 
-			if(!IosLoader::IsD2X(GameConfig.ios == INHERIT ? Settings.cios : GameConfig.ios) && !NandEmu_compatible)
+			if(autoIOS == GAME_IOS_CUSTOM && !IosLoader::IsD2X(GameConfig.ios == INHERIT ? Settings.cios : GameConfig.ios) && !NandEmu_compatible)
 				WindowPrompt(tr("Error:"), tr("NAND emulation is only available on D2X cIOS!"), tr("OK"));
 			else
 			{

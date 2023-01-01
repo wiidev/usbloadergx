@@ -49,6 +49,7 @@ cat <<EOF > ./HBC/meta.xml
 	<release_date>$rev_date</release_date>
 	<!-- remove this line to enable arguments
 	<arguments>
+		<arg>--ios=249</arg>
 		<arg>--bootios=58</arg>
 		<arg>--usbport=0</arg>
 		<arg>--mountusb=1</arg>
@@ -75,11 +76,9 @@ Libwiigui: Tantric
 Libogc/Devkit: Shagkur and Wintermute
 FreeTypeGX: Armin Tamzarian
 
-USB Loader GX (enhanced):
+USB Loader GX:
 https://github.com/wiidev/usbloadergx
-USB Loader GX (official):
-https://sourceforge.net/projects/usbloadergx
-Support (official):
+Support:
 https://gbatemp.net/threads/149922
 GameTDB:
 https://www.gametdb.com

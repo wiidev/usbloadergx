@@ -15,6 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ****************************************************************************/
+#include <algorithm>
+
 #include "menu/menus.h"
 #include "menu/WDMMenu.hpp"
 #include "mload/mload.h"
@@ -57,6 +59,7 @@
 #include "neek.hpp"
 #include "lstub.h"
 #include "xml/GameTDB.hpp"
+#include "wad/nandtitle.h"
 
 /* GCC 11 false positives */
 #if __GNUC__ > 10
@@ -69,6 +72,7 @@ u32 AppEntrypoint = 0;
 
 extern bool isWiiVC; // in sys.cpp
 extern u32 hdd_sector_size[2];
+extern std::vector<struct d2x> d2x_list;
 extern "C"
 {
 	syssram *__SYS_LockSram();
@@ -143,7 +147,8 @@ u32 GameBooter::BootPartition(char *dolpath, u8 videoselected, u8 alternatedol, 
 		return 0;
 
 	/* Open specified partition */
-	ret = WDVD_OpenPartition(offset);
+	u32 Tmd_Buffer[0x4A00] ATTRIBUTE_ALIGN(32);
+	ret = WDVD_OpenPartition(offset, Tmd_Buffer);
 	if (ret < 0)
 		return 0;
 
@@ -307,6 +312,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	u8 deflicker = game_cfg->deflicker == INHERIT ? Settings.deflicker : game_cfg->deflicker;
 	u8 sneekChoice = game_cfg->sneekVideoPatch == INHERIT ? Settings.sneekVideoPatch : game_cfg->sneekVideoPatch;
 	s32 iosChoice = game_cfg->ios == INHERIT ? Settings.cios : game_cfg->ios;
+	u8 autoIOS = game_cfg->autoios == INHERIT ? Settings.AutoIOS : game_cfg->autoios;
 	u8 countrystrings = game_cfg->patchcountrystrings == INHERIT ? Settings.patchcountrystrings : game_cfg->patchcountrystrings;
 	u8 alternatedol = game_cfg->loadalternatedol;
 	u32 alternatedoloffset = game_cfg->alternatedolstart;
@@ -363,6 +369,104 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 		}
 	}
 
+	if (autoIOS == GAME_IOS_AUTO && d2x_list.size())
+	{
+		s32 requestedIOS = 0;
+		if (gameHeader.type == TYPE_GAME_NANDCHAN)
+			requestedIOS = Channels::GetRequestedIOS(gameHeader.tid, NULL);
+		else if (gameHeader.type == TYPE_GAME_EMUNANDCHAN)
+			requestedIOS = Channels::GetRequestedIOS(gameHeader.tid, NandEmuPath);
+		else if (gameHeader.type == TYPE_GAME_WII_IMG)
+		{
+			wbfs_disc_t *d = WBFS_OpenDisc(gameHeader.id);
+			if (d)
+			{
+				void *titleTMD = NULL;
+				int tmd_size = wbfs_extract_file(d, (char *)"TMD", &titleTMD);
+				if (titleTMD != NULL)
+				{
+					if (tmd_size > 0x18B)
+						requestedIOS = *((u8 *)titleTMD + 0x18B);
+					free(titleTMD);
+				}
+				WBFS_CloseDisc(d);
+			}
+		}
+		else if (gameHeader.type == TYPE_GAME_WII_DISC)
+		{
+			u64 offset;
+			if (Disc_FindPartition(&offset) >= 0)
+			{
+				u32 Tmd_Buffer[0x4A00] ATTRIBUTE_ALIGN(32);
+				if (WDVD_OpenPartition(offset, Tmd_Buffer) >= 0)
+				{
+					tmd *tmd_dvd = (tmd *)SIGNATURE_PAYLOAD(Tmd_Buffer);
+					requestedIOS = tmd_dvd->sys_version;
+					WDVD_ClosePartition();
+				}
+			}
+		}
+
+		if (requestedIOS)
+		{
+			// Remove cIOS duplicates
+			// This is done here so that IsD2X() always has the complete list
+			for (auto cios = d2x_list.begin(); cios != d2x_list.end();)
+			{
+				if (cios->duplicate)
+				{
+					gprintf("Duplicate IOS: %d in slot %d removed\n", cios->base, cios->slot);
+					cios = d2x_list.erase(cios);
+				}
+				else
+					++cios;
+			}
+
+			gprintf("Requested IOS: %d\n", requestedIOS);
+			// Workaround for SpongeBobs Boating Bash
+			if (memcmp(gameHeader.id, "SBV", 3) == 0)
+			{
+				// Check if we don't have a cIOS with base IOS 53
+				if (!IosLoader::GetD2XIOS(requestedIOS))
+				{
+					if (isWiiU())
+						requestedIOS = 58;
+					else
+						requestedIOS = IosLoader::GetD2XIOS(58) ? 58 : 38;
+					gprintf("Applied SpongeBob workaround\n");
+				}
+			}
+
+			// Check if there's any cIOS options remaining
+			if (d2x_list.size())
+			{
+				// Check for a D2X cIOS with the requested base IOS
+				int slot = IosLoader::GetD2XIOS(requestedIOS);
+				if (slot)
+					iosChoice = slot;
+				else
+				{
+					// Nothing found, so try the closest match
+					// e.g. if we've got 55, 57 & 58 and a game requests 56 we'll use 57
+					auto cios = std::lower_bound(d2x_list.begin(), d2x_list.end(), requestedIOS, [](const d2x &x, const int &y)
+												 { return x.base < y; });
+					// Check if the requested IOS is greater than what's available
+					if (cios == d2x_list.end())
+					{
+						requestedIOS = d2x_list.back().base;
+						iosChoice = d2x_list.back().slot;
+					}
+					else
+					{
+						requestedIOS = cios->base;
+						iosChoice = cios->slot;
+					}
+					gprintf("Next best IOS: %d\n", requestedIOS);
+				}
+				gprintf("Boot with IOS: %d base %d\n", iosChoice, requestedIOS);
+			}
+		}
+	}
 	AppCleanUp();
 
 	gprintf("\tSettings.partition: %d\n", Settings.partition);

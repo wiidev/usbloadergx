@@ -124,6 +124,7 @@ void CSettings::SetDefault()
 	BootIOS = 58;
 	LoaderIOS = 249;
 	cios = 249;
+	AutoIOS = GAME_IOS_AUTO;
 	gridRows = 3;
 	partition = 0;
 	discart = DISCARTS_ORIGINALS_CUSTOMS;
@@ -345,6 +346,7 @@ bool CSettings::Save()
 	fprintf(file, "GameSort = %d\n", GameSort);
 	fprintf(file, "LoaderIOS = %d\n", LoaderIOS);
 	fprintf(file, "cios = %d\n", cios);
+	fprintf(file, "autoios = %d\n", AutoIOS);
 	fprintf(file, "keyset = %d\n", keyset);
 	fprintf(file, "xflip = %d\n", xflip);
 	fprintf(file, "gridRows = %d\n", gridRows);
@@ -664,6 +666,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "cios") == 0)
 	{
 		cios = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "autoios") == 0)
+	{
+		AutoIOS = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "keyset") == 0)

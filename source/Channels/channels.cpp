@@ -264,12 +264,12 @@ u8 *Channels::GetDol(const u64 &title, u8 *tmdBuffer, bool &isForwarder)
     return outBuf;
 }
 
-u8 Channels::GetRequestedIOS(const u64 &title)
+u8 Channels::GetRequestedIOS(const u64 &title, const char *prefix)
 {
     u8 IOS = 0;
 
     u32 tmdSize = 0;
-    u8 *titleTMD = GetTMD(title, &tmdSize, "");
+    u8 *titleTMD = GetTMD(title, &tmdSize, prefix);
     if (!titleTMD)
         return 0;
 

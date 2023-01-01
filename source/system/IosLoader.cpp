@@ -1,5 +1,6 @@
 #include <gctypes.h>
 #include <ogc/machine/processor.h>
+#include <algorithm>
 
 #include "IosLoader.h"
 #include "sys.h"
@@ -18,27 +19,23 @@
 #include "mload/modules/odip_frag.h"
 #include "utils/tools.h"
 #include "gecko.h"
-
-#define MEM2_PROT		0x0D8B420A
-#define ES_MODULE_START	((u16 *)0x939F0000)
-#define ES_MODULE_END	(ES_MODULE_START + 0x4000)
-#define ES_HACK_OFFSET	4
+#include "libs/libruntimeiospatch/runtimeiospatch.h"
 
 extern u32 hdd_sector_size[2];
 
 /*
  * Buffer variables for the IOS info to avoid loading it several times
  */
-static int currentIOS = -1;
-static iosinfo_t *currentIOSInfo = NULL;
 static int currentMIOS = -1;
 static int currentDMLVersion = -1;
+
+std::vector<struct d2x> d2x_list;
 
 /******************************************************************************
  * Public Methods:
  ******************************************************************************/
 /*
- * Check if the ios passed is a Hermes ios.
+ * Check if the IOS passed is a Hermes IOS.
  */
 bool IosLoader::IsHermesIOS(s32 ios)
 {
@@ -46,7 +43,7 @@ bool IosLoader::IsHermesIOS(s32 ios)
 }
 
 /*
- * Check if the ios passed is a Waninkoko ios.
+ * Check if the IOS passed is a Waninkoko IOS.
  */
 bool IosLoader::IsWaninkokoIOS(s32 ios)
 {
@@ -57,22 +54,77 @@ bool IosLoader::IsWaninkokoIOS(s32 ios)
 }
 
 /*
- * Check if the ios passed is a d2x ios.
+ * Check if the IOS passed is a d2x IOS.
  */
 bool IosLoader::IsD2X(s32 ios)
 {
-	iosinfo_t *info = GetIOSInfo(ios);
-	if(!info)
-		return false;
-
-	bool res = (strncasecmp(info->name, "d2x", 3) == 0);
-
-	return res;
+	for (auto cios = d2x_list.begin(); cios != d2x_list.end(); ++cios)
+	{
+		if (cios->slot == ios)
+			return true;
+	}
+	return false;
 }
 
 /*
- * Loads CIOS (If possible the one from the settings file).
- * @return 0 if a cios has been successfully loaded. Else a value below 0 is returned.
+ * Check if the IOS is a d2x cIOS and return the base IOS.
+ */
+bool IosLoader::IsD2XBase(s32 ios, s32 *base)
+{
+	iosinfo_t *info = GetIOSInfo(ios);
+	if(!info)
+	{
+		*base = 0;
+		return 0;
+	}
+
+	*base = (u8)info->baseios;
+
+	bool result = (strncasecmp(info->name, "d2x", 3) == 0);
+	free(info);
+	return result;
+}
+
+/*
+ * Get the cIOS slot from a given base IOS.
+ */
+s32 IosLoader::GetD2XIOS(s32 base)
+{
+	for (auto cios = d2x_list.begin(); cios != d2x_list.end(); ++cios)
+	{
+		if (cios->base == base)
+			return cios->slot;
+	}
+	return 0;
+}
+
+/*
+ * Check if slots 255-200 contain a d2x cIOS and store info about them.
+ */
+void IosLoader::GetD2XInfo()
+{
+	s32 base = 0;
+	ISFS_Initialize();
+	for (s32 i = 255; i >= 200; i--) // Prefer higher slots e.g. 251, 250 & 249
+	{
+		if (IsD2XBase(i, &base))
+		{
+			struct d2x cios = {};
+			cios.slot = i;
+			cios.base = base;
+			cios.duplicate = GetD2XIOS(base) ? 1 : 0;
+			d2x_list.push_back(cios);
+			gprintf("Found d2x cIOS %d (base %d)\n", i, base);
+		}
+	}
+	ISFS_Deinitialize();
+	std::sort(d2x_list.begin(), d2x_list.end(), [](const d2x &a, const d2x &b)
+			  { return a.base < b.base; });
+}
+
+/*
+ * Loads cIOS (If possible the one from the settings file).
+ * @return 0 if a cIOS has been successfully loaded. Else a value below 0 is returned.
  */
 s32 IosLoader::LoadAppCios(u8 ios)
 {
@@ -98,7 +150,7 @@ s32 IosLoader::LoadAppCios(u8 ios)
 
 		if ((ret = ReloadIosSafe(cios)) > -1)
 		{
-			// Remember working cios
+			// Remember working cIOS
 			Settings.LoaderIOS = cios;
 			break;
 		}
@@ -108,8 +160,8 @@ s32 IosLoader::LoadAppCios(u8 ios)
 }
 
 /*
- * Loads a CIOS before a game start.
- * @return 0 if a cios has been successfully loaded. Else a value below 0 is returned.
+ * Loads a cIOS before a game start.
+ * @return 0 if a cIOS has been successfully loaded. Else a value below 0 is returned.
  */
 s32 IosLoader::LoadGameCios(s32 ios)
 {
@@ -136,7 +188,7 @@ s32 IosLoader::LoadGameCios(s32 ios)
 
 /*
  * Reloads a certain IOS under the condition, that an appropriate version of the IOS is installed.
- * @return a negative value if a safe reload of the ios was not possible.
+ * @return a negative value if a safe reload of the IOS was not possible.
  */
 s32 IosLoader::ReloadIosSafe(s32 ios)
 {
@@ -176,43 +228,9 @@ s32 IosLoader::ReloadIosSafe(s32 ios)
  */
 s32 IosLoader::ReloadIosKeepingRights(s32 ios)
 {
-	PatchAHB();
+	IosPatch_AHBPROT(false);
 	// Reload IOS. MEM2 protection is implicitly re-enabled
 	return IOS_ReloadIOS(ios);
-}
-
-void IosLoader::PatchAHB()
-{
-	if (CheckAHBPROT())
-	{
-		static const u16 ticket_check[] = {
-			0x685B,		  // ldr  r3, [r3, #4] ; Get TMD pointer
-			0x22EC, 0x0052,  // movs r2, 0x1D8	; Set offset of access rights field in TMD
-			0x189B,		  // adds r3, r3, r2   ; Add offset to TMD pointer
-			0x681B,		  // ldr  r3, [r3]	 ; Load access rights. We'll hack it with full access rights!!!
-			0x4698,		  // mov  r8, r3	   ; Store it for the DVD video bitcheck later
-			0x07DB		   // lsls r3, r3, 0x1F ; check AHBPROT bit
-		};
-		// Disable memory protection
-		write16(MEM2_PROT, 0);
-
-		for (u16 *patchme = ES_MODULE_START; patchme < ES_MODULE_END; patchme++)
-		{
-			if (!memcmp(patchme, ticket_check, sizeof(ticket_check)))
-			{
-				gprintf("PatchAHB: Found TMD access rights check at %p\n", patchme);
-
-				/* Apply patch */
-				patchme[ES_HACK_OFFSET] = 0x23FF; // li r3, 0xFF ; Set full access rights
-
-				/* Flush cache */
-				DCFlushRange(patchme+ES_HACK_OFFSET, 2);
-				break;
-			}
-		}
-		// Enable memory protection
-		write16(MEM2_PROT, 1);
-	}
 }
 
 /*
@@ -565,70 +583,51 @@ void IosLoader::LoadIOSModules(s32 ios, s32 ios_rev)
 				mload_close();
 			}
 		}
+		if (info)
+			free(info);
 		ISFS_Deinitialize();
 	}
 }
 
 /*
- * Reads the ios info struct from the .app file.
+ * Reads the IOS info struct from the .app file.
  * @return pointer to iosinfo_t on success else NULL. The user is responsible for freeing the buffer.
  */
 iosinfo_t *IosLoader::GetIOSInfo(s32 ios)
 {
-	if(currentIOS == ios && currentIOSInfo)
-		return currentIOSInfo;
-
-	if(currentIOSInfo)
-	{
-		free(currentIOSInfo);
-		currentIOSInfo = NULL;
-	}
-
-	currentIOS = ios;
-	char filepath[ISFS_MAXPATH] ATTRIBUTE_ALIGN(0x20);
+	char filepath[ISFS_MAXPATH] ATTRIBUTE_ALIGN(32);
 	u64 TicketID = ((((u64) 1) << 32) | ios);
 	u32 TMD_Length;
 
-	s32 ret = ES_GetStoredTMDSize(TicketID, &TMD_Length);
-	if (ret < 0)
+	if (ES_GetStoredTMDSize(TicketID, &TMD_Length) < 0)
 		return NULL;
 
 	signed_blob *TMD = (signed_blob*) memalign(32, ALIGN32(TMD_Length));
 	if (!TMD)
 		return NULL;
 
-	ret = ES_GetStoredTMD(TicketID, TMD, TMD_Length);
-	if (ret < 0)
+	if (ES_GetStoredTMD(TicketID, TMD, TMD_Length) < 0)
 	{
 		free(TMD);
 		return NULL;
 	}
 
-	snprintf(filepath, sizeof(filepath), "/title/%08x/%08x/content/%08x.app", 0x00000001, (unsigned int)ios, (unsigned int)(*(u8 *)((u32)TMD+0x1E7)));
-
+	snprintf(filepath, sizeof(filepath), "/title/00000001/%08x/content/%08x.app", (u8)ios, *(u8 *)((u32)TMD+0x1E7));
 	free(TMD);
 
-	u8 *buffer = NULL;
 	u32 filesize = 0;
+	iosinfo_t *buffer = NULL;
 
-	NandTitle::LoadFileFromNand(filepath, &buffer, &filesize);
+	NandTitle::LoadFileFromNand(filepath, (u8**)&buffer, &filesize);
 
-	if(!buffer)
+	if (!buffer || filesize == 0)
 		return NULL;
 
-	iosinfo_t *iosinfo = (iosinfo_t *) buffer;
-
-	if(iosinfo->magicword != 0x1ee7c105 || iosinfo->magicversion != 1)
+	if (buffer->magicword != 0x1ee7c105 || buffer->magicversion != 1)
 	{
 		free(buffer);
 		return NULL;
 	}
 
-	iosinfo = (iosinfo_t *) realloc(buffer, sizeof(iosinfo_t));
-	if(!iosinfo)
-		iosinfo = (iosinfo_t *) buffer;
-
-	currentIOSInfo = iosinfo;
-
-	return iosinfo;
+	return buffer;
 }

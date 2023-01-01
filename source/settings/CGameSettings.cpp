@@ -194,6 +194,7 @@ bool CGameSettings::Save()
 		fprintf(f, "ocarina:%d; ", GameList[i].ocarina);
 		fprintf(f, "vipatch:%d; ", GameList[i].vipatch);
 		fprintf(f, "ios:%d; ", GameList[i].ios);
+		fprintf(f, "autoios:%d; ", GameList[i].autoios);
 		fprintf(f, "parentalcontrol:%d; ", GameList[i].parentalcontrol);
 		fprintf(f, "iosreloadblock:%d; ", GameList[i].iosreloadblock);
 		fprintf(f, "patchcountrystrings:%d; ", GameList[i].patchcountrystrings);
@@ -305,6 +306,11 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 	else if(strcmp(name, "ios") == 0)
 	{
 		game.ios = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "autoios") == 0)
+	{
+		game.autoios = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "parentalcontrol") == 0)
@@ -689,6 +695,7 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.ocarina = INHERIT;
 	game.vipatch = INHERIT;
 	game.ios = INHERIT;
+	game.autoios = INHERIT;
 	game.parentalcontrol = PARENTAL_LVL_EVERYONE;
 	game.patchcountrystrings = INHERIT;
 	game.loadalternatedol = ALT_DOL_DEFAULT;

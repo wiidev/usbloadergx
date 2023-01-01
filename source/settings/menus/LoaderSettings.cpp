@@ -45,6 +45,12 @@ static const char * OnOffText[] =
 	trNOOP( "Auto" )
 };
 
+static const char * GamesIOSText[] =
+{
+	trNOOP( "Auto" ),
+	trNOOP( "Custom" )
+};
+
 static const char * AspectText[] =
 {
 	trNOOP( "Force 4:3" ),
@@ -219,6 +225,7 @@ LoaderSettings::LoaderSettings()
 
 	oldLoaderMode = Settings.LoaderMode;
 	oldGameCubeSource = Settings.GameCubeSource;
+	oldLoaderIOS = Settings.LoaderIOS;
 }
 
 LoaderSettings::~LoaderSettings()
@@ -237,6 +244,11 @@ LoaderSettings::~LoaderSettings()
 	if(oldGameCubeSource != Settings.GameCubeSource)
 	{
 		GCGames::Instance()->LoadAllGames();
+	}
+	
+	if(oldLoaderIOS != Settings.LoaderIOS)
+	{
+		editMetaArguments();
 	}
 }
 
@@ -262,6 +274,10 @@ void LoaderSettings::SetOptionNames()
 	}
 	Options->SetName(Idx++, "%s", tr( "Loaders IOS" ));
 	Options->SetName(Idx++, "%s", tr( "Games IOS" ));
+	if(Settings.AutoIOS == GAME_IOS_CUSTOM)
+	{
+		Options->SetName(Idx++, "%s", tr( "Custom Games IOS" ));
+	}
 	Options->SetName(Idx++, "%s", tr( "Quick Boot" ));
 	Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
 	Options->SetName(Idx++, "%s", tr( "Return To" ));
@@ -371,15 +387,24 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: Loaders IOS
 	if (Settings.godmode)
-		Options->SetValue(Idx++, "IOS %i", Settings.LoaderIOS);
+		Options->SetValue(Idx++, "%i", Settings.LoaderIOS);
 	else
 		Options->SetValue(Idx++, "********");
 
 	//! Settings: Games IOS
 	if (Settings.godmode)
-		Options->SetValue(Idx++, "IOS %i", Settings.cios);
+		Options->SetValue(Idx++, "%s", tr( GamesIOSText[Settings.AutoIOS] ));
 	else
 		Options->SetValue(Idx++, "********");
+
+	//! Settings: Custom Games IOS
+	if(Settings.AutoIOS == GAME_IOS_CUSTOM)
+	{
+		if (Settings.godmode)
+			Options->SetValue(Idx++, "%i", Settings.cios);
+		else
+			Options->SetValue(Idx++, "********");
+	}
 
 	//! Settings: Quick Boot
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.quickboot] ));
@@ -696,6 +721,17 @@ int LoaderSettings::GetMenuInternal()
 	{
 		if(!Settings.godmode)
 			return MENU_NONE;
+		if (++Settings.AutoIOS >= GAME_IOS_MAX) Settings.AutoIOS = GAME_IOS_AUTO;
+		Options->ClearList();
+		SetOptionNames();
+		SetOptionValues();
+	}
+
+	//! Settings: Custom Games IOS
+	else if (Settings.AutoIOS == GAME_IOS_CUSTOM && ret == ++Idx)
+	{
+		if(!Settings.godmode)
+			return MENU_NONE;
 
 		char entered[4];
 		snprintf(entered, sizeof(entered), "%i", Settings.cios);
@@ -738,8 +774,11 @@ int LoaderSettings::GetMenuInternal()
 	//! Settings: EmuNAND Save Mode
 	else if (ret == ++Idx )
 	{
-		if(!IosLoader::IsD2X(Settings.cios))
-			WindowPrompt(tr("Error:"), tr("NAND Emulation is only available on D2X cIOS!"), tr("OK"));
+		if (Settings.AutoIOS == GAME_IOS_CUSTOM && !IosLoader::IsD2X(Settings.cios))
+		{
+			WindowPrompt(tr("Error:"), tr("NAND emulation is only available on D2X cIOS!"), tr("OK"));
+			Settings.NandEmuMode = EMUNAND_OFF;
+		}
 		else if (++Settings.NandEmuMode >= EMUNAND_NEEK) Settings.NandEmuMode = EMUNAND_OFF;
 	}
 

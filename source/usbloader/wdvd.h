@@ -15,7 +15,7 @@ s32 WDVD_Seek(u64);
 s32 WDVD_Offset(u64);
 s32 WDVD_StopLaser(void);
 s32 WDVD_StopMotor(void);
-s32 WDVD_OpenPartition(u64 offset);
+s32 WDVD_OpenPartition(u64 offset, u32 *tmdbuf);
 s32 WDVD_ClosePartition(void);
 s32 WDVD_UnencryptedRead(void *, u32, u64);
 s32 WDVD_Read(void *, u32, u64);

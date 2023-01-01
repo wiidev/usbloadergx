@@ -124,6 +124,7 @@ class CSettings
 		u8 BootIOS;
 		u8 LoaderIOS;
 		u8 cios;
+		short AutoIOS;
 		short quickboot;
 		short wsprompt;
 		short keyset;
@@ -171,7 +172,6 @@ class CSettings
 		std::vector<u32> RequiredCategories;
 		std::vector<u32> ForbiddenCategories;
 		u8 EntryIOS;
-		short UseArgumentIOS;
 		short NandEmuMode;
 		short NandEmuChanMode;
 		short UseSystemFont;

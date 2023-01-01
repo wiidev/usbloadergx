@@ -19,6 +19,7 @@ typedef struct _GameCFG
 	short ocarina;
 	short vipatch;
 	short ios;
+	short autoios;
 	short parentalcontrol;
 	short iosreloadblock;
 	short loadalternatedol;
@@ -87,6 +88,7 @@ typedef struct _GameCFG
 		this->ocarina = game.ocarina;
 		this->vipatch = game.vipatch;
 		this->ios = game.ios;
+		this->autoios = game.autoios;
 		this->parentalcontrol = game.parentalcontrol;
 		this->iosreloadblock = game.iosreloadblock;
 		this->loadalternatedol = game.loadalternatedol;

@@ -81,6 +81,13 @@ typedef struct _iosinfo_t
 	char versionstring[0x10];   // Example: beta2
 } __attribute__((packed)) iosinfo_t;
 
+typedef struct d2x
+{
+	s32 slot;
+	s32 base;
+	s32 duplicate;
+} d2x;
+
 class IosLoader
 {
 	public:
@@ -88,10 +95,12 @@ class IosLoader
 		static s32 LoadGameCios(s32 ios);
 		static s32 ReloadIosSafe(s32 ios);
 		static s32 ReloadIosKeepingRights(s32 ios);
-		static void PatchAHB();
 		static bool IsHermesIOS(s32 ios = IOS_GetVersion());
 		static bool IsWaninkokoIOS(s32 ios = IOS_GetVersion());
 		static bool IsD2X(s32 ios = IOS_GetVersion());
+		static bool IsD2XBase(s32 ios, s32 *base);
+		static s32 GetD2XIOS(s32 base);
+		static void GetD2XInfo();
 		static iosinfo_t *GetIOSInfo(s32 ios);
 		static u8 GetMIOSInfo();
 		static u8 GetDMLVersion(char* releaseDate = NULL);

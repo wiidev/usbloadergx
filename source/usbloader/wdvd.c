@@ -193,12 +193,11 @@ s32 WDVD_StopMotor(void)
 	return (ret == 1) ? 0 : -ret;
 }
 
-s32 WDVD_OpenPartition(u64 offset)
+s32 WDVD_OpenPartition(u64 offset, u32 *tmdbuf)
 {
 	if (_di_fd < 0)
 		return _di_fd;
 
-	static u8 Tmd_Buffer[0x4A00] ATTRIBUTE_ALIGN(32);
 	static ioctlv Vectors[5] ATTRIBUTE_ALIGN(32);
 	s32 ret;
 
@@ -214,7 +213,7 @@ s32 WDVD_OpenPartition(u64 offset)
 	Vectors[1].len		= 0;
 	Vectors[2].data		= 0;
 	Vectors[2].len		= 0;
-	Vectors[3].data		= Tmd_Buffer;
+	Vectors[3].data		= tmdbuf;
 	Vectors[3].len		= 0x49e4;
 	Vectors[4].data		= outbuf;
 	Vectors[4].len		= 0x20;

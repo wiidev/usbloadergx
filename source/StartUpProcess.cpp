@@ -51,7 +51,7 @@ StartUpProcess::StartUpProcess()
 
 	versionTxt = new GuiText(" ", 18, (GXColor){255, 255, 255, 255});
 	versionTxt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-	versionTxt->SetPosition(20, screenheight - 20);
+	versionTxt->SetPosition(23, screenheight - 20);
 
 #ifdef FULLCHANNEL
 	versionTxt->SetTextf("v3.0c Rev. %s (%s)", GetRev(), commitID());
@@ -101,15 +101,22 @@ int StartUpProcess::ParseArguments(int argc, char *argv[])
 
 		gprintf("Boot argument %i: %s\n", i + 1, argv[i]);
 
-		char *ptr = strcasestr(argv[i], "-bootios=");
+		char *ptr = strcasestr(argv[i], "-ios=");
+		if(ptr)
+		{
+			if(atoi(ptr+strlen("-ios=")) == 58)
+				Settings.LoaderIOS = 58;
+			else
+				Settings.LoaderIOS = LIMIT(atoi(ptr+strlen("-ios=")), 200, 255);
+		}
+
+		ptr = strcasestr(argv[i], "-bootios=");
 		if (ptr)
 		{
 			if (atoi(ptr + strlen("-bootios=")) == 58)
-				Settings.LoaderIOS = 58;
+				Settings.BootIOS = 58;
 			else
-				Settings.LoaderIOS = LIMIT(atoi(ptr + strlen("-bootios=")), 200, 255);
-			Settings.UseArgumentIOS = ON;
-			Settings.BootIOS = Settings.LoaderIOS;
+				Settings.BootIOS = LIMIT(atoi(ptr + strlen("-bootios=")), 200, 255);
 		}
 
 		ptr = strcasestr(argv[i], "-usbport=");
@@ -245,38 +252,54 @@ int StartUpProcess::Run(int argc, char *argv[])
 	return ret;
 }
 
+void StartUpProcess::LoadIOS(u8 ios, bool boot)
+{
+	SetTextf("Reloading to IOS%d%s\n", ios, boot ? " requested in meta.xml" : "");
+	if (IosLoader::LoadAppCios(ios) < 0)
+	{
+		SetTextf("Failed to load an IOS. USB Loader GX requires a cIOS or IOS58 with AHB access. Exiting...\n");
+		sleep(5);
+		Sys_BackToLoader();
+	}
+	SetTextf("Reloaded to IOS%d r%d\n", Settings.LoaderIOS, IOS_GetRevision());
+}
+
 int StartUpProcess::Execute(bool quickGameBoot)
 {
 	Settings.EntryIOS = IOS_GetVersion();
 	// Disable AHBPROT
-	IosLoader::PatchAHB();
-	gprintf("Current IOS: %d - have AHB access: %s\n", Settings.EntryIOS, AHBPROT_DISABLED ? "yes" : "no");
-	// Reload to a cIOS if required (old forwarder?) or requested
-	if (!AHBPROT_DISABLED || (Settings.EntryIOS != Settings.BootIOS))
-	{
-		SetTextf("Reloading to cIOS %d%s\n", Settings.LoaderIOS, Settings.UseArgumentIOS ? "requested in meta.xml" : "");
-		if (IosLoader::LoadAppCios(Settings.LoaderIOS) < 0)
-		{
-			SetTextf("Failed to load an IOS. USB Loader GX requires a cIOS or IOS58 with AHB access. Exiting...\n");
-			sleep(5);
-			Sys_BackToLoader();
-		}
-		SetTextf("Reloaded to cIOS %d\n", Settings.LoaderIOS);
-		gprintf("Current IOS: %d - have AHB access: %s\n", IOS_GetVersion(), AHBPROT_DISABLED ? "yes" : "no");
-	}
+	IosPatch_AHBPROT(false);
 
+	// Store dx2 cIOS info
+	IosLoader::GetD2XInfo();
+
+	gprintf("Current IOS: %d - have AHB access: %s\n", Settings.EntryIOS, AHBPROT_DISABLED ? "yes" : "no");
+	// Reload to a cIOS if we're using both USB ports
+	if (Settings.USBPort == 2)
+		LoadIOS(Settings.LoaderIOS, false);
+
+	// Reload to a cIOS if required (old forwarder?) or requested
+	else if (!AHBPROT_DISABLED || (Settings.EntryIOS != Settings.BootIOS))
+		LoadIOS(Settings.BootIOS, true);
+
+	// Setup the pads
 	SetupPads();
 
+	// Mount the SD card
 	SetTextf("Initializing SD card\n");
 	DeviceHandler::Instance()->MountSD();
 
 	// Do not mount USB if not needed. USB is not available with WiiU WiiVC injected channel
+	bool USBSuccess = false;
 	if (Settings.USBAutoMount == ON && !isWiiVC)
 	{
 		SetTextf("Initializing USB devices\n");
-		USBSpinUp();
-		DeviceHandler::Instance()->MountAllUSB(false);
-		gprintf("Completed initialization of USB devices\n");
+		if (USBSpinUp())
+		{
+			DeviceHandler::Instance()->MountAllUSB(false);
+			USBSuccess = true;
+			gprintf("Completed initialization of USB devices\n");
+		}
 	}
 
 	SetTextf("Loading config files\n");
@@ -311,7 +334,7 @@ int StartUpProcess::Execute(bool quickGameBoot)
 		// Now load the cIOS that was set in the settings menu
 		if (IosLoader::LoadAppCios(Settings.LoaderIOS) > -1)
 		{
-			SetTextf("Reloaded to %s%d r%d\n", IOS_GetVersion() >= 200 ? "cIOS " : "IOS", Settings.LoaderIOS, IOS_GetRevision());
+			SetTextf("Reloaded to IOS%d r%d\n", Settings.LoaderIOS, IOS_GetRevision());
 			// Re-Mount devices
 			SetTextf("Reinitializing devices\n");
 		}
@@ -321,10 +344,10 @@ int StartUpProcess::Execute(bool quickGameBoot)
 		SetupPads();
 
 		DeviceHandler::Instance()->MountSD();
-		if (Settings.USBAutoMount == ON)
+		if (Settings.USBAutoMount == ON && USBSuccess)
 		{
-			USBSpinUp();
-			DeviceHandler::Instance()->MountAllUSB(false);
+			if (USBSpinUp())
+				DeviceHandler::Instance()->MountAllUSB(false);
 		}
 	}
 
@@ -353,9 +376,9 @@ int StartUpProcess::Execute(bool quickGameBoot)
 	// Enable isfs permission if using Hermes v4 without AHB, or WiiU WiiVC (IOS255 fw.img)
 	if (IOS_GetVersion() < 200 || (IosLoader::IsHermesIOS() && IOS_GetRevision() == 4) || isWiiVC)
 	{
-		SetTextf("Patching %s%d\n", IOS_GetVersion() >= 200 ? "cIOS " : "IOS", IOS_GetVersion());
+		SetTextf("Patching IOS%d\n", IOS_GetVersion());
 		if (IosPatch_RUNTIME(!isWiiVC, false, false, isWiiVC, false) == ERROR_PATCH)
-			gprintf("Patching %sIOS%d failed!\n", IOS_GetVersion() >= 200 ? "c" : "", IOS_GetVersion());
+			gprintf("Patching IOS%d failed!\n", IOS_GetVersion());
 		else
 			NandTitles.Get(); // get NAND channel's titles
 

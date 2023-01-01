@@ -34,6 +34,8 @@ int updateMetaXML()
 		return 0;
 
 	char line[50];
+	snprintf(line, sizeof(line), "--ios=%d", Settings.LoaderIOS);
+	MetaXML.SetArgument(line);
 	snprintf(line, sizeof(line), "--bootios=%d", Settings.BootIOS);
 	MetaXML.SetArgument(line);
 	snprintf(line, sizeof(line), "--usbport=%d", Settings.USBPort);
@@ -86,6 +88,8 @@ int editMetaArguments()
 		if (strstr(line, "<arguments>") != NULL)
 		{
 			fputs(line, destination);
+			snprintf(line, max_line_size, "		<arg>--ios=%d</arg>\n", Settings.LoaderIOS);
+			fputs(line, destination);
 			snprintf(line, max_line_size, "		<arg>--bootios=%d</arg>\n", Settings.BootIOS);
 			fputs(line, destination);
 			snprintf(line, max_line_size, "		<arg>--usbport=%d</arg>\n", Settings.USBPort);
@@ -111,11 +115,9 @@ int editMetaArguments()
 	fclose(source);
 	fclose(destination);
 	delete[] line;
-	
-	if(CopyFile(metatmppath, metapath) <0)
-		return 0;
-	
-	RemoveFile(metatmppath);
-	
+
+	if (RemoveFile(metapath))
+		RenameFile(metatmppath, metapath);
+
 	return 1;
 }
