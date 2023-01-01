@@ -97,7 +97,7 @@ bool ZipFile::FindFilePart(const char *partfilename, std::string &realname)
 
 		if(strcasestr(filename, partfilename) != 0)
 		{
-			realname = filename;
+			realname.assign(filename);
 			return true;
 		}
 	}

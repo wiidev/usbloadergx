@@ -114,7 +114,7 @@ int UninstallSM::GetMenuInternal()
 		char GameID[7];
 		snprintf(GameID, sizeof(GameID), "%s", (char *) DiscHeader->id);
 
-		std::string Title = GameTitles.GetTitle(DiscHeader);
+		std::string Title(GameTitles.GetTitle(DiscHeader));
 		GameSettings.Remove(DiscHeader->id);
 		GameSettings.Save();
 		GameStatistics.Remove(DiscHeader->id);

@@ -12,6 +12,11 @@
 #include <stdio.h>
 #include <string.h>
 
+/* GCC 11 false positives */
+#if __GNUC__ > 11
+#pragma GCC diagnostic ignored "-Wstringop-overflow"
+#endif
+
 #define u8 unsigned char	   /* 8 bits  */
 #define u32 unsigned long	   /* 32 bits */
 #define u64 unsigned long long

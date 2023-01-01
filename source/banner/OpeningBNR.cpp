@@ -329,7 +329,7 @@ u8 *OpeningBNR::LoadGCBNR(const discHdr *header, u32 *len)
 	}
 	else if (header->type == TYPE_GAME_GC_EXTRACTED)
 	{
-		std::string gamePath = path;
+		std::string gamePath(path);
 		gamePath += "root/";
 		//! open default file first
 		file = fopen((gamePath + "opening.bnr").c_str(), "rb");

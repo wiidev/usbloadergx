@@ -36,12 +36,12 @@ jobs:
           path: cache
           key: ${{ runner.os }}-cache-1
 
-      - name: Download devkitPPC r39, libogc 2.3.1 and required tools
+      - name: Download devkitPPC r41, libogc 2.3.1 and required tools
         if: steps.cache-1.outputs.cache-hit != 'true'
         # general-tools is needed for bin2s and gamecube-tools is needed for elf2dol & gcdsptool
         run: | 
           mkdir cache && cd cache
-          wget "https://wii.leseratte10.de/devkitPro/file.php/devkitPPC-r39-2-linux_x86_64.pkg.tar.xz"
+          wget "https://wii.leseratte10.de/devkitPro/file.php/devkitPPC-r41-2-linux_x86_64.pkg.tar.xz"
           wget "https://wii.leseratte10.de/devkitPro/file.php/devkitppc-rules-1.1.1-1-any.pkg.tar.xz"
           wget "https://wii.leseratte10.de/devkitPro/file.php/libogc-2.3.1-1-any.pkg.tar.xz"
           wget "https://wii.leseratte10.de/devkitPro/file.php/general-tools-1.2.0-2-linux_x86_64.pkg.tar.xz"
@@ -51,7 +51,7 @@ jobs:
       - name: Verify checksums
         run: |
           sha256sum -c <<EOF
-          76465565a4c5f9bce2849f12876b470f5044b02ce242fd22f57b6b7a2b113ead  cache/devkitPPC-r39-2-linux_x86_64.pkg.tar.xz
+          f8bdbabd7e30ebc87dc129c092d1fa85e38d726de78befad3dc6714568431076  cache/devkitPPC-r41-2-linux_x86_64.pkg.tar.xz
           0118f06fff938c3d4913fdc004d5edd2f72e3a16c544fb5699b0e97552529d29  cache/devkitppc-rules-1.1.1-1-any.pkg.tar.xz
           b10553cced35ab8d3d0c48ee44cdb345f46be5e8f82496dd308f699db4f8d490  cache/libogc-2.3.1-1-any.pkg.tar.xz
           3348e521e48f27912d0bca05eac73b4365c8c7006b637c95850f4feabe5dd2e9  cache/general-tools-1.2.0-2-linux_x86_64.pkg.tar.xz
@@ -77,7 +77,7 @@ jobs:
 
       - name: Extract downloaded files
         run: |
-          tar -xf cache/devkitPPC-r39-2-linux_x86_64.pkg.tar.xz --strip-components=1
+          tar -xf cache/devkitPPC-r41-2-linux_x86_64.pkg.tar.xz --strip-components=1
           tar -xf cache/devkitppc-rules-1.1.1-1-any.pkg.tar.xz --strip-components=1
           tar -xf cache/libogc-2.3.1-1-any.pkg.tar.xz --strip-components=1
           tar -xf cache/general-tools-1.2.0-2-linux_x86_64.pkg.tar.xz --strip-components=1

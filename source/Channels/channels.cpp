@@ -554,14 +554,12 @@ bool Channels::ParseTitleDir(char *path, int language)
 
     while ((dirent = readdir(dir)) != 0)
     {
-        if (!dirent->d_name)
+        if (strlen(dirent->d_name) == 0)
             continue;
 
         // These can't be booted anyways
-        if (*dirent->d_name == '.' || strcmp(dirent->d_name, "48414141") == 0 || strcmp(dirent->d_name, "48414641") == 0)
-        {
+        if (dirent->d_name[0] == '.' || strcmp(dirent->d_name, "48414141") == 0 || strcmp(dirent->d_name, "48414641") == 0)
             continue;
-        }
 
         snprintf(pathEndPtr, 1024 - (pathEndPtr - path), "/%s/content/title.tmd", dirent->d_name);
 

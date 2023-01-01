@@ -5,7 +5,7 @@ apt-get update && apt-get install make xz-utils -y
 
 # Download and extract
 cd /opt
-wget "https://wii.leseratte10.de/devkitPro/file.php/devkitPPC-r39-2-linux_x86_64.pkg.tar.xz"
+wget "https://wii.leseratte10.de/devkitPro/file.php/devkitPPC-r41-2-linux_x86_64.pkg.tar.xz"
 wget "https://wii.leseratte10.de/devkitPro/file.php/devkitppc-rules-1.1.1-1-any.pkg.tar.xz"
 wget "https://wii.leseratte10.de/devkitPro/file.php/libogc-2.3.1-1-any.pkg.tar.xz"
 wget "https://wii.leseratte10.de/devkitPro/file.php/general-tools-1.2.0-2-linux_x86_64.pkg.tar.xz"

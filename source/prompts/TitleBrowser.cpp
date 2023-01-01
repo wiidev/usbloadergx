@@ -69,7 +69,7 @@ bool TitleSelector(char output[])
 	OptionList options4;
 	//write the titles on the option browser
 
-	std::string Filepath = Settings.titlestxt_path;
+	std::string Filepath(Settings.titlestxt_path);
 	Filepath += "wiitdb.xml";
 
 	GameTDB *XML_DB = new GameTDB(Filepath.c_str());
@@ -251,7 +251,7 @@ int TitleBrowser()
 	OptionList options3;
 	//write the titles on the option browser
 
-	std::string Filepath = Settings.titlestxt_path;
+	std::string Filepath(Settings.titlestxt_path);
 	Filepath += "wiitdb.xml";
 
 	GameTDB *XML_DB = new GameTDB(Filepath.c_str());

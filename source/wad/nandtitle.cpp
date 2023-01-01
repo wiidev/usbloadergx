@@ -686,7 +686,7 @@ int NandTitle::ExtractDir(const char *nandPath, const char *filepath)
 	if(!filepath || !nandPath)
 		return -1;
 
-	std::string internFilePath = filepath;
+	std::string internFilePath(filepath);
 	char *internNandPath = (char *) memalign(32, ISFS_MAXPATH);
 	if(!internNandPath)
 		return -666;

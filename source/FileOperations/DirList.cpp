@@ -88,7 +88,7 @@ bool DirList::LoadPath(std::string &folderpath, const char *filter, u32 flags, s
 
 	while ((dirent = readdir(dir)) != 0)
 	{
-		if(!dirent->d_name)
+		if(strlen(dirent->d_name) == 0)
 			continue;
 
 		snprintf(filename, MAXPATHLEN, "%s/%s", folderpath.c_str(), dirent->d_name);

@@ -88,12 +88,13 @@ void GCGames::LoadGameList(const std::string &path, std::vector<struct discHdr> 
 
 	while ((dirent = readdir(dir_iter)) != 0)
 	{
-		const char *dirname = dirent->d_name;
-		if (!dirname)
+		if (strlen(dirent->d_name) == 0)
 			continue;
 
-		if (dirname[0] == '.')
+		if (dirent->d_name[0] == '.')
 			continue;
+
+		const char *dirname = dirent->d_name;
 
 		// reset id and title
 		memset(id, 0, sizeof(id));
