@@ -1848,6 +1848,9 @@ msgstr "重新載入 SD 卡"
 msgid "Reloading game list now, please wait..."
 msgstr "現在重新載入遊戲清單，請稍候..."
 
+msgid "Remember Last Game"
+msgstr ""
+
 msgid "Remember Unlock"
 msgstr "儲存解鎖"
 

@@ -642,8 +642,16 @@ void GameBrowseMenu::ReloadBrowser()
 	}
 
 	//! Check if the loaded setting is still in range
-	Settings.SelectedGame = LIMIT(Settings.SelectedGame, 0, gameList.size()-1);
-	Settings.GameListOffset = LIMIT(Settings.GameListOffset, 0, gameList.size()-1);
+	if (Settings.RememberLastGame)
+	{
+		Settings.SelectedGame = LIMIT(Settings.SelectedGame, 0, gameList.size()-1);
+		Settings.GameListOffset = LIMIT(Settings.GameListOffset, 0, gameList.size()-1);
+	}
+	else
+	{
+		Settings.SelectedGame = 0;
+		Settings.GameListOffset = 0;
+	}
 
 	delete gameBrowser;
 	delete searchBar;

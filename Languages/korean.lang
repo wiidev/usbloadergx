@@ -1848,6 +1848,9 @@ msgstr "SD 리로드"
 msgid "Reloading game list now, please wait..."
 msgstr "게임 목록을 다시 불러오고 있습니다. 잠시만 기다려주십시오..."
 
+msgid "Remember Last Game"
+msgstr "마지막 게임 기억하기"
+
 msgid "Remember Unlock"
 msgstr "잠금 해제 기억"
 

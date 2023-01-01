@@ -151,6 +151,7 @@ GuiSettingsMenu::GuiSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Full covers Download" ));
 	Options->SetName(Idx++, "%s", tr( "Cover Action" ));
 	Options->SetName(Idx++, "%s", tr( "Screensaver" ));
+	Options->SetName(Idx++, "%s", tr( "Remember Last Game" ));
 	Options->SetName(Idx++, "%s", tr( "Mark new games" ));
 	Options->SetName(Idx++, "%s", tr( "Show Play Count" ));
 	Options->SetName(Idx++, "%s", tr( "Show Favorite on banner" ));
@@ -227,6 +228,9 @@ void GuiSettingsMenu::SetOptionValues()
 
 	//! Settings: Screensaver
 	Options->SetValue(Idx++, "%s", tr( ScreensaverText[Settings.screensaver] ));
+
+	//! Settings: Remember Last Game
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.RememberLastGame] ));
 
 	//! Settings: Mark new games
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.marknewtitles] ));
@@ -417,6 +421,12 @@ int GuiSettingsMenu::GetMenuInternal()
 		if (++Settings.screensaver >= SCREENSAVER_MAX) Settings.screensaver = 0;
 
 		SetWPADTimeout();
+	}
+
+	//! Settings: Remember Last Game
+	else if (ret == ++Idx)
+	{
+		if (++Settings.RememberLastGame >= MAX_ON_OFF) Settings.RememberLastGame = 0;
 	}
 
 	//! Settings: Mark new games

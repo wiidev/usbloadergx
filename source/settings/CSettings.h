@@ -164,6 +164,7 @@ class CSettings
 		short Wiinnertag;
 		short SelectedGame;
 		short GameListOffset;
+		short RememberLastGame;
 		short sneekVideoPatch;
 		std::vector<u32> EnabledCategories;
 		std::vector<u32> RequiredCategories;

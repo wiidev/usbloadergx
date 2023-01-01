@@ -1848,6 +1848,9 @@ msgstr "Επαναφόρτωση κάρτας SD"
 msgid "Reloading game list now, please wait..."
 msgstr "Επαναφόρτωση λίστας παιχνιδιών, παρακαλώ περιμένετε..."
 
+msgid "Remember Last Game"
+msgstr ""
+
 msgid "Remember Unlock"
 msgstr "Μόνιμο ξεκλείδωμα"
 

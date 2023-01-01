@@ -1848,6 +1848,9 @@ msgstr "SD Karte neuladen"
 msgid "Reloading game list now, please wait..."
 msgstr "Aktualisiere Spieleliste, bitte warten..."
 
+msgid "Remember Last Game"
+msgstr "Letztes Spiel merken"
+
 msgid "Remember Unlock"
 msgstr "Entsperrung behalten"
 

@@ -162,6 +162,7 @@ void CSettings::SetDefault()
 	Wiinnertag = OFF;
 	SelectedGame = 0;
 	GameListOffset = 0;
+	RememberLastGame = ON;
 	sneekVideoPatch = OFF;
 	NandEmuMode = OFF;
 	NandEmuChanMode = 2;
@@ -429,6 +430,7 @@ bool CSettings::Save()
 	fprintf(file, "WiinnertagPath = %s\n", WiinnertagPath);
 	fprintf(file, "SelectedGame = %d\n", SelectedGame);
 	fprintf(file, "GameListOffset = %d\n", GameListOffset);
+	fprintf(file, "RememberLastGame = %d\n", RememberLastGame);
 	fprintf(file, "sneekVideoPatch = %d\n", sneekVideoPatch);
 	fprintf(file, "NandEmuMode = %d\n", NandEmuMode);
 	fprintf(file, "NandEmuChanMode = %d\n", NandEmuChanMode);
@@ -835,6 +837,10 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if(strcmp(name, "GameListOffset") == 0)
 	{
 		GameListOffset = atoi(value);
+	}
+	else if(strcmp(name, "RememberLastGame") == 0)
+	{
+		RememberLastGame = atoi(value);
 	}
 	else if(strcmp(name, "sneekVideoPatch") == 0)
 	{

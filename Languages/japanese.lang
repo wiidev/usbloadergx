@@ -1848,6 +1848,9 @@ msgstr "SDを再読み込み"
 msgid "Reloading game list now, please wait..."
 msgstr "ゲームリストを再読み込み中、お待ちください..."
 
+msgid "Remember Last Game"
+msgstr ""
+
 msgid "Remember Unlock"
 msgstr "ロック解除を記憶"
 
