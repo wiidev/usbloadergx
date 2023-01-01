@@ -289,25 +289,43 @@ void GuiBannerGrid::Update(GuiTrigger *t)
 	for(int i = 0; i < MAX_BUTTONS && !AnimationRunning; i++)
 		gridBtn[i]->Update(t);
 
-	if(pageNo > 0)
-	{
-		btnLeft->Update(t);
+	if (ticks_to_millisecs(diff_ticks(time, gettime())) < 100)
+		return;
 
-		if((btnLeft->GetState() == STATE_CLICKED) && !AnimationRunning) {
-			btnLeft->SetState(STATE_DEFAULT);
+	btnLeft->Update(t);
+	btnRight->Update(t);
+
+	u32 buttons = t->wpad.btns_h;
+	u32 buttonsPAD = t->pad.btns_h;
+	if ((btnLeft->GetState() == STATE_CLICKED) && !AnimationRunning)
+	{
+		if (!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_MINUS) ||
+			  (buttons & WPAD_CLASSIC_BUTTON_A) || (buttons & WPAD_CLASSIC_BUTTON_MINUS) ||
+			  (buttonsPAD & PAD_BUTTON_A) || (buttonsPAD & PAD_TRIGGER_L)  || t->Left()))
+		{
+			btnLeft->ResetState();
+			return;
+		}
+		if (pageNo > 0)
+		{
+			time = gettime();
 			fAnimation -= chanWidth * 4.f;
 			pageNo--;
 			UpdateTooltips();
 		}
 	}
-
-
-	if(pageNo < pageCnt-1)
+	else if ((btnRight->GetState() == STATE_CLICKED) && !AnimationRunning)
 	{
-		btnRight->Update(t);
-
-		if((btnRight->GetState() == STATE_CLICKED) && !AnimationRunning) {
-			btnRight->SetState(STATE_DEFAULT);
+		if (!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_PLUS) ||
+			  (buttons & WPAD_CLASSIC_BUTTON_A) || (buttons & WPAD_CLASSIC_BUTTON_PLUS) ||
+			  (buttonsPAD & PAD_BUTTON_A) || (buttonsPAD & PAD_TRIGGER_R)  || t->Right()))
+		{
+			btnRight->ResetState();
+			return;
+		}
+		if (pageNo < pageCnt - 1)
+		{
+			time = gettime();
 			fAnimation += chanWidth * 4.f;
 			pageNo++;
 			UpdateTooltips();

@@ -59,6 +59,7 @@ private:
 
 	int pageNo;
 	int pageCnt;
+	u64 time;
 	Vec2f ScreenProps;
 
 	Texture gridFrameTex;
