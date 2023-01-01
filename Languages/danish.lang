@@ -2188,9 +2188,6 @@ msgstr "Denne Nintendont version er ikke understøttet korrekt. Autostart deakti
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "Dette spil har flere disks. Vælg venligst disken der skal startes."
 
-msgid "This patch might not work with all games. If a game doesn't boot, disable it in individual game settings menu."
-msgstr "Denne patch virker nok ikke med alle spil. Hvis et spil ikke start, deaktiver den i det individuelle spil indstillinger menu."
-
 msgid "This path must be on SD!"
 msgstr "Denne sti skal være på SD!"
 

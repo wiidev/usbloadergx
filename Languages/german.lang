@@ -2188,9 +2188,6 @@ msgstr ""
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "Dieses Spiel hat mehrere Disks. Bitte wähle, welche Disk gestartet werden soll."
 
-msgid "This patch might not work with all games. If a game doesn't boot, disable it in individual game settings menu."
-msgstr ""
-
 msgid "This path must be on SD!"
 msgstr "Dieser Pfad muss auf der SD sein!"
 

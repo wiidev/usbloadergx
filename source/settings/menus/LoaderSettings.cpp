@@ -581,8 +581,6 @@ int LoaderSettings::GetMenuInternal()
 	if (ret == ++Idx)
 	{
 		if (++Settings.patchFix480p >= MAX_ON_OFF) Settings.patchFix480p = 0;
-		if(Settings.patchFix480p)
-			WindowPrompt(tr("Warning:"), tr("This patch might not work with all games. If a game doesn't boot, disable it in individual game settings menu."), tr("OK"));
 	}
 
 	//! Settings: Sneek Video Patch

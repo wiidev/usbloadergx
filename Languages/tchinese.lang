@@ -2188,9 +2188,6 @@ msgstr ""
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "此遊戲為多重光碟。請選擇光碟啟動。"
 
-msgid "This patch might not work with all games. If a game doesn't boot, disable it in individual game settings menu."
-msgstr ""
-
 msgid "This path must be on SD!"
 msgstr "此路徑必須是在SD卡上！"
 

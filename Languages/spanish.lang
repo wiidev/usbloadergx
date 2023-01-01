@@ -2188,9 +2188,6 @@ msgstr "Esta versión de Nintendont no es soportada. El autoarranque será desac
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "Este juego posee varios discos. Por favor, elige el que deseas cargar."
 
-msgid "This patch might not work with all games. If a game doesn't boot, disable it in individual game settings menu."
-msgstr "Esta ruta puede no funcionar con todos los juegos. Si un juego no arranca, deshabilítalo individualmente en la configuración."
-
 msgid "This path must be on SD!"
 msgstr "¡Esta ruta debe estar en la SD!"
 

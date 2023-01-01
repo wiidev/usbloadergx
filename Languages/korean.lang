@@ -2188,9 +2188,6 @@ msgstr "이 닌텐돈트 버전은 올바르게 지원되지 않습니다. 자�
 msgid "This game has multiple discs. Please select the disc to launch."
 msgstr "이 게임에는 여러 개의 디스크가 있습니다. 실행할 디스크를 선택하십시오."
 
-msgid "This patch might not work with all games. If a game doesn't boot, disable it in individual game settings menu."
-msgstr "이 패치는 모든 게임에서 작동하지 않을 수 있습니다. 게임이 부팅되지 않으면 개별 게임 설정 메뉴에서 비활성화하십시오."
-
 msgid "This path must be on SD!"
 msgstr "이 경로는 SD에 있어야 합니다!"
 
