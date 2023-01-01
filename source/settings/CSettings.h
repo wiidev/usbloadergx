@@ -84,8 +84,8 @@ class CSettings
 		char WiinnertagPath[100];
 		char NandEmuPath[50];
 		char NandEmuChanPath[50];
-		char BNRCachePath[50];
-		char GameHeaderCachePath[50];
+		char BNRCachePath[100];
+		char GameHeaderCachePath[100];
 		char GameCubePath[100];
 		char GameCubeSDPath[100];
 		char DEVOLoaderPath[100];
@@ -135,7 +135,10 @@ class CSettings
 		short partition;
 		short musicloopmode;
 		short godmode;
-		short titlesOverride; // db_titles
+		short TitlesType;
+		short CacheCheck;
+		u32 CacheCheckCRC;
+		short CacheTitles;
 		short gridRows;
 		short autonetwork;
 		short discart;
@@ -146,12 +149,10 @@ class CSettings
 		short GameSplit;
 		short PlaylogUpdate;
 		short ShowFreeSpace;
-		short UseGameHeaderCache;
 		short HomeMenu;
 		short MultiplePartitions;
 		short USBPort;
 		short USBAutoMount;
-		short CacheTitles;
 		short BlockIOSReload;
 		u32 InstallPartitions;
 		u32 ParentalBlocks;
@@ -183,7 +184,6 @@ class CSettings
 		short UseChanLauncher;
 		int AdjustOverscanX;
 		int AdjustOverscanY;
-		short ForceDiscTitles;
 		short TooltipDelay;
 		short GameWindowMode;
 		short CacheBNRFiles;

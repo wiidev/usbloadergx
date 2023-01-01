@@ -124,7 +124,6 @@ HardDriveSM::~HardDriveSM()
 		//! Reload the new game titles
 		gameList.ReadGameList();
 		gameList.LoadUnfiltered();
-		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false);
 		
 		if(oldSettingsUSBAutoMount != Settings.USBAutoMount || NewSettingsUSBPort == -1)
 		{

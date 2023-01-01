@@ -148,7 +148,6 @@ class GameBrowseMenu : public GuiWindow
 		GuiButton * loaderModeBtn;
 		GuiButton * homebrewBtn;
 		GuiButton * DownloadBtn;
-		GuiButton * idBtn;
 
 		GuiTooltip * installBtnTT;
 		GuiTooltip * settingsBtnTT;
@@ -168,7 +167,6 @@ class GameBrowseMenu : public GuiWindow
 		GuiTooltip * loaderModeBtnTT;
 		GuiTooltip * homebrewBtnTT;
 		GuiTooltip * DownloadBtnTT;
-		GuiTooltip * IDBtnTT;
 };
 
 #endif

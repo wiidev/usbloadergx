@@ -36,9 +36,10 @@ public:
 
 	static u8 *GetOpeningBnr(const char *gameID);
 
-	u32 LoadAllGames(void);
+	u32 LoadAllGames(bool use_cache = false);
 
 	void LoadGameList(const std::string &path, std::vector<struct discHdr> &headerList, std::vector<std::string> &pathList);
+	void clear();
 
 	bool RemoveGame(const char *gameID);
 	bool RemoveSDGame(const char *gameID);
@@ -48,7 +49,8 @@ public:
 
 	std::vector<struct discHdr> & GetHeaders(void)
 	{
-		LoadAllGames();
+		if (HeaderList.empty())
+			LoadAllGames(true);
 
 		return HeaderList;
 	}

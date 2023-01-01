@@ -344,6 +344,9 @@ msgstr "緩衝頻道動畫檔案"
 msgid "Cache BNR Files Path"
 msgstr "緩衝頻道動畫檔案路徑"
 
+msgid "Cache Path"
+msgstr ""
+
 msgid "Cache Titles"
 msgstr "遊戲標題緩衝"
 
@@ -638,6 +641,9 @@ msgstr "Devolution的loader.bin檔無法載入。"
 
 msgid "Directory does not exist!"
 msgstr "目錄不存在"
+
+msgid "Disc"
+msgstr ""
 
 msgid "Disc 1"
 msgstr "光碟 1"
@@ -1011,9 +1017,6 @@ msgstr "強制 PAL50"
 msgid "Force PAL60"
 msgstr "強制 PAL60"
 
-msgid "Force Titles from Disc"
-msgstr "強制從光碟顯示標題"
-
 msgid "Force Widescreen"
 msgstr ""
 
@@ -1104,9 +1107,6 @@ msgstr "GameCube 遊戲刪除"
 msgid "GameCube Install Menu"
 msgstr "GameCube 安裝畫面"
 
-msgid "Game Header Cache Files Path"
-msgstr ""
-
 msgid "Game ID"
 msgstr "遊戲 ID"
 
@@ -1166,6 +1166,9 @@ msgstr "GameCube 來源"
 
 msgid "Gamename [GAMEID]"
 msgstr "遊戲名稱 [GAMEID]"
+
+msgid "GameTDB"
+msgstr ""
 
 msgid "Games"
 msgstr "遊戲數量"
@@ -1848,7 +1851,7 @@ msgstr ""
 msgid "Reset BG Music"
 msgstr "重設背景音樂"
 
-msgid "Reset Game Header Cache"
+msgid "Reset Cached Titles"
 msgstr ""
 
 msgid "Reset Playcounter"
@@ -2185,8 +2188,8 @@ msgstr "系統頻道"
 msgid "Titles Path"
 msgstr ""
 
-msgid "Titles from GameTDB"
-msgstr "從GameTDB顯示遊戲名稱"
+msgid "Titles From"
+msgstr ""
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
 msgstr "用光碟執行GameCube遊戲，你需在遊戲設定中設定GameCube 模式為MIOS。"
@@ -2278,9 +2281,6 @@ msgid "USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyw
 msgstr ""
 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
-msgstr ""
-
-msgid "Use Game Header Cache"
 msgstr ""
 
 msgid "Uninstall"

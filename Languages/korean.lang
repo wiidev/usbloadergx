@@ -344,6 +344,9 @@ msgstr "BNR 파일 캐쉬"
 msgid "Cache BNR Files Path"
 msgstr "BNR 파일 경로 캐쉬"
 
+msgid "Cache Path"
+msgstr "캐시 경로"
+
 msgid "Cache Titles"
 msgstr "타이틀 캐쉬"
 
@@ -638,6 +641,9 @@ msgstr "데볼루션의 loader.bin 파일을 로드 할 수 없습니다."
 
 msgid "Directory does not exist!"
 msgstr "디렉토리가 존재하지 않습니다!"
+
+msgid "Disc"
+msgstr "디스크"
 
 msgid "Disc 1"
 msgstr "디스크 1"
@@ -1011,9 +1017,6 @@ msgstr "강제 PAL50"
 msgid "Force PAL60"
 msgstr "강제 PAL60"
 
-msgid "Force Titles from Disc"
-msgstr "디스크에서 강제 타이틀"
-
 msgid "Force Widescreen"
 msgstr "강제 와이드스크린"
 
@@ -1104,9 +1107,6 @@ msgstr "게임큐브 게임 삭제"
 msgid "GameCube Install Menu"
 msgstr "게임큐브 설치 메뉴"
 
-msgid "Game Header Cache Files Path"
-msgstr "게임 헤더 캐시 파일 경로"
-
 msgid "Game ID"
 msgstr "게임 ID"
 
@@ -1166,6 +1166,9 @@ msgstr "게임큐브 소스"
 
 msgid "Gamename [GAMEID]"
 msgstr "게임이름 [게임ID]"
+
+msgid "GameTDB"
+msgstr ""
 
 msgid "Games"
 msgstr "게임"
@@ -1848,8 +1851,8 @@ msgstr "모든 게임 설정 재설정"
 msgid "Reset BG Music"
 msgstr "배경 음악 리셋"
 
-msgid "Reset Game Header Cache"
-msgstr "게임 헤더 캐시 리셋"
+msgid "Reset Cached Titles"
+msgstr "캐시된 타이틀 재설정"
 
 msgid "Reset Playcounter"
 msgstr "실행 횟수 리셋"
@@ -2185,8 +2188,8 @@ msgstr "타이틀 실행기"
 msgid "Titles Path"
 msgstr "타이틀 경로"
 
-msgid "Titles from GameTDB"
-msgstr "GameTDB의 타이틀"
+msgid "Titles From"
+msgstr "제목 출처"
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
 msgstr "디스크에서 게임큐브 게임을 실행하려면 게임 설정에서 게임큐브 모드를 MIOS로 설정해야 합니다."

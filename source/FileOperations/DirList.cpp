@@ -37,9 +37,9 @@
 #include "utils/StringTools.h"
 #include "DirList.h"
 
-DirList::DirList(const char * path, const char *filter, u32 flags)
+DirList::DirList(const char * path, const char *filter, u32 flags, s32 max_depth)
 {
-	this->LoadPath(path, filter, flags);
+	this->LoadPath(path, filter, flags, max_depth);
 	this->SortList();
 }
 
@@ -48,16 +48,16 @@ DirList::~DirList()
 	ClearList();
 }
 
-bool DirList::LoadPath(const char * folder, const char *filter, u32 flags)
+bool DirList::LoadPath(const char * folder, const char *filter, u32 flags, s32 max_depth)
 {
 	if(!folder) return false;
 
 	std::string folderpath(folder);
 
-	return LoadPath(folderpath, filter, flags);
+	return LoadPath(folderpath, filter, flags, max_depth);
 }
 
-bool DirList::LoadPath(std::string &folderpath, const char *filter, u32 flags)
+bool DirList::LoadPath(std::string &folderpath, const char *filter, u32 flags, s32 max_depth)
 {
 	if(folderpath.size() < 3)
 		return false;
@@ -103,12 +103,12 @@ bool DirList::LoadPath(std::string &folderpath, const char *filter, u32 flags)
 			if(strcmp(filename,".") == 0 || strcmp(filename,"..") == 0)
 				continue;
 
-			if(flags & CheckSubfolders)
+			if((flags & CheckSubfolders) && (max_depth != 0))
 			{
 				int length = folderpath.size();
 				if(!isRoot) folderpath += '/';
 				folderpath += filename;
-				LoadPath(folderpath, filter, flags);
+				LoadPath(folderpath, filter, flags, max_depth - 1);
 				folderpath.erase(length);
 			}
 

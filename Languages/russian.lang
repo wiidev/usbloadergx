@@ -344,6 +344,9 @@ msgstr ""
 msgid "Cache BNR Files Path"
 msgstr ""
 
+msgid "Cache Path"
+msgstr ""
+
 msgid "Cache Titles"
 msgstr ""
 
@@ -638,6 +641,9 @@ msgstr ""
 
 msgid "Directory does not exist!"
 msgstr "Каталог не существует!"
+
+msgid "Disc"
+msgstr ""
 
 msgid "Disc 1"
 msgstr ""
@@ -1011,9 +1017,6 @@ msgstr ""
 msgid "Force PAL60"
 msgstr ""
 
-msgid "Force Titles from Disc"
-msgstr ""
-
 msgid "Force Widescreen"
 msgstr ""
 
@@ -1104,9 +1107,6 @@ msgstr ""
 msgid "GameCube Install Menu"
 msgstr ""
 
-msgid "Game Header Cache Files Path"
-msgstr ""
-
 msgid "Game ID"
 msgstr "ID игры"
 
@@ -1165,6 +1165,9 @@ msgid "GameCube Source"
 msgstr ""
 
 msgid "Gamename [GAMEID]"
+msgstr ""
+
+msgid "GameTDB"
 msgstr ""
 
 msgid "Games"
@@ -1848,7 +1851,7 @@ msgstr ""
 msgid "Reset BG Music"
 msgstr ""
 
-msgid "Reset Game Header Cache"
+msgid "Reset Cached Titles"
 msgstr ""
 
 msgid "Reset Playcounter"
@@ -2185,7 +2188,7 @@ msgstr "Загрузчик тайтла"
 msgid "Titles Path"
 msgstr ""
 
-msgid "Titles from GameTDB"
+msgid "Titles From"
 msgstr ""
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
@@ -2278,9 +2281,6 @@ msgid "USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyw
 msgstr ""
 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
-msgstr ""
-
-msgid "Use Game Header Cache"
 msgstr ""
 
 msgid "Uninstall"

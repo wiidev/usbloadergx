@@ -133,13 +133,14 @@ void CSettings::SetDefault()
 	wiilight = WIILIGHT_ON;
 	autonetwork = OFF;
 	patchcountrystrings = OFF;
-	titlesOverride = ON;
-	ForceDiscTitles = OFF;
+	TitlesType = TITLETYPE_FROMWIITDB;
+	CacheCheck = ON;
+	CacheCheckCRC = 0;
+	CacheTitles = ON;
 	screensaver = SCREENSAVER_10_MIN;
 	musicloopmode = ON;
 	marknewtitles = ON;
 	ShowFreeSpace = ON;
-	UseGameHeaderCache = OFF;
 	PlaylogUpdate = OFF;
 	ParentalBlocks = BLOCK_ALL;
 	InstallToDir = INSTALL_TO_NAME_GAMEID;
@@ -150,7 +151,6 @@ void CSettings::SetDefault()
 	BlockIOSReload = AUTO;
 	USBPort = 0;
 	USBAutoMount = ON;
-	CacheTitles = ON;
 	WSFactor = 0.8f; //actually should be 0.75 for real widescreen
 	FontScaleFactor = 0.8f; //it's a work around to not have to change ALL fonts now
 	ClockFontScaleFactor = 1.0f; // Scale of 1 to prevent misaligned clock.
@@ -314,7 +314,7 @@ bool CSettings::Save()
 	char filedest[300];
 	snprintf(filedest, sizeof(filedest), "%sGXGlobal.cfg", ConfigPath);
 
-	if(!CreateSubfolder(ConfigPath))	return false;
+	if(!CreateSubfolder(ConfigPath)) return false;
 
 	FILE * file = fopen(filedest, "w");
 	if (!file) return false;
@@ -372,8 +372,10 @@ bool CSettings::Save()
 	fprintf(file, "BcaCodepath = %s\n", BcaCodepath);
 	fprintf(file, "WipCodepath = %s\n", WipCodepath);
 	fprintf(file, "WDMpath = %s\n", WDMpath);
-	fprintf(file, "titlesOverride = %d\n", titlesOverride);
-	fprintf(file, "ForceDiscTitles = %d\n", ForceDiscTitles);
+	fprintf(file, "TitlesType = %d\n", TitlesType);
+	fprintf(file, "CacheCheck = %d\n", CacheCheck);
+	fprintf(file, "CacheCheckCRC = %08X\n", CacheCheckCRC);
+	fprintf(file, "CacheTitles = %d\n", CacheTitles);
 	fprintf(file, "patchcountrystrings = %d\n", patchcountrystrings);
 	fprintf(file, "screensaver = %d\n", screensaver);
 	fprintf(file, "musicloopmode = %d\n", musicloopmode);
@@ -383,7 +385,6 @@ bool CSettings::Save()
 	fprintf(file, "partition = %d\n", partition);
 	fprintf(file, "marknewtitles = %d\n", marknewtitles);
 	fprintf(file, "ShowFreeSpace = %d\n", ShowFreeSpace);
-	fprintf(file, "UseGameHeaderCache = %d\n", UseGameHeaderCache);
 	fprintf(file, "InstallToDir = %d\n", InstallToDir);
 	fprintf(file, "GameSplit = %d\n", GameSplit);
 	fprintf(file, "InstallPartitions = %08X\n", (unsigned int)InstallPartitions);
@@ -394,7 +395,6 @@ bool CSettings::Save()
 	fprintf(file, "MultiplePartitions = %d\n", MultiplePartitions);
 	fprintf(file, "USBPort = %d\n", USBPort);
 	fprintf(file, "USBAutoMount = %d\n", USBAutoMount);
-	fprintf(file, "CacheTitles = %d\n", CacheTitles);
 	fprintf(file, "BlockIOSReload = %d\n", BlockIOSReload);
 	fprintf(file, "WSFactor = %0.3f\n", WSFactor);
 	fprintf(file, "FontScaleFactor = %0.3f\n", FontScaleFactor);
@@ -702,14 +702,24 @@ bool CSettings::SetSetting(char *name, char *value)
 		screensaver = atoi(value);
 		return true;
 	}
-	else if (strcmp(name, "titlesOverride") == 0)
+	else if (strcmp(name, "TitlesType") == 0)
 	{
-		titlesOverride = atoi(value);
+		TitlesType = atoi(value);
 		return true;
 	}
-	else if (strcmp(name, "ForceDiscTitles") == 0)
+	else if (strcmp(name, "CacheCheck") == 0)
 	{
-		ForceDiscTitles = atoi(value);
+		CacheCheck = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "CacheCheckCRC") == 0)
+	{
+		CacheCheckCRC = strtoul(value, 0, 16);
+		return true;
+	}
+	else if (strcmp(name, "CacheTitles") == 0)
+	{
+		CacheTitles = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "musicloopmode") == 0)
@@ -747,11 +757,6 @@ bool CSettings::SetSetting(char *name, char *value)
 		ShowFreeSpace = atoi(value);
 		return true;
 	}
-	else if (strcmp(name, "UseGameHeaderCache") == 0)
-	{
-		UseGameHeaderCache = atoi(value);
-		return true;
-	}
 	else if (strcmp(name, "HomeMenu") == 0)
 	{
 		HomeMenu = atoi(value);
@@ -775,11 +780,6 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "USBAutoMount") == 0)
 	{
 		USBAutoMount = atoi(value);
-		return true;
-	}
-	else if (strcmp(name, "CacheTitles") == 0)
-	{
-		CacheTitles = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "patchcountrystrings") == 0)

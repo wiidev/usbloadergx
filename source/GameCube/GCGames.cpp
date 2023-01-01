@@ -58,6 +58,19 @@ const char *GCGames::GetPath(const char *gameID) const
 	return "";
 }
 
+void GCGames::clear()
+{
+	PathList.clear();
+	HeaderList.clear();
+	sdGCList.clear();
+	sdGCPathList.clear();
+	//! Clear memory of the vector completely
+	std::vector<std::string>().swap(PathList);
+	std::vector<struct discHdr>().swap(HeaderList);
+	std::vector<struct discHdr>().swap(sdGCList);
+	std::vector<std::string>().swap(sdGCPathList);
+}
+
 void GCGames::LoadGameList(const std::string &path, std::vector<struct discHdr> &headerList, std::vector<std::string> &pathList)
 {
 	struct discHdr tmpHdr;
@@ -65,7 +78,7 @@ void GCGames::LoadGameList(const std::string &path, std::vector<struct discHdr> 
 	u8 id[8];
 	u8 disc_number = 0;
 	char fpath[1024];
-	char fname_title[64];
+	char fname_title[130];
 	DIR *dir_iter;
 	struct dirent *dirent;
 
@@ -174,19 +187,21 @@ void GCGames::LoadGameList(const std::string &path, std::vector<struct discHdr> 
 			}
 		}
 
-		// if we have titles.txt entry use that
-		const char *title = GameTitles.GetTitle(id);
+		std::string title = "";
+		if (Settings.TitlesType == TITLETYPE_FORCED_DISC && GameTitles.GetTitleType((const char *)id) == TITLETYPE_FORCED_DISC)
+			title.assign(GameTitles.GetTitle((const char *)id));
 
-		// if no titles.txt get title from dir or file name
-		if (strlen(title) == 0 && !Settings.ForceDiscTitles && strlen(fname_title) > 0)
-			title = fname_title;
+		if (title.length() == 0 && Settings.TitlesType != TITLETYPE_FORCED_DISC && strlen(fname_title) > 0)
+			title.assign(fname_title);
 
-		if (*id != 0 && strlen(title) > 0)
+		title.erase(0, title.find_first_not_of(' '));
+
+		if (*id != 0 && title.length() > 0 && title.length() < 64)
 		{
 			std::string gamePath = std::string(path) + dirname + (extracted ? "/" : strrchr(fpath, '/'));
 			memset(&tmpHdr, 0, sizeof(tmpHdr));
 			memcpy(tmpHdr.id, id, sizeof(tmpHdr.id));
-			snprintf(tmpHdr.title, sizeof(tmpHdr.title), "%s", title);
+			snprintf(tmpHdr.title, sizeof(tmpHdr.title), "%s", title.c_str());
 			tmpHdr.magic = GCGames::MAGIC;
 			tmpHdr.type = extracted ? TYPE_GAME_GC_EXTRACTED : TYPE_GAME_GC_IMG;
 			tmpHdr.disc_no = disc_number;
@@ -209,11 +224,14 @@ void GCGames::LoadGameList(const std::string &path, std::vector<struct discHdr> 
 				std::string gamePath = std::string(path) + dirname + (extracted ? "/" : strrchr(fpath, '/'));
 				tmpHdr.magic = tmpHdr.gc_magic;
 				tmpHdr.type = extracted ? TYPE_GAME_GC_EXTRACTED : TYPE_GAME_GC_IMG;
+				title.assign(tmpHdr.title);
+				title.erase(0, title.find_first_not_of(' '));
+				snprintf(tmpHdr.title, sizeof(tmpHdr.title), "%s", title.c_str());
 				headerList.push_back(tmpHdr);
 				pathList.push_back(gamePath);
-
 				// Save title for next start
-				GameTitles.SetGameTitle(tmpHdr.id, tmpHdr.title);
+				if (Settings.TitlesType == TITLETYPE_FORCED_DISC && GameTitles.GetTitleType((const char *)tmpHdr.id) != TITLETYPE_MANUAL_OVERRIDE)
+					GameTitles.SetGameTitle((const char *)tmpHdr.id, tmpHdr.title, TITLETYPE_FORCED_DISC);
 			}
 		}
 	}
@@ -221,14 +239,14 @@ void GCGames::LoadGameList(const std::string &path, std::vector<struct discHdr> 
 	closedir(dir_iter);
 }
 
-u32 GCGames::LoadAllGames(void)
+u32 GCGames::LoadAllGames(bool use_cache)
 {
-	if (Settings.UseGameHeaderCache && isCacheFile(GAMECUBE_HEADER_CACHE_FILE))
+	if (use_cache && Settings.CacheTitles && isCacheFile(GAMECUBE_HEADER_CACHE_FILE))
 	{
 		if (HeaderList.empty() && PathList.empty())
 			LoadGameHeaderCache(HeaderList, PathList);
 		if (!HeaderList.empty())
-			return (int)HeaderList.size();
+			return HeaderList.size();
 	}
 
 	PathList.clear();
@@ -282,7 +300,10 @@ u32 GCGames::LoadAllGames(void)
 		}
 	}
 
-	if (Settings.UseGameHeaderCache && !HeaderList.empty() && !PathList.empty())
+	if (HeaderList.size() > 0 || sdGCList.size() > 0)
+		GameTitles.SortTitleList();
+
+	if (Settings.CacheTitles)
 		SaveGameHeaderCache(HeaderList, PathList);
 
 	return HeaderList.size();

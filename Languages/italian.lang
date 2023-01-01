@@ -344,6 +344,9 @@ msgstr "Cache file BNR"
 msgid "Cache BNR Files Path"
 msgstr "Percorso cache file BNR"
 
+msgid "Cache Path"
+msgstr ""
+
 msgid "Cache Titles"
 msgstr "Cache titoli"
 
@@ -638,6 +641,9 @@ msgstr "Impossibile caricare il file loader.bin di Devolution."
 
 msgid "Directory does not exist!"
 msgstr "Il percorso non esiste!"
+
+msgid "Disc"
+msgstr ""
 
 msgid "Disc 1"
 msgstr "Disco 1"
@@ -1011,9 +1017,6 @@ msgstr "Forza PAL50"
 msgid "Force PAL60"
 msgstr "Forza PAL60"
 
-msgid "Force Titles from Disc"
-msgstr "Forza titolo da disco"
-
 msgid "Force Widescreen"
 msgstr "Forza Widescreen"
 
@@ -1104,9 +1107,6 @@ msgstr "Menu disinstallazioni GC"
 msgid "GameCube Install Menu"
 msgstr "Menu installazioni GC"
 
-msgid "Game Header Cache Files Path"
-msgstr ""
-
 msgid "Game ID"
 msgstr "ID gioco"
 
@@ -1166,6 +1166,9 @@ msgstr "Sorgente GameCube"
 
 msgid "Gamename [GAMEID]"
 msgstr "Nomegioco [IDGIOCO]"
+
+msgid "GameTDB"
+msgstr ""
 
 msgid "Games"
 msgstr "Giochi"
@@ -1848,7 +1851,7 @@ msgstr ""
 msgid "Reset BG Music"
 msgstr "Ripristina musica sottofondo"
 
-msgid "Reset Game Header Cache"
+msgid "Reset Cached Titles"
 msgstr ""
 
 msgid "Reset Playcounter"
@@ -2185,8 +2188,8 @@ msgstr "Avvia titoli"
 msgid "Titles Path"
 msgstr "Percorso titoli"
 
-msgid "Titles from GameTDB"
-msgstr "Titoli da GameTDB"
+msgid "Titles From"
+msgstr "Titoli da"
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
 msgstr "Per avviare i giochi GameCube da disco devi impostare la modalità Gamecube su MIOS nelle impostazioni del gioco."

@@ -344,6 +344,9 @@ msgstr "BNRﾌｧｲﾙをｷｬｯｼｭ"
 msgid "Cache BNR Files Path"
 msgstr "BNRﾌｧｲﾙｷｬｯｼｭ"
 
+msgid "Cache Path"
+msgstr ""
+
 msgid "Cache Titles"
 msgstr "ｹﾞｰﾑ名のｷｬｯｼｭ"
 
@@ -638,6 +641,9 @@ msgstr "Devolutionのloader.binが読み込めません"
 
 msgid "Directory does not exist!"
 msgstr "フォルダがありません"
+
+msgid "Disc"
+msgstr ""
 
 msgid "Disc 1"
 msgstr ""
@@ -1011,9 +1017,6 @@ msgstr "PAL50に強制"
 msgid "Force PAL60"
 msgstr "PAL60に強制"
 
-msgid "Force Titles from Disc"
-msgstr "ディスク内のゲーム名に強制"
-
 msgid "Force Widescreen"
 msgstr ""
 
@@ -1104,9 +1107,6 @@ msgstr "GCゲームの削除"
 msgid "GameCube Install Menu"
 msgstr "GCインストールメニュー"
 
-msgid "Game Header Cache Files Path"
-msgstr ""
-
 msgid "Game ID"
 msgstr "IDのみ"
 
@@ -1166,6 +1166,9 @@ msgstr ""
 
 msgid "Gamename [GAMEID]"
 msgstr "ゲーム名 [ゲームID]"
+
+msgid "GameTDB"
+msgstr ""
 
 msgid "Games"
 msgstr "ゲーム"
@@ -1848,7 +1851,7 @@ msgstr ""
 msgid "Reset BG Music"
 msgstr "BGMをリセット"
 
-msgid "Reset Game Header Cache"
+msgid "Reset Cached Titles"
 msgstr ""
 
 msgid "Reset Playcounter"
@@ -2185,8 +2188,8 @@ msgstr "ランチャー"
 msgid "Titles Path"
 msgstr ""
 
-msgid "Titles from GameTDB"
-msgstr "ｹﾞｰﾑ名の日本語化"
+msgid "Titles From"
+msgstr ""
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
 msgstr "GCゲームをディスク起動するには設定でGCモードをMIOSにしてください"

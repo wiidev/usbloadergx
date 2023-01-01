@@ -12,6 +12,7 @@
 #include "utils/tools.h"
 #include "system/IosLoader.h"
 #include "cache/cache.hpp"
+#include "settings/GameTitles.h"
 
 #define WII_MAGIC   0x5D1C9EA3
 
@@ -148,7 +149,6 @@ int MenuGCInstall()
 		if(ret >= 0) {
 			//! success
 			installed_games++;
-			ResetGameHeaderCache();
 		}
 		else if(ret == PROGRESS_CANCELED)
 		{
@@ -184,6 +184,7 @@ int MenuGCInstall()
 		return result;
 
 	gameList.FilterList();
+	isCacheCurrent();
 	bgMusic->Pause();
 	GuiSound instsuccess(Resources::GetFile("success.ogg"), Resources::GetFileSize("success.ogg"), Settings.sfxvolume);
 	instsuccess.SetVolume(Settings.sfxvolume);
@@ -289,9 +290,9 @@ int MenuInstall()
 			else
 			{
 				ShowProgress(tr("Install finished"), headerdisc.title, tr("Reloading game list now, please wait..."), gamesize, gamesize, true, true);
-				ResetGameHeaderCache();
 				gameList.ReadGameList(); //get the entries again
 				gameList.FilterList();
+				isCacheCurrent();
 				bgMusic->Pause();
 				GuiSound instsuccess(Resources::GetFile("success.ogg"), Resources::GetFileSize("success.ogg"), Settings.sfxvolume);
 				instsuccess.SetVolume(Settings.sfxvolume);

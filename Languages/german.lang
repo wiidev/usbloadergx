@@ -344,6 +344,9 @@ msgstr "BNR-Cache"
 msgid "Cache BNR Files Path"
 msgstr "Cache BNR Dateien"
 
+msgid "Cache Path"
+msgstr ""
+
 msgid "Cache Titles"
 msgstr "Titel cachen"
 
@@ -638,6 +641,9 @@ msgstr "Devolution's loader.bin Datei kann nicht geladen werden."
 
 msgid "Directory does not exist!"
 msgstr "Verzeichnis existiert nicht!"
+
+msgid "Disc"
+msgstr "Disk"
 
 msgid "Disc 1"
 msgstr "Disk 1"
@@ -1011,9 +1017,6 @@ msgstr "PAL50 erzw."
 msgid "Force PAL60"
 msgstr "PAL60 erzw."
 
-msgid "Force Titles from Disc"
-msgstr "Erzwinge DVD-Titel"
-
 msgid "Force Widescreen"
 msgstr "Erzwinge Widescreen"
 
@@ -1104,9 +1107,6 @@ msgstr "GameCube Spiele Löschen"
 msgid "GameCube Install Menu"
 msgstr "GameCube Installationsmenü"
 
-msgid "Game Header Cache Files Path"
-msgstr ""
-
 msgid "Game ID"
 msgstr "Spiel ID"
 
@@ -1166,6 +1166,9 @@ msgstr "GameCube Quelle"
 
 msgid "Gamename [GAMEID]"
 msgstr "Spielname [SPIELID]"
+
+msgid "GameTDB"
+msgstr ""
 
 msgid "Games"
 msgstr "Spiele"
@@ -1848,7 +1851,7 @@ msgstr ""
 msgid "Reset BG Music"
 msgstr "Musik zurücksetzen"
 
-msgid "Reset Game Header Cache"
+msgid "Reset Cached Titles"
 msgstr ""
 
 msgid "Reset Playcounter"
@@ -2185,8 +2188,8 @@ msgstr "Channel Launcher"
 msgid "Titles Path"
 msgstr ""
 
-msgid "Titles from GameTDB"
-msgstr "Namen aus der WiiTDB"
+msgid "Titles From"
+msgstr ""
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
 msgstr "Um GameCube Spiele von DVD zu starten, muss der GameCube Modus in den Spieleinstellungen auf MIOS gesetzt werden."
@@ -2279,9 +2282,6 @@ msgstr "USBLoaderGX konnte die Nintendont config Dateien nicht ändern. Nintendo
 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
 msgstr "USBLoaderGX r1218 wird benötigt um Nintendont Alpha v0.1 starten zu können. Bitte aktualisiere deine Nintendont Version."
-
-msgid "Use Game Header Cache"
-msgstr ""
 
 msgid "Uninstall"
 msgstr "Deinstallieren"

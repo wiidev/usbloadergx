@@ -329,17 +329,6 @@ GameBrowseMenu::GameBrowseMenu()
 	gameCoverImg->SetPosition(thInt("26 - cover/download btn pos x"), thInt("58 - cover/download btn pos y"));
 	gameCoverImg->SetWidescreen(Settings.widescreen);
 
-	IDBtnTT = new GuiTooltip(tr( "Click to change game ID" ));
-	if (Settings.wsprompt) IDBtnTT->SetWidescreen(Settings.widescreen);
-	IDBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
-	idBtn = new GuiButton(60, 23);
-	idBtn->SetPosition(thInt("68 - gameID btn pos x"), thInt("305 - gameID btn pos y"));
-	idBtn->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	idBtn->SetSoundOver(btnSoundOver);
-	idBtn->SetTrigger(0, trigA);
-	idBtn->SetToolTip(IDBtnTT, 205, -30);
-	idBtn->SetSelectable(false);
-
 	GXColor clockColor = thColor("r=138 g=138 b=138 a=240 - clock color");
 	float clockFontScaleFactor = thFloat("1.0 - Overrided clock scale factor. 1.0=allow user setting") != 1.0f ? thFloat("1.0 - Overrided clock scale factor. 1.0=allow user setting") : Settings.ClockFontScaleFactor;
 	clockTimeBack = new GuiText("88:88", 40 / Settings.FontScaleFactor * clockFontScaleFactor, (GXColor) {clockColor.r, clockColor.g, clockColor.b, (u8)(clockColor.a / 6)});
@@ -495,7 +484,6 @@ GameBrowseMenu::~GameBrowseMenu()
 	delete loaderModeBtn;
 	delete homebrewBtn;
 	delete DownloadBtn;
-	delete idBtn;
 
 	delete installBtnTT;
 	delete settingsBtnTT;
@@ -515,7 +503,6 @@ GameBrowseMenu::~GameBrowseMenu()
 	delete loaderModeBtnTT;
 	delete homebrewBtnTT;
 	delete DownloadBtnTT;
-	delete IDBtnTT;
 
 	delete gameBrowser;
 	mainWindow->Remove(searchBar);
@@ -863,9 +850,6 @@ void GameBrowseMenu::ReloadBrowser()
 	if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_COVER_DOWNLOADS))
 		Append(DownloadBtn);
 
-	if ((Settings.gameDisplay == LIST_MODE) && (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_GAMEID_CHANGE)))
-		Append(idBtn);
-
 	Append(favoriteBtn);
 	Append(searchBtn);
 	Append(sortBtn);
@@ -961,7 +945,7 @@ int GameBrowseMenu::MainLoop()
 				else
 				{
 					gameList.ReadGameList();
-					GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false);
+					GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
 					if(Settings.ShowFreeSpace)
 					{
 						ThreadedTask::Instance()->AddCallback(&HDDSizeCallback);
@@ -1317,7 +1301,7 @@ int GameBrowseMenu::MainLoop()
 				{
 					WBFS_ReInit(WBFS_DEVICE_USB);
 				}
-				gameList.ReadGameList();
+				gameList.ReadGameList(true);
 
 				if(Settings.ShowFreeSpace)
 				{
@@ -1327,32 +1311,12 @@ int GameBrowseMenu::MainLoop()
 			}
 
 			wString oldFilter(gameList.GetCurrentFilter());
-			GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false);
+			GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
 			gameList.FilterList(oldFilter.c_str());
 			ReloadBrowser();
 		}
 		loaderModeBtn->ResetState();
 	}
-
-	else if (Settings.gameDisplay == LIST_MODE && idBtn->GetState() == STATE_CLICKED)
-	{
-		gprintf("\tidBtn Clicked\n");
-		struct discHdr * header = gameList[GetSelectedGame()];
-		//enter new game ID
-		char entered[7];
-		snprintf(entered, sizeof(entered), "%s", (char *) header->id);
-		int result = OnScreenKeyboard(entered, sizeof(entered), 0);
-		if (result == 1)
-		{
-			WBFS_ReIDGame(header->id, entered);
-			wString oldFilter(gameList.GetCurrentFilter());
-			gameList.ReadGameList();
-			gameList.FilterList(oldFilter.c_str());
-			ReloadBrowser();
-		}
-		idBtn->ResetState();
-	}
-
 	else if (Settings.gameDisplay == LIST_MODE && GetSelectedGame() != gameSelectedOld)
 	{
 		gameSelectedOld = GetSelectedGame();
@@ -1389,7 +1353,7 @@ void GameBrowseMenu::CheckDiscSlotUpdate()
 
 	delayCounter = 0;
 	u32 DiscDriveCover = 0;
-	WDVD_GetCoverStatus(&DiscDriveCover);//for detecting if i disc has been inserted
+	WDVD_GetCoverStatus(&DiscDriveCover);//for detecting if a disc has been inserted
 
 	if ((DiscDriveCover & 0x02) && (DiscDriveCover != DiscDriveCoverOld))
 	{

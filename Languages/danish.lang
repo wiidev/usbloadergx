@@ -344,6 +344,9 @@ msgstr "Cache BNR Filer"
 msgid "Cache BNR Files Path"
 msgstr "Sti til Cache BNR Filer"
 
+msgid "Cache Path"
+msgstr ""
+
 msgid "Cache Titles"
 msgstr "Cache titler"
 
@@ -638,6 +641,9 @@ msgstr "Devolution's loader.bin filen kunne ikke loades."
 
 msgid "Directory does not exist!"
 msgstr "Mappen eksisterer ikke!"
+
+msgid "Disc"
+msgstr "Disk"
 
 msgid "Disc 1"
 msgstr "Disk 1"
@@ -1011,9 +1017,6 @@ msgstr "Tving PAL50"
 msgid "Force PAL60"
 msgstr "Tving PAL60"
 
-msgid "Force Titles from Disc"
-msgstr "Tving Titler fra Disk"
-
 msgid "Force Widescreen"
 msgstr "Tving Widescreen"
 
@@ -1104,9 +1107,6 @@ msgstr "GameCube Spil Slet"
 msgid "GameCube Install Menu"
 msgstr "GameCube Installations Menu"
 
-msgid "Game Header Cache Files Path"
-msgstr "Sti til Spil Header Cache filer"
-
 msgid "Game ID"
 msgstr "Spil-ID"
 
@@ -1166,6 +1166,9 @@ msgstr "GameCube Kilde"
 
 msgid "Gamename [GAMEID]"
 msgstr "Spilnavn [SPILID]"
+
+msgid "GameTDB"
+msgstr ""
 
 msgid "Games"
 msgstr "Spil"
@@ -1848,8 +1851,8 @@ msgstr "Nulstil Alle Spilindstillinger"
 msgid "Reset BG Music"
 msgstr "Nulstil BG-musik"
 
-msgid "Reset Game Header Cache"
-msgstr "Nulstil Spilheader Cache"
+msgid "Reset Cached Titles"
+msgstr ""
 
 msgid "Reset Playcounter"
 msgstr "Nulstil spiltæller"
@@ -2185,8 +2188,8 @@ msgstr "Titel-starter"
 msgid "Titles Path"
 msgstr "Titler Sti"
 
-msgid "Titles from GameTDB"
-msgstr "Titler fra GameTDB"
+msgid "Titles From"
+msgstr "Titler Fra"
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
 msgstr "For at køre GameCube spil fra Disken skal du sætte GameCube-tilstanden til MIOS i spilindstillingerne."
@@ -2279,9 +2282,6 @@ msgstr "USBloaderGX kunne ikke skrive en Nintendont config fil. Vil du starte Ni
 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
 msgstr "USBloaderGX r1218 kræves for Nintendont Alpha v0.1. Opdater venligst din Nintendont boot.dol version."
-
-msgid "Use Game Header Cache"
-msgstr "Brug Game Header Cache"
 
 msgid "Uninstall"
 msgstr "Afinstallér"

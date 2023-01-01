@@ -344,6 +344,9 @@ msgstr "Cache BNR Bestanden"
 msgid "Cache BNR Files Path"
 msgstr "Cache BNR Bestandspad"
 
+msgid "Cache Path"
+msgstr ""
+
 msgid "Cache Titles"
 msgstr "Titels cachen"
 
@@ -639,11 +642,14 @@ msgstr "Devolution's loader.bin bestand kan niet worden geladen."
 msgid "Directory does not exist!"
 msgstr "Map bestaat niet!"
 
+msgid "Disc"
+msgstr ""
+
 msgid "Disc 1"
-msgstr "Disc 1"
+msgstr ""
 
 msgid "Disc 2"
-msgstr "Disc 2"
+msgstr ""
 
 msgid "Disc Artwork Download"
 msgstr "Download disk labels"
@@ -1011,9 +1017,6 @@ msgstr "Forceer PAL50"
 msgid "Force PAL60"
 msgstr "Forceer PAL60"
 
-msgid "Force Titles from Disc"
-msgstr "Forceer titels van Disk"
-
 msgid "Force Widescreen"
 msgstr "Forceer Breedbeeld"
 
@@ -1104,9 +1107,6 @@ msgstr "GameCube Spel Verwijderen"
 msgid "GameCube Install Menu"
 msgstr "GameCube Installatie Menu"
 
-msgid "Game Header Cache Files Path"
-msgstr ""
-
 msgid "Game ID"
 msgstr "Spel ID"
 
@@ -1166,6 +1166,9 @@ msgstr "GameCube Bron"
 
 msgid "Gamename [GAMEID]"
 msgstr "Spelnaam [SPELID]"
+
+msgid "GameTDB"
+msgstr ""
 
 msgid "Games"
 msgstr "Spellen"
@@ -1848,7 +1851,7 @@ msgstr ""
 msgid "Reset BG Music"
 msgstr "Reset achtergrond muziek"
 
-msgid "Reset Game Header Cache"
+msgid "Reset Cached Titles"
 msgstr ""
 
 msgid "Reset Playcounter"
@@ -2185,8 +2188,8 @@ msgstr "Titel Launcher"
 msgid "Titles Path"
 msgstr ""
 
-msgid "Titles from GameTDB"
-msgstr "Titels van GameTDB"
+msgid "Titles From"
+msgstr "Titels Van"
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
 msgstr "Om GameCube spellen vanaf disk te spelen moet je de GameCube modus op MIOS zetten in de spel instellingen."
@@ -2278,9 +2281,6 @@ msgid "USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyw
 msgstr "USBLoaderGX kon Nintendont config bestand niet schrijven. Nintendont toch starten?"
 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
-msgstr ""
-
-msgid "Use Game Header Cache"
 msgstr ""
 
 msgid "Uninstall"

@@ -55,8 +55,10 @@ void GameList::clear()
 	FullGameList.clear();
 	GamePartitionList.clear();
 	FilteredList.clear();
+	EnabledGameList.clear();
 	//! Clear memory of the vector completely
 	std::vector<struct discHdr *>().swap(FilteredList);
+	std::vector<struct discHdr *>().swap(EnabledGameList);
 	std::vector<struct discHdr>().swap(FullGameList);
 	std::vector<int>().swap(GamePartitionList);
 }
@@ -118,6 +120,9 @@ int GameList::InternalReadList(int part)
 	if (cnt == 0)
 		return 0;
 
+	// Sort the titles by game ID for faster searching
+	GameTitles.SortTitleList();
+
 	/* Buffer length */
 	u32 len = sizeof(struct discHdr) * cnt;
 
@@ -165,14 +170,14 @@ int GameList::InternalReadList(int part)
 	return PartGameList.size();
 }
 
-int GameList::ReadGameList()
+int GameList::ReadGameList(bool use_cache)
 {
-	if (Settings.UseGameHeaderCache && isCacheFile(WII_HEADER_CACHE_FILE))
+	if (use_cache && Settings.CacheTitles && isCacheFile(WII_HEADER_CACHE_FILE))
 	{
 		if (FullGameList.empty() && GamePartitionList.empty())
 			LoadGameHeaderCache(FullGameList, GamePartitionList);
 		if (!FullGameList.empty())
-			return (int)FullGameList.size();
+			return FullGameList.size();
 	}
 	// Clear list
 	FullGameList.clear();
@@ -199,17 +204,16 @@ int GameList::ReadGameList()
 		}
 	}
 
-	if (Settings.UseGameHeaderCache && !FullGameList.empty() && !GamePartitionList.empty())
+	if (Settings.CacheTitles)
 		SaveGameHeaderCache(FullGameList, GamePartitionList);
-
 	return cnt;
 }
 
-void GameList::InternalFilterList(std::vector<struct discHdr> &FullList)
+void GameList::InternalFilterList(std::vector<struct discHdr *> &FullList)
 {
 	for (u32 i = 0; i < FullList.size(); ++i)
 	{
-		struct discHdr *header = &FullList[i];
+		struct discHdr *header = FullList[i];
 
 		/* Register game */
 		NewTitles::Instance()->CheckGame(header->id);
@@ -231,7 +235,7 @@ void GameList::InternalFilterList(std::vector<struct discHdr> &FullList)
 			}
 		}
 
-		//ignore uLoader cfg "iso".  i was told it is "__CFG_"  but not confirmed
+		// Ignore uLoader cfg "iso".  i was told it is "__CFG_"  but not confirmed
 		if (strncasecmp((char *)header->id, "__CFG_", 6) == 0)
 			continue;
 
@@ -326,65 +330,27 @@ void GameList::InternalFilterList(std::vector<struct discHdr> &FullList)
 
 int GameList::FilterList(const wchar_t *gameFilter)
 {
-	if ((Settings.LoaderMode & MODE_WIIGAMES) && (FullGameList.size() == 0))
-		ReadGameList();
-
 	if (gameFilter)
 		GameFilter.assign(gameFilter);
 
 	FilteredList.clear();
 
-	int allType = DISABLED;
-	// Verify the display mode for category "All"
-	for (u32 n = 0; n < Settings.EnabledCategories.size(); ++n)
-	{
-		if (Settings.EnabledCategories[n] == 0)
-		{
-			allType = ENABLED;
-			break;
-		}
-	}
-
-	if (Settings.UseGameHeaderCache && allType == ENABLED && Settings.godmode && isCacheFile(FilteredListCacheFileName(gameFilter)))
-	{
-		LoadFilteredListCache(FilteredList, GameFilter.c_str());
-		GuiSearchBar::FilterList(FilteredList, GameFilter);
-		if (!FilteredList.empty())
-			return FilteredList.size();
-	}
-
-	// Filter current game list if selected
-	if (Settings.LoaderMode & MODE_WIIGAMES)
-		InternalFilterList(FullGameList);
-
-	// Filter gc game list if selected
-	if (Settings.LoaderMode & MODE_GCGAMES)
-		InternalFilterList(GCGames::Instance()->GetHeaders());
-
-	// Filter nand channel list if selected
-	if (Settings.LoaderMode & MODE_NANDCHANNELS)
-		InternalFilterList(Channels::Instance()->GetNandHeaders());
-
-	// Filter emu nand channel list if selected
-	if (Settings.LoaderMode & MODE_EMUCHANNELS)
-		InternalFilterList(Channels::Instance()->GetEmuHeaders());
+	EnabledList();
+	InternalFilterList(EnabledGameList);
 
 	NewTitles::Instance()->Save();
 	GuiSearchBar::FilterList(FilteredList, GameFilter);
 
 	SortList();
 
-	if (Settings.UseGameHeaderCache && allType == ENABLED && Settings.godmode && !FilteredList.empty() && (Settings.GameSort & SORT_RANKING) == 0 && (Settings.GameSort & SORT_PLAYCOUNT) == 0 && (Settings.GameSort & SORT_FAVORITE) == 0)
-		SaveFilteredListCache(FilteredList, GameFilter.c_str());
-
 	return FilteredList.size();
 }
 
-void GameList::InternalLoadUnfiltered(std::vector<struct discHdr> &FullList)
+void GameList::InternalLoadUnfiltered(std::vector<struct discHdr *> &FullList)
 {
 	for (u32 i = 0; i < FullList.size(); ++i)
 	{
-		struct discHdr *header = &FullList[i];
+		struct discHdr *header = FullList[i];
 
 		/* Register game */
 		NewTitles::Instance()->CheckGame(header->id);
@@ -395,45 +361,64 @@ void GameList::InternalLoadUnfiltered(std::vector<struct discHdr> &FullList)
 
 int GameList::LoadUnfiltered()
 {
-	if ((Settings.LoaderMode & MODE_WIIGAMES) && (FullGameList.size() == 0))
-		ReadGameList();
-
 	GameFilter.clear();
 	FilteredList.clear();
 
-	if (Settings.UseGameHeaderCache && isCacheFile(FilteredListCacheFileName()))
-	{
-		LoadFilteredListCache(FilteredList, GameFilter.c_str());
-		GuiSearchBar::FilterList(FilteredList, GameFilter);
-		if (!FilteredList.empty())
-			return FilteredList.size();
-	}
-
-	// Filter current game list if selected
-	if (Settings.LoaderMode & MODE_WIIGAMES)
-		InternalLoadUnfiltered(FullGameList);
-
-	// Filter gc game list if selected
-	if (Settings.LoaderMode & MODE_GCGAMES)
-		InternalLoadUnfiltered(GCGames::Instance()->GetHeaders());
-
-	// Filter nand channel list if selected
-	if (Settings.LoaderMode & MODE_NANDCHANNELS)
-		InternalLoadUnfiltered(Channels::Instance()->GetNandHeaders());
-
-	// Filter emu nand channel list if selected
-	if (Settings.LoaderMode & MODE_EMUCHANNELS)
-		InternalLoadUnfiltered(Channels::Instance()->GetEmuHeaders());
+	EnabledList();
+	InternalLoadUnfiltered(EnabledGameList);
 
 	NewTitles::Instance()->Save();
 	GuiSearchBar::FilterList(FilteredList, GameFilter);
 
 	SortList();
 
-	if (Settings.UseGameHeaderCache && !FilteredList.empty() && (Settings.GameSort & SORT_RANKING) == 0 && (Settings.GameSort & SORT_PLAYCOUNT) == 0 && (Settings.GameSort & SORT_FAVORITE) == 0)
-		SaveFilteredListCache(FilteredList, GameFilter.c_str());
-
 	return FilteredList.size();
+}
+
+int GameList::EnabledList()
+{
+	EnabledGameList.clear();
+
+	if (Settings.TitlesType == TITLETYPE_FROMWIITDB)
+		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
+	
+	GetGameListHeaders(EnabledGameList, Settings.LoaderMode);
+
+	return EnabledGameList.size();
+}
+
+void GameList::InternalGetGameListHeaders(std::vector<struct discHdr *> &tmplist, std::vector<struct discHdr> &FullList)
+{
+	for (u32 i = 0; i < FullList.size(); ++i)
+	{
+		struct discHdr *header = &FullList[i];
+		tmplist.push_back(header);
+	}
+}
+
+int GameList::GetGameListHeaders(std::vector<struct discHdr *> &tmplist, short LoaderMode)
+{
+	// Filter current game list if selected
+	if (LoaderMode & MODE_WIIGAMES)
+	{
+		if (FullGameList.size() == 0)
+			ReadGameList(true);
+		InternalGetGameListHeaders(tmplist, FullGameList);
+	}
+
+	// Filter GC game list if selected
+	if (LoaderMode & MODE_GCGAMES)
+		InternalGetGameListHeaders(tmplist, GCGames::Instance()->GetHeaders());
+
+	// Filter NAND channel list if selected
+	if (LoaderMode & MODE_NANDCHANNELS)
+		InternalGetGameListHeaders(tmplist, Channels::Instance()->GetNandHeaders());
+
+	// Filter EmuNAND channel list if selected
+	if (LoaderMode & MODE_EMUCHANNELS)
+		InternalGetGameListHeaders(tmplist, Channels::Instance()->GetEmuHeaders());
+
+	return tmplist.size();
 }
 
 void GameList::SortList()

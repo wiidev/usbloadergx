@@ -32,12 +32,12 @@ class FeatureSettingsMenu : public SettingsMenu
 		FeatureSettingsMenu();
 		virtual ~FeatureSettingsMenu();
 	protected:
+		void SetOptionNames();
 		void SetOptionValues();
 		int GetMenuInternal();
 
-		int OldTitlesOverride;
+		int OldTitlesType;
 		int OldCacheTitles;
-		int OldForceDiscTitles;
 
 		OptionList GuiOptions;
 };

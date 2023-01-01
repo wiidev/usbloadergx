@@ -344,6 +344,9 @@ msgstr "缓存 BNR 文件"
 msgid "Cache BNR Files Path"
 msgstr "缓存 BNR 文件路径"
 
+msgid "Cache Path"
+msgstr ""
+
 msgid "Cache Titles"
 msgstr "缓存游戏标题"
 
@@ -638,6 +641,9 @@ msgstr "无法加载 Devolution 的 loader.bin。"
 
 msgid "Directory does not exist!"
 msgstr "目录不存在！"
+
+msgid "Disc"
+msgstr ""
 
 msgid "Disc 1"
 msgstr "光盘 1"
@@ -1011,9 +1017,6 @@ msgstr "强制 PAL50"
 msgid "Force PAL60"
 msgstr "强制 PAL60"
 
-msgid "Force Titles from Disc"
-msgstr "强制从光盘读取标题"
-
 msgid "Force Widescreen"
 msgstr "强制宽屏"
 
@@ -1104,9 +1107,6 @@ msgstr "GameCube 游戏删除"
 msgid "GameCube Install Menu"
 msgstr "GameCube 安装菜单"
 
-msgid "Game Header Cache Files Path"
-msgstr ""
-
 msgid "Game ID"
 msgstr "游戏 ID"
 
@@ -1166,6 +1166,9 @@ msgstr "GameCube 来源"
 
 msgid "Gamename [GAMEID]"
 msgstr "游戏名 [GAMEID]"
+
+msgid "GameTDB"
+msgstr ""
 
 msgid "Games"
 msgstr "游戏"
@@ -1848,7 +1851,7 @@ msgstr ""
 msgid "Reset BG Music"
 msgstr "重置背景音乐"
 
-msgid "Reset Game Header Cache"
+msgid "Reset Cached Titles"
 msgstr ""
 
 msgid "Reset Playcounter"
@@ -2185,8 +2188,8 @@ msgstr "系统频道"
 msgid "Titles Path"
 msgstr ""
 
-msgid "Titles from GameTDB"
-msgstr "从 GameTDB 读取标题"
+msgid "Titles From"
+msgstr ""
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
 msgstr "想要加载光盘上的 GameCube 游戏，请将游戏设置中的 GameCube 模式设置为 MIOS。"
@@ -2279,9 +2282,6 @@ msgstr "USBloaderGX不能写Nintendont设置文件，是否运行Nintendont？"
 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
 msgstr "USBloaderGX r1218之针对nintendont Alpha v0.1，请更新你的Nintendont boot。dol版本。"
-
-msgid "Use Game Header Cache"
-msgstr ""
 
 msgid "Uninstall"
 msgstr "删除"

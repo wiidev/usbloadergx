@@ -37,6 +37,8 @@
 #include "themes/CTheme.h"
 #include "FileOperations/fileops.h"
 #include "gecko.h"
+#include "cache/cache.hpp"
+#include "usbloader/GameList.h"
 
 CustomPathsSM::CustomPathsSM()
 	: SettingsMenu(tr("Custom Paths"), &GuiOptions, MENU_NONE)
@@ -65,7 +67,7 @@ CustomPathsSM::CustomPathsSM()
 	Options->SetName(Idx++, tr("Devolution Loader Path"));
 	Options->SetName(Idx++, tr("Nintendont Loader Path"));
 	Options->SetName(Idx++, tr("Cache BNR Files Path"));
-	Options->SetName(Idx++, tr("Game Header Cache Files Path"));
+	Options->SetName(Idx++, tr("Cache Path"));
 
 	SetOptionValues();
 }
@@ -143,7 +145,7 @@ void CustomPathsSM::SetOptionValues()
 	//! Settings: Cache BNR Files Path
 	Options->SetValue(Idx++, Settings.BNRCachePath);
 
-	//! Settings: Game Header Cache Files Path
+	//! Settings: Cache Path
 	Options->SetValue(Idx++, Settings.GameHeaderCachePath);
 }
 
@@ -316,7 +318,7 @@ int CustomPathsSM::GetMenuInternal()
 		else if(result == 1)
 		{
 			Channels::Instance()->GetEmuChannelList();
-			GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false);
+			GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
 		}
 	}
 
@@ -372,10 +374,10 @@ int CustomPathsSM::GetMenuInternal()
 		ChangePath(Settings.BNRCachePath, sizeof(Settings.BNRCachePath));
 	}
 
-	//! Settings: Game Header Cache Files Path
+	//! Settings: Cache Path
 	else if (ret == ++Idx)
 	{
-		titleTxt->SetText(tr( "Game Header Cache Files Path" ));
+		titleTxt->SetText(tr( "Cache Path" ));
 		ChangePath(Settings.GameHeaderCachePath, sizeof(Settings.GameHeaderCachePath));
 	}
 

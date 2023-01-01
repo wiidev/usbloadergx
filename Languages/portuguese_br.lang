@@ -344,6 +344,9 @@ msgstr "Cache de Banners"
 msgid "Cache BNR Files Path"
 msgstr "Caminho Cache"
 
+msgid "Cache Path"
+msgstr ""
+
 msgid "Cache Titles"
 msgstr "Títulos em Cache"
 
@@ -638,6 +641,9 @@ msgstr "O arquivo loader.bin do Devolution não pode ser lido"
 
 msgid "Directory does not exist!"
 msgstr "Pasta não existe!"
+
+msgid "Disc"
+msgstr ""
 
 msgid "Disc 1"
 msgstr "Disco 1"
@@ -1011,9 +1017,6 @@ msgstr "Forçar PAL50"
 msgid "Force PAL60"
 msgstr "Forçar PAL60"
 
-msgid "Force Titles from Disc"
-msgstr "Carregar Nome de Disco"
-
 msgid "Force Widescreen"
 msgstr ""
 
@@ -1104,9 +1107,6 @@ msgstr "Desinstalar Jogos GameCube"
 msgid "GameCube Install Menu"
 msgstr "Instalar Jogos GameCube"
 
-msgid "Game Header Cache Files Path"
-msgstr ""
-
 msgid "Game ID"
 msgstr "ID do Jogo"
 
@@ -1166,6 +1166,9 @@ msgstr "Pasta de Jogos"
 
 msgid "Gamename [GAMEID]"
 msgstr "Nome Jogo [IDJOGO]"
+
+msgid "GameTDB"
+msgstr ""
 
 msgid "Games"
 msgstr "Jogos"
@@ -1848,7 +1851,7 @@ msgstr ""
 msgid "Reset BG Music"
 msgstr "Música padrão"
 
-msgid "Reset Game Header Cache"
+msgid "Reset Cached Titles"
 msgstr ""
 
 msgid "Reset Playcounter"
@@ -2185,8 +2188,8 @@ msgstr "Gestor de Títulos"
 msgid "Titles Path"
 msgstr "Pasta Títulos"
 
-msgid "Titles from GameTDB"
-msgstr "Títulos do GameTDB"
+msgid "Titles From"
+msgstr "Títulos do"
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
 msgstr "Para rodar jogos de GameCube em disco, você precisa definir o modo de GameCube para MIOS nas configurações do jogo"
@@ -2279,9 +2282,6 @@ msgstr "USB Loader GX não conseguiu gravar configurações do Nintendont. Rodar
 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
 msgstr "USB Loader GX r1218 é exigido para usar o Nintendont Alpha v0.1. Atualize sua versão do Nintendont"
-
-msgid "Use Game Header Cache"
-msgstr ""
 
 msgid "Uninstall"
 msgstr "Desinstalar"

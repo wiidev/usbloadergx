@@ -12,6 +12,7 @@
 #include "settings/GameTitles.h"
 #include "xml/GameTDB.hpp"
 #include "utils/ShowError.h"
+#include "cache/cache.hpp"
 
 static int FindGamePartition()
 {
@@ -25,6 +26,7 @@ static int FindGamePartition()
 
 		if (WBFS_OpenPart(i) == 0)
 		{
+			GameTitles.SortTitleList();
 			Settings.partition = i;
 			return 0;
 		}
@@ -54,6 +56,7 @@ static int FindGamePartition()
 
 		if (count > 0)
 		{
+			GameTitles.SortTitleList();
 			Settings.partition = i;
 			return 0;
 		}
@@ -66,6 +69,7 @@ static int FindGamePartition()
 
 	if(firstValidPartition >= 0)
 	{
+		GameTitles.SortTitleList();
 		Settings.partition = firstValidPartition;
 		return 0;
 	}
@@ -167,13 +171,10 @@ int MountGamePartition(bool ShowGUI)
 		Sys_LoadMenu();
 	}
 
-	gprintf("LoadTitlesFromGameTDB\n");
-	//! gameList is loaded in GameTitles.LoadTitlesFromGameTDB after cache file load
-	//! for speed up purpose. If titles override active, load game list here.
-	if(Settings.titlesOverride)
-		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
-	else
-		gameList.LoadUnfiltered();
+	if(ShowGUI && Settings.CacheCheck && !isCacheCurrent())
+		ResetGameHeaderCache();
+
+	gameList.LoadUnfiltered();
 
 	return ret;
 }

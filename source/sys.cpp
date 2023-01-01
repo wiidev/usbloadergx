@@ -91,8 +91,7 @@ void AppCleanUp(void)
 
 	BannerAsync::ThreadExit();
 
-	if(Settings.CacheTitles)
-		GameTitles.WriteCachedTitles(Settings.titlestxt_path);
+	GameTitles.WriteCachedTitles(Settings.titlestxt_path);
 	Settings.Save();
 
 	ExitGUIThreads();

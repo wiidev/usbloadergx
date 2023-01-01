@@ -1,27 +1,43 @@
 #include <string.h>
+#include <unistd.h>
+#include <algorithm>
+
 #include "GameTitles.h"
 #include "CSettings.h"
 #include "usbloader/GameList.h"
 #include "Channels/channels.h"
 #include "xml/GameTDB.hpp"
 #include "svnrev.h"
-#include "gecko.h"
+#include "FileOperations/fileops.h"
 
-#define VALID_CACHE_REVISION	1280
+#define VALID_CACHE_REVISION 1280
 
 CGameTitles GameTitles;
 
-void CGameTitles::SetGameTitle(const char * id, const char * title, const std::string region)
+bool dbExists = false;
+
+void CGameTitles::SortTitleList()
 {
-	if(!id || !title)
+	std::sort(TitleList.begin(), TitleList.end(), [](const GameTitle &x, const GameTitle &y)
+			  { return (strncasecmp(x.GameID, y.GameID, 6) < 0); });
+}
+
+void CGameTitles::SetGameTitle(const char *id, const char *title, char TitleType, const std::string region, int ParentalRating, int PlayersCount)
+{
+	if (!id || !title)
 		return;
 
-	for(u32 i = 0; i < TitleList.size(); ++i)
+	for (u32 i = 0; i < TitleList.size(); ++i)
 	{
-		if(strncasecmp(id, TitleList[i].GameID, 6) == 0)
+		if (strncasecmp(TitleList[i].GameID, id, 6) == 0)
 		{
 			TitleList[i].Title = title;
 			TitleList[i].Region = region;
+			if (ParentalRating != -1)
+				TitleList[i].ParentalRating = ParentalRating;
+			if (PlayersCount != 1)
+				TitleList[i].PlayersCount = PlayersCount;
+			TitleList[i].TitleType = TitleType;
 			return;
 		}
 	}
@@ -30,85 +46,107 @@ void CGameTitles::SetGameTitle(const char * id, const char * title, const std::s
 	snprintf(newTitle.GameID, sizeof(newTitle.GameID), id);
 	newTitle.Title = title;
 	newTitle.Region = region;
-	newTitle.ParentalRating = -1;
-	newTitle.PlayersCount = 1;
-	newTitle.FromWiiTDB = 0;
+	newTitle.ParentalRating = ParentalRating;
+	newTitle.PlayersCount = PlayersCount;
+	newTitle.TitleType = TitleType;
 
 	TitleList.push_back(newTitle);
 }
 
-const char * CGameTitles::GetTitle(const char * id) const
+const char *CGameTitles::GetTitle(const char *id, bool allow_access) const
 {
-	if(!id)
+	if (!id)
 		return "";
 
-	for(u32 i = 0; i < TitleList.size(); ++i)
+	auto game = std::lower_bound(TitleList.begin(), TitleList.end(), id, [](const GameTitle &gt, const char *gameid)
+								 { return (strncasecmp(gt.GameID, gameid, 6) < 0); });
+	if (game != TitleList.end())
 	{
-		if(strncasecmp(id, TitleList[i].GameID, 6) == 0)
-			return TitleList[i].Title.c_str();
+		if (strncasecmp((const char *)game->GameID, (const char *)id, 6) == 0)
+		{
+			if ((dbExists && Settings.TitlesType == TITLETYPE_FROMWIITDB) || game->TitleType == TITLETYPE_MANUAL_OVERRIDE || (Settings.TitlesType == TITLETYPE_FORCED_DISC && game->TitleType == TITLETYPE_FORCED_DISC) || allow_access)
+				return game->Title.c_str();
+		}
 	}
 
-	for(int i = 0; i < gameList.size(); ++i)
+	for (int i = 0; i < gameList.size(); ++i)
 	{
-		if(strncasecmp(id, (char *) gameList[i]->id, 6) == 0)
+		if (strncasecmp((const char *)gameList[i]->id, id, 6) == 0)
 			return gameList[i]->title;
-
 	}
 
 	return "";
 }
 
-const char * CGameTitles::GetTitle(const struct discHdr *header) const
+const char *CGameTitles::GetTitle(const struct discHdr *header) const
 {
-	if(!header)
+	if (!header)
 		return "";
 
-	for(u32 i = 0; i < TitleList.size(); ++i)
+	auto game = std::lower_bound(TitleList.begin(), TitleList.end(), (const char *)header->id, [](const GameTitle &gt, const char *gameid)
+								 { return (strncasecmp(gt.GameID, gameid, 6) < 0); });
+	if (game != TitleList.end())
 	{
-		if(strncasecmp((const char *) header->id, TitleList[i].GameID, 6) == 0)
-			return TitleList[i].Title.c_str();
+		if (strncasecmp(game->GameID, (const char *)header->id, 6) == 0)
+		{
+			if ((dbExists && Settings.TitlesType == TITLETYPE_FROMWIITDB) || game->TitleType == TITLETYPE_MANUAL_OVERRIDE || (Settings.TitlesType == TITLETYPE_FORCED_DISC && game->TitleType == TITLETYPE_FORCED_DISC))
+				return game->Title.c_str();
+		}
 	}
 
 	return header->title;
 }
 
-const char * CGameTitles::GetRegion(const char * id) const
+char CGameTitles::GetTitleType(const char *id) const
 {
-	if(!id || !Settings.titlesOverride)
+	if (!id)
+		return 0;
+
+	for (u32 i = 0; i < TitleList.size(); ++i)
+	{
+		if (strncasecmp(TitleList[i].GameID, id, 6) == 0)
+			return TitleList[i].TitleType;
+	}
+
+	return 0;
+}
+
+const char *CGameTitles::GetRegion(const char *id) const
+{
+	if (!id || Settings.TitlesType != TITLETYPE_FROMWIITDB)
 		return "NULL";
 
-	for(u32 i = 0; i < TitleList.size(); ++i)
+	for (u32 i = 0; i < TitleList.size(); ++i)
 	{
-		if(strncasecmp(id, TitleList[i].GameID, 6) == 0)
+		if (strncasecmp(TitleList[i].GameID, id, 6) == 0)
 			return TitleList[i].Region.c_str();
 	}
 
 	return "NULL";
 }
 
-int CGameTitles::GetParentalRating(const char * id) const
+int CGameTitles::GetParentalRating(const char *id) const
 {
-	if(!id)
+	if (!id)
 		return -1;
 
-	for(u32 i = 0; i < TitleList.size(); ++i)
+	for (u32 i = 0; i < TitleList.size(); ++i)
 	{
-		if(strncasecmp(id, TitleList[i].GameID, 6) == 0)
+		if (strncasecmp(TitleList[i].GameID, id, 6) == 0)
 			return TitleList[i].ParentalRating;
 	}
 
 	return -1;
 }
 
-
-int CGameTitles::GetPlayersCount(const char * id) const
+int CGameTitles::GetPlayersCount(const char *id) const
 {
-	if(!id)
+	if (!id)
 		return 1;
 
-	for(u32 i = 0; i < TitleList.size(); ++i)
+	for (u32 i = 0; i < TitleList.size(); ++i)
 	{
-		if(strncasecmp(id, TitleList[i].GameID, 6) == 0)
+		if (strncasecmp(TitleList[i].GameID, id, 6) == 0)
 			return TitleList[i].PlayersCount;
 	}
 
@@ -122,33 +160,41 @@ void CGameTitles::SetDefault()
 	std::vector<GameTitle>().swap(TitleList);
 }
 
-typedef struct _CacheTitle
+void CGameTitles::Reset()
 {
-	char GameID[7];
-	char Title[130]; // long titles e.g. RGOJJ9 & DLSP64
-	char Region[7];
-	char FromWiiTDB;
-	int ParentalRating;
-	int PlayersCount;
+	if (TitleList.empty())
+		return;
 
-} ATTRIBUTE_PACKED CacheTitle;
+	for (u32 i = 0; i < TitleList.size(); ++i)
+	{
+		if (TitleList[i].TitleType < TITLETYPE_MANUAL_OVERRIDE)
+			TitleList[i].TitleType = TITLETYPE_DEFAULT;
+	}
+}
 
-u32 CGameTitles::ReadCachedTitles(const char * path)
+u32 CGameTitles::ReadCachedTitles(const char *path)
 {
-	std::string Cachepath = path;
-	if(path[strlen(path)-1] != '/')
+	std::string dbpath(Settings.titlestxt_path);
+	if (dbpath.back() != '/')
+		dbpath += '/';
+	dbpath += "wiitdb.xml";
+	dbExists = CheckFile(dbpath.c_str());
+
+	std::string Cachepath(path);
+	if (Cachepath.back() != '/')
 		Cachepath += '/';
 	Cachepath += "TitlesCache.bin";
 
 	//! Load cached last so that the titles are preloaded before reading list
-	FILE * f = fopen(Cachepath.c_str(), "rb");
-	if(!f) return 0;
+	FILE *f = fopen(Cachepath.c_str(), "rb");
+	if (!f)
+		return 0;
 
 	u32 revision = 0;
 
 	fread(&revision, 1, 4, f);
 
-	if(revision < VALID_CACHE_REVISION)
+	if (revision < VALID_CACHE_REVISION)
 	{
 		fclose(f);
 		return 0;
@@ -160,7 +206,7 @@ u32 CGameTitles::ReadCachedTitles(const char * path)
 	fread(LangCode, 1, 10, f);
 
 	//! Check if cache has correct language code
-	if(strcmp(LangCode, Settings.db_language) != 0)
+	if (strcmp(LangCode, Settings.db_language) != 0)
 	{
 		fclose(f);
 		return 0;
@@ -172,31 +218,31 @@ u32 CGameTitles::ReadCachedTitles(const char * path)
 	std::vector<CacheTitle> CachedList(count);
 	TitleList.resize(count);
 
-	fread(&CachedList[0], 1, count*sizeof(CacheTitle), f);
+	fread(&CachedList[0], 1, count * sizeof(CacheTitle), f);
 	fclose(f);
 
-	for(u32 i = 0; i < count; ++i)
+	for (u32 i = 0; i < count; ++i)
 	{
 		strcpy(TitleList[i].GameID, CachedList[i].GameID);
 		TitleList[i].Title = CachedList[i].Title;
 		TitleList[i].Region = CachedList[i].Region;
 		TitleList[i].ParentalRating = CachedList[i].ParentalRating;
 		TitleList[i].PlayersCount = CachedList[i].PlayersCount;
-		TitleList[i].FromWiiTDB = CachedList[i].FromWiiTDB;
+		TitleList[i].TitleType = CachedList[i].TitleType;
 	}
 
 	return count;
 }
 
-void CGameTitles::WriteCachedTitles(const char * path)
+void CGameTitles::WriteCachedTitles(const char *path)
 {
-	std::string Cachepath = path;
-	if(path[strlen(path)-1] != '/')
+	std::string Cachepath(path);
+	if (Cachepath.back() != '/')
 		Cachepath += '/';
 	Cachepath += "TitlesCache.bin";
 
 	FILE *f = fopen(Cachepath.c_str(), "wb");
-	if(!f)
+	if (!f)
 		return;
 
 	CacheTitle Cache;
@@ -205,8 +251,9 @@ void CGameTitles::WriteCachedTitles(const char * path)
 	fwrite(&revision, 1, 4, f);
 	fwrite(Settings.db_language, 1, 10, f);
 	fwrite(&count, 1, 4, f);
+	SortTitleList();
 
-	for(u32 i = 0; i < count; ++i)
+	for (u32 i = 0; i < count; ++i)
 	{
 		memset(&Cache, 0, sizeof(CacheTitle));
 		snprintf(Cache.GameID, sizeof(Cache.GameID), "%s", TitleList[i].GameID);
@@ -214,7 +261,7 @@ void CGameTitles::WriteCachedTitles(const char * path)
 		snprintf(Cache.Region, sizeof(Cache.Region), "%s", TitleList[i].Region.c_str());
 		Cache.ParentalRating = TitleList[i].ParentalRating;
 		Cache.PlayersCount = TitleList[i].PlayersCount;
-		Cache.FromWiiTDB = TitleList[i].FromWiiTDB;
+		Cache.TitleType = TitleList[i].TitleType;
 
 		fwrite(&Cache, 1, sizeof(CacheTitle), f);
 	}
@@ -222,99 +269,109 @@ void CGameTitles::WriteCachedTitles(const char * path)
 	fclose(f);
 }
 
-void CGameTitles::GetMissingTitles(std::vector<std::string> &MissingTitles, bool removeUnused)
+int CGameTitles::GetMissingTitles(std::vector<std::string> &MissingTitles, std::vector<struct discHdr *> &headerlist)
 {
-	std::vector<struct discHdr *> &FullList = gameList.GetFilteredList();
-	std::vector<bool> UsedCachedList(TitleList.size(), false);
-
-	for(u32 i = 0; i < FullList.size(); ++i)
+	for (u32 i = 0; i < headerlist.size(); ++i)
 	{
-		bool isCached = false;
-
-		for(u32 n = 0; n < TitleList.size(); ++n)
+		bool found = false;
+		for (u32 n = 0; n < TitleList.size(); ++n)
 		{
-			if(strncasecmp(TitleList[n].GameID, (const char *) FullList[i]->id, 6) == 0)
+			if (strncasecmp(TitleList[n].GameID, (const char *)headerlist[i]->id, 6) == 0)
 			{
-				UsedCachedList[n] = true;
-				//! If the title is not from WiiTDB, try to reload it
-				isCached = TitleList[n].FromWiiTDB;
+				if (TitleList[n].TitleType >= TITLETYPE_FROMWIITDB)
+					found = true;
 				break;
 			}
 		}
-
-		if(!isCached)
-		{
-			char gameID[7];
-			snprintf(gameID, sizeof(gameID), (const char *) FullList[i]->id);
-			MissingTitles.push_back(std::string(gameID));
-		}
+		if (!found /*&& !headerlist[i]->tid*/)
+			MissingTitles.push_back((std::string)(const char *)headerlist[i]->id);
 	}
+	return MissingTitles.size();
+}
 
-	if(!removeUnused)
+void CGameTitles::CleanTitles(std::vector<struct discHdr *> &headerlist)
+{
+	if (TitleList.empty())
 		return;
 
-	for(u32 n = 0; n < TitleList.size(); ++n)
+	for (u32 n = 0; n < TitleList.size(); ++n)
 	{
-		if(!UsedCachedList[n])
+		bool isCached = false;
+		for (u32 i = 0; i < headerlist.size(); ++i)
 		{
-			TitleList.erase(TitleList.begin()+n);
+			if (strncasecmp(TitleList[n].GameID, (const char *)headerlist[i]->id, 6) == 0)
+			{
+				isCached = true;
+				break;
+			}
+		}
+		if (!isCached)
+		{
+			TitleList.erase(TitleList.begin() + n);
 			n--;
 		}
 	}
+	return;
 }
 
-void CGameTitles::LoadTitlesFromGameTDB(const char * path, bool removeUnused)
+void CGameTitles::LoadTitlesFromGameTDB(const char *path)
 {
-	if(!path || !Settings.titlesOverride)
+	if (!path || Settings.TitlesType != TITLETYPE_FROMWIITDB)
 		return;
 
-	std::string Filepath = path;
-	if(path[strlen(path)-1] != '/')
+	std::string Filepath(path);
+	if (Filepath.back() != '/')
 		Filepath += '/';
-
 	Filepath += "wiitdb.xml";
 
-	//! Read game list
-	gameList.LoadUnfiltered();
-
-	//! Removed unused cache titles and get the still missing ones
-	std::vector<std::string> MissingTitles;
-	GetMissingTitles(MissingTitles, removeUnused);
-
-	if(MissingTitles.size() == 0)
+	std::vector<struct discHdr *> headerlist;
+	if (!gameList.GetGameListHeaders(headerlist, MODE_ALL))
 		return;
 
-	std::string Title;
+	//! Removed unused cache titles and get the still missing ones
+	CleanTitles(headerlist);
+	std::vector<std::string> MissingTitles;
+	if (!GetMissingTitles(MissingTitles, headerlist))
+		return;
 
-	GameTDB XML_DB(Filepath.c_str());
+	GameTDB XML_DB;
+	if (!XML_DB.OpenFile(Filepath.c_str()))
+		return;
+	dbExists = true;
+
 	XML_DB.SetLanguageCode(Settings.db_language);
-	int Rating;
-	std::string RatValTxt;
-	std::string Region;
 
-	for(u32 i = 0; i < MissingTitles.size(); ++i)
+	for (u32 i = 0; i < MissingTitles.size(); ++i)
 	{
-		if(!XML_DB.GetTitle(MissingTitles[i].c_str(), Title))
+		std::string Title;
+		std::string Region;
+		std::string RatValTxt;
+		int ParentalRating = -1;
+		int PlayersCount = 1;
+
+		if (!XML_DB.GetTitle(MissingTitles[i].c_str(), Title))
 			continue;
 
-		if(XML_DB.GetRegion(MissingTitles[i].c_str(), Region))
-			this->SetGameTitle(MissingTitles[i].c_str(), Title.c_str(), Region);
+		// This change allows the game to be sorted correctly
+		if (Title.compare("Ōkami") == 0)
+			Title.assign("Okami");
+
+		int Rating = XML_DB.GetRating(MissingTitles[i].c_str());
+		if (Rating >= 0)
+		{
+			if (XML_DB.GetRatingValue(MissingTitles[i].c_str(), RatValTxt))
+				ParentalRating = GameTDB::ConvertRating(RatValTxt.c_str(), GameTDB::RatingToString(Rating), "PEGI");
+		}
+
+		int pc = XML_DB.GetPlayers(MissingTitles[i].c_str());
+		if (pc > 0)
+			PlayersCount = pc;
+
+		if (XML_DB.GetRegion(MissingTitles[i].c_str(), Region))
+			SetGameTitle(MissingTitles[i].c_str(), Title.c_str(), TITLETYPE_FROMWIITDB, Region, ParentalRating, PlayersCount);
 		else
-			this->SetGameTitle(MissingTitles[i].c_str(), Title.c_str());
-		//! Title is loaded from WiiTDB, remember that it's good
-		TitleList[TitleList.size()-1].FromWiiTDB = 1;
-
-		Rating = XML_DB.GetRating(MissingTitles[i].c_str());
-		if(Rating < 0)
-			continue;
-
-		if(!XML_DB.GetRatingValue(MissingTitles[i].c_str(), RatValTxt))
-			continue;
-
-		TitleList[TitleList.size()-1].ParentalRating = GameTDB::ConvertRating(RatValTxt.c_str(), GameTDB::RatingToString(Rating), "PEGI");
-		int ret = XML_DB.GetPlayers(MissingTitles[i].c_str());
-		if(ret > 0)
-			TitleList[TitleList.size()-1].PlayersCount = ret;
+			SetGameTitle(MissingTitles[i].c_str(), Title.c_str(), TITLETYPE_FROMWIITDB, "NULL", ParentalRating, PlayersCount);
 	}
 	XML_DB.CloseFile();
+	SortTitleList();
 }

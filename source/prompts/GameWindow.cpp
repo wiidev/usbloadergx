@@ -22,6 +22,7 @@
 #include "banner/OpeningBNR.hpp"
 #include "utils/ShowError.h"
 #include "utils/tools.h"
+#include "cache/cache.hpp"
 
 #define NONE		0
 #define LEFT		1
@@ -601,26 +602,37 @@ int GameWindow::MainLoop()
 	{
 		// Hide the window
 		Hide();
-
 		// This button can only be clicked when this is not a dvd header
 		struct discHdr *header = gameList[gameSelected];
-
-		//enter new game title
-		char entered[60];
+		// Enter the new game title
+		char entered[130];
 		snprintf(entered, sizeof(entered), "%s", GameTitles.GetTitle(header));
-		int result = OnScreenKeyboard(entered, 60, 0);
+		int result = OnScreenKeyboard(entered, 129, 0);
 		if (result == 1)
 		{
-			WBFS_RenameGame(header->id, entered);
-			GameTitles.SetGameTitle(header->id, entered);
+			if (strlen(entered) > 0)
+				GameTitles.SetGameTitle(header->id, entered, TITLETYPE_MANUAL_OVERRIDE);
+			else
+				GameTitles.SetGameTitle(header->id, header->title, TITLETYPE_DEFAULT);
+			// Refresh and set the title for the window
 			wString oldFilter(gameList.GetCurrentFilter());
-			gameList.ReadGameList();
 			gameList.FilterList(oldFilter.c_str());
-			if(browserMenu) browserMenu->ReloadBrowser();
+            nameTxt->SetText(GameTitles.GetTitle(header));
+			// Remember the games new position
+			for (int i = 0; i < gameList.size(); ++i)
+			{
+				if (strncasecmp((const char *)gameList[i]->id, (const char *)header->id, 6) == 0)
+				{
+					Settings.SelectedGame = 0;
+					Settings.GameListOffset = i;
+					gameSelected = i;
+				}
+			}
+			if (browserMenu)
+				browserMenu->ReloadBrowser();
 		}
 		// Show the window again
 		Show();
-
 		nameBtn->ResetState();
 	}
 

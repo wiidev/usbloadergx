@@ -47,12 +47,12 @@ class DirList
 		//!\param path Path from where to load the filelist of all files
 		//!\param filter A fileext that needs to be filtered
 		//!\param flags search/filter flags from the enum
-		DirList(const char * path, const char *filter = NULL, u32 flags = Files | Dirs);
+		DirList(const char * path, const char *filter = NULL, u32 flags = Files | Dirs, s32 max_depth = -1);
 		//!Destructor
 		~DirList();
 		//! Load all the files from a directory
-		bool LoadPath(const char * path, const char *filter = NULL, u32 flags = Files | Dirs);
-		bool LoadPath(std::string &path, const char *filter = NULL, u32 flags = Files | Dirs);
+		bool LoadPath(const char * path, const char *filter = NULL, u32 flags = Files | Dirs, s32 max_depth = -1);
+		bool LoadPath(std::string &path, const char *filter = NULL, u32 flags = Files | Dirs, s32 max_depth = -1);
 		//! Get a filename of the list
 		//!\param list index
 		const char * GetFilename(int index);

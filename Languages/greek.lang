@@ -344,6 +344,9 @@ msgstr "αποθήκευση αρχείων BNR"
 msgid "Cache BNR Files Path"
 msgstr "αποθήκευση τοποθεσίας αρχείων BNR"
 
+msgid "Cache Path"
+msgstr ""
+
 msgid "Cache Titles"
 msgstr "Αποθήκευση τίτλων"
 
@@ -638,6 +641,9 @@ msgstr "Το αρχείο loader.bin του devolution δεν φορτώθηκε
 
 msgid "Directory does not exist!"
 msgstr "Ο φάκελος δεν υπάρχει!"
+
+msgid "Disc"
+msgstr ""
 
 msgid "Disc 1"
 msgstr ""
@@ -1011,9 +1017,6 @@ msgstr "Επιβολή PAL50"
 msgid "Force PAL60"
 msgstr "Επιβολή PAL60"
 
-msgid "Force Titles from Disc"
-msgstr "Επιβολή ονόματος από το ίδιο το παιχνίδι"
-
 msgid "Force Widescreen"
 msgstr ""
 
@@ -1104,9 +1107,6 @@ msgstr "Διαγραφή παιχνιδιών GameCube"
 msgid "GameCube Install Menu"
 msgstr "menu εγκατάστασης παιχνιδιών GameCube"
 
-msgid "Game Header Cache Files Path"
-msgstr ""
-
 msgid "Game ID"
 msgstr "ID παιχνιδιού"
 
@@ -1166,6 +1166,9 @@ msgstr ""
 
 msgid "Gamename [GAMEID]"
 msgstr "όνομα παιχνιδιού [κωδικόςπαιχνιδιού]"
+
+msgid "GameTDB"
+msgstr ""
 
 msgid "Games"
 msgstr "Παιχνίδια"
@@ -1848,7 +1851,7 @@ msgstr ""
 msgid "Reset BG Music"
 msgstr "Επαναφορά μουσικής υπόκρουσης."
 
-msgid "Reset Game Header Cache"
+msgid "Reset Cached Titles"
 msgstr ""
 
 msgid "Reset Playcounter"
@@ -2185,8 +2188,8 @@ msgstr "Εκκινητής τίτλων"
 msgid "Titles Path"
 msgstr ""
 
-msgid "Titles from GameTDB"
-msgstr "Τίτλοι από το GameTDB"
+msgid "Titles From"
+msgstr ""
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
 msgstr "Για αναπαραγωγή τίτλων Gamecube από τους αυθεντικούς δίσκους τους, πρέπει να ορίσετε την επιλογή GameCube σε ΜΙΟS, στις ρυθμίσεις κάθε τίτλου."
@@ -2278,9 +2281,6 @@ msgid "USBloaderGX couldn't write Nintendont config file. Launch Nintendont anyw
 msgstr ""
 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
-msgstr ""
-
-msgid "Use Game Header Cache"
 msgstr ""
 
 msgid "Uninstall"

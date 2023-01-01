@@ -129,17 +129,17 @@ int UninstallSM::GetMenuInternal()
 			if(ret >= 0)
 			{
 				wString oldFilter(gameList.GetCurrentFilter());
-				ResetGameHeaderCache();
 				gameList.ReadGameList();
 				gameList.FilterList(oldFilter.c_str());
+				isCacheCurrent();
 			}
 		}
 		else if(DiscHeader->type == TYPE_GAME_GC_IMG)
 		{
 			GCGames::Instance()->RemoveGame(GameID);
-			ResetGameHeaderCache();
 			// Reload list
 			GCGames::Instance()->LoadAllGames();
+			isCacheCurrent();
 		}
 		else if(DiscHeader->type == TYPE_GAME_EMUNANDCHAN && DiscHeader->tid != 0)
 		{
@@ -151,8 +151,8 @@ int UninstallSM::GetMenuInternal()
 			snprintf(filepath, sizeof(filepath), "%s/title/%08x/%08x/", Settings.NandEmuChanPath, (unsigned int) (DiscHeader->tid >> 32), (unsigned int) DiscHeader->tid);
 			RemoveDirectory(filepath);
 
-			ResetGameHeaderCache();
 			Channels::Instance()->GetEmuChannelList();
+			isCacheCurrent();
 		}
 
 		if(choice == 2)

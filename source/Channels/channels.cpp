@@ -58,8 +58,23 @@ typedef struct _dolheader
 
 Channels *Channels::instance = NULL;
 
-void Channels::GetEmuChannelList()
+void Channels::clear()
 {
+    EmuChannels.clear();
+    //! Clear memory of the vector completely
+    std::vector<struct discHdr>().swap(EmuChannels);
+}
+
+void Channels::GetEmuChannelList(bool use_cache)
+{
+    if (use_cache && Settings.CacheTitles && isCacheFile(EMUNAND_HEADER_CACHE_FILE))
+    {
+        if (EmuChannels.empty())
+            LoadGameHeaderCache(EmuChannels);
+        if (!EmuChannels.empty())
+            return;
+    }
+
     EmuChannels.clear();
 
     char filepath[1024];
@@ -73,6 +88,9 @@ void Channels::GetEmuChannelList()
 
     snprintf(filepath, sizeof(filepath), "%s/title/00010002", Settings.NandEmuChanPath);
     ParseTitleDir(filepath, language);
+
+    if (Settings.CacheTitles)
+        SaveGameHeaderCache(EmuChannels);
 }
 
 void Channels::GetChannelList()
@@ -111,16 +129,8 @@ void Channels::InternalGetNandChannelList(u32 type)
         if (tid == 0x000100014c554c5aLL || tid == 0x00010001AF1BF516LL || tid == 0x0001000148415858LL)
             strcpy(id, "JODI");
 
-        const char *name = GameTitles.GetTitle(id);
-        std::string TitleName;
-
-        if (!name || *name == '\0')
-        {
-            name = NandTitles.NameOf(tid);
-            // Set title for caching
-            if (name)
-                GameTitles.SetGameTitle(id, name);
-        }
+		std::string TitleName(NandTitles.NameOf(tid));
+        TitleName.erase(0, TitleName.find_first_not_of(' '));
 
         int s = NandChannels.size();
         NandChannels.resize(s + 1);
@@ -128,7 +138,7 @@ void Channels::InternalGetNandChannelList(u32 type)
         memcpy(NandChannels[s].id, id, 4);
         NandChannels[s].tid = tid;
         NandChannels[s].type = TYPE_GAME_NANDCHAN;
-        strncpy(NandChannels[s].title, name ? name : "", sizeof(NandChannels[s].title) - 1);
+        strncpy(NandChannels[s].title, TitleName.c_str(), sizeof(NandChannels[s].title) - 1);
     }
 }
 
@@ -142,19 +152,8 @@ std::vector<struct discHdr> &Channels::GetNandHeaders(void)
 
 std::vector<struct discHdr> &Channels::GetEmuHeaders(void)
 {
-    if (Settings.UseGameHeaderCache && isCacheFile(EMUNAND_HEADER_CACHE_FILE))
-    {
-        if (EmuChannels.empty())
-            LoadGameHeaderCache(EmuChannels);
-        if (!EmuChannels.empty())
-            return EmuChannels;
-    }
-
     if (EmuChannels.empty())
-        this->GetEmuChannelList();
-
-    if (Settings.UseGameHeaderCache && !EmuChannels.empty())
-        SaveGameHeaderCache(EmuChannels);
+        this->GetEmuChannelList(true);
 
     return EmuChannels;
 }

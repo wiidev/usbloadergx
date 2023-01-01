@@ -31,7 +31,7 @@
 #include "gecko.h"
 
 #define MAX_FAT_PATH 1024
-#define TITLE_LEN 64
+#define TITLE_LEN 130
 
 using namespace std;
 
@@ -367,19 +367,24 @@ bool Wbfs_Fat::CheckLayoutB(char *fname, int len, u8* id, char *fname_title)
 void Wbfs_Fat::AddHeader(struct discHdr *discHeader)
 {
 	//! First allocate before reallocating
-	if(!fat_hdr_list)
-		fat_hdr_list = (struct discHdr *) malloc(sizeof(struct discHdr));
+	if (!fat_hdr_list)
+		fat_hdr_list = (struct discHdr *)malloc(sizeof(struct discHdr));
 
-	struct discHdr *tmpList = (struct discHdr *) realloc(fat_hdr_list, (fat_hdr_count+1) * sizeof(struct discHdr));
-	if(!tmpList)
-		return; //out of memory, keep the list until now and stop
+	struct discHdr *tmpList = (struct discHdr *)realloc(fat_hdr_list, (fat_hdr_count + 1) * sizeof(struct discHdr));
+	if (!tmpList)
+		return; // out of memory, keep the list until now and stop
 
-	for(int j = 0; j < 6; ++j)
-		discHeader->id[j] = toupper((int) discHeader->id[j]);
+	for (int j = 0; j < 6; ++j)
+		discHeader->id[j] = toupper((int)discHeader->id[j]);
+
+	std::string title(discHeader->title);
+	title.erase(0, title.find_first_not_of(' '));
+	snprintf(discHeader->title, sizeof(discHeader->title), "%s", title.c_str());
 
 	fat_hdr_list = tmpList;
 	memcpy(&fat_hdr_list[fat_hdr_count], discHeader, sizeof(struct discHdr));
-	GameTitles.SetGameTitle(discHeader->id, discHeader->title);
+	if ((Settings.TitlesType == TITLETYPE_FORCED_DISC && GameTitles.GetTitleType((const char *)discHeader->id) != TITLETYPE_MANUAL_OVERRIDE))
+		GameTitles.SetGameTitle((const char *)discHeader->id, discHeader->title, TITLETYPE_FORCED_DISC);
 	fat_hdr_count++;
 }
 
@@ -395,7 +400,6 @@ s32 Wbfs_Fat::GetHeadersCount()
 	int len;
 	u8 id[8];
 	memset(id, 0, sizeof(id));
-	const char *title;
 	DIR *dir_iter;
 	struct dirent *dirent;
 
@@ -491,17 +495,18 @@ s32 Wbfs_Fat::GetHeadersCount()
 			snprintf(fpath, sizeof(fpath), "%s/%s/%.6s.wbfs", path, dirent->d_name, (char *) id);
 		}
 
-		// if we have titles.txt entry use that
-		title = GameTitles.GetTitle(id);
-		// if no titles.txt get title from dir or file name
-		if (strlen(title) == 0 && !Settings.ForceDiscTitles && strlen(fname_title) > 0)
-			title = fname_title;
+		std::string title = "";
+		if (Settings.TitlesType == TITLETYPE_FORCED_DISC && GameTitles.GetTitleType((const char *)id) == TITLETYPE_FORCED_DISC)
+			title.assign(GameTitles.GetTitle((const char *)id));
 
-		if (strlen(title) > 0)
+		if (title.length() == 0 && Settings.TitlesType != TITLETYPE_FORCED_DISC && strlen(fname_title) > 0)
+			title.assign(fname_title);
+
+		if (*id != 0 && title.length() > 0 && title.length() < 64)
 		{
 			memset(&tmpHdr, 0, sizeof(tmpHdr));
 			memcpy(tmpHdr.id, id, sizeof(tmpHdr.id));
-			snprintf(tmpHdr.title, sizeof(tmpHdr.title), "%s", title);
+			snprintf(tmpHdr.title, sizeof(tmpHdr.title), "%s", title.c_str());
 			tmpHdr.magic = 0x5D1C9EA3;
 			AddHeader(&tmpHdr);
 			continue;

@@ -226,7 +226,6 @@ LoaderSettings::~LoaderSettings()
 		}
 
 		gameList.LoadUnfiltered();
-		GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path, false);
 	}
 	
 	if(oldGameCubeSource != Settings.GameCubeSource)
@@ -1067,4 +1066,3 @@ int LoaderSettings::GetMenuInternal()
 
 	return MENU_NONE;
 }
-

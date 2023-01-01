@@ -344,6 +344,9 @@ msgstr "Fichiers BNR en cache"
 msgid "Cache BNR Files Path"
 msgstr "Dossier de cache BNR"
 
+msgid "Cache Path"
+msgstr ""
+
 msgid "Cache Titles"
 msgstr "Titres en cache"
 
@@ -638,6 +641,9 @@ msgstr "Le fichier loader.bin de Devolution n'a pu être chargé."
 
 msgid "Directory does not exist!"
 msgstr "Répertoire inexistant!"
+
+msgid "Disc"
+msgstr "Disque"
 
 msgid "Disc 1"
 msgstr "Disque 1"
@@ -1011,9 +1017,6 @@ msgstr "Forcer PAL50"
 msgid "Force PAL60"
 msgstr "Forcer PAL60"
 
-msgid "Force Titles from Disc"
-msgstr "Forcer charg. titres du disque"
-
 msgid "Force Widescreen"
 msgstr "Forcer 16:9"
 
@@ -1104,9 +1107,6 @@ msgstr "Menu de suppression GameCube"
 msgid "GameCube Install Menu"
 msgstr "Menu d'installation GameCube"
 
-msgid "Game Header Cache Files Path"
-msgstr ""
-
 msgid "Game ID"
 msgstr "ID du jeu"
 
@@ -1166,6 +1166,9 @@ msgstr "Source GameCube"
 
 msgid "Gamename [GAMEID]"
 msgstr "NomJeu [IDJEU]"
+
+msgid "GameTDB"
+msgstr ""
 
 msgid "Games"
 msgstr "Jeux"
@@ -1848,7 +1851,7 @@ msgstr ""
 msgid "Reset BG Music"
 msgstr "Fond sonore par defaut"
 
-msgid "Reset Game Header Cache"
+msgid "Reset Cached Titles"
 msgstr ""
 
 msgid "Reset Playcounter"
@@ -2185,8 +2188,8 @@ msgstr "Menu Chaînes"
 msgid "Titles Path"
 msgstr "Dossier titres"
 
-msgid "Titles from GameTDB"
-msgstr "Titres de GameTDB"
+msgid "Titles From"
+msgstr "Titres de"
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
 msgstr "Pour lancer les jeux GameCube à partir du disque vous devez placer le Mode GameCube sur MIOS dans les paramètres du jeu."
@@ -2279,9 +2282,6 @@ msgstr "USBLoaderGX n'a pas pu créer le fichier de configuration de Nintendont.
 
 msgid "USBloaderGX r1218 is required for Nintendont Alpha v0.1. Please update your Nintendont boot.dol version."
 msgstr "Nintendont Alpha v0.1 ne fonctionne qu'avec USBLoaderGX r1218. Veuillez mettre à jour votre version de Nintendont."
-
-msgid "Use Game Header Cache"
-msgstr ""
 
 msgid "Uninstall"
 msgstr "Désinstaller"

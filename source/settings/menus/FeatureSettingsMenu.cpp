@@ -27,6 +27,7 @@
 
 #include "FeatureSettingsMenu.hpp"
 #include "Channels/channels.h"
+#include "GameCube/GCGames.h"
 #include "settings/CGameCategories.hpp"
 #include "settings/CGameSettings.h"
 #include "settings/GameTitles.h"
@@ -62,14 +63,47 @@ static const char * WiilightText[WIILIGHT_MAX] =
 	trNOOP( "Only for Install" )
 };
 
+static const char * TitleTypeText[] =
+{
+	trNOOP( "Folder" ),
+	trNOOP( "Disc" ),
+	trNOOP( "GameTDB" )
+};
+
 FeatureSettingsMenu::FeatureSettingsMenu()
 	: SettingsMenu(tr("Features Settings"), &GuiOptions, MENU_NONE)
 {
+	SetOptionNames();
+	SetOptionValues();
+	OldTitlesType = Settings.TitlesType;
+	OldCacheTitles = Settings.CacheTitles;
+}
+
+FeatureSettingsMenu::~FeatureSettingsMenu()
+{
+	if (Settings.TitlesType != OldTitlesType || Settings.CacheTitles != OldCacheTitles)
+	{
+		//! Remove cached titles and reload new titles
+		GameTitles.Reset();
+		gameList.clear();
+		GCGames::Instance()->clear();
+		Channels::Instance()->clear();
+
+		if ((Settings.CacheTitles && (Settings.TitlesType == TITLETYPE_FORCED_DISC || OldTitlesType == TITLETYPE_FORCED_DISC)) || (!Settings.CacheTitles && OldCacheTitles))
+			ResetGameHeaderCache();
+
+		gameList.LoadUnfiltered();
+	}
+	//! EmuNAND contents might of changed
+	isCacheCurrent();
+}
+
+void FeatureSettingsMenu::SetOptionNames()
+{
 	int Idx = 0;
-	Options->SetName(Idx++, "%s", tr( "Titles from GameTDB" ));
+
+	Options->SetName(Idx++, "%s", tr( "Titles From" ));
 	Options->SetName(Idx++, "%s", tr( "Cache Titles" ));
-	Options->SetName(Idx++, "%s", tr( "Use Game Header Cache" ));
-	Options->SetName(Idx++, "%s", tr( "Force Titles from Disc" ));
 	Options->SetName(Idx++, "%s", tr( "Wiilight" ));
 	Options->SetName(Idx++, "%s", tr( "Rumble" ));
 	Options->SetName(Idx++, "%s", tr( "AutoInit Network" ));
@@ -86,53 +120,19 @@ FeatureSettingsMenu::FeatureSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "WiiU Widescreen" ));
 	Options->SetName(Idx++, "%s", tr( "Boot Neek System Menu" ));
 	Options->SetName(Idx++, "%s", tr( "Reset All Game Settings" ));
-	Options->SetName(Idx++, "%s", tr( "Reset Game Header Cache" ));
-
-	OldTitlesOverride = Settings.titlesOverride;
-	OldCacheTitles = Settings.CacheTitles;
-	OldForceDiscTitles = Settings.ForceDiscTitles;
-
-	SetOptionValues();
-}
-
-FeatureSettingsMenu::~FeatureSettingsMenu()
-{
-	if (   Settings.titlesOverride != OldTitlesOverride
-		|| Settings.CacheTitles != OldCacheTitles
-		|| Settings.ForceDiscTitles != OldForceDiscTitles)
-	{
-		if(Settings.ForceDiscTitles)
-			Settings.titlesOverride = OFF;
-
-		//! Remove cached titles and reload new titles
-		GameTitles.SetDefault();
-		if(Settings.titlesOverride) {
-			GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
-		}
-		else
-		{
-			//! Don't override titles, in other words read them from disc header or directory names
-			gameList.ReadGameList();
-			gameList.LoadUnfiltered();
-		}
-	}
+	if (Settings.CacheTitles)
+		Options->SetName(Idx++, "%s", tr( "Reset Cached Titles" ));
 }
 
 void FeatureSettingsMenu::SetOptionValues()
 {
 	int Idx = 0;
 
-	//! Settings: Titles from GameTDB
-	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.titlesOverride] ));
+	//! Settings: Titles From
+	Options->SetValue(Idx++, "%s", tr( TitleTypeText[Settings.TitlesType] ));
 
 	//! Settings: Cache Titles
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.CacheTitles] ));
-
-	//! Settings: Use Game Header Cache
-	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.UseGameHeaderCache] ));
-
-	//! Settings: Force Titles from Disc
-	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.ForceDiscTitles] ));
 
 	//! Settings: Wiilight
 	Options->SetValue(Idx++, "%s", tr( WiilightText[Settings.wiilight] ));
@@ -191,28 +191,19 @@ int FeatureSettingsMenu::GetMenuInternal()
 	int Idx = -1;
 
 
-	//! Settings: Titles from GameTDB
+	//! Settings: Titles From
 	if (ret == ++Idx)
 	{
-		if (++Settings.titlesOverride >= MAX_ON_OFF) Settings.titlesOverride = 0;
+		if (++Settings.TitlesType >= 3) Settings.TitlesType = 0;
 	}
 
 	//! Settings: Cache Titles
 	else if (ret == ++Idx)
 	{
 		if (++Settings.CacheTitles >= MAX_ON_OFF) Settings.CacheTitles = 0;
-	}
-
-	//! Settings: Use Game Header Cache
-	else if (ret == ++Idx)
-	{
-		if (++Settings.UseGameHeaderCache >= MAX_ON_OFF) Settings.UseGameHeaderCache = 0;
-	}
-
-	//! Settings: Force Titles from Disc
-	else if (ret == ++Idx)
-	{
-		if (++Settings.ForceDiscTitles >= MAX_ON_OFF) Settings.ForceDiscTitles = 0;
+		Options->ClearList();
+		SetOptionNames();
+		SetOptionValues();
 	}
 
 	//! Settings: Wiilight
@@ -332,8 +323,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 
 			for(int i = 0; i < gameList.size(); ++i)
 			{
-				if(   gameList[i]->type != TYPE_GAME_WII_IMG
-				   && gameList[i]->type != TYPE_GAME_NANDCHAN)
+				if(gameList[i]->type != TYPE_GAME_WII_IMG && gameList[i]->type != TYPE_GAME_NANDCHAN)
 					continue;
 
 				if(gameList[i]->tid != 0) //! Channels
@@ -548,7 +538,6 @@ int FeatureSettingsMenu::GetMenuInternal()
 				}
 
 				// Refresh new EmuNAND content
-				ResetGameHeaderCache();
 				Channels::Instance()->GetEmuChannelList();
 				GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
 			}
@@ -639,7 +628,6 @@ int FeatureSettingsMenu::GetMenuInternal()
 					}
 
 					// Refresh new EmuNAND content
-					ResetGameHeaderCache();
 					Channels::Instance()->GetEmuChannelList();
 					GameTitles.LoadTitlesFromGameTDB(Settings.titlestxt_path);
 				}
@@ -749,14 +737,17 @@ int FeatureSettingsMenu::GetMenuInternal()
 			GameSettings.RemoveAll();
 	}
 
-	//! Reset Game Header Cache
-	else if(ret == ++Idx)
+	//! Reset Cached Titles
+	else if(Settings.CacheTitles && ret == ++Idx)
 	{
 		int choice = WindowPrompt(tr( "Are you sure you want to reset?" ), 0, tr( "Yes" ), tr( "Cancel" ));
 		if (choice == 1)
 		{
+			gameList.clear();
+			GCGames::Instance()->clear();
+			Channels::Instance()->clear();
 			ResetGameHeaderCache();
-			gameList.ReadGameList();
+			gameList.LoadUnfiltered();
 		}
 	}
 	SetOptionValues();
