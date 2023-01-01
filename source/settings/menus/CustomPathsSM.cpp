@@ -50,7 +50,6 @@ CustomPathsSM::CustomPathsSM()
 	Options->SetName(Idx++, tr("Disc Artwork Path"));
 	Options->SetName(Idx++, tr("Theme Path"));
 	Options->SetName(Idx++, tr("Titles Path"));
-	Options->SetName(Idx++, tr("Update Path"));
 	Options->SetName(Idx++, tr("GCT Cheatcodes Path"));
 	Options->SetName(Idx++, tr("TXT Cheatcodes Path"));
 	Options->SetName(Idx++, tr("DOL Path"));
@@ -93,9 +92,6 @@ void CustomPathsSM::SetOptionValues()
 
 	//! Settings: Titles Path
 	Options->SetValue(Idx++, Settings.titlestxt_path);
-
-	//! Settings: Update Path
-	Options->SetValue(Idx++, Settings.update_path);
 
 	//! Settings: GCT Cheatcodes Path
 	Options->SetValue(Idx++, Settings.Cheatcodespath);
@@ -215,13 +211,6 @@ int CustomPathsSM::GetMenuInternal()
 				}
 			}
 		}
-	}
-
-	//! Settings: Update Path
-	else if (ret == ++Idx)
-	{
-		titleTxt->SetText(tr( "Update Path" ));
-		ChangePath(Settings.update_path, sizeof(Settings.update_path));
 	}
 
 	//! Settings: GCT Cheatcodes Path

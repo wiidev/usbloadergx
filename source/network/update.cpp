@@ -145,7 +145,7 @@ static void UpdateIconPng()
 	downloadfile("https://raw.githubusercontent.com/wiidev/usbloadergx/updates/icon.png", &file);
 	if (file.size > 0)
 	{
-		snprintf(iconpath, sizeof(iconpath), "%sicon.png", Settings.update_path);
+		snprintf(iconpath, sizeof(iconpath), "%sicon.png", Settings.ConfigPath);
 		FILE *pfile = fopen(iconpath, "wb");
 		if (pfile)
 		{
@@ -163,7 +163,7 @@ static void UpdateMetaXml()
 	downloadfile("https://raw.githubusercontent.com/wiidev/usbloadergx/updates/meta.xml", &file);
 	if (file.size > 0)
 	{
-		snprintf(xmlpath, sizeof(xmlpath), "%smeta.xml", Settings.update_path);
+		snprintf(xmlpath, sizeof(xmlpath), "%smeta.xml", Settings.ConfigPath);
 		FILE *pfile = fopen(xmlpath, "wb");
 		if (pfile)
 		{
@@ -217,8 +217,8 @@ static int ApplicationDownload(void)
 	snprintf(tmppath, sizeof(tmppath), "%s/ULNR.wad", Settings.BootDevice);
 #else
 	char realpath[250];
-	snprintf(realpath, sizeof(realpath), "%sboot.dol", Settings.update_path);
-	snprintf(tmppath, sizeof(tmppath), "%sboot.tmp", Settings.update_path);
+	snprintf(realpath, sizeof(realpath), "%sboot.dol", Settings.ConfigPath);
+	snprintf(tmppath, sizeof(tmppath), "%sboot.tmp", Settings.ConfigPath);
 #endif
 
 	int ret = DownloadFileToPath(DownloadURL.c_str(), tmppath);
@@ -279,12 +279,6 @@ int UpdateApp()
 	if (!IsNetworkInit() && !NetworkInitPrompt())
 	{
 		WindowPrompt(tr("Error:"), tr("Could not initialize network!"), tr("OK"));
-		return -1;
-	}
-
-	if (!CreateSubfolder(Settings.update_path))
-	{
-		WindowPrompt(tr("Error:"), tr("Can't create directory"), tr("OK"));
 		return -1;
 	}
 

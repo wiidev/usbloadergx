@@ -25,12 +25,12 @@ distribution.
 #include "settings/CSettings.h"
 #include "svnrev.h"
 
-int updateMetaXML (void)
+int updateMetaXML()
 {
 	HomebrewXML MetaXML;
 	char filepath[255];
-	snprintf(filepath, sizeof(filepath), "%s/meta.xml", Settings.update_path);
-	if(!MetaXML.LoadHomebrewXMLData(filepath))
+	snprintf(filepath, sizeof(filepath), "%smeta.xml", Settings.ConfigPath);
+	if (!MetaXML.LoadHomebrewXMLData(filepath))
 		return 0;
 
 	char line[50];
@@ -47,22 +47,19 @@ int updateMetaXML (void)
 	return ret;
 }
 
-int editMetaArguments (void)
+int editMetaArguments()
 {
 	char metapath[255] = "";
 	char metatmppath[255] = "";
-
-	snprintf(metapath, sizeof(metapath), "%s/meta.xml", Settings.update_path);
-	snprintf(metatmppath, sizeof(metatmppath), "%s/meta.tmp", Settings.update_path);
+	snprintf(metapath, sizeof(metapath), "%smeta.xml", Settings.ConfigPath);
+	snprintf(metatmppath, sizeof(metatmppath), "%smeta.tmp", Settings.ConfigPath);
 
 	FILE *source = fopen(metapath, "rb");
-	if(!source)
-	{
+	if (!source)
 		return 0;
-	}
 
 	FILE *destination = fopen(metatmppath, "wb");
-	if(!destination)
+	if (!destination)
 	{
 		fclose(source);
 		return 0;
@@ -70,23 +67,23 @@ int editMetaArguments (void)
 
 	const int max_line_size = 255;
 	char *line = new char[max_line_size];
-	while (fgets(line, max_line_size, source) != NULL) 
+	while (fgets(line, max_line_size, source) != NULL)
 	{
 		// delete commented lines
-		if( strstr(line, "	<!-- remove this line to enable arguments") != NULL ||
-			strstr(line, "	remove this line to enable arguments -->")   != NULL)
+		if (strstr(line, "	<!-- remove this line to enable arguments") != NULL ||
+			strstr(line, "	remove this line to enable arguments -->") != NULL)
 		{
 			strcpy(line, "");
 		}
 		// delete commented lines (old version)
-		if( strstr(line, "<!--   // remove this line to enable arguments") != NULL ||
-			strstr(line, "// remove this line to enable arguments -->")   != NULL)
+		if (strstr(line, "<!--   // remove this line to enable arguments") != NULL ||
+			strstr(line, "// remove this line to enable arguments -->") != NULL)
 		{
 			strcpy(line, "");
 		}
 
 		// generate argurments
-		if(strstr(line, "<arguments>") != NULL)
+		if (strstr(line, "<arguments>") != NULL)
 		{
 			fputs(line, destination);
 			snprintf(line, max_line_size, "		<arg>--bootios=%d</arg>\n", Settings.BootIOS);
@@ -96,14 +93,14 @@ int editMetaArguments (void)
 			snprintf(line, max_line_size, "		<arg>--mountusb=%d</arg>\n", Settings.USBAutoMount);
 			fputs(line, destination);
 			
-			while(strstr(line, "</arguments>") == NULL)
+			while (strstr(line, "</arguments>") == NULL)
 			{
 				fgets(line, max_line_size, source); // advance one line
-				if(feof(source))
+				if (feof(source))
 				{
 					fclose(source);
 					fclose(destination);
-					delete [] line;
+					delete[] line;
 					return 0;
 				}
 			}
@@ -113,7 +110,7 @@ int editMetaArguments (void)
 
 	fclose(source);
 	fclose(destination);
-	delete [] line;
+	delete[] line;
 	
 	if(CopyFile(metatmppath, metapath) <0)
 		return 0;

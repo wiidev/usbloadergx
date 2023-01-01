@@ -138,9 +138,6 @@ bool CGameStatistics::Save()
 	if(ptr)
 		ptr[0] = 0;
 
-	if(!CreateSubfolder(filepath))
-		return false;
-
 	FILE * f = fopen(ConfigPath.c_str(), "w");
 	if (!f) return false;
 

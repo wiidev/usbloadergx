@@ -24,7 +24,7 @@
 #ifndef _META_H_
 #define _META_H_
 
-int updateMetaXML(void);
-int editMetaArguments(void);
+int updateMetaXML();
+int editMetaArguments();
 
 #endif

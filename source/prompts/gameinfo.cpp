@@ -1118,14 +1118,13 @@ char *readable_size(float size, char *buf)
 bool save_gamelist(bool bCSV) // save gamelist
 {
 	mainWindow->SetState(STATE_DISABLED);
-	CreateSubfolder(Settings.update_path);
 
 	// Save the game list
 	char tmp[256];
 	if(bCSV)
-		snprintf(tmp, sizeof(tmp), "%sGameList.csv", Settings.update_path);
+		snprintf(tmp, sizeof(tmp), "%sGameList.csv", Settings.ConfigPath);
 	else
-		snprintf(tmp, sizeof(tmp), "%sGameList.txt", Settings.update_path);
+		snprintf(tmp, sizeof(tmp), "%sGameList.txt", Settings.ConfigPath);
 
 	FILE *f = fopen(tmp, "w");
 	if (!f)

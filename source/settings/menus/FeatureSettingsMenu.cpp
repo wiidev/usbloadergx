@@ -600,7 +600,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 							if(WindowPrompt(tr( "EmuNAND WAD Manager" ), fmt(tr("%i WAD file(s) not processed!"), wadList->GetFilecount()), tr("Save List"), tr( "OK" )))
 							{
 								char path[200];
-								snprintf(path, sizeof(path), "%s/wad_manager_errors.txt", Settings.update_path);
+								snprintf(path, sizeof(path), "%s/wad_manager_errors.txt", Settings.ConfigPath);
 
 								FILE *f = fopen(path, "a");
 								if(f)

@@ -412,7 +412,7 @@ void ImageDownloader::DownloadImage(const char *url, const char *gameID, const c
 void ImageDownloader::CreateCSVLog()
 {
 	char path[200];
-	snprintf(path, sizeof(path), "%s/MissingImages.csv", Settings.update_path);
+	snprintf(path, sizeof(path), "%s/MissingImages.csv", Settings.ConfigPath);
 
 	FILE *f = fopen(path, "wb");
 	if(!f) return;

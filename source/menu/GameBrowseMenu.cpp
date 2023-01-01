@@ -931,7 +931,7 @@ int GameBrowseMenu::MainLoop()
 		gprintf("\tgameCntBtn clicked\n");
 		gamecntBtn->ResetState();
 
-		int choice = WindowPrompt(0, fmt("%s %sGameList ?", tr( "Save Game List to" ), Settings.update_path), "TXT", "CSV", tr( "Back" ));
+		int choice = WindowPrompt(0, fmt("%s %sGameList ?", tr( "Save Game List to" ), Settings.ConfigPath), "TXT", "CSV", tr( "Back" ));
 		if (choice)
 		{
 			if (save_gamelist(choice == 2))

@@ -175,8 +175,6 @@ bool CGameSettings::Save()
 	if(ptr)
 		ptr[0] = 0;
 
-	CreateSubfolder(filepath);
-
 	FILE * f = fopen(ConfigPath.c_str(), "w");
 	if (!f) return false;
 

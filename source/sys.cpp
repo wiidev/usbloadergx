@@ -239,7 +239,7 @@ void Sys_LoadHBC(void)
 
 bool RebootApp(void)
 {
-	// be sure to use current settings as arguments
+	// Be sure to use current settings as arguments
 	editMetaArguments();
 	
 #ifdef FULLCHANNEL
@@ -251,12 +251,12 @@ bool RebootApp(void)
 	// Load meta.xml arguments
 	char filepath[255];
 	HomebrewXML MetaXML;
-	snprintf(filepath, sizeof(filepath), "%s/meta.xml", Settings.update_path);
+	snprintf(filepath, sizeof(filepath), "%smeta.xml", Settings.ConfigPath);
 	MetaXML.LoadHomebrewXMLData(filepath);
 
 	u8 *buffer = NULL;
 	u32 filesize = 0;
-	snprintf(filepath, sizeof(filepath), "%s/boot.dol", Settings.update_path);
+	snprintf(filepath, sizeof(filepath), "%sboot.dol", Settings.ConfigPath);
 	LoadFileToMem(filepath, &buffer, &filesize);
 	if(!buffer)
 	{
@@ -298,12 +298,6 @@ void ScreenShot()
 
 	// Create the full pathname.
 	snprintf(fullPath, sizeof(fullPath), "%s%s", Settings.ConfigPath, filename);
-
-	if(!CreateSubfolder(Settings.ConfigPath))
-	{
-		gprintf("Can't create screenshot folder\n");
-		return;
-	}
 
 	TakeScreenshot(fullPath);
 }

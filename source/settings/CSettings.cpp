@@ -44,7 +44,7 @@ CSettings::CSettings()
 {
 	CONF_Init();
 	strcpy(BootDevice, "sd:");
-	snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/", BootDevice);
+	snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/", BootDevice);
 	this->SetDefault();
 	FirstTimeRun = true;
 }
@@ -61,9 +61,8 @@ void CSettings::SetDefault()
 	snprintf(disc_path, sizeof(disc_path), "%simages/disc/", ConfigPath);
 	snprintf(titlestxt_path, sizeof(titlestxt_path), "%s", ConfigPath);
 	snprintf(languagefiles_path, sizeof(languagefiles_path), "%slanguage/", ConfigPath);
-	snprintf(update_path, sizeof(update_path), "%s/apps/usbloader_gx/", BootDevice);
-	snprintf(BNRCachePath, sizeof(BNRCachePath), "%s/apps/usbloader_gx/cache_bnr/", BootDevice);
-	snprintf(GameHeaderCachePath, sizeof(GameHeaderCachePath), "%s/apps/usbloader_gx/cache/", BootDevice);
+	snprintf(BNRCachePath, sizeof(BNRCachePath), "%scache_bnr/", ConfigPath);
+	snprintf(GameHeaderCachePath, sizeof(GameHeaderCachePath), "%scache/", ConfigPath);
 	snprintf(homebrewapps_path, sizeof(homebrewapps_path), "%s/apps/", BootDevice);
 	snprintf(Cheatcodespath, sizeof(Cheatcodespath), "%s/codes/", BootDevice);
 	snprintf(TxtCheatcodespath, sizeof(TxtCheatcodespath), "%s/txtcodes/", BootDevice);
@@ -317,8 +316,6 @@ bool CSettings::Save()
 	char filedest[300];
 	snprintf(filedest, sizeof(filedest), "%sGXGlobal.cfg", ConfigPath);
 
-	if(!CreateSubfolder(ConfigPath)) return false;
-
 	FILE * file = fopen(filedest, "w");
 	if (!file) return false;
 
@@ -367,7 +364,6 @@ bool CSettings::Save()
 	fprintf(file, "ogg_path = %s\n", ogg_path);
 	fprintf(file, "wiilight = %d\n", wiilight);
 	fprintf(file, "gameDisplay = %d\n", gameDisplay);
-	fprintf(file, "update_path = %s\n", update_path);
 	fprintf(file, "homebrewapps_path = %s\n", homebrewapps_path);
 	fprintf(file, "BNRCachePath = %s\n", BNRCachePath);
 	fprintf(file, "GameHeaderCachePath = %s\n", GameHeaderCachePath);
@@ -1271,11 +1267,6 @@ bool CSettings::SetSetting(char *name, char *value)
 		strlcpy(ogg_path, value, sizeof(ogg_path));
 		return true;
 	}
-	else if (strcmp(name, "update_path") == 0)
-	{
-		strlcpy(update_path, value, sizeof(update_path));
-		return true;
-	}
 	else if (strcmp(name, "homebrewapps_path") == 0)
 	{
 		strlcpy(homebrewapps_path, value, sizeof(homebrewapps_path));
@@ -1497,63 +1488,42 @@ bool CSettings::SetSetting(char *name, char *value)
 
 bool CSettings::FindConfig()
 {
-	bool found = false;
-	char CheckDevice[73];
 	char CheckPath[300];
+	std::string device(ConfigPath);
+	char *ptr = strchr(device.c_str(), ':');
+	if (ptr)
+	{
+		*ptr = 0;
+		snprintf(BootDevice, sizeof(BootDevice), "%s:", device.c_str());
+		snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
 
-	// Enumerate the devices supported by libogc.
-	for (int i = SD; (i < MAXDEVICES) && !found; ++i)
+		FILE *fp = fopen(CheckPath, "ab+");
+		if (fp)
+		{
+			fclose(fp);
+			return true;
+		}
+	}
+
+	// Enumerate the devices supported by libogc
+	char CheckDevice[73];
+	for (int i = SD; i < MAXDEVICES; ++i)
 	{
 		snprintf(CheckDevice, sizeof(CheckDevice), "%s:", DeviceName[i]);
+		// Check for the config file in the apps directory
+		strlcpy(BootDevice, CheckDevice, sizeof(BootDevice));
+		snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/", BootDevice);
+		snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
 
-		if(!found)
+		FILE *fp = fopen(CheckPath, "ab+");
+		if (fp)
 		{
-			// Check for the config file in the apps directory.
-			strlcpy(BootDevice, CheckDevice, sizeof(BootDevice));
-			snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/", BootDevice);
-			snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
-			found = CheckFile(CheckPath);
-		}
-		if(!found)
-		{
-			// Check for the config file in the config directory.
-			strlcpy(BootDevice, CheckDevice, sizeof(BootDevice));
-			snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/", BootDevice);
-			snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
-			found = CheckFile(CheckPath);
+			fclose(fp);
+			return true;
 		}
 	}
 
-	FILE * testFp = NULL;
-	//! No existing config so try to find a place where we can write it too
-	for (int i = SD; (i < MAXDEVICES) && !found; ++i)
-	{
-		sprintf(CheckDevice, "%s:", DeviceName[i]);
-
-		if (!found)
-		{
-			// Check if we can write to the apps directory.
-			strlcpy(BootDevice, CheckDevice, sizeof(BootDevice));
-			snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/", BootDevice);
-			snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
-			testFp = fopen(CheckPath, "wb");
-			found = (testFp != NULL);
-			if(testFp) fclose(testFp);
-		}
-		if (!found)
-		{
-			// Check if we can write to the config directory.
-			strlcpy(BootDevice, CheckDevice, sizeof(BootDevice));
-			snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/", BootDevice);
-			CreateSubfolder(ConfigPath);
-			snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
-			testFp = fopen(CheckPath, "wb");
-			found = (testFp != NULL);
-			if(testFp) fclose(testFp);
-		}
-	}
-
-	return found;
+	return false;
 }
 
 void CSettings::ParseLine(char *line)

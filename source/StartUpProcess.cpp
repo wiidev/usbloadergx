@@ -218,6 +218,21 @@ bool StartUpProcess::USBSpinUp()
 
 int StartUpProcess::Run(int argc, char *argv[])
 {
+	// A normal launch should always have the first arg be the path
+	char *ptr = strrchr(argv[0], '/');
+	if (ptr && (argv[0][2] == ':' || argv[0][3] == ':'))
+	{
+		*ptr = 0;
+		// HBC doesn't specify the USB port
+		if (strncmp(argv[0], "usb", 3) == 0)
+		{
+			snprintf(Settings.BootDevice, sizeof(Settings.BootDevice), "usb1");
+			snprintf(Settings.ConfigPath, sizeof(Settings.ConfigPath), "usb1:%s/", argv[0] + 4);
+		}
+		else if (strncmp(argv[0], "sd", 2) == 0)
+			snprintf(Settings.ConfigPath, sizeof(Settings.ConfigPath), "%s/", argv[0]);
+		gprintf("Loader path: %s\n", Settings.ConfigPath);
+	}
 	int quickGameBoot = ParseArguments(argc, argv);
 
 	StartUpProcess Process;

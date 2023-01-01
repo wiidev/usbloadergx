@@ -78,7 +78,6 @@ class CSettings
 		char BcaCodepath[100];
 		char WipCodepath[100];
 		char dolpath[100];
-		char update_path[100];
 		char homebrewapps_path[100];
 		char WDMpath[100];
 		char WiinnertagPath[100];
