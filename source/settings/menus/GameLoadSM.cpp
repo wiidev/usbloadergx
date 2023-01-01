@@ -72,6 +72,12 @@ static const char * DeflickerText[] =
 	trNOOP( "ON (High)" )
 };
 
+static const char * WidthText[] =
+{
+	trNOOP( "Auto" ),
+	trNOOP( "Framebuffer" )
+};
+
 static const char * AspectText[] =
 {
 	trNOOP( "Force 4:3" ),
@@ -206,6 +212,7 @@ void GameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Sneek Video Patch" ));
 	Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
 	Options->SetName(Idx++, "%s", tr( "Deflicker Filter" ));
+	Options->SetName(Idx++, "%s", tr( "Video Width" ));
 	Options->SetName(Idx++, "%s", tr( "Aspect Ratio" ));
 	Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
@@ -287,6 +294,12 @@ void GameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(DeflickerText[GameConfig.deflicker]));
+
+	//! Settings: Video Width
+	if(GameConfig.videoWidth == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(WidthText[GameConfig.videoWidth]));
 
 	//! Settings: Aspect Ratio
 	if(GameConfig.aspectratio == INHERIT)
@@ -481,6 +494,12 @@ int GameLoadSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.deflicker >= DEFLICKER_MAX) GameConfig.deflicker = INHERIT;
+	}
+
+	//! Settings: Video Width
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.videoWidth >= WIDTH_MAX) GameConfig.videoWidth = INHERIT;
 	}
 
 	//! Settings: Aspect Ratio

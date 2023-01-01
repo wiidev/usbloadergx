@@ -59,7 +59,7 @@ void ClearDOLList()
 }
 
 void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 languageChoice, u8 patchcountrystring,
-                 u8 vipatch, u8 deflicker, u8 sneekVideoPatch, u8 hooktype, u64 returnTo, u8 privateServer, const char *serverAddr)
+                 u8 vipatch, u8 deflicker, u8 sneekVideoPatch, u8 hooktype, u8 videoWidth, u64 returnTo, u8 privateServer, const char *serverAddr)
 {
     int i;
     u8 vfilter_off[7] = {0, 0, 21, 22, 21, 0, 0};
@@ -98,6 +98,9 @@ void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 language
         do_wip_code(dst, len);
 
         anti_002_fix(dst, len);
+
+        if (videoWidth == WIDTH_FRAMEBUFFER)
+            patch_width(dst, len);
 
         if (deflicker == DEFLICKER_ON_LOW)
         {
@@ -164,6 +167,54 @@ void anti_002_fix(u8 *addr, u32 len)
         {
             *((u32 *)addr_start + 1) = 0x40820214;
             return;
+        }
+        addr_start += 4;
+    }
+}
+
+void patch_width(u8 *addr, u32 len)
+{
+    u8 SearchPattern[32] = {
+        0x40, 0x82, 0x00, 0x08, 0x48, 0x00, 0x00, 0x1C,
+        0x28, 0x09, 0x00, 0x03, 0x40, 0x82, 0x00, 0x08,
+        0x48, 0x00, 0x00, 0x10, 0x2C, 0x03, 0x00, 0x00,
+        0x40, 0x82, 0x00, 0x08, 0x54, 0xA5, 0x0C, 0x3C};
+    u8 *addr_start = addr;
+    u8 *addr_end = addr + len - sizeof(SearchPattern);
+    while (addr_start <= addr_end)
+    {
+        if (memcmp(addr_start, SearchPattern, sizeof(SearchPattern)) == 0)
+        {
+            if (addr_start[-0x70] == 0xA0 && addr_start[-0x6E] == 0x00 && addr_start[-0x6D] == 0x0A)
+            {
+                if (addr_start[-0x44] == 0xA0 && addr_start[-0x42] == 0x00 && addr_start[-0x41] == 0x0E)
+                {
+                    u8 reg_a = (addr_start[-0x6F] >> 5);
+                    u8 reg_b = (addr_start[-0x43] >> 5);
+
+                    // Patch to the framebuffer resolution
+                    addr_start[-0x41] = 0x04;
+
+                    // Center the image
+                    void *offset = addr_start - 0x70;
+
+                    u32 old_heap_ptr = *(u32 *)0x80003110;
+                    *(u32 *)0x80003110 = old_heap_ptr - 0x20;
+                    u32 heap_space = old_heap_ptr - 0x20;
+
+                    u32 org_address = (addr_start[-0x70] << 24) | (addr_start[-0x6F] << 16);
+                    *(u32 *)(heap_space + 0x00) = org_address | 4;
+                    *(u32 *)(heap_space + 0x04) = 0x200002D0 | (reg_b << 21) | (reg_a << 16);
+                    *(u32 *)(heap_space + 0x08) = 0x38000002 | (reg_a << 21);
+                    *(u32 *)(heap_space + 0x0C) = 0x7C000396 | (reg_a << 21) | (reg_b << 16) | (reg_a << 11);
+
+                    *(u32 *)offset = 0x48000000 + ((heap_space - (u32)offset) & 0x3ffffff);
+                    *(u32 *)(heap_space + 0x10) = 0x48000000 + ((((u32)offset + 0x04) - (heap_space + 0x10)) & 0x3ffffff);
+
+                    gprintf("Patched resolution. Branched from 0x%x to 0x%x\n", offset, heap_space);
+                    return;
+                }
+            }
         }
         addr_start += 4;
     }

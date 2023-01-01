@@ -188,6 +188,7 @@ bool CGameSettings::Save()
 		fprintf(f, "videoPatchDol:%d; ", GameList[i].videoPatchDol);
 		fprintf(f, "patchFix480p:%d; ", GameList[i].patchFix480p);
 		fprintf(f, "deflicker:%d; ", GameList[i].deflicker);
+		fprintf(f, "videowidth:%d; ", GameList[i].videoWidth);
 		fprintf(f, "aspectratio:%d; ", GameList[i].aspectratio);
 		fprintf(f, "language:%d; ", GameList[i].language);
 		fprintf(f, "ocarina:%d; ", GameList[i].ocarina);
@@ -274,6 +275,11 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 	else if (strcmp(name, "deflicker") == 0)
 	{
 		game.deflicker = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "videowidth") == 0)
+	{
+		game.videoWidth = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "aspectratio") == 0)
@@ -677,6 +683,7 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.videoPatchDol = INHERIT;
 	game.patchFix480p = INHERIT;
 	game.deflicker = INHERIT;
+	game.videoWidth = INHERIT;
 	game.aspectratio = INHERIT;
 	game.language = INHERIT;
 	game.ocarina = INHERIT;

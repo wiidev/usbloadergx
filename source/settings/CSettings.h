@@ -120,6 +120,7 @@ class CSettings
 		short gamesoundvolume;
 		short tooltips;
 		short parentalcontrol;
+		short videoWidth;
 		u8 BootIOS;
 		u8 LoaderIOS;
 		u8 cios;

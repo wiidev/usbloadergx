@@ -312,6 +312,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	u8 reloadblock = game_cfg->iosreloadblock == INHERIT ? Settings.BlockIOSReload : game_cfg->iosreloadblock;
 	u8 Hooktype = game_cfg->Hooktype == INHERIT ? Settings.Hooktype : game_cfg->Hooktype;
 	u8 WiirdDebugger = game_cfg->WiirdDebugger == INHERIT ? Settings.WiirdDebugger : game_cfg->WiirdDebugger;
+	u16 videoWidth = game_cfg->videoWidth == INHERIT ? Settings.videoWidth : game_cfg->videoWidth;
 	u64 returnToChoice = strlen(Settings.returnTo) > 0 ? (game_cfg->returnTo ? NandTitles.FindU32(Settings.returnTo) : 0) : 0;
 	u8 NandEmuMode = OFF;
 	const char *NandEmuPath = game_cfg->NandEmuPath.size() == 0 ? Settings.NandEmuPath : game_cfg->NandEmuPath.c_str();
@@ -485,13 +486,13 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	{
 		//! Either the server is not Wiimmfi, or, if it is Wiimmfi, the game isn't MKWii - patch the old way
 		gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice,
-					deflicker, sneekChoice, Hooktype, returnToChoice, PrivServChoice, customAddress);
+					deflicker, sneekChoice, Hooktype, videoWidth, returnToChoice, PrivServChoice, customAddress);
 	}
 	else
 	{
 		//! Wiimmfi patch for Mario Kart Wii - patch with PRIVSERV_OFF and handle all the patching within do_new_wiimmfi()
 		gamepatches(videoChoice, videoPatchDolChoice, aspectChoice, languageChoice, countrystrings, viChoice,
-					deflicker, sneekChoice, Hooktype, returnToChoice, PRIVSERV_OFF, customAddress);
+					deflicker, sneekChoice, Hooktype, videoWidth, returnToChoice, PRIVSERV_OFF, customAddress);
 	}
 
 	//! Load Code handler if needed

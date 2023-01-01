@@ -1062,6 +1062,9 @@ msgstr "Οριζόντιο πλάτος προβολής καρέ"
 msgid "Frame Projection Y-Offset"
 msgstr "Κάθετο ύψος προβολής καρέ"
 
+msgid "Framebuffer"
+msgstr ""
+
 msgid "Frames"
 msgstr "Καρέ"
 
@@ -2384,6 +2387,9 @@ msgid "Video offset"
 msgstr ""
 
 msgid "Video scale"
+msgstr ""
+
+msgid "Video Width"
 msgstr ""
 
 msgid "Virtual Pointer Speed"

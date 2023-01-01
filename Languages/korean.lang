@@ -1062,6 +1062,9 @@ msgstr "프레임 영상 X-옵셋"
 msgid "Frame Projection Y-Offset"
 msgstr "프레임 영상 Y-옵셋"
 
+msgid "Framebuffer"
+msgstr "프레임 버퍼"
+
 msgid "Frames"
 msgstr "프레임"
 
@@ -2388,6 +2391,9 @@ msgstr "비디오 옵셋"
 
 msgid "Video scale"
 msgstr "비디오 스케일"
+
+msgid "Video Width"
+msgstr "비디오 폭"
 
 msgid "Virtual Pointer Speed"
 msgstr "가상 포인터 속도"

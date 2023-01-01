@@ -1062,6 +1062,9 @@ msgstr "Rand projectie X-compensatie"
 msgid "Frame Projection Y-Offset"
 msgstr "Rand projectie Y-compensatie"
 
+msgid "Framebuffer"
+msgstr ""
+
 msgid "Frames"
 msgstr "Randen"
 
@@ -2384,6 +2387,9 @@ msgid "Video offset"
 msgstr ""
 
 msgid "Video scale"
+msgstr ""
+
+msgid "Video Width"
 msgstr ""
 
 msgid "Virtual Pointer Speed"

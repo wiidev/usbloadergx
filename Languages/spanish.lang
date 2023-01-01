@@ -1062,6 +1062,9 @@ msgstr "Proyección del marco X-Offset"
 msgid "Frame Projection Y-Offset"
 msgstr "Proyección del marco Y-Offset"
 
+msgid "Framebuffer"
+msgstr ""
+
 msgid "Frames"
 msgstr "Marcos"
 
@@ -2385,6 +2388,9 @@ msgstr "Offset de vídeo"
 
 msgid "Video scale"
 msgstr "Escala de vídeo"
+
+msgid "Video Width"
+msgstr ""
 
 msgid "Virtual Pointer Speed"
 msgstr "Vel. Puntero Virtual"

@@ -1062,6 +1062,9 @@ msgstr "Deslocamento X da Moldura"
 msgid "Frame Projection Y-Offset"
 msgstr "Deslocamento Y da Moldura"
 
+msgid "Framebuffer"
+msgstr ""
+
 msgid "Frames"
 msgstr ""
 
@@ -2385,6 +2388,9 @@ msgstr ""
 
 msgid "Video scale"
 msgstr "Escala Video"
+
+msgid "Video Width"
+msgstr ""
 
 msgid "Virtual Pointer Speed"
 msgstr "Velocidade do Ponteiro"

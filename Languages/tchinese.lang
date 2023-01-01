@@ -1062,6 +1062,9 @@ msgstr "畫框投射X軸位移"
 msgid "Frame Projection Y-Offset"
 msgstr "畫框投射Y軸位移"
 
+msgid "Framebuffer"
+msgstr ""
+
 msgid "Frames"
 msgstr "畫框數"
 
@@ -2384,6 +2387,9 @@ msgid "Video offset"
 msgstr ""
 
 msgid "Video scale"
+msgstr ""
+
+msgid "Video Width"
 msgstr ""
 
 msgid "Virtual Pointer Speed"

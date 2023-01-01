@@ -25,6 +25,7 @@ typedef struct _GameCFG
 	u32 alternatedolstart;
 	short patchcountrystrings;
 	std::string alternatedolname;
+	short videoWidth;
 	short returnTo;
 	short sneekVideoPatch;
 	short NandEmuMode;
@@ -92,6 +93,7 @@ typedef struct _GameCFG
 		this->alternatedolstart = game.alternatedolstart;
 		this->patchcountrystrings = game.patchcountrystrings;
 		this->alternatedolname = game.alternatedolname;
+		this->videoWidth = game.videoWidth;
 		this->returnTo = game.returnTo;
 		this->sneekVideoPatch = game.sneekVideoPatch;
 		this->NandEmuMode = game.NandEmuMode;

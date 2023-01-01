@@ -1062,6 +1062,9 @@ msgstr "フレーム角のXオフセット"
 msgid "Frame Projection Y-Offset"
 msgstr "フレーム角のyオフセット"
 
+msgid "Framebuffer"
+msgstr ""
+
 msgid "Frames"
 msgstr "フレーム"
 
@@ -2387,6 +2390,9 @@ msgid "Video offset"
 msgstr ""
 
 msgid "Video scale"
+msgstr ""
+
+msgid "Video Width"
 msgstr ""
 
 msgid "Virtual Pointer Speed"

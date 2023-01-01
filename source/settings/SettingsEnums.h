@@ -125,6 +125,13 @@ enum
 
 enum
 {
+	WIDTH_AUTO,
+	WIDTH_FRAMEBUFFER,
+	WIDTH_MAX
+};
+
+enum
+{
 	CLOCK_HR12 = 1, // use OFF for clock off
 	CLOCK_HR24,
 	CLOCK_MAX

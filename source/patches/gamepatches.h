@@ -10,11 +10,12 @@ extern "C" {
 void RegisterDOL(u8 *dst, int len);
 void ClearDOLList();
 void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 languageChoice, u8 patchcountrystring,
-                 u8 vipatch, u8 deflicker, u8 sneekVideoPatch, u8 hooktype, u64 returnTo, u8 privateServer, const char *serverAddr);
+                 u8 vipatch, u8 deflicker, u8 sneekVideoPatch, u8 hooktype, u8 videoWidth, u64 returnTo, u8 privateServer, const char *serverAddr);
 void anti_002_fix(u8 *addr, u32 len);
 void deflicker_patch(u8 *addr, u32 len);
 void patch_vfilters(u8 *addr, u32 len, u8 *vfilter);
 void patch_vfilters_rogue(u8 *addr, u32 len, u8 *vfilter);
+void patch_width(u8 *addr, u32 len);
 void PrivateServerPatcher(void *addr, u32 len, u8 privateServer, const char *serverAddr);
 void PatchFix480p();
 s8 do_new_wiimmfi();

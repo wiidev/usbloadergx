@@ -61,7 +61,7 @@ static const char * VideoModeText[] =
 	trNOOP( "Force NTSC" ),
 	trNOOP( "Region Patch" ),
 	trNOOP( "Force PAL480p" ),
-	trNOOP( "Force NTSC480p" ),
+	trNOOP( "Force NTSC480p" )
 };
 
 static const char * VideoPatchDolText[] =
@@ -69,7 +69,7 @@ static const char * VideoPatchDolText[] =
 	trNOOP( "OFF" ),
 	trNOOP( "Region Patch" ),
 	trNOOP( "ON" ),
-	trNOOP( "All" ),
+	trNOOP( "All" )
 };
 
 static const char * DeflickerText[] =
@@ -80,6 +80,12 @@ static const char * DeflickerText[] =
 	trNOOP( "ON (Low)" ),
 	trNOOP( "ON (Medium)" ),
 	trNOOP( "ON (High)" )
+};
+
+static const char * WidthText[] =
+{
+	trNOOP( "Auto" ),
+	trNOOP( "Framebuffer" )
 };
 
 static const char * LanguageText[] =
@@ -114,20 +120,20 @@ static const char * HooktypeText[] =
 	trNOOP( "GXDraw" ),
 	trNOOP( "GXFlush" ),
 	trNOOP( "OSSleepThread" ),
-	trNOOP( "AXNextFrame" ),
+	trNOOP( "AXNextFrame" )
 };
 
 static const char * ChannelLaunchText[] =
 {
 	trNOOP( "Main DOL" ),
-	trNOOP( "Boot Content" ),
+	trNOOP( "Boot Content" )
 };
 
 static const char * GCMode[] =
 {
 	trNOOP( "MIOS (Default & Customs)" ),
 	trNOOP( "Devolution" ),
-	trNOOP( "Nintendont" ),
+	trNOOP( "Nintendont" )
 };
 
 static const char * GCSourceText[][3] =
@@ -136,7 +142,7 @@ static const char * GCSourceText[][3] =
 	{ trNOOP( "SD Path" ), "", "" },
 	{ trNOOP( "Auto" ), "", "" },
 	{ trNOOP( "Main Path" ), "/", trNOOP( "SD Path" ) },
-	{ trNOOP( "SD Path" ), "/", trNOOP( "Main Path" ) },
+	{ trNOOP( "SD Path" ), "/", trNOOP( "Main Path" ) }
 };
 
 static const char * DMLVideoText[] =
@@ -150,21 +156,21 @@ static const char * DMLVideoText[] =
 	"", // unused
 	trNOOP( "Force PAL480p" ),
 	trNOOP( "Force NTSC480p" ),
-	trNOOP( "None" ),
+	trNOOP( "None" )
 };
 
 static const char * DMLNMMMode[] =
 {
 	trNOOP( "OFF" ),
 	trNOOP( "ON" ),
-	trNOOP( "Debug" ),
+	trNOOP( "Debug" )
 };
 
 static const char * DMLDebug[] =
 {
 	trNOOP( "OFF" ),
 	trNOOP( "ON" ),
-	trNOOP( "Debug Wait" ),
+	trNOOP( "Debug Wait" )
 };
 
 static const char * DEVOMCText[] =
@@ -172,21 +178,21 @@ static const char * DEVOMCText[] =
 	trNOOP( "OFF" ),
 	trNOOP( "ON" ),
 	trNOOP( "Individual" ),
-	trNOOP( "Regional" ),
+	trNOOP( "Regional" )
 };
 
 static const char * NINMCText[] =
 {
 	trNOOP( "OFF" ),
 	trNOOP( "Individual" ),
-	trNOOP( "ON (Multi)" ),
+	trNOOP( "ON (Multi)" )
 };
 
 static const char * NINCfgText[] =
 {
 	trNOOP( "Delete" ),
 	trNOOP( "Create" ),
-	trNOOP( "No change" ),
+	trNOOP( "No change" )
 };
 
 static const char * PrivServText[] =
@@ -195,7 +201,7 @@ static const char * PrivServText[] =
 	trNOOP( "NoSSL only" ),
 	trNOOP( "Wiimmfi" ),
 	trNOOP( "AltWFC" ),
-	trNOOP( "Custom" ),
+	trNOOP( "Custom" )
 };
 
 static const char blocked[22] =
@@ -244,6 +250,7 @@ void LoaderSettings::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Sneek Video Patch" ));
 	Options->SetName(Idx++, "%s", tr( "VIDTV Patch" ));
 	Options->SetName(Idx++, "%s", tr( "Deflicker Filter" ));
+	Options->SetName(Idx++, "%s", tr( "Video Width" ));
 	Options->SetName(Idx++, "%s", tr( "Aspect Ratio" ));
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
 	Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
@@ -339,6 +346,9 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: Deflicker Filter
 	Options->SetValue(Idx++, "%s", tr( DeflickerText[Settings.deflicker] ));
+
+	//! Settings: Video Width
+	Options->SetValue(Idx++, "%s", tr( WidthText[Settings.videoWidth] ));
 
 	//! Settings: Aspect Ratio
 	Options->SetValue(Idx++, "%s", tr( AspectText[Settings.GameAspectRatio] ));
@@ -599,6 +609,12 @@ int LoaderSettings::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.deflicker >= DEFLICKER_MAX) Settings.deflicker = 0;
+	}
+
+	//! Settings: Video Width
+	else if (ret == ++Idx)
+	{
+		if (++Settings.videoWidth >= WIDTH_MAX) Settings.videoWidth = 0;
 	}
 
 	//! Settings: Aspect Ratio
