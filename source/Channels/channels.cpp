@@ -96,11 +96,11 @@ void Channels::InternalGetNandChannelList(u32 type)
         if (!tid)
             break;
 
-        //these can't be booted anyways
+        // These can't be booted anyways
         if (TITLE_LOWER(tid) == 0x48414741 || TITLE_LOWER(tid) == 0x48414141 || TITLE_LOWER(tid) == 0x48414641)
             continue;
 
-        //these aren't installed on the nand
+        // These aren't installed on the nand
         if (!NandTitles.Exists(tid))
             continue;
 
@@ -159,8 +159,10 @@ std::vector<struct discHdr> &Channels::GetEmuHeaders(void)
     return EmuChannels;
 }
 
-u8 *Channels::GetDol(const u64 &title, u8 *tmdBuffer)
+u8 *Channels::GetDol(const u64 &title, u8 *tmdBuffer, bool &isForwarder)
 {
+    static const u8 dolsign[6] = {0x00, 0x00, 0x01, 0x00, 0x00, 0x00};
+    static u8 dolhead[32] ATTRIBUTE_ALIGN(32);
     u8 *buffer = NULL;
     u32 filesize = 0;
     u32 bootcontent = 0xDEADBEAF;
@@ -175,13 +177,43 @@ u8 *Channels::GetDol(const u64 &title, u8 *tmdBuffer)
 
     if (!Settings.UseChanLauncher)
     {
+        // Channels and VC
         for (u32 i = 0; i < tmd_file->num_contents; ++i)
         {
-            // It won't match a dol signature
-            if (tmd_file->contents[i].index == 1)
+            if (tmd_file->contents[i].index == tmd_file->boot_index)
+                continue; // Skip loader
+
+            snprintf(filepath, ISFS_MAXPATH, "/title/%08x/%08x/content/%08x.app", (unsigned int)high, (unsigned int)low, (unsigned int)tmd_file->contents[i].cid);
+
+            s32 fd = ISFS_Open(filepath, ISFS_OPEN_READ);
+            if (fd < 0)
+                continue;
+
+            s32 ret = ISFS_Read(fd, dolhead, 32);
+            ISFS_Close(fd);
+
+            if (ret != 32)
+                continue;
+
+            if (memcmp(dolhead, dolsign, sizeof(dolsign)) == 0)
             {
+                // Normal channels and VC use 1
+                if (tmd_file->contents[i].index != 1)
+                    isForwarder = true;
                 bootcontent = tmd_file->contents[i].cid;
                 break;
+            }
+        }
+        // WiiWare not matching a dol signature
+        if (bootcontent == 0xDEADBEAF)
+        {
+            for (u32 i = 0; i < tmd_file->num_contents; ++i)
+            {
+                if (tmd_file->contents[i].index == 1)
+                {
+                    bootcontent = tmd_file->contents[i].cid;
+                    break;
+                }
             }
         }
     }
@@ -300,7 +332,8 @@ u32 Channels::LoadChannel(const u64 &chantitle)
         return 0;
     }
 
-    u8 *chanDOL = GetDol(chantitle, tmdBuffer);
+    bool isForwarder = false;
+    u8 *chanDOL = GetDol(chantitle, tmdBuffer, isForwarder);
     if (!chanDOL)
     {
         ISFS_Deinitialize();
@@ -372,7 +405,8 @@ u32 Channels::LoadChannel(const u64 &chantitle)
 
     // IOS Version Check
     *(vu32 *)0x80003140 = ((ios << 16)) | 0xFFFF;
-    *(vu32 *)0x80003188 = ((ios << 16)) | 0xFFFF;
+    if (!isForwarder)
+        *(vu32 *)0x80003188 = ((ios << 16)) | 0xFFFF;
 
     ISFS_Deinitialize();
 
