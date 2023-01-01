@@ -954,9 +954,9 @@ int GameBrowseMenu::MainLoop()
 		if (choice == 1)
 		{
 			this->SetState(STATE_DISABLED);
-			if(!(Settings.LoaderMode & MODE_WIIGAMES) && (gameList.GameCount() == 0))
+			if (!(Settings.LoaderMode & MODE_WIIGAMES) && (gameList.GameCount() == 0))
 			{
-				if(WBFS_ReInit(WBFS_DEVICE_USB) < 0)
+				if (WBFS_ReInit(WBFS_DEVICE_USB) < 0)
 					ShowError(tr("Failed to initialize the USB storage device."));
 				else
 				{
@@ -967,11 +967,17 @@ int GameBrowseMenu::MainLoop()
 						ThreadedTask::Instance()->AddCallback(&HDDSizeCallback);
 						ThreadedTask::Instance()->Execute();
 					}
-					return MenuInstall();
+					int res = MenuInstall();
+					WDVD_StopMotor();
+					return res;
 				}
 			}
 			else
-				return MenuInstall();
+			{
+				int res = MenuInstall();
+				WDVD_StopMotor();
+				return res;
+			}
 
 			this->SetState(STATE_DEFAULT);
 		}
@@ -1623,6 +1629,7 @@ int GameBrowseMenu::OpenClickedGame(struct discHdr *header)
 
 	wiilight(0);
 	rockout(0);
+	WDVD_StopMotor();
 
 	SetState(STATE_DEFAULT);
 	SetAllowDim(true);
