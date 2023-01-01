@@ -558,7 +558,7 @@ bool Channels::ParseTitleDir(char *path, int language)
         if (!dirent->d_name)
             continue;
 
-        //these can't be booted anyways
+        // These can't be booted anyways
         if (*dirent->d_name == '.' || strcmp(dirent->d_name, "48414141") == 0 || strcmp(dirent->d_name, "48414641") == 0)
         {
             continue;
@@ -569,9 +569,12 @@ bool Channels::ParseTitleDir(char *path, int language)
         if (stat(path, &st) != 0)
             continue;
 
-        // check if content in tmd exists
+        // Check if content in tmd exists
         if (!emuExists(path))
             continue;
+
+        // Reset tmd location on path
+        snprintf(pathEndPtr, 1024 - (pathEndPtr - path), "/%s/content/title.tmd", dirent->d_name);
 
         u32 tidLow = strtoul(dirent->d_name, NULL, 16);
         char id[5];
@@ -585,20 +588,10 @@ bool Channels::ParseTitleDir(char *path, int language)
             strcpy(id, "JODI");
 
         std::string TitleName;
-
-        const char *title = GameTitles.GetTitle(id);
-        if (title && *title != '\0')
-        {
-            TitleName = title;
-        }
-        else if (GetEmuChanTitle(path, language, TitleName))
-        {
-            GameTitles.SetGameTitle(id, TitleName.c_str());
-        }
-        else
-        {
+        if(!GetEmuChanTitle(path, language, TitleName))
             TitleName = id;
-        }
+
+		TitleName.erase(0, TitleName.find_first_not_of(' '));
 
         int s = EmuChannels.size();
         EmuChannels.resize(s + 1);
@@ -764,7 +757,7 @@ u8 *Channels::GetOpeningBnr(const u64 &title, u32 *outsize, const char *pathPref
             break;
 
         IMET *imet = (IMET *)(buffer + IMET_OFFSET);
-        if (imet->sig != 'IMET')
+        if (imet->sig != IMET_SIGNATURE)
         {
             free(buffer);
             break;
