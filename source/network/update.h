@@ -29,7 +29,6 @@
 #ifndef _UPDATEOPS_H_
 #define _UPDATEOPS_H_
 
-int CheckUpdate();
 int UpdateGameTDB();
 int UpdateApp();
 int DownloadFileToPath(const char *url, const char *dest);

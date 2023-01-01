@@ -385,7 +385,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "Peruuta"
 
-msgid "Cannot write to destination."
+msgid "Can't write to destination."
 msgstr ""
 
 msgid "Categories"
@@ -1238,9 +1238,6 @@ msgstr ""
 
 msgid "Hour"
 msgstr "Tunti"
-
-msgid "How do you want to update?"
-msgstr "Kuinka haluat päivittää?"
 
 msgid "How to Shutdown?"
 msgstr "Miten sammutetaan?"
@@ -2337,12 +2334,6 @@ msgstr ""
 msgid "Update"
 msgstr "Päivitä"
 
-msgid "Update All"
-msgstr "Päivitä kaikki"
-
-msgid "Update DOL"
-msgstr "Päivitä DOL"
-
 msgid "Update Files"
 msgstr "Päivitä tiedostot"
 
@@ -2524,9 +2515,6 @@ msgstr ""
 
 msgid "and translators for language files updates"
 msgstr ""
-
-msgid "available"
-msgstr "Saatavilla"
 
 msgid "does not exist!"
 msgstr "Ei löydy!"

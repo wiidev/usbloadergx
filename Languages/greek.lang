@@ -385,7 +385,7 @@ msgstr "Αδυναμία ανάγνωσης αρχείου: %s"
 msgid "Cancel"
 msgstr "ʼκυρο"
 
-msgid "Cannot write to destination."
+msgid "Can't write to destination."
 msgstr "Αδυναμία εγγραφής στον προορισμό."
 
 msgid "Categories"
@@ -1238,9 +1238,6 @@ msgstr "τύπος hook"
 
 msgid "Hour"
 msgstr "Ώρα"
-
-msgid "How do you want to update?"
-msgstr "Πώς θα θέλατε να αναβαθμίσετε?"
 
 msgid "How to Shutdown?"
 msgstr "Πως να τερματιστει η εφαρμογή?"
@@ -2337,12 +2334,6 @@ msgstr "Μη συμβατός τύπος αρχείου, δοκιμάστε να
 msgid "Update"
 msgstr "Aναβάθμιση"
 
-msgid "Update All"
-msgstr "Αναβάθμιση όλων"
-
-msgid "Update DOL"
-msgstr "Αναβάθμιση DOL"
-
 msgid "Update Files"
 msgstr "Αναβάθμιση αρχείων"
 
@@ -2524,9 +2515,6 @@ msgstr "διάρκεια εστίασης (Ταχύτητα)"
 
 msgid "and translators for language files updates"
 msgstr "και τους μεταφραστές για τις αναβαθμίσεις στις διαθέσιμες γλώσσες του προγράμματος"
-
-msgid "available"
-msgstr "διαθέσιμο"
 
 msgid "does not exist!"
 msgstr "δεν υπάρχει!"

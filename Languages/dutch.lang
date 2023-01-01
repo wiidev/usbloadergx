@@ -385,7 +385,7 @@ msgstr "Kan bestand niet lezen: %s"
 msgid "Cancel"
 msgstr "Annuleren"
 
-msgid "Cannot write to destination."
+msgid "Can't write to destination."
 msgstr "Kan niet naar bestemming schrijven."
 
 msgid "Categories"
@@ -1238,9 +1238,6 @@ msgstr ""
 
 msgid "Hour"
 msgstr "Uur"
-
-msgid "How do you want to update?"
-msgstr "Hoe wil je updaten?"
 
 msgid "How to Shutdown?"
 msgstr "Hoe uitzetten?"
@@ -2337,12 +2334,6 @@ msgstr "Niet ondersteund formaat, probeer TempTheme.zip handmatig uit te pakken.
 msgid "Update"
 msgstr "Updaten"
 
-msgid "Update All"
-msgstr "Alles updaten"
-
-msgid "Update DOL"
-msgstr "DOL updaten"
-
 msgid "Update Files"
 msgstr "Bestanden Updaten"
 
@@ -2524,9 +2515,6 @@ msgstr "Zoom tijd (snelheid)"
 
 msgid "and translators for language files updates"
 msgstr "en vertalers voor taalbestand updates"
-
-msgid "available"
-msgstr "beschikbaar"
 
 msgid "does not exist!"
 msgstr "bestaat niet!"

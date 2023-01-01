@@ -385,7 +385,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "Anuluj"
 
-msgid "Cannot write to destination."
+msgid "Can't write to destination."
 msgstr ""
 
 msgid "Categories"
@@ -1238,9 +1238,6 @@ msgstr ""
 
 msgid "Hour"
 msgstr "Godzina"
-
-msgid "How do you want to update?"
-msgstr "Wybierz rodzaj aktualizacji"
 
 msgid "How to Shutdown?"
 msgstr "Wybierz rodzaj zamkniecia"
@@ -2337,12 +2334,6 @@ msgstr ""
 msgid "Update"
 msgstr "Aktualizacja"
 
-msgid "Update All"
-msgstr "Zaktualizuj wszystko"
-
-msgid "Update DOL"
-msgstr "Zaktualizuj Dol"
-
 msgid "Update Files"
 msgstr "Zaktualizuj pliki"
 
@@ -2524,9 +2515,6 @@ msgstr ""
 
 msgid "and translators for language files updates"
 msgstr ""
-
-msgid "available"
-msgstr "dostepne"
 
 msgid "does not exist!"
 msgstr "nie istnieje!"

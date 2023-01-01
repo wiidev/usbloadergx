@@ -385,7 +385,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "Cancelar"
 
-msgid "Cannot write to destination."
+msgid "Can't write to destination."
 msgstr "Não foi possível escrever no destino."
 
 msgid "Categories"
@@ -1238,9 +1238,6 @@ msgstr "Tipo Hook"
 
 msgid "Hour"
 msgstr "Horas"
-
-msgid "How do you want to update?"
-msgstr "O que deseja actualizar?"
 
 msgid "How to Shutdown?"
 msgstr "Como desligar a consola?"
@@ -2337,12 +2334,6 @@ msgstr "Formato não suportado, tente extrair manualmente TempTheme.zip."
 msgid "Update"
 msgstr "Actualizações"
 
-msgid "Update All"
-msgstr "Actualizar Tudo"
-
-msgid "Update DOL"
-msgstr "Actualizar DOL"
-
 msgid "Update Files"
 msgstr "Actualizar ficheiros"
 
@@ -2524,9 +2515,6 @@ msgstr ""
 
 msgid "and translators for language files updates"
 msgstr "e tradutores para as actualizações de idioma"
-
-msgid "available"
-msgstr "disponível"
 
 msgid "does not exist!"
 msgstr "não existe!"

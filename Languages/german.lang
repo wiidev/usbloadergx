@@ -385,7 +385,7 @@ msgstr "Datei kann nicht gelesen werden: %s"
 msgid "Cancel"
 msgstr "Abbrechen"
 
-msgid "Cannot write to destination."
+msgid "Can't write to destination."
 msgstr "Ziel kann nicht beschrieben werden."
 
 msgid "Categories"
@@ -1238,9 +1238,6 @@ msgstr "Hooktype"
 
 msgid "Hour"
 msgstr "Stunden"
-
-msgid "How do you want to update?"
-msgstr "Was soll aktualisiert werden?"
 
 msgid "How to Shutdown?"
 msgstr "Wie soll ausgeschaltet werden?"
@@ -2337,12 +2334,6 @@ msgstr "Nichtunterstütztes Format, versuche die TempTheme.zip manuell zu entpac
 msgid "Update"
 msgstr "Update"
 
-msgid "Update All"
-msgstr "Alles Updaten"
-
-msgid "Update DOL"
-msgstr "Nur DOL"
-
 msgid "Update Files"
 msgstr "Aktualisieren"
 
@@ -2524,9 +2515,6 @@ msgstr "Zoom Dauer"
 
 msgid "and translators for language files updates"
 msgstr "und Übersetzer für Sprachdateien Updates"
-
-msgid "available"
-msgstr "verfügbar"
 
 msgid "does not exist!"
 msgstr "existiert nicht!"

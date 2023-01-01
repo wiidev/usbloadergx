@@ -385,7 +385,7 @@ msgstr "无法读取文件：%s"
 msgid "Cancel"
 msgstr "取消"
 
-msgid "Cannot write to destination."
+msgid "Can't write to destination."
 msgstr "无法写入目标。"
 
 msgid "Categories"
@@ -1238,9 +1238,6 @@ msgstr "挂载类型"
 
 msgid "Hour"
 msgstr "小时"
-
-msgid "How do you want to update?"
-msgstr "你要升级哪些文件？"
 
 msgid "How to Shutdown?"
 msgstr "如何关机？"
@@ -2337,12 +2334,6 @@ msgstr "不支持的格式，请手动解压缩 TempTheme.zip 。"
 msgid "Update"
 msgstr "升级"
 
-msgid "Update All"
-msgstr "全部升级"
-
-msgid "Update DOL"
-msgstr "仅升级主程序"
-
 msgid "Update Files"
 msgstr "升级文件"
 
@@ -2524,9 +2515,6 @@ msgstr "缩放间隔 (速度)"
 
 msgid "and translators for language files updates"
 msgstr "以及翻译人员的语言文件更新"
-
-msgid "available"
-msgstr "允许"
 
 msgid "does not exist!"
 msgstr "不存在！"

@@ -385,7 +385,7 @@ msgstr "Não foi possível ler o arquivo: %s"
 msgid "Cancel"
 msgstr "Cancelar"
 
-msgid "Cannot write to destination."
+msgid "Can't write to destination."
 msgstr "Não foi possível escrever no destino"
 
 msgid "Categories"
@@ -1238,9 +1238,6 @@ msgstr ""
 
 msgid "Hour"
 msgstr "Horas"
-
-msgid "How do you want to update?"
-msgstr "O que deseja atualizar?"
 
 msgid "How to Shutdown?"
 msgstr "Como desligar o console?"
@@ -2337,12 +2334,6 @@ msgstr "Formato não suportado, tente extrair manualmente TempTheme.zip"
 msgid "Update"
 msgstr "Atualizações"
 
-msgid "Update All"
-msgstr "Atualizar Tudo"
-
-msgid "Update DOL"
-msgstr "Atualizar DOL"
-
 msgid "Update Files"
 msgstr "Atualizar arquivos"
 
@@ -2524,9 +2515,6 @@ msgstr "Velocidade do Zoom"
 
 msgid "and translators for language files updates"
 msgstr "e tradutores para as atualizações de idioma"
-
-msgid "available"
-msgstr "disponível"
 
 msgid "does not exist!"
 msgstr "não existe!"

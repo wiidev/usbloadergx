@@ -385,7 +385,7 @@ msgstr "파일을 읽을 수 없음: %s"
 msgid "Cancel"
 msgstr "취소"
 
-msgid "Cannot write to destination."
+msgid "Can't write to destination."
 msgstr "대상에 쓸 수 없습니다."
 
 msgid "Categories"
@@ -1238,9 +1238,6 @@ msgstr "후크타입"
 
 msgid "Hour"
 msgstr "시간"
-
-msgid "How do you want to update?"
-msgstr "어떻게 업데이트 하겠습니까?"
 
 msgid "How to Shutdown?"
 msgstr "어떻게 종료 하겠습니까?"
@@ -2340,12 +2337,6 @@ msgstr "지원되지 않는 형식인 경우 수동으로 TempTheme.zip를 추�
 msgid "Update"
 msgstr "업데이트"
 
-msgid "Update All"
-msgstr "모두 업데이트"
-
-msgid "Update DOL"
-msgstr "DOL 업데이트"
-
 msgid "Update Files"
 msgstr "파일 업데이트"
 
@@ -2527,9 +2518,6 @@ msgstr "확대/축소 지속시간 (속도)"
 
 msgid "and translators for language files updates"
 msgstr "그리고 언어 파일 업데이트를 위한 번역가"
-
-msgid "available"
-msgstr "가능한"
 
 msgid "does not exist!"
 msgstr "존재하지 않습니다!"

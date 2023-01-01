@@ -385,7 +385,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "Zrušit"
 
-msgid "Cannot write to destination."
+msgid "Can't write to destination."
 msgstr "Nelze zapisovat na vybrané umístení."
 
 msgid "Categories"
@@ -1238,9 +1238,6 @@ msgstr ""
 
 msgid "Hour"
 msgstr "Hodina"
-
-msgid "How do you want to update?"
-msgstr "Jak si prejete provést aktualizaci?"
 
 msgid "How to Shutdown?"
 msgstr "Jakým zpusobem ukoncit?"
@@ -2337,12 +2334,6 @@ msgstr "Nepodporovaný formát, poskuste se rucne rozbalit TempTheme.zip."
 msgid "Update"
 msgstr "Aktualizace"
 
-msgid "Update All"
-msgstr "Plná aktualizace"
-
-msgid "Update DOL"
-msgstr "Aktualizace DOL"
-
 msgid "Update Files"
 msgstr "Zaktualizuj soubory"
 
@@ -2524,9 +2515,6 @@ msgstr ""
 
 msgid "and translators for language files updates"
 msgstr "a prekladatelé pro jazykové aktualizace"
-
-msgid "available"
-msgstr "dostupný"
 
 msgid "does not exist!"
 msgstr "neexistuje!"

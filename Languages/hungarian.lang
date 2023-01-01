@@ -385,7 +385,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "Mégse"
 
-msgid "Cannot write to destination."
+msgid "Can't write to destination."
 msgstr ""
 
 msgid "Categories"
@@ -1238,9 +1238,6 @@ msgstr ""
 
 msgid "Hour"
 msgstr "Óra"
-
-msgid "How do you want to update?"
-msgstr "Hogyan szeretnél frissíteni?"
 
 msgid "How to Shutdown?"
 msgstr "Hogyan kapcsoljon ki?"
@@ -2340,12 +2337,6 @@ msgstr ""
 msgid "Update"
 msgstr "Frissítés"
 
-msgid "Update All"
-msgstr "Minden Frissítése"
-
-msgid "Update DOL"
-msgstr "DOL Frissítése"
-
 msgid "Update Files"
 msgstr "Fájlok frissítése"
 
@@ -2527,9 +2518,6 @@ msgstr ""
 
 msgid "and translators for language files updates"
 msgstr ""
-
-msgid "available"
-msgstr "elérhetõ"
 
 msgid "does not exist!"
 msgstr "nem létezik!"

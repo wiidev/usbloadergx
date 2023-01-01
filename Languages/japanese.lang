@@ -385,7 +385,7 @@ msgstr "ファイルを読み込めません: %s"
 msgid "Cancel"
 msgstr "やめる"
 
-msgid "Cannot write to destination."
+msgid "Can't write to destination."
 msgstr "出力先に書き込めません"
 
 msgid "Categories"
@@ -1238,9 +1238,6 @@ msgstr "フックタイプ"
 
 msgid "Hour"
 msgstr "時間"
-
-msgid "How do you want to update?"
-msgstr "更新方法の選択"
 
 msgid "How to Shutdown?"
 msgstr "終了方法の選択"
@@ -2340,12 +2337,6 @@ msgstr "非対応の形式なのでTempTheme.zipを自己解凍してくださ�
 msgid "Update"
 msgstr "更新"
 
-msgid "Update All"
-msgstr "全て"
-
-msgid "Update DOL"
-msgstr "DOLのみ"
-
 msgid "Update Files"
 msgstr "すべて更新"
 
@@ -2527,9 +2518,6 @@ msgstr "ズームの継続(速度)"
 
 msgid "and translators for language files updates"
 msgstr "/ K-M & Trickart …日本語化"
-
-msgid "available"
-msgstr "があります"
 
 msgid "does not exist!"
 msgstr "存在しません!"

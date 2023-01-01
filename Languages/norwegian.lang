@@ -385,7 +385,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "Avbryt"
 
-msgid "Cannot write to destination."
+msgid "Can't write to destination."
 msgstr "Kan ikke skrive til mål."
 
 msgid "Categories"
@@ -1238,9 +1238,6 @@ msgstr ""
 
 msgid "Hour"
 msgstr "Timer"
-
-msgid "How do you want to update?"
-msgstr "Hvordan vil du oppdatere?"
 
 msgid "How to Shutdown?"
 msgstr "Hvordan skru av?"
@@ -2337,12 +2334,6 @@ msgstr "Ikke støttet format. Prøv å pakk ut TempTheme.zip manuelt."
 msgid "Update"
 msgstr "Oppdater"
 
-msgid "Update All"
-msgstr "Oppdater alt"
-
-msgid "Update DOL"
-msgstr "Oppdater DOL"
-
 msgid "Update Files"
 msgstr "Oppdater filer"
 
@@ -2524,9 +2515,6 @@ msgstr ""
 
 msgid "and translators for language files updates"
 msgstr "og oversettere for språkfiler"
-
-msgid "available"
-msgstr "tilgjengelig"
 
 msgid "does not exist!"
 msgstr "finnes ikke!"

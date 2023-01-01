@@ -385,7 +385,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "ยกเลิก"
 
-msgid "Cannot write to destination."
+msgid "Can't write to destination."
 msgstr ""
 
 msgid "Categories"
@@ -1238,9 +1238,6 @@ msgstr ""
 
 msgid "Hour"
 msgstr "ชั่วโมง"
-
-msgid "How do you want to update?"
-msgstr "ต้องการอัพเดทแบบไหน ?"
 
 msgid "How to Shutdown?"
 msgstr "ต้องการปิดแบบไหน ?"
@@ -2337,12 +2334,6 @@ msgstr ""
 msgid "Update"
 msgstr "อัพเดท"
 
-msgid "Update All"
-msgstr "อัทเดททั้งหมด"
-
-msgid "Update DOL"
-msgstr "อัพเดท DOL"
-
 msgid "Update Files"
 msgstr "อัพเดทไฟล์"
 
@@ -2524,9 +2515,6 @@ msgstr ""
 
 msgid "and translators for language files updates"
 msgstr ""
-
-msgid "available"
-msgstr "ว่างอยู่"
 
 msgid "does not exist!"
 msgstr "ไม่มี!"

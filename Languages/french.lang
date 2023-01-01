@@ -385,7 +385,7 @@ msgstr "Impossible de lire le fichier: %s"
 msgid "Cancel"
 msgstr "Annuler"
 
-msgid "Cannot write to destination."
+msgid "Can't write to destination."
 msgstr "Écriture impossible."
 
 msgid "Categories"
@@ -1238,9 +1238,6 @@ msgstr ""
 
 msgid "Hour"
 msgstr "heures"
-
-msgid "How do you want to update?"
-msgstr "Comment effectuer la mise à jour ?"
 
 msgid "How to Shutdown?"
 msgstr "Arrêt de la Wii ?"
@@ -2337,12 +2334,6 @@ msgstr "Format non supporté, essayez d'extraire manuellement TempTheme.zip."
 msgid "Update"
 msgstr "Mise à jour"
 
-msgid "Update All"
-msgstr "Totale"
-
-msgid "Update DOL"
-msgstr "DOL seul"
-
 msgid "Update Files"
 msgstr "MàJ Fichiers"
 
@@ -2524,9 +2515,6 @@ msgstr "Durée du zoom (Vitesse)"
 
 msgid "and translators for language files updates"
 msgstr "et les traducteurs pour la MàJ des fichiers langue"
-
-msgid "available"
-msgstr "disponible"
 
 msgid "does not exist!"
 msgstr "inexistant!"

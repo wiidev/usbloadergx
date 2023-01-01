@@ -25,7 +25,7 @@
 static const char * LanguageFilesURL = "https://raw.githubusercontent.com/wiidev/usbloadergx/enhanced/Languages/";
 static const char * LanguagesURL = "https://raw.githubusercontent.com/wiidev/usbloadergx/enhanced/Languages/index.html";
 
-int DownloadAllLanguageFiles(int revision)
+int DownloadAllLanguageFiles()
 {
 	if(!CreateSubfolder(Settings.languagefiles_path))
 	{
@@ -43,11 +43,6 @@ int DownloadAllLanguageFiles(int revision)
 	URL_List LinkList(LanguagesURL);
 	int listsize = LinkList.GetURLCount();
 	int files_downloaded = 0;
-	char target[11];
-	if(revision > 0)
-		snprintf(target, sizeof(target), "%d", revision);
-	else
-		snprintf(target, sizeof(target), "%s", GetRev());
 
 	ShowProgress(tr("Updating Language Files:"), 0, 0, 0, listsize, false, true);
 
@@ -68,7 +63,7 @@ int DownloadAllLanguageFiles(int revision)
 
 		ShowProgress(tr("Updating Language Files:"), 0, filename, i, listsize, false, true);
 
-		snprintf(fullURL, sizeof(fullURL), "%s%s?p=%s", LanguageFilesURL, filename, target);
+		snprintf(fullURL, sizeof(fullURL), "%s%s", LanguageFilesURL, filename);
 
 		struct download file = {};
 		downloadfile(fullURL, &file);

@@ -385,7 +385,7 @@ msgstr "Kan ikke læse fil: %s"
 msgid "Cancel"
 msgstr "Annuller"
 
-msgid "Cannot write to destination."
+msgid "Can't write to destination."
 msgstr "Kan ikke skrive til destinationen."
 
 msgid "Categories"
@@ -1238,9 +1238,6 @@ msgstr ""
 
 msgid "Hour"
 msgstr "Time"
-
-msgid "How do you want to update?"
-msgstr "Hvordan skal der opdateres?"
 
 msgid "How to Shutdown?"
 msgstr "Hvordan skal der slukkes?"
@@ -2337,12 +2334,6 @@ msgstr "Format ikke understøttet, prøv at udpakke TempTheme.zip manuelt"
 msgid "Update"
 msgstr "Opdatér"
 
-msgid "Update All"
-msgstr "Opdatér alt"
-
-msgid "Update DOL"
-msgstr "Opdatér DOL"
-
 msgid "Update Files"
 msgstr "Opdatér filer"
 
@@ -2524,9 +2515,6 @@ msgstr ""
 
 msgid "and translators for language files updates"
 msgstr "og oversættere for sprog filer"
-
-msgid "available"
-msgstr "tilgængelig"
 
 msgid "does not exist!"
 msgstr "eksisterer ikke!"

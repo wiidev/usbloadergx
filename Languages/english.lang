@@ -385,7 +385,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-msgid "Cannot write to destination."
+msgid "Can't write to destination."
 msgstr ""
 
 msgid "Categories"
@@ -1237,9 +1237,6 @@ msgid "Hooktype"
 msgstr ""
 
 msgid "Hour"
-msgstr ""
-
-msgid "How do you want to update?"
 msgstr ""
 
 msgid "How to Shutdown?"
@@ -2337,12 +2334,6 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-msgid "Update All"
-msgstr ""
-
-msgid "Update DOL"
-msgstr ""
-
 msgid "Update Files"
 msgstr ""
 
@@ -2523,9 +2514,6 @@ msgid "Zoom Duration (Speed)"
 msgstr ""
 
 msgid "and translators for language files updates"
-msgstr ""
-
-msgid "available"
 msgstr ""
 
 msgid "does not exist!"

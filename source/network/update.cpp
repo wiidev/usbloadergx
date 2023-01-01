@@ -39,15 +39,11 @@
 #include "settings/GameTitles.h"
 #include "language/gettext.h"
 #include "language/UpdateLanguage.h"
-#include "homebrewboot/BootHomebrew.h"
-#include "utils/StringTools.h"
 #include "utils/ShowError.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/ProgressWindow.h"
 #include "FileOperations/fileops.h"
 #include "xml/GameTDB.hpp"
-#include "wad/nandtitle.h"
-#include "wad/wad.h"
 #include "sys.h"
 #include "svnrev.h"
 
@@ -68,7 +64,8 @@ int DownloadFileToPath(const char *url, const char *dest)
 		FILE *savefile = fopen(dest, "wb");
 		if (!savefile)
 		{
-			ShowError(tr("Cannot write to destination."));
+			MEM2_free(file.data);
+			ShowError(tr("Can't write to destination."));
 			return -7;
 		}
 		fwrite(file.data, 1, file.size, savefile);
@@ -113,7 +110,7 @@ int UpdateGameTDB()
 	if (CheckNewGameTDBVersion(Settings.URL_GameTDB) == false)
 	{
 		gprintf("Not updating GameTDB: Version is the same\n");
-		return -1;
+		return -2;
 	}
 
 	gprintf("Updating GameTDB...\n");
@@ -177,33 +174,6 @@ static void UpdateMetaXml()
 	}
 }
 
-int CheckUpdate()
-{
-	if (!IsNetworkInit())
-		return -1;
-
-	int revnumber = 0;
-	int currentrev = atoi(GetRev());
-
-	struct download file = {};
-#ifdef FULLCHANNEL
-	downloadfile("https://raw.githubusercontent.com/wiidev/usbloadergx/updates/update_wad.txt", &file);
-#else
-	downloadfile("https://raw.githubusercontent.com/wiidev/usbloadergx/updates/update_dol.txt", &file);
-#endif
-
-	if (file.size > 0)
-	{
-		revnumber = atoi((char *)file.data);
-		MEM2_free(file.data);
-	}
-
-	if (revnumber > currentrev)
-		return revnumber;
-
-	return -1;
-}
-
 static int ApplicationDownload(void)
 {
 	std::string DownloadURL;
@@ -251,18 +221,11 @@ static int ApplicationDownload(void)
 	snprintf(tmppath, sizeof(tmppath), "%sboot.tmp", Settings.update_path);
 #endif
 
-	int update_choice = WindowPrompt(fmt("Rev%i %s.", newrev, tr("available")), tr("How do you want to update?"), tr("Update DOL"), tr("Update All"), tr("Cancel"));
-	if (update_choice == 0)
-		return 0;
-
 	int ret = DownloadFileToPath(DownloadURL.c_str(), tmppath);
 	if (ret < 1024 * 1024)
 	{
 		remove(tmppath);
 		WindowPrompt(tr("Failed updating"), tr("Error while downloding file"), tr("OK"));
-		if (update_choice == 1)
-			return -1;
-
 		update_error = true;
 	}
 	else
@@ -294,25 +257,19 @@ static int ApplicationDownload(void)
 #endif
 	}
 
-	if (update_choice == 2)
-	{
-		UpdateIconPng();
-		UpdateMetaXml();
-		UpdateGameTDB();
-		DownloadAllLanguageFiles(newrev);
-	}
-
 	if (update_error)
 	{
 		ShowError(tr("Error while updating USB Loader GX."));
 		return -1;
 	}
 
-	if (update_choice > 0)
-	{
-		WindowPrompt(tr("Successfully updated."), tr("Restarting..."), 0, 0, 0, 0, 150);
-		RebootApp();
-	}
+	UpdateIconPng();
+	UpdateMetaXml();
+	UpdateGameTDB();
+	//DownloadAllLanguageFiles();
+
+	WindowPrompt(tr("Successfully Updated"), tr("Restarting..."), 0, 0, 0, 0, 150);
+	RebootApp();
 
 	return 0;
 }
@@ -341,9 +298,15 @@ int UpdateApp()
 	}
 	else if (choice == 2)
 	{
-		if (UpdateGameTDB() < 0)
+		int gameTDB = UpdateGameTDB();
+		if (gameTDB == -2)
 		{
-			WindowPrompt(fmt("%s", tr("WiiTDB.xml is up to date.")), 0, tr("OK"));
+			WindowPrompt(tr("WiiTDB.xml is up to date."), 0, tr("OK"));
+			return 1;
+		}
+		else if (gameTDB == -1)
+		{
+			WindowPrompt(tr("Update Failed"), 0, tr("OK"));
 			return 1;
 		}
 		else

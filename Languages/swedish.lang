@@ -385,7 +385,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "Avbryt"
 
-msgid "Cannot write to destination."
+msgid "Can't write to destination."
 msgstr ""
 
 msgid "Categories"
@@ -1238,9 +1238,6 @@ msgstr ""
 
 msgid "Hour"
 msgstr "Timmars"
-
-msgid "How do you want to update?"
-msgstr "Hur vill du uppdatera?"
 
 msgid "How to Shutdown?"
 msgstr "Hur vill du stänga av?"
@@ -2337,12 +2334,6 @@ msgstr ""
 msgid "Update"
 msgstr "Uppdatera"
 
-msgid "Update All"
-msgstr "Uppdatera alla"
-
-msgid "Update DOL"
-msgstr "Updatera DOL"
-
 msgid "Update Files"
 msgstr "Uppdatera Filer"
 
@@ -2524,9 +2515,6 @@ msgstr ""
 
 msgid "and translators for language files updates"
 msgstr ""
-
-msgid "available"
-msgstr "tillgänglig"
 
 msgid "does not exist!"
 msgstr "existerar inte!"
