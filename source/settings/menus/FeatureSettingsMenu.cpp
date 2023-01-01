@@ -661,8 +661,10 @@ int FeatureSettingsMenu::GetMenuInternal()
 			}
 			else
 			{
+				// Create the directory if it doesn't exist
+				CreateSubfolder(Settings.NINLoaderPath);
 				// Rename existing boot.dol file to boot.bak
-				if(CheckFile(NINUpdatePath))
+				if (CheckFile(NINUpdatePath))
 					RenameFile(NINUpdatePath, NINUpdatePathBak);
 				
 				if (DownloadFileToPath("https://raw.githubusercontent.com/FIX94/Nintendont/master/loader/loader.dol", NINUpdatePath) > 0)
@@ -677,7 +679,7 @@ int FeatureSettingsMenu::GetMenuInternal()
 				{
 					// Restore backup file if found
 					RemoveFile(NINUpdatePath);
-					if(CheckFile(NINUpdatePathBak))
+					if (CheckFile(NINUpdatePathBak))
 						RenameFile(NINUpdatePathBak, NINUpdatePath);
 					WindowPrompt(tr("Update Failed"), 0, tr("OK"));
 				}
