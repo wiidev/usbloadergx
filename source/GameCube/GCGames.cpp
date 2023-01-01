@@ -639,7 +639,7 @@ int nintendontBuildDate(const char *NIN_loader_path, char *NINBuildDate)
 
 					// Search month string start position in header
 					char *dateStart = NULL;
-					const char *month[] = {"Jan ", "Feb ", "Mar ", "Apr ", "May ", "Jun ", "Jui ", "Aug ", "Sep ", "Oct ", "Nov ", "Dec "};
+					const char *month[] = {"Jan ", "Feb ", "Mar ", "Apr ", "May ", "Jun ", "Jul ", "Aug ", "Sep ", "Oct ", "Nov ", "Dec "};
 					for (u8 m = 0; m < 12; m++)
 					{
 						dateStart = strstr(NINHeader, month[m]);
