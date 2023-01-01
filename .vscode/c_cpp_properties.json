@@ -1,0 +1,50 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/devkitPro/libogc/include/**"
+            ],
+            "defines": [
+                "HW_RVL",
+                "GEKKO"
+            ],
+            "compilerPath": "C:/devkitPro/devkitPPC/bin/powerpc-eabi-gcc.exe",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x86"
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${env:DEVKITPRO}/libogc/include/**"
+            ],
+            "defines": [
+                "HW_RVL",
+                "GEKKO"
+            ],
+            "compilerPath": "${env:DEVKITPRO}/devkitPPC/bin/powerpc-eabi-gcc",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x86"
+        },
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${env:DEVKITPRO}/libogc/include/**"
+            ],
+            "defines": [
+                "HW_RVL",
+                "GEKKO"
+            ],
+            "compilerPath": "${env:DEVKITPRO}/devkitPPC/bin/powerpc-eabi-gcc",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x86"
+        }
+    ],
+    "version": 4
+}

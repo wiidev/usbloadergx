@@ -2,22 +2,36 @@ name: Build binaries
 
 on:
   push:
+    branches:
+      - "**"
     paths-ignore:
+      - '**.md'
+      - '.devcontainer/**'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/FUNDING.yml'
+      - '.github/**/*.md'
+      - '.vscode/**'
       - 'HBC/**'
       - 'Languages/**'
   pull_request:
     paths-ignore:
+      - '**.md'
+      - '.devcontainer/**'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/FUNDING.yml'
+      - '.github/**/*.md'
+      - '.vscode/**'
       - 'HBC/**'
       - 'Languages/**'
 
 jobs:
   download-build-tools:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - name: Restore cache
         id: cache-1
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: cache
           key: ${{ runner.os }}-cache-1
@@ -45,14 +59,14 @@ jobs:
           EOF
   
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     needs: download-build-tools
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Restore cache
         id: cache-1
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: cache
           key: ${{ runner.os }}-cache-1
@@ -74,81 +88,21 @@ jobs:
           PATH=$(pwd)/devkitpro/devkitPPC/bin:$PATH DEVKITPPC=$(pwd)/devkitpro/devkitPPC DEVKITPRO=$(pwd)/devkitpro make
 
       - name: Package
-        id: pack
         run: |
           mkdir -p upload/apps/usbloader_gx
           cp boot.dol upload/apps/usbloader_gx
           cp HBC/icon.png upload/apps/usbloader_gx
           cp HBC/meta.xml upload/apps/usbloader_gx
-          echo "::set-output name=sha::$(echo ${GITHUB_SHA} | head -c 7)"
+          echo "sha=$(git rev-parse --short=7 HEAD)" >> $GITHUB_ENV
 
       - name: Upload binary
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with: 
-          name: usbloadergx_${{ steps.pack.outputs.sha }}
+          name: usbloadergx_${{ env.sha }}
           path: upload
 
       - name: Upload debug binary
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with: 
-          name: usbloadergx_${{ steps.pack.outputs.sha }}_debug
-          path: boot.elf
-
-  build-latest-libogc:
-    runs-on: ubuntu-20.04
-    needs: download-build-tools
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Restore cache
-        id: cache-1
-        uses: actions/cache@v2
-        with:
-          path: cache
-          key: ${{ runner.os }}-cache-1
-
-      - name: Check cache
-        if: steps.cache-1.outputs.cache-hit != 'true'
-        run: exit 1
-
-      - name: Extract downloaded files
-        run: |
-          tar -xf cache/devkitPPC-r39-2-linux_x86_64.pkg.tar.xz --strip-components=1
-          tar -xf cache/devkitppc-rules-1.1.1-1-any.pkg.tar.xz --strip-components=1
-          tar -xf cache/general-tools-1.2.0-2-linux_x86_64.pkg.tar.xz --strip-components=1
-          tar -xf cache/gamecube-tools-1.0.3-1-linux_x86_64.pkg.tar.xz --strip-components=1
-
-      - name: Checkout libogc
-        uses: actions/checkout@v2
-        with:
-          repository: devkitPro/libogc
-          path: libogc
-
-      - name: Compile and install libogc
-        run: PATH=$(pwd)/devkitpro/devkitPPC/bin:$PATH DEVKITPPC=$(pwd)/devkitpro/devkitPPC DEVKITPRO=$(pwd)/devkitpro make install -C libogc
-
-      - name: Compile USB Loader GX
-        run: |
-          rm -r libogc
-          PATH=$(pwd)/devkitpro/devkitPPC/bin:$PATH DEVKITPPC=$(pwd)/devkitpro/devkitPPC DEVKITPRO=$(pwd)/devkitpro make
-
-      - name: Package
-        id: pack
-        run: |
-          mkdir -p upload/apps/usbloader_gx
-          cp boot.dol upload/apps/usbloader_gx
-          cp HBC/icon.png upload/apps/usbloader_gx
-          cp HBC/meta.xml upload/apps/usbloader_gx
-          echo "::set-output name=sha::$(echo ${GITHUB_SHA} | head -c 7)"
-
-      - name: Upload binary
-        uses: actions/upload-artifact@v2
-        with: 
-          name: usbloadergx_libogc_${{ steps.pack.outputs.sha }}
-          path: upload
-
-      - name: Upload debug binary
-        uses: actions/upload-artifact@v2
-        with: 
-          name: usbloadergx_libogc_${{ steps.pack.outputs.sha }}_debug
+          name: usbloadergx_${{ env.sha }}_debug
           path: boot.elf

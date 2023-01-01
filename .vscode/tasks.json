@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "options": {
+        "env": {
+            "WIILOAD": "tcp:192.168.1.5"
+        }
+    },
+    "tasks": [
+        {
+            "label": "make",
+            "type": "shell",
+            "command": "make",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "make clean",
+            "problemMatcher": []
+        },
+        {
+            "label": "deploy",
+            "type": "shell",
+            "command": "make deploy",
+            "problemMatcher": []
+        }
+    ]
+}

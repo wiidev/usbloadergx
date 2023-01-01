@@ -59,7 +59,7 @@ INCLUDES	:=	source
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
-CFLAGS		=	-g -ggdb -O3 -Wall -Wno-multichar -Wno-unused-parameter -Wextra $(MACHDEP) $(INCLUDE) -D_GNU_SOURCE
+CFLAGS		=	-g -ggdb -O2 -Wall -Wno-multichar -Wno-unused-parameter -Wextra $(MACHDEP) $(INCLUDE) -D_GNU_SOURCE
 CXXFLAGS	=	$(CFLAGS)
 LDFLAGS		=	-g -ggdb $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80B00000,-wrap,malloc,-wrap,free,-wrap,memalign,-wrap,calloc,-wrap,realloc,-wrap,malloc_usable_size,-wrap,time
 
@@ -172,15 +172,19 @@ all:
 
 #---------------------------------------------------------------------------------
 clean:
-	@echo clean ...
-	@rm -fr $(BUILD) $(OUTPUT).elf $(OUTPUT).dol
-#---------------------------------------------------------------------------------
-run:
-	$(MAKE)
-	@echo Done building ...
-	@echo Now Run That Shit ...
+	@echo Cleaning...
+	@rm -fr $(BUILD) $(OUTPUT).elf $(OUTPUT).dol usbloader_gx.zip usbloader_gx
 
-	wiiload $(OUTPUT).dol
+#---------------------------------------------------------------------------------
+deploy:
+	$(MAKE)
+	@echo Deploying...
+	@[ -d usbloader_gx ] || mkdir -p usbloader_gx
+	@cp $(TARGET).dol usbloader_gx/
+	@cp HBC/icon.png usbloader_gx/
+	@cp HBC/meta.xml usbloader_gx/
+	@zip usbloader_gx.zip usbloader_gx/*
+	wiiload usbloader_gx.zip
 
 #---------------------------------------------------------------------------------
 reload:
@@ -190,7 +194,6 @@ reload:
 release:
 	$(MAKE)
 	cp boot.dol ./hbc/boot.dol
-
 
 #---------------------------------------------------------------------------------
 else

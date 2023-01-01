@@ -1,7 +1,13 @@
 *.dol
 *.elf
-/build
+*.exe
+*.bat
+.vscode/
+build/
+usbloader_gx/
 /HBC/meta.xml
 /source/themes/filelist.h
 /source/gitver.c
 /source/svnrev.c
+/usbloader_gx.zip
+/wiiload
