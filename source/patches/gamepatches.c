@@ -2,8 +2,8 @@
 #include <gccore.h>
 #include <malloc.h>
 #include <string.h>
+
 #include "usbloader/disc.h"
-#include "dolpatcher.h"
 #include "wip.h"
 #include "gecko.h"
 #include "patchcode.h"
@@ -67,8 +67,8 @@ void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 language
     u8 vfilter_high[7] = {8, 8, 10, 12, 10, 8, 8};
 
     // If a wip file is loaded for this game this does nothing - Dimok
-    PoPPatch();
-    NSMBPatch();
+    patch_nsmb((u8 *)0x80000000);
+    patch_pop((u8 *)0x80000000);
 
     for (i = 0; i < dolCount; ++i)
     {
@@ -77,7 +77,8 @@ void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 language
 
         VideoModePatcher(dst, len, videoSelected, videoPatchDol);
 
-        dogamehooks(hooktype, dst, len);
+        if (hooktype)
+            dogamehooks(hooktype, dst, len);
 
         if (vipatch)
             vidolpatcher(dst, len);
@@ -99,22 +100,22 @@ void gamepatches(u8 videoSelected, u8 videoPatchDol, u8 aspectForce, u8 language
         if (deflicker == DEFLICKER_ON_LOW)
         {
             patch_vfilters(dst, len, vfilter_low);
-            patch_vfilters_rouge(dst, len, vfilter_low);
+            patch_vfilters_rogue(dst, len, vfilter_low);
         }
         else if (deflicker == DEFLICKER_ON_MEDIUM)
         {
             patch_vfilters(dst, len, vfilter_medium);
-            patch_vfilters_rouge(dst, len, vfilter_medium);
+            patch_vfilters_rogue(dst, len, vfilter_medium);
         }
         else if (deflicker == DEFLICKER_ON_HIGH)
         {
             patch_vfilters(dst, len, vfilter_high);
-            patch_vfilters_rouge(dst, len, vfilter_high);
+            patch_vfilters_rogue(dst, len, vfilter_high);
         }
         else if (deflicker != DEFLICKER_AUTO)
         {
             patch_vfilters(dst, len, vfilter_off);
-            patch_vfilters_rouge(dst, len, vfilter_off);
+            patch_vfilters_rogue(dst, len, vfilter_off);
             // This might break fade and brightness effects
             if (deflicker == DEFLICKER_OFF_EXTENDED)
                 deflicker_patch(dst, len);
@@ -154,8 +155,8 @@ void anti_002_fix(u8 *addr, u32 len)
 {
     u32 SearchPattern[3] = {0x2C000000, 0x48000214, 0x3C608000};
     u8 *addr_start = addr;
-    u8 *addr_end = addr + len;
-    while (addr_start <= addr_end - sizeof(SearchPattern))
+    u8 *addr_end = addr + len - sizeof(SearchPattern);
+    while (addr_start <= addr_end)
     {
         if (memcmp(addr_start, SearchPattern, sizeof(SearchPattern)) == 0)
         {
@@ -177,8 +178,8 @@ void deflicker_patch(u8 *addr, u32 len)
         0x90698000, 0x99498000, 0x90E98000,
         0x99498000, 0x91098000, 0x41820040};
     u8 *addr_start = addr;
-    u8 *addr_end = addr + len;
-    while (addr_start <= addr_end - sizeof(SearchPattern))
+    u8 *addr_end = addr + len - sizeof(SearchPattern);
+    while (addr_start <= addr_end)
     {
         if (memcmp(addr_start, SearchPattern, sizeof(SearchPattern)) == 0)
         {
@@ -192,7 +193,7 @@ void deflicker_patch(u8 *addr, u32 len)
 
 /**
     480p Pixel Fix Patch by leseratte
-    fix for a Nintendo Revolution SDK bug found by Extrems affecting early Wii console when using 480p video mode.
+    Fix for a Nintendo Revolution SDK bug found by Extrems affecting early Wii console when using 480p video mode.
     https://shmups.system11.org/viewtopic.php?p=1361158#p1361158
     https://github.com/ExtremsCorner/libogc-rice/commit/941d687e271fada68c359bbed98bed1fbb454448
 **/
@@ -211,29 +212,29 @@ void PatchFix480p()
     /// Used by: New Super Mario Bros, ...
 
     /*
-    * Code block that is being patched (in MKW):
-    *
-    * 4bffe30d: bl WaitMicroTime
-    * 38000065: li r0, 0x65
-    * 9b810019: stb r28, 25(r1) // store the wrong value (1)
-    * 38810018: addi r4, r1, 0x18
-    * 386000e0: li r3, 0xe0
-    * 98010018: stb r0, 24(r1)
-    * 38a00002: li r5, 2
-    * 4bffe73d: bl __VISendI2CData
-    *
-    * r28 is a register that is set to 1 at the beginning of the function.
-    * However, its contents are used elsewhere as well, so we can't just modify this one function.
-    *
-    * The following code first searches for one of the patterns above, then replaces the
-    * "stb r28, 25(r1)" instruction that stores the wrong value on the stack with a branch instead
-    * That branch branches to the injected custom code ("li r3, 3; stb r3, 25(r1)") that stores the
-    * correct value (3) instead. At the end of the injected code will be another branch that branches
-    * back to the instruction after the one that has been replaced (so, to "addi r4, r1, 0x18").
-    * r3 can safely be used as a temporary register because its contents will be replaced immediately
-    * afterwards anyways.
-    *
-    */
+     * Code block that is being patched (in MKW):
+     *
+     * 4bffe30d: bl WaitMicroTime
+     * 38000065: li r0, 0x65
+     * 9b810019: stb r28, 25(r1) // store the wrong value (1)
+     * 38810018: addi r4, r1, 0x18
+     * 386000e0: li r3, 0xe0
+     * 98010018: stb r0, 24(r1)
+     * 38a00002: li r5, 2
+     * 4bffe73d: bl __VISendI2CData
+     *
+     * r28 is a register that is set to 1 at the beginning of the function.
+     * However, its contents are used elsewhere as well, so we can't just modify this one function.
+     *
+     * The following code first searches for one of the patterns above, then replaces the
+     * "stb r28, 25(r1)" instruction that stores the wrong value on the stack with a branch instead
+     * That branch branches to the injected custom code ("li r3, 3; stb r3, 25(r1)") that stores the
+     * correct value (3) instead. At the end of the injected code will be another branch that branches
+     * back to the instruction after the one that has been replaced (so, to "addi r4, r1, 0x18").
+     * r3 can safely be used as a temporary register because its contents will be replaced immediately
+     * afterwards anyways.
+     *
+     */
 
     void *offset = NULL;
     void *addr = (void *)0x80000000;
@@ -863,11 +864,11 @@ void domainpatcher(void *addr, u32 len, const char *domain)
     } while (++cur < end);
 }
 
-bool NSMBPatch()
+bool patch_nsmb(u8 *gameid)
 {
     WIP_Code *CodeList = NULL;
 
-    if (memcmp("SMNE01", (char *)0x80000000, 6) == 0)
+    if (memcmp(gameid, "SMNE01", 6) == 0)
     {
         CodeList = MEM2_alloc(3 * sizeof(WIP_Code));
         if (!CodeList)
@@ -883,7 +884,7 @@ bool NSMBPatch()
         CodeList[2].srcaddress = 0xDA000000;
         CodeList[2].dstaddress = 0x71000000;
     }
-    else if (memcmp("SMNP01", (char *)0x80000000, 6) == 0)
+    else if (memcmp(gameid, "SMNP01", 6) == 0)
     {
         CodeList = MEM2_alloc(3 * sizeof(WIP_Code));
         if (!CodeList)
@@ -899,7 +900,7 @@ bool NSMBPatch()
         CodeList[2].srcaddress = 0x388000DA;
         CodeList[2].dstaddress = 0x38800071;
     }
-    else if (memcmp("SMNJ01", (char *)0x80000000, 6) == 0)
+    else if (memcmp(gameid, "SMNJ01", 6) == 0)
     {
         CodeList = MEM2_alloc(3 * sizeof(WIP_Code));
         if (!CodeList)
@@ -922,13 +923,14 @@ bool NSMBPatch()
         CodeList = NULL;
         return false;
     }
-
+    if (CodeList)
+        gprintf("Patched New Super Mario Bros\n");
     return CodeList != NULL;
 }
 
-bool PoPPatch()
+bool patch_pop(u8 *gameid)
 {
-    if (memcmp("SPX", (char *)0x80000000, 3) != 0 && memcmp("RPW", (char *)0x80000000, 3) != 0)
+    if (memcmp(gameid, "SPX", 3) != 0 && memcmp(gameid, "RPW", 3) != 0)
         return false;
 
     WIP_Code *CodeList = MEM2_alloc(5 * sizeof(WIP_Code));
@@ -954,8 +956,82 @@ bool PoPPatch()
         CodeList = NULL;
         return false;
     }
+    if (CodeList)
+        gprintf("Patched Prince of Persia\n");
+    return CodeList != NULL;
+}
 
-    return true;
+void patch_error_codes(u8 *gameid)
+{
+    // Thanks to Seeky for the MKWii gecko codes
+    // Thanks to InvoxiPlayGames for the gecko codes for the 23400 fix.
+    // Reimplemented by Leseratte without the need for a code handler.
+    u32 *patch_addr = 0;
+    u32 *patched = 0;
+
+    // Patch error 23400 for CoD (Black Ops, Reflex, MW3) and Rock Band 3 / The Beatles
+    if (memcmp(gameid, "SC7", 3) == 0)
+    {
+        gprintf("Patching error 23400 for %s\n", gameid);
+        *(u32 *)0x8023c954 = 0x41414141;
+    }
+    else if (memcmp(gameid, "RJA", 3) == 0)
+    {
+        gprintf("Patching error 23400 for %s\n", gameid);
+        *(u32 *)0x801b838c = 0x41414141;
+    }
+    else if (memcmp(gameid, "SM8", 3) == 0)
+    {
+        gprintf("Patching error 23400 for %s\n", gameid);
+        *(u32 *)0x80238c74 = 0x41414141;
+    }
+    else if (memcmp(gameid, "SZB", 3) == 0)
+    {
+        gprintf("Patching error 23400 for %s\n", gameid);
+        *(u32 *)0x808e3b20 = 0x41414141;
+    }
+    else if (memcmp(gameid, "R9J", 3) == 0)
+    {
+        gprintf("Patching error 23400 for %s\n", gameid);
+        *(u32 *)0x808d6934 = 0x41414141;
+    }
+
+    // Patch RCE vulnerability in MKWii.
+    else if (memcmp(gameid, "RMC", 3) == 0)
+    {
+        switch (gameid[3])
+        {
+            case 'P':
+                patched = (u32 *)0x80276054;
+                patch_addr = (u32 *)0x8089a194;
+                break;
+            case 'E':
+                patched = (u32 *)0x80271d14;
+                patch_addr = (u32 *)0x80895ac4;
+                break;
+            case 'J':
+                patched = (u32 *)0x802759f4;
+                patch_addr = (u32 *)0x808992f4;
+                break;
+            case 'K':
+                patched = (u32 *)0x80263E34;
+                patch_addr = (u32 *)0x808885cc;
+                break;
+            default:
+                gprintf("NOT patching RCE vulnerability due to invalid game ID: %s\n", gameid);
+                return;
+        }
+
+        if (*patched != '*')
+            gprintf("Game is already Wiimmfi-patched, don't apply the RCE fix\n");
+        else
+        {
+            gprintf("Patching RCE vulnerability for %s\n", gameid);
+
+            for (int i = 0; i < 7; i++)
+                *patch_addr++ = 0xff;
+        }
+    }
 }
 
 /** Insert the individual gamepatches above with the patterns and patch data **/
@@ -1077,23 +1153,23 @@ static GXRModeObj TVPal528IntDf_RVL = {
     GX_FALSE,      // aa
 
     // sample points arranged in increasing Y order
-	{
+    {
         {6, 6}, {6, 6}, {6, 6}, // pix 0, 3 sample points, 1/12 units, 4 bits each
         {6, 6}, {6, 6}, {6, 6}, // pix 1
         {6, 6}, {6, 6}, {6, 6}, // pix 2
         {6, 6}, {6, 6}, {6, 6}  // pix 3
-	},
+    },
 
     // vertical filter[7], 1/64 units, 6 bits each
-	{
-		 8, // line n-1
-		 8, // line n-1
-		10, // line n
-		12, // line n
-		10, // line n
-		 8, // line n+1
-		 8  // line n+1
-	}
+    {
+         8, // line n-1
+         8, // line n-1
+        10, // line n
+        12, // line n
+        10, // line n
+         8, // line n+1
+         8  // line n+1
+    }
 };
 
 static GXRModeObj *vmodes[] = {
@@ -1269,9 +1345,10 @@ static void patch_videomode(GXRModeObj *mode1, GXRModeObj *mode2)
         mode1->viYOrigin = mode2->viYOrigin;
         mode1->viWidth = mode2->viWidth;
         mode1->viHeight = mode2->viHeight;
-    } else {
-        gprintf("Skipped patching dimensions %d x %d\n", mode1->viWidth, mode1->viHeight);
     }
+    else
+        gprintf("Skipped patching dimensions %d x %d\n", mode1->viWidth, mode1->viHeight);
+
     mode1->xfbMode = mode2->xfbMode;
     mode1->field_rendering = mode2->field_rendering;
     mode1->aa = mode2->aa;
@@ -1358,9 +1435,10 @@ static bool Search_and_patch_Video_Modes(u8 *Address, u32 Size, GXRModeObj *Tabl
 // Patch known and unknown vfilters within GXRModeObj structures
 void patch_vfilters(u8 *addr, u32 len, u8 *vfilter)
 {
+    u8 *addr_start = addr;
     while (len >= sizeof(GXRModeObj))
     {
-        GXRModeObj *vidmode = (GXRModeObj *)addr;
+        GXRModeObj *vidmode = (GXRModeObj *)addr_start;
         if ((memcmp(vidmode->sample_pattern, PATTERN, 24) == 0 || memcmp(vidmode->sample_pattern, PATTERN_AA, 24) == 0) &&
             (vidmode->fbWidth == 640 || vidmode->fbWidth == 608 || vidmode->fbWidth == 512) &&
             (vidmode->field_rendering == 0 || vidmode->field_rendering == 1) &&
@@ -1368,17 +1446,18 @@ void patch_vfilters(u8 *addr, u32 len, u8 *vfilter)
         {
             gprintf("Replaced vfilter %02x%02x%02x%02x%02x%02x%02x @ %p (GXRModeObj)\n",
                     vidmode->vfilter[0], vidmode->vfilter[1], vidmode->vfilter[2], vidmode->vfilter[3],
-                    vidmode->vfilter[4], vidmode->vfilter[5], vidmode->vfilter[6], addr);
+                    vidmode->vfilter[4], vidmode->vfilter[5], vidmode->vfilter[6], addr_start);
             memcpy(vidmode->vfilter, vfilter, 7);
-            addr += (sizeof(GXRModeObj) - 4);
+            addr_start += (sizeof(GXRModeObj) - 4);
             len -= (sizeof(GXRModeObj) - 4);
         }
-        addr += 4;
+        addr_start += 4;
         len -= 4;
     }
 }
 
-void patch_vfilters_rouge(u8 *addr, u32 len, u8 *vfilter)
+// Patch rogue vfilters found in some games
+void patch_vfilters_rogue(u8 *addr, u32 len, u8 *vfilter)
 {
     u8 known_vfilters[7][7] = {
         {8, 8, 10, 12, 10, 8, 8},
@@ -1389,24 +1468,25 @@ void patch_vfilters_rouge(u8 *addr, u32 len, u8 *vfilter)
         {4, 4, 16, 16, 16, 4, 4},
         {2, 2, 17, 22, 17, 2, 2}
     };
+    u8 *addr_start = addr;
     u8 *addr_end = addr + len - 8;
-    while (addr <= addr_end)
+    while (addr_start <= addr_end)
     {
         u8 known_vfilter[7];
         for (int i = 0; i < 7; i++)
         {
             for (int x = 0; x < 7; x++)
                 known_vfilter[x] = known_vfilters[i][x];
-            if (!addr[7] && memcmp(addr, known_vfilter, 7) == 0)
+            if (!addr_start[7] && memcmp(addr_start, known_vfilter, 7) == 0)
             {
-                gprintf("Replaced vfilter %02x%02x%02x%02x%02x%02x%02x @ %p\n", addr[0], addr[1], addr[2],
-                        addr[3], addr[4], addr[5], addr[6], addr);
+                gprintf("Replaced vfilter %02x%02x%02x%02x%02x%02x%02x @ %p\n", addr_start[0], addr_start[1],
+                        addr_start[2], addr_start[3], addr_start[4], addr_start[5], addr_start[6], addr_start);
                 memcpy(addr, vfilter, 7);
-                addr += 7;
+                addr_start += 7;
                 break;
             }
         }
-        addr += 1;
+        addr_start += 1;
     }
 }
 
@@ -1654,7 +1734,7 @@ bool PatchReturnTo(void *Address, int Size, u32 id)
         addr = (u32 *)ad[0];
         memcpy(addr, &newval, sizeof(u32));  // bl ad[ 3 ]
         memcpy(addr + 4, &nop, sizeof(u32)); // nop
-        //gprintf("\t%08x -> %08x\n", addr, newval );
+        // gprintf("\t%08x -> %08x\n", addr, newval );
 
         // ES_GetTicketViews() again
         newval = (ad[3] - ad[1]);
@@ -1663,7 +1743,7 @@ bool PatchReturnTo(void *Address, int Size, u32 id)
         addr = (u32 *)ad[1];
         memcpy(addr, &newval, sizeof(u32));  // bl ad[ 3 ]
         memcpy(addr + 4, &nop, sizeof(u32)); // nop
-        //gprintf("\t%08x -> %08x\n", addr, newval );
+        // gprintf("\t%08x -> %08x\n", addr, newval );
 
         // ES_LaunchTitle()
         newval = (ad[3] - ad[2]);
@@ -1672,7 +1752,7 @@ bool PatchReturnTo(void *Address, int Size, u32 id)
         addr = (u32 *)ad[2];
         memcpy(addr, &newval, sizeof(u32));  // bl ad[ 3 ]
         memcpy(addr + 4, &nop, sizeof(u32)); // nop
-        //gprintf("\t%08x -> %08x\n", addr, newval );
+        // gprintf("\t%08x -> %08x\n", addr, newval );
 
         returnToPatched = 1;
     }
@@ -1711,7 +1791,7 @@ int PatchNewReturnTo(int es_fd, u64 title)
     return result;
 }
 
-int BlockIOSReload(int es_fd, u8 gameIOS)
+int BlockIOSReload(int es_fd, u32 gameIOS)
 {
     if (es_fd < 0)
         return -1;

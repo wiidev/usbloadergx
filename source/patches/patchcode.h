@@ -36,7 +36,6 @@ void langpatcher(void *addr, u32 len, u8 languageChoice);
 void vidolpatcher(void *addr, u32 len);
 void patchdebug(void *addr, u32 len);
 int LoadGameConfig(const char *CheatFilepath);
-int ocarina_patch(u8 *gameid);
 int ocarina_load_code(const char *CheatFilepath, u8 *gameid);
 
 #ifdef __cplusplus

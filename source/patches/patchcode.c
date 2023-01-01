@@ -78,9 +78,6 @@ static const u32 langpatch[3] = {0x7C600775, 0x40820010, 0x38000000};
 void dogamehooks(u32 hooktype, void *addr, u32 len)
 //---------------------------------------------------------------------------------
 {
-	if (hooktype == 0x00)
-		return;
-
 	bool isChannel = (*((char *)0x80000005) == 0) && (*((char *)0x80000006) == 0);
 	void *addr_start = addr;
 	void *addr_end = addr + len;
@@ -580,93 +577,6 @@ int LoadGameConfig(const char *CheatFilepath)
 		return -1;
 	}
 	tempgameconfsize = filesize;
-
-	return 0;
-}
-
-int ocarina_patch(u8 *gameid)
-{
-	// Thanks to Seeky for the MKWii gecko codes
-	// Thanks to InvoxiPlayGames for the gecko codes for the 23400 fix.
-	// Reimplemented by Leseratte without the need for a code handler.
-
-	u32 * patch_addr = 0;
-	char * patched = 0; 
-
-	// Patch error 23400 for CoD (Black Ops, Reflex, MW3) and Rock Band 3 / The Beatles
-
-	if (memcmp(gameid, "SC7", 3) == 0) 
-	{
-		gprintf("Patching error 23400 for game %s\n", gameid);
-		*(u32 *)0x8023c954 = 0x41414141;
-	}
-
-	else if (memcmp(gameid, "RJA", 3) == 0) 
-	{
-		gprintf("Patching error 23400 for game %s\n", gameid);
-		*(u32 *)0x801b838c = 0x41414141;
-	}
-
-	else if (memcmp(gameid, "SM8", 3) == 0) 
-	{
-		gprintf("Patching error 23400 for game %s\n", gameid);
-		*(u32 *)0x80238c74 = 0x41414141;
-	}
-
-	else if (memcmp(gameid, "SZB", 3) == 0) 
-	{
-		gprintf("Patching error 23400 for game %s\n", gameid);
-		*(u32 *)0x808e3b20 = 0x41414141;
-	}
-
-	else if (memcmp(gameid, "R9J", 3) == 0) 
-	{
-		gprintf("Patching error 23400 for game %s\n", gameid);
-		*(u32 *)0x808d6934 = 0x41414141;
-	}
-
-	// Patch RCE vulnerability in MKWii.
-	else if (memcmp(gameid, "RMC", 3) == 0) 
-	{
-		switch (gameid[3]) {
-
-			case 'P':
-				patched = (char *)0x80276054;
-				patch_addr = (u32 *)0x8089a194;
-				break; 
-			
-			case 'E': 
-				patched = (char *)0x80271d14;
-				patch_addr = (u32 *)0x80895ac4;
-				break; 
-
-			case 'J': 
-				patched = (char *)0x802759f4;
-				patch_addr = (u32 *)0x808992f4;
-				break;
-			
-			case 'K': 
-				patched = (char *)0x80263E34; 
-				patch_addr = (u32 *)0x808885cc; 
-				break; 
-
-			default:
-				gprintf("NOT patching RCE vulnerability due to invalid game ID: %s\n", gameid);
-				return 0;
-		}
-
-		if (*patched != '*') {
-			gprintf("Game is already Wiimmfi-patched, don't apply the RCE fix\n");
-		}
-		else {
-			gprintf("Patching RCE vulnerability for game ID %s\n", gameid);
-
-			for (int i = 0; i < 7; i++) {
-				*patch_addr++ = 0xff; 
-			}
-		}
-
-	}
 
 	return 0;
 }

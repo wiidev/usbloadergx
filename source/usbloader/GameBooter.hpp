@@ -26,6 +26,7 @@ class GameBooter
 		static int BootGame(struct discHdr *gameHdr);
 		static int BootGCMode(struct discHdr *gameHdr);
 	private:
+		static bool exclude_game(u8 *gameid, bool skipChannels = false);
 		static void SetupAltDOL(u8 * gameID, u8 &alternatedol, u32 &alternatedoloffset);
 		static void SetupNandEmu(u8 NandEmuMode, const char *NandEmuPath, struct discHdr &gameHeader);
 		static int SetupDisc(struct discHdr &gameHeader);
