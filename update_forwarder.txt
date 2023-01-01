@@ -1,3 +1,3 @@
 5.1
-http://svn.code.sf.net/p/usbloadergx/code/branches/updates/USBLoaderGX_forwarder[UNEO]_Wii.wad
-http://svn.code.sf.net/p/usbloadergx/code/branches/updates/USBLoaderGX_forwarder[UNEO]_vWii.wad
+https://github.com/wiidev/usbloadergx/raw/updates/USBLoaderGX_forwarder%5BUNEO%5D_Wii.wad
+https://github.com/wiidev/usbloadergx/raw/updates/USBLoaderGX_forwarder%5BUNEO%5D_vWii.wad
