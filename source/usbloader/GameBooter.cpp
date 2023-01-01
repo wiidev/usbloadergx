@@ -56,6 +56,7 @@
 #include "prompts/ProgressWindow.h"
 #include "neek.hpp"
 #include "lstub.h"
+#include "xml/GameTDB.hpp"
 
 /* GCC 11 false positives */
 #if __GNUC__ > 10
@@ -327,6 +328,40 @@ int GameBooter::BootGame(struct discHdr *gameHdr)
 	// boot neek for Wii games and EmuNAND channels only
 	if (NandEmuMode == EMUNAND_NEEK && (gameHeader.type == TYPE_GAME_WII_IMG || gameHeader.type == TYPE_GAME_EMUNANDCHAN))
 		return BootNeek(&gameHeader);
+
+	if (languageChoice == CONSOLE_DEFAULT)
+	{
+		std::string Filepath(Settings.titlestxt_path);
+		if (Filepath.back() != '/')
+			Filepath += '/';
+		Filepath += "wiitdb.xml";
+
+		GameTDB XML_DB;
+		if (XML_DB.OpenFile(Filepath.c_str()))
+		{
+			std::string gameLangs;
+			if (XML_DB.GetLanguages((char *)gameHeader.id, gameLangs))
+			{
+				// Check if the game supports the system language (CONF_GetLanguage returns 0-9)
+				std::string sysLangs[] = {"JA", "EN", "DE", "FR", "ES", "IT", "NL", "ZHCN", "ZHTW", "KO"};
+				if (gameLangs.find(sysLangs[CONF_GetLanguage()]) == std::string::npos)
+				{
+					// Use whatever is the first supported language
+					std::string lang = gameLangs.substr(0, gameLangs.find(","));
+					for (u32 i = 0; i < sizeof(sysLangs) / sizeof(sysLangs[0]); i++)
+					{
+						if (sysLangs[i] == lang)
+						{
+							gprintf("Changed language to %s\n", lang.c_str());
+							languageChoice = i;
+							break;
+						}
+					}
+				}
+			}
+			XML_DB.CloseFile();
+		}
+	}
 
 	AppCleanUp();
 
