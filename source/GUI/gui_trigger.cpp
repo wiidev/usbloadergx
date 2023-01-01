@@ -79,8 +79,6 @@ s8 GuiTrigger::WPAD_Stick(u8 right, int axis)
 	switch (wpad.exp.type)
 	{
 	case WPAD_EXP_NUNCHUK:
-		js = right ? NULL : &wpad.exp.nunchuk.js;
-		break;
 	case WPAD_EXP_GUITARHERO3:
 		js = right ? NULL : &wpad.exp.nunchuk.js;
 		break;
@@ -181,7 +179,7 @@ bool GuiTrigger::Right()
 bool GuiTrigger::Up()
 {
 	u32 wiibtn = WPAD_BUTTON_UP;
-	if (wpad.exp.type == WPAD_EXP_CLASSIC)
+	if (wpad.exp.type == WPAD_EXP_CLASSIC || wpad.exp.type == WPAD_EXP_GUITARHERO3)
 		wiibtn |= WPAD_CLASSIC_BUTTON_UP;
 
 	if (((wpad.btns_d | wpad.btns_h) & wiibtn) || ((pad.btns_d | pad.btns_h) & PAD_BUTTON_UP))
@@ -203,7 +201,7 @@ bool GuiTrigger::Up()
 bool GuiTrigger::Down()
 {
 	u32 wiibtn = WPAD_BUTTON_DOWN;
-	if (wpad.exp.type == WPAD_EXP_CLASSIC)
+	if (wpad.exp.type == WPAD_EXP_CLASSIC || wpad.exp.type == WPAD_EXP_GUITARHERO3)
 		wiibtn |= WPAD_CLASSIC_BUTTON_DOWN;
 
 	if (((wpad.btns_d | wpad.btns_h) & wiibtn) || ((pad.btns_d | pad.btns_h) & PAD_BUTTON_DOWN))

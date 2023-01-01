@@ -458,7 +458,8 @@ void GuiButton::Update(GuiTrigger * t)
 				cc_btns_trig = trigger[i]->wpad.btns_d >> 16;
 				
 				if( ((t->wpad.btns_d > 0 && wm_btns == wm_btns_trig) 
-					|| (t->wpad.exp.type == WPAD_EXP_CLASSIC && cc_btns == cc_btns_trig))
+					|| (t->wpad.exp.type == WPAD_EXP_CLASSIC && cc_btns == cc_btns_trig)
+					|| (t->wpad.exp.type == WPAD_EXP_GUITARHERO3 && cc_btns == cc_btns_trig))
 					|| (t->pad.btns_d > 0 && t->pad.btns_d == trigger[i]->pad.btns_d))
 				{
 					if (t->chan == stateChan || stateChan == -1)
@@ -501,6 +502,7 @@ void GuiButton::Update(GuiTrigger * t)
 				
 				if( (t->wpad.btns_d > 0 && wm_btns == wm_btns_trig) 
 					|| (t->wpad.exp.type == WPAD_EXP_CLASSIC && cc_btns == cc_btns_trig)
+					|| (t->wpad.exp.type == WPAD_EXP_GUITARHERO3 && cc_btns == cc_btns_trig)
 					|| (t->pad.btns_d > 0 && t->pad.btns_d == trigger[i]->pad.btns_d))
 				{
 					if (trigger[i]->type == TRIGGER_HELD && state == STATE_SELECTED && (t->chan == stateChan || stateChan == -1))
@@ -509,6 +511,7 @@ void GuiButton::Update(GuiTrigger * t)
 
 				if( (t->wpad.btns_h > 0 && wm_btns_h == wm_btns_trig) 
 					|| (t->wpad.exp.type == WPAD_EXP_CLASSIC && cc_btns_h == cc_btns_trig)
+					|| (t->wpad.exp.type == WPAD_EXP_GUITARHERO3 && cc_btns_h == cc_btns_trig)
 					|| (t->pad.btns_h > 0 && t->pad.btns_h == trigger[i]->pad.btns_h)
 				)
 				{
