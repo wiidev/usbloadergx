@@ -28,10 +28,8 @@
 #include <map>
 #include <string>
 #include <vector>
-#include "xml/tinyxml2.h"
+#include "xml/pugixml.hpp"
 #include "CCategoryList.hpp"
-
-using namespace tinyxml2;
 
 class CGameCategories
 {
@@ -58,7 +56,7 @@ class CGameCategories
 
 		CCategoryList CategoryList;
 	protected:
-		bool ValidVersion(XMLElement *xmlfile);
+		bool ValidVersion(pugi::xml_node xmlfile);
 
 		std::string configPath;
 		const std::vector<unsigned int> defaultCategory;

@@ -90,18 +90,18 @@ static bool CheckNewGameTDBVersion(const char *url)
 	if (file.gametdbcheck <= 0)
 		return false;
 
-	std::string Title;
-	std::string Filepath = Settings.titlestxt_path;
-	if (Settings.titlestxt_path[Filepath.size() - 1] != '/')
+	std::string Filepath(Settings.titlestxt_path);
+	if (Filepath.back() != '/')
 		Filepath += '/';
 	Filepath += "wiitdb.xml";
 
 	GameTDB XML_DB;
 
-	if (!XML_DB.OpenFile((Filepath.c_str())))
+	if (!XML_DB.OpenFile(Filepath.c_str()))
 		return true; //! If no file exists we need the file
 
 	u64 ExistingVersion = XML_DB.GetGameTDBVersion();
+	XML_DB.CloseFile();
 
 	gprintf("Existing GameTDB Version: %llu Online GameTDB Version: %llu\n", ExistingVersion, file.gametdbcheck);
 
@@ -118,10 +118,9 @@ int UpdateGameTDB()
 
 	gprintf("Updating GameTDB...\n");
 
-	std::string ZipPath = Settings.titlestxt_path;
-	if (Settings.titlestxt_path[ZipPath.size() - 1] != '/')
+	std::string ZipPath(Settings.titlestxt_path);
+	if (ZipPath.back() != '/')
 		ZipPath += '/';
-
 	ZipPath += "wiitdb.zip";
 
 	int filesize = DownloadFileToPath(Settings.URL_GameTDB, ZipPath.c_str());

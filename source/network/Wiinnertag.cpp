@@ -27,10 +27,8 @@
 #include "network/networkops.h"
 #include "network/https.h"
 #include "utils/StringTools.h"
-#include "xml/tinyxml2.h"
+#include "xml/pugixml.hpp"
 #include "gecko.h"
-
-using namespace tinyxml2;
 
 Wiinnertag::Wiinnertag(const std::string &filepath)
 {
@@ -39,26 +37,27 @@ Wiinnertag::Wiinnertag(const std::string &filepath)
 
 bool Wiinnertag::ReadXML(const std::string &filepath)
 {
-	XMLDocument xmlDoc; 
-	if(xmlDoc.LoadFile(filepath.c_str()) != 0)
+	pugi::xml_document xmlDoc;
+	pugi::xml_parse_result result = xmlDoc.load_file(filepath.c_str());
+	if (!result)
 		return false;
 
-	XMLElement * node =  xmlDoc.FirstChildElement("Tag");
+	pugi::xml_node node = xmlDoc.child("Tag");
 
-	while(node != NULL)
+	while (node != NULL)
 	{
-		const char * URL = node->Attribute("URL");
-		const char * Key = node->Attribute("Key");
+		const char *URL = node.attribute("URL").value();
+		const char *Key = node.attribute("Key").value();
 
-		if(URL && Key)
+		if (URL && Key)
 		{
 			int size = tagList.size();
-			tagList.resize(size+1);
+			tagList.resize(size + 1);
 			tagList[size].first = URL;
 			tagList[size].second = Key;
 		}
 
-		node = node->NextSiblingElement();
+		node = node.next_sibling();
 	}
 
 	return true;
@@ -66,12 +65,12 @@ bool Wiinnertag::ReadXML(const std::string &filepath)
 
 bool Wiinnertag::Send(const char *gameID)
 {
-	if(!IsNetworkInit())
+	if (!IsNetworkInit())
 		return false;
 
 	char sendURL[1024];
 
-	for(u32 i = 0; i < tagList.size(); ++i)
+	for (u32 i = 0; i < tagList.size(); ++i)
 	{
 		strcpy(sendURL, tagList[i].first.c_str());
 
@@ -88,11 +87,11 @@ bool Wiinnertag::Send(const char *gameID)
 
 bool Wiinnertag::TagGame(const char *gameID)
 {
-	std::string fullpath = Settings.WiinnertagPath;
-	if(fullpath.size() == 0)
+	std::string fullpath(Settings.WiinnertagPath);
+	if (fullpath.length() == 0)
 		return false;
 
-	if(fullpath[fullpath.size()-1] != '/')
+	if (fullpath.back() != '/')
 		fullpath += '/';
 	fullpath += "Wiinnertag.xml";
 
@@ -102,27 +101,26 @@ bool Wiinnertag::TagGame(const char *gameID)
 
 bool Wiinnertag::CreateExample(const std::string &filepath)
 {
-	if(filepath.size() == 0)
+	if (filepath.length() == 0)
 		return false;
 
 	CreateSubfolder(filepath.c_str());
 
 	std::string fullpath = filepath;
-	if(fullpath[fullpath.size()-1] != '/')
+	if (fullpath.back() != '/')
 		fullpath += '/';
 	fullpath += "Wiinnertag.xml";
 
-	XMLDocument xmlDoc;
+	pugi::xml_document xmlDoc;
+	pugi::xml_node declaration = xmlDoc.append_child(pugi::node_declaration);
+	declaration.append_attribute("version") = "1.0";
+	declaration.append_attribute("encoding") = "UTF-8";
 
-	XMLDeclaration * declaration = xmlDoc.NewDeclaration();
-	xmlDoc.InsertEndChild(declaration);
+	pugi::xml_node Tag = xmlDoc.append_child("Tag");
+	Tag.append_attribute("URL") = "https://tag.rc24.xyz/wii?game={ID6}&key={KEY}";
+	Tag.append_attribute("Key") = "1234567890";
 
-	XMLElement *Tag = xmlDoc.NewElement("Tag");
-	Tag->SetAttribute("URL", "https://tag.rc24.xyz/wii?game={ID6}&key={KEY}");
-	Tag->SetAttribute("Key", "1234567890");
-	xmlDoc.InsertEndChild(Tag);
-
-	xmlDoc.SaveFile(fullpath.c_str());
+	xmlDoc.save_file(fullpath.c_str());
 
 	return true;
 }

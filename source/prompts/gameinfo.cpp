@@ -94,6 +94,7 @@ static int InternalShowGameInfo(struct discHdr *header)
 
 	if(!XML_DB.GetGameXMLInfo(ID, &GameInfo))
 	{
+		XML_DB.CloseFile();
 		ShowError(tr("Could not find info for this game in the wiitdb.xml."));
 		return -1;
 	}
@@ -255,26 +256,26 @@ static int InternalShowGameInfo(struct discHdr *header)
 	char linebuf2[100] = "";
 
 	// enable icons for required accessories
-	for (u32 i = 0; i < GameInfo.AccessoirList.size(); ++i)
+	for (u32 i = 0; i < GameInfo.AccessoryList.size(); ++i)
 	{
-		if(!GameInfo.AccessoirList[i].Required)
+		if(!GameInfo.AccessoryList[i].Required)
 			continue;
 
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "classiccontroller") == 0) classiccontroller = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "nunchuk") == 0) nunchuk = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "guitar") == 0) guitar = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "drums") == 0) drums = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "dancepad") == 0) dancepad = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "motionplus") == 0) motionplus = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "wheel") == 0) wheel = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "balanceboard") == 0) balanceboard = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "microphone") == 0) microphone = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "zapper") == 0) zapper = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "nintendods") == 0) nintendods = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "wiispeak") == 0) wiispeak = 1;
-		//if (strcmp(GameInfo.AccessoirList[i].Name.c_str(),"vitalitysensor")==0)
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "classiccontroller") == 0) classiccontroller = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "nunchuk") == 0) nunchuk = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "guitar") == 0) guitar = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "drums") == 0) drums = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "dancepad") == 0) dancepad = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "motionplus") == 0) motionplus = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "wheel") == 0) wheel = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "balanceboard") == 0) balanceboard = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "microphone") == 0) microphone = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "zapper") == 0) zapper = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "nintendods") == 0) nintendods = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "wiispeak") == 0) wiispeak = 1;
+		//if (strcmp(GameInfo.AccessoryList[i].Name.c_str(),"vitalitysensor")==0)
 		//   vitalitysensor=1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "gamecube") == 0) gamecube = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "gamecube") == 0) gamecube = 1;
 	}
 
 	// switch icons
@@ -331,26 +332,26 @@ static int InternalShowGameInfo(struct discHdr *header)
 	else dancepadImgData = Resources::GetImageData("dancepad.png");
 
 	// look for optional accessories
-	for (u32 i = 0; i < GameInfo.AccessoirList.size(); ++i)
+	for (u32 i = 0; i < GameInfo.AccessoryList.size(); ++i)
 	{
-		if(GameInfo.AccessoirList[i].Required)
+		if(GameInfo.AccessoryList[i].Required)
 			continue;
 
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "classiccontroller") == 0) classiccontroller = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "nunchuk") == 0) nunchuk = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "guitar") == 0) guitar = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "drums") == 0) drums = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "dancepad") == 0) dancepad = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "motionplus") == 0) motionplus = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "wheel") == 0) wheel = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "balanceboard") == 0) balanceboard = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "microphone") == 0) microphone = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "zapper") == 0) zapper = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "nintendods") == 0) nintendods = 1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "wiispeak") == 0) wiispeak = 1;
-		//if (strcmp(GameInfo.AccessoirList[i].Name.c_str(),"vitalitysensor")==0)
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "classiccontroller") == 0) classiccontroller = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "nunchuk") == 0) nunchuk = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "guitar") == 0) guitar = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "drums") == 0) drums = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "dancepad") == 0) dancepad = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "motionplus") == 0) motionplus = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "wheel") == 0) wheel = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "balanceboard") == 0) balanceboard = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "microphone") == 0) microphone = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "zapper") == 0) zapper = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "nintendods") == 0) nintendods = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "wiispeak") == 0) wiispeak = 1;
+		//if (strcmp(GameInfo.AccessoryList[i].Name.c_str(),"vitalitysensor")==0)
 		//	vitalitysensor=1;
-		if (strcmp(GameInfo.AccessoirList[i].Name.c_str(), "gamecube") == 0) gamecube = 1;
+		if (strcmp(GameInfo.AccessoryList[i].Name.c_str(), "gamecube") == 0) gamecube = 1;
 	}
 
 	dialogBoxImg1 = new GuiImage(&dialogBox1);
