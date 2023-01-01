@@ -97,6 +97,12 @@ static const char * CoversFullDownloadText[COVERSFULL_MAX_CHOICE] =
 	trNOOP( "Low/High" )
 };
 
+static const char * CoverActionText[COVER_ACTION_MAX] =
+{
+	trNOOP( "Download" ),
+	trNOOP( "Information" )
+};
+
 static const char *ScreensaverText[SCREENSAVER_MAX] =
 {
 	trNOOP( "OFF" ),
@@ -143,6 +149,7 @@ GuiSettingsMenu::GuiSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Keyboard" ));
 	Options->SetName(Idx++, "%s", tr( "Disc Artwork Download" ));
 	Options->SetName(Idx++, "%s", tr( "Full covers Download" ));
+	Options->SetName(Idx++, "%s", tr( "Cover Action" ));
 	Options->SetName(Idx++, "%s", tr( "Screensaver" ));
 	Options->SetName(Idx++, "%s", tr( "Mark new games" ));
 	Options->SetName(Idx++, "%s", tr( "Show Play Count" ));
@@ -214,6 +221,9 @@ void GuiSettingsMenu::SetOptionValues()
 
 	//! Settings: Covers Full Artwork Download
 	Options->SetValue(Idx++, "%s", tr( CoversFullDownloadText[Settings.coversfull] ));
+
+	//! Settings: Cover Action
+	Options->SetValue(Idx++, "%s", tr( CoverActionText[Settings.CoverAction] ));
 
 	//! Settings: Screensaver
 	Options->SetValue(Idx++, "%s", tr( ScreensaverText[Settings.screensaver] ));
@@ -393,6 +403,12 @@ int GuiSettingsMenu::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++Settings.coversfull >= COVERSFULL_MAX_CHOICE) Settings.coversfull = 0;
+	}
+
+	//! Settings: Cover Action
+	else if (ret == ++Idx)
+	{
+		if (++Settings.CoverAction >= COVER_ACTION_MAX) Settings.CoverAction = 0;
 	}
 
 	//! Settings: Screensaver

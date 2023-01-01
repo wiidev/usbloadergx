@@ -412,11 +412,11 @@ msgstr "Il file dei trucchi è vuoto"
 msgid "Clear"
 msgstr "Azzera"
 
-msgid "Click to Download Covers"
+msgid "Click to download covers"
 msgstr "Clicca per scaricare le copertine"
 
-msgid "Click to change game ID"
-msgstr "Clicca per cambiare ID al gioco"
+msgid "Click to view information"
+msgstr ""
 
 msgid "Clock"
 msgstr "Orologio"
@@ -530,6 +530,9 @@ msgstr "Impossibile scrivere il file."
 
 msgid "Could not write to:"
 msgstr "Impossibile scrivere in:"
+
+msgid "Cover Action"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "Scarica copertine"
@@ -1261,6 +1264,9 @@ msgstr "File in arrivo %0.2fMB"
 
 msgid "Individual"
 msgstr "Individuale"
+
+msgid "Information"
+msgstr ""
 
 msgid "Initializing Network"
 msgstr "Inizializzando la rete"

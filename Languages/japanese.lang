@@ -412,11 +412,11 @@ msgstr "チートファイルがありません"
 msgid "Clear"
 msgstr "クリア"
 
-msgid "Click to Download Covers"
+msgid "Click to download covers"
 msgstr "クリックでカバーをダウンロード"
 
-msgid "Click to change game ID"
-msgstr "クリックでゲームIDを変更"
+msgid "Click to view information"
+msgstr ""
 
 msgid "Clock"
 msgstr "時計の表示"
@@ -530,6 +530,9 @@ msgstr "ファイルを書き込めません"
 
 msgid "Could not write to:"
 msgstr "書き込めません:"
+
+msgid "Cover Action"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "何をダウンロードしますか"
@@ -1261,6 +1264,9 @@ msgstr "ﾌｧｲﾙを受信中 %0.2fMB"
 
 msgid "Individual"
 msgstr "個別"
+
+msgid "Information"
+msgstr ""
 
 msgid "Initializing Network"
 msgstr "接続中･･･"

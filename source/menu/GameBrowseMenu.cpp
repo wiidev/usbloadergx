@@ -312,17 +312,24 @@ GameBrowseMenu::GameBrowseMenu()
 	homebrewImgOver->SetWidescreen(Settings.widescreen);
 	homebrewBtn = new GuiButton(homebrewImg, homebrewImgOver, ALIGN_LEFT, ALIGN_TOP, thInt("410 - HBC btn pos x"), thInt("405 - HBC btn pos y"),
 								trigA, btnSoundOver, btnSoundClick2, 1, homebrewBtnTT, 15, -30, 1, 5);
+
+	if (Settings.CoverAction == COVER_ACTION_DOWNLOAD)
+		listCoverBtnTT = new GuiTooltip(tr( "Click to download covers" ));
+	else
+		listCoverBtnTT = new GuiTooltip(tr( "Click to view information" ));
+	if (Settings.wsprompt) listCoverBtnTT->SetWidescreen(Settings.widescreen);
+	listCoverBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
+	listCoverBtn = new GuiButton (0, 0);
+	listCoverBtn->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	listCoverBtn->SetPosition(thInt("26 - cover/download btn pos x"), thInt("58 - cover/download btn pos y"));
+	listCoverBtn->SetSoundOver(btnSoundOver);
+	listCoverBtn->SetToolTip(listCoverBtnTT, 205, -30);
+	listCoverBtn->SetTrigger(trigA);
+	listCoverBtn->SetSelectable(false);
+
 	//Downloading Covers
-	DownloadBtnTT = new GuiTooltip(tr( "Click to Download Covers" ));
-	if (Settings.wsprompt) DownloadBtnTT->SetWidescreen(Settings.widescreen);
-	DownloadBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
 	DownloadBtn = new GuiButton (0, 0);
-	DownloadBtn->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	DownloadBtn->SetPosition(thInt("26 - cover/download btn pos x"), thInt("58 - cover/download btn pos y"));
-	DownloadBtn->SetSoundOver(btnSoundOver);
-	DownloadBtn->SetTrigger(0, trigA);
 	DownloadBtn->SetTrigger(1, trig1);
-	DownloadBtn->SetToolTip(DownloadBtnTT, 205, -30);
 	DownloadBtn->SetSelectable(false);
 
 	gameCoverImg = new GuiImage();
@@ -483,6 +490,7 @@ GameBrowseMenu::~GameBrowseMenu()
 	delete categBtn;
 	delete loaderModeBtn;
 	delete homebrewBtn;
+	delete listCoverBtn;
 	delete DownloadBtn;
 
 	delete installBtnTT;
@@ -502,7 +510,7 @@ GameBrowseMenu::~GameBrowseMenu()
 	delete categBtnTT;
 	delete loaderModeBtnTT;
 	delete homebrewBtnTT;
-	delete DownloadBtnTT;
+	delete listCoverBtnTT;
 
 	delete gameBrowser;
 	mainWindow->Remove(searchBar);
@@ -649,7 +657,7 @@ void GameBrowseMenu::ReloadBrowser()
 			LoadCover(gameList[0]);
 		if(gameList.size() > 0)
 			Append(gameCoverImg);
-		DownloadBtn->SetSize(160, 224);
+		listCoverBtn->SetSize(160, 224);
 		listBtn->SetImage(listBtnImg);
 		listBtn->SetImageOver(listBtnImg);
 		gridBtn->SetImage(gridBtnImg_g);
@@ -697,7 +705,7 @@ void GameBrowseMenu::ReloadBrowser()
 	}
 	else if (Settings.gameDisplay == GRID_MODE)
 	{
-		DownloadBtn->SetSize(0, 0);
+		listCoverBtn->SetSize(0, 0);
 		UpdateGameInfoText(NULL);
 		gridBtn->SetImage(gridBtnImg);
 		gridBtn->SetImageOver(gridBtnImg);
@@ -745,7 +753,7 @@ void GameBrowseMenu::ReloadBrowser()
 	}
 	else if (Settings.gameDisplay == CAROUSEL_MODE)
 	{
-		DownloadBtn->SetSize(0, 0);
+		listCoverBtn->SetSize(0, 0);
 		UpdateGameInfoText(NULL);
 		carouselBtn->SetImage(carouselBtnImg);
 		carouselBtn->SetImageOver(carouselBtnImg);
@@ -793,7 +801,7 @@ void GameBrowseMenu::ReloadBrowser()
 	}
 	else if(Settings.gameDisplay == BANNERGRID_MODE)
 	{
-		DownloadBtn->SetSize(0, 0);
+		listCoverBtn->SetSize(0, 0);
 		UpdateGameInfoText(NULL);
 		bannerGridBtn->SetImage(bannerGridBtnImg);
 		bannerGridBtn->SetImageOver(bannerGridBtnImg);
@@ -848,7 +856,12 @@ void GameBrowseMenu::ReloadBrowser()
 		Append(installBtn);
 
 	if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_COVER_DOWNLOADS))
+	{
 		Append(DownloadBtn);
+		Append(listCoverBtn);
+	}
+	else if (Settings.CoverAction == COVER_ACTION_INFO)
+		Append(listCoverBtn);
 
 	Append(favoriteBtn);
 	Append(searchBtn);
@@ -991,6 +1004,33 @@ int GameBrowseMenu::MainLoop()
 			ResumeGui();
 		}
 		sdcardBtn->ResetState();
+	}
+
+	else if (listCoverBtn->GetState() == STATE_CLICKED)
+	{
+		gprintf("\tcoverBtn Clicked\n");
+		if (Settings.CoverAction == COVER_ACTION_DOWNLOAD)
+		{
+			ImageDownloader::DownloadImages();
+			gameList.FilterList();
+			ReloadBrowser();
+			listCoverBtn->ResetState();
+		}
+		else
+		{
+			int SelectedGame = GetSelectedGame();
+			listCoverBtn->ResetState();
+			if (SelectedGame >= 0 && SelectedGame < (s32) gameList.size())
+			{
+				rockout(gameList[SelectedGame]);
+				SetState(STATE_DISABLED);
+				int choice = showGameInfo(SelectedGame, 0);
+				SetState(STATE_DEFAULT);
+				rockout(0);
+				if (choice == 2)
+					homeBtn->SetState(STATE_CLICKED);
+			}
+		}
 	}
 
 	else if (DownloadBtn->GetState() == STATE_CLICKED)

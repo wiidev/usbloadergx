@@ -412,11 +412,11 @@ msgstr "El archivo de cheats está vacío"
 msgid "Clear"
 msgstr "Borrar"
 
-msgid "Click to Download Covers"
-msgstr "Clic para descargar Carátulas"
+msgid "Click to download covers"
+msgstr "Clic para descargar carátulas"
 
-msgid "Click to change game ID"
-msgstr "Clic para cambiar la ID del juego"
+msgid "Click to view information"
+msgstr ""
 
 msgid "Clock"
 msgstr "Reloj"
@@ -530,6 +530,9 @@ msgstr "No se pudo escribir archivo."
 
 msgid "Could not write to:"
 msgstr "No se pudo escribir en:"
+
+msgid "Cover Action"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "Descarga de Covers"
@@ -1260,6 +1263,9 @@ msgid "Incoming file %0.2fMB"
 msgstr "Archivo recibido %0.2fMB"
 
 msgid "Individual"
+msgstr ""
+
+msgid "Information"
 msgstr ""
 
 msgid "Initializing Network"

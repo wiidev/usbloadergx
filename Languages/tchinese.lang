@@ -412,11 +412,11 @@ msgstr "金手指檔是空的"
 msgid "Clear"
 msgstr "清除"
 
-msgid "Click to Download Covers"
+msgid "Click to download covers"
 msgstr "點選下載封面"
 
-msgid "Click to change game ID"
-msgstr "點選變更遊戲 ID"
+msgid "Click to view information"
+msgstr ""
 
 msgid "Clock"
 msgstr "時鐘"
@@ -530,6 +530,9 @@ msgstr "無法寫入檔案。"
 
 msgid "Could not write to:"
 msgstr "無法寫入到："
+
+msgid "Cover Action"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "下載封面"
@@ -1261,6 +1264,9 @@ msgstr "正在接收檔案 %0.2fMB"
 
 msgid "Individual"
 msgstr "個別的"
+
+msgid "Information"
+msgstr ""
 
 msgid "Initializing Network"
 msgstr "正在啟動網路"

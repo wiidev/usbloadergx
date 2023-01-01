@@ -412,11 +412,11 @@ msgstr "Snydfilen er tom"
 msgid "Clear"
 msgstr "Ryd"
 
-msgid "Click to Download Covers"
+msgid "Click to download covers"
 msgstr "Klik for at downloade covers"
 
-msgid "Click to change game ID"
-msgstr "Klik for at ændre spil-ID"
+msgid "Click to view information"
+msgstr ""
 
 msgid "Clock"
 msgstr "Ur"
@@ -530,6 +530,9 @@ msgstr "Kunne ikke skrive fil"
 
 msgid "Could not write to:"
 msgstr "Kunne ikke skrive til:"
+
+msgid "Cover Action"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "Cover-download"
@@ -1261,6 +1264,9 @@ msgstr "Henter fil %0.2fMB"
 
 msgid "Individual"
 msgstr "Individuel"
+
+msgid "Information"
+msgstr ""
 
 msgid "Initializing Network"
 msgstr "Initialiserer netværksforbindelse"

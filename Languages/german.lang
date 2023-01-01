@@ -412,11 +412,11 @@ msgstr "Cheatdatei ist leer"
 msgid "Clear"
 msgstr "Freigeben"
 
-msgid "Click to Download Covers"
+msgid "Click to download covers"
 msgstr "Cover herunterladen"
 
-msgid "Click to change game ID"
-msgstr "Spiel ID ändern"
+msgid "Click to view information"
+msgstr "Drücke um Infos zu erhalten"
 
 msgid "Clock"
 msgstr "Uhr"
@@ -530,6 +530,9 @@ msgstr "Konnte Datei nicht erstellen."
 
 msgid "Could not write to:"
 msgstr "Konnte nicht schreiben zu:"
+
+msgid "Cover Action"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "Welche Cover herunterladen?"
@@ -1261,6 +1264,9 @@ msgstr "Eingehende Datei %0.2fMB"
 
 msgid "Individual"
 msgstr "Individuell"
+
+msgid "Information"
+msgstr ""
 
 msgid "Initializing Network"
 msgstr "Initialisiere Netzwerk"

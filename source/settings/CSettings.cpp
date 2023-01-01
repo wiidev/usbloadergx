@@ -128,6 +128,7 @@ void CSettings::SetDefault()
 	partition = 0;
 	discart = DISCARTS_ORIGINALS_CUSTOMS;
 	coversfull = COVERSFULL_HQ;
+	CoverAction = COVER_ACTION_DOWNLOAD;
 	xflip = XFLIP_SYSMENU;
 	quickboot = OFF;
 	wiilight = WIILIGHT_ON;
@@ -382,6 +383,7 @@ bool CSettings::Save()
 	fprintf(file, "autonetwork = %d\n", autonetwork);
 	fprintf(file, "discart = %d\n", discart);
 	fprintf(file, "coversfull = %d\n", coversfull);
+	fprintf(file, "CoverAction = %d\n", CoverAction);
 	fprintf(file, "partition = %d\n", partition);
 	fprintf(file, "marknewtitles = %d\n", marknewtitles);
 	fprintf(file, "ShowFreeSpace = %d\n", ShowFreeSpace);
@@ -795,6 +797,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "coversfull") == 0)
 	{
 		coversfull = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "CoverAction") == 0)
+	{
+		CoverAction = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "autonetwork") == 0)

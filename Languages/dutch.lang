@@ -412,11 +412,11 @@ msgstr "Cheatbestand is leeg"
 msgid "Clear"
 msgstr "Wissen"
 
-msgid "Click to Download Covers"
+msgid "Click to download covers"
 msgstr "Klik om hoesjes te downloaden"
 
-msgid "Click to change game ID"
-msgstr "Klik om het spel ID te wijzigen"
+msgid "Click to view information"
+msgstr ""
 
 msgid "Clock"
 msgstr "Klok"
@@ -530,6 +530,9 @@ msgstr "Kan niet naar bestand schrijven."
 
 msgid "Could not write to:"
 msgstr "Kan niet schrijven naar:"
+
+msgid "Cover Action"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "Download hoesjes"
@@ -1261,6 +1264,9 @@ msgstr "Binnenkomend bestand %0.2fMB"
 
 msgid "Individual"
 msgstr "Individueel"
+
+msgid "Information"
+msgstr ""
 
 msgid "Initializing Network"
 msgstr "Netwerk initialiseren"

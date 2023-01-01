@@ -412,11 +412,11 @@ msgstr "Kooditiedosto tyhjä"
 msgid "Clear"
 msgstr ""
 
-msgid "Click to Download Covers"
+msgid "Click to download covers"
 msgstr "Klikkaa ladataksesi kansia"
 
-msgid "Click to change game ID"
-msgstr "Klikkaa vaihtaaksesi pelin ID"
+msgid "Click to view information"
+msgstr ""
 
 msgid "Clock"
 msgstr "Kello"
@@ -529,6 +529,9 @@ msgid "Could not write file."
 msgstr ""
 
 msgid "Could not write to:"
+msgstr ""
+
+msgid "Cover Action"
 msgstr ""
 
 msgid "Cover Download"
@@ -1260,6 +1263,9 @@ msgid "Incoming file %0.2fMB"
 msgstr ""
 
 msgid "Individual"
+msgstr ""
+
+msgid "Information"
 msgstr ""
 
 msgid "Initializing Network"

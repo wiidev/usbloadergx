@@ -412,11 +412,11 @@ msgstr "ไฟล์สูตรโกง ว่างเปล่า"
 msgid "Clear"
 msgstr ""
 
-msgid "Click to Download Covers"
+msgid "Click to download covers"
 msgstr "กดเพื่อดาวน์โหลดหน้าปก"
 
-msgid "Click to change game ID"
-msgstr "กดเพื่อเปลี่ยน ID เกมส์"
+msgid "Click to view information"
+msgstr ""
 
 msgid "Clock"
 msgstr "นาฬิกา"
@@ -529,6 +529,9 @@ msgid "Could not write file."
 msgstr ""
 
 msgid "Could not write to:"
+msgstr ""
+
+msgid "Cover Action"
 msgstr ""
 
 msgid "Cover Download"
@@ -1260,6 +1263,9 @@ msgid "Incoming file %0.2fMB"
 msgstr "ดาวน์โหลดไฟล์ %0.2fMB"
 
 msgid "Individual"
+msgstr ""
+
+msgid "Information"
 msgstr ""
 
 msgid "Initializing Network"

@@ -412,11 +412,11 @@ msgstr "το αρχείο cheat είναι κενό"
 msgid "Clear"
 msgstr "Σβήσιμο"
 
-msgid "Click to Download Covers"
+msgid "Click to download covers"
 msgstr "Κλικ για λήψη εξωφύλλων"
 
-msgid "Click to change game ID"
-msgstr "Κλικ για αλλαγή ονόματος παιχνιδιού"
+msgid "Click to view information"
+msgstr ""
 
 msgid "Clock"
 msgstr "Ρολοϊ"
@@ -530,6 +530,9 @@ msgstr "Δεν είναι δυνατή η εγγραφή του αρχείου."
 
 msgid "Could not write to:"
 msgstr "Αδυναμία εγγραφής σε:"
+
+msgid "Cover Action"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "Λήψη εξωφύλλων"
@@ -1261,6 +1264,9 @@ msgstr "Εισερχόμενο αρχείο %0.2fMB"
 
 msgid "Individual"
 msgstr "Ξεχωριστά"
+
+msgid "Information"
+msgstr ""
 
 msgid "Initializing Network"
 msgstr "Σύνδεση στο διαδίκτυο"

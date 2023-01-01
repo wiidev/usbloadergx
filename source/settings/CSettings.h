@@ -143,6 +143,7 @@ class CSettings
 		short autonetwork;
 		short discart;
 		short coversfull;
+		short CoverAction;
 		short gamesound;
 		short marknewtitles;
 		short InstallToDir;

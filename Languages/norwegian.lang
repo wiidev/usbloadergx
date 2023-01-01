@@ -412,11 +412,11 @@ msgstr "Juksefil er tom"
 msgid "Clear"
 msgstr "Fjern"
 
-msgid "Click to Download Covers"
+msgid "Click to download covers"
 msgstr "Klikk for å laste ned cover"
 
-msgid "Click to change game ID"
-msgstr "Klikk for å endre spill ID"
+msgid "Click to view information"
+msgstr ""
 
 msgid "Clock"
 msgstr "Klokke"
@@ -530,6 +530,9 @@ msgstr ""
 
 msgid "Could not write to:"
 msgstr "Kan ikke skrive til:"
+
+msgid "Cover Action"
+msgstr ""
 
 msgid "Cover Download"
 msgstr "Cover nedlasting"
@@ -1260,6 +1263,9 @@ msgid "Incoming file %0.2fMB"
 msgstr "Laster ned fil %0.2fMB"
 
 msgid "Individual"
+msgstr ""
+
+msgid "Information"
 msgstr ""
 
 msgid "Initializing Network"

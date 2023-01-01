@@ -412,11 +412,11 @@ msgstr "Hile dosyası boş"
 msgid "Clear"
 msgstr ""
 
-msgid "Click to Download Covers"
+msgid "Click to download covers"
 msgstr "Kapak Indirmek için Tıklayın"
 
-msgid "Click to change game ID"
-msgstr "Oyun ID sini değiştirmek için tıklayın"
+msgid "Click to view information"
+msgstr ""
 
 msgid "Clock"
 msgstr "Saat"
@@ -529,6 +529,9 @@ msgid "Could not write file."
 msgstr ""
 
 msgid "Could not write to:"
+msgstr ""
+
+msgid "Cover Action"
 msgstr ""
 
 msgid "Cover Download"
@@ -1260,6 +1263,9 @@ msgid "Incoming file %0.2fMB"
 msgstr "Gelen dosya %0.2fMB"
 
 msgid "Individual"
+msgstr ""
+
+msgid "Information"
 msgstr ""
 
 msgid "Initializing Network"
