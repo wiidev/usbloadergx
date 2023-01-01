@@ -588,9 +588,6 @@ msgstr "Des"
 msgid "Default"
 msgstr "Standard"
 
-msgid "Default Gamesettings"
-msgstr "Standard innstillinger"
-
 msgid "Default Settings"
 msgstr "Standard innstillinger"
 
@@ -1086,7 +1083,7 @@ msgstr ""
 msgid "Full Menu"
 msgstr ""
 
-msgid "Full covers Download"
+msgid "Full Covers Download"
 msgstr ""
 
 msgid "Full shutdown"
@@ -1379,13 +1376,13 @@ msgstr "Venstre"
 msgid "Like SysMenu"
 msgstr "Lik Systemmeny"
 
-msgid "List on Gamelaunch"
+msgid "List on game launch"
 msgstr "Liste ved starting av spill"
 
 msgid "Load"
 msgstr "Start"
 
-msgid "Load From SD/USB"
+msgid "Load from SD/USB"
 msgstr "Start fra SD/USB"
 
 #, c-format
@@ -1455,7 +1452,7 @@ msgstr ""
 msgid "Mar"
 msgstr ""
 
-msgid "Mark new games"
+msgid "Mark New Games"
 msgstr "Merk nye spill"
 
 msgid "May"
@@ -1878,7 +1875,7 @@ msgstr "Tilbakestill BG musikk"
 msgid "Reset Cached Titles"
 msgstr ""
 
-msgid "Reset Playcounter"
+msgid "Reset Play Count"
 msgstr "Nullstill teller"
 
 msgid "Reset to default BGM?"
@@ -1965,7 +1962,7 @@ msgstr "Velg DOL offset"
 msgid "Select a DOL"
 msgstr "Velg en DOL fil"
 
-msgid "Select a DOL from Game"
+msgid "Select a DOL from game"
 msgstr "Velg en DOL fra spill"
 
 msgid "Select game categories"

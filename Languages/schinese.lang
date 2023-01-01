@@ -588,9 +588,6 @@ msgstr "十二月"
 msgid "Default"
 msgstr "缺省"
 
-msgid "Default Gamesettings"
-msgstr "缺省游戏设定"
-
 msgid "Default Settings"
 msgstr "缺省设置"
 
@@ -1086,7 +1083,7 @@ msgstr "全部封面"
 msgid "Full Menu"
 msgstr "完整菜单"
 
-msgid "Full covers Download"
+msgid "Full Covers Download"
 msgstr "全部封面下载"
 
 msgid "Full shutdown"
@@ -1379,13 +1376,13 @@ msgstr "左"
 msgid "Like SysMenu"
 msgstr "同系统菜单"
 
-msgid "List on Gamelaunch"
+msgid "List on game launch"
 msgstr "游戏启动时选择"
 
 msgid "Load"
 msgstr "载入"
 
-msgid "Load From SD/USB"
+msgid "Load from SD/USB"
 msgstr "从 SD/USB 载入"
 
 #, c-format
@@ -1455,7 +1452,7 @@ msgstr ""
 msgid "Mar"
 msgstr "三月"
 
-msgid "Mark new games"
+msgid "Mark New Games"
 msgstr "标记新游戏"
 
 msgid "May"
@@ -1878,7 +1875,7 @@ msgstr "重置背景音乐"
 msgid "Reset Cached Titles"
 msgstr ""
 
-msgid "Reset Playcounter"
+msgid "Reset Play Count"
 msgstr "重置游戏计数"
 
 msgid "Reset to default BGM?"
@@ -1965,7 +1962,7 @@ msgstr "选择 DOL 偏移位"
 msgid "Select a DOL"
 msgstr "选择一个 DOL"
 
-msgid "Select a DOL from Game"
+msgid "Select a DOL from game"
 msgstr "从游戏选择 DOL"
 
 msgid "Select game categories"

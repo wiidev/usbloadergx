@@ -148,11 +148,11 @@ GuiSettingsMenu::GuiSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Font Scale Factor" ));
 	Options->SetName(Idx++, "%s", tr( "Keyboard" ));
 	Options->SetName(Idx++, "%s", tr( "Disc Artwork Download" ));
-	Options->SetName(Idx++, "%s", tr( "Full covers Download" ));
+	Options->SetName(Idx++, "%s", tr( "Full Covers Download" ));
 	Options->SetName(Idx++, "%s", tr( "Cover Action" ));
 	Options->SetName(Idx++, "%s", tr( "Screensaver" ));
 	Options->SetName(Idx++, "%s", tr( "Remember Last Game" ));
-	Options->SetName(Idx++, "%s", tr( "Mark new games" ));
+	Options->SetName(Idx++, "%s", tr( "Mark New Games" ));
 	Options->SetName(Idx++, "%s", tr( "Show Play Count" ));
 	Options->SetName(Idx++, "%s", tr( "Show Favorite on banner" ));
 	Options->SetName(Idx++, "%s", tr( "Show Free Space" ));
@@ -221,7 +221,7 @@ void GuiSettingsMenu::SetOptionValues()
 	//! Settings: Disc Artwork Download
 	Options->SetValue(Idx++, "%s", tr( DiscArtDownloadText[Settings.discart] ));
 
-	//! Settings: Covers Full Artwork Download
+	//! Settings: Full Covers Download
 	Options->SetValue(Idx++, "%s", tr( CoversFullDownloadText[Settings.coversfull] ));
 
 	//! Settings: Cover Action
@@ -233,7 +233,7 @@ void GuiSettingsMenu::SetOptionValues()
 	//! Settings: Remember Last Game
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.RememberLastGame] ));
 
-	//! Settings: Mark new games
+	//! Settings: Mark New Games
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.marknewtitles] ));
 
 	//! Settings: Show Play Count
@@ -407,7 +407,7 @@ int GuiSettingsMenu::GetMenuInternal()
 		if (++Settings.discart >= DISCARTS_MAX_CHOICE) Settings.discart = 0;
 	}
 
-	//! Settings: Covers Full Artwork Download
+	//! Settings: Full Covers Download
 	else if (ret == ++Idx)
 	{
 		if (++Settings.coversfull >= COVERSFULL_MAX_CHOICE) Settings.coversfull = 0;
@@ -433,7 +433,7 @@ int GuiSettingsMenu::GetMenuInternal()
 		if (++Settings.RememberLastGame >= MAX_ON_OFF) Settings.RememberLastGame = 0;
 	}
 
-	//! Settings: Mark new games
+	//! Settings: Mark New Games
 	else if (ret == ++Idx)
 	{
 		if (++Settings.marknewtitles >= MAX_ON_OFF) Settings.marknewtitles = 0;

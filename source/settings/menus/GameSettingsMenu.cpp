@@ -78,7 +78,7 @@ void GameSettingsMenu::SetupMainButtons()
 	{
 		SetMainButton(pos++, tr( "Extract Save to EmuNAND" ), MainButtonImgData, MainButtonImgOverData);
 	}
-	SetMainButton(pos++, tr( "Default Gamesettings" ), MainButtonImgData, MainButtonImgOverData);
+	SetMainButton(pos++, tr( "Default Settings" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Uninstall Menu" ), MainButtonImgData, MainButtonImgOverData);
 }
 
@@ -197,7 +197,7 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 		}
 	}
 
-	//! Default Gamesettings
+	//! Default Settings
 	else if(menuNr == Idx++)
 	{
 		int choice = WindowPrompt(tr( "Are you sure?" ), 0, tr( "Yes" ), tr( "Cancel" ));

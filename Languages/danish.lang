@@ -588,9 +588,6 @@ msgstr ""
 msgid "Default"
 msgstr "Standard"
 
-msgid "Default Gamesettings"
-msgstr "Standard spil-indstillinger"
-
 msgid "Default Settings"
 msgstr "Standardindstillinger"
 
@@ -1086,8 +1083,8 @@ msgstr "Fuld Covers"
 msgid "Full Menu"
 msgstr "Fuld Menu"
 
-msgid "Full covers Download"
-msgstr "Fuld covers Download"
+msgid "Full Covers Download"
+msgstr "Fuld Covers Download"
 
 msgid "Full shutdown"
 msgstr "Sluk"
@@ -1379,13 +1376,13 @@ msgstr "Venstre"
 msgid "Like SysMenu"
 msgstr "Ligesom Wii-menuen"
 
-msgid "List on Gamelaunch"
+msgid "List on game launch"
 msgstr "Vis ved opstart af spil"
 
 msgid "Load"
 msgstr "Indlæs"
 
-msgid "Load From SD/USB"
+msgid "Load from SD/USB"
 msgstr "Indlæs fra SD/USB"
 
 #, c-format
@@ -1455,7 +1452,7 @@ msgstr "Manuel (40~120)"
 msgid "Mar"
 msgstr ""
 
-msgid "Mark new games"
+msgid "Mark New Games"
 msgstr "Marker nye spil"
 
 msgid "May"
@@ -1878,7 +1875,7 @@ msgstr "Nulstil BG-musik"
 msgid "Reset Cached Titles"
 msgstr ""
 
-msgid "Reset Playcounter"
+msgid "Reset Play Count"
 msgstr "Nulstil spiltæller"
 
 msgid "Reset to default BGM?"
@@ -1965,7 +1962,7 @@ msgstr "Vælg DOL offset"
 msgid "Select a DOL"
 msgstr "Vælg en DOL"
 
-msgid "Select a DOL from Game"
+msgid "Select a DOL from game"
 msgstr "Vælg DOL fra spil"
 
 msgid "Select game categories"

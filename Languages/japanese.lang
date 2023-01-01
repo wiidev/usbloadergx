@@ -588,9 +588,6 @@ msgstr "12月"
 msgid "Default"
 msgstr "初期値"
 
-msgid "Default Gamesettings"
-msgstr "設定を初期化"
-
 msgid "Default Settings"
 msgstr "設定を初期化"
 
@@ -1086,7 +1083,7 @@ msgstr "フルカバー"
 msgid "Full Menu"
 msgstr "完全なメニュー"
 
-msgid "Full covers Download"
+msgid "Full Covers Download"
 msgstr "ﾌﾙｶﾊﾞｰのﾀﾞｳﾝﾛｰﾄﾞ"
 
 msgid "Full shutdown"
@@ -1379,13 +1376,13 @@ msgstr "左ボタンで"
 msgid "Like SysMenu"
 msgstr "Wiiメニュー風"
 
-msgid "List on Gamelaunch"
+msgid "List on game launch"
 msgstr "ゲーム起動時にリスト"
 
 msgid "Load"
 msgstr "はじめる"
 
-msgid "Load From SD/USB"
+msgid "Load from SD/USB"
 msgstr "SD/USBからロード"
 
 #, c-format
@@ -1455,7 +1452,7 @@ msgstr ""
 msgid "Mar"
 msgstr "3月"
 
-msgid "Mark new games"
+msgid "Mark New Games"
 msgstr "Newマークの表示機能"
 
 msgid "May"
@@ -1878,7 +1875,7 @@ msgstr "BGMをリセット"
 msgid "Reset Cached Titles"
 msgstr ""
 
-msgid "Reset Playcounter"
+msgid "Reset Play Count"
 msgstr "プレイ回数をリセット"
 
 msgid "Reset to default BGM?"
@@ -1965,7 +1962,7 @@ msgstr "代替DOLの選択"
 msgid "Select a DOL"
 msgstr "DOLを選択"
 
-msgid "Select a DOL from Game"
+msgid "Select a DOL from game"
 msgstr "ゲームからDOLを選択"
 
 msgid "Select game categories"

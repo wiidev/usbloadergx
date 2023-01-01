@@ -588,9 +588,6 @@ msgstr "Ara"
 msgid "Default"
 msgstr "Varsayılan"
 
-msgid "Default Gamesettings"
-msgstr "Varsayılan Oyun ayarları"
-
 msgid "Default Settings"
 msgstr "Varsayılan Ayarlar"
 
@@ -1086,7 +1083,7 @@ msgstr ""
 msgid "Full Menu"
 msgstr ""
 
-msgid "Full covers Download"
+msgid "Full Covers Download"
 msgstr ""
 
 msgid "Full shutdown"
@@ -1379,13 +1376,13 @@ msgstr "Sol"
 msgid "Like SysMenu"
 msgstr "Sistem Menüsü Gibi"
 
-msgid "List on Gamelaunch"
+msgid "List on game launch"
 msgstr ""
 
 msgid "Load"
 msgstr "Yükle"
 
-msgid "Load From SD/USB"
+msgid "Load from SD/USB"
 msgstr "SD/USB den yükle"
 
 #, c-format
@@ -1455,7 +1452,7 @@ msgstr ""
 msgid "Mar"
 msgstr ""
 
-msgid "Mark new games"
+msgid "Mark New Games"
 msgstr "Yeni oyunlari imle"
 
 msgid "May"
@@ -1878,7 +1875,7 @@ msgstr ""
 msgid "Reset Cached Titles"
 msgstr ""
 
-msgid "Reset Playcounter"
+msgid "Reset Play Count"
 msgstr "Sayacı sıfırla"
 
 msgid "Reset to default BGM?"
@@ -1965,7 +1962,7 @@ msgstr ""
 msgid "Select a DOL"
 msgstr "Bir DOL seç"
 
-msgid "Select a DOL from Game"
+msgid "Select a DOL from game"
 msgstr ""
 
 msgid "Select game categories"

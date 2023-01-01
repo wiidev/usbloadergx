@@ -51,7 +51,7 @@ UninstallSM::UninstallSM(struct discHdr * header)
 	{
 		Options->SetName(Idx++, "%s", tr( "Uninstall Game" ));
 	}
-	Options->SetName(Idx++, "%s", tr( "Reset Playcounter" ));
+	Options->SetName(Idx++, "%s", tr( "Reset Play Count" ));
 	Options->SetName(Idx++, "%s", tr( "Delete Cover Artwork" ));
 	Options->SetName(Idx++, "%s", tr( "Delete Disc Artwork" ));
 	Options->SetName(Idx++, "%s", tr( "Delete Cached Banner" ));
@@ -73,7 +73,7 @@ void UninstallSM::SetOptionValues()
 		Options->SetValue(Idx++, " ");
 	}
 
-	//! Settings: Reset Playcounter
+	//! Settings: Reset Play Count
 	Options->SetValue(Idx++, " ");
 
 	//! Settings: Delete Cover Artwork
@@ -185,7 +185,7 @@ int UninstallSM::GetMenuInternal()
 		return MENU_DISCLIST;
 	}
 
-	//! Settings: Reset Playcounter
+	//! Settings: Reset Play Count
 	else if (ret == ++Idx)
 	{
 		int result = WindowPrompt(tr( "Are you sure?" ), 0, tr( "Yes" ), tr( "Cancel" ));

@@ -588,9 +588,6 @@ msgstr "Dez"
 msgid "Default"
 msgstr "Predefinida/o"
 
-msgid "Default Gamesettings"
-msgstr "Definições Jogo Predefinidas"
-
 msgid "Default Settings"
 msgstr "Definições Predefinidas"
 
@@ -1086,7 +1083,7 @@ msgstr ""
 msgid "Full Menu"
 msgstr "Menu Completo"
 
-msgid "Full covers Download"
+msgid "Full Covers Download"
 msgstr ""
 
 msgid "Full shutdown"
@@ -1379,13 +1376,13 @@ msgstr "Esquerda"
 msgid "Like SysMenu"
 msgstr "Igual ao Menu Wii"
 
-msgid "List on Gamelaunch"
+msgid "List on game launch"
 msgstr "Lista inicial"
 
 msgid "Load"
 msgstr "Carregar"
 
-msgid "Load From SD/USB"
+msgid "Load from SD/USB"
 msgstr "Carregar do SD/USB"
 
 #, c-format
@@ -1455,7 +1452,7 @@ msgstr ""
 msgid "Mar"
 msgstr "Mar"
 
-msgid "Mark new games"
+msgid "Mark New Games"
 msgstr "Marcar jogos novos"
 
 msgid "May"
@@ -1878,7 +1875,7 @@ msgstr "Reinicializar Música de Fundo"
 msgid "Reset Cached Titles"
 msgstr ""
 
-msgid "Reset Playcounter"
+msgid "Reset Play Count"
 msgstr "Limpar Contagem"
 
 msgid "Reset to default BGM?"
@@ -1965,7 +1962,7 @@ msgstr "Seleccionar Offset DOL"
 msgid "Select a DOL"
 msgstr "Seleccionar um DOL"
 
-msgid "Select a DOL from Game"
+msgid "Select a DOL from game"
 msgstr "Seleccionar um DOL do Jogo"
 
 msgid "Select game categories"

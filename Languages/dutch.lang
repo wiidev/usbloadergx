@@ -588,9 +588,6 @@ msgstr ""
 msgid "Default"
 msgstr "Standaard"
 
-msgid "Default Gamesettings"
-msgstr "Standaard spel instellingen"
-
 msgid "Default Settings"
 msgstr "Standaardinstellingen"
 
@@ -1086,7 +1083,7 @@ msgstr "Volledige Hoesjes"
 msgid "Full Menu"
 msgstr "Volledig Menu"
 
-msgid "Full covers Download"
+msgid "Full Covers Download"
 msgstr "Volledige hoesjes download"
 
 msgid "Full shutdown"
@@ -1379,13 +1376,13 @@ msgstr "Links"
 msgid "Like SysMenu"
 msgstr "Als SysteemMenu"
 
-msgid "List on Gamelaunch"
+msgid "List on game launch"
 msgstr "Lijst bij Spelstart"
 
 msgid "Load"
 msgstr "Laad"
 
-msgid "Load From SD/USB"
+msgid "Load from SD/USB"
 msgstr "Laden van SD/USB"
 
 #, c-format
@@ -1455,7 +1452,7 @@ msgstr ""
 msgid "Mar"
 msgstr "Mrt"
 
-msgid "Mark new games"
+msgid "Mark New Games"
 msgstr "Markeer nieuwe spellen"
 
 msgid "May"
@@ -1878,7 +1875,7 @@ msgstr "Reset achtergrond muziek"
 msgid "Reset Cached Titles"
 msgstr ""
 
-msgid "Reset Playcounter"
+msgid "Reset Play Count"
 msgstr "Speeltellers resetten"
 
 msgid "Reset to default BGM?"
@@ -1965,7 +1962,7 @@ msgstr "Selecteer DOL Offset"
 msgid "Select a DOL"
 msgstr "Selecteer een DOL"
 
-msgid "Select a DOL from Game"
+msgid "Select a DOL from game"
 msgstr "Selecteer een DOL van Spel"
 
 msgid "Select game categories"

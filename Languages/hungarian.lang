@@ -588,9 +588,6 @@ msgstr ""
 msgid "Default"
 msgstr "Alapértelmezett"
 
-msgid "Default Gamesettings"
-msgstr "Alapértelmezett beállítások"
-
 msgid "Default Settings"
 msgstr "Alapértelmezett beállítások"
 
@@ -1086,7 +1083,7 @@ msgstr ""
 msgid "Full Menu"
 msgstr ""
 
-msgid "Full covers Download"
+msgid "Full Covers Download"
 msgstr ""
 
 msgid "Full shutdown"
@@ -1379,13 +1376,13 @@ msgstr "Balra"
 msgid "Like SysMenu"
 msgstr "Mint a Rendszermenü"
 
-msgid "List on Gamelaunch"
+msgid "List on game launch"
 msgstr ""
 
 msgid "Load"
 msgstr "Betöltés"
 
-msgid "Load From SD/USB"
+msgid "Load from SD/USB"
 msgstr "Betöltés SD/USB-rõl"
 
 #, c-format
@@ -1455,7 +1452,7 @@ msgstr ""
 msgid "Mar"
 msgstr "Már"
 
-msgid "Mark new games"
+msgid "Mark New Games"
 msgstr "Új játékok megjelölése"
 
 msgid "May"
@@ -1878,7 +1875,7 @@ msgstr ""
 msgid "Reset Cached Titles"
 msgstr ""
 
-msgid "Reset Playcounter"
+msgid "Reset Play Count"
 msgstr "Elindítások nullázása"
 
 msgid "Reset to default BGM?"
@@ -1965,7 +1962,7 @@ msgstr ""
 msgid "Select a DOL"
 msgstr "DOL kiválasztása"
 
-msgid "Select a DOL from Game"
+msgid "Select a DOL from game"
 msgstr ""
 
 msgid "Select game categories"

@@ -112,9 +112,9 @@ static const char * ParentalText[] =
 static const char * AlternateDOLText[] =
 {
 	trNOOP( "OFF" ),
-	trNOOP( "Select a DOL from Game" ),
-	trNOOP( "Load From SD/USB" ),
-	trNOOP( "List on Gamelaunch" ),
+	trNOOP( "Select a DOL from game" ),
+	trNOOP( "Load from SD/USB" ),
+	trNOOP( "List on game launch" ),
 	trNOOP( "Default" )
 };
 

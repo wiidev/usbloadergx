@@ -588,9 +588,6 @@ msgstr "Dic"
 msgid "Default"
 msgstr "Por Defecto"
 
-msgid "Default Gamesettings"
-msgstr "Restaurar configuración"
-
 msgid "Default Settings"
 msgstr "Restaurar configuración"
 
@@ -1086,7 +1083,7 @@ msgstr "Covers Completos"
 msgid "Full Menu"
 msgstr "Completo"
 
-msgid "Full covers Download"
+msgid "Full Covers Download"
 msgstr "Descargar covers completos"
 
 msgid "Full shutdown"
@@ -1379,13 +1376,13 @@ msgstr "Izquierda"
 msgid "Like SysMenu"
 msgstr "Como Menú Sist."
 
-msgid "List on Gamelaunch"
+msgid "List on game launch"
 msgstr "Lista al lanzar juego"
 
 msgid "Load"
 msgstr "Cargar"
 
-msgid "Load From SD/USB"
+msgid "Load from SD/USB"
 msgstr "Cargar desde SD/USB"
 
 #, c-format
@@ -1455,7 +1452,7 @@ msgstr ""
 msgid "Mar"
 msgstr ""
 
-msgid "Mark new games"
+msgid "Mark New Games"
 msgstr "Marcar juegos nuevos"
 
 msgid "May"
@@ -1878,7 +1875,7 @@ msgstr "Reiniciar Música de Fondo"
 msgid "Reset Cached Titles"
 msgstr ""
 
-msgid "Reset Playcounter"
+msgid "Reset Play Count"
 msgstr "Reiniciar Partidas"
 
 msgid "Reset to default BGM?"
@@ -1965,7 +1962,7 @@ msgstr "Seleccionar offset del DOL"
 msgid "Select a DOL"
 msgstr "Seleccionar DOL"
 
-msgid "Select a DOL from Game"
+msgid "Select a DOL from game"
 msgstr "Seleccionar DOL desde Juego"
 
 msgid "Select game categories"

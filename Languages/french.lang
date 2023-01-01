@@ -588,9 +588,6 @@ msgstr "Déc"
 msgid "Default"
 msgstr "Par défaut"
 
-msgid "Default Gamesettings"
-msgstr "Réinitialiser les paramètres du jeu"
-
 msgid "Default Settings"
 msgstr "Réinitialiser les paramètres"
 
@@ -1086,7 +1083,7 @@ msgstr "Jaquettes complètes"
 msgid "Full Menu"
 msgstr "Menu complet"
 
-msgid "Full covers Download"
+msgid "Full Covers Download"
 msgstr "Téléch. Jaqu. complètes"
 
 msgid "Full shutdown"
@@ -1379,13 +1376,13 @@ msgstr "Gauche"
 msgid "Like SysMenu"
 msgstr "Menu système"
 
-msgid "List on Gamelaunch"
+msgid "List on game launch"
 msgstr "Proposer au démarrage"
 
 msgid "Load"
 msgstr "Charger"
 
-msgid "Load From SD/USB"
+msgid "Load from SD/USB"
 msgstr "Charger depuis SD/USB"
 
 #, c-format
@@ -1455,7 +1452,7 @@ msgstr "Manuelle (40~120)"
 msgid "Mar"
 msgstr "Mars"
 
-msgid "Mark new games"
+msgid "Mark New Games"
 msgstr "Marquer les nouveaux jeux"
 
 msgid "May"
@@ -1878,7 +1875,7 @@ msgstr "Fond sonore par defaut"
 msgid "Reset Cached Titles"
 msgstr ""
 
-msgid "Reset Playcounter"
+msgid "Reset Play Count"
 msgstr "Remise à zéro du compteur d'utilisations"
 
 msgid "Reset to default BGM?"
@@ -1965,7 +1962,7 @@ msgstr "Offset du DOL alt."
 msgid "Select a DOL"
 msgstr "Choisir un DOL"
 
-msgid "Select a DOL from Game"
+msgid "Select a DOL from game"
 msgstr "Sélectionner un DOL à partir du jeu"
 
 msgid "Select game categories"

@@ -588,9 +588,6 @@ msgstr "12 월"
 msgid "Default"
 msgstr "기본"
 
-msgid "Default Gamesettings"
-msgstr "기본 게임설정"
-
 msgid "Default Settings"
 msgstr "기본 설정"
 
@@ -1086,7 +1083,7 @@ msgstr "전체 커버"
 msgid "Full Menu"
 msgstr "전체 메뉴"
 
-msgid "Full covers Download"
+msgid "Full Covers Download"
 msgstr "전체 커버 다운로드"
 
 msgid "Full shutdown"
@@ -1379,13 +1376,13 @@ msgstr "왼쪽"
 msgid "Like SysMenu"
 msgstr "SysMenu 처럼"
 
-msgid "List on Gamelaunch"
+msgid "List on game launch"
 msgstr "게임실행 목록"
 
 msgid "Load"
 msgstr "로드"
 
-msgid "Load From SD/USB"
+msgid "Load from SD/USB"
 msgstr "SD/USB에서 로드"
 
 #, c-format
@@ -1455,7 +1452,7 @@ msgstr "매뉴얼 (40~120)"
 msgid "Mar"
 msgstr "3 월"
 
-msgid "Mark new games"
+msgid "Mark New Games"
 msgstr "새 게임 표시"
 
 msgid "May"
@@ -1878,7 +1875,7 @@ msgstr "배경 음악 리셋"
 msgid "Reset Cached Titles"
 msgstr "캐시된 타이틀 재설정"
 
-msgid "Reset Playcounter"
+msgid "Reset Play Count"
 msgstr "실행 횟수 리셋"
 
 msgid "Reset to default BGM?"
@@ -1965,7 +1962,7 @@ msgstr "DOL 옵셋 선택"
 msgid "Select a DOL"
 msgstr "DOL 선택"
 
-msgid "Select a DOL from Game"
+msgid "Select a DOL from game"
 msgstr "게임에서 DOL 선택"
 
 msgid "Select game categories"

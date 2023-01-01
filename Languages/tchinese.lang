@@ -588,9 +588,6 @@ msgstr "十二月"
 msgid "Default"
 msgstr "預設值"
 
-msgid "Default Gamesettings"
-msgstr "初始化遊戲設定"
-
 msgid "Default Settings"
 msgstr "初始化設定"
 
@@ -1086,7 +1083,7 @@ msgstr "完整封面"
 msgid "Full Menu"
 msgstr "完整選單"
 
-msgid "Full covers Download"
+msgid "Full Covers Download"
 msgstr "完整封面下載"
 
 msgid "Full shutdown"
@@ -1379,13 +1376,13 @@ msgstr "左"
 msgid "Like SysMenu"
 msgstr "同系統選單"
 
-msgid "List on Gamelaunch"
+msgid "List on game launch"
 msgstr "遊戲啟動時列出清單"
 
 msgid "Load"
 msgstr "載入"
 
-msgid "Load From SD/USB"
+msgid "Load from SD/USB"
 msgstr "從 SD/USB 載入"
 
 #, c-format
@@ -1455,7 +1452,7 @@ msgstr ""
 msgid "Mar"
 msgstr "三月"
 
-msgid "Mark new games"
+msgid "Mark New Games"
 msgstr "標示新遊戲"
 
 msgid "May"
@@ -1878,7 +1875,7 @@ msgstr "重設背景音樂"
 msgid "Reset Cached Titles"
 msgstr ""
 
-msgid "Reset Playcounter"
+msgid "Reset Play Count"
 msgstr "重設執行次數"
 
 msgid "Reset to default BGM?"
@@ -1965,7 +1962,7 @@ msgstr "選取DOL補償"
 msgid "Select a DOL"
 msgstr "選擇一個 DOL"
 
-msgid "Select a DOL from Game"
+msgid "Select a DOL from game"
 msgstr "從遊戲中選擇DOL"
 
 msgid "Select game categories"

@@ -588,9 +588,6 @@ msgstr "joulu"
 msgid "Default"
 msgstr "Oletus"
 
-msgid "Default Gamesettings"
-msgstr "Oletus peliasetukset"
-
 msgid "Default Settings"
 msgstr "Oletusasetukset"
 
@@ -1086,7 +1083,7 @@ msgstr ""
 msgid "Full Menu"
 msgstr ""
 
-msgid "Full covers Download"
+msgid "Full Covers Download"
 msgstr ""
 
 msgid "Full shutdown"
@@ -1379,13 +1376,13 @@ msgstr "Vasen"
 msgid "Like SysMenu"
 msgstr "Kuin wii-menu"
 
-msgid "List on Gamelaunch"
+msgid "List on game launch"
 msgstr ""
 
 msgid "Load"
 msgstr "Lataa"
 
-msgid "Load From SD/USB"
+msgid "Load from SD/USB"
 msgstr "Lataa SD:ltä/USB:ltä"
 
 #, c-format
@@ -1455,7 +1452,7 @@ msgstr ""
 msgid "Mar"
 msgstr "maalis"
 
-msgid "Mark new games"
+msgid "Mark New Games"
 msgstr ""
 
 msgid "May"
@@ -1878,7 +1875,7 @@ msgstr ""
 msgid "Reset Cached Titles"
 msgstr ""
 
-msgid "Reset Playcounter"
+msgid "Reset Play Count"
 msgstr "Resetoi pelauksen määrä"
 
 msgid "Reset to default BGM?"
@@ -1965,7 +1962,7 @@ msgstr ""
 msgid "Select a DOL"
 msgstr "Valitse DOL"
 
-msgid "Select a DOL from Game"
+msgid "Select a DOL from game"
 msgstr ""
 
 msgid "Select game categories"

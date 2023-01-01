@@ -588,9 +588,6 @@ msgstr "List"
 msgid "Default"
 msgstr "Puvodní"
 
-msgid "Default Gamesettings"
-msgstr "Puvodní nastavení her"
-
 msgid "Default Settings"
 msgstr "Puvodní nastavení"
 
@@ -1086,7 +1083,7 @@ msgstr ""
 msgid "Full Menu"
 msgstr "Plná nabídka"
 
-msgid "Full covers Download"
+msgid "Full Covers Download"
 msgstr ""
 
 msgid "Full shutdown"
@@ -1379,13 +1376,13 @@ msgstr "Vlevo"
 msgid "Like SysMenu"
 msgstr "Jako hlavní menu"
 
-msgid "List on Gamelaunch"
+msgid "List on game launch"
 msgstr "Seznam pri spustení hry"
 
 msgid "Load"
 msgstr "Spustit"
 
-msgid "Load From SD/USB"
+msgid "Load from SD/USB"
 msgstr "Nahrát z SD/USB"
 
 #, c-format
@@ -1455,7 +1452,7 @@ msgstr ""
 msgid "Mar"
 msgstr "Brez"
 
-msgid "Mark new games"
+msgid "Mark New Games"
 msgstr "Oznacir nové hry"
 
 msgid "May"
@@ -1878,7 +1875,7 @@ msgstr "Obnovit hudbu na pozadí"
 msgid "Reset Cached Titles"
 msgstr ""
 
-msgid "Reset Playcounter"
+msgid "Reset Play Count"
 msgstr "Vynulovat cítac spuštení"
 
 msgid "Reset to default BGM?"
@@ -1965,7 +1962,7 @@ msgstr "Vyberte DOL ofset"
 msgid "Select a DOL"
 msgstr "Vyberte DOL"
 
-msgid "Select a DOL from Game"
+msgid "Select a DOL from game"
 msgstr "Vybrat DOL ze hry"
 
 msgid "Select game categories"

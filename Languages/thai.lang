@@ -588,9 +588,6 @@ msgstr "ธค."
 msgid "Default"
 msgstr "ค่าแรกกำหนด"
 
-msgid "Default Gamesettings"
-msgstr "ค่าแรกกำหนด"
-
 msgid "Default Settings"
 msgstr "ค่าแรกกำหนด"
 
@@ -1086,7 +1083,7 @@ msgstr ""
 msgid "Full Menu"
 msgstr ""
 
-msgid "Full covers Download"
+msgid "Full Covers Download"
 msgstr ""
 
 msgid "Full shutdown"
@@ -1379,13 +1376,13 @@ msgstr "ซ้าย"
 msgid "Like SysMenu"
 msgstr "คล้าย SysMenu"
 
-msgid "List on Gamelaunch"
+msgid "List on game launch"
 msgstr ""
 
 msgid "Load"
 msgstr "โหลด"
 
-msgid "Load From SD/USB"
+msgid "Load from SD/USB"
 msgstr "โหลดจาก SD/USB"
 
 #, c-format
@@ -1455,7 +1452,7 @@ msgstr ""
 msgid "Mar"
 msgstr "มีค."
 
-msgid "Mark new games"
+msgid "Mark New Games"
 msgstr ""
 
 msgid "May"
@@ -1878,7 +1875,7 @@ msgstr ""
 msgid "Reset Cached Titles"
 msgstr ""
 
-msgid "Reset Playcounter"
+msgid "Reset Play Count"
 msgstr "เคลียร์การนับจำนวนที่เล่น"
 
 msgid "Reset to default BGM?"
@@ -1965,7 +1962,7 @@ msgstr ""
 msgid "Select a DOL"
 msgstr "เลือก DOL"
 
-msgid "Select a DOL from Game"
+msgid "Select a DOL from game"
 msgstr ""
 
 msgid "Select game categories"

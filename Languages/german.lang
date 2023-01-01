@@ -588,9 +588,6 @@ msgstr "Dezember"
 msgid "Default"
 msgstr "Standard"
 
-msgid "Default Gamesettings"
-msgstr "Spieleinstellungen zurücksetzen"
-
 msgid "Default Settings"
 msgstr "Einstellungen zurücksetzen"
 
@@ -1086,7 +1083,7 @@ msgstr "Box Cover"
 msgid "Full Menu"
 msgstr "Ganzes Menü"
 
-msgid "Full covers Download"
+msgid "Full Covers Download"
 msgstr "Box Cover Download"
 
 msgid "Full shutdown"
@@ -1379,13 +1376,13 @@ msgstr "Links"
 msgid "Like SysMenu"
 msgstr "System Menü"
 
-msgid "List on Gamelaunch"
+msgid "List on game launch"
 msgstr "Auflisten beim Spielstart"
 
 msgid "Load"
 msgstr "Laden"
 
-msgid "Load From SD/USB"
+msgid "Load from SD/USB"
 msgstr "Von SD/USB laden"
 
 #, c-format
@@ -1455,7 +1452,7 @@ msgstr ""
 msgid "Mar"
 msgstr "März"
 
-msgid "Mark new games"
+msgid "Mark New Games"
 msgstr "Neue Spiele mark."
 
 msgid "May"
@@ -1878,7 +1875,7 @@ msgstr "Musik zurücksetzen"
 msgid "Reset Cached Titles"
 msgstr ""
 
-msgid "Reset Playcounter"
+msgid "Reset Play Count"
 msgstr "Spielzähler zurücksetzen"
 
 msgid "Reset to default BGM?"
@@ -1965,7 +1962,7 @@ msgstr "Wähle DOL Offset"
 msgid "Select a DOL"
 msgstr "Wähle eine DOL"
 
-msgid "Select a DOL from Game"
+msgid "Select a DOL from game"
 msgstr "Wähle eine DOL vom Spiel"
 
 msgid "Select game categories"

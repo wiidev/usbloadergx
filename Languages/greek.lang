@@ -588,9 +588,6 @@ msgstr "Δεκέμβριος"
 msgid "Default"
 msgstr "Βασική"
 
-msgid "Default Gamesettings"
-msgstr "Βασικές ρυθμίσεις παιχνιδιών"
-
 msgid "Default Settings"
 msgstr "Βασικές ρυθμίσεις"
 
@@ -1086,7 +1083,7 @@ msgstr "Ολόκληρα εξώφυλλα"
 msgid "Full Menu"
 msgstr "Πλήρες μενού"
 
-msgid "Full covers Download"
+msgid "Full Covers Download"
 msgstr "Λήψη ολόκληρων εξωφύλλων"
 
 msgid "Full shutdown"
@@ -1379,13 +1376,13 @@ msgstr "Αριστερά"
 msgid "Like SysMenu"
 msgstr "όπως στο κεντρικό μενού"
 
-msgid "List on Gamelaunch"
+msgid "List on game launch"
 msgstr "Προβολή κατα την εκκίνηση παιχνιδιού"
 
 msgid "Load"
 msgstr "Φόρτωση"
 
-msgid "Load From SD/USB"
+msgid "Load from SD/USB"
 msgstr "ʼνοιγμα από SD/USB"
 
 #, c-format
@@ -1455,7 +1452,7 @@ msgstr ""
 msgid "Mar"
 msgstr "Mάρτιος"
 
-msgid "Mark new games"
+msgid "Mark New Games"
 msgstr "Μαρκάρισμα νέων παιχνιδιών"
 
 msgid "May"
@@ -1878,7 +1875,7 @@ msgstr "Επαναφορά μουσικής υπόκρουσης."
 msgid "Reset Cached Titles"
 msgstr ""
 
-msgid "Reset Playcounter"
+msgid "Reset Play Count"
 msgstr "Επαναφορά του Playcounter"
 
 msgid "Reset to default BGM?"
@@ -1965,7 +1962,7 @@ msgstr "Επιλογή δευτερεύοντος DOL"
 msgid "Select a DOL"
 msgstr "Επιλογή DOL"
 
-msgid "Select a DOL from Game"
+msgid "Select a DOL from game"
 msgstr "Επιλογή αρχείου DOL από το παιχνίδι"
 
 msgid "Select game categories"
