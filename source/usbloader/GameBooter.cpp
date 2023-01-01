@@ -1598,7 +1598,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 	}
 	else
 	{
-		if (ninVideoChoice == DML_VIDEO_AUTO) // Auto select video mode
+		if (ninVideoChoice == DML_VIDEO_AUTO || ninVideoChoice == DML_VIDEO_FORCE_DISCDEFAULT) // Auto select video mode
 		{
 			Disc_SelectVMode(VIDEO_MODE_DISCDEFAULT, false, NULL, &nin_config->VideoMode);
 			nin_config->VideoMode = NIN_VID_AUTO;
@@ -1612,7 +1612,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 			if (ninDeflickerChoice)
 				nin_config->VideoMode |= NIN_VID_FORCE_DF; // v2.208+
 
-			if (ninPal50PatchChoice && (nin_config->VideoMode & NIN_VID_FORCE_PAL50))
+			if (ninPal50PatchChoice)
 				nin_config->VideoMode |= NIN_VID_PATCH_PAL50; // v3.368+
 
 			if (nin_config->VideoMode & NIN_VID_PROG)
