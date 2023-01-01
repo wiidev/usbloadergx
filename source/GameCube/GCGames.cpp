@@ -136,11 +136,22 @@ void GCGames::LoadGameList(const std::string &path, std::vector<struct discHdr> 
 
 		for (int i = 0; i < 4; i++)
 		{
-			char name[50];
+			char name[12];
 			snprintf(name, sizeof(name), "%.6s.%s", (i % 2) == 0 ? "game" : (char *)id, i >= 2 ? "gcm" : "iso");
 			snprintf(fpath, sizeof(fpath), "%s%s/%s", path.c_str(), dirname, name);
 			if ((found = (stat(fpath, &st) == 0)) == true)
 				break;
+		}
+		if (!found)
+		{
+			for (int i = 0; i < 2; i++)
+			{
+				char name[12];
+				snprintf(name, sizeof(name), "%.6s.ciso", (i % 2) == 0 ? "game" : (char *)id);
+				snprintf(fpath, sizeof(fpath), "%s%s/%s", path.c_str(), dirname, name);
+				if ((found = (stat(fpath, &st) == 0)) == true)
+					break;
+			}
 		}
 
 		// Check if only disc2.iso is present
@@ -148,7 +159,7 @@ void GCGames::LoadGameList(const std::string &path, std::vector<struct discHdr> 
 		{
 			for (int i = 0; i < 2; i++)
 			{
-				char name[50];
+				char name[12];
 				snprintf(name, sizeof(name), "disc2.%s", (i % 2) == 0 ? "gcm" : "iso"); // allow gcm, though DM(L) require "disc2.iso" filename
 				snprintf(fpath, sizeof(fpath), "%s%s/%s", path.c_str(), dirname, name);
 				if ((found = (stat(fpath, &st) == 0)) == true)
@@ -156,6 +167,18 @@ void GCGames::LoadGameList(const std::string &path, std::vector<struct discHdr> 
 					disc_number = 1;
 					break;
 				}
+			}
+		}
+
+		if (!found)
+		{
+			char name[12];
+			snprintf(name, sizeof(name), "disc2.ciso");
+			snprintf(fpath, sizeof(fpath), "%s%s/%s", path.c_str(), dirname, name);
+			if ((found = (stat(fpath, &st) == 0)) == true)
+			{
+				disc_number = 1;
+				break;
 			}
 		}
 
@@ -176,7 +199,16 @@ void GCGames::LoadGameList(const std::string &path, std::vector<struct discHdr> 
 			FILE *fp = fopen(fpath, "rb");
 			if (fp != NULL)
 			{
+				u32 cios_magic;
 				memset(&tmpHdr, 0, sizeof(tmpHdr));
+				fread(&cios_magic, sizeof(u32), 1, fp);
+				if (cios_magic == 0x4349534F)
+				{
+					tmpHdr.is_ciso = 1;
+					fseek(fp, 0x8000, SEEK_SET);
+				}
+				else
+					fseek(fp, 0, SEEK_SET);
 				fread(&tmpHdr, sizeof(struct discHdr), 1, fp);
 				fclose(fp);
 
@@ -216,7 +248,16 @@ void GCGames::LoadGameList(const std::string &path, std::vector<struct discHdr> 
 		FILE *fp = fopen(fpath, "rb");
 		if (fp != NULL)
 		{
+			u32 cios_magic;
 			memset(&tmpHdr, 0, sizeof(tmpHdr));
+			fread(&cios_magic, sizeof(u32), 1, fp);
+			if (cios_magic == 0x4349534F)
+			{
+				tmpHdr.is_ciso = 1;
+				fseek(fp, 0x8000, SEEK_SET);
+			}
+			else
+				fseek(fp, 0, SEEK_SET);
 			fread(&tmpHdr, sizeof(struct discHdr), 1, fp);
 			fclose(fp);
 
