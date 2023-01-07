@@ -199,8 +199,8 @@ void patch_width(u8 *addr, u32 len)
                     void *offset = addr_start - 0x70;
 
                     u32 old_heap_ptr = *(u32 *)0x80003110;
-                    *(u32 *)0x80003110 = old_heap_ptr - 0x20;
-                    u32 heap_space = old_heap_ptr - 0x20;
+                    *(u32 *)0x80003110 = old_heap_ptr - 0x40;
+                    u32 heap_space = old_heap_ptr - 0x40;
 
                     u32 org_address = (addr_start[-0x70] << 24) | (addr_start[-0x6F] << 16);
                     *(u32 *)(heap_space + 0x00) = org_address | 4;
@@ -2029,7 +2029,7 @@ void patch_vfilters_rogue(u8 *addr, u32 len, u8 *vfilter)
             {
                 gprintf("Replaced vfilter %02x%02x%02x%02x%02x%02x%02x @ %p\n", addr_start[0], addr_start[1],
                         addr_start[2], addr_start[3], addr_start[4], addr_start[5], addr_start[6], addr_start);
-                memcpy(addr, vfilter, 7);
+                memcpy(addr_start, vfilter, 7);
                 addr_start += 7;
                 break;
             }
