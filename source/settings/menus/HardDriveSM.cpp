@@ -100,7 +100,7 @@ HardDriveSM::HardDriveSM()
 
 HardDriveSM::~HardDriveSM()
 {
-	gprintf("Quit HDD settings: %i\n", Settings.SDMode);
+	gprintf("SD mode %i\n", Settings.SDMode);
 	//! if partition has changed, Reinitialize it
 	if (Settings.partition != OldSettingsPartition ||
 		Settings.MultiplePartitions != OldSettingsMultiplePartitions ||
@@ -121,7 +121,7 @@ HardDriveSM::~HardDriveSM()
 				if(Settings.partition >= DeviceHandler::GetUSBPartitionCount())
 					Settings.partition = 0;
 
-				// set -1 to edit meta.xml arguments
+				// Set -1 to edit meta.xml arguments
 				NewSettingsUSBPort = -1;
 			}
 
@@ -138,7 +138,7 @@ HardDriveSM::~HardDriveSM()
 		
 		if(oldSettingsUSBAutoMount != Settings.USBAutoMount || NewSettingsUSBPort == -1 || OldSettingsSDMode != Settings.SDMode)
 		{
-			// edit meta.xml arguments
+			// Edit meta.xml arguments
 			editMetaArguments();
 			gprintf("Updated meta.xml\n");
 		}
