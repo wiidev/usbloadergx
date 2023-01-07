@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# spanish.lang - r1272
+# spanish.lang - r1280
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -33,11 +33,11 @@ msgstr "Faltan %i archivos"
 
 #, c-format
 msgid "%i WAD file(s) not processed!"
-msgstr "¡No se procesó %i archivo(s) WAD!"
+msgstr "¡%i archivo(s) WAD no procesado(s)!"
 
 #, c-format
 msgid "%i WAD found."
-msgstr "WAD %i encontrado."
+msgstr "%i WAD encontrado(s)."
 
 #, c-format
 msgid "%s only accepts GameCube backups in ISO format."
@@ -144,7 +144,7 @@ msgid "All the features of USB Loader GX are unlocked."
 msgstr "Todas las características del USB Loader GX desbloqueadas."
 
 msgid "All WAD files processed successfully."
-msgstr ""
+msgstr "Todos los archivos WAD procesados con éxito."
 
 msgid "Alternate DOL"
 msgstr "DOL Alternativo"
@@ -345,7 +345,7 @@ msgid "Cache BNR Files Path"
 msgstr "Caché de archivos BNR"
 
 msgid "Cache Path"
-msgstr ""
+msgstr "Ruta de caché"
 
 msgid "Cache Titles"
 msgstr "Caché de Títulos"
@@ -386,7 +386,7 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 msgid "Can't write to destination."
-msgstr "No se pudo escribir en el destino."
+msgstr "Imposible escribir en el destino."
 
 msgid "Categories"
 msgstr "Categorías"
@@ -401,7 +401,7 @@ msgid "Channel Launcher"
 msgstr "Cargador de Canales"
 
 msgid "Channel Path"
-msgstr ""
+msgstr "Ruta de Canales"
 
 msgid "Channels"
 msgstr "Canales"
@@ -413,10 +413,10 @@ msgid "Clear"
 msgstr "Borrar"
 
 msgid "Click to download covers"
-msgstr "Clic para descargar carátulas"
+msgstr "Click para descargar Covers"
 
 msgid "Click to view information"
-msgstr ""
+msgstr "Click para ver información"
 
 msgid "Clock"
 msgstr "Reloj"
@@ -532,7 +532,7 @@ msgid "Could not write to:"
 msgstr "No se pudo escribir en:"
 
 msgid "Cover Action"
-msgstr ""
+msgstr "Acción de Cover"
 
 msgid "Cover Download"
 msgstr "Descarga de Covers"
@@ -556,10 +556,10 @@ msgid "Custom Banners"
 msgstr "Banners personalizados"
 
 msgid "Custom Game IOS"
-msgstr ""
+msgstr "IOS custom de juego"
 
 msgid "Custom Games IOS"
-msgstr ""
+msgstr "IOS custom de juegos"
 
 msgid "Custom Paths"
 msgstr "Rutas personalizadas"
@@ -652,7 +652,7 @@ msgid "Directory does not exist!"
 msgstr "¡La carpeta no existe!"
 
 msgid "Disc"
-msgstr ""
+msgstr "Disco"
 
 msgid "Disc 1"
 msgstr "Disco 1"
@@ -661,7 +661,7 @@ msgid "Disc 2"
 msgstr "Disco 2"
 
 msgid "Disc Artwork"
-msgstr ""
+msgstr "Imagen de Disco"
 
 msgid "Disc Artwork Download"
 msgstr "Descarga Imagen Discos"
@@ -763,7 +763,7 @@ msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "¿Quieres sincronizar el sector de información de espacio libre en todas las particiones FAT32?"
 
 msgid "Do you wish to update/download all language files?"
-msgstr "¿Quieres actualizar/descargar todos los archivos de idiomas?"
+msgstr "¿Quieres actualizar/descargar todos los archivos de idioma?"
 
 msgid "Dol Video Patch"
 msgstr "Parche vídeo DOL"
@@ -778,22 +778,22 @@ msgid "Download finished"
 msgstr "Descarga completada"
 
 msgid "Downloading 3D Covers"
-msgstr "Descargando covers 3D"
+msgstr "Descargando Covers 3D"
 
 msgid "Downloading Custom Banners"
 msgstr "Descargando banners personalizados"
 
 msgid "Downloading Flat Covers"
-msgstr "Descargando covers 2D"
+msgstr "Descargando Covers 2D"
 
 msgid "Downloading Full HQ Covers"
-msgstr "Descargando covers HQ completos"
+msgstr "Descargando Covers HQ completos"
 
 msgid "Downloading Full LQ Covers"
-msgstr "Descargando covers LQ completos"
+msgstr "Descargando Covers LQ completos"
 
 msgid "Downloading Custom Disc Artwork"
-msgstr ""
+msgstr "Descargando imagen custom de disco"
 
 msgid "Downloading file..."
 msgstr "Descargando archivo..."
@@ -802,13 +802,13 @@ msgid "Downloading image:"
 msgstr "Descargando imagen:"
 
 msgid "Downloading Original Disc Artwork"
-msgstr ""
+msgstr "Descargando imagen original de disco"
 
 msgid "Downloading pagelist:"
 msgstr "Descargando lista de páginas:"
 
 msgid "Dump NAND to EmuNAND"
-msgstr "Volcar NAND en NAND emulada"
+msgstr "Volcar NAND a EmuNAND"
 
 msgid "During zoom"
 msgstr "Durante zoom"
@@ -826,22 +826,22 @@ msgid "ERROR: Can't set up theme."
 msgstr "ERROR: No se puede configurar el tema."
 
 msgid "EmuNAND WAD Manager"
-msgstr "WAD Manager de NAND Emulada"
+msgstr "WAD Manager de EmuNAND"
 
 msgid "EmuNAND Channel Mode"
-msgstr ""
+msgstr "Modo de Canales Emulados"
 
 msgid "EmuNAND Channel Path"
-msgstr ""
+msgstr "Ruta de Canales Emulados"
 
 msgid "EmuNAND Channels"
 msgstr "Canales Emulados"
 
 msgid "EmuNAND Save Mode"
-msgstr ""
+msgstr "Modo de salvado en emulación"
 
 msgid "EmuNAND Save Path"
-msgstr ""
+msgstr "Ruta de Saves en EmuNAND"
 
 msgid "Emulated NAND"
 msgstr "NAND Emulada"
@@ -909,22 +909,22 @@ msgid "Exit to where?"
 msgstr "¿Salir a dónde?"
 
 msgid "Export All Saves to EmuNAND"
-msgstr "Exportar Saves a la NAND"
+msgstr "Exportar Saves a la EmuNAND"
 
 msgid "Export Miis to EmuNAND"
-msgstr "Exportar Miis a la NAND"
+msgstr "Exportar Miis a EmuNAND"
 
 msgid "Export SYSCONF to EmuNAND"
-msgstr "Exportar SYSCONF a la NAND"
+msgstr "Exportar SYSCONF a EmuNAND"
 
 msgid "Extract Miis to the EmuNAND?"
-msgstr "¿Extraer Miis a la NAND?"
+msgstr "¿Extraer Miis a EmuNAND?"
 
 msgid "Extract SYSCONF to the EmuNAND?"
-msgstr "¿Extraer SYSCONF a la NAND?"
+msgstr "¿Extraer SYSCONF a EmuNAND?"
 
 msgid "Extract Save to EmuNAND"
-msgstr "Extraer Save a NAND"
+msgstr "Extraer Save a EmuNAND"
 
 msgid "Extracting file:"
 msgstr "Extrayendo archivo:"
@@ -1090,7 +1090,7 @@ msgid "Full Menu"
 msgstr "Completo"
 
 msgid "Full Covers Download"
-msgstr "Descargar covers completos"
+msgstr "Descargar Covers completos"
 
 msgid "Full shutdown"
 msgstr "Apagar"
@@ -1170,7 +1170,7 @@ msgstr "Juego en Modo ventana"
 msgid "Game is already installed:"
 msgstr "El juego ya está instalado:"
 
-msgid "Game's IOS"
+msgid "Games IOS"
 msgstr "IOS del juego"
 
 msgid "Game/Install Partition"
@@ -1269,7 +1269,7 @@ msgid "Individual"
 msgstr ""
 
 msgid "Information"
-msgstr ""
+msgstr "Información"
 
 msgid "Initializing Network"
 msgstr "Iniciando la Red"
@@ -1365,10 +1365,10 @@ msgid "Language change:"
 msgstr "Cambiar Idioma:"
 
 msgid "Languagefiles Path"
-msgstr "Ruta de Idioma"
+msgstr "Ruta de Idiomas"
 
 msgid "Languagepath changed."
-msgstr "Ruta de Idioma cambiada."
+msgstr "Ruta de Idiomas cambiada."
 
 msgid "Launching Wii games with emulated NAND only works on d2x cIOS! Change game IOS to a d2x cIOS first."
 msgstr "¡Los juegos de Wii emulados sólo funcionan con un cIOS d2x! Cambia el IOS del juego a uno d2x primero."
@@ -1401,11 +1401,11 @@ msgstr "¿Cargar este DOL como DOL Alternativo?"
 msgid "Loader Settings"
 msgstr "Configurar Cargador"
 
-msgid "Loader's IOS"
+msgid "Loaders IOS"
 msgstr "IOS del cargador"
 
 msgid "Loading standard language."
-msgstr "Cargando idioma estándar."
+msgstr "Cargando Idioma estándar."
 
 msgid "Loading standard music."
 msgstr "Cargando música estándar."
@@ -1603,7 +1603,7 @@ msgid "No games found on the disc"
 msgstr "No se encontraron juegos en el disco"
 
 msgid "No language files to update on your devices! Do you want to download new language files?"
-msgstr "No se encontraron archivos de idioma para actualizar. ¿Quieres descargarlo"
+msgstr "Actualizaciones para idiomas actuales no encontradas. ¿Descargar uno nuevo?"
 
 msgid "No new updates."
 msgstr "No hay actualizaciones."
@@ -1852,7 +1852,7 @@ msgid "Reloading game list now, please wait..."
 msgstr "Recargando lista de juegos, espera..."
 
 msgid "Remember Last Game"
-msgstr ""
+msgstr "Recordar Último Juego"
 
 msgid "Remember Unlock"
 msgstr "Recordar Bloqueo"
@@ -1879,7 +1879,7 @@ msgid "Reset BG Music"
 msgstr "Reiniciar Música de Fondo"
 
 msgid "Reset Cached Titles"
-msgstr ""
+msgstr "Reiniciar títulos en caché"
 
 msgid "Reset Play Count"
 msgstr "Reiniciar Partidas"
@@ -1921,7 +1921,7 @@ msgid "SD Card could not be accessed."
 msgstr "No se puede acceder a tarjeta SD."
 
 msgid "SD Card Mode"
-msgstr ""
+msgstr "Modo Tarjeta SD"
 
 msgid "SD GameCube Games Path"
 msgstr "Ruta de juegos GameCube en SD"
@@ -1948,7 +1948,7 @@ msgid "Save List"
 msgstr "Guardar Lista"
 
 msgid "Save Path"
-msgstr ""
+msgstr "Ruta de salvado"
 
 msgid "Saved"
 msgstr "Guardado"
@@ -1981,7 +1981,7 @@ msgid "Select loader mode"
 msgstr "Seleccionar Modo del Cargador"
 
 msgid "Select the EmuNAND path to use."
-msgstr "Seleccionar la ruta de la NAND emulada a usar"
+msgstr "Selecciona ruta de la EmuNAND a usar."
 
 msgid "Select titles sources."
 msgstr "Selecciona origen de títulos."
@@ -2008,7 +2008,7 @@ msgid "Show Free Space"
 msgstr "Mostrar Espacio Libre"
 
 msgid "Show Game Count"
-msgstr ""
+msgstr "Mostrar cantidad de juegos"
 
 msgid "Show Play Count"
 msgstr "Mostrar Partidas"
@@ -2125,7 +2125,7 @@ msgid "System Default"
 msgstr "Sistema"
 
 msgid "System Proxy Settings"
-msgstr "Configuración de proxy del sistema"
+msgstr "Configurar Proxy"
 
 msgid "TChinese"
 msgstr "Chino T."
@@ -2140,13 +2140,13 @@ msgid "The Force Widescreen setting requires DIOS MIOS v2.1 or more. This settin
 msgstr "Forzar 16:9 requiere DIOS MIOS 2.1 o superior."
 
 msgid "The Miis will be extracted to your EmuNAND path and EmuNAND channel path. Attention: All existing files will be overwritten."
-msgstr "Los Miis se extraerán en la ruta de NAND emulada. Atención: todos los archivos existentes serán sobreescritos."
+msgstr "Los Miis se extraerán en las rutas de tu NAND emulada. Atención: todos los archivos existentes serán sobreescritos."
 
 msgid "The No Disc+ setting requires DIOS MIOS 2.2 update2. This setting will be ignored."
 msgstr "El ajuste No Disc+ requiere DIOS MIOS 2.2 update2."
 
 msgid "The SYSCONF file will be extracted to your EmuNAND path and EmuNAND channel path. Attention: All existing files will be overwritten."
-msgstr "El archivo SYSCONF será extraido a la ruta de tu EmuNAND y Canales de EmuNAND. Atención: todos los archivos existentes serán sobreescritos"
+msgstr "El archivo SYSCONF será extraído en las rutas de tu NAND emulada. Atención: todos los archivos existentes serán sobreescritos"
 
 msgid "The application might crash if there is currently a read/write access to the SD card!"
 msgstr "¡La aplicación puede fallar si hay algún acceso de lectura/escritura en la tarjeta SD!"
@@ -2155,7 +2155,7 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "La carpeta especificada no existe. ¿Quieres crearla?"
 
 msgid "The files will be extracted to your EmuNAND save and channel path. Attention: All existing files will be overwritten."
-msgstr "Los archivos se extraerán en la ruta de NAND emulada. Atención: todos los archivos existentes serán sobreescritos."
+msgstr "Los archivos se extraerán en las rutas de tu NAND emulada. Atención: todos los archivos existentes serán sobreescritos."
 
 msgid "The game is on SD Card."
 msgstr "El juego está en la SD."
@@ -2164,10 +2164,10 @@ msgid "The game is on USB."
 msgstr "El juego está en USB."
 
 msgid "The save game will be extracted to your EmuNAND path."
-msgstr "La partida guardada se extraerá en la NAND para emular."
+msgstr "La partida guardada se extraerá en la NAND emulada."
 
 msgid "The save games will be extracted to your EmuNAND path. Attention: All existing saves will be overwritten."
-msgstr "Las partidas guardadas se extraerán en la NAND para emular. Atención: Partidas existentes serán sobreescritas."
+msgstr "Las partidas guardadas se extraerán en la NAND emulada. Atención: Partidas existentes serán sobreescritas."
 
 msgid "The WAD file was installed"
 msgstr "El WAD ha sido instalado"
@@ -2210,7 +2210,7 @@ msgid "This path must be on SD!"
 msgstr "¡Esta ruta debe estar en la SD!"
 
 msgid "This setting doesn't work in SD card mode."
-msgstr ""
+msgstr "Esta configuración no funciona en Tarjetas SD."
 
 msgid "Time left:"
 msgstr "Quedan:"
@@ -2225,7 +2225,7 @@ msgid "Titles Path"
 msgstr "Ruta de títulos"
 
 msgid "Titles From"
-msgstr ""
+msgstr "Títulos de"
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
 msgstr "Para cargar juegos de GameCube desde Disco debes configurar el modo GameCube a MIOS."
@@ -2350,16 +2350,16 @@ msgid "Update Files"
 msgstr "Archivos"
 
 msgid "Update all Language Files"
-msgstr "Actualizar todos los archivos de Idiomas"
+msgstr "Actualizar los archivos de Idioma"
 
 msgid "Update Failed"
-msgstr "Error en la Actualización"
+msgstr "Actualización fallida"
 
 msgid "Update Successful"
-msgstr "Actualización exitosa."
+msgstr "Actualización exitosa"
 
 msgid "Updating Language Files:"
-msgstr "Actualizando archivos de Idiomas:"
+msgstr "Actualizando archivos de Idioma:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Enviado archivo ZIP instalado en la carpeta homebrew."
@@ -2399,7 +2399,7 @@ msgid "Video scale"
 msgstr "Escala de vídeo"
 
 msgid "Video Width"
-msgstr ""
+msgstr "Ancho de vídeo"
 
 msgid "Virtual Pointer Speed"
 msgstr "Vel. Puntero Virtual"
@@ -2541,7 +2541,7 @@ msgid "for FAT/NTFS support"
 msgstr "por el soporte FAT/NTFS."
 
 msgid "for GameTDB and hosting covers / disc images"
-msgstr "por GameTDB y alojar covers e imágenes."
+msgstr "por GameTDB y alojar Covers e imágenes."
 
 msgid "for Ocarina"
 msgstr "por Ocarina."
@@ -2637,10 +2637,10 @@ msgstr "segundos restantes"
 #~ msgstr "Img. Discos Artísticas"
 
 #~ msgid "Full HQ Covers"
-#~ msgstr "Carátulas HQ Comp."
+#~ msgstr "Covers HQ Comp."
 
 #~ msgid "Full LQ Covers"
-#~ msgstr "Carátulas LQ Comp."
+#~ msgstr "Covers LQ Comp."
 
 #~ msgid "Original Discarts"
 #~ msgstr "Img. Discos Originales"
@@ -2682,10 +2682,10 @@ msgstr "segundos restantes"
 #~ msgstr "No es un Disco Wii"
 
 #~ msgid "The files will be extracted to your EmuNAND path. Attention: All existing files will be overwritten."
-#~ msgstr "Los archivos se extraeran en la ruta de tu NAND emuada. ATENCION: los archivos existentes seran sobreescritos"
+#~ msgstr "Los archivos se extraeran en la ruta de tu NAND emulada. ATENCION: los archivos existentes seran sobreescritos"
 
 #~ msgid "The save games will be extracted to your EmuNAND path. Attention: All existing saves will be overwritten."
-#~ msgstr "Las partidas guardadas se extraeran en la ruta de tu NAND emuada. ATENCION: las partidas existentes seran sobreescritas"
+#~ msgstr "Las partidas guardadas se extraeran en la ruta de tu NAND emulada. ATENCION: las partidas existentes seran sobreescritas"
 
 #~ msgid "Extracting NAND files:"
 #~ msgstr "Extrayendo archivos de NAND:"
@@ -2796,4 +2796,4 @@ msgstr "segundos restantes"
 #~ msgstr "WiiTDB está actualizado."
 
 #~ msgid "for WiiTDB and hosting covers / disc images"
-#~ msgstr "por WiiTDB y alojar carátulas e imágenes"
+#~ msgstr "por WiiTDB y alojar covers e imágenes"
