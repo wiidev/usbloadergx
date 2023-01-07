@@ -129,7 +129,12 @@ void Channels::InternalGetNandChannelList(u32 type)
         if (tid == 0x000100014c554c5aLL || tid == 0x00010001AF1BF516LL || tid == 0x0001000148415858LL)
             strcpy(id, "JODI");
 
-		std::string TitleName(NandTitles.NameOf(tid));
+        const char *name = NandTitles.NameOf(tid);
+        std::string TitleName;
+        if (!name || *name == '\0')
+            TitleName.assign(id);
+        else
+            TitleName.assign(name);
         TitleName.erase(0, TitleName.find_first_not_of(' '));
 
         int s = NandChannels.size();
