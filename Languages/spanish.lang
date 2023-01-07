@@ -1170,7 +1170,7 @@ msgstr "Juego en Modo ventana"
 msgid "Game is already installed:"
 msgstr "El juego ya está instalado:"
 
-msgid "Game's IOS"
+msgid "Games IOS"
 msgstr "IOS del juego"
 
 msgid "Game/Install Partition"
@@ -1401,7 +1401,7 @@ msgstr "¿Cargar este DOL como DOL Alternativo?"
 msgid "Loader Settings"
 msgstr "Configurar Cargador"
 
-msgid "Loader's IOS"
+msgid "Loaders IOS"
 msgstr "IOS del cargador"
 
 msgid "Loading standard language."
