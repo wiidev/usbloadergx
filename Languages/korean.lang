@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# korean.lang - r1272
+# korean.lang - r1281
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -1093,7 +1093,7 @@ msgid "Full Covers Download"
 msgstr "전체 커버 다운로드"
 
 msgid "Full shutdown"
-msgstr "완전한 종료"
+msgstr "종료"
 
 msgid "GAMEID_Gamename"
 msgstr "게임ID_게임이름"
@@ -2581,3 +2581,6 @@ msgstr "의"
 
 msgid "seconds left"
 msgstr "초 남았습니다."
+
+msgid "Update Nintendont"
+msgstr "닌텐돈트 업데이트"
