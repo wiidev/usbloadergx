@@ -1023,20 +1023,29 @@ msgstr "16:9に強制"
 msgid "Force 4:3"
 msgstr "4:3に強制"
 
-msgid "Force NTSC"
-msgstr "NTSCに強制"
+msgid "Force NTSC 240p60"
+msgstr "NTSC240p60に強制"
 
-msgid "Force NTSC480p"
-msgstr "NTSC480pに強制"
+msgid "Force NTSC 480i60"
+msgstr "NTSC480i60に強制"
 
-msgid "Force PAL480p"
-msgstr "PAL480pに強制"
+msgid "Force NTSC 480p60"
+msgstr "NTSC480p60に強制"
 
-msgid "Force PAL50"
-msgstr "PAL50に強制"
+msgid "Force PAL 240p60"
+msgstr "PAL240p60に強制"
 
-msgid "Force PAL60"
-msgstr "PAL60に強制"
+msgid "Force PAL 288p50"
+msgstr "PAL288p50に強制"
+
+msgid "Force PAL 480i60"
+msgstr "PAL480i60に強制"
+
+msgid "Force PAL 480p60"
+msgstr "PAL480p60に強制"
+
+msgid "Force PAL 576i50"
+msgstr "PAL576i50に強制"
 
 msgid "Force Widescreen"
 msgstr ""
@@ -1795,6 +1804,9 @@ msgid "Playing Music:"
 msgstr "再生中"
 
 msgid "Please enter a valid address e.g. wiimmfi.de"
+msgstr ""
+
+msgid "Please note that forcing the video mode to 240p or 288p is currently an experimental feature that does not work with all games."
 msgstr ""
 
 msgid "Please wait"

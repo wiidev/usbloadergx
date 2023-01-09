@@ -69,12 +69,12 @@ static const char * DMLVideoText[] =
 	trNOOP( "Auto" ),
 	trNOOP( "System Default" ),
 	trNOOP( "Disc Default" ),
-	trNOOP( "Force PAL50" ),
-	trNOOP( "Force PAL60" ),
-	trNOOP( "Force NTSC" ),
+	trNOOP( "Force PAL 576i50" ),
+	trNOOP( "Force PAL 480i60" ),
+	trNOOP( "Force NTSC 480i60" ),
 	"", // unused
-	trNOOP( "Force PAL480p" ),
-	trNOOP( "Force NTSC480p" ),
+	trNOOP( "Force PAL 480p60" ),
+	trNOOP( "Force NTSC 480p60" ),
 	trNOOP( "None" ),
 };
 

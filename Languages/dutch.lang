@@ -1023,20 +1023,29 @@ msgstr "Forceer 16:9"
 msgid "Force 4:3"
 msgstr "Forceer 4:3"
 
-msgid "Force NTSC"
-msgstr "Forceer NTSC"
+msgid "Force NTSC 240p60"
+msgstr "Forceer NTSC 240p60"
 
-msgid "Force NTSC480p"
-msgstr "Forceer NTSC480p"
+msgid "Force NTSC 480i60"
+msgstr "Forceer NTSC 480i60"
 
-msgid "Force PAL480p"
-msgstr "Forceer PAL480p"
+msgid "Force NTSC 480p60"
+msgstr "Forceer NTSC 480p60"
 
-msgid "Force PAL50"
-msgstr "Forceer PAL50"
+msgid "Force PAL 240p60"
+msgstr "Forceer PAL 240p60"
 
-msgid "Force PAL60"
-msgstr "Forceer PAL60"
+msgid "Force PAL 288p50"
+msgstr "Forceer PAL 288p50"
+
+msgid "Force PAL 480i60"
+msgstr "Forceer PAL 480i60"
+
+msgid "Force PAL 480p60"
+msgstr "Forceer PAL 480p60"
+
+msgid "Force PAL 576i50"
+msgstr "Forceer PAL 576i50"
 
 msgid "Force Widescreen"
 msgstr "Forceer Breedbeeld"
@@ -1795,6 +1804,9 @@ msgid "Playing Music:"
 msgstr "Speelt nu:"
 
 msgid "Please enter a valid address e.g. wiimmfi.de"
+msgstr ""
+
+msgid "Please note that forcing the video mode to 240p or 288p is currently an experimental feature that does not work with all games."
 msgstr ""
 
 msgid "Please wait"
