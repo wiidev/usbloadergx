@@ -1093,7 +1093,7 @@ void patch_error_codes(u8 *gameid)
 // viYOrigin is calculated as (576 - 528)/2 in libogc 2.0.0 for the following render modes.
 // But we need to use (574 - 528)/2 so that the render modes match the Revolution SDK.
 
-static GXRModeObj TVPal528Prog_RVL = {
+GXRModeObj TVPal528Prog_RVL = {
     6,             // viDisplayMode
     640,           // fbWidth
     528,           // efbHeight
@@ -1126,7 +1126,7 @@ static GXRModeObj TVPal528Prog_RVL = {
     }
 };
 
-static GXRModeObj TVPal528ProgSoft_RVL = {
+GXRModeObj TVPal528ProgSoft_RVL = {
     6,             // viDisplayMode
     640,           // fbWidth
     528,           // efbHeight
@@ -1159,7 +1159,7 @@ static GXRModeObj TVPal528ProgSoft_RVL = {
     }
 };
 
-static GXRModeObj TVPal524ProgAa_RVL = {
+GXRModeObj TVPal524ProgAa_RVL = {
     6,             // viDisplayMode
     640,           // fbWidth
     264,           // efbHeight
@@ -1192,7 +1192,7 @@ static GXRModeObj TVPal524ProgAa_RVL = {
     }
 };
 
-static GXRModeObj TVPal528Int_RVL = {
+GXRModeObj TVPal528Int_RVL = {
     4,             // viDisplayMode
     640,           // fbWidth
     528,           // efbHeight
@@ -1225,7 +1225,7 @@ static GXRModeObj TVPal528Int_RVL = {
     }
 };
 
-static GXRModeObj TVPal528IntDf_RVL = {
+GXRModeObj TVPal528IntDf_RVL = {
     4,             // viDisplayMode
     640,           // fbWidth
     528,           // efbHeight
@@ -1258,7 +1258,7 @@ static GXRModeObj TVPal528IntDf_RVL = {
     }
 };
 
-static GXRModeObj TVEurgb60Hz480Prog_RVL = {
+GXRModeObj TVEurgb60Hz480Prog_RVL = {
     22,            // viDisplayMode
     640,           // fbWidth
     480,           // efbHeight
@@ -1291,7 +1291,7 @@ static GXRModeObj TVEurgb60Hz480Prog_RVL = {
     }
 };
 
-static GXRModeObj TVEurgb60Hz480ProgSoft_RVL = {
+GXRModeObj TVEurgb60Hz480ProgSoft_RVL = {
     22,            // viDisplayMode
     640,           // fbWidth
     480,           // efbHeight
@@ -1324,7 +1324,7 @@ static GXRModeObj TVEurgb60Hz480ProgSoft_RVL = {
     }
 };
 
-static GXRModeObj TVEurgb60Hz480ProgAa_RVL = {
+GXRModeObj TVEurgb60Hz480ProgAa_RVL = {
     22,            // viDisplayMode
     640,           // fbWidth
     242,           // efbHeight
@@ -1357,7 +1357,7 @@ static GXRModeObj TVEurgb60Hz480ProgAa_RVL = {
     }
 };
 
-static GXRModeObj TVPal524IntAa_RVL = {
+GXRModeObj TVPal524IntAa_RVL = {
     4,             // viDisplayMode
     640,           // fbWidth
     264,           // efbHeight
@@ -1390,7 +1390,7 @@ static GXRModeObj TVPal524IntAa_RVL = {
     }
 };
 
-static GXRModeObj TVPal264Int_RVL = {
+GXRModeObj TVPal264Int_RVL = {
     4,             // viDisplayMode
     640,           // fbWidth
     264,           // efbHeight
@@ -1423,7 +1423,7 @@ static GXRModeObj TVPal264Int_RVL = {
     }
 };
 
-static GXRModeObj TVPal264IntAa_RVL = {
+GXRModeObj TVPal264IntAa_RVL = {
     4,             // viDisplayMode
     640,           // fbWidth
     264,           // efbHeight
@@ -1456,7 +1456,7 @@ static GXRModeObj TVPal264IntAa_RVL = {
     }
 };
 
-static GXRModeObj TVPal264Ds_RVL = {
+GXRModeObj TVPal264Ds_RVL = {
     5,             // viDisplayMode
     640,           // fbWidth
     264,           // efbHeight
@@ -1489,7 +1489,7 @@ static GXRModeObj TVPal264Ds_RVL = {
     }
 };
 
-static GXRModeObj TVPal264DsAa_RVL = {
+GXRModeObj TVPal264DsAa_RVL = {
     5,             // viDisplayMode
     640,           // fbWidth
     264,           // efbHeight
@@ -1522,7 +1522,7 @@ static GXRModeObj TVPal264DsAa_RVL = {
     }
 };
 
-static GXRModeObj TVMpal240Int_RVL = {
+GXRModeObj TVMpal240Int_RVL = {
     8,             // viDisplayMode
     640,           // fbWidth
     240,           // efbHeight
@@ -1555,7 +1555,7 @@ static GXRModeObj TVMpal240Int_RVL = {
     }
 };
 
-static GXRModeObj TVMpal240IntAa_RVL = {
+GXRModeObj TVMpal240IntAa_RVL = {
     8,             // viDisplayMode
     640,           // fbWidth
     240,           // efbHeight
@@ -1588,7 +1588,7 @@ static GXRModeObj TVMpal240IntAa_RVL = {
     }
 };
 
-static GXRModeObj TVMpal480Int_RVL = {
+GXRModeObj TVMpal480Int_RVL = {
     8,             // viDisplayMode
     640,           // fbWidth
     480,           // efbHeight
@@ -1621,7 +1621,7 @@ static GXRModeObj TVMpal480Int_RVL = {
     }
 };
 
-static GXRModeObj TVMpal480ProgSoft_RVL = {
+GXRModeObj TVMpal480ProgSoft_RVL = {
     10,            // viDisplayMode
     640,           // fbWidth
     480,           // efbHeight
@@ -1654,7 +1654,7 @@ static GXRModeObj TVMpal480ProgSoft_RVL = {
     }
 };
 
-static GXRModeObj TVMpal480ProgAa_RVL = {
+GXRModeObj TVMpal480ProgAa_RVL = {
     10,            // viDisplayMode
     640,           // fbWidth
     242,           // efbHeight

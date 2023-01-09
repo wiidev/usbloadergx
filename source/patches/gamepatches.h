@@ -31,6 +31,26 @@ int PatchNewReturnTo(int es_fd, u64 title);
 int BlockIOSReload(int es_fd, u32 gameIOS);
 void PatchAspectRatio(void *addr, u32 len, u8 aspect);
 
+// Revolution SDK Render Modes
+extern GXRModeObj TVPal528Prog_RVL;
+extern GXRModeObj TVPal528ProgSoft_RVL;
+extern GXRModeObj TVPal524ProgAa_RVL;
+extern GXRModeObj TVPal528Int_RVL;
+extern GXRModeObj TVPal528IntDf_RVL;
+extern GXRModeObj TVEurgb60Hz480Prog_RVL;
+extern GXRModeObj TVEurgb60Hz480ProgSoft_RVL;
+extern GXRModeObj TVEurgb60Hz480ProgAa_RVL;
+extern GXRModeObj TVPal524IntAa_RVL;
+extern GXRModeObj TVPal264Int_RVL;
+extern GXRModeObj TVPal264IntAa_RVL;
+extern GXRModeObj TVPal264Ds_RVL;
+extern GXRModeObj TVPal264DsAa_RVL;
+extern GXRModeObj TVMpal240Int_RVL;
+extern GXRModeObj TVMpal240IntAa_RVL;
+extern GXRModeObj TVMpal480Int_RVL;
+extern GXRModeObj TVMpal480ProgSoft_RVL;
+extern GXRModeObj TVMpal480ProgAa_RVL;
+
 #ifdef __cplusplus
 }
 #endif
