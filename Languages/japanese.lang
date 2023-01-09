@@ -1257,6 +1257,9 @@ msgstr "時間"
 msgid "How to Shutdown?"
 msgstr "終了方法の選択"
 
+msgid "If you experience any issues, please reset your Wii and choose a different video mode."
+msgstr ""
+
 msgid "Import Categories"
 msgstr "カテゴリをインポート"
 
@@ -1806,9 +1809,6 @@ msgstr "再生中"
 msgid "Please enter a valid address e.g. wiimmfi.de"
 msgstr ""
 
-msgid "Please note that forcing the video mode to 240p or 288p is currently an experimental feature that does not work with all games."
-msgstr ""
-
 msgid "Please wait"
 msgstr "お待ちください"
 
@@ -2203,6 +2203,9 @@ msgstr "テーマ名:"
 msgid "Themes by www.spiffy360.com"
 msgstr "テーマ…www.spiffy360.com"
 
+msgid "These video modes do not work with most games. They also do not work at all on Wii U consoles. Proceed anyways?"
+msgstr ""
+
 msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "このIOSはBootMiiのIOSです"
 
@@ -2515,6 +2518,9 @@ msgstr "暗証番号が違います"
 
 msgid "Yes"
 msgstr "はい"
+
+msgid "You are attempting to access the 240p and 288p forced video modes. These video modes are currently HIGHLY experimental."
+msgstr ""
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "rev17以前のcIOS249ではFAT32/NTFS/EXTに対応していません"

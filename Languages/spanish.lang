@@ -1257,6 +1257,9 @@ msgstr "Horas"
 msgid "How to Shutdown?"
 msgstr "¿Apagar Wii?"
 
+msgid "If you experience any issues, please reset your Wii and choose a different video mode."
+msgstr ""
+
 msgid "Import Categories"
 msgstr "Importar categorías"
 
@@ -1806,9 +1809,6 @@ msgstr "Reproduciendo música:"
 msgid "Please enter a valid address e.g. wiimmfi.de"
 msgstr "Escribe una ruta válida (p. ej. wiimmfi.de)"
 
-msgid "Please note that forcing the video mode to 240p or 288p is currently an experimental feature that does not work with all games."
-msgstr ""
-
 msgid "Please wait"
 msgstr "Por favor, espera"
 
@@ -2203,6 +2203,9 @@ msgstr "Título del Tema:"
 msgid "Themes by www.spiffy360.com"
 msgstr "Temas por www.spiffy360.com"
 
+msgid "These video modes do not work with most games. They also do not work at all on Wii U consoles. Proceed anyways?"
+msgstr ""
+
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "Este es el IOS de BootMii. Si estás seguro de que no es BootMii y tienes instalado otra cosa en este slot ignora esta advertencia."
 
@@ -2512,6 +2515,9 @@ msgstr "Contraseña incorrecta"
 
 msgid "Yes"
 msgstr "Sí"
+
+msgid "You are attempting to access the 240p and 288p forced video modes. These video modes are currently HIGHLY experimental."
+msgstr ""
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Estás intentando seleccionar una partición FAT32/NTFS/EXT con una revisión menor a la 18 del cIOS249. Esto no está soportado. Continúa a tu propio riesgo."

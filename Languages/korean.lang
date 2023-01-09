@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# korean.lang - r1272
+# korean.lang - r1281
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -1102,7 +1102,7 @@ msgid "Full Covers Download"
 msgstr "전체 커버 다운로드"
 
 msgid "Full shutdown"
-msgstr "완전한 종료"
+msgstr "종료"
 
 msgid "GAMEID_Gamename"
 msgstr "게임ID_게임이름"
@@ -1256,6 +1256,9 @@ msgstr "시간"
 
 msgid "How to Shutdown?"
 msgstr "어떻게 종료 하겠습니까?"
+
+msgid "If you experience any issues, please reset your Wii and choose a different video mode."
+msgstr ""
 
 msgid "Import Categories"
 msgstr "카테고리 가져오기"
@@ -1806,9 +1809,6 @@ msgstr "재생 음악:"
 msgid "Please enter a valid address e.g. wiimmfi.de"
 msgstr "유효한 주소를 입력하세요. 예) wiimmfi.de"
 
-msgid "Please note that forcing the video mode to 240p or 288p is currently an experimental feature that does not work with all games."
-msgstr ""
-
 msgid "Please wait"
 msgstr "기다려주십시오."
 
@@ -2203,6 +2203,9 @@ msgstr "테마 타이틀:"
 msgid "Themes by www.spiffy360.com"
 msgstr "www.spiffy360.com의 테마"
 
+msgid "These video modes do not work with most games. They also do not work at all on Wii U consoles. Proceed anyways?"
+msgstr ""
+
 msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "이 IOS는 BootMii IOS입니다. 확실한 경우 BootMii가 아니며 이 경고를 무시하는 것 외에 다른 것을 설치하십시오."
 
@@ -2370,6 +2373,9 @@ msgstr "모든 언어 파일 업데이트"
 msgid "Update Failed"
 msgstr "업데이트 실패"
 
+msgid "Update Nintendont"
+msgstr "닌텐돈트 업데이트"
+
 msgid "Update Successful"
 msgstr "업데이트 성공"
 
@@ -2515,6 +2521,9 @@ msgstr "잘못된 비밀번호"
 
 msgid "Yes"
 msgstr "예"
+
+msgid "You are attempting to access the 240p and 288p forced video modes. These video modes are currently HIGHLY experimental."
+msgstr ""
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "cIOS 249 Rev.18 이하인 FAT32/NTFS/EXT 파티션을 선택하려고 합니다. 지원되지 않습니다. 위험을 감수하십시오."

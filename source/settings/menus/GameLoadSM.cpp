@@ -488,7 +488,13 @@ int GameLoadSM::GetMenuInternal()
 		if (++GameConfig.video >= VIDEO_MODE_MAX) GameConfig.video = INHERIT;
 		if (GameConfig.video == VIDEO_MODE_PAL288P)
 		{
-			WindowPrompt(tr("Warning:"), tr("Please note that forcing the video mode to 240p or 288p is currently an experimental feature that does not work with all games."), tr("OK"));
+			WindowPrompt(tr("Warning:"), tr("You are attempting to access the 240p and 288p forced video modes. These video modes are currently HIGHLY experimental."), tr("Next"));
+			int choice = WindowPrompt(tr("Warning:"), tr("These video modes do not work with most games. They also do not work at all on Wii U consoles. Proceed anyways?"), tr("Yes"), tr("No"));
+			if (choice == 1)
+			{
+				WindowPrompt(tr(""), tr("If you experience any issues, please reset your Wii and choose a different video mode."), tr("OK"));
+			}
+			else GameConfig.video = INHERIT;
 		}
 	}
 
