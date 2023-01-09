@@ -1023,20 +1023,29 @@ msgstr "Forza 16:9"
 msgid "Force 4:3"
 msgstr "Forza 4:3"
 
-msgid "Force NTSC"
-msgstr "Forza NTSC"
+msgid "Force NTSC 240p60"
+msgstr "Forza NTSC 240p60"
 
-msgid "Force NTSC480p"
-msgstr "Forza NTSC480p"
+msgid "Force NTSC 480i60"
+msgstr "Forza NTSC 480i60"
 
-msgid "Force PAL480p"
-msgstr "Forza PAL480p"
+msgid "Force NTSC 480p60"
+msgstr "Forza NTSC 480p60"
 
-msgid "Force PAL50"
-msgstr "Forza PAL50"
+msgid "Force PAL 240p60"
+msgstr "Forza PAL 240p60"
 
-msgid "Force PAL60"
-msgstr "Forza PAL60"
+msgid "Force PAL 288p50"
+msgstr "Forza PAL 288p50"
+
+msgid "Force PAL 480i60"
+msgstr "Forza PAL 480i60"
+
+msgid "Force PAL 480p60"
+msgstr "Forza PAL 480p60"
+
+msgid "Force PAL 576i50"
+msgstr "Forza PAL 576i50"
 
 msgid "Force Widescreen"
 msgstr "Forza Widescreen"
@@ -1247,6 +1256,9 @@ msgstr "Ora"
 
 msgid "How to Shutdown?"
 msgstr "Come vuoi spegnere?"
+
+msgid "If you experience any issues, please reset your Wii and choose a different video mode."
+msgstr ""
 
 msgid "Import Categories"
 msgstr "Importa categorie"
@@ -2191,6 +2203,9 @@ msgstr "Titolo del tema:"
 msgid "Themes by www.spiffy360.com"
 msgstr "Temi da www.spiffy360.com"
 
+msgid "These video modes do not work with most games. They also do not work at all on Wii U consoles. Proceed anyways?"
+msgstr ""
+
 msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "Questo IOS è quello di BootMii IOS. Se sei sicuro di aver installato qualcos'altro al suo posto allora ignora questo avvertimento."
 
@@ -2503,6 +2518,9 @@ msgstr "Password errata"
 
 msgid "Yes"
 msgstr "Si"
+
+msgid "You are attempting to access the 240p and 288p forced video modes. These video modes are currently HIGHLY experimental."
+msgstr ""
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Stai cercando di selezionare una partizione FAT32/NTFS/EXT con un cIOS 249 di versione < 18. Continua a tuo rischio e pericolo."

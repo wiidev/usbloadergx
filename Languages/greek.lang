@@ -1023,20 +1023,29 @@ msgstr "Επιβολή αναλογίας 16:9"
 msgid "Force 4:3"
 msgstr "Επιβολή αναλογίας  4:3"
 
-msgid "Force NTSC"
-msgstr "Επιβολή NTSC"
+msgid "Force NTSC 240p60"
+msgstr "Επιβολή NTSC 240p60"
 
-msgid "Force NTSC480p"
-msgstr "Επιβολή NTSC480p"
+msgid "Force NTSC 480i60"
+msgstr "Επιβολή NTSC 480i60"
 
-msgid "Force PAL480p"
-msgstr "Επιβολή PAL480p"
+msgid "Force NTSC 480p60"
+msgstr "Επιβολή NTSC 480p60"
 
-msgid "Force PAL50"
-msgstr "Επιβολή PAL50"
+msgid "Force PAL 240p60"
+msgstr "Επιβολή PAL 240p60"
 
-msgid "Force PAL60"
-msgstr "Επιβολή PAL60"
+msgid "Force PAL 288p50"
+msgstr "Επιβολή PAL 288p50"
+
+msgid "Force PAL 480i60"
+msgstr "Επιβολή PAL 480i60"
+
+msgid "Force PAL 480p60"
+msgstr "Επιβολή PAL 480p60"
+
+msgid "Force PAL 576i50"
+msgstr "Επιβολή PAL 576i50"
 
 msgid "Force Widescreen"
 msgstr ""
@@ -1247,6 +1256,9 @@ msgstr "Ώρα"
 
 msgid "How to Shutdown?"
 msgstr "Πως να τερματιστει η εφαρμογή?"
+
+msgid "If you experience any issues, please reset your Wii and choose a different video mode."
+msgstr ""
 
 msgid "Import Categories"
 msgstr "Εισαγωγή κατηγοριών"
@@ -2191,6 +2203,9 @@ msgstr "όνομα θέματος:"
 msgid "Themes by www.spiffy360.com"
 msgstr "Θέματα από την ιστοσελίδα www.spiffy360.com"
 
+msgid "These video modes do not work with most games. They also do not work at all on Wii U consoles. Proceed anyways?"
+msgstr ""
+
 msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "Το ΙΟS αυτό είναι του λειτουργικού BootMii. Αν όμως είστε βέβαιος-η ότι δεν είναι, παρακαλώ αγνοήστε αυτή την προειδοποίηση."
 
@@ -2500,6 +2515,9 @@ msgstr "Λανθασμένος κωδικός"
 
 msgid "Yes"
 msgstr "Ναι"
+
+msgid "You are attempting to access the 240p and 288p forced video modes. These video modes are currently HIGHLY experimental."
+msgstr ""
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Προσπαθείτε να επιλέξετε ενα partition FAT32/NTFS/EXT με cIOS 249 έκδοσης < 18. Αυτό δεν υποστηρίζεται. Προχωρήστε με δική σας ευθύνη."

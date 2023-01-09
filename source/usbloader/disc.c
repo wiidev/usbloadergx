@@ -184,6 +184,24 @@ void Disc_SelectVMode(u8 videoselected, bool devolution, u32 *dml_VideoMode, u32
 			if(dml_VideoMode) *dml_VideoMode = DML_VID_FORCE_PROG | DML_VID_PROG_PATCH;
 			if(nin_VideoMode) *nin_VideoMode = NIN_VID_FORCE_NTSC | NIN_VID_PROG;
 			break;
+		case VIDEO_MODE_PAL288P:
+			rmode =  &TVPal264Ds_RVL;
+			rmode_reg = VI_PAL;
+			if(dml_VideoMode) *dml_VideoMode = DML_VID_FORCE_PAL50;
+			if(nin_VideoMode) *nin_VideoMode = NIN_VID_FORCE_PAL50;
+			break;
+		case VIDEO_MODE_PAL240P:
+			rmode = &TVEurgb60Hz240Ds;
+			rmode_reg = VI_EURGB60;
+			if(dml_VideoMode) *dml_VideoMode = DML_VID_FORCE_PAL60;
+			if(nin_VideoMode) *nin_VideoMode = NIN_VID_FORCE_PAL60;
+			break;
+		case VIDEO_MODE_NTSC240P:
+			rmode = &TVNtsc240Ds;
+			rmode_reg = VI_NTSC;
+			if(dml_VideoMode) *dml_VideoMode = DML_VID_FORCE_NTSC;
+			if(nin_VideoMode) *nin_VideoMode = NIN_VID_FORCE_NTSC;
+			break;
 		case VIDEO_MODE_SYSDEFAULT: // AUTO PATCH TO SYSTEM
 			break;
 	}

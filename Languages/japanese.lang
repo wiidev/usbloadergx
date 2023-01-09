@@ -1023,20 +1023,29 @@ msgstr "16:9に強制"
 msgid "Force 4:3"
 msgstr "4:3に強制"
 
-msgid "Force NTSC"
-msgstr "NTSCに強制"
+msgid "Force NTSC 240p60"
+msgstr "NTSC240p60に強制"
 
-msgid "Force NTSC480p"
-msgstr "NTSC480pに強制"
+msgid "Force NTSC 480i60"
+msgstr "NTSC480i60に強制"
 
-msgid "Force PAL480p"
-msgstr "PAL480pに強制"
+msgid "Force NTSC 480p60"
+msgstr "NTSC480p60に強制"
 
-msgid "Force PAL50"
-msgstr "PAL50に強制"
+msgid "Force PAL 240p60"
+msgstr "PAL240p60に強制"
 
-msgid "Force PAL60"
-msgstr "PAL60に強制"
+msgid "Force PAL 288p50"
+msgstr "PAL288p50に強制"
+
+msgid "Force PAL 480i60"
+msgstr "PAL480i60に強制"
+
+msgid "Force PAL 480p60"
+msgstr "PAL480p60に強制"
+
+msgid "Force PAL 576i50"
+msgstr "PAL576i50に強制"
 
 msgid "Force Widescreen"
 msgstr ""
@@ -1247,6 +1256,9 @@ msgstr "時間"
 
 msgid "How to Shutdown?"
 msgstr "終了方法の選択"
+
+msgid "If you experience any issues, please reset your Wii and choose a different video mode."
+msgstr ""
 
 msgid "Import Categories"
 msgstr "カテゴリをインポート"
@@ -2191,6 +2203,9 @@ msgstr "テーマ名:"
 msgid "Themes by www.spiffy360.com"
 msgstr "テーマ…www.spiffy360.com"
 
+msgid "These video modes do not work with most games. They also do not work at all on Wii U consoles. Proceed anyways?"
+msgstr ""
+
 msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "このIOSはBootMiiのIOSです"
 
@@ -2503,6 +2518,9 @@ msgstr "暗証番号が違います"
 
 msgid "Yes"
 msgstr "はい"
+
+msgid "You are attempting to access the 240p and 288p forced video modes. These video modes are currently HIGHLY experimental."
+msgstr ""
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "rev17以前のcIOS249ではFAT32/NTFS/EXTに対応していません"

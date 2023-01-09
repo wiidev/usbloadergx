@@ -1023,20 +1023,29 @@ msgstr ""
 msgid "Force 4:3"
 msgstr ""
 
-msgid "Force NTSC"
-msgstr "Vynutit NTSC"
+msgid "Force NTSC 240p60"
+msgstr "Vynutit NTSC 240p60"
 
-msgid "Force NTSC480p"
-msgstr ""
+msgid "Force NTSC 480i60"
+msgstr "Vynutit NTSC 480i60"
 
-msgid "Force PAL480p"
-msgstr ""
+msgid "Force NTSC 480p60"
+msgstr "Vynutit NTSC 480p60"
 
-msgid "Force PAL50"
-msgstr "Vynutit PAL50"
+msgid "Force PAL 240p60"
+msgstr "Vynutit PAL 240p60"
 
-msgid "Force PAL60"
-msgstr "Vynutit PAL60"
+msgid "Force PAL 288p50"
+msgstr "Vynutit PAL 288p50"
+
+msgid "Force PAL 480i60"
+msgstr "Vynutit PAL 480i60"
+
+msgid "Force PAL 480p60"
+msgstr "Vynutit PAL 480p60"
+
+msgid "Force PAL 576i50"
+msgstr "Vynutit PAL 576i50"
 
 msgid "Force Widescreen"
 msgstr ""
@@ -1247,6 +1256,9 @@ msgstr "Hodina"
 
 msgid "How to Shutdown?"
 msgstr "Jakým zpusobem ukoncit?"
+
+msgid "If you experience any issues, please reset your Wii and choose a different video mode."
+msgstr ""
 
 msgid "Import Categories"
 msgstr ""
@@ -2191,6 +2203,9 @@ msgstr "Název tématu"
 msgid "Themes by www.spiffy360.com"
 msgstr "Téma od www.spiffy360.com"
 
+msgid "These video modes do not work with most games. They also do not work at all on Wii U consoles. Proceed anyways?"
+msgstr ""
+
 msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "Tento IOS je BootMii IOS. Pokud si jste jisti ze toto není BootMii a máte zde nainstalováno neco jiného, pak ignorujte toto varování."
 
@@ -2500,6 +2515,9 @@ msgstr "Špatné heslo"
 
 msgid "Yes"
 msgstr "Ano"
+
+msgid "You are attempting to access the 240p and 288p forced video modes. These video modes are currently HIGHLY experimental."
+msgstr ""
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Pokousíte se vybrat oddíl FAT32/NTFS/EXT s cIOS 249 Rev < 18. To není podporováno. Pokracujte na vasi odpovednost."

@@ -52,12 +52,15 @@ static const char * VideoModeText[] =
 {
 	trNOOP( "System Default" ),
 	trNOOP( "Disc Default" ),
-	trNOOP( "Force PAL50" ),
-	trNOOP( "Force PAL60" ),
-	trNOOP( "Force NTSC" ),
+	trNOOP( "Force PAL 576i50" ),
+	trNOOP( "Force PAL 480i60" ),
+	trNOOP( "Force NTSC 480i60" ),
 	trNOOP( "Region Patch" ),
-	trNOOP( "Force PAL480p" ),
-	trNOOP( "Force NTSC480p" )
+	trNOOP( "Force PAL 480p60" ),
+	trNOOP( "Force NTSC 480p60" ),
+	trNOOP( "Force PAL 288p50" ),
+	trNOOP( "Force PAL 240p60" ),
+	trNOOP( "Force NTSC 240p60" )
 };
 
 static const char * VideoPatchDolText[] =
@@ -483,6 +486,16 @@ int GameLoadSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.video >= VIDEO_MODE_MAX) GameConfig.video = INHERIT;
+		if (GameConfig.video == VIDEO_MODE_PAL288P)
+		{
+			WindowPrompt(tr("Warning:"), tr("You are attempting to access the 240p and 288p forced video modes. These video modes are currently HIGHLY experimental."), tr("Next"));
+			int choice = WindowPrompt(tr("Warning:"), tr("These video modes do not work with most games. They also do not work at all on Wii U consoles. Proceed anyways?"), tr("Yes"), tr("No"));
+			if (choice == 1)
+			{
+				WindowPrompt(tr(""), tr("If you experience any issues, please reset your Wii and choose a different video mode."), tr("OK"));
+			}
+			else GameConfig.video = INHERIT;
+		}
 	}
 
 	//! Settings: Dol Video Patch

@@ -1023,20 +1023,29 @@ msgstr "Erzw. 16:9"
 msgid "Force 4:3"
 msgstr "Erzw. 4:3"
 
-msgid "Force NTSC"
-msgstr "NTSC erzw."
+msgid "Force NTSC 240p60"
+msgstr "NTSC 240p60 erzw."
 
-msgid "Force NTSC480p"
-msgstr "NTSC480p erzw."
+msgid "Force NTSC 480i60"
+msgstr "NTSC 480i60 erzw."
 
-msgid "Force PAL480p"
-msgstr "PAL480p erzw."
+msgid "Force NTSC 480p60"
+msgstr "NTSC 480p60 erzw."
 
-msgid "Force PAL50"
-msgstr "PAL50 erzw."
+msgid "Force PAL 240p60"
+msgstr "PAL 240p60 erzw."
 
-msgid "Force PAL60"
-msgstr "PAL60 erzw."
+msgid "Force PAL 288p50"
+msgstr "PAL 288p50 erzw."
+
+msgid "Force PAL 480i60"
+msgstr "PAL 480i60 erzw."
+
+msgid "Force PAL 480p60"
+msgstr "PAL 480p60 erzw."
+
+msgid "Force PAL 576i50"
+msgstr "PAL 576i50 erzw."
 
 msgid "Force Widescreen"
 msgstr "Erzwinge Widescreen"
@@ -1247,6 +1256,9 @@ msgstr "Stunden"
 
 msgid "How to Shutdown?"
 msgstr "Wie soll ausgeschaltet werden?"
+
+msgid "If you experience any issues, please reset your Wii and choose a different video mode."
+msgstr ""
 
 msgid "Import Categories"
 msgstr "Importiere Kategorien"
@@ -2191,6 +2203,9 @@ msgstr "Name:"
 msgid "Themes by www.spiffy360.com"
 msgstr "Themes von www.spiffy360.com"
 
+msgid "These video modes do not work with most games. They also do not work at all on Wii U consoles. Proceed anyways?"
+msgstr ""
+
 msgid "This IOS is the BootMii IOS. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "Dieses IOS ist das BootMii IOS. Solltest du sicher sein, dass es nicht das BootMii IOS ist und du dort etwas anderes installiert hast, ignoriere diese Warnung."
 
@@ -2500,6 +2515,9 @@ msgstr "Falsches Passwort"
 
 msgid "Yes"
 msgstr "Ja"
+
+msgid "You are attempting to access the 240p and 288p forced video modes. These video modes are currently HIGHLY experimental."
+msgstr ""
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Es wird versucht eine FAT32/NTFS/EXT Partition mit dem cIOS 249 Rev < 18 auszuwählen. Das wird nicht unterstützt. Weiter auf eigene Gefahr."

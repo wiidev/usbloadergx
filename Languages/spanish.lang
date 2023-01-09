@@ -1023,20 +1023,29 @@ msgstr "Forzar 16:9"
 msgid "Force 4:3"
 msgstr "Forzar 4:3"
 
-msgid "Force NTSC"
-msgstr "Forzar NTSC"
+msgid "Force NTSC 240p60"
+msgstr "Forzar NTSC 240p60"
 
-msgid "Force NTSC480p"
-msgstr "Forzar NTSC480p"
+msgid "Force NTSC 480i60"
+msgstr "Forzar NTSC 480i60"
 
-msgid "Force PAL480p"
-msgstr "Forzar PAL480p"
+msgid "Force NTSC 480p60"
+msgstr "Forzar NTSC 480p60"
 
-msgid "Force PAL50"
-msgstr "Forzar PAL50"
+msgid "Force PAL 240p60"
+msgstr "Forzar PAL 240p60"
 
-msgid "Force PAL60"
-msgstr "Forzar PAL60"
+msgid "Force PAL 288p50"
+msgstr "Forzar PAL 288p50"
+
+msgid "Force PAL 480i60"
+msgstr "Forzar PAL 480i60"
+
+msgid "Force PAL 480p60"
+msgstr "Forzar PAL 480p60"
+
+msgid "Force PAL 576i50"
+msgstr "Forzar PAL 576i50"
 
 msgid "Force Widescreen"
 msgstr "Forzar 16:9"
@@ -1247,6 +1256,9 @@ msgstr "Horas"
 
 msgid "How to Shutdown?"
 msgstr "¿Apagar Wii?"
+
+msgid "If you experience any issues, please reset your Wii and choose a different video mode."
+msgstr ""
 
 msgid "Import Categories"
 msgstr "Importar categorías"
@@ -2191,6 +2203,9 @@ msgstr "Título del Tema:"
 msgid "Themes by www.spiffy360.com"
 msgstr "Temas por www.spiffy360.com"
 
+msgid "These video modes do not work with most games. They also do not work at all on Wii U consoles. Proceed anyways?"
+msgstr ""
+
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "Este es el IOS de BootMii. Si estás seguro de que no es BootMii y tienes instalado otra cosa en este slot ignora esta advertencia."
 
@@ -2500,6 +2515,9 @@ msgstr "Contraseña incorrecta"
 
 msgid "Yes"
 msgstr "Sí"
+
+msgid "You are attempting to access the 240p and 288p forced video modes. These video modes are currently HIGHLY experimental."
+msgstr ""
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Estás intentando seleccionar una partición FAT32/NTFS/EXT con una revisión menor a la 18 del cIOS249. Esto no está soportado. Continúa a tu propio riesgo."
