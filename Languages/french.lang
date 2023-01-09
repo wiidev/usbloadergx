@@ -1945,10 +1945,10 @@ msgid "Save Game List to"
 msgstr "Sauvegarder la liste des jeux sous"
 
 msgid "Save List"
-msgstr "Exporter la liste"
+msgstr "Sauvegarder la liste"
 
 msgid "Save Path"
-msgstr ""
+msgstr "Sauvegarder le chemin"
 
 msgid "Saved"
 msgstr "Sauvegardé"
@@ -2008,7 +2008,7 @@ msgid "Show Free Space"
 msgstr "Afficher l'espace libre"
 
 msgid "Show Game Count"
-msgstr ""
+msgstr "Afficher le nombre de jeux"
 
 msgid "Show Play Count"
 msgstr "Afficher le compteur d'utilis."
@@ -2125,7 +2125,7 @@ msgid "System Default"
 msgstr "Console par défaut"
 
 msgid "System Proxy Settings"
-msgstr ""
+msgstr "Paramètres de proxy du système"
 
 msgid "TChinese"
 msgstr "Chinois traditionnel"
@@ -2210,7 +2210,7 @@ msgid "This path must be on SD!"
 msgstr "Ce chemin doit être situé sur la carte SD !"
 
 msgid "This setting doesn't work in SD card mode."
-msgstr ""
+msgstr "Ce réglage ne fonctionne pas en mode carte SD."
 
 msgid "Time left:"
 msgstr "Fini dans:"
@@ -2293,7 +2293,7 @@ msgid "Two Lines"
 msgstr "Deux lignes"
 
 msgid "USB"
-msgstr ""
+msgstr "USB"
 
 msgid "USB Device not initialized."
 msgstr "Périphérique USB non initialisé."
@@ -2377,11 +2377,11 @@ msgid "VIDTV Patch"
 msgstr "Patch VIDTV"
 
 msgid "Version:"
-msgstr ""
+msgstr "Version:"
 
 #, c-format
 msgid "Version: %s"
-msgstr ""
+msgstr "Version: %s"
 
 msgid "Video Deflicker"
 msgstr "Vidéo Deflicker"
@@ -2399,7 +2399,7 @@ msgid "Video scale"
 msgstr "Échelle de l'image"
 
 msgid "Video Width"
-msgstr ""
+msgstr "Largeur vidéo"
 
 msgid "Virtual Pointer Speed"
 msgstr "Vitesse du pointeur virtuel"
@@ -2462,22 +2462,22 @@ msgid "Wii Settings"
 msgstr "Paramètres Wii"
 
 msgid "WiiTDB.xml"
-msgstr ""
+msgstr "WiiTDB.xml"
 
 msgid "WiiTDB.xml is up to date."
 msgstr "WiiTDB.xml est à jour."
 
 msgid "WiiU Widescreen"
-msgstr ""
+msgstr "Écran large WiiU"
 
 msgid "Wiilight"
 msgstr "Illumination Wii"
 
 msgid "Wiimmfi"
-msgstr ""
+msgstr "Wiimmfi"
 
 msgid "Wiinnertag"
-msgstr ""
+msgstr "Wiinnertag"
 
 msgid "Wiinnertag Path"
 msgstr "Dossier Wiinnertag"
@@ -2568,7 +2568,7 @@ msgid "free"
 msgstr "libre"
 
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 msgid "not set"
 msgstr "non défini"
