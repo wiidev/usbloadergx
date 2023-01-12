@@ -20,7 +20,7 @@ The first configuration is the optimal one for the Wii, but the second configura
 ````
 Slot 249 base 56
 Slot 250 base 57
-Slot 251 base 38
+Slot 251 base 58
 ````
 **For vWii and Wii**
 ````
