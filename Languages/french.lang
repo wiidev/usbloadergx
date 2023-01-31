@@ -345,7 +345,7 @@ msgid "Cache BNR Files Path"
 msgstr "Dossier de cache BNR"
 
 msgid "Cache Path"
-msgstr ""
+msgstr "Chemin du Cache"
 
 msgid "Cache Titles"
 msgstr "Titres en cache"
@@ -401,7 +401,7 @@ msgid "Channel Launcher"
 msgstr "Lancement des Chaînes"
 
 msgid "Channel Path"
-msgstr ""
+msgstr "Chemin de la Chaîne"
 
 msgid "Channels"
 msgstr "Chaînes"
@@ -416,7 +416,7 @@ msgid "Click to download covers"
 msgstr "Téléchargement des jaquettes"
 
 msgid "Click to view information"
-msgstr ""
+msgstr "Cliquez pour afficher les informations"
 
 msgid "Clock"
 msgstr "Horloge"
@@ -532,7 +532,7 @@ msgid "Could not write to:"
 msgstr "Écriture impossible vers:"
 
 msgid "Cover Action"
-msgstr ""
+msgstr "Action des jaquettes"
 
 msgid "Cover Download"
 msgstr "Téléchargement des jaquettes"
@@ -550,7 +550,7 @@ msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr "Le fichier neek actuel n'est pas neek2o. Démarrage automatique désactivé."
 
 msgid "Custom Address"
-msgstr ""
+msgstr "Adresse persos"
 
 msgid "Custom Banners"
 msgstr "Bannières persos"
@@ -565,7 +565,7 @@ msgid "Custom Paths"
 msgstr "Personnalisation des dossiers"
 
 msgid "Custom"
-msgstr ""
+msgstr "Personnalisé"
 
 msgid "Customs"
 msgstr "Persos"
@@ -793,7 +793,7 @@ msgid "Downloading Full LQ Covers"
 msgstr "Téléch. des jaquettes complètes SD"
 
 msgid "Downloading Custom Disc Artwork"
-msgstr ""
+msgstr "Téléchargement de l'artwork des disques personnalisé"
 
 msgid "Downloading file..."
 msgstr "Téléchargement du fichier..."
@@ -1945,10 +1945,10 @@ msgid "Save Game List to"
 msgstr "Sauvegarder la liste des jeux sous"
 
 msgid "Save List"
-msgstr "Exporter la liste"
+msgstr "Sauvegarder la liste"
 
 msgid "Save Path"
-msgstr ""
+msgstr "Sauvegarder le chemin"
 
 msgid "Saved"
 msgstr "Sauvegardé"
@@ -2008,7 +2008,7 @@ msgid "Show Free Space"
 msgstr "Afficher l'espace libre"
 
 msgid "Show Game Count"
-msgstr ""
+msgstr "Afficher le nombre de jeux"
 
 msgid "Show Play Count"
 msgstr "Afficher le compteur d'utilis."
@@ -2125,7 +2125,7 @@ msgid "System Default"
 msgstr "Console par défaut"
 
 msgid "System Proxy Settings"
-msgstr ""
+msgstr "Paramètres de proxy du système"
 
 msgid "TChinese"
 msgstr "Chinois traditionnel"
@@ -2210,7 +2210,7 @@ msgid "This path must be on SD!"
 msgstr "Ce chemin doit être situé sur la carte SD !"
 
 msgid "This setting doesn't work in SD card mode."
-msgstr ""
+msgstr "Ce réglage ne fonctionne pas en mode carte SD."
 
 msgid "Time left:"
 msgstr "Fini dans:"
@@ -2399,7 +2399,7 @@ msgid "Video scale"
 msgstr "Échelle de l'image"
 
 msgid "Video Width"
-msgstr ""
+msgstr "Largeur vidéo"
 
 msgid "Virtual Pointer Speed"
 msgstr "Vitesse du pointeur virtuel"
@@ -2468,7 +2468,7 @@ msgid "WiiTDB.xml is up to date."
 msgstr "WiiTDB.xml est à jour."
 
 msgid "WiiU Widescreen"
-msgstr ""
+msgstr "Écran large WiiU"
 
 msgid "Wiilight"
 msgstr "Illumination Wii"
