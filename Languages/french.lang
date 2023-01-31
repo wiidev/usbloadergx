@@ -345,7 +345,7 @@ msgid "Cache BNR Files Path"
 msgstr "Dossier de cache BNR"
 
 msgid "Cache Path"
-msgstr ""
+msgstr "Chemin du Cache"
 
 msgid "Cache Titles"
 msgstr "Titres en cache"
@@ -401,7 +401,7 @@ msgid "Channel Launcher"
 msgstr "Lancement des Chaînes"
 
 msgid "Channel Path"
-msgstr ""
+msgstr "Chemin de la Chaîne"
 
 msgid "Channels"
 msgstr "Chaînes"
@@ -416,7 +416,7 @@ msgid "Click to download covers"
 msgstr "Téléchargement des jaquettes"
 
 msgid "Click to view information"
-msgstr ""
+msgstr "Cliquez pour afficher les informations"
 
 msgid "Clock"
 msgstr "Horloge"
@@ -532,7 +532,7 @@ msgid "Could not write to:"
 msgstr "Écriture impossible vers:"
 
 msgid "Cover Action"
-msgstr ""
+msgstr "Action des jaquettes"
 
 msgid "Cover Download"
 msgstr "Téléchargement des jaquettes"
@@ -550,7 +550,7 @@ msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr "Le fichier neek actuel n'est pas neek2o. Démarrage automatique désactivé."
 
 msgid "Custom Address"
-msgstr ""
+msgstr "Adresse persos"
 
 msgid "Custom Banners"
 msgstr "Bannières persos"
@@ -565,7 +565,7 @@ msgid "Custom Paths"
 msgstr "Personnalisation des dossiers"
 
 msgid "Custom"
-msgstr ""
+msgstr "Personnalisé"
 
 msgid "Customs"
 msgstr "Persos"
@@ -793,7 +793,7 @@ msgid "Downloading Full LQ Covers"
 msgstr "Téléch. des jaquettes complètes SD"
 
 msgid "Downloading Custom Disc Artwork"
-msgstr ""
+msgstr "Téléchargement de l'artwork des disques personnalisé"
 
 msgid "Downloading file..."
 msgstr "Téléchargement du fichier..."
@@ -2293,7 +2293,7 @@ msgid "Two Lines"
 msgstr "Deux lignes"
 
 msgid "USB"
-msgstr "USB"
+msgstr ""
 
 msgid "USB Device not initialized."
 msgstr "Périphérique USB non initialisé."
@@ -2377,11 +2377,11 @@ msgid "VIDTV Patch"
 msgstr "Patch VIDTV"
 
 msgid "Version:"
-msgstr "Version:"
+msgstr ""
 
 #, c-format
 msgid "Version: %s"
-msgstr "Version: %s"
+msgstr ""
 
 msgid "Video Deflicker"
 msgstr "Vidéo Deflicker"
@@ -2462,7 +2462,7 @@ msgid "Wii Settings"
 msgstr "Paramètres Wii"
 
 msgid "WiiTDB.xml"
-msgstr "WiiTDB.xml"
+msgstr ""
 
 msgid "WiiTDB.xml is up to date."
 msgstr "WiiTDB.xml est à jour."
@@ -2474,10 +2474,10 @@ msgid "Wiilight"
 msgstr "Illumination Wii"
 
 msgid "Wiimmfi"
-msgstr "Wiimmfi"
+msgstr ""
 
 msgid "Wiinnertag"
-msgstr "Wiinnertag"
+msgstr ""
 
 msgid "Wiinnertag Path"
 msgstr "Dossier Wiinnertag"
@@ -2568,7 +2568,7 @@ msgid "free"
 msgstr "libre"
 
 msgid "ms"
-msgstr "ms"
+msgstr ""
 
 msgid "not set"
 msgstr "non défini"
