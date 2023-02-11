@@ -1344,7 +1344,7 @@ int GameBrowseMenu::MainLoop()
 				{
 					// This shouldn't ever fail in SD card mode
 					ShowError("%s %s", tr( "USB Device not initialized." ), tr("Switching to channel list mode."));
-					Settings.LoaderMode &= ~MODE_WIIGAMES;
+					//Settings.LoaderMode &= ~MODE_WIIGAMES;
 					Settings.LoaderMode |= MODE_NANDCHANNELS;
 				}
 				else
