@@ -234,7 +234,7 @@ bool StartUpProcess::USBSpinUp()
 			cancelBtn->Update(&userInput[i]);
 			sdmodeBtn->Update(&userInput[i]);
 		}
-
+/*
 		if (cancelBtn->GetState() == STATE_CLICKED)
 			break;
 
@@ -244,7 +244,7 @@ bool StartUpProcess::USBSpinUp()
 			sdhc_mode_sd = 1;
 			break;
 		}
-
+*/
 		messageTxt->SetTextf("Waiting for HDD: %i sec left\n", 20 - (int)countDown.elapsed());
 		Draw();
 		usleep(50000);
