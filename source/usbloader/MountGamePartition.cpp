@@ -173,8 +173,10 @@ int MountGamePartition(bool ShowGUI)
 			if (ShowGUI)
 				ShowError("%s %s", tr( "USB Device not initialized." ), tr("Switching to channel list mode."));
 
+			// DEG_HACK: Don't disable Wii list or show nan chans, enable EmuNand since on the SD card.
 			//Settings.LoaderMode &= ~MODE_WIIGAMES;
-			Settings.LoaderMode |= MODE_NANDCHANNELS;
+			//Settings.LoaderMode |= MODE_NANDCHANNELS;
+			Settings.LoaderMode |= MODE_EMUCHANNELS;
 		}
 	}
 	else
