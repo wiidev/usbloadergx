@@ -57,9 +57,9 @@ StartUpProcess::StartUpProcess()
 	versionTxt->SetPosition(23, screenheight - 20);
 
 #ifdef FULLCHANNEL
-	versionTxt->SetTextf("v3.0c Rev. %s (%s)", GetRev(), commitID());
+	versionTxt->SetTextf("v3.0c Rev. %s (%s) Dave's Hack", GetRev(), commitID());
 #else
-	versionTxt->SetTextf("v3.0 Rev. %s (%s)", GetRev(), commitID());
+	versionTxt->SetTextf("v3.0 Rev. %s (%s) Dave's Hack", GetRev(), commitID());
 #endif
 
 	if (strncmp(Settings.ConfigPath, "sd", 2) == 0)
@@ -234,7 +234,7 @@ bool StartUpProcess::USBSpinUp()
 			cancelBtn->Update(&userInput[i]);
 			sdmodeBtn->Update(&userInput[i]);
 		}
-/*
+/* DEG_HACK
 		if (cancelBtn->GetState() == STATE_CLICKED)
 			break;
 
