@@ -33,15 +33,15 @@ msgstr "%i missende bestanden"
 
 #, c-format
 msgid "%i WAD file(s) not processed!"
-msgstr ""
+msgstr "%i WAD bestand(en) niet verwerkt!"
 
 #, c-format
 msgid "%i WAD found."
-msgstr ""
+msgstr "%i WAD niet gevonden."
 
 #, c-format
 msgid "%s only accepts GameCube backups in ISO format."
-msgstr "%s accepteerd alleen GameCube backups in ISO formaat."
+msgstr "%s accepteert alleen GameCube backups in ISO formaat."
 
 #, c-format
 msgid "%s requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."
@@ -108,7 +108,7 @@ msgid "5 min"
 msgstr ""
 
 msgid "=== GameCube Settings"
-msgstr ""
+msgstr "=== GameCube-instellingen"
 
 msgid "AUTO"
 msgstr "Automatisch"
@@ -126,7 +126,7 @@ msgid "Adjust Overscan Y"
 msgstr "Aanpassen Overscan Y"
 
 msgid "After zoom"
-msgstr ""
+msgstr "Na zoomen"
 
 msgid "All"
 msgstr "Alles"
@@ -144,7 +144,7 @@ msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle functies van USB Loader GX zijn vrijgegeven."
 
 msgid "All WAD files processed successfully."
-msgstr ""
+msgstr "Alle WAD bestanden succesvol verwerkt."
 
 msgid "Alternate DOL"
 msgstr "Alternatieve DOL"
