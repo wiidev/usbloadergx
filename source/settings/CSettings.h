@@ -175,6 +175,8 @@ class CSettings
 		short NandEmuMode;
 		short NandEmuChanMode;
 		short UseSystemFont;
+		short AutobootDiscs;
+		short AutobootDiscsDelay;
 		short Hooktype;
 		short WiirdDebugger;
 		short WiirdDebuggerPause;
