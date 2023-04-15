@@ -33,15 +33,15 @@ msgstr "%i missende bestanden"
 
 #, c-format
 msgid "%i WAD file(s) not processed!"
-msgstr ""
+msgstr "%i WAD bestand(en) niet verwerkt!"
 
 #, c-format
 msgid "%i WAD found."
-msgstr ""
+msgstr "%i WAD niet gevonden."
 
 #, c-format
 msgid "%s only accepts GameCube backups in ISO format."
-msgstr "%s accepteerd alleen GameCube backups in ISO formaat."
+msgstr "%s accepteert alleen GameCube backups in ISO formaat."
 
 #, c-format
 msgid "%s requires AHB access! Please launch USBLoaderGX from HBC or from an updated channel or forwarder."
@@ -72,13 +72,13 @@ msgid "1 hour"
 msgstr "1 uur"
 
 msgid "10 min"
-msgstr ""
+msgstr "10 minuten"
 
 msgid "2 (Teen 12+)"
 msgstr "2 (Tiener 12+)"
 
 msgid "20 min"
-msgstr ""
+msgstr "20 minuten"
 
 msgid "2D Cover Path"
 msgstr "Locatie 2D hoesjes"
@@ -87,10 +87,10 @@ msgid "3 (Mature 16+)"
 msgstr "3 (Jongeren 16+)"
 
 msgid "3 min"
-msgstr ""
+msgstr "3 minuten"
 
 msgid "30 min"
-msgstr ""
+msgstr "30 minuten"
 
 msgid "3D Cover Path"
 msgstr "Locatie 3D hoesjes"
@@ -105,10 +105,10 @@ msgid "480p Pixel Fix Patch"
 msgstr ""
 
 msgid "5 min"
-msgstr ""
+msgstr "5 minuten"
 
 msgid "=== GameCube Settings"
-msgstr ""
+msgstr "=== GameCube-instellingen"
 
 msgid "AUTO"
 msgstr "Automatisch"
@@ -126,7 +126,7 @@ msgid "Adjust Overscan Y"
 msgstr "Aanpassen Overscan Y"
 
 msgid "After zoom"
-msgstr ""
+msgstr "Na zoomen"
 
 msgid "All"
 msgstr "Alles"
@@ -144,7 +144,7 @@ msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle functies van USB Loader GX zijn vrijgegeven."
 
 msgid "All WAD files processed successfully."
-msgstr ""
+msgstr "Alle WAD bestanden succesvol verwerkt."
 
 msgid "Alternate DOL"
 msgstr "Alternatieve DOL"
@@ -186,19 +186,19 @@ msgid "Are you sure you want to remount SD?"
 msgstr "Weet je zeker dat je de SD wilt hermounten?"
 
 msgid "Are you sure you want to reset?"
-msgstr "Wet je zeker dat je wilt resetten?"
+msgstr "Weet je zeker dat je wilt resetten?"
 
 msgid "Are you sure?"
 msgstr "Zeker weten?"
 
 msgid "Aspect Ratio"
-msgstr "verhouding ratio"
+msgstr "Beeldverhouding"
 
 msgid "Attention!"
 msgstr "Opgelet!"
 
 msgid "Attention: All savegames will be deleted."
-msgstr ""
+msgstr "Let op: Alle savegames zullen worden verwijderd."
 
 msgid "Aug"
 msgstr ""
@@ -210,7 +210,7 @@ msgid "Auto"
 msgstr "Auto"
 
 msgid "Auto Boot"
-msgstr "Auto Opstart"
+msgstr "Automatisch Opstarten"
 
 msgid "AutoInit Network"
 msgstr "Netwerk AutoStart"
@@ -279,19 +279,19 @@ msgid "Block HBC Menu"
 msgstr "Blokkeer HBC Menu"
 
 msgid "Block Hard Drive Settings"
-msgstr "Blokkeer Harddisk Instellingen"
+msgstr "Blokkeer Harde Schijf Instellingen"
 
 msgid "Block IOS Reload"
 msgstr "Blokkeer IOS Herladen"
 
 msgid "Block Loader Layout Button"
-msgstr ""
+msgstr "Blokkeer Lader Lay-Out Knop"
 
 msgid "Block Loader Mode Button"
-msgstr ""
+msgstr "Blokkeer Lader-modusknop"
 
 msgid "Block Loader Settings"
-msgstr "Blokkeer Loader Instellingen"
+msgstr "Blokkeer Lader Instellingen"
 
 msgid "Block Parental Settings"
 msgstr "Blokkeer Ouderlijk Toezicht"
@@ -324,16 +324,16 @@ msgid "Boot Content"
 msgstr "Start Content"
 
 msgid "Boot Neek System Menu"
-msgstr ""
+msgstr "Start Neek-systeemmenu"
 
 msgid "Boot?"
-msgstr "Start?"
+msgstr "Starten?"
 
 msgid "Both"
 msgstr "Beide"
 
 msgid "Both Ports"
-msgstr "Beide poorten"
+msgstr "Beide Poorten"
 
 msgid "CC Rumble"
 msgstr ""
@@ -345,10 +345,10 @@ msgid "Cache BNR Files Path"
 msgstr "Cache BNR Bestandspad"
 
 msgid "Cache Path"
-msgstr ""
+msgstr "Cache Pad"
 
 msgid "Cache Titles"
-msgstr "Titels cachen"
+msgstr "Titels Cachen"
 
 msgid "Can't be formatted"
 msgstr "Kan niet geformatteerd worden"
@@ -395,13 +395,13 @@ msgid "Categories:"
 msgstr "Categorieën:"
 
 msgid "Change Play Path"
-msgstr "Verander afspeel locatie"
+msgstr "Verander Afspeellocatie"
 
 msgid "Channel Launcher"
 msgstr "Kanaal Launcher"
 
 msgid "Channel Path"
-msgstr ""
+msgstr "Kanaal Pad"
 
 msgid "Channels"
 msgstr "Kanalen"
@@ -416,7 +416,7 @@ msgid "Click to download covers"
 msgstr "Klik om hoesjes te downloaden"
 
 msgid "Click to view information"
-msgstr ""
+msgstr "Klik om informatie te weergeven"
 
 msgid "Clock"
 msgstr "Klok"
@@ -468,13 +468,13 @@ msgid "Continue?"
 msgstr "Doorgaan?"
 
 msgid "Controllevel"
-msgstr "Controle niveau"
+msgstr "Controle Niveau"
 
 msgid "Copy"
 msgstr "Kopie"
 
 msgid "Copying Canceled"
-msgstr "Kopiëren geannuleerd"
+msgstr "Kopiëren Geannuleerd"
 
 msgid "Copying GC game..."
 msgstr "GC game kopiëren..."
@@ -514,7 +514,7 @@ msgid "Could not initialize network, time out!"
 msgstr "Kan netwerk niet initialiseren, time-out!"
 
 msgid "Could not open Disc"
-msgstr "Kan disk niet openen"
+msgstr "Kan schijf niet openen"
 
 msgid "Could not open the WiiTDB.xml file."
 msgstr "Kan het WiiTDB.xml bestand niet openen."
@@ -532,10 +532,10 @@ msgid "Could not write to:"
 msgstr "Kan niet schrijven naar:"
 
 msgid "Cover Action"
-msgstr ""
+msgstr "Hoesactie"
 
 msgid "Cover Download"
-msgstr "Download hoesjes"
+msgstr "Download Hoesjes"
 
 msgid "Create"
 msgstr "Maak"
@@ -547,7 +547,7 @@ msgid "Crop Overscan"
 msgstr ""
 
 msgid "Current neek files are not neek2o. Game autoboot disabled."
-msgstr ""
+msgstr "De huidige neek-bestanden zijn niet neek2o. Automatisch opstarten van spel uitgeschakeld."
 
 msgid "Custom Address"
 msgstr "Aangepaste Adres"
@@ -556,10 +556,10 @@ msgid "Custom Banners"
 msgstr "Aangepaste Banners"
 
 msgid "Custom Game IOS"
-msgstr ""
+msgstr "Aangepaste Spel IOS"
 
 msgid "Custom Games IOS"
-msgstr ""
+msgstr "Aangepaste Spellen IOS"
 
 msgid "Custom Paths"
 msgstr "Aangepaste Locaties"
@@ -598,7 +598,7 @@ msgid "Default Settings"
 msgstr "Standaardinstellingen"
 
 msgid "Deflicker Filter"
-msgstr ""
+msgstr "Deflicker-filter"
 
 msgid "Delete"
 msgstr "Verwijderen"
@@ -613,10 +613,10 @@ msgid "Delete Cheat TXT"
 msgstr "Cheat TXT verwijderen"
 
 msgid "Delete Cover Artwork"
-msgstr "Hoesjes verwijderen"
+msgstr "Hoesjes Verwijderen"
 
 msgid "Delete Disc Artwork"
-msgstr "Disk labels verwijderen"
+msgstr "Schijflabels Verwijderen"
 
 msgid "Delete category"
 msgstr "Verwijder categorie"
@@ -652,40 +652,40 @@ msgid "Directory does not exist!"
 msgstr "Map bestaat niet!"
 
 msgid "Disc"
-msgstr ""
+msgstr "Schijf"
 
 msgid "Disc 1"
-msgstr ""
+msgstr "Schijf 1"
 
 msgid "Disc 2"
-msgstr ""
+msgstr "Schijf 2"
 
 msgid "Disc Artwork"
-msgstr ""
+msgstr "Schijflabels"
 
 msgid "Disc Artwork Download"
-msgstr "Download disk labels"
+msgstr "Download Schijflabels"
 
 msgid "Disc Artwork Path"
-msgstr "Locatie disk labels"
+msgstr "Locatie Schijflabels"
 
 msgid "Disc Default"
-msgstr "Disk standaard"
+msgstr "Schijfstandaard"
 
 msgid "Disc Insert Detected"
-msgstr "Disk invoer gedetecteerd"
+msgstr "Schijf Invoer Gedetecteerd"
 
 msgid "Disc Read Delay"
-msgstr ""
+msgstr "Schijfleesvertraging"
 
 msgid "Disc read error."
-msgstr "Disk leesfout."
+msgstr "Schijfleesfout."
 
 msgid "Disc-Select Prompt"
-msgstr ""
+msgstr "Schijfselecte-prompt"
 
 msgid "Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"
-msgstr "Disc2 moet in een ongecomprimeerd formaat worden opgeslagen om te werken met DM (L) V2.6+, weet je zeker dat je wilt installeren in een gecomprimeerd formaat?"
+msgstr "Schijf2 moet in een ongecomprimeerd formaat worden opgeslagen om te werken met DM (L) V2.6+, weet je zeker dat je wilt installeren in een gecomprimeerd formaat?"
 
 msgid "DiskFlip"
 msgstr ""
@@ -751,7 +751,7 @@ msgid "Do you want to load the default theme?"
 msgstr "Wil je het standaard thema laden?"
 
 msgid "Do you want to move the file(s)? Any existing ones will be deleted!"
-msgstr ""
+msgstr "Wil je de/het bestand(en) verplaatsen? Bestaande bestanden zullen verwijderd worden!"
 
 msgid "Do you want to re-init network?"
 msgstr "Wil je het netwerk herinitialiseren?"
@@ -772,7 +772,7 @@ msgid "Download"
 msgstr "Download"
 
 msgid "Download Now"
-msgstr "Download nu"
+msgstr "Download Nu"
 
 msgid "Download finished"
 msgstr "Download voltooid"
@@ -781,7 +781,7 @@ msgid "Downloading 3D Covers"
 msgstr "3D hoesjes aan het downloaden"
 
 msgid "Downloading Custom Banners"
-msgstr "Aangepaste banners aan het downloaden"
+msgstr "Aangepaste Banners Aan Het Downloaden"
 
 msgid "Downloading Flat Covers"
 msgstr "Platte hoesjes aan het downloaden"
@@ -838,13 +838,13 @@ msgid "EmuNAND Channels"
 msgstr "EmuNAND Kanalen"
 
 msgid "EmuNAND Save Mode"
-msgstr ""
+msgstr "EmuNAND Opslamodus"
 
 msgid "EmuNAND Save Path"
-msgstr ""
+msgstr "EmuNAND Opslagpad"
 
 msgid "Emulated NAND"
-msgstr "Geëmuleerd NAND"
+msgstr "Geëmuleerde NAND"
 
 msgid "English"
 msgstr "Engels"
@@ -866,10 +866,10 @@ msgid "Error opening downloaded file"
 msgstr "Fout bij het openen van gedownload bestand"
 
 msgid "Error reading Disc"
-msgstr "Fout bij lezen disk"
+msgstr "Fout bij lezen schijf"
 
 msgid "Error reading disc"
-msgstr ""
+msgstr "Fout bij lezen schijf"
 
 #, c-format
 msgid "Error when downloading file: %i"
@@ -1012,7 +1012,7 @@ msgid "Flip-X"
 msgstr "X omwisselen"
 
 msgid "Folder"
-msgstr ""
+msgstr "Map"
 
 msgid "Font Scale Factor"
 msgstr "Lettertype Schaal Factor"
@@ -1222,7 +1222,7 @@ msgid "HOME Menu"
 msgstr "HOME Menu"
 
 msgid "Hard Drive Settings"
-msgstr "Harddisk Instellingen"
+msgstr "Harde Schijf Instellingen"
 
 msgid "High Quality"
 msgstr "Hoge Kwaliteit"
@@ -1269,16 +1269,16 @@ msgid "Individual"
 msgstr "Individueel"
 
 msgid "Information"
-msgstr ""
+msgstr "Informatie"
 
 msgid "Initializing Network"
 msgstr "Netwerk initialiseren"
 
 msgid "Insert Disk"
-msgstr "Voer een disk in"
+msgstr "Voer een schijf in"
 
 msgid "Insert a Wii or a GameCube Disc!"
-msgstr "Voer een Wii of GameCube Disk in!"
+msgstr "Voer een Wii of GameCube schijf in!"
 
 msgid "Install"
 msgstr "Installeer"
@@ -1299,7 +1299,7 @@ msgid "Install a game"
 msgstr "Spel installeren"
 
 msgid "Install error - Cleaning incomplete data."
-msgstr ""
+msgstr "Installeerfout - Opschonen van onvolledige gegevens."
 
 msgid "Install finished"
 msgstr "Installatie voltooid"
@@ -1564,7 +1564,7 @@ msgid "No Cheatfile found"
 msgstr "Geen cheatbestand gevonden"
 
 msgid "No DOL file found on disc."
-msgstr "Geen DOL bestand gevonden op disk."
+msgstr "Geen DOL bestand gevonden op schijf."
 
 msgid "No Disc+"
 msgstr "Geen Disk+"
@@ -1600,7 +1600,7 @@ msgid "No files missing!"
 msgstr "Geen missende bestanden!"
 
 msgid "No games found on the disc"
-msgstr "Geen spellen gevonden op disk"
+msgstr "Geen spellen gevonden op schijf"
 
 msgid "No language files to update on your devices! Do you want to download new language files?"
 msgstr "Geen taalbestanden om te updateten op je apparaten! Wil je nieuwe taalbestanden downloaden?"
@@ -1630,7 +1630,7 @@ msgid "Not Initialized"
 msgstr "Niet Geïnitialiseerd"
 
 msgid "Not a Wii or a GameCube Disc"
-msgstr "Geen Wii of GameCube Disk"
+msgstr "Geen Wii of GameCube schijf"
 
 msgid "Not a valid URL"
 msgstr "Geen geldige URL"
@@ -1903,7 +1903,7 @@ msgid "Right"
 msgstr "Rechts"
 
 msgid "Rotating Disc"
-msgstr "Draaiende Disk"
+msgstr "Draaiende Schijf"
 
 msgid "Round"
 msgstr ""
