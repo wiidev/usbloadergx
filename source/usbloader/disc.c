@@ -263,12 +263,6 @@ s32 Disc_Init(void)
 
 s32 Disc_Open(void)
 {
-	s32 ret;
-
-	/* Reset drive */
-	ret = WDVD_Reset();
-	if (ret < 0) return ret;
-
 	/* Read disc ID */
 	return WDVD_ReadDiskId(diskid);
 }

@@ -159,6 +159,8 @@ GuiSettingsMenu::GuiSettingsMenu()
 	Options->SetName(Idx++, "%s", tr( "Show Game Count" ));
 	Options->SetName(Idx++, "%s", tr( "HOME Menu" ));
 	Options->SetName(Idx++, "%s", tr( "Use System Font" ));
+	Options->SetName(Idx++, "%s", tr( "Autoboot Discs" ));
+	Options->SetName(Idx++, "%s", tr( "Autoboot Discs Delay" ));
 	Options->SetName(Idx++, "%s", tr( "Virtual Pointer Speed" ));
 	Options->SetName(Idx++, "%s", tr( "Adjust Overscan X" ));
 	Options->SetName(Idx++, "%s", tr( "Adjust Overscan Y" ));
@@ -253,6 +255,12 @@ void GuiSettingsMenu::SetOptionValues()
 
 	//! Settings: Use System Font
 	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.UseSystemFont] ));
+
+	//! Settings: Autoboot Discs
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.AutobootDiscs] ));
+
+	//! Settings: Autoboot Discs Delay
+	Options->SetValue(Idx++, "%i", Settings.AutobootDiscsDelay);
 
 	//! Settings: Virtual Pointer Speed
 	Options->SetValue(Idx++, "%g", Settings.PointerSpeed);
@@ -482,6 +490,18 @@ int GuiSettingsMenu::GetMenuInternal()
 			Settings.FontScaleFactor = 0.8f;
 		else if(Settings.FontScaleFactor == 0.8f && Settings.UseSystemFont == OFF)
 			Settings.FontScaleFactor = 1.0f;
+	}
+
+	//! Settings: Autoboot Discs
+	else if (ret == ++Idx)
+	{
+		if (++Settings.AutobootDiscs >= MAX_ON_OFF) Settings.AutobootDiscs = 0;
+	}
+
+	//! Settings: Autoboot Discs Delay
+	else if (ret == ++Idx)
+	{
+		if (++Settings.AutobootDiscsDelay >= 6) Settings.AutobootDiscsDelay = 0;
 	}
 
 	//! Settings: Virtual Pointer Speed

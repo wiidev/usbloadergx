@@ -169,6 +169,8 @@ void CSettings::SetDefault()
 	NandEmuMode = OFF;
 	NandEmuChanMode = 2;
 	UseSystemFont = ON;
+	AutobootDiscs = OFF;
+	AutobootDiscsDelay = 3;
 	Hooktype = 0;
 	WiirdDebugger = OFF;
 	WiirdDebuggerPause = OFF;
@@ -439,6 +441,8 @@ bool CSettings::Save()
 	fprintf(file, "NandEmuPath = %s\n", NandEmuPath);
 	fprintf(file, "NandEmuChanPath = %s\n", NandEmuChanPath);
 	fprintf(file, "UseSystemFont = %d\n", UseSystemFont);
+	fprintf(file, "AutobootDiscs = %d\n", AutobootDiscs);
+	fprintf(file, "AutobootDiscsDelay = %d\n", AutobootDiscsDelay);
 	fprintf(file, "Hooktype = %d\n", Hooktype);
 	fprintf(file, "WiirdDebugger = %d\n", WiirdDebugger);
 	fprintf(file, "WiirdDebuggerPause = %d\n", WiirdDebuggerPause);
@@ -866,6 +870,14 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if(strcmp(name, "UseSystemFont") == 0)
 	{
 		UseSystemFont = atoi(value);
+	}
+	else if (strcmp(name, "AutobootDiscs") == 0)
+	{
+		AutobootDiscs = atoi(value);
+	}
+	else if (strcmp(name, "AutobootDiscsDelay") == 0)
+	{
+		AutobootDiscsDelay = atoi(value);
 	}
 	else if(strcmp(name, "Hooktype") == 0)
 	{
