@@ -81,7 +81,7 @@ msgid "20 min"
 msgstr "20 min."
 
 msgid "2D Cover Path"
-msgstr "Ruta Carátulas 2D"
+msgstr "Ruta de carátulas 2D"
 
 msgid "3 (Mature 16+)"
 msgstr "Jóvenes 16+"
@@ -93,7 +93,7 @@ msgid "30 min"
 msgstr "30 min."
 
 msgid "3D Cover Path"
-msgstr "Ruta Carátulas 3D"
+msgstr "Ruta de carátulas 3D"
 
 msgid "3D Covers"
 msgstr "Carátulas 3D"
@@ -102,7 +102,7 @@ msgid "4 (Adults Only 18+)"
 msgstr "Adultos 18+"
 
 msgid "480p Pixel Fix Patch"
-msgstr "Parche Corrección 480p"
+msgstr "Parche corrección 480p"
 
 msgid "5 min"
 msgstr "5 min."
@@ -192,7 +192,7 @@ msgid "Are you sure?"
 msgstr "¿Estás seguro?"
 
 msgid "Aspect Ratio"
-msgstr "Relación de Aspecto"
+msgstr "Relación de aspecto"
 
 msgid "Attention!"
 msgstr "¡Atención!"
@@ -213,28 +213,28 @@ msgid "Auto Boot"
 msgstr "Autoarranque"
 
 msgid "AutoInit Network"
-msgstr "Autoiniciar Red"
+msgstr "Autoiniciar red"
 
 msgid "BCA Codes Path"
-msgstr "Ruta Códigos BCA"
+msgstr "Ruta códigos BCA"
 
 msgid "Back"
 msgstr "Atrás"
 
 msgid "Back to HBC or Wii Menu"
-msgstr "Volver al HBC o Menú de Wii"
+msgstr "Abrir Menú HOME"
 
 msgid "Background Music"
 msgstr "Música de fondo"
 
 msgid "Banner Animation"
-msgstr "Animación del Banner"
+msgstr "Banner Animado"
 
 msgid "Banner Animation Settings"
-msgstr "Opciones de Animación del Banner"
+msgstr "Ajustes del Banner Animado"
 
 msgid "Banner On Channels"
-msgstr "Banner en Canales"
+msgstr "Banner del canal"
 
 msgid "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version."
 msgstr "¡La vista de banners en cuadrícula sólo está disponibles con AHBPROT! Instala una versión reciente de HBC."
@@ -306,7 +306,7 @@ msgid "Block SD Reload Button"
 msgstr "Recargar SD"
 
 msgid "Block Sound Settings"
-msgstr "Ajustes de Sonido"
+msgstr "Ajustes de Audio"
 
 msgid "Block Theme Downloader"
 msgstr "Descarga de Temas"
@@ -342,13 +342,13 @@ msgid "Cache BNR Files"
 msgstr "Caché de archivos BNR"
 
 msgid "Cache BNR Files Path"
-msgstr "Caché de archivos BNR"
+msgstr "Ruta de caché de archivos BNR"
 
 msgid "Cache Path"
 msgstr "Ruta de caché"
 
 msgid "Cache Titles"
-msgstr "Caché de Títulos"
+msgstr "Caché de títulos"
 
 msgid "Can't be formatted"
 msgstr "No se puede formatear"
@@ -398,7 +398,7 @@ msgid "Change Play Path"
 msgstr "Cambiar Ruta"
 
 msgid "Channel Launcher"
-msgstr "Cargador de Canales"
+msgstr "Cargador de canales"
 
 msgid "Channel Path"
 msgstr "Ruta de Canales"
@@ -532,7 +532,7 @@ msgid "Could not write to:"
 msgstr "No se pudo escribir en:"
 
 msgid "Cover Action"
-msgstr "Acción de carátula"
+msgstr "Acción de la carátula"
 
 msgid "Cover Download"
 msgstr "Descarga de carátulas"
@@ -544,7 +544,7 @@ msgid "Credits"
 msgstr "Créditos"
 
 msgid "Crop Overscan"
-msgstr "Recortar Sobreescaneado"
+msgstr "Recortar sobreescaneado"
 
 msgid "Current neek files are not neek2o. Game autoboot disabled."
 msgstr "Archivos actuales de NEEK no son NEEK2o. Autoarranque de juego deshabilitado."
@@ -571,7 +571,7 @@ msgid "Customs"
 msgstr "Personalizadas"
 
 msgid "Customs/Original"
-msgstr "Pers./Original"
+msgstr "Personalizadas >> Original"
 
 msgid "D Buttons"
 msgstr "Botones D-Pad"
@@ -607,10 +607,10 @@ msgid "Delete Cached Banner"
 msgstr "Borrar banner en caché"
 
 msgid "Delete Cheat GCT"
-msgstr "Borrar Trucos GCT"
+msgstr "Borrar trucos GCT"
 
 msgid "Delete Cheat TXT"
-msgstr "Borrar Trucos TXT"
+msgstr "Borrar trucos TXT"
 
 msgid "Delete Cover Artwork"
 msgstr "Borrar Carátulas"
@@ -643,7 +643,7 @@ msgid "Devolution"
 msgstr ""
 
 msgid "Devolution Loader Path"
-msgstr "Ubicación de Devolution"
+msgstr "Ruta de Devolution"
 
 msgid "Devolution's loader.bin file can't be loaded."
 msgstr "No se pudo cargar el loader.bin de Devolution."
@@ -664,16 +664,16 @@ msgid "Disc Artwork"
 msgstr "Imagen de Disco"
 
 msgid "Disc Artwork Download"
-msgstr "Descargar Imagenes de Discos"
+msgstr "Descargar imágenes de disco"
 
 msgid "Disc Artwork Path"
-msgstr "Ruta Imagenes de Discos"
+msgstr "Ruta imágenes de Discos"
 
 msgid "Disc Default"
 msgstr "Por defecto del Disco"
 
 msgid "Disc Insert Detected"
-msgstr "Disco Detectado"
+msgstr "Disco detectado"
 
 msgid "Disc Read Delay"
 msgstr "Retraso lectura disco"
@@ -826,10 +826,10 @@ msgid "ERROR: Can't set up theme."
 msgstr "ERROR: No se puede configurar el tema."
 
 msgid "EmuNAND WAD Manager"
-msgstr "WAD Manager de EmuNAND"
+msgstr "Gestionar WADs de EmuNAND"
 
 msgid "EmuNAND Channel Mode"
-msgstr "Modo de Canales de EmuNAND"
+msgstr "Modo de canales de EmuNAND"
 
 msgid "EmuNAND Channel Path"
 msgstr "Ruta de Canales de EmunNAND"
@@ -939,7 +939,7 @@ msgid "Extracting NAND files:"
 msgstr "Extrayendo NAND:"
 
 msgid "F-Zero AX"
-msgstr ""
+msgstr "Compatibilidad F-Zero AX"
 
 msgid "Failed"
 msgstr "Falló"
@@ -1009,13 +1009,13 @@ msgid "Flat Covers"
 msgstr "Carátulas 2D"
 
 msgid "Flip-X"
-msgstr "Desplazamiento X"
+msgstr "Desplazamiento horizontal"
 
 msgid "Folder"
 msgstr "Carpeta"
 
 msgid "Font Scale Factor"
-msgstr "Tamaño de la Fuente"
+msgstr "Tamaño de la fuente"
 
 msgid "Force 16:9"
 msgstr "Forzar 16:9"
@@ -1090,7 +1090,7 @@ msgid "Full Menu"
 msgstr "Menú completo"
 
 msgid "Full Covers Download"
-msgstr "Descargar Carátulas enteras"
+msgstr "Descargar carátulas enteras"
 
 msgid "Full shutdown"
 msgstr "Apagar"
@@ -1099,7 +1099,7 @@ msgid "GAMEID_Gamename"
 msgstr "IDJUEGO_NombreJuego"
 
 msgid "GC Banner Scale"
-msgstr "Tamaño del Banner GC"
+msgstr "Tamaño del banner GC"
 
 msgid "GC Games"
 msgstr "Juegos GC"
@@ -1117,7 +1117,7 @@ msgid "GCT File created"
 msgstr "Archivo GCT creado"
 
 msgid "GUI Settings"
-msgstr "Ajustes de la Interfaz"
+msgstr "Ajustes de Interfaz"
 
 msgid "GXDraw"
 msgstr ""
@@ -1162,19 +1162,19 @@ msgid "Game Sound Volume"
 msgstr "Volumen del Juego"
 
 msgid "Game Split Size"
-msgstr "Tamaño de División"
+msgstr "Tamaño de división"
 
 msgid "Game Window Mode"
-msgstr "Juego en Modo ventana"
+msgstr "Ventana al abrir juego"
 
 msgid "Game is already installed:"
 msgstr "El juego ya está instalado:"
 
 msgid "Games IOS"
-msgstr "IOS de los Juegos"
+msgstr "IOS de los juegos"
 
 msgid "Game/Install Partition"
-msgstr "Partición de Juegos"
+msgstr "Partición de juegos"
 
 msgid "GameCube"
 msgstr ""
@@ -1216,13 +1216,13 @@ msgid "Global Settings"
 msgstr "Ajustes globales"
 
 msgid "Grid Scroll Speed"
-msgstr "Velocidad de desplazamiento en cuadrícula"
+msgstr "Velocidad de la cuadrícula"
 
 msgid "HOME Menu"
 msgstr "Menú HOME"
 
 msgid "Hard Drive Settings"
-msgstr "Disco Duro"
+msgstr "Ajustes de Disco Duro"
 
 msgid "High Quality"
 msgstr "Alta Calidad"
@@ -1237,7 +1237,7 @@ msgid "Homebrew Channel"
 msgstr "Canal Homebrew"
 
 msgid "Homebrew Launcher"
-msgstr "Ejecutar Homebrew"
+msgstr "Abrir app de Homebrew"
 
 msgid "Hooktype"
 msgstr "HookType"
@@ -1474,7 +1474,7 @@ msgid "Memory Card with 2043 blocs has issues with Nintendont. Use at your own r
 msgstr "Las Tarjetas de Memoria de 2043 bloques tienen problemas al usarlas con Nintendont."
 
 msgid "Messageboard Update"
-msgstr "Actualizar Tablón de Mensajes"
+msgstr "Actualizar tablón de mensajes"
 
 msgid "Motion+ Video"
 msgstr "Vídeo Motion+"
@@ -1489,7 +1489,7 @@ msgid "Move File"
 msgstr "Mover archivo"
 
 msgid "Multiple Partitions"
-msgstr "Particiones Múltiples"
+msgstr "Particiones múltiples"
 
 msgid "Music Loop Mode"
 msgstr "Modo Música en Bucle"
@@ -1561,7 +1561,7 @@ msgid "No"
 msgstr ""
 
 msgid "No Cheatfile found"
-msgstr "No se encontró un archivo de Trucos"
+msgstr "No se encontró un archivo de trucos"
 
 msgid "No DOL file found on disc."
 msgstr "No se encontró un archivo DOL en el Disco"
@@ -1735,10 +1735,10 @@ msgid "Only for Install"
 msgstr "Sólo al instalar"
 
 msgid "Original"
-msgstr "Originales"
+msgstr "Sólo originales"
 
 msgid "Original/Customs"
-msgstr "Originales/Pers."
+msgstr "Originales >> Personalizadas"
 
 msgid "PAD Hook"
 msgstr ""
@@ -1765,10 +1765,10 @@ msgid "Password has been changed"
 msgstr "La contraseña ha sido cambiada"
 
 msgid "Patch Country Strings"
-msgstr "Parchear País"
+msgstr "Parchear país"
 
 msgid "Path Changed"
-msgstr "Ruta Cambiada"
+msgstr "Ruta cambiada"
 
 msgid "Permission denied."
 msgstr "Permiso denegado."
@@ -1816,7 +1816,7 @@ msgid "Process finished."
 msgstr "Proceso terminado."
 
 msgid "Progressive Patch"
-msgstr "Parche Progresivo"
+msgstr "Parchear vídeo progresivo"
 
 msgid "Prompts Buttons"
 msgstr "Botones"
@@ -1825,7 +1825,7 @@ msgid "Published by"
 msgstr "Publicado por"
 
 msgid "Quick Boot"
-msgstr "Inicio Rápido"
+msgstr "Inicio rápido"
 
 msgid "Random Directory Music"
 msgstr "Aleatorio de la carpeta musical"
@@ -1852,7 +1852,7 @@ msgid "Reloading game list now, please wait..."
 msgstr "Recargando lista de juegos, espera..."
 
 msgid "Remember Last Game"
-msgstr "Recordar Último Juego"
+msgstr "Recordar último juego"
 
 msgid "Remember Unlock"
 msgstr "Recordar Bloqueo"
@@ -1921,7 +1921,7 @@ msgid "SD Card could not be accessed."
 msgstr "No se puede acceder a tarjeta SD."
 
 msgid "SD Card Mode"
-msgstr "Modo Tarjeta SD"
+msgstr "Modo tarjeta SD"
 
 msgid "SD GameCube Games Path"
 msgstr "Ruta de juegos GameCube en SD"
@@ -1996,13 +1996,13 @@ msgid "Settings"
 msgstr "Ajustes"
 
 msgid "Settings File"
-msgstr "Archivo de Ajustes"
+msgstr "Archivo de ajustes"
 
 msgid "Show Categories"
 msgstr "Mostrar categorías"
 
 msgid "Show Favorite on banner"
-msgstr "Mostrar Favoritos en banner"
+msgstr "Mostrar puntuación en banner"
 
 msgid "Show Free Space"
 msgstr "Mostrar espacio libre"
@@ -2053,7 +2053,7 @@ msgid "Sort order by most played"
 msgstr "Ordenar por más veces jugadas"
 
 msgid "Sound"
-msgstr "Sonido"
+msgstr "Audio"
 
 msgid "Sound Settings"
 msgstr "Ajustes de Sonido"
@@ -2116,7 +2116,7 @@ msgid "Switching to channel list mode."
 msgstr "Cambiando a modo lista de canales."
 
 msgid "Sync FAT32 FS Info"
-msgstr "Sincronizar info de FAT32"
+msgstr "Sincronizar info. de FAT32"
 
 msgid "Synchronizing..."
 msgstr "Sincronizando..."
@@ -2131,7 +2131,7 @@ msgid "TChinese"
 msgstr "Chino Trad."
 
 msgid "TXT Cheatcodes Path"
-msgstr "Ruta de Trucos TXT"
+msgstr "Ruta de trucos TXT"
 
 msgid "The .them file was not found in the zip."
 msgstr "No se encontró el archivo .them en el ZIP."
@@ -2183,7 +2183,7 @@ msgid "Theme Menu"
 msgstr "Menú de Temas"
 
 msgid "Theme Path"
-msgstr "Ruta de Temas"
+msgstr "Ruta de temas"
 
 msgid "Theme Title:"
 msgstr "Título del Tema:"
@@ -2225,7 +2225,7 @@ msgid "Titles Path"
 msgstr "Ruta de títulos"
 
 msgid "Titles From"
-msgstr "Títulos de"
+msgstr "Obtener títulos desde"
 
 msgid "To run GameCube games from Disc you need to set the GameCube mode to MIOS in the game settings."
 msgstr "Para cargar juegos de GameCube desde Disco debes cambiar el modo GameCube a MIOS."
@@ -2278,7 +2278,7 @@ msgid "To use ocarina with %s you need the %s file."
 msgstr "Para usar Ocarina con %s necesitas el archivo %s."
 
 msgid "Tooltip Delay"
-msgstr "Retraso de ayuda rápida"
+msgstr "Retraso de de la descripción"
 
 msgid "Tooltips"
 msgstr "Descripción"
@@ -2365,7 +2365,7 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Enviado archivo ZIP instalado en la carpeta homebrew."
 
 msgid "Use System Font"
-msgstr "Usar Fuente del Sistema"
+msgstr "Usar fuente del sistema"
 
 msgid "Use global"
 msgstr "Por Defecto"
@@ -2387,13 +2387,13 @@ msgid "Video Deflicker"
 msgstr "Deflicker"
 
 msgid "Video Mode"
-msgstr "Modo de Vídeo"
+msgstr "Modo de vídeo"
 
 msgid "Video Scale Value"
-msgstr "Valor de Escala de vídeo"
+msgstr "Valor de escalado de vídeo"
 
 msgid "Video offset"
-msgstr "Offset de vídeo"
+msgstr "Desplazar imagen"
 
 msgid "Video scale"
 msgstr "Escala de vídeo"
@@ -2402,13 +2402,13 @@ msgid "Video Width"
 msgstr "Ancho de vídeo"
 
 msgid "Virtual Pointer Speed"
-msgstr "Vel. Puntero Virtual"
+msgstr "Vel. puntero virtual"
 
 msgid "WDM Files Path"
-msgstr "Ruta Archivos WDM"
+msgstr "Ruta archivos WDM"
 
 msgid "WIP Patches Path"
-msgstr "Ruta Parches WIP"
+msgstr "Ruta parches WIP"
 
 msgid "Waiting..."
 msgstr "Esperando..."
@@ -2447,10 +2447,10 @@ msgid "WiFi Features"
 msgstr "Características WiFi"
 
 msgid "Widescreen Factor"
-msgstr "Factor Panorámico"
+msgstr "Factor panorámico"
 
 msgid "Widescreen Fix"
-msgstr "Corrección panorámica"
+msgstr "Corregir para 16:9"
 
 msgid "Wii Games"
 msgstr "Juegos de Wii"
