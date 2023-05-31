@@ -33,11 +33,11 @@ msgstr "%i fehlende Dateien"
 
 #, c-format
 msgid "%i WAD file(s) not processed!"
-msgstr ""
+msgstr "%i WAD-Datei(en) nicht bearbeitet!"
 
 #, c-format
 msgid "%i WAD found."
-msgstr ""
+msgstr "%i WAD-Dateien gefunden."
 
 #, c-format
 msgid "%s only accepts GameCube backups in ISO format."
@@ -144,7 +144,7 @@ msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle Funktionen des USB Loader GX sind jetzt freigeschaltet."
 
 msgid "All WAD files processed successfully."
-msgstr ""
+msgstr "Alle WAD-Dateien wurden erfolgreich verarbeitet."
 
 msgid "Alternate DOL"
 msgstr "Alternative DOL"
@@ -198,7 +198,7 @@ msgid "Attention!"
 msgstr "Achtung!"
 
 msgid "Attention: All savegames will be deleted."
-msgstr ""
+msgstr "Achtung: Alle Spielstände werden gelöscht."
 
 msgid "Aug"
 msgstr "August"
@@ -285,7 +285,7 @@ msgid "Block IOS Reload"
 msgstr "Blocke IOS-Neuladen"
 
 msgid "Block Loader Layout Button"
-msgstr ""
+msgstr "Blocke Loader Layout Button"
 
 msgid "Block Loader Mode Button"
 msgstr "Blocke Loader-Modus Button"
@@ -321,7 +321,7 @@ msgid "Block Updates"
 msgstr "Blocke Updates"
 
 msgid "Boot Content"
-msgstr "Boote Inhalt"
+msgstr "Boot-Inhalt"
 
 msgid "Boot Neek System Menu"
 msgstr ""
@@ -330,7 +330,7 @@ msgid "Boot?"
 msgstr "Kanal starten?"
 
 msgid "Both"
-msgstr "ID und Region"
+msgstr "Beide"
 
 msgid "Both Ports"
 msgstr "Beide Ports"
@@ -339,13 +339,13 @@ msgid "CC Rumble"
 msgstr ""
 
 msgid "Cache BNR Files"
-msgstr "BNR-Cache"
+msgstr "BNR-Dateien cachen"
 
 msgid "Cache BNR Files Path"
 msgstr "Cache BNR Dateien"
 
 msgid "Cache Path"
-msgstr ""
+msgstr "Cache-Pfad"
 
 msgid "Cache Titles"
 msgstr "Titel cachen"
