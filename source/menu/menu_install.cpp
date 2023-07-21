@@ -27,7 +27,7 @@ int MenuGCInstall()
 	GCDumper gcDumper;
 	if(gcDumper.ReadDiscHeader() < 0)
 	{
-		WindowPrompt(tr("Error"), tr("Error reading disc"), tr("OK"));
+		WindowPrompt(tr("Error"), tr("Error reading disc. Check for smudges/scratches."), tr("OK"));
 		return MENU_DISCLIST;
 	}
 
@@ -35,7 +35,7 @@ int MenuGCInstall()
 
 	if(gcDumper.GetDiscHeaders().size() == 0)
 	{
-		WindowPrompt(tr("Error"), tr("No games found on the disc"), tr("OK"));
+		WindowPrompt(tr("Error"), tr("No games were found on this disk. Try cleaning the disk, and make sure to insert it correctly."), tr("OK"));
 		return MENU_DISCLIST;
 	}
 	else if(gcDumper.GetDiscHeaders().size() > 1)
@@ -62,7 +62,7 @@ int MenuGCInstall()
 	}
 	else
 	{
-		if(!WindowPrompt(tr( "Continue to install game?" ), gcDumper.GetDiscHeaders().at(0).title, tr("Yes"), tr( "Cancel" )))
+		if(!WindowPrompt(tr( "Would you like to install this game?" ), gcDumper.GetDiscHeaders().at(0).title, tr("Yes"), tr( "Cancel" )))
 			return MENU_DISCLIST;
 
 		installGames.push_back(0);
@@ -82,7 +82,7 @@ int MenuGCInstall()
 	//! Alert the user if he is dumping on SD with DIOS MIOS (USB) installed
 	if(destination == 2 && IosLoader::GetMIOSInfo() == DIOS_MIOS)
 	{
-		if(!WindowPrompt(tr("Are you sure you want to install on SD?"), ("You have DIOS-MIOS installed so the game need to be on a FAT32 USB. You will need to install DIOS-MIOS Lite to run this game from SD."), tr("Yes"), tr( "Cancel" )))
+		if(!WindowPrompt(tr("Are you sure you want to install on the SD card?"), ("You have DIOS-MIOS installed so the game need to be on a FAT32 USB. You will need to install DIOS-MIOS Lite to run this game from an SD card."), tr("Yes"), tr( "Cancel" )))
 			return MENU_DISCLIST;
 	}
 
@@ -104,7 +104,7 @@ int MenuGCInstall()
 		//! check if the game is already installed on SD/USB
 		if(GCGames::Instance()->IsInstalled((char *)gcDumper.GetDiscHeaders().at(installGames[i]).id, gcDumper.GetDiscHeaders().at(installGames[i]).disc_no))
 		{
-			WindowPrompt(tr("Game is already installed:"), gcDumper.GetDiscHeaders().at(installGames[i]).title, tr("OK"));
+			WindowPrompt(tr("Oops! This game is already installed:"), gcDumper.GetDiscHeaders().at(installGames[i]).title, tr("OK"));
 			if(i+1 < installGames.size()) {
 				continue;
 			}
@@ -118,7 +118,7 @@ int MenuGCInstall()
 		// Check Disc2 installation format (DML 2.6+ auto-swap feature doesn't work with extracted game format)
 		if(Settings.GCInstallCompressed && gcDumper.GetDiscHeaders().at(installGames[i]).disc_no == 1)
 		{
-			int choice = WindowPrompt(tr(gcDumper.GetDiscHeaders().at(installGames[i]).title), tr("Disc2 needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"), tr("Yes"), tr("Cancel"));
+			int choice = WindowPrompt(tr(gcDumper.GetDiscHeaders().at(installGames[i]).title), tr("This disc needs to be installed in uncompressed format to work with DM(L) v2.6+, are you sure you want to install in compressed format?"), tr("Yes"), tr("Cancel"));
 			if(choice == 0)
 			{
 				if(i+1 < installGames.size()) {
@@ -160,7 +160,7 @@ int MenuGCInstall()
 			//! Error occured, ask the user what to do if there are more games to install
 			if(i+1 < installGames.size())
 			{
-				if(!WindowPrompt(tr( "Install Error!" ), tr("Do you want to continue with next game?"), tr("Yes"), tr( "Cancel" )))
+				if(!WindowPrompt(tr( "There was an error during the installation! This can occur when there is corrupt data on the disk or if it is scratched/smudged." ), tr("Do you want to continue with the next game?"), tr("Yes"), tr( "Cancel" )))
 				{
 					result = MENU_DISCLIST;
 					break;
@@ -168,7 +168,7 @@ int MenuGCInstall()
 			}
 			else
 			{
-				WindowPrompt(tr( "Install Error!" ), 0, tr( "Back" ));
+				WindowPrompt(tr( "There was an error with the installation!" ), 0, tr( "Back" ));
 				result = MENU_DISCLIST;
 				break;
 			}
@@ -212,16 +212,16 @@ int MenuInstall()
 
 	int ret, choice = 0;
 
-	ret = DiscWait(tr( "Insert Disk" ), tr( "Waiting..." ), tr( "Cancel" ), 0, 0);
+	ret = DiscWait(tr( "Please insert your game disk." ), tr( "Waiting..." ), tr( "Cancel" ), 0, 0);
 	if (ret < 0)
 	{
-		WindowPrompt(tr( "Error reading Disc" ), 0, tr( "Back" ));
+		WindowPrompt(tr( "There was an error reading the disc." ), 0, tr( "Back" ));
 		return MENU_DISCLIST;
 	}
 	ret = Disc_Open();
 	if (ret < 0)
 	{
-		WindowPrompt(tr( "Could not open Disc" ), 0, tr( "Back" ));
+		WindowPrompt(tr( "Could not open disk." ), 0, tr( "Back" ));
 		return MENU_DISCLIST;
 	}
 
@@ -231,7 +231,7 @@ int MenuInstall()
 
 	if ((headerdisc.magic != WII_MAGIC) && (headerdisc.gc_magic != GCGames::MAGIC))
 	{
-		choice = WindowPrompt(tr( "Not a Wii or a GameCube Disc" ), tr( "Insert a Wii or a GameCube Disc!" ), tr( "OK" ), tr( "Back" ));
+		choice = WindowPrompt(tr( "This is not a Wii or a Gamecube Disc." ), tr( "Please Insert a Wii or a GameCube Disc!" ), tr( "OK" ), tr( "Back" ));
 		if (choice == 1)
 			return MenuInstall();
 		else
@@ -246,7 +246,7 @@ int MenuInstall()
 	ret = WBFS_CheckGame(headerdisc.id);
 	if (ret)
 	{
-		WindowPrompt(tr( "Game is already installed:" ), headerdisc.title, tr( "Back" ));
+		WindowPrompt(tr( "Oops! This game is already installed:" ), headerdisc.title, tr( "Back" ));
 		return MENU_DISCLIST;
 	}
 
@@ -259,17 +259,17 @@ int MenuInstall()
 	snprintf(gametxt, sizeof(gametxt), "%s : %.2fGB", headerdisc.title, gamesize/GB_SIZE);
 
 	wiilight(1);
-	choice = WindowPrompt(tr( "Continue to install game?" ), gametxt, tr( "OK" ), tr( "Cancel" ));
+	choice = WindowPrompt(tr( "Continue to the installation?" ), gametxt, tr( "OK" ), tr( "Cancel" ));
 
 	if (choice == 1)
 	{
-		sprintf(gametxt, "%s", tr( "Installing game:" ));
+		sprintf(gametxt, "%s", tr( "Currently installing your game:" ));
 
 		if (gamesize/GB_SIZE > freespace)
 		{
 			char errortxt[50];
 			sprintf(errortxt, "%s: %.2fGB, %s: %.2fGB", tr( "Game Size" ), gamesize/GB_SIZE, tr( "Free Space" ), freespace);
-			WindowPrompt(tr( "Not enough free space!" ), errortxt, tr( "OK" ));
+			WindowPrompt(tr( "Not enough free space! Either connect a larger USB device or make space!" ), errortxt, tr( "OK" ));
 		}
 		else
 		{
@@ -281,15 +281,15 @@ int MenuInstall()
 			wiilight(0);
 			if (install_abort_signal)
 			{
-				WindowPrompt(tr( "Install Canceled" ), 0, tr( "OK" ));
+				WindowPrompt(tr( "Installation was cancelled." ), 0, tr( "OK" ));
 			}
 			else if (ret != 0)
 			{
-				WindowPrompt(tr( "Install Error!" ), 0, tr( "Back" ));
+				WindowPrompt(tr( "There was an error installing!!" ), 0, tr( "Back" ));
 			}
 			else
 			{
-				ShowProgress(tr("Install finished"), headerdisc.title, tr("Reloading game list now, please wait..."), gamesize, gamesize, true, true);
+				ShowProgress(tr("Installation complete!"), headerdisc.title, tr("Reloading game list, please wait..."), gamesize, gamesize, true, true);
 				gameList.ReadGameList(); //get the entries again
 				gameList.FilterList();
 				isCacheCurrent();
