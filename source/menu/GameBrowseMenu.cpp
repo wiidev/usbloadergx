@@ -915,9 +915,9 @@ int GameBrowseMenu::MainLoop()
 		gprintf("\tpoweroffBtn clicked\n");
 		int choice = 0;
 		if(isWiiU())
-			choice = WindowPrompt(tr( "How to Shutdown?" ), 0, tr( "Full shutdown" ), tr("Cancel"));
+			choice = WindowPrompt(tr( "Shutdown?" ), 0, tr( "Full shutdown" ), tr("Cancel"));
 		else
-			choice = WindowPrompt(tr( "How to Shutdown?" ), 0, tr( "Full shutdown" ), tr( "Standby" ), tr( "Cancel" ));
+			choice = WindowPrompt(tr( "Shutdown?" ), 0, tr( "Full shutdown" ), tr( "Standby" ), tr( "Cancel" ));
 		
 		if (choice == 2)
 			Sys_ShutdownToIdle();
@@ -931,13 +931,13 @@ int GameBrowseMenu::MainLoop()
 		gprintf("\tgameCntBtn clicked\n");
 		gamecntBtn->ResetState();
 
-		int choice = WindowPrompt(0, fmt("%s %sGameList ?", tr( "Save Game List to" ), Settings.ConfigPath), "TXT", "CSV", tr( "Back" ));
+		int choice = WindowPrompt(0, fmt("%s %sGameList ?", tr( "How would you like to save your gamelist?" ), Settings.ConfigPath), "TXT", "CSV", tr( "Back" ));
 		if (choice)
 		{
 			if (save_gamelist(choice == 2))
-				WindowPrompt(0, tr( "Saved" ), tr( "OK" ));
+				WindowPrompt(0, tr( "Saved!" ), tr( "OK" ));
 			else
-				WindowPrompt(tr( "Error" ), tr( "Could not save." ), tr( "OK" ));
+				WindowPrompt(tr( "Error!" ), tr( "Could not save." ), tr( "OK" ));
 		}
 	}
 	else if (homeBtn->GetState() == STATE_CLICKED)
@@ -951,19 +951,19 @@ int GameBrowseMenu::MainLoop()
 	{
 		if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_GAME_INSTALL))
 		{
-			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			WindowPrompt(tr( "Permission denied." ), tr( "Your console must be unlocked for this option." ), tr( "OK" ));
 			installBtn->ResetState();
 			return MENU_NONE;
 		}
 
-		int choice = WindowPrompt(tr( "Install a game" ), 0, tr( "Yes" ), tr( "No" ));
+		int choice = WindowPrompt(tr( "Would you like to install the game currently in your drive?" ), 0, tr( "Yes" ), tr( "No" ));
 		if (choice == 1)
 		{
 			this->SetState(STATE_DISABLED);
 			if (!(Settings.LoaderMode & MODE_WIIGAMES) && (gameList.GameCount() == 0))
 			{
 				if (WBFS_ReInit(Settings.SDMode ? WBFS_DEVICE_SDHC : WBFS_DEVICE_USB) < 0)
-					ShowError(tr("Failed to initialize the USB storage device."));
+					ShowError(tr("Uh oh! We couldn't initialize your USB drive. Make sure it is formatted correctly under the FAT32 Files system."));
 				else
 				{
 					gameList.ReadGameList();
@@ -992,7 +992,7 @@ int GameBrowseMenu::MainLoop()
 	else if (sdcardBtn->GetState() == STATE_CLICKED)
 	{
 		gprintf("\tsdCardBtn Clicked\n");
-		if(WindowPrompt(tr("Are you sure you want to remount SD?"), tr("The application might crash if there is currently a read/write access to the SD card!"), tr("Yes"), tr("Cancel")))
+		if(WindowPrompt(tr("Are you sure you want to remount the SD card?"), tr("USBLoaderGX might crash if it is running from the SD card!"), tr("Yes"), tr("Cancel")))
 		{
 			HaltGui();
 			BannerAsync::HaltThread();
@@ -1055,7 +1055,7 @@ int GameBrowseMenu::MainLoop()
 	{
 		if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_GLOBAL_SETTINGS))
 		{
-			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			WindowPrompt(tr( "Permission denied." ), tr( "Your console must be unlocked for this option." ), tr( "OK" ));
 			settingsBtn->ResetState();
 			return MENU_NONE;
 		}
@@ -1079,7 +1079,7 @@ int GameBrowseMenu::MainLoop()
 		{
 			Settings.GameSort &= ~SORT_FAVORITE;
 			gameList.FilterList();
-			ShowError(tr("No favorites selected."));
+			ShowError(tr("You don't have any favorites selected!."));
 		}
 		else
 			ReloadBrowser();
@@ -1170,7 +1170,7 @@ int GameBrowseMenu::MainLoop()
 	{
 		if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_LOADER_LAYOUT_BUTTON))
 		{
-			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			WindowPrompt(tr( "Permission denied." ), tr( "Your console must be unlocked for this option." ), tr( "OK" ));
 			listBtn->ResetState();
 			return returnMenu;
 		}
@@ -1187,7 +1187,7 @@ int GameBrowseMenu::MainLoop()
 	{
 		if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_LOADER_LAYOUT_BUTTON))
 		{
-			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			WindowPrompt(tr( "Permission denied." ), tr( "Your console must be unlocked for this option." ), tr( "OK" ));
 			gridBtn->ResetState();
 			return returnMenu;
 		}
@@ -1204,7 +1204,7 @@ int GameBrowseMenu::MainLoop()
 	{
 		if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_LOADER_LAYOUT_BUTTON))
 		{
-			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			WindowPrompt(tr( "Permission denied." ), tr( "Your console must be unlocked for this option." ), tr( "OK" ));
 			carouselBtn->ResetState();
 			return returnMenu;
 		}
@@ -1221,13 +1221,13 @@ int GameBrowseMenu::MainLoop()
 	{
 		if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_LOADER_LAYOUT_BUTTON))
 		{
-			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			WindowPrompt(tr( "Permission denied." ), tr( "Your console must be unlocked for this option." ), tr( "OK" ));
 			bannerGridBtn->ResetState();
 			return returnMenu;
 		}
 		gprintf("\tbannerGridBtn Clicked\n");
 		if(!SystemMenuResources::Instance()->IsLoaded()) {
-			WindowPrompt(tr( "Error:" ), tr( "Banner grid layout is only available with AHBPROT! Please consider installing new HBC version." ), tr( "OK" ));
+			WindowPrompt(tr( "Error:" ), tr( "The banner grid layout is only available with AHBPROT! Consider updating to the latest version of the Homebrew Channel!" ), tr( "OK" ));
 			bannerGridBtn->ResetState();
 			return MENU_NONE;
 		}
@@ -1267,7 +1267,7 @@ int GameBrowseMenu::MainLoop()
 		lockBtn->ResetState();
 		if (Settings.godmode)
 		{
-			if(WindowPrompt(tr( "Parental Control" ), tr( "Are you sure you want to lock USB Loader GX?" ), tr( "Yes" ), tr( "No" )) == 1)
+			if(WindowPrompt(tr( "Parental Control" ), tr( "Are you sure you want to lock USBLoaderGX?" ), tr( "Yes" ), tr( "No" )) == 1)
 			{
 				Settings.godmode = 0;
 				gameList.FilterList();
@@ -1283,13 +1283,13 @@ int GameBrowseMenu::MainLoop()
 			if (result > 0)
 			{
 				if(result == 1)
-					WindowPrompt( tr( "Correct Password" ), tr( "All the features of USB Loader GX are unlocked." ), tr( "OK" ));
+					WindowPrompt( tr( "Parental controls have been disabled." ), tr( "Every feature of USBLoaderGX is unlocked." ), tr( "OK" ));
 				Settings.godmode = 1;
 				gameList.FilterList();
 				ReloadBrowser();
 			}
 			else if(result < 0)
-				WindowPrompt(tr( "Wrong Password" ), tr( "USB Loader GX is protected" ), tr( "OK" ));
+				WindowPrompt(tr( "Incorrect Password!" ), tr( "USBLoaderGX is still locked." ), tr( "OK" ));
 		}
 	}
 
@@ -1297,7 +1297,7 @@ int GameBrowseMenu::MainLoop()
 	{
 		if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_CATEGORIES_MENU))
 		{
-			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			WindowPrompt(tr( "Permission denied." ), tr( "Your console must be unlocked for this option." ), tr( "OK" ));
 			categBtn->ResetState();
 			return returnMenu;
 		}
@@ -1327,12 +1327,12 @@ int GameBrowseMenu::MainLoop()
 	{
 		if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_LOADER_MODE_BUTTON))
 		{
-			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			WindowPrompt(tr( "Permission denied." ), tr( "Your console must be unlocked for this option." ), tr( "OK" ));
 			loaderModeBtn->ResetState();
 			return returnMenu;
 		}
 
-		int choice = CheckboxWindow(tr( "Select titles sources." ), 0, tr( "Wii Games" ), tr( "NAND Channels" ), tr("EmuNAND Channels"), tr("GC Games"), 0, 0, Settings.LoaderMode);
+		int choice = CheckboxWindow(tr( "Which criteria do you want displayed in USBLoaderGX?." ), 0, tr( "Wii Games" ), tr( "NAND Channels" ), tr("EmuNAND Channels"), tr("GC Games"), 0, 0, Settings.LoaderMode);
 		if(choice != CheckedNone && choice != Settings.LoaderMode)
 		{
 			Settings.LoaderMode = choice;
@@ -1343,7 +1343,7 @@ int GameBrowseMenu::MainLoop()
 				if (wbfsinit < 0)
 				{
 					// This shouldn't ever fail in SD card mode
-					ShowError("%s %s", tr( "USB Device not initialized." ), tr("Switching to channel list mode."));
+					ShowError("%s %s", tr( "Your USB Device is not initialized." ), tr("Switching to channel list mode."));
 					Settings.LoaderMode &= ~MODE_WIIGAMES;
 					Settings.LoaderMode |= MODE_NANDCHANNELS;
 				}
@@ -1407,7 +1407,7 @@ void GameBrowseMenu::CheckDiscSlotUpdate()
 
 	if ((DiscDriveCover & 0x02) && (DiscDriveCover != DiscDriveCoverOld))
 	{
-		int choice = WindowPrompt(tr( "Disc Insert Detected" ), 0, tr( "Install" ), tr( "Mount DVD drive" ), tr( "Cancel" ));
+		int choice = WindowPrompt(tr( "A disk has been inserted! What would you like to do?" ), 0, tr( "Install Game" ), tr( "Mount Disk" ), tr( "Cancel" ));
 		if (choice == 1)
 			installBtn->SetState(STATE_CLICKED);
 		else if (choice == 2)
@@ -1425,13 +1425,13 @@ void GameBrowseMenu::CheckDiscSlotUpdate()
 			{
 				delete dvdheader;
 				dvdheader = NULL;
-				ShowError(tr("Can't mount or unknown disc format."));
+				ShowError(tr("Can't mount disk or it is using an unknown format."));
 			}
 			else
 				OpenClickedGame(dvdheader);
 		}
 		else
-			WindowPrompt(tr( "No disc inserted." ), 0, tr( "OK" ));
+			WindowPrompt(tr( "No disk has been inserted." ), 0, tr( "OK" ));
 
 		dvdBtn->ResetState();
 	}

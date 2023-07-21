@@ -183,21 +183,21 @@ void WDMMenu::CheckGameFiles(const struct discHdr * header)
 	wbfs_disc_t *disc = WBFS_OpenDisc((u8 *) header->id);
 	if (!disc)
 	{
-		WindowPrompt(tr( "ERROR:" ), tr( "Could not open Disc" ), tr( "OK" ));
+		WindowPrompt(tr( "ERROR:" ), tr( "Uh oh! We could'nt read the disk. Please try cleaning and reinserting it." ), tr( "OK" ));
 		return;
 	}
 
 	wiidisc_t *wdisc = wd_open_disc((s32(*)(void *, u32, u32, void *)) wbfs_disc_read, disc);
 	if (!wdisc)
 	{
-		WindowPrompt(tr( "ERROR:" ), tr( "Could not open Disc" ), tr( "OK" ));
+		WindowPrompt(tr( "ERROR:" ), tr( "Uh oh! We could'nt read the disk. Please try cleaning and reinserting it." ), tr( "OK" ));
 		return;
 	}
 
 	FST_ENTRY * fstbuffer = (FST_ENTRY *) wd_extract_file(wdisc, ONLY_GAME_PARTITION, (char*) "FST");
 	if (!fstbuffer)
 	{
-		WindowPrompt(tr( "ERROR:" ), tr( "Not enough free memory." ), tr( "OK" ));
+		WindowPrompt(tr( "ERROR:" ), tr( "Oops! Not enough free storage available. Please make room on your drive or insert a larger one to continue." ), tr( "OK" ));
 		return;
 	}
 

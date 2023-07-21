@@ -63,7 +63,7 @@ StartUpProcess::StartUpProcess()
 #endif
 
 	if (strncmp(Settings.ConfigPath, "sd", 2) == 0)
-		cancelTxt = new GuiText("Press B to cancel or A to enable SD card mode", 22, (GXColor){255, 255, 255, 255});
+		cancelTxt = new GuiText("Press B to cancel or A to enter SD Card mode.", 22, (GXColor){255, 255, 255, 255});
 	else
 		cancelTxt = new GuiText("Press B to cancel", 22, (GXColor){255, 255, 255, 255});
 	cancelTxt->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
@@ -245,7 +245,7 @@ bool StartUpProcess::USBSpinUp()
 			break;
 		}
 
-		messageTxt->SetTextf("Waiting for HDD: %i sec left\n", 20 - (int)countDown.elapsed());
+		messageTxt->SetTextf("Waiting for USB drive: %i sec left\n", 20 - (int)countDown.elapsed());
 		Draw();
 		usleep(50000);
 	} while (countDown.elapsed() < 20.f);
@@ -289,11 +289,11 @@ void StartUpProcess::LoadIOS(u8 ios, bool boot)
 	SetTextf("Reloading to IOS%d%s\n", ios, boot ? " requested in meta.xml" : "");
 	if (IosLoader::LoadAppCios(ios) < 0)
 	{
-		SetTextf("Failed to load an IOS. USB Loader GX requires a cIOS or IOS58 with AHB access. Exiting...\n");
+		SetTextf("Failed to load an IOS. Wii USB Tool requires a cIOS or IOS58 with AHB access. Exiting...\n");
 		sleep(5);
 		Sys_BackToLoader();
 	}
-	SetTextf("Reloaded to IOS%d r%d\n", Settings.LoaderIOS, IOS_GetRevision());
+	SetTextf("Reloaded to IOS%d r%d\n.", Settings.LoaderIOS, IOS_GetRevision());
 }
 
 int StartUpProcess::Execute(bool quickGameBoot)
@@ -305,7 +305,7 @@ int StartUpProcess::Execute(bool quickGameBoot)
 	// Store dx2 cIOS info
 	IosLoader::GetD2XInfo();
 
-	gprintf("Current IOS: %d - have AHB access: %s\n", Settings.EntryIOS, AHBPROT_DISABLED ? "yes" : "no");
+	gprintf("Current IOS: %d - have AHB access: %s\n.", Settings.EntryIOS, AHBPROT_DISABLED ? "yes" : "no");
 	// Reload to a cIOS if we're using both USB ports
 	if (Settings.USBPort == 2 && !Settings.SDMode)
 		LoadIOS(Settings.LoaderIOS, false);
@@ -325,12 +325,12 @@ int StartUpProcess::Execute(bool quickGameBoot)
 	bool USBSuccess = false;
 	if (Settings.USBAutoMount == ON && !isWiiVC && !Settings.SDMode)
 	{
-		SetTextf("Initializing USB devices\n");
+		SetTextf("Initializing USB drives\n.");
 		if (USBSpinUp())
 		{
 			DeviceHandler::Instance()->MountAllUSB(false);
 			USBSuccess = true;
-			gprintf("Completed initialization of USB devices\n");
+			gprintf("Completed initialization of USB devices\n!");
 		}
 	}
 
@@ -366,11 +366,11 @@ int StartUpProcess::Execute(bool quickGameBoot)
 		// Now load the cIOS that was set in the settings menu
 		if (IosLoader::LoadAppCios(Settings.LoaderIOS) > -1)
 		{
-			SetTextf("Reloaded to IOS%d r%d\n", Settings.LoaderIOS, IOS_GetRevision());
+			SetTextf("Reloaded to IOS%d r%d\n.", Settings.LoaderIOS, IOS_GetRevision());
 			// Re-Mount devices
-			SetTextf("Reinitializing devices\n");
+			SetTextf("Reinitializing devices\n!");
 		}
-		gprintf("Current IOS: %d - have AHB access: %s\n", IOS_GetVersion(), AHBPROT_DISABLED ? "yes" : "no");
+		gprintf("Current IOS: %d - have AHB access: %s\n.", IOS_GetVersion(), AHBPROT_DISABLED ? "yes" : "no");
 
 		// Start pads again
 		SetupPads();
@@ -424,7 +424,7 @@ int StartUpProcess::Execute(bool quickGameBoot)
 	ISFS_Initialize();
 
 	// Check MIOS version
-	SetTextf("Checking installed MIOS\n");
+	SetTextf("Checking installed MIOS\n.");
 	IosLoader::GetMIOSInfo();
 
 	SetTextf("Loading resources\n");

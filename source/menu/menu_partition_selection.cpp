@@ -36,7 +36,7 @@ int SelectPartitionMenu()
 		else
 		{
 			options.SetName(counter, "%s %d:", tr( "Partition" ), cnt + 1);
-			options.SetValue(counter, tr( "Can't be formatted" ));
+			options.SetValue(counter, tr( "This drive could not be formatted." ));
 		}
 		counter++;
 	}
@@ -98,7 +98,7 @@ int SelectPartitionMenu()
 
 		if (ret >= 0)
 		{
-			if (strcmp(options.GetValue(ret), tr( "Can't be formatted" )) != 0)
+			if (strcmp(options.GetValue(ret), tr( "We couldn't successfully format the drive." )) != 0)
 			{
 				choice = ret;
 				ExitSelect = true;

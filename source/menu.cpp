@@ -1,5 +1,6 @@
 /****************************************************************************
  * USB Loader GX Team
+ * Edited as Wii USB Tool by EDK
  *
  * libwiigui Template
  * by Tantric 2009
