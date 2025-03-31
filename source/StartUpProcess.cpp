@@ -44,7 +44,7 @@ StartUpProcess::StartUpProcess()
 	GXImage->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	GXImage->SetPosition(screenwidth / 2, screenheight / 2 - 50);
 
-	titleTxt = new GuiText("Loading...", 24, (GXColor){255, 255, 255, 255});
+	titleTxt = new GuiText(" ", 24, (GXColor){255, 255, 255, 255});
 	titleTxt->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	titleTxt->SetPosition(screenwidth / 2, screenheight / 2 + 30);
 
@@ -57,15 +57,15 @@ StartUpProcess::StartUpProcess()
 	versionTxt->SetPosition(23, screenheight - 20);
 
 #ifdef FULLCHANNEL
-	versionTxt->SetTextf("v3.0c Rev. %s (%s)", GetRev(), commitID());
+	versionTxt->SetTextf("EPRAMI Mod by DaniNocchi. v1.0.");
 #else
-	versionTxt->SetTextf("v3.0 Rev. %s (%s)", GetRev(), commitID());
+	versionTxt->SetTextf("EPRAMI Mod by DaniNocchi. v1.0.");
 #endif
 
 	if (strncmp(Settings.ConfigPath, "sd", 2) == 0)
-		cancelTxt = new GuiText("Press B to cancel or A to enable SD card mode", 22, (GXColor){255, 255, 255, 255});
+		cancelTxt = new GuiText("HD não detectado. Informe a Daniel ou Fabio sobre tal problema. Pressione B para voltar", 22, (GXColor){255, 255, 255, 255});
 	else
-		cancelTxt = new GuiText("Press B to cancel", 22, (GXColor){255, 255, 255, 255});
+		cancelTxt = new GuiText("Pressione B para voltar", 22, (GXColor){255, 255, 255, 255});
 	cancelTxt->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	cancelTxt->SetPosition(screenwidth / 2, screenheight / 2 + 90);
 
@@ -158,31 +158,7 @@ int StartUpProcess::ParseArguments(int argc, char *argv[])
 	}
 
 	return quickBoot;
-}
-
-void StartUpProcess::TextFade(int direction)
-{
-	if (direction > 0)
-	{
-		for (int i = 0; i < 255; i += direction)
-		{
-			messageTxt->SetAlpha(i);
-			Draw();
-		}
-		messageTxt->SetAlpha(255);
-		Draw();
-	}
-	else if (direction < 0)
-	{
-		for (int i = 255; i > 0; i += direction)
-		{
-			messageTxt->SetAlpha(i);
-			Draw();
-		}
-		messageTxt->SetAlpha(0);
-		Draw();
-	}
-}
+} 
 
 void StartUpProcess::SetTextf(const char *format, ...)
 {
@@ -191,10 +167,8 @@ void StartUpProcess::SetTextf(const char *format, ...)
 	va_start(va, format);
 	if ((vasprintf(&tmp, format, va) >= 0) && tmp)
 	{
-		TextFade(-40);
 		gprintf(tmp);
 		messageTxt->SetText(tmp);
-		TextFade(40);
 	}
 	va_end(va);
 
@@ -296,6 +270,25 @@ void StartUpProcess::LoadIOS(u8 ios, bool boot)
 	SetTextf("Reloaded to IOS%d r%d\n", Settings.LoaderIOS, IOS_GetRevision());
 }
 
+void StartUpProcess::ShowLoadingAnimation()
+{
+    const char* baseText = "Carregando";
+    int dotCount = 0;
+
+    for (int i = 0; i < 12; ++i) // Repete a animação algumas vezes
+    {
+        std::string loadingText = baseText;
+        for (int j = 0; j < dotCount; j++)
+            loadingText += ".";
+
+        titleTxt->SetText(loadingText.c_str()); // Atualiza o texto
+        Draw(); // Redesenha a tela para refletir a mudança
+        usleep(500000); // Espera 0.5 segundos
+
+        dotCount = (dotCount + 1) % 4; // Alterna entre 0, 1, 2 e 3 pontos
+    }
+}
+
 int StartUpProcess::Execute(bool quickGameBoot)
 {
 	Settings.EntryIOS = IOS_GetVersion();
@@ -333,7 +326,7 @@ int StartUpProcess::Execute(bool quickGameBoot)
 			gprintf("Completed initialization of USB devices\n");
 		}
 	}
-
+	ShowLoadingAnimation();
 	SetTextf("Loading config files\n");
 	gprintf("\tLoading config...%s\n", Settings.Load() ? "done" : "failed");
 	gprintf("\tLoading language...%s\n", Settings.LoadLanguage(Settings.language_path, CONSOLE_DEFAULT) ? "done" : "failed");
@@ -454,8 +447,6 @@ void StartUpProcess::Draw()
 {
 	background->Draw();
 	GXImage->Draw();
-	titleTxt->Draw();
-	messageTxt->Draw();
 	versionTxt->Draw();
 	if (drawCancel)
 		cancelTxt->Draw();
@@ -481,3 +472,4 @@ int StartUpProcess::QuickGameBoot(const char *gameID)
 
 	return GameBooter::BootGame(header);
 }
+

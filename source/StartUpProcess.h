@@ -12,9 +12,9 @@ private:
 	StartUpProcess();
 	~StartUpProcess();
 	void LoadIOS(u8 ios, bool boot);
+	void ShowLoadingAnimation();
 	int Execute(bool quickGameBoot);
 	bool USBSpinUp();
-	void TextFade(int direction);
 	void SetTextf(const char *format, ...);
 	void Draw();
 	static int ParseArguments(int argc, char *argv[]);
