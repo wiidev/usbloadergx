@@ -64,6 +64,7 @@
 #include "wad/nandtitle.h"
 #include "settings/GameTitles.h"
 #include "SystemMenu/SystemMenuResources.h"
+#include "GameCube/MemCardPro.h"
 
 /* GCC 11 false positives */
 #if __GNUC__ > 10
@@ -100,6 +101,9 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 	// check the settings
 	GameCFG *game_cfg = GameSettings.GetGameCFG(gameHdr->id);
 	u8 GCMode = game_cfg->GameCubeMode == INHERIT ? Settings.GameCubeMode : game_cfg->GameCubeMode;
+
+    // Send GameID
+    gameID_early_set(gameHdr);
 
 	// Devolution
 	if (GCMode == GC_MODE_DEVOLUTION)
