@@ -45,7 +45,7 @@ s32 MCP_GetDeviceID(s32 chan, u32 *id)
 		return MCP_RESULT_READY;
 }
 
-s32 MCP_SetDiskID(s32 chan, const dvddiskid *diskID)
+s32 MCP_SetDiskID(s32 chan, const dvddiskid *diskID, bool shortID)
 {
 	bool err = false;
 	u8 cmd[12];
@@ -62,11 +62,14 @@ s32 MCP_SetDiskID(s32 chan, const dvddiskid *diskID)
 
 	if (diskID) {
 		memcpy(&cmd[2], diskID->gamename, 4);
-		memcpy(&cmd[6], diskID->company,  2);
-		cmd[8]  = digits[diskID->disknum / 16];
-		cmd[9]  = digits[diskID->disknum % 16];
-		cmd[10] = digits[diskID->gamever / 16];
-		cmd[11] = digits[diskID->gamever % 16];
+        if (!shortID)
+        {
+            memcpy(&cmd[6], diskID->company,  2);
+            cmd[8]  = digits[diskID->disknum / 16];
+            cmd[9]  = digits[diskID->disknum % 16];
+            cmd[10] = digits[diskID->gamever / 16];
+            cmd[11] = digits[diskID->gamever % 16];
+        };
 	}
 
 	err |= !EXI_ImmEx(chan, cmd, sizeof(cmd), EXI_WRITE);
@@ -103,7 +106,7 @@ s32 MCP_SetDiskInfo(s32 chan, const char diskInfo[64])
 From Swiss, gameid.c
 */
 
-void gameID_early_set(const discHdr *header)
+void gameID_early_set(const discHdr *header, bool shortID)
 {
 	for (s32 chan = 0; chan < 2; chan++) {
 		u32 id;
@@ -113,7 +116,7 @@ void gameID_early_set(const discHdr *header)
 		if (ret < 0) continue;
 		while ((ret = MCP_GetDeviceID(chan, &id)) == MCP_RESULT_BUSY);
 		if (ret < 0) continue;
-		while ((ret = MCP_SetDiskID(chan, (dvddiskid *)header)) == MCP_RESULT_BUSY);
+		while ((ret = MCP_SetDiskID(chan, (dvddiskid *)header, shortID)) == MCP_RESULT_BUSY);
 		if (ret < 0) continue;
 		while ((ret = MCP_SetDiskInfo(chan, header->title)) == MCP_RESULT_BUSY);
 		if (ret < 0) continue;

@@ -211,6 +211,7 @@ bool CGameSettings::Save()
 		fprintf(f, "wpadMotor:%d; ", GameList[i].wpadMotor);
 		fprintf(f, "wpadSpeaker:%d; ", GameList[i].wpadSpeaker);
 		fprintf(f, "GameCubeMode:%d; ", GameList[i].GameCubeMode);
+        fprintf(f, "MemCardProGameID:%d; ", GameList[i].MemCardProGameID);
 		fprintf(f, "DMLVideo:%d; ", GameList[i].DMLVideo);
 		fprintf(f, "DMLProgPatch:%d; ", GameList[i].DMLProgPatch);
 		fprintf(f, "DMLNMM:%d; ", GameList[i].DMLNMM);
@@ -402,6 +403,11 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		game.GameCubeMode = atoi(value);
 		return true;
 	}
+    else if(strcmp(name, "MemCardProGameID") == 0)
+    {
+        game.MemCardProGameID = atoi(value);
+        return true;
+    }
 	else if(strcmp(name, "DMLVideo") == 0)
 	{
 		game.DMLVideo = atoi(value);
@@ -736,6 +742,7 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.wpadMotor = INHERIT;
 	game.wpadSpeaker = INHERIT;
 	game.GameCubeMode = INHERIT;
+    game.MemCardProGameID = INHERIT;
 	game.DMLVideo = INHERIT;
 	game.DMLProgPatch = INHERIT;
 	game.DMLNMM = INHERIT;

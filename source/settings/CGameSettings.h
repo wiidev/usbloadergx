@@ -37,6 +37,7 @@ typedef struct _GameCFG
 	short wpadMotor;
 	short wpadSpeaker;
 	short GameCubeMode;
+    short MemCardProGameID;
 	short DMLVideo;
 	short DMLProgPatch;
 	short DMLNMM;
@@ -110,6 +111,7 @@ typedef struct _GameCFG
 		this->wpadMotor = game.wpadMotor;
 		this->wpadSpeaker = game.wpadSpeaker;
 		this->GameCubeMode = game.GameCubeMode;
+        this->MemCardProGameID = game.MemCardProGameID;
 		this->DMLVideo = game.DMLVideo;
 		this->DMLProgPatch = game.DMLProgPatch;
 		this->DMLNMM = game.DMLNMM;

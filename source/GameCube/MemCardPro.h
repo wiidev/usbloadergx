@@ -21,9 +21,9 @@ extern "C" {
 
 s32 MCP_ProbeEx(s32 chan);
 s32 MCP_GetDeviceID(s32 chan, u32 *id);
-s32 MCP_SetDiskID(s32 chan, const dvddiskid *diskID);
+s32 MCP_SetDiskID(s32 chan, const dvddiskid *diskID, bool shortID);
 s32 MCP_SetDiskInfo(s32 chan, const char diskInfo[64]);
-void gameID_early_set(const discHdr *header);
+void gameID_early_set(const discHdr *header, bool shortID);
 
 #ifdef __cplusplus
 }

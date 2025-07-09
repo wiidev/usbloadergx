@@ -71,6 +71,13 @@ static const char * GCMode[] =
 	trNOOP( "Nintendont" )
 };
 
+static const char * MCPGameID[] =
+{
+    trNOOP( "Off"),
+    trNOOP( "Full ID" ),
+    trNOOP( "Short ID" )
+};
+
 static const char * DMLVideoText[] =
 {
 	trNOOP( "Auto" ),
@@ -184,6 +191,7 @@ void GCGameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
 	Options->SetName(Idx++, "%s", tr( "Parental Control" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
+    Options->SetName(Idx++, "%s", tr( "MemCardPro GameID" ));
 	if(currentGCmode == GC_MODE_MIOS &&IosLoader::GetMIOSInfo() > DEFAULT_MIOS)
 	{
 		Options->SetName(Idx++, "%s", tr( "--==   DIOS MIOS (Lite)" ));
@@ -274,6 +282,12 @@ void GCGameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(GCMode[GameConfig.GameCubeMode]));
+    
+    //! Settings: MemCardPro GameID
+	if(GameConfig.MemCardProGameID == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(MCPGameID[GameConfig.MemCardProGameID]));
 	
 	if(currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS)
 	{
@@ -663,7 +677,13 @@ int GCGameLoadSM::GetMenuInternal()
 			SetOptionNames();
 			SetOptionValues();
 	}
-
+    
+    //! Settings: MemCardPro GameID
+    else if (ret == ++Idx)
+    {
+        if (++GameConfig.MemCardProGameID >= MEMCARDPRO_GAMEID_MAX_CHOICE) GameConfig.MemCardProGameID = INHERIT;
+    }
+    
 	//! Settings: GameCube TITLE : DIOS MIOS (Lite) + Nintendont
 	else if (currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
 	{

@@ -156,6 +156,13 @@ static const char * GCMode[] =
 	trNOOP( "Nintendont" )
 };
 
+static const char * MCPGameID[] =
+{
+    trNOOP( "Off"),
+    trNOOP( "Full ID" ),
+    trNOOP( "Short ID" )
+};
+
 static const char * GCSourceText[][3] =
 {
 	{ trNOOP( "Main Path" ), "", "" },
@@ -322,6 +329,7 @@ void LoaderSettings::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "=== GameCube Settings" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Source" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
+    Options->SetName(Idx++, "%s", tr( "MemCardPro GameID" ));
 	Options->SetName(Idx++, "%s", tr( "Progressive Patch" ));
 	Options->SetName(Idx++, "%s", tr( "--==  DM(L) + Nintendont" ));
 	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
@@ -499,6 +507,9 @@ void LoaderSettings::SetOptionValues()
 
 	//! Settings: GameCube Mode
 	Options->SetValue(Idx++, "%s", tr(GCMode[Settings.GameCubeMode]));
+    
+    //! Settings: MemCardPro GameID
+    Options->SetValue(Idx++, "%s", tr(MCPGameID[Settings.MemCardProGameID]));
 
 	//! Settings: DML + NIN + Devo Progressive Patch
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLProgPatch]));
@@ -920,6 +931,12 @@ int LoaderSettings::GetMenuInternal()
 	{
 		if (++Settings.GameCubeMode >= CG_MODE_MAX_CHOICE) Settings.GameCubeMode = 0;
 	}
+
+    //! Settings: MemCardPro GameID
+    else if (ret == ++Idx)
+    {
+        if (++Settings.MemCardProGameID >= MEMCARDPRO_GAMEID_MAX_CHOICE) Settings.MemCardProGameID = 0;
+    }
 
 	//! Settings: DML + NIN + Devo Progressive Patch
 	else if (ret == ++Idx)

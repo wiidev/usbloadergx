@@ -203,6 +203,7 @@ void CSettings::SetDefault()
 	GCBannerScale = 1.5f;
 	GameCubeMode = GC_MODE_NINTENDONT;
 	GameCubeSource = AUTO;
+    MemCardProGameID = OFF;
 	MultiDiscPrompt = OFF;
 	DMLVideo = DML_VIDEO_AUTO;
 	DMLProgPatch = OFF;
@@ -486,6 +487,7 @@ bool CSettings::Save()
 	fprintf(file, "GameCubeSDPath = %s\n", GameCubeSDPath);
 	fprintf(file, "GameCubeMode = %d\n", GameCubeMode);
 	fprintf(file, "GameCubeSource = %d\n", GameCubeSource);
+    fprintf(file, "MemCardProGameID = %d\n", MemCardProGameID);
 	fprintf(file, "MultiDiscPrompt = %d\n", MultiDiscPrompt);
 	fprintf(file, "DMLVideo = %d\n", DMLVideo);
 	fprintf(file, "DMLProgPatch = %d\n", DMLProgPatch);
@@ -1051,6 +1053,11 @@ bool CSettings::SetSetting(char *name, char *value)
 		GameCubeSource = atoi(value);
 		return true;
 	}
+    else if (strcmp(name, "MemCardProGameID") == 0)
+    {
+        MemCardProGameID = atoi(value);
+        return true;
+    }
 	else if (strcmp(name, "MultiDiscPrompt") == 0)
 	{
 		MultiDiscPrompt = atoi(value);
