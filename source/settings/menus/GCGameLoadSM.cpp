@@ -73,7 +73,7 @@ static const char * GCMode[] =
 
 static const char * MCPGameID[] =
 {
-	trNOOP( "Off"),
+	trNOOP( "OFF"),
 	trNOOP( "Full ID" ),
 	trNOOP( "Short ID" )
 };
@@ -288,7 +288,7 @@ void GCGameLoadSM::SetOptionValues()
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(GCMode[GameConfig.GameCubeMode]));
-
+	
 	if(currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS)
 	{
 
