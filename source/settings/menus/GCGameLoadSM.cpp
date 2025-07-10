@@ -190,7 +190,7 @@ void GCGameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Favorite Level" ));
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
 	Options->SetName(Idx++, "%s", tr( "Parental Control" ));
-	Options->SetName(Idx++, "%s", tr( "MemCardPro GameID" ));
+	Options->SetName(Idx++, "%s", tr( "MemCard PRO Game ID" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
 	if(currentGCmode == GC_MODE_MIOS &&IosLoader::GetMIOSInfo() > DEFAULT_MIOS)
 	{
@@ -277,7 +277,7 @@ void GCGameLoadSM::SetOptionValues()
 	//! Settings: Parental Control
 	Options->SetValue(Idx++, "%s", tr(ParentalText[GameConfig.parentalcontrol]));
 
-	//! Settings: MemCardPro GameID
+	//! Settings: MemCard PRO Game ID
 	if(GameConfig.MemCardProGameID == INHERIT)
 		Options->SetValue(Idx++, tr("Use global"));
 	else
@@ -668,7 +668,7 @@ int GCGameLoadSM::GetMenuInternal()
 		if (++GameConfig.parentalcontrol >= 5) GameConfig.parentalcontrol = 0;
 	}
 
-	//! Settings: MemCardPro GameID
+	//! Settings: MemCard PRO Game ID
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.MemCardProGameID >= MEMCARDPRO_GAMEID_MAX_CHOICE) GameConfig.MemCardProGameID = INHERIT;

@@ -328,7 +328,7 @@ void LoaderSettings::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Autoboot Discs Delay" ));
 	Options->SetName(Idx++, "%s", tr( "=== GameCube Settings" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Source" ));
-	Options->SetName(Idx++, "%s", tr( "MemCardPro GameID" ));
+	Options->SetName(Idx++, "%s", tr( "MemCard PRO Game ID" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
 	Options->SetName(Idx++, "%s", tr( "Progressive Patch" ));
 	Options->SetName(Idx++, "%s", tr( "--==  DM(L) + Nintendont" ));
@@ -505,7 +505,7 @@ void LoaderSettings::SetOptionValues()
 		Options->SetValue(Idx++, "%s%s%s", tr(GCSourceText[Settings.GameCubeSource][0]),
 	                	GCSourceText[Settings.GameCubeSource][1], tr(GCSourceText[Settings.GameCubeSource][2]));
 
-	//! Settings: MemCardPro GameID
+	//! Settings: MemCard PRO Game ID
 	Options->SetValue(Idx++, "%s", tr(MCPGameID[Settings.MemCardProGameID]));
 
 	//! Settings: GameCube Mode
@@ -926,7 +926,7 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.GameCubeSource >= CG_SOURCE_MAX_CHOICE) Settings.GameCubeSource = 0;
 	}
 
-	//! Settings: MemCardPro GameID
+	//! Settings: MemCard PRO Game ID
 	else if (ret == ++Idx)
 	{
 		if (++Settings.MemCardProGameID >= MEMCARDPRO_GAMEID_MAX_CHOICE) Settings.MemCardProGameID = 0;
