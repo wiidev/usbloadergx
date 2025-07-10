@@ -677,7 +677,7 @@ int GCGameLoadSM::GetMenuInternal()
 			SetOptionNames();
 			SetOptionValues();
 	}
-	
+
 	//! Settings: MemCardPro GameID
 	else if (ret == ++Idx)
 	{
