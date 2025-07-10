@@ -1,8 +1,4 @@
 /* 
- * Lightly modified from Swiss, mcp.c
- */
-
-/* 
  * Copyright (c) 2022, Extrems <extrems@extremscorner.org>
  * 
  * This file is part of Swiss.
@@ -19,6 +15,10 @@
  * 
  * You should have received a copy of the GNU General Public License
  * with Swiss.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+/* 
+ * Lightly modified from Swiss, mcp.c
  */
 
 #include <stdbool.h>

@@ -101,7 +101,7 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 	// check the settings
 	GameCFG *game_cfg = GameSettings.GetGameCFG(gameHdr->id);
 	u8 GCMode = game_cfg->GameCubeMode == INHERIT ? Settings.GameCubeMode : game_cfg->GameCubeMode;
-	
+
 	// Devolution
 	if (GCMode == GC_MODE_DEVOLUTION)
 		return BootDevolution(gameHdr);
@@ -118,6 +118,14 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 	// MIOS or Wiigator cMIOS
 	if (gameHdr->type == TYPE_GAME_GC_DISC)
 	{
+		// Send GameID
+		int MemCardProGameID = game_cfg->MemCardProGameID == INHERIT ? Settings.MemCardProGameID : game_cfg->MemCardProGameID;
+		if (MemCardProGameID == MEMCARDPRO_GAMEID_ON_FULL || MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT)
+		{
+			bool shortID = (MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT);
+			gameID_early_set(gameHdr, shortID);
+		}
+
 		ExitApp();
 		gprintf("\nLoading BC for GameCube");
 		WII_Initialize();
@@ -946,6 +954,14 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		snprintf(gamePath + strlen(gamePath), sizeof(gamePath) - strlen(gamePath), "/disc2.iso");
 	}
 
+	// Send GameID
+	int MemCardProGameID = game_cfg->MemCardProGameID == INHERIT ? Settings.MemCardProGameID : game_cfg->MemCardProGameID;
+	if (MemCardProGameID == MEMCARDPRO_GAMEID_ON_FULL || MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT)
+	{
+		bool shortID = (MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT);
+		gameID_early_set(gameHdr, shortID);
+	}
+
 	ExitApp();
 
 	// Game ID
@@ -1059,14 +1075,6 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		u32 region = *HW_VI1CFG;
 		*HW_VI1CFG = region | (1 << 17);
 		DCFlushRange((void *)HW_VI1CFG, 4);
-	}
-
-	// Send GameID
-	int MemCardProGameID = game_cfg->MemCardProGameID == INHERIT ? Settings.MemCardProGameID : game_cfg->MemCardProGameID;
-	if (MemCardProGameID == MEMCARDPRO_GAMEID_ON_FULL || MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT)
-	{
-		bool shortID = (MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT);
-		gameID_early_set(gameHdr, shortID);
 	}
 
 	gprintf("\nLoading BC for GameCube\n");
