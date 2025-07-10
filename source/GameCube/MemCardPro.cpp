@@ -81,14 +81,13 @@ s32 MCP_SetDiskID(s32 chan, const dvddiskid *diskID, bool shortID)
 
 	if (diskID) {
 		memcpy(&cmd[2], diskID->gamename, 4);
-        if (!shortID)
-        {
-            memcpy(&cmd[6], diskID->company,  2);
-            cmd[8]  = digits[diskID->disknum / 16];
-            cmd[9]  = digits[diskID->disknum % 16];
-            cmd[10] = digits[diskID->gamever / 16];
-            cmd[11] = digits[diskID->gamever % 16];
-        };
+		if (!shortID){
+			memcpy(&cmd[6], diskID->company,  2);
+			cmd[8]  = digits[diskID->disknum / 16];
+			cmd[9]  = digits[diskID->disknum % 16];
+			cmd[10] = digits[diskID->gamever / 16];
+			cmd[11] = digits[diskID->gamever % 16];
+		}	
 	}
 
 	err |= !EXI_ImmEx(chan, cmd, sizeof(cmd), EXI_WRITE);
