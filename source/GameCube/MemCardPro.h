@@ -49,4 +49,3 @@ void gameID_early_set(const discHdr *header, bool shortID);
 #endif
 
 #endif
-
