@@ -1069,6 +1069,14 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		DCFlushRange((void *)HW_VI1CFG, 4);
 	}
 
+	// Send GameID
+	int MemCardProGameID = game_cfg->MemCardProGameID == INHERIT ? Settings.MemCardProGameID : game_cfg->MemCardProGameID;
+	if (MemCardProGameID == MEMCARDPRO_GAMEID_ON_FULL || MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT)
+	{
+		bool shortID = (MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT);
+		gameID_early_set(gameHdr, shortID);
+	}
+
 	gprintf("\nLoading BC for GameCube\n");
 	WII_Initialize();
 	return WII_LaunchTitle(0x0000000100000100ULL);
@@ -1297,6 +1305,14 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 
 	// flush disc ID and Devolution config out to memory
 	DCFlushRange(lowmem, 64);
+    
+	// Send GameID
+	int MemCardProGameID = game_cfg->MemCardProGameID == INHERIT ? Settings.MemCardProGameID : game_cfg->MemCardProGameID;
+	if (MemCardProGameID == MEMCARDPRO_GAMEID_ON_FULL || MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT)
+	{
+		bool shortID = (MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT);
+		gameID_early_set(gameHdr, shortID);
+	}
 
 	ExitApp();
 	IosLoader::ReloadIosKeepingRights(58); // reload IOS 58 with AHBPROT rights
@@ -1965,6 +1981,14 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 			}
 			gprintf("done\n");
 		}
+	}
+
+	// Send GameID
+	int MemCardProGameID = game_cfg->MemCardProGameID == INHERIT ? Settings.MemCardProGameID : game_cfg->MemCardProGameID;
+	if (MemCardProGameID == MEMCARDPRO_GAMEID_ON_FULL || MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT)
+	{
+		bool shortID = (MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT);
+		gameID_early_set(gameHdr, shortID);
 	}
 
 	if (NINArgsboot)
