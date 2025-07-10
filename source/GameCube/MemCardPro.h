@@ -1,5 +1,5 @@
 /* 
- * From Swiss, mcp.h
+ * Lightly modified from Swiss, mcp.h
  */
 
 /* 
