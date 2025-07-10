@@ -102,14 +102,14 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 	GameCFG *game_cfg = GameSettings.GetGameCFG(gameHdr->id);
 	u8 GCMode = game_cfg->GameCubeMode == INHERIT ? Settings.GameCubeMode : game_cfg->GameCubeMode;
     
-    // Send GameID
-    int MemCardProGameID = game_cfg->MemCardProGameID == INHERIT ? Settings.MemCardProGameID : game_cfg->MemCardProGameID;
-    if (MemCardProGameID == MEMCARDPRO_GAMEID_ON_FULL || MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT)
-    {
-        bool shortID = (MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT);
-        gameID_early_set(gameHdr, shortID);
-    };
-    
+	// Send GameID
+	int MemCardProGameID = game_cfg->MemCardProGameID == INHERIT ? Settings.MemCardProGameID : game_cfg->MemCardProGameID;
+	if (MemCardProGameID == MEMCARDPRO_GAMEID_ON_FULL || MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT)
+	{
+		bool shortID = (MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT);
+		gameID_early_set(gameHdr, shortID);
+	}
+	
 	// Devolution
 	if (GCMode == GC_MODE_DEVOLUTION)
 		return BootDevolution(gameHdr);

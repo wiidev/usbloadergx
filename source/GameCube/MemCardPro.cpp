@@ -1,5 +1,24 @@
 /* 
-From Swiss, mcp.c
+ * Lightly modified from Swiss, mcp.c
+ */
+
+/* 
+ * Copyright (c) 2022, Extrems <extrems@extremscorner.org>
+ * 
+ * This file is part of Swiss.
+ * 
+ * Swiss is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * Swiss is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * with Swiss.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <stdbool.h>
@@ -103,8 +122,27 @@ s32 MCP_SetDiskInfo(s32 chan, const char diskInfo[64])
 }
 
 /*
-From Swiss, gameid.c
-*/
+ * Lightly modified from Swiss, gameid.c
+ */
+
+/* 
+ * Copyright (c) 2022-2025, Extrems <extrems@extremscorner.org>
+ * 
+ * This file is part of Swiss.
+ * 
+ * Swiss is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * Swiss is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * with Swiss.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
 void gameID_early_set(const discHdr *header, bool shortID)
 {
