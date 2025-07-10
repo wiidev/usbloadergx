@@ -158,7 +158,7 @@ static const char * GCMode[] =
 
 static const char * MCPGameID[] =
 {
-	trNOOP( "Off"),
+	trNOOP( "OFF"),
 	trNOOP( "Full ID" ),
 	trNOOP( "Short ID" )
 };
@@ -328,8 +328,8 @@ void LoaderSettings::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Autoboot Discs Delay" ));
 	Options->SetName(Idx++, "%s", tr( "=== GameCube Settings" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Source" ));
-	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
 	Options->SetName(Idx++, "%s", tr( "MemCardPro GameID" ));
+	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
 	Options->SetName(Idx++, "%s", tr( "Progressive Patch" ));
 	Options->SetName(Idx++, "%s", tr( "--==  DM(L) + Nintendont" ));
 	Options->SetName(Idx++, "%s", tr( "Video Mode" ));
@@ -505,11 +505,11 @@ void LoaderSettings::SetOptionValues()
 		Options->SetValue(Idx++, "%s%s%s", tr(GCSourceText[Settings.GameCubeSource][0]),
 	                	GCSourceText[Settings.GameCubeSource][1], tr(GCSourceText[Settings.GameCubeSource][2]));
 
-	//! Settings: GameCube Mode
-	Options->SetValue(Idx++, "%s", tr(GCMode[Settings.GameCubeMode]));
-
 	//! Settings: MemCardPro GameID
 	Options->SetValue(Idx++, "%s", tr(MCPGameID[Settings.MemCardProGameID]));
+
+	//! Settings: GameCube Mode
+	Options->SetValue(Idx++, "%s", tr(GCMode[Settings.GameCubeMode]));
 
 	//! Settings: DML + NIN + Devo Progressive Patch
 	Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.DMLProgPatch]));
@@ -926,16 +926,16 @@ int LoaderSettings::GetMenuInternal()
 		if (++Settings.GameCubeSource >= CG_SOURCE_MAX_CHOICE) Settings.GameCubeSource = 0;
 	}
 
-	//! Settings: GameCube Mode
-	else if (ret == ++Idx)
-	{
-		if (++Settings.GameCubeMode >= CG_MODE_MAX_CHOICE) Settings.GameCubeMode = 0;
-	}
-
 	//! Settings: MemCardPro GameID
 	else if (ret == ++Idx)
 	{
 		if (++Settings.MemCardProGameID >= MEMCARDPRO_GAMEID_MAX_CHOICE) Settings.MemCardProGameID = 0;
+	}
+
+	//! Settings: GameCube Mode
+	else if (ret == ++Idx)
+	{
+		if (++Settings.GameCubeMode >= CG_MODE_MAX_CHOICE) Settings.GameCubeMode = 0;
 	}
 
 	//! Settings: DML + NIN + Devo Progressive Patch

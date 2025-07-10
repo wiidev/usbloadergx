@@ -207,9 +207,9 @@ class CSettings
 		float BannerProjectionWidth;
 		float BannerProjectionHeight;
 		float GCBannerScale;
+		short MemCardProGameID;
 		short GameCubeMode;
 		short GameCubeSource;
-		short MemCardProGameID;
 		short MultiDiscPrompt;
 		short DMLVideo;
 		short DMLProgPatch;

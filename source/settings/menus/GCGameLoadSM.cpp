@@ -190,8 +190,8 @@ void GCGameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Favorite Level" ));
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
 	Options->SetName(Idx++, "%s", tr( "Parental Control" ));
-	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
 	Options->SetName(Idx++, "%s", tr( "MemCardPro GameID" ));
+	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
 	if(currentGCmode == GC_MODE_MIOS &&IosLoader::GetMIOSInfo() > DEFAULT_MIOS)
 	{
 		Options->SetName(Idx++, "%s", tr( "--==   DIOS MIOS (Lite)" ));
@@ -277,18 +277,18 @@ void GCGameLoadSM::SetOptionValues()
 	//! Settings: Parental Control
 	Options->SetValue(Idx++, "%s", tr(ParentalText[GameConfig.parentalcontrol]));
 
+	//! Settings: MemCardPro GameID
+	if(GameConfig.MemCardProGameID == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(MCPGameID[GameConfig.MemCardProGameID]));
+
 	//! Settings: GameCube Mode
 	if(GameConfig.GameCubeMode == INHERIT)
 		Options->SetValue(Idx++, tr("Use global"));
 	else
 		Options->SetValue(Idx++, "%s", tr(GCMode[GameConfig.GameCubeMode]));
 
-	//! Settings: MemCardPro GameID
-	if(GameConfig.MemCardProGameID == INHERIT)
-		Options->SetValue(Idx++, tr("Use global"));
-	else
-		Options->SetValue(Idx++, "%s", tr(MCPGameID[GameConfig.MemCardProGameID]));
-	
 	if(currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS)
 	{
 
@@ -668,6 +668,12 @@ int GCGameLoadSM::GetMenuInternal()
 		if (++GameConfig.parentalcontrol >= 5) GameConfig.parentalcontrol = 0;
 	}
 
+	//! Settings: MemCardPro GameID
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.MemCardProGameID >= MEMCARDPRO_GAMEID_MAX_CHOICE) GameConfig.MemCardProGameID = INHERIT;
+	}
+
 	//! Settings: GameCube Mode
 	else if (ret == ++Idx)
 	{
@@ -678,12 +684,6 @@ int GCGameLoadSM::GetMenuInternal()
 			SetOptionValues();
 	}
 
-	//! Settings: MemCardPro GameID
-	else if (ret == ++Idx)
-	{
-		if (++GameConfig.MemCardProGameID >= MEMCARDPRO_GAMEID_MAX_CHOICE) GameConfig.MemCardProGameID = INHERIT;
-	}
-	
 	//! Settings: GameCube TITLE : DIOS MIOS (Lite) + Nintendont
 	else if (currentGCmode == GC_MODE_MIOS && IosLoader::GetMIOSInfo() > DEFAULT_MIOS && ret == ++Idx)
 	{
