@@ -1091,74 +1091,24 @@ void patch_re4(u8 *gameid)
         *(u32 *)0x8016B0C8 = 0x38600001;
 }
 
-bool patch_nsmb(u8 *gameid)
+void patch_nsmb(u8 *gameid)
 {
-    WIP_Code *CodeList = NULL;
-
     if (memcmp(gameid, "SMNE01", 6) == 0)
-    {
-        CodeList = MEM2_alloc(3 * sizeof(WIP_Code));
-        if (!CodeList)
-            return false;
-
-        CodeList[0].offset = 0x001AB610;
-        CodeList[0].srcaddress = 0x9421FFD0;
-        CodeList[0].dstaddress = 0x4E800020;
-        CodeList[1].offset = 0x001CED53;
-        CodeList[1].srcaddress = 0xDA000000;
-        CodeList[1].dstaddress = 0x71000000;
-        CodeList[2].offset = 0x001CED6B;
-        CodeList[2].srcaddress = 0xDA000000;
-        CodeList[2].dstaddress = 0x71000000;
-    }
+        *(u32 *)0x801D0D60 = 0x48000170;
     else if (memcmp(gameid, "SMNP01", 6) == 0)
-    {
-        CodeList = MEM2_alloc(3 * sizeof(WIP_Code));
-        if (!CodeList)
-            return false;
-
-        CodeList[0].offset = 0x001AB750;
-        CodeList[0].srcaddress = 0x9421FFD0;
-        CodeList[0].dstaddress = 0x4E800020;
-        CodeList[1].offset = 0x001CEE90;
-        CodeList[1].srcaddress = 0x38A000DA;
-        CodeList[1].dstaddress = 0x38A00071;
-        CodeList[2].offset = 0x001CEEA8;
-        CodeList[2].srcaddress = 0x388000DA;
-        CodeList[2].dstaddress = 0x38800071;
-    }
+        *(u32 *)0x801D0EA0 = 0x48000170;
     else if (memcmp(gameid, "SMNJ01", 6) == 0)
-    {
-        CodeList = MEM2_alloc(3 * sizeof(WIP_Code));
-        if (!CodeList)
-            return false;
-
-        CodeList[0].offset = 0x001AB420;
-        CodeList[0].srcaddress = 0x9421FFD0;
-        CodeList[0].dstaddress = 0x4E800020;
-        CodeList[1].offset = 0x001CEB63;
-        CodeList[1].srcaddress = 0xDA000000;
-        CodeList[1].dstaddress = 0x71000000;
-        CodeList[2].offset = 0x001CEB7B;
-        CodeList[2].srcaddress = 0xDA000000;
-        CodeList[2].dstaddress = 0x71000000;
-    }
-
-    if (CodeList && set_wip_list(CodeList, 3) == false)
-    {
-        MEM2_free(CodeList);
-        CodeList = NULL;
-        return false;
-    }
-    if (CodeList)
-        gprintf("Patched New Super Mario Bros\n");
-    return CodeList != NULL;
+        *(u32 *)0x801D0B70 = 0x48000170;
+    else if (memcmp(gameid, "SMNK01", 6) == 0)
+        *(u32 *)0x801D12A0 = 0x48000170;
+    else if (memcmp(gameid, "SMNW01", 6) == 0)
+        *(u32 *)0x801D12A0 = 0x48000170;
 }
 
-bool patch_pop(u8 *gameid)
+void patch_pop(u8 *gameid)
 {
     if (memcmp(gameid, "SPX", 3) != 0 && memcmp(gameid, "RPW", 3) != 0)
-        return false;
+        return;
 
     WIP_Code *CodeList = MEM2_alloc(5 * sizeof(WIP_Code));
     CodeList[0].offset = 0x007AAC6A;
@@ -1181,11 +1131,7 @@ bool patch_pop(u8 *gameid)
     {
         MEM2_free(CodeList);
         CodeList = NULL;
-        return false;
     }
-    if (CodeList)
-        gprintf("Patched Prince of Persia\n");
-    return CodeList != NULL;
 }
 
 void patch_sdcard(u8 *gameid)
