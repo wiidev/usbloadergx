@@ -580,10 +580,10 @@ msgid "Custom Paths"
 msgstr "自定义路径"
 
 msgid "Customs"
-msgstr "海关"
+msgstr "自定义"
 
 msgid "Customs/Original"
-msgstr "海关/原版"
+msgstr "自定义/原版"
 
 msgid "D Buttons"
 msgstr "D 按钮"
@@ -2555,7 +2555,7 @@ msgid "ms"
 msgstr "毫秒"
 
 msgid "of"
-msgstr "的"
+msgstr "自"
 
 msgid "seconds left"
 msgstr "剩余秒数"
