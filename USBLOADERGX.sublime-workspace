@@ -1,0 +1,1054 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ELEME",
+				"ELEMENT_ATTRIBUTE"
+			],
+			[
+				"Set",
+				"SetOptionValues"
+			],
+			[
+				"Riiv",
+				"RiivolutionModPatch"
+			],
+			[
+				"Riivo",
+				"RiivolutionModPatch"
+			],
+			[
+				"cstd",
+				"cstdio"
+			],
+			[
+				"Opt",
+				"OptionList"
+			],
+			[
+				"cs",
+				"cstdlib"
+			],
+			[
+				"ios",
+				"iostream"
+			],
+			[
+				"inc",
+				"include"
+			],
+			[
+				"SetOptions",
+				"SetupOptions"
+			],
+			[
+				"R",
+				"RiivolutionModPatch"
+			],
+			[
+				"Riivol",
+				"RiivolutionMods"
+			],
+			[
+				"Back",
+				"BackButtonCallback"
+			],
+			[
+				"Gui",
+				"GuiTrigger"
+			],
+			[
+				"direc",
+				"directory"
+			],
+			[
+				"csd",
+				"cstdint"
+			],
+			[
+				"cst",
+				"cstdarg"
+			],
+			[
+				"in",
+				"include"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "source/Riivolution/RiivolutionModOptions.cpp",
+			"redo_stack":
+			[
+				[
+					332,
+					1,
+					"insert",
+					{
+						"characters": ")"
+					},
+					"AQAAANwBAAAAAAAA3AEAAAAAAAABAAAAKQ",
+					"AQAAAAAAAAABAAAA3QEAAAAAAADdAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					331,
+					1,
+					"left_delete",
+					null,
+					"AwAAANwBAAAAAAAA3QEAAAAAAAAAAAAA3QEAAAAAAADeAQAAAAAAAAAAAADeAQAAAAAAAOgBAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA3AEAAAAAAADcAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					328,
+					1,
+					"left_delete",
+					null,
+					"BAAAAGUCAAAAAAAAZgIAAAAAAAAAAAAAZgIAAAAAAABqAgAAAAAAAAAAAABqAgAAAAAAAGwCAAAAAAAAAAAAAGwCAAAAAAAAeQIAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAZQIAAAAAAABlAgAAAAAAAAAAAAAAAPC/"
+				]
+			],
+			"settings":
+			{
+				"buffer_size": 4277,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+				[
+					1,
+					1,
+					"paste",
+					null,
+					"AQAAAAAAAAAAAAAA2wQAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					5,
+					1,
+					"insert",
+					{
+						"characters": "GUI"
+					},
+					"BAAAAEkBAAAAAAAASgEAAAAAAAAAAAAASgEAAAAAAABKAQAAAAAAAAQAAABtYWluSgEAAAAAAABLAQAAAAAAAAAAAABLAQAAAAAAAEwBAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAATQEAAAAAAABJAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					6,
+					2,
+					"left_delete",
+					null,
+					"AgAAAEsBAAAAAAAASwEAAAAAAAABAAAASUoBAAAAAAAASgEAAAAAAAABAAAAVQ",
+					"AQAAAAAAAAABAAAATAEAAAAAAABMAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					7,
+					1,
+					"insert",
+					{
+						"characters": "iuo"
+					},
+					"AwAAAEoBAAAAAAAASwEAAAAAAAAAAAAASwEAAAAAAABMAQAAAAAAAAAAAABMAQAAAAAAAE0BAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAASgEAAAAAAABKAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					8,
+					3,
+					"left_delete",
+					null,
+					"AwAAAEwBAAAAAAAATAEAAAAAAAABAAAAb0sBAAAAAAAASwEAAAAAAAABAAAAdUoBAAAAAAAASgEAAAAAAAABAAAAaQ",
+					"AQAAAAAAAAABAAAATQEAAAAAAABNAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					9,
+					1,
+					"insert",
+					{
+						"characters": "ui"
+					},
+					"AgAAAEoBAAAAAAAASwEAAAAAAAAAAAAASwEAAAAAAABMAQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAASgEAAAAAAABKAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					13,
+					4,
+					"left_delete",
+					null,
+					"BAAAAGgBAAAAAAAAaAEAAAAAAAABAAAAbmcBAAAAAAAAZwEAAAAAAAABAAAAaWYBAAAAAAAAZgEAAAAAAAABAAAAYWUBAAAAAAAAZQEAAAAAAAABAAAAbQ",
+					"AQAAAAAAAAABAAAAaQEAAAAAAABpAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					14,
+					1,
+					"insert",
+					{
+						"characters": "Gui"
+					},
+					"AwAAAGUBAAAAAAAAZgEAAAAAAAAAAAAAZgEAAAAAAABnAQAAAAAAAAAAAABnAQAAAAAAAGgBAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAZQEAAAAAAABlAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					17,
+					1,
+					"insert",
+					{
+						"characters": "CONG"
+					},
+					"BAAAAJwBAAAAAAAAnQEAAAAAAAAAAAAAnQEAAAAAAACeAQAAAAAAAAAAAACeAQAAAAAAAJ8BAAAAAAAAAAAAAJ8BAAAAAAAAoAEAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAnAEAAAAAAACcAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					18,
+					1,
+					"left_delete",
+					null,
+					"AQAAAJ8BAAAAAAAAnwEAAAAAAAABAAAARw",
+					"AQAAAAAAAAABAAAAoAEAAAAAAACgAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					19,
+					1,
+					"insert",
+					{
+						"characters": "F_"
+					},
+					"AgAAAJ8BAAAAAAAAoAEAAAAAAAAAAAAAoAEAAAAAAAChAQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAnwEAAAAAAACfAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					22,
+					1,
+					"insert",
+					{
+						"characters": "CONF_"
+					},
+					"BQAAAK8BAAAAAAAAsAEAAAAAAAAAAAAAsAEAAAAAAACxAQAAAAAAAAAAAACxAQAAAAAAALIBAAAAAAAAAAAAALIBAAAAAAAAswEAAAAAAAAAAAAAswEAAAAAAAC0AQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAArwEAAAAAAACvAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					28,
+					2,
+					"left_delete",
+					null,
+					"AgAAAFMBAAAAAAAAUwEAAAAAAAABAAAAPlIBAAAAAAAAUgEAAAAAAAABAAAALQ",
+					"AQAAAAAAAAABAAAAVAEAAAAAAABUAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					29,
+					1,
+					"insert",
+					{
+						"characters": "::"
+					},
+					"AgAAAFIBAAAAAAAAUwEAAAAAAAAAAAAAUwEAAAAAAABUAQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAUgEAAAAAAABSAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					31,
+					2,
+					"left_delete",
+					null,
+					"AgAAAG8BAAAAAAAAbwEAAAAAAAABAAAAPm4BAAAAAAAAbgEAAAAAAAABAAAALQ",
+					"AQAAAAAAAAABAAAAcAEAAAAAAABwAQAAAAAAAAAAAAAAwFZA"
+				],
+				[
+					32,
+					1,
+					"insert",
+					{
+						"characters": "::"
+					},
+					"AgAAAG4BAAAAAAAAbwEAAAAAAAAAAAAAbwEAAAAAAABwAQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAbgEAAAAAAABuAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					43,
+					1,
+					"paste",
+					null,
+					"AgAAACABAAAAAAAAywQAAAAAAAAAAAAAywQAAAAAAADLBAAAAAAAAHIDAABib29sIFJpaXZvbHV0aW9uTW9kT3B0aW9uczo6U2hvdygpIHsKICAgIEd1aVdpbmRvdzo6UmVtb3ZlQWxsKCk7CiAgICBHdWlXaW5kb3c6OlNldFRpdGxlKG1vZC5zZWN0aW9uVGl0bGUuY19zdHIoKSwgaXNXaWRlID8gQ09ORl9BU1BFQ1RfMTZfOSA6IENPTkZfQVNQRUNUXzRfMyk7CiAgICBzdGQ6OnZlY3RvcjxzdGQ6OnN0cmluZz4gZW50cmllczsKICAgIGVudHJpZXMucHVzaF9iYWNrKCJTZWxlY3QgQW5vdGhlciBNb2QiKTsKICAgIGZvciAoYXV0byYgb3B0IDogbW9kLm9wdGlvbnMpCiAgICAgICAgZW50cmllcy5wdXNoX2JhY2sob3B0Lm5hbWUpOwogICAgaW50IHNlbGVjdGVkID0gV2luZG93UHJvbXB0KG1vZC5zZWN0aW9uVGl0bGUuY19zdHIoKSwgbnVsbHB0ciwgZW50cmllcyk7CiAgICBpZiAoc2VsZWN0ZWQgPT0gMCAmJiBhbGxvd1NlbGVjdEFub3RoZXIpIHsKICAgICAgICBzZWxlY3RBbm90aGVyID0gdHJ1ZTsKICAgICAgICByZXR1cm4gZmFsc2U7CiAgICB9CiAgICBmb3IgKHNpemVfdCBpID0gMDsgaSA8IG1vZC5vcHRpb25zLnNpemUoKTsgKytpKSB7CiAgICAgICAgUmlpdm9PcHRpb24mIG9wdCA9IG1vZC5vcHRpb25zW2ldOwogICAgICAgIHN0ZDo6dmVjdG9yPHN0ZDo6c3RyaW5nPiBjaG9pY2VzOwogICAgICAgIGZvciAoYXV0byYgY2ggOiBvcHQuY2hvaWNlcykKICAgICAgICAgICAgY2hvaWNlcy5wdXNoX2JhY2soY2gubmFtZSk7CiAgICAgICAgaW50IGNob2ljZSA9IFdpbmRvd1Byb21wdChvcHQubmFtZS5jX3N0cigpLCBudWxscHRyLCBjaG9pY2VzLCBvcHQuc2VsZWN0ZWQpOwogICAgICAgIGlmIChjaG9pY2UgPj0gMCkKICAgICAgICAgICAgb3B0LnNlbGVjdGVkID0gY2hvaWNlOwogICAgfQogICAgcmV0dXJuIHRydWU7Cn0",
+					"AQAAAAAAAAABAAAAkgQAAAAAAAAgAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					50,
+					1,
+					"paste",
+					null,
+					"AQAAAGMAAAAAAAAAnwAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAYwAAAAAAAABjAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					51,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AQAAAJ8AAAAAAAAAoAAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAnwAAAAAAAACfAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					66,
+					2,
+					"left_delete",
+					null,
+					"AgAAAGMAAAAAAAAAYwAAAAAAAAAhAAAAI2luY2x1ZGUgInByb21wdHMvQ2hvaWNlUHJvbXB0LmgiYgAAAAAAAABiAAAAAAAAAAEAAAAK",
+					"AQAAAAAAAAABAAAAhAAAAAAAAABjAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					97,
+					1,
+					"paste",
+					null,
+					"AgAAAAAAAAAAAAAA6RAAAAAAAAAAAAAA6RAAAAAAAADpEAAAAAAAADcFAAAjaW5jbHVkZSAiUmlpdm9sdXRpb25Nb2RPcHRpb25zLmhwcCIKI2luY2x1ZGUgInRoZW1lcy9DVGhlbWUuaCIKI2luY2x1ZGUgInByb21wdHMvUHJvbXB0V2luZG93cy5oIgojaW5jbHVkZSAidGhlbWVzL0NUaGVtZS5oIgoKUmlpdm9sdXRpb25Nb2RPcHRpb25zOjpSaWl2b2x1dGlvbk1vZE9wdGlvbnMoUmlpdm9sdXRpb25Nb2RYbWwmIG0sIGJvb2wgYWxsb3dTZWxlY3QsIGJvb2wgd2lkZSkKICAgIDogbW9kKG0pLCBhbGxvd1NlbGVjdEFub3RoZXIoYWxsb3dTZWxlY3QpLCBpc1dpZGUod2lkZSkKewogICAgc2VsZWN0QW5vdGhlciA9IGZhbHNlOwp9Cgpib29sIFJpaXZvbHV0aW9uTW9kT3B0aW9uczo6U2hvdygpIHsKICAgIC8vIENsZWFyIHdpbmRvdyBhbmQgc2V0IHRpdGxlIGZvciB0aGlzIHN1YndpbmRvdy9tZW51CiAgICB0aGlzLT5SZW1vdmVBbGwoKTsKICAgIHRoaXMtPlNldFRpdGxlKG1vZC5zZWN0aW9uVGl0bGUuY19zdHIoKSwgaXNXaWRlID8gQ09ORl9BU1BFQ1RfMTZfOSA6IENPTkZfQVNQRUNUXzRfMyk7CgogICAgc3RkOjp2ZWN0b3I8c3RkOjpzdHJpbmc+IGVudHJpZXM7CiAgICBlbnRyaWVzLnB1c2hfYmFjaygiU2VsZWN0IEFub3RoZXIgTW9kIik7CiAgICBmb3IgKGF1dG8mIG9wdCA6IG1vZC5vcHRpb25zKQogICAgICAgIGVudHJpZXMucHVzaF9iYWNrKG9wdC5uYW1lKTsKCiAgICBpbnQgc2VsZWN0ZWQgPSBDaG9pY2VQcm9tcHQobW9kLnNlY3Rpb25UaXRsZS5jX3N0cigpLCAiIiwgZW50cmllcywgMCwgdGhpcyk7CiAgICBpZiAoc2VsZWN0ZWQgPT0gMCAmJiBhbGxvd1NlbGVjdEFub3RoZXIpIHsKICAgICAgICBzZWxlY3RBbm90aGVyID0gdHJ1ZTsKICAgICAgICByZXR1cm4gZmFsc2U7CiAgICB9CgogICAgZm9yIChzaXplX3QgaSA9IDA7IGkgPCBtb2Qub3B0aW9ucy5zaXplKCk7ICsraSkgewogICAgICAgIFJpaXZvT3B0aW9uJiBvcHQgPSBtb2Qub3B0aW9uc1tpXTsKICAgICAgICBzdGQ6OnZlY3RvcjxzdGQ6OnN0cmluZz4gY2hvaWNlczsKICAgICAgICBmb3IgKGF1dG8mIGNoIDogb3B0LmNob2ljZXMpCiAgICAgICAgICAgIGNob2ljZXMucHVzaF9iYWNrKGNoLm5hbWUpOwoKICAgICAgICBpbnQgY2hvaWNlID0gQ2hvaWNlUHJvbXB0KG9wdC5uYW1lLmNfc3RyKCksICIiLCBjaG9pY2VzLCBvcHQuc2VsZWN0ZWQsIHRoaXMpOwogICAgICAgIGlmIChjaG9pY2UgPj0gMCkKICAgICAgICAgICAgb3B0LnNlbGVjdGVkID0gY2hvaWNlOwogICAgfQogICAgcmV0dXJuIHRydWU7Cn0KYm9vbCBSaWl2b2x1dGlvbk1vZE9wdGlvbnM6OndhbnRzU2VsZWN0QW5vdGhlcigpIGNvbnN0IHsgcmV0dXJuIHNlbGVjdEFub3RoZXI7IH0",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAA3BQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					102,
+					1,
+					"insert",
+					{
+						"characters": "GUI/"
+					},
+					"BAAAALoAAAAAAAAAuwAAAAAAAAAAAAAAuwAAAAAAAAC8AAAAAAAAAAAAAAC8AAAAAAAAAL0AAAAAAAAAAAAAAL0AAAAAAAAAvgAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAugAAAAAAAAC6AAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					106,
+					9,
+					"left_delete",
+					null,
+					"CQAAALkAAAAAAAAAuQAAAAAAAAABAAAAL7gAAAAAAAAAuAAAAAAAAAABAAAAc7cAAAAAAAAAtwAAAAAAAAABAAAAZ7YAAAAAAAAAtgAAAAAAAAABAAAAbrUAAAAAAAAAtQAAAAAAAAABAAAAabQAAAAAAAAAtAAAAAAAAAABAAAAdLMAAAAAAAAAswAAAAAAAAABAAAAdLIAAAAAAAAAsgAAAAAAAAABAAAAZbEAAAAAAAAAsQAAAAAAAAABAAAAcw",
+					"AQAAAAAAAAABAAAAugAAAAAAAAC6AAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					109,
+					1,
+					"insert",
+					{
+						"characters": "Menus/"
+					},
+					"BgAAANgAAAAAAAAA2QAAAAAAAAAAAAAA2QAAAAAAAADaAAAAAAAAAAAAAADaAAAAAAAAANsAAAAAAAAAAAAAANsAAAAAAAAA3AAAAAAAAAAAAAAA3AAAAAAAAADdAAAAAAAAAAAAAADdAAAAAAAAAN4AAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA2AAAAAAAAADYAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					113,
+					1,
+					"left_delete",
+					null,
+					"AQAAANgAAAAAAAAA2AAAAAAAAAABAAAATQ",
+					"AQAAAAAAAAABAAAA2QAAAAAAAADZAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					114,
+					1,
+					"insert",
+					{
+						"characters": "m"
+					},
+					"AQAAANgAAAAAAAAA2QAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA2AAAAAAAAADYAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					121,
+					1,
+					"paste",
+					null,
+					"AgAAAP4AAAAAAAAADwEAAAAAAAAAAAAADwEAAAAAAAAPAQAAAAAAABEAAABPcHRpb25Ccm93c2VyLmhwcA",
+					"AQAAAAAAAAABAAAA/gAAAAAAAAAPAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					122,
+					1,
+					"insert",
+					{
+						"characters": ".h"
+					},
+					"AgAAAA8BAAAAAAAAEAEAAAAAAAAAAAAAEAEAAAAAAAARAQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAADwEAAAAAAAAPAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					125,
+					1,
+					"insert",
+					{
+						"characters": "GUI"
+					},
+					"BAAAAPoAAAAAAAAA+wAAAAAAAAAAAAAA+wAAAAAAAAD7AAAAAAAAAAMAAABndWn7AAAAAAAAAPwAAAAAAAAAAAAAAPwAAAAAAAAA/QAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA/QAAAAAAAAD6AAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					151,
+					1,
+					"insert",
+					{
+						"characters": "GUI"
+					},
+					"BAAAAB0BAAAAAAAAHgEAAAAAAAAAAAAAHgEAAAAAAAAeAQAAAAAAAAMAAABndWkeAQAAAAAAAB8BAAAAAAAAAAAAAB8BAAAAAAAAIAEAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAHQEAAAAAAAAgAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					156,
+					1,
+					"insert",
+					{
+						"characters": "themes"
+					},
+					"BwAAADIBAAAAAAAAMwEAAAAAAAAAAAAAMwEAAAAAAAAzAQAAAAAAAAkAAAByZXNvdXJjZXMzAQAAAAAAADQBAAAAAAAAAAAAADQBAAAAAAAANQEAAAAAAAAAAAAANQEAAAAAAAA2AQAAAAAAAAAAAAA2AQAAAAAAADcBAAAAAAAAAAAAADcBAAAAAAAAOAEAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAOwEAAAAAAAAyAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					163,
+					1,
+					"paste",
+					null,
+					"AgAAAAAAAAAAAAAAphAAAAAAAAAAAAAAphAAAAAAAACmEAAAAAAAAOkQAAAjaW5jbHVkZSAiUmlpdm9sdXRpb25Nb2RPcHRpb25zLmhwcCIKI2luY2x1ZGUgInRoZW1lcy9DVGhlbWUuaCIKI2luY2x1ZGUgInByb21wdHMvUHJvbXB0V2luZG93cy5oIgojaW5jbHVkZSAic2V0dGluZ3MvQ1NldHRpbmdzLmgiCiNpbmNsdWRlICJGaWxlT3BlcmF0aW9ucy9maWxlb3BzLmgiCiNpbmNsdWRlICJHVUkvT3B0aW9uTGlzdC5ocHAiCiNpbmNsdWRlICJzZXR0aW5ncy9tZW51cy9TZXR0aW5nc01lbnUuaHBwIgojaW5jbHVkZSAiR1VJL2d1aV9vcHRpb25icm93c2VyLmgiCiNpbmNsdWRlICJHVUkvZ3VpLmgiCiNpbmNsdWRlICJ0aGVtZXMvUmVzb3VyY2VzLmgiCgpzdGF0aWMgY29uc3QgY2hhciAqIERpc2FibGVkVGV4dCA9ICJEaXNhYmxlZCI7CgpSaWl2b2x1dGlvbk1vZE9wdGlvbnM6OlJpaXZvbHV0aW9uTW9kT3B0aW9ucyhSaWl2b2x1dGlvbk1vZFhtbCYgbSwgYm9vbCBhbGxvd1NlbGVjdCwgYm9vbCB3aWRlKQogICAgOiBHdWlXaW5kb3coNjQwLCA0ODApLCBtb2QobSksIGFsbG93U2VsZWN0QW5vdGhlcihhbGxvd1NlbGVjdCksIGlzV2lkZSh3aWRlKSwgc2VsZWN0QW5vdGhlcihmYWxzZSkKewogICAgLy8gU2V0dXAgb3B0aW9uIGxpc3QKICAgIE9wdGlvbnMgPSBuZXcgT3B0aW9uTGlzdCgpOwogICAgU2V0T3B0aW9uTmFtZXMoKTsKICAgIFNldE9wdGlvblZhbHVlcygpOwoKICAgIC8vIE9wdGlvbiBCcm93c2VyCiAgICBvcHRpb25Ccm93c2VyID0gbmV3IE9wdGlvbkJyb3dzZXIoT3B0aW9ucywgNDAwLCAzNjAsIDQwLCA0MCwgT3B0aW9uQnJvd3Nlcjo6U2V0dGluZ3NPcHRzKTsKICAgIG9wdGlvbkJyb3dzZXItPlNldENvbDJQb3NpdGlvbigzMDApOwogICAgb3B0aW9uQnJvd3Nlci0+U2V0QWxpZ25tZW50KEFMSUdOX0xFRlQsIEFMSUdOX1RPUCk7CiAgICBvcHRpb25Ccm93c2VyLT5TZXRQb3NpdGlvbigzMCwgNTApOwoKICAgIC8vIFNhdmUgYnV0dG9uCiAgICBHdWlJbWFnZURhdGEgKmJ0bk91dGxpbmUgPSBSZXNvdXJjZXM6OkdldEltYWdlRGF0YSgiYnV0dG9uX2RpYWxvZ3VlX2JveC5wbmciKTsKICAgIEd1aVRleHQgKnNhdmVCdG5UeHQgPSBuZXcgR3VpVGV4dCgiU2F2ZSIsIDIyLCB0aENvbG9yKCJyPTAgZz0wIGI9MCBhPTI1NSAtIHByb21wdCB3aW5kb3dzIGJ1dHRvbiB0ZXh0IGNvbG9yIikpOwogICAgc2F2ZUJ0blR4dC0+U2V0TWF4V2lkdGgoYnRuT3V0bGluZS0+R2V0V2lkdGgoKSAtIDMwKTsKICAgIEd1aUltYWdlICpzYXZlQnRuSW1nID0gbmV3IEd1aUltYWdlKGJ0bk91dGxpbmUpOwogICAgc2F2ZUJ0biA9IG5ldyBHdWlCdXR0b24oc2F2ZUJ0bkltZywgc2F2ZUJ0bkltZywgMiwgMywgMTgwLCA0MDAsIHRyaWdBLCBidG5Tb3VuZE92ZXIsIGJ0blNvdW5kQ2xpY2syLCAxKTsKICAgIHNhdmVCdG4tPlNldExhYmVsKHNhdmVCdG5UeHQpOwoKICAgIEFwcGVuZChvcHRpb25Ccm93c2VyKTsKICAgIEFwcGVuZChzYXZlQnRuKTsKCiAgICAvLyBUaXRsZQogICAgdGl0bGVUeHQgPSBuZXcgR3VpVGV4dChtb2Quc2VjdGlvblRpdGxlLmNfc3RyKCksIDMyLCB0aENvbG9yKCJyPTAgZz0wIGI9MCBhPTI1NSAtIHNldHRpbmdzIHRpdGxlIGNvbG9yIikpOwogICAgdGl0bGVUeHQtPlNldEFsaWdubWVudChBTElHTl9DRU5URVIsIEFMSUdOX1RPUCk7CiAgICB0aXRsZVR4dC0+U2V0UG9zaXRpb24oMCwgMTApOwogICAgQXBwZW5kKHRpdGxlVHh0KTsKCiAgICBSZXN1bWVHdWkoKTsKfQoKUmlpdm9sdXRpb25Nb2RPcHRpb25zOjp+Umlpdm9sdXRpb25Nb2RPcHRpb25zKCkKewogICAgSGFsdEd1aSgpOwogICAgUmVtb3ZlKG9wdGlvbkJyb3dzZXIpOwogICAgUmVtb3ZlKHNhdmVCdG4pOwogICAgUmVtb3ZlKHRpdGxlVHh0KTsKICAgIGRlbGV0ZSBPcHRpb25zOwogICAgZGVsZXRlIG9wdGlvbkJyb3dzZXI7CiAgICBkZWxldGUgc2F2ZUJ0bjsKICAgIGRlbGV0ZSB0aXRsZVR4dDsKICAgIFJlc3VtZUd1aSgpOwp9Cgp2b2lkIFJpaXZvbHV0aW9uTW9kT3B0aW9uczo6U2V0T3B0aW9uTmFtZXMoKQp7CiAgICBPcHRpb25zLT5DbGVhckxpc3QoKTsKCiAgICBpbnQgaWR4ID0gMDsKICAgIGlmIChhbGxvd1NlbGVjdEFub3RoZXIpCiAgICAgICAgT3B0aW9ucy0+U2V0TmFtZShpZHgrKywgIiVzIiwgIlNlbGVjdCBBbm90aGVyIE1vZCIpOwoKICAgIGZvciAoc2l6ZV90IGkgPSAwOyBpIDwgbW9kLm9wdGlvbnMuc2l6ZSgpOyArK2kpCiAgICAgICAgT3B0aW9ucy0+U2V0TmFtZShpZHgrKywgIiVzIiwgbW9kLm9wdGlvbnNbaV0ubmFtZS5jX3N0cigpKTsKfQoKdm9pZCBSaWl2b2x1dGlvbk1vZE9wdGlvbnM6OlNldE9wdGlvblZhbHVlcygpCnsKICAgIGludCBpZHggPSAwOwogICAgaWYgKGFsbG93U2VsZWN0QW5vdGhlcikKICAgICAgICBPcHRpb25zLT5TZXRWYWx1ZShpZHgrKywgIiIpOwoKICAgIGZvciAoc2l6ZV90IGkgPSAwOyBpIDwgbW9kLm9wdGlvbnMuc2l6ZSgpOyArK2kpCiAgICB7CiAgICAgICAgY29uc3QgUmlpdm9PcHRpb24mIG9wdCA9IG1vZC5vcHRpb25zW2ldOwogICAgICAgIGNvbnN0IHN0ZDo6c3RyaW5nJiBjaG9pY2UgPSAob3B0LnNlbGVjdGVkID49IDAgJiYgb3B0LnNlbGVjdGVkIDwgKGludClvcHQuY2hvaWNlcy5zaXplKCkpCiAgICAgICAgICAgID8gb3B0LmNob2ljZXNbb3B0LnNlbGVjdGVkXS5uYW1lCiAgICAgICAgICAgIDogRGlzYWJsZWRUZXh0OwoKICAgICAgICBPcHRpb25zLT5TZXRWYWx1ZShpZHgrKywgIiVzIiwgY2hvaWNlLmNfc3RyKCkpOwogICAgfQp9Cgpib29sIFJpaXZvbHV0aW9uTW9kT3B0aW9uczo6U2hvdygpCnsKICAgIGludCByZXQgPSAtMTsKICAgIHNlbGVjdEFub3RoZXIgPSBmYWxzZTsKICAgIG9wdGlvbkJyb3dzZXItPlJlc2V0U3RhdGUoKTsKCiAgICB3aGlsZSAocmV0IDwgMCkKICAgIHsKICAgICAgICAvLyBSZWRyYXcgb3B0aW9ucyBpbiBjYXNlIG9mIGNoYW5nZXMKICAgICAgICBTZXRPcHRpb25WYWx1ZXMoKTsKICAgICAgICBvcHRpb25Ccm93c2VyLT5TZXRPcHRpb25MaXN0KE9wdGlvbnMpOwoKICAgICAgICB0aGlzLT5EcmF3KCk7CiAgICAgICAgdGhpcy0+VXBkYXRlKHVzZXJJbnB1dFswXSk7CiAgICAgICAgdXNsZWVwKDEwMDApOwoKICAgICAgICBpZiAoc2F2ZUJ0bi0+R2V0U3RhdGUoKSA9PSBTVEFURV9DTElDS0VEKQogICAgICAgIHsKICAgICAgICAgICAgLy8gU2F2ZSBjb25maWcgZm9yIHRoaXMgbW9kCiAgICAgICAgICAgIGlmIChSaWl2b2x1dGlvbk1vZHM6OlNhdmVDb25maWcobW9kLnJlZ2lvbmFsSWQsIG1vZCkpCiAgICAgICAgICAgICAgICBXaW5kb3dQcm9tcHQoIlN1Y2Nlc3MiLCAiTW9kIGNvbmZpZ3VyYXRpb24gc2F2ZWQuIiwgIk9LIik7CiAgICAgICAgICAgIGVsc2UKICAgICAgICAgICAgICAgIFdpbmRvd1Byb21wdCgiRXJyb3IiLCAiRmFpbGVkIHRvIHNhdmUgbW9kIGNvbmZpZ3VyYXRpb24uIiwgIk9LIik7CiAgICAgICAgICAgIHNhdmVCdG4tPlJlc2V0U3RhdGUoKTsKICAgICAgICB9CgogICAgICAgIHJldCA9IG9wdGlvbkJyb3dzZXItPkdldENsaWNrZWRPcHRpb24oKTsKICAgIH0KCiAgICBpbnQgaWR4ID0gMDsKICAgIGlmIChhbGxvd1NlbGVjdEFub3RoZXIgJiYgcmV0ID09IGlkeCsrKQogICAgewogICAgICAgIHNlbGVjdEFub3RoZXIgPSB0cnVlOwogICAgICAgIHJldHVybiBmYWxzZTsKICAgIH0KICAgIGVsc2UKICAgIHsKICAgICAgICAvLyBNYXAgcmV0IHRvIG1vZC5vcHRpb25zIGVudHJ5CiAgICAgICAgcmV0IC09IGFsbG93U2VsZWN0QW5vdGhlciA/IDEgOiAwOwogICAgICAgIGlmIChyZXQgPCAwIHx8IHJldCA+PSAoaW50KW1vZC5vcHRpb25zLnNpemUoKSkKICAgICAgICAgICAgcmV0dXJuIHRydWU7CgogICAgICAgIC8vIFNob3cgY2hvaWNlcyBmb3IgdGhpcyBvcHRpb24KICAgICAgICBSaWl2b09wdGlvbiYgb3B0ID0gbW9kLm9wdGlvbnNbcmV0XTsKICAgICAgICBzdGQ6OnZlY3Rvcjxjb25zdCBjaGFyKj4gY2hvaWNlczsKICAgICAgICBmb3IgKGF1dG8mIGNoIDogb3B0LmNob2ljZXMpCiAgICAgICAgICAgIGNob2ljZXMucHVzaF9iYWNrKGNoLm5hbWUuY19zdHIoKSk7CgogICAgICAgIGludCBzZWwgPSBXaW5kb3dQcm9tcHQob3B0Lm5hbWUuY19zdHIoKSwgIlNlbGVjdCBhbiBvcHRpb246IiwgY2hvaWNlcywgb3B0LnNlbGVjdGVkKTsKICAgICAgICBpZiAoc2VsID49IDApCiAgICAgICAgICAgIG9wdC5zZWxlY3RlZCA9IHNlbDsKCiAgICAgICAgcmV0dXJuIFNob3coKTsgLy8gUmVjdXJzZSBmb3IgZnVydGhlciBlZGl0cwogICAgfQp9Cgpib29sIFJpaXZvbHV0aW9uTW9kT3B0aW9uczo6d2FudHNTZWxlY3RBbm90aGVyKCkgY29uc3QKewogICAgcmV0dXJuIHNlbGVjdEFub3RoZXI7Cn0",
+					"AQAAAAAAAAABAAAAAAAAAAAAAADpEAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					168,
+					1,
+					"insert",
+					{
+						"characters": "themes"
+					},
+					"BwAAAPIAAAAAAAAA8wAAAAAAAAAAAAAA8wAAAAAAAADzAAAAAAAAAAkAAAByZXNvdXJjZXPzAAAAAAAAAPQAAAAAAAAAAAAAAPQAAAAAAAAA9QAAAAAAAAAAAAAA9QAAAAAAAAD2AAAAAAAAAAAAAAD2AAAAAAAAAPcAAAAAAAAAAAAAAPcAAAAAAAAA+AAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA+wAAAAAAAADyAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					171,
+					1,
+					"insert",
+					{
+						"characters": "GUI"
+					},
+					"BAAAABABAAAAAAAAEQEAAAAAAAAAAAAAEQEAAAAAAAARAQAAAAAAAAMAAABndWkRAQAAAAAAABIBAAAAAAAAAAAAABIBAAAAAAAAEwEAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAEwEAAAAAAAAQAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					176,
+					1,
+					"insert",
+					{
+						"characters": "GUI"
+					},
+					"BAAAADEBAAAAAAAAMgEAAAAAAAAAAAAAMgEAAAAAAAAyAQAAAAAAAAgAAABzZXR0aW5nczIBAAAAAAAAMwEAAAAAAAAAAAAAMwEAAAAAAAA0AQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAOQEAAAAAAAAxAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					185,
+					1,
+					"insert",
+					{
+						"characters": "gui_optio"
+					},
+					"CgAAADUBAAAAAAAANgEAAAAAAAAAAAAANgEAAAAAAAA2AQAAAAAAAA4AAABPcHRpb25MaXN0LmhwcDYBAAAAAAAANwEAAAAAAAAAAAAANwEAAAAAAAA4AQAAAAAAAAAAAAA4AQAAAAAAADkBAAAAAAAAAAAAADkBAAAAAAAAOgEAAAAAAAAAAAAAOgEAAAAAAAA7AQAAAAAAAAAAAAA7AQAAAAAAADwBAAAAAAAAAAAAADwBAAAAAAAAPQEAAAAAAAAAAAAAPQEAAAAAAAA+AQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAANQEAAAAAAABDAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					186,
+					1,
+					"insert",
+					{
+						"characters": "nbrowser."
+					},
+					"CQAAAD4BAAAAAAAAPwEAAAAAAAAAAAAAPwEAAAAAAABAAQAAAAAAAAAAAABAAQAAAAAAAEEBAAAAAAAAAAAAAEEBAAAAAAAAQgEAAAAAAAAAAAAAQgEAAAAAAABDAQAAAAAAAAAAAABDAQAAAAAAAEQBAAAAAAAAAAAAAEQBAAAAAAAARQEAAAAAAAAAAAAARQEAAAAAAABGAQAAAAAAAAAAAABGAQAAAAAAAEcBAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAPgEAAAAAAAA+AQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					187,
+					1,
+					"insert",
+					{
+						"characters": "h"
+					},
+					"AQAAAEcBAAAAAAAASAEAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAARwEAAAAAAABHAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					192,
+					1,
+					"left_delete",
+					null,
+					"AQAAACMBAAAAAAAAIwEAAAAAAAABAAAAcA",
+					"AQAAAAAAAAABAAAAJAEAAAAAAAAkAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					196,
+					1,
+					"left_delete",
+					null,
+					"AQAAACMBAAAAAAAAIwEAAAAAAAABAAAAcA",
+					"AQAAAAAAAAABAAAAJAEAAAAAAAAkAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					199,
+					1,
+					"insert",
+					{
+						"characters": "[["
+					},
+					"AgAAACMBAAAAAAAAJAEAAAAAAAAAAAAAJAEAAAAAAAAlAQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAIwEAAAAAAAAjAQAAAAAAAAAAAAAA4GdA"
+				],
+				[
+					202,
+					2,
+					"left_delete",
+					null,
+					"AgAAACQBAAAAAAAAJAEAAAAAAAABAAAAWyMBAAAAAAAAIwEAAAAAAAABAAAAWw",
+					"AQAAAAAAAAABAAAAJQEAAAAAAAAlAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					203,
+					1,
+					"insert",
+					{
+						"characters": "pp"
+					},
+					"AgAAACMBAAAAAAAAJAEAAAAAAAAAAAAAJAEAAAAAAAAlAQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAIwEAAAAAAAAjAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					206,
+					7,
+					"left_delete",
+					null,
+					"BwAAACABAAAAAAAAIAEAAAAAAAABAAAAch8BAAAAAAAAHwEAAAAAAAABAAAAZR4BAAAAAAAAHgEAAAAAAAABAAAAcx0BAAAAAAAAHQEAAAAAAAABAAAAdxwBAAAAAAAAHAEAAAAAAAABAAAAbxsBAAAAAAAAGwEAAAAAAAABAAAAchoBAAAAAAAAGgEAAAAAAAABAAAAQg",
+					"AQAAAAAAAAABAAAAIQEAAAAAAAAhAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					207,
+					1,
+					"insert",
+					{
+						"characters": "Listy"
+					},
+					"BQAAABoBAAAAAAAAGwEAAAAAAAAAAAAAGwEAAAAAAAAcAQAAAAAAAAAAAAAcAQAAAAAAAB0BAAAAAAAAAAAAAB0BAAAAAAAAHgEAAAAAAAAAAAAAHgEAAAAAAAAfAQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAGgEAAAAAAAAaAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					208,
+					1,
+					"left_delete",
+					null,
+					"AQAAAB4BAAAAAAAAHgEAAAAAAAABAAAAeQ",
+					"AQAAAAAAAAABAAAAHwEAAAAAAAAfAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					213,
+					1,
+					"insert",
+					{
+						"characters": "\n#include"
+					},
+					"CQAAAEYBAAAAAAAARwEAAAAAAAAAAAAARwEAAAAAAABIAQAAAAAAAAAAAABIAQAAAAAAAEkBAAAAAAAAAAAAAEkBAAAAAAAASgEAAAAAAAAAAAAASgEAAAAAAABLAQAAAAAAAAAAAABLAQAAAAAAAEwBAAAAAAAAAAAAAEwBAAAAAAAATQEAAAAAAAAAAAAATQEAAAAAAABOAQAAAAAAAAAAAABOAQAAAAAAAE8BAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAARgEAAAAAAABGAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					214,
+					1,
+					"insert",
+					{
+						"characters": " sys"
+					},
+					"BAAAAE8BAAAAAAAAUAEAAAAAAAAAAAAAUAEAAAAAAABRAQAAAAAAAAAAAABRAQAAAAAAAFIBAAAAAAAAAAAAAFIBAAAAAAAAUwEAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAATwEAAAAAAABPAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					215,
+					1,
+					"insert",
+					{
+						"characters": ".h"
+					},
+					"AgAAAFMBAAAAAAAAVAEAAAAAAAAAAAAAVAEAAAAAAABVAQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAUwEAAAAAAABTAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					218,
+					1,
+					"insert",
+					{
+						"characters": "\"settings/"
+					},
+					"CgAAAFABAAAAAAAAUQEAAAAAAAAAAAAAUQEAAAAAAABSAQAAAAAAAAAAAABSAQAAAAAAAFMBAAAAAAAAAAAAAFMBAAAAAAAAVAEAAAAAAAAAAAAAVAEAAAAAAABVAQAAAAAAAAAAAABVAQAAAAAAAFYBAAAAAAAAAAAAAFYBAAAAAAAAVwEAAAAAAAAAAAAAVwEAAAAAAABYAQAAAAAAAAAAAABYAQAAAAAAAFkBAAAAAAAAAAAAAFkBAAAAAAAAWgEAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAUAEAAAAAAABQAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					219,
+					1,
+					"insert",
+					{
+						"characters": "menus/"
+					},
+					"BgAAAFoBAAAAAAAAWwEAAAAAAAAAAAAAWwEAAAAAAABcAQAAAAAAAAAAAABcAQAAAAAAAF0BAAAAAAAAAAAAAF0BAAAAAAAAXgEAAAAAAAAAAAAAXgEAAAAAAABfAQAAAAAAAAAAAABfAQAAAAAAAGABAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAWgEAAAAAAABaAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					221,
+					1,
+					"insert",
+					{
+						"characters": "\""
+					},
+					"AQAAAGUBAAAAAAAAZgEAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAZQEAAAAAAABlAQAAAAAAAP///////+9/"
+				],
+				[
+					226,
+					15,
+					"left_delete",
+					null,
+					"DwAAAF8BAAAAAAAAXwEAAAAAAAABAAAAL14BAAAAAAAAXgEAAAAAAAABAAAAc10BAAAAAAAAXQEAAAAAAAABAAAAdVwBAAAAAAAAXAEAAAAAAAABAAAAblsBAAAAAAAAWwEAAAAAAAABAAAAZVoBAAAAAAAAWgEAAAAAAAABAAAAbVkBAAAAAAAAWQEAAAAAAAABAAAAL1gBAAAAAAAAWAEAAAAAAAABAAAAc1cBAAAAAAAAVwEAAAAAAAABAAAAZ1YBAAAAAAAAVgEAAAAAAAABAAAAblUBAAAAAAAAVQEAAAAAAAABAAAAaVQBAAAAAAAAVAEAAAAAAAABAAAAdFMBAAAAAAAAUwEAAAAAAAABAAAAdFIBAAAAAAAAUgEAAAAAAAABAAAAZVEBAAAAAAAAUQEAAAAAAAABAAAAcw",
+					"AQAAAAAAAAABAAAAYAEAAAAAAABgAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					233,
+					1,
+					"paste",
+					null,
+					"AgAAAFkBAAAAAAAAsRAAAAAAAAAAAAAAsRAAAAAAAACxEAAAAAAAAFgPAABzdGF0aWMgY29uc3QgY2hhciAqIERpc2FibGVkVGV4dCA9ICJEaXNhYmxlZCI7CgpSaWl2b2x1dGlvbk1vZE9wdGlvbnM6OlJpaXZvbHV0aW9uTW9kT3B0aW9ucyhSaWl2b2x1dGlvbk1vZFhtbCAmbSwgYm9vbCBhbGxvd1NlbGVjdCwgYm9vbCB3aWRlKQogICAgOiBTZXR0aW5nc01lbnUobS5zZWN0aW9uVGl0bGUuY19zdHIoKSwgJkd1aU9wdGlvbnMsIE1FTlVfTk9ORSksCiAgICAgIG1vZChtKSwKICAgICAgYWxsb3dTZWxlY3RBbm90aGVyKGFsbG93U2VsZWN0KSwKICAgICAgaXNXaWRlKHdpZGUpLAogICAgICBzZWxlY3RBbm90aGVyKGZhbHNlKQp7CiAgICBPcHRpb25zID0gJkd1aU9wdGlvbnM7CiAgICBTZXRPcHRpb25OYW1lcygpOwogICAgU2V0T3B0aW9uVmFsdWVzKCk7CgogICAgLy8gU2F2ZSBidXR0b24KICAgIEd1aUltYWdlRGF0YSAqYnRuT3V0bGluZSA9IFJlc291cmNlczo6R2V0SW1hZ2VEYXRhKCJidXR0b25fZGlhbG9ndWVfYm94LnBuZyIpOwogICAgc2F2ZUJ0blR4dCA9IG5ldyBHdWlUZXh0KHRyKCJTYXZlIiksIDIyLCB0aENvbG9yKCJyPTAgZz0wIGI9MCBhPTI1NSAtIHByb21wdCB3aW5kb3dzIGJ1dHRvbiB0ZXh0IGNvbG9yIikpOwogICAgc2F2ZUJ0blR4dC0+U2V0TWF4V2lkdGgoYnRuT3V0bGluZS0+R2V0V2lkdGgoKSAtIDMwKTsKICAgIHNhdmVCdG5JbWcgPSBuZXcgR3VpSW1hZ2UoYnRuT3V0bGluZSk7CiAgICB0cmlnQSA9IG5ldyBHdWlUcmlnZ2VyKCk7CiAgICB0cmlnQS0+U2V0U2ltcGxlVHJpZ2dlcigtMSwgV1BBRF9CVVRUT05fQSB8IFdQQURfQ0xBU1NJQ19CVVRUT05fQSwgUEFEX0JVVFRPTl9BKTsKICAgIHNhdmVCdG4gPSBuZXcgR3VpQnV0dG9uKHNhdmVCdG5JbWcsIHNhdmVCdG5JbWcsIDIsIDMsIDE4MCwgNDAwLCB0cmlnQSwgYnRuU291bmRPdmVyLCBidG5Tb3VuZENsaWNrMiwgMSk7CiAgICBzYXZlQnRuLT5TZXRMYWJlbChzYXZlQnRuVHh0KTsKICAgIEFwcGVuZChzYXZlQnRuKTsKCiAgICBTZXRBbGlnbm1lbnQoQUxJR05fQ0VOVFJFLCBBTElHTl9NSURETEUpOwogICAgU2V0UG9zaXRpb24oMCwgMCk7Cn0KClJpaXZvbHV0aW9uTW9kT3B0aW9uczo6flJpaXZvbHV0aW9uTW9kT3B0aW9ucygpCnsKICAgIEhhbHRHdWkoKTsKICAgIFJlbW92ZShzYXZlQnRuKTsKICAgIGRlbGV0ZSBzYXZlQnRuVHh0OwogICAgZGVsZXRlIHNhdmVCdG5JbWc7CiAgICBkZWxldGUgc2F2ZUJ0bjsKICAgIGRlbGV0ZSB0cmlnQTsKICAgIFJlc3VtZUd1aSgpOwp9Cgp2b2lkIFJpaXZvbHV0aW9uTW9kT3B0aW9uczo6U2V0T3B0aW9uTmFtZXMoKQp7CiAgICBPcHRpb25zLT5DbGVhckxpc3QoKTsKICAgIGludCBpZHggPSAwOwogICAgaWYgKGFsbG93U2VsZWN0QW5vdGhlcikKICAgICAgICBPcHRpb25zLT5TZXROYW1lKGlkeCsrLCAiJXMiLCB0cigiU2VsZWN0IEFub3RoZXIgTW9kIikpOwoKICAgIGZvciAoc2l6ZV90IGkgPSAwOyBpIDwgbW9kLm9wdGlvbnMuc2l6ZSgpOyArK2kpCiAgICAgICAgT3B0aW9ucy0+U2V0TmFtZShpZHgrKywgIiVzIiwgbW9kLm9wdGlvbnNbaV0ubmFtZS5jX3N0cigpKTsKfQoKdm9pZCBSaWl2b2x1dGlvbk1vZE9wdGlvbnM6OlNldE9wdGlvblZhbHVlcygpCnsKICAgIGludCBpZHggPSAwOwogICAgaWYgKGFsbG93U2VsZWN0QW5vdGhlcikKICAgICAgICBPcHRpb25zLT5TZXRWYWx1ZShpZHgrKywgIiIpOwoKICAgIGZvciAoc2l6ZV90IGkgPSAwOyBpIDwgbW9kLm9wdGlvbnMuc2l6ZSgpOyArK2kpCiAgICB7CiAgICAgICAgY29uc3QgUmlpdm9PcHRpb24gJm9wdCA9IG1vZC5vcHRpb25zW2ldOwogICAgICAgIGNvbnN0IHN0ZDo6c3RyaW5nICZjaG9pY2UgPSAob3B0LnNlbGVjdGVkID49IDAgJiYgb3B0LnNlbGVjdGVkIDwgKGludClvcHQuY2hvaWNlcy5zaXplKCkpCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA/IG9wdC5jaG9pY2VzW29wdC5zZWxlY3RlZF0ubmFtZQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgOiBEaXNhYmxlZFRleHQ7CgogICAgICAgIE9wdGlvbnMtPlNldFZhbHVlKGlkeCsrLCAiJXMiLCBjaG9pY2UuY19zdHIoKSk7CiAgICB9Cn0KCmJvb2wgUmlpdm9sdXRpb25Nb2RPcHRpb25zOjpTaG93KCkKewogICAgaW50IHJldCA9IC0xOwogICAgc2VsZWN0QW5vdGhlciA9IGZhbHNlOwogICAgb3B0aW9uQnJvd3Nlci0+UmVzZXRTdGF0ZSgpOwoKICAgIHdoaWxlIChyZXQgPCAwKQogICAgewogICAgICAgIFNldE9wdGlvblZhbHVlcygpOwogICAgICAgIG9wdGlvbkJyb3dzZXItPlNldE9wdGlvbkxpc3QoT3B0aW9ucyk7CgogICAgICAgIERyYXcoKTsKICAgICAgICBVcGRhdGUodXNlcklucHV0WzBdKTsKICAgICAgICB1c2xlZXAoMTAwMCk7CgogICAgICAgIGlmIChzYXZlQnRuLT5HZXRTdGF0ZSgpID09IFNUQVRFX0NMSUNLRUQpCiAgICAgICAgewogICAgICAgICAgICBpZiAoUmlpdm9sdXRpb25Nb2RzOjpTYXZlQ29uZmlnKG1vZC5yZWdpb25hbElkLCBtb2QpKQogICAgICAgICAgICAgICAgV2luZG93UHJvbXB0KHRyKCJTdWNjZXNzIiksIHRyKCJNb2QgY29uZmlndXJhdGlvbiBzYXZlZC4iKSwgdHIoIk9LIikpOwogICAgICAgICAgICBlbHNlCiAgICAgICAgICAgICAgICBXaW5kb3dQcm9tcHQodHIoIkVycm9yIiksIHRyKCJGYWlsZWQgdG8gc2F2ZSBtb2QgY29uZmlndXJhdGlvbi4iKSwgdHIoIk9LIikpOwogICAgICAgICAgICBzYXZlQnRuLT5SZXNldFN0YXRlKCk7CiAgICAgICAgfQoKICAgICAgICByZXQgPSBvcHRpb25Ccm93c2VyLT5HZXRDbGlja2VkT3B0aW9uKCk7CiAgICB9CgogICAgaW50IGlkeCA9IDA7CiAgICBpZiAoYWxsb3dTZWxlY3RBbm90aGVyICYmIHJldCA9PSBpZHgrKykKICAgIHsKICAgICAgICBzZWxlY3RBbm90aGVyID0gdHJ1ZTsKICAgICAgICByZXR1cm4gZmFsc2U7CiAgICB9CiAgICBlbHNlCiAgICB7CiAgICAgICAgLy8gTWFwIHJldCB0byBtb2Qub3B0aW9ucyBlbnRyeQogICAgICAgIHJldCAtPSBhbGxvd1NlbGVjdEFub3RoZXIgPyAxIDogMDsKICAgICAgICBpZiAocmV0IDwgMCB8fCByZXQgPj0gKGludCltb2Qub3B0aW9ucy5zaXplKCkpCiAgICAgICAgICAgIHJldHVybiB0cnVlOwoKICAgICAgICAvLyBTaG93IGNob2ljZXMgZm9yIHRoaXMgb3B0aW9uCiAgICAgICAgUmlpdm9PcHRpb24gJm9wdCA9IG1vZC5vcHRpb25zW3JldF07CiAgICAgICAgc3RkOjp2ZWN0b3I8Y29uc3QgY2hhciAqPiBjaG9pY2VzOwogICAgICAgIGZvciAoYXV0byAmY2ggOiBvcHQuY2hvaWNlcykKICAgICAgICAgICAgY2hvaWNlcy5wdXNoX2JhY2soY2gubmFtZS5jX3N0cigpKTsKCiAgICAgICAgLy8gVXNlIHRoZSBjbGFzc2ljIGJ1dHRvbiBwcm9tcHQgc3R5bGUgZm9yIG9wdGlvbiBzZWxlY3Rpb24KICAgICAgICBpbnQgc2VsID0gV2luZG93UHJvbXB0KG9wdC5uYW1lLmNfc3RyKCksIHRyKCJTZWxlY3QgYW4gb3B0aW9uOiIpLCBjaG9pY2VzWzBdLCAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNob2ljZXMuc2l6ZSgpID4gMSA/IGNob2ljZXNbMV0gOiBOVUxMLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY2hvaWNlcy5zaXplKCkgPiAyID8gY2hvaWNlc1syXSA6IE5VTEwsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjaG9pY2VzLnNpemUoKSA+IDMgPyBjaG9pY2VzWzNdIDogTlVMTCwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG9wdC5zZWxlY3RlZCk7CiAgICAgICAgaWYgKHNlbCA+PSAwKQogICAgICAgICAgICBvcHQuc2VsZWN0ZWQgPSBzZWw7CgogICAgICAgIHJldHVybiBTaG93KCk7IC8vIFJlY3Vyc2UgZm9yIGZ1cnRoZXIgZWRpdHMKICAgIH0KfQoKYm9vbCBSaWl2b2x1dGlvbk1vZE9wdGlvbnM6OndhbnRzU2VsZWN0QW5vdGhlcigpIGNvbnN0CnsKICAgIHJldHVybiBzZWxlY3RBbm90aGVyOwp9",
+					"AQAAAAAAAAABAAAAsRAAAAAAAABZAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					260,
+					2,
+					"left_delete",
+					null,
+					"AgAAAEwFAAAAAAAATAUAAAAAAAABAAAARUsFAAAAAAAASwUAAAAAAAABAAAAUg",
+					"AQAAAAAAAAABAAAATQUAAAAAAABNBQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					261,
+					1,
+					"insert",
+					{
+						"characters": "ER"
+					},
+					"AgAAAEsFAAAAAAAATAUAAAAAAAAAAAAATAUAAAAAAABNBQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAASwUAAAAAAABLBQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					266,
+					1,
+					"insert",
+					{
+						"characters": "trz9"
+					},
+					"BAAAAPwBAAAAAAAA/QEAAAAAAAAAAAAA/QEAAAAAAAD+AQAAAAAAAAAAAAD+AQAAAAAAAP8BAAAAAAAAAAAAAP8BAAAAAAAAAAIAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA/AEAAAAAAAD8AQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					301,
+					2,
+					"left_delete",
+					null,
+					"AgAAAP8BAAAAAAAA/wEAAAAAAAABAAAAOf4BAAAAAAAA/gEAAAAAAAABAAAAeg",
+					"AQAAAAAAAAABAAAAAAIAAAAAAAAAAgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					302,
+					1,
+					"insert",
+					{
+						"characters": "("
+					},
+					"AQAAAP4BAAAAAAAA/wEAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA/gEAAAAAAAD+AQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					305,
+					1,
+					"insert",
+					{
+						"characters": ")"
+					},
+					"AQAAABUCAAAAAAAAFgIAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAFQIAAAAAAAAVAgAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Aziz/Downloads/usbloadergx-enhanced/source/usbloader/GameBooter.cpp",
+		"/C/Users/Aziz/Downloads/usbloadergx-enhanced/source/Riivolution/RiivolutionMods.hpp",
+		"/C/Users/Aziz/Downloads/usbloadergx-enhanced/source/Riivolution/RiivolutionMods.cpp",
+		"/C/Users/Aziz/Downloads/usbloadergx-enhanced/source/Riivolution/RiivolutionModPicker.hpp",
+		"/C/Users/Aziz/Downloads/usbloadergx-enhanced/source/Riivolution/RiivolutionModPicker.cpp",
+		"/C/Users/Aziz/Downloads/usbloadergx-enhanced/source/settings/menus/GameLoadSM.hpp",
+		"/C/Users/Aziz/Downloads/usbloadergx-enhanced/source/settings/menus/GameLoadSM.cpp",
+		"/C/Users/Aziz/Downloads/usbloadergx-enhanced/source/Riivolution/RiivolutionModOptions.hpp",
+		"/C/Users/Aziz/Downloads/usbloadergx-enhanced/source/settings/menus/GameSettingsMenu.cpp",
+		"/C/Users/Aziz/Downloads/usbloadergx-enhanced/source/settings/menus/SettingsMenu.cpp",
+		"/C/Users/Aziz/Downloads/usbloadergx-enhanced/source/settings/menus/GlobalSettings.cpp",
+		"/C/Users/Aziz/Downloads/usbloadergx-enhanced/source/Riivolution/RiivolutionModsOptions.hpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/usbloader/fstfile.h",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/usbloader/GameBooter.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/usbloader/GameBooter.hpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/utils/sjis.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/menu/GameBrowseMenu.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/deepseek/D/Files/usbloadergx/source/utils/sjis.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/utils/MemoryUtil.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/utils/MemoryUtil.h",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/xml/pugixml.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/Riivolution/rvl_wdvd.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/usbloader/wdvd.c",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/Riivolution/fwrite.h",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/Riivolution/fwrite.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/Riivolution/files.c",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/Riivolution/launcher.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/Riivolution/haxx.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/Riivolution/haxx.h",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/Riivolution/RiivolutionMods.hpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/Riivolution/RiivolutionMods.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/Riivolution/riivolution.h",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/Riivolution/riivolution.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/Riivolution/riivolution_config.h",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/Riivolution/rvl_wdvd.h",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/libxml++/exceptions/exception.h",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/Riivolution/riivolution_config.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/usbloader/wdvd.h",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/usbloader/RiivolutionMods.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/usbloader/RiivolutionMods.hpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/usbloader/wbfs.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/patches/patchcode.c",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/GUI/gui.h",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/FileOperations/fileops.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/FileOperations/fileops.h",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/settings/menus/FeatureSettingsMenu.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/settings/menus/RiivolutionModsSM.hpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/settings/menus/RiivolutionModsSM.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/settings/CSettings.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/GUI/OptionList.hpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/GUI/OptionList.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/settings/menus/SettingsMenu.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/settings/menus/GameLoadSM.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/settings/menus/GameLoadSM.hpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/settings/menus/GameSettingsMenu.cpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/settings/menus/GameSettingsMenu.hpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/Base/Files/rawksd/launcher/include/wdvd.h",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/Base/Files/rawksd/launcher/dollz3/dol2elf.c",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/rawksd/rawksd/kamek/files.c",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/usbloader/RiivolutionModsMenu.hpp",
+		"/C/Users/Aziz/Downloads/USBLOADERGXX/usbloadergx/source/usbloader/RiivolutionModsMenu.cpp",
+		"/C/Users/Aziz/Downloads/dd/usbloadergx/source/utils/sjis.cpp",
+		"/C/Users/Aziz/Downloads/sjis.cpp"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"SetOptionList",
+			"optionBr",
+			"option",
+			"SetOptionList",
+			"OptionList",
+			"GuiOptions",
+			"Options",
+			"SetOptio",
+			"savebtn",
+			"Save",
+			"Changes",
+			"changes",
+			"main",
+			"mainWin",
+			"back",
+			"\"Back\"",
+			"Back\"",
+			"Back",
+			"GetValue",
+			"Back",
+			"Set",
+			"SetPosition",
+			"optionbrow",
+			"option",
+			"rotate",
+			"scroll",
+			"oss",
+			"SaveConfigXML",
+			"Apply",
+			"riivol",
+			"Setfile",
+			"Set",
+			"SETFILE",
+			"WDVD",
+			"ApplyRi",
+			"fs",
+			"gamepatches",
+			"BootGame",
+			"SetupDisc",
+			"SetupDosc",
+			"BootGame",
+			"RVL",
+			"GetModRVL",
+			"GetMod",
+			"SearchFile",
+			"WDVD",
+			"GameBooter",
+			"filepatches",
+			"onoption",
+			"\"HA",
+			"HA",
+			"HACA",
+			"HAKA",
+			"HA",
+			"system",
+			"piracy",
+			"patches",
+			"onoption",
+			"NS",
+			"Riivolution",
+			"Clear",
+			"ClearPrev",
+			"ClearPreb",
+			"Option",
+			"Clear",
+			"getgamecfg",
+			"getgameconfig",
+			"InitGUI",
+			"optionbrowser",
+			"save",
+			"Back",
+			"Save",
+			"back",
+			"button",
+			"gui",
+			"SetMod",
+			"modfolder",
+			"modFolder",
+			"modpath",
+			"left",
+			"minu",
+			"arr",
+			"optionlist",
+			"lixml",
+			"sd",
+			"create",
+			"gameloadsm",
+			"gui",
+			"guielement",
+			"modsele",
+			"load",
+			"Parse",
+			"loadxml",
+			"XMLloader",
+			"SETUP",
+			"SETU[",
+			"xmlselection",
+			"filepath",
+			"filecount",
+			"fiilecount",
+			"getf",
+			"triggers",
+			"trigg",
+			"trig",
+			"triga",
+			"trigger",
+			"btn",
+			"button",
+			"trigger",
+			"triggera",
+			"triggers",
+			"trigger",
+			"triggera",
+			"modloade",
+			"loadconfig",
+			"riivolutionmodsmenu",
+			"BACKBTN",
+			"usb",
+			"PathExists",
+			"Checkstack",
+			"Checkstackusa",
+			"alloc",
+			"logmess",
+			"Alloc",
+			"All",
+			"LogMess",
+			"apply",
+			"applypa"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "source/Riivolution/RiivolutionModOptions.cpp",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4277,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2548,
+								2548
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1050.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "USBLOADERGX.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

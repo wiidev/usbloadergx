@@ -36,6 +36,17 @@
 #include "GameLoadSM.hpp"
 #include "GCGameLoadSM.hpp"
 #include "UninstallSM.hpp"
+#include "Riivolution/RiivolutionMods.hpp"
+#include "Riivolution/RiivolutionModsSM.hpp"
+
+static void SDLog(const char* msg)
+{
+    FILE* f = fopen("sd:/usbloadergx_riivo_debug.txt", "a");
+    if (f) {
+        fprintf(f, "%s\n", msg);
+        fclose(f);
+    }
+}
 
 GameSettingsMenu::GameSettingsMenu(GameBrowseMenu *parent, struct discHdr * header)
 	: FlyingButtonsMenu(GameTitles.GetTitle(header)), browserMenu(parent)
@@ -72,6 +83,11 @@ void GameSettingsMenu::SetupMainButtons()
 	SetMainButton(pos++, tr( "Game Load" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Ocarina" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Categories" ), MainButtonImgData, MainButtonImgOverData);
+	if(		DiscHeader->type == TYPE_GAME_WII_IMG
+		||	DiscHeader->type == TYPE_GAME_WII_DISC)
+	{
+		SetMainButton(pos++, tr( "Riivolution" ), MainButtonImgData, MainButtonImgOverData);
+	}
 	if(		DiscHeader->type == TYPE_GAME_WII_IMG
 		||	DiscHeader->type == TYPE_GAME_WII_DISC
 		||	DiscHeader->type == TYPE_GAME_NANDCHAN)
@@ -147,6 +163,58 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 		Append(backBtn);
 		ShowMenu();
 	}
+
+	//! Riivolution Mods
+	 else if (menuNr == Idx++)
+    {
+        SDLog("Riivolution: Entered menu handler.");
+
+        std::string discId((char*)DiscHeader->id, 6);
+        std::string shortId = discId.substr(0, 3);
+
+        SDLog(("Riivolution: Scanning for XMLs, shortId=" + shortId).c_str());
+        auto mods = RiivolutionMods::ScanForXmls(shortId);
+
+        if (mods.empty()) {
+            SDLog("Riivolution: No XMLs found, exiting.");
+            WindowPrompt(tr("No Riivolution mods found for this game."), nullptr, tr("OK"));
+            return;
+        }
+
+        SDLog(("Riivolution: Found " + std::to_string(mods.size()) + " XML(s).").c_str());
+
+        bool isWide = (Settings.widescreen);
+
+        HideMenu();
+        ResumeGui();
+
+        // Transfer GUI control to RiivolutionModsSM
+        SDLog("Riivolution: Opening RiivolutionModsSM.");
+
+        CurrentMenu = new RiivolutionModsSM(mods, isWide);
+        Append(CurrentMenu);
+
+        // You may want to loop until menu returns (like GameLoadSM)
+        int riivoResult = MENU_NONE;
+        while ((riivoResult = CurrentMenu->GetMenu()) == MENU_NONE) {
+            usleep(10000);
+        }
+        SDLog("Riivolution: Exited RiivolutionModsSM menu.");
+
+        // Save config for last selected mod if needed
+        RiivolutionModsSM* riivoMenu = static_cast<RiivolutionModsSM*>(CurrentMenu);
+        if (riivoMenu && !riivoMenu->wantsSelectAnother() && riivoMenu->modList.size() > 0) {
+            SDLog("Riivolution: Saving config for last selected mod.");
+            RiivolutionMods::SaveConfig(riivoMenu->modList[riivoMenu->currentModIdx].regionalId,
+                                        riivoMenu->modList[riivoMenu->currentModIdx]);
+        }
+
+        // Clean up menu
+        Remove(CurrentMenu);
+        delete CurrentMenu;
+        CurrentMenu = nullptr;
+        SDLog("Riivolution: Cleaned up menu and finished.");
+    }
 
 	//! Extract Save to EmuNAND
 	else if(	(DiscHeader->type == TYPE_GAME_WII_IMG

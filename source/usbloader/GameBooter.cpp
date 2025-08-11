@@ -64,6 +64,10 @@
 #include "wad/nandtitle.h"
 #include "settings/GameTitles.h"
 #include "SystemMenu/SystemMenuResources.h"
+#include "Riivolution/RiivolutionMods.hpp"
+#include "Riivolution/RiivolutionPatcher.hpp"
+#include "Riivolution/rawksd/riivolution_config.h"
+#include "Riivolution/rawksd/riivolution.h"
 
 /* GCC 11 false positives */
 #if __GNUC__ > 10
@@ -330,7 +334,7 @@ int GameBooter::BootGame(struct discHdr *gameHdr, const s8 useOcarina)
 		NandEmuMode = game_cfg->NandEmuMode == INHERIT ? Settings.NandEmuChanMode : game_cfg->NandEmuMode;
 		NandEmuPath = game_cfg->NandEmuPath.size() == 0 ? Settings.NandEmuChanPath : game_cfg->NandEmuPath.c_str();
 	}
-	
+
 	// boot neek for Wii games and EmuNAND channels only
 	if (NandEmuMode == EMUNAND_NEEK && (gameHeader.type == TYPE_GAME_WII_IMG || gameHeader.type == TYPE_GAME_EMUNANDCHAN))
 		return BootNeek(&gameHeader);

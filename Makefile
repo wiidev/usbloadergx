@@ -49,6 +49,9 @@ SOURCES		:=	source \
 				source/utils \
 				source/utils/minizip \
 				source/usbloader/wbfs \
+				source/Riivolution \
+				source/Riivolution/rawksd \
+				source/Riivolution/libxml++ \
 				source/cache
 DATA		:=	data/images \
 				data/fonts \
