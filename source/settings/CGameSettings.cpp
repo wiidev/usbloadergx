@@ -49,6 +49,7 @@ GameCFG * CGameSettings::GetGameCFG(const char * id)
 	if(!id)
 	{
 		DefaultConfig.id[0] = '\0';
+		DefaultConfig.GameTitle.clear();
 		return &DefaultConfig;
 	}
 
@@ -59,6 +60,8 @@ GameCFG * CGameSettings::GetGameCFG(const char * id)
 	}
 
 	memcpy(DefaultConfig.id, id, 6);
+	// Ensure the default config doesn't carry over a title from a previous lookup
+	DefaultConfig.GameTitle.clear();
 
 	return &DefaultConfig;
 }

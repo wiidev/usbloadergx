@@ -126,7 +126,12 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 			GameCFG * game = GameSettings.GetGameCFG(DiscHeader->id);
 			if(game)
 			{
-				game->GameTitle = entered;
+				// Create a copy to ensure we don't modify the DefaultConfig pointer directly
+				// and to ensure we add the new config to the persistent list.
+				GameCFG GameConfig = *game;
+				GameConfig.GameTitle = entered;
+				
+				GameSettings.AddGame(GameConfig);
 				GameSettings.Save();
 				
 				// Update the title in memory immediately so it reflects in the GUI
