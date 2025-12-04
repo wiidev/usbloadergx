@@ -81,6 +81,13 @@ typedef struct _GameCFG
 	short Locked;
 	std::string GameTitle;
 
+	_GameCFG() {}
+
+	_GameCFG(const struct _GameCFG &game)
+	{
+		*this = game;
+	}
+
 	void operator=(const struct _GameCFG &game)
 	{
 		memcpy(this->id, game.id, sizeof(game.id));
