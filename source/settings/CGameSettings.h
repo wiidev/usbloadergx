@@ -79,6 +79,7 @@ typedef struct _GameCFG
 	short PrivateServer;
 	std::string CustomAddress;
 	short Locked;
+	std::string GameTitle;
 
 	void operator=(const struct _GameCFG &game)
 	{
@@ -152,6 +153,7 @@ typedef struct _GameCFG
 		this->PrivateServer = game.PrivateServer;
 		this->CustomAddress = game.CustomAddress;
 		this->Locked = game.Locked;
+		this->GameTitle = game.GameTitle;
 	}
 } GameCFG;
 
