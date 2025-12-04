@@ -141,6 +141,9 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 				MenuTitle = entered;
 				if(titleTxt)
 					titleTxt->SetText(entered);
+
+				// Sort the list so the new name moves to the correct alphabetical position
+				gameList.SortList();
 				
 				// Refresh browser list on exit
 				browserMenu->ReloadBrowser();
