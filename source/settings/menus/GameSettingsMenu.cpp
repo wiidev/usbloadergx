@@ -70,6 +70,7 @@ void GameSettingsMenu::SetupMainButtons()
 	int pos = 0;
 
 	SetMainButton(pos++, tr( "Game Load" ), MainButtonImgData, MainButtonImgOverData);
+	SetMainButton(pos++, tr( "Rename Game" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Ocarina" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Categories" ), MainButtonImgData, MainButtonImgOverData);
 	if(		DiscHeader->type == TYPE_GAME_WII_IMG
@@ -105,6 +106,49 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 			CurrentMenu = new GameLoadSM(DiscHeader);
 		}
 		Append(CurrentMenu);
+	}
+
+	//! Rename Game
+	else if(menuNr == Idx++)
+	{
+		if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_GAME_SETTINGS))
+		{
+			WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+			return;
+		}
+
+		char entered[100];
+		snprintf(entered, sizeof(entered), "%s", GameTitles.GetTitle(DiscHeader));
+		
+		int ret = OnScreenKeyboard(entered, sizeof(entered), 0);
+		if(ret)
+		{
+			GameCFG * game = GameSettings.GetGameCFG(DiscHeader->id);
+			if(game)
+			{
+				// Create a copy to ensure we don't modify the DefaultConfig pointer directly
+				// and to ensure we add the new config to the persistent list.
+				GameCFG GameConfig = *game;
+				GameConfig.GameTitle = entered;
+				
+				GameSettings.AddGame(GameConfig);
+				GameSettings.Save();
+				
+				// Update the title in memory immediately so it reflects in the GUI
+				GameTitles.SetGameTitle((const char *)DiscHeader->id, entered, TITLETYPE_MANUAL_OVERRIDE, "NULL", -1, 1);
+				
+				// Update the menu header
+				MenuTitle = entered;
+				if(titleTxt)
+					titleTxt->SetText(entered);
+
+				// Sort the list so the new name moves to the correct alphabetical position
+				gameList.SortList();
+				
+				// Refresh browser list on exit
+				browserMenu->ReloadBrowser();
+			}
+		}
 	}
 
 	//! Ocarina

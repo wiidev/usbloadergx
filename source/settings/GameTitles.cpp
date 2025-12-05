@@ -4,6 +4,7 @@
 
 #include "GameTitles.h"
 #include "CSettings.h"
+#include "CGameSettings.h"
 #include "usbloader/GameList.h"
 #include "Channels/channels.h"
 #include "xml/GameTDB.hpp"
@@ -58,6 +59,11 @@ const char *CGameTitles::GetTitle(const char *id, bool allow_access) const
 	if (!id)
 		return "";
 
+	// Check manual override from CGameSettings first
+	GameCFG *cfg = GameSettings.GetGameCFG(id);
+	if(cfg && !cfg->GameTitle.empty())
+		return cfg->GameTitle.c_str();
+
 	auto game = std::lower_bound(TitleList.begin(), TitleList.end(), id, [](const GameTitle &gt, const char *gameid)
 								 { return (strncasecmp(gt.GameID, gameid, 6) < 0); });
 	if (game != TitleList.end())
@@ -82,6 +88,11 @@ const char *CGameTitles::GetTitle(const struct discHdr *header) const
 {
 	if (!header)
 		return "";
+
+	// Check manual override from CGameSettings first
+	GameCFG *cfg = GameSettings.GetGameCFG(header->id);
+	if(cfg && !cfg->GameTitle.empty())
+		return cfg->GameTitle.c_str();
 
 	auto game = std::lower_bound(TitleList.begin(), TitleList.end(), (const char *)header->id, [](const GameTitle &gt, const char *gameid)
 								 { return (strncasecmp(gt.GameID, gameid, 6) < 0); });
