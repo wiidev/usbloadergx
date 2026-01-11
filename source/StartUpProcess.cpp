@@ -32,7 +32,6 @@ extern bool isWiiVC; // in sys.cpp
 
 StartUpProcess::StartUpProcess()
 {
-	
 	background = new GuiImage(screenwidth, screenheight, (GXColor){0, 0, 0, 255});
 
 	GXImageData = Resources::GetImageData("gxlogo.png");
