@@ -32,27 +32,12 @@ extern bool isWiiVC; // in sys.cpp
 
 StartUpProcess::StartUpProcess()
 {
-	//! Load default font for the next text outputs
-	Theme::LoadFont("");
-
 	background = new GuiImage(screenwidth, screenheight, (GXColor){0, 0, 0, 255});
 
 	GXImageData = Resources::GetImageData("gxlogo.png");
 	GXImage = new GuiImage(GXImageData);
 	GXImage->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
 	GXImage->SetPosition(screenwidth / 2, screenheight / 2 - 50);
-
-	titleTxt = new GuiText("Loading...", 24, (GXColor){255, 255, 255, 255});
-	titleTxt->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
-	titleTxt->SetPosition(screenwidth / 2, screenheight / 2 + 30);
-
-	messageTxt = new GuiText(" ", 22, (GXColor){255, 255, 255, 255});
-	messageTxt->SetAlignment(ALIGN_CENTER, ALIGN_MIDDLE);
-	messageTxt->SetPosition(screenwidth / 2, screenheight / 2 + 60);
-
-	versionTxt = new GuiText(" ", 18, (GXColor){255, 255, 255, 255});
-	versionTxt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-	versionTxt->SetPosition(23, screenheight - 20);
 
 // Please don't release unofficial builds w/o tagging them as such
 #if defined(FULLCHANNEL)
