@@ -119,6 +119,10 @@ void USBStorage2_Deinit()
 		MEM2_free(mem2_ptr);
 		mem2_ptr = NULL;
 	}
+	if (usb2_port > 0)
+	{
+		usb2_port = 0;
+	}
 }
 
 s32 USBStorage2_SetPort(u32 port)

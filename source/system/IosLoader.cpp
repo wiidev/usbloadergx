@@ -174,6 +174,7 @@ s32 IosLoader::LoadGameCios(s32 ios)
 	WBFS_CloseAll();
 	WDVD_Close();
 	DeviceHandler::Instance()->UnMountSD();
+	DeviceHandler::Instance()->UnMountAllUSB();
 	DeviceHandler::DestroyInstance();
 	USBStorage2_Deinit();
 
