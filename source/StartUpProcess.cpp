@@ -27,6 +27,7 @@
 #include "sys.h"
 #include "version.h"
 #include "settings/meta.h"
+#include "usbloader/GameList.h"
 
 extern bool isWiiVC; // in sys.cpp
 
@@ -360,6 +361,7 @@ int StartUpProcess::Execute(bool quickGameBoot, bool isBadBoot)
 
 	SetTextf("Loading config files\n");
 	gprintf("\tLoading config...%s\n", Settings.Load() ? "done" : "failed");
+	gprintf("\tLoading duplicate ID map...%s\n", LoadDuplicateIDMap() ? "done" : "failed");
 	gprintf("\tLoading language...%s\n", Settings.LoadLanguage(Settings.language_path, CONSOLE_DEFAULT) ? "done" : "failed");
 	gprintf("\tLoading game settings...%s\n", GameSettings.Load(Settings.ConfigPath) ? "done" : "failed");
 	gprintf("\tLoading game statistics...%s\n", GameStatistics.Load(Settings.ConfigPath) ? "done" : "failed");

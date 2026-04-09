@@ -40,6 +40,12 @@
 #include "Channels/channels.h"
 #include "cache/cache.hpp"
 
+#include <map>
+#include <fstream>
+#include <iomanip>
+
+std::map<std::string, std::string> DuplicateIDMap;
+
 enum
 {
 	DISABLED,
@@ -488,4 +494,59 @@ bool GameList::PlayersSortCallback(const struct discHdr *a, const struct discHdr
 		return NameSortCallback(a, b);
 
 	return (count1 > count2);
+}
+
+void GameList::DuplicateGame(const struct discHdr *originalGame, const char *newGameID)
+{
+    if (!originalGame || !newGameID || strlen(newGameID) != 6)
+        return;
+
+    // copy original ID before any vector operations
+    char originalID[7] = {0};
+    memcpy(originalID, originalGame->id, 6);
+
+    struct discHdr newGame = *originalGame;
+    memset(newGame.id, 0, sizeof(newGame.id));
+    memcpy(newGame.id, newGameID, 6);
+
+    FullGameList.push_back(newGame);
+    GamePartitionList.push_back(GamePartitionList[GetPartitionNumber((const u8*)originalID)]);
+
+    DuplicateIDMap[std::string(newGameID, 6)] = std::string(originalID, 6);
+
+    SaveGameHeaderCache(FullGameList, GamePartitionList);
+    FilterList();
+
+    SaveDuplicateIDMap();
+}
+
+void SaveDuplicateIDMap(const char *configPath) {
+    char path[300];
+    if (configPath)
+        snprintf(path, sizeof(path), "%sduplicate_ids.cfg", configPath);
+    else
+        snprintf(path, sizeof(path), "%sduplicate_ids.cfg", Settings.ConfigPath);
+
+    std::ofstream out(path);
+    for (const auto& pair : DuplicateIDMap) {
+        out << pair.first << " " << pair.second << "\n";
+    }
+}
+
+bool LoadDuplicateIDMap(const char *configPath) {
+    char path[300];
+    if (configPath)
+        snprintf(path, sizeof(path), "%sduplicate_ids.cfg", configPath);
+    else
+        snprintf(path, sizeof(path), "%sduplicate_ids.cfg", Settings.ConfigPath);
+
+    DuplicateIDMap.clear();
+    std::ifstream in(path);
+    if (!in.is_open())
+        return false;
+    std::string dup, orig;
+    while (in >> dup >> orig) {
+        DuplicateIDMap[dup] = orig;
+    }
+    return true;
 }
