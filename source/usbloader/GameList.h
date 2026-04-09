@@ -5,6 +5,7 @@
 #include "Controls/DeviceHandler.hpp"
 #include "wstring.hpp"
 #include "usbloader/disc.h"
+#include <map>
 
 class GameList
 {
@@ -38,6 +39,7 @@ class GameList
 		std::vector<struct discHdr *> &GetFilteredList(void) { return FilteredList; }
 		std::vector<struct discHdr> &GetFullGameList(void) { return FullGameList; }
 		int GetGameListHeaders(std::vector<struct discHdr *> &tmplist, short LoaderMode);
+		void DuplicateGame(const struct discHdr *originalGame, const char *newGameID);
 	protected:
 		int InternalReadList(int part);
 		void InternalFilterList(std::vector<struct discHdr *> &FullList);
@@ -57,5 +59,10 @@ class GameList
 };
 
 extern GameList gameList;
+
+extern std::map<std::string, std::string> DuplicateIDMap;
+void SaveDuplicateIDMap(const char *configPath = nullptr);
+bool LoadDuplicateIDMap(const char *configPath = nullptr);
+
 
 #endif

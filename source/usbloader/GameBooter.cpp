@@ -64,6 +64,7 @@
 #include "wad/nandtitle.h"
 #include "settings/GameTitles.h"
 #include "SystemMenu/SystemMenuResources.h"
+#include "usbloader/GameList.h"
 
 /* GCC 11 false positives */
 #if __GNUC__ > 10
@@ -280,6 +281,16 @@ int GameBooter::BootGame(struct discHdr *gameHdr, const s8 useOcarina)
 	ocarinaAnswer = useOcarina;
 	struct discHdr gameHeader;
 	memcpy(&gameHeader, gameHdr, sizeof(struct discHdr));
+
+    std::string duplicateID((char*)gameHeader.id, 6);
+    std::string originalID;
+    bool isDuplicate = false;
+    if (DuplicateIDMap.count(duplicateID)) {
+        originalID = DuplicateIDMap[duplicateID];
+        isDuplicate = true;
+        // use original ID for disc access and booting
+        memcpy(gameHeader.id, originalID.c_str(), 6);
+    }
 
 	gprintf("Boot Game: %s (%.6s)\n", gameHeader.title, gameHeader.id);
 
@@ -602,7 +613,8 @@ int GameBooter::BootGame(struct discHdr *gameHdr, const s8 useOcarina)
 	if (ocarinaChoice)
 	{
 		//! Force hooktype if not selected but Ocarina is enabled
-		if (ocarina_load_code(Settings.Cheatcodespath, gameHeader.id) > 0 && Hooktype == OFF)
+		u8 *cheatID = isDuplicate ? (u8*)duplicateID.c_str() : gameHeader.id;
+		if (ocarina_load_code(Settings.Cheatcodespath, cheatID) > 0 && Hooktype == OFF)
 			Hooktype = 1;
 	}
 

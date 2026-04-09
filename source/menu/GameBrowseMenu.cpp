@@ -414,6 +414,18 @@ GameBrowseMenu::GameBrowseMenu()
 	clockTime->SetPosition(thInt("275 - clock pos x"), thInt("335 - clock pos y"));
 	clockTime->SetFont(Resources::GetFile("clock.ttf"), Resources::GetFileSize("clock.ttf"));
 
+	btnDuplicateGame = Resources::GetImageData("duplicate.png");
+	btnDuplicateGameOver = Resources::GetImageData("duplicate_hover.png");
+
+	duplicateGameBtnTT = new GuiTooltip(tr("Duplicate Game with New ID"));
+	duplicateGameBtnImg = new GuiImage(btnDuplicateGame);
+	duplicateGameBtnImg->SetScale(0.8f);
+	duplicateGameBtnImgOver = new GuiImage(btnDuplicateGameOver);
+	duplicateGameBtnImgOver->SetScale(0.8f);
+	duplicateGameBtn = new GuiButton(duplicateGameBtnImg, duplicateGameBtnImgOver, ALIGN_LEFT, ALIGN_TOP,
+									thInt("160 - duplicate game btn pos x"), thInt("290 - duplicate game btn pos y"),
+									trigA, btnSoundOver, btnSoundClick2, 1, duplicateGameBtnTT, 65, -30, 1, 5);
+
 	ToolBar.push_back(favoriteBtn);
 	ToolBar.push_back(searchBtn);
 	ToolBar.push_back(sortBtn);
@@ -599,6 +611,13 @@ GameBrowseMenu::~GameBrowseMenu()
 	delete loaderModeBtnTT;
 	delete homebrewBtnTT;
 	delete listCoverBtnTT;
+
+	delete btnDuplicateGame;
+	delete btnDuplicateGameOver;
+	delete duplicateGameBtnTT;
+	delete duplicateGameBtnImg;
+	delete duplicateGameBtnImgOver;
+	delete duplicateGameBtn;
 
 	delete gameBrowser;
 	mainWindow->Remove(searchBar);
@@ -877,6 +896,8 @@ void GameBrowseMenu::ReloadBrowser(bool firstRun)
 				UpdateGameInfoText(gameList[SelectedGame]);
 			}
 		}
+
+		Append(duplicateGameBtn);
 	}
 	else if (Settings.gameDisplay == GRID_MODE)
 	{
@@ -1747,6 +1768,40 @@ void GameBrowseMenu::CheckDiscSlotUpdate()
 			dvdBtn->SetImage(dvdBtnImg_g);
 
 		DiscDriveCoverOld = DiscDriveCover;
+	}
+
+	if (duplicateGameBtn->GetState() == STATE_CLICKED)
+	{
+		duplicateGameBtn->ResetState();
+
+		int selectedGame = GetSelectedGame();
+		if (selectedGame >= 0 && selectedGame < (s32)gameList.size())
+		{
+			struct discHdr *header = gameList[selectedGame];
+			char newGameID[7] = {0};
+
+			// fill the current game ID
+			snprintf(newGameID, sizeof(newGameID), "%s", (char *)header->id);
+
+			int result = OnScreenKeyboard(newGameID, sizeof(newGameID), 0);
+			if (result == 1)
+			{
+				if (strlen(newGameID) == 6)
+				{
+					gameList.DuplicateGame(header, newGameID);
+					WindowPrompt(tr("Success"), tr("Game duplicated with new Game ID."), tr("OK"));
+					ReloadBrowser();
+				}
+				else
+				{
+					WindowPrompt(tr("Error"), tr("Game ID must be exactly 6 characters."), tr("OK"));
+				}
+			}
+		}
+		else
+		{
+			WindowPrompt(tr("Error"), tr("No game selected."), tr("OK"));
+		}
 	}
 }
 

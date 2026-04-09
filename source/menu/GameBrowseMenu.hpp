@@ -191,6 +191,13 @@ class GameBrowseMenu : public GuiWindow
 		GuiTooltip * loaderModeBtnTT;
 		GuiTooltip * homebrewBtnTT;
 		GuiTooltip * listCoverBtnTT;
+
+		GuiImageData *btnDuplicateGame;
+		GuiImageData *btnDuplicateGameOver;
+		GuiTooltip *duplicateGameBtnTT;
+		GuiImage *duplicateGameBtnImg;
+		GuiImage *duplicateGameBtnImgOver;
+		GuiButton *duplicateGameBtn;
 };
 
 #endif

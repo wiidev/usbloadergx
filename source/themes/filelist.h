@@ -1,7 +1,7 @@
 /****************************************************************************
  * USB Loader GX resource files.
  * This file is generated automatically.
- * Includes 208 files.
+ * Includes 210 files.
  *
  * NOTE:
  * Any manual modification of this file will be overwriten by the generation.
@@ -64,6 +64,8 @@
 #include "dialogue_box_startgame_png.h"
 #include "drums_png.h"
 #include "drumsR_png.h"
+#include "duplicate_png.h"
+#include "duplicate_hover_png.h"
 #include "dvd_png.h"
 #include "dvd_gray_png.h"
 #include "esrb_ao_png.h"
@@ -276,6 +278,8 @@ RecourceFile Resources::RecourceFiles[] =
 	{"dialogue_box_startgame.png", dialogue_box_startgame_png, dialogue_box_startgame_png_size, NULL, 0},
 	{"drums.png", drums_png, drums_png_size, NULL, 0},
 	{"drumsR.png", drumsR_png, drumsR_png_size, NULL, 0},
+	{"duplicate.png", duplicate_png, duplicate_png_size, NULL, 0},
+	{"duplicate_hover.png", duplicate_hover_png, duplicate_hover_png_size, NULL, 0},
 	{"dvd.png", dvd_png, dvd_png_size, NULL, 0},
 	{"dvd_gray.png", dvd_gray_png, dvd_gray_png_size, NULL, 0},
 	{"esrb_ao.png", esrb_ao_png, esrb_ao_png_size, NULL, 0},
