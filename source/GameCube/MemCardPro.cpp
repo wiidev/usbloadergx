@@ -41,7 +41,7 @@ s32 MCP_GetDeviceID(s32 chan, u32 *id)
 	u8 cmd[2];
 
 	if (!EXI_Lock(chan, EXI_DEVICE_0, NULL)) return MCP_RESULT_BUSY;
-	if (!EXI_Select(chan, EXI_DEVICE_0, EXI_SPEED16MHZ)) {
+	if (!EXI_Select(chan, EXI_DEVICE_0, EXI_SPEED1MHZ)) {
 		EXI_Unlock(chan);
 		return MCP_RESULT_NOCARD;
 	}

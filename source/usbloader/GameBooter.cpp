@@ -118,13 +118,7 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 	// MIOS or Wiigator cMIOS
 	if (gameHdr->type == TYPE_GAME_GC_DISC)
 	{
-		// Send GameID
-		int MemCardProGameID = game_cfg->MemCardProGameID == INHERIT ? Settings.MemCardProGameID : game_cfg->MemCardProGameID;
-		if (MemCardProGameID == MEMCARDPRO_GAMEID_ON_FULL || MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT)
-		{
-			bool shortID = (MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT);
-			gameID_early_set(gameHdr, shortID);
-		}
+		SendGameID(gameHdr);
 
 		ExitApp();
 		gprintf("\nLoading BC for GameCube");
@@ -279,6 +273,18 @@ void GameBooter::ShutDownDevices(int gameUSBPort)
 	USBStorage2_Deinit();
 	if (!Settings.SDMode)
 		USB_Deinitialize();
+}
+
+void GameBooter::SendGameID(struct discHdr *gameHdr)
+{
+	GameCFG *game_cfg = GameSettings.GetGameCFG(gameHdr->id);
+
+	int MemCardProGameID = game_cfg->MemCardProGameID == INHERIT ? Settings.MemCardProGameID : game_cfg->MemCardProGameID;
+	if (MemCardProGameID == MEMCARDPRO_GAMEID_ON_FULL || MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT)
+	{
+		bool shortID = (MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT);
+		gameID_early_set(gameHdr, shortID);
+	}
 }
 
 int GameBooter::BootGame(struct discHdr *gameHdr, const s8 useOcarina)
@@ -954,13 +960,7 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		snprintf(gamePath + strlen(gamePath), sizeof(gamePath) - strlen(gamePath), "/disc2.iso");
 	}
 
-	// Send GameID
-	int MemCardProGameID = game_cfg->MemCardProGameID == INHERIT ? Settings.MemCardProGameID : game_cfg->MemCardProGameID;
-	if (MemCardProGameID == MEMCARDPRO_GAMEID_ON_FULL || MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT)
-	{
-		bool shortID = (MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT);
-		gameID_early_set(gameHdr, shortID);
-	}
+	SendGameID(gameHdr);
 
 	ExitApp();
 
@@ -1306,13 +1306,7 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 	// flush disc ID and Devolution config out to memory
 	DCFlushRange(lowmem, 64);
     
-	// Send GameID
-	int MemCardProGameID = game_cfg->MemCardProGameID == INHERIT ? Settings.MemCardProGameID : game_cfg->MemCardProGameID;
-	if (MemCardProGameID == MEMCARDPRO_GAMEID_ON_FULL || MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT)
-	{
-		bool shortID = (MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT);
-		gameID_early_set(gameHdr, shortID);
-	}
+	SendGameID(gameHdr);
 
 	ExitApp();
 	IosLoader::ReloadIosKeepingRights(58); // reload IOS 58 with AHBPROT rights
@@ -1983,13 +1977,7 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		}
 	}
 
-	// Send GameID
-	int MemCardProGameID = game_cfg->MemCardProGameID == INHERIT ? Settings.MemCardProGameID : game_cfg->MemCardProGameID;
-	if (MemCardProGameID == MEMCARDPRO_GAMEID_ON_FULL || MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT)
-	{
-		bool shortID = (MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT);
-		gameID_early_set(gameHdr, shortID);
-	}
+	SendGameID(gameHdr);
 
 	if (NINArgsboot)
 	{
