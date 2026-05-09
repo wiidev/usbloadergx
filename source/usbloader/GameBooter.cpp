@@ -64,6 +64,7 @@
 #include "wad/nandtitle.h"
 #include "settings/GameTitles.h"
 #include "SystemMenu/SystemMenuResources.h"
+#include "GameCube/MemCardPro.h"
 
 /* GCC 11 false positives */
 #if __GNUC__ > 10
@@ -117,6 +118,8 @@ int GameBooter::BootGCMode(struct discHdr *gameHdr)
 	// MIOS or Wiigator cMIOS
 	if (gameHdr->type == TYPE_GAME_GC_DISC)
 	{
+		SendGameID(gameHdr);
+
 		ExitApp();
 		gprintf("\nLoading BC for GameCube");
 		WII_Initialize();
@@ -270,6 +273,18 @@ void GameBooter::ShutDownDevices(int gameUSBPort)
 	USBStorage2_Deinit();
 	if (!Settings.SDMode)
 		USB_Deinitialize();
+}
+
+void GameBooter::SendGameID(struct discHdr *gameHdr)
+{
+	GameCFG *game_cfg = GameSettings.GetGameCFG(gameHdr->id);
+
+	int MemCardProGameID = game_cfg->MemCardProGameID == INHERIT ? Settings.MemCardProGameID : game_cfg->MemCardProGameID;
+	if (MemCardProGameID == MEMCARDPRO_GAMEID_ON_FULL || MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT)
+	{
+		bool shortID = (MemCardProGameID == MEMCARDPRO_GAMEID_ON_SHORT);
+		gameID_early_set(gameHdr, shortID);
+	}
 }
 
 int GameBooter::BootGame(struct discHdr *gameHdr, const s8 useOcarina)
@@ -945,6 +960,8 @@ int GameBooter::BootDIOSMIOS(struct discHdr *gameHdr)
 		snprintf(gamePath + strlen(gamePath), sizeof(gamePath) - strlen(gamePath), "/disc2.iso");
 	}
 
+	SendGameID(gameHdr);
+
 	ExitApp();
 
 	// Game ID
@@ -1288,6 +1305,8 @@ int GameBooter::BootDevolution(struct discHdr *gameHdr)
 
 	// flush disc ID and Devolution config out to memory
 	DCFlushRange(lowmem, 64);
+    
+	SendGameID(gameHdr);
 
 	ExitApp();
 	IosLoader::ReloadIosKeepingRights(58); // reload IOS 58 with AHBPROT rights
@@ -1957,6 +1976,8 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 			gprintf("done\n");
 		}
 	}
+
+	SendGameID(gameHdr);
 
 	if (NINArgsboot)
 	{

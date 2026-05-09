@@ -210,6 +210,7 @@ bool CGameSettings::Save()
 		fprintf(f, "WiirdDebugger:%d; ", GameList[i].WiirdDebugger);
 		fprintf(f, "wpadMotor:%d; ", GameList[i].wpadMotor);
 		fprintf(f, "wpadSpeaker:%d; ", GameList[i].wpadSpeaker);
+		fprintf(f, "MemCardProGameID:%d; ", GameList[i].MemCardProGameID);
 		fprintf(f, "GameCubeMode:%d; ", GameList[i].GameCubeMode);
 		fprintf(f, "DMLVideo:%d; ", GameList[i].DMLVideo);
 		fprintf(f, "DMLProgPatch:%d; ", GameList[i].DMLProgPatch);
@@ -395,6 +396,11 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 	else if(strcmp(name, "Locked") == 0)
 	{
 		game.Locked = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "MemCardProGameID") == 0)
+	{
+		game.MemCardProGameID = atoi(value);
 		return true;
 	}
 	else if(strcmp(name, "GameCubeMode") == 0)
@@ -735,6 +741,7 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.WiirdDebugger = INHERIT;
 	game.wpadMotor = INHERIT;
 	game.wpadSpeaker = INHERIT;
+	game.MemCardProGameID = INHERIT;
 	game.GameCubeMode = INHERIT;
 	game.DMLVideo = INHERIT;
 	game.DMLProgPatch = INHERIT;

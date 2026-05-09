@@ -201,6 +201,7 @@ void CSettings::SetDefault()
 	BannerProjectionWidth = (Settings.widescreen ? (Settings.PAL50 ? 616 : 620.0f) : 608.0f);
 	BannerProjectionHeight = (Settings.PAL50 ? 448.0f : (NTSC ? 470.0f : 464.0f));
 	GCBannerScale = 1.5f;
+	MemCardProGameID = OFF;
 	GameCubeMode = GC_MODE_NINTENDONT;
 	GameCubeSource = AUTO;
 	MultiDiscPrompt = OFF;
@@ -484,6 +485,7 @@ bool CSettings::Save()
 	fprintf(file, "GCBannerScale = %g\n", GCBannerScale);
 	fprintf(file, "GameCubePath = %s\n", GameCubePath);
 	fprintf(file, "GameCubeSDPath = %s\n", GameCubeSDPath);
+	fprintf(file, "MemCardProGameID = %d\n", MemCardProGameID);
 	fprintf(file, "GameCubeMode = %d\n", GameCubeMode);
 	fprintf(file, "GameCubeSource = %d\n", GameCubeSource);
 	fprintf(file, "MultiDiscPrompt = %d\n", MultiDiscPrompt);
@@ -1039,6 +1041,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "ParentalBlocks") == 0)
 	{
 		ParentalBlocks = strtoul(value, 0, 16);
+		return true;
+	}
+	else if (strcmp(name, "MemCardProGameID") == 0)
+	{
+		MemCardProGameID = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "GameCubeMode") == 0)

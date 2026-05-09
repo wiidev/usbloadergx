@@ -71,6 +71,13 @@ static const char * GCMode[] =
 	trNOOP( "Nintendont" )
 };
 
+static const char * MCPGameID[] =
+{
+	trNOOP( "OFF"),
+	trNOOP( "Full ID" ),
+	trNOOP( "Short ID" )
+};
+
 static const char * DMLVideoText[] =
 {
 	trNOOP( "Auto" ),
@@ -183,6 +190,7 @@ void GCGameLoadSM::SetOptionNames()
 	Options->SetName(Idx++, "%s", tr( "Favorite Level" ));
 	Options->SetName(Idx++, "%s", tr( "Game Language" ));
 	Options->SetName(Idx++, "%s", tr( "Parental Control" ));
+	Options->SetName(Idx++, "%s", tr( "MemCard PRO" ));
 	Options->SetName(Idx++, "%s", tr( "GameCube Mode" ));
 	if(currentGCmode == GC_MODE_MIOS &&IosLoader::GetMIOSInfo() > DEFAULT_MIOS)
 	{
@@ -268,6 +276,12 @@ void GCGameLoadSM::SetOptionValues()
 
 	//! Settings: Parental Control
 	Options->SetValue(Idx++, "%s", tr(ParentalText[GameConfig.parentalcontrol]));
+
+	//! Settings: MemCard PRO
+	if(GameConfig.MemCardProGameID == INHERIT)
+		Options->SetValue(Idx++, tr("Use global"));
+	else
+		Options->SetValue(Idx++, "%s", tr(MCPGameID[GameConfig.MemCardProGameID]));
 
 	//! Settings: GameCube Mode
 	if(GameConfig.GameCubeMode == INHERIT)
@@ -652,6 +666,12 @@ int GCGameLoadSM::GetMenuInternal()
 	else if (ret == ++Idx)
 	{
 		if (++GameConfig.parentalcontrol >= 5) GameConfig.parentalcontrol = 0;
+	}
+
+	//! Settings: MemCard PRO
+	else if (ret == ++Idx)
+	{
+		if (++GameConfig.MemCardProGameID >= MEMCARDPRO_GAMEID_MAX_CHOICE) GameConfig.MemCardProGameID = INHERIT;
 	}
 
 	//! Settings: GameCube Mode
