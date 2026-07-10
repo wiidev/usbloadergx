@@ -24,3 +24,7 @@ Slot 249 base 56
 Slot 250 base 57
 Slot 251 base 58
 ````
+
+## License
+
+Files which do not have an explicit copyright document in the top comment are subject to the GPLv3 license (see [COPYING](./COPYING))
