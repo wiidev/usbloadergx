@@ -88,6 +88,7 @@ HardDriveSM::HardDriveSM()
 	if (strncmp(Settings.ConfigPath, "sd", 2) == 0)
 		Options->SetName(Idx++, "%s", tr( "SD Card Mode" ));
 	Options->SetName(Idx++, "%s", tr( "USB Port" ));
+	Options->SetName(Idx++, "%s", tr( "Disable HDD Power Saving" ));
 	Options->SetName(Idx++, "%s", tr( "Install Directories" ));
 	Options->SetName(Idx++, "%s", tr( "Game Split Size" ));
 	Options->SetName(Idx++, "%s", tr( "Install Partitions" ));
@@ -185,6 +186,9 @@ void HardDriveSM::SetOptionValues()
 	else
 		Options->SetValue(Idx++, "%i", NewSettingsUSBPort);
 
+	//! Settings: Disable HDD power saving
+	Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.DisableHDDPowerSaving] ));
+
 	//! Settings: Install directories
 	Options->SetValue(Idx++, "%s", tr( InstallToText[Settings.InstallToDir] ));
 
@@ -272,6 +276,20 @@ int HardDriveSM::GetMenuInternal()
 
 		else if (++NewSettingsUSBPort >= 3) // 2 = both ports
 			NewSettingsUSBPort = 0;
+	}
+
+	//! Settings: Disable HDD power saving
+	else if (ret == ++Idx)
+	{
+		if (++Settings.DisableHDDPowerSaving >= MAX_ON_OFF)
+			Settings.DisableHDDPowerSaving = 0;
+
+		if (Settings.DisableHDDPowerSaving == ON)
+		{
+			WindowPrompt(0,
+				tr("Applied on the next launch after testing ATA support. This may keep a mechanical HDD spinning, increasing power use, heat, noise, and running time."),
+				tr("OK"));
+		}
 	}
 
 	//! Settings: Install directories

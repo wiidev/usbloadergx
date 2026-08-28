@@ -28,6 +28,19 @@ s32 USBStorage_OGC_Read(usbstorage_handle *dev, u8 lun, u32 sector, u16 n_sector
 s32 USBStorage_OGC_Write(usbstorage_handle *dev, u8 lun, u32 sector, u16 n_sectors, const u8 *buffer);
 s32 USBStorage_OGC_StartStop(usbstorage_handle *dev, u8 lun, u8 lo_ej, u8 start, u8 imm);
 
+#define USBSTORAGE_POWER_APM_DISABLED       (1 << 0)
+#define USBSTORAGE_POWER_STANDBY_DISABLED   (1 << 1)
+#define USBSTORAGE_POWER_ALL_DISABLED       (USBSTORAGE_POWER_APM_DISABLED | USBSTORAGE_POWER_STANDBY_DISABLED)
+
+/**
+ * Disable ATA Advanced Power Management and the ATA standby timer on the
+ * currently mounted USB/SAT disk. A non-mutating ATA command is used to check
+ * pass-through support first. Returns a USBSTORAGE_POWER_* bitmask, zero when
+ * unsupported, or a negative transport error. The settings are volatile and
+ * do not write sectors or bridge firmware.
+ */
+s32 USBStorage_OGC_DisablePowerSaving();
+
 extern DISC_INTERFACE __io_usbstorage_ogc;
 
 #ifdef __cplusplus
