@@ -19,6 +19,7 @@
 #include "settings/CGameCategories.hpp"
 #include "settings/GameTitles.h"
 #include "usbloader/usbstorage2.h"
+#include "usbloader/usbstorage_libogc.h"
 #include "usbloader/MountGamePartition.h"
 #include "usbloader/GameBooter.hpp"
 #include "usbloader/GameList.h"
@@ -365,6 +366,44 @@ int StartUpProcess::Execute(bool quickGameBoot, bool isBadBoot)
 	gprintf("\tLoading game statistics...%s\n", GameStatistics.Load(Settings.ConfigPath) ? "done" : "failed");
 	gprintf("\tLoading game categories...%s\n", GameCategories.Load(Settings.ConfigPath) ? "done" : "failed");
 	gprintf("\tLoading cached titles...%s\n", GameTitles.ReadCachedTitles(Settings.titlestxt_path) ? "done" : "failed (using default)");
+
+	// Apply volatile ATA power settings while the IOS58/libogc USB backend is
+	// still mounted. The later cIOS backend does not expose raw SCSI commands.
+	if (Settings.DisableHDDPowerSaving && USBSuccess)
+	{
+		if (IOS_GetVersion() == 58)
+		{
+			SetTextf("Disabling HDD power saving\n");
+			s32 result = USBStorage_OGC_DisablePowerSaving();
+			if (result == USBSTORAGE_POWER_ALL_DISABLED)
+			{
+				SetTextf("HDD power saving disabled\n");
+				gprintf("Disable HDD power saving: APM and standby timer disabled\n");
+			}
+			else if (result > 0)
+			{
+				SetTextf("HDD power saving partially disabled\n");
+				gprintf("Disable HDD power saving: APM %s, standby timer %s\n",
+					(result & USBSTORAGE_POWER_APM_DISABLED) ? "disabled" : "failed",
+					(result & USBSTORAGE_POWER_STANDBY_DISABLED) ? "disabled" : "failed");
+			}
+			else if (result == 0)
+			{
+				SetTextf("HDD power saving not supported\n");
+				gprintf("Disable HDD power saving: ATA power commands not supported\n");
+			}
+			else
+			{
+				SetTextf("HDD power saving command failed\n");
+				gprintf("Disable HDD power saving: transport error (%i)\n", result);
+			}
+		}
+		else
+		{
+			SetTextf("HDD power saving requires IOS58\n");
+			gprintf("Disable HDD power saving: skipped (requires IOS58 USB backend)\n");
+		}
+	}
 
 	// Some settings need to be enabled to boot directly into games
 	gprintf("Quick game boot: %s\n", quickGameBoot ? "yes" : "no");

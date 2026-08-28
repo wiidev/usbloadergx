@@ -159,6 +159,7 @@ class CSettings
 		short SilentHomeMenu;
 		short MultiplePartitions;
 		short USBPort;
+		short DisableHDDPowerSaving;
 		short BlockIOSReload;
 		u32 InstallPartitions;
 		u32 ParentalBlocks;

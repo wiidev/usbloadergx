@@ -234,7 +234,7 @@ static s32 __send_cbw(usbstorage_handle *dev, u8 lun, u32 len, u8 flags, const u
 	__stwbrx(cbw_buffer, 8, len);
 	cbw_buffer[12] = flags;
 	cbw_buffer[13] = lun;
-	cbw_buffer[14] = (cbLen > 6 ? 10 : 6);
+	cbw_buffer[14] = (cbLen > 6 ? cbLen : 6);
 
 	memcpy(cbw_buffer + 15, cb, cbLen);
 
@@ -1011,6 +1011,56 @@ int USBStorage_OGC_ioctl(int request, ...)
     
     va_end(ap);
     return retval;
+}
+
+static s32 __usbstorage_ogc_ata_nodata(u8 ata_command, u8 feature)
+{
+    raw_device_command rdc;
+    s32 retval;
+
+    memset(&rdc, 0, sizeof(rdc));
+    rdc.command[0] = 0x85; /* ATA PASS-THROUGH (16) */
+    rdc.command[1] = 0x06; /* Non-data protocol */
+    rdc.command[2] = 0x0c;
+    rdc.command[4] = feature;
+    rdc.command[14] = ata_command;
+    rdc.command_length = sizeof(rdc.command);
+    rdc.flags = B_RAW_DEVICE_DATA_IN;
+
+    retval = USBStorage_OGC_ioctl(B_RAW_DEVICE_COMMAND, &rdc);
+    if (retval < 0)
+        return retval;
+
+    return rdc.scsi_status == 0 ? USBSTORAGE_OK : USBSTORAGE_ESTATUS;
+}
+
+s32 USBStorage_OGC_DisablePowerSaving()
+{
+    /* CHECK POWER MODE does not change drive state. */
+    s32 retval = __usbstorage_ogc_ata_nodata(0xe5, 0x00);
+    if (retval == USBSTORAGE_ESTATUS)
+        return 0;
+    if (retval < 0)
+        return retval;
+
+    s32 result = 0;
+    s32 transport_error = 0;
+
+    /* SET FEATURES, DISABLE APM. */
+    retval = __usbstorage_ogc_ata_nodata(0xef, 0x85);
+    if (retval == USBSTORAGE_OK)
+        result |= USBSTORAGE_POWER_APM_DISABLED;
+    else if (retval != USBSTORAGE_ESTATUS)
+        transport_error = retval;
+
+    /* IDLE with sector count zero disables the standby timer. */
+    retval = __usbstorage_ogc_ata_nodata(0xe3, 0x00);
+    if (retval == USBSTORAGE_OK)
+        result |= USBSTORAGE_POWER_STANDBY_DISABLED;
+    else if (retval != USBSTORAGE_ESTATUS && transport_error == 0)
+        transport_error = retval;
+
+    return result != 0 ? result : transport_error;
 }
 
 DISC_INTERFACE __io_usbstorage_ogc = {

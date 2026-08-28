@@ -156,6 +156,7 @@ void CSettings::SetDefault()
 	MultiplePartitions = OFF;
 	BlockIOSReload = AUTO;
 	USBPort = 0;
+	DisableHDDPowerSaving = OFF;
 	WSFactor = 0.8f; //actually should be 0.75 for real widescreen
 	FontScaleFactor = 0.8f; //it's a work around to not have to change ALL fonts now
 	ClockFontScaleFactor = 1.0f; // Scale of 1 to prevent misaligned clock.
@@ -414,6 +415,7 @@ bool CSettings::Save()
 	fprintf(file, "SilentHomeMenu = %d\n", SilentHomeMenu);
 	fprintf(file, "MultiplePartitions = %d\n", MultiplePartitions);
 	fprintf(file, "USBPort = %d\n", USBPort);
+	fprintf(file, "DisableHDDPowerSaving = %d\n", DisableHDDPowerSaving);
 	fprintf(file, "BlockIOSReload = %d\n", BlockIOSReload);
 	fprintf(file, "WSFactor = %0.3f\n", WSFactor);
 	fprintf(file, "FontScaleFactor = %0.3f\n", FontScaleFactor);
@@ -827,6 +829,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "USBPort") == 0)
 	{
 		USBPort = atoi(value);
+		return true;
+	}
+	else if (strcmp(name, "DisableHDDPowerSaving") == 0)
+	{
+		DisableHDDPowerSaving = atoi(value);
 		return true;
 	}
 	else if (strcmp(name, "patchcountrystrings") == 0)
