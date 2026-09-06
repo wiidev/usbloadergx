@@ -1200,6 +1200,10 @@ void patch_sdcard(u8 *gameid)
     else if (memcmp(gameid, "REXJ01", 6) == 0)
         *(u32 *)0x800ba404 = 0x4800014c;
 
+    // Super Smash Bros. Brawl (game opens /dev/sdio/slot0 at boot; skip its SD driver init so it takes the no-card path)
+    else if (memcmp(gameid, "RSBE01", 6) == 0)
+        *(u32 *)0x803ee240 = 0x38600001; // bl SDLibInit -> li r3,1  (NTSC-U v1.02)
+
     // Kirby's Return to Dream Land
     else if (memcmp(gameid, "SUKE01", 6) == 0)
     {
