@@ -52,6 +52,8 @@
 #include "memory/memory.h"
 #include "utils/StringTools.h"
 #include "homebrewboot/BootHomebrew.h"
+#include "riivolution/FriivAdapter.h"
+#include "homebrewboot/HomebrewXML.h"
 #include "GameBooter.hpp"
 #include "NandEmu.h"
 #include "SavePath.h"
@@ -1986,6 +1988,129 @@ int GameBooter::BootNintendont(struct discHdr *gameHdr)
 		// Launch Nintendont
 		return !(BootHomebrew(NIN_loader_path) < 0);
 	}
+}
+
+int GameBooter::BootFriivolution(struct discHdr *gameHdr)
+{
+	const char *LoaderName = "Friivolution";
+
+	if (!gameHdr)
+		return -1;
+
+	/* Standalone route for Wii titles only; GameCube keeps its own loaders. */
+	if (gameHdr->type != TYPE_GAME_WII_IMG && gameHdr->type != TYPE_GAME_WII_DISC)
+	{
+		WindowPrompt(tr("Error:"), tr(FriivResultText(FRIIV_ERR_TYPE)), tr("OK"));
+		return -1;
+	}
+
+	GameCFG *game_cfg = GameSettings.GetGameCFG(gameHdr->id);
+	const char *modXml = game_cfg ? game_cfg->FriivModXml.c_str() : "";
+
+	/* Physical disc boots with an empty path; FAT backups are translated. */
+	bool isDisc = (gameHdr->type == TYPE_GAME_WII_DISC);
+	const char *fatPath = NULL;
+	if (!isDisc)
+	{
+		if (gameHdr->is_ciso)
+		{
+			WindowPrompt(tr("Error:"), tr(FriivResultText(FRIIV_ERR_CISO)), tr("OK"));
+			return -1;
+		}
+		if (strlen(gameHdr->path) == 0)
+		{
+			WindowPrompt(tr("Error:"), tr(FriivResultText(FRIIV_ERR_NO_PATH)), tr("OK"));
+			return -1;
+		}
+		fatPath = gameHdr->path;
+	}
+
+	char relPath[FRIIV_CFG_PATH_MAX];
+	bool useUsb = false;
+	FriivBuildResult pr = FriivTranslateGamePath(fatPath, isDisc, relPath, sizeof(relPath), &useUsb);
+	if (pr != FRIIV_OK)
+	{
+		WindowPrompt(tr("Error:"), tr(FriivResultText(pr)), tr("OK"));
+		return -1;
+	}
+
+	FRIIV_CFG friiv_cfg;
+	FriivBuildResult br = FriivBuildConfig(relPath, useUsb, gameHdr->id, modXml, &friiv_cfg);
+	if (br != FRIIV_OK)
+	{
+		WindowPrompt(tr("Error:"), tr(FriivResultText(br)), tr("OK"));
+		return -1;
+	}
+
+	/* Locate the Friivolution application (configurable directory). */
+	char loaderPath[MAX_FAT_PATH];
+	size_t dirLen = strlen(Settings.FriivLoaderPath);
+	bool hasSlash = dirLen > 0 && Settings.FriivLoaderPath[dirLen - 1] == '/';
+	snprintf(loaderPath, sizeof(loaderPath), "%s%sboot.dol",
+		 Settings.FriivLoaderPath, hasSlash ? "" : "/");
+	if (!CheckFile(loaderPath))
+	{
+		snprintf(loaderPath, sizeof(loaderPath), "%s%sboot.elf",
+			 Settings.FriivLoaderPath, hasSlash ? "" : "/");
+	}
+	if (!CheckFile(loaderPath))
+	{
+		WindowPrompt(tr("Error:"),
+			 fmt(tr("To launch Wii games with %s you need its boot file in the Friivolution Loader Path."), LoaderName),
+			 tr("OK"));
+		return -1;
+	}
+	gprintf("FRIIV: Loader path = %s\n", loaderPath);
+	gprintf("FRIIV: Game path   = %s (%s)\n", relPath[0] ? relPath : "(disc)", useUsb ? "USB" : "SD");
+	if (friiv_cfg.ModXml[0])
+		gprintf("FRIIV: Mod XML     = %s\n", friiv_cfg.ModXml);
+
+	/* Support check: 1.01+ understands the argument. Older builds (and
+	 * Riivolution itself) harmlessly ignore it and show their own menus. */
+	{
+		char metaPath[MAX_FAT_PATH];
+		snprintf(metaPath, sizeof(metaPath), "%s%smeta.xml",
+			 Settings.FriivLoaderPath, hasSlash ? "" : "/");
+		HomebrewXML meta;
+		if (meta.LoadHomebrewXMLData(metaPath) == 1 && meta.GetVersion())
+		{
+			gprintf("FRIIV: meta.xml version = %s\n", meta.GetVersion());
+			if (!strcmp(meta.GetVersion(), "1.00"))
+			{
+				int choice = WindowPrompt(tr("Warning:"),
+							  tr("This Friivolution version predates loader handoff (need 1.01+). It will show its own menus. Launch anyway?"),
+							  tr("Yes"), tr("Cancel"));
+				if (choice == 0)
+					return -1;
+			}
+		}
+	}
+
+	/* Same binary-argument handoff GX uses for Nintendont. */
+	u8 *buffer = NULL;
+	u32 filesize = 0;
+	LoadFileToMem(loaderPath, &buffer, &filesize);
+	if (!buffer)
+		return -1;
+	FreeHomebrewBuffer();
+	CopyHomebrewMemory(buffer, 0, filesize);
+
+	FRIIV_CFG *arg = (FRIIV_CFG *)MEM2_alloc(sizeof(FRIIV_CFG));
+	if (!arg)
+	{
+		gprintf("FRIIV: out of memory for boot argument\n");
+		WindowPrompt(tr("Error:"), tr("Could not allocate memory."), tr("OK"));
+		return -1;
+	}
+	memcpy(arg, &friiv_cfg, sizeof(*arg));
+
+	AddBootArgument(loaderPath);
+	AddBootArgument((char *)arg, sizeof(*arg));
+
+	MEM2_free(arg);
+
+	/* Chainload; on success this never returns. */
+	return !(BootHomebrewFromMem() < 0);
 }
 
 int GameBooter::BootNeek(struct discHdr *gameHdr)

@@ -252,6 +252,8 @@ bool CGameSettings::Save()
 		fprintf(f, "DEVODiscDelay:%d; ", GameList[i].DEVODiscDelay);
 		fprintf(f, "PrivateServer:%d; ", GameList[i].PrivateServer);
 		fprintf(f, "CustomAddress:%s; ", GameList[i].CustomAddress.c_str());
+		fprintf(f, "FriivMode:%d; ", GameList[i].FriivMode);
+		fprintf(f, "FriivModXml:%s; ", GameList[i].FriivModXml.c_str());
 		fprintf(f, "Locked:%d;\n", GameList[i].Locked);
 	}
 	fprintf(f, "# END\n");
@@ -557,6 +559,16 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 		game.NINLoaderPath = value;
 		return true;
 	}
+	else if(strcmp(name, "FriivMode") == 0)
+	{
+		game.FriivMode = atoi(value);
+		return true;
+	}
+	else if(strcmp(name, "FriivModXml") == 0)
+	{
+		game.FriivModXml = value;
+		return true;
+	}
 	else if(strcmp(name, "DEVOMCEmulation") == 0)
 	{
 		game.DEVOMCEmulation = atoi(value);
@@ -778,4 +790,6 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.PrivateServer = INHERIT;
 	game.CustomAddress.clear();
 	game.Locked = OFF;
+	game.FriivMode = OFF;
+	game.FriivModXml.clear();
 }

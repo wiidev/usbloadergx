@@ -79,6 +79,8 @@ typedef struct _GameCFG
 	short PrivateServer;
 	std::string CustomAddress;
 	short Locked;
+	short FriivMode;
+	std::string FriivModXml;
 
 	void operator=(const struct _GameCFG &game)
 	{
@@ -152,6 +154,8 @@ typedef struct _GameCFG
 		this->PrivateServer = game.PrivateServer;
 		this->CustomAddress = game.CustomAddress;
 		this->Locked = game.Locked;
+		this->FriivMode = game.FriivMode;
+		this->FriivModXml = game.FriivModXml;
 	}
 } GameCFG;
 

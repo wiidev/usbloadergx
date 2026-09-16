@@ -37,6 +37,7 @@ SOURCES		:=	source \
 				source/Channels \
 				source/BoxCover \
 				source/GameCube \
+				source/riivolution \
 				source/cheats \
 				source/homebrewboot \
 				source/themes \

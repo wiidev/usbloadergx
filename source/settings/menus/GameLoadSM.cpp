@@ -30,6 +30,7 @@
 #include "prompts/DiscBrowser.h"
 #include "prompts/filebrowser.h"
 #include "usbloader/AlternateDOLOffsets.h"
+#include "riivolution/FriivAdapter.h"
 #include "language/gettext.h"
 #include "wad/nandtitle.h"
 #include "system/IosLoader.h"
@@ -274,6 +275,8 @@ void GameLoadSM::SetOptionNames()
 	{
 		Options->SetName(Idx++, "%s", tr( "Alternate DOL" ));
 		Options->SetName(Idx++, "%s", tr( "Select DOL Offset" ));
+		Options->SetName(Idx++, "%s", tr( "Friivolution" ));
+		Options->SetName(Idx++, "%s", tr( "Friivolution Mod" ));
 	}
 }
 
@@ -478,6 +481,15 @@ void GameLoadSM::SetOptionValues()
 			else
 				Options->SetValue(Idx++, "%i", (int)GameConfig.alternatedolstart);
 		}
+
+		//! Settings: Friivolution (Riivolution mods via the Friivolution app)
+		Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.FriivMode == ON ? ON : OFF] ));
+
+		//! Settings: Friivolution Mod (empty = every matching mod, as by hand)
+		if (GameConfig.FriivModXml.size() == 0)
+			Options->SetValue(Idx++, "%s", tr( "All mods" ));
+		else
+			Options->SetValue(Idx++, "%s", GameConfig.FriivModXml.c_str());
 	}
 }
 
@@ -802,6 +814,33 @@ int GameLoadSM::GetMenuInternal()
 			if (GameConfig.alternatedolstart == 0)
 				GameConfig.loadalternatedol = 0;
 			if (parentWindow) parentWindow->SetState(STATE_DEFAULT);
+		}
+
+		//! Settings: Friivolution
+		else if (ret == ++Idx)
+		{
+			if (++GameConfig.FriivMode > ON) GameConfig.FriivMode = OFF;
+		}
+
+		//! Settings: Friivolution Mod (cycles All mods -> each /riivolution/*.xml)
+		else if (ret == ++Idx)
+		{
+			char mods[FRIIV_MOD_MAX][FRIIV_MOD_NAME_MAX];
+			int n = FriivCollectModNames(mods, FRIIV_MOD_MAX);
+			int cur = -1;
+			for (int i = 0; i < n; i++)
+			{
+				if (GameConfig.FriivModXml == mods[i])
+				{
+					cur = i;
+					break;
+				}
+			}
+			if (++cur >= n) cur = -1;
+			if (cur < 0)
+				GameConfig.FriivModXml.clear();
+			else
+				GameConfig.FriivModXml = mods[cur];
 		}
 	}
 

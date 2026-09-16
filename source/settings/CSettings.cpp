@@ -75,6 +75,7 @@ void CSettings::SetDefault()
 	snprintf(NandEmuPath, sizeof(NandEmuPath), "%s/nands/01/", BootDevice);
 	snprintf(DEVOLoaderPath, sizeof(DEVOLoaderPath), "%s/apps/gc_devo/", BootDevice);
 	snprintf(NINLoaderPath, sizeof(NINLoaderPath), "%s/apps/nintendont/", BootDevice);
+	snprintf(FriivLoaderPath, sizeof(FriivLoaderPath), "%s/apps/friivolution/", BootDevice);
 	strlcpy(NandEmuChanPath, NandEmuPath, sizeof(NandEmuChanPath));
 	strlcpy(GameCubePath, "usb1:/games/", sizeof(GameCubePath));
 	strlcpy(GameCubeSDPath, "sd:/games/", sizeof(GameCubeSDPath));
@@ -529,6 +530,7 @@ bool CSettings::Save()
 	fprintf(file, "DEVODiscDelay = %d\n", DEVODiscDelay);
 	fprintf(file, "DEVOLoaderPath = %s\n", DEVOLoaderPath);
 	fprintf(file, "NINLoaderPath = %s\n", NINLoaderPath);
+	fprintf(file, "FriivLoaderPath = %s\n", FriivLoaderPath);
 	fprintf(file, "GCInstallCompressed = %d\n", GCInstallCompressed);
 	fprintf(file, "GCInstallAligned = %d\n", GCInstallAligned);
 	fprintf(file, "PrivateServer = %d\n", PrivateServer);
@@ -1264,6 +1266,11 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "NINLoaderPath") == 0)
 	{
 		strlcpy(NINLoaderPath, value, sizeof(NINLoaderPath));
+		return true;
+	}
+	else if (strcmp(name, "FriivLoaderPath") == 0)
+	{
+		strlcpy(FriivLoaderPath, value, sizeof(FriivLoaderPath));
 		return true;
 	}
 	else if (strcmp(name, "GCInstallCompressed") == 0)

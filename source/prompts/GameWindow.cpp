@@ -840,12 +840,46 @@ void GameWindow::BootGame(struct discHdr *header)
 		}
 	}
 
+	/* Standalone Friivolution route: Friivolution owns mod preparation and
+	 * launching; GX only hands over the game/mod selection. Normal launches
+	 * below are untouched when the per-game toggle is off. */
+	if ((header->type == TYPE_GAME_WII_IMG || header->type == TYPE_GAME_WII_DISC) &&
+	    game_cfg->FriivMode == ON)
+	{
+		if (gameNandEmuMode != EMUNAND_OFF)
+		{
+			ShowError(tr("EmuNAND saves do not apply under Friivolution. Turn EmuNAND off for this game first."));
+			return;
+		}
+		if (game_cfg->loadalternatedol != ALT_DOL_DEFAULT)
+		{
+			if (!WindowPrompt(tr("Friivolution:"), tr("Alternate DOL selection does not apply under Friivolution. Continue?"), tr("Continue"), tr("Cancel")))
+				return;
+		}
+		if (ocarinaChoice)
+		{
+			if (!WindowPrompt(tr("Friivolution:"), tr("GX cheat codes do not apply under Friivolution. Continue without them?"), tr("Continue"), tr("Cancel")))
+				return;
+		}
+		GameStatistics.SetPlayCount(header->id, GameStatistics.GetPlayCount(header->id)+1);
+		GameStatistics.Save();
+
+		int friivRet = GameBooter::BootFriivolution(header);
+
+		if (friivRet == -1)
+		{
+			GameStatistics.SetPlayCount(header->id, GameStatistics.GetPlayCount(header->id)-1);
+			GameStatistics.Save();
+		}
+		return;
+	}
+
 	GameStatistics.SetPlayCount(header->id, GameStatistics.GetPlayCount(header->id)+1);
 	GameStatistics.Save();
 
 	// Just calling that shuts down everything and starts game
 	int ret = GameBooter::BootGame(header, ocarinaChoice);
-	
+
 	// If the launch is canceled, reduce playCount
 	if(ret == -1)
 	{
