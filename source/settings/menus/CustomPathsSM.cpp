@@ -65,6 +65,7 @@ CustomPathsSM::CustomPathsSM()
 	Options->SetName(Idx++, tr("SD GameCube Path"));
 	Options->SetName(Idx++, tr("Devolution Loader Path"));
 	Options->SetName(Idx++, tr("Nintendont Loader Path"));
+	Options->SetName(Idx++, tr("Friivolution Loader Path"));
 	Options->SetName(Idx++, tr("Cache BNR Files Path"));
 	Options->SetName(Idx++, tr("Cache Path"));
 
@@ -137,6 +138,9 @@ void CustomPathsSM::SetOptionValues()
 
 	//! Settings: GameCube Nintendont boot.dol Path
 	Options->SetValue(Idx++, Settings.NINLoaderPath);
+
+	//! Settings: Friivolution Path
+	Options->SetValue(Idx++, Settings.FriivLoaderPath);
 
 	//! Settings: Cache BNR Files Path
 	Options->SetValue(Idx++, Settings.BNRCachePath);
@@ -354,6 +358,13 @@ int CustomPathsSM::GetMenuInternal()
 	{
 		titleTxt->SetText(tr( "Nintendont Loader Path" ));
 		ChangePath(Settings.NINLoaderPath, sizeof(Settings.NINLoaderPath));
+	}
+
+	//! Settings: Friivolution boot.dol path
+	else if (ret == ++Idx)
+	{
+		titleTxt->SetText(tr( "Friivolution Loader Path" ));
+		ChangePath(Settings.FriivLoaderPath, sizeof(Settings.FriivLoaderPath));
 	}
 
 	//! Settings: Cache BNR Files Path

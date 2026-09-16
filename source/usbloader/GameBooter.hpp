@@ -25,6 +25,7 @@ class GameBooter
 	public:
 		static int BootGame(struct discHdr *gameHdr, const s8 useOcarina = -1);
 		static int BootGCMode(struct discHdr *gameHdr);
+		static int BootFriivolution(struct discHdr *gameHdr);
 	private:
 		static void SetupAltDOL(u8 * gameID, u8 &alternatedol, u32 &alternatedoloffset);
 		static void SetupNandEmu(u8 NandEmuMode, const char *NandEmuPath, struct discHdr &gameHeader);
