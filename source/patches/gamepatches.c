@@ -538,6 +538,8 @@ void PrivateServerPatcher(void *addr, u32 len, u8 privateServer, const char *ser
         domainpatcher(addr, len, "wiimmfi.de");
     else if (privateServer == PRIVSERV_ALTWFC)
         domainpatcher(addr, len, "zwei.moe");
+    else if (privateServer == PRISERV_WIILINK)
+        domainpatcher(addr, len, "wiilink24.com");
     else if (privateServer == PRIVSERV_CUSTOM && strlen(serverAddr) > 3)
         domainpatcher(addr, len, serverAddr);
 }

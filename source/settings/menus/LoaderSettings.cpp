@@ -230,6 +230,7 @@ static const char * PrivServText[] =
 	trNOOP( "NoSSL only" ),
 	trNOOP( "Wiimmfi" ),
 	trNOOP( "AltWFC" ),
+	trNOOP( "WiiLink WFC" ),
 	trNOOP( "Custom" )
 };
 
