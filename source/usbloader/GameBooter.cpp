@@ -52,6 +52,7 @@
 #include "memory/memory.h"
 #include "utils/StringTools.h"
 #include "homebrewboot/BootHomebrew.h"
+#include "usbloader/RiftWii.hpp"
 #include "GameBooter.hpp"
 #include "NandEmu.h"
 #include "SavePath.h"
@@ -437,6 +438,15 @@ int GameBooter::BootGame(struct discHdr *gameHdr, const s8 useOcarina)
 			}
 			XML_DB.CloseFile();
 		}
+	}
+
+	//! A Riivolution pack is picked: RiftWii applies it and boots the game with these settings
+	if (game_cfg->RiivolutionPack.size() && (gameHeader.type == TYPE_GAME_WII_IMG || gameHeader.type == TYPE_GAME_WII_DISC))
+	{
+		RiftWii::BootGame(gameHeader, game_cfg->RiivolutionPack, videoChoice, languageChoice, ocarinaChoice, deflicker,
+						  videoWidth, PrivServChoice, customAddress, autoIOS, iosChoice, returnToChoice);
+		WindowPrompt(tr( "Error:" ), tr( "RiftWii could not be started. It goes in apps/riftwii on the SD card." ), tr( "OK" ));
+		return -1;
 	}
 
 	if (autoIOS == GAME_IOS_AUTO && d2x_list.size() && !isWiiVC)
