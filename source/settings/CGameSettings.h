@@ -78,6 +78,7 @@ typedef struct _GameCFG
 	short DEVODiscDelay;
 	short PrivateServer;
 	std::string CustomAddress;
+	std::string RiivolutionPack;
 	short Locked;
 
 	void operator=(const struct _GameCFG &game)
@@ -151,6 +152,7 @@ typedef struct _GameCFG
 		this->DEVODiscDelay = game.DEVODiscDelay;
 		this->PrivateServer = game.PrivateServer;
 		this->CustomAddress = game.CustomAddress;
+		this->RiivolutionPack = game.RiivolutionPack;
 		this->Locked = game.Locked;
 	}
 } GameCFG;

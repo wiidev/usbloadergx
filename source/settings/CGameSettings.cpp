@@ -252,6 +252,7 @@ bool CGameSettings::Save()
 		fprintf(f, "DEVODiscDelay:%d; ", GameList[i].DEVODiscDelay);
 		fprintf(f, "PrivateServer:%d; ", GameList[i].PrivateServer);
 		fprintf(f, "CustomAddress:%s; ", GameList[i].CustomAddress.c_str());
+		fprintf(f, "RiivolutionPack:%s; ", GameList[i].RiivolutionPack.c_str());
 		fprintf(f, "Locked:%d;\n", GameList[i].Locked);
 	}
 	fprintf(f, "# END\n");
@@ -608,6 +609,11 @@ bool CGameSettings::SetSetting(GameCFG & game, const char *name, const char *val
 			game.CustomAddress = value;
 		return true;
 	}
+	else if(strcmp(name, "RiivolutionPack") == 0)
+	{
+		game.RiivolutionPack = value;
+		return true;
+	}
 
 	return false;
 }
@@ -777,5 +783,6 @@ void CGameSettings::SetDefault(GameCFG &game)
 	game.DEVODiscDelay = INHERIT;
 	game.PrivateServer = INHERIT;
 	game.CustomAddress.clear();
+	game.RiivolutionPack.clear();
 	game.Locked = OFF;
 }

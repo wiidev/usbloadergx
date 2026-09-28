@@ -33,6 +33,7 @@
 #include "language/gettext.h"
 #include "wad/nandtitle.h"
 #include "system/IosLoader.h"
+#include "usbloader/RiftWii.hpp"
 #include "GameLoadSM.hpp"
 #include "sys.h"
 
@@ -274,6 +275,7 @@ void GameLoadSM::SetOptionNames()
 	{
 		Options->SetName(Idx++, "%s", tr( "Alternate DOL" ));
 		Options->SetName(Idx++, "%s", tr( "Select DOL Offset" ));
+		Options->SetName(Idx++, "%s", tr( "Riivolution (RiftWii)" ));
 	}
 }
 
@@ -478,6 +480,12 @@ void GameLoadSM::SetOptionValues()
 			else
 				Options->SetValue(Idx++, "%i", (int)GameConfig.alternatedolstart);
 		}
+
+		//! Settings: Riivolution (RiftWii)
+		if (GameConfig.RiivolutionPack.size() == 0)
+			Options->SetValue(Idx++, "%s", tr( OnOffText[0] ));
+		else
+			Options->SetValue(Idx++, "%s", GameConfig.RiivolutionPack.c_str());
 	}
 }
 
@@ -802,6 +810,25 @@ int GameLoadSM::GetMenuInternal()
 			if (GameConfig.alternatedolstart == 0)
 				GameConfig.loadalternatedol = 0;
 			if (parentWindow) parentWindow->SetState(STATE_DEFAULT);
+		}
+
+		//! Settings: Riivolution (RiftWii): OFF, then each pack for this game in turn
+		else if (ret == ++Idx)
+		{
+			std::vector<std::string> packs;
+			RiftWii::ListPacks(GameConfig.id, packs);
+			if (RiftWii::LoaderPath().empty())
+				WindowPrompt(tr( "RiftWii not found" ), tr( "Riivolution packs are played through RiftWii. Copy it to apps/riftwii on the SD card." ), tr( "OK" ));
+			else if (packs.empty())
+				WindowPrompt(tr( "No Riivolution packs" ), tr( "No pack in sd:/riivolution is made for this game." ), tr( "OK" ));
+			else
+			{
+				size_t next = 0;
+				for (size_t i = 0; i < packs.size(); ++i)
+					if (packs[i] == GameConfig.RiivolutionPack)
+						next = i + 1;
+				GameConfig.RiivolutionPack = next < packs.size() ? packs[next] : "";
+			}
 		}
 	}
 
