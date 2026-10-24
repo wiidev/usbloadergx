@@ -69,6 +69,8 @@ bool Layout::Load(const u8 *brlyt)
 	std::stack<std::vector<Pane*>*> pane_stack;
 	pane_stack.push(&panes);
 
+	std::stack<Pane*> pane_owner_stack;
+
 	const u8 *position = brlyt + brlytFile->header_len;
 
 	for(u32 i = 0; i < brlytFile->section_count; ++i)
@@ -170,13 +172,18 @@ bool Layout::Load(const u8 *brlyt)
 		}
 		else if (section->magic == Layout::MAGIC_PANE_PUSH)
 		{
-			if (last_pane)
+			if (last_pane) {
 				pane_stack.push(&last_pane->panes);
+				pane_owner_stack.push(last_pane);
+			}
 		}
 		else if (section->magic == Layout::MAGIC_PANE_POP)
 		{
-			if (pane_stack.size() > 1)
+			if (pane_stack.size() > 1) {
 				pane_stack.pop();
+				last_pane = pane_owner_stack.top();
+				pane_owner_stack.pop();
+			}
 		}
 		else if (section->magic == Group::MAGIC)
 		{
