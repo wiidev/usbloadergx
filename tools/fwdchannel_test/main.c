@@ -1,5 +1,5 @@
 /* Host test: build a channel WAD with source/channel/fwdchannel.c and write it out,
- * to compare byte-for-byte with tools/forwarder/make_wad.py of the "wii" notes repo.
+ * e.g. to compare byte for byte with an independent implementation.
  * usage: fwdtest template.bin nandloader.app forwarder.dol banner.bnr GAMEID TITLE /loader/path keys.bin out.wad */
 #include <stdio.h>
 #include <stdlib.h>
