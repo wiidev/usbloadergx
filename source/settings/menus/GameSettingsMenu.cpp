@@ -23,6 +23,7 @@
  ***************************************************************************/
 #include <unistd.h>
 #include "GameSettingsMenu.hpp"
+#include "channel/ChannelCreator.h"
 #include "themes/CTheme.h"
 #include "FileOperations/fileops.h"
 #include "prompts/PromptWindows.h"
@@ -77,6 +78,13 @@ void GameSettingsMenu::SetupMainButtons()
 		||	DiscHeader->type == TYPE_GAME_NANDCHAN)
 	{
 		SetMainButton(pos++, tr( "Extract Save to EmuNAND" ), MainButtonImgData, MainButtonImgOverData);
+	}
+	if(		DiscHeader->type == TYPE_GAME_WII_IMG
+		||	DiscHeader->type == TYPE_GAME_WII_DISC)
+	{
+		SetMainButton(pos++, tr( "Create Wii Menu Channel" ), MainButtonImgData, MainButtonImgOverData);
+		if(GameChannelInstalled(DiscHeader))
+			SetMainButton(pos++, tr( "Remove Wii Menu Channel" ), MainButtonImgData, MainButtonImgOverData);
 	}
 	SetMainButton(pos++, tr( "Default Settings" ), MainButtonImgData, MainButtonImgOverData);
 	SetMainButton(pos++, tr( "Uninstall Menu" ), MainButtonImgData, MainButtonImgOverData);
@@ -195,6 +203,23 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 			else
 				WindowPrompt(tr("Files extracted successfully."), 0, tr("OK"));
 		}
+	}
+
+	//! Create Wii Menu Channel
+	else if(	(DiscHeader->type == TYPE_GAME_WII_IMG
+			||	 DiscHeader->type == TYPE_GAME_WII_DISC)
+			&&	menuNr == Idx++)
+	{
+		CreateGameChannel(DiscHeader);
+	}
+
+	//! Remove Wii Menu Channel (only listed when the channel is installed)
+	else if(	(DiscHeader->type == TYPE_GAME_WII_IMG
+			||	 DiscHeader->type == TYPE_GAME_WII_DISC)
+			&&	GameChannelInstalled(DiscHeader)
+			&&	menuNr == Idx++)
+	{
+		RemoveGameChannel(DiscHeader);
 	}
 
 	//! Default Settings

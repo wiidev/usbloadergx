@@ -49,7 +49,8 @@ SOURCES		:=	source \
 				source/utils \
 				source/utils/minizip \
 				source/usbloader/wbfs \
-				source/cache
+				source/cache \
+				source/channel
 DATA		:=	data/images \
 				data/fonts \
 				data/sounds \
