@@ -32,6 +32,7 @@
 #include "Controls/DeviceHandler.hpp"
 #include "settings/CSettings.h"
 #include "settings/GameTitles.h"
+#include "channel/ChannelCreator.h"
 #include "patches/gamepatches.h"
 #include "wad/nandtitle.h"
 #include "memory/memory.h"
@@ -124,6 +125,11 @@ void Channels::InternalGetNandChannelList(u32 type)
 
         // These aren't installed on the nand
         if (!NandTitles.Exists(tid))
+            continue;
+
+        // Shortcut channels made by "Create Wii Menu Channel" would duplicate their game
+        u32 first = TITLE_LOWER(tid) >> 24; // shortcut IDs: T/K for Wii games, Y/Z for GameCube games
+        if ((first == 'T' || first == 'K' || first == 'Y' || first == 'Z') && IsGameShortcutChannel(tid))
             continue;
 
         char id[5];
