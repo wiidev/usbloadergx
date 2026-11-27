@@ -895,11 +895,23 @@ static u8 *brlyt_edit(const u8 *layout, u32 len, const brlyt_text *texts, int nt
 				for (i = 0; i < ntexts; i++)
 					if (!strcmp(name, texts[i].pane))
 					{
-						u32 buf = get16(L + o + 0x4C), stroff = get32(L + o + 0x58), chars, c;
+						u32 buf = get16(L + o + 0x4C), stroff = get32(L + o + 0x58), max = buf / 2 - 1, chars, c;
 						size_t tl = u16len(texts[i].text);
-						chars = buf / 2 - 1;
-						if (tl < chars)
-							chars = (u32)tl;
+						chars = (u32)tl;
+						if (tl > max)
+						{
+							/* too long: cut at the last space, no "..." (the Wii Menu then wraps the
+							 * line itself and shows more), as wiiwad.fit_text */
+							u32 k;
+							chars = max;
+							for (k = chars; k > 0; k--)
+								if (texts[i].text[k - 1] == ' ')
+									break;
+							if (k > 0)
+								chars = k - 1;
+							while (chars > 0 && texts[i].text[chars - 1] == ' ')
+								chars--;
+						}
 						memset(L + o + stroff, 0, buf);
 						for (c = 0; c < chars; c++)
 							put16(L + o + stroff + c * 2, texts[i].text[c]);
@@ -942,9 +954,8 @@ int fwd_gc_banner(const uint8_t *template_bnr, uint32_t template_size, const uin
                   uint8_t **out, uint32_t *out_size)
 {
 	static const u16 s_gamecube[] = {'G', 'a', 'm', 'e', 'C', 'u', 'b', 'e', 0};
-	static const u16 s_developer[] = {'D', 'e', 'v', 'e', 'l', 'o', 'p', 'e', 'r', ':', 0};
 	static const u16 s_space[] = {' ', 0};
-	static const char *const hide[] = {"Line1", "Line2", "T_Released", "T_release_date", "T_versiontext", "T_version"};
+	static const char *const hide[] = {"T_Coded_by", "Line1", "Line2", "T_Released", "T_release_date", "T_versiontext", "T_version"};
 	const u8 *tpl, *image = gc_bnr + GC_BNR_IMAGE;
 	const u32 image_size = GC_IMAGE_W * GC_IMAGE_H * 2;
 	u8 header[IMET_HASHED];
@@ -993,16 +1004,15 @@ int fwd_gc_banner(const uint8_t *template_bnr, uint32_t template_size, const uin
 	/* banner: game picture, GameCube background, texts */
 	{
 		const u8_entry *e = u8_find(&banner, "arc/timg/HBPic.tpl"), *lay = u8_find(&banner, "arc/blyt/banner.brlyt");
-		brlyt_text texts[5];
+		brlyt_text texts[4];
 		u8 *t, *bg, *L;
 		u32 tl2;
 		if (!e || !lay) goto done;
 		texts[0].pane = "T_PF"; texts[0].text = s_gamecube;
-		texts[1].pane = "T_Coded_by"; texts[1].text = s_developer;
-		texts[2].pane = "T_coder"; texts[2].text = developer;
-		texts[3].pane = "T_name"; texts[3].text = title;
-		texts[4].pane = "T_short_descript"; texts[4].text = (description && description[0]) ? description : s_space;
-		L = brlyt_edit(lay->data, lay->size, texts, 5, hide, 6);
+		texts[1].pane = "T_coder"; texts[1].text = developer;
+		texts[2].pane = "T_name"; texts[2].text = title;
+		texts[3].pane = "T_short_descript"; texts[3].text = (description && description[0]) ? description : s_space;
+		L = brlyt_edit(lay->data, lay->size, texts, 4, hide, 7);
 		t = tpl_replace(e->data, GC_IMAGE_W, GC_IMAGE_H, 5, image, image_size, &tl2);
 		bg = malloc(bg_size);
 		if (!L || !t || !bg) { free(L); free(t); free(bg); ret = FWD_ERR_NOMEM; goto done; }
