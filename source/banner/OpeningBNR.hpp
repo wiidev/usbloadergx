@@ -117,8 +117,10 @@ public:
 		return GetIMETTitle(lang);
 	}
 
-private:
+	//! GameCube opening.bnr (BNR1/BNR2) of a GameCube game; caller frees
 	u8 *LoadGCBNR(const discHdr *header, u32 *len = 0);
+
+private:
 	IMETHeader *imetHdr;
 	u32 filesize;
 	char gameID[7];

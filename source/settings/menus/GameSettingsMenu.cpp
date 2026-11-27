@@ -80,7 +80,9 @@ void GameSettingsMenu::SetupMainButtons()
 		SetMainButton(pos++, tr( "Extract Save to EmuNAND" ), MainButtonImgData, MainButtonImgOverData);
 	}
 	if(		DiscHeader->type == TYPE_GAME_WII_IMG
-		||	DiscHeader->type == TYPE_GAME_WII_DISC)
+		||	DiscHeader->type == TYPE_GAME_WII_DISC
+		||	DiscHeader->type == TYPE_GAME_GC_IMG
+		||	DiscHeader->type == TYPE_GAME_GC_EXTRACTED)
 	{
 		SetMainButton(pos++, tr( "Create Wii Menu Channel" ), MainButtonImgData, MainButtonImgOverData);
 		if(GameChannelInstalled(DiscHeader))
@@ -207,7 +209,9 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 
 	//! Create Wii Menu Channel
 	else if(	(DiscHeader->type == TYPE_GAME_WII_IMG
-			||	 DiscHeader->type == TYPE_GAME_WII_DISC)
+			||	 DiscHeader->type == TYPE_GAME_WII_DISC
+			||	 DiscHeader->type == TYPE_GAME_GC_IMG
+			||	 DiscHeader->type == TYPE_GAME_GC_EXTRACTED)
 			&&	menuNr == Idx++)
 	{
 		CreateGameChannel(DiscHeader);
@@ -215,7 +219,9 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
 
 	//! Remove Wii Menu Channel (only listed when the channel is installed)
 	else if(	(DiscHeader->type == TYPE_GAME_WII_IMG
-			||	 DiscHeader->type == TYPE_GAME_WII_DISC)
+			||	 DiscHeader->type == TYPE_GAME_WII_DISC
+			||	 DiscHeader->type == TYPE_GAME_GC_IMG
+			||	 DiscHeader->type == TYPE_GAME_GC_EXTRACTED)
 			&&	GameChannelInstalled(DiscHeader)
 			&&	menuNr == Idx++)
 	{

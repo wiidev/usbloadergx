@@ -28,6 +28,7 @@ enum
 	FWD_ERR_FAKESIGN = -10,
 	FWD_ERR_PATH = -11,
 	FWD_ERR_NANDLOADER = -12,
+	FWD_ERR_GC_BNR = -13,
 };
 
 const char *fwd_error_text(int err)
@@ -47,6 +48,7 @@ const char *fwd_error_text(int err)
 	case FWD_ERR_FAKESIGN: return "Fakesigning failed";
 	case FWD_ERR_PATH: return "Loader path is too long";
 	case FWD_ERR_NANDLOADER: return "No nandloader (install the UNEO forwarder channel)";
+	case FWD_ERR_GC_BNR: return "The game has no GameCube opening.bnr";
 	}
 	return "Unknown error";
 }
@@ -814,6 +816,250 @@ fail:
 	return result;
 }
 
+/* ------------------------------------------------------ GameCube banner */
+
+#define GC_BNR_IMAGE 0x20
+#define GC_IMAGE_W 96
+#define GC_IMAGE_H 32
+
+static u16 get16(const u8 *p) { return (u16)(p[0] << 8 | p[1]); }
+
+static size_t u16len(const u16 *s)
+{
+	size_t n = 0;
+	while (s && s[n])
+		n++;
+	return n;
+}
+
+/* One-picture TPL: header and filters of the template, new size, format and pixels */
+static u8 *tpl_replace(const u8 *template_tpl, u32 w, u32 h, u32 fmt, const u8 *pixels, u32 pixels_size, u32 *out_len)
+{
+	u8 *t = malloc(0x40 + pixels_size);
+	u32 img;
+	if (!t)
+		return NULL;
+	memcpy(t, template_tpl, 0x40);
+	img = get32(t + 0x0C);
+	put16(t + img, (u16)h);
+	put16(t + img + 2, (u16)w);
+	put32(t + img + 4, fmt);
+	put32(t + img + 8, 0x40);
+	put32(t + 0x10, 0); /* no palette */
+	memcpy(t + 0x40, pixels, pixels_size);
+	*out_len = 0x40 + pixels_size;
+	return t;
+}
+
+static void u8_set(u8_list *l, const char *path, u8 *data, u32 size)
+{
+	int i;
+	for (i = 0; i < l->count; i++)
+		if (strcmp(l->e[i].path, path) == 0)
+		{
+			free(l->e[i].owned);
+			l->e[i].owned = data;
+			l->e[i].data = data;
+			l->e[i].size = size;
+			return;
+		}
+	free(data);
+}
+
+typedef struct { const char *pane; const u16 *text; } brlyt_text;
+
+/* Set txt1 texts (within their buffers) and hide panes by name */
+static u8 *brlyt_edit(const u8 *layout, u32 len, const brlyt_text *texts, int ntexts, const char *const *hide, int nhide)
+{
+	u8 *L = malloc(len);
+	u32 o, n, k;
+	if (!L)
+		return NULL;
+	memcpy(L, layout, len);
+	o = get16(L + 0x0C);
+	n = get16(L + 0x0E);
+	for (k = 0; k < n && o + 8 <= len; k++)
+	{
+		u32 size = get32(L + o + 4);
+		if (!memcmp(L + o, "pan1", 4) || !memcmp(L + o, "pic1", 4) || !memcmp(L + o, "txt1", 4)
+		    || !memcmp(L + o, "bnd1", 4) || !memcmp(L + o, "wnd1", 4))
+		{
+			char name[17];
+			int i;
+			memcpy(name, L + o + 0x0C, 16);
+			name[16] = 0;
+			for (i = 0; i < nhide; i++)
+				if (!strcmp(name, hide[i]))
+					L[o + 8] &= (u8)~1;
+			if (!memcmp(L + o, "txt1", 4))
+				for (i = 0; i < ntexts; i++)
+					if (!strcmp(name, texts[i].pane))
+					{
+						u32 buf = get16(L + o + 0x4C), stroff = get32(L + o + 0x58), chars, c;
+						size_t tl = u16len(texts[i].text);
+						chars = buf / 2 - 1;
+						if (tl < chars)
+							chars = (u32)tl;
+						memset(L + o + stroff, 0, buf);
+						for (c = 0; c < chars; c++)
+							put16(L + o + stroff + c * 2, texts[i].text[c]);
+						put16(L + o + 0x4E, (u16)((chars + 1) * 2));
+					}
+		}
+		o += size;
+	}
+	return L;
+}
+
+/* Rebuild an icon.bin/banner.bin (IMD5 + LZ77 U8) from a file list; returns the raw U8 size */
+static u8 *part_wrap(const u8_list *files, u32 *wrapped_len, u32 *raw_len)
+{
+	u32 zlen;
+	u8 *raw = u8_build(files, raw_len), *z, *w;
+	if (!raw)
+		return NULL;
+	z = fwd_lz77_compress(raw, *raw_len, &zlen);
+	free(raw);
+	if (!z)
+		return NULL;
+	w = malloc(zlen + 0x20);
+	if (w)
+	{
+		memcpy(w, "IMD5", 4);
+		put32(w + 4, zlen);
+		memset(w + 8, 0, 8);
+		fwd_md5(z, zlen, w + 16);
+		memcpy(w + 0x20, z, zlen);
+		*wrapped_len = zlen + 0x20;
+	}
+	free(z);
+	return w;
+}
+
+int fwd_gc_banner(const uint8_t *template_bnr, uint32_t template_size, const uint8_t *gc_bnr, uint32_t gc_size,
+                  const uint16_t *title, const uint16_t *developer, const uint16_t *description,
+                  const uint8_t *logo_tpl, uint32_t logo_size, const uint8_t *bg_tpl, uint32_t bg_size,
+                  uint8_t **out, uint32_t *out_size)
+{
+	static const u16 s_gamecube[] = {'G', 'a', 'm', 'e', 'C', 'u', 'b', 'e', 0};
+	static const u16 s_developer[] = {'D', 'e', 'v', 'e', 'l', 'o', 'p', 'e', 'r', ':', 0};
+	static const u16 s_space[] = {' ', 0};
+	static const char *const hide[] = {"Line1", "Line2", "T_Released", "T_release_date", "T_versiontext", "T_version"};
+	const u8 *tpl, *image = gc_bnr + GC_BNR_IMAGE;
+	const u32 image_size = GC_IMAGE_W * GC_IMAGE_H * 2;
+	u8 header[IMET_HASHED];
+	u8_list outer, icon, banner;
+	u8 *uicon = NULL, *ubanner = NULL;
+	u32 ulen, i, lang;
+	int ret = FWD_ERR_BANNER_U8;
+	size_t tl;
+
+	*out = NULL;
+	if (template_size < 0x40 + IMET_HASHED || memcmp(template_bnr + 0x80, "IMET", 4) != 0)
+		return FWD_ERR_BANNER_HDR;
+	if (gc_size < GC_BNR_IMAGE + image_size || (memcmp(gc_bnr, "BNR1", 4) && memcmp(gc_bnr, "BNR2", 4)))
+		return FWD_ERR_GC_BNR;
+	tpl = template_bnr + 0x40;
+	memcpy(header, tpl, IMET_HASHED);
+	if (u8_parse(tpl + IMET_HASHED, template_size - 0x40 - IMET_HASHED, &outer) < 0)
+		return FWD_ERR_BANNER_U8;
+	memset(&icon, 0, sizeof(icon));
+	memset(&banner, 0, sizeof(banner));
+	{
+		const u8_entry *ei = u8_find(&outer, "meta/icon.bin"), *eb = u8_find(&outer, "meta/banner.bin");
+		if (!ei || !eb)
+			goto done;
+		uicon = banner_part(ei->data, ei->size, &ulen);
+		if (!uicon || u8_parse(uicon, ulen, &icon) < 0)
+			goto done;
+		ubanner = banner_part(eb->data, eb->size, &ulen);
+		if (!ubanner || u8_parse(ubanner, ulen, &banner) < 0)
+			goto done;
+	}
+
+	/* icon: game picture + GameCube logo */
+	{
+		const u8_entry *e = u8_find(&icon, "arc/timg/Iconpng.tpl");
+		u8 *t, *logo;
+		u32 tl2;
+		if (!e) goto done;
+		t = tpl_replace(e->data, GC_IMAGE_W, GC_IMAGE_H, 5, image, image_size, &tl2);
+		logo = malloc(logo_size);
+		if (!t || !logo) { free(t); free(logo); ret = FWD_ERR_NOMEM; goto done; }
+		memcpy(logo, logo_tpl, logo_size);
+		u8_set(&icon, "arc/timg/Iconpng.tpl", t, tl2);
+		u8_set(&icon, "arc/timg/HBLogo.tpl", logo, logo_size);
+	}
+	/* banner: game picture, GameCube background, texts */
+	{
+		const u8_entry *e = u8_find(&banner, "arc/timg/HBPic.tpl"), *lay = u8_find(&banner, "arc/blyt/banner.brlyt");
+		brlyt_text texts[5];
+		u8 *t, *bg, *L;
+		u32 tl2;
+		if (!e || !lay) goto done;
+		texts[0].pane = "T_PF"; texts[0].text = s_gamecube;
+		texts[1].pane = "T_Coded_by"; texts[1].text = s_developer;
+		texts[2].pane = "T_coder"; texts[2].text = developer;
+		texts[3].pane = "T_name"; texts[3].text = title;
+		texts[4].pane = "T_short_descript"; texts[4].text = (description && description[0]) ? description : s_space;
+		L = brlyt_edit(lay->data, lay->size, texts, 5, hide, 6);
+		t = tpl_replace(e->data, GC_IMAGE_W, GC_IMAGE_H, 5, image, image_size, &tl2);
+		bg = malloc(bg_size);
+		if (!L || !t || !bg) { free(L); free(t); free(bg); ret = FWD_ERR_NOMEM; goto done; }
+		memcpy(bg, bg_tpl, bg_size);
+		u8_set(&banner, "arc/blyt/banner.brlyt", L, lay->size);
+		u8_set(&banner, "arc/timg/HBPic.tpl", t, tl2);
+		u8_set(&banner, "arc/timg/bg.tpl", bg, bg_size);
+	}
+	/* repack icon.bin / banner.bin, IMET sizes and names */
+	{
+		u32 wl, rl;
+		u8 *w = part_wrap(&icon, &wl, &rl);
+		if (!w) { ret = FWD_ERR_NOMEM; goto done; }
+		u8_set(&outer, "meta/icon.bin", w, wl);
+		put32(header + 0x4C, rl);
+		w = part_wrap(&banner, &wl, &rl);
+		if (!w) { ret = FWD_ERR_NOMEM; goto done; }
+		u8_set(&outer, "meta/banner.bin", w, wl);
+		put32(header + 0x50, rl);
+	}
+	tl = u16len(title);
+	if (tl > 41)
+		tl = 41;
+	for (lang = 0; lang < 10; lang++)
+	{
+		u8 *p = header + IMET_OFFSET + 0x1C + lang * 84;
+		memset(p, 0, 84);
+		for (i = 0; i < tl; i++)
+			put16(p + i * 2, title[i]);
+	}
+	memset(header + IMET_MD5, 0, 16);
+	fwd_md5(header, IMET_HASHED, header + IMET_MD5);
+	{
+		u32 arclen;
+		u8 *arc = u8_build(&outer, &arclen);
+		if (!arc) { ret = FWD_ERR_NOMEM; goto done; }
+		*out = malloc(IMET_HASHED + arclen);
+		if (*out)
+		{
+			memcpy(*out, header, IMET_HASHED);
+			memcpy(*out + IMET_HASHED, arc, arclen);
+			*out_size = IMET_HASHED + arclen;
+			ret = FWD_OK;
+		}
+		else
+			ret = FWD_ERR_NOMEM;
+		free(arc);
+	}
+done:
+	u8_list_free(&icon);
+	u8_list_free(&banner);
+	u8_list_free(&outer);
+	free(uicon);
+	free(ubanner);
+	return ret;
+}
+
 /* ------------------------------------------------------- ticket and TMD */
 
 #define SIG_BODY 0x140
@@ -850,6 +1096,8 @@ int fwd_default_title_id(const char *game_id, char out4[5])
 		return FWD_ERR_GAME_ID;
 	if (game_id[0] == 'R') first = 'T';
 	else if (game_id[0] == 'S') first = 'K';
+	else if (game_id[0] == 'G') first = 'Y';
+	else if (game_id[0] == 'D') first = 'Z';
 	else return FWD_ERR_TITLE_ID;
 	out4[0] = first;
 	memcpy(out4 + 1, game_id + 1, 3);

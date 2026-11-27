@@ -9,11 +9,18 @@
 #include <malloc.h>
 #include <stdio.h>
 #include <string.h>
+#include <string>
+#include <vector>
 #include "ChannelCreator.h"
 #include "fwdchannel.h"
 #include "fwdinstall.h"
 #include "fwd_template_bin.h"
 #include "fwd_forwarder_bin.h"
+#include "fwd_gc_logo_bin.h"
+#include "fwd_gc_bg_bin.h"
+#include "custom_banner_bnr.h"
+#include "utils/sjis.h"
+#include "wstring.hpp"
 #include "banner/OpeningBNR.hpp"
 #include "FileOperations/fileops.h"
 #include "language/gettext.h"
@@ -27,6 +34,78 @@
 
 static const u8 wii_common_key[16] = {0xeb, 0xe4, 0x2a, 0x22, 0x5e, 0x85, 0x93, 0xe4,
                                       0x48, 0xd9, 0xc5, 0x45, 0x73, 0x81, 0xaa, 0xf7};
+
+static bool IsWiiGame(const struct discHdr *h)
+{
+	return h->type == TYPE_GAME_WII_IMG || h->type == TYPE_GAME_WII_DISC;
+}
+
+static bool IsGCGame(const struct discHdr *h)
+{
+	return h->type == TYPE_GAME_GC_IMG || h->type == TYPE_GAME_GC_EXTRACTED;
+}
+
+//! UTF-16 for the banner, from UTF-8
+static std::vector<u16> ToUtf16(const std::string &utf8)
+{
+	wString w;
+	w.fromUTF8(utf8.c_str());
+	std::vector<u16> out;
+	for (size_t i = 0; i < w.size(); i++)
+		if (w[i] < 0x10000)
+			out.push_back((u16)w[i]);
+	out.push_back(0);
+	return out;
+}
+
+//! A text field of a GameCube opening.bnr (first language), whitespace trimmed
+static std::string GCText(const u8 *bnr, u32 off, u32 n, bool sjis)
+{
+	std::string s((const char *)bnr + 0x1820 + off, strnlen((const char *)bnr + 0x1820 + off, n));
+	const char *ws = " \t\n\r\v\f\x1c\x1d\x1e\x1f\x85\xa0";
+	size_t a = s.find_first_not_of(ws), b = s.find_last_not_of(ws);
+	s = (a == std::string::npos) ? std::string() : s.substr(a, b - a + 1);
+	if (sjis)
+		return sj2utf8(s);
+	std::string utf8; //! latin-1 -> UTF-8
+	for (size_t i = 0; i < s.size(); i++)
+	{
+		unsigned char c = s[i];
+		if (c < 0x80)
+			utf8 += (char)c;
+		else
+		{
+			utf8 += (char)(0xC0 | c >> 6);
+			utf8 += (char)(0x80 | (c & 0x3F));
+		}
+	}
+	return utf8;
+}
+
+//! Channel banner for a GameCube game from the loader's template
+static u8 *LoadGCChannelBanner(const struct discHdr *header, u32 *size)
+{
+	OpeningBNR loader;
+	u32 bnr_size = 0;
+	u8 *gc = loader.LoadGCBNR(header, &bnr_size);
+	if (!gc || bnr_size < 0x1820 + 0x140)
+	{
+		free(gc);
+		return NULL;
+	}
+	bool sjis = header->id[3] == 'J' || header->id[3] == 'W';
+	std::string dev = GCText(gc, 0x80, 0x40, sjis);
+	if (dev.empty())
+		dev = GCText(gc, 0x20, 0x20, sjis);
+	std::vector<u16> title = ToUtf16(GameTitles.GetTitle(header)), developer = ToUtf16(dev),
+	                 description = ToUtf16(GCText(gc, 0xC0, 0x80, sjis));
+	u8 *out = NULL;
+	int r = fwd_gc_banner(custom_banner_bnr, custom_banner_bnr_size, gc, bnr_size, &title[0], &developer[0], &description[0],
+	                      fwd_gc_logo_bin, fwd_gc_logo_bin_size, fwd_gc_bg_bin, fwd_gc_bg_bin_size, &out, size);
+	gprintf("ChannelCreator: GameCube banner -> %d, %u bytes\n", r, r ? 0 : *size);
+	free(gc);
+	return r ? NULL : out;
+}
 
 //! Banner: the cache file if there is one, else straight from the game image
 static u8 *LoadBanner(const struct discHdr *header, u32 *size)
@@ -88,7 +167,7 @@ static bool SaveWad(const fwd_channel *ch, const char *game_id, char *path, int 
 
 void CreateGameChannel(const struct discHdr *header)
 {
-	if (!header || (header->type != TYPE_GAME_WII_IMG && header->type != TYPE_GAME_WII_DISC))
+	if (!header || (!IsWiiGame(header) && !IsGCGame(header)))
 		return;
 
 	char game_id[7];
@@ -117,7 +196,7 @@ void CreateGameChannel(const struct discHdr *header)
 		return;
 
 	u32 bnr_size = 0;
-	u8 *bnr = LoadBanner(header, &bnr_size);
+	u8 *bnr = IsGCGame(header) ? LoadGCChannelBanner(header, &bnr_size) : LoadBanner(header, &bnr_size);
 	if (!bnr)
 	{
 		WindowPrompt(tr("Create Wii Menu Channel"), tr("Could not load the game's banner."), tr("OK"));
@@ -178,7 +257,7 @@ void CreateGameChannel(const struct discHdr *header)
 
 static bool ChannelTitleId(const struct discHdr *header, char title4[5], u8 title_id[8])
 {
-	if (!header || (header->type != TYPE_GAME_WII_IMG && header->type != TYPE_GAME_WII_DISC))
+	if (!header || (!IsWiiGame(header) && !IsGCGame(header)))
 		return false;
 	char game_id[7];
 	snprintf(game_id, sizeof(game_id), "%.6s", (const char *)header->id);

@@ -128,7 +128,8 @@ void Channels::InternalGetNandChannelList(u32 type)
             continue;
 
         // Shortcut channels made by "Create Wii Menu Channel" would duplicate their game
-        if ((TITLE_LOWER(tid) >> 24 == 'T' || TITLE_LOWER(tid) >> 24 == 'K') && IsGameShortcutChannel(tid))
+        u32 first = TITLE_LOWER(tid) >> 24; // shortcut IDs: T/K for Wii games, Y/Z for GameCube games
+        if ((first == 'T' || first == 'K' || first == 'Y' || first == 'Z') && IsGameShortcutChannel(tid))
             continue;
 
         char id[5];
